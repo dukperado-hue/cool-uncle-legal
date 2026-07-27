@@ -392,188 +392,218 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
 
   <!-- BREADCRUMB -->
   <div class="breadcrumb" id="breadcrumb">
-    📍 ประมวลกฎหมายแพ่ง > บรรพ 4 > ลักษณะ 1 > หมวด 2
+    📍 กำลังโหลด...
   </div>
 
   <!-- ARTICLE HEADER -->
   <article class="article-header">
-    <div class="article-number" id="article-number">276</div>
-    <div class="article-subtitle" id="article-subtitle">
-      สัญญาขายสินค้า - การคัดค้าน
-    </div>
+    <div class="article-number" id="article-number">-</div>
+    <div class="article-subtitle" id="article-subtitle"></div>
 
     <!-- AUDIO CONTROLS -->
     <div id="audio-controls"></div>
 
     <!-- ARTICLE TEXT -->
     <div class="article-body" id="article-text">
-      ผู้ซื้อมีสิทธิคัดค้านสินค้าทั้งหมดหรือบางส่วนภายในระยะเวลาที่กำหนด...
+      กำลังโหลดข้อมูลมาตรา...
     </div>
   </article>
 
   <!-- TABS -->
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('overview')">📋 ประวัติและข้อมูล</button>
-    <button class="tab-btn" onclick="switchTab('caselaw')">⚖️ ฎีกาศาลสูง</button>
-    <button class="tab-btn" onclick="switchTab('examples')">📝 ตัวอย่าง</button>
-    <button class="tab-btn" onclick="switchTab('related')">🔗 มาตราที่เกี่ยวข้อง</button>
+    <button class="tab-btn active" onclick="switchTab('overview', this)">📋 ประวัติและข้อมูล</button>
+    <button class="tab-btn" onclick="switchTab('caselaw', this)">⚖️ ฎีกาศาลสูง</button>
+    <button class="tab-btn" onclick="switchTab('examples', this)">📝 ตัวอย่าง</button>
+    <button class="tab-btn" onclick="switchTab('related', this)">🔗 มาตราที่เกี่ยวข้อง</button>
   </div>
 
   <!-- TAB: OVERVIEW -->
   <div id="tab-overview" class="tab-content active">
     <div style="background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px;">
       <h3 style="margin-bottom: 16px;">📖 ข้อมูลมาตรา</h3>
-      
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
-        <div>
-          <div style="font-size: 11px; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 6px;">ประมวล</div>
-          <div style="font-weight: 600; color: var(--ink);">ประมวลกฎหมายแพ่ง</div>
-        </div>
-        <div>
-          <div style="font-size: 11px; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 6px;">บรรพ</div>
-          <div style="font-weight: 600; color: var(--ink);">บรรพ 4 สัญญา</div>
-        </div>
-        <div>
-          <div style="font-size: 11px; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 6px;">ลักษณะ</div>
-          <div style="font-weight: 600; color: var(--ink);">ลักษณะ 1 สัญญาขาย</div>
-        </div>
-        <div>
-          <div style="font-size: 11px; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 6px;">หมวด</div>
-          <div style="font-weight: 600; color: var(--ink);">หมวด 2 สิทธิของผู้ซื้อ</div>
-        </div>
-      </div>
 
-      <div style="margin-top: 20px; padding-top: 20px; border-top: 1px dashed var(--line);">
-        <div style="font-size: 13px; color: var(--ink-soft); line-height: 1.8;">
-          <strong>หมายเหตุ:</strong> มาตรา 276 เป็นหนึ่งในมาตราสำคัญเกี่ยวกับสิทธิของผู้ซื้อในการคัดค้านสินค้าที่ไม่ถูกต้อง ตามพระราชกฤษฎีกาว่าด้วยการทดแทน...
-        </div>
-      </div>
+      <div id="overview-meta" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;"></div>
+
+      <div id="overview-keywords" style="margin-top: 20px; padding-top: 20px; border-top: 1px dashed var(--line);"></div>
     </div>
   </div>
 
   <!-- TAB: CASE LAW -->
   <div id="tab-caselaw" class="tab-content">
-    <div id="caselaw-container">
-      <div class="case-item">
-        <div class="case-number">⚖️ ฎีกา ที่ 1234/2562</div>
-        <div class="case-title">คดี: ผู้ซื้อคัดค้านสินค้าข้อมูลเท็จ</div>
-        <div class="case-summary">
-          ศาลตัดสินว่า ผู้ซื้อมีสิทธิคัดค้านสินค้าตามมาตรา 276 แม้ว่าระยะเวลา...
-        </div>
-        <div class="case-action">
-          <a href="#" class="case-link" onclick="return false;">อ่านเต็มฎีกา →</a>
-        </div>
-      </div>
-
-      <div class="case-item">
-        <div class="case-number">⚖️ ฎีกา ที่ 2345/2563</div>
-        <div class="case-title">คดี: อีกตัวอย่างฎีกา</div>
-        <div class="case-summary">
-          คำตัดสินศาลยุติธรรม: เห็นว่า...
-        </div>
-        <div class="case-action">
-          <a href="#" class="case-link" onclick="return false;">อ่านเต็มฎีกา →</a>
-        </div>
-      </div>
-    </div>
+    <div id="caselaw-container"></div>
   </div>
 
   <!-- TAB: EXAMPLES -->
   <div id="tab-examples" class="tab-content">
-    <div id="examples-container">
-      <div class="example-item">
-        <div class="example-title">📝 ตัวอย่าง 1: การคัดค้านสินค้า</div>
-        <div class="example-scenario">
-          <strong>สถานการณ์:</strong> นายเอ ซื้อเครื่องซักผ้าจากนายบี ราคา 50,000 บาท เมื่อส่งมอบแล้ว พบว่าสินค้าชำรุด
-        </div>
-        <div class="example-explanation">
-          <strong>การประยุกต์:</strong> ตามมาตรา 276 นายเอ มีสิทธิคัดค้านสินค้าภายใน 30 วัน นายบี ต้องรับเอาสินค้าคืนและคืนเงิน
-        </div>
-      </div>
-
-      <div class="example-item">
-        <div class="example-title">📝 ตัวอย่าง 2: ระยะเวลาการคัดค้าน</div>
-        <div class="example-scenario">
-          <strong>สถานการณ์:</strong> นางสาวจ ซื้อเสื้อผ้า 10 ชิ้น แต่ 2 ชิ้นไม่ตรงกับคำอธิบาย
-        </div>
-        <div class="example-explanation">
-          <strong>การประยุกต์:</strong> นางสาวจ อาจคัดค้านเพียงบางส่วน ตามมาตรา 276
-        </div>
-      </div>
-    </div>
+    <div id="examples-container"></div>
   </div>
 
   <!-- TAB: RELATED -->
   <div id="tab-related" class="tab-content">
     <div class="related-articles">
-      <h3>🔗 มาตราที่เกี่ยวข้อง</h3>
-      <div class="related-list">
-        <a href="#" class="related-link">270</a>
-        <a href="#" class="related-link">271</a>
-        <a href="#" class="related-link">275</a>
-        <a href="#" class="related-link" style="font-weight: 900;">276</a>
-        <a href="#" class="related-link">277</a>
-        <a href="#" class="related-link">278</a>
-        <a href="#" class="related-link">300</a>
-        <a href="#" class="related-link">350</a>
-      </div>
-
-      <div style="margin-top: 20px; padding-top: 20px; border-top: 1px dashed var(--line);">
-        <h4 style="font-size: 14px; margin-bottom: 10px;">📚 พระราชกฤษฎีกาที่เกี่ยวข้อง</h4>
-        <ul style="font-size: 13px; color: var(--ink-soft); line-height: 1.8; list-style-position: inside;">
-          <li>พระราชกฤษฎีกาว่าด้วยการบริหารจัดการ...</li>
-          <li>พระราชกฤษฎีกาว่าด้วยสิ่งของและทรัพย์สิน...</li>
-          <li>ประกาศกระทรวงพาณิชย์...</li>
-        </ul>
-      </div>
+      <h3>🔗 มาตราที่มีคำสำคัญร่วมกัน</h3>
+      <div class="related-list" id="related-list"></div>
     </div>
   </div>
 
   <!-- ARTICLE NAVIGATION -->
-  <div class="article-nav">
-    <a href="#" class="nav-btn" onclick="return false;">
-      <span class="nav-label">← มาตราก่อนหน้า</span>
-      <span class="nav-title">มาตรา 275</span>
-    </a>
-    <a href="#" class="nav-btn" onclick="return false;">
-      <span class="nav-label">มาตราถัดไป →</span>
-      <span class="nav-title">มาตรา 277</span>
-    </a>
-  </div>
+  <div class="article-nav" id="article-nav"></div>
 
 </div>
 
 <script>
 /* ================================================================
-   ARTICLE VIEWER LOGIC
-   ⚠️ ตอนนี้เป็น demo / placeholder
-   อปเดต: เมื่อ JSON data พร้อม
+   ARTICLE VIEWER - LIVE VERSION
+   Loads codex-data.json, reads ?id=civil_276 from the URL
    ================================================================ */
 
-function switchTab(tabName) {
-  // ซ่อน tab ทั้งหมด
-  document.querySelectorAll('.tab-content').forEach(tab => {
-    tab.classList.remove('active');
-  });
-  
-  // เอา active ออก button ทั้งหมด
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.classList.remove('active');
-  });
-  
-  // แสดง tab ที่เลือก + ให้ button active
+const BOOK_TITLES = {
+  civil: 'ประมวลกฎหมายแพ่งและพาณิชย์',
+  criminal: 'ประมวลกฎหมายอาญา',
+};
+
+let codexData = null;
+let currentBookType = null;
+let currentNumber = null;
+
+function switchTab(tabName, btn) {
+  document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + tabName).classList.add('active');
-  event.target.classList.add('active');
+  const activeBtn = btn || (typeof event !== 'undefined' && event.target);
+  if (activeBtn) activeBtn.classList.add('active');
 }
 
-// TTS Setup
-document.addEventListener('DOMContentLoaded', () => {
+function emptyState(icon, text) {
+  return `<div class="empty-section"><div class="icon">${icon}</div><p>${text}</p></div>`;
+}
+
+function renderOverview(article) {
+  const meta = article.meta || {};
+  const rows = [];
+  if (meta.book) rows.push(['บรรพ/ภาค', meta.book]);
+  if (meta.cat) rows.push(['หมวด/ลักษณะ', meta.cat]);
+  document.getElementById('overview-meta').innerHTML = rows.length
+    ? rows.map(([label, val]) => `
+        <div>
+          <div style="font-size:11px;color:var(--ink-faint);text-transform:uppercase;margin-bottom:6px;">${label}</div>
+          <div style="font-weight:600;color:var(--ink);">${val}</div>
+        </div>`).join('')
+    : emptyState('📖', 'ยังไม่มีข้อมูลหมวดหมู่สำหรับมาตรานี้');
+
+  document.getElementById('overview-keywords').innerHTML = (article.keywords && article.keywords.length)
+    ? `<div style="font-size:13px;color:var(--ink-soft);"><strong>คำสำคัญ:</strong> ${article.keywords.join(', ')}</div>`
+    : '';
+}
+
+function renderCaseLaw(article) {
+  const el = document.getElementById('caselaw-container');
+  if (!article.caseLaw || article.caseLaw.length === 0) {
+    el.innerHTML = emptyState('⚖️', 'ยังไม่มีฎีกาที่เกี่ยวข้องกับมาตรานี้ (อยู่ระหว่างรวบรวมข้อมูล)');
+    return;
+  }
+  el.innerHTML = article.caseLaw.map(c => `
+    <div class="case-item">
+      <div class="case-number">⚖️ ${c.caseNumber || ''}</div>
+      <div class="case-title">${c.title || ''}</div>
+      <div class="case-summary">${c.summary || ''}</div>
+    </div>`).join('');
+}
+
+function renderExamples(article) {
+  const el = document.getElementById('examples-container');
+  if (!article.examples || article.examples.length === 0) {
+    el.innerHTML = emptyState('📝', 'ยังไม่มีตัวอย่างการใช้มาตรานี้ (อยู่ระหว่างรวบรวมข้อมูล)');
+    return;
+  }
+  el.innerHTML = article.examples.map(ex => `
+    <div class="example-item">
+      <div class="example-title">📝 ${ex.title || ''}</div>
+      <div class="example-scenario"><strong>สถานการณ์:</strong> ${ex.scenario || ''}</div>
+      <div class="example-explanation"><strong>การประยุกต์:</strong> ${ex.explanation || ''}</div>
+    </div>`).join('');
+}
+
+function renderRelated(article, articles) {
+  const el = document.getElementById('related-list');
+  const myKeywords = new Set(article.keywords || []);
+  if (myKeywords.size === 0) {
+    el.innerHTML = emptyState('🔗', 'มาตรานี้ยังไม่มีคำสำคัญให้จับคู่มาตราที่เกี่ยวข้อง');
+    return;
+  }
+  const related = Object.values(articles)
+    .filter(a => a.number !== article.number)
+    .map(a => ({ a, overlap: (a.keywords || []).filter(k => myKeywords.has(k)).length }))
+    .filter(x => x.overlap > 0)
+    .sort((x, y) => y.overlap - x.overlap)
+    .slice(0, 8);
+
+  el.innerHTML = related.length
+    ? related.map(({ a }) => `<a href="codex-article-viewer.html?id=${currentBookType}_${a.number}" class="related-link">${a.number}</a>`).join('')
+    : emptyState('🔗', 'ไม่พบมาตราอื่นที่มีคำสำคัญร่วมกัน');
+}
+
+function renderNav(articles) {
+  const numbers = Object.keys(articles).map(Number).sort((a, b) => a - b);
+  const idx = numbers.indexOf(Number(currentNumber));
+  const prev = idx > 0 ? numbers[idx - 1] : null;
+  const next = idx >= 0 && idx < numbers.length - 1 ? numbers[idx + 1] : null;
+
+  const el = document.getElementById('article-nav');
+  el.innerHTML = `
+    ${prev ? `<a href="codex-article-viewer.html?id=${currentBookType}_${prev}" class="nav-btn">
+      <span class="nav-label">← มาตราก่อนหน้า</span><span class="nav-title">มาตรา ${prev}</span>
+    </a>` : '<div></div>'}
+    ${next ? `<a href="codex-article-viewer.html?id=${currentBookType}_${next}" class="nav-btn">
+      <span class="nav-label">มาตราถัดไป →</span><span class="nav-title">มาตรา ${next}</span>
+    </a>` : '<div></div>'}
+  `;
+}
+
+function showNotFound(msg) {
+  document.getElementById('article-number').textContent = '—';
+  document.getElementById('breadcrumb').textContent = '📍 ไม่พบมาตรา';
+  document.getElementById('article-text').textContent = msg || 'ไม่พบมาตรานี้ในฐานข้อมูล';
+}
+
+async function loadAndRender() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  if (!id || !id.includes('_')) { showNotFound('ไม่ได้ระบุมาตราที่ต้องการดู'); return; }
+
+  currentBookType = id.slice(0, id.indexOf('_'));
+  currentNumber = id.slice(id.indexOf('_') + 1);
+
+  try {
+    const res = await fetch('codex-data.json');
+    if (!res.ok) throw new Error('fetch failed');
+    codexData = await res.json();
+  } catch (e) {
+    showNotFound('โหลดฐานข้อมูลไม่สำเร็จ ลองรีเฟรชหน้าอีกครั้ง');
+    return;
+  }
+
+  const book = codexData.books[currentBookType];
+  const article = book && book.articles[currentNumber];
+  if (!article) { showNotFound(`ไม่พบมาตรา ${currentNumber}`); return; }
+
+  document.getElementById('breadcrumb').textContent = `📍 ${BOOK_TITLES[currentBookType] || currentBookType}`;
+  document.getElementById('article-number').textContent = article.number;
+  document.getElementById('article-subtitle').textContent = BOOK_TITLES[currentBookType] || '';
+  document.getElementById('article-text').textContent = article.text;
+
+  renderOverview(article);
+  renderCaseLaw(article);
+  renderExamples(article);
+  renderRelated(article, book.articles);
+  renderNav(book.articles);
+
   if ('speechSynthesis' in window) {
     thaiTTS.createAudioControl('audio-controls', ['article-text']);
   }
-  
-  console.log('📖 Article Viewer Ready (Beta)');
-});
+}
+
+document.addEventListener('DOMContentLoaded', loadAndRender);
 </script>
 </body>
 </html>

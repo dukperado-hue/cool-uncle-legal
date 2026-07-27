@@ -206,9 +206,9 @@ button{
     </div>
 
     <div class="book-selector">
-      <button class="book-btn active" onclick="selectBook('all')">🔍 ทั้งหมด</button>
-      <button class="book-btn" onclick="selectBook('civil')">📖 ประมวลแพ่ง</button>
-      <button class="book-btn" onclick="selectBook('criminal')">📕 ประมวลอาญา</button>
+      <button class="book-btn active" onclick="selectBook('all', this)">🔍 ทั้งหมด</button>
+      <button class="book-btn" onclick="selectBook('civil', this)">📖 ประมวลแพ่ง</button>
+      <button class="book-btn" onclick="selectBook('criminal', this)">📕 ประมวลอาญา</button>
     </div>
 
     <div class="search-form">
@@ -302,10 +302,11 @@ async function loadCodexData() {
   }
 }
 
-function selectBook(book) {
+function selectBook(book, btn) {
   selectedBook = book;
-  document.querySelectorAll('.book-btn').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
+  document.querySelectorAll('.book-btn').forEach(b => b.classList.remove('active'));
+  const activeBtn = btn || (typeof event !== 'undefined' && event.target);
+  if (activeBtn) activeBtn.classList.add('active');
   clearSearch();
 }
 
@@ -428,8 +429,7 @@ function clearSearch() {
 }
 
 function viewArticle(id) {
-  // TODO: Link to article viewer
-  alert('🚧 Article viewer coming soon for: ' + id);
+  window.location.href = 'codex-article-viewer.html?id=' + encodeURIComponent(id);
 }
 
 function showError(msg) {
@@ -443,8 +443,18 @@ function showError(msg) {
   `;
 }
 
-// Load data on page load
-document.addEventListener('DOMContentLoaded', loadCodexData);
+// Load data on page load, then apply ?book= from URL if present
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadCodexData();
+
+  const params = new URLSearchParams(window.location.search);
+  const book = params.get('book');
+  if (book === 'civil' || book === 'criminal') {
+    const btn = document.querySelector(`.book-btn[onclick^="selectBook('${book}'"]`);
+    selectBook(book, btn);
+    search();
+  }
+});
 </script>
 </body>
 </html>
