@@ -106,13 +106,36 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
 
 .article-body {
   font-size: 16px;
-  line-height: 2;
+  line-height: 1.8;
   color: var(--ink);
   background: #FEFDFB;
   padding: 20px;
   border-radius: 8px;
   border-left: 4px solid var(--gold);
   margin-bottom: 20px;
+}
+
+.warak-row {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 14px;
+  align-items: baseline;
+}
+
+.warak-row + .warak-row {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line);
+}
+
+.warak-label {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.warak-text {
   white-space: pre-line;
 }
 
@@ -468,6 +491,36 @@ let codexData = null;
 let currentBookType = null;
 let currentNumber = null;
 
+const THAI_DIGIT_WORDS = ['', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า'];
+
+function thaiOrdinalWord(n) {
+  if (n <= 0) return String(n);
+  if (n < 10) return THAI_DIGIT_WORDS[n];
+  if (n < 20) return n === 10 ? 'สิบ' : n === 11 ? 'สิบเอ็ด' : 'สิบ' + THAI_DIGIT_WORDS[n - 10];
+  const tens = Math.floor(n / 10), ones = n % 10;
+  const tensWord = tens === 2 ? 'ยี่สิบ' : THAI_DIGIT_WORDS[tens] + 'สิบ';
+  if (ones === 0) return tensWord;
+  return tensWord + (ones === 1 ? 'เอ็ด' : THAI_DIGIT_WORDS[ones]);
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function renderArticleBody(article) {
+  const el = document.getElementById('article-text');
+  const paragraphs = article.text.split('\n').filter(p => p.trim());
+  if (paragraphs.length <= 1) {
+    el.textContent = article.text;
+    return;
+  }
+  el.innerHTML = paragraphs.map((p, i) => `
+    <div class="warak-row">
+      <div class="warak-label">วรรค${thaiOrdinalWord(i + 1)}</div>
+      <div class="warak-text">${escapeHtml(p)}</div>
+    </div>`).join('');
+}
+
 function switchTab(tabName, btn) {
   document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -624,7 +677,7 @@ async function loadAndRender() {
     ? '<span style="color:var(--bad);font-size:13px;font-weight:700;border:1px solid var(--bad);border-radius:4px;padding:2px 8px;">ยกเลิกแล้ว</span>'
     : '';
   document.getElementById('article-subtitle').textContent = BOOK_TITLES[currentBookType] || '';
-  document.getElementById('article-text').textContent = article.text;
+  renderArticleBody(article);
 
   renderOverview(article);
   renderCaseLaw(article);
