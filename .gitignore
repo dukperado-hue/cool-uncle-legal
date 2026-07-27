@@ -12,6 +12,8 @@
 /PROJECT_SUMMARY.md
 /codex-schema.json
 
+codex-data.json.bak
+
 # OS/editor junk
 .DS_Store
 Thumbs.db
