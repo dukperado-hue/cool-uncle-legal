@@ -152,7 +152,7 @@ button{
 
 .article-meta{font-size:11px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.05em;display:flex;gap:8px}
 
-.article-text{font-size:14px;color:var(--ink);line-height:1.7;margin:12px 0}
+.article-text{font-size:14px;color:var(--ink);line-height:1.7;margin:12px 0;white-space:pre-line}
 
 .article-breadcrumb{font-size:12px;color:var(--ink-faint);margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
 
@@ -202,7 +202,7 @@ button{
   <div class="search-container">
     <div class="search-header">
       <h1>📚 ค้นหาประมวลกฎหมาย</h1>
-      <p>ค้นหาด้วยเลขมาตรา คำสำคัญ หรือหัวข้อเรื่อง (2,129 มาตรา)</p>
+      <p>ค้นหาด้วยเลขมาตรา คำสำคัญ หรือหัวข้อเรื่อง (2,284 มาตรา)</p>
     </div>
 
     <div class="book-selector">
@@ -334,7 +334,8 @@ function search() {
         article.text.toLowerCase().includes(searchText) ||
         (article.keywords && article.keywords.some(k => k.includes(searchText)));
       
-      const numberMatch = !searchArticle || article.number === searchArticle;
+      const numberMatch = !searchArticle || article.number === searchArticle ||
+        article.number.startsWith(searchArticle + ' ') || article.number.startsWith(searchArticle + '/');
       
       if (textMatch && numberMatch) {
         results.push({
@@ -374,6 +375,7 @@ function displayResults(results) {
     <article class="article-card" onclick="viewArticle('${article.bookType}_${article.number}')">
       <div class="article-header">
         <div class="article-number">มาตรา ${article.number}</div>
+        ${article.cancelled ? '<span style="color:var(--bad);font-size:12px;font-weight:700;border:1px solid var(--bad);border-radius:4px;padding:2px 6px;">ยกเลิกแล้ว</span>' : ''}
       </div>
       
       <div class="article-text">
@@ -381,8 +383,9 @@ function displayResults(results) {
       </div>
 
       <div class="article-breadcrumb">
-        📍 ${article.bookType === 'civil' ? 'ประมวลแพ่ง' : 'ประมวลอาญา'} 
-        ${article.meta ? ' • ' + Object.values(article.meta).filter(v=>v).join(' › ') : ''}
+        📍 ${article.bookType === 'civil' ? 'ประมวลแพ่ง' : 'ประมวลอาญา'}
+        ${[article.meta?.phaak, article.meta?.laksana, article.meta?.muad, article.meta?.suan]
+          .filter(Boolean).map(v => ' › ' + v).join('')}
       </div>
 
       <div class="article-action">

@@ -12,7 +12,7 @@
 /PROJECT_SUMMARY.md
 /codex-schema.json
 
-codex-data.json.bak
+*.bak
 
 # OS/editor junk
 .DS_Store

@@ -113,6 +113,7 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
   border-radius: 8px;
   border-left: 4px solid var(--gold);
   margin-bottom: 20px;
+  white-space: pre-line;
 }
 
 /* AUDIO CONTROLS */
@@ -398,6 +399,7 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
   <!-- ARTICLE HEADER -->
   <article class="article-header">
     <div class="article-number" id="article-number">-</div>
+    <div id="article-cancelled-badge"></div>
     <div class="article-subtitle" id="article-subtitle"></div>
 
     <!-- AUDIO CONTROLS -->
@@ -481,15 +483,17 @@ function emptyState(icon, text) {
 function renderOverview(article) {
   const meta = article.meta || {};
   const rows = [];
-  if (meta.book) rows.push(['บรรพ/ภาค', meta.book]);
-  if (meta.cat) rows.push(['หมวด/ลักษณะ', meta.cat]);
+  if (meta.phaak) rows.push(['บรรพ/ภาค', meta.phaak + (meta.phaakTitle ? ' ' + meta.phaakTitle : '')]);
+  if (meta.laksana) rows.push(['ลักษณะ', meta.laksana + (meta.laksanaTitle ? ' ' + meta.laksanaTitle : '')]);
+  if (meta.muad) rows.push(['หมวด', meta.muad + (meta.muadTitle ? ' ' + meta.muadTitle : '')]);
+  if (meta.suan) rows.push(['ส่วนที่', meta.suan + (meta.suanTitle ? ' ' + meta.suanTitle : '')]);
   document.getElementById('overview-meta').innerHTML = rows.length
     ? rows.map(([label, val]) => `
         <div>
           <div style="font-size:11px;color:var(--ink-faint);text-transform:uppercase;margin-bottom:6px;">${label}</div>
           <div style="font-weight:600;color:var(--ink);">${val}</div>
         </div>`).join('')
-    : emptyState('📖', 'ยังไม่มีข้อมูลหมวดหมู่สำหรับมาตรานี้');
+    : emptyState('📖', 'มาตรานี้อยู่ในบทบัญญัติทั่วไปก่อนเข้าบรรพ/ภาคใด ๆ');
 
   document.getElementById('overview-keywords').innerHTML = (article.keywords && article.keywords.length)
     ? `<div style="font-size:13px;color:var(--ink-soft);"><strong>คำสำคัญ:</strong> ${article.keywords.join(', ')}</div>`
@@ -524,37 +528,64 @@ function renderExamples(article) {
     </div>`).join('');
 }
 
+const SUFFIX_RANK = { '': 0, 'ทวิ': 1, 'ตรี': 2, 'จัตวา': 3, 'เบญจ': 4, 'ฉ': 5, 'สัตต': 6, 'อัฏฐ': 7, 'นว': 8, 'ทศ': 9 };
+
+function sortKey(numStr) {
+  const spaceIdx = numStr.indexOf(' ');
+  const numPart = spaceIdx === -1 ? numStr : numStr.slice(0, spaceIdx);
+  const suffix = spaceIdx === -1 ? '' : numStr.slice(spaceIdx + 1);
+  const [main, sub] = numPart.split('/').map(Number);
+  return [main, sub || 0, SUFFIX_RANK[suffix] ?? 0];
+}
+
+function compareNumbers(a, b) {
+  const ka = sortKey(a), kb = sortKey(b);
+  for (let i = 0; i < 3; i++) if (ka[i] !== kb[i]) return ka[i] - kb[i];
+  return 0;
+}
+
+function pathKey(meta, depth) {
+  const parts = [meta.phaak, meta.laksana, meta.muad, meta.suan].slice(0, depth);
+  if (parts.some(p => !p)) return null;
+  return parts.join(' / ');
+}
+
 function renderRelated(article, articles) {
   const el = document.getElementById('related-list');
-  const myKeywords = new Set(article.keywords || []);
-  if (myKeywords.size === 0) {
-    el.innerHTML = emptyState('🔗', 'มาตรานี้ยังไม่มีคำสำคัญให้จับคู่มาตราที่เกี่ยวข้อง');
+  const meta = article.meta || {};
+  // prefer the most specific full path available (phaak/laksana/muad), fall back to phaak/laksana
+  const bucket = pathKey(meta, 3) || pathKey(meta, 2);
+  if (!bucket) {
+    el.innerHTML = emptyState('🔗', 'มาตรานี้ยังไม่มีหมวดหมู่ให้จับคู่มาตราที่เกี่ยวข้อง');
     return;
   }
-  const related = Object.values(articles)
-    .filter(a => a.number !== article.number)
-    .map(a => ({ a, overlap: (a.keywords || []).filter(k => myKeywords.has(k)).length }))
-    .filter(x => x.overlap > 0)
-    .sort((x, y) => y.overlap - x.overlap)
-    .slice(0, 8);
+  const depth = pathKey(meta, 3) ? 3 : 2;
+  const sameSection = Object.values(articles)
+    .filter(a => pathKey(a.meta || {}, depth) === bucket)
+    .sort((a, b) => compareNumbers(a.number, b.number));
+  const selfIdx = sameSection.findIndex(a => a.number === article.number);
+  const windowStart = Math.max(0, selfIdx - 6);
+  const related = sameSection
+    .slice(windowStart, windowStart + 13)
+    .filter(a => a.number !== article.number);
 
   el.innerHTML = related.length
-    ? related.map(({ a }) => `<a href="codex-article-viewer.html?id=${currentBookType}_${a.number}" class="related-link">${a.number}</a>`).join('')
-    : emptyState('🔗', 'ไม่พบมาตราอื่นที่มีคำสำคัญร่วมกัน');
+    ? related.map(a => `<a href="codex-article-viewer.html?id=${currentBookType}_${encodeURIComponent(a.number)}" class="related-link">${a.number}</a>`).join('')
+    : emptyState('🔗', 'ไม่พบมาตราอื่นในหมวดเดียวกัน');
 }
 
 function renderNav(articles) {
-  const numbers = Object.keys(articles).map(Number).sort((a, b) => a - b);
-  const idx = numbers.indexOf(Number(currentNumber));
+  const numbers = Object.keys(articles).sort(compareNumbers);
+  const idx = numbers.indexOf(currentNumber);
   const prev = idx > 0 ? numbers[idx - 1] : null;
   const next = idx >= 0 && idx < numbers.length - 1 ? numbers[idx + 1] : null;
 
   const el = document.getElementById('article-nav');
   el.innerHTML = `
-    ${prev ? `<a href="codex-article-viewer.html?id=${currentBookType}_${prev}" class="nav-btn">
+    ${prev ? `<a href="codex-article-viewer.html?id=${currentBookType}_${encodeURIComponent(prev)}" class="nav-btn">
       <span class="nav-label">← มาตราก่อนหน้า</span><span class="nav-title">มาตรา ${prev}</span>
     </a>` : '<div></div>'}
-    ${next ? `<a href="codex-article-viewer.html?id=${currentBookType}_${next}" class="nav-btn">
+    ${next ? `<a href="codex-article-viewer.html?id=${currentBookType}_${encodeURIComponent(next)}" class="nav-btn">
       <span class="nav-label">มาตราถัดไป →</span><span class="nav-title">มาตรา ${next}</span>
     </a>` : '<div></div>'}
   `;
@@ -589,6 +620,9 @@ async function loadAndRender() {
 
   document.getElementById('breadcrumb').textContent = `📍 ${BOOK_TITLES[currentBookType] || currentBookType}`;
   document.getElementById('article-number').textContent = article.number;
+  document.getElementById('article-cancelled-badge').innerHTML = article.cancelled
+    ? '<span style="color:var(--bad);font-size:13px;font-weight:700;border:1px solid var(--bad);border-radius:4px;padding:2px 8px;">ยกเลิกแล้ว</span>'
+    : '';
   document.getElementById('article-subtitle').textContent = BOOK_TITLES[currentBookType] || '';
   document.getElementById('article-text').textContent = article.text;
 
