@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ห้องซ้อมสอบ กฎหมายรัฐธรรมนูญ น.251</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;900&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF9F4;
+  --card:#FFFFFF;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --gold-soft:#F3E8CF;
+  --ok:#1E7A4F;
+  --ok-bg:#E6F4EC;
+  --bad:#B23A3A;
+  --bad-bg:#FBEAEA;
+  --accent:#2E4A7A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+/* ---------- top home bar (flat, for future multi-subject hub) ---------- */
+.home-bar{
+  display:flex;align-items:center;gap:10px;
+  background:#EFEAE0;border-bottom:1px solid var(--line);
+  padding:10px 16px;font-size:13px;color:var(--ink-soft);
+}
+.home-bar-link{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.home-bar-link:hover{text-decoration:underline}
+.home-bar-sep{color:var(--ink-faint)}
+.home-bar-current{font-weight:600;color:var(--ink-soft)}
+.home-bar-score{
+  margin-left:auto;font-weight:800;color:#8F6511;background:var(--gold-soft);
+  padding:4px 12px;border-radius:999px;font-size:13px;white-space:nowrap;
+  transition:transform .15s;
+}
+.home-bar-score.score-pop{animation:scorePop .4s ease}
+@keyframes scorePop{
+  0%{transform:scale(1)}
+  35%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),
+    var(--paper);
+  color:var(--ink);
+  min-height:100vh;
+  padding:20px 14px 60px;
+  font-size:16px;
+  line-height:1.75;
+}
+.wrap{max-width:860px;margin:0 auto}
+
+/* ---------- header ---------- */
+header{text-align:center;margin-bottom:22px;transition:opacity .15s}
+header.compact{margin-bottom:10px}
+header.compact .crest{display:none}
+header.compact h1{font-size:19px}
+header.compact .subtitle{display:none}
+.crest{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Noto Serif Thai',serif;
+  font-size:13px;letter-spacing:.35em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:6px;
+}
+.crest::before,.crest::after{content:"";width:44px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+.crest::after{background:linear-gradient(90deg,var(--gold),transparent);}
+h1{
+  font-family:'Noto Serif Thai',serif;
+  font-size:clamp(24px,5vw,36px);
+  font-weight:700;line-height:1.3;
+}
+.subtitle{color:var(--ink-soft);font-size:15px;margin-top:2px}
+
+/* ---------- tabs ---------- */
+.tabbar{
+  display:flex;gap:6px;background:#F1EDE2;border:1px solid var(--line);
+  border-radius:999px;padding:5px;margin:20px auto 26px;max-width:600px;
+}
+.tabbar button{
+  flex:1;border:none;background:transparent;border-radius:999px;
+  padding:10px 5px;font-family:inherit;font-size:13.5px;font-weight:600;
+  color:var(--ink-soft);cursor:pointer;transition:all .2s;
+}
+.tabbar button.on{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+.tabbar button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#btn-reset,#btn-sound{
+  flex:0 0 38px;font-size:15px;color:var(--ink-faint);
+}
+#btn-reset:hover{color:var(--bad)}
+#btn-sound:hover{color:var(--accent)}
+
+/* ---------- sticky bottom action bar ---------- */
+.sticky-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
+  background:linear-gradient(180deg,rgba(251,249,244,0) 0%,var(--paper) 35%);
+  padding:22px 14px calc(14px + env(safe-area-inset-bottom,0px));
+}
+.sticky-bar-inner{max-width:860px;margin:0 auto;display:flex;gap:10px}
+.sticky-bar-inner button{
+  flex:1;box-shadow:0 6px 20px rgba(34,40,58,.22);
+  padding:18px 20px;font-size:17.5px;font-weight:700;border-radius:14px;
+  letter-spacing:.01em;
+}
+body.has-sticky-bar{padding-bottom:92px}
+@media(max-width:520px){
+  .sticky-bar{padding:18px 10px calc(12px + env(safe-area-inset-bottom,0px))}
+  .sticky-bar-inner button{padding:16px 14px;font-size:16px}
+}
+.irac-caselist{display:flex;flex-direction:column;gap:10px}
+.irac-case-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;text-align:left;cursor:pointer;transition:border-color .15s;
+}
+.irac-case-card:hover{border-color:var(--gold)}
+.irac-case-card .icref{font-size:12px;color:var(--ink-faint);margin-bottom:4px}
+.irac-case-card .ictitle{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:600}
+.irac-case-card .icprog{font-size:12.5px;color:var(--gold);margin-top:6px;font-weight:600}
+
+.irac-facts{
+  background:#FBF6E8;border:1px solid var(--gold-soft);border-radius:var(--radius);
+  padding:14px 16px;margin-bottom:6px;font-size:15px;line-height:1.85;color:var(--ink);
+  max-height:92px;overflow:hidden;position:relative;
+}
+.irac-facts::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:34px;
+  background:linear-gradient(180deg,transparent,#FBF6E8);pointer-events:none;
+}
+.irac-facts.expanded{max-height:none}
+.irac-facts.expanded::after{display:none}
+.irac-facts-toggle{
+  display:block;width:100%;text-align:center;font-size:13px;color:var(--accent);font-weight:600;
+  background:none;border:none;padding:5px 0 14px;cursor:pointer;
+}
+
+.irac-stepper{display:flex;gap:5px;margin-bottom:8px}
+.irac-step{
+  flex:1;text-align:center;font-size:11px;font-weight:600;color:var(--ink-faint);
+  padding:5px 2px;border-radius:8px;background:#EEEBE0;border:1px solid transparent;
+}
+.irac-step.active{background:var(--accent);color:#fff}
+.irac-step.done{background:var(--ok-bg);color:var(--ok);border-color:#BFE3CE}
+
+.irac-progress-label{font-size:12.5px;color:var(--ink-soft);margin-bottom:6px;font-weight:600}
+.irac-back{background:none;border:none;color:var(--ink-faint);font-size:13px;cursor:pointer;margin-bottom:12px;padding:0}
+.irac-back:hover{color:var(--accent)}
+
+.irac-issue-recap{
+  background:var(--ok-bg);border:1px solid #BFE3CE;border-radius:var(--radius);
+  padding:16px 18px;text-align:center;
+}
+.irac-issue-recap .big{font-family:'Noto Serif Thai',serif;font-size:18px;font-weight:700;color:#14563A;margin-bottom:6px}
+
+/* ---------- stage banner (แถบธีมตามหมวด แทน SVG scene) ---------- */
+.stage{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  margin-bottom:14px;min-height:74px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px;border:1px solid rgba(0,0,0,.06);
+}
+.stage .stage-icon{font-size:30px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.15))}
+.stage .stage-label{font-family:'Noto Serif Thai',serif;font-weight:700;font-size:15px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.stage .stage-src{font-size:11.5px;color:rgba(255,255,255,.85);margin-top:2px;display:block}
+@media(max-width:520px){.stage{min-height:60px;padding:10px}.stage .stage-icon{font-size:24px}.stage .stage-label{font-size:13px}}
+
+/* ---------- มาตรา chip strip (โหมดการ์ด) ---------- */
+.matra-chips{display:none;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:14px}
+.matra-chips-label{font-size:12.5px;color:var(--ink-faint);font-weight:600;margin-right:2px}
+.matra-chip{
+  --chip-color:#888;
+  font-family:'Noto Serif Thai',serif;font-size:12.5px;font-weight:700;
+  background:var(--card);border:1.5px solid var(--line);color:var(--ink-soft);
+  border-radius:999px;padding:5px 12px;cursor:pointer;transition:all .15s;
+}
+.matra-chip:hover{border-color:var(--chip-color);color:var(--chip-color)}
+.matra-chip.active{background:var(--chip-color);border-color:var(--chip-color);color:#fff}
+
+button{font-family:inherit}
+select{
+  font-family:inherit;font-size:15px;color:var(--ink);
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:10px 12px;width:100%;
+}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.row select{flex:1;min-width:170px;width:auto}
+.muted{color:var(--ink-soft);font-size:14px;white-space:nowrap}
+
+/* ---------- flashcard ---------- */
+.flip-stage{perspective:1200px}
+.flashcard{
+  position:relative;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  min-height:250px;padding:34px 26px 30px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:10px;overflow:hidden;
+  transition:transform .16s ease;
+}
+.flashcard.flipping{transform:rotateY(90deg)}
+@media (prefers-reduced-motion:reduce){.flashcard.flipping{transform:none}}
+.ribbon{
+  position:absolute;top:0;left:26px;width:34px;height:56px;
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%);
+}
+.chapter-tag{
+  font-size:12.5px;font-weight:700;letter-spacing:.02em;
+  padding:4px 14px;border-radius:999px;
+}
+.src-tag{font-size:11.5px;color:var(--ink-faint);margin-top:2px;font-weight:600}
+.sec-no{
+  font-family:'Noto Serif Thai',serif;font-size:clamp(30px,7vw,44px);
+  font-weight:700;line-height:1.25;
+}
+.stars{color:var(--gold);font-size:16px;letter-spacing:.15em}
+.hint{font-size:13px;color:var(--ink-faint);margin-top:10px}
+.face-back .card-title{font-family:'Noto Serif Thai',serif;font-size:17px;font-weight:600;line-height:1.6}
+.face-back .card-result{font-size:16px;margin-top:10px;line-height:1.8}
+.face-back .card-note{
+  font-size:14px;color:var(--ink-soft);margin-top:12px;line-height:1.7;
+  border-top:1px dashed var(--line);padding-top:10px;max-width:560px;
+}
+.nav3{display:flex;gap:10px;margin-top:14px}
+.nav3 button{
+  flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:12px;font-size:14.5px;font-weight:600;color:var(--ink);cursor:pointer;
+  transition:border-color .15s, transform .1s;
+}
+.nav3 button:hover{border-color:var(--ink-faint)}
+.nav3 button:active{transform:scale(.98)}
+.nav3 button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- sequence list ---------- */
+.seq-item{
+  background:var(--card);border:1px solid var(--line);border-left-width:6px;
+  border-radius:12px;padding:14px 16px;margin-bottom:10px;
+  display:flex;gap:12px;box-shadow:0 1px 2px rgba(34,40,58,.04);
+}
+.seq-num{
+  font-family:'Noto Serif Thai',serif;font-weight:700;font-size:15px;
+  color:var(--ink-faint);min-width:22px;padding-top:3px;
+}
+.seq-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.seq-sec{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:700}
+.seq-title{font-size:15px;font-weight:600}
+.seq-res{font-size:14.5px;margin-top:4px;line-height:1.7}
+.seq-note{font-size:13.5px;color:var(--ink-soft);margin-top:5px;line-height:1.65;border-top:1px dashed var(--line);padding-top:5px}
+.seq-stars{color:var(--gold);font-size:12px;letter-spacing:.1em}
+.seq-src{font-size:12px;color:var(--ink-faint);font-weight:600}
+
+/* ---------- quiz ---------- */
+.lvlbar{display:flex;gap:8px;margin-bottom:14px}
+.lvlbar button{
+  flex:1;border:1.5px solid var(--line);background:var(--card);border-radius:12px;
+  padding:12px 8px;font-size:14.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+}
+.lvlbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.lvlbar .lvl-desc{display:block;font-size:12px;font-weight:400;color:var(--ink-faint);margin-top:2px}
+.lvlbar button.on .lvl-desc{color:var(--accent)}
+
+.setbar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.setbar button{
+  border:1px solid var(--line);background:var(--card);border-radius:999px;
+  padding:7px 15px;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.setbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.setbar .best{color:var(--gold);font-size:12px;font-weight:700}
+
+.progressbar{height:6px;background:#EDE9DD;border-radius:99px;overflow:hidden;margin-bottom:8px}
+.progressbar>div{height:100%;background:linear-gradient(90deg,var(--accent),#5E7BB0);border-radius:99px;transition:width .3s}
+.quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:14px;gap:10px}
+.quiz-timer{
+  font-weight:700;color:var(--ink-soft);background:#EEEBE0;border-radius:999px;
+  padding:3px 10px;font-size:13px;white-space:nowrap;
+}
+.quiz-timer.timer-fast{background:var(--ok-bg);color:var(--ok)}
+.quiz-meta .score{font-weight:700}
+
+.scenario{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:20px 22px;margin-bottom:14px;
+}
+.scenario .qtext{font-size:16.5px;line-height:1.9}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opts button{
+  text-align:left;background:var(--card);border:1.5px solid var(--line);
+  border-radius:12px;padding:14px 16px;font-size:15px;line-height:1.7;
+  color:var(--ink);cursor:pointer;transition:border-color .15s, background .15s;
+  display:flex;gap:10px;
+}
+.opts button:hover:not(:disabled){border-color:var(--ink-faint)}
+.opts button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opts .abc{
+  font-family:'Noto Serif Thai',serif;font-weight:700;color:var(--ink-faint);
+  min-width:20px;
+}
+.opts button.correct{border-color:var(--ok);background:var(--ok-bg)}
+.opts button.correct .abc{color:var(--ok)}
+.opts button.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opts button.wrong .abc{color:var(--bad)}
+.opts button:disabled{cursor:default;opacity:.92}
+
+.explain{
+  display:none;margin-top:14px;border-radius:12px;padding:16px 18px;
+  font-size:15px;line-height:1.85;border:1px solid;
+}
+.explain.ok{background:var(--ok-bg);border-color:#BFE3CE;color:#14563A}
+.explain.bad{background:var(--bad-bg);border-color:#F0C9C9;color:#7C2A2A}
+.explain b{display:block;margin-bottom:4px;font-size:15.5px}
+.pts-earned{
+  display:inline-block;background:var(--gold);color:#fff;font-weight:800;
+  font-size:12.5px;padding:2px 9px;border-radius:999px;margin-left:6px;vertical-align:middle;
+}
+
+.btn-primary{background:var(--accent);color:#fff;border:none}
+.btn-primary:hover{background:#26406B}
+.btn-ghost{background:var(--card);border:1.5px solid var(--line) !important;color:var(--ink)}
+
+/* ---------- summary ---------- */
+.summary{
+  display:none;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:34px 24px;text-align:center;
+}
+.summary .grade{font-family:'Noto Serif Thai',serif;font-size:24px;font-weight:700;margin-top:8px}
+.summary .bigscore{font-family:'Noto Serif Thai',serif;font-size:52px;font-weight:700;color:var(--accent);line-height:1.2}
+.summary .of{font-size:15px;color:var(--ink-soft)}
+.summary .gstars{color:var(--gold);font-size:22px;letter-spacing:.2em;margin-top:6px}
+.summary .sum-actions{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+.summary .sum-actions button{
+  border-radius:12px;padding:12px 22px;font-size:14.5px;font-weight:700;cursor:pointer;border:none;
+}
+footer{
+  margin-top:40px;text-align:center;font-size:12.5px;color:var(--ink-faint);
+  border-top:1px solid var(--line);padding-top:16px;
+}
+.view{display:none}
+.view.on{display:block}
+
+.study-layout{display:flex;gap:20px;align-items:flex-start}
+.study-toc{display:none;flex:0 0 190px;position:sticky;top:12px;border-left:2px solid var(--line);padding-left:12px}
+.study-toc-label{font-size:11.5px;color:var(--ink-faint);font-weight:700;margin-bottom:8px;letter-spacing:.05em}
+.study-toc-item{display:block;font-size:13px;color:var(--ink-soft);text-decoration:none;padding:4px 0;line-height:1.4;border-bottom:none}
+.study-toc-item:hover{color:var(--accent)}
+.study-toc-major{font-weight:700;color:var(--ink);margin-top:6px}
+.study-toc-item.study-toc-major:first-child{margin-top:0}
+.study-toc-item{}
+.study-panel{flex:1;min-width:0;font-size:15.5px;line-height:1.9;color:var(--ink)}
+.study-panel h4{font-family:'Noto Serif Thai',serif;font-size:19px;font-weight:700;margin:22px 0 10px;color:var(--accent);scroll-margin-top:16px}
+.study-panel h4:first-child{margin-top:0}
+.study-panel h5{font-family:'Noto Serif Thai',serif;font-size:16.5px;font-weight:700;margin:18px 0 8px;color:#14563A;scroll-margin-top:16px}
+.study-panel p{margin-bottom:12px}
+.study-panel p.p-tight{background:var(--gold-soft);border-radius:10px;padding:12px 14px;font-size:14.5px;line-height:1.8}
+.study-panel ul,.study-panel ol{margin:0 0 14px 22px}
+.study-panel li{margin-bottom:8px}
+.study-panel b{color:var(--ink)}
+.study-panel table{width:100%;border-collapse:collapse;margin:10px 0 16px;font-size:14px}
+.study-panel th,.study-panel td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.study-panel th{background:var(--gold-soft);font-weight:700}
+@media (max-width:720px){
+  .study-layout{flex-direction:column}
+  .study-toc{position:static;border-left:none;border-bottom:1px solid var(--line);padding:0 0 10px;width:100%}
+}
+</style>
+</head>
+<body>
+<div class="home-bar">
+  <span class="home-bar-current">น.251 กฎหมายรัฐธรรมนูญ</span>
+  <span class="home-bar-score" id="global-score">🏆 <span id="score-value">0</span> คะแนน</span>
+</div>
+<div class="wrap">
+
+<header id="page-header">
+  <div class="crest" id="hd-crest">น.251 กฎหมายรัฐธรรมนูญ</div>
+  <h1 id="hd-title">ห้องซ้อมสอบ กฎหมายรัฐธรรมนูญ</h1>
+  <div class="subtitle" id="hd-sub">รัฐธรรมนูญแห่งราชอาณาจักรไทย พุทธศักราช 2560 · เรียนเป็นเรื่อง เข้าใจก่อนสอบ</div>
+</header>
+
+<nav class="tabbar" aria-label="โหมดเกม">
+  <button id="tab-study" class="on">สรุปเนื้อหา</button>
+  <button id="tab-quiz">วิเคราะห์โจทย์</button>
+  <button id="tab-irac">ฝึก IRAC</button>
+  <button id="btn-sound" title="ปิด/เปิดเสียง" aria-label="ปิด/เปิดเสียง">🔊</button>
+  <button id="btn-reset" title="รีเซ็ตทั้งหมด" aria-label="รีเซ็ตทั้งหมด">↺</button>
+</nav>
+
+<!-- ============ โหมด 1: สรุปเนื้อหา (เรียนเป็นเรื่อง) ============ -->
+<section id="view-study" class="view on">
+  <div id="study-picker">
+    <p class="muted" style="margin-bottom:14px;font-size:14px">เลือกหัวข้อที่จะอ่านทำความเข้าใจทีละเรื่อง สรุปจากเนื้อหาเลคเชอร์ทั้ง 15 ครั้งและแนวข้อสอบจริงของวิชา</p>
+    <div class="irac-caselist" id="study-topiclist"></div>
+  </div>
+
+  <div id="study-play" style="display:none">
+    <button class="irac-back" id="study-back">← กลับไปเลือกหัวข้อ</button>
+    <div class="chapter-tag" id="study-tag" style="display:inline-block;margin-bottom:10px"></div>
+    <div class="study-layout">
+      <div class="study-toc" id="study-toc"></div>
+      <div class="study-panel" id="study-panel"></div>
+    </div>
+    <div class="sum-actions" style="margin-top:18px">
+      <button id="study-prev" class="btn-ghost">← หัวข้อก่อนหน้า</button>
+      <button id="study-next" class="btn-primary">หัวข้อถัดไป →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ โหมด 2: วิเคราะห์โจทย์ ============ -->
+<section id="view-quiz" class="view">
+  <div class="setbar" id="set-picker"></div>
+
+  <div id="quiz-play">
+    <div class="progressbar"><div id="pbar" style="width:0%"></div></div>
+    <div class="quiz-meta">
+      <span class="muted" id="quiz-progress"></span>
+      <span class="quiz-timer" id="quiz-timer">⏱ 0.0s</span>
+      <span class="score" id="quiz-score"></span>
+    </div>
+    <div class="chapter-tag" id="quiz-tag" style="display:inline-block;margin-bottom:10px"></div>
+    <div class="stage" id="quiz-stage" aria-hidden="true"></div>
+    <div class="scenario"><div class="qtext" id="quiz-scenario"></div></div>
+    <div class="opts" id="quiz-options"></div>
+    <div class="explain" id="quiz-explain"></div>
+  </div>
+
+  <div class="summary" id="quiz-summary">
+    <div class="muted" id="sum-set-label"></div>
+    <div class="bigscore" id="sum-score">0</div>
+    <div class="of" id="sum-of">จาก 10 ข้อ</div>
+    <div class="gstars" id="sum-stars"></div>
+    <div class="grade" id="sum-grade"></div>
+    <div class="muted" id="sum-best" style="margin-top:6px"></div>
+    <div class="sum-actions">
+      <button id="sum-review" class="btn-ghost" style="display:none">ทบทวนข้อที่ผิด</button>
+      <button id="sum-retry" class="btn-ghost">ทำชุดนี้ซ้ำ</button>
+      <button id="sum-nextset" class="btn-primary" style="display:none">ชุดถัดไป →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ โหมด 3: ฝึก IRAC ============ -->
+<section id="view-irac" class="view">
+  <div id="irac-picker">
+    <p class="muted" style="margin-bottom:14px;font-size:14px">เลือกข้อสอบจริงที่จะฝึกวินิจฉัยแบบ IRAC ทีละประเด็น: ตั้งประเด็น → เลือกมาตรา → ปรับบท → สรุปผล</p>
+    <div class="irac-caselist" id="irac-caselist"></div>
+  </div>
+
+  <div id="irac-play" style="display:none">
+    <button class="irac-back" id="irac-back">← กลับไปเลือกข้อสอบ</button>
+    <div class="chapter-tag" id="irac-case-tag" style="display:inline-block;margin-bottom:6px"></div>
+    <div class="irac-facts" id="irac-facts"></div>
+    <button class="irac-facts-toggle" id="irac-facts-toggle">ขยายอ่านโจทย์เต็ม ▾</button>
+
+    <div style="margin-top:2px">
+      <div class="irac-progress-label" id="irac-progress-label"></div>
+      <span class="quiz-timer" id="irac-timer">⏱ 0.0s</span>
+      <div class="irac-stepper" id="irac-stepper">
+        <div class="irac-step" data-step="issue">1. ประเด็น</div>
+        <div class="irac-step" data-step="rule">2. มาตรา</div>
+        <div class="irac-step" data-step="app">3. ปรับบท</div>
+        <div class="irac-step" data-step="conc">4. สรุปผล</div>
+      </div>
+    </div>
+
+    <div id="irac-stage-box">
+      <div class="scenario" style="padding:16px 18px;margin-bottom:10px"><div class="qtext" id="irac-question" style="font-size:16.5px"></div></div>
+      <div class="opts" id="irac-options"></div>
+      <div class="explain" id="irac-explain"></div>
+    </div>
+
+    <div id="irac-recap-box" style="display:none">
+      <div class="irac-issue-recap">
+        <div class="big" id="irac-recap-title"></div>
+        <div id="irac-recap-text" style="font-size:14.5px;line-height:1.8;color:#14563A"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary" id="irac-summary">
+    <div class="muted" id="irac-sum-label"></div>
+    <div class="bigscore" id="irac-sum-score">0</div>
+    <div class="of" id="irac-sum-of"></div>
+    <div class="gstars" id="irac-sum-stars"></div>
+    <div class="grade" id="irac-sum-grade"></div>
+    <div class="sum-actions">
+      <button id="irac-sum-retry" class="btn-ghost">ทำข้อนี้ซ้ำ</button>
+      <button id="irac-sum-back" class="btn-ghost">เลือกข้อสอบอื่น</button>
+      <button id="irac-sum-nextcase" class="btn-primary" style="display:none">ข้อถัดไป →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  สร้างด้วย Claude · สรุปจากเอกสารเลคเชอร์ น.251 กฎหมายรัฐธรรมนูญ และแนวข้อสอบจริงของวิชา
+</footer>
+</div>
+
+<div class="sticky-bar" id="sticky-bar">
+  <div class="sticky-bar-inner">
+    <button id="quiz-next" class="btn-primary" style="display:none">ข้อถัดไป →</button>
+    <button id="quiz-finish" class="btn-primary" style="display:none">ดูสรุปผล</button>
+    <button id="irac-next" class="btn-primary" style="display:none">ถัดไป →</button>
+    <button id="irac-recap-next" class="btn-primary" style="display:none">ประเด็นถัดไป →</button>
+  </div>
+</div>
+</body>
+
+<script>
+const CONFIG = {
+  crest: "น.251 กฎหมายรัฐธรรมนูญ",
+  title: "ห้องซ้อมสอบ กฎหมายรัฐธรรมนูญ",
+  subtitle: "รัฐธรรมนูญแห่งราชอาณาจักรไทย พุทธศักราช 2560 · เรียนเป็นเรื่อง เข้าใจก่อนสอบ",
+  storageKey: "con251_best_v1"
+};
+
+const CATEGORIES = {
+  concept: {
+    label: "1) ข้อความคิดว่าด้วยรัฐธรรมนูญ",
+    soft: "#F3E8CF", strong: "#8F6511", icon: "📜",
+    source: "ทฤษฎีทั่วไป"
+  },
+  constituent: {
+    label: "2) อำนาจสถาปนา และการแก้ไข รธน.",
+    soft: "#E4F3EA", strong: "#1F6B45", icon: "🏛️",
+    source: "ทฤษฎี + ม.255-256"
+  },
+  separation: {
+    label: "3) แบ่งแยกอำนาจ และรูปแบบรัฐบาล",
+    soft: "#E9E4F7", strong: "#5B3FA6", icon: "⚖️",
+    source: "ทฤษฎีทั่วไป"
+  },
+  organs: {
+    label: "4) องค์กรตามรัฐธรรมนูญ",
+    soft: "#FDEAE0", strong: "#B5501E", icon: "🏢",
+    source: "รธน. 2560 หมวด 7-12"
+  },
+  constitutionalism: {
+    label: "5) รัฐธรรมนูญนิยม",
+    soft: "#E3F1F8", strong: "#1D6E93", icon: "🕊️",
+    source: "ทฤษฎีทั่วไป"
+  },
+  finance: {
+    label: "6) การเงินการคลังตามรัฐธรรมนูญ",
+    soft: "#FBEAEA", strong: "#B23A3A", icon: "💰",
+    source: "รธน. 2560 ม.62, 140-144"
+  },
+  rights: {
+    label: "7) สิทธิและเสรีภาพ",
+    soft: "#EAF3E3", strong: "#3D7A1E", icon: "✊",
+    source: "รธน. 2560 ม.25-49"
+  },
+  democracy: {
+    label: "8) รัฐธรรมนูญกับประชาธิปไตย",
+    soft: "#F3E8CF", strong: "#8F6511", icon: "🗳️",
+    source: "ทฤษฎี + รธน. 2560"
+  },
+  review: {
+    label: "9) การตรวจสอบความชอบด้วย รธน.",
+    soft: "#E4F3EA", strong: "#1F6B45", icon: "🔍",
+    source: "รธน. 2560 ม.5, 148, 173, 212, 231"
+  }
+};
+
+const SUMMARY_TOPICS = [
+{
+  id: "concept",
+  label: "1) ข้อความคิดว่าด้วยรัฐธรรมนูญ",
+  toc: [
+    {id:"c1-h1", level:"major", text:"รัฐธรรมนูญคืออะไร"},
+    {id:"c1-h2", level:"item", text:"ทำไมเป็นกฎหมายสูงสุด"},
+    {id:"c1-h3", level:"major", text:"การนิยาม 2 แนวทาง"},
+    {id:"c1-h4", level:"item", text:"คุณลักษณะ 4 ประการ"},
+    {id:"c1-h5", level:"major", text:"ประเภทของรัฐธรรมนูญ"}
+  ],
+  html: `
+  <h4 id="c1-h1">รัฐธรรมนูญคืออะไร</h4>
+  <p>นักวิชาการแต่ละสายอธิบาย "รัฐธรรมนูญ" ต่างมุมกัน: <b>หยุด แสงอุทัย</b> มองว่าเป็นการกำหนดระเบียบแห่งอำนาจสูงสุดและความสัมพันธ์ของอำนาจ ส่วน <b>วรเจตน์ ภาคีรัตน์</b> มองว่าเป็นการกำหนดโครงสร้างอำนาจรัฐ บวกกับการรับรองสิทธิพื้นฐาน โดยทั่วไปฝ่ายอนุรักษนิยมมักเน้น "ที่มาของอำนาจ" ในขณะที่ฝ่ายประชาธิปไตยเน้น "สิทธิเสรีภาพของประชาชน"</p>
+  <h5 id="c1-h2">ทำไมรัฐธรรมนูญจึงเป็นกฎหมายสูงสุด</h5>
+  <p>ให้ลองไล่ดูว่าใครมีอำนาจออกกฎหมายฉบับหนึ่ง แล้วไล่ต่อไปว่าอำนาจนั้นมาจากกฎหมายลำดับสูงกว่าฉบับใด เมื่อไล่ไปเรื่อย ๆ ในที่สุดจะต้องไปสิ้นสุดที่รัฐธรรมนูญเสมอ เพราะรัฐธรรมนูญเป็นกฎเกณฑ์ฉบับแรกที่ก่อตั้งอำนาจทุกอย่างในรัฐขึ้นมา จึงไม่มีกฎหมายใดอยู่เหนือกว่าได้อีก</p>
+  <h4 id="c1-h3">การนิยามรัฐธรรมนูญ 2 แนวทาง</h4>
+  <ul>
+    <li><b>ตามเนื้อหา (materialism):</b> ดูว่าเนื้อหาพูดถึงสิทธิ/เสรีภาพ/โครงสร้างอำนาจหรือไม่ ถ้าใช่ก็ถือเป็น "รัฐธรรมนูญ" ได้แม้จะไม่ได้อยู่ในเอกสารฉบับหลัก — <i>ข้อดี</i>: จำกัดเนื้อหาได้ชัด — <i>ข้อเสีย</i>: เนื้อหากระจัดกระจายอยู่หลายแหล่ง (fragmentation)</li>
+    <li><b>ตามแบบพิธี (formalism):</b> ดูจากกระบวนการจัดทำและสถานะความเป็นกฎหมายสูงสุด — <i>ข้อดี</i>: ทำให้รัฐธรรมนูญนิยมเกิดขึ้นได้จริงในทางปฏิบัติ — <i>ข้อเสีย</i>: ไม่จำกัดเนื้อหา (อะไรก็ใส่เข้าไปในรัฐธรรมนูญได้)</li>
+  </ul>
+  <h5 id="c1-h4">คุณลักษณะสำคัญของรัฐธรรมนูญ</h5>
+  <p>โดยทั่วไปมี 4 ประการ: <b>Universality</b> (ใช้บังคับกับทุกคนในรัฐ), <b>Supremacy</b> (เป็นกฎหมายสูงสุด), <b>Indelibleness</b> (แก้ไขได้ยากกว่ากฎหมายธรรมดา), และ <b>Perpetual</b> (ออกแบบให้ดำรงอยู่ถาวร ไม่ใช่กฎหมายชั่วคราว)</p>
+  <h4 id="c1-h5">ประเภทของรัฐธรรมนูญที่มักออกสอบ</h4>
+  <p>การจัดแบ่งที่พบบ่อยคือ <b>"รัฐธรรมนูญลายลักษณ์อักษร – รัฐธรรมนูญจารีตประเพณี (ไม่เป็นลายลักษณ์อักษร)"</b> กับ <b>"รัฐธรรมนูญแก้ไขยาก – รัฐธรรมนูญแก้ไขง่าย"</b> ข้อสอบมักถามด้วยว่าการจัดแบ่งเช่นนี้เหมาะสมหรือมีข้อพิจารณาอย่างไร (เช่น ในทางปฏิบัติแทบไม่มีรัฐธรรมนูญที่ไม่เป็นลายลักษณ์อักษรแท้ ๆ อีกต่อไป และ "แก้ไขยาก-ง่าย" ก็เป็นเรื่องของระดับมากกว่าขาวดำ)</p>
+  <p class="p-tight">ควรแยกให้ออกระหว่าง 3 คำที่คล้ายกัน: <b>รัฐธรรมนูญจารีตประเพณี</b> คือรัฐธรรมนูญที่ไม่เป็นลายลักษณ์อักษรทั้งฉบับ<br><b>กฎหมายจารีตประเพณีทางรัฐธรรมนูญ</b> คือกฎเกณฑ์ที่มีสถานะเป็นกฎหมายจริง เกิดจากการปฏิบัติซ้ำ ๆ จนเป็นที่ยอมรับ<br><b>ธรรมเนียมปฏิบัติทางรัฐธรรมนูญ</b> ไม่ใช่กฎหมายในความหมายเคร่งครัด แต่มีผลเปลี่ยนแปลงพฤติกรรมของผู้ใช้อำนาจในทางปฏิบัติ</p>
+  `
+},
+{
+  id: "constituent",
+  label: "2) อำนาจสถาปนารัฐธรรมนูญ และการแก้ไข รธน.",
+  toc: [
+    {id:"c2-h1", level:"major", text:"ทฤษฎีอำนาจสถาปนารัฐธรรมนูญ"},
+    {id:"c2-h2", level:"item", text:"ลักษณะ 3 ประการ"},
+    {id:"c2-h3", level:"item", text:"อำนาจสถาปนา vs อำนาจที่ถูกสถาปนา"},
+    {id:"c2-h4", level:"major", text:"ผู้ทรงอำนาจสถาปนารัฐธรรมนูญ"},
+    {id:"c2-h5", level:"major", text:"ขั้นตอนแก้ไข รธน. ตาม ม.256"},
+    {id:"c2-h6", level:"item", text:"คำวินิจฉัยศาล รธน. ที่ 4/2564"}
+  ],
+  html: `
+  <h4 id="c2-h1">ทฤษฎีว่าด้วยอำนาจสถาปนารัฐธรรมนูญ (Pouvoir Constituant)</h4>
+  <p>เสนอครั้งแรกโดย <b>ซีเอเยส (Siéyès)</b> นักปรัชญาชาวฝรั่งเศส และพัฒนาต่อโดย <b>Carl Schmitt</b> อธิบายว่านี่คือ "อำนาจก่อตั้งระบอบและองค์กรทางการเมือง" ซึ่งให้กำเนิดรัฐธรรมนูญขึ้นมาทั้งระบบ อำนาจนี้คือ <b>อำนาจสูงสุดตามข้อเท็จจริง ณ ขณะใดขณะหนึ่ง</b> ไม่ใช่อำนาจตามกฎหมาย</p>
+  <h5 id="c2-h2">ลักษณะสำคัญ 3 ประการ</h5>
+  <ul>
+    <li><b>อำนาจแห่งการริเริ่ม (Initiating Power):</b> ริเริ่มก่อตั้งระบอบการเมือง/ระบบกฎหมายใหม่ ปรากฏตัวในช่วงที่ยังไม่มีระบบกฎหมายมาก่อน</li>
+    <li><b>อำนาจอันอิสระ (Independent Power):</b> ไม่ตกอยู่ภายใต้อาณัติของผู้ใด เลือกก่อตั้งระบอบแบบใดก็ได้</li>
+    <li><b>อำนาจอันไร้ข้อจำกัด (Unconditional Power):</b> สูงสุด ล้นพ้น ไม่มีกฎเกณฑ์ใดจำกัดได้ก่อนที่รัฐธรรมนูญจะเกิดขึ้น</li>
+  </ul>
+  <p>อำนาจนี้ <b>เป็นอันหนึ่งอันเดียวและแบ่งแยกไม่ได้</b> และ <b>ไม่หมดไปหลังใช้แล้ว</b> — ยังคงอยู่ "เคียงข้างและเหนือกว่า" รัฐธรรมนูญเสมอ</p>
+  <h5 id="c2-h3">อำนาจสถาปนา VS อำนาจที่ถูกสถาปนา (Pouvoir Constitué)</h5>
+  <table><tr><th>ประเด็น</th><th>อำนาจสถาปนา</th><th>อำนาจที่ถูกสถาปนา</th></tr>
+  <tr><td>ที่มา</td><td>มีอยู่ก่อน เป็นต้นกำเนิดของรัฐธรรมนูญ</td><td>ได้รับมอบมาจากรัฐธรรมนูญ</td></tr>
+  <tr><td>ลักษณะ</td><td>สูงสุด ไร้ข้อจำกัด</td><td>ถูกจำกัดขอบเขต/เงื่อนไขโดย รธน.</td></tr>
+  <tr><td>ตัวอย่าง</td><td>ประชาชนผู้ลงประชามติรับ รธน. ฉบับใหม่</td><td>รัฐสภาที่ใช้อำนาจแก้ไข รธน. ตาม ม.256 (เป็น "อำนาจสถาปนาลำดับรอง" ที่รับมอบมา)</td></tr>
+  </table>
+  <p class="p-tight">อุปมา: อำนาจสถาปนารัฐธรรมนูญเหมือน <b>วิศวกรและเจ้าของกรรมสิทธิ์ดั้งเดิม</b>ของตึกสูง มีอำนาจเด็ดขาดกำหนดโครงสร้างทั้งหมด เมื่อตึกสร้างเสร็จ อำนาจดูแล/ปรับปรุงย่อยจะตกเป็นของ "ผู้จัดการอาคาร" (= องค์กรตามรัฐธรรมนูญ) ซึ่งมีอำนาจจำกัดตามที่เจ้าของกำหนดไว้เท่านั้น หากจะแก้โครงสร้างหลัก ต้องได้รับมอบอำนาจมาเป็นการเฉพาะ (อำนาจสถาปนาลำดับรอง)</p>
+  <h4 id="c2-h4">ใครคือผู้ทรงอำนาจสถาปนารัฐธรรมนูญ</h4>
+  <p>ตามแนวคิด<b>รัฐธรรมนูญนิยม</b> ประชาชนเท่านั้นที่เป็นผู้ทรงอำนาจสถาปนา เพราะเป็นเจ้าของอำนาจอธิปไตย แต่ถ้ามองแบบ<b>อำนาจตามข้อเท็จจริง</b> ผู้ที่มีอำนาจสูงสุด ณ ขณะนั้นก็อาจกลายเป็นผู้ทรงอำนาจสถาปนาได้ (เช่น คณะรัฐประหารที่ยึดอำนาจสำเร็จ) ซึ่งเป็นข้อด้อยสำคัญของทฤษฎีนี้ เพราะขัดกับหลักรัฐธรรมนูญนิยม และเสี่ยงให้ศาลต้องใช้ดุลพินิจสูงในการชี้ว่าใครคือผู้ทรงอำนาจในภาวะไม่ชัดเจน</p>
+  <h4 id="c2-h5">ขั้นตอนแก้ไขรัฐธรรมนูญ (มาตรา 256)</h4>
+  <p>ต้องผ่าน 3 วาระในที่ประชุมร่วมกันของรัฐสภา จุดที่ออกสอบบ่อยคือเงื่อนไขเสียง ส.ว.: วาระที่ 1 และ 3 ต้องมีเสียงเห็นชอบของ ส.ว. ไม่น้อยกว่า <b>1 ใน 3</b> ของสมาชิกทั้งหมดเท่าที่มีอยู่ และในวาระ 3 ต้องมี ส.ส. จากพรรคที่ไม่มีตำแหน่งรัฐมนตรี/ประธานสภาเห็นชอบไม่น้อยกว่า <b>ร้อยละ 20</b> ด้วย (กลไกคุ้มครองเสียงข้างน้อย) หากเป็นการแก้ไขหมวด 1 (บททั่วไป) หมวด 2 (พระมหากษัตริย์) หมวด 15 (การแก้ไข รธน.) หรือเรื่องคุณสมบัติ/อำนาจหน้าที่ศาลและองค์กรอิสระ ต้องผ่าน<b>ประชามติ</b>ก่อนด้วย</p>
+  <h5 id="c2-h6">คำวินิจฉัยศาลรัฐธรรมนูญที่ 4/2564 — จะร่าง รธน. ใหม่ทั้งฉบับโดยใช้ ม.256 ได้ไหม</h5>
+  <p>ศาลวินิจฉัยว่า มาตรา 256 เป็นเพียง<b>อำนาจแก้ไขเพิ่มเติม</b> (อำนาจที่ถูกสถาปนา/รับมอบมา ถูกจำกัดทั้งรูปแบบและเนื้อหา) ไม่ใช่อำนาจจัดทำรัฐธรรมนูญฉบับใหม่ทั้งฉบับ หากรัฐสภาต้องการร่างฉบับใหม่ทั้งฉบับ ต้องคืนอำนาจให้ประชาชน (ผู้ทรงอำนาจสถาปนาที่แท้จริง) ด้วยการทำ<b>ประชามติ 2 ครั้ง</b>: ครั้งแรกถามว่าอยากมีฉบับใหม่หรือไม่ หากเห็นชอบจึงร่าง แล้วทำประชามติครั้งที่สองถามว่าเห็นชอบกับร่างฉบับใหม่หรือไม่ จึงจะประกาศใช้ได้</p>
+  `
+},
+{
+  id: "separation",
+  label: "3) การแบ่งแยกอำนาจและรูปแบบรัฐบาล",
+  toc: [
+    {id:"c3-h1", level:"major", text:"หลักคิดของ Montesquieu / Locke"},
+    {id:"c3-h2", level:"major", text:"เหตุผลที่ต้องแบ่งอำนาจ"},
+    {id:"c3-h3", level:"major", text:"ลักษณะการกระทำของแต่ละองค์กร"},
+    {id:"c3-h4", level:"major", text:"Judicial Review — Marbury v. Madison"},
+    {id:"c3-h5", level:"item", text:"ฎ.1/2489 ของไทย"}
+  ],
+  html: `
+  <h4 id="c3-h1">หลักคิดสำคัญเรื่องการแบ่งแยกอำนาจ</h4>
+  <p><b>Lord Acton:</b> "อำนาจทำให้เสื่อมทราม อำนาจเด็ดขาดยิ่งทำให้เสื่อมทรามสิ้นเชิง" (Absolute power corrupts absolutely) — <b>Montesquieu:</b> หากอำนาจนิติบัญญัติ บริหาร และตุลาการ รวมอยู่ที่หน่วยเดียวกัน ย่อมนำไปสู่ความพินาศ จึงต้องแบ่งเป็น 3 ฝ่าย — <b>Locke:</b> แบ่งเป็น 3 เช่นกัน (นิติบัญญัติ / บริหาร / ต่างประเทศ) แต่ยังรวมตุลาการไว้ในฝ่ายบริหาร ทำให้ขาดกลไก check &amp; balance ที่สมบูรณ์ ปัจจุบันโลกส่วนใหญ่ใช้แบบ Montesquieu ที่แยกตุลาการออกมาเป็นอิสระ</p>
+  <h5 id="c3-h2">เหตุผลที่ต้องแบ่งแยกอำนาจ</h5>
+  <ul>
+    <li>ป้องกันอำนาจเบ็ดเสร็จ (despotism)</li>
+    <li>สร้างระบบตรวจสอบถ่วงดุล (check &amp; balance)</li>
+    <li>ทำให้แต่ละองค์กรมีความเชี่ยวชาญเฉพาะด้าน (ผลพลอยได้)</li>
+  </ul>
+  <h4 id="c3-h3">ลักษณะการกระทำของแต่ละองค์กร</h4>
+  <ul>
+    <li><b>นิติบัญญัติ:</b> ออกกฎหมายที่เป็น<b>นามธรรมและใช้ทั่วไป</b> (ต่างจากคำสั่งทางปกครองที่เป็นรูปธรรม/เจาะจงราย)</li>
+    <li><b>บริหาร:</b> <b>เชิงรุก (active)</b> ริเริ่มกำหนดนโยบายได้เอง แบ่งเป็นการกระทำทางรัฐบาล (นโยบาย/ความมั่นคง) กับการกระทำทางปกครอง (บริการสาธารณะ เช่น น้ำ ไฟ ถนน)</li>
+    <li><b>ตุลาการ:</b> <b>เชิงรับ (passive)</b> เริ่มพิจารณาได้ต่อเมื่อมีผู้มาฟ้องเท่านั้น ทำหน้าที่ชี้ขาดข้อพิพาทโดยปรับใช้กฎหมายกับข้อเท็จจริง คำพิพากษามีผลเด็ดขาดแต่ต้องอาศัยฝ่ายปกครองบังคับคดีให้เป็นจริง</li>
+  </ul>
+  <p class="p-tight">ข้อสังเกตที่ออกสอบบ่อย: องค์กรทั้งสามจำเป็นต้อง "เท่าเทียมกัน" หรือไม่? คำตอบคือไม่จำเป็นเสมอไป บางระบบ เช่น ฝรั่งเศส ก็ออกแบบให้อำนาจไม่เท่ากันได้</p>
+  <h4 id="c3-h4">กำเนิด Judicial Review — คดี Marbury v. Madison (1803)</h4>
+  <p>หลักกฎหมายมหาชนสำคัญคือ "ไม่มีกฎหมายให้อำนาจ = ไม่มีอำนาจ" (ต่างจากกฎหมายเอกชนที่ไม่ห้าม = ทำได้) ในคดีนี้ John Marshall ประธานศาลสูงสุดสหรัฐฯ วางหลักว่า <b>ศาลมีอำนาจโดยสภาพ (Inherent Power)</b> ในการตีความว่ากฎเกณฑ์ใดจะนำมาปรับใช้กับคดี เมื่อกฎหมายธรรมดา (Judicial Act) ขัดกับรัฐธรรมนูญ ศาลต้องเลือกใช้รัฐธรรมนูญซึ่งเป็นกฎหมายลำดับสูงกว่า ผลคือรัฐธรรมนูญมีสถานะเป็นกฎหมายสูงสุด และกฎหมายใดขัดรัฐธรรมนูญย่อม<b>เป็นโมฆะ ใช้บังคับไม่ได้</b> นี่คือจุดกำเนิดของการที่ศาลมีอำนาจตรวจสอบความชอบด้วยรัฐธรรมนูญของกฎหมาย</p>
+  <h5 id="c3-h5">กรณีไทย — คำพิพากษาฎีกาที่ 1/2489 (คดีอาชญากรสงคราม)</h5>
+  <p>หลังไทยแพ้สงครามโลกครั้งที่ 2 มีการออกกฎหมายลงโทษอาชญากรสงครามแบบย้อนหลัง ซึ่งขัดกับเสรีภาพตามรัฐธรรมนูญขณะนั้น (ม.14) ศาลฎีกาไทยให้เหตุผลทำนองเดียวกับ Marshall ว่า<b>ศาลมีอำนาจตีความรัฐธรรมนูญได้เอง</b> แม้ตัวบทจะบอกว่าเป็นอำนาจของสภาผู้แทนราษฎรก็ตาม เพราะการใช้กฎหมายย่อมต้องมีการตีความเสมอ และวินิจฉัยว่าบทบัญญัติที่ลงโทษย้อนหลังนั้น<b>ขัดต่อรัฐธรรมนูญและเป็นโมฆะ</b> — ข้อสังเกต: ขณะนั้นไทยยังไม่มีศาลรัฐธรรมนูญเป็นการเฉพาะ ศาลฎีกาจึงทำหน้าที่นี้เอง</p>
+  `
+}
+];
+
+SUMMARY_TOPICS.push(
+{
+  id: "organs",
+  label: "4) องค์กรตามรัฐธรรมนูญ",
+  toc: [
+    {id:"c4-h1", level:"major", text:"รัฐสภา: สภาเดี่ยว vs สภาคู่"},
+    {id:"c4-h2", level:"item", text:"ที่มาของ ส.ว. — 3 รูปแบบ"},
+    {id:"c4-h3", level:"major", text:"คณะรัฐมนตรี"},
+    {id:"c4-h4", level:"major", text:"องค์กรตุลาการและความเป็นที่สุด"}
+  ],
+  html: `
+  <h4 id="c4-h1">รูปแบบรัฐสภา: สภาเดี่ยว vs สภาคู่</h4>
+  <p><b>สภาเดี่ยว (Unicameralism)</b> เช่น เดนมาร์ก กรีซ สิงคโปร์ นอร์เวย์ — <i>ข้อดี</i>: รัฐบาลเข้มแข็ง ตัดสินใจเร็ว — <i>ข้อเสีย (โดยนัย)</i>: ขาดกลไกตรวจสอบถ่วงดุลภายในฝ่ายนิติบัญญัติเอง</p>
+  <p><b>สภาคู่ (Bicameralism)</b> เช่น ไทย เยอรมนี (Bundestag/Bundesrat) สหราชอาณาจักร (Lords/Commons) สหรัฐฯ (Senate/House) — <i>ข้อดี</i>: มีสภาสูงทำหน้าที่ "กลั่นกรอง" กฎหมาย สะท้อนความหลากหลาย ช่วยถ่วงดุล — <i>ข้อเสีย</i>: กระบวนการช้าลง และหากวุฒิสภาไม่ได้มาจากการเลือกตั้งทางตรงอาจขาดความชอบธรรมทางประชาธิปไตย</p>
+  <p class="p-tight">อุปมา: ระบบสภาคู่เหมือนสร้างสะพานที่ต้องผ่านวิศวกร 2 ชุดตรวจสอบ — ชุดแรก (สภาผู้แทนฯ) เป็นตัวแทนเสียงประชาชน เน้นความเร็ว ชุดสอง (วุฒิสภา) เป็นผู้เชี่ยวชาญ เน้นตรวจสอบความมั่นคงระยะยาว การมีสองชั้นนี้ทำให้ผลลัพธ์น่าเชื่อถือกว่า</p>
+  <h5 id="c4-h2">ที่มาของ ส.ว. — 3 รูปแบบหลักที่ใช้อภิปรายในข้อสอบ</h5>
+  <ul>
+    <li><b>เลือกตั้งทางตรงทั้งหมด:</b> ชอบธรรมทางประชาธิปไตยสูงสุด แต่ควรออกแบบอำนาจให้ต่างจากสภาผู้แทนฯ เพื่อไม่ให้ซ้ำซ้อน</li>
+    <li><b>เลือกกันเองของกลุ่มวิชาชีพ/ผู้เชี่ยวชาญ</b> (เช่น ส.ว. ชุดปกติ ตาม รธน. 2560): ส่งเสริมความหลากหลายและความเชี่ยวชาญเฉพาะด้าน ลดความผูกพันกับการเมืองแบบพรรค</li>
+    <li><b>แต่งตั้งโดยองค์กรทางการเมืองหลัก:</b> สร้างการยอมรับผลงานจากผู้แต่งตั้ง แต่เสี่ยงถูกครอบงำ — มักแก้ด้วยการให้ดำรงตำแหน่งได้วาระเดียว</li>
+  </ul>
+  <h4 id="c4-h3">คณะรัฐมนตรี</h4>
+  <p>เป็นองค์กรฝ่ายบริหารสูงสุด มีอำนาจกำหนดนโยบายบริหารราชการแผ่นดิน เสนอกฎหมาย ออกพระราชกำหนด/พระราชกฤษฎีกา และรับผิดชอบต่อสภาผู้แทนราษฎรผ่านกลไกการอภิปรายไม่ไว้วางใจ ซึ่งเป็นเครื่องมือ check &amp; balance หลักของฝ่ายนิติบัญญัติต่อฝ่ายบริหาร</p>
+  <h4 id="c4-h4">องค์กรตุลาการ และปัญหาความเป็นที่สุดของคำพิพากษา</h4>
+  <p>คำพิพากษาของศาลสูงสุด/ศาลสุดท้ายมีลักษณะ <b>finality</b> (ความเป็นที่สุด) คือตรวจสอบต่อไม่ได้อีก ซึ่งเป็น <b>"ความเลวร้ายที่จำเป็น" (necessary evil)</b> — จำเป็นเพราะระบบกฎหมายต้องมีจุดยุติข้อพิพาทเพื่อความแน่นอนแห่งนิติฐานะ แต่ก็ "เลวร้าย" เพราะหากคำพิพากษานั้นผิดพลาดหรือขัดรัฐธรรมนูญ ก็ไม่มีกลไกแก้ไขได้อีก แนวทางบรรเทาปัญหาที่มักอภิปรายกัน ได้แก่ การมีระบบอุทธรณ์/ฎีกาหลายชั้นก่อนถึงที่สุด การให้เหตุผลคำพิพากษาอย่างละเอียดเพื่อให้ตรวจสอบทางวิชาการได้ หรือกลไกการรื้อฟื้นคดีในกรณีข้อเท็จจริงใหม่ที่ร้ายแรง</p>
+  <p class="p-tight">ข้อสอบมักถามเปรียบเทียบด้วยว่า เมื่อเทียบ 3 ฝ่ายแล้ว ฝ่ายตุลาการมีความสามารถละเมิดสิทธิเสรีภาพประชาชน "น้อยที่สุด" เพราะมีลักษณะเชิงรับ (ต้องรอมีคดีมาก่อน) ต่างจากฝ่ายบริหารที่ริเริ่มเองได้ และฝ่ายนิติบัญญัติที่ออกกฎเกณฑ์ใช้บังคับทั่วไปได้เอง — ประเด็นนี้เชื่อมโยงกับความเป็นอิสระของตุลาการที่ต้องได้รับการคุ้มครองเป็นพิเศษ เพื่อให้ทำหน้าที่ตรวจสอบอำนาจอื่นได้อย่างแท้จริง</p>
+  `
+},
+{
+  id: "constitutionalism",
+  label: "5) รัฐธรรมนูญนิยม",
+  toc: [
+    {id:"c5-h1", level:"major", text:"เป้าหมายของรัฐธรรมนูญนิยม"},
+    {id:"c5-h2", level:"major", text:"หลักการ 7 ข้อ"},
+    {id:"c5-h3", level:"major", text:"มุมมองของ Dieter Grimm"},
+    {id:"c5-h4", level:"major", text:"รธน. 2560 ดีตามแนวคิดนี้หรือไม่"}
+  ],
+  html: `
+  <h4 id="c5-h1">รัฐธรรมนูญนิยม (Constitutionalism) คืออะไร</h4>
+  <p>เป็น<b>ข้อความคิด/แนวคิด</b>ที่กำหนดเป้าหมายว่ารัฐธรรมนูญที่ดีควรมีเนื้อหาหรือทำหน้าที่อย่างไร เพื่อบรรลุเป้าหมายสูงสุดของ<b>เสรีประชาธิปไตย</b> นั่นคือการสร้าง <b>"สังคมที่ปกครองโดยกฎหมาย" (rule of law)</b> หรือ <b>"การปกครองตนเองของประชาชน" (self-governance)</b> — หมายความว่าประชาชนเป็นทั้งผู้ปกครองและผู้ใต้ปกครองในเวลาเดียวกัน ยังคงเป็นเสรีชนและเสมอภาคกันเสมอ หน้าที่หลักของรัฐธรรมนูญคือกำหนดให้มีการใช้อำนาจ พร้อมกับจำกัดการใช้อำนาจนั้นไปพร้อมกัน (limited government)</p>
+  <h4 id="c5-h2">หลักการ 7 ข้อ ที่เป็นเงื่อนไขเนื้อหาของรัฐธรรมนูญนิยม</h4>
+  <ol>
+    <li><b>ความเป็นกฎหมายสูงสุดของรัฐธรรมนูญ</b> — คุ้มครองคุณค่าเสรีประชาธิปไตยอื่นที่บรรจุไว้ในรัฐธรรมนูญ</li>
+    <li><b>ความเป็นประชาธิปไตย</b> — ประชาชนเป็นเจ้าของอำนาจสูงสุด ตัดสินใจโดยเสียงข้างมากแต่ต้องคุ้มครองเสียงข้างน้อยเสมอ</li>
+    <li><b>การแบ่งแยกอำนาจ</b> — ป้องกันการใช้อำนาจตามอำเภอใจ</li>
+    <li><b>หลักนิติรัฐ/นิติธรรม</b> — ทุกคนรวมถึงองค์กรรัฐต้องอยู่ภายใต้กฎหมาย</li>
+    <li><b>การเคารพสิทธิขั้นพื้นฐานของประชาชน</b> — เพราะประชาชนคือผู้ทรงอำนาจสถาปนา</li>
+    <li><b>การจำกัด/ตรวจสอบการใช้อำนาจรัฐ</b></li>
+    <li><b>ความเป็นอิสระของฝ่ายตุลาการหรือองค์กรตรวจสอบอื่น</b></li>
+  </ol>
+  <h4 id="c5-h3">มุมมองของ Dieter Grimm</h4>
+  <p>Grimm มองว่ารัฐธรรมนูญนิยมไม่ใช่แค่การทำให้อำนาจมหาชนอยู่ใต้กฎหมาย (legalization of public power) แต่คือการ<b>สร้างกรอบกฎหมายให้อำนาจมหาชน</b>เพื่อไปสู่ <b>limited government</b> โดยเสนอเงื่อนไข 5 ประการ: รัฐธรรมนูญยุคใหม่เป็นบรรทัดฐานทางกฎหมาย (ไม่ใช่ปรัชญาลอย ๆ) / จัดระเบียบอำนาจมหาชนขึ้นใหม่ทั้งระบบ / เป็นระบบที่สมบูรณ์ในตัวเอง (ไม่มีอำนาจนอกเหนือที่รัฐธรรมนูญกำหนด) / มีความชอบธรรมก็ต่อเมื่อมาจากประชาชน / เป็นกฎหมายสูงสุดของรัฐ</p>
+  <h4 id="c5-h4">รัฐธรรมนูญ 2560 ดีตามแนวคิดนี้หรือไม่</h4>
+  <p><b>ประเด็นที่ขัดแย้ง</b> (ส่วนใหญ่อยู่ในบทเฉพาะกาล): มาตรา 265/279 รับรองอำนาจ คสช. รวมถึงมาตรา 44 ของ รธน. ชั่วคราว 2557 ที่ให้อำนาจแบบไม่แบ่งแยกอำนาจ / มาตรา 272 ให้ ส.ว. ร่วมเลือกนายกรัฐมนตรีใน 5 ปีแรก / มาตรา 204, 222 ฯลฯ ให้ ส.ว. มีอำนาจแต่งตั้งตุลาการศาลรัฐธรรมนูญและองค์กรอิสระ (ซึ่ง<b>ไม่ใช่บทเฉพาะกาล</b> ยังมีผลอยู่) / มาตรา 256 ทำให้แก้ไข รธน. ยากเพราะต้องพึ่งเสียง ส.ว. — ปัญหาหลักคือ ส.ว. ไม่ได้มาจากการเลือกตั้ง จึงขาดความชอบธรรมเชิงประชาธิปไตยแต่มีอำนาจมาก</p>
+  <p><b>ประเด็นที่สอดคล้อง</b>: ยืนยันว่าประชาชนเป็นเจ้าของอำนาจอธิปไตย มีบทบัญญัติสิทธิเสรีภาพ มีองค์กรตรวจสอบหลายองค์กร และรับรองความเป็นกฎหมายสูงสุดไว้ชัดเจนในมาตรา 5 — สรุปคือ รธน. 2560 มีทั้งส่วนที่สอดคล้องและไม่สอดคล้องกับรัฐธรรมนูญนิยม โดยจุดอ่อนหลักอยู่ที่แหล่งที่มาของอำนาจบางส่วนที่ไม่ได้มาจากประชาชนโดยตรง</p>
+  `
+},
+{
+  id: "finance",
+  label: "6) การเงินการคลังตามรัฐธรรมนูญ",
+  toc: [
+    {id:"c6-h1", level:"major", text:"เครื่องมือทางการคลัง 3 ประเภท"},
+    {id:"c6-h2", level:"major", text:"หลัก 5 ข้อในระดับรัฐธรรมนูญ"},
+    {id:"c6-h3", level:"major", text:"หลักความยินยอมทางภาษี"}
+  ],
+  html: `
+  <h4 id="c6-h1">เครื่องมือทางการคลัง 3 ประเภท</h4>
+  <p><b>รายจ่ายสาธารณะ</b> (Public Expenditure), <b>รายได้สาธารณะ</b> (Public Revenue), <b>หนี้สาธารณะ</b> (Public Debt) — ใช้เพื่อการจัดสรรทรัพยากร กระจายรายได้ที่เป็นธรรม และรักษาเสถียรภาพเศรษฐกิจ "งบประมาณรายจ่าย" ตามกฎหมายว่าด้วยวิธีการงบประมาณ หมายถึง จำนวนเงินอย่างสูงที่อนุญาตให้จ่ายหรือก่อหนี้ผูกพันได้ตามวัตถุประสงค์และภายในเวลาที่กำหนด (ปกติ 1 ปีงบประมาณ คือ 1 ต.ค. – 30 ก.ย.)</p>
+  <h4 id="c6-h2">หลักทั่วไป 5 ข้อ ระดับรัฐธรรมนูญ</h4>
+  <ol>
+    <li><b>กรอบวินัยทางการคลัง (ม.62):</b> รัฐต้องรักษาวินัยการเงินการคลังอย่างเคร่งครัด ให้มีเสถียรภาพยั่งยืน</li>
+    <li><b>หลักความยินยอมในการจ่ายเงินแผ่นดิน (ม.141):</b> งบประมาณรายจ่ายของแผ่นดินต้องทำเป็น<b>พระราชบัญญัติ</b> เพื่อแสดงความยินยอมผ่านผู้แทนประชาชน หากออกไม่ทันให้ใช้กฎหมายงบประมาณปีก่อนไปพลางก่อน</li>
+    <li><b>หลักความครอบคลุมของเอกสารงบประมาณ (ม.142):</b> ต้องแสดงแหล่งที่มาของรายได้ ผลสัมฤทธิ์ที่คาดว่าจะได้รับ และความสอดคล้องกับยุทธศาสตร์ชาติ</li>
+    <li><b>หลักอำนาจรัฐสภาในการอนุมัติงบประมาณ (ม.143):</b> สภาผู้แทนราษฎรต้องพิจารณาให้เสร็จภายใน <b>105 วัน</b> (ไม่เสร็จถือว่าเห็นชอบ) วุฒิสภาพิจารณาให้เสร็จภายใน <b>20 วัน</b> และแก้ไขเพิ่มเติมไม่ได้</li>
+    <li><b>หลักห้ามฝ่ายนิติบัญญัติริเริ่มกำหนดรายจ่ายแผ่นดิน (ม.144):</b> ส.ส. แปรญัตติเพิ่ม/เปลี่ยนรายการไม่ได้ ทำได้แค่ลด/ตัดทอนรายจ่ายที่ไม่ใช่รายจ่ายตามข้อผูกพัน และห้าม ส.ส./ส.ว./กรรมาธิการมีส่วนได้เสียในงบประมาณไม่ว่าทางตรงหรือทางอ้อม — ฝ่าฝืนถึงขั้นสิ้นสุดสมาชิกภาพ</li>
+  </ol>
+  <h4 id="c6-h3">หลักความยินยอมทางภาษี (ไม่มีภาษีโดยไม่มีผู้แทน)</h4>
+  <p>เป็นหลักคลาสสิกของประชาธิปไตยแบบผู้แทน (no taxation without representation) แต่ <b>รัฐธรรมนูญ 2560 ไม่ได้บัญญัติรับรองหลักนี้ไว้อย่างชัดแจ้ง</b> ต่างจากหลายประเทศ ทำให้ฝ่ายบริหารยังมีช่องตราพระราชกำหนดเพื่อจัดเก็บภาษีได้ในบางกรณี (เช่น เหตุความมั่นคงทางเศรษฐกิจ) แม้ภายหลังต้องผ่านรัฐสภา แต่รัฐสภามีอำนาจตรวจสอบพระราชกำหนดที่จำกัดกว่าการพิจารณากฎหมายทั่วไป จุดนี้มักถูกหยิบมาเปรียบเทียบกับ "หลักความยินยอมในการจ่ายเงินแผ่นดิน" (ม.141) ซึ่งรัฐธรรมนูญรับรองไว้ชัดเจนกว่ามาก</p>
+  `
+}
+);
+
+SUMMARY_TOPICS.push(
+{
+  id: "rights",
+  label: "7) สิทธิและเสรีภาพ",
+  toc: [
+    {id:"c7-h1", level:"major", text:"มาตรา 25 — สิทธิที่ไม่ได้ห้าม/จำกัดคือมีสิทธิ"},
+    {id:"c7-h2", level:"major", text:"มาตรา 26 — หลักจำกัดสิทธิ"},
+    {id:"c7-h3", level:"item", text:"หลักความได้สัดส่วน 3 หลักย่อย"},
+    {id:"c7-h4", level:"item", text:"ไข่ขาว-ไข่แดง: สารัตถะแห่งสิทธิ"}
+  ],
+  html: `
+  <h4 id="c7-h1">มาตรา 25 วรรคหนึ่ง — โครงสร้างพื้นฐานของสิทธิเสรีภาพ</h4>
+  <p>วางหลักว่า การใดที่รัฐธรรมนูญหรือกฎหมายอื่นไม่ได้ห้ามหรือจำกัดไว้ บุคคลย่อมมีสิทธิและเสรีภาพที่จะทำการนั้นได้และได้รับความคุ้มครอง ตราบเท่าที่ไม่กระทบความมั่นคงของรัฐ ความสงบเรียบร้อย/ศีลธรรมอันดี และไม่ละเมิดสิทธิผู้อื่น — เป็นการวาง "หลักการทั่วไป" รองรับสิทธิที่ไม่ได้เขียนไว้เป็นการเฉพาะทุกมาตรา</p>
+  <h4 id="c7-h2">มาตรา 26 — หลักทั่วไปในการตรากฎหมายจำกัดสิทธิ</h4>
+  <p>การตรากฎหมายจำกัดสิทธิต้องเป็นไปตามเงื่อนไขในรัฐธรรมนูญ ถ้ารัฐธรรมนูญไม่ได้กำหนดเงื่อนไขไว้เป็นการเฉพาะ กฎหมายนั้นต้อง (1) ไม่ขัดหลักนิติธรรม (2) ไม่เพิ่มภาระ/จำกัดสิทธิเกินสมควรแก่เหตุ (3) ไม่กระทบศักดิ์ศรีความเป็นมนุษย์ (4) ต้องระบุเหตุผลความจำเป็น และ (5) ต้องมีผลใช้บังคับเป็นการทั่วไป ไม่เจาะจงกรณีหรือบุคคลใดบุคคลหนึ่ง (ยกเว้นกฎหมายเวนคืนอสังหาริมทรัพย์)</p>
+  <h5 id="c7-h3">หลักความพอสมควรแก่เหตุ (หลักความได้สัดส่วน) — 3 หลักย่อย</h5>
+  <ol>
+    <li><b>หลักความเหมาะสม (Suitability):</b> มาตรการต้องบรรลุวัตถุประสงค์ได้จริง</li>
+    <li><b>หลักความจำเป็น (Necessity):</b> ในบรรดามาตรการที่บรรลุผลได้ ต้องเลือกที่กระทบสิทธิน้อยที่สุด</li>
+    <li><b>หลักความพอสมควรแก่เหตุอย่างแคบ (Strict Proportionality):</b> ประโยชน์สาธารณะที่ได้ต้องสมดุลกับสิทธิที่เอกชนต้องเสียไป</li>
+  </ol>
+  <h5 id="c7-h4">หลักคุ้มครองสารัตถะแห่งสิทธิ — เปรียบเหมือน "ไข่ขาว-ไข่แดง"</h5>
+  <p>ฝ่ายนิติบัญญัติจำกัดสิทธิได้เพียงส่วน "ไข่ขาว" (ขอบนอก) เท่านั้น <b>ห้ามเจาะทะลุถึง "ไข่แดง"</b> ซึ่งเป็นแก่นสำคัญของสิทธินั้น — รัฐธรรมนูญ 2540/2550 เคยเขียนหลักนี้ไว้ชัดเจนกว่าว่า "จะกระทบกระเทือนสาระสำคัญแห่งสิทธิและเสรีภาพมิได้" แต่รัฐธรรมนูญ 2560 มาตรา 26 ไม่ได้เขียนคำนี้ไว้ตรง ๆ ทำให้เป็นประเด็นถกเถียงว่าควรปรับปรุงหรือไม่</p>
+  <p class="p-tight">ข้อสังเกตสำคัญที่ออกสอบซ้ำ: มาตรา 26 วรรคหนึ่ง แยกกรณี "มีเงื่อนไขเฉพาะบัญญัติไว้แล้ว" (เช่น ม.40 เสรีภาพประกอบอาชีพ) กับ "ไม่ได้บัญญัติเงื่อนไขไว้" (ต้องผ่านเกณฑ์นิติธรรม/ได้สัดส่วน/ศักดิ์ศรีความเป็นมนุษย์) การแยกเช่นนี้เสี่ยงให้ตีความว่าสิทธิที่มีเงื่อนไขเฉพาะไม่ต้องผ่านเกณฑ์ทั่วไปอีก แต่ในทางปฏิบัติศาลรัฐธรรมนูญมักนำหลักนิติธรรม/ได้สัดส่วน/ศักดิ์ศรีความเป็นมนุษย์มาตรวจสอบกฎหมายจำกัดสิทธิทุกประเภทอยู่ดี ไม่แยกตามตัวบท จึงมีข้อเสนอให้แก้ ม.26 ให้ชัดว่าใช้บังคับกับกฎหมายจำกัดสิทธิทุกฉบับโดยไม่แยกเงื่อนไข</p>
+  `
+},
+{
+  id: "democracy",
+  label: "8) รัฐธรรมนูญกับประชาธิปไตย",
+  toc: [
+    {id:"c8-h1", level:"major", text:"ประชาธิปไตยคือระบอบที่เลวร้ายน้อยที่สุด"},
+    {id:"c8-h2", level:"major", text:"ประชาธิปไตยทางตรง vs ผู้แทน"},
+    {id:"c8-h3", level:"major", text:"หลักการคุ้มครองเสียงข้างน้อย"}
+  ],
+  html: `
+  <h4 id="c8-h1">"ประชาธิปไตยเป็นระบอบการปกครองที่เลวร้ายน้อยที่สุด"</h4>
+  <p>ประโยคคลาสสิกนี้ (มักอ้างถึง Winston Churchill) สื่อว่าประชาธิปไตยไม่ใช่ยาวิเศษที่แก้ปัญหาสังคมได้ทุกเรื่อง เพราะยังมีข้อบกพร่อง เช่น เสียงข้างมากอาจกดขี่เสียงข้างน้อย หรือการตัดสินใจอาจไม่มีประสิทธิภาพเท่าระบอบรวบอำนาจ แต่เมื่อเทียบกับระบอบทางเลือกอื่น (เผด็จการ อำนาจนิยม) ประชาธิปไตยยังคงเป็นระบอบที่คุ้มครองสิทธิเสรีภาพ เปิดพื้นที่ตรวจสอบ และแก้ไขเปลี่ยนแปลงผู้ปกครองได้โดยสันติวิธีมากที่สุด</p>
+  <h4 id="c8-h2">ประชาธิปไตยทางตรง กับ ประชาธิปไตยแบบผู้แทน</h4>
+  <p>ประชาธิปไตยแบบผู้แทน (representative democracy) คือรูปแบบหลักที่รัฐสมัยใหม่ใช้ ประชาชนใช้อำนาจอธิปไตยผ่านผู้แทนที่เลือกตั้งเข้ามาแทนที่จะตัดสินใจเองทุกเรื่อง กลไกที่เชื่อมโยงกับหลักนี้โดยตรงคือ<b>หลักความยินยอมในการจ่ายเงินแผ่นดิน</b> (งบประมาณต้องผ่านความเห็นชอบของผู้แทนราษฎรในรูปพระราชบัญญัติ) และ<b>หลักความยินยอมทางภาษี</b> — ทั้งสองหลักสะท้อนว่าการที่รัฐจะเก็บเงินหรือใช้เงินของประชาชน ต้องผ่านความยินยอมของผู้แทนที่ประชาชนเลือกมาเสียก่อน</p>
+  <h4 id="c8-h3">หลักการคุ้มครองเสียงข้างน้อย</h4>
+  <p>เป็นเงื่อนไขที่ขาดไม่ได้ของประชาธิปไตยตามแนวคิดรัฐธรรมนูญนิยม เพราะการตัดสินใจโดยเสียงข้างมากต้องไม่ละเมิดสิทธิขั้นพื้นฐานของเสียงข้างน้อย ตัวอย่างกลไกในรัฐธรรมนูญไทยที่สะท้อนหลักนี้ ได้แก่ เกณฑ์เสียง ส.ส. ฝ่ายค้าน (พรรคที่ไม่มีตำแหน่งรัฐมนตรี) ไม่น้อยกว่าร้อยละ 20 ในการลงมติแก้ไขรัฐธรรมนูญวาระที่ 3 และสิทธิของสมาชิกรัฐสภาจำนวนหนึ่ง (เช่น ไม่น้อยกว่า 1 ใน 10 หรือ 1 ใน 5 ของแต่ละสภา) ในการเข้าชื่อกันเสนอเรื่องให้ศาลรัฐธรรมนูญตรวจสอบกฎหมายก่อนหรือหลังประกาศใช้ ซึ่งเปิดโอกาสให้ฝ่ายเสียงข้างน้อยในสภาคัดค้านกฎหมายของฝ่ายเสียงข้างมากได้ผ่านกลไกทางศาล แทนที่จะต้องพึ่งพากำลังเสียงในสภาเพียงอย่างเดียว</p>
+  `
+},
+{
+  id: "review",
+  label: "9) การตรวจสอบความชอบด้วยรัฐธรรมนูญ",
+  toc: [
+    {id:"c9-h1", level:"major", text:"มาตรา 5 — หลักความเป็นกฎหมายสูงสุด"},
+    {id:"c9-h2", level:"major", text:"ก่อนประกาศใช้ (ม.148) — นามธรรม"},
+    {id:"c9-h3", level:"major", text:"หลังประกาศใช้ รูปธรรม (ม.212)"},
+    {id:"c9-h4", level:"major", text:"หลังประกาศใช้ นามธรรม (ม.231 / ม.173)"},
+    {id:"c9-h5", level:"major", text:"การตรวจสอบพระราชกำหนด"}
+  ],
+  html: `
+  <h4 id="c9-h1">มาตรา 5 — รากฐานของการตรวจสอบทั้งหมด</h4>
+  <p>บทบัญญัติ กฎ ข้อบังคับ หรือการกระทำใดที่ขัดหรือแย้งต่อรัฐธรรมนูญ <b>ใช้บังคับมิได้</b> — นี่คือรากฐานที่ทำให้ต้องมีระบบตรวจสอบความชอบด้วยรัฐธรรมนูญ ซึ่งแบ่งตามช่วงเวลาเป็น "ก่อนประกาศใช้" กับ "หลังประกาศใช้" และแบ่งตามรูปแบบเป็น "รูปธรรม" (ต้องมีคดี/ข้อเท็จจริงเกิดขึ้นก่อน) กับ "นามธรรม" (ตรวจสอบตัวบทได้เลยโดยไม่ต้องมีคดี)</p>
+  <h4 id="c9-h2">A. การตรวจสอบก่อนประกาศใช้ (Ex Ante Review) — มาตรา 148</h4>
+  <p>ใช้กับ<b>ร่างพระราชบัญญัติ</b>และร่างพระราชบัญญัติประกอบรัฐธรรมนูญ เป็นการตรวจสอบแบบนามธรรม ผู้มีสิทธิเสนอ: สมาชิกรัฐสภารวมกันไม่น้อยกว่า 1 ใน 10 หรือ นายกรัฐมนตรี ประเด็นตรวจสอบมี 2 เรื่องคือ (1) เนื้อหาขัดรัฐธรรมนูญหรือไม่ (2) กระบวนการตราไม่ถูกต้องหรือไม่ ผลทางกฎหมาย: หากขัดเนื้อหาและเป็น<b>สาระสำคัญ</b> ร่างตกไปทั้งฉบับ ถ้าไม่ใช่สาระสำคัญ ตกเฉพาะข้อความนั้น แต่ถ้าเป็นปัญหา<b>กระบวนการตรา</b> กฎหมายกำหนดให้ตกไป<b>ทั้งฉบับเสมอ</b> (คำวินิจฉัยที่ 23/2563 กรณีเสียบบัตรแทนกัน ที่ให้ตกเฉพาะบางส่วนโดยอ้างความจำเป็นเร่งด่วน จึงถูกวิพากษ์ว่าไม่ตรงตามหลักการของมาตรานี้)</p>
+  <p><i>ข้อดี</i>: ป้องกันปัญหาตั้งแต่ต้น ไม่กระทบผลย้อนหลัง คุ้มครองเสียงข้างน้อย — <i>ข้อจำกัด</i>: วัตถุแห่งการตรวจสอบยังไม่ชัด (กฎหมายยังไม่บังคับใช้จริง) เสี่ยงศาลแทรกแซงกระบวนการนิติบัญญัติ ทำให้ประกาศใช้กฎหมายล่าช้า</p>
+  <h4 id="c9-h3">B1. หลังประกาศใช้ แบบรูปธรรม (Concrete) — มาตรา 212</h4>
+  <p>ใช้เมื่อ<b>มีคดีจริงเกิดขึ้นแล้ว</b>และศาลต้องใช้บทบัญญัติกฎหมายตัดสินคดีนั้น วัตถุแห่งการตรวจสอบคือบทบัญญัติที่ศาลจะใช้บังคับแก่คดี (ไม่ใช่กฎหมายทั้งฉบับ) ผู้มีสิทธิเสนอ: ศาลเห็นเอง หรือคู่ความโต้แย้ง เงื่อนไข: ต้อง<b>ยังไม่เคยมีคำวินิจฉัยศาลรัฐธรรมนูญ</b>ในประเด็นนั้นมาก่อน (การเคยผ่าน ม.148 ไม่ถือว่าเป็นคำวินิจฉัยส่วนนี้) เมื่อครบเงื่อนไข ศาลที่พิจารณาคดี<b>ต้องส่ง</b>ให้ศาลรัฐธรรมนูญวินิจฉัยเสมอ แต่สามารถพิจารณาคดีต่อไปได้โดยรอการพิพากษาไว้ก่อน ผลทางกฎหมาย: หากขัดรัฐธรรมนูญ บทบัญญัตินั้นใช้บังคับไม่ได้ มีผลในคดีทั้งปวงแต่ไม่กระทบคำพิพากษาถึงที่สุดแล้ว ยกเว้นคดีอาญา — ผู้ที่เคยถูกพิพากษาตามบทบัญญัตินั้นถือเป็นผู้ไม่เคยกระทำผิด และให้ปล่อยตัวถ้ายังรับโทษอยู่ (แต่ไม่มีสิทธิเรียกค่าชดเชย)</p>
+  <p><i>ข้อดี</i>: ปัญหาปรากฏชัดเจนเพราะบังคับใช้แล้ว กำจัดความไม่ชอบด้วย รธน. ได้ทุกเมื่อ เยียวยาการละเมิดสิทธิได้ — <i>ข้อจำกัด</i>: กระทบความมั่นคงแห่งนิติฐานะของผู้ที่เคยดำเนินการตามกฎหมายนั้น อาจถูกมองว่าศาลทำลายเจตจำนงประชาชน และอาจเกิดช่องว่างทางกฎหมายทันที</p>
+  <h4 id="c9-h4">B2. หลังประกาศใช้ แบบนามธรรม — ผู้ตรวจการแผ่นดิน (ม.231) และ พ.ร.ก. (ม.173)</h4>
+  <p><b>มาตรา 231:</b> ผู้ตรวจการแผ่นดินเสนอเรื่องได้โดยไม่ต้องมีคดีเกิดขึ้น หากเห็นว่าบทบัญญัติใด "มีปัญหาเกี่ยวกับความชอบด้วยรัฐธรรมนูญ" ผลทางกฎหมายมีผล<b>ไปข้างหน้าเท่านั้น</b> (ไม่ย้อนหลัง) เว้นแต่กำหนดไว้เป็นอย่างอื่น</p>
+  <p><b>มาตรา 173:</b> ใช้เฉพาะกับ<b>พระราชกำหนดที่ประกาศใช้แล้วแต่ยังไม่ได้รับอนุมัติจากรัฐสภา</b> ผู้เสนอ: ส.ส./ส.ว. ไม่น้อยกว่า 1 ใน 5 ของแต่ละสภา ประเด็นโต้แย้งได้เฉพาะว่าไม่เป็นไปตามวัตถุประสงค์ตาม ม.172 วรรคหนึ่ง (ความปลอดภัยประเทศ/ความมั่นคงเศรษฐกิจ/ภัยพิบัติสาธารณะ) เท่านั้น <b>ตรวจสอบเงื่อนไขด้านเวลา (ความจำเป็นรีบด่วน) ไม่ได้</b> เพราะถือเป็นดุลพินิจฝ่ายบริหารโดยแท้ หากศาลวินิจฉัยว่าไม่เป็นไปตามเงื่อนไข พระราชกำหนดนั้น<b>ไม่มีผลบังคับใช้มาแต่ต้น</b> (ต้องใช้เสียงตุลาการไม่น้อยกว่า 2 ใน 3)</p>
+  <h4 id="c9-h5">สรุปช่องทางตรวจสอบพระราชกำหนด (พ.ร.ก.)</h4>
+  <p>พ.ร.ก. <b>ไม่เป็นวัตถุแห่งการตรวจสอบตาม ม.148</b> เพราะมาตรานี้ใช้คำว่า "ร่างพระราชบัญญัติ" เท่านั้น และเพราะสภาพของ พ.ร.ก. ต้องออกด้วยความจำเป็นเร่งด่วน การให้ตรวจสอบก่อนออกจะทำลายความเร่งด่วนนั้น แต่หลังประกาศใช้แล้ว พ.ร.ก. ทั่วไปตรวจสอบได้ถึง 3 ช่องทาง: (1) เงื่อนไขการตราตาม ม.173 (2) เนื้อหาที่ใช้บังคับแก่คดีตาม ม.212 (3) เนื้อหาแบบนามธรรมผ่านผู้ตรวจการแผ่นดินตาม ม.231(1) — ส่วน<b>พ.ร.ก. ภาษีอากรและเงินตรา (ม.174)</b> เท่านั้นที่ไม่ถูกตรวจสอบตาม ม.173 แต่ยังคงถูกตรวจสอบได้ตาม ม.212 และ ม.231(1) ตามปกติ</p>
+  `
+}
+);
+
+/* QUIZ_ADV — สังเคราะห์เป็นข้อสอบปรนัยจากเนื้อหาเลคเชอร์และแนวข้อสอบอัตนัยจริง
+   (แหล่งข้อมูลของวิชานี้เป็นข้อสอบอัตนัย/บรรยายทั้งหมด จึงแปลงประเด็น เลข มาตรา
+   และหลักการที่ปรากฏจริงในเอกสารประกอบการเรียนมาเป็นตัวเลือกปรนัยเพื่อฝึกความเข้าใจ) */
+const QUIZ_ADV = [
+{cat:"concept", q:"ข้อใดตรงกับ 'คุณลักษณะ' ของรัฐธรรมนูญตามที่เรียนมากที่สุด (Universality, Supremacy, Indelibleness, Perpetual)?",
+ opts:["ใช้บังคับเฉพาะเจ้าหน้าที่รัฐ แก้ไขได้ง่ายเหมือนกฎหมายทั่วไป","ใช้บังคับกับทุกคนในรัฐ เป็นกฎหมายสูงสุด แก้ไขยากกว่ากฎหมายธรรมดา และออกแบบให้คงอยู่ถาวร","เป็นกฎหมายชั่วคราวที่ใช้เฉพาะช่วงเปลี่ยนผ่านทางการเมือง","ใช้บังคับเฉพาะในกรุงเทพมหานครเป็นการนำร่อง"],
+ ans:1, explain:"คุณลักษณะสำคัญของรัฐธรรมนูญ 4 ประการคือ Universality, Supremacy, Indelibleness และ Perpetual ตามที่สรุปไว้ในเนื้อหาครั้งที่ 1"},
+{cat:"concept", q:"การนิยามรัฐธรรมนูญ 'ตามแบบพิธี (formalism)' มีข้อเสียตรงกับข้อใด?",
+ opts:["เนื้อหากระจัดกระจายหลายแหล่ง (fragmentation)","เนื้อหาไม่ถูกจำกัด อะไรก็ใส่เข้าไปในรัฐธรรมนูญได้","ใช้กับประเทศที่ไม่มีรัฐธรรมนูญลายลักษณ์อักษรไม่ได้","ไม่สามารถอธิบายความเป็นกฎหมายสูงสุดได้เลย"],
+ ans:1, explain:"การนิยามตามแบบพิธีเน้นดูกระบวนการจัดทำและสถานะกฎหมายสูงสุด ข้อดีคือทำให้รัฐธรรมนูญนิยมเกิดขึ้นได้จริง แต่ข้อเสียคือไม่จำกัดเนื้อหา ต่างจากการนิยามตามเนื้อหา (materialism) ที่มีข้อเสียคือกระจัดกระจาย"},
+{cat:"constituent", q:"ตามทฤษฎีอำนาจสถาปนารัฐธรรมนูญ อำนาจที่รัฐสภาใช้ในการแก้ไขเพิ่มเติมรัฐธรรมนูญตามมาตรา 256 จัดอยู่ในประเภทใด?",
+ opts:["อำนาจสถาปนารัฐธรรมนูญดั้งเดิม (Original Constituent Power)","อำนาจสถาปนารัฐธรรมนูญลำดับรอง/รับมา (Derived Constituent Power)","อำนาจตามข้อเท็จจริง (Social Power) ที่ไม่มีกฎเกณฑ์ควบคุม","อำนาจบริหารทั่วไปตามหลักการแบ่งแยกอำนาจ"],
+ ans:1, explain:"รัฐสภาไม่ได้มีอำนาจสถาปนารัฐธรรมนูญดั้งเดิม แต่เป็นอำนาจที่ 'ได้รับมอบมา' จากประชาชนผู้ทรงอำนาจสถาปนาดั้งเดิม จึงเรียกว่าอำนาจสถาปนาลำดับรอง ซึ่งถูกจำกัดทั้งรูปแบบและเนื้อหาตามที่รัฐธรรมนูญกำหนด"},
+{cat:"constituent", q:"ตามคำวินิจฉัยศาลรัฐธรรมนูญที่ 4/2564 หากรัฐสภาต้องการจัดทำรัฐธรรมนูญฉบับใหม่ทั้งฉบับ ต้องทำอย่างไรก่อน?",
+ opts:["ใช้มาตรา 256 แก้ไขได้เลยโดยไม่ต้องทำประชามติ เพราะเป็นอำนาจนิติบัญญัติปกติ","ต้องจัดให้มีการออกเสียงประชามติถามประชาชนก่อนว่าต้องการรัฐธรรมนูญฉบับใหม่หรือไม่ แล้วจึงร่างและทำประชามติซ้ำอีกครั้ง","ให้ศาลรัฐธรรมนูญเป็นผู้ร่างแทนประชาชนได้ทันที","ให้คณะรัฐมนตรีมีมติเห็นชอบแทนประชามติได้"],
+ ans:1, explain:"ศาลวินิจฉัยว่ามาตรา 256 เป็นเพียงอำนาจแก้ไขเพิ่มเติม ไม่ใช่อำนาจจัดทำใหม่ทั้งฉบับ หากต้องการฉบับใหม่ ต้องคืนอำนาจให้ประชาชนผ่านประชามติ 2 ครั้ง (ก่อนร่าง และหลังร่างเสร็จ)"},
+{cat:"separation", q:"ตามคดี Marbury v. Madison (1803) ผู้พิพากษา John Marshall ให้เหตุผลว่าศาลมีอำนาจตรวจสอบความชอบด้วยรัฐธรรมนูญของกฎหมายเพราะเหตุใด?",
+ opts:["เพราะรัฐธรรมนูญสหรัฐฯ เขียนให้อำนาจศาลไว้อย่างชัดแจ้ง","เพราะศาลมีอำนาจโดยสภาพ (Inherent Power) ต้องตีความและเลือกใช้กฎเกณฑ์ที่ขัดกัน หากรัฐธรรมนูญเป็นกฎหมายสูงกว่า ศาลต้องเลือกใช้รัฐธรรมนูญ","เพราะสภาคองเกรสมีมติมอบอำนาจให้ศาลเป็นการเฉพาะ","เพราะประธานาธิบดีมีคำสั่งให้ศาลตรวจสอบกฎหมายทุกฉบับ"],
+ ans:1, explain:"Marshall อธิบายว่าเป็นหน้าที่โดยธรรมชาติของฝ่ายตุลาการที่ต้องตีความกฎเกณฑ์ที่จะปรับใช้กับคดี เมื่อกฎหมายธรรมดาขัดกับรัฐธรรมนูญซึ่งเป็นกฎหมายสูงกว่า ศาลต้องเลือกใช้รัฐธรรมนูญ ไม่ใช่เพราะมีบทบัญญัติให้อำนาจไว้ตรง ๆ"},
+{cat:"separation", q:"ตามหลักการแบ่งแยกอำนาจที่เรียน 'ฝ่ายตุลาการ' มีลักษณะการกระทำแบบใด?",
+ opts:["เชิงรุก (active) ริเริ่มกำหนดนโยบายได้เอง","เชิงรับ (passive) ต้องมีผู้มาฟ้องร้องก่อนจึงจะเริ่มพิจารณาได้","ออกกฎเกณฑ์ทั่วไปที่ใช้บังคับกับทุกคนได้เอง","มีอำนาจบังคับคดีได้เองโดยไม่ต้องพึ่งฝ่ายปกครอง"],
+ ans:1, explain:"ตุลาการมีลักษณะเชิงรับ (passive) กล่าวคือต้องมีคนมาฟ้องคดีก่อนศาลจึงจะเริ่มกระบวนพิจารณาได้ ต่างจากฝ่ายบริหารที่ริเริ่มกำหนดนโยบายได้เอง (active)"},
+{cat:"organs", q:"ข้อใดคือข้อดีหลักของระบบ 'สภาคู่ (Bicameralism)' ตามที่เรียน?",
+ opts:["ทำให้กระบวนการนิติบัญญัติรวดเร็วขึ้นเพราะมีสองสภาช่วยกันทำงาน","วุฒิสภาทำหน้าที่เป็นสภาพี่เลี้ยงกลั่นกรองกฎหมาย ช่วยตรวจสอบถ่วงดุลและสะท้อนความหลากหลาย","ลดค่าใช้จ่ายในการดำเนินงานของรัฐสภาเมื่อเทียบกับสภาเดี่ยว","ทำให้ไม่ต้องมีการเลือกตั้งสมาชิกวุฒิสภาอีกต่อไป"],
+ ans:1, explain:"ข้อดีของสภาคู่คือมีวุฒิสภาช่วยกลั่นกรอง ตรวจสอบถ่วงดุล และสะท้อนความหลากหลายทางสังคม ส่วนข้อเสียคือกระบวนการช้าลงและอาจขาดความชอบธรรมประชาธิปไตยหากไม่ได้มาจากการเลือกตั้งทางตรง"},
+{cat:"organs", q:"เพราะเหตุใดการที่คำพิพากษาของศาลสูงสุด/ศาลสุดท้ายไม่สามารถถูกตรวจสอบได้อีก จึงถูกเรียกว่า 'necessary evil'?",
+ opts:["เพราะเป็นเรื่องผิดกฎหมายที่ยอมให้เกิดขึ้นโดยไม่มีเหตุผลรองรับ","เพราะระบบกฎหมายจำเป็นต้องมีจุดยุติข้อพิพาทเพื่อความแน่นอนแห่งนิติฐานะ แม้จะเสี่ยงต่อความผิดพลาดที่แก้ไขไม่ได้อีก","เพราะศาลสูงสุดไม่เคยตัดสินผิดพลาดเลยในทางปฏิบัติ","เพราะกฎหมายห้ามศาลอื่นวิจารณ์คำพิพากษาศาลสูงสุด"],
+ ans:1, explain:"หลักความเป็นที่สุด (finality) จำเป็นเพื่อให้คดีความยุติลงและเกิดความแน่นอนทางกฎหมาย แต่ก็เป็น 'ความเลวร้าย' เพราะหากคำพิพากษาผิดพลาดหรือขัดรัฐธรรมนูญ ก็ไม่มีกลไกแก้ไขต่อได้อีก จึงเรียกว่า necessary evil"},
+{cat:"constitutionalism", q:"เป้าหมายสูงสุดของรัฐธรรมนูญนิยม (Constitutionalism) ตรงกับข้อใดมากที่สุด?",
+ opts:["การรวมอำนาจไว้ที่ผู้นำสูงสุดเพื่อความรวดเร็วในการตัดสินใจ","การสร้างสังคมที่ปกครองโดยกฎหมาย (rule of law) หรือการปกครองตนเองของประชาชน (self-governance)","การยกเลิกฝ่ายตุลาการเพื่อให้ฝ่ายบริหารทำงานคล่องตัว","การให้ต่างประเทศเข้ามาช่วยร่างรัฐธรรมนูญแทนประชาชนในประเทศ"],
+ ans:1, explain:"เป้าหมายสูงสุดของรัฐธรรมนูญนิยมคือการสร้างสังคมที่ปกครองโดยกฎหมาย/การปกครองตนเองของประชาชน ผ่านรัฐบาลที่มีการจำกัดอำนาจ (limited government)"},
+{cat:"constitutionalism", q:"ข้อใด 'ไม่ใช่' บทเฉพาะกาลที่สิ้นสุดไปแล้ว แต่ยังคงมีผลใช้บังคับอยู่ตามที่เรียนเรื่องปัญหา ส.ว. กับรัฐธรรมนูญนิยม?",
+ opts:["อำนาจของ คสช. ตามมาตรา 44 ของรัฐธรรมนูญชั่วคราว 2557","อำนาจของ ส.ว. ในการร่วมเลือกนายกรัฐมนตรีในช่วง 5 ปีแรก (ม.272)","อำนาจของ ส.ว. ในการให้ความเห็นชอบผู้ดำรงตำแหน่งในองค์กรอิสระและตุลาการศาลรัฐธรรมนูญ","การรับรองประกาศ คสช. ตามมาตรา 279 ในช่วงเปลี่ยนผ่าน"],
+ ans:2, explain:"อำนาจ ส.ว. ในการให้ความเห็นชอบตุลาการศาลรัฐธรรมนูญและองค์กรอิสระ (เช่น ม.204, 222 ฯลฯ) ไม่ใช่บทเฉพาะกาล ยังมีผลใช้บังคับอยู่ต่อเนื่อง ต่างจากอำนาจ คสช. และอำนาจเลือกนายกฯ ของ ส.ว. ที่เป็นบทเฉพาะกาลซึ่งสิ้นสุดไปแล้ว"},
+{cat:"finance", q:"ตามมาตรา 143 สภาผู้แทนราษฎรต้องพิจารณาร่างพระราชบัญญัติงบประมาณรายจ่ายประจำปีให้แล้วเสร็จภายในกี่วัน?",
+ opts:["30 วัน","60 วัน","105 วัน","180 วัน"],
+ ans:2, explain:"มาตรา 143 กำหนดให้สภาผู้แทนราษฎรพิจารณาร่าง พ.ร.บ. งบประมาณฯ ให้แล้วเสร็จภายใน 105 วัน หากไม่เสร็จให้ถือว่าเห็นชอบ ส่วนวุฒิสภาพิจารณาให้เสร็จภายใน 20 วันและแก้ไขเพิ่มเติมไม่ได้"},
+{cat:"finance", q:"หลักการห้ามฝ่ายนิติบัญญัติริเริ่มกำหนดรายจ่ายแผ่นดินตามมาตรา 144 มีสาระสำคัญตรงกับข้อใด?",
+ opts:["ส.ส. แปรญัตติเพิ่มหรือเปลี่ยนแปลงรายการงบประมาณไม่ได้ ทำได้เพียงลด/ตัดทอนรายจ่ายที่ไม่ใช่รายจ่ายตามข้อผูกพัน","ส.ส. มีอำนาจเพิ่มงบประมาณให้หน่วยงานใดก็ได้ตามที่เห็นสมควร","วุฒิสภาเป็นผู้มีอำนาจแต่เพียงผู้เดียวในการกำหนดรายจ่ายแผ่นดิน","งบประมาณรายจ่ายไม่จำเป็นต้องผ่านความเห็นชอบของรัฐสภา"],
+ ans:0, explain:"มาตรา 144 ห้ามการแปรญัตติที่เปลี่ยนแปลง/เพิ่มเติมรายการหรือจำนวนเงิน อนุญาตเฉพาะการลดหรือตัดทอนรายจ่ายที่ไม่ใช่รายจ่ายตามข้อผูกพัน และห้าม ส.ส./ส.ว./กรรมาธิการมีส่วนได้เสียในงบประมาณ ฝ่าฝืนถึงขั้นสิ้นสุดสมาชิกภาพ"},
+{cat:"finance", q:"เหตุใดจึงกล่าวได้ว่ารัฐธรรมนูญ 2560 'ไม่ได้' รับรองหลักความยินยอมทางภาษี (ไม่มีภาษีโดยไม่มีผู้แทน) ไว้อย่างชัดแจ้ง?",
+ opts:["เพราะรัฐธรรมนูญห้ามการเก็บภาษีทุกประเภทโดยเด็ดขาด","เพราะไม่มีบทบัญญัติรับรองหลักนี้ไว้ตรง ๆ ทำให้ฝ่ายบริหารยังมีช่องตราพระราชกำหนดจัดเก็บภาษีได้ในบางกรณี","เพราะมาตรา 141 ได้ยกเลิกหลักนี้ไปแล้วอย่างชัดแจ้ง","เพราะศาลรัฐธรรมนูญเคยวินิจฉัยห้ามใช้หลักนี้"],
+ ans:1, explain:"รัฐธรรมนูญ 2560 ไม่ได้บัญญัติรับรองหลักความยินยอมทางภาษีไว้ชัดแจ้ง ต่างจากหลักความยินยอมในการจ่ายเงินแผ่นดิน (ม.141) ที่รับรองไว้ชัดเจน ทำให้ฝ่ายบริหารยังมีช่องตราพระราชกำหนดเพื่อจัดเก็บภาษีได้ในบางสถานการณ์"},
+{cat:"rights", q:"หลักความพอสมควรแก่เหตุ (หลักความได้สัดส่วน) ในการจำกัดสิทธิ ประกอบด้วยหลักย่อยใดบ้าง?",
+ opts:["หลักความเหมาะสม หลักความจำเป็น และหลักความพอสมควรแก่เหตุอย่างแคบ","หลักความเร่งด่วน หลักความลับ และหลักความประหยัด","หลักเสียงข้างมาก หลักผู้แทน และหลักการเลือกตั้ง","หลักนิติวิธี หลักตีความ และหลักอุดช่องว่าง"],
+ ans:0, explain:"หลักความได้สัดส่วนแบ่งเป็น 3 หลักย่อย ได้แก่ ความเหมาะสม (มาตรการต้องบรรลุวัตถุประสงค์ได้) ความจำเป็น (ต้องเลือกมาตรการที่กระทบสิทธิน้อยที่สุด) และความพอสมควรแก่เหตุอย่างแคบ (ประโยชน์สาธารณะต้องสมดุลกับสิทธิที่เสียไป)"},
+{cat:"rights", q:"อุปมา 'ไข่ขาว-ไข่แดง' ในเรื่องการจำกัดสิทธิเสรีภาพ หมายความว่าอย่างไร?",
+ opts:["ฝ่ายนิติบัญญัติจำกัดสิทธิได้เฉพาะส่วนขอบนอก (ไข่ขาว) แต่ห้ามกระทบแก่นสำคัญของสิทธิ (ไข่แดง)","สิทธิทุกประเภทจำกัดได้เท่ากันหมดไม่มีข้อยกเว้น","ไข่แดงหมายถึงสิทธิที่จำกัดได้อย่างเต็มที่โดยไม่มีเงื่อนไข","เป็นหลักที่ใช้เฉพาะกับกฎหมายภาษีเท่านั้น"],
+ ans:0, explain:"หลักคุ้มครองสารัตถะแห่งสิทธิเปรียบว่าฝ่ายนิติบัญญัติจำกัดสิทธิได้เพียงส่วนไข่ขาว (ขอบนอก) เท่านั้น ห้ามเจาะทะลุถึงไข่แดงซึ่งเป็นแก่นสำคัญของสิทธินั้น"},
+{cat:"democracy", q:"เพราะเหตุใดการคุ้มครองเสียงข้างน้อยจึงเป็นเงื่อนไขที่ขาดไม่ได้ของประชาธิปไตยตามแนวคิดรัฐธรรมนูญนิยม?",
+ opts:["เพราะเสียงข้างน้อยมีความสำคัญมากกว่าเสียงข้างมากเสมอ","เพราะการตัดสินใจโดยเสียงข้างมากต้องไม่ละเมิดสิทธิขั้นพื้นฐานของเสียงข้างน้อย","เพราะรัฐธรรมนูญห้ามใช้ระบบเสียงข้างมากโดยเด็ดขาด","เพราะเสียงข้างน้อยมีสิทธิยับยั้งกฎหมายทุกฉบับได้ทันที"],
+ ans:1, explain:"รัฐธรรมนูญนิยมยอมรับกลไกเสียงข้างมากในการตัดสินใจ แต่ต้องมีการคุ้มครองเสียงข้างน้อยควบคู่กันเสมอ เพื่อไม่ให้เสียงข้างมากละเมิดสิทธิขั้นพื้นฐานของเสียงข้างน้อย"},
+{cat:"review", q:"การตรวจสอบความชอบด้วยรัฐธรรมนูญของร่างพระราชบัญญัติก่อนประกาศใช้ตามมาตรา 148 เป็นการตรวจสอบรูปแบบใด และผลเป็นอย่างไรหากพบว่ากระบวนการตราไม่ถูกต้อง?",
+ opts:["เป็นการตรวจสอบแบบรูปธรรม และร่างตกไปเฉพาะส่วนที่บกพร่องเท่านั้น","เป็นการตรวจสอบแบบนามธรรม และหากกระบวนการตราไม่ถูกต้อง ร่างพระราชบัญญัตินั้นตกไปทั้งฉบับ","เป็นการตรวจสอบแบบนามธรรม แต่ไม่มีผลทางกฎหมายใด ๆ ต่อร่างกฎหมาย","เป็นการตรวจสอบแบบรูปธรรม ต้องมีคดีเกิดขึ้นก่อนจึงตรวจสอบได้"],
+ ans:1, explain:"มาตรา 148 เป็นการตรวจสอบแบบนามธรรมเพราะยังไม่มีข้อเท็จจริงเกิดขึ้น หากศาลวินิจฉัยว่ากระบวนการตราไม่ถูกต้องตามรัฐธรรมนูญ ร่างพระราชบัญญัตินั้นต้องตกไปทั้งฉบับเสมอ ไม่ว่าจะอ้างเหตุความจำเป็นเร่งด่วนเพียงใดก็ตาม"},
+{cat:"review", q:"เงื่อนไขสำคัญของการตรวจสอบตามมาตรา 212 (แบบรูปธรรม) ที่ทำให้ศาลต้องส่งเรื่องให้ศาลรัฐธรรมนูญวินิจฉัยคือข้อใด?",
+ opts:["ต้องมีคู่ความอย่างน้อย 3 ฝ่ายในคดีนั้น","ต้องยังไม่เคยมีคำวินิจฉัยของศาลรัฐธรรมนูญในประเด็นนั้นมาก่อน","ต้องเป็นคดีที่ศาลฎีกาเท่านั้นเป็นผู้พิจารณา","ต้องได้รับความยินยอมจากคู่ความทั้งสองฝ่ายก่อน"],
+ ans:1, explain:"เงื่อนไขสำคัญคือต้องยังไม่เคยมีคำวินิจฉัยของศาลรัฐธรรมนูญในส่วนที่เกี่ยวข้องกับบทบัญญัตินั้นมาก่อน (การเคยผ่านการตรวจสอบตาม ม.148 ไม่ถือว่าเป็นคำวินิจฉัยในส่วนนี้) เมื่อครบเงื่อนไขศาลต้องส่งเรื่องเสมอเพราะเป็นอำนาจเฉพาะของศาลรัฐธรรมนูญ"},
+{cat:"review", q:"การตรวจสอบพระราชกำหนดตามมาตรา 173 มีข้อจำกัดตรงกับข้อใด?",
+ opts:["ตรวจสอบได้ทั้งเงื่อนไขด้านวัตถุประสงค์และเงื่อนไขด้านเวลา (ความจำเป็นรีบด่วน)","ตรวจสอบได้เฉพาะเงื่อนไขด้านวัตถุประสงค์ตาม ม.172 วรรคหนึ่งเท่านั้น ส่วนเงื่อนไขด้านเวลาเป็นดุลพินิจของฝ่ายบริหารที่ตรวจสอบไม่ได้","ตรวจสอบไม่ได้เลยไม่ว่ากรณีใด เพราะ พ.ร.ก. อยู่นอกเขตอำนาจศาลรัฐธรรมนูญ","ใช้ได้กับพระราชกำหนดภาษีอากรและเงินตราเท่านั้น"],
+ ans:1, explain:"มาตรา 173 ตรวจสอบได้เฉพาะว่า พ.ร.ก. เป็นไปตามวัตถุประสงค์ตามมาตรา 172 วรรคหนึ่งหรือไม่ (ความปลอดภัยประเทศ ความมั่นคงเศรษฐกิจ ภัยพิบัติสาธารณะ) ส่วนเงื่อนไขด้านเวลา (ความจำเป็นรีบด่วนอันมิอาจหลีกเลี่ยงได้) ถือเป็นดุลพินิจของคณะรัฐมนตรีโดยแท้ ศาลรัฐธรรมนูญไม่มีอำนาจตรวจสอบ"},
+{cat:"review", q:"พระราชกำหนดประเภทใดที่ 'ไม่ถูก' ตรวจสอบตามมาตรา 173 แต่ยังคงถูกตรวจสอบได้ตามมาตรา 212 และมาตรา 231?",
+ opts:["พระราชกำหนดเกี่ยวกับความมั่นคงทางทหาร","พระราชกำหนดเกี่ยวกับภาษีอากรและเงินตรา (ม.174)","พระราชกำหนดทุกฉบับไม่มีข้อยกเว้น","พระราชกำหนดที่ออกในสมัยรัฐบาลรักษาการ"],
+ ans:1, explain:"พระราชกำหนดเกี่ยวกับภาษีอากรและเงินตราตามมาตรา 174 เป็นข้อยกเว้นที่ไม่ถูกตรวจสอบตามมาตรา 173 แต่ยังคงถูกตรวจสอบเชิงเนื้อหาได้ตามมาตรา 212 (เมื่อมีคดี) และมาตรา 231(1) (ผู้ตรวจการแผ่นดินเสนอ) ตามปกติ"}
+];
+
+const IRAC_CASES = [
+{
+  id: "case1",
+  examRef: "แนวข้อสอบ 2564-online ข้อ 4 กรณีที่ 1",
+  title: "ศาลปกครอง ก. กับข้อโต้แย้งเรื่ององค์ประชุมวุฒิสภาไม่ครบ",
+  cat: "review",
+  facts: "ในคดีปกครองคดีหนึ่งซึ่งอยู่ระหว่างการพิจารณาของศาลปกครอง ก. นายพิศสมัยผู้ฟ้องคดีเห็นว่าพระราชบัญญัติ ABC ซึ่งเป็นกฎหมายที่ศาลจะใช้บังคับแก่คดีนี้ <b>ตราขึ้นโดยไม่ถูกต้องตามบทบัญญัติแห่งรัฐธรรมนูญ</b> เนื่องจากในการพิจารณาร่างพระราชบัญญัติดังกล่าวในชั้นวุฒิสภาในวาระลงมติ <b>มีองค์ประชุมไม่ครบตามจำนวนที่รัฐธรรมนูญกำหนด</b> พระราชบัญญัติดังกล่าวมีความบกพร่องอย่างร้ายแรง จึงขอให้ศาลปกครอง ก. ส่งคำโต้แย้งให้ศาลรัฐธรรมนูญเพื่อวินิจฉัย ทั้งนี้ ศาลรัฐธรรมนูญยังไม่เคยมีคำวินิจฉัยในประเด็นดังกล่าวมาก่อน ศาลปกครอง ก. จึงส่งคำโต้แย้งให้ศาลรัฐธรรมนูญวินิจฉัย<br><br>คำถาม: ศาลปกครอง ก. ดำเนินการถูกต้องตามรัฐธรรมนูญแห่งราชอาณาจักรไทย พุทธศักราช 2560 หรือไม่ อย่างไร",
+  issues: [
+    {
+      label: "ประเด็นที่ 1 — ช่องทางตรวจสอบที่ใช้ถูกต้องหรือไม่",
+      issueQ: "ข้อเท็จจริงนี้ควรวินิจฉัยผ่านช่องทางตรวจสอบความชอบด้วยรัฐธรรมนูญช่องทางใด?",
+      issueOpts: [
+        "มาตรา 148 การตรวจสอบร่างพระราชบัญญัติก่อนประกาศใช้",
+        "มาตรา 212 การตรวจสอบบทบัญญัติแห่งกฎหมายที่ศาลจะใช้บังคับแก่คดี (หลังประกาศใช้ แบบรูปธรรม)",
+        "มาตรา 231 การเสนอเรื่องโดยผู้ตรวจการแผ่นดิน",
+        "มาตรา 256 การแก้ไขเพิ่มเติมรัฐธรรมนูญ"
+      ],
+      issueAns: 1,
+      issueFeedback: "ถูกต้อง — พระราชบัญญัติ ABC ประกาศใช้แล้วและเป็นกฎหมายที่ศาลปกครอง ก. จะต้องใช้บังคับแก่คดีที่กำลังพิจารณาอยู่ นี่คือลักษณะของการตรวจสอบหลังประกาศใช้แบบรูปธรรมตามมาตรา 212 ไม่ใช่มาตรา 148 ซึ่งใช้กับร่างกฎหมายที่ยังไม่ประกาศใช้เท่านั้น",
+      ruleQ: "ตามมาตรา 212 ประเด็นที่คู่ความหรือศาลสามารถโต้แย้งเพื่อขอให้ส่งศาลรัฐธรรมนูญวินิจฉัยได้ มีขอบเขตเพียงใด?",
+      ruleOpts: [
+        "โต้แย้งได้ทั้งเรื่องเนื้อหาขัดรัฐธรรมนูญ และเรื่องกระบวนการตราไม่ถูกต้อง",
+        "โต้แย้งได้เฉพาะประเด็นเดียวคือบทบัญญัตินั้น 'ต้องด้วยมาตรา 5' คือขัดหรือแย้งต่อรัฐธรรมนูญในเชิงเนื้อหาเท่านั้น ไม่สามารถโต้แย้งเรื่องกระบวนการตราได้",
+        "โต้แย้งได้เฉพาะเรื่ององค์ประชุมของสภาเท่านั้น",
+        "ต้องโต้แย้งพร้อมกันทั้งสองประเด็นเสมอ มิฉะนั้นศาลจะไม่รับพิจารณา"
+      ],
+      ruleAns: 1,
+      ruleFeedback: "ถูกต้อง — มาตรา 212 จำกัดประเด็นที่โต้แย้งได้ไว้เพียงเรื่องเนื้อหาของบทบัญญัติว่าขัดหรือแย้งต่อรัฐธรรมนูญตามมาตรา 5 หรือไม่เท่านั้น ปัญหาเรื่อง 'กระบวนการตรา' เช่น องค์ประชุมไม่ครบ ไม่ใช่ประเด็นที่จะโต้แย้งผ่านช่องทางนี้ได้",
+      appQ: "เมื่อข้อโต้แย้งของนายพิศสมัยเป็นเรื่ององค์ประชุมวุฒิสภาไม่ครบ (ปัญหากระบวนการตรา) ไม่ใช่เรื่องเนื้อหาขัดรัฐธรรมนูญ การที่ศาลปกครอง ก. ส่งเรื่องให้ศาลรัฐธรรมนูญวินิจฉัยผ่านมาตรา 212 จึงเป็นอย่างไร?",
+      appOpts: [
+        "ถูกต้อง เพราะมีการโต้แย้งและยังไม่เคยมีคำวินิจฉัยมาก่อน จึงเข้าเงื่อนไขครบถ้วน",
+        "ไม่ถูกต้อง เพราะประเด็นที่โต้แย้งเป็นเรื่องกระบวนการตรา ซึ่งอยู่นอกขอบเขตประเด็นที่มาตรา 212 อนุญาตให้โต้แย้งได้",
+        "ถูกต้อง เพราะศาลปกครองมีอำนาจพิเศษต่างจากศาลยุติธรรมทั่วไป",
+        "ไม่ถูกต้อง เพราะศาลปกครองไม่มีอำนาจส่งเรื่องให้ศาลรัฐธรรมนูญได้เลยไม่ว่ากรณีใด"
+      ],
+      appAns: 1,
+      appFeedback: "ถูกต้อง — แม้จะยังไม่เคยมีคำวินิจฉัยในประเด็นนี้มาก่อนก็ตาม แต่เนื้อหาของข้อโต้แย้ง (องค์ประชุมไม่ครบ) เป็นปัญหา 'กระบวนการตรา' ซึ่งไม่ใช่ประเด็นที่มาตรา 212 เปิดช่องให้โต้แย้งได้ (มาตรา 212 จำกัดเฉพาะเรื่องเนื้อหาขัดรัฐธรรมนูญตามมาตรา 5) ศาลปกครอง ก. จึงดำเนินการไม่ถูกต้อง",
+      concQ: "สรุปแล้ว ศาลปกครอง ก. ดำเนินการถูกต้องตามรัฐธรรมนูญ 2560 หรือไม่?",
+      concOpts: [
+        "ถูกต้องแล้ว เพราะได้ส่งเรื่องให้ศาลรัฐธรรมนูญซึ่งเป็นองค์กรที่มีอำนาจเฉพาะ",
+        "ไม่ถูกต้อง เพราะข้อโต้แย้งเรื่ององค์ประชุมไม่ครบเป็นปัญหากระบวนการตรา ซึ่งอยู่นอกขอบเขตประเด็นที่ตรวจสอบได้ตามมาตรา 212 ศาลปกครอง ก. จึงไม่ควรส่งเรื่องนี้ให้ศาลรัฐธรรมนูญวินิจฉัยผ่านช่องทางนี้",
+        "ไม่ถูกต้อง เพราะศาลปกครองไม่มีสิทธิเห็นเองหรือรับข้อโต้แย้งจากคู่ความได้เลย",
+        "ถูกต้องบางส่วน เพราะแม้ผิดช่องทางแต่ศาลรัฐธรรมนูญจะแก้ไขให้เอง"
+      ],
+      concAns: 1,
+      concFeedback: "<b>สรุป:</b> ศาลปกครอง ก. ดำเนินการ<b>ไม่ถูกต้อง</b> เพราะประเด็นที่นายพิศสมัยโต้แย้ง คือ 'องค์ประชุมวุฒิสภาไม่ครบ' เป็นปัญหาเกี่ยวกับ<b>กระบวนการตรากฎหมาย</b> ซึ่งมาตรา 212 ของรัฐธรรมนูญกำหนดขอบเขตประเด็นที่โต้แย้งได้ไว้เพียงเรื่อง<b>เนื้อหา</b>ของบทบัญญัติว่าขัดหรือแย้งกับรัฐธรรมนูญตามมาตรา 5 เท่านั้น ไม่ได้ครอบคลุมถึงปัญหากระบวนการตรา (ซึ่งเป็นประเด็นที่ตรวจสอบได้เฉพาะช่วงก่อนประกาศใช้ตามมาตรา 148 เท่านั้น และเวลานี้ล่วงเลยขั้นตอนนั้นไปแล้ว) การที่ศาลปกครอง ก. ยอมส่งเรื่องให้ศาลรัฐธรรมนูญผ่านมาตรา 212 ทั้งที่ประเด็นไม่อยู่ในขอบเขตที่กฎหมายกำหนด จึงเป็นการดำเนินการที่ไม่ถูกต้อง"
+    }
+  ]
+},
+{
+  id: "case2",
+  examRef: "แนวข้อสอบ 2564-online ข้อ 4 กรณีที่ 2",
+  title: "ศาลจังหวัด ฮ. ปฏิเสธไม่ส่งข้อโต้แย้งเรื่องสันนิษฐานความผิดยาเสพติด",
+  cat: "review",
+  facts: "ในคดีอาญาคดีหนึ่งซึ่งอยู่ระหว่างการพิจารณาของศาลจังหวัด ฮ. นายสมชายจำเลยในคดีเห็นว่า <b>มาตรา 18 ของพระราชบัญญัติ XYZ</b> ที่บัญญัติว่า 'ผู้ใดมียาเสพติดไว้ในการครอบครอง ให้สันนิษฐานว่าผู้นั้นกระทำความผิดฐานผลิตและจำหน่ายยาเสพติด' ซึ่งเป็นบทบัญญัติที่ตนถูกกล่าวหาและเป็นบทบัญญัติที่ศาลจะใช้บังคับแก่คดี เป็นบทบัญญัติที่<b>ขัดหรือแย้งต่อมาตรา 29 ของรัฐธรรมนูญ</b> ที่วางหลักว่าในคดีอาญาให้สันนิษฐานไว้ก่อนว่าจำเลยไม่มีความผิด บทบัญญัติดังกล่าวจึงเป็นอันใช้บังคับมิได้ตามมาตรา 5 จึงขอให้ศาลจังหวัด ฮ. ส่งคำโต้แย้งให้ศาลรัฐธรรมนูญเพื่อวินิจฉัย ทั้งนี้ ศาลรัฐธรรมนูญยังไม่เคยมีคำวินิจฉัยในประเด็นดังกล่าวมาก่อน<br><br>อย่างไรก็ดี <b>ศาลจังหวัด ฮ. เห็นเองว่าบทบัญญัติข้างต้นไม่ได้ขัดหรือแย้งต่อมาตรา 29 จึงปฏิเสธไม่ส่งคำโต้แย้งดังกล่าวให้ศาลรัฐธรรมนูญวินิจฉัย</b><br><br>คำถาม: ศาลจังหวัด ฮ. ดำเนินการถูกต้องตามรัฐธรรมนูญแห่งราชอาณาจักรไทย พุทธศักราช 2560 หรือไม่ อย่างไร",
+  issues: [
+    {
+      label: "ประเด็นที่ 1 — ศาลมีดุลพินิจปฏิเสธไม่ส่งเรื่องได้หรือไม่",
+      issueQ: "ข้อเท็จจริงนี้เข้าเงื่อนไขการตรวจสอบตามมาตราใด และศาลจังหวัด ฮ. มีดุลพินิจที่จะวินิจฉัยเนื้อหาเองแล้วปฏิเสธไม่ส่งเรื่องได้หรือไม่?",
+      issueOpts: [
+        "เข้าเงื่อนไขมาตรา 212 และศาลมีดุลพินิจเต็มที่ที่จะวินิจฉัยเนื้อหาเองได้เสมอ ไม่ต้องส่งศาลรัฐธรรมนูญ",
+        "เข้าเงื่อนไขมาตรา 212 และเมื่อครบเงื่อนไขทางรูปแบบ (มีการโต้แย้งเรื่องเนื้อหา + ยังไม่เคยมีคำวินิจฉัย) ศาลไม่มีดุลพินิจวินิจฉัยเนื้อหาเอง ต้องส่งให้ศาลรัฐธรรมนูญซึ่งมีอำนาจเฉพาะเป็นผู้ชี้ขาด",
+        "เข้าเงื่อนไขมาตรา 148 ซึ่งใช้กับร่างกฎหมายเท่านั้น",
+        "ไม่เข้าเงื่อนไขใดเลยเพราะเป็นคดีอาญา ไม่ใช่คดีปกครอง"
+      ],
+      issueAns: 1,
+      issueFeedback: "ถูกต้อง — คู่ความ (จำเลย) โต้แย้งว่าบทบัญญัติที่ศาลจะใช้บังคับแก่คดีขัดหรือแย้งต่อรัฐธรรมนูญตามมาตรา 5 (เชิงเนื้อหา) และยังไม่เคยมีคำวินิจฉัยของศาลรัฐธรรมนูญมาก่อน จึงเข้าเงื่อนไขมาตรา 212 ครบถ้วนในทางรูปแบบ อำนาจวินิจฉัยว่าขัดรัฐธรรมนูญจริงหรือไม่เป็นอำนาจเฉพาะของศาลรัฐธรรมนูญเท่านั้น ศาลจังหวัด ฮ. ไม่มีอำนาจชี้ขาดเนื้อหาเองแล้วปฏิเสธไม่ส่ง",
+      ruleQ: "หากศาลจังหวัด ฮ. เห็นว่าข้อโต้แย้งไม่มีน้ำหนักหรือไม่น่าจะขัดรัฐธรรมนูญจริง ศาลควรทำอย่างไรตามกระบวนการที่ถูกต้อง?",
+      ruleOpts: [
+        "ปฏิเสธไม่ส่งเรื่อง แล้วพิพากษาคดีต่อไปโดยใช้บทบัญญัตินั้นตามปกติ",
+        "ส่งความเห็นไปให้ศาลรัฐธรรมนูญวินิจฉัย และดำเนินกระบวนพิจารณาคดีต่อไปได้ แต่ให้รอการพิพากษาคดีไว้ก่อนจนกว่าจะมีคำวินิจฉัย",
+        "ยกฟ้องคดีทันทีโดยไม่ต้องพิจารณาต่อ",
+        "ส่งเรื่องให้ศาลฎีกาแทนศาลรัฐธรรมนูญ"
+      ],
+      ruleAns: 1,
+      ruleFeedback: "ถูกต้อง — เมื่อเข้าเงื่อนไขมาตรา 212 ศาลต้องส่งความเห็นไปยังศาลรัฐธรรมนูญเพื่อวินิจฉัย โดยระหว่างนั้นศาลที่พิจารณาคดีสามารถดำเนินกระบวนพิจารณาคดีต่อไปได้ตามปกติ เพียงแต่ต้องรอการพิพากษาคดีไว้ก่อน เพื่อไม่ให้คู่ความใช้ช่องทางนี้เป็นเครื่องมือประวิงคดี",
+      appQ: "การที่ศาลจังหวัด ฮ. ใช้ดุลพินิจของตนเองวินิจฉัยว่าบทบัญญัติไม่ขัดมาตรา 29 แล้วปฏิเสธไม่ส่งเรื่อง สอดคล้องกับหลักการแบ่งอำนาจในการวินิจฉัยความชอบด้วยรัฐธรรมนูญหรือไม่?",
+      appOpts: [
+        "สอดคล้อง เพราะศาลทุกศาลมีอำนาจวินิจฉัยความชอบด้วยรัฐธรรมนูญได้เองอยู่แล้ว",
+        "ไม่สอดคล้อง เพราะอำนาจวินิจฉัยชี้ขาดว่าบทบัญญัติกฎหมายขัดหรือแย้งกับรัฐธรรมนูญหรือไม่ เป็นอำนาจเฉพาะของศาลรัฐธรรมนูญ ศาลจังหวัดไม่มีอำนาจชี้ขาดเองเพื่อปิดช่องไม่ให้ประเด็นไปถึงศาลรัฐธรรมนูญ",
+        "สอดคล้อง เพราะเป็นคดีอาญาซึ่งศาลยุติธรรมมีอำนาจเบ็ดเสร็จ",
+        "ไม่เกี่ยวข้องกับหลักการแบ่งอำนาจแต่อย่างใด"
+      ],
+      appAns: 1,
+      appFeedback: "ถูกต้อง — ระบบการตรวจสอบความชอบด้วยรัฐธรรมนูญของไทยกำหนดให้ศาลรัฐธรรมนูญเป็นองค์กรที่มีอำนาจเฉพาะ (exclusive power) ในการวินิจฉัยว่ากฎหมายขัดหรือแย้งรัฐธรรมนูญหรือไม่ ศาลจังหวัดซึ่งเป็นศาลยุติธรรมทั่วไปไม่มีอำนาจตัดสินประเด็นนี้เองเพื่อปิดกั้นไม่ให้เรื่องไปถึงศาลรัฐธรรมนูญ",
+      concQ: "สรุปแล้ว ศาลจังหวัด ฮ. ดำเนินการถูกต้องตามรัฐธรรมนูญ 2560 หรือไม่?",
+      concOpts: [
+        "ถูกต้องแล้ว เพราะศาลมีความเชี่ยวชาญเพียงพอที่จะวินิจฉัยเองได้",
+        "ไม่ถูกต้อง เพราะเมื่อครบเงื่อนไขทางรูปแบบตามมาตรา 212 ศาลจังหวัด ฮ. มีหน้าที่ต้องส่งเรื่องให้ศาลรัฐธรรมนูญวินิจฉัย จะใช้ดุลพินิจของตนเองชี้ขาดเนื้อหาแล้วปฏิเสธไม่ส่งไม่ได้",
+        "ถูกต้องแล้ว เพราะข้อโต้แย้งของจำเลยไม่มีมูลตั้งแต่ต้น",
+        "ไม่ถูกต้อง เพราะควรส่งเรื่องให้ผู้ตรวจการแผ่นดินแทน"
+      ],
+      concAns: 1,
+      concFeedback: "<b>สรุป:</b> ศาลจังหวัด ฮ. ดำเนินการ<b>ไม่ถูกต้อง</b> เพราะเมื่อจำเลยโต้แย้งว่าบทบัญญัติที่ศาลจะใช้บังคับแก่คดีขัดหรือแย้งต่อรัฐธรรมนูญ (เข้าเงื่อนไขตามมาตรา 5) และยังไม่เคยมีคำวินิจฉัยของศาลรัฐธรรมนูญในประเด็นนี้มาก่อน เงื่อนไขทางรูปแบบตามมาตรา 212 ก็ครบถ้วนแล้ว ศาลจังหวัด ฮ. จึง<b>มีหน้าที่ต้องส่ง</b>ความเห็นไปให้ศาลรัฐธรรมนูญวินิจฉัย เพราะอำนาจชี้ขาดว่าขัดรัฐธรรมนูญจริงหรือไม่เป็นอำนาจเฉพาะของศาลรัฐธรรมนูญเท่านั้น การที่ศาลจังหวัด ฮ. ใช้ดุลพินิจของตนเองวินิจฉัยเนื้อหาแล้วปฏิเสธไม่ส่งเรื่อง จึงขัดต่อกระบวนการที่รัฐธรรมนูญกำหนดไว้"
+    }
+  ]
+},
+{
+  id: "case3",
+  examRef: "แนวข้อสอบ 2564-online ข้อ 4 (ชุดที่ 2) กรณีที่ 1",
+  title: "ประธานสภาผู้แทนราษฎรกับร่างกฎหมายควบคุมอาชีพประกอบรถยนต์ไฟฟ้า",
+  cat: "review",
+  facts: "หลังจากรัฐสภาให้ความเห็นชอบร่างพระราชบัญญัติว่าด้วยการประกอบอาชีพประกอบรถยนต์ที่ใช้พลังงานไฟฟ้า พ.ศ. .... แต่ก่อนที่นายกรัฐมนตรีจะนำร่างขึ้นทูลเกล้าฯ มีสมาชิกสภาผู้แทนราษฎรพรรคพร้อมพัฒนารวมกัน<b>ไม่น้อยกว่าหนึ่งในสิบของจำนวนสมาชิกทั้งหมดเท่าที่มีอยู่ของทั้งสองสภา</b> เห็นว่าร่างพระราชบัญญัติดังกล่าวมีข้อความกำหนดให้ผู้ที่จะประกอบอาชีพนี้ต้องได้รับใบอนุญาตก่อนเท่านั้น ซึ่งขัดหรือแย้งต่อ<b>มาตรา 40</b> ที่รับรองเสรีภาพในการประกอบอาชีพ จึงเสนอความเห็นไปยังประธานสภาผู้แทนราษฎร<br><br>อย่างไรก็ดี <b>ประธานสภาผู้แทนราษฎรเห็นเองว่าข้อความดังกล่าวไม่ได้ขัดหรือแย้งต่อมาตรา 40</b> เพราะบุคคลยังคงมีเสรีภาพประกอบอาชีพอยู่ เพียงแต่ต้องขอใบอนุญาตเท่านั้น อีกทั้งร่างกฎหมายก็ผ่านความเห็นชอบจากรัฐสภาซึ่งเป็นผู้แทนประชาชนมาแล้วอย่างรอบคอบ จึง<b>ไม่ส่งความเห็นดังกล่าวไปยังศาลรัฐธรรมนูญเพื่อวินิจฉัย</b><br><br>คำถาม: ประธานสภาผู้แทนราษฎรดำเนินการถูกต้องตามรัฐธรรมนูญแห่งราชอาณาจักรไทย พุทธศักราช 2560 หรือไม่ อย่างไร",
+  issues: [
+    {
+      label: "ประเด็นที่ 1 — บทบาทของประธานสภาเมื่อครบเงื่อนไขเสนอเรื่องตามมาตรา 148",
+      issueQ: "เมื่อสมาชิกรัฐสภาไม่น้อยกว่า 1 ใน 10 ของทั้งสองสภาเข้าชื่อกันเสนอความเห็นว่าร่างกฎหมายขัดรัฐธรรมนูญ ประธานสภาผู้แทนราษฎรมีอำนาจหน้าที่อย่างไรตามมาตรา 148?",
+      issueOpts: [
+        "มีอำนาจวินิจฉัยเนื้อหาเองว่าขัดรัฐธรรมนูญจริงหรือไม่ หากเห็นว่าไม่ขัดก็ไม่ต้องส่งเรื่องต่อ",
+        "เมื่อครบเงื่อนไขจำนวนผู้เข้าชื่อตามที่กฎหมายกำหนดแล้ว มีหน้าที่ต้องส่งความเห็นนั้นไปยังศาลรัฐธรรมนูญเพื่อวินิจฉัย ไม่มีดุลพินิจชี้ขาดเนื้อหาเอง",
+        "ต้องรอให้นายกรัฐมนตรีเป็นผู้ตัดสินใจแทน",
+        "ไม่มีบทบาทใด ๆ ในกระบวนการนี้เลย"
+      ],
+      issueAns: 1,
+      issueFeedback: "ถูกต้อง — มาตรา 148 กำหนดกลไกให้สมาชิกรัฐสภาจำนวนหนึ่ง (หรือนายกรัฐมนตรี) เสนอความเห็นต่อประธานแห่งสภาที่ตนเป็นสมาชิก เมื่อครบองค์ประกอบด้านจำนวนแล้ว หน้าที่ของประธานสภาคือส่งต่อความเห็นนั้นไปยังศาลรัฐธรรมนูญซึ่งเป็นองค์กรที่มีอำนาจเฉพาะในการวินิจฉัยเนื้อหา ไม่ใช่วินิจฉัยชี้ขาดเอง",
+      ruleQ: "เหตุผลที่ประธานสภาไม่มีอำนาจชี้ขาดเนื้อหาเองสอดคล้องกับหลักการใดที่เรียนมาเรื่องการตรวจสอบความชอบด้วยรัฐธรรมนูญ?",
+      ruleOpts: [
+        "หลักการที่ว่าการวินิจฉัยความชอบด้วยรัฐธรรมนูญของกฎหมายเป็นอำนาจเฉพาะ (exclusive power) ของศาลรัฐธรรมนูญ ไม่ใช่อำนาจของผู้ดำรงตำแหน่งทางการเมือง",
+        "หลักการที่ว่าประธานสภาเป็นผู้แทนสูงสุดของฝ่ายนิติบัญญัติจึงมีอำนาจตัดสินใจแทนศาลได้",
+        "หลักการห้ามฝ่ายนิติบัญญัติริเริ่มกำหนดรายจ่ายแผ่นดิน",
+        "หลักความยินยอมในการจ่ายเงินแผ่นดิน"
+      ],
+      ruleAns: 0,
+      ruleFeedback: "ถูกต้อง — ตลอดทั้งระบบการตรวจสอบความชอบด้วยรัฐธรรมนูญของไทย (ไม่ว่าจะเป็นมาตรา 148, 212, 173 หรือ 231) วางอยู่บนหลักที่ว่าการชี้ขาดว่ากฎหมายขัดหรือแย้งกับรัฐธรรมนูญหรือไม่ เป็นอำนาจเฉพาะของศาลรัฐธรรมนูญเท่านั้น ผู้ดำรงตำแหน่งทางการเมืองอื่น เช่น ประธานสภา มีหน้าที่เพียงส่งเรื่องต่อเมื่อครบเงื่อนไขรูปแบบ ไม่มีอำนาจชี้ขาดเนื้อหาเอง",
+      appQ: "ข้ออ้างของประธานสภาที่ว่า 'ร่างกฎหมายผ่านความเห็นชอบของรัฐสภาอย่างรอบคอบแล้ว จึงไม่จำเป็นต้องส่งศาลรัฐธรรมนูญอีก' รับฟังได้ตามหลักกฎหมายรัฐธรรมนูญหรือไม่?",
+      appOpts: [
+        "รับฟังได้ เพราะรัฐสภาเป็นผู้แทนประชาชนย่อมกลั่นกรองเนื้อหาได้ดีที่สุดอยู่แล้ว",
+        "รับฟังไม่ได้ เพราะมาตรา 148 มีขึ้นเพื่อเปิดช่องให้ตรวจสอบร่างกฎหมายที่รัฐสภาผ่านความเห็นชอบแล้วอีกชั้นหนึ่งโดยองค์กรตุลาการ ซึ่งเป็นกลไกคุ้มครองเสียงข้างน้อยโดยเฉพาะ การที่รัฐสภาเห็นชอบแล้วไม่ได้ทำให้พ้นจากการตรวจสอบนี้",
+        "รับฟังได้ เพราะมาตรา 148 ใช้เฉพาะกรณีที่รัฐสภายังไม่ได้ลงมติเท่านั้น",
+        "ไม่เกี่ยวข้องกับประเด็นนี้เลย"
+      ],
+      appAns: 1,
+      appFeedback: "ถูกต้อง — จุดประสงค์หลักของมาตรา 148 คือการเปิดโอกาสให้เสียงข้างน้อยในรัฐสภา (ซึ่งพ่ายแพ้ในการลงมติ) สามารถขอให้ศาลรัฐธรรมนูญตรวจสอบร่างกฎหมายที่ผ่านความเห็นชอบจากเสียงข้างมากไปแล้วอีกครั้งหนึ่ง การที่ร่างกฎหมายผ่านสภามาแล้วจึงไม่ใช่เหตุผลที่จะปฏิเสธไม่ส่งเรื่อง เพราะขัดกับเจตนารมณ์ของกลไกคุ้มครองเสียงข้างน้อยนี้โดยตรง",
+      concQ: "สรุปแล้ว ประธานสภาผู้แทนราษฎรดำเนินการถูกต้องตามรัฐธรรมนูญ 2560 หรือไม่?",
+      concOpts: [
+        "ถูกต้องแล้ว เพราะมีอำนาจกลั่นกรองความเห็นของสมาชิกก่อนส่งต่อได้",
+        "ไม่ถูกต้อง เพราะเมื่อครบจำนวนผู้เข้าชื่อตามมาตรา 148 แล้ว ประธานสภามีหน้าที่ต้องส่งความเห็นไปยังศาลรัฐธรรมนูญ จะใช้ดุลพินิจของตนเองชี้ขาดเนื้อหาแล้วระงับไว้ไม่ได้",
+        "ถูกต้องแล้ว เพราะมาตรา 40 ไม่ใช่สิทธิที่ได้รับความคุ้มครองตามรัฐธรรมนูญ",
+        "ไม่ถูกต้อง เพราะควรส่งเรื่องให้ศาลปกครองแทนศาลรัฐธรรมนูญ"
+      ],
+      concAns: 1,
+      concFeedback: "<b>สรุป:</b> ประธานสภาผู้แทนราษฎรดำเนินการ<b>ไม่ถูกต้อง</b> เพราะเมื่อสมาชิกรัฐสภาไม่น้อยกว่า 1 ใน 10 ของทั้งสองสภาเข้าชื่อกันเสนอความเห็นตามมาตรา 148 แล้ว หน้าที่ของประธานสภาคือส่งความเห็นนั้นไปให้<b>ศาลรัฐธรรมนูญ</b>ซึ่งเป็นองค์กรที่มีอำนาจเฉพาะเป็นผู้วินิจฉัยว่าขัดรัฐธรรมนูญหรือไม่ ประธานสภาไม่มีอำนาจใช้ดุลพินิจของตนเองชี้ขาดเนื้อหาแล้วปฏิเสธไม่ส่งต่อ แม้จะเห็นว่าร่างกฎหมายผ่านความเห็นชอบของรัฐสภามาอย่างรอบคอบแล้วก็ตาม เพราะมาตรา 148 มีขึ้นเพื่อคุ้มครองเสียงข้างน้อยโดยเฉพาะ"
+    }
+  ]
+},
+{
+  id: "case4",
+  examRef: "แนวข้อสอบ 2564-online ข้อ 4 (ชุดที่ 2) กรณีที่ 2",
+  title: "ศาลจังหวัด กขค. กับกฎหมายลักทรัพย์วัตถุโบราณที่เจาะจงเพศชาย",
+  cat: "rights",
+  facts: "ในคดีอาญาคดีหนึ่งซึ่งอยู่ระหว่างการพิจารณาของศาลจังหวัด กขค. นายสมปองจำเลยโต้แย้งว่า<b>มาตรา 15 ของพระราชบัญญัติว่าด้วยการกระทำความผิดเกี่ยวกับการลักทรัพย์อันเป็นวัตถุโบราณ พ.ศ. 2565</b> ที่บัญญัติว่า 'ชายใดลักทรัพย์อันเป็นวัตถุโบราณ ต้องระวางโทษ...' ซึ่งเป็นบทบัญญัติที่ตนถูกกล่าวหาและเป็นบทบัญญัติที่ศาลจะใช้บังคับแก่คดี เป็นบทบัญญัติที่<b>ขัดหรือแย้งต่อมาตรา 27 ของรัฐธรรมนูญ</b> ที่รับรองหลักความเสมอภาคและห้ามเลือกปฏิบัติโดยไม่เป็นธรรมเพราะเหตุแห่งความแตกต่างของบุคคล เนื่องจากบทบัญญัติกำหนดความผิดไว้เฉพาะเพศชายเท่านั้น มีลักษณะเลือกปฏิบัติทางเพศ บทบัญญัติดังกล่าวจึงเป็นอันใช้บังคับมิได้ตามมาตรา 5 นายสมปองจึงขอให้ศาลจังหวัด กขค. ส่งคำโต้แย้งให้ศาลรัฐธรรมนูญเพื่อวินิจฉัย ทั้งนี้ ศาลรัฐธรรมนูญยังไม่เคยมีคำวินิจฉัยในประเด็นดังกล่าวมาก่อน<br><br><b>ศาลจังหวัด กขค. จึงส่งคำโต้แย้งของนายสมปองให้ศาลรัฐธรรมนูญเพื่อวินิจฉัย</b><br><br>คำถาม: ศาลจังหวัด กขค. ดำเนินการถูกต้องตามรัฐธรรมนูญแห่งราชอาณาจักรไทย พุทธศักราช 2560 หรือไม่ อย่างไร",
+  issues: [
+    {
+      label: "ประเด็นที่ 1 — ตรวจสอบเงื่อนไขทางรูปแบบของมาตรา 212",
+      issueQ: "ข้อเท็จจริงนี้เข้าเงื่อนไขทางรูปแบบของมาตรา 212 ครบถ้วนหรือไม่ เพราะเหตุใด?",
+      issueOpts: [
+        "ไม่ครบ เพราะบทบัญญัติมาตรา 15 ยังไม่เคยถูกนำมาใช้บังคับกับผู้ใดมาก่อน",
+        "ครบถ้วน เพราะ (1) เป็นบทบัญญัติที่ศาลจะใช้บังคับแก่คดี (2) คู่ความ (จำเลย) โต้แย้งว่าขัดหรือแย้งต่อรัฐธรรมนูญตามมาตรา 5 ในเชิงเนื้อหา และ (3) ยังไม่เคยมีคำวินิจฉัยของศาลรัฐธรรมนูญในประเด็นนี้มาก่อน",
+        "ไม่ครบ เพราะคดีอาญาไม่อยู่ในขอบเขตของมาตรา 212",
+        "ครบถ้วน แต่ต้องรอให้คดีถึงที่สุดก่อนจึงจะส่งได้"
+      ],
+      issueAns: 1,
+      issueFeedback: "ถูกต้อง — องค์ประกอบของมาตรา 212 คือ (1) บทบัญญัติที่ศาลจะใช้บังคับแก่คดีที่กำลังพิจารณา (2) มีการโต้แย้งเชิงเนื้อหาว่าขัดหรือแย้งรัฐธรรมนูญ (ต้องด้วยมาตรา 5) และ (3) ยังไม่เคยมีคำวินิจฉัยของศาลรัฐธรรมนูญในประเด็นเดียวกันมาก่อน ข้อเท็จจริงนี้เข้าองค์ประกอบครบทั้งสามข้อ",
+      ruleQ: "ข้อโต้แย้งของนายสมปอง (กฎหมายเจาะจงเฉพาะเพศชาย) เป็นการอ้างขัดต่อหลักการใดของรัฐธรรมนูญ?",
+      ruleOpts: [
+        "หลักความยินยอมทางภาษี",
+        "หลักความเสมอภาคและการห้ามเลือกปฏิบัติโดยไม่เป็นธรรมเพราะเหตุแห่งความแตกต่างของบุคคล (มาตรา 27)",
+        "หลักการแบ่งแยกอำนาจ",
+        "หลักความเป็นกฎหมายสูงสุดของรัฐธรรมนูญตามมาตรา 5 เท่านั้น โดยไม่มีสิทธิเฉพาะเรื่องใดถูกอ้างถึง"
+      ],
+      ruleAns: 1,
+      ruleFeedback: "ถูกต้อง — ข้อโต้แย้งอ้างมาตรา 27 ซึ่งรับรองหลักความเสมอภาคทางกฎหมายและห้ามเลือกปฏิบัติโดยไม่เป็นธรรมเพราะเหตุแห่งความแตกต่าง เช่น เพศ ถิ่นกำเนิด เชื้อชาติ ฯลฯ การที่กฎหมายกำหนดความผิดไว้เฉพาะ 'ชายใด' จึงเป็นประเด็นที่อาจเข้าข่ายเลือกปฏิบัติทางเพศได้ (ส่วนจะขัดจริงหรือไม่เป็นดุลยพินิจของศาลรัฐธรรมนูญที่จะวินิจฉัยต่อไป)",
+      appQ: "การที่ศาลจังหวัด กขค. ส่งคำโต้แย้งนี้ให้ศาลรัฐธรรมนูญวินิจฉัย โดยไม่ได้ชี้ขาดเสียเองว่ากฎหมายขัดมาตรา 27 จริงหรือไม่ สอดคล้องกับขั้นตอนที่ถูกต้องหรือไม่?",
+      appOpts: [
+        "สอดคล้อง เพราะเมื่อครบเงื่อนไขทางรูปแบบแล้ว ศาลมีหน้าที่ส่งเรื่อง ส่วนการชี้ขาดว่าขัดจริงหรือไม่เป็นอำนาจเฉพาะของศาลรัฐธรรมนูญ",
+        "ไม่สอดคล้อง เพราะศาลจังหวัดควรวินิจฉัยชี้ขาดเองว่าขัดหรือไม่ก่อนตัดสินใจส่ง",
+        "สอดคล้อง แต่ต้องระงับการพิจารณาคดีไว้ทั้งหมดจนกว่าศาลรัฐธรรมนูญจะวินิจฉัยเสร็จ ห้ามดำเนินกระบวนพิจารณาต่อ",
+        "ไม่สอดคล้อง เพราะเรื่องเพศไม่ใช่ประเด็นที่ศาลรัฐธรรมนูญมีอำนาจพิจารณา"
+      ],
+      appAns: 0,
+      appFeedback: "ถูกต้อง — ศาลจังหวัด กขค. ทำถูกขั้นตอนโดยไม่ได้ชี้ขาดเนื้อหาเอง แต่ส่งเรื่องให้ศาลรัฐธรรมนูญซึ่งมีอำนาจเฉพาะเป็นผู้วินิจฉัย ส่วนตัวเลือกที่ว่าต้องระงับกระบวนพิจารณาคดีทั้งหมดนั้นไม่ถูกต้อง เพราะตามหลักที่เรียนมา ศาลสามารถดำเนินกระบวนพิจารณาคดีต่อไปได้ เพียงแต่ต้องรอการ 'พิพากษา' คดีไว้ก่อนเท่านั้น",
+      concQ: "สรุปแล้ว ศาลจังหวัด กขค. ดำเนินการถูกต้องตามรัฐธรรมนูญ 2560 หรือไม่?",
+      concOpts: [
+        "ถูกต้องแล้ว เพราะเข้าเงื่อนไขทางรูปแบบของมาตรา 212 ครบถ้วน และศาลได้ปฏิบัติตามหน้าที่ส่งเรื่องให้ศาลรัฐธรรมนูญโดยไม่ก้าวล่วงไปชี้ขาดเนื้อหาเอง",
+        "ไม่ถูกต้อง เพราะควรปฏิเสธไม่ส่ง เนื่องจากเห็นได้ชัดว่ากฎหมายไม่ขัดรัฐธรรมนูญ",
+        "ไม่ถูกต้อง เพราะประเด็นเรื่องเพศไม่ใช่เรื่องที่ตรวจสอบผ่านมาตรา 212 ได้",
+        "ถูกต้องบางส่วนเท่านั้น เพราะต้องส่งผ่านมาตรา 231 แทน"
+      ],
+      concAns: 0,
+      concFeedback: "<b>สรุป:</b> ศาลจังหวัด กขค. ดำเนินการ<b>ถูกต้องแล้ว</b> เพราะข้อเท็จจริงเข้าองค์ประกอบของมาตรา 212 ครบถ้วน กล่าวคือเป็นบทบัญญัติที่ศาลจะใช้บังคับแก่คดี มีคู่ความโต้แย้งเชิงเนื้อหาว่าขัดกับมาตรา 27 (หลักความเสมอภาค) ซึ่งเป็นการโต้แย้ง 'ต้องด้วยมาตรา 5' และยังไม่เคยมีคำวินิจฉัยของศาลรัฐธรรมนูญในประเด็นนี้มาก่อน ศาลจังหวัด กขค. จึงมีหน้าที่ต้องส่งเรื่องให้ศาลรัฐธรรมนูญวินิจฉัย และได้ปฏิบัติถูกต้องโดยไม่ก้าวล่วงไปตัดสินเนื้อหาเอง อันเป็นการเคารพหลักที่ว่าการชี้ขาดความชอบด้วยรัฐธรรมนูญเป็นอำนาจเฉพาะของศาลรัฐธรรมนูญ"
+    }
+  ]
+}
+];
+
+</script>
+<script>
+/* ================================================================
+   ENGINE — โครงเกม (ตัดโหมดการ์ด/เรียงมาตรา/เรียงขั้นตอนออก
+   เพิ่มโหมดสรุปเนื้อหาแทน)
+   ================================================================ */
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function chunk(arr, size){
+  const out = [];
+  for(let i=0;i<arr.length;i+=size) out.push(arr.slice(i, i+size));
+  return out;
+}
+function esc(s){
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+const STORAGE_PREFIX = 'con251';
+
+const SoundFX = (function(){
+  let ctx = null;
+  let enabled = true;
+  try{ enabled = localStorage.getItem(STORAGE_PREFIX + '_sound') !== 'off'; }catch(e){}
+  function ensureCtx(){
+    if(!ctx){
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if(AC) ctx = new AC();
+    }
+    if(ctx && ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+  function tone(freq, dur, type, gainVal, delay){
+    if(!enabled) return;
+    const c = ensureCtx();
+    if(!c) return;
+    const t0 = c.currentTime + (delay||0);
+    const osc = c.createOscillator();
+    const gain = c.createGain();
+    osc.type = type || 'sine';
+    osc.frequency.setValueAtTime(freq, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(gainVal||0.1, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+dur);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+dur+0.02);
+  }
+  return {
+    click(){ tone(560,0.05,'square',0.05); },
+    tab(){ tone(820,0.035,'sine',0.05); },
+    correct(){ tone(523,0.09,'triangle',0.08); tone(659,0.09,'triangle',0.08,0.09); tone(784,0.14,'triangle',0.09,0.18); },
+    wrong(){ tone(220,0.16,'sawtooth',0.07); tone(160,0.2,'sawtooth',0.06,0.06); },
+    isOn(){ return enabled; },
+    toggle(){
+      enabled = !enabled;
+      try{ localStorage.setItem(STORAGE_PREFIX + '_sound', enabled ? 'on' : 'off'); }catch(e){}
+      return enabled;
+    }
+  };
+})();
+
+/* =========================================================
+   GAMIFICATION — คะแนนรวม (มุมขวาบน)
+   ========================================================= */
+const SCORE_KEY = STORAGE_PREFIX + '_score_v1';
+function loadScore(){ try{ return parseInt(localStorage.getItem(SCORE_KEY)||'0',10)||0; }catch(e){ return 0; } }
+let totalScore = loadScore();
+function saveScoreValue(){ try{ localStorage.setItem(SCORE_KEY, String(totalScore)); }catch(e){} }
+function renderScoreDisplay(){
+  const el = document.getElementById('score-value');
+  if(el) el.textContent = totalScore;
+}
+function addScore(n){
+  totalScore += n;
+  saveScoreValue();
+  renderScoreDisplay();
+  const badge = document.getElementById('global-score');
+  if(badge){
+    badge.classList.remove('score-pop');
+    void badge.offsetWidth;
+    badge.classList.add('score-pop');
+  }
+}
+function loadSeenSet(key){
+  try{ return new Set(JSON.parse(localStorage.getItem(key) || '[]')); }
+  catch(e){ return new Set(); }
+}
+function saveSeenSet(key, set){
+  try{ localStorage.setItem(key, JSON.stringify(Array.from(set))); }
+  catch(e){}
+}
+const studySeenSet = loadSeenSet(STORAGE_PREFIX + '_studySeen');
+
+function makeQuestionTimer(elId, fastThreshold){
+  let startTs = 0, intervalId = null;
+  function update(){
+    const el = document.getElementById(elId);
+    if(!el) return;
+    const sec = (Date.now() - startTs) / 1000;
+    el.textContent = '⏱ ' + sec.toFixed(1) + 's';
+    el.classList.toggle('timer-fast', sec <= fastThreshold);
+  }
+  return {
+    start(){
+      startTs = Date.now();
+      clearInterval(intervalId);
+      intervalId = setInterval(update, 100);
+      update();
+    },
+    stop(){
+      clearInterval(intervalId);
+      return (Date.now() - startTs) / 1000;
+    }
+  };
+}
+const QUIZ_FAST_THRESHOLD = 8;
+const quizTimer = makeQuestionTimer('quiz-timer', QUIZ_FAST_THRESHOLD);
+const iracTimer = makeQuestionTimer('irac-timer', QUIZ_FAST_THRESHOLD);
+
+const ADV_POOL = shuffle(QUIZ_ADV);
+const ADV_SETS = chunk(ADV_POOL, 8);
+
+/* ---------- header text ---------- */
+document.getElementById('hd-crest').textContent = CONFIG.crest;
+document.getElementById('hd-title').textContent = CONFIG.title;
+document.getElementById('hd-sub').textContent = CONFIG.subtitle;
+
+/* ---------- badge / stage painters ---------- */
+function paintBadge(el, catKey){
+  const c = CATEGORIES[catKey];
+  el.style.background = c.soft;
+  el.style.color = c.strong;
+  el.textContent = c.label;
+}
+function paintStage(elId, catKey){
+  const el = document.getElementById(elId);
+  const c = CATEGORIES[catKey];
+  el.style.background = 'linear-gradient(135deg,' + c.strong + ' 0%, ' + c.strong + 'CC 100%)';
+  el.innerHTML =
+    '<span class="stage-icon">' + c.icon + '</span>' +
+    '<span><span class="stage-label">' + esc(c.label) + '</span>' +
+    '<span class="stage-src">' + esc(c.source) + '</span></span>';
+}
+
+/* =========================================================
+   โหมด 1: สรุปเนื้อหา (เรียนเป็นเรื่อง)
+   ========================================================= */
+let studyIdx = 0;
+
+function renderTopicPicker(){
+  const el = document.getElementById('study-topiclist');
+  el.innerHTML = '';
+  SUMMARY_TOPICS.forEach((t,i)=>{
+    const card = document.createElement('button');
+    card.className = 'irac-case-card';
+    const done = studySeenSet.has(t.id);
+    card.innerHTML =
+      '<div class="icref">'+esc(CATEGORIES[t.id] ? CATEGORIES[t.id].label : '')+(done ? ' · ✓ อ่านแล้ว' : '')+'</div>'+
+      '<div class="ictitle">'+esc(t.label)+'</div>';
+    card.addEventListener('click', ()=>{ SoundFX.click(); startStudy(i); });
+    el.appendChild(card);
+  });
+}
+
+function startStudy(idx){
+  studyIdx = idx;
+  document.getElementById('study-picker').style.display = 'none';
+  document.getElementById('study-play').style.display = 'block';
+  document.getElementById('page-header').classList.add('compact');
+  renderStudyTopic();
+  syncStickyBar();
+}
+
+function renderStudyTopic(){
+  const t = SUMMARY_TOPICS[studyIdx];
+  paintBadge(document.getElementById('study-tag'), t.id);
+  const panel = document.getElementById('study-panel');
+  panel.innerHTML = t.html;
+  panel.scrollTop = 0;
+
+  const tocEl = document.getElementById('study-toc');
+  if(t.toc && t.toc.length >= 3){
+    tocEl.style.display = 'block';
+    tocEl.innerHTML = '<div class="study-toc-label">ในหัวข้อนี้</div>' + t.toc.map(item=>
+      '<a href="#'+esc(item.id)+'" class="study-toc-item study-toc-'+item.level+'" data-jump="'+esc(item.id)+'">'+esc(item.text)+'</a>'
+    ).join('');
+    tocEl.querySelectorAll('[data-jump]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const target = panel.querySelector('#'+CSS.escape(a.getAttribute('data-jump')));
+        if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+  } else {
+    tocEl.style.display = 'none';
+    tocEl.innerHTML = '';
+  }
+
+  if(!studySeenSet.has(t.id)){
+    studySeenSet.add(t.id);
+    saveSeenSet(STORAGE_PREFIX + '_studySeen', studySeenSet);
+    addScore(15);
+  }
+
+  document.getElementById('study-prev').style.display = studyIdx > 0 ? 'inline-block' : 'none';
+  document.getElementById('study-next').textContent = (studyIdx < SUMMARY_TOPICS.length - 1) ? 'หัวข้อถัดไป →' : 'กลับไปเลือกหัวข้อ';
+}
+
+document.getElementById('study-prev').addEventListener('click', ()=>{
+  SoundFX.click();
+  if(studyIdx > 0){ studyIdx--; renderStudyTopic(); }
+});
+document.getElementById('study-next').addEventListener('click', ()=>{
+  SoundFX.click();
+  if(studyIdx < SUMMARY_TOPICS.length - 1){ studyIdx++; renderStudyTopic(); }
+  else { backToStudyPicker(); }
+});
+document.getElementById('study-back').addEventListener('click', ()=>{
+  SoundFX.click();
+  backToStudyPicker();
+});
+function backToStudyPicker(){
+  document.getElementById('study-picker').style.display = 'block';
+  document.getElementById('study-play').style.display = 'none';
+  document.getElementById('page-header').classList.remove('compact');
+  renderTopicPicker();
+  syncStickyBar();
+}
+
+/* =========================================================
+   โหมด 2: วิเคราะห์โจทย์ (ข้อสอบจริง)
+   ========================================================= */
+let quizPool = ADV_SETS[0];
+let quizOrder = shuffle(quizPool.map((_,i)=>i));
+let quizIdx = 0;
+let score = 0;
+let answered = false;
+let currentSetIdx = 0;
+let wrongIdxs = [];
+let reviewMode = false;
+
+function loadBest(){
+  try{ return JSON.parse(localStorage.getItem(CONFIG.storageKey) || '{}'); }
+  catch(e){ return {}; }
+}
+function saveBest(setIdx, score, total){
+  const data = loadBest();
+  const key = 'adv_' + setIdx;
+  if(!data[key] || score > data[key].score){
+    data[key] = {score, total};
+    try{ localStorage.setItem(CONFIG.storageKey, JSON.stringify(data)); }catch(e){}
+  }
+}
+function getBest(setIdx){
+  const data = loadBest();
+  return data['adv_' + setIdx] || null;
+}
+
+function renderSetPicker(){
+  const picker = document.getElementById('set-picker');
+  picker.innerHTML = '';
+  ADV_SETS.forEach((s,i)=>{
+    const btn = document.createElement('button');
+    const best = getBest(i);
+    btn.innerHTML = 'ชุด ' + (i+1) + (best ? ' <span class="best">'+best.score+'/'+best.total+'</span>' : '');
+    if(i === currentSetIdx) btn.classList.add('on');
+    btn.addEventListener('click', ()=>{ SoundFX.click(); selectSet(i); });
+    picker.appendChild(btn);
+  });
+}
+
+function selectSet(i){
+  currentSetIdx = i;
+  quizPool = ADV_SETS[i];
+  quizOrder = shuffle(quizPool.map((_,k)=>k));
+  quizIdx = 0; score = 0; wrongIdxs = []; reviewMode = false;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderSetPicker();
+  renderQuiz();
+}
+
+function syncStickyBar(){
+  const quizOn = viewQuiz.classList.contains('on') && document.getElementById('quiz-play').style.display !== 'none';
+  const iracOn = viewIrac.classList.contains('on') && document.getElementById('irac-play').style.display === 'block';
+  const show = quizOn || iracOn;
+  document.getElementById('sticky-bar').style.display = show ? 'block' : 'none';
+  document.body.classList.toggle('has-sticky-bar', show);
+}
+
+function renderQuiz(){
+  const item = quizPool[quizOrder[quizIdx]];
+  document.getElementById('quiz-scenario').textContent = item.q;
+  const label = reviewMode ? 'ทบทวนข้อผิด' : ('ชุด ' + (currentSetIdx+1));
+  document.getElementById('quiz-progress').textContent = label + ' • ข้อ ' + (quizIdx+1) + ' / ' + quizPool.length;
+  document.getElementById('quiz-score').textContent = 'คะแนน ' + score + ' / ' + quizPool.length;
+  document.getElementById('pbar').style.width = (((quizIdx)/quizPool.length)*100) + '%';
+  paintBadge(document.getElementById('quiz-tag'), item.cat);
+  paintStage('quiz-stage', item.cat);
+  const optsDiv = document.getElementById('quiz-options');
+  optsDiv.innerHTML = '';
+  const letters = ['ก','ข','ค','ง'];
+  item.opts.forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.innerHTML = '<span class="abc">'+letters[i]+'</span><span>'+esc(opt)+'</span>';
+    btn.addEventListener('click', ()=> selectAnswer(i));
+    optsDiv.appendChild(btn);
+  });
+  document.getElementById('quiz-explain').style.display = 'none';
+  document.getElementById('quiz-explain').className = 'explain';
+  document.getElementById('quiz-next').style.display = 'none';
+  document.getElementById('quiz-finish').style.display = 'none';
+  answered = false;
+  syncStickyBar();
+  quizTimer.start();
+}
+
+function selectAnswer(i){
+  if(answered) return;
+  answered = true;
+  const elapsed = quizTimer.stop();
+  const item = quizPool[quizOrder[quizIdx]];
+  const optsDiv = document.getElementById('quiz-options');
+  const btns = optsDiv.querySelectorAll('button');
+  btns.forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx === item.ans) b.classList.add('correct');
+    else if(idx === i) b.classList.add('wrong');
+  });
+  const isCorrect = (i === item.ans);
+  let ptsMsg = '';
+  if(isCorrect){
+    score++; SoundFX.correct();
+    const pts = elapsed <= QUIZ_FAST_THRESHOLD ? 20 : 1;
+    addScore(pts);
+    ptsMsg = ' <span class="pts-earned">+' + pts + ' คะแนน' + (elapsed <= QUIZ_FAST_THRESHOLD ? ' ตอบเร็ว!' : '') + '</span>';
+  } else {
+    SoundFX.wrong(); if(!reviewMode) wrongIdxs.push(quizOrder[quizIdx]);
+  }
+  document.getElementById('quiz-score').textContent = 'คะแนน ' + score + ' / ' + quizPool.length;
+  document.getElementById('pbar').style.width = (((quizIdx+1)/quizPool.length)*100) + '%';
+  const explainDiv = document.getElementById('quiz-explain');
+  explainDiv.className = 'explain ' + (isCorrect ? 'ok' : 'bad');
+  explainDiv.innerHTML = '<b>' + (isCorrect ? '✓ ถูกต้อง' : '✗ ยังไม่ถูก — เฉลยคือ ' + letters_ans(item)) + ptsMsg + '</b>' + item.explain;
+  explainDiv.style.display = 'block';
+  if(quizIdx < quizPool.length - 1){
+    document.getElementById('quiz-next').style.display = 'block';
+  } else {
+    document.getElementById('quiz-finish').style.display = 'block';
+  }
+}
+function letters_ans(item){
+  return ['ก','ข','ค','ง'][item.ans];
+}
+
+document.getElementById('quiz-next').addEventListener('click', ()=>{ quizIdx++; renderQuiz(); });
+document.getElementById('quiz-finish').addEventListener('click', showSummary);
+
+function showSummary(){
+  document.getElementById('quiz-play').style.display = 'none';
+  syncStickyBar();
+  const summary = document.getElementById('quiz-summary');
+  summary.style.display = 'block';
+  const total = quizPool.length;
+  document.getElementById('sum-set-label').textContent = reviewMode ? 'ทบทวนข้อที่ผิด' : ('ข้อสอบจริง • ชุด ' + (currentSetIdx+1));
+  document.getElementById('sum-score').textContent = score;
+  document.getElementById('sum-of').textContent = 'จาก ' + total + ' ข้อ';
+  const pct = total ? score/total : 0;
+  const starCount = Math.max(1, Math.round(pct*5));
+  document.getElementById('sum-stars').textContent = '★'.repeat(starCount) + '☆'.repeat(5-starCount);
+  let grade = 'ลุยต่อได้เลย';
+  if(pct >= 0.9) grade = 'เยี่ยมมาก แม่นจริง';
+  else if(pct >= 0.7) grade = 'ดีมาก ใกล้เต็มแล้ว';
+  else if(pct >= 0.5) grade = 'พอใช้ ทบทวนอีกนิด';
+  else grade = 'ลองย้อนไปอ่านสรุปเนื้อหาแล้วมาสู้ใหม่';
+  document.getElementById('sum-grade').textContent = grade;
+
+  if(!reviewMode){
+    saveBest(currentSetIdx, score, total);
+    const best = getBest(currentSetIdx);
+    document.getElementById('sum-best').textContent = best ? ('คะแนนดีที่สุดของชุดนี้: ' + best.score + '/' + best.total) : '';
+  } else {
+    document.getElementById('sum-best').textContent = '';
+  }
+
+  document.getElementById('sum-nextset').style.display = (!reviewMode && currentSetIdx < ADV_SETS.length - 1) ? 'inline-block' : 'none';
+  document.getElementById('sum-review').style.display = (!reviewMode && wrongIdxs.length > 0) ? 'inline-block' : 'none';
+}
+
+document.getElementById('sum-retry').addEventListener('click', ()=>{
+  if(reviewMode){
+    quizOrder = shuffle(quizPool.map((_,i)=>i));
+  } else {
+    quizOrder = shuffle(quizPool.map((_,i)=>i));
+    wrongIdxs = [];
+  }
+  quizIdx = 0; score = 0;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderQuiz();
+});
+document.getElementById('sum-nextset').addEventListener('click', ()=>{ selectSet(currentSetIdx + 1); });
+document.getElementById('sum-review').addEventListener('click', ()=>{
+  reviewMode = true;
+  const basePool = quizPool;
+  quizPool = wrongIdxs.map(i => basePool[i]);
+  quizOrder = shuffle(quizPool.map((_,i)=>i));
+  quizIdx = 0; score = 0;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderQuiz();
+});
+
+/* =========================================================
+   แท็บหลัก + รีเซ็ต
+   ========================================================= */
+const tabStudy = document.getElementById('tab-study');
+const tabQuiz = document.getElementById('tab-quiz');
+const tabIrac = document.getElementById('tab-irac');
+const viewStudy = document.getElementById('view-study');
+const viewQuiz = document.getElementById('view-quiz');
+const viewIrac = document.getElementById('view-irac');
+
+function setTab(which){
+  viewStudy.classList.toggle('on', which==='study');
+  viewQuiz.classList.toggle('on', which==='quiz');
+  viewIrac.classList.toggle('on', which==='irac');
+  tabStudy.classList.toggle('on', which==='study');
+  tabQuiz.classList.toggle('on', which==='quiz');
+  tabIrac.classList.toggle('on', which==='irac');
+  const headerEl = document.getElementById('page-header');
+  if(which === 'quiz'){
+    headerEl.classList.add('compact');
+  } else if(which === 'study'){
+    headerEl.classList.toggle('compact', document.getElementById('study-play').style.display !== 'none');
+  } else if(which === 'irac'){
+    headerEl.classList.toggle('compact', document.getElementById('irac-play').style.display !== 'none');
+  }
+  syncStickyBar();
+}
+tabStudy.addEventListener('click', ()=>{ SoundFX.tab(); setTab('study'); });
+tabQuiz.addEventListener('click', ()=>{ SoundFX.tab(); setTab('quiz'); });
+tabIrac.addEventListener('click', ()=>{ SoundFX.tab(); setTab('irac'); });
+
+const btnSound = document.getElementById('btn-sound');
+btnSound.textContent = SoundFX.isOn() ? '🔊' : '🔇';
+btnSound.addEventListener('click', ()=>{
+  const on = SoundFX.toggle();
+  btnSound.textContent = on ? '🔊' : '🔇';
+  if(on) SoundFX.click();
+});
+
+document.getElementById('btn-reset').addEventListener('click', ()=>{
+  if(!confirm('รีเซ็ตหน้าจอทั้งหมด (คะแนนดีที่สุดที่บันทึกไว้จะยังอยู่) ต้องการดำเนินการต่อหรือไม่?')) return;
+  backToStudyPicker();
+  selectSet(0);
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('irac-play').style.display = 'none';
+  document.getElementById('irac-summary').style.display = 'none';
+  renderCasePicker();
+  setTab('study');
+});
+
+/* =========================================================
+   โหมด 3: ฝึก IRAC
+   ========================================================= */
+let iracCaseIdx = 0;
+let iracIssueIdx = 0;
+let iracStage = 'issue'; // issue -> rule -> app -> conc
+let iracScore = 0;
+let iracTotal = 0;
+
+function renderCasePicker(){
+  const el = document.getElementById('irac-caselist');
+  el.innerHTML = '';
+  IRAC_CASES.forEach((c, i)=>{
+    const card = document.createElement('button');
+    card.className = 'irac-case-card';
+    card.innerHTML =
+      '<div class="icref">'+esc(c.examRef)+' · '+esc(CATEGORIES[c.cat].label)+'</div>'+
+      '<div class="ictitle">'+esc(c.title)+'</div>'+
+      '<div class="icprog">'+c.issues.length+' ประเด็น · '+(c.issues.length*4)+' ขั้นตอน</div>';
+    card.addEventListener('click', ()=>{ SoundFX.click(); startIracCase(i); });
+    el.appendChild(card);
+  });
+}
+
+function startIracCase(idx){
+  iracCaseIdx = idx;
+  iracIssueIdx = 0;
+  iracStage = 'issue';
+  iracScore = 0;
+  iracTotal = IRAC_CASES[idx].issues.length * 4;
+  document.getElementById('irac-picker').style.display = 'none';
+  document.getElementById('irac-play').style.display = 'block';
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('irac-recap-box').style.display = 'none';
+  document.getElementById('irac-stage-box').style.display = 'block';
+  document.getElementById('page-header').classList.add('compact');
+  const c = IRAC_CASES[idx];
+  paintBadge(document.getElementById('irac-case-tag'), c.cat);
+  const factsEl = document.getElementById('irac-facts');
+  factsEl.innerHTML = c.facts;
+  factsEl.classList.remove('expanded');
+  document.getElementById('irac-facts-toggle').textContent = 'ขยายอ่านโจทย์เต็ม ▾';
+  syncStickyBar();
+  renderIracStep();
+}
+
+document.getElementById('irac-facts-toggle').addEventListener('click', ()=>{
+  const factsEl = document.getElementById('irac-facts');
+  const expanded = factsEl.classList.toggle('expanded');
+  document.getElementById('irac-facts-toggle').textContent = expanded ? 'ย่อโจทย์ ▴' : 'ขยายอ่านโจทย์เต็ม ▾';
+});
+
+document.getElementById('irac-back').addEventListener('click', ()=>{
+  SoundFX.click();
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('irac-play').style.display = 'none';
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('page-header').classList.remove('compact');
+  syncStickyBar();
+  renderCasePicker();
+});
+
+const IRAC_STAGE_INFO = {
+  issue:{key:'issue', qKey:'issueQ', optsKey:'issueOpts', ansKey:'issueAns', fbKey:'issueFeedback', label:'เลือกประเด็น', next:'rule'},
+  rule: {key:'rule',  qKey:'ruleQ',  optsKey:'ruleOpts',  ansKey:'ruleAns',  fbKey:'ruleFeedback',  label:'เลือกมาตรา', next:'app'},
+  app:  {key:'app',   qKey:'appQ',   optsKey:'appOpts',   ansKey:'appAns',   fbKey:'appFeedback',   label:'ปรับบท',     next:'conc'},
+  conc: {key:'conc',  qKey:'concQ',  optsKey:'concOpts',  ansKey:'concAns',  fbKey:'concFeedback',  label:'สรุปผล',     next:null}
+};
+
+function renderIracStep(){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  const info = IRAC_STAGE_INFO[iracStage];
+
+  document.getElementById('irac-progress-label').textContent =
+    issue.label + ' · ประเด็น ' + (iracIssueIdx+1) + '/' + c.issues.length + ' · ขั้นตอน: ' + info.label;
+
+  const order = ['issue','rule','app','conc'];
+  const curIdx = order.indexOf(iracStage);
+  document.querySelectorAll('#irac-stepper .irac-step').forEach((el)=>{
+    const step = el.getAttribute('data-step');
+    const stepIdx = order.indexOf(step);
+    el.classList.remove('active','done');
+    if(stepIdx < curIdx) el.classList.add('done');
+    else if(stepIdx === curIdx) el.classList.add('active');
+  });
+
+  document.getElementById('irac-question').textContent = issue[info.qKey];
+  const optsDiv = document.getElementById('irac-options');
+  optsDiv.innerHTML = '';
+  const letters = ['ก','ข','ค','ง'];
+  issue[info.optsKey].forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.innerHTML = '<span class="abc">'+letters[i]+'</span><span>'+esc(opt)+'</span>';
+    btn.addEventListener('click', ()=> selectIracOption(i));
+    optsDiv.appendChild(btn);
+  });
+  document.getElementById('irac-explain').style.display = 'none';
+  document.getElementById('irac-explain').className = 'explain';
+  document.getElementById('irac-next').style.display = 'none';
+  document.getElementById('irac-recap-next').style.display = 'none';
+  iracTimer.start();
+}
+
+function selectIracOption(i){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  const info = IRAC_STAGE_INFO[iracStage];
+  const optsDiv = document.getElementById('irac-options');
+  const btns = optsDiv.querySelectorAll('button');
+  if(btns[0].disabled) return;
+  const elapsed = iracTimer.stop();
+  const ans = issue[info.ansKey];
+  btns.forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx === ans) b.classList.add('correct');
+    else if(idx === i) b.classList.add('wrong');
+  });
+  const isCorrect = (i === ans);
+  let ptsMsg = '';
+  if(isCorrect){
+    iracScore++; SoundFX.correct();
+    const pts = elapsed <= QUIZ_FAST_THRESHOLD ? 20 : 1;
+    addScore(pts);
+    ptsMsg = ' <span class="pts-earned">+' + pts + ' คะแนน' + (elapsed <= QUIZ_FAST_THRESHOLD ? ' ตอบเร็ว!' : '') + '</span>';
+  } else {
+    SoundFX.wrong();
+  }
+  const explainDiv = document.getElementById('irac-explain');
+  explainDiv.className = 'explain ' + (isCorrect ? 'ok' : 'bad');
+  explainDiv.innerHTML = '<b>' + (isCorrect ? '✓ ถูกต้อง' : '✗ ยังไม่ถูก — คำตอบที่ควรเลือกคือ ข้อ ' + ['ก','ข','ค','ง'][ans]) + ptsMsg + '</b>' + issue[info.fbKey];
+  explainDiv.style.display = 'block';
+  document.getElementById('irac-next').style.display = 'block';
+  syncStickyBar();
+}
+
+document.getElementById('irac-next').addEventListener('click', ()=>{
+  SoundFX.click();
+  const info = IRAC_STAGE_INFO[iracStage];
+  if(info.next){
+    iracStage = info.next;
+    renderIracStep();
+  } else {
+    showIssueRecap();
+  }
+});
+
+function showIssueRecap(){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  document.getElementById('irac-stage-box').style.display = 'none';
+  const recapBox = document.getElementById('irac-recap-box');
+  recapBox.style.display = 'block';
+  const isLast = iracIssueIdx >= c.issues.length - 1;
+  document.getElementById('irac-recap-title').textContent = 'ทำครบ ' + issue.label + ' แล้ว';
+  document.getElementById('irac-recap-text').innerHTML = issue.concFeedback;
+  document.getElementById('irac-next').style.display = 'none';
+  document.getElementById('irac-recap-next').textContent = isLast ? 'ดูสรุปผลทั้งข้อ →' : 'ประเด็นถัดไป →';
+  document.getElementById('irac-recap-next').style.display = 'block';
+}
+
+document.getElementById('irac-recap-next').addEventListener('click', ()=>{
+  SoundFX.click();
+  const c = IRAC_CASES[iracCaseIdx];
+  document.getElementById('irac-recap-box').style.display = 'none';
+  document.getElementById('irac-recap-next').style.display = 'none';
+  if(iracIssueIdx >= c.issues.length - 1){
+    showIracCaseSummary();
+  } else {
+    iracIssueIdx++;
+    iracStage = 'issue';
+    document.getElementById('irac-stage-box').style.display = 'block';
+    renderIracStep();
+  }
+});
+
+function showIracCaseSummary(){
+  document.getElementById('irac-play').style.display = 'none';
+  syncStickyBar();
+  const summary = document.getElementById('irac-summary');
+  summary.style.display = 'block';
+  const c = IRAC_CASES[iracCaseIdx];
+  document.getElementById('irac-sum-label').textContent = c.title;
+  document.getElementById('irac-sum-score').textContent = iracScore;
+  document.getElementById('irac-sum-of').textContent = 'จาก ' + iracTotal + ' ขั้นตอน';
+  const pct = iracTotal ? iracScore/iracTotal : 0;
+  const starCount = Math.max(1, Math.round(pct*5));
+  document.getElementById('irac-sum-stars').textContent = '★'.repeat(starCount) + '☆'.repeat(5-starCount);
+  let grade = 'ลุยต่อได้เลย';
+  if(pct >= 0.9) grade = 'วินิจฉัยแม่นมาก เก่งมาก!';
+  else if(pct >= 0.7) grade = 'ดีมาก ใกล้ครบทุกประเด็นแล้ว';
+  else if(pct >= 0.5) grade = 'พอใช้ ลองย้อนทบทวนประเด็นที่พลาด';
+  else grade = 'ลองอ่านโจทย์อีกครั้งแล้วไล่ทีละประเด็นใหม่';
+  document.getElementById('irac-sum-grade').textContent = grade;
+  document.getElementById('irac-sum-nextcase').style.display = (iracCaseIdx < IRAC_CASES.length - 1) ? 'inline-block' : 'none';
+}
+
+document.getElementById('irac-sum-retry').addEventListener('click', ()=>{
+  SoundFX.click();
+  startIracCase(iracCaseIdx);
+});
+document.getElementById('irac-sum-back').addEventListener('click', ()=>{
+  SoundFX.click();
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('page-header').classList.remove('compact');
+  renderCasePicker();
+});
+document.getElementById('irac-sum-nextcase').addEventListener('click', ()=>{
+  SoundFX.click();
+  startIracCase(iracCaseIdx + 1);
+});
+
+/* ---------- init ---------- */
+renderScoreDisplay();
+renderTopicPicker();
+renderSetPicker();
+renderQuiz();
+renderCasePicker();
+setTab('study');
+</script>
+
+</html>

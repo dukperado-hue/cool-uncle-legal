@@ -1,0 +1,2303 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>น.300 กฎหมายลักษณะมรดก</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;900&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+<style>
+:root{
+  --paper:#FBF9F4;
+  --card:#FFFFFF;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --gold-soft:#F3E8CF;
+  --ok:#1E7A4F;
+  --ok-bg:#E6F4EC;
+  --bad:#B23A3A;
+  --bad-bg:#FBEAEA;
+  --accent:#2E4A7A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+/* ---------- top home bar (flat, for future multi-subject hub) ---------- */
+.home-bar{
+  display:flex;align-items:center;gap:10px;
+  background:#EFEAE0;border-bottom:1px solid var(--line);
+  padding:10px 16px;font-size:13px;color:var(--ink-soft);
+}
+.home-bar-link{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.home-bar-link:hover{text-decoration:underline}
+.home-bar-sep{color:var(--ink-faint)}
+.home-bar-current{font-weight:600;color:var(--ink-soft)}
+.home-bar-score{
+  margin-left:auto;font-weight:800;color:#8F6511;background:var(--gold-soft);
+  padding:4px 12px;border-radius:999px;font-size:13px;white-space:nowrap;
+  transition:transform .15s;
+}
+.home-bar-score.score-pop{animation:scorePop .4s ease}
+@keyframes scorePop{
+  0%{transform:scale(1)}
+  35%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),
+    var(--paper);
+  color:var(--ink);
+  min-height:100vh;
+  padding:20px 14px 60px;
+  font-size:16px;
+  line-height:1.75;
+}
+.wrap{max-width:860px;margin:0 auto}
+
+/* ---------- header ---------- */
+header{text-align:center;margin-bottom:22px;transition:opacity .15s}
+header.compact{margin-bottom:10px}
+header.compact .crest{display:none}
+header.compact h1{font-size:19px}
+header.compact .subtitle{display:none}
+.crest{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Noto Serif Thai',serif;
+  font-size:13px;letter-spacing:.35em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:6px;
+}
+.crest::before,.crest::after{content:"";width:44px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+.crest::after{background:linear-gradient(90deg,var(--gold),transparent);}
+h1{
+  font-family:'Noto Serif Thai',serif;
+  font-size:clamp(24px,5vw,36px);
+  font-weight:700;line-height:1.3;
+}
+.subtitle{color:var(--ink-soft);font-size:15px;margin-top:2px}
+
+/* ---------- tabs ---------- */
+.tabbar{
+  display:flex;gap:6px;background:#F1EDE2;border:1px solid var(--line);
+  border-radius:999px;padding:5px;margin:20px auto 26px;max-width:600px;
+}
+.tabbar button{
+  flex:1;border:none;background:transparent;border-radius:999px;
+  padding:10px 5px;font-family:inherit;font-size:13.5px;font-weight:600;
+  color:var(--ink-soft);cursor:pointer;transition:all .2s;
+}
+.tabbar button.on{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+.tabbar button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#btn-reset,#btn-sound{
+  flex:0 0 38px;font-size:15px;color:var(--ink-faint);
+}
+#btn-reset:hover{color:var(--bad)}
+#btn-sound:hover{color:var(--accent)}
+
+/* ---------- sticky bottom action bar ---------- */
+.sticky-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
+  background:linear-gradient(180deg,rgba(251,249,244,0) 0%,var(--paper) 35%);
+  padding:22px 14px calc(14px + env(safe-area-inset-bottom,0px));
+}
+.sticky-bar-inner{max-width:860px;margin:0 auto;display:flex;gap:10px}
+.sticky-bar-inner button{
+  flex:1;box-shadow:0 6px 20px rgba(34,40,58,.22);
+  padding:18px 20px;font-size:17.5px;font-weight:700;border-radius:14px;
+  letter-spacing:.01em;
+}
+body.has-sticky-bar{padding-bottom:92px}
+@media(max-width:520px){
+  .sticky-bar{padding:18px 10px calc(12px + env(safe-area-inset-bottom,0px))}
+  .sticky-bar-inner button{padding:16px 14px;font-size:16px}
+}
+.irac-caselist{display:flex;flex-direction:column;gap:10px}
+.irac-case-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;text-align:left;cursor:pointer;transition:border-color .15s;
+}
+.irac-case-card:hover{border-color:var(--gold)}
+.irac-case-card .icref{font-size:12px;color:var(--ink-faint);margin-bottom:4px}
+.irac-case-card .ictitle{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:600}
+.irac-case-card .icprog{font-size:12.5px;color:var(--gold);margin-top:6px;font-weight:600}
+
+.irac-facts{
+  background:#FBF6E8;border:1px solid var(--gold-soft);border-radius:var(--radius);
+  padding:14px 16px;margin-bottom:6px;font-size:15px;line-height:1.85;color:var(--ink);
+  max-height:92px;overflow:hidden;position:relative;
+}
+.irac-facts::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:34px;
+  background:linear-gradient(180deg,transparent,#FBF6E8);pointer-events:none;
+}
+.irac-facts.expanded{max-height:none}
+.irac-facts.expanded::after{display:none}
+.irac-facts-toggle{
+  display:block;width:100%;text-align:center;font-size:13px;color:var(--accent);font-weight:600;
+  background:none;border:none;padding:5px 0 14px;cursor:pointer;
+}
+
+.irac-stepper{display:flex;gap:5px;margin-bottom:8px}
+.irac-step{
+  flex:1;text-align:center;font-size:11px;font-weight:600;color:var(--ink-faint);
+  padding:5px 2px;border-radius:8px;background:#EEEBE0;border:1px solid transparent;
+}
+.irac-step.active{background:var(--accent);color:#fff}
+.irac-step.done{background:var(--ok-bg);color:var(--ok);border-color:#BFE3CE}
+
+.irac-progress-label{font-size:12.5px;color:var(--ink-soft);margin-bottom:6px;font-weight:600}
+.irac-back{background:none;border:none;color:var(--ink-faint);font-size:13px;cursor:pointer;margin-bottom:12px;padding:0}
+.irac-back:hover{color:var(--accent)}
+
+.irac-issue-recap{
+  background:var(--ok-bg);border:1px solid #BFE3CE;border-radius:var(--radius);
+  padding:16px 18px;text-align:center;
+}
+.irac-issue-recap .big{font-family:'Noto Serif Thai',serif;font-size:18px;font-weight:700;color:#14563A;margin-bottom:6px}
+
+/* ---------- stage banner (แถบธีมตามหมวด แทน SVG scene) ---------- */
+.stage{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  margin-bottom:14px;min-height:74px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px;border:1px solid rgba(0,0,0,.06);
+}
+.stage .stage-icon{font-size:30px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.15))}
+.stage .stage-label{font-family:'Noto Serif Thai',serif;font-weight:700;font-size:15px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.stage .stage-src{font-size:11.5px;color:rgba(255,255,255,.85);margin-top:2px;display:block}
+@media(max-width:520px){.stage{min-height:60px;padding:10px}.stage .stage-icon{font-size:24px}.stage .stage-label{font-size:13px}}
+
+/* ---------- มาตรา chip strip (โหมดการ์ด) ---------- */
+.matra-chips{display:none;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:14px}
+.matra-chips-label{font-size:12.5px;color:var(--ink-faint);font-weight:600;margin-right:2px}
+.matra-chip{
+  --chip-color:#888;
+  font-family:'Noto Serif Thai',serif;font-size:12.5px;font-weight:700;
+  background:var(--card);border:1.5px solid var(--line);color:var(--ink-soft);
+  border-radius:999px;padding:5px 12px;cursor:pointer;transition:all .15s;
+}
+.matra-chip:hover{border-color:var(--chip-color);color:var(--chip-color)}
+.matra-chip.active{background:var(--chip-color);border-color:var(--chip-color);color:#fff}
+
+button{font-family:inherit}
+select{
+  font-family:inherit;font-size:15px;color:var(--ink);
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:10px 12px;width:100%;
+}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.row select{flex:1;min-width:170px;width:auto}
+.muted{color:var(--ink-soft);font-size:14px;white-space:nowrap}
+
+/* ---------- flashcard ---------- */
+.flip-stage{perspective:1200px}
+.flashcard{
+  position:relative;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  min-height:250px;padding:34px 26px 30px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:10px;overflow:hidden;
+  transition:transform .16s ease;
+}
+.flashcard.flipping{transform:rotateY(90deg)}
+@media (prefers-reduced-motion:reduce){.flashcard.flipping{transform:none}}
+.ribbon{
+  position:absolute;top:0;left:26px;width:34px;height:56px;
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%);
+}
+.chapter-tag{
+  font-size:12.5px;font-weight:700;letter-spacing:.02em;
+  padding:4px 14px;border-radius:999px;
+}
+.src-tag{font-size:11.5px;color:var(--ink-faint);margin-top:2px;font-weight:600}
+.sec-no{
+  font-family:'Noto Serif Thai',serif;font-size:clamp(30px,7vw,44px);
+  font-weight:700;line-height:1.25;
+}
+.stars{color:var(--gold);font-size:16px;letter-spacing:.15em}
+.hint{font-size:13px;color:var(--ink-faint);margin-top:10px}
+.face-back .card-title{font-family:'Noto Serif Thai',serif;font-size:17px;font-weight:600;line-height:1.6}
+.face-back .card-result{font-size:16px;margin-top:10px;line-height:1.8}
+.face-back .card-note{
+  font-size:14px;color:var(--ink-soft);margin-top:12px;line-height:1.7;
+  border-top:1px dashed var(--line);padding-top:10px;max-width:560px;
+}
+.nav3{display:flex;gap:10px;margin-top:14px}
+.nav3 button{
+  flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:12px;font-size:14.5px;font-weight:600;color:var(--ink);cursor:pointer;
+  transition:border-color .15s, transform .1s;
+}
+.nav3 button:hover{border-color:var(--ink-faint)}
+.nav3 button:active{transform:scale(.98)}
+.nav3 button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- sequence list ---------- */
+.seq-item{
+  background:var(--card);border:1px solid var(--line);border-left-width:6px;
+  border-radius:12px;padding:14px 16px;margin-bottom:10px;
+  display:flex;gap:12px;box-shadow:0 1px 2px rgba(34,40,58,.04);
+}
+.seq-num{
+  font-family:'Noto Serif Thai',serif;font-weight:700;font-size:15px;
+  color:var(--ink-faint);min-width:22px;padding-top:3px;
+}
+.seq-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.seq-sec{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:700}
+.seq-title{font-size:15px;font-weight:600}
+.seq-res{font-size:14.5px;margin-top:4px;line-height:1.7}
+.seq-note{font-size:13.5px;color:var(--ink-soft);margin-top:5px;line-height:1.65;border-top:1px dashed var(--line);padding-top:5px}
+.seq-stars{color:var(--gold);font-size:12px;letter-spacing:.1em}
+.seq-src{font-size:12px;color:var(--ink-faint);font-weight:600}
+
+/* ---------- quiz ---------- */
+.lvlbar{display:flex;gap:8px;margin-bottom:14px}
+.lvlbar button{
+  flex:1;border:1.5px solid var(--line);background:var(--card);border-radius:12px;
+  padding:12px 8px;font-size:14.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+}
+.lvlbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.lvlbar .lvl-desc{display:block;font-size:12px;font-weight:400;color:var(--ink-faint);margin-top:2px}
+.lvlbar button.on .lvl-desc{color:var(--accent)}
+
+.setbar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.setbar button{
+  border:1px solid var(--line);background:var(--card);border-radius:999px;
+  padding:7px 15px;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.setbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.setbar .best{color:var(--gold);font-size:12px;font-weight:700}
+
+.progressbar{height:6px;background:#EDE9DD;border-radius:99px;overflow:hidden;margin-bottom:8px}
+.progressbar>div{height:100%;background:linear-gradient(90deg,var(--accent),#5E7BB0);border-radius:99px;transition:width .3s}
+.quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:14px;gap:10px}
+.quiz-timer{
+  font-weight:700;color:var(--ink-soft);background:#EEEBE0;border-radius:999px;
+  padding:3px 10px;font-size:13px;white-space:nowrap;
+}
+.quiz-timer.timer-fast{background:var(--ok-bg);color:var(--ok)}
+.quiz-meta .score{font-weight:700}
+
+.scenario{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:20px 22px;margin-bottom:14px;
+}
+.scenario .qtext{font-size:16.5px;line-height:1.9}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opts button{
+  text-align:left;background:var(--card);border:1.5px solid var(--line);
+  border-radius:12px;padding:14px 16px;font-size:15px;line-height:1.7;
+  color:var(--ink);cursor:pointer;transition:border-color .15s, background .15s;
+  display:flex;gap:10px;
+}
+.opts button:hover:not(:disabled){border-color:var(--ink-faint)}
+.opts button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opts .abc{
+  font-family:'Noto Serif Thai',serif;font-weight:700;color:var(--ink-faint);
+  min-width:20px;
+}
+.opts button.correct{border-color:var(--ok);background:var(--ok-bg)}
+.opts button.correct .abc{color:var(--ok)}
+.opts button.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opts button.wrong .abc{color:var(--bad)}
+.opts button:disabled{cursor:default;opacity:.92}
+
+.explain{
+  display:none;margin-top:14px;border-radius:12px;padding:16px 18px;
+  font-size:15px;line-height:1.85;border:1px solid;
+}
+.explain.ok{background:var(--ok-bg);border-color:#BFE3CE;color:#14563A}
+.explain.bad{background:var(--bad-bg);border-color:#F0C9C9;color:#7C2A2A}
+.explain b{display:block;margin-bottom:4px;font-size:15.5px}
+.pts-earned{
+  display:inline-block;background:var(--gold);color:#fff;font-weight:800;
+  font-size:12.5px;padding:2px 9px;border-radius:999px;margin-left:6px;vertical-align:middle;
+}
+
+.btn-primary{background:var(--accent);color:#fff;border:none}
+.btn-primary:hover{background:#26406B}
+.btn-ghost{background:var(--card);border:1.5px solid var(--line) !important;color:var(--ink)}
+
+/* ---------- summary ---------- */
+.summary{
+  display:none;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:34px 24px;text-align:center;
+}
+.summary .grade{font-family:'Noto Serif Thai',serif;font-size:24px;font-weight:700;margin-top:8px}
+.summary .bigscore{font-family:'Noto Serif Thai',serif;font-size:52px;font-weight:700;color:var(--accent);line-height:1.2}
+.summary .of{font-size:15px;color:var(--ink-soft)}
+.summary .gstars{color:var(--gold);font-size:22px;letter-spacing:.2em;margin-top:6px}
+.summary .sum-actions{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+.summary .sum-actions button{
+  border-radius:12px;padding:12px 22px;font-size:14.5px;font-weight:700;cursor:pointer;border:none;
+}
+footer{
+  margin-top:40px;text-align:center;font-size:12.5px;color:var(--ink-faint);
+  border-top:1px solid var(--line);padding-top:16px;
+}
+.view{display:none}
+.view.on{display:block}
+
+/* ---------- โหมด 5: สรุปเนื้อหา ---------- */
+.study-nav3{display:flex;gap:10px}
+.study-disclaimer{
+  background:#FFF6E0;border:1px solid #F0D896;color:#7A5A0A;
+  border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;
+  text-align:center;margin-bottom:14px;
+}
+.study-nav3 button{
+  flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:11px;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer;
+}
+.study-nav3 button:hover{border-color:var(--ink-faint)}
+.study-panel{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:22px 24px;margin:14px 0;
+}
+.study-title{
+  font-family:'Noto Serif Thai',serif;font-size:19px;font-weight:700;color:var(--accent);
+  margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid var(--gold-soft);
+}
+.study-toc{
+  background:#F6F3EA;border:1px solid var(--gold-soft);border-radius:12px;
+  padding:12px 14px;margin-bottom:22px;
+}
+.study-toc-label{font-size:12.5px;font-weight:700;color:var(--gold);margin-bottom:8px}
+.study-toc-list{display:flex;flex-wrap:wrap;gap:6px 8px}
+.study-toc-item{
+  font-size:12.5px;text-decoration:none;padding:5px 10px;border-radius:999px;
+  background:var(--card);border:1px solid var(--line);color:var(--ink-soft);
+  transition:border-color .15s,color .15s;
+}
+.study-toc-item:hover{border-color:var(--accent);color:var(--accent)}
+.study-toc-item.toc-major{
+  background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700;
+  flex-basis:100%;border-radius:8px;padding:7px 12px;
+}
+.study-toc-item.toc-major:hover{background:#26406B;color:#fff}
+.study-content{font-size:15px;line-height:1.9;color:var(--ink)}
+.study-content h4,.study-content h5,.study-content h6{
+  font-family:'Noto Serif Thai',serif;color:var(--accent);line-height:1.5;
+}
+.study-content h4{font-size:18px;margin:40px 0 14px;padding-top:14px;border-top:1px solid var(--line)}
+.study-content h4:first-child{margin-top:0;padding-top:0;border-top:none}
+.study-content h5{font-size:16.5px;margin:30px 0 10px}
+.study-content h6{font-size:15.5px;color:var(--gold);margin:22px 0 8px}
+.study-content p{margin:8px 0}
+.study-content ul,.study-content ol{margin:6px 0 10px 22px}
+.study-content li{margin:4px 0}
+.study-content b{color:var(--ink);font-weight:700}
+.study-content hr{border:none;border-top:1px dashed var(--line);margin:18px 0}
+.study-content a{color:var(--accent)}
+.study-content .muted{color:var(--ink-faint);font-style:italic}
+.study-content .tbl-wrap{overflow-x:auto;margin:10px 0}
+.study-content table{border-collapse:collapse;width:100%;font-size:14px}
+.study-content th,.study-content td{
+  border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;
+}
+.study-content th{background:var(--gold-soft);color:#5A4415;font-weight:700}
+.study-content tr:nth-child(even) td{background:#FBF9F3}
+@media(max-width:640px){
+  .tabbar{flex-wrap:wrap;border-radius:16px;max-width:100%}
+  .tabbar button{flex:1 1 30%}
+  #btn-reset,#btn-sound{flex:0 0 auto}
+}
+@media(max-width:520px){
+  .study-panel{padding:16px}
+  .study-title{font-size:17px}
+}
+@media(max-width:520px){
+  body{padding:14px 10px 50px}
+  .flashcard{padding:28px 16px 24px}
+  .scenario{padding:16px}
+}
+.order-placed-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;min-height:10px}
+.order-placed-row{
+  display:flex;align-items:center;gap:10px;
+  background:var(--card);border:1.5px solid var(--line);border-radius:12px;
+  padding:12px 14px;font-size:14.5px;line-height:1.6;
+}
+.order-placed-row.correct{border-color:var(--ok);background:var(--ok-bg)}
+.order-placed-row.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.order-num{
+  font-family:'Noto Serif Thai',serif;font-weight:700;color:var(--accent);
+  background:#EEF2F9;border-radius:999px;width:24px;height:24px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;
+}
+.order-placed-row.correct .order-num{background:var(--ok);color:#fff}
+.order-placed-row.wrong .order-num{background:var(--bad);color:#fff}
+.order-txt{flex:1}
+.order-remove{
+  background:none;border:none;color:var(--ink-faint);cursor:pointer;font-size:15px;
+  padding:2px 6px;flex-shrink:0;
+}
+.order-remove:hover{color:var(--bad)}
+.order-pool{display:flex;flex-wrap:wrap;gap:8px}
+.order-chip{
+  background:var(--card);border:1.5px solid var(--line);border-radius:12px;
+  padding:10px 14px;font-size:14px;cursor:pointer;text-align:left;line-height:1.6;
+  transition:border-color .15s;flex:1 1 100%;
+}
+.order-chip:hover:not(:disabled){border-color:var(--accent)}
+.order-chip:disabled{opacity:.5;cursor:default}
+</style>
+</head>
+<body>
+<div class="home-bar">
+  <a href="index.html" class="home-bar-link">← กลับหน้าหลัก</a>
+  <span class="home-bar-sep">·</span>
+  <span class="home-bar-current">น.300 กฎหมายลักษณะมรดก</span>
+  <span class="home-bar-score" id="global-score">🏆 <span id="score-value">0</span> คะแนน</span>
+</div>
+<div class="wrap">
+
+<header id="page-header">
+  <div class="crest" id="hd-crest">น.300 กฎหมายลักษณะมรดก</div>
+  <h1 id="hd-title">ห้องซ้อมสอบ น.300 กฎหมายลักษณะมรดก</h1>
+  <div class="subtitle" id="hd-sub">ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 6</div>
+</header>
+
+<nav class="tabbar" aria-label="โหมดเกม">
+  <button id="tab-card" class="on">การ์ดจำมาตรา</button>
+  <button id="tab-seq">เรียงมาตรา</button>
+  <button id="tab-quiz">วิเคราะห์โจทย์</button>
+  <button id="tab-irac">ฝึก IRAC</button>
+  <button id="tab-order">เรียงขั้นตอน</button>
+  <button id="btn-sound" title="ปิด/เปิดเสียง" aria-label="ปิด/เปิดเสียง">🔊</button>
+  <button id="btn-reset" title="รีเซ็ตทั้งหมด" aria-label="รีเซ็ตทั้งหมด">↺</button>
+</nav>
+
+<!-- ============ โหมด 1: การ์ด ============ -->
+<section id="view-card" class="view on">
+  <div class="row">
+    <select id="cat-select" aria-label="เลือกหมวด"></select>
+    <span class="muted" id="card-progress"></span>
+  </div>
+  <div class="matra-chips" id="matra-chips"></div>
+  <div class="stage" id="card-stage" aria-hidden="true"></div>
+  <div class="flip-stage">
+    <div class="flashcard" id="flip-card" role="button" tabindex="0" aria-label="แตะเพื่อพลิกการ์ด">
+      <div class="ribbon" id="card-ribbon"></div>
+      <div class="chapter-tag" id="cat-badge"></div>
+      <div class="face-front" id="face-front">
+        <div class="sec-no" id="card-section"></div>
+        <div class="src-tag" id="card-src-front"></div>
+        <div class="stars" id="card-stars"></div>
+        <div class="hint">แตะการ์ดเพื่อดูคำตอบ · ปุ่มลูกศรเลื่อนการ์ด</div>
+      </div>
+      <div class="face-back" id="face-back" style="display:none">
+        <div class="card-title" id="card-title"></div>
+        <div class="src-tag" id="card-src-back"></div>
+        <div class="card-result" id="card-result"></div>
+        <div class="card-note" id="card-note"></div>
+      </div>
+    </div>
+  </div>
+  <div class="nav3">
+    <button id="btn-prev">← ก่อนหน้า</button>
+    <button id="btn-shuffle">⇄ สุ่มใหม่</button>
+    <button id="btn-next">ถัดไป →</button>
+  </div>
+</section>
+
+<!-- ============ โหมด 2: เรียงมาตรา ============ -->
+<section id="view-seq" class="view">
+  <div class="row"><select id="seq-select" aria-label="เลือกหมวดเรียงมาตรา"></select></div>
+  <div id="seq-list"></div>
+</section>
+
+<!-- ============ โหมด 3: วิเคราะห์โจทย์ ============ -->
+<section id="view-quiz" class="view">
+  <div class="lvlbar">
+    <button id="lvl-basic" class="on">พื้นฐาน<span class="lvl-desc">ท่องจำมาตรา–ผลกฎหมาย</span></button>
+    <button id="lvl-adv">ข้อสอบจริง<span class="lvl-desc">โจทย์สถานการณ์แนวข้อสอบ</span></button>
+  </div>
+  <div class="setbar" id="set-picker"></div>
+
+  <div id="quiz-play">
+    <div class="progressbar"><div id="pbar" style="width:0%"></div></div>
+    <div class="quiz-meta">
+      <span class="muted" id="quiz-progress"></span>
+      <span class="quiz-timer" id="quiz-timer">⏱ 0.0s</span>
+      <span class="score" id="quiz-score"></span>
+    </div>
+    <div class="chapter-tag" id="quiz-tag" style="display:inline-block;margin-bottom:10px"></div>
+    <div class="stage" id="quiz-stage" aria-hidden="true"></div>
+    <div class="scenario"><div class="qtext" id="quiz-scenario"></div></div>
+    <div class="opts" id="quiz-options"></div>
+    <div class="explain" id="quiz-explain"></div>
+  </div>
+
+  <div class="summary" id="quiz-summary">
+    <div class="muted" id="sum-set-label"></div>
+    <div class="bigscore" id="sum-score">0</div>
+    <div class="of" id="sum-of">จาก 10 ข้อ</div>
+    <div class="gstars" id="sum-stars"></div>
+    <div class="grade" id="sum-grade"></div>
+    <div class="muted" id="sum-best" style="margin-top:6px"></div>
+    <div class="sum-actions">
+      <button id="sum-review" class="btn-ghost" style="display:none">ทบทวนข้อที่ผิด</button>
+      <button id="sum-retry" class="btn-ghost">ทำชุดนี้ซ้ำ</button>
+      <button id="sum-nextset" class="btn-primary" style="display:none">ชุดถัดไป →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ โหมด 4: ฝึก IRAC ============ -->
+<section id="view-irac" class="view">
+  <div id="irac-picker">
+    <p class="muted" style="margin-bottom:14px;font-size:14px">เลือกข้อสอบจริงที่จะฝึกวินิจฉัยแบบ IRAC ทีละประเด็น: ตั้งประเด็น → เลือกมาตรา → ปรับบท → สรุปผล</p>
+    <div class="irac-caselist" id="irac-caselist"></div>
+  </div>
+
+  <div id="irac-play" style="display:none">
+    <button class="irac-back" id="irac-back">← กลับไปเลือกข้อสอบ</button>
+    <div class="chapter-tag" id="irac-case-tag" style="display:inline-block;margin-bottom:6px"></div>
+    <div class="irac-facts" id="irac-facts"></div>
+    <button class="irac-facts-toggle" id="irac-facts-toggle">ขยายอ่านโจทย์เต็ม ▾</button>
+
+    <div style="margin-top:2px">
+      <div class="irac-progress-label" id="irac-progress-label"></div>
+      <span class="quiz-timer" id="irac-timer">⏱ 0.0s</span>
+      <div class="irac-stepper" id="irac-stepper">
+        <div class="irac-step" data-step="issue">1. ประเด็น</div>
+        <div class="irac-step" data-step="rule">2. มาตรา</div>
+        <div class="irac-step" data-step="app">3. ปรับบท</div>
+        <div class="irac-step" data-step="conc">4. สรุปผล</div>
+      </div>
+    </div>
+
+    <div id="irac-stage-box">
+      <div class="scenario" style="padding:16px 18px;margin-bottom:10px"><div class="qtext" id="irac-question" style="font-size:16.5px"></div></div>
+      <div class="opts" id="irac-options"></div>
+      <div class="explain" id="irac-explain"></div>
+    </div>
+
+    <div id="irac-recap-box" style="display:none">
+      <div class="irac-issue-recap">
+        <div class="big" id="irac-recap-title"></div>
+        <div id="irac-recap-text" style="font-size:14.5px;line-height:1.8;color:#14563A"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary" id="irac-summary">
+    <div class="muted" id="irac-sum-label"></div>
+    <div class="bigscore" id="irac-sum-score">0</div>
+    <div class="of" id="irac-sum-of"></div>
+    <div class="gstars" id="irac-sum-stars"></div>
+    <div class="grade" id="irac-sum-grade"></div>
+    <div class="sum-actions">
+      <button id="irac-sum-retry" class="btn-ghost">ทำข้อนี้ซ้ำ</button>
+      <button id="irac-sum-back" class="btn-ghost">เลือกข้อสอบอื่น</button>
+      <button id="irac-sum-nextcase" class="btn-primary" style="display:none">ข้อถัดไป →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ โหมด 5: เรียงขั้นตอน ============ -->
+<section id="view-order" class="view">
+  <div id="order-picker">
+    <p class="muted" style="margin-bottom:14px;font-size:14px">แตะขั้นตอนตามลำดับที่ถูกต้องของแต่ละกระบวนวิธีพิจารณา แข่งกับเวลาเพื่อคะแนนโบนัส</p>
+    <div class="irac-caselist" id="order-caselist"></div>
+  </div>
+
+  <div id="order-play" style="display:none">
+    <button class="irac-back" id="order-back">← กลับไปเลือกข้อ</button>
+    <div class="chapter-tag" id="order-tag" style="display:inline-block;margin-bottom:6px"></div>
+    <div class="scenario" style="padding:16px 18px;margin-bottom:10px">
+      <div class="qtext" id="order-title" style="font-size:16.5px"></div>
+    </div>
+    <p class="muted" style="margin-bottom:10px;font-size:13px">แตะการ์ดขั้นตอนด้านล่างเรียงตามลำดับที่ถูกต้อง <span class="quiz-timer" id="order-timer">⏱ 0.0s</span></p>
+    <div id="order-placed" class="order-placed-list"></div>
+    <div id="order-pool" class="order-pool"></div>
+    <div class="explain" id="order-explain" style="display:none"></div>
+    <div class="sum-actions" style="margin-top:14px">
+      <button id="order-retry" class="btn-ghost" style="display:none">ลองใหม่</button>
+      <button id="order-nextcase" class="btn-primary" style="display:none">ข้อถัดไป →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  สร้างด้วย Claude · ข้อมูลจากเอกสารประกอบการสอน ข้อสอบเก่า และสัมมนา น.300 ธรรมศาสตร์
+</footer>
+</div>
+
+<div class="sticky-bar" id="sticky-bar">
+  <div class="sticky-bar-inner">
+    <button id="quiz-next" class="btn-primary" style="display:none">ข้อถัดไป →</button>
+    <button id="quiz-finish" class="btn-primary" style="display:none">ดูสรุปผล</button>
+    <button id="irac-next" class="btn-primary" style="display:none">ถัดไป →</button>
+    <button id="irac-recap-next" class="btn-primary" style="display:none">ประเด็นถัดไป →</button>
+    <button id="order-check" class="btn-primary" style="display:none">ตรวจคำตอบ ✓</button>
+  </div>
+</div>
+
+<script>
+const CONFIG = {
+  crest:      "น.300",
+  title:      "ห้องซ้อมสอบ น.300 กฎหมายลักษณะมรดก",
+  subtitle:   "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 6",
+  storageKey: "law300_quiz_best_v1"
+};
+/* ================================================================
+   ข้อมูลวิชา น.300 / LA300 กฎหมายลักษณะมรดก (Law of Succession)
+   คณะนิติศาสตร์ มหาวิทยาลัยธรรมศาสตร์ (ท่าพระจันทร์ ภาคบัณฑิต)
+   อ้างอิง ป.พ.พ. บรรพ 6 + เอกสารสรุป/ข้อสอบเก่าในโปรเจกต์
+   ================================================================ */
+
+const CATEGORIES = {
+  intro: {
+    label: "๑) บทนำ & กองมรดก",
+    soft: "#F0E7D8", strong: "#6B4E2E", icon: "🪦", source: "ป.พ.พ."
+  },
+  heirs: {
+    label: "๒) ทายาทโดยธรรม ลำดับ & ส่วนแบ่ง",
+    soft: "#E4F3EA", strong: "#1F6B45", icon: "👪", source: "ป.พ.พ."
+  },
+  spouse: {
+    label: "๓) คู่สมรส พระภิกษุ แผ่นดิน",
+    soft: "#F7E3EC", strong: "#A03060", icon: "💍", source: "ป.พ.พ."
+  },
+  repr: {
+    label: "๔) การรับมรดกแทนที่",
+    soft: "#E1ECF9", strong: "#2A5CA8", icon: "🔄", source: "ป.พ.พ."
+  },
+  loss: {
+    label: "๕) การเสียสิทธิ (กำจัด/ตัด/สละ)",
+    soft: "#F9E4E1", strong: "#B23B2E", icon: "⛔", source: "ป.พ.พ."
+  },
+  willnat: {
+    label: "๖) พินัยกรรม: ลักษณะ & ความสามารถ",
+    soft: "#EEE7F6", strong: "#7A5AA6", icon: "📜", source: "ป.พ.พ."
+  },
+  willform: {
+    label: "๗) แบบพินัยกรรม & พยาน",
+    soft: "#F7EFD6", strong: "#B8860B", icon: "✍️", source: "ป.พ.พ."
+  },
+  willeffect: {
+    label: "๘) ผล ตีความ เพิกถอน & ตกไป",
+    soft: "#DDF1F0", strong: "#0E7C7B", icon: "🧭", source: "ป.พ.พ."
+  },
+  admin: {
+    label: "๙) ผู้จัดการมรดก",
+    soft: "#E7EAEF", strong: "#4A5568", icon: "🧑‍⚖️", source: "ป.พ.พ."
+  }
+};
+
+const CARDS = [
+  /* ---------- ๑ บทนำ & กองมรดก ---------- */
+  { cat:"intro", section:"ม.1599", title:"มรดกตกทอดเมื่อตาย", result:"เมื่อบุคคลใดตาย มรดกของบุคคลนั้นตกทอดแก่ทายาททันทีโดยผลของกฎหมาย ทายาทอาจเสียไปซึ่งสิทธิในมรดกได้แต่ตามบทบัญญัติแห่งประมวลกฎหมายนี้", note:"อ.ธนภัทรแนะให้เริ่มเขียนตอบข้อสอบด้วย ม.1599 เสมอ เพื่อชี้ว่ามรดกเกิดขึ้นเมื่อใด", stars:5, source:"ป.พ.พ." },
+  { cat:"intro", section:"ม.1600", title:"กองมรดกมีอะไรบ้าง", result:"กองมรดกได้แก่ ทรัพย์สินทุกชนิดของผู้ตาย ตลอดทั้งสิทธิ หน้าที่ และความรับผิดต่าง ๆ เว้นแต่ตามกฎหมายหรือโดยสภาพเป็นการเฉพาะตัวของผู้ตายโดยแท้", note:"สิทธิเฉพาะตัวโดยสภาพ เช่น สิทธิตามสัญญาจ้างแรงงาน สิทธิรับค่าอุปการะเลี้ยงดู ไม่ตกทอด", stars:5, source:"ป.พ.พ." },
+  { cat:"intro", section:"ม.1601", title:"ทายาทรับผิดไม่เกินทรัพย์มรดก", result:"ทายาทไม่จำต้องรับผิดเกินกว่าทรัพย์มรดกที่ตกทอดได้แก่ตน", note:"ฎ.2161/2558 เจ้าหนี้กองมรดกบังคับได้เฉพาะทรัพย์ในกองมรดก ไม่ถึงทรัพย์ส่วนตัวของทายาท", stars:4, source:"ป.พ.พ." },
+  { cat:"intro", section:"ม.1602", title:"สาบสูญ = ถึงแก่ความตาย", result:"เมื่อบุคคลใดต้องถือว่าถึงแก่ความตายตามบทบัญญัติเรื่องสาบสูญ (ม.62) มรดกของบุคคลนั้นตกทอดแก่ทายาท", note:"ผลของคำสั่งศาลให้เป็นคนสาบสูญ ทำให้เกิดมรดกได้เช่นเดียวกับการตายจริง", stars:3, source:"ป.พ.พ." },
+  { cat:"intro", section:"ม.1603", title:"ทายาท 2 ประเภท", result:"กองมรดกตกทอดแก่ทายาทได้ 2 ทาง คือ (1) โดยสิทธิตามกฎหมาย เรียก 'ทายาทโดยธรรม' และ (2) โดยพินัยกรรม เรียก 'ผู้รับพินัยกรรม'", note:"เป็นภาพรวมโครงสร้างของทายาททั้งวิชา", stars:4, source:"ป.พ.พ." },
+
+  /* ---------- ๒ ทายาทโดยธรรม ลำดับ & ส่วนแบ่ง ---------- */
+  { cat:"heirs", section:"ม.1604", title:"สภาพบุคคลของทายาท", result:"บุคคลธรรมดาจะเป็นทายาทได้ก็ต่อเมื่อมีสภาพบุคคลอยู่ หรืออยู่ในครรภ์มารดาแล้วในเวลาที่เจ้ามรดกถึงแก่ความตาย และภายหลังคลอดแล้วรอดอยู่", note:"ทายาทที่ตายพร้อมเจ้ามรดกต่างไม่เป็นทายาทของกันและกัน (ฎ.13129/2556)", stars:4, source:"ป.พ.พ." },
+  { cat:"heirs", section:"ม.1627", title:"บุตรนอกกฎหมายที่รับรอง & บุตรบุญธรรม", result:"บุตรนอกกฎหมายที่บิดาได้รับรองแล้ว และบุตรบุญธรรม ให้ถือว่าเป็นผู้สืบสันดานเหมือนกับบุตรที่ชอบด้วยกฎหมายตามความหมายแห่งประมวลกฎหมายนี้", note:"การรับรองบุตรโดยพฤติการณ์ก็เพียงพอ (ให้ใช้นามสกุล อุปการะเลี้ยงดู แสดงต่อบุคคลทั่วไป)", stars:5, source:"ป.พ.พ." },
+  { cat:"heirs", section:"ม.1629", title:"ทายาทโดยธรรม 6 ลำดับ", result:"ทายาทโดยธรรมมี 6 ลำดับ: (1) ผู้สืบสันดาน (2) บิดามารดา (3) พี่น้องร่วมบิดามารดาเดียวกัน (4) พี่น้องร่วมบิดาหรือมารดาเดียวกัน (5) ปู่ ย่า ตา ยาย (6) ลุง ป้า น้า อา; คู่สมรสที่ยังมีชีวิตอยู่ก็เป็นทายาทโดยธรรมด้วย", note:"หัวใจของการแบ่งมรดก ต้องท่องให้ขึ้นใจ", stars:5, source:"ป.พ.พ." },
+  { cat:"heirs", section:"ม.1630", title:"ลำดับก่อนตัดลำดับหลัง", result:"ตราบใดที่มีทายาทซึ่งยังมีชีวิตอยู่ หรือมีผู้รับมรดกแทนที่ยังไม่ขาดสายในลำดับหนึ่ง ๆ ทายาทลำดับถัดลงไปไม่มีสิทธิรับมรดก; แต่ถ้าบิดามารดายังมีชีวิตอยู่ ให้ได้ส่วนแบ่งเสมือนทายาทชั้นบุตร", note:"ข้อยกเว้นสำคัญ: บิดามารดา (ลำดับ 2) ได้ส่วนเท่าบุตร แม้มีผู้สืบสันดาน (ลำดับ 1)", stars:5, source:"ป.พ.พ." },
+  { cat:"heirs", section:"ม.1631", title:"ผู้สืบสันดานต่างชั้น", result:"ในระหว่างผู้สืบสันดานต่างชั้นกัน บุตรของเจ้ามรดกอันอยู่ในชั้นสนิทที่สุดเท่านั้นมีสิทธิรับมรดก ผู้สืบสันดานชั้นถัดลงไปจะรับมรดกได้ก็แต่โดยอาศัยสิทธิรับมรดกแทนที่", note:"หลานรับมรดกปู่ได้เฉพาะเมื่อบิดา (บุตรของปู่) ตายก่อน = รับแทนที่", stars:4, source:"ป.พ.พ." },
+  { cat:"heirs", section:"ม.1633", title:"ลำดับเดียวกันแบ่งเท่ากัน", result:"ทายาทโดยธรรมในลำดับเดียวกันในแต่ละลำดับ ชอบที่จะได้รับส่วนแบ่งเท่ากัน ถ้าลำดับใดมีทายาทโดยธรรมเพียงคนเดียว ทายาทคนนั้นมีสิทธิได้รับส่วนแบ่งทั้งหมด", note:"เป็นหลักการหารส่วนแบ่งภายในลำดับเดียวกัน", stars:5, source:"ป.พ.พ." },
+
+  /* ---------- ๓ คู่สมรส พระภิกษุ แผ่นดิน ---------- */
+  { cat:"spouse", section:"ม.1623", title:"ทรัพย์พระภิกษุตกวัด", result:"ทรัพย์สินของพระภิกษุที่ได้มาระหว่างเวลาที่อยู่ในสมณเพศ เมื่อพระภิกษุนั้นถึงแก่มรณภาพ ให้ตกเป็นสมบัติของวัดที่เป็นภูมิลำเนาของพระภิกษุนั้น เว้นแต่จะได้จำหน่ายไปในระหว่างชีวิตหรือโดยพินัยกรรม", note:"ประเด็นข้อสอบยอดฮิต: แยกทรัพย์ 'ระหว่างสมณเพศ' ออกจากทรัพย์ก่อนบวช/หลังสึก", stars:5, source:"ป.พ.พ." },
+  { cat:"spouse", section:"ม.1624", title:"ทรัพย์ก่อนอุปสมบท", result:"ทรัพย์สินของบุคคลที่มีอยู่ก่อนอุปสมบทเป็นพระภิกษุ ย่อมตกทอดแก่ทายาทโดยธรรมของบุคคลนั้นตามปกติ ไม่ตกเป็นสมบัติของวัด", note:"ทรัพย์ก่อนบวช หรือทรัพย์ที่ได้มาหลังสึก จึงเป็นมรดกตกทอดตามธรรมดา", stars:4, source:"ป.พ.พ." },
+  { cat:"spouse", section:"ม.1625", title:"แยกสินสมรสก่อนตั้งกองมรดก", result:"ถ้าผู้ตายมีคู่สมรส ต้องคิดส่วนแบ่งและปันทรัพย์สินระหว่างผู้ตายกับคู่สมรสที่ยังมีชีวิตอยู่ให้เสร็จก่อน กองมรดกจึงประกอบด้วยสินส่วนตัวของผู้ตายรวมกับครึ่งหนึ่งของสินสมรส", note:"ขั้นตอนบังคับก่อนคำนวณส่วนแบ่งทุกครั้งที่มีคู่สมรส", stars:5, source:"ป.พ.พ." },
+  { cat:"spouse", section:"ม.1628", title:"ร้าง/แยกกันอยู่ยังรับมรดกกันได้", result:"สามีภริยาที่ร้างกันหรือแยกกันอยู่โดยยังมิได้จดทะเบียนหย่า ยังคงมีสิทธิรับมรดกซึ่งกันและกัน", note:"ตราบใดยังไม่หย่าตามกฎหมาย ความเป็นคู่สมรสยังคงอยู่", stars:4, source:"ป.พ.พ." },
+  { cat:"spouse", section:"ม.1635", title:"ส่วนแบ่งคู่สมรส", result:"คู่สมรสที่ยังมีชีวิตอยู่ได้รับมรดกดังนี้: (1) ถ้ามีผู้สืบสันดาน ได้ส่วนเสมือนทายาทชั้นบุตร (2) ถ้าไม่มีผู้สืบสันดานแต่มีลำดับ 2 หรือ 3 ได้กึ่งหนึ่ง (3) ถ้ามีลำดับ 4,5,6 ได้ 2 ใน 3 ส่วน (4) ถ้าไม่มีทายาทตาม ม.1629 เลย ได้ทั้งหมด", note:"ยิ่งญาติอยู่ลำดับต่ำลง คู่สมรสยิ่งได้ส่วนมากขึ้น", stars:5, source:"ป.พ.พ." },
+  { cat:"spouse", section:"ม.1753", title:"มรดกไม่มีผู้รับตกแผ่นดิน", result:"ภายใต้บังคับสิทธิของเจ้าหนี้กองมรดก เมื่อบุคคลใดตายโดยไม่มีทายาทโดยธรรมหรือผู้รับพินัยกรรม หรือการตั้งมูลนิธิตามพินัยกรรม มรดกของบุคคลนั้นตกทอดแก่แผ่นดิน", note:"แม้ตกแผ่นดิน หนี้สินยังตามไป เจ้าหนี้เรียกจากกระทรวงการคลังได้ไม่เกินทรัพย์มรดก", stars:4, source:"ป.พ.พ." },
+
+  /* ---------- ๔ การรับมรดกแทนที่ ---------- */
+  { cat:"repr", section:"ม.1639", title:"หลักการรับมรดกแทนที่", result:"ถ้าทายาทตามลำดับ (1) (3) (4) หรือ (6) ถึงแก่ความตายก่อนเจ้ามรดก ถ้ามีผู้สืบสันดานก็ให้ผู้สืบสันดานรับมรดกแทนที่ ถ้าเป็นผู้สืบสันดานคนละชั้นให้รับแทนที่กันเป็นลำดับ ๆ ไป", note:"รับแทนที่ได้เฉพาะลำดับ 1,3,4,6 เท่านั้น (จำง่าย: เว้น 2 กับ 5)", stars:5, source:"ป.พ.พ." },
+  { cat:"repr", section:"ม.1640", title:"ตาย = รวมถึงสาบสูญ", result:"เมื่อบุคคลใดต้องถือว่าถึงแก่ความตายตามเรื่องสาบสูญ ให้มีการรับมรดกแทนที่กันได้", note:"การถูกศาลสั่งให้เป็นคนสาบสูญก่อนเจ้ามรดกตาย ก็ทำให้เกิดการรับแทนที่ได้", stars:3, source:"ป.พ.พ." },
+  { cat:"repr", section:"ม.1641", title:"ลำดับ 2 และ 5 ไม่มีการรับแทนที่", result:"ทายาทลำดับ (2) บิดามารดา และลำดับ (5) ปู่ ย่า ตา ยาย ไม่มีการรับมรดกแทนที่", note:"เป็นเหตุผลที่ต้องจำว่าแทนที่ได้เฉพาะ 1,3,4,6", stars:4, source:"ป.พ.พ." },
+  { cat:"repr", section:"ม.1642", title:"แทนที่เฉพาะทายาทโดยธรรม", result:"การรับมรดกแทนที่กันนั้น ให้ใช้บังคับแต่เฉพาะในระหว่างทายาทโดยธรรมเท่านั้น", note:"ผู้รับพินัยกรรมที่ตายก่อนเจ้ามรดก ไม่มีการรับแทนที่ ข้อกำหนดตกไปตาม ม.1698", stars:4, source:"ป.พ.พ." },
+  { cat:"repr", section:"ม.1643", title:"ผู้รับแทนที่ต้องเป็นผู้สืบสันดานโดยตรง", result:"สิทธิที่จะรับมรดกแทนที่กันนั้น ได้เฉพาะแก่ผู้สืบสันดานโดยตรงเท่านั้น", note:"คู่สมรสของผู้ตายก่อน ไม่ใช่ผู้สืบสันดานโดยตรง จึงรับแทนที่ไม่ได้", stars:4, source:"ป.พ.พ." },
+  { cat:"repr", section:"ม.1645", title:"สละกองหนึ่งไม่ตัดสิทธิแทนที่กองอื่น", result:"การสละมรดกของบุคคลใดในกองมรดกหนึ่ง ไม่ตัดสิทธิของผู้นั้นในการรับมรดกแทนที่ในกองมรดกอื่น", note:"สละมรดกพ่อ ยังรับแทนที่พ่อเพื่อรับมรดกปู่ได้", stars:3, source:"ป.พ.พ." },
+
+  /* ---------- ๕ การเสียสิทธิ ---------- */
+  { cat:"loss", section:"ม.1605", title:"กำจัดฐานยักย้าย/ปิดบังทรัพย์", result:"ทายาทที่ยักย้ายหรือปิดบังทรัพย์มรดกเท่าส่วนที่ตนจะได้หรือมากกว่า ต้องถูกกำจัดมิให้ได้มรดกเลย; ถ้ายักย้าย/ปิดบังน้อยกว่าส่วนที่ตนจะได้ ถูกกำจัดเพียงเท่าส่วนที่ได้ยักย้ายปิดบัง", note:"เป็นการกำจัด 'ภายหลัง' เจ้ามรดกตายเท่านั้น รับแทนที่ตาม ม.1639 ไม่ได้ แต่ผู้สืบสันดานสืบมรดกตาม ม.1607 ได้", stars:5, source:"ป.พ.พ." },
+  { cat:"loss", section:"ม.1606", title:"กำจัดฐานเป็นผู้ไม่สมควร (5 เหตุ)", result:"บุคคลต่อไปนี้ต้องถูกกำจัดมิให้รับมรดกฐานเป็นผู้ไม่สมควร เช่น ผู้ต้องคำพิพากษาถึงที่สุดว่าเจตนากระทำหรือพยายามให้เจ้ามรดกหรือผู้มีสิทธิก่อนตนตาย; ผู้ฉ้อฉลข่มขู่ให้เจ้ามรดกทำ/เพิกถอน/เปลี่ยนพินัยกรรม; ผู้ปลอม ทำลาย หรือปิดบังพินัยกรรม เป็นต้น", note:"ต้องคำพิพากษาถึงที่สุด; กำจัดทั้งหมด อาจเกิดก่อนหรือหลังเจ้ามรดกตายก็ได้; เจ้ามรดกให้อภัยเป็นลายลักษณ์อักษรได้ (วรรคท้าย)", stars:5, source:"ป.พ.พ." },
+  { cat:"loss", section:"ม.1607", title:"การกำจัดเป็นการเฉพาะตัว", result:"การถูกกำจัดมิให้รับมรดกนั้นเป็นการเฉพาะตัว ผู้สืบสันดานของทายาทที่ถูกกำจัดสืบมรดกต่อไปได้เสมือนหนึ่งว่าทายาทนั้นตายแล้ว", note:"ต่างจาก 'รับแทนที่': การสืบมรดกตาม ม.1607 ผู้สืบสันดานไม่จำต้องเป็นผู้สืบสายโลหิต บุตรบุญธรรมก็สืบได้", stars:5, source:"ป.พ.พ." },
+  { cat:"loss", section:"ม.1608", title:"เจ้ามรดกตัดทายาทมิให้รับมรดก", result:"เจ้ามรดกจะตัดทายาทโดยธรรมของตนคนใดมิให้รับมรดกก็ได้ แต่ต้องแสดงเจตนาชัดแจ้ง โดย (1) โดยพินัยกรรม หรือ (2) โดยทำเป็นหนังสือมอบไว้แก่พนักงานเจ้าหน้าที่", note:"ต่างจากการ 'กำจัด' ตรงที่เป็นเจตนาของเจ้ามรดกเอง; หากทำพินัยกรรมยกมรดกทั้งหมดแก่ผู้อื่นก็ถือว่าตัดโดยปริยาย", stars:5, source:"ป.พ.พ." },
+  { cat:"loss", section:"ม.1612", title:"วิธีสละมรดก", result:"การสละมรดกต้องแสดงเจตนาชัดแจ้งเป็นหนังสือมอบไว้แก่พนักงานเจ้าหน้าที่ หรือทำเป็นสัญญาประนีประนอมยอมความ", note:"หนังสือสละมรดกต้องมอบต่อพนักงานเจ้าหน้าที่จึงสมบูรณ์ ถ้าเพียงทำหนังสือกันเองไม่พอ", stars:5, source:"ป.พ.พ." },
+  { cat:"loss", section:"ม.1613", title:"สละต้องเต็มกอง ไม่มีเงื่อนไข", result:"การสละมรดกจะทำแต่เพียงบางส่วน หรือทำโดยมีเงื่อนไขหรือเงื่อนเวลาไม่ได้; และการสละมรดกนั้นจะถอนเสียมิได้", note:"'สละบางส่วน/มีเงื่อนไข = ไม่ได้' และ 'ถอนการสละ = ไม่ได้' เป็นกับดักข้อสอบ", stars:5, source:"ป.พ.พ." },
+  { cat:"loss", section:"ม.1615", title:"ผลของการสละย้อนหลัง", result:"การสละมรดกมีผลย้อนหลังไปถึงเวลาที่เจ้ามรดกตาย; ส่วนแบ่งของผู้สละตกได้แก่ทายาทอื่นเสมือนหนึ่งว่าผู้สละมรดกนั้นตายก่อนเจ้ามรดก", note:"ทำให้ผู้สืบสันดานของผู้สละอาจรับมรดกแทนที่ได้", stars:4, source:"ป.พ.พ." },
+
+  /* ---------- ๖ พินัยกรรม: ลักษณะ & ความสามารถ ---------- */
+  { cat:"willnat", section:"ม.1646", title:"สิทธิทำพินัยกรรม", result:"บุคคลใดจะแสดงเจตนาโดยพินัยกรรมกำหนดการเผื่อตายในเรื่องทรัพย์สินของตน หรือในการต่าง ๆ อันจะให้เกิดเป็นผลบังคับได้ตามกฎหมายเมื่อตนตายก็ได้", note:"พินัยกรรมเป็นนิติกรรมฝ่ายเดียวที่มีผลเมื่อผู้ทำตาย", stars:3, source:"ป.พ.พ." },
+  { cat:"willnat", section:"ม.1647", title:"เผื่อตายด้วยพินัยกรรมตามแบบ", result:"การแสดงเจตนากำหนดการเผื่อตายนั้น ย่อมทำได้ด้วยคำสั่งครั้งสุดท้ายกำหนดไว้ในพินัยกรรมซึ่งได้ทำขึ้นตามแบบที่กฎหมายกำหนด", note:"เชื่อมกับ ม.1655 เรื่องแบบพินัยกรรม", stars:3, source:"ป.พ.พ." },
+  { cat:"willnat", section:"ม.1652", title:"ห้ามยกให้ผู้ปกครองก่อนบัญชีเสร็จ", result:"บุคคลที่อยู่ในความปกครองจะทำพินัยกรรมยกทรัพย์มรดกให้แก่ผู้ปกครองหรือคู่สมรส บุพการี ผู้สืบสันดาน หรือพี่น้องของผู้ปกครองไม่ได้ จนกว่าผู้ปกครองจะได้ทำบัญชีทรัพย์สินเสร็จตามกฎหมาย", note:"ป้องกันการใช้อิทธิพลของผู้ปกครองเหนือผู้อยู่ในปกครอง", stars:3, source:"ป.พ.พ." },
+  { cat:"willnat", section:"ม.1653", title:"ผู้เขียน/พยาน+คู่สมรส รับทรัพย์ไม่ได้", result:"ผู้เขียนพินัยกรรมหรือพยานในพินัยกรรม จะเป็นผู้รับทรัพย์ตามพินัยกรรมนั้นไม่ได้ รวมถึงคู่สมรสของผู้เขียนหรือของพยานด้วย; และเจ้าพนักงานที่จดข้อความพินัยกรรมด้วยวาจา (ม.1663) ก็รับทรัพย์ไม่ได้", note:"ดูสถานะ ณ ขณะทำพินัยกรรม แม้ต่อมาหย่ากันก็ยังรับไม่ได้; ขัด ม.1653 เฉพาะข้อ = โมฆะแยกส่วน", stars:5, source:"ป.พ.พ." },
+  { cat:"willnat", section:"ม.1654", title:"เวลาพิจารณาความสามารถ", result:"ความสามารถของผู้ทำพินัยกรรม ให้พิจารณาแต่ในเวลาที่ทำพินัยกรรม; ความสามารถของผู้รับพินัยกรรม ให้พิจารณาแต่ในเวลาที่ผู้ทำพินัยกรรมตาย", note:"จุดเวลาต่างกันของผู้ทำ (ขณะทำ) กับผู้รับ (ขณะเจ้ามรดกตาย)", stars:4, source:"ป.พ.พ." },
+  { cat:"willnat", section:"ม.1703", title:"อายุขั้นต่ำผู้ทำพินัยกรรม", result:"พินัยกรรมซึ่งบุคคลที่มีอายุยังไม่ครบสิบห้าปีบริบูรณ์ทำขึ้นนั้น เป็นโมฆะ", note:"ผู้เยาว์อายุครบ 15 ปีทำพินัยกรรมได้เองโดยไม่ต้องได้รับความยินยอม (ม.25)", stars:4, source:"ป.พ.พ." },
+  { cat:"willnat", section:"ม.1704", title:"คนวิกลจริต/ไร้ความสามารถทำพินัยกรรม", result:"พินัยกรรมซึ่งบุคคลผู้ถูกศาลสั่งให้เป็นคนไร้ความสามารถทำขึ้นนั้นเป็นโมฆะ; พินัยกรรมซึ่งบุคคลผู้ถูกอ้างว่าวิกลจริตทำขึ้น จะเป็นโมฆะก็ต่อเมื่อพิสูจน์ได้ว่าทำในเวลาที่จริตวิกล", note:"คนไร้ความสามารถ = โมฆะเสมอ; คนวิกลจริต = ต้องพิสูจน์ว่าทำขณะวิกล", stars:4, source:"ป.พ.พ." },
+
+  /* ---------- ๗ แบบพินัยกรรม & พยาน ---------- */
+  { cat:"willform", section:"ม.1655", title:"พินัยกรรมต้องทำตามแบบ", result:"พินัยกรรมจะทำได้ก็แต่ตามแบบใดแบบหนึ่งที่กฎหมายกำหนดไว้ (แบบธรรมดา, เขียนเองทั้งฉบับ, เอกสารฝ่ายเมือง, เอกสารลับ, ทำด้วยวาจา ฯลฯ)", note:"ทำผิดแบบ = โมฆะ ตาม ม.1705", stars:4, source:"ป.พ.พ." },
+  { cat:"willform", section:"ม.1656", title:"แบบธรรมดา", result:"พินัยกรรมแบบธรรมดา ต้องทำเป็นหนังสือ ลงวัน เดือน ปีขณะทำ ผู้ทำพินัยกรรมลงลายมือชื่อไว้ต่อหน้าพยานอย่างน้อย 2 คนพร้อมกัน ซึ่งพยานต้องลงลายมือชื่อรับรองลายมือชื่อผู้ทำพินัยกรรมในขณะนั้น", note:"ถ้าในพินัยกรรมมีลายมือชื่อผู้เขียนกับพยานอีก 1 คน ก็นับผู้เขียนเป็นพยานอีกคนได้", stars:5, source:"ป.พ.พ." },
+  { cat:"willform", section:"ม.1657", title:"แบบเขียนเองทั้งฉบับ", result:"พินัยกรรมแบบเขียนเองทั้งฉบับ ต้องให้ผู้ทำพินัยกรรมเขียนด้วยมือตนเองซึ่งข้อความทั้งหมด วัน เดือน ปี และลายมือชื่อของตน", note:"ไม่ต้องมีพยาน; ห้ามพิมพ์ หรือให้ผู้อื่นเขียน; แก้ไขต้องเขียนเอง+ลงลายมือชื่อกำกับ", stars:5, source:"ป.พ.พ." },
+  { cat:"willform", section:"ม.1658", title:"แบบเอกสารฝ่ายเมือง", result:"พินัยกรรมแบบเอกสารฝ่ายเมือง ผู้ทำแจ้งข้อความต่อนายอำเภอต่อหน้าพยาน 2 คน นายอำเภอจดและอ่านให้ฟัง ผู้ทำและพยานลงลายมือชื่อ แล้วนายอำเภอลงลายมือชื่อ วันเดือนปี และประทับตราตำแหน่ง", note:"พยานต้องลงลายมือชื่อเท่านั้น (พิมพ์ลายนิ้วมือไม่ได้ ตาม ม.1666)", stars:4, source:"ป.พ.พ." },
+  { cat:"willform", section:"ม.1660", title:"แบบเอกสารลับ", result:"พินัยกรรมแบบเอกสารลับ ผู้ทำลงลายมือชื่อในเอกสาร ผนึกและลงลายมือชื่อคาบรอยผนึก นำไปแสดงต่อนายอำเภอพร้อมพยาน 2 คน แจ้งว่าเป็นพินัยกรรมของตน แล้วนายอำเภอ ผู้ทำ และพยานลงลายมือชื่อบนซอง", note:"หากโมฆะเพราะทำผิดแบบ อาจแปลงรูปเป็นแบบธรรมดา/เขียนเองทั้งฉบับได้ (ม.174)", stars:4, source:"ป.พ.พ." },
+  { cat:"willform", section:"ม.1663", title:"แบบทำด้วยวาจา", result:"เมื่อมีพฤติการณ์พิเศษที่ไม่อาจทำพินัยกรรมตามแบบอื่นได้ ผู้ทำอาจแสดงเจตนากำหนดการเผื่อตายด้วยวาจาต่อหน้าพยานอย่างน้อย 2 คนซึ่งอยู่พร้อมกัน ณ ที่นั้น", note:"พยานต้องไปแสดงตนต่อนายอำเภอโดยไม่ชักช้าเพื่อแจ้งข้อความ วันเดือนปี สถานที่ และพฤติการณ์พิเศษ", stars:4, source:"ป.พ.พ." },
+  { cat:"willform", section:"ม.1670", title:"บุคคลต้องห้ามเป็นพยาน", result:"บุคคลต่อไปนี้จะเป็นพยานในการทำพินัยกรรมไม่ได้: (1) ผู้ซึ่งยังไม่บรรลุนิติภาวะ (2) บุคคลวิกลจริตหรือถูกศาลสั่งให้เป็นผู้เสมือนไร้ความสามารถ (3) บุคคลที่หูหนวก เป็นใบ้ หรือตาบอดทั้งสองข้าง", note:"ถ้าพยานเป็นบุคคลต้องห้าม อาจกระทบความสมบูรณ์ตามแบบ", stars:4, source:"ป.พ.พ." },
+  { cat:"willform", section:"ม.1705", title:"ทำผิดแบบ = โมฆะ", result:"พินัยกรรมหรือข้อกำหนดพินัยกรรมที่ทำขึ้นขัดต่อบทบัญญัติแห่ง ม.1652, 1653, 1656, 1657, 1658, 1660, 1661 หรือ 1663 ย่อมเป็นโมฆะ", note:"เชื่อมโยงทุกแบบ; ขัด ม.1653 อาจเป็นโมฆะแยกส่วนเฉพาะข้อกำหนดที่ยกทรัพย์ให้ผู้เขียน/พยาน", stars:5, source:"ป.พ.พ." },
+
+  /* ---------- ๘ ผล ตีความ เพิกถอน & ตกไป ---------- */
+  { cat:"willeffect", section:"ม.1674", title:"พินัยกรรมมีเงื่อนไข", result:"ถ้าข้อกำหนดพินัยกรรมมีเงื่อนไขบังคับก่อนและเงื่อนไขนั้นสำเร็จก่อนผู้ทำพินัยกรรมตาย ข้อกำหนดมีผลเมื่อผู้ทำพินัยกรรมตาย; ถ้าเงื่อนไขบังคับก่อนสำเร็จภายหลังผู้ทำพินัยกรรมตาย ข้อกำหนดมีผลตั้งแต่เวลาเงื่อนไขสำเร็จ", note:"เงื่อนไขบังคับหลังสำเร็จหลังตาย ข้อกำหนดมีผลตั้งแต่ตาย แต่ตกเป็นอันไร้ผลเมื่อเงื่อนไขสำเร็จ", stars:3, source:"ป.พ.พ." },
+  { cat:"willeffect", section:"ม.1684", title:"การตีความพินัยกรรม", result:"เมื่อความข้อใดข้อหนึ่งในพินัยกรรมอาจตีความได้เป็นหลายนัย ให้ถือเอาตามนัยที่จะสำเร็จผลตามความประสงค์ของผู้ทำพินัยกรรมมากที่สุด", note:"หลักตีความตามเจตนาของผู้ทำพินัยกรรมเป็นสำคัญ", stars:3, source:"ป.พ.พ." },
+  { cat:"willeffect", section:"ม.1686", title:"ก่อตั้งทรัสต์ไม่ได้", result:"อันว่าทรัสต์นั้นจะก่อตั้งขึ้นโดยตรงหรือโดยทางอ้อมด้วยพินัยกรรมหรือด้วยนิติกรรมใด ๆ ที่มีผลในระหว่างชีวิตก็ดี หรือเมื่อตายแล้วก็ดี หามีผลไม่ เว้นแต่โดยอาศัยอำนาจตามบทบัญญัติแห่งกฎหมายเพื่อการก่อตั้งทรัสต์เท่านั้น", note:"ต้องใช้การตั้งผู้ปกครองทรัพย์ (ม.1687) แทนการก่อตั้งทรัสต์", stars:3, source:"ป.พ.พ." },
+  { cat:"willeffect", section:"ม.1687", title:"ตั้งผู้ปกครองทรัพย์", result:"ถ้าผู้ทำพินัยกรรมประสงค์จะยกทรัพย์สินให้แก่ผู้เยาว์หรือผู้ซึ่งศาลสั่งให้เป็นคนไร้/เสมือนไร้ความสามารถ หรือผู้ซึ่งต้องรักษาตัวในโรงพยาบาลเพราะจิตฟั่นเฟือน อาจตั้งผู้ปกครองทรัพย์เพื่อจัดการทรัพย์นั้นได้ตามที่กำหนด", note:"ผู้ปกครองทรัพย์เป็นทางเลือกที่กฎหมายให้แทนทรัสต์", stars:3, source:"ป.พ.พ." },
+  { cat:"willeffect", section:"ม.1693", title:"เพิกถอนพินัยกรรมเมื่อใดก็ได้", result:"ผู้ทำพินัยกรรมจะเพิกถอนพินัยกรรมของตนเสียทั้งหมดหรือแต่บางส่วนในเวลาใดก็ได้", note:"เป็นสิทธิเด็ดขาดของผู้ทำพินัยกรรมที่จะเปลี่ยนใจได้จนวินาทีสุดท้าย", stars:4, source:"ป.พ.พ." },
+  { cat:"willeffect", section:"ม.1694", title:"เพิกถอนด้วยพินัยกรรมฉบับหลัง", result:"ถ้าจะเพิกถอนพินัยกรรมฉบับก่อนด้วยพินัยกรรมฉบับหลัง การเพิกถอนจะสมบูรณ์ต่อเมื่อพินัยกรรมฉบับหลังได้ทำถูกต้องตามแบบที่กฎหมายกำหนด", note:"หนังสือแบ่งทรัพย์กันเองไม่ใช่พินัยกรรม จึงเพิกถอนพินัยกรรมไม่ได้ (ฎ.372/2509)", stars:4, source:"ป.พ.พ." },
+  { cat:"willeffect", section:"ม.1695", title:"เพิกถอนด้วยการทำลาย/ขีดฆ่า", result:"ถ้าพินัยกรรมทำเป็นต้นฉบับฉบับเดียว ผู้ทำพินัยกรรมอาจเพิกถอนเสียได้โดยทำลายหรือขีดฆ่าเสียด้วยความตั้งใจ", note:"การทำลาย/ขีดฆ่าต้องกระทำ 'ด้วยความตั้งใจ' จึงจะมีผลเพิกถอน", stars:4, source:"ป.พ.พ." },
+  { cat:"willeffect", section:"ม.1696", title:"โอนทรัพย์ = เพิกถอนเฉพาะสิ่ง", result:"ถ้าผู้ทำพินัยกรรมได้โอนไปโดยสมบูรณ์ซึ่งทรัพย์สินอันเป็นวัตถุแห่งข้อกำหนดพินัยกรรมใดด้วยความตั้งใจ ข้อกำหนดพินัยกรรมนั้นเป็นอันเพิกถอนไป; ใช้บังคับเช่นกันเมื่อผู้ทำพินัยกรรมทำลายทรัพย์นั้นด้วยความตั้งใจ", note:"ถ้าต่อมาทรัพย์กลับคืนมา ข้อกำหนดที่เพิกถอนไปแล้วไม่ฟื้น (เว้นข้อกำหนดอื่นยังอยู่)", stars:4, source:"ป.พ.พ." },
+  { cat:"willeffect", section:"ม.1698", title:"ข้อกำหนดพินัยกรรมตกไป", result:"ข้อกำหนดพินัยกรรมตกไป เช่น เมื่อผู้รับพินัยกรรมตายก่อนผู้ทำพินัยกรรม; เมื่อเป็นข้อกำหนดมีเงื่อนไขและเงื่อนไขไม่สำเร็จ; หรือเมื่อทรัพย์ที่ยกให้สูญหาย/ถูกทำลายไปโดยผู้ทำพินัยกรรมมิได้ตั้งใจในระหว่างมีชีวิต", note:"ผู้รับพินัยกรรมตายก่อน = ตกไป (ไม่มีการรับแทนที่ตาม ม.1642)", stars:4, source:"ป.พ.พ." },
+  { cat:"willeffect", section:"ม.1699", title:"พินัยกรรมตกไปตกทายาทโดยธรรม", result:"ถ้าพินัยกรรมหรือข้อกำหนดในพินัยกรรมเกี่ยวกับทรัพย์สินรายใดตกไป ทรัพย์สินรายนั้นตกทอดแก่ทายาทโดยธรรมหรือได้แก่แผ่นดินแล้วแต่กรณี", note:"เมื่อข้อกำหนดตกไป ทรัพย์กลับเข้ากองมรดกแบ่งตามทายาทโดยธรรม", stars:4, source:"ป.พ.พ." },
+  { cat:"willeffect", section:"ม.1708", title:"เพิกถอนพินัยกรรมที่ทำเพราะข่มขู่", result:"เมื่อผู้ทำพินัยกรรมตายแล้ว ผู้มีส่วนได้เสียจะร้องขอให้เพิกถอนพินัยกรรมซึ่งได้ทำขึ้นเพราะเหตุข่มขู่ก็ได้ แต่หากผู้ทำพินัยกรรมยังมีชีวิตอยู่ต่อมาเกินหนึ่งปีนับแต่พ้นการข่มขู่แล้ว จะร้องขอเพิกถอนไม่ได้", note:"เฉพาะ 'ผู้มีส่วนได้เสีย' เท่านั้นที่ร้องขอได้", stars:3, source:"ป.พ.พ." },
+  { cat:"willeffect", section:"ม.1709", title:"เพิกถอนเพราะสำคัญผิด/ฉ้อฉล", result:"การเพิกถอนข้อกำหนดพินัยกรรมซึ่งทำขึ้นเพราะสำคัญผิดหรือกลฉ้อฉลนั้น จะร้องขอได้ต่อเมื่อความสำคัญผิดหรือกลฉ้อฉลถึงขนาด ซึ่งถ้ามิได้มีความสำคัญผิดหรือกลฉ้อฉลเช่นนั้น ข้อกำหนดนั้นคงจะมิได้ทำขึ้น", note:"สำคัญผิดใน 'มูลเหตุจูงใจ' อย่างเดียวไม่กระทบความสมบูรณ์ของพินัยกรรม (ประเด็นข้อสอบคุณนายจำเริญ)", stars:4, source:"ป.พ.พ." },
+
+  /* ---------- ๙ ผู้จัดการมรดก ---------- */
+  { cat:"admin", section:"ม.1711", title:"ที่มาของผู้จัดการมรดก", result:"ผู้จัดการมรดกนั้น รวมตลอดทั้งบุคคลที่ตั้งขึ้นโดยพินัยกรรมหรือโดยคำสั่งศาล", note:"2 ทางเข้าสู่ตำแหน่ง: พินัยกรรมตั้ง หรือศาลตั้ง", stars:3, source:"ป.พ.พ." },
+  { cat:"admin", section:"ม.1713", title:"ผู้ร้องขอตั้งผู้จัดการมรดก", result:"ทายาทหรือผู้มีส่วนได้เสียหรือพนักงานอัยการ อาจร้องต่อศาลขอให้ตั้งผู้จัดการมรดกได้ ในกรณีเช่น ทายาทสูญหาย อยู่นอกราชอาณาจักร เป็นผู้เยาว์; ผู้จัดการมรดกหรือทายาทไม่สามารถหรือไม่เต็มใจจัดการ; หรือมีเหตุขัดข้องในการจัดการหรือแบ่งปันมรดก", note:"ผู้มีส่วนได้เสียตามแนวฎีการวมถึงผู้สืบสิทธิของทายาท ผู้แทนโดยชอบธรรม ผู้ปกครอง ผู้อนุบาล", stars:5, source:"ป.พ.พ." },
+  { cat:"admin", section:"ม.1718", title:"บุคคลต้องห้ามเป็นผู้จัดการมรดก", result:"บุคคลต่อไปนี้เป็นผู้จัดการมรดกไม่ได้: (1) ผู้ซึ่งยังไม่บรรลุนิติภาวะ (2) บุคคลวิกลจริตหรือถูกศาลสั่งให้เป็นคนเสมือนไร้ความสามารถ (3) บุคคลซึ่งศาลสั่งให้เป็นคนล้มละลาย", note:"ผู้จัดการมรดกที่ถูกพิพากษาให้ล้มละลายภายหลัง ย่อมขาดคุณสมบัติ (ฎ.1403/2538)", stars:4, source:"ป.พ.พ." },
+  { cat:"admin", section:"ม.1719", title:"อำนาจหน้าที่ผู้จัดการมรดก", result:"ผู้จัดการมรดกมีสิทธิและหน้าที่ที่จะทำการอันจำเป็นเพื่อจัดการมรดกโดยทั่วไป และเพื่อแบ่งปันทรัพย์มรดก", note:"ขอบเขตอำนาจกรอบใหญ่ของผู้จัดการมรดก", stars:4, source:"ป.พ.พ." },
+  { cat:"admin", section:"ม.1724", title:"ทายาทผูกพันในกิจการที่ทำในขอบอำนาจ", result:"ทายาทย่อมมีความผูกพันต่อบุคคลภายนอกในกิจการทั้งหลายอันผู้จัดการมรดกได้ทำไปภายในขอบอำนาจในฐานะที่เป็นผู้จัดการมรดก", note:"คุ้มครองบุคคลภายนอกที่สุจริตทำนิติกรรมกับผู้จัดการมรดก", stars:3, source:"ป.พ.พ." },
+  { cat:"admin", section:"ม.1727", title:"ถอนผู้จัดการมรดก", result:"ผู้มีส่วนได้เสียคนหนึ่งคนใดจะร้องขอให้ศาลสั่งถอนผู้จัดการมรดก เพราะเหตุผู้จัดการมรดกละเลยไม่ทำการตามหน้าที่ หรือเพราะเหตุอย่างอื่นที่สมควรก็ได้ แต่ต้องร้องขอเสียก่อนที่การปันมรดกเสร็จสิ้นลง", note:"ต้องร้องก่อนแบ่งมรดกเสร็จ", stars:4, source:"ป.พ.พ." },
+  { cat:"admin", section:"ม.1728", title:"เริ่มจัดทำบัญชีภายใน 15 วัน", result:"ผู้จัดการมรดกต้องลงมือจัดทำบัญชีทรัพย์มรดกภายในสิบห้าวันนับแต่เริ่มหน้าที่ หรือนับแต่วันที่รู้ถึงการตั้งเป็นผู้จัดการมรดก แล้วแต่กรณี", note:"จำคู่กับ ม.1729 (ทำบัญชีให้เสร็จภายใน 1 เดือน ต่อหน้าพยาน 2 คน)", stars:3, source:"ป.พ.พ." },
+  { cat:"admin", section:"ม.1733", title:"อายุความฟ้องผู้จัดการมรดก", result:"คดีเกี่ยวกับการจัดการมรดกนั้น มิให้ทายาทฟ้องเกินกว่าห้าปีนับแต่การจัดการมรดกสิ้นสุดลง", note:"อายุความ 5 ปีนับแต่การจัดการมรดกสิ้นสุด", stars:3, source:"ป.พ.พ." }
+];
+</script>
+<script>
+/* ================================================================
+   QUIZ_ADV — โจทย์แนวข้อสอบจริง (ปรับจากข้อสอบเก่า/สัมมนาในโปรเจกต์
+   ให้อยู่ในรูปเลือกตอบข้อเดียว)
+   ================================================================ */
+const QUIZ_ADV = [
+  {
+    cat:"spouse",
+    q:"ภิกษุสนได้รับถวายจตุปัจจัยเป็นเงินสด 800,000 บาทในระหว่างที่อยู่ในสมณเพศ ต่อมาสึกออกมาแล้วนำเงินนั้นไปซื้อสวนลำไย ภายหลังกลับไปอุปสมบทใหม่และมรณภาพ เงิน/สวนลำไยดังกล่าวควรวินิจฉัยอย่างไร (ปรับจากข้อสอบไล่ 2/2563)",
+    opts:[
+      "ตกเป็นสมบัติของวัดทั้งหมดตาม ม.1623 เพราะเป็นทรัพย์ของพระภิกษุ",
+      "เป็นทรัพย์ที่ได้มา 'ระหว่างสมณเพศ' รอบแรก แต่เมื่อสึกออกมาแล้วนำไปซื้อทรัพย์ใหม่ในระหว่างเป็นฆราวาส ทรัพย์ที่ได้มาช่วงเป็นฆราวาสไม่ตกวัด ต้องแยกพิจารณาตามช่วงเวลา",
+      "ตกทอดแก่ทายาทโดยธรรมทั้งหมดเพราะสึกแล้ว",
+      "ตกแก่แผ่นดินเพราะไม่มีผู้รับ"
+    ],
+    ans:1,
+    explain:"<b>ม.1623 ประกอบ ม.1624</b> ต้องแยกทรัพย์ตาม 'ช่วงเวลาที่ได้มา' เงินที่ได้รับถวายระหว่างสมณเพศเป็นทรัพย์ที่อยู่ในบังคับ ม.1623 แต่เมื่อสึกมาเป็นฆราวาสแล้วนำไปแปลงเป็นสวนลำไย ทรัพย์ที่ก่อขึ้นในช่วงเป็นฆราวาสย่อมตกทอดแก่ทายาทตามปกติ กับดักของโจทก์คือให้แยก 'ทรัพย์ระหว่างสมณเพศ' ออกจาก 'ทรัพย์นอกสมณเพศ' ให้ชัด"
+  },
+  {
+    cat:"spouse",
+    q:"ก่อนมรณภาพ ภิกษุสนได้รับถวายแจกันโบราณมูลค่า 1,000,000 บาทในระหว่างที่อยู่ในสมณเพศรอบที่สอง เมื่อมรณภาพ แจกันนี้ตกได้แก่ผู้ใด",
+    opts:[
+      "ทายาทโดยธรรมของภิกษุสน",
+      "นางส้มมารดา เพราะเป็นทายาทลำดับ 2",
+      "ตกเป็นสมบัติของวัดที่เป็นภูมิลำเนาของภิกษุสน ตาม ม.1623 เว้นแต่จะได้จำหน่ายในระหว่างชีวิตหรือโดยพินัยกรรม",
+      "ตกแก่แผ่นดินตาม ม.1753"
+    ],
+    ans:2,
+    explain:"<b>ม.1623</b> แจกันได้รับถวายระหว่างอยู่ในสมณเพศและยังไม่ได้จำหน่ายหรือทำพินัยกรรมยกให้ผู้ใด เมื่อมรณภาพจึงตกเป็นสมบัติของวัดที่เป็นภูมิลำเนาของพระภิกษุนั้น"
+  },
+  {
+    cat:"loss",
+    q:"นายหนึ่งต้องคำพิพากษาถึงที่สุดให้จำคุกฐานพยายามฆ่านายโก้ (หลานของนายหนึ่ง) ต่อมานายโก้ตาย นายหนึ่งจะมีสิทธิรับมรดกของนายโก้หรือไม่ (ปรับจากข้อสอบกลางภาค)",
+    opts:[
+      "รับได้ตามปกติเพราะเป็นญาติสนิท",
+      "ต้องถูกกำจัดมิให้รับมรดกฐานเป็นผู้ไม่สมควรตาม ม.1606(1) เพราะต้องคำพิพากษาถึงที่สุดว่าเจตนาพยายามให้เจ้ามรดกถึงแก่ความตาย",
+      "รับได้ครึ่งหนึ่ง",
+      "ต้องรอให้เจ้ามรดกให้อภัยก่อนเสมอ"
+    ],
+    ans:1,
+    explain:"<b>ม.1606(1)</b> ผู้ที่ต้องคำพิพากษาถึงที่สุดว่าได้เจตนากระทำหรือพยายามกระทำให้เจ้ามรดก (หรือผู้มีสิทธิก่อนตน) ถึงแก่ความตายโดยมิชอบด้วยกฎหมาย ต้องถูกกำจัดมิให้รับมรดกฐานเป็นผู้ไม่สมควร การกำจัดตาม ม.1606 กำจัดทั้งหมด และอาจเกิดก่อนหรือหลังเจ้ามรดกตายก็ได้"
+  },
+  {
+    cat:"loss",
+    q:"ข้อใดอธิบายความแตกต่างระหว่างการถูกกำจัดตาม ม.1605 กับ ม.1606 ได้ถูกต้อง",
+    opts:[
+      "ม.1605 กำจัดทั้งหมดเสมอ ส่วน ม.1606 กำจัดบางส่วน",
+      "ม.1605 (ยักย้าย/ปิดบังทรัพย์) เกิดหลังเจ้ามรดกตายเท่านั้นและอาจถูกกำจัดบางส่วน ส่วน ม.1606 (ผู้ไม่สมควร) กำจัดทั้งหมดและอาจเกิดก่อนหรือหลังเจ้ามรดกตาย",
+      "ทั้งสองมาตราต้องเกิดก่อนเจ้ามรดกตายเสมอ",
+      "ทั้งสองมาตราให้รับมรดกแทนที่ตาม ม.1639 ได้เหมือนกัน"
+    ],
+    ans:1,
+    explain:"<b>ม.1605 vs ม.1606</b> ม.1605 เหตุคือยักย้าย/ปิดบังทรัพย์มรดก เกิดหลังเจ้ามรดกตายเท่านั้น อาจกำจัดทั้งหมดหรือบางส่วน; ม.1606 เหตุคือความประพฤติไม่สมควร กำจัดทั้งหมด อาจเกิดก่อนหรือหลังเจ้ามรดกตาย และถ้าเกิดก่อนตายผู้สืบสันดานรับแทนที่ตาม ม.1639 ได้"
+  },
+  {
+    cat:"heirs",
+    q:"นายหนึ่งอยู่กินกับนางวันดีโดยไม่จดทะเบียนสมรส มีบุตรคือ ด.ช.สาม โดยนายหนึ่งให้ใช้นามสกุล อุปการะเลี้ยงดู และให้การศึกษา ด.ช.สามมีฐานะทางมรดกอย่างไรต่อกองมรดกของนายหนึ่ง",
+    opts:[
+      "ไม่เป็นทายาทเพราะเป็นบุตรนอกกฎหมาย",
+      "เป็นผู้สืบสันดานเหมือนบุตรชอบด้วยกฎหมายตาม ม.1627 เพราะเป็นบุตรนอกกฎหมายที่บิดารับรองแล้วโดยพฤติการณ์",
+      "เป็นทายาทลำดับ 3",
+      "เป็นเพียงผู้รับพินัยกรรม"
+    ],
+    ans:1,
+    explain:"<b>ม.1627</b> บุตรนอกกฎหมายที่บิดาได้รับรองแล้ว ให้ถือเป็นผู้สืบสันดานเหมือนบุตรชอบด้วยกฎหมาย การให้ใช้นามสกุล อุปการะเลี้ยงดู และให้การศึกษาอย่างเปิดเผย ถือเป็นการรับรองโดยพฤติการณ์ ด.ช.สามจึงเป็นทายาทลำดับ 1 ของนายหนึ่ง"
+  },
+  {
+    cat:"loss",
+    q:"นายเอกทำหนังสือสละมรดกที่ตนจะได้รับจากนางสองทั้งหมด และมอบให้แก่พนักงานเจ้าหน้าที่โดยถูกต้องตามแบบ ผลเป็นอย่างไร (ปรับจากข้อสอบไล่ 2/2563)",
+    opts:[
+      "การสละไม่สมบูรณ์เพราะสละก่อนเจ้ามรดกตายไม่ได้ทุกกรณี",
+      "การสละสมบูรณ์ตาม ม.1612 และมีผลย้อนหลังถึงเวลาเจ้ามรดกตายตาม ม.1615 ส่วนแบ่งตกแก่ทายาทอื่นเสมือนนายเอกตายก่อนเจ้ามรดก",
+      "นายเอกยังรับได้ครึ่งหนึ่ง",
+      "ต้องได้รับความยินยอมจากทายาทคนอื่นก่อน"
+    ],
+    ans:1,
+    explain:"<b>ม.1612 ประกอบ ม.1615</b> การสละมรดกที่ทำเป็นหนังสือมอบไว้แก่พนักงานเจ้าหน้าที่ย่อมสมบูรณ์ และมีผลย้อนหลังไปถึงเวลาเจ้ามรดกตาย ส่วนแบ่งของผู้สละตกได้แก่ทายาทอื่นเสมือนหนึ่งว่าผู้สละตายก่อนเจ้ามรดก (อาจเปิดช่องให้ผู้สืบสันดานของผู้สละรับแทนที่ได้)"
+  },
+  {
+    cat:"willnat",
+    q:"คุณนายจำเริญทำพินัยกรรมยกทรัพย์ให้นายมากแทนนางมี เพราะเข้าใจผิดว่านางมีเป็นผู้ลักทรัพย์ของตน ทั้งที่ความจริงนายมากเป็นผู้ลัก ข้อเข้าใจผิดนี้มีผลต่อความสมบูรณ์ของพินัยกรรมอย่างไร (ปรับจากข้อสอบปลายภาค)",
+    opts:[
+      "พินัยกรรมตกเป็นโมฆะทั้งฉบับทันที",
+      "เป็นความสำคัญผิดใน 'มูลเหตุจูงใจ' ในการทำพินัยกรรมเท่านั้น ไม่กระทบความสมบูรณ์ พินัยกรรมยังมีผล",
+      "นางมีร้องขอเพิกถอนได้เสมอแม้ไม่ใช่ผู้มีส่วนได้เสีย",
+      "ทรัพย์ต้องตกแก่แผ่นดินทันที"
+    ],
+    ans:1,
+    explain:"<b>ม.1709 (สำคัญผิด)</b> ความสำคัญผิดที่กระทบความสมบูรณ์ต้องเป็นสำคัญผิดในสาระสำคัญถึงขนาด ส่วนความสำคัญผิดใน 'มูลเหตุจูงใจ' เพียงอย่างเดียว (เช่น เข้าใจผิดว่าใครเป็นขโมย) ไม่ทำให้พินัยกรรมเสียไป พินัยกรรมยกทรัพย์ให้นายมากยังคงมีผล และนางมีต้องเป็น 'ผู้มีส่วนได้เสีย' จึงจะร้องขอเพิกถอนได้"
+  },
+  {
+    cat:"willform",
+    q:"พินัยกรรมแบบเอกสารฝ่ายเมืองฉบับหนึ่ง มีพยานคนหนึ่งพิมพ์ลายนิ้วมือแทนการลงลายมือชื่อ แต่มีลายมือชื่อนายอำเภอในฐานะผู้จัดทำอยู่ด้วย ควรวินิจฉัยอย่างไร",
+    opts:[
+      "สมบูรณ์เป็นพินัยกรรมเอกสารฝ่ายเมืองตามเดิม",
+      "ตกเป็นโมฆะในฐานะเอกสารฝ่ายเมือง (เพราะพยานต้องลงลายมือชื่อตาม ม.1666) แต่อาจแปลงรูปเป็นพินัยกรรมแบบธรรมดาได้ตาม ม.174 หากครบองค์ประกอบ",
+      "สมบูรณ์เพราะพิมพ์ลายนิ้วมือก็เท่ากับลงลายมือชื่อเสมอ",
+      "โมฆะทั้งฉบับและแปลงรูปไม่ได้เลย"
+    ],
+    ans:1,
+    explain:"<b>ม.1658, ม.1666, ม.174</b> พยานในพินัยกรรมเอกสารฝ่ายเมืองต้องลงลายมือชื่อเท่านั้น พิมพ์ลายนิ้วมือไม่ได้ ทำให้เสียไปในฐานะเอกสารฝ่ายเมือง แต่โดยหลักโมฆะแปลงรูป (ม.174) หากมีองค์ประกอบครบตามแบบธรรมดา (หนังสือ วันเดือนปี ลายมือชื่อผู้ทำและพยาน 2 คน) ก็อาจถือเป็นพินัยกรรมแบบธรรมดาที่สมบูรณ์ได้"
+  },
+  {
+    cat:"willnat",
+    q:"นายเขียวเป็นผู้เขียนพินัยกรรมให้เจ้ามรดก และในพินัยกรรมมีข้อกำหนดยกที่ดินให้ 'ภริยาของนายเขียว' ข้อกำหนดนี้มีผลอย่างไร แม้ต่อมานายเขียวจะหย่ากับภริยาแล้ว",
+    opts:[
+      "มีผลสมบูรณ์เพราะต่อมาหย่าแล้ว",
+      "ข้อกำหนดยกทรัพย์ให้คู่สมรสของผู้เขียนพินัยกรรมเป็นโมฆะตาม ม.1653 โดยพิจารณาสถานะ ณ ขณะทำพินัยกรรม แม้ภายหลังจะหย่าก็ยังคงรับไม่ได้ (โมฆะแยกส่วนเฉพาะข้อนั้น)",
+      "พินัยกรรมทั้งฉบับเป็นโมฆะ",
+      "ต้องให้ศาลสั่งเพิกถอนก่อนเสมอ"
+    ],
+    ans:1,
+    explain:"<b>ม.1653 ประกอบ ม.1705</b> ห้ามผู้เขียนหรือพยาน รวมทั้งคู่สมรสของบุคคลดังกล่าว เป็นผู้รับทรัพย์ตามพินัยกรรม โดยพิจารณาสถานะ ณ ขณะทำพินัยกรรม แม้ต่อมาจะหย่าร้างก็ยังรับไม่ได้ หากเป็นเพียงข้อกำหนดข้อหนึ่ง พินัยกรรมตกเป็นโมฆะแยกส่วนเฉพาะข้อนั้น ข้ออื่นยังสมบูรณ์"
+  },
+  {
+    cat:"intro",
+    q:"ก่อนตาย นายดำได้ทำสัญญาประนีประนอมยอมความในคดีละเมิด โดยคู่กรณีตกลงชดใช้ค่าสินไหมทดแทน 5 แสนบาท แต่นายดำตายก่อนไปรับเช็ค สิทธิเรียกค่าสินไหมนี้ตกทอดเป็นมรดกหรือไม่ (ปรับจากสัมมนา อ.ศุภวิช)",
+    opts:[
+      "ไม่ตกทอด เพราะเป็นสิทธิเฉพาะตัว",
+      "ตกทอดเป็นมรดกตาม ม.1600 เพราะเป็นสิทธิเรียกร้องในทางทรัพย์สินที่เกิดขึ้นแล้วและไม่ใช่สิทธิเฉพาะตัวโดยสภาพ",
+      "ตกแก่แผ่นดินทันที",
+      "ตกเป็นของคู่กรณีในคดีละเมิด"
+    ],
+    ans:1,
+    explain:"<b>ม.1600</b> เมื่อได้ทำสัญญาประนีประนอมยอมความจนเกิดสิทธิเรียกร้องเป็นเงินจำนวนแน่นอนแล้ว สิทธินั้นเป็นสิทธิในทางทรัพย์สินที่ไม่ใช่การเฉพาะตัวโดยสภาพ จึงตกทอดเป็นมรดกแก่ทายาทของนายดำได้ (ต่างจากสิทธิที่ยังเป็นเพียงสิทธิเรียกค่าสินไหมจากมูลละเมิดต่อร่างกาย/ชีวิตล้วน ๆ ที่ต้องพิจารณาเป็นเรื่อง ๆ)"
+  },
+  {
+    cat:"admin",
+    q:"เจ้ามรดกมิได้ทำพินัยกรรมตั้งผู้จัดการมรดกไว้ และการแบ่งมรดกมีข้อขัดข้อง ผู้ใดร้องขอต่อศาลให้ตั้งผู้จัดการมรดกได้",
+    opts:[
+      "เฉพาะพนักงานอัยการเท่านั้น",
+      "ทายาท ผู้มีส่วนได้เสีย หรือพนักงานอัยการ ตาม ม.1713 เมื่อมีเหตุเช่น ทายาทเป็นผู้เยาว์/อยู่ต่างประเทศ หรือมีเหตุขัดข้องในการจัดการหรือแบ่งมรดก",
+      "เฉพาะทายาทลำดับ 1 เท่านั้น",
+      "เจ้าหนี้กองมรดกเท่านั้น"
+    ],
+    ans:1,
+    explain:"<b>ม.1713</b> ทายาท ผู้มีส่วนได้เสีย หรือพนักงานอัยการ ร้องขอให้ศาลตั้งผู้จัดการมรดกได้ เมื่อเข้าเหตุตามกฎหมาย เช่น ทายาทเป็นผู้เยาว์ อยู่นอกราชอาณาจักร หรือมีเหตุขัดข้องในการจัดการ/แบ่งปันมรดก 'ผู้มีส่วนได้เสีย' ตามแนวฎีการวมถึงผู้สืบสิทธิของทายาทและผู้แทนโดยชอบธรรมด้วย"
+  }
+];
+
+/* ================================================================
+   IRAC_CASES — วินิจฉัยทีละประเด็นแบบ IRAC
+   ประเด็นแรกของทุกคดีเริ่มด้วยการตั้งกองมรดก (ม.1599–1600) ตามแนว
+   วิธีตอบข้อสอบของ อ.ธนภัทร
+   ================================================================ */
+const IRAC_CASES = [
+  {
+    id:"case1",
+    examRef:"ปรับจากข้อสอบไล่ ภาค 2/2563 (ภิกษุสน)",
+    title:"พระภิกษุ ทรัพย์สมณเพศ และการตัดทายาท",
+    cat:"spouse",
+    facts:"ภิกษุสนอุปสมบท ณ วัดไต่ธรรม ได้รับถวายจตุปัจจัยระหว่างพรรษาเป็นเงินสด 800,000 บาท ต่อมาสึกมาอยู่บ้าน นำเงินนั้นไปซื้อสวนลำไย 600,000 บาท และเช่าซื้อตึกแถวจนครบทุกงวด 200,000 บาท ภายหลังกลับไปอุปสมบทที่วัดเดิม ระหว่างนั้นได้รับถวายแจกันโบราณ 1,000,000 บาท และก่อนมรณภาพหนึ่งสัปดาห์ได้ทำพินัยกรรมแบบเอกสารลับสมบูรณ์ มีข้อกำหนดตัดวัดไต่ธรรมและนางส้มมารดามิให้เป็นทายาท<br><br>ให้แบ่งทรัพย์มรดกของภิกษุสน",
+    issues:[
+      {
+        label:"ประเด็นที่ 1 — มรดกและกองมรดกของภิกษุสน",
+        issueQ:"ก่อนวินิจฉัยการแบ่ง ต้องตั้งประเด็นใดเป็นอันดับแรก",
+        issueOpts:[
+          "การเกิดมรดก (ม.1599) และองค์ประกอบของกองมรดก (ม.1600) โดยแยกทรัพย์ตามช่วงเวลาที่ได้มา",
+          "ลำดับทายาททันทีโดยไม่ต้องดูทรัพย์",
+          "แบบของพินัยกรรมเป็นอันดับแรก",
+          "สิทธิของเจ้าหนี้ก่อนเสมอ"
+        ],
+        issueAns:0,
+        issueFeedback:"ถูกต้อง ตามแนว อ.ธนภัทร เริ่มด้วย ม.1599 (มรดกเกิดเมื่อภิกษุสนมรณภาพ) แล้วจึงตั้งกองมรดกตาม ม.1600",
+        ruleQ:"บทกฎหมายใดใช้แยกว่าทรัพย์ใดตกวัด ทรัพย์ใดเป็นมรดก",
+        ruleOpts:[
+          "ม.1623 (ทรัพย์ระหว่างสมณเพศตกวัด) ประกอบ ม.1624 (ทรัพย์ก่อนบวช/นอกสมณเพศตกทายาท)",
+          "ม.1633 ส่วนแบ่งเท่ากัน",
+          "ม.1639 การรับมรดกแทนที่",
+          "ม.1712 ผู้จัดการมรดก"
+        ],
+        ruleAns:0,
+        ruleFeedback:"ม.1623 คู่กับ ม.1624 เป็นหัวใจของการแยกทรัพย์พระภิกษุ",
+        appQ:"ปรับข้อเท็จจริง: สวนลำไยและตึกแถวที่ซื้อ 'ระหว่างสึกเป็นฆราวาส' ควรถือเป็นอย่างไร",
+        appOpts:[
+          "เป็นทรัพย์ที่ได้มา/ก่อขึ้นในช่วงเป็นฆราวาส ไม่ตกวัดตาม ม.1623 จึงเป็นมรดกตกทอดแก่ทายาท ส่วนแจกันที่ได้ระหว่างสมณเพศรอบสองตกวัด",
+          "ตกวัดทั้งหมดเพราะเงินต้นมาจากจตุปัจจัย",
+          "ตกแก่แผ่นดินทั้งหมด",
+          "เป็นสินสมรสของวัด"
+        ],
+        appAns:0,
+        appFeedback:"ต้องแยกตามช่วงเวลาที่ได้ทรัพย์มา ทรัพย์ที่ก่อขึ้นช่วงเป็นฆราวาสไม่ตกวัด",
+        concQ:"สรุปการจัดประเภททรัพย์",
+        concOpts:[
+          "แจกันโบราณ (ได้ระหว่างสมณเพศ ยังไม่จำหน่าย) ตกวัดตาม ม.1623; สวนลำไยและตึกแถว (ก่อขึ้นช่วงฆราวาส) เป็นมรดกตกทอดแก่ทายาท",
+          "ทุกอย่างตกวัด",
+          "ทุกอย่างเป็นมรดก",
+          "ทุกอย่างตกแผ่นดิน"
+        ],
+        concAns:0,
+        concFeedback:"<b>สรุปประเด็น 1:</b> ตาม ม.1623 แจกันโบราณที่ได้รับถวายระหว่างสมณเพศรอบสองและยังไม่ได้จำหน่ายหรือทำพินัยกรรมยกให้ผู้ใด ย่อมตกเป็นสมบัติของวัดไต่ธรรมที่เป็นภูมิลำเนา ส่วนสวนลำไยและตึกแถวซึ่งก่อขึ้นในช่วงที่ภิกษุสนสึกเป็นฆราวาส เป็นทรัพย์นอกบังคับ ม.1623 จึงเป็นกองมรดกตกทอดแก่ทายาทตาม ม.1600"
+      },
+      {
+        label:"ประเด็นที่ 2 — ผลของการตัดวัดและมารดามิให้เป็นทายาท",
+        issueQ:"ข้อกำหนดในพินัยกรรมที่ 'ตัดวัดไต่ธรรมและนางส้มมารดามิให้เป็นทายาท' เป็นประเด็นเรื่องใด",
+        issueOpts:[
+          "การตัดทายาทโดยธรรมมิให้รับมรดกโดยเจ้ามรดก (ม.1608)",
+          "การกำจัดฐานยักย้ายทรัพย์ (ม.1605)",
+          "การสละมรดก (ม.1612)",
+          "การรับมรดกแทนที่ (ม.1639)"
+        ],
+        issueAns:0,
+        issueFeedback:"เป็นเรื่องเจ้ามรดกแสดงเจตนาตัดทายาทของตนเอง ตาม ม.1608",
+        ruleQ:"การตัดทายาทมิให้รับมรดกทำได้โดยวิธีใด",
+        ruleOpts:[
+          "แสดงเจตนาชัดแจ้งโดยพินัยกรรม หรือหนังสือมอบไว้แก่พนักงานเจ้าหน้าที่ ตาม ม.1608",
+          "เพียงบอกกล่าวด้วยวาจาต่อทายาทก็พอ",
+          "ต้องฟ้องศาลทุกกรณี",
+          "ทำไม่ได้เลยตามกฎหมายไทย"
+        ],
+        ruleAns:0,
+        ruleFeedback:"ม.1608 ให้ตัดทายาทได้โดยพินัยกรรมหรือหนังสือต่อพนักงานเจ้าหน้าที่",
+        appQ:"เมื่อพินัยกรรมเอกสารลับสมบูรณ์แล้วตัดนางส้มมารดา (ทายาทลำดับ 2) ผลเป็นอย่างไรต่อนางส้ม",
+        appOpts:[
+          "นางส้มถูกตัดมิให้รับมรดกในกองมรดกของภิกษุสนตามข้อกำหนดในพินัยกรรมที่สมบูรณ์",
+          "นางส้มยังรับได้เต็มเพราะเป็นแม่",
+          "นางส้มต้องถูกกำจัดตาม ม.1606",
+          "การตัดไม่มีผลเพราะทำโดยพินัยกรรม"
+        ],
+        appAns:0,
+        appFeedback:"พินัยกรรมสมบูรณ์ + แสดงเจตนาตัดชัดแจ้ง = การตัดมีผลตาม ม.1608",
+        concQ:"สรุปผลของการตัด",
+        concOpts:[
+          "การตัดวัดและนางส้มมีผลตาม ม.1608 (ส่วนวัดได้ทรัพย์ตาม ม.1623 อยู่แล้วต่างหากจากฐานะทายาท); ทรัพย์ที่เป็นมรดกจึงตกแก่ทายาทที่เหลือ และหากไม่มีทายาทอื่นเลยจึงตกแก่แผ่นดินตาม ม.1753",
+          "ทรัพย์ทั้งหมดตกแก่นางส้ม",
+          "ทรัพย์ตกวัดทั้งหมดเสมอ",
+          "การตัดเป็นโมฆะ"
+        ],
+        concAns:0,
+        concFeedback:"<b>สรุปประเด็น 2:</b> ข้อกำหนดตัดทายาทในพินัยกรรมเอกสารลับที่สมบูรณ์ย่อมมีผลตาม ม.1608 นางส้ม (ทายาทลำดับ 2) จึงถูกตัดมิให้รับมรดก ส่วนทรัพย์ที่เป็นมรดก (สวนลำไย ตึกแถว) ต้องแบ่งให้ทายาทโดยธรรมที่เหลือที่มีสิทธิ หากปรากฏว่าไม่มีทายาทโดยธรรมอื่นและไม่มีผู้รับพินัยกรรมในทรัพย์นั้น ทรัพย์ส่วนนั้นย่อมตกแก่แผ่นดินตาม ม.1753"
+      }
+    ]
+  },
+  {
+    id:"case2",
+    examRef:"ปรับจากข้อสอบกลางภาค (นายหนึ่ง–นายโก้–นางสอง)",
+    title:"กำจัดฐานพยายามฆ่า บุตรนอกกฎหมาย และการสละมรดก",
+    cat:"loss",
+    facts:"นายหนึ่งและนางสองเป็นพี่น้องร่วมบิดามารดา นายหนึ่งอยู่กินกับนางวันดีโดยไม่จดทะเบียน มีบุตรคือ ด.ช.สาม (ให้ใช้นามสกุล อุปการะเลี้ยงดู) และจดทะเบียนรับ ด.ญ.ส้ม เป็นบุตรบุญธรรม; นางสองมีบุตรคนเดียวคือ นายโก้ นายหนึ่งต้องคำพิพากษาถึงที่สุดให้จำคุกฐานพยายามฆ่านายโก้ ต่อมานายโก้ป่วยตาย (มีที่ดิน 900,000 บาท) หลังจากนั้นไม่นานนางสองก็ตาย (มีเงินฝาก 100,000 บาท) และระหว่างที่นายหนึ่งอยู่ในคุก นายสามได้ทำหนังสือสละมรดกทั้งหมดของนายหนึ่งต่อพนักงานเจ้าหน้าที่โดยถูกต้อง<br><br>ให้แบ่งมรดกของนายโก้และนางสองตามลำดับ",
+    issues:[
+      {
+        label:"ประเด็นที่ 1 — กองมรดกของนายโก้",
+        issueQ:"เริ่มวินิจฉัยการแบ่งมรดกนายโก้ด้วยประเด็นใดก่อน",
+        issueOpts:[
+          "การเกิดมรดกเมื่อนายโก้ตาย (ม.1599) และตั้งกองมรดก = ที่ดิน 900,000 บาท (ม.1600)",
+          "ลำดับพี่น้องของนางสองก่อน",
+          "การสละมรดกของนายสามก่อน",
+          "แบบพินัยกรรมก่อน"
+        ],
+        issueAns:0,
+        issueFeedback:"ตั้งกองมรดกนายโก้ก่อนตาม ม.1599–1600",
+        ruleQ:"ใครเป็นทายาทของนายโก้ และมีเหตุกำจัดผู้ใดหรือไม่",
+        ruleOpts:[
+          "นางสอง (มารดา ลำดับ 2) เป็นทายาท; นายหนึ่งซึ่งเป็นน้าและต้องคำพิพากษาถึงที่สุดฐานพยายามฆ่านายโก้ ต้องถูกกำจัดตาม ม.1606(1)",
+          "นายหนึ่งรับได้เต็มเพราะเป็นน้า",
+          "นายโก้ไม่มีทายาทเลย",
+          "ด.ญ.ส้มเป็นทายาทของนายโก้"
+        ],
+        ruleAns:0,
+        ruleFeedback:"นายหนึ่งถูกกำจัดตาม ม.1606(1) เพราะพยายามฆ่านายโก้",
+        appQ:"เมื่อนายโก้ตาย ทายาทลำดับใดมีสิทธิ และผลของการกำจัดนายหนึ่งเป็นอย่างไร",
+        appOpts:[
+          "นางสอง (มารดา) เป็นทายาทลำดับ 2 รับมรดกนายโก้ทั้งหมด เพราะนายโก้ไม่มีผู้สืบสันดาน/คู่สมรส และนายหนึ่งถูกกำจัดแล้ว",
+          "แบ่งครึ่งระหว่างนางสองกับนายหนึ่ง",
+          "ตกแก่ ด.ช.สาม",
+          "ตกแผ่นดิน"
+        ],
+        appAns:0,
+        appFeedback:"มารดารับมรดกบุตรที่ไม่มีผู้สืบสันดาน",
+        concQ:"สรุปการแบ่งมรดกนายโก้",
+        concOpts:[
+          "ที่ดิน 900,000 บาทของนายโก้ตกได้แก่นางสองผู้เป็นมารดา (ทายาทลำดับ 2) แต่ผู้เดียว",
+          "แบ่งให้นายหนึ่งด้วยครึ่งหนึ่ง",
+          "ตกแก่บุตรบุญธรรมของนายหนึ่ง",
+          "ตกแผ่นดินเพราะไม่มีทายาท"
+        ],
+        concAns:0,
+        concFeedback:"<b>สรุปประเด็น 1:</b> นายโก้ไม่มีผู้สืบสันดานและคู่สมรส ทายาทที่มีสิทธิคือนางสองมารดา (ลำดับ 2 ตาม ม.1629(2)) นายหนึ่งแม้เป็นญาติแต่ต้องถูกกำจัดมิให้รับมรดกฐานเป็นผู้ไม่สมควรตาม ม.1606(1) เพราะต้องคำพิพากษาถึงที่สุดว่าพยายามฆ่านายโก้ ที่ดิน 900,000 บาทจึงตกได้แก่นางสองแต่ผู้เดียว"
+      },
+      {
+        label:"ประเด็นที่ 2 — กองมรดกของนางสองและสิทธิของทายาท",
+        issueQ:"เมื่อนางสองตาย กองมรดกประกอบด้วยอะไร",
+        issueOpts:[
+          "เงินฝาก 100,000 บาท รวมกับที่ดิน 900,000 บาทที่นางสองเพิ่งรับมรดกมาจากนายโก้ = รวม 1,000,000 บาท",
+          "เฉพาะเงินฝาก 100,000 บาท",
+          "เฉพาะที่ดิน 900,000 บาท",
+          "ไม่มีทรัพย์เลย"
+        ],
+        issueAns:0,
+        issueFeedback:"ทรัพย์ที่นางสองรับมรดกจากนายโก้กลายเป็นทรัพย์ของนางสอง จึงรวมเป็นกองมรดกของนางสองด้วย",
+        ruleQ:"ทายาทของนางสองมีใครบ้าง และนายหนึ่งรับมรดกนางสองได้หรือไม่",
+        ruleOpts:[
+          "ทายาทลำดับ 1 ของนางสองคือนายโก้ แต่นายโก้ตายก่อนนางสอง; นายหนึ่ง (พี่น้องร่วมบิดามารดา ลำดับ 3) ไม่ถูกกำจัดในกองนางสอง เพราะการกำจัดตาม ม.1606 เป็นการเฉพาะตัวต่อเจ้ามรดกที่ถูกกระทำ (นายโก้) ไม่ใช่ต่อนางสอง",
+          "นายหนึ่งถูกกำจัดในทุกกองมรดกตลอดไป",
+          "ด.ช.สาม รับมรดกนางสองโดยตรง",
+          "นางวันดีเป็นทายาทของนางสอง"
+        ],
+        ruleAns:0,
+        ruleFeedback:"การกำจัดตาม ม.1606 เฉพาะตัวต่อเจ้ามรดกที่ถูกกระทำ นายหนึ่งจึงยังเป็นทายาทของนางสองได้",
+        appQ:"เมื่อนายโก้ (บุตร) ตายก่อนนางสอง ใครรับมรดกนางสอง และการสละมรดกของนายสามเกี่ยวข้องอย่างไร",
+        appOpts:[
+          "นายโก้ไม่มีผู้สืบสันดานจึงไม่มีการรับแทนที่ในกองนางสอง เมื่อไม่มีทายาทลำดับ 1–2 ทายาทลำดับ 3 คือนายหนึ่งจึงรับมรดกนางสอง; หนังสือสละของนายสามเป็นการสละมรดก 'ของนายหนึ่ง' ไม่กระทบมรดกของนางสอง",
+          "นายสามรับมรดกนางสองแทนนายหนึ่ง",
+          "มรดกนางสองตกแผ่นดิน",
+          "ด.ญ.ส้มรับมรดกนางสอง"
+        ],
+        appAns:0,
+        appFeedback:"การสละของนายสามเป็นการสละในกองมรดกของนายหนึ่ง คนละกองกับมรดกนางสอง",
+        concQ:"สรุปการแบ่งมรดกนางสอง",
+        concOpts:[
+          "มรดกนางสองรวม 1,000,000 บาท ตกได้แก่นายหนึ่ง (พี่น้องร่วมบิดามารดา ลำดับ 3 ตาม ม.1629(3)) เพราะไม่มีทายาทลำดับ 1–2 และนายหนึ่งมิได้ถูกกำจัดในกองของนางสอง",
+          "ตกแก่ ด.ช.สามและ ด.ญ.ส้ม",
+          "ตกแผ่นดิน",
+          "แบ่งครึ่งกับนายสาม"
+        ],
+        concAns:0,
+        concFeedback:"<b>สรุปประเด็น 2:</b> กองมรดกนางสองรวมที่ดินที่รับมาจากนายโก้เป็น 1,000,000 บาท นายโก้ (บุตร) ตายก่อนและไม่มีผู้สืบสันดานรับแทนที่ จึงไม่มีทายาทลำดับ 1 เมื่อบิดามารดา (ลำดับ 2) ไม่มี ทายาทลำดับ 3 คือนายหนึ่งผู้เป็นพี่น้องร่วมบิดามารดาจึงรับมรดกนางสอง การกำจัดตาม ม.1606 เป็นการเฉพาะตัวต่อนายโก้เท่านั้น ไม่กระทบสิทธิของนายหนึ่งในกองมรดกนางสอง ส่วนหนังสือสละของนายสามเป็นการสละมรดกในกองของนายหนึ่ง จึงไม่เกี่ยวกับการแบ่งมรดกนางสอง"
+      }
+    ]
+  },
+  {
+    id:"case3",
+    examRef:"ปรับจากข้อสอบปลายภาค (คุณนายจำเริญ)",
+    title:"สำคัญผิดในมูลเหตุจูงใจของพินัยกรรม",
+    cat:"willnat",
+    facts:"คุณนายจำเริญเคยตั้งใจยกทรัพย์ให้นางมี แต่เข้าใจผิดว่านางมีเป็นผู้ลักข้าวของมีค่าในบ้าน จึงทำพินัยกรรมฉบับใหม่ยกทรัพย์ให้นายมากแทน และตั้งนายมานะทนายความเป็นผู้จัดการมรดก หลังคุณนายจำเริญตายไปสองสัปดาห์ นายมานะพบหลักฐานชัดว่าแท้จริงผู้ลักทรัพย์คือนายมาก โดยนางมีไม่มีส่วนรู้เห็น นางมีจึงมาปรึกษาว่าจะทำอย่างไรจึงจะมีสิทธิรับมรดก<br><br>ให้วินิจฉัยว่าคำแนะนำของนายมานะ (ที่ว่าเป็นเพียงสำคัญผิดในมูลเหตุจูงใจ ไม่กระทบพินัยกรรม) รับฟังได้หรือไม่",
+    issues:[
+      {
+        label:"ประเด็นที่ 1 — ความสมบูรณ์ของพินัยกรรมที่ทำเพราะเข้าใจผิด",
+        issueQ:"ประเด็นหลักของคดีนี้คือเรื่องใด",
+        issueOpts:[
+          "ความสำคัญผิดในการทำพินัยกรรมกระทบความสมบูรณ์หรือไม่ (สำคัญผิดในสาระสำคัญ vs มูลเหตุจูงใจ)",
+          "แบบของพินัยกรรม",
+          "การกำจัดฐานยักย้ายทรัพย์",
+          "การรับมรดกแทนที่"
+        ],
+        issueAns:0,
+        issueFeedback:"เป็นเรื่องผลของความสำคัญผิดต่อพินัยกรรม",
+        ruleQ:"บทกฎหมายใดที่เกี่ยวข้องกับการเพิกถอนพินัยกรรมเพราะสำคัญผิด",
+        ruleOpts:[
+          "ม.1709 (การเพิกถอนข้อกำหนดพินัยกรรมที่ทำเพราะสำคัญผิดหรือกลฉ้อฉลถึงขนาด)",
+          "ม.1656 แบบธรรมดา",
+          "ม.1727 การถอนผู้จัดการมรดก",
+          "ม.1615 ผลของการสละ"
+        ],
+        ruleAns:0,
+        ruleFeedback:"ม.1709 ว่าด้วยความสำคัญผิด/กลฉ้อฉลในพินัยกรรม",
+        appQ:"การที่คุณนายจำเริญเข้าใจผิดว่านางมีเป็นขโมย ถือเป็นความสำคัญผิดประเภทใด",
+        appOpts:[
+          "สำคัญผิดใน 'มูลเหตุจูงใจ' ที่ทำให้เปลี่ยนใจ ไม่ใช่สำคัญผิดในสาระสำคัญของนิติกรรม จึงไม่ทำให้พินัยกรรมเสียไป",
+          "สำคัญผิดในตัวบุคคลผู้รับพินัยกรรมเสมอ",
+          "กลฉ้อฉลของนายมาก จึงเพิกถอนได้ทันที",
+          "ทำให้พินัยกรรมเป็นโมฆะทั้งฉบับ"
+        ],
+        appAns:0,
+        appFeedback:"เป็นความเข้าใจผิดเรื่องเหตุจูงใจในการเปลี่ยนใจ ไม่ใช่สาระสำคัญของการทำพินัยกรรม",
+        concQ:"สรุปความสมบูรณ์ของพินัยกรรม",
+        concOpts:[
+          "พินัยกรรมยกทรัพย์ให้นายมากยังคงมีผลสมบูรณ์ เพราะเป็นเพียงสำคัญผิดในมูลเหตุจูงใจ ไม่ถึงขนาดตาม ม.1709 คำแนะนำของนายมานะในส่วนนี้รับฟังได้",
+          "พินัยกรรมเป็นโมฆะ นางมีได้ทรัพย์ทันที",
+          "ทรัพย์ตกแผ่นดิน",
+          "นายมากถูกกำจัดจึงเสียสิทธิเสมอ"
+        ],
+        concAns:0,
+        concFeedback:"<b>สรุปประเด็น 1:</b> ความสำคัญผิดของคุณนายจำเริญเป็นเพียงความสำคัญผิดใน 'มูลเหตุจูงใจ' ที่ทำให้เปลี่ยนใจไม่ยกทรัพย์ให้นางมี มิใช่ความสำคัญผิดในสาระสำคัญถึงขนาดตาม ม.1709 พินัยกรรมที่ยกทรัพย์ให้นายมากจึงยังคงมีผลสมบูรณ์ คำแนะนำของนายมานะในส่วนนี้จึงรับฟังได้"
+      },
+      {
+        label:"ประเด็นที่ 2 — ผู้มีส่วนได้เสียและผลหากพินัยกรรมตกไป",
+        issueQ:"นางมีจะร้องขอเพิกถอนพินัยกรรมได้หรือไม่ ต้องพิจารณาเรื่องใด",
+        issueOpts:[
+          "นางมีต้องเป็น 'ผู้มีส่วนได้เสีย' จึงจะร้องขอเพิกถอนได้ และต้องได้ประโยชน์จากการเพิกถอนนั้น",
+          "ใครก็ร้องขอเพิกถอนพินัยกรรมได้",
+          "ต้องรอ 10 ปีก่อนเสมอ",
+          "ต้องให้ผู้จัดการมรดกยินยอมก่อน"
+        ],
+        issueAns:0,
+        issueFeedback:"สิทธิร้องขอเพิกถอนสงวนไว้เฉพาะผู้มีส่วนได้เสีย",
+        ruleQ:"หากสมมุติว่าพินัยกรรมตกไป ทรัพย์จะตกได้แก่ผู้ใด",
+        ruleOpts:[
+          "ตกทอดแก่ทายาทโดยธรรมตาม ม.1699 หากไม่มีทายาทโดยธรรมเลยจึงตกแก่แผ่นดินตาม ม.1753",
+          "ตกแก่นางมีเสมอ",
+          "ตกแก่นายมานะผู้จัดการมรดก",
+          "ตกแก่นายมากเช่นเดิม"
+        ],
+        ruleAns:0,
+        ruleFeedback:"ม.1699 ทรัพย์ที่พินัยกรรมตกไปกลับเข้ากองมรดกแบ่งตามทายาทโดยธรรม",
+        appQ:"นางมีเป็นเพียงผู้ที่คุณนายจำเริญเคยตั้งใจจะยกทรัพย์ให้ แต่มิใช่ทายาทโดยธรรม การเพิกถอนพินัยกรรมจะเป็นประโยชน์แก่นางมีหรือไม่",
+        appOpts:[
+          "ไม่เป็นประโยชน์ เพราะแม้พินัยกรรมตกไป ทรัพย์ก็ตกแก่ทายาทโดยธรรมหรือแผ่นดิน ไม่ตกแก่นางมีซึ่งมิใช่ทายาทโดยธรรม",
+          "เป็นประโยชน์เพราะนางมีจะได้ทรัพย์ทันที",
+          "นางมีได้กึ่งหนึ่งเสมอ",
+          "นางมีกลายเป็นผู้จัดการมรดก"
+        ],
+        appAns:0,
+        appFeedback:"นางมีไม่ใช่ทายาทโดยธรรม การเพิกถอนจึงไม่ทำให้นางมีได้ทรัพย์",
+        concQ:"สรุปคำแนะนำที่ควรให้นางมี",
+        concOpts:[
+          "แม้เหตุผลของนายมานะบางส่วนคลาดเคลื่อน (เรื่องส่วนได้เสีย/มรดกไม่มีผู้รับ) แต่ผลลัพธ์ตรงกันว่าการเพิกถอนไม่เป็นประโยชน์แก่นางมี ทางที่ดีนางมีควรเจรจากับนายมากขอแบ่งทรัพย์ ไม่ใช่ฟ้องเพิกถอน",
+          "นางมีควรฟ้องเพิกถอนพินัยกรรมทันที",
+          "นางมีควรร้องเป็นผู้จัดการมรดก",
+          "นางมีควรสละมรดก"
+        ],
+        concAns:0,
+        concFeedback:"<b>สรุปประเด็น 2:</b> นางมีมิใช่ทายาทโดยธรรมของคุณนายจำเริญ แม้พินัยกรรมจะถูกเพิกถอนหรือตกไป ทรัพย์ก็จะตกแก่ทายาทโดยธรรมตาม ม.1699 หรือแก่แผ่นดินตาม ม.1753 มิได้ตกแก่นางมี ดังนั้นการฟ้องเพิกถอนจึงไม่เป็นประโยชน์แก่นางมี คำแนะนำเชิงปฏิบัติที่ให้นางมีเจรจากับนายมากเพื่อขอแบ่งทรัพย์บางส่วนจึงเหมาะสมกว่า"
+      }
+    ]
+  },
+  {
+    id:"case4",
+    examRef:"ปรับจากสัมมนา อ.ศุภวิช (นายดำ)",
+    title:"สิทธิที่ตกทอด/ไม่ตกทอดเป็นมรดก",
+    cat:"intro",
+    facts:"นายดำอายุ 25 ปี เป็นกำพร้าบิดามารดาตั้งแต่เด็ก ประสบอุบัติเหตุเสียชีวิตกะทันหัน ก่อนตายนายดำทำสัญญาต่างตอบแทนพิเศษยิ่งกว่าสัญญาเช่าธรรมดา เช่าที่ดิน 1 ไร่จากนายแดง 20 ปีเพื่อทำตลาดนัด (มีการพัฒนาที่ดินแล้ว) เพิ่งชนะคดีได้ค่าสินไหมทดแทนจากมูลละเมิด 300,000 บาท และเพิ่งได้รับที่ดิน 1 ไร่ตามพินัยกรรม นายดำมีนางเหลืองน้าสาวที่รับนายดำเป็นบุตรบุญธรรมตั้งแต่แบเบาะ นายทองสามีใหม่ของนางเหลือง และ น.ส.ส้มบุตรสาวของนางเหลือง<br><br>ให้พิจารณาว่าผู้ใดมีสิทธิรับมรดกของนายดำ และทรัพย์/สิทธิใดตกทอดเป็นมรดกได้",
+    issues:[
+      {
+        label:"ประเด็นที่ 1 — กองมรดกและสิทธิที่ตกทอดของนายดำ",
+        issueQ:"ต้องตั้งประเด็นใดก่อนพิจารณาว่าใครรับมรดก",
+        issueOpts:[
+          "การเกิดมรดกเมื่อนายดำตาย (ม.1599) และองค์ประกอบของกองมรดกตาม ม.1600 ว่าสิทธิใดตกทอด สิทธิใดเป็นการเฉพาะตัว",
+          "ลำดับทายาทก่อนเสมอ",
+          "ความสามารถในการทำพินัยกรรม",
+          "แบบพินัยกรรม"
+        ],
+        issueAns:0,
+        issueFeedback:"ตั้งกองมรดกและพิจารณาลักษณะของสิทธิก่อนตาม ม.1599–1600",
+        ruleQ:"หลักเกณฑ์ใดใช้แยกว่าสิทธิใดตกทอดเป็นมรดก",
+        ruleOpts:[
+          "ม.1600 — ทรัพย์สิน สิทธิ หน้าที่ ความรับผิดตกทอด เว้นแต่โดยกฎหมายหรือโดยสภาพเป็นการเฉพาะตัวของผู้ตายโดยแท้",
+          "ม.1633 แบ่งเท่ากัน",
+          "ม.1639 รับแทนที่",
+          "ม.1718 ต้องห้ามเป็นผู้จัดการมรดก"
+        ],
+        ruleAns:0,
+        ruleFeedback:"ม.1600 คือหลักในการคัดแยกสิทธิที่ตกทอด",
+        appQ:"สัญญาต่างตอบแทนพิเศษยิ่งกว่าเช่าธรรมดา และค่าสินไหมทดแทนที่ชนะคดีแล้ว ตกทอดเป็นมรดกหรือไม่",
+        appOpts:[
+          "สิทธิตามสัญญาต่างตอบแทนพิเศษ (ก่อภาระผูกพันในทางทรัพย์สินเกินกว่าเช่าธรรมดา) และค่าสินไหมที่ศาลพิพากษาแล้วเป็นจำนวนแน่นอน ไม่ใช่สิทธิเฉพาะตัวโดยสภาพ จึงตกทอดเป็นมรดก",
+          "ทั้งสองเป็นสิทธิเฉพาะตัว ไม่ตกทอด",
+          "ตกทอดเฉพาะค่าสินไหม แต่สัญญาเช่าระงับเสมอเพราะผู้เช่าตาย",
+          "ตกแผ่นดินทั้งหมด"
+        ],
+        appAns:0,
+        appFeedback:"สัญญาต่างตอบแทนพิเศษไม่ระงับเพราะการตายเหมือนเช่าธรรมดา และค่าสินไหมที่แน่นอนแล้วตกทอดได้",
+        concQ:"สรุปสิทธิที่ตกทอด",
+        concOpts:[
+          "ที่ดินตามพินัยกรรม ค่าสินไหม 300,000 บาท และสิทธิตามสัญญาต่างตอบแทนพิเศษ ล้วนตกทอดเป็นมรดกตาม ม.1600 (ต่างจากสัญญาเช่าธรรมดาที่เป็นสิทธิเฉพาะตัวและระงับเมื่อผู้เช่าตาย)",
+          "ไม่มีทรัพย์ใดตกทอดเลย",
+          "ตกทอดเฉพาะที่ดิน",
+          "ทุกอย่างตกวัด"
+        ],
+        concAns:0,
+        concFeedback:"<b>สรุปประเด็น 1:</b> ตาม ม.1600 ที่ดินตามพินัยกรรม ค่าสินไหมทดแทน 300,000 บาทที่ศาลพิพากษาถึงที่สุดแล้ว และสิทธิตามสัญญาต่างตอบแทนพิเศษยิ่งกว่าเช่าธรรมดา (ซึ่งไม่ระงับเพราะการตายเหมือนสัญญาเช่าธรรมดา) ล้วนเป็นสิทธิในทางทรัพย์สินที่ไม่ใช่การเฉพาะตัวโดยสภาพ จึงตกทอดเป็นมรดกของนายดำ"
+      },
+      {
+        label:"ประเด็นที่ 2 — ทายาทของนายดำ",
+        issueQ:"นายดำเป็นบุตรบุญธรรมของนางเหลือง เมื่อนายดำตาย นางเหลืองมีฐานะเป็นทายาทอย่างไร",
+        issueOpts:[
+          "นางเหลืองในฐานะผู้รับบุตรบุญธรรมมีสิทธิรับมรดกของบุตรบุญธรรม (นายดำ) ในฐานะทายาทโดยธรรมลำดับ 2 (เสมือนบิดามารดา)",
+          "นางเหลืองไม่มีสิทธิใด ๆ เพราะเป็นเพียงน้า",
+          "น.ส.ส้มรับมรดกก่อนนางเหลืองเสมอ",
+          "นายทองรับมรดกในฐานะคู่สมรสของนายดำ"
+        ],
+        issueAns:0,
+        issueFeedback:"ผู้รับบุตรบุญธรรมมีฐานะคล้ายบิดามารดาต่อกองมรดกของบุตรบุญธรรม",
+        ruleQ:"น.ส.ส้ม (บุตรของนางเหลือง) และนายทอง (สามีใหม่ของนางเหลือง) มีสิทธิในมรดกนายดำหรือไม่",
+        ruleOpts:[
+          "โดยหลัก น.ส.ส้มและนายทองมิใช่ทายาทโดยธรรมของนายดำโดยตรง (ไม่ใช่ผู้สืบสันดาน คู่สมรส หรือบุพการีของนายดำ) จึงไม่มีสิทธิรับมรดกนายดำ",
+          "ทั้งสองเป็นทายาทลำดับ 1",
+          "นายทองเป็นคู่สมรสของนายดำ",
+          "น.ส.ส้มเป็นพี่น้องร่วมบิดามารดาของนายดำ"
+        ],
+        ruleAns:0,
+        ruleFeedback:"ต้องแยกความสัมพันธ์ให้ชัด บุคคลรอบตัวนางเหลืองไม่ได้เป็นทายาทของนายดำโดยอัตโนมัติ",
+        appQ:"เมื่อนายดำไม่มีผู้สืบสันดานและคู่สมรส ใครรับมรดกนายดำ",
+        appOpts:[
+          "นางเหลืองผู้รับบุตรบุญธรรมรับมรดกในฐานะทายาทลำดับ 2 (เสมือนบิดามารดา) ส่วนนายทองและ น.ส.ส้มไม่ใช่ทายาทของนายดำ",
+          "แบ่งสามส่วนเท่ากันระหว่างนางเหลือง นายทอง น.ส.ส้ม",
+          "ตกแผ่นดินเพราะนายดำกำพร้า",
+          "น.ส.ส้มรับทั้งหมด"
+        ],
+        appAns:0,
+        appFeedback:"นางเหลืองในฐานะผู้รับบุตรบุญธรรมเป็นทายาทที่มีสิทธิ",
+        concQ:"สรุปทายาทของนายดำ",
+        concOpts:[
+          "มรดกของนายดำตกได้แก่นางเหลืองผู้รับบุตรบุญธรรม (ทายาทโดยธรรมเสมือนบิดามารดา ลำดับ 2) แต่ผู้เดียว นายทองและ น.ส.ส้มไม่มีสิทธิ",
+          "ตกแก่ น.ส.ส้ม",
+          "ตกแผ่นดิน",
+          "แบ่งสามคนเท่ากัน"
+        ],
+        concAns:0,
+        concFeedback:"<b>สรุปประเด็น 2:</b> นายดำเป็นกำพร้าไม่มีผู้สืบสันดานและคู่สมรส เมื่อนางเหลืองรับนายดำเป็นบุตรบุญธรรม ความสัมพันธ์ทางมรดกทำให้นางเหลืองมีสิทธิรับมรดกของบุตรบุญธรรมในฐานะทายาทโดยธรรมเสมือนบิดามารดา (ลำดับ 2) ส่วนนายทอง (สามีใหม่ของนางเหลือง) และ น.ส.ส้ม (บุตรของนางเหลือง) มิใช่ผู้สืบสันดาน คู่สมรส หรือบุพการีของนายดำ จึงไม่มีสิทธิรับมรดกนายดำ ทรัพย์มรดกทั้งหมดจึงตกได้แก่นางเหลืองแต่ผู้เดียว"
+      }
+    ]
+  }
+];
+
+/* ================================================================
+   ORDER_CASES — เรียงขั้นตอน (แนววิธีตอบข้อสอบ)
+   ================================================================ */
+const ORDER_CASES = [
+  {
+    id:"order1",
+    title:"ขั้นตอนวิเคราะห์ข้อสอบแบ่งมรดก (แนว อ.ธนภัทร)",
+    cat:"intro",
+    steps:[
+      "อ่านคำถามท้ายโจทย์ก่อน เพื่อจับประเด็นที่ต้องตอบ แล้วค่อยอ่านข้อเท็จจริงโดยวงเฉพาะส่วนที่เกี่ยวข้อง",
+      "เมื่อพบชื่อบุคคล วิเคราะห์ว่าแต่ละคนเป็นใคร เข้าข่ายมาตราใด แล้วเขียนเลขมาตรากำกับไว้",
+      "เริ่มเขียนตอบด้วย ม.1599 เสมอ อธิบายว่ามรดกเกิดขึ้นได้อย่างไร (เมื่อเจ้ามรดกตาย)",
+      "วิเคราะห์กองมรดกตาม ม.1600 ว่าประกอบด้วยอะไรบ้าง กรณีมีคู่สมรสให้แยกสินส่วนตัวกับสินสมรสก่อน (ม.1625)",
+      "อธิบายบุคคลที่เกี่ยวข้องทุกคนว่ามีสิทธิหรือไม่มีสิทธิรับมรดกอย่างไร (ลำดับทายาท การกำจัด การตัด การสละ ฯลฯ)",
+      "คำนวณส่วนแบ่งของทายาทที่มีสิทธิให้ครบถ้วน",
+      "สรุปประเด็นตามที่โจทย์ถามให้ครบทุกประเด็น (ถ้ามีข้อย่อยหลายข้อ ให้เริ่มวิเคราะห์ใหม่ตั้งแต่ ม.1599 ทุกข้อ)"
+    ]
+  },
+  {
+    id:"order2",
+    title:"ลำดับการคิดส่วนแบ่งเมื่อมีคู่สมรส",
+    cat:"spouse",
+    steps:[
+      "จัดการสินสมรสกับสินส่วนตัวระหว่างผู้ตายกับคู่สมรสให้เสร็จก่อน (ม.1625)",
+      "ตั้งกองมรดก = สินส่วนตัวของผู้ตาย + ครึ่งหนึ่งของสินสมรส",
+      "พิจารณาลำดับทายาทตาม ม.1629 ว่ามีทายาทลำดับใดมีสิทธิรับมรดกบ้าง",
+      "คิดส่วนแบ่งของคู่สมรสตาม ม.1635 ตามลำดับทายาทที่รับร่วม (เท่าบุตร / กึ่งหนึ่ง / สองในสาม / ทั้งหมด)",
+      "แบ่งส่วนที่เหลือให้ทายาทโดยธรรมในลำดับเดียวกันเท่า ๆ กันตาม ม.1633"
+    ]
+  }
+];
+</script>
+<script>
+/* ================================================================
+   ENGINE — โครงเกม
+   ================================================================ */
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function pickDistractors(pool, excludeIdx, n){
+  const idxs = pool.map((_,i)=>i).filter(i=>i!==excludeIdx);
+  return shuffle(idxs).slice(0,n);
+}
+function chunk(arr, size){
+  const out = [];
+  for(let i=0;i<arr.length;i+=size) out.push(arr.slice(i, i+size));
+  return out;
+}
+function esc(s){
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+const SoundFX = (function(){
+  let ctx = null;
+  let enabled = true;
+  try{ enabled = localStorage.getItem('law300_sound') !== 'off'; }catch(e){}
+  function ensureCtx(){
+    if(!ctx){
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if(AC) ctx = new AC();
+    }
+    if(ctx && ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+  function tone(freq, dur, type, gainVal, delay){
+    if(!enabled) return;
+    const c = ensureCtx();
+    if(!c) return;
+    const t0 = c.currentTime + (delay||0);
+    const osc = c.createOscillator();
+    const gain = c.createGain();
+    osc.type = type || 'sine';
+    osc.frequency.setValueAtTime(freq, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(gainVal||0.1, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+dur);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+dur+0.02);
+  }
+  return {
+    click(){ tone(560,0.05,'square',0.05); },
+    flip(){ tone(700,0.04,'triangle',0.06); tone(420,0.05,'triangle',0.05,0.05); },
+    tab(){ tone(820,0.035,'sine',0.05); },
+    correct(){ tone(523,0.09,'triangle',0.08); tone(659,0.09,'triangle',0.08,0.09); tone(784,0.14,'triangle',0.09,0.18); },
+    wrong(){ tone(220,0.16,'sawtooth',0.07); tone(160,0.2,'sawtooth',0.06,0.06); },
+    score(){ tone(1046,0.1,'sine',0.07); tone(1568,0.12,'sine',0.06,0.08); },
+    isOn(){ return enabled; },
+    toggle(){
+      enabled = !enabled;
+      try{ localStorage.setItem('law300_sound', enabled ? 'on' : 'off'); }catch(e){}
+      return enabled;
+    }
+  };
+})();
+
+/* =========================================================
+   GAMIFICATION — คะแนนรวม (มุมขวาบน)
+   ========================================================= */
+const SCORE_KEY = 'law300_score_v1';
+function loadScore(){ try{ return parseInt(localStorage.getItem(SCORE_KEY)||'0',10)||0; }catch(e){ return 0; } }
+let totalScore = loadScore();
+function saveScoreValue(){ try{ localStorage.setItem(SCORE_KEY, String(totalScore)); }catch(e){} }
+function renderScoreDisplay(){
+  const el = document.getElementById('score-value');
+  if(el) el.textContent = totalScore;
+}
+function addScore(n){
+  totalScore += n;
+  saveScoreValue();
+  renderScoreDisplay();
+  const badge = document.getElementById('global-score');
+  if(badge){
+    badge.classList.remove('score-pop');
+    void badge.offsetWidth;
+    badge.classList.add('score-pop');
+  }
+}
+function loadSeenSet(key){
+  try{ return new Set(JSON.parse(localStorage.getItem(key) || '[]')); }
+  catch(e){ return new Set(); }
+}
+function saveSeenSet(key, set){
+  try{ localStorage.setItem(key, JSON.stringify(Array.from(set))); }
+  catch(e){}
+}
+const cardSeenSet = loadSeenSet('law300_cardsSeen');
+const seqSeenSet = loadSeenSet('law300_seqSeen');
+
+function makeQuestionTimer(elId, fastThreshold){
+  let startTs = 0, intervalId = null;
+  function update(){
+    const el = document.getElementById(elId);
+    if(!el) return;
+    const sec = (Date.now() - startTs) / 1000;
+    el.textContent = '⏱ ' + sec.toFixed(1) + 's';
+    el.classList.toggle('timer-fast', sec <= fastThreshold);
+  }
+  return {
+    start(){
+      startTs = Date.now();
+      clearInterval(intervalId);
+      intervalId = setInterval(update, 100);
+      update();
+    },
+    stop(){
+      clearInterval(intervalId);
+      return (Date.now() - startTs) / 1000;
+    }
+  };
+}
+const QUIZ_FAST_THRESHOLD = 8;
+const quizTimer = makeQuestionTimer('quiz-timer', QUIZ_FAST_THRESHOLD);
+const iracTimer = makeQuestionTimer('irac-timer', QUIZ_FAST_THRESHOLD);
+
+/* ---- สร้างโจทย์ระดับพื้นฐานอัตโนมัติจาก CARDS ---- */
+function buildBasicPool(){
+  const qs = [];
+  CARDS.forEach((c, idx)=>{
+    const dIdx = pickDistractors(CARDS, idx, 3);
+    const opts = [c.result, ...dIdx.map(i=>CARDS[i].result)];
+    const order = shuffle(opts.map((_,i)=>i));
+    qs.push({cat:c.cat, q: c.section + ' (' + c.title + ') มีผลทางกฎหมายอย่างไร',
+      opts: order.map(i=>opts[i]), ans: order.indexOf(0),
+      explain: c.section + ' [' + c.source + ']: ' + c.result + (c.note? ' ' + c.note : '')});
+  });
+  CARDS.forEach((c, idx)=>{
+    if(idx % 2 === 1) return;
+    const dIdx = pickDistractors(CARDS, idx, 3);
+    const opts = [c.section, ...dIdx.map(i=>CARDS[i].section)];
+    const order = shuffle(opts.map((_,i)=>i));
+    qs.push({cat:c.cat, q: '"' + c.result + '" (เรื่อง ' + c.title + ') ตรงกับมาตราใด',
+      opts: order.map(i=>opts[i]), ans: order.indexOf(0),
+      explain: c.title + ' บัญญัติอยู่ใน ' + c.section + ' [' + c.source + ']'});
+  });
+  return shuffle(qs);
+}
+
+const BASIC_POOL = buildBasicPool();
+const ADV_POOL   = shuffle(QUIZ_ADV);
+const BASIC_SETS = chunk(BASIC_POOL, 10);
+const ADV_SETS   = chunk(ADV_POOL, 10);
+
+/* ---------- header text ---------- */
+document.getElementById('hd-crest').textContent = CONFIG.crest;
+document.getElementById('hd-title').textContent = CONFIG.title;
+document.getElementById('hd-sub').textContent = CONFIG.subtitle;
+
+/* ---------- badge / stage painters ---------- */
+function paintBadge(el, catKey){
+  const c = CATEGORIES[catKey];
+  el.style.background = c.soft;
+  el.style.color = c.strong;
+  el.textContent = c.label;
+}
+function paintCardFrame(cardEl, ribbonEl, secEl, catKey){
+  const c = CATEGORIES[catKey];
+  ribbonEl.style.background = c.strong;
+  secEl.style.color = c.strong;
+}
+function paintStage(elId, catKey){
+  const el = document.getElementById(elId);
+  const c = CATEGORIES[catKey];
+  el.style.background = 'linear-gradient(135deg,' + c.strong + ' 0%, ' + c.strong + 'CC 100%)';
+  el.innerHTML =
+    '<span class="stage-icon">' + c.icon + '</span>' +
+    '<span><span class="stage-label">' + esc(c.label) + '</span>' +
+    '<span class="stage-src">' + esc(c.source) + '</span></span>';
+}
+
+/* =========================================================
+   โหมด 1: การ์ดจำมาตรา
+   ========================================================= */
+let deck = shuffle(CARDS);
+let cardIdx = 0;
+let flipped = false;
+
+const catSelect = document.getElementById('cat-select');
+(function initCatSelect(){
+  const optAll = document.createElement('option');
+  optAll.value = 'all'; optAll.textContent = 'ทุกหมวด';
+  catSelect.appendChild(optAll);
+  Object.keys(CATEGORIES).forEach(k=>{
+    const o = document.createElement('option');
+    o.value = k; o.textContent = CATEGORIES[k].label;
+    catSelect.appendChild(o);
+  });
+})();
+catSelect.addEventListener('change', ()=>{
+  const val = catSelect.value;
+  deck = val === 'all' ? shuffle(CARDS) : shuffle(CARDS.filter(c=>c.cat===val));
+  cardIdx = 0; flipped = false;
+  renderMatraChips(val);
+  renderCard();
+});
+
+function renderMatraChips(catVal){
+  const wrap = document.getElementById('matra-chips');
+  wrap.innerHTML = '';
+  if(catVal === 'all'){ wrap.style.display = 'none'; return; }
+  const items = CARDS.filter(c=>c.cat===catVal);
+  const cCat = CATEGORIES[catVal];
+  wrap.style.display = 'flex';
+  const label = document.createElement('span');
+  label.className = 'matra-chips-label';
+  label.textContent = 'มาตราในหมวดนี้:';
+  wrap.appendChild(label);
+  items.forEach(item=>{
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'matra-chip';
+    chip.textContent = item.section;
+    chip.style.setProperty('--chip-color', cCat.strong);
+    chip.title = item.title;
+    chip.addEventListener('click', ()=>{
+      SoundFX.click();
+      const idx = deck.findIndex(d=>d.section===item.section && d.cat===item.cat);
+      if(idx >= 0){ cardIdx = idx; flipped = false; renderCard(); }
+    });
+    wrap.appendChild(chip);
+  });
+}
+function updateMatraChipActive(section){
+  document.querySelectorAll('#matra-chips .matra-chip').forEach(el=>{
+    el.classList.toggle('active', el.textContent === section);
+  });
+}
+
+function renderCard(){
+  if(deck.length === 0) return;
+  const c = deck[cardIdx];
+  document.getElementById('card-section').textContent = c.section;
+  document.getElementById('card-src-front').textContent = c.source;
+  document.getElementById('card-stars').textContent = '★'.repeat(c.stars) + '☆'.repeat(5-c.stars);
+  document.getElementById('card-title').textContent = c.title;
+  document.getElementById('card-src-back').textContent = c.source;
+  document.getElementById('card-result').textContent = c.result;
+  document.getElementById('card-note').textContent = c.note || '';
+  document.getElementById('card-note').style.display = c.note ? 'block' : 'none';
+  document.getElementById('card-progress').textContent = (cardIdx+1) + ' / ' + deck.length;
+  document.getElementById('face-front').style.display = flipped ? 'none' : 'flex';
+  document.getElementById('face-back').style.display = flipped ? 'block' : 'none';
+  paintBadge(document.getElementById('cat-badge'), c.cat);
+  paintCardFrame(document.getElementById('flip-card'), document.getElementById('card-ribbon'), document.getElementById('card-section'), c.cat);
+  /* flip color */
+  const _fc = CATEGORIES[c.cat];
+  document.getElementById('flip-card').style.background = flipped ? _fc.soft : 'var(--card)';
+  document.getElementById('flip-card').style.borderColor = flipped ? _fc.strong : 'var(--line)';
+  paintStage('card-stage', c.cat);
+  updateMatraChipActive(c.section);
+}
+const flipCardEl = document.getElementById('flip-card');
+function doFlip(){
+  SoundFX.flip();
+  flipCardEl.classList.add('flipping');
+  setTimeout(()=>{
+    flipped = !flipped;
+    renderCard();
+    flipCardEl.classList.remove('flipping');
+    if(flipped){
+      const c = deck[cardIdx];
+      const key = c.cat + '|' + c.section;
+      if(!cardSeenSet.has(key)){
+        cardSeenSet.add(key);
+        saveSeenSet('law300_cardsSeen', cardSeenSet);
+        SoundFX.score();
+        addScore(10);
+      }
+    }
+  }, 90);
+}
+flipCardEl.addEventListener('click', doFlip);
+flipCardEl.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); doFlip(); } });
+document.getElementById('btn-next').addEventListener('click', ()=>{ SoundFX.click(); cardIdx=(cardIdx+1)%deck.length; flipped=false; renderCard(); });
+document.getElementById('btn-prev').addEventListener('click', ()=>{ SoundFX.click(); cardIdx=(cardIdx-1+deck.length)%deck.length; flipped=false; renderCard(); });
+document.getElementById('btn-shuffle').addEventListener('click', ()=>{ SoundFX.click(); deck=shuffle(deck); cardIdx=0; flipped=false; renderCard(); });
+
+/* =========================================================
+   โหมด 2: เรียงมาตราจำเป็นกลุ่ม
+   ========================================================= */
+const SEQ_ORDER = Object.keys(CATEGORIES);
+const seqSelect = document.getElementById('seq-select');
+SEQ_ORDER.forEach(val=>{
+  const o = document.createElement('option');
+  o.value = val; o.textContent = CATEGORIES[val].label;
+  seqSelect.appendChild(o);
+});
+function renderSeq(){
+  const val = seqSelect.value;
+  const items = CARDS.filter(c=>c.cat===val);
+  const c = CATEGORIES[val];
+  const listEl = document.getElementById('seq-list');
+  listEl.innerHTML = '';
+  items.forEach((item,i)=>{
+    const row = document.createElement('div');
+    row.className = 'seq-item';
+    row.style.borderLeftColor = c.strong;
+    let noteHtml = item.note ? '<div class="seq-note">'+esc(item.note)+'</div>' : '';
+    row.innerHTML =
+      '<div class="seq-num">'+(i+1)+'</div>'+
+      '<div style="flex:1">'+
+        '<div class="seq-head">'+
+          '<span class="seq-sec" style="color:'+c.strong+'">'+esc(item.section)+'</span>'+
+          '<span class="seq-title">'+esc(item.title)+'</span>'+
+          '<span class="seq-src">['+esc(item.source)+']</span>'+
+          '<span class="seq-stars">'+('★'.repeat(item.stars))+'</span>'+
+        '</div>'+
+        '<div class="seq-res">'+esc(item.result)+'</div>'+
+        noteHtml+
+      '</div>';
+    listEl.appendChild(row);
+  });
+  const sentinel = document.createElement('div');
+  sentinel.id = 'seq-sentinel';
+  sentinel.style.height = '1px';
+  listEl.appendChild(sentinel);
+  setupSeqObserver(val);
+}
+seqSelect.addEventListener('change', renderSeq);
+
+let seqObserver = null;
+function setupSeqObserver(catVal){
+  if(seqObserver) seqObserver.disconnect();
+  const sentinel = document.getElementById('seq-sentinel');
+  if(!sentinel) return;
+  seqObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting && !seqSeenSet.has(catVal)){
+        seqSeenSet.add(catVal);
+        saveSeenSet('law300_seqSeen', seqSeenSet);
+        SoundFX.score();
+        addScore(100);
+      }
+    });
+  }, {threshold:0.1});
+  seqObserver.observe(sentinel);
+}
+
+/* =========================================================
+   โหมด 3: วิเคราะห์โจทย์
+   ========================================================= */
+let quizLevel = 'basic';
+let currentSetIdx = 0;
+let quizPool = BASIC_SETS[0];
+let quizOrder = shuffle(quizPool.map((_,i)=>i));
+let quizIdx = 0;
+let score = 0;
+let answered = false;
+let wrongIdxs = [];
+let reviewMode = false;
+
+function currentSets(){ return quizLevel === 'basic' ? BASIC_SETS : ADV_SETS; }
+
+function loadBest(){
+  try{ return JSON.parse(localStorage.getItem(CONFIG.storageKey) || '{}'); }
+  catch(e){ return {}; }
+}
+function saveBest(level, setIdx, score, total){
+  const data = loadBest();
+  const key = level + '_' + setIdx;
+  if(!data[key] || score > data[key].score){
+    data[key] = {score, total};
+    try{ localStorage.setItem(CONFIG.storageKey, JSON.stringify(data)); }catch(e){}
+  }
+}
+function getBest(level, setIdx){
+  const data = loadBest();
+  return data[level + '_' + setIdx] || null;
+}
+
+function renderSetPicker(){
+  const sets = currentSets();
+  const picker = document.getElementById('set-picker');
+  picker.innerHTML = '';
+  sets.forEach((s,i)=>{
+    const btn = document.createElement('button');
+    const best = getBest(quizLevel, i);
+    btn.innerHTML = 'ชุด ' + (i+1) + (best ? ' <span class="best">'+best.score+'/'+best.total+'</span>' : '');
+    if(i === currentSetIdx) btn.classList.add('on');
+    btn.addEventListener('click', ()=>{ SoundFX.click(); selectSet(i); });
+    picker.appendChild(btn);
+  });
+}
+
+function selectSet(i){
+  currentSetIdx = i;
+  quizPool = currentSets()[i];
+  quizOrder = shuffle(quizPool.map((_,k)=>k));
+  quizIdx = 0; score = 0; wrongIdxs = []; reviewMode = false;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderSetPicker();
+  renderQuiz();
+}
+
+function setLevel(lvl){
+  quizLevel = lvl;
+  currentSetIdx = 0;
+  quizPool = currentSets()[0];
+  quizOrder = shuffle(quizPool.map((_,i)=>i));
+  quizIdx = 0; score = 0; wrongIdxs = []; reviewMode = false;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  document.getElementById('lvl-basic').classList.toggle('on', lvl==='basic');
+  document.getElementById('lvl-adv').classList.toggle('on', lvl==='adv');
+  renderSetPicker();
+  renderQuiz();
+}
+
+function syncStickyBar(){
+  const quizOn = viewQuiz.classList.contains('on') && document.getElementById('quiz-play').style.display !== 'none';
+  const iracOn = viewIrac.classList.contains('on') && document.getElementById('irac-play').style.display === 'block';
+  const orderOn = viewOrder.classList.contains('on') && document.getElementById('order-play').style.display !== 'none';
+  const show = quizOn || iracOn || orderOn;
+  document.getElementById('sticky-bar').style.display = show ? 'block' : 'none';
+  document.body.classList.toggle('has-sticky-bar', show);
+}
+
+function renderQuiz(){
+  const item = quizPool[quizOrder[quizIdx]];
+  document.getElementById('quiz-scenario').textContent = item.q;
+  const label = reviewMode ? 'ทบทวนข้อผิด' : ('ชุด ' + (currentSetIdx+1));
+  document.getElementById('quiz-progress').textContent = label + ' • ข้อ ' + (quizIdx+1) + ' / ' + quizPool.length;
+  document.getElementById('quiz-score').textContent = 'คะแนน ' + score + ' / ' + quizPool.length;
+  document.getElementById('pbar').style.width = (((quizIdx)/quizPool.length)*100) + '%';
+  paintBadge(document.getElementById('quiz-tag'), item.cat);
+  paintStage('quiz-stage', item.cat);
+  const optsDiv = document.getElementById('quiz-options');
+  optsDiv.innerHTML = '';
+  const letters = ['ก','ข','ค','ง'];
+  item.opts.forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.innerHTML = '<span class="abc">'+letters[i]+'</span><span>'+esc(opt)+'</span>';
+    btn.addEventListener('click', ()=> selectAnswer(i));
+    optsDiv.appendChild(btn);
+  });
+  document.getElementById('quiz-explain').style.display = 'none';
+  document.getElementById('quiz-explain').className = 'explain';
+  document.getElementById('quiz-next').style.display = 'none';
+  document.getElementById('quiz-finish').style.display = 'none';
+  answered = false;
+  syncStickyBar();
+  quizTimer.start();
+}
+
+function selectAnswer(i){
+  if(answered) return;
+  answered = true;
+  const elapsed = quizTimer.stop();
+  const item = quizPool[quizOrder[quizIdx]];
+  const optsDiv = document.getElementById('quiz-options');
+  const btns = optsDiv.querySelectorAll('button');
+  btns.forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx === item.ans) b.classList.add('correct');
+    else if(idx === i) b.classList.add('wrong');
+  });
+  const isCorrect = (i === item.ans);
+  let ptsMsg = '';
+  if(isCorrect){
+    score++; SoundFX.correct();
+    const pts = elapsed <= QUIZ_FAST_THRESHOLD ? 20 : 1;
+    addScore(pts);
+    ptsMsg = ' <span class="pts-earned">+' + pts + ' คะแนน' + (elapsed <= QUIZ_FAST_THRESHOLD ? ' ตอบเร็ว!' : '') + '</span>';
+  } else {
+    SoundFX.wrong(); if(!reviewMode) wrongIdxs.push(quizOrder[quizIdx]);
+  }
+  document.getElementById('quiz-score').textContent = 'คะแนน ' + score + ' / ' + quizPool.length;
+  document.getElementById('pbar').style.width = (((quizIdx+1)/quizPool.length)*100) + '%';
+  const explainDiv = document.getElementById('quiz-explain');
+  explainDiv.className = 'explain ' + (isCorrect ? 'ok' : 'bad');
+  explainDiv.innerHTML = '<b>' + (isCorrect ? '✓ ถูกต้อง' : '✗ ยังไม่ถูก — เฉลยคือ ' + letters_ans(item)) + ptsMsg + '</b>' + item.explain;
+  explainDiv.style.display = 'block';
+  if(quizIdx < quizPool.length - 1){
+    document.getElementById('quiz-next').style.display = 'block';
+  } else {
+    document.getElementById('quiz-finish').style.display = 'block';
+  }
+}
+function letters_ans(item){
+  return ['ก','ข','ค','ง'][item.ans];
+}
+
+document.getElementById('quiz-next').addEventListener('click', ()=>{ quizIdx++; renderQuiz(); });
+
+document.getElementById('quiz-finish').addEventListener('click', showSummary);
+
+function showSummary(){
+  document.getElementById('quiz-play').style.display = 'none';
+  syncStickyBar();
+  const summary = document.getElementById('quiz-summary');
+  summary.style.display = 'block';
+  const total = quizPool.length;
+  document.getElementById('sum-set-label').textContent = reviewMode ? 'ทบทวนข้อที่ผิด' : ('ระดับ' + (quizLevel==='basic'?'พื้นฐาน':'ข้อสอบจริง') + ' • ชุด ' + (currentSetIdx+1));
+  document.getElementById('sum-score').textContent = score;
+  document.getElementById('sum-of').textContent = 'จาก ' + total + ' ข้อ';
+  const pct = total ? score/total : 0;
+  const starCount = Math.max(1, Math.round(pct*5));
+  document.getElementById('sum-stars').textContent = '★'.repeat(starCount) + '☆'.repeat(5-starCount);
+  let grade = 'ลุยต่อได้เลย';
+  if(pct >= 0.9) grade = 'เยี่ยมมาก แม่นจริง';
+  else if(pct >= 0.7) grade = 'ดีมาก ใกล้เต็มแล้ว';
+  else if(pct >= 0.5) grade = 'พอใช้ ทบทวนอีกนิด';
+  else grade = 'ลองทบทวนการ์ดแล้วมาสู้ใหม่';
+  document.getElementById('sum-grade').textContent = grade;
+
+  if(!reviewMode){
+    saveBest(quizLevel, currentSetIdx, score, total);
+    const best = getBest(quizLevel, currentSetIdx);
+    document.getElementById('sum-best').textContent = best ? ('คะแนนดีที่สุดของชุดนี้: ' + best.score + '/' + best.total) : '';
+  } else {
+    document.getElementById('sum-best').textContent = '';
+  }
+
+  const sets = currentSets();
+  document.getElementById('sum-nextset').style.display = (!reviewMode && currentSetIdx < sets.length - 1) ? 'inline-block' : 'none';
+  document.getElementById('sum-review').style.display = (!reviewMode && wrongIdxs.length > 0) ? 'inline-block' : 'none';
+}
+
+document.getElementById('sum-retry').addEventListener('click', ()=>{
+  if(reviewMode){
+    quizOrder = shuffle(quizPool.map((_,i)=>i));
+  } else {
+    quizOrder = shuffle(quizPool.map((_,i)=>i));
+    wrongIdxs = [];
+  }
+  quizIdx = 0; score = 0;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderQuiz();
+});
+document.getElementById('sum-nextset').addEventListener('click', ()=>{ selectSet(currentSetIdx + 1); });
+document.getElementById('sum-review').addEventListener('click', ()=>{
+  reviewMode = true;
+  const basePool = quizPool;
+  quizPool = wrongIdxs.map(i => basePool[i]);
+  quizOrder = shuffle(quizPool.map((_,i)=>i));
+  quizIdx = 0; score = 0;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderQuiz();
+});
+
+document.getElementById('lvl-basic').addEventListener('click', ()=>{ SoundFX.click(); setLevel('basic'); });
+document.getElementById('lvl-adv').addEventListener('click', ()=>{ SoundFX.click(); setLevel('adv'); });
+
+/* =========================================================
+   แท็บหลัก + รีเซ็ต
+   ========================================================= */
+const tabCard = document.getElementById('tab-card');
+const tabSeq  = document.getElementById('tab-seq');
+const tabQuiz = document.getElementById('tab-quiz');
+const tabIrac = document.getElementById('tab-irac');
+const tabOrder = document.getElementById('tab-order');
+const viewCard = document.getElementById('view-card');
+const viewSeq  = document.getElementById('view-seq');
+const viewQuiz = document.getElementById('view-quiz');
+const viewIrac = document.getElementById('view-irac');
+const viewOrder = document.getElementById('view-order');
+
+function setTab(which){
+  viewCard.classList.toggle('on', which==='card');
+  viewSeq.classList.toggle('on', which==='seq');
+  viewQuiz.classList.toggle('on', which==='quiz');
+  viewIrac.classList.toggle('on', which==='irac');
+  viewOrder.classList.toggle('on', which==='order');
+  tabCard.classList.toggle('on', which==='card');
+  tabSeq.classList.toggle('on', which==='seq');
+  tabQuiz.classList.toggle('on', which==='quiz');
+  tabIrac.classList.toggle('on', which==='irac');
+  tabOrder.classList.toggle('on', which==='order');
+  const headerEl = document.getElementById('page-header');
+  if(which === 'quiz' || which === 'order'){
+    headerEl.classList.add('compact');
+  } else if(which !== 'irac' || document.getElementById('irac-play').style.display === 'none'){
+    headerEl.classList.remove('compact');
+  }
+  syncStickyBar();
+}
+tabCard.addEventListener('click', ()=>{ SoundFX.tab(); setTab('card'); });
+tabSeq.addEventListener('click', ()=>{ SoundFX.tab(); setTab('seq'); });
+tabQuiz.addEventListener('click', ()=>{ SoundFX.tab(); setTab('quiz'); });
+tabIrac.addEventListener('click', ()=>{ SoundFX.tab(); setTab('irac'); });
+tabOrder.addEventListener('click', ()=>{ SoundFX.tab(); setTab('order'); renderOrderPicker(); });
+
+const btnSound = document.getElementById('btn-sound');
+btnSound.textContent = SoundFX.isOn() ? '🔊' : '🔇';
+btnSound.addEventListener('click', ()=>{
+  const on = SoundFX.toggle();
+  btnSound.textContent = on ? '🔊' : '🔇';
+  if(on) SoundFX.click();
+});
+
+document.getElementById('btn-reset').addEventListener('click', ()=>{
+  if(!confirm('รีเซ็ตหน้าจอทั้งหมด (คะแนนดีที่สุดที่บันทึกไว้จะยังอยู่) ต้องการดำเนินการต่อหรือไม่?')) return;
+  catSelect.value = 'all';
+  deck = shuffle(CARDS); cardIdx = 0; flipped = false;
+  renderMatraChips('all');
+  renderCard();
+  seqSelect.value = SEQ_ORDER[0];
+  renderSeq();
+  setLevel('basic');
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('irac-play').style.display = 'none';
+  document.getElementById('irac-summary').style.display = 'none';
+  renderCasePicker();
+  document.getElementById('order-picker').style.display = 'block';
+  document.getElementById('order-play').style.display = 'none';
+  renderOrderPicker();
+  setTab('card');
+});
+
+/* =========================================================
+   โหมด 4: ฝึก IRAC
+   ========================================================= */
+let iracCaseIdx = 0;
+let iracIssueIdx = 0;
+let iracStage = 'issue'; // issue -> rule -> app -> conc
+let iracScore = 0;
+let iracTotal = 0;
+
+function renderCasePicker(){
+  const el = document.getElementById('irac-caselist');
+  el.innerHTML = '';
+  IRAC_CASES.forEach((c, i)=>{
+    const card = document.createElement('button');
+    card.className = 'irac-case-card';
+    card.innerHTML =
+      '<div class="icref">'+esc(c.examRef)+' · '+esc(CATEGORIES[c.cat].label)+'</div>'+
+      '<div class="ictitle">'+esc(c.title)+'</div>'+
+      '<div class="icprog">'+c.issues.length+' ประเด็น · '+(c.issues.length*4)+' ขั้นตอน</div>';
+    card.addEventListener('click', ()=>{ SoundFX.click(); startIracCase(i); });
+    el.appendChild(card);
+  });
+}
+
+function startIracCase(idx){
+  iracCaseIdx = idx;
+  iracIssueIdx = 0;
+  iracStage = 'issue';
+  iracScore = 0;
+  iracTotal = IRAC_CASES[idx].issues.length * 4;
+  document.getElementById('irac-picker').style.display = 'none';
+  document.getElementById('irac-play').style.display = 'block';
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('irac-recap-box').style.display = 'none';
+  document.getElementById('irac-stage-box').style.display = 'block';
+  document.getElementById('page-header').classList.add('compact');
+  const c = IRAC_CASES[idx];
+  paintBadge(document.getElementById('irac-case-tag'), c.cat);
+  const factsEl = document.getElementById('irac-facts');
+  factsEl.innerHTML = c.facts;
+  factsEl.classList.remove('expanded');
+  document.getElementById('irac-facts-toggle').textContent = 'ขยายอ่านโจทย์เต็ม ▾';
+  syncStickyBar();
+  renderIracStep();
+}
+
+document.getElementById('irac-facts-toggle').addEventListener('click', ()=>{
+  const factsEl = document.getElementById('irac-facts');
+  const expanded = factsEl.classList.toggle('expanded');
+  document.getElementById('irac-facts-toggle').textContent = expanded ? 'ย่อโจทย์ ▴' : 'ขยายอ่านโจทย์เต็ม ▾';
+});
+
+document.getElementById('irac-back').addEventListener('click', ()=>{
+  SoundFX.click();
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('irac-play').style.display = 'none';
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('page-header').classList.remove('compact');
+  syncStickyBar();
+  renderCasePicker();
+});
+
+const IRAC_STAGE_INFO = {
+  issue:{key:'issue', qKey:'issueQ', optsKey:'issueOpts', ansKey:'issueAns', fbKey:'issueFeedback', label:'เลือกประเด็น', next:'rule'},
+  rule: {key:'rule',  qKey:'ruleQ',  optsKey:'ruleOpts',  ansKey:'ruleAns',  fbKey:'ruleFeedback',  label:'เลือกมาตรา', next:'app'},
+  app:  {key:'app',   qKey:'appQ',   optsKey:'appOpts',   ansKey:'appAns',   fbKey:'appFeedback',   label:'ปรับบท',     next:'conc'},
+  conc: {key:'conc',  qKey:'concQ',  optsKey:'concOpts',  ansKey:'concAns',  fbKey:'concFeedback',  label:'สรุปผล',     next:null}
+};
+
+function renderIracStep(){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  const info = IRAC_STAGE_INFO[iracStage];
+
+  document.getElementById('irac-progress-label').textContent =
+    issue.label + ' · ประเด็น ' + (iracIssueIdx+1) + '/' + c.issues.length + ' · ขั้นตอน: ' + info.label;
+
+  const order = ['issue','rule','app','conc'];
+  const curIdx = order.indexOf(iracStage);
+  document.querySelectorAll('#irac-stepper .irac-step').forEach((el)=>{
+    const step = el.getAttribute('data-step');
+    const stepIdx = order.indexOf(step);
+    el.classList.remove('active','done');
+    if(stepIdx < curIdx) el.classList.add('done');
+    else if(stepIdx === curIdx) el.classList.add('active');
+  });
+
+  document.getElementById('irac-question').textContent = issue[info.qKey];
+  const optsDiv = document.getElementById('irac-options');
+  optsDiv.innerHTML = '';
+  const letters = ['ก','ข','ค','ง'];
+  issue[info.optsKey].forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.innerHTML = '<span class="abc">'+letters[i]+'</span><span>'+esc(opt)+'</span>';
+    btn.addEventListener('click', ()=> selectIracOption(i));
+    optsDiv.appendChild(btn);
+  });
+  document.getElementById('irac-explain').style.display = 'none';
+  document.getElementById('irac-explain').className = 'explain';
+  document.getElementById('irac-next').style.display = 'none';
+  document.getElementById('irac-recap-next').style.display = 'none';
+  iracTimer.start();
+}
+
+function selectIracOption(i){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  const info = IRAC_STAGE_INFO[iracStage];
+  const optsDiv = document.getElementById('irac-options');
+  const btns = optsDiv.querySelectorAll('button');
+  if(btns[0].disabled) return;
+  const elapsed = iracTimer.stop();
+  const ans = issue[info.ansKey];
+  btns.forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx === ans) b.classList.add('correct');
+    else if(idx === i) b.classList.add('wrong');
+  });
+  const isCorrect = (i === ans);
+  let ptsMsg = '';
+  if(isCorrect){
+    iracScore++; SoundFX.correct();
+    const pts = elapsed <= QUIZ_FAST_THRESHOLD ? 20 : 1;
+    addScore(pts);
+    ptsMsg = ' <span class="pts-earned">+' + pts + ' คะแนน' + (elapsed <= QUIZ_FAST_THRESHOLD ? ' ตอบเร็ว!' : '') + '</span>';
+  } else {
+    SoundFX.wrong();
+  }
+  const explainDiv = document.getElementById('irac-explain');
+  explainDiv.className = 'explain ' + (isCorrect ? 'ok' : 'bad');
+  explainDiv.innerHTML = '<b>' + (isCorrect ? '✓ ถูกต้อง' : '✗ ยังไม่ถูก — คำตอบที่ควรเลือกคือ ข้อ ' + ['ก','ข','ค','ง'][ans]) + ptsMsg + '</b>' + issue[info.fbKey];
+  explainDiv.style.display = 'block';
+  document.getElementById('irac-next').style.display = 'block';
+  syncStickyBar();
+}
+
+document.getElementById('irac-next').addEventListener('click', ()=>{
+  SoundFX.click();
+  const info = IRAC_STAGE_INFO[iracStage];
+  if(info.next){
+    iracStage = info.next;
+    renderIracStep();
+  } else {
+    showIssueRecap();
+  }
+});
+
+function showIssueRecap(){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  document.getElementById('irac-stage-box').style.display = 'none';
+  const recapBox = document.getElementById('irac-recap-box');
+  recapBox.style.display = 'block';
+  const isLast = iracIssueIdx >= c.issues.length - 1;
+  document.getElementById('irac-recap-title').textContent = 'ทำครบ ' + issue.label + ' แล้ว';
+  document.getElementById('irac-recap-text').innerHTML = issue.concFeedback;
+  document.getElementById('irac-next').style.display = 'none';
+  document.getElementById('irac-recap-next').textContent = isLast ? 'ดูสรุปผลทั้งข้อ →' : 'ประเด็นถัดไป →';
+  document.getElementById('irac-recap-next').style.display = 'block';
+}
+
+document.getElementById('irac-recap-next').addEventListener('click', ()=>{
+  SoundFX.click();
+  const c = IRAC_CASES[iracCaseIdx];
+  document.getElementById('irac-recap-box').style.display = 'none';
+  document.getElementById('irac-recap-next').style.display = 'none';
+  if(iracIssueIdx >= c.issues.length - 1){
+    showIracCaseSummary();
+  } else {
+    iracIssueIdx++;
+    iracStage = 'issue';
+    document.getElementById('irac-stage-box').style.display = 'block';
+    renderIracStep();
+  }
+});
+
+function showIracCaseSummary(){
+  document.getElementById('irac-play').style.display = 'none';
+  syncStickyBar();
+  const summary = document.getElementById('irac-summary');
+  summary.style.display = 'block';
+  const c = IRAC_CASES[iracCaseIdx];
+  document.getElementById('irac-sum-label').textContent = c.title;
+  document.getElementById('irac-sum-score').textContent = iracScore;
+  document.getElementById('irac-sum-of').textContent = 'จาก ' + iracTotal + ' ขั้นตอน';
+  const pct = iracTotal ? iracScore/iracTotal : 0;
+  const starCount = Math.max(1, Math.round(pct*5));
+  document.getElementById('irac-sum-stars').textContent = '★'.repeat(starCount) + '☆'.repeat(5-starCount);
+  let grade = 'ลุยต่อได้เลย';
+  if(pct >= 0.9) grade = 'วินิจฉัยแม่นมาก เก่งมาก!';
+  else if(pct >= 0.7) grade = 'ดีมาก ใกล้ครบทุกประเด็นแล้ว';
+  else if(pct >= 0.5) grade = 'พอใช้ ลองย้อนทบทวนประเด็นที่พลาด';
+  else grade = 'ลองอ่านโจทย์อีกครั้งแล้วไล่ทีละประเด็นใหม่';
+  document.getElementById('irac-sum-grade').textContent = grade;
+  document.getElementById('irac-sum-nextcase').style.display = (iracCaseIdx < IRAC_CASES.length - 1) ? 'inline-block' : 'none';
+}
+
+document.getElementById('irac-sum-retry').addEventListener('click', ()=>{
+  SoundFX.click();
+  startIracCase(iracCaseIdx);
+});
+document.getElementById('irac-sum-back').addEventListener('click', ()=>{
+  SoundFX.click();
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('page-header').classList.remove('compact');
+  renderCasePicker();
+});
+document.getElementById('irac-sum-nextcase').addEventListener('click', ()=>{
+  SoundFX.click();
+  startIracCase(iracCaseIdx + 1);
+});
+
+renderCasePicker();
+
+/* =========================================================
+   โหมด 5: เรียงขั้นตอน (คลิกเรียงลำดับ)
+   ========================================================= */
+let orderCaseIdx = 0;
+let orderRemaining = [];
+let orderPlaced = [];
+let orderChecked = false;
+const orderTimer = makeQuestionTimer('order-timer', 20);
+const orderSeenSet = loadSeenSet('law300_orderSeen');
+
+function renderOrderPicker(){
+  const el = document.getElementById('order-caselist');
+  el.innerHTML = '';
+  ORDER_CASES.forEach((o,i)=>{
+    const card = document.createElement('button');
+    card.className = 'irac-case-card';
+    card.innerHTML =
+      '<div class="icref">'+esc(CATEGORIES[o.cat].label)+'</div>'+
+      '<div class="ictitle">'+esc(o.title)+'</div>'+
+      '<div class="icprog">'+o.steps.length+' ขั้นตอน</div>';
+    card.addEventListener('click', ()=>{ SoundFX.click(); startOrderCase(i); });
+    el.appendChild(card);
+  });
+}
+
+function startOrderCase(idx){
+  orderCaseIdx = idx;
+  orderChecked = false;
+  const o = ORDER_CASES[idx];
+  orderRemaining = shuffle(o.steps.map((_,i)=>i));
+  orderPlaced = [];
+  document.getElementById('order-picker').style.display = 'none';
+  document.getElementById('order-play').style.display = 'block';
+  document.getElementById('order-summary').style.display = 'none';
+  document.getElementById('page-header').classList.add('compact');
+  paintBadge(document.getElementById('order-tag'), o.cat);
+  document.getElementById('order-title').textContent = o.title;
+  document.getElementById('order-explain').style.display = 'none';
+  document.getElementById('order-retry').style.display = 'none';
+  document.getElementById('order-nextcase').style.display = 'none';
+  renderOrderPools();
+  orderTimer.start();
+  syncStickyBar();
+}
+
+function renderOrderPools(){
+  const o = ORDER_CASES[orderCaseIdx];
+  const poolEl = document.getElementById('order-pool');
+  const placedEl = document.getElementById('order-placed');
+  poolEl.innerHTML = '';
+  orderRemaining.forEach(stepIdx=>{
+    const btn = document.createElement('button');
+    btn.className = 'order-chip';
+    btn.textContent = o.steps[stepIdx];
+    btn.disabled = orderChecked;
+    btn.addEventListener('click', ()=>{
+      if(orderChecked) return;
+      SoundFX.click();
+      orderRemaining = orderRemaining.filter(x=>x!==stepIdx);
+      orderPlaced.push(stepIdx);
+      renderOrderPools();
+    });
+    poolEl.appendChild(btn);
+  });
+  placedEl.innerHTML = '';
+  orderPlaced.forEach((stepIdx,pos)=>{
+    const row = document.createElement('div');
+    row.className = 'order-placed-row';
+    row.innerHTML = '<span class="order-num">'+(pos+1)+'</span><span class="order-txt">'+esc(o.steps[stepIdx])+'</span>' +
+      (orderChecked ? '' : '<button class="order-remove" data-i="'+pos+'">✕</button>');
+    placedEl.appendChild(row);
+  });
+  if(!orderChecked){
+    placedEl.querySelectorAll('.order-remove').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        const pos = parseInt(btn.getAttribute('data-i'),10);
+        const removed = orderPlaced.splice(pos,1)[0];
+        orderRemaining.push(removed);
+        renderOrderPools();
+      });
+    });
+  }
+  document.getElementById('order-check').style.display = (orderRemaining.length===0 && !orderChecked) ? 'block' : 'none';
+}
+
+function checkOrder(){
+  if(orderChecked) return;
+  orderChecked = true;
+  const elapsed = orderTimer.stop();
+  const o = ORDER_CASES[orderCaseIdx];
+  let correctCount = 0;
+  orderPlaced.forEach((stepIdx,pos)=>{ if(stepIdx===pos) correctCount++; });
+  const allCorrect = correctCount === o.steps.length;
+  renderOrderPools();
+  document.querySelectorAll('#order-placed .order-placed-row').forEach((row,pos)=>{
+    row.classList.add(orderPlaced[pos]===pos ? 'correct' : 'wrong');
+  });
+  const explainEl = document.getElementById('order-explain');
+  let ptsMsg = '';
+  if(allCorrect){
+    SoundFX.correct();
+    if(!orderSeenSet.has(o.id)){
+      orderSeenSet.add(o.id);
+      saveSeenSet('law300_orderSeen', orderSeenSet);
+      const pts = elapsed <= 20 ? 50 : 5;
+      addScore(pts);
+      ptsMsg = ' <span class="pts-earned">+' + pts + ' คะแนน' + (elapsed <= 20 ? ' เร็วมาก!' : '') + '</span>';
+    }
+  } else {
+    SoundFX.wrong();
+  }
+  explainEl.className = 'explain ' + (allCorrect ? 'ok' : 'bad');
+  explainEl.innerHTML = '<b>' + (allCorrect ? '✓ เรียงถูกต้องทั้งหมด!' : '✗ ถูก ' + correctCount + ' / ' + o.steps.length + ' ขั้นตอน') + ptsMsg + '</b>' +
+    (allCorrect ? 'เยี่ยมมาก! ลำดับขั้นตอนตรงกับที่ถูกต้องทุกช่อง' : 'ลองดูแถวที่ทำเครื่องหมายสีแดง แล้วกด "ลองใหม่" เพื่อเรียงอีกครั้ง');
+  explainEl.style.display = 'block';
+  document.getElementById('order-check').style.display = 'none';
+  document.getElementById('order-retry').style.display = 'inline-block';
+  document.getElementById('order-nextcase').style.display = (orderCaseIdx < ORDER_CASES.length - 1) ? 'inline-block' : 'none';
+  syncStickyBar();
+}
+
+document.getElementById('order-back').addEventListener('click', ()=>{
+  SoundFX.click();
+  document.getElementById('order-picker').style.display = 'block';
+  document.getElementById('order-play').style.display = 'none';
+  document.getElementById('page-header').classList.remove('compact');
+  syncStickyBar();
+  renderOrderPicker();
+});
+document.getElementById('order-check').addEventListener('click', checkOrder);
+document.getElementById('order-retry').addEventListener('click', ()=>{ SoundFX.click(); startOrderCase(orderCaseIdx); });
+document.getElementById('order-nextcase').addEventListener('click', ()=>{ SoundFX.click(); startOrderCase(orderCaseIdx + 1); });
+
+renderOrderPicker();
+
+/* ---------- init ---------- */
+renderScoreDisplay();
+renderCard();
+seqSelect.value = SEQ_ORDER[0];
+renderSeq();
+renderSetPicker();
+setLevel('basic');
+setTab('card');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2239 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ห้องซ้อมสอบ กม.สัญญาทางพาณิชย์ 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@400;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF9F4;
+  --card:#FFFFFF;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --gold-soft:#F3E8CF;
+  --ok:#1E7A4F;
+  --ok-bg:#E6F4EC;
+  --bad:#B23A3A;
+  --bad-bg:#FBEAEA;
+  --accent:#2E4A7A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+/* ---------- top home bar (flat, for future multi-subject hub) ---------- */
+.home-bar{
+  display:flex;align-items:center;gap:10px;
+  background:#EFEAE0;border-bottom:1px solid var(--line);
+  padding:10px 16px;font-size:13px;color:var(--ink-soft);
+}
+.home-bar-link{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.home-bar-link:hover{text-decoration:underline}
+.home-bar-sep{color:var(--ink-faint)}
+.home-bar-current{font-weight:600;color:var(--ink-soft)}
+.home-bar-score{
+  margin-left:auto;font-weight:800;color:#8F6511;background:var(--gold-soft);
+  padding:4px 12px;border-radius:999px;font-size:13px;white-space:nowrap;
+  transition:transform .15s;
+}
+.home-bar-score.score-pop{animation:scorePop .4s ease}
+@keyframes scorePop{
+  0%{transform:scale(1)}
+  35%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),
+    var(--paper);
+  color:var(--ink);
+  min-height:100vh;
+  padding:20px 14px 60px;
+  font-size:16px;
+  line-height:1.75;
+}
+.wrap{max-width:860px;margin:0 auto}
+
+/* ---------- header ---------- */
+header{text-align:center;margin-bottom:22px;transition:opacity .15s}
+header.compact{margin-bottom:10px}
+header.compact .crest{display:none}
+header.compact h1{font-size:19px}
+header.compact .subtitle{display:none}
+.crest{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Noto Serif Thai',serif;
+  font-size:13px;letter-spacing:.35em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:6px;
+}
+.crest::before,.crest::after{content:"";width:44px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+.crest::after{background:linear-gradient(90deg,var(--gold),transparent);}
+h1{
+  font-family:'Noto Serif Thai',serif;
+  font-size:clamp(24px,5vw,36px);
+  font-weight:700;line-height:1.3;
+}
+.subtitle{color:var(--ink-soft);font-size:15px;margin-top:2px}
+
+/* ---------- tabs ---------- */
+.tabbar{
+  display:flex;gap:6px;background:#F1EDE2;border:1px solid var(--line);
+  border-radius:999px;padding:5px;margin:20px auto 26px;max-width:600px;
+}
+.tabbar button{
+  flex:1;border:none;background:transparent;border-radius:999px;
+  padding:10px 5px;font-family:inherit;font-size:13.5px;font-weight:600;
+  color:var(--ink-soft);cursor:pointer;transition:all .2s;
+}
+.tabbar button.on{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+.tabbar button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#btn-reset,#btn-sound{
+  flex:0 0 38px;font-size:15px;color:var(--ink-faint);
+}
+#btn-reset:hover{color:var(--bad)}
+#btn-sound:hover{color:var(--accent)}
+
+/* ---------- sticky bottom action bar ---------- */
+.sticky-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
+  background:linear-gradient(180deg,rgba(251,249,244,0) 0%,var(--paper) 35%);
+  padding:22px 14px calc(14px + env(safe-area-inset-bottom,0px));
+}
+.sticky-bar-inner{max-width:860px;margin:0 auto;display:flex;gap:10px}
+.sticky-bar-inner button{
+  flex:1;box-shadow:0 6px 20px rgba(34,40,58,.22);
+  padding:18px 20px;font-size:17.5px;font-weight:700;border-radius:14px;
+  letter-spacing:.01em;
+}
+body.has-sticky-bar{padding-bottom:92px}
+@media(max-width:520px){
+  .sticky-bar{padding:18px 10px calc(12px + env(safe-area-inset-bottom,0px))}
+  .sticky-bar-inner button{padding:16px 14px;font-size:16px}
+}
+.irac-caselist{display:flex;flex-direction:column;gap:10px}
+.irac-case-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;text-align:left;cursor:pointer;transition:border-color .15s;
+}
+.irac-case-card:hover{border-color:var(--gold)}
+.irac-case-card .icref{font-size:12px;color:var(--ink-faint);margin-bottom:4px}
+.irac-case-card .ictitle{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:600}
+.irac-case-card .icprog{font-size:12.5px;color:var(--gold);margin-top:6px;font-weight:600}
+
+.irac-facts{
+  background:#FBF6E8;border:1px solid var(--gold-soft);border-radius:var(--radius);
+  padding:14px 16px;margin-bottom:6px;font-size:15px;line-height:1.85;color:var(--ink);
+  max-height:92px;overflow:hidden;position:relative;
+}
+.irac-facts::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:34px;
+  background:linear-gradient(180deg,transparent,#FBF6E8);pointer-events:none;
+}
+.irac-facts.expanded{max-height:none}
+.irac-facts.expanded::after{display:none}
+.irac-facts-toggle{
+  display:block;width:100%;text-align:center;font-size:13px;color:var(--accent);font-weight:600;
+  background:none;border:none;padding:5px 0 14px;cursor:pointer;
+}
+
+.irac-stepper{display:flex;gap:5px;margin-bottom:8px}
+.irac-step{
+  flex:1;text-align:center;font-size:11px;font-weight:600;color:var(--ink-faint);
+  padding:5px 2px;border-radius:8px;background:#EEEBE0;border:1px solid transparent;
+}
+.irac-step.active{background:var(--accent);color:#fff}
+.irac-step.done{background:var(--ok-bg);color:var(--ok);border-color:#BFE3CE}
+
+.irac-progress-label{font-size:12.5px;color:var(--ink-soft);margin-bottom:6px;font-weight:600}
+.irac-back{background:none;border:none;color:var(--ink-faint);font-size:13px;cursor:pointer;margin-bottom:12px;padding:0}
+.irac-back:hover{color:var(--accent)}
+
+.irac-issue-recap{
+  background:var(--ok-bg);border:1px solid #BFE3CE;border-radius:var(--radius);
+  padding:16px 18px;text-align:center;
+}
+.irac-issue-recap .big{font-family:'Noto Serif Thai',serif;font-size:18px;font-weight:700;color:#14563A;margin-bottom:6px}
+
+/* ---------- stage banner (แถบธีมตามหมวด แทน SVG scene) ---------- */
+.stage{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  margin-bottom:14px;min-height:74px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px;border:1px solid rgba(0,0,0,.06);
+}
+.stage .stage-icon{font-size:30px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.15))}
+.stage .stage-label{font-family:'Noto Serif Thai',serif;font-weight:700;font-size:15px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.stage .stage-src{font-size:11.5px;color:rgba(255,255,255,.85);margin-top:2px;display:block}
+@media(max-width:520px){.stage{min-height:60px;padding:10px}.stage .stage-icon{font-size:24px}.stage .stage-label{font-size:13px}}
+
+/* ---------- มาตรา chip strip (โหมดการ์ด) ---------- */
+.matra-chips{display:none;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:14px}
+.matra-chips-label{font-size:12.5px;color:var(--ink-faint);font-weight:600;margin-right:2px}
+.matra-chip{
+  --chip-color:#888;
+  font-family:'Noto Serif Thai',serif;font-size:12.5px;font-weight:700;
+  background:var(--card);border:1.5px solid var(--line);color:var(--ink-soft);
+  border-radius:999px;padding:5px 12px;cursor:pointer;transition:all .15s;
+}
+.matra-chip:hover{border-color:var(--chip-color);color:var(--chip-color)}
+.matra-chip.active{background:var(--chip-color);border-color:var(--chip-color);color:#fff}
+
+button{font-family:inherit}
+select{
+  font-family:inherit;font-size:15px;color:var(--ink);
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:10px 12px;width:100%;
+}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.row select{flex:1;min-width:170px;width:auto}
+.muted{color:var(--ink-soft);font-size:14px;white-space:nowrap}
+
+/* ---------- flashcard ---------- */
+.flip-stage{perspective:1200px}
+.flashcard{
+  position:relative;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  min-height:250px;padding:34px 26px 30px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:10px;overflow:hidden;
+  transition:transform .16s ease,background .16s ease,border-color .16s ease;
+}
+.flashcard.is-flipped{background:var(--flip-soft,#F3F1E9);border-color:var(--flip-strong,var(--accent))}
+.flashcard.flipping{transform:rotateY(90deg)}
+@media (prefers-reduced-motion:reduce){.flashcard.flipping{transform:none}}
+.ribbon{
+  position:absolute;top:0;left:26px;width:34px;height:56px;
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%);
+}
+.chapter-tag{
+  font-size:12.5px;font-weight:700;letter-spacing:.02em;
+  padding:4px 14px;border-radius:999px;
+}
+.src-tag{font-size:11.5px;color:var(--ink-faint);margin-top:2px;font-weight:600}
+.sec-no{
+  font-family:'Noto Serif Thai',serif;font-size:clamp(30px,7vw,44px);
+  font-weight:700;line-height:1.25;
+}
+.stars{color:var(--gold);font-size:16px;letter-spacing:.15em}
+.hint{font-size:13px;color:var(--ink-faint);margin-top:10px}
+.face-back .card-title{font-family:'Noto Serif Thai',serif;font-size:17px;font-weight:600;line-height:1.6}
+.face-back .card-result{font-size:16px;margin-top:10px;line-height:1.8}
+.face-back .card-note{
+  font-size:14px;color:var(--ink-soft);margin-top:12px;line-height:1.7;
+  border-top:1px dashed var(--line);padding-top:10px;max-width:560px;
+}
+.nav3{display:flex;gap:10px;margin-top:14px}
+.nav3 button{
+  flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:12px;font-size:14.5px;font-weight:600;color:var(--ink);cursor:pointer;
+  transition:border-color .15s, transform .1s;
+}
+.nav3 button:hover{border-color:var(--ink-faint)}
+.nav3 button:active{transform:scale(.98)}
+.nav3 button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- sequence list ---------- */
+.seq-item{
+  background:var(--card);border:1px solid var(--line);border-left-width:6px;
+  border-radius:12px;padding:14px 16px;margin-bottom:10px;
+  display:flex;gap:12px;box-shadow:0 1px 2px rgba(34,40,58,.04);
+}
+.seq-num{
+  font-family:'Noto Serif Thai',serif;font-weight:700;font-size:15px;
+  color:var(--ink-faint);min-width:22px;padding-top:3px;
+}
+.seq-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.seq-sec{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:700}
+.seq-title{font-size:15px;font-weight:600}
+.seq-res{font-size:14.5px;margin-top:4px;line-height:1.7}
+.seq-note{font-size:13.5px;color:var(--ink-soft);margin-top:5px;line-height:1.65;border-top:1px dashed var(--line);padding-top:5px}
+.seq-stars{color:var(--gold);font-size:12px;letter-spacing:.1em}
+.seq-src{font-size:12px;color:var(--ink-faint);font-weight:600}
+
+/* ---------- quiz ---------- */
+.lvlbar{display:flex;gap:8px;margin-bottom:14px}
+.lvlbar button{
+  flex:1;border:1.5px solid var(--line);background:var(--card);border-radius:12px;
+  padding:12px 8px;font-size:14.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+}
+.lvlbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.lvlbar .lvl-desc{display:block;font-size:12px;font-weight:400;color:var(--ink-faint);margin-top:2px}
+.lvlbar button.on .lvl-desc{color:var(--accent)}
+
+.setbar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.setbar button{
+  border:1px solid var(--line);background:var(--card);border-radius:999px;
+  padding:7px 15px;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.setbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.setbar .best{color:var(--gold);font-size:12px;font-weight:700}
+
+.progressbar{height:6px;background:#EDE9DD;border-radius:99px;overflow:hidden;margin-bottom:8px}
+.progressbar>div{height:100%;background:linear-gradient(90deg,var(--accent),#5E7BB0);border-radius:99px;transition:width .3s}
+.quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:14px;gap:10px}
+.quiz-timer{
+  font-weight:700;color:var(--ink-soft);background:#EEEBE0;border-radius:999px;
+  padding:3px 10px;font-size:13px;white-space:nowrap;
+}
+.quiz-timer.timer-fast{background:var(--ok-bg);color:var(--ok)}
+.quiz-meta .score{font-weight:700}
+
+.scenario{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:20px 22px;margin-bottom:14px;
+}
+.scenario .qtext{font-size:16.5px;line-height:1.9}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opts button{
+  text-align:left;background:var(--card);border:1.5px solid var(--line);
+  border-radius:12px;padding:14px 16px;font-size:15px;line-height:1.7;
+  color:var(--ink);cursor:pointer;transition:border-color .15s, background .15s;
+  display:flex;gap:10px;
+}
+.opts button:hover:not(:disabled){border-color:var(--ink-faint)}
+.opts button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opts .abc{
+  font-family:'Noto Serif Thai',serif;font-weight:700;color:var(--ink-faint);
+  min-width:20px;
+}
+.opts button.correct{border-color:var(--ok);background:var(--ok-bg)}
+.opts button.correct .abc{color:var(--ok)}
+.opts button.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opts button.wrong .abc{color:var(--bad)}
+.opts button:disabled{cursor:default;opacity:.92}
+
+.explain{
+  display:none;margin-top:14px;border-radius:12px;padding:16px 18px;
+  font-size:15px;line-height:1.85;border:1px solid;
+}
+.explain.ok{background:var(--ok-bg);border-color:#BFE3CE;color:#14563A}
+.explain.bad{background:var(--bad-bg);border-color:#F0C9C9;color:#7C2A2A}
+.explain b{display:block;margin-bottom:4px;font-size:15.5px}
+.pts-earned{
+  display:inline-block;background:var(--gold);color:#fff;font-weight:800;
+  font-size:12.5px;padding:2px 9px;border-radius:999px;margin-left:6px;vertical-align:middle;
+}
+
+.btn-primary{background:var(--accent);color:#fff;border:none}
+.btn-primary:hover{background:#26406B}
+.btn-ghost{background:var(--card);border:1.5px solid var(--line) !important;color:var(--ink)}
+
+/* ---------- summary ---------- */
+.summary{
+  display:none;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:34px 24px;text-align:center;
+}
+.summary .grade{font-family:'Noto Serif Thai',serif;font-size:24px;font-weight:700;margin-top:8px}
+.summary .bigscore{font-family:'Noto Serif Thai',serif;font-size:52px;font-weight:700;color:var(--accent);line-height:1.2}
+.summary .of{font-size:15px;color:var(--ink-soft)}
+.summary .gstars{color:var(--gold);font-size:22px;letter-spacing:.2em;margin-top:6px}
+.summary .sum-actions{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+.summary .sum-actions button{
+  border-radius:12px;padding:12px 22px;font-size:14.5px;font-weight:700;cursor:pointer;border:none;
+}
+footer{
+  margin-top:40px;text-align:center;font-size:12.5px;color:var(--ink-faint);
+  border-top:1px solid var(--line);padding-top:16px;
+}
+.view{display:none}
+.view.on{display:block}
+
+/* ---------- โหมด 5: สรุปเนื้อหา ---------- */
+.study-nav3{display:flex;gap:10px}
+.study-disclaimer{
+  background:#FFF6E0;border:1px solid #F0D896;color:#7A5A0A;
+  border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;
+  text-align:center;margin-bottom:14px;
+}
+.study-nav3 button{
+  flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:11px;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer;
+}
+.study-nav3 button:hover{border-color:var(--ink-faint)}
+.study-panel{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:22px 24px;margin:14px 0;
+}
+.study-title{
+  font-family:'Noto Serif Thai',serif;font-size:19px;font-weight:700;color:var(--accent);
+  margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid var(--gold-soft);
+}
+.study-toc{
+  background:#F6F3EA;border:1px solid var(--gold-soft);border-radius:12px;
+  padding:12px 14px;margin-bottom:22px;
+}
+.study-toc-label{font-size:12.5px;font-weight:700;color:var(--gold);margin-bottom:8px}
+.study-toc-list{display:flex;flex-wrap:wrap;gap:6px 8px}
+.study-toc-item{
+  font-size:12.5px;text-decoration:none;padding:5px 10px;border-radius:999px;
+  background:var(--card);border:1px solid var(--line);color:var(--ink-soft);
+  transition:border-color .15s,color .15s;
+}
+.study-toc-item:hover{border-color:var(--accent);color:var(--accent)}
+.study-toc-item.toc-major{
+  background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700;
+  flex-basis:100%;border-radius:8px;padding:7px 12px;
+}
+.study-toc-item.toc-major:hover{background:#26406B;color:#fff}
+.study-content{font-size:15px;line-height:1.9;color:var(--ink)}
+.study-content h4,.study-content h5,.study-content h6{
+  font-family:'Noto Serif Thai',serif;color:var(--accent);line-height:1.5;
+}
+.study-content h4{font-size:18px;margin:40px 0 14px;padding-top:14px;border-top:1px solid var(--line)}
+.study-content h4:first-child{margin-top:0;padding-top:0;border-top:none}
+.study-content h5{font-size:16.5px;margin:30px 0 10px}
+.study-content h6{font-size:15.5px;color:var(--gold);margin:22px 0 8px}
+.study-content p{margin:8px 0}
+.study-content ul,.study-content ol{margin:6px 0 10px 22px}
+.study-content li{margin:4px 0}
+.study-content b{color:var(--ink);font-weight:700}
+.study-content hr{border:none;border-top:1px dashed var(--line);margin:18px 0}
+.study-content a{color:var(--accent)}
+.study-content .muted{color:var(--ink-faint);font-style:italic}
+.study-content .tbl-wrap{overflow-x:auto;margin:10px 0}
+.study-content table{border-collapse:collapse;width:100%;font-size:14px}
+.study-content th,.study-content td{
+  border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;
+}
+.study-content th{background:var(--gold-soft);color:#5A4415;font-weight:700}
+.study-content tr:nth-child(even) td{background:#FBF9F3}
+@media(max-width:640px){
+  .tabbar{flex-wrap:wrap;border-radius:16px;max-width:100%}
+  .tabbar button{flex:1 1 30%}
+  #btn-reset,#btn-sound{flex:0 0 auto}
+}
+@media(max-width:520px){
+  .study-panel{padding:16px}
+  .study-title{font-size:17px}
+}
+@media(max-width:520px){
+  body{padding:14px 10px 50px}
+  .flashcard{padding:28px 16px 24px}
+  .scenario{padding:16px}
+}
+
+/* ===== โหมด 5: สรุปเนื้อหา ===== */
+.study-panel{
+  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);
+  border-radius:var(--radius);padding:22px 24px;margin-top:6px;
+  font-size:15px;line-height:1.85;color:var(--ink);
+}
+.study-panel h4{
+  font-family:'Noto Serif Thai',serif;font-size:17px;color:var(--accent-dark,#14563A);
+  margin:22px 0 10px;padding-top:14px;border-top:1px dashed var(--line);
+}
+.study-panel h4:first-child{margin-top:0;padding-top:0;border-top:none}
+.study-panel ul{margin:8px 0 14px 22px;padding:0}
+.study-panel li{margin-bottom:8px}
+.study-panel p{margin:0 0 12px}
+.study-panel p.p-tight{
+  background:var(--soft-bg,#F3F1E9);border-radius:10px;padding:12px 14px;font-size:14px;
+}
+.study-panel b{color:var(--accent-dark,#14563A)}
+#study-bottom-sentinel{height:1px}
+</style>
+</head>
+<body>
+<div class="home-bar">
+  <a href="index.html" class="home-bar-link">← กลับหน้าหลัก</a>
+  <span class="home-bar-sep">·</span>
+  <span class="home-bar-current">สัญญาทางพาณิชย์ 1</span>
+  <span class="home-bar-score" id="global-score">🏆 <span id="score-value">0</span> คะแนน</span>
+</div>
+<div class="wrap">
+
+<header id="page-header">
+  <div class="crest" id="hd-crest">สัญญาทางพาณิชย์ 1</div>
+  <h1 id="hd-title">ห้องซ้อมสอบ กม.สัญญาทางพาณิชย์ 1</h1>
+  <div class="subtitle" id="hd-sub">ป.พ.พ. บรรพ 3 ลักษณะ 1-3, 5-6, 15-16 · ซื้อขาย · แลกเปลี่ยน · ให้ · เช่าทรัพย์ · เช่าซื้อ · จ้างทำของ · ตัวแทน</div>
+</header>
+
+<nav class="tabbar" aria-label="โหมดเกม">
+  <button id="tab-card" class="on">การ์ดจำมาตรา</button>
+  <button id="tab-seq">เรียงมาตรา</button>
+  <button id="tab-quiz">วิเคราะห์โจทย์</button>
+  <button id="tab-irac">ฝึก IRAC</button>
+  <button id="tab-study">สรุปเนื้อหา</button>
+  <button id="btn-sound" title="ปิด/เปิดเสียง" aria-label="ปิด/เปิดเสียง">🔊</button>
+  <button id="btn-reset" title="รีเซ็ตทั้งหมด" aria-label="รีเซ็ตทั้งหมด">↺</button>
+</nav>
+
+<!-- ============ โหมด 1: การ์ด ============ -->
+<section id="view-card" class="view on">
+  <div class="row">
+    <select id="cat-select" aria-label="เลือกหมวด"></select>
+    <span class="muted" id="card-progress"></span>
+  </div>
+  <div class="matra-chips" id="matra-chips"></div>
+  <div class="stage" id="card-stage" aria-hidden="true"></div>
+  <div class="flip-stage">
+    <div class="flashcard" id="flip-card" role="button" tabindex="0" aria-label="แตะเพื่อพลิกการ์ด">
+      <div class="ribbon" id="card-ribbon"></div>
+      <div class="chapter-tag" id="cat-badge"></div>
+      <div class="face-front" id="face-front">
+        <div class="sec-no" id="card-section"></div>
+        <div class="src-tag" id="card-src-front"></div>
+        <div class="stars" id="card-stars"></div>
+        <div class="hint">แตะการ์ดเพื่อดูคำตอบ · ปุ่มลูกศรเลื่อนการ์ด</div>
+      </div>
+      <div class="face-back" id="face-back" style="display:none">
+        <div class="card-title" id="card-title"></div>
+        <div class="src-tag" id="card-src-back"></div>
+        <div class="card-result" id="card-result"></div>
+        <div class="card-note" id="card-note"></div>
+      </div>
+    </div>
+  </div>
+  <div class="nav3">
+    <button id="btn-prev">← ก่อนหน้า</button>
+    <button id="btn-shuffle">⇄ สุ่มใหม่</button>
+    <button id="btn-next">ถัดไป →</button>
+  </div>
+</section>
+
+<!-- ============ โหมด 2: เรียงมาตรา ============ -->
+<section id="view-seq" class="view">
+  <div class="row"><select id="seq-select" aria-label="เลือกหมวดเรียงมาตรา"></select></div>
+  <div id="seq-list"></div>
+</section>
+
+<!-- ============ โหมด 3: วิเคราะห์โจทย์ ============ -->
+<section id="view-quiz" class="view">
+  <div class="lvlbar">
+    <button id="lvl-basic" class="on">พื้นฐาน<span class="lvl-desc">ท่องจำมาตรา–ผลกฎหมาย</span></button>
+    <button id="lvl-adv">ข้อสอบจริง<span class="lvl-desc">โจทย์สถานการณ์แนวข้อสอบ</span></button>
+  </div>
+  <div class="setbar" id="set-picker"></div>
+
+  <div id="quiz-play">
+    <div class="progressbar"><div id="pbar" style="width:0%"></div></div>
+    <div class="quiz-meta">
+      <span class="muted" id="quiz-progress"></span>
+      <span class="quiz-timer" id="quiz-timer">⏱ 0.0s</span>
+      <span class="score" id="quiz-score"></span>
+    </div>
+    <div class="chapter-tag" id="quiz-tag" style="display:inline-block;margin-bottom:10px"></div>
+    <div class="stage" id="quiz-stage" aria-hidden="true"></div>
+    <div class="scenario"><div class="qtext" id="quiz-scenario"></div></div>
+    <div class="opts" id="quiz-options"></div>
+    <div class="explain" id="quiz-explain"></div>
+  </div>
+
+  <div class="summary" id="quiz-summary">
+    <div class="muted" id="sum-set-label"></div>
+    <div class="bigscore" id="sum-score">0</div>
+    <div class="of" id="sum-of">จาก 10 ข้อ</div>
+    <div class="gstars" id="sum-stars"></div>
+    <div class="grade" id="sum-grade"></div>
+    <div class="muted" id="sum-best" style="margin-top:6px"></div>
+    <div class="sum-actions">
+      <button id="sum-review" class="btn-ghost" style="display:none">ทบทวนข้อที่ผิด</button>
+      <button id="sum-retry" class="btn-ghost">ทำชุดนี้ซ้ำ</button>
+      <button id="sum-nextset" class="btn-primary" style="display:none">ชุดถัดไป →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ โหมด 4: ฝึก IRAC ============ -->
+<section id="view-irac" class="view">
+  <div id="irac-picker">
+    <p class="muted" style="margin-bottom:14px;font-size:14px">เลือกข้อสอบจริงที่จะฝึกวินิจฉัยแบบ IRAC ทีละประเด็น: ตั้งประเด็น → เลือกมาตรา → ปรับบท → สรุปผล</p>
+    <div class="irac-caselist" id="irac-caselist"></div>
+  </div>
+
+  <div id="irac-play" style="display:none">
+    <button class="irac-back" id="irac-back">← กลับไปเลือกข้อสอบ</button>
+    <div class="chapter-tag" id="irac-case-tag" style="display:inline-block;margin-bottom:6px"></div>
+    <div class="irac-facts" id="irac-facts"></div>
+    <button class="irac-facts-toggle" id="irac-facts-toggle">ขยายอ่านโจทย์เต็ม ▾</button>
+
+    <div style="margin-top:2px">
+      <div class="irac-progress-label" id="irac-progress-label"></div>
+      <span class="quiz-timer" id="irac-timer">⏱ 0.0s</span>
+      <div class="irac-stepper" id="irac-stepper">
+        <div class="irac-step" data-step="issue">1. ประเด็น</div>
+        <div class="irac-step" data-step="rule">2. มาตรา</div>
+        <div class="irac-step" data-step="app">3. ปรับบท</div>
+        <div class="irac-step" data-step="conc">4. สรุปผล</div>
+      </div>
+    </div>
+
+    <div id="irac-stage-box">
+      <div class="scenario" style="padding:16px 18px;margin-bottom:10px"><div class="qtext" id="irac-question" style="font-size:16.5px"></div></div>
+      <div class="opts" id="irac-options"></div>
+      <div class="explain" id="irac-explain"></div>
+    </div>
+
+    <div id="irac-recap-box" style="display:none">
+      <div class="irac-issue-recap">
+        <div class="big" id="irac-recap-title"></div>
+        <div id="irac-recap-text" style="font-size:14.5px;line-height:1.8;color:#14563A"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary" id="irac-summary">
+    <div class="muted" id="irac-sum-label"></div>
+    <div class="bigscore" id="irac-sum-score">0</div>
+    <div class="of" id="irac-sum-of"></div>
+    <div class="gstars" id="irac-sum-stars"></div>
+    <div class="grade" id="irac-sum-grade"></div>
+    <div class="sum-actions">
+      <button id="irac-sum-retry" class="btn-ghost">ทำข้อนี้ซ้ำ</button>
+      <button id="irac-sum-back" class="btn-ghost">เลือกข้อสอบอื่น</button>
+      <button id="irac-sum-nextcase" class="btn-primary" style="display:none">ข้อถัดไป →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ โหมด 5: สรุปเนื้อหา ============ -->
+<section id="view-study" class="view">
+  <div class="row"><select id="study-select" aria-label="เลือกหัวข้อสรุป"></select></div>
+  <div class="study-panel" id="study-panel"></div>
+  <div id="study-bottom-sentinel"></div>
+</section>
+
+<footer>
+  สร้างด้วย Claude · เนื้อหาจากติวชีทกลางภาคและสูตรสรุปทั้งวิชา อ้างอิงตัวบท ป.พ.พ. ทุกมาตรา ใช้เพื่อทบทวนเท่านั้น ไม่ทดแทนตำราหรือคำบรรยาย
+</footer>
+</div>
+
+<div class="sticky-bar" id="sticky-bar">
+  <div class="sticky-bar-inner">
+    <button id="quiz-next" class="btn-primary" style="display:none">ข้อถัดไป →</button>
+    <button id="quiz-finish" class="btn-primary" style="display:none">ดูสรุปผล</button>
+    <button id="irac-next" class="btn-primary" style="display:none">ถัดไป →</button>
+    <button id="irac-recap-next" class="btn-primary" style="display:none">ประเด็นถัดไป →</button>
+  </div>
+</div>
+<script>
+const CONFIG = {
+  crest: "สัญญาทางพาณิชย์ 1",
+  title: "ห้องซ้อมสอบ กม.สัญญาทางพาณิชย์ 1",
+  subtitle: "ป.พ.พ. บรรพ 3 ลักษณะ 1-3, 5-6, 15-16 · ซื้อขาย · แลกเปลี่ยน · ให้ · เช่าทรัพย์ · เช่าซื้อ · จ้างทำของ · ตัวแทน",
+  storageKey: "lc330_quizBest"
+};
+
+const CATEGORIES = {
+  sale_general: {
+    label: "ก) ซื้อขาย: ลักษณะ/แบบ/โอนกรรมสิทธิ์/ส่งมอบ",
+    soft: "#E3F1E9", strong: "#1F6B45", icon: "🤝", source: "ป.พ.พ."
+  },
+  sale_liability: {
+    label: "ข) ซื้อขาย: ความรับผิดผู้ขาย",
+    soft: "#DFF4F2", strong: "#0E7C7B", icon: "🛡️", source: "ป.พ.พ."
+  },
+  sale_buyer_special: {
+    label: "ค) ซื้อขาย: หน้าที่ผู้ซื้อ / ขายฝาก / ขายทอดตลาด",
+    soft: "#EEF2D8", strong: "#748A1E", icon: "🏷️", source: "ป.พ.พ."
+  },
+  exchange: {
+    label: "ง) แลกเปลี่ยน",
+    soft: "#FCE9D6", strong: "#C9702A", icon: "🔄", source: "ป.พ.พ."
+  },
+  gift: {
+    label: "จ) ให้",
+    soft: "#F1E3F7", strong: "#7C3AA6", icon: "🎁", source: "ป.พ.พ."
+  },
+  lease_property: {
+    label: "ฉ) เช่าทรัพย์",
+    soft: "#DEEAF8", strong: "#1D5FA8", icon: "🏠", source: "ป.พ.พ."
+  },
+  hire_purchase: {
+    label: "ช) เช่าซื้อ",
+    soft: "#DBF1F5", strong: "#0E7FA0", icon: "🚗", source: "ป.พ.พ."
+  },
+  hire_of_work: {
+    label: "ซ) จ้างทำของ",
+    soft: "#F2E6D8", strong: "#8B5A2B", icon: "🔨", source: "ป.พ.พ."
+  },
+  agency: {
+    label: "ฌ) ตัวแทน",
+    soft: "#FBE0E3", strong: "#B3223C", icon: "🧑‍💼", source: "ป.พ.พ."
+  }
+};
+
+const CARDS = [
+// ===== ก) ซื้อขายทั่วไป (453-471) =====
+{cat:"sale_general", section:"ม.453", title:"ลักษณะของสัญญาซื้อขาย", result:"สัญญาซึ่งผู้ขายโอนกรรมสิทธิ์แห่งทรัพย์สินให้แก่ผู้ซื้อ และผู้ซื้อตกลงจะใช้ราคาทรัพย์สินนั้นให้แก่ผู้ขาย (มุ่งโอนกรรมสิทธิ์ ผู้ขายไม่จำต้องเป็นเจ้าของทรัพย์ขณะทำสัญญาก็ได้ และราคาต้องชำระด้วยเงินตราเป็นสำคัญ)", note:"เทียบ ม.518 แลกเปลี่ยน (โอนกรรมสิทธิ์ให้กัน ไม่ใช้เงิน) และ ม.521 ให้ (โอนโดยเสน่หา ไม่มีค่าตอบแทน)", stars:5, source:"ป.พ.พ."},
+{cat:"sale_general", section:"ม.454 วรรคหนึ่ง", title:"คำมั่นจะซื้อหรือขาย", result:"คำมั่นที่คู่กรณีฝ่ายหนึ่งให้ไว้ก่อนว่าจะซื้อหรือขาย จะมีผลเป็นการซื้อขายต่อเมื่ออีกฝ่ายบอกกล่าวความจำนงจะซื้อขายให้สำเร็จตลอดไป และคำบอกกล่าวไปถึงผู้ให้คำมั่นแล้ว", note:"ผูกพันผู้ให้คำมั่นฝ่ายเดียว อีกฝ่ายมีสิทธิเลือก (Option)", stars:5, source:"ป.พ.พ."},
+{cat:"sale_general", section:"ม.454 วรรคสอง", title:"การสิ้นผลของคำมั่นที่ไม่มีกำหนดเวลา", result:"ถ้าคำมั่นไม่ได้กำหนดเวลาไว้ ผู้ให้คำมั่นอาจกำหนดเวลาพอสมควรและบอกกล่าวให้อีกฝ่ายตอบมาให้แน่นอนภายในกำหนด ถ้าไม่ตอบภายในกำหนด คำมั่นนั้นไร้ผล", note:"หลุมพราง: ผู้ให้คำมั่นถอนคำมั่นเองไม่ได้ ต้องใช้วิธีบอกกล่าวกำหนดเวลาให้ตอบ", stars:4, source:"ป.พ.พ."},
+{cat:"sale_general", section:"ม.456 วรรคหนึ่ง", title:"แบบของสัญญาซื้อขายอสังหาริมทรัพย์/สังหาริมทรัพย์พิเศษ", result:"การซื้อขายอสังหาริมทรัพย์ (และเรือมีระวางตั้งแต่ 5 ตันขึ้นไป แพ สัตว์พาหนะ) ถ้ามิได้ทำเป็นหนังสือและจดทะเบียนต่อพนักงานเจ้าหน้าที่ เป็นโมฆะ", note:"ทั้งทำเป็นหนังสือ + จดทะเบียน ขาดอย่างใดอย่างหนึ่งไม่ได้ ไม่เช่นนั้นโมฆะ", stars:5, source:"ป.พ.พ."},
+{cat:"sale_general", section:"ม.456 วรรคสอง", title:"หลักฐานฟ้องร้อง: สัญญาจะซื้อจะขาย/คำมั่น", result:"สัญญาจะขายจะซื้อ หรือคำมั่นในการซื้อขายอสังหาริมทรัพย์/สังหาริมทรัพย์พิเศษ ถ้าไม่มีหลักฐานเป็นหนังสือลงลายมือชื่อฝ่ายที่ต้องรับผิด หรือวางประจำ หรือชำระหนี้บางส่วน จะฟ้องร้องบังคับคดีไม่ได้", note:"มีอย่างใดอย่างหนึ่งใน 3 อย่างก็พอ ไม่ต้องมีครบ", stars:5, source:"ป.พ.พ."},
+{cat:"sale_general", section:"ม.456 วรรคสาม", title:"หลักฐานฟ้องร้อง: สังหาริมทรัพย์ราคา 20,000 บาทขึ้นไป", result:"สัญญาซื้อขายสังหาริมทรัพย์ทั่วไปที่ตกลงราคาตั้งแต่ 20,000 บาทขึ้นไป ต้องมีหลักฐานอย่างใดอย่างหนึ่งตามวรรคสอง จึงจะฟ้องร้องบังคับคดีได้", note:"ต่ำกว่า 20,000 บาท ตกลงปากเปล่าก็สมบูรณ์และฟ้องร้องได้เลย ไม่ต้องมีหลักฐาน", stars:5, source:"ป.พ.พ."},
+{cat:"sale_general", section:"ม.457", title:"ค่าฤชาธรรมเนียมทำสัญญาซื้อขาย", result:"ผู้ซื้อผู้ขายออกใช้เท่ากันทั้งสองฝ่าย", note:null, stars:2, source:"ป.พ.พ."},
+{cat:"sale_general", section:"ม.458", title:"หลักการโอนกรรมสิทธิ์", result:"กรรมสิทธิ์ในทรัพย์สินที่ขายย่อมโอนไปยังผู้ซื้อตั้งแต่ขณะทำสัญญาซื้อขายกัน (แม้ยังไม่ส่งมอบหรือชำระราคา)", note:"ใช้เมื่อทรัพย์เป็นทรัพย์เฉพาะสิ่งและรู้ราคาแน่นอนแล้วเท่านั้น อยู่ภายใต้หลักผู้รับโอนไม่มีสิทธิดีกว่าผู้โอน (ม.1336)", stars:5, source:"ป.พ.พ."},
+{cat:"sale_general", section:"ม.459", title:"ซื้อขายมีเงื่อนไข/เงื่อนเวลา", result:"ถ้าสัญญาซื้อขายมีเงื่อนไขหรือเงื่อนเวลาบังคับไว้ กรรมสิทธิ์ยังไม่โอนจนกว่าจะสำเร็จตามเงื่อนไขหรือถึงกำหนดเงื่อนเวลานั้น", note:"ต้องเป็นเงื่อนไข/เงื่อนเวลาที่เกี่ยวกับการโอนกรรมสิทธิ์เท่านั้น ถ้าเป็นเงื่อนไขเรื่องอื่น (เช่นชำระราคาภายหลัง) ยังบังคับตาม ม.458", stars:4, source:"ป.พ.พ."},
+{cat:"sale_general", section:"ม.460", title:"ทรัพย์ยังไม่เฉพาะสิ่ง / ยังไม่รู้ราคา", result:"วรรคหนึ่ง: ทรัพย์ที่ยังไม่ได้กำหนดลงไว้แน่นอน กรรมสิทธิ์ยังไม่โอนจนกว่าจะได้หมาย นับ ชั่ง ตวง วัด หรือคัดเลือกให้บ่งตัวแน่นอน · วรรคสอง: ทรัพย์เฉพาะสิ่งที่ยังต้องชั่งตวงวัดเพื่อให้รู้ราคาแน่นอน กรรมสิทธิ์ยังไม่โอนจนกว่าจะทำการนั้นแล้ว", note:"สัญญาซื้อขายเหมา (กำหนดตัวทรัพย์และราคาแน่นอนแล้ว) ไม่เข้ามาตรานี้ ใช้ ม.458 กรรมสิทธิ์โอนทันที", stars:4, source:"ป.พ.พ."},
+{cat:"sale_general", section:"ม.461", title:"หน้าที่ส่งมอบทรัพย์สิน", result:"ผู้ขายจำต้องส่งมอบทรัพย์สินซึ่งขายนั้นให้แก่ผู้ซื้อ", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"sale_general", section:"ม.462", title:"วิธีการส่งมอบ", result:"การส่งมอบจะทำอย่างหนึ่งอย่างใดก็ได้ สุดแต่เป็นผลให้ทรัพย์สินไปอยู่ในเงื้อมมือของผู้ซื้อ", note:null, stars:2, source:"ป.พ.พ."},
+{cat:"sale_general", section:"ม.463", title:"การส่งมอบผ่านผู้ขนส่ง", result:"ถ้าสัญญากำหนดให้ส่งทรัพย์สินจากที่หนึ่งไปอีกที่หนึ่ง การส่งมอบสำเร็จเมื่อได้ส่งมอบทรัพย์สินให้แก่ผู้ขนส่งแล้ว", note:"หลุมพราง: ต้องเป็น \"ผู้ขนส่ง\" ตามกฎหมายจริง เช่น หากส่งสัตว์มีชีวิตทางไปรษณีย์ที่ห้ามรับส่งสัตว์ ไปรษณีย์ไม่ใช่ผู้ขนส่งของสิ่งนั้น ผู้ขายยังไม่หลุดพ้นความรับผิด", stars:4, source:"ป.พ.พ."},
+{cat:"sale_general", section:"ม.465(1)-(3)", title:"ส่งมอบสังหาริมทรัพย์ขาด/เกิน/ระคน", result:"(1) ส่งน้อยกว่าสัญญา: ผู้ซื้อปัดทั้งหมดได้ หรือรับไว้แล้วใช้ราคาตามส่วน · (2) ส่งมากกว่าสัญญา: รับตามสัญญาปัดส่วนเกิน หรือปัดทั้งหมด หรือรับไว้ทั้งหมดแล้วใช้ราคาตามส่วน · (3) ส่งระคนกับทรัพย์อื่น: รับเฉพาะตามสัญญาปัดส่วนที่ระคน หรือปัดทั้งหมด", note:"ไม่ใช้กับสัญญาซื้อขายเหมา", stars:4, source:"ป.พ.พ."},
+{cat:"sale_general", section:"ม.466", title:"ส่งมอบอสังหาริมทรัพย์ขาด/เกิน (เกณฑ์ 5%)", result:"หากระบุจำนวนเนื้อที่ไว้และส่งมอบขาด/เกิน ผู้ซื้อเลือกปัดหรือรับไว้ใช้ราคาตามส่วนได้ · ถ้าขาด/เกินไม่เกิน 5% ผู้ซื้อต้องรับไว้และใช้ราคาตามส่วน (ปัดไม่ได้) เว้นแต่ขาด/เกินถึงขนาดที่รู้ก่อนแล้วคงไม่ทำสัญญา จึงเลิกสัญญาได้", note:null, stars:4, source:"ป.พ.พ."},
+{cat:"sale_general", section:"ม.467", title:"อายุความส่งมอบขาด/เกินจำนวน", result:"ห้ามฟ้องคดีเมื่อพ้นกำหนด 1 ปีนับแต่เวลาส่งมอบ", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"sale_general", section:"ม.468", title:"สิทธิยึดหน่วงของผู้ขาย", result:"ถ้าสัญญาไม่มีกำหนดเวลาชำระราคา ผู้ขายมีสิทธิยึดหน่วงทรัพย์สินไว้ได้จนกว่าจะได้รับชำระราคา", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"sale_general", section:"ม.470-471", title:"ผู้ซื้อผิดนัด: บอกกล่าวและขายทอดตลาด", result:"ถ้าผู้ซื้อผิดนัด ผู้ขายอาจมีจดหมายบอกกล่าวให้ใช้ราคาภายในเวลาอันควรที่กำหนดไว้ ถ้าผู้ซื้อยังเพิกเฉย ผู้ขายนำทรัพย์สินออกขายทอดตลาดได้ เงินสุทธิที่ได้ให้หักราคาที่ค้างชำระ ถ้าเหลือให้ส่งคืนผู้ซื้อ", note:null, stars:3, source:"ป.พ.พ."},
+
+// ===== ข) ความรับผิดผู้ขาย (472-485) =====
+{cat:"sale_liability", section:"ม.472", title:"ความรับผิดเพื่อชำรุดบกพร่อง", result:"ถ้าทรัพย์สินที่ขายชำรุดบกพร่องอันเป็นเหตุให้เสื่อมราคา หรือเสื่อมความเหมาะสมแก่ประโยชน์อันมุ่งใช้ตามปกติหรือตามสัญญา ผู้ขายต้องรับผิด ไม่ว่าจะรู้หรือไม่รู้ว่ามีความชำรุดบกพร่อง", note:"ความรับผิดเด็ดขาด (Strict Liability) ความชำรุดบกพร่องต้องมีอยู่ก่อนหรือขณะทำสัญญา/ส่งมอบ ครอบคลุมถึงกรณี \"ไม่ตรงสเปก\" ด้วย ไม่ใช่แค่พังทางกายภาพ", stars:5, source:"ป.พ.พ."},
+{cat:"sale_liability", section:"ม.473", title:"กรณีผู้ขายไม่ต้องรับผิดเพื่อชำรุดบกพร่อง", result:"(1) ผู้ซื้อรู้อยู่แล้วหรือควรรู้หากใช้ความระมัดระวังของวิญญูชน (2) ความชำรุดเห็นประจักษ์ตอนส่งมอบและผู้ซื้อรับไว้โดยไม่อิดเอื้อน (3) ทรัพย์สินนั้นได้ขายทอดตลาด", note:null, stars:4, source:"ป.พ.พ."},
+{cat:"sale_liability", section:"ม.474", title:"อายุความชำรุดบกพร่อง", result:"ห้ามฟ้องคดีเมื่อพ้น 1 ปีนับแต่เวลาที่ได้พบเห็นความชำรุดบกพร่อง", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"sale_liability", section:"ม.475", title:"ความรับผิดในการรอนสิทธิ", result:"ถ้ามีบุคคลภายนอกมารบกวนขัดสิทธิของผู้ซื้อในการครองทรัพย์สินโดยปกติสุข เพราะบุคคลนั้นมีสิทธิเหนือทรัพย์สินอยู่ในเวลาซื้อขาย หรือเพราะความผิดของผู้ขาย ผู้ขายต้องรับผิด", note:"มักโยงกับ ม.1303 (ขายซ้อน) หรือ ม.1332 (ซื้อของสุจริตจากท้องตลาด) เพื่อวินิจฉัยว่าใครมีสิทธิดีกว่า", stars:5, source:"ป.พ.พ."},
+{cat:"sale_liability", section:"ม.476", title:"ข้อยกเว้นรอนสิทธิ: ผู้ซื้อรู้อยู่แล้ว", result:"ถ้าสิทธิของผู้ก่อการรบกวนนั้นผู้ซื้อรู้อยู่แล้วในเวลาซื้อขาย ผู้ขายไม่ต้องรับผิด", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"sale_liability", section:"ม.479", title:"ผลของการรอนสิทธิ", result:"ถ้าทรัพย์สินหลุดไปจากผู้ซื้อทั้งหมดหรือบางส่วนเพราะการรอนสิทธิ หรือตกอยู่ในบังคับสิทธิอย่างหนึ่งอย่างใดจนเสื่อมราคา/เสื่อมประโยชน์ และผู้ซื้อไม่รู้ในเวลาซื้อขาย ผู้ขายต้องรับผิด", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"sale_liability", section:"ม.483", title:"ข้อสัญญายกเว้นความรับผิด", result:"คู่สัญญาซื้อขายจะตกลงกันว่าผู้ขายไม่ต้องรับผิดเพื่อชำรุดบกพร่องหรือรอนสิทธิก็ได้", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"sale_liability", section:"ม.485", title:"ข้อจำกัดของข้อสัญญายกเว้นความรับผิด", result:"ข้อสัญญายกเว้นความรับผิดไม่อาจคุ้มครองผู้ขายในผลของการอันผู้ขายได้กระทำไปเอง หรือผลแห่งข้อความจริงที่ผู้ขายรู้อยู่แล้วและปกปิดเสีย", note:"หลุมพราง \"ข้อยกเว้นของข้อยกเว้น\": แม้ตกลงยกเว้นไว้ตาม ม.483 แต่ถ้าเข้า ม.485 (ทำเองหรือรู้แล้วปกปิด) ข้อตกลงยกเว้นถูกตัดบททันที", stars:5, source:"ป.พ.พ."},
+
+// ===== ค) หน้าที่ผู้ซื้อ / ขายฝาก / ขายตามตัวอย่าง / ขายทอดตลาด (486-517) =====
+{cat:"sale_buyer_special", section:"ม.486-487", title:"หน้าที่ผู้ซื้อ: รับมอบและใช้ราคา", result:"ผู้ซื้อจำต้องรับมอบทรัพย์สินและใช้ราคาตามสัญญา ราคาจะกำหนดในสัญญา ปล่อยให้กำหนดภายหลัง หรือถือตามทางปฏิบัติของคู่สัญญาก็ได้ ถ้าไม่มีกำหนดเด็ดขาด ผู้ซื้อต้องใช้ราคาตามสมควร", note:null, stars:2, source:"ป.พ.พ."},
+{cat:"sale_buyer_special", section:"ม.488", title:"สิทธิยึดหน่วงราคาของผู้ซื้อ", result:"ถ้าผู้ซื้อพบความชำรุดบกพร่อง มีสิทธิยึดหน่วงราคาที่ยังไม่ได้ชำระไว้ได้ทั้งหมดหรือบางส่วน เว้นแต่ผู้ขายจะหาประกันที่สมควรให้", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"sale_buyer_special", section:"ม.491", title:"ลักษณะของสัญญาขายฝาก", result:"สัญญาซื้อขายซึ่งกรรมสิทธิ์ในทรัพย์สินตกไปยังผู้ซื้อ โดยมีข้อตกลงว่าผู้ขายอาจไถ่ทรัพย์นั้นคืนได้", note:"เป็นสัญญาซื้อขายประเภทหนึ่ง จึงใช้บทบัญญัติทั่วไปเรื่องแบบ/หลักฐาน/การโอนกรรมสิทธิ์ของซื้อขายด้วย ต้องเป็นข้อตกลงตั้งแต่ขณะทำสัญญา ถ้าตกลงให้สิทธิไถ่ภายหลัง ไม่ใช่ขายฝากแต่เป็นซื้อขายธรรมดา", stars:5, source:"ป.พ.พ."},
+{cat:"sale_buyer_special", section:"ม.493", title:"ข้อตกลงห้ามจำหน่ายทรัพย์สินที่ขายฝาก", result:"คู่สัญญาตกลงกันไม่ให้ผู้ซื้อฝากจำหน่ายทรัพย์สินก็ได้ ถ้าผู้ซื้อฝ่าฝืนต้องรับผิดต่อผู้ขายในความเสียหาย", note:"ข้อตกลงนี้เป็นเพียงบุคคลสิทธิ หากผู้ซื้อฝากขายต่อไปให้บุคคลภายนอก สัญญานั้นยังสมบูรณ์ ผู้ขายฝากได้แต่ใช้สิทธิไถ่จากบุคคลภายนอกหรือเรียกผู้ซื้อฝากรับผิด", stars:3, source:"ป.พ.พ."},
+{cat:"sale_buyer_special", section:"ม.494", title:"กำหนดเวลาไถ่ทรัพย์ขายฝาก", result:"ห้ามใช้สิทธิไถ่เมื่อพ้นเวลา: (1) อสังหาริมทรัพย์ 10 ปีนับแต่เวลาซื้อขาย (2) สังหาริมทรัพย์ 3 ปีนับแต่เวลาซื้อขาย", note:null, stars:4, source:"ป.พ.พ."},
+{cat:"sale_buyer_special", section:"ม.497-498", title:"ผู้มีสิทธิไถ่ / ผู้มีหน้าที่รับไถ่", result:"สิทธิไถ่ใช้ได้แต่: ผู้ขายเดิม/ทายาท, ผู้รับโอนสิทธิ, หรือผู้ที่สัญญายอมให้เป็นผู้ไถ่ · ใช้ได้เฉพาะต่อ: ผู้ซื้อเดิม/ทายาท, ผู้รับโอนทรัพย์ (สังหาฯ ต้องรู้ในเวลาโอนว่าติดสิทธิไถ่คืน)", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"sale_buyer_special", section:"ม.499", title:"สินไถ่", result:"ถ้าไม่ได้กำหนดสินไถ่ไว้ ให้ไถ่ตามราคาที่ขายฝาก ถ้าสินไถ่ที่กำหนดสูงกว่าราคาขายฝากจริงเกินร้อยละ 15 ต่อปี ให้ไถ่ตามราคาจริงรวมประโยชน์ตอบแทนร้อยละ 15 ต่อปี", note:"สินไถ่ต้องเป็นเงินเสมอ", stars:3, source:"ป.พ.พ."},
+{cat:"sale_buyer_special", section:"ม.503-504", title:"ขายตามตัวอย่าง / ขายตามคำพรรณนา", result:"ขายตามตัวอย่าง: ผู้ขายต้องส่งมอบทรัพย์ให้ตรงตามตัวอย่าง · ขายตามคำพรรณนา: ต้องส่งมอบให้ตรงตามคำพรรณนา · ห้ามฟ้องคดีเมื่อพ้น 1 ปีนับแต่ส่งมอบ", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"sale_buyer_special", section:"ม.505-508", title:"ขายเผื่อชอบ", result:"การซื้อขายโดยมีเงื่อนไขให้ผู้ซื้อมีโอกาสตรวจดูก่อนรับซื้อ ถ้าไม่ตรวจรับภายในเวลาที่กำหนด ผู้ขายไม่มีความผูกพันต่อไป การซื้อขายบริบูรณ์เมื่อผู้ซื้อไม่บอกปัดภายในเวลา หรือไม่ส่งคืน หรือชำระราคาแล้ว หรือจำหน่ายทรัพย์สินนั้นไปแล้ว", note:null, stars:2, source:"ป.พ.พ."},
+{cat:"sale_buyer_special", section:"ม.509", title:"ความบริบูรณ์ของการขายทอดตลาด", result:"การขายทอดตลาดบริบูรณ์เมื่อผู้ทอดตลาดแสดงความตกลงด้วยการเคาะไม้หรือกิริยาอื่นตามจารีตประเพณี ก่อนหน้านั้นผู้สู้ราคาถอนคำสู้ราคาได้", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"sale_buyer_special", section:"ม.511-512", title:"ห้ามผู้ทอดตลาด/ผู้ขายเข้าสู้ราคาเอง", result:"ห้ามผู้ทอดตลาดเข้าสู้ราคาหรือใช้ผู้อื่นสู้ราคาในการทอดตลาดที่ตนอำนวยการ · ห้ามผู้ขายเข้าสู้ราคาเอง เว้นแต่แถลงไว้ในคำโฆษณาว่าผู้ขายถือสิทธิเข้าสู้ราคาด้วย", note:null, stars:2, source:"ป.พ.พ."},
+{cat:"sale_buyer_special", section:"ม.515-516", title:"หน้าที่ผู้สู้ราคาสูงสุด", result:"ผู้สู้ราคาสูงสุดต้องใช้ราคาเป็นเงินสดเมื่อการซื้อขายบริบูรณ์ ถ้าละเลยไม่ใช้ราคา ผู้ทอดตลาดเอาทรัพย์ออกขายซ้ำ ถ้าได้เงินสุทธิไม่คุ้มราคาและค่าใช้จ่ายเดิม ผู้สู้ราคาเดิมต้องรับผิดส่วนที่ขาด", note:null, stars:2, source:"ป.พ.พ."},
+
+// ===== ง) แลกเปลี่ยน (518-520) =====
+{cat:"exchange", section:"ม.518", title:"ลักษณะของสัญญาแลกเปลี่ยน", result:"สัญญาซึ่งคู่กรณีต่างโอนกรรมสิทธิ์แห่งทรัพย์สินให้กันและกัน", note:null, stars:4, source:"ป.พ.พ."},
+{cat:"exchange", section:"ม.519", title:"การนำบทบัญญัติซื้อขายมาใช้กับแลกเปลี่ยน", result:"บทบัญญัติทั้งหลายในลักษณะซื้อขายให้ใช้ถึงการแลกเปลี่ยนด้วย โดยให้ถือว่าคู่สัญญาแลกเปลี่ยนเป็นผู้ขายในส่วนทรัพย์สินที่ตนส่งมอบ และเป็นผู้ซื้อในส่วนทรัพย์สินที่ตนได้รับ", note:"เรื่องแบบ หลักฐาน โอนกรรมสิทธิ์ ความรับผิดชำรุดบกพร่อง/รอนสิทธิ ใช้หลักซื้อขายทั้งหมด", stars:5, source:"ป.พ.พ."},
+{cat:"exchange", section:"ม.520", title:"แลกเปลี่ยนที่มีการโอนเงินเพิ่ม", result:"ถ้าคู่สัญญาฝ่ายหนึ่งตกลงโอนเงินเพิ่มเข้ากับทรัพย์สินสิ่งอื่นให้อีกฝ่าย บทบัญญัติเรื่องราคาในลักษณะซื้อขายให้ใช้ถึงเงินนั้นด้วย", note:null, stars:2, source:"ป.พ.พ."},
+
+// ===== จ) ให้ (521-536) =====
+{cat:"gift", section:"ม.521", title:"ลักษณะของสัญญาให้", result:"สัญญาซึ่งผู้ให้โอนทรัพย์สินของตนให้โดยเสน่หาแก่ผู้รับ และผู้รับยอมรับเอาทรัพย์สินนั้น", note:"ต้องมีผลให้ผู้รับได้รับทรัพย์ตั้งแต่ผู้ให้ยังมีชีวิตอยู่ ถ้าจะให้มีผลเมื่อผู้ให้ตาย ต้องบังคับตามเรื่องพินัยกรรม (ม.536)", stars:5, source:"ป.พ.พ."},
+{cat:"gift", section:"ม.522", title:"วิธีการให้", result:"การให้จะทำด้วยการปลดหนี้ให้แก่ผู้รับ หรือด้วยการชำระหนี้ซึ่งผู้รับค้างชำระอยู่ก็ได้", note:"การปลดหนี้ให้ก็เป็นสัญญาให้อย่างหนึ่ง", stars:3, source:"ป.พ.พ."},
+{cat:"gift", section:"ม.523", title:"ความสมบูรณ์ของการให้สังหาริมทรัพย์", result:"การให้ย่อมสมบูรณ์ต่อเมื่อส่งมอบทรัพย์สินที่ให้", note:null, stars:4, source:"ป.พ.พ."},
+{cat:"gift", section:"ม.525", title:"ความสมบูรณ์ของการให้อสังหาริมทรัพย์/สังหาริมทรัพย์พิเศษ", result:"ถ้าทรัพย์สินซึ่งถ้าจะซื้อขายกันต้องทำเป็นหนังสือและจดทะเบียนต่อพนักงานเจ้าหน้าที่ การให้ย่อมสมบูรณ์ต่อเมื่อทำเป็นหนังสือและจดทะเบียนแล้ว โดยไม่ต้องส่งมอบก็สมบูรณ์ได้", note:null, stars:4, source:"ป.พ.พ."},
+{cat:"gift", section:"ม.526", title:"คำมั่นว่าจะให้ทรัพย์สินที่ต้องจดทะเบียน", result:"ถ้าให้ทรัพย์สินหรือให้คำมั่นว่าจะให้ทรัพย์สินได้ทำเป็นหนังสือและจดทะเบียนแล้ว และผู้ให้ไม่ส่งมอบ ผู้รับชอบจะเรียกให้ส่งมอบทรัพย์สินหรือราคาแทนได้ แต่เรียกค่าสินไหมทดแทนอย่างอื่นไม่ได้", note:"คำมั่นจะให้ในอนาคตต้องทำเป็นหนังสือและจดทะเบียนเท่านั้น จึงจะฟ้องร้องบังคับคดีได้ ตกลงปากเปล่าเป็นเพียงหนี้ตามน้ำใจ (หนี้ธรรมจรรยา)", stars:4, source:"ป.พ.พ."},
+{cat:"gift", section:"ม.528", title:"การให้อันมีค่าภาระติดพัน", result:"ผู้รับการให้มีหน้าที่ต้องปฏิบัติตามภาระที่ตกลงกันไว้ ถ้าผู้รับละเลยไม่ชำระค่าภาระติดพัน ผู้ให้เรียกให้ส่งทรัพย์สินคืนได้ตามหลักลาภมิควรได้", note:"ต้องเป็นภาระที่ผูกพันกับตัวทรัพย์สินนั้นเอง", stars:4, source:"ป.พ.พ."},
+{cat:"gift", section:"ม.531", title:"เหตุถอนคืนการให้เพราะเหตุเนรคุณ", result:"ผู้ให้เรียกถอนคืนการให้เพราะเหตุผู้รับประพฤติเนรคุณได้ในกรณี (1) ผู้รับประทุษร้ายผู้ให้เป็นความผิดอาญาอย่างร้ายแรง (2) ทำให้ผู้ให้เสียชื่อเสียงหรือหมิ่นประมาทอย่างร้ายแรง (3) บอกปัดไม่ยอมให้สิ่งจำเป็นเลี้ยงชีวิตแก่ผู้ให้ในยามยากไร้ทั้งที่ให้ได้", note:null, stars:5, source:"ป.พ.พ."},
+{cat:"gift", section:"ม.532", title:"ทายาทของผู้ให้เรียกถอนคืนการให้", result:"ทายาทของผู้ให้อาจเรียกถอนคืนการให้ได้เฉพาะในเหตุที่ผู้รับฆ่าผู้ให้ตายโดยเจตนาและไม่ชอบด้วยกฎหมาย หรือกีดกันผู้ให้มิให้ถอนคืนการให้", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"gift", section:"ม.533", title:"อายุความถอนคืนการให้เพราะเนรคุณ", result:"จะถอนคืนไม่ได้เมื่อผู้ให้ได้ให้อภัยแล้ว หรือเมื่อพ้น 6 เดือนนับแต่ทราบเหตุเนรคุณ และห้ามฟ้องคดีเมื่อพ้น 10 ปีนับแต่เหตุการณ์นั้น", note:"อายุความสั้นมาก เป็นจุดที่ข้อสอบมักหลอกด้วยระยะเวลาที่ผ่านไป", stars:4, source:"ป.พ.พ."},
+{cat:"gift", section:"ม.534", title:"ผลของการถอนคืนการให้", result:"เมื่อถอนคืนการให้ ให้ส่งคืนทรัพย์สินตามบทบัญญัติว่าด้วยลาภมิควรได้", note:null, stars:2, source:"ป.พ.พ."},
+{cat:"gift", section:"ม.535", title:"ข้อยกเว้นการถอนคืนการให้เพราะเนรคุณ", result:"การให้ต่อไปนี้จะถอนคืนเพราะเหตุเนรคุณไม่ได้: (1) ให้เป็นบำเหน็จสินจ้างโดยแท้ (2) ให้สิ่งที่มีค่าภาระติดพัน (3) ให้โดยหน้าที่ธรรมจรรยา (4) ให้ในการสมรส", note:"หลุมพราง: แม้เนรคุณจริง แต่ถ้าทรัพย์ที่ให้เข้า (2) เช่น ที่ดินติดจำนอง จะเรียกคืนเพราะเนรคุณไม่ได้ ต้องอาศัยเหตุอื่น (เช่น ม.528 ละเลยค่าภาระติดพัน) แทน", stars:5, source:"ป.พ.พ."},
+{cat:"gift", section:"ม.536", title:"การให้ที่มีผลเมื่อผู้ให้ตาย", result:"การให้ซึ่งจะให้เป็นผลต่อเมื่อผู้ให้ตาย ให้บังคับด้วยบทกฎหมายว่าด้วยมรดก (ต้องทำตามแบบพินัยกรรม)", note:null, stars:3, source:"ป.พ.พ."},
+
+// ===== ฉ) เช่าทรัพย์ (537-571) =====
+{cat:"lease_property", section:"ม.538", title:"แบบและหลักฐานเช่าอสังหาริมทรัพย์", result:"เช่าไม่เกิน 3 ปี ต้องมีหลักฐานเป็นหนังสือลงลายมือชื่อฝ่ายที่ต้องรับผิด มิฉะนั้นฟ้องร้องไม่ได้ · เช่าเกิน 3 ปี (หรือตลอดชีวิต) ต้องทำเป็นหนังสือและจดทะเบียนต่อพนักงานเจ้าหน้าที่ มิฉะนั้นฟ้องร้องบังคับได้เพียง 3 ปี", note:"มาตราที่ออกสอบบ่อยที่สุดของเช่าทรัพย์", stars:5, source:"ป.พ.พ."},
+{cat:"lease_property", section:"ม.542-543", title:"เช่าซ้อนกันหลายคน", result:"สังหาริมทรัพย์: ใครได้ครอบครองก่อน มีสิทธิดีกว่า · อสังหาริมทรัพย์: ใครจดทะเบียนก่อน มีสิทธิดีกว่า เว้นแต่ไม่ได้จดทะเบียนทั้งคู่ให้ดูว่าใครครอบครองก่อน", note:"ถ้ามีทั้งจดและไม่จดทะเบียนซ้อนกัน คนจดทะเบียนมีสิทธิดีกว่า เว้นแต่คนไม่จดได้ครอบครองก่อนวันที่อีกฝ่ายไปจดทะเบียน", stars:4, source:"ป.พ.พ."},
+{cat:"lease_property", section:"ม.544-545", title:"เช่าช่วง", result:"ถ้าผู้ให้เช่าไม่ยินยอมให้เช่าช่วง ถือเป็นการเช่าช่วงโดยมิชอบ ผู้ให้เช่าบอกเลิกสัญญาได้ · ถ้ายินยอม (เช่าช่วงโดยชอบ) ผู้เช่าช่วงต้องรับผิดต่อผู้ให้เช่าเดิมโดยตรง", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"lease_property", section:"ม.549", title:"การนำหลักซื้อขายมาใช้กับเช่าทรัพย์", result:"บทบัญญัติว่าด้วยการส่งมอบ ความชำรุดบกพร่อง (ม.472) และการรอนสิทธิ (ม.475) ในลักษณะซื้อขาย ให้นำมาใช้บังคับกับสัญญาเช่าด้วย", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"lease_property", section:"ม.550, 553", title:"หน้าที่ซ่อมแซม", result:"ผู้ให้เช่าต้องซ่อมแซมใหญ่ (เช่น หลังคารั่ว โครงสร้างพัง) ส่วนผู้เช่าต้องบำรุงรักษาและซ่อมแซมเล็กน้อย (เช่น เปลี่ยนหลอดไฟ ลูกบิดประตู)", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"lease_property", section:"ม.560 วรรคสอง", title:"บอกเลิกกรณีไม่จ่ายค่าเช่ารายเดือน", result:"ผู้ให้เช่าจะเลิกสัญญาทันทีไม่ได้ ต้องบอกกล่าวให้ผู้เช่าชำระค่าเช่าที่ค้างโดยให้เวลาอย่างน้อย 15 วัน หากพ้นกำหนดยังไม่ชำระ จึงมีสิทธิบอกเลิกสัญญา", note:"อย่าสับสนกับเช่าซื้อ (ม.574 เลิกได้ทันทีเมื่อผิดนัด 2 คราวติดกัน) เช่าทรัพย์รายเดือนไม่มีคำว่า \"เลิกได้ทันที\" เด็ดขาด", stars:5, source:"ป.พ.พ."},
+{cat:"lease_property", section:"ม.566", title:"บอกเลิกสัญญาเช่าที่ไม่มีกำหนดเวลา", result:"ฝ่ายใดจะบอกเลิกก็ได้ โดยบอกกล่าวเมื่อสิ้นกำหนดชำระค่าเช่า และให้เวลาอีก 1 ช่วงการชำระค่าเช่าเป็นอย่างน้อย (แต่ไม่จำเป็นต้องเกิน 2 เดือน)", note:null, stars:4, source:"ป.พ.พ."},
+{cat:"lease_property", section:"ม.569", title:"ผลของการโอนกรรมสิทธิ์ทรัพย์สินที่เช่า", result:"สัญญาเช่าอสังหาริมทรัพย์ไม่ระงับเพราะเหตุโอนกรรมสิทธิ์ ผู้รับโอนย่อมรับไปทั้งสิทธิและหน้าที่ของผู้ให้เช่าเดิมที่มีต่อผู้เช่า", note:null, stars:4, source:"ป.พ.พ."},
+{cat:"lease_property", section:"ม.570", title:"การเช่าต่อเมื่อสิ้นสุดสัญญาเดิม", result:"ถ้าสิ้นกำหนดเวลาเช่าแล้วผู้เช่ายังครองทรัพย์อยู่ และผู้ให้เช่ารู้แล้วไม่ทักท้วง ถือว่าคู่สัญญาทำสัญญาใหม่ต่อไปโดยไม่มีกำหนดเวลา", note:"สเต็ปคอมโบข้อสอบ Final: ม.538(เช่าเกิน3ปีไม่จดทะเบียน บังคับได้แค่3ปี) → ม.570(อยู่ต่อไม่ทักท้วง=ไม่มีกำหนดเวลา) → ม.569(ขายตึกผู้รับโอนรับสัญญาไปด้วย) → ม.566(ไล่ต้องบอกกล่าวล่วงหน้า)", stars:5, source:"ป.พ.พ."},
+
+// ===== ช) เช่าซื้อ (572-574) =====
+{cat:"hire_purchase", section:"ม.572", title:"ลักษณะและแบบของสัญญาเช่าซื้อ", result:"เจ้าของเอาทรัพย์สินออกให้เช่า และให้คำมั่นว่าจะขายทรัพย์สินนั้นหรือว่าจะให้ทรัพย์สินนั้นตกเป็นสิทธิแก่ผู้เช่า โดยเงื่อนไขที่ผู้เช่าได้ใช้เงินเป็นจำนวนเท่านั้นเท่านี้คราว ต้องทำเป็นหนังสือ มิฉะนั้นเป็นโมฆะ", note:"ทำเป็นหนังสือพอ ไม่ต้องจดทะเบียน แม้เป็นอสังหาริมทรัพย์ก็ตาม", stars:5, source:"ป.พ.พ."},
+{cat:"hire_purchase", section:"ม.573", title:"สิทธิบอกเลิกของผู้เช่าซื้อ", result:"ผู้เช่าซื้อจะบอกเลิกสัญญาในเวลาใดก็ได้ ด้วยส่งมอบทรัพย์สินกลับคืนให้แก่เจ้าของโดยเสียค่าใช้จ่ายของตนเอง", note:"บอกปากเปล่าอย่างเดียวยังไม่เลิกสัญญา ต้องส่งมอบทรัพย์คืนด้วย", stars:4, source:"ป.พ.พ."},
+{cat:"hire_purchase", section:"ม.574", title:"สิทธิบอกเลิกของผู้ให้เช่าซื้อ", result:"ถ้าผู้เช่าซื้อผิดนัดชำระเงินสองคราวติดกัน หรือผิดนัดในงวดสุดท้าย ผู้ให้เช่าซื้อบอกเลิกสัญญาได้ ริบเงินที่ส่งมาแล้วทั้งหมด และกลับเข้าครองทรัพย์สินได้", note:"ต่างจากเช่าทรัพย์ (ม.560 ต้องบอกกล่าวก่อน) เช่าซื้อผิดนัด 2 คราวติดกันเลิกได้ทันที ค่างวดที่ค้างศาลให้ประยุกต์ใช้ ม.391 วรรคสามเรียกเป็นค่าใช้ทรัพย์แทน", stars:5, source:"ป.พ.พ."},
+
+// ===== ซ) จ้างทำของ (587-607) =====
+{cat:"hire_of_work", section:"ม.587", title:"ลักษณะของสัญญาจ้างทำของ", result:"สัญญาซึ่งผู้รับจ้างตกลงรับทำการงานสิ่งใดสิ่งหนึ่งจนสำเร็จให้แก่ผู้ว่าจ้าง และผู้ว่าจ้างตกลงจะให้สินจ้างเพื่อผลสำเร็จแห่งการที่ทำนั้น", note:"มุ่งเน้นที่ \"ผลสำเร็จของงาน/ฝีมือ\" เป็นสำคัญ ต่างจากซื้อขายที่มุ่งเน้นตัวทรัพย์สิน และไม่มีแบบ/หลักฐานบังคับ ตกลงปากเปล่าก็ฟ้องร้องบังคับคดีได้แม้ราคาสูง", stars:5, source:"ป.พ.พ."},
+{cat:"hire_of_work", section:"ม.593", title:"ผู้รับจ้างทำงานชักช้า", result:"ถ้าผู้รับจ้างทำงานชักช้าจนคาดหมายได้แน่นอนว่างานจะไม่สำเร็จตามกำหนด ผู้ว่าจ้างบอกเลิกสัญญาได้ทันที โดยไม่ต้องรอถึงกำหนดเวลาส่งมอบ", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"hire_of_work", section:"ม.594", title:"ผู้รับจ้างทำงานบกพร่อง/ฝ่าฝืนสัญญา", result:"ผู้ว่าจ้างขอให้ศาลสั่งให้บุคคลภายนอกเข้าทำงานแทนได้ โดยให้ผู้รับจ้างเดิมออกค่าใช้จ่าย", note:"ไม่จำเป็นต้องบอกเลิกสัญญาเดิมก่อน", stars:3, source:"ป.พ.พ."},
+{cat:"hire_of_work", section:"ม.597-598", title:"รับมอบงานโดยไม่อิดเอื้อน", result:"ม.597 ผลของส่งมอบล่าช้า: รับไว้โดยไม่ทักท้วง หมดสิทธิเรียกค่าเสียหายจากการส่งช้า · ม.598 ผลของความชำรุดบกพร่อง: รับไว้โดยไม่อิดเอื้อน ผู้รับจ้างไม่ต้องรับผิด เว้นแต่ความชำรุดนั้นไม่อาจเห็นได้ตามปกติ หรือผู้รับจ้างจงใจปกปิด", note:null, stars:4, source:"ป.พ.พ."},
+{cat:"hire_of_work", section:"ม.600", title:"กรอบเวลาความชำรุดบกพร่องต้องปรากฏ", result:"ความชำรุดบกพร่องต้องปรากฏขึ้นภายใน 1 ปีนับแต่ส่งมอบ แต่ถ้าเป็นสิ่งปลูกสร้างกับพื้นดิน (ไม่ใช่เรือนไม้) ต้องปรากฏภายใน 5 ปี", note:"หลุมพรางซ้อนหลุมพราง: ถ้าผู้รับจ้างรู้ว่าชำรุดแต่จงใจปกปิด (เช่นทาสีทับรอยร้าว) เกราะคุ้มครอง 1 ปี/5 ปีนี้แตกทันที ต้องรับผิดแม้พ้นกำหนดแล้ว", stars:4, source:"ป.พ.พ."},
+{cat:"hire_of_work", section:"ม.601", title:"อายุความฟ้องคดีชำรุดบกพร่อง", result:"ผู้ว่าจ้างต้องฟ้องคดีภายใน 1 ปีนับแต่วันที่ความชำรุดบกพร่องปรากฏขึ้น (แยกจาก ม.600 ซึ่งเป็นกรอบเวลาที่ความชำรุดต้องโผล่มา)", note:null, stars:4, source:"ป.พ.พ."},
+{cat:"hire_of_work", section:"ม.605", title:"ความวินาศก่อนส่งมอบ", result:"ถ้างานพังทลายเพราะเหตุสุดวิสัยก่อนส่งมอบ ผู้รับจ้างไม่มีสิทธิได้สินจ้าง และผู้ใดเป็นผู้จัดหาสัมภาระ ผู้นั้นต้องรับเคราะห์ในส่วนสัมภาระนั้น", note:"ไม่ว่าใครหาวัสดุ ถ้างานพังก่อนส่งมอบ ผู้รับจ้างชวดค่าจ้างเสมอ เว้นแต่ความผิดอยู่ที่ผู้ว่าจ้าง", stars:3, source:"ป.พ.พ."},
+{cat:"hire_of_work", section:"ม.607", title:"การจ้างช่วง", result:"ผู้รับจ้างอาจให้บุคคลอื่นทำการที่ว่าจ้างแทนตนได้ ทั้งหมดหรือบางส่วน เว้นแต่ตามสัญญาหรือโดยพฤติการณ์แห่งงานจะเห็นได้ว่าคู่สัญญาประสงค์จะให้ทำเองแต่ผู้เดียว แต่ผู้รับจ้างยังคงต้องรับผิดต่อผู้ว่าจ้างในการที่บุคคลอื่นได้ทำแทนไป", note:"หากรับจ้างเพราะฝีมือ/ความรู้ความสามารถเฉพาะตัว (เช่นจ้างนักร้อง จ้างวาดรูป) จะจ้างช่วงไม่ได้", stars:3, source:"ป.พ.พ."},
+
+// ===== ฌ) ตัวแทน (797-832) =====
+{cat:"agency", section:"ม.797", title:"ลักษณะของสัญญาตัวแทน", result:"สัญญาซึ่งให้บุคคลคนหนึ่งเรียกว่าตัวแทน มีอำนาจทำการแทนบุคคลอีกคนหนึ่งเรียกว่าตัวการ และตกลงจะทำการดังนั้น", note:"เป็นสัญญาที่มีคู่กรณี 3 ฝ่ายเกี่ยวข้อง (ตัวการ ตัวแทน บุคคลภายนอก)", stars:4, source:"ป.พ.พ."},
+{cat:"agency", section:"ม.798", title:"แบบและหลักฐานการตั้งตัวแทน", result:"ถ้ากิจการที่ตัวแทนจะไปทำกับบุคคลภายนอก กฎหมายบังคับว่าต้องทำเป็นหนังสือหรือมีหลักฐานเป็นหนังสือ การตั้งตัวแทนเพื่อกิจการนั้นก็ต้องทำตามแบบนั้นด้วย มิฉะนั้นตัวการกับบุคคลภายนอกจะฟ้องร้องบังคับคดีกันไม่ได้เลย", note:"จุดตายยอดฮิต: ต้องเช็คก่อนว่ากิจการที่ตัวแทนจะไปทำ กฎหมายบังคับแบบ/หลักฐานหรือไม่ (เทียบราคา/ประเภททรัพย์) แม้ฝ่าฝืน สัญญาตั้งตัวแทนระหว่างตัวการ-ตัวแทนเองไม่เป็นโมฆะ ยังฟ้องกันเองได้", stars:5, source:"ป.พ.พ."},
+{cat:"agency", section:"ม.799", title:"ตัวแทนไร้ความสามารถ", result:"บุคคลผู้ไร้ความสามารถ (เช่น ผู้เยาว์) จะเป็นตัวแทนก็ได้ แต่ความสัมพันธ์ระหว่างตัวการกับตัวแทนให้บังคับตามบทบัญญัติลักษณะเรื่องความสามารถของบุคคล", note:"วงใน (ตัวการ-ตัวแทน): สัญญาตั้งตัวแทนเป็นโมฆียะ · วงนอก (ตัวการ-บุคคลภายนอก): การกระทำของตัวแทนยังผูกพันตัวการสมบูรณ์ตาม ม.820 ตัวการอ้างว่าตัวแทนเป็นผู้เยาว์เพื่อเบี้ยวหนี้บุคคลภายนอกไม่ได้", stars:4, source:"ป.พ.พ."},
+{cat:"agency", section:"ม.800-801", title:"ขอบอำนาจของตัวแทนเฉพาะการ/ตัวแทนทั่วไป", result:"ตัวแทนเฉพาะการ (ม.800): มีอำนาจทำการทั้งหลายอันจำเป็นเพื่อให้กิจการนั้นสำเร็จ (หลัก \"ร่มแห่งอำนาจ\") · ตัวแทนทั่วไป (ม.801): ทำได้ทุกอย่างเพื่อสงวนรักษาทรัพย์สิน ยกเว้นข้อห้าม 6 ประการ เช่น ขาย/จำนองอสังหาฯ ให้เช่าอสังหาฯ เกิน 3 ปี ฟ้องคดี", note:null, stars:4, source:"ป.พ.พ."},
+{cat:"agency", section:"ม.805", title:"ห้ามตัวแทนทำนิติกรรมกับตนเอง", result:"ตัวแทนจะทำนิติกรรมในนามของตัวการซึ่งตนเองเป็นคู่กรณีอีกฝ่ายหนึ่งไม่ได้ หรือเป็นตัวแทนให้คู่สัญญาทั้ง 2 ฝ่ายไม่ได้ เว้นแต่เป็นการชำระหนี้", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"agency", section:"ม.811", title:"ตัวแทนใช้เงินตัวการไปในกิจส่วนตัว", result:"ถ้าตัวแทนเอาเงินที่ควรจะได้ส่งแก่ตัวการไปใช้สอยเป็นประโยชน์ส่วนตน ต้องเสียดอกเบี้ยในเงินนั้นนับแต่วันที่เอาไปใช้", note:null, stars:2, source:"ป.พ.พ."},
+{cat:"agency", section:"ม.812", title:"ความรับผิดของตัวแทนต่อตัวการ", result:"ตัวแทนต้องรับผิดต่อตัวการหากเกิดความเสียหายจาก: ประมาทเลินเล่อ, ไม่ทำการเป็นตัวแทน, ทำปราศจากอำนาจ, หรือทำนอกเหนืออำนาจ", note:"จุดตาย: ทำในขอบอำนาจแต่ประมาท ≠ ทำเกินอำนาจ ตัวการยังต้องผูกพันกับบุคคลภายนอกตาม ม.820 แล้วค่อยไปไล่เบี้ยตัวแทนตาม ม.812 เอง", stars:5, source:"ป.พ.พ."},
+{cat:"agency", section:"ม.813-814", title:"ตัวแทนช่วง", result:"ม.813: ตัวแทนที่ตั้งตัวแทนช่วงตามที่ตัวการระบุตัวให้ตั้ง จะรับผิดเฉพาะกรณีที่รู้ว่าตัวแทนช่วงไม่เหมาะสมแล้วไม่แจ้งหรือไม่ถอน · ม.814: ตัวแทนช่วงรับผิดโดยตรงต่อตัวการฉันใด ตัวการก็ต้องรับผิดต่อตัวแทนช่วงฉันนั้น (มาตราสะพานเชื่อม)", note:"ตัวแทนช่วงที่ตัวการระบุตัวเองเป็นเกราะคุ้มครองตัวแทนหลัก แม้ตัวแทนช่วงทำพังแค่ไหน ตัวแทนหลักก็หลุดพ้นความรับผิด เว้นแต่รู้อยู่แล้วว่าไม่เหมาะสม", stars:5, source:"ป.พ.พ."},
+{cat:"agency", section:"ม.816", title:"สิทธิไล่เบี้ยของตัวแทน", result:"ตัวแทนที่ออกเงินทดรองหรือค่าใช้จ่ายไปก่อน เรียกคืนจากตัวการได้พร้อมดอกเบี้ย รวมถึงเรียกค่าเสียหายที่เกิดจากการเป็นตัวแทนด้วย", note:null, stars:2, source:"ป.พ.พ."},
+{cat:"agency", section:"ม.820", title:"ความรับผิดของตัวการต่อบุคคลภายนอก", result:"ตัวการย่อมมีความผูกพันต่อบุคคลภายนอกในกิจการทั้งหลายอันตัวแทนหรือตัวแทนช่วงได้ทำไปภายในขอบอำนาจแห่งฐานตัวแทน", note:"แม้ตัวแทนทำโดยประมาทเลินเล่อ ตัวการก็ต้องรับผิดต่อบุคคลภายนอกก่อน แล้วค่อยไปไล่เบี้ยตัวแทนตาม ม.812", stars:5, source:"ป.พ.พ."},
+{cat:"agency", section:"ม.821", title:"ตัวแทนเชิด", result:"บุคคลผู้เชิดบุคคลอีกคนหนึ่งออกแสดงเป็นตัวแทนของตน หรือรู้แล้วยอมให้เขาเชิดตัวเองออกแสดงเป็นตัวแทน ต้องรับผิดต่อบุคคลภายนอกผู้สุจริตเสมือนหนึ่งเขาเป็นตัวแทนของตนจริง", note:null, stars:4, source:"ป.พ.พ."},
+{cat:"agency", section:"ม.822", title:"ตัวแทนทำเกินอำนาจโดยพฤติการณ์น่าเชื่อ", result:"ถ้าตัวแทนทำเกินขอบอำนาจ แต่พฤติการณ์แห่งเรื่องเป็นที่ให้บุคคลภายนอกมีมูลเหตุอันสมควรเชื่อว่าอยู่ในขอบอำนาจ ให้ใช้บทบัญญัติเรื่องตัวแทนเชิดในมาตราก่อนบังคับ", note:"เช่น เซ็นใบมอบอำนาจเปล่าทิ้งไว้แล้วตัวแทนกรอกข้อความเกินอำนาจ ตัวการยังต้องผูกพัน", stars:4, source:"ป.พ.พ."},
+{cat:"agency", section:"ม.823", title:"ตัวแทนทำนอกเหนือ/ปราศจากอำนาจ", result:"โดยหลักไม่ผูกพันตัวการ เว้นแต่ตัวการจะให้สัตยาบัน หากตัวการไม่ให้สัตยาบัน ตัวแทนต้องรับผิดต่อบุคคลภายนอกด้วยตนเองลำพัง", note:"การให้สัตยาบันมีผลย้อนหลังผูกพันมาแต่ต้น แต่ตัวการยังฟ้องเรียกค่าเสียหายจากตัวแทนฐานทำนอกอำนาจตาม ม.812 ได้อยู่ (สิทธิไม่หายไป)", stars:4, source:"ป.พ.พ."},
+{cat:"agency", section:"ม.825", title:"ตัวแทนรับสินบน", result:"ถ้าตัวแทนรับอามิสสินจากบุคคลภายนอกโดยฝ่าฝืนหน้าที่ ตัวการไม่ต้องผูกพันในสัญญาที่ตัวแทนทำไปนั้นเลย เว้นแต่ตัวการจะยินยอมด้วย", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"agency", section:"ม.826", title:"เหตุความระงับแห่งสัญญาตัวแทน", result:"สัญญาตัวแทนระงับไปเมื่อฝ่ายใดฝ่ายหนึ่งตาย ไร้ความสามารถ หรือล้มละลาย", note:null, stars:3, source:"ป.พ.พ."},
+{cat:"agency", section:"ม.830-831", title:"ห้ามอ้างความระงับสู้บุคคลผู้สุจริต", result:"ถ้าสัญญาตัวแทนระงับแล้วแต่ตัวแทนหรือบุคคลภายนอกผู้สุจริตยังไม่ทราบ จะยกความระงับขึ้นต่อสู้เพื่อให้พ้นความรับผิดไม่ได้ (ม.830 ใช้ยันตัวแทน / ม.831 ใช้ยันบุคคลภายนอก)", note:"เช่น ตัวการตาย ตัวแทนไม่รู้ ไปทำสัญญากับบุคคลภายนอกที่ไม่รู้เช่นกัน ทายาทตัวการจะยกความตายขึ้นปฏิเสธความรับผิดไม่ได้ ทั้งต่อตัวแทนและบุคคลภายนอก", stars:4, source:"ป.พ.พ."},
+];
+
+const QUIZ_ADV = [
+{cat:"sale_general", q:"นายเอกตกลงขายรถยนต์มือสองให้นายโทด้วยวาจา ราคา 18,000 บาท ทั้งสองไม่ได้ประกอบธุรกิจรถยนต์ สัญญานี้มีผลอย่างไร?", opts:["เป็นโมฆะ เพราะรถยนต์เป็นสังหาริมทรัพย์พิเศษต้องทำเป็นหนังสือ","สมบูรณ์และฟ้องร้องบังคับคดีได้ทันที เพราะราคาต่ำกว่า 20,000 บาท ไม่ต้องมีแบบหรือหลักฐานใดๆ","สมบูรณ์แต่ฟ้องร้องไม่ได้ เพราะไม่มีหลักฐานเป็นหนังสือ","ต้องรอให้จดทะเบียนโอนที่กรมการขนส่งก่อนจึงสมบูรณ์"], ans:1, explain:"รถยนต์ไม่ใช่สังหาริมทรัพย์ชนิดพิเศษตาม ม.456 วรรคหนึ่ง (ต่างจากเรือมีระวาง 5 ตันขึ้นไป แพ สัตว์พาหนะ) และราคาไม่ถึง 20,000 บาท จึงไม่ต้องมีแบบหรือหลักฐานใดๆ ตาม ม.456 วรรคสาม สัญญาปากเปล่าสมบูรณ์และฟ้องร้องบังคับคดีได้ทันที"},
+{cat:"sale_general", q:"นายเอตกลงขายที่ดินให้นายบีด้วยวาจา โดยนายบีวางมัดจำไว้ 50,000 บาท สัญญาซื้อขายที่ดินนี้มีผลอย่างไร?", opts:["สมบูรณ์และฟ้องร้องได้ เพราะมีการวางมัดจำแล้ว","เป็นโมฆะ เพราะการซื้อขายอสังหาริมทรัพย์ต้องทำเป็นหนังสือและจดทะเบียนต่อพนักงานเจ้าหน้าที่ตาม ม.456 วรรคหนึ่ง มิฉะนั้นเป็นโมฆะ ไม่ใช่แค่ฟ้องร้องไม่ได้","ฟ้องร้องไม่ได้แต่ไม่เป็นโมฆะ เพราะมีมัดจำเป็นหลักฐาน","สมบูรณ์เพราะเป็นสัญญาจะซื้อจะขาย"], ans:1, explain:"ที่ดินเป็นอสังหาริมทรัพย์ ต้องทำเป็นหนังสือและจดทะเบียนต่อพนักงานเจ้าหน้าที่ตาม ม.456 วรรคหนึ่ง มิฉะนั้นเป็นโมฆะทันที การวางมัดจำเป็นเพียงหลักฐานที่ใช้ได้กับกรณีตามวรรคสอง (สัญญาจะซื้อจะขาย/คำมั่น) ไม่ใช่กรณีซื้อขายเสร็จเด็ดขาดตามวรรคหนึ่งซึ่งบังคับแบบเด็ดขาด"},
+{cat:"sale_general", q:"นายเอให้คำมั่นแก่นายบีว่าจะขายที่ดินให้ในราคา 2 ล้านบาท โดยไม่ได้กำหนดเวลาให้ตอบรับ ต่อมานายเออยากถอนคำมั่น จะทำได้อย่างไร?", opts:["ถอนคำมั่นได้ทันทีโดยบอกกล่าวไปยังนายบี","ถอนคำมั่นเองไม่ได้ แต่กำหนดเวลาพอสมควรและบอกกล่าวให้นายบีตอบรับภายในกำหนด ถ้าไม่ตอบรับ คำมั่นจึงไร้ผล","ถอนไม่ได้เลยไม่ว่ากรณีใด ต้องผูกพันตลอดไป","ต้องรอให้ครบ 1 ปีก่อนจึงถอนได้"], ans:1, explain:"ตาม ม.454 วรรคสอง ผู้ให้คำมั่นที่ไม่ได้กำหนดเวลาไว้ ไม่มีสิทธิถอนคำมั่นได้เองโดยตรง แต่ใช้วิธีกำหนดเวลาพอสมควรแล้วบอกกล่าวให้อีกฝ่ายตอบรับ หากไม่ตอบรับภายในกำหนด คำมั่นจึงจะไร้ผล"},
+{cat:"sale_general", q:"สัญญาซื้อขายข้าวสาร 100 กระสอบ ยังไม่ได้คัดแยกหรือชั่งนับว่าเป็นกระสอบใดบ้าง กรรมสิทธิ์ในข้าวสารโอนไปยังผู้ซื้อเมื่อใด?", opts:["ทันทีที่ทำสัญญาซื้อขายตาม ม.458", "เมื่อได้หมาย นับ ชั่ง ตวง วัด หรือคัดเลือกให้บ่งตัวทรัพย์แน่นอนแล้วตาม ม.460 วรรคหนึ่ง", "เมื่อชำระราคาครบถ้วนแล้วเท่านั้น", "เมื่อผู้ซื้อนำข้าวสารไปขายต่อ"], ans:1, explain:"เมื่อทรัพย์สินยังไม่ได้กำหนดลงไว้แน่นอน (ทรัพย์สินไม่เฉพาะสิ่ง) กรรมสิทธิ์ยังไม่โอนจนกว่าจะได้บ่งตัวทรัพย์สินให้แน่นอนตาม ม.460 วรรคหนึ่ง ไม่ใช้หลักทั่วไปตาม ม.458"},
+{cat:"sale_liability", q:"นายเอซื้อรถยนต์จากนายบี ตกลงกันว่าเป็นรถปี 2025 แต่ได้รับมอบรถปี 2024 ซึ่งยังใช้งานได้ปกติดี ไม่มีความเสียหายทางกายภาพใดๆ ถือเป็นความชำรุดบกพร่องหรือไม่?", opts:["ไม่ถือเป็นความชำรุดบกพร่อง เพราะรถยังใช้งานได้ปกติไม่มีอะไรเสียหาย","ถือเป็นความชำรุดบกพร่องตาม ม.472 เพราะทำให้เสื่อมราคาแม้จะไม่ตรงสเปกที่ตกลงกัน ไม่จำเป็นต้องเสียหายทางกายภาพ","ไม่ถือเป็นความชำรุดบกพร่อง เพราะเป็นความผิดพลาดในการสื่อสารเท่านั้น","ถือเป็นความชำรุดบกพร่องเฉพาะกรณีที่ผู้ขายรู้เท่านั้น"], ans:1, explain:"ม.472 ครอบคลุมถึงกรณีที่ทรัพย์สิน \"ไม่ตรงสเปก\" หรือเสื่อมความเหมาะสมแก่ประโยชน์ที่มุ่งหมายโดยสัญญาด้วย ไม่ใช่แค่ความเสียหายทางกายภาพ และเป็นความรับผิดเด็ดขาดไม่ว่าผู้ขายจะรู้หรือไม่รู้ก็ตาม"},
+{cat:"sale_liability", q:"นายเอซื้อกระต่ายเพศผู้-เมียเพื่อนำไปผสมพันธุ์ แต่ได้กระต่ายเพศเดียวกันทั้งคู่มา (ซึ่งแข็งแรงดี) ผู้ขายต้องรับผิดหรือไม่?", opts:["ไม่ต้องรับผิด เพราะกระต่ายไม่ได้เจ็บป่วยหรือพิการ", "ต้องรับผิดฐานชำรุดบกพร่องตาม ม.472 เพราะทรัพย์สินเสื่อมความเหมาะสมแก่ประโยชน์อันมุ่งหมายโดยสัญญา (ผสมพันธุ์ไม่ได้)", "ไม่ต้องรับผิด เพราะเป็นเรื่องของสัตว์ ไม่ใช่ทรัพย์สินทั่วไป", "ต้องรับผิดเฉพาะกรณีที่ผู้ขายจงใจหลอกลวงเท่านั้น"], ans:1, explain:"แม้กระต่ายจะแข็งแรงดี แต่ผิดวัตถุประสงค์ของสัญญา (ต้องการคู่ผสมพันธุ์) ถือเป็นการเสื่อมประโยชน์ที่มุ่งหมายโดยสัญญาตาม ม.472 ผู้ขายต้องรับผิดฐานชำรุดบกพร่องแม้ทรัพย์จะไม่มีอะไรเสียหายทางกายภาพ"},
+{cat:"sale_liability", q:"นายเอส่งลูกกระต่ายมีชีวิตทางไปรษณีย์ไทยซึ่งมีนโยบายห้ามรับส่งสัตว์มีชีวิต กระต่ายตายระหว่างทาง ผู้ขายหลุดพ้นความรับผิดตาม ม.463 หรือไม่?", opts:["หลุดพ้น เพราะได้ส่งมอบให้ผู้ขนส่งแล้วตาม ม.463", "ไม่หลุดพ้น เพราะไปรษณีย์ที่มีนโยบายห้ามรับส่งสัตว์มีชีวิตไม่ถือเป็น \"ผู้ขนส่ง\" ตามกฎหมายสำหรับสัตว์นั้น ผู้ขายยังต้องรับผิด", "หลุดพ้นเสมอไม่ว่ากรณีใด เพราะเป็นเหตุสุดวิสัย", "ต้องแบ่งความรับผิดกับไปรษณีย์"], ans:1, explain:"หลุมพราง ม.463: การส่งมอบผ่านผู้ขนส่งจะทำให้ผู้ขายหลุดพ้นความรับผิดได้ต้องเป็นการส่งผ่าน \"ผู้ขนส่ง\" ตามกฎหมายจริง หากผู้ให้บริการขนส่งนั้นมีนโยบายห้ามรับส่งสิ่งของประเภทนั้น ก็ไม่ถือเป็นผู้ขนส่งของสิ่งนั้น ผู้ขายยังไม่หลุดพ้นจากหนี้"},
+{cat:"sale_buyer_special", q:"นายเอทำสัญญาขายฝากบ้านให้นายบี กำหนดเวลาไถ่ 15 ปี ข้อตกลงเรื่องกำหนดเวลาไถ่นี้มีผลอย่างไร?", opts:["บังคับได้เต็ม 15 ปีตามที่ตกลง", "ให้ลดลงมาเป็น 10 ปีตาม ม.495 เพราะกำหนดเกินกว่าที่กฎหมายอนุญาตสำหรับอสังหาริมทรัพย์", "ทำให้สัญญาขายฝากทั้งฉบับเป็นโมฆะ", "ให้ลดลงมาเป็น 3 ปีเหมือนสังหาริมทรัพย์"], ans:1, explain:"ม.494(1) กำหนดเวลาไถ่อสังหาริมทรัพย์สูงสุด 10 ปี หากสัญญากำหนดเกินกว่านั้น ม.495 ให้ลดลงมาเป็น 10 ปีตามประเภททรัพย์ ไม่ทำให้สัญญาทั้งฉบับเป็นโมฆะ"},
+{cat:"sale_buyer_special", q:"นายเอขายฝากนาฬิกาเรือนหนึ่งให้นายบี (สังหาริมทรัพย์ทั่วไป) โดยไม่ได้กำหนดสินไถ่ไว้ในสัญญา เมื่อจะไถ่ต้องใช้ราคาเท่าใด?", opts:["ใช้ราคาตามที่ตกลงกันในภายหลัง", "ให้ไถ่ตามราคาที่ขายฝากไว้เดิมตาม ม.499", "ไถ่ฟรีไม่ต้องเสียเงิน เพราะไม่ได้กำหนดไว้", "ให้ศาลเป็นผู้กำหนดราคาใหม่ทั้งหมด"], ans:1, explain:"ม.499 วางหลักว่าถ้าไม่ได้กำหนดสินไถ่ไว้ ให้ไถ่ตามราคาที่ขายฝากไว้เดิม"},
+{cat:"exchange", q:"นายเอตกลงแลกนาฬิกาเรือนหนึ่งกับกล้องถ่ายรูปของนายบี โดยนาฬิกามีมูลค่าน้อยกว่ากล้อง นายเอจึงจ่ายเงินเพิ่มให้นายบี 5,000 บาทด้วย ธุรกรรมนี้เรียกว่าอะไร และบทบัญญัติใดใช้บังคับกับเงิน 5,000 บาทนั้น?", opts:["เป็นสัญญาซื้อขาย ใช้ ม.453 กับเงินทั้งหมด", "เป็นสัญญาแลกเปลี่ยนที่มีการโอนเงินเพิ่มตาม ม.520 ซึ่งให้นำบทบัญญัติเรื่องราคาในลักษณะซื้อขายมาใช้กับเงิน 5,000 บาทนั้นด้วย", "เป็นสัญญาให้ เพราะมีการจ่ายเงินเพิ่มโดยไม่มีสิ่งตอบแทน", "เป็นสัญญาเช่าซื้อ"], ans:1, explain:"ม.518 สัญญาแลกเปลี่ยนคือคู่กรณีต่างโอนกรรมสิทธิ์ให้กัน เมื่อมีการโอนเงินเพิ่มเข้ากับทรัพย์สินสิ่งอื่น ม.520 ให้นำบทบัญญัติเรื่องราคาในลักษณะซื้อขายมาใช้กับเงินส่วนนั้นด้วย"},
+{cat:"exchange", q:"ในสัญญาแลกเปลี่ยนที่ทรัพย์สินฝ่ายหนึ่งชำรุดบกพร่อง ฝ่ายที่ได้รับทรัพย์ชำรุดจะเรียกร้องให้อีกฝ่ายรับผิดตามหลักใด?", opts:["ไม่มีบทบัญญัติเฉพาะเรื่องนี้ในลักษณะแลกเปลี่ยน จึงเรียกร้องไม่ได้เลย", "ใช้หลักความรับผิดเพื่อชำรุดบกพร่องตาม ม.472 (ลักษณะซื้อขาย) โดยอนุโลม เพราะ ม.519 ให้ถือว่าคู่สัญญาแลกเปลี่ยนเป็นผู้ขายในส่วนที่ตนส่งมอบ", "ต้องฟ้องเป็นคดีละเมิดเท่านั้น", "ต้องยกเลิกสัญญาทั้งฉบับเสมอ"], ans:1, explain:"ม.519 ให้นำบทบัญญัติทั้งหลายในลักษณะซื้อขายมาใช้กับการแลกเปลี่ยนด้วย โดยถือว่าคู่สัญญาฝ่ายที่ส่งมอบทรัพย์ชำรุดเป็น \"ผู้ขาย\" ในส่วนนั้น จึงต้องรับผิดตาม ม.472 เช่นเดียวกับสัญญาซื้อขาย"},
+{cat:"gift", q:"นายเอให้คำมั่นด้วยวาจาว่าจะยกที่ดินให้นายบีในอนาคต โดยไม่ได้ทำเป็นหนังสือหรือจดทะเบียน นายบีจะฟ้องบังคับให้นายเอโอนที่ดินได้หรือไม่?", opts:["ได้ เพราะเป็นคำมั่นที่ชัดเจน", "ไม่ได้ เพราะคำมั่นจะให้ทรัพย์สินที่ต้องจดทะเบียนต้องทำเป็นหนังสือและจดทะเบียนต่อพนักงานเจ้าหน้าที่ตาม ม.526 มิฉะนั้นเป็นเพียงหนี้ตามน้ำใจ ฟ้องร้องบังคับคดีไม่ได้", "ได้ ถ้ามีพยานบุคคลยืนยันคำมั่นนั้น", "ได้ครึ่งหนึ่งของมูลค่าที่ดิน"], ans:1, explain:"ม.526 กำหนดว่าคำมั่นว่าจะให้ทรัพย์สินที่ถ้าจะให้กันจริงต้องทำเป็นหนังสือและจดทะเบียน (เช่นที่ดิน) ต้องทำเป็นหนังสือและจดทะเบียนคำมั่นนั้นด้วยจึงจะฟ้องร้องบังคับคดีได้ ตกลงปากเปล่าเป็นเพียงหนี้ตามน้ำใจ (หนี้ธรรมจรรยา)"},
+{cat:"gift", q:"นายเอยกรถยนต์ให้นายบีเป็นการตอบแทนที่นายบีทำงานให้ตนมาตลอด 10 ปีโดยไม่คิดค่าจ้าง ต่อมานายบีด่าว่านายเออย่างรุนแรง นายเอจะถอนคืนการให้เพราะเหตุเนรคุณได้หรือไม่?", opts:["ได้ เพราะด่าว่ารุนแรงเข้าเหตุเนรคุณตาม ม.531", "ไม่ได้ เพราะเป็นการให้เป็นบำเหน็จสินจ้างโดยแท้ เข้าข้อยกเว้นตาม ม.535(1) ห้ามถอนคืนเพราะเนรคุณ", "ได้ แต่ต้องฟ้องภายใน 1 เดือน", "ไม่ได้ เพราะรถยนต์เป็นสังหาริมทรัพย์พิเศษ"], ans:1, explain:"ม.535(1) ห้ามถอนคืนการให้ที่เป็น \"บำเหน็จสินจ้างโดยแท้\" เพราะเหตุเนรคุณ แม้เข้าเหตุเนรคุณตาม ม.531 ก็ตาม การให้เพื่อตอบแทนการทำงานถือเป็นบำเหน็จสินจ้าง"},
+{cat:"lease_property", q:"นายเอเช่าที่ดินจากนายบีโดยไม่ได้กำหนดระยะเวลาเช่าไว้ในสัญญา และชำระค่าเช่าเป็นรายเดือน หากนายบีต้องการบอกเลิกสัญญา ต้องทำอย่างไร?", opts:["บอกเลิกได้ทันทีโดยไม่ต้องแจ้งล่วงหน้า", "บอกกล่าวเมื่อสิ้นกำหนดชำระค่าเช่า และให้เวลาอีกอย่างน้อย 1 ช่วงการชำระค่าเช่า (คือ 1 เดือน) ตาม ม.566", "ต้องรอจนครบ 3 ปีก่อนจึงบอกเลิกได้", "ต้องฟ้องศาลขอคำสั่งก่อนเสมอ"], ans:1, explain:"ม.566 สัญญาเช่าที่ไม่มีกำหนดเวลา ฝ่ายใดจะบอกเลิกก็ได้ โดยบอกกล่าวเมื่อสิ้นกำหนดชำระค่าเช่าและให้เวลาอีกอย่างน้อย 1 ช่วงการชำระค่าเช่า"},
+{cat:"lease_property", q:"นายเอให้นายบีและนายซีเช่าที่ดินแปลงเดียวกันซ้อนกัน โดยนายบีทำสัญญาก่อนแต่ไม่ได้จดทะเบียน ส่วนนายซีทำสัญญาทีหลังแต่ไปจดทะเบียนก่อน ใครมีสิทธิดีกว่า?", opts:["นายบี เพราะทำสัญญาก่อน", "นายซี เพราะจดทะเบียนก่อนตาม ม.543 เว้นแต่นายบีจะได้ครอบครองที่ดินก่อนวันที่นายซีไปจดทะเบียน", "ต้องแบ่งที่ดินคนละครึ่ง", "นายเอต้องเลือกเองว่าจะให้ใครเช่า"], ans:1, explain:"ม.542-543 กรณีเช่าซ้อนอสังหาริมทรัพย์ ใครจดทะเบียนก่อนมีสิทธิดีกว่า วันทำสัญญาไม่สำคัญ เว้นแต่ผู้ที่ไม่จดทะเบียนจะได้ครอบครองที่ดินไปก่อนวันที่อีกฝ่ายไปจดทะเบียน"},
+{cat:"hire_purchase", q:"นายเอทำสัญญาเช่าซื้อรถยนต์กับนายบีด้วยวาจา (ไม่ได้ทำเป็นหนังสือ) สัญญานี้มีผลอย่างไร?", opts:["สมบูรณ์ เพราะเป็นสัญญาที่เกิดจากความยินยอมของทั้งสองฝ่าย", "เป็นโมฆะตาม ม.572 วรรคสอง เพราะเช่าซื้อต้องทำเป็นหนังสือ มิฉะนั้นเป็นโมฆะ", "สมบูรณ์แต่ฟ้องร้องบังคับคดีไม่ได้", "ต้องจดทะเบียนต่อพนักงานเจ้าหน้าที่ด้วยจึงจะสมบูรณ์"], ans:1, explain:"ม.572 วรรคสอง กำหนดว่าสัญญาเช่าซื้อถ้าไม่ทำเป็นหนังสือเป็นโมฆะ (ไม่ต้องจดทะเบียนแม้เป็นทรัพย์ที่ปกติต้องจดทะเบียน)"},
+{cat:"hire_purchase", q:"นายเอเช่าซื้อรถยนต์จากนายบี ผิดนัดชำระค่าเช่าซื้องวดที่ 5 และงวดที่ 6 ติดต่อกัน นายบีมีสิทธิอย่างไร?", opts:["ต้องบอกกล่าวให้เวลาอย่างน้อย 15 วันก่อนจึงบอกเลิกสัญญาได้ เหมือนเช่าทรัพย์", "บอกเลิกสัญญาได้ทันที ริบเงินที่ส่งมาแล้วทั้งหมด และกลับเข้าครองทรัพย์สินได้ตาม ม.574", "ต้องฟ้องศาลก่อนจึงจะบอกเลิกได้", "ไม่มีสิทธิบอกเลิก ต้องรอให้ครบสัญญา"], ans:1, explain:"ม.574 ผู้ให้เช่าซื้อมีสิทธิบอกเลิกสัญญาได้ทันทีเมื่อผู้เช่าซื้อผิดนัดชำระเงิน 2 คราวติดกัน โดยริบเงินที่ส่งมาแล้วทั้งหมดและกลับเข้าครองทรัพย์สินได้ ต่างจากเช่าทรัพย์ (ม.560) ที่ต้องบอกกล่าวก่อน"},
+{cat:"hire_of_work", q:"ผู้รับจ้างสร้างบ้านไม้หลังหนึ่ง หลังส่งมอบไปแล้ว 2 ปี พบว่าโครงหลังคาไม้ผุ ผู้ว่าจ้างจะฟ้องเรียกค่าเสียหายได้หรือไม่?", opts:["ได้ เพราะยังไม่เกิน 5 ปีตาม ม.600", "ไม่ได้ เพราะเรือนไม้มีกรอบเวลาที่ความชำรุดต้องปรากฏเพียง 1 ปีนับแต่ส่งมอบตาม ม.600 (ข้อยกเว้นของสิ่งปลูกสร้าง 5 ปี ใช้ไม่ได้กับเรือนไม้)", "ได้ ไม่มีกำหนดเวลาใดๆ เพราะเป็นเรื่องโครงสร้างบ้าน", "ไม่ได้ เพราะต้องฟ้องภายใน 6 เดือนนับแต่ส่งมอบเท่านั้น"], ans:1, explain:"ม.600 กำหนดกรอบเวลาความชำรุดบกพร่องต้องปรากฏภายใน 1 ปีนับแต่ส่งมอบเป็นหลัก ยกเว้นเฉพาะ \"สิ่งปลูกสร้างกับพื้นดิน\" (ไม่ใช่เรือนไม้) ที่ขยายเป็น 5 ปี บ้านไม้จึงมีกรอบเวลาเพียง 1 ปี เมื่อพบหลังจาก 2 ปีจึงพ้นกรอบเวลาที่จะเรียกร้องได้แล้ว"},
+{cat:"hire_of_work", q:"ผู้รับจ้างวาดภาพเหมือนบุคคลที่มีชื่อเสียง จะมอบหมายให้ลูกศิษย์วาดแทนตนทั้งหมดได้หรือไม่?", opts:["ได้เสมอ เพราะ ม.607 อนุญาตให้จ้างช่วงได้ทุกกรณี", "ไม่ได้ เพราะสาระสำคัญของสัญญาอยู่ที่ฝีมือ/ความรู้ความสามารถเฉพาะตัวของผู้รับจ้าง จึงจ้างช่วงไม่ได้", "ได้ ถ้าลูกศิษย์มีฝีมือดีกว่า", "ไม่ได้ เพราะภาพเหมือนต้องมีลิขสิทธิ์เฉพาะตัว"], ans:1, explain:"ม.607 อนุญาตให้จ้างช่วงได้เป็นหลัก เว้นแต่สาระสำคัญแห่งสัญญาอยู่ที่ความรู้ความสามารถเฉพาะตัวของผู้รับจ้าง (เช่น จ้างวาดรูป จ้างนักร้อง) ซึ่งกรณีนี้เข้าข้อยกเว้น จึงจ้างช่วงไม่ได้"},
+{cat:"agency", q:"นายเอตั้งนายบีเป็นตัวแทนไปซื้อที่ดินแปลงหนึ่งราคา 3 ล้านบาทจากนายซี การตั้งตัวแทนนี้ต้องทำอย่างไร?", opts:["ทำด้วยวาจาก็เพียงพอ เพราะการตั้งตัวแทนไม่มีแบบบังคับ", "ต้องทำเป็นหนังสือ เพราะการซื้อขายที่ดินต้องทำเป็นหนังสือและจดทะเบียนตาม ม.456 การตั้งตัวแทนเพื่อกิจการนี้จึงต้องทำเป็นหนังสือด้วยตาม ม.798 วรรคหนึ่ง", "ต้องจดทะเบียนตั้งตัวแทนต่อพนักงานเจ้าหน้าที่ด้วย", "ทำอย่างไรก็ได้ เพราะกฎหมายไม่ได้บังคับเรื่องแบบของตัวแทนไว้เลย"], ans:1, explain:"ม.798 วรรคหนึ่ง: กิจการที่กฎหมายบังคับให้ต้องทำเป็นหนังสือ (เช่นซื้อขายอสังหาริมทรัพย์ตาม ม.456) การตั้งตัวแทนเพื่อกิจการนั้นก็ต้องทำเป็นหนังสือด้วย"},
+{cat:"agency", q:"นายเอสั่งให้ตัวแทนของตนนำสินค้าไปขายที่ชลบุรี แม้ไม่ได้สั่งเจาะจง แต่ตัวแทนไปทำสัญญาเช่ารถบรรทุกเพื่อขนสินค้าไปด้วย ตัวการต้องผูกพันจ่ายค่าเช่ารถหรือไม่?", opts:["ไม่ต้องผูกพัน เพราะไม่ได้สั่งให้เช่ารถบรรทุกโดยตรง", "ต้องผูกพัน เพราะเป็นตัวแทนเฉพาะการตาม ม.800 ซึ่งมีอำนาจทำการทั้งหลายอันจำเป็นเพื่อให้กิจการสำเร็จ (หลักร่มแห่งอำนาจ)", "ไม่ต้องผูกพัน เพราะเกินขอบอำนาจทั่วไปตาม ม.801", "ต้องผูกพันเฉพาะครึ่งหนึ่งของค่าเช่ารถ"], ans:1, explain:"ม.800 ตัวแทนเฉพาะการมีอำนาจทำการทั้งหลายอันจำเป็นเพื่อให้กิจการที่ได้รับมอบหมายสำเร็จลุล่วง แม้ไม่ได้สั่งตรงๆ (หลัก \"ร่มแห่งอำนาจ\") การเช่ารถบรรทุกขนสินค้าไปขายจึงอยู่ในขอบอำนาจ ตัวการต้องผูกพัน"},
+{cat:"agency", q:"ตัวการเสียชีวิตกะทันหัน โดยตัวแทนไม่ทราบ จึงไปทำสัญญาซื้อของกับบุคคลภายนอกที่ไม่ทราบเช่นกัน ทายาทของตัวการจะอ้างว่าสัญญาตัวแทนระงับแล้วเพื่อปฏิเสธความรับผิดต่อบุคคลภายนอกได้หรือไม่?", opts:["ได้ เพราะสัญญาตัวแทนระงับทันทีเมื่อตัวการตายตาม ม.826", "ไม่ได้ เพราะทายาทจะยกความตายขึ้นเป็นข้อต่อสู้บุคคลภายนอกผู้สุจริตไม่ได้ตาม ม.831 ทายาทยังต้องผูกพันตามสัญญา", "ได้ครึ่งหนึ่งของมูลค่าสัญญา", "ต้องให้ศาลตัดสินเป็นรายกรณีไป"], ans:1, explain:"แม้ ม.826 จะให้สัญญาตัวแทนระงับเมื่อตัวการตาย แต่ ม.831 คุ้มครองบุคคลภายนอกผู้สุจริตที่ไม่ทราบความตายนั้น ทายาทจะยกความตายขึ้นต่อสู้บุคคลภายนอกเพื่อปฏิเสธความรับผิดไม่ได้"},
+{cat:"agency", q:"ตัวแทนรับสินบนจากบุคคลภายนอกเพื่อทำสัญญาที่เสียเปรียบตัวการ ผลของสัญญาที่ตัวแทนทำไปเป็นอย่างไร?", opts:["ตัวการต้องผูกพันตามสัญญานั้นเสมอตาม ม.820", "ตัวการไม่ต้องผูกพันในสัญญาที่ตัวแทนทำไปนั้นเลยตาม ม.825 เว้นแต่ตัวการจะยินยอมด้วย", "สัญญาเป็นโมฆียะ ต้องรอให้ตัวการบอกล้าง", "บุคคลภายนอกต้องคืนสินบนเท่านั้น สัญญายังสมบูรณ์"], ans:1, explain:"ม.825 กำหนดไว้ชัดเจนว่าถ้าตัวแทนรับอามิสสินจากบุคคลภายนอกโดยฝ่าฝืนหน้าที่ ตัวการไม่ต้องผูกพันในสัญญาที่ตัวแทนทำไปนั้นเลย เว้นแต่ตัวการจะยินยอมด้วย"},
+];
+</script>
+<script>
+const IRAC_CASES = [
+{
+  id: "case_lion",
+  examRef: "ข้อสอบแก้ตัว ปีการศึกษา 2564 ข้อ 1",
+  title: "รูปปั้น Lion: ขายซ้อนและข้อยกเว้นความรับผิด",
+  cat: "sale_liability",
+  facts: "1 มิ.ย. 2565 นายวศินตกลงขายรูปปั้น \"Lion\" ให้นายชัยราคา 15,000 บาท ทำสัญญาเป็นหนังสือลงลายมือชื่อทั้งสองฝ่าย ตกลงส่งมอบและชำระราคาวันที่ 6 มิ.ย. 2565 และระบุว่านายวศินจะไม่รับผิดในความชำรุดบกพร่องและการรอนสิทธิใด ๆ<br><br>4 มิ.ย. 2565 นายกันต์ (เพื่อนนายวศิน) ขอซื้อรูปปั้นเดียวกันในราคา 18,000 บาท โดยไม่ทราบเรื่องที่ขายให้นายชัยไปแล้ว นายวศินตกลงขายด้วยวาจา ส่งมอบและชำระราคาทันที พร้อมตกลงยกเว้นความรับผิดเช่นเดียวกัน (ทุกฝ่ายเป็นบุคคลธรรมดา ไม่ได้ประกอบธุรกิจรูปปั้น)<br><br>6 มิ.ย. 2565 นายชัยนำเงินมาชำระ แต่นายวศินไม่มีรูปปั้นจะส่งมอบให้แล้ว<br><br>ต่อมาปรากฏว่ารูปปั้นมีรอยแตกขนาดใหญ่ ซึ่งมีมาตั้งแต่ก่อนนายวศินเริ่มขาย โดยนายวศินทราบแต่ใช้วัสดุปกปิดไว้อย่างดีจนไม่สามารถสังเกตเห็นได้ในขณะซื้อขาย",
+  issues: [
+    {
+      label: "ประเด็นที่ 1 — สิทธิระหว่างนายชัยกับนายกันต์",
+      issueQ: "นายชัยอ้างว่าตนมีสิทธิดีกว่าเพราะทำสัญญาก่อนและเป็นหนังสือ ข้ออ้างนี้ฟังขึ้นหรือไม่ และใครมีสิทธิดีกว่าในรูปปั้น?",
+      issueOpts: ["นายชัยฟังขึ้น เพราะทำสัญญาเป็นหนังสือก่อน", "นายกันต์มีสิทธิดีกว่า เพราะได้ครอบครองไว้โดยสุจริตและเสียค่าตอบแทน", "ทั้งคู่ไม่มีสิทธิ เพราะสัญญาทั้งสองเป็นโมฆะ", "ต้องแบ่งกรรมสิทธิ์คนละครึ่ง"],
+      issueAns: 1,
+      issueFeedback: "ถูกต้อง — รูปปั้นเป็นสังหาริมทรัพย์ทั่วไปราคาไม่ถึง 20,000 บาท กฎหมายไม่บังคับแบบหรือหลักฐาน การขายปากเปล่าให้นายกันต์จึงสมบูรณ์ ประเด็นจริงอยู่ที่ใครมีสิทธิดีกว่าตาม ม.1303",
+      ruleQ: "หลักกฎหมายใดใช้ชี้ขาดว่าใครมีสิทธิดีกว่าในกรณี \"ขายซ้อน\" สังหาริมทรัพย์เช่นนี้?",
+      ruleOpts: ["ม.456 วรรคสาม เรื่องหลักฐานการฟ้องร้อง", "ม.1303 บุคคลผู้ได้ทรัพย์ไว้ในครอบครองก่อนโดยสุจริตและเสียค่าตอบแทนมีสิทธิดีกว่า", "ม.458 กรรมสิทธิ์โอนทันทีเมื่อทำสัญญา (ใช้กับนายชัยเท่านั้น)", "ม.483 ข้อสัญญายกเว้นความรับผิด"],
+      ruleAns: 1,
+      ruleFeedback: "ถูกต้อง — แม้นายชัยจะได้กรรมสิทธิ์ตาม ม.458 ก่อน แต่เมื่อทรัพย์ถูกขายซ้อนให้บุคคลภายนอกที่สุจริต เสียค่าตอบแทน และได้ครอบครองแล้ว ม.1303 คุ้มครองให้บุคคลภายนอกนั้นได้กรรมสิทธิ์ไป",
+      appQ: "ปรับข้อเท็จจริงเข้ากับมาตรา 1303 อย่างไร?",
+      appOpts: ["นายกันต์ซื้อในราคาสูงกว่า จึงมีสิทธิดีกว่าโดยอัตโนมัติ", "นายกันต์ได้ครอบครองรูปปั้นก่อน ซื้อโดยเสียค่าตอบแทน และไม่ทราบเรื่องนายชัยเลย จึงเข้าเงื่อนไขคุ้มครองครบทุกข้อ", "นายชัยทำสัญญาเป็นหนังสือ จึงต้องชนะเสมอไม่ว่ากรณีใด", "ต้องดูว่าใครจ่ายเงินมัดจำก่อน"],
+      appAns: 1,
+      appFeedback: "ถูกต้อง — ครบองค์ประกอบ ม.1303: ได้ครอบครองก่อน + สุจริต (ไม่รู้เรื่องนายชัย) + เสียค่าตอบแทน (18,000 บาท)",
+      concQ: "สรุปผล: ระหว่างนายชัยกับนายกันต์ ใครมีสิทธิดีกว่าในรูปปั้น \"Lion\"?",
+      concOpts: ["นายชัย", "นายกันต์", "ทั้งคู่มีสิทธิเท่ากัน", "ไม่มีใครมีสิทธิ ต้องคืนให้นายวศิน"],
+      concAns: 1,
+      concFeedback: "นายกันต์เป็นผู้มีสิทธิดีกว่าในรูปปั้น \"Lion\" ตามมาตรา 1303 เนื่องจากได้ครอบครองไว้โดยสุจริตและเสียค่าตอบแทนก่อน แม้นายชัยจะทำสัญญาก่อนและเป็นหนังสือก็ตาม ข้ออ้างของนายชัยจึงฟังไม่ขึ้น"
+    },
+    {
+      label: "ประเด็นที่ 2 — นายชัยเรียกให้นายวศินรับผิดฐานรอนสิทธิได้หรือไม่",
+      issueQ: "นายชัย (ผู้ไม่มีสิทธิดีกว่า) จะเรียกให้นายวศินรับผิดได้หรือไม่ ทั้งที่มีข้อตกลงยกเว้นความรับผิดในสัญญา?",
+      issueOpts: ["เรียกไม่ได้เด็ดขาด เพราะตกลงยกเว้นความรับผิดไว้แล้ว", "เรียกได้ฐานรอนสิทธิ เพราะการรอนสิทธิเกิดจากความผิดของนายวศินเอง จึงไม่เข้าข้อยกเว้น", "เรียกไม่ได้ เพราะยังไม่มีคำพิพากษาว่านายกันต์ชนะ", "เรียกได้เฉพาะค่าปรับ ไม่ใช่ค่าเสียหาย"],
+      issueAns: 1,
+      issueFeedback: "ถูกต้อง — ม.475 ให้ผู้ขายรับผิดเมื่อมีบุคคลภายนอกมารบกวนสิทธิเพราะความผิดของผู้ขายเอง",
+      ruleQ: "มาตราใดจำกัดผลของข้อสัญญายกเว้นความรับผิดในกรณีนี้?",
+      ruleOpts: ["ม.483 (อนุญาตให้ยกเว้นได้)", "ม.485 (ข้อยกเว้นไม่คุ้มครองผลจากการที่ผู้ขายกระทำไปเอง)", "ม.472 (ความรับผิดเด็ดขาดเรื่องชำรุดบกพร่อง)", "ม.494 (กำหนดเวลาไถ่ทรัพย์)"],
+      ruleAns: 1,
+      ruleFeedback: "ถูกต้อง — ม.485 ตัดข้อสัญญายกเว้นความรับผิดออกไปเมื่อความเสียหายเป็น \"ผลของการอันผู้ขายได้กระทำไปเอง\"",
+      appQ: "เหตุใดการนำรูปปั้นไปขายซ้อนให้นายกันต์จึงเป็น \"ผลของการอันผู้ขายได้กระทำไปเอง\"?",
+      appOpts: ["เพราะนายวศินเป็นคนตัดสินใจนำทรัพย์ไปขายซ้อนเอง ทำให้นายชัยสูญเสียสิทธิ", "เพราะนายกันต์เป็นคนผิด ไม่ใช่นายวศิน", "เพราะนายชัยไม่ได้จดทะเบียนสัญญา", "เพราะราคาที่ขายให้นายกันต์สูงกว่า"],
+      appAns: 0,
+      appFeedback: "ถูกต้อง — การรอนสิทธิที่นายชัยประสบเกิดจากการกระทำของนายวศินเองโดยตรง (ไม่ใช่เหตุสุดวิสัยหรือบุคคลภายนอกล้วนๆ) จึงเข้า ม.485",
+      concQ: "สรุปผล: นายชัยเรียกให้นายวศินรับผิดฐานรอนสิทธิได้หรือไม่?",
+      concOpts: ["ได้ เพราะข้อตกลงยกเว้นความรับผิดไม่อาจใช้คุ้มครองผลจากการกระทำของผู้ขายเอง", "ไม่ได้ เพราะตกลงยกเว้นไว้แล้วเด็ดขาด", "ได้เฉพาะครึ่งหนึ่งของราคา", "ไม่ได้ เพราะนายชัยไม่ใช่เจ้าของกรรมสิทธิ์"],
+      concAns: 0,
+      concFeedback: "นายชัยเรียกร้องให้นายวศินรับผิดฐานรอนสิทธิได้ เพราะเหตุรอนสิทธิเกิดจากการกระทำของนายวศินเอง ข้อตกลงยกเว้นความรับผิดในสัญญาจึงไม่อาจนำมาใช้คุ้มครองนายวศินได้ตาม ม.485"
+    },
+    {
+      label: "ประเด็นที่ 3 — นายกันต์เรียกให้นายวศินรับผิดเรื่องรอยแตกได้หรือไม่",
+      issueQ: "นายกันต์ (ผู้มีสิทธิในรูปปั้น) จะเรียกร้องให้นายวศินรับผิดในรอยแตกที่นายวศินรู้อยู่แล้วแต่ปกปิดไว้ได้หรือไม่?",
+      issueOpts: ["ไม่ได้ เพราะตกลงยกเว้นความรับผิดด้วยวาจาไว้แล้ว", "ได้ เพราะนายวศินรู้อยู่แล้วและจงใจปกปิดความชำรุดบกพร่อง เข้า ม.485", "ไม่ได้ เพราะรอยแตกเห็นประจักษ์อยู่แล้ว", "ได้เฉพาะกรณีที่ทำสัญญาเป็นหนังสือเท่านั้น"],
+      issueAns: 1,
+      issueFeedback: "ถูกต้อง — แม้ทรัพย์จะชำรุดบกพร่องและมีข้อตกลงยกเว้นความรับผิด แต่การที่ผู้ขายรู้แล้วปกปิดเข้าข้อยกเว้นของข้อยกเว้นตาม ม.485",
+      ruleQ: "หลักความรับผิดพื้นฐานเรื่องชำรุดบกพร่องตามมาตราใด และมีลักษณะเด็ดขาดเพียงใด?",
+      ruleOpts: ["ม.472 ความรับผิดเด็ดขาด (Strict Liability) ไม่ว่าผู้ขายจะรู้หรือไม่รู้ก็ตาม", "ม.472 ใช้เฉพาะเมื่อผู้ขายรู้เท่านั้น", "ม.475 ความรับผิดฐานรอนสิทธิ", "ม.483 อนุญาตให้ยกเว้นได้เสมอไม่มีข้อยกเว้น"],
+      ruleAns: 0,
+      ruleFeedback: "ถูกต้อง — ม.472 วางหลักความรับผิดเด็ดขาด และ ม.485 ตัดข้อยกเว้นเมื่อผู้ขายรู้อยู่แล้วและปกปิดเสีย",
+      appQ: "รอยแตกขนาดใหญ่ที่มีมาก่อนขายและถูกปกปิดไว้ ส่งผลต่อข้อตกลงยกเว้นความรับผิดอย่างไร?",
+      appOpts: ["ไม่กระทบ ข้อตกลงยกเว้นยังใช้ได้เต็มที่", "ทำให้ข้อตกลงยกเว้นความรับผิดใช้บังคับไม่ได้ เพราะเข้าเหตุตาม ม.485", "ทำให้สัญญาทั้งฉบับเป็นโมฆะ", "ทำให้นายกันต์ต้องคืนรูปปั้น"],
+      appAns: 1,
+      appFeedback: "ถูกต้อง — นายวศินรู้อยู่แล้วถึงรอยแตกและจงใจใช้วัสดุปกปิดไว้อย่างดี เข้าเงื่อนไข \"รู้อยู่แล้วและปกปิดเสีย\" ตาม ม.485 ข้อตกลงยกเว้นความรับผิดจึงตกไป",
+      concQ: "สรุปผล: นายกันต์เรียกร้องค่าเสียหายจากรอยแตกได้หรือไม่?",
+      concOpts: ["ได้ เพราะผู้ขายรู้อยู่แล้วและปกปิดความชำรุดบกพร่อง ข้อตกลงยกเว้นความรับผิดจึงตกเป็นอันใช้ไม่ได้", "ไม่ได้เด็ดขาด", "ได้แค่ครึ่งหนึ่งของค่าเสียหาย", "ต้องฟ้องนายชัยแทน"],
+      concAns: 0,
+      concFeedback: "นายกันต์สามารถเรียกร้องให้นายวศินรับผิดในความชำรุดบกพร่องได้ เนื่องจากผู้ขายรู้อยู่แล้วและปกปิดเหตุแห่งความชำรุดบกพร่องนั้น ข้อตกลงยกเว้นความรับผิดจึงใช้บังคับไม่ได้ตาม ม.485"
+    }
+  ]
+},
+{
+  id: "case_lease_building",
+  examRef: "ข้อสอบแก้ตัว ปีการศึกษา 2564 ข้อ 2",
+  title: "เช่าอาคาร 10 ปี ไม่จดทะเบียน แล้วผู้ให้เช่าขายต่อ",
+  cat: "lease_property",
+  facts: "นายเอกเช่าอาคารที่เพิ่งก่อสร้างเสร็จจากนายโท โดยนายเอกให้เงินช่วยค่าก่อสร้าง 500,000 บาทในวันทำสัญญา สัญญาเช่าทำเป็นหนังสือลงลายมือชื่อทั้งสองฝ่ายแต่ไม่ได้จดทะเบียน กำหนดเวลาเช่า 10 ปี ค่าเช่าเดือนละ 30,000 บาท ชำระทุกต้นเดือน<br><br>หลังเช่าไปแล้ว 5 ปี นายโทขายอาคารให้นายตรี ทำสัญญาซื้อขายเป็นหนังสือและจดทะเบียนถูกต้อง หลังรับโอนกรรมสิทธิ์ นายเอกไม่ยอมชำระค่าเช่า 2 เดือนติดกัน นายตรีต้องการให้นายเอกออกจากอาคารทันที โดยอ้างว่า (1) นายเอกเช่าโดยไม่จดทะเบียนมาแต่ต้น เป็นการเช่าที่ไม่ชอบ อ้างยันตนไม่ได้ (2) นายตรีเป็นเจ้าของกรรมสิทธิ์ มีอำนาจขับไล่ใครก็ได้ (3) นายเอกค้างค่าเช่า 2 เดือนติดกัน เป็นเหตุให้เลิกสัญญาได้",
+  issues: [
+    {
+      label: "ประเด็นที่ 1 — สถานะของสัญญาเช่าหลังผ่าน 3 ปี",
+      issueQ: "สัญญาเช่า 10 ปีที่ทำเป็นหนังสือแต่ไม่จดทะเบียน มีผลบังคับอย่างไรเมื่อเช่าเลยมา 5 ปีแล้ว?",
+      issueOpts: ["เป็นโมฆะทั้งฉบับตั้งแต่ต้น เพราะไม่จดทะเบียน", "บังคับได้เต็ม 10 ปีตามสัญญา เพราะทำเป็นหนังสือแล้ว", "บังคับได้แค่ 3 ปีแรกตาม ม.538 แต่เมื่ออยู่ต่อโดยไม่ถูกทักท้วง กลายเป็นสัญญาเช่าไม่มีกำหนดเวลาตาม ม.570", "ระงับไปทันทีเมื่อครบ 3 ปี ต้องออกจากอาคารทันที"],
+      issueAns: 2,
+      issueFeedback: "ถูกต้อง — เช่าเกิน 3 ปีที่ไม่จดทะเบียน บังคับได้เพียง 3 ปีแรกตาม ม.538 เมื่อผู้เช่าอยู่ต่อโดยผู้ให้เช่ารู้แต่ไม่ทักท้วง กลายเป็นสัญญาเช่าแบบไม่มีกำหนดเวลาตาม ม.570",
+      ruleQ: "มาตราใดกำหนดผลของการเช่าอสังหาริมทรัพย์เกิน 3 ปีที่ไม่ได้จดทะเบียน?",
+      ruleOpts: ["ม.538: ฟ้องร้องบังคับคดีได้เพียง 3 ปี", "ม.456: สัญญาเป็นโมฆะ", "ม.474: อายุความ 1 ปี", "ม.494: กำหนดเวลาไถ่ทรัพย์"],
+      ruleAns: 0,
+      ruleFeedback: "ถูกต้อง — ม.538 กำหนดให้เช่าเกิน 3 ปีที่ไม่จดทะเบียน ฟ้องร้องบังคับคดีได้เพียง 3 ปีแรกเท่านั้น",
+      appQ: "เงินช่วยค่าก่อสร้าง 500,000 บาทที่นายเอกจ่าย ทำให้สัญญานี้เป็น \"สัญญาต่างตอบแทนพิเศษยิ่งกว่าเช่าธรรมดา\" หรือไม่?",
+      appOpts: ["ใช่ เพราะจ่ายเงินก้อนใหญ่ในวันทำสัญญา", "ไม่ใช่ เพราะอาคารเพิ่งก่อสร้างเสร็จแล้วก่อนเช่า เงินนี้จึงเป็นเพียง \"เงินกินเปล่า\" ไม่ใช่เงินช่วยระหว่างก่อสร้าง", "ใช่ เพราะเป็นจำนวนเงินที่สูงกว่าค่าเช่ารายเดือนมาก", "ไม่ใช่ เพราะไม่ได้ทำเป็นหนังสือ"],
+      appAns: 1,
+      appFeedback: "ถูกต้อง — หลุมพรางสำคัญ: สัญญาต่างตอบแทนพิเศษต้องจ่ายเงินช่วยระหว่างที่ตึกยังสร้างไม่เสร็จ แต่โจทย์ระบุชัดว่าอาคาร \"เพิ่งก่อสร้างเสร็จ\" สัญญานี้จึงเป็นเช่าธรรมดาที่ต้องอยู่ภายใต้ ม.538 เต็มรูปแบบ",
+      concQ: "สรุป: เมื่อเช่ามาแล้ว 5 ปี สถานะของสัญญาเป็นอย่างไร?",
+      concOpts: ["สัญญาเช่าแบบไม่มีกำหนดเวลา (จาก ม.538 ครบ 3 ปี + ม.570 อยู่ต่อไม่ทักท้วง)", "สัญญาเช่า 10 ปีเต็มตามที่ตกลง", "สัญญาสิ้นสุดแล้วตั้งแต่ปีที่ 3", "สัญญาเป็นโมฆะทั้งฉบับ"],
+      concAns: 0,
+      concFeedback: "สัญญากลายเป็นสัญญาเช่าแบบไม่มีกำหนดเวลา เพราะบังคับได้เพียง 3 ปีแรกตาม ม.538 แล้วนายเอกอยู่ต่อโดยนายโทไม่ทักท้วง เข้า ม.570"
+    },
+    {
+      label: "ประเด็นที่ 2 — ข้ออ้างทั้ง 3 ข้อของนายตรีฟังขึ้นหรือไม่",
+      issueQ: "ข้ออ้างทั้ง 3 ประการของนายตรี (เช่าไม่ชอบ / เจ้าของกรรมสิทธิ์ขับไล่ได้ทันที / ค้างค่าเช่า 2 เดือนเลิกได้ทันที) ฟังขึ้นหรือไม่?",
+      issueOpts: ["ฟังขึ้นทั้ง 3 ข้อ ขับไล่ได้ทันที", "ฟังไม่ขึ้นทั้ง 3 ข้อ ต้องดำเนินการตามขั้นตอนกฎหมายก่อน", "ฟังขึ้นเฉพาะข้อ 3 เพราะค้างค่าเช่าจริง", "ฟังขึ้นเฉพาะข้อ 2 เพราะเป็นเจ้าของกรรมสิทธิ์"],
+      issueAns: 1,
+      issueFeedback: "ถูกต้อง — ทั้ง 3 ข้ออ้างฟังไม่ขึ้น เพราะสัญญาเช่ายังผูกพันอยู่ (ม.569, ม.570) และการไม่จ่ายค่าเช่าต้องบอกกล่าวก่อนตาม ม.560",
+      ruleQ: "เมื่อนายโทขายอาคารให้นายตรี สัญญาเช่าที่มีอยู่มีผลอย่างไรต่อนายตรี?",
+      ruleOpts: ["สัญญาเช่าระงับไปเพราะเปลี่ยนเจ้าของ นายตรีไม่ผูกพัน", "สัญญาเช่าไม่ระงับ ผู้รับโอน (นายตรี) ต้องรับไปทั้งสิทธิและหน้าที่ของผู้ให้เช่าเดิมตาม ม.569", "นายตรีมีสิทธิเลือกว่าจะรับสัญญาเช่าหรือไม่ก็ได้", "สัญญาเช่าเปลี่ยนเป็นสัญญาเช่าซื้อโดยอัตโนมัติ"],
+      ruleAns: 1,
+      ruleFeedback: "ถูกต้อง — ม.569 สัญญาเช่าอสังหาริมทรัพย์ไม่ระงับเพราะเหตุโอนกรรมสิทธิ์ ผู้รับโอนต้องรับไปทั้งสิทธิและหน้าที่ของผู้ให้เช่าเดิม",
+      appQ: "การที่นายเอกค้างค่าเช่า 2 เดือนติดกัน นายตรีมีสิทธิบอกเลิกและขับไล่ทันทีได้หรือไม่?",
+      appOpts: ["ได้ทันที เพราะค้างถึง 2 เดือนแล้ว", "ไม่ได้ทันที ต้องบอกกล่าวให้ชำระค่าเช่าที่ค้างโดยให้เวลาอย่างน้อย 15 วันก่อนตาม ม.560 วรรคสอง", "ได้ทันที เพราะเป็นเจ้าของกรรมสิทธิ์ใหม่", "ไม่ได้เลย เพราะสัญญาเป็นเช่าซื้อ"],
+      appAns: 1,
+      appFeedback: "ถูกต้อง — หลุมพราง: อย่าเอาไปปนกับเช่าซื้อ (ม.574 เลิกได้ทันทีเมื่อผิดนัด 2 คราว) เช่าทรัพย์รายเดือนไม่มีคำว่า \"เลิกได้ทันที\" ต้องบอกกล่าวให้เวลาอย่างน้อย 15 วันตาม ม.560 วรรคสองเสมอ",
+      concQ: "สรุป: นายตรีมีทางเลือกใดบ้างในการขับไล่นายเอก?",
+      concOpts: ["ขับไล่ได้ทันทีโดยไม่ต้องทำอะไรเพิ่ม", "ต้องบอกกล่าวให้ชำระค่าเช่าที่ค้างโดยให้เวลาอย่างน้อย 15 วัน (ม.560) หรือบอกเลิกสัญญาไม่มีกำหนดเวลาล่วงหน้าอย่างน้อย 1 เดือน (ม.566)", "ต้องฟ้องขับไล่ทันทีโดยไม่ต้องบอกกล่าว", "ไม่มีทางเลือกใดเลย ต้องรอครบ 10 ปี"],
+      concAns: 1,
+      concFeedback: "ข้ออ้างทั้ง 3 ประการของนายตรีฟังไม่ขึ้น นายตรีมีทางเลือก 2 ทาง: (1) บอกกล่าวให้นายเอกชำระค่าเช่าที่ค้างโดยให้เวลาอย่างน้อย 15 วันตาม ม.560 วรรคสอง หรือ (2) บอกเลิกสัญญาเช่าไม่มีกำหนดเวลาโดยบอกกล่าวล่วงหน้าอย่างน้อย 1 เดือนตาม ม.566"
+    }
+  ]
+},
+{
+  id: "case_gift_watch_land",
+  examRef: "ข้อสอบแก้ตัว ปีการศึกษา 2564 ข้อ 3.1",
+  title: "นาฬิกาของขวัญและที่ดินติดจำนอง: ถอนคืนการให้เพราะเนรคุณ",
+  cat: "gift",
+  facts: "นายภูผามอบนาฬิกาเรือนหนึ่งให้นายสินธุเป็นของขวัญเนื่องในโอกาสได้เลื่อนตำแหน่งงาน และทำหนังสือจดทะเบียนยกที่ดินที่ติดจำนองแปลงหนึ่งให้นายศิลา<br><br>นายสินธุพบว่านาฬิกาทำงานผิดปกติ บอกเวลาไม่ถูกต้อง ทำให้เสียหายจากงานที่นัดไว้ จึงไม่พอใจนายภูผา ส่วนนายศิลาก็ไม่พอใจที่ได้ที่ดินติดจำนอง จึงไม่นำเงินไปไถ่ถอนจำนอง ทั้งสองคนยังด่าว่านายภูผาต่อหน้าคนจำนวนมากจนนายภูผาเสียชื่อเสียงอย่างมาก จนล้มป่วยต้องรักษาตัวในโรงพยาบาล 2 เดือน<br><br>เมื่อออกจากโรงพยาบาลนายภูผามาปรึกษาทันทีว่าจะเรียกนาฬิกาคืนจากนายสินธุและเรียกที่ดินคืนจากนายศิลาได้หรือไม่",
+  issues: [
+    {
+      label: "ประเด็นที่ 1 — เรียกนาฬิกาคืนจากนายสินธุ",
+      issueQ: "นายภูผาจะเรียกถอนคืนการให้นาฬิกาจากนายสินธุได้หรือไม่?",
+      issueOpts: ["ไม่ได้ เพราะนาฬิกาเป็นของขวัญธรรมดา ถอนคืนไม่ได้เลย", "ได้ เพราะนายสินธุด่าว่านายภูผาต่อหน้าคนจำนวนมากจนเสียชื่อเสียงอย่างร้ายแรง เข้าเหตุเนรคุณตาม ม.531(2)", "ไม่ได้ เพราะนาฬิกาเสียเป็นความผิดของนายภูผาเอง", "ได้ แต่ต้องรอจนนาฬิกาซ่อมเสร็จก่อน"],
+      issueAns: 1,
+      issueFeedback: "ถูกต้อง — การหมิ่นประมาทผู้ให้อย่างร้ายแรงเป็นเหตุเนรคุณตาม ม.531(2) โดยไม่เกี่ยวกับเรื่องนาฬิกาเสีย (ผู้ให้ไม่ต้องรับผิดชำรุดบกพร่องในสัญญาให้)",
+      ruleQ: "อายุความในการฟ้องถอนคืนการให้เพราะเหตุเนรคุณคือเท่าใด?",
+      ruleOpts: ["1 ปีนับแต่วันทำสัญญาให้", "6 เดือนนับแต่ทราบเหตุเนรคุณ (และไม่เกิน 10 ปีนับแต่เกิดเหตุ) ตาม ม.533", "5 ปีนับแต่ส่งมอบทรัพย์", "ไม่มีกำหนดอายุความ"],
+      ruleAns: 1,
+      ruleFeedback: "ถูกต้อง — ม.533 กำหนดอายุความสั้นมากคือ 6 เดือนนับแต่ทราบเหตุ",
+      appQ: "นายภูผารักษาตัวในโรงพยาบาล 2 เดือนแล้วมาปรึกษาทันที ยังอยู่ในกำหนดเวลาฟ้องหรือไม่?",
+      appOpts: ["ไม่อยู่ในกำหนด เพราะเกิน 6 เดือนแล้ว", "ยังอยู่ในกำหนด เพราะผ่านไปเพียง 2 เดือนนับแต่ทราบเหตุ ยังไม่ครบ 6 เดือน", "ไม่เกี่ยวกับอายุความ เพราะเป็นเหตุสุดวิสัย", "ต้องนับใหม่ตั้งแต่ออกจากโรงพยาบาล"],
+      appAns: 1,
+      appFeedback: "ถูกต้อง — 2 เดือนยังไม่พ้นกำหนด 6 เดือนตาม ม.533 นายภูผายังมีสิทธิฟ้อง",
+      concQ: "สรุป: นายภูผาเรียกนาฬิกาคืนจากนายสินธุได้หรือไม่?",
+      concOpts: ["ได้ โดยอ้างเหตุถอนคืนการให้เพราะประพฤติเนรคุณ (หมิ่นประมาทอย่างร้ายแรง) เนื่องจากยังอยู่ในอายุความ 6 เดือน", "ไม่ได้เลย", "ได้เฉพาะครึ่งหนึ่งของมูลค่า", "ต้องฟ้องภายใน 1 เดือนเท่านั้น"],
+      concAns: 0,
+      concFeedback: "นายภูผาเรียกนาฬิกาคืนจากนายสินธุได้ โดยอ้างเหตุถอนคืนการให้เพราะผู้รับประพฤติเนรคุณ (หมิ่นประมาทอย่างร้ายแรง) ตาม ม.531(2) เนื่องจากยังฟ้องคดีภายในอายุความ 6 เดือนตาม ม.533"
+    },
+    {
+      label: "ประเด็นที่ 2 — เรียกที่ดินคืนจากนายศิลา",
+      issueQ: "นายภูผาจะเรียกที่ดินคืนจากนายศิลาโดยอ้างเหตุเนรคุณ (ด่าว่าจนเสียชื่อเสียง) ได้หรือไม่?",
+      issueOpts: ["ได้ เพราะนายศิลาก็ด่าว่าเช่นเดียวกับนายสินธุ", "ไม่ได้ เพราะที่ดินเป็น \"สิ่งที่มีค่าภาระติดพัน\" (ติดจำนอง) ซึ่งเข้าข้อยกเว้นห้ามถอนคืนเพราะเนรคุณตาม ม.535(2)", "ไม่ได้ เพราะนายศิลาไม่ได้ด่าว่ารุนแรงพอ", "ได้ แต่ต้องแบ่งที่ดินคืนครึ่งหนึ่ง"],
+      issueAns: 1,
+      issueFeedback: "ถูกต้อง — หลุมพรางสำคัญ: แม้เข้าเหตุเนรคุณ (ด่าว่ารุนแรง) แต่ทรัพย์ที่ให้เป็น \"สิ่งที่มีค่าภาระติดพัน\" เข้าข้อยกเว้นเด็ดขาดตาม ม.535(2) ห้ามถอนคืนเพราะเนรคุณ",
+      ruleQ: "แม้เรียกคืนเพราะเนรคุณไม่ได้ นายภูผามีช่องทางอื่นใดที่จะเรียกที่ดินคืนจากนายศิลาได้หรือไม่?",
+      ruleOpts: ["ไม่มีช่องทางใดเลย ต้องปล่อยที่ดินไป", "มี — ม.528 ให้สิทธิผู้ให้เรียกทรัพย์คืนได้ตามหลักลาภมิควรได้ หากผู้รับละเลยไม่ชำระค่าภาระติดพัน", "มีเฉพาะการฟ้องเรียกค่าเสียหายจากการหมิ่นประมาทเท่านั้น", "มีเฉพาะกรณีที่จดทะเบียนยกเลิกนิติกรรม"],
+      ruleAns: 1,
+      ruleFeedback: "ถูกต้อง — ม.528 เป็นช่องทางที่ถูกต้อง เพราะนายศิลาละเลยไม่ไปไถ่ถอนจำนองซึ่งเป็นภาระติดพันของที่ดิน",
+      appQ: "ข้อเท็จจริงที่นายศิลา \"ไม่นำเงินไปไถ่ถอนจำนอง\" ปรับเข้ากับ ม.528 อย่างไร?",
+      appOpts: ["ไม่เกี่ยวข้องกับ ม.528 เลย เป็นเพียงเรื่องภายในของนายศิลา", "ถือเป็นการละเลยไม่ชำระค่าภาระติดพันที่ผูกพันกับที่ดิน นายภูผาจึงเรียกให้ส่งคืนที่ดินได้ตาม ม.528", "ทำให้สัญญาให้เป็นโมฆะทั้งฉบับ", "ทำให้นายศิลาต้องเสียดอกเบี้ยเท่านั้น ไม่ต้องคืนที่ดิน"],
+      appAns: 1,
+      appFeedback: "ถูกต้อง — การไม่ไถ่ถอนจำนองคือการละเลยไม่ชำระค่าภาระติดพัน เข้าเงื่อนไข ม.528 ให้สิทธิผู้ให้เรียกทรัพย์คืนได้",
+      concQ: "สรุป: นายภูผาเรียกที่ดินคืนจากนายศิลาได้หรือไม่ โดยอาศัยเหตุใด?",
+      concOpts: ["ไม่ได้เลยไม่ว่าเหตุใด", "ได้ แต่ต้องอ้างเหตุนายศิลาละเลยไม่ชำระค่าภาระติดพันตาม ม.528 เท่านั้น จะอ้างเหตุเนรคุณไม่ได้", "ได้ โดยอ้างเหตุเนรคุณเช่นเดียวกับนาฬิกา", "ได้ แต่ต้องคืนเงินค่าจำนองให้นายศิลาก่อน"],
+      concAns: 1,
+      concFeedback: "นายภูผาเรียกที่ดินคืนจากนายศิลาได้ แต่ต้องอ้างเหตุที่นายศิลา \"ละเลยไม่ชำระค่าภาระติดพัน\" ตาม ม.528 เท่านั้น จะอ้างเหตุประพฤติเนรคุณเพื่อเรียกที่ดินคืนไม่ได้ เพราะเข้าข้อยกเว้นตาม ม.535(2)"
+    }
+  ]
+},
+{
+  id: "case_agency_rice",
+  examRef: "ข้อสอบแก้ตัว ปีการศึกษา 2567",
+  title: "ฝากซื้อข้าว: ตัวแทนทำนอกเหนืออำนาจ",
+  cat: "agency",
+  facts: "นายดำฝากนายขาวซื้อข้าวหอมมะลิ 1 กระสอบ ราคา 1,000 บาทให้ตน นายขาวตกลง เมื่อไปที่ร้านนายแดง นายขาวกลับสั่งซื้อข้าวไรซ์เบอรี่ 2 กระสอบ ๆ ละ 1,200 บาท โดยบอกนายแดงว่าตนซื้อ 1 กระสอบ ส่วนอีกกระสอบให้ส่งไปบ้านนายดำเพราะตนทำงานแทนนายดำ นายแดงรับทราบและนำส่งวันรุ่งขึ้น<br><br>นายแดงส่งข้าวไรซ์เบอรี่ให้นายดำ แต่นายดำปฏิเสธ อ้างว่าไม่ได้สั่งซื้อ ขอให้นำกลับ นายแดงจึงส่งมอบข้าวทั้ง 2 กระสอบให้นายขาว แต่นายขาวรับเพียง 1 กระสอบพร้อมจ่ายเงิน 1,200 บาท อ้างว่านายแดงทราบแล้วว่าตนซื้อแทนนายดำอีกกระสอบ",
+  issues: [
+    {
+      label: "ประเด็นที่ 1 — นายขาวทำในหรือนอกขอบอำนาจ",
+      issueQ: "การที่นายขาวสั่งซื้อข้าวไรซ์เบอรี่ (แทนข้าวหอมมะลิที่ได้รับมอบหมาย) เป็นการทำในหรือนอกเหนือขอบอำนาจของตัวแทน?",
+      issueOpts: ["อยู่ในขอบอำนาจ เพราะยังเป็นการซื้อข้าวเหมือนกัน", "นอกเหนือขอบอำนาจ เพราะซื้อข้าวผิดประเภทและราคาสูงกว่าที่ตัวการมอบหมายไว้", "อยู่ในขอบอำนาจ เพราะนายดำไม่ได้ระบุชนิดข้าวไว้ชัดเจน", "ไม่เกี่ยวกับขอบอำนาจ เพราะเป็นเรื่องของนายแดงเท่านั้น"],
+      issueAns: 1,
+      issueFeedback: "ถูกต้อง — นายดำมอบอำนาจจำกัดเฉพาะข้าวหอมมะลิ 1 กระสอบ ราคา 1,000 บาท การซื้อข้าวไรซ์เบอรี่ราคา 1,200 บาทจึงเกินขอบอำนาจที่ได้รับมอบหมาย",
+      ruleQ: "ผลทางกฎหมายเมื่อตัวแทนทำนอกเหนืออำนาจและตัวการไม่ให้สัตยาบันคือ?",
+      ruleOpts: ["ตัวการต้องผูกพันเสมอไม่ว่าจะให้สัตยาบันหรือไม่", "ตามม.823: ไม่ผูกพันตัวการ เว้นแต่ให้สัตยาบัน หากไม่ให้สัตยาบัน ตัวแทนต้องรับผิดต่อบุคคลภายนอกโดยลำพัง", "สัญญาทั้งหมดเป็นโมฆะ ไม่มีใครต้องรับผิด", "บุคคลภายนอกต้องรับผิดชอบเอง"],
+      ruleAns: 1,
+      ruleFeedback: "ถูกต้อง — ม.823 วรรคหนึ่งและวรรคสอง วางหลักไว้ชัดเจนตามนี้",
+      appQ: "การที่นายดำปฏิเสธไม่รับข้าวไรซ์เบอรี่ ถือเป็นการให้สัตยาบันหรือไม่ และผลเป็นอย่างไร?",
+      appOpts: ["ถือเป็นการให้สัตยาบัน เพราะนายแดงส่งของมาให้แล้ว", "ไม่ให้สัตยาบัน ผลคือสัญญาซื้อขายข้าวไรซ์เบอรี่กระสอบที่ 2 ไม่ผูกพันนายดำ นายขาวต้องรับผิดต่อนายแดงเอง", "ถือเป็นการให้สัตยาบันบางส่วน", "ไม่มีผลทางกฎหมายใดๆ เพราะนายแดงรู้อยู่แล้วว่านายขาวเป็นตัวแทน"],
+      appAns: 1,
+      appFeedback: "ถูกต้อง — การปฏิเสธรับของคือการไม่ให้สัตยาบันอย่างชัดเจน ผลจึงตกที่นายขาวต้องรับผิดเองตาม ม.823 วรรคสอง",
+      concQ: "สรุป: นายแดงจะเรียกให้นายขาวรับข้าวที่เหลือและชำระเงิน 1,200 บาทได้หรือไม่?",
+      concOpts: ["ไม่ได้ เพราะนายแดงรู้อยู่แล้วว่านายขาวเป็นตัวแทน จึงต้องไปเรียกจากนายดำ", "ได้ เพราะนายขาวทำนอกเหนืออำนาจและตัวการไม่ให้สัตยาบัน นายขาวต้องรับผิดโดยลำพังตนเองตาม ม.823 วรรคสอง", "ไม่ได้เลยในทุกกรณี เพราะสัญญาเป็นโมฆะ", "ได้เฉพาะครึ่งหนึ่งของราคา"],
+      concAns: 1,
+      concFeedback: "นายแดงเรียกให้นายขาวรับข้าวและชำระเงินได้ เพราะเป็นการทำนอกเหนืออำนาจที่ตัวการไม่ให้สัตยาบัน นายขาวต้องรับผิดโดยลำพังตนเองตาม ม.823 วรรคสอง — การที่นายแดงรู้ว่านายขาวเป็นตัวแทนทั่วไป ไม่ใช่การรู้ว่าเขาทำนอกเหนืออำนาจ จึงไม่เข้าข้อยกเว้นที่จะทำให้ตัวแทนหลุดพ้นความรับผิด"
+    }
+  ]
+},
+{
+  id: "case_agency_hp",
+  examRef: "ข้อสอบแก้ตัว ปีการศึกษา 2564 ข้อ 5",
+  title: "ตั้งตัวแทนด้วยวาจาไปทำสัญญาเช่าซื้อรถยนต์",
+  cat: "agency",
+  facts: "นายเกียรติแต่งตั้งนายศักดิ์เป็นตัวแทนด้วยวาจา ให้ไปทำสัญญาเช่าซื้อรถยนต์ให้ตน นายศักดิ์ทำสัญญาเช่าซื้อรถยนต์กับนายเมือง เป็นหนังสือ ลงลายมือชื่อนายเมืองในฐานะผู้ให้เช่าซื้อ และนายศักดิ์ในฐานะผู้เช่าซื้อ (เช่าซื้อ 3 ปี ค่าเช่าซื้อเดือนละ 30,000 บาท)<br><br>หลังทำสัญญา นายศักดิ์บอกให้นายเมืองส่งมอบรถให้นายเกียรติ เพราะนายเกียรติเป็นผู้เช่าซื้อตัวจริง และให้เก็บเงินค่าเช่าซื้อกับนายเกียรติ นายเกียรติใช้รถได้ 3 เดือนแล้วไม่จ่ายค่าเช่าซื้อเดือนที่ 3-4 นายเมืองจึงบอกเลิกสัญญาและเรียกรถคืน นายเกียรติไม่ยอมคืน นายเมืองจึงฟ้องศาลให้บังคับนายเกียรติส่งมอบรถและเรียกค่าเสียหาย \"ตามสัญญาเช่าซื้อ\"",
+  issues: [
+    {
+      label: "ประเด็นที่ 1 — ผลของการตั้งตัวแทนด้วยวาจาเพื่อทำสัญญาเช่าซื้อ",
+      issueQ: "การตั้งตัวแทนด้วยวาจาให้ไปทำสัญญาเช่าซื้อ (ซึ่งกฎหมายบังคับให้ต้องทำเป็นหนังสือ) ชอบด้วยกฎหมายหรือไม่?",
+      issueOpts: ["ชอบด้วยกฎหมาย เพราะการตั้งตัวแทนไม่มีแบบบังคับ", "ไม่ชอบด้วยกฎหมาย เพราะเช่าซื้อต้องทำเป็นหนังสือ (ม.572) การตั้งตัวแทนเพื่อกิจการนี้จึงต้องทำเป็นหนังสือด้วยตาม ม.798 วรรคหนึ่ง", "ไม่ชอบเพราะไม่ได้จดทะเบียน", "ชอบด้วยกฎหมาย เพราะนายศักดิ์เป็นผู้ลงนามในสัญญาเอง"],
+      issueAns: 1,
+      issueFeedback: "ถูกต้อง — ม.572 วรรคสองบังคับให้เช่าซื้อต้องทำเป็นหนังสือ มิฉะนั้นเป็นโมฆะ เมื่อกิจการที่ตัวแทนไปทำต้องทำเป็นหนังสือ การตั้งตัวแทนก็ต้องทำเป็นหนังสือตาม ม.798 วรรคหนึ่งด้วย",
+      ruleQ: "ผลของการฝ่าฝืน ม.798 คืออะไร?",
+      ruleOpts: ["ทำให้สัญญาตั้งตัวแทนระหว่างตัวการกับตัวแทนเป็นโมฆะ", "ตัวการกับบุคคลภายนอกไม่มีความผูกพันกันเลย แต่สัญญาตั้งตัวแทนระหว่างตัวการ-ตัวแทนเองยังสมบูรณ์และฟ้องกันเองได้", "ทำให้สัญญาเช่าซื้อระหว่างนายศักดิ์กับนายเมืองเป็นโมฆะไปด้วย", "ไม่มีผลใดๆ เพราะนายเมืองทราบเรื่องแล้ว"],
+      ruleAns: 1,
+      ruleFeedback: "ถูกต้อง — จุดตายสำคัญ: อย่าเขียนว่า \"สัญญาตั้งตัวแทนเป็นโมฆะ\" ผลที่แท้จริงคือไม่มีความผูกพันระหว่างตัวการกับบุคคลภายนอกเท่านั้น",
+      appQ: "การที่นายเมืองรู้ภายหลังว่านายเกียรติเป็นตัวการตัวจริง (ส่งรถให้ เก็บเงินจากนายเกียรติ) ทำให้สัญญาผูกพันนายเกียรติได้หรือไม่?",
+      appOpts: ["ได้ เพราะนายเมืองรู้และยอมรับพฤติการณ์นั้นแล้ว", "ไม่ได้ เพราะกฎหมายวิธีพิจารณาความแพ่งไม่เปิดทางให้สืบพยานบุคคลแทนเอกสารที่กฎหมายบังคับให้ต้องมี (ม.798) ยังคงต้องมีหนังสือตั้งตัวแทน", "ได้ เพราะถือว่านายเกียรติให้สัตยาบันแล้ว", "ไม่เกี่ยวข้องกับประเด็นนี้"],
+      appAns: 1,
+      appFeedback: "ถูกต้อง — แม้จะมีพฤติการณ์บ่งชี้ แต่เมื่อกฎหมายบังคับให้ต้องมีหนังสือ จะเอาพยานบุคคลหรือการรับรู้มาสืบแทนเอกสารไม่ได้ ตัวการจึงยังไม่ผูกพัน",
+      concQ: "สรุป: ศาลจะพิพากษาให้นายเกียรติรับผิดตามสัญญาเช่าซื้อหรือไม่?",
+      concOpts: ["ให้รับผิด เพราะเป็นตัวการตัวจริง", "ยกฟ้อง เพราะนายเกียรติไม่มีผลผูกพันทางกฎหมายกับนายเมืองตามสัญญาเช่าซื้อ เนื่องจากตั้งตัวแทนด้วยวาจาฝ่าฝืน ม.798 วรรคหนึ่ง", "ให้รับผิดครึ่งหนึ่ง", "ให้นายศักดิ์และนายเกียรติรับผิดร่วมกัน"],
+      concAns: 1,
+      concFeedback: "ศาลจะพิพากษายกฟ้องนายเกียรติ เพราะไม่มีนิติสัมพันธ์ตามสัญญาเช่าซื้อกับนายเมือง นายเมืองต้องไปฟ้องนายศักดิ์ (ตัวแทนผู้ลงนามในสัญญาเช่าซื้อ) แทน ซึ่งนายศักดิ์จะไปไล่เบี้ยเอากับนายเกียรติในภายหลังตาม ม.816 ได้"
+    }
+  ]
+},
+{
+  id: "case_hire_work_wall",
+  examRef: "ข้อสอบแก้ตัว ปีการศึกษา 2567",
+  title: "จ้างสร้างอาคาร: กำแพงร้าวและการปกปิดความชำรุด",
+  cat: "hire_of_work",
+  facts: "นายฟา (ผู้ว่าจ้าง) ว่าจ้างนายเมฆ (ผู้รับจ้างหลัก) สร้างอาคารคอนกรีต 3 ชั้น นายเมฆนำงานก่อกำแพงไปให้นายแก้ว (ผู้รับจ้างช่วง) ทำต่อ นายแก้วใช้วัสดุไม่ได้คุณภาพจนกำแพงปริแยกในปีที่ 3 หลังส่งมอบ นายฟาพบและปรึกษาทนายเมื่อเวลาผ่านไป 8 เดือนนับแต่พบรอยแยก<br><br>อีกกรณีหนึ่ง: เสาของอาคารมีรอยร้าวที่นายเมฆรู้อยู่แล้วแต่ใช้สีทาปกปิดไว้ตั้งแต่แรก รอยร้าวเพิ่งปรากฏให้เห็นเมื่อเวลาผ่านไป 6 ปีหลังส่งมอบ นายฟามาปรึกษาเพื่อฟ้องคดีเมื่อเวลาผ่านไปแล้ว 15 เดือนนับแต่พบรอยร้าว",
+  issues: [
+    {
+      label: "ประเด็นที่ 1 — กำแพงปริแยก (พบในปีที่ 3, ฟ้องภายใน 8 เดือน)",
+      issueQ: "นายฟาจะฟ้องเรียกให้นายเมฆรับผิดในความชำรุดบกพร่องของกำแพง (ซึ่งเกิดจากนายแก้วผู้รับจ้างช่วง) และคดียังไม่ขาดอายุความหรือไม่?",
+      issueOpts: ["ฟ้องนายเมฆไม่ได้ ต้องฟ้องนายแก้วโดยตรงเท่านั้น", "ฟ้องนายเมฆได้ เพราะผู้รับจ้างหลักต้องรับผิดในความประพฤติของผู้รับจ้างช่วงเสมอตาม ม.607 และยังไม่ขาดอายุความ", "ฟ้องไม่ได้เลย เพราะขาดอายุความแล้ว", "ฟ้องได้เฉพาะนายแก้วและนายเมฆร่วมกันเท่านั้น"],
+      issueAns: 1,
+      issueFeedback: "ถูกต้อง — ม.607 ผู้รับจ้างหลักต้องรับผิดต่อผู้ว่าจ้างในความประพฤติของผู้รับจ้างช่วงเสมอ ผู้ว่าจ้างไม่มีนิติสัมพันธ์กับผู้รับจ้างช่วงโดยตรง",
+      ruleQ: "กรอบเวลาที่ความชำรุดบกพร่องของสิ่งปลูกสร้างกับพื้นดินต้องปรากฏ และอายุความฟ้องคดี ตามลำดับคือ?",
+      ruleOpts: ["ต้องปรากฏภายใน 1 ปี ฟ้องภายใน 1 ปีนับแต่ส่งมอบ", "ต้องปรากฏภายใน 5 ปี (ม.600) ฟ้องภายใน 1 ปีนับแต่ความชำรุดปรากฏ (ม.601)", "ต้องปรากฏภายใน 5 ปี ฟ้องภายใน 5 ปีเช่นกัน", "ไม่มีกรอบเวลาใดๆ"],
+      ruleAns: 1,
+      ruleFeedback: "ถูกต้อง — ม.600 (กรอบเวลาปรากฏ 5 ปีสำหรับสิ่งปลูกสร้างกับพื้นดิน) กับ ม.601 (อายุความฟ้องคดี 1 ปีนับแต่ปรากฏ) เป็นคนละมาตรากัน ห้ามสับสน",
+      appQ: "รอยแยกปรากฏในปีที่ 3 (ยังอยู่ในกรอบ 5 ปี) และนายฟาปรึกษาทนายภายใน 8 เดือนนับแต่พบ (ยังไม่ครบ 1 ปี) ผลเป็นอย่างไร?",
+      appOpts: ["คดีขาดอายุความแล้ว เพราะเลย 1 ปีนับแต่ส่งมอบ", "คดียังไม่ขาดอายุความ เพราะปรากฏภายในกรอบ 5 ปีตาม ม.600 และฟ้องภายใน 1 ปีนับแต่ปรากฏตาม ม.601", "ต้องนับอายุความจากวันทำสัญญาจ้าง ไม่ใช่วันส่งมอบ", "คดีขาดอายุความเพราะผ่านไป 3 ปีแล้ว"],
+      appAns: 1,
+      appFeedback: "ถูกต้อง — ทั้งสองเงื่อนไขเวลาผ่านครบถ้วน กำแพงจึงยังฟ้องร้องบังคับคดีได้",
+      concQ: "สรุป: นายฟาฟ้องนายเมฆรับผิดเรื่องกำแพงได้หรือไม่?",
+      concOpts: ["ได้ เพราะยังอยู่ในกรอบเวลา 5 ปีตาม ม.600 และยังไม่ขาดอายุความ 1 ปีตาม ม.601", "ไม่ได้ เพราะขาดอายุความแล้ว", "ได้เฉพาะกรณีที่นายแก้วยินยอม", "ไม่ได้ เพราะต้องฟ้องนายแก้วเท่านั้น"],
+      concAns: 0,
+      concFeedback: "นายฟาฟ้องนายเมฆ (ผู้รับจ้างหลัก) ให้รับผิดในความชำรุดบกพร่องของกำแพงได้ เพราะยังอยู่ในกรอบเวลา 5 ปีของ ม.600 และยังไม่ขาดอายุความฟ้องร้อง 1 ปีตาม ม.601"
+    },
+    {
+      label: "ประเด็นที่ 2 — เสาร้าวที่ถูกปกปิด (พบปีที่ 6, ฟ้องหลัง 15 เดือน)",
+      issueQ: "รอยร้าวที่เสาถูกปกปิดไว้ตั้งแต่แรก แล้วเพิ่งปรากฏในปีที่ 6 (เกินกรอบ 5 ปีของ ม.600) นายเมฆยังต้องรับผิดหรือไม่?",
+      issueOpts: ["ไม่ต้องรับผิด เพราะเกินกรอบเวลา 5 ปีแล้ว", "ยังต้องรับผิด เพราะการปกปิดทำให้ข้อจำกัดเวลา 5 ปีใช้บังคับไม่ได้ตาม ม.600 วรรคสอง", "ไม่ต้องรับผิด เพราะนายฟารับมอบงานโดยไม่อิดเอื้อน", "ต้องรับผิดเพียงครึ่งหนึ่งของความเสียหาย"],
+      issueAns: 1,
+      issueFeedback: "ถูกต้อง — ม.598 และ ม.600 วรรคสอง: การปกปิดความชำรุดบกพร่องทำให้ผู้รับจ้างไม่ได้รับความคุ้มครองจากกรอบเวลา ไม่ว่าจะปรากฏช้าเพียงใดก็ยังต้องรับผิดในตัวความชำรุดบกพร่อง",
+      ruleQ: "แต่ถึงจะยังต้องรับผิดในตัวความชำรุดบกพร่อง สิทธิฟ้องคดีของนายฟายังมีข้อจำกัดใดอยู่?",
+      ruleOpts: ["ไม่มีข้อจำกัดใดเลยเพราะเป็นการปกปิด ฟ้องเมื่อใดก็ได้", "ยังคงต้องฟ้องภายใน 1 ปีนับแต่วันที่ความชำรุดบกพร่องปรากฏขึ้นตาม ม.601 เสมอ", "ต้องฟ้องภายใน 6 เดือนเท่านั้นเพราะเป็นกรณีปกปิด", "ไม่ต้องพิจารณาอายุความเพราะเป็นการฉ้อฉล"],
+      ruleAns: 1,
+      ruleFeedback: "ถูกต้อง — จุดตายสุดฮิต: การปกปิดปลดล็อคเฉพาะข้อจำกัดเวลาปรากฏ (ม.600) แต่ไม่ได้ยกเว้นอายุความฟ้องคดี 1 ปีตาม ม.601 ซึ่งยังคงบังคับอยู่เสมอ",
+      appQ: "นายฟาฟ้องคดีเมื่อเวลาผ่านไป 15 เดือนนับแต่พบรอยร้าว ผลเป็นอย่างไร?",
+      appOpts: ["ยังไม่ขาดอายุความ เพราะเป็นกรณีปกปิด ไม่มีกำหนดเวลา", "ขาดอายุความแล้ว เพราะเกิน 1 ปีนับแต่วันที่ความชำรุดบกพร่องปรากฏขึ้นตาม ม.601", "ยังไม่ขาดอายุความ เพราะยังไม่ครบ 5 ปี", "ต้องดูวันทำสัญญาจ้างเป็นหลัก ไม่ใช่วันพบรอยร้าว"],
+      appAns: 1,
+      appFeedback: "ถูกต้อง — 15 เดือนเกินกำหนด 1 ปีตาม ม.601 แล้ว แม้นายเมฆจะยังต้องรับผิดในตัวความชำรุด (เพราะปกปิด) แต่สิทธิฟ้องคดีของนายฟาขาดอายุความไปแล้ว",
+      concQ: "สรุป: นายฟาฟ้องนายเมฆเรื่องเสาร้าวได้หรือไม่?",
+      concOpts: ["ฟ้องไม่ได้ เพราะคดีขาดอายุความตาม ม.601 แม้นายเมฆจะต้องรับผิดในตัวความชำรุดบกพร่องเพราะปกปิดก็ตาม", "ฟ้องได้เต็มที่ เพราะเป็นการปกปิด", "ฟ้องได้ภายใน 5 ปีเท่านั้น", "ฟ้องได้เฉพาะค่าซ่อมแซมเสาเท่านั้น"],
+      concAns: 0,
+      concFeedback: "นายฟาไม่สามารถฟ้องคดีเรียกให้นายเมฆรับผิดได้อีกต่อไป แม้นายเมฆจะยังต้องรับผิดในตัวความชำรุดบกพร่องเพราะเหตุปกปิด (ไม่ถูกจำกัดด้วยกรอบเวลา 5 ปี) แต่เมื่อปล่อยเวลาล่วงเลยมาถึง 15 เดือนนับแต่พบรอยร้าว คดีจึงขาดอายุความตาม ม.601 ซึ่งเป็นคนละเรื่องกับกรอบเวลาปรากฏตาม ม.600"
+    }
+  ]
+}
+];
+
+const SUMMARY_TOPICS = [
+{
+  id: "sum_sale_general",
+  label: "สรุป: ซื้อขายทั่วไป (ลักษณะ/แบบ/โอนกรรมสิทธิ์/ส่งมอบ)",
+  cat: "sale_general",
+  html: `
+  <h4 id="s1-h1">สเต็ป 1: แยกประเภทสัญญาให้ขาดก่อนเสมอ</h4>
+  <ul>
+    <li><b>สัญญาจอง</b>: สัญญาไม่มีชื่อตาม ม.151 (เสรีภาพในการทำสัญญา) มีวัตถุประสงค์เพื่อ "ซื้อเวลา" ให้ผู้จองตัดสินใจ ผู้จองจ่ายเงินล็อกสิทธิ แต่ไม่มีหน้าที่ต้องซื้อ หากเปลี่ยนใจก็แค่ถูกริบเงินจอง</li>
+    <li><b>คำมั่นจะซื้อหรือขาย (ม.454)</b>: วรรคหนึ่งผูกพันผู้ให้คำมั่นฝ่ายเดียว อีกฝ่ายมีสิทธิเลือก (Option) วรรคสองหากไม่กำหนดเวลาตอบรับ ผู้ให้คำมั่นต้องบอกกล่าวกำหนดเวลาพอสมควรให้อีกฝ่ายตอบรับ หากไม่ตอบ คำมั่นจึงจะสิ้นผล (ผู้ให้คำมั่นถอนเองไม่ได้)</li>
+    <li><b>สัญญาจะซื้อจะขาย</b>: ตกลงแน่นอนแล้วว่าจะซื้อขาย แต่มีหนี้ต้องไปโอนกรรมสิทธิ์กันภายหน้า ผูกพันทั้งสองฝ่าย ฟ้องบังคับคดีได้</li>
+    <li><b>สัญญาซื้อขายเสร็จเด็ดขาด (ม.453)</b>: มุ่งโอนกรรมสิทธิ์ในทรัพย์สิน และผู้ซื้อตกลงจะใช้ราคาทันที</li>
+  </ul>
+  <p class="p-tight">💡 หลุมพราง: ชื่อสัญญาไม่สำคัญเท่าเนื้อหา แม้หัวกระดาษเขียนว่า "ใบจอง" แต่ถ้าเนื้อหาบังคับให้ต้องซื้อหรือรับโอนกรรมสิทธิ์ ศาลจะตีความเป็น "สัญญาจะซื้อจะขาย" ทันที</p>
+
+  <h4 id="s1-h2">สเต็ป 2: แบบและหลักฐานการฟ้องร้อง (ม.456)</h4>
+  <ul>
+    <li>วรรคหนึ่ง — ซื้อขายอสังหาริมทรัพย์และสังหาริมทรัพย์ชนิดพิเศษ (เรือระวาง 5 ตันขึ้นไป แพ สัตว์พาหนะ): ต้อง <b>ทำเป็นหนังสือและจดทะเบียน</b>ต่อพนักงานเจ้าหน้าที่ มิฉะนั้นเป็น <b>โมฆะ</b></li>
+    <li>วรรคสอง — สัญญาจะซื้อจะขาย/คำมั่นซื้อขายอสังหาฯ: ต้องมีหลักฐานอย่างใดอย่างหนึ่งใน 3 อย่างจึงฟ้องร้องได้ (1) หลักฐานเป็นหนังสือลงลายมือชื่อฝ่ายผู้ต้องรับผิด (2) วางประจำ/มัดจำ (3) ชำระหนี้บางส่วน</li>
+    <li>วรรคสาม — สังหาริมทรัพย์ทั่วไปราคาตั้งแต่ 20,000 บาทขึ้นไป: ต้องมีหลักฐานอย่างใดอย่างหนึ่งตามวรรคสองเช่นกัน</li>
+  </ul>
+  <p class="p-tight">💡 หลุมพราง: รถยนต์ไม่ใช่สังหาริมทรัพย์ชนิดพิเศษ ซื้อขายปากเปล่าไม่เป็นโมฆะ แต่ถ้าราคา 20,000 บาทขึ้นไปต้องมีหลักฐานฟ้องร้อง เงินจองกับมัดจำไม่เหมือนกันเสมอไป ต้องดูเจตนาว่าให้ไว้เพื่อประกันการปฏิบัติตามสัญญาหรือไม่</p>
+
+  <h4 id="s1-h3">สเต็ป 3: การโอนกรรมสิทธิ์ (ม.458-460)</h4>
+  <ul>
+    <li>ม.458 — หลักทั่วไป: กรรมสิทธิ์โอนไปยังผู้ซื้อ<b>ทันทีตั้งแต่ขณะตกลงทำสัญญา</b> แม้ยังไม่จ่ายเงินหรือยังไม่ส่งมอบ</li>
+    <li>ม.459 — ซื้อขายมีเงื่อนไข/เงื่อนเวลา: กรรมสิทธิ์ยังไม่โอนจนกว่าจะสำเร็จตามเงื่อนไขหรือถึงกำหนดเวลา</li>
+    <li>ม.460 วรรคหนึ่ง — ทรัพย์ยังไม่เฉพาะสิ่ง: ต้องเลือก บ่งตัว หรือแยกทรัพย์ออกมาก่อน กรรมสิทธิ์จึงโอน</li>
+    <li>ม.460 วรรคสอง — ทรัพย์เฉพาะสิ่งแต่ยังไม่ทราบราคา: ต้องชั่ง ตวง วัด เพื่อให้รู้ราคาก่อน กรรมสิทธิ์จึงโอน</li>
+  </ul>
+  <p class="p-tight">อย่าตอบตามความรู้สึกว่า "จ่ายเงินแล้วกรรมสิทธิ์ถึงโอน" กฎหมายไทยไม่ได้ผูกการโอนกรรมสิทธิ์กับการชำระราคาหรือส่งมอบเป็นหลัก</p>
+
+  <h4 id="s1-h4">สเต็ป 4: การส่งมอบและปริมาณทรัพย์ (ม.461-466)</h4>
+  <ul>
+    <li>ม.461-462: ผู้ขายมีหน้าที่ส่งมอบทรัพย์สินให้ไปอยู่ในเงื้อมมือของผู้ซื้อ</li>
+    <li>ม.465 — ส่งมอบสังหาริมทรัพย์ผิดจำนวน: ขาดจำนวน (ปฏิเสธทั้งหมด หรือรับไว้แล้วจ่ายตามส่วน) / ล้ำจำนวน (รับตามสัญญาปฏิเสธส่วนเกิน หรือปฏิเสธทั้งหมด หรือรับไว้ทั้งหมดแล้วจ่ายเพิ่ม) / ระคนกับทรัพย์อื่น (รับเฉพาะตามสัญญาปฏิเสธส่วนที่ระคน หรือปฏิเสธทั้งหมด)</li>
+    <li>ม.466 — ส่งมอบอสังหาริมทรัพย์ผิดจำนวน (เกณฑ์ 5%): ขาด/เกินไม่เกิน 5% ผู้ซื้อต้องรับไว้และจ่ายราคาตามส่วน (ปฏิเสธไม่ได้) เว้นแต่พิสูจน์ได้ว่าเป็นสาระสำคัญจึงเลิกสัญญาได้</li>
+  </ul>
+  <p class="p-tight">💡 หลุมพราง ม.463 (ส่งผ่านผู้ขนส่ง): การส่งผ่านผู้ขนส่งต้องเป็น "ผู้ขนส่ง" ตามกฎหมายจริง เช่น สัตว์มีชีวิตที่ไปรษณีย์มีนโยบายห้ามรับส่ง ไปรษณีย์ไม่ใช่ผู้ขนส่งของสิ่งนั้น ผู้ขายจึงยังไม่หลุดพ้นความรับผิด</p>
+
+  <h4 id="s1-h5">สเต็ป 5: สิทธิของผู้ขายเมื่อผู้ซื้อผิดนัด (ม.468, 470-471)</h4>
+  <p class="p-tight">หากผู้ซื้อผิดนัดไม่ชำระราคา ผู้ขายมีสิทธิยึดหน่วงทรัพย์ไว้ได้ (ม.468) และหากบอกกล่าวให้ชำระหนี้ในเวลาอันสมควรแล้วผู้ซื้อยังเพิกเฉย ผู้ขายมีสิทธินำทรัพย์ออกขายทอดตลาด (ม.470-471) เงินสุทธิที่ได้ให้หักราคาที่ค้างชำระ ถ้าเหลือให้ส่งคืนผู้ซื้อ</p>
+  `
+},
+{
+  id: "sum_sale_liability",
+  label: "สรุป: ความรับผิดผู้ขาย (ชำรุดบกพร่อง/รอนสิทธิ)",
+  cat: "sale_liability",
+  html: `
+  <h4 id="s2-h1">ความรับผิดในความชำรุดบกพร่อง (ม.472-474)</h4>
+  <p class="p-tight">ม.472 — หลักความรับผิด: ผู้ขายต้องรับผิดเมื่อทรัพย์เสื่อมราคา เสื่อมความเหมาะสมแก่ประโยชน์ตามปกติ หรือ<b>เสื่อมความเหมาะสมแก่ประโยชน์ที่มุ่งหมายโดยสัญญา</b> (ครอบคลุมถึงกรณี "ไม่ตรงสเปก" ด้วย ไม่ใช่แค่ทรัพย์เสียหายทางกายภาพ) โดยผู้ขายต้องรับผิดแบบ<b>เด็ดขาด (Strict Liability)</b> แม้จะไม่รู้ว่ามีความชำรุดบกพร่องก็ตาม</p>
+  <ul>
+    <li>ม.473 — ข้อยกเว้นผู้ขายไม่ต้องรับผิด: (1) ผู้ซื้อรู้อยู่แล้วในเวลาซื้อขาย หรือควรจะรู้หากใช้ความระมัดระวังของวิญญูชน (2) ความชำรุดเห็นประจักษ์ตอนรับมอบและผู้ซื้อรับไว้โดยไม่อิดเอื้อน (3) ทรัพย์สินนั้นได้ขายทอดตลาด</li>
+    <li>ม.474 — อายุความ: ห้ามฟ้องคดีเมื่อพ้น 1 ปีนับแต่เวลาที่พบเห็นความชำรุดบกพร่อง</li>
+    <li>ม.488 — สิทธิยึดหน่วงราคา: ผู้ซื้อมีสิทธิยึดหน่วงไม่ยอมชำระราคา หากพบเห็นความชำรุดบกพร่อง</li>
+  </ul>
+
+  <h4 id="s2-h2">ความรับผิดในการรอนสิทธิ (ม.475-479)</h4>
+  <p class="p-tight">ม.475 — หลักการรอนสิทธิ: มีบุคคลภายนอกมารบกวนขัดสิทธิของผู้ซื้อในการครองทรัพย์สินโดยปกติสุข เพราะบุคคลนั้นมี "สิทธิดีกว่า" หรือเพราะความผิดของผู้ขายเอง ผู้ขายต้องรับผิด</p>
+  <p class="p-tight">ม.476 — ข้อยกเว้น: ผู้ขายไม่ต้องรับผิดถ้าสิทธิของผู้ก่อการรบกวนนั้น "ผู้ซื้อรู้อยู่แล้ว" ในเวลาซื้อขาย</p>
+  <p class="p-tight">ม.479 — ขยายความลักษณะการรอนสิทธิ: ไม่ได้จำกัดเฉพาะกรณีทรัพย์หลุดมือไปทั้งหมด (Total Eviction) แต่รวมถึงกรณีที่ทรัพย์สินตกอยู่ในบังคับแห่งสิทธิอย่างหนึ่งอย่างใดจนเสื่อมราคา/เสื่อมประโยชน์ด้วย เช่น ผู้ซื้ออสังหาริมทรัพย์ต้องรับภาระผูกพันตามสัญญาเช่าเดิมที่ติดมากับทรัพย์ ก็ถือเป็นการรอนสิทธิ</p>
+  <p class="p-tight">🔗 กฎหมายทรัพย์สินที่เกี่ยวโยง (ม.1303, ม.1332): การจะตอบเรื่องรอนสิทธิได้สมบูรณ์ในโจทย์ลักษณะ "ขายซ้อน" ต้องผูกโยงไปดูก่อนว่าใครมีสิทธิดีกว่าตามกฎหมายทรัพย์สิน — ม.1303 (บุคคลผู้ได้สังหาริมทรัพย์ไว้ในครอบครองโดยสุจริต เสียค่าตอบแทน มีสิทธิดีกว่า) และ ม.1332 (ซื้อทรัพย์จากพ่อค้า/ตลาด/ขายทอดตลาดโดยสุจริต ผู้ซื้อมีสิทธิยึดทรัพย์ไว้จนกว่าเจ้าของแท้จริงจะชดใช้เงินคืน หากคืนไปถือว่าทรัพย์หลุดมือ = ถูกรอนสิทธิ ผู้ขายต้องรับผิด) จึงจะปรับเข้าสู่ความรับผิดของผู้ขายฐานรอนสิทธิตาม ม.475 ได้ครบถ้วน</p>
+
+  <h4 id="s2-h3">ข้อสัญญายกเว้นความรับผิด (ม.483, 485)</h4>
+  <p class="p-tight">ม.483 — คู่สัญญาซื้อขายจะตกลงกันว่าผู้ขายไม่ต้องรับผิดเพื่อชำรุดบกพร่องหรือรอนสิทธิก็ได้</p>
+  <p class="p-tight">🚨 ม.485 — จุดตายสุดฮิต (ข้อยกเว้นของข้อยกเว้น): ข้อสัญญายกเว้นความรับผิดไม่อาจคุ้มครองผู้ขายในผลของการอันผู้ขาย<b>ได้กระทำไปเอง</b> หรือผลแห่งข้อความจริงที่ผู้ขาย<b>รู้อยู่แล้วและปกปิดเสีย</b> แม้จะตกลงยกเว้นไว้ในสัญญาแล้วก็ตาม ข้อตกลงยกเว้นนั้นถูกตัดบททันที</p>
+  <p class="p-tight">💡 ตัวอย่างจริงจากข้อสอบ: ผู้ขายนำทรัพย์ไปขายซ้อนให้บุคคลภายนอกจนผู้ซื้อคนแรกถูกรอนสิทธิ ถือเป็น "ผลจากการกระทำของผู้ขายเอง" — หรือผู้ขายรู้อยู่แล้วว่าทรัพย์มีตำหนิแต่ใช้วัสดุปกปิดไว้จนดูไม่ออก ถือเป็น "รู้อยู่แล้วและปกปิด" ทั้งสองกรณีนี้ข้อตกลงยกเว้นความรับผิดใช้บังคับไม่ได้เสมอ</p>
+  `
+},
+{
+  id: "sum_sale_buyer_special",
+  label: "สรุป: หน้าที่ผู้ซื้อ / ขายฝาก / ขายทอดตลาด",
+  cat: "sale_buyer_special",
+  html: `
+  <h4 id="s3-h1">หน้าที่ผู้ซื้อ (ม.486-488)</h4>
+  <p class="p-tight">ผู้ซื้อจำต้องรับมอบทรัพย์สินและใช้ราคาตามสัญญา (ม.486-487) และมีสิทธิยึดหน่วงราคาที่ยังไม่ชำระไว้ได้หากพบความชำรุดบกพร่อง เว้นแต่ผู้ขายจะหาประกันที่สมควรให้ (ม.488)</p>
+
+  <h4 id="s3-h2">สัญญาขายฝาก (ม.491-499)</h4>
+  <ul>
+    <li>ม.491 — ลักษณะ: สัญญาซื้อขายซึ่งกรรมสิทธิ์ตกไปยังผู้ซื้อทันที โดยมีข้อตกลง<b>ตั้งแต่ขณะทำสัญญา</b>ว่าผู้ขายอาจไถ่ทรัพย์นั้นคืนได้ — เป็นสัญญาซื้อขายประเภทหนึ่ง จึงใช้บทบัญญัติทั่วไปเรื่องแบบ/หลักฐาน/การโอนกรรมสิทธิ์ของซื้อขายด้วยทั้งหมด</li>
+    <li>ม.493 — ข้อตกลงห้ามจำหน่ายทรัพย์: เป็นเพียงบุคคลสิทธิ หากผู้ซื้อฝากขายต่อให้บุคคลภายนอก สัญญานั้นยังสมบูรณ์ ผู้ขายฝากได้แต่ใช้สิทธิไถ่จากบุคคลภายนอกหรือเรียกผู้ซื้อฝากรับผิดในความเสียหาย</li>
+    <li>ม.494 — กำหนดเวลาไถ่: อสังหาริมทรัพย์ไม่เกิน 10 ปี / สังหาริมทรัพย์ไม่เกิน 3 ปี นับแต่เวลาซื้อขาย (ถ้าสัญญากำหนดเกินกว่านี้ กฎหมายลดลงมาเท่ากับเพดานสูงสุดตามประเภททรัพย์ ไม่ทำให้สัญญาทั้งฉบับเป็นโมฆะ)</li>
+    <li>ม.499 — สินไถ่: ถ้าไม่ได้กำหนดไว้ ให้ไถ่ตามราคาที่ขายฝากไว้เดิม ถ้าสินไถ่ที่กำหนดสูงกว่าราคาขายฝากจริงเกินร้อยละ 15 ต่อปี ให้ไถ่ตามราคาจริงรวมประโยชน์ตอบแทนร้อยละ 15 ต่อปี (สินไถ่ต้องเป็นเงินเสมอ)</li>
+  </ul>
+
+  <h4 id="s3-h3">ขายตามตัวอย่าง / ขายตามคำพรรณนา / ขายเผื่อชอบ (ม.503-508)</h4>
+  <p class="p-tight">ขายตามตัวอย่าง: ผู้ขายต้องส่งมอบทรัพย์ให้ตรงตามตัวอย่าง / ขายตามคำพรรณนา: ต้องส่งมอบให้ตรงตามคำพรรณนา (ห้ามฟ้องคดีเมื่อพ้น 1 ปีนับแต่ส่งมอบ) / ขายเผื่อชอบ: ผู้ซื้อมีโอกาสตรวจดูก่อนรับซื้อ การซื้อขายบริบูรณ์เมื่อผู้ซื้อไม่บอกปัดภายในเวลาที่กำหนด หรือไม่ส่งคืน หรือชำระราคาแล้ว หรือจำหน่ายทรัพย์สินนั้นไปแล้ว</p>
+
+  <h4 id="s3-h4">ขายทอดตลาด (ม.509-516)</h4>
+  <ul>
+    <li>ม.509 — ความบริบูรณ์: บริบูรณ์เมื่อผู้ทอดตลาดแสดงความตกลงด้วยการเคาะไม้หรือกิริยาอื่นตามจารีตประเพณี ก่อนหน้านั้นผู้สู้ราคาถอนคำสู้ราคาได้</li>
+    <li>ม.511-512 — ห้ามผู้ทอดตลาดหรือผู้ขายเข้าสู้ราคาเอง เว้นแต่ผู้ขายจะแถลงไว้ในคำโฆษณาว่าถือสิทธิเข้าสู้ราคาด้วย</li>
+    <li>ม.515-516 — หน้าที่ผู้สู้ราคาสูงสุด: ต้องใช้ราคาเป็นเงินสดทันทีที่การซื้อขายบริบูรณ์ ถ้าละเลย ผู้ทอดตลาดเอาทรัพย์ออกขายซ้ำ หากได้เงินไม่คุ้มราคาและค่าใช้จ่ายเดิม ผู้สู้ราคาเดิมต้องรับผิดส่วนที่ขาด</li>
+  </ul>
+  `
+},
+{
+  id: "sum_exchange",
+  label: "สรุป: สัญญาแลกเปลี่ยน",
+  cat: "exchange",
+  html: `
+  <h4 id="s4-h1">ลักษณะของสัญญาแลกเปลี่ยน (ม.518)</h4>
+  <p class="p-tight">สัญญาซึ่งคู่กรณี<b>ต่างโอนกรรมสิทธิ์แห่งทรัพย์สินให้กันและกัน</b> — จุดต่างจากซื้อขาย (ม.453) คือไม่มีฝ่ายใดใช้ "เงินตรา" เป็นค่าตอบแทนหลัก ทั้งสองฝ่ายต่างเป็นทั้งผู้ให้และผู้รับทรัพย์สินไปพร้อมกัน</p>
+
+  <h4 id="s4-h2">การนำบทบัญญัติซื้อขายมาใช้ (ม.519 — มาตราหัวใจของเรื่องนี้)</h4>
+  <p class="p-tight">บทบัญญัติทั้งหลายในลักษณะซื้อขายให้ใช้ถึงการแลกเปลี่ยนด้วย โดยให้ถือว่า<b>คู่สัญญาแลกเปลี่ยนเป็นผู้ขายในส่วนทรัพย์สินซึ่งตนส่งมอบ และเป็นผู้ซื้อในส่วนทรัพย์สินซึ่งตนได้รับ</b></p>
+  <p class="p-tight">💡 ผลในทางปฏิบัติ: ทุกเรื่องที่เคยเรียนในสัญญาซื้อขาย — แบบและหลักฐาน (ม.456), การโอนกรรมสิทธิ์ (ม.458-460), ความรับผิดฐานชำรุดบกพร่อง (ม.472) และรอนสิทธิ (ม.475) — นำมาปรับใช้กับแลกเปลี่ยนได้ทั้งหมด โดยสลับบทบาทผู้ขาย/ผู้ซื้อไปตามฝ่ายที่ส่งมอบ/รับทรัพย์สินนั้น เช่น หากทรัพย์สินฝ่าย ก. ที่ส่งมอบให้ ข. มีความชำรุดบกพร่อง ก. ต้องรับผิดฐานเป็น "ผู้ขาย" ในส่วนนั้นตาม ม.472</p>
+
+  <h4 id="s4-h3">การแลกเปลี่ยนที่มีการโอนเงินเพิ่ม (ม.520)</h4>
+  <p class="p-tight">ถ้าทรัพย์สินทั้งสองฝ่ายมีมูลค่าไม่เท่ากัน คู่สัญญาฝ่ายหนึ่งอาจตกลงโอนเงินเพิ่มเข้ากับทรัพย์สินสิ่งอื่นให้อีกฝ่ายก็ได้ กรณีนี้กฎหมายให้นำบทบัญญัติเรื่อง "ราคา" ในลักษณะซื้อขายมาใช้กับเงินส่วนนั้นด้วย (เช่น หน้าที่ชำระราคา สิทธิยึดหน่วง)</p>
+  <p class="p-tight">📌 ข้อสังเกต: แลกเปลี่ยนเป็นสัญญาที่มีเนื้อหาสั้นที่สุดในวิชานี้ (มีเพียง 3 มาตรา) ข้อสอบมักออกเป็นข้อย่อยผสมกับซื้อขาย ให้จำหลักไว้ว่า "จำลักษณะเฉพาะ 3 มาตรานี้ให้แม่น แล้วที่เหลือทั้งหมดใช้หลักซื้อขายทุกมาตราได้เลย"</p>
+  `
+},
+{
+  id: "sum_gift",
+  label: "สรุป: สัญญาให้",
+  cat: "gift",
+  html: `
+  <h4 id="sg-h1">ลักษณะสัญญาและความสมบูรณ์ของการให้</h4>
+  <ul>
+    <li>ม.521: มุ่งโอนทรัพย์สินให้โดยเสน่หา และผู้รับยอมรับเอา — ต้องแยก "คำมั่นว่าจะให้" กับ "คำมั่นโฆษณา" และ "สัญญาให้" ให้ออกจากกัน</li>
+    <li>ม.523: การให้สังหาริมทรัพย์สมบูรณ์ต่อเมื่อ <b>ส่งมอบ</b> ทรัพย์สิน (ตกลงปากเปล่าแต่ยังไม่ส่งมอบ สัญญายังไม่เกิดผล)</li>
+    <li>ม.525: การให้อสังหาริมทรัพย์สมบูรณ์ต่อเมื่อทำเป็นหนังสือและจดทะเบียนต่อพนักงานเจ้าหน้าที่ (ไม่ต้องส่งมอบก็สมบูรณ์ได้ถ้าจดทะเบียนแล้ว)</li>
+    <li>ม.526: คำมั่นว่าจะให้ทรัพย์สินในอนาคตต้องทำเป็นหนังสือและจดทะเบียนต่อพนักงานเจ้าหน้าที่เท่านั้นจึงฟ้องร้องบังคับคดีได้ (ทำกันเองหรือพูดปากเปล่าฟ้องไม่ได้ เป็นเพียงหนี้ธรรมจรรยา)</li>
+  </ul>
+
+  <h4 id="sg-h2">การให้อันมีค่าภาระติดพัน (ม.528)</h4>
+  <p class="p-tight">ผู้รับการให้มีหน้าที่ปฏิบัติตามภาระที่ตกลงกันไว้ (ต้องเป็นภาระที่ผูกพันกับตัวทรัพย์สินนั้นเอง) ถ้าผู้รับละเลยไม่ชำระค่าภาระติดพัน ผู้ให้เรียกให้ส่งทรัพย์สินคืนได้ตามหลักลาภมิควรได้</p>
+
+  <h4 id="sg-h3">การถอนคืนการให้เพราะเหตุเนรคุณ (ม.531, 535)</h4>
+  <p class="p-tight">ม.531 — เหตุเนรคุณ 3 ประการ (ผู้ให้ฟ้องถอนคืนได้): (1) ประทุษร้ายผู้ให้เป็นความผิดอาญาอย่างร้ายแรง (2) ทำให้ผู้ให้เสียชื่อเสียง หรือหมิ่นประมาทผู้ให้อย่างร้ายแรง (ศาลดูบริบทของคำด่า) (3) บอกปัดไม่ยอมให้สิ่งของจำเป็นเลี้ยงชีวิตแก่ผู้ให้ ทั้งที่ผู้รับให้ได้และผู้ให้ยากไร้</p>
+  <p class="p-tight">ม.535 — ข้อยกเว้นที่ห้ามถอนคืนการให้ แม้จะเนรคุณก็ตาม: (1) ให้เป็นบำเหน็จสินจ้าง (ตอบแทนการทำงาน) (2) ให้อันมีค่าภาระติดพัน (3) ให้ตามหน้าที่ธรรมจรรยา (4) ให้ในการสมรส</p>
+  <p class="p-tight">💡 หลุมพราง: อาจารย์มักออกข้อสอบหลอกโดยให้ข้อเท็จจริงว่ามีการด่าทออย่างรุนแรง (เนรคุณแน่ๆ) แต่ทรัพย์ที่ให้ดันเป็นทรัพย์ที่มีภาระติดพัน (เช่น ที่ดินติดจำนอง) นักศึกษาต้องเช็ค ม.535 เสมอ อย่ารีบฟันธงว่าถอนคืนเพราะเนรคุณได้ — แต่ยังอาจใช้ช่องทางอื่น เช่น ม.528 (ละเลยค่าภาระติดพัน) แทนได้</p>
+  <p class="p-tight">อายุความ (ม.533): ห้ามฟ้องเมื่อพ้น 6 เดือนนับแต่ทราบเหตุ และไม่เกิน 10 ปีนับแต่เกิดเหตุ — อายุความสั้นมาก มักถูกใช้หลอกด้วยระยะเวลาที่ผ่านไปในโจทย์</p>
+
+  <h4 id="sg-h4">บทเบ็ดเตล็ด (ม.536)</h4>
+  <p class="p-tight">การให้ที่จะให้เป็นผลต่อเมื่อผู้ให้ตาย (ให้ยกมรดก) ต้องทำตามแบบ "พินัยกรรม" เท่านั้น จะใช้เรื่องสัญญาให้บังคับไม่ได้</p>
+  `
+},
+{
+  id: "sum_lease",
+  label: "สรุป: สัญญาเช่าทรัพย์",
+  cat: "lease_property",
+  html: `
+  <h4 id="sl-h1">แบบและหลักฐาน (ม.538 — มาตราที่ออกสอบบ่อยที่สุด)</h4>
+  <ul>
+    <li>เช่าไม่เกิน 3 ปี: ต้องมีหลักฐานเป็นหนังสือลงลายมือชื่อฝ่ายที่ต้องรับผิด มิฉะนั้นฟ้องไม่ได้</li>
+    <li>เช่าเกิน 3 ปี: ต้องทำเป็นหนังสือและจดทะเบียนต่อพนักงานเจ้าหน้าที่ มิฉะนั้นฟ้องบังคับได้แค่ 3 ปี</li>
+  </ul>
+
+  <h4 id="sl-h2">การเช่าซ้อนกันหลายคน (ม.542-543)</h4>
+  <p class="p-tight">หลักการจำ: "ใครได้ตามหลักเกณฑ์ของตัวเองก่อน มีสิทธิดีกว่า" วันที่ทำสัญญาไม่สำคัญ</p>
+  <ul>
+    <li>สังหาริมทรัพย์: ใครได้ "ครอบครอง" ก่อน คนนั้นชนะ</li>
+    <li>อสังหาริมทรัพย์: ใครได้ "จดทะเบียน" ก่อน คนนั้นมีสิทธิดีกว่า เว้นแต่ไม่ได้จดทะเบียนทั้งคู่ให้ดูว่าใครครอบครองก่อน</li>
+  </ul>
+
+  <h4 id="sl-h3">เช่าช่วง (ม.544-545) และการนำหลักซื้อขายมาใช้ (ม.549)</h4>
+  <p class="p-tight">ถ้าผู้ให้เช่าไม่ยินยอมให้เช่าช่วง ถือเป็นเช่าช่วงโดยมิชอบ ผู้ให้เช่าบอกเลิกสัญญาได้ แต่ถ้ายินยอม (เช่าช่วงโดยชอบ) ผู้เช่าช่วงต้องรับผิดต่อผู้ให้เช่าเดิมโดยตรง — และ ม.549 ให้นำบทบัญญัติว่าด้วยการส่งมอบ ความชำรุดบกพร่อง (ม.472) และการรอนสิทธิ (ม.475) ในลักษณะซื้อขายมาใช้บังคับกับสัญญาเช่าด้วย</p>
+
+  <h4 id="sl-h4">หน้าที่ซ่อมแซม (ม.550, 553)</h4>
+  <p class="p-tight">ผู้ให้เช่าต้องซ่อมแซมใหญ่ (เช่น หลังคารั่ว โครงสร้างพัง) ส่วนผู้เช่าต้องบำรุงรักษาและซ่อมแซมเล็กน้อย (เช่น เปลี่ยนหลอดไฟ ลูกบิดประตู)</p>
+
+  <h4 id="sl-h5">สเต็ปคอมโบข้อสอบ Final ที่ออกซ้ำบ่อย</h4>
+  <p class="p-tight">1) เช่า 10 ปีไม่จดทะเบียน = บังคับได้แค่ 3 ปีแรก (ม.538) → 2) ปีที่ 4-5 อยู่ต่อไม่ทักท้วง = กลายเป็นสัญญาเช่าไม่มีกำหนดเวลา (ม.570) → 3) ขายตึกในปีที่ 5 = ผู้รับโอนรับสัญญาเช่าไม่มีกำหนดเวลาไปด้วย (ม.569) → 4) จะไล่ต้องบอกกล่าวล่วงหน้า 1 รอบชำระค่าเช่า (ม.566) ขับไล่ทันทีไม่ได้</p>
+  <p class="p-tight">ม.560 วรรคสอง — บอกเลิกกรณีไม่จ่ายค่าเช่ารายเดือน: ผู้ให้เช่าเลิกสัญญาทันทีไม่ได้ ต้องบอกกล่าวให้ผู้เช่าชำระค่าเช่าที่ค้างโดยให้เวลา "อย่างน้อย 15 วัน" หากพ้นกำหนดยังไม่ชำระ จึงมีสิทธิบอกเลิกสัญญา</p>
+  <p class="p-tight">ม.566 — บอกเลิกสัญญาที่ไม่มีกำหนดเวลา: ฝ่ายใดจะบอกเลิกก็ได้ โดยต้องบอกกล่าวเมื่อสิ้นกำหนดชำระค่าเช่า และให้เวลาอีก 1 ช่วงการชำระค่าเช่า (แต่ไม่จำเป็นต้องเกิน 2 เดือน)</p>
+
+  <h4 id="sl-h6">หลุมพรางสัญญาต่างตอบแทนพิเศษยิ่งกว่าเช่าธรรมดา (หลักศาลฎีกา)</h4>
+  <p class="p-tight">เป็นกรณีผู้เช่าให้ค่าตอบแทนพิเศษนอกเหนือค่าเช่า (เช่น ช่วยค่าก่อสร้างระหว่างตึกยังสร้างไม่เสร็จ หรือสร้างตึกแล้วยกกรรมสิทธิ์ให้ผู้ให้เช่า) ผลคือทำด้วยวาจาก็บังคับได้ตามระยะเวลาที่ตกลง (ไม่ต้องใช้ ม.538) สัญญาไม่ระงับแม้ผู้เช่าตาย แต่หากผู้ให้เช่าโอนกรรมสิทธิ์ให้บุคคลภายนอก ผู้รับโอนไม่ต้องผูกพันตามสัญญาพิเศษนี้ (กลายเป็นสัญญาเช่าธรรมดาที่ต้องกลับไปใช้ ม.538)</p>
+  <p class="p-tight">💡 หลุมพราง: เงิน "ช่วยค่าก่อสร้าง" จะเป็นสัญญาต่างตอบแทนพิเศษได้ก็ต่อเมื่อจ่าย <b>ระหว่างที่ตึกยังสร้างไม่เสร็จ</b> เท่านั้น หากอาคารเสร็จแล้วจึงเช่า เงินนั้นเป็นเพียง "เงินกินเปล่า" สัญญาเป็นเช่าธรรมดา</p>
+
+  <h4 id="sl-h7">การโอนกรรมสิทธิ์และการเช่าต่อเมื่อหมดสัญญา (ม.569-570)</h4>
+  <p class="p-tight">ม.569: สัญญาเช่าอสังหาริมทรัพย์ไม่ระงับเพราะเหตุโอนกรรมสิทธิ์ ผู้รับโอนต้องรับไปทั้งสิทธิและหน้าที่ของผู้ให้เช่าเดิม</p>
+  <p class="p-tight">ม.570: ถ้าสิ้นกำหนดเวลาเช่าแล้วผู้เช่ายังครองทรัพย์อยู่ และผู้ให้เช่ารู้แล้วไม่ทักท้วง ถือว่าคู่สัญญาทำสัญญาใหม่ต่อไปโดยไม่มีกำหนดเวลา</p>
+  `
+},
+{
+  id: "sum_hire_purchase",
+  label: "สรุป: สัญญาเช่าซื้อ",
+  cat: "hire_purchase",
+  html: `
+  <h4 id="shp-h1">ลักษณะและแบบของสัญญา (ม.572)</h4>
+  <p class="p-tight">เจ้าของทรัพย์สินเอาทรัพย์สินออกให้เช่า และให้คำมั่นว่าจะขายทรัพย์สินนั้นหรือว่าจะให้ทรัพย์สินนั้นตกเป็นสิทธิแก่ผู้เช่า โดยเงื่อนไขที่ผู้เช่าได้ใช้เงินเป็นจำนวนเท่านั้นเท่านี้คราว</p>
+  <p class="p-tight">🚨 หลุมพรางเรื่องแบบของสัญญา (จุดตายยอดฮิต): สัญญาเช่าซื้อต้อง<b>ทำเป็นหนังสือ</b> มิฉะนั้นตกเป็น<b>โมฆะ</b> (ม.572 วรรคสอง) แต่<b>ไม่ต้องจดทะเบียน</b>ต่อพนักงานเจ้าหน้าที่ แม้จะเช่าซื้ออสังหาริมทรัพย์ (เช่น บ้าน ที่ดิน) ก็ตาม ข้อสอบชอบหลอกว่าต้องไปจดทะเบียนเหมือนซื้อขายอสังหาริมทรัพย์ (ม.456) — จุดตายคือเช่าซื้อตกอยู่ใต้ ม.572 วรรคสองเพียงแค่ "ทำเป็นหนังสือ" ก็มีผลสมบูรณ์แล้ว ห้ามเอา ม.456 มาปน</p>
+
+  <h4 id="shp-h2">สิทธิบอกเลิกของผู้เช่าซื้อ (ม.573)</h4>
+  <p class="p-tight">ผู้เช่าซื้อจะเลิกสัญญาเมื่อใดก็ได้ แต่ต้อง<b>ส่งมอบทรัพย์สินกลับคืน</b>ให้เจ้าของด้วยค่าใช้จ่ายของตนเอง (ถ้าโทรบอกหรือบอกด้วยวาจาเฉยๆ สัญญายังไม่เลิก ต้องมีการส่งมอบคืนจริง)</p>
+
+  <h4 id="shp-h3">สิทธิบอกเลิกของผู้ให้เช่าซื้อ (ม.574 — เปรียบเทียบกับเช่าทรัพย์)</h4>
+  <p class="p-tight">ผู้ให้เช่าซื้อบอกเลิกสัญญาได้<b>ทันที</b>เมื่อผู้เช่าซื้อผิดนัดชำระเงิน "2 คราวติดกัน" หรือผิดสัญญาข้อสาระสำคัญ ผลของการเลิก: ผู้ให้เช่าซื้อริบเงินค่างวดที่รับมาแล้วได้ทั้งหมด และเรียกทรัพย์คืนได้ ส่วนค่างวดที่ค้างชำระอยู่ (ยังไม่ได้จ่าย) ไม่มีเขียนไว้ใน ม.574 โดยตรง ศาลให้ประยุกต์ใช้ ม.391 วรรคสาม โดยเรียกค่างวดที่ค้างเป็น "ค่าใช้ทรัพย์" แทน</p>
+  <p class="p-tight">💡 หลุมพรางสำคัญที่สุด — ห้ามสับสนกับเช่าทรัพย์: เช่าทรัพย์รายเดือน (ม.560 วรรคสอง) ผู้ให้เช่าเลิกสัญญาทันทีไม่ได้ ต้องบอกกล่าวให้ชำระก่อนอย่างน้อย 15 วัน แต่<b>เช่าซื้อ (ม.574) เลิกได้ทันที</b>เมื่อผิดนัด 2 คราวติดกัน ไม่ต้องบอกกล่าวล่วงหน้าก่อนเหมือนเช่าทรัพย์ — สองมาตรานี้เป็นคนละหลักกันโดยสิ้นเชิง</p>
+
+  <h4 id="shp-h4">เช่าซื้อที่เกี่ยวโยงกับสัญญาตัวแทน (ม.798 ประกอบ ม.572)</h4>
+  <p class="p-tight">ถ้าตัวการมอบหมายให้ตัวแทนไปทำสัญญาเช่าซื้อแทนตน เนื่องจากเช่าซื้อเป็นกิจการที่กฎหมายบังคับให้ต้องทำเป็นหนังสือ การตั้งตัวแทนเพื่อกิจการนี้ก็ต้องทำเป็นหนังสือด้วยตาม ม.798 วรรคหนึ่ง หากตั้งตัวแทนด้วยวาจาเพื่อไปทำสัญญาเช่าซื้อ ตัวการจะไม่มีผลผูกพันทางกฎหมายกับคู่สัญญาอีกฝ่ายเลย แม้จะมีพฤติการณ์บ่งชี้ว่าตัวการเป็นผู้เช่าซื้อตัวจริงก็ตาม (กฎหมายวิธีพิจารณาความแพ่งไม่เปิดทางให้สืบพยานบุคคลแทนเอกสารที่กฎหมายบังคับให้ต้องมี)</p>
+  `
+},
+{
+  id: "sum_hire_of_work",
+  label: "สรุป: สัญญาจ้างทำของ",
+  cat: "hire_of_work",
+  html: `
+  <h4 id="shw-h1">สเต็ป 1: แยกประเภทสัญญาให้ออก</h4>
+  <ul>
+    <li>ม.587 — จ้างทำของ vs ซื้อขาย: จ้างทำของมุ่งเน้นที่ "ผลสำเร็จของงาน/ฝีมือ" เป็นสำคัญ ถ้ามุ่งเน้น "ตัวทรัพย์สิน" เป็นหลัก เป็นซื้อขาย</li>
+    <li>จ้างทำของ vs จ้างแรงงาน: จุดตายคือ "อำนาจบังคับบัญชา" กับ "ผลสำเร็จ" — รับเงินเดือนประจำ นายจ้างสั่งการ/ลงโทษได้ = จ้างแรงงาน / มีอิสระทำงาน มุ่งผลสำเร็จเป็นชิ้นๆ = จ้างทำของ</li>
+  </ul>
+  <p class="p-tight">💡 หลุมพราง "แบบ": สัญญาจ้างทำของไม่มีแบบและไม่ต้องมีหลักฐานเป็นหนังสือเลย แม้จ้างสร้างตึกราคา 10 ล้านบาทด้วยวาจา สัญญาก็สมบูรณ์และฟ้องร้องบังคับคดีได้ ห้ามเผลอเอา ม.456 (ซื้อขาย) หรือ ม.538 (เช่าทรัพย์) มาตอบ</p>
+
+  <h4 id="shw-h2">ผู้รับจ้างทำงานชักช้า/บกพร่อง (ม.593-594)</h4>
+  <p class="p-tight">ม.593: ถ้าผู้รับจ้างทำงานชักช้าจนคาดหมายได้แน่นอนว่างานจะไม่สำเร็จตามกำหนด ผู้ว่าจ้างบอกเลิกสัญญาได้ทันที โดยไม่ต้องรอถึงกำหนดเวลาส่งมอบ</p>
+  <p class="p-tight">ม.594: ถ้าผู้รับจ้างทำงานบกพร่องหรือฝ่าฝืนสัญญา ผู้ว่าจ้างขอให้ศาลสั่งให้บุคคลภายนอกเข้าทำงานแทนได้ โดยให้ผู้รับจ้างเดิมออกค่าใช้จ่าย โดยไม่จำเป็นต้องบอกเลิกสัญญาเดิมก่อน</p>
+
+  <h4 id="shw-h3">ผู้รับจ้างช่วงและละเมิด (ม.607)</h4>
+  <p class="p-tight">โดยหลักผู้รับจ้างเอางานไปให้ผู้รับจ้างช่วงทำต่อได้เสมอ เว้นแต่สาระสำคัญอยู่ที่ความรู้ความสามารถเฉพาะตัว (เช่น จ้างนักร้อง จ้างวาดรูป) หรือมีข้อห้ามในสัญญา — ผู้รับจ้างหลักต้องรับผิดในความประพฤติของผู้รับจ้างช่วงเสมอต่อผู้ว่าจ้าง (ผู้ว่าจ้างไม่มีนิติสัมพันธ์กับผู้รับจ้างช่วงโดยตรง ต้องฟ้องผู้รับจ้างหลักเท่านั้น)</p>
+
+  <h4 id="shw-h4">รับมอบงานโดยอิดเอื้อนหรือไม่ (ม.597-598)</h4>
+  <p class="p-tight">รับไว้เฉยๆ ไม่สงวนสิทธิ ไม่บ่น ไม่ทักท้วง = "รับไว้โดยไม่อิดเอื้อน" ผลคือหมดสิทธิเรียกค่าปรับ/ค่าเสียหายจากส่งช้า (ม.597) และหลุดพ้นความรับผิดชำรุดบกพร่อง (ม.598) เว้นแต่ความชำรุดนั้น "มองไม่เห็นตอนรับมอบ (ซ่อนเร้น)" หรือ "ผู้รับจ้างเจตนาปกปิด (เอาสีทาทับรอยร้าว)"</p>
+
+  <h4 id="shw-h5">จุดตายสุดฮิต — ระยะเวลารับผิด vs อายุความ (ม.600 vs ม.601)</h4>
+  <p class="p-tight">ม.600 (กรอบเวลาที่ความชำรุดต้องปรากฏ): ต้องปรากฏภายใน 1 ปีนับแต่ส่งมอบ ถ้าเป็น "สิ่งปลูกสร้างกับพื้นดิน" (ไม่ใช่เรือนไม้) ขยายเป็น 5 ปี</p>
+  <p class="p-tight">ม.601 (อายุความฟ้องศาล): ไม่ว่าความชำรุดจะโผล่มาตอนไหน (ภายใต้กรอบ ม.600) ผู้ว่าจ้างต้องฟ้องภายใน 1 ปีนับแต่วันที่ความชำรุดนั้นปรากฏขึ้น หากปล่อยทิ้งไว้เกิน 1 ปี คดีขาดอายุความ</p>
+  <p class="p-tight">💡 หลุมพรางซ้อนหลุมพราง (การปกปิด): ถ้าผู้รับจ้างรู้ว่ามีรอยร้าวแต่เอาสีทาทับปกปิด เกราะคุ้มครอง 1 ปีหรือ 5 ปีตาม ม.600 จะแตกทันที (ปลดล็อคข้อจำกัดเวลาปรากฏ) แต่ไม่ได้ยกเว้นอายุความฟ้องคดี 1 ปีตาม ม.601 ซึ่งยังคงบังคับอยู่เสมอ — สองมาตรานี้เป็นคนละเรื่องกัน ห้ามเอามาปนกัน</p>
+
+  <h4 id="shw-h6">ความวินาศก่อนส่งมอบ (ม.605) และสิทธิยึดหน่วง (ม.599)</h4>
+  <p class="p-tight">ม.605: ถ้างานพังทลายเพราะเหตุสุดวิสัยก่อนส่งมอบ ผู้รับจ้างไม่มีสิทธิได้สินจ้าง และผู้ใดเป็นผู้จัดหาสัมภาระ ผู้นั้นต้องรับเคราะห์ในส่วนสัมภาระนั้น — ไม่ว่าใครหาวัสดุ ถ้างานพังก่อนส่งมอบ ผู้รับจ้างจะ "ชวดค่าจ้าง" เสมอ เว้นแต่ความผิดจะอยู่ที่ผู้ว่าจ้าง</p>
+  <p class="p-tight">ม.599: ผู้ว่าจ้างพบงานชำรุดหรือส่งช้า มีสิทธิยึดหน่วงสินจ้างไว้ก่อนได้จนกว่าจะซ่อมแซม</p>
+  `
+},
+{
+  id: "sum_agency",
+  label: "สรุป: สัญญาตัวแทน",
+  cat: "agency",
+  html: `
+  <p class="p-tight">การทำโจทย์ข้อสอบ "สัญญาตัวแทน" ถือเป็นด่านที่ปราบเซียนและซับซ้อนที่สุดในวิชานี้ เพราะมีตัวละครถึง 3 ฝ่าย (ตัวการ ตัวแทน บุคคลภายนอก) เข้ามาเกี่ยวข้องเสมอ</p>
+
+  <h4 id="sa-h1">1. เช็คความสามารถของคู่สัญญา (ม.799)</h4>
+  <p class="p-tight">ข้อสอบมักหลอกเรื่องตั้ง "ผู้เยาว์" เป็นตัวแทน ต้องแยกวิเคราะห์เป็น 2 วง: วงใน (ตัวการ-ตัวแทน): สัญญาตั้งตัวแทนตกเป็น "โมฆียะ" / วงนอก (ตัวการ-บุคคลภายนอก): กฎหมายคุ้มครองบุคคลภายนอก การกระทำของตัวแทนยัง "ผูกพันตัวการอย่างสมบูรณ์" ตาม ม.799 ประกอบ ม.820 ตัวการเบี้ยวหนี้บุคคลภายนอกโดยอ้างเรื่องผู้เยาว์ไม่ได้</p>
+
+  <h4 id="sa-h2">2. เช็ค "แบบและหลักฐาน" (ม.798 — จุดตายยอดฮิต!)</h4>
+  <p class="p-tight">ดูเสมอว่าสิ่งที่ตัวแทนจะไปทำกับบุคคลภายนอกนั้น กฎหมายบังคับเรื่อง "แบบ" หรือ "หลักฐาน" หรือไม่ — ถ้าตัวแทนจะไปทำสัญญาที่ต้องทำเป็นหนังสือ (เช่น เช่าซื้อ, ซื้อขายที่ดิน) การตั้งตัวแทนก็ต้องทำเป็นหนังสือ (ม.798 วรรคหนึ่ง) ถ้าต้องมีหลักฐานเป็นหนังสือ (เช่น กู้ยืมเงิน, ซื้อขายสังหาฯ 20,000 บาทขึ้นไป) การตั้งตัวแทนก็ต้องมีหลักฐานเป็นหนังสือลงลายมือชื่อตัวการ (ม.798 วรรคสอง)</p>
+  <p class="p-tight">🚨 หลุมพรางที่ 1 (ผลของการไม่ทำตาม ม.798): หากตั้งตัวแทนด้วยวาจาฝ่าฝืน ม.798 ผลคือตัวการกับบุคคลภายนอกไม่มีความผูกพันกันเลย (ฟ้องร้องกันไม่ได้) แต่สัญญาตั้งตัวแทนระหว่าง "ตัวการกับตัวแทน" เองไม่เป็นโมฆะ ยังฟ้องร้องกันเองได้ตามปกติ</p>
+  <p class="p-tight">🚨 หลุมพรางที่ 2 (มัดจำ/ชำระหนี้บางส่วน): ถ้าให้ตัวแทนไปซื้อของ 20,000 บาทขึ้นไป แต่ตกลงด้วยวาจาโดยใช้วิธี "ชำระหนี้บางส่วนหรือวางมัดจำ" ในวันทำสัญญา กรณีนี้ไม่ต้องอาศัยหลักฐานเป็นหนังสือ การตั้งตัวแทนด้วยวาจาจึงสมบูรณ์และบังคับคดีได้</p>
+
+  <h4 id="sa-h3">3. ประเมิน "ขอบอำนาจ" (ม.800-801)</h4>
+  <p class="p-tight">ตัวแทนเฉพาะการ (ม.800): หลัก "ร่มแห่งอำนาจ" (Umbrella of Power) — แม้ตัวการไม่ได้สั่งตรงๆ แต่ถ้าเป็นสิ่งจำเป็นเพื่อให้งานสำเร็จ ถือว่าอยู่ในขอบอำนาจเสมอ<br>ตัวแทนทั่วไป (ม.801): ทำได้ทุกอย่าง ยกเว้นข้อห้าม 6 ประการ (เช่น ขาย/จำนองอสังหาฯ ให้เช่าอสังหาฯ เกิน 3 ปี ฟ้องคดี)</p>
+  <p class="p-tight">🚨 หลุมพราง: หากตัวแทนทั่วไปเอาที่ดินตัวการไปให้เช่า 4 ปี ศาลมองว่าผูกพันตัวการแค่ 3 ปีแรกเท่านั้น พอเข้าปีที่ 4 ตัวการสามารถฟ้องขับไล่ผู้เช่าได้</p>
+
+  <h4 id="sa-h4">4. "ตัวแทนช่วง" และเกราะคุ้มครองตัวแทน (ม.813-814)</h4>
+  <p class="p-tight">ถ้าตัวการเป็นคนเจาะจงชื่อให้ตั้ง (เช่น บอกว่าถ้าติดธุระให้ตั้งนาย A) ตัวแทนหลัก "หลุดพ้นความรับผิด" ทันทีที่ตั้งนาย A ไม่ว่านาย A จะทำพังแค่ไหน เว้นแต่ตัวแทนหลัก "รู้อยู่แล้ว" ว่านาย A ไม่เหมาะหรือไว้ใจไม่ได้แล้วยังฝืนตั้งโดยไม่บอกตัวการ (ม.813)</p>
+  <p class="p-tight">สะพานเชื่อมความรับผิด (ม.814): กฎหมายสร้างสะพานเชื่อมให้ "ตัวการ" และ "ตัวแทนช่วง" ฟ้องร้องกันได้โดยตรง</p>
+
+  <h4 id="sa-h5">5. ข้อสอบหลอก "ตัวการต้องผูกพันแม้ไม่ได้สั่ง"</h4>
+  <p class="p-tight">หากตัวแทนทำนอกอำนาจหรือไม่มีการตั้งตัวแทนกันเลย ตัวการอาจต้องผูกพันรับผิดต่อบุคคลภายนอกใน 3 กรณี:</p>
+  <ul>
+    <li><b>ตัวแทนเชิด (ม.821)</b>: ไม่มีสัญญาตัวแทน แต่ตัวการไป "เชิด" คนอื่นให้บุคคลภายนอกเชื่อ หรือรู้แล้วยอมให้เขาอ้างตัวเป็นตัวแทน ตัวการต้องรับผิดต่อบุคคลภายนอกผู้สุจริต</li>
+    <li><b>ตัวแทนทำเกินอำนาจ (ม.822)</b>: เป็นตัวแทนกันอยู่แล้วแต่ทำเกินอำนาจ แต่พฤติการณ์ของตัวการทำให้บุคคลภายนอกเชื่อว่ามีอำนาจ (เช่น เซ็นใบมอบอำนาจเปล่าทิ้งไว้แล้วตัวแทนกรอกข้อความ) ตัวการต้องผูกพัน</li>
+    <li><b>การให้สัตยาบัน (ม.823)</b>: ทำเกินอำนาจ/ไม่มีอำนาจ โดยหลักไม่ผูกพันตัวการ เว้นแต่ตัวการจะให้สัตยาบัน — มีผลย้อนหลัง แต่ตัวการยังฟ้องเรียกค่าเสียหายจากตัวแทนฐานทำนอกอำนาจตาม ม.812 ได้อยู่ดี หากตัวการไม่ให้สัตยาบัน ตัวแทนต้องรับผิดต่อบุคคลภายนอกโดยลำพังตนเอง เว้นแต่บุคคลภายนอกรู้อยู่แล้วว่าตัวแทนทำนอกเหนืออำนาจ</li>
+  </ul>
+
+  <h4 id="sa-h6">6. ความรับผิดของตัวแทนต่อตัวการ (ม.812) และตัวการรับสินบน (ม.825)</h4>
+  <p class="p-tight">ม.812: ตัวแทนต้องรับผิดต่อตัวการหากเกิดความเสียหายจาก ประมาทเลินเล่อ, ไม่ทำการเป็นตัวแทน, ทำปราศจากอำนาจ, หรือทำนอกเหนืออำนาจ — จุดตาย: ทำในขอบอำนาจแต่ประมาท ≠ ทำเกินอำนาจ ตัวการยังต้องผูกพันกับบุคคลภายนอกตาม ม.820 ก่อน แล้วค่อยไปไล่เบี้ยตัวแทนตาม ม.812 เอง</p>
+  <p class="p-tight">ม.825: ถ้าตัวแทนรับอามิสสินจากบุคคลภายนอกโดยฝ่าฝืนหน้าที่ ตัวการไม่ต้องผูกพันในสัญญาที่ตัวแทนทำไปนั้นเลย เว้นแต่ตัวการจะยินยอมด้วย</p>
+
+  <h4 id="sa-h7">7. "ความระงับแห่งสัญญา" และหลุมพรางความตาย (ม.826, 830-831)</h4>
+  <p class="p-tight">สัญญาตัวแทนระงับทันทีเมื่อฝ่ายใดฝ่ายหนึ่งตาย ไร้ความสามารถ หรือล้มละลาย (ม.826)</p>
+  <p class="p-tight">🚨 จุดตาย: ข้อสอบมักออกว่าตัวการตาย (สัญญาระงับแล้ว) แต่ตัวแทนไม่รู้ จึงไปทำสัญญากับบุคคลภายนอกที่ไม่รู้เช่นกัน ทายาทตัวการจะยกความตายมาเป็นข้อต่อสู้ "ตัวแทน" ไม่ได้ (ม.830) และจะยกความตายมาเป็นข้อต่อสู้ "บุคคลภายนอกผู้สุจริต" ไม่ได้ (ม.831) ทายาทจึงต้องผูกพันตามสัญญา</p>
+
+  <h4 id="sa-h8">แนวทางเขียนตอบ IRAC</h4>
+  <p class="p-tight">ข้อสอบสัญญาตัวแทนมักออกเป็น "ข้อสอบตุ๊กตา 3 ฝ่าย" เสมอ ให้ขึ้นต้นด้วยการอธิบายความสัมพันธ์ระหว่าง "ตัวการกับบุคคลภายนอก" ก่อน (อ้าง ม.820 หรือข้อยกเว้นต่างๆ) เพื่อตอบว่าสัญญาผูกพันหรือไม่ จากนั้นค่อยขึ้นย่อหน้าใหม่มาวินิจฉัย "ความสัมพันธ์ภายในระหว่างตัวการกับตัวแทน" (เช่น การไล่เบี้ยค่าเสียหาย ม.812 หรือเบิกเงินทดรองคืน ม.816) แยกทีละคู่สัญญาจะทำให้ตอบได้ครบถ้วนและไม่หลงประเด็น</p>
+  `
+}
+];
+</script>
+<script>
+/* ================================================================
+   ENGINE — โครงเกม
+   ================================================================ */
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function pickDistractors(pool, excludeIdx, n){
+  const idxs = pool.map((_,i)=>i).filter(i=>i!==excludeIdx);
+  return shuffle(idxs).slice(0,n);
+}
+function chunk(arr, size){
+  const out = [];
+  for(let i=0;i<arr.length;i+=size) out.push(arr.slice(i, i+size));
+  return out;
+}
+function esc(s){
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+const SoundFX = (function(){
+  let ctx = null;
+  let enabled = true;
+  try{ enabled = localStorage.getItem('lc330_sound') !== 'off'; }catch(e){}
+  function ensureCtx(){
+    if(!ctx){
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if(AC) ctx = new AC();
+    }
+    if(ctx && ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+  function tone(freq, dur, type, gainVal, delay){
+    if(!enabled) return;
+    const c = ensureCtx();
+    if(!c) return;
+    const t0 = c.currentTime + (delay||0);
+    const osc = c.createOscillator();
+    const gain = c.createGain();
+    osc.type = type || 'sine';
+    osc.frequency.setValueAtTime(freq, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(gainVal||0.1, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+dur);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+dur+0.02);
+  }
+  return {
+    click(){ tone(560,0.05,'square',0.05); },
+    flip(){ tone(700,0.04,'triangle',0.06); tone(420,0.05,'triangle',0.05,0.05); },
+    tab(){ tone(820,0.035,'sine',0.05); },
+    correct(){ tone(523,0.09,'triangle',0.08); tone(659,0.09,'triangle',0.08,0.09); tone(784,0.14,'triangle',0.09,0.18); },
+    wrong(){ tone(220,0.16,'sawtooth',0.07); tone(160,0.2,'sawtooth',0.06,0.06); },
+    score(){ tone(1046,0.1,'sine',0.07); tone(1568,0.12,'sine',0.06,0.08); },
+    isOn(){ return enabled; },
+    toggle(){
+      enabled = !enabled;
+      try{ localStorage.setItem('lc330_sound', enabled ? 'on' : 'off'); }catch(e){}
+      return enabled;
+    }
+  };
+})();
+
+/* =========================================================
+   GAMIFICATION — คะแนนรวม (มุมขวาบน)
+   ========================================================= */
+const SCORE_KEY = 'lc330_score_v1';
+function loadScore(){ try{ return parseInt(localStorage.getItem(SCORE_KEY)||'0',10)||0; }catch(e){ return 0; } }
+let totalScore = loadScore();
+function saveScoreValue(){ try{ localStorage.setItem(SCORE_KEY, String(totalScore)); }catch(e){} }
+function renderScoreDisplay(){
+  const el = document.getElementById('score-value');
+  if(el) el.textContent = totalScore;
+}
+function addScore(n){
+  totalScore += n;
+  saveScoreValue();
+  renderScoreDisplay();
+  const badge = document.getElementById('global-score');
+  if(badge){
+    badge.classList.remove('score-pop');
+    void badge.offsetWidth;
+    badge.classList.add('score-pop');
+  }
+}
+function loadSeenSet(key){
+  try{ return new Set(JSON.parse(localStorage.getItem(key) || '[]')); }
+  catch(e){ return new Set(); }
+}
+function saveSeenSet(key, set){
+  try{ localStorage.setItem(key, JSON.stringify(Array.from(set))); }
+  catch(e){}
+}
+const cardSeenSet = loadSeenSet('lc330_cardsSeen');
+const seqSeenSet = loadSeenSet('lc330_seqSeen');
+
+function makeQuestionTimer(elId, fastThreshold){
+  let startTs = 0, intervalId = null;
+  function update(){
+    const el = document.getElementById(elId);
+    if(!el) return;
+    const sec = (Date.now() - startTs) / 1000;
+    el.textContent = '⏱ ' + sec.toFixed(1) + 's';
+    el.classList.toggle('timer-fast', sec <= fastThreshold);
+  }
+  return {
+    start(){
+      startTs = Date.now();
+      clearInterval(intervalId);
+      intervalId = setInterval(update, 100);
+      update();
+    },
+    stop(){
+      clearInterval(intervalId);
+      return (Date.now() - startTs) / 1000;
+    }
+  };
+}
+const QUIZ_FAST_THRESHOLD = 8;
+const quizTimer = makeQuestionTimer('quiz-timer', QUIZ_FAST_THRESHOLD);
+const iracTimer = makeQuestionTimer('irac-timer', QUIZ_FAST_THRESHOLD);
+
+/* ---- สร้างโจทย์ระดับพื้นฐานอัตโนมัติจาก CARDS ---- */
+function buildBasicPool(){
+  const qs = [];
+  CARDS.forEach((c, idx)=>{
+    const dIdx = pickDistractors(CARDS, idx, 3);
+    const opts = [c.result, ...dIdx.map(i=>CARDS[i].result)];
+    const order = shuffle(opts.map((_,i)=>i));
+    qs.push({cat:c.cat, q: c.section + ' (' + c.title + ') มีผลทางกฎหมายอย่างไร',
+      opts: order.map(i=>opts[i]), ans: order.indexOf(0),
+      explain: c.section + ' [' + c.source + ']: ' + c.result + (c.note? ' ' + c.note : '')});
+  });
+  CARDS.forEach((c, idx)=>{
+    if(idx % 2 === 1) return;
+    const dIdx = pickDistractors(CARDS, idx, 3);
+    const opts = [c.section, ...dIdx.map(i=>CARDS[i].section)];
+    const order = shuffle(opts.map((_,i)=>i));
+    qs.push({cat:c.cat, q: '"' + c.result + '" (เรื่อง ' + c.title + ') ตรงกับมาตราใด',
+      opts: order.map(i=>opts[i]), ans: order.indexOf(0),
+      explain: c.title + ' บัญญัติอยู่ใน ' + c.section + ' [' + c.source + ']'});
+  });
+  return shuffle(qs);
+}
+
+const BASIC_POOL = buildBasicPool();
+const ADV_POOL   = shuffle(QUIZ_ADV);
+const BASIC_SETS = chunk(BASIC_POOL, 10);
+const ADV_SETS   = chunk(ADV_POOL, 10);
+
+/* ---------- header text ---------- */
+document.getElementById('hd-crest').textContent = CONFIG.crest;
+document.getElementById('hd-title').textContent = CONFIG.title;
+document.getElementById('hd-sub').textContent = CONFIG.subtitle;
+
+/* ---------- badge / stage painters ---------- */
+function paintBadge(el, catKey){
+  const c = CATEGORIES[catKey];
+  el.style.background = c.soft;
+  el.style.color = c.strong;
+  el.textContent = c.label;
+}
+function paintCardFrame(cardEl, ribbonEl, secEl, catKey, isFlipped){
+  const c = CATEGORIES[catKey];
+  ribbonEl.style.background = c.strong;
+  secEl.style.color = c.strong;
+  cardEl.style.setProperty('--flip-soft', c.soft);
+  cardEl.style.setProperty('--flip-strong', c.strong);
+  cardEl.classList.toggle('is-flipped', !!isFlipped);
+}
+function paintStage(elId, catKey){
+  const el = document.getElementById(elId);
+  const c = CATEGORIES[catKey];
+  el.style.background = 'linear-gradient(135deg,' + c.strong + ' 0%, ' + c.strong + 'CC 100%)';
+  el.innerHTML =
+    '<span class="stage-icon">' + c.icon + '</span>' +
+    '<span><span class="stage-label">' + esc(c.label) + '</span>' +
+    '<span class="stage-src">' + esc(c.source) + '</span></span>';
+}
+
+/* =========================================================
+   โหมด 1: การ์ดจำมาตรา
+   ========================================================= */
+let deck = shuffle(CARDS);
+let cardIdx = 0;
+let flipped = false;
+
+const catSelect = document.getElementById('cat-select');
+(function initCatSelect(){
+  const optAll = document.createElement('option');
+  optAll.value = 'all'; optAll.textContent = 'ทุกหมวด';
+  catSelect.appendChild(optAll);
+  Object.keys(CATEGORIES).forEach(k=>{
+    const o = document.createElement('option');
+    o.value = k; o.textContent = CATEGORIES[k].label;
+    catSelect.appendChild(o);
+  });
+})();
+catSelect.addEventListener('change', ()=>{
+  const val = catSelect.value;
+  deck = val === 'all' ? shuffle(CARDS) : shuffle(CARDS.filter(c=>c.cat===val));
+  cardIdx = 0; flipped = false;
+  renderMatraChips(val);
+  renderCard();
+});
+
+function renderMatraChips(catVal){
+  const wrap = document.getElementById('matra-chips');
+  wrap.innerHTML = '';
+  if(catVal === 'all'){ wrap.style.display = 'none'; return; }
+  const items = CARDS.filter(c=>c.cat===catVal);
+  const cCat = CATEGORIES[catVal];
+  wrap.style.display = 'flex';
+  const label = document.createElement('span');
+  label.className = 'matra-chips-label';
+  label.textContent = 'มาตราในหมวดนี้:';
+  wrap.appendChild(label);
+  items.forEach(item=>{
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'matra-chip';
+    chip.textContent = item.section;
+    chip.style.setProperty('--chip-color', cCat.strong);
+    chip.title = item.title;
+    chip.addEventListener('click', ()=>{
+      SoundFX.click();
+      const idx = deck.findIndex(d=>d.section===item.section && d.cat===item.cat);
+      if(idx >= 0){ cardIdx = idx; flipped = false; renderCard(); }
+    });
+    wrap.appendChild(chip);
+  });
+}
+function updateMatraChipActive(section){
+  document.querySelectorAll('#matra-chips .matra-chip').forEach(el=>{
+    el.classList.toggle('active', el.textContent === section);
+  });
+}
+
+function renderCard(){
+  if(deck.length === 0) return;
+  const c = deck[cardIdx];
+  document.getElementById('card-section').textContent = c.section;
+  document.getElementById('card-src-front').textContent = c.source;
+  document.getElementById('card-stars').textContent = '★'.repeat(c.stars) + '☆'.repeat(5-c.stars);
+  document.getElementById('card-title').textContent = c.title;
+  document.getElementById('card-src-back').textContent = c.source;
+  document.getElementById('card-result').textContent = c.result;
+  document.getElementById('card-note').textContent = c.note || '';
+  document.getElementById('card-note').style.display = c.note ? 'block' : 'none';
+  document.getElementById('card-progress').textContent = (cardIdx+1) + ' / ' + deck.length;
+  document.getElementById('face-front').style.display = flipped ? 'none' : 'flex';
+  document.getElementById('face-back').style.display = flipped ? 'block' : 'none';
+  paintBadge(document.getElementById('cat-badge'), c.cat);
+  paintCardFrame(document.getElementById('flip-card'), document.getElementById('card-ribbon'), document.getElementById('card-section'), c.cat, flipped);
+  paintStage('card-stage', c.cat);
+  updateMatraChipActive(c.section);
+}
+const flipCardEl = document.getElementById('flip-card');
+function doFlip(){
+  SoundFX.flip();
+  flipCardEl.classList.add('flipping');
+  setTimeout(()=>{
+    flipped = !flipped;
+    renderCard();
+    flipCardEl.classList.remove('flipping');
+    if(flipped){
+      const c = deck[cardIdx];
+      const key = c.cat + '|' + c.section;
+      if(!cardSeenSet.has(key)){
+        cardSeenSet.add(key);
+        saveSeenSet('lc330_cardsSeen', cardSeenSet);
+        SoundFX.score();
+        addScore(10);
+      }
+    }
+  }, 90);
+}
+flipCardEl.addEventListener('click', doFlip);
+flipCardEl.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); doFlip(); } });
+document.getElementById('btn-next').addEventListener('click', ()=>{ SoundFX.click(); cardIdx=(cardIdx+1)%deck.length; flipped=false; renderCard(); });
+document.getElementById('btn-prev').addEventListener('click', ()=>{ SoundFX.click(); cardIdx=(cardIdx-1+deck.length)%deck.length; flipped=false; renderCard(); });
+document.getElementById('btn-shuffle').addEventListener('click', ()=>{ SoundFX.click(); deck=shuffle(deck); cardIdx=0; flipped=false; renderCard(); });
+
+/* =========================================================
+   โหมด 2: เรียงมาตราจำเป็นกลุ่ม
+   ========================================================= */
+const SEQ_ORDER = Object.keys(CATEGORIES);
+const seqSelect = document.getElementById('seq-select');
+SEQ_ORDER.forEach(val=>{
+  const o = document.createElement('option');
+  o.value = val; o.textContent = CATEGORIES[val].label;
+  seqSelect.appendChild(o);
+});
+function renderSeq(){
+  const val = seqSelect.value;
+  const items = CARDS.filter(c=>c.cat===val);
+  const c = CATEGORIES[val];
+  const listEl = document.getElementById('seq-list');
+  listEl.innerHTML = '';
+  items.forEach((item,i)=>{
+    const row = document.createElement('div');
+    row.className = 'seq-item';
+    row.style.borderLeftColor = c.strong;
+    let noteHtml = item.note ? '<div class="seq-note">'+esc(item.note)+'</div>' : '';
+    row.innerHTML =
+      '<div class="seq-num">'+(i+1)+'</div>'+
+      '<div style="flex:1">'+
+        '<div class="seq-head">'+
+          '<span class="seq-sec" style="color:'+c.strong+'">'+esc(item.section)+'</span>'+
+          '<span class="seq-title">'+esc(item.title)+'</span>'+
+          '<span class="seq-src">['+esc(item.source)+']</span>'+
+          '<span class="seq-stars">'+('★'.repeat(item.stars))+'</span>'+
+        '</div>'+
+        '<div class="seq-res">'+esc(item.result)+'</div>'+
+        noteHtml+
+      '</div>';
+    listEl.appendChild(row);
+  });
+  const sentinel = document.createElement('div');
+  sentinel.id = 'seq-sentinel';
+  sentinel.style.height = '1px';
+  listEl.appendChild(sentinel);
+  setupSeqObserver(val);
+}
+seqSelect.addEventListener('change', renderSeq);
+
+let seqObserver = null;
+function setupSeqObserver(catVal){
+  if(seqObserver) seqObserver.disconnect();
+  const sentinel = document.getElementById('seq-sentinel');
+  if(!sentinel) return;
+  seqObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting && !seqSeenSet.has(catVal)){
+        seqSeenSet.add(catVal);
+        saveSeenSet('lc330_seqSeen', seqSeenSet);
+        SoundFX.score();
+        addScore(100);
+      }
+    });
+  }, {threshold:0.1});
+  seqObserver.observe(sentinel);
+}
+
+/* =========================================================
+   โหมด 3: วิเคราะห์โจทย์
+   ========================================================= */
+let quizLevel = 'basic';
+let currentSetIdx = 0;
+let quizPool = BASIC_SETS[0];
+let quizOrder = shuffle(quizPool.map((_,i)=>i));
+let quizIdx = 0;
+let score = 0;
+let answered = false;
+let wrongIdxs = [];
+let reviewMode = false;
+
+function currentSets(){ return quizLevel === 'basic' ? BASIC_SETS : ADV_SETS; }
+
+function loadBest(){
+  try{ return JSON.parse(localStorage.getItem(CONFIG.storageKey) || '{}'); }
+  catch(e){ return {}; }
+}
+function saveBest(level, setIdx, score, total){
+  const data = loadBest();
+  const key = level + '_' + setIdx;
+  if(!data[key] || score > data[key].score){
+    data[key] = {score, total};
+    try{ localStorage.setItem(CONFIG.storageKey, JSON.stringify(data)); }catch(e){}
+  }
+}
+function getBest(level, setIdx){
+  const data = loadBest();
+  return data[level + '_' + setIdx] || null;
+}
+
+function renderSetPicker(){
+  const sets = currentSets();
+  const picker = document.getElementById('set-picker');
+  picker.innerHTML = '';
+  sets.forEach((s,i)=>{
+    const btn = document.createElement('button');
+    const best = getBest(quizLevel, i);
+    btn.innerHTML = 'ชุด ' + (i+1) + (best ? ' <span class="best">'+best.score+'/'+best.total+'</span>' : '');
+    if(i === currentSetIdx) btn.classList.add('on');
+    btn.addEventListener('click', ()=>{ SoundFX.click(); selectSet(i); });
+    picker.appendChild(btn);
+  });
+}
+
+function selectSet(i){
+  currentSetIdx = i;
+  quizPool = currentSets()[i];
+  quizOrder = shuffle(quizPool.map((_,k)=>k));
+  quizIdx = 0; score = 0; wrongIdxs = []; reviewMode = false;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderSetPicker();
+  renderQuiz();
+}
+
+function setLevel(lvl){
+  quizLevel = lvl;
+  currentSetIdx = 0;
+  quizPool = currentSets()[0];
+  quizOrder = shuffle(quizPool.map((_,i)=>i));
+  quizIdx = 0; score = 0; wrongIdxs = []; reviewMode = false;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  document.getElementById('lvl-basic').classList.toggle('on', lvl==='basic');
+  document.getElementById('lvl-adv').classList.toggle('on', lvl==='adv');
+  renderSetPicker();
+  renderQuiz();
+}
+
+function syncStickyBar(){
+  const quizOn = viewQuiz.classList.contains('on') && document.getElementById('quiz-play').style.display !== 'none';
+  const iracOn = viewIrac.classList.contains('on') && document.getElementById('irac-play').style.display === 'block';
+  const show = quizOn || iracOn;
+  document.getElementById('sticky-bar').style.display = show ? 'block' : 'none';
+  document.body.classList.toggle('has-sticky-bar', show);
+}
+
+function renderQuiz(){
+  const item = quizPool[quizOrder[quizIdx]];
+  document.getElementById('quiz-scenario').textContent = item.q;
+  const label = reviewMode ? 'ทบทวนข้อผิด' : ('ชุด ' + (currentSetIdx+1));
+  document.getElementById('quiz-progress').textContent = label + ' • ข้อ ' + (quizIdx+1) + ' / ' + quizPool.length;
+  document.getElementById('quiz-score').textContent = 'คะแนน ' + score + ' / ' + quizPool.length;
+  document.getElementById('pbar').style.width = (((quizIdx)/quizPool.length)*100) + '%';
+  paintBadge(document.getElementById('quiz-tag'), item.cat);
+  paintStage('quiz-stage', item.cat);
+  const optsDiv = document.getElementById('quiz-options');
+  optsDiv.innerHTML = '';
+  const letters = ['ก','ข','ค','ง'];
+  item.opts.forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.innerHTML = '<span class="abc">'+letters[i]+'</span><span>'+esc(opt)+'</span>';
+    btn.addEventListener('click', ()=> selectAnswer(i));
+    optsDiv.appendChild(btn);
+  });
+  document.getElementById('quiz-explain').style.display = 'none';
+  document.getElementById('quiz-explain').className = 'explain';
+  document.getElementById('quiz-next').style.display = 'none';
+  document.getElementById('quiz-finish').style.display = 'none';
+  answered = false;
+  syncStickyBar();
+  quizTimer.start();
+}
+
+function selectAnswer(i){
+  if(answered) return;
+  answered = true;
+  const elapsed = quizTimer.stop();
+  const item = quizPool[quizOrder[quizIdx]];
+  const optsDiv = document.getElementById('quiz-options');
+  const btns = optsDiv.querySelectorAll('button');
+  btns.forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx === item.ans) b.classList.add('correct');
+    else if(idx === i) b.classList.add('wrong');
+  });
+  const isCorrect = (i === item.ans);
+  let ptsMsg = '';
+  if(isCorrect){
+    score++; SoundFX.correct();
+    const pts = elapsed <= QUIZ_FAST_THRESHOLD ? 20 : 1;
+    addScore(pts);
+    ptsMsg = ' <span class="pts-earned">+' + pts + ' คะแนน' + (elapsed <= QUIZ_FAST_THRESHOLD ? ' ตอบเร็ว!' : '') + '</span>';
+  } else {
+    SoundFX.wrong(); if(!reviewMode) wrongIdxs.push(quizOrder[quizIdx]);
+  }
+  document.getElementById('quiz-score').textContent = 'คะแนน ' + score + ' / ' + quizPool.length;
+  document.getElementById('pbar').style.width = (((quizIdx+1)/quizPool.length)*100) + '%';
+  const explainDiv = document.getElementById('quiz-explain');
+  explainDiv.className = 'explain ' + (isCorrect ? 'ok' : 'bad');
+  explainDiv.innerHTML = '<b>' + (isCorrect ? '✓ ถูกต้อง' : '✗ ยังไม่ถูก — เฉลยคือ ' + letters_ans(item)) + ptsMsg + '</b>' + item.explain;
+  explainDiv.style.display = 'block';
+  if(quizIdx < quizPool.length - 1){
+    document.getElementById('quiz-next').style.display = 'block';
+  } else {
+    document.getElementById('quiz-finish').style.display = 'block';
+  }
+}
+function letters_ans(item){
+  return ['ก','ข','ค','ง'][item.ans];
+}
+
+document.getElementById('quiz-next').addEventListener('click', ()=>{ quizIdx++; renderQuiz(); });
+
+document.getElementById('quiz-finish').addEventListener('click', showSummary);
+
+function showSummary(){
+  document.getElementById('quiz-play').style.display = 'none';
+  syncStickyBar();
+  const summary = document.getElementById('quiz-summary');
+  summary.style.display = 'block';
+  const total = quizPool.length;
+  document.getElementById('sum-set-label').textContent = reviewMode ? 'ทบทวนข้อที่ผิด' : ('ระดับ' + (quizLevel==='basic'?'พื้นฐาน':'ข้อสอบจริง') + ' • ชุด ' + (currentSetIdx+1));
+  document.getElementById('sum-score').textContent = score;
+  document.getElementById('sum-of').textContent = 'จาก ' + total + ' ข้อ';
+  const pct = total ? score/total : 0;
+  const starCount = Math.max(1, Math.round(pct*5));
+  document.getElementById('sum-stars').textContent = '★'.repeat(starCount) + '☆'.repeat(5-starCount);
+  let grade = 'ลุยต่อได้เลย';
+  if(pct >= 0.9) grade = 'เยี่ยมมาก แม่นจริง';
+  else if(pct >= 0.7) grade = 'ดีมาก ใกล้เต็มแล้ว';
+  else if(pct >= 0.5) grade = 'พอใช้ ทบทวนอีกนิด';
+  else grade = 'ลองทบทวนการ์ดแล้วมาสู้ใหม่';
+  document.getElementById('sum-grade').textContent = grade;
+
+  if(!reviewMode){
+    saveBest(quizLevel, currentSetIdx, score, total);
+    const best = getBest(quizLevel, currentSetIdx);
+    document.getElementById('sum-best').textContent = best ? ('คะแนนดีที่สุดของชุดนี้: ' + best.score + '/' + best.total) : '';
+  } else {
+    document.getElementById('sum-best').textContent = '';
+  }
+
+  const sets = currentSets();
+  document.getElementById('sum-nextset').style.display = (!reviewMode && currentSetIdx < sets.length - 1) ? 'inline-block' : 'none';
+  document.getElementById('sum-review').style.display = (!reviewMode && wrongIdxs.length > 0) ? 'inline-block' : 'none';
+}
+
+document.getElementById('sum-retry').addEventListener('click', ()=>{
+  if(reviewMode){
+    quizOrder = shuffle(quizPool.map((_,i)=>i));
+  } else {
+    quizOrder = shuffle(quizPool.map((_,i)=>i));
+    wrongIdxs = [];
+  }
+  quizIdx = 0; score = 0;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderQuiz();
+});
+document.getElementById('sum-nextset').addEventListener('click', ()=>{ selectSet(currentSetIdx + 1); });
+document.getElementById('sum-review').addEventListener('click', ()=>{
+  reviewMode = true;
+  const basePool = quizPool;
+  quizPool = wrongIdxs.map(i => basePool[i]);
+  quizOrder = shuffle(quizPool.map((_,i)=>i));
+  quizIdx = 0; score = 0;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderQuiz();
+});
+
+document.getElementById('lvl-basic').addEventListener('click', ()=>{ SoundFX.click(); setLevel('basic'); });
+document.getElementById('lvl-adv').addEventListener('click', ()=>{ SoundFX.click(); setLevel('adv'); });
+
+/* =========================================================
+   แท็บหลัก + รีเซ็ต
+   ========================================================= */
+const tabCard = document.getElementById('tab-card');
+const tabSeq  = document.getElementById('tab-seq');
+const tabQuiz = document.getElementById('tab-quiz');
+const tabIrac = document.getElementById('tab-irac');
+const tabStudy = document.getElementById('tab-study');
+const viewCard = document.getElementById('view-card');
+const viewSeq  = document.getElementById('view-seq');
+const viewQuiz = document.getElementById('view-quiz');
+const viewIrac = document.getElementById('view-irac');
+const viewStudy = document.getElementById('view-study');
+
+function setTab(which){
+  viewCard.classList.toggle('on', which==='card');
+  viewSeq.classList.toggle('on', which==='seq');
+  viewQuiz.classList.toggle('on', which==='quiz');
+  viewIrac.classList.toggle('on', which==='irac');
+  viewStudy.classList.toggle('on', which==='study');
+  tabCard.classList.toggle('on', which==='card');
+  tabSeq.classList.toggle('on', which==='seq');
+  tabQuiz.classList.toggle('on', which==='quiz');
+  tabIrac.classList.toggle('on', which==='irac');
+  tabStudy.classList.toggle('on', which==='study');
+  const headerEl = document.getElementById('page-header');
+  if(which === 'quiz'){
+    headerEl.classList.add('compact');
+  } else if(which !== 'irac' || document.getElementById('irac-play').style.display === 'none'){
+    headerEl.classList.remove('compact');
+  }
+  syncStickyBar();
+}
+tabCard.addEventListener('click', ()=>{ SoundFX.tab(); setTab('card'); });
+tabSeq.addEventListener('click', ()=>{ SoundFX.tab(); setTab('seq'); });
+tabQuiz.addEventListener('click', ()=>{ SoundFX.tab(); setTab('quiz'); });
+tabIrac.addEventListener('click', ()=>{ SoundFX.tab(); setTab('irac'); });
+tabStudy.addEventListener('click', ()=>{ SoundFX.tab(); setTab('study'); });
+
+const btnSound = document.getElementById('btn-sound');
+btnSound.textContent = SoundFX.isOn() ? '🔊' : '🔇';
+btnSound.addEventListener('click', ()=>{
+  const on = SoundFX.toggle();
+  btnSound.textContent = on ? '🔊' : '🔇';
+  if(on) SoundFX.click();
+});
+
+document.getElementById('btn-reset').addEventListener('click', ()=>{
+  if(!confirm('รีเซ็ตหน้าจอทั้งหมด (คะแนนดีที่สุดที่บันทึกไว้จะยังอยู่) ต้องการดำเนินการต่อหรือไม่?')) return;
+  catSelect.value = 'all';
+  deck = shuffle(CARDS); cardIdx = 0; flipped = false;
+  renderMatraChips('all');
+  renderCard();
+  seqSelect.value = SEQ_ORDER[0];
+  renderSeq();
+  setLevel('basic');
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('irac-play').style.display = 'none';
+  document.getElementById('irac-summary').style.display = 'none';
+  renderCasePicker();
+  studySeenSet.clear();
+  saveSeenSet('lc330_studySeen', studySeenSet);
+  setTab('card');
+});
+
+/* =========================================================
+   โหมด 4: ฝึก IRAC
+   ========================================================= */
+let iracCaseIdx = 0;
+let iracIssueIdx = 0;
+let iracStage = 'issue'; // issue -> rule -> app -> conc
+let iracScore = 0;
+let iracTotal = 0;
+
+function renderCasePicker(){
+  const el = document.getElementById('irac-caselist');
+  el.innerHTML = '';
+  IRAC_CASES.forEach((c, i)=>{
+    const card = document.createElement('button');
+    card.className = 'irac-case-card';
+    card.innerHTML =
+      '<div class="icref">'+esc(c.examRef)+' · '+esc(CATEGORIES[c.cat].label)+'</div>'+
+      '<div class="ictitle">'+esc(c.title)+'</div>'+
+      '<div class="icprog">'+c.issues.length+' ประเด็น · '+(c.issues.length*4)+' ขั้นตอน</div>';
+    card.addEventListener('click', ()=>{ SoundFX.click(); startIracCase(i); });
+    el.appendChild(card);
+  });
+}
+
+function startIracCase(idx){
+  iracCaseIdx = idx;
+  iracIssueIdx = 0;
+  iracStage = 'issue';
+  iracScore = 0;
+  iracTotal = IRAC_CASES[idx].issues.length * 4;
+  document.getElementById('irac-picker').style.display = 'none';
+  document.getElementById('irac-play').style.display = 'block';
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('irac-recap-box').style.display = 'none';
+  document.getElementById('irac-stage-box').style.display = 'block';
+  document.getElementById('page-header').classList.add('compact');
+  const c = IRAC_CASES[idx];
+  paintBadge(document.getElementById('irac-case-tag'), c.cat);
+  const factsEl = document.getElementById('irac-facts');
+  factsEl.innerHTML = c.facts;
+  factsEl.classList.remove('expanded');
+  document.getElementById('irac-facts-toggle').textContent = 'ขยายอ่านโจทย์เต็ม ▾';
+  syncStickyBar();
+  renderIracStep();
+}
+
+document.getElementById('irac-facts-toggle').addEventListener('click', ()=>{
+  const factsEl = document.getElementById('irac-facts');
+  const expanded = factsEl.classList.toggle('expanded');
+  document.getElementById('irac-facts-toggle').textContent = expanded ? 'ย่อโจทย์ ▴' : 'ขยายอ่านโจทย์เต็ม ▾';
+});
+
+document.getElementById('irac-back').addEventListener('click', ()=>{
+  SoundFX.click();
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('irac-play').style.display = 'none';
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('page-header').classList.remove('compact');
+  syncStickyBar();
+  renderCasePicker();
+});
+
+const IRAC_STAGE_INFO = {
+  issue:{key:'issue', qKey:'issueQ', optsKey:'issueOpts', ansKey:'issueAns', fbKey:'issueFeedback', label:'เลือกประเด็น', next:'rule'},
+  rule: {key:'rule',  qKey:'ruleQ',  optsKey:'ruleOpts',  ansKey:'ruleAns',  fbKey:'ruleFeedback',  label:'เลือกมาตรา', next:'app'},
+  app:  {key:'app',   qKey:'appQ',   optsKey:'appOpts',   ansKey:'appAns',   fbKey:'appFeedback',   label:'ปรับบท',     next:'conc'},
+  conc: {key:'conc',  qKey:'concQ',  optsKey:'concOpts',  ansKey:'concAns',  fbKey:'concFeedback',  label:'สรุปผล',     next:null}
+};
+
+function renderIracStep(){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  const info = IRAC_STAGE_INFO[iracStage];
+
+  document.getElementById('irac-progress-label').textContent =
+    issue.label + ' · ประเด็น ' + (iracIssueIdx+1) + '/' + c.issues.length + ' · ขั้นตอน: ' + info.label;
+
+  const order = ['issue','rule','app','conc'];
+  const curIdx = order.indexOf(iracStage);
+  document.querySelectorAll('#irac-stepper .irac-step').forEach((el)=>{
+    const step = el.getAttribute('data-step');
+    const stepIdx = order.indexOf(step);
+    el.classList.remove('active','done');
+    if(stepIdx < curIdx) el.classList.add('done');
+    else if(stepIdx === curIdx) el.classList.add('active');
+  });
+
+  document.getElementById('irac-question').textContent = issue[info.qKey];
+  const optsDiv = document.getElementById('irac-options');
+  optsDiv.innerHTML = '';
+  const letters = ['ก','ข','ค','ง'];
+  issue[info.optsKey].forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.innerHTML = '<span class="abc">'+letters[i]+'</span><span>'+esc(opt)+'</span>';
+    btn.addEventListener('click', ()=> selectIracOption(i));
+    optsDiv.appendChild(btn);
+  });
+  document.getElementById('irac-explain').style.display = 'none';
+  document.getElementById('irac-explain').className = 'explain';
+  document.getElementById('irac-next').style.display = 'none';
+  document.getElementById('irac-recap-next').style.display = 'none';
+  iracTimer.start();
+}
+
+function selectIracOption(i){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  const info = IRAC_STAGE_INFO[iracStage];
+  const optsDiv = document.getElementById('irac-options');
+  const btns = optsDiv.querySelectorAll('button');
+  if(btns[0].disabled) return;
+  const elapsed = iracTimer.stop();
+  const ans = issue[info.ansKey];
+  btns.forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx === ans) b.classList.add('correct');
+    else if(idx === i) b.classList.add('wrong');
+  });
+  const isCorrect = (i === ans);
+  let ptsMsg = '';
+  if(isCorrect){
+    iracScore++; SoundFX.correct();
+    const pts = elapsed <= QUIZ_FAST_THRESHOLD ? 20 : 1;
+    addScore(pts);
+    ptsMsg = ' <span class="pts-earned">+' + pts + ' คะแนน' + (elapsed <= QUIZ_FAST_THRESHOLD ? ' ตอบเร็ว!' : '') + '</span>';
+  } else {
+    SoundFX.wrong();
+  }
+  const explainDiv = document.getElementById('irac-explain');
+  explainDiv.className = 'explain ' + (isCorrect ? 'ok' : 'bad');
+  explainDiv.innerHTML = '<b>' + (isCorrect ? '✓ ถูกต้อง' : '✗ ยังไม่ถูก — คำตอบที่ควรเลือกคือ ข้อ ' + ['ก','ข','ค','ง'][ans]) + ptsMsg + '</b>' + issue[info.fbKey];
+  explainDiv.style.display = 'block';
+  document.getElementById('irac-next').style.display = 'block';
+  syncStickyBar();
+}
+
+document.getElementById('irac-next').addEventListener('click', ()=>{
+  SoundFX.click();
+  const info = IRAC_STAGE_INFO[iracStage];
+  if(info.next){
+    iracStage = info.next;
+    renderIracStep();
+  } else {
+    showIssueRecap();
+  }
+});
+
+function showIssueRecap(){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  document.getElementById('irac-stage-box').style.display = 'none';
+  const recapBox = document.getElementById('irac-recap-box');
+  recapBox.style.display = 'block';
+  const isLast = iracIssueIdx >= c.issues.length - 1;
+  document.getElementById('irac-recap-title').textContent = 'ทำครบ ' + issue.label + ' แล้ว';
+  document.getElementById('irac-recap-text').innerHTML = issue.concFeedback;
+  document.getElementById('irac-next').style.display = 'none';
+  document.getElementById('irac-recap-next').textContent = isLast ? 'ดูสรุปผลทั้งข้อ →' : 'ประเด็นถัดไป →';
+  document.getElementById('irac-recap-next').style.display = 'block';
+}
+
+document.getElementById('irac-recap-next').addEventListener('click', ()=>{
+  SoundFX.click();
+  const c = IRAC_CASES[iracCaseIdx];
+  document.getElementById('irac-recap-box').style.display = 'none';
+  document.getElementById('irac-recap-next').style.display = 'none';
+  if(iracIssueIdx >= c.issues.length - 1){
+    showIracCaseSummary();
+  } else {
+    iracIssueIdx++;
+    iracStage = 'issue';
+    document.getElementById('irac-stage-box').style.display = 'block';
+    renderIracStep();
+  }
+});
+
+function showIracCaseSummary(){
+  document.getElementById('irac-play').style.display = 'none';
+  syncStickyBar();
+  const summary = document.getElementById('irac-summary');
+  summary.style.display = 'block';
+  const c = IRAC_CASES[iracCaseIdx];
+  document.getElementById('irac-sum-label').textContent = c.title;
+  document.getElementById('irac-sum-score').textContent = iracScore;
+  document.getElementById('irac-sum-of').textContent = 'จาก ' + iracTotal + ' ขั้นตอน';
+  const pct = iracTotal ? iracScore/iracTotal : 0;
+  const starCount = Math.max(1, Math.round(pct*5));
+  document.getElementById('irac-sum-stars').textContent = '★'.repeat(starCount) + '☆'.repeat(5-starCount);
+  let grade = 'ลุยต่อได้เลย';
+  if(pct >= 0.9) grade = 'วินิจฉัยแม่นมาก เก่งมาก!';
+  else if(pct >= 0.7) grade = 'ดีมาก ใกล้ครบทุกประเด็นแล้ว';
+  else if(pct >= 0.5) grade = 'พอใช้ ลองย้อนทบทวนประเด็นที่พลาด';
+  else grade = 'ลองอ่านโจทย์อีกครั้งแล้วไล่ทีละประเด็นใหม่';
+  document.getElementById('irac-sum-grade').textContent = grade;
+  document.getElementById('irac-sum-nextcase').style.display = (iracCaseIdx < IRAC_CASES.length - 1) ? 'inline-block' : 'none';
+}
+
+document.getElementById('irac-sum-retry').addEventListener('click', ()=>{
+  SoundFX.click();
+  startIracCase(iracCaseIdx);
+});
+document.getElementById('irac-sum-back').addEventListener('click', ()=>{
+  SoundFX.click();
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('page-header').classList.remove('compact');
+  renderCasePicker();
+});
+document.getElementById('irac-sum-nextcase').addEventListener('click', ()=>{
+  SoundFX.click();
+  startIracCase(iracCaseIdx + 1);
+});
+
+renderCasePicker();
+
+/* =========================================================
+   โหมด 5: สรุปเนื้อหา
+   ========================================================= */
+const studySeenSet = loadSeenSet('lc330_studySeen');
+let studyObserver = null;
+
+function renderStudySelect(){
+  const sel = document.getElementById('study-select');
+  sel.innerHTML = '';
+  SUMMARY_TOPICS.forEach(t=>{
+    const opt = document.createElement('option');
+    opt.value = t.id;
+    opt.textContent = (CATEGORIES[t.cat] ? CATEGORIES[t.cat].icon + ' ' : '') + t.label;
+    sel.appendChild(opt);
+  });
+}
+
+function renderStudyTopic(){
+  const sel = document.getElementById('study-select');
+  const topic = SUMMARY_TOPICS.find(t=>t.id === sel.value) || SUMMARY_TOPICS[0];
+  const panel = document.getElementById('study-panel');
+  panel.innerHTML = topic.html;
+  panel.style.borderLeftColor = CATEGORIES[topic.cat] ? CATEGORIES[topic.cat].strong : '#1F6B45';
+  panel.scrollTop = 0;
+  setupStudyObserver(topic.id);
+}
+
+function setupStudyObserver(topicId){
+  if(studyObserver) studyObserver.disconnect();
+  const sentinel = document.getElementById('study-bottom-sentinel');
+  studyObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting && !studySeenSet.has(topicId)){
+        studySeenSet.add(topicId);
+        saveSeenSet('lc330_studySeen', studySeenSet);
+        addScore(10);
+        SoundFX.correct();
+      }
+    });
+  }, { threshold: 0.1 });
+  studyObserver.observe(sentinel);
+}
+
+document.getElementById('study-select').addEventListener('change', ()=>{ SoundFX.click(); renderStudyTopic(); });
+renderStudySelect();
+
+/* ---------- init ---------- */
+renderScoreDisplay();
+renderCard();
+seqSelect.value = SEQ_ORDER[0];
+renderSeq();
+renderSetPicker();
+setLevel('basic');
+renderStudyTopic();
+setTab('card');
+</script>
+</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ประมวลกฎหมาย - ค้นหามาตรา</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;900&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --paper:#FBF9F4;
+  --card:#FFFFFF;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --accent:#2E4A7A;
+  --ok:#1E7A4F;
+  --bad:#B23A3A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:radial-gradient(1200px 500px at 50% -200px,#F2EDDF 0%,transparent 60%),var(--paper);
+  color:var(--ink);min-height:100vh;font-size:16px;line-height:1.75;
+}
+
+h1,h2,h3{font-family:'Noto Serif Thai',serif}
+
+.topbar{
+  display:flex;align-items:center;gap:10px;
+  background:#EFEAE0;border-bottom:1px solid var(--line);
+  padding:10px 18px;font-size:13px;color:var(--ink-soft);
+  position:sticky;top:0;z-index:100;
+}
+.topbar-brand{font-weight:800;color:var(--ink);display:flex;align-items:center;gap:6px}
+
+.wrap{max-width:1200px;margin:0 auto;padding:20px 18px 60px}
+
+.back-button{
+  display:inline-flex;align-items:center;gap:6px;color:var(--accent);
+  font-weight:600;font-size:14px;text-decoration:none;margin-bottom:20px;transition:all .2s;
+}
+.back-button:hover{transform:translateX(-4px);color:var(--ink)}
+
+.search-container{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;margin-bottom:32px;box-shadow:var(--shadow);
+}
+
+.search-header h1{font-size:28px;margin-bottom:8px;color:var(--ink)}
+.search-header p{font-size:14px;color:var(--ink-soft);margin-bottom:20px}
+
+.book-selector{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:10px;margin-bottom:24px;
+}
+.book-btn{
+  padding:12px;background:#F5F3F0;border:2px solid var(--line);
+  border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;
+  transition:all .2s;font-family:inherit;color:var(--ink-soft);
+}
+.book-btn:hover,.book-btn.active{
+  border-color:var(--gold);background:var(--card);color:var(--ink);box-shadow:var(--shadow);
+}
+
+.search-form{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;
+}
+
+.form-group{display:flex;flex-direction:column}
+.form-group label{
+  font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;
+  text-transform:uppercase;letter-spacing:.05em;
+}
+
+input[type="text"],input[type="number"],select{
+  padding:10px 12px;border:1px solid var(--line);border-radius:6px;
+  font-size:14px;font-family:inherit;background:var(--card);color:var(--ink);
+  transition:border-color .2s;
+}
+
+input[type="text"]:focus,input[type="number"]:focus,select:focus{
+  outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(46,74,122,.1);
+}
+
+.search-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+button{
+  padding:12px;border:none;border-radius:6px;font-size:14px;
+  font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;
+}
+
+.btn-primary{background:var(--accent);color:white}
+.btn-primary:hover{background:#1d3a5a;transform:translateY(-1px)}
+
+.btn-secondary{background:#F5F3F0;color:var(--ink);border:1px solid var(--line)}
+.btn-secondary:hover{background:#E8E6E0}
+
+.results-container{display:grid;grid-template-columns:250px 1fr;gap:24px}
+
+.filters-sidebar{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px;height:fit-content;position:sticky;top:80px;
+}
+
+.filters-sidebar h3{font-size:16px;margin-bottom:16px;color:var(--ink)}
+
+.filter-group{margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.filter-group:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+
+.filter-title{
+  font-size:12px;font-weight:700;text-transform:uppercase;
+  color:var(--ink-soft);margin-bottom:10px;letter-spacing:.05em;
+}
+
+.filter-item{display:flex;align-items:center;gap:8px;margin-bottom:8px;cursor:pointer}
+
+.filter-item input[type="checkbox"]{cursor:pointer}
+
+.filter-item label{font-size:13px;color:var(--ink-soft);cursor:pointer;flex:1}
+
+.filter-item label:hover{color:var(--ink)}
+
+.results-main{display:flex;flex-direction:column;gap:16px}
+
+.result-count{
+  font-size:13px;color:var(--ink-soft);margin-bottom:12px;
+  padding-bottom:12px;border-bottom:1px solid var(--line);
+}
+
+.article-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px;cursor:pointer;transition:all .2s;
+}
+
+.article-card:hover{
+  border-color:var(--gold);box-shadow:0 4px 12px rgba(34,40,58,.1);
+  transform:translateY(-2px);
+}
+
+.article-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:10px}
+
+.article-number{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--accent)}
+
+.article-meta{font-size:11px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.05em;display:flex;gap:8px}
+
+.article-text{font-size:14px;color:var(--ink);line-height:1.7;margin:12px 0}
+
+.article-breadcrumb{font-size:12px;color:var(--ink-faint);margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+
+.article-action{
+  margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+}
+
+.article-link{color:var(--accent);font-weight:600;font-size:13px;text-decoration:none}
+
+.article-link:hover{text-decoration:underline}
+
+.empty-state{text-align:center;padding:60px 20px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius)}
+
+.empty-state .icon{font-size:48px;margin-bottom:16px}
+
+.empty-state h3{font-size:18px;margin-bottom:8px;color:var(--ink)}
+
+.empty-state p{color:var(--ink-soft);margin-bottom:16px}
+
+.loading{text-align:center;padding:40px;color:var(--ink-soft)}
+
+.loading::after{content:"...";animation:dots 1.5s infinite}
+
+@keyframes dots{0%,33%{content:"."} 66%{content:".."} 100%{content:"..."}}
+
+@media(max-width:768px){
+  .results-container{grid-template-columns:1fr}
+  .filters-sidebar{position:static}
+  .search-form{grid-template-columns:1fr}
+  .book-selector{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-brand">📚 Cool Uncle</span>
+  <span style="color:var(--ink-faint)">·</span>
+  <span>ประมวลกฎหมาย</span>
+</div>
+
+<div class="wrap">
+  
+  <a href="index.html" class="back-button">← กลับหน้าแรก</a>
+
+  <div class="search-container">
+    <div class="search-header">
+      <h1>📚 ค้นหาประมวลกฎหมาย</h1>
+      <p>ค้นหาด้วยเลขมาตรา คำสำคัญ หรือหัวข้อเรื่อง (2,129 มาตรา)</p>
+    </div>
+
+    <div class="book-selector">
+      <button class="book-btn active" onclick="selectBook('all')">🔍 ทั้งหมด</button>
+      <button class="book-btn" onclick="selectBook('civil')">📖 ประมวลแพ่ง</button>
+      <button class="book-btn" onclick="selectBook('criminal')">📕 ประมวลอาญา</button>
+    </div>
+
+    <div class="search-form">
+      <div class="form-group">
+        <label for="search-text">ค้นหา (คำสำคัญ)</label>
+        <input type="text" id="search-text" placeholder="เช่น สัญญา, ความผิด, หนี้สิน">
+      </div>
+      <div class="form-group">
+        <label for="search-article">เลขมาตรา</label>
+        <input type="number" id="search-article" placeholder="เช่น 276">
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:end">
+      <div class="form-group">
+        <label for="filter-book">ประมวล</label>
+        <select id="filter-book">
+          <option value="">ทั้งหมด</option>
+          <option value="civil">ประมวลแพ่ง</option>
+          <option value="criminal">ประมวลอาญา</option>
+        </select>
+      </div>
+      <button class="btn-primary" onclick="search()">🔍 ค้นหา</button>
+      <button class="btn-secondary" onclick="clearSearch()">ล้าง</button>
+    </div>
+  </div>
+
+  <div class="results-container">
+    
+    <aside class="filters-sidebar">
+      <h3>🎯 ตัวกรอง</h3>
+      
+      <div class="filter-group">
+        <div class="filter-title">ประเภท</div>
+        <div class="filter-item">
+          <input type="checkbox" id="filter-civil" value="civil" onchange="applyFilters()">
+          <label for="filter-civil">ประมวลแพ่ง</label>
+        </div>
+        <div class="filter-item">
+          <input type="checkbox" id="filter-criminal" value="criminal" onchange="applyFilters()">
+          <label for="filter-criminal">ประมวลอาญา</label>
+        </div>
+      </div>
+
+      <div class="filter-group" style="border-bottom:none">
+        <button class="btn-secondary" style="width:100%" onclick="clearSearch()">
+          🔄 รีเซ็ต
+        </button>
+      </div>
+    </aside>
+
+    <main class="results-main">
+      <div class="result-count" id="result-count">ค้นหามาตรา 0 รายการ</div>
+      
+      <div id="results-list">
+        <div class="empty-state">
+          <div class="icon">📖</div>
+          <h3>เริ่มค้นหา</h3>
+          <p>ใส่คำค้นหาหรือเลขมาตราแล้วกด ค้นหา</p>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+</div>
+
+<script>
+// =====================================================================
+// CODEX SEARCH - LIVE VERSION
+// Loads from codex-data.json
+// =====================================================================
+
+let codexData = null;
+let selectedBook = 'all';
+let currentResults = [];
+
+// Load data on page load
+async function loadCodexData() {
+  try {
+    const response = await fetch('codex-data.json');
+    if (!response.ok) throw new Error('Failed to load codex data');
+    codexData = await response.json();
+    console.log('✅ Codex loaded:', {
+      civil: codexData.books.civil.articles.length,
+      criminal: codexData.books.criminal.articles.length,
+    });
+  } catch (error) {
+    console.error('❌ Error loading codex:', error);
+    showError('ไม่สามารถโหลดข้อมูลประมวลกฎหมาย');
+  }
+}
+
+function selectBook(book) {
+  selectedBook = book;
+  document.querySelectorAll('.book-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  clearSearch();
+}
+
+function search() {
+  if (!codexData) {
+    showError('กำลังโหลดข้อมูล...');
+    return;
+  }
+
+  const searchText = document.getElementById('search-text').value.toLowerCase();
+  const searchArticle = document.getElementById('search-article').value;
+
+  let results = [];
+
+  // Get books to search
+  const books = selectedBook === 'all' 
+    ? ['civil', 'criminal'] 
+    : [selectedBook];
+
+  books.forEach(bookType => {
+    const articles = codexData.books[bookType].articles;
+    
+    Object.values(articles).forEach(article => {
+      const textMatch = !searchText || 
+        article.text.toLowerCase().includes(searchText) ||
+        (article.keywords && article.keywords.some(k => k.includes(searchText)));
+      
+      const numberMatch = !searchArticle || article.number === searchArticle;
+      
+      if (textMatch && numberMatch) {
+        results.push({
+          ...article,
+          bookType: bookType,
+        });
+      }
+    });
+  });
+
+  // Sort by number (numeric)
+  results.sort((a, b) => parseInt(a.number) - parseInt(b.number));
+
+  currentResults = results;
+  displayResults(results);
+}
+
+function displayResults(results) {
+  const resultsList = document.getElementById('results-list');
+  const resultCount = document.getElementById('result-count');
+
+  if (results.length === 0) {
+    resultsList.innerHTML = `
+      <div class="empty-state">
+        <div class="icon">🔍</div>
+        <h3>ไม่พบผลลัพธ์</h3>
+        <p>ลองเปลี่ยนคำค้นหาหรือตัวกรอง</p>
+      </div>
+    `;
+    resultCount.textContent = `ไม่พบผลลัพธ์`;
+    return;
+  }
+
+  resultCount.textContent = `พบ ${results.length} มาตรา`;
+
+  resultsList.innerHTML = results.map(article => `
+    <article class="article-card" onclick="viewArticle('${article.bookType}_${article.number}')">
+      <div class="article-header">
+        <div class="article-number">มาตรา ${article.number}</div>
+      </div>
+      
+      <div class="article-text">
+        ${article.text.substring(0, 200)}...
+      </div>
+
+      <div class="article-breadcrumb">
+        📍 ${article.bookType === 'civil' ? 'ประมวลแพ่ง' : 'ประมวลอาญา'} 
+        ${article.meta ? ' • ' + Object.values(article.meta).filter(v=>v).join(' › ') : ''}
+      </div>
+
+      <div class="article-action">
+        <a href="#" class="article-link" onclick="event.preventDefault(); viewArticle('${article.bookType}_${article.number}');">
+          อ่านเต็ม →
+        </a>
+      </div>
+    </article>
+  `).join('');
+}
+
+function applyFilters() {
+  const civil = document.getElementById('filter-civil').checked;
+  const criminal = document.getElementById('filter-criminal').checked;
+  
+  if (!civil && !criminal) {
+    selectedBook = 'all';
+  } else if (civil && !criminal) {
+    selectedBook = 'civil';
+  } else if (criminal && !civil) {
+    selectedBook = 'criminal';
+  } else {
+    selectedBook = 'all';
+  }
+  
+  search();
+}
+
+function clearSearch() {
+  document.getElementById('search-text').value = '';
+  document.getElementById('search-article').value = '';
+  document.getElementById('filter-book').value = '';
+  document.getElementById('filter-civil').checked = false;
+  document.getElementById('filter-criminal').checked = false;
+  
+  document.getElementById('results-list').innerHTML = `
+    <div class="empty-state">
+      <div class="icon">📖</div>
+      <h3>เริ่มค้นหา</h3>
+      <p>ใส่คำค้นหาหรือเลขมาตราแล้วกด ค้นหา</p>
+    </div>
+  `;
+  document.getElementById('result-count').textContent = 'ค้นหามาตรา 0 รายการ';
+}
+
+function viewArticle(id) {
+  // TODO: Link to article viewer
+  alert('🚧 Article viewer coming soon for: ' + id);
+}
+
+function showError(msg) {
+  const resultsList = document.getElementById('results-list');
+  resultsList.innerHTML = `
+    <div class="empty-state">
+      <div class="icon">⚠️</div>
+      <h3>ข้อผิดพลาด</h3>
+      <p>${msg}</p>
+    </div>
+  `;
+}
+
+// Load data on page load
+document.addEventListener('DOMContentLoaded', loadCodexData);
+</script>
+</body>
+</html>

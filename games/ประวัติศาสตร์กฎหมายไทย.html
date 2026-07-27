@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>น.462 ประวัติศาสตร์กฎหมายไทย — เกมทบทวน</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&family=Noto+Serif+Thai:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF9F4;
+  --card:#FFFFFF;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --gold-soft:#F3E8CF;
+  --ok:#1E7A4F;
+  --ok-bg:#E6F4EC;
+  --bad:#B23A3A;
+  --bad-bg:#FBEAEA;
+  --accent:#2E4A7A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%), var(--paper);
+  color:var(--ink);min-height:100vh;padding:20px 14px 60px;font-size:16px;line-height:1.75;
+}
+.wrap{max-width:900px;margin:0 auto}
+
+.home-bar{
+  display:flex;align-items:center;gap:10px;
+  background:#EFEAE0;border-bottom:1px solid var(--line);
+  padding:10px 16px;font-size:13px;color:var(--ink-soft);
+  margin:-20px -14px 20px;
+}
+.home-bar-current{font-weight:700;color:var(--ink)}
+.home-bar-score{
+  margin-left:auto;font-weight:800;color:#8F6511;background:var(--gold-soft);
+  padding:4px 12px;border-radius:999px;font-size:13px;white-space:nowrap;transition:transform .15s;
+}
+.home-bar-score.score-pop{animation:scorePop .4s ease}
+@keyframes scorePop{0%{transform:scale(1)}35%{transform:scale(1.25)}100%{transform:scale(1)}}
+
+header{text-align:center;margin-bottom:22px}
+.crest{
+  display:inline-flex;align-items:center;gap:10px;font-family:'Noto Serif Thai',serif;
+  font-size:13px;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-bottom:6px;
+}
+.crest::before,.crest::after{content:"";width:44px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+.crest::after{background:linear-gradient(90deg,var(--gold),transparent);}
+h1{font-family:'Noto Serif Thai',serif;font-size:clamp(24px,5vw,36px);font-weight:700;line-height:1.3}
+.subtitle{color:var(--ink-soft);font-size:15px;margin-top:2px}
+
+.tabbar{
+  display:flex;gap:6px;background:#F1EDE2;border:1px solid var(--line);
+  border-radius:999px;padding:5px;margin:20px auto 26px;max-width:560px;
+}
+.tabbar button{
+  flex:1;border:none;background:transparent;border-radius:999px;
+  padding:11px 6px;font-family:inherit;font-size:14px;font-weight:700;
+  color:var(--ink-soft);cursor:pointer;transition:all .2s;
+}
+.tabbar button.on{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+
+.view{display:none}
+.view.on{display:block}
+
+/* ---- card mode ---- */
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.row select{flex:1;min-width:170px;font-family:inherit;font-size:15px;color:var(--ink);
+  background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.muted{color:var(--ink-soft);font-size:14px;white-space:nowrap}
+
+.stage{
+  position:relative;border-radius:var(--radius);overflow:hidden;margin-bottom:14px;min-height:74px;
+  display:flex;align-items:center;justify-content:center;gap:10px;padding:14px;border:1px solid rgba(0,0,0,.06);
+}
+.stage .stage-icon{font-size:30px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.15))}
+.stage .stage-label{font-family:'Noto Serif Thai',serif;font-weight:700;font-size:15px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.stage .stage-src{font-size:11.5px;color:rgba(255,255,255,.85);margin-top:2px;display:block}
+
+.flip-stage{perspective:1200px}
+.flashcard{
+  position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);min-height:260px;padding:34px 26px 30px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;
+  overflow:hidden;transition:transform .16s ease;
+}
+.flashcard.flipping{transform:rotateY(90deg)}
+.ribbon{position:absolute;top:0;left:26px;width:34px;height:56px;clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%)}
+.chapter-tag{font-size:12.5px;font-weight:700;letter-spacing:.02em;padding:4px 14px;border-radius:999px}
+.src-tag{font-size:11.5px;color:var(--ink-faint);margin-top:2px;font-weight:600}
+.sec-chip{font-family:'Noto Serif Thai',serif;font-size:12.5px;font-weight:700;color:var(--ink-faint);letter-spacing:.03em;text-transform:uppercase}
+.card-question{font-family:'Noto Serif Thai',serif;font-size:clamp(19px,4.4vw,26px);font-weight:700;line-height:1.55;margin:10px 0 4px;max-width:520px}
+.stars{color:var(--gold);font-size:16px;letter-spacing:.15em;margin-top:6px}
+.hint{font-size:13px;color:var(--ink-faint);margin-top:14px}
+.face-back .card-title{font-family:'Noto Serif Thai',serif;font-size:18px;font-weight:700;line-height:1.6}
+.face-back .card-result{font-size:16px;margin-top:14px;line-height:1.95;max-width:560px}
+.face-back .card-note{font-size:14px;color:var(--ink-soft);margin-top:14px;line-height:1.85;border-top:1px dashed var(--line);padding-top:12px;max-width:560px}
+.flashcard{gap:6px}
+.face-front, .face-back{display:flex;flex-direction:column;align-items:center;gap:2px}
+.nav3{display:flex;gap:10px;margin-top:14px}
+.nav3 button{flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;font-size:14.5px;font-weight:600;color:var(--ink);cursor:pointer;transition:border-color .15s, transform .1s}
+.nav3 button:hover{border-color:var(--ink-faint)}
+.nav3 button:active{transform:scale(.98)}
+
+/* ---- study mode ---- */
+.study-layout{display:flex;gap:20px;align-items:flex-start}
+.study-nav{flex:0 0 210px;display:flex;flex-direction:column;gap:6px;position:sticky;top:14px}
+.study-nav button{
+  text-align:left;background:var(--card);border:1px solid var(--line);border-left-width:5px;
+  border-radius:10px;padding:11px 12px;font-family:inherit;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+}
+.study-nav button.on{color:var(--ink);box-shadow:var(--shadow);background:#fff}
+.study-panel{flex:1;min-width:0}
+.study-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.study-head .ic{font-size:26px}
+.study-head h2{font-family:'Noto Serif Thai',serif;font-size:21px}
+.study-head .src{font-size:12.5px;color:var(--ink-faint);font-weight:600;margin-top:2px}
+.study-body p{margin-bottom:12px;line-height:1.9;font-size:15.5px}
+.study-body ul{margin:0 0 12px 22px}
+.study-body li{margin-bottom:6px;line-height:1.8}
+.study-body b{color:var(--ink)}
+.examBox{
+  background:#FBF6E8;border:1.5px dashed var(--gold);border-radius:12px;
+  padding:14px 16px;margin:16px 0;font-size:14.5px;line-height:1.8;
+}
+.examBox .exlabel{font-weight:800;color:#8F6511;font-size:12.5px;letter-spacing:.04em;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.examBox .exq{color:var(--ink)}
+.examBox .exsrc{color:var(--ink-faint);font-size:12px;margin-top:6px}
+.study-progress{font-size:12.5px;color:var(--ink-faint);margin-top:18px;padding-top:12px;border-top:1px solid var(--line)}
+@media(max-width:720px){
+  .study-layout{flex-direction:column}
+  .study-nav{flex-direction:row;flex-wrap:wrap;position:static;width:100%}
+  .study-nav button{flex:1 1 45%}
+}
+
+/* ---- video mode ---- */
+.video-group{margin-bottom:28px}
+.video-group h3{font-family:'Noto Serif Thai',serif;font-size:17px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.video-grid{display:grid;grid-template-columns:1fr;gap:16px}
+.video-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.video-frame-wrap{position:relative;width:100%;padding-top:56.25%;background:#000}
+.video-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-meta{padding:12px 16px}
+.video-meta .vtitle{font-weight:700;font-size:15px}
+.video-meta .vdesc{font-size:13px;color:var(--ink-soft);margin-top:3px}
+.video-fallback{display:inline-block;margin-top:10px;font-size:12.5px;font-weight:700;color:var(--accent);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+.video-fallback:hover{border-color:var(--accent);background:var(--gold-soft)}
+
+footer{text-align:center;color:var(--ink-faint);font-size:12.5px;margin-top:40px}
+</style>
+</head>
+<body>
+
+<div class="home-bar">
+  <span class="home-bar-current">น.462 ประวัติศาสตร์กฎหมายไทย</span>
+  <span class="home-bar-score">🏆 <span id="score-value">0</span> คะแนน</span>
+</div>
+
+<div class="wrap">
+
+<header>
+  <div class="crest">น.462 · ประวัติศาสตร์กฎหมายไทย</div>
+  <h1>ห้องซ้อมสอบ ประวัติศาสตร์กฎหมายไทย</h1>
+  <div class="subtitle">จากกฎหมายโรมันถึงกฎหมายมหาชนไทย — พร้อมทศพิธราชธรรมและตัวอย่างข้อสอบจริง</div>
+</header>
+
+<nav class="tabbar" aria-label="โหมดเกม">
+  <button id="tab-card" class="on">การ์ดจำ</button>
+  <button id="tab-study">โหมดอ่าน</button>
+  <button id="tab-video">วิดีโอ</button>
+</nav>
+
+<!-- ============ โหมด 1: การ์ดจำ ============ -->
+<section id="view-card" class="view on">
+  <div class="row">
+    <select id="cat-select" aria-label="เลือกหมวด"></select>
+    <span class="muted" id="card-progress"></span>
+  </div>
+  <div class="stage" id="card-stage" aria-hidden="true"></div>
+  <div class="flip-stage">
+    <div class="flashcard" id="flip-card" role="button" tabindex="0" aria-label="แตะเพื่อพลิกการ์ด">
+      <div class="ribbon" id="card-ribbon"></div>
+      <div class="chapter-tag" id="cat-badge"></div>
+      <div class="face-front" id="face-front">
+        <div class="sec-chip" id="card-section"></div>
+        <div class="card-question" id="card-question"></div>
+        <div class="src-tag" id="card-src-front"></div>
+        <div class="stars" id="card-stars"></div>
+        <div class="hint">แตะการ์ดเพื่อดูคำตอบ · ปุ่มลูกศรเลื่อนการ์ด</div>
+      </div>
+      <div class="face-back" id="face-back" style="display:none">
+        <div class="card-title" id="card-title"></div>
+        <div class="src-tag" id="card-src-back"></div>
+        <div class="card-result" id="card-result"></div>
+        <div class="card-note" id="card-note"></div>
+      </div>
+    </div>
+  </div>
+  <div class="nav3">
+    <button id="btn-prev">← ก่อนหน้า</button>
+    <button id="btn-shuffle">⇄ สุ่มใหม่</button>
+    <button id="btn-next">ถัดไป →</button>
+  </div>
+</section>
+
+<!-- ============ โหมด 2: อ่าน (แยกยุค + กรอบข้อสอบ) ============ -->
+<section id="view-study" class="view">
+  <div class="study-layout">
+    <div class="study-nav" id="study-nav"></div>
+    <div class="study-panel">
+      <div class="study-head">
+        <span class="ic" id="study-ic"></span>
+        <div>
+          <h2 id="study-title"></h2>
+          <div class="src" id="study-src"></div>
+        </div>
+      </div>
+      <div class="study-body" id="study-body"></div>
+      <div class="study-progress" id="study-progress"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ โหมด 3: วิดีโอ ============ -->
+<section id="view-video" class="view">
+  <p class="muted" style="margin-bottom:18px">ดู/ฟังคลิปบรรยายประกอบแต่ละยุคได้ในหน้านี้เลย</p>
+  <div id="video-container"></div>
+</section>
+
+<footer>สร้างด้วย Claude · เนื้อหาจากเอกสารประกอบวิชา น.462/LAW1106 และข้อสอบเก่า · ใช้เพื่อการทบทวนเท่านั้น</footer>
+</div>
+
+<script>
+/* ================= DATA ================= */
+const CATEGORIES = {
+  roman:      {label:"กฎหมายโรมัน",                    soft:"#E6EEF7", strong:"#2E5C8A", icon:"🏛️", source:"ประวัติศาสตร์กฎหมายโรมัน"},
+  medieval:   {label:"ยุคกลาง / Common Law–Equity",     soft:"#EFE7F5", strong:"#6B4C9A", icon:"⚖️", source:"กฎหมายอังกฤษ"},
+  sukhothai:  {label:"กฎหมายไทยยุคสุโขทัย",             soft:"#F3EAD9", strong:"#A9762F", icon:"📜", source:"ศิลาจารึกหลักที่ 1 / 38, มังรายศาสตร์"},
+  ayutthaya:  {label:"กฎหมายไทยยุคอยุธยา",              soft:"#F3E1E1", strong:"#8C3B3B", icon:"🏯", source:"พระธรรมศาสตร์ / พระราชศาสตร์"},
+  dynasty3:   {label:"ตราสามดวง & ทศพิธราชธรรม",        soft:"#F3E8CF", strong:"#8F6511", icon:"👑", source:"กฎหมายตราสามดวง"},
+  reform5:    {label:"ปฏิรูปกฎหมาย รัชกาลที่ 5",         soft:"#E3F0E9", strong:"#2F7A5E", icon:"⚡", source:"สนธิสัญญาเบาว์ริง / กระทรวงยุติธรรม"},
+  codify:     {label:"การจัดทำประมวลกฎหมายสมัยใหม่",     soft:"#E4EBF3", strong:"#345E8C", icon:"📘", source:"ป.พ.พ. / วิธีการแบบญี่ปุ่น"},
+  publiclaw:  {label:"กฎหมายมหาชนไทย",                  soft:"#F1E4EC", strong:"#7A3E5E", icon:"🏳️", source:"รัฐธรรมนูญ / กฎหมายมหาชน"}
+};
+
+const CARDS = [
+  {cat:"roman", section:"4 ยุค", title:"การแบ่งยุคประวัติศาสตร์โรมัน", q:"กฎหมายโรมัน 4 ยุค มีอะไรบ้าง?", result:"แบ่งเป็นยุคกษัตริย์ (753–509 ปีก่อน ค.ศ.) ยุคสาธารณรัฐ (509–27 ปีก่อน ค.ศ.) ยุคจักรวรรดิ และยุคเสื่อม", note:"คนละแบบกับการแบ่งยุค “กฎหมายโรมัน” ที่เน้นพัฒนาการทางนิติศาสตร์", stars:3, source:"ประวัติศาสตร์โรมัน"},
+  {cat:"roman", section:"12 โต๊ะ", title:"กฎหมาย 12 โต๊ะ (Twelve Tables)", q:"กฎหมาย 12 โต๊ะ เกิดขึ้นได้อย่างไร?", result:"เกิดจากการเรียกร้องของชนชั้นสามัญให้บันทึกจารีตประเพณีที่ใช้กันในหมู่ผู้ดีอย่างเปิดเผย นับเป็นกฎหมายลายลักษณ์อักษรฉบับแรกของโรมันและจุดเริ่มต้นของวิชานิติศาสตร์", note:null, stars:4, source:"กฎหมายโรมัน"},
+  {cat:"roman", section:"Jus", title:"Jus Civile / Jus Gentium / Jus Honorarium", q:"Jus Civile, Jus Gentium, Jus Honorarium ต่างกันอย่างไร?", result:"Jus Civile ใช้เฉพาะพลเมืองโรมันจากจารีตประเพณี · Jus Gentium ใช้กับคนต่างด้าว · Jus Honorarium เกิดจากคำสั่งของ Praetor รวมกันแล้วทำให้กฎหมายโรมันครอบคลุมสมบูรณ์", note:null, stars:4, source:"กฎหมายโรมัน"},
+  {cat:"roman", section:"Praetor", title:"บทบาทของ Praetor", q:"Praetor มีบทบาทอย่างไรในกฎหมายโรมัน?", result:"ผู้พิพากษาที่มีอำนาจออกหลักเกณฑ์ใหม่เพื่ออุดช่องว่างของ Jus Civile ทำให้กฎหมายโรมันยืดหยุ่นและพัฒนาไปตามยุคสมัย", note:null, stars:3, source:"กฎหมายโรมัน"},
+  {cat:"roman", section:"Corpus Juris Civilis", title:"ประมวลกฎหมายจัสติเนียน", q:"Corpus Juris Civilis ประกอบด้วยอะไรบ้าง?", result:"จักรพรรดิจัสติเนียนจัดทำในศตวรรษที่ 6 แบ่ง 4 ภาค: Digest(Pandect) รวมความเห็นนักนิติศาสตร์ · Institute หลักกฎหมายพื้นฐาน · Codex รวบรวมพระราชโองการ · Novels กฎหมายใหม่หลัง Codex", note:"กลายเป็นรากฐานของกฎหมายยุโรปจนถึงศตวรรษที่ 19", stars:5, source:"กฎหมายโรมัน"},
+  {cat:"roman", section:"Pax Romana", title:"Pax Romana", q:"Pax Romana คืออะไร เกิดขึ้นได้อย่างไร?", result:"ความสงบสุขในจักรวรรดิโรมันที่ครอบคลุมยุโรป เอเชียไมเนอร์ และแอฟริกาเหนือ เกิดจากระบบกฎหมาย-การปกครองที่มีประสิทธิภาพ ยึดหลักเหตุผลและความเป็นธรรมแบบสโตอิค", note:null, stars:3, source:"กฎหมายโรมัน"},
+  {cat:"roman", section:"เสื่อมสลาย", title:"การเสื่อมสลายของจักรวรรดิโรมัน", q:"เหตุใดจักรวรรดิโรมันจึงเสื่อมสลาย?", result:"ความมั่งคั่งนำไปสู่การเสพสุขและฉ้อราษฎร์บังหลวง คุณธรรมแบบสโตอิคเสื่อมถอย จักรวรรดิพ่ายแพ้การรุกรานของอนารยชนในศตวรรษที่ 5 ยุโรปเข้าสู่ยุคมืด", note:null, stars:2, source:"กฎหมายโรมัน"},
+
+  {cat:"medieval", section:"Common Law", title:"ที่มาของ Common Law", q:"Common Law มีที่มาจากอะไร?", result:"เกิดจากคำพิพากษาของศาลหลวง (King's Court) ของอังกฤษ ใช้จารีตประเพณีร่วมของราชอาณาจักรเป็นหลัก", note:null, stars:3, source:"กฎหมายอังกฤษ"},
+  {cat:"medieval", section:"Equity", title:"ที่มาของ Equity", q:"Equity เกิดขึ้นมาได้อย่างไร?", result:"เกิดจากคำพิพากษาของศาลชานเซอรี่ (Court of Chancery) เมื่อคู่ความไม่ได้รับความเป็นธรรมจาก Common Law ที่เคร่งครัด จึงถวายฎีกาต่อกษัตริย์ให้วินิจฉัยตามความเป็นธรรม", note:null, stars:4, source:"กฎหมายอังกฤษ"},
+  {cat:"medieval", section:"ข้อต่าง", title:"ข้อแตกต่าง Common Law กับ Equity", q:"Common Law กับ Equity ต่างกันอย่างไร?", result:"Common Law: บังคับเอากับทรัพย์สิน เยียวยาเป็นเงินเท่านั้น ใช้ลูกขุนวินิจฉัยข้อเท็จจริง · Equity: บังคับเอากับตัวบุคคล (ไม่ทำตามถือหมิ่นศาล) ผู้พิพากษา/ชานเซลเลอร์วินิจฉัยทั้งข้อเท็จจริง-ข้อกฎหมาย เยียวยาได้ตรงตามสัญญา (specific performance)", note:null, stars:4, source:"กฎหมายอังกฤษ"},
+  {cat:"medieval", section:"Magna Carta", title:"Magna Carta (มหาบัตร)", q:"Magna Carta คืออะไร สำคัญอย่างไร?", result:"กฎบัตร ค.ศ.1215 ที่ขุนนางบังคับให้พระเจ้าจอห์นทรงตรา จำกัดอำนาจกษัตริย์เรื่องภาษี รับรองสิทธิได้รับความยุติธรรม ถือเป็นกฎหมายรัฐธรรมนูญฉบับแรกของโลก มี 63 ข้อ", note:"นักวิชาการเทียบเคียงกับศิลาจารึกพ่อขุนรามคำแหง", stars:4, source:"กฎหมายอังกฤษ"},
+
+  {cat:"sukhothai", section:"หลักที่ 1", title:"ศิลาจารึกพ่อขุนรามคำแหง (หลักที่ 1)", q:"ศิลาจารึกหลักที่ 1 คืออะไร?", result:"หลักฐานทางกฎหมายภาษาไทยฉบับแรก เนื้อหาครอบคลุมกฎหมายซื้อขาย ที่ดิน มรดก การร้องทุกข์ และลักษณะมนุษยธรรมต่อเชลยศึก", note:null, stars:5, source:"ศิลาจารึกหลักที่ 1"},
+  {cat:"sukhothai", section:"หลักที่ 38", title:"ศิลาจารึกหลักที่ 38 (กฎหมายลักษณะโจร)", q:"ศิลาจารึกหลักที่ 38 ว่าด้วยเรื่องอะไร?", result:"กำหนดว่าผู้เอาข้าทาสของผู้อื่นไปเกิน 3 วันต้องถูกปรับไหมตามพระราชศาสตร์-พระธรรมศาสตร์ แสดงว่าไทยใช้พระธรรมศาสตร์เป็นหลักบัญญัติกฎหมายมาตั้งแต่สมัยสุโขทัย", note:null, stars:3, source:"ศิลาจารึกหลักที่ 38"},
+  {cat:"sukhothai", section:"มังรายศาสตร์", title:"มังรายศาสตร์", q:"มังรายศาสตร์คืออะไร?", result:"กฎหมายของพระเจ้ามังรายแห่งล้านนา ยุคเดียวกับกฎหมายพ่อขุนรามคำแหง อ้างมูลคดีวิวาทจากพระธรรมศาสตร์ กล่าวถึงการเข้าหุ้นค้าขาย กู้ยืม จ้างแรงงาน จ้างทำของ", note:null, stars:3, source:"มังรายศาสตร์"},
+  {cat:"sukhothai", section:"ที่ดิน", title:"กฎหมายที่ดินสมัยสุโขทัย", q:"กฎหมายที่ดินสมัยสุโขทัยใช้หลักอะไร?", result:"ใช้หลักผู้ใดหักล้างถางพงและเพาะปลูกในที่ใด ย่อมได้สิทธิครอบครองที่นั้น เป็นสิทธิใช้ยันกันเองระหว่างเอกชน แต่อ้างสิทธิต่อพระเจ้าแผ่นดินไม่ได้ เพราะที่ดินทั้งปวงเป็นของพระเจ้าแผ่นดิน", note:null, stars:3, source:"ศิลาจารึกหลักที่ 1"},
+  {cat:"sukhothai", section:"สั่นกระดิ่ง", title:"กฎหมายว่าด้วยการร้องทุกข์", q:"ราษฎรสุโขทัยร้องทุกข์ต่อกษัตริย์ได้อย่างไร?", result:"พ่อขุนรามคำแหงทรงแขวนกระดิ่งไว้หน้าประตูวัง ไพร่ฟ้าผู้มีทุกข์ร้อนสามารถสั่นกระดิ่งร้องทุกข์ถึงพระองค์โดยตรง เป็นจุดเริ่มต้นของการถวายฎีกา", note:null, stars:3, source:"ศิลาจารึกหลักที่ 1"},
+  {cat:"sukhothai", section:"เทียบ Magna Carta", title:"ศิลาจารึกฯ ในฐานะกฎหมายรัฐธรรมนูญ", q:"เหตุใดศิลาจารึกหลักที่ 1 จึงถูกเทียบกับ Magna Carta?", result:"นักวิชาการเทียบศิลาจารึกพ่อขุนรามคำแหงกับ Magna Carta เพราะทั้งคู่จำกัดอำนาจกษัตริย์เรื่องภาษี (จังกอบ) และรับรองสิทธิเสรีภาพราษฎร แม้ที่มาอำนาจจะต่างกัน", note:null, stars:3, source:"ศิลาจารึกหลักที่ 1"},
+
+  {cat:"ayutthaya", section:"พระธรรมศาสตร์", title:"พระธรรมศาสตร์", q:"พระธรรมศาสตร์คืออะไร?", result:"กฎหมายแม่บทที่สำคัญที่สุดของกฎหมายเก่าไทย เชื่อว่าพระมโนสารฤๅษีคัดลอกมาจากกำแพงจักรวาล เป็นที่มาของมูลคดีวิวาท 29 ประการ และหลักเกณฑ์ เช่น ทศพิธราชธรรม", note:null, stars:4, source:"พระธรรมศาสตร์"},
+  {cat:"ayutthaya", section:"พระราชศาสตร์", title:"พระราชศาสตร์", q:"พระราชศาสตร์คืออะไร?", result:"กฎหมายที่พระมหากษัตริย์ทรงตราขึ้นเองตามพระราชอำนาจ แยกเป็นสาขาคดีต่าง ๆ อ้างอิงคาถาบาลีตามมูลคดีในพระธรรมศาสตร์เสมอ", note:null, stars:3, source:"พระราชศาสตร์"},
+  {cat:"ayutthaya", section:"5 ประเภทคดี", title:"ประเภทคดีในกฎหมายอยุธยา", q:"กฎหมายอยุธยาแบ่งคดีเป็นกี่ประเภท อะไรบ้าง?", result:"แบ่งเป็น 5 ประเภท คือ ความแพ่ง ความอาชญา ความนครบาล ความอุทธรณ์ และความมรดก โดยไม่มีการแยกคดีแพ่งออกจากคดีอาญาอย่างชัดเจน", note:null, stars:3, source:"กฎหมายอยุธยา"},
+  {cat:"ayutthaya", section:"25 ศาล", title:"ระบบศาลสมัยอยุธยา", q:"ระบบศาลสมัยอยุธยาเป็นอย่างไร?", result:"มีศาลสังกัดกรมต่าง ๆ รวม 25 ศาล เช่น ศาลกรมมหาดไทย ศาลกรมกลาโหม ศาลกรมพระนครบาล ศาลกรมวัง ศาลกรมท่า นอกจากนี้ยังมีศาลรับสั่งและศาลหัวเมือง", note:null, stars:3, source:"กฎหมายอยุธยา"},
+  {cat:"ayutthaya", section:"ตระลาการ-ลูกขุน", title:"ตระลาการและลูกขุน", q:"ตระลาการกับลูกขุนทำหน้าที่ต่างกันอย่างไร?", result:"ตระลาการทำหน้าที่สอบสวนรวบรวมพยานหลักฐาน (ชี้ข้อเท็จจริง) แล้วส่งสำนวนให้ลูกขุน (ผู้พิพากษา) วินิจฉัยชี้ขาดตามข้อกฎหมายว่าฝ่ายใดแพ้ชนะ", note:null, stars:3, source:"กฎหมายอยุธยา"},
+  {cat:"ayutthaya", section:"ศักดินา", title:"ระบบศักดินา", q:"ระบบศักดินาคืออะไร?", result:"เครื่องกำหนดสิทธิหน้าที่และฐานะของคนในสังคมอยุธยา แบ่งชนชั้นปกครอง (กษัตริย์ เจ้านาย ขุนนาง) กับชนชั้นถูกปกครอง (ไพร่ ทาส) ขุนนางศักดินา 400 ขึ้นไปถือเป็นมูลนาย", note:null, stars:3, source:"กฎหมายอยุธยา"},
+  {cat:"ayutthaya", section:"ทาส 7 ประเภท", title:"ทาส 7 ประเภทตามพระธรรมศาสตร์", q:"ทาสตามพระธรรมศาสตร์มีกี่ประเภท อะไรบ้าง?", result:"ข้าสินไถ่ · ลูกทาสเกิดในเรือนเบี้ย · ทาสได้มา · ทาสท่านให้ · ทาสอันได้ด้วยช่วยกังวลแห่งคนต้องทัณฑ์โทษ · ทาสที่เลี้ยงมาในยามทุพภิกขภัย · ทาสที่ได้จากการเป็นเชลย", note:null, stars:3, source:"พระธรรมศาสตร์"},
+
+  {cat:"dynasty3", section:"ตราสามดวง", title:"กฎหมายตราสามดวง", q:"กฎหมายตราสามดวงคืออะไร?", result:"ประมวลกฎหมายฉบับแรกของไทย ชำระสะสางในรัชกาลที่ 1 จากกฎหมายอยุธยาที่หลงเหลือ มีเนื้อหากว่า 1,600 บท จัดทำเสร็จภายในเวลาไม่ถึง 1 ปี", note:"สำนวนภาษายังเป็นสำนวนรัตนโกสินทร์ตอนต้น เชื่อว่ามีทั้งส่วนตราขึ้นใหม่และปรับปรุงจากกฎหมายอยุธยาเดิม", stars:5, source:"กฎหมายตราสามดวง"},
+  {cat:"dynasty3", section:"หลักอินทภาษ", title:"หลักอินทภาษ", q:"หลักอินทภาษสอนเรื่องอะไร?", result:"คำสอนของพระอินทร์ต่อผู้ทำหน้าที่ตุลาการ ว่าต้องปราศจากอคติ 4 คือ ฉันทาคติ(ลำเอียงเพราะรัก) โทสาคติ(ลำเอียงเพราะโกรธ) ภยาคติ(ลำเอียงเพราะกลัว) โมหาคติ(ลำเอียงเพราะหลง)", note:"เปรียบผู้พิพากษาที่ลำเอียงว่าบาปหนักยิ่งกว่าฆ่าคนบริสุทธิ์", stars:5, source:"กฎหมายตราสามดวง"},
+  {cat:"dynasty3", section:"เหตุแห่งตระลาการ 24", title:"เหตุแห่งตระลาการ 24 ประการ", q:"เหตุแห่งตระลาการ 24 ประการว่าด้วยเรื่องอะไร?", result:"บทบัญญัติในพระธรรมศาสตร์ว่าด้วยคุณสมบัติ/หน้าที่ของตระลาการที่ดี เป็นหัวข้อที่ออกสอบบ่อย เช่น “ตระลาการตั้งตนให้เป็นอิสรภาพ” หมายถึงต้องไม่ลำเอียงเข้าข้างฝ่ายใด", note:null, stars:5, source:"พระธรรมศาสตร์"},
+  {cat:"dynasty3", section:"ทศพิธราชธรรม", title:"ทศพิธราชธรรม (ราชธรรม 10 ประการ)", q:"ทศพิธราชธรรม 10 ประการมีอะไรบ้าง?", result:"1.ทาน 2.ศีล 3.ปริจจาคะ 4.อาชชวะ(ซื่อตรง) 5.มัททวะ(อ่อนโยน) 6.ตปะ(ขจัดความชั่ว) 7.อักโกธะ(ไม่โกรธ) 8.อวิหิงสา(ไม่เบียดเบียน) 9.ขันติ(อดทน) 10.อวิโรธนะ(ไม่ผิดจากธรรม)", note:"หลักธรรมที่พระธรรมศาสตร์กำหนดให้พระมหากษัตริย์ทรงยึดถือในการบริหารราชการแผ่นดินและอำนวยความยุติธรรม — หัวข้อที่อาจารย์ชอบออกสอบ", stars:5, source:"พระธรรมศาสตร์"},
+  {cat:"dynasty3", section:"ประพฤติธรรม 4", title:"ประพฤติธรรม 4 ประการ", q:"ประพฤติธรรม 4 ประการมีอะไรบ้าง?", result:"1.ลงโทษผู้ควรถูกลงโทษและให้รางวัลผู้ทำความดี 2.ทะนุบำรุงผู้มีความรู้และศีลสัตย์ 3.รวบรวมพระราชทรัพย์โดยยุติธรรม 4.ปกครองพระราชอาณาจักรให้ประชาชนเกษมสุขโดยยุติธรรม", note:"ตามพระธรรมศาสตร์ที่กษัตริย์พึงประพฤติเพื่อประโยชน์สุขของประชาชน", stars:5, source:"พระธรรมศาสตร์"},
+  {cat:"dynasty3", section:"พระเจ้ามหาสมมุติราช", title:"ตำนานกำเนิดสถาบันกษัตริย์", q:"ตำนานกำเนิดสถาบันกษัตริย์เล่าว่าอย่างไร?", result:"เมื่อมนุษย์เกิดวิวาทหาผู้ตัดสินไม่ได้ ประชาชนจึงร่วมกันตั้งพระโพธิสัตว์ขึ้นเป็นอธิบดี ทรงพระนามพระเจ้ามหาสมมุติราช เป็นที่มาของแนวคิดราชาธิปไตย/สมบูรณาญาสิทธิราช", note:null, stars:4, source:"พระธรรมศาสตร์"},
+  {cat:"dynasty3", section:"พระมโนสาร", title:"ตำนานพระมโนสารกับพระธรรมศาสตร์", q:"ตำนานพระมโนสารเกี่ยวข้องกับพระธรรมศาสตร์อย่างไร?", result:"เรื่องพระมโนสารตัดสินคดีแตงเถาไม่เป็นธรรม จนออกบวชและเหาะไปเห็นคัมภีร์พระธรรมศาสตร์จารึกที่กำแพงจักรวาล จึงจดจำมาแต่งเป็นคัมภีร์", note:"แสดงเจตนาให้กฎหมายมีที่มาจากอำนาจเบื้องสูงเหนือมนุษย์", stars:4, source:"พระธรรมศาสตร์"},
+  {cat:"dynasty3", section:"มูลคดี 10 / 29", title:"มูลคดีตระลาการ 10 / มูลคดีวิวาท 29", q:"มูลคดีตระลาการ 10 และมูลคดีวิวาท 29 คืออะไร?", result:"พระราชศาสตร์แบ่งเป็นมูลคดีแห่งผู้พิพากษาและตระลาการ 10 ประการ (6 หมวด เช่น หลักอินทภาษ พระธรรมนูญ พยาน) และมูลคดีวิวาท 29 ประการ (12 หมวด)", note:null, stars:3, source:"พระราชศาสตร์"},
+
+  {cat:"reform5", section:"เบาว์ริง", title:"สนธิสัญญาเบาว์ริง (พ.ศ.2398)", q:"สนธิสัญญาเบาว์ริงส่งผลอย่างไรต่อไทย?", result:"สนธิสัญญาฉบับแรกที่ไทยเสียสิทธิสภาพนอกอาณาเขต คนในบังคับอังกฤษขึ้นศาลกงสุลอังกฤษแทนศาลไทย เป็นจุดเริ่มต้นให้ไทยต้องเร่งปฏิรูปกฎหมายและการศาล", note:null, stars:4, source:"สนธิสัญญาเบาว์ริง"},
+  {cat:"reform5", section:"สิทธิสภาพนอกอาณาเขต", title:"สิทธิสภาพนอกอาณาเขต", q:"สิทธิสภาพนอกอาณาเขตคืออะไร?", result:"สิทธิที่ชาวต่างชาติไม่ต้องขึ้นศาลไทยแต่ขึ้นศาลกงสุลของตน เกิดจากข้อกล่าวหาว่ากฎหมายไทยล้าหลัง ทำให้ไทยเสียเปรียบทั้งการเมืองและเศรษฐกิจ", note:null, stars:4, source:"สนธิสัญญาเบาว์ริง"},
+  {cat:"reform5", section:"จารีตนครบาล", title:"การยกเลิกจารีตนครบาล", q:"เหตุใดจารีตนครบาลจึงถูกยกเลิก?", result:"จารีตนครบาลคือวิธีสอบสวนแบบเก่าที่ถือว่าผู้ต้องหาเป็นผู้ร้ายไว้ก่อน ใช้การทรมานหาหลักฐาน ถูกมองว่าป่าเถื่อน จึงถูกยกเลิกโดย พ.ร.บ.ยกเลิกวิธีพิจารณาโจรผู้ร้ายตามจารีตนครบาล ร.ศ.115", note:null, stars:4, source:"การปฏิรูปกระบวนยุติธรรม"},
+  {cat:"reform5", section:"กระทรวงยุติธรรม", title:"การตั้งกระทรวงยุติธรรม", q:"กระทรวงยุติธรรมตั้งขึ้นเมื่อใด และทำอะไรบ้าง?", result:"ตั้งขึ้น ร.ศ.110 (พ.ศ.2434) รวมศาลต่าง ๆ ที่กระจัดกระจายเหลือเพียง 7 ศาล ต่อมาตั้งกรมอัยการใน ร.ศ.112 (พ.ศ.2436) และตั้งโรงเรียนกฎหมายใน พ.ศ.2440", note:null, stars:4, source:"การปฏิรูปกระบวนยุติธรรม"},
+  {cat:"reform5", section:"เลิกทาส-ไพร่", title:"การเลิกทาสและเลิกระบบไพร่", q:"รัชกาลที่ 5 ทรงเลิกทาสและเลิกไพร่อย่างไร?", result:"พ.ร.บ.พิกัดเกษียณอายุลูกทาสลูกไท (พ.ศ.2417) ให้ลดค่าตัวทาสที่เกิดปีมะโรงลงเรื่อย ๆ จนเป็นไทเมื่ออายุ 21 ปี และยกเลิกระบบไพร่ด้วย พ.ร.บ.ลักษณะเกณฑ์ทหาร ร.ศ.124 (พ.ศ.2448)", note:null, stars:4, source:"รัชกาลที่ 5"},
+  {cat:"reform5", section:"หมอบคลาน", title:"ประกาศเลิกธรรมเนียมหมอบคลาน (จ.ศ.1235)", q:"เหตุใดรัชกาลที่ 5 จึงทรงเลิกธรรมเนียมหมอบคลาน?", result:"รัชกาลที่ 5 ทรงเห็นว่าธรรมเนียมหมอบคลานกราบไหว้เป็นการกดขี่ที่ไม่มีประโยชน์ต่อบ้านเมือง จึงโปรดให้ค่อย ๆ เลิกธรรมเนียมนี้", note:null, stars:3, source:"รัชกาลที่ 5"},
+  {cat:"reform5", section:"กฎหมายอาญา ร.ศ.127", title:"กฎหมายลักษณะอาญา ร.ศ.127", q:"เหตุใดจึงต้องประกาศกฎหมายลักษณะอาญา ร.ศ.127?", result:"ประกาศใช้เพื่อความทันสมัย แก้ปัญหากฎหมายตราสามดวงที่ไม่แยกคดีแพ่ง-อาญาเด็ดขาด บทลงโทษไม่กำหนดระยะเวลาชัดเจน และมีรายละเอียดฟุ่มเฟือย เช่น กำหนดโทษตามศักดินา", note:null, stars:4, source:"รัชกาลที่ 5"},
+
+  {cat:"codify", section:"วิธีการแบบญี่ปุ่น", title:"วิธีการแบบญี่ปุ่นในการร่าง ป.พ.พ.", q:"'วิธีการแบบญี่ปุ่น' ในการร่าง ป.พ.พ. คืออะไร?", result:"พระยามานวราชเสวี (ปลอด วิเชียร ณ สงขลา) นำวิธีการที่ญี่ปุ่นเคยใช้จัดทำประมวลกฎหมายแพ่งของตนมาปรับใช้ในการร่าง ป.พ.พ.ไทย พ.ศ.2468", note:"เป็นประเด็นที่ออกสอบบ่อยเรื่องข้อดี-ข้อเสียของวิธีนี้", stars:5, source:"การจัดทำ ป.พ.พ."},
+  {cat:"codify", section:"คณะกรรมการร่าง", title:"คณะกรรมการร่างประมวลกฎหมายแพ่งฯ", q:"คณะกรรมการร่างประมวลกฎหมายแพ่งฯ ทำงานอย่างไร?", result:"เริ่มตั้งคณะกรรมการใน พ.ศ.2451 โดยชาวฝรั่งเศสเป็นหลัก ร่างได้เพียง 2 บรรพใน พ.ศ.2459 ต่อมาปรับคณะกรรมการใหม่ (ไทย+ต่างชาติ) จนสำเร็จบางส่วนใน พ.ศ.2468 และสมบูรณ์ใน พ.ศ.2477", note:null, stars:4, source:"การจัดทำ ป.พ.พ."},
+  {cat:"codify", section:"แหล่งอ้างอิง ป.พ.พ.", title:"แหล่งอ้างอิงในการร่าง ป.พ.พ.", q:"ป.พ.พ. แต่ละบรรพอ้างอิงกฎหมายประเทศใดบ้าง?", result:"บรรพ 1-2 อิงกฎหมายเยอรมันและญี่ปุ่น (รากฐานโรมัน) · บรรพ 3 เรื่องซื้อขายอิงกฎหมายอังกฤษ (Sale of Goods Act 1893) · ตั๋วเงินอิง Bill of Exchange Act 1882", note:null, stars:4, source:"การจัดทำ ป.พ.พ."},
+  {cat:"codify", section:"พระอัยการลักษณะเบ็ดเสร็จ", title:"กฎหมายที่ดินโบราณ", q:"กฎหมายที่ดินโบราณของไทยคืออะไร?", result:"ตัวบทกฎหมายที่ดินโบราณของไทยที่ยังใช้ศึกษาในโรงเรียนกฎหมาย จนกระทั่งมีการประกาศใช้ ป.พ.พ.บรรพ 4 ว่าด้วยทรัพย์สิน ใน พ.ศ.2475", note:null, stars:3, source:"กฎหมายที่ดินโบราณ"},
+  {cat:"codify", section:"รับกฎหมายอังกฤษ", title:"การรับหลักกฎหมายอังกฤษยุคแรก", q:"เหตุใดคำพิพากษายุคแรกจึงนำหลักกฎหมายอังกฤษมาใช้?", result:"เพราะผู้วางรากฐานกฎหมายไทยสมัยใหม่ส่วนใหญ่จบการศึกษาจากอังกฤษ คำพิพากษายุคแรกจึงนำหลัก Consideration (สินจ้าง) และ Estoppel (กฎหมายปิดปาก) มาใช้ตัดสิน", note:null, stars:3, source:"การจัดทำกฎหมายสมัยใหม่"},
+
+  {cat:"publiclaw", section:"รัฐธรรมนูญ", title:"รัฐธรรมนูญ vs กฎหมายรัฐธรรมนูญ", q:"'รัฐธรรมนูญ' กับ 'กฎหมายรัฐธรรมนูญ' ต่างกันอย่างไร?", result:"“รัฐธรรมนูญ” คือกฎหมายสูงสุดที่บัญญัติเรื่องการปกครองไว้ในฉบับเดียวเป็นลายลักษณ์อักษร ส่วน “กฎหมายรัฐธรรมนูญ” หมายถึงกฎหมายทุกที่มาที่เกี่ยวกับการปกครองประเทศ รวมถึงจารีตประเพณีการปกครองด้วย", note:null, stars:3, source:"หลักกฎหมายมหาชน"},
+  {cat:"publiclaw", section:"The King Can Do No Wrong", title:"หลัก The King Can Do No Wrong", q:"หลัก The King Can Do No Wrong คืออะไร?", result:"หลักที่พระมหากษัตริย์ทรงกระทำผิดมิได้ เกิดในกฎหมายอังกฤษยุค Common Law เพราะกษัตริย์เคยเป็นแหล่งอำนาจอธิปไตยเอง จึงไม่อาจถูกฟ้องร้อง หลักนี้ปรากฏอยู่ในรัฐธรรมนูญไทยปัจจุบัน", note:null, stars:3, source:"หลักกฎหมายมหาชน"},
+  {cat:"publiclaw", section:"เทียบ Magna Carta", title:"ศิลาจารึกหลักที่ 1 เทียบ Magna Carta", q:"ศิลาจารึกหลักที่ 1 เทียบกับ Magna Carta อย่างไร?", result:"ทั้งสองฉบับจำกัดอำนาจกษัตริย์เรื่องภาษี รับรองสิทธิเสรีภาพราษฎร และตราขึ้นโดยองค์อธิปัตย์ แต่ต่างกันที่มาของอำนาจ (สืบราชสมบัติ vs. พรของพระเจ้า) และขอบเขตการปกครอง", note:null, stars:3, source:"หลักกฎหมายมหาชน"}
+];
+
+/* ================= STUDY (โหมดอ่าน) ================= */
+const STUDY_TOPICS = [
+  {id:"roman", cat:"roman", label:"1. กฎหมายโรมัน", html:`
+    <p><b>ทำไมวิชานิติศาสตร์ถึงถือกำเนิดที่โรมัน ไม่ใช่อียิปต์ จีน หรืออินเดีย?</b> ทั้งที่อารยธรรมเหล่านั้นก็มีกฎหมายเช่นกัน คำตอบอยู่ที่โครงสร้างสังคมโรมันซึ่งประกอบด้วยชุมชนเกษตรกับชุมชนทหารผสมกัน — ชุมชนเกษตรยอมรับจารีตประเพณีด้วยความสมัครใจ ส่วนชุมชนทหารถือกฎเกณฑ์และวินัยเป็นใหญ่ เชื่อในเหตุผลและความถูกต้อง เมื่อสองลักษณะนี้ผสานกัน จึงเกิดทั้ง "จารีตที่คนยอมรับเอง" และ "วินัยที่เคร่งครัด" ซึ่งเป็นเงื่อนไขที่ทำให้เกิดการคิดอย่างเป็นระบบเกี่ยวกับกฎเกณฑ์</p>
+    <p>ในยุคแรก กฎหมายจารีตของโรมันถือเป็นของศักดิ์สิทธิ์ ผูกพันกับพระประสงค์ของเทพเจ้า คนทั่วไปรับรู้ได้จากพิธีกรรมทางศาสนาและการคำนวณทางดาราศาสตร์ ราว 450 ปีก่อนคริสตกาล ชนชั้นสามัญ (เพลเบียน) ซึ่งไม่มีทางรู้เนื้อหากฎหมายที่ชนชั้นสูง (แพทริเซียน) ผูกขาดการตีความอยู่ จึงเรียกร้องให้บันทึกจารีตเหล่านี้เป็นลายลักษณ์อักษรอย่างเปิดเผย เกิดเป็น <b>กฎหมายสิบสองโต๊ะ</b> จารึกบนแผ่นทองแดงตั้งไว้ในที่สาธารณะ นับเป็นชัยชนะสำคัญของเพลเบียนที่จำกัดอำนาจการตีความตามอำเภอใจของแพทริเซียนลงได้ แม้เนื้อหาส่วนหนึ่งจะยังสะท้อนความเหลื่อมล้ำเดิมอยู่ก็ตาม (เช่น ห้ามแต่งงานข้ามชนชั้น และลูกหนี้เพลเบียนอาจถูกบังคับเป็นทาสของเจ้าหนี้แพทริเซียนได้หากผิดนัดชำระหนี้)</p>
+    <p>การใช้กฎหมายสิบสองโต๊ะตัดสินคดีเป็นหน้าที่ของ "ผู้ทรงคุณวุฒิ" (คนแก่ที่ได้รับความนับถือ เคยทำหน้าที่สำคัญของรัฐ) ซึ่งให้ความเห็นทางกฎหมาย เรียกว่า <b>responsa</b> เช่น วินิจฉัยความสมบูรณ์ของพินัยกรรมหรือการแบ่งมรดก โดยต้องตีความถ้อยคำด้วยเหตุผลเชิงตรรกะ — นี่คือจุดกำเนิดของ "การให้เหตุผลทางกฎหมาย" เป็นครั้งแรก และเมื่อมีการบันทึกความเห็นเหล่านี้ไว้ ก็นำไปสู่การค้นหาหลักการเบื้องหลังตัวบท และพัฒนาเป็นการศึกษากฎหมายอย่างเป็นระบบ ต่อมาแนวคิดนี้ยังได้รับอิทธิพลจาก<b>ปรัชญาสโตอิก</b> (Stoicism) ที่เชื่อเรื่องเหตุผลตามธรรมชาติ — มนุษย์มีความทุกข์เพราะฝืนธรรมชาติ ซึ่งเป็นที่มาของแนวคิดเรื่องเสรีภาพ ความเป็นบุคคล หลัก pacta sunt servanda (สัญญาต้องเป็นสัญญา) และการครอบครองในกฎหมายโรมัน</p>
+    <p><b>การแบ่งยุคกฎหมายโรมัน</b> (ต่างจากการแบ่งยุค "ประวัติศาสตร์การเมือง" ที่เน้นสงคราม/ราชวงศ์):</p>
+    <ul>
+      <li><b>ยุคโบราณ</b> (ราว 1000–450 ปีก่อน ค.ศ.) — ปกครองด้วยจารีตประเพณีล้วน ๆ</li>
+      <li><b>ยุคสาธารณรัฐ</b> (450 ปีก่อน ค.ศ. – ศตวรรษที่ 1) — เริ่มเกิดนิติศาสตร์ นำเหตุผลมาอธิบายกฎหมาย</li>
+      <li><b>ยุคจักรวรรดิตอนต้น</b> (ศตวรรษที่ 1–250 ค.ศ.) — ยุครุ่งเรืองที่สุด จัดระเบียบกฎหมายอย่างเป็นระบบ นำจารีตมาเปรียบเทียบ เกิดนักนิติศาสตร์ฆราวาส (iuris consulti/iuris prudentes) ที่ทำหน้าที่เป็นที่ปรึกษา สอน และเขียนตำรากฎหมาย จนได้รับยกย่องว่าเป็น "วิทยาศาสตร์กฎหมายที่แท้จริง"</li>
+      <li><b>ยุคจักรวรรดิตอนปลาย</b> (250–534 ค.ศ.) — จักรพรรดิต้องการอะไรก็ออกกฎหมายเอง อำนาจนิติบัญญัติกระจุกที่ตัวบุคคล จึงเกิดความเสื่อมถอยทางวิชาการ</li>
+    </ul>
+    <p><b>แหล่งที่มาของกฎหมายโรมัน</b> มี 3 ทางหลัก ได้แก่ (1) กฎหมายบัญญัติ (Lex) เช่น กฎหมายสิบสองโต๊ะ (2) กฎหมายเจ้าพนักงาน (Edicts of the Praetor) — ทุกปี Praetor ผู้บริหารสูงสุดของกฎหมายแพ่งจะประกาศกฤษฎีกากำหนดการเยียวยาหรือสิทธิใหม่ ๆ เพื่ออุดช่องว่างของ Jus Civile ที่คับแคบ เกิดเป็น <b>Jus Honorarium</b> และ (3) ความเห็นของนักนิติศาสตร์ (Interpretatio/ius respondendi) ซึ่งจักรพรรดิทรงแต่งตั้งให้นักปราชญ์แสดงความเห็นทางกฎหมายในพระนามของพระองค์ ตัวอย่างตำราสำคัญคือ Institutiones ของ Gaius และ Digest ใน Corpus Iuris Civilis ที่คัดจากผลงานนักนิติศาสตร์คลาสสิกกว่า 40 ท่าน</p>
+    <p><b>ประเภทของกฎหมายโรมัน 4 ระบบ:</b> Jus Civile (กฎหมายสำหรับพลเมืองโรมัน มาจากจารีต) · Jus Gentium (ใช้ในคดีระหว่างชาวโรมันกับคนต่างชาติ ยึดเหตุผลสากล) · Jus Honorarium (จากคำสั่ง Praetor) · Jus Naturale (กฎหมายธรรมชาติ เน้นความเสมอภาคของมนุษย์ เช่น การตั้งคำถามต่อสถาบันทาสว่าขัดหลักมนุษยธรรม) เมื่อจักรวรรดิขยายตัว ทั้งสี่ระบบนี้ค่อย ๆ ผสานเข้าด้วยกัน จนในศตวรรษที่ 6 จักรพรรดิ<b>จัสติเนียน</b>ทรงรวบรวมเป็น <b>Corpus Juris Civilis</b> 4 ภาค: Digest/Pandect (ความเห็นนักนิติศาสตร์) · Institute (หลักกฎหมายพื้นฐานสำหรับการศึกษา) · Codex (พระราชโองการที่ยังใช้ได้) · Novels (กฎหมายใหม่หลัง Codex) กลายเป็นรากฐานของกฎหมายยุโรปไปอีกนับพันปี</p>
+    <p>แม้จักรวรรดิโรมันตะวันตกจะล่มสลายในปี ค.ศ.476 (เมื่อจักรพรรดิโรมุลุส เอากุสตุสถูกขับไล่) ยุโรปเข้าสู่ "ยุคมืด" นานราว 500 ปี แต่จักรวรรดิโรมันตะวันออก (ไบแซนไทน์) ยังรักษากฎหมายและวัฒนธรรมกรีก-โรมันไว้อีกนับพันปีจนถึง ค.ศ.1453 เหตุที่กฎหมายโรมันอยู่ยั่งยืนกว่าพันปีนั้น อาจารย์ปรีดี เกษมทรัพย์อธิบายว่าเพราะกฎหมายโรมันไม่ใช่แค่ตัวบท แต่เป็น <b>"วัฒนธรรมทางเหตุผล"</b> (ratio scripta = คัมภีร์แห่งเหตุผล) ที่ใช้การตีความอย่างกว้าง การเทียบเคียง (analogy) และการพัฒนาหลักใหม่อยู่เสมอ เช่น หลัก Exceptio Doli ที่ศาลใช้ดุลพินิจปฏิเสธการบังคับสัญญาที่เกิดจากความสำคัญผิดหรือฉ้อฉล เพื่อความเป็นธรรม</p>
+    <div class="examBox"><div class="exlabel">📝 ตัวอย่างข้อสอบจริง</div>
+      <div class="exq">“ที่มีผู้กล่าวว่ากฎหมายโรมันได้ครอบครองยุโรปถึง 3 ยุคนั้น ท่านเข้าใจว่าหมายความว่าอย่างไร ให้อธิบายมาโดยสังเขป” (20 คะแนน)</div>
+      <div class="exsrc">น.462 ประวัติศาสตร์กฎหมายไทย ภาคบัณฑิต 2562</div>
+    </div>
+    <div class="examBox"><div class="exlabel">📝 ตัวอย่างข้อสอบจริง</div>
+      <div class="exq">“จงอธิบายถึงคุณค่าที่โดดเด่นของกฎหมายโรมันในฐานะที่เป็นวิทยาการ และอิทธิพลที่กฎหมายโรมันมีต่อกฎหมายของนานาประเทศในยุโรป (โดยเฉพาะประเทศในภาคพื้นทวีป) นอกจากนี้ จงระบุแหล่งที่มาหลักของกฎหมายโรมัน (เช่น กฎหมายบัญญัติ (Lex), กฎหมายเจ้าพนักงาน (Edicts of the Praetor), และความเห็นของนักนิติศาสตร์ (Interpretatio))”</div>
+      <div class="exsrc">สรุปคำถาม-แนวคำตอบ เอกสารประกอบวิชา (ชีท Uncle)</div>
+    </div>`},
+  {id:"medieval", cat:"medieval", label:"2. ยุคกลาง–Common Law/Equity", html:`
+    <p>เมื่อจักรวรรดิโรมันตะวันตกล่มสลาย (ค.ศ.476) ยุโรปเข้าสู่ยุคกลาง กฎหมายท้องถิ่นและกฎหมายศาสนจักรมีบทบาทมากขึ้น แต่ความรู้กฎหมายโรมันไม่ได้หายไปทั้งหมด — ยังคงถูกศึกษาต่อในมหาวิทยาลัยยุโรป โดยเฉพาะที่โบโลญญา นักวิชาการกลุ่ม <b>Glossator</b> (อักขราจารย์) ทำหน้าที่จดหมายเหตุ (gloss) อธิบายความหมายตัวบท Corpus Juris Civilis และรวบรวมความรู้ที่สืบทอดมาจากโลกมุสลิมด้วย ต่อมานักวิชาการกลุ่ม <b>Commentator</b> พัฒนาต่อโดยไม่เพียงอธิบายถ้อยคำ แต่วิเคราะห์และถกเถียงหลักกฎหมายอย่างลึกซึ้ง เช่น องค์ประกอบของการละเมิด (ต้องมีการกระทำผิดกฎหมาย เกิดความเสียหาย และความเสียหายนั้นต้องเป็นสิ่งที่กฎหมายมุ่งคุ้มครอง) การถกเถียงเช่นนี้ดำเนินต่อเนื่องตั้งแต่ศตวรรษที่ 12 ถึง 15 จนเกิดสิ่งที่เรียกว่า <b>ius commune</b> — กฎหมายร่วมของยุโรปที่มีรากฐานจากกฎหมายโรมัน</p>
+    <p>ในกระบวนการยุติธรรมสมัยกลาง การพิสูจน์ความจริงในคดีความมักอาศัย <b>"การพิสูจน์ด้วยพระเจ้า" (Ordeal)</b> เช่น ให้ผู้ถูกกล่าวหาถือเหล็กที่เผาจนร้อนแดงเดินเป็นระยะทาง 9 ฟุต แล้วพันมือรอดู 3 วัน 3 คืน หากไม่มีแผลถือว่าบริสุทธิ์ หรือให้จุ่มมือลงในน้ำเดือด หรือโยนลงน้ำเย็น (จมน้ำ=บริสุทธิ์, ลอยน้ำ=มีความผิด) เชื่อว่าพระเจ้าจะปกป้องผู้บริสุทธิ์ไว้ — เป็นแนวทางที่คล้ายกับ "การดำน้ำลุยเพลิง" ในกฎหมายไทยและจีนโบราณ</p>
+    <p>ในอังกฤษ ศาลหลวง (King's Court) ใช้จารีตประเพณีร่วมของราชอาณาจักรตัดสินคดี เรียกว่า <b>Common Law</b> แบ่งเป็นศาลย่อย 3 ศาล ได้แก่ ศาลคอมมอนพลีส์ (Court of Common Pleas — ข้อพิพาทระหว่างราษฎรด้วยกันเอง เช่น คดีที่ดิน หนี้สิน) ศาลเอ็คซ์เช็คเกอร์ (Court of Exchequer — เกี่ยวกับการคลัง) และศาลคิงส์เบนช์ ด้วยความที่ Common Law เคร่งครัดและไม่ยืดหยุ่น (เยียวยาได้เฉพาะเป็นเงินตรา) คู่ความที่ไม่ได้รับความเป็นธรรมจึงถวายฎีกาต่อกษัตริย์โดยตรง จนก่อให้เกิด <b>ศาลชานเซอรี่ (Court of Chancery)</b> ที่ตัดสินตามหลักความเป็นธรรม เรียกว่า <b>Equity</b></p>
+    <p><b>ข้อแตกต่างสำคัญระหว่าง Common Law กับ Equity:</b></p>
+    <ul>
+      <li>สภาพบังคับ: Common Law บังคับเอากับทรัพย์สินของจำเลย (การไม่ปฏิบัติตามไม่ถือเป็นการหมิ่นศาล) ส่วน Equity บังคับเอากับตัวบุคคล (ไม่ปฏิบัติตามถือเป็นการหมิ่นอำนาจศาล)</li>
+      <li>ผู้วินิจฉัย: Common Law ใช้ลูกขุนวินิจฉัยข้อเท็จจริง ผู้พิพากษาวินิจฉัยเฉพาะข้อกฎหมาย ส่วน Equity ผู้พิพากษา/ชานเซลเลอร์คนเดียววินิจฉัยทั้งข้อเท็จจริงและข้อกฎหมาย</li>
+      <li>การเยียวยา: Common Law เยียวยาเป็นเงินตราเท่านั้น ส่วน Equity ศาลอาจสั่งให้จำเลยชำระหนี้ตรงตามสัญญา (decree of specific performance) หรือสั่งห้ามกระทำการหนึ่งใด (injunction) ได้</li>
+      <li>ที่มา: Common Law มาจากคำพิพากษาศาลหลวง ส่วน Equity มาจากคำพิพากษาศาลชานเซอรี่</li>
+    </ul>
+    <p>หลักกฎหมาย Equity ที่สำคัญและยังใช้อยู่ในปัจจุบันคือ <b>ทรัสต์ (Trust)</b> ซึ่งเกิดจากคำพิพากษาของศาลชานเซอรี่</p>
+    <p><b>Magna Carta</b> (มหาบัตร ค.ศ.1215) เป็นกฎบัตรที่ขุนนางอังกฤษบังคับให้พระเจ้าจอห์นทรงตราขึ้น มีทั้งหมด 63 ข้อ ถือเป็นจุดเริ่มต้นของกฎหมายรัฐธรรมนูญอังกฤษ — ลิดรอนอำนาจที่ไม่ชอบของกษัตริย์ จำกัดอำนาจเรื่องภาษี รับรองว่าบุคคลจะไม่ถูกลงโทษเว้นแต่มีคำตัดสินของบุคคลในฐานันดรเดียวกันหรือตามกฎหมายบ้านเมือง และรับรองว่าความยุติธรรมต้องไม่ใช่สิ่งที่ซื้อหาได้ ถือเป็นกฎหมายรัฐธรรมนูญฉบับแรกของโลกและเป็นจุดเทียบเคียงสำคัญกับศิลาจารึกพ่อขุนรามคำแหงของไทย</p>
+    <div class="examBox"><div class="exlabel">📝 ตัวอย่างข้อสอบจริง</div>
+      <div class="exq">“จงอธิบายสิ่งต่อไปนี้โดยเปรียบเทียบกฎหมายโรมันและกฎหมายอังกฤษ (ก) การคุ้มครองการครอบครอง (ข) ภาระจำยอมในเชิงบวก (ค) ลักษณะของราคาสินค้าตามสัญญาซื้อขาย (ง) เหตุผลในการมีทายาท” (20 คะแนน)</div>
+      <div class="exsrc">น.462 ประวัติศาสตร์กฎหมายไทย ภาคบัณฑิต 2561</div>
+    </div>
+    <div class="examBox"><div class="exlabel">📝 ตัวอย่างข้อสอบจริง</div>
+      <div class="exq">“จงเปรียบเทียบสถานภาพของสมาชิกของครอบครัวซึ่งอยู่ภายใต้อำนาจของหัวหน้าครอบครัวในกฎหมายโรมันและผู้เยาว์ในกฎหมายอังกฤษ” (20 คะแนน)</div>
+      <div class="exsrc">น.462 ประวัติศาสตร์กฎหมายไทย ภาคบัณฑิต 2561</div>
+    </div>`},
+  {id:"sukhothai", cat:"sukhothai", label:"3. กฎหมายไทยยุคสุโขทัย", html:`
+    <p>ในช่วงพุทธศตวรรษที่ 18 เมื่ออาณาจักรขอมและพุกามเริ่มเสื่อมอำนาจ ชนเผ่าไทจึงตั้งตนเป็นอิสระ อาณาจักร<b>สุโขทัย</b>เป็นหนึ่งในแคว้นที่ตั้งตนขึ้น มีศูนย์กลางอยู่บริเวณลุ่มแม่น้ำยมและแม่น้ำน่าน กษัตริย์ผู้สถาปนาคือพ่อขุนศรีนาวนำถม ลักษณะการปกครองเป็นแบบ <b>"พ่อปกครองลูก"</b> หรือ <b>ธรรมราชา</b> เนื่องจากเมืองยังไม่ใหญ่มาก ความสัมพันธ์ระหว่างกษัตริย์กับราษฎรจึงใกล้ชิด รูปแบบนี้เป็นแบบอย่างสืบไปถึงสมัยอยุธยาและรัตนโกสินทร์</p>
+    <p>หลักฐานสำคัญที่สุดคือ <b>ศิลาจารึกหลักที่ 1</b> (จารึกพ่อขุนรามคำแหง) สันนิษฐานว่าทำขึ้นเมื่อ พ.ศ.1835 ค้นพบโดยพระบาทสมเด็จพระจอมเกล้าเจ้าอยู่หัวเมื่อครั้งทรงผนวช ณ เนินปราสาทเมืองเก่าสุโขทัย เมื่อ พ.ศ.2376 เนื้อหาสำคัญที่มักออกสอบมี 4 เรื่องหลัก ซึ่งนักวิชาการนิยมนำไปเทียบกับสิทธิเสรีภาพตามรัฐธรรมนูญปัจจุบัน:</p>
+    <ul>
+      <li><b>สิทธิในทรัพย์สินที่หามาได้ กรรมสิทธิ์ และการสืบมรดก</b> — ข้อความในจารึกว่า เมื่อลูกเจ้าลูกขุนผู้ใดล้มตายลง เหย้าเรือน ช้าง ขอ ลูกเมีย ไพร่ฟ้าข้าไท สวนหมาก สวนพลู ที่พ่อแม่ทำไว้ ย่อมตกเป็นของลูก — เทียบได้กับมาตรา 37 รัฐธรรมนูญ 2560 ที่รับรองสิทธิในทรัพย์สินและการสืบมรดก โดยผู้มีสิทธิรับมรดกในสมัยนั้นคือบรรดาบุตรของผู้ตายเท่านั้น</li>
+      <li><b>สิทธิและเสรีภาพในการประกอบอาชีพ</b> — "เจ้าเมืองบ่เอาจกอบในไพร่ลู่ทาง ใครใคร่ค้าช้างค้า ใครใคร่ค้าม้าค้า ใครใคร่ค้าเงินค้าทองค้า" หมายถึงไม่เก็บภาษีผ่านด่าน (จกอบ) จากราษฎรที่เดินทางค้าขาย ทำให้สุโขทัยได้ชื่อว่าเป็นเมืองปลอดภาษี — เทียบได้กับมาตรา 40 ที่รับรองเสรีภาพในการประกอบอาชีพ</li>
+      <li><b>สิทธิร้องทุกข์และได้รับการพิจารณาคดีอย่างเป็นธรรม</b> — มีกระดิ่งแขวนไว้ที่ปากประตูวัง ไพร่ฟ้าผู้มีทุกข์ร้อนสามารถสั่นกระดิ่งร้องทุกข์ได้โดยตรง พ่อขุนรามคำแหงจะเรียกมาถามความด้วยความซื่อตรง "บ่เข้าผู้ลักมักผู้ซ่อน" คือไม่เข้าข้างใครโดยไม่เป็นธรรม — เทียบได้กับมาตรา 68 ที่กำหนดให้การอำนวยความยุติธรรมมีประสิทธิภาพ เป็นธรรม เข้าถึงได้สะดวก</li>
+      <li><b>สิทธิมีส่วนร่วมในกิจการบ้านเมือง</b> — "ให้ฝูงท่วยลูกเจ้าลูกขุนฝูงท่วยถือบ้านถือเมือง" หมายถึงร่วมปกครองบ้านเมือง — เทียบได้กับมาตรา 43 ที่ให้สิทธิบุคคล/ชุมชนเสนอแนะต่อหน่วยงานรัฐ</li>
+    </ul>
+    <p>นอกจากนี้ศิลาจารึกยังมีข้อความแสดงความสัมพันธ์ระหว่างประเทศและกฎหมายมนุษยธรรม เช่น การช่วยเหลือผู้มาพึ่งพระบรมโพธิสมภาร และการห้ามฆ่า/ทำร้ายเชลยศึก ("ได้ข้าเสือกข้าเสือ หัวพุ่งหัวรบก็ดี บ่ฆ่าบ่ตี") ซึ่งสอดคล้องกับหลักสากลเรื่องการปฏิบัติต่อเชลยศึกตามอนุสัญญาเจนีวา ค.ศ.1949 ด้วยเหตุนี้นักวิชาการจึงเห็นว่า<b>ศิลาจารึกหลักที่ 1 มีลักษณะเป็นกฎหมายรัฐธรรมนูญ</b> เทียบเคียงได้กับ Magna Carta ของอังกฤษ</p>
+    <p>นอกจากศิลาจารึกหลักที่ 1 แล้ว ยังมี <b>ศิลาจารึกหลักที่ 38</b> (กฎหมายลักษณะโจร) ซึ่งยังไม่แน่ชัดว่าตราขึ้นในสมัยสุโขทัยหรือถูกกษัตริย์อยุธยาตราขึ้นเพื่อบังคับใช้กับเมืองสุโขทัยที่ตกเป็นประเทศราช (ตัวเลขศักราชในจารึกเลือนหายไป) แต่มีข้อความอ้างอิง "พระราชศาสตร์พระธรรมศาสตร์" แสดงว่าไทยรับพระธรรมศาสตร์มาเป็นหลักบัญญัติกฎหมายมาตั้งแต่ยุคนี้ และ <b>มังรายศาสตร์</b> ของพระเจ้ามังรายแห่งล้านนา ซึ่งร่วมสมัยกับพ่อขุนรามคำแหง (ทั้งสองพระองค์ทรงเป็นพระสหายกัน) มีเนื้อหาเกี่ยวกับสัญญาต่าง ๆ เช่น หุ้นส่วนค้าขาย กู้ยืม จ้างแรงงาน จ้างทำของ</p>
+    <div class="examBox"><div class="exlabel">📝 ตัวอย่างข้อสอบจริง</div>
+      <div class="exq">“ให้อธิบายความหมายของถ้อยคำต่อไปนี้ตามความเข้าใจ (1) ไตรภูมิพระร่วง (2) พระจักรพรรดิราช” (10+10 คะแนน)</div>
+      <div class="exsrc">น.462 ประวัติศาสตร์กฎหมายไทย ศูนย์ลำปาง 2560</div>
+    </div>
+    <div class="examBox"><div class="exlabel">📝 ตัวอย่างข้อสอบจริง</div>
+      <div class="exq">“หากมีผู้กล่าวว่า การที่จะเข้าใจแนวความคิดที่ปรากฏใน ‘พระธรรมสาตร’ อันเป็นบทนำของกฎหมายตรา 3 ดวงได้เป็นอย่างดีนั้น จะต้องย้อนกลับไปทำความเข้าใจรากฐานวัฒนธรรมทางความคิดและภูมิปัญญาใน ‘ยุคทวาราวดี’ ... ท่านเห็นด้วยกับคำอธิบายข้างต้นหรือไม่ ให้อธิบาย” (20 คะแนน)</div>
+      <div class="exsrc">น.462 ประวัติศาสตร์กฎหมายไทย ศูนย์ลำปาง 2560</div>
+    </div>`},
+  {id:"ayutthaya", cat:"ayutthaya", label:"4. กฎหมายไทยยุคอยุธยา", html:`
+    <p><b>กรุงศรีอยุธยา</b> สถาปนาขึ้นเมื่อ พ.ศ.1893 โดยสมเด็จพระรามาธิบดีที่ 1 (พระเจ้าอู่ทอง) ตั้งอยู่ในบริเวณที่แม่น้ำ 3 สาย (เจ้าพระยา ป่าสัก ลพบุรี) ล้อมรอบ ซึ่งเป็นชัยภูมิเหมาะสมทั้งด้านความมั่นคงและการค้า มีความเจริญรุ่งเรืองต่อเนื่องยาวนานถึง 417 ปี การปกครองเป็นระบอบ<b>ราชาธิปไตย/สมบูรณาญาสิทธิราชย์</b> รับแนวคิดมาจากอินเดียผ่านทางเขมร ถือว่ากษัตริย์เป็น<b>สมมติเทพ</b> มีพระราชอำนาจล้นพ้น</p>
+    <p>โครงสร้างกฎหมายอยุธยาวางอยู่บน <b>พระธรรมศาสตร์</b> (กฎหมายแม่บทที่สำคัญที่สุด ได้รับอิทธิพลจากคัมภีร์พระธรรมศาสตร์อันศักดิ์สิทธิ์ของอินเดีย เชื่อว่าพระมโนสารฤๅษีคัดลอกมาจากกำแพงจักรวาล) และ <b>พระราชศาสตร์</b> (กฎหมายที่กษัตริย์ทรงตราขึ้นเองตามพระราชอำนาจ แยกเป็นสาขาคดีต่าง ๆ) พระธรรมศาสตร์ยังกล่าวถึงตำนานกำเนิดสถาบันกษัตริย์ และวางหลักธรรมสำคัญที่กษัตริย์พึงประพฤติไว้ คือ<b>ทศพิธราชธรรม 10 ประการ</b> ทรงศีล 5 ศีล 8 และ<b>ประพฤติธรรม 4 ประการ</b> ได้แก่ (1) ลงโทษผู้ควรถูกลงโทษและให้รางวัลผู้ทำความดี (2) ทะนุบำรุงผู้มีความรู้และมีศีลสัตย์ (3) รวบรวมพระราชทรัพย์โดยยุติธรรม และ (4) ปกครองพระราชอาณาจักรให้ประชาชนเกษมสุขโดยยุติธรรม — หลักนี้ปรากฏอยู่ใน<b>พระไอยการอาชญาหลวง</b> ที่ตราขึ้นเมื่อ พ.ศ.1895 ในรัชสมัยสมเด็จพระรามาธิบดีที่ 1 ว่าพระมหากษัตริย์ทรงมีพระคุณอนันต์เป็นขอบคันกั้นสรรพภัย ดุจเขาจักรวาลอันกางกั้นแผ่นดินไว้มิให้เหลวไหล (ดูรายละเอียดทศพิธราชธรรมเพิ่มเติมในหัวข้อ "ตราสามดวง & ทศพิธราชธรรม")</p>
+    <p>ระบบคดีในอยุธยาแบ่งเป็น 5 ประเภท คือ ความแพ่ง ความอาชญา ความนครบาล ความอุทธรณ์ และความมรดก โดย<b>ไม่มีการแยกคดีแพ่ง-อาญาอย่างชัดเจน</b> ราชทูตลาลูแบร์แห่งฝรั่งเศส (นักกฎหมายที่เข้ามาสมัยสมเด็จพระนารายณ์มหาราช) บันทึกไว้ว่าคดีความในสยามมีอยู่แบบเดียว มักมีการลงอาญาทัณฑ์แก่ผู้แพ้คดีแม้เป็นคดีแพ่งแท้ ๆ ระบบศาลมีถึง 25 ศาล กระจายสังกัดตามกรมต่าง ๆ (กรมมหาดไทย กรมกลาโหม กรมพระนครบาล กรมวัง กรมท่า ฯลฯ) กระบวนพิจารณาใช้<b>ตระลาการ</b>สอบสวนรวบรวมพยานหลักฐาน (ชี้ข้อเท็จจริง) แล้วส่งสำนวนให้<b>ลูกขุน</b> (ผู้พิพากษา) วินิจฉัยชี้ขาดตามข้อกฎหมาย</p>
+    <p><b>ตัวอย่างพระไอยการสำคัญในกฎหมายตราสามดวงที่ระบุปีบัญญัติย้อนไปในสมัยอยุธยา</b> (หลักฐานว่าเนื้อหาส่วนใหญ่ของตราสามดวงคือกฎหมายอยุธยาที่ถูกนำมาชำระใหม่ ไม่ใช่แต่งขึ้นใหม่ทั้งหมด):</p>
+    <ul>
+      <li>สมัยสมเด็จพระรามาธิบดีที่ 1 (พ.ศ.1893–1912): พระไอยการลักษณะพยาน (1894) พระไอยการลักษณะอาญาหลวง (1895) พระไอยการลักษณะรับฟ้อง (1899) พระไอยการลักษณะลักพา (1899) พระไอยการลักษณะอาญาราษฎร์ (1901) พระไอยการลักษณะโจร (1903) พระไอยการลักษณะเบ็ดเสร็จ (1903) พระไอยการลักษณะผัวเมีย (1904) พระไอยการลักษณะโจรว่าด้วยสมโจร (1910)</li>
+      <li>สมัยสมเด็จพระบรมไตรโลกนาถ (พ.ศ.1991–2031): พระไอยการลักษณะอาญาขบถศึก พระไอยการลักษณะอาญาหลวง (ฉบับแก้ไขเพิ่มเติม) พระไอยการตำแหน่งพลเรือน และกฎมณเฑียรบาล</li>
+    </ul>
+    <p>สังคมอยุธยาจัดระเบียบด้วย<b>ระบบศักดินา</b> — เครื่องกำหนดสิทธิ หน้าที่ และฐานะของทุกคน แบ่งเป็นชนชั้นปกครอง (กษัตริย์ เจ้านาย ขุนนาง/ข้าราชการฝ่ายหน้าฝ่ายใน — ขุนนางศักดินา 400 ขึ้นไปถือเป็นมูลนาย มีคดีความไม่ต้องไปศาลเองใช้ตัวแทนได้) และชนชั้นถูกปกครอง คือ<b>ไพร่</b> (สามัญชนที่สังกัดมูลนาย แบ่งเป็นไพร่หลวงกับไพร่สม ผู้ไม่มีมูลนายจะไม่ได้รับความคุ้มครองทางกฎหมายและใช้สิทธิทางศาลไม่ได้) และ<b>ทาส</b> (ส่วนใหญ่เกิดจากความยากจนต้องขายตัว มี 7 ประเภทตามพระธรรมศาสตร์ ได้แก่ ข้าสินไถ่ ลูกทาสเกิดในเรือนเบี้ย ทาสได้มา ทาสท่านให้ ทาสอันได้ด้วยช่วยกังวลแห่งคนต้องทัณฑ์โทษ ทาสที่เลี้ยงมาในยามทุพภิกขภัย และทาสที่ได้จากการเป็นเชลย จดหมายเหตุลาลูแบร์กล่าวว่าคนสยามนิยมเป็นทาสมากกว่าเป็นไท เพราะการเป็นไทในสยามลำบากกว่า)</p>
+    <p><b>ประเด็นถกเถียงว่ากฎหมายตราสามดวงแท้จริงคือกฎหมายอยุธยา:</b> เมื่อพิจารณาตัวบทกฎหมายตราสามดวงจะพบว่าพระอัยการหลายฉบับระบุปีที่บัญญัติย้อนไปในสมัยอยุธยาทั้งสิ้น เช่น พระอัยการลักษณะพยาน (พ.ศ.1894) พระอัยการลักษณะอาญาหลวง (พ.ศ.1895) พระอัยการลักษณะผัวเมีย (พ.ศ.1904) ซึ่งตรงกับรัชสมัยสมเด็จพระรามาธิบดีที่ 1 (ครองราชย์ พ.ศ.1893–1912) และพระอัยการลักษณะอาญาขบถศึก กฎมณเฑียรบาล ที่ระบุว่าบัญญัติในสมัยสมเด็จพระบรมไตรโลกนาถ (ครองราชย์ พ.ศ.1991–2031) — ข้อเท็จจริงเหล่านี้สนับสนุนว่ากฎหมายตราสามดวงคือกฎหมายอยุธยาที่ถูกนำมาชำระสะสางใหม่ในสมัยรัตนโกสินทร์ตอนต้นเท่านั้น ไม่ใช่กฎหมายที่แต่งขึ้นใหม่ทั้งหมด</p>
+    <div class="examBox"><div class="exlabel">📝 ตัวอย่างข้อสอบจริง</div>
+      <div class="exq">“พระธรรมศาสตร์ในกฎหมายตราสามดวงมีบทบัญญัติเกี่ยวกับเหตุแห่งตระลาการ 24 ประการ ซึ่งมีหัวข้อหนึ่งกำหนดว่า ‘ตระลาการตั้งตนให้เป็นอิสรภาพ’ นั้น หมายความว่าอย่างไร และท่านมีความเข้าใจว่าการกำหนดดังกล่าวเป็นไปเพื่อประโยชน์ในการอำนวยความยุติธรรมอย่างไร จงอธิบาย” (20 คะแนน)</div>
+      <div class="exsrc">น.462 ประวัติศาสตร์กฎหมายไทย ภาคบัณฑิต 2561</div>
+    </div>
+    <div class="examBox"><div class="exlabel">📝 ตัวอย่างข้อสอบจริง</div>
+      <div class="exq">“ท่านมีความเข้าใจว่าเหตุแห่งตระลาการ 24 ประการตามพระธรรมศาสตร์เป็นบทบัญญัติในเรื่องใด และมูลคดี 3 ประการในเหตุแห่งตระลาการ 24 ประการ ซึ่งมูลคดีหนึ่งบัญญัติว่า ‘คือโจทจำเลยมิได้วิบัติเป็นมูลคดี 1’ ท่านมีความเข้าใจว่าอย่างไร และเทียบเคียงได้กับหลักเรื่องใดใน ป.วิ.อาญาปัจจุบัน” (20 คะแนน)</div>
+      <div class="exsrc">น.462 ประวัติศาสตร์กฎหมายไทย ภาคบัณฑิต 2562</div>
+    </div>`},
+  {id:"dynasty3", cat:"dynasty3", label:"5. ตราสามดวง & ทศพิธราชธรรม", html:`
+    <p><b>ที่มาของกฎหมายตราสามดวง:</b> จุดเริ่มต้นของการชำระกฎหมายมาจาก <b>คดีอำแดงป้อม</b> — อำแดงป้อมฟ้องหย่าสามีของตนโดยที่ตนเองมีชู้ ศาลสมัยนั้นพิจารณาแล้วเห็นว่ามีบทกฎหมายสามฉบับที่เก็บไว้สามที่ต่างกันแต่มีข้อความตรงกันว่า "หญิงหย่าชาย ชายหาผิดมิได้ หญิงท่านว่าหย่าชายหย่าไม่ได้" (คือหญิงจะฟ้องหย่าชายไม่ได้หากชายไม่มีความผิด) แต่ศาลกลับตัดสินให้หย่าได้ — ผิดเพี้ยนจากตัวบท รัชกาลที่ 1 จึงทรงเห็นว่ากฎหมายที่ใช้มาตั้งแต่สมัยอยุธยาอาจวิปริตผิดเพี้ยนไปจากเหตุกรุงแตก จึงโปรดให้ตั้งคณะกรรมการชำระกฎหมายขึ้น 11 คน ประกอบด้วย <b>อาลักษณ์</b> (ทำหน้าที่จดบันทึก คัดลอก และตรวจทานตัวบทให้ถูกต้องตามหลักภาษา) <b>ลูกขุน</b> (ผู้ทรงความรู้กฎหมายที่ทำหน้าที่วินิจฉัยและยืนยันความถูกต้องของหลักกฎหมายแต่ละเรื่อง) และ<b>ราชบัณฑิต</b> (ผู้เชี่ยวชาญคัมภีร์พระธรรมศาสตร์และหลักบาลี คอยสอบทานที่มาของบทบัญญัติ) ใช้เวลา 11 เดือน ตรวจสอบ รวบรวม ชำระ และคัดลอกกฎหมายขึ้นใหม่เป็น 3 ชุด</p>
+    <p><b>เหตุที่ต้องมี "ตราสามดวง":</b> รัชกาลที่ 1 ทรงคาดว่ากฎหมายเดิมอาจถูกปลอมแปลงไปมากถึง 90% เพื่อป้องกันการปลอมแปลงในอนาคต จึงโปรดให้ประทับตรา 3 ดวงบนกฎหมายที่ชำระขึ้นใหม่ทุกชุด ได้แก่ <b>ตราคชสีห์</b> (ตราประจำกระทรวงกลาโหม) <b>ตราราชสีห์</b> (ตราประจำกระทรวงมหาดไทย) และ <b>ตราบัวแก้ว</b> (ตราประจำกรมท่า/กระทรวงการต่างประเทศ) หากกฎหมายฉบับใดไม่มีตราทั้งสามดวงประทับอยู่ ก็จะไม่รับฟังเป็นหลักฐาน กฎหมายตราสามดวงจึงถือเป็น<b>ประมวลกฎหมายฉบับแรกของไทย</b> และเป็นวรรณกรรมชิ้นเอกของสมัยรัตนโกสินทร์ที่สะท้อนระบบการปกครอง สังคม และวิถีชีวิตของคนไทยตั้งแต่กรุงศรีอยุธยาได้ดีที่สุด เพราะเอกสารประเภทอื่นที่บันทึกชีวิตราษฎรธรรมดามีน้อยมาก</p>
+    <p><b>โครงสร้างของกฎหมายตราสามดวง</b> มี 3 ส่วนหลัก:</p>
+    <ul>
+      <li><b>พระธรรมศาสตร์</b> — กฎหมายแม่บทที่สำคัญที่สุดในกฎหมายตราสามดวง ได้รับอิทธิพลจากคัมภีร์พระธรรมศาสตร์อันศักดิ์สิทธิ์ของอินเดีย เชื่อกันว่าเป็นคัมภีร์ที่พระมโนสารฤๅษีไปคัดลอกมาจากกำแพงจักรวาล เป็นบ่อเกิดของหลักการสากลที่ไม่เปลี่ยนแปลงตามกาลเวลา เช่น อคติ 4 หลักอินทภาษ และทศพิธราชธรรม จึงถือเป็นต้นแบบของกฎหมายในดินแดนเอเชียตะวันออกเฉียงใต้</li>
+      <li><b>พระราชศาสตร์</b> — คำพิพากษา/ตัวอย่างคดีที่กษัตริย์ทรงวินิจฉัยไว้เป็นบรรทัดฐาน แบ่งเป็นสาขาคดีต่าง ๆ อ้างอิงคาถาบาลีตามมูลคดีในพระธรรมศาสตร์เสมอ</li>
+      <li><b>พระราชนิติศาสตร์/พระราชกำหนด</b> — กฎหมายด้านบริหารปกครองที่กษัตริย์บัญญัติขึ้นนอกเหนือมูลคดี ไม่ต้องอิงบาลี เช่น กฎพระสงฆ์ กฎมณเฑียรบาล</li>
+    </ul>
+    <p>ในทางเนื้อหาแบ่งได้เป็นกฎหมายแพ่ง เช่น พระอัยการลักษณะผัวเมีย พระอัยการลักษณะมรดก และกฎหมายอาญา เช่น กฎหมายลักษณะโจร พระอัยการลักษณะวิวาทด่าตีกัน พระอัยการลักษณะอาญาหลวง ซึ่งใช้บังคับเรื่อยมาจนถูกยกเลิกทั้งหมดเมื่อ พ.ศ.2481</p>
+    <p><b>เนื้อหาที่ออกสอบบ่อยที่สุดในหมวดนี้:</b></p>
+    <ul>
+      <li><b>หลักอินทภาษ</b> — คำสอนของพระอินทร์ต่อผู้ทำหน้าที่ตุลาการว่าต้องปราศจากอคติ 4 คือ ฉันทาคติ (ลำเอียงเพราะรัก) โทสาคติ (ลำเอียงเพราะโกรธ) ภยาคติ (ลำเอียงเพราะกลัว) โมหาคติ (ลำเอียงเพราะหลง) เปรียบผู้พิพากษาที่ลำเอียงว่าบาปหนักยิ่งกว่าการฆ่าคนบริสุทธิ์ และต้องรอบรู้ขั้นตอนวิธีพิจารณาความในศาลตั้งแต่รับ-ตรวจคำฟ้อง ชี้สองสถาน จนถึงพิเคราะห์พยาน</li>
+      <li><b>เหตุแห่งตระลาการ 24 ประการ</b> — คุณสมบัติและหน้าที่ของตระลาการที่ดี เช่นข้อ "ตระลาการตั้งตนให้เป็นอิสรภาพ" หมายถึงต้องไม่ลำเอียงเข้าข้างฝ่ายใด รวมถึงมูลคดี 3 ประการที่ว่า "โจทจำเลยมิได้วิบัติเป็นมูลคดี" ซึ่งหมายถึงคู่ความทั้งสองฝ่ายต้องมีอำนาจฟ้องและอำนาจดำเนินคดี — เทียบเคียงได้กับหลักเรื่องอำนาจฟ้อง/ผู้เสียหายในกฎหมายวิธีพิจารณาความปัจจุบัน</li>
+      <li><b>มูลคดีแห่งตระลาการ 10 ประการ</b> — พระราชศาสตร์วางหลักมูลคดีที่ผู้พิพากษาและตระลาการต้องใช้พิจารณาคดีไว้ 10 ประการ จัดกลุ่มเป็น 6 หมวดใหญ่ ได้แก่ (1) หลักอินทภาษ (2) พระธรรมนูญ — ว่าด้วยอำนาจหน้าที่ของศาลและตุลาการแต่ละตำแหน่ง (3) พระอัยการลักษณะพยาน (4) การพิสูจน์ด้วยการดำน้ำ-ลุยเพลิง (5) พระอัยการลักษณะรับฟ้อง และ (6) พระอัยการลักษณะตระลาการ ทั้งหมดนี้คู่ขนานไปกับ<b>มูลคดีวิวาท 29 ประการ</b> (จัดเป็น 12 หมวด) ที่ใช้เป็นหัวข้อในการวินิจฉัยคดีพิพาทระหว่างราษฎร</li>
+      <li><b>ทศพิธราชธรรม (ราชธรรม 10 ประการ)</b> — 1.ทาน (พระราชทานทรัพย์สิ่งของ) 2.ศีล (รักษามารยาทกายวาจาดีงาม) 3.ปริจจาคะ (บริจาคเพื่อสาธารณประโยชน์) 4.อาชชวะ (พระอัธยาศัยตรง ซื่อสัตย์) 5.มัททวะ (อ่อนโยน) 6.ตปะ (ขจัดเผาผลาญความชั่ว) 7.อักโกธะ (ไม่โกรธโดยไม่มีเหตุ) 8.อวิหิงสา (ไม่เบียดเบียนผู้อื่น) 9.ขันติ (อดทนเข้มแข็ง) 10.อวิโรธนะ (ไม่ผิดจากธรรม ไม่ยินร้าย) — เป็นหลักธรรมที่พระธรรมศาสตร์กำหนดให้พระมหากษัตริย์ทรงยึดถือควบคู่กับศีล 5 ศีล 8</li>
+      <li><b>ประพฤติธรรม 4 ประการ</b> — (1) ลงโทษผู้ควรถูกลงโทษและให้รางวัลผู้ทำความดี ทำให้กฎหมายศักดิ์สิทธิ์ ประชาชนเคารพกฎหมาย (2) ทะนุบำรุงผู้มีความรู้และมีศีลสัตย์ เพื่อสร้างสติปัญญาแก่ชาติ (3) รวบรวมพระราชทรัพย์โดยยุติธรรม ("ประมูลมา" ในสมัยก่อนหมายถึงการเก็บภาษีอย่างเป็นธรรม) (4) ปกครองพระราชอาณาจักรให้ประชาชนเกษมสุขโดยยุติธรรม — ถือเป็นข้อสำคัญที่สุด เพราะสังคมที่ปราศจากความยุติธรรมย่อมนำไปสู่ปัญหา หลักนี้ปรากฏอยู่ใน<b>พระไอยการอาชญาหลวง</b> ที่ตราขึ้นเมื่อ พ.ศ.1895 ในรัชสมัยสมเด็จพระรามาธิบดีที่ 1</li>
+    </ul>
+    <p>ตำนานกำเนิดสถาบันกษัตริย์ในพระธรรมศาสตร์เล่าว่า เมื่อมนุษย์เกิดวิวาทกันหาผู้ตัดสินไม่ได้ ประชาชนจึงร่วมกันสถาปนา<b>พระเจ้ามหาสมมุติราช</b>ขึ้นเป็นอธิบดี อันเป็นที่มาของแนวคิดราชาธิปไตย/สมบูรณาญาสิทธิราชย์ ส่วน<b>ตำนานพระมโนสาร</b> เล่าถึงคดีแย่งผลแตงที่พระมโนสารตัดสินไม่เป็นธรรม (ตัดสินว่าแตงอยู่ในไร่ใครเป็นของคนนั้น ทั้งที่เถาแตงเลื้อยข้ามเขตแดนไปเอง) จนถูกตำหนิและต้องออกบวช แล้วเหาะไปเห็นคัมภีร์พระธรรมศาสตร์จารึกอยู่ที่กำแพงจักรวาล จึงจดจำมาแต่งเป็นคัมภีร์ — คดีแย่งผลแตงนี้ยังถือเป็นต้นกำเนิดเชิงตำนานของหลักกฎหมายเรื่องดอกผลตามธรรมชาติที่เชื่อมโยงมาถึง ป.พ.พ. ปัจจุบัน</p>
+    <p><b>คดีสำคัญอื่นที่เชื่อมโยงยุคนี้กับการปฏิรูปกระบวนยุติธรรมสมัยใหม่</b> คือ<b>คดีพระยอดเมืองขวาง</b>ในสมัยรัชกาลที่ 5 ซึ่งมีการตั้งศาลพิเศษพิจารณาคดีนี้โดยเฉพาะและใช้กระบวนพิจารณาแบบตะวันตก (มีทนายความ อัยการ สืบพยานต่อเนื่อง) แม้ท้ายที่สุดจะถูกฝรั่งเศสแทรกแซง แต่ก็แสดงถึงความพยายามของไทยในการปรับปรุงระบบกฎหมายให้ทันสมัย</p>
+    <div class="examBox"><div class="exlabel">📝 ตัวอย่างข้อสอบจริง (หัวข้อที่อาจารย์ชอบออก)</div>
+      <div class="exq">“ในพระธรรมสาตรมีความตอนหนึ่งว่า ‘ครั้งนั้น สมเดจพระบรมโพธิสัตว์เจ้า ได้มาบังเกิดเป็นพระมหาบุรุษในต้นพัทกัลป ... จึ่งตั้งสมเดจพระมหาบุรุษราชเจ้าขึ้นเป็นอธิบดี มีพระนามกรชื่อว่าพระเจ้ามหาสมมุติราช กอบไปด้วยสัตะพิธรัตน 7 ปรการ...’ ให้ท่านอธิบายแนวความคิดในเรื่อง ‘สถานะของผู้ปกครอง’ ที่ปรากฏข้างต้น” (20 คะแนน)</div>
+      <div class="exsrc">น.462 ประวัติศาสตร์กฎหมายไทย ศูนย์ลำปาง 2560</div>
+    </div>
+    <div class="examBox"><div class="exlabel">📝 ตัวอย่างข้อสอบจริง</div>
+      <div class="exq">โจทย์มักถามให้อธิบาย “ทศพิธราชธรรม” และ/หรือ “ประพฤติธรรม 4 ประการ” พร้อมวิเคราะห์ว่าหลักธรรมเหล่านี้ยังมีความสำคัญต่อผู้ปกครองในปัจจุบันหรือไม่ อย่างไร รวมถึงคำถามให้อธิบายความหมายของ “กำแพงจักรวาล” และ “มูลคดี” ตามความเข้าใจ</div>
+      <div class="exsrc">น.462 ประวัติศาสตร์กฎหมายไทย ศูนย์ลำปาง 2560 และเอกสารประกอบวิชา</div>
+    </div>`},
+  {id:"reform5", cat:"reform5", label:"6. ปฏิรูปกฎหมาย ร.5", html:`
+    <p>จุดเปลี่ยนสำคัญคือ <b>สนธิสัญญาเบาว์ริง (Bowring's Treaty)</b> พ.ศ.2398 ซึ่งไทยถูกบีบบังคับให้ทำกับอังกฤษเป็นชาติแรก ข้อตกลงหลักคือ (1) คนในบังคับอังกฤษขึ้นศาลกงสุลอังกฤษแทนศาลไทย (สิทธิสภาพนอกอาณาเขต) (2) พ่อค้าอังกฤษมีสิทธิค้าขายโดยเสรีตามเมืองท่าสยาม (3) กำหนดภาษีขาเข้าร้อยละ 3 ภาษีขาออกเก็บครั้งเดียว ฝิ่นเป็นสินค้าปลอดภาษี (4) พ่อค้าอังกฤษซื้อขายโดยตรงกับคนสยามได้ (5) หากไทยให้สิทธิพิเศษแก่ชาติอื่นนอกสนธิสัญญา ต้องให้อังกฤษด้วย หลังจากนั้นชาติมหาอำนาจอื่น ๆ ก็ทยอยทำสนธิสัญญาทำนองเดียวกัน (อเมริกา ฝรั่งเศส 2399, เดนมาร์ก 2400, ญี่ปุ่น 2441, รัสเซีย 2442 ฯลฯ)</p>
+    <p>สาเหตุที่ไทยถูกบีบให้ทำสนธิสัญญานี้คือข้อกล่าวหาว่า<b>กฎหมายไทยป่าเถื่อน</b> ชาติตะวันตกจึงเรียกร้องสิทธิสภาพนอกอาณาเขตเพื่อไม่ต้องอยู่ภายใต้บังคับกฎหมายไทยและศาลไทย สภาพการณ์นี้เป็นจุดเริ่มต้นที่ทำให้ไทยต้องเร่งปฏิรูปประเทศทุกด้าน ทั้งการปกครอง กฎหมาย การศาล เศรษฐกิจ การคมนาคม การศึกษา และขนบธรรมเนียมประเพณี เพื่อให้รอดพ้นจากการตกเป็นเมืองขึ้น</p>
+    <p><b>การปฏิรูปด้านสังคมและธรรมเนียม</b> ในรัชสมัยพระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัว (รัชกาลที่ 5 ครองราชย์ พ.ศ.2411–2453):</p>
+    <ul>
+      <li>ประกาศเปลี่ยนธรรมเนียมใหม่ จ.ศ.1235 (พ.ศ.2416) ให้เลิก<b>ธรรมเนียมหมอบคลาน</b> ทรงเห็นว่าเป็นการกดขี่ที่ไม่มีประโยชน์ต่อบ้านเมือง</li>
+      <li>พ.ร.บ.พิกัดกระเษียรอายุลูกทาสลูกไท เดือน 5 จ.ศ.1236 (พ.ศ.2417) เพื่อทยอย<b>เลิกทาส</b> กำหนดค่าตัวทาสที่เกิดในปีมะโรง (พ.ศ.2411) ให้ลดลงเรื่อย ๆ จนเป็นไทเมื่ออายุ 21 ปี ตามด้วย พ.ร.บ.ทาส ร.ศ.124 (พ.ศ.2448) ให้ลูกทาสทั้งหลายเป็นไท ห้ามขายตัวอีก ใช้เวลารวม 37 ปีทาสจึงหมดไปจากเมืองไทย</li>
+      <li>ยกเลิกระบบ<b>ไพร่</b>โดยค่อยเป็นค่อยไปจนสำเร็จ พ.ศ.2448 ด้วย พ.ร.บ.ลักษณะเกณฑ์ทหาร ร.ศ.124</li>
+    </ul>
+    <p><b>การปฏิรูปด้านกฎหมายและการศาล:</b> เดิมชาวตะวันตกตั้งข้อรังเกียจสำคัญว่าระบบกฎหมายไทยไม่แบ่งแยกคดีแพ่ง-อาญาเด็ดขาด ทำให้การระบุโทษซ้ำซ้อนกัน (ลาลูแบร์และกรมหมื่นราชบุรีดิเรกฤทธิ์ต่างบันทึกถึงความยากในการแยกคดีแพ่ง-อาญาของระบบเดิม) ไทยจึงเริ่มรับหลักกฎหมายอังกฤษมาใช้ตั้งแต่ พ.ศ.2439 โดยในคดีอาญายกเลิก<b>จารีตนครบาล</b> (วิธีสอบสวนแบบเก่าที่ถือว่าผู้ต้องหาเป็นผู้ร้ายไว้ก่อน ใช้การทรมานหาหลักฐาน ถูกมองว่าป่าเถื่อน) ด้วย พ.ร.บ.ยกเลิกวิธีพิจารณาโจรผู้ร้ายตามจารีตนครบาล ร.ศ.115 และประกาศ พ.ร.บ.กระบวนพิจารณาความแพ่ง ร.ศ.115 ซึ่งเป็นครั้งแรกที่แยกคดีแพ่งและอาญาออกจากกันอย่างชัดเจน ต่อมามีการตรา พ.ร.บ.ลักษณะพยาน ร.ศ.113 กำหนดวิธีพิจารณาใหม่ให้ทันสมัย (การอ้างพยานบุคคล พยานเอกสาร วิธีสืบพยาน 3 วิธี) โดยยังนำกฎหมายเก่าบางมาตราในพระอัยการลักษณะรับฟ้อง/ลักษณะพยาน/ลักษณะตระลาการมาใช้ร่วมด้วย</p>
+    <p>ด้านองค์กรศาล: ตั้ง<b>กระทรวงยุติธรรม</b> ในปี ร.ศ.110 (พ.ศ.2434) รวมศาลที่กระจัดกระจายเหลือเพียง 7 ศาล ตั้ง<b>กรมอัยการ</b>ในสังกัดกระทรวงยุติธรรมเมื่อ ร.ศ.112 (พ.ศ.2436) ก่อนหน้านั้นราษฎรผู้เสียหายต้องฟ้องคดีอาญาด้วยตนเอง ตั้ง<b>โรงเรียนกฎหมาย</b>ใน พ.ศ.2440 (ภายหลังโอนไปรวมกับคณะนิติศาสตร์และรัฐศาสตร์ที่มหาวิทยาลัยธรรมศาสตร์) และในส่วนภูมิภาคก็ปฏิรูปศาลหัวเมืองเป็น 3 ชั้น (ศาลมณฑล ศาลเมือง ศาลแขวง) ตามพระธรรมนูญศาลหัวเมือง ร.ศ.114 จนถึง พ.ศ.2451 จึงประกาศใช้พระธรรมนูญศาลยุติธรรมและ พ.ร.บ.วิธีพิจารณาความแพ่ง ร.ศ.127 ฉบับสมบูรณ์</p>
+    <p>ในด้านกฎหมายเนื้อหา ประกาศใช้<b>กฎหมายลักษณะอาญา ร.ศ.127</b> (พ.ศ.2451) เพื่อความทันสมัย เนื่องจากกฎหมายตราสามดวงถูกวิจารณ์ว่า (1) ไม่แยกคดีแพ่ง-อาญาเด็ดขาด (2) บทลงโทษไม่กำหนดระยะเวลาชัดเจน (3) ไม่มีความเป็นสากล มีรายละเอียดฟุ่มเฟือย เช่น กำหนดประเภทโจรถึง 16 ประเภท กำหนดโทษตามศักดินาของผู้กระทำและผู้เสียหาย (4) ขาดบทบัญญัติรองรับความผิดรูปแบบใหม่ และ (5) ขาดมาตรฐานที่แน่นอนในการบังคับใช้</p>
+    <p>ผลของการปฏิรูปทั้งหมดนี้ทำให้กฎหมายไทยทันสมัยและเป็นสากลขึ้น ต่างชาติเริ่มพอใจในกระบวนการยุติธรรมไทยและยินยอมขึ้นศาลไทย ทำให้เอกภาพทางการศาลของไทยกลับคืนมา และสิทธิสภาพนอกอาณาเขตของคนต่างชาติค่อย ๆ หมดสิ้นไปในเวลาต่อมา (สมบูรณ์ในสมัยรัชกาลที่ 6-7 หลังไทยเข้าร่วมสงครามโลกครั้งที่ 1 กับฝ่ายสัมพันธมิตร ทำให้มีโอกาสเจรจาแก้ไขสนธิสัญญาที่ไม่เป็นธรรม)</p>
+    <div class="examBox"><div class="exlabel">📝 ตัวอย่างข้อสอบจริง</div>
+      <div class="exq">“จงพิจารณาข้อความต่อไปนี้ในพระราชบัญญัติลักษณะเปลี่ยนธรรมเนียมใหม่ จุลศักราช 1235 (พ.ศ.2416) ‘...ธรรมเนียมที่หมอบคลานกราบไหว้ในประเทศสยามนี้ เห็นว่าเป็นการกดขี่แก่กันแข็งแรงนัก...’ จงอธิบายว่าความหมายที่แท้จริงในการตราพระราชบัญญัตินี้คืออะไร และให้ท่านวิเคราะห์ผลบังคับตามกฎหมายนี้ตามหลักวิชาทางประวัติศาสตร์กฎหมายที่ท่านได้ศึกษามา โดยแสดงด้วยว่าอะไรเป็นปัจจัยที่ส่งเสริมหรือขัดขวางความมีผลของกฎหมายนี้” (20 คะแนน)</div>
+      <div class="exsrc">น.462 ประวัติศาสตร์กฎหมายไทย ภาคบัณฑิต 2562</div>
+    </div>
+    <div class="examBox"><div class="exlabel">📝 ตัวอย่างข้อสอบจริง</div>
+      <div class="exq">“จงอธิบายสถานะและพระราชอำนาจของพระมหากษัตริย์ภายใต้กฎหมายไทยเดิม” (20 คะแนน)</div>
+      <div class="exsrc">น.462 ประวัติศาสตร์กฎหมายไทย ภาคบัณฑิต 2561</div>
+    </div>`},
+  {id:"codify", cat:"codify", label:"7. การจัดทำประมวลกฎหมายสมัยใหม่", html:`
+    <p>ก่อนจะเข้าใจการทำประมวลกฎหมายของไทย ควรเข้าใจภาพรวมของ<b>ขบวนการจัดทำประมวลกฎหมาย (Codification)</b> ในยุโรปก่อน ในทางการเมือง ศตวรรษที่ 17-18 เกิดการก่อตัวของรัฐชาติ (Nation State) สมัยใหม่และการรวมอำนาจสู่ศูนย์กลางของรัฐสมบูรณาญาสิทธิราชย์ ทำให้เกิดความมุ่งหมายจัดระเบียบกฎหมายให้เป็นเอกภาพภายใต้คำขวัญ <b>"One Nation, One King, One Law"</b> ในทางความคิด การศึกษากฎหมายโรมันในมหาวิทยาลัยยุโรปตั้งแต่ศตวรรษที่ 11 จนได้รับการยอมรับเป็นกฎหมายทั่วไปของยุโรป (<b>ius commune</b>) ก่อให้เกิดอุดมคติว่ามนุษย์มีเหตุผลเพียงพอจะเรียบเรียงกฎหมายเป็นระบบได้ จึงเกิดการชำระสะสางกฎหมายชาติต่าง ๆ ต่อเนื่อง เช่น เดนมาร์ก (1683) สวีเดน (1734) บาวาเรีย (1756) ปรัสเซีย (1794) จนถึงจุดสูงสุดคือ<b>ประมวลกฎหมายนโปเลียน (Code Civil ฝรั่งเศส 1804)</b> ซึ่งรวมกฎหมายโรมัน จารีตประเพณี และกฎหมายยุคปฏิวัติเข้าเป็นระบบเดียว มีอิทธิพลไปทั่วโลก</p>
+    <p>ในเยอรมนี การจัดทำประมวลกฎหมายล่าช้ากว่าเพราะอิทธิพลของ<b>สำนักประวัติศาสตร์ (Historical School)</b> นำโดย Friedrich Carl von Savigny ที่โต้แย้งกับ Thibaut ว่ากฎหมายเป็นผลผลิตของประวัติศาสตร์และจิตวิญญาณของชาติ (Volksgeist) จะไปลอกกฎหมายชาติอื่นมาใช้ไม่ได้ ในที่สุดประมวลกฎหมายแพ่งเยอรมัน (BGB) จึงประกาศใช้ในปี ค.ศ.1896 มีผลบังคับใช้ ค.ศ.1900 ตามด้วยประมวลกฎหมายแพ่งสวิส (ZGB, 1907) — ทั้งหมดนี้เป็นบริบทที่ประเทศไทยใช้อ้างอิงเมื่อเริ่มจัดทำ<b>ประมวลกฎหมายแพ่งและพาณิชย์แห่งสยาม</b>ในเวลาต่อมา</p>
+    <p><b>กระบวนการจัดทำ ป.พ.พ. ของไทย</b> เริ่มตั้งคณะกรรมการร่างใน พ.ศ.2451 โดยมีชาวฝรั่งเศสเป็นหลักในช่วงแรก (เพราะฝรั่งเศสมีอิทธิพลมากในเวลานั้น) แต่งานล่าช้ามาก ร่างได้เพียง 2 บรรพภายใน พ.ศ.2459 ต่อมามีการปรับคณะกรรมการใหม่ให้มีสมเด็จพระเจ้าบรมวงศ์เธอ กรมพระสวัสดิวัดนวิศิษฎ์ (อธิบดีศาลฎีกา) เป็นประธาน และมีกรรมการทั้งไทยและต่างชาติ</p>
+    <p>จุดเด่นที่สุดของหัวข้อนี้คือ <b>"วิธีการแบบญี่ปุ่น"</b> ที่พระยามานวราชเสวี (ปลอด วิเชียร ณ สงขลา) นำมาปรับใช้ในการจัดทำ ป.พ.พ. พ.ศ.2468 — เป็นหัวข้อที่ออกสอบซ้ำแล้วซ้ำเล่าในหลายปีการศึกษา คณะกรรมการอ้างอิงหลักการดังนี้: อ้างอิงกฎหมายไทยที่มีอยู่เดิม (ตัวบทและคำพิพากษา) ศึกษาเปรียบเทียบจากประมวลกฎหมายต่างประเทศ — จากฝรั่งเศสในแง่ความชัดเจน จากกฎหมายอังกฤษบางส่วนที่คนไทยคุ้นเคยอยู่แล้ว จาก<b>ประมวลกฎหมายญี่ปุ่นและสวิส</b>ในแง่บทบัญญัติที่ทันสมัยและใช้งานสะดวก และจากกฎหมายเยอรมันในแง่เทคนิคทางกฎหมาย โดยเน้นผลในทางปฏิบัติเป็นสำคัญ ในทางเนื้อหา บรรพ 1-2 อิงกฎหมายเยอรมันและญี่ปุ่น (ซึ่งมีรากฐานจากกฎหมายโรมัน) จนบางมาตรา (เช่นเรื่องวางทรัพย์) แทบเหมือนกันคำต่อคำ บรรพ 3 เรื่องซื้อขายกลับไปยึดกฎหมายอังกฤษเป็นหลัก (Sale of Goods Act 1893) และกฎหมายตั๋วเงินอิง Bill of Exchange Act 1882 ของอังกฤษ ส่วนกฎหมายลักษณะบริษัทก็ได้แนวคิดจากอังกฤษเช่นกัน ประมวลกฎหมายสำเร็จบางส่วนใน พ.ศ.2468 และสมบูรณ์ทั้ง 6 บรรพใน พ.ศ.2477 (บรรพ 5 ครอบครัวมีผลบังคับ ต.ค.2478)</p>
+    <p>ในด้านทรัพย์สิน กฎหมายที่ดินโบราณของไทย เช่น <b>พระอัยการลักษณะเบ็ดเสร็จ</b> ยังใช้ศึกษาในโรงเรียนกฎหมายและใช้ในทางปฏิบัติจนกระทั่งมีการประกาศใช้ ป.พ.พ. บรรพ 4 ว่าด้วยทรัพย์สิน ใน พ.ศ.2475 จึงยกเลิกระบบเดิมไป ส่วนในคำพิพากษายุคแรก ๆ ก็เริ่มเห็นการนำหลักกฎหมายอังกฤษมาปรับใช้ตัดสินคดี เช่น หลัก<b>Consideration (สินจ้าง)</b> ในคำพิพากษาที่ 352 ร.ศ.119 และหลัก<b>Estoppel (กฎหมายปิดปาก)</b> ในคำพิพากษาที่ 65 ร.ศ.121 เนื่องจากนักกฎหมายไทยรุ่นบุกเบิกที่วางรากฐานกฎหมายสมัยใหม่ส่วนใหญ่จบการศึกษาจากอังกฤษ</p>
+    <div class="examBox"><div class="exlabel">📝 ตัวอย่างข้อสอบจริง</div>
+      <div class="exq">“‘วิธีการแบบญี่ปุ่น’ ที่พระยามานวราชเสวี (ปลอด วิเชียร ณ สงขลา) นำมาใช้ในการจัดทำประมวลกฎหมายแพ่งและพาณิชย์ พ.ศ.2468 มีข้อดีและข้อเสียอย่างไร จงอธิบาย” (20 คะแนน)</div>
+      <div class="exsrc">น.462 ประวัติศาสตร์กฎหมายไทย ศูนย์ลำปาง 2560 / ภาคบัณฑิต 2561</div>
+    </div>
+    <div class="examBox"><div class="exlabel">📝 ตัวอย่างข้อสอบจริง</div>
+      <div class="exq">“พระยามานวราชเสวี (ปลอด วิเชียร ณ สงขลา) มีความเข้าใจผิดในการจัดทำประมวลกฎหมายแพ่งและพาณิชย์ พ.ศ.2468 อย่างไร และความเข้าใจผิดดังกล่าวส่งผลอย่างไรต่อการใช้การตีความกฎหมาย จงอธิบายโดยยกตัวอย่างการตีความหลักกฎหมายเพื่อประกอบพอสังเขป” (20 คะแนน)</div>
+      <div class="exsrc">น.462 ประวัติศาสตร์กฎหมายไทย ศูนย์ลำปาง 2560</div>
+    </div>
+    <div class="examBox"><div class="exlabel">📝 ตัวอย่างข้อสอบจริง</div>
+      <div class="exq">“จากที่ได้ศึกษา ‘กฎหมายที่ดินโบราณ’ ดังปรากฏอยู่ในตัวบท ‘พระอายการลักษณะเบ็ดเสร็จ’... ท่านเห็นว่าในระบบกฎหมายที่ดินไทยก่อนปี พ.ศ.2475 ประสบปัญหาในแง่หลักการทางกฎหมายมากน้อยเพียงใดหรือไม่ จงอธิบายโดยละเอียด” (20 คะแนน)</div>
+      <div class="exsrc">น.462 ประวัติศาสตร์กฎหมายไทย ศูนย์ลำปาง 2560</div>
+    </div>`},
+  {id:"publiclaw", cat:"publiclaw", label:"8. กฎหมายมหาชนไทย", html:`
+    <p>ควรแยกให้ชัดระหว่างคำว่า <b>"รัฐธรรมนูญ"</b> (กฎหมายสูงสุดของประเทศที่บัญญัติเรื่องการปกครองไว้ในฉบับเดียวเป็นลายลักษณ์อักษร กำหนดการแบ่งแยกอำนาจอธิปไตย องค์กรปกครอง การประกันสิทธิเสรีภาพ และการแก้ไขรัฐธรรมนูญ) กับ <b>"กฎหมายรัฐธรรมนูญ"</b> ซึ่งความหมายกว้างกว่ามาก หมายถึงกฎหมายทุกที่มาที่เกี่ยวกับการปกครองประเทศ ไม่ว่าจะเป็นพระราชกฤษฎีกาสมัยสมบูรณาญาสิทธิราชย์ พระราชบัญญัติที่ตราโดยรัฐสภา คำพิพากษาของศาล หรือแม้แต่ธรรมเนียมปฏิบัติทางรัฐธรรมนูญที่ไม่ได้บัญญัติเป็นลายลักษณ์อักษร (ของไทยเรียกว่า "ประเพณีการปกครองในระบอบประชาธิปไตยอันมีพระมหากษัตริย์ทรงเป็นประมุข") กฎหมายรัฐธรรมนูญจึงอาจเป็นลายลักษณ์อักษรหรือไม่เป็นก็ได้</p>
+    <p>ในเชิงประวัติศาสตร์ นักวิชาการมักเปรียบเทียบ<b>ศิลาจารึกหลักที่ 1</b> (พ่อขุนรามคำแหง) กับ <b>Magna Carta</b> ของอังกฤษ ในฐานะต้นแบบยุคแรกของ "กฎหมายรัฐธรรมนูญ" เพราะทั้งสองฉบับ (1) จำกัดอำนาจกษัตริย์เรื่องภาษี — ต่างกันตรงที่กษัตริย์จอห์นถูกขุนนางบังคับ ส่วนพ่อขุนรามคำแหงทรงยกเลิกจังกอบด้วยพระองค์เอง (2) ประกันสิทธิเสรีภาพราษฎรในหลายด้าน เช่น สิทธิรับมรดก สิทธิเดินทาง สิทธิซื้อขาย สิทธิได้รับความยุติธรรม (3) ตราขึ้นโดยองค์อธิปัตย์ผู้มีอำนาจสูงสุด แต่อ้างที่มาอำนาจต่างกัน (สืบราชสมบัติ vs. พรของพระเจ้า) และ (4) กำหนดขอบเขตการปกครองดินแดนของตน</p>
+    <p>หลักสำคัญหลักหนึ่งในกฎหมายมหาชนไทยที่รับมาจากตะวันตกคือ <b>"The King Can Do No Wrong"</b> (พระมหากษัตริย์ทรงกระทำผิดมิได้) มีรากมาจากกฎหมายอังกฤษยุคสมบูรณาญาสิทธิราชย์ที่อำนาจบริหารทุกประเภทรวมศูนย์ที่กษัตริย์ ทำให้กษัตริย์เป็นแหล่งกำเนิดอำนาจอธิปไตยเอง จึงไม่อาจถูกฟ้องร้องดำเนินคดีใด ๆ ได้ (เพราะจะเท่ากับบังคับให้อยู่ภายใต้อำนาจของตนเอง) หลักการนี้ยังปรากฏอยู่ในรัฐธรรมนูญไทยปัจจุบัน (มาตรา 6 ของรัฐธรรมนูญ 2560 — "องค์พระมหากษัตริย์ทรงดำรงอยู่ในฐานะอันเป็นที่เคารพสักการะ ผู้ใดจะละเมิดมิได้ ผู้ใดจะกล่าวหาหรือฟ้องร้องพระมหากษัตริย์ในทางใด ๆ มิได้") โดยเชื่อมโยงกับหลักที่ว่ามาตรา 3 บัญญัติให้อำนาจอธิปไตยเป็นของปวงชนชาวไทย พระมหากษัตริย์ผู้ทรงเป็นประมุขทรงใช้อำนาจนั้นทางรัฐสภา คณะรัฐมนตรี และศาล กล่าวคือพระองค์ไม่ได้ทรงบริหารราชการแผ่นดินเอง เพียงทรงกระทำตามคำแนะนำของรัฐบาล จึงไม่ต้องรับผิดชอบต่อการกระทำของฝ่ายบริหาร นิติบัญญัติ และตุลาการ หลักนี้ได้รับการยอมรับในหลายประเทศที่มีกษัตริย์เป็นประมุขภายใต้รัฐธรรมนูญ เช่น เดนมาร์ก เบลเยียม นอร์เวย์</p>
+    <p>ก่อนจะมีรัฐธรรมนูญลายลักษณ์อักษรฉบับแรกของไทยใน พ.ศ.2475 (พระราชทานโดยพระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว รัชกาลที่ 7 ภายหลังการเปลี่ยนแปลงการปกครองโดยคณะราษฎร) ประเทศไทยปกครองด้วยระบอบสมบูรณาญาสิทธิราชย์ต่อเนื่องมาตั้งแต่สุโขทัยและอยุธยา ซึ่งรากฐานความคิดเรื่องการจำกัดอำนาจผู้ปกครองและการรับรองสิทธิราษฎรที่ปรากฏอยู่แล้วในศิลาจารึกหลักที่ 1 และพระธรรมศาสตร์ (ทศพิธราชธรรม ประพฤติธรรม 4 ประการ) จึงถือเป็นรากฐานทางความคิดสำคัญของกฎหมายมหาชนไทยสมัยใหม่ ก่อนที่จะพัฒนาสู่โครงสร้างรัฐธรรมนูญแบบตะวันตกในเวลาต่อมา</p>
+    <div class="examBox"><div class="exlabel">📝 ตัวอย่างข้อสอบจริง</div>
+      <div class="exq">“จงอธิบายสถานะและพระราชอำนาจของพระมหากษัตริย์ภายใต้กฎหมายไทยเดิม” (20 คะแนน)</div>
+      <div class="exsrc">น.462 ประวัติศาสตร์กฎหมายไทย ภาคบัณฑิต 2561</div>
+    </div>
+    <div class="examBox"><div class="exlabel">📝 ตัวอย่างข้อสอบจริง</div>
+      <div class="exq">“จงอธิบายว่าหลักการใช้การตีความกฎหมายของไทย มีส่วนได้รับอิทธิพลจากหลักวิชากฎหมายตะวันตกว่าอย่างไร และยังยึดโยงอยู่กับรากเหง้าทางวัฒนธรรมไทยหรือไม่ เพียงใด” (20 คะแนน)</div>
+      <div class="exsrc">น.462 ประวัติศาสตร์กฎหมายไทย ภาคบัณฑิต 2561</div>
+    </div>`}
+];
+
+/* ================= VIDEO (โหมดวิดีโอ) ================= */
+const VIDEO_GROUPS = [
+  {label:"กฎหมายโรมัน", icon:"🏛️", videos:[
+    {id:"4_q9scIpT9Y", title:"พัฒนาการกฎหมายโรมัน (1)"},
+    {id:"TgUcBp-6PKg", title:"พัฒนาการกฎหมายโรมัน (2 ต่อ)"}
+  ]},
+  {label:"กฎหมายโรมันถึงยุคกลาง", icon:"⚖️", videos:[
+    {id:"AzShn-i4HNI", title:"กฎหมายโรมันถึงยุคกลาง"}
+  ]},
+  {label:"กฎหมายยุคกลางของยุโรป", icon:"🏰", videos:[
+    {id:"0hiPXBJ-ltw", title:"กฎหมายยุคกลาง", list:"PLl3HwAGv_CvfpmrUA826buVF9ObmTafWf"}
+  ]},
+  {label:"กฎหมายไทยดั้งเดิม–อยุธยา–รัตนโกสินทร์", icon:"📜", videos:[
+    {id:"_rX8QtcY-jI", title:"กฎหมายไทยยุคดั้งเดิม", list:"PLl3HwAGv_CvfpmrUA826buVF9ObmTafWf"},
+    {id:"tGO_H-UBxWo", title:"กฎหมายอยุธยา", list:"PLl3HwAGv_CvfpmrUA826buVF9ObmTafWf"},
+    {id:"1nt4Jnd1eHc", title:"กฎหมายต้นกรุงรัตนโกสินทร์", list:"PLl3HwAGv_CvfpmrUA826buVF9ObmTafWf"},
+    {id:"zcOatvX9q8Y", title:"กฎหมายไทยยุคใหม่", list:"PLl3HwAGv_CvfpmrUA826buVF9ObmTafWf"}
+  ]},
+  {label:"กฎหมายมหาชนไทย", icon:"🏳️", videos:[
+    {id:"cgi9X-axtzA", title:"ประวัติกฎหมายมหาชนไทย", list:"PLl3HwAGv_CvfpmrUA826buVF9ObmTafWf"}
+  ]},
+  {label:"กฎหมายแพ่งไทย", icon:"📘", videos:[
+    {id:"AavD-Vd2h88", title:"การทำกฎหมายแพ่งในไทย", list:"PLl3HwAGv_CvfpmrUA826buVF9ObmTafWf"}
+  ]}
+];
+
+/* ================= SCORE ================= */
+const SCORE_KEY = "n462_score_v1";
+function loadScore(){ try{ return parseInt(localStorage.getItem(SCORE_KEY)||"0",10)||0; }catch(e){ return 0; } }
+let totalScore = loadScore();
+function saveScoreValue(){ try{ localStorage.setItem(SCORE_KEY, String(totalScore)); }catch(e){} }
+function renderScoreDisplay(){ document.getElementById("score-value").textContent = totalScore; }
+function addScore(n){
+  totalScore += n; saveScoreValue(); renderScoreDisplay();
+  const el = document.querySelector(".home-bar-score");
+  el.classList.remove("score-pop"); void el.offsetWidth; el.classList.add("score-pop");
+}
+function loadSeenSet(key){ try{ return new Set(JSON.parse(localStorage.getItem(key)||"[]")); }catch(e){ return new Set(); } }
+function saveSeenSet(key,set){ try{ localStorage.setItem(key, JSON.stringify([...set])); }catch(e){} }
+const cardSeenSet = loadSeenSet("n462_cardsSeen");
+const studySeenSet = loadSeenSet("n462_studySeen");
+
+function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+/* ================= TABS ================= */
+const tabs = {card:document.getElementById("tab-card"), study:document.getElementById("tab-study"), video:document.getElementById("tab-video")};
+const views = {card:document.getElementById("view-card"), study:document.getElementById("view-study"), video:document.getElementById("view-video")};
+function setTab(which){
+  Object.keys(tabs).forEach(k=>{ tabs[k].classList.toggle("on", k===which); views[k].classList.toggle("on", k===which); });
+}
+tabs.card.addEventListener("click", ()=>setTab("card"));
+tabs.study.addEventListener("click", ()=>setTab("study"));
+tabs.video.addEventListener("click", ()=>setTab("video"));
+
+/* ================= CARD MODE ================= */
+const catSelect = document.getElementById("cat-select");
+(function initCatSelect(){
+  const optAll = document.createElement("option");
+  optAll.value = "all"; optAll.textContent = "ทุกหมวด";
+  catSelect.appendChild(optAll);
+  Object.keys(CATEGORIES).forEach(k=>{
+    const o = document.createElement("option");
+    o.value = k; o.textContent = CATEGORIES[k].icon + " " + CATEGORIES[k].label;
+    catSelect.appendChild(o);
+  });
+})();
+
+let cardPool = shuffle(CARDS.map((c,i)=>i));
+let cardIdx = 0;
+let flipped = false;
+
+function currentCardIndices(){
+  const val = catSelect.value || "all";
+  const idxs = CARDS.map((c,i)=>i).filter(i => val==="all" || CARDS[i].cat===val);
+  return idxs;
+}
+function resetCardPool(){
+  cardPool = shuffle(currentCardIndices());
+  cardIdx = 0; flipped = false;
+  renderCard();
+}
+catSelect.addEventListener("change", resetCardPool);
+
+function paintBadge(el, catKey){
+  const c = CATEGORIES[catKey];
+  el.textContent = c.icon + " " + c.label;
+  el.style.background = c.soft; el.style.color = c.strong;
+}
+function paintStage(catKey){
+  const c = CATEGORIES[catKey];
+  const stage = document.getElementById("card-stage");
+  stage.style.background = `linear-gradient(135deg, ${c.strong}, ${c.strong}CC)`;
+  stage.innerHTML = `<span class="stage-icon">${c.icon}</span><div><span class="stage-label">${c.label}</span><span class="stage-src">${c.source}</span></div>`;
+}
+function renderCard(){
+  if(cardPool.length===0){ resetCardPool(); return; }
+  const card = CARDS[cardPool[cardIdx]];
+  flipped = false;
+  document.getElementById("face-front").style.display = "flex";
+  document.getElementById("face-back").style.display = "none";
+  paintBadge(document.getElementById("cat-badge"), card.cat);
+  paintStage(card.cat);
+  document.getElementById("card-ribbon").style.background = CATEGORIES[card.cat].strong;
+  document.getElementById("card-section").textContent = card.section;
+  document.getElementById("card-question").textContent = card.q || card.title;
+  document.getElementById("card-src-front").textContent = card.source;
+  document.getElementById("card-src-back").textContent = card.source;
+  document.getElementById("card-stars").textContent = "★".repeat(card.stars) + "☆".repeat(5-card.stars);
+  document.getElementById("card-title").textContent = card.title;
+  document.getElementById("card-result").textContent = card.result;
+  const noteEl = document.getElementById("card-note");
+  if(card.note){ noteEl.textContent = "💡 " + card.note; noteEl.style.display = "block"; }
+  else{ noteEl.style.display = "none"; }
+  document.getElementById("card-progress").textContent = (cardIdx+1) + " / " + cardPool.length;
+}
+function doFlip(){
+  const flip = document.getElementById("flip-card");
+  flip.classList.add("flipping");
+  setTimeout(()=>{
+    flipped = !flipped;
+    document.getElementById("face-front").style.display = flipped ? "none" : "flex";
+    document.getElementById("face-back").style.display = flipped ? "flex" : "none";
+    flip.classList.remove("flipping");
+    if(flipped){
+      const key = cardPool[cardIdx];
+      if(!cardSeenSet.has(key)){ cardSeenSet.add(key); saveSeenSet("n462_cardsSeen", cardSeenSet); addScore(2); }
+    }
+  }, 140);
+}
+document.getElementById("flip-card").addEventListener("click", doFlip);
+document.getElementById("flip-card").addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); doFlip(); } });
+document.getElementById("btn-next").addEventListener("click", ()=>{ cardIdx = (cardIdx+1) % cardPool.length; renderCard(); });
+document.getElementById("btn-prev").addEventListener("click", ()=>{ cardIdx = (cardIdx-1+cardPool.length) % cardPool.length; renderCard(); });
+document.getElementById("btn-shuffle").addEventListener("click", ()=>{ cardPool = shuffle(currentCardIndices()); cardIdx = 0; renderCard(); });
+
+/* ================= STUDY MODE ================= */
+const studyNav = document.getElementById("study-nav");
+let studyIdx = 0;
+STUDY_TOPICS.forEach((t,i)=>{
+  const b = document.createElement("button");
+  b.textContent = t.label;
+  b.addEventListener("click", ()=>{ studyIdx = i; renderStudy(); });
+  studyNav.appendChild(b);
+});
+function renderStudy(){
+  const t = STUDY_TOPICS[studyIdx];
+  const c = CATEGORIES[t.cat];
+  [...studyNav.children].forEach((b,i)=>{
+    b.classList.toggle("on", i===studyIdx);
+    b.style.borderLeftColor = i===studyIdx ? c.strong : "transparent";
+  });
+  document.getElementById("study-ic").textContent = c.icon;
+  document.getElementById("study-title").textContent = t.label.replace(/^\d+\.\s*/, "");
+  document.getElementById("study-src").textContent = c.source;
+  document.getElementById("study-body").innerHTML = t.html;
+  document.getElementById("study-progress").textContent = "อ่านแล้ว " + studySeenSet.size + " / " + STUDY_TOPICS.length + " หัวข้อ";
+  if(!studySeenSet.has(t.id)){ studySeenSet.add(t.id); saveSeenSet("n462_studySeen", studySeenSet); addScore(5); }
+  document.getElementById("study-progress").textContent = "อ่านแล้ว " + studySeenSet.size + " / " + STUDY_TOPICS.length + " หัวข้อ";
+}
+renderStudy();
+
+/* ================= VIDEO MODE ================= */
+const videoContainer = document.getElementById("video-container");
+VIDEO_GROUPS.forEach(g=>{
+  const wrap = document.createElement("div");
+  wrap.className = "video-group";
+  const h3 = document.createElement("h3");
+  h3.innerHTML = `<span>${g.icon}</span> ${g.label}`;
+  wrap.appendChild(h3);
+  const grid = document.createElement("div");
+  grid.className = "video-grid";
+  g.videos.forEach(v=>{
+    const card = document.createElement("div");
+    card.className = "video-card";
+    const src = "https://www.youtube-nocookie.com/embed/" + v.id + (v.list ? ("?list=" + v.list + "&rel=0") : "?rel=0");
+    const watchUrl = "https://www.youtube.com/watch?v=" + v.id + (v.list ? ("&list=" + v.list) : "");
+    card.innerHTML = `
+      <div class="video-frame-wrap"><iframe src="${src}" title="${v.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+      <div class="video-meta">
+        <div class="vtitle">${v.title}</div>
+        <div class="vdesc">${g.label}</div>
+        <a class="video-fallback" href="${watchUrl}" target="_blank" rel="noopener">▶ เล่นไม่ได้? เปิดดูใน YouTube</a>
+      </div>`;
+    grid.appendChild(card);
+  });
+  wrap.appendChild(grid);
+  videoContainer.appendChild(wrap);
+});
+
+/* ================= INIT ================= */
+renderScoreDisplay();
+resetCardPool();
+</script>
+</body>
+</html>

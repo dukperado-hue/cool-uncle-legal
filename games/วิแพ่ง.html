@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ห้องซ้อมสอบ วิ.แพ่ง — น.280/207</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@400;600;700;900&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ══ DESIGN TOKENS ══════════════════════════════════════════════════════════ */
+:root{
+  --bg-page:#eef2f7;
+  --bg-panel:#ffffff;
+  --bg-panel2:#f7f9fc;
+  --border:#dde3ec;
+  --border-med:#bfcce0;
+  --text-h:#1a2332;
+  --text-body:#374151;
+  --text-soft:#6b7280;
+  --text-muted:#9ca3af;
+  --gold:#b5832c;
+  --gold-l:#fef3c7;
+  --good:#166534;
+  --good-l:#dcfce7;
+  --bad:#991b1b;
+  --bad-l:#fee2e2;
+  --cat:#1e40af;
+  --cat-pale:#eff6ff;
+  --shadow:0 1px 3px rgba(0,0,0,.07), 0 4px 14px rgba(0,0,0,.05);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.10);
+  --radius:10px;
+  --radius-sm:7px;
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
+html,body{margin:0;padding:0;}
+body{background:var(--bg-page);color:var(--text-body);font-family:'Sarabun',sans-serif;font-size:15px;line-height:1.6;min-height:100vh;padding-bottom:70px;transition:background .35s;}
+h1,h2,h3,.serif{font-family:'Noto Serif Thai',serif;}
+
+/* ══ SUBJECT BAR ════════════════════════════════════════════════════════════ */
+.subject-bar{position:sticky;top:0;z-index:80;display:flex;align-items:center;gap:8px;background:#fff;border-bottom:2px solid var(--border);padding:0 16px;height:52px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.brand-home{display:flex;align-items:center;gap:8px;text-decoration:none;color:inherit;padding:0 4px;}
+.brand-logo{font-size:22px;line-height:1;}
+.brand-name{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:700;color:var(--text-h);letter-spacing:.01em;white-space:nowrap;}
+.home-btn-wrap{display:flex;align-items:center;margin-left:6px;}
+.btn-home-tab{display:inline-flex;align-items:center;font-family:'Sarabun',sans-serif;font-size:12.5px;font-weight:700;color:var(--text-soft);background:#f1f5f9;border:1px solid var(--border);border-radius:6px;padding:5px 12px;text-decoration:none;transition:all .15s;white-space:nowrap;}
+.btn-home-tab:hover{background:var(--cat);color:#fff;border-color:var(--cat);}
+.course-title-bar{display:flex;flex-direction:column;justify-content:center;margin-left:10px;border-left:1.5px solid var(--border);padding-left:12px;}
+.course-title-main{font-family:'Noto Serif Thai',serif;font-size:13.5px;font-weight:700;color:var(--text-h);line-height:1.2;white-space:nowrap;}
+.course-title-sub{font-size:10px;color:var(--text-muted);white-space:nowrap;}
+@media(max-width:640px){.course-title-bar{display:none;}}
+.subject-tab{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 14px;height:100%;border-bottom:2px solid transparent;margin-bottom:-2px;cursor:pointer;transition:all .15s;min-width:72px;}
+.subject-tab:hover:not(.active){background:#f3f4f6;}
+.subject-tab.active{border-bottom-color:var(--cat);}
+.stab-code{font-family:'Noto Serif Thai',serif;font-size:13px;font-weight:700;color:var(--cat);}
+.stab-name{font-size:10px;color:var(--text-soft);}
+.score-block{position:relative;display:flex;flex-direction:column;align-items:flex-end;padding:6px 12px;background:linear-gradient(135deg,#1e3a8a,#2563eb);border-radius:8px;min-width:80px;margin-left:auto;}
+.score-label{font-size:9px;color:rgba(255,255,255,.7);letter-spacing:.06em;text-transform:uppercase;}
+.score-num{font-family:'Noto Serif Thai',serif;font-size:20px;font-weight:700;color:#fbbf24;line-height:1.1;}
+.score-pop{position:absolute;top:-22px;right:4px;font-size:12px;font-weight:700;color:#16a34a;opacity:0;transform:translateY(4px);transition:opacity .3s,transform .3s;pointer-events:none;white-space:nowrap;background:#fff;padding:2px 6px;border-radius:4px;border:1px solid #bbf7d0;}
+
+/* ══ LAYOUT ══════════════════════════════════════════════════════════════════ */
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 40px;}
+
+/* ══ MODE TABS ═══════════════════════════════════════════════════════════════ */
+.mode-tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:18px;}
+.tab{background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 4px;text-align:center;font-size:11px;cursor:pointer;color:var(--text-soft);line-height:1.3;transition:all .15s;}
+.tab b{display:block;font-family:'Noto Serif Thai',serif;font-size:16px;color:#94a3b8;}
+.tab:hover:not(.active){border-color:var(--cat);color:var(--cat);background:var(--cat-pale);}
+.tab.active{background:var(--cat);color:#fff;border-color:var(--cat);box-shadow:var(--shadow);}
+.tab.active b{color:#fff;}
+
+/* ══ PANEL ═══════════════════════════════════════════════════════════════════ */
+.panel{background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);max-height:calc(100vh - 130px);overflow-y:auto;}
+.panel h2{margin:0 0 3px;font-size:19px;color:var(--text-h);}
+.panel .desc{font-size:13px;color:var(--text-soft);margin-bottom:16px;}
+.section-title{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin:18px 0 10px;border-bottom:1px solid var(--border);padding-bottom:6px;}
+select{font-family:'Sarabun',sans-serif;font-size:13.5px;padding:7px 10px;border-radius:var(--radius-sm);border:1px solid var(--border-med);background:#fff;color:var(--text-body);outline:none;}
+select:focus{border-color:var(--cat);}
+.btn{font-family:'Sarabun',sans-serif;font-weight:700;font-size:13px;border:none;border-radius:var(--radius-sm);padding:9px 16px;cursor:pointer;transition:transform .1s,filter .1s;white-space:nowrap;}
+.btn:active{transform:scale(.97);}
+.btn-gold{background:linear-gradient(180deg,#fde68a,#d4a017);color:#3a1a00;box-shadow:0 2px 0 #a0720d;}
+.btn-gold:hover{filter:brightness(1.06);}
+.btn-ghost{background:transparent;border:1.5px solid var(--border-med);color:var(--text-body);}
+.btn-ghost:hover{border-color:var(--cat);color:var(--cat);background:var(--cat-pale);}
+.btn-dark{background:var(--text-h);color:#fff;}
+.btn-sm{padding:6px 12px;font-size:12px;}
+.btn:disabled{opacity:.35;cursor:not-allowed;}
+.cat-pill{display:inline-flex;align-items:center;font-size:11px;padding:2px 10px;border-radius:999px;background:var(--cat);color:#fff;font-weight:600;}
+.qtag{display:inline-block;font-size:11px;font-weight:700;color:var(--bad);border:1.5px solid var(--bad);border-radius:4px;padding:1px 7px;margin:0 4px 6px 0;background:var(--bad-l);}
+.floatbar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:10px 16px;display:flex;justify-content:center;align-items:center;gap:12px;box-shadow:0 -3px 12px rgba(0,0,0,.06);}
+.progress-bar{height:4px;background:var(--border);border-radius:99px;overflow:hidden;margin:8px 0 14px;}
+.progress-bar>div{height:100%;background:var(--cat);border-radius:99px;transition:width .4s ease;}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.row-center{justify-content:center;}
+.backrow{margin-bottom:12px;}
+.timer-bar{height:4px;border-radius:99px;background:#e5e7eb;overflow:hidden;margin-bottom:10px;}
+.timer-bar>div{height:100%;background:#f59e0b;border-radius:99px;transition:width 1s linear;}
+
+/* ══ FLASHCARD ═══════════════════════════════════════════════════════════════ */
+.flip-stage{perspective:1400px;max-width:540px;margin:14px auto;}
+.flip-card{position:relative;min-height:270px;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,.2,.2,1);cursor:pointer;}
+.flip-card.flipped{transform:rotateY(180deg);}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--radius);overflow:hidden;}
+.face-front{background:#fff;border:1px solid var(--border);display:flex;flex-direction:column;box-shadow:var(--shadow);}
+.img-slot{height:110px;background:var(--bg-page);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text-muted);font-size:11px;position:relative;}
+.img-label{background:#fff;border-radius:4px;padding:3px 8px;border:1px dashed var(--border-med);}
+.img-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.card-body{padding:16px 20px;flex:1;display:flex;flex-direction:column;justify-content:center;}
+.card-body .cat-badge{font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+.card-body .code{font-family:'Noto Serif Thai',serif;font-size:26px;font-weight:700;color:var(--cat);}
+.card-body .title{font-weight:600;font-size:14px;color:var(--text-body);margin-top:5px;}
+.face-front .hint{position:absolute;bottom:10px;right:14px;font-size:10px;color:var(--text-muted);}
+.face-back{background:#1a2332;color:#e2e8f0;transform:rotateY(180deg);padding:20px 22px;display:flex;flex-direction:column;box-shadow:var(--shadow);}
+.face-back .code-mini{font-family:'Noto Serif Thai',serif;font-size:12.5px;color:#fbbf24;margin-bottom:8px;}
+.face-back .txt{font-size:13.5px;line-height:1.75;}
+.face-back .case-box{margin-top:12px;padding:9px 13px;background:rgba(251,191,36,.1);border-left:3px solid #fbbf24;font-size:12.5px;color:#fbbf24;border-radius:0 4px 4px 0;}
+.card-controls{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap;}
+
+/* ══ LIST MODE ════════════════════════════════════════════════════════════════ */
+.list-cat-strip{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;}
+.list-cat-tab{font-size:12px;font-weight:600;padding:5px 12px;border-radius:999px;cursor:pointer;background:#f1f5f9;border:1px solid var(--border);color:var(--text-soft);transition:all .15s;}
+.list-cat-tab:hover{border-color:var(--cat);color:var(--cat);background:var(--cat-pale);}
+.list-cat-tab.active{background:var(--cat);color:#fff;border-color:var(--cat);}
+.lct-count{font-size:10px;opacity:.7;margin-left:2px;}
+.list-item{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:13px 16px;margin-bottom:7px;display:grid;grid-template-columns:68px 1fr;gap:0 12px;transition:box-shadow .15s,border-color .15s;}
+.list-item:hover{border-color:var(--cat);box-shadow:var(--shadow);}
+.list-item .code{font-family:'Noto Serif Thai',serif;color:var(--cat);font-size:14px;font-weight:700;padding-top:2px;}
+.list-item .right{}
+.list-item .title{font-weight:700;font-size:13px;color:var(--text-h);margin-bottom:3px;}
+.list-item .txt{font-size:12.5px;color:var(--text-soft);line-height:1.6;}
+.list-item .case-tag{display:inline-block;margin-top:5px;font-size:11px;color:var(--gold);background:#fef9ec;border-radius:4px;padding:1px 7px;border:1px solid #fde68a;}
+
+/* ══ QUIZ ════════════════════════════════════════════════════════════════════ */
+.set-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:16px;}
+.set-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px 12px;text-align:center;cursor:pointer;transition:all .15s;box-shadow:var(--shadow);}
+.set-card:hover{border-color:var(--cat);box-shadow:var(--shadow-lg);transform:translateY(-1px);}
+.set-card b{display:block;font-family:'Noto Serif Thai',serif;font-size:20px;color:var(--cat);margin-bottom:4px;}
+.set-card .set-desc{font-size:11.5px;color:var(--text-soft);}
+.set-card .best{font-size:11px;color:var(--text-muted);margin-top:6px;padding-top:6px;border-top:1px solid var(--border);}
+.subtoggle{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
+.stog{padding:14px 12px;border-radius:var(--radius);border:1px solid var(--border);background:#fff;cursor:pointer;text-align:center;font-size:13px;font-weight:600;color:var(--text-body);transition:all .15s;}
+.stog b{display:block;font-size:15px;font-family:'Noto Serif Thai',serif;color:var(--cat);margin-bottom:3px;}
+.stog:hover{border-color:var(--cat);background:var(--cat-pale);}
+.stog.active{background:var(--cat);color:#fff;border-color:var(--cat);}
+.stog.active b{color:#fff;}
+.fact-block{background:#f8fafc;border-left:3px solid var(--cat);padding:13px 16px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;line-height:1.75;margin-bottom:14px;color:var(--text-body);}
+.fact-block.collapsed{max-height:68px;overflow:hidden;position:relative;}
+.fact-block.collapsed::after{content:"";position:absolute;bottom:0;left:0;right:0;height:30px;background:linear-gradient(transparent,#f8fafc);pointer-events:none;}
+.fact-toggle{font-size:12px;font-weight:700;color:var(--cat);cursor:pointer;margin-bottom:8px;display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:4px;background:var(--cat-pale);border:1px solid #bfdbfe;}
+.choice{display:block;width:100%;text-align:left;background:#fff;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:11px 15px;margin-bottom:8px;font-size:13.5px;cursor:pointer;font-family:'Sarabun',sans-serif;color:var(--text-body);transition:border-color .15s,background .15s,transform .1s;}
+.choice:hover:not(:disabled){border-color:var(--cat);background:var(--cat-pale);transform:translateX(2px);}
+.choice.correct{border-color:var(--good);background:var(--good-l);color:#0f3320;}
+.choice.wrong{border-color:var(--bad);background:var(--bad-l);color:#5c0000;}
+.choice:disabled{cursor:default;transform:none;}
+.explain-box{margin-top:12px;background:#1a2332;color:#e2e8f0;border-radius:var(--radius);padding:14px 18px;font-size:13px;line-height:1.75;border-top:3px solid var(--cat);}
+.explain-box b{color:#fbbf24;}
+
+/* ══ ORDER / WALK ════════════════════════════════════════════════════════════ */
+.order-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px;}
+.order-item{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:11px 14px;display:flex;align-items:center;gap:12px;cursor:grab;font-size:13.5px;user-select:none;transition:box-shadow .15s;}
+.order-item:hover{box-shadow:var(--shadow);}
+.order-item.dragging{opacity:.35;}
+.order-item .slot{width:24px;height:24px;border-radius:50%;background:#1a2332;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-family:'Noto Serif Thai',serif;font-weight:700;flex-shrink:0;}
+.order-item.correct{border-color:var(--good);background:var(--good-l);}
+.order-item.correct .slot{background:var(--good);}
+.order-item.wrong{border-color:var(--bad);background:var(--bad-l);}
+.order-item.wrong .slot{background:var(--bad);}
+.step-track{display:flex;gap:5px;margin-bottom:12px;}
+.step-dot{flex:1;height:4px;border-radius:99px;background:var(--border);}
+.step-dot.done{background:var(--good);}
+.step-dot.active{background:var(--cat);}
+.step-label{font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.step-badge{background:var(--cat);color:#fff;border-radius:999px;padding:1px 8px;font-size:10px;}
+.guide-box{margin-top:12px;background:var(--good-l);border:1.5px solid var(--good);border-radius:var(--radius);padding:13px 16px;font-size:13px;line-height:1.7;color:#0f3320;}
+.stars{font-size:34px;text-align:center;margin:14px 0;letter-spacing:4px;}
+.summary-score{text-align:center;font-size:22px;font-family:'Noto Serif Thai',serif;font-weight:700;color:var(--cat);margin-bottom:4px;}
+.summary-sub{text-align:center;font-size:13px;color:var(--text-soft);}
+
+/* ══ CONTENT SUMMARY ════════════════════════════════════════════════════════ */
+.content-week{background:#fff;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;box-shadow:var(--shadow);}
+.content-week-header{display:flex;align-items:center;padding:13px 18px;cursor:pointer;background:#f8fafc;border-bottom:1px solid transparent;transition:background .15s;gap:10px;}
+.content-week-header:hover{background:#eef2f7;}
+.content-week-header.open{background:var(--cat);color:#fff;}
+.content-week-header.open .week-badge{background:rgba(255,255,255,.2);color:#fff;}
+.week-badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--cat-pale);color:var(--cat);flex-shrink:0;}
+.week-title{font-weight:700;font-size:14px;flex:1;}
+.week-chevron{font-size:13px;opacity:.5;transition:transform .2s;}
+.week-chevron.open{transform:rotate(180deg);}
+.content-week-body{display:none;padding:16px 18px;}
+.content-week-body.open{display:block;}
+.content-topic{margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.content-topic:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.topic-heading{font-family:'Noto Serif Thai',serif;font-size:14px;font-weight:700;color:var(--text-h);margin-bottom:7px;}
+.topic-body{font-size:13px;color:var(--text-body);line-height:1.8;background:#f8fafc;border-radius:var(--radius-sm);padding:10px 14px;border:1px solid var(--border);}
+.read-btn{display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:12px;color:var(--text-muted);cursor:pointer;padding:4px 10px;border-radius:6px;border:1px solid var(--border);transition:all .15s;}
+.read-btn:hover{color:var(--good);border-color:var(--good);background:var(--good-l);}
+.read-btn.read{color:var(--good);border-color:var(--good);background:var(--good-l);}
+
+@media(max-width:640px){.mode-tabs{grid-template-columns:repeat(3,1fr);}.panel{padding:16px;}.subtoggle{grid-template-columns:1fr;}.list-item{grid-template-columns:56px 1fr;}.subject-bar{padding:0 10px;}}
+</style>
+</head>
+<body id="body">
+
+<div class="subject-bar" id="subjectBar">
+  <a href="index.html" class="brand-home" title="กลับหน้าเลือกวิชา">
+    <span class="brand-logo">⚖️</span>
+    <span class="brand-name">Cool Uncle</span>
+  </a>
+  <div class="home-btn-wrap">
+    <a href="index.html" class="btn-home-tab" title="กลับหน้าเลือกวิชา">
+      ‹ เลือกวิชา
+    </a>
+  </div>
+  <div class="course-title-bar">
+    <span class="course-title-main">วิธีพิจารณาความแพ่ง</span>
+    <span class="course-title-sub">และพระธรรมนูญศาลยุติธรรม</span>
+  </div>
+  <div class="score-block">
+    <div id="scorePop" class="score-pop">+10</div>
+    <div class="score-label">คะแนน</div>
+    <div id="scoreNum" class="score-num">0</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="mode-tabs" id="tabs"></div>
+  <div class="panel" id="panel"></div>
+</div>
+<div class="floatbar" id="floatbar" style="display:none;"></div>
+<script>
+
+/* ================= AUDIO ================= */
+let actx=null;
+function ac(){ if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)(); return actx; }
+function beep(freq,dur,type,vol){
+  try{
+    const ctx=ac(); const o=ctx.createOscillator(); const g=ctx.createGain();
+    o.type=type||'sine'; o.frequency.value=freq;
+    g.gain.value=vol||0.08;
+    o.connect(g); g.connect(ctx.destination);
+    o.start(); g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+dur);
+    o.stop(ctx.currentTime+dur);
+  }catch(e){}
+}
+function sndClick(){ beep(700,0.05,'square',0.05); }
+function sndCorrect(){ beep(523,0.09,'sine',0.09); setTimeout(()=>beep(784,0.14,'sine',0.09),90); }
+function sndWrong(){ beep(180,0.22,'sawtooth',0.07); }
+
+/* ================= CATEGORIES ================= */
+const CATEGORIES = {
+  phdn:        {name:"พระธรรมนูญศาลยุติธรรม",   color:"#5b3a8e"},
+  jurisdiction:{name:"เขตอำนาจศาล",              color:"#0f766e"},
+  parties:     {name:"คู่ความ / ร้องสอด",         color:"#3730a3"},
+  service:     {name:"การส่งคำคู่ความ",           color:"#475569"},
+  pleading:    {name:"คำฟ้อง - คำให้การ",         color:"#9d174d"},
+  evidence:    {name:"พยานหลักฐาน",              color:"#92400e"},
+  summary:     {name:"วิธีพิจารณาวิสามัญ",        color:"#166534"},
+  judgment:    {name:"คำพิพากษาและคำสั่ง",        color:"#1e3a8a"},
+  appeal:      {name:"อุทธรณ์ - ฎีกา",            color:"#7f1d1d"},
+};
+const CAT_ORDER = ["phdn","jurisdiction","parties","service","pleading","evidence","summary","judgment","appeal"];
+
+/* ================= CARDS ================= */
+const CARDS = [
+  // PHDN
+  {cat:"phdn",code:"ม.8,9",title:"ผู้ทำการแทนผู้บริหารศาล",
+   text:"อธิบดีศาล/หัวหน้าศาลไม่อยู่ → ผู้พิพากษาที่มี 'อาวุโสสูงสุด' ทำการแทน ห้าม: 'ผู้พิพากษาอาวุโส' (ตำแหน่งเฉพาะผู้เกษียณต่ออายุ) และ 'ผู้พิพากษาประจำศาล' ทำการแทนเด็ดขาด",
+   case:"ตัวอย่าง: ผู้พิพากษาถูกโยกย้ายยังไม่มีผู้มาแทน → ผู้พิพากษาอาวุโสสูงสุดทำการแทนและลงชื่อในคำพิพากษาได้"},
+  {cat:"phdn",code:"ม.17+25(4)",title:"ศาลแขวง/ผู้พิพากษาคนเดียว — คดีแพ่ง",
+   text:"อำนาจศาลแขวง = อำนาจผู้พิพากษาคนเดียว คือคดีแพ่งทุนทรัพย์ 'ไม่เกิน 300,000 บาท' — นับรวมดอกเบี้ยถึงวันฟ้องด้วย",
+   case:"ฎ.1619/2562: ฟ้องเรียก 300,000 บาท รวมดอกเบี้ยแล้วเกิน 300,000 → ไม่อยู่ในอำนาจศาลแขวง ต้องฟ้องศาลจังหวัด"},
+  {cat:"phdn",code:"ม.19/1 ว.1",title:"ดุลพินิจศาลใหญ่เมื่อฟ้องผิดศาล",
+   text:"คดีอยู่ในอำนาจศาลแขวงตั้งแต่ต้น แต่โจทก์นำไปฟ้องศาลจังหวัด/แพ่ง/อาญา → ศาลใหญ่มี 'ดุลพินิจ' รับไว้เองหรือโอนไปศาลแขวงก็ได้",
+   case:"ฎ.7497-7502/2561: อัยการฟ้องข้อหาในอำนาจศาลแขวงที่ศาลจังหวัดพัทยา → ศาลจังหวัดมีดุลพินิจรับพิจารณาไว้เองได้"},
+  {cat:"phdn",code:"ม.19/1 ว.2",title:"พฤติการณ์เปลี่ยน — โอนไม่ได้",
+   text:"ฟ้องถูกต้องที่ศาลจังหวัด แต่ต่อมาพฤติการณ์เปลี่ยนทำให้คดีกลายเป็นอำนาจศาลแขวง → ศาลจังหวัด 'ต้องพิจารณาต่อไป จะโอนไม่ได้'",
+   case:"ฎ.2817/2556: ฟ้องหมิ่นประมาทด้วยการโฆษณา (ศาลจังหวัด) แต่ไต่สวนแล้วรับเฉพาะหมิ่นธรรมดา (ศาลแขวง) → ศาลจังหวัดต้องพิจารณาต่อ จะสั่งโอนไม่ได้"},
+  {cat:"phdn",code:"ม.25(2)",title:"อำนาจผู้พิพากษาคนเดียว — ห้ามวินิจฉัยชี้ขาดข้อพิพาท",
+   text:"ผู้พิพากษาคนเดียวมีอำนาจออกคำสั่งใดๆ ซึ่ง 'มิใช่เป็นไปในทางวินิจฉัยชี้ขาดข้อพิพาทแห่งคดี'",
+   case:"ฎ.125/2526: คำสั่ง 'ยกคำร้องขัดทรัพย์' = วินิจฉัยชี้ขาดข้อพิพาท → ไม่อยู่ในอำนาจผู้พิพากษาคนเดียว ต้องใช้องค์คณะ"},
+  {cat:"phdn",code:"ม.25(5)",title:"ผู้พิพากษาคนเดียว — คดีอาญา (2 เพดาน)",
+   text:"เพดาน 1 (คุณสมบัติคดี): โทษตามกฎหมาย จำคุกไม่เกิน 3 ปี หรือปรับไม่เกิน 60,000 บาท | เพดาน 2 (ลงจริง): จำคุกไม่เกิน 6 เดือน ปรับไม่เกิน 10,000 บาท"},
+  {cat:"phdn",code:"ม.26",title:"องค์คณะผู้พิพากษาปกติ",
+   text:"ศาลจังหวัดต้องมีผู้พิพากษาอย่างน้อย 2 คน — 'ผู้พิพากษาประจำศาล' นั่งพร้อมกันได้ไม่เกิน 1 คน"},
+  {cat:"phdn",code:"ม.28",title:"เหตุขัดข้องระหว่าง 'พิจารณาคดี'",
+   text:"ผู้บริหารศาลเข้านั่งพิจารณาแทนเอง หรือ 'มอบหมาย' ให้ผู้พิพากษาอื่นนั่งแทนได้ — มอบหมายได้เพราะยังอยู่ขั้น 'พิจารณา'"},
+  {cat:"phdn",code:"ม.29",title:"เหตุขัดข้องระหว่าง 'ทำคำพิพากษา' ⚠️ หลุมพราง",
+   text:"ผู้บริหารศาลต้องตรวจสำนวนแล้วลงชื่อทำคำพิพากษา 'ด้วยตนเอง' เท่านั้น — มอบหมายให้คนอื่นทำแทนไม่ได้เด็ดขาด",
+   case:"ฎ.17227/2557: ผู้พิพากษาเจ้าของสำนวนย้ายไปรับราชการที่อื่น → หัวหน้าศาลต้องตรวจสำนวนและลงชื่อร่วมทำคำพิพากษาเอง มอบหมายไม่ได้"},
+  // JURISDICTION
+  {cat:"jurisdiction",code:"ม.3(2)(ก)",title:"ขยายภูมิลำเนาจำเลย 2 ปี",
+   text:"จำเลยเคยมีภูมิลำเนาในราชอาณาจักร 'ภายใน 2 ปีก่อนวันยื่นฟ้อง' → ถือว่าที่นั่นเป็นภูมิลำเนาจำเลย — เกิน 2 ปีใช้ไม่ได้เลย",
+   case:"ตัวอย่าง: จำเลยย้ายออกจากไทยไปแล้วเกิน 2 ปี 4 เดือน → ม.3(2)(ก) ใช้บังคับไม่ได้ ที่นั่นไม่ใช่ภูมิลำเนาอีกต่อไป"},
+  {cat:"jurisdiction",code:"ม.4(1)",title:"หลักทั่วไปคดีมีข้อพิพาท",
+   text:"คำฟ้องเสนอต่อ 'ศาลที่จำเลยมีภูมิลำเนาอยู่ในเขตศาล' หรือ 'ศาลที่มูลคดีเกิดขึ้นในเขตศาล' — โจทก์มีสิทธิเลือกฟ้องศาลใดศาลหนึ่ง",
+   case:"ตัวอย่าง: จำเลยทำงานสระบุรี แต่ภูมิลำเนาทะเบียนบ้านอยู่อยุธยา → ฟ้องศาลจังหวัดอยุธยา (ภูมิลำเนา) ได้"},
+  {cat:"jurisdiction",code:"ม.4 ทวิ",title:"คดีเกี่ยวกับอสังหาริมทรัพย์",
+   text:"คำฟ้องเกี่ยวด้วยอสังหาริมทรัพย์ → 'ให้เสนอต่อศาลที่อสังหาริมทรัพย์นั้นตั้งอยู่ในเขตศาล' หรือศาลที่จำเลยมีภูมิลำเนา",
+   case:"ฎ.3530/2542: ฟ้องขอให้ชำระเงินและบังคับจำนองที่ดิน = คดีเกี่ยวด้วยอสังหาริมทรัพย์ → ฟ้องที่ศาลซึ่งที่ดินตั้งอยู่ได้"},
+  {cat:"jurisdiction",code:"ม.5",title:"มูลความแห่งคดีเกี่ยวข้องกัน",
+   text:"จำเลยหลายคน/มูลคดีเกิดหลายท้องที่ แต่ 'มูลความแห่งคดีเกี่ยวข้องกัน' → โจทก์มีสิทธิ 'เลือก' เสนอคำฟ้องต่อศาลที่มีเขตอำนาจใดศาลหนึ่งได้",
+   case:"ฎ.4306/2550: จำเลยที่ 1 (กทม.) + จำเลยที่ 2 ร่วมรับผิดในฐานะตัวการตัวแทน → ฟ้องต่อศาลที่จำเลยที่ 2 มีภูมิลำเนาได้"},
+  {cat:"jurisdiction",code:"ม.7",title:"คำฟ้องเกี่ยวเนื่องกับคดีเดิม",
+   text:"คำฟ้องหรือคำร้องขอที่ 'เกี่ยวเนื่องกับคดีที่เคยอยู่ในศาลใด ให้เสนอต่อศาลนั้น' — เช่น ฟ้องแย้ง ต้องเสนอต่อศาลที่คดีเดิมพิจารณาอยู่"},
+  // PARTIES
+  {cat:"parties",code:"ม.55",title:"อำนาจฟ้อง",
+   text:"ต้องปรากฏว่า 'มีการโต้แย้งสิทธิหรือหน้าที่ตามกฎหมายแพ่ง' (คดีมีข้อพิพาท) หรือจำเป็นต้อง 'ใช้สิทธิทางศาล' (คดีไม่มีข้อพิพาท)",
+   case:"ฎ.4100/2530: จำเลยทำรั้วปิดกั้นทางเดินของโจทก์เจ้าของรวม = โต้แย้งสิทธิ → มีอำนาจฟ้อง"},
+  {cat:"parties",code:"ม.57",title:"การร้องสอด (3 ทาง)",
+   text:"(1) 'จำเป็นเพื่อยังให้ได้รับความรับรอง คุ้มครอง หรือบังคับตามสิทธิของตน' | (2) 'มีส่วนได้เสียตามกฎหมายในผลแห่งคดี' | (3) อาจถูกเรียกเพื่อ 'การใช้สิทธิไล่เบี้ยหรือเรียกค่าทดแทน'",
+   case:"ฎ.774/2539 (ม.57(1)): ผู้ร้องสอดอ้างว่าตนได้กรรมสิทธิ์ที่ดินพิพาทโดยครอบครองปรปักษ์ → ร้องสอดเข้ามาเพื่อคุ้มครองสิทธิของตน"},
+  {cat:"parties",code:"ม.58",title:"สิทธิของผู้ร้องสอด",
+   text:"(1)(3): 'เสมือนหนึ่งว่าตนได้ฟ้องหรือถูกฟ้องเป็นคดีเรื่องใหม่' | (2): 'ห้ามมิให้ใช้สิทธิอย่างอื่นนอกจากสิทธิที่มีอยู่แก่คู่ความที่ตนเข้าร่วม และห้ามใช้สิทธิในทางที่ขัดกับคู่ความเดิม'",
+   case:"ฎ.996/2549 (ม.57(2)): จำเลยร่วมร้องสอดเข้ามาร่วมกับจำเลยที่ 1 เมื่อจำเลยที่ 1 ขาดนัดยื่นคำให้การ → จำเลยร่วมจะมายื่นคำให้การของตนเองไม่ได้"},
+  {cat:"parties",code:"ม.59",title:"คู่ความร่วม",
+   text:"'มีผลประโยชน์ร่วมกันในมูลความแห่งคดี' → ฟ้องร่วมกัน/ถูกฟ้องร่วมกันได้ — 'ห้ามมิให้ถือว่าบุคคลเหล่านั้นแทนซึ่งกันและกัน' เว้นแต่หนี้แบ่งแยกไม่ได้",
+   case:"ฎ.3252/2548: โจทก์ 109 คน เป็นสมาชิกสมาคมฌาปนกิจถูกจำเลยผิดสัญญา → มีผลประโยชน์ร่วมกัน ฟ้องร่วมกันในคดีเดียวได้"},
+  {cat:"parties",code:"ม.42,43",title:"คู่ความมรณะ — เข้าแทนที่",
+   text:"เมื่อคู่ความมรณะ ต้องสั่งเลื่อนคดีจนกว่า 'ทายาท ผู้จัดการมรดก หรือผู้มีส่วนได้เสีย จะเข้ามาเป็นคู่ความแทนที่' — กำหนด 1 ปีนับแต่วันมรณะ",
+   case:"ฎ.4376/2540: โจทก์ถึงแก่กรรมระหว่างพิจารณาแต่ไม่ปรากฏต่อศาล ศาลพิพากษาไป → คำพิพากษาผูกพันจำเลย จำเลยขอให้ยกคำพิพากษาไม่ได้"},
+  // SERVICE
+  {cat:"service",code:"ม.74",title:"ส่งหมายโดยตรง — เวลาและสถานที่",
+   text:"ส่งใน 'เวลากลางวัน (ระหว่างพระอาทิตย์ขึ้นและพระอาทิตย์ตก)' ณ ภูมิลำเนาหรือสำนักทำการงานของผู้รับ — เป็นวิธีหลัก ต้องทำก่อนวิธีอื่น"},
+  {cat:"service",code:"ม.76",title:"ส่งให้ผู้รับแทน",
+   text:"หากไม่พบตัวจำเลย ส่งให้บุคคลที่ 'มีอายุเกิน 20 ปี ซึ่งอยู่หรือทำงานในบ้านเรือนหรือสำนักทำการงาน' นั้นแทนได้"},
+  {cat:"service",code:"ม.79",title:"ปิดหมาย — ใช้เมื่อส่งธรรมดาไม่ได้",
+   text:"ต้องส่งธรรมดาก่อน หากส่งไม่ได้จึงจะ 'ปิดคำคู่ความไว้ในที่แลเห็นได้ง่าย ณ ภูมิลำเนา' ได้ — มีผลบังคับ 'เมื่อพ้นกำหนด 15 วัน นับแต่วันที่ปิดหมาย'",
+   case:"ฎ.2215/2549: ศาลปิดประกาศหน้าศาลโดยไม่ส่งหมายวิธีธรรมดาก่อน = ข้ามขั้นตอน ไม่ชอบด้วย ม.79"},
+  // PLEADING
+  {cat:"pleading",code:"ม.172",title:"ฟ้องเคลือบคลุม",
+   text:"คำฟ้องต้อง 'แสดงโดยแจ้งชัดซึ่งสภาพแห่งข้อหา ข้ออ้างที่อาศัยเป็นหลักแห่งข้อหา และคำขอบังคับ' — ไม่ใช่ข้อกฎหมายเกี่ยวความสงบฯ จำเลยต้องยกในคำให้การเอง",
+   case:"ฎ.43/2525: ฟ้องว่าจำเลยทำละเมิดให้สินค้าเสียหาย พร้อมแจกแจงรายการและมูลค่า = ชัดแจ้งแล้ว ฟ้องไม่เคลือบคลุม"},
+  {cat:"pleading",code:"ม.174",title:"ทิ้งฟ้อง",
+   text:"โจทก์เพิกเฉย 'ไม่จัดการส่งหมายเรียกและสำเนาคำฟ้อง' ภายใน 7 วัน → ศาลสั่งจำหน่ายคดีได้ (ดุลพินิจ)"},
+  {cat:"pleading",code:"ม.175,176",title:"ถอนฟ้อง และผล",
+   text:"หลังจำเลยให้การแล้ว ต้องขออนุญาตศาลและศาลต้องฟังจำเลยก่อน — ผล: 'ลบล้างกระบวนพิจารณาทั้งหมด คืนสู่ฐานะเดิม' โจทก์นำมาฟ้องใหม่ได้ (แต่อายุความไม่สะดุด)",
+   case:"ฎ.5477/2558: โจทก์ขอถอนเพราะเพิ่งทราบเอกสารใหม่ ไม่ได้เปรียบเชิงคดี = ถือว่าสุจริต ศาลอนุญาตให้ถอนได้"},
+  {cat:"pleading",code:"ม.177,178",title:"คำให้การ และฟ้องแย้ง",
+   text:"คำให้การต้อง 'แสดงโดยชัดแจ้งว่ายอมรับหรือปฏิเสธข้ออ้างของโจทก์ทั้งสิ้นหรือแต่บางส่วน รวมทั้งเหตุแห่งการนั้น' — ปฏิเสธลอยๆ = ไม่มีประเด็นนำสืบ",
+   case:"ฎ.5974/2539: จำเลยให้การและฟ้องแย้งว่าครอบครองปรปักษ์เกิน 10 ปี = ชัดแจ้ง"},
+  {cat:"pleading",code:"ม.179,180",title:"การแก้ไขคำคู่ความ",
+   text:"ต้องยื่น 'ก่อนวันชี้สองสถาน หรือก่อนวันสืบพยานไม่น้อยกว่า 7 วัน' — ยื่นช้า ศาลอนุญาตได้ถ้าเข้าข้อยกเว้น 3 ประการ: (1)มีเหตุสมควร (2)ความสงบเรียบร้อยฯ (3)ข้อผิดพลาดเล็กน้อย",
+   case:"ฎ.7465/2552: ขอแก้ว่าสัญญาค้ำประกัน 'โมฆะ' = ความสงบเรียบร้อยฯ → อนุญาตแม้ยื่นเกินกำหนด ⚠️ แต่ 'โมฆียะ' และ 'อายุความ' ไม่ใช่ความสงบฯ → ยื่นช้าไม่ได้"},
+  {cat:"pleading",code:"ม.182,183",title:"การชี้สองสถาน",
+   text:"ศาลนำข้ออ้างข้อเถียงมาเทียบ ข้อที่รับกัน = ยุติ ข้อที่ยังโต้เถียง → ศาล 'กำหนดเป็นประเด็นข้อพิพาท' และกำหนดภาระการพิสูจน์ว่าฝ่ายใดมีหน้าที่นำสืบ"},
+  // EVIDENCE
+  {cat:"evidence",code:"ม.84",title:"ข้อเท็จจริงที่ไม่ต้องพิสูจน์",
+   text:"ไม่ต้องนำสืบถ้า: 'รู้กันอยู่ทั่วไปไม่อาจโต้แย้งได้' หรือ 'คู่ความรับกันแล้วในศาล' หรือกฎหมายสันนิษฐานไว้ก่อน"},
+  {cat:"evidence",code:"ม.94",title:"ห้ามสืบพยานบุคคลแก้เอกสาร",
+   text:"เมื่อกฎหมายบังคับต้องมีเอกสาร ห้ามสืบพยานบุคคลเพื่อ 'เพิ่มเติม ตัดทอน หรือเปลี่ยนแปลง' ข้อความในเอกสารนั้น",
+   case:"ฎ.1402/2530: สัญญาระบุวางมัดจำ 400,000 บาท → จำเลยนำพยานบุคคลมาสืบเปลี่ยนแปลงข้อความในสัญญาไม่ได้ ต้องห้ามตาม ม.94"},
+  {cat:"evidence",code:"ม.202",title:"โจทก์ขาดนัดพิจารณา — ผลต่อคดี",
+   text:"โจทก์ขาดนัด → ศาล 'จำหน่ายคดีเสียจากสารบบความ' เว้นแต่จำเลยแจ้งประสงค์ให้พิจารณาต่อ — ถ้าจำเลยขอให้พิจารณาต่อ ศาลต้องวินิจฉัยตามภาระพิสูจน์จริง ไม่ใช่ชนะอัตโนมัติ"},
+  // SUMMARY PROCEDURE
+  {cat:"summary",code:"ม.150,156/1",title:"ขอยกเว้นค่าธรรมเนียมศาล (ขอนาถา)",
+   text:"ผู้ไม่มีทรัพย์พอชำระค่าธรรมเนียม ยื่นขอยกเว้นได้ หากศาลยกคำร้อง อุทธรณ์ได้ภายใน 7 วัน (กรอบเวลาสั้นเป็นพิเศษ — ระวังสับสนกับ 15 วัน)"},
+  {cat:"summary",code:"ม.189-195",title:"คดีมโนสาเร่",
+   text:"ทุนทรัพย์ 'ไม่เกิน 300,000 บาท' หรือฟ้องขับไล่ค่าเช่า 'ไม่เกิน 30,000 บาท/เดือน' — โจทก์ 'ฟ้องด้วยวาจาได้' ศาลนัดให้คู่ความมา 'ไกล่เกลี่ย ให้การ และสืบพยานในวันเดียวกัน'"},
+  {cat:"summary",code:"ม.196",title:"คดีไม่มีข้อยุ่งยาก",
+   text:"คดีสามัญฟ้องตาม 'ตั๋วเงิน' หรือ 'สัญญาเป็นหนังสือ' ซึ่งดูเป็นสัญญาแท้จริงสมบูรณ์ → ศาลอาจสั่งใช้กระบวนการมโนสาเร่ได้"},
+  {cat:"summary",code:"ม.197-199",title:"ขาดนัดยื่นคำให้การ — ขั้นตอน",
+   text:"จำเลยรับหมายแล้วไม่ยื่นคำให้การใน 15 วัน (1) โจทก์ขอให้ตนชนะใน 15 วัน (ม.198) มิฉะนั้นศาลจำหน่ายคดี (2) ศาลดูว่าคำฟ้อง 'มีมูลและไม่ขัดกฎหมาย' (3) จำเลยร้องขอพิจารณาคดีใหม่ได้ใน 15 วันหลังส่งคำบังคับ (ม.199 ตรี)",
+   case:"ฎ.5508/2545: โจทก์ไม่ขอภายใน 15 วัน → ศาลสั่งจำหน่ายคดีได้"},
+  {cat:"summary",code:"ม.200-207",title:"ขาดนัดพิจารณา — ขั้นตอน",
+   text:"ไม่มาศาล 'วันสืบพยานนัดแรก' = ขาดนัดพิจารณา | โจทก์ไม่มา (ม.202): ศาล 'จำหน่ายคดี' เว้นแต่จำเลยขอพิจารณาต่อ | จำเลยไม่มา (ม.204,206): โจทก์สืบพยานฝ่ายเดียว | ทางแก้ (ม.207): ร้องขอพิจารณาคดีใหม่หากมีเหตุสมควรและมิได้จงใจขาดนัด",
+   case:"ฎ.3388/2545: มาสายเกินไปโดยไม่แจ้งเหตุ = ขาดนัดพิจารณา"},
+  // JUDGMENT
+  {cat:"judgment",code:"ม.132",title:"การจำหน่ายคดี",
+   text:"ศาลสั่งจำหน่ายเมื่อ: 'ทิ้งฟ้อง ถอนฟ้อง โจทก์ขาดนัดพิจารณา' หรือคู่ความมรณะพ้น 1 ปีไม่มีทายาทเข้าแทนที่"},
+  {cat:"judgment",code:"ม.138",title:"พิพากษาตามยอม",
+   text:"คู่ความตกลง 'ประนีประนอมยอมความกันในข้อที่พิพาท' และไม่ฝ่าฝืนกฎหมาย ศาลพิพากษาตามยอม — 'ห้ามอุทธรณ์' เว้นแต่ขัดความสงบเรียบร้อย"},
+  {cat:"judgment",code:"ม.142",title:"ห้ามพิพากษาเกินคำขอ",
+   text:"'ห้ามมิให้ศาลพิพากษาหรือทำคำสั่งให้สิ่งใดๆ นอกเหนือไปจากที่ปรากฏในคำฟ้อง' — ข้อยกเว้น ม.142(1): คดีฟ้องขับไล่ ศาลพิพากษาบังคับไปถึง 'บริวาร' ของจำเลยด้วย"},
+  {cat:"judgment",code:"ม.144",title:"ดำเนินกระบวนพิจารณาซ้ำ",
+   text:"'ห้ามมิให้ดำเนินกระบวนพิจารณาในศาลนั้นอันเกี่ยวกับคดีหรือประเด็นที่วินิจฉัยชี้ขาดแล้วนั้นอีก'",
+   case:"ฎ.8458/2558: ศาลฎีกาพิพากษาถึงที่สุดว่าจำเลยไม่มีสิทธิเก็บกินในที่ดิน จำเลยนำประเด็นนี้กลับมาอีก = ห้ามตาม ม.144"},
+  {cat:"judgment",code:"ม.145",title:"ผลผูกพันคำพิพากษา",
+   text:"คำพิพากษาย่อม 'ผูกพันคู่ความ' นับแต่วันที่พิพากษาหรือมีคำสั่ง จนกว่าจะถูกเปลี่ยนแปลง"},
+  {cat:"judgment",code:"ม.148",title:"ฟ้องซ้ำ",
+   text:"'ห้ามมิให้คู่ความเดียวกัน รื้อร้องฟ้องกันอีก ในประเด็นที่ได้วินิจฉัยโดยอาศัยเหตุอย่างเดียวกัน' เมื่อคดีก่อนถึงที่สุดแล้ว",
+   case:"ฎ.5286/2531: คดีก่อนศาลวินิจฉัยถึงที่สุด คู่ความเดิมนำประเด็นเดิมมาฟ้องอีก = ฟ้องซ้ำ"},
+  {cat:"judgment",code:"ม.173",title:"ฟ้องซ้อน",
+   text:"'นับแต่เวลายื่นคำฟ้อง... ห้ามโจทก์ยื่นคำฟ้องเรื่องเดียวกันนั้น ต่อศาลเดียวกันหรือต่อศาลอื่น' — คดีก่อนยังไม่ถึงที่สุด",
+   case:"ฎ.1091/2537: คดีแรกฟ้องอ้างครอบครองปรปักษ์ คดีหลังฟ้องอ้างการซื้อขาย = ข้ออ้างต่างกัน ไม่ถือเป็นฟ้องซ้อน"},
+  // APPEAL
+  {cat:"appeal",code:"ม.223",title:"หลักทั่วไปการอุทธรณ์",
+   text:"คำพิพากษาหรือคำสั่งศาลชั้นต้น 'ให้อุทธรณ์คัดค้านได้เสมอ' เว้นแต่จะถูกจำกัดสิทธิตามกฎหมาย"},
+  {cat:"appeal",code:"ม.224",title:"ข้อจำกัดอุทธรณ์ข้อเท็จจริง",
+   text:"คีย์เวิร์ด: 'ทุนทรัพย์ที่พิพาทกันในชั้นอุทธรณ์ไม่เกินห้าหมื่นบาท ห้ามมิให้คู่ความอุทธรณ์ในปัญหาข้อเท็จจริง' — คดีไม่มีทุนทรัพย์อุทธรณ์ได้เสมอ เว้นขับไล่ค่าเช่าไม่เกิน 4,000/เดือน",
+   case:"ฎ.3558/2530: โจทก์ 2 คนฟ้องรวม 60,619 บาท แต่แยกรายบุคคลไม่เกิน 50,000 → ห้ามอุทธรณ์ข้อเท็จจริง"},
+  {cat:"appeal",code:"ม.225",title:"ต้องยกขึ้นว่ากันมาแล้วโดยชอบ",
+   text:"'ต้องเป็นข้อที่ได้ยกขึ้นว่ากันมาแล้วโดยชอบในศาลชั้นต้น และเป็นสาระแก่คดี' — ข้อยกเว้น: เรื่องความสงบเรียบร้อยฯ",
+   case:"ฎ.11714/2553: อุทธรณ์เรื่องอายุความโดยไม่กล่าวว่าคำพิพากษาผิดอย่างไร = อุทธรณ์ไม่ชัดแจ้ง ต้องห้าม"},
+  {cat:"appeal",code:"ม.226",title:"คำสั่งระหว่างพิจารณา — ต้องโต้แย้งก่อน",
+   text:"'ห้ามมิให้อุทธรณ์คำสั่งนั้นในระหว่างพิจารณา' คู่ความต้อง 'โต้แย้งคำสั่งนั้นไว้' จึงจะอุทธรณ์ได้เมื่อมีคำพิพากษาแล้ว",
+   case:"ฎ.936/2548: คำสั่งไม่อนุญาตให้จำเลยเลื่อนคดี = คำสั่งระหว่างพิจารณา ต้องโต้แย้งไว้ก่อน → ไม่โต้แย้ง ศาลชั้นต้นสั่งไม่รับอุทธรณ์ชอบแล้ว"},
+  {cat:"appeal",code:"ม.227,228",title:"ข้อยกเว้น — ไม่ใช่คำสั่งระหว่างพิจารณา",
+   text:"คำสั่งชี้ขาดเบื้องต้นข้อกฎหมายตาม ม.24 ที่ 'ทำให้คดีเสร็จไปทั้งเรื่อง (ม.227) หรือเสร็จไปบางส่วน (ม.228)' → อุทธรณ์ได้ทันทีโดยไม่ต้องโต้แย้งไว้",
+   case:"ฎ.3900/2549: ศาลสั่งงดสืบพยานแล้วพิพากษายกฟ้องเพราะโจทก์ไม่มีอำนาจฟ้อง = ชี้ขาดเบื้องต้น (ม.24) → โจทก์อุทธรณ์ได้ทันทีโดยไม่ต้องโต้แย้งก่อน"},
+  {cat:"appeal",code:"ม.229",title:"วางค่าธรรมเนียมใช้แทนคู่ความอีกฝ่าย",
+   text:"อุทธรณ์ที่กระทบคำพิพากษาเรื่องเงิน ต้องนำค่าฤชาธรรมเนียมที่จะต้องใช้แทนมาวางศาลพร้อมอุทธรณ์ — ไม่วาง = อุทธรณ์ไม่ชอบ"},
+  {cat:"appeal",code:"ม.231",title:"การขอทุเลาการบังคับคดี",
+   text:"ยื่นคำร้องพร้อมวางเงิน/หาประกัน เพื่อชะลอการบังคับคดีระหว่างรอผลอุทธรณ์ — ไม่ใช่สิทธิอัตโนมัติ ต้องให้ศาลอนุญาต"},
+  {cat:"appeal",code:"ม.247",title:"ระบบฎีกาอนุญาต",
+   text:"ต้องยื่น 'คำร้องขออนุญาตฎีกา' แสดงให้เห็นว่าเป็นปัญหาสำคัญที่ศาลฎีกาควรวินิจฉัย — ไม่ใช่สิทธิฎีกาได้เองเหมือนอุทธรณ์"},
+];
+
+/* ================= REAL EXAM MCQ (เฉพาะข้อที่มีเฉลย) ================= */
+const MCQ = [
+{cat:"jurisdiction", fact:"บริษัทลักกี้ประกันภัยฯ จ่ายค่ารักษาพยาบาลแทนนางอัปสรผู้ประสบภัยจากรถ ตาม พ.ร.บ.คุ้มครองผู้ประสบภัยจากรถ เหตุนายไพจิตรขับรถชนที่จังหวัดชลบุรี นายไพจิตรปฏิเสธไม่ชดใช้คืนและย้ายภูมิลำเนาไปกัมพูชาเกิน 2 ปีแล้ว (เดิมเคยอยู่ระยอง)",
+ question:"บริษัทฯ ควรเสนอคำฟ้องต่อศาลใด?",
+ choices:[{t:"ศาลจังหวัดชลบุรี เพราะเป็นที่มูลคดีเกิดตาม ม.4(1)",c:true},{t:"ศาลจังหวัดระยอง เพราะเป็นภูมิลำเนาเดิมตาม ม.3(2)(ก)",c:false},{t:"ฟ้องไม่ได้เพราะจำเลยไม่มีภูมิลำเนาในไทยแล้ว",c:false},{t:"ศาลแพ่ง กรุงเทพฯ เพราะเป็นที่ตั้งบริษัทโจทก์",c:false}],
+ explain:"เหตุละเมิดที่ชลบุรีเป็นต้นเหตุแห่งการโต้แย้งสิทธิ ถือเป็น 'มูลคดีเกิด' ตาม <b>ม.4(1)</b> ส่วนระยองใช้ไม่ได้เพราะย้ายภูมิลำเนาเกิน 2 ปีแล้วตาม ม.3(2)(ก)"},
+{cat:"judgment", fact:"คดีก่อน จำเลยฟ้องขับไล่ ย. กับบริวารออกจากที่พิพาท ศาลพิพากษาให้จำเลยชนะ ชั้นบังคับคดี โจทก์คดีนี้ (อ้างเป็นบริวาร ย.) ต่อสู้ว่าบ้านอยู่นอกที่พิพาท ศาลไต่สวนแล้วสั่งขนย้ายออก ถึงที่สุด ต่อมาโจทก์ฟ้องคดีใหม่อ้างว่าที่ดินเป็นที่ชายทะเลนอกโฉนดจำเลย ขอเพิกถอนคำพิพากษาเดิม",
+ question:"ฟ้องคดีใหม่นี้เป็น 'ฟ้องซ้ำ' ตาม ม.148 หรือไม่?",
+ choices:[{t:"เป็นฟ้องซ้ำ เพราะคู่ความและประเด็นกรรมสิทธิ์เป็นเรื่องเดียวกันที่ถึงที่สุดแล้ว",c:true},{t:"ไม่เป็น เพราะเข้าข้อยกเว้น ม.148(1) เนื่องจากเป็นชั้นบังคับคดี",c:false},{t:"ไม่เป็น เพราะคู่ความไม่ใช่คนเดียวกัน",c:false},{t:"ไม่เป็น เพราะที่ดินคนละแปลงกับคดีก่อน",c:false}],
+ explain:"ฎ.5286/2531 — คู่ความเดียวกัน ประเด็นกรรมสิทธิ์ที่พิพาทแปลงเดียวกันซึ่งศาลไต่สวนถึงที่สุดแล้ว จึงเป็น<b>ฟ้องซ้ำ</b> ข้อยกเว้น (1) ใช้ไม่ได้เพราะมีคำสั่งถึงที่สุดในชั้นบังคับคดีไปแล้ว"},
+{cat:"appeal", fact:"โจทก์ฟ้องขับไล่จำเลยจากที่ดิน (ค่าเช่าเดือนละ 5,000 บาท) จำเลยต่อสู้ว่าที่ดินเป็นของนางขำมารดาตน ครอบครองปรปักษ์แล้ว ศาลพิพากษาให้ขับไล่และให้ชดใช้ค่าเสียหาย 50,000 บาท จำเลยอุทธรณ์ 2 ประเด็น: (1) ที่ดินเป็นของนางขำไม่ใช่โจทก์ (2) ค่าเสียหาย 50,000 บาทสูงไป",
+ question:"ศาลชั้นต้นควรสั่งรับอุทธรณ์อย่างไร?",
+ choices:[{t:"รับประเด็น (1) เพราะค่าเช่าเกิน 4,000 บาท/เดือน แต่ไม่รับประเด็น (2) เพราะทุนทรัพย์ไม่เกิน 50,000",c:true},{t:"รับอุทธรณ์ทั้งสองประเด็นเพราะยื่นมาพร้อมกัน",c:false},{t:"ไม่รับทั้งสองประเด็นเพราะเป็นข้อเท็จจริงทั้งคู่",c:false},{t:"รับประเด็น (2) แต่ไม่รับประเด็น (1)",c:false}],
+ explain:"ประเด็น (1) เป็นคดีขับไล่ไม่มีทุนทรัพย์ ค่าเช่าเกิน 4,000/เดือน จึงอุทธรณ์ข้อเท็จจริงได้ตาม <b>ม.224 ว.2</b> ส่วนประเด็น (2) มีทุนทรัพย์ไม่เกิน 50,000 ต้องห้ามตาม <b>ม.224 ว.1</b>"},
+{cat:"phdn", fact:"โจทก์ฟ้องเรียกหนี้เงินกู้ 250,000 บาท คดีเข้าสู่ศาลจังหวัด",
+ question:"ผู้พิพากษาคนเดียวพิจารณาพิพากษาคดีนี้ได้หรือไม่?",
+ choices:[{t:"ได้ เพราะทุนทรัพย์ไม่เกิน 300,000 บาทตาม พธน. ม.25(4)",c:true},{t:"ไม่ได้ เพราะศาลจังหวัดต้องใช้องค์คณะ 2 คนเสมอ",c:false},{t:"ไม่ได้ เพราะทุนทรัพย์เกิน 200,000 บาท",c:false},{t:"ได้เฉพาะถ้าคู่ความยินยอมเท่านั้น",c:false}],
+ explain:"ตาม <b>ม.25(4)</b> ผู้พิพากษาคนเดียวมีอำนาจคดีแพ่งทุนทรัพย์ไม่เกิน 300,000 บาท ไม่ว่าขึ้นศาลแขวงหรือศาลจังหวัด"},
+{cat:"summary", fact:"จำเลยขาดนัดยื่นคำให้การ ต่อมายื่นคำให้การเข้ามาโดยไม่ได้มาศาลแจ้งว่าประสงค์ต่อสู้คดี และไม่แสดงว่าการขาดนัดมิได้จงใจ",
+ question:"ศาลควรมีคำสั่งอย่างไร?",
+ choices:[{t:"ปฏิเสธไม่รับคำให้การ เพราะไม่ปฏิบัติตามหลักเกณฑ์ ม.199",c:true},{t:"รับไว้พิจารณาเพราะจำเลยมีสิทธิยื่นได้เสมอ",c:false},{t:"รับไว้แต่ตัดสิทธินำสืบพยาน",c:false},{t:"ให้จำเลยแก้ไขคำให้การใหม่ภายใน 15 วัน",c:false}],
+ explain:"ฎ.9101/2547 — ต้องมาศาลในโอกาสแรกและแจ้งประสงค์ต่อสู้คดีตาม <b>ม.199</b> เมื่อไม่ทำตามหลักเกณฑ์ ศาลชอบที่จะปฏิเสธไม่รับ"},
+{cat:"summary", fact:"คดีมโนสาเร่ วันสืบพยานโจทก์ ทนายจำเลยมอบฉันทะให้เสมียนทนายยื่นคำร้องขอเลื่อนคดีและฟังคำสั่งศาลแทน ศาลไม่อนุญาตให้เลื่อน ตัวจำเลยไม่ได้มาศาล",
+ question:"ถือว่าจำเลยขาดนัดพิจารณาหรือไม่?",
+ choices:[{t:"ไม่ถือว่าขาดนัด เพราะเสมียนทนายมาศาลแทนแล้ว เสียแค่สิทธิซักค้านนัดนั้น",c:true},{t:"ถือว่าขาดนัดทันทีเพราะตัวจำเลยไม่มา",c:false},{t:"ถือว่าขาดนัดเพราะศาลไม่อนุญาตให้เลื่อน",c:false},{t:"ต้องรอศาลวินิจฉัยเป็นกรณีไป ไม่มีหลักตายตัว",c:false}],
+ explain:"ฎ.13049/2558 — มอบฉันทะเสมียนทนายมายื่นคำร้องและฟังคำสั่งแทน ถือว่ามาศาลแล้ว ผลเป็นเพียงเสียสิทธิซักค้านพยานในนัดนั้น ไม่เป็นขาดนัดพิจารณาตาม <b>ม.200</b>"},
+{cat:"summary", fact:"ศาลนัดสืบพยานโจทก์ 9.00 น. ศาลออกนั่งพิจารณาจริง 10.30 น. ฝ่ายโจทก์ยังไม่มาและไม่แจ้งเหตุขัดข้องใดๆ",
+ question:"ศาลควรมีคำสั่งอย่างไร?",
+ choices:[{t:"ถือว่าโจทก์ขาดนัดพิจารณา สั่งจำหน่ายคดีได้",c:true},{t:"ต้องรอจนสิ้นเวลาทำการศาลก่อนจึงถือว่าขาดนัด",c:false},{t:"ต้องเลื่อนคดีให้อัตโนมัติเพราะยังไม่มีใครร้องขอ",c:false},{t:"ถือว่าคดีจบลงด้วยการพิพากษายกฟ้องทันที",c:false}],
+ explain:"ฎ.3388/2545 — ต้องมาศาลตรงเวลานัด มาสายเกินไปโดยไม่แจ้งเหตุ ถือว่า<b>ขาดนัดพิจารณา</b> ศาลสั่งจำหน่ายคดีได้ตาม ม.132(2) ประกอบ ม.201"},
+{cat:"jurisdiction", fact:"นายเก่งทำสัญญาเช่าซื้อรถยนต์จากร้านของนายดุสิตที่จังหวัดหนองคาย แล้วผิดนัดไม่ชำระค่าเช่าซื้อเกิน 2 ปี นายเก่งแจ้งย้ายภูมิลำเนาออกจากบ้านที่บุรีรัมย์ไปขอนแก่น แต่ยังไม่แจ้งย้ายเข้าที่ขอนแก่น และแจ้งย้ายออกคนเดียวไม่พาครอบครัวไปด้วย",
+ question:"บริษัทควรฟ้องนายเก่งที่ศาลใด?",
+ choices:[{t:"ศาลจังหวัดบุรีรัมย์ (ภูมิลำเนาเดิม) หรือศาลจังหวัดหนองคาย (มูลคดีเกิด) เลือกได้ตาม ม.4(1)",c:true},{t:"ศาลจังหวัดขอนแก่นเท่านั้น เพราะเป็นที่แจ้งย้ายไป",c:false},{t:"ฟ้องได้เฉพาะศาลหนองคายเท่านั้น",c:false},{t:"ฟ้องไม่ได้เพราะยังไม่ทราบภูมิลำเนาที่แน่นอน",c:false}],
+ explain:"เมื่อนายเก่งไม่มีเจตนาย้ายถิ่นที่อยู่จริง (ไม่พาครอบครัวไป ยังไม่แจ้งย้ายเข้า) ให้ถือภูมิลำเนาเดิมคือบุรีรัมย์ และมูลคดี (ที่ทำสัญญา) เกิดที่หนองคาย จึงเลือกฟ้องได้ทั้งสองศาลตาม <b>ม.4(1)</b>"},
+{cat:"jurisdiction", fact:"อ. รับเช็คจากจำเลยเพื่อคืนเงินร่วมลงทุน แล้วสลักหลังโอนเช็คให้โจทก์ เมื่อถึงกำหนดโจทก์นำเช็คไปเรียกเก็บที่ธนาคารแต่ธนาคารปฏิเสธการจ่ายเงิน",
+ question:"มูลคดีที่ทำให้โจทก์มีอำนาจฟ้องเกิดขึ้นที่ใด?",
+ choices:[{t:"ธนาคารที่ปฏิเสธการจ่ายเงิน เพราะเป็นจุดที่ความรับผิดของจำเลยในฐานะผู้สั่งจ่ายเกิดขึ้น",c:true},{t:"ภูมิลำเนาของ อ. เพราะเป็นผู้รับเช็คคนแรก",c:false},{t:"สถานที่ที่จำเลยสั่งจ่ายเช็คให้ อ. ในตอนแรก",c:false},{t:"ภูมิลำเนาของโจทก์ผู้ทรงเช็คคนปัจจุบัน",c:false}],
+ explain:"โจทก์เป็นผู้ทรงเช็คโดยการสลักหลัง มีสิทธิเช่นเดียวกับ อ. ความรับผิดของจำเลยเกิดขึ้นเมื่อเช็คถูกธนาคารปฏิเสธการจ่ายเงิน สถานที่ที่มูลคดีเกิดคือ<b>ธนาคารที่ปฏิเสธการจ่ายเงิน</b>"},
+{cat:"pleading", fact:"โจทก์ฟ้องเรียกหนี้เงินกู้ 50,000 บาท จำเลยให้การว่าฟ้องเคลือบคลุมและไม่เคยกู้ยืม ศาลชั้นต้นวินิจฉัยว่าฟ้องไม่เคลือบคลุมและพิพากษาให้จำเลยชำระเต็มจำนวน แต่ผู้พิพากษาที่นั่งพิจารณาทำความเห็นแย้งไว้ว่า 'ฟ้องเคลือบคลุมต้องยกฟ้อง' (เป็นความเห็นแย้งในข้อกฎหมาย)",
+ question:"จำเลยจะอุทธรณ์ในข้อเท็จจริงว่าไม่เคยกู้ยืมเงินได้หรือไม่?",
+ choices:[{t:"ไม่ได้ เพราะความเห็นแย้งเป็นข้อกฎหมาย ไม่ใช่ข้อเท็จจริง และทุนทรัพย์ไม่เกิน 50,000 บาท",c:true},{t:"ได้ เพราะมีความเห็นแย้งของผู้พิพากษาอยู่แล้ว",c:false},{t:"ได้เสมอเพราะเป็นเรื่องอำนาจฟ้อง",c:false},{t:"ไม่ได้ เพราะทุนทรัพย์เกิน 50,000 บาท",c:false}],
+ explain:"ความเห็นแย้งที่จะทำให้อุทธรณ์ข้อเท็จจริงได้ตาม <b>ม.224 ว.1</b> ต้องเป็นความเห็นแย้ง<b>ในข้อเท็จจริง</b>เท่านั้น ความเห็นแย้งเรื่องฟ้องเคลือบคลุมเป็นข้อกฎหมาย จึงไม่เข้าข้อยกเว้น เมื่อทุนทรัพย์ไม่เกิน 50,000 บาท จึงต้องห้ามอุทธรณ์ข้อเท็จจริง"},
+{cat:"parties", fact:"โจทก์ 109 คนต่างเป็นสมาชิกสมาคมฌาปนกิจสงเคราะห์ของจำเลย จำเลยผิดข้อตกลงไม่จ่ายเงินสงเคราะห์ศพและอ้างเท็จว่าสมาชิกลาออกหมดแล้ว โจทก์ทั้งหมดจึงฟ้องเรียกเงินคืน/ค่าเสียหายรวมกันเป็นคดีเดียว",
+ question:"โจทก์ทั้ง 109 คนฟ้องรวมกันในคดีเดียวได้หรือไม่?",
+ choices:[{t:"ได้ เพราะมีผลประโยชน์ร่วมกันในมูลความแห่งคดีตาม ม.59",c:true},{t:"ไม่ได้ เพราะแต่ละคนมีสัญญาเป็นรายบุคคลแยกจากกัน",c:false},{t:"ได้เฉพาะกรณีทุนทรัพย์รวมกันไม่เกินเกณฑ์ศาลแขวงเท่านั้น",c:false},{t:"ไม่ได้ เพราะจำนวนคู่ความมากเกินไป",c:false}],
+ explain:"ฎ.3252/2548 — แม้สัญญาจะแยกรายบุคคล แต่มูลเหตุที่จำเลยผิดข้อตกลงและอ้างเท็จเป็นเรื่องเดียวกัน ถือว่าโจทก์แต่ละคนมีผลประโยชน์ร่วมกันในมูลความแห่งคดีตาม <b>ม.59</b> จึงรวมฟ้องเป็นคดีเดียวได้"},
+{cat:"parties", fact:"โจทก์ 2 คนถูกจำเลยกระทำละเมิดในคราวเดียวกัน ค่าเสียหายแยกกันได้ โจทก์ที่ 1 เสียหาย 200,000 บาท โจทก์ที่ 2 เสียหายเพียง 40,000 บาท (ปกติอยู่ในเขตศาลแขวง)",
+ question:"โจทก์ทั้งสองฟ้องรวมกันในคดีเดียวที่ศาลเดียวกันได้หรือไม่?",
+ choices:[{t:"ได้ เพราะมูลหนี้เกิดจากละเมิดคราวเดียวกัน มีผลประโยชน์ร่วมกันในมูลความแห่งคดีตาม ม.59",c:true},{t:"ไม่ได้ เพราะทุนทรัพย์ของโจทก์แต่ละคนต่างกัน ต้องแยกฟ้อง",c:false},{t:"ได้เฉพาะโจทก์ที่ 1 เท่านั้น โจทก์ที่ 2 ต้องฟ้องศาลแขวงแยก",c:false},{t:"ไม่ได้ เพราะค่าเสียหายคำนวณแยกกันได้",c:false}],
+ explain:"ฎ.7471/2541 — แม้ค่าเสียหายแยกกันได้และโจทก์ที่ 2 มีทุนทรัพย์เพียง 40,000 บาท แต่มูลหนี้เกิดจากละเมิดคราวเดียวกัน ถือมีผลประโยชน์ร่วมกันในมูลความแห่งคดีตาม <b>ม.59</b> ฟ้องรวมกันได้"},
+{cat:"parties", fact:"จำเลยในฐานะผู้จัดการมรดกของ ป. ถึงแก่ความตายระหว่างพิจารณาคดี ผู้ร้องซึ่งเป็นทายาทของจำเลย (ไม่ใช่ทายาทของ ป.) ยื่นคำร้องขอเข้าเป็นคู่ความแทนที่จำเลย แต่ผู้ร้องไม่ได้เป็นผู้จัดการหรือผู้ปกครองทรัพย์มรดกของ ป. แต่อย่างใด",
+ question:"ผู้ร้องเข้าเป็นคู่ความแทนที่จำเลยได้หรือไม่?",
+ choices:[{t:"ไม่ได้ เพราะหน้าที่ผู้จัดการมรดกเป็นเรื่องเฉพาะตัว สิ้นสุดไปพร้อมจำเลย ผู้ร้องไม่มีอำนาจจัดการทรัพย์มรดกของ ป.",c:true},{t:"ได้ เพราะผู้ร้องเป็นทายาทของจำเลยผู้มรณะ",c:false},{t:"ได้ หากศาลอนุญาตตามดุลพินิจโดยไม่มีเงื่อนไข",c:false},{t:"ได้เสมอภายในกำหนด 1 ปีไม่ว่าผู้ร้องจะมีอำนาจจัดการทรัพย์มรดกหรือไม่",c:false}],
+ explain:"หน้าที่ผู้จัดการมรดกเป็นเรื่องเฉพาะตัว ไม่ตกทอดไปยังทายาทของผู้จัดการมรดกเอง ผู้ร้องเป็นเพียงทายาทของจำเลย ไม่ใช่ผู้มีอำนาจจัดการทรัพย์มรดกของ ป. จึงเข้าแทนที่ไม่ได้ตาม <b>ม.42-43</b> เมื่อไม่มีคำขอของผู้มีอำนาจที่แท้จริงภายใน 1 ปี ศาลต้องจำหน่ายคดีตาม ม.132(3)"},
+{cat:"summary", fact:"คดีมีฟ้องแย้ง ศาลกำหนดให้โจทก์นำสืบก่อน วันนัดสืบพยานจำเลย (ในฐานะจำเลยเดิมและโจทก์ฟ้องแย้ง) ไม่มาศาล ฝ่ายที่มาศาลนำพยานโจทก์สืบจนเสร็จ",
+ question:"การไม่มาศาลของจำเลยมีผลต่อฐานะใดบ้าง?",
+ choices:[{t:"ขาดนัดพิจารณาทั้งสองฐานะ คือฐานะจำเลยเดิมและฐานะโจทก์ฟ้องแย้ง",c:true},{t:"ขาดนัดเฉพาะฐานะจำเลยเดิมเท่านั้น",c:false},{t:"ขาดนัดเฉพาะฐานะโจทก์ฟ้องแย้งเท่านั้น",c:false},{t:"ไม่ถือว่าขาดนัดเลยเพราะมีฟ้องแย้ง",c:false}],
+ explain:"ฎ.3778/2549 — เมื่อคู่ความมี 2 ฐานะพร้อมกัน การไม่มาศาลในวันสืบพยานย่อมถือว่า<b>ขาดนัดพิจารณาทั้งสองฐานะ</b> ศาลชั้นต้นต้องพิจารณาคดีต่อไปฝ่ายเดียวรวมถึงส่วนฟ้องแย้งด้วย"},
+{cat:"evidence", fact:"โจทก์ฟ้องเรียกหนี้เงินกู้ จำเลยให้การปฏิเสธว่าไม่เคยกู้ยืมและสัญญากู้เป็นเอกสารปลอม ถึงวันนัดสืบพยานโจทก์ โจทก์ไม่มาศาล จำเลยมาศาลและแถลงไม่ติดใจสืบพยาน ศาลชั้นต้นจึงสั่งจำหน่ายคดีออกจากสารบบความ",
+ question:"คำสั่งจำหน่ายคดีของศาลชั้นต้นชอบด้วยกฎหมายหรือไม่?",
+ choices:[{t:"ไม่ชอบ เพราะเมื่อจำเลยขอให้พิจารณาต่อ ศาลต้องวินิจฉัยตามภาระพิสูจน์ ซึ่งโจทก์มีภาระแต่ไม่มาสืบ ต้องพิพากษายกฟ้อง ไม่ใช่จำหน่ายคดี",c:true},{t:"ชอบแล้ว เพราะจำเลยไม่ติดใจสืบพยานเท่ากับยุติคดี",c:false},{t:"ชอบแล้ว เพราะโจทก์ขาดนัดพิจารณาต้องจำหน่ายคดีเสมอ",c:false},{t:"ไม่ชอบ เพราะต้องเลื่อนคดีให้โจทก์มาสืบใหม่",c:false}],
+ explain:"เมื่อโจทก์ขาดนัดพิจารณาแต่จำเลยแถลงขอให้พิจารณาต่อ ศาลต้องพิจารณาชี้ขาดไปฝ่ายเดียวตาม <b>ม.202</b> โดยดูภาระการพิสูจน์จริง คดีนี้โจทก์มีภาระพิสูจน์เรื่องกู้ยืม เมื่อไม่นำพยานมาสืบ ต้องพิพากษา<b>ยกฟ้อง</b> การสั่งจำหน่ายคดีจึงไม่ชอบ"},
+{cat:"appeal", fact:"โจทก์ฟ้องเรียกเงินตามเช็ค 1,000,000 บาท จำเลยให้การปฏิเสธความรับผิด ศาลชั้นต้นเห็นว่าคดีพอวินิจฉัยได้จึงสั่งงดสืบพยานแล้วพิพากษาให้จำเลยชำระหนี้เต็มจำนวน จำเลยอุทธรณ์คำสั่งงดสืบพยานโดยไม่ได้โต้แย้งคำสั่งไว้ก่อน และวางค่าขึ้นศาลชั้นอุทธรณ์ 200 บาท แต่ไม่ได้วางค่าธรรมเนียมใช้แทนโจทก์",
+ question:"คำสั่งของศาลชั้นต้นที่ไม่รับอุทธรณ์ของจำเลยชอบด้วยกฎหมายหรือไม่?",
+ choices:[{t:"ชอบแล้ว เพราะแม้ประเด็นงดสืบพยานอุทธรณ์ได้โดยไม่ต้องโต้แย้งไว้ก่อน แต่จำเลยไม่วางค่าธรรมเนียมใช้แทนตาม ม.229 จึงเป็นอุทธรณ์ที่ไม่ชอบ",c:true},{t:"ไม่ชอบ เพราะจำเลยมีสิทธิอุทธรณ์คำสั่งงดสืบพยานได้เสมอ",c:false},{t:"ไม่ชอบ เพราะจำเลยไม่จำเป็นต้องวางค่าธรรมเนียมใดๆ เลย",c:false},{t:"ชอบแล้ว เพราะจำเลยไม่ได้โต้แย้งคำสั่งงดสืบพยานไว้ก่อน",c:false}],
+ explain:"คำสั่งงดสืบพยานแล้ววินิจฉัยชี้ขาดคดีไปเลยเป็นคำสั่งตาม <b>ม.24</b> ซึ่งทำให้คดีเสร็จไปทั้งเรื่อง ไม่ใช่คำสั่งระหว่างพิจารณาตาม ม.226 จึงอุทธรณ์ได้โดยไม่ต้องโต้แย้งไว้ก่อน แต่เมื่ออุทธรณ์นี้กระทบคำพิพากษาเรื่องเงินโดยตรง จำเลยต้องนำค่าธรรมเนียมที่จะต้องใช้แทนโจทก์มาวางศาลพร้อมอุทธรณ์ตาม <b>ม.229</b> เมื่อไม่วาง จึงเป็นอุทธรณ์ที่ไม่ชอบ"},
+{cat:"appeal", fact:"จำเลยยื่นคำร้องขอแก้ไขเพิ่มเติมคำให้การเพื่อตั้งประเด็นใหม่ ศาลมีคำสั่งยกคำร้องตาม ม.180 เมื่อศาลพิพากษาคดีเสร็จแล้ว จำเลยประสงค์จะอุทธรณ์คำสั่งยกคำร้องขอแก้ไขคำให้การนั้น โดยไม่เคยโต้แย้งคำสั่งไว้ก่อนเลย",
+ question:"จำเลยอุทธรณ์คำสั่งยกคำร้องขอแก้ไขคำให้การนี้ได้หรือไม่?",
+ choices:[{t:"ได้ เพราะเป็นคำสั่งไม่รับคำคู่ความซึ่งทำให้ประเด็นที่ตั้งขึ้นเสร็จไป จึงอุทธรณ์ตาม ม.223 ได้โดยไม่ต้องโต้แย้งไว้ก่อน",c:true},{t:"ไม่ได้ เพราะไม่เคยโต้แย้งคำสั่งไว้ก่อนตาม ม.226",c:false},{t:"ไม่ได้ เพราะคำร้องขอแก้ไขคำให้การไม่ใช่คำคู่ความ",c:false},{t:"ได้เฉพาะกรณีที่ศาลชั้นต้นอนุญาตให้อุทธรณ์เท่านั้น",c:false}],
+ explain:"ฎ.96/2509 (ประชุมใหญ่) — คำร้องขอแก้ไขคำให้การเป็นการตั้งประเด็น จึงเป็นคำคู่ความ เมื่อศาลสั่งยกคำร้องมีผลเป็นคำสั่งไม่รับคำคู่ความ ทำให้ประเด็นที่ตั้งขึ้นเสร็จไป จำเลยอุทธรณ์ได้ตาม <b>ม.223</b> โดยไม่ต้องโต้แย้งไว้ก่อน (ไม่ใช่การอุทธรณ์คำสั่งระหว่างพิจารณาตาม ม.226)"},
+{cat:"appeal", fact:"คดีแพ่งเกี่ยวเนื่องกับคดีอาญา ระหว่างพิจารณาคดีแพ่งในศาลชั้นต้น ศาลในคดีอาญามีคำพิพากษาถึงที่สุดว่าจำเลยไม่มีความผิด จำเลยในคดีแพ่งจึงยกประเด็นนี้ขึ้นอ้างในชั้นอุทธรณ์เป็นครั้งแรก โดยไม่เคยยกขึ้นในศาลชั้นต้นเลย เพราะขณะนั้นคดีอาญายังไม่ถึงที่สุด",
+ question:"จำเลยยกประเด็นนี้ขึ้นอุทธรณ์ได้หรือไม่ ทั้งที่ไม่เคยยกในศาลชั้นต้น?",
+ choices:[{t:"ได้ เพราะพฤติการณ์ไม่เปิดช่องให้จำเลยยกขึ้นต่อสู้ในศาลชั้นต้นได้ตั้งแต่แรก",c:true},{t:"ไม่ได้ เพราะเป็นข้อที่ไม่ได้ยกขึ้นว่ากันมาแล้วในศาลชั้นต้นตาม ม.225",c:false},{t:"ไม่ได้ เพราะเป็นเรื่องนอกประเด็นแห่งคดีแพ่งโดยสิ้นเชิง",c:false},{t:"ได้เฉพาะในชั้นฎีกาเท่านั้น อุทธรณ์ยกขึ้นไม่ได้",c:false}],
+ explain:"ฎ.1001/2559 — โดยหลัก ม.225 ต้องยกขึ้นว่ากันมาแล้วในศาลชั้นต้น แต่เมื่อคดีอาญาเพิ่งถึงที่สุดในระหว่างพิจารณาคดีแพ่งชั้นต้น พฤติการณ์ไม่เปิดช่องให้จำเลยยกขึ้นต่อสู้ได้ตั้งแต่ต้น จึงเป็น<b>ข้อยกเว้น</b>ที่ยกขึ้นอุทธรณ์ได้"},
+{cat:"appeal", fact:"คดีเช่าอสังหาริมทรัพย์ต่างตอบแทนพิเศษ โจทก์ฟ้องระบุว่าได้บอกเลิกการเช่ากับจำเลยแล้ว จำเลยให้การว่าโจทก์ไม่เคยบอกเลิกการเช่า แต่เมื่อศาลชั้นต้นชี้สองสถานและกำหนดประเด็นนำสืบ กลับไม่ได้กำหนดประเด็นเรื่องการบอกเลิกการเช่าไว้ และจำเลยก็ไม่ได้โต้แย้งคำสั่งชี้สองสถานนั้น",
+ question:"จำเลยจะยกประเด็นเรื่องไม่ได้บอกเลิกการเช่าขึ้นอุทธรณ์และฎีกาได้หรือไม่?",
+ choices:[{t:"ไม่ได้ เพราะไม่ได้โต้แย้งคำสั่งชี้สองสถานที่ไม่กำหนดประเด็นนี้ไว้ ต้องห้ามตาม ม.226",c:true},{t:"ได้เสมอ เพราะจำเลยเคยให้การต่อสู้ประเด็นนี้ไว้แล้ว",c:false},{t:"ได้ เพราะเป็นข้อกฎหมายเกี่ยวด้วยความสงบเรียบร้อย",c:false},{t:"ได้ เพราะศาลชั้นต้นมีหน้าที่ต้องกำหนดประเด็นให้ครบเองโดยไม่ต้องโต้แย้ง",c:false}],
+ explain:"ฎ.2170/2516 — แม้จำเลยจะเคยให้การต่อสู้ไว้ แต่เมื่อศาลชี้สองสถานไม่ได้กำหนดเป็นประเด็นนำสืบและจำเลยไม่ได้โต้แย้งคำสั่งนั้นไว้ ย่อมยกขึ้นอ้างในชั้นอุทธรณ์และฎีกาไม่ได้ ต้องห้ามตาม <b>ม.226</b>"},
+{cat:"appeal", fact:"ผู้ร้องขอตั้งผู้จัดการมรดกตามพินัยกรรม ผู้คัดค้านยอมรับว่าพินัยกรรมสมบูรณ์ เพียงแต่ข้อความที่ขีดฆ่าต่อเติมไม่สมบูรณ์ ศาลจึงกำหนดประเด็นเฉพาะส่วนที่ขีดฆ่าต่อเติม เมื่อสืบพยานเสร็จ ผู้คัดค้านกลับแถลงว่าพินัยกรรมปลอมทั้งฉบับ และยกประเด็นนี้ขึ้นอุทธรณ์",
+ question:"ผู้คัดค้านยกประเด็นพินัยกรรมปลอมทั้งฉบับขึ้นอุทธรณ์ได้หรือไม่?",
+ choices:[{t:"ไม่ได้ เพราะเป็นการกล่าวอ้างนอกประเด็นที่ตั้งไว้ในศาลชั้นต้น ไม่ใช่ข้อที่ว่ากันมาแล้วโดยชอบ",c:true},{t:"ได้ เพราะเป็นข้อกฎหมายเกี่ยวด้วยความสงบเรียบร้อยที่ยกขึ้นเองเมื่อใดก็ได้",c:false},{t:"ได้ เพราะผู้คัดค้านเคยยอมรับเรื่องพินัยกรรมไว้แล้วในคำคัดค้าน",c:false},{t:"ได้ เพราะเกี่ยวเนื่องกับประเด็นเรื่องขีดฆ่าต่อเติมโดยตรง",c:false}],
+ explain:"ฎ.539/2532 — ประเด็นที่ศาลชั้นต้นกำหนดไว้มีเพียงส่วนขีดฆ่าต่อเติม การกล่าวอ้างว่าพินัยกรรมปลอมทั้งฉบับเป็นการกล่าวอ้าง<b>นอกประเด็น</b>ที่ตั้งไว้ ไม่ใช่ข้อที่ได้ยกขึ้นว่ากันมาแล้วโดยชอบในศาลชั้นต้นตาม <b>ม.225</b>"},
+
+/* ---- เพิ่มจาก น.380 การสอบแก้ตัว ปีการศึกษา 2564 (ต้นฉบับไม่มีเฉลย ผู้ช่วยวิเคราะห์และเขียนเฉลยเพิ่มเติม) ---- */
+{cat:"jurisdiction", fact:"นายทิม (สัญชาติอเมริกัน) อยู่กินฉันสามีภริยากับนางนกที่บ้านของนางนกในจังหวัดนราธิวาสมาตั้งแต่ต้นปี 2560 โดยเดินทางไปทำธุรกิจที่มาเลเซียเป็นประจำ วันที่ 1 ต.ค. 2564 นายทิมทำสัญญากู้ยืมเงิน 1 ล้านดอลลาร์สหรัฐจากนายดันแคน (สัญชาติอังกฤษ ภูมิลำเนาลอนดอน) ลงนามที่มาเลเซีย ตกลงคืนเงินภายใน 1 ปี (ครบกำหนด 1 ต.ค. 2565) วันที่ 1 มิ.ย. 2565 ขณะเดินทางกลับจากอินเดียโดยสายการบินไทยเหนือน่านฟ้าเมียนมาร์ ทั้งสองทะเลาะกันจนนายทิมใช้ขวดไวน์ตีศีรษะนายดันแคนบาดเจ็บ เมื่อถึงไทยนายดันแคนทวงเงินคืนทันทีแต่นายทิมปฏิเสธและเดินทางกลับบอสตันทันที วันที่ 1 ก.ค. 2565 นายดันแคนมาปรึกษาว่าจะฟ้องเรียกหนี้เงินกู้ได้หรือไม่",
+ question:"ณ วันที่ 1 กรกฎาคม 2565 นายดันแคนมีอำนาจฟ้องเรียกหนี้เงินกู้คืนได้ทันทีหรือไม่?",
+ choices:[{t:"ยังฟ้องไม่ได้ เพราะหนี้ยังไม่ถึงกำหนดชำระ (ครบกำหนด 1 ต.ค. 2565) จึงยังไม่มีข้อโต้แย้งสิทธิตาม ม.55 ควรรอถึงกำหนดก่อนจึงฟ้อง",c:true},{t:"ฟ้องได้ทันที เพราะนายทิมปฏิเสธไม่คืนเงินเมื่อถูกทวงถามแล้วถือเป็นข้อโต้แย้งสิทธิ",c:false},{t:"ฟ้องได้ทันที เพราะนายทิมหลบหนีไปต่างประเทศถือเป็นผิดสัญญาโดยปริยาย",c:false},{t:"ฟ้องไม่ได้เลยไม่ว่าเวลาใด เพราะสัญญาทำในต่างประเทศ",c:false}],
+ explain:"แม้นายทิมจะปฏิเสธไม่คืนเงินและหลบหนีไป แต่สัญญากู้กำหนดเวลาชำระคืนไว้แน่นอน (ครบกำหนด 1 ต.ค. 2565) สิทธิเรียกร้องตามสัญญายังไม่เกิดขึ้นจนกว่าจะถึงกำหนด การทวงถามก่อนกำหนดยังไม่ถือเป็นข้อโต้แย้งสิทธิตาม <b>ม.55</b> นายดันแคนจึงควรรอจนถึงวันที่ 1 ต.ค. 2565 จึงจะมีอำนาจฟ้อง — ฟ้องก่อนกำหนดเสี่ยงถูกยกฟ้องเพราะยังไม่มีอำนาจฟ้อง<br><br><b>เขตอำนาจศาล</b> (เมื่อถึงเวลาฟ้อง): นายทิมเคยมีถิ่นที่อยู่หลักที่นราธิวาสมาหลายปี น่าจะถือเป็นภูมิลำเนาได้แม้ย้ายออกไปแล้วไม่เกิน 2 ปีตาม ม.3(2)(ก) ส่วนมูลคดีเงินกู้เกิดที่มาเลเซีย (ที่ทำสัญญา) ไม่ใช่เขตศาลไทย จึงอาศัยเขตศาลได้เฉพาะภูมิลำเนาจำเลย (นราธิวาส)<br><br><b>ส่วนค่าเสียหายจากการทำร้ายร่างกาย</b>ที่เกิดบนอากาศยานไทยเหนือน่านฟ้าเมียนมาร์ เป็นประเด็นที่ยังไม่มีบทบัญญัติชัดแจ้งในวิ.แพ่ง ต้องอาศัยการเทียบเคียงหลักที่ว่าการกระทำบนยานพาหนะจดทะเบียนไทยอาจถือเสมือนเกิดในราชอาณาจักร (ทำนองเดียวกับหลักในทางอาญา) ซึ่งยังมีน้ำหนักโต้แย้งได้ทั้งสองทาง ผู้เรียนควรฝึกวิเคราะห์เหตุผลประกอบ ไม่มีคำตอบตายตัวเดียวในส่วนนี้ <i>(หมายเหตุ: ข้อนี้ไม่มีเฉลยต้นฉบับ เป็นการวิเคราะห์เพิ่มเติม)</i>"},
+{cat:"service", fact:"ศาลสั่งส่งหมายเรียกและสำเนาคำฟ้องแก่จำเลยทาง EMS ณ ภูมิลำเนาจำเลย เกิด 4 กรณีแยกกัน: (1) ไม่พบจำเลย ออกใบแจ้งให้ไปรับเองที่ทำการไปรษณีย์ภายใน 7 วัน (2) ไม่พบจำเลย จึงปิดหมายไว้ที่ประตูบ้านจำเลย (3) ไม่พบจำเลย นำเอกสารกลับไปที่ทำการไปรษณีย์ และบังเอิญพบภรรยาจำเลยอายุ 21 ปีที่อาศัยบ้านเดียวกันมาส่งพัสดุพอดี จึงส่งมอบเอกสารให้รับไว้ที่ที่ทำการไปรษณีย์ (4) รถขนส่งไปรษณีย์เกิดอุบัติเหตุทำให้จัดส่งล่าช้า หมายเรียกไปถึงมือจำเลยโดยตรงเวลา 20.30 น.",
+ question:"กรณีใดต่อไปนี้ถือเป็นการส่งหมายที่ 'ไม่ชอบ' ด้วยกฎหมาย?",
+ choices:[{t:"กรณีที่ 1 และกรณีที่ 3",c:true},{t:"กรณีที่ 2 และกรณีที่ 4 เท่านั้น",c:false},{t:"ทั้ง 4 กรณีชอบด้วยกฎหมายทั้งหมด",c:false},{t:"ทั้ง 4 กรณีไม่ชอบด้วยกฎหมายทั้งหมด",c:false}],
+ explain:"กรณีที่ 1 เพียงออกใบแจ้งให้จำเลยไปรับเองไม่ถือเป็นการส่งถึงตัวหรือปิดหมายตามหลักเกณฑ์ ม.74/76/79 จึงไม่ชอบ • กรณีที่ 2 ปิดหมายไว้ ณ ภูมิลำเนาจำเลยเมื่อไม่พบตัว เข้าเกณฑ์ <b>ม.79</b> จึงชอบ • กรณีที่ 3 แม้ภรรยาจำเลยจะบรรลุนิติภาวะและอยู่บ้านเดียวกัน แต่ <b>ม.76</b> กำหนดให้ต้องส่ง ณ ภูมิลำเนา/สำนักทำการงานของจำเลยเท่านั้น การส่งมอบที่ทำการไปรษณีย์ไม่ตรงสถานที่ตามกฎหมาย จึงไม่ชอบ • กรณีที่ 4 ส่งถึงตัวจำเลยโดยตรงตาม <b>ม.74</b> แม้ล่าช้าเพราะอุบัติเหตุ แต่ยังเป็นการส่งถึงตัวจริง จึงชอบ <i>(หมายเหตุ: ข้อนี้ไม่มีเฉลยต้นฉบับ เป็นการวิเคราะห์เพิ่มเติม)</i>"},
+{cat:"pleading", fact:"โจทก์ฟ้องว่าตนเป็นเจ้าของที่ดิน จำเลยขอเข้าปลูกบ้านอยู่อาศัยโดยเสียค่าตอบแทนปีละ 9,000 บาท ต่อมาโจทก์เรียกเก็บค่าใช้ประโยชน์ที่ดิน จำเลยไม่ยอมจ่ายและไม่ยอมทำหลักฐานเช่าเป็นหนังสือ โจทก์จึงฟ้องขับไล่พร้อมเรียกค่าเสียหาย จำเลยให้การและฟ้องแย้งว่าไม่เคยขออาศัยจากโจทก์ แต่บ้านพิพาทเดิมเป็นของนาย ก. ซึ่งยกให้จำเลย และจำเลยครอบครองปรปักษ์ที่ดินส่วนที่รุกล้ำมาเกิน 10 ปีแล้ว ขอให้ศาลพิพากษาว่าที่ดินพิพาทตกเป็นกรรมสิทธิ์จำเลยโดยครอบครองปรปักษ์ ศาลชั้นต้นสั่งว่าฟ้องแย้งไม่เกี่ยวกับฟ้องเดิม จึงไม่รับฟ้องแย้ง",
+ question:"คำสั่งไม่รับฟ้องแย้งของศาลชั้นต้นชอบด้วยกฎหมายหรือไม่?",
+ choices:[{t:"ไม่ชอบ เพราะฟ้องแย้งเรื่องกรรมสิทธิ์ที่ดินแปลงเดียวกันเกี่ยวข้องกับฟ้องเดิมโดยตรง หากจำเลยชนะประเด็นนี้ย่อมทำให้ฟ้องขับไล่เดิมตกไปทั้งหมด",c:true},{t:"ชอบแล้ว เพราะเป็นคนละเหตุกับที่โจทก์ฟ้อง (สัญญาเช่า vs ครอบครองปรปักษ์)",c:false},{t:"ชอบแล้ว เพราะฟ้องแย้งเรื่องกรรมสิทธิ์ต้องแยกฟ้องเป็นคดีใหม่เสมอ",c:false},{t:"ไม่ชอบ เพราะศาลไม่มีอำนาจไม่รับฟ้องแย้งไม่ว่ากรณีใด",c:false}],
+ explain:"ฟ้องแย้งที่จะรวมพิจารณากับฟ้องเดิมได้ต้อง 'เกี่ยวข้องกัน' พอที่จะพิจารณาและชี้ขาดตัดสินเข้าด้วยกันได้ตาม <b>ม.177 วรรคสาม</b> แม้จำเลยจะอ้างเหตุต่างจากฟ้องเดิม แต่ประเด็นที่แท้จริงคือ 'กรรมสิทธิ์ในที่ดินแปลงเดียวกัน' ซึ่งเป็นรากฐานของฟ้องเดิมทั้งหมด หากจำเลยชนะเรื่องครอบครองปรปักษ์ ฟ้องขับไล่เดิมก็ไม่มีมูลอีกต่อไป ฟ้องแย้งจึงเกี่ยวข้องกับฟ้องเดิมโดยตรง ศาลต้องรับไว้พิจารณารวมกัน คำสั่งไม่รับฟ้องแย้งจึงไม่ชอบ <i>(หมายเหตุ: ข้อนี้ไม่มีเฉลยต้นฉบับ เป็นการวิเคราะห์เพิ่มเติม)</i>"},
+{cat:"summary", fact:"โจทก์ฟ้องเรียกหนี้เงินกู้ 500,000 บาท ศาลรับฟ้องเป็นคดีไม่มีข้อยุ่งยากให้พิจารณาอย่างมโนสาเร่ นัดพิจารณาวันเดียวเพื่อไกล่เกลี่ย ให้จำเลยให้การ และสืบพยานโจทก์ในวันเดียวกัน ถึงวันนัดไม่มีคู่ความฝ่ายใดมาศาลเลย ศาลชั้นต้นมีคำสั่งว่าโจทก์ไม่นำพยานหลักฐานมาสืบตามกำหนด ถือว่าคดีของโจทก์ไม่มีมูล และให้ยกฟ้องโจทก์ตาม ม.198 ทวิ วรรคห้า",
+ question:"คำสั่งยกฟ้องของศาลชั้นต้นโดยอาศัย ม.198 ทวิ วรรคห้า ชอบด้วยกฎหมายหรือไม่?",
+ choices:[{t:"ไม่ชอบ เพราะเป็นกรณีคู่ความทั้งสองฝ่ายขาดนัดพิจารณาในวันสืบพยานนัดแรกของคดีมโนสาเร่ ต้องปรับด้วยหลักขาดนัดพิจารณา (ม.200-201) ไม่ใช่หลักขาดนัดยื่นคำให้การ",c:true},{t:"ชอบแล้ว เพราะโจทก์มีภาระพิสูจน์แต่ไม่นำพยานมาสืบจึงต้องยกฟ้องเสมอ",c:false},{t:"ชอบแล้ว เพราะ ม.198 ทวิ ใช้กับคดีมโนสาเร่ทุกกรณี",c:false},{t:"ไม่ชอบ เพราะศาลต้องเลื่อนคดีให้คู่ความมาใหม่เท่านั้น ห้ามสั่งอย่างอื่น",c:false}],
+ explain:"ม.198 ทวิ ใช้กับกรณี 'จำเลยขาดนัดยื่นคำให้การ' ซึ่งศาลต้องพิจารณาฝ่ายเดียวและตรวจว่าคดีโจทก์มีมูลหรือไม่ก่อนพิพากษา แต่คดีมโนสาเร่/ไม่มีข้อยุ่งยากนัดแรกเป็นวันไกล่เกลี่ย ให้การ และสืบพยานพร้อมกัน ยังไม่เข้าสู่กระบวนขาดนัดยื่นคำให้การแบบคดีสามัญ เมื่อคู่ความทั้งสองฝ่ายไม่มาศาลในวันนัดซึ่งเป็นวันสืบพยานนัดแรกด้วย ต้องถือเป็น<b>ขาดนัดพิจารณา</b>ตาม ม.200-201 ศาลชอบที่จะสั่งจำหน่ายคดี ไม่ใช่ยกฟ้องตาม ม.198 ทวิ ว.5 การอ้างมาตราผิดทำให้คำสั่งไม่ชอบ <i>(หมายเหตุ: ข้อนี้ไม่มีเฉลยต้นฉบับ เป็นการวิเคราะห์เพิ่มเติม)</i>"},
+{cat:"appeal", fact:"โจทก์ฟ้องว่าจำเลยที่ 1 เป็นลูกจ้างของจำเลยที่ 2 ขับรถโดยประมาทชนรถโจทก์เสียหาย 215,000 บาท ขอให้จำเลยทั้งสองร่วมกันรับผิด จำเลยทั้งสองให้การว่าจำเลยที่ 1 ไม่ใช่ลูกจ้างจำเลยที่ 2 และขับรถไปธุระส่วนตัว ศาลชั้นต้นพิพากษาว่าจำเลยที่ 1 ไม่ใช่ลูกจ้างจำเลยที่ 2 จริง (ยกฟ้องจำเลยที่ 2 ทั้งหมด) ให้จำเลยที่ 1 ชดใช้ 140,000 บาทแก่โจทก์ โจทก์อุทธรณ์ขอให้จำเลยทั้งสองร่วมกันรับผิด 215,000 บาท ศาลชั้นต้นสั่งรับอุทธรณ์ของโจทก์ในส่วนที่เกี่ยวกับจำเลยที่ 2",
+ question:"คำสั่งรับอุทธรณ์ของโจทก์ในส่วนที่เกี่ยวกับจำเลยที่ 2 ชอบด้วยกฎหมายหรือไม่?",
+ choices:[{t:"ชอบแล้ว เพราะทุนทรัพย์ที่พิพาทเกี่ยวกับจำเลยที่ 2 ในชั้นอุทธรณ์คือเต็มจำนวน 215,000 บาท (ถูกยกฟ้องทั้งหมด) เกิน 50,000 บาท จึงไม่ต้องห้ามอุทธรณ์ข้อเท็จจริง",c:true},{t:"ไม่ชอบ เพราะจำเลยที่ 2 ไม่ได้อุทธรณ์เอง โจทก์จึงอุทธรณ์แทนไม่ได้",c:false},{t:"ไม่ชอบ เพราะทุนทรัพย์ที่พิพาทเหลือเพียง 75,000 บาท (215,000-140,000)",c:false},{t:"ไม่ชอบ เพราะประเด็นความเป็นลูกจ้างเป็นข้อกฎหมาย จึงต้องห้ามอุทธรณ์เสมอ",c:false}],
+ explain:"จำเลยที่ 2 ไม่จำเป็นต้องอุทธรณ์เองเพราะเป็นฝ่ายชนะคดีในศาลชั้นต้นอยู่แล้ว โจทก์ซึ่งแพ้ในส่วนนี้มีสิทธิอุทธรณ์คัดค้านได้เอง ทุนทรัพย์ที่พิพาทกันในชั้นอุทธรณ์ 'เฉพาะที่เกี่ยวกับจำเลยที่ 2' ต้องคิดเต็มจำนวน 215,000 บาท (ไม่ใช่ส่วนต่างจากคำพิพากษาจำเลยที่ 1) เพราะจำเลยที่ 2 ไม่ต้องรับผิดแม้แต่บาทเดียวตามคำพิพากษาเดิม เมื่อทุนทรัพย์เกิน 50,000 บาท จึงไม่ต้องห้ามอุทธรณ์ปัญหาข้อเท็จจริงตาม <b>ม.224</b> ศาลชั้นต้นรับอุทธรณ์ได้ชอบแล้ว <i>(หมายเหตุ: ข้อนี้ไม่มีเฉลยต้นฉบับ เป็นการวิเคราะห์เพิ่มเติม)</i>"},
+];
+
+/* topic tags for red Tag chips in quiz mode (1-2 short labels per question) */
+const MCQ_TAGS = [
+  ["เขตอำนาจศาล"], ["ฟ้องซ้ำ"], ["ข้อจำกัดอุทธรณ์"], ["ผู้พิพากษาคนเดียว"], ["ขาดนัดยื่นคำให้การ"],
+  ["ขาดนัดพิจารณา"], ["ขาดนัดพิจารณา"], ["เขตอำนาจศาล","ภูมิลำเนา"], ["เขตอำนาจศาล","มูลคดีเกิด"], ["ข้อจำกัดอุทธรณ์","ฟ้องเคลือบคลุม"],
+  ["คู่ความร่วม"], ["คู่ความร่วม"], ["คู่ความมรณะ"], ["ขาดนัดพิจารณา","ฟ้องแย้ง"], ["ภาระการพิสูจน์"],
+  ["คำสั่งระหว่างพิจารณา","ค่าธรรมเนียมใช้แทน"], ["คำสั่งระหว่างพิจารณา"], ["ยกขึ้นว่ากล่าว"], ["ยกขึ้นว่ากล่าว"], ["ยกขึ้นว่ากล่าว"],
+  ["อำนาจฟ้อง","เขตอำนาจศาล"], ["การส่งคำคู่ความ"], ["ฟ้องแย้ง"], ["ขาดนัดพิจารณา","คดีไม่มีข้อยุ่งยาก"], ["อุทธรณ์","ทุนทรัพย์"],
+];
+MCQ.forEach((m,i)=>{ m.tags = MCQ_TAGS[i] || [CATEGORIES[m.cat].name]; });
+
+/* ================= WALKTHROUGH (ฝึกโจทย์วิธีสัมบัญญัติ) ================= */
+const WALK = [
+{ title:"ขอแก้ไขคำให้การล่าช้า (ม.180 — จาก warmode หน้า 305-309)",
+  fact:"โจทก์ฟ้องให้จำเลยรับผิดตามสัญญาค้ำประกันและสัญญาจำนอง จำเลยยื่นคำให้การแล้ว ต่อมาศาลสั่งงดชี้สองสถาน จำเลยยื่นคำร้องขอแก้ไขคำให้การหลังพ้นกำหนด 2 ประเด็น: (1) เปลี่ยนข้อต่อสู้จาก 'ไม่เคยทำสัญญาค้ำประกัน' เป็น 'ทำสัญญาค้ำประกันหนี้เดิมที่ชำระครบแล้ว ไม่ใช่หนี้คดีนี้' (2) เพิ่มข้อต่อสู้ว่าโจทก์นำสัญญาเดียวกันไปฟ้องที่ศาลแพ่งไว้แล้ว การฟ้องคดีนี้จึงเป็นฟ้องซ้อน",
+  issues:[
+    { name:"ประเด็นที่ 1: ขอแก้เปลี่ยนข้อต่อสู้เรื่องสัญญา (ยื่นล่าช้า)",
+      issueOptions:["คำร้องขอแก้ไขคำให้การที่ยื่นล่าช้าประเด็นนี้ ศาลอนุญาตได้หรือไม่","สัญญาค้ำประกันสมบูรณ์หรือไม่","จำเลยต้องรับผิดเท่าใด","โจทก์ฟ้องถูกศาลหรือไม่"], issueCorrect:0,
+      sectionOptions:["ม.180 วิ.แพ่ง (ข้อยกเว้น 3 ประการ)","ม.179 วิ.แพ่ง","ม.177 วิ.แพ่ง","ม.225 วิ.แพ่ง"], sectionCorrect:0,
+      applyOptions:["เป็นการยกข้อเท็จจริงใหม่เปลี่ยนแปลงข้อเถียงที่จำเลยทราบดีอยู่แล้วตั้งแต่รับสำเนาคำฟ้อง ไม่มีเหตุอันสมควร ไม่ใช่ความสงบเรียบร้อยฯ และไม่ใช่ข้อผิดหลงเล็กน้อย","เป็นเพียงการแก้ข้อผิดพลาดเล็กน้อยที่อีกฝ่ายไม่ได้ต่อสู้","เป็นเรื่องความสงบเรียบร้อยฯ เพราะกระทบรูปคดีจำเลยอย่างมาก","มีเหตุอันสมควรเพราะจำเลยเพิ่งนึกได้"], applyCorrect:0,
+      conclusionOptions:["ศาลไม่อนุญาตให้แก้ไข เพราะไม่เข้าข้อยกเว้นใดใน 3 ประการของ ม.180","ศาลต้องอนุญาตเสมอเพราะยังไม่พิพากษา","ศาลอนุญาตได้เพราะจำนวนเงินสูงถึง 72 ล้านบาท","ศาลต้องไต่สวนก่อนเสมอ"], conclusionCorrect:0,
+      guide:"ฎ.4399/2545 — การยกข้อเท็จจริงขึ้นต่อสู้ใหม่และเปลี่ยนแปลงข้อเถียงที่ตนทราบดีอยู่แล้ว โดยไม่มีเหตุอันสมควร ไม่ใช่เรื่องความสงบเรียบร้อยฯ และไม่ใช่ข้อผิดหลงเล็กน้อย จึงต้องยื่นภายในกำหนด (ก่อนวันสืบพยานไม่น้อยกว่า 7 วัน) เมื่อยื่นล่าช้าศาลไม่อนุญาต — เทียบ ฎ.183/2551 ที่วางหลักเดียวกันว่าแม้แต่ข้อต่อสู้เรื่อง 'ฟ้องเคลือบคลุม' ก็กระทบเพียงรูปคดีของจำเลยเอง ไม่ใช่ความสงบเรียบร้อยฯ" },
+    { name:"ประเด็นที่ 2: ขอเพิ่มข้อต่อสู้เรื่องฟ้องซ้อน (ยื่นล่าช้า)",
+      issueOptions:["ข้อต่อสู้เรื่องฟ้องซ้อนที่ยื่นล่าช้า ศาลอนุญาตให้แก้ไขได้หรือไม่","คดีที่ศาลแพ่งจะพิพากษาเมื่อใด","โจทก์ถอนฟ้องคดีใดคดีหนึ่งได้หรือไม่","จำเลยต้องวางเงินประกันหรือไม่"], issueCorrect:0,
+      sectionOptions:["ม.180 (ข้อยกเว้นเรื่องความสงบเรียบร้อยฯ) ประกอบ ม.173 ว.2(1)","ม.148 วิ.แพ่ง","ม.144 วิ.แพ่ง","ม.179 วิ.แพ่ง"], sectionCorrect:0,
+      applyOptions:["ฟ้องซ้อนเกี่ยวพันกับอำนาจฟ้องของโจทก์โดยตรง จึงเป็นข้อกฎหมายเกี่ยวด้วยความสงบเรียบร้อยของประชาชน","ฟ้องซ้อนเป็นเพียงข้อเท็จจริงที่จำเลยทราบอยู่แล้ว","ฟ้องซ้อนเป็นข้อผิดหลงเล็กน้อย","ฟ้องซ้อนต้องยกในชั้นอุทธรณ์เท่านั้น"], applyCorrect:0,
+      conclusionOptions:["ศาลอนุญาตให้แก้ไขได้ แม้ยื่นพ้นกำหนด เพราะยื่นได้ทุกเมื่อก่อนศาลพิพากษา","ศาลไม่อนุญาตเพราะยื่นล่าช้าเหมือนประเด็นแรก","ศาลอนุญาตได้เฉพาะเมื่อโจทก์ยินยอม","ต้องรอผลคดีที่ศาลแพ่งก่อน"], conclusionCorrect:0,
+      guide:"ฎ.4399/2545 (ส่วนที่สอง) — เรื่องฟ้องซ้อนเกี่ยวพันกับอำนาจฟ้อง จึงเป็นปัญหาความสงบเรียบร้อยฯ เข้าข้อยกเว้น ม.180 ยื่นขอแก้ไขได้ก่อนศาลพิพากษาแม้พ้นกำหนดแล้ว — หลุมพรางที่อาจารย์เน้น: 'โมฆะ' (ฎ.7465/2552) เป็นความสงบฯ แก้ได้ แต่ 'โมฆียะ' (ฎ.5074/2549) และ 'อายุความ' (ฎ.2354/2529) ไม่ใช่ความสงบฯ ยื่นช้าห้ามแก้" },
+  ]},
+{ title:"นายเก่งเช่าซื้อรถยนต์ (อำนาจฟ้อง + เขตอำนาจศาล)",
+  fact:"นายเก่งทำสัญญาเช่าซื้อรถยนต์จากบริษัทที่จังหวัดหนองคาย แล้วผิดนัดไม่ชำระค่าเช่าซื้อเกิน 2 ปี นายเก่งแจ้งย้ายภูมิลำเนาออกจากบุรีรัมย์ไปขอนแก่น แต่ยังไม่แจ้งย้ายเข้า และไม่พาครอบครัวไปด้วย",
+  issues:[
+    { name:"ประเด็นที่ 1: อำนาจฟ้อง",
+      issueOptions:["บริษัทมีอำนาจนำคดีขึ้นสู่ศาลหรือไม่","จำเลยควรถูกจำคุกหรือไม่","สัญญาเช่าซื้อโมฆะหรือไม่","ใครเป็นเจ้าของรถยนต์"], issueCorrect:0,
+      sectionOptions:["ม.55 วิ.แพ่ง","ม.4(1) วิ.แพ่ง","ป.พ.พ. ม.572","ม.148 วิ.แพ่ง"], sectionCorrect:0,
+      applyOptions:["นายเก่งผิดนัดไม่ชำระค่าเช่าซื้อ = มีข้อโต้แย้งสิทธิของบริษัทแล้ว","ยังไม่มีข้อโต้แย้งสิทธิเพราะยังไม่ฟ้อง","เป็นคดีไม่มีข้อพิพาทต้องใช้คำร้องขอ","ต้องรอศาลแพ่งวินิจฉัยก่อนจึงมีอำนาจฟ้อง"], applyCorrect:0,
+      conclusionOptions:["บริษัทมีอำนาจฟ้องนายเก่งได้ตาม ม.55","บริษัทไม่มีอำนาจฟ้องเพราะยังไม่ครบอายุความ","บริษัทต้องรอให้นายเก่งฟ้องก่อน","บริษัทมีอำนาจฟ้องเฉพาะเมื่อนายเก่งยินยอม"], conclusionCorrect:0,
+      guide:"เมื่อจำเลยผิดสัญญาไม่ชำระหนี้ ถือว่ามีข้อโต้แย้งสิทธิของโจทก์ตามกฎหมายแพ่งเกิดขึ้นแล้ว โจทก์จึงมีอำนาจเสนอคดีต่อศาลได้ตาม ม.55 ไม่ว่าท้ายที่สุดจะชนะหรือแพ้คดีในเนื้อหา" },
+    { name:"ประเด็นที่ 2: เขตอำนาจศาล",
+      issueOptions:["ควรฟ้องคดีที่ศาลใด","ควรฟ้องภายในกี่วัน","ต้องเสียค่าขึ้นศาลเท่าใด","ต้องมีทนายความหรือไม่"], issueCorrect:0,
+      sectionOptions:["ม.4(1) วิ.แพ่ง","ม.4ทวิ วิ.แพ่ง","ม.5 วิ.แพ่ง","ม.7 วิ.แพ่ง"], sectionCorrect:0,
+      applyOptions:["ภูมิลำเนาจำเลยยังเป็นบุรีรัมย์ (ยังไม่มีเจตนาย้ายจริง) และมูลคดีเกิดที่หนองคาย จึงเลือกฟ้องได้ 2 ศาล","ต้องฟ้องที่ขอนแก่นเพราะเป็นที่แจ้งย้ายไปเท่านั้น","ต้องฟ้องที่ตั้งบริษัทเจ้าหนี้เท่านั้น","ไม่มีศาลใดมีเขตอำนาจเพราะภูมิลำเนาไม่แน่นอน"], applyCorrect:0,
+      conclusionOptions:["ฟ้องได้ที่ศาลจังหวัดบุรีรัมย์ หรือศาลจังหวัดหนองคาย เลือกศาลใดศาลหนึ่ง","ฟ้องได้เฉพาะศาลจังหวัดขอนแก่นเท่านั้น","ต้องฟ้องทั้งสามศาลพร้อมกัน","ฟ้องไม่ได้จนกว่าจะทราบภูมิลำเนาที่แน่นอน"], conclusionCorrect:0,
+      guide:"เมื่อพฤติการณ์แสดงว่าจำเลยยังไม่มีเจตนาย้ายถิ่นที่อยู่โดยแท้จริง (แจ้งย้ายออกอย่างเดียวไม่พาครอบครัวไป และยังไม่แจ้งย้ายเข้าที่ใหม่) ให้ถือว่าภูมิลำเนาเดิมยังใช้ได้ โจทก์จึงเลือกฟ้องที่ภูมิลำเนาจำเลย (บุรีรัมย์) หรือที่มูลคดีเกิด คือที่ทำสัญญา (หนองคาย) ได้ตาม ม.4(1)" },
+  ]},
+{ title:"ที่ดินนางขำ (ข้อจำกัดอุทธรณ์ข้อเท็จจริง)",
+  fact:"โจทก์ฟ้องขับไล่จำเลยจากที่ดิน (ค่าเช่าเดือนละ 5,000 บาท) จำเลยต่อสู้ว่าที่ดินเป็นของนางขำมารดาตนซึ่งครอบครองปรปักษ์แล้ว ศาลพิพากษาให้ขับไล่และให้จำเลยชดใช้ค่าเสียหาย 50,000 บาท จำเลยอุทธรณ์ 2 ประเด็น: (1) กรรมสิทธิ์ที่ดินเป็นของนางขำ (2) ค่าเสียหาย 50,000 บาทสูงเกินไป",
+  issues:[
+    { name:"ประเด็นที่ 1: อุทธรณ์เรื่องกรรมสิทธิ์ (คดีขับไล่)",
+      issueOptions:["อุทธรณ์เรื่องกรรมสิทธิ์ที่ดินต้องห้ามหรือไม่","จำเลยต้องเสียค่าขึ้นศาลเท่าใด","ที่ดินเป็นของใครกันแน่","ศาลชั้นต้นมีอำนาจพิจารณาคดีนี้หรือไม่"], issueCorrect:0,
+      sectionOptions:["ม.224 วรรคสอง วิ.แพ่ง","ม.224 วรรคแรก วิ.แพ่ง","ม.225 วิ.แพ่ง","ม.148 วิ.แพ่ง"], sectionCorrect:0,
+      applyOptions:["คดีขับไล่ไม่มีทุนทรัพย์ ค่าเช่าเดือนละ 5,000 บาท เกิน 4,000 บาท จึงไม่ต้องห้ามอุทธรณ์ข้อเท็จจริง","คดีมีทุนทรัพย์ 50,000 บาท จึงต้องห้ามอุทธรณ์","ค่าเช่าต่ำกว่า 4,000 บาท จึงต้องห้ามอุทธรณ์","เป็นปัญหาข้อกฎหมายจึงอุทธรณ์ได้เสมอ"], applyCorrect:0,
+      conclusionOptions:["ศาลชั้นต้นรับอุทธรณ์ประเด็นนี้ได้ ไม่ต้องห้าม","ศาลชั้นต้นต้องไม่รับอุทธรณ์ประเด็นนี้","ต้องรอศาลอุทธรณ์วินิจฉัยว่ารับได้หรือไม่ก่อน","ต้องให้จำเลยวางเงินประกันก่อนจึงรับได้"], conclusionCorrect:0,
+      guide:"คดีฟ้องขับไล่ถือเป็นคดีไม่มีทุนทรัพย์ ข้อยกเว้นห้ามอุทธรณ์ข้อเท็จจริงใช้เฉพาะกรณีค่าเช่าไม่เกิน 4,000 บาท/เดือน เมื่อค่าเช่าที่นี่คือ 5,000 บาท (เกิน 4,000) จึงไม่ต้องห้าม อุทธรณ์ข้อเท็จจริงเรื่องกรรมสิทธิ์ได้ตาม ม.224 วรรคสอง" },
+    { name:"ประเด็นที่ 2: อุทธรณ์เรื่องค่าเสียหาย (มีทุนทรัพย์)",
+      issueOptions:["อุทธรณ์เรื่องจำนวนค่าเสียหายต้องห้ามหรือไม่","ค่าเสียหายคำนวณถูกต้องหรือไม่","จำเลยต้องชำระค่าเสียหายเมื่อใด","โจทก์มีสิทธิเรียกดอกเบี้ยหรือไม่"], issueCorrect:0,
+      sectionOptions:["ม.224 วรรคแรก วิ.แพ่ง","ม.224 วรรคสอง วิ.แพ่ง","ม.223 วิ.แพ่ง","ม.226 วิ.แพ่ง"], sectionCorrect:0,
+      applyOptions:["ทุนทรัพย์ชั้นอุทธรณ์คือ 50,000 บาท ไม่เกิน 50,000 บาท จึงต้องห้ามอุทธรณ์ข้อเท็จจริง เว้นแต่เข้าข้อยกเว้น","ทุนทรัพย์เกิน 50,000 บาท จึงอุทธรณ์ได้เสมอ","เป็นคดีไม่มีทุนทรัพย์จึงอุทธรณ์ได้เสมอ","ต้องพิจารณารวมกับประเด็นกรรมสิทธิ์เป็นเรื่องเดียว"], applyCorrect:0,
+      conclusionOptions:["ศาลชั้นต้นต้องไม่รับอุทธรณ์ประเด็นนี้ เว้นแต่มีความเห็นแย้ง/คำรับรอง/หนังสืออนุญาต","ศาลชั้นต้นรับอุทธรณ์ประเด็นนี้ได้ตามปกติ","ต้องยกฟ้องประเด็นนี้ไปเลยโดยไม่ต้องพิจารณา","ต้องให้ศาลฎีกาวินิจฉัยประเด็นนี้โดยตรง"], conclusionCorrect:0,
+      guide:"การอุทธรณ์จำนวนค่าเสียหายเป็นการโต้แย้งดุลพินิจซึ่งเป็นปัญหาข้อเท็จจริงในคดีมีทุนทรัพย์ เมื่อทุนทรัพย์ชั้นอุทธรณ์ (50,000 บาท) ไม่เกิน 50,000 บาท จึงต้องห้ามอุทธรณ์ข้อเท็จจริงตาม ม.224 วรรคแรก เว้นแต่จะเข้าข้อยกเว้น (ความเห็นแย้งของผู้พิพากษา/คำรับรอง/หนังสืออนุญาตอธิบดี)" },
+  ]},
+{ title:"ผู้จัดการมรดกถึงแก่ความตาย (คู่ความมรณะ)",
+  fact:"จำเลยในฐานะผู้จัดการมรดกของ ป. ถึงแก่ความตายระหว่างพิจารณาคดี ผู้ร้องซึ่งเป็นทายาทของจำเลย (ไม่ใช่ทายาทของ ป. และไม่มีอำนาจจัดการทรัพย์มรดกของ ป.) ยื่นคำร้องขอเข้าเป็นคู่ความแทนที่จำเลย",
+  issues:[
+    { name:"ประเด็นที่ 1: ใครมีสิทธิเข้าเป็นคู่ความแทนที่",
+      issueOptions:["ผู้ร้องมีสิทธิเข้าเป็นคู่ความแทนที่จำเลยหรือไม่","ผู้ร้องต้องชำระหนี้แทนจำเลยหรือไม่","ป. เป็นเจ้าของทรัพย์มรดกจริงหรือไม่","ศาลมีอำนาจพิจารณาคดีนี้ต่อไปหรือไม่"], issueCorrect:0,
+      sectionOptions:["ม.42-43 วิ.แพ่ง","ม.55 วิ.แพ่ง","ม.148 วิ.แพ่ง","ม.132(3) วิ.แพ่ง"], sectionCorrect:0,
+      applyOptions:["หน้าที่ผู้จัดการมรดกเป็นเรื่องเฉพาะตัว สิ้นสุดไปพร้อมจำเลย ผู้ร้องไม่มีอำนาจจัดการทรัพย์มรดกของ ป.","ผู้ร้องเป็นทายาทของจำเลยจึงรับช่วงสิทธิหน้าที่ทั้งหมดของจำเลยโดยอัตโนมัติ","หน้าที่ผู้จัดการมรดกตกทอดแก่ทายาทของจำเลยเสมอ","ไม่มีผลใดๆ เพราะจำเลยตายแล้วคดีเป็นอันยุติ"], applyCorrect:0,
+      conclusionOptions:["ผู้ร้องเข้าเป็นคู่ความแทนที่จำเลยไม่ได้ เพราะไม่ใช่ผู้มีอำนาจจัดการทรัพย์มรดกของ ป.","ผู้ร้องเข้าเป็นคู่ความแทนที่ได้ทันที","ผู้ร้องต้องรอศาลแต่งตั้งเป็นผู้จัดการมรดกคนใหม่ก่อนเข้าคดีนี้ไม่ได้เลย","ผู้ร้องเข้าเป็นคู่ความแทนที่ได้แต่ต้องวางเงินประกันก่อน"], conclusionCorrect:0,
+      guide:"หน้าที่ผู้จัดการมรดกเป็นเรื่องเฉพาะตัวของผู้ได้รับแต่งตั้ง เมื่อผู้จัดการมรดกตาย หน้าที่นั้นสิ้นสุดลง ไม่ตกทอดไปยังทายาทของผู้จัดการมรดกเอง ผู้ที่จะเข้าแทนที่ได้ต้องเป็นผู้มีอำนาจจัดการทรัพย์มรดกของเจ้ามรดกตัวจริง (ป.) เท่านั้น" },
+    { name:"ประเด็นที่ 2: ผลเมื่อพ้นกำหนดไม่มีผู้เข้าแทนที่",
+      issueOptions:["ถ้าพ้นกำหนด 1 ปีไม่มีผู้มีอำนาจเข้าแทนที่ ศาลต้องทำอย่างไร","ศาลต้องรอไปเรื่อยๆ จนกว่าจะมีผู้เข้าแทนที่","คดีเป็นโมฆะทันทีที่จำเลยตาย","โจทก์ต้องฟ้องทายาทของจำเลยเป็นคดีใหม่"], issueCorrect:0,
+      sectionOptions:["ม.42 ประกอบ ม.132(3) วิ.แพ่ง","ม.148 วิ.แพ่ง","ม.55 วิ.แพ่ง","ม.226 วิ.แพ่ง"], sectionCorrect:0,
+      applyOptions:["ไม่มีคำขอของผู้จัดการทรัพย์มรดก/ผู้ปกครองทรัพย์มรดกของ ป. เข้ามาเป็นคู่ความแทนที่ภายใน 1 ปีนับแต่จำเลยตาย","มีทายาทของจำเลยยื่นคำร้องแล้วจึงถือว่าครบกำหนดตามกฎหมาย","ไม่มีกำหนดเวลาใดๆ ในเรื่องนี้ตามกฎหมาย","ต้องนับระยะเวลาจากวันฟ้องคดี ไม่ใช่วันจำเลยตาย"], applyCorrect:0,
+      conclusionOptions:["ศาลต้องมีคำสั่งจำหน่ายคดีออกจากสารบบความ","ศาลต้องยกฟ้องโจทก์ทันที","ศาลต้องพิพากษาให้โจทก์ชนะคดีโดยอัตโนมัติ","ศาลต้องเลื่อนการพิจารณาไปไม่มีกำหนด"], conclusionCorrect:0,
+      guide:"เมื่อพ้นกำหนด 1 ปีนับแต่วันที่คู่ความฝ่ายนั้นมรณะโดยไม่มีคำขอของผู้มีอำนาจที่แท้จริงเข้ามาเป็นคู่ความแทนที่ ศาลต้องมีคำสั่งจำหน่ายคดีออกจากสารบบความตาม ม.42 ประกอบ ม.132(3)" },
+  ]},
+{ title:"อุทธรณ์คำสั่งงดสืบพยาน + ค่าธรรมเนียมใช้แทน",
+  fact:"โจทก์ฟ้องเรียกเงินตามเช็ค 1,000,000 บาท จำเลยให้การปฏิเสธ ศาลชั้นต้นสั่งงดสืบพยานแล้วพิพากษาให้จำเลยชำระเต็มจำนวน จำเลยอุทธรณ์คำสั่งงดสืบพยานโดยไม่เคยโต้แย้งไว้ก่อน และวางค่าขึ้นศาลอุทธรณ์ 200 บาท แต่ไม่ได้วางค่าธรรมเนียมใช้แทนโจทก์",
+  issues:[
+    { name:"ประเด็นที่ 1: อุทธรณ์คำสั่งงดสืบพยานโดยไม่โต้แย้งไว้ก่อน",
+      issueOptions:["คำสั่งงดสืบพยานแล้วพิพากษาเลย เป็นคำสั่งประเภทใด","จำเลยต้องเสียค่าขึ้นศาลเท่าใด","ศาลชั้นต้นมีอำนาจงดสืบพยานหรือไม่","จำเลยต้องอุทธรณ์ภายในกี่วัน"], issueCorrect:0,
+      sectionOptions:["ม.24 วิ.แพ่ง (ไม่ใช่คำสั่งระหว่างพิจารณาตาม ม.226)","ม.226 วิ.แพ่ง (คำสั่งระหว่างพิจารณา ต้องโต้แย้งไว้ก่อน)","ม.174 วิ.แพ่ง","ม.148 วิ.แพ่ง"], sectionCorrect:0,
+      applyOptions:["ศาลวินิจฉัยชี้ขาดเบื้องต้นในข้อกฎหมายทำให้คดีเสร็จไปทั้งเรื่อง จึงไม่ใช่คำสั่งระหว่างพิจารณา","ศาลเพียงเลื่อนการสืบพยานออกไป คดียังไม่เสร็จ","เป็นคำสั่งเกี่ยวกับพยานหลักฐานที่ต้องโต้แย้งไว้เสมอ","เป็นคำสั่งที่ไม่มีผลทางกฎหมายใดๆ"], applyCorrect:0,
+      conclusionOptions:["จำเลยอุทธรณ์คำสั่งงดสืบพยานได้โดยไม่ต้องโต้แย้งไว้ก่อน","จำเลยอุทธรณ์ไม่ได้เพราะไม่เคยโต้แย้งไว้ก่อน","จำเลยต้องขออนุญาตศาลฎีกาก่อนจึงอุทธรณ์ได้","จำเลยต้องยื่นคำร้องขอให้ศาลชั้นต้นทบทวนเองก่อน"], conclusionCorrect:0,
+      guide:"เมื่อศาลสั่งงดสืบพยานแล้ววินิจฉัยชี้ขาดคดีไปเลยโดยอาศัยข้อกฎหมาย ถือเป็นคำสั่งตาม ม.24 ซึ่งทำให้คดีเสร็จไปทั้งเรื่อง จึงไม่ใช่ 'คำสั่งระหว่างพิจารณา' ตาม ม.226 ที่ต้องโต้แย้งไว้ก่อน จำเลยจึงมีสิทธิอุทธรณ์คำสั่งนี้ได้ทันทีแม้ไม่เคยโต้แย้งไว้" },
+    { name:"ประเด็นที่ 2: ค่าธรรมเนียมที่ต้องวางพร้อมอุทธรณ์",
+      issueOptions:["อุทธรณ์นี้ต้องวางค่าธรรมเนียมใช้แทนโจทก์หรือไม่","ค่าขึ้นศาล 200 บาทที่วางไว้ถูกต้องหรือไม่","จำเลยต้องวางเงินตามจำนวนหนี้เต็มจำนวนหรือไม่","โจทก์ต้องคัดค้านค่าธรรมเนียมหรือไม่"], issueCorrect:0,
+      sectionOptions:["ม.229 วิ.แพ่ง","ม.172 วิ.แพ่ง","ม.4 วิ.แพ่ง","ม.199 วิ.แพ่ง"], sectionCorrect:0,
+      applyOptions:["อุทธรณ์นี้กระทบคำพิพากษาที่ให้จำเลยชำระเงินโดยตรง จึงต้องวางค่าฤชาธรรมเนียมที่จะต้องใช้แทนโจทก์มาพร้อมอุทธรณ์","อุทธรณ์คำสั่งงดสืบพยานไม่เกี่ยวกับผลแพ้ชนะเรื่องเงินเลย จึงไม่ต้องวาง","ค่าขึ้นศาล 200 บาทที่วางแล้วถือว่าครอบคลุมค่าธรรมเนียมใช้แทนแล้ว","หน้าที่วางค่าธรรมเนียมใช้แทนเป็นของโจทก์ ไม่ใช่จำเลย"], applyCorrect:0,
+      conclusionOptions:["ศาลชั้นต้นไม่รับอุทธรณ์ของจำเลยได้ เพราะไม่วางค่าธรรมเนียมใช้แทนตาม ม.229 ชอบแล้ว","ศาลชั้นต้นต้องรับอุทธรณ์ไว้ก่อนแล้วค่อยเรียกเก็บภายหลัง","ศาลชั้นต้นต้องคืนคำอุทธรณ์ให้จำเลยแก้ไขค่าขึ้นศาลเท่านั้น","ศาลชั้นต้นไม่มีอำนาจตรวจสอบเรื่องค่าธรรมเนียมนี้"], conclusionCorrect:0,
+      guide:"แม้จำเลยมีสิทธิอุทธรณ์คำสั่งงดสืบพยานได้โดยไม่ต้องโต้แย้งไว้ก่อน แต่เมื่ออุทธรณ์นั้นกระทบคำพิพากษาในเรื่องที่ให้ชำระเงินแก่โจทก์โดยตรง จำเลยยังมีหน้าที่ต้องนำเงินค่าฤชาธรรมเนียมที่จะต้องใช้แทนโจทก์มาวางศาลพร้อมกับอุทธรณ์ตาม ม.229 เมื่อไม่วาง ศาลชั้นต้นมีคำสั่งไม่รับอุทธรณ์ได้โดยชอบ" },
+  ]},
+];
+
+
+/* ================= SUBJECTS & CONTENT ================= */
+const SUBJECTS = {
+  la280: {
+    name:"น.280 / น.207 กฎหมายวิธีพิจารณาความแพ่ง",
+    color:"#1e3a8a",
+    weeks:[
+      {week:"สัปดาห์ 1-2", title:"พระธรรมนูญศาลยุติธรรม + ภาพรวม ป.วิ.พ.",
+       topics:[
+         {heading:"1. โครงสร้างศาลยุติธรรม",
+          body:"แบ่ง 3 ชั้น: ศาลชั้นต้น → ศาลอุทธรณ์ → ศาลฎีกา • ศาลพิเศษ: แรงงาน, ทรัพย์สินทางปัญญา, ภาษีอากร, ล้มละลาย • ศาลแขวง (ม.17): มีอำนาจเท่าผู้พิพากษาคนเดียวตาม ม.24-25"},
+         {heading:"2. อำนาจผู้พิพากษาคนเดียว (ม.24-25)",
+          body:"ม.24: ออกคำสั่ง/หมายที่ไม่ใช่วินิจฉัยชี้ขาดข้อพิพาท • ม.25(4): คดีแพ่งทุนทรัพย์ ≤ 300,000 บาท • ม.25(5): คดีอาญาโทษสูงสุด ≤ 3 ปี/60,000 บาท แต่ลงจริงได้ไม่เกิน 6 เดือน/10,000 บาท"},
+         {heading:"3. ม.19/1 — ผ่อนคลายเขตอำนาจ",
+          body:"ว.1: คดีศาลแขวงที่ไปฟ้องศาลจังหวัด → ศาลจังหวัดมีดุลพินิจรับไว้เองหรือโอนก็ได้ • ว.2: พฤติการณ์เปลี่ยนระหว่างพิจารณา → ศาลจังหวัดต้องพิจารณาต่อไปจนจบ จะโอนไม่ได้"},
+         {heading:"4. ม.26-29 — องค์คณะและเหตุขัดข้อง",
+          body:"ม.26: ศาลจังหวัดต้องมีผู้พิพากษา ≥ 2 คน (ผู้พิพากษาประจำศาลนั่งพร้อมกันได้ไม่เกิน 1 คน) • ม.28: เหตุขัดข้องระหว่างพิจารณา → มอบหมายแทนได้ • ม.29: ⚠️ เหตุขัดข้องระหว่างทำคำพิพากษา → หัวหน้าศาลต้องทำเองเท่านั้น ห้ามมอบหมาย"},
+       ]},
+      {week:"สัปดาห์ 2-3", title:"เขตอำนาจศาล + อำนาจผู้พิพากษา",
+       topics:[
+         {heading:"1. 3 ขั้นตอนตรวจเขตอำนาจศาล",
+          body:"(1) ชั้นศาล: ต้องเริ่มที่ศาลชั้นต้นเสมอ (2) เขตพื้นที่: ดูภูมิลำเนาจำเลย/มูลคดีเกิด (ม.4) (3) อำนาจตามสภาพคำฟ้อง: คดีแพ่ง/อาญา ทุนทรัพย์เท่าไหร่"},
+         {heading:"2. ⭐ คดีมีทุนทรัพย์ vs ไม่มีทุนทรัพย์ (ออกสอบทุกปี)",
+          body:"มีทุนทรัพย์: ถ้าชนะแล้วโจทก์ 'ได้เงิน/ทรัพย์' เพิ่มขึ้น เช่น ฟ้องเงินกู้ ค่าเสียหาย บังคับโอนที่ดิน เพิกถอนนิติกรรมให้โดยเสน่หา • ไม่มีทุนทรัพย์: ฟ้องขับไล่ (ทั่วไป) เพิกถอนพินัยกรรม เพิกถอนการฉอฉล ฟ้องหามใช้ชื่อการค้า ขอสาบสูญ ขอตั้งผู้จัดการมรดก • เทคนิคจำ: 'ถ้าชนะคดี โจทก์ได้ทรัพย์เพิ่มขึ้นไหม? ใช่ = มีทุนทรัพย์'"},
+         {heading:"3. เทคนิคคำนวณทุนทรัพย์",
+          body:"ดูคำขอท้ายฟ้องเป็นหลัก • ดอกเบี้ย: นับถึงวันฟ้องเท่านั้น ดอกเบี้ยอนาคตไม่นับ • โจทก์หลายคน: แยกทุนทรัพย์รายคน • หนี้ร่วม: ไม่หาร ถือเต็มจำนวน • ฎ.1619/2562: ฟ้อง 300,000 รวมดอกเบี้ยถึงวันฟ้องเกิน 300,000 → ไม่อยู่ในอำนาจศาลแขวง"},
+       ]},
+      {week:"สัปดาห์ 3-6", title:"คู่ความ + คำฟ้อง + ค่าธรรมเนียม + ส่งคำคู่ความ + คำให้การ",
+       topics:[
+         {heading:"1. อำนาจฟ้อง ม.55",
+          body:"ต้องมี 'ข้อโต้แย้งสิทธิ' (คดีมีข้อพิพาท → ใช้คำฟ้อง) หรือ 'จำเป็นต้องใช้สิทธิทางศาล' (คดีไม่มีข้อพิพาท → ใช้คำร้องขอ) • ฎ.4100/2530: จำเลยปิดกั้นทางเดิน = โต้แย้งสิทธิ → มีอำนาจฟ้อง"},
+         {heading:"2. ร้องสอด ม.57-58",
+          body:"(1) คุ้มครองสิทธิของตน (ฝ่ายที่สาม): มีสิทธิเสมือนฟ้องใหม่ (2) เป็นคู่ความร่วม: ห้ามใช้สิทธินอกเหนือจากคู่ความฝ่ายที่เข้าร่วม (3) ถูกเรียกเข้ามา • ฎ.996/2549: จำเลยร่วม (57(2)) ไม่มีสิทธิยื่นคำให้การของตนเองถ้าจำเลยที่ 1 ขาดนัด"},
+         {heading:"3. ส่งคำคู่ความ ม.74-79",
+          body:"ลำดับ: ส่งโดยตรง (ม.74) → ส่งให้คนในบ้าน อายุ>20 ปี (ม.76) → ปิดหมาย (ม.79) มีผลเมื่อพ้น 15 วัน • ข้ามขั้นตอนไม่ได้! ฎ.2215/2549: ปิดประกาศหน้าศาลโดยไม่ส่งธรรมดาก่อน = ไม่ชอบ"},
+         {heading:"4. คำให้การและฟ้องแย้ง ม.177-178",
+          body:"ต้องยื่นใน 15 วัน • ฟ้องแย้งต้องเกี่ยวข้องกับฟ้องเดิม • ปฏิเสธลอยๆ = ไม่มีประเด็นนำสืบ • ม.179-180: ขอแก้ไขต้องทำก่อนวันชี้สองสถาน เว้นแต่เรื่องความสงบเรียบร้อยฯ (เช่น โมฆะ) ยื่นเกินกำหนดได้ — ⚠️ โมฆียะ/อายุความ ไม่ใช่ความสงบฯ"},
+       ]},
+      {week:"สัปดาห์ 7-11", title:"วิธีพิจารณาในศาลชั้นต้น + วิสามัญ + คำพิพากษา",
+       topics:[
+         {heading:"1. ขาดนัดยื่นคำให้การ (ม.197-199ตรี)",
+          body:"จำเลยไม่ยื่นใน 15 วัน → โจทก์ต้องขอชนะภายใน 15 วัน (ม.198) มิฉะนั้นศาลจำหน่ายคดี • ศาลพิจารณาว่าฟ้อง 'มีมูลและไม่ขัดกฎหมาย' (ม.198ทวิ) • คดีพิเศษ (สิทธิสภาพบุคคล/ครอบครัว/อสังหาฯ/หนี้ไม่แน่นอน) ต้องสืบพยานฝ่ายเดียวก่อน • ขอพิจารณาคดีใหม่ใน 15 วันหลังส่งคำบังคับ (ม.199ตรี)"},
+         {heading:"2. ขาดนัดพิจารณา (ม.200-207)",
+          body:"ไม่มาศาล 'วันสืบพยานนัดแรก' = ขาดนัดพิจารณา (นัดถัดๆ ไปไม่มาแค่เสียสิทธิในนัดนั้น) • โจทก์ไม่มา (ม.202): ศาลจำหน่ายคดี เว้นแต่จำเลยขอพิจารณาต่อ → ศาลวินิจฉัยตามภาระพิสูจน์จริง • จำเลยไม่มา (ม.204,206): สืบพยานโจทก์ฝ่ายเดียว"},
+         {heading:"3. คดีมโนสาเร่ (ม.189-195) และไม่มีข้อยุ่งยาก (ม.196)",
+          body:"มโนสาเร่: ทุนทรัพย์ ≤ 300,000 หรือขับไล่ค่าเช่า ≤ 30,000/เดือน — ฟ้องด้วยวาจาได้ นัดเดียวรวมไกล่เกลี่ย+ให้การ+สืบพยาน • ไม่มีข้อยุ่งยาก: ฟ้องตามตั๋วเงิน/สัญญาหนังสือ → ใช้กระบวนการมโนสาเร่ได้ ไม่จำกัดทุนทรัพย์"},
+         {heading:"4. คำพิพากษา (ม.131-148)",
+          body:"ม.132: จำหน่ายคดี • ม.138: พิพากษาตามยอม — ห้ามอุทธรณ์ เว้นแต่ขัดความสงบฯ • ม.142: ห้ามพิพากษาเกินคำขอ (ข้อยกเว้น: คดีขับไล่พิพากษาถึง 'บริวาร' ได้) • ม.144: ห้ามดำเนินกระบวนพิจารณาซ้ำ • ม.148: ห้ามฟ้องซ้ำ (คดีก่อนถึงที่สุด) • ม.173: ห้ามฟ้องซ้อน (คดีก่อนยังค้างพิจารณา)"},
+       ]},
+      {week:"สัปดาห์ 12-15", title:"อุทธรณ์ + ฎีกา",
+       topics:[
+         {heading:"1. หลักทั่วไป ม.223-225",
+          body:"ม.223: อุทธรณ์ได้เสมอ เว้นแต่กฎหมายจำกัด • ม.224: ⭐ 'ทุนทรัพย์ที่พิพาทกันในชั้นอุทธรณ์' ≤ 50,000 บาท ห้ามอุทธรณ์ข้อเท็จจริง (เว้นแต่ความเห็นแย้ง/คำรับรอง/หนังสืออนุญาตอธิบดี) • ม.225: ต้องยกขึ้นว่ากันมาแล้วโดยชอบในศาลชั้นต้น เว้นแต่ความสงบเรียบร้อยฯ"},
+         {heading:"2. คำสั่งระหว่างพิจารณา ม.226-228",
+          body:"ม.226: ห้ามอุทธรณ์ทันที ต้องโต้แย้งคำสั่งไว้ก่อน แล้วค่อยอุทธรณ์เมื่อมีคำพิพากษา • ม.227-228: ข้อยกเว้น — คำสั่งที่ทำให้คดีเสร็จไปทั้งเรื่อง/บางส่วน หรือไม่รับคำคู่ความ → อุทธรณ์ได้ทันทีโดยไม่ต้องโต้แย้ง • ฎ.3900/2549: สั่งงดสืบพยานแล้วยกฟ้อง = ชี้ขาดเบื้องต้น ม.24 → อุทธรณ์ได้ทันที"},
+         {heading:"3. ⭐ ทุนทรัพย์ชั้นอุทธรณ์ (ออกสอบบ่อย)",
+          body:"ทุนทรัพย์ชั้นอุทธรณ์ ≠ ทุนทรัพย์ตอนฟ้อง — คิดจากส่วนที่แพ้และยังโต้แย้งอยู่ • ฎ.3558/2530: โจทก์ 2 คนฟ้องรวม 60,619 บาท แต่แยกรายบุคคลไม่เกิน 50,000 → ห้ามอุทธรณ์ข้อเท็จจริง • คดีขับไล่: ถ้าค่าเช่า ≤ 4,000/เดือน ห้ามอุทธรณ์ข้อเท็จจริง"},
+         {heading:"4. ระบบฎีกา (ม.247) — ฎีกาอนุญาต",
+          body:"ต้องยื่นคำร้องขออนุญาตฎีกา แสดงว่าเป็นปัญหาสำคัญที่ควรวินิจฉัย • ไม่มีสิทธิฎีกาอัตโนมัติเหมือนอุทธรณ์ • ม.231: ขอทุเลาการบังคับคดี — ต้องวางเงิน/หาประกัน ไม่ใช่สิทธิอัตโนมัติ"},
+       ]},
+    ]
+  }
+};
+let activeSubject = 'la280';
+
+/* ================= GAMIFICATION ================= */
+const GK = 'viphaeng_score_v2';
+function loadScore(){
+  try{ return JSON.parse(localStorage.getItem(GK)||'{"total":0,"seenCards":{},"seenContent":{}}'); }
+  catch(e){ return {total:0,seenCards:{},seenContent:{}}; }
+}
+function saveScore(s){ try{ localStorage.setItem(GK,JSON.stringify(s)); }catch(e){} }
+let GS = loadScore();
+
+function addScore(pts, reason){
+  GS.total = Math.max(0, GS.total + pts);
+  saveScore(GS);
+  updateScoreUI();
+  showScorePop(pts, reason);
+}
+function showScorePop(pts, reason){
+  const el = document.getElementById('scorePop');
+  if(!el) return;
+  const minus = pts < 0;
+  el.textContent = (minus ? '' : '+') + pts + (reason ? ' ' + reason : '');
+  el.style.color = minus ? '#ef4444' : '#16a34a';
+  el.style.borderColor = minus ? '#fca5a5' : '#bbf7d0';
+  el.style.opacity = '1';
+  el.style.transform = 'translateY(0)';
+  clearTimeout(el._t);
+  el._t = setTimeout(()=>{ el.style.opacity='0'; el.style.transform='translateY(-10px)'; }, 1400);
+}
+function updateScoreUI(){
+  const el = document.getElementById('scoreNum');
+  if(el) el.textContent = GS.total.toLocaleString();
+}
+
+/* ================= CONTENT SUMMARY RENDERER ================= */
+function renderContent(){
+  const subj = SUBJECTS[activeSubject];
+  if(!subj) return '<p>ยังไม่มีเนื้อหา</p>';
+  return `
+    <h2>สรุปเนื้อหาเตรียมสอบ</h2>
+    <div class="desc">เนื้อหาตาม Course Spec น.280/น.207 ปีการศึกษา 2568 — กดหัวข้อเพื่อขยาย · อ่านจบกด ✓ รับ 20 คะแนน</div>
+    ${subj.weeks.map((w,wi)=>{
+      const wKey = 'w'+wi;
+      return `
+      <div class="content-week">
+        <div class="content-week-header" id="cwh_${wKey}" onclick="toggleWeek('${wKey}')">
+          <span class="week-badge">${w.week}</span>
+          <span class="week-title">${w.title}</span>
+          <span class="week-chevron" id="chev_${wKey}">▼</span>
+        </div>
+        <div class="content-week-body" id="cwb_${wKey}">
+          ${w.topics.map((t,ti)=>{
+            const tKey = wKey+'_t'+ti;
+            const isRead = GS.seenContent && GS.seenContent[tKey];
+            return `
+            <div class="content-topic">
+              <div class="topic-heading">📌 ${t.heading}</div>
+              <div class="topic-body">${t.body.replace(/•/g,'<br>• ')}</div>
+              <div class="read-btn ${isRead?'read':''}" id="rbtn_${tKey}" onclick="markRead('${tKey}')">
+                ${isRead ? '✓ อ่านแล้ว' : '✓ กดเมื่ออ่านจบ (+20 คะแนน)'}
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>`;
+    }).join('')}
+  `;
+}
+function toggleWeek(wKey){
+  const hdr = document.getElementById('cwh_'+wKey);
+  const body = document.getElementById('cwb_'+wKey);
+  const chev = document.getElementById('chev_'+wKey);
+  if(!body) return;
+  const open = body.classList.toggle('open');
+  if(hdr) hdr.classList.toggle('open', open);
+  if(chev) chev.classList.toggle('open', open);
+}
+function markRead(tKey){
+  if(!GS.seenContent) GS.seenContent = {};
+  if(!GS.seenContent[tKey]){
+    GS.seenContent[tKey] = 1;
+    saveScore(GS);
+    addScore(100, 'อ่านจบ 📖');
+  }
+  const btn = document.getElementById('rbtn_'+tKey);
+  if(btn){ btn.textContent='✓ อ่านแล้ว'; btn.classList.add('read'); }
+}
+
+/* ================= SUBJECT BAR SWITCHER ================= */
+function switchSubject(id){
+  if(id === 'la330') return;
+  activeSubject = id;
+  document.querySelectorAll('.subject-tab').forEach(t=>{
+    t.classList.toggle('active', t.id === 'stab_'+id);
+  });
+  state.tab = 0;
+  render();
+}
+
+
+
+/* ================= HELPERS ================= */
+const CAT_BG_ANGLE = {}; CAT_ORDER.forEach((id,i)=>{ CAT_BG_ANGLE[id] = (i*40)%360; });
+function setTheme(catId){
+  const cat = CATEGORIES[catId] ? catId : "appeal";
+  const c = CATEGORIES[cat].color;
+  document.documentElement.style.setProperty('--cat', c);
+  const r=parseInt(c.slice(1,3),16), g=parseInt(c.slice(3,5),16), b=parseInt(c.slice(5,7),16);
+  document.documentElement.style.setProperty('--cat-pale', `rgba(${r},${g},${b},0.09)`);
+  const angle = CAT_BG_ANGLE[cat] || 0;
+  const idx = CAT_ORDER.indexOf(cat);
+  const posX = 10 + (idx%3)*35;
+  const posY = idx%2===0 ? -10 : 90;
+  // Light theme: subtle color tint over the page background
+  document.body.style.background =
+    `radial-gradient(900px 500px at ${posX}% ${posY}%, ${c}14 0%, transparent 55%)`;
+}
+function shuffle(arr){
+  const a=arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+function bestScore(key){
+  try{ const v = localStorage.getItem('vpk_'+key); return v?JSON.parse(v):null; }catch(e){ return null; }
+}
+function saveBestScore(key,score,total){
+  try{
+    const cur = bestScore(key);
+    const attempts = (cur? cur.attempts:0) + 1;
+    if(!cur || score>cur.score){ localStorage.setItem('vpk_'+key, JSON.stringify({score,total,attempts})); }
+    else { localStorage.setItem('vpk_'+key, JSON.stringify({score:cur.score,total,attempts})); }
+  }catch(e){}
+}
+
+/* ================= STATE ================= */
+let state = {
+  tab:0,
+  cardCat:"phdn", cardIdx:0, cardFlipped:false,
+  listCat:"phdn",
+  quizSub:null, // 'A' | 'B'
+  quizLevel:null, quizSet:null, quizPool:[], quizIdx:0, quizAnswered:false, quizScore:0,
+  orderCase:null, orderPool:null, orderChecked:false, orderScore:0,
+  walkCase:null, issueIdx:0, stepIdx:0, walkScore:0, walkAnswered:false, walkTotalSteps:0, walkCorrectSteps:0,
+  factExpanded:false,
+};
+
+const TABS = [
+  {label:"การ์ดจำมาตรา", n:"1"},
+  {label:"เรียงมาตราเป็นกลุ่ม", n:"2"},
+  {label:"วิเคราะห์โจทย์", n:"3"},
+  {label:"ฝึกโจทย์สัมบัญญัติ", n:"4"},
+  {label:"สรุปเนื้อหา", n:"5"},
+];
+
+function renderTabs(){
+  document.getElementById('tabs').innerHTML = TABS.map((t,i)=>`
+    <div class="tab ${state.tab===i?'active':''}" onclick="sndClick();setTab(${i})"><b>${t.n}</b>${t.label}</div>`).join('');
+}
+function setTab(i){ state.tab=i; state.cardFlipped=false; render(); }
+
+function render(){
+  renderTabs();
+  const fb = document.getElementById('floatbar');
+  fb.style.display='none'; fb.innerHTML='';
+  const p = document.getElementById('panel');
+  if(state.tab===0){ setTheme(state.cardCat); p.innerHTML = renderCardMode(); }
+  if(state.tab===1){ setTheme(state.listCat); p.innerHTML = renderListMode(); }
+  if(state.tab===2){ setTheme(currentQuizCat()); p.innerHTML = renderMode3(); }
+  if(state.tab===3){ setTheme(currentWalkCat()); p.innerHTML = renderWalkMode(); }
+  if(state.tab===4){ document.documentElement.style.setProperty("--cat","#1e40af"); document.body.style.background="#f0f4f8"; p.innerHTML = renderContent(); }
+}
+
+/* ================= MODE 1: FLASHCARD ================= */
+function cardsOf(cat){ return CARDS.filter(c=>c.cat===cat); }
+function renderCardMode(){
+  const deck = cardsOf(state.cardCat);
+  if(state.cardIdx>=deck.length) state.cardIdx=0;
+  const card = deck[state.cardIdx];
+  return `
+    <h2>การ์ดจำมาตรา</h2>
+    <div class="desc">แตะการ์ดเพื่อพลิกดูใจความ · เลือกหมวดหมู่จาก dropdown</div>
+    <div class="row" style="margin-bottom:14px;">
+      <select onchange="sndClick();state.cardCat=this.value;state.cardIdx=0;state.cardFlipped=false;render();">
+        ${CAT_ORDER.map(id=>`<option value="${id}" ${id===state.cardCat?'selected':''}>${CATEGORIES[id].name} (${cardsOf(id).length})</option>`).join('')}
+      </select>
+      <span class="cat-pill">${state.cardIdx+1} / ${deck.length}</span>
+    </div>
+    <div class="flip-stage">
+      <div class="flip-card ${state.cardFlipped?'flipped':''}" onclick="flipCard()">
+        <div class="face face-front">
+          <div class="img-slot" id="cardImgSlot">
+            ${card.img ? `<img src="${card.img}" alt="${card.title}">` : `<div class="img-label">📷 ช่องใส่ภาพประกอบ</div>`}
+          </div>
+          <div class="card-body">
+            <div class="cat-badge">${CATEGORIES[card.cat].name}</div>
+            <div class="code">${card.code}</div>
+            <div class="title">${card.title}</div>
+          </div>
+          <div class="hint">แตะเพื่อดูใจความ ›</div>
+        </div>
+        <div class="face face-back">
+          <div class="code-mini">◆ ${card.code} — ${card.title}</div>
+          <div class="txt">${card.text}</div>
+          ${card.case ? `<div class="case-box">⚖️ ตัวอย่างฎีกา: ${card.case}</div>` : ''}
+        </div>
+      </div>
+    </div>
+    <div class="card-controls">
+      <button class="btn btn-ghost btn-sm" onclick="sndClick();prevCard()">‹ ก่อนหน้า</button>
+      <button class="btn btn-ghost btn-sm" onclick="sndClick();shuffleCard()">🔀 สุ่ม</button>
+      <button class="btn btn-gold btn-sm" onclick="sndClick();nextCard()">ถัดไป ›</button>
+    </div>
+  `;
+}
+function flipCard(){
+  if(!state.cardFlipped){
+    const deck=cardsOf(state.cardCat);
+    const k=state.cardCat+'_'+state.cardIdx;
+    if(!GS.seenCards[k]){ GS.seenCards[k]=1; saveScore(GS); addScore(10,'พลิกการ์ด'); }
+  }
+  state.cardFlipped=!state.cardFlipped; sndClick(); render();
+}
+function nextCard(){ const d=cardsOf(state.cardCat); state.cardIdx=(state.cardIdx+1)%d.length; state.cardFlipped=false; render(); }
+function prevCard(){ const d=cardsOf(state.cardCat); state.cardIdx=(state.cardIdx-1+d.length)%d.length; state.cardFlipped=false; render(); }
+function shuffleCard(){ const d=cardsOf(state.cardCat); state.cardIdx=Math.floor(Math.random()*d.length); state.cardFlipped=false; render(); }
+
+/* ================= MODE 2: LIST BY GROUP ================= */
+function renderListMode(){
+  const deck = cardsOf(state.listCat);
+  const catTabs = CAT_ORDER.map(id=>`
+    <div class="list-cat-tab ${id===state.listCat?'active':''}" onclick="sndClick();state.listCat='${id}';render();">
+      ${CATEGORIES[id].name} <span class="lct-count">${cardsOf(id).length}</span>
+    </div>`).join('');
+  setTimeout(()=>{
+    const panel = document.getElementById('panel');
+    if(!panel) return;
+    const scrollKey = 'list_scroll_'+state.listCat;
+    panel.onscroll = function(){
+      const near = panel.scrollTop + panel.clientHeight >= panel.scrollHeight - 40;
+      if(near && !GS.seenContent[scrollKey]){
+        GS.seenContent[scrollKey] = 1;
+        saveScore(GS);
+        addScore(100, 'อ่านครบหมวด 📚');
+      }
+    };
+  }, 100);
+  return `
+    <h2>เรียงมาตราเป็นกลุ่ม</h2>
+    <div class="desc">คลิกหมวดด้านล่าง แล้วไล่อ่านมาตราทั้งหมดเรียงตามลำดับจริงในหน้าเดียว</div>
+    <div class="list-cat-strip">${catTabs}</div>
+    <div class="section-title">${CATEGORIES[state.listCat].name} · ${deck.length} มาตรา</div>
+    ${deck.map(c=>`
+      <div class="list-item">
+        <div class="code">${c.code}</div>
+        <div class="right">
+          <div class="title">${c.title}</div>
+          <div class="txt">${c.text}</div>
+          ${c.case ? `<div class="case-tag">⚖️ ${c.case}</div>` : ''}
+        </div>
+      </div>`).join('')}
+  `;
+}
+
+/* ================= MODE 3: วิเคราะห์โจทย์ (A: ปรนัย / B: ไล่สาย) ================= */
+const PROCEDURE_ORDER = [
+  { title:"ขั้นตอนวิเคราะห์อำนาจฟ้องและเขตอำนาจศาล",
+    steps:[
+      "มีข้อโต้แย้งเกี่ยวกับสิทธิ/หน้าที่ตามกฎหมายแพ่ง หรือต้องใช้สิทธิทางศาลหรือไม่ (ม.55)",
+      "แยกว่าเป็นคดีมีข้อพิพาท (คำฟ้อง) หรือคดีไม่มีข้อพิพาท (คำร้องขอ)",
+      "ตรวจว่าเข้าเขตศาลเฉพาะ เช่น ม.4ทวิ (อสังหาริมทรัพย์) หรือไม่ ถ้าไม่ใช้หลักทั่วไป ม.4(1)",
+      "ตรวจภูมิลำเนาจำเลยหรือสถานที่มูลคดีเกิด เพื่อชี้ว่าศาลใดมีเขตอำนาจ",
+    ]},
+  { title:"ขั้นตอนวินิจฉัยว่าเป็น 'ฟ้องซ้ำ' ตาม ม.148",
+    steps:[
+      "ตรวจว่าคดีก่อนมีคำพิพากษาถึงที่สุดแล้วหรือยัง",
+      "ตรวจว่าคู่ความคดีหลังเป็นคู่ความเดียวกันกับคดีก่อนหรือไม่",
+      "ตรวจว่าประเด็นคดีหลังเป็นประเด็นเดียวกันกับคดีก่อนหรือไม่",
+      "ตรวจว่าศาลในคดีก่อนวินิจฉัยชี้ขาดเนื้อหาแห่งคดีแล้วหรือไม่",
+      "พิจารณาว่าเข้าข้อยกเว้นตาม ม.148(1)-(3) หรือไม่ ก่อนสรุปผล",
+    ]},
+  { title:"ขั้นตอนตรวจข้อจำกัดอุทธรณ์ข้อเท็จจริง (ม.224)",
+    steps:[
+      "แยกว่าประเด็นที่จะอุทธรณ์เป็นปัญหาข้อเท็จจริงหรือข้อกฎหมาย",
+      "ถ้าเป็นข้อเท็จจริง ตรวจว่าคดีมีทุนทรัพย์หรือไม่มีทุนทรัพย์",
+      "หากมีทุนทรัพย์ คำนวณทุนทรัพย์ที่พิพาทกันในชั้นอุทธรณ์",
+      "ถ้าไม่เกิน 50,000 บาท ตรวจว่าเข้าข้อยกเว้น (ความเห็นแย้ง/คำรับรอง/หนังสืออนุญาต) หรือไม่",
+    ]},
+  { title:"ขั้นตอนกระบวนพิจารณาคดีสามัญ ตั้งแต่ฟ้องถึงพิพากษา",
+    steps:[
+      "โจทก์ยื่นคำฟ้องต่อศาลที่มีเขตอำนาจ",
+      "ศาลตรวจคำฟ้องและมีคำสั่งรับฟ้อง",
+      "ส่งหมายเรียกและสำเนาคำฟ้องแก่จำเลย",
+      "จำเลยยื่นคำให้การภายใน 15 วัน (อาจฟ้องแย้งมาด้วย)",
+      "ศาลชี้สองสถาน กำหนดประเด็นข้อพิพาทและภาระการพิสูจน์",
+      "สืบพยานโจทก์และจำเลยตามประเด็น",
+      "ศาลมีคำพิพากษา",
+    ]},
+];
+
+function currentQuizCat(){
+  if(state.quizSub==='B') return CAT_ORDER[(state.orderCase||0) % CAT_ORDER.length];
+  if(state.quizLevel==='real' && state.quizPool[state.quizIdx]) return state.quizPool[state.quizIdx].cat;
+  return "appeal";
+}
+function buildBasicSet(){
+  const pool = shuffle(CARDS).slice(0,10);
+  return pool.map(card=>{
+    const others = shuffle(CARDS.filter(c=>c!==card && c.title!==card.title)).slice(0,3);
+    const choices = shuffle([{t:card.title,c:true}, ...others.map(o=>({t:o.title,c:false}))]);
+    return {cat:card.cat, tags:[CATEGORIES[card.cat].name], fact:`${CATEGORIES[card.cat].name}`, question:`มาตรา ${card.code} เกี่ยวข้องกับเรื่องใด?`, choices, explain:`${card.code}: ${card.text}${card.case?` (${card.case})`:''}`};
+  });
+}
+function realChunks(){
+  const n=10; const chunks=[];
+  for(let i=0;i<MCQ.length;i+=n) chunks.push(MCQ.slice(i,i+n));
+  return chunks;
+}
+function renderMode3(){
+  if(!state.quizSub){
+    return `
+      <h2>วิเคราะห์โจทย์</h2>
+      <div class="desc">เลือกรูปแบบการฝึก</div>
+      <div class="subtoggle">
+        <div class="stog" onclick="sndClick();state.quizSub='A'; state.quizLevel=null; state.quizSet=null; render();"><b>Sub-mode A</b><br>ปรนัยวิเคราะห์</div>
+        <div class="stog" onclick="sndClick();state.quizSub='B'; state.orderCase=null; render();"><b>Sub-mode B</b><br>ไล่สาย (เรียงขั้นตอน)</div>
+      </div>
+    `;
+  }
+  const backTop = `<div class="backrow"><button class="btn btn-ghost" onclick="sndClick();state.quizSub=null; state.quizLevel=null; state.quizSet=null; state.orderCase=null; render();">‹ กลับไปเลือกรูปแบบ</button></div>`;
+  if(state.quizSub==='A') return backTop + renderQuizModeA();
+  return backTop + renderOrderModeB();
+}
+
+/* ---- Sub-mode A: ปรนัยวิเคราะห์ ---- */
+function renderQuizModeA(){
+  if(!state.quizLevel){
+    return `
+      <h2>วิเคราะห์โจทย์ — ปรนัยวิเคราะห์</h2>
+      <div class="desc">เลือกระดับที่ต้องการฝึก</div>
+      <div class="set-grid">
+        <div class="set-card" onclick="sndClick();startQuizLevel('basic')"><b>พื้นฐาน</b><div>จับคู่มาตรา ↔ เรื่อง<br>(สุ่มใหม่ทุกครั้ง)</div></div>
+        <div class="set-card" onclick="sndClick();startQuizLevel('real')"><b>ข้อสอบจริง</b><div>โจทย์สถานการณ์จริง<br>${MCQ.length} ข้อ</div></div>
+      </div>
+    `;
+  }
+  if(!state.quizSet){
+    if(state.quizLevel==='basic'){
+      return `
+        <h2>วิเคราะห์โจทย์ — พื้นฐาน</h2>
+        <div class="desc">ชุดคำถามจับคู่มาตรากับเรื่อง สุ่มจากคลังมาตราทั้งหมด</div>
+        <div class="set-grid">
+          <div class="set-card" onclick="sndClick();startBasicSet()"><b>เริ่มชุดใหม่</b><div>10 ข้อ สุ่มใหม่</div></div>
+        </div>
+        <button class="btn btn-ghost" onclick="sndClick();state.quizLevel=null; render();">‹ กลับ</button>
+      `;
+    } else {
+      const sets = realChunks();
+      return `
+        <h2>วิเคราะห์โจทย์ — ข้อสอบจริง</h2>
+        <div class="desc">เลือกชุดข้อสอบ — คะแนนดีที่สุดจะถูกบันทึกไว้ (ทำแล้วกี่ครั้งแสดงไว้ด้วย)</div>
+        <div class="set-grid">
+          ${sets.map((s,i)=>{ const b=bestScore('real-set-'+i); return `
+          <div class="set-card" onclick="sndClick();startRealSet(${i})"><b>ชุดที่ ${i+1}</b><div>${s.length} ข้อ</div>
+          <div class="best">${b?`คะแนนดีที่สุด ${b.score}/${b.total} (ทำ ${b.attempts} ครั้ง)`:'ยังไม่เคยทำ'}</div></div>`;}).join('')}
+        </div>
+        <button class="btn btn-ghost" onclick="sndClick();state.quizLevel=null; render();">‹ กลับ</button>
+      `;
+    }
+  }
+  // in-progress quiz
+  const q = state.quizPool[state.quizIdx];
+  const total = state.quizPool.length;
+  document.getElementById('floatbar').style.display='flex';
+  document.getElementById('floatbar').innerHTML = state.quizAnswered
+    ? `<button class="btn btn-gold" onclick="sndClick();nextQuiz()">${state.quizIdx+1<total?'ข้อถัดไป ›':'ดูสรุปผล ›'}</button>`
+    : `<span style="color:#a9b6cf;font-size:12.5px;align-self:center;">เลือกคำตอบเพื่อดำเนินการต่อ</span>`;
+  return `
+    <div class="backrow"><button class="btn btn-ghost" onclick="sndClick();abandonQuiz()">‹ ถอยหลังไปเลือกชุด</button></div>
+    <h2>${state.quizLevel==='basic'?'พื้นฐาน':'ข้อสอบจริง'} <span class="cat-pill">${CATEGORIES[q.cat].name}</span></h2>
+    <div>${(q.tags||[]).map(t=>`<span class="qtag">${t}</span>`).join('')}</div>
+    <div class="progress-bar"><div style="width:${(state.quizIdx/total)*100}%"></div></div>
+    <div class="desc">ข้อ ${state.quizIdx+1} / ${total} · คะแนน ${state.quizScore}</div>
+    <div class="timer-bar"><div id="timerFill" style="width:100%;background:#f59e0b;"></div></div>
+    ${q.fact && state.quizLevel==='real' ? `<div class="fact-block">${q.fact}</div>`:''}
+    <div style="font-weight:600;font-size:14.5px;margin-bottom:10px;">${q.question}</div>
+    <div id="quizChoices">
+      ${q.choices.map((ch,i)=>`<button class="choice" data-i="${i}" onclick="answerQuiz(${i})">${ch.t}</button>`).join('')}
+    </div>
+    <div id="quizExplain"></div>
+  `;
+}
+function abandonQuiz(){ state.quizSet=null; state.quizPool=[]; state.quizIdx=0; state.quizAnswered=false; render(); }
+function startQuizLevel(level){ state.quizLevel=level; state.quizSet=null; render(); }
+function startBasicSet(){
+  state.quizSet='basic'; state.quizPool=buildBasicSet(); state.quizIdx=0; state.quizAnswered=false; state.quizScore=0; render();
+}
+function startRealSet(i){
+  state.quizSet='real-'+i; state.quizPool = realChunks()[i].map(m=>({cat:m.cat, tags:m.tags, fact:m.fact, question:m.question, choices:m.choices.map(c=>({t:c.t,c:c.c})), explain:m.explain}));
+  state.quizIdx=0; state.quizAnswered=false; state.quizScore=0; render();
+}
+function answerQuiz(i){ state.quizStartTime = state.quizStartTime; // preserved
+
+  if(state.quizAnswered) return;
+  const q = state.quizPool[state.quizIdx];
+  state.quizAnswered=true;
+  document.querySelectorAll('#quizChoices .choice').forEach((btn,idx)=>{
+    btn.disabled=true;
+    if(q.choices[idx].c) btn.classList.add('correct');
+    else if(idx===i) btn.classList.add('wrong');
+  });
+  const elapsed = Date.now() - (state.quizStartTime||Date.now());
+  if(q.choices[i].c){
+    state.quizScore++;
+    sndCorrect();
+    addScore(10, 'ถูก ✓');
+  } else {
+    sndWrong();
+    addScore(-5, 'ผิด ✗');
+  }
+  document.getElementById('quizExplain').innerHTML = `<div class="explain-box"><b>คำอธิบาย:</b> ${q.explain}</div>`;
+  document.getElementById('floatbar').innerHTML = `<button class="btn btn-gold" onclick="sndClick();nextQuiz()">${state.quizIdx+1<state.quizPool.length?'ข้อถัดไป ›':'ดูสรุปผล ›'}</button>`;
+}
+function nextQuiz(){
+  if(state.quizIdx+1 < state.quizPool.length){ state.quizIdx++; state.quizAnswered=false; render(); return; }
+  // finished
+  if(state.quizSet && state.quizSet.startsWith('real-')){
+    const i = state.quizSet.split('-')[1];
+    saveBestScore('real-set-'+i, state.quizScore, state.quizPool.length);
+  }
+  const p = document.getElementById('panel');
+  document.getElementById('floatbar').style.display='none';
+  p.innerHTML = `
+    <h2>สรุปผล</h2>
+    <div class="stars">${'⭐'.repeat(Math.max(1,Math.round(state.quizScore/state.quizPool.length*5)))}</div>
+    <div class="desc" style="text-align:center;font-size:16px;">ได้คะแนน ${state.quizScore} / ${state.quizPool.length}</div>
+    <div class="row" style="justify-content:center;margin-top:16px;">
+      <button class="btn btn-gold" onclick="sndClick();state.quizSet=null; render();">‹ เลือกชุดใหม่</button>
+      <button class="btn btn-ghost" onclick="sndClick();state.quizLevel=null; state.quizSet=null; render();">เปลี่ยนระดับ</button>
+    </div>
+  `;
+}
+
+/* ---- Sub-mode B: ไล่สาย (เรียงลำดับขั้นตอน) ---- */
+function shuffledIdx(n){
+  const arr=[...Array(n).keys()];
+  for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; }
+  if(n>1 && arr.every((v,i)=>v===i)){ [arr[0],arr[1]]=[arr[1],arr[0]]; }
+  return arr;
+}
+function renderOrderModeB(){
+  if(state.orderCase===null){
+    return `
+      <h2>ไล่สาย — เรียงลำดับขั้นตอน</h2>
+      <div class="desc">เลือกโจทย์ แล้วลากการ์ดเพื่อจัดลำดับขั้นตอนที่ถูกต้อง · ตอบถูกครบสะสม ${state.orderScore} ชุด</div>
+      <div class="set-grid">
+        ${PROCEDURE_ORDER.map((p,i)=>`<div class="set-card" onclick="sndClick();startOrder(${i})"><b>ชุดที่ ${i+1}</b><div style="font-size:12px;">${p.title}</div></div>`).join('')}
+      </div>
+    `;
+  }
+  const p = PROCEDURE_ORDER[state.orderCase];
+  if(!state.orderPool){ state.orderPool = shuffledIdx(p.steps.length); state.orderChecked=false; }
+  return `
+    <div class="backrow"><button class="btn btn-ghost" onclick="sndClick();state.orderCase=null; render();">‹ ถอยหลังไปเลือกชุด</button></div>
+    <h2>${p.title}</h2>
+    <div class="desc">ลากการ์ดเพื่อจัดลำดับขั้นตอนที่ถูกต้อง แล้วกด "ตรวจคำตอบ"</div>
+    <ul class="order-list" id="orderList">
+      ${state.orderPool.map((stepIdx,pos)=>`
+        <li class="order-item" draggable="true" data-idx="${stepIdx}">
+          <span class="slot">${pos+1}</span><span>${p.steps[stepIdx]}</span>
+        </li>`).join('')}
+    </ul>
+    <div class="row" id="orderBtnRowB" style="margin-top:14px;">
+      <button class="btn btn-gold" onclick="sndClick();checkOrderB()">ตรวจคำตอบ</button>
+      <button class="btn btn-ghost" onclick="sndClick();reshuffleOrderB()">สลับใหม่</button>
+    </div>
+  `;
+}
+function startOrder(i){ state.orderStartTime=Date.now(); state.orderCase=i; state.orderPool=null; state.orderChecked=false; render(); initOrderDndB(); }
+function reshuffleOrderB(){ state.orderPool=shuffledIdx(PROCEDURE_ORDER[state.orderCase].steps.length); state.orderChecked=false; render(); initOrderDndB(); }
+function nextOrderB(){ state.orderCase=(state.orderCase+1)%PROCEDURE_ORDER.length; state.orderPool=null; state.orderChecked=false; render(); initOrderDndB(); }
+function checkOrderB(){
+  const items=[...document.querySelectorAll('#orderList .order-item')];
+  const order=items.map(it=>Number(it.dataset.idx));
+  state.orderPool=order;
+  let allCorrect=true;
+  items.forEach((it,pos)=>{
+    const ok=order[pos]===pos;
+    it.classList.remove('correct','wrong');
+    it.classList.add(ok?'correct':'wrong');
+    if(!ok) allCorrect=false;
+  });
+  state.orderChecked=true;
+  const elapsed = Date.now() - (state.orderStartTime||Date.now());
+  if(allCorrect){ state.orderScore++; sndCorrect(); addScore(elapsed<20000?50:5, elapsed<20000?'เรียงได้ไว!':'เรียงถูก'); } else { sndWrong(); }
+  const row = document.getElementById('orderBtnRowB');
+  row.insertAdjacentHTML('beforeend', allCorrect
+    ? `<span style="font-weight:700;color:var(--good);align-self:center;">✓ ถูกต้อง</span>`
+    : `<span style="font-weight:700;color:var(--bad);align-self:center;">ยังไม่ถูก ลองใหม่</span>`);
+  row.insertAdjacentHTML('beforeend', `<button class="btn btn-dark" onclick="sndClick();nextOrderB()">ชุดถัดไป ›</button>`);
+}
+function initOrderDndB(){
+  const list = document.getElementById('orderList');
+  if(!list) return;
+  let dragEl = null;
+  list.querySelectorAll('.order-item').forEach(item=>{
+    item.addEventListener('dragstart', ()=>{ dragEl=item; item.classList.add('dragging'); });
+    item.addEventListener('dragend', ()=>{ item.classList.remove('dragging'); renumber(); });
+  });
+  list.addEventListener('dragover', e=>{
+    e.preventDefault();
+    const after = getDragAfter(list, e.clientY);
+    const dragging = list.querySelector('.dragging');
+    if(!dragging) return;
+    if(after==null) list.appendChild(dragging);
+    else list.insertBefore(dragging, after);
+  });
+  function getDragAfter(container, y){
+    const els = [...container.querySelectorAll('.order-item:not(.dragging)')];
+    return els.reduce((closest, child)=>{
+      const box = child.getBoundingClientRect();
+      const offset = y - box.top - box.height/2;
+      if(offset<0 && offset>closest.offset) return {offset, element:child};
+      else return closest;
+    }, {offset:-Infinity}).element;
+  }
+  function renumber(){
+    list.querySelectorAll('.order-item').forEach((it,pos)=>{
+      it.querySelector('.slot').textContent = pos+1;
+      it.classList.remove('correct','wrong');
+    });
+  }
+}
+
+/* ================= MODE 4: WALKTHROUGH ================= */
+function currentWalkCat(){ return "judgment"; }
+function renderWalkMode(){
+  if(state.walkCase===null){
+    return `
+      <h2>ฝึกโจทย์วิธีสัมบัญญัติ</h2>
+      <div class="desc">เลือกข้อสอบจริง แล้วไล่ทีละประเด็น: เลือกประเด็น → เลือกมาตรา → ปรับบท → สรุปผล</div>
+      <div class="set-grid">
+        ${WALK.map((w,i)=>`<div class="set-card" onclick="sndClick();startWalk(${i})"><b>ข้อที่ ${i+1}</b><div class="set-desc">${w.title}</div></div>`).join('')}
+      </div>
+    `;
+  }
+  const w = WALK[state.walkCase];
+  if(state.issueIdx>=w.issues.length){
+    const totalSteps = w.issues.length*4;
+    const pct = Math.round(state.walkCorrectSteps/totalSteps*100);
+    document.getElementById('floatbar').style.display='none';
+    return `
+      <h2>สรุปผล</h2>
+      <div class="stars">${'⭐'.repeat(Math.max(1,Math.round(pct/20)))}</div>
+      <div class="summary-score">${state.walkCorrectSteps} / ${totalSteps}</div>
+      <div class="summary-sub">ขั้นตอนที่ตอบถูก (${pct}%) · ${w.title}</div>
+      <div class="row row-center" style="margin-top:20px;">
+        <button class="btn btn-gold" onclick="sndClick();state.walkCase=null; render();">‹ เลือกข้อสอบใหม่</button>
+      </div>
+    `;
+  }
+  const issue = w.issues[state.issueIdx];
+  const stepNames=["เลือกประเด็น","เลือกมาตรา","ปรับบท","สรุปผล"];
+  const stepIcons=["❓","📖","🔗","✅"];
+  const stepMap=[
+    {options:issue.issueOptions, correct:issue.issueCorrect, prompt:"ประเด็นนี้คือเรื่องอะไร?"},
+    {options:issue.sectionOptions, correct:issue.sectionCorrect, prompt:"ควรใช้มาตราใดในการวินิจฉัย?"},
+    {options:issue.applyOptions, correct:issue.applyCorrect, prompt:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร?"},
+    {options:issue.conclusionOptions, correct:issue.conclusionCorrect, prompt:"สรุปผลควรเป็นอย่างไร?"},
+  ];
+  const step = stepMap[state.stepIdx];
+  document.getElementById('floatbar').style.display = state.walkAnswered ? 'flex':'none';
+  if(state.walkAnswered){
+    document.getElementById('floatbar').innerHTML = `<button class="btn btn-gold" onclick="sndClick();nextWalkStep()">${(state.stepIdx<3)?'ขั้นถัดไป ›':(state.issueIdx+1<w.issues.length?'ประเด็นถัดไป ›':'ดูสรุปผล ›')}</button>`;
+  }
+  return `
+    <h2>${w.title}</h2>
+    <div class="backrow"><button class="btn btn-ghost btn-sm" onclick="sndClick();state.walkCase=null;render();">‹ กลับไปเลือกข้อสอบ</button></div>
+    <h2>${w.title}</h2>
+    <span class="fact-toggle" onclick="sndClick();state.factExpanded=!state.factExpanded;render();">${state.factExpanded?'▲ ย่อโจทย์':'▼ ขยายโจทย์เต็ม'}</span>
+    <div class="fact-block ${state.factExpanded?'':'collapsed'}">${w.fact}</div>
+    <div style="margin-bottom:12px;"><span class="cat-pill">📋 ${issue.name}</span></div>
+    <div class="step-track">
+      ${[0,1,2,3].map(i=>`<div class="step-dot ${i<state.stepIdx?'done':(i===state.stepIdx?'active':'')}"></div>`).join('')}
+    </div>
+    <div class="step-label">
+      <span class="step-badge">ขั้นที่ ${state.stepIdx+1}/4</span>
+      ${stepIcons[state.stepIdx]} ${stepNames[state.stepIdx]}
+    </div>
+    <div style="font-weight:700;font-size:14.5px;margin-bottom:12px;color:var(--text-body);">${step.prompt}</div>
+    <div id="walkChoices">
+      ${step.options.map((opt,i)=>`<button class="choice" data-i="${i}" onclick="answerWalk(${i})">${opt}</button>`).join('')}
+    </div>
+    <div id="walkGuide"></div>
+  `;
+}
+function startWalk(i){ state.walkCase=i; state.issueIdx=0; state.stepIdx=0; state.walkScore=0; state.walkAnswered=false; state.walkCorrectSteps=0; state.factExpanded=false; render(); }
+function answerWalk(i){
+  if(state.walkAnswered) return;
+  const w = WALK[state.walkCase]; const issue = w.issues[state.issueIdx];
+  const stepMap=[
+    {options:issue.issueOptions, correct:issue.issueCorrect},
+    {options:issue.sectionOptions, correct:issue.sectionCorrect},
+    {options:issue.applyOptions, correct:issue.applyCorrect},
+    {options:issue.conclusionOptions, correct:issue.conclusionCorrect},
+  ];
+  const step = stepMap[state.stepIdx];
+  state.walkAnswered=true;
+  document.querySelectorAll('#walkChoices .choice').forEach((btn,idx)=>{
+    btn.disabled=true;
+    if(idx===step.correct) btn.classList.add('correct');
+    else if(idx===i) btn.classList.add('wrong');
+  });
+  if(i===step.correct){ state.walkCorrectSteps++; sndCorrect(); addScore(10,'ถูก ✓'); } else { sndWrong(); addScore(-5,'ผิด ✗'); }
+  const isLastStep = state.stepIdx===3;
+  document.getElementById('walkGuide').innerHTML = isLastStep ? `<div class="guide-box"><b>สรุปเหตุผล:</b> ${issue.guide}</div>` : '';
+  const w2 = WALK[state.walkCase];
+  document.getElementById('floatbar').style.display='flex';
+  document.getElementById('floatbar').innerHTML = `<button class="btn btn-gold" onclick="sndClick();nextWalkStep()">${(state.stepIdx<3)?'ขั้นถัดไป ›':(state.issueIdx+1<w2.issues.length?'ประเด็นถัดไป ›':'ดูสรุปผล ›')}</button>`;
+}
+function nextWalkStep(){
+  const w = WALK[state.walkCase];
+  if(state.stepIdx<3){ state.stepIdx++; state.walkAnswered=false; render(); return; }
+  state.issueIdx++; state.stepIdx=0; state.walkAnswered=false; render();
+}
+
+/* ================= INIT ================= */
+render();
+
+
+/* ── INIT ── */
+GS = loadScore();
+updateScoreUI();
+render();
+</script>
+</body>
+</html>

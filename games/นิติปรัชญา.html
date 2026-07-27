@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>นิติปรัชญา — เอกสารทบทวน 10 ส่วน</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@400;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF9F4;
+  --card:#FFFFFF;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --gold-soft:#F3E8CF;
+  --accent:#2E4A7A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+  --header-h:64px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),
+    var(--paper);
+  color:var(--ink);
+  min-height:100vh;
+  font-size:16px;
+  line-height:1.85;
+}
+
+/* ---------- sticky top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  height:var(--header-h);
+  display:flex;align-items:center;gap:12px;
+  background:rgba(251,249,244,.92);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+  padding:0 16px;
+}
+.topbar .menu-btn{
+  display:none;
+  background:var(--gold-soft);color:#8F6511;border:none;border-radius:10px;
+  padding:8px 12px;font-weight:700;font-size:14px;cursor:pointer;
+  font-family:'Sarabun',sans-serif;
+}
+.topbar .title{
+  font-family:'Noto Serif Thai',serif;font-weight:700;font-size:16px;color:var(--ink);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.topbar .title small{display:block;font-family:'Sarabun',sans-serif;font-weight:400;font-size:12px;color:var(--ink-soft)}
+.topbar .progress-wrap{
+  margin-left:auto;flex:0 0 auto;display:flex;align-items:center;gap:8px;
+}
+.topbar .progress-track{
+  width:110px;height:6px;border-radius:99px;background:var(--line);overflow:hidden;
+}
+.topbar .progress-fill{
+  height:100%;background:linear-gradient(90deg,var(--gold),#8F6511);width:10%;
+  transition:width .25s ease;
+}
+.topbar .progress-label{font-size:12px;color:var(--ink-soft);white-space:nowrap}
+
+/* ---------- layout ---------- */
+.layout{
+  max-width:1180px;margin:0 auto;
+  display:grid;grid-template-columns:260px 1fr;gap:28px;
+  padding:24px 16px 80px;
+}
+nav.sidebar{
+  align-self:start;position:sticky;top:calc(var(--header-h) + 16px);
+  max-height:calc(100vh - var(--header-h) - 32px);overflow-y:auto;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:10px;
+}
+nav.sidebar a{
+  display:flex;gap:10px;align-items:flex-start;
+  text-decoration:none;color:var(--ink-soft);
+  padding:9px 10px;border-radius:10px;font-size:14px;line-height:1.4;
+  border-left:3px solid transparent;
+}
+nav.sidebar a .num{
+  flex:0 0 auto;width:22px;height:22px;border-radius:50%;
+  background:var(--gold-soft);color:#8F6511;font-weight:700;font-size:12px;
+  display:flex;align-items:center;justify-content:center;
+}
+nav.sidebar a:hover{background:var(--gold-soft);color:var(--ink)}
+nav.sidebar a.active{
+  background:var(--gold-soft);color:var(--ink);font-weight:700;
+  border-left-color:var(--gold);
+}
+
+main{min-width:0}
+
+.hero{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:26px 24px;margin-bottom:22px;
+}
+.hero .crest{
+  font-family:'Noto Serif Thai',serif;font-size:12px;letter-spacing:.3em;
+  color:var(--gold);text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:8px;
+}
+.hero .crest::before,.hero .crest::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.hero h1{font-family:'Noto Serif Thai',serif;font-size:clamp(22px,4vw,30px);font-weight:700;margin-bottom:8px}
+.hero p{color:var(--ink-soft);font-size:15px}
+
+section.part{
+  scroll-margin-top:calc(var(--header-h) + 14px);
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:26px 24px;margin-bottom:22px;
+}
+section.part .part-head{
+  display:flex;align-items:center;gap:14px;margin-bottom:6px;padding-bottom:14px;
+  border-bottom:2px solid var(--gold-soft);
+}
+section.part .part-num{
+  flex:0 0 auto;width:44px;height:44px;border-radius:12px;
+  background:linear-gradient(135deg,var(--gold),#8F6511);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Noto Serif Thai',serif;font-weight:700;font-size:18px;
+}
+section.part h2{
+  font-family:'Noto Serif Thai',serif;font-size:clamp(19px,3vw,24px);
+  font-weight:700;color:var(--ink);line-height:1.4;
+}
+section.part .part-sub{color:var(--ink-soft);font-size:13.5px;margin-top:2px}
+
+.block{margin-top:18px}
+.block h3{
+  font-family:'Noto Serif Thai',serif;font-size:16.5px;font-weight:600;
+  color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.block h3::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold);flex:0 0 auto}
+.block ul{padding-left:22px}
+.block li{margin-bottom:7px}
+.block li::marker{color:var(--gold)}
+.block p{margin-bottom:10px}
+
+.quote{
+  margin:14px 0;padding:14px 18px;background:var(--gold-soft);
+  border-left:4px solid var(--gold);border-radius:8px;
+  font-family:'Noto Serif Thai',serif;font-size:14.5px;color:#5c4a1f;line-height:1.9;
+}
+.quote cite{display:block;margin-top:6px;font-family:'Sarabun',sans-serif;font-size:12.5px;color:#8F6511;font-style:normal}
+
+.term{
+  display:inline-block;background:#EFF3FA;color:var(--accent);
+  padding:1px 8px;border-radius:6px;font-weight:600;font-size:.94em;
+}
+
+table.cmp{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+table.cmp th,table.cmp td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+table.cmp th{background:var(--gold-soft);color:#5c4a1f;font-family:'Noto Serif Thai',serif;font-weight:700}
+table.cmp tr:nth-child(even) td{background:#FAF8F2}
+
+.thinkers{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:14px}
+.thinker-card{
+  background:#FAF8F2;border:1px solid var(--line);border-radius:10px;padding:12px 14px;
+}
+.thinker-card .name{font-family:'Noto Serif Thai',serif;font-weight:700;color:var(--ink);font-size:14.5px}
+.thinker-card .years{color:var(--ink-faint);font-size:12px;margin-bottom:6px}
+.thinker-card .desc{font-size:13.5px;color:var(--ink-soft);line-height:1.7}
+
+.nav-arrows{
+  display:flex;justify-content:space-between;gap:12px;margin-top:16px;
+}
+.nav-arrows a{
+  flex:1;text-decoration:none;color:var(--ink);background:var(--card);
+  border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:13.5px;
+  display:flex;flex-direction:column;gap:2px;transition:border-color .15s;
+}
+.nav-arrows a:hover{border-color:var(--gold)}
+.nav-arrows a .lbl{color:var(--ink-faint);font-size:11.5px}
+.nav-arrows a.next{text-align:right;margin-left:auto}
+
+.done-check{
+  display:inline-flex;align-items:center;gap:6px;margin-left:auto;
+  font-size:12.5px;color:var(--ink-soft);cursor:pointer;user-select:none;
+  background:#F4F2EA;border:1px solid var(--line);border-radius:999px;padding:5px 12px;
+}
+.done-check input{accent-color:var(--gold);width:14px;height:14px}
+.part-head-row{display:flex;align-items:center;gap:14px;width:100%}
+
+footer{text-align:center;color:var(--ink-faint);font-size:12.5px;padding:20px 0 10px}
+
+/* ---------- mode tabs ---------- */
+.mode-tabs{
+  display:flex;gap:6px;background:#EFEAE0;border-bottom:1px solid var(--line);
+  padding:8px 16px;overflow-x:auto;
+}
+.mode-tab{
+  flex:0 0 auto;border:none;background:transparent;color:var(--ink-soft);
+  font-family:'Sarabun',sans-serif;font-weight:600;font-size:13.5px;
+  padding:8px 16px;border-radius:999px;cursor:pointer;white-space:nowrap;
+}
+.mode-tab.active{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+
+/* ---------- exam guide ---------- */
+.exam-step{
+  display:flex;gap:14px;margin-bottom:16px;
+}
+.exam-step .exam-num{
+  flex:0 0 auto;width:32px;height:32px;border-radius:50%;
+  background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;
+}
+.exam-step .exam-body{flex:1}
+.exam-step .exam-body h4{font-family:'Noto Serif Thai',serif;font-size:15px;margin-bottom:4px;color:var(--ink)}
+.exam-step .exam-body p{color:var(--ink-soft);font-size:14px}
+.pastq{
+  background:#FAF8F2;border:1px dashed var(--line);border-radius:10px;
+  padding:10px 14px;margin-bottom:8px;font-size:13.5px;color:var(--ink-soft);
+}
+.pastq strong{color:var(--ink)}
+
+/* ---------- story mode ---------- */
+#mode-story{display:none}
+.story-wrap{max-width:760px;margin:0 auto}
+.story-hero{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:24px;margin-bottom:8px;
+}
+.story-hero h1{font-family:'Noto Serif Thai',serif;font-size:clamp(20px,4vw,26px)}
+.story-hero p{color:var(--ink-soft);font-size:14.5px;margin-top:6px}
+.timeline{position:relative;margin-top:10px;padding-left:26px}
+.timeline::before{
+  content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;
+  background:linear-gradient(var(--gold),var(--line));
+}
+.story-node{position:relative;margin-bottom:30px}
+.story-node::before{
+  content:"";position:absolute;left:-26px;top:4px;width:14px;height:14px;border-radius:50%;
+  background:var(--gold);border:3px solid var(--paper);box-shadow:0 0 0 1px var(--gold);
+}
+.story-node h3{font-family:'Noto Serif Thai',serif;color:var(--accent);font-size:17px;margin-bottom:8px}
+.story-node .era{font-size:12px;color:var(--gold);font-weight:700;letter-spacing:.05em;margin-bottom:4px;text-transform:uppercase}
+.story-node p{color:var(--ink);font-size:14.5px;margin-bottom:10px}
+.story-node .link{color:var(--ink-soft);font-size:13px;font-style:italic}
+.img-slot{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  border:1.5px dashed var(--line);border-radius:10px;background:#FAF8F2;
+  color:var(--ink-faint);font-size:12.5px;height:64px;margin:10px 0;
+}
+.img-slot svg{opacity:.5}
+.node-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.node-head h3{margin-bottom:0;flex:1}
+.pastq-title{
+  font-family:'Noto Serif Thai',serif;font-weight:700;font-size:13.5px;
+  color:#8F6511;margin:14px 0 6px;
+}
+
+/* ---------- TTS ---------- */
+.tts-btn{
+  flex:0 0 auto;border:1px solid var(--line);background:var(--card);
+  border-radius:8px;width:32px;height:32px;font-size:15px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;color:var(--accent);
+  transition:background .15s;
+}
+.tts-btn:hover{background:var(--gold-soft)}
+.tts-btn.speaking{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tts-bar{
+  position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
+  z-index:80;display:none;align-items:center;gap:10px;
+  background:var(--ink);color:#fff;border-radius:999px;
+  padding:9px 16px;box-shadow:0 8px 24px rgba(0,0,0,.25);font-size:13px;
+  max-width:92vw;
+}
+.tts-bar.show{display:flex}
+.tts-bar button{
+  background:rgba(255,255,255,.14);border:none;color:#fff;border-radius:50%;
+  width:30px;height:30px;cursor:pointer;font-size:14px;flex:0 0 auto;
+  display:flex;align-items:center;justify-content:center;
+}
+.tts-bar button:hover{background:rgba(255,255,255,.28)}
+.tts-bar .tts-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:40vw;color:#eee}
+.tts-bar select{
+  background:rgba(255,255,255,.14);color:#fff;border:none;border-radius:6px;
+  font-size:12px;padding:4px 6px;
+}
+
+/* ---------- video mode ---------- */
+#mode-video{display:none}
+.video-wrap{max-width:980px;margin:0 auto;padding:24px 16px 80px}
+.video-hero{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:24px;margin-bottom:20px;
+}
+.video-hero h1{font-family:'Noto Serif Thai',serif;font-size:clamp(20px,4vw,26px)}
+.video-hero p{color:var(--ink-soft);font-size:14.5px;margin-top:6px}
+.video-section-title{
+  font-family:'Noto Serif Thai',serif;font-weight:700;font-size:16px;
+  color:var(--accent);margin:22px 0 12px;display:flex;align-items:center;gap:8px;
+}
+.video-section-title::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.video-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px;
+  display:block;text-decoration:none;color:inherit;transition:transform .15s, box-shadow .15s;
+}
+.video-link:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(34,40,58,.14)}
+.video-frame{position:relative;width:100%;padding-bottom:56.25%;background:#111 center/cover no-repeat}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.play-overlay{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.25);
+}
+.play-overlay::before{
+  content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.55));
+}
+.play-overlay{
+  color:#fff;font-size:0;
+}
+.play-overlay::after{
+  content:"▶";position:relative;z-index:1;
+  width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.92);
+  color:#B08A3C;font-size:20px;display:flex;align-items:center;justify-content:center;
+  padding-left:4px;box-shadow:0 4px 14px rgba(0,0,0,.3);
+}
+.video-caption{padding:12px 16px}
+.video-caption h4{font-family:'Noto Serif Thai',serif;font-size:14.5px;color:var(--ink)}
+.video-caption p{font-size:12.5px;color:var(--ink-soft);margin-top:2px}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.video-grid .video-card{margin-bottom:0}
+
+/* mobile */
+.overlay{display:none;position:fixed;inset:0;background:rgba(34,40,58,.4);z-index:60}
+@media (max-width:880px){
+  .layout{grid-template-columns:1fr;padding:16px 12px 60px}
+  .topbar .menu-btn{display:inline-block}
+  nav.sidebar{
+    position:fixed;top:0;left:0;bottom:0;z-index:70;width:82vw;max-width:320px;
+    max-height:none;border-radius:0;transform:translateX(-105%);transition:transform .25s ease;
+  }
+  nav.sidebar.open{transform:translateX(0)}
+  .overlay.open{display:block}
+  .topbar .progress-track{width:70px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="menu-btn" id="menuBtn">☰ สารบัญ</button>
+  <div class="title">นิติปรัชญา <small>เอกสารทบทวน 10 ส่วน · โหมดอ่านล้วน</small></div>
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">0/10 อ่านแล้ว</div>
+  </div>
+</div>
+
+<div class="mode-tabs">
+  <button class="mode-tab active" data-mode="review">📖 อ่านทบทวนรายส่วน</button>
+  <button class="mode-tab" data-mode="story">🕰️ เล่าเรื่องสำนักคิด (ไทม์ไลน์)</button>
+  <button class="mode-tab" data-mode="video">🎬 วิดีโอบรรยาย</button>
+</div>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="layout" id="mode-review">
+  <nav class="sidebar" id="sidebar">
+    <a href="javascript:void(0)" data-jump="p1"><span class="num">1</span> บทนำ: ความรู้ ศาสตร์ และนิติปรัชญา</a>
+    <a href="javascript:void(0)" data-jump="p2"><span class="num">2</span> กฎหมายธรรมชาติ: ยุคกรีก–โรมัน</a>
+    <a href="javascript:void(0)" data-jump="p3"><span class="num">3</span> กฎหมายธรรมชาติ: ยุคสมัยกลาง</a>
+    <a href="javascript:void(0)" data-jump="p4"><span class="num">4</span> รัฐสมัยใหม่ & สำนักกฎหมายบ้านเมือง</a>
+    <a href="javascript:void(0)" data-jump="p5"><span class="num">5</span> กฎหมายธรรมชาติสมัยใหม่</a>
+    <a href="javascript:void(0)" data-jump="p6"><span class="num">6</span> สำนักประวัติศาสตร์กฎหมาย</a>
+    <a href="javascript:void(0)" data-jump="p7"><span class="num">7</span> สังคมวิทยากฎหมาย</a>
+    <a href="javascript:void(0)" data-jump="p8"><span class="num">8</span> ทฤษฎีกฎหมายสามชั้น</a>
+    <a href="javascript:void(0)" data-jump="p9"><span class="num">9</span> มาร์กซิสต์ & สัจนิยมทางกฎหมาย</a>
+    <a href="javascript:void(0)" data-jump="p10"><span class="num">10</span> ความยุติธรรม & ปัญหาร่วมสมัย</a>
+    <a href="javascript:void(0)" data-jump="p11"><span class="num">✎</span> แนวทางการทำข้อสอบ</a>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <div class="crest">เอกสารประกอบการทบทวน</div>
+      <h1>นิติปรัชญา (Philosophy of Law)</h1>
+      <p>สรุปเนื้อหาแบ่งเป็น 10 ส่วน ครอบคลุมภาคทฤษฎีระบบและภาคประวัติศาสตร์ความคิดทางกฎหมาย ตั้งแต่กรีกโบราณจนถึงปัญหาร่วมสมัย ใช้สำหรับอ่านทบทวนต่อเนื่อง — เลื่อนอ่านไปทีละส่วน หรือกดสารบัญด้านซ้ายเพื่อข้ามไปยังหัวข้อที่ต้องการ</p>
+    </div>
+
+    <!-- ================= PART 1 ================= -->
+    <section class="part" id="p1" data-part="1">
+      <div class="part-head">
+        <div class="part-head-row">
+          <div class="part-num">1</div>
+          <div>
+            <h2>บทนำว่าด้วยความรู้ ศาสตร์ และนิติปรัชญา</h2>
+            <div class="part-sub">ขอบเขตของนิติศาสตร์ · 3 แง่มุมของกฎหมาย · ปัญหาหลัก 3 ประการของนิติปรัชญา</div>
+          </div>
+          <button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงส่วนนี้">🔊</button>
+          <label class="done-check"><input type="checkbox" class="mark" data-id="1"> อ่านแล้ว</label>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>นิติศาสตร์ใน 3 แง่มุม</h3>
+        <p>การมองกฎหมายอย่างรอบด้านต้องอาศัย 3 มุมมองประกอบกัน ก่อนจะยกระดับความคิดไปสู่วิชานิติปรัชญาซึ่งเป็นการมองกฎหมายในระดับนามธรรมที่บริสุทธิ์ที่สุด</p>
+        <ul>
+          <li><span class="term">นิติศาสตร์ในแง่แบบแผน</span> — ศึกษากฎหมายที่ใช้บังคับอยู่จริงในปัจจุบัน (Positive Law) เช่นวิชากฎหมายแพ่ง อาญา ที่นักศึกษากฎหมายเรียนตามปกติ</li>
+          <li><span class="term">นิติศาสตร์ในแง่ข้อเท็จจริง</span> — มองกฎหมายผ่านประวัติศาสตร์และสังคมวิทยากฎหมาย คือศึกษาว่ากฎหมายเกิดขึ้น เปลี่ยนแปลง และทำงานจริงในสังคมอย่างไร</li>
+          <li><span class="term">นิติศาสตร์ในแง่คุณค่า</span> — ประเมินว่ากฎหมายที่มีอยู่ "ดี" หรือ "เลว" เพียงใด วัดด้วยมาตรฐานความยุติธรรมหรือศีลธรรม</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>ปัญหาหลัก 3 ประการของนิติปรัชญา</h3>
+        <ul>
+          <li><span class="term">ปัญหาอภิปรัชญา (Metaphysical)</span> — กฎหมายคืออะไร? มีธรรมชาติ/สาระสำคัญเป็นอย่างไร</li>
+          <li><span class="term">ปัญหาญาณวิทยา (Epistemological)</span> — เราจะรู้จักหรือเข้าถึงกฎหมายได้อย่างไร ด้วยเหตุผล ประสบการณ์ หรือการเปิดเผยจากพระเจ้า</li>
+          <li><span class="term">ปัญหาจริยปรัชญา (Ethical)</span> — ความยุติธรรมคืออะไร และกฎหมายควรมีความสัมพันธ์กับศีลธรรมอย่างไร</li>
+        </ul>
+        <p>สามคำถามนี้คือเส้นด้ายที่ร้อยเรียงทุกสำนักความคิดในเอกสารนี้เข้าด้วยกัน — แต่ละสำนักคือคำตอบที่ต่างกันต่อคำถามชุดเดียวกันนี้</p>
+      </div>
+
+      <div class="nav-arrows">
+        <span></span>
+        <a class="next" href="javascript:void(0)" data-jump="p2"><span class="lbl">ถัดไป</span>ส่วนที่ 2: กฎหมายธรรมชาติ ยุคกรีก–โรมัน →</a>
+      </div>
+    </section>
+
+    <!-- ================= PART 2 ================= -->
+    <section class="part" id="p2" data-part="2">
+      <div class="part-head">
+        <div class="part-head-row">
+          <div class="part-num">2</div>
+          <div>
+            <h2>สำนักกฎหมายธรรมชาติ (ยุคกรีกและโรมัน)</h2>
+            <div class="part-sub">เฮราคลิตุส · โซโฟคลีส · เพลโต · อริสโตเติล · สโตอิก · ซิเซโร</div>
+          </div>
+          <button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงส่วนนี้">🔊</button>
+          <label class="done-check"><input type="checkbox" class="mark" data-id="2"> อ่านแล้ว</label>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>แนวคิดตั้งต้น</h3>
+        <p>ยุคกรีกโบราณยังไม่มีศาสนาในความหมายปัจจุบัน ชาวกรีกเคารพ "ธรรมชาติ" ประหนึ่งเทพเจ้า จึงเชื่อว่ากฎเกณฑ์ของมนุษย์เป็นส่วนหนึ่งของกฎเกณฑ์จักรวาลที่เป็นสากลและนิรันดร <span class="term">เฮราคลิตุส</span> บิดาผู้ก่อกำเนิดสำนักนี้ กล่าวว่าแก่นสารของชีวิตมาจากความสัมพันธ์ของสรรพสิ่งที่ปรากฏอยู่แล้วในธรรมชาติ มิได้เกิดจากเจตจำนงของผู้มีอำนาจคนใด กฎหมายจึงเป็นภววิสัย (Objective Law) ที่อยู่เหนือรัฐ ส่วน <span class="term">โซโฟคลีส</span> ในงานเขียน <em>Antigone</em> ยืนยันว่ากฎของมนุษย์ที่ขัดกับกฎธรรมชาติย่อมเป็นโมฆะ</p>
+      </div>
+
+      <div class="thinkers">
+        <div class="thinker-card">
+          <div class="name">เพลโต (Plato)</div>
+          <div class="years">ทฤษฎีแห่งแบบ / ราชาปราชญ์</div>
+          <div class="desc">กฎหมายธรรมชาติคือ "แบบ" อันไม่เปลี่ยนแปลง ใช้เป็นบรรทัดฐานของกฎหมายบ้านเมือง มีเพียงราชาปราชญ์ผู้มีญาณอันบริสุทธิ์เท่านั้นที่เข้าถึงได้ (ใน <em>The Republic</em>) แต่ในบั้นปลายชีวิต (<em>The Laws</em>) เพลโตกลับยอมรับว่า "รัฐกฎหมาย" ที่ผู้ปกครองต้องอยู่ใต้กฎหมาย เป็นทางเลือกที่ดีที่สุดอันดับสอง เพราะราชาปราชญ์ที่สมบูรณ์แบบหาได้ยาก</div>
+        </div>
+        <div class="thinker-card">
+          <div class="name">อริสโตเติล (Aristotle)</div>
+          <div class="years">ศิษย์เพลโต ผู้แย้งเรื่องราชาปราชญ์</div>
+          <div class="desc">เชื่อว่ามนุษย์ทุกคนมีเหตุผลในตัวเอง ไม่จำเป็นต้องมีราชาปราชญ์ชี้นำ สนับสนุนการปกครองโดยกฎหมาย (กฎหมายคือ "เหตุผลที่ปราศจากกิเลสตัณหา") แบ่งความยุติธรรมเป็น Distributive (แบ่งสรรตามสัดส่วน) และ Commutative/Corrective (ชดเชยทดแทน) และเสนอหลัก Equity (epieikeia) เพื่อแก้ข้อบกพร่องของกฎเกณฑ์ตายตัว</div>
+        </div>
+        <div class="thinker-card">
+          <div class="name">สำนักสโตอิก (Zeno)</div>
+          <div class="years">Logos และคอสโมโพลิแทน</div>
+          <div class="desc">เชื่อว่าจักรวาลถูกปกครองด้วยเหตุผลสากล (Logos) มนุษย์ทุกคนเท่าเทียมกันในฐานะผู้มีส่วนร่วมใน Logos — ไม่แบ่งแยกโรมัน/คนป่าเถื่อน หรือไทย/ทาส เป็นรากฐานของแนวคิดสิทธิมนุษยชนสากลในเวลาต่อมา อุดมคติสูงสุดคือ "รัฐโลก" (cosmopolis)</div>
+        </div>
+        <div class="thinker-card">
+          <div class="name">ซิเซโร (Cicero, 106–43 BC)</div>
+          <div class="years">True law is right reason</div>
+          <div class="desc">สังเคราะห์ความคิดโสกราตีส อริสโตเติล และสโตอิก นิยามกฎหมายธรรมชาติแบบคลาสสิก และปฏิเสธว่ากฎหมายที่อยุติธรรมอย่างยิ่ง (เช่น อนุญาตให้ทรราชประหารคนโดยไม่พิจารณาคดี) ไม่สมควรเรียกว่ากฎหมาย</div>
+        </div>
+      </div>
+
+      <div class="quote">
+        "กฎหมายที่แท้จริงคือเหตุผลที่ถูกต้อง สอดคล้องกับธรรมชาติ แผ่ซ่านไปในทุกสิ่งอย่างสม่ำเสมอและเป็นนิรันดร์ ... กฎหมายนี้ไม่เป็นอย่างหนึ่งที่กรุงโรม และเป็นอีกอย่างหนึ่งในเอเธนส์ แต่คงเป็นกฎหมายอันเดียวไม่เปลี่ยนแปลง ผูกพันบังคับทุกชาติทุกยุคทุกสมัย"
+        <cite>— ซิเซโร, นิยามกฎหมายธรรมชาติแบบคลาสสิก</cite>
+      </div>
+
+      <div class="block">
+        <h3>มรดกทางกฎหมายโรมัน</h3>
+        <p>โรมันรับกฎหมายธรรมชาติจากกรีกผ่านสำนักสโตอิก แบ่งกฎหมายเป็น <span class="term">Jus Civile</span> (ใช้กับพลเมืองโรมันด้วยกัน) และ <span class="term">Jus Gentium</span> (ใช้กับคนต่างด้าว สะท้อนหลักการสากล) นักกฎหมายโรมันในทางปฏิบัติเน้น <em>jus naturale</em>, <em>naturalis ratio</em> มากกว่าทฤษฎีนามธรรม จนกระทั่งจักรพรรดิจัสติเนียนรวบรวมเป็นประมวลกฎหมาย ซึ่งถูกค้นพบใหม่ในยุคกลางที่เมือง Pisa นำไปสู่การก่อตั้งสำนักกฎหมายที่ Bologna</p>
+      </div>
+
+      <div class="nav-arrows">
+        <a href="javascript:void(0)" data-jump="p1"><span class="lbl">← ก่อนหน้า</span>ส่วนที่ 1: บทนำ</a>
+        <a class="next" href="javascript:void(0)" data-jump="p3"><span class="lbl">ถัดไป</span>ส่วนที่ 3: กฎหมายธรรมชาติ ยุคสมัยกลาง →</a>
+      </div>
+    </section>
+
+    <!-- ================= PART 3 ================= -->
+    <section class="part" id="p3" data-part="3">
+      <div class="part-head">
+        <div class="part-head-row">
+          <div class="part-num">3</div>
+          <div>
+            <h2>สำนักกฎหมายธรรมชาติ (ยุคสมัยกลาง)</h2>
+            <div class="part-sub">นักบุญออกัสติน · นักบุญโทมัส อไควนัส · กฎหมาย 4 ลำดับชั้น</div>
+          </div>
+          <button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงส่วนนี้">🔊</button>
+          <label class="done-check"><input type="checkbox" class="mark" data-id="3"> อ่านแล้ว</label>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>นักบุญออกัสติน (St. Augustine, ค.ศ. 354–430)</h3>
+        <p>เขียน <em>De Civitate Dei</em> (นครแห่งพระเจ้า) ผสานปรัชญากรีกแบบเพลโตเข้ากับศาสนาคริสต์ แบ่งกฎหมายเป็น 3 ระดับ: <span class="term">Lex Aeterna</span> (กฎหมายนิรันดร — พระประสงค์ของพระเจ้า), <span class="term">Lex Naturalis</span> (กฎหมายธรรมชาติ — รอยพิมพ์ไม่สมบูรณ์ของกฎหมายนิรันดรในใจมนุษย์), และ <span class="term">Lex Temporalis</span> (กฎหมายเฉพาะกาล — กฎหมายบ้านเมือง ซึ่งขัดกับกฎที่สูงกว่าไม่ได้)</p>
+      </div>
+
+      <div class="block">
+        <h3>นักบุญโทมัส อไควนัส (St. Thomas Aquinas, ค.ศ. 1225–1274)</h3>
+        <p>บิดาแห่งสำนัก Scholasticism สังเคราะห์ปรัชญาอริสโตเติลเข้ากับเทววิทยาคริสต์ นิยามกฎหมายว่าคือ <em>"บัญญัติแห่งเหตุผลเพื่อความดีส่วนรวม (bonum commune) ที่กำหนดโดยผู้ดูแลชุมชนและประกาศใช้"</em> และจัดลำดับชั้นกฎหมายไว้ 4 ระดับ:</p>
+        <table class="cmp">
+          <tr><th>ลำดับ</th><th>ชื่อ</th><th>ความหมาย</th></tr>
+          <tr><td>1</td><td>Lex Aeterna<br><span style="color:var(--ink-faint)">กฎหมายนิรันดร</span></td><td>ปัญญาและเหตุผลของพระเจ้าที่กำกับจักรวาลทั้งหมด มีเพียงพระเจ้าเท่านั้นที่รู้ทั้งหมด</td></tr>
+          <tr><td>2</td><td>Lex Naturalis<br><span style="color:var(--ink-faint)">กฎหมายธรรมชาติ</span></td><td>ส่วนหนึ่งของกฎหมายนิรันดรที่มนุษย์เข้าถึงได้ด้วยเหตุผล หลักพื้นฐานคือ "จงทำดี ละเว้นความชั่ว"</td></tr>
+          <tr><td>3</td><td>Lex Divina<br><span style="color:var(--ink-faint)">กฎหมายศักดิ์สิทธิ์</span></td><td>กฎที่มนุษย์รู้ได้ด้วยการเปิดเผยของพระเจ้าเท่านั้น เช่น บัญญัติ 10 ประการ</td></tr>
+          <tr><td>4</td><td>Lex Humana<br><span style="color:var(--ink-faint)">กฎหมายมนุษย์</span></td><td>การปรับกฎหมายธรรมชาติให้เข้ากับเวลาสถานที่ หากขัดกับความดีส่วนรวมย่อมเสียความชอบธรรม</td></tr>
+        </table>
+        <p><strong>หลักที่สำคัญ:</strong> กฎที่อยู่ลำดับต่ำกว่าจะขัดหรือแย้งกับกฎที่อยู่สูงกว่าไม่ได้ — เป็นรากฐานของแนวคิดที่ว่ารัฐธรรมนูญเป็นกฎหมายสูงสุดในปัจจุบัน นอกจากนี้อไควนัสยังเป็นผู้อธิบาย <span class="term">สิทธิในการต่อต้านผู้ปกครอง (Civil Disobedience)</span> เป็นครั้งแรก หากผู้ปกครองเป็นอันตรายต่อชีวิตทรัพย์สินของประชาชน</p>
+      </div>
+
+      <div class="quote">
+        "เมื่อความยุติธรรมถูกพรากไป อาณาจักรก็ไม่ต่างอะไรกับการปล้นครั้งใหญ่"
+        <cite>— St. Thomas Aquinas</cite>
+      </div>
+
+      <div class="block">
+        <h3>จุดสิ้นสุดของยุคกลาง</h3>
+        <p><span class="term">Duns Scotus</span> แยกศรัทธาออกจากเหตุผล ส่วน <span class="term">William of Ockham</span> เสนอว่าความรู้เชิงประจักษ์เท่านั้นให้ความแน่นอน แนวคิดสากลเป็นเพียง "ชื่อเรียก" (nominalism) — เป็นจุดเริ่มต้นของการสั่นคลอนอำนาจศาสนจักร ประกอบกับเหตุการณ์ เช่น การขายใบไถ่บาป นำไปสู่ทฤษฎีดาบสองเล่มที่แยกฝ่ายอาณาจักรออกจากฝ่ายศาสนจักร เป็นทางเข้าสู่ยุคสมัยใหม่</p>
+      </div>
+
+      <div class="nav-arrows">
+        <a href="javascript:void(0)" data-jump="p2"><span class="lbl">← ก่อนหน้า</span>ส่วนที่ 2: กรีก–โรมัน</a>
+        <a class="next" href="javascript:void(0)" data-jump="p4"><span class="lbl">ถัดไป</span>ส่วนที่ 4: สำนักกฎหมายบ้านเมือง →</a>
+      </div>
+    </section>
+
+    <!-- ================= PART 4 ================= -->
+    <section class="part" id="p4" data-part="4">
+      <div class="part-head">
+        <div class="part-head-row">
+          <div class="part-num">4</div>
+          <div>
+            <h2>รัฐสมัยใหม่และสำนักกฎหมายบ้านเมือง (Legal Positivism)</h2>
+            <div class="part-sub">ฮอบส์ · ออสติน · เคลเซ่น · ฮาร์ต · Separation Thesis</div>
+          </div>
+          <button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงส่วนนี้">🔊</button>
+          <label class="done-check"><input type="checkbox" class="mark" data-id="4"> อ่านแล้ว</label>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>แก่นความคิด</h3>
+        <p>เมื่อรัฐสมัยใหม่ก่อตัวขึ้นพร้อมอำนาจอธิปไตยเด็ดขาด สำนักนี้เสนอว่า <span class="term">"กฎหมายคือคำสั่งของรัฏฐาธิปัตย์"</span> (ผู้มีอำนาจสูงสุดในรัฐ) แยกกฎหมายออกจากศีลธรรมและความยุติธรรมอย่างเด็ดขาด เรียกว่า <span class="term">Separation Thesis</span></p>
+      </div>
+
+      <div class="thinkers">
+        <div class="thinker-card">
+          <div class="name">โทมัส ฮอบส์ (Thomas Hobbes)</div>
+          <div class="desc">เชื่อว่ามนุษย์เห็นแก่ตัวและโหดร้ายตามธรรมชาติ จึงต้องทำสัญญาภักดี (Pactum Subjectionis) มอบอำนาจเด็ดขาดให้รัฏฐาธิปัตย์ เป็นรากฐานของสมบูรณาญาสิทธิราชย์ และเป็นที่มาของแนวคิดที่ว่า "คำสั่ง" ของรัฏฐาธิปัตย์คือกฎหมาย</div>
+        </div>
+        <div class="thinker-card">
+          <div class="name">จอห์น ออสติน (John Austin, 1790–1859)</div>
+          <div class="desc">ผู้ก่อตั้ง Command Theory: "กฎหมายคือคำสั่งของรัฏฐาธิปัตย์ ซึ่งได้รับการสนับสนุนด้วยการข่มขู่ลงโทษ" องค์ประกอบหลัก 3 อย่าง คือ คำสั่ง (Command), รัฏฐาธิปัตย์ (Sovereign), สภาพบังคับ (Sanction)</div>
+        </div>
+        <div class="thinker-card">
+          <div class="name">ฮันส์ เคลเซ่น (Hans Kelsen)</div>
+          <div class="desc">เจ้าของ Pure Theory of Law ปฏิเสธแนวคิด "คำสั่ง/เจตจำนง" ของออสติน ต้องการแยกกฎหมายออกจากศีลธรรม การเมือง ศาสนาอย่างเด็ดขาด เพื่อวิเคราะห์กฎหมายจากตัวบทล้วนๆ ผ่านแนวคิด Grundnorm (บรรทัดฐานพื้นฐาน)</div>
+        </div>
+        <div class="thinker-card">
+          <div class="name">H.L.A. Hart</div>
+          <div class="desc">วิจารณ์ออสตินว่าเรียบง่ายเกินไป เสนอว่ากฎหมายคือ "ระบบของกฎเกณฑ์" ประกอบด้วย <em>กฎปฐมภูมิ (Primary Rules)</em> ที่กำหนดหน้าที่ และ <em>กฎทุติยภูมิ (Secondary Rules)</em> ที่เป็น "กฎเกี่ยวกับกฎ" เช่น กฎการรับรอง (Rule of Recognition) ยอมรับว่ามี "เนื้อหาอย่างน้อยที่สุดของกฎหมายธรรมชาติ" (Minimum Content of Natural Law)</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>ข้อวิพากษ์วิจารณ์</h3>
+        <ul>
+          <li><strong>จากสำนักธรรมชาตินิยม:</strong> กฎหมายที่ไม่เป็นธรรมไม่ใช่กฎหมายที่แท้จริง (Unjust Law is No Law) — เหตุการณ์หลังสงครามโลกครั้งที่ 2 (กฎหมายนาซี) แสดงให้เห็นอันตรายของการแยกกฎหมายจากศีลธรรมโดยสิ้นเชิง</li>
+          <li><strong>จากสำนักประวัติศาสตร์:</strong> กฎหมายไม่ได้มาจากเจตจำนงของรัฏฐาธิปัตย์ แต่งอกเงยจากจิตวิญญาณประชาชาติ</li>
+          <li><strong>ภายในสำนักเอง:</strong> ฮาร์ตและเคลเซ่นวิจารณ์ออสตินว่าไม่อธิบายความต่อเนื่องของกฎหมายเมื่อรัฏฐาธิปัตย์เปลี่ยน และไม่เหมาะกับระบอบประชาธิปไตย</li>
+        </ul>
+      </div>
+
+      <div class="nav-arrows">
+        <a href="javascript:void(0)" data-jump="p3"><span class="lbl">← ก่อนหน้า</span>ส่วนที่ 3: ยุคสมัยกลาง</a>
+        <a class="next" href="javascript:void(0)" data-jump="p5"><span class="lbl">ถัดไป</span>ส่วนที่ 5: กฎหมายธรรมชาติสมัยใหม่ →</a>
+      </div>
+    </section>
+
+    <!-- ================= PART 5 ================= -->
+    <section class="part" id="p5" data-part="5">
+      <div class="part-head">
+        <div class="part-head-row">
+          <div class="part-num">5</div>
+          <div>
+            <h2>สำนักกฎหมายธรรมชาติสมัยใหม่ (Modern Natural Law)</h2>
+            <div class="part-sub">โกรเชียส · ฮอบส์ · ล็อค · มองเตสกิเออ · รุสโซ · สัญญาประชาคม</div>
+          </div>
+          <button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงส่วนนี้">🔊</button>
+          <label class="done-check"><input type="checkbox" class="mark" data-id="5"> อ่านแล้ว</label>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>การแปรสภาพจากศาสนาสู่เหตุผล</h3>
+        <p><span class="term">ฮิวโก โกรเชียส (Hugo Grotius)</span> เสนอว่ากฎหมายธรรมชาติย่อมดำรงอยู่ได้ แม้สมมติว่าไม่มีพระเจ้าอยู่จริง (etsi Deus non daretur) เป็นจุดเปลี่ยนสำคัญที่ทำให้กฎหมายธรรมชาติยึดโยงกับ "เหตุผลของมนุษย์" แทนความเชื่อทางศาสนา สอดคล้องกับยุคฟื้นฟูศิลปวิทยาการ การปฏิรูปศาสนา และความเชื่อมั่นในเหตุผลนิยม (Rationalism)</p>
+      </div>
+
+      <div class="block">
+        <h3>ทฤษฎีสัญญาประชาคม (Social Contract Theory)</h3>
+        <table class="cmp">
+          <tr><th>นักคิด</th><th>มุมมองต่อธรรมชาติมนุษย์</th><th>รูปแบบสัญญา / ผล</th></tr>
+          <tr><td><strong>Thomas Hobbes</strong></td><td>เห็นแก่ตัวและโหดร้าย</td><td>สัญญาภักดี (Pactum Subjectionis) — มอบอำนาจเด็ดขาดแก่ผู้ปกครอง → สมบูรณาญาสิทธิราชย์</td></tr>
+          <tr><td><strong>John Locke</strong></td><td>มีสิทธิเสรีภาพตามธรรมชาติ แต่ไร้ขอบเขตจะขัดแย้งกัน</td><td>สัญญาสหภาพ (Pactum Unionis) — มอบอำนาจบางส่วน สงวนสิทธิธรรมชาติไว้ รัฐมีอำนาจจำกัด หากละเมิดถือผิดสัญญา</td></tr>
+          <tr><td><strong>Rousseau</strong></td><td>โอบอ้อมอารีแต่ขาดความมั่นคงในสิทธิ</td><td>สละสิทธิให้ส่วนรวม เกิดเจตจำนงทั่วไป (General Will) → รากฐานประชาธิปไตยรวมศูนย์ เสียงข้างมากผูกพันเสียงข้างน้อย</td></tr>
+        </table>
+        <p><span class="term">มองเตสกิเออ (Montesquieu)</span> เสนอหลักการแบ่งแยกอำนาจ (นิติบัญญัติ บริหาร ตุลาการ) เพื่อคานอำนาจกัน ป้องกันการใช้อำนาจเกินขอบเขต ("Power tends to corrupt")</p>
+      </div>
+
+      <div class="block">
+        <h3>อิมมานูเอล คานท์ (Kant)</h3>
+        <p>แยกโลกแห่งเหตุผลบริสุทธิ์ (สิ่งที่เป็นอยู่) กับโลกแห่งสติปัญญา (สิ่งที่ควรจะเป็น/เสรีภาพ) นิยามกฎหมายว่าเป็นสภาพการณ์ที่การเลือกอย่างอิสระของบุคคลหนึ่งดำรงอยู่ร่วมกันได้กับการเลือกอย่างอิสระของผู้อื่น คานท์วิจารณ์กฎหมายธรรมชาติแบบตายตัวว่าไม่สอดคล้องกับโลกแห่งประสบการณ์จริง — เป็นจุดเปลี่ยนที่ปูทางไปสู่สำนักประวัติศาสตร์</p>
+      </div>
+
+      <div class="block">
+        <h3>คุณูปการต่อยุคปัจจุบัน</h3>
+        <p>แนวคิดเรื่องสิทธิเสรีภาพขั้นพื้นฐาน การแบ่งแยกอำนาจ และสัญญาประชาคม เป็นรากฐานของรัฐธรรมนูญและระบอบประชาธิปไตยสมัยใหม่ นำไปสู่การจัดทำประมวลกฎหมายในภาคพื้นยุโรป เช่น Code Napoleon (1804) ของฝรั่งเศส</p>
+      </div>
+
+      <div class="nav-arrows">
+        <a href="javascript:void(0)" data-jump="p4"><span class="lbl">← ก่อนหน้า</span>ส่วนที่ 4: สำนักกฎหมายบ้านเมือง</a>
+        <a class="next" href="javascript:void(0)" data-jump="p6"><span class="lbl">ถัดไป</span>ส่วนที่ 6: สำนักประวัติศาสตร์ →</a>
+      </div>
+    </section>
+
+    <!-- ================= PART 6 ================= -->
+    <section class="part" id="p6" data-part="6">
+      <div class="part-head">
+        <div class="part-head-row">
+          <div class="part-num">6</div>
+          <div>
+            <h2>สำนักประวัติศาสตร์กฎหมาย (Historical School)</h2>
+            <div class="part-sub">ซาวิญญี่ · Volksgeist · การคัดค้านประมวลกฎหมายเยอรมัน</div>
+          </div>
+          <button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงส่วนนี้">🔊</button>
+          <label class="done-check"><input type="checkbox" class="mark" data-id="6"> อ่านแล้ว</label>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>ที่มาและข้อโต้แย้ง</h3>
+        <p>เกิดขึ้นเมื่อศาสตราจารย์ Thibaut เสนอให้จัดทำประมวลกฎหมายแพ่งเยอรมันเลียนแบบฝรั่งเศส เพื่อเผยแพร่แนวคิดประชาธิปไตยและรวมชนชาติเยอรมัน แต่ <span class="term">ซาวิญญี่ (Von Savigny)</span> โต้แย้งว่ากฎหมายไม่ใช่สิ่งที่มนุษย์สร้างขึ้นตามใจชอบด้วยเหตุผลสากล แต่เป็นสิ่งที่เกิดขึ้นเองและเติบโตไปตามประวัติศาสตร์ของแต่ละชนชาติ เหมือนภาษาประจำชาติ</p>
+      </div>
+
+      <div class="block">
+        <h3>Volksgeist — จิตวิญญาณประชาชาติ</h3>
+        <p>ตัวกำหนดธรรมชาติของกฎหมายคือลักษณะเฉพาะของชนชาติ ซึ่งซาวิญญี่เรียกว่า Volksgeist มีความหมาย 3 นัย: (1) พฤติกรรมร่วมของประชาชน (2) จิตสำนึกร่วมของประชาชน (ความรู้สึกผิดชอบชั่วดี) และ (3) เจตจำนงของประชาชน เมื่อสิ่งเหล่านี้ปฏิบัติสืบเนื่องนานพอ (ราว 30 ปี) ย่อมกลายเป็นจารีตประเพณี</p>
+        <p><strong>ทฤษฎีวิวัฒนาการกฎหมาย:</strong> ในยุคแรก Volksgeist แสดงออกผ่านประเพณี → กฎหมายชาวบ้าน (Volksrecht) เมื่อสังคมซับซ้อนขึ้น ต้องอาศัยนักกฎหมายปรุงแต่งหลักกฎหมาย → กฎหมายของนักกฎหมาย (Juristenrecht) การนิติบัญญัติจึงเป็นเพียง <em>"การบันทึกผลของวิชานิติศาสตร์"</em> ไม่ใช่การสร้างกฎหมายตามอำเภอใจ — กฎหมายจึงเป็นสิ่งที่ถูกค้นพบ ไม่ใช่สิ่งที่ถูกสร้างขึ้น</p>
+      </div>
+
+      <div class="block">
+        <h3>เปรียบเทียบกับสำนักกฎหมายธรรมชาติ</h3>
+        <table class="cmp">
+          <tr><th>ประเด็น</th><th>สำนักธรรมนิยม (Natural Law)</th><th>สำนักประวัติศาสตร์ (Historical)</th></tr>
+          <tr><td>แหล่งที่มา</td><td>ธรรมชาติของมนุษย์ ศีลธรรม เหตุผล</td><td>ประวัติศาสตร์ จารีตประเพณี Volksgeist</td></tr>
+          <tr><td>ลักษณะ</td><td>สากลและนิรันดร (Universal & Eternal)</td><td>เฉพาะตัวแต่ละชาติ เปลี่ยนแปลงได้</td></tr>
+          <tr><td>มุมมองต่อเหตุผล</td><td>เหตุผลสากล (Universal Ratio) เหมือนกันทุกชาติ</td><td>Volksgeist ซับซ้อนกว่าเหตุผลล้วน มีอารมณ์ วัฒนธรรมร่วมด้วย</td></tr>
+          <tr><td>ผลต่อการทำประมวลกฎหมาย</td><td>ฝรั่งเศส: Code Civil 1804 (เร่งบัญญัติตามเหตุผลสากล)</td><td>เยอรมนี: BGB 1896 (ล่าช้าเกือบศตวรรษ เพราะต้องศึกษาจารีตก่อน)</td></tr>
+        </table>
+      </div>
+
+      <div class="block">
+        <h3>จุดอ่อน</h3>
+        <p>มองไม่เห็นบทบาทของการนิติบัญญัติเชิงรุกในปัจจุบัน ที่จำเป็นต้องบัญญัติกฎหมายเพื่อตอบสนองการพัฒนาสังคมสมัยใหม่โดยตรง (เช่นกฎหมายเทคนิคประเภท mala prohibita) ซึ่งไม่ได้รอการก่อตัวของจารีตประเพณี</p>
+      </div>
+
+      <div class="nav-arrows">
+        <a href="javascript:void(0)" data-jump="p5"><span class="lbl">← ก่อนหน้า</span>ส่วนที่ 5: กฎหมายธรรมชาติสมัยใหม่</a>
+        <a class="next" href="javascript:void(0)" data-jump="p7"><span class="lbl">ถัดไป</span>ส่วนที่ 7: สังคมวิทยากฎหมาย →</a>
+      </div>
+    </section>
+
+    <!-- ================= PART 7 ================= -->
+    <section class="part" id="p7" data-part="7">
+      <div class="part-head">
+        <div class="part-head-row">
+          <div class="part-num">7</div>
+          <div>
+            <h2>สำนักสังคมวิทยากฎหมาย (Sociological Jurisprudence)</h2>
+            <div class="part-sub">Law in action vs Law in books · รอสโค พาวด์ · วิศวกรรมสังคม</div>
+          </div>
+          <button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงส่วนนี้">🔊</button>
+          <label class="done-check"><input type="checkbox" class="mark" data-id="7"> อ่านแล้ว</label>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>กฎหมายในฐานะปรากฏการณ์ทางสังคม</h3>
+        <p>สำนักนี้ให้ความสำคัญกับ <span class="term">กฎหมายที่มีผลบังคับใช้จริงในสังคม (Law in action)</span> มากกว่าตัวบทที่เขียนไว้เฉยๆ (Law in books) โดยสนใจว่ากฎหมายทำหน้าที่และส่งผลต่อสังคมอย่างไรจริง ไม่ใช่เพียงสิ่งที่บัญญัติไว้บนกระดาษ</p>
+      </div>
+
+      <div class="block">
+        <h3>รอสโค พาวด์ (Roscoe Pound) — วิศวกรรมสังคม</h3>
+        <p>เสนอทฤษฎี <span class="term">"วิศวกรรมสังคม" (Social Engineering)</span> มองนักกฎหมายเสมือนวิศวกรผู้ใช้กฎหมายเป็นเครื่องมือจัดระเบียบและถ่วงดุลผลประโยชน์ต่างๆ ในสังคมให้สมดุล ได้แก่ ผลประโยชน์ปัจเจกชน (individual interests) ผลประโยชน์มหาชน (public interests) และผลประโยชน์สังคม (social interests) — กฎหมายที่ดีต้องทำหน้าที่ประสานผลประโยชน์ที่ขัดแย้งกันเหล่านี้ ไม่ใช่เพียงบังคับใช้กฎเกณฑ์ตายตัว</p>
+      </div>
+
+      <div class="block">
+        <h3>ตำแหน่งเมื่อเทียบกับสำนักอื่น</h3>
+        <p>สังคมวิทยากฎหมายสนใจ "ความมีประโยชน์แห่งสังคม" (Expediency) ซึ่งสอดคล้องกับองค์ประกอบที่สามในทฤษฎีของ Radbruch (นักคิดศตวรรษที่ 20 ที่เสนอว่ากฎหมายประกอบด้วยความยุติธรรม ความแน่นอน และ Expediency ร่วมกัน) แนวคิดนี้แตกต่างจากสำนักปฏิฐานนิยมที่สนใจเพียงรูปแบบ/กระบวนการออกกฎหมาย และต่างจากสำนักประวัติศาสตร์ที่มองย้อนอดีต เพราะสังคมวิทยากฎหมายมองไปข้างหน้า — กฎหมายควรถูกออกแบบเพื่อทำหน้าที่บางอย่างในสังคมปัจจุบันและอนาคต</p>
+      </div>
+
+      <div class="nav-arrows">
+        <a href="javascript:void(0)" data-jump="p6"><span class="lbl">← ก่อนหน้า</span>ส่วนที่ 6: สำนักประวัติศาสตร์</a>
+        <a class="next" href="javascript:void(0)" data-jump="p8"><span class="lbl">ถัดไป</span>ส่วนที่ 8: ทฤษฎีกฎหมายสามชั้น →</a>
+      </div>
+    </section>
+
+    <!-- ================= PART 8 ================= -->
+    <section class="part" id="p8" data-part="8">
+      <div class="part-head">
+        <div class="part-head-row">
+          <div class="part-num">8</div>
+          <div>
+            <h2>ทฤษฎีกฎหมายสามชั้น (Three-Layer Theory of Law)</h2>
+            <div class="part-sub">ศ.ดร.ปรีดี เกษมทรัพย์ · Volksrecht · Juristenrecht · Technical Law</div>
+          </div>
+          <button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงส่วนนี้">🔊</button>
+          <label class="done-check"><input type="checkbox" class="mark" data-id="8"> อ่านแล้ว</label>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>แนวคิดหลัก</h3>
+        <p>ทฤษฎีของอาจารย์ปรีดี เกษมทรัพย์ มองว่ากฎหมายก่อตัวขึ้นเองในสังคมและค่อยๆ คลี่คลายวิวัฒนาการต่อเนื่องมาถึงปัจจุบัน ไม่ได้เกิดจากการสร้างขึ้นโดยเจตจำนงของมนุษย์แต่อย่างใด เปรียบเสมือน <em>"เนื้อหมูสามชั้น"</em> — แม้เป็นเนื้อเดียวกันแต่ประกอบด้วยชั้นที่ต่างลักษณะซ้อนกันอยู่ 3 ชั้น เป็นความคิดที่ใช้วิจารณ์ทั้งสำนักกฎหมายบ้านเมืองและสำนักประวัติศาสตร์ไปพร้อมกัน</p>
+      </div>
+
+      <div class="block">
+        <h3>วิวัฒนาการกฎหมาย 3 ยุค</h3>
+        <table class="cmp">
+          <tr><th>ยุค</th><th>ชื่อ</th><th>ลักษณะ</th></tr>
+          <tr><td>1</td><td><strong>กฎหมายชาวบ้าน</strong><br>(Volksrecht)</td><td>รู้ได้จากสามัญสำนึกว่าสิ่งใดถูกสิ่งใดผิด เช่น คนป่ายิงกวางแล้วควรเป็นเจ้าของกรรมสิทธิ์ — ไม่ต้องเรียนก็เข้าใจได้ ชาวบ้านทุกคนเป็นผู้ทรงกฎหมาย</td></tr>
+          <tr><td>2</td><td><strong>กฎหมายของนักกฎหมาย</strong><br>(Juristenrecht)</td><td>เมื่อเหตุการณ์ซับซ้อนขึ้น ต้องใช้ผู้มีความรู้ปรุงแต่งหลักกฎหมายด้วยเหตุผล เช่น กวางที่ถูกยิงแต่ยังไม่ตายวิ่งไปที่ดินคนอื่น ใครเป็นเจ้าของ — เป็นสิ่งที่ต้องเรียนจึงจะเข้าใจ</td></tr>
+          <tr><td>3</td><td><strong>กฎหมายเทคนิค</strong><br>(Technical Law)</td><td>บัญญัติขึ้นด้วยเหตุผลทางเทคนิคเพื่อความมุ่งหมายเฉพาะ เช่น กฎหมายจราจร ไม่ได้ชี้วัดว่าผู้ฝ่าฝืนเป็นคนดีหรือเลว กฎหมายสมัยใหม่ส่วนใหญ่เป็นประเภทนี้</td></tr>
+        </table>
+        <p>ทฤษฎีกฎหมาย (Theory of Law) ของสำนักนี้คือ <span class="term">แบบแผนความประพฤติของคนในสังคม (Norm)</span> ที่มีกระบวนการบังคับเป็นกิจจะลักษณะ (Organized Sanction)</p>
+      </div>
+
+      <div class="block">
+        <h3>ข้อเสนอในการออกกฎหมาย</h3>
+        <ul>
+          <li>ต้องมีความชัดเจนแน่นอนพอสมควร</li>
+          <li>ต้องไม่ฝ่าฝืนธรรมชาติ</li>
+          <li>ต้องไม่ทำให้ผู้ถูกบังคับเสียประโยชน์เกินไป</li>
+          <li>ต้องคำนึงถึงกระบวนการ องค์กร กลไกในการบังคับใช้</li>
+          <li>ต้องคำนึงถึงบรรยากาศทางสังคมที่เอื้อให้เกิดการเคารพกฎหมาย</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>เปรียบต่างจากสำนักกฎหมายบ้านเมือง</h3>
+        <p>ทฤษฎีสามชั้นไม่เห็นด้วยกับสำนักปฏิฐานนิยมที่ว่ากฎหมายคือคำสั่งของรัฐาธิปัตย์เพียงอย่างเดียว เพราะการออกกฎหมายที่ดีต้องคำนึงถึงเหตุผล ศีลธรรม และสามัญสำนึกความรู้สึกผิดชอบชั่วดีประกอบด้วยเสมอ จึงจะเกิดความยุติธรรมที่แท้จริง</p>
+      </div>
+
+      <div class="nav-arrows">
+        <a href="javascript:void(0)" data-jump="p7"><span class="lbl">← ก่อนหน้า</span>ส่วนที่ 7: สังคมวิทยากฎหมาย</a>
+        <a class="next" href="javascript:void(0)" data-jump="p9"><span class="lbl">ถัดไป</span>ส่วนที่ 9: มาร์กซิสต์ & สัจนิยม →</a>
+      </div>
+    </section>
+
+    <!-- ================= PART 9 ================= -->
+    <section class="part" id="p9" data-part="9">
+      <div class="part-head">
+        <div class="part-head-row">
+          <div class="part-num">9</div>
+          <div>
+            <h2>ทฤษฎีกฎหมายมาร์กซิสต์และสัจนิยมทางกฎหมาย</h2>
+            <div class="part-sub">โครงสร้างส่วนบน/ล่าง · Legal Realism</div>
+          </div>
+          <button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงส่วนนี้">🔊</button>
+          <label class="done-check"><input type="checkbox" class="mark" data-id="9"> อ่านแล้ว</label>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>ทฤษฎีกฎหมายมาร์กซิสต์ (The Marxist Theory of Law)</h3>
+        <p>วางอยู่บนพื้นฐานของ <span class="term">นิยัตินิยมทางเศรษฐกิจ (Economic Determinism)</span> — เศรษฐกิจ (โครงสร้างส่วนล่าง/Infra Structure) เป็นตัวกำหนดกฎหมาย ศีลธรรม การเมือง วัฒนธรรม (โครงสร้างส่วนบน/Super Structure) ของสังคม รูปแบบและเนื้อหาของกฎหมายจึงแปรเปลี่ยนไปตามความสัมพันธ์ทางเศรษฐกิจและการต่อสู้ทางชนชั้น</p>
+        <p><strong>ข้อสรุปหลัก 3 ประการ:</strong></p>
+        <ul>
+          <li>กฎหมายเป็นผลผลิต/ผลสะท้อนของโครงสร้างเศรษฐกิจ</li>
+          <li>กฎหมายเป็นเครื่องมือ/อาวุธที่ชนชั้นปกครองสร้างขึ้นเพื่อปกป้องอำนาจของตน (กดขี่ชนชั้นล่าง)</li>
+          <li>ในสังคมคอมมิวนิสต์ที่สมบูรณ์ กฎหมายในฐานะเครื่องมือควบคุมสังคมจะเหือดหายไปในที่สุด (Withering Away)</li>
+        </ul>
+        <p><strong>ข้อวิจารณ์:</strong> เป็นข้อสรุปที่ง่ายเกินไปที่มองว่าเศรษฐกิจเป็นปัจจัยเดียวที่กำหนดกฎหมาย ทั้งที่ปัจจัยทางการเมือง อุดมการณ์ วัฒนธรรม ศีลธรรมก็มีส่วนกำหนดด้วย และกฎหมายจำนวนมาก (เช่น กฎหมายประกันสังคม กฎหมายคุ้มครองแรงงาน) กลับปกป้องผลประโยชน์ของคนส่วนใหญ่ที่ยากไร้โดยตรง ซึ่งขัดกับข้อสรุปว่ากฎหมายเป็นเพียงเครื่องมือกดขี่ นอกจากนี้มาร์กซิสต์ไม่ยอมรับหลักนิติธรรม (Rule of Law) เพราะมองว่าเป็นมายาคติของอุดมการณ์เสรีนิยม</p>
+      </div>
+
+      <div class="block">
+        <h3>สัจนิยมทางกฎหมาย (Legal Realism)</h3>
+        <p>เกิดขึ้นโดยเฉพาะในสหรัฐอเมริกา มองผลลัพธ์ในทางปฏิบัติ (practical outcomes) เป็นสำคัญ มากกว่าตัวบทกฎหมายที่เขียนไว้ ยึดถือว่า <span class="term">กฎหมายที่แท้จริงคือสิ่งที่ศาลพิจารณาตัดสินชี้ขาดจริง</span> ไม่ใช่ถ้อยคำในประมวลกฎหมาย เน้นศึกษาพฤติกรรมจริงของผู้พิพากษาและผลของคำพิพากษาในทางปฏิบัติ เป็นแนวคิดที่ใกล้เคียงกับ "Law in action" ของสำนักสังคมวิทยา แต่เน้นหนักไปที่กระบวนการตัดสินคดีในศาลโดยเฉพาะ</p>
+      </div>
+
+      <div class="nav-arrows">
+        <a href="javascript:void(0)" data-jump="p8"><span class="lbl">← ก่อนหน้า</span>ส่วนที่ 8: ทฤษฎีกฎหมายสามชั้น</a>
+        <a class="next" href="javascript:void(0)" data-jump="p10"><span class="lbl">ถัดไป</span>ส่วนที่ 10: ความยุติธรรม & ปัญหาร่วมสมัย →</a>
+      </div>
+    </section>
+
+    <!-- ================= PART 10 ================= -->
+    <section class="part" id="p10" data-part="10">
+      <div class="part-head">
+        <div class="part-head-row">
+          <div class="part-num">10</div>
+          <div>
+            <h2>ทฤษฎีความยุติธรรมและการประยุกต์ใช้กับปัญหาร่วมสมัย</h2>
+            <div class="part-sub">Distributive/Commutative Justice · หลักนิติธรรม · Civil Disobedience</div>
+          </div>
+          <button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงส่วนนี้">🔊</button>
+          <label class="done-check"><input type="checkbox" class="mark" data-id="10"> อ่านแล้ว</label>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>รูปแบบของความยุติธรรมตามอริสโตเติล</h3>
+        <ul>
+          <li><span class="term">ความยุติธรรมในการแบ่งปัน (Distributive Justice)</span> — แบ่งปันผลประโยชน์ในสังคมตามคุณประโยชน์หรือคุณงามความดีที่บุคคลนั้นให้แก่สังคม วัดด้วยสัดส่วน ไม่ใช่เชิงปริมาณ</li>
+          <li><span class="term">ความยุติธรรมในการแลกเปลี่ยนทดแทน (Commutative/Corrective Justice)</span> — เกี่ยวข้องกับการแลกเปลี่ยนที่สมบูรณ์ในสัญญา หรือการชดใช้ค่าเสียหายในทางละเมิด วัดได้เชิงปริมาณ</li>
+        </ul>
+        <p>นอกจากนี้อริสโตเติลยังแบ่งความยุติธรรมเป็น <span class="term">Natural Justice</span> (สิ่งที่มนุษย์ทุกคนรู้ได้ด้วยเหตุผลร่วมกัน) และ <span class="term">Conventional Justice</span> (สิ่งที่มนุษย์ในแต่ละกาลเทศะตกลงกัน) และยอมรับหลัก <em>Equity</em> เพื่อแก้ไขความไม่เป็นธรรมที่เกิดจากการใช้กฎเกณฑ์ทั่วไปอย่างเคร่งครัด</p>
+      </div>
+
+      <div class="block">
+        <h3>หลักนิติธรรม (Rule of Law)</h3>
+        <p>มีรากฐานจากอริสโตเติลที่เห็นว่าการปกครองโดยกฎหมายดีกว่าการปกครองโดยมนุษย์ เพราะกฎหมายคือ "เหตุผลที่ปราศจากกิเลสตัณหา" หลักนี้พัฒนาต่อมาสู่แนวคิดที่ว่ารัฐธรรมนูญและหลักนิติธรรมเป็นกฎหมายสูงสุด คุ้มครองความเสมอภาค สิทธิเสรีภาพขั้นพื้นฐาน และศักดิ์ศรีความเป็นมนุษย์ โดยศาลมีอำนาจพิจารณาพิพากษาคดีทั้งปวง — เป็นผลรวมของคุณูปการจากปรัชญากฎหมายทั้ง 3 ยุค (โบราณ กลาง สมัยใหม่) ที่ผ่านมา</p>
+      </div>
+
+      <div class="block">
+        <h3>การดื้อแพ่งต่อกฎหมาย (Civil Disobedience)</h3>
+        <p>แนวคิดที่อไควนัสอธิบายไว้เป็นครั้งแรกในยุคกลาง — หากผู้ปกครองและกฎหมายเป็นอันตรายต่อความสงบเรียบร้อย ทำลายชีวิตและทรัพย์สินของประชาชน ประชาชนมีสิทธิที่จะต่อต้านการปกครองนั้นได้ เป็นประเด็นที่เชื่อมโยงกับคำถามว่า "กฎหมายที่อยุติธรรมยังเป็นกฎหมายหรือไม่" ซึ่งเป็นเส้นแบ่งสำคัญระหว่างสำนักธรรมชาตินิยมกับสำนักปฏิฐานนิยม</p>
+      </div>
+
+      <div class="block">
+        <h3>การประยุกต์ใช้กับปัญหาสังคมร่วมสมัย</h3>
+        <p>นิติปรัชญาไม่ใช่เพียงทฤษฎีนามธรรม แต่เป็นกรอบคิดสำหรับวิเคราะห์ปัญหาทางกฎหมายและสังคมในปัจจุบัน เช่น:</p>
+        <ul>
+          <li><strong>ปัญหาฝุ่น PM 2.5</strong> — คำถามเรื่องสิทธิในสิ่งแวดล้อมที่ดี ความยุติธรรมในการแบ่งปันภาระ (Distributive Justice) ระหว่างผู้ก่อมลพิษกับผู้ได้รับผลกระทบ และบทบาทของรัฐในการออกกฎหมายเทคนิคเพื่อควบคุม</li>
+          <li><strong>ปัญหาการทำแท้ง</strong> — ความขัดแย้งระหว่างสิทธิในชีวิต (มุมมองกฎหมายธรรมชาติ) กับสิทธิเสรีภาพในเนื้อตัวร่างกายของสตรี (มุมมองเสรีนิยม) สะท้อนข้อถกเถียงเรื่องความสัมพันธ์ระหว่างกฎหมายกับศีลธรรม</li>
+          <li><strong>โทษประหารชีวิต</strong> — คำถามเรื่องความยุติธรรมเชิงชดเชยทดแทน (Commutative Justice) เทียบกับหลักศักดิ์ศรีความเป็นมนุษย์และสิทธิในชีวิตที่ไม่อาจพรากได้</li>
+        </ul>
+        <p style="margin-top:10px">ทุกประเด็นข้างต้นสามารถนำกรอบคิดของแต่ละสำนักในเอกสารนี้ (ธรรมชาตินิยม ปฏิฐานนิยม ประวัติศาสตร์ สังคมวิทยา สามชั้น มาร์กซิสต์) มาใช้วิเคราะห์และให้เหตุผลสนับสนุนจุดยืนที่แตกต่างกันได้ทั้งสิ้น — นี่คือคุณค่าของการศึกษานิติปรัชญาอย่างเป็นระบบ</p>
+      </div>
+
+      <div class="nav-arrows">
+        <a href="javascript:void(0)" data-jump="p9"><span class="lbl">← ก่อนหน้า</span>ส่วนที่ 9: มาร์กซิสต์ & สัจนิยม</a>
+        <a class="next" href="javascript:void(0)" data-jump="p11"><span class="lbl">ถัดไป</span>แนวทางการทำข้อสอบ →</a>
+      </div>
+    </section>
+
+    <!-- ================= PART 11: EXAM GUIDE ================= -->
+    <section class="part" id="p11" data-part="11">
+      <div class="part-head">
+        <div class="part-head-row">
+          <div class="part-num">✎</div>
+          <div>
+            <h2>แนวทางการทำข้อสอบนิติปรัชญา</h2>
+            <div class="part-sub">ลักษณะข้อสอบ · โครงสร้างการเขียนตอบ · ตัวอย่างประเด็นที่ออกสอบบ่อย</div>
+          </div>
+          <button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงส่วนนี้">🔊</button>
+          <label class="done-check"><input type="checkbox" class="mark" data-id="11"> อ่านแล้ว</label>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>ลักษณะของข้อสอบวิชานี้</h3>
+        <p>ข้อสอบนิติปรัชญาเป็น <strong>ข้อสอบเชิงความเข้าใจมากกว่าความจำ</strong> มักออกในรูปเรียงความให้อธิบาย เปรียบเทียบ หรือวิเคราะห์ประเด็น — บางครั้งเป็นคำถามที่ไม่เคยเรียนมาตรงๆ แต่ต้องใช้ "หลักคิด" ของแต่ละสำนักไปประยุกต์ตอบ ผู้ตรวจจึงมองหา <em>กระบวนการให้เหตุผล</em> ไม่ใช่การท่องจำนิยามมาเรียงต่อกัน</p>
+      </div>
+
+      <div class="block">
+        <h3>โครงสร้างการเขียนตอบที่แนะนำ (5 ขั้น)</h3>
+        <div class="exam-step">
+          <div class="exam-num">1</div>
+          <div class="exam-body"><h4>วางกรอบ/นิยามคำถาม</h4><p>บอกว่าคำถามนี้อยู่ในปัญหาหลักข้อใดของนิติปรัชญา (อภิปรัชญา / ญาณวิทยา / จริยปรัชญา) และเกี่ยวข้องกับสำนักคิดใด</p></div>
+        </div>
+        <div class="exam-step">
+          <div class="exam-num">2</div>
+          <div class="exam-body"><h4>อธิบายหลักคิด/ทฤษฎีที่เกี่ยวข้อง</h4><p>อธิบายแก่นความคิดของสำนักนั้นให้ถูกต้อง อ้างชื่อนักคิดและคำนิยามสำคัญ (เช่น คำพูดของซิเซโร, สูตรของอไควนัส)</p></div>
+        </div>
+        <div class="exam-step">
+          <div class="exam-num">3</div>
+          <div class="exam-body"><h4>เปรียบเทียบ/วิพากษ์กับสำนักอื่น</h4><p>ข้อสอบส่วนใหญ่ถามเชิงเปรียบเทียบ — ใช้ตารางความคิดในหัวเปรียบเทียบ "ที่มา / ลักษณะ / ความสัมพันธ์กับศีลธรรม" เพื่อแสดงว่าเข้าใจความแตกต่างจริง ไม่ใช่แค่รู้ทีละสำนักแยกกัน</p></div>
+        </div>
+        <div class="exam-step">
+          <div class="exam-num">4</div>
+          <div class="exam-body"><h4>ยกตัวอย่างประกอบ</h4><p>ใช้อุปมา (บ้าน-รากฐาน, น้ำ-ขวด, เนื้อสามชั้น) หรือประเด็นร่วมสมัย (PM 2.5 / ทำแท้ง / โทษประหาร / รัฐประหาร) เพื่อแสดงว่านำหลักไปปรับใช้ได้จริง</p></div>
+        </div>
+        <div class="exam-step">
+          <div class="exam-num">5</div>
+          <div class="exam-body"><h4>สรุปจุดยืน/ข้อวิพากษ์</h4><p>ปิดท้ายด้วยความเห็นที่มีเหตุผลรองรับ เช่น สำนักนี้มีคุณูปการอะไร มีข้อบกพร่องอะไร จะไม่ทิ้งคำถามไว้ลอยๆ โดยไม่สรุป</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>ตัวอย่างประเด็นข้อสอบที่ออกบ่อย</h3>
+        <div class="pastq"><strong>Q:</strong> ทฤษฎีปฏิฐานนิยมทางกฎหมายเป็นทฤษฎีที่รับใช้เผด็จการจริงหรือไม่?</div>
+        <div class="pastq"><strong>Q:</strong> ความคิดสำนักกฎหมายธรรมชาติสมัยใหม่แตกต่างจากสมัยกลางอย่างไร และมีคุณูปการต่อยุคปัจจุบันอย่างไร?</div>
+        <div class="pastq"><strong>Q:</strong> เปรียบเทียบ Theory of Law ของสำนักธรรมนิยมกับสำนักประวัติศาสตร์ และผลต่อการจัดทำประมวลกฎหมายในยุโรป</div>
+        <div class="pastq"><strong>Q:</strong> ร้าดบรุคเห็นว่ากฎหมายเป็นมโนทัศน์ทางวัฒนธรรม แนวคิดนี้ต่างจากนักคิดศตวรรษที่ 20 ท่านอื่นอย่างไร?</div>
+        <div class="pastq"><strong>Q:</strong> อธิบายปัญหากฎหมายจากระดับนิติศาสตร์โดยแท้ไปสู่ปัญหานิติปรัชญา พร้อมยกตัวอย่างประกอบ (เช่น ปัญหาการทำแท้ง)</div>
+        <div class="pastq"><strong>Q:</strong> รากฐานทางความคิดของหลักนิติธรรมและรัฐธรรมนูญเป็นกฎหมายสูงสุด มีที่มาจากปรัชญากฎหมายยุคใดบ้าง โดยสังเขป</div>
+      </div>
+
+      <div class="block">
+        <h3>ข้อควรระวัง</h3>
+        <ul>
+          <li>อย่าเขียนแยกสำนักคิดเป็นเกาะๆ — ผู้ตรวจให้คะแนนที่ "การเชื่อมโยง" ระหว่างสำนัก มากกว่าปริมาณข้อมูล</li>
+          <li>อย่าลืมระบุ <em>ที่มา/นักคิด</em> ทุกครั้งที่อ้างทฤษฎี เพื่อแสดงความแม่นยำ</li>
+          <li>คำถามเชิงวิพากษ์ (เช่น "จริงหรือไม่ที่...") ต้องเสนอทั้งฝ่ายสนับสนุนและฝ่ายโต้แย้ง ก่อนค่อยสรุปจุดยืนของตน</li>
+        </ul>
+      </div>
+
+      <div class="nav-arrows">
+        <a href="javascript:void(0)" data-jump="p10"><span class="lbl">← ก่อนหน้า</span>ส่วนที่ 10: ความยุติธรรม</a>
+        <a href="javascript:void(0)" data-jump="p1"><span class="lbl">กลับไป</span>ส่วนที่ 1: บทนำ ↺</a>
+      </div>
+    </section>
+
+    <footer>เอกสารทบทวนวิชานิติปรัชญา · จัดทำเพื่อการอ่านทวนเนื้อหาส่วนตัว</footer>
+  </main>
+</div>
+
+<div id="mode-story">
+  <div class="story-wrap" style="padding:24px 16px 80px;max-width:820px;margin:0 auto">
+    <div class="story-hero">
+      <h1>🕰️ เรื่องเล่าของนิติปรัชญา — จากพระเจ้าสู่รัฐธรรมนูญ</h1>
+      <p>อ่านต่อเนื่องเป็นเรื่องเดียว ไล่ตามพัฒนาการความคิดว่าทำไมสำนักหนึ่งจึงเกิดขึ้นมา "โต้" กับสำนักก่อนหน้า — เหมาะสำหรับปูภาพรวมก่อนลงรายละเอียดในโหมดอ่านทบทวน (ช่องรูปภาพเตรียมไว้สำหรับใส่ภาพประกอบในอนาคต)</p>
+    </div>
+
+    <div class="timeline">
+      <div class="story-node">
+        <div class="era">~600 ปีก่อน ค.ศ. · กรีกโบราณ</div>
+        <div class="node-head"><h3>1. จุดเริ่มต้น: ธรรมชาติคือพระเจ้า</h3><button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงตอนนี้">🔊</button></div>
+        <p>ชาวกรีกยังไม่มีศาสนาแบบมีพระเจ้าองค์เดียว พวกเขาเคารพ "ธรรมชาติ" เป็นดั่งเทพ ในมหากาพย์ของโฮเมอร์และเฮเซียด กฎหมายถูกมองว่ามาจากเจตจำนงของซุส ผู้มอบ "nomos" (หลักการจัดระเบียบ) ให้มนุษย์แยกจากสัตว์ป่าที่ไร้กฎหมาย เฮราคลิตุสจึงมองว่ากฎหมายเป็นสิ่งที่มีอยู่แล้วในธรรมชาติ ไม่ใช่สิ่งที่มนุษย์คนใดคนหนึ่งบัญญัติขึ้น เพลโตยกระดับความคิดนี้เป็น "โลกแห่งแบบ" อันสมบูรณ์แบบเหนือโลกจริง เสนอว่ามีเพียงราชาปราชญ์เท่านั้นที่เข้าถึงความจริงนี้ได้ ส่วนอริสโตเติลลูกศิษย์ของเขากลับเห็นต่าง — เขาเชื่อว่ามนุษย์ทุกคนมีเหตุผลในตัวเอง ไม่ต้องพึ่งราชาปราชญ์ จึงสนับสนุนการปกครองโดยกฎหมายแทน และเป็นผู้แบ่งความยุติธรรมเป็นแบบแบ่งปันกับแบบแลกเปลี่ยนทดแทนเป็นคนแรก</p>
+        <p>แต่ในยุคเดียวกันก็มีเสียงค้าน — นักปรัชญาโซฟิสต์อย่างโพรทาโกรัสเสนอว่า "มนุษย์คือเครื่องวัดสรรพสิ่ง" ความจริงจึงสัมพัทธ์ ไม่มีมาตรฐานสากล และธราซีมาคัสถึงกับเสนอว่า "ความเป็นธรรมคือผลประโยชน์ของผู้มีอำนาจ" ซึ่งเป็นเมล็ดพันธุ์แรกของแนวคิดปฏิฐานนิยมที่จะเบ่งบานอีกสองพันปีให้หลัง</p>
+        <div class="img-slot">🖼️ พื้นที่สำหรับภาพประกอบ: กรีกโบราณ / เพลโต-อริสโตเติล</div>
+        <div class="pastq-title">📝 ข้อสอบที่มักออกในหัวข้อนี้</div>
+        <div class="pastq">อธิบายคุณูปการทางกฎหมายของอริสโตเติล และความแตกต่างจากเพลโต</div>
+        <div class="pastq">เพราะเหตุใดยุคกรีกจึงถูกเรียกว่าเป็น "จุดสูงสุด" ของการใช้เหตุผลทางกฎหมาย ท่านเห็นด้วยหรือไม่ เพราะเหตุใด</div>
+        <div class="pastq">อธิบายความขัดแย้งระหว่างกฎหมายศักดิ์สิทธิ์กับกฎหมายมนุษย์ผ่านเรื่อง Antigone</div>
+        <p class="link">→ ความคิดนี้เดินทางสู่โรมผ่านสำนักสโตอิก ที่เชื่อว่าจักรวาลถูกปกครองด้วยเหตุผลสากล (Logos) และมนุษย์ทุกคนเท่าเทียมกัน และถูกซิเซโรกลั่นเป็นวลีอมตะ "กฎหมายที่แท้จริงคือเหตุผลที่ถูกต้อง"</p>
+      </div>
+
+      <div class="story-node">
+        <div class="era">ค.ศ. 300–1400 · ยุคกลาง</div>
+        <div class="node-head"><h3>2. เมื่อศาสนจักรเรืองอำนาจ: ธรรมชาติกลายเป็นพระประสงค์ของพระเจ้า</h3><button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงตอนนี้">🔊</button></div>
+        <p>เมื่อจักรวรรดิโรมันล่มสลายและศาสนาคริสต์เรืองอำนาจ "เหตุผล" ของกรีก-โรมันถูกหลอมรวมเข้ากับศรัทธา นักบุญออกัสตินอธิบายว่าทุกสิ่งเกิดจากพระประสงค์ของพระเจ้า แบ่งกฎหมายเป็น 3 ระดับ (นิรันดร ธรรมชาติ เฉพาะกาล) ส่วนนักบุญโทมัส อไควนัส บิดาแห่งสำนัก Scholasticism สังเคราะห์อริสโตเติลเข้ากับเทววิทยา จัดกฎหมายเป็นบันไดสี่ขั้นจากพระเจ้าลงมาสู่มนุษย์: Lex Aeterna → Lex Naturalis → Lex Divina → Lex Humana โดยวางหลักว่ากฎที่อยู่ลำดับต่ำกว่าจะขัดกับกฎที่สูงกว่าไม่ได้</p>
+        <p>อไควนัสยังเป็นคนแรกที่กล้าอธิบายเรื่อง <span class="term">การดื้อแพ่งต่อกฎหมาย (Civil Disobedience)</span> — หากผู้ปกครองอยุติธรรมและเป็นภัยต่อชีวิตทรัพย์สินของประชาชน ประชาชนมีสิทธิต่อต้านได้ นี่คือเมล็ดพันธุ์ของแนวคิดที่ต่อมาถูกจอห์น รอลส์นำไปพัฒนาเป็นเงื่อนไขความชอบธรรมของการดื้อแพ่งในยุคปัจจุบัน</p>
+        <div class="img-slot">🖼️ พื้นที่สำหรับภาพประกอบ: มหาวิหารยุคกลาง / อไควนัส</div>
+        <div class="pastq-title">📝 ข้อสอบที่มักออกในหัวข้อนี้</div>
+        <div class="pastq">อธิบายการแบ่งกฎหมาย 4 ลำดับชั้นของนักบุญโทมัส อไควนัส พร้อมยกตัวอย่าง</div>
+        <div class="pastq">เปรียบเทียบแนวคิดกฎหมายธรรมชาติยุคกรีก-โรมัน กับยุคกลาง แตกต่างกันอย่างไร</div>
+        <div class="pastq">อธิบายที่มาของแนวคิด Civil Disobedience และเงื่อนไขความชอบธรรมตามจอห์น รอลส์</div>
+        <p class="link">→ แต่เมื่อศรัทธาเริ่มถูกตั้งคำถาม (การขายใบไถ่บาป ฯลฯ) อำนาจศาสนจักรก็เริ่มสั่นคลอน โลกกำลังจะเปลี่ยน</p>
+      </div>
+
+      <div class="story-node">
+        <div class="era">ค.ศ. 1500s–1600s · รัฐสมัยใหม่</div>
+        <div class="node-head"><h3>3. รัฐชาติถือกำเนิด: กฎหมายคือคำสั่งของผู้มีอำนาจ</h3><button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงตอนนี้">🔊</button></div>
+        <p>เมื่อศาสนจักรเสื่อมอำนาจ รัฐสมัยใหม่ที่มีอธิปไตยเด็ดขาดก็ก่อตัวขึ้นแทน ฮอบส์มองมนุษย์ว่าเห็นแก่ตัวโดยธรรมชาติ ชีวิตในสภาวะธรรมชาติจึง "โดดเดี่ยว ยากจน โสมม ป่าเถื่อน และสั้น" มนุษย์จึงต้องทำสัญญายกอำนาจทั้งหมดให้ผู้ปกครองเพื่อความสงบ ต่อมาจอห์น ออสตินสรุปให้ชัดเป็นทฤษฎีคำสั่ง (Command Theory) ว่า "กฎหมายคือคำสั่งทั่วไปของรัฏฐาธิปัตย์ ใครไม่ปฏิบัติตามต้องโทษ" — นี่คือจุดกำเนิดสำนักกฎหมายบ้านเมือง (Legal Positivism) ที่แยกกฎหมายออกจากศีลธรรมโดยเด็ดขาด (Separation Thesis)</p>
+        <p>ต่อมาฮันส์ เคลเซ่นพัฒนาต่อเป็น Pure Theory of Law ผ่านแนวคิด Grundnorm ส่วน H.L.A. Hart วิจารณ์ว่าออสตินเรียบง่ายเกินไป เสนอว่ากฎหมายคือระบบของกฎปฐมภูมิและกฎทุติยภูมิแทน สำนักนี้มีอิทธิพลมากในไทยผ่านการก่อตั้งโรงเรียนกฎหมายในรัชกาลที่ 5 แต่ก็ถูกตั้งคำถามอย่างหนักในเวลาต่อมาว่าอาจเป็นเครื่องมือรับใช้เผด็จการได้</p>
+        <div class="img-slot">🖼️ พื้นที่สำหรับภาพประกอบ: ฮอบส์ / Leviathan</div>
+        <div class="pastq-title">📝 ข้อสอบที่มักออกในหัวข้อนี้</div>
+        <div class="pastq">ทฤษฎีปฏิฐานนิยมทางกฎหมายเป็นทฤษฎีที่รับใช้เผด็จการจริงหรือไม่? จงอธิบาย</div>
+        <div class="pastq">เปรียบเทียบ Command Theory ของออสตินกับ Pure Theory of Law ของเคลเซ่น</div>
+        <div class="pastq">อิทธิพลของสำนักกฎหมายบ้านเมืองต่อระบบกฎหมายไทยเป็นอย่างไร</div>
+        <p class="link">→ แต่การให้อำนาจเด็ดขาดแก่ผู้ปกครองก็น่ากลัวเช่นกัน... นักคิดรุ่นถัดมาจึงเริ่มถามว่า แล้วสิทธิของประชาชนอยู่ที่ไหน?</p>
+      </div>
+
+      <div class="story-node">
+        <div class="era">ค.ศ. 1600s–1700s · กฎหมายธรรมชาติสมัยใหม่</div>
+        <div class="node-head"><h3>4. เหตุผลกลับมา (คราวนี้ไม่ต้องมีพระเจ้า)</h3><button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงตอนนี้">🔊</button></div>
+        <p>โกรเชียสประกาศว่ากฎหมายธรรมชาติดำรงอยู่ได้แม้สมมติว่าไม่มีพระเจ้า (etsi Deus non daretur) — เหตุผลของมนุษย์เพียงพอแล้ว ล็อคเสนอว่ามนุษย์มีสิทธิตามธรรมชาติในชีวิต เสรีภาพ และทรัพย์สิน ที่รัฐต้องเคารพ หากรัฐละเมิดถือว่าผิดสัญญาและประชาชนมีสิทธิล้มล้างได้ รุสโซเสนอเจตจำนงทั่วไปของประชาชน (General Will) เป็นที่มาของอำนาจอธิปไตย มองเตสกิเออเสนอแบ่งแยกอำนาจนิติบัญญัติ บริหาร ตุลาการ เพื่อคานกัน ป้องกันการใช้อำนาจเกินขอบเขต — นี่คือรากฐานของประชาธิปไตยและรัฐธรรมนูญสมัยใหม่</p>
+        <p>คานท์เข้ามาปิดท้ายยุคนี้ด้วยการแยกโลกแห่งเหตุผลบริสุทธิ์ออกจากโลกแห่งเสรีภาพ นิยามกฎหมายว่าเป็นเงื่อนไขที่เสรีภาพของบุคคลหนึ่งอยู่ร่วมกับเสรีภาพของผู้อื่นได้ พร้อมวิจารณ์ว่ากฎหมายธรรมชาติแบบตายตัวไม่สอดคล้องกับโลกแห่งประสบการณ์จริง เป็นจุดเปลี่ยนที่ปูทางไปสู่สำนักถัดไป</p>
+        <div class="img-slot">🖼️ พื้นที่สำหรับภาพประกอบ: ล็อค / รุสโซ / การปฏิวัติฝรั่งเศส</div>
+        <div class="pastq-title">📝 ข้อสอบที่มักออกในหัวข้อนี้</div>
+        <div class="pastq">เปรียบเทียบทฤษฎีสัญญาประชาคมของฮอบส์ ล็อค และรุสโซ</div>
+        <div class="pastq">กฎหมายธรรมชาติสมัยใหม่แตกต่างจากยุคกลางอย่างไร และมีคุณูปการต่อยุคปัจจุบันอย่างไร</div>
+        <div class="pastq">หลักการแบ่งแยกอำนาจของมองเตสกิเออมีความสำคัญต่อรัฐธรรมนูญอย่างไร</div>
+        <p class="link">→ ฝรั่งเศสรีบนำเหตุผลสากลนี้ไปเขียนเป็นประมวลกฎหมายทันที (Code Napoleon 1804)... แต่เยอรมนีกลับไม่เห็นด้วย</p>
+      </div>
+
+      <div class="story-node">
+        <div class="era">ค.ศ. 1800s · เยอรมนี</div>
+        <div class="node-head"><h3>5. กบฏต่อ "เหตุผลสากล": กฎหมายมาจากจิตวิญญาณชนชาติ</h3><button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงตอนนี้">🔊</button></div>
+        <p>ซาวิญญี่คัดค้านข้อเสนอของ Thibaut ที่จะลอกเลียนประมวลกฎหมายฝรั่งเศสมาใช้ในเยอรมนี เขาเชื่อว่ากฎหมายไม่ใช่สิ่งที่ออกแบบได้ด้วยเหตุผลอย่างเดียวตามใจชอบ แต่ต้องงอกเงยจากประวัติศาสตร์และจิตวิญญาณของแต่ละชนชาติ (Volksgeist) เหมือนภาษาประจำชาติ — กฎหมายจึงเป็นสิ่งที่ "ถูกค้นพบ" ไม่ใช่ "ถูกสร้างขึ้น" นิติบัญญัติเป็นเพียงผู้บันทึกผลของวิชานิติศาสตร์เท่านั้น</p>
+        <p>ผลของแนวคิดนี้ปรากฏชัดในทางปฏิบัติ: ฝรั่งเศสมีประมวลกฎหมายแพ่งตั้งแต่ ค.ศ. 1804 ด้วยความเชื่อมั่นในเหตุผลสากล ขณะที่เยอรมนีต้องรอถึง ค.ศ. 1896 กว่าจะมีประมวลกฎหมายแพ่ง (BGB) เพราะต้องศึกษาจารีตประเพณีให้ถ่องแท้ก่อน แม้จะล่าช้าแต่ก็ได้มาตรฐานทางวิชาการที่สูงมาก</p>
+        <div class="img-slot">🖼️ พื้นที่สำหรับภาพประกอบ: ซาวิญญี่ / BGB</div>
+        <div class="pastq-title">📝 ข้อสอบที่มักออกในหัวข้อนี้</div>
+        <div class="pastq">เปรียบเทียบสำนักธรรมนิยม (Natural Law) กับสำนักประวัติศาสตร์ (Historical School)</div>
+        <div class="pastq">Volksgeist คืออะไร มีความหมายกี่นัย และเกี่ยวข้องกับวิวัฒนาการกฎหมายอย่างไร</div>
+        <div class="pastq">เพราะเหตุใดประมวลกฎหมายฝรั่งเศสและเยอรมนีจึงเกิดขึ้นในเวลาที่ต่างกันมาก</div>
+        <p class="link">→ ขณะเดียวกันในอเมริกาและอังกฤษ นักคิดกลุ่มหนึ่งเริ่มมองข้ามทั้งเหตุผลสากลและจิตวิญญาณชนชาติ แล้วหันไปมองว่ากฎหมาย "ทำงาน" จริงอย่างไรในสังคม</p>
+      </div>
+
+      <div class="story-node">
+        <div class="era">ปลาย 1800s–1900s</div>
+        <div class="node-head"><h3>6. กฎหมายในฐานะเครื่องมือทางสังคม</h3><button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงตอนนี้">🔊</button></div>
+        <p>รอสโค พาวด์ เสนอว่านักกฎหมายคือ "วิศวกรสังคม" ผู้ใช้กฎหมายถ่วงดุลผลประโยชน์ปัจเจก มหาชน และสังคมให้สมดุล — กฎหมายที่เขียนไว้ (Law in books) ไม่สำคัญเท่ากับกฎหมายที่ทำงานจริง (Law in action) แนวคิดนี้สอดคล้องกับ "Expediency" หนึ่งในสามองค์ประกอบของกฎหมายตามร้าดบรุคในเวลาต่อมา</p>
+        <p>ในสายเดียวกัน นักสัจนิยมอเมริกัน (Legal Realism) ไปไกลกว่านั้น: กฎหมายที่แท้จริงคือสิ่งที่ศาลตัดสินจริง ไม่ใช่ตัวบท เน้นศึกษาพฤติกรรมจริงของผู้พิพากษา — เป็นการเคลื่อนความสนใจจากตัวบทกฎหมายไปสู่ผลลัพธ์ในทางปฏิบัติอย่างเต็มตัว</p>
+        <div class="img-slot">🖼️ พื้นที่สำหรับภาพประกอบ: รอสโค พาวด์ / ศาลอเมริกัน</div>
+        <div class="pastq-title">📝 ข้อสอบที่มักออกในหัวข้อนี้</div>
+        <div class="pastq">อธิบายทฤษฎี "วิศวกรรมสังคม" ของรอสโค พาวด์ พร้อมยกตัวอย่างการถ่วงดุลผลประโยชน์</div>
+        <div class="pastq">Law in action กับ Law in books ต่างกันอย่างไร ยกตัวอย่างประกอบ</div>
+        <div class="pastq">สัจนิยมทางกฎหมายต่างจากสำนักสังคมวิทยากฎหมายอย่างไร</div>
+        <p class="link">→ ในไทย อาจารย์ปรีดี เกษมทรัพย์ ก็มองว่าทุกสำนักที่ผ่านมาถูกเพียงบางส่วน จึงหลอมรวมทุกมุมมองเป็นทฤษฎีเดียว</p>
+      </div>
+
+      <div class="story-node">
+        <div class="era">ไทย · ศตวรรษที่ 20</div>
+        <div class="node-head"><h3>7. สังเคราะห์ทุกสำนัก: ทฤษฎีกฎหมายสามชั้น</h3><button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงตอนนี้">🔊</button></div>
+        <p>อาจารย์ปรีดี เกษมทรัพย์ เปรียบกฎหมายเหมือน "เนื้อหมูสามชั้น" — ชั้นแรกคือกฎหมายชาวบ้านที่รู้ได้ด้วยสามัญสำนึก (ใกล้เคียงสำนักประวัติศาสตร์) ชั้นที่สองคือกฎหมายของนักกฎหมายที่ปรุงแต่งด้วยเหตุผล (ใกล้เคียงสำนักธรรมชาตินิยม) และชั้นที่สามคือกฎหมายเทคนิคที่รัฐบัญญัติขึ้นเพื่อแก้ปัญหาเฉพาะหน้า (ใกล้เคียงสำนักกฎหมายบ้านเมือง) — กฎหมายจึงไม่ใช่สิ่งเดียว แต่เป็นสามชั้นซ้อนกันในเนื้อเดียว ไม่ได้เกิดจากเจตจำนงของมนุษย์แต่อย่างใด</p>
+        <p>ทฤษฎีนี้ต่างจากสำนักกฎหมายบ้านเมืองอย่างชัดเจน เพราะเห็นว่าการออกกฎหมายที่ดีต้องคำนึงถึงเหตุผล ศีลธรรม และสามัญสำนึกความรู้สึกผิดชอบชั่วดีประกอบด้วยเสมอ ไม่ใช่เพียงคำสั่งของรัฏฐาธิปัตย์เท่านั้น จึงจะเกิดความยุติธรรมที่แท้จริง</p>
+        <div class="img-slot">🖼️ พื้นที่สำหรับภาพประกอบ: อ.ปรีดี เกษมทรัพย์ / เนื้อสามชั้น</div>
+        <div class="pastq-title">📝 ข้อสอบที่มักออกในหัวข้อนี้</div>
+        <div class="pastq">อธิบายทฤษฎีกฎหมายสามชั้น พร้อมยกตัวอย่างประกอบแต่ละชั้น</div>
+        <div class="pastq">ทฤษฎีกฎหมายสามชั้นแตกต่างจากสำนักกฎหมายบ้านเมืองอย่างไร</div>
+        <div class="pastq">ข้อเสนอ 5 ประการในการออกกฎหมายที่ดีตามทฤษฎีสามชั้นมีอะไรบ้าง</div>
+        <p class="link">→ ขณะที่นักคิดสายซ้ายกลับมองกฎหมายในมุมที่ต่างออกไปโดยสิ้นเชิง</p>
+      </div>
+
+      <div class="story-node">
+        <div class="era">ศตวรรษที่ 19–20</div>
+        <div class="node-head"><h3>8. เสียงค้านจากฝ่ายซ้าย: กฎหมายคือเครื่องมือของชนชั้นปกครอง</h3><button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงตอนนี้">🔊</button></div>
+        <p>มาร์กซ์และเองเกลส์มองกฎหมาย ศีลธรรม และการเมืองเป็นเพียง "โครงสร้างส่วนบน" (Super Structure) ที่ถูกกำหนดโดยระบบเศรษฐกิจ (โครงสร้างส่วนล่าง) กฎหมายจึงเป็นอาวุธที่ชนชั้นปกครองใช้รักษาอำนาจของตน และจะเหือดหายไปในสังคมคอมมิวนิสต์ที่สมบูรณ์เมื่อไม่มีชนชั้นเหลืออยู่ — เป็นข้อท้าทายที่รุนแรงที่สุดต่อความคิดว่ากฎหมายเป็นกลางและเป็นธรรมมาโดยตลอด</p>
+        <p>แต่ทฤษฎีนี้ก็ถูกวิจารณ์ว่าง่ายเกินไป เพราะมองเศรษฐกิจเป็นปัจจัยเดียว ทั้งที่กฎหมายจำนวนมาก เช่น กฎหมายประกันสังคมหรือคุ้มครองแรงงาน กลับปกป้องผลประโยชน์ของคนส่วนใหญ่ที่ยากไร้โดยตรง ซึ่งขัดกับข้อสรุปว่ากฎหมายเป็นเพียงเครื่องมือกดขี่เท่านั้น</p>
+        <div class="img-slot">🖼️ พื้นที่สำหรับภาพประกอบ: มาร์กซ์ / โครงสร้างส่วนบน-ล่าง</div>
+        <div class="pastq-title">📝 ข้อสอบที่มักออกในหัวข้อนี้</div>
+        <div class="pastq">อธิบายทฤษฎีกฎหมายมาร์กซิสต์ พร้อมข้อสรุปหลัก 3 ประการ</div>
+        <div class="pastq">ท่านเห็นด้วยหรือไม่ว่ากฎหมายเป็นเพียงเครื่องมือของชนชั้นปกครอง เพราะเหตุใด</div>
+        <div class="pastq">เหตุใดทฤษฎีมาร์กซิสต์จึงปฏิเสธหลักนิติธรรม (Rule of Law)</div>
+        <p class="link">→ และคำถามที่รุนแรงที่สุดก็มาถึงจุดแตกหักในสงครามโลกครั้งที่ 2...</p>
+      </div>
+
+      <div class="story-node">
+        <div class="era">หลังสงครามโลกครั้งที่ 2 – ปัจจุบัน</div>
+        <div class="node-head"><h3>9. บทเรียนจากนาซี: กฎหมายที่อยุติธรรมยังเป็นกฎหมายหรือไม่?</h3><button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงตอนนี้">🔊</button></div>
+        <p>เมื่อกฎหมายของฮิตเลอร์ที่ผ่าน "กระบวนการที่ถูกต้อง" ทุกอย่าง กลับนำไปสู่อาชญากรรมต่อมนุษยชาติ โลกจึงหันกลับมาตั้งคำถามกับสำนักกฎหมายบ้านเมืองอีกครั้ง ร้าดบรุคเสนอว่ากฎหมายเป็นมโนทัศน์ทางวัฒนธรรม ต้องสมดุลระหว่างความยุติธรรม ความแน่นอนของกฎหมาย และประโยชน์แห่งสังคม (สามองค์ประกอบของกฎหมาย) ฮาร์ตพยายามประนีประนอมโดยยอมรับ "เนื้อหาอย่างน้อยที่สุดของกฎหมายธรรมชาติ" (Minimum Content of Natural Law)</p>
+        <p>ทุกสำนักที่เคยเดินคนละทางมาเกือบสองพันปี เริ่มหันมาโอบรับกันเพื่อตอบคำถามเดียวกัน: กฎหมายที่ดีต้องมีอะไรบ้าง? นี่คือจุดที่นิติปรัชญาในศตวรรษที่ 20 ไม่ได้เลือกข้างสำนักใดสำนักหนึ่งอย่างเด็ดขาดอีกต่อไป แต่พยายามสังเคราะห์ทุกมุมมองเข้าด้วยกัน</p>
+        <div class="img-slot">🖼️ พื้นที่สำหรับภาพประกอบ: ศาลนูเรมเบิร์ก / ร้าดบรุค</div>
+        <div class="pastq-title">📝 ข้อสอบที่มักออกในหัวข้อนี้</div>
+        <div class="pastq">อธิบายสูตรของร้าดบรุค (Radbruch's Formula) และองค์ประกอบสามประการของกฎหมาย</div>
+        <div class="pastq">"กฎหมายที่ไม่ยุติธรรมยังเป็นกฎหมายหรือไม่" ท่านมีความเห็นอย่างไร โดยอ้างอิงสำนักคิดประกอบ</div>
+        <div class="pastq">เหตุการณ์นาซีเยอรมนีเปลี่ยนทิศทางความคิดนิติปรัชญาศตวรรษที่ 20 อย่างไร</div>
+        <p class="link">→ และคำถามนี้เองที่เรายังใช้วิเคราะห์ปัญหาปัจจุบัน เช่น PM 2.5 การทำแท้ง และโทษประหารชีวิต</p>
+      </div>
+
+      <div class="story-node">
+        <div class="era">วันนี้</div>
+        <div class="node-head"><h3>10. บทสรุป: ทุกสำนักคือเลนส์คนละบาน มองภูเขาลูกเดียวกัน</h3><button class="tts-btn" onclick="speakNear(this)" title="อ่านออกเสียงตอนนี้">🔊</button></div>
+        <p>ธรรมชาตินิยมถามว่ากฎหมายควรเป็นอย่างไร ปฏิฐานนิยมถามว่ากฎหมายเป็นอย่างไรในความเป็นจริง ประวัติศาสตร์ถามว่ากฎหมายมาจากไหน สังคมวิทยาถามว่ากฎหมายทำหน้าที่อะไร สามชั้นถามว่าทำไมกฎหมายจึงมีหลายแบบพร้อมกัน และมาร์กซิสต์ถามว่าใครได้ประโยชน์จากกฎหมายนั้น — นักกฎหมายที่ดีไม่จำเป็นต้องเลือกเพียงสำนักเดียว แต่ต้องรู้จักหยิบเลนส์แต่ละบานมาใช้ให้ถูกกับคำถามที่เผชิญอยู่ตรงหน้า</p>
+        <div class="pastq-title">📝 ข้อสอบภาพรวมที่มักออก</div>
+        <div class="pastq">นำทฤษฎีนิติปรัชญาทุกสำนักมาวิเคราะห์ปัญหาร่วมสมัย เช่น ฝุ่น PM 2.5 การทำแท้ง หรือโทษประหารชีวิต</div>
+        <div class="pastq">เปรียบเทียบสำนักคิดสองสำนักใดก็ได้ที่เรียนมา พร้อมข้อดี-ข้อจำกัดของแต่ละสำนัก</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="mode-video">
+  <div class="video-wrap">
+    <div class="video-hero">
+      <h1>🎬 วิดีโอบรรยายประกอบ</h1>
+      <p>วิดีโอที่จัดทำขึ้นเองประกอบการเรียน แบ่งเป็นวิดีโอทฤษฎีเชิงลึก 2 คลิป และคลิปสรุปคำบรรยายทั้ง 6 ครั้ง (เน้นฟังเสียงประกอบการอ่านทบทวน)</p>
+    </div>
+
+    <div class="video-section-title">ทฤษฎีเชิงลึก</div>
+    <div class="video-grid">
+      <a class="video-card video-link" href="https://www.youtube.com/watch?v=RfHkgmNS_t4&list=PLl3HwAGv_CveSnYpJZAFNEaBN0_MC4wWD" target="_blank" rel="noopener">
+        <div class="video-frame" style="background-image:url('https://img.youtube.com/vi/RfHkgmNS_t4/hqdefault.jpg')">
+          <div class="play-overlay">▶</div>
+        </div>
+        <div class="video-caption"><h4>ทฤษฎีนิติปรัชญา: จากกรีกสู่โรมัน</h4><p>ครอบคลุมส่วนที่ 2 ของเอกสาร — เฮราคลิตุส เพลโต อริสโตเติล สโตอิก ซิเซโร · เปิดฟังบน YouTube</p></div>
+      </a>
+      <a class="video-card video-link" href="https://www.youtube.com/watch?v=ZVT1Ll6GD3k&list=PLl3HwAGv_CveSnYpJZAFNEaBN0_MC4wWD" target="_blank" rel="noopener">
+        <div class="video-frame" style="background-image:url('https://img.youtube.com/vi/ZVT1Ll6GD3k/hqdefault.jpg')">
+          <div class="play-overlay">▶</div>
+        </div>
+        <div class="video-caption"><h4>ทฤษฎีนิติปรัชญา: ยุคสมัยกลาง</h4><p>ครอบคลุมส่วนที่ 3 ของเอกสาร — ออกัสติน อไควนัส กฎหมาย 4 ลำดับชั้น · เปิดฟังบน YouTube</p></div>
+      </a>
+    </div>
+
+    <div class="video-section-title">สรุปคำบรรยาย 6 ครั้ง (ฟังเสียงอย่างเดียว)</div>
+    <div class="video-grid">
+      <a class="video-card video-link" href="https://youtu.be/EujP1YTD4Hg" target="_blank" rel="noopener">
+        <div class="video-frame" style="background-image:url('https://img.youtube.com/vi/EujP1YTD4Hg/hqdefault.jpg')"><div class="play-overlay">▶</div></div>
+        <div class="video-caption"><h4>สรุปคำบรรยาย ครั้งที่ 1</h4></div>
+      </a>
+      <a class="video-card video-link" href="https://youtu.be/MqwtU7VNRuI" target="_blank" rel="noopener">
+        <div class="video-frame" style="background-image:url('https://img.youtube.com/vi/MqwtU7VNRuI/hqdefault.jpg')"><div class="play-overlay">▶</div></div>
+        <div class="video-caption"><h4>สรุปคำบรรยาย ครั้งที่ 2</h4></div>
+      </a>
+      <a class="video-card video-link" href="https://youtu.be/p012E5LQjaI" target="_blank" rel="noopener">
+        <div class="video-frame" style="background-image:url('https://img.youtube.com/vi/p012E5LQjaI/hqdefault.jpg')"><div class="play-overlay">▶</div></div>
+        <div class="video-caption"><h4>สรุปคำบรรยาย ครั้งที่ 3</h4></div>
+      </a>
+      <a class="video-card video-link" href="https://youtu.be/b85731pM1zE" target="_blank" rel="noopener">
+        <div class="video-frame" style="background-image:url('https://img.youtube.com/vi/b85731pM1zE/hqdefault.jpg')"><div class="play-overlay">▶</div></div>
+        <div class="video-caption"><h4>สรุปคำบรรยาย ครั้งที่ 4</h4></div>
+      </a>
+      <a class="video-card video-link" href="https://youtu.be/CIhJscgxu4E" target="_blank" rel="noopener">
+        <div class="video-frame" style="background-image:url('https://img.youtube.com/vi/CIhJscgxu4E/hqdefault.jpg')"><div class="play-overlay">▶</div></div>
+        <div class="video-caption"><h4>สรุปคำบรรยาย ครั้งที่ 5</h4></div>
+      </a>
+      <a class="video-card video-link" href="https://youtu.be/PoLqta5EGsY" target="_blank" rel="noopener">
+        <div class="video-frame" style="background-image:url('https://img.youtube.com/vi/PoLqta5EGsY/hqdefault.jpg')"><div class="play-overlay">▶</div></div>
+        <div class="video-caption"><h4>สรุปคำบรรยาย ครั้งที่ 6</h4></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="tts-bar" id="ttsBar">
+  <button id="ttsPlayPause" title="เล่น/หยุดชั่วคราว">⏸️</button>
+  <button id="ttsStop" title="หยุด">⏹️</button>
+  <span class="tts-label" id="ttsLabel">กำลังอ่าน…</span>
+  <select id="ttsRate" title="ความเร็ว">
+    <option value="0.85">0.85x</option>
+    <option value="1" selected>1x</option>
+    <option value="1.25">1.25x</option>
+    <option value="1.5">1.5x</option>
+  </select>
+</div>
+
+<script>
+// ---------- robust click-to-jump (fixes anchor navigation inside sandboxed/preview frames) ----------
+const HEADER_OFFSET = 78; // topbar + mode-tabs height buffer
+function jumpTo(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  const y = el.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
+  window.scrollTo({ top: y, behavior: 'smooth' });
+}
+function wireAnchorLinks(container){
+  container.querySelectorAll('[data-jump]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('data-jump');
+      if(!document.getElementById(id)) return;
+      e.preventDefault();
+      jumpTo(id);
+    });
+  });
+}
+wireAnchorLinks(document);
+
+// mobile sidebar toggle
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+const menuBtn = document.getElementById('menuBtn');
+function openMenu(){ sidebar.classList.add('open'); overlay.classList.add('open'); }
+function closeMenu(){ sidebar.classList.remove('open'); overlay.classList.remove('open'); }
+menuBtn.addEventListener('click', openMenu);
+overlay.addEventListener('click', closeMenu);
+sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setTimeout(closeMenu, 50)));
+
+// active link highlight on scroll
+const parts = Array.from(document.querySelectorAll('section.part'));
+const links = Array.from(sidebar.querySelectorAll('a'));
+function setActive(id){
+  links.forEach(l => l.classList.toggle('active', l.getAttribute('data-jump') === id));
+}
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ setActive(e.target.id); }
+  });
+}, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+parts.forEach(p => io.observe(p));
+
+// progress tracking via checkboxes (in-memory only, no storage needed per session)
+const checks = Array.from(document.querySelectorAll('.mark'));
+const fill = document.getElementById('progressFill');
+const label = document.getElementById('progressLabel');
+function updateProgress(){
+  const done = checks.filter(c => c.checked).length;
+  fill.style.width = (done/checks.length*100) + '%';
+  label.textContent = done + '/' + checks.length + ' อ่านแล้ว';
+}
+checks.forEach(c => c.addEventListener('change', updateProgress));
+updateProgress();
+
+// ---------- mode tab switching ----------
+const modeTabs = Array.from(document.querySelectorAll('.mode-tab'));
+const modeReview = document.getElementById('mode-review');
+const modeStory = document.getElementById('mode-story');
+const modeVideo = document.getElementById('mode-video');
+function setMode(mode){
+  modeTabs.forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+  modeReview.style.display = mode === 'review' ? 'grid' : 'none';
+  modeStory.style.display = mode === 'story' ? 'block' : 'none';
+  modeVideo.style.display = mode === 'video' ? 'block' : 'none';
+  window.scrollTo({ top: 0, behavior: 'auto' });
+}
+modeTabs.forEach(t => t.addEventListener('click', () => setMode(t.dataset.mode)));
+
+// ---------- Text-to-Speech (Web Speech API, built into browser — no server/token cost) ----------
+const ttsBar = document.getElementById('ttsBar');
+const ttsLabel = document.getElementById('ttsLabel');
+const ttsPlayPause = document.getElementById('ttsPlayPause');
+const ttsStop = document.getElementById('ttsStop');
+const ttsRate = document.getElementById('ttsRate');
+let ttsActiveBtn = null;
+const supportsTTS = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+
+let thaiVoice = null;
+function pickThaiVoice(){
+  if(!supportsTTS) return;
+  const voices = window.speechSynthesis.getVoices() || [];
+  thaiVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('th')) || null;
+}
+if(supportsTTS){
+  pickThaiVoice();
+  window.speechSynthesis.onvoiceschanged = pickThaiVoice;
+}
+
+function getReadableText(el){
+  const clone = el.cloneNode(true);
+  clone.querySelectorAll('.img-slot, .done-check, .tts-btn, button').forEach(n => n.remove());
+  return (clone.innerText || clone.textContent || '').replace(/\s+/g,' ').trim();
+}
+
+function speakNear(btn){
+  if(!supportsTTS){ alert('เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง ลองเปิดด้วย Chrome หรือ Safari รุ่นล่าสุด'); return; }
+  if(!thaiVoice){
+    pickThaiVoice();
+  }
+  if(!thaiVoice){
+    alert('อุปกรณ์นี้ยังไม่มี "เสียงอ่านภาษาไทย" ติดตั้งไว้ จึงยังอ่านออกเสียงไทยไม่ได้ (ถ้าฝืนอ่านจะออกมาเพี้ยนเป็นเสียงภาษาอื่น)\n\nวิธีติดตั้งเพิ่ม:\n• Windows: Settings > Time & Language > Speech > Manage voices > เพิ่ม Thai\n• Android: Settings > System > Languages > Text-to-speech > ติดตั้งเสียงภาษาไทย\n• iPhone/iPad: Settings > Accessibility > Spoken Content > Voices > Thai\n\nมือถือส่วนใหญ่มักมีเสียงไทยติดมาให้อยู่แล้ว');
+    return;
+  }
+  const container = btn.closest('section.part') || btn.closest('.story-node');
+  if(!container) return;
+  if(ttsActiveBtn === btn){ toggleSpeakingPause(); return; }
+  stopSpeech();
+  const titleEl = container.querySelector('h2, h3');
+  ttsLabel.textContent = titleEl ? titleEl.textContent.trim() : 'กำลังอ่าน…';
+  const text = getReadableText(container);
+  if(!text){ return; }
+  ttsActiveBtn = btn;
+  btn.classList.add('speaking');
+  ttsBar.classList.add('show');
+  ttsPlayPause.textContent = '⏸️';
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'th-TH';
+  utter.voice = thaiVoice;
+  utter.rate = parseFloat(ttsRate.value) || 1;
+  utter.onend = stopSpeech;
+  utter.onerror = stopSpeech;
+  window.speechSynthesis.speak(utter);
+  startChromeKeepAlive();
+}
+
+// Chrome has a known bug where speechSynthesis silently stops after ~15s on long text.
+// Nudging pause/resume periodically keeps it alive without affecting other browsers.
+let ttsKeepAliveTimer = null;
+function startChromeKeepAlive(){
+  clearInterval(ttsKeepAliveTimer);
+  ttsKeepAliveTimer = setInterval(() => {
+    if(!window.speechSynthesis.speaking){ clearInterval(ttsKeepAliveTimer); return; }
+    if(!window.speechSynthesis.paused){
+      window.speechSynthesis.pause();
+      window.speechSynthesis.resume();
+    }
+  }, 8000);
+}
+
+function toggleSpeakingPause(){
+  if(!supportsTTS) return;
+  if(window.speechSynthesis.speaking && !window.speechSynthesis.paused){
+    window.speechSynthesis.pause();
+    ttsPlayPause.textContent = '▶️';
+  } else if(window.speechSynthesis.paused){
+    window.speechSynthesis.resume();
+    ttsPlayPause.textContent = '⏸️';
+  }
+}
+
+function stopSpeech(){
+  if(supportsTTS) window.speechSynthesis.cancel();
+  clearInterval(ttsKeepAliveTimer);
+  if(ttsActiveBtn) ttsActiveBtn.classList.remove('speaking');
+  ttsActiveBtn = null;
+  ttsBar.classList.remove('show');
+}
+
+if(supportsTTS){
+  ttsPlayPause.addEventListener('click', toggleSpeakingPause);
+  ttsStop.addEventListener('click', stopSpeech);
+} else {
+  ttsBar.style.display = 'none';
+}
+</script>
+</body>
+</html>

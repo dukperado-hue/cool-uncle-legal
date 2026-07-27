@@ -1,0 +1,2216 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ห้องซ้อมสอบ กฎหมายครอบครัว</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;900&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+<style>
+:root{
+  --paper:#FBF9F4;
+  --card:#FFFFFF;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --gold-soft:#F3E8CF;
+  --ok:#1E7A4F;
+  --ok-bg:#E6F4EC;
+  --bad:#B23A3A;
+  --bad-bg:#FBEAEA;
+  --accent:#2E4A7A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+/* ---------- top home bar (flat, for future multi-subject hub) ---------- */
+.home-bar{
+  display:flex;align-items:center;gap:10px;
+  background:#EFEAE0;border-bottom:1px solid var(--line);
+  padding:10px 16px;font-size:13px;color:var(--ink-soft);
+}
+.home-bar-link{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.home-bar-link:hover{text-decoration:underline}
+.home-bar-sep{color:var(--ink-faint)}
+.home-bar-current{font-weight:600;color:var(--ink-soft)}
+.home-bar-score{
+  margin-left:auto;font-weight:800;color:#8F6511;background:var(--gold-soft);
+  padding:4px 12px;border-radius:999px;font-size:13px;white-space:nowrap;
+  transition:transform .15s;
+}
+.home-bar-score.score-pop{animation:scorePop .4s ease}
+@keyframes scorePop{
+  0%{transform:scale(1)}
+  35%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),
+    var(--paper);
+  color:var(--ink);
+  min-height:100vh;
+  padding:20px 14px 60px;
+  font-size:16px;
+  line-height:1.75;
+}
+.wrap{max-width:860px;margin:0 auto}
+
+/* ---------- header ---------- */
+header{text-align:center;margin-bottom:22px;transition:opacity .15s}
+header.compact{margin-bottom:10px}
+header.compact .crest{display:none}
+header.compact h1{font-size:19px}
+header.compact .subtitle{display:none}
+.crest{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Noto Serif Thai',serif;
+  font-size:13px;letter-spacing:.35em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:6px;
+}
+.crest::before,.crest::after{content:"";width:44px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+.crest::after{background:linear-gradient(90deg,var(--gold),transparent);}
+h1{
+  font-family:'Noto Serif Thai',serif;
+  font-size:clamp(24px,5vw,36px);
+  font-weight:700;line-height:1.3;
+}
+.subtitle{color:var(--ink-soft);font-size:15px;margin-top:2px}
+
+/* ---------- tabs ---------- */
+.tabbar{
+  display:flex;gap:6px;background:#F1EDE2;border:1px solid var(--line);
+  border-radius:999px;padding:5px;margin:20px auto 26px;max-width:600px;
+}
+.tabbar button{
+  flex:1;border:none;background:transparent;border-radius:999px;
+  padding:10px 5px;font-family:inherit;font-size:13.5px;font-weight:600;
+  color:var(--ink-soft);cursor:pointer;transition:all .2s;
+}
+.tabbar button.on{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+.tabbar button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#btn-reset,#btn-sound{
+  flex:0 0 38px;font-size:15px;color:var(--ink-faint);
+}
+#btn-reset:hover{color:var(--bad)}
+#btn-sound:hover{color:var(--accent)}
+
+/* ---------- sticky bottom action bar ---------- */
+.sticky-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
+  background:linear-gradient(180deg,rgba(251,249,244,0) 0%,var(--paper) 35%);
+  padding:22px 14px calc(14px + env(safe-area-inset-bottom,0px));
+}
+.sticky-bar-inner{max-width:860px;margin:0 auto;display:flex;gap:10px}
+.sticky-bar-inner button{
+  flex:1;box-shadow:0 6px 20px rgba(34,40,58,.22);
+  padding:18px 20px;font-size:17.5px;font-weight:700;border-radius:14px;
+  letter-spacing:.01em;
+}
+body.has-sticky-bar{padding-bottom:92px}
+@media(max-width:520px){
+  .sticky-bar{padding:18px 10px calc(12px + env(safe-area-inset-bottom,0px))}
+  .sticky-bar-inner button{padding:16px 14px;font-size:16px}
+}
+.irac-caselist{display:flex;flex-direction:column;gap:10px}
+.irac-case-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;text-align:left;cursor:pointer;transition:border-color .15s;
+}
+.irac-case-card:hover{border-color:var(--gold)}
+.irac-case-card .icref{font-size:12px;color:var(--ink-faint);margin-bottom:4px}
+.irac-case-card .ictitle{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:600}
+.irac-case-card .icprog{font-size:12.5px;color:var(--gold);margin-top:6px;font-weight:600}
+
+.irac-facts{
+  background:#FBF6E8;border:1px solid var(--gold-soft);border-radius:var(--radius);
+  padding:14px 16px;margin-bottom:6px;font-size:15px;line-height:1.85;color:var(--ink);
+  max-height:92px;overflow:hidden;position:relative;
+}
+.irac-facts::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:34px;
+  background:linear-gradient(180deg,transparent,#FBF6E8);pointer-events:none;
+}
+.irac-facts.expanded{max-height:none}
+.irac-facts.expanded::after{display:none}
+.irac-facts-toggle{
+  display:block;width:100%;text-align:center;font-size:13px;color:var(--accent);font-weight:600;
+  background:none;border:none;padding:5px 0 14px;cursor:pointer;
+}
+
+.irac-stepper{display:flex;gap:5px;margin-bottom:8px}
+.irac-step{
+  flex:1;text-align:center;font-size:11px;font-weight:600;color:var(--ink-faint);
+  padding:5px 2px;border-radius:8px;background:#EEEBE0;border:1px solid transparent;
+}
+.irac-step.active{background:var(--accent);color:#fff}
+.irac-step.done{background:var(--ok-bg);color:var(--ok);border-color:#BFE3CE}
+
+.irac-progress-label{font-size:12.5px;color:var(--ink-soft);margin-bottom:6px;font-weight:600}
+.irac-back{background:none;border:none;color:var(--ink-faint);font-size:13px;cursor:pointer;margin-bottom:12px;padding:0}
+.irac-back:hover{color:var(--accent)}
+
+.irac-issue-recap{
+  background:var(--ok-bg);border:1px solid #BFE3CE;border-radius:var(--radius);
+  padding:16px 18px;text-align:center;
+}
+.irac-issue-recap .big{font-family:'Noto Serif Thai',serif;font-size:18px;font-weight:700;color:#14563A;margin-bottom:6px}
+
+/* ---------- stage banner (แถบธีมตามหมวด แทน SVG scene) ---------- */
+.stage{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  margin-bottom:14px;min-height:74px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px;border:1px solid rgba(0,0,0,.06);
+}
+.stage .stage-icon{font-size:30px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.15))}
+.stage .stage-label{font-family:'Noto Serif Thai',serif;font-weight:700;font-size:15px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.stage .stage-src{font-size:11.5px;color:rgba(255,255,255,.85);margin-top:2px;display:block}
+@media(max-width:520px){.stage{min-height:60px;padding:10px}.stage .stage-icon{font-size:24px}.stage .stage-label{font-size:13px}}
+
+/* ---------- มาตรา chip strip (โหมดการ์ด) ---------- */
+.matra-chips{display:none;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:14px}
+.matra-chips-label{font-size:12.5px;color:var(--ink-faint);font-weight:600;margin-right:2px}
+.matra-chip{
+  --chip-color:#888;
+  font-family:'Noto Serif Thai',serif;font-size:12.5px;font-weight:700;
+  background:var(--card);border:1.5px solid var(--line);color:var(--ink-soft);
+  border-radius:999px;padding:5px 12px;cursor:pointer;transition:all .15s;
+}
+.matra-chip:hover{border-color:var(--chip-color);color:var(--chip-color)}
+.matra-chip.active{background:var(--chip-color);border-color:var(--chip-color);color:#fff}
+
+button{font-family:inherit}
+select{
+  font-family:inherit;font-size:15px;color:var(--ink);
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:10px 12px;width:100%;
+}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.row select{flex:1;min-width:170px;width:auto}
+.muted{color:var(--ink-soft);font-size:14px;white-space:nowrap}
+
+/* ---------- flashcard ---------- */
+.flip-stage{perspective:1200px}
+.flashcard{
+  position:relative;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  min-height:250px;padding:34px 26px 30px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:10px;overflow:hidden;
+  transition:transform .16s ease;
+}
+.flashcard.flipping{transform:rotateY(90deg)}
+@media (prefers-reduced-motion:reduce){.flashcard.flipping{transform:none}}
+/* ---------- flashcard สีหมวด ---------- */
+.flashcard[data-face="front"]{background:var(--card-soft,var(--card));border-top:4px solid var(--card-strong,var(--line))}
+.flashcard[data-face="back"]{background:var(--card-strong,var(--accent));border-top:none}
+.flashcard[data-face="back"] .card-title,
+.flashcard[data-face="back"] .card-result,
+.flashcard[data-face="back"] .card-note,
+.flashcard[data-face="back"] .src-tag,
+.flashcard[data-face="back"] .cat-badge-inline{color:#fff}
+.flashcard[data-face="back"] .card-note{border-top-color:rgba(255,255,255,.3);color:rgba(255,255,255,.85)}
+.flashcard[data-face="back"] .card-note::before{content:none}
+.btn-flip-hint{display:none}
+
+.ribbon{
+  position:absolute;top:0;left:26px;width:34px;height:56px;
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%);
+}
+.chapter-tag{
+  font-size:12.5px;font-weight:700;letter-spacing:.02em;
+  padding:4px 14px;border-radius:999px;
+}
+.src-tag{font-size:11.5px;color:var(--ink-faint);margin-top:2px;font-weight:600}
+.sec-no{
+  font-family:'Noto Serif Thai',serif;font-size:clamp(30px,7vw,44px);
+  font-weight:700;line-height:1.25;
+}
+.stars{color:var(--gold);font-size:16px;letter-spacing:.15em}
+.hint{font-size:13px;color:var(--ink-faint);margin-top:10px}
+.face-back .card-title{font-family:'Noto Serif Thai',serif;font-size:17px;font-weight:600;line-height:1.6}
+.face-back .card-result{font-size:16px;margin-top:10px;line-height:1.8}
+.face-back .card-note{
+  font-size:14px;color:var(--ink-soft);margin-top:12px;line-height:1.7;
+  border-top:1px dashed var(--line);padding-top:10px;max-width:560px;
+}
+.nav3{display:flex;gap:10px;margin-top:14px}
+.nav3 button{
+  flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:12px;font-size:14.5px;font-weight:600;color:var(--ink);cursor:pointer;
+  transition:border-color .15s, transform .1s;
+}
+.nav3 button:hover{border-color:var(--ink-faint)}
+.nav3 button:active{transform:scale(.98)}
+.nav3 button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- sequence list ---------- */
+.seq-item{
+  background:var(--card);border:1px solid var(--line);border-left-width:6px;
+  border-radius:12px;padding:14px 16px;margin-bottom:10px;
+  display:flex;gap:12px;box-shadow:0 1px 2px rgba(34,40,58,.04);
+}
+.seq-num{
+  font-family:'Noto Serif Thai',serif;font-weight:700;font-size:15px;
+  color:var(--ink-faint);min-width:22px;padding-top:3px;
+}
+.seq-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.seq-sec{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:700}
+.seq-title{font-size:15px;font-weight:600}
+.seq-res{font-size:14.5px;margin-top:4px;line-height:1.7}
+.seq-note{font-size:13.5px;color:var(--ink-soft);margin-top:5px;line-height:1.65;border-top:1px dashed var(--line);padding-top:5px}
+.seq-stars{color:var(--gold);font-size:12px;letter-spacing:.1em}
+.seq-src{font-size:12px;color:var(--ink-faint);font-weight:600}
+
+/* ---------- quiz ---------- */
+.lvlbar{display:flex;gap:8px;margin-bottom:14px}
+.lvlbar button{
+  flex:1;border:1.5px solid var(--line);background:var(--card);border-radius:12px;
+  padding:12px 8px;font-size:14.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+}
+.lvlbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.lvlbar .lvl-desc{display:block;font-size:12px;font-weight:400;color:var(--ink-faint);margin-top:2px}
+.lvlbar button.on .lvl-desc{color:var(--accent)}
+
+.setbar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.setbar button{
+  border:1px solid var(--line);background:var(--card);border-radius:999px;
+  padding:7px 15px;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.setbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.setbar .best{color:var(--gold);font-size:12px;font-weight:700}
+
+.progressbar{height:6px;background:#EDE9DD;border-radius:99px;overflow:hidden;margin-bottom:8px}
+.progressbar>div{height:100%;background:linear-gradient(90deg,var(--accent),#5E7BB0);border-radius:99px;transition:width .3s}
+.quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:14px;gap:10px}
+.quiz-timer{
+  font-weight:700;color:var(--ink-soft);background:#EEEBE0;border-radius:999px;
+  padding:3px 10px;font-size:13px;white-space:nowrap;
+}
+.quiz-timer.timer-fast{background:var(--ok-bg);color:var(--ok)}
+.quiz-meta .score{font-weight:700}
+
+.scenario{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:20px 22px;margin-bottom:14px;
+}
+.scenario .qtext{font-size:16.5px;line-height:1.9}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opts button{
+  text-align:left;background:var(--card);border:1.5px solid var(--line);
+  border-radius:12px;padding:14px 16px;font-size:15px;line-height:1.7;
+  color:var(--ink);cursor:pointer;transition:border-color .15s, background .15s;
+  display:flex;gap:10px;
+}
+.opts button:hover:not(:disabled){border-color:var(--ink-faint)}
+.opts button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opts .abc{
+  font-family:'Noto Serif Thai',serif;font-weight:700;color:var(--ink-faint);
+  min-width:20px;
+}
+.opts button.correct{border-color:var(--ok);background:var(--ok-bg)}
+.opts button.correct .abc{color:var(--ok)}
+.opts button.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opts button.wrong .abc{color:var(--bad)}
+.opts button:disabled{cursor:default;opacity:.92}
+
+.explain{
+  display:none;margin-top:14px;border-radius:12px;padding:16px 18px;
+  font-size:15px;line-height:1.85;border:1px solid;
+}
+.explain.ok{background:var(--ok-bg);border-color:#BFE3CE;color:#14563A}
+.explain.bad{background:var(--bad-bg);border-color:#F0C9C9;color:#7C2A2A}
+.explain b{display:block;margin-bottom:4px;font-size:15.5px}
+.pts-earned{
+  display:inline-block;background:var(--gold);color:#fff;font-weight:800;
+  font-size:12.5px;padding:2px 9px;border-radius:999px;margin-left:6px;vertical-align:middle;
+}
+
+.btn-primary{background:var(--accent);color:#fff;border:none}
+.btn-primary:hover{background:#26406B}
+.btn-ghost{background:var(--card);border:1.5px solid var(--line) !important;color:var(--ink)}
+
+/* ---------- summary ---------- */
+.summary{
+  display:none;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:34px 24px;text-align:center;
+}
+.summary .grade{font-family:'Noto Serif Thai',serif;font-size:24px;font-weight:700;margin-top:8px}
+.summary .bigscore{font-family:'Noto Serif Thai',serif;font-size:52px;font-weight:700;color:var(--accent);line-height:1.2}
+.summary .of{font-size:15px;color:var(--ink-soft)}
+.summary .gstars{color:var(--gold);font-size:22px;letter-spacing:.2em;margin-top:6px}
+.summary .sum-actions{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+.summary .sum-actions button{
+  border-radius:12px;padding:12px 22px;font-size:14.5px;font-weight:700;cursor:pointer;border:none;
+}
+footer{
+  margin-top:40px;text-align:center;font-size:12.5px;color:var(--ink-faint);
+  border-top:1px solid var(--line);padding-top:16px;
+}
+.view{display:none}
+.view.on{display:block}
+
+/* ---------- โหมด 5: สรุปเนื้อหา ---------- */
+.study-nav3{display:flex;gap:10px}
+.study-disclaimer{
+  background:#FFF6E0;border:1px solid #F0D896;color:#7A5A0A;
+  border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;
+  text-align:center;margin-bottom:14px;
+}
+.study-nav3 button{
+  flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:11px;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer;
+}
+.study-nav3 button:hover{border-color:var(--ink-faint)}
+.study-panel{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:22px 24px;margin:14px 0;
+}
+.study-title{
+  font-family:'Noto Serif Thai',serif;font-size:19px;font-weight:700;color:var(--accent);
+  margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid var(--gold-soft);
+}
+.study-toc{
+  background:#F6F3EA;border:1px solid var(--gold-soft);border-radius:12px;
+  padding:12px 14px;margin-bottom:22px;
+}
+.study-toc-label{font-size:12.5px;font-weight:700;color:var(--gold);margin-bottom:8px}
+.study-toc-list{display:flex;flex-wrap:wrap;gap:6px 8px}
+.study-toc-item{
+  font-size:12.5px;text-decoration:none;padding:5px 10px;border-radius:999px;
+  background:var(--card);border:1px solid var(--line);color:var(--ink-soft);
+  transition:border-color .15s,color .15s;
+}
+.study-toc-item:hover{border-color:var(--accent);color:var(--accent)}
+.study-toc-item.toc-major{
+  background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700;
+  flex-basis:100%;border-radius:8px;padding:7px 12px;
+}
+.study-toc-item.toc-major:hover{background:#26406B;color:#fff}
+.study-content{font-size:15px;line-height:1.9;color:var(--ink)}
+.study-content h4,.study-content h5,.study-content h6{
+  font-family:'Noto Serif Thai',serif;color:var(--accent);line-height:1.5;
+}
+.study-content h4{font-size:18px;margin:40px 0 14px;padding-top:14px;border-top:1px solid var(--line)}
+.study-content h4:first-child{margin-top:0;padding-top:0;border-top:none}
+.study-content h5{font-size:16.5px;margin:30px 0 10px}
+.study-content h6{font-size:15.5px;color:var(--gold);margin:22px 0 8px}
+.study-content p{margin:8px 0}
+.study-content ul,.study-content ol{margin:6px 0 10px 22px}
+.study-content li{margin:4px 0}
+.study-content b{color:var(--ink);font-weight:700}
+.study-content hr{border:none;border-top:1px dashed var(--line);margin:18px 0}
+.study-content a{color:var(--accent)}
+.study-content .muted{color:var(--ink-faint);font-style:italic}
+.study-content .tbl-wrap{overflow-x:auto;margin:10px 0}
+.study-content table{border-collapse:collapse;width:100%;font-size:14px}
+.study-content th,.study-content td{
+  border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;
+}
+.study-content th{background:var(--gold-soft);color:#5A4415;font-weight:700}
+.study-content tr:nth-child(even) td{background:#FBF9F3}
+@media(max-width:640px){
+  .tabbar{flex-wrap:wrap;border-radius:16px;max-width:100%}
+  .tabbar button{flex:1 1 30%}
+  #btn-reset,#btn-sound{flex:0 0 auto}
+}
+@media(max-width:520px){
+  .study-panel{padding:16px}
+  .study-title{font-size:17px}
+}
+@media(max-width:520px){
+  body{padding:14px 10px 50px}
+  .flashcard{padding:28px 16px 24px}
+  .scenario{padding:16px}
+}
+</style>
+
+</style>
+</head>
+<body>
+<div class="home-bar">
+  <a href="index.html" class="home-bar-link">← กลับหน้าหลัก</a>
+  <span class="home-bar-sep">·</span>
+  <span class="home-bar-current">กฎหมายลักษณะครอบครัว</span>
+  <span class="home-bar-score" id="global-score">🏆 <span id="score-value">0</span> คะแนน</span>
+</div>
+<div class="wrap">
+
+<header id="page-header">
+  <div class="crest" id="hd-crest">กฎหมายลักษณะครอบครัว</div>
+  <h1 id="hd-title">ห้องซ้อมสอบ กฎหมายครอบครัว</h1>
+  <div class="subtitle" id="hd-sub">ป.พ.พ. บรรพ 5 · ปรับปรุงตามสมรสเท่าเทียม พ.ศ. 2567</div>
+</header>
+
+<nav class="tabbar" aria-label="โหมดเกม">
+  <button id="tab-card" class="on">การ์ดจำมาตรา</button>
+  <button id="tab-seq">เรียงมาตรา</button>
+  <button id="tab-quiz">วิเคราะห์โจทย์</button>
+  <button id="tab-irac">ฝึก IRAC</button>
+  <button id="tab-order" style="display:none">เรียงขั้นตอน</button>
+  <button id="btn-sound" title="ปิด/เปิดเสียง" aria-label="ปิด/เปิดเสียง">🔊</button>
+  <button id="btn-reset" title="รีเซ็ตทั้งหมด" aria-label="รีเซ็ตทั้งหมด">↺</button>
+</nav>
+
+<!-- ============ โหมด 1: การ์ด ============ -->
+<section id="view-card" class="view on">
+  <div class="row">
+    <select id="cat-select" aria-label="เลือกหมวด"></select>
+    <span class="muted" id="card-progress"></span>
+  </div>
+  <div class="matra-chips" id="matra-chips"></div>
+  <div class="stage" id="card-stage" aria-hidden="true"></div>
+  <div class="flip-stage">
+    <div class="flashcard" id="flip-card" role="button" tabindex="0" aria-label="แตะเพื่อพลิกการ์ด">
+      <div class="ribbon" id="card-ribbon"></div>
+      <div class="chapter-tag" id="cat-badge"></div>
+      <div class="face-front" id="face-front">
+        <div class="sec-no" id="card-section"></div>
+        <div class="src-tag" id="card-src-front"></div>
+        <div class="stars" id="card-stars"></div>
+        <div class="hint">แตะการ์ดเพื่อดูคำตอบ · ปุ่มลูกศรเลื่อนการ์ด</div>
+      </div>
+      <div class="face-back" id="face-back" style="display:none">
+        <div class="card-title" id="card-title"></div>
+        <div class="src-tag" id="card-src-back"></div>
+        <div class="card-result" id="card-result"></div>
+        <div class="card-note" id="card-note"></div>
+      </div>
+    </div>
+  </div>
+  <div class="nav3">
+    <button id="btn-prev">← ก่อนหน้า</button>
+    <button id="btn-shuffle">⇄ สุ่มใหม่</button>
+    <button id="btn-next">ถัดไป →</button>
+  </div>
+</section>
+
+<!-- ============ โหมด 2: เรียงมาตรา ============ -->
+<section id="view-seq" class="view">
+  <div class="row"><select id="seq-select" aria-label="เลือกหมวดเรียงมาตรา"></select></div>
+  <div id="seq-list"></div>
+</section>
+
+<!-- ============ โหมด 3: วิเคราะห์โจทย์ ============ -->
+<section id="view-quiz" class="view">
+  <div class="lvlbar">
+    <button id="lvl-basic" class="on">พื้นฐาน<span class="lvl-desc">ท่องจำมาตรา–ผลกฎหมาย</span></button>
+    <button id="lvl-adv">ข้อสอบจริง<span class="lvl-desc">โจทย์สถานการณ์แนวข้อสอบ</span></button>
+  </div>
+  <div class="setbar" id="set-picker"></div>
+
+  <div id="quiz-play">
+    <div class="progressbar"><div id="pbar" style="width:0%"></div></div>
+    <div class="quiz-meta">
+      <span class="muted" id="quiz-progress"></span>
+      <span class="quiz-timer" id="quiz-timer">⏱ 0.0s</span>
+      <span class="score" id="quiz-score"></span>
+    </div>
+    <div class="chapter-tag" id="quiz-tag" style="display:inline-block;margin-bottom:10px"></div>
+    <div class="stage" id="quiz-stage" aria-hidden="true"></div>
+    <div class="scenario"><div class="qtext" id="quiz-scenario"></div></div>
+    <div class="opts" id="quiz-options"></div>
+    <div class="explain" id="quiz-explain"></div>
+  </div>
+
+  <div class="summary" id="quiz-summary">
+    <div class="muted" id="sum-set-label"></div>
+    <div class="bigscore" id="sum-score">0</div>
+    <div class="of" id="sum-of">จาก 10 ข้อ</div>
+    <div class="gstars" id="sum-stars"></div>
+    <div class="grade" id="sum-grade"></div>
+    <div class="muted" id="sum-best" style="margin-top:6px"></div>
+    <div class="sum-actions">
+      <button id="sum-review" class="btn-ghost" style="display:none">ทบทวนข้อที่ผิด</button>
+      <button id="sum-retry" class="btn-ghost">ทำชุดนี้ซ้ำ</button>
+      <button id="sum-nextset" class="btn-primary" style="display:none">ชุดถัดไป →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ โหมด 4: ฝึก IRAC ============ -->
+<section id="view-irac" class="view">
+  <div id="irac-picker">
+    <p class="muted" style="margin-bottom:14px;font-size:14px">เลือกข้อสอบจริงที่จะฝึกวินิจฉัยแบบ IRAC ทีละประเด็น: ตั้งประเด็น → เลือกมาตรา → ปรับบท → สรุปผล</p>
+    <div class="irac-caselist" id="irac-caselist"></div>
+  </div>
+
+  <div id="irac-play" style="display:none">
+    <button class="irac-back" id="irac-back">← กลับไปเลือกข้อสอบ</button>
+    <div class="chapter-tag" id="irac-case-tag" style="display:inline-block;margin-bottom:6px"></div>
+    <div class="irac-facts" id="irac-facts"></div>
+    <button class="irac-facts-toggle" id="irac-facts-toggle">ขยายอ่านโจทย์เต็ม ▾</button>
+
+    <div style="margin-top:2px">
+      <div class="irac-progress-label" id="irac-progress-label"></div>
+      <span class="quiz-timer" id="irac-timer">⏱ 0.0s</span>
+      <div class="irac-stepper" id="irac-stepper">
+        <div class="irac-step" data-step="issue">1. ประเด็น</div>
+        <div class="irac-step" data-step="rule">2. มาตรา</div>
+        <div class="irac-step" data-step="app">3. ปรับบท</div>
+        <div class="irac-step" data-step="conc">4. สรุปผล</div>
+      </div>
+    </div>
+
+    <div id="irac-stage-box">
+      <div class="scenario" style="padding:16px 18px;margin-bottom:10px"><div class="qtext" id="irac-question" style="font-size:16.5px"></div></div>
+      <div class="opts" id="irac-options"></div>
+      <div class="explain" id="irac-explain"></div>
+    </div>
+
+    <div id="irac-recap-box" style="display:none">
+      <div class="irac-issue-recap">
+        <div class="big" id="irac-recap-title"></div>
+        <div id="irac-recap-text" style="font-size:14.5px;line-height:1.8;color:#14563A"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary" id="irac-summary">
+    <div class="muted" id="irac-sum-label"></div>
+    <div class="bigscore" id="irac-sum-score">0</div>
+    <div class="of" id="irac-sum-of"></div>
+    <div class="gstars" id="irac-sum-stars"></div>
+    <div class="grade" id="irac-sum-grade"></div>
+    <div class="sum-actions">
+      <button id="irac-sum-retry" class="btn-ghost">ทำข้อนี้ซ้ำ</button>
+      <button id="irac-sum-back" class="btn-ghost">เลือกข้อสอบอื่น</button>
+      <button id="irac-sum-nextcase" class="btn-primary" style="display:none">ข้อถัดไป →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ โหมด 5: เรียงขั้นตอน ============ -->
+<section id="view-order" class="view">
+  <div id="order-picker">
+    <p class="muted" style="margin-bottom:14px;font-size:14px">แตะขั้นตอนตามลำดับที่ถูกต้องของแต่ละกระบวนวิธีพิจารณา แข่งกับเวลาเพื่อคะแนนโบนัส</p>
+    <div class="irac-caselist" id="order-caselist"></div>
+  </div>
+
+  <div id="order-play" style="display:none">
+    <button class="irac-back" id="order-back">← กลับไปเลือกข้อ</button>
+    <div class="chapter-tag" id="order-tag" style="display:inline-block;margin-bottom:6px"></div>
+    <div class="scenario" style="padding:16px 18px;margin-bottom:10px">
+      <div class="qtext" id="order-title" style="font-size:16.5px"></div>
+    </div>
+    <p class="muted" style="margin-bottom:10px;font-size:13px">แตะการ์ดขั้นตอนด้านล่างเรียงตามลำดับที่ถูกต้อง <span class="quiz-timer" id="order-timer">⏱ 0.0s</span></p>
+    <div id="order-placed" class="order-placed-list"></div>
+    <div id="order-pool" class="order-pool"></div>
+    <div class="explain" id="order-explain" style="display:none"></div>
+    <div class="sum-actions" style="margin-top:14px">
+      <button id="order-retry" class="btn-ghost" style="display:none">ลองใหม่</button>
+      <button id="order-nextcase" class="btn-primary" style="display:none">ข้อถัดไป →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  สร้างด้วย Claude · การ์ดสรุปมาตราและโจทย์แนวข้อสอบ กฎหมายลักษณะครอบครัว (ป.พ.พ. บรรพ 5) · ชื่อบุคคลในโจทย์เป็นชื่อสมมติ
+</footer>
+</div>
+
+<div class="sticky-bar" id="sticky-bar">
+  <div class="sticky-bar-inner">
+    <button id="quiz-next" class="btn-primary" style="display:none">ข้อถัดไป →</button>
+    <button id="quiz-finish" class="btn-primary" style="display:none">ดูสรุปผล</button>
+    <button id="irac-next" class="btn-primary" style="display:none">ถัดไป →</button>
+    <button id="irac-recap-next" class="btn-primary" style="display:none">ประเด็นถัดไป →</button>
+    <button id="order-check" class="btn-primary" style="display:none">ตรวจคำตอบ ✓</button>
+  </div>
+</div>
+
+<script>
+/* ==============================================================
+   ข้อมูลวิชา: กฎหมายลักษณะครอบครัว (ป.พ.พ. บรรพ 5)
+   ปรับปรุงตาม พ.ร.บ. แก้ไข ป.พ.พ. (สมรสเท่าเทียม) พ.ศ. 2567
+   *ชื่อบุคคลในโจทย์เป็นชื่อสมมติ ไม่ใช่ข้อสอบต้นฉบับ*
+   ============================================================== */
+
+const CONFIG = {
+  crest: "กฎหมายลักษณะครอบครัว",
+  title: "ห้องซ้อมสอบ กฎหมายครอบครัว",
+  subtitle: "ป.พ.พ. บรรพ 5 · ปรับปรุงตามสมรสเท่าเทียม พ.ศ. 2567",
+  storageKey: "famlaw_progress_v1"
+};
+
+const CATEGORIES = {
+  betroth: { label:"๑) การหมั้น", soft:"#FBE7F0", strong:"#B23A6E", icon:"💍", source:"ป.พ.พ." },
+  marriage:{ label:"๒) การสมรส & โมฆะ-โมฆียะ", soft:"#E7EAF6", strong:"#2E4A7A", icon:"💒", source:"ป.พ.พ." },
+  property:{ label:"๓) ทรัพย์สิน & หนี้ระหว่างสมรส", soft:"#E6F4EC", strong:"#1E7A4F", icon:"💰", source:"ป.พ.พ." },
+  divorce: { label:"๔) การหย่า", soft:"#F0E7F6", strong:"#7A3FA0", icon:"⚖️", source:"ป.พ.พ." },
+  parentchild:{ label:"๕) บิดามารดา–บุตร", soft:"#FBEBDD", strong:"#C2621B", icon:"👶", source:"ป.พ.พ." },
+  guardian_adopt:{ label:"๖) ผู้ปกครอง & บุตรบุญธรรม", soft:"#F3E8CF", strong:"#8A6A25", icon:"🧸", source:"ป.พ.พ." }
+};
+
+const CARDS = [
+  { cat:"betroth", section:"ม.1435", title:"เงื่อนไขอายุของการหมั้น", stars:5, source:"ป.พ.พ.",
+    result:"การหมั้นจะทำได้เมื่อบุคคลทั้งสองฝ่ายมีอายุ 18 ปีบริบูรณ์แล้ว การหมั้นที่ฝ่าฝืนเงื่อนไขอายุตกเป็น 'โมฆะ'",
+    note:"แก้ไขตามสมรสเท่าเทียม 2567 จากเดิม 17 ปี ให้สอดคล้องกับเกณฑ์อายุสมรสใน ม.1448" },
+  { cat:"betroth", section:"ม.1436", title:"ผู้เยาว์ทำการหมั้น", stars:4, source:"ป.พ.พ.",
+    result:"ผู้เยาว์จะทำการหมั้นได้ต้องได้รับความยินยอมของบิดามารดา/ผู้รับบุตรบุญธรรม/ผู้ปกครอง การหมั้นที่ไม่ได้รับความยินยอมตกเป็น 'โมฆียะ'",
+    note:"เทียบกับ ม.1435 ที่ฝ่าฝืนอายุแล้วเป็นโมฆะ — คนละผลกัน" },
+  { cat:"betroth", section:"ม.1437", title:"ความสมบูรณ์ของการหมั้น & ของหมั้น", stars:5, source:"ป.พ.พ.",
+    result:"การหมั้นสมบูรณ์เมื่อ 'ฝ่ายผู้หมั้น' ส่งมอบหรือโอนทรัพย์สินอันเป็นของหมั้นให้แก่ 'ผู้รับหมั้น' และของหมั้นย่อมตกเป็นสิทธิแก่ผู้รับหมั้น",
+    note:"ถ้อยคำใหม่ใช้ 'ผู้หมั้น/ผู้รับหมั้น' แทน 'ชาย/หญิง' เพราะสมรสเท่าเทียม" },
+  { cat:"betroth", section:"ม.1437 ว.3", title:"สินสอด", stars:4, source:"ป.พ.พ.",
+    result:"สินสอด คือทรัพย์สินที่ฝ่ายผู้หมั้นให้แก่บิดามารดา/ผู้รับบุตรบุญธรรม/ผู้ปกครองฝ่ายผู้รับหมั้น เพื่อตอบแทนการที่ผู้รับหมั้นยอมสมรส ถ้าไม่มีการสมรสโดยเหตุสำคัญอันเกิดแก่ผู้รับหมั้น ฝ่ายผู้หมั้นเรียกสินสอดคืนได้",
+    note:"สินสอดต่างจากของหมั้น: ของหมั้นให้แก่ตัวผู้รับหมั้น แต่สินสอดให้แก่ผู้ปกครองของผู้รับหมั้น" },
+  { cat:"betroth", section:"ม.1438", title:"หมั้นฟ้องบังคับสมรสไม่ได้", stars:3, source:"ป.พ.พ.",
+    result:"การหมั้นไม่เป็นเหตุที่จะร้องขอให้ศาลบังคับให้สมรสได้ ข้อตกลงว่าจะให้เบี้ยปรับหากผิดสัญญาหมั้นเป็น 'โมฆะ'",
+    note:"ข้อตกลงเบี้ยปรับ (เช่น 'ถ้าไม่สมรสให้จ่าย 2 แสน') บังคับไม่ได้เลย" },
+  { cat:"betroth", section:"ม.1439", title:"ผิดสัญญาหมั้น", stars:5, source:"ป.พ.พ.",
+    result:"เมื่อหมั้นแล้ว ถ้าฝ่ายใดผิดสัญญาหมั้น ฝ่ายนั้นต้องรับผิดใช้ค่าทดแทน และถ้าผู้รับหมั้นเป็นฝ่ายผิดให้คืนของหมั้นแก่ผู้หมั้นด้วย",
+    note:"ถ้าผู้หมั้นเป็นฝ่ายผิด ผู้รับหมั้นไม่ต้องคืนของหมั้น" },
+  { cat:"betroth", section:"ม.1440", title:"ประเภทของค่าทดแทน", stars:5, source:"ป.พ.พ.",
+    result:"ค่าทดแทนมี 3 ประเภท: (1) ทดแทนความเสียหายต่อกาย/ชื่อเสียง (2) ทดแทนค่าใช้จ่าย/หนี้ที่ก่อขึ้นโดยสุจริตเพื่อเตรียมการสมรส (3) ทดแทนการที่ได้จัดการทรัพย์สิน/การงานอาชีพโดยคาดว่าจะได้สมรส",
+    note:"'ค่าเตรียมการสมรส' เช่น จองสถานที่ เข้าคอร์สเจ้าสาว จองฮันนีมูน = อนุ (2)" },
+  { cat:"betroth", section:"ม.1441", title:"คู่หมั้นตายก่อนสมรส", stars:4, source:"ป.พ.พ.",
+    result:"ถ้าคู่หมั้นฝ่ายหนึ่งตายก่อนสมรส อีกฝ่ายจะเรียกค่าทดแทนไม่ได้ และของหมั้นหรือสินสอดที่ได้ส่งมอบแล้วไม่ต้องคืน",
+    note:"ความตายไม่ใช่การผิดสัญญา จึงไม่มีใครต้องรับผิด" },
+  { cat:"betroth", section:"ม.1442", title:"เหตุสำคัญอันเกิดแก่ผู้รับหมั้น", stars:4, source:"ป.พ.พ.",
+    result:"ถ้ามีเหตุสำคัญอันเกิดแก่ 'ผู้รับหมั้น' ผู้หมั้นมีสิทธิบอกเลิกสัญญาหมั้นได้ และผู้รับหมั้นต้องคืนของหมั้นแก่ผู้หมั้น",
+    note:"เหตุสำคัญ = เหตุที่กระทบต่อการสมรสอย่างมาก เช่น ผู้รับหมั้นไปมีความสัมพันธ์กับผู้อื่น" },
+  { cat:"betroth", section:"ม.1443", title:"เหตุสำคัญอันเกิดแก่ผู้หมั้น", stars:4, source:"ป.พ.พ.",
+    result:"ถ้ามีเหตุสำคัญอันเกิดแก่ 'ผู้หมั้น' ผู้รับหมั้นมีสิทธิบอกเลิกสัญญาหมั้นได้ โดยผู้รับหมั้นไม่ต้องคืนของหมั้น",
+    note:"ต่างจาก ม.1442: ฝ่ายที่บอกเลิกเพราะเหตุอยู่ที่อีกฝ่าย ไม่ต้องคืนของหมั้น" },
+  { cat:"betroth", section:"ม.1444", title:"กระทำชั่วอย่างร้ายแรง", stars:4, source:"ป.พ.พ.",
+    result:"ถ้าเหตุอันทำให้บอกเลิกสัญญาหมั้นเกิดจากการกระทำชั่วอย่างร้ายแรงของคู่หมั้นอีกฝ่ายซึ่งเกิดหลังการหมั้น คู่หมั้นผู้กระทำชั่วต้องรับผิดใช้ค่าทดแทนเสมือนเป็นผู้ผิดสัญญาหมั้น",
+    note:"เป็นการซ้อนความรับผิด: ทั้งถูกบอกเลิกและต้องจ่ายค่าทดแทน" },
+  { cat:"betroth", section:"ม.1445–1446", title:"ค่าทดแทนจากผู้อื่น", stars:3, source:"ป.พ.พ.",
+    result:"ผู้หมั้นเรียกค่าทดแทนจากผู้อื่นที่ได้ร่วมประเวณีกับคู่หมั้น (ม.1445) หรือข่มขืน/พยายามข่มขืนคู่หมั้น (ม.1446) โดยผู้นั้นรู้หรือควรรู้ว่าคู่หมั้นได้หมั้นแล้ว",
+    note:"ม.1445 ต้องบอกเลิกสัญญาหมั้นก่อน แต่ ม.1446 (ข่มขืน) ไม่ต้องบอกเลิกก่อน" },
+  { cat:"betroth", section:"ม.1447/1–2", title:"อายุความสัญญาหมั้น", stars:3, source:"ป.พ.พ.",
+    result:"สิทธิเรียกร้องค่าทดแทน และสิทธิเรียกคืนของหมั้น/สินสอด มีอายุความ 6 เดือน นับแต่วันผิดสัญญาหมั้น หรือวันที่บอกเลิกสัญญาหมั้น แล้วแต่กรณี",
+    note:"อายุความสั้นมาก — 6 เดือน" },
+
+  { cat:"marriage", section:"ม.1448", title:"เงื่อนไขอายุการสมรส", stars:5, source:"ป.พ.พ.",
+    result:"การสมรสจะทำได้เมื่อบุคคลทั้งสองมีอายุ 18 ปีบริบูรณ์แล้ว แต่ศาลอาจอนุญาตให้สมรสก่อนได้เมื่อมีเหตุอันสมควร",
+    note:"สมรสเท่าเทียม 2567 แก้จาก 17 เป็น 18 ปี และใช้ 'บุคคลทั้งสอง' แทน 'ชาย-หญิง'" },
+  { cat:"marriage", section:"ม.1449", title:"ห้ามสมรสกับคนวิกลจริต", stars:4, source:"ป.พ.พ.",
+    result:"การสมรสจะทำไม่ได้ถ้าบุคคลฝ่ายหนึ่งเป็นคนวิกลจริต หรือเป็นบุคคลซึ่งศาลสั่งให้เป็นคนไร้ความสามารถ ฝ่าฝืนตกเป็นโมฆะ",
+    note:"เหตุโมฆะ ต้องมีคำพิพากษาศาลจึงจะแสดงว่าเป็นโมฆะ (ม.1496)" },
+  { cat:"marriage", section:"ม.1450", title:"ห้ามสมรสกับญาติสืบสายโลหิต", stars:4, source:"ป.พ.พ.",
+    result:"ห้ามสมรสกับญาติสืบสายโลหิตโดยตรงขึ้นไปหรือลงมา หรือพี่น้องร่วมบิดามารดา/ร่วมแต่บิดาหรือมารดา ความเป็นญาติถือตามสายโลหิตโดยไม่คำนึงว่าจะชอบด้วยกฎหมายหรือไม่ ฝ่าฝืนเป็นโมฆะ",
+    note:"แม้เป็นบุตรนอกสมรสก็ถือเป็นญาติสายโลหิตตามมาตรานี้" },
+  { cat:"marriage", section:"ม.1451", title:"ผู้รับบุตรบุญธรรมกับบุตรบุญธรรม", stars:3, source:"ป.พ.พ.",
+    result:"ผู้รับบุตรบุญธรรมและบุตรบุญธรรมจะสมรสกันไม่ได้",
+    note:"ฝ่าฝืนไม่ถึงกับเป็นโมฆะ แต่ผลคือความเป็นบุตรบุญธรรมสิ้นสุดลง (ม.1598/32)" },
+  { cat:"marriage", section:"ม.1452", title:"ห้ามสมรสซ้อน", stars:5, source:"ป.พ.พ.",
+    result:"การสมรสจะทำไม่ได้ถ้าบุคคลนั้นมีคู่สมรสอยู่แล้ว การสมรสซ้อนตกเป็นโมฆะ และผู้มีส่วนได้เสียกล่าวอ้างได้เลยโดยไม่ต้องมีคำพิพากษาศาล",
+    note:"เทียบ ม.1497: สมรสซ้อนกล่าวอ้างได้เอง ต่างจากเหตุโมฆะอื่นที่ต้องมีคำพิพากษา" },
+  { cat:"marriage", section:"ม.1453", title:"หญิงสมรสใหม่ต้องรอ 310 วัน", stars:5, source:"ป.พ.พ.",
+    result:"หญิง (หรือผู้ที่ตั้งครรภ์ได้) ที่การสมรสสิ้นสุดลง จะสมรสใหม่ได้เมื่อพ้น 310 วัน เว้นแต่ (1) คลอดบุตรแล้วในระหว่างนั้น (2) สมรสกับคู่สมรสเดิม (3) มีใบรับรองแพทย์ว่าไม่ได้ตั้งครรภ์ (4) ศาลมีคำสั่งให้สมรสได้",
+    note:"เป็นเพียง 'ข้อห้ามนายทะเบียน' หากฝ่าฝืนจดไปแล้ว การสมรสไม่ตกเป็นโมฆะหรือโมฆียะ" },
+  { cat:"marriage", section:"ม.1457", title:"การสมรสต้องจดทะเบียน", stars:4, source:"ป.พ.พ.",
+    result:"การสมรสตามประมวลกฎหมายนี้จะมีได้เฉพาะเมื่อได้จดทะเบียนแล้วเท่านั้น",
+    note:"อยู่กินฉันคู่สมรสโดยไม่จดทะเบียน = ไม่เป็นการสมรสตามกฎหมาย" },
+  { cat:"marriage", section:"ม.1458", title:"ความยินยอมในการสมรส", stars:4, source:"ป.พ.พ.",
+    result:"การสมรสจะทำได้ต่อเมื่อบุคคลทั้งสองยินยอมเป็นคู่สมรสกัน และต้องแสดงความยินยอมนั้นโดยเปิดเผยต่อหน้านายทะเบียนและให้นายทะเบียนบันทึกไว้",
+    note:"ฝ่าฝืน (ไม่ยินยอม/สมรสหลอก) ตกเป็นโมฆะตาม ม.1495" },
+  { cat:"marriage", section:"ม.1460", title:"สมรสในพฤติการณ์พิเศษ", stars:2, source:"ป.พ.พ.",
+    result:"เมื่อไม่อาจจดทะเบียนต่อนายทะเบียนได้เพราะอยู่ในภาวะสงคราม/ภัยอันตราย อาจแสดงเจตนาสมรสต่อหน้าบุคคลบรรลุนิติภาวะที่อยู่ ณ ที่นั้น แล้วบันทึกไว้เพื่อจดทะเบียนภายหลัง",
+    note:"มาตรานี้ลอกจากกฎหมายเยอรมัน ใช้มากในช่วงสงครามโลก" },
+  { cat:"marriage", section:"ม.1495", title:"เหตุที่ทำให้การสมรสเป็นโมฆะ", stars:5, source:"ป.พ.พ.",
+    result:"การสมรสที่ฝ่าฝืน ม.1449 (วิกลจริต) ม.1450 (ญาติสายโลหิต) ม.1452 (สมรสซ้อน) และ ม.1458 (ความยินยอม) ตกเป็นโมฆะ",
+    note:"จำ 4 เหตุโมฆะ: วิกลจริต / ญาติ / ซ้อน / ไม่ยินยอม" },
+  { cat:"marriage", section:"ม.1503", title:"เหตุขอเพิกถอนการสมรสที่เป็นโมฆียะ", stars:5, source:"ป.พ.พ.",
+    result:"เหตุที่จะขอให้ศาลเพิกถอนการสมรสเพราะเป็นโมฆียะ มีเฉพาะการฝ่าฝืน ม.1448 (อายุ), ม.1505 (สำคัญผิดตัวคู่สมรส), ม.1506 (กลฉ้อฉล), ม.1507 (ข่มขู่), และ ม.1509 (ไม่ได้รับความยินยอมของบิดามารดา)",
+    note:"โมฆียะต้อง 'ขอให้ศาลเพิกถอน' ก่อนจึงสิ้นผล ต่างจากโมฆะที่เสียเปล่าแต่ต้น" },
+  { cat:"marriage", section:"ม.1505–1507", title:"สำคัญผิด / กลฉ้อฉล / ข่มขู่", stars:3, source:"ป.พ.พ.",
+    result:"สมรสโดยสำคัญผิดตัวคู่สมรส (ม.1505), โดยถูกกลฉ้อฉลถึงขนาดที่ถ้าไม่มีคงไม่สมรส (ม.1506), หรือโดยถูกข่มขู่ (ม.1507) ทำให้การสมรสเป็นโมฆียะ",
+    note:"สำคัญผิด 'ตัวคู่สมรส' เท่านั้น ไม่รวมสำคัญผิดในคุณสมบัติ" },
+
+  { cat:"property", section:"ม.1465", title:"สัญญาก่อนสมรส (หลักทั่วไป)", stars:3, source:"ป.พ.พ.",
+    result:"ถ้าคู่สมรสไม่ได้ทำสัญญากันไว้เป็นพิเศษก่อนสมรส ให้ใช้บทบัญญัติในหมวดทรัพย์สินนี้บังคับ ข้อความในสัญญาก่อนสมรสที่ขัดต่อความสงบเรียบร้อย/ศีลธรรมอันดี หรือให้ใช้กฎหมายต่างประเทศบังคับ เป็นโมฆะ",
+    note:null },
+  { cat:"property", section:"ม.1466", title:"แบบของสัญญาก่อนสมรส", stars:3, source:"ป.พ.พ.",
+    result:"สัญญาก่อนสมรสต้องจดแจ้งข้อตกลงไว้ในทะเบียนสมรสพร้อมกับการจดทะเบียน หรือทำเป็นหนังสือลงลายมือชื่อคู่สมรสและพยานอย่างน้อย 2 คน แนบไว้ท้ายทะเบียนสมรส มิฉะนั้นเป็นโมฆะ",
+    note:null },
+  { cat:"property", section:"ม.1469", title:"สัญญาระหว่างสมรสบอกล้างได้", stars:4, source:"ป.พ.พ.",
+    result:"สัญญาที่เกี่ยวกับทรัพย์สินซึ่งคู่สมรสทำไว้ต่อกันระหว่างเป็นคู่สมรส ฝ่ายใดฝ่ายหนึ่งจะบอกล้างเสียก็ได้ ในระหว่างที่เป็นคู่สมรสกัน หรือภายใน 1 ปีนับแต่วันที่ขาดจากการสมรส",
+    note:"คุ้มครองบุคคลภายนอกผู้สุจริต" },
+  { cat:"property", section:"ม.1471", title:"สินส่วนตัว", stars:5, source:"ป.พ.พ.",
+    result:"สินส่วนตัว ได้แก่ (1) ทรัพย์ที่มีอยู่ก่อนสมรส (2) เครื่องใช้สอยส่วนตัว/เครื่องมือประกอบอาชีพ (3) ทรัพย์ที่ได้มาระหว่างสมรสโดยการรับมรดกหรือการให้โดยเสน่หา (4) ของหมั้น",
+    note:"มรดก/ของขวัญที่ได้ระหว่างสมรส = สินส่วนตัวเสมอ" },
+  { cat:"property", section:"ม.1472", title:"ทรัพย์ที่ได้มาแทนสินส่วนตัว", stars:4, source:"ป.พ.พ.",
+    result:"สินส่วนตัวที่ได้แลกเปลี่ยน/ขายได้เงินมา หรือซื้อทรัพย์อื่นด้วยเงินสินส่วนตัว หรือได้เงินมาแทนการถูกทำลาย ทรัพย์ที่ได้มาใหม่นั้นยังคงเป็นสินส่วนตัว",
+    note:"หลัก 'ช่วงทรัพย์' — สินส่วนตัวแปลงร่างเป็นทรัพย์ใหม่ก็ยังเป็นสินส่วนตัว" },
+  { cat:"property", section:"ม.1473", title:"การจัดการสินส่วนตัว", stars:3, source:"ป.พ.พ.",
+    result:"สินส่วนตัวของคู่สมรสฝ่ายใด ให้ฝ่ายนั้นเป็นผู้จัดการเอง",
+    note:null },
+  { cat:"property", section:"ม.1474", title:"สินสมรส & ข้อสันนิษฐาน", stars:5, source:"ป.พ.พ.",
+    result:"สินสมรส ได้แก่ (1) ทรัพย์ที่ได้มาระหว่างสมรส (2) ทรัพย์ที่ฝ่ายใดได้มาโดยพินัยกรรม/การให้เป็นหนังสือที่ระบุว่าเป็นสินสมรส (3) ดอกผลของสินส่วนตัว ถ้าสงสัยว่าเป็นสินสมรสหรือไม่ ให้สันนิษฐานว่าเป็นสินสมรส",
+    note:"ดอกผลของสินส่วนตัว (เช่น ค่าเช่าบ้านที่เป็นสินส่วนตัว) กลายเป็นสินสมรส" },
+  { cat:"property", section:"ม.1476", title:"จัดการสินสมรสที่ต้องทำร่วมกัน", stars:5, source:"ป.พ.พ.",
+    result:"การจัดการสินสมรสในเรื่องสำคัญต้องจัดการร่วมกันหรือได้รับความยินยอม เช่น ขาย/ขายฝาก/แลกเปลี่ยน/จำนอง/ปลดจำนองอสังหาริมทรัพย์; ให้เช่าอสังหาฯ เกิน 3 ปี; ให้กู้ยืมเงิน; ให้โดยเสน่หา; ประนีประนอมยอมความ ส่วนเรื่องอื่นจัดการได้โดยลำพัง",
+    note:"นอกรายการ ม.1476 คู่สมรสแต่ละฝ่ายจัดการได้เอง" },
+  { cat:"property", section:"ม.1476/1", title:"ตกลงจัดการต่างจากที่กฎหมายกำหนด", stars:2, source:"ป.พ.พ.",
+    result:"คู่สมรสอาจทำสัญญาก่อนสมรสตกลงให้จัดการสินสมรสแตกต่างไปจาก ม.1476 ได้บางส่วนหรือทั้งหมด",
+    note:null },
+  { cat:"property", section:"ม.1480", title:"เพิกถอนนิติกรรมที่ทำไปโดยไม่ยินยอม", stars:4, source:"ป.พ.พ.",
+    result:"ถ้าคู่สมรสฝ่ายหนึ่งทำนิติกรรมเกี่ยวกับสินสมรสที่ต้องได้รับความยินยอมร่วมกันไปโดยลำพัง อีกฝ่ายฟ้องขอเพิกถอนได้ภายใน 1 ปีนับแต่รู้เหตุ หรือ 10 ปีนับแต่ทำนิติกรรม แต่คุ้มครองบุคคลภายนอกผู้ทำการโดยสุจริตและเสียค่าตอบแทน",
+    note:null },
+  { cat:"property", section:"ม.1484", title:"ร้องขอให้ศาลสั่งเรื่องการจัดการ", stars:3, source:"ป.พ.พ.",
+    result:"ถ้าฝ่ายที่มีอำนาจจัดการสินสมรสจัดการเสียหาย/ไม่อุปการะเลี้ยงดูอีกฝ่าย/มีหนี้สินล้นพ้นตัว/ขัดขวางการจัดการของอีกฝ่ายโดยไม่มีเหตุผล อีกฝ่ายอาจร้องขอให้ศาลสั่งให้ตนเป็นผู้จัดการแต่ผู้เดียวหรือสั่งแยกสินสมรสได้",
+    note:null },
+  { cat:"property", section:"ม.1490", title:"หนี้ร่วมระหว่างคู่สมรส", stars:5, source:"ป.พ.พ.",
+    result:"หนี้ที่คู่สมรสต้องรับผิดร่วมกันมี 4 กรณี: (1) หนี้เพื่อจัดการบ้านเรือน/จัดหาสิ่งจำเป็น/อุปการะเลี้ยงดู/รักษาพยาบาลคนในครอบครัว/การศึกษาบุตรตามสมควร (2) หนี้เกี่ยวข้องกับสินสมรส (3) หนี้จากการงานที่ทำด้วยกัน (4) หนี้ที่ฝ่ายหนึ่งก่อขึ้นเพื่อประโยชน์ตนฝ่ายเดียวแต่อีกฝ่ายให้สัตยาบัน",
+    note:"หนี้ร่วมบังคับได้ทั้งสินสมรสและสินส่วนตัวของทั้งสองฝ่าย; หนี้ส่วนตัวบังคับจากสินส่วนตัวก่อน" },
+  { cat:"property", section:"ม.1533", title:"แบ่งสินสมรสเมื่อหย่า", stars:5, source:"ป.พ.พ.",
+    result:"เมื่อหย่ากันให้แบ่งสินสมรสให้คู่สมรสได้ส่วนเท่ากัน",
+    note:"หลัก 'แบ่งครึ่ง' ใช้กับสินสมรสเท่านั้น สินส่วนตัวไม่ต้องแบ่ง" },
+
+  { cat:"divorce", section:"ม.1501", title:"การสมรสสิ้นสุดลงอย่างไร", stars:3, source:"ป.พ.พ.",
+    result:"การสมรสสิ้นสุดลงด้วย (1) ความตาย (2) การหย่า หรือ (3) ศาลพิพากษาให้เพิกถอน",
+    note:null },
+  { cat:"divorce", section:"ม.1514", title:"วิธีการหย่า", stars:4, source:"ป.พ.พ.",
+    result:"การหย่าทำได้ 2 วิธี คือ โดยความยินยอมของทั้งสองฝ่าย หรือโดยคำพิพากษาของศาล",
+    note:null },
+  { cat:"divorce", section:"ม.1515", title:"แบบของการหย่าโดยยินยอม", stars:4, source:"ป.พ.พ.",
+    result:"การหย่าโดยความยินยอมต้องทำเป็นหนังสือและมีพยานลงลายมือชื่ออย่างน้อย 2 คน และมีผลสมบูรณ์เมื่อได้จดทะเบียนหย่าแล้ว",
+    note:"หนังสือหย่าอย่างเดียวยังไม่พอ ต้องจดทะเบียนหย่าด้วย" },
+  { cat:"divorce", section:"ม.1516", title:"เหตุฟ้องหย่า (10 เหตุ)", stars:5, source:"ป.พ.พ.",
+    result:"เหตุฟ้องหย่า เช่น (1) อุปการะ/ยกย่องผู้อื่นฉันคู่สมรส เป็นชู้ มีชู้ (2) ประพฤติชั่ว (3) ทำร้าย/หมิ่นประมาทเหยียดหยามอย่างร้ายแรง (4) จงใจละทิ้งร้างเกิน 1 ปี (4/2) แยกกันอยู่เกิน 3 ปี (6) ไม่ช่วยเหลืออุปการะ/เป็นปฏิปักษ์อย่างร้ายแรง (9) เป็นโรคติดต่อร้ายแรง (10) มีสภาพไม่อาจร่วมประเวณีได้ตลอดกาล",
+    note:"ถ้อยคำใช้ 'คู่สมรส' เป็นกลางทางเพศตามสมรสเท่าเทียม" },
+  { cat:"divorce", section:"ม.1517", title:"ยินยอม/รู้เห็นเป็นใจ ฟ้องหย่าไม่ได้", stars:3, source:"ป.พ.พ.",
+    result:"เหตุฟ้องหย่าตาม ม.1516 (1) และ (2) ถ้าฝ่ายที่จะฟ้องได้ยินยอมหรือรู้เห็นเป็นใจในการกระทำนั้น จะยกเป็นเหตุฟ้องหย่าไม่ได้",
+    note:null },
+  { cat:"divorce", section:"ม.1518", title:"ให้อภัยแล้วสิทธิฟ้องหย่าระงับ", stars:3, source:"ป.พ.พ.",
+    result:"สิทธิฟ้องหย่าย่อมหมดไปเมื่อฝ่ายที่มีสิทธิได้กระทำการอันแสดงว่าให้อภัยในการกระทำของอีกฝ่ายซึ่งเป็นเหตุฟ้องหย่านั้นแล้ว",
+    note:null },
+  { cat:"divorce", section:"ม.1520", title:"อำนาจปกครองบุตรเมื่อหย่า", stars:4, source:"ป.พ.พ.",
+    result:"การหย่าโดยความยินยอมให้ตกลงกันว่าฝ่ายใดจะเป็นผู้ใช้อำนาจปกครองบุตร ถ้าไม่ตกลงหรือหย่าโดยคำพิพากษา ให้ศาลเป็นผู้ชี้ขาด",
+    note:null },
+  { cat:"divorce", section:"ม.1523", title:"ค่าทดแทนกรณีมีชู้", stars:4, source:"ป.พ.พ.",
+    result:"เมื่อหย่าโดยเหตุตาม ม.1516(1) คู่สมรสมีสิทธิเรียกค่าทดแทนจากคู่สมรสอีกฝ่ายและจากผู้ซึ่งเป็นชู้ได้; ทั้งอาจเรียกค่าทดแทนจากผู้ที่ล่วงเกินคู่สมรสไปในทำนองชู้สาวได้",
+    note:null },
+  { cat:"divorce", section:"ม.1526", title:"ค่าเลี้ยงชีพ", stars:4, source:"ป.พ.พ.",
+    result:"ถ้าการหย่าเป็นความผิดของคู่สมรสฝ่ายใดฝ่ายหนึ่งแต่ฝ่ายเดียว และการหย่าทำให้อีกฝ่ายยากจนลงเพราะไม่มีรายได้พอ อีกฝ่ายมีสิทธิขอค่าเลี้ยงชีพได้",
+    note:"ต่างจาก 'ค่าอุปการะเลี้ยงดูบุตร' — ค่าเลี้ยงชีพให้แก่ตัวคู่สมรส" },
+
+  { cat:"parentchild", section:"ม.1536", title:"ข้อสันนิษฐานความเป็นบุตรชอบด้วยกฎหมาย", stars:5, source:"ป.พ.พ.",
+    result:"เด็กที่เกิดแต่หญิงขณะเป็นคู่สมรส หรือภายใน 310 วันนับแต่การสมรสสิ้นสุด ให้สันนิษฐานว่าเป็นบุตรชอบด้วยกฎหมายของชายผู้เป็นหรือเคยเป็นคู่สมรส",
+    note:"ถ้อยคำใหม่: 'สามี' → 'ชายผู้เป็นคู่สมรส' เพื่อรองรับสมรสเท่าเทียม" },
+  { cat:"parentchild", section:"ม.1537", title:"หญิงสมรสใหม่แล้วคลอดบุตร", stars:4, source:"ป.พ.พ.",
+    result:"ถ้าหญิงสมรสใหม่และคลอดบุตรภายใน 310 วันนับแต่การสมรสเดิมสิ้นสุด ให้สันนิษฐานว่าเด็กเป็นบุตรชอบด้วยกฎหมายของชายผู้เป็นคู่สมรส 'คนใหม่'",
+    note:"กฎหมายเลือกให้เป็นบุตรของคู่สมรสคนหลังไว้ก่อน" },
+  { cat:"parentchild", section:"ม.1539", title:"ฟ้องปฏิเสธความเป็นบุตร", stars:4, source:"ป.พ.พ.",
+    result:"ชายผู้เป็นหรือเคยเป็นคู่สมรสอาจฟ้องคดีไม่รับเด็กเป็นบุตรได้ โดยพิสูจน์ว่าตนไม่ได้อยู่ร่วมกับมารดาเด็กในระยะที่อาจตั้งครรภ์ (ระหว่าง 180–310 วันก่อนเด็กเกิด) หรือตนไม่อาจเป็นบิดาได้ด้วยเหตุอื่น",
+    note:"เป็นการหักล้างข้อสันนิษฐานตาม ม.1536" },
+  { cat:"parentchild", section:"ม.1542", title:"อายุความฟ้องไม่รับเด็กเป็นบุตร", stars:3, source:"ป.พ.พ.",
+    result:"การฟ้องไม่รับเด็กเป็นบุตรต้องฟ้องภายใน 1 ปีนับแต่รู้การเกิดของเด็ก และห้ามฟ้องเมื่อพ้น 10 ปีนับแต่วันเกิดของเด็ก",
+    note:null },
+  { cat:"parentchild", section:"ม.1546", title:"บุตรของหญิงที่ไม่ได้สมรส", stars:5, source:"ป.พ.พ.",
+    result:"เด็กที่เกิดจากหญิงที่มิได้สมรสกับชาย ให้ถือว่าเป็นบุตรชอบด้วยกฎหมายของหญิงนั้นเสมอ",
+    note:"บุตรนอกสมรสเป็นบุตรของแม่โดยอัตโนมัติ แต่ยังไม่ใช่บุตรชอบด้วยกฎหมายของพ่อ" },
+  { cat:"parentchild", section:"ม.1547", title:"ทำให้บุตรนอกสมรสเป็นบุตรชอบด้วยกฎหมายของบิดา", stars:5, source:"ป.พ.พ.",
+    result:"เด็กที่เกิดจากบิดามารดาที่มิได้สมรสกัน จะเป็นบุตรชอบด้วยกฎหมายของบิดาได้ 3 ทาง คือ (1) บิดามารดาได้สมรสกันภายหลัง (2) บิดาจดทะเบียนรับรองบุตร หรือ (3) ศาลพิพากษาว่าเป็นบุตร",
+    note:"จำ 3 ทาง: สมรสภายหลัง / จดทะเบียนรับรอง / ศาลพิพากษา" },
+  { cat:"parentchild", section:"ม.1548", title:"ความยินยอมในการจดทะเบียนรับรองบุตร", stars:4, source:"ป.พ.พ.",
+    result:"บิดาจะจดทะเบียนรับเด็กเป็นบุตรได้ต่อเมื่อได้รับความยินยอมของเด็กและมารดาเด็ก ถ้าเด็กหรือมารดาไม่อาจให้ความยินยอมหรือคัดค้าน บิดาต้องร้องขอต่อศาล",
+    note:null },
+  { cat:"parentchild", section:"ม.1557", title:"ผลย้อนหลังของการเป็นบุตรชอบด้วยกฎหมาย", stars:3, source:"ป.พ.พ.",
+    result:"การเป็นบุตรชอบด้วยกฎหมายของบิดาตาม ม.1547 มีผลนับแต่วันที่เด็กเกิด",
+    note:"มีผลย้อนหลัง จึงกระทบสิทธิรับมรดกด้วย" },
+  { cat:"parentchild", section:"ม.1561–1562", title:"ชื่อสกุล & ห้ามฟ้องบุพการี", stars:3, source:"ป.พ.พ.",
+    result:"บุตรมีสิทธิใช้ชื่อสกุลของบิดา (ถ้าไม่ปรากฏบิดาให้ใช้ของมารดา) และห้ามมิให้บุตรฟ้องบุพการีของตนเป็นคดีแพ่งหรืออาญา (คดีอุทลุม) เว้นแต่อัยการหรือญาติสนิทดำเนินการแทน",
+    note:"คดีอุทลุม = คดีที่ผู้สืบสันดานฟ้องบุพการี ต้องห้าม" },
+  { cat:"parentchild", section:"ม.1563–1564", title:"หน้าที่อุปการะเลี้ยงดู", stars:4, source:"ป.พ.พ.",
+    result:"บุตรมีหน้าที่อุปการะเลี้ยงดูบิดามารดา (ม.1563) และบิดามารดามีหน้าที่อุปการะเลี้ยงดูและให้การศึกษาแก่บุตรผู้เยาว์ (ม.1564)",
+    note:"เป็นหน้าที่ต่างตอบแทนกันตามกฎหมาย" },
+  { cat:"parentchild", section:"ม.1566", title:"อำนาจปกครองอยู่กับบิดามารดา", stars:5, source:"ป.พ.พ.",
+    result:"บุตรผู้เยาว์อยู่ใต้อำนาจปกครองของบิดามารดา อำนาจปกครองอยู่กับบิดาหรือมารดาแต่ฝ่ายเดียวได้ในบางกรณี เช่น อีกฝ่ายตาย/ถูกถอนอำนาจปกครอง/ศาลสั่งให้อำนาจปกครองอยู่กับฝ่ายใด/บิดามารดาตกลงกันตามที่กฎหมายให้ทำได้",
+    note:"อำนาจปกครองเป็นของ 'ทั้งบิดาและมารดาร่วมกัน' เป็นหลัก" },
+  { cat:"parentchild", section:"ม.1567", title:"สิทธิของผู้ใช้อำนาจปกครอง", stars:5, source:"ป.พ.พ.",
+    result:"ผู้ใช้อำนาจปกครองมีสิทธิ (1) กำหนดที่อยู่ของบุตร (2) ทำโทษบุตรตามสมควรเพื่อว่ากล่าวสั่งสอน (3) ให้บุตรทำการงานตามสมควรแก่ความสามารถ (4) เรียกบุตรคืนจากผู้ที่กักบุตรไว้โดยมิชอบ",
+    note:"อนุ (2) แก้ไข พ.ศ.2565 ห้ามลงโทษด้วยความรุนแรง/ทารุณ/เฆี่ยนตี" },
+  { cat:"parentchild", section:"ม.1574", title:"จัดการทรัพย์สินบุตรต้องขออนุญาตศาล", stars:4, source:"ป.พ.พ.",
+    result:"กิจการเกี่ยวกับทรัพย์สินของบุตรผู้เยาว์บางประเภท ผู้ใช้อำนาจปกครองทำเองไม่ได้ ต้องได้รับอนุญาตจากศาลก่อน เช่น ขาย/จำนอง/ปลดจำนองอสังหาริมทรัพย์ของบุตร ให้กู้ยืม ให้โดยเสน่หา ประนีประนอมยอมความ",
+    note:"คุ้มครองทรัพย์สินของผู้เยาว์จากการจัดการของบิดามารดา" },
+  { cat:"parentchild", section:"ม.1582", title:"ถอนอำนาจปกครอง", stars:3, source:"ป.พ.พ.",
+    result:"ถ้าผู้ใช้อำนาจปกครองใช้อำนาจโดยมิชอบ/ประพฤติชั่วร้าย/จัดการทรัพย์สินบุตรในทางเสียหาย ศาลอาจสั่งถอนอำนาจปกครองบางส่วนหรือทั้งหมดได้",
+    note:null },
+
+  { cat:"guardian_adopt", section:"ม.1585", title:"เมื่อใดจึงตั้งผู้ปกครองได้", stars:4, source:"ป.พ.พ.",
+    result:"ผู้เยาว์ที่ไม่มีบิดามารดา หรือบิดามารดาถูกถอนอำนาจปกครอง อาจมีการตั้ง 'ผู้ปกครอง' ขึ้นดูแลระหว่างเป็นผู้เยาว์ได้",
+    note:"ผู้ปกครองใช้เมื่อไม่มีผู้ใช้อำนาจปกครองแล้วเท่านั้น" },
+  { cat:"guardian_adopt", section:"ม.1586", title:"วิธีตั้งผู้ปกครอง", stars:3, source:"ป.พ.พ.",
+    result:"ผู้ปกครองตั้งขึ้นได้โดยคำสั่งศาล หรือโดยพินัยกรรมของบิดาหรือมารดาซึ่งตายทีหลัง",
+    note:null },
+  { cat:"guardian_adopt", section:"ม.1587", title:"คุณสมบัติผู้ปกครอง", stars:3, source:"ป.พ.พ.",
+    result:"ผู้ที่จะเป็นผู้ปกครองต้องเป็นผู้บรรลุนิติภาวะ และต้องไม่เป็นบุคคลต้องห้าม เช่น คนไร้/เสมือนไร้ความสามารถ บุคคลล้มละลาย หรือผู้ที่ศาลเห็นว่าไม่เหมาะสม",
+    note:null },
+  { cat:"guardian_adopt", section:"ม.1598/19", title:"เงื่อนไขอายุของการรับบุตรบุญธรรม", stars:5, source:"ป.พ.พ.",
+    result:"ผู้รับบุตรบุญธรรมต้องมีอายุไม่ต่ำกว่า 25 ปี และต้องมีอายุแก่กว่าผู้ที่จะเป็นบุตรบุญธรรมอย่างน้อย 15 ปี",
+    note:"จำเลข: 25 ปี และห่างกันอย่างน้อย 15 ปี" },
+  { cat:"guardian_adopt", section:"ม.1598/20", title:"ความยินยอมของผู้จะเป็นบุตรบุญธรรม", stars:4, source:"ป.พ.พ.",
+    result:"ถ้าผู้ที่จะเป็นบุตรบุญธรรมมีอายุไม่ต่ำกว่า 15 ปี ผู้นั้นต้องให้ความยินยอมด้วยตนเอง",
+    note:null },
+  { cat:"guardian_adopt", section:"ม.1598/21", title:"ความยินยอมของบิดามารดา", stars:5, source:"ป.พ.พ.",
+    result:"การรับผู้เยาว์เป็นบุตรบุญธรรมต้องได้รับความยินยอมของบิดาและมารดา ถ้าฝ่ายใดตายหรือถูกถอนอำนาจปกครอง ให้ฝ่ายที่เหลือเป็นผู้ให้ความยินยอม",
+    note:"ต้องได้ความยินยอมของบิดา 'และ' มารดา (ทั้งสอง)" },
+  { cat:"guardian_adopt", section:"ม.1598/23", title:"ศาลสั่งอนุญาตแทนความยินยอม", stars:4, source:"ป.พ.พ.",
+    result:"ถ้าบิดามารดาหรือผู้มีอำนาจให้ความยินยอมไม่ให้ความยินยอมโดยไม่มีเหตุผลอันสมควร ผู้ประสงค์จะรับบุตรบุญธรรมอาจร้องขอต่อศาลให้มีคำสั่งอนุญาตแทนได้",
+    note:"ทางออกเมื่อบิดา/มารดาหายตัวไปหรือดื้อไม่ยอมโดยไม่มีเหตุ" },
+  { cat:"guardian_adopt", section:"ม.1598/25", title:"ความยินยอมของคู่สมรส", stars:4, source:"ป.พ.พ.",
+    result:"ผู้จะรับบุตรบุญธรรมหรือผู้จะเป็นบุตรบุญธรรม ถ้ามีคู่สมรสอยู่ ต้องได้รับความยินยอมจากคู่สมรสก่อน",
+    note:null },
+  { cat:"guardian_adopt", section:"ม.1598/26", title:"คู่สมรสเพศเดียวกันรับบุตรบุญธรรม", stars:3, source:"ป.พ.พ.",
+    result:"ตามกฎหมายสมรสเท่าเทียม คู่สมรสเพศเดียวกันสามารถร่วมกันรับบุตรบุญธรรมได้",
+    note:"เป็นผลจากการแก้ไข ป.พ.พ. เพื่อรองรับการสมรสของบุคคลเพศเดียวกัน" },
+  { cat:"guardian_adopt", section:"ม.1598/27", title:"การรับบุตรบุญธรรมต้องจดทะเบียน", stars:4, source:"ป.พ.พ.",
+    result:"การรับบุตรบุญธรรมจะสมบูรณ์ต่อเมื่อได้จดทะเบียนตามกฎหมาย และถ้าผู้จะเป็นบุตรบุญธรรมเป็นผู้เยาว์ต้องปฏิบัติตาม พ.ร.บ.การรับเด็กเป็นบุตรบุญธรรมด้วย",
+    note:null },
+  { cat:"guardian_adopt", section:"ม.1598/28", title:"ฐานะและมรดกของบุตรบุญธรรม", stars:5, source:"ป.พ.พ.",
+    result:"บุตรบุญธรรมมีฐานะอย่างเดียวกับบุตรชอบด้วยกฎหมายของผู้รับบุตรบุญธรรม แต่ไม่สูญเสียสิทธิและหน้าที่ในครอบครัวที่กำเนิดมา ทั้งนี้ 'ผู้รับบุตรบุญธรรม' ไม่มีสิทธิรับมรดกของบุตรบุญธรรมในฐานะทายาทโดยธรรม",
+    note:"บุตรบุญธรรมรับมรดกได้ 2 ทาง แต่พ่อแม่บุญธรรมไม่รับมรดกบุตรบุญธรรม" },
+  { cat:"guardian_adopt", section:"ม.1598/32", title:"การเลิกรับบุตรบุญธรรม", stars:3, source:"ป.พ.พ.",
+    result:"การรับบุตรบุญธรรมย่อมเลิกกันได้ด้วยความตกลง โดยคำพิพากษาของศาล หรือเมื่อมีการสมรสระหว่างผู้รับบุตรบุญธรรมกับบุตรบุญธรรม (ฝ่าฝืน ม.1451)",
+    note:null }
+];
+
+const QUIZ_ADV = [
+  { cat:"betroth",
+    q:"เอกและวินทำพิธีหมั้นกันตอนทั้งคู่อายุ 19 ปี ทั้งสองยังเป็นผู้เยาว์ตามข้อเท็จจริงเดิม (สมมติเกณฑ์บรรลุนิติภาวะ 20 ปี) โดยบิดามารดาทั้งสองฝ่ายไม่ทราบและไม่ได้ให้ความยินยอม การหมั้นนี้มีผลอย่างไร",
+    opts:["สมบูรณ์ เพราะอายุครบ 18 ปีแล้ว","เป็นโมฆะ เพราะไม่ได้รับความยินยอม","เป็นโมฆียะ เพราะผู้เยาว์หมั้นโดยไม่ได้รับความยินยอมของบิดามารดา","ไม่เป็นการหมั้นเลย เพราะไม่ได้จดทะเบียน"],
+    ans:2,
+    explain:"อายุครบ 18 ปีตาม <b>ม.1435</b> การหมั้นจึงไม่เป็นโมฆะเรื่องอายุ แต่เมื่อยังเป็นผู้เยาว์และหมั้นโดยไม่ได้รับความยินยอมของบิดามารดา ผลคือ <b>โมฆียะ ตาม ม.1436</b> (คนละผลกับการฝ่าฝืนอายุที่เป็นโมฆะ)" },
+  { cat:"betroth",
+    q:"ฝ่ายผู้หมั้นมอบแหวนเป็นของหมั้นให้ผู้รับหมั้น และมอบทองคำให้บิดามารดาของผู้รับหมั้นเพื่อตอบแทนที่ยอมให้สมรส ต่อมาผู้หมั้นเป็นฝ่ายบอกเลิกเองโดยไม่มีเหตุจากอีกฝ่าย ผู้หมั้นเรียกทรัพย์คืนได้เพียงใด",
+    opts:["เรียกคืนได้ทั้งของหมั้นและสินสอด","เรียกคืนได้เฉพาะสินสอด ไม่ได้ของหมั้น","เรียกคืนไม่ได้ทั้งของหมั้นและสินสอด เพราะตนเป็นฝ่ายผิด","เรียกคืนได้เฉพาะของหมั้น"],
+    ans:2,
+    explain:"ทองคำที่ให้บิดามารดาเพื่อตอบแทนการยอมสมรสคือ <b>สินสอด (ม.1437 ว.3)</b> เรียกคืนได้เฉพาะเมื่อไม่มีการสมรสเพราะเหตุอันเกิดแก่ผู้รับหมั้น เมื่อผู้หมั้นเป็นฝ่ายผิดเอง จึงเรียกสินสอดคืนไม่ได้ และของหมั้นก็ตกเป็นสิทธิผู้รับหมั้นแล้ว (<b>ม.1439</b> ให้คืนของหมั้นเฉพาะเมื่อผู้รับหมั้นเป็นฝ่ายผิด)" },
+  { cat:"marriage",
+    q:"นางแก้วเป็นหม้าย สามีเสียชีวิตไปแล้ว 3 เดือน ประสงค์จดทะเบียนสมรสกับคู่รักคนใหม่ แต่นายทะเบียนปฏิเสธโดยอ้างว่าต้องรอให้พ้น 310 วัน ข้อใดถูกต้อง",
+    opts:["นายทะเบียนถูก และหากฝ่าฝืนจดไปการสมรสเป็นโมฆะ","การรอ 310 วันเป็นข้อห้ามนายทะเบียน มีข้อยกเว้นได้ เช่น ใบรับรองแพทย์ว่าไม่ตั้งครรภ์หรือศาลสั่ง","นางแก้วสมรสได้ทันทีเพราะสามีตายแล้ว ไม่มีข้อห้าม","ต้องรอ 310 วันเสมอ ไม่มีข้อยกเว้นใด ๆ"],
+    ans:1,
+    explain:"ตาม <b>ม.1453</b> หญิงที่การสมรสสิ้นสุดต้องรอ 310 วัน 'เว้นแต่' คลอดบุตรแล้ว/สมรสกับคู่เดิม/มีใบรับรองแพทย์ว่าไม่ตั้งครรภ์/ศาลสั่ง และหลักนี้เป็นเพียง 'ข้อห้ามนายทะเบียน' หากฝ่าฝืนจดไปแล้วการสมรสก็ไม่เป็นโมฆะหรือโมฆียะ" },
+  { cat:"marriage",
+    q:"การสมรสในกรณีใดต่อไปนี้ 'ไม่' ตกเป็นโมฆะตาม ม.1495",
+    opts:["สมรสซ้อนขณะมีคู่สมรสเดิมอยู่","สมรสกับพี่น้องร่วมบิดามารดา","สมรสโดยถูกข่มขู่","สมรสกับคนที่ศาลสั่งให้เป็นคนไร้ความสามารถ"],
+    ans:2,
+    explain:"เหตุโมฆะตาม <b>ม.1495</b> คือฝ่าฝืน ม.1449 (วิกลจริต/ไร้ความสามารถ), 1450 (ญาติ), 1452 (ซ้อน), 1458 (ยินยอม) ส่วนการสมรสโดยถูก 'ข่มขู่' เป็นเหตุ <b>โมฆียะ ตาม ม.1507/1503</b> ต้องขอให้ศาลเพิกถอน ไม่ใช่โมฆะ" },
+  { cat:"property",
+    q:"ก่อนสมรส นายฟ้าได้รับสลากกินแบ่งเป็นของขวัญจากแม่ ต่อมาระหว่างสมรสสลากใบนั้นถูกรางวัล 6 ล้านบาท เงินรางวัลนี้เป็นทรัพย์สินประเภทใด",
+    opts:["สินสมรส เพราะได้เงินมาระหว่างสมรส","สินส่วนตัวของนายฟ้า เพราะเป็นทรัพย์ที่ได้มาแทนสลากซึ่งเป็นสินส่วนตัว","สินสมรสครึ่งหนึ่ง สินส่วนตัวครึ่งหนึ่ง","สินส่วนตัวของแม่ผู้ให้สลาก"],
+    ans:1,
+    explain:"สลากเป็น 'การให้โดยเสน่หา' ก่อนสมรส จึงเป็น <b>สินส่วนตัว (ม.1471)</b> เงินรางวัลที่ได้จากสลากใบนั้นเป็นทรัพย์ที่ได้มาแทนที่สินส่วนตัว จึงยังคงเป็น <b>สินส่วนตัวตาม ม.1472</b> ไม่ใช่สินสมรส" },
+  { cat:"property",
+    q:"ระหว่างสมรส นายเมฆกู้เงินเพื่อนำมาจ่ายค่ารักษาพยาบาลลูกที่ป่วย เจ้าหนี้จะบังคับชำระหนี้จากทรัพย์สินใดได้บ้าง",
+    opts:["เฉพาะสินส่วนตัวของนายเมฆเท่านั้น","เฉพาะสินสมรสเท่านั้น","ทั้งสินสมรสและสินส่วนตัวของคู่สมรสทั้งสองฝ่าย เพราะเป็นหนี้ร่วม","ต้องรอแบ่งสินสมรสก่อนจึงบังคับได้"],
+    ans:2,
+    explain:"หนี้เพื่อรักษาพยาบาลคนในครอบครัว/การศึกษาบุตรตามสมควรเป็น <b>หนี้ร่วม ตาม ม.1490(1)</b> เจ้าหนี้จึงบังคับได้ทั้งสินสมรสและสินส่วนตัวของคู่สมรสทั้งสองฝ่าย" },
+  { cat:"property",
+    q:"หนี้ค่าสินไหมทดแทนจากการที่คู่สมรสฝ่ายหนึ่งขับรถโดยประมาทไปชนผู้อื่น (ละเมิดส่วนตัว) จัดเป็นหนี้ประเภทใด",
+    opts:["หนี้ร่วมตาม ม.1490 เสมอ","หนี้ส่วนตัวของฝ่ายที่ก่อ เว้นแต่อีกฝ่ายให้สัตยาบัน","สินสมรส","หนี้ที่ตกแก่บุตร"],
+    ans:1,
+    explain:"หนี้ละเมิดที่ฝ่ายหนึ่งก่อขึ้นเพื่อกิจการส่วนตัว ไม่เข้าเกณฑ์หนี้ร่วม 4 ข้อใน <b>ม.1490</b> จึงเป็น <b>หนี้ส่วนตัว</b> เว้นแต่อีกฝ่ายจะให้สัตยาบันจึงกลายเป็นหนี้ร่วมตามอนุ (4)" },
+  { cat:"divorce",
+    q:"คู่สมรสฝ่ายหนึ่งไปอุปการะยกย่องบุคคลอื่นฉันคู่สมรส อีกฝ่ายจะใช้เป็นเหตุฟ้องหย่าและเรียกค่าทดแทนได้จากใครบ้าง",
+    opts:["เรียกได้จากคู่สมรสฝ่ายผิดเท่านั้น","เรียกได้จากคู่สมรสฝ่ายผิดและจากชู้","เรียกได้จากชู้เท่านั้น","เรียกค่าทดแทนไม่ได้เลย ได้แต่หย่า"],
+    ans:1,
+    explain:"เหตุตาม <b>ม.1516(1)</b> และสิทธิเรียกค่าทดแทนตาม <b>ม.1523</b> ให้เรียกได้ทั้งจากคู่สมรสอีกฝ่ายและจากผู้ซึ่งเป็นชู้/ผู้ล่วงเกินในทำนองชู้สาว" },
+  { cat:"divorce",
+    q:"ข้อใดเป็น 'ค่าเลี้ยงชีพ' ตาม ม.1526 ไม่ใช่ค่าอื่น",
+    opts:["เงินที่ให้แก่บุตรผู้เยาว์หลังหย่า","เงินที่คู่สมรสฝ่ายที่ต้องยากจนลงเพราะการหย่าที่เป็นความผิดของอีกฝ่ายเรียกได้","เงินชดเชยการมีชู้","เงินค่าของหมั้นที่ต้องคืน"],
+    ans:1,
+    explain:"<b>ค่าเลี้ยงชีพ (ม.1526)</b> ให้แก่ 'ตัวคู่สมรส' ที่ต้องยากจนลงเพราะการหย่าอันเป็นความผิดของอีกฝ่ายแต่ฝ่ายเดียว ต่างจากค่าอุปการะเลี้ยงดูบุตรและค่าทดแทนกรณีมีชู้" },
+  { cat:"parentchild",
+    q:"นางสาวนิดอยู่กินกับนายเอกโดยไม่จดทะเบียนสมรส คลอดบุตรสาว นายเอกเป็นผู้ไปแจ้งเกิดและเลี้ยงดูอย่างดี บุตรสาวเป็นบุตรชอบด้วยกฎหมายของใคร",
+    opts:["ของนายเอก เพราะแจ้งเกิดและเลี้ยงดู","ของนางสาวนิดเท่านั้น จนกว่านายเอกจะจดทะเบียนรับรอง/สมรส/ศาลพิพากษา","ของทั้งสองคนทันที","ไม่เป็นบุตรของใครเลย"],
+    ans:1,
+    explain:"เด็กเกิดจากหญิงที่ไม่ได้สมรสเป็นบุตรชอบด้วยกฎหมายของ 'มารดา' เสมอตาม <b>ม.1546</b> การแจ้งเกิด/เลี้ยงดูยังไม่ทำให้เป็นบุตรชอบด้วยกฎหมายของบิดา ต้องเข้าทางใดทางหนึ่งใน <b>ม.1547</b> (สมรสภายหลัง/จดทะเบียนรับรอง/ศาลพิพากษา)" },
+  { cat:"parentchild",
+    q:"บิดาอ้างว่าตน 'มีอำนาจปกครองเหนือลูกแต่ผู้เดียว' จึงบังคับพาบุตรผู้เยาว์ไปได้โดยมารดาไม่มีสิทธิออกความเห็น ข้ออ้างนี้ถูกต้องหรือไม่",
+    opts:["ถูก เพราะบิดาเป็นหัวหน้าครอบครัว","ไม่ถูก อำนาจปกครองเป็นของบิดาและมารดาร่วมกันตาม ม.1566","ถูก ถ้าบิดาเป็นผู้ส่งเสียเลี้ยงดู","ไม่ถูก เพราะอำนาจปกครองเป็นของมารดาเท่านั้น"],
+    ans:1,
+    explain:"ตาม <b>ม.1566</b> บุตรผู้เยาว์อยู่ใต้อำนาจปกครองของ 'บิดาและมารดา' ร่วมกัน จะอยู่กับฝ่ายเดียวได้เฉพาะกรณีที่กฎหมายกำหนด (อีกฝ่ายตาย/ถูกถอนอำนาจ/ศาลสั่ง/ตกลงกัน) ข้ออ้างของบิดาจึงฟังไม่ขึ้น" },
+  { cat:"guardian_adopt",
+    q:"นางเมตตาอายุ 40 ปี ต้องการรับหลานชายอายุ 16 ปีเป็นบุตรบุญธรรมเพื่อให้ได้รับมรดกในฐานะทายาท แต่กังวลว่าจะติดเงื่อนไขความยินยอมของบิดาเด็กที่หายตัวไป ควรแนะนำอย่างไร",
+    opts:["รับเป็นบุตรบุญธรรมไม่ได้เลยถ้าบิดาไม่ยินยอม","ให้ตั้งเป็นผู้ปกครองแทน จะได้ผลเหมือนกัน","รับบุตรบุญธรรมได้ โดยหากบิดาไม่ยินยอมโดยไม่มีเหตุผลอันสมควรให้ร้องขอต่อศาลสั่งอนุญาตแทนตาม ม.1598/23","ต้องรอให้เด็กอายุครบ 20 ปีก่อน"],
+    ans:2,
+    explain:"อายุผ่านเงื่อนไข <b>ม.1598/19</b> (40 ปี และแก่กว่า 15 ปีขึ้นไป) เด็กอายุ 16 ต้องยินยอมเอง (<b>ม.1598/20</b>) ต้องได้ความยินยอมของบิดามารดา (<b>ม.1598/21</b>) หากบิดาหายตัว/ไม่ยอมโดยไม่มีเหตุผล ร้องขอศาลอนุญาตแทนได้ (<b>ม.1598/23</b>) และหากต้องการให้เด็กเป็นทายาทรับมรดกต้องเป็น 'บุตรบุญธรรม' เพราะ 'ผู้ปกครอง' ไม่ทำให้เกิดสิทธิรับมรดก" },
+  { cat:"guardian_adopt",
+    q:"ข้อใดกล่าวถูกต้องเกี่ยวกับสิทธิรับมรดกของบุตรบุญธรรมตาม ม.1598/28",
+    opts:["บุตรบุญธรรมขาดจากการเป็นทายาทของพ่อแม่แท้","ผู้รับบุตรบุญธรรมมีสิทธิรับมรดกของบุตรบุญธรรมในฐานะทายาทโดยธรรม","บุตรบุญธรรมมีฐานะเป็นบุตรชอบด้วยกฎหมายของผู้รับ และยังไม่สูญสิทธิในครอบครัวเดิม","บุตรบุญธรรมรับมรดกจากผู้รับไม่ได้"],
+    ans:2,
+    explain:"ตาม <b>ม.1598/28</b> บุตรบุญธรรมมีฐานะอย่างบุตรชอบด้วยกฎหมายของผู้รับ 'และ' ไม่สูญสิทธิในครอบครัวเดิม (จึงรับมรดกได้สองทาง) แต่ 'ผู้รับบุตรบุญธรรม' ไม่มีสิทธิรับมรดกของบุตรบุญธรรมในฐานะทายาทโดยธรรม" }
+];
+
+const IRAC_CASES = [
+  {
+    id:"case1", examRef:"แนวข้อสอบ – การหมั้น", title:"หมั้นซ้อนความรับผิด : วิน–แพรว", cat:"betroth",
+    facts:"นายวิน อายุ 19 ปี เป็นบุตรของนางพิม (ไม่ปรากฏบิดา) และเป็นบุตรบุญธรรมของนายเดชโดยชอบด้วยกฎหมาย ต่อมานางสาวแพรว อายุ 25 ปี มาขอหมั้นนายวิน และนายวินตกลง<br><br>ในวันหมั้น นางพิมมอบแหวนประจำตระกูลเป็นของหมั้นให้แพรว ส่วนบิดามารดาของแพรวก็มอบแหวนให้วิน และมอบเงินสด 1,000,000 บาทให้นางพิมเพื่อตอบแทนที่วินยอมสมรส ทั้งสองยังตกลงกันว่าถ้าฝ่ายใดไม่ยอมสมรสโดยไม่มีเหตุตามกฎหมาย อีกฝ่ายเรียกค่าเสียหาย 200,000 บาทได้<br><br>แพรวเข้าคอร์สเตรียมเป็นเจ้าสาวเสียเงิน 100,000 บาท และจองตั๋วเครื่องบิน–โรงแรมฮันนีมูนอีก 100,000 บาท ต่อมาวินไปร่วมประเวณีกับนายบุญนายจ้างของตน โดยนายบุญไม่รู้ว่าวินมีคู่หมั้น เมื่อแพรวทราบจึงไม่ประสงค์จะสมรสกับวินอีกต่อไป",
+    issues:[
+      { label:"ประเด็นที่ 1 — การหมั้นสมบูรณ์และมีผลหรือไม่",
+        issueQ:"ประเด็นแรกที่ต้องวินิจฉัยคือเรื่องใด",
+        issueOpts:["การหมั้นระหว่างวินกับแพรวสมบูรณ์และมีผลตามกฎหมายหรือไม่","วินต้องรับผิดทางอาญาหรือไม่","แพรวต้องจ่ายภาษีของหมั้นหรือไม่","นายบุญมีความผิดฐานลักทรัพย์หรือไม่"],
+        issueAns:0,
+        issueFeedback:"ต้องดูก่อนว่ามีการหมั้นที่สมบูรณ์เกิดขึ้นหรือไม่ จึงจะพิจารณาสิทธิบอกเลิกและค่าทดแทนต่อไปได้",
+        ruleQ:"มาตราใดใช้วินิจฉัยความสมบูรณ์ของการหมั้นในประเด็นนี้",
+        ruleOpts:["ม.1435 (อายุ) + ม.1437 (การส่งมอบของหมั้น) + ม.1438 (เบี้ยปรับเป็นโมฆะ)","ม.1516 เหตุฟ้องหย่า","ม.1490 หนี้ร่วม","ม.1598/19 อายุผู้รับบุตรบุญธรรม"],
+        ruleAns:0,
+        ruleFeedback:"เงื่อนไขการหมั้นอยู่ที่อายุ (ม.1435) และการส่งมอบของหมั้น (ม.1437) ส่วนข้อตกลงเบี้ยปรับต้องดู ม.1438",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["ทั้งคู่อายุเกิน 18 ปี ผ่านเงื่อนไขอายุ ม.1435 และมีการส่งมอบของหมั้นให้แพรวแล้ว การหมั้นจึงสมบูรณ์ตาม ม.1437","การหมั้นเป็นโมฆะเพราะวินเป็นบุตรบุญธรรม","การหมั้นไม่สมบูรณ์เพราะไม่ได้จดทะเบียน","การหมั้นเป็นโมฆะเพราะฝ่ายหญิงอายุมากกว่า"],
+        appAns:0,
+        appFeedback:"อายุครบ 18 ทั้งคู่ (ม.1435) มีการมอบแหวนของหมั้นให้แพรวจริง (ม.1437) การหมั้นจึงสมบูรณ์ ส่วนข้อตกลงเบี้ยปรับ 200,000 บาทเป็นโมฆะตาม ม.1438",
+        concQ:"สรุปประเด็นแรกอย่างไร",
+        concOpts:["การหมั้นสมบูรณ์และมีผล แต่ข้อตกลงเบี้ยปรับ 200,000 บาทเป็นโมฆะ","การหมั้นเป็นโมฆะทั้งหมด","ไม่มีการหมั้นเกิดขึ้น","การหมั้นเป็นโมฆียะเพราะอายุ"],
+        concAns:0,
+        concFeedback:"การหมั้นสมบูรณ์ตาม ม.1435–1437 แต่ข้อตกลงจะให้เบี้ยปรับหากไม่สมรสนั้นบังคับไม่ได้และเป็น 'โมฆะ' ตาม ม.1438 เพราะการหมั้นฟ้องบังคับให้สมรสไม่ได้" },
+      { label:"ประเด็นที่ 2 — แพรวมีสิทธิบอกเลิกสัญญาหมั้นหรือไม่",
+        issueQ:"ประเด็นนี้คือเรื่องอะไร",
+        issueOpts:["การที่วินไปร่วมประเวณีกับผู้อื่นเป็น 'เหตุสำคัญอันเกิดแก่ผู้หมั้น' ที่ให้แพรวบอกเลิกได้หรือไม่","แพรวมีสิทธิฟ้องหย่าหรือไม่","วินต้องคืนสินสอดหรือไม่","แพรวต้องรับวินเป็นบุตรบุญธรรมหรือไม่"],
+        issueAns:0,
+        issueFeedback:"ยังไม่มีการสมรส จึงเป็นเรื่อง 'บอกเลิกสัญญาหมั้น' ไม่ใช่การหย่า",
+        ruleQ:"ควรใช้มาตราใดวินิจฉัยสิทธิบอกเลิกของแพรว",
+        ruleOpts:["ม.1443 (เหตุสำคัญอันเกิดแก่ผู้หมั้น) ประกอบ ม.1444 (กระทำชั่วอย่างร้ายแรง)","ม.1516(1) มีชู้","ม.1453 รอ 310 วัน","ม.1533 แบ่งสินสมรส"],
+        ruleAns:0,
+        ruleFeedback:"วิน (ผู้หมั้น) เป็นผู้ก่อเหตุ จึงเข้า ม.1443 และหากเป็นการกระทำชั่วอย่างร้ายแรงยังโยงถึงความรับผิดตาม ม.1444",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["วินไปร่วมประเวณีกับนายบุญหลังหมั้น เป็นเหตุสำคัญอันเกิดแก่ผู้หมั้น แพรวบอกเลิกได้ตาม ม.1443 และไม่ต้องคืนของหมั้น","แพรวบอกเลิกไม่ได้เพราะวินไม่ได้ทำผิดต่อแพรวโดยตรง","แพรวต้องคืนแหวนให้วินก่อนจึงบอกเลิกได้","วินบอกเลิกได้ฝ่ายเดียว"],
+        appAns:0,
+        appFeedback:"พฤติกรรมของวินหลังหมั้นเป็นเหตุสำคัญอันเกิดแก่ผู้หมั้นตาม ม.1443 แพรวจึงบอกเลิกได้และไม่ต้องคืนของหมั้น",
+        concQ:"สรุปประเด็นที่ 2 อย่างไร",
+        concOpts:["แพรวมีสิทธิบอกเลิกสัญญาหมั้นได้ตาม ม.1443 โดยไม่ต้องคืนของหมั้น","แพรวไม่มีสิทธิบอกเลิก","แพรวต้องรอให้ศาลพิพากษาก่อน","แพรวต้องคืนของหมั้นทั้งหมด"],
+        concAns:0,
+        concFeedback:"เมื่อเหตุเกิดจากตัววิน (ผู้หมั้น) แพรว (ผู้รับหมั้น) จึงบอกเลิกสัญญาหมั้นได้ตาม ม.1443 และไม่ต้องคืนของหมั้น" },
+      { label:"ประเด็นที่ 3 — สิทธิเรียกค่าทดแทนของแพรว",
+        issueQ:"ประเด็นสุดท้ายคือเรื่องใด",
+        issueOpts:["แพรวเรียกค่าทดแทนการเตรียมการสมรสจากวิน และค่าทดแทนจากนายบุญได้หรือไม่","แพรวเรียกค่าเลี้ยงชีพได้หรือไม่","แพรวขอแบ่งสินสมรสได้หรือไม่","แพรวขอถอนอำนาจปกครองได้หรือไม่"],
+        issueAns:0,
+        issueFeedback:"ค่าเตรียมการสมรสและค่าทดแทนจากผู้ร่วมประเวณีเป็นสิทธิเฉพาะเรื่องการหมั้น",
+        ruleQ:"ใช้มาตราใดวินิจฉัย",
+        ruleOpts:["ม.1440(2) ค่าเตรียมการสมรส + ม.1445 ค่าทดแทนจากผู้ร่วมประเวณีกับคู่หมั้น","ม.1523 ค่าทดแทนกรณีมีชู้","ม.1526 ค่าเลี้ยงชีพ","ม.1567 อำนาจปกครอง"],
+        ruleAns:0,
+        ruleFeedback:"ค่าคอร์สเจ้าสาว/ฮันนีมูนเป็นค่าเตรียมการสมรสตาม ม.1440(2) ส่วนการเรียกจากนายบุญเข้า ม.1445",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["แพรวเรียกค่าเตรียมการสมรส 200,000 บาทจากวินได้ตาม ม.1440(2) แต่เรียกค่าทดแทนจากนายบุญตาม ม.1445 ไม่ได้ เพราะนายบุญไม่รู้ว่าวินมีคู่หมั้น","แพรวเรียกได้ทั้งจากวินและนายบุญเต็มจำนวน","แพรวเรียกไม่ได้เลยเพราะยังไม่สมรส","แพรวเรียกได้เฉพาะจากนายบุญ"],
+        appAns:0,
+        appFeedback:"ค่าเตรียมการสมรสเรียกจากวินได้ตาม ม.1440(2) แต่ ม.1445 กำหนดให้เรียกจากผู้ร่วมประเวณีได้เฉพาะเมื่อผู้นั้น 'รู้หรือควรรู้' ว่าคู่หมั้นได้หมั้นแล้ว เมื่อนายบุญไม่รู้ จึงเรียกไม่ได้",
+        concQ:"สรุปประเด็นที่ 3",
+        concOpts:["เรียกค่าเตรียมการสมรสจากวินได้ตาม ม.1440(2) แต่เรียกจากนายบุญไม่ได้เพราะเขาไม่รู้ว่าวินมีคู่หมั้น","เรียกได้ทั้งสองคนเต็มจำนวน","เรียกไม่ได้เลย","เรียกได้เฉพาะเบี้ยปรับ 200,000 บาท"],
+        concAns:0,
+        concFeedback:"แพรวเรียกค่าเตรียมการสมรสจากวินได้ (ม.1440(2)) แต่เรียกค่าทดแทนจากนายบุญไม่ได้ตาม ม.1445 เพราะเขาไม่รู้และไม่ควรรู้ว่าวินมีคู่หมั้น ส่วนเบี้ยปรับ 200,000 บาทเป็นโมฆะตาม ม.1438" }
+    ]
+  },
+  {
+    id:"case2", examRef:"แนวข้อสอบ – เงื่อนไขการสมรส", title:"หม้ายสามเดือนกับกฎ 310 วัน : นางแก้ว", cat:"marriage",
+    facts:"นางแก้วกลายเป็นหม้ายเพราะนายศักดิ์สามีเสียชีวิตจากอุบัติเหตุเมื่อ 3 เดือนก่อน ต่อมานางแก้วไปแจ้งนายทะเบียนเพื่อขอจดทะเบียนสมรสกับนายสดคู่รักคนใหม่ โดยทั้งคู่ผ่านเกณฑ์การสมรสทุกประการ แต่นายทะเบียนปฏิเสธ โดยอ้างว่าต้องรอให้พ้น 310 วันนับแต่นายศักดิ์ถึงแก่ความตาย นางแก้วมาปรึกษาท่านในฐานะทนายความ",
+    issues:[
+      { label:"ประเด็นที่ 1 — หลักการรอ 310 วันและข้อยกเว้น",
+        issueQ:"ประเด็นแรกคือเรื่องใด",
+        issueOpts:["หญิงที่การสมรสสิ้นสุดต้องรอ 310 วันจึงจะสมรสใหม่ได้หรือไม่ และมีข้อยกเว้นใด","นางแก้วมีสิทธิรับมรดกนายศักดิ์หรือไม่","นายสดต้องจ่ายสินสอดหรือไม่","การสมรสเดิมเป็นโมฆะหรือไม่"],
+        issueAns:0,
+        issueFeedback:"ประเด็นตรงคือข้อห้ามเรื่องระยะเวลา 310 วันที่นายทะเบียนยกขึ้น และทางออกของนางแก้ว",
+        ruleQ:"ใช้มาตราใดวินิจฉัย",
+        ruleOpts:["ม.1453","ม.1452 สมรสซ้อน","ม.1448 อายุ","ม.1516 เหตุหย่า"],
+        ruleAns:0,
+        ruleFeedback:"ม.1453 คือหลักการรอ 310 วันและข้อยกเว้นทั้งสี่",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["สามีเพิ่งตายราว 90 วัน ยังไม่พ้น 310 วัน จึงต้องด้วยข้อห้าม แต่นางแก้วขอใบรับรองแพทย์ว่าไม่ตั้งครรภ์หรือขอคำสั่งศาลเพื่อเข้าข้อยกเว้นได้","นางแก้วสมรสได้ทันทีเพราะสามีตาย ไม่มีข้อห้าม","ต้องรอ 310 วันเสมอโดยไม่มีทางออก","ม.1453 ใช้กับผู้ชายเท่านั้น"],
+        appAns:0,
+        appFeedback:"เพิ่งพ้นเพียงราว 90 วัน ยังไม่ครบ 310 วัน จึงเข้าข้อห้าม แต่ ม.1453 มีข้อยกเว้น เช่น ใบรับรองแพทย์ว่าไม่ตั้งครรภ์ หรือคำสั่งศาล",
+        concQ:"สรุปประเด็นแรก",
+        concOpts:["โดยหลักนางแก้วต้องรอ 310 วัน แต่ขอใบรับรองแพทย์ว่าไม่ตั้งครรภ์หรือคำสั่งศาลเพื่อสมรสก่อนได้ตามข้อยกเว้น ม.1453","นางแก้วสมรสไม่ได้เด็ดขาดจนครบ 310 วัน","นายทะเบียนต้องจดให้ทันที","นางแก้วต้องรอ 1 ปี"],
+        concAns:0,
+        concFeedback:"นางแก้วเข้าข้อห้าม 310 วันตาม ม.1453 จริง แต่กฎหมายเปิดข้อยกเว้นไว้ เช่น มีใบรับรองแพทย์ว่าไม่ได้ตั้งครรภ์ หรือมีคำสั่งศาลให้สมรสได้ จึงไม่จำเป็นต้องรอจนครบ" },
+      { label:"ประเด็นที่ 2 — ผลหากฝ่าฝืนจดทะเบียนไปแล้ว",
+        issueQ:"ถ้านายทะเบียนเผลอจดทะเบียนสมรสให้ทั้งที่ยังไม่พ้น 310 วัน การสมรสมีผลอย่างไร",
+        issueOpts:["ต้องวินิจฉัยว่าการฝ่าฝืน ม.1453 ทำให้การสมรสเป็นโมฆะ โมฆียะ หรือสมบูรณ์","ต้องวินิจฉัยว่าใครเป็นเจ้าของสินสอด","ต้องวินิจฉัยเรื่องอำนาจปกครองบุตร","ต้องวินิจฉัยเรื่องมรดก"],
+        issueAns:0,
+        issueFeedback:"คำถามคือสภาพความสมบูรณ์ของการสมรสที่ฝ่าฝืน ม.1453",
+        ruleQ:"เทียบกับเหตุโมฆะ/โมฆียะตามมาตราใด",
+        ruleOpts:["ม.1495 (เหตุโมฆะ) และ ม.1503 (เหตุโมฆียะ) — ม.1453 ไม่อยู่ในทั้งสองบัญชี","ม.1516 เหตุหย่า","ม.1440 ค่าทดแทน","ม.1567 อำนาจปกครอง"],
+        ruleAns:0,
+        ruleFeedback:"เหตุโมฆะอยู่ใน ม.1495 เหตุโมฆียะอยู่ใน ม.1503 — ม.1453 ไม่ถูกระบุไว้ในทั้งสอง",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["ม.1453 เป็นเพียงข้อห้ามนายทะเบียน ไม่ถูกระบุเป็นเหตุโมฆะใน ม.1495 หรือเหตุโมฆียะใน ม.1503 การสมรสที่จดไปแล้วจึงสมบูรณ์","การสมรสเป็นโมฆะทันที","การสมรสเป็นโมฆียะ เพิกถอนได้","การสมรสไม่เกิดขึ้นเลย"],
+        appAns:0,
+        appFeedback:"เพราะ ม.1453 ไม่อยู่ในบัญชีเหตุโมฆะ (1495) หรือโมฆียะ (1503) การสมรสที่จดไปแล้วจึงสมบูรณ์ ผลเสียตกที่นายทะเบียนที่ทำผิดระเบียบ",
+        concQ:"สรุปประเด็นที่ 2",
+        concOpts:["หากฝ่าฝืนจดไปแล้ว การสมรสสมบูรณ์ ไม่เป็นโมฆะหรือโมฆียะ เพราะ ม.1453 เป็นเพียงข้อห้ามนายทะเบียน","การสมรสเป็นโมฆะ","การสมรสเป็นโมฆียะ","การสมรสไม่เกิดขึ้น"],
+        concAns:0,
+        concFeedback:"กฎ 310 วันมีไว้ป้องกันปัญหาการสันนิษฐานความเป็นบุตรซ้อนกัน แต่เป็นเพียงข้อห้ามนายทะเบียน ฝ่าฝืนแล้วการสมรสยังสมบูรณ์" }
+    ]
+  },
+  {
+    id:"case3", examRef:"แนวข้อสอบ – ทรัพย์สินระหว่างสมรส", title:"แบ่งสมบัติคู่สมรสเพศเดียวกัน : ฟ้า–เมฆ", cat:"property",
+    facts:"นายฟ้าและนายเมฆอยู่กินกันมาหลายปี และจดทะเบียนสมรสกันเมื่อกฎหมายรับรองการสมรสของบุคคลเพศเดียวกัน โดยจดทะเบียนวันที่ 14 กุมภาพันธ์ 2568<br><br>ก่อนจดทะเบียน ทั้งสองมีบ้าน 1 หลัง ราคา 5 ล้านบาท ที่ซื้อร่วมกันและใส่ชื่อเป็นเจ้าของร่วม และมีเงินฝากจากธุรกิจ 3 ล้านบาท ก่อนสมรสหนึ่งวัน นายฟ้าได้รับสลากกินแบ่งเป็นของขวัญวันเกิดจากแม่ ต่อมาสลากถูกรางวัลได้เงิน 6 ล้านบาท ส่วนนายเมฆได้รับมรดกทองคำจากยาย นำไปขายได้เงินสด 2 แสนบาท<br><br>หลังสมรสได้ไม่นาน ทั้งสองทะเลาะกันและประสงค์จะหย่า โดยนายเมฆยังมีบุตรติดคือเด็กชายต้นที่นายฟ้าเลี้ยงดูมาตลอด นายเมฆกู้เงินมาจ่ายค่ารักษาพยาบาลเด็กชายต้น 1 แสนบาท และนายฟ้าขับรถประมาทชนผู้อื่นต้องจ่ายค่าสินไหม 3 แสนบาท",
+    issues:[
+      { label:"ประเด็นที่ 1 — จำแนกสินส่วนตัวและสินสมรส",
+        issueQ:"ประเด็นแรกที่ต้องวินิจฉัยคือ",
+        issueOpts:["ทรัพย์แต่ละรายการเป็นสินส่วนตัวหรือสินสมรส","ใครมีอำนาจปกครองเด็กชายต้น","การสมรสเพศเดียวกันเป็นโมฆะหรือไม่","ใครต้องจ่ายค่าเลี้ยงชีพ"],
+        issueAns:0,
+        issueFeedback:"ต้องจำแนกประเภททรัพย์ก่อน จึงจะแบ่งได้ถูกต้อง",
+        ruleQ:"ใช้มาตราใดจำแนก",
+        ruleOpts:["ม.1471 (สินส่วนตัว) + ม.1472 (ทรัพย์แทนสินส่วนตัว) + ม.1474 (สินสมรส)","ม.1516 เหตุหย่า","ม.1598/19 อายุบุตรบุญธรรม","ม.1440 ค่าทดแทน"],
+        ruleAns:0,
+        ruleFeedback:"หัวใจอยู่ที่ ม.1471, 1472 และ 1474",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["บ้านและเงินธุรกิจมีอยู่ก่อนสมรสจึงเป็นสินส่วนตัว (กรรมสิทธิ์รวม); สลากเป็นของให้ก่อนสมรส เงินรางวัลเป็นทรัพย์แทนจึงเป็นสินส่วนตัวของฟ้า (ม.1472); ทองมรดกและเงินที่ขายได้เป็นสินส่วนตัวของเมฆ","ทุกอย่างเป็นสินสมรสเพราะได้มา/มีค่าเพิ่มระหว่างสมรส","บ้านเป็นสินสมรสเพราะใช้ร่วมกัน","เงินรางวัลสลากเป็นสินสมรส"],
+        appAns:0,
+        appFeedback:"บ้าน 5 ล้าน + เงินธุรกิจ 3 ล้าน มีก่อนสมรส = สินส่วนตัว (ถือกรรมสิทธิ์รวมคนละครึ่ง); สลากเป็นการให้ก่อนสมรส เงินรางวัลเป็นทรัพย์ที่ได้มาแทน = สินส่วนตัวของฟ้า (ม.1471, 1472); ทองมรดก = สินส่วนตัวของเมฆ",
+        concQ:"สรุปประเด็นแรก",
+        concOpts:["ทรัพย์เกือบทั้งหมดเป็นสินส่วนตัว ไม่มีสินสมรสก้อนใหญ่ให้แบ่งครึ่ง","ทุกอย่างเป็นสินสมรสแบ่งครึ่ง","บ้านเท่านั้นเป็นสินสมรส","เงินรางวัลสลากเป็นสินสมรส"],
+        concAns:0,
+        concFeedback:"บ้านและเงินธุรกิจเป็นสินส่วนตัวที่ถือกรรมสิทธิ์รวม; เงินรางวัลสลากเป็นสินส่วนตัวของฟ้าตาม ม.1471–1472; ทองมรดกเป็นสินส่วนตัวของเมฆ จึงแทบไม่มีสินสมรสให้แบ่ง" },
+      { label:"ประเด็นที่ 2 — การแบ่งเมื่อหย่า",
+        issueQ:"เมื่อหย่าแล้วต้องแบ่งทรัพย์อย่างไร",
+        issueOpts:["แบ่งเฉพาะสินสมรสคนละครึ่ง ส่วนสินส่วนตัวต่างคนต่างเอาไป","แบ่งทุกอย่างคนละครึ่งรวมทั้งสินส่วนตัว","ฝ่ายผิดไม่ได้อะไรเลย","ศาลริบทั้งหมด"],
+        issueAns:0,
+        issueFeedback:"หลักแบ่งครึ่งใช้กับสินสมรสเท่านั้น",
+        ruleQ:"ใช้มาตราใด",
+        ruleOpts:["ม.1533 (แบ่งสินสมรสส่วนเท่ากัน)","ม.1440","ม.1516","ม.1567"],
+        ruleAns:0,
+        ruleFeedback:"ม.1533 คือหลักแบ่งสินสมรสคนละครึ่งเมื่อหย่า",
+        appQ:"ปรับเข้ากับข้อเท็จจริง",
+        appOpts:["สินส่วนตัว (บ้าน/เงินธุรกิจตามส่วนกรรมสิทธิ์รวม, เงินรางวัลของฟ้า, ทองของเมฆ) ต่างคนต่างเอาคืน ส่วนที่เป็นสินสมรสจริงจึงแบ่งครึ่งตาม ม.1533","แบ่งทุกก้อนคนละครึ่ง","เมฆได้ทั้งหมดเพราะมีบุตร","ฟ้าได้ทั้งหมดเพราะถูกรางวัล"],
+        appAns:0,
+        appFeedback:"ตาม ม.1533 แบ่งเฉพาะสินสมรส ส่วนสินส่วนตัวต่างฝ่ายต่างรับคืนตามที่จำแนกไว้ในประเด็นที่ 1",
+        concQ:"สรุปประเด็นที่ 2",
+        concOpts:["ต่างฝ่ายต่างรับสินส่วนตัวคืน และแบ่งเฉพาะสินสมรส (ถ้ามี) คนละครึ่งตาม ม.1533","แบ่งทุกอย่างคนละครึ่ง","ยกให้ฝ่ายที่ดูแลบุตร","ศาลริบ"],
+        concAns:0,
+        concFeedback:"สินส่วนตัวไม่ต้องแบ่ง ต่างฝ่ายต่างรับคืน มีแต่สินสมรสเท่านั้นที่แบ่งครึ่งตาม ม.1533" },
+      { label:"ประเด็นที่ 3 — หนี้ร่วมหรือหนี้ส่วนตัว",
+        issueQ:"หนี้ทั้งสองก้อนใครต้องรับผิด",
+        issueOpts:["ต้องแยกว่าหนี้ใดเป็นหนี้ร่วม หนี้ใดเป็นหนี้ส่วนตัว","ทั้งสองก้อนเป็นหนี้ร่วมเสมอ","ทั้งสองก้อนเป็นหนี้ส่วนตัวเสมอ","หนี้ตกแก่เด็กชายต้น"],
+        issueAns:0,
+        issueFeedback:"ต้องดูที่ลักษณะของหนี้แต่ละก้อนตาม ม.1490",
+        ruleQ:"ใช้มาตราใด",
+        ruleOpts:["ม.1490 (หนี้ร่วม 4 กรณี)","ม.1533","ม.1471","ม.1516"],
+        ruleAns:0,
+        ruleFeedback:"ม.1490 กำหนดหนี้ร่วม 4 กรณี",
+        appQ:"ปรับเข้ากับข้อเท็จจริง",
+        appOpts:["หนี้กู้มารักษาพยาบาลเด็กชายต้นเป็นหนี้ร่วมตาม ม.1490(1); ส่วนหนี้ค่าสินไหมจากการขับรถชนของฟ้าเป็นหนี้ส่วนตัวของฟ้า","หนี้ทั้งสองเป็นหนี้ร่วม","หนี้ทั้งสองเป็นหนี้ส่วนตัว","เด็กชายต้นต้องรับผิด"],
+        appAns:0,
+        appFeedback:"ค่ารักษาพยาบาลคนในครอบครัวเข้า ม.1490(1) เป็นหนี้ร่วม; หนี้ละเมิดขับรถชนเป็นเรื่องส่วนตัวของฟ้า ไม่เข้าเกณฑ์หนี้ร่วม",
+        concQ:"สรุปประเด็นที่ 3",
+        concOpts:["หนี้ค่ารักษาพยาบาลเด็กชายต้นเป็นหนี้ร่วม (ม.1490(1)) แต่หนี้ละเมิดของฟ้าเป็นหนี้ส่วนตัว","ทั้งสองเป็นหนี้ร่วม","ทั้งสองเป็นหนี้ส่วนตัว","เด็กชายต้นรับผิด"],
+        concAns:0,
+        concFeedback:"หนี้เพื่อรักษาพยาบาลคนในครอบครัวเป็นหนี้ร่วมตาม ม.1490(1) เจ้าหนี้บังคับได้ทั้งสองฝ่าย ส่วนหนี้ละเมิดของฟ้าเป็นหนี้ส่วนตัวที่ฟ้ารับผิดเอง" }
+    ]
+  },
+  {
+    id:"case4", examRef:"แนวข้อสอบ – ความเป็นบุตร", title:"ลูกใครกันแน่ : ห่วงโซ่การสมรสของนิด", cat:"parentchild",
+    facts:"นางสาวนิดอยู่กินกับนายเอกฉันคู่สมรสแต่ไม่ได้จดทะเบียน คลอดบุตรสาวชื่อ ด.ญ.แก้ว นายเอกเป็นผู้ไปแจ้งเกิดระบุว่าตนเป็นบิดาและเลี้ยงดูอย่างดีจน ด.ญ.แก้วอายุ 1 ขวบ ต่อมานายเอกทราบว่าตนไม่ใช่บิดาแท้ ๆ จึงเลิกกับนิด<br><br>ต่อมานิดจดทะเบียนสมรสกับนายโท (บิดาแท้ของแก้ว) แต่นายโทประสบอุบัติเหตุเสียชีวิต หลังจากนั้น 6 เดือน นิดจดทะเบียนสมรสกับนายตรี และอีก 2 เดือนนิดคลอดบุตรชายชื่อ ด.ช.ต้น ต่อมานิดกับนายตรีหย่าขาดกันโดยความยินยอม<br><br>5 ปีต่อมา นิดพบรักและจดทะเบียนสมรสกับนางสาวพลอย (คู่สมรสเพศเดียวกัน) หลังจดทะเบียนได้ 5 เดือน นิดคลอดบุตรสาวชื่อ ด.ญ.ปลาย",
+    issues:[
+      { label:"ประเด็นที่ 1 — ด.ญ.แก้ว เป็นบุตรของใคร",
+        issueQ:"ประเด็นแรก",
+        issueOpts:["ด.ญ.แก้ว ซึ่งเกิดขณะนิดยังไม่ได้สมรสกับใคร เป็นบุตรชอบด้วยกฎหมายของใคร","แก้วเป็นบุตรบุญธรรมของเอกหรือไม่","เอกต้องจ่ายค่าเลี้ยงชีพหรือไม่","แก้วมีสิทธิใช้นามสกุลใคร"],
+        issueAns:0,
+        issueFeedback:"แก้วเกิดตอนนิดยังไม่ได้สมรส ต้องดูสถานะบุตรนอกสมรส",
+        ruleQ:"ใช้มาตราใด",
+        ruleOpts:["ม.1546 (บุตรของหญิงที่ไม่ได้สมรส) ประกอบ ม.1547","ม.1536 สันนิษฐานความเป็นบุตร","ม.1598/19","ม.1516"],
+        ruleAns:0,
+        ruleFeedback:"เด็กเกิดนอกสมรสเป็นบุตรของมารดาตาม ม.1546 เว้นแต่เข้า ม.1547",
+        appQ:"ปรับเข้ากับข้อเท็จจริง",
+        appOpts:["แก้วเกิดขณะนิดไม่ได้สมรส จึงเป็นบุตรชอบด้วยกฎหมายของนิด (มารดา) ตาม ม.1546; นายเอกเพียงแจ้งเกิด/เลี้ยงดู ยังไม่ทำให้เป็นบุตรชอบด้วยกฎหมายของเอก","แก้วเป็นบุตรของนายเอกเพราะแจ้งเกิด","แก้วเป็นบุตรของนายโทบิดาแท้ทันที","แก้วไม่เป็นบุตรของใคร"],
+        appAns:0,
+        appFeedback:"ตาม ม.1546 แก้วเป็นบุตรชอบด้วยกฎหมายของนิด การแจ้งเกิด/เลี้ยงดูของเอกไม่เข้าเกณฑ์ ม.1547 (ไม่ได้สมรส/จดทะเบียนรับรอง/ศาลพิพากษา)",
+        concQ:"สรุปประเด็นแรก",
+        concOpts:["ด.ญ.แก้ว เป็นบุตรชอบด้วยกฎหมายของนิด (มารดา) เท่านั้นตาม ม.1546","เป็นบุตรของเอก","เป็นบุตรของโท","ไม่เป็นบุตรของใคร"],
+        concAns:0,
+        concFeedback:"เด็กที่เกิดจากหญิงที่ไม่ได้สมรสเป็นบุตรชอบด้วยกฎหมายของมารดาเสมอตาม ม.1546 จนกว่าบิดาจะทำให้ชอบด้วยกฎหมายตาม ม.1547" },
+      { label:"ประเด็นที่ 2 — ด.ช.ต้น เป็นบุตรของใคร",
+        issueQ:"ด.ช.ต้น เกิดหลังนิดสมรสกับตรีเพียง 2 เดือน แต่โทเพิ่งตายไปก่อนหน้า เป็นบุตรของใคร",
+        issueOpts:["ต้องใช้ข้อสันนิษฐานความเป็นบุตรเมื่อหญิงสมรสใหม่","ต้นเป็นบุตรบุญธรรมของตรี","ต้นเป็นบุตรของเอก","ต้นไม่เป็นบุตรของใคร"],
+        issueAns:0,
+        issueFeedback:"เด็กเกิดคาบเกี่ยวการสมรสสองครั้ง ต้องใช้ข้อสันนิษฐาน",
+        ruleQ:"ใช้มาตราใด",
+        ruleOpts:["ม.1537 (หญิงสมรสใหม่และคลอดภายใน 310 วัน) ประกอบ ม.1536","ม.1546","ม.1598/28","ม.1453"],
+        ruleAns:0,
+        ruleFeedback:"เมื่อการสมรสเดิมสิ้นสุดแล้วสมรสใหม่และคลอดภายใน 310 วัน ใช้ ม.1537",
+        appQ:"ปรับเข้ากับข้อเท็จจริง",
+        appOpts:["ต้นเกิดภายใน 310 วันนับแต่การสมรสกับโทสิ้นสุด และนิดสมรสใหม่กับตรีแล้ว ม.1537 ให้สันนิษฐานว่าต้นเป็นบุตรชอบด้วยกฎหมายของ 'ตรี' (คู่สมรสคนใหม่)","สันนิษฐานว่าเป็นบุตรของโทเสมอ","เป็นบุตรของเอก","ไม่มีข้อสันนิษฐาน"],
+        appAns:0,
+        appFeedback:"ม.1537 แก้ปัญหาการสันนิษฐานซ้อนโดยให้เด็กเป็นบุตรของคู่สมรสคนหลัง คือ ตรี (เว้นแต่จะมีการฟ้องปฏิเสธความเป็นบุตร)",
+        concQ:"สรุปประเด็นที่ 2",
+        concOpts:["สันนิษฐานว่า ด.ช.ต้น เป็นบุตรชอบด้วยกฎหมายของนายตรีตาม ม.1537","เป็นบุตรของโท","เป็นบุตรของเอก","ไม่เป็นบุตรของใคร"],
+        concAns:0,
+        concFeedback:"ตาม ม.1537 เมื่อสมรสใหม่แล้วคลอดภายใน 310 วัน กฎหมายสันนิษฐานให้เด็กเป็นบุตรของคู่สมรสคนใหม่ (ตรี) ไว้ก่อน" },
+      { label:"ประเด็นที่ 3 — ด.ญ.ปลาย เป็นบุตรของใคร",
+        issueQ:"ปลายเกิด 5 เดือนหลังนิดสมรสกับพลอย (คู่สมรสเพศเดียวกัน) เป็นบุตรของใคร",
+        issueOpts:["ต้องพิจารณาว่าข้อสันนิษฐานความเป็นบุตรของ 'ชาย' ใช้กับคู่สมรสหญิงได้หรือไม่","ปลายเป็นบุตรของพลอยเสมอ","ปลายเป็นบุตรของตรี","ปลายเป็นบุตรบุญธรรม"],
+        issueAns:0,
+        issueFeedback:"ประเด็นสมรสเท่าเทียม: ข้อสันนิษฐานเขียนถึง 'ชายผู้เป็นคู่สมรส'",
+        ruleQ:"ใช้มาตราใด",
+        ruleOpts:["ม.1536 (สันนิษฐานเฉพาะ 'ชาย' ผู้เป็นคู่สมรส) ประกอบ ม.1546","ม.1537 เท่านั้น","ม.1598/19","ม.1516"],
+        ruleAns:0,
+        ruleFeedback:"ม.1536 สันนิษฐานให้เป็นบุตรของ 'ชาย' ผู้เป็นคู่สมรส เมื่อคู่สมรสเป็นหญิงจึงต้องพิจารณาต่อ",
+        appQ:"ปรับเข้ากับข้อเท็จจริง",
+        appOpts:["พลอยเป็นคู่สมรสหญิง ไม่อาจเป็นบิดาทางสายโลหิต ข้อสันนิษฐานตาม ม.1536 ที่ผูกกับ 'ชาย' จึงไม่ทำให้พลอยเป็นบิดา ปลายจึงเป็นบุตรชอบด้วยกฎหมายของนิด (มารดาผู้คลอด) ตาม ม.1546","สันนิษฐานว่าปลายเป็นบุตรของพลอย","ปลายเป็นบุตรของตรี","ปลายไม่เป็นบุตรของใคร"],
+        appAns:0,
+        appFeedback:"ข้อสันนิษฐานความเป็นบุตรผูกกับ 'ชายผู้เป็นคู่สมรส' เมื่อคู่สมรสเป็นหญิงที่ไม่อาจเป็นบิดาทางสายโลหิต ปลายจึงเป็นบุตรของมารดาผู้คลอดตาม ม.1546",
+        concQ:"สรุปประเด็นที่ 3",
+        concOpts:["ด.ญ.ปลาย เป็นบุตรชอบด้วยกฎหมายของนิด (มารดาผู้คลอด) ตาม ม.1546 เพราะข้อสันนิษฐานผูกกับ 'ชาย' ผู้เป็นคู่สมรส","เป็นบุตรของพลอย","เป็นบุตรของตรี","ไม่เป็นบุตรของใคร"],
+        concAns:0,
+        concFeedback:"นี่คือจุดที่สมรสเท่าเทียมยังทิ้งช่องว่างไว้: ข้อสันนิษฐาน ม.1536 ยังผูกกับ 'ชาย' ผู้เป็นคู่สมรส เมื่อคู่สมรสเป็นหญิง เด็กจึงเป็นบุตรของมารดาผู้คลอดตาม ม.1546 (การให้พลอยเป็นบิดา/มารดาอีกคนต้องอาศัยการรับรองบุตร/รับบุตรบุญธรรมต่อไป)" }
+    ]
+  },
+  {
+    id:"case5", examRef:"แนวข้อสอบ – บุตรบุญธรรม/ผู้ปกครอง", title:"รับหลานเป็นลูกบุญธรรม : ป้าเมตตา", cat:"guardian_adopt",
+    facts:"นางเมตตา อายุ 40 ปี นักธุรกิจฐานะดี เป็นพี่สาวของนางเมษา อายุ 32 ปี ต้องการรับนายก้อง อายุ 16 ปี ซึ่งเป็นบุตรของนางเมษาและนายกรมาดูแล และประสงค์ให้ก้องได้รับมรดกของตนในฐานะทายาทโดยธรรม เพราะทราบว่าเมษาป่วยหนักอาจมีชีวิตอยู่ได้ไม่นาน<br><br>นายกร สามีของเมษา ละทิ้งครอบครัวไปทำงานกับแก๊งคอลเซ็นเตอร์แถบชายแดนมาหลายปีโดยไม่ได้หย่ากับเมษา และมีข่าวว่ากำลังจะกลับมาเอาตัวก้องไป<br><br>นายสันต์ สามีของเมตตาที่แยกกันอยู่มากว่า 3 ปี ไม่คัดค้านการรับก้อง แต่กังวลว่าตนจะต้องมีหน้าที่อุปการะเลี้ยงดูก้อง จึงอยากให้เมตตาเป็นเพียง 'ผู้ปกครอง' ของก้องมากกว่า",
+    issues:[
+      { label:"ประเด็นที่ 1 — เงื่อนไขอายุและความยินยอมของตัวเด็ก",
+        issueQ:"ประเด็นแรก",
+        issueOpts:["เมตตามีคุณสมบัติด้านอายุที่จะรับก้องเป็นบุตรบุญธรรมหรือไม่ และก้องต้องยินยอมเองหรือไม่","เมตตาต้องหย่ากับสันต์ก่อนหรือไม่","ก้องต้องจ่ายค่าอุปการะให้ใคร","เมษาต้องทำพินัยกรรมหรือไม่"],
+        issueAns:0,
+        issueFeedback:"เริ่มจากเงื่อนไขพื้นฐานของผู้รับและตัวเด็ก",
+        ruleQ:"ใช้มาตราใด",
+        ruleOpts:["ม.1598/19 (อายุผู้รับ) + ม.1598/20 (ความยินยอมของเด็กอายุ ≥15 ปี)","ม.1546 + 1547","ม.1516","ม.1440"],
+        ruleAns:0,
+        ruleFeedback:"อายุผู้รับดู ม.1598/19 ความยินยอมของเด็กดู ม.1598/20",
+        appQ:"ปรับเข้ากับข้อเท็จจริง",
+        appOpts:["เมตตาอายุ 40 ปี (≥25) และแก่กว่าก้อง 24 ปี (≥15) ผ่านเงื่อนไข ม.1598/19; ก้องอายุ 16 (≥15) ต้องให้ความยินยอมด้วยตนเองตาม ม.1598/20","เมตตาอายุน้อยเกินไป","ก้องไม่ต้องยินยอมเพราะเป็นผู้เยาว์","ต้องรอก้องอายุ 20 ปี"],
+        appAns:0,
+        appFeedback:"อายุเมตตาและช่วงอายุที่ห่างกันผ่านเกณฑ์ ม.1598/19 และก้องอายุเกิน 15 ปีจึงต้องยินยอมเองตาม ม.1598/20",
+        concQ:"สรุปประเด็นแรก",
+        concOpts:["เมตตามีคุณสมบัติด้านอายุตาม ม.1598/19 และต้องได้รับความยินยอมของก้องเองตาม ม.1598/20","เมตตาอายุไม่ถึงเกณฑ์","ก้องไม่ต้องยินยอม","ต้องรอก้องบรรลุนิติภาวะ"],
+        concAns:0,
+        concFeedback:"เมตตา (40 ปี) แก่กว่าก้อง (16 ปี) เกิน 15 ปี ผ่าน ม.1598/19 และก้องอายุเกิน 15 ปีต้องยินยอมเองตาม ม.1598/20" },
+      { label:"ประเด็นที่ 2 — ความยินยอมของบิดามารดาและคู่สมรส",
+        issueQ:"ต้องได้รับความยินยอมจากใครอีกบ้าง และจะทำอย่างไรเมื่อนายกรหายไป",
+        issueOpts:["ต้องได้ความยินยอมของบิดามารดาของก้อง และของคู่สมรสของเมตตา; ถ้ากรไม่ยอมโดยไม่มีเหตุผลให้ขอศาลสั่งแทน","ไม่ต้องขอความยินยอมจากใครเลย","ต้องขอความยินยอมจากนายสันต์เท่านั้น","ต้องขอความยินยอมจากศาลอย่างเดียว"],
+        issueAns:0,
+        issueFeedback:"ต้องดูความยินยอมของบิดามารดา (1598/21), ทางออกเมื่อไม่ยอม (1598/23) และความยินยอมคู่สมรส (1598/25)",
+        ruleQ:"ใช้มาตราใด",
+        ruleOpts:["ม.1598/21 + ม.1598/23 + ม.1598/25","ม.1533 + 1516","ม.1471 + 1474","ม.1435 + 1437"],
+        ruleAns:0,
+        ruleFeedback:"1598/21 ความยินยอมบิดามารดา, 1598/23 ศาลสั่งแทน, 1598/25 ความยินยอมคู่สมรส",
+        appQ:"ปรับเข้ากับข้อเท็จจริง",
+        appOpts:["ต้องได้ความยินยอมของเมษาและกร (ม.1598/21); กรหายไป/อาจไม่ยอมโดยไม่มีเหตุผล จึงขอศาลสั่งอนุญาตแทนได้ (ม.1598/23); และต้องได้ความยินยอมของสันต์คู่สมรสของเมตตา (ม.1598/25)","ขอเฉพาะความยินยอมของเมษาก็พอ","ไม่ต้องขอใครเพราะก้องยินยอมแล้ว","สันต์ต้องเป็นผู้รับร่วมด้วยเสมอ"],
+        appAns:0,
+        appFeedback:"บิดามารดาต้องยินยอมทั้งคู่ (ม.1598/21) เมื่อกรหายไปหรือไม่ยอมโดยไม่มีเหตุผลอันสมควร ขอศาลสั่งแทนตาม ม.1598/23 และสันต์ในฐานะคู่สมรสของเมตตาต้องให้ความยินยอมตาม ม.1598/25",
+        concQ:"สรุปประเด็นที่ 2",
+        concOpts:["ต้องได้ความยินยอมของเมษา+กร (หากกรไม่ยอมโดยไม่มีเหตุ ขอศาลสั่งแทนตาม ม.1598/23) และความยินยอมของสันต์ตาม ม.1598/25","ขอเฉพาะเมษา","ไม่ต้องขอใคร","สันต์ต้องรับร่วม"],
+        concAns:0,
+        concFeedback:"ต้องได้ความยินยอมของบิดามารดาทั้งสอง (ม.1598/21) มีทางออกทางศาลเมื่อกรไม่ยอมโดยไม่มีเหตุ (ม.1598/23) และต้องได้ความยินยอมของสันต์คู่สมรสตาม ม.1598/25 — แต่สันต์ไม่ต้องเป็นผู้รับร่วม" },
+      { label:"ประเด็นที่ 3 — บุตรบุญธรรม vs ผู้ปกครอง และหน้าที่ของสันต์",
+        issueQ:"ควรเลือกทางใดจึงตอบวัตถุประสงค์ของเมตตา และสันต์จะมีหน้าที่อุปการะก้องหรือไม่",
+        issueOpts:["ต้องเทียบผลของ 'บุตรบุญธรรม' กับ 'ผู้ปกครอง' ในแง่สิทธิรับมรดกและหน้าที่ของสันต์","เลือกอย่างไรก็ได้ ผลเหมือนกัน","ผู้ปกครองทำให้ก้องเป็นทายาทของเมตตา","สันต์ต้องอุปการะก้องเสมอ"],
+        issueAns:0,
+        issueFeedback:"วัตถุประสงค์คือให้ก้องได้รับมรดก จึงต้องเทียบสองทางเลือก",
+        ruleQ:"ใช้มาตราใด",
+        ruleOpts:["ม.1598/28 (ฐานะและมรดกของบุตรบุญธรรม) เทียบกับบทว่าด้วยผู้ปกครอง (ม.1585 เป็นต้น)","ม.1516 + 1523","ม.1471 + 1472","ม.1435 + 1436"],
+        ruleAns:0,
+        ruleFeedback:"ผลเรื่องมรดกอยู่ที่ ม.1598/28 ส่วนผู้ปกครองไม่ก่อสิทธิรับมรดก",
+        appQ:"ปรับเข้ากับข้อเท็จจริง",
+        appOpts:["ถ้าต้องการให้ก้องเป็นทายาทรับมรดกของเมตตา ต้องรับเป็น 'บุตรบุญธรรม' (ม.1598/28) เพราะ 'ผู้ปกครอง' ไม่ทำให้เกิดสิทธิรับมรดก; และก้องเป็นบุตรบุญธรรมของเมตตาเท่านั้น สันต์จึงไม่มีหน้าที่อุปการะก้อง","ตั้งผู้ปกครองก็ทำให้ก้องรับมรดกได้","สันต์ต้องอุปการะก้องเพราะเป็นสามีเมตตา","ก้องรับมรดกไม่ได้ทั้งสองทาง"],
+        appAns:0,
+        appFeedback:"ผู้ปกครองดูแลตัว/ทรัพย์สินผู้เยาว์แต่ไม่ทำให้เป็นทายาท ต้องรับเป็นบุตรบุญธรรมจึงจะได้สิทธิรับมรดก (ม.1598/28) และก้องเป็นบุตรบุญธรรมของเมตตาผู้เดียว สันต์ไม่ใช่ผู้รับ จึงไม่มีหน้าที่อุปการะ",
+        concQ:"สรุปประเด็นที่ 3",
+        concOpts:["ควรรับก้องเป็นบุตรบุญธรรม (ไม่ใช่ตั้งผู้ปกครอง) เพื่อให้ก้องเป็นทายาทรับมรดกตาม ม.1598/28 และสันต์ไม่มีหน้าที่อุปการะก้อง","ตั้งผู้ปกครองดีกว่า","สันต์ต้องอุปการะก้อง","ก้องรับมรดกไม่ได้"],
+        concAns:0,
+        concFeedback:"เพื่อให้ก้องเป็นทายาทโดยธรรม ต้องรับเป็นบุตรบุญธรรม (ม.1598/28) การตั้งผู้ปกครองไม่ให้สิทธิรับมรดก และเมื่อก้องเป็นบุตรบุญธรรมของเมตตาผู้เดียว สันต์คู่สมรสจึงไม่มีหน้าที่อุปการะเลี้ยงดูก้อง" }
+    ]
+  }
+];
+
+const ORDER_CASES = []; /* วิชานี้เป็นสารบัญญัติ ไม่มีโหมดเรียงขั้นตอน */
+</script>
+
+<script>
+/* ================================================================
+   ENGINE — โครงเกม
+   ================================================================ */
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function pickDistractors(pool, excludeIdx, n){
+  const idxs = pool.map((_,i)=>i).filter(i=>i!==excludeIdx);
+  return shuffle(idxs).slice(0,n);
+}
+function chunk(arr, size){
+  const out = [];
+  for(let i=0;i<arr.length;i+=size) out.push(arr.slice(i, i+size));
+  return out;
+}
+function esc(s){
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+const SoundFX = (function(){
+  let ctx = null;
+  let enabled = true;
+  try{ enabled = localStorage.getItem('famlaw_sound') !== 'off'; }catch(e){}
+  function ensureCtx(){
+    if(!ctx){
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if(AC) ctx = new AC();
+    }
+    if(ctx && ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+  function tone(freq, dur, type, gainVal, delay){
+    if(!enabled) return;
+    const c = ensureCtx();
+    if(!c) return;
+    const t0 = c.currentTime + (delay||0);
+    const osc = c.createOscillator();
+    const gain = c.createGain();
+    osc.type = type || 'sine';
+    osc.frequency.setValueAtTime(freq, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(gainVal||0.1, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+dur);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+dur+0.02);
+  }
+  return {
+    click(){ tone(560,0.05,'square',0.05); },
+    flip(){ tone(700,0.04,'triangle',0.06); tone(420,0.05,'triangle',0.05,0.05); },
+    tab(){ tone(820,0.035,'sine',0.05); },
+    correct(){ tone(523,0.09,'triangle',0.08); tone(659,0.09,'triangle',0.08,0.09); tone(784,0.14,'triangle',0.09,0.18); },
+    wrong(){ tone(220,0.16,'sawtooth',0.07); tone(160,0.2,'sawtooth',0.06,0.06); },
+    score(){ tone(1046,0.1,'sine',0.07); tone(1568,0.12,'sine',0.06,0.08); },
+    isOn(){ return enabled; },
+    toggle(){
+      enabled = !enabled;
+      try{ localStorage.setItem('famlaw_sound', enabled ? 'on' : 'off'); }catch(e){}
+      return enabled;
+    }
+  };
+})();
+
+/* =========================================================
+   GAMIFICATION — คะแนนรวม (มุมขวาบน)
+   ========================================================= */
+const SCORE_KEY = 'famlaw_score_v1';
+function loadScore(){ try{ return parseInt(localStorage.getItem(SCORE_KEY)||'0',10)||0; }catch(e){ return 0; } }
+let totalScore = loadScore();
+function saveScoreValue(){ try{ localStorage.setItem(SCORE_KEY, String(totalScore)); }catch(e){} }
+function renderScoreDisplay(){
+  const el = document.getElementById('score-value');
+  if(el) el.textContent = totalScore;
+}
+function addScore(n){
+  totalScore += n;
+  saveScoreValue();
+  renderScoreDisplay();
+  const badge = document.getElementById('global-score');
+  if(badge){
+    badge.classList.remove('score-pop');
+    void badge.offsetWidth;
+    badge.classList.add('score-pop');
+  }
+}
+function loadSeenSet(key){
+  try{ return new Set(JSON.parse(localStorage.getItem(key) || '[]')); }
+  catch(e){ return new Set(); }
+}
+function saveSeenSet(key, set){
+  try{ localStorage.setItem(key, JSON.stringify(Array.from(set))); }
+  catch(e){}
+}
+const cardSeenSet = loadSeenSet('famlaw_cardsSeen');
+const seqSeenSet = loadSeenSet('famlaw_seqSeen');
+
+function makeQuestionTimer(elId, fastThreshold){
+  let startTs = 0, intervalId = null;
+  function update(){
+    const el = document.getElementById(elId);
+    if(!el) return;
+    const sec = (Date.now() - startTs) / 1000;
+    el.textContent = '⏱ ' + sec.toFixed(1) + 's';
+    el.classList.toggle('timer-fast', sec <= fastThreshold);
+  }
+  return {
+    start(){
+      startTs = Date.now();
+      clearInterval(intervalId);
+      intervalId = setInterval(update, 100);
+      update();
+    },
+    stop(){
+      clearInterval(intervalId);
+      return (Date.now() - startTs) / 1000;
+    }
+  };
+}
+const QUIZ_FAST_THRESHOLD = 8;
+const quizTimer = makeQuestionTimer('quiz-timer', QUIZ_FAST_THRESHOLD);
+const iracTimer = makeQuestionTimer('irac-timer', QUIZ_FAST_THRESHOLD);
+
+/* ---- สร้างโจทย์ระดับพื้นฐานอัตโนมัติจาก CARDS ---- */
+function buildBasicPool(){
+  const qs = [];
+  CARDS.forEach((c, idx)=>{
+    const dIdx = pickDistractors(CARDS, idx, 3);
+    const opts = [c.result, ...dIdx.map(i=>CARDS[i].result)];
+    const order = shuffle(opts.map((_,i)=>i));
+    qs.push({cat:c.cat, q: c.section + ' (' + c.title + ') มีผลทางกฎหมายอย่างไร',
+      opts: order.map(i=>opts[i]), ans: order.indexOf(0),
+      explain: c.section + ' [' + c.source + ']: ' + c.result + (c.note? ' ' + c.note : '')});
+  });
+  CARDS.forEach((c, idx)=>{
+    if(idx % 2 === 1) return;
+    const dIdx = pickDistractors(CARDS, idx, 3);
+    const opts = [c.section, ...dIdx.map(i=>CARDS[i].section)];
+    const order = shuffle(opts.map((_,i)=>i));
+    qs.push({cat:c.cat, q: '"' + c.result + '" (เรื่อง ' + c.title + ') ตรงกับมาตราใด',
+      opts: order.map(i=>opts[i]), ans: order.indexOf(0),
+      explain: c.title + ' บัญญัติอยู่ใน ' + c.section + ' [' + c.source + ']'});
+  });
+  return shuffle(qs);
+}
+
+const BASIC_POOL = buildBasicPool();
+const ADV_POOL   = shuffle(QUIZ_ADV);
+const BASIC_SETS = chunk(BASIC_POOL, 10);
+const ADV_SETS   = chunk(ADV_POOL, 10);
+
+/* ---------- header text ---------- */
+document.getElementById('hd-crest').textContent = CONFIG.crest;
+document.getElementById('hd-title').textContent = CONFIG.title;
+document.getElementById('hd-sub').textContent = CONFIG.subtitle;
+
+/* ---------- badge / stage painters ---------- */
+function paintBadge(el, catKey){
+  const c = CATEGORIES[catKey];
+  el.style.background = c.soft;
+  el.style.color = c.strong;
+  el.textContent = c.label;
+}
+function paintCardFrame(cardEl, ribbonEl, secEl, catKey){
+  const c = CATEGORIES[catKey];
+  // ribbon + section number colour (front face accent)
+  ribbonEl.style.background = c.strong;
+  secEl.style.color = c.strong;
+  // expose category palette as CSS vars so CSS can style front/back
+  cardEl.style.setProperty('--card-soft',   c.soft);
+  cardEl.style.setProperty('--card-strong', c.strong);
+}
+function paintStage(elId, catKey){
+  const el = document.getElementById(elId);
+  const c = CATEGORIES[catKey];
+  el.style.background = 'linear-gradient(135deg,' + c.strong + ' 0%, ' + c.strong + 'CC 100%)';
+  el.innerHTML =
+    '<span class="stage-icon">' + c.icon + '</span>' +
+    '<span><span class="stage-label">' + esc(c.label) + '</span>' +
+    '<span class="stage-src">' + esc(c.source) + '</span></span>';
+}
+
+/* =========================================================
+   โหมด 1: การ์ดจำมาตรา
+   ========================================================= */
+let deck = shuffle(CARDS);
+let cardIdx = 0;
+let flipped = false;
+
+const catSelect = document.getElementById('cat-select');
+(function initCatSelect(){
+  const optAll = document.createElement('option');
+  optAll.value = 'all'; optAll.textContent = 'ทุกหมวด';
+  catSelect.appendChild(optAll);
+  Object.keys(CATEGORIES).forEach(k=>{
+    const o = document.createElement('option');
+    o.value = k; o.textContent = CATEGORIES[k].label;
+    catSelect.appendChild(o);
+  });
+})();
+catSelect.addEventListener('change', ()=>{
+  const val = catSelect.value;
+  deck = val === 'all' ? shuffle(CARDS) : shuffle(CARDS.filter(c=>c.cat===val));
+  cardIdx = 0; flipped = false;
+  renderMatraChips(val);
+  renderCard();
+});
+
+function renderMatraChips(catVal){
+  const wrap = document.getElementById('matra-chips');
+  wrap.innerHTML = '';
+  if(catVal === 'all'){ wrap.style.display = 'none'; return; }
+  const items = CARDS.filter(c=>c.cat===catVal);
+  const cCat = CATEGORIES[catVal];
+  wrap.style.display = 'flex';
+  const label = document.createElement('span');
+  label.className = 'matra-chips-label';
+  label.textContent = 'มาตราในหมวดนี้:';
+  wrap.appendChild(label);
+  items.forEach(item=>{
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'matra-chip';
+    chip.textContent = item.section;
+    chip.style.setProperty('--chip-color', cCat.strong);
+    chip.title = item.title;
+    chip.addEventListener('click', ()=>{
+      SoundFX.click();
+      const idx = deck.findIndex(d=>d.section===item.section && d.cat===item.cat);
+      if(idx >= 0){ cardIdx = idx; flipped = false; renderCard(); }
+    });
+    wrap.appendChild(chip);
+  });
+}
+function updateMatraChipActive(section){
+  document.querySelectorAll('#matra-chips .matra-chip').forEach(el=>{
+    el.classList.toggle('active', el.textContent === section);
+  });
+}
+
+function renderCard(){
+  if(deck.length === 0) return;
+  const c = deck[cardIdx];
+  document.getElementById('card-section').textContent = c.section;
+  document.getElementById('card-src-front').textContent = c.source;
+  document.getElementById('card-stars').textContent = '★'.repeat(c.stars) + '☆'.repeat(5-c.stars);
+  document.getElementById('card-title').textContent = c.title;
+  document.getElementById('card-src-back').textContent = c.source;
+  document.getElementById('card-result').textContent = c.result;
+  document.getElementById('card-note').textContent = c.note || '';
+  document.getElementById('card-note').style.display = c.note ? 'block' : 'none';
+  document.getElementById('card-progress').textContent = (cardIdx+1) + ' / ' + deck.length;
+  document.getElementById('face-front').style.display = flipped ? 'none' : 'flex';
+  document.getElementById('face-back').style.display = flipped ? 'block' : 'none';
+  document.getElementById('flip-card').dataset.face = flipped ? 'back' : 'front';
+  paintBadge(document.getElementById('cat-badge'), c.cat);
+  paintCardFrame(document.getElementById('flip-card'), document.getElementById('card-ribbon'), document.getElementById('card-section'), c.cat);
+  paintStage('card-stage', c.cat);
+  updateMatraChipActive(c.section);
+}
+const flipCardEl = document.getElementById('flip-card');
+function doFlip(){
+  SoundFX.flip();
+  flipCardEl.classList.add('flipping');
+  setTimeout(()=>{
+    flipped = !flipped;
+    renderCard();
+    flipCardEl.classList.remove('flipping');
+    if(flipped){
+      const c = deck[cardIdx];
+      const key = c.cat + '|' + c.section;
+      if(!cardSeenSet.has(key)){
+        cardSeenSet.add(key);
+        saveSeenSet('famlaw_cardsSeen', cardSeenSet);
+        SoundFX.score();
+        addScore(10);
+      }
+    }
+  }, 90);
+}
+flipCardEl.addEventListener('click', doFlip);
+flipCardEl.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); doFlip(); } });
+document.getElementById('btn-next').addEventListener('click', ()=>{ SoundFX.click(); cardIdx=(cardIdx+1)%deck.length; flipped=false; renderCard(); });
+document.getElementById('btn-prev').addEventListener('click', ()=>{ SoundFX.click(); cardIdx=(cardIdx-1+deck.length)%deck.length; flipped=false; renderCard(); });
+document.getElementById('btn-shuffle').addEventListener('click', ()=>{ SoundFX.click(); deck=shuffle(deck); cardIdx=0; flipped=false; renderCard(); });
+
+/* =========================================================
+   โหมด 2: เรียงมาตราจำเป็นกลุ่ม
+   ========================================================= */
+const SEQ_ORDER = Object.keys(CATEGORIES);
+const seqSelect = document.getElementById('seq-select');
+SEQ_ORDER.forEach(val=>{
+  const o = document.createElement('option');
+  o.value = val; o.textContent = CATEGORIES[val].label;
+  seqSelect.appendChild(o);
+});
+function renderSeq(){
+  const val = seqSelect.value;
+  const items = CARDS.filter(c=>c.cat===val);
+  const c = CATEGORIES[val];
+  const listEl = document.getElementById('seq-list');
+  listEl.innerHTML = '';
+  items.forEach((item,i)=>{
+    const row = document.createElement('div');
+    row.className = 'seq-item';
+    row.style.borderLeftColor = c.strong;
+    let noteHtml = item.note ? '<div class="seq-note">'+esc(item.note)+'</div>' : '';
+    row.innerHTML =
+      '<div class="seq-num">'+(i+1)+'</div>'+
+      '<div style="flex:1">'+
+        '<div class="seq-head">'+
+          '<span class="seq-sec" style="color:'+c.strong+'">'+esc(item.section)+'</span>'+
+          '<span class="seq-title">'+esc(item.title)+'</span>'+
+          '<span class="seq-src">['+esc(item.source)+']</span>'+
+          '<span class="seq-stars">'+('★'.repeat(item.stars))+'</span>'+
+        '</div>'+
+        '<div class="seq-res">'+esc(item.result)+'</div>'+
+        noteHtml+
+      '</div>';
+    listEl.appendChild(row);
+  });
+  const sentinel = document.createElement('div');
+  sentinel.id = 'seq-sentinel';
+  sentinel.style.height = '1px';
+  listEl.appendChild(sentinel);
+  setupSeqObserver(val);
+}
+seqSelect.addEventListener('change', renderSeq);
+
+let seqObserver = null;
+function setupSeqObserver(catVal){
+  if(seqObserver) seqObserver.disconnect();
+  const sentinel = document.getElementById('seq-sentinel');
+  if(!sentinel) return;
+  seqObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting && !seqSeenSet.has(catVal)){
+        seqSeenSet.add(catVal);
+        saveSeenSet('famlaw_seqSeen', seqSeenSet);
+        SoundFX.score();
+        addScore(100);
+      }
+    });
+  }, {threshold:0.1});
+  seqObserver.observe(sentinel);
+}
+
+/* =========================================================
+   โหมด 3: วิเคราะห์โจทย์
+   ========================================================= */
+let quizLevel = 'basic';
+let currentSetIdx = 0;
+let quizPool = BASIC_SETS[0];
+let quizOrder = shuffle(quizPool.map((_,i)=>i));
+let quizIdx = 0;
+let score = 0;
+let answered = false;
+let wrongIdxs = [];
+let reviewMode = false;
+
+function currentSets(){ return quizLevel === 'basic' ? BASIC_SETS : ADV_SETS; }
+
+function loadBest(){
+  try{ return JSON.parse(localStorage.getItem(CONFIG.storageKey) || '{}'); }
+  catch(e){ return {}; }
+}
+function saveBest(level, setIdx, score, total){
+  const data = loadBest();
+  const key = level + '_' + setIdx;
+  if(!data[key] || score > data[key].score){
+    data[key] = {score, total};
+    try{ localStorage.setItem(CONFIG.storageKey, JSON.stringify(data)); }catch(e){}
+  }
+}
+function getBest(level, setIdx){
+  const data = loadBest();
+  return data[level + '_' + setIdx] || null;
+}
+
+function renderSetPicker(){
+  const sets = currentSets();
+  const picker = document.getElementById('set-picker');
+  picker.innerHTML = '';
+  sets.forEach((s,i)=>{
+    const btn = document.createElement('button');
+    const best = getBest(quizLevel, i);
+    btn.innerHTML = 'ชุด ' + (i+1) + (best ? ' <span class="best">'+best.score+'/'+best.total+'</span>' : '');
+    if(i === currentSetIdx) btn.classList.add('on');
+    btn.addEventListener('click', ()=>{ SoundFX.click(); selectSet(i); });
+    picker.appendChild(btn);
+  });
+}
+
+function selectSet(i){
+  currentSetIdx = i;
+  quizPool = currentSets()[i];
+  quizOrder = shuffle(quizPool.map((_,k)=>k));
+  quizIdx = 0; score = 0; wrongIdxs = []; reviewMode = false;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderSetPicker();
+  renderQuiz();
+}
+
+function setLevel(lvl){
+  quizLevel = lvl;
+  currentSetIdx = 0;
+  quizPool = currentSets()[0];
+  quizOrder = shuffle(quizPool.map((_,i)=>i));
+  quizIdx = 0; score = 0; wrongIdxs = []; reviewMode = false;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  document.getElementById('lvl-basic').classList.toggle('on', lvl==='basic');
+  document.getElementById('lvl-adv').classList.toggle('on', lvl==='adv');
+  renderSetPicker();
+  renderQuiz();
+}
+
+function syncStickyBar(){
+  const quizOn = viewQuiz.classList.contains('on') && document.getElementById('quiz-play').style.display !== 'none';
+  const iracOn = viewIrac.classList.contains('on') && document.getElementById('irac-play').style.display === 'block';
+  const orderOn = viewOrder.classList.contains('on') && document.getElementById('order-play').style.display !== 'none';
+  const show = quizOn || iracOn || orderOn;
+  document.getElementById('sticky-bar').style.display = show ? 'block' : 'none';
+  document.body.classList.toggle('has-sticky-bar', show);
+}
+
+function renderQuiz(){
+  const item = quizPool[quizOrder[quizIdx]];
+  document.getElementById('quiz-scenario').textContent = item.q;
+  const label = reviewMode ? 'ทบทวนข้อผิด' : ('ชุด ' + (currentSetIdx+1));
+  document.getElementById('quiz-progress').textContent = label + ' • ข้อ ' + (quizIdx+1) + ' / ' + quizPool.length;
+  document.getElementById('quiz-score').textContent = 'คะแนน ' + score + ' / ' + quizPool.length;
+  document.getElementById('pbar').style.width = (((quizIdx)/quizPool.length)*100) + '%';
+  paintBadge(document.getElementById('quiz-tag'), item.cat);
+  paintStage('quiz-stage', item.cat);
+  const optsDiv = document.getElementById('quiz-options');
+  optsDiv.innerHTML = '';
+  const letters = ['ก','ข','ค','ง'];
+  item.opts.forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.innerHTML = '<span class="abc">'+letters[i]+'</span><span>'+esc(opt)+'</span>';
+    btn.addEventListener('click', ()=> selectAnswer(i));
+    optsDiv.appendChild(btn);
+  });
+  document.getElementById('quiz-explain').style.display = 'none';
+  document.getElementById('quiz-explain').className = 'explain';
+  document.getElementById('quiz-next').style.display = 'none';
+  document.getElementById('quiz-finish').style.display = 'none';
+  answered = false;
+  syncStickyBar();
+  quizTimer.start();
+}
+
+function selectAnswer(i){
+  if(answered) return;
+  answered = true;
+  const elapsed = quizTimer.stop();
+  const item = quizPool[quizOrder[quizIdx]];
+  const optsDiv = document.getElementById('quiz-options');
+  const btns = optsDiv.querySelectorAll('button');
+  btns.forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx === item.ans) b.classList.add('correct');
+    else if(idx === i) b.classList.add('wrong');
+  });
+  const isCorrect = (i === item.ans);
+  let ptsMsg = '';
+  if(isCorrect){
+    score++; SoundFX.correct();
+    const pts = elapsed <= QUIZ_FAST_THRESHOLD ? 20 : 1;
+    addScore(pts);
+    ptsMsg = ' <span class="pts-earned">+' + pts + ' คะแนน' + (elapsed <= QUIZ_FAST_THRESHOLD ? ' ตอบเร็ว!' : '') + '</span>';
+  } else {
+    SoundFX.wrong(); if(!reviewMode) wrongIdxs.push(quizOrder[quizIdx]);
+  }
+  document.getElementById('quiz-score').textContent = 'คะแนน ' + score + ' / ' + quizPool.length;
+  document.getElementById('pbar').style.width = (((quizIdx+1)/quizPool.length)*100) + '%';
+  const explainDiv = document.getElementById('quiz-explain');
+  explainDiv.className = 'explain ' + (isCorrect ? 'ok' : 'bad');
+  explainDiv.innerHTML = '<b>' + (isCorrect ? '✓ ถูกต้อง' : '✗ ยังไม่ถูก — เฉลยคือ ' + letters_ans(item)) + ptsMsg + '</b>' + item.explain;
+  explainDiv.style.display = 'block';
+  if(quizIdx < quizPool.length - 1){
+    document.getElementById('quiz-next').style.display = 'block';
+  } else {
+    document.getElementById('quiz-finish').style.display = 'block';
+  }
+}
+function letters_ans(item){
+  return ['ก','ข','ค','ง'][item.ans];
+}
+
+document.getElementById('quiz-next').addEventListener('click', ()=>{ quizIdx++; renderQuiz(); });
+
+document.getElementById('quiz-finish').addEventListener('click', showSummary);
+
+function showSummary(){
+  document.getElementById('quiz-play').style.display = 'none';
+  syncStickyBar();
+  const summary = document.getElementById('quiz-summary');
+  summary.style.display = 'block';
+  const total = quizPool.length;
+  document.getElementById('sum-set-label').textContent = reviewMode ? 'ทบทวนข้อที่ผิด' : ('ระดับ' + (quizLevel==='basic'?'พื้นฐาน':'ข้อสอบจริง') + ' • ชุด ' + (currentSetIdx+1));
+  document.getElementById('sum-score').textContent = score;
+  document.getElementById('sum-of').textContent = 'จาก ' + total + ' ข้อ';
+  const pct = total ? score/total : 0;
+  const starCount = Math.max(1, Math.round(pct*5));
+  document.getElementById('sum-stars').textContent = '★'.repeat(starCount) + '☆'.repeat(5-starCount);
+  let grade = 'ลุยต่อได้เลย';
+  if(pct >= 0.9) grade = 'เยี่ยมมาก แม่นจริง';
+  else if(pct >= 0.7) grade = 'ดีมาก ใกล้เต็มแล้ว';
+  else if(pct >= 0.5) grade = 'พอใช้ ทบทวนอีกนิด';
+  else grade = 'ลองทบทวนการ์ดแล้วมาสู้ใหม่';
+  document.getElementById('sum-grade').textContent = grade;
+
+  if(!reviewMode){
+    saveBest(quizLevel, currentSetIdx, score, total);
+    const best = getBest(quizLevel, currentSetIdx);
+    document.getElementById('sum-best').textContent = best ? ('คะแนนดีที่สุดของชุดนี้: ' + best.score + '/' + best.total) : '';
+  } else {
+    document.getElementById('sum-best').textContent = '';
+  }
+
+  const sets = currentSets();
+  document.getElementById('sum-nextset').style.display = (!reviewMode && currentSetIdx < sets.length - 1) ? 'inline-block' : 'none';
+  document.getElementById('sum-review').style.display = (!reviewMode && wrongIdxs.length > 0) ? 'inline-block' : 'none';
+}
+
+document.getElementById('sum-retry').addEventListener('click', ()=>{
+  if(reviewMode){
+    quizOrder = shuffle(quizPool.map((_,i)=>i));
+  } else {
+    quizOrder = shuffle(quizPool.map((_,i)=>i));
+    wrongIdxs = [];
+  }
+  quizIdx = 0; score = 0;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderQuiz();
+});
+document.getElementById('sum-nextset').addEventListener('click', ()=>{ selectSet(currentSetIdx + 1); });
+document.getElementById('sum-review').addEventListener('click', ()=>{
+  reviewMode = true;
+  const basePool = quizPool;
+  quizPool = wrongIdxs.map(i => basePool[i]);
+  quizOrder = shuffle(quizPool.map((_,i)=>i));
+  quizIdx = 0; score = 0;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderQuiz();
+});
+
+document.getElementById('lvl-basic').addEventListener('click', ()=>{ SoundFX.click(); setLevel('basic'); });
+document.getElementById('lvl-adv').addEventListener('click', ()=>{ SoundFX.click(); setLevel('adv'); });
+
+/* =========================================================
+   แท็บหลัก + รีเซ็ต
+   ========================================================= */
+const tabCard = document.getElementById('tab-card');
+const tabSeq  = document.getElementById('tab-seq');
+const tabQuiz = document.getElementById('tab-quiz');
+const tabIrac = document.getElementById('tab-irac');
+const tabOrder = document.getElementById('tab-order');
+const viewCard = document.getElementById('view-card');
+const viewSeq  = document.getElementById('view-seq');
+const viewQuiz = document.getElementById('view-quiz');
+const viewIrac = document.getElementById('view-irac');
+const viewOrder = document.getElementById('view-order');
+
+function setTab(which){
+  viewCard.classList.toggle('on', which==='card');
+  viewSeq.classList.toggle('on', which==='seq');
+  viewQuiz.classList.toggle('on', which==='quiz');
+  viewIrac.classList.toggle('on', which==='irac');
+  viewOrder.classList.toggle('on', which==='order');
+  tabCard.classList.toggle('on', which==='card');
+  tabSeq.classList.toggle('on', which==='seq');
+  tabQuiz.classList.toggle('on', which==='quiz');
+  tabIrac.classList.toggle('on', which==='irac');
+  tabOrder.classList.toggle('on', which==='order');
+  const headerEl = document.getElementById('page-header');
+  if(which === 'quiz' || which === 'order'){
+    headerEl.classList.add('compact');
+  } else if(which !== 'irac' || document.getElementById('irac-play').style.display === 'none'){
+    headerEl.classList.remove('compact');
+  }
+  syncStickyBar();
+}
+tabCard.addEventListener('click', ()=>{ SoundFX.tab(); setTab('card'); });
+tabSeq.addEventListener('click', ()=>{ SoundFX.tab(); setTab('seq'); });
+tabQuiz.addEventListener('click', ()=>{ SoundFX.tab(); setTab('quiz'); });
+tabIrac.addEventListener('click', ()=>{ SoundFX.tab(); setTab('irac'); });
+tabOrder.addEventListener('click', ()=>{ SoundFX.tab(); setTab('order'); renderOrderPicker(); });
+
+const btnSound = document.getElementById('btn-sound');
+btnSound.textContent = SoundFX.isOn() ? '🔊' : '🔇';
+btnSound.addEventListener('click', ()=>{
+  const on = SoundFX.toggle();
+  btnSound.textContent = on ? '🔊' : '🔇';
+  if(on) SoundFX.click();
+});
+
+document.getElementById('btn-reset').addEventListener('click', ()=>{
+  if(!confirm('รีเซ็ตหน้าจอทั้งหมด (คะแนนดีที่สุดที่บันทึกไว้จะยังอยู่) ต้องการดำเนินการต่อหรือไม่?')) return;
+  catSelect.value = 'all';
+  deck = shuffle(CARDS); cardIdx = 0; flipped = false;
+  renderMatraChips('all');
+  renderCard();
+  seqSelect.value = SEQ_ORDER[0];
+  renderSeq();
+  setLevel('basic');
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('irac-play').style.display = 'none';
+  document.getElementById('irac-summary').style.display = 'none';
+  renderCasePicker();
+  document.getElementById('order-picker').style.display = 'block';
+  document.getElementById('order-play').style.display = 'none';
+  renderOrderPicker();
+  setTab('card');
+});
+
+/* =========================================================
+   โหมด 4: ฝึก IRAC
+   ========================================================= */
+let iracCaseIdx = 0;
+let iracIssueIdx = 0;
+let iracStage = 'issue'; // issue -> rule -> app -> conc
+let iracScore = 0;
+let iracTotal = 0;
+
+function renderCasePicker(){
+  const el = document.getElementById('irac-caselist');
+  el.innerHTML = '';
+  IRAC_CASES.forEach((c, i)=>{
+    const card = document.createElement('button');
+    card.className = 'irac-case-card';
+    card.innerHTML =
+      '<div class="icref">'+esc(c.examRef)+' · '+esc(CATEGORIES[c.cat].label)+'</div>'+
+      '<div class="ictitle">'+esc(c.title)+'</div>'+
+      '<div class="icprog">'+c.issues.length+' ประเด็น · '+(c.issues.length*4)+' ขั้นตอน</div>';
+    card.addEventListener('click', ()=>{ SoundFX.click(); startIracCase(i); });
+    el.appendChild(card);
+  });
+}
+
+function startIracCase(idx){
+  iracCaseIdx = idx;
+  iracIssueIdx = 0;
+  iracStage = 'issue';
+  iracScore = 0;
+  iracTotal = IRAC_CASES[idx].issues.length * 4;
+  document.getElementById('irac-picker').style.display = 'none';
+  document.getElementById('irac-play').style.display = 'block';
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('irac-recap-box').style.display = 'none';
+  document.getElementById('irac-stage-box').style.display = 'block';
+  document.getElementById('page-header').classList.add('compact');
+  const c = IRAC_CASES[idx];
+  paintBadge(document.getElementById('irac-case-tag'), c.cat);
+  const factsEl = document.getElementById('irac-facts');
+  factsEl.innerHTML = c.facts;
+  factsEl.classList.remove('expanded');
+  document.getElementById('irac-facts-toggle').textContent = 'ขยายอ่านโจทย์เต็ม ▾';
+  syncStickyBar();
+  renderIracStep();
+}
+
+document.getElementById('irac-facts-toggle').addEventListener('click', ()=>{
+  const factsEl = document.getElementById('irac-facts');
+  const expanded = factsEl.classList.toggle('expanded');
+  document.getElementById('irac-facts-toggle').textContent = expanded ? 'ย่อโจทย์ ▴' : 'ขยายอ่านโจทย์เต็ม ▾';
+});
+
+document.getElementById('irac-back').addEventListener('click', ()=>{
+  SoundFX.click();
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('irac-play').style.display = 'none';
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('page-header').classList.remove('compact');
+  syncStickyBar();
+  renderCasePicker();
+});
+
+const IRAC_STAGE_INFO = {
+  issue:{key:'issue', qKey:'issueQ', optsKey:'issueOpts', ansKey:'issueAns', fbKey:'issueFeedback', label:'เลือกประเด็น', next:'rule'},
+  rule: {key:'rule',  qKey:'ruleQ',  optsKey:'ruleOpts',  ansKey:'ruleAns',  fbKey:'ruleFeedback',  label:'เลือกมาตรา', next:'app'},
+  app:  {key:'app',   qKey:'appQ',   optsKey:'appOpts',   ansKey:'appAns',   fbKey:'appFeedback',   label:'ปรับบท',     next:'conc'},
+  conc: {key:'conc',  qKey:'concQ',  optsKey:'concOpts',  ansKey:'concAns',  fbKey:'concFeedback',  label:'สรุปผล',     next:null}
+};
+
+function renderIracStep(){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  const info = IRAC_STAGE_INFO[iracStage];
+
+  document.getElementById('irac-progress-label').textContent =
+    issue.label + ' · ประเด็น ' + (iracIssueIdx+1) + '/' + c.issues.length + ' · ขั้นตอน: ' + info.label;
+
+  const order = ['issue','rule','app','conc'];
+  const curIdx = order.indexOf(iracStage);
+  document.querySelectorAll('#irac-stepper .irac-step').forEach((el)=>{
+    const step = el.getAttribute('data-step');
+    const stepIdx = order.indexOf(step);
+    el.classList.remove('active','done');
+    if(stepIdx < curIdx) el.classList.add('done');
+    else if(stepIdx === curIdx) el.classList.add('active');
+  });
+
+  document.getElementById('irac-question').textContent = issue[info.qKey];
+  const optsDiv = document.getElementById('irac-options');
+  optsDiv.innerHTML = '';
+  const letters = ['ก','ข','ค','ง'];
+  issue[info.optsKey].forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.innerHTML = '<span class="abc">'+letters[i]+'</span><span>'+esc(opt)+'</span>';
+    btn.addEventListener('click', ()=> selectIracOption(i));
+    optsDiv.appendChild(btn);
+  });
+  document.getElementById('irac-explain').style.display = 'none';
+  document.getElementById('irac-explain').className = 'explain';
+  document.getElementById('irac-next').style.display = 'none';
+  document.getElementById('irac-recap-next').style.display = 'none';
+  iracTimer.start();
+}
+
+function selectIracOption(i){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  const info = IRAC_STAGE_INFO[iracStage];
+  const optsDiv = document.getElementById('irac-options');
+  const btns = optsDiv.querySelectorAll('button');
+  if(btns[0].disabled) return;
+  const elapsed = iracTimer.stop();
+  const ans = issue[info.ansKey];
+  btns.forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx === ans) b.classList.add('correct');
+    else if(idx === i) b.classList.add('wrong');
+  });
+  const isCorrect = (i === ans);
+  let ptsMsg = '';
+  if(isCorrect){
+    iracScore++; SoundFX.correct();
+    const pts = elapsed <= QUIZ_FAST_THRESHOLD ? 20 : 1;
+    addScore(pts);
+    ptsMsg = ' <span class="pts-earned">+' + pts + ' คะแนน' + (elapsed <= QUIZ_FAST_THRESHOLD ? ' ตอบเร็ว!' : '') + '</span>';
+  } else {
+    SoundFX.wrong();
+  }
+  const explainDiv = document.getElementById('irac-explain');
+  explainDiv.className = 'explain ' + (isCorrect ? 'ok' : 'bad');
+  explainDiv.innerHTML = '<b>' + (isCorrect ? '✓ ถูกต้อง' : '✗ ยังไม่ถูก — คำตอบที่ควรเลือกคือ ข้อ ' + ['ก','ข','ค','ง'][ans]) + ptsMsg + '</b>' + issue[info.fbKey];
+  explainDiv.style.display = 'block';
+  document.getElementById('irac-next').style.display = 'block';
+  syncStickyBar();
+}
+
+document.getElementById('irac-next').addEventListener('click', ()=>{
+  SoundFX.click();
+  const info = IRAC_STAGE_INFO[iracStage];
+  if(info.next){
+    iracStage = info.next;
+    renderIracStep();
+  } else {
+    showIssueRecap();
+  }
+});
+
+function showIssueRecap(){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  document.getElementById('irac-stage-box').style.display = 'none';
+  const recapBox = document.getElementById('irac-recap-box');
+  recapBox.style.display = 'block';
+  const isLast = iracIssueIdx >= c.issues.length - 1;
+  document.getElementById('irac-recap-title').textContent = 'ทำครบ ' + issue.label + ' แล้ว';
+  document.getElementById('irac-recap-text').innerHTML = issue.concFeedback;
+  document.getElementById('irac-next').style.display = 'none';
+  document.getElementById('irac-recap-next').textContent = isLast ? 'ดูสรุปผลทั้งข้อ →' : 'ประเด็นถัดไป →';
+  document.getElementById('irac-recap-next').style.display = 'block';
+}
+
+document.getElementById('irac-recap-next').addEventListener('click', ()=>{
+  SoundFX.click();
+  const c = IRAC_CASES[iracCaseIdx];
+  document.getElementById('irac-recap-box').style.display = 'none';
+  document.getElementById('irac-recap-next').style.display = 'none';
+  if(iracIssueIdx >= c.issues.length - 1){
+    showIracCaseSummary();
+  } else {
+    iracIssueIdx++;
+    iracStage = 'issue';
+    document.getElementById('irac-stage-box').style.display = 'block';
+    renderIracStep();
+  }
+});
+
+function showIracCaseSummary(){
+  document.getElementById('irac-play').style.display = 'none';
+  syncStickyBar();
+  const summary = document.getElementById('irac-summary');
+  summary.style.display = 'block';
+  const c = IRAC_CASES[iracCaseIdx];
+  document.getElementById('irac-sum-label').textContent = c.title;
+  document.getElementById('irac-sum-score').textContent = iracScore;
+  document.getElementById('irac-sum-of').textContent = 'จาก ' + iracTotal + ' ขั้นตอน';
+  const pct = iracTotal ? iracScore/iracTotal : 0;
+  const starCount = Math.max(1, Math.round(pct*5));
+  document.getElementById('irac-sum-stars').textContent = '★'.repeat(starCount) + '☆'.repeat(5-starCount);
+  let grade = 'ลุยต่อได้เลย';
+  if(pct >= 0.9) grade = 'วินิจฉัยแม่นมาก เก่งมาก!';
+  else if(pct >= 0.7) grade = 'ดีมาก ใกล้ครบทุกประเด็นแล้ว';
+  else if(pct >= 0.5) grade = 'พอใช้ ลองย้อนทบทวนประเด็นที่พลาด';
+  else grade = 'ลองอ่านโจทย์อีกครั้งแล้วไล่ทีละประเด็นใหม่';
+  document.getElementById('irac-sum-grade').textContent = grade;
+  document.getElementById('irac-sum-nextcase').style.display = (iracCaseIdx < IRAC_CASES.length - 1) ? 'inline-block' : 'none';
+}
+
+document.getElementById('irac-sum-retry').addEventListener('click', ()=>{
+  SoundFX.click();
+  startIracCase(iracCaseIdx);
+});
+document.getElementById('irac-sum-back').addEventListener('click', ()=>{
+  SoundFX.click();
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('page-header').classList.remove('compact');
+  renderCasePicker();
+});
+document.getElementById('irac-sum-nextcase').addEventListener('click', ()=>{
+  SoundFX.click();
+  startIracCase(iracCaseIdx + 1);
+});
+
+renderCasePicker();
+
+/* =========================================================
+   โหมด 5: เรียงขั้นตอน (คลิกเรียงลำดับ)
+   ========================================================= */
+let orderCaseIdx = 0;
+let orderRemaining = [];
+let orderPlaced = [];
+let orderChecked = false;
+const orderTimer = makeQuestionTimer('order-timer', 20);
+const orderSeenSet = loadSeenSet('famlaw_orderSeen');
+
+function renderOrderPicker(){
+  const el = document.getElementById('order-caselist');
+  el.innerHTML = '';
+  ORDER_CASES.forEach((o,i)=>{
+    const card = document.createElement('button');
+    card.className = 'irac-case-card';
+    card.innerHTML =
+      '<div class="icref">'+esc(CATEGORIES[o.cat].label)+'</div>'+
+      '<div class="ictitle">'+esc(o.title)+'</div>'+
+      '<div class="icprog">'+o.steps.length+' ขั้นตอน</div>';
+    card.addEventListener('click', ()=>{ SoundFX.click(); startOrderCase(i); });
+    el.appendChild(card);
+  });
+}
+
+function startOrderCase(idx){
+  orderCaseIdx = idx;
+  orderChecked = false;
+  const o = ORDER_CASES[idx];
+  orderRemaining = shuffle(o.steps.map((_,i)=>i));
+  orderPlaced = [];
+  document.getElementById('order-picker').style.display = 'none';
+  document.getElementById('order-play').style.display = 'block';
+  document.getElementById('order-summary').style.display = 'none';
+  document.getElementById('page-header').classList.add('compact');
+  paintBadge(document.getElementById('order-tag'), o.cat);
+  document.getElementById('order-title').textContent = o.title;
+  document.getElementById('order-explain').style.display = 'none';
+  document.getElementById('order-retry').style.display = 'none';
+  document.getElementById('order-nextcase').style.display = 'none';
+  renderOrderPools();
+  orderTimer.start();
+  syncStickyBar();
+}
+
+function renderOrderPools(){
+  const o = ORDER_CASES[orderCaseIdx];
+  const poolEl = document.getElementById('order-pool');
+  const placedEl = document.getElementById('order-placed');
+  poolEl.innerHTML = '';
+  orderRemaining.forEach(stepIdx=>{
+    const btn = document.createElement('button');
+    btn.className = 'order-chip';
+    btn.textContent = o.steps[stepIdx];
+    btn.disabled = orderChecked;
+    btn.addEventListener('click', ()=>{
+      if(orderChecked) return;
+      SoundFX.click();
+      orderRemaining = orderRemaining.filter(x=>x!==stepIdx);
+      orderPlaced.push(stepIdx);
+      renderOrderPools();
+    });
+    poolEl.appendChild(btn);
+  });
+  placedEl.innerHTML = '';
+  orderPlaced.forEach((stepIdx,pos)=>{
+    const row = document.createElement('div');
+    row.className = 'order-placed-row';
+    row.innerHTML = '<span class="order-num">'+(pos+1)+'</span><span class="order-txt">'+esc(o.steps[stepIdx])+'</span>' +
+      (orderChecked ? '' : '<button class="order-remove" data-i="'+pos+'">✕</button>');
+    placedEl.appendChild(row);
+  });
+  if(!orderChecked){
+    placedEl.querySelectorAll('.order-remove').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        const pos = parseInt(btn.getAttribute('data-i'),10);
+        const removed = orderPlaced.splice(pos,1)[0];
+        orderRemaining.push(removed);
+        renderOrderPools();
+      });
+    });
+  }
+  document.getElementById('order-check').style.display = (orderRemaining.length===0 && !orderChecked) ? 'block' : 'none';
+}
+
+function checkOrder(){
+  if(orderChecked) return;
+  orderChecked = true;
+  const elapsed = orderTimer.stop();
+  const o = ORDER_CASES[orderCaseIdx];
+  let correctCount = 0;
+  orderPlaced.forEach((stepIdx,pos)=>{ if(stepIdx===pos) correctCount++; });
+  const allCorrect = correctCount === o.steps.length;
+  renderOrderPools();
+  document.querySelectorAll('#order-placed .order-placed-row').forEach((row,pos)=>{
+    row.classList.add(orderPlaced[pos]===pos ? 'correct' : 'wrong');
+  });
+  const explainEl = document.getElementById('order-explain');
+  let ptsMsg = '';
+  if(allCorrect){
+    SoundFX.correct();
+    if(!orderSeenSet.has(o.id)){
+      orderSeenSet.add(o.id);
+      saveSeenSet('famlaw_orderSeen', orderSeenSet);
+      const pts = elapsed <= 20 ? 50 : 5;
+      addScore(pts);
+      ptsMsg = ' <span class="pts-earned">+' + pts + ' คะแนน' + (elapsed <= 20 ? ' เร็วมาก!' : '') + '</span>';
+    }
+  } else {
+    SoundFX.wrong();
+  }
+  explainEl.className = 'explain ' + (allCorrect ? 'ok' : 'bad');
+  explainEl.innerHTML = '<b>' + (allCorrect ? '✓ เรียงถูกต้องทั้งหมด!' : '✗ ถูก ' + correctCount + ' / ' + o.steps.length + ' ขั้นตอน') + ptsMsg + '</b>' +
+    (allCorrect ? 'เยี่ยมมาก! ลำดับขั้นตอนตรงกับที่ถูกต้องทุกช่อง' : 'ลองดูแถวที่ทำเครื่องหมายสีแดง แล้วกด "ลองใหม่" เพื่อเรียงอีกครั้ง');
+  explainEl.style.display = 'block';
+  document.getElementById('order-check').style.display = 'none';
+  document.getElementById('order-retry').style.display = 'inline-block';
+  document.getElementById('order-nextcase').style.display = (orderCaseIdx < ORDER_CASES.length - 1) ? 'inline-block' : 'none';
+  syncStickyBar();
+}
+
+document.getElementById('order-back').addEventListener('click', ()=>{
+  SoundFX.click();
+  document.getElementById('order-picker').style.display = 'block';
+  document.getElementById('order-play').style.display = 'none';
+  document.getElementById('page-header').classList.remove('compact');
+  syncStickyBar();
+  renderOrderPicker();
+});
+document.getElementById('order-check').addEventListener('click', checkOrder);
+document.getElementById('order-retry').addEventListener('click', ()=>{ SoundFX.click(); startOrderCase(orderCaseIdx); });
+document.getElementById('order-nextcase').addEventListener('click', ()=>{ SoundFX.click(); startOrderCase(orderCaseIdx + 1); });
+
+renderOrderPicker();
+
+/* ---------- init ---------- */
+renderScoreDisplay();
+renderCard();
+seqSelect.value = SEQ_ORDER[0];
+renderSeq();
+renderSetPicker();
+setLevel('basic');
+setTab('card');
+</script>
+
+</body>
+</html>

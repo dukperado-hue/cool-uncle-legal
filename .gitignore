@@ -1,0 +1,18 @@
+# Superseded originals from Claude.ai download (kept on disk, not tracked)
+# Content lives now in: index.html, shared.css, tts-helper.js, games/, docs/
+/draft/
+/files/
+/index-upgraded.html
+/CLAUDE_CODE_BRIEF.md
+/CLAUDE_CODE_SETUP.md
+/CODEX_EXTRACTION_GUIDE.md
+/CODEX_INTEGRATION.md
+/INDEX_UPGRADE_GUIDE.md
+/PHASE1_COMPLETE.md
+/PROJECT_SUMMARY.md
+/codex-schema.json
+
+# OS/editor junk
+.DS_Store
+Thumbs.db
+desktop.ini

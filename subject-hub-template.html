@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>นิติกรรมและสัญญา · Cool Uncle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;900&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Inline TTS + YouTube + Subject Hub extras */
+:root{
+  --subject-color:#1E7A4F;
+  --subject-soft:#E6F4EC;
+}
+
+body{padding:20px 14px 60px}
+.wrap{max-width:860px;margin:0 auto}
+
+/* HERO SECTION */
+.subject-hero{
+  text-align:center;margin-bottom:32px;
+}
+.subject-hero .back{
+  display:block;text-align:left;margin-bottom:20px;
+}
+.subject-badge{
+  display:inline-block;font-size:12px;font-weight:700;
+  letter-spacing:.06em;color:var(--subject-color);text-transform:uppercase;
+  margin-bottom:8px;
+}
+.subject-hero h1{
+  font-size:clamp(28px,5.4vw,42px);font-weight:900;
+  line-height:1.28;margin-bottom:12px;color:var(--ink);
+}
+.subject-hero .desc{
+  font-size:15px;color:var(--ink-soft);max-width:600px;margin:0 auto;
+}
+
+/* GAME/RESOURCE GRID */
+.resource-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;
+  margin:28px 0;
+}
+.resource-card{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  padding:20px;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);text-decoration:none;color:inherit;
+  cursor:pointer;transition:all .2s;
+}
+.resource-card:hover{
+  transform:translateY(-4px);box-shadow:0 8px 24px rgba(34,40,58,.12);
+  border-color:var(--subject-color);
+}
+.resource-icon{
+  font-size:36px;width:56px;height:56px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--subject-soft);border-radius:12px;
+}
+.resource-card .name{
+  font-size:14px;font-weight:700;color:var(--ink);text-align:center;
+}
+.resource-card .detail{
+  font-size:12px;color:var(--ink-soft);text-align:center;
+}
+
+/* DIVIDER */
+.divider{
+  height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);
+  margin:32px 0;
+}
+
+/* NOTES/INFO BOX */
+.info-box{
+  background:var(--subject-soft);border-left:4px solid var(--subject-color);
+  padding:14px 16px;border-radius:6px;margin:20px 0;
+  font-size:13.5px;line-height:1.7;color:var(--ink);
+}
+.info-box strong{color:var(--subject-color);display:block;margin-bottom:4px}
+
+/* MOBILE */
+@media(max-width:520px){
+  .resource-grid{grid-template-columns:1fr}
+  .subject-hero h1{font-size:26px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-brand">👴🏻 Cool Uncle</span>
+  <span class="topbar-sep">·</span>
+  <span id="subject-level">ปริญญาตรี</span>
+  <span class="topbar-right">
+    <span class="topbar-pill" id="subject-name-pill">นิติกรรมและสัญญา</span>
+  </span>
+</div>
+
+<div class="wrap">
+  
+  <a href="index.html" class="back-button">← กลับ</a>
+
+  <section class="subject-hero">
+    <div class="subject-badge" id="subject-code">LAW1103</div>
+    <h1 id="subject-title">นิติกรรมและสัญญา</h1>
+    <p class="desc" id="subject-desc">นิติกรรม เงื่อนไข ผลของสัญญา ไปจนถึงซื้อขาย เช่าทรัพย์ และการผิดสัญญา</p>
+  </section>
+
+  <!-- AUDIO PLAYER (อ่านไทยตาม TTS) -->
+  <div class="audio-control" id="audio-controls-container" style="display:none">
+    <button id="btn-speak" onclick="speakPage()">🔊 อ่านหน้านี้</button>
+    <div class="speed-control">
+      <label>ความเร็ว:</label>
+      <input type="range" id="speech-speed" min="0.5" max="2" step="0.1" value="1" onchange="updateSpeed()">
+      <span id="speed-display">1x</span>
+    </div>
+  </div>
+
+  <!-- RESOURCE GRID -->
+  <div class="resource-grid">
+    <a href="เกมจำมาตรา-LAW1103.html" class="resource-card" target="_self">
+      <div class="resource-icon">📚</div>
+      <div class="name">เกมจำมาตรา</div>
+      <div class="detail">ท่องมาตรา + วิเคราะห์</div>
+    </a>
+    <a href="เกมจำมาตรา-LAW1103.html" class="resource-card" target="_self">
+      <div class="resource-icon">⚡</div>
+      <div class="name">ฝึก IRAC</div>
+      <div class="detail">วิเคราะห์โจทย์กฎหมาย</div>
+    </a>
+    <a href="เกมจำมาตรา-LAW1103.html" class="resource-card" target="_self">
+      <div class="resource-icon">🎯</div>
+      <div class="name">ตัวอย่างข้อสอบ</div>
+      <div class="detail">ท่องมาตรา + ปรอบ</div>
+    </a>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- YOUTUBE WIDGET -->
+  <div class="youtube-section" id="youtube-widget" style="display:none">
+    <h3>📺 แนะนำวิดีโอเสริมเรียน</h3>
+    <div class="youtube-list" id="youtube-list">
+      <!-- Dynamic content here -->
+    </div>
+  </div>
+
+  <!-- INFO BOX -->
+  <div class="info-box">
+    <strong>💡 วิธีการเรียนอย่างไรให้เป็นผล?</strong>
+    เริ่มจากการท่องมาตราและทำความเข้าใจที่ลึกซึ้ง จากนั้นฝึกวิเคราะห์โจทย์เพื่อเห็นการประยุกต์ใช้ และสุดท้ายทำข้อสอบจริงเพื่อตรวจสอบความเข้าใจ
+  </div>
+
+  <footer>
+    สร้างด้วย Claude · Cool Uncle Legal Lab 2024 · อ่านเสริมเท่านั้น
+  </footer>
+</div>
+
+<script>
+/* ================================================================
+   TEXT-TO-SPEECH (อ่านไทยตาม API)
+   ใช้ Google Cloud TTS หรือ Web Speech API
+   ================================================================ */
+
+let currentUtterance = null;
+let speechRate = 1;
+
+function speakPage(){
+  const btn = document.getElementById('btn-speak');
+  const titleEl = document.getElementById('subject-title');
+  const descEl = document.getElementById('subject-desc');
+  
+  const text = titleEl.textContent + '. ' + descEl.textContent;
+  
+  if(speechSynthesis.speaking){
+    speechSynthesis.cancel();
+    btn.textContent = '🔊 อ่านหน้านี้';
+    return;
+  }
+  
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'th-TH';
+  utterance.rate = speechRate;
+  utterance.pitch = 1;
+  utterance.volume = 1;
+  
+  utterance.onstart = () => {
+    btn.textContent = '⏸️ หยุดอ่าน';
+  };
+  
+  utterance.onend = () => {
+    btn.textContent = '🔊 อ่านหน้านี้';
+  };
+  
+  utterance.onerror = (e) => {
+    console.error('TTS Error:', e.error);
+    btn.textContent = '🔊 อ่านหน้านี้';
+    // Fallback: ถ้า browser ไม่รองรับ Thai TTS
+    if(e.error === 'not-allowed' || e.error === 'network'){
+      alert('ระบบอ่านไทยยังไม่พร้อม กรุณาใช้ Google Chrome ล่าสุด');
+    }
+  };
+  
+  speechSynthesis.speak(utterance);
+  currentUtterance = utterance;
+}
+
+function updateSpeed(){
+  const speed = parseFloat(document.getElementById('speech-speed').value);
+  speechRate = speed;
+  document.getElementById('speed-display').textContent = speed.toFixed(1) + 'x';
+  if(speechSynthesis.speaking){
+    speechSynthesis.cancel();
+  }
+}
+
+// ตรวจสอบว่า browser รองรับ Speech Synthesis
+if('speechSynthesis' in window){
+  document.getElementById('audio-controls-container').style.display = 'flex';
+} else {
+  console.warn('Speech Synthesis API not supported');
+}
+
+/* ================================================================
+   YOUTUBE WIDGET - แสดงวิดีโอเสริมเรียน
+   ================================================================ */
+
+const youtubeVideos = [
+  {
+    title: 'บทนำนิติกรรม',
+    channel: 'Law School Channel',
+    id: 'example-video-1',
+    url: 'https://www.youtube.com/watch?v=example1'
+  },
+  {
+    title: 'สัญญาและผลของสัญญา',
+    channel: 'Legal Academy Thailand',
+    id: 'example-video-2',
+    url: 'https://www.youtube.com/watch?v=example2'
+  }
+];
+
+if(youtubeVideos.length > 0){
+  document.getElementById('youtube-widget').style.display = 'block';
+  const list = document.getElementById('youtube-list');
+  list.innerHTML = youtubeVideos.map(v => `
+    <a href="${v.url}" target="_blank" rel="noopener" class="youtube-item">
+      <div class="thumb">▶️</div>
+      <div class="meta">
+        <div class="title">${v.title}</div>
+        <div class="channel">${v.channel}</div>
+      </div>
+      <div class="youtube-item-open">เปิด →</div>
+    </a>
+  `).join('');
+}
+
+// Dynamic subject data (แก้ไขได้ที่นี่)
+const SUBJECT_DATA = {
+  title: 'นิติกรรมและสัญญา',
+  code: 'LAW1103',
+  desc: 'นิติกรรม เงื่อนไข ผลของสัญญา ไปจนถึงซื้อขาย เช่าทรัพย์ และการผิดสัญญา',
+  color: '#1E7A4F',
+  level: 'ปริญญาตรี',
+  youtubeLinks: [
+    // เพิ่ม YouTube links ที่นี่
+  ]
+};
+
+// Update page from SUBJECT_DATA
+document.documentElement.style.setProperty('--subject-color', SUBJECT_DATA.color);
+document.documentElement.style.setProperty('--subject-soft', SUBJECT_DATA.color + '20');
+</script>
+</body>
+</html>

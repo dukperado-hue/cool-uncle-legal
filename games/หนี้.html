@@ -1,0 +1,2375 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ห้องซ้อมสอบ วิชาหนี้ — LAW 2102</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;900&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+<style>
+:root{
+  --paper:#FBF9F4;
+  --card:#FFFFFF;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --gold-soft:#F3E8CF;
+  --ok:#1E7A4F;
+  --ok-bg:#E6F4EC;
+  --bad:#B23A3A;
+  --bad-bg:#FBEAEA;
+  --accent:#2E4A7A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+/* ---------- top home bar (flat, for future multi-subject hub) ---------- */
+.home-bar{
+  display:flex;align-items:center;gap:10px;
+  background:#EFEAE0;border-bottom:1px solid var(--line);
+  padding:10px 16px;font-size:13px;color:var(--ink-soft);
+}
+.home-bar-link{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.home-bar-link:hover{text-decoration:underline}
+.home-bar-sep{color:var(--ink-faint)}
+.home-bar-current{font-weight:600;color:var(--ink-soft)}
+.home-bar-score{
+  margin-left:auto;font-weight:800;color:#8F6511;background:var(--gold-soft);
+  padding:4px 12px;border-radius:999px;font-size:13px;white-space:nowrap;
+  transition:transform .15s;
+}
+.home-bar-score.score-pop{animation:scorePop .4s ease}
+@keyframes scorePop{
+  0%{transform:scale(1)}
+  35%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),
+    var(--paper);
+  color:var(--ink);
+  min-height:100vh;
+  padding:20px 14px 60px;
+  font-size:16px;
+  line-height:1.75;
+}
+.wrap{max-width:860px;margin:0 auto}
+
+/* ---------- header ---------- */
+header{text-align:center;margin-bottom:22px;transition:opacity .15s}
+header.compact{margin-bottom:10px}
+header.compact .crest{display:none}
+header.compact h1{font-size:19px}
+header.compact .subtitle{display:none}
+.crest{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Noto Serif Thai',serif;
+  font-size:13px;letter-spacing:.35em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:6px;
+}
+.crest::before,.crest::after{content:"";width:44px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+.crest::after{background:linear-gradient(90deg,var(--gold),transparent);}
+h1{
+  font-family:'Noto Serif Thai',serif;
+  font-size:clamp(24px,5vw,36px);
+  font-weight:700;line-height:1.3;
+}
+.subtitle{color:var(--ink-soft);font-size:15px;margin-top:2px}
+
+/* ---------- tabs ---------- */
+.tabbar{
+  display:flex;gap:6px;background:#F1EDE2;border:1px solid var(--line);
+  border-radius:999px;padding:5px;margin:20px auto 26px;max-width:600px;
+}
+.tabbar button{
+  flex:1;border:none;background:transparent;border-radius:999px;
+  padding:10px 5px;font-family:inherit;font-size:13.5px;font-weight:600;
+  color:var(--ink-soft);cursor:pointer;transition:all .2s;
+}
+.tabbar button.on{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+.tabbar button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#btn-reset,#btn-sound{
+  flex:0 0 38px;font-size:15px;color:var(--ink-faint);
+}
+#btn-reset:hover{color:var(--bad)}
+#btn-sound:hover{color:var(--accent)}
+
+/* ---------- sticky bottom action bar ---------- */
+.sticky-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
+  background:linear-gradient(180deg,rgba(251,249,244,0) 0%,var(--paper) 35%);
+  padding:22px 14px calc(14px + env(safe-area-inset-bottom,0px));
+}
+.sticky-bar-inner{max-width:860px;margin:0 auto;display:flex;gap:10px}
+.sticky-bar-inner button{
+  flex:1;box-shadow:0 6px 20px rgba(34,40,58,.22);
+  padding:18px 20px;font-size:17.5px;font-weight:700;border-radius:14px;
+  letter-spacing:.01em;
+}
+body.has-sticky-bar{padding-bottom:92px}
+@media(max-width:520px){
+  .sticky-bar{padding:18px 10px calc(12px + env(safe-area-inset-bottom,0px))}
+  .sticky-bar-inner button{padding:16px 14px;font-size:16px}
+}
+.irac-caselist{display:flex;flex-direction:column;gap:10px}
+.irac-case-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;text-align:left;cursor:pointer;transition:border-color .15s;
+}
+.irac-case-card:hover{border-color:var(--gold)}
+.irac-case-card .icref{font-size:12px;color:var(--ink-faint);margin-bottom:4px}
+.irac-case-card .ictitle{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:600}
+.irac-case-card .icprog{font-size:12.5px;color:var(--gold);margin-top:6px;font-weight:600}
+
+.irac-facts{
+  background:#FBF6E8;border:1px solid var(--gold-soft);border-radius:var(--radius);
+  padding:14px 16px;margin-bottom:6px;font-size:15px;line-height:1.85;color:var(--ink);
+  max-height:92px;overflow:hidden;position:relative;
+}
+.irac-facts::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:34px;
+  background:linear-gradient(180deg,transparent,#FBF6E8);pointer-events:none;
+}
+.irac-facts.expanded{max-height:none}
+.irac-facts.expanded::after{display:none}
+.irac-facts-toggle{
+  display:block;width:100%;text-align:center;font-size:13px;color:var(--accent);font-weight:600;
+  background:none;border:none;padding:5px 0 14px;cursor:pointer;
+}
+
+.irac-stepper{display:flex;gap:5px;margin-bottom:8px}
+.irac-step{
+  flex:1;text-align:center;font-size:11px;font-weight:600;color:var(--ink-faint);
+  padding:5px 2px;border-radius:8px;background:#EEEBE0;border:1px solid transparent;
+}
+.irac-step.active{background:var(--accent);color:#fff}
+.irac-step.done{background:var(--ok-bg);color:var(--ok);border-color:#BFE3CE}
+
+.irac-progress-label{font-size:12.5px;color:var(--ink-soft);margin-bottom:6px;font-weight:600}
+.irac-back{background:none;border:none;color:var(--ink-faint);font-size:13px;cursor:pointer;margin-bottom:12px;padding:0}
+.irac-back:hover{color:var(--accent)}
+
+.irac-issue-recap{
+  background:var(--ok-bg);border:1px solid #BFE3CE;border-radius:var(--radius);
+  padding:16px 18px;text-align:center;
+}
+.irac-issue-recap .big{font-family:'Noto Serif Thai',serif;font-size:18px;font-weight:700;color:#14563A;margin-bottom:6px}
+
+/* ---------- stage banner (แถบธีมตามหมวด แทน SVG scene) ---------- */
+.stage{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  margin-bottom:14px;min-height:74px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px;border:1px solid rgba(0,0,0,.06);
+}
+.stage .stage-icon{font-size:30px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.15))}
+.stage .stage-label{font-family:'Noto Serif Thai',serif;font-weight:700;font-size:15px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.stage .stage-src{font-size:11.5px;color:rgba(255,255,255,.85);margin-top:2px;display:block}
+@media(max-width:520px){.stage{min-height:60px;padding:10px}.stage .stage-icon{font-size:24px}.stage .stage-label{font-size:13px}}
+
+/* ---------- มาตรา chip strip (โหมดการ์ด) ---------- */
+.matra-chips{display:none;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:14px}
+.matra-chips-label{font-size:12.5px;color:var(--ink-faint);font-weight:600;margin-right:2px}
+.matra-chip{
+  --chip-color:#888;
+  font-family:'Noto Serif Thai',serif;font-size:12.5px;font-weight:700;
+  background:var(--card);border:1.5px solid var(--line);color:var(--ink-soft);
+  border-radius:999px;padding:5px 12px;cursor:pointer;transition:all .15s;
+}
+.matra-chip:hover{border-color:var(--chip-color);color:var(--chip-color)}
+.matra-chip.active{background:var(--chip-color);border-color:var(--chip-color);color:#fff}
+
+button{font-family:inherit}
+select{
+  font-family:inherit;font-size:15px;color:var(--ink);
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:10px 12px;width:100%;
+}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.row select{flex:1;min-width:170px;width:auto}
+.muted{color:var(--ink-soft);font-size:14px;white-space:nowrap}
+
+/* ---------- flashcard ---------- */
+.flip-stage{perspective:1200px}
+.flashcard{
+  position:relative;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  min-height:250px;padding:34px 26px 30px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:10px;overflow:hidden;
+  transition:transform .16s ease;
+}
+.flashcard.flipping{transform:rotateY(90deg)}
+@media (prefers-reduced-motion:reduce){.flashcard.flipping{transform:none}}
+.ribbon{
+  position:absolute;top:0;left:26px;width:34px;height:56px;
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%);
+}
+.chapter-tag{
+  font-size:12.5px;font-weight:700;letter-spacing:.02em;
+  padding:4px 14px;border-radius:999px;
+}
+.src-tag{font-size:11.5px;color:var(--ink-faint);margin-top:2px;font-weight:600}
+.sec-no{
+  font-family:'Noto Serif Thai',serif;font-size:clamp(30px,7vw,44px);
+  font-weight:700;line-height:1.25;
+}
+.stars{color:var(--gold);font-size:16px;letter-spacing:.15em}
+.hint{font-size:13px;color:var(--ink-faint);margin-top:10px}
+.face-back .card-title{font-family:'Noto Serif Thai',serif;font-size:17px;font-weight:600;line-height:1.6}
+.face-back .card-result{font-size:16px;margin-top:10px;line-height:1.8}
+.face-back .card-note{
+  font-size:14px;color:var(--ink-soft);margin-top:12px;line-height:1.7;
+  border-top:1px dashed var(--line);padding-top:10px;max-width:560px;
+}
+.nav3{display:flex;gap:10px;margin-top:14px}
+.nav3 button{
+  flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:12px;font-size:14.5px;font-weight:600;color:var(--ink);cursor:pointer;
+  transition:border-color .15s, transform .1s;
+}
+.nav3 button:hover{border-color:var(--ink-faint)}
+.nav3 button:active{transform:scale(.98)}
+.nav3 button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- sequence list ---------- */
+.seq-item{
+  background:var(--card);border:1px solid var(--line);border-left-width:6px;
+  border-radius:12px;padding:14px 16px;margin-bottom:10px;
+  display:flex;gap:12px;box-shadow:0 1px 2px rgba(34,40,58,.04);
+}
+.seq-num{
+  font-family:'Noto Serif Thai',serif;font-weight:700;font-size:15px;
+  color:var(--ink-faint);min-width:22px;padding-top:3px;
+}
+.seq-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.seq-sec{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:700}
+.seq-title{font-size:15px;font-weight:600}
+.seq-res{font-size:14.5px;margin-top:4px;line-height:1.7}
+.seq-note{font-size:13.5px;color:var(--ink-soft);margin-top:5px;line-height:1.65;border-top:1px dashed var(--line);padding-top:5px}
+.seq-stars{color:var(--gold);font-size:12px;letter-spacing:.1em}
+.seq-src{font-size:12px;color:var(--ink-faint);font-weight:600}
+
+/* ---------- quiz ---------- */
+.lvlbar{display:flex;gap:8px;margin-bottom:14px}
+.lvlbar button{
+  flex:1;border:1.5px solid var(--line);background:var(--card);border-radius:12px;
+  padding:12px 8px;font-size:14.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+}
+.lvlbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.lvlbar .lvl-desc{display:block;font-size:12px;font-weight:400;color:var(--ink-faint);margin-top:2px}
+.lvlbar button.on .lvl-desc{color:var(--accent)}
+
+.setbar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.setbar button{
+  border:1px solid var(--line);background:var(--card);border-radius:999px;
+  padding:7px 15px;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.setbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.setbar .best{color:var(--gold);font-size:12px;font-weight:700}
+
+.progressbar{height:6px;background:#EDE9DD;border-radius:99px;overflow:hidden;margin-bottom:8px}
+.progressbar>div{height:100%;background:linear-gradient(90deg,var(--accent),#5E7BB0);border-radius:99px;transition:width .3s}
+.quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:14px;gap:10px}
+.quiz-timer{
+  font-weight:700;color:var(--ink-soft);background:#EEEBE0;border-radius:999px;
+  padding:3px 10px;font-size:13px;white-space:nowrap;
+}
+.quiz-timer.timer-fast{background:var(--ok-bg);color:var(--ok)}
+.quiz-meta .score{font-weight:700}
+
+.scenario{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:20px 22px;margin-bottom:14px;
+}
+.scenario .qtext{font-size:16.5px;line-height:1.9}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opts button{
+  text-align:left;background:var(--card);border:1.5px solid var(--line);
+  border-radius:12px;padding:14px 16px;font-size:15px;line-height:1.7;
+  color:var(--ink);cursor:pointer;transition:border-color .15s, background .15s;
+  display:flex;gap:10px;
+}
+.opts button:hover:not(:disabled){border-color:var(--ink-faint)}
+.opts button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opts .abc{
+  font-family:'Noto Serif Thai',serif;font-weight:700;color:var(--ink-faint);
+  min-width:20px;
+}
+.opts button.correct{border-color:var(--ok);background:var(--ok-bg)}
+.opts button.correct .abc{color:var(--ok)}
+.opts button.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opts button.wrong .abc{color:var(--bad)}
+.opts button:disabled{cursor:default;opacity:.92}
+
+.explain{
+  display:none;margin-top:14px;border-radius:12px;padding:16px 18px;
+  font-size:15px;line-height:1.85;border:1px solid;
+}
+.explain.ok{background:var(--ok-bg);border-color:#BFE3CE;color:#14563A}
+.explain.bad{background:var(--bad-bg);border-color:#F0C9C9;color:#7C2A2A}
+.explain b{display:block;margin-bottom:4px;font-size:15.5px}
+.pts-earned{
+  display:inline-block;background:var(--gold);color:#fff;font-weight:800;
+  font-size:12.5px;padding:2px 9px;border-radius:999px;margin-left:6px;vertical-align:middle;
+}
+
+.btn-primary{background:var(--accent);color:#fff;border:none}
+.btn-primary:hover{background:#26406B}
+.btn-ghost{background:var(--card);border:1.5px solid var(--line) !important;color:var(--ink)}
+
+/* ---------- summary ---------- */
+.summary{
+  display:none;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:34px 24px;text-align:center;
+}
+.summary .grade{font-family:'Noto Serif Thai',serif;font-size:24px;font-weight:700;margin-top:8px}
+.summary .bigscore{font-family:'Noto Serif Thai',serif;font-size:52px;font-weight:700;color:var(--accent);line-height:1.2}
+.summary .of{font-size:15px;color:var(--ink-soft)}
+.summary .gstars{color:var(--gold);font-size:22px;letter-spacing:.2em;margin-top:6px}
+.summary .sum-actions{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+.summary .sum-actions button{
+  border-radius:12px;padding:12px 22px;font-size:14.5px;font-weight:700;cursor:pointer;border:none;
+}
+footer{
+  margin-top:40px;text-align:center;font-size:12.5px;color:var(--ink-faint);
+  border-top:1px solid var(--line);padding-top:16px;
+}
+.view{display:none}
+.view.on{display:block}
+
+/* ---------- โหมด 5: สรุปเนื้อหา ---------- */
+.study-nav3{display:flex;gap:10px}
+.study-disclaimer{
+  background:#FFF6E0;border:1px solid #F0D896;color:#7A5A0A;
+  border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;
+  text-align:center;margin-bottom:14px;
+}
+.study-nav3 button{
+  flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:11px;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer;
+}
+.study-nav3 button:hover{border-color:var(--ink-faint)}
+.study-panel{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:22px 24px;margin:14px 0;
+}
+.study-title{
+  font-family:'Noto Serif Thai',serif;font-size:19px;font-weight:700;color:var(--accent);
+  margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid var(--gold-soft);
+}
+.study-toc{
+  background:#F6F3EA;border:1px solid var(--gold-soft);border-radius:12px;
+  padding:12px 14px;margin-bottom:22px;
+}
+.study-toc-label{font-size:12.5px;font-weight:700;color:var(--gold);margin-bottom:8px}
+.study-toc-list{display:flex;flex-wrap:wrap;gap:6px 8px}
+.study-toc-item{
+  font-size:12.5px;text-decoration:none;padding:5px 10px;border-radius:999px;
+  background:var(--card);border:1px solid var(--line);color:var(--ink-soft);
+  transition:border-color .15s,color .15s;
+}
+.study-toc-item:hover{border-color:var(--accent);color:var(--accent)}
+.study-toc-item.toc-major{
+  background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700;
+  flex-basis:100%;border-radius:8px;padding:7px 12px;
+}
+.study-toc-item.toc-major:hover{background:#26406B;color:#fff}
+.study-content{font-size:15px;line-height:1.9;color:var(--ink)}
+.study-content h4,.study-content h5,.study-content h6{
+  font-family:'Noto Serif Thai',serif;color:var(--accent);line-height:1.5;
+}
+.study-content h4{font-size:18px;margin:40px 0 14px;padding-top:14px;border-top:1px solid var(--line)}
+.study-content h4:first-child{margin-top:0;padding-top:0;border-top:none}
+.study-content h5{font-size:16.5px;margin:30px 0 10px}
+.study-content h6{font-size:15.5px;color:var(--gold);margin:22px 0 8px}
+.study-content p{margin:8px 0}
+.study-content ul,.study-content ol{margin:6px 0 10px 22px}
+.study-content li{margin:4px 0}
+.study-content b{color:var(--ink);font-weight:700}
+.study-content hr{border:none;border-top:1px dashed var(--line);margin:18px 0}
+.study-content a{color:var(--accent)}
+.study-content .muted{color:var(--ink-faint);font-style:italic}
+.study-content .tbl-wrap{overflow-x:auto;margin:10px 0}
+.study-content table{border-collapse:collapse;width:100%;font-size:14px}
+.study-content th,.study-content td{
+  border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;
+}
+.study-content th{background:var(--gold-soft);color:#5A4415;font-weight:700}
+.study-content tr:nth-child(even) td{background:#FBF9F3}
+@media(max-width:640px){
+  .tabbar{flex-wrap:wrap;border-radius:16px;max-width:100%}
+  .tabbar button{flex:1 1 30%}
+  #btn-reset,#btn-sound{flex:0 0 auto}
+}
+@media(max-width:520px){
+  .study-panel{padding:16px}
+  .study-title{font-size:17px}
+}
+@media(max-width:520px){
+  body{padding:14px 10px 50px}
+  .flashcard{padding:28px 16px 24px}
+  .scenario{padding:16px}
+}
+
+/* ==================================================
+   Subject-specific additions (LAW 2102)
+   ================================================== */
+
+/* Header score badge (moved from removed home-bar) */
+.header-score{
+  position:absolute;top:14px;right:14px;
+  background:var(--gold-soft);color:#7A5A0A;
+  padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700;
+  border:1px solid #E5C87A;
+}
+.header-score.score-pop{animation:score-pop .3s ease}
+@keyframes score-pop{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+#page-header{position:relative}
+@media(max-width:600px){
+  .header-score{position:static;display:inline-block;margin-top:8px}
+}
+
+/* Mode 1 flashcard — color change on flip */
+.flashcard{transition:transform .16s ease, background-color .3s ease, border-color .3s ease}
+.flashcard.is-back{box-shadow:0 2px 4px rgba(34,40,58,.06),0 10px 26px rgba(34,40,58,.1)}
+
+/* Mode 2 flip-card grid */
+.seq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;perspective:1200px}
+.seq-card{
+  position:relative;background:var(--card);border:1.5px solid var(--line);
+  border-radius:14px;box-shadow:var(--shadow);cursor:pointer;
+  min-height:168px;padding:18px 18px 16px;display:flex;flex-direction:column;
+  transition:transform .16s ease, background-color .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.seq-card.flipping{transform:rotateY(90deg)}
+@media (prefers-reduced-motion:reduce){.seq-card.flipping{transform:none}}
+.seq-card.is-back{box-shadow:0 2px 4px rgba(34,40,58,.06),0 10px 26px rgba(34,40,58,.1)}
+.seq-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.seq-num{
+  font-family:'Noto Serif Thai',serif;font-weight:700;color:var(--ink-faint);
+  background:#EEF2F9;border-radius:999px;width:24px;height:24px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:12.5px;padding-top:0;min-width:24px;
+}
+.seq-sec{font-family:'Noto Serif Thai',serif;font-size:19px;font-weight:700}
+.seq-front-title{font-size:14.5px;font-weight:600;margin-top:10px;line-height:1.6;flex:1}
+.seq-front-hint{font-size:11.5px;color:var(--ink-faint);margin-top:auto;padding-top:8px}
+.seq-res{font-size:13.5px;line-height:1.7;margin-top:8px}
+.seq-note{font-size:12.5px;color:var(--ink-soft);margin-top:10px;line-height:1.6;border-top:1px dashed var(--line);padding-top:8px}
+.seq-back{display:none}
+.seq-card.is-back .seq-front{display:none}
+.seq-card.is-back .seq-back{display:block}
+.seq-progress{font-size:13px;color:var(--ink-faint);margin-bottom:12px}
+
+/* Mode 5 — สรุปเนื้อหา (readable spacing) */
+.study-disclaimer{
+  background:#FFF6E0;border:1px solid #F0D896;color:#7A5A0A;
+  border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;
+  text-align:center;margin-bottom:14px;
+}
+.study-nav3{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.study-nav3 button{
+  flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:11px;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer;
+  min-width:130px;
+}
+.study-nav3 button:hover{border-color:var(--ink-faint)}
+.study-nav3 button.active{color:#fff}
+
+/* TTS bar */
+.tts-bar{
+  display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+  background:#F1EDE2;border:1px solid var(--line);border-radius:12px;
+  padding:8px 12px;margin-bottom:14px;
+}
+.tts-btn{
+  background:var(--accent);color:#fff;border:none;border-radius:8px;
+  padding:8px 14px;font-size:13.5px;font-weight:600;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;font-family:inherit;
+}
+.tts-btn:hover{opacity:.9}
+.tts-btn-ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.tts-btn-ghost:hover{border-color:var(--bad);color:var(--bad)}
+.tts-ico{font-size:11px}
+.tts-rate{font-size:12.5px;color:var(--ink-soft);margin-left:auto;display:inline-flex;align-items:center;gap:6px}
+.tts-rate select{
+  background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:5px 8px;font-family:inherit;font-size:12.5px;cursor:pointer;
+}
+
+/* Study panel — MORE readable spacing (larger fonts, taller line-height, more paragraph gap) */
+.study-panel{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:30px 32px;margin:14px 0;
+}
+@media(max-width:640px){.study-panel{padding:22px 20px}}
+.study-title{
+  font-family:'Noto Serif Thai',serif;font-size:20px;font-weight:700;
+  margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--line);
+}
+.study-toc{
+  margin-bottom:22px;padding:12px 14px;background:#F8F5EC;
+  border:1px solid var(--line);border-radius:10px;
+}
+.study-toc-title{font-size:12px;font-weight:700;color:var(--ink-faint);letter-spacing:.05em;margin-bottom:6px;text-transform:uppercase}
+.study-toc a{
+  display:block;padding:6px 10px;font-size:14px;color:var(--accent);
+  text-decoration:none;border-radius:6px;
+}
+.study-toc a:hover{background:#EEF2F9}
+.study-toc a.toc-major{font-weight:700}
+.study-toc a.toc-item{padding-left:24px;font-weight:500;color:var(--ink-soft);font-size:13.5px}
+.study-panel h4{
+  font-family:'Noto Serif Thai',serif;font-size:17.5px;font-weight:700;
+  margin:32px 0 12px;scroll-margin-top:20px;color:var(--ink);
+  padding-left:12px;border-left:4px solid var(--gold);
+}
+.study-panel h4:first-child{margin-top:8px}
+.study-panel h5{font-size:15px;font-weight:700;margin:18px 0 8px;color:#8A6A25}
+.study-panel p{font-size:15.5px;line-height:2.0;margin:14px 0;color:var(--ink-soft)}
+.study-panel ul,.study-panel ol{font-size:15.5px;line-height:2.0;margin:14px 0 14px 24px;color:var(--ink-soft)}
+.study-panel li{margin-bottom:8px;padding-left:4px}
+.study-panel b{color:var(--ink);font-weight:700}
+.study-panel u{text-decoration-color:var(--gold);text-underline-offset:3px}
+.study-exam-box{
+  background:#FBF6E8;border:1.5px solid var(--gold-soft);border-radius:var(--radius);
+  padding:20px 22px;margin:22px 0;
+}
+.study-exam-box h5{margin-top:0;color:#8A6A25;font-size:15px;border-left:none;padding-left:0}
+.study-exam-box p{font-size:14.5px;line-height:1.9;color:var(--ink-soft);margin:10px 0}
+.study-exam-box ul,.study-exam-box ol{font-size:14.5px;line-height:1.9;color:var(--ink-soft);margin:10px 0 10px 22px}
+.study-exam-box li{margin-bottom:6px}
+.study-progress{font-size:13px;color:var(--ink-faint);margin-bottom:12px}
+
+/* TTS currently-reading highlight */
+.tts-reading{background:linear-gradient(120deg,#FFF3C7 0%,#FFEFB0 100%);border-radius:4px;padding:2px 4px;transition:background .2s}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header id="page-header">
+  <div class="crest" id="hd-crest">LAW 2102 กฎหมายลักษณะหนี้</div>
+  <h1 id="hd-title">ห้องซ้อมสอบ วิชาหนี้</h1>
+  <div class="subtitle" id="hd-sub">ป.พ.พ. บรรพ 2 ลักษณะ 1 (มาตรา 194–353)</div>
+  <div class="header-score" id="global-score">🏆 <span id="score-value">0</span> คะแนน</div>
+</header>
+
+<nav class="tabbar" aria-label="โหมดเกม">
+  <button id="tab-card" class="on">การ์ดจำมาตรา</button>
+  <button id="tab-seq">เรียงมาตรา</button>
+  <button id="tab-quiz">วิเคราะห์โจทย์</button>
+  <button id="tab-irac">ฝึก IRAC</button>
+  <button id="tab-study">สรุปเนื้อหา</button>
+  <button id="btn-sound" title="ปิด/เปิดเสียง" aria-label="ปิด/เปิดเสียง">🔊</button>
+  <button id="btn-reset" title="รีเซ็ตทั้งหมด" aria-label="รีเซ็ตทั้งหมด">↺</button>
+</nav>
+
+<!-- ============ โหมด 1: การ์ด ============ -->
+<section id="view-card" class="view on">
+  <div class="row">
+    <select id="cat-select" aria-label="เลือกหมวด"></select>
+    <span class="muted" id="card-progress"></span>
+  </div>
+  <div class="matra-chips" id="matra-chips"></div>
+  <div class="stage" id="card-stage" aria-hidden="true"></div>
+  <div class="flip-stage">
+    <div class="flashcard" id="flip-card" role="button" tabindex="0" aria-label="แตะเพื่อพลิกการ์ด">
+      <div class="ribbon" id="card-ribbon"></div>
+      <div class="chapter-tag" id="cat-badge"></div>
+      <div class="face-front" id="face-front">
+        <div class="sec-no" id="card-section"></div>
+        <div class="src-tag" id="card-src-front"></div>
+        <div class="stars" id="card-stars"></div>
+        <div class="hint">แตะการ์ดเพื่อดูคำตอบ · ปุ่มลูกศรเลื่อนการ์ด</div>
+      </div>
+      <div class="face-back" id="face-back" style="display:none">
+        <div class="card-title" id="card-title"></div>
+        <div class="src-tag" id="card-src-back"></div>
+        <div class="card-result" id="card-result"></div>
+        <div class="card-note" id="card-note"></div>
+      </div>
+    </div>
+  </div>
+  <div class="nav3">
+    <button id="btn-prev">← ก่อนหน้า</button>
+    <button id="btn-shuffle">⇄ สุ่มใหม่</button>
+    <button id="btn-next">ถัดไป →</button>
+  </div>
+</section>
+
+<!-- ============ โหมด 2: เรียงมาตรา ============ -->
+<section id="view-seq" class="view">
+  <div class="row"><select id="seq-select" aria-label="เลือกหมวดเรียงมาตรา"></select></div>
+  <div id="seq-list"></div>
+</section>
+
+<!-- ============ โหมด 3: วิเคราะห์โจทย์ ============ -->
+<section id="view-quiz" class="view">
+  <div class="lvlbar">
+    <button id="lvl-basic" class="on">พื้นฐาน<span class="lvl-desc">ท่องจำมาตรา–ผลกฎหมาย</span></button>
+    <button id="lvl-adv">ข้อสอบจริง<span class="lvl-desc">โจทย์สถานการณ์แนวข้อสอบ</span></button>
+  </div>
+  <div class="setbar" id="set-picker"></div>
+
+  <div id="quiz-play">
+    <div class="progressbar"><div id="pbar" style="width:0%"></div></div>
+    <div class="quiz-meta">
+      <span class="muted" id="quiz-progress"></span>
+      <span class="quiz-timer" id="quiz-timer">⏱ 0.0s</span>
+      <span class="score" id="quiz-score"></span>
+    </div>
+    <div class="chapter-tag" id="quiz-tag" style="display:inline-block;margin-bottom:10px"></div>
+    <div class="stage" id="quiz-stage" aria-hidden="true"></div>
+    <div class="scenario"><div class="qtext" id="quiz-scenario"></div></div>
+    <div class="opts" id="quiz-options"></div>
+    <div class="explain" id="quiz-explain"></div>
+  </div>
+
+  <div class="summary" id="quiz-summary">
+    <div class="muted" id="sum-set-label"></div>
+    <div class="bigscore" id="sum-score">0</div>
+    <div class="of" id="sum-of">จาก 10 ข้อ</div>
+    <div class="gstars" id="sum-stars"></div>
+    <div class="grade" id="sum-grade"></div>
+    <div class="muted" id="sum-best" style="margin-top:6px"></div>
+    <div class="sum-actions">
+      <button id="sum-review" class="btn-ghost" style="display:none">ทบทวนข้อที่ผิด</button>
+      <button id="sum-retry" class="btn-ghost">ทำชุดนี้ซ้ำ</button>
+      <button id="sum-nextset" class="btn-primary" style="display:none">ชุดถัดไป →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ โหมด 4: ฝึก IRAC ============ -->
+<section id="view-irac" class="view">
+  <div id="irac-picker">
+    <p class="muted" style="margin-bottom:14px;font-size:14px">เลือกข้อสอบจริงที่จะฝึกวินิจฉัยแบบ IRAC ทีละประเด็น: ตั้งประเด็น → เลือกมาตรา → ปรับบท → สรุปผล</p>
+    <div class="irac-caselist" id="irac-caselist"></div>
+  </div>
+
+  <div id="irac-play" style="display:none">
+    <button class="irac-back" id="irac-back">← กลับไปเลือกข้อสอบ</button>
+    <div class="chapter-tag" id="irac-case-tag" style="display:inline-block;margin-bottom:6px"></div>
+    <div class="irac-facts" id="irac-facts"></div>
+    <button class="irac-facts-toggle" id="irac-facts-toggle">ขยายอ่านโจทย์เต็ม ▾</button>
+
+    <div style="margin-top:2px">
+      <div class="irac-progress-label" id="irac-progress-label"></div>
+      <span class="quiz-timer" id="irac-timer">⏱ 0.0s</span>
+      <div class="irac-stepper" id="irac-stepper">
+        <div class="irac-step" data-step="issue">1. ประเด็น</div>
+        <div class="irac-step" data-step="rule">2. มาตรา</div>
+        <div class="irac-step" data-step="app">3. ปรับบท</div>
+        <div class="irac-step" data-step="conc">4. สรุปผล</div>
+      </div>
+    </div>
+
+    <div id="irac-stage-box">
+      <div class="scenario" style="padding:16px 18px;margin-bottom:10px"><div class="qtext" id="irac-question" style="font-size:16.5px"></div></div>
+      <div class="opts" id="irac-options"></div>
+      <div class="explain" id="irac-explain"></div>
+    </div>
+
+    <div id="irac-recap-box" style="display:none">
+      <div class="irac-issue-recap">
+        <div class="big" id="irac-recap-title"></div>
+        <div id="irac-recap-text" style="font-size:14.5px;line-height:1.8;color:#14563A"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary" id="irac-summary">
+    <div class="muted" id="irac-sum-label"></div>
+    <div class="bigscore" id="irac-sum-score">0</div>
+    <div class="of" id="irac-sum-of"></div>
+    <div class="gstars" id="irac-sum-stars"></div>
+    <div class="grade" id="irac-sum-grade"></div>
+    <div class="sum-actions">
+      <button id="irac-sum-retry" class="btn-ghost">ทำข้อนี้ซ้ำ</button>
+      <button id="irac-sum-back" class="btn-ghost">เลือกข้อสอบอื่น</button>
+      <button id="irac-sum-nextcase" class="btn-primary" style="display:none">ข้อถัดไป →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ โหมด 5: สรุปเนื้อหา ============ -->
+<section id="view-study" class="view">
+  <div class="study-disclaimer">⚠️ ใช้ประกอบการอ่านตำราหลักเท่านั้น</div>
+  <div class="study-progress" id="study-progress"></div>
+  <div class="study-nav3" id="study-nav"></div>
+  <div class="tts-bar" id="tts-bar" style="display:none">
+    <button id="tts-play" class="tts-btn" title="อ่านออกเสียง"><span class="tts-ico">▶</span> อ่านออกเสียง</button>
+    <button id="tts-pause" class="tts-btn" title="หยุดชั่วคราว/เล่นต่อ" style="display:none"><span class="tts-ico">⏸</span> หยุดชั่วคราว</button>
+    <button id="tts-stop" class="tts-btn tts-btn-ghost" title="หยุด" style="display:none"><span class="tts-ico">■</span> หยุด</button>
+    <label class="tts-rate">ความเร็ว <select id="tts-rate">
+      <option value="0.8">0.8×</option>
+      <option value="1" selected>1.0×</option>
+      <option value="1.2">1.2×</option>
+      <option value="1.5">1.5×</option>
+    </select></label>
+  </div>
+  <div class="study-panel" id="study-panel"></div>
+</section>
+
+<footer>
+  ใช้อ่านประกอบเท่านั้น
+</footer>
+</div>
+
+<div class="sticky-bar" id="sticky-bar">
+  <div class="sticky-bar-inner">
+    <button id="quiz-next" class="btn-primary" style="display:none">ข้อถัดไป →</button>
+    <button id="quiz-finish" class="btn-primary" style="display:none">ดูสรุปผล</button>
+    <button id="irac-next" class="btn-primary" style="display:none">ถัดไป →</button>
+    <button id="irac-recap-next" class="btn-primary" style="display:none">ประเด็นถัดไป →</button>
+  </div>
+</div>
+
+
+<script>
+const CONFIG = {
+  crest: "LAW 2102",
+  title: "ห้องซ้อมสอบ วิชาหนี้",
+  subtitle: "ป.พ.พ. บรรพ 2 ลักษณะ 1 (มาตรา 194–353)",
+  storageKey: "law2102_bestScores_v1"
+};
+
+const CATEGORIES = {
+  general: { label: "1) บทเบ็ดเสร็จทั่วไป", soft: "#E6F4EC", strong: "#1E7A4F", icon: "📜", source: "ป.พ.พ." },
+  default: { label: "2) ลูกหนี้ผิดนัด–เจ้าหนี้ผิดนัด", soft: "#E7EAF6", strong: "#2E4A7A", icon: "⏰", source: "ป.พ.พ." },
+  impossibility: { label: "3) การชำระหนี้กลายเป็นพ้นวิสัย", soft: "#EDE3F7", strong: "#6B3FA0", icon: "🌪️", source: "ป.พ.พ." },
+  enforce: { label: "4) การบังคับชำระหนี้ / ค่าเสียหาย", soft: "#FBEAEA", strong: "#B23A3A", icon: "⚖️", source: "ป.พ.พ." },
+  protect: { label: "5) มาตรการคุ้มครองเจ้าหนี้", soft: "#F3E8CF", strong: "#8A6A25", icon: "🛡️", source: "ป.พ.พ." },
+  subrogation: { label: "6) การเปลี่ยนตัวเจ้าหนี้", soft: "#DFF3F0", strong: "#157A6E", icon: "🔄", source: "ป.พ.พ." },
+  multi: { label: "7) ลูกหนี้–เจ้าหนี้หลายคน", soft: "#FBEBDA", strong: "#C1631A", icon: "👥", source: "ป.พ.พ." },
+  extinction: { label: "8) ความระงับแห่งหนี้", soft: "#E4E9ED", strong: "#3A4A5A", icon: "🔚", source: "ป.พ.พ." }
+};
+
+const CARDS = [
+  // ===== 1) บทเบ็ดเสร็จทั่วไป =====
+  { cat:"general", section:"ม.194", title:"นิยามหนี้ / สิทธิเรียกร้อง", result:"ด้วยอำนาจแห่งมูลหนี้ เจ้าหนี้ย่อมมีสิทธิเรียกให้ลูกหนี้ชำระหนี้ได้ อนึ่ง การชำระหนี้ด้วยงดเว้นการอันใดอันหนึ่งก็ย่อมมีได้ — หนี้จึงเป็นความสัมพันธ์ทางกฎหมายที่เจ้าหนี้มีสิทธิเรียกให้ลูกหนี้กระทำการ งดเว้นกระทำการ หรือส่งมอบทรัพย์สิน", note:"องค์ประกอบของหนี้มี 4 อย่าง: เจ้าหนี้ ลูกหนี้ วัตถุแห่งหนี้ ระยะเวลาชำระหนี้", stars:5, source:"ป.พ.พ." },
+  { cat:"general", section:"ม.195 ว.1", title:"วัตถุแห่งหนี้ระบุแต่ประเภท (ทรัพย์ทั่วไป)", result:"เมื่อทรัพย์ซึ่งเป็นวัตถุแห่งหนี้ระบุไว้แต่เพียงเป็นประเภท และไม่อาจกำหนดชนิดจากสภาพนิติกรรม/เจตนาคู่กรณีได้ ลูกหนี้ต้องส่งมอบทรัพย์ชนิดปานกลาง", note:"เช่น สั่งซื้อ 'ข้าวสาร 1 กระสอบ' โดยไม่ระบุยี่ห้อ ต้องส่งของคุณภาพปานกลางตามท้องตลาด", stars:4, source:"ป.พ.พ." },
+  { cat:"general", section:"ม.195 ว.2", title:"ทรัพย์กลายเป็นทรัพย์เฉพาะสิ่งเมื่อใด", result:"ทรัพย์ทั่วไปกลายเป็นวัตถุแห่งหนี้เฉพาะสิ่งตั้งแต่เวลาที่ลูกหนี้ได้กระทำการอันตนพึงต้องทำเพื่อส่งมอบครบทุกประการแล้ว หรือลูกหนี้เลือกกำหนดทรัพย์ที่จะส่งมอบด้วยความยินยอมของเจ้าหนี้แล้ว", note:"ผลสำคัญ: ถ้าทรัพย์เฉพาะสิ่งสูญหาย/เสียหายเพราะเหตุสุดวิสัยหลังจุดนี้ ลูกหนี้อาจหลุดพ้นได้", stars:5, source:"ป.พ.พ." },
+  { cat:"general", section:"ม.198–199", title:"หนี้ที่ต้องเลือกกระทำ (หนี้เลือกกระทำ)", result:"ถ้าการชำระหนี้มีหลายอย่างให้เลือก สิทธิเลือกตกอยู่แก่ลูกหนี้ เว้นแต่จะได้ตกลงกันไว้เป็นอย่างอื่น การเลือกทำได้ด้วยแสดงเจตนาแก่คู่กรณีอีกฝ่าย และเมื่อเลือกแล้วให้ถือว่าเป็นการชำระหนี้อันกำหนดให้กระทำแต่ต้นมา", note:"เช่น สัญญาระบุว่าจะส่งมอบสุนัขพันธุ์ปักกิ่งหรือไซบีเรียนก็ได้ สิทธิเลือกอยู่ที่ผู้ขาย(ลูกหนี้)", stars:5, source:"ป.พ.พ." },
+  { cat:"general", section:"ม.201", title:"บุคคลภายนอกเป็นผู้เลือก", result:"ถ้าบุคคลภายนอกจะพึงเป็นผู้เลือก ให้กระทำด้วยแสดงเจตนาแก่ลูกหนี้ และลูกหนี้ต้องแจ้งความนั้นแก่เจ้าหนี้ ถ้าบุคคลภายนอกไม่อาจเลือกหรือไม่เต็มใจเลือก สิทธิเลือกตกไปอยู่แก่ฝ่ายลูกหนี้", note:null, stars:3, source:"ป.พ.พ." },
+  { cat:"general", section:"ม.202", title:"พ้นวิสัยก่อนมีการเลือก", result:"ถ้าทรัพย์ที่จะเลือกอย่างใดอย่างหนึ่งตกเป็นพ้นวิสัยจะส่งมอบตั้งแต่ต้น หรือกลายเป็นพ้นวิสัยในภายหลังด้วยเหตุอย่างใดอย่างหนึ่งอันจะโทษฝ่ายหนึ่งฝ่ายใดได้ ท่านว่าหนี้นั้นจำกัดอยู่ที่ทรัพย์อย่างอื่น เว้นแต่ในกรณีที่ฝ่ายผู้ไม่มีสิทธิเลือกเป็นผู้ทำให้ทรัพย์อย่างหนึ่งเป็นพ้นวิสัยแก่การส่งมอบ ฝ่ายที่มีสิทธิเลือกจะเลือกเอาทรัพย์อย่างนั้นก็ได้", note:"ตัวอย่าง: สิทธิเลือกอยู่ที่ผู้ขาย แต่ผู้ซื้อ(เจ้าหนี้)ประมาททำให้สุนัขตัวหนึ่งตาย ผู้ขายมีสิทธิชี้เลือกตัวที่ตายเป็นทรัพย์ที่ส่งมอบ และยังเรียกราคาเต็มได้; แต่ถ้าตายเพราะอุบัติเหตุสุดวิสัย (เช่นฟ้าผ่า) จะเหลือทางเลือกเดียวคือส่งมอบตัวที่รอด", stars:5, source:"ป.พ.พ." },
+
+  // ===== 2) ลูกหนี้ผิดนัด–เจ้าหนี้ผิดนัด =====
+  { cat:"default", section:"ม.204", title:"กำหนดเวลาชำระหนี้และการเตือน", result:"ถ้าหนี้ถึงกำหนดชำระแล้ว และเจ้าหนี้ได้ให้คำเตือนลูกหนี้แล้วลูกหนี้ยังไม่ชำระ ลูกหนี้ตกเป็นผู้ผิดนัดตั้งแต่เวลาที่เตือนนั้น ถ้าได้กำหนดเวลาชำระหนี้ไว้ตามวันแห่งปฏิทิน ลูกหนี้ผิดนัดทันทีที่พ้นกำหนดโดยไม่ต้องเตือน", note:null, stars:5, source:"ป.พ.พ." },
+  { cat:"default", section:"ม.205", title:"ข้อแก้ตัวของลูกหนี้ว่าไม่ผิดนัด", result:"ตราบใดการชำระหนี้ยังมิได้กระทำลงเพราะพฤติการณ์อันใดอันหนึ่งซึ่งลูกหนี้ไม่ต้องรับผิดชอบ ตราบนั้นลูกหนี้ยังหาได้ชื่อว่าผิดนัดไม่", note:"ใช้ต่อสู้ได้เฉพาะช่วงเวลาที่มีพฤติการณ์นั้นอยู่จริง", stars:4, source:"ป.พ.พ." },
+  { cat:"default", section:"ม.216", title:"บอกปัดไม่รับชำระหนี้เพราะผิดนัด", result:"ถ้าโดยเหตุผิดนัด การชำระหนี้กลายเป็นอันไร้ประโยชน์แก่เจ้าหนี้ เจ้าหนี้จะบอกปัดไม่รับชำระหนี้และเรียกค่าสินไหมทดแทนเพื่อการไม่ชำระหนี้ก็ได้", note:"ตัวอย่าง: จ้างตัดชุดแต่งงาน ตัดเสร็จไม่ทันวันแต่งงาน — เจ้าหนี้บอกปัดรับชุดได้ทั้งหมดหรือบางส่วน", stars:4, source:"ป.พ.พ." },
+  { cat:"default", section:"ม.217", title:"ความรับผิดที่เพิ่มขึ้นระหว่างลูกหนี้ผิดนัด", result:"ลูกหนี้ต้องรับผิดชอบในความเสียหายที่เกิดจากความประมาทเลินเล่อระหว่างที่ตนผิดนัด ทั้งต้องรับผิดในการที่การชำระหนี้กลายเป็นพ้นวิสัยเพราะอุบัติเหตุที่เกิดระหว่างผิดนัดด้วย เว้นแต่ความเสียหายนั้นจะเกิดขึ้นอยู่ดีแม้ชำระหนี้ทันเวลา", note:"จุดที่ออกสอบบ่อย: เทียบกับ ม.204 วรรค 2 (เช่น กรณีซื้อไก่แล้วตายเพราะโรคระบาดระหว่างผิดนัด)", stars:5, source:"ป.พ.พ." },
+  { cat:"default", section:"ม.208", title:"วิธีการชำระหนี้ของเจ้าหนี้ผิดนัด", result:"การชำระหนี้จะให้สำเร็จผลเป็นอย่างใด ลูกหนี้ต้องขอชำระหนี้อย่างนั้นโดยตรงต่อตัวเจ้าหนี้ ตามวิธีการ วันเวลา และสถานที่ที่กำหนด จะบังคับให้เจ้าหนี้รับชำระหนี้อย่างอื่นแทนไม่ได้", note:"เช่น หนี้เงินจะเอาเช็คมาบังคับให้เจ้าหนี้รับแทนเงินสดไม่ได้ เว้นแต่เจ้าหนี้ยินยอมเอง (ม.321)", stars:4, source:"ป.พ.พ." },
+  { cat:"default", section:"ม.212", title:"เหตุขัดข้องชั่วคราวของเจ้าหนี้", result:"ถ้ามิได้กำหนดเวลาชำระหนี้ไว้ หรือลูกหนี้มีสิทธิชำระหนี้ก่อนกำหนด การที่เจ้าหนี้มีเหตุขัดข้องชั่วคราวไม่อาจรับชำระหนี้ที่ลูกหนี้ขอปฏิบัตินั้น ไม่ทำให้เจ้าหนี้ตกเป็นผู้ผิดนัด เว้นแต่ลูกหนี้จะได้บอกกล่าวการชำระหนี้ไว้ล่วงหน้าโดยเวลาอันสมควร", note:null, stars:3, source:"ป.พ.พ." },
+
+  // ===== 3) การชำระหนี้กลายเป็นพ้นวิสัย =====
+  { cat:"impossibility", section:"หลักทั่วไป", title:"องค์ประกอบการชำระหนี้ตกเป็นพ้นวิสัย", result:"(1) ลูกหนี้ชำระหนี้ไม่ได้ถึงขนาดเป็นพ้นวิสัย ไม่ใช่แค่ยากลำบาก/ขาดทุน (2) ต้องเป็นการพ้นวิสัยถาวร ไม่ใช่ชั่วคราว (3) เหตุพ้นวิสัยต้องเกิดขึ้นภายหลังก่อหนี้แล้ว — ถ้าเกิดก่อนก่อหนี้ นิติกรรมนั้นตกเป็นโมฆะตาม ม.150 แทน", note:null, stars:5, source:"ป.พ.พ." },
+  { cat:"impossibility", section:"ม.218", title:"พ้นวิสัยเพราะพฤติการณ์ที่ลูกหนี้ต้องรับผิดชอบ", result:"ถ้าการชำระหนี้กลายเป็นพ้นวิสัยเพราะพฤติการณ์อันใดอันหนึ่งซึ่งลูกหนี้ต้องรับผิดชอบ ลูกหนี้จะต้องใช้ค่าสินไหมทดแทนให้แก่เจ้าหนี้เพื่อความเสียหายอันเกิดแต่การไม่ชำระหนี้นั้น", note:null, stars:4, source:"ป.พ.พ." },
+  { cat:"impossibility", section:"ม.219", title:"พ้นวิสัยเพราะพฤติการณ์ที่ลูกหนี้ไม่ต้องรับผิดชอบ", result:"ถ้าการชำระหนี้กลายเป็นพ้นวิสัยเพราะพฤติการณ์อันใดอันหนึ่งซึ่งลูกหนี้ไม่ต้องรับผิดชอบ ลูกหนี้ย่อมหลุดพ้นจากการชำระหนี้นั้น", note:"ประเด็นที่ต้องวินิจฉัยแม่นยำ: เหตุนั้นเป็นพฤติการณ์ที่ลูกหนี้ต้องรับผิดชอบหรือไม่ (ม.218 vs ม.219)", stars:5, source:"ป.พ.พ." },
+  { cat:"impossibility", section:"ม.372 ว.1", title:"ความเสี่ยงภัยในสัญญาต่างตอบแทน", result:"ในสัญญาต่างตอบแทน ถ้าการชำระหนี้ตกเป็นพ้นวิสัยเพราะพฤติการณ์ที่ลูกหนี้ไม่ต้องรับผิดชอบ ลูกหนี้ย่อมหลุดพ้นจากการชำระหนี้ แต่ไม่มีสิทธิได้รับชำระหนี้ตอบแทนจากอีกฝ่าย (เว้นแต่ทรัพย์เป็นทรัพย์เฉพาะสิ่งและพ้นวิสัยหลังส่งมอบแล้ว)", note:"อาจารย์เน้นมาตรานี้เป็นพิเศษ กรณีทรัพย์ยังไม่เป็นทรัพย์เฉพาะสิ่ง เช่น ตัวอย่างซื้อจระเข้ระบุฟาร์มแล้วน้ำท่วม", stars:5, source:"ป.พ.พ." },
+  { cat:"impossibility", section:"ม.372 ว.2", title:"พ้นวิสัยเพราะเจ้าหนี้ผิดนัด", result:"ถ้าการชำระหนี้ตกเป็นพ้นวิสัยเพราะพฤติการณ์ที่ทั้งสองฝ่ายไม่ต้องรับผิดชอบภายหลังที่เจ้าหนี้ผิดนัดไม่รับชำระหนี้แล้ว ลูกหนี้ยังคงมีสิทธิได้รับชำระหนี้ตอบแทนจากเจ้าหนี้อยู่นั่นเอง", note:null, stars:4, source:"ป.พ.พ." },
+  { cat:"impossibility", section:"ฎ.1074/2546", title:"ตัวอย่าง: ไฟไหม้โรงสีระหว่างทำสัญญาต่างตอบแทน", result:"ส่งข้าวเปลือกให้สีเป็นข้าวสารแล้วส่งคืน ถือเป็นสัญญาต่างตอบแทน เมื่อข้าวเปลือกกลายเป็นข้าวสาร(ทรัพย์เฉพาะสิ่ง)แล้ว ไฟไหม้โรงสีโดยไม่ปรากฏว่าใครเป็นต้นเหตุ ถือว่าพ้นวิสัยเพราะพฤติการณ์ที่ลูกหนี้ไม่ต้องรับผิดชอบตาม ม.219 วรรคหนึ่ง", note:null, stars:3, source:"ป.พ.พ." },
+
+  // ===== 4) การบังคับชำระหนี้ / ค่าเสียหาย =====
+  { cat:"enforce", section:"ม.213", title:"สิทธิร้องขอให้ศาลบังคับชำระหนี้", result:"ถ้าลูกหนี้ละเลยไม่ชำระหนี้ เจ้าหนี้จะร้องขอต่อศาลให้สั่งบังคับชำระหนี้ก็ได้ เว้นแต่สภาพแห่งหนี้จะไม่เปิดช่องให้ทำเช่นนั้นได้", note:"แม้ไม่มีคำขอชัดเจน ศาลก็พิพากษาให้ตามคำขอบังคับได้ เช่น ฟ้องเรียกทรัพย์คืน ถ้าคืนไม่ได้ให้ใช้ราคาแทน", stars:4, source:"ป.พ.พ." },
+  { cat:"enforce", section:"ม.214", title:"บังคับชำระหนี้จากทรัพย์สินทั่วไปของลูกหนี้", result:"เจ้าหนี้มีสิทธิที่จะให้ชำระหนี้ของตนจากทรัพย์สินของลูกหนี้จนสิ้นเชิง รวมทั้งเงินและทรัพย์สินอื่น ๆ ซึ่งบุคคลภายนอกค้างชำระแก่ลูกหนี้ด้วย", note:"เป็นหลัก 'ทรัพย์สินทั้งหมดของลูกหนี้เป็นหลักประกันหนี้' (general lien)", stars:4, source:"ป.พ.พ." },
+  { cat:"enforce", section:"ม.215", title:"เรียกค่าสินไหมทดแทนเพื่อการไม่ชำระหนี้", result:"เมื่อลูกหนี้ไม่ชำระหนี้ให้ต้องตามความประสงค์อันแท้จริงแห่งมูลหนี้ เจ้าหนี้จะเรียกเอาค่าสินไหมทดแทนเพื่อความเสียหายอันเกิดแต่การนั้นก็ได้", note:null, stars:4, source:"ป.พ.พ." },
+  { cat:"enforce", section:"ม.222", title:"ขอบเขตค่าสินไหมทดแทน", result:"วรรคหนึ่ง: ค่าสินไหมทดแทนได้แก่การเสียหายเพียงที่เกิดขึ้นตามปกติธรรมดา วรรคสอง: หรือความเสียหายอันเกิดแต่พฤติการณ์พิเศษ หากคู่กรณีได้คาดเห็นหรือควรจะได้คาดเห็นพฤติการณ์เช่นนั้นล่วงหน้าก่อนแล้ว", note:"ต้องพิสูจน์ว่าอีกฝ่ายคาดเห็นหรือควรคาดเห็นพฤติการณ์พิเศษนั้น มิฉะนั้นเรียกไม่ได้", stars:5, source:"ป.พ.พ." },
+  { cat:"enforce", section:"ม.223", title:"ผู้เสียหายมีส่วนผิดด้วย", result:"ถ้าฝ่ายผู้เสียหายมีส่วนทำความผิดก่อให้เกิดความเสียหายด้วย จำนวนค่าสินไหมทดแทนที่จะต้องใช้มากน้อยเพียงใดต้องอาศัยพฤติการณ์เป็นประมาณ โดยดูว่าความเสียหายเกิดขึ้นเพราะฝ่ายไหนเป็นผู้ก่อยิ่งหย่อนกว่ากันเพียงไร", note:"หลักคล้ายกับ contributory negligence ในทางแพ่ง", stars:4, source:"ป.พ.พ." },
+
+  // ===== 5) มาตรการในการคุ้มครองเจ้าหนี้ =====
+  { cat:"protect", section:"ม.233", title:"สิทธิเรียกร้องของลูกหนี้ (Subrogatory action)", result:"ถ้าลูกหนี้ขัดขืนไม่ยอมใช้สิทธิเรียกร้อง หรือเพิกเฉยเสียไม่ใช้สิทธิเรียกร้อง เป็นเหตุให้เจ้าหนี้ต้องเสียประโยชน์ เจ้าหนี้จะใช้สิทธิเรียกร้องนั้นในนามของตนเองแทนลูกหนี้เพื่อป้องกันสิทธิของตนในมูลหนี้นั้นก็ได้ เว้นแต่ในข้อที่เป็นการของลูกหนี้ส่วนตัวโดยแท้", note:"เจ้าหนี้ใช้สิทธินี้ได้เลยโดยไม่ต้องขออนุญาตจากลูกหนี้ก่อน และหนี้ระหว่างลูกหนี้กับลูกหนี้ของลูกหนี้ต้องถึงกำหนดชำระแล้ว", stars:5, source:"ป.พ.พ." },
+  { cat:"protect", section:"ม.237", title:"เพิกถอนการฉ้อฉล — หลักเกณฑ์", result:"เจ้าหนี้ชอบที่จะร้องขอให้ศาลเพิกถอนนิติกรรมใด ๆ อันลูกหนี้ได้กระทำลงทั้งรู้อยู่ว่าเป็นทางให้เจ้าหนี้เสียเปรียบ แต่ถ้าเป็นนิติกรรมมีค่าตอบแทน ผู้ได้ลาภงอกต้องรู้ข้อความจริงนั้นด้วยจึงเพิกถอนได้ ส่วนถ้าเป็นการให้โดยเสน่หา เพียงลูกหนี้รู้ฝ่ายเดียวก็พอ", note:"ใช้เฉพาะนิติกรรมที่มีวัตถุเป็นสิทธิในทรัพย์สินเท่านั้น (ไม่รวมนิติกรรมเกี่ยวกับสถานะบุคคล เช่น จดทะเบียนรับบุตรบุญธรรม)", stars:5, source:"ป.พ.พ." },
+  { cat:"protect", section:"ม.238", title:"ความคุ้มครองบุคคลภายนอกผู้สุจริต", result:"การเพิกถอนตาม ม.237 ไม่กระทบถึงสิทธิของบุคคลภายนอกอันได้มาโดยสุจริตและเสียค่าตอบแทนก่อนฟ้องคดีขอเพิกถอน เว้นแต่กรณีที่บุคคลภายนอกได้ลาภงอกไปโดยเสน่หา แม้สุจริตก็ไม่ได้รับความคุ้มครอง", note:null, stars:4, source:"ป.พ.พ." },
+  { cat:"protect", section:"ม.240", title:"อายุความฟ้องเพิกถอนการฉ้อฉล", result:"ห้ามฟ้องร้องเมื่อพ้นกำหนด 1 ปีนับแต่เวลาที่เจ้าหนี้ได้รู้ต้นเหตุอันเป็นมูลให้เพิกถอน หรือพ้น 10 ปีนับแต่ได้ทำนิติกรรมนั้น", note:null, stars:4, source:"ป.พ.พ." },
+  { cat:"protect", section:"ม.241", title:"สิทธิยึดหน่วง", result:"ผู้ใดเป็นผู้ครองทรัพย์สินของผู้อื่น และมีหนี้อันเป็นคุณประโยชน์แก่ตนเกี่ยวด้วยทรัพย์สินซึ่งครองนั้น ผู้นั้นจะยึดหน่วงทรัพย์สินนั้นไว้จนกว่าจะได้ชำระหนี้ก็ได้ เว้นแต่หนี้นั้นยังไม่ถึงกำหนด หรือการครอบครองเริ่มมาโดยไม่ชอบด้วยกฎหมาย", note:null, stars:4, source:"ป.พ.พ." },
+
+  // ===== 6) การเปลี่ยนตัวเจ้าหนี้ =====
+  { cat:"subrogation", section:"ม.226", title:"ผลของการรับช่วงสิทธิ / ช่วงทรัพย์", result:"บุคคลผู้รับช่วงสิทธิของเจ้าหนี้ ชอบที่จะใช้สิทธิทั้งหลายบรรดาที่เจ้าหนี้มีอยู่โดยมูลหนี้ รวมทั้งประกันแห่งหนี้นั้นได้ในนามของตนเอง ส่วนช่วงทรัพย์คือเอาทรัพย์สินอันหนึ่งเข้าแทนที่ทรัพย์สินอีกอันหนึ่งในฐานะนิตินัยอย่างเดียวกัน", note:"ผลคือเจ้าหนี้เดิมหลุดพ้นจากความผูกพันในหนี้รายนั้นโดยสิ้นเชิง", stars:5, source:"ป.พ.พ." },
+  { cat:"subrogation", section:"ม.227", title:"รับช่วงสิทธิเมื่อเจ้าหนี้ได้ค่าสินไหมทดแทนเต็มราคา", result:"เมื่อเจ้าหนี้ได้รับค่าสินไหมทดแทนความเสียหายเต็มตามราคาทรัพย์หรือสิทธิซึ่งเป็นวัตถุแห่งหนี้นั้นแล้ว ลูกหนี้ย่อมเข้าสู่ฐานะเป็นผู้รับช่วงสิทธิของเจ้าหนี้อันเกี่ยวกับทรัพย์หรือสิทธินั้น ๆ ด้วยอำนาจกฎหมาย", note:"เป็น 1 ใน 3 กรณีรับช่วงสิทธิที่ ป.พ.พ. บรรพ 2 กำหนดไว้", stars:4, source:"ป.พ.พ." },
+  { cat:"subrogation", section:"ม.303", title:"การโอนสิทธิเรียกร้อง — สภาพต้องเปิดช่อง", result:"สิทธิเรียกร้องนั้นท่านว่าจะพึงโอนกันได้ เว้นแต่สภาพแห่งสิทธินั้นเองจะไม่เปิดช่องให้โอนกันได้ การโอนสิทธิเรียกร้องต้องทำเป็นหนังสือจึงจะสมบูรณ์", note:"สิทธิเรียกร้องที่จะพึงมีขึ้นในอนาคต หรือยังไม่ถึงกำหนดชำระ ก็สามารถโอนกันได้ ถ้าสภาพเปิดช่องให้โอน", stars:4, source:"ป.พ.พ." },
+  { cat:"subrogation", section:"ม.306", title:"การโอนสิทธิเรียกร้องยกขึ้นต่อสู้ลูกหนี้/บุคคลภายนอก", result:"การโอนสิทธิเรียกร้องจะยกขึ้นต่อสู้ลูกหนี้หรือบุคคลภายนอกได้ ต่อเมื่อได้บอกกล่าวการโอนไปยังลูกหนี้ หรือลูกหนี้ยินยอมด้วยในการโอนนั้น การบอกกล่าวหรือความยินยอมนี้ต้องทำเป็นหนังสือ", note:null, stars:4, source:"ป.พ.พ." },
+  { cat:"subrogation", section:"หลักทั่วไป", title:"ความแตกต่าง: ช่วงสิทธิ vs โอนสิทธิเรียกร้อง", result:"ช่วงสิทธิ (ม.226 เป็นต้นไป) เกิดขึ้นโดยผลของกฎหมายเฉพาะกรณีที่กฎหมายกำหนดไว้เท่านั้น ส่วนการโอนสิทธิเรียกร้อง (ม.303 เป็นต้นไป) เกิดจากข้อสัญญาระหว่างเจ้าหนี้เดิมกับผู้รับโอน — ทั้งสองกรณีมูลหนี้เดิมและตัวลูกหนี้เดิมยังคงอยู่ เปลี่ยนแต่ตัวเจ้าหนี้", note:null, stars:4, source:"ป.พ.พ." },
+
+  // ===== 7) ลูกหนี้–เจ้าหนี้หลายคน =====
+  { cat:"multi", section:"ม.290", title:"หนี้แบ่งชำระได้ + มีบุคคลหลายคนเป็นลูกหนี้/เจ้าหนี้", result:"ถ้าการชำระหนี้เป็นการอันจะแบ่งกันชำระได้ และมีบุคคลหลายคนเป็นลูกหนี้หรือเจ้าหนี้ เมื่อกรณีเป็นที่สงสัย ท่านว่าลูกหนี้แต่ละคนต้องรับผิดเพียงส่วนเท่า ๆ กัน และเจ้าหนี้แต่ละคนก็ชอบที่จะได้รับแต่เพียงส่วนเท่า ๆ กัน", note:"เป็นบท 'สันนิษฐาน' ใช้เมื่อไม่มีข้อตกลงหรือกฎหมายกำหนดไว้เป็นอย่างอื่น", stars:4, source:"ป.พ.พ." },
+  { cat:"multi", section:"ม.291", title:"ลูกหนี้ร่วม", result:"ถ้าบุคคลหลายคนจะต้องทำการชำระหนี้โดยทำนองซึ่งแต่ละคนจำต้องชำระหนี้สิ้นเชิง เจ้าหนี้จะเรียกชำระหนี้จากลูกหนี้แต่คนใดคนหนึ่งสิ้นเชิงหรือแต่โดยส่วนก็ได้ตามแต่จะเลือก แต่ลูกหนี้ทั้งปวงก็ยังคงต้องผูกพันอยู่จนกว่าหนี้นั้นจะได้ชำระเสร็จสิ้นเชิง", note:null, stars:4, source:"ป.พ.พ." },
+  { cat:"multi", section:"ม.292/293/295", title:"ผลของการกระทำระหว่างลูกหนี้ร่วม", result:"การชำระหนี้ วางทรัพย์แทนชำระหนี้ หักกลบลบหนี้ ของลูกหนี้ร่วมคนหนึ่ง มีผลให้ลูกหนี้ทุกคนหลุดพ้น (ม.292) การปลดหนี้ให้ลูกหนี้ร่วมคนหนึ่งเป็นคุณแก่คนอื่นเท่าส่วนที่ปลด (ม.293) ส่วนเหตุอื่น เช่น ลูกหนี้ผิดนัด อายุความ เป็นไปเพื่อคุณโทษเฉพาะตัวลูกหนี้คนนั้น ไม่กระทบคนอื่น (ม.295)", note:null, stars:4, source:"ป.พ.พ." },
+  { cat:"multi", section:"ม.299", title:"เจ้าหนี้ร่วม", result:"เจ้าหนี้ร่วมคนใดคนหนึ่งต่างมีสิทธิเรียกร้องให้ลูกหนี้ชำระหนี้แก่ตนโดยสิ้นเชิงได้ ลูกหนี้มีสิทธิเลือกชำระหนี้แก่เจ้าหนี้คนใดก็ได้ และให้นำ ม.292, 293, 295 (เรื่องลูกหนี้ร่วม) มาใช้บังคับกับกรณีเจ้าหนี้ร่วมโดยอนุโลม", note:null, stars:4, source:"ป.พ.พ." },
+  { cat:"multi", section:"ม.299 ว.2", title:"หนี้เกลื่อนกลืนกันในเจ้าหนี้ร่วมคนหนึ่ง", result:"ถ้าหนี้เกลื่อนกลืนกันในตัวเจ้าหนี้ร่วมคนหนึ่ง สิทธิของเจ้าหนี้ร่วมคนอื่น ๆ อันมีต่อลูกหนี้ย่อมเป็นอันระงับไปด้วย", note:"ตัวอย่าง: เอกและโทเป็นเจ้าหนี้ร่วมของตรี ตรีตายและเอกรับมรดกทั้งหมด — หนี้ระงับเพราะเกลื่อนกลืนในตัวเอก (ม.353) และสิทธิของโทก็ระงับตามไปด้วย", stars:4, source:"ป.พ.พ." },
+
+  // ===== 8) ความระงับแห่งหนี้ =====
+  { cat:"extinction", section:"หลักทั่วไป", title:"เหตุความระงับแห่งหนี้ 5 ประการ", result:"หนี้ระงับได้ 5 ทาง คือ (1) การชำระหนี้ ม.314-339 (2) การปลดหนี้ ม.340 (3) การหักกลบลบหนี้ ม.341-348 (4) การแปลงหนี้ใหม่ ม.349-352 (5) หนี้เกลื่อนกลืนกัน ม.353", note:"อายุความไม่ใช่เหตุระงับหนี้ เพียงทำให้เจ้าหนี้ฟ้องบังคับไม่ได้เท่านั้น หนี้ยังคงมีอยู่", stars:5, source:"ป.พ.พ." },
+  { cat:"extinction", section:"ม.314", title:"ผู้มีสิทธิชำระหนี้", result:"บุคคลภายนอกจะเป็นผู้ชำระหนี้แทนก็ได้ เว้นแต่สภาพแห่งหนี้จะไม่เปิดช่องให้ทำเช่นนั้น หรือขัดกับเจตนาที่คู่กรณีแสดงไว้ บุคคลที่ไม่มีส่วนได้เสียในการชำระหนี้จะเข้าชำระหนี้โดยขืนใจลูกหนี้ไม่ได้", note:null, stars:3, source:"ป.พ.พ." },
+  { cat:"extinction", section:"ม.315", title:"ผู้มีอำนาจรับชำระหนี้", result:"การชำระหนี้ต้องทำให้แก่ตัวเจ้าหนี้หรือบุคคลผู้มีอำนาจรับชำระหนี้แทนเจ้าหนี้ การชำระหนี้ให้แก่ผู้ไม่มีอำนาจรับชำระหนี้ ถ้าเจ้าหนี้ให้สัตยาบันก็นับว่าสมบูรณ์", note:null, stars:3, source:"ป.พ.พ." },
+  { cat:"extinction", section:"ม.321", title:"การชำระหนี้อย่างอื่น", result:"ถ้าเจ้าหนี้ยอมรับการชำระหนี้อย่างอื่นแทนการชำระหนี้ที่ได้ตกลงกันไว้ หนี้นั้นก็เป็นอันระงับสิ้นไป", note:"เช่น ตกลงชำระเป็นเงินสด แต่เจ้าหนี้ยอมรับโอนเงินผ่านธนาคารแทน หนี้ก็ระงับตามวรรคนี้", stars:4, source:"ป.พ.พ." },
+  { cat:"extinction", section:"ม.331", title:"วางทรัพย์เมื่อเจ้าหนี้บอกปัด/ไม่อาจรับชำระ", result:"ถ้าเจ้าหนี้บอกปัดไม่ยอมรับชำระหนี้ หรือไม่สามารถจะรับชำระหนี้ได้ หากลูกหนี้วางทรัพย์อันเป็นวัตถุแห่งหนี้ไว้เพื่อประโยชน์แก่เจ้าหนี้ ลูกหนี้ก็ย่อมหลุดพ้นจากหนี้ได้ ใช้ได้แม้ในกรณีที่ไม่อาจหยั่งรู้ถึงสิทธิหรือตัวเจ้าหนี้ได้แน่นอนโดยมิใช่ความผิดของตน", note:"ทำได้โดยนำทรัพย์ไปวางไว้ที่สำนักงานวางทรัพย์", stars:3, source:"ป.พ.พ." },
+  { cat:"extinction", section:"ม.349", title:"แปลงหนี้ใหม่ (ภาพรวม)", result:"เมื่อคู่กรณีที่เกี่ยวข้องได้ทำสัญญาเปลี่ยนสิ่งซึ่งเป็นสาระสำคัญแห่งหนี้ไซร้ ท่านว่าหนี้นั้นเป็นอันระงับสิ้นไปด้วยแปลงหนี้ใหม่ (อยู่ในช่วง ม.349-352 ของหมวดความระงับแห่งหนี้)", note:"หนี้เดิมระงับ เกิดหนี้ใหม่ขึ้นแทนที่ ต่างจากการโอนสิทธิเรียกร้องซึ่งหนี้เดิมยังคงอยู่", stars:4, source:"ป.พ.พ." }
+];
+
+const QUIZ_ADV = [
+  {
+    cat:"protect",
+    q:"ก. เป็นเจ้าหนี้เงินกู้ของ ข. ต่อมา ก. ทราบว่า ข. โอนที่ดินให้แก่ ค. โดยรู้อยู่ว่าเป็นทางให้ ก. เสียเปรียบ และ ค. ได้โอนที่ดินนั้นต่อไปให้แก่ ง. ซึ่งเป็นบุคคลภายนอกผู้สุจริตและเสียค่าตอบแทน ก่อนที่ ก. จะฟ้องคดี ก. จึงฟ้องขอเพิกถอนนิติกรรมการโอนระหว่าง ข. กับ ค. ตาม ป.พ.พ. มาตรา 237 ก. จะฟ้องเพิกถอนนิติกรรมการโอนที่ดินจาก ค. ไปยัง ง. ได้หรือไม่",
+    opts:["ได้ เพราะ ข. ทำนิติกรรมโดยรู้อยู่ว่าเป็นทางให้เจ้าหนี้เสียเปรียบ","ไม่ได้ เพราะ ง. เป็นบุคคลภายนอกที่ได้สิทธิในทรัพย์มาโดยสุจริตและเสียค่าตอบแทนก่อนฟ้องคดีขอเพิกถอน จึงได้รับความคุ้มครองตาม ม.238","ได้ เพราะสิทธิเพิกถอนการฉ้อฉลติดไปกับทรัพย์เสมอไม่ว่าจะโอนต่อไปกี่ทอด","ไม่ได้ เพราะสิทธิเรียกร้องของ ก. ขาดอายุความแล้ว"],
+    ans:1,
+    explain:"ตาม <b>ม.238</b> การเพิกถอนตาม ม.237 ไม่กระทบถึงสิทธิของบุคคลภายนอกอันได้มาโดยสุจริตและเสียค่าตอบแทนก่อนฟ้องคดีขอเพิกถอน เมื่อ ง. สุจริตและได้ทรัพย์มาก่อน ก. ฟ้อง ง. จึงได้รับความคุ้มครอง (หากเป็นการให้โดยเสน่หา แม้สุจริตก็ไม่ได้รับความคุ้มครองตาม ม.238 วรรคสอง)"
+  },
+  {
+    cat:"protect",
+    q:"ก. ให้ ข. กู้ยืมเงิน 1 ล้านบาทเพื่อนำไปลงทุน โดยตกลงว่า ข. จะชำระหนี้คืนเมื่อ ข. ถูกสลากกินแบ่งรัฐบาลรางวัลใดก็ได้ ต่อมา ข. ถูกรางวัลเลขท้าย 2 ตัว ได้เงิน 1,000 บาท ซึ่ง ข. เห็นว่าเงินรางวัลไม่เพียงพอจะชำระหนี้ให้ ก. จึงเพิกเฉยไม่แจ้งให้ ก. ทราบและไม่ปฏิบัติการชำระหนี้ ก. จะใช้สิทธิเรียกร้องเงินรางวัลดังกล่าวแทน ข. ได้หรือไม่",
+    opts:["ไม่ได้ เพราะเงินรางวัลเป็นสิทธิเฉพาะตัวของ ข. โดยแท้","ได้ ตาม ม.233 เพราะ ข. เพิกเฉยไม่ใช้สิทธิเรียกร้อง เป็นเหตุให้ ก. ต้องเสียประโยชน์ โดยไม่ต้องได้รับอนุญาตจาก ข. ก่อน","ไม่ได้ เพราะหนี้ระหว่าง ก. กับ ข. ยังไม่ถึงกำหนดชำระ","ได้ แต่ต้องฟ้อง ข. ให้ชำระหนี้จนศาลมีคำพิพากษาก่อนจึงจะใช้สิทธิแทนได้"],
+    ans:1,
+    explain:"เข้าหลักเกณฑ์ <b>ม.233</b> ครบถ้วน: ข. เพิกเฉยไม่ใช้สิทธิเรียกร้อง (เรื่องเงินรางวัลไม่ใช่สิทธิส่วนตัวโดยแท้ เพราะเป็นสิทธิในทรัพย์สินที่โอนกันได้) เป็นเหตุให้ ก. เจ้าหนี้เสียประโยชน์ ก. จึงใช้สิทธิเรียกร้องนั้นในนามตนเองแทน ข. ได้ทันทีโดยไม่ต้องขออนุญาตจาก ข. ก่อน"
+  },
+  {
+    cat:"general",
+    q:"ภีมทำสัญญาซื้อขายแมวจากลิษา โดยสัญญากำหนดให้อันดา (บุคคลภายนอก) เป็นผู้เลือกว่าจะรับมอบแมวตัวใดในบรรดา 3 ตัวที่ลิษามีไว้เสนอขาย ต่อมาก่อนที่อันดาจะเลือก ภีมขับรถโดยประมาทเลินเล่อชนแมวตัวหนึ่งตาย ข้อใดถูกต้องเกี่ยวกับผลทางกฎหมาย",
+    opts:["สิทธิเลือกยังคงเป็นของอันดาเช่นเดิม ไม่มีผลกระทบใด ๆ","หนี้ตกเป็นพ้นวิสัยทั้งหมด ลิษาหลุดพ้นจากการส่งมอบแมวทุกตัว","เมื่อฝ่ายซึ่งไม่มีสิทธิเลือก (ภีม) เป็นผู้ทำให้แมวตัวหนึ่งพ้นวิสัยแก่การส่งมอบ ฝ่ายที่มีสิทธิเลือกอาจเลือกเอาแมวตัวที่ตายนั้นเป็นการชำระหนี้ก็ได้ตาม ม.202 และยังคงเรียกราคาได้เต็มจำนวน","ลิษาต้องคืนเงินให้ภีมทั้งหมดเพราะสัญญาเป็นโมฆะ"],
+    ans:2,
+    explain:"หลัก <b>ม.202</b>: เมื่อฝ่ายที่ไม่มีสิทธิเลือก (ในที่นี้คือภีม เพราะสัญญาให้อันดาเป็นผู้เลือกแทน) เป็นผู้ทำให้ทรัพย์อย่างหนึ่งพ้นวิสัยแก่การส่งมอบ กฎหมายไม่จำกัดสิทธิของฝ่ายที่มีสิทธิเลือก จึงอาจเลือกเอาทรัพย์ที่พ้นวิสัย(ตายแล้ว)นั้นมาถือเป็นการชำระหนี้ และเรียกราคาเต็มจำนวนได้ ต่างจากกรณีพ้นวิสัยเพราะอุบัติเหตุสุดวิสัยซึ่งจะจำกัดให้เหลือทางเลือกเดียวคือทรัพย์ที่เหลือรอด"
+  },
+  {
+    cat:"default",
+    q:"เจ้าหนี้ให้ลูกหนี้กู้ยืมเงินโดยไม่ได้กำหนดเวลาชำระหนี้ไว้ ลูกหนี้จะตกเป็นผู้ผิดนัดเมื่อใด",
+    opts:["ทันทีที่ครบ 1 ปีนับแต่วันทำสัญญากู้ยืม","เมื่อเจ้าหนี้ได้ให้คำเตือนแก่ลูกหนี้แล้วลูกหนี้ยังไม่ชำระหนี้","ทันทีที่ทำสัญญากู้ยืมเงินเสร็จสมบูรณ์","เมื่อเจ้าหนี้ฟ้องคดีต่อศาลแล้วเท่านั้น"],
+    ans:1,
+    explain:"ตาม <b>ม.204 วรรคหนึ่ง</b> เมื่อหนี้ถึงกำหนดชำระแล้ว (หนี้ไม่มีกำหนดเวลาถือว่าถึงกำหนดชำระได้ทันที) เจ้าหนี้ต้องเตือนให้ลูกหนี้ชำระก่อน หากลูกหนี้ยังไม่ชำระหลังจากถูกเตือนแล้ว จึงจะตกเป็นผู้ผิดนัด (ต่างจากหนี้ที่กำหนดเวลาชำระไว้แน่นอนตามวันปฏิทิน ซึ่งผิดนัดทันทีเมื่อพ้นกำหนดโดยไม่ต้องเตือน)"
+  },
+  {
+    cat:"multi",
+    q:"ก ข ค เป็นเจ้าหนี้ร่วมของ ง ลูกหนี้ ในหนี้เงินกู้ 30,000 บาท ซึ่งไม่มีกำหนดเวลาชำระหนี้ ก เจ้าหนี้ร่วมคนหนึ่งได้บอกกล่าวเตือนให้ ง ชำระหนี้แล้ว แต่ ง ไม่ยอมชำระ ผลของการผิดนัดนี้มีต่อ ข และ ค หรือไม่",
+    opts:["มีผลถึง ข และ ค ด้วย เพราะเป็นเจ้าหนี้ร่วมกัน","ไม่มีผลถึง ข และ ค เพราะการผิดนัดเป็นเรื่องเฉพาะตัวของเจ้าหนี้ร่วมแต่ละคนตาม ม.299 วรรคสาม ประกอบ ม.295","ไม่มีผลเลยแม้แต่กับ ก เพราะต้องให้เจ้าหนี้ร่วมทุกคนเตือนพร้อมกัน","มีผลถึง ข และ ค เฉพาะกรณีหนี้เป็นหนี้เงินเท่านั้น"],
+    ans:1,
+    explain:"ม.299 วรรคสาม ให้นำ <b>ม.295</b> มาใช้บังคับกับเจ้าหนี้ร่วมโดยอนุโลม ซึ่งเหตุอย่างลูกหนี้ผิดนัด การหยิบยกอ้างความรับผิด อายุความ เป็นไปเพื่อคุณและโทษแต่เฉพาะตัวของเจ้าหนี้ร่วมคนนั้นเพียงคนเดียว ไม่มีผลถึงเจ้าหนี้ร่วมคนอื่น ดังนั้นการผิดนัดของ ง ต่อ ก มีผลเฉพาะ ก เท่านั้น"
+  },
+  {
+    cat:"extinction",
+    q:"ลูกหนี้เป็นหนี้เงินเจ้าหนี้ตามสัญญากู้ยืม ต่อมาเจ้าหนี้ยินยอมรับโอนที่ดินแปลงหนึ่งจากลูกหนี้แทนการชำระหนี้เป็นเงิน โดยลูกหนี้และเจ้าหนี้ตกลงกันชัดแจ้งเช่นนั้น ผลทางกฎหมายเป็นอย่างไร",
+    opts:["หนี้เงินกู้ไม่ระงับ เพราะไม่ได้ชำระเป็นเงินตามที่ตกลงไว้แต่ต้น","หนี้เงินกู้ระงับสิ้นไปตาม ม.321 เพราะเจ้าหนี้ยอมรับการชำระหนี้อย่างอื่นแทนการชำระหนี้ที่ตกลงกันไว้","เป็นโมฆะ เพราะเปลี่ยนวัตถุแห่งหนี้ไม่ได้หากไม่ทำสัญญาแปลงหนี้ใหม่เป็นหนังสือ","หนี้ระงับเพียงบางส่วนเท่านั้น ต้องชำระเงินส่วนที่เหลือเสมอ"],
+    ans:1,
+    explain:"ตาม <b>ม.321 วรรคหนึ่ง</b> ถ้าเจ้าหนี้ยอมรับการชำระหนี้อย่างอื่นแทนการชำระหนี้ที่ได้ตกลงกันไว้แต่เดิม หนี้นั้นก็เป็นอันระงับสิ้นไป โดยไม่จำเป็นต้องทำเป็นสัญญาแปลงหนี้ใหม่ เพียงเจ้าหนี้ยินยอมรับชำระหนี้อย่างอื่นก็เพียงพอแล้ว"
+  }
+];
+
+const IRAC_CASES = [
+  {
+    id:"case_cat",
+    examRef:"ข้อสอบปลายภาค 1/2566 Sec.6700/01 ข้อ 1",
+    title:"หนี้เลือกกระทำ: แมวส้มสายพันธุ์สก็อตติชโฟลด์",
+    cat:"general",
+    facts:"ภีมตกลงทำสัญญาซื้อแมวส้มสายพันธุ์สก็อตติชโฟลด์จากลิษา ในราคาตัวละ 20,000 บาท เพื่อเป็นของขวัญวันเกิดให้กับอันดาภรรยาของตน ในสัญญากำหนดให้อันดาเป็นผู้เลือกว่าต้องการแมวตัวใดในระหว่าง \"เจ้าทิม\" \"เจ้าทอม\" และ \"เจ้าที่หน่า\" โดยอันดาต้องแจ้งให้ลิษาทราบว่าเลือกแมวตัวใดภายในวันที่ 12 ธันวาคม 2566 และภีมจะมารับมอบและชำระราคาแมวที่ฟาร์มของลิษาในวันที่ 20 ธันวาคม 2566<br><br>ปรากฏว่าในวันที่ 12 ธันวาคม 2566 อันดาก็ไม่ได้แจ้งให้ลิษาทราบว่าตัดสินใจเลือกแมวตัวใด จนกระทั่งต่อมาในวันที่ 20 ธันวาคม 2566 อันดาบอกภีมว่าตนตัดสินใจเลือก \"เจ้าที่หน่า\" และให้ภีมเดินทางไปรับมอบแมวที่ฟาร์มของลิษา แต่ระหว่างทางด้วยความประมาทเลินเล่อ ภีมได้ขับรถชน \"เจ้าทอม\" ตาย ภีมจึงแจ้งแก่ลิษาว่าอันดาเลือกให้ลิษาส่งมอบ \"เจ้าที่หน่า\" ตามสัญญาซื้อขาย แต่ลิษาปฏิเสธเพราะต้องการเก็บ \"เจ้าที่หน่า\" ที่เพิ่งได้รับรางวัลจากการประกวดไว้เป็นแม่พันธุ์ต่อไป ส่วน \"เจ้าทิม\" ลิษาก็ได้ขายให้กับลูกค้าอีกรายหนึ่งซึ่งเสนอให้ราคาที่ดีกว่าไปแล้ว ลิษาจึงบอกภีมว่าตนต้องการจะส่งมอบ \"เจ้าทอม\" ให้แก่ภีม แต่เมื่อภีมเองเป็นคนทำให้ \"เจ้าทอม\" ตาย ตนจึงไม่มีหน้าที่ต้องส่งมอบแมวตัวใดให้แก่ภีมอีกต่อไป",
+    issues:[
+      {
+        label:"ประเด็นที่ 1 — ใครมีสิทธิเลือกแมว และผลของการไม่เลือกภายในกำหนด",
+        issueQ:"ประเด็นแรกที่ต้องวินิจฉัยคือเรื่องใด",
+        issueOpts:["ลิษาผิดสัญญาซื้อขายหรือไม่","อันดาซึ่งเป็นบุคคลภายนอกมีสิทธิเลือกแมวหรือไม่ และเมื่อไม่เลือกภายในกำหนดเวลา ผลเป็นอย่างไร","ภีมมีอำนาจฟ้องคดีนี้หรือไม่","สัญญาซื้อขายแมวเป็นโมฆะหรือไม่"],
+        issueAns:1,
+        issueFeedback:"ถูกต้อง — สัญญากำหนดให้อันดา (บุคคลภายนอก) เป็นผู้เลือก จึงต้องพิจารณาก่อนว่ากลไกการเลือกโดยบุคคลภายนอกทำงานอย่างไร และผลเมื่อไม่เลือกภายในกำหนดคืออะไร",
+        ruleQ:"ควรใช้มาตราใดในการวินิจฉัยประเด็นนี้",
+        ruleOpts:["ม.201 (บุคคลภายนอกเป็นผู้เลือก) ประกอบ ม.200 (ผลเมื่อไม่เลือกภายในกำหนดเวลา)","ม.237 (เพิกถอนการฉ้อฉล)","ม.233 (สิทธิเรียกร้องของลูกหนี้)","ม.321 (การชำระหนี้อย่างอื่น)"],
+        ruleAns:0,
+        ruleFeedback:"ถูกต้อง — ม.201 วางกลไกการเลือกโดยบุคคลภายนอก ส่วน ม.200 กำหนดผลเมื่อฝ่ายที่มีสิทธิเลือกไม่ใช้สิทธิภายในกำหนดเวลาที่ตกลงกันไว้",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["อันดาไม่แจ้งเลือกภายในวันที่ 12 ธ.ค. ตามที่สัญญากำหนด สิทธิเลือกจึงยังคงอยู่ที่อันดาต่อไปได้ไม่จำกัดเวลา","อันดาไม่แจ้งเลือกภายในกำหนดเวลาตามสัญญา (12 ธ.ค.) แต่ต่อมาก็ยังได้ใช้สิทธิเลือกก่อนถึงวันนัดรับมอบ (20 ธ.ค.) จึงถือว่าการเลือกยังมีผลสมบูรณ์ตามมาตรา 199 เพราะไม่มีฝ่ายใดยกเอาการล่วงเลยกำหนดเวลาขึ้นโต้แย้งหรือให้สิทธิเลือกตกไปอยู่แก่อีกฝ่าย","สิทธิเลือกตกไปเป็นของลิษาโดยอัตโนมัติทันทีที่พ้นวันที่ 12 ธ.ค.","สัญญาทั้งหมดตกเป็นโมฆะเพราะไม่เลือกภายในกำหนด"],
+        appAns:1,
+        appFeedback:"ถูกต้อง — แม้อันดาจะไม่เลือกภายในกำหนดวันที่ 12 ธ.ค. ตามสัญญา แต่ไม่ปรากฏว่าลิษาหรือฝ่ายใดยกเอาการล่วงเลยกำหนดเวลานั้นขึ้นเรียกร้องให้สิทธิเลือกตกไปเป็นของตน อันดาจึงยังคงใช้สิทธิเลือก \"เจ้าที่หน่า\" ก่อนวันนัดรับมอบได้ และเมื่อเลือกแล้วให้ถือว่าเป็นการชำระหนี้อันกำหนดไว้แต่ต้นตาม ม.199",
+        concQ:"สรุปผลของประเด็นนี้ควรเป็นอย่างไร",
+        concOpts:["การเลือก \"เจ้าที่หน่า\" ของอันดามีผลสมบูรณ์ วัตถุแห่งหนี้จึงถูกกำหนดเป็น \"เจ้าที่หน่า\" ตั้งแต่เวลาที่เลือก","การเลือกไม่มีผลเพราะเลือกช้าไป","ต้องเลือกใหม่โดยลิษาเป็นผู้เลือกแทน","ไม่มีการเลือกเกิดขึ้นเลยตามกฎหมาย"],
+        concAns:0,
+        concFeedback:"สรุป: อันดาในฐานะบุคคลภายนอกผู้มีสิทธิเลือกตามสัญญา ได้ใช้สิทธิเลือก \"เจ้าที่หน่า\" ก่อนถึงกำหนดวันรับมอบ แม้จะล่าช้ากว่าวันที่ตกลงไว้เดิม แต่เมื่อไม่มีฝ่ายใดยกข้อล่วงเลยกำหนดเวลาขึ้นต่อสู้ การเลือกนั้นจึงสมบูรณ์และผูกพันคู่สัญญาตาม ม.199 วัตถุแห่งหนี้จึงถูกจำกัดเป็น \"เจ้าที่หน่า\" นับแต่เวลาที่อันดาแสดงเจตนาเลือก"
+      },
+      {
+        label:"ประเด็นที่ 2 — ข้ออ้างของลิษาที่จะไม่ส่งมอบแมวตัวใดเลยฟังขึ้นหรือไม่",
+        issueQ:"ประเด็นที่สองที่ต้องวินิจฉัยคือเรื่องใด",
+        issueOpts:["ลิษามีสิทธิบอกปัดไม่ส่งมอบแมวตัวใดเลยเพราะภีมทำให้เจ้าทอมตายโดยประมาทหรือไม่","อันดามีอำนาจทำสัญญาแทนภีมหรือไม่","ราคาแมว 20,000 บาทเป็นราคาที่เป็นธรรมหรือไม่","สัญญาซื้อขายผิดแบบหรือไม่"],
+        issueAns:0,
+        issueFeedback:"ถูกต้อง — เมื่อวัตถุแห่งหนี้ถูกจำกัดเป็น \"เจ้าที่หน่า\" แล้วตามประเด็นที่ 1 ประเด็นต่อไปคือลิษาจะยกเหตุที่ภีมทำให้เจ้าทอม(ตัวที่ไม่ได้ถูกเลือก)ตาย มาอ้างปฏิเสธไม่ส่งมอบเจ้าที่หน่าได้หรือไม่",
+        ruleQ:"ควรใช้มาตราใดในการวินิจฉัย",
+        ruleOpts:["ม.202 (พ้นวิสัยก่อนมีการเลือก โดยฝ่ายไม่มีสิทธิเลือกเป็นผู้ทำให้พ้นวิสัย)","ม.219 (พ้นวิสัยเพราะพฤติการณ์ที่ลูกหนี้ไม่ต้องรับผิดชอบ)","ม.240 (อายุความเพิกถอนฉ้อฉล)","ม.290 (ลูกหนี้หลายคน)"],
+        ruleAns:0,
+        ruleFeedback:"ถูกต้อง — ประเด็นนี้คือกรณีพ้นวิสัยก่อนการเลือกจะมีผลสมบูรณ์ (เจ้าทอมตายก่อนหรือระหว่างช่วงที่ยังไม่แน่ชัดว่าจะเลือกตัวใด) โดยฝ่ายที่ไม่มีสิทธิเลือกเป็นผู้ทำให้พ้นวิสัย จึงต้องใช้ ม.202",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["ภีมเป็นฝ่ายเจ้าหนี้ผู้ไม่มีสิทธิเลือก (สิทธิเลือกเป็นของอันดา) และภีมเองเป็นผู้ทำให้เจ้าทอมตายโดยประมาท กรณีจึงเข้า ม.202 ที่ให้สิทธิฝ่ายมีสิทธิเลือก(อันดา)เลือกเอาตัวที่ตายเป็นการชำระหนี้ได้ ไม่ใช่ให้ลิษาลูกหนี้อ้างพ้นวิสัยปัดความรับผิด","เจ้าทอมตายเพราะเหตุสุดวิสัย จึงต้องใช้ ม.219 ให้ลิษาหลุดพ้น","ลิษาเป็นผู้ทำให้เจ้าทอมตายเอง จึงต้องรับผิดตาม ม.218","เป็นกรณีที่ต้องเลือกทรัพย์ใหม่ทั้งหมดสามตัว"],
+        appAns:0,
+        appFeedback:"ถูกต้อง — ผู้ที่ทำให้แมวตายคือภีม ซึ่งเป็นฝ่ายที่ไม่มีสิทธิเลือกในธุรกรรมนี้ (สิทธิเลือกอยู่ที่อันดาตามสัญญา) ตามหลัก ม.202 กฎหมายไม่จำกัดสิทธิของฝ่ายมีสิทธิเลือก—แต่ในที่นี้อันดาเลือก \"เจ้าที่หน่า\" ไปแล้ว ซึ่งยังมีชีวิตอยู่ครบถ้วน ลิษาจึงไม่มีสิทธิยกเหตุที่เจ้าทอม(ตัวที่ไม่ถูกเลือก)ตายมาอ้างปฏิเสธไม่ส่งมอบเจ้าที่หน่าที่ถูกเลือกแล้วโดยชอบ",
+        concQ:"สรุปผลควรเป็นอย่างไร",
+        concOpts:["ข้ออ้างของลิษาฟังไม่ขึ้น ลิษามีหน้าที่ต้องส่งมอบ \"เจ้าที่หน่า\" ให้แก่ภีมตามสัญญา และภีมต้องชำระราคา 20,000 บาท","ข้ออ้างของลิษาฟังขึ้น เพราะภีมทำให้แมวตายจึงถือว่าผิดสัญญาก่อน","ลิษาไม่ต้องส่งมอบแมวตัวใดเลยและไม่ต้องคืนเงินมัดจำ","ต้องให้ศาลเป็นผู้เลือกแมวตัวใหม่ให้ภีม"],
+        concAns:0,
+        concFeedback:"สรุป: เมื่อวัตถุแห่งหนี้ถูกจำกัดเป็น \"เจ้าที่หน่า\" แล้วโดยการเลือกของอันดาซึ่งสมบูรณ์ตามประเด็นที่ 1 การที่เจ้าทอม(ตัวที่ไม่ถูกเลือก)ตายเพราะความประมาทของภีมผู้ไม่มีสิทธิเลือก ไม่กระทบต่อหน้าที่ของลิษาที่ต้องส่งมอบเจ้าที่หน่าแต่อย่างใด ข้ออ้างของลิษาที่จะไม่ส่งมอบแมวตัวใดเลยจึงฟังไม่ขึ้น ลิษายังมีหน้าที่ต้องส่งมอบ \"เจ้าที่หน่า\" ให้แก่ภีมตามสัญญาซื้อขาย"
+      }
+    ]
+  },
+  {
+    id:"case_protect1",
+    examRef:"ข้อสอบปลายภาค อ.มณฑิรา (มธ.) 2556 ข้อ 2",
+    title:"เพิกเฉยไม่ใช้สิทธิเรียกร้อง — เงินรางวัลสลากกินแบ่งฯ",
+    cat:"protect",
+    facts:"ในวันที่ 31 สิงหาคม นาย ก. ให้นาย ข. กู้ยืมเงินไปจำนวน 1 ล้านบาทเพื่อให้นาย ข. จะนำเงินไปใช้ในการลงทุนเปิดร้านสะดวกซื้อ โดยมีข้อตกลงกันให้นาย ข. ชำระหนี้คืนเมื่อนาย ข. ถูกสลากกินแบ่งรัฐบาลรางวัลใดก็ได้ แทนที่นาย ข. จะนำเงินไปใช้ในการลงทุนในการทำธุรกิจ นาย ข. กลับนำเงิน 1 ล้านบาทที่ได้รับมาจากนาย ก. ไปซื้อสลากกินแบ่งรัฐบาลทั้งหมด ปรากฏข้อเท็จจริงว่าในวันที่ 1 กันยายน นาย ข. ถูกรางวัลสลากกินแบ่งรัฐบาลเลขท้าย 2 ตัว ได้รับรางวัลจำนวน 1,000 บาท นาย ข. เห็นว่าเงินรางวัลไม่เพียงพอจะชำระหนี้ให้กับนาย ก. ได้ นาย ข. จึงเพิกเฉยไม่แจ้งให้นาย ก. ทราบและไม่ปฏิบัติการชำระหนี้ให้แก่นาย ก.<br><br>นอกจากนี้นาย ข. ได้ขายที่ดินแปลงหนึ่งของตนให้กับนาย ค. ไปในราคา 1 ล้านบาท โดยจดทะเบียนโอนกรรมสิทธิ์ให้กับนาย ค. ไปแล้ว แต่นาย ค. ยังไม่ได้ชำระราคาค่าที่ดินให้แก่นาย ข. เพราะในสัญญาซื้อขายที่ดินนั้นระบุว่านาย ค. จะต้องชำระราคาค่าที่ดินให้แก่นาย ข. เมื่อนาย ข. ถูกสลากกินแบ่งรัฐบาลรางวัลใดก็ได้เช่นกัน เมื่อนาย ข. ถูกสลากกินแบ่งรัฐบาลรางวัลในวันที่ 1 กันยายน นาย ก. ก็ได้แจ้งให้นาย ค. ทราบเพื่อให้นาย ค. ทราบว่า นาย ข. เกรงว่าหากได้เงินราคาค่าที่ดินมา ตนจะถูกนาย ก. บังคับชำระหนี้",
+    issues:[
+      {
+        label:"ประเด็นที่ 1 — สิทธิของนาย ก. ต่อเงินรางวัลสลากกินแบ่งฯ ที่นาย ข. เพิกเฉย",
+        issueQ:"ประเด็นแรกที่ต้องวินิจฉัยคือเรื่องใด",
+        issueOpts:["นาย ก. จะใช้สิทธิเรียกร้องเงินรางวัลสลากกินแบ่งฯ แทนนาย ข. ได้หรือไม่ เพราะนาย ข. เพิกเฉยไม่ใช้สิทธิ","สัญญากู้ยืมเงินระหว่าง ก. กับ ข. เป็นโมฆะหรือไม่","นาย ก. มีสิทธิริบสลากกินแบ่งฯ ทั้งหมดหรือไม่","นาย ข. ผิดสัญญากู้ยืมแล้วหรือยัง"],
+        issueAns:0,
+        issueFeedback:"ถูกต้อง — ข้อเท็จจริงชี้ตรงไปที่การที่ลูกหนี้ (นาย ข.) เพิกเฉยไม่ใช้สิทธิเรียกร้องเงินรางวัลของตนเอง ทำให้ต้องพิจารณามาตรการคุ้มครองเจ้าหนี้ตามสิทธิเรียกร้องของลูกหนี้",
+        ruleQ:"ควรใช้มาตราใดในการวินิจฉัย",
+        ruleOpts:["ม.233 สิทธิเรียกร้องของลูกหนี้ (ใช้สิทธิแทนลูกหนี้)","ม.237 เพิกถอนการฉ้อฉล","ม.241 สิทธิยึดหน่วง","ม.226 ช่วงสิทธิ"],
+        ruleAns:0,
+        ruleFeedback:"ถูกต้อง — กรณีนี้ลูกหนี้ไม่ได้ทำนิติกรรมโอนทรัพย์ออกไป (จึงไม่ใช่เรื่องฉ้อฉลตาม ม.237) แต่เป็นการที่ลูกหนี้ 'เพิกเฉยไม่ใช้สิทธิเรียกร้อง' ของตนเอง ตรงกับหลักเกณฑ์ ม.233 พอดี",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["นาย ข. เพิกเฉยไม่ใช้สิทธิรับเงินรางวัล เป็นเหตุให้นาย ก. เจ้าหนี้เสียประโยชน์ (ไม่มีทรัพย์สินอื่นให้ชำระหนี้เพราะเอาเงินกู้ไปซื้อสลากหมด) และเรื่องเงินรางวัลก็ไม่ใช่สิทธิเฉพาะตัวของนาย ข. โดยแท้ นาย ก. จึงใช้สิทธิเรียกร้องนั้นแทนนาย ข. ได้ทันที","เงินรางวัลเป็นสิทธิเฉพาะตัวของนาย ข. โดยแท้ นาย ก. จึงใช้สิทธิแทนไม่ได้เลย","นาย ก. ต้องรอให้หนี้เงินกู้ถึงกำหนดชำระ (คือนาย ข. ถูกรางวัล) ก่อน แล้วจึงจะใช้สิทธิได้ ซึ่งในกรณีนี้ยังไม่ถึงกำหนด","นาย ก. ต้องขออนุญาตศาลก่อนจึงจะใช้สิทธิแทนนาย ข. ได้"],
+        appAns:0,
+        appFeedback:"ถูกต้อง — สิทธิรับเงินรางวัลเป็นสิทธิในทรัพย์สินที่โอน/เรียกร้องแทนกันได้ ไม่ใช่สิทธิเฉพาะตัวโดยแท้ (เช่น สิทธิรับค่าอุปการะเลี้ยงดู) และการที่นาย ข. เอาเงินกู้ไปซื้อสลากจนไม่มีทรัพย์สินอื่นเพียงพอชำระหนี้ ตรงกับ 'เป็นเหตุให้เจ้าหนี้ต้องเสียประโยชน์' นาย ก. จึงใช้สิทธิตาม ม.233 ได้เลยโดยไม่ต้องขออนุญาตจากนาย ข. ก่อน",
+        concQ:"สรุปผลของประเด็นนี้ควรเป็นอย่างไร",
+        concOpts:["นาย ก. มีสิทธิใช้สิทธิเรียกร้องเงินรางวัล 1,000 บาทในนามของตนเองแทนนาย ข. ได้ตาม ม.233","นาย ก. ไม่มีสิทธิใด ๆ ต่อเงินรางวัลนี้เลย","นาย ก. ต้องฟ้องนาย ข. ให้ล้มละลายก่อนจึงจะได้เงินรางวัล","เงินรางวัลตกเป็นของรัฐโดยอัตโนมัติ"],
+        concAns:0,
+        concFeedback:"สรุป: นาย ข. ลูกหนี้เพิกเฉยไม่ใช้สิทธิเรียกร้องรับเงินรางวัลของตนเอง ทำให้นาย ก. เจ้าหนี้ต้องเสียประโยชน์เพราะไม่มีทรัพย์สินอื่นเพียงพอชำระหนี้ และเรื่องนี้ไม่ใช่สิทธิเฉพาะตัวของนาย ข. โดยแท้ นาย ก. จึงมีสิทธิใช้สิทธิเรียกร้องเงินรางวัลนั้นในนามของตนเองแทนนาย ข. ได้ทันทีตาม ม.233 โดยไม่ต้องขออนุญาตจากนาย ข. ก่อน"
+      }
+    ]
+  },
+  {
+    id:"case_lien1",
+    examRef:"ข้อสอบปลายภาค อ.มณฑิรา (มธ.) 2557 ข้อ 3",
+    title:"สิทธิยึดหน่วงรถยนต์ของอู่ซ่อมรถ",
+    cat:"protect",
+    facts:"นายปราณีนำรถยนต์ของตนมูลค่า 300,000 บาท ไปให้อู่ซ่อมรถของนายกบตรวจสภาพและขัดเคลือบสีใหม่ กำหนดรับรถและชำระค่าจ้างจำนวน 50,000 บาทในอีก 2 สัปดาห์ เมื่อถึงกำหนดนายปราณีมารับรถโดยแจ้งแก่นายกบว่าขอนำเงินค่าจ้างมาชำระให้ในภายหลัง นายกบจึงปฏิเสธไม่ส่งมอบรถให้แก่นายปราณี และแจ้งว่าตนจะยึดรถไว้จนกว่านายปราณีจะนำเงินค่าจ้างมาชำระให้ครบถ้วน<br><br>หลังจากนั้น 1 เดือน นายกบต้องการปิดกิจการอู่ซ่อมรถของตนและย้ายถิ่นฐาน นายกบจึงได้มาตกลงเจรจากับนายปราณีให้นางสาวบัวเข้ามาเป็นเจ้าหนี้ผู้มีสิทธิเรียกให้นายปราณีชำระหนี้ค่าจ้างที่ค้างชำระจำนวน 50,000 บาทแทนตน และได้มีการตกลงให้นายปราณีเปลี่ยนตัวมาผูกพันเป็นลูกหนี้นางสาวบัวในมูลหนี้นี้ตามสัญญากู้ยืมเงินจำนวน 50,000 บาทแทนด้วย โดยนางสาวบัวได้ชำระค่าตอบแทนให้แก่นายกบเป็นจำนวน 30,000 บาท นายปราณีตกลงยินยอมด้วยในการทำสัญญาดังกล่าวโดยไม่ทักท้วง โดยที่นายปราณี นายกบ และนางสาวบัวได้ทำสัญญาเป็นหนังสือลงลายมือชื่อทั้งสามฝ่ายไว้เป็นหลักฐาน นอกจากนี้ยังปรากฏข้อเท็จจริงว่านายกบได้ส่งมอบรถยนต์ของนายปราณีที่ตนยึดไว้ให้แก่นางสาวบัวเพื่อเป็นประกันการชำระหนี้ดังกล่าวด้วย โดยที่นายปราณีไม่ทราบเรื่องแต่อย่างใด",
+    issues:[
+      {
+        label:"ประเด็นที่ 1 — นายกบมีสิทธิยึดหน่วงรถยนต์ของนายปราณีไว้ได้หรือไม่",
+        issueQ:"ประเด็นแรกที่ต้องวินิจฉัยคือเรื่องใด",
+        issueOpts:["นายกบมีสิทธิยึดหน่วงรถยนต์ของนายปราณีไว้จนกว่าจะได้รับชำระค่าจ้างหรือไม่","สัญญาจ้างซ่อมรถเป็นโมฆะหรือไม่","นายปราณีผิดนัดชำระหนี้แล้วหรือยัง","นายกบมีสิทธิขายทอดตลาดรถยนต์ได้ทันทีหรือไม่"],
+        issueAns:0,
+        issueFeedback:"ถูกต้อง — ข้อเท็จจริงคือนายกบครอบครองรถของนายปราณีอยู่และมีหนี้ค่าจ้างซ่อมค้างชำระ จึงต้องพิจารณาว่าเข้าเกณฑ์สิทธิยึดหน่วงหรือไม่",
+        ruleQ:"ควรใช้มาตราใดในการวินิจฉัย",
+        ruleOpts:["ม.241 สิทธิยึดหน่วง","ม.226 ช่วงสิทธิ","ม.349 แปลงหนี้ใหม่","ม.233 สิทธิเรียกร้องของลูกหนี้"],
+        ruleAns:0,
+        ruleFeedback:"ถูกต้อง — ม.241 ให้สิทธิผู้ครองทรัพย์สินของผู้อื่นซึ่งมีหนี้อันเป็นคุณประโยชน์เกี่ยวกับทรัพย์สินนั้น ยึดหน่วงทรัพย์สินไว้จนกว่าจะได้รับชำระหนี้",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["นายกบครอบครองรถของนายปราณีโดยชอบ (รับมาซ่อม) และมีหนี้ค่าจ้าง 50,000 บาทอันเป็นคุณประโยชน์เกี่ยวกับรถคันนั้นโดยตรง และหนี้ค่าจ้างถึงกำหนดชำระแล้ว จึงเข้าองค์ประกอบ ม.241 ครบถ้วน","นายกบไม่มีสิทธิยึดหน่วงเพราะหนี้ยังไม่ถึงกำหนดชำระ","นายกบไม่มีสิทธิยึดหน่วงเพราะไม่ได้ครอบครองรถ","สิทธิยึดหน่วงใช้ได้เฉพาะอสังหาริมทรัพย์เท่านั้น"],
+        appAns:0,
+        appFeedback:"ถูกต้อง — นายกบครอบครองรถยนต์ของนายปราณีโดยชอบด้วยกฎหมาย (รับมาซ่อม) หนี้ค่าจ้างซ่อม 50,000 บาทเป็นคุณประโยชน์แก่นายกบเกี่ยวกับรถคันที่ครอบครองนั้นโดยตรง และหนี้ถึงกำหนดชำระแล้วเมื่อนายปราณีมาขอรับรถ จึงครบองค์ประกอบตาม ม.241",
+        concQ:"สรุปผลของประเด็นนี้ควรเป็นอย่างไร",
+        concOpts:["นายกบมีสิทธิยึดหน่วงรถยนต์ของนายปราณีไว้ได้จนกว่าจะได้รับชำระค่าจ้างครบถ้วน","นายกบไม่มีสิทธิยึดหน่วงเลย ต้องคืนรถทันที","นายกบมีสิทธิยึดหน่วงได้เพียงครึ่งคัน","นายกบต้องฟ้องศาลก่อนจึงจะยึดหน่วงได้"],
+        concAns:0,
+        concFeedback:"สรุป: นายกบครอบครองรถของนายปราณีโดยชอบและมีหนี้ค่าจ้างซ่อมอันเป็นคุณประโยชน์เกี่ยวกับรถคันนั้นซึ่งถึงกำหนดชำระแล้ว จึงเข้าหลักเกณฑ์ ม.241 ครบถ้วน นายกบจึงมีสิทธิยึดหน่วงรถยนต์ไว้จนกว่านายปราณีจะชำระค่าจ้าง 50,000 บาทให้ครบถ้วน"
+      },
+      {
+        label:"ประเด็นที่ 2 — ผลของการที่นายกบส่งมอบรถที่ยึดหน่วงไว้ให้นางสาวบัว",
+        issueQ:"ประเด็นที่สองที่ต้องวินิจฉัยคือเรื่องใด",
+        issueOpts:["นายกบมีสิทธินำรถที่ยึดหน่วงไว้ไปส่งมอบให้นางสาวบัวเป็นประกันหนี้ได้หรือไม่ เมื่อเปลี่ยนตัวเจ้าหนี้แล้ว","นางสาวบัวต้องคืนเงิน 30,000 บาทให้นายกบหรือไม่","สัญญาระหว่างนายกบกับนางสาวบัวเป็นโมฆียะหรือไม่","นายปราณีต้องชำระหนี้ให้ใครระหว่างนายกบกับนางสาวบัว"],
+        issueAns:0,
+        issueFeedback:"ถูกต้อง — เมื่อมีการเปลี่ยนตัวเจ้าหนี้จากนายกบเป็นนางสาวบัว (พร้อมกับตัวหนี้เปลี่ยนเป็นหนี้กู้ยืม) ต้องพิจารณาว่าสิทธิยึดหน่วงเดิมของนายกบโอนตามไปเป็นของนางสาวบัวได้หรือไม่ และการส่งมอบรถให้นางสาวบัวชอบด้วยกฎหมายหรือไม่",
+        ruleQ:"ควรใช้มาตราใดในการวินิจฉัย",
+        ruleOpts:["ม.349 การแปลงหนี้ใหม่ (เปลี่ยนสาระสำคัญแห่งหนี้) ประกอบหลักที่ว่าสิทธิยึดหน่วงเป็นสิทธิเฉพาะตัวผูกกับหนี้เดิม","ม.372 ความเสี่ยงภัยในสัญญาต่างตอบแทน","ม.202 พ้นวิสัยก่อนเลือก","ม.223 ผู้เสียหายมีส่วนผิด"],
+        ruleAns:0,
+        ruleFeedback:"ถูกต้อง — ข้อเท็จจริงคือมีการเปลี่ยนทั้งตัวเจ้าหนี้และเปลี่ยนมูลหนี้เดิม(ค่าจ้างซ่อม)ไปเป็นหนี้ใหม่(กู้ยืมเงิน) ซึ่งเป็นการเปลี่ยนสาระสำคัญแห่งหนี้ อันเป็นลักษณะของการแปลงหนี้ใหม่ตาม ม.349 ซึ่งมีผลให้หนี้เดิมระงับไปสิ้นเชิง",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["เมื่อนายกบ นางสาวบัว และนายปราณี ตกลงเปลี่ยนมูลหนี้ค่าจ้างซ่อมเดิมเป็นหนี้กู้ยืมเงินรายใหม่ระหว่างนายปราณีกับนางสาวบัว หนี้ค่าจ้างซ่อมเดิมย่อมระงับไปโดยแปลงหนี้ใหม่ เมื่อหนี้เดิมระงับ สิทธิยึดหน่วงซึ่งเป็นเพียงมาตรการคุ้มครองหนี้เดิมของนายกบก็ย่อมระงับไปด้วย นายกบจึงไม่มีสิทธิใด ๆ เหลืออยู่ในรถคันนั้นที่จะส่งมอบให้นางสาวบัวเป็นประกันได้อีก","สิทธิยึดหน่วงเป็นทรัพยสิทธิที่ติดไปกับตัวรถเสมอ ไม่ว่าหนี้จะเปลี่ยนไปอย่างไร นายกบจึงส่งมอบให้บัวได้เสมอ","การแปลงหนี้ใหม่ไม่ทำให้หนี้เดิมระงับ สิทธิยึดหน่วงจึงยังคงอยู่กับนายกบต่อไป","นางสาวบัวได้กรรมสิทธิ์ในรถยนต์ทันทีที่รับมอบจากนายกบ"],
+        appAns:0,
+        appFeedback:"ถูกต้อง — การแปลงหนี้ใหม่ตาม ม.349 มีผลให้หนี้เดิม (ค่าจ้างซ่อม) ระงับสิ้นไปโดยสิ้นเชิง เกิดหนี้ใหม่ (กู้ยืมเงิน) ขึ้นแทนที่ สิทธิยึดหน่วงของนายกบตาม ม.241 เป็นสิทธิที่ผูกอยู่กับหนี้ค่าจ้างซ่อมเดิมโดยเฉพาะ เมื่อหนี้เดิมระงับไปแล้ว สิทธิยึดหน่วงนั้นก็ย่อมระงับตามไปด้วย นายกบจึงไม่มีสิทธิเหลืออยู่ในรถที่จะส่งมอบให้นางสาวบัวเป็นประกันของหนี้ใหม่ได้อีก",
+        concQ:"สรุปผลของประเด็นนี้ควรเป็นอย่างไร",
+        concOpts:["การที่นายกบส่งมอบรถให้นางสาวบัวเป็นประกันหนี้ใหม่ไม่ชอบด้วยกฎหมาย เพราะสิทธิยึดหน่วงเดิมระงับไปพร้อมกับหนี้เดิมแล้ว","นางสาวบัวได้สิทธิยึดหน่วงรถต่อจากนายกบโดยอัตโนมัติ","นายปราณีต้องยอมให้นางสาวบัวยึดรถต่อไปเสมอเพราะตนยินยอมทำสัญญาแปลงหนี้ใหม่แล้ว","รถยนต์ตกเป็นกรรมสิทธิ์ของนางสาวบัวทันที"],
+        concAns:0,
+        concFeedback:"สรุป: เมื่อมีการแปลงหนี้ใหม่จากหนี้ค่าจ้างซ่อมเป็นหนี้กู้ยืมเงินตาม ม.349 หนี้เดิมย่อมระงับสิ้นไป สิทธิยึดหน่วงรถยนต์ของนายกบซึ่งผูกอยู่กับหนี้ค่าจ้างซ่อมเดิมโดยเฉพาะจึงระงับไปด้วย การที่นายกบนำรถไปส่งมอบให้นางสาวบัวเพื่อเป็นประกันหนี้กู้ยืมรายใหม่จึงไม่มีสิทธิยึดหน่วงใดรองรับ แม้นายปราณีจะยินยอมในการทำสัญญาแปลงหนี้ใหม่ก็ไม่ได้หมายความว่ายินยอมให้นำรถของตนไปเป็นประกันหนี้ใหม่ด้วยแต่อย่างใด"
+      }
+    ]
+  }
+];
+
+
+
+const SUMMARY_TOPICS = [
+  {
+    id: "s1_intro",
+    label: "1. ความเบื้องต้น — ความหมาย วัตถุแห่งหนี้",
+    cat: "general",
+    html: `
+<h4 id="s1-h1">ความหมายของหนี้ (ม.194)</h4>
+<p>"หนี้" คือความสัมพันธ์ทางกฎหมายระหว่างบุคคลสองฝ่าย ฝ่ายหนึ่งเรียกว่า <b>เจ้าหนี้</b> มีสิทธิเรียกร้องให้อีกฝ่ายหนึ่งเรียกว่า <b>ลูกหนี้</b> กระทำการ งดเว้นกระทำการ หรือส่งมอบทรัพย์สินให้แก่ตนเองได้ ด้วยอำนาจแห่งมูลหนี้ เจ้าหนี้ย่อมมีสิทธิเรียกให้ลูกหนี้ชำระหนี้ได้ — การชำระหนี้ด้วยงดเว้นการอันใดอันหนึ่งก็ย่อมมีได้ (ม.194)</p>
+<p>องค์ประกอบของหนี้มี 4 อย่าง: (1) เจ้าหนี้ (2) ลูกหนี้ (3) วัตถุแห่งหนี้ (4) ระยะเวลาชำระหนี้ และความแตกต่างสำคัญคือ <b>บุคคลสิทธิ</b> (สิทธิเรียกร้องต่อบุคคลเฉพาะราย) กับ <b>ทรัพยสิทธิ</b> (สิทธิเหนือทรัพย์สินที่ยันบุคคลทั่วไปได้)</p>
+
+<h4 id="s1-h2">วัตถุแห่งหนี้ 3 ประเภท</h4>
+<p>วัตถุแห่งหนี้คือสิ่งที่เจ้าหนี้เรียกให้ลูกหนี้ชำระ แบ่งเป็น: (1) การกระทำการ (2) การงดเว้นกระทำการ (3) การส่งมอบทรัพย์สิน/โอนกรรมสิทธิ์</p>
+
+<h4 id="s1-h3">ทรัพย์ทั่วไป vs ทรัพย์เฉพาะสิ่ง (ม.195)</h4>
+<p><b>ทรัพย์ทั่วไป</b> (Generic Thing) คือทรัพย์ที่ระบุไว้แต่เพียงเป็นประเภท หาของมาแทนกันได้ ส่วน <b>ทรัพย์เฉพาะสิ่ง</b> (Specific Thing) คือทรัพย์ที่ถูกเจาะจงตัวตนแน่นอนแล้ว</p>
+<p>เมื่อทรัพย์เป็นวัตถุแห่งหนี้ระบุแต่เพียงเป็นประเภท และไม่อาจกำหนดชนิดจากสภาพนิติกรรมหรือเจตนาคู่กรณีได้ → ลูกหนี้ต้องส่งมอบทรัพย์ชนิดปานกลาง (ม.195 ว.1)</p>
+<p>ทรัพย์ทั่วไปจะกลายเป็นทรัพย์เฉพาะสิ่งได้ 2 ทาง:</p>
+<ul>
+<li>ลูกหนี้ได้กระทำการอันจำเป็นเพื่อส่งมอบเสร็จสิ้นแล้ว (เช่น ชั่ง ตวง วัด คัดแยกออกมาเตรียมส่ง)</li>
+<li>ลูกหนี้กำหนดทรัพย์นั้นด้วยความยินยอมของเจ้าหนี้ (ม.195 ว.2)</li>
+</ul>
+<p><b>ผลสำคัญ:</b> เมื่อกลายเป็นทรัพย์เฉพาะสิ่งแล้ว ถ้าสูญหายโดยโทษลูกหนี้ไม่ได้ ลูกหนี้จะหลุดพ้นจากการชำระหนี้ (ม.219) ไม่ต้องหาของใหม่มาทดแทน</p>
+
+<div class="study-exam-box">
+<h5>⚠️ ตัวอย่างที่อาจารย์เน้น</h5>
+<p><b>กรณีซื้อจระเข้ระบุฟาร์ม</b> — สัญญาซื้อจระเข้จากฟาร์มเฉพาะ ถ้าน้ำท่วมฟาร์มจระเข้หายหมด → ต้องวินิจฉัยว่าขณะนั้นเป็นทรัพย์ทั่วไปหรือทรัพย์เฉพาะสิ่ง ถ้ายังเป็นทรัพย์ทั่วไป (ยังไม่คัดตัวมาส่งมอบ) → หนี้ไม่พ้นวิสัย ต้องหาจระเข้มาส่ง แต่ถ้ากลายเป็นทรัพย์เฉพาะสิ่งแล้ว → พิจารณา ม.219 ต่อไป อาจารย์เน้น ม.372 เป็นพิเศษ</p>
+</div>
+
+<h4 id="s1-h4">หนี้เงินตรา (ม.196-197)</h4>
+<p>หนี้ที่แสดงเป็นเงินตราต่างประเทศ ลูกหนี้มีสิทธิเลือกที่จะชำระเป็นเงินไทยได้ตามอัตราแลกเปลี่ยน ณ สถานที่และเวลาที่ใช้เงิน (ม.196) แต่หากกำหนดไว้ว่าต้องชำระเป็นเงินตราต่างประเทศเท่านั้น ก็ต้องปฏิบัติตามนั้น (ม.196 ว.2)</p>
+
+<h4 id="s1-h5">หนี้เลือกกระทำ (ม.198-202)</h4>
+<p>กรณีที่มีวัตถุแห่งหนี้หลายอย่างแต่ต้องเลือกทำเพียงอย่างเดียว <b>สิทธิเลือกตกเป็นของ "ลูกหนี้"</b> เว้นแต่จะตกลงเป็นอย่างอื่น (ม.198) เมื่อแสดงเจตนาเลือกแล้ว ให้ถือว่าหนี้นั้นมีเพียงอย่างเดียวมาตั้งแต่ต้น (ม.199)</p>
+<p><b>จุดที่ต้องระวัง — พ้นวิสัย "ก่อน" การเลือก (ม.202):</b></p>
+<ul>
+<li>พ้นวิสัยเพราะอุบัติเหตุ → จำกัดหนี้เหลือเพียงทางเลือกที่ทำได้ (ตัดชอยส์ที่พังทิ้ง)</li>
+<li>พ้นวิสัยเพราะความผิดของฝ่ายที่ <b>"ไม่มี"</b> สิทธิเลือก → สิทธิเลือกไม่ถูกจำกัดลง ฝ่ายที่มีสิทธิเลือกยังสามารถเลือกวัตถุที่พ้นวิสัยไปแล้วได้</li>
+</ul>
+
+<div class="study-exam-box">
+<h5>📝 กรอบโจทย์สอบ — หนี้เลือกกระทำ</h5>
+<p>ข้อสอบมักถามว่า: ก. ตกลงซื้อสัตว์เลี้ยงจาก ข. โดยให้ ค. (บุคคลภายนอก) เป็นผู้เลือก ก่อนที่ ค. จะเลือก ก. ขับรถชนสัตว์ตัวหนึ่งตาย → ใครมีสิทธิเลือก และผลเป็นอย่างไร?</p>
+<p><b>แนววิเคราะห์:</b> ม.201 กำหนดให้บุคคลภายนอกเลือกโดยแสดงเจตนาแก่ลูกหนี้ ถ้าบุคคลภายนอกไม่อาจเลือก สิทธิเลือกตกไปอยู่แก่ลูกหนี้ เมื่อ ก. (ฝ่ายไม่มีสิทธิเลือก) ทำให้สัตว์ตัวหนึ่งตาย → ตาม ม.202 ฝ่ายที่มีสิทธิเลือกยังเลือกตัวที่ตายได้ → ข. อาจเลือกส่งมอบ "ตัวที่ตาย" เรียกราคาเต็มได้</p>
+</div>
+`,
+    toc: [
+      {id:"s1-h1", level:"major", text:"ความหมายของหนี้ (ม.194)"},
+      {id:"s1-h2", level:"item", text:"วัตถุแห่งหนี้ 3 ประเภท"},
+      {id:"s1-h3", level:"major", text:"ทรัพย์ทั่วไป vs ทรัพย์เฉพาะสิ่ง (ม.195)"},
+      {id:"s1-h4", level:"item", text:"หนี้เงินตรา (ม.196-197)"},
+      {id:"s1-h5", level:"major", text:"หนี้เลือกกระทำ (ม.198-202)"}
+    ]
+  },
+  {
+    id: "s2_default",
+    label: "2. ผลแห่งหนี้ — ลูกหนี้ผิดนัด / เจ้าหนี้ผิดนัด",
+    cat: "default",
+    html: `
+<h4 id="s2-h1">ลูกหนี้ผิดนัด (ม.204)</h4>
+<p>การพิจารณาว่าลูกหนี้ผิดนัดหรือไม่ ให้ดูที่ <b>"กำหนดเวลาชำระหนี้"</b> เป็นหลัก:</p>
+<ul>
+<li><b>กำหนดไว้แน่นอนตามวันปฏิทิน</b> → ลูกหนี้ผิดนัดทันทีที่เลยกำหนดโดยไม่ต้องเตือน (ม.204 ว.2)</li>
+<li><b>ไม่ได้กำหนดไว้แน่นอน</b> หรือกำหนดเวลาให้อนุมานจากพฤติการณ์ → เจ้าหนี้ต้อง <b>"เตือน"</b> ก่อนจึงจะถือว่าผิดนัด (ม.204 ว.1)</li>
+</ul>
+<p>ข้อแก้ตัวของลูกหนี้ (ม.205): ตราบใดการชำระหนี้ยังมิได้กระทำลงเพราะพฤติการณ์อันใดอันหนึ่งซึ่งลูกหนี้ไม่ต้องรับผิดชอบ ตราบนั้นลูกหนี้ยังหาได้ชื่อว่าผิดนัดไม่ แต่ถ้าเป็นหนี้เงิน ลูกหนี้จะอ้างว่า "ไม่มีเงิน" เพื่อไม่ผิดนัดไม่ได้</p>
+
+<h4 id="s2-h2">ความรับผิดที่เพิ่มขึ้นระหว่างลูกหนี้ผิดนัด (ม.217) ★★★</h4>
+<p>นี่คือจุดที่สำคัญมาก — ลูกหนี้ต้องรับผิดชอบในความเสียหายที่เกิดจากความประมาทเลินเล่อระหว่างที่ตนผิดนัด <b>ทั้งต้องรับผิดในการที่การชำระหนี้กลายเป็นพ้นวิสัยเพราะอุบัติเหตุที่เกิดระหว่างผิดนัดด้วย</b> เว้นแต่ความเสียหายนั้นจะเกิดขึ้นอยู่ดีแม้ชำระหนี้ทันเวลา</p>
+
+<div class="study-exam-box">
+<h5>⚠️ ตัวอย่างที่อาจารย์เน้น — ม.217</h5>
+<p><b>กรณียืมรถแล้วรถหายเพราะพายุ:</b> ถ้าลูกหนี้ผิดนัดคืนรถ → ต้องรับผิดแม้รถจะหายเพราะพายุ (อุบัติเหตุ) เพราะเกิดระหว่างผิดนัด แต่ถ้าพิสูจน์ได้ว่าพายุจะทำลายรถเสียหายอยู่ดีแม้ส่งมอบทันเวลา (เช่น พายุถล่มบ้านเจ้าหนี้ด้วย) → ลูกหนี้อาจหลุดพ้นได้</p>
+<p><b>กรณีซื้อไก่ 50 ตัว:</b> ลูกหนี้ผิดนัดส่งมอบไก่ ระหว่างผิดนัดเกิดโรคระบาด ไก่ตายหมด → ลูกหนี้ต้องรับผิดตาม ม.217 แต่ถ้าไก่ตายเพราะโรคระบาดทั่วประเทศ (เกิดขึ้นอยู่ดีแม้ส่งทันเวลา) → อาจพ้นผิดได้</p>
+</div>
+
+<h4 id="s2-h3">สิทธิบอกปัดไม่รับชำระหนี้ (ม.216)</h4>
+<p>ถ้าโดยเหตุผิดนัด การชำระหนี้กลายเป็นอันไร้ประโยชน์แก่เจ้าหนี้ → เจ้าหนี้จะบอกปัดไม่รับชำระหนี้และเรียกค่าสินไหมทดแทนเพื่อการไม่ชำระหนี้ก็ได้</p>
+
+<h4 id="s2-h4">เจ้าหนี้ผิดนัด (ม.207-212)</h4>
+<p>เกิดขึ้นเมื่อ:</p>
+<ul>
+<li>ลูกหนี้ขอปฏิบัติการชำระหนี้โดยชอบแล้ว แต่เจ้าหนี้ปฏิเสธไม่รับโดยปราศจากมูลเหตุ (ม.207)</li>
+<li>เจ้าหนี้ไม่ทำการอันใดตามที่ตกลงกันภายในเวลาที่กำหนดเพื่อให้ลูกหนี้ปฏิบัติการชำระหนี้ (ม.209)</li>
+<li>ในสัญญาต่างตอบแทน เจ้าหนี้พร้อมรับของแต่ <b>"ไม่เสนอชำระหนี้ตอบแทน"</b> เช่น ไม่ยอมจ่ายเงิน (ม.210)</li>
+</ul>
+<p><b>ผลของเจ้าหนี้ผิดนัด:</b> ลูกหนี้จะหลุดพ้นจากความรับผิดในความล่าช้า (ม.330) และหากทรัพย์เสียหายในระหว่างนี้โดยลูกหนี้ไม่ผิด ลูกหนี้ก็หลุดพ้นจากหนี้ได้</p>
+
+<h4 id="s2-h5">ดอกเบี้ยผิดนัด (ม.224-225)</h4>
+<p>หนี้เงิน: ลูกหนี้ต้องเสียดอกเบี้ยระหว่างผิดนัดอัตราร้อยละเจ็ดครึ่งต่อปี เว้นแต่จะมีอัตราตกลงกันไว้สูงกว่า (ม.224) ถ้าเจ้าหนี้อาจจะเรียกค่าเสียหายอื่นได้ ก็ไม่ถูกห้ามเพราะเหตุที่มีดอกเบี้ยแล้ว (ม.225)</p>
+`,
+    toc: [
+      {id:"s2-h1", level:"major", text:"ลูกหนี้ผิดนัด (ม.204)"},
+      {id:"s2-h2", level:"major", text:"ความรับผิดที่เพิ่มขึ้น (ม.217) ★★★"},
+      {id:"s2-h3", level:"item", text:"สิทธิบอกปัดไม่รับชำระหนี้ (ม.216)"},
+      {id:"s2-h4", level:"major", text:"เจ้าหนี้ผิดนัด (ม.207-212)"},
+      {id:"s2-h5", level:"item", text:"ดอกเบี้ยผิดนัด (ม.224-225)"}
+    ]
+  },
+  {
+    id: "s3_imposs",
+    label: "3. การชำระหนี้กลายเป็นพ้นวิสัย / ผลในสัญญาต่างตอบแทน",
+    cat: "impossibility",
+    html: `
+<h4 id="s3-h1">หลักทั่วไป — พ้นวิสัย (ม.218-219)</h4>
+<p>การชำระหนี้ "ตกเป็นพ้นวิสัย" หมายถึงลูกหนี้ไม่สามารถชำระหนี้ได้อย่างแท้จริง ไม่ใช่แค่ยากลำบากหรือขาดทุน ต้องเป็นการพ้นวิสัยถาวร ไม่ใช่ชั่วคราว และเหตุพ้นวิสัยต้องเกิดขึ้นภายหลังก่อหนี้แล้ว (ถ้าเกิดก่อน → นิติกรรมตกเป็นโมฆะตาม ม.150)</p>
+<ul>
+<li><b>ม.218</b> — พ้นวิสัยเพราะพฤติการณ์ที่ลูกหนี้ <u>ต้อง</u> รับผิดชอบ → ลูกหนี้ต้องใช้ค่าสินไหมทดแทน</li>
+<li><b>ม.219</b> — พ้นวิสัยเพราะพฤติการณ์ที่ลูกหนี้ <u>ไม่ต้อง</u> รับผิดชอบ → ลูกหนี้หลุดพ้นจากการชำระหนี้</li>
+</ul>
+
+<h4 id="s3-h2">ผลในสัญญาต่างตอบแทน (ม.369-372) ★★★</h4>
+<p>ม.372 เป็นมาตราที่อาจารย์เน้นเป็นพิเศษ: ในสัญญาต่างตอบแทน</p>
+<ul>
+<li><b>ว.1:</b> พ้นวิสัยเพราะพฤติการณ์ที่ลูกหนี้ไม่ต้องรับผิดชอบ → ลูกหนี้หลุดพ้น แต่ <b>ไม่มีสิทธิได้รับชำระหนี้ตอบแทนจากอีกฝ่าย</b> (ความเสี่ยงภัยตกแก่ลูกหนี้)</li>
+<li><b>ว.2:</b> ถ้าพ้นวิสัยเกิดขึ้นระหว่างที่ <b>เจ้าหนี้ผิดนัดไม่รับชำระหนี้</b> → ลูกหนี้ยังคงมีสิทธิได้รับชำระหนี้ตอบแทน (ความเสี่ยงภัยกลับไปตกแก่เจ้าหนี้)</li>
+</ul>
+
+<div class="study-exam-box">
+<h5>📝 กรอบโจทย์สอบ — พ้นวิสัย + สัญญาต่างตอบแทน</h5>
+<p><b>ตุ๊กตาอาจารย์:</b> ก. ซื้อจระเข้จากฟาร์มของ ข. โดยระบุฟาร์ม ต่อมาน้ำท่วมฟาร์ม จระเข้หนีหายหมด — ต้องวินิจฉัย:</p>
+<ul>
+<li>ขณะน้ำท่วม ทรัพย์ยังเป็นทรัพย์ทั่วไปหรือเป็นทรัพย์เฉพาะสิ่งแล้ว? (ม.195 ว.2)</li>
+<li>ถ้ายังเป็นทรัพย์ทั่วไป → หนี้ไม่พ้นวิสัย ข.ต้องหาจระเข้มาส่ง</li>
+<li>ถ้าเป็นทรัพย์เฉพาะสิ่งแล้ว → พ้นวิสัยเพราะเหตุที่ ข. ไม่ต้องรับผิดชอบ → ข. หลุดพ้น (ม.219) แต่ไม่มีสิทธิได้รับราคาค่าจระเข้จาก ก. (ม.372 ว.1)</li>
+<li>แต่ถ้า ก. ผิดนัดไม่มารับจระเข้ก่อนน้ำท่วม → ข. ยังมีสิทธิได้รับราคา (ม.372 ว.2)</li>
+</ul>
+</div>
+
+<h4 id="s3-h3">แยก 3 กลุ่ม: ม.217 vs ม.218 vs ม.219</h4>
+<p>ต้องแยกพิจารณาออกเป็น 3 กลุ่ม:</p>
+<ul>
+<li><b>ม.217</b> — พ้นวิสัยเกิดเพราะ <u>อุบัติเหตุระหว่างลูกหนี้ผิดนัด</u> → ลูกหนี้รับผิดเสมอ (เว้นแต่เสียหายอยู่ดีแม้ชำระทัน)</li>
+<li><b>ม.218</b> — พ้นวิสัยเกิดเพราะ <u>พฤติการณ์ที่ลูกหนี้ต้องรับผิดชอบ</u> → ลูกหนี้ต้องใช้ค่าสินไหมทดแทน</li>
+<li><b>ม.219</b> — พ้นวิสัยเกิดเพราะ <u>พฤติการณ์ที่ลูกหนี้ไม่ต้องรับผิดชอบ</u> → ลูกหนี้หลุดพ้น</li>
+</ul>
+`,
+    toc: [
+      {id:"s3-h1", level:"major", text:"หลักทั่วไป (ม.218-219)"},
+      {id:"s3-h2", level:"major", text:"ผลในสัญญาต่างตอบแทน (ม.372) ★★★"},
+      {id:"s3-h3", level:"major", text:"แยก 3 กลุ่ม: ม.217 / 218 / 219"}
+    ]
+  },
+  {
+    id: "s4_enforce",
+    label: "4. การบังคับชำระหนี้ / ค่าสินไหมทดแทน",
+    cat: "enforce",
+    html: `
+<h4 id="s4-h1">สิทธิร้องขอให้ศาลบังคับชำระหนี้ (ม.213-214)</h4>
+<p>เมื่อลูกหนี้ไม่ชำระหนี้ เจ้าหนี้มีสิทธิฟ้องร้องต่อศาลเพื่อขอให้บังคับชำระหนี้โดยเฉพาะเจาะจงได้ (ม.213) ซึ่งหากสภาพแห่งหนี้ไม่เปิดช่องให้บังคับได้โดยตรง (เช่น หนี้กระทำการที่ต้องใช้ความสามารถเฉพาะตัว) ศาลอาจสั่งให้บุคคลภายนอกทำแทนโดยให้ลูกหนี้เสียค่าใช้จ่าย หรืออาจใช้คำพิพากษาแทนการแสดงเจตนา</p>
+<p>เจ้าหนี้มีสิทธิที่จะให้ชำระหนี้จาก <b>ทรัพย์สินทั้งหมด</b> ของลูกหนี้ (ม.214) — นี่คือหลัก "ทรัพย์สินทั้งหมดของลูกหนี้เป็นหลักประกันหนี้" (General Lien)</p>
+
+<h4 id="s4-h2">ค่าสินไหมทดแทน (ม.222-223)</h4>
+<p>ม.222 ว.1: ค่าสินไหมทดแทนได้แก่เรียกค่าเสียหายเช่นที่ตามปกติย่อมเกิดขึ้นแต่การไม่ชำระหนี้นั้น (ค่าเสียหายปกติ)</p>
+<p>ม.222 ว.2: เจ้าหนี้จะเรียกค่าสินไหมทดแทนได้แม้กระทั่งเพื่อความเสียหายอันเกิดแต่ <b>พฤติการณ์พิเศษ</b> หากว่าคู่กรณีที่เกี่ยวข้องได้คาดเห็นหรือควรจะได้คาดเห็นพฤติการณ์เช่นนั้นล่วงหน้าก่อนแล้ว</p>
+<p>ม.223: ถ้าฝ่ายผู้เสียหายมีส่วนทำความผิดก่อให้เกิดความเสียหายด้วย → จำนวนค่าสินไหมทดแทนต้องอาศัยพฤติการณ์เป็นประมาณ (หลัก contributory negligence)</p>
+`,
+    toc: [
+      {id:"s4-h1", level:"major", text:"สิทธิร้องขอบังคับชำระหนี้ (ม.213-214)"},
+      {id:"s4-h2", level:"major", text:"ค่าสินไหมทดแทน (ม.222-223)"}
+    ]
+  },
+  {
+    id: "s5_subrog",
+    label: "5. การเข้ารับแทนที่ — ช่วงสิทธิ / ช่วงทรัพย์",
+    cat: "subrogation",
+    html: `
+<h4 id="s5-h1">การรับช่วงสิทธิ (ม.226-227, 229-230)</h4>
+<p>การเปลี่ยนตัวเจ้าหนี้ <b>โดยผลของกฎหมาย</b> เกิดขึ้นเมื่อบุคคลภายนอกที่มีส่วนได้เสียตามกฎหมายได้เข้าชำระหนี้ให้แก่เจ้าหนี้แทนลูกหนี้ บุคคลผู้รับช่วงสิทธิชอบที่จะใช้สิทธิทั้งหลายที่เจ้าหนี้มีอยู่โดยมูลหนี้ รวมทั้งประกันแห่งหนี้นั้น ในนามของตนเอง (ม.226)</p>
+<p>เมื่อเจ้าหนี้ได้รับค่าสินไหมทดแทนเต็มตามราคาทรัพย์แล้ว → ลูกหนี้ย่อมเข้าสู่ฐานะเป็นผู้รับช่วงสิทธิของเจ้าหนี้ด้วยอำนาจกฎหมาย (ม.227)</p>
+<p>ตัวอย่าง: บริษัทประกันจ่ายค่าสินไหมทดแทนแทนลูกหนี้ → บริษัทประกันเข้ารับช่วงสิทธิไล่เบี้ยเอากับลูกหนี้ได้</p>
+
+<h4 id="s5-h2">การช่วงทรัพย์ (ม.228, 231-232)</h4>
+<p>การเปลี่ยนตัวทรัพย์ที่เป็นวัตถุแห่งหนี้ เกิดขึ้นเมื่อทรัพย์เดิมพ้นวิสัยส่งมอบ แต่ลูกหนี้ได้ของแทนหรือเงินค่าสินไหมทดแทนมาแทนที่ → เอาทรัพย์สินอันหนึ่งเข้าแทนที่ทรัพย์สินอีกอันหนึ่งในฐานะนิตินัยอย่างเดียวกัน (ม.226 ว.2)</p>
+
+<h4 id="s5-h3">ช่วงสิทธิ vs โอนสิทธิเรียกร้อง (ม.303)</h4>
+<p><b>ข้อแตกต่างสำคัญ:</b></p>
+<ul>
+<li>ช่วงสิทธิ → เกิดขึ้น <b>โดยผลของกฎหมาย</b> เฉพาะกรณีที่กฎหมายกำหนดไว้</li>
+<li>โอนสิทธิเรียกร้อง → เกิดจาก <b>ข้อสัญญา</b> ระหว่างเจ้าหนี้เดิมกับผู้รับโอน ต้องทำเป็นหนังสือ (ม.303) และต้องบอกกล่าวหรือได้รับความยินยอมจากลูกหนี้จึงจะยกขึ้นต่อสู้ลูกหนี้ได้ (ม.306)</li>
+</ul>
+`,
+    toc: [
+      {id:"s5-h1", level:"major", text:"การรับช่วงสิทธิ (ม.226-227)"},
+      {id:"s5-h2", level:"major", text:"การช่วงทรัพย์ (ม.228)"},
+      {id:"s5-h3", level:"major", text:"ช่วงสิทธิ vs โอนสิทธิเรียกร้อง"}
+    ]
+  },
+  {
+    id: "s6_protect",
+    label: "6. มาตรการคุ้มครองเจ้าหนี้ — ใช้สิทธิแทน / ฉ้อฉล / ยึดหน่วง",
+    cat: "protect",
+    html: `
+<h4 id="s6-h1">การใช้สิทธิเรียกร้องของลูกหนี้ (ม.233-236)</h4>
+<p>เมื่อลูกหนี้ขัดขืนไม่ยอมใช้สิทธิเรียกร้อง หรือเพิกเฉยไม่ใช้สิทธิเรียกร้อง เป็นเหตุให้เจ้าหนี้ต้องเสียประโยชน์ → เจ้าหนี้จะใช้สิทธิเรียกร้องนั้น <b>ในนามของตนเอง</b> แทนลูกหนี้เพื่อป้องกันสิทธิของตนในมูลหนี้นั้นก็ได้ เว้นแต่สิทธิเฉพาะตัวของลูกหนี้โดยแท้ (ม.233)</p>
+<p>เจ้าหนี้ใช้สิทธินี้ได้ <b>ทันทีโดยไม่ต้องขออนุญาตจากลูกหนี้</b> และหนี้ระหว่างลูกหนี้กับลูกหนี้ของลูกหนี้ต้องถึงกำหนดชำระแล้ว</p>
+
+<div class="study-exam-box">
+<h5>📝 กรอบโจทย์สอบ — ม.233</h5>
+<p><b>ตุ๊กตาอาจารย์:</b> ก. เป็นเจ้าหนี้เงินกู้ของ ข. ต่อมา ก. ทราบว่า ข. ถูกสลากกินแบ่งรัฐบาล แต่ ข. เพิกเฉยไม่ไปรับเงินรางวัล เพราะเห็นว่าเงินรางวัลไม่เพียงพอจะชำระหนี้ → ก. มีสิทธิใช้สิทธิเรียกร้องเงินรางวัลแทน ข. ได้ตาม ม.233 เพราะเรื่องเงินรางวัลไม่ใช่สิทธิเฉพาะตัวของ ข. โดยแท้</p>
+</div>
+
+<h4 id="s6-h2">การเพิกถอนการฉ้อฉล (ม.237-240) ★★★</h4>
+<p>เจ้าหนี้ชอบที่จะร้องขอให้ศาลเพิกถอนนิติกรรมใด ๆ อันลูกหนี้ได้กระทำลงทั้งรู้อยู่ว่าจะเป็นทางให้เจ้าหนี้เสียเปรียบ (ม.237) แยกเป็น:</p>
+<ul>
+<li><b>นิติกรรมมีค่าตอบแทน:</b> ผู้ได้ลาภงอกต้อง <b>รู้</b> ข้อความจริงนั้นด้วยจึงเพิกถอนได้</li>
+<li><b>นิติกรรมให้โดยเสน่หา:</b> เพียงลูกหนี้รู้ฝ่ายเดียวก็พอ (ไม่ต้องพิสูจน์ว่าผู้รับรู้)</li>
+</ul>
+<p><b>ความคุ้มครองบุคคลภายนอก (ม.238):</b> การเพิกถอนไม่กระทบถึงสิทธิของบุคคลภายนอกอันได้มาโดยสุจริตและเสียค่าตอบแทน <b>ก่อนฟ้องคดีขอเพิกถอน</b> แต่ถ้าได้ลาภงอกมาโดยเสน่หา แม้สุจริตก็ไม่ได้รับความคุ้มครอง</p>
+<p><b>อายุความ (ม.240):</b> 1 ปีนับแต่เจ้าหนี้รู้ต้นเหตุ หรือ 10 ปีนับแต่ทำนิติกรรม</p>
+
+<div class="study-exam-box">
+<h5>📝 กรอบโจทย์สอบ — ม.237-238</h5>
+<p>ก. เป็นเจ้าหนี้ของ ข. → ข. รู้ว่ามีหนี้อยู่ แต่โอนที่ดินให้ ค. → ค. โอนต่อให้ ง. ซึ่งสุจริตและเสียค่าตอบแทน ก่อนที่ ก. จะฟ้อง → ก. ฟ้องเพิกถอนการโอนจาก ค. ไปยัง ง. ได้หรือไม่?</p>
+<p><b>คำตอบ:</b> ไม่ได้ ง. ได้รับความคุ้มครองตาม ม.238 เพราะเป็นบุคคลภายนอกที่ได้สิทธิมาโดยสุจริตและเสียค่าตอบแทนก่อนฟ้องคดี</p>
+</div>
+
+<h4 id="s6-h3">สิทธิยึดหน่วง (ม.241-250)</h4>
+<p>ผู้ใดเป็นผู้ครองทรัพย์สินของผู้อื่น และมีหนี้อันเป็นคุณประโยชน์แก่ตนเกี่ยวด้วยทรัพย์สินซึ่งครองนั้น ผู้นั้นจะยึดหน่วงทรัพย์สินนั้นไว้จนกว่าจะได้ชำระหนี้ก็ได้ (ม.241)</p>
+<p><b>เงื่อนไข:</b> หนี้ต้องถึงกำหนดชำระแล้ว และการครอบครองต้องเริ่มมาโดยชอบด้วยกฎหมาย</p>
+<p><b>ข้อสังเกต:</b> เรื่อง <u>บุริมสิทธิ (ม.251-289)</u> อาจารย์ได้ระบุไว้อย่างชัดเจนว่า <b>ตัดออก ไม่นำมาออกข้อสอบปลายภาค</b></p>
+`,
+    toc: [
+      {id:"s6-h1", level:"major", text:"ใช้สิทธิเรียกร้องของลูกหนี้ (ม.233)"},
+      {id:"s6-h2", level:"major", text:"เพิกถอนการฉ้อฉล (ม.237-240) ★★★"},
+      {id:"s6-h3", level:"major", text:"สิทธิยึดหน่วง (ม.241)"}
+    ]
+  },
+  {
+    id: "s7_extinct",
+    label: "7. ความระงับแห่งหนี้ — 5 วิธี",
+    cat: "extinction",
+    html: `
+<h4 id="s7-h1">ภาพรวม — 5 เหตุความระงับแห่งหนี้</h4>
+<ul>
+<li><b>1. การชำระหนี้</b> (ม.314, 321, 331)</li>
+<li><b>2. การหักกลบลบหนี้</b> (ม.341)</li>
+<li><b>3. การแปลงหนี้ใหม่</b> (ม.349)</li>
+<li><b>4. การปลดหนี้</b> (ม.340)</li>
+<li><b>5. หนี้เกลื่อนกลืนกัน</b> (ม.353)</li>
+</ul>
+<p>ข้อสังเกต: <b>อายุความไม่ใช่เหตุระงับหนี้</b> เพียงทำให้เจ้าหนี้ฟ้องบังคับไม่ได้เท่านั้น หนี้ยังคงมีอยู่</p>
+
+<h4 id="s7-h2">การชำระหนี้ (ม.314-339)</h4>
+<p>บุคคลภายนอกจะเป็นผู้ชำระหนี้แทนก็ได้ เว้นแต่สภาพแห่งหนี้จะไม่เปิดช่อง (ม.314) การชำระหนี้ต้องทำให้แก่ตัวเจ้าหนี้หรือบุคคลผู้มีอำนาจรับชำระหนี้แทน (ม.315)</p>
+<p><b>ม.321 — การชำระหนี้อย่างอื่น:</b> ถ้าเจ้าหนี้ยอมรับการชำระหนี้อย่างอื่นแทนการชำระหนี้ที่ตกลงไว้ หนี้นั้นก็ระงับสิ้นไป</p>
+<p><b>ม.331 — วางทรัพย์:</b> ถ้าเจ้าหนี้บอกปัดไม่ยอมรับชำระหนี้ หรือไม่สามารถรับชำระหนี้ได้ หากลูกหนี้วางทรัพย์ไว้เพื่อประโยชน์แก่เจ้าหนี้ ลูกหนี้ก็หลุดพ้นจากหนี้ได้</p>
+
+<h4 id="s7-h3">การปลดหนี้ (ม.340)</h4>
+<p>การแสดงเจตนาสละสิทธิเรียกร้อง ถ้าหนี้เดิมมีหลักฐานเป็นหนังสือ → การปลดหนี้ก็ต้องทำเป็นหนังสือหรือเวนคืนเอกสารที่เป็นหลักฐานด้วย</p>
+
+<h4 id="s7-h4">การหักกลบลบหนี้ (ม.341-348)</h4>
+<p>เงื่อนไข: (1) หนี้ต่างราย (ต่างฝ่ายต่างเป็นหนี้กัน) (2) มีวัตถุเดียวกัน (3) ถึงกำหนดชำระ → ฝ่ายหนึ่งฝ่ายใดหักกลบลบหนี้ได้ ข้อยกเว้น: หนี้ที่ไม่อาจบังคับได้ตามกฎหมาย (เช่น หนี้ขาดอายุความ) ไม่สามารถนำมาหักกลบลบหนี้ได้ (ม.344)</p>
+
+<h4 id="s7-h5">การแปลงหนี้ใหม่ (ม.349-352)</h4>
+<p>เมื่อคู่กรณีตกลงเปลี่ยนสิ่งซึ่งเป็นสาระสำคัญแห่งหนี้ → หนี้เดิมระงับ เกิดหนี้ใหม่ขึ้นแทนที่ ต่างจากการโอนสิทธิเรียกร้องซึ่งหนี้เดิมยังคงอยู่</p>
+
+<div class="study-exam-box">
+<h5>📝 กรอบโจทย์สอบ — แปลงหนี้ใหม่ + ยึดหน่วง</h5>
+<p><b>ตุ๊กตาอาจารย์:</b> กบเป็นเจ้าของอู่ซ่อมรถ ปราณีนำรถมาซ่อม ค้างค่าจ้าง 50,000 บาท กบยึดหน่วงรถไว้ (ม.241) ต่อมากบ ปราณี บัว ตกลงแปลงหนี้ค่าจ้างซ่อมเป็นหนี้กู้ยืมเงินระหว่างปราณีกับบัว</p>
+<p><b>ผล:</b> หนี้ค่าจ้างเดิมระงับ (ม.349) → สิทธิยึดหน่วงซึ่งผูกอยู่กับหนี้เดิมก็ระงับไปด้วย → กบไม่มีสิทธิยึดรถไว้อีกต่อไป</p>
+</div>
+
+<h4 id="s7-h6">หนี้เกลื่อนกลืนกัน (ม.353)</h4>
+<p>เมื่อสิทธิและหน้าที่ตกมาอยู่กับบุคคลเดียวกัน หนี้ย่อมระงับสิ้นไป เช่น เอกเป็นเจ้าหนี้ของโท โทตายและเอกรับมรดกทั้งหมด → หนี้ระงับเพราะเกลื่อนกลืน</p>
+`,
+    toc: [
+      {id:"s7-h1", level:"major", text:"ภาพรวม — 5 เหตุระงับแห่งหนี้"},
+      {id:"s7-h2", level:"item", text:"การชำระหนี้ (ม.314-339)"},
+      {id:"s7-h3", level:"item", text:"การปลดหนี้ (ม.340)"},
+      {id:"s7-h4", level:"major", text:"การหักกลบลบหนี้ (ม.341-348)"},
+      {id:"s7-h5", level:"major", text:"การแปลงหนี้ใหม่ (ม.349-352)"},
+      {id:"s7-h6", level:"item", text:"หนี้เกลื่อนกลืนกัน (ม.353)"}
+    ]
+  },
+  {
+    id: "s8_transfer",
+    label: "8. การโอนสิทธิเรียกร้อง (ม.303-313)",
+    cat: "subrogation",
+    html: `
+<h4 id="s8-h1">หลักเกณฑ์การโอนสิทธิเรียกร้อง (ม.303-306)</h4>
+<p>สิทธิเรียกร้องจะพึงโอนกันได้ เว้นแต่สภาพแห่งสิทธินั้นเองจะไม่เปิดช่องให้โอนกันได้ (ม.303 ว.1) การโอนสิทธิเรียกร้อง <b>ต้องทำเป็นหนังสือ</b> จึงจะสมบูรณ์ (ม.306)</p>
+<p>การโอนสิทธิเรียกร้องจะยกขึ้นต่อสู้ลูกหนี้หรือบุคคลภายนอกได้ ต่อเมื่อได้ <b>บอกกล่าวการโอนไปยังลูกหนี้</b> หรือลูกหนี้ยินยอมด้วยในการโอนนั้น การบอกกล่าวหรือความยินยอมนี้ต้องทำเป็นหนังสือ (ม.306)</p>
+`,
+    toc: [
+      {id:"s8-h1", level:"major", text:"หลักเกณฑ์การโอนสิทธิเรียกร้อง (ม.303-306)"}
+    ]
+  },
+  {
+    id: "s9_multi",
+    label: "9. ลูกหนี้และเจ้าหนี้หลายคน",
+    cat: "multi",
+    html: `
+<h4 id="s9-h1">หนี้แบ่งชำระได้ (ม.290)</h4>
+<p>ถ้าการชำระหนี้เป็นการอันจะแบ่งกันชำระได้ และมีบุคคลหลายคนเป็นลูกหนี้หรือเจ้าหนี้ → ลูกหนี้แต่ละคนต้องรับผิดเพียงส่วนเท่า ๆ กัน (ข้อสันนิษฐานเมื่อกรณีเป็นที่สงสัย)</p>
+
+<h4 id="s9-h2">ลูกหนี้ร่วม (ม.291-297) ★★★</h4>
+<p>ม.291: ถ้าบุคคลหลายคนจะต้องทำการชำระหนี้โดยทำนองซึ่งแต่ละคนจำต้องชำระหนี้ <b>สิ้นเชิง</b> → เจ้าหนี้จะเรียกชำระหนี้จากลูกหนี้แต่คนใดคนหนึ่งสิ้นเชิงหรือแต่โดยส่วนก็ได้ตามแต่จะเลือก แต่ลูกหนี้ทั้งปวงก็ยังคงต้องผูกพันอยู่จนกว่าหนี้จะได้ชำระเสร็จสิ้นเชิง</p>
+
+<h4 id="s9-h3">ผลของการกระทำระหว่างลูกหนี้ร่วม</h4>
+<ul>
+<li><b>ม.292:</b> การชำระหนี้ / วางทรัพย์ / หักกลบลบหนี้ ของลูกหนี้ร่วมคนหนึ่ง → มีผลให้ลูกหนี้ <b>ทุกคน</b> หลุดพ้น</li>
+<li><b>ม.293:</b> การปลดหนี้ให้ลูกหนี้ร่วมคนหนึ่ง → เป็นคุณแก่คนอื่นเท่าส่วนที่ปลด</li>
+<li><b>ม.295:</b> เหตุอื่น เช่น ลูกหนี้ผิดนัด อายุความ → เป็นไปเพื่อคุณโทษ <b>เฉพาะตัว</b> ลูกหนี้คนนั้น ไม่กระทบคนอื่น</li>
+</ul>
+
+<div class="study-exam-box">
+<h5>📝 กรอบโจทย์สอบ — ลูกหนี้ร่วม + เจ้าหนี้ร่วม</h5>
+<p>ก ข ค เป็นเจ้าหนี้ร่วมของ ง ในหนี้เงินกู้ 30,000 บาท ไม่มีกำหนดเวลาชำระหนี้ ก. เจ้าหนี้ร่วมคนหนึ่งบอกกล่าวเตือนให้ ง. ชำระหนี้ ง. ไม่ยอมชำระ → ผลของการผิดนัดมีต่อ ข. และ ค. หรือไม่?</p>
+<p><b>คำตอบ:</b> ไม่มีผลถึง ข. และ ค. ตาม ม.299 ว.3 ให้นำ ม.295 มาใช้บังคับกับเจ้าหนี้ร่วมโดยอนุโลม ดังนั้นการผิดนัดเป็นเรื่อง <b>เฉพาะตัว</b> ของเจ้าหนี้ร่วมแต่ละคน มีผลเฉพาะ ก. เท่านั้น</p>
+</div>
+`,
+    toc: [
+      {id:"s9-h1", level:"item", text:"หนี้แบ่งชำระได้ (ม.290)"},
+      {id:"s9-h2", level:"major", text:"ลูกหนี้ร่วม (ม.291-297) ★★★"},
+      {id:"s9-h3", level:"major", text:"ผลของการกระทำระหว่างลูกหนี้ร่วม"}
+    ]
+  }
+];
+
+</script>
+<script>
+/* ================================================================
+   ENGINE — โครงเกม
+   ================================================================ */
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function pickDistractors(pool, excludeIdx, n){
+  const idxs = pool.map((_,i)=>i).filter(i=>i!==excludeIdx);
+  return shuffle(idxs).slice(0,n);
+}
+function chunk(arr, size){
+  const out = [];
+  for(let i=0;i<arr.length;i+=size) out.push(arr.slice(i, i+size));
+  return out;
+}
+function esc(s){
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+const SoundFX = (function(){
+  let ctx = null;
+  let enabled = true;
+  try{ enabled = localStorage.getItem('law2102_sound') !== 'off'; }catch(e){}
+  function ensureCtx(){
+    if(!ctx){
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if(AC) ctx = new AC();
+    }
+    if(ctx && ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+  function tone(freq, dur, type, gainVal, delay){
+    if(!enabled) return;
+    const c = ensureCtx();
+    if(!c) return;
+    const t0 = c.currentTime + (delay||0);
+    const osc = c.createOscillator();
+    const gain = c.createGain();
+    osc.type = type || 'sine';
+    osc.frequency.setValueAtTime(freq, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(gainVal||0.1, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+dur);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+dur+0.02);
+  }
+  return {
+    click(){ tone(560,0.05,'square',0.05); },
+    flip(){ tone(700,0.04,'triangle',0.06); tone(420,0.05,'triangle',0.05,0.05); },
+    tab(){ tone(820,0.035,'sine',0.05); },
+    correct(){ tone(523,0.09,'triangle',0.08); tone(659,0.09,'triangle',0.08,0.09); tone(784,0.14,'triangle',0.09,0.18); },
+    wrong(){ tone(220,0.16,'sawtooth',0.07); tone(160,0.2,'sawtooth',0.06,0.06); },
+    score(){ tone(1046,0.1,'sine',0.07); tone(1568,0.12,'sine',0.06,0.08); },
+    isOn(){ return enabled; },
+    toggle(){
+      enabled = !enabled;
+      try{ localStorage.setItem('law2102_sound', enabled ? 'on' : 'off'); }catch(e){}
+      return enabled;
+    }
+  };
+})();
+
+/* =========================================================
+   GAMIFICATION — คะแนนรวม (มุมขวาบน)
+   ========================================================= */
+const SCORE_KEY = 'law2102_score_v1';
+function loadScore(){ try{ return parseInt(localStorage.getItem(SCORE_KEY)||'0',10)||0; }catch(e){ return 0; } }
+let totalScore = loadScore();
+function saveScoreValue(){ try{ localStorage.setItem(SCORE_KEY, String(totalScore)); }catch(e){} }
+function renderScoreDisplay(){
+  const el = document.getElementById('score-value');
+  if(el) el.textContent = totalScore;
+}
+function addScore(n){
+  totalScore += n;
+  saveScoreValue();
+  renderScoreDisplay();
+  const badge = document.getElementById('global-score');
+  if(badge){
+    badge.classList.remove('score-pop');
+    void badge.offsetWidth;
+    badge.classList.add('score-pop');
+  }
+}
+function loadSeenSet(key){
+  try{ return new Set(JSON.parse(localStorage.getItem(key) || '[]')); }
+  catch(e){ return new Set(); }
+}
+function saveSeenSet(key, set){
+  try{ localStorage.setItem(key, JSON.stringify(Array.from(set))); }
+  catch(e){}
+}
+const cardSeenSet = loadSeenSet('law2102_cardsSeen');
+const seqSeenSet = loadSeenSet('law2102_seqSeen');
+
+function makeQuestionTimer(elId, fastThreshold){
+  let startTs = 0, intervalId = null;
+  function update(){
+    const el = document.getElementById(elId);
+    if(!el) return;
+    const sec = (Date.now() - startTs) / 1000;
+    el.textContent = '⏱ ' + sec.toFixed(1) + 's';
+    el.classList.toggle('timer-fast', sec <= fastThreshold);
+  }
+  return {
+    start(){
+      startTs = Date.now();
+      clearInterval(intervalId);
+      intervalId = setInterval(update, 100);
+      update();
+    },
+    stop(){
+      clearInterval(intervalId);
+      return (Date.now() - startTs) / 1000;
+    }
+  };
+}
+const QUIZ_FAST_THRESHOLD = 8;
+const quizTimer = makeQuestionTimer('quiz-timer', QUIZ_FAST_THRESHOLD);
+const iracTimer = makeQuestionTimer('irac-timer', QUIZ_FAST_THRESHOLD);
+
+/* ---- สร้างโจทย์ระดับพื้นฐานอัตโนมัติจาก CARDS ---- */
+function buildBasicPool(){
+  const qs = [];
+  CARDS.forEach((c, idx)=>{
+    const dIdx = pickDistractors(CARDS, idx, 3);
+    const opts = [c.result, ...dIdx.map(i=>CARDS[i].result)];
+    const order = shuffle(opts.map((_,i)=>i));
+    qs.push({cat:c.cat, q: c.section + ' (' + c.title + ') มีผลทางกฎหมายอย่างไร',
+      opts: order.map(i=>opts[i]), ans: order.indexOf(0),
+      explain: c.section + ' [' + c.source + ']: ' + c.result + (c.note? ' ' + c.note : '')});
+  });
+  CARDS.forEach((c, idx)=>{
+    if(idx % 2 === 1) return;
+    const dIdx = pickDistractors(CARDS, idx, 3);
+    const opts = [c.section, ...dIdx.map(i=>CARDS[i].section)];
+    const order = shuffle(opts.map((_,i)=>i));
+    qs.push({cat:c.cat, q: '"' + c.result + '" (เรื่อง ' + c.title + ') ตรงกับมาตราใด',
+      opts: order.map(i=>opts[i]), ans: order.indexOf(0),
+      explain: c.title + ' บัญญัติอยู่ใน ' + c.section + ' [' + c.source + ']'});
+  });
+  return shuffle(qs);
+}
+
+const BASIC_POOL = buildBasicPool();
+const ADV_POOL   = shuffle(QUIZ_ADV);
+const BASIC_SETS = chunk(BASIC_POOL, 10);
+const ADV_SETS   = chunk(ADV_POOL, 10);
+
+/* ---------- header text ---------- */
+document.getElementById('hd-crest').textContent = CONFIG.crest;
+document.getElementById('hd-title').textContent = CONFIG.title;
+document.getElementById('hd-sub').textContent = CONFIG.subtitle;
+
+/* ---------- badge / stage painters ---------- */
+function paintBadge(el, catKey){
+  const c = CATEGORIES[catKey];
+  el.style.background = c.soft;
+  el.style.color = c.strong;
+  el.textContent = c.label;
+}
+function paintCardFrame(cardEl, ribbonEl, secEl, catKey, isBack){
+  const c = CATEGORIES[catKey];
+  ribbonEl.style.background = c.strong;
+  secEl.style.color = c.strong;
+  cardEl.classList.toggle('is-back', !!isBack);
+  if(isBack){
+    cardEl.style.background = c.soft;
+    cardEl.style.borderColor = c.strong;
+  } else {
+    cardEl.style.background = '';
+    cardEl.style.borderColor = '';
+  }
+}
+function paintStage(elId, catKey){
+  const el = document.getElementById(elId);
+  const c = CATEGORIES[catKey];
+  el.style.background = 'linear-gradient(135deg,' + c.strong + ' 0%, ' + c.strong + 'CC 100%)';
+  el.innerHTML =
+    '<span class="stage-icon">' + c.icon + '</span>' +
+    '<span><span class="stage-label">' + esc(c.label) + '</span>' +
+    '<span class="stage-src">' + esc(c.source) + '</span></span>';
+}
+
+/* =========================================================
+   โหมด 1: การ์ดจำมาตรา
+   ========================================================= */
+let deck = shuffle(CARDS);
+let cardIdx = 0;
+let flipped = false;
+
+const catSelect = document.getElementById('cat-select');
+(function initCatSelect(){
+  const optAll = document.createElement('option');
+  optAll.value = 'all'; optAll.textContent = 'ทุกหมวด';
+  catSelect.appendChild(optAll);
+  Object.keys(CATEGORIES).forEach(k=>{
+    const o = document.createElement('option');
+    o.value = k; o.textContent = CATEGORIES[k].label;
+    catSelect.appendChild(o);
+  });
+})();
+catSelect.addEventListener('change', ()=>{
+  const val = catSelect.value;
+  deck = val === 'all' ? shuffle(CARDS) : shuffle(CARDS.filter(c=>c.cat===val));
+  cardIdx = 0; flipped = false;
+  renderMatraChips(val);
+  renderCard();
+});
+
+function renderMatraChips(catVal){
+  const wrap = document.getElementById('matra-chips');
+  wrap.innerHTML = '';
+  if(catVal === 'all'){ wrap.style.display = 'none'; return; }
+  const items = CARDS.filter(c=>c.cat===catVal);
+  const cCat = CATEGORIES[catVal];
+  wrap.style.display = 'flex';
+  const label = document.createElement('span');
+  label.className = 'matra-chips-label';
+  label.textContent = 'มาตราในหมวดนี้:';
+  wrap.appendChild(label);
+  items.forEach(item=>{
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'matra-chip';
+    chip.textContent = item.section;
+    chip.style.setProperty('--chip-color', cCat.strong);
+    chip.title = item.title;
+    chip.addEventListener('click', ()=>{
+      SoundFX.click();
+      const idx = deck.findIndex(d=>d.section===item.section && d.cat===item.cat);
+      if(idx >= 0){ cardIdx = idx; flipped = false; renderCard(); }
+    });
+    wrap.appendChild(chip);
+  });
+}
+function updateMatraChipActive(section){
+  document.querySelectorAll('#matra-chips .matra-chip').forEach(el=>{
+    el.classList.toggle('active', el.textContent === section);
+  });
+}
+
+function renderCard(){
+  if(deck.length === 0) return;
+  const c = deck[cardIdx];
+  document.getElementById('card-section').textContent = c.section;
+  document.getElementById('card-src-front').textContent = c.source;
+  document.getElementById('card-stars').textContent = '★'.repeat(c.stars) + '☆'.repeat(5-c.stars);
+  document.getElementById('card-title').textContent = c.title;
+  document.getElementById('card-src-back').textContent = c.source;
+  document.getElementById('card-result').textContent = c.result;
+  document.getElementById('card-note').textContent = c.note || '';
+  document.getElementById('card-note').style.display = c.note ? 'block' : 'none';
+  document.getElementById('card-progress').textContent = (cardIdx+1) + ' / ' + deck.length;
+  document.getElementById('face-front').style.display = flipped ? 'none' : 'flex';
+  document.getElementById('face-back').style.display = flipped ? 'block' : 'none';
+  paintBadge(document.getElementById('cat-badge'), c.cat);
+  paintCardFrame(document.getElementById('flip-card'), document.getElementById('card-ribbon'), document.getElementById('card-section'), c.cat, flipped);
+  paintStage('card-stage', c.cat);
+  updateMatraChipActive(c.section);
+}
+const flipCardEl = document.getElementById('flip-card');
+function doFlip(){
+  SoundFX.flip();
+  flipCardEl.classList.add('flipping');
+  setTimeout(()=>{
+    flipped = !flipped;
+    renderCard();
+    flipCardEl.classList.remove('flipping');
+    if(flipped){
+      const c = deck[cardIdx];
+      const key = c.cat + '|' + c.section;
+      if(!cardSeenSet.has(key)){
+        cardSeenSet.add(key);
+        saveSeenSet('law2102_cardsSeen', cardSeenSet);
+        SoundFX.score();
+        addScore(10);
+      }
+    }
+  }, 90);
+}
+flipCardEl.addEventListener('click', doFlip);
+flipCardEl.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); doFlip(); } });
+document.getElementById('btn-next').addEventListener('click', ()=>{ SoundFX.click(); cardIdx=(cardIdx+1)%deck.length; flipped=false; renderCard(); });
+document.getElementById('btn-prev').addEventListener('click', ()=>{ SoundFX.click(); cardIdx=(cardIdx-1+deck.length)%deck.length; flipped=false; renderCard(); });
+document.getElementById('btn-shuffle').addEventListener('click', ()=>{ SoundFX.click(); deck=shuffle(deck); cardIdx=0; flipped=false; renderCard(); });
+
+/* =========================================================
+   โหมด 2: เรียงมาตราจำเป็นกลุ่ม
+   ========================================================= */
+const SEQ_ORDER = Object.keys(CATEGORIES);
+const seqSelect = document.getElementById('seq-select');
+SEQ_ORDER.forEach(val=>{
+  const o = document.createElement('option');
+  o.value = val; o.textContent = CATEGORIES[val].label;
+  seqSelect.appendChild(o);
+});
+function renderSeq(){
+  const val = seqSelect.value;
+  const items = CARDS.filter(c=>c.cat===val);
+  const c = CATEGORIES[val];
+  const listEl = document.getElementById('seq-list');
+  listEl.innerHTML = '';
+
+  const progress = document.createElement('div');
+  progress.className = 'seq-progress';
+  progress.id = 'seq-progress';
+  listEl.appendChild(progress);
+
+  const grid = document.createElement('div');
+  grid.className = 'seq-grid';
+
+  items.forEach((item,i)=>{
+    const card = document.createElement('div');
+    card.className = 'seq-card';
+    card.tabIndex = 0;
+    card.setAttribute('role','button');
+    card.setAttribute('aria-label','แตะเพื่อดูคำตอบ');
+    let noteHtml = item.note ? '<div class="seq-note">'+esc(item.note)+'</div>' : '';
+    card.innerHTML =
+      '<div class="seq-front">'+
+        '<div class="seq-card-top">'+
+          '<span class="seq-num">'+(i+1)+'</span>'+
+          '<span class="seq-stars">'+('★'.repeat(item.stars))+'</span>'+
+        '</div>'+
+        '<div class="seq-sec">'+esc(item.section)+'</div>'+
+        '<div class="seq-front-title">'+esc(item.title)+'</div>'+
+        '<div class="seq-front-hint">แตะเพื่อดูคำตอบ</div>'+
+      '</div>'+
+      '<div class="seq-back">'+
+        '<div class="seq-card-top">'+
+          '<span class="seq-sec">'+esc(item.section)+'</span>'+
+          '<span class="seq-src">['+esc(item.source)+']</span>'+
+        '</div>'+
+        '<div class="seq-res">'+esc(item.result)+'</div>'+
+        noteHtml+
+      '</div>';
+    function toggle(){
+      SoundFX.flip();
+      card.classList.add('flipping');
+      setTimeout(()=>{
+        const nowBack = !card.classList.contains('is-back');
+        card.classList.toggle('is-back', nowBack);
+        card.classList.remove('flipping');
+        if(nowBack){
+          card.style.background = c.soft;
+          card.style.borderColor = c.strong;
+          const key = item.cat + '|' + item.section;
+          if(!cardSeenSet.has(key)){
+            cardSeenSet.add(key);
+            saveSeenSet('law2102_cardsSeen', cardSeenSet);
+            SoundFX.score();
+            addScore(10);
+          }
+        } else {
+          card.style.background = '';
+          card.style.borderColor = '';
+        }
+        updateSeqProgress(val);
+      }, 90);
+    }
+    card.addEventListener('click', toggle);
+    card.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
+    grid.appendChild(card);
+  });
+  listEl.appendChild(grid);
+  updateSeqProgress(val);
+}
+function updateSeqProgress(catVal){
+  const el = document.getElementById('seq-progress');
+  if(!el) return;
+  const items = CARDS.filter(c=>c.cat===catVal);
+  const seen = items.filter(c=>cardSeenSet.has(c.cat+'|'+c.section)).length;
+  el.textContent = 'ดูแล้ว ' + seen + ' / ' + items.length + ' มาตรา — แตะการ์ดเพื่อพลิกดูคำตอบ';
+}
+seqSelect.addEventListener('change', renderSeq);
+
+/* =========================================================
+   โหมด 3: วิเคราะห์โจทย์
+   ========================================================= */
+let quizLevel = 'basic';
+let currentSetIdx = 0;
+let quizPool = BASIC_SETS[0];
+let quizOrder = shuffle(quizPool.map((_,i)=>i));
+let quizIdx = 0;
+let score = 0;
+let answered = false;
+let wrongIdxs = [];
+let reviewMode = false;
+
+function currentSets(){ return quizLevel === 'basic' ? BASIC_SETS : ADV_SETS; }
+
+function loadBest(){
+  try{ return JSON.parse(localStorage.getItem(CONFIG.storageKey) || '{}'); }
+  catch(e){ return {}; }
+}
+function saveBest(level, setIdx, score, total){
+  const data = loadBest();
+  const key = level + '_' + setIdx;
+  if(!data[key] || score > data[key].score){
+    data[key] = {score, total};
+    try{ localStorage.setItem(CONFIG.storageKey, JSON.stringify(data)); }catch(e){}
+  }
+}
+function getBest(level, setIdx){
+  const data = loadBest();
+  return data[level + '_' + setIdx] || null;
+}
+
+function renderSetPicker(){
+  const sets = currentSets();
+  const picker = document.getElementById('set-picker');
+  picker.innerHTML = '';
+  sets.forEach((s,i)=>{
+    const btn = document.createElement('button');
+    const best = getBest(quizLevel, i);
+    btn.innerHTML = 'ชุด ' + (i+1) + (best ? ' <span class="best">'+best.score+'/'+best.total+'</span>' : '');
+    if(i === currentSetIdx) btn.classList.add('on');
+    btn.addEventListener('click', ()=>{ SoundFX.click(); selectSet(i); });
+    picker.appendChild(btn);
+  });
+}
+
+function selectSet(i){
+  currentSetIdx = i;
+  quizPool = currentSets()[i];
+  quizOrder = shuffle(quizPool.map((_,k)=>k));
+  quizIdx = 0; score = 0; wrongIdxs = []; reviewMode = false;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderSetPicker();
+  renderQuiz();
+}
+
+function setLevel(lvl){
+  quizLevel = lvl;
+  currentSetIdx = 0;
+  quizPool = currentSets()[0];
+  quizOrder = shuffle(quizPool.map((_,i)=>i));
+  quizIdx = 0; score = 0; wrongIdxs = []; reviewMode = false;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  document.getElementById('lvl-basic').classList.toggle('on', lvl==='basic');
+  document.getElementById('lvl-adv').classList.toggle('on', lvl==='adv');
+  renderSetPicker();
+  renderQuiz();
+}
+
+function syncStickyBar(){
+  const quizOn = viewQuiz.classList.contains('on') && document.getElementById('quiz-play').style.display !== 'none';
+  const iracOn = viewIrac.classList.contains('on') && document.getElementById('irac-play').style.display === 'block';
+  const show = quizOn || iracOn;
+  document.getElementById('sticky-bar').style.display = show ? 'block' : 'none';
+  document.body.classList.toggle('has-sticky-bar', show);
+}
+
+function renderQuiz(){
+  const item = quizPool[quizOrder[quizIdx]];
+  document.getElementById('quiz-scenario').textContent = item.q;
+  const label = reviewMode ? 'ทบทวนข้อผิด' : ('ชุด ' + (currentSetIdx+1));
+  document.getElementById('quiz-progress').textContent = label + ' • ข้อ ' + (quizIdx+1) + ' / ' + quizPool.length;
+  document.getElementById('quiz-score').textContent = 'คะแนน ' + score + ' / ' + quizPool.length;
+  document.getElementById('pbar').style.width = (((quizIdx)/quizPool.length)*100) + '%';
+  paintBadge(document.getElementById('quiz-tag'), item.cat);
+  paintStage('quiz-stage', item.cat);
+  const optsDiv = document.getElementById('quiz-options');
+  optsDiv.innerHTML = '';
+  const letters = ['ก','ข','ค','ง'];
+  item.opts.forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.innerHTML = '<span class="abc">'+letters[i]+'</span><span>'+esc(opt)+'</span>';
+    btn.addEventListener('click', ()=> selectAnswer(i));
+    optsDiv.appendChild(btn);
+  });
+  document.getElementById('quiz-explain').style.display = 'none';
+  document.getElementById('quiz-explain').className = 'explain';
+  document.getElementById('quiz-next').style.display = 'none';
+  document.getElementById('quiz-finish').style.display = 'none';
+  answered = false;
+  syncStickyBar();
+  quizTimer.start();
+}
+
+function selectAnswer(i){
+  if(answered) return;
+  answered = true;
+  const elapsed = quizTimer.stop();
+  const item = quizPool[quizOrder[quizIdx]];
+  const optsDiv = document.getElementById('quiz-options');
+  const btns = optsDiv.querySelectorAll('button');
+  btns.forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx === item.ans) b.classList.add('correct');
+    else if(idx === i) b.classList.add('wrong');
+  });
+  const isCorrect = (i === item.ans);
+  let ptsMsg = '';
+  if(isCorrect){
+    score++; SoundFX.correct();
+    const pts = elapsed <= QUIZ_FAST_THRESHOLD ? 20 : 1;
+    addScore(pts);
+    ptsMsg = ' <span class="pts-earned">+' + pts + ' คะแนน' + (elapsed <= QUIZ_FAST_THRESHOLD ? ' ตอบเร็ว!' : '') + '</span>';
+  } else {
+    SoundFX.wrong(); if(!reviewMode) wrongIdxs.push(quizOrder[quizIdx]);
+  }
+  document.getElementById('quiz-score').textContent = 'คะแนน ' + score + ' / ' + quizPool.length;
+  document.getElementById('pbar').style.width = (((quizIdx+1)/quizPool.length)*100) + '%';
+  const explainDiv = document.getElementById('quiz-explain');
+  explainDiv.className = 'explain ' + (isCorrect ? 'ok' : 'bad');
+  explainDiv.innerHTML = '<b>' + (isCorrect ? '✓ ถูกต้อง' : '✗ ยังไม่ถูก — เฉลยคือ ' + letters_ans(item)) + ptsMsg + '</b>' + item.explain;
+  explainDiv.style.display = 'block';
+  if(quizIdx < quizPool.length - 1){
+    document.getElementById('quiz-next').style.display = 'block';
+  } else {
+    document.getElementById('quiz-finish').style.display = 'block';
+  }
+}
+function letters_ans(item){
+  return ['ก','ข','ค','ง'][item.ans];
+}
+
+document.getElementById('quiz-next').addEventListener('click', ()=>{ quizIdx++; renderQuiz(); });
+
+document.getElementById('quiz-finish').addEventListener('click', showSummary);
+
+function showSummary(){
+  document.getElementById('quiz-play').style.display = 'none';
+  syncStickyBar();
+  const summary = document.getElementById('quiz-summary');
+  summary.style.display = 'block';
+  const total = quizPool.length;
+  document.getElementById('sum-set-label').textContent = reviewMode ? 'ทบทวนข้อที่ผิด' : ('ระดับ' + (quizLevel==='basic'?'พื้นฐาน':'ข้อสอบจริง') + ' • ชุด ' + (currentSetIdx+1));
+  document.getElementById('sum-score').textContent = score;
+  document.getElementById('sum-of').textContent = 'จาก ' + total + ' ข้อ';
+  const pct = total ? score/total : 0;
+  const starCount = Math.max(1, Math.round(pct*5));
+  document.getElementById('sum-stars').textContent = '★'.repeat(starCount) + '☆'.repeat(5-starCount);
+  let grade = 'ลุยต่อได้เลย';
+  if(pct >= 0.9) grade = 'เยี่ยมมาก แม่นจริง';
+  else if(pct >= 0.7) grade = 'ดีมาก ใกล้เต็มแล้ว';
+  else if(pct >= 0.5) grade = 'พอใช้ ทบทวนอีกนิด';
+  else grade = 'ลองทบทวนการ์ดแล้วมาสู้ใหม่';
+  document.getElementById('sum-grade').textContent = grade;
+
+  if(!reviewMode){
+    saveBest(quizLevel, currentSetIdx, score, total);
+    const best = getBest(quizLevel, currentSetIdx);
+    document.getElementById('sum-best').textContent = best ? ('คะแนนดีที่สุดของชุดนี้: ' + best.score + '/' + best.total) : '';
+  } else {
+    document.getElementById('sum-best').textContent = '';
+  }
+
+  const sets = currentSets();
+  document.getElementById('sum-nextset').style.display = (!reviewMode && currentSetIdx < sets.length - 1) ? 'inline-block' : 'none';
+  document.getElementById('sum-review').style.display = (!reviewMode && wrongIdxs.length > 0) ? 'inline-block' : 'none';
+}
+
+document.getElementById('sum-retry').addEventListener('click', ()=>{
+  if(reviewMode){
+    quizOrder = shuffle(quizPool.map((_,i)=>i));
+  } else {
+    quizOrder = shuffle(quizPool.map((_,i)=>i));
+    wrongIdxs = [];
+  }
+  quizIdx = 0; score = 0;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderQuiz();
+});
+document.getElementById('sum-nextset').addEventListener('click', ()=>{ selectSet(currentSetIdx + 1); });
+document.getElementById('sum-review').addEventListener('click', ()=>{
+  reviewMode = true;
+  const basePool = quizPool;
+  quizPool = wrongIdxs.map(i => basePool[i]);
+  quizOrder = shuffle(quizPool.map((_,i)=>i));
+  quizIdx = 0; score = 0;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderQuiz();
+});
+
+document.getElementById('lvl-basic').addEventListener('click', ()=>{ SoundFX.click(); setLevel('basic'); });
+document.getElementById('lvl-adv').addEventListener('click', ()=>{ SoundFX.click(); setLevel('adv'); });
+
+/* =========================================================
+   แท็บหลัก + รีเซ็ต
+   ========================================================= */
+const tabCard = document.getElementById('tab-card');
+const tabSeq  = document.getElementById('tab-seq');
+const tabQuiz = document.getElementById('tab-quiz');
+const tabIrac = document.getElementById('tab-irac');
+const tabStudy = document.getElementById('tab-study');
+const viewCard = document.getElementById('view-card');
+const viewSeq  = document.getElementById('view-seq');
+const viewQuiz = document.getElementById('view-quiz');
+const viewIrac = document.getElementById('view-irac');
+const viewStudy = document.getElementById('view-study');
+
+function setTab(which){
+  viewCard.classList.toggle('on', which==='card');
+  viewSeq.classList.toggle('on', which==='seq');
+  viewQuiz.classList.toggle('on', which==='quiz');
+  viewIrac.classList.toggle('on', which==='irac');
+  viewStudy.classList.toggle('on', which==='study');
+  tabCard.classList.toggle('on', which==='card');
+  tabSeq.classList.toggle('on', which==='seq');
+  tabQuiz.classList.toggle('on', which==='quiz');
+  tabIrac.classList.toggle('on', which==='irac');
+  tabStudy.classList.toggle('on', which==='study');
+  const headerEl = document.getElementById('page-header');
+  if(which === 'quiz'){
+    headerEl.classList.add('compact');
+  } else if(which !== 'irac' || document.getElementById('irac-play').style.display === 'none'){
+    headerEl.classList.remove('compact');
+  }
+  if(which === 'study' && !studyInitDone){ renderStudy(0); studyInitDone = true; }
+  if(which !== 'study' && typeof TTS !== 'undefined') TTS.stop();
+  syncStickyBar();
+}
+tabCard.addEventListener('click', ()=>{ SoundFX.tab(); setTab('card'); });
+tabSeq.addEventListener('click', ()=>{ SoundFX.tab(); setTab('seq'); });
+tabQuiz.addEventListener('click', ()=>{ SoundFX.tab(); setTab('quiz'); });
+tabIrac.addEventListener('click', ()=>{ SoundFX.tab(); setTab('irac'); });
+tabStudy.addEventListener('click', ()=>{ SoundFX.tab(); setTab('study'); });
+
+const btnSound = document.getElementById('btn-sound');
+btnSound.textContent = SoundFX.isOn() ? '🔊' : '🔇';
+btnSound.addEventListener('click', ()=>{
+  const on = SoundFX.toggle();
+  btnSound.textContent = on ? '🔊' : '🔇';
+  if(on) SoundFX.click();
+});
+
+document.getElementById('btn-reset').addEventListener('click', ()=>{
+  if(!confirm('รีเซ็ตหน้าจอทั้งหมด (คะแนนดีที่สุดที่บันทึกไว้จะยังอยู่) ต้องการดำเนินการต่อหรือไม่?')) return;
+  catSelect.value = 'all';
+  deck = shuffle(CARDS); cardIdx = 0; flipped = false;
+  renderMatraChips('all');
+  renderCard();
+  seqSelect.value = SEQ_ORDER[0];
+  renderSeq();
+  setLevel('basic');
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('irac-play').style.display = 'none';
+  document.getElementById('irac-summary').style.display = 'none';
+  renderCasePicker();
+  setTab('card');
+});
+
+/* =========================================================
+   โหมด 4: ฝึก IRAC
+   ========================================================= */
+let iracCaseIdx = 0;
+let iracIssueIdx = 0;
+let iracStage = 'issue'; // issue -> rule -> app -> conc
+let iracScore = 0;
+let iracTotal = 0;
+
+function renderCasePicker(){
+  const el = document.getElementById('irac-caselist');
+  el.innerHTML = '';
+  IRAC_CASES.forEach((c, i)=>{
+    const card = document.createElement('button');
+    card.className = 'irac-case-card';
+    card.innerHTML =
+      '<div class="icref">'+esc(c.examRef)+' · '+esc(CATEGORIES[c.cat].label)+'</div>'+
+      '<div class="ictitle">'+esc(c.title)+'</div>'+
+      '<div class="icprog">'+c.issues.length+' ประเด็น · '+(c.issues.length*4)+' ขั้นตอน</div>';
+    card.addEventListener('click', ()=>{ SoundFX.click(); startIracCase(i); });
+    el.appendChild(card);
+  });
+}
+
+function startIracCase(idx){
+  iracCaseIdx = idx;
+  iracIssueIdx = 0;
+  iracStage = 'issue';
+  iracScore = 0;
+  iracTotal = IRAC_CASES[idx].issues.length * 4;
+  document.getElementById('irac-picker').style.display = 'none';
+  document.getElementById('irac-play').style.display = 'block';
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('irac-recap-box').style.display = 'none';
+  document.getElementById('irac-stage-box').style.display = 'block';
+  document.getElementById('page-header').classList.add('compact');
+  const c = IRAC_CASES[idx];
+  paintBadge(document.getElementById('irac-case-tag'), c.cat);
+  const factsEl = document.getElementById('irac-facts');
+  factsEl.innerHTML = c.facts;
+  factsEl.classList.remove('expanded');
+  document.getElementById('irac-facts-toggle').textContent = 'ขยายอ่านโจทย์เต็ม ▾';
+  syncStickyBar();
+  renderIracStep();
+}
+
+document.getElementById('irac-facts-toggle').addEventListener('click', ()=>{
+  const factsEl = document.getElementById('irac-facts');
+  const expanded = factsEl.classList.toggle('expanded');
+  document.getElementById('irac-facts-toggle').textContent = expanded ? 'ย่อโจทย์ ▴' : 'ขยายอ่านโจทย์เต็ม ▾';
+});
+
+document.getElementById('irac-back').addEventListener('click', ()=>{
+  SoundFX.click();
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('irac-play').style.display = 'none';
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('page-header').classList.remove('compact');
+  syncStickyBar();
+  renderCasePicker();
+});
+
+const IRAC_STAGE_INFO = {
+  issue:{key:'issue', qKey:'issueQ', optsKey:'issueOpts', ansKey:'issueAns', fbKey:'issueFeedback', label:'เลือกประเด็น', next:'rule'},
+  rule: {key:'rule',  qKey:'ruleQ',  optsKey:'ruleOpts',  ansKey:'ruleAns',  fbKey:'ruleFeedback',  label:'เลือกมาตรา', next:'app'},
+  app:  {key:'app',   qKey:'appQ',   optsKey:'appOpts',   ansKey:'appAns',   fbKey:'appFeedback',   label:'ปรับบท',     next:'conc'},
+  conc: {key:'conc',  qKey:'concQ',  optsKey:'concOpts',  ansKey:'concAns',  fbKey:'concFeedback',  label:'สรุปผล',     next:null}
+};
+
+function renderIracStep(){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  const info = IRAC_STAGE_INFO[iracStage];
+
+  document.getElementById('irac-progress-label').textContent =
+    issue.label + ' · ประเด็น ' + (iracIssueIdx+1) + '/' + c.issues.length + ' · ขั้นตอน: ' + info.label;
+
+  const order = ['issue','rule','app','conc'];
+  const curIdx = order.indexOf(iracStage);
+  document.querySelectorAll('#irac-stepper .irac-step').forEach((el)=>{
+    const step = el.getAttribute('data-step');
+    const stepIdx = order.indexOf(step);
+    el.classList.remove('active','done');
+    if(stepIdx < curIdx) el.classList.add('done');
+    else if(stepIdx === curIdx) el.classList.add('active');
+  });
+
+  document.getElementById('irac-question').textContent = issue[info.qKey];
+  const optsDiv = document.getElementById('irac-options');
+  optsDiv.innerHTML = '';
+  const letters = ['ก','ข','ค','ง'];
+  issue[info.optsKey].forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.innerHTML = '<span class="abc">'+letters[i]+'</span><span>'+esc(opt)+'</span>';
+    btn.addEventListener('click', ()=> selectIracOption(i));
+    optsDiv.appendChild(btn);
+  });
+  document.getElementById('irac-explain').style.display = 'none';
+  document.getElementById('irac-explain').className = 'explain';
+  document.getElementById('irac-next').style.display = 'none';
+  document.getElementById('irac-recap-next').style.display = 'none';
+  iracTimer.start();
+}
+
+function selectIracOption(i){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  const info = IRAC_STAGE_INFO[iracStage];
+  const optsDiv = document.getElementById('irac-options');
+  const btns = optsDiv.querySelectorAll('button');
+  if(btns[0].disabled) return;
+  const elapsed = iracTimer.stop();
+  const ans = issue[info.ansKey];
+  btns.forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx === ans) b.classList.add('correct');
+    else if(idx === i) b.classList.add('wrong');
+  });
+  const isCorrect = (i === ans);
+  let ptsMsg = '';
+  if(isCorrect){
+    iracScore++; SoundFX.correct();
+    const pts = elapsed <= QUIZ_FAST_THRESHOLD ? 20 : 1;
+    addScore(pts);
+    ptsMsg = ' <span class="pts-earned">+' + pts + ' คะแนน' + (elapsed <= QUIZ_FAST_THRESHOLD ? ' ตอบเร็ว!' : '') + '</span>';
+  } else {
+    SoundFX.wrong();
+  }
+  const explainDiv = document.getElementById('irac-explain');
+  explainDiv.className = 'explain ' + (isCorrect ? 'ok' : 'bad');
+  explainDiv.innerHTML = '<b>' + (isCorrect ? '✓ ถูกต้อง' : '✗ ยังไม่ถูก — คำตอบที่ควรเลือกคือ ข้อ ' + ['ก','ข','ค','ง'][ans]) + ptsMsg + '</b>' + issue[info.fbKey];
+  explainDiv.style.display = 'block';
+  document.getElementById('irac-next').style.display = 'block';
+  syncStickyBar();
+}
+
+document.getElementById('irac-next').addEventListener('click', ()=>{
+  SoundFX.click();
+  const info = IRAC_STAGE_INFO[iracStage];
+  if(info.next){
+    iracStage = info.next;
+    renderIracStep();
+  } else {
+    showIssueRecap();
+  }
+});
+
+function showIssueRecap(){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  document.getElementById('irac-stage-box').style.display = 'none';
+  const recapBox = document.getElementById('irac-recap-box');
+  recapBox.style.display = 'block';
+  const isLast = iracIssueIdx >= c.issues.length - 1;
+  document.getElementById('irac-recap-title').textContent = 'ทำครบ ' + issue.label + ' แล้ว';
+  document.getElementById('irac-recap-text').innerHTML = issue.concFeedback;
+  document.getElementById('irac-next').style.display = 'none';
+  document.getElementById('irac-recap-next').textContent = isLast ? 'ดูสรุปผลทั้งข้อ →' : 'ประเด็นถัดไป →';
+  document.getElementById('irac-recap-next').style.display = 'block';
+}
+
+document.getElementById('irac-recap-next').addEventListener('click', ()=>{
+  SoundFX.click();
+  const c = IRAC_CASES[iracCaseIdx];
+  document.getElementById('irac-recap-box').style.display = 'none';
+  document.getElementById('irac-recap-next').style.display = 'none';
+  if(iracIssueIdx >= c.issues.length - 1){
+    showIracCaseSummary();
+  } else {
+    iracIssueIdx++;
+    iracStage = 'issue';
+    document.getElementById('irac-stage-box').style.display = 'block';
+    renderIracStep();
+  }
+});
+
+function showIracCaseSummary(){
+  document.getElementById('irac-play').style.display = 'none';
+  syncStickyBar();
+  const summary = document.getElementById('irac-summary');
+  summary.style.display = 'block';
+  const c = IRAC_CASES[iracCaseIdx];
+  document.getElementById('irac-sum-label').textContent = c.title;
+  document.getElementById('irac-sum-score').textContent = iracScore;
+  document.getElementById('irac-sum-of').textContent = 'จาก ' + iracTotal + ' ขั้นตอน';
+  const pct = iracTotal ? iracScore/iracTotal : 0;
+  const starCount = Math.max(1, Math.round(pct*5));
+  document.getElementById('irac-sum-stars').textContent = '★'.repeat(starCount) + '☆'.repeat(5-starCount);
+  let grade = 'ลุยต่อได้เลย';
+  if(pct >= 0.9) grade = 'วินิจฉัยแม่นมาก เก่งมาก!';
+  else if(pct >= 0.7) grade = 'ดีมาก ใกล้ครบทุกประเด็นแล้ว';
+  else if(pct >= 0.5) grade = 'พอใช้ ลองย้อนทบทวนประเด็นที่พลาด';
+  else grade = 'ลองอ่านโจทย์อีกครั้งแล้วไล่ทีละประเด็นใหม่';
+  document.getElementById('irac-sum-grade').textContent = grade;
+  document.getElementById('irac-sum-nextcase').style.display = (iracCaseIdx < IRAC_CASES.length - 1) ? 'inline-block' : 'none';
+}
+
+document.getElementById('irac-sum-retry').addEventListener('click', ()=>{
+  SoundFX.click();
+  startIracCase(iracCaseIdx);
+});
+document.getElementById('irac-sum-back').addEventListener('click', ()=>{
+  SoundFX.click();
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('page-header').classList.remove('compact');
+  renderCasePicker();
+});
+document.getElementById('irac-sum-nextcase').addEventListener('click', ()=>{
+  SoundFX.click();
+  startIracCase(iracCaseIdx + 1);
+});
+
+renderCasePicker();
+
+
+/* =========================================================
+   โหมด 5: สรุปเนื้อหา
+   ========================================================= */
+let studyInitDone = false;
+let studyIdx = 0;
+const studySeenSet = loadSeenSet('law2102_studySeen');
+
+/* ---- Web Speech TTS ---- */
+const TTS = (function(){
+  const supported = typeof window !== 'undefined' && 'speechSynthesis' in window;
+  let queue = [], qIdx = 0, currentEl = null, paused = false, rate = 1;
+  function pickThaiVoice(){
+    const vs = window.speechSynthesis.getVoices();
+    return vs.find(v => v.lang && v.lang.toLowerCase().startsWith('th')) || vs[0];
+  }
+  function clearHighlight(){
+    if(currentEl){ currentEl.classList.remove('tts-reading'); currentEl = null; }
+  }
+  function speakNext(){
+    if(qIdx >= queue.length){ clearHighlight(); setBtns('idle'); return; }
+    const item = queue[qIdx];
+    clearHighlight();
+    currentEl = item.el;
+    if(currentEl){
+      currentEl.classList.add('tts-reading');
+      currentEl.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+    const u = new SpeechSynthesisUtterance(item.text);
+    const v = pickThaiVoice();
+    if(v) u.voice = v;
+    u.lang = (v && v.lang) || 'th-TH';
+    u.rate = rate;
+    u.onend = ()=>{ qIdx++; speakNext(); };
+    u.onerror = ()=>{ qIdx++; speakNext(); };
+    window.speechSynthesis.speak(u);
+  }
+  function setBtns(state){
+    const p = document.getElementById('tts-play');
+    const pa = document.getElementById('tts-pause');
+    const s = document.getElementById('tts-stop');
+    if(!p) return;
+    if(state === 'playing'){
+      p.style.display = 'none'; pa.style.display = 'inline-flex'; s.style.display = 'inline-flex';
+      pa.innerHTML = '<span class="tts-ico">⏸</span> หยุดชั่วคราว';
+    } else if(state === 'paused'){
+      pa.innerHTML = '<span class="tts-ico">▶</span> เล่นต่อ';
+    } else { // idle
+      p.style.display = 'inline-flex'; pa.style.display = 'none'; s.style.display = 'none';
+    }
+  }
+  function play(){
+    if(!supported) return;
+    const panel = document.getElementById('study-panel');
+    if(!panel) return;
+    if(window.speechSynthesis.paused){
+      window.speechSynthesis.resume();
+      paused = false;
+      setBtns('playing');
+      return;
+    }
+    stop();
+    // Build queue from readable elements (title, h4, h5, p, li — skip toc)
+    const readable = panel.querySelectorAll('.study-title, h4, h5, p, li');
+    queue = [];
+    readable.forEach(el=>{
+      // Skip toc anchors
+      if(el.closest('.study-toc')) return;
+      const txt = el.textContent.trim();
+      if(txt.length > 0) queue.push({el, text: txt});
+    });
+    if(queue.length === 0) return;
+    qIdx = 0;
+    setBtns('playing');
+    speakNext();
+  }
+  function pauseToggle(){
+    if(!supported) return;
+    if(window.speechSynthesis.paused){
+      window.speechSynthesis.resume();
+      paused = false;
+      setBtns('playing');
+    } else if(window.speechSynthesis.speaking){
+      window.speechSynthesis.pause();
+      paused = true;
+      setBtns('paused');
+    }
+  }
+  function stop(){
+    if(!supported) return;
+    window.speechSynthesis.cancel();
+    clearHighlight();
+    queue = []; qIdx = 0; paused = false;
+    setBtns('idle');
+  }
+  function setRate(r){ rate = r; }
+  return {supported, play, pauseToggle, stop, setRate};
+})();
+
+function renderStudy(idx){
+  if(typeof SUMMARY_TOPICS === 'undefined' || !SUMMARY_TOPICS.length) return;
+  TTS.stop();
+  studyIdx = idx;
+  const nav = document.getElementById('study-nav');
+  nav.innerHTML = '';
+  SUMMARY_TOPICS.forEach((t,i)=>{
+    const btn = document.createElement('button');
+    btn.textContent = t.label;
+    btn.className = i === idx ? 'active' : '';
+    const cat = CATEGORIES[t.cat];
+    if(i === idx){
+      btn.style.background = cat.strong;
+      btn.style.borderColor = cat.strong;
+    }
+    btn.addEventListener('click', ()=>{ SoundFX.click(); renderStudy(i); });
+    nav.appendChild(btn);
+  });
+  const topic = SUMMARY_TOPICS[idx];
+  const cat = CATEGORIES[topic.cat];
+  const panel = document.getElementById('study-panel');
+  panel.style.borderTopColor = cat.strong;
+  panel.style.borderTopWidth = '3px';
+
+  let tocHtml = '';
+  if(topic.toc && topic.toc.length >= 2){
+    tocHtml = '<div class="study-toc"><div class="study-toc-title">สารบัญหัวข้อ</div>';
+    topic.toc.forEach(t=>{
+      tocHtml += '<a href="#'+t.id+'" class="toc-'+t.level+'">'+esc(t.text)+'</a>';
+    });
+    tocHtml += '</div>';
+  }
+  panel.innerHTML = '<div class="study-title" style="color:'+cat.strong+'">'+esc(topic.label)+'</div>' + tocHtml + topic.html;
+
+  panel.querySelectorAll('.study-toc a').forEach(a=>{
+    a.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const target = document.getElementById(a.getAttribute('href').slice(1));
+      if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  // Show TTS bar if supported
+  const ttsBar = document.getElementById('tts-bar');
+  if(ttsBar) ttsBar.style.display = TTS.supported ? 'flex' : 'none';
+
+  if(!studySeenSet.has(topic.id)){
+    studySeenSet.add(topic.id);
+    saveSeenSet('law2102_studySeen', studySeenSet);
+    SoundFX.score();
+    addScore(50);
+  }
+  updateStudyProgress();
+}
+function updateStudyProgress(){
+  const el = document.getElementById('study-progress');
+  if(!el || typeof SUMMARY_TOPICS === 'undefined') return;
+  const seen = SUMMARY_TOPICS.filter(t=>studySeenSet.has(t.id)).length;
+  el.textContent = 'อ่านแล้ว ' + seen + ' / ' + SUMMARY_TOPICS.length + ' หัวข้อ';
+}
+
+// Wire TTS buttons after DOM ready
+(function initTTS(){
+  const play = document.getElementById('tts-play');
+  const pause = document.getElementById('tts-pause');
+  const stop = document.getElementById('tts-stop');
+  const rate = document.getElementById('tts-rate');
+  if(play) play.addEventListener('click', ()=> TTS.play());
+  if(pause) pause.addEventListener('click', ()=> TTS.pauseToggle());
+  if(stop) stop.addEventListener('click', ()=> TTS.stop());
+  if(rate) rate.addEventListener('change', ()=> TTS.setRate(parseFloat(rate.value)));
+  // Preload voices (Chrome quirk)
+  if('speechSynthesis' in window){
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = ()=>{ window.speechSynthesis.getVoices(); };
+  }
+})();
+
+/* ---------- init ---------- */
+renderScoreDisplay();
+renderCard();
+seqSelect.value = SEQ_ORDER[0];
+renderSeq();
+renderSetPicker();
+setLevel('basic');
+setTab('card');
+</script>
+</html>

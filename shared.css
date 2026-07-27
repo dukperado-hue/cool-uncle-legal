@@ -1,0 +1,138 @@
+/* ================================================================
+   SHARED STYLES - ใช้ร่วมสำหรับทุกหน้า
+   โครงสร้าง: Design system ฐานสำหรับ Cool Uncle Legal Lab
+   ================================================================ */
+
+:root{
+  --paper:#FBF9F4;
+  --card:#FFFFFF;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --gold-soft:#F3E8CF;
+  --ok:#1E7A4F;
+  --ok-bg:#E6F4EC;
+  --bad:#B23A3A;
+  --bad-bg:#FBEAEA;
+  --accent:#2E4A7A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),
+    var(--paper);
+  color:var(--ink);
+  min-height:100vh;
+  font-size:16px;
+  line-height:1.75;
+}
+
+h1,h2,h3{font-family:'Noto Serif Thai',serif}
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;900&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap');
+
+/* ============ TOP BAR ============ */
+.topbar{
+  display:flex;align-items:center;gap:10px;
+  background:#EFEAE0;border-bottom:1px solid var(--line);
+  padding:10px 18px;font-size:13px;color:var(--ink-soft);
+}
+.topbar-brand{font-weight:800;color:var(--ink);display:flex;align-items:center;gap:6px}
+.topbar-sep{color:var(--ink-faint)}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+.topbar-pill{
+  background:var(--gold-soft);color:#8F6511;font-weight:700;font-size:12.5px;
+  padding:4px 11px;border-radius:999px;
+}
+
+/* ============ BACK BUTTON ============ */
+.back-button{
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--accent);font-weight:600;font-size:14px;
+  text-decoration:none;margin-bottom:16px;transition:all .2s;
+}
+.back-button:hover{transform:translateX(-4px);color:var(--ink)}
+.back-button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* ============ AUDIO PLAYER (READ ALOUD) ============ */
+.audio-control{
+  display:flex;align-items:center;gap:8px;
+  margin:14px 0 20px;padding:12px 14px;
+  background:var(--ok-bg);border:1px solid var(--ok);
+  border-radius:var(--radius);
+}
+.audio-control button{
+  display:flex;align-items:center;gap:6px;
+  background:var(--ok);color:white;border:none;
+  padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;
+  cursor:pointer;transition:all .2s;
+  font-family:inherit;
+}
+.audio-control button:hover{background:#177047;transform:translateY(-1px)}
+.audio-control button:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.audio-control .speed-control{
+  display:flex;align-items:center;gap:4px;font-size:12px;
+}
+.audio-control input[type="range"]{width:80px}
+
+/* ============ YOUTUBE WIDGET ============ */
+.youtube-section{
+  margin:24px 0;padding:16px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--radius);
+}
+.youtube-section h3{
+  font-size:16px;font-weight:700;margin-bottom:12px;color:var(--ink);
+}
+.youtube-list{
+  display:flex;flex-direction:column;gap:10px;
+}
+.youtube-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px;background:#F9F7F2;border-radius:8px;
+  text-decoration:none;color:inherit;transition:all .2s;
+  cursor:pointer;
+}
+.youtube-item:hover{background:#F1EDE2;border-left:3px solid var(--accent)}
+.youtube-item .thumb{
+  width:60px;height:45px;background:#E0DDD5;border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+}
+.youtube-item .meta{flex:1;display:flex;flex-direction:column;gap:4px}
+.youtube-item .title{font-size:14px;font-weight:600;color:var(--ink)}
+.youtube-item .channel{font-size:12px;color:var(--ink-soft)}
+.youtube-item-open{color:var(--accent);font-weight:600;font-size:12px}
+
+/* ============ WRAPPER ============ */
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px 60px}
+.wrap-compact{max-width:860px;margin:0 auto;padding:0 18px 60px}
+
+/* ============ FOOTER ============ */
+footer{
+  margin-top:52px;text-align:center;font-size:12.5px;color:var(--ink-faint);
+  border-top:1px solid var(--line);padding-top:18px;
+}
+
+/* ============ UTILITY CLASSES ============ */
+.text-center{text-align:center}
+.mt-32{margin-top:32px}
+.mb-16{margin-bottom:16px}
+
+/* ============ MOBILE ============ */
+@media(max-width:520px){
+  .audio-control{padding:10px 12px;font-size:12px}
+  .audio-control button{padding:6px 10px;font-size:12px}
+  .youtube-item{padding:8px}
+  .youtube-item .thumb{width:50px;height:37px}
+  .youtube-item .title{font-size:13px}
+  .youtube-item .channel{font-size:11px}
+}

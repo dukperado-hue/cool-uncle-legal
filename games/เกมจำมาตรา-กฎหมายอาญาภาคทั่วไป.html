@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เกมจำมาตรา · กฎหมายอาญา ภาคทั่วไป</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF9F4;
+  --card:#FFFFFF;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --gold-soft:#F3E8CF;
+  --ok:#1E7A4F;
+  --ok-bg:#E6F4EC;
+  --bad:#B23A3A;
+  --bad-bg:#FBEAEA;
+  --accent:#2E4A7A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),
+    var(--paper);
+  color:var(--ink);
+  min-height:100vh;
+  padding:20px 14px 60px;
+  font-size:16px;
+  line-height:1.75;
+}
+.wrap{max-width:860px;margin:0 auto}
+
+header{text-align:center;margin-bottom:22px;transition:opacity .15s}
+header.compact{margin-bottom:10px}
+header.compact .crest{display:none}
+header.compact h1{font-size:19px}
+header.compact .subtitle{display:none}
+.crest{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Noto Serif Thai',serif;
+  font-size:13px;letter-spacing:.35em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:6px;
+}
+.crest::before,.crest::after{content:"";width:44px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+.crest::after{background:linear-gradient(90deg,var(--gold),transparent);}
+h1{
+  font-family:'Noto Serif Thai',serif;
+  font-size:clamp(24px,5vw,36px);
+  font-weight:700;line-height:1.3;
+}
+.subtitle{color:var(--ink-soft);font-size:15px;margin-top:2px}
+
+.tabbar{
+  display:flex;gap:5px;background:#F1EDE2;border:1px solid var(--line);
+  border-radius:999px;padding:5px;margin:20px auto 26px;max-width:680px;
+  overflow-x:auto;
+}
+.tabbar button{
+  flex:1 0 auto;border:none;background:transparent;border-radius:999px;
+  padding:10px 10px;font-family:inherit;font-size:13.5px;font-weight:600;
+  color:var(--ink-soft);cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+.tabbar button.on{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+.tabbar button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#btn-reset,#btn-sound{
+  flex:0 0 38px;font-size:15px;color:var(--ink-faint);
+}
+#btn-reset:hover{color:var(--bad)}
+#btn-sound:hover{color:var(--accent)}
+
+.sticky-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
+  background:linear-gradient(180deg,rgba(251,249,244,0) 0%,var(--paper) 35%);
+  padding:22px 14px calc(14px + env(safe-area-inset-bottom,0px));
+}
+.sticky-bar-inner{max-width:860px;margin:0 auto;display:flex;gap:10px}
+.sticky-bar-inner button{
+  flex:1;box-shadow:0 6px 20px rgba(34,40,58,.22);
+  padding:20px 18px;font-size:18px;font-weight:700;border-radius:16px;
+  min-height:60px;
+}
+body.has-sticky-bar{padding-bottom:96px}
+@media(max-width:520px){
+  .sticky-bar{padding:18px 10px calc(12px + env(safe-area-inset-bottom,0px))}
+  .sticky-bar-inner button{padding:18px 14px;font-size:16.5px;min-height:56px}
+}
+
+.irac-caselist{display:flex;flex-direction:column;gap:10px}
+.irac-case-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;text-align:left;cursor:pointer;transition:border-color .15s;
+}
+.irac-case-card:hover{border-color:var(--gold)}
+.irac-case-card .icref{font-size:12px;color:var(--ink-faint);margin-bottom:4px}
+.irac-case-card .ictitle{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:600}
+.irac-case-card .icprog{font-size:12.5px;color:var(--gold);margin-top:6px;font-weight:600}
+
+.irac-facts{
+  background:#FBF6E8;border:1px solid var(--gold-soft);border-radius:var(--radius);
+  padding:14px 16px;margin-bottom:6px;font-size:15.5px;line-height:1.85;color:var(--ink);
+  max-height:92px;overflow:hidden;position:relative;
+}
+.irac-facts::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:34px;
+  background:linear-gradient(180deg,transparent,#FBF6E8);pointer-events:none;
+}
+.irac-facts.expanded{max-height:none}
+.irac-facts.expanded::after{display:none}
+.irac-facts-toggle{
+  display:block;width:100%;text-align:center;font-size:13px;color:var(--accent);font-weight:600;
+  background:none;border:none;padding:5px 0 14px;cursor:pointer;
+}
+
+.irac-stepper{display:flex;gap:5px;margin-bottom:8px}
+.irac-step{
+  flex:1;text-align:center;font-size:11px;font-weight:600;color:var(--ink-faint);
+  padding:5px 2px;border-radius:8px;background:#EEEBE0;border:1px solid transparent;
+}
+.irac-step.active{background:var(--accent);color:#fff}
+.irac-step.done{background:var(--ok-bg);color:var(--ok);border-color:#BFE3CE}
+
+.irac-progress-label{font-size:12.5px;color:var(--ink-soft);margin-bottom:6px;font-weight:600}
+.irac-back{background:none;border:none;color:var(--ink-faint);font-size:13px;cursor:pointer;margin-bottom:12px;padding:0}
+.irac-back:hover{color:var(--accent)}
+
+.irac-issue-recap{
+  background:var(--ok-bg);border:1px solid #BFE3CE;border-radius:var(--radius);
+  padding:16px 18px;text-align:center;
+}
+.irac-issue-recap .big{font-family:'Noto Serif Thai',serif;font-size:18px;font-weight:700;color:#14563A;margin-bottom:6px}
+
+.stage{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  margin-bottom:14px;min-height:88px;
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  padding:14px 16px;
+}
+.stage .icon-wrap{
+  width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.22);
+  display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+}
+.stage .icon-wrap svg{width:30px;height:30px}
+.stage .stage-label{font-family:'Noto Serif Thai',serif;font-size:15px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.25)}
+@media(max-width:520px){.stage{min-height:72px}.stage .icon-wrap{width:42px;height:42px}.stage .icon-wrap svg{width:24px;height:24px}}
+
+button{font-family:inherit}
+select{
+  font-family:inherit;font-size:15px;color:var(--ink);
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:10px 12px;width:100%;
+}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.row select{flex:1;min-width:170px;width:auto}
+.muted{color:var(--ink-soft);font-size:14px;white-space:nowrap}
+
+.flip-stage{perspective:1200px}
+.flashcard{
+  position:relative;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  min-height:250px;padding:34px 26px 30px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:10px;overflow:hidden;
+  transition:transform .16s ease;
+}
+.flashcard.flipping{transform:rotateY(90deg)}
+@media (prefers-reduced-motion:reduce){.flashcard.flipping{transform:none}}
+.ribbon{
+  position:absolute;top:0;left:26px;width:34px;height:56px;
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%);
+}
+.chapter-tag{
+  font-size:12px;font-weight:700;letter-spacing:.03em;
+  padding:4px 14px;border-radius:999px;
+}
+.sec-no{
+  font-family:'Noto Serif Thai',serif;font-size:clamp(34px,7vw,48px);
+  font-weight:700;line-height:1.2;
+}
+.stars{color:var(--gold);font-size:16px;letter-spacing:.15em}
+.hint{font-size:13px;color:var(--ink-faint);margin-top:10px}
+.face-back .card-title{font-family:'Noto Serif Thai',serif;font-size:18px;font-weight:600;line-height:1.6}
+.face-back .card-result{font-size:16.5px;margin-top:10px;line-height:1.8}
+.face-back .card-note{
+  font-size:14px;color:var(--ink-soft);margin-top:12px;line-height:1.7;
+  border-top:1px dashed var(--line);padding-top:10px;max-width:560px;
+}
+.nav3{display:flex;gap:10px;margin-top:14px}
+.nav3 button{
+  flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:12px;font-size:14.5px;font-weight:600;color:var(--ink);cursor:pointer;
+  transition:border-color .15s, transform .1s;
+}
+.nav3 button:hover{border-color:var(--ink-faint)}
+.nav3 button:active{transform:scale(.98)}
+.nav3 button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.seq-group{margin-bottom:26px}
+.seq-group-head{
+  font-family:'Noto Serif Thai',serif;font-size:17px;font-weight:700;
+  padding:10px 14px;border-radius:10px;margin-bottom:10px;
+}
+.seq-item{
+  background:var(--card);border:1px solid var(--line);border-left-width:6px;
+  border-radius:12px;padding:14px 16px;margin-bottom:10px;
+  display:flex;gap:12px;box-shadow:0 1px 2px rgba(34,40,58,.04);
+}
+.seq-num{
+  font-family:'Noto Serif Thai',serif;font-weight:700;font-size:15px;
+  color:var(--ink-faint);min-width:22px;padding-top:3px;
+}
+.seq-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.seq-sec{font-family:'Noto Serif Thai',serif;font-size:17px;font-weight:700}
+.seq-title{font-size:15px;font-weight:600}
+.seq-res{font-size:14.5px;margin-top:4px;line-height:1.7}
+.seq-note{font-size:13.5px;color:var(--ink-soft);margin-top:5px;line-height:1.65;border-top:1px dashed var(--line);padding-top:5px}
+.seq-stars{color:var(--gold);font-size:12px;letter-spacing:.1em}
+
+.lvlbar{display:flex;gap:8px;margin-bottom:14px}
+.lvlbar button{
+  flex:1;border:1.5px solid var(--line);background:var(--card);border-radius:12px;
+  padding:12px 8px;font-size:14.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+}
+.lvlbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.lvlbar .lvl-desc{display:block;font-size:12px;font-weight:400;color:var(--ink-faint);margin-top:2px}
+.lvlbar button.on .lvl-desc{color:var(--accent)}
+
+.setbar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.setbar button{
+  border:1px solid var(--line);background:var(--card);border-radius:999px;
+  padding:7px 15px;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.setbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.setbar .best{color:var(--gold);font-size:12px;font-weight:700}
+
+.progressbar{height:6px;background:#EDE9DD;border-radius:99px;overflow:hidden;margin-bottom:8px}
+.progressbar>div{height:100%;background:linear-gradient(90deg,var(--accent),#5E7BB0);border-radius:99px;transition:width .3s}
+.quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:14px}
+.quiz-meta .score{font-weight:700}
+
+.scenario{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:20px 22px;margin-bottom:14px;
+}
+.scenario .qtext{font-size:16.5px;line-height:1.9}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opts button{
+  text-align:left;background:var(--card);border:1.5px solid var(--line);
+  border-radius:12px;padding:14px 16px;font-size:15.5px;line-height:1.7;
+  color:var(--ink);cursor:pointer;transition:border-color .15s, background .15s;
+  display:flex;gap:10px;
+}
+.opts button:hover:not(:disabled){border-color:var(--ink-faint)}
+.opts button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opts .abc{
+  font-family:'Noto Serif Thai',serif;font-weight:700;color:var(--ink-faint);
+  min-width:20px;
+}
+.opts button.correct{border-color:var(--ok);background:var(--ok-bg)}
+.opts button.correct .abc{color:var(--ok)}
+.opts button.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opts button.wrong .abc{color:var(--bad)}
+.opts button:disabled{cursor:default;opacity:.92}
+
+.explain{
+  display:none;margin-top:14px;border-radius:12px;padding:16px 18px;
+  font-size:15px;line-height:1.85;border:1px solid;
+}
+.explain.ok{background:var(--ok-bg);border-color:#BFE3CE;color:#14563A}
+.explain.bad{background:var(--bad-bg);border-color:#F0C9C9;color:#7C2A2A}
+.explain b{display:block;margin-bottom:4px;font-size:15.5px}
+
+.quiz-actions{display:flex;gap:10px;margin-top:14px}
+.quiz-actions button{
+  flex:1;border:none;border-radius:12px;padding:13px;font-size:15px;font-weight:700;
+  cursor:pointer;display:none;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#26406B}
+.btn-ghost{background:var(--card);border:1.5px solid var(--line) !important;color:var(--ink)}
+
+.summary{
+  display:none;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:34px 24px;text-align:center;
+}
+.summary .grade{font-family:'Noto Serif Thai',serif;font-size:26px;font-weight:700;margin-top:8px}
+.summary .bigscore{font-family:'Noto Serif Thai',serif;font-size:56px;font-weight:700;color:var(--accent);line-height:1.2}
+.summary .of{font-size:15px;color:var(--ink-soft)}
+.summary .gstars{color:var(--gold);font-size:22px;letter-spacing:.2em;margin-top:6px}
+.summary .sum-actions{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+.summary .sum-actions button{
+  border-radius:12px;padding:12px 22px;font-size:14.5px;font-weight:700;cursor:pointer;border:none;
+}
+
+.read-section{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  margin-bottom:12px;overflow:hidden;box-shadow:0 1px 2px rgba(34,40,58,.04);
+}
+.read-head{
+  width:100%;text-align:left;background:none;border:none;cursor:pointer;
+  padding:16px 18px;display:flex;align-items:center;gap:12px;
+}
+.read-head .rnum{
+  font-family:'Noto Serif Thai',serif;font-weight:700;font-size:15px;
+  width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  flex:0 0 auto;color:#fff;
+}
+.read-head .rtitle{font-family:'Noto Serif Thai',serif;font-size:16.5px;font-weight:700;flex:1}
+.read-head .rarrow{font-size:13px;color:var(--ink-faint);transition:transform .2s}
+.read-section.open .rarrow{transform:rotate(180deg)}
+.read-body{display:none;padding:0 18px 20px 60px;font-size:15px;line-height:1.9;color:var(--ink)}
+.read-section.open .read-body{display:block}
+.read-body p{margin-bottom:10px}
+.read-body b{color:var(--accent)}
+.read-body ul{margin:8px 0 8px 20px}
+.read-body li{margin-bottom:6px}
+.read-note{
+  background:#FBF6E8;border:1px solid var(--gold-soft);border-radius:10px;
+  padding:10px 14px;margin-top:10px;font-size:13.5px;color:#6B5426;
+}
+
+footer{
+  margin-top:40px;text-align:center;font-size:12.5px;color:var(--ink-faint);
+  border-top:1px solid var(--line);padding-top:16px;
+}
+.view{display:none}
+.view.on{display:block}
+@media(max-width:520px){
+  body{padding:14px 10px 50px}
+  .flashcard{padding:30px 16px 26px}
+  .scenario{padding:16px}
+  .read-body{padding-left:18px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header id="page-header">
+  <div class="crest" id="hd-crest">ประมวลกฎหมายอาญา</div>
+  <h1 id="hd-title">เกมจำมาตรา</h1>
+  <div class="subtitle" id="hd-sub">กฎหมายอาญา ภาคทั่วไป · น.110/น.210</div>
+</header>
+
+<nav class="tabbar" aria-label="โหมดเกม">
+  <button id="tab-card" class="on">การ์ดจำมาตรา</button>
+  <button id="tab-seq">เรียงตามโครงสร้าง</button>
+  <button id="tab-quiz">วิเคราะห์โจทย์</button>
+  <button id="tab-irac">ฝึก IRAC</button>
+  <button id="tab-read">อ่านเนื้อหา</button>
+  <button id="btn-sound" title="ปิด/เปิดเสียง" aria-label="ปิด/เปิดเสียง">🔊</button>
+  <button id="btn-reset" title="รีเซ็ตทั้งหมด" aria-label="รีเซ็ตทั้งหมด">↺</button>
+</nav>
+
+<!-- ============ โหมด 1: การ์ด ============ -->
+<section id="view-card" class="view on">
+  <div class="row">
+    <select id="cat-select" aria-label="เลือกหมวด"></select>
+    <span class="muted" id="card-progress"></span>
+  </div>
+  <div class="stage" id="card-stage" aria-hidden="true"></div>
+  <div class="flip-stage">
+    <div class="flashcard" id="flip-card" role="button" tabindex="0" aria-label="แตะเพื่อพลิกการ์ด">
+      <div class="ribbon" id="card-ribbon"></div>
+      <div class="chapter-tag" id="cat-badge"></div>
+      <div class="face-front" id="face-front">
+        <div class="sec-no" id="card-section"></div>
+        <div class="stars" id="card-stars"></div>
+        <div class="hint">แตะการ์ดเพื่อดูคำตอบ · ปุ่มลูกศรเลื่อนการ์ด</div>
+      </div>
+      <div class="face-back" id="face-back" style="display:none">
+        <div class="card-title" id="card-title"></div>
+        <div class="card-result" id="card-result"></div>
+        <div class="card-note" id="card-note"></div>
+      </div>
+    </div>
+  </div>
+  <div class="nav3">
+    <button id="btn-prev">← ก่อนหน้า</button>
+    <button id="btn-shuffle">⇄ สุ่มใหม่</button>
+    <button id="btn-next">ถัดไป →</button>
+  </div>
+</section>
+
+<!-- ============ โหมด 2: เรียงตามโครงสร้างความรับผิด ============ -->
+<section id="view-seq" class="view">
+  <p class="muted" style="margin-bottom:14px;font-size:13.5px;line-height:1.7">เรียงมาตราตามลำดับ "โครงสร้างความรับผิดทางอาญา" ที่ใช้วินิจฉัยโจทย์เสมอ: ขอบเขตการใช้กฎหมาย → โครงสร้างที่ 1 (การกระทำครบองค์ประกอบ) → โครงสร้างที่ 2 (ไม่มีเหตุยกเว้นความผิด) → โครงสร้างที่ 3 (ไม่มีเหตุยกเว้นโทษ) → พยายาม/ร่วมกระทำ → โทษ → ตัวอย่างภาคความผิด</p>
+  <div class="row"><select id="seq-select" aria-label="เลือกโครงสร้าง/หมวด"></select></div>
+  <div id="seq-groups"></div>
+</section>
+
+<!-- ============ โหมด 3: วิเคราะห์โจทย์ ============ -->
+<section id="view-quiz" class="view">
+  <div class="lvlbar">
+    <button id="lvl-basic" class="on">พื้นฐาน<span class="lvl-desc">ท่องจำมาตรา–ผลกฎหมาย</span></button>
+    <button id="lvl-adv">ข้อสอบจริง<span class="lvl-desc">จากข้อสอบเก่า (ดัดแปลงชื่อ)</span></button>
+  </div>
+  <div class="setbar" id="set-picker"></div>
+
+  <div id="quiz-play">
+    <div class="progressbar"><div id="pbar" style="width:0%"></div></div>
+    <div class="quiz-meta">
+      <span class="muted" id="quiz-progress"></span>
+      <span class="score" id="quiz-score"></span>
+    </div>
+    <div class="chapter-tag" id="quiz-tag" style="display:inline-block;margin-bottom:10px"></div>
+    <div class="stage" id="quiz-stage" aria-hidden="true"></div>
+    <div class="scenario"><div class="qtext" id="quiz-scenario"></div></div>
+    <div class="opts" id="quiz-options"></div>
+    <div class="explain" id="quiz-explain"></div>
+  </div>
+
+  <div class="summary" id="quiz-summary">
+    <div class="muted" id="sum-set-label"></div>
+    <div class="bigscore" id="sum-score">0</div>
+    <div class="of" id="sum-of">จาก 10 ข้อ</div>
+    <div class="gstars" id="sum-stars"></div>
+    <div class="grade" id="sum-grade"></div>
+    <div class="muted" id="sum-best" style="margin-top:6px"></div>
+    <div class="sum-actions">
+      <button id="sum-review" class="btn-ghost" style="display:none">ทบทวนข้อที่ผิด</button>
+      <button id="sum-retry" class="btn-ghost">ทำชุดนี้ซ้ำ</button>
+      <button id="sum-nextset" class="btn-primary" style="display:none">ชุดถัดไป →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ โหมด 4: ฝึก IRAC ============ -->
+<section id="view-irac" class="view">
+  <div id="irac-picker">
+    <p class="muted" style="margin-bottom:14px;font-size:14px">เลือกข้อสอบเก่าที่จะฝึกวินิจฉัยแบบ IRAC ทีละประเด็นตามโครงสร้างความรับผิดทางอาญา: อ่านโจทย์ → เลือกประเด็น → เลือกมาตรา → ปรับบท → สรุปผล</p>
+    <div class="irac-caselist" id="irac-caselist"></div>
+  </div>
+
+  <div id="irac-play" style="display:none">
+    <button class="irac-back" id="irac-back">← กลับไปเลือกข้อสอบ</button>
+    <div class="chapter-tag" id="irac-case-tag" style="display:inline-block;margin-bottom:6px"></div>
+    <div class="irac-facts" id="irac-facts"></div>
+    <button class="irac-facts-toggle" id="irac-facts-toggle">ขยายอ่านโจทย์เต็ม ▾</button>
+
+    <div style="margin-top:2px">
+      <div class="irac-progress-label" id="irac-progress-label"></div>
+      <div class="irac-stepper" id="irac-stepper">
+        <div class="irac-step" data-step="issue">1. ประเด็น</div>
+        <div class="irac-step" data-step="rule">2. มาตรา</div>
+        <div class="irac-step" data-step="app">3. ปรับบท</div>
+        <div class="irac-step" data-step="conc">4. สรุปผล</div>
+      </div>
+    </div>
+
+    <div id="irac-stage-box">
+      <div class="scenario" style="padding:16px 18px;margin-bottom:10px"><div class="qtext" id="irac-question" style="font-size:17px"></div></div>
+      <div class="opts" id="irac-options"></div>
+      <div class="explain" id="irac-explain"></div>
+    </div>
+
+    <div id="irac-recap-box" style="display:none">
+      <div class="irac-issue-recap">
+        <div class="big" id="irac-recap-title"></div>
+        <div id="irac-recap-text" style="font-size:14.5px;line-height:1.8;color:#14563A"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary" id="irac-summary">
+    <div class="muted" id="irac-sum-label"></div>
+    <div class="bigscore" id="irac-sum-score">0</div>
+    <div class="of" id="irac-sum-of"></div>
+    <div class="gstars" id="irac-sum-stars"></div>
+    <div class="grade" id="irac-sum-grade"></div>
+    <div class="sum-actions">
+      <button id="irac-sum-retry" class="btn-ghost">ทำข้อนี้ซ้ำ</button>
+      <button id="irac-sum-back" class="btn-ghost">เลือกข้อสอบอื่น</button>
+      <button id="irac-sum-nextcase" class="btn-primary" style="display:none">ข้อถัดไป →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ โหมด 5: อ่านเนื้อหาวิชา ============ -->
+<section id="view-read" class="view">
+  <p class="muted" style="margin-bottom:16px;font-size:13.5px;line-height:1.7">สรุปเนื้อหาจากคำบรรยายวิชา แตะหัวข้อเพื่อขยายอ่าน</p>
+  <div id="read-list"></div>
+</section>
+
+<footer>
+  สรุปเพื่อการศึกษาเท่านั้น ไม่ใช่คำแนะนำทางกฎหมาย · โปรดตรวจสอบกับตัวบทและคำบรรยายฉบับล่าสุดเสมอ
+</footer>
+</div>
+
+<div class="sticky-bar" id="sticky-bar">
+  <div class="sticky-bar-inner">
+    <button id="quiz-next" class="btn-primary" style="display:none">ข้อถัดไป →</button>
+    <button id="quiz-finish" class="btn-primary" style="display:none">ดูสรุปผล</button>
+    <button id="irac-next" class="btn-primary" style="display:none">ถัดไป →</button>
+    <button id="irac-recap-next" class="btn-primary" style="display:none">ประเด็นถัดไป →</button>
+  </div>
+</div>
+
+<script>
+/* ================================================================
+   GAME DATA — กฎหมายอาญา ภาคทั่วไป
+   ================================================================ */
+
+const CONFIG = {
+  crest: "ประมวลกฎหมายอาญา",
+  title: "เกมจำมาตรา",
+  subtitle: "กฎหมายอาญา ภาคทั่วไป · น.110/น.210",
+  storageKey: "memgame_law_criminal_1"
+};
+
+/* หมวดหมู่: แยกภาคทั่วไป (โทนน้ำเงิน/เขียว/ม่วง/ส้ม/เทา) ออกจากภาคความผิด (โทนแดง) อย่างชัดเจน */
+const CATEGORIES = {
+  scope:   {label:"ขอบเขตการใช้กฎหมาย (ม.1-10)",              soft:"#E3EAF2", strong:"#1F3A5F", grad:"linear-gradient(135deg,#25406B,#3C5D8F)"},
+  struct1: {label:"โครงสร้างที่ 1 การกระทำ/องค์ประกอบ (ม.59-63)", soft:"#E3EFFA", strong:"#175A9E", grad:"linear-gradient(135deg,#1D5FA6,#3F82C9)"},
+  struct2: {label:"โครงสร้างที่ 2 ยกเว้นความผิด (ม.68-70)",       soft:"#DFF3EA", strong:"#0B6B57", grad:"linear-gradient(135deg,#0E7A63,#2FA187)"},
+  struct3: {label:"โครงสร้างที่ 3 ยกเว้นโทษ/ลดโทษ (ม.64-78)",     soft:"#ECEAFB", strong:"#4A41A8", grad:"linear-gradient(135deg,#4A41A8,#7268CE)"},
+  attempt: {label:"พยายาม + ร่วมกระทำ (ม.80-89)",                 soft:"#F9EDD6", strong:"#8A5A0D", grad:"linear-gradient(135deg,#8A5A0D,#C4903A)"},
+  penalty: {label:"โทษ / ริบทรัพย์ (ม.18, 32-33)",                soft:"#EEECE4", strong:"#4A4A45", grad:"linear-gradient(135deg,#4A4A45,#767066)"},
+  offense: {label:"ตัวอย่างภาคความผิดที่ออกสอบบ่อย",              soft:"#FBE8E8", strong:"#9C2B2B", grad:"linear-gradient(135deg,#9C2B2B,#C85C4E)"}
+};
+
+/* โครงสร้างเรียงลำดับสำหรับโหมด "เรียงตามโครงสร้าง" */
+const STRUCTURE_GROUPS = [
+  {cat:"scope",   heading:"ก่อนเริ่มโครงสร้าง — ขอบเขตการใช้บังคับกฎหมายอาญา"},
+  {cat:"struct1", heading:"โครงสร้างที่ 1 — การกระทำครบองค์ประกอบที่กฎหมายบัญญัติ"},
+  {cat:"struct2", heading:"โครงสร้างที่ 2 — ไม่มีกฎหมายยกเว้นความผิด"},
+  {cat:"struct3", heading:"โครงสร้างที่ 3 — ไม่มีกฎหมายยกเว้นโทษ (รวมเหตุลดโทษ)"},
+  {cat:"attempt", heading:"หัวข้อเสริม — ความพยายามกระทำความผิด และผู้มีส่วนร่วม"},
+  {cat:"penalty", heading:"หัวข้อเสริม — โทษทางอาญาและการริบทรัพย์สิน"},
+  {cat:"offense", heading:"ภาคความผิด — ฐานความผิดที่ใช้เป็นโจทย์ตุ๊กตาบ่อย"}
+];
+
+const CARDS = [
+/* ---------- ขอบเขตการใช้กฎหมาย ---------- */
+{cat:"scope",section:"ม.1",title:"บทนิยามศัพท์",result:"ประมวลกฎหมายอาญาบัญญัตินิยามศัพท์เฉพาะไว้ (เช่น โดยทุจริต, เอกสาร, อาวุธ) ต้องตีความตามนิยามนี้ก่อนเสมอ ก่อนไปใช้ความหมายทั่วไป",stars:3},
+{cat:"scope",section:"ม.2",title:"หลัก Nullum crimen, nulla poena sine lege",result:"บุคคลจะต้องรับโทษทางอาญาต่อเมื่อได้กระทำการอันกฎหมายที่ใช้ในขณะกระทำนั้นบัญญัติเป็นความผิดและกำหนดโทษไว้ ถ้ากฎหมายที่บัญญัติภายหลังยกเลิกความผิดหรือให้เป็นคุณแก่ผู้กระทำทั้งหมด ให้ใช้กฎหมายใหม่",note:"หัวใจของหลักความชอบด้วยกฎหมายในทางอาญา ห้ามลงโทษย้อนหลังโดยไม่มีกฎหมายรองรับ",stars:5},
+{cat:"scope",section:"ม.3",title:"กฎหมายใหม่เป็นคุณกว่าบางส่วน",result:"หากกฎหมายที่ใช้ภายหลังเพียงแต่เปลี่ยนแปลงบางส่วน (เช่น อัตราโทษเบาลง) ให้ใช้ส่วนที่เป็นคุณแก่ผู้กระทำเท่าที่เป็นคุณ",stars:3},
+{cat:"scope",section:"ม.4",title:"หลักดินแดน",result:"ผู้ใดกระทำความผิดในราชอาณาจักรไทย ต้องรับโทษตามกฎหมายไทย รวมถึงกระทำในเรือไทยหรืออากาศยานไทยไม่ว่าจะอยู่ ณ ที่ใด (วรรคสอง)",stars:4},
+{cat:"scope",section:"ม.5",title:"กรณี \"ให้ถือว่า\" กระทำในราชอาณาจักร",result:"ขยายหลักดินแดนให้ครอบคลุม 3 กรณี: (1) กระทำบางส่วนในราชอาณาจักร บางส่วนนอกราชอาณาจักร (2) กระทำนอกราชอาณาจักรแต่ผลเกิดในราชอาณาจักร (3) ตระเตรียมหรือพยายามกระทำนอกราชอาณาจักร แต่ถ้าจะได้กระทำตลอดไปการกระทำนั้นจะบรรลุผลในราชอาณาจักร",note:"เป็นมาตราที่ออกสอบบ่อยที่สุดในหมวดขอบเขตการใช้กฎหมาย ต้องแยกให้ออกทั้ง 3 อนุมาตรา",stars:5},
+{cat:"scope",section:"ม.6",title:"ตัวการ/ผู้ใช้/ผู้สนับสนุนอยู่ต่างประเทศ",result:"ถ้าตัวการ ผู้ใช้ หรือผู้สนับสนุนกระทำการอยู่นอกราชอาณาจักร แต่ผู้ลงมือกระทำความผิดกระทำในราชอาณาจักร ให้ถือว่าตัวการ ผู้ใช้ ผู้สนับสนุนนั้นได้กระทำในราชอาณาจักรด้วย",stars:4},
+{cat:"scope",section:"ม.7",title:"อำนาจลงโทษสากล + หลักป้องกันรัฐ",result:"ความผิดร้ายแรงที่กระทบต่อความมั่นคงของรัฐหรือเป็นภัยต่อนานาประเทศ เช่น กบฏ ปลอมแปลงเงินตรา โจรสลัด รัฐไทยลงโทษได้แม้กระทำนอกราชอาณาจักรทั้งหมดและไม่ว่าผู้กระทำจะเป็นคนชาติใด",stars:4},
+{cat:"scope",section:"ม.8",title:"หลักบุคคล",result:"ผู้กระทำความผิดนอกราชอาณาจักร หากผู้กระทำเป็นคนไทย หรือผู้เสียหายเป็นคนไทย (เฉพาะฐานความผิดที่กฎหมายระบุไว้ เช่น ฆ่าคน ทำร้าย ลักทรัพย์) ศาลไทยลงโทษได้ แต่ต้องมีรัฐบาลประเทศที่เกิดเหตุหรือผู้เสียหายร้องขอให้ลงโทษด้วย",stars:5},
+{cat:"scope",section:"ม.9",title:"เจ้าพนักงานกระทำผิดนอกราชอาณาจักร",result:"เจ้าพนักงานของรัฐไทยกระทำความผิดต่อตำแหน่งหน้าที่ราชการนอกราชอาณาจักร ต้องรับโทษในราชอาณาจักร",stars:3},
+{cat:"scope",section:"ม.10",title:"คำนึงถึงคำพิพากษาศาลต่างประเทศ",result:"ผู้ใดถูกศาลต่างประเทศพิพากษาแล้วสำหรับการกระทำเดียวกัน ให้นำผลของคำพิพากษานั้นมาพิจารณาประกอบ (หลักห้ามลงโทษซ้ำสอง)",stars:3},
+
+/* ---------- โครงสร้างที่ 1 ---------- */
+{cat:"struct1",section:"ม.59 ว.1",title:"หลักทั่วไป: ต้องเจตนา เว้นแต่กฎหมายกำหนดไว้เป็นอื่น",result:"บุคคลจะต้องรับผิดทางอาญาก็ต่อเมื่อได้กระทำโดยเจตนา เว้นแต่จะได้กระทำโดยประมาทในกรณีที่กฎหมายบัญญัติให้ต้องรับผิดเมื่อประมาท หรือเว้นแต่ในกรณีที่กฎหมายบัญญัติไว้โดยชัดแจ้งให้ต้องรับผิดแม้ไม่มีเจตนา",note:"เป็นประตูแรกที่ต้องตอบก่อนเสมอในการวินิจฉัยองค์ประกอบภายใน",stars:5},
+{cat:"struct1",section:"ม.59 ว.2-3",title:"ความหมายของเจตนา",result:"เจตนา = รู้ข้อเท็จจริงอันเป็นองค์ประกอบภายนอกของความผิด + ประสงค์ต่อผล หรือย่อมเล็งเห็นผลของการกระทำนั้น",note:"ถ้าไม่รู้ข้อเท็จจริงอันเป็นองค์ประกอบภายนอก ถือว่าขาดเจตนาตั้งแต่ต้น ไม่ต้องพิจารณาเหตุยกเว้นใด ๆ ต่อ",stars:5},
+{cat:"struct1",section:"ม.59 ว.4",title:"ความหมายของประมาท",result:"กระทำโดยปราศจากความระมัดระวังซึ่งบุคคลในภาวะเช่นนั้นจักต้องมีตามวิสัยและพฤติการณ์ และผู้กระทำอาจใช้ความระมัดระวังเช่นว่านั้นได้ แต่หาได้ใช้ให้เพียงพอไม่",stars:5},
+{cat:"struct1",section:"ม.59 ว.5",title:"การกระทำโดยงดเว้น",result:"การกระทำให้หมายความรวมถึงการให้เกิดผลอันหนึ่งอันใดโดยงดเว้นการที่จักต้องกระทำเพื่อป้องกันผลนั้นด้วย",note:"ต้องมี \"หน้าที่\" ตามกฎหมาย สัญญา หรือจากการกระทำก่อนของตนเองที่ก่อภยันตรายขึ้น จึงจะเข้าเงื่อนไขนี้ — งดเว้นไม่ใช่ฐานความผิด แต่เป็นเพียงรูปแบบหนึ่งของ \"การกระทำ\"",stars:5},
+{cat:"struct1",section:"ม.60",title:"การกระทำโดยพลาด",result:"ผู้ใดเจตนากระทำต่อบุคคลหนึ่ง แต่ผลของการกระทำเกิดแก่อีกบุคคลหนึ่งโดยพลาดไป กฎหมายให้ถือว่าผู้นั้นกระทำโดยเจตนาต่อบุคคลที่ได้รับผลร้ายนั้นด้วย",note:"ใช้เมื่อผลพลาดไปโดยไม่ได้ตั้งใจ (เช่น ยิงเป้าหมาย A แต่กระสุนไปถูก B)",stars:5},
+{cat:"struct1",section:"ม.61",title:"สำคัญผิดในตัวบุคคล",result:"ผู้กระทำเจตนาจะกระทำต่อบุคคลหนึ่ง แต่ได้กระทำต่ออีกบุคคลหนึ่งโดยสำคัญผิด กฎหมายไม่ยกเป็นข้อแก้ตัว ผู้กระทำยังต้องรับผิดฐานเจตนาต่อบุคคลที่ได้รับผลนั้น",note:"ต่างจาก ม.60 ตรงที่ ม.61 คือกระทำถูกเป้าหมายจริง เพียงแต่เข้าใจตัวบุคคลผิด",stars:4},
+{cat:"struct1",section:"ม.62",title:"สำคัญผิดในข้อเท็จจริง",result:"หากมีข้อเท็จจริงซึ่งถ้ามีอยู่จริงจะทำให้การกระทำไม่เป็นความผิด หรือได้รับยกเว้นโทษ หรือได้รับโทษน้อยลง แม้ข้อเท็จจริงนั้นจะไม่มีอยู่จริง แต่ผู้กระทำสำคัญผิดว่ามีอยู่จริง ให้ยกประโยชน์แก่ผู้กระทำเสมือนมีข้อเท็จจริงนั้นจริง",note:"ถ้าความสำคัญผิดเกิดจากความประมาทของผู้กระทำเอง และเป็นความผิดที่กฎหมายกำหนดให้รับผิดฐานประมาทได้ ผู้กระทำยังต้องรับผิดฐานประมาท",stars:5},
+{cat:"struct1",section:"ม.63",title:"ผลธรรมดาที่ทำให้รับโทษหนักขึ้น",result:"ถ้าผลของการกระทำความผิดทำให้ผู้กระทำต้องรับโทษหนักขึ้น ผู้กระทำจะต้องรับโทษหนักขึ้นนั้นก็ต่อเมื่อผู้กระทำได้กระทำโดยประมาท (ควรเล็งเห็นได้) ว่าผลนั้นจะเกิดขึ้น",note:"ใช้บ่อยกับกรณีทำร้ายร่างกายแล้วผู้ถูกกระทำเสียชีวิตภายหลังจากเหตุแทรกซ้อน (เช่น รักษาแผลไม่ดี) ต้องดูว่าเป็นผลที่คาดหมายได้ตามธรรมดาหรือไม่",stars:5},
+
+/* ---------- โครงสร้างที่ 2 ---------- */
+{cat:"struct2",section:"ม.68",title:"ป้องกันโดยชอบด้วยกฎหมาย",result:"ผู้ใดจำต้องกระทำการใดเพื่อป้องกันสิทธิของตนหรือของผู้อื่นให้พ้นภยันตรายซึ่งเกิดจากการประทุษร้ายอันละเมิดต่อกฎหมายและเป็นภยันตรายที่ใกล้จะถึง ถ้าได้กระทำพอสมควรแก่เหตุ การกระทำนั้นเป็นการป้องกันโดยชอบด้วยกฎหมาย ไม่มีความผิด",note:"ผลคือ \"ไม่มีความผิด\" เลย ต่างจากเหตุยกเว้นโทษที่ยังมีความผิดแต่ไม่ต้องรับโทษ",stars:5},
+{cat:"struct2",section:"ม.69",title:"ป้องกัน/จำเป็นเกินสมควรแก่เหตุ",result:"ถ้าการกระทำตาม ม.68 หรือ ม.67 ได้กระทำเกินสมควรแก่เหตุ ศาลจะลงโทษน้อยกว่าที่กฎหมายกำหนดไว้สำหรับความผิดนั้นเพียงใดก็ได้ แต่ถ้าเกินสมควรแก่เหตุเพราะตื่นเต้น ตกใจ หรือกลัว ศาลจะไม่ลงโทษผู้กระทำก็ได้",stars:4},
+{cat:"struct2",section:"ม.70",title:"กระทำตามคำสั่งเจ้าพนักงาน",result:"ผู้ใดกระทำตามคำสั่งของเจ้าพนักงานแม้คำสั่งนั้นจะไม่ชอบด้วยกฎหมาย ถ้าผู้กระทำมีหน้าที่หรือเชื่อโดยสุจริตว่ามีหน้าที่ต้องปฏิบัติตาม ไม่ต้องรับโทษ เว้นแต่จะรู้ว่าคำสั่งนั้นไม่ชอบด้วยกฎหมาย",note:"ผลเป็นเหตุยกเว้นโทษ ไม่ใช่ยกเว้นความผิด — จัดในหมวดนี้เพื่อให้เห็นลำดับการพิจารณาคำสั่งของเจ้าพนักงานควบคู่กับการป้องกันตัว",stars:3},
+
+/* ---------- โครงสร้างที่ 3 (ยกเว้นโทษ/ลดโทษ) ---------- */
+{cat:"struct3",section:"ม.64",title:"อ้างความไม่รู้กฎหมาย",result:"บุคคลจะแก้ตัวว่าไม่รู้กฎหมายเพื่อให้พ้นจากความรับผิดทางอาญาไม่ได้ เว้นแต่ศาลเห็นว่าตามสภาพและพฤติการณ์ ผู้กระทำไม่อาจรู้ได้ว่ากฎหมายบัญญัติเช่นนั้น ศาลอาจลดโทษให้ตามที่เห็นสมควร",stars:3},
+{cat:"struct3",section:"ม.65",title:"คนวิกลจริต",result:"ผู้กระทำความผิดในขณะไม่สามารถรู้ผิดชอบ หรือไม่สามารถบังคับตนเองได้ เพราะมีจิตบกพร่อง โรคจิต หรือจิตฟั่นเฟือน ไม่ต้องรับโทษ แต่ถ้ายังรู้ผิดชอบอยู่บ้าง หรือยังบังคับตนเองได้บ้าง ศาลจะลงโทษน้อยกว่าที่กฎหมายกำหนดไว้เพียงใดก็ได้",stars:5},
+{cat:"struct3",section:"ม.66",title:"คนมึนเมา",result:"ความมึนเมาเพราะเสพสุราหรือสิ่งเมาอย่างอื่นเอง จะยกขึ้นเป็นข้อแก้ตัวตาม ม.65 ไม่ได้ เว้นแต่ความมึนเมานั้นจะได้เกิดโดยผู้เมาถูกขืนใจให้เสพ หรือไม่รู้ว่าสิ่งนั้นจะทำให้มึนเมา",note:"เมาเองโดยสมัครใจ = อ้างไม่ได้เด็ดขาด ข้อสอบชอบออกจุดนี้",stars:5},
+{cat:"struct3",section:"ม.67",title:"การกระทำโดยจำเป็น",result:"ผู้ใดกระทำผิดด้วยความจำเป็น (1) เพราะอยู่ในที่บังคับหรือภายใต้อำนาจซึ่งไม่สามารถหลีกเลี่ยงหรือขัดขืนได้ หรือ (2) เพื่อให้ตนเองหรือผู้อื่นพ้นจากภยันตรายที่ใกล้จะถึงและไม่สามารถหลีกเลี่ยงได้ ถ้าการกระทำนั้นไม่เกินสมควรแก่เหตุ ผู้นั้นไม่ต้องรับโทษ",note:"ผลเป็น \"ไม่ต้องรับโทษ\" (ยกเว้นโทษ) แม้ยังมีความผิดอยู่ — ต่างจากป้องกันตาม ม.68 ซึ่งไม่มีความผิดเลย",stars:5},
+{cat:"struct3",section:"ม.71",title:"ความผิดเกี่ยวกับทรัพย์ระหว่างญาติ",result:"ความผิดฐานลักทรัพย์ ยักยอก ฉ้อโกง ทำให้เสียทรัพย์ บุกรุก ระหว่างสามีภริยา ไม่ต้องรับโทษ ส่วนระหว่างญาติสนิท (บุพการี ผู้สืบสันดาน พี่น้องร่วมบิดามารดา) เป็นความผิดอันยอมความได้ และศาลจะลดโทษให้ก็ได้",note:"ต้องเป็น \"สามีภริยาที่ชอบด้วยกฎหมาย\" (จดทะเบียนสมรส) เท่านั้น อยู่กินฉันสามีภริยาโดยไม่จดทะเบียนไม่เข้าเงื่อนไขนี้",stars:5},
+{cat:"struct3",section:"ม.72",title:"บันดาลโทสะ",result:"ผู้ใดบันดาลโทสะโดยถูกข่มเหงอย่างร้ายแรงด้วยเหตุอันไม่เป็นธรรม จึงกระทำความผิดต่อผู้ข่มเหงในขณะนั้น ศาลจะลงโทษผู้นั้นน้อยกว่าที่กฎหมายกำหนดไว้สำหรับความผิดนั้นเพียงใดก็ได้",note:"ต้องกระทำต่อ \"ผู้ข่มเหง\" เอง และต้องกระทำ \"ในขณะนั้น\" ทันทีทันใด",stars:4},
+{cat:"struct3",section:"ม.73-76",title:"อายุของผู้กระทำผิด",result:"เด็กอายุไม่เกิน 12 ปี ไม่ต้องรับโทษเลย (ม.73) · เกิน 12 ไม่เกิน 15 ปี ไม่ต้องรับโทษแต่ใช้วิธีการสำหรับเด็ก (ม.74) · เกิน 15 ไม่เกิน 18 ปี ศาลอาจลดมาตราส่วนโทษลงกึ่งหนึ่ง (ม.75) · เกิน 18 ไม่เกิน 20 ปี ศาลอาจลดโทษลง 1 ใน 3 หรือกึ่งหนึ่ง (ม.76)",note:"เป็นบันไดอายุที่ต้องจำเป็นช่วง ๆ ให้แม่น ข้อสอบชอบใส่ตัวละครอายุ 16-17 ปี",stars:5},
+{cat:"struct3",section:"ม.78",title:"เหตุบรรเทาโทษ",result:"เมื่อมีเหตุบรรเทาโทษ เช่น ผู้กระทำเป็นผู้โฉดเขลาเบาปัญญา ตกอยู่ในความทุกข์อย่างสาหัส ให้การรับสารภาพ หรือลุแก่โทษต่อเจ้าพนักงาน ศาลจะลดโทษให้ไม่เกินกึ่งหนึ่งของโทษที่จะลง",stars:3},
+
+/* ---------- พยายาม + ร่วมกระทำ ---------- */
+{cat:"attempt",section:"ม.80",title:"พยายามกระทำความผิด",result:"ผู้ใดลงมือกระทำความผิดแต่กระทำไปไม่ตลอด หรือกระทำไปตลอดแล้วแต่การกระทำนั้นไม่บรรลุผล ผู้นั้นพยายามกระทำความผิด ต้องระวางโทษสองในสามส่วนของโทษที่กฎหมายกำหนดไว้สำหรับความผิดนั้น",stars:5},
+{cat:"attempt",section:"ม.81",title:"พยายามกระทำความผิดที่เป็นไปไม่ได้อย่างแน่แท้",result:"ถ้าการกระทำนั้นไม่อาจบรรลุผลได้อย่างแน่แท้ เพราะวัตถุที่มุ่งหมายกระทำต่อไม่มีอยู่ในที่กระทำ หรือกระทำด้วยวิธีการซึ่งไม่อาจบรรลุผลได้อย่างแน่แท้ ให้ศาลลงโทษไม่เกินกึ่งหนึ่งของโทษที่กฎหมายกำหนดไว้สำหรับความผิดนั้น หรือจะไม่ลงโทษเลยก็ได้",stars:4},
+{cat:"attempt",section:"ม.82",title:"ยับยั้ง/กลับใจ",result:"ผู้ใดลงมือกระทำความผิดแล้วยับยั้งเสียเองไม่กระทำการให้ตลอด หรือกลับใจแก้ไขไม่ให้ผลของการกระทำนั้นเกิดขึ้น ผู้นั้นไม่ต้องรับโทษสำหรับการพยายามกระทำความผิดนั้น แต่ถ้าการที่ได้กระทำไปแล้วต้องด้วยบทกฎหมายที่บัญญัติเป็นความผิด ผู้นั้นต้องรับโทษสำหรับความผิดนั้น ๆ",stars:4},
+{cat:"attempt",section:"ม.83",title:"ตัวการ",result:"ในกรณีความผิดใดเกิดขึ้นโดยการกระทำของบุคคลตั้งแต่สองคนขึ้นไป ผู้ที่ได้ร่วมกระทำความผิดด้วยกันนั้นเป็นตัวการ ต้องระวางโทษตามที่กฎหมายกำหนดไว้สำหรับความผิดนั้น",note:"ต้องมีทั้งการร่วมกระทำและเจตนาร่วมกัน (ร่วมรู้ร่วมใจ) ไม่ใช่แค่อยู่ในเหตุการณ์เฉย ๆ",stars:5},
+{cat:"attempt",section:"ม.84",title:"ผู้ใช้ให้กระทำความผิด",result:"ผู้ใดก่อให้ผู้อื่นกระทำความผิดไม่ว่าด้วยการใช้ บังคับ ขู่เข็ญ จ้าง วาน หรือยุยงส่งเสริม ผู้นั้นเป็นผู้ใช้ให้กระทำความผิด ต้องรับโทษเสมือนเป็นตัวการ ถ้าความผิดมิได้กระทำลงไม่ว่าจะเป็นเพราะผู้ถูกใช้ไม่ยอมกระทำหรือเหตุอื่นใด ผู้ใช้ต้องระวางโทษเพียงหนึ่งในสามของโทษที่กำหนดไว้สำหรับความผิดนั้น",stars:5},
+{cat:"attempt",section:"ม.86",title:"ผู้สนับสนุน",result:"ผู้ใดกระทำด้วยประการใด ๆ อันเป็นการช่วยเหลือ หรือให้ความสะดวกในการที่ผู้อื่นกระทำความผิดก่อนหรือขณะกระทำความผิด แม้ผู้กระทำความผิดจะมิได้รู้ถึงการช่วยเหลือหรือให้ความสะดวกนั้น ผู้นั้นเป็นผู้สนับสนุนการกระทำความผิด ต้องระวางโทษสองในสามส่วนของโทษที่กำหนดไว้สำหรับความผิดที่สนับสนุนนั้น",stars:4},
+{cat:"attempt",section:"ม.87",title:"ขอบเขตความรับผิดของผู้ใช้/ผู้สนับสนุน",result:"กำหนดว่าเมื่อความผิดที่เกิดขึ้นจริงต่างไปจากที่มุ่งหมาย ผู้ใช้หรือผู้สนับสนุนจะต้องรับผิดเพียงใด โดยพิจารณาจากสิ่งที่ผู้ใช้/ผู้สนับสนุนได้คาดหมายหรือควรจะคาดหมายได้",stars:3},
+{cat:"attempt",section:"ม.89",title:"เหตุส่วนตัวและเหตุในลักษณะคดี",result:"ถ้ามีเหตุส่วนตัวอันจะให้ผู้กระทำความผิดคนใดไม่ต้องรับโทษหรือได้รับโทษน้อยลงหรือมากขึ้น ให้ใช้เฉพาะแก่ผู้กระทำที่มีเหตุนั้นเท่านั้น ส่วนเหตุอื่นซึ่งเป็นเหตุในลักษณะคดี ให้ใช้แก่ผู้ร่วมกระทำความผิดด้วยกันทุกคน",note:"เช่น บันดาลโทสะเป็นเหตุส่วนตัว ใช้เฉพาะผู้ที่ถูกข่มเหงเอง ไม่ลามไปถึงผู้ร่วมกระทำคนอื่น",stars:4},
+
+/* ---------- โทษ/ริบทรัพย์ ---------- */
+{cat:"penalty",section:"ม.18",title:"โทษทางอาญา 5 สถาน",result:"โทษสำหรับลงแก่ผู้กระทำความผิดมี 5 สถาน คือ ประหารชีวิต จำคุก กักขัง ปรับ และริบทรัพย์สิน",stars:4},
+{cat:"penalty",section:"ม.32",title:"ทรัพย์ที่ต้องริบเสมอ",result:"ทรัพย์สินซึ่งบุคคลได้ใช้ หรือมีไว้เพื่อใช้ในการกระทำความผิด ให้ริบเสียทั้งสิ้น เว้นแต่ทรัพย์สินนั้นเป็นของผู้อื่นซึ่งมิได้รู้เห็นเป็นใจด้วยในการกระทำความผิด",stars:4},
+{cat:"penalty",section:"ม.33",title:"ทรัพย์ที่ศาลมีดุลพินิจริบหรือไม่ริบ",result:"บรรดาทรัพย์สินซึ่งได้ใช้ หรือมีไว้เพื่อใช้ในการกระทำความผิด หรือได้มาโดยการกระทำความผิด ให้ศาลมีอำนาจสั่งริบเสียได้ ไม่ว่าจะเป็นของผู้กระทำความผิดหรือไม่ แต่ทรัพย์ที่ไม่ใช่เครื่องมือหลักในการกระทำผิดโดยตรง ศาลมีดุลพินิจว่าจะริบหรือไม่ก็ได้",note:"ต้องแยกให้ออกจาก ม.32 ซึ่งบังคับให้ริบเสมอ — จุดถามยอดฮิตคือ รถที่ใช้ขนของที่ลักมา หรือปืนที่ใช้ป้องกันตัวโดยชอบ",stars:5},
+
+/* ---------- ภาคความผิด (ตัวอย่างที่ออกสอบบ่อย) ---------- */
+{cat:"offense",section:"ม.288",title:"ฆ่าผู้อื่นโดยเจตนา",result:"ผู้ใดฆ่าผู้อื่น ต้องระวางโทษประหารชีวิต จำคุกตลอดชีวิต หรือจำคุกตั้งแต่ 15-20 ปี",stars:5},
+{cat:"offense",section:"ม.289",title:"ฆ่าโดยไตร่ตรองไว้ก่อน/ฆ่าบุพการี",result:"ฆ่าโดยไตร่ตรองไว้ก่อน ฆ่าบุพการี ฆ่าเจ้าพนักงานซึ่งกระทำตามหน้าที่ หรือฆ่าเพื่อปกปิดความผิดอื่นของตน มีโทษหนักกว่าการฆ่าธรรมดาตาม ม.288",stars:4},
+{cat:"offense",section:"ม.290",title:"ทำร้ายจนเป็นเหตุถึงแก่ความตาย",result:"ผู้ใดมิได้มีเจตนาฆ่า แต่ทำร้ายผู้อื่นจนเป็นเหตุให้ผู้นั้นถึงแก่ความตาย ต้องระวางโทษจำคุก 3-15 ปี",note:"จุดสำคัญ: มีเพียงเจตนาทำร้าย ไม่มีเจตนาฆ่า ต่างจาก ม.288/289 ซึ่งต้องมีเจตนาฆ่า",stars:5},
+{cat:"offense",section:"ม.291",title:"ประมาทเป็นเหตุให้ถึงแก่ความตาย",result:"ผู้ใดกระทำโดยประมาท และการกระทำนั้นเป็นเหตุให้ผู้อื่นถึงแก่ความตาย ต้องระวางโทษจำคุกไม่เกิน 10 ปี",stars:4},
+{cat:"offense",section:"ม.295",title:"ทำร้ายร่างกาย",result:"ผู้ใดทำร้ายผู้อื่นจนเป็นเหตุให้เกิดอันตรายแก่กายหรือจิตใจของผู้อื่นนั้น ต้องระวางโทษจำคุกไม่เกิน 2 ปี",stars:4},
+{cat:"offense",section:"ม.297",title:"ทำร้ายร่างกายจนได้รับอันตรายสาหัส",result:"ถ้าการทำร้ายเป็นเหตุให้ผู้ถูกกระทำรับอันตรายสาหัส (เช่น ตาบอด หูหนวก แขนขาขาด ทุพพลภาพ) ผู้กระทำต้องระวางโทษหนักขึ้น",stars:4},
+{cat:"offense",section:"ม.300",title:"ประมาทเป็นเหตุให้รับอันตรายสาหัส",result:"ผู้ใดกระทำโดยประมาท และการกระทำนั้นเป็นเหตุให้ผู้อื่นรับอันตรายสาหัส ต้องระวางโทษจำคุกไม่เกิน 3 ปี",stars:3},
+{cat:"offense",section:"ม.309",title:"ข่มขืนใจผู้อื่น",result:"ผู้ใดข่มขืนใจผู้อื่นให้กระทำการใด ไม่กระทำการใด หรือจำยอมต่อสิ่งใด โดยทำให้กลัวว่าจะเกิดอันตรายต่อชีวิต ร่างกาย เสรีภาพ ชื่อเสียง หรือทรัพย์สิน หรือโดยใช้กำลังประทุษร้ายจนผู้ถูกข่มขืนใจต้องกระทำการนั้น",stars:3},
+{cat:"offense",section:"ม.334",title:"ลักทรัพย์",result:"ผู้ใดเอาทรัพย์ของผู้อื่น หรือที่ผู้อื่นเป็นเจ้าของรวมอยู่ด้วยไปโดยทุจริต ผู้นั้นกระทำความผิดฐานลักทรัพย์",stars:5},
+{cat:"offense",section:"ม.339",title:"ชิงทรัพย์",result:"ผู้ใดลักทรัพย์โดยใช้กำลังประทุษร้าย หรือขู่เข็ญว่าในทันใดนั้นจะใช้กำลังประทุษร้าย เพื่อความสะดวกในการลักทรัพย์หรือพาทรัพย์นั้นไป ผู้นั้นกระทำความผิดฐานชิงทรัพย์",stars:4},
+{cat:"offense",section:"ม.358",title:"ทำให้เสียทรัพย์",result:"ผู้ใดทำให้เสียหาย ทำลาย ทำให้เสื่อมค่า หรือทำให้ไร้ประโยชน์ซึ่งทรัพย์ของผู้อื่นหรือผู้อื่นเป็นเจ้าของรวมอยู่ด้วย ผู้นั้นกระทำความผิดฐานทำให้เสียทรัพย์",note:"ต้องมีเจตนา — ถ้ากระทำไปโดยไม่รู้ว่าเป็นทรัพย์ของผู้อื่น (ขาดเจตนา) ไม่ผิดฐานนี้ เพราะกฎหมายไม่ได้กำหนดให้รับผิดฐานประมาทด้วย",stars:4},
+{cat:"offense",section:"ม.147, 157",title:"ความผิดของเจ้าพนักงาน",result:"ม.147 เจ้าพนักงานเบียดบังทรัพย์ที่ตนมีหน้าที่ดูแลไปเป็นของตนหรือผู้อื่นโดยทุจริต · ม.157 เจ้าพนักงานปฏิบัติหรือละเว้นการปฏิบัติหน้าที่โดยมิชอบเพื่อให้เกิดความเสียหายแก่ผู้หนึ่งผู้ใด หรือโดยทุจริต",stars:3}
+];
+</script>
+<script>
+/* ---------- โจทย์สถานการณ์ ระดับข้อสอบจริง ----------
+   ดัดแปลงจากข้อสอบเก่าวิชา น.110/น.210 กฎหมายอาญา ภาคทั่วไป ที่พบในเอกสารประกอบวิชา
+   (ปรับ/เปลี่ยนชื่อตัวละครและถ้อยคำบางส่วน เพื่อการฝึกฝนเท่านั้น ไม่ใช่เฉลยทางการของสถาบัน) */
+const QUIZ_ADV = [
+{cat:"struct1",q:"นางหนึ่งเดินเบียดฝูงชนในสวนสัตว์อย่างไม่ระมัดระวังจนชนนางสองเซถลาตกลงไปในบ่อสัตว์ดุ นางสองถูกสัตว์กัดบาดเจ็บสาหัส นางหนึ่งไม่ได้ตั้งใจให้เกิดเหตุนี้เลย ควรวินิจฉัยความรับผิดของนางหนึ่งอย่างไร",
+opts:["ไม่มีความผิดเพราะไม่มีเจตนา","มีความผิดฐานกระทำโดยประมาทเป็นเหตุให้ผู้อื่นรับอันตรายสาหัส ตาม ม.59 วรรคสี่ ประกอบ ม.300 เพราะเดินเบียดคนจำนวนมากโดยไม่ระมัดระวังตามวิสัยที่ควรมี","มีความผิดฐานทำร้ายร่างกายโดยเจตนาตาม ม.295","มีความผิดฐานพยายามฆ่าตาม ม.288 ประกอบ ม.80"],
+ans:1,explain:"แม้ไม่มีเจตนา แต่การเดินเบียดผู้คนจำนวนมากโดยไม่สนใจใครถือเป็นการปราศจากความระมัดระวังตามวิสัยและพฤติการณ์ที่ควรมี เข้าองค์ประกอบ \"ประมาท\" ตาม ม.59 วรรคสี่ เมื่อผลคือมีผู้ได้รับอันตรายสาหัส จึงปรับบทด้วย ม.300"},
+{cat:"struct3",q:"เด็กชายอายุ 16 ปี แอบขโมยแหวนทองของมารดาตนเองไปจำนำเพื่อเอาเงินไปเที่ยว ควรวินิจฉัยอย่างไร",
+opts:["ไม่ผิดเพราะเป็นทรัพย์ของมารดาตนเอง ถือเป็นทรัพย์สินร่วมของครอบครัว","ผิดฐานลักทรัพย์ตาม ม.334 ครบองค์ประกอบ แต่เป็นความผิดเกี่ยวกับทรัพย์ระหว่างญาติสนิท (บุพการี) จึงเป็นความผิดอันยอมความได้ตาม ม.71 วรรคสอง และศาลอาจลดมาตราส่วนโทษลงกึ่งหนึ่งเพราะอายุ 16 ปีตาม ม.75","ไม่ต้องรับโทษเลยเพราะเป็นเด็กอายุต่ำกว่า 18 ปีทุกกรณี","ผิดฐานยักยอกทรัพย์เพราะเป็นทรัพย์ที่ครอบครองร่วมกันอยู่แล้ว"],
+ans:1,explain:"แหวนเป็นทรัพย์ของมารดา ไม่ใช่ทรัพย์ของบุตรเอง การเอาไปจำนำโดยทุจริตครบองค์ประกอบลักทรัพย์ตาม ม.334 แต่เนื่องจากกระทำต่อบุพการี จึงเป็นความผิดอันยอมความได้ตาม ม.71 วรรคสอง และเพราะอายุ 16 ปี (เกิน 15 ไม่เกิน 18) ศาลอาจลดมาตราส่วนโทษลงกึ่งหนึ่งตาม ม.75"},
+{cat:"struct1",q:"นายเอทำร้ายร่างกายนางบีด้วยขาตั้งกล้องจนได้รับบาดเจ็บที่แขน สามวันต่อมานางบีเสียชีวิตเพราะติดเชื้อในกระแสเลือด สาเหตุเพราะนางบีไม่ยอมไปหาหมอแต่ใช้วิธีรดน้ำมนต์รักษาแผลเอง นายเอต้องรับผิดในความตายของนางบีด้วยหรือไม่",
+opts:["ไม่ต้องรับผิดเลย เพราะนางบีเป็นผู้เลือกวิธีรักษาที่ผิดเอง ตัดความสัมพันธ์ระหว่างการกระทำและผล","ต้องรับผิดในความตายด้วยตาม ม.63 เพราะการติดเชื้อจากแผลที่ไม่ได้รับการรักษาที่ถูกต้องเป็นผลธรรมดาที่อาจเกิดขึ้นได้จากบาดแผล ซึ่งวิญญูชนคาดหมายได้","ต้องรับผิดฐานฆ่าคนตายโดยเจตนาตาม ม.288 ทันที","ไม่มีความผิดใด ๆ เลยเพราะไม่มีเจตนาต้องการให้ตาย"],
+ans:1,explain:"หลักการรักษาบาดแผลที่ไม่ถูกวิธีจนติดเชื้อและเสียชีวิตในเวลาไม่นานหลังถูกทำร้าย มักถือเป็น \"ผลธรรมดา\" ที่คาดหมายได้จากบาดแผลตาม ม.63 ไม่ใช่เหตุแทรกแซงที่ตัดความสัมพันธ์ระหว่างการกระทำและผล นายเอจึงต้องรับผิดในผลที่หนักขึ้นนั้นด้วย แม้เดิมมีเจตนาเพียงทำร้ายร่างกาย"},
+{cat:"struct2",q:"นายซีเห็นนายเอกำลังใช้ขาตั้งกล้องตีนางบีอย่างรุนแรง จึงวิ่งเข้าไปผลักนายเอเพื่อให้หยุดทำร้าย เป็นเหตุให้นายเอล้มลงได้รับบาดเจ็บเล็กน้อย นายซีมีความผิดหรือไม่",
+opts:["มีความผิดฐานทำร้ายร่างกายตาม ม.295 เพราะมีเจตนาผลักจริง","ไม่มีความผิด เพราะเป็นการป้องกันโดยชอบด้วยกฎหมายตาม ม.68 กระทำเพื่อป้องกันสิทธิของนางบีให้พ้นภยันตรายที่ใกล้จะถึง และพอสมควรแก่เหตุเมื่อเทียบกับบาดเจ็บเล็กน้อยที่เกิดขึ้น","มีความผิดฐานพยายามทำร้ายร่างกายตาม ม.295 ประกอบ ม.80","ไม่มีความผิดเพราะไม่มีเจตนาเคลื่อนไหวร่างกาย"],
+ans:1,explain:"นายซีมีการกระทำและเจตนาผลักจริง จึงครบองค์ประกอบความผิดฐานทำร้ายร่างกาย แต่เข้าเหตุยกเว้นความผิดฐานป้องกันโดยชอบด้วยกฎหมายตาม ม.68 เพราะกระทำเพื่อป้องกันนางบีจากภยันตรายที่ใกล้จะถึงจากการกระทำอันละเมิดต่อกฎหมายของนายเอ และผลที่เกิด (บาดเจ็บเล็กน้อย) ก็พอสมควรแก่เหตุ"},
+{cat:"struct3",q:"นายเอใช้ปืนจ่อศีรษะบังคับให้นางซีใช้ไม้ตีนางบีเพื่อแก้แค้น หากไม่ทำจะยิงทั้งคู่ นางซีจึงจำต้องทำตามจนนางบีบาดเจ็บสาหัส นางซีต้องรับผิดหรือไม่",
+opts:["ไม่มีความผิดเลยเพราะไม่มีเจตนา","มีความผิดครบองค์ประกอบฐานทำร้ายร่างกายสาหัสตาม ม.297 เพราะมีเจตนากระทำ แต่เข้าเหตุยกเว้นโทษฐานกระทำโดยจำเป็นตาม ม.67 เพราะถูกบังคับด้วยอาวุธและไม่สามารถหลีกเลี่ยงได้ อีกทั้งภัยที่กลัวร้ายแรงกว่าผลที่เกิด","มีความผิดและต้องรับโทษเต็มตาม ม.297 เพราะจำเป็นใช้ได้เฉพาะเหตุจำเป็นทางธรรมชาติเท่านั้น","เป็นตัวการร่วมกับนายเอตาม ม.83 จึงไม่มีเหตุยกเว้นใด ๆ"],
+ans:1,explain:"นางซีมีเจตนากระทำและครบองค์ประกอบความผิดฐานทำร้ายร่างกายสาหัส แต่กระทำไปเพราะถูกบังคับด้วยอาวุธปืนโดยไม่มีทางเลือกอื่น เข้าเหตุจำเป็นตาม ม.67(1) และเมื่อเทียบกับภัยที่ขู่ว่าจะยิงทั้งคู่ ถือว่าไม่เกินสมควรแก่เหตุ จึงไม่ต้องรับโทษ แม้ยังมีความผิดอยู่"},
+{cat:"attempt",q:"นายเอบังคับขู่เข็ญด้วยอาวุธปืนให้นางซีไปทำร้ายนางบี จนนางซีทำตามและนางบีบาดเจ็บสาหัส นายเอมีความผิดฐานใด",
+opts:["ไม่มีความผิดเพราะนายเอไม่ได้ลงมือทำร้ายด้วยตนเอง","เป็นผู้ใช้ให้ผู้อื่นกระทำความผิดตาม ม.84 ประกอบ ม.297 ต้องรับโทษเสมือนเป็นตัวการ","เป็นเพียงผู้สนับสนุนตาม ม.86 เพราะไม่ได้ลงมือเอง","มีความผิดฐานพยายามทำร้ายร่างกายเท่านั้น"],
+ans:1,explain:"นายเอก่อให้นางซีกระทำความผิดด้วยการข่มขู่บังคับ เข้าลักษณะผู้ใช้ให้กระทำความผิดตาม ม.84 และเมื่อนางซีกระทำความผิดสำเร็จ นายเอต้องรับโทษเสมือนเป็นตัวการตาม ม.297"},
+{cat:"struct3",q:"นางบีป่วยเป็นโรคจิตเภท แม้จะรู้ว่าไม่ควรทำแต่ไม่สามารถควบคุมตัวเองได้ จู่ ๆ เข้าไปจับคอผู้อื่นบิดจนได้รับบาดเจ็บ ควรวินิจฉัยอย่างไร",
+opts:["ไม่มีความผิดเพราะไม่มีเจตนา","มีความผิดครบองค์ประกอบฐานทำร้ายร่างกายตาม ม.295 เพราะยังรู้ข้อเท็จจริงและประสงค์ต่อผล แต่เข้าเหตุยกเว้นโทษฐานวิกลจริตตาม ม.65 เพราะไม่สามารถบังคับตนเองได้เนื่องจากอาการทางจิต","มีความผิดเต็มตาม ม.297 เพราะรู้ตัวว่าไม่ควรทำแต่ยังทำ","ไม่มีความผิดเพราะเป็นผู้ป่วยโดยกำเนิด"],
+ans:1,explain:"นางบียังรู้ข้อเท็จจริงว่ากำลังบิดคอใคร จึงมีเจตนาและครบองค์ประกอบความผิด แต่เพราะอาการโรคจิตเภททำให้ไม่สามารถบังคับตนเองไม่ให้กระทำได้ แม้จะรู้ผิดชอบอยู่บ้าง จึงเข้าเหตุยกเว้นหรือลดโทษฐานวิกลจริตตาม ม.65"},
+{cat:"struct1",q:"นางบีจับกระจกมองหลังรถมอเตอร์ไซค์บิดไปมาอย่างแรงจนกระจกหักเสียหาย เพราะอาการโรคจิตเภทของตนทำให้เข้าใจผิดคิดว่ากระจกเป็นคอคน ควรวินิจฉัยความผิดฐานทำให้เสียทรัพย์อย่างไร",
+opts:["มีความผิดฐานทำให้เสียทรัพย์ตาม ม.358 เพราะทำให้ทรัพย์เสียหายจริง","ไม่มีความผิด เพราะขาดเจตนาตั้งแต่ต้น เนื่องจากไม่รู้ข้อเท็จจริงอันเป็นองค์ประกอบของความผิด (ไม่รู้ว่าเป็นทรัพย์) และความผิดฐานนี้กฎหมายไม่ได้กำหนดให้ต้องรับผิดแม้กระทำโดยประมาท","มีความผิดฐานประมาทให้ทรัพย์เสียหาย เพราะไม่ระมัดระวัง","มีความผิดเพราะทรัพย์เสียหายจริงไม่ว่าจะรู้หรือไม่รู้ก็ตาม"],
+ans:1,explain:"เมื่อนางบีไม่รู้ข้อเท็จจริงอันเป็นองค์ประกอบภายนอกของความผิด (เข้าใจว่ากำลังจับคอคน ไม่รู้ว่าเป็นทรัพย์) จึงขาดเจตนาตาม ม.59 วรรคสาม และความผิดฐานทำให้เสียทรัพย์ไม่มีบทบัญญัติให้รับผิดแม้กระทำโดยประมาท การกระทำของนางบีจึงไม่เป็นความผิดตั้งแต่ต้น"},
+{cat:"struct3",q:"นายหนึ่งดื่มสุราจนมึนเมาอย่างหนักด้วยความสมัครใจของตนเอง แล้วก่อเหตุทำร้ายผู้อื่น จะอ้างความมึนเมาเป็นเหตุยกเว้นหรือลดโทษได้หรือไม่",
+opts:["ได้เสมอ เพราะขณะกระทำไม่มีสติรับผิดชอบ","ไม่ได้ เพราะความมึนเมาที่เกิดจากการเสพสุราด้วยความสมัครใจของตนเอง ไม่เข้าข้อยกเว้นตาม ม.66 ซึ่งใช้เฉพาะกรณีถูกขืนใจให้เสพหรือไม่รู้ว่าจะทำให้มึนเมาเท่านั้น","ได้เฉพาะกรณีเมาครั้งแรกในชีวิต","ได้หากดื่มในปริมาณที่เกินควบคุมตนเอง"],
+ans:1,explain:"ม.66 กำหนดชัดเจนว่าความมึนเมาที่เกิดจากการเสพสุราหรือสิ่งเมาอย่างอื่นด้วยความสมัครใจของตนเอง จะยกขึ้นเป็นข้อแก้ตัวไม่ได้ เว้นแต่ถูกขืนใจให้เสพหรือไม่รู้ว่าสิ่งนั้นจะทำให้มึนเมา ซึ่งไม่ตรงกับข้อเท็จจริงนี้"},
+{cat:"struct1",q:"นายหนึ่งเมาแล้วเหวี่ยงหมัดจะชกนายสาม แต่นายสามหลบทัน หมัดไม่โดน ต่อมานายหนึ่งเสียหลักไปชนหม้อชาบูจนน้ำร้อนลวกนายสี่ที่นั่งอยู่ใกล้ ๆ ได้รับบาดเจ็บ ทั้งที่ไม่ได้ตั้งใจทำร้ายนายสี่เลย ควรวินิจฉัยอย่างไร",
+opts:["ไม่มีความผิดต่อนายสี่เพราะไม่มีเจตนา","ผิดฐานพยายามทำร้ายร่างกายนายสามตาม ม.295 ประกอบ ม.80 และผิดฐานทำร้ายร่างกายนายสี่โดยเจตนาโดยพลาดตาม ม.295 ประกอบ ม.60 เพราะเจตนาทำร้ายที่มีต่อนายสามพลาดไปเกิดผลกับนายสี่","ผิดฐานประมาทเป็นเหตุให้นายสี่บาดเจ็บเท่านั้น","ผิดฐานทำร้ายร่างกายนายสามสำเร็จ เพราะนายหนึ่งลงมือแล้ว"],
+ans:1,explain:"หมัดที่เหวี่ยงใส่นายสามไม่โดน จึงเป็นเพียงพยายามทำร้ายร่างกายตาม ม.295 ประกอบ ม.80 ส่วนที่ชนหม้อจนน้ำร้อนลวกนายสี่นั้น แม้เดิมมีเจตนาต่อนายสาม แต่ผลไปเกิดกับนายสี่ กฎหมายให้ถือว่ามีเจตนาต่อนายสี่ด้วยตาม ม.60 (เจตนาโดยพลาด) จึงผิดฐานทำร้ายร่างกายนายสี่ด้วย"},
+{cat:"struct1",q:"นายสองเห็นกระเป๋าเงินตกอยู่ในร้าน เข้าใจว่าเป็นของนายสาม จึงแอบหยิบไปเพราะอยากแก้แค้น แต่แท้จริงกระเป๋าเป็นของนายหนึ่ง นายสองมีความผิดฐานลักทรัพย์หรือไม่",
+opts:["ไม่ผิด เพราะเข้าใจผิดว่าเป็นของนายสาม ไม่ใช่นายหนึ่ง","ผิดฐานลักทรัพย์ตาม ม.334 ประกอบ ม.61 เพราะความสำคัญผิดในตัวเจ้าของทรัพย์ไม่ทำให้พ้นผิด ยังต้องรับผิดต่อเจ้าของทรัพย์ที่แท้จริงคือนายหนึ่ง","ผิดฐานยักยอกทรัพย์สินหาย","ผิดเฉพาะเมื่อทราบว่าเป็นของนายหนึ่งในภายหลังเท่านั้น"],
+ans:1,explain:"นายสองมีเจตนาเอาทรัพย์ของผู้อื่นไปโดยทุจริตอยู่แล้ว เพียงแต่สำคัญผิดว่าเป็นของใคร กรณีนี้เทียบเคียงหลักสำคัญผิดในตัวบุคคลตาม ม.61 ซึ่งไม่ทำให้พ้นความรับผิด นายสองยังต้องรับผิดฐานลักทรัพย์ต่อนายหนึ่งผู้เป็นเจ้าของที่แท้จริง"},
+{cat:"offense",q:"นายสองนำนายหนึ่งซึ่งเมาจนหมดสติไปแอบทิ้งไว้ในรั้วบ้านของนายห้า ทั้งที่รู้อยู่แล้วว่าบ้านนายห้ามีสุนัขดุหลายตัว รุ่งขึ้นนายหนึ่งถูกสุนัขกัดบาดเจ็บสาหัส ควรวินิจฉัยความรับผิดของนายสองอย่างไร",
+opts:["ไม่มีความผิดเพราะไม่ได้ลงมือทำร้ายด้วยตนเอง สุนัขเป็นผู้กระทำ","มีความผิดฐานทำร้ายร่างกายจนได้รับอันตรายสาหัสตาม ม.297 ประกอบ ม.59 โดยเจตนาเล็งเห็นผล เพราะย่อมคาดหมายได้ว่าสุนัขดุจะทำร้ายนายหนึ่ง จึงถือเป็นผู้กระทำโดยตรงที่ใช้สัตว์เป็นเครื่องมือ","มีความผิดฐานประมาทเป็นเหตุให้ผู้อื่นได้รับอันตรายสาหัสเท่านั้น","ไม่มีความผิดเพราะนายห้าต่างหากที่ต้องรับผิดในฐานะเจ้าของสุนัข"],
+ans:1,explain:"นายสองรู้อยู่แล้วว่าบ้านนายห้ามีสุนัขดุ การนำนายหนึ่งซึ่งไม่มีสติไปทิ้งไว้ในที่เช่นนั้น ย่อมเล็งเห็นผลได้อย่างแน่ชัดว่าจะเกิดอันตราย จึงมีเจตนาเล็งเห็นผลตาม ม.59 แม้ไม่ได้ลงมือทำร้ายเอง แต่ถือเป็นผู้กระทำผิดโดยตรงโดยใช้สัตว์เป็นเครื่องมือ ต้องรับผิดฐานทำร้ายร่างกายจนได้รับอันตรายสาหัสตาม ม.297"},
+{cat:"scope",q:"หากนายห้าเจ้าของบ้านและสุนัขไม่รู้เรื่องที่นายสองแอบนำนายหนึ่งไปทิ้งไว้ในรั้วบ้านตนเองเลย นายห้าต้องร่วมรับผิดด้วยหรือไม่",
+opts:["ต้องรับผิดเสมอเพราะเป็นเจ้าของสุนัขที่ก่อเหตุ","ไม่ต้องรับผิด เพราะนายห้าไม่รู้ข้อเท็จจริงและไม่มีเจตนาหรือประมาทเกี่ยวกับเหตุการณ์นี้เลย","ต้องรับผิดฐานประมาทเพราะเลี้ยงสุนัขดุไว้ในบ้าน","ต้องรับผิดร่วมกับนายสองในฐานะตัวการ"],
+ans:1,explain:"ความรับผิดทางอาญาต้องอาศัยการกระทำและเจตนาหรือประมาทของผู้นั้นเอง เมื่อนายห้าไม่รู้เรื่องที่นายสองนำนายหนึ่งไปทิ้งไว้ในบ้านตนเองเลย จึงไม่มีการกระทำ เจตนา หรือความประมาทใด ๆ ของนายห้าเกี่ยวกับเหตุการณ์นี้ นายห้าจึงไม่ต้องรับผิด"},
+{cat:"struct1",q:"พนักงานขับรถบรรทุกไม้ซุงหักหลบสุนัขจนไม้ซุงหล่นขวางถนน แต่มัวแต่โทรศัพท์ขอความช่วยเหลือโดยไม่รีบทำเครื่องหมายเตือนผู้ใช้ทาง จนมีผู้ขับรถจักรยานยนต์มาชนไม้ซุงได้รับบาดเจ็บสาหัสในความมืด ควรวินิจฉัยอย่างไร",
+opts:["ไม่มีความผิดเพราะไม่ได้ตั้งใจให้ไม้ซุงหล่น","มีความผิดฐานกระทำโดยประมาทเป็นเหตุให้ผู้อื่นรับอันตรายสาหัสตาม ม.59 วรรคห้า (งดเว้น) ประกอบ ม.300 เพราะมีหน้าที่ต้องป้องกันอันตรายที่เกิดจากไม้ซุงที่ตนทำหล่น แต่งดเว้นไม่รีบทำเครื่องหมายเตือน","มีความผิดฐานทำร้ายร่างกายโดยเจตนา","ไม่มีความผิดเพราะเป็นเหตุสุดวิสัยที่สุนัขวิ่งตัดหน้า"],
+ans:1,explain:"แม้การที่ไม้ซุงหล่นครั้งแรกจะไม่ใช่ความผิดของพนักงานขับรถ (หลบสุนัขโดยจำเป็น) แต่เมื่อไม้ซุงตกขวางถนนแล้ว พนักงานย่อมมีหน้าที่ตามวิสัยที่ควรกระทำเพื่อป้องกันอันตรายที่อาจเกิดแก่ผู้ใช้ทางคนอื่น การไม่รีบทำเครื่องหมายเตือนจึงเป็นการงดเว้นตาม ม.59 วรรคห้า และเป็นความประมาท เพราะย่อมคาดหมายได้ว่าจะมีรถมาชนในที่มืด"},
+{cat:"struct3",q:"ผู้ขับรถจักรยานยนต์ถูกขู่ด้วยไม้ว่าจะถูกทำร้ายหากไม่ยอมขับรถพาผู้บาดเจ็บสาหัสไปโรงพยาบาล จึงจำต้องขับไปส่งด้วยความกลัว ผู้ขับรถต้องรับผิดฐานถูกข่มขืนใจให้กระทำการหรือไม่",
+opts:["ผู้ขับรถต้องรับผิดร่วมด้วยเพราะยอมทำตาม","ผู้ขับรถไม่มีความผิดใด เพราะไม่ได้เป็นผู้กระทำความผิดต่อผู้ใด เพียงถูกข่มขืนใจให้กระทำการเท่านั้น ส่วนผู้ข่มขู่อาจมีความผิดฐานข่มขืนใจผู้อื่นตาม ม.309 แต่ก็อาจอ้างเหตุจำเป็นได้เพราะกระทำเพื่อช่วยชีวิตคนที่บาดเจ็บสาหัส","ผู้ขับรถมีความผิดฐานถูกบังคับให้ขับรถโดยประมาท","ทั้งสองฝ่ายไม่มีความผิดเพราะเป็นเหตุสุดวิสัย"],
+ans:1,explain:"ผู้ขับรถเป็นฝ่ายถูกกระทำ ไม่มีเจตนากระทำผิดต่อผู้ใด จึงไม่มีความผิด ส่วนผู้ที่ใช้ไม้ขู่บังคับอาจเข้าองค์ประกอบความผิดฐานข่มขืนใจผู้อื่นตาม ม.309 แต่เมื่อพิจารณาเจตนาที่แท้จริงคือต้องการช่วยชีวิตผู้บาดเจ็บสาหัสที่รอความช่วยเหลืออยู่ อาจอ้างเหตุจำเป็นตาม ม.67(2) ได้ เพราะเป็นการกระทำเพื่อให้ผู้อื่นพ้นจากภยันตรายที่ใกล้จะถึง"},
+{cat:"offense",q:"ลูกจ้างขโมยลูกสุนัขพันธุ์หนึ่งจากฟาร์มเพื่อนำไปมอบให้นายจ้างตามที่ได้รับคำสั่ง แต่เกิดความเข้าใจผิดหยิบลูกสุนัขผิดตัว (คิดว่าเป็นของฟาร์ม ก. แต่จริงเป็นของฟาร์ม ข. ซึ่งอยู่ใกล้กัน) ลูกจ้างมีความผิดฐานลักทรัพย์หรือไม่",
+opts:["ไม่ผิด เพราะเข้าใจผิดโดยสุจริตว่าเป็นทรัพย์ที่นายจ้างต้องการ","ผิดฐานลักทรัพย์ตาม ม.334 เพราะยังมีเจตนาเอาทรัพย์ของผู้อื่นไปโดยทุจริตอยู่ครบถ้วน ความเข้าใจผิดว่าเป็นของฟาร์มใดไม่ใช่สาระสำคัญที่ทำให้ขาดเจตนา เพราะยังรู้อยู่ว่ากำลังลักทรัพย์ของผู้อื่นซึ่งไม่ใช่ของตน","ผิดฐานยักยอกทรัพย์เพราะได้รับมอบหมายจากนายจ้าง","ไม่ผิดเพราะไม่ได้ตั้งใจขโมยลูกสุนัขตัวนั้นโดยเฉพาะ"],
+ans:1,explain:"แม้ลูกจ้างจะเข้าใจผิดว่าลูกสุนัขเป็นของฟาร์มใด แต่ยังรู้ข้อเท็จจริงอันเป็นองค์ประกอบสำคัญคือทรัพย์นั้นไม่ใช่ของตนและตั้งใจเอาไปโดยไม่มีสิทธิ (ทุจริต) เจตนาลักทรัพย์จึงครบถ้วน ความเข้าใจผิดเรื่องเจ้าของที่แท้จริงไม่กระทบเจตนาลักทรัพย์ที่มีอยู่แล้ว"},
+{cat:"struct3",q:"หญิงที่อยู่กินฉันสามีภริยากับชายคนหนึ่งมานานกว่า 10 ปีโดยไม่ได้จดทะเบียนสมรส ลักแหวนเพชรของฝ่ายชายไปขายเพื่อใช้หนี้พนันของตนเอง จะอ้างเหตุยกเว้นโทษตาม ม.71 (ทรัพย์ระหว่างสามีภริยา) ได้หรือไม่",
+opts:["ได้ เพราะอยู่กินด้วยกันมานานเกิน 10 ปีถือเป็นสามีภริยาโดยพฤตินัย","ไม่ได้ เพราะ ม.71 ใช้เฉพาะสามีภริยาที่จดทะเบียนสมรสถูกต้องตามกฎหมายเท่านั้น การอยู่กินฉันสามีภริยาโดยไม่จดทะเบียนไม่เข้าเงื่อนไขนี้ไม่ว่าจะอยู่ด้วยกันนานเพียงใด","ได้เพราะเป็นทรัพย์ที่ใช้ร่วมกันในบ้าน","ไม่ได้เพราะเป็นความผิดฐานชิงทรัพย์ไม่ใช่ลักทรัพย์"],
+ans:1,explain:"ม.71 ใช้คำว่า \"สามีภริยา\" ซึ่งหมายถึงคู่สมรสที่จดทะเบียนสมรสถูกต้องตามกฎหมายเท่านั้น การอยู่กินฉันสามีภริยาโดยไม่จดทะเบียน แม้จะนานเพียงใดก็ไม่ทำให้เป็น \"สามีภริยา\" ตามความหมายของกฎหมาย จึงอ้างเหตุยกเว้นโทษนี้ไม่ได้ และหนี้การพนันก็ไม่ใช่ภยันตรายที่กฎหมายรับรองให้อ้างเหตุจำเป็นได้ด้วย"},
+{cat:"scope",q:"หลัก \"Nullum crimen, nulla poena sine lege\" (ไม่มีความผิด ไม่มีโทษ โดยไม่มีกฎหมาย) ตาม ม.2 มีความหมายอย่างไร",
+opts:["ศาลสามารถลงโทษบุคคลได้ตราบใดที่การกระทำนั้นผิดศีลธรรม แม้ไม่มีกฎหมายบัญญัติไว้","บุคคลจะต้องรับโทษทางอาญาต่อเมื่อมีกฎหมายบัญญัติไว้ล่วงหน้าอย่างชัดเจนว่าการกระทำนั้นเป็นความผิดและกำหนดโทษไว้ในขณะกระทำ ห้ามใช้กฎหมายที่ออกภายหลังลงโทษย้อนหลัง เว้นแต่เป็นคุณแก่ผู้กระทำ","กฎหมายอาญาใช้บังคับย้อนหลังได้เสมอไม่ว่าจะเป็นคุณหรือโทษแก่ผู้กระทำ","หลักนี้ใช้เฉพาะกับความผิดร้ายแรงเท่านั้น ความผิดเล็กน้อยไม่ต้องมีกฎหมายบัญญัติไว้ก่อนก็ได้"],
+ans:1,explain:"หลักนี้เป็นรากฐานของความชอบด้วยกฎหมายในทางอาญา กำหนดว่าการลงโทษบุคคลต้องมีกฎหมายบัญญัติไว้ล่วงหน้าอย่างชัดเจนทั้งฐานความผิดและโทษ ห้ามใช้กฎหมายใหม่ย้อนหลังไปลงโทษการกระทำที่ผ่านมาแล้ว เว้นแต่กฎหมายใหม่นั้นเป็นคุณแก่ผู้กระทำซึ่งใช้ย้อนหลังได้ตาม ม.2-3"},
+{cat:"struct1",q:"เจ้าหน้าที่ดูแลสะพานไม้ได้รับแจ้งว่าสะพานชำรุดมากและต้องรีบปิดใช้งานก่อน แต่กลับปล่อยให้รถของคนรู้จักขับข้ามไปก่อนโดยไม่ห้าม จนสะพานพังถล่มเป็นเหตุให้คนในรถถึงแก่ความตาย ควรวินิจฉัยความรับผิดของเจ้าหน้าที่อย่างไร",
+opts:["ไม่มีความผิดเพราะสะพานพังเองไม่ใช่เพราะการกระทำของเจ้าหน้าที่","มีความผิดฐานกระทำโดยประมาทเป็นเหตุให้ผู้อื่นถึงแก่ความตายตาม ม.59 วรรคห้า (งดเว้น) ประกอบ ม.291 เพราะมีหน้าที่ตามตำแหน่งที่ต้องปิดกั้นสะพานอันตรายแต่งดเว้นไม่ทำ ทั้งที่รู้อยู่แล้วว่าสะพานชำรุดมาก","มีความผิดฐานฆ่าคนตายโดยเจตนาตาม ม.288","ไม่มีความผิดเพราะเป็นความประมาทของคนขับรถเอง"],
+ans:1,explain:"เจ้าหน้าที่มีหน้าที่ตามตำแหน่งงานที่ต้องดูแลและปิดกั้นสะพานที่ชำรุดอันตราย เมื่อรู้อยู่แล้วว่าสะพานชำรุดมากแต่งดเว้นไม่ปิดกั้นหรือห้ามใช้งาน จนเป็นเหตุให้มีผู้เสียชีวิต ถือเป็นการกระทำโดยงดเว้นหน้าที่ตาม ม.59 วรรคห้า ประกอบกับเป็นการขาดความระมัดระวังตามวิสัยที่ควรมี จึงเป็นความผิดฐานประมาทเป็นเหตุให้ผู้อื่นถึงแก่ความตายตาม ม.291"},
+{cat:"offense",q:"แพทย์ฉีดยาให้ผู้ป่วยระยะสุดท้ายตามคำขอร้องของผู้ป่วยเองที่ทนทุกข์ทรมานมากและต้องการจบชีวิต ผู้ป่วยเสียชีวิตจากการฉีดยานั้น แพทย์มีความผิดฐานฆ่าคนตายหรือไม่",
+opts:["ไม่มีความผิด เพราะผู้ป่วยยินยอมและร้องขอเอง","มีความผิดฐานฆ่าผู้อื่นโดยเจตนาตาม ม.288 แม้ผู้ตายจะยินยอมหรือร้องขอเองก็ตาม เพราะความยินยอมของผู้เสียหายไม่ใช่เหตุยกเว้นความผิดในความผิดต่อชีวิต ซึ่งเป็นสิทธิที่กฎหมายไม่ยอมให้สละ","มีความผิดฐานประมาทเป็นเหตุให้ผู้อื่นถึงแก่ความตายเท่านั้น","ไม่มีความผิดเพราะเป็นการกระทำตามหน้าที่แพทย์"],
+ans:1,explain:"แม้ผู้ป่วยจะร้องขอและยินยอมเอง แต่ชีวิตเป็นสิทธิที่กฎหมายไม่ยอมให้บุคคลอื่นมาทำลายได้แม้ได้รับความยินยอม (ต่างจากทรัพย์สินซึ่งความยินยอมของเจ้าของอาจเป็นเหตุยกเว้นความผิดได้) แพทย์ผู้ฉีดยาจึงยังมีเจตนาฆ่าและมีความผิดตาม ม.288 ความยินยอมของผู้ตายเป็นเพียงเหตุบรรเทาโทษที่ศาลอาจนำมาพิจารณาลงโทษสถานเบาเท่านั้น"},
+{cat:"struct1",q:"บุตรชายแอบเปลี่ยนยาในขวดเป็นยาพิษเพื่อหลอกให้แพทย์นำไปฉีดให้มารดาของตนโดยที่แพทย์ไม่รู้ความจริง จนมารดาเสียชีวิต บุตรชายและแพทย์มีความผิดอย่างไร",
+opts:["แพทย์มีความผิดฐานฆ่าคนตายเพราะเป็นผู้ลงมือฉีดยาเอง","บุตรชายมีความผิดฐานฆ่าโดยไตร่ตรองไว้ก่อนตาม ม.289 โดยใช้แพทย์เป็นเครื่องมือกระทำผิดโดยแพทย์ไม่รู้ข้อเท็จจริง ส่วนแพทย์ไม่มีความผิดเพราะขาดเจตนา (สำคัญผิดในข้อเท็จจริงตาม ม.62)","ทั้งสองคนเป็นตัวการร่วมกันตาม ม.83","บุตรชายมีความผิดฐานเป็นผู้สนับสนุนเท่านั้น"],
+ans:1,explain:"แพทย์ไม่รู้ว่ายาที่ฉีดเป็นยาพิษ จึงขาดเจตนาและได้รับการคุ้มครองตามหลักสำคัญผิดในข้อเท็จจริงตาม ม.62 ไม่มีความผิด ส่วนบุตรชายเป็นผู้วางแผนและใช้แพทย์เป็นเครื่องมือกระทำผิดโดยไม่รู้ตัว ถือเป็นผู้กระทำผิดโดยตรง (อ้อม) ซึ่งมีการวางแผนไตร่ตรองไว้ก่อน จึงมีความผิดฐานฆ่าโดยไตร่ตรองไว้ก่อนตาม ม.289"},
+{cat:"struct3",q:"เจ้าของร้านถูกลูกจ้างของตนด่าทออย่างไม่เหมาะสมเรื่องการทำงาน จึงโกรธมากและวิ่งไล่ทำร้ายลูกจ้าง เจ้าของร้านจะอ้างเหตุกระทำโดยจำเป็นได้หรือไม่ อย่างไร",
+opts:["ได้ เพราะถูกด่าทอทำให้เสียหน้าอย่างร้ายแรง","ไม่ได้ เพราะการถูกด่าทอไม่ใช่ภยันตรายต่อชีวิต ร่างกาย หรือสิ่งใดที่ใกล้จะถึงตามความหมายของเหตุจำเป็นในม.67 เป็นเพียงความไม่พอใจส่วนตัว หากจะอ้างเหตุลดโทษควรพิจารณาเรื่องบันดาลโทสะตาม ม.72 แทน แต่ก็ต้องดูว่าถูกข่มเหงร้ายแรงด้วยเหตุอันไม่เป็นธรรมหรือไม่","ได้เพราะเป็นเจ้าของร้านมีอำนาจปกครองลูกจ้าง","ได้เสมอเมื่อถูกลูกน้องล่วงเกิน"],
+ans:1,explain:"เหตุจำเป็นตาม ม.67 ต้องเป็นภยันตรายที่ใกล้จะถึงต่อชีวิต ร่างกาย หรือสิ่งที่กฎหมายคุ้มครอง การถูกด่าทอเป็นเพียงความไม่พอใจ ไม่ใช่ภยันตรายในความหมายนี้ จึงอ้างเหตุจำเป็นไม่ได้ หากจะอ้างเหตุลดโทษต้องพิจารณาบันดาลโทสะตาม ม.72 ซึ่งต้องถูกข่มเหงอย่างร้ายแรงด้วยเหตุอันไม่เป็นธรรมและกระทำต่อผู้ข่มเหงในขณะนั้น"},
+{cat:"struct2",q:"ลูกจ้างถูกเจ้าของร้านไล่ทำร้ายอย่างไม่เป็นธรรม จึงวิ่งหนีเข้าไปหลบในร้านค้าอื่นและทำกระจกของร้านนั้นแตกเสียหายระหว่างวิ่งหนี ลูกจ้างจะอ้างเหตุยกเว้นความผิดฐานทำให้เสียทรัพย์ได้หรือไม่",
+opts:["ไม่ได้เลย ต้องรับผิดฐานทำให้เสียทรัพย์เต็มจำนวน","อาจอ้างได้ว่าเป็นผลจากการกระทำเพื่อป้องกันตัวให้พ้นจากภยันตรายที่ใกล้จะถึงจากการถูกไล่ทำร้าย แต่ต้องพิจารณาว่าความเสียหายที่เกิดกับกระจกนั้นพอสมควรแก่เหตุหรือไม่ ซึ่งหากเป็นผลพลอยได้จากการหนีเอาตัวรอดโดยไม่มีทางเลือกอื่น ก็มีน้ำหนักที่จะเข้าเหตุจำเป็นหรือป้องกันได้","ต้องรับผิดฐานบุกรุกด้วย","ไม่มีความผิดเพราะเป็นทรัพย์ของบุคคลภายนอกไม่เกี่ยวกับคู่กรณี"],
+ans:1,explain:"เมื่อลูกจ้างตกอยู่ในภยันตรายที่ใกล้จะถึงจากการถูกไล่ทำร้าย การวิ่งหนีเข้าไปหลบภัยแม้จะทำให้ทรัพย์ของบุคคลภายนอกเสียหายโดยไม่ได้ตั้งใจ ก็อาจเข้าเหตุกระทำโดยจำเป็นเพื่อให้ตนพ้นภยันตรายตาม ม.67(2) ได้ หากพิจารณาแล้วว่าเป็นการกระทำที่ไม่เกินสมควรแก่เหตุเมื่อเทียบกับภัยที่เผชิญอยู่"}
+];
+</script>
+<script>
+/* ================================================================
+   IRAC CASES — จากข้อสอบเก่า/เอกสารสัมมนาที่มีแนวคำตอบจริง (ดัดแปลงชื่อตัวละคร)
+   ================================================================ */
+const IRAC_CASES = [
+{
+  id:"case1", examRef:"ข้อสอบเก่า น.110 กฎหมายอาญาภาคทั่วไป (ดัดแปลงชื่อ)", title:"สวนสัตว์ กล้อง และแหวนทองของแม่", cat:"struct1",
+  facts:"เด็กชายเอกอายุ 16 ปี แอบขโมยแหวนทองของมารดาไปจำนำเพื่อเอาเงินพา น.ส.บีแฟนสาวไปเที่ยวชมสัตว์ที่สวนสัตว์เปิดแห่งหนึ่ง ระหว่างรอชมสัตว์ นางซีซึ่งอ้างตนเป็นอินฟลูเอนเซอร์ชื่อดังมาถ่ายคอนเทนต์ ได้แซงคิวเดินเบียดผู้คนโดยไม่สนใจใครจนชน น.ส.บีตกลงไปในบ่อสัตว์ดุ แม้บ่อไม่ลึกมาก แต่สัตว์ในบ่อตกใจวิ่งเข้ากัด น.ส.บีได้รับบาดเจ็บสาหัส ด้วยความโกรธ เด็กชายเอกแย่งขาตั้งกล้องจากนางซีมากระหน่ำตีนางซีจนได้รับบาดเจ็บที่แขน ระหว่างนั้นนายดีซึ่งจำนางซีได้เพราะติดตามเป็นแฟนคลับ จึงวิ่งเข้าไปผลักเด็กชายเอกเพื่อให้หยุดทำร้ายนางซี เป็นเหตุให้เด็กชายเอกตกลงไปในบ่อสัตว์อีกคน แต่ได้รับบาดเจ็บเพียงเล็กน้อย สามวันต่อมานางซีเสียชีวิตขณะกำลังไลฟ์สดขายของ เนื่องจากอาการติดเชื้อในกระแสเลือด สาเหตุเพราะนางซีไม่ยอมไปรักษาแผลกับแพทย์แต่ใช้วิธีดื่มและอาบน้ำมนต์แทน",
+  issues:[
+    {
+      label:"ประเด็นที่ 1 — ความรับผิดของนางซี (เดินเบียดจน น.ส.บีตกบ่อสัตว์ดุ)",
+      issueQ:"การที่นางซีเดินเบียดผู้คนโดยไม่สนใจใครจนชน น.ส.บีตกบ่อสัตว์ดุ ควรตั้งเป็นประเด็นทางกฎหมายเรื่องใด",
+      issueOpts:["นางซีมีเจตนาทำร้าย น.ส.บี โดยตรง","นางซีกระทำโดยประมาทหรือไม่ เพราะไม่ได้ตั้งใจให้เกิดผลร้ายแต่อย่างใด","นางซีมีเหตุยกเว้นความผิดฐานป้องกันตัว","เป็นเรื่องเจตนาโดยพลาดตาม ม.60"],
+      issueAns:1,
+      issueFeedback:"ใช่แล้ว — นางซีไม่มีเจตนาให้ น.ส.บีตกบ่อสัตว์ดุเลย จึงต้องพิจารณาว่าเข้าองค์ประกอบ \"ประมาท\" ตาม ม.59 วรรคสี่หรือไม่ จากการเดินเบียดผู้คนโดยไม่ระมัดระวัง",
+      ruleQ:"บทกฎหมายใดที่ใช้ปรับกับประเด็นนี้",
+      ruleOpts:["ม.59 วรรคสี่ (ความหมายของประมาท) ประกอบ ม.300 (ประมาทเป็นเหตุให้ผู้อื่นรับอันตรายสาหัส)","ม.288 (ฆ่าผู้อื่นโดยเจตนา)","ม.295 (ทำร้ายร่างกายโดยเจตนา)","ม.68 (ป้องกันโดยชอบด้วยกฎหมาย)"],
+      ruleAns:0,
+      ruleFeedback:"ถูกต้อง — เมื่อไม่มีเจตนา ต้องพิจารณาต่อว่าเป็นการกระทำโดยปราศจากความระมัดระวังตามวิสัยและพฤติการณ์หรือไม่ตาม ม.59 วรรคสี่ และผลที่เกิดคือ น.ส.บีบาดเจ็บสาหัส จึงปรับกับ ม.300",
+      appQ:"ข้อใดปรับบทข้อเท็จจริงเข้ากับมาตราได้ถูกต้อง",
+      appOpts:["นางซีเดินเบียดเสียดผู้คนจำนวนมากในสถานที่แออัดโดยไม่สนใจใคร ถือเป็นการปราศจากความระมัดระวังตามวิสัยและพฤติการณ์ที่บุคคลทั่วไปพึงมี และผลที่ น.ส.บีตกบ่อสัตว์ดุจนบาดเจ็บสาหัสเป็นผลโดยตรงจากความไม่ระมัดระวังนั้น","นางซีตั้งใจเดินชนเพื่อแกล้ง น.ส.บี","น.ส.บีประมาทเองที่ไม่ระวังตัว จึงตัดความรับผิดของนางซี","สัตว์ในบ่อเป็นผู้กระทำผิด ไม่ใช่นางซี"],
+      appAns:0,
+      appFeedback:"ถูกต้อง — การเดินเบียดผู้คนในสถานที่แออัดโดยไม่สนใจใครเป็นการขาดความระมัดระวังตามวิสัยที่ควรมี และเป็นเหตุโดยตรงให้เกิดผลบาดเจ็บสาหัส",
+      concQ:"ข้อสรุปใดถูกต้อง",
+      concOpts:["นางซีมีความผิดฐานกระทำโดยประมาทเป็นเหตุให้ผู้อื่นรับอันตรายสาหัสตาม ม.59 วรรคสี่ ประกอบ ม.300","นางซีไม่มีความผิดเพราะไม่มีเจตนา","นางซีมีความผิดฐานทำร้ายร่างกายโดยเจตนาตาม ม.295","นางซีมีความผิดฐานพยายามฆ่า"],
+      concAns:0,
+      concFeedback:"สรุปถูกต้อง — นางซีต้องรับผิดฐานกระทำโดยประมาทเป็นเหตุให้ น.ส.บีได้รับอันตรายสาหัสตาม ม.300 ประกอบ ม.59 วรรคสี่"
+    },
+    {
+      label:"ประเด็นที่ 2 — ความรับผิดของเด็กชายเอก (ขโมยแหวนของมารดา)",
+      issueQ:"การที่เด็กชายเอกแอบเอาแหวนทองของมารดาไปจำนำ ควรตั้งเป็นประเด็นทางกฎหมายเรื่องใด",
+      issueOpts:["เด็กชายเอกมีความผิดฐานลักทรัพย์หรือไม่ และมีเหตุพิเศษเรื่องความสัมพันธ์ทางเครือญาติและอายุที่ต้องพิจารณาเพิ่มหรือไม่","เป็นเรื่องยักยอกทรัพย์เพราะครอบครองอยู่ก่อนแล้ว","เป็นเรื่องกรรโชกทรัพย์","ไม่มีประเด็นเพราะเป็นทรัพย์ในครอบครัวเดียวกัน"],
+      issueAns:0,
+      issueFeedback:"ใช่แล้ว — ต้องพิจารณาทั้งองค์ประกอบความผิดฐานลักทรัพย์ และเหตุพิเศษสองเรื่องคือทรัพย์เป็นของมารดา (ญาติสนิท) กับอายุของเด็กชายเอกที่เพียง 16 ปี",
+      ruleQ:"บทกฎหมายใดที่ใช้ปรับกับประเด็นนี้",
+      ruleOpts:["ม.334 (ลักทรัพย์) ประกอบ ม.71 วรรคสอง (ทรัพย์ระหว่างญาติสนิท) และ ม.75 (ลดมาตราส่วนโทษสำหรับเด็กอายุเกิน 15 ไม่เกิน 18 ปี)","ม.334 เพียงมาตราเดียว","ม.352 (ยักยอกทรัพย์)","ม.73 (เด็กอายุไม่เกิน 12 ปี ไม่ต้องรับโทษ)"],
+      ruleAns:0,
+      ruleFeedback:"ถูกต้อง — ต้องปรับสามมาตราประกอบกัน เพราะทั้งองค์ประกอบความผิดหลัก เหตุพิเศษเรื่องความสัมพันธ์ทางเครือญาติ และอายุของผู้กระทำ ล้วนกระทบต่อผลทางกฎหมายทั้งสิ้น",
+      appQ:"ข้อใดปรับบทข้อเท็จจริงเข้ากับมาตราได้ถูกต้อง",
+      appOpts:["เด็กชายเอกเอาแหวนของมารดาไปโดยทุจริตครบองค์ประกอบลักทรัพย์ตาม ม.334 แต่เพราะแหวนเป็นของมารดาซึ่งเป็นบุพการี จึงเป็นความผิดอันยอมความได้ตาม ม.71 วรรคสอง และเพราะอายุ 16 ปี (เกิน 15 ไม่เกิน 18) ศาลอาจลดมาตราส่วนโทษลงกึ่งหนึ่งตาม ม.75","แหวนเป็นทรัพย์ร่วมของครอบครัว จึงไม่ผิดลักทรัพย์","เด็กชายเอกอายุยังไม่ถึงเกณฑ์ต้องรับโทษเลยตาม ม.73","เป็นความผิดที่ยอมความไม่ได้เพราะเป็นทรัพย์มีค่า"],
+      appAns:0,
+      appFeedback:"ถูกต้อง — ทั้งสามมาตราต้องใช้ประกอบกันเพื่อให้ได้ผลลัพธ์ทางกฎหมายที่ถูกต้องครบถ้วน",
+      concQ:"ข้อสรุปใดถูกต้อง",
+      concOpts:["เด็กชายเอกมีความผิดฐานลักทรัพย์ตาม ม.334 แต่เป็นความผิดอันยอมความได้เพราะกระทำต่อมารดาตาม ม.71 วรรคสอง และหากมีการฟ้องร้อง ศาลอาจลดมาตราส่วนโทษลงกึ่งหนึ่งเพราะอายุ 16 ปีตาม ม.75","เด็กชายเอกไม่มีความผิดเลยเพราะเป็นทรัพย์ของมารดา","เด็กชายเอกต้องรับโทษเต็มตามอัตราโทษของผู้ใหญ่","ความผิดนี้เป็นความผิดที่ยอมความไม่ได้และไม่มีการลดโทษใด ๆ"],
+      concAns:0,
+      concFeedback:"สรุปถูกต้อง — เด็กชายเอกมีความผิดฐานลักทรัพย์ แต่เป็นความผิดอันยอมความได้ และศาลมีดุลพินิจลดมาตราส่วนโทษเพราะอายุ"
+    },
+    {
+      label:"ประเด็นที่ 3 — ความรับผิดของเด็กชายเอก (ทำร้ายนางซีจนเสียชีวิตภายหลัง)",
+      issueQ:"เด็กชายเอกทำร้ายนางซีด้วยขาตั้งกล้อง ต่อมานางซีเสียชีวิตเพราะติดเชื้อจากการรักษาแผลไม่ถูกวิธี ควรตั้งเป็นประเด็นทางกฎหมายเรื่องใด",
+      issueOpts:["เด็กชายเอกมีความผิดฐานทำร้ายร่างกายเพียงใด และต้องรับผิดในผลที่นางซีเสียชีวิตในภายหลังด้วยหรือไม่","เป็นเรื่องประมาทเป็นเหตุให้ถึงแก่ความตายเพียงอย่างเดียว","เป็นเรื่องฆ่าโดยไตร่ตรองไว้ก่อนตาม ม.289","ไม่มีความผิดเพราะนางซีรักษาแผลผิดวิธีเอง"],
+      issueAns:0,
+      issueFeedback:"ใช่แล้ว — ต้องแยกพิจารณาสองชั้น คือเจตนาที่แท้จริงของเด็กชายเอกในการทำร้าย และผลที่หนักขึ้นคือความตายที่เกิดขึ้นภายหลังว่าต้องรับผิดด้วยหรือไม่",
+      ruleQ:"บทกฎหมายใดที่ใช้ปรับกับประเด็นนี้",
+      ruleOpts:["ม.295 หรือ ม.297 (ทำร้ายร่างกาย) ประกอบ ม.63 (ผลธรรมดาที่ทำให้รับโทษหนักขึ้น)","ม.288 (ฆ่าผู้อื่นโดยเจตนา) เพียงมาตราเดียว","ม.291 (ประมาทเป็นเหตุให้ถึงแก่ความตาย) เพียงมาตราเดียว","ม.290 (ทำร้ายจนเป็นเหตุถึงแก่ความตาย) โดยไม่ต้องพิจารณา ม.63"],
+      ruleAns:0,
+      ruleFeedback:"ถูกต้อง — เจตนาเดิมของเด็กชายเอกคือทำร้ายร่างกายเท่านั้น (มุ่งไปที่แขน) ไม่ใช่เจตนาฆ่า ส่วนความตายที่เกิดภายหลังต้องพิจารณาผ่าน ม.63 ว่าเป็นผลธรรมดาที่คาดหมายได้หรือไม่",
+      appQ:"ข้อใดปรับบทข้อเท็จจริงเข้ากับมาตราได้ถูกต้อง",
+      appOpts:["เด็กชายเอกใช้ขาตั้งกล้องตีที่แขนของนางซี แสดงเจตนาเพียงทำร้ายร่างกาย ไม่ใช่เจตนาฆ่า จึงเข้า ม.295 หรือ ม.297 แล้วแต่ความสาหัสของบาดแผล และการที่นางซีเสียชีวิตภายหลังเพราะแผลติดเชื้อจากการไม่ไปรักษาที่ถูกต้อง ยังถือเป็นผลธรรมดาที่วิญญูชนคาดหมายได้จากบาดแผล จึงต้องรับผิดในผลที่หนักขึ้นตาม ม.63","เด็กชายเอกมีเจตนาฆ่ามาตั้งแต่ต้น เพราะรู้ว่าขาตั้งกล้องอาจทำให้ตายได้","การที่นางซีรักษาแผลด้วยน้ำมนต์เป็นเหตุแทรกแซงที่ตัดความสัมพันธ์ระหว่างการกระทำและผล เด็กชายเอกจึงไม่ต้องรับผิดในความตาย","เด็กชายเอกไม่มีความผิดใดเลยเพราะนางซีเป็นฝ่ายเริ่มก่อน"],
+      appAns:0,
+      appFeedback:"ถูกต้อง — จุดสำคัญคือแยกเจตนาทำร้าย (ที่มีจริง) ออกจากผลที่หนักขึ้นคือความตาย ซึ่งพิจารณาแยกผ่านหลักผลธรรมดาตาม ม.63 ไม่ใช่การตัดความสัมพันธ์ระหว่างเหตุและผล เพราะการติดเชื้อจากบาดแผลเป็นเรื่องที่คาดหมายได้ตามธรรมดา",
+      concQ:"ข้อสรุปใดถูกต้อง",
+      concOpts:["เด็กชายเอกมีความผิดฐานทำร้ายร่างกายตาม ม.295 หรือ ม.297 และต้องรับผิดในผลที่นางซีเสียชีวิตด้วยตาม ม.63 เพราะเป็นผลธรรมดาที่คาดหมายได้จากบาดแผล","เด็กชายเอกมีความผิดฐานฆ่าคนตายโดยเจตนาตาม ม.288 เต็มบท","เด็กชายเอกไม่ต้องรับผิดในความตายเลยเพราะนางซีรักษาแผลผิดวิธีเอง","เด็กชายเอกมีความผิดฐานประมาทเป็นเหตุให้ถึงแก่ความตายเพียงอย่างเดียว โดยไม่มีความผิดฐานทำร้ายร่างกาย"],
+      concAns:0,
+      concFeedback:"สรุปถูกต้อง — เด็กชายเอกมีความผิดฐานทำร้ายร่างกาย และต้องรับผิดในผลที่หนักขึ้นคือความตายของนางซีด้วย เพราะเป็นผลธรรมดาที่อาจเกิดขึ้นได้จากบาดแผลที่ไม่ได้รับการรักษาอย่างถูกวิธี"
+    },
+    {
+      label:"ประเด็นที่ 4 — ความรับผิดของนายดี (ผลักเด็กชายเอกเพื่อหยุดทำร้ายนางซี)",
+      issueQ:"นายดีวิ่งเข้าไปผลักเด็กชายเอกเพื่อให้หยุดทำร้ายนางซี จนเด็กชายเอกตกบ่อสัตว์ได้รับบาดเจ็บเล็กน้อย ควรตั้งเป็นประเด็นทางกฎหมายเรื่องใด",
+      issueOpts:["นายดีมีเหตุยกเว้นความผิดฐานป้องกันโดยชอบด้วยกฎหมายหรือไม่","นายดีมีความผิดฐานพยายามฆ่า","นายดีเป็นตัวการร่วมกับเด็กชายเอก","ไม่มีประเด็นเพราะนายดีไม่มีเจตนาเคลื่อนไหวร่างกาย"],
+      issueAns:0,
+      issueFeedback:"ใช่แล้ว — นายดีมีการกระทำและเจตนาผลักจริง จึงต้องพิจารณาว่าเข้าเหตุยกเว้นความผิดฐานป้องกันตาม ม.68 หรือไม่",
+      ruleQ:"บทกฎหมายใดที่ใช้ปรับกับประเด็นนี้",
+      ruleOpts:["ม.68 (ป้องกันโดยชอบด้วยกฎหมาย)","ม.67 (กระทำโดยจำเป็น)","ม.72 (บันดาลโทสะ)","ม.83 (ตัวการ)"],
+      ruleAns:0,
+      ruleFeedback:"ถูกต้อง — นายดีกระทำเพื่อปกป้องนางซีจากภยันตรายที่ใกล้จะถึงจากการถูกเด็กชายเอกทำร้าย จึงต้องพิจารณาตามหลักป้องกันตาม ม.68",
+      appQ:"ข้อใดปรับบทข้อเท็จจริงเข้ากับมาตราได้ถูกต้อง",
+      appOpts:["นายดีผลักเด็กชายเอกเพื่อยับยั้งการทำร้ายนางซีซึ่งเป็นภยันตรายที่ใกล้จะถึงและละเมิดต่อกฎหมาย ผลที่เกิดคือเด็กชายเอกบาดเจ็บเพียงเล็กน้อย จึงพอสมควรแก่เหตุเมื่อเทียบกับความรุนแรงของการทำร้ายที่นางซีกำลังเผชิญ","นายดีควรเรียกเจ้าหน้าที่แทนการลงมือเอง จึงไม่เข้าเหตุป้องกัน","การผลักจนตกบ่อสัตว์ถือว่าเกินสมควรแก่เหตุเสมอ","นายดีไม่มีสิทธิป้องกันเพราะนางซีเป็นผู้ก่อเหตุกับ น.ส.บีก่อน"],
+      appAns:0,
+      appFeedback:"ถูกต้อง — เมื่อเปรียบเทียบความร้ายแรงของภยันตรายที่นางซีกำลังเผชิญกับผลเพียงบาดเจ็บเล็กน้อยที่เกิดกับเด็กชายเอก ถือว่าพอสมควรแก่เหตุ",
+      concQ:"ข้อสรุปใดถูกต้อง",
+      concOpts:["นายดีไม่มีความผิด เพราะเป็นการป้องกันโดยชอบด้วยกฎหมายตาม ม.68","นายดีมีความผิดฐานทำร้ายร่างกายเต็มบท","นายดีมีความผิดแต่ได้รับการลดโทษเพราะบันดาลโทสะ","นายดีต้องรับผิดร่วมกับเด็กชายเอกฐานตัวการ"],
+      concAns:0,
+      concFeedback:"สรุปถูกต้อง — นายดีไม่มีความผิดเพราะเข้าเหตุยกเว้นความผิดฐานป้องกันโดยชอบด้วยกฎหมายตาม ม.68"
+    }
+  ]
+},
+{
+  id:"case2", examRef:"ข้อสอบเก่า น.110 กฎหมายอาญาภาคทั่วไป (ดัดแปลงชื่อ)", title:"ร้านนวดแผนโบราณ กับปืนที่จ่อขู่", cat:"struct3",
+  facts:"นายเอเสียใจและโกรธมากเมื่อพบว่าน้องสาวคนเดียวของตนเสียชีวิตภายหลังกลับจากการนวดบิดคอ เพราะเข้าใจว่าทำให้กระดูกเคลื่อนไปกดทับไขสันหลัง คืนวันหนึ่งจึงบุกไปที่ร้านนวดแผนโบราณ จับตัวนางบีหมอนวดที่นวดคอน้องสาวของตนไว้ จากนั้นใช้ปืนจ่อศีรษะบังคับให้นางซีเจ้าของร้านใช้ไม้ฟาดหลังนางบีเพื่อแก้แค้น หากไม่ยอมทำนายเอขู่จะยิงให้ตายทั้งคู่ นางซีจึงจำต้องทำตามจนนางบีบาดเจ็บสาหัส ภายหลังผลตรวจทางการแพทย์ชี้ชัดว่าน้องสาวนายเอไม่ได้เสียชีวิตจากการนวดแต่อย่างใด แต่กระแสข่าวก่อนหน้าทำให้ร้านนวดต้องปิดตัวและนางบีถูกเลิกจ้าง นางบีเครียดจนมีอาการซึมเศร้าและกลายเป็นโรคจิตเภท แม้จะรู้ว่าไม่ควรทำแต่เมื่อเห็นคนอื่นหันหลังให้จะต้องรีบเข้าไปจับบิดคอแรง ๆ ค่ำวันหนึ่งนางบีจับคอ น.ส.ดีที่นั่งรอรถเมล์บิดจนคอเคล็ดต้องรักษาตัวนาน ต่อมาอีกวันหนึ่ง นางบีเห็นกระจกมองหลังรถมอเตอร์ไซค์ของนายอีเป็นคอคน จึงรีบเข้าไปจับบิดจนกระจกหักเสียหาย",
+  issues:[
+    {
+      label:"ประเด็นที่ 1 — ความรับผิดของนางซี (ถูกจี้ปืนบังคับให้ทำร้ายนางบี)",
+      issueQ:"นางซีถูกนายเอใช้ปืนจ่อศีรษะบังคับให้ใช้ไม้ฟาดนางบี ควรตั้งเป็นประเด็นทางกฎหมายเรื่องใด",
+      issueOpts:["นางซีมีความผิดครบองค์ประกอบหรือไม่ และมีเหตุยกเว้นโทษฐานกระทำโดยจำเป็นหรือไม่","นางซีไม่มีเจตนาเลยเพราะถูกบังคับ","นางซีเป็นผู้เสียหายไม่ใช่ผู้กระทำผิด","เป็นเรื่องป้องกันโดยชอบด้วยกฎหมาย"],
+      issueAns:0,
+      issueFeedback:"ใช่แล้ว — นางซีมีการเคลื่อนไหวร่างกายและรู้ว่ากำลังทำร้ายนางบี จึงมีเจตนาและครบองค์ประกอบ แต่ต้องพิจารณาต่อว่ามีเหตุยกเว้นโทษเพราะถูกบังคับหรือไม่",
+      ruleQ:"บทกฎหมายใดที่ใช้ปรับกับประเด็นนี้",
+      ruleOpts:["ม.297 (ทำร้ายร่างกายสาหัส) ประกอบ ม.67(1) (กระทำโดยจำเป็นเพราะถูกบังคับ)","ม.297 เพียงมาตราเดียวโดยไม่มีเหตุยกเว้นใด","ม.68 (ป้องกันโดยชอบด้วยกฎหมาย)","ม.62 (สำคัญผิดในข้อเท็จจริง)"],
+      ruleAns:0,
+      ruleFeedback:"ถูกต้อง — นางซีครบองค์ประกอบทำร้ายร่างกายสาหัสตาม ม.297 แต่กระทำไปเพราะถูกบังคับด้วยอาวุธปืนโดยไม่มีทางเลือก จึงต้องพิจารณาเหตุจำเป็นตาม ม.67(1)",
+      appQ:"ข้อใดปรับบทข้อเท็จจริงเข้ากับมาตราได้ถูกต้อง",
+      appOpts:["นางซีถูกนายเอใช้ปืนจ่อศีรษะข่มขู่ว่าจะยิงทั้งคู่หากไม่ทำตาม ถือเป็นการอยู่ภายใต้อำนาจบังคับซึ่งไม่สามารถหลีกเลี่ยงหรือขัดขืนได้ และเมื่อเทียบกับภัยที่ขู่ว่าจะถูกยิงตาย การทำร้ายนางบีจนสาหัสไม่ถือว่าเกินสมควรแก่เหตุ","นางซีสามารถขัดขืนหรือหลบหนีได้ จึงไม่เข้าเหตุจำเป็น","นางซีมีเจตนาร่วมกับนายเอมาตั้งแต่ต้น จึงไม่มีเหตุยกเว้นใด","การใช้ไม้ฟาดถือว่าเกินสมควรแก่เหตุเสมอไม่ว่ากรณีใด"],
+      appAns:0,
+      appFeedback:"ถูกต้อง — การถูกจ่อปืนขู่ฆ่าเป็นภัยร้ายแรงถึงชีวิต เมื่อเทียบกับผลที่นางซีก่อ (ทำร้ายสาหัส) จึงไม่ถือว่าเกินสมควรแก่เหตุ",
+      concQ:"ข้อสรุปใดถูกต้อง",
+      concOpts:["นางซีมีความผิดครบองค์ประกอบตาม ม.297 แต่ไม่ต้องรับโทษเพราะเข้าเหตุกระทำโดยจำเป็นตาม ม.67(1)","นางซีไม่มีความผิดใดเลย","นางซีต้องรับโทษเต็มตาม ม.297 โดยไม่มีเหตุยกเว้น","นางซีมีความผิดแต่ได้ลดโทษเพราะบันดาลโทสะ"],
+      concAns:0,
+      concFeedback:"สรุปถูกต้อง — นางซียังมีความผิดอยู่ แต่ไม่ต้องรับโทษเพราะเหตุจำเป็นตาม ม.67(1)"
+    },
+    {
+      label:"ประเด็นที่ 2 — ความรับผิดของนายเอ (บังคับให้นางซีทำร้ายนางบี)",
+      issueQ:"นายเอใช้ปืนขู่บังคับให้นางซีทำร้ายนางบี ควรตั้งเป็นประเด็นทางกฎหมายเรื่องใด",
+      issueOpts:["นายเอเป็นผู้ใช้ให้ผู้อื่นกระทำความผิดหรือไม่","นายเอไม่มีความผิดเพราะไม่ได้ลงมือเอง","นายเอเป็นผู้สนับสนุนเท่านั้น","นายเอมีความผิดฐานพยายามทำร้ายร่างกายเท่านั้น"],
+      issueAns:0,
+      issueFeedback:"ใช่แล้ว — นายเอก่อให้นางซีกระทำความผิดด้วยการข่มขู่บังคับ จึงต้องพิจารณาความรับผิดในฐานะผู้ใช้",
+      ruleQ:"บทกฎหมายใดที่ใช้ปรับกับประเด็นนี้",
+      ruleOpts:["ม.84 (ผู้ใช้ให้กระทำความผิด) ประกอบ ม.297","ม.86 (ผู้สนับสนุน) ประกอบ ม.297","ม.83 (ตัวการ) เท่านั้น","ม.67 (กระทำโดยจำเป็น) เช่นเดียวกับนางซี"],
+      ruleAns:0,
+      ruleFeedback:"ถูกต้อง — นายเอก่อให้ผู้อื่น (นางซี) กระทำความผิดด้วยการบังคับขู่เข็ญ เข้าลักษณะผู้ใช้ตาม ม.84 และเมื่อความผิดสำเร็จ ต้องรับโทษเสมือนตัวการ",
+      appQ:"ข้อใดปรับบทข้อเท็จจริงเข้ากับมาตราได้ถูกต้อง",
+      appOpts:["นายเอใช้อาวุธปืนข่มขู่บังคับให้นางซีทำร้ายนางบีโดยเจตนา และนางซีก็กระทำตามจนนางบีบาดเจ็บสาหัสจริง นายเอจึงเป็นผู้ใช้ให้กระทำความผิดสำเร็จ ต้องรับโทษเสมือนเป็นตัวการโดยไม่มีเหตุยกเว้นความผิดหรือยกเว้นโทษใดที่อ้างได้ เพราะนายเอเป็นผู้ก่อเหตุเองตั้งแต่ต้น","นายเอไม่ต้องรับผิดเพราะนางซีเป็นผู้ลงมือจริง","นายเอได้รับการยกเว้นโทษเพราะโกรธแค้นจากการสูญเสียน้องสาว","นายเอมีความผิดเพียงฐานพยายามเพราะไม่ได้ลงมือเอง"],
+      appAns:0,
+      appFeedback:"ถูกต้อง — นายเอเป็นผู้ก่อเหตุและบังคับให้ผู้อื่นกระทำผิด จึงไม่มีเหตุยกเว้นใดที่อ้างได้ ต่างจากนางซีซึ่งเป็นผู้ถูกบังคับ",
+      concQ:"ข้อสรุปใดถูกต้อง",
+      concOpts:["นายเอมีความผิดฐานเป็นผู้ใช้ให้กระทำความผิดตาม ม.84 ประกอบ ม.297 ต้องรับโทษเสมือนเป็นตัวการ","นายเอไม่มีความผิดเพราะไม่ได้ลงมือทำร้ายเอง","นายเอมีความผิดเพียงฐานข่มขืนใจผู้อื่นเท่านั้น ไม่เกี่ยวกับการทำร้ายร่างกาย","นายเอได้รับยกเว้นโทษเพราะกระทำด้วยอารมณ์โกรธ"],
+      concAns:0,
+      concFeedback:"สรุปถูกต้อง — นายเอต้องรับโทษฐานทำร้ายร่างกายสาหัสเสมือนเป็นตัวการ ในฐานะผู้ใช้ให้กระทำความผิดตาม ม.84"
+    },
+    {
+      label:"ประเด็นที่ 3 — ความรับผิดของนางบี (จับคอ น.ส.ดีเพราะอาการทางจิต)",
+      issueQ:"นางบีจับคอ น.ส.ดีบิดจนคอเคล็ด เพราะอาการโรคจิตเภทที่ควบคุมตนเองไม่ได้ ควรตั้งเป็นประเด็นทางกฎหมายเรื่องใด",
+      issueOpts:["นางบีมีความผิดครบองค์ประกอบหรือไม่ และมีเหตุยกเว้นโทษฐานวิกลจริตหรือไม่","นางบีไม่มีเจตนาเลยเพราะป่วยเป็นโรคจิต","นางบีมีเหตุยกเว้นความผิดฐานป้องกันตัว","ไม่มีประเด็นเพราะนางบีเป็นผู้เสียหายจากคดีแรก"],
+      issueAns:0,
+      issueFeedback:"ใช่แล้ว — นางบียังรู้ตัวว่ากำลังทำอะไรอยู่ (รู้ว่าไม่ควรทำ) จึงยังมีเจตนา แต่ต้องพิจารณาว่าเข้าเหตุยกเว้นโทษเพราะไม่สามารถบังคับตนเองได้จากอาการทางจิตหรือไม่",
+      ruleQ:"บทกฎหมายใดที่ใช้ปรับกับประเด็นนี้",
+      ruleOpts:["ม.295 (ทำร้ายร่างกาย) ประกอบ ม.65 (วิกลจริต)","ม.295 เพียงมาตราเดียวโดยไม่มีเหตุยกเว้น","ม.67 (กระทำโดยจำเป็น)","ม.62 (สำคัญผิดในข้อเท็จจริง)"],
+      ruleAns:0,
+      ruleFeedback:"ถูกต้อง — ครบองค์ประกอบทำร้ายร่างกายตาม ม.295 แต่ต้องพิจารณาเหตุยกเว้นโทษฐานวิกลจริตตาม ม.65 ประกอบด้วย เพราะไม่สามารถบังคับตนเองได้จากอาการทางจิต",
+      appQ:"ข้อใดปรับบทข้อเท็จจริงเข้ากับมาตราได้ถูกต้อง",
+      appOpts:["นางบีจับคอ น.ส.ดีซึ่งเป็นอวัยวะสำคัญโดยเจตนาเพราะรู้ข้อเท็จจริงและประสงค์ต่อผล ครบองค์ประกอบ ม.295 แต่เนื่องจากอาการโรคจิตเภททำให้ไม่สามารถบังคับตนเองไม่ให้กระทำได้ แม้จะยังรู้ผิดชอบอยู่บ้างว่าไม่ควรทำ จึงเข้าเหตุยกเว้นหรือลดโทษฐานวิกลจริตตาม ม.65","นางบีไม่มีเจตนาเลยเพราะป่วยเป็นโรคจิต","อาการป่วยไม่เกี่ยวกับความรับผิดทางอาญาเลย","นางบีต้องรับโทษเต็มเพราะยังรู้ตัวว่าไม่ควรทำ"],
+      appAns:0,
+      appFeedback:"ถูกต้อง — จุดสำคัญคือนางบียังมีเจตนา (รู้ข้อเท็จจริงและประสงค์ต่อผล) เพียงแต่ไม่สามารถควบคุมยับยั้งตนเองได้เพราะอาการทางจิต ซึ่งเป็นเงื่อนไขของ ม.65",
+      concQ:"ข้อสรุปใดถูกต้อง",
+      concOpts:["นางบีมีความผิดครบองค์ประกอบตาม ม.295 แต่ได้รับการยกเว้นหรือลดโทษเพราะวิกลจริตตาม ม.65","นางบีไม่มีความผิดเลยเพราะป่วยเป็นโรคจิต","นางบีต้องรับโทษเต็มตาม ม.295 เพราะยังรู้ตัว","นางบีมีความผิดฐานพยายามทำร้ายร่างกายเท่านั้น"],
+      concAns:0,
+      concFeedback:"สรุปถูกต้อง — นางบีมีความผิดแต่ได้รับการยกเว้นหรือลดโทษตามดุลพินิจศาลเพราะเหตุวิกลจริตตาม ม.65"
+    },
+    {
+      label:"ประเด็นที่ 4 — ความรับผิดของนางบี (ทุบกระจกรถนายอีเพราะคิดว่าเป็นคอคน)",
+      issueQ:"นางบีจับกระจกมองหลังรถของนายอีบิดจนแตกเสียหาย เพราะอาการทางจิตทำให้เข้าใจผิดคิดว่าเป็นคอคน ควรตั้งเป็นประเด็นทางกฎหมายเรื่องใด",
+      issueOpts:["นางบีมีเจตนาทำให้เสียทรัพย์หรือไม่ เพราะไม่รู้เลยว่าสิ่งที่จับเป็นทรัพย์","เป็นเรื่องวิกลจริตเช่นเดียวกับประเด็นที่ 3","เป็นเรื่องเหตุจำเป็น","เป็นเรื่องป้องกันโดยชอบด้วยกฎหมาย"],
+      issueAns:0,
+      issueFeedback:"ใช่แล้ว — จุดต่างจากประเด็นที่ 3 คือกรณีนี้นางบีไม่รู้เลยว่าสิ่งที่ตนจับเป็นทรัพย์สิน จึงเป็นปัญหาเรื่ององค์ประกอบภายในตั้งแต่ต้น ไม่ใช่เรื่องยกเว้นโทษ",
+      ruleQ:"บทกฎหมายใดที่ใช้ปรับกับประเด็นนี้",
+      ruleOpts:["ม.59 วรรคสาม (ไม่รู้ข้อเท็จจริงอันเป็นองค์ประกอบภายนอก = ขาดเจตนา) ประกอบ ม.358 (ทำให้เสียทรัพย์)","ม.65 (วิกลจริต) เช่นเดียวกับประเด็นก่อน","ม.62 (สำคัญผิดในข้อเท็จจริงที่เป็นคุณ)","ม.358 เพียงมาตราเดียวโดยไม่ต้องพิจารณาเจตนา"],
+      ruleAns:0,
+      ruleFeedback:"ถูกต้อง — เมื่อไม่รู้ข้อเท็จจริงว่าสิ่งที่จับเป็นทรัพย์เลย ถือว่าขาดเจตนาตั้งแต่ต้นตาม ม.59 วรรคสาม ต่างจากประเด็นก่อนซึ่งยังรู้ว่ากำลังทำร้ายคน เพียงแต่ควบคุมตัวเองไม่ได้",
+      appQ:"ข้อใดปรับบทข้อเท็จจริงเข้ากับมาตราได้ถูกต้อง",
+      appOpts:["ขณะลงมือ นางบีไม่รู้เลยว่าสิ่งที่ตนจับบิดเป็นทรัพย์ (กระจกมองหลัง) แต่เข้าใจว่าเป็นคอคน จึงขาดเจตนาทำให้เสียทรัพย์ตั้งแต่ต้นตาม ม.59 วรรคสาม และเพราะความผิดฐานทำให้เสียทรัพย์ไม่มีบทบัญญัติให้รับผิดฐานประมาทด้วย การกระทำของนางบีจึงไม่เป็นความผิด","นางบีมีเจตนาทำให้เสียทรัพย์เพราะทรัพย์เสียหายจริง","ต้องใช้ ม.65 เช่นเดียวกับประเด็นที่ 3 เพราะเป็นอาการป่วยเดียวกัน","นางบีต้องรับผิดฐานประมาททำให้เสียทรัพย์"],
+      appAns:0,
+      appFeedback:"ถูกต้อง — ต่างจากประเด็นที่ 3 (ยังรู้ว่ากำลังทำร้ายคน) กรณีนี้นางบีไม่รู้เลยว่าเป็นทรัพย์ จึงขาดเจตนาตั้งแต่ต้น ไม่ใช่กรณีมีเจตนาแล้วมายกเว้นโทษภายหลัง",
+      concQ:"ข้อสรุปใดถูกต้อง",
+      concOpts:["นางบีไม่มีความผิดฐานทำให้เสียทรัพย์ เพราะขาดเจตนาตั้งแต่ต้นและกฎหมายไม่กำหนดให้รับผิดฐานประมาทในความผิดนี้","นางบีมีความผิดฐานทำให้เสียทรัพย์เต็มบท","นางบีได้รับยกเว้นโทษเพราะวิกลจริตเช่นเดียวกับประเด็นที่ 3","นางบีต้องรับผิดฐานประมาททำให้เสียทรัพย์"],
+      concAns:0,
+      concFeedback:"สรุปถูกต้อง — นางบีไม่มีความผิดฐานทำให้เสียทรัพย์เพราะขาดเจตนาตั้งแต่ต้น ไม่ต้องพิจารณาเหตุยกเว้นโทษต่อไปอีก"
+    }
+  ]
+},
+{
+  id:"case3", examRef:"ข้อสอบเก่า น.110 กฎหมายอาญาภาคทั่วไป (ดัดแปลงชื่อ)", title:"ดูบอลที่ร้านชาบู เมาแล้วก่อเหตุ", cat:"attempt",
+  facts:"นายหนึ่งและนายสองนัดกันไปกินดื่มและดูฟุตบอลที่ร้านชาบูบุฟเฟต์แห่งหนึ่ง ทั้งคู่เชียร์ทีมหนึ่ง ขณะที่นายสามและนายสี่โต๊ะข้าง ๆ เชียร์อีกทีม จบครึ่งแรกทีมที่นายหนึ่งเชียร์ตามอยู่ นายหนึ่งซึ่งดื่มสุราไปมากจนมึนเมาเริ่มหงุดหงิด เมื่อนายสามเดินซุ่มซ่ามมาชนถังน้ำแข็งบนโต๊ะจนนายหนึ่งล้ม นายหนึ่งจึงลุกขึ้นเหวี่ยงหมัดใส่นายสามทันที แต่นายสามหลบทัน นายหนึ่งจึงเสียหลักไปชนหม้อชาบูล้มคว่ำจนน้ำร้อนลวกแขนนายสี่ที่นั่งอยู่ใกล้ ๆ ได้รับบาดเจ็บ ระหว่างที่นายสามและพนักงานร้านกำลังช่วยเหลือนายสี่อยู่ นายสองเห็นกระเป๋าเงินใบหนึ่งตกอยู่ คิดว่าเป็นของนายสาม จึงแอบหยิบเอาไปเพราะอยากแก้แค้นให้ทีมที่เชียร์ แต่แท้จริงกระเป๋าใบนั้นเป็นของนายหนึ่งเอง เมื่อร้านปิด นายหนึ่งหากระเป๋าเงินตัวเองไม่เจอ ด้วยความโกรธจัดที่ทั้งบอลแพ้และเพื่อนไม่ยอมจ่ายเงิน นายสองซึ่งต้องขี่รถจักรยานยนต์ไปส่งนายหนึ่งที่บ้าน จึงนำนายหนึ่งซึ่งเมาจนหมดสติไปแอบทิ้งไว้ในรั้วบ้านของนายห้าซึ่งรู้กันดีว่ามีสุนัขดุหลายตัวเฝ้าอยู่ เช้าวันรุ่งขึ้นมีคนพบนายหนึ่งถูกสุนัขกัดจนร่างกายเต็มไปด้วยบาดแผลและเลือด ต้องรีบนำส่งโรงพยาบาล",
+  issues:[
+    {
+      label:"ประเด็นที่ 1 — ความรับผิดของนายหนึ่ง (เหวี่ยงหมัดใส่นายสามและทำนายสี่บาดเจ็บ)",
+      issueQ:"นายหนึ่งเหวี่ยงหมัดใส่นายสามแต่พลาด แล้วเสียหลักชนหม้อจนน้ำร้อนลวกนายสี่ ทั้งที่เมาสุราอยู่ ควรตั้งเป็นประเด็นทางกฎหมายเรื่องใด",
+      issueOpts:["ความรับผิดของนายหนึ่งต่อนายสาม (พยายามทำร้าย) และต่อนายสี่ (เจตนาโดยพลาด) และความมึนเมาเป็นข้อแก้ตัวได้หรือไม่","เป็นเรื่องประมาทเพียงอย่างเดียวทั้งสองกรณี","นายหนึ่งไม่มีความผิดใดเพราะเมาจนไม่รู้ตัว","เป็นเรื่องป้องกันตัวเพราะถูกนายสามชนก่อน"],
+      issueAns:0,
+      issueFeedback:"ใช่แล้ว — ต้องแยกพิจารณาการกระทำต่อนายสาม (หมัดไม่โดน) กับผลที่เกิดกับนายสี่ (ไม่ได้ตั้งใจ) และปัญหาความมึนเมาแยกต่างหากอีกประเด็นหนึ่ง",
+      ruleQ:"บทกฎหมายใดที่ใช้ปรับกับประเด็นนี้",
+      ruleOpts:["ม.295 ประกอบ ม.80 (พยายามทำร้ายนายสาม) และ ม.295 ประกอบ ม.60 (เจตนาโดยพลาดต่อนายสี่) โดยนายหนึ่งอ้างมึนเมาตาม ม.66 ไม่ได้เพราะสมัครใจเสพเอง","ม.295 ประกอบ ม.61 (สำคัญผิดในตัวบุคคล) เพียงมาตราเดียว","ม.300 (ประมาทให้ผู้อื่นสาหัส) ทั้งสองกรณี","ไม่มีมาตราใดปรับได้เพราะเมาจนไม่รู้ตัว"],
+      ruleAns:0,
+      ruleFeedback:"ถูกต้อง — หมัดที่ไม่โดนนายสามเป็นเพียงพยายาม ส่วนผลที่เกิดกับนายสี่ซึ่งไม่ใช่เป้าหมายเดิมเป็นเจตนาโดยพลาดตาม ม.60 และความมึนเมาโดยสมัครใจไม่เป็นข้อแก้ตัวตาม ม.66",
+      appQ:"ข้อใดปรับบทข้อเท็จจริงเข้ากับมาตราได้ถูกต้อง",
+      appOpts:["นายหนึ่งเหวี่ยงหมัดโดยเจตนาทำร้ายนายสามแต่ไม่โดน จึงเป็นพยายามทำร้ายร่างกายตาม ม.295 ประกอบ ม.80 ส่วนที่เสียหลักชนหม้อจนน้ำร้อนลวกนายสี่ แม้เดิมมีเจตนาต่อนายสาม แต่กฎหมายให้ถือว่ามีเจตนาต่อนายสี่ด้วยตาม ม.60 และความมึนเมาที่เกิดจากการดื่มสุราด้วยความสมัครใจ ไม่อาจยกเป็นข้อแก้ตัวตาม ม.66 ได้","นายหนึ่งไม่มีความผิดต่อนายสี่เพราะไม่มีเจตนา","นายหนึ่งอ้างความมึนเมาเป็นเหตุยกเว้นโทษได้เพราะไม่มีสติ","นายหนึ่งมีความผิดฐานทำร้ายนายสามสำเร็จเพราะลงมือแล้ว"],
+      appAns:0,
+      appFeedback:"ถูกต้อง — ต้องปรับทั้งสามประเด็นย่อยเข้าด้วยกันเพื่อให้ได้ความรับผิดที่ครบถ้วนของนายหนึ่ง",
+      concQ:"ข้อสรุปใดถูกต้อง",
+      concOpts:["นายหนึ่งมีความผิดฐานพยายามทำร้ายร่างกายนายสามตาม ม.295 ประกอบ ม.80 และทำร้ายร่างกายนายสี่โดยเจตนาโดยพลาดตาม ม.295 ประกอบ ม.60 โดยอ้างความมึนเมาเป็นข้อแก้ตัวไม่ได้","นายหนึ่งมีความผิดต่อนายสามสำเร็จ แต่ไม่มีความผิดต่อนายสี่","นายหนึ่งไม่มีความผิดใดเลยเพราะเมาจนไม่รู้ตัว","นายหนึ่งมีความผิดฐานประมาทเพียงอย่างเดียวทั้งสองกรณี"],
+      concAns:0,
+      concFeedback:"สรุปถูกต้อง — นายหนึ่งต้องรับผิดทั้งฐานพยายามทำร้ายนายสาม และทำร้ายนายสี่โดยเจตนาโดยพลาด โดยอ้างมึนเมาไม่ได้"
+    },
+    {
+      label:"ประเด็นที่ 2 — ความรับผิดของนายสอง (ขโมยกระเป๋าโดยสำคัญผิดตัวเจ้าของ)",
+      issueQ:"นายสองหยิบกระเป๋าเงินไปโดยเข้าใจว่าเป็นของนายสาม แต่แท้จริงเป็นของนายหนึ่ง ควรตั้งเป็นประเด็นทางกฎหมายเรื่องใด",
+      issueOpts:["นายสองมีความผิดฐานลักทรัพย์หรือไม่ แม้จะสำคัญผิดในตัวเจ้าของทรัพย์","นายสองไม่มีความผิดเพราะเข้าใจผิดโดยสุจริต","เป็นเรื่องยักยอกทรัพย์สินหาย","เป็นเรื่องรับของโจร"],
+      issueAns:0,
+      issueFeedback:"ใช่แล้ว — นายสองมีเจตนาเอาทรัพย์ของผู้อื่นไปโดยทุจริตอยู่แล้ว เพียงแต่เข้าใจผิดว่าเป็นของใคร จึงต้องพิจารณาว่าความสำคัญผิดนี้กระทบเจตนาลักทรัพย์หรือไม่",
+      ruleQ:"บทกฎหมายใดที่ใช้ปรับกับประเด็นนี้",
+      ruleOpts:["ม.334 (ลักทรัพย์) ประกอบ ม.61 (สำคัญผิดในตัวบุคคล/เจ้าของทรัพย์ไม่กระทบเจตนา)","ม.334 ไม่ผิดเพราะสำคัญผิดในเจ้าของทรัพย์","ม.352 (ยักยอกทรัพย์)","ม.62 (สำคัญผิดในข้อเท็จจริงที่เป็นคุณ)"],
+      ruleAns:0,
+      ruleFeedback:"ถูกต้อง — หลักสำคัญผิดในตัวบุคคลตาม ม.61 ใช้เทียบเคียงได้ว่าความเข้าใจผิดเรื่องตัวเจ้าของทรัพย์ไม่ทำให้พ้นความรับผิด เพราะยังมีเจตนาเอาทรัพย์ผู้อื่นไปโดยทุจริตอยู่ครบถ้วน",
+      appQ:"ข้อใดปรับบทข้อเท็จจริงเข้ากับมาตราได้ถูกต้อง",
+      appOpts:["นายสองรู้อยู่แล้วว่ากระเป๋าไม่ใช่ของตนและตั้งใจเอาไปโดยไม่มีสิทธิเพื่อแก้แค้น เจตนาลักทรัพย์จึงครบถ้วน ความเข้าใจผิดว่าเป็นของนายสามหรือนายหนึ่งเป็นเพียงรายละเอียดที่ไม่กระทบเจตนาลักทรัพย์ที่มีอยู่แล้ว จึงยังต้องรับผิดต่อนายหนึ่งผู้เป็นเจ้าของที่แท้จริง","นายสองไม่ผิดเพราะไม่ได้ตั้งใจขโมยของนายหนึ่งโดยเฉพาะ","นายสองผิดเฉพาะเมื่อทราบความจริงภายหลังเท่านั้น","ความสำคัญผิดในเจ้าของทรัพย์ทำให้นายสองพ้นผิดเสมอ"],
+      appAns:0,
+      appFeedback:"ถูกต้อง — องค์ประกอบเจตนาลักทรัพย์อยู่ที่การรู้ว่าทรัพย์ไม่ใช่ของตนและตั้งใจเอาไปโดยทุจริต ซึ่งครบถ้วนอยู่แล้วไม่ว่าจะเข้าใจผิดเรื่องเจ้าของเป็นใคร",
+      concQ:"ข้อสรุปใดถูกต้อง",
+      concOpts:["นายสองมีความผิดฐานลักทรัพย์ตาม ม.334 ต่อนายหนึ่งผู้เป็นเจ้าของที่แท้จริง แม้จะเข้าใจผิดว่าเป็นทรัพย์ของนายสามก็ตาม","นายสองไม่มีความผิดเพราะเข้าใจผิดโดยสุจริต","นายสองมีความผิดฐานยักยอกทรัพย์แทน","นายสองต้องรอให้ทราบความจริงก่อนจึงจะเกิดความผิด"],
+      concAns:0,
+      concFeedback:"สรุปถูกต้อง — นายสองมีความผิดฐานลักทรัพย์ตาม ม.334 ต่อนายหนึ่งผู้เป็นเจ้าของทรัพย์ที่แท้จริง"
+    },
+    {
+      label:"ประเด็นที่ 3 — ความรับผิดของนายสอง (นำนายหนึ่งไปทิ้งไว้ในบ้านที่มีสุนัขดุ)",
+      issueQ:"นายสองนำนายหนึ่งซึ่งเมาจนหมดสติไปแอบทิ้งไว้ในรั้วบ้านที่รู้อยู่แล้วว่ามีสุนัขดุ จนนายหนึ่งถูกกัดบาดเจ็บ ควรตั้งเป็นประเด็นทางกฎหมายเรื่องใด",
+      issueOpts:["นายสองมีเจตนาต่อผลที่นายหนึ่งถูกสุนัขทำร้ายหรือไม่ และต้องรับผิดฐานใด","เป็นเรื่องประมาทเพียงอย่างเดียว","ไม่มีความผิดเพราะสุนัขเป็นผู้กระทำ","เป็นเรื่องทอดทิ้งบุคคลซึ่งพึ่งตนเองไม่ได้เพียงอย่างเดียว"],
+      issueAns:0,
+      issueFeedback:"ใช่แล้ว — ต้องพิจารณาว่าการรู้อยู่แล้วว่ามีสุนัขดุแล้วยังนำคนที่ไม่มีสติไปทิ้งไว้ ถือเป็นการเล็งเห็นผลได้หรือไม่ ซึ่งจะกำหนดระดับความรับผิดที่แตกต่างจากประมาทมาก",
+      ruleQ:"บทกฎหมายใดที่ใช้ปรับกับประเด็นนี้",
+      ruleOpts:["ม.59 (เจตนาย่อมเล็งเห็นผล) ประกอบ ม.297 (ทำร้ายร่างกายสาหัส) โดยถือว่านายสองใช้สุนัขเป็นเครื่องมือกระทำผิดโดยตรง","ม.300 (ประมาทให้ผู้อื่นสาหัส) เพียงมาตราเดียว","ไม่มีมาตราใดปรับได้เพราะสุนัขเป็นผู้กระทำ","ม.291 (ประมาทให้ถึงแก่ความตาย) เพราะเกือบเสียชีวิต"],
+      ruleAns:0,
+      ruleFeedback:"ถูกต้อง — เมื่อนายสองรู้อยู่แล้วว่ามีสุนัขดุ การนำคนที่ไม่มีสติไปทิ้งไว้ในที่เช่นนั้นย่อมเล็งเห็นผลได้อย่างชัดเจนว่าจะเกิดอันตราย จึงมีเจตนาเล็งเห็นผลตาม ม.59 ไม่ใช่เพียงประมาท",
+      appQ:"ข้อใดปรับบทข้อเท็จจริงเข้ากับมาตราได้ถูกต้อง",
+      appOpts:["นายสองรู้อยู่แล้วว่าบ้านของนายห้ามีสุนัขดุหลายตัวเฝ้าอยู่ การนำนายหนึ่งซึ่งเมาจนหมดสติไปแอบทิ้งไว้ในรั้วบ้านนั้น ย่อมคาดหมายหรือเล็งเห็นผลได้อย่างแน่ชัดว่านายหนึ่งจะถูกสุนัขทำร้าย เมื่อผลเกิดขึ้นจริงจนนายหนึ่งบาดเจ็บสาหัส นายสองจึงมีเจตนาเล็งเห็นผลและต้องรับผิดฐานทำร้ายร่างกายจนได้รับอันตรายสาหัส โดยถือว่าใช้สุนัขเป็นเครื่องมือกระทำผิด","นายสองไม่มีความผิดเพราะไม่ได้ลงมือทำร้ายด้วยตนเอง","นายสองมีความผิดเพียงฐานประมาทเพราะไม่ได้ตั้งใจให้สุนัขกัดจริง ๆ","ความรับผิดตกอยู่ที่นายห้าเจ้าของสุนัขเท่านั้น"],
+      appAns:0,
+      appFeedback:"ถูกต้อง — ความรู้ล่วงหน้าว่ามีสุนัขดุเปลี่ยนระดับเจตนาจากประมาทเป็นเจตนาเล็งเห็นผล ทำให้ความรับผิดหนักขึ้นอย่างมีนัยสำคัญ",
+      concQ:"ข้อสรุปใดถูกต้อง",
+      concOpts:["นายสองมีความผิดฐานทำร้ายร่างกายจนได้รับอันตรายสาหัสตาม ม.297 ประกอบ ม.59 (เจตนาเล็งเห็นผล) โดยใช้สุนัขเป็นเครื่องมือกระทำผิด","นายสองมีความผิดฐานประมาทเป็นเหตุให้ผู้อื่นรับอันตรายสาหัสเท่านั้น","นายสองไม่มีความผิดใดเลยเพราะสุนัขเป็นผู้กัดจริง","ความรับผิดทั้งหมดตกอยู่ที่นายห้าเจ้าของสุนัข"],
+      concAns:0,
+      concFeedback:"สรุปถูกต้อง — นายสองต้องรับผิดฐานทำร้ายร่างกายจนได้รับอันตรายสาหัสตาม ม.297 เพราะมีเจตนาเล็งเห็นผลจากการรู้ล่วงหน้าว่ามีสุนัขดุ"
+    }
+  ]
+}
+];
+</script>
+<script>
+/* ================================================================
+   READING SECTIONS — สรุปเนื้อหาจากคำบรรยายวิชา (แท็บ 5)
+   ================================================================ */
+const READING_SECTIONS = [
+{
+  title:"ภาพรวม: โครงสร้างความรับผิดทางอาญา 3 ขั้น",
+  color:"#2E4A7A",
+  html:`<p>การวินิจฉัยโจทย์กฎหมายอาญาทุกข้อ ควรไล่ตามลำดับ <b>3 ขั้นตอนหลัก</b> เสมอ ห้ามข้ามขั้นตอน เพราะแต่ละขั้นมีผลทางกฎหมายต่างกัน:</p>
+  <ul>
+    <li><b>โครงสร้างที่ 1</b> — การกระทำครบองค์ประกอบที่กฎหมายบัญญัติ (มีการกระทำ + องค์ประกอบภายนอกครบ + องค์ประกอบภายใน คือเจตนาหรือประมาท)</li>
+    <li><b>โครงสร้างที่ 2</b> — ไม่มีกฎหมายยกเว้นความผิด (เช่น ป้องกันโดยชอบด้วยกฎหมาย) ถ้าเข้าเหตุนี้ ผลคือ "ไม่มีความผิด" เลย</li>
+    <li><b>โครงสร้างที่ 3</b> — ไม่มีกฎหมายยกเว้นโทษ (เช่น จำเป็น วิกลจริต) ถ้าเข้าเหตุนี้ ผลคือ "มีความผิด แต่ไม่ต้องรับโทษ"</li>
+  </ul>
+  <p>ต้องไล่ตามลำดับนี้เสมอ: วิเคราะห์การกระทำก่อน → ดูองค์ประกอบ (โครงสร้าง 1) → ดูว่ามีกฎหมายอนุญาตให้ทำได้หรือไม่ (โครงสร้าง 2) → ดูว่ามีเหตุควรให้อภัยหรือไม่ (โครงสร้าง 3) การข้ามขั้นตอนหรือสลับลำดับเป็นข้อผิดพลาดที่พบบ่อยที่สุดในการตอบข้อสอบ</p>
+  <div class="read-note">💡 จำง่าย ๆ: โครงสร้าง 1 ถามว่า "ผิดหรือไม่" / โครงสร้าง 2 ถามว่า "กฎหมายอนุญาตให้ทำหรือไม่" / โครงสร้าง 3 ถามว่า "ควรให้อภัยหรือไม่"</div>`
+},
+{
+  title:"โครงสร้างที่ 1 — การกระทำและองค์ประกอบความผิด",
+  color:"#175A9E",
+  html:`<p><b>การกระทำ</b> ในทางอาญา หมายถึงการเคลื่อนไหวร่างกายหรือไม่เคลื่อนไหวร่างกาย (งดเว้น) ภายใต้การบังคับของจิตใจ คือ คิด ตกลงใจ และกระทำตามที่คิด หากเป็นการกระทำที่เกิดจากการละเมอ ถูกสะกดจิต หรือลมชัก จะถือว่าไม่มี "การกระทำ" ทางอาญาเลย ไม่ต้องพิจารณาความผิดใด ๆ ต่อไป</p>
+  <p><b>องค์ประกอบภายนอก</b> ได้แก่ ผู้กระทำ การกระทำ และวัตถุแห่งการกระทำ ต้องครบทั้งสามส่วนตามที่บทบัญญัติกำหนดไว้</p>
+  <p><b>องค์ประกอบภายใน</b> แบ่งเป็นเจตนา (ม.59) หรือประมาท (ม.59 วรรคสี่) เจตนาประกอบด้วย "ส่วนรู้" (รู้ข้อเท็จจริงอันเป็นองค์ประกอบภายนอก) และ "ส่วนต้องการ" (ประสงค์ต่อผล หรือย่อมเล็งเห็นผล) หากไม่รู้ข้อเท็จจริง ถือว่าขาดเจตนาทันที</p>
+  <p><b>ความสัมพันธ์ระหว่างการกระทำและผล (Causation)</b> ใช้กับความผิดที่ต้องการผล เช่น ฆ่าคนตาย โดยใช้ทฤษฎีเงื่อนไข (ถ้าไม่ทำ ผลจะไม่เกิด) และหากมีเหตุแทรกแซง ต้องใช้ทฤษฎีเหตุที่เหมาะสมพิจารณาว่าวิญญูชนคาดหมายผลนั้นได้หรือไม่</p>
+  <div class="read-note">📌 มาตราหลักของหมวดนี้: ม.59 (หลักทั่วไป) · ม.60 (พลาด) · ม.61 (สำคัญผิดตัวบุคคล) · ม.62 (สำคัญผิดข้อเท็จจริง) · ม.63 (ผลธรรมดา)</div>`
+},
+{
+  title:"โครงสร้างที่ 2 — ไม่มีกฎหมายยกเว้นความผิด",
+  color:"#0B6B57",
+  html:`<p>แม้การกระทำจะครบองค์ประกอบความผิดตามโครงสร้างที่ 1 แล้ว แต่หากมีกฎหมายให้อำนาจกระทำได้ บุคคลนั้นจะ <b>"ไม่มีความผิด"</b> เลย ไม่ใช่แค่ไม่ต้องรับโทษ</p>
+  <p>ตัวอย่างสำคัญที่สุดคือ <b>การป้องกันโดยชอบด้วยกฎหมาย (ม.68)</b> ซึ่งต้องมีองค์ประกอบครบ 4 ส่วน: (1) มีภยันตรายซึ่งเกิดจากการประทุษร้ายอันละเมิดต่อกฎหมาย (2) ภยันตรายนั้นใกล้จะถึง (3) กระทำเพื่อป้องกันสิทธิของตนเองหรือผู้อื่น (4) กระทำพอสมควรแก่เหตุ</p>
+  <p>นอกจากนี้ยังมีเหตุที่ไม่มีลายลักษณ์อักษรชัดเจน เช่น หลักความยินยอมอันบริสุทธิ์ (เจ้าของสิทธิยินยอมให้กระทำ) และหลักจารีตประเพณี (เช่น การปะทะกันตามกติกาในกีฬา)</p>
+  <div class="read-note">⚠️ ถ้าป้องกันเกินสมควรแก่เหตุ จะไม่เข้า ม.68 อีกต่อไป แต่ไปเข้า ม.69 ซึ่งศาลอาจลดโทษหรือยกเว้นโทษ (กรณีตื่นเต้นตกใจกลัว) — ผลต่างจาก ม.68 ตรงที่ยังถือว่า "มีความผิด" อยู่</div>`
+},
+{
+  title:"โครงสร้างที่ 3 — ไม่มีกฎหมายยกเว้นโทษ (รวมเหตุลดโทษ)",
+  color:"#4A41A8",
+  html:`<p>เป็นกรณีที่ผู้กระทำ <b>"มีความผิดทางอาญาแล้ว"</b> (ผ่านโครงสร้างที่ 1 และ 2 มาแล้ว) แต่กฎหมายเห็นว่ามีเหตุผลที่ควรให้อภัยหรือไม่ควรลงโทษ จึงยกเว้นโทษทางอาญาให้ โดยยังอาจต้องรับผิดทางแพ่งอยู่</p>
+  <p>แบ่งกลุ่มเหตุยกเว้น/ลดโทษได้เป็น 3 กลุ่ม:</p>
+  <ul>
+    <li><b>เหตุเพราะข้อจำกัดความรู้ผิดชอบ</b> — เด็กอายุไม่เกิน 15 ปี (ม.73, ม.74), คนวิกลจริต (ม.65), คนมึนเมาโดยไม่รู้ตัวหรือถูกบังคับให้เสพ (ม.66)</li>
+    <li><b>เหตุเพราะสถานการณ์บีบคั้น</b> — การกระทำโดยจำเป็น (ม.67 ทั้งสองวงเล็บ) และการปฏิบัติตามคำสั่งที่ไม่ชอบด้วยกฎหมายของเจ้าพนักงาน (ม.70)</li>
+    <li><b>เหตุนโยบายแห่งรัฐ</b> — ความผิดเกี่ยวกับทรัพย์บางฐานระหว่างสามีภริยา (ม.71)</li>
+  </ul>
+  <p>นอกจากนี้ยังมี <b>เหตุลดโทษ</b> ซึ่งไม่ใช่ยกเว้นโทษทั้งหมดแต่ลดปริมาณโทษลง เช่น บันดาลโทสะ (ม.72) และเหตุบรรเทาโทษทั่วไป (ม.78) เช่น การให้การรับสารภาพ หรือลุแก่โทษ</p>
+  <div class="read-note">📌 ข้อควรระวัง: ม.67 (จำเป็น) ต้องแยกจาก ม.68 (ป้องกัน) ให้ชัด — ป้องกันคือต่อสู้ผู้ก่อภัย ส่วนจำเป็นมักเป็นการกระทำต่อบุคคลที่สาม/ทรัพย์สินของผู้บริสุทธิ์เพื่อหนีภัย</div>`
+},
+{
+  title:"ขอบเขตการใช้บังคับกฎหมายอาญาเกี่ยวกับสถานที่",
+  color:"#1F3A5F",
+  html:`<p>ก่อนจะพิจารณาความผิดใด ต้องตอบก่อนว่ากฎหมายอาญาไทยใช้บังคับกับเหตุการณ์นั้นได้หรือไม่ โดยมีหลักสำคัญ 3 ระดับ:</p>
+  <p><b>1) หลักดินแดน (ม.4)</b> — กระทำในราชอาณาจักรไทย หรือบนเรือไทย/อากาศยานไทยไม่ว่าอยู่ที่ใด ต้องรับผิดตามกฎหมายไทย</p>
+  <p><b>2) หลักให้ถือว่ากระทำในราชอาณาจักร (ม.5-6)</b> — ขยายอำนาจศาลไทยแม้การกระทำไม่ได้เกิดบนแผ่นดินไทยทั้งหมด ได้แก่ กระทำบางส่วนใน-บางส่วนนอก, กระทำนอกแต่ผลเกิดในไทย, ตระเตรียม/พยายามนอกแต่ประสงค์ผลในไทย (ม.5) และตัวการ/ผู้ใช้/ผู้สนับสนุนอยู่ต่างประเทศแต่ผู้ลงมือกระทำในไทย (ม.6)</p>
+  <p><b>3) กระทำนอกราชอาณาจักรล้วน ๆ</b> — ศาลไทยยังอาจลงโทษได้ผ่านหลักพิเศษ: หลักอำนาจลงโทษสากลและป้องกันรัฐสำหรับความผิดร้ายแรง (ม.7), หลักบุคคล กรณีผู้กระทำหรือผู้เสียหายเป็นคนไทยและมีการร้องขอให้ลงโทษ (ม.8), และเจ้าพนักงานไทยกระทำผิดต่อหน้าที่นอกประเทศ (ม.9)</p>
+  <div class="read-note">💡 ลำดับการตอบ: เริ่มจากถามว่ากระทำในราชอาณาจักรหรือไม่ (ม.4) → ถ้าไม่ใช่ล้วน ๆ ดูว่าเข้ากรณี "ให้ถือว่า" หรือไม่ (ม.5-6) → ถ้ายังไม่เข้า ดูข้อยกเว้นพิเศษ (ม.7-9)</div>`
+},
+{
+  title:"โทษทางอาญาและการริบทรัพย์สิน",
+  color:"#4A4A45",
+  html:`<p>โทษทางอาญาตามประมวลกฎหมายอาญามี <b>5 สถาน</b> (ม.18) คือ ประหารชีวิต จำคุก กักขัง ปรับ และริบทรัพย์สิน</p>
+  <p>การริบทรัพย์สินแบ่งเป็น 2 ลักษณะที่ต้องแยกให้ออก:</p>
+  <ul>
+    <li><b>ม.32</b> — ทรัพย์ที่ใช้หรือมีไว้เพื่อใช้ในการกระทำความผิดโดยตรง <b>ต้องริบเสมอ</b> เว้นแต่เป็นของผู้อื่นที่ไม่รู้เห็นเป็นใจ</li>
+    <li><b>ม.33</b> — ทรัพย์ที่ใช้หรือมีไว้เพื่อใช้ในการกระทำความผิด หรือได้มาจากการกระทำความผิด แต่ไม่ใช่เครื่องมือหลักโดยตรง <b>ศาลมีดุลพินิจ</b> ว่าจะริบหรือไม่ก็ได้</li>
+  </ul>
+  <p>ตัวอย่างที่ข้อสอบชอบถาม: รถที่ใช้ขนของที่ลักมา (เป็นเพียงพาหนะ ไม่ใช่เครื่องมือลักทรัพย์โดยตรง — เข้า ม.33) หรือปืนที่ใช้ป้องกันตัวโดยชอบด้วยกฎหมายตาม ม.68 (ไม่ใช่ทรัพย์ที่ใช้ในการกระทำความผิด เพราะการป้องกันโดยชอบไม่ใช่ความผิด จึงไม่ต้องริบ)</p>`
+}
+];
+</script>
+<script>
+/* ================================================================
+   ICONS — ไอคอน SVG ง่าย ๆ ต่อหมวด (แทนระบบสไปรท์รูปภาพ เพื่อให้ไฟล์ standalone เบา)
+   ================================================================ */
+const CAT_ICON = {
+  scope:   '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.5 6 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-6-3.5-9s1-6.5 3.5-9z"/></svg>',
+  struct1: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12h8M8 8h5M8 16h5"/></svg>',
+  struct2: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"/></svg>',
+  struct3: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 2v20M7 4h10M9 4l-4 7a4 4 0 008 0l-4-7zM15 4l-4 7a4 4 0 008 0l-4-7z"/></svg>',
+  attempt: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg>',
+  penalty: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 3v3M5 8h14M5 8l-2 5a3.5 3.5 0 007 0L8 8M19 8l-2 5a3.5 3.5 0 007 0L22 13M12 21h-4M12 21h4M12 6v15"/></svg>',
+  offense: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 2l3 6 6 1-4.5 4.5L17.5 20 12 17l-5.5 3 1-6.5L3 9l6-1 3-6z"/></svg>'
+};
+
+function renderStage(elId, cat){
+  const el = document.getElementById(elId);
+  if(!el) return;
+  const c = CATEGORIES[cat] || CATEGORIES.scope;
+  el.style.background = c.grad;
+  el.innerHTML = '<div class="icon-wrap">'+(CAT_ICON[cat]||CAT_ICON.scope)+'</div><div class="stage-label">'+esc(c.label)+'</div>';
+}
+
+/* ---------------- เสียงประกอบ (Web Audio, ไม่ใช้ไฟล์เสียง) ---------------- */
+const SoundFX = (function(){
+  let ctx = null;
+  let enabled = true;
+  try{ enabled = localStorage.getItem('memgame_sound') !== 'off'; }catch(e){}
+  function ensureCtx(){
+    if(!ctx){
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if(AC) ctx = new AC();
+    }
+    if(ctx && ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+  function tone(freq, dur, type, gainVal, delay){
+    if(!enabled) return;
+    const c = ensureCtx();
+    if(!c) return;
+    const t0 = c.currentTime + (delay||0);
+    const osc = c.createOscillator();
+    const gain = c.createGain();
+    osc.type = type || 'sine';
+    osc.frequency.setValueAtTime(freq, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(gainVal||0.1, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+dur);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+dur+0.02);
+  }
+  return {
+    click(){ tone(560,0.05,'square',0.05); },
+    flip(){ tone(700,0.04,'triangle',0.06); tone(420,0.05,'triangle',0.05,0.05); },
+    tab(){ tone(820,0.035,'sine',0.05); },
+    correct(){ tone(523,0.09,'triangle',0.08); tone(659,0.09,'triangle',0.08,0.09); tone(784,0.14,'triangle',0.09,0.18); },
+    wrong(){ tone(220,0.16,'sawtooth',0.07); tone(160,0.2,'sawtooth',0.06,0.06); },
+    isOn(){ return enabled; },
+    toggle(){
+      enabled = !enabled;
+      try{ localStorage.setItem('memgame_sound', enabled ? 'on' : 'off'); }catch(e){}
+      return enabled;
+    }
+  };
+})();
+</script>
+<script>
+/* =========================================================
+   ENGINE — ฟังก์ชันเครื่องมือทั่วไป
+   ========================================================= */
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function pickDistractors(pool, excludeIdx, n){
+  const idxs = pool.map((_,i)=>i).filter(i=>i!==excludeIdx);
+  return shuffle(idxs).slice(0,n);
+}
+function chunk(arr, size){
+  const out = [];
+  for(let i=0;i<arr.length;i+=size) out.push(arr.slice(i, i+size));
+  return out;
+}
+function esc(s){
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+function loadBest(){
+  try{ return JSON.parse(localStorage.getItem(CONFIG.storageKey) || '{}'); }
+  catch(e){ return {}; }
+}
+function saveBest(level, setIdx, score, total){
+  const data = loadBest();
+  const key = level + '_' + setIdx;
+  if(!data[key] || score > data[key].score){
+    data[key] = {score, total};
+    try{ localStorage.setItem(CONFIG.storageKey, JSON.stringify(data)); }catch(e){}
+  }
+}
+function getBest(level, setIdx){
+  const data = loadBest();
+  return data[level + '_' + setIdx] || null;
+}
+
+function buildBasicPool(){
+  const qs = [];
+  CARDS.forEach((c, idx)=>{
+    const dIdx = pickDistractors(CARDS, idx, 3);
+    const opts = [c.result, ...dIdx.map(i=>CARDS[i].result)];
+    const order = shuffle(opts.map((_,i)=>i));
+    qs.push({cat:c.cat, q: c.section + ' (' + c.title + ') มีผลทางกฎหมายอย่างไร',
+      opts: order.map(i=>opts[i]), ans: order.indexOf(0),
+      explain: c.section + ': ' + c.result + (c.note? ' ' + c.note : '')});
+  });
+  CARDS.forEach((c, idx)=>{
+    if(idx % 2 === 1) return;
+    const dIdx = pickDistractors(CARDS, idx, 3);
+    const opts = [c.section, ...dIdx.map(i=>CARDS[i].section)];
+    const order = shuffle(opts.map((_,i)=>i));
+    qs.push({cat:c.cat, q: '"' + c.result + '" (เรื่อง ' + c.title + ') ตรงกับมาตราใด',
+      opts: order.map(i=>opts[i]), ans: order.indexOf(0),
+      explain: c.title + ' บัญญัติอยู่ใน ' + c.section});
+  });
+  return shuffle(qs);
+}
+
+const BASIC_POOL = buildBasicPool();
+const ADV_POOL   = shuffle(QUIZ_ADV);
+const BASIC_SETS = chunk(BASIC_POOL, 10);
+const ADV_SETS   = chunk(ADV_POOL, 10);
+
+document.getElementById('hd-crest').textContent = CONFIG.crest;
+document.getElementById('hd-title').textContent = CONFIG.title;
+document.getElementById('hd-sub').textContent = CONFIG.subtitle;
+
+function paintBadge(el, catKey){
+  const c = CATEGORIES[catKey];
+  el.style.background = c.soft;
+  el.style.color = c.strong;
+  el.textContent = c.label;
+}
+function paintCardFrame(cardEl, ribbonEl, secEl, catKey){
+  const c = CATEGORIES[catKey];
+  ribbonEl.style.background = c.strong;
+  secEl.style.color = c.strong;
+}
+
+/* =========================================================
+   โหมด 1: การ์ดจำมาตรา
+   ========================================================= */
+let deck = shuffle(CARDS);
+let cardIdx = 0;
+let flipped = false;
+
+const catSelect = document.getElementById('cat-select');
+(function initCatSelect(){
+  const optAll = document.createElement('option');
+  optAll.value = 'all'; optAll.textContent = 'ทุกหมวด';
+  catSelect.appendChild(optAll);
+  Object.keys(CATEGORIES).forEach(k=>{
+    const o = document.createElement('option');
+    o.value = k; o.textContent = CATEGORIES[k].label;
+    catSelect.appendChild(o);
+  });
+})();
+catSelect.addEventListener('change', ()=>{
+  const val = catSelect.value;
+  deck = val === 'all' ? shuffle(CARDS) : shuffle(CARDS.filter(c=>c.cat===val));
+  cardIdx = 0; flipped = false;
+  renderCard();
+});
+
+function renderCard(){
+  if(deck.length === 0) return;
+  const c = deck[cardIdx];
+  document.getElementById('card-section').textContent = c.section;
+  document.getElementById('card-stars').textContent = '★'.repeat(c.stars) + '☆'.repeat(5-c.stars);
+  document.getElementById('card-title').textContent = c.title;
+  document.getElementById('card-result').textContent = c.result;
+  document.getElementById('card-note').textContent = c.note || '';
+  document.getElementById('card-note').style.display = c.note ? 'block' : 'none';
+  document.getElementById('card-progress').textContent = (cardIdx+1) + ' / ' + deck.length;
+  document.getElementById('face-front').style.display = flipped ? 'none' : 'flex';
+  document.getElementById('face-back').style.display = flipped ? 'block' : 'none';
+  paintBadge(document.getElementById('cat-badge'), c.cat);
+  paintCardFrame(document.getElementById('flip-card'), document.getElementById('card-ribbon'), document.getElementById('card-section'), c.cat);
+  renderStage('card-stage', c.cat);
+}
+const flipCardEl = document.getElementById('flip-card');
+function doFlip(){
+  SoundFX.flip();
+  flipCardEl.classList.add('flipping');
+  setTimeout(()=>{
+    flipped = !flipped;
+    renderCard();
+    flipCardEl.classList.remove('flipping');
+  }, 90);
+}
+flipCardEl.addEventListener('click', doFlip);
+flipCardEl.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); doFlip(); } });
+document.getElementById('btn-next').addEventListener('click', ()=>{ SoundFX.click(); cardIdx=(cardIdx+1)%deck.length; flipped=false; renderCard(); });
+document.getElementById('btn-prev').addEventListener('click', ()=>{ SoundFX.click(); cardIdx=(cardIdx-1+deck.length)%deck.length; flipped=false; renderCard(); });
+document.getElementById('btn-shuffle').addEventListener('click', ()=>{ SoundFX.click(); deck=shuffle(deck); cardIdx=0; flipped=false; renderCard(); });
+
+/* =========================================================
+   โหมด 2: เรียงตามโครงสร้างความรับผิด (เลือกทีละหมวดด้วย dropdown)
+   ========================================================= */
+const seqSelect = document.getElementById('seq-select');
+(function initSeqSelect(){
+  STRUCTURE_GROUPS.forEach((group, i)=>{
+    const o = document.createElement('option');
+    o.value = String(i);
+    o.textContent = group.heading;
+    seqSelect.appendChild(o);
+  });
+})();
+seqSelect.addEventListener('change', renderSeqGroups);
+
+function renderSeqGroups(){
+  const wrap = document.getElementById('seq-groups');
+  wrap.innerHTML = '';
+  const group = STRUCTURE_GROUPS[Number(seqSelect.value || 0)];
+  const c = CATEGORIES[group.cat];
+  const items = CARDS.filter(card=>card.cat===group.cat);
+  const groupEl = document.createElement('div');
+  groupEl.className = 'seq-group';
+  const head = document.createElement('div');
+  head.className = 'seq-group-head';
+  head.style.background = c.soft;
+  head.style.color = c.strong;
+  head.textContent = group.heading;
+  groupEl.appendChild(head);
+  items.forEach((item,i)=>{
+    const row = document.createElement('div');
+    row.className = 'seq-item';
+    row.style.borderLeftColor = c.strong;
+    const noteHtml = item.note ? '<div class="seq-note">'+esc(item.note)+'</div>' : '';
+    row.innerHTML =
+      '<div class="seq-num">'+(i+1)+'</div>'+
+      '<div style="flex:1">'+
+        '<div class="seq-head">'+
+          '<span class="seq-sec" style="color:'+c.strong+'">'+esc(item.section)+'</span>'+
+          '<span class="seq-title">'+esc(item.title)+'</span>'+
+          '<span class="seq-stars">'+('★'.repeat(item.stars))+'</span>'+
+        '</div>'+
+        '<div class="seq-res">'+esc(item.result)+'</div>'+
+        noteHtml+
+      '</div>';
+    groupEl.appendChild(row);
+  });
+  wrap.appendChild(groupEl);
+}
+
+/* =========================================================
+   โหมด 3: วิเคราะห์โจทย์
+   ========================================================= */
+let quizLevel = 'basic';
+let currentSetIdx = 0;
+let quizPool = BASIC_SETS[0];
+let quizOrder = shuffle(quizPool.map((_,i)=>i));
+let quizIdx = 0;
+let score = 0;
+let answered = false;
+let wrongIdxs = [];
+let reviewMode = false;
+
+function currentSets(){ return quizLevel === 'basic' ? BASIC_SETS : ADV_SETS; }
+
+function renderSetPicker(){
+  const sets = currentSets();
+  const picker = document.getElementById('set-picker');
+  picker.innerHTML = '';
+  sets.forEach((s,i)=>{
+    const btn = document.createElement('button');
+    const best = getBest(quizLevel, i);
+    btn.innerHTML = 'ชุด ' + (i+1) + (best ? ' <span class="best">'+best.score+'/'+best.total+'</span>' : '');
+    if(i === currentSetIdx) btn.classList.add('on');
+    btn.addEventListener('click', ()=>{ SoundFX.click(); selectSet(i); });
+    picker.appendChild(btn);
+  });
+}
+
+function selectSet(i){
+  currentSetIdx = i;
+  quizPool = currentSets()[i];
+  quizOrder = shuffle(quizPool.map((_,k)=>k));
+  quizIdx = 0; score = 0; wrongIdxs = []; reviewMode = false;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderSetPicker();
+  renderQuiz();
+}
+
+function setLevel(lvl){
+  quizLevel = lvl;
+  currentSetIdx = 0;
+  quizPool = currentSets()[0];
+  quizOrder = shuffle(quizPool.map((_,i)=>i));
+  quizIdx = 0; score = 0; wrongIdxs = []; reviewMode = false;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  document.getElementById('lvl-basic').classList.toggle('on', lvl==='basic');
+  document.getElementById('lvl-adv').classList.toggle('on', lvl==='adv');
+  renderSetPicker();
+  renderQuiz();
+}
+
+function syncStickyBar(){
+  const quizOn = viewQuiz.classList.contains('on') && document.getElementById('quiz-play').style.display !== 'none';
+  const iracOn = viewIrac.classList.contains('on') && document.getElementById('irac-play').style.display === 'block';
+  const show = quizOn || iracOn;
+  document.getElementById('sticky-bar').style.display = show ? 'block' : 'none';
+  document.body.classList.toggle('has-sticky-bar', show);
+}
+
+function renderQuiz(){
+  const item = quizPool[quizOrder[quizIdx]];
+  document.getElementById('quiz-scenario').textContent = item.q;
+  const label = reviewMode ? 'ทบทวนข้อผิด' : ('ชุด ' + (currentSetIdx+1));
+  document.getElementById('quiz-progress').textContent = label + ' • ข้อ ' + (quizIdx+1) + ' / ' + quizPool.length;
+  document.getElementById('quiz-score').textContent = 'คะแนน ' + score + ' / ' + quizPool.length;
+  document.getElementById('pbar').style.width = (((quizIdx)/quizPool.length)*100) + '%';
+  paintBadge(document.getElementById('quiz-tag'), item.cat);
+  renderStage('quiz-stage', item.cat);
+  const optsDiv = document.getElementById('quiz-options');
+  optsDiv.innerHTML = '';
+  const letters = ['ก','ข','ค','ง'];
+  item.opts.forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.innerHTML = '<span class="abc">'+letters[i]+'</span><span>'+esc(opt)+'</span>';
+    btn.addEventListener('click', ()=> selectAnswer(i));
+    optsDiv.appendChild(btn);
+  });
+  document.getElementById('quiz-explain').style.display = 'none';
+  document.getElementById('quiz-explain').className = 'explain';
+  document.getElementById('quiz-next').style.display = 'none';
+  document.getElementById('quiz-finish').style.display = 'none';
+  answered = false;
+  syncStickyBar();
+}
+
+function selectAnswer(i){
+  if(answered) return;
+  answered = true;
+  const item = quizPool[quizOrder[quizIdx]];
+  const optsDiv = document.getElementById('quiz-options');
+  const btns = optsDiv.querySelectorAll('button');
+  btns.forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx === item.ans) b.classList.add('correct');
+    else if(idx === i) b.classList.add('wrong');
+  });
+  const isCorrect = (i === item.ans);
+  if(isCorrect){ score++; SoundFX.correct(); } else { SoundFX.wrong(); if(!reviewMode) wrongIdxs.push(quizOrder[quizIdx]); }
+  document.getElementById('quiz-score').textContent = 'คะแนน ' + score + ' / ' + quizPool.length;
+  document.getElementById('pbar').style.width = (((quizIdx+1)/quizPool.length)*100) + '%';
+  const explainDiv = document.getElementById('quiz-explain');
+  explainDiv.className = 'explain ' + (isCorrect ? 'ok' : 'bad');
+  explainDiv.innerHTML = '<b>' + (isCorrect ? '✓ ถูกต้อง' : '✗ ยังไม่ถูก — เฉลยคือ ' + letters_ans(item)) + '</b>' + esc(item.explain);
+  explainDiv.style.display = 'block';
+  if(quizIdx < quizPool.length - 1){
+    document.getElementById('quiz-next').style.display = 'block';
+  } else {
+    document.getElementById('quiz-finish').style.display = 'block';
+  }
+}
+function letters_ans(item){
+  return ['ก','ข','ค','ง'][item.ans];
+}
+
+document.getElementById('quiz-next').addEventListener('click', ()=>{ quizIdx++; renderQuiz(); });
+document.getElementById('quiz-finish').addEventListener('click', showSummary);
+
+function showSummary(){
+  document.getElementById('quiz-play').style.display = 'none';
+  syncStickyBar();
+  const summary = document.getElementById('quiz-summary');
+  summary.style.display = 'block';
+  const total = quizPool.length;
+  document.getElementById('sum-set-label').textContent = reviewMode ? 'ทบทวนข้อที่ผิด' : ('ระดับ' + (quizLevel==='basic'?'พื้นฐาน':'ข้อสอบจริง') + ' • ชุด ' + (currentSetIdx+1));
+  document.getElementById('sum-score').textContent = score;
+  document.getElementById('sum-of').textContent = 'จาก ' + total + ' ข้อ';
+  const pct = total ? score/total : 0;
+  const starCount = Math.max(1, Math.round(pct*5));
+  document.getElementById('sum-stars').textContent = '★'.repeat(starCount) + '☆'.repeat(5-starCount);
+  let grade = 'ลุยต่อได้เลย';
+  if(pct >= 0.9) grade = 'เยี่ยมมาก แม่นจริง';
+  else if(pct >= 0.7) grade = 'ดีมาก ใกล้เต็มแล้ว';
+  else if(pct >= 0.5) grade = 'พอใช้ ทบทวนอีกนิด';
+  else grade = 'ลองทบทวนการ์ดแล้วมาสู้ใหม่';
+  document.getElementById('sum-grade').textContent = grade;
+
+  if(!reviewMode){
+    saveBest(quizLevel, currentSetIdx, score, total);
+    const best = getBest(quizLevel, currentSetIdx);
+    document.getElementById('sum-best').textContent = best ? ('คะแนนดีที่สุดของชุดนี้: ' + best.score + '/' + best.total) : '';
+  } else {
+    document.getElementById('sum-best').textContent = '';
+  }
+
+  const sets = currentSets();
+  document.getElementById('sum-nextset').style.display = (!reviewMode && currentSetIdx < sets.length - 1) ? 'inline-block' : 'none';
+  document.getElementById('sum-review').style.display = (!reviewMode && wrongIdxs.length > 0) ? 'inline-block' : 'none';
+}
+
+document.getElementById('sum-retry').addEventListener('click', ()=>{
+  if(reviewMode){
+    quizOrder = shuffle(quizPool.map((_,i)=>i));
+  } else {
+    quizOrder = shuffle(quizPool.map((_,i)=>i));
+    wrongIdxs = [];
+  }
+  quizIdx = 0; score = 0;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderQuiz();
+});
+document.getElementById('sum-nextset').addEventListener('click', ()=>{ selectSet(currentSetIdx + 1); });
+document.getElementById('sum-review').addEventListener('click', ()=>{
+  reviewMode = true;
+  const basePool = quizPool;
+  quizPool = wrongIdxs.map(i => basePool[i]);
+  quizOrder = shuffle(quizPool.map((_,i)=>i));
+  quizIdx = 0; score = 0;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderQuiz();
+});
+
+document.getElementById('lvl-basic').addEventListener('click', ()=>{ SoundFX.click(); setLevel('basic'); });
+document.getElementById('lvl-adv').addEventListener('click', ()=>{ SoundFX.click(); setLevel('adv'); });
+
+/* =========================================================
+   โหมด 4: ฝึก IRAC
+   ========================================================= */
+let iracCaseIdx = 0;
+let iracIssueIdx = 0;
+let iracStage = 'issue';
+let iracScore = 0;
+let iracTotal = 0;
+
+function renderCasePicker(){
+  const el = document.getElementById('irac-caselist');
+  el.innerHTML = '';
+  IRAC_CASES.forEach((c, i)=>{
+    const card = document.createElement('button');
+    card.className = 'irac-case-card';
+    card.innerHTML =
+      '<div class="icref">'+esc(c.examRef)+'</div>'+
+      '<div class="ictitle">'+esc(c.title)+'</div>'+
+      '<div class="icprog">'+c.issues.length+' ประเด็น · '+(c.issues.length*4)+' ขั้นตอน</div>';
+    card.addEventListener('click', ()=>{ SoundFX.click(); startIracCase(i); });
+    el.appendChild(card);
+  });
+}
+
+function startIracCase(idx){
+  iracCaseIdx = idx;
+  iracIssueIdx = 0;
+  iracStage = 'issue';
+  iracScore = 0;
+  iracTotal = IRAC_CASES[idx].issues.length * 4;
+  document.getElementById('irac-picker').style.display = 'none';
+  document.getElementById('irac-play').style.display = 'block';
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('irac-recap-box').style.display = 'none';
+  document.getElementById('irac-stage-box').style.display = 'block';
+  document.getElementById('page-header').classList.add('compact');
+  const c = IRAC_CASES[idx];
+  paintBadge(document.getElementById('irac-case-tag'), c.cat);
+  const factsEl = document.getElementById('irac-facts');
+  factsEl.innerHTML = c.facts;
+  factsEl.classList.remove('expanded');
+  document.getElementById('irac-facts-toggle').textContent = 'ขยายอ่านโจทย์เต็ม ▾';
+  syncStickyBar();
+  renderIracStep();
+}
+
+document.getElementById('irac-facts-toggle').addEventListener('click', ()=>{
+  const factsEl = document.getElementById('irac-facts');
+  const expanded = factsEl.classList.toggle('expanded');
+  document.getElementById('irac-facts-toggle').textContent = expanded ? 'ย่อโจทย์ ▴' : 'ขยายอ่านโจทย์เต็ม ▾';
+});
+
+document.getElementById('irac-back').addEventListener('click', ()=>{
+  SoundFX.click();
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('irac-play').style.display = 'none';
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('page-header').classList.remove('compact');
+  syncStickyBar();
+  renderCasePicker();
+});
+
+const IRAC_STAGE_INFO = {
+  issue:{key:'issue', qKey:'issueQ', optsKey:'issueOpts', ansKey:'issueAns', fbKey:'issueFeedback', label:'เลือกประเด็น', next:'rule'},
+  rule: {key:'rule',  qKey:'ruleQ',  optsKey:'ruleOpts',  ansKey:'ruleAns',  fbKey:'ruleFeedback',  label:'เลือกมาตรา', next:'app'},
+  app:  {key:'app',   qKey:'appQ',   optsKey:'appOpts',   ansKey:'appAns',   fbKey:'appFeedback',   label:'ปรับบท',     next:'conc'},
+  conc: {key:'conc',  qKey:'concQ',  optsKey:'concOpts',  ansKey:'concAns',  fbKey:'concFeedback',  label:'สรุปผล',     next:null}
+};
+
+function renderIracStep(){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  const info = IRAC_STAGE_INFO[iracStage];
+
+  document.getElementById('irac-progress-label').textContent =
+    issue.label + ' · ประเด็น ' + (iracIssueIdx+1) + '/' + c.issues.length + ' · ขั้นตอน: ' + info.label;
+
+  const order = ['issue','rule','app','conc'];
+  const curIdx = order.indexOf(iracStage);
+  document.querySelectorAll('#irac-stepper .irac-step').forEach((el)=>{
+    const step = el.getAttribute('data-step');
+    const stepIdx = order.indexOf(step);
+    el.classList.remove('active','done');
+    if(stepIdx < curIdx) el.classList.add('done');
+    else if(stepIdx === curIdx) el.classList.add('active');
+  });
+
+  document.getElementById('irac-question').textContent = issue[info.qKey];
+  const optsDiv = document.getElementById('irac-options');
+  optsDiv.innerHTML = '';
+  const letters = ['ก','ข','ค','ง'];
+  issue[info.optsKey].forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.innerHTML = '<span class="abc">'+letters[i]+'</span><span>'+esc(opt)+'</span>';
+    btn.addEventListener('click', ()=> selectIracOption(i));
+    optsDiv.appendChild(btn);
+  });
+  document.getElementById('irac-explain').style.display = 'none';
+  document.getElementById('irac-explain').className = 'explain';
+  document.getElementById('irac-next').style.display = 'none';
+  document.getElementById('irac-recap-next').style.display = 'none';
+}
+
+function selectIracOption(i){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  const info = IRAC_STAGE_INFO[iracStage];
+  const optsDiv = document.getElementById('irac-options');
+  const btns = optsDiv.querySelectorAll('button');
+  if(btns[0].disabled) return;
+  const ans = issue[info.ansKey];
+  btns.forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx === ans) b.classList.add('correct');
+    else if(idx === i) b.classList.add('wrong');
+  });
+  const isCorrect = (i === ans);
+  if(isCorrect){ iracScore++; SoundFX.correct(); } else { SoundFX.wrong(); }
+  const explainDiv = document.getElementById('irac-explain');
+  explainDiv.className = 'explain ' + (isCorrect ? 'ok' : 'bad');
+  explainDiv.innerHTML = '<b>' + (isCorrect ? '✓ ถูกต้อง' : '✗ ยังไม่ถูก — คำตอบที่ควรเลือกคือ ข้อ ' + ['ก','ข','ค','ง'][ans]) + '</b>' + esc(issue[info.fbKey]);
+  explainDiv.style.display = 'block';
+  document.getElementById('irac-next').style.display = 'block';
+  syncStickyBar();
+}
+
+document.getElementById('irac-next').addEventListener('click', ()=>{
+  SoundFX.click();
+  const info = IRAC_STAGE_INFO[iracStage];
+  if(info.next){
+    iracStage = info.next;
+    renderIracStep();
+  } else {
+    showIssueRecap();
+  }
+});
+
+function showIssueRecap(){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  document.getElementById('irac-stage-box').style.display = 'none';
+  const recapBox = document.getElementById('irac-recap-box');
+  recapBox.style.display = 'block';
+  const isLast = iracIssueIdx >= c.issues.length - 1;
+  document.getElementById('irac-recap-title').textContent = 'ทำครบ ' + issue.label + ' แล้ว';
+  document.getElementById('irac-recap-text').textContent = issue.concFeedback;
+  document.getElementById('irac-next').style.display = 'none';
+  document.getElementById('irac-recap-next').textContent = isLast ? 'ดูสรุปผลทั้งข้อ →' : 'ประเด็นถัดไป →';
+  document.getElementById('irac-recap-next').style.display = 'block';
+}
+
+document.getElementById('irac-recap-next').addEventListener('click', ()=>{
+  SoundFX.click();
+  const c = IRAC_CASES[iracCaseIdx];
+  document.getElementById('irac-recap-box').style.display = 'none';
+  document.getElementById('irac-recap-next').style.display = 'none';
+  if(iracIssueIdx >= c.issues.length - 1){
+    showIracCaseSummary();
+  } else {
+    iracIssueIdx++;
+    iracStage = 'issue';
+    document.getElementById('irac-stage-box').style.display = 'block';
+    renderIracStep();
+  }
+});
+
+function showIracCaseSummary(){
+  document.getElementById('irac-play').style.display = 'none';
+  syncStickyBar();
+  const summary = document.getElementById('irac-summary');
+  summary.style.display = 'block';
+  const c = IRAC_CASES[iracCaseIdx];
+  document.getElementById('irac-sum-label').textContent = c.title;
+  document.getElementById('irac-sum-score').textContent = iracScore;
+  document.getElementById('irac-sum-of').textContent = 'จาก ' + iracTotal + ' ขั้นตอน';
+  const pct = iracTotal ? iracScore/iracTotal : 0;
+  const starCount = Math.max(1, Math.round(pct*5));
+  document.getElementById('irac-sum-stars').textContent = '★'.repeat(starCount) + '☆'.repeat(5-starCount);
+  let grade = 'ลุยต่อได้เลย';
+  if(pct >= 0.9) grade = 'วินิจฉัยแม่นมาก เก่งมาก!';
+  else if(pct >= 0.7) grade = 'ดีมาก ใกล้ครบทุกประเด็นแล้ว';
+  else if(pct >= 0.5) grade = 'พอใช้ ลองย้อนทบทวนประเด็นที่พลาด';
+  else grade = 'ลองอ่านโจทย์อีกครั้งแล้วไล่ทีละประเด็นใหม่';
+  document.getElementById('irac-sum-grade').textContent = grade;
+  document.getElementById('irac-sum-nextcase').style.display = (iracCaseIdx < IRAC_CASES.length - 1) ? 'inline-block' : 'none';
+}
+
+document.getElementById('irac-sum-retry').addEventListener('click', ()=>{
+  SoundFX.click();
+  startIracCase(iracCaseIdx);
+});
+document.getElementById('irac-sum-back').addEventListener('click', ()=>{
+  SoundFX.click();
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('page-header').classList.remove('compact');
+  renderCasePicker();
+});
+document.getElementById('irac-sum-nextcase').addEventListener('click', ()=>{
+  SoundFX.click();
+  startIracCase(iracCaseIdx + 1);
+});
+
+/* =========================================================
+   โหมด 5: อ่านเนื้อหาวิชา
+   ========================================================= */
+function renderReadList(){
+  const wrap = document.getElementById('read-list');
+  wrap.innerHTML = '';
+  READING_SECTIONS.forEach((sec, i)=>{
+    const box = document.createElement('div');
+    box.className = 'read-section';
+    box.innerHTML =
+      '<button class="read-head">'+
+        '<span class="rnum" style="background:'+sec.color+'">'+(i+1)+'</span>'+
+        '<span class="rtitle">'+esc(sec.title)+'</span>'+
+        '<span class="rarrow">▾</span>'+
+      '</button>'+
+      '<div class="read-body">'+sec.html+'</div>';
+    const headBtn = box.querySelector('.read-head');
+    headBtn.addEventListener('click', ()=>{
+      SoundFX.click();
+      box.classList.toggle('open');
+    });
+    wrap.appendChild(box);
+  });
+  if(wrap.firstChild) wrap.firstChild.classList.add('open');
+}
+
+/* =========================================================
+   แท็บหลัก + รีเซ็ต
+   ========================================================= */
+const tabCard = document.getElementById('tab-card');
+const tabSeq  = document.getElementById('tab-seq');
+const tabQuiz = document.getElementById('tab-quiz');
+const tabIrac = document.getElementById('tab-irac');
+const tabRead = document.getElementById('tab-read');
+const viewCard = document.getElementById('view-card');
+const viewSeq  = document.getElementById('view-seq');
+const viewQuiz = document.getElementById('view-quiz');
+const viewIrac = document.getElementById('view-irac');
+const viewRead = document.getElementById('view-read');
+
+function setTab(which){
+  viewCard.classList.toggle('on', which==='card');
+  viewSeq.classList.toggle('on', which==='seq');
+  viewQuiz.classList.toggle('on', which==='quiz');
+  viewIrac.classList.toggle('on', which==='irac');
+  viewRead.classList.toggle('on', which==='read');
+  tabCard.classList.toggle('on', which==='card');
+  tabSeq.classList.toggle('on', which==='seq');
+  tabQuiz.classList.toggle('on', which==='quiz');
+  tabIrac.classList.toggle('on', which==='irac');
+  tabRead.classList.toggle('on', which==='read');
+  const headerEl = document.getElementById('page-header');
+  if(which === 'quiz' || which === 'read'){
+    headerEl.classList.add('compact');
+  } else if(which !== 'irac' || document.getElementById('irac-play').style.display === 'none'){
+    headerEl.classList.remove('compact');
+  }
+  syncStickyBar();
+}
+tabCard.addEventListener('click', ()=>{ SoundFX.tab(); setTab('card'); });
+tabSeq.addEventListener('click', ()=>{ SoundFX.tab(); setTab('seq'); });
+tabQuiz.addEventListener('click', ()=>{ SoundFX.tab(); setTab('quiz'); });
+tabIrac.addEventListener('click', ()=>{ SoundFX.tab(); setTab('irac'); });
+tabRead.addEventListener('click', ()=>{ SoundFX.tab(); setTab('read'); });
+
+const btnSound = document.getElementById('btn-sound');
+btnSound.textContent = SoundFX.isOn() ? '🔊' : '🔇';
+btnSound.addEventListener('click', ()=>{
+  const on = SoundFX.toggle();
+  btnSound.textContent = on ? '🔊' : '🔇';
+  if(on) SoundFX.click();
+});
+
+document.getElementById('btn-reset').addEventListener('click', ()=>{
+  if(!confirm('รีเซ็ตหน้าจอทั้งหมด (คะแนนดีที่สุดที่บันทึกไว้จะยังอยู่) ต้องการดำเนินการต่อหรือไม่?')) return;
+  catSelect.value = 'all';
+  deck = shuffle(CARDS); cardIdx = 0; flipped = false;
+  renderCard();
+  seqSelect.value = '0';
+  renderSeqGroups();
+  setLevel('basic');
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('irac-play').style.display = 'none';
+  document.getElementById('irac-summary').style.display = 'none';
+  renderCasePicker();
+  setTab('card');
+});
+
+/* ---------- init ---------- */
+renderCard();
+renderSeqGroups();
+renderSetPicker();
+setLevel('basic');
+renderCasePicker();
+renderReadList();
+setTab('card');
+</script>
+</body>
+</html>

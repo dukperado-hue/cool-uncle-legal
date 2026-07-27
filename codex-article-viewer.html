@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>มาตรา - ประมวลกฎหมาย</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;900&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="tts-helper.js"></script>
+<style>
+:root {
+  --paper: #FBF9F4;
+  --card: #FFFFFF;
+  --ink: #22283A;
+  --ink-soft: #5A6072;
+  --ink-faint: #9AA0B0;
+  --line: #E5E1D6;
+  --gold: #B08A3C;
+  --accent: #2E4A7A;
+  --ok: #1E7A4F;
+  --bad: #B23A3A;
+  --radius: 14px;
+  --shadow: 0 1px 2px rgba(34,40,58,.05), 0 6px 20px rgba(34,40,58,.07);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Sarabun', system-ui, sans-serif;
+  background: radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%), var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #EFEAE0;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 18px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.wrap { max-width: 900px; margin: 0 auto; padding: 20px 18px 60px; }
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  margin-bottom: 20px;
+  transition: all .2s;
+}
+.back-button:hover { transform: translateX(-4px); }
+
+/* BREADCRUMB */
+.breadcrumb {
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin-bottom: 20px;
+  padding: 12px;
+  background: #F9F7F2;
+  border-radius: 6px;
+  border-left: 3px solid var(--gold);
+}
+
+/* ARTICLE HEADER */
+.article-header {
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+}
+
+.article-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.article-subtitle {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.article-body {
+  font-size: 16px;
+  line-height: 2;
+  color: var(--ink);
+  background: #FEFDFB;
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 4px solid var(--gold);
+  margin-bottom: 20px;
+}
+
+/* AUDIO CONTROLS */
+.audio-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--ok-bg);
+  border: 1px solid var(--ok);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.audio-control button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--ok);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .2s;
+}
+
+.audio-control button:hover { background: #177047; }
+
+/* TABS */
+.tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--line);
+  overflow-x: auto;
+}
+
+.tab-btn {
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all .2s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.tab-btn:hover {
+  color: var(--ink);
+}
+
+.tab-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn .3s;
+}
+
+@keyframes fadeIn {
+  from { opacity: .8; }
+  to { opacity: 1; }
+}
+
+/* CASE LAW SECTION */
+.case-item {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border-left: 4px solid var(--bad);
+}
+
+.case-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: var(--bad);
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.case-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.case-summary {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #FEFDFB;
+  border-radius: 4px;
+}
+
+.case-action {
+  font-size: 12px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+}
+
+.case-link {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.case-link:hover {
+  text-decoration: underline;
+}
+
+/* EXAMPLE SECTION */
+.example-item {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border-left: 4px solid var(--ok);
+}
+
+.example-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ok);
+  margin-bottom: 8px;
+}
+
+.example-scenario {
+  font-size: 13px;
+  color: var(--ink);
+  background: #F0F9F6;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  border-left: 2px solid var(--ok);
+}
+
+.example-explanation {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+/* EMPTY STATE */
+.empty-section {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--ink-faint);
+}
+
+.empty-section .icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+/* NAVIGATION */
+.article-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: all .2s;
+  cursor: pointer;
+}
+
+.nav-btn:hover {
+  border-color: var(--gold);
+  box-shadow: var(--shadow);
+  background: #FEFDFB;
+}
+
+.nav-label {
+  font-size: 11px;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.nav-title {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* RELATED ARTICLES */
+.related-articles {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-top: 32px;
+}
+
+.related-articles h3 {
+  font-size: 16px;
+  margin-bottom: 16px;
+  color: var(--ink);
+}
+
+.related-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 8px;
+}
+
+.related-link {
+  padding: 8px;
+  background: #F5F3F0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 13px;
+  transition: all .2s;
+}
+
+.related-link:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .article-header { padding: 18px; }
+  .article-number { font-size: 36px; }
+  .tabs { flex-wrap: wrap; }
+  .article-nav { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span style="font-weight:800; color:var(--ink);">📚 Cool Uncle</span>
+  <span style="color:var(--ink-faint)">·</span>
+  <span>ประมวลกฎหมาย</span>
+</div>
+
+<div class="wrap">
+  
+  <a href="codex-search.html" class="back-button">← ค้นหาต่อ</a>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb" id="breadcrumb">
+    📍 ประมวลกฎหมายแพ่ง > บรรพ 4 > ลักษณะ 1 > หมวด 2
+  </div>
+
+  <!-- ARTICLE HEADER -->
+  <article class="article-header">
+    <div class="article-number" id="article-number">276</div>
+    <div class="article-subtitle" id="article-subtitle">
+      สัญญาขายสินค้า - การคัดค้าน
+    </div>
+
+    <!-- AUDIO CONTROLS -->
+    <div id="audio-controls"></div>
+
+    <!-- ARTICLE TEXT -->
+    <div class="article-body" id="article-text">
+      ผู้ซื้อมีสิทธิคัดค้านสินค้าทั้งหมดหรือบางส่วนภายในระยะเวลาที่กำหนด...
+    </div>
+  </article>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('overview')">📋 ประวัติและข้อมูล</button>
+    <button class="tab-btn" onclick="switchTab('caselaw')">⚖️ ฎีกาศาลสูง</button>
+    <button class="tab-btn" onclick="switchTab('examples')">📝 ตัวอย่าง</button>
+    <button class="tab-btn" onclick="switchTab('related')">🔗 มาตราที่เกี่ยวข้อง</button>
+  </div>
+
+  <!-- TAB: OVERVIEW -->
+  <div id="tab-overview" class="tab-content active">
+    <div style="background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px;">
+      <h3 style="margin-bottom: 16px;">📖 ข้อมูลมาตรา</h3>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+        <div>
+          <div style="font-size: 11px; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 6px;">ประมวล</div>
+          <div style="font-weight: 600; color: var(--ink);">ประมวลกฎหมายแพ่ง</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 6px;">บรรพ</div>
+          <div style="font-weight: 600; color: var(--ink);">บรรพ 4 สัญญา</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 6px;">ลักษณะ</div>
+          <div style="font-weight: 600; color: var(--ink);">ลักษณะ 1 สัญญาขาย</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 6px;">หมวด</div>
+          <div style="font-weight: 600; color: var(--ink);">หมวด 2 สิทธิของผู้ซื้อ</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 20px; padding-top: 20px; border-top: 1px dashed var(--line);">
+        <div style="font-size: 13px; color: var(--ink-soft); line-height: 1.8;">
+          <strong>หมายเหตุ:</strong> มาตรา 276 เป็นหนึ่งในมาตราสำคัญเกี่ยวกับสิทธิของผู้ซื้อในการคัดค้านสินค้าที่ไม่ถูกต้อง ตามพระราชกฤษฎีกาว่าด้วยการทดแทน...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: CASE LAW -->
+  <div id="tab-caselaw" class="tab-content">
+    <div id="caselaw-container">
+      <div class="case-item">
+        <div class="case-number">⚖️ ฎีกา ที่ 1234/2562</div>
+        <div class="case-title">คดี: ผู้ซื้อคัดค้านสินค้าข้อมูลเท็จ</div>
+        <div class="case-summary">
+          ศาลตัดสินว่า ผู้ซื้อมีสิทธิคัดค้านสินค้าตามมาตรา 276 แม้ว่าระยะเวลา...
+        </div>
+        <div class="case-action">
+          <a href="#" class="case-link" onclick="return false;">อ่านเต็มฎีกา →</a>
+        </div>
+      </div>
+
+      <div class="case-item">
+        <div class="case-number">⚖️ ฎีกา ที่ 2345/2563</div>
+        <div class="case-title">คดี: อีกตัวอย่างฎีกา</div>
+        <div class="case-summary">
+          คำตัดสินศาลยุติธรรม: เห็นว่า...
+        </div>
+        <div class="case-action">
+          <a href="#" class="case-link" onclick="return false;">อ่านเต็มฎีกา →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: EXAMPLES -->
+  <div id="tab-examples" class="tab-content">
+    <div id="examples-container">
+      <div class="example-item">
+        <div class="example-title">📝 ตัวอย่าง 1: การคัดค้านสินค้า</div>
+        <div class="example-scenario">
+          <strong>สถานการณ์:</strong> นายเอ ซื้อเครื่องซักผ้าจากนายบี ราคา 50,000 บาท เมื่อส่งมอบแล้ว พบว่าสินค้าชำรุด
+        </div>
+        <div class="example-explanation">
+          <strong>การประยุกต์:</strong> ตามมาตรา 276 นายเอ มีสิทธิคัดค้านสินค้าภายใน 30 วัน นายบี ต้องรับเอาสินค้าคืนและคืนเงิน
+        </div>
+      </div>
+
+      <div class="example-item">
+        <div class="example-title">📝 ตัวอย่าง 2: ระยะเวลาการคัดค้าน</div>
+        <div class="example-scenario">
+          <strong>สถานการณ์:</strong> นางสาวจ ซื้อเสื้อผ้า 10 ชิ้น แต่ 2 ชิ้นไม่ตรงกับคำอธิบาย
+        </div>
+        <div class="example-explanation">
+          <strong>การประยุกต์:</strong> นางสาวจ อาจคัดค้านเพียงบางส่วน ตามมาตรา 276
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: RELATED -->
+  <div id="tab-related" class="tab-content">
+    <div class="related-articles">
+      <h3>🔗 มาตราที่เกี่ยวข้อง</h3>
+      <div class="related-list">
+        <a href="#" class="related-link">270</a>
+        <a href="#" class="related-link">271</a>
+        <a href="#" class="related-link">275</a>
+        <a href="#" class="related-link" style="font-weight: 900;">276</a>
+        <a href="#" class="related-link">277</a>
+        <a href="#" class="related-link">278</a>
+        <a href="#" class="related-link">300</a>
+        <a href="#" class="related-link">350</a>
+      </div>
+
+      <div style="margin-top: 20px; padding-top: 20px; border-top: 1px dashed var(--line);">
+        <h4 style="font-size: 14px; margin-bottom: 10px;">📚 พระราชกฤษฎีกาที่เกี่ยวข้อง</h4>
+        <ul style="font-size: 13px; color: var(--ink-soft); line-height: 1.8; list-style-position: inside;">
+          <li>พระราชกฤษฎีกาว่าด้วยการบริหารจัดการ...</li>
+          <li>พระราชกฤษฎีกาว่าด้วยสิ่งของและทรัพย์สิน...</li>
+          <li>ประกาศกระทรวงพาณิชย์...</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARTICLE NAVIGATION -->
+  <div class="article-nav">
+    <a href="#" class="nav-btn" onclick="return false;">
+      <span class="nav-label">← มาตราก่อนหน้า</span>
+      <span class="nav-title">มาตรา 275</span>
+    </a>
+    <a href="#" class="nav-btn" onclick="return false;">
+      <span class="nav-label">มาตราถัดไป →</span>
+      <span class="nav-title">มาตรา 277</span>
+    </a>
+  </div>
+
+</div>
+
+<script>
+/* ================================================================
+   ARTICLE VIEWER LOGIC
+   ⚠️ ตอนนี้เป็น demo / placeholder
+   อปเดต: เมื่อ JSON data พร้อม
+   ================================================================ */
+
+function switchTab(tabName) {
+  // ซ่อน tab ทั้งหมด
+  document.querySelectorAll('.tab-content').forEach(tab => {
+    tab.classList.remove('active');
+  });
+  
+  // เอา active ออก button ทั้งหมด
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  
+  // แสดง tab ที่เลือก + ให้ button active
+  document.getElementById('tab-' + tabName).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// TTS Setup
+document.addEventListener('DOMContentLoaded', () => {
+  if ('speechSynthesis' in window) {
+    thaiTTS.createAudioControl('audio-controls', ['article-text']);
+  }
+  
+  console.log('📖 Article Viewer Ready (Beta)');
+});
+</script>
+</body>
+</html>
