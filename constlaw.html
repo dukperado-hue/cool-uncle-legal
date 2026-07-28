@@ -34,6 +34,12 @@ html{-webkit-text-size-adjust:100%}
   background:#EFEAE0;border-bottom:1px solid var(--line);
   padding:10px 16px;font-size:13px;color:var(--ink-soft);
 }
+.home-bar-logo{
+  font-size:22px;line-height:1;display:inline-flex;align-items:center;
+  text-decoration:none;margin-right:2px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.12));
+  transition:transform .15s;
+}
+.home-bar-logo:hover{transform:scale(1.1)}
 .home-bar-link{
   color:var(--accent);text-decoration:none;font-weight:700;
   display:inline-flex;align-items:center;gap:4px;
@@ -378,9 +384,31 @@ footer{
 </head>
 <body>
 <div class="home-bar">
+  <a href="index.html" class="home-bar-logo" title="กลับหน้าหลัก" onmouseenter="playHoverSound()">👴🏻</a>
+  <a href="index.html" class="home-bar-link" onmouseenter="playHoverSound()">← กลับหน้าหลัก</a>
+  <span class="home-bar-sep">·</span>
   <span class="home-bar-current">น.251 กฎหมายรัฐธรรมนูญ</span>
   <span class="home-bar-score" id="global-score">🏆 <span id="score-value">0</span> คะแนน</span>
 </div>
+<script>
+let __hbAudioCtx;
+function playHoverSound(){
+  try{
+    __hbAudioCtx = __hbAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __hbAudioCtx;
+    if(c.state === 'suspended') c.resume();
+    const t0 = c.currentTime;
+    const osc = c.createOscillator(), gain = c.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(0.05, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+0.09);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+0.1);
+  }catch(e){}
+}
+</script>
 <div class="wrap">
 
 <header id="page-header">

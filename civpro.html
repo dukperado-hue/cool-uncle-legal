@@ -39,7 +39,8 @@ h1,h2,h3,.serif{font-family:'Noto Serif Thai',serif;}
 /* ══ SUBJECT BAR ════════════════════════════════════════════════════════════ */
 .subject-bar{position:sticky;top:0;z-index:80;display:flex;align-items:center;gap:8px;background:#fff;border-bottom:2px solid var(--border);padding:0 16px;height:52px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
 .brand-home{display:flex;align-items:center;gap:8px;text-decoration:none;color:inherit;padding:0 4px;}
-.brand-logo{font-size:22px;line-height:1;}
+.brand-logo{font-size:24px;line-height:1;transition:transform .15s;}
+.brand-home:hover .brand-logo{transform:scale(1.1);}
 .brand-name{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:700;color:var(--text-h);letter-spacing:.01em;white-space:nowrap;}
 .home-btn-wrap{display:flex;align-items:center;margin-left:6px;}
 .btn-home-tab{display:inline-flex;align-items:center;font-family:'Sarabun',sans-serif;font-size:12.5px;font-weight:700;color:var(--text-soft);background:#f1f5f9;border:1px solid var(--border);border-radius:6px;padding:5px 12px;text-decoration:none;transition:all .15s;white-space:nowrap;}
@@ -202,12 +203,12 @@ select:focus{border-color:var(--cat);}
 <body id="body">
 
 <div class="subject-bar" id="subjectBar">
-  <a href="index.html" class="brand-home" title="กลับหน้าเลือกวิชา">
-    <span class="brand-logo">⚖️</span>
+  <a href="index.html" class="brand-home" title="กลับหน้าเลือกวิชา" onmouseenter="playHoverSound()">
+    <span class="brand-logo">👴🏻</span>
     <span class="brand-name">Cool Uncle</span>
   </a>
   <div class="home-btn-wrap">
-    <a href="index.html" class="btn-home-tab" title="กลับหน้าเลือกวิชา">
+    <a href="index.html" class="btn-home-tab" title="กลับหน้าเลือกวิชา" onmouseenter="playHoverSound()">
       ‹ เลือกวิชา
     </a>
   </div>
@@ -221,6 +222,25 @@ select:focus{border-color:var(--cat);}
     <div id="scoreNum" class="score-num">0</div>
   </div>
 </div>
+<script>
+let __hbAudioCtx;
+function playHoverSound(){
+  try{
+    __hbAudioCtx = __hbAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __hbAudioCtx;
+    if(c.state === 'suspended') c.resume();
+    const t0 = c.currentTime;
+    const osc = c.createOscillator(), gain = c.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(0.05, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+0.09);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+0.1);
+  }catch(e){}
+}
+</script>
 
 <div class="wrap">
   <div class="mode-tabs" id="tabs"></div>

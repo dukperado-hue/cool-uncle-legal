@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>กฎหมายระหว่างประเทศแผนกคดีบุคคล · Cool Uncle Legal Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;800&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF9F4;
+  --card:#FFFFFF;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --gold-soft:#F3E8CF;
+  --ok:#1E7A4F;
+  --ok-bg:#E6F4EC;
+  --bad:#B23A3A;
+  --bad-bg:#FBEAEA;
+  --accent:#2E4A7A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+/* ---------- top home bar ---------- */
+.home-bar{
+  display:flex;align-items:center;gap:10px;
+  background:#EFEAE0;border-bottom:1px solid var(--line);
+  padding:10px 16px;font-size:13px;color:var(--ink-soft);
+}
+.home-bar-logo{
+  font-size:22px;line-height:1;display:inline-flex;align-items:center;
+  text-decoration:none;margin-right:2px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.12));
+  transition:transform .15s;
+}
+.home-bar-logo:hover{transform:scale(1.1)}
+.home-bar-link{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.home-bar-link:hover{text-decoration:underline}
+.home-bar-sep{color:var(--ink-faint)}
+.home-bar-current{font-weight:600;color:var(--ink-soft)}
+
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),var(--paper);
+  color:var(--ink);min-height:100vh;font-size:16px;line-height:1.75;
+}
+h1,h2{font-family:'Noto Serif Thai',serif}
+
+.wrap{max-width:820px;margin:0 auto;padding:28px 16px 60px}
+
+.page-head{text-align:center;margin-bottom:28px}
+.page-head .crest{
+  width:64px;height:64px;border-radius:50%;margin:0 auto 14px;
+  background:radial-gradient(circle at 32% 28%, #E7C983, var(--gold) 55%, #8F6511 100%);
+  display:flex;align-items:center;justify-content:center;font-size:28px;
+  box-shadow:0 6px 18px rgba(176,138,60,.35), inset 0 2px 3px rgba(255,255,255,.5);
+}
+.page-head h1{font-size:26px;font-weight:800;color:var(--ink)}
+.page-head .subtitle{color:var(--ink-soft);margin-top:8px;font-size:14.5px}
+.page-head .code{
+  display:inline-block;margin-top:10px;font-family:'JetBrains Mono',monospace;
+  font-size:12px;font-weight:700;color:#8F6511;background:var(--gold-soft);
+  padding:4px 12px;border-radius:999px;
+}
+
+.notice{
+  background:#FBF6E8;border:1.5px dashed var(--gold);border-radius:var(--radius);
+  padding:14px 16px;margin:24px 0;font-size:14px;color:var(--ink-soft);
+  display:flex;align-items:center;gap:10px;
+}
+
+.lecture-list{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.lecture-row{
+  display:flex;align-items:center;gap:14px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;
+  box-shadow:var(--shadow);transition:border-color .15s;
+}
+.lecture-row:hover{border-color:var(--gold)}
+.lecture-num{
+  width:36px;height:36px;flex-shrink:0;border-radius:50%;background:var(--gold-soft);
+  color:#8F6511;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;
+}
+.lecture-info{flex:1;min-width:0}
+.lecture-title{font-weight:700;color:var(--ink);font-size:15px}
+.lecture-status{font-size:12.5px;color:var(--ink-faint);margin-top:2px}
+.lecture-pending{
+  font-size:12px;font-weight:700;color:var(--ink-faint);background:#F1EDE2;
+  padding:5px 12px;border-radius:999px;white-space:nowrap;flex-shrink:0;
+}
+.lecture-open{
+  font-size:12.5px;font-weight:700;color:var(--accent);text-decoration:none;
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px;white-space:nowrap;flex-shrink:0;
+}
+.lecture-open:hover{background:var(--gold-soft);border-color:var(--gold)}
+
+footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)}
+</style>
+</head>
+<body>
+<div class="home-bar">
+  <a href="index.html" class="home-bar-logo" title="กลับหน้าหลัก" onmouseenter="playHoverSound()">👴🏻</a>
+  <a href="index.html" class="home-bar-link" onmouseenter="playHoverSound()">← กลับหน้าหลัก</a>
+  <span class="home-bar-sep">·</span>
+  <span class="home-bar-current">กฎหมายระหว่างประเทศแผนกคดีบุคคล</span>
+</div>
+
+<div class="wrap">
+  <header class="page-head">
+    <div class="crest">🌏</div>
+    <h1>กฎหมายระหว่างประเทศแผนกคดีบุคคล</h1>
+    <p class="subtitle">สรุปเนื้อหาบรรยายรายครั้ง · ปี 4</p>
+    <span class="code">LA313</span>
+  </header>
+
+  <div class="notice">⏳ หน้านี้เตรียมไว้สำหรับสรุปเนื้อหาบรรยาย 15 ครั้ง — จะทยอยอัปโหลดไฟล์ PDF ทีหลัง</div>
+
+  <div class="lecture-list" id="lectureList"></div>
+
+  <footer>สร้างด้วย Claude · ⚠️ ใช้อ่านเสริมหลักสูตรเท่านั้น โปรดตรวจสอบความถูกต้องของข้อมูล · Cool Uncle Legal Lab 2024</footer>
+</div>
+
+<script>
+let __hbAudioCtx;
+function playHoverSound(){
+  try{
+    __hbAudioCtx = __hbAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __hbAudioCtx;
+    if(c.state === 'suspended') c.resume();
+    const t0 = c.currentTime;
+    const osc = c.createOscillator(), gain = c.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(0.05, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+0.09);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+0.1);
+  }catch(e){}
+}
+
+/* Each entry: { n, pdf }. Set pdf: "pdfs/xxx.pdf" once a file is uploaded to switch the row from "pending" to a real link. */
+const LECTURES = Array.from({length: 15}, (_, i) => ({ n: i + 1, pdf: null }));
+
+function renderLectures(){
+  const el = document.getElementById('lectureList');
+  el.innerHTML = LECTURES.map(l => `
+    <div class="lecture-row">
+      <div class="lecture-num">${l.n}</div>
+      <div class="lecture-info">
+        <div class="lecture-title">บรรยายครั้งที่ ${l.n}</div>
+        <div class="lecture-status">${l.pdf ? 'พร้อมอ่าน' : 'รออัปโหลด PDF สรุปเนื้อหา'}</div>
+      </div>
+      ${l.pdf
+        ? `<a href="${l.pdf}" class="lecture-open" target="_blank" rel="noopener" onmouseenter="playHoverSound()">เปิด PDF →</a>`
+        : `<span class="lecture-pending">⏳ รออัปโหลด</span>`}
+    </div>
+  `).join('');
+}
+renderLectures();
+</script>
+</body>
+</html>
