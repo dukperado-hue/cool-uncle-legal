@@ -94,16 +94,17 @@
 .theme-toggle button.active{background:var(--accent);box-shadow:0 0 0 1px var(--accent)}
 .theme-toggle button:hover{background:var(--line)}
 
-/* กระสือ COMPANION (horror mode only) */
-.krasue-companion{
+/* GHOST COMPANION (horror mode — rotating cast of 4) */
+.ghost-companion{
   position:fixed;right:16px;bottom:16px;width:100px;height:auto;
   pointer-events:none;opacity:0;transform:translateY(8px);
-  transition:opacity .5s ease,transform .5s ease;z-index:999;
+  transition:opacity .6s ease;z-index:999;
   filter:drop-shadow(0 0 16px rgba(180,20,40,.45));
-  animation:krasue-float 3.4s ease-in-out infinite;
+  animation:ghost-float 3.4s ease-in-out infinite;
 }
-.krasue-companion.visible{opacity:1;transform:translateY(0)}
-@keyframes krasue-float{
+.ghost-companion.visible{opacity:1}
+.ghost-companion.pulse{filter:drop-shadow(0 0 26px rgba(180,20,40,.8)) drop-shadow(0 0 10px rgba(255,255,255,.3))}
+@keyframes ghost-float{
   0%,100%{transform:translateY(0) rotate(-1.5deg)}
   50%{transform:translateY(-10px) rotate(1.5deg)}
 }
@@ -320,7 +321,7 @@ button{
 
 <div class="wrap">
   
-  <a href="index.html" class="back-button">← กลับหน้าแรก</a>
+  <a href="index.html?tab=codex" class="back-button">← กลับหน้าเลือกประมวล</a>
 
   <div class="search-container">
     <div class="search-header">
@@ -406,7 +407,8 @@ function setTheme(theme){
   }
   try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
   updateThemeToggleUI(theme);
-  if (theme !== 'horror') hideKrasue(true);
+  if (theme === 'horror') { startGhostRotation(); playHooSound(); }
+  else { stopGhostRotation(); }
 }
 
 function updateThemeToggleUI(theme){
@@ -416,35 +418,61 @@ function updateThemeToggleUI(theme){
 }
 
 /* ================================================================
-   กระสือ (Krasue) COMPANION — horror mode only, appears while typing
+   GHOST COMPANION — rotating cast of 4 Thai spirits (กระสือ / ผีจีน /
+   ผีเขียว / นางตานี), horror mode only. Persistently visible while
+   horror mode is active, cycling every 5s with a soft "hoo" tone.
+   Typing gives a brief extra glow pulse on top of the base presence.
    ================================================================ */
-let krasueEl = null;
-let krasueTimer = null;
+const GHOST_IMAGES = [
+  'pics/krasue-companion.png',
+  'pics/phijeen-companion.png',
+  'pics/phikeaw-companion.png',
+  'pics/nangtanee-companion.png'
+];
+let ghostEl = null, ghostRotateTimer = null, ghostPulseTimer = null, ghostIndex = 0;
 
-function ensureKrasueEl(){
-  if (krasueEl) return krasueEl;
+function ensureGhostEl(){
+  if (ghostEl) return ghostEl;
   const img = document.createElement('img');
-  img.src = 'pics/krasue-companion.png';
+  img.src = GHOST_IMAGES[0];
   img.alt = '';
   img.setAttribute('aria-hidden', 'true');
-  img.className = 'krasue-companion';
+  img.className = 'ghost-companion';
   document.body.appendChild(img);
-  krasueEl = img;
+  ghostEl = img;
   return img;
 }
 
-function showKrasue(){
-  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
-  const el = ensureKrasueEl();
+function startGhostRotation(){
+  const el = ensureGhostEl();
+  ghostIndex = 0;
+  el.src = GHOST_IMAGES[ghostIndex];
   el.classList.add('visible');
-  clearTimeout(krasueTimer);
-  krasueTimer = setTimeout(() => { el.classList.remove('visible'); }, 1800);
+  clearInterval(ghostRotateTimer);
+  ghostRotateTimer = setInterval(rotateGhost, 5000);
 }
 
-function hideKrasue(immediate){
-  clearTimeout(krasueTimer);
-  if (krasueEl) krasueEl.classList.remove('visible');
-  if (immediate && krasueEl) { /* let the CSS transition still play a quick fade */ }
+function rotateGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl();
+  ghostIndex = (ghostIndex + 1) % GHOST_IMAGES.length;
+  el.style.opacity = '0.15';
+  setTimeout(() => { el.src = GHOST_IMAGES[ghostIndex]; el.style.opacity = ''; }, 220);
+  playHooSound();
+}
+
+function stopGhostRotation(){
+  clearInterval(ghostRotateTimer);
+  ghostRotateTimer = null;
+  if (ghostEl) { ghostEl.classList.remove('visible'); ghostEl.style.opacity = ''; }
+}
+
+function pulseGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl();
+  el.classList.add('pulse');
+  clearTimeout(ghostPulseTimer);
+  ghostPulseTimer = setTimeout(() => el.classList.remove('pulse'), 350);
 }
 
 // Delegated listener catches search-text, search-article, and any
@@ -453,9 +481,61 @@ document.addEventListener('input', (e) => {
   const t = e.target;
   if (!t) return;
   if (t.id === 'search-text' || t.id === 'search-article' || (t.classList && t.classList.contains('note-input'))) {
-    showKrasue();
+    pulseGhost();
   }
 });
+
+/* Ambient "hoo~" — low breathy tone with vibrato, evoking Thai
+   goosebump-story radio shows. Soft attack/decay, kept quiet since it
+   can repeat every 5s for as long as horror mode stays on. */
+let __ghostAudioCtx;
+function playHooSound(){
+  try{
+    __ghostAudioCtx = __ghostAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __ghostAudioCtx;
+    if (c.state === 'suspended') c.resume();
+    const t0 = c.currentTime, dur = 1.6;
+    const baseFreq = 180 + Math.random() * 50;
+
+    const osc = c.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(baseFreq, t0);
+
+    const lfo = c.createOscillator();
+    lfo.type = 'sine';
+    lfo.frequency.setValueAtTime(4.2, t0);
+    const lfoGain = c.createGain();
+    lfoGain.gain.setValueAtTime(6, t0);
+    lfo.connect(lfoGain); lfoGain.connect(osc.frequency);
+
+    const mainGain = c.createGain();
+    mainGain.gain.setValueAtTime(0.0001, t0);
+    mainGain.gain.exponentialRampToValueAtTime(0.035, t0 + 0.55);
+    mainGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+
+    const bufferSize = Math.floor(c.sampleRate * dur);
+    const noiseBuffer = c.createBuffer(1, bufferSize, c.sampleRate);
+    const data = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+    const noise = c.createBufferSource();
+    noise.buffer = noiseBuffer;
+    const noiseFilter = c.createBiquadFilter();
+    noiseFilter.type = 'bandpass';
+    noiseFilter.frequency.setValueAtTime(baseFreq * 1.6, t0);
+    noiseFilter.Q.setValueAtTime(0.7, t0);
+    const noiseGain = c.createGain();
+    noiseGain.gain.setValueAtTime(0.0001, t0);
+    noiseGain.gain.exponentialRampToValueAtTime(0.01, t0 + 0.55);
+    noiseGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+
+    osc.connect(mainGain); mainGain.connect(c.destination);
+    noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(c.destination);
+
+    osc.start(t0); osc.stop(t0 + dur);
+    lfo.start(t0); lfo.stop(t0 + dur);
+    noise.start(t0); noise.stop(t0 + dur);
+  } catch(e){}
+}
 
 let codexData = null;
 let selectedBook = 'civil';
@@ -603,6 +683,35 @@ function renderArticleTextHtml(text, bookType, currentNumber) {
       <div class="warak-text">${linkifyMatraRefs(escapeHtml(p), bookType, currentNumber)}</div>
     </div>`;
   }).join('');
+}
+
+// "กฎหมายปกครอง" merged compact card on index.html links here with
+// ?book=admin — a pseudo-value covering 2 real books (adminproc /
+// admincourt). Show a small chooser (reusing the existing .book-selector
+// / .book-btn styles) before locking to whichever one gets picked.
+function showAdminBookPicker() {
+  document.querySelector('.search-header h1').textContent = '🏛️ เลือกฉบับกฎหมายปกครอง';
+  document.querySelector('.search-header p').textContent = 'เลือกฉบับที่ต้องการค้นหามาตรา';
+  document.getElementById('search-text').disabled = true;
+  document.getElementById('search-article').disabled = true;
+  const existing = document.getElementById('admin-book-picker');
+  if (existing) existing.remove();
+  const picker = document.createElement('div');
+  picker.id = 'admin-book-picker';
+  picker.className = 'book-selector';
+  picker.innerHTML = `
+    <button type="button" class="book-btn" onclick="pickAdminBook('adminproc')" onmouseenter="playHoverSound()">📝 วิ.ปฏิบัติราชการทางปกครอง</button>
+    <button type="button" class="book-btn" onclick="pickAdminBook('admincourt')" onmouseenter="playHoverSound()">🏢 จัดตั้งศาลปกครองฯ</button>
+  `;
+  document.querySelector('.search-container').appendChild(picker);
+}
+
+function pickAdminBook(book) {
+  const picker = document.getElementById('admin-book-picker');
+  if (picker) picker.remove();
+  document.getElementById('search-text').disabled = false;
+  document.getElementById('search-article').disabled = false;
+  applyBookLock(book);
 }
 
 function applyBookLock(book) {
@@ -800,13 +909,17 @@ function showError(msg) {
 
 // Load data, then lock the page to whichever ?book= the homepage linked to
 document.addEventListener('DOMContentLoaded', async () => {
-  updateThemeToggleUI(document.documentElement.getAttribute('data-theme') || 'light');
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+  updateThemeToggleUI(currentTheme);
+  if (currentTheme === 'horror') startGhostRotation();
 
   await loadCodexData();
 
   const params = new URLSearchParams(window.location.search);
   const book = params.get('book');
-  if (book && BOOK_INFO[book]) {
+  if (book === 'admin') {
+    showAdminBookPicker();
+  } else if (book && BOOK_INFO[book]) {
     applyBookLock(book);
   }
 });

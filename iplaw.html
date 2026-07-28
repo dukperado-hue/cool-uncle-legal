@@ -24,6 +24,39 @@
   --radius:14px;
   --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
 }
+
+/* ============ THEME: DARK ============ */
+:root[data-theme="dark"]{
+  --paper:#14161f;--card:#1c2030;--ink:#E9E7E1;--ink-soft:#A9AEC2;--ink-faint:#6C7188;
+  --line:#2E3348;--gold:#E0BD73;--gold-soft:#3A3320;--ok:#4FCB8D;--ok-bg:#173425;
+  --bad:#E2685F;--bad-bg:#3A1E1C;--accent:#84A6E8;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.45);
+}
+/* ============ THEME: HORROR (กระสือ mode) ============ */
+:root[data-theme="horror"]{
+  --paper:#0A070C;--card:#151019;--ink:#D9D2C9;--ink-soft:#9C8F93;--ink-faint:#5C5460;
+  --line:#2B1F26;--gold:#8F1F2B;--gold-soft:#301418;--ok:#3F7A4F;--ok-bg:#16241a;
+  --bad:#FF3355;--bad-bg:#301018;--accent:#4A8F5C;
+  --shadow:0 1px 2px rgba(0,0,0,.6),0 10px 28px rgba(0,0,0,.6);
+}
+:root[data-theme="dark"] body,:root[data-theme="horror"] body{background:var(--paper)}
+:root[data-theme="dark"] .home-bar,:root[data-theme="horror"] .home-bar{background:var(--card);border-bottom-color:var(--line)}
+:root[data-theme="dark"] .notice,:root[data-theme="horror"] .notice{background:rgba(255,255,255,.04)}
+:root[data-theme="dark"] .lecture-pending,:root[data-theme="horror"] .lecture-pending{background:rgba(255,255,255,.06);color:var(--ink-faint)}
+:root[data-theme="dark"] .lecture-row:hover,:root[data-theme="horror"] .lecture-row:hover{border-color:var(--gold)}
+
+/* THEME TOGGLE */
+.theme-toggle{display:flex;gap:3px;margin-left:auto;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+.theme-toggle button{border:none;background:transparent;border-radius:999px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .2s;font-family:inherit}
+.theme-toggle button.active{background:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.theme-toggle button:hover{background:var(--line)}
+
+/* GHOST COMPANION (horror mode — rotating cast of 4) */
+.ghost-companion{position:fixed;right:16px;bottom:16px;width:100px;height:auto;pointer-events:none;opacity:0;transform:translateY(8px);transition:opacity .6s ease;z-index:999;filter:drop-shadow(0 0 16px rgba(180,20,40,.45));animation:ghost-float 3.4s ease-in-out infinite}
+.ghost-companion.visible{opacity:1}
+.ghost-companion.pulse{filter:drop-shadow(0 0 26px rgba(180,20,40,.8)) drop-shadow(0 0 10px rgba(255,255,255,.3))}
+@keyframes ghost-float{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
+
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
 
@@ -105,11 +138,26 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
 </style>
 </head>
 <body>
+<script>
+// Apply the persisted theme as early as possible to avoid a flash of the
+// wrong theme (light/dark/horror shared site-wide via localStorage).
+(function(){
+  try {
+    var t = localStorage.getItem('codex-theme');
+    if (t === 'dark' || t === 'horror') document.documentElement.setAttribute('data-theme', t);
+  } catch(e){}
+})();
+</script>
 <div class="home-bar">
   <a href="index.html" class="home-bar-logo" title="กลับหน้าหลัก" onmouseenter="playHoverSound()">👴🏻</a>
   <a href="index.html" class="home-bar-link" onmouseenter="playHoverSound()">← กลับหน้าหลัก</a>
   <span class="home-bar-sep">·</span>
   <span class="home-bar-current">กฎหมายทรัพย์สินทางปัญญา</span>
+  <div class="theme-toggle" role="group" aria-label="เลือกธีม">
+    <button type="button" data-theme-btn="light" onclick="setTheme('light')" onmouseenter="playHoverSound()" title="โหมดสว่าง">☀️</button>
+    <button type="button" data-theme-btn="dark" onclick="setTheme('dark')" onmouseenter="playHoverSound()" title="โหมดมืด">🌙</button>
+    <button type="button" data-theme-btn="horror" onclick="setTheme('horror')" onmouseenter="playHoverSound()" title="โหมดสยองขวัญ">👻</button>
+  </div>
 </div>
 
 <div class="wrap">
@@ -165,6 +213,155 @@ function renderLectures(){
   `).join('');
 }
 renderLectures();
+</script>
+<script>
+/* ================================================================
+   THEME SYSTEM (light / dark / horror) — persisted site-wide via
+   localStorage key "codex-theme" (shared with every other page).
+   ================================================================ */
+const THEME_KEY = 'codex-theme';
+
+function setTheme(theme){
+  if (theme === 'light') {
+    document.documentElement.removeAttribute('data-theme');
+  } else {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
+  try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
+  updateThemeToggleUI(theme);
+  if (theme === 'horror') { startGhostRotation(); playHooSound(); }
+  else { stopGhostRotation(); }
+}
+
+function updateThemeToggleUI(theme){
+  document.querySelectorAll('.theme-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.themeBtn === theme);
+  });
+}
+
+/* ================================================================
+   GHOST COMPANION — rotating cast of 4 Thai spirits (กระสือ / ผีจีน /
+   ผีเขียว / นางตานี), horror mode only. Persistently visible while
+   horror mode is active, cycling every 5s with a soft "hoo" tone.
+   Typing gives a brief extra glow pulse on top of the base presence.
+   ================================================================ */
+const GHOST_IMAGES = [
+  'pics/krasue-companion.png',
+  'pics/phijeen-companion.png',
+  'pics/phikeaw-companion.png',
+  'pics/nangtanee-companion.png'
+];
+let ghostEl = null, ghostRotateTimer = null, ghostPulseTimer = null, ghostIndex = 0;
+
+function ensureGhostEl(){
+  if (ghostEl) return ghostEl;
+  const img = document.createElement('img');
+  img.src = GHOST_IMAGES[0];
+  img.alt = '';
+  img.setAttribute('aria-hidden', 'true');
+  img.className = 'ghost-companion';
+  document.body.appendChild(img);
+  ghostEl = img;
+  return img;
+}
+
+function startGhostRotation(){
+  const el = ensureGhostEl();
+  ghostIndex = 0;
+  el.src = GHOST_IMAGES[ghostIndex];
+  el.classList.add('visible');
+  clearInterval(ghostRotateTimer);
+  ghostRotateTimer = setInterval(rotateGhost, 5000);
+}
+
+function rotateGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl();
+  ghostIndex = (ghostIndex + 1) % GHOST_IMAGES.length;
+  el.style.opacity = '0.15';
+  setTimeout(() => { el.src = GHOST_IMAGES[ghostIndex]; el.style.opacity = ''; }, 220);
+  playHooSound();
+}
+
+function stopGhostRotation(){
+  clearInterval(ghostRotateTimer);
+  ghostRotateTimer = null;
+  if (ghostEl) { ghostEl.classList.remove('visible'); ghostEl.style.opacity = ''; }
+}
+
+function pulseGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl();
+  el.classList.add('pulse');
+  clearTimeout(ghostPulseTimer);
+  ghostPulseTimer = setTimeout(() => el.classList.remove('pulse'), 350);
+}
+
+document.addEventListener('input', (e) => {
+  const t = e.target;
+  if (!t) return;
+  if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || (t.classList && t.classList.contains('note-input'))) {
+    pulseGhost();
+  }
+});
+
+/* Ambient "hoo~" — low breathy tone with vibrato, evoking Thai
+   goosebump-story radio shows. Soft attack/decay, kept quiet since it
+   can repeat every 5s for as long as horror mode stays on. */
+let __ghostAudioCtx;
+function playHooSound(){
+  try{
+    __ghostAudioCtx = __ghostAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __ghostAudioCtx;
+    if (c.state === 'suspended') c.resume();
+    const t0 = c.currentTime, dur = 1.6;
+    const baseFreq = 180 + Math.random() * 50;
+
+    const osc = c.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(baseFreq, t0);
+
+    const lfo = c.createOscillator();
+    lfo.type = 'sine';
+    lfo.frequency.setValueAtTime(4.2, t0);
+    const lfoGain = c.createGain();
+    lfoGain.gain.setValueAtTime(6, t0);
+    lfo.connect(lfoGain); lfoGain.connect(osc.frequency);
+
+    const mainGain = c.createGain();
+    mainGain.gain.setValueAtTime(0.0001, t0);
+    mainGain.gain.exponentialRampToValueAtTime(0.035, t0 + 0.55);
+    mainGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+
+    const bufferSize = Math.floor(c.sampleRate * dur);
+    const noiseBuffer = c.createBuffer(1, bufferSize, c.sampleRate);
+    const data = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+    const noise = c.createBufferSource();
+    noise.buffer = noiseBuffer;
+    const noiseFilter = c.createBiquadFilter();
+    noiseFilter.type = 'bandpass';
+    noiseFilter.frequency.setValueAtTime(baseFreq * 1.6, t0);
+    noiseFilter.Q.setValueAtTime(0.7, t0);
+    const noiseGain = c.createGain();
+    noiseGain.gain.setValueAtTime(0.0001, t0);
+    noiseGain.gain.exponentialRampToValueAtTime(0.01, t0 + 0.55);
+    noiseGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+
+    osc.connect(mainGain); mainGain.connect(c.destination);
+    noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(c.destination);
+
+    osc.start(t0); osc.stop(t0 + dur);
+    lfo.start(t0); lfo.stop(t0 + dur);
+    noise.start(t0); noise.stop(t0 + dur);
+  } catch(e){}
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  updateThemeToggleUI(current);
+  if (current === 'horror') startGhostRotation();
+});
 </script>
 </body>
 </html>

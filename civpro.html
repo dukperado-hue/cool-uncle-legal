@@ -31,6 +31,63 @@
   --radius:10px;
   --radius-sm:7px;
 }
+
+/* ============ THEME: DARK ============ */
+:root[data-theme="dark"]{
+  --bg-page:#14161f;--bg-panel:#1c2030;--bg-panel2:#232840;
+  --border:#2E3348;--border-med:#3a4060;
+  --text-h:#E9E7E1;--text-body:#c7cbdb;--text-soft:#A9AEC2;--text-muted:#6C7188;
+  --gold:#E0BD73;--gold-l:#3A3320;
+  --good:#4FCB8D;--good-l:#173425;
+  --bad:#E2685F;--bad-l:#3A1E1C;
+  --cat:#84A6E8;--cat-pale:#1f2740;
+  --shadow:0 1px 3px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.4);
+}
+/* ============ THEME: HORROR (กระสือ mode) ============ */
+:root[data-theme="horror"]{
+  --bg-page:#0A070C;--bg-panel:#151019;--bg-panel2:#1c1420;
+  --border:#2B1F26;--border-med:#3d2a33;
+  --text-h:#D9D2C9;--text-body:#c2b8ae;--text-soft:#9C8F93;--text-muted:#5C5460;
+  --gold:#8F1F2B;--gold-l:#301418;
+  --good:#3F7A4F;--good-l:#16241a;
+  --bad:#FF3355;--bad-l:#301018;
+  --cat:#4A8F5C;--cat-pale:#1a2a1e;
+  --shadow:0 1px 3px rgba(0,0,0,.5), 0 4px 14px rgba(0,0,0,.4);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.55);
+}
+:root[data-theme="dark"] body,:root[data-theme="horror"] body{background:var(--bg-page)}
+:root[data-theme="dark"] .subject-bar,:root[data-theme="dark"] .tab,:root[data-theme="dark"] select,
+:root[data-theme="dark"] .face-front,:root[data-theme="dark"] .img-label,:root[data-theme="dark"] .list-item,
+:root[data-theme="dark"] .set-card,:root[data-theme="dark"] .stog,:root[data-theme="dark"] .choice,
+:root[data-theme="dark"] .order-item,:root[data-theme="dark"] .content-week,
+:root[data-theme="horror"] .subject-bar,:root[data-theme="horror"] .tab,:root[data-theme="horror"] select,
+:root[data-theme="horror"] .face-front,:root[data-theme="horror"] .img-label,:root[data-theme="horror"] .list-item,
+:root[data-theme="horror"] .set-card,:root[data-theme="horror"] .stog,:root[data-theme="horror"] .choice,
+:root[data-theme="horror"] .order-item,:root[data-theme="horror"] .content-week{background:var(--bg-panel)}
+:root[data-theme="dark"] .btn-home-tab,:root[data-theme="dark"] .subject-tab:hover:not(.active),
+:root[data-theme="dark"] .list-cat-tab,:root[data-theme="dark"] .fact-block,
+:root[data-theme="dark"] .content-week-header,:root[data-theme="dark"] .topic-body,
+:root[data-theme="horror"] .btn-home-tab,:root[data-theme="horror"] .subject-tab:hover:not(.active),
+:root[data-theme="horror"] .list-cat-tab,:root[data-theme="horror"] .fact-block,
+:root[data-theme="horror"] .content-week-header,:root[data-theme="horror"] .topic-body{background:var(--bg-panel2)}
+:root[data-theme="dark"] .content-week-header:hover,:root[data-theme="horror"] .content-week-header:hover{background:var(--border)}
+:root[data-theme="dark"] .score-pop,:root[data-theme="horror"] .score-pop{background:var(--bg-panel);color:var(--good);border-color:var(--border)}
+:root[data-theme="dark"] .list-item .case-tag,:root[data-theme="horror"] .list-item .case-tag{background:var(--gold-l);border-color:var(--gold)}
+
+/* THEME TOGGLE */
+.theme-toggle{display:flex;gap:3px;margin-left:auto;background:var(--bg-panel);border:1px solid var(--border);border-radius:999px;padding:3px}
+.subject-bar .theme-toggle{margin-left:0}
+.theme-toggle button{border:none;background:transparent;border-radius:999px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .2s;font-family:inherit}
+.theme-toggle button.active{background:var(--cat);box-shadow:0 0 0 1px var(--cat)}
+.theme-toggle button:hover{background:var(--border)}
+
+/* GHOST COMPANION (horror mode — rotating cast of 4) */
+.ghost-companion{position:fixed;right:16px;bottom:16px;width:100px;height:auto;pointer-events:none;opacity:0;transform:translateY(8px);transition:opacity .6s ease;z-index:999;filter:drop-shadow(0 0 16px rgba(180,20,40,.45));animation:ghost-float 3.4s ease-in-out infinite}
+.ghost-companion.visible{opacity:1}
+.ghost-companion.pulse{filter:drop-shadow(0 0 26px rgba(180,20,40,.8)) drop-shadow(0 0 10px rgba(255,255,255,.3))}
+@keyframes ghost-float{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
+
 *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
 html,body{margin:0;padding:0;}
 body{background:var(--bg-page);color:var(--text-body);font-family:'Sarabun',sans-serif;font-size:15px;line-height:1.6;min-height:100vh;padding-bottom:70px;transition:background .35s;}
@@ -201,6 +258,14 @@ select:focus{border-color:var(--cat);}
 </style>
 </head>
 <body id="body">
+<script>
+(function(){
+  try {
+    var t = localStorage.getItem('codex-theme');
+    if (t === 'dark' || t === 'horror') document.documentElement.setAttribute('data-theme', t);
+  } catch(e){}
+})();
+</script>
 
 <div class="subject-bar" id="subjectBar">
   <a href="index.html" class="brand-home" title="กลับหน้าเลือกวิชา" onmouseenter="playHoverSound()">
@@ -215,6 +280,11 @@ select:focus{border-color:var(--cat);}
   <div class="course-title-bar">
     <span class="course-title-main">วิธีพิจารณาความแพ่ง</span>
     <span class="course-title-sub">และพระธรรมนูญศาลยุติธรรม</span>
+  </div>
+  <div class="theme-toggle" role="group" aria-label="เลือกธีม">
+    <button type="button" data-theme-btn="light" onclick="setColorTheme('light')" onmouseenter="playHoverSound()" title="โหมดสว่าง">☀️</button>
+    <button type="button" data-theme-btn="dark" onclick="setColorTheme('dark')" onmouseenter="playHoverSound()" title="โหมดมืด">🌙</button>
+    <button type="button" data-theme-btn="horror" onclick="setColorTheme('horror')" onmouseenter="playHoverSound()" title="โหมดสยองขวัญ">👻</button>
   </div>
   <div class="score-block">
     <div id="scorePop" class="score-pop">+10</div>
@@ -1321,6 +1391,97 @@ render();
 GS = loadScore();
 updateScoreUI();
 render();
+</script>
+<script>
+const THEME_KEY = 'codex-theme';
+// Named setColorTheme (not setTheme) — this file already has a pre-existing
+// setTheme(catId) used throughout the quiz app to color subject categories;
+// this is the unrelated light/dark/horror site-wide appearance toggle.
+function setColorTheme(theme){
+  if (theme === 'light') { document.documentElement.removeAttribute('data-theme'); }
+  else { document.documentElement.setAttribute('data-theme', theme); }
+  try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
+  updateThemeToggleUI(theme);
+  if (theme === 'horror') { startGhostRotation(); playHooSound(); }
+  else { stopGhostRotation(); }
+}
+function updateThemeToggleUI(theme){
+  document.querySelectorAll('.theme-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.themeBtn === theme);
+  });
+}
+const GHOST_IMAGES = ['pics/krasue-companion.png','pics/phijeen-companion.png','pics/phikeaw-companion.png','pics/nangtanee-companion.png'];
+let ghostEl = null, ghostRotateTimer = null, ghostPulseTimer = null, ghostIndex = 0;
+function ensureGhostEl(){
+  if (ghostEl) return ghostEl;
+  const img = document.createElement('img');
+  img.src = GHOST_IMAGES[0]; img.alt = ''; img.setAttribute('aria-hidden', 'true'); img.className = 'ghost-companion';
+  document.body.appendChild(img); ghostEl = img; return img;
+}
+function startGhostRotation(){
+  const el = ensureGhostEl(); ghostIndex = 0; el.src = GHOST_IMAGES[ghostIndex]; el.classList.add('visible');
+  clearInterval(ghostRotateTimer); ghostRotateTimer = setInterval(rotateGhost, 5000);
+}
+function rotateGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl(); ghostIndex = (ghostIndex + 1) % GHOST_IMAGES.length;
+  el.style.opacity = '0.15';
+  setTimeout(() => { el.src = GHOST_IMAGES[ghostIndex]; el.style.opacity = ''; }, 220);
+  playHooSound();
+}
+function stopGhostRotation(){
+  clearInterval(ghostRotateTimer); ghostRotateTimer = null;
+  if (ghostEl) { ghostEl.classList.remove('visible'); ghostEl.style.opacity = ''; }
+}
+function pulseGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl(); el.classList.add('pulse');
+  clearTimeout(ghostPulseTimer); ghostPulseTimer = setTimeout(() => el.classList.remove('pulse'), 350);
+}
+document.addEventListener('input', (e) => {
+  const t = e.target;
+  if (!t) return;
+  if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || (t.classList && t.classList.contains('note-input'))) pulseGhost();
+});
+let __ghostAudioCtx;
+function playHooSound(){
+  try{
+    __ghostAudioCtx = __ghostAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __ghostAudioCtx;
+    if (c.state === 'suspended') c.resume();
+    const t0 = c.currentTime, dur = 1.6;
+    const baseFreq = 180 + Math.random() * 50;
+    const osc = c.createOscillator(); osc.type = 'sine'; osc.frequency.setValueAtTime(baseFreq, t0);
+    const lfo = c.createOscillator(); lfo.type = 'sine'; lfo.frequency.setValueAtTime(4.2, t0);
+    const lfoGain = c.createGain(); lfoGain.gain.setValueAtTime(6, t0);
+    lfo.connect(lfoGain); lfoGain.connect(osc.frequency);
+    const mainGain = c.createGain();
+    mainGain.gain.setValueAtTime(0.0001, t0);
+    mainGain.gain.exponentialRampToValueAtTime(0.035, t0 + 0.55);
+    mainGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    const bufferSize = Math.floor(c.sampleRate * dur);
+    const noiseBuffer = c.createBuffer(1, bufferSize, c.sampleRate);
+    const data = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+    const noise = c.createBufferSource(); noise.buffer = noiseBuffer;
+    const noiseFilter = c.createBiquadFilter();
+    noiseFilter.type = 'bandpass'; noiseFilter.frequency.setValueAtTime(baseFreq * 1.6, t0); noiseFilter.Q.setValueAtTime(0.7, t0);
+    const noiseGain = c.createGain();
+    noiseGain.gain.setValueAtTime(0.0001, t0);
+    noiseGain.gain.exponentialRampToValueAtTime(0.01, t0 + 0.55);
+    noiseGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    osc.connect(mainGain); mainGain.connect(c.destination);
+    noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(c.destination);
+    osc.start(t0); osc.stop(t0 + dur);
+    lfo.start(t0); lfo.stop(t0 + dur);
+    noise.start(t0); noise.stop(t0 + dur);
+  } catch(e){}
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  updateThemeToggleUI(current);
+  if (current === 'horror') startGhostRotation();
+});
 </script>
 </body>
 </html>

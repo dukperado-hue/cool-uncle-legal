@@ -39,6 +39,47 @@
   --branch-crimproc:#F57C00;
 }
 
+/* ============ THEME: DARK ============ */
+:root[data-theme="dark"]{
+  --paper:#14161f;--card:#1c2030;--ink:#E9E7E1;--ink-soft:#A9AEC2;--ink-faint:#6C7188;
+  --line:#2E3348;--gold:#E0BD73;--gold-soft:#3A3320;--ok:#4FCB8D;--ok-bg:#173425;
+  --bad:#E2685F;--bad-bg:#3A1E1C;--accent:#84A6E8;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.45);
+}
+/* ============ THEME: HORROR (กระสือ mode) ============ */
+:root[data-theme="horror"]{
+  --paper:#0A070C;--card:#151019;--ink:#D9D2C9;--ink-soft:#9C8F93;--ink-faint:#5C5460;
+  --line:#2B1F26;--gold:#8F1F2B;--gold-soft:#301418;--ok:#3F7A4F;--ok-bg:#16241a;
+  --bad:#FF3355;--bad-bg:#301018;--accent:#4A8F5C;
+  --shadow:0 1px 2px rgba(0,0,0,.6),0 10px 28px rgba(0,0,0,.6);
+}
+:root[data-theme="dark"] body,:root[data-theme="horror"] body{background:var(--paper)}
+:root[data-theme="dark"] .topbar,:root[data-theme="horror"] .topbar{background:var(--card);border-bottom-color:var(--line)}
+:root[data-theme="dark"] .tab-buttons,:root[data-theme="dark"] .term-buttons,
+:root[data-theme="horror"] .tab-buttons,:root[data-theme="horror"] .term-buttons{background:rgba(255,255,255,.04)}
+:root[data-theme="dark"] .codex-section,:root[data-theme="horror"] .codex-section{
+  background:linear-gradient(135deg,rgba(224,189,115,.08) 0%,rgba(132,166,232,.08) 100%);border-color:var(--gold);
+}
+:root[data-theme="dark"] .codex-card,:root[data-theme="horror"] .codex-card{background:var(--card);border-color:var(--line);color:var(--ink)}
+:root[data-theme="dark"] .codex-card.featured,:root[data-theme="horror"] .codex-card.featured{
+  background:linear-gradient(180deg,var(--card) 0%,var(--gold-soft) 220%);border-color:var(--gold-soft);
+}
+:root[data-theme="dark"] .codex-card .status,:root[data-theme="horror"] .codex-card .status{background:var(--line);color:var(--ink-faint)}
+:root[data-theme="dark"] .status-pill,:root[data-theme="horror"] .status-pill{background:var(--ok-bg);color:var(--ok)}
+:root[data-theme="dark"] .arcade-body,:root[data-theme="horror"] .arcade-body{filter:grayscale(.15) brightness(.95)}
+
+/* THEME TOGGLE */
+.theme-toggle{display:flex;gap:3px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+.theme-toggle button{border:none;background:transparent;border-radius:999px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .2s;font-family:inherit}
+.theme-toggle button.active{background:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.theme-toggle button:hover{background:var(--line)}
+
+/* GHOST COMPANION (horror mode — rotating cast of 4) */
+.ghost-companion{position:fixed;right:16px;bottom:16px;width:100px;height:auto;pointer-events:none;opacity:0;transform:translateY(8px);transition:opacity .6s ease;z-index:999;filter:drop-shadow(0 0 16px rgba(180,20,40,.45));animation:ghost-float 3.4s ease-in-out infinite}
+.ghost-companion.visible{opacity:1}
+.ghost-companion.pulse{filter:drop-shadow(0 0 26px rgba(180,20,40,.8)) drop-shadow(0 0 10px rgba(255,255,255,.3))}
+@keyframes ghost-float{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
+
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
 body{
@@ -323,6 +364,14 @@ footer{
 </style>
 </head>
 <body>
+<script>
+(function(){
+  try {
+    var t = localStorage.getItem('codex-theme');
+    if (t === 'dark' || t === 'horror') document.documentElement.setAttribute('data-theme', t);
+  } catch(e){}
+})();
+</script>
 
 <!-- TOP BAR -->
 <div class="topbar">
@@ -335,6 +384,11 @@ footer{
     <a href="https://www.youtube.com/@CoolUncleLaw/videos" target="_blank" rel="noopener" class="topbar-yt-icon" title="Cool Uncle Law · YouTube Channel" onmouseenter="playHoverSound()">📺</a>
     <div class="topbar-countdown" id="exam-countdown">
       📅 ถึงสอบ: ...
+    </div>
+    <div class="theme-toggle" role="group" aria-label="เลือกธีม">
+      <button type="button" data-theme-btn="light" onclick="setTheme('light')" onmouseenter="playHoverSound()" title="โหมดสว่าง">☀️</button>
+      <button type="button" data-theme-btn="dark" onclick="setTheme('dark')" onmouseenter="playHoverSound()" title="โหมดมืด">🌙</button>
+      <button type="button" data-theme-btn="horror" onclick="setTheme('horror')" onmouseenter="playHoverSound()" title="โหมดสยองขวัญ">👻</button>
     </div>
   </span>
 </div>
@@ -508,20 +562,15 @@ footer{
           <div class="name">พระธรรมนูญ</div>
           <div class="status">34 มาตรา</div>
         </a>
-        <a href="codex-search.html?book=adminproc" class="codex-card compact" onmouseenter="playHoverSound()">
-          <div class="icon">📝</div>
-          <div class="name">วิ.ปฏิบัติราชการ</div>
-          <div class="status">88 มาตรา</div>
-        </a>
-        <a href="codex-search.html?book=admincourt" class="codex-card compact" onmouseenter="playHoverSound()">
-          <div class="icon">🏢</div>
-          <div class="name">ศาลปกครอง</div>
-          <div class="status">158 มาตรา</div>
-        </a>
         <a href="codex-search.html?book=const2560" class="codex-card compact" onmouseenter="playHoverSound()">
           <div class="icon">🇹🇭</div>
           <div class="name">รัฐธรรมนูญ 2560</div>
           <div class="status">279 มาตรา</div>
+        </a>
+        <a href="codex-search.html?book=admin" class="codex-card compact" onmouseenter="playHoverSound()">
+          <div class="icon">🏢</div>
+          <div class="name">กฎหมายปกครอง</div>
+          <div class="status">2 ฉบับ</div>
         </a>
       </div>
     </div>
@@ -756,6 +805,101 @@ renderSubjects('year4', 'grid-year4');
 updateCountdown();
 setInterval(updateCountdown, 3600000); // Refresh day/hour diff every hour
 setInterval(rotateCountdown, 5000); // Cycle to next subject every 5s
+
+// Deep-link support: index.html?tab=codex lands directly on that tab (e.g. codex-search.html's back button)
+const requestedTab = new URLSearchParams(location.search).get('tab');
+if (requestedTab && document.getElementById('tab-' + requestedTab)) {
+  switchTab(requestedTab);
+  document.querySelector(`.tab-btn[onclick="switchTab('${requestedTab}')"]`)?.classList.add('active');
+}
+</script>
+<script>
+const THEME_KEY = 'codex-theme';
+function setTheme(theme){
+  if (theme === 'light') { document.documentElement.removeAttribute('data-theme'); }
+  else { document.documentElement.setAttribute('data-theme', theme); }
+  try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
+  updateThemeToggleUI(theme);
+  if (theme === 'horror') { startGhostRotation(); playHooSound(); }
+  else { stopGhostRotation(); }
+}
+function updateThemeToggleUI(theme){
+  document.querySelectorAll('.theme-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.themeBtn === theme);
+  });
+}
+const GHOST_IMAGES = ['pics/krasue-companion.png','pics/phijeen-companion.png','pics/phikeaw-companion.png','pics/nangtanee-companion.png'];
+let ghostEl = null, ghostRotateTimer = null, ghostPulseTimer = null, ghostIndex = 0;
+function ensureGhostEl(){
+  if (ghostEl) return ghostEl;
+  const img = document.createElement('img');
+  img.src = GHOST_IMAGES[0]; img.alt = ''; img.setAttribute('aria-hidden', 'true'); img.className = 'ghost-companion';
+  document.body.appendChild(img); ghostEl = img; return img;
+}
+function startGhostRotation(){
+  const el = ensureGhostEl(); ghostIndex = 0; el.src = GHOST_IMAGES[ghostIndex]; el.classList.add('visible');
+  clearInterval(ghostRotateTimer); ghostRotateTimer = setInterval(rotateGhost, 5000);
+}
+function rotateGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl(); ghostIndex = (ghostIndex + 1) % GHOST_IMAGES.length;
+  el.style.opacity = '0.15';
+  setTimeout(() => { el.src = GHOST_IMAGES[ghostIndex]; el.style.opacity = ''; }, 220);
+  playHooSound();
+}
+function stopGhostRotation(){
+  clearInterval(ghostRotateTimer); ghostRotateTimer = null;
+  if (ghostEl) { ghostEl.classList.remove('visible'); ghostEl.style.opacity = ''; }
+}
+function pulseGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl(); el.classList.add('pulse');
+  clearTimeout(ghostPulseTimer); ghostPulseTimer = setTimeout(() => el.classList.remove('pulse'), 350);
+}
+document.addEventListener('input', (e) => {
+  const t = e.target;
+  if (!t) return;
+  if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || (t.classList && t.classList.contains('note-input'))) pulseGhost();
+});
+let __ghostAudioCtx;
+function playHooSound(){
+  try{
+    __ghostAudioCtx = __ghostAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __ghostAudioCtx;
+    if (c.state === 'suspended') c.resume();
+    const t0 = c.currentTime, dur = 1.6;
+    const baseFreq = 180 + Math.random() * 50;
+    const osc = c.createOscillator(); osc.type = 'sine'; osc.frequency.setValueAtTime(baseFreq, t0);
+    const lfo = c.createOscillator(); lfo.type = 'sine'; lfo.frequency.setValueAtTime(4.2, t0);
+    const lfoGain = c.createGain(); lfoGain.gain.setValueAtTime(6, t0);
+    lfo.connect(lfoGain); lfoGain.connect(osc.frequency);
+    const mainGain = c.createGain();
+    mainGain.gain.setValueAtTime(0.0001, t0);
+    mainGain.gain.exponentialRampToValueAtTime(0.035, t0 + 0.55);
+    mainGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    const bufferSize = Math.floor(c.sampleRate * dur);
+    const noiseBuffer = c.createBuffer(1, bufferSize, c.sampleRate);
+    const data = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+    const noise = c.createBufferSource(); noise.buffer = noiseBuffer;
+    const noiseFilter = c.createBiquadFilter();
+    noiseFilter.type = 'bandpass'; noiseFilter.frequency.setValueAtTime(baseFreq * 1.6, t0); noiseFilter.Q.setValueAtTime(0.7, t0);
+    const noiseGain = c.createGain();
+    noiseGain.gain.setValueAtTime(0.0001, t0);
+    noiseGain.gain.exponentialRampToValueAtTime(0.01, t0 + 0.55);
+    noiseGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    osc.connect(mainGain); mainGain.connect(c.destination);
+    noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(c.destination);
+    osc.start(t0); osc.stop(t0 + dur);
+    lfo.start(t0); lfo.stop(t0 + dur);
+    noise.start(t0); noise.stop(t0 + dur);
+  } catch(e){}
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  updateThemeToggleUI(current);
+  if (current === 'horror') startGhostRotation();
+});
 </script>
 </body>
 </html>
