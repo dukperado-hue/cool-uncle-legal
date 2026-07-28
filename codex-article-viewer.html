@@ -40,10 +40,10 @@
   --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.45);
 }
 
-/* ============ THEME: HORROR (กระสือ mode) ============ */
+/* ============ THEME: HORROR (Thai Horror Manga mode) ============ */
 :root[data-theme="horror"]{
-  --paper:#0A070C;
-  --card:#151019;
+  --paper:#1a1a1a;
+  --card:#242424;
   --ink:#D9D2C9;
   --ink-soft:#9C8F93;
   --ink-faint:#5C5460;
@@ -52,6 +52,7 @@
   --accent:#4A8F5C;
   --ok:#3F7A4F;
   --bad:#FF3355;
+  --glow:#4a6b53;
   --shadow:0 1px 2px rgba(0,0,0,.6),0 10px 28px rgba(0,0,0,.6);
 }
 
@@ -103,20 +104,108 @@
 .theme-toggle button.active{background:var(--accent);box-shadow:0 0 0 1px var(--accent)}
 .theme-toggle button:hover{background:var(--line)}
 
-/* GHOST COMPANION (horror mode — rotating cast of 4) */
-.ghost-companion{
-  position:fixed;right:16px;bottom:16px;width:100px;height:auto;
-  pointer-events:none;opacity:0;transform:translateY(8px);
-  transition:opacity .6s ease;z-index:999;
-  filter:drop-shadow(0 0 16px rgba(180,20,40,.45));
-  animation:ghost-float 3.4s ease-in-out infinite;
+/* ============ HERO HEADER (ghost + manga speech bubble) ============
+   Structure is shared across all 3 themes; the ghost avatar and
+   pastel comic-bubble treatment only activate under horror — light/
+   dark themes fall back to a plain header via the base rules below. */
+.hero-row{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  margin-bottom:20px;
 }
-.ghost-companion.visible{opacity:1}
-.ghost-companion.pulse{filter:drop-shadow(0 0 26px rgba(180,20,40,.8)) drop-shadow(0 0 10px rgba(255,255,255,.3))}
-@keyframes ghost-float{
-  0%,100%{transform:translateY(0) rotate(-1.5deg)}
-  50%{transform:translateY(-10px) rotate(1.5deg)}
+.hero-ghost{
+  display:none;
+  flex-shrink:0;
 }
+.speech-bubble{
+  flex:1;
+  min-width:0;
+}
+.speech-bubble-top{
+  display:flex;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:10px;
+}
+.speech-bubble-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.bubble-btn{
+  background:#F5F3F0;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:6px 12px;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  color:var(--ink);
+  font-family:inherit;
+  text-decoration:none;
+  transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+}
+.bubble-btn:hover{ transform:translateY(-2px); box-shadow:var(--shadow); border-color:var(--gold); }
+.bubble-btn[disabled]{ opacity:.35; pointer-events:none; }
+
+/* ---- Horror mode: pixel-manga ghost + comic speech bubble ---- */
+:root[data-theme="horror"] .article-header{
+  border:1px solid var(--glow);
+  box-shadow:0 0 0 1px rgba(74,107,83,.25), 0 0 32px rgba(74,107,83,.28), var(--shadow);
+}
+:root[data-theme="horror"] .hero-ghost{
+  display:block;
+  width:132px;
+  height:auto;
+  margin-top:-56px;
+  filter:drop-shadow(0 0 18px rgba(74,107,83,.55)) drop-shadow(0 6px 10px rgba(0,0,0,.5));
+  transition:filter .3s ease, transform .3s ease;
+}
+:root[data-theme="horror"] .hero-ghost.pulse{
+  filter:drop-shadow(0 0 28px rgba(74,107,83,.9)) drop-shadow(0 6px 10px rgba(0,0,0,.5));
+  transform:scale(1.04);
+}
+:root[data-theme="horror"] .speech-bubble{
+  position:relative;
+  background:#e8f4ec;
+  color:#1f3d2b;
+  border-radius:18px;
+  padding:14px 18px;
+  margin-top:8px;
+  box-shadow:0 6px 16px rgba(0,0,0,.4);
+}
+:root[data-theme="horror"] .speech-bubble::before{
+  content:"";
+  position:absolute;
+  left:-14px;
+  top:26px;
+  width:0;
+  height:0;
+  border:11px solid transparent;
+  border-right-color:#e8f4ec;
+}
+:root[data-theme="horror"] .speech-bubble .article-number-label{ color:#2f6b45; }
+:root[data-theme="horror"] .speech-bubble .article-number{ color:#1f3d2b; font-size:22px; }
+:root[data-theme="horror"] .bubble-btn{
+  background:#fff;
+  border-color:#bcd8c6;
+  color:#1f3d2b;
+}
+:root[data-theme="horror"] .bubble-btn:hover{
+  background:#2f6b45;
+  border-color:#2f6b45;
+  color:#e8f4ec;
+}
+:root[data-theme="horror"] .note-input{
+  background:#2f2f2f;
+  border-color:var(--glow);
+}
+:root[data-theme="horror"] .note-input:focus{ background:#333; border-color:#6ea37f; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { -webkit-text-size-adjust: 100%; }
@@ -181,12 +270,17 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
   box-shadow: var(--shadow);
 }
 
+.article-number-label {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
 .article-number {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 48px;
-  font-weight: 900;
+  font-size: 18px;
+  font-weight: 700;
   color: var(--accent);
-  margin-bottom: 8px;
 }
 
 .article-subtitle {
@@ -240,14 +334,6 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
   font-weight: 600;
 }
 .matra-ref-link:hover { color: var(--gold); }
-
-/* HEADER TOP ACTIONS (print) */
-.article-header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-}
 
 .icon-btn {
   background: #F5F3F0;
@@ -593,9 +679,14 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
 /* MOBILE */
 @media (max-width: 640px) {
   .article-header { padding: 18px; }
-  .article-number { font-size: 36px; }
+  .article-number { font-size: 16px; }
   .tabs { flex-wrap: wrap; }
   .article-nav { grid-template-columns: 1fr; }
+  .hero-row { gap: 10px; }
+  :root[data-theme="horror"] .hero-ghost { width: 84px; margin-top: -34px; }
+  :root[data-theme="horror"] .speech-bubble { padding: 12px 14px; }
+  :root[data-theme="horror"] .speech-bubble .article-number { font-size: 18px; }
+  .bubble-btn { padding: 6px 9px; font-size: 12px; }
 }
 </style>
 </head>
@@ -633,12 +724,21 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
 
   <!-- ARTICLE HEADER -->
   <article class="article-header" id="article-card">
-    <div class="article-header-top">
-      <div>
-        <div class="article-number" id="article-number">-</div>
-        <div id="article-cancelled-badge"></div>
+    <div class="hero-row">
+      <img class="hero-ghost" id="hero-ghost" src="pics/krasue-companion.png" alt="" aria-hidden="true">
+      <div class="speech-bubble">
+        <div class="speech-bubble-top">
+          <span class="article-number-label">มาตรา</span>
+          <span class="article-number" id="article-number">-</span>
+          <span id="article-cancelled-badge"></span>
+        </div>
+        <div class="speech-bubble-actions">
+          <a href="#" id="nav-prev-btn" class="bubble-btn" onmouseenter="playHoverSound()" disabled>‹ ก่อนหน้า</a>
+          <a href="#" id="nav-next-btn" class="bubble-btn" onmouseenter="playHoverSound()" disabled>ถัดไป ›</a>
+          <button type="button" id="btn-header-read" class="bubble-btn" onclick="toggleHeaderRead(this)" onmouseenter="playHoverSound()">🔊 อ่าน</button>
+          <button type="button" class="bubble-btn" title="พิมพ์มาตรานี้" onclick="printCurrentArticle()" onmouseenter="playHoverSound()">🖨️ พิมพ์</button>
+        </div>
       </div>
-      <button type="button" class="icon-btn" title="พิมพ์มาตรานี้" onclick="printCurrentArticle()" onmouseenter="playHoverSound()">🖨️ พิมพ์</button>
     </div>
     <div class="article-subtitle" id="article-subtitle"></div>
 
@@ -659,48 +759,8 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
     </div>
   </article>
 
-  <!-- TABS -->
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('overview', this)">📋 ประวัติและข้อมูล</button>
-    <button class="tab-btn" onclick="switchTab('lecture', this)">🎓 คำบรรยาย</button>
-    <button class="tab-btn" onclick="switchTab('caselaw', this)">⚖️ ฎีกาศาลสูง</button>
-    <button class="tab-btn" onclick="switchTab('examples', this)">📝 ตัวอย่าง</button>
-    <button class="tab-btn" onclick="switchTab('related', this)">🔗 มาตราที่เกี่ยวข้อง</button>
-  </div>
-
-  <!-- TAB: OVERVIEW -->
-  <div id="tab-overview" class="tab-content active">
-    <div style="background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px;">
-      <h3 style="margin-bottom: 16px;">📖 ข้อมูลมาตรา</h3>
-
-      <div id="overview-meta" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;"></div>
-
-      <div id="overview-keywords" style="margin-top: 20px; padding-top: 20px; border-top: 1px dashed var(--line);"></div>
-    </div>
-  </div>
-
-  <!-- TAB: LECTURE NOTES -->
-  <div id="tab-lecture" class="tab-content">
-    <div id="lecture-container"></div>
-  </div>
-
-  <!-- TAB: CASE LAW -->
-  <div id="tab-caselaw" class="tab-content">
-    <div id="caselaw-container"></div>
-  </div>
-
-  <!-- TAB: EXAMPLES -->
-  <div id="tab-examples" class="tab-content">
-    <div id="examples-container"></div>
-  </div>
-
-  <!-- TAB: RELATED -->
-  <div id="tab-related" class="tab-content">
-    <div class="related-articles">
-      <h3>🔗 มาตราที่มีคำสำคัญร่วมกัน</h3>
-      <div class="related-list" id="related-list"></div>
-    </div>
-  </div>
+  <!-- อธิบายมาตรา -->
+  <div id="lecture-container"></div>
 
   <!-- ARTICLE NAVIGATION -->
   <div class="article-nav" id="article-nav"></div>
@@ -762,10 +822,12 @@ function updateThemeToggleUI(theme){
 }
 
 /* ================================================================
-   GHOST COMPANION — rotating cast of 4 Thai spirits (กระสือ / ผีจีน /
-   ผีเขียว / นางตานี), horror mode only. Persistently visible while
-   horror mode is active, cycling every 5s with a soft "hoo" tone.
-   Typing gives a brief extra glow pulse on top of the base presence.
+   HERO GHOST — rotating cast of 4 Thai spirits (กระสือ / ผีจีน /
+   ผีเขียว / นางตานี), horror mode only. Sits anchored in the article
+   card header (peeking over the top edge), cycling every 5s with a
+   soft "hoo" tone. No longer a page-fixed floating element — it lives
+   inline in the layout via #hero-ghost. Typing gives a brief glow
+   pulse on top of the base presence.
    ================================================================ */
 const GHOST_IMAGES = [
   'pics/krasue-companion.png',
@@ -773,32 +835,21 @@ const GHOST_IMAGES = [
   'pics/phikeaw-companion.png',
   'pics/nangtanee-companion.png'
 ];
-let ghostEl = null, ghostRotateTimer = null, ghostPulseTimer = null, ghostIndex = 0;
-
-function ensureGhostEl(){
-  if (ghostEl) return ghostEl;
-  const img = document.createElement('img');
-  img.src = GHOST_IMAGES[0];
-  img.alt = '';
-  img.setAttribute('aria-hidden', 'true');
-  img.className = 'ghost-companion';
-  document.body.appendChild(img);
-  ghostEl = img;
-  return img;
-}
+let ghostRotateTimer = null, ghostPulseTimer = null, ghostIndex = 0;
 
 function startGhostRotation(){
-  const el = ensureGhostEl();
+  const el = document.getElementById('hero-ghost');
+  if (!el) return;
   ghostIndex = 0;
   el.src = GHOST_IMAGES[ghostIndex];
-  el.classList.add('visible');
   clearInterval(ghostRotateTimer);
   ghostRotateTimer = setInterval(rotateGhost, 5000);
 }
 
 function rotateGhost(){
   if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
-  const el = ensureGhostEl();
+  const el = document.getElementById('hero-ghost');
+  if (!el) return;
   ghostIndex = (ghostIndex + 1) % GHOST_IMAGES.length;
   el.style.opacity = '0.15';
   setTimeout(() => { el.src = GHOST_IMAGES[ghostIndex]; el.style.opacity = ''; }, 220);
@@ -808,12 +859,12 @@ function rotateGhost(){
 function stopGhostRotation(){
   clearInterval(ghostRotateTimer);
   ghostRotateTimer = null;
-  if (ghostEl) { ghostEl.classList.remove('visible'); ghostEl.style.opacity = ''; }
 }
 
 function pulseGhost(){
   if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
-  const el = ensureGhostEl();
+  const el = document.getElementById('hero-ghost');
+  if (!el) return;
   el.classList.add('pulse');
   clearTimeout(ghostPulseTimer);
   ghostPulseTimer = setTimeout(() => el.classList.remove('pulse'), 350);
@@ -976,80 +1027,32 @@ function renderArticleBody(article) {
   }).join('');
 }
 
-function switchTab(tabName, btn) {
-  document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + tabName).classList.add('active');
-  const activeBtn = btn || (typeof event !== 'undefined' && event.target);
-  if (activeBtn) activeBtn.classList.add('active');
-}
-
 function emptyState(icon, text) {
   return `<div class="empty-section"><div class="icon">${icon}</div><p>${text}</p></div>`;
-}
-
-function renderOverview(article) {
-  const meta = article.meta || {};
-  const rows = [];
-  if (meta.phaak) rows.push(['บรรพ/ภาค', meta.phaak + (meta.phaakTitle ? ' ' + meta.phaakTitle : '')]);
-  if (meta.laksana) rows.push(['ลักษณะ', meta.laksana + (meta.laksanaTitle ? ' ' + meta.laksanaTitle : '')]);
-  if (meta.muad) rows.push(['หมวด', meta.muad + (meta.muadTitle ? ' ' + meta.muadTitle : '')]);
-  if (meta.suan) rows.push(['ส่วนที่', meta.suan + (meta.suanTitle ? ' ' + meta.suanTitle : '')]);
-  document.getElementById('overview-meta').innerHTML = rows.length
-    ? rows.map(([label, val]) => `
-        <div>
-          <div style="font-size:11px;color:var(--ink-faint);text-transform:uppercase;margin-bottom:6px;">${label}</div>
-          <div style="font-weight:600;color:var(--ink);">${val}</div>
-        </div>`).join('')
-    : emptyState('📖', 'มาตรานี้อยู่ในบทบัญญัติทั่วไปก่อนเข้าบรรพ/ภาคใด ๆ');
-
-  document.getElementById('overview-keywords').innerHTML = (article.keywords && article.keywords.length)
-    ? `<div style="font-size:13px;color:var(--ink-soft);"><strong>คำสำคัญ:</strong> ${article.keywords.join(', ')}</div>`
-    : '';
 }
 
 function renderLectureNotes(article) {
   const el = document.getElementById('lecture-container');
   if (!article.lectureNotes || article.lectureNotes.length === 0) {
-    el.innerHTML = emptyState('🎓', 'ยังไม่มีสรุปคำบรรยายสำหรับมาตรานี้ (อยู่ระหว่างรวบรวมข้อมูล)');
+    el.innerHTML = `
+      <div style="background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px;">
+        <h3 style="margin-bottom: 16px;">🎓 อธิบายมาตรา</h3>
+        ${emptyState('🎓', 'ยังไม่มีคำอธิบายสำหรับมาตรานี้ (อยู่ระหว่างรวบรวมข้อมูล)')}
+      </div>`;
     return;
   }
-  el.innerHTML = article.lectureNotes.map(n => `
-    <div class="case-item">
-      <div class="case-number">🎓 ${escapeHtml(n.topic || '')}</div>
-      <div class="case-summary" style="white-space:pre-line">${escapeHtml(n.text || '')}</div>
-      <div style="margin-top:10px;font-size:12px;color:var(--ink-faint);border-top:1px dashed var(--line);padding-top:8px;">
-        ℹ️ ${escapeHtml(n.source || 'สรุปโดย AI จากคำบรรยาย — โปรดตรวจสอบความถูกต้องก่อนใช้อ้างอิง')}
-      </div>
-    </div>`).join('');
-}
-
-function renderCaseLaw(article) {
-  const el = document.getElementById('caselaw-container');
-  if (!article.caseLaw || article.caseLaw.length === 0) {
-    el.innerHTML = emptyState('⚖️', 'ยังไม่มีฎีกาที่เกี่ยวข้องกับมาตรานี้ (อยู่ระหว่างรวบรวมข้อมูล)');
-    return;
-  }
-  el.innerHTML = article.caseLaw.map(c => `
-    <div class="case-item">
-      <div class="case-number">⚖️ ${c.caseNumber || ''}</div>
-      <div class="case-title">${c.title || ''}</div>
-      <div class="case-summary">${c.summary || ''}</div>
-    </div>`).join('');
-}
-
-function renderExamples(article) {
-  const el = document.getElementById('examples-container');
-  if (!article.examples || article.examples.length === 0) {
-    el.innerHTML = emptyState('📝', 'ยังไม่มีตัวอย่างการใช้มาตรานี้ (อยู่ระหว่างรวบรวมข้อมูล)');
-    return;
-  }
-  el.innerHTML = article.examples.map(ex => `
-    <div class="example-item">
-      <div class="example-title">📝 ${ex.title || ''}</div>
-      <div class="example-scenario"><strong>สถานการณ์:</strong> ${ex.scenario || ''}</div>
-      <div class="example-explanation"><strong>การประยุกต์:</strong> ${ex.explanation || ''}</div>
-    </div>`).join('');
+  el.innerHTML = `
+    <div style="background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px;">
+      <h3 style="margin-bottom: 16px;">🎓 อธิบายมาตรา</h3>
+      ${article.lectureNotes.map(n => `
+        <div class="case-item">
+          <div class="case-number">🎓 ${escapeHtml(n.topic || '')}</div>
+          <div class="case-summary" style="white-space:pre-line">${escapeHtml(n.text || '')}</div>
+          <div style="margin-top:10px;font-size:12px;color:var(--ink-faint);border-top:1px dashed var(--line);padding-top:8px;">
+            ℹ️ ${escapeHtml(n.source || 'สรุปโดย AI จากคำบรรยาย — โปรดตรวจสอบความถูกต้องก่อนใช้อ้างอิง')}
+          </div>
+        </div>`).join('')}
+    </div>`;
 }
 
 const SUFFIX_RANK = { '': 0, 'ทวิ': 1, 'ตรี': 2, 'จัตวา': 3, 'เบญจ': 4, 'ฉ': 5, 'สัตต': 6, 'อัฏฐ': 7, 'นว': 8, 'ทศ': 9 };
@@ -1068,35 +1071,6 @@ function compareNumbers(a, b) {
   return 0;
 }
 
-function pathKey(meta, depth) {
-  const parts = [meta.phaak, meta.laksana, meta.muad, meta.suan].slice(0, depth);
-  if (parts.some(p => !p)) return null;
-  return parts.join(' / ');
-}
-
-function renderRelated(article, articles) {
-  const el = document.getElementById('related-list');
-  const meta = article.meta || {};
-  // prefer the most specific full path available (phaak/laksana/muad), fall back to phaak/laksana
-  const bucket = pathKey(meta, 3) || pathKey(meta, 2);
-  if (!bucket) {
-    el.innerHTML = emptyState('🔗', 'มาตรานี้ยังไม่มีหมวดหมู่ให้จับคู่มาตราที่เกี่ยวข้อง');
-    return;
-  }
-  const depth = pathKey(meta, 3) ? 3 : 2;
-  const sameSection = Object.values(articles)
-    .filter(a => pathKey(a.meta || {}, depth) === bucket)
-    .sort((a, b) => compareNumbers(a.number, b.number));
-  const selfIdx = sameSection.findIndex(a => a.number === article.number);
-  const windowStart = Math.max(0, selfIdx - 6);
-  const related = sameSection
-    .slice(windowStart, windowStart + 13)
-    .filter(a => a.number !== article.number);
-
-  el.innerHTML = related.length
-    ? related.map(a => `<a href="codex-article-viewer.html?id=${currentBookType}_${encodeURIComponent(a.number)}" class="related-link">${a.number}</a>`).join('')
-    : emptyState('🔗', 'ไม่พบมาตราอื่นในหมวดเดียวกัน');
-}
 
 function renderNav(articles) {
   const numbers = Object.keys(articles).sort(compareNumbers);
@@ -1113,6 +1087,29 @@ function renderNav(articles) {
       <span class="nav-label">มาตราถัดไป →</span><span class="nav-title">มาตรา ${next}</span>
     </a>` : '<div></div>'}
   `;
+
+  // Mirror prev/next into the header speech-bubble quick-action buttons.
+  const prevBtn = document.getElementById('nav-prev-btn');
+  const nextBtn = document.getElementById('nav-next-btn');
+  if (prevBtn) {
+    if (prev) { prevBtn.href = `codex-article-viewer.html?id=${currentBookType}_${encodeURIComponent(prev)}`; prevBtn.removeAttribute('disabled'); }
+    else { prevBtn.href = '#'; prevBtn.setAttribute('disabled', ''); }
+  }
+  if (nextBtn) {
+    if (next) { nextBtn.href = `codex-article-viewer.html?id=${currentBookType}_${encodeURIComponent(next)}`; nextBtn.removeAttribute('disabled'); }
+    else { nextBtn.href = '#'; nextBtn.setAttribute('disabled', ''); }
+  }
+}
+
+// Lightweight play/stop toggle for the header's "🔊 อ่าน" bubble button —
+// proxies the existing thaiTTS instance (configured in loadAndRender)
+// rather than duplicating speech-synthesis logic.
+function toggleHeaderRead(btn) {
+  if (typeof thaiTTS === 'undefined') return;
+  thaiTTS.toggleSpeak();
+  setTimeout(() => {
+    btn.textContent = window.speechSynthesis.speaking ? '⏸️ หยุด' : '🔊 อ่าน';
+  }, 60);
 }
 
 function showNotFound(msg) {
@@ -1280,7 +1277,10 @@ async function loadAndRender() {
   const article = book && book.articles[currentNumber];
   if (!article) { showNotFound(`ไม่พบมาตรา ${currentNumber}`); return; }
 
-  document.getElementById('breadcrumb').textContent = `📍 ${BOOK_TITLES[currentBookType] || currentBookType}`;
+  const crumbParts = [BOOK_TITLES[currentBookType] || currentBookType];
+  const m = article.meta || {};
+  [m.phaak, m.laksana, m.muad, m.suan].forEach(part => { if (part) crumbParts.push(part); });
+  document.getElementById('breadcrumb').textContent = `📍 ${crumbParts.join(' › ')}`;
   document.getElementById('article-number').textContent = article.number;
   document.getElementById('article-cancelled-badge').innerHTML = article.cancelled
     ? '<span style="color:var(--bad);font-size:13px;font-weight:700;border:1px solid var(--bad);border-radius:4px;padding:2px 8px;">ยกเลิกแล้ว</span>'
@@ -1288,11 +1288,7 @@ async function loadAndRender() {
   document.getElementById('article-subtitle').textContent = BOOK_TITLES[currentBookType] || '';
   renderArticleBody(article);
 
-  renderOverview(article);
   renderLectureNotes(article);
-  renderCaseLaw(article);
-  renderExamples(article);
-  renderRelated(article, book.articles);
   renderNav(book.articles);
   bindNoteInput(article);
   renderChapterAudioIdle(article, book.articles);
