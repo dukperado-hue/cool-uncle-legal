@@ -664,6 +664,21 @@ function linkifyMatraRefs(escapedText, bookType, currentNumber) {
   });
 }
 
+function lectureNotesHtml(article) {
+  if (!article.lectureNotes || !article.lectureNotes.length) return '';
+  const notes = article.lectureNotes.map(n => `
+      <div style="margin-bottom:10px;">
+        <div style="font-weight:700;color:var(--accent);font-size:13.5px;margin-bottom:4px;">🎓 ${escapeHtml(n.topic || '')}</div>
+        <div style="font-size:13.5px;color:var(--ink);white-space:pre-line;line-height:1.7;">${escapeHtml(n.text || '')}</div>
+      </div>`).join('');
+  const source = article.lectureNotes[0].source || '';
+  return `
+    <div class="lecture-notes" style="margin:14px 0;padding:14px;background:rgba(46,74,122,.05);border:1px solid var(--line);border-radius:10px;">
+      ${notes}
+      <div style="font-size:11.5px;color:var(--ink-faint);border-top:1px dashed var(--line);padding-top:8px;margin-top:4px;">ℹ️ ${escapeHtml(source)}</div>
+    </div>`;
+}
+
 function renderArticleTextHtml(text, bookType, currentNumber) {
   const chunks = text.split('\n').filter(p => p.trim());
   if (chunks.length <= 1) return linkifyMatraRefs(escapeHtml(text), bookType, currentNumber);
@@ -808,6 +823,8 @@ function displayResults(results) {
       </div>
 
       <div class="article-text">${renderArticleTextHtml(article.text, article.bookType, article.number)}</div>
+
+      ${lectureNotesHtml(article)}
 
       <div class="article-note">
         <textarea class="note-input" data-note-key="codex-note-${article.id}" placeholder="📝 บันทึกส่วนตัวของคุณเกี่ยวกับมาตรานี้..."></textarea>
