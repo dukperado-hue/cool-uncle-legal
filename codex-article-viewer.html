@@ -25,6 +25,98 @@
   --shadow: 0 1px 2px rgba(34,40,58,.05), 0 6px 20px rgba(34,40,58,.07);
 }
 
+/* ============ THEME: DARK ============ */
+:root[data-theme="dark"]{
+  --paper:#14161f;
+  --card:#1c2030;
+  --ink:#E9E7E1;
+  --ink-soft:#A9AEC2;
+  --ink-faint:#6C7188;
+  --line:#2E3348;
+  --gold:#E0BD73;
+  --accent:#84A6E8;
+  --ok:#4FCB8D;
+  --bad:#E2685F;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.45);
+}
+
+/* ============ THEME: HORROR (กระสือ mode) ============ */
+:root[data-theme="horror"]{
+  --paper:#0A070C;
+  --card:#151019;
+  --ink:#D9D2C9;
+  --ink-soft:#9C8F93;
+  --ink-faint:#5C5460;
+  --line:#2B1F26;
+  --gold:#8F1F2B;
+  --accent:#4A8F5C;
+  --ok:#3F7A4F;
+  --bad:#FF3355;
+  --shadow:0 1px 2px rgba(0,0,0,.6),0 10px 28px rgba(0,0,0,.6);
+}
+
+/* Surfaces that used hardcoded near-white hex instead of a CSS var —
+   normalize them under dark/horror with a subtle translucent overlay. */
+:root[data-theme="dark"] .topbar,
+:root[data-theme="horror"] .topbar{ background:var(--card); border-bottom-color:var(--line); }
+:root[data-theme="dark"] body{
+  background:radial-gradient(1200px 500px at 50% -200px,#232840 0%,transparent 60%),var(--paper);
+}
+:root[data-theme="horror"] body{
+  background:radial-gradient(1200px 500px at 50% -220px,rgba(90,20,30,.35) 0%,transparent 60%),var(--paper);
+}
+:root[data-theme="dark"] .breadcrumb,
+:root[data-theme="dark"] .article-body,
+:root[data-theme="dark"] .icon-btn,
+:root[data-theme="dark"] .note-input,
+:root[data-theme="dark"] .case-summary,
+:root[data-theme="dark"] .example-scenario,
+:root[data-theme="dark"] .related-link,
+:root[data-theme="dark"] .chapter-audio-active,
+:root[data-theme="horror"] .breadcrumb,
+:root[data-theme="horror"] .article-body,
+:root[data-theme="horror"] .icon-btn,
+:root[data-theme="horror"] .note-input,
+:root[data-theme="horror"] .case-summary,
+:root[data-theme="horror"] .example-scenario,
+:root[data-theme="horror"] .related-link,
+:root[data-theme="horror"] .chapter-audio-active{
+  background:rgba(255,255,255,.04);
+}
+:root[data-theme="dark"] .note-input:focus,
+:root[data-theme="horror"] .note-input:focus{background:rgba(255,255,255,.07)}
+:root[data-theme="dark"] .nav-btn:hover,
+:root[data-theme="horror"] .nav-btn:hover{background:rgba(255,255,255,.04)}
+:root[data-theme="dark"] .related-link:hover,
+:root[data-theme="horror"] .related-link:hover{background:var(--accent);color:var(--paper)}
+
+/* THEME TOGGLE */
+.theme-toggle{
+  display:flex;gap:3px;margin-left:auto;background:var(--card);
+  border:1px solid var(--line);border-radius:999px;padding:3px;
+}
+.theme-toggle button{
+  border:none;background:transparent;border-radius:999px;width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  font-size:14px;transition:all .2s;font-family:inherit;
+}
+.theme-toggle button.active{background:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.theme-toggle button:hover{background:var(--line)}
+
+/* กระสือ COMPANION (horror mode only) */
+.krasue-companion{
+  position:fixed;right:16px;bottom:16px;width:100px;height:auto;
+  pointer-events:none;opacity:0;transform:translateY(8px);
+  transition:opacity .5s ease,transform .5s ease;z-index:999;
+  filter:drop-shadow(0 0 16px rgba(180,20,40,.45));
+  animation:krasue-float 3.4s ease-in-out infinite;
+}
+.krasue-companion.visible{opacity:1;transform:translateY(0)}
+@keyframes krasue-float{
+  0%,100%{transform:translateY(0) rotate(-1.5deg)}
+  50%{transform:translateY(-10px) rotate(1.5deg)}
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { -webkit-text-size-adjust: 100%; }
 body {
@@ -138,6 +230,110 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
 .warak-text {
   white-space: pre-line;
 }
+
+.matra-ref-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+  font-weight: 600;
+}
+.matra-ref-link:hover { color: var(--gold); }
+
+/* HEADER TOP ACTIONS (print) */
+.article-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.icon-btn {
+  background: #F5F3F0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--ink);
+  transition: all .2s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+.icon-btn:hover { background: var(--card); border-color: var(--gold); }
+
+/* PERSONAL NOTE */
+.article-note { margin-top: 20px; }
+.note-input {
+  width: 100%;
+  min-height: 70px;
+  resize: vertical;
+  border: 1px dashed var(--ink-faint);
+  border-radius: 8px;
+  background: #FBFAF6;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 10px 12px;
+  line-height: 1.6;
+}
+.note-input::placeholder { color: var(--ink-faint); }
+.note-input:focus { outline: none; border-color: var(--gold); background: #fff; }
+
+#print-area { display: none; }
+@media print {
+  body.printing-one > *:not(#print-area) { display: none !important; }
+  body.printing-one #print-area { display: block !important; padding: 24px; }
+}
+
+/* CHAPTER READ-ALOUD */
+.chapter-audio-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .2s;
+}
+.chapter-audio-btn:hover { background: #1d3a5a; }
+
+.chapter-audio-active {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #F2F6FC;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+}
+
+.chapter-now-reading {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.chapter-audio-active button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.chapter-audio-active button:hover { background: #1d3a5a; }
 
 /* AUDIO CONTROLS */
 .audio-control {
@@ -403,11 +599,26 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
 </style>
 </head>
 <body>
+<script>
+// Apply the persisted theme as early as possible to avoid a flash of the
+// wrong theme (light/dark/horror shared across codex pages via localStorage).
+(function(){
+  try {
+    var t = localStorage.getItem('codex-theme');
+    if (t === 'dark' || t === 'horror') document.documentElement.setAttribute('data-theme', t);
+  } catch(e){}
+})();
+</script>
 
 <div class="topbar">
   <span style="font-weight:800; color:var(--ink);">📚 Cool Uncle</span>
   <span style="color:var(--ink-faint)">·</span>
   <span>ประมวลกฎหมาย</span>
+  <div class="theme-toggle" role="group" aria-label="เลือกธีม">
+    <button type="button" data-theme-btn="light" onclick="setTheme('light')" onmouseenter="playHoverSound()" title="โหมดสว่าง">☀️</button>
+    <button type="button" data-theme-btn="dark" onclick="setTheme('dark')" onmouseenter="playHoverSound()" title="โหมดมืด">🌙</button>
+    <button type="button" data-theme-btn="horror" onclick="setTheme('horror')" onmouseenter="playHoverSound()" title="โหมดสยองขวัญ">👻</button>
+  </div>
 </div>
 
 <div class="wrap">
@@ -420,17 +631,30 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
   </div>
 
   <!-- ARTICLE HEADER -->
-  <article class="article-header">
-    <div class="article-number" id="article-number">-</div>
-    <div id="article-cancelled-badge"></div>
+  <article class="article-header" id="article-card">
+    <div class="article-header-top">
+      <div>
+        <div class="article-number" id="article-number">-</div>
+        <div id="article-cancelled-badge"></div>
+      </div>
+      <button type="button" class="icon-btn" title="พิมพ์มาตรานี้" onclick="printCurrentArticle()" onmouseenter="playHoverSound()">🖨️ พิมพ์</button>
+    </div>
     <div class="article-subtitle" id="article-subtitle"></div>
 
     <!-- AUDIO CONTROLS -->
     <div id="audio-controls"></div>
 
+    <!-- READ WHOLE หมวด -->
+    <div id="chapter-audio"></div>
+
     <!-- ARTICLE TEXT -->
     <div class="article-body" id="article-text">
       กำลังโหลดข้อมูลมาตรา...
+    </div>
+
+    <!-- PERSONAL NOTE -->
+    <div class="article-note">
+      <textarea class="note-input" id="article-note-input" placeholder="📝 บันทึกส่วนตัวของคุณเกี่ยวกับมาตรานี้..."></textarea>
     </div>
   </article>
 
@@ -476,11 +700,100 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
 
 </div>
 
+<div id="print-area"></div>
+
 <script>
 /* ================================================================
    ARTICLE VIEWER - LIVE VERSION
    Loads codex-data.json, reads ?id=civil_276 from the URL
    ================================================================ */
+
+/* ================================================================
+   HOVER SOUND (Web Audio API blip) — same implementation as index.html
+   and the rest of the site, for consistency.
+   ================================================================ */
+let __hbAudioCtx;
+function playHoverSound(){
+  try{
+    __hbAudioCtx = __hbAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __hbAudioCtx;
+    if(c.state === 'suspended') c.resume();
+    const t0 = c.currentTime;
+    const osc = c.createOscillator(), gain = c.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(0.05, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+0.09);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+0.1);
+  }catch(e){}
+}
+
+/* ================================================================
+   THEME SYSTEM (light / dark / horror) — shared via localStorage
+   key "codex-theme" with codex-search.html.
+   ================================================================ */
+const THEME_KEY = 'codex-theme';
+
+function setTheme(theme){
+  if (theme === 'light') {
+    document.documentElement.removeAttribute('data-theme');
+  } else {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
+  try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
+  updateThemeToggleUI(theme);
+  if (theme !== 'horror') hideKrasue(true);
+}
+
+function updateThemeToggleUI(theme){
+  document.querySelectorAll('.theme-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.themeBtn === theme);
+  });
+}
+
+/* ================================================================
+   กระสือ (Krasue) COMPANION — horror mode only, appears while typing
+   in the personal note textarea.
+   ================================================================ */
+let krasueEl = null;
+let krasueTimer = null;
+
+function ensureKrasueEl(){
+  if (krasueEl) return krasueEl;
+  const img = document.createElement('img');
+  img.src = 'pics/krasue-companion.png';
+  img.alt = '';
+  img.setAttribute('aria-hidden', 'true');
+  img.className = 'krasue-companion';
+  document.body.appendChild(img);
+  krasueEl = img;
+  return img;
+}
+
+function showKrasue(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureKrasueEl();
+  el.classList.add('visible');
+  clearTimeout(krasueTimer);
+  krasueTimer = setTimeout(() => { el.classList.remove('visible'); }, 1800);
+}
+
+function hideKrasue(){
+  clearTimeout(krasueTimer);
+  if (krasueEl) krasueEl.classList.remove('visible');
+}
+
+// Delegated listener catches the note textarea (and any future typed
+// input) without needing to rebind after each article load.
+document.addEventListener('input', (e) => {
+  const t = e.target;
+  if (!t) return;
+  if (t.classList && t.classList.contains('note-input')) {
+    showKrasue();
+  }
+});
 
 const BOOK_TITLES = {
   civil: 'ประมวลกฎหมายแพ่งและพาณิชย์',
@@ -488,6 +801,9 @@ const BOOK_TITLES = {
   civpro: 'ประมวลกฎหมายวิธีพิจารณาความแพ่ง',
   crimpro: 'ประมวลกฎหมายวิธีพิจารณาความอาญา',
   constitution: 'พระธรรมนูญศาลยุติธรรม',
+  adminproc: 'พระราชบัญญัติวิธีปฏิบัติราชการทางปกครอง',
+  admincourt: 'พระราชบัญญัติจัดตั้งศาลปกครองและวิธีพิจารณาคดีปกครอง',
+  const2560: 'รัฐธรรมนูญแห่งราชอาณาจักรไทย พุทธศักราช 2560',
 };
 
 let codexData = null;
@@ -510,18 +826,68 @@ function escapeHtml(s) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
+const THAI_DIGIT_CHARS = '๐๑๒๓๔๕๖๗๘๙';
+function thaiNumToArabic(s) {
+  return s.replace(/[๐-๙]/g, d => String(THAI_DIGIT_CHARS.indexOf(d)));
+}
+
+// --- มาตรา cross-reference auto-linking -------------------------------
+// Matches "มาตรา <number>[/sub][ suffix]" e.g. "มาตรา ๒๘", "มาตรา 193/1",
+// "มาตรา ๔ ทวิ". Runs on already-escaped text; the matched substring only
+// ever contains the literal word "มาตรา", whitespace, Thai/Arabic digits
+// and a small fixed set of Thai suffix words, so it can never introduce
+// HTML/attribute-breaking characters.
+const MATRA_SUFFIXES = 'ทวิ|ตรี|จัตวา|เบญจ|ฉ|สัตต|อัฏฐ|นว|ทศ';
+const MATRA_REF_RE = new RegExp(
+  'มาตรา\\s*([0-9๐-๙]+(?:\\s*\\/\\s*[0-9๐-๙]+)?)(?:\\s+(' + MATRA_SUFFIXES + ')(?![ก-ฮ]))?',
+  'g'
+);
+
+function normalizeMatraNumber(rawNum, rawSuffix) {
+  const n = thaiNumToArabic(rawNum).replace(/\s+/g, '');
+  return rawSuffix ? (n + ' ' + rawSuffix) : n;
+}
+
+// escapedText must already be HTML-escaped via escapeHtml(). Only wraps
+// a match in <a> when it resolves to a real article in the same book,
+// and never links the article's own current number (avoids self-links).
+function linkifyMatraRefs(escapedText, bookType, currentNumber) {
+  if (!bookType || !codexData || !codexData.books[bookType]) return escapedText;
+  const articles = codexData.books[bookType].articles;
+  return escapedText.replace(MATRA_REF_RE, (full, rawNum, rawSuffix) => {
+    const candidate = normalizeMatraNumber(rawNum, rawSuffix);
+    if (!candidate || candidate === currentNumber) return full;
+    if (Object.prototype.hasOwnProperty.call(articles, candidate)) {
+      const href = `codex-article-viewer.html?id=${bookType}_${encodeURIComponent(candidate)}`;
+      return `<a href="${href}" class="matra-ref-link">${full}</a>`;
+    }
+    return full;
+  });
+}
+
 function renderArticleBody(article) {
   const el = document.getElementById('article-text');
-  const paragraphs = article.text.split('\n').filter(p => p.trim());
-  if (paragraphs.length <= 1) {
-    el.textContent = article.text;
+  const chunks = article.text.split('\n').filter(p => p.trim());
+  if (chunks.length <= 1) {
+    el.innerHTML = linkifyMatraRefs(escapeHtml(article.text), currentBookType, article.number);
     return;
   }
-  el.innerHTML = paragraphs.map((p, i) => `
+  let warakN = 0;
+  el.innerHTML = chunks.map(p => {
+    const anuMatch = p.match(/^\(([๐-๙0-9]+)\)/);
+    let label;
+    if (anuMatch) {
+      label = `อนุ ${thaiNumToArabic(anuMatch[1])}`;
+    } else {
+      warakN++;
+      label = `วรรค${thaiOrdinalWord(warakN)}`;
+    }
+    return `
     <div class="warak-row">
-      <div class="warak-label">วรรค${thaiOrdinalWord(i + 1)}</div>
-      <div class="warak-text">${escapeHtml(p)}</div>
-    </div>`).join('');
+      <div class="warak-label">${label}</div>
+      <div class="warak-text">${linkifyMatraRefs(escapeHtml(p), currentBookType, article.number)}</div>
+    </div>`;
+  }).join('');
 }
 
 function switchTab(tabName, btn) {
@@ -653,7 +1019,143 @@ function showNotFound(msg) {
   document.getElementById('article-text').textContent = msg || 'ไม่พบมาตรานี้ในฐานข้อมูล';
 }
 
+// --- personal note (per-article, localStorage) --------------------------
+
+function bindNoteInput(article) {
+  const el = document.getElementById('article-note-input');
+  if (!el) return;
+  const key = 'codex-note-' + article.id;
+  el.value = localStorage.getItem(key) || '';
+  const save = () => { try { localStorage.setItem(key, el.value); } catch (e) { /* storage unavailable/full */ } };
+  el.addEventListener('input', save);
+  el.addEventListener('blur', save);
+}
+
+// --- print just this article --------------------------------------------
+
+function printCurrentArticle() {
+  const card = document.getElementById('article-card');
+  const printArea = document.getElementById('print-area');
+  if (!card || !printArea) return;
+  const numberText = document.getElementById('article-number').textContent;
+  const subtitleText = document.getElementById('article-subtitle').textContent;
+  const bodyHtml = document.getElementById('article-text').innerHTML;
+  printArea.innerHTML = `
+    <h2 style="font-family:'Noto Serif Thai',serif;margin-bottom:6px;">มาตรา ${numberText}</h2>
+    <div style="font-size:13px;color:var(--ink-soft);margin-bottom:14px;">${subtitleText}</div>
+    <div class="article-body" style="border:none;padding:0;background:none;">${bodyHtml}</div>
+  `;
+  document.body.classList.add('printing-one');
+  window.print();
+}
+
+window.addEventListener('afterprint', () => {
+  document.body.classList.remove('printing-one');
+  const printArea = document.getElementById('print-area');
+  if (printArea) printArea.innerHTML = '';
+});
+
+// --- "อ่านทั้งหมวด" continuous chapter playback --------------------------
+
+let chapterQueue = [];
+let chapterQueueIdx = -1;
+let chapterPaused = false;
+
+function getChapterArticles(article, articles) {
+  const meta = article.meta || {};
+  if (!meta.muad) return [];
+  return Object.values(articles)
+    .filter(a => (a.meta || {}).muad === meta.muad)
+    .sort((a, b) => compareNumbers(a.number, b.number));
+}
+
+function renderChapterAudioIdle(article, articles) {
+  const el = document.getElementById('chapter-audio');
+  if (!el) return;
+  if (!('speechSynthesis' in window) || getChapterArticles(article, articles).length < 2) {
+    el.innerHTML = '';
+    return;
+  }
+  el.innerHTML = `<button type="button" class="chapter-audio-btn" onclick="startReadChapter()" onmouseenter="playHoverSound()">🔊 อ่านทั้งหมวด</button>`;
+}
+
+function renderChapterAudioActive() {
+  const el = document.getElementById('chapter-audio');
+  if (!el) return;
+  el.innerHTML = `
+    <div class="chapter-audio-active">
+      <span class="chapter-now-reading" id="chapter-now-reading"></span>
+      <button type="button" id="chapter-pause-btn" onclick="togglePauseResumeChapter()" onmouseenter="playHoverSound()">⏸️ หยุดชั่วคราว</button>
+      <button type="button" onclick="stopReadChapter()" onmouseenter="playHoverSound()">⏹️ หยุดอ่าน</button>
+    </div>`;
+}
+
+function startReadChapter() {
+  if (!('speechSynthesis' in window)) {
+    alert('เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง');
+    return;
+  }
+  const book = codexData.books[currentBookType];
+  const article = book.articles[currentNumber];
+  chapterQueue = getChapterArticles(article, book.articles);
+  if (!chapterQueue.length) {
+    alert('ไม่พบมาตราอื่นในหมวดเดียวกันนี้');
+    return;
+  }
+  window.speechSynthesis.cancel();
+  chapterPaused = false;
+  const startIdx = chapterQueue.findIndex(a => a.number === currentNumber);
+  renderChapterAudioActive();
+  speakChapterFrom(startIdx >= 0 ? startIdx : 0);
+}
+
+function speakChapterFrom(idx) {
+  if (idx < 0 || idx >= chapterQueue.length) {
+    stopReadChapter();
+    return;
+  }
+  chapterQueueIdx = idx;
+  const art = chapterQueue[idx];
+  const statusEl = document.getElementById('chapter-now-reading');
+  if (statusEl) statusEl.textContent = `🔊 กำลังอ่าน: มาตรา ${art.number}`;
+
+  const utter = new SpeechSynthesisUtterance(`มาตรา ${art.number}. ${art.text}`);
+  utter.lang = 'th-TH';
+  utter.onend = () => {
+    if (!chapterPaused) speakChapterFrom(chapterQueueIdx + 1);
+  };
+  utter.onerror = () => {
+    if (!chapterPaused) speakChapterFrom(chapterQueueIdx + 1);
+  };
+  window.speechSynthesis.speak(utter);
+}
+
+function togglePauseResumeChapter() {
+  const btn = document.getElementById('chapter-pause-btn');
+  if (chapterPaused) {
+    window.speechSynthesis.resume();
+    chapterPaused = false;
+    if (btn) btn.textContent = '⏸️ หยุดชั่วคราว';
+  } else {
+    window.speechSynthesis.pause();
+    chapterPaused = true;
+    if (btn) btn.textContent = '▶️ อ่านต่อ';
+  }
+}
+
+function stopReadChapter() {
+  window.speechSynthesis.cancel();
+  chapterQueue = [];
+  chapterQueueIdx = -1;
+  chapterPaused = false;
+  const book = codexData && codexData.books[currentBookType];
+  const article = book && book.articles[currentNumber];
+  if (article) renderChapterAudioIdle(article, book.articles);
+}
+
 async function loadAndRender() {
+  updateThemeToggleUI(document.documentElement.getAttribute('data-theme') || 'light');
+
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   if (!id || !id.includes('_')) { showNotFound('ไม่ได้ระบุมาตราที่ต้องการดู'); return; }
@@ -687,6 +1189,8 @@ async function loadAndRender() {
   renderExamples(article);
   renderRelated(article, book.articles);
   renderNav(book.articles);
+  bindNoteInput(article);
+  renderChapterAudioIdle(article, book.articles);
 
   if ('speechSynthesis' in window) {
     thaiTTS.createAudioControl('audio-controls', ['article-text']);

@@ -24,6 +24,90 @@
   --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
 }
 
+/* ============ THEME: DARK ============ */
+:root[data-theme="dark"]{
+  --paper:#14161f;
+  --card:#1c2030;
+  --ink:#E9E7E1;
+  --ink-soft:#A9AEC2;
+  --ink-faint:#6C7188;
+  --line:#2E3348;
+  --gold:#E0BD73;
+  --accent:#84A6E8;
+  --ok:#4FCB8D;
+  --bad:#E2685F;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.45);
+}
+
+/* ============ THEME: HORROR (กระสือ mode) ============ */
+:root[data-theme="horror"]{
+  --paper:#0A070C;
+  --card:#151019;
+  --ink:#D9D2C9;
+  --ink-soft:#9C8F93;
+  --ink-faint:#5C5460;
+  --line:#2B1F26;
+  --gold:#8F1F2B;
+  --accent:#4A8F5C;
+  --ok:#3F7A4F;
+  --bad:#FF3355;
+  --shadow:0 1px 2px rgba(0,0,0,.6),0 10px 28px rgba(0,0,0,.6);
+}
+
+/* Surfaces that used hardcoded near-white hex instead of a CSS var —
+   normalize them under dark/horror with a subtle translucent overlay
+   so they still read as "a shade off the card" without needing a
+   bespoke hex per element. */
+:root[data-theme="dark"] .topbar,
+:root[data-theme="horror"] .topbar{ background:var(--card); border-bottom-color:var(--line); }
+:root[data-theme="dark"] body{
+  background:radial-gradient(1200px 500px at 50% -200px,#232840 0%,transparent 60%),var(--paper);
+}
+:root[data-theme="horror"] body{
+  background:radial-gradient(1200px 500px at 50% -220px,rgba(90,20,30,.35) 0%,transparent 60%),var(--paper);
+}
+:root[data-theme="dark"] .book-btn,
+:root[data-theme="dark"] .btn-secondary,
+:root[data-theme="dark"] .icon-btn,
+:root[data-theme="horror"] .book-btn,
+:root[data-theme="horror"] .btn-secondary,
+:root[data-theme="horror"] .icon-btn{
+  background:rgba(255,255,255,.04);color:var(--ink-soft);
+}
+:root[data-theme="dark"] .btn-secondary:hover,
+:root[data-theme="horror"] .btn-secondary:hover{background:rgba(255,255,255,.08)}
+:root[data-theme="dark"] .note-input,
+:root[data-theme="horror"] .note-input{background:rgba(255,255,255,.03)}
+:root[data-theme="dark"] .note-input:focus,
+:root[data-theme="horror"] .note-input:focus{background:rgba(255,255,255,.06)}
+
+/* THEME TOGGLE */
+.theme-toggle{
+  display:flex;gap:3px;margin-left:auto;background:var(--card);
+  border:1px solid var(--line);border-radius:999px;padding:3px;
+}
+.theme-toggle button{
+  border:none;background:transparent;border-radius:999px;width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  font-size:14px;transition:all .2s;font-family:inherit;
+}
+.theme-toggle button.active{background:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.theme-toggle button:hover{background:var(--line)}
+
+/* กระสือ COMPANION (horror mode only) */
+.krasue-companion{
+  position:fixed;right:16px;bottom:16px;width:100px;height:auto;
+  pointer-events:none;opacity:0;transform:translateY(8px);
+  transition:opacity .5s ease,transform .5s ease;z-index:999;
+  filter:drop-shadow(0 0 16px rgba(180,20,40,.45));
+  animation:krasue-float 3.4s ease-in-out infinite;
+}
+.krasue-companion.visible{opacity:1;transform:translateY(0)}
+@keyframes krasue-float{
+  0%,100%{transform:translateY(0) rotate(-1.5deg)}
+  50%{transform:translateY(-10px) rotate(1.5deg)}
+}
+
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
 body{
@@ -141,13 +225,43 @@ button{
   padding:20px;
 }
 
-.article-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:10px}
+.article-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:10px;gap:12px}
 
 .article-number{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--accent)}
 
 .article-meta{font-size:11px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.05em;display:flex;gap:8px}
 
+.article-actions{display:flex;align-items:center;gap:6px;flex-shrink:0}
+
+.icon-btn{
+  background:#F5F3F0;border:1px solid var(--line);border-radius:6px;
+  padding:6px 10px;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink);
+  transition:all .2s;white-space:nowrap;
+}
+.icon-btn:hover{background:var(--card);border-color:var(--gold)}
+.icon-btn:disabled{opacity:.4;cursor:not-allowed}
+.icon-btn:disabled:hover{background:#F5F3F0;border-color:var(--line)}
+
 .article-text{font-size:15px;color:var(--ink);line-height:1.8;margin:14px 0}
+
+.matra-ref-link{color:var(--accent);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px;font-weight:600}
+.matra-ref-link:hover{color:var(--gold)}
+
+.article-note{margin:14px 0}
+.note-input{
+  width:100%;min-height:56px;resize:vertical;
+  border:1px dashed var(--ink-faint);border-radius:8px;
+  background:#FBFAF6;color:var(--ink);
+  font-family:inherit;font-size:13px;padding:10px 12px;line-height:1.6;
+}
+.note-input::placeholder{color:var(--ink-faint)}
+.note-input:focus{outline:none;border-color:var(--gold);background:#fff}
+
+#print-area{display:none}
+@media print{
+  body.printing-one > *:not(#print-area){display:none !important}
+  body.printing-one #print-area{display:block !important;padding:24px}
+}
 
 .warak-row{display:grid;grid-template-columns:78px 1fr;gap:12px;align-items:baseline}
 .warak-row + .warak-row{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
@@ -177,15 +291,31 @@ button{
   .filters-sidebar{position:static}
   .search-form{grid-template-columns:1fr}
   .book-selector{grid-template-columns:repeat(2,1fr)}
+  .article-header{flex-wrap:wrap}
 }
 </style>
 </head>
 <body>
+<script>
+// Apply the persisted theme as early as possible to avoid a flash of the
+// wrong theme (light/dark/horror shared across codex pages via localStorage).
+(function(){
+  try {
+    var t = localStorage.getItem('codex-theme');
+    if (t === 'dark' || t === 'horror') document.documentElement.setAttribute('data-theme', t);
+  } catch(e){}
+})();
+</script>
 
 <div class="topbar">
   <span class="topbar-brand">📚 Cool Uncle</span>
   <span style="color:var(--ink-faint)">·</span>
   <span>ประมวลกฎหมาย</span>
+  <div class="theme-toggle" role="group" aria-label="เลือกธีม">
+    <button type="button" data-theme-btn="light" onclick="setTheme('light')" onmouseenter="playHoverSound()" title="โหมดสว่าง">☀️</button>
+    <button type="button" data-theme-btn="dark" onclick="setTheme('dark')" onmouseenter="playHoverSound()" title="โหมดมืด">🌙</button>
+    <button type="button" data-theme-btn="horror" onclick="setTheme('horror')" onmouseenter="playHoverSound()" title="โหมดสยองขวัญ">👻</button>
+  </div>
 </div>
 
 <div class="wrap">
@@ -232,11 +362,100 @@ button{
 
 </div>
 
+<div id="print-area"></div>
+
 <script>
 // =====================================================================
 // CODEX SEARCH - LIVE VERSION
 // Loads from codex-data.json
 // =====================================================================
+
+/* ================================================================
+   HOVER SOUND (Web Audio API blip) — same implementation as index.html
+   and the rest of the site, for consistency.
+   ================================================================ */
+let __hbAudioCtx;
+function playHoverSound(){
+  try{
+    __hbAudioCtx = __hbAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __hbAudioCtx;
+    if(c.state === 'suspended') c.resume();
+    const t0 = c.currentTime;
+    const osc = c.createOscillator(), gain = c.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(0.05, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+0.09);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+0.1);
+  }catch(e){}
+}
+
+/* ================================================================
+   THEME SYSTEM (light / dark / horror) — shared via localStorage
+   key "codex-theme" with codex-article-viewer.html.
+   ================================================================ */
+const THEME_KEY = 'codex-theme';
+
+function setTheme(theme){
+  if (theme === 'light') {
+    document.documentElement.removeAttribute('data-theme');
+  } else {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
+  try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
+  updateThemeToggleUI(theme);
+  if (theme !== 'horror') hideKrasue(true);
+}
+
+function updateThemeToggleUI(theme){
+  document.querySelectorAll('.theme-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.themeBtn === theme);
+  });
+}
+
+/* ================================================================
+   กระสือ (Krasue) COMPANION — horror mode only, appears while typing
+   ================================================================ */
+let krasueEl = null;
+let krasueTimer = null;
+
+function ensureKrasueEl(){
+  if (krasueEl) return krasueEl;
+  const img = document.createElement('img');
+  img.src = 'pics/krasue-companion.png';
+  img.alt = '';
+  img.setAttribute('aria-hidden', 'true');
+  img.className = 'krasue-companion';
+  document.body.appendChild(img);
+  krasueEl = img;
+  return img;
+}
+
+function showKrasue(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureKrasueEl();
+  el.classList.add('visible');
+  clearTimeout(krasueTimer);
+  krasueTimer = setTimeout(() => { el.classList.remove('visible'); }, 1800);
+}
+
+function hideKrasue(immediate){
+  clearTimeout(krasueTimer);
+  if (krasueEl) krasueEl.classList.remove('visible');
+  if (immediate && krasueEl) { /* let the CSS transition still play a quick fade */ }
+}
+
+// Delegated listener catches search-text, search-article, and any
+// dynamically-rendered .note-input textareas without rebinding per card.
+document.addEventListener('input', (e) => {
+  const t = e.target;
+  if (!t) return;
+  if (t.id === 'search-text' || t.id === 'search-article' || (t.classList && t.classList.contains('note-input'))) {
+    showKrasue();
+  }
+});
 
 let codexData = null;
 let selectedBook = 'civil';
@@ -263,6 +482,9 @@ const BOOK_INFO = {
   civpro: { title: 'ประมวลกฎหมายวิธีพิจารณาความแพ่ง', short: 'ประมวลวิแพ่ง', icon: '⚖️' },
   crimpro: { title: 'ประมวลกฎหมายวิธีพิจารณาความอาญา', short: 'ประมวลวิอาญา', icon: '🔍' },
   constitution: { title: 'พระธรรมนูญศาลยุติธรรม', short: 'พระธรรมนูญศาลยุติธรรม', icon: '🏛️' },
+  adminproc: { title: 'พระราชบัญญัติวิธีปฏิบัติราชการทางปกครอง', short: 'วิ.ปฏิบัติราชการ', icon: '📝' },
+  admincourt: { title: 'พระราชบัญญัติจัดตั้งศาลปกครองและวิธีพิจารณาคดีปกครอง', short: 'ศาลปกครอง', icon: '🏢' },
+  const2560: { title: 'รัฐธรรมนูญแห่งราชอาณาจักรไทย พุทธศักราช 2560', short: 'รัฐธรรมนูญ 2560', icon: '📜' },
 };
 const MAX_RESULTS = 50;
 
@@ -281,21 +503,113 @@ function escapeHtml(s) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-function renderArticleTextHtml(text) {
-  const paragraphs = text.split('\n').filter(p => p.trim());
-  if (paragraphs.length <= 1) return escapeHtml(text);
-  return paragraphs.map((p, i) => `
+const THAI_DIGIT_CHARS = '๐๑๒๓๔๕๖๗๘๙';
+function thaiNumToArabic(s) {
+  return s.replace(/[๐-๙]/g, d => String(THAI_DIGIT_CHARS.indexOf(d)));
+}
+
+// --- article-number sort/adjacency (ported from codex-article-viewer.html
+// so prev/next navigation here uses the exact same ordering logic) --------
+const SUFFIX_RANK = { '': 0, 'ทวิ': 1, 'ตรี': 2, 'จัตวา': 3, 'เบญจ': 4, 'ฉ': 5, 'สัตต': 6, 'อัฏฐ': 7, 'นว': 8, 'ทศ': 9 };
+
+function sortKey(numStr) {
+  const spaceIdx = numStr.indexOf(' ');
+  const numPart = spaceIdx === -1 ? numStr : numStr.slice(0, spaceIdx);
+  const suffix = spaceIdx === -1 ? '' : numStr.slice(spaceIdx + 1);
+  const [main, sub] = numPart.split('/').map(Number);
+  return [main, sub || 0, SUFFIX_RANK[suffix] ?? 0];
+}
+
+function compareNumbers(a, b) {
+  const ka = sortKey(a), kb = sortKey(b);
+  for (let i = 0; i < 3; i++) if (ka[i] !== kb[i]) return ka[i] - kb[i];
+  return 0;
+}
+
+function getAdjacentArticleNumbers(bookType, number) {
+  const book = codexData && codexData.books[bookType];
+  if (!book) return { prev: null, next: null };
+  const numbers = Object.keys(book.articles).sort(compareNumbers);
+  const idx = numbers.indexOf(number);
+  if (idx === -1) return { prev: null, next: null };
+  return {
+    prev: idx > 0 ? numbers[idx - 1] : null,
+    next: idx < numbers.length - 1 ? numbers[idx + 1] : null,
+  };
+}
+
+// Re-runs the existing search flow scoped to one specific article number,
+// so prev/next paging stays inside the same results-list UI.
+function navigateArticle(bookType, currentNum, direction) {
+  const adj = getAdjacentArticleNumbers(bookType, currentNum);
+  const target = direction === 'prev' ? adj.prev : adj.next;
+  if (!target) return;
+  document.getElementById('search-text').value = '';
+  document.getElementById('search-article').value = target;
+  search();
+  document.getElementById('results-list').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// --- มาตรา cross-reference auto-linking -------------------------------
+// Matches "มาตรา <number>[/sub][ suffix]" e.g. "มาตรา ๒๘", "มาตรา 193/1",
+// "มาตรา ๔ ทวิ". Runs on already-escaped text; the matched substring only
+// ever contains the literal word "มาตรา", whitespace, Thai/Arabic digits
+// and a small fixed set of Thai suffix words, so it can never introduce
+// HTML/attribute-breaking characters.
+const MATRA_SUFFIXES = 'ทวิ|ตรี|จัตวา|เบญจ|ฉ|สัตต|อัฏฐ|นว|ทศ';
+const MATRA_REF_RE = new RegExp(
+  'มาตรา\\s*([0-9๐-๙]+(?:\\s*\\/\\s*[0-9๐-๙]+)?)(?:\\s+(' + MATRA_SUFFIXES + ')(?![ก-ฮ]))?',
+  'g'
+);
+
+function normalizeMatraNumber(rawNum, rawSuffix) {
+  const n = thaiNumToArabic(rawNum).replace(/\s+/g, '');
+  return rawSuffix ? (n + ' ' + rawSuffix) : n;
+}
+
+// escapedText must already be HTML-escaped via escapeHtml(). Only wraps
+// a match in <a> when it resolves to a real article in the same book,
+// and never links the article's own current number (avoids self-links).
+function linkifyMatraRefs(escapedText, bookType, currentNumber) {
+  if (!bookType || !codexData || !codexData.books[bookType]) return escapedText;
+  const articles = codexData.books[bookType].articles;
+  return escapedText.replace(MATRA_REF_RE, (full, rawNum, rawSuffix) => {
+    const candidate = normalizeMatraNumber(rawNum, rawSuffix);
+    if (!candidate || candidate === currentNumber) return full;
+    if (Object.prototype.hasOwnProperty.call(articles, candidate)) {
+      const href = `codex-article-viewer.html?id=${bookType}_${encodeURIComponent(candidate)}`;
+      return `<a href="${href}" class="matra-ref-link">${full}</a>`;
+    }
+    return full;
+  });
+}
+
+function renderArticleTextHtml(text, bookType, currentNumber) {
+  const chunks = text.split('\n').filter(p => p.trim());
+  if (chunks.length <= 1) return linkifyMatraRefs(escapeHtml(text), bookType, currentNumber);
+  let warakN = 0;
+  return chunks.map(p => {
+    const anuMatch = p.match(/^\(([๐-๙0-9]+)\)/);
+    let label;
+    if (anuMatch) {
+      label = `อนุ ${thaiNumToArabic(anuMatch[1])}`;
+    } else {
+      warakN++;
+      label = `วรรค${thaiOrdinalWord(warakN)}`;
+    }
+    return `
     <div class="warak-row">
-      <div class="warak-label">วรรค${thaiOrdinalWord(i + 1)}</div>
-      <div class="warak-text">${escapeHtml(p)}</div>
-    </div>`).join('');
+      <div class="warak-label">${label}</div>
+      <div class="warak-text">${linkifyMatraRefs(escapeHtml(p), bookType, currentNumber)}</div>
+    </div>`;
+  }).join('');
 }
 
 function applyBookLock(book) {
   selectedBook = book;
   const info = BOOK_INFO[book];
   if (!info) return;
-  document.querySelector('.search-header h1').textContent = `${info.icon} ค้นหา${info.short}`;
+  document.querySelector('.search-header h1').textContent = `${info.icon} ค้นหา${info.title}`;
   const count = codexData && codexData.books[book] ? Object.keys(codexData.books[book].articles).length : 0;
   document.querySelector('.search-header p').textContent = count
     ? `ค้นหาด้วยเลขมาตรา หรือคำสำคัญ (${count.toLocaleString()} มาตรา)`
@@ -369,14 +683,26 @@ function displayResults(results) {
     ? `พบ ${results.length} มาตรา (แสดง ${MAX_RESULTS} รายการแรก — ลองค้นหาให้เจาะจงขึ้น)`
     : `พบ ${results.length} มาตรา`;
 
-  resultsList.innerHTML = shown.map(article => `
-    <article class="article-card">
+  resultsList.innerHTML = shown.map(article => {
+    const adj = getAdjacentArticleNumbers(article.bookType, article.number);
+    return `
+    <article class="article-card" data-article-id="${article.id}">
       <div class="article-header">
         <div class="article-number">มาตรา ${article.number}</div>
-        ${article.cancelled ? '<span class="cancelled-badge">ยกเลิกแล้ว</span>' : ''}
+        <div class="article-actions">
+          ${article.cancelled ? '<span class="cancelled-badge">ยกเลิกแล้ว</span>' : ''}
+          <button type="button" class="icon-btn" title="มาตราก่อนหน้า" onclick="navigateArticle('${article.bookType}','${article.number}','prev')" onmouseenter="playHoverSound()" ${adj.prev ? '' : 'disabled'}>‹ ก่อนหน้า</button>
+          <button type="button" class="icon-btn" title="มาตราถัดไป" onclick="navigateArticle('${article.bookType}','${article.number}','next')" onmouseenter="playHoverSound()" ${adj.next ? '' : 'disabled'}>ถัดไป ›</button>
+          <button type="button" class="icon-btn btn-read" title="อ่านออกเสียงมาตรานี้" onclick="speakArticle(this)" onmouseenter="playHoverSound()">🔊 อ่าน</button>
+          <button type="button" class="icon-btn" title="พิมพ์เฉพาะมาตรานี้" onclick="printArticle(this)" onmouseenter="playHoverSound()">🖨️ พิมพ์</button>
+        </div>
       </div>
 
-      <div class="article-text">${renderArticleTextHtml(article.text)}</div>
+      <div class="article-text">${renderArticleTextHtml(article.text, article.bookType, article.number)}</div>
+
+      <div class="article-note">
+        <textarea class="note-input" data-note-key="codex-note-${article.id}" placeholder="📝 บันทึกส่วนตัวของคุณเกี่ยวกับมาตรานี้..."></textarea>
+      </div>
 
       <div class="article-breadcrumb">
         📍 ${BOOK_INFO[article.bookType].short}
@@ -384,8 +710,68 @@ function displayResults(results) {
           .filter(Boolean).map(v => ' › ' + v).join('')}
       </div>
     </article>
-  `).join('');
+  `;
+  }).join('');
+
+  resultsList.querySelectorAll('.note-input').forEach(bindNoteInput);
 }
+
+// --- per-article read / print / note controls --------------------------
+
+function bindNoteInput(el) {
+  const key = el.dataset.noteKey;
+  if (!key) return;
+  el.value = localStorage.getItem(key) || '';
+  const save = () => { try { localStorage.setItem(key, el.value); } catch (e) { /* storage unavailable/full */ } };
+  el.addEventListener('input', save);
+  el.addEventListener('blur', save);
+}
+
+function speakArticle(btn) {
+  if (!('speechSynthesis' in window)) {
+    alert('เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง');
+    return;
+  }
+  const wasThisSpeaking = btn.dataset.speaking === '1';
+  window.speechSynthesis.cancel();
+  document.querySelectorAll('.btn-read[data-speaking="1"]').forEach(b => {
+    b.dataset.speaking = '';
+    b.textContent = '🔊 อ่าน';
+  });
+  if (wasThisSpeaking) return; // this button was already reading -> treat click as stop
+
+  const card = btn.closest('.article-card');
+  const numberText = card.querySelector('.article-number').textContent;
+  const bodyText = card.querySelector('.article-text').innerText;
+  const utter = new SpeechSynthesisUtterance(`${numberText}. ${bodyText}`);
+  utter.lang = 'th-TH';
+  utter.onstart = () => { btn.dataset.speaking = '1'; btn.textContent = '⏸️ หยุด'; };
+  utter.onend = () => { btn.dataset.speaking = ''; btn.textContent = '🔊 อ่าน'; };
+  utter.onerror = () => { btn.dataset.speaking = ''; btn.textContent = '🔊 อ่าน'; };
+  window.speechSynthesis.speak(utter);
+}
+
+function printArticle(btn) {
+  const card = btn.closest('.article-card');
+  const printArea = document.getElementById('print-area');
+  if (!card || !printArea) return;
+  const numberText = card.querySelector('.article-number').textContent;
+  const bodyHtml = card.querySelector('.article-text').innerHTML;
+  const breadcrumbHtml = card.querySelector('.article-breadcrumb') ? card.querySelector('.article-breadcrumb').innerHTML : '';
+  printArea.innerHTML = `
+    <h2 style="font-family:'Noto Serif Thai',serif;margin-bottom:14px;">${numberText}</h2>
+    <div class="article-text">${bodyHtml}</div>
+    <div class="article-breadcrumb">${breadcrumbHtml}</div>
+  `;
+  document.body.classList.add('printing-one');
+  window.print();
+}
+
+window.addEventListener('afterprint', () => {
+  document.body.classList.remove('printing-one');
+  const printArea = document.getElementById('print-area');
+  if (printArea) printArea.innerHTML = '';
+});
 
 function clearSearch() {
   document.getElementById('search-text').value = '';
@@ -414,6 +800,8 @@ function showError(msg) {
 
 // Load data, then lock the page to whichever ?book= the homepage linked to
 document.addEventListener('DOMContentLoaded', async () => {
+  updateThemeToggleUI(document.documentElement.getAttribute('data-theme') || 'light');
+
   await loadCodexData();
 
   const params = new URLSearchParams(window.location.search);
