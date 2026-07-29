@@ -727,7 +727,7 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
   </div>
   <button type="button" id="drone-mute-btn" class="drone-mute-btn" onclick="toggleDroneMute(this)" title="ปิด/เปิดเสียงบรรยากาศ">🔊</button>
 </div>
-<audio id="horror-bgm" loop preload="none" style="display:none">
+<audio id="horror-bgm" loop preload="auto" playsinline webkit-playsinline style="display:none">
   <source src="music/The_Cold_Stream_Lament.mp3" type="audio/mpeg">
 </audio>
 
@@ -829,7 +829,7 @@ function setTheme(theme){
   }
   try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
   updateThemeToggleUI(theme);
-  if (theme === 'horror') { startGhostRotation(); playHooSound(); startAmbientDrone(); }
+  if (theme === 'horror') { playHorrorBgm(); startGhostRotation(); playHooSound(); startAmbientDrone(); }
   else { stopGhostRotation(); stopAmbientDrone(); }
 }
 
@@ -994,14 +994,15 @@ function startAmbientDrone(){
     __droneNodes = { master, nodes: [o1, o2, pad, padLfo], noiseTimer: null };
     scheduleNoiseSwell();
   } catch(e){}
-  playHorrorBgm();
 }
 
 function playHorrorBgm(){
   const bgm = document.getElementById('horror-bgm');
   if (!bgm) return;
+  bgm.muted = false;
   bgm.volume = __droneMuted ? 0 : 0.35;
-  bgm.play().catch(() => {});
+  const p = bgm.play();
+  if (p && p.catch) p.catch(() => { bgm.load(); bgm.play().catch(() => {}); });
 }
 
 function stopHorrorBgm(){

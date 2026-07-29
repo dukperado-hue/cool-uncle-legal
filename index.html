@@ -87,10 +87,23 @@
 :root[data-theme="horror"] .drone-mute-btn:hover{ background:var(--line); }
 
 /* GHOST COMPANION (horror mode — rotating cast of 4) */
-.ghost-companion{position:fixed;right:16px;bottom:16px;width:100px;height:auto;pointer-events:none;opacity:0;transform:translateY(8px);transition:opacity .6s ease;z-index:999;filter:drop-shadow(0 0 16px rgba(180,20,40,.45));animation:ghost-float 3.4s ease-in-out infinite}
+.ghost-companion{position:fixed;right:16px;bottom:16px;width:200px;height:auto;pointer-events:auto;cursor:pointer;opacity:0;transform:translateY(8px);transition:opacity .6s ease;z-index:999;filter:drop-shadow(0 0 16px rgba(180,20,40,.45));animation:ghost-float 3.4s ease-in-out infinite}
 .ghost-companion.visible{opacity:1}
 .ghost-companion.pulse{filter:drop-shadow(0 0 26px rgba(180,20,40,.8)) drop-shadow(0 0 10px rgba(255,255,255,.3))}
 @keyframes ghost-float{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
+.ghost-speech{
+  position:fixed;max-width:200px;background:#fff;color:#1a1a1a;
+  border-radius:14px;padding:8px 13px;font-size:13px;font-weight:700;
+  font-family:'Sarabun',system-ui,sans-serif;line-height:1.4;
+  box-shadow:0 8px 20px rgba(0,0,0,.4);z-index:1000;
+  opacity:0;pointer-events:none;transform:translateY(6px) scale(.96);
+  transition:opacity .2s ease,transform .2s ease;text-align:center;
+}
+.ghost-speech.visible{opacity:1;transform:translateY(0) scale(1)}
+.ghost-speech::after{
+  content:"";position:absolute;right:28px;bottom:-8px;width:0;height:0;
+  border:8px solid transparent;border-top-color:#fff;
+}
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
@@ -385,6 +398,7 @@ footer{
   .topbar{flex-wrap:wrap}
   .topbar-right{width:100%;justify-content:space-between;margin-left:0;margin-top:8px}
   .hero-mascot{display:none !important}
+  .ghost-companion{width:38vw;max-width:160px;right:10px;bottom:10px}
 }
 </style>
 </head>
@@ -418,7 +432,7 @@ footer{
     <button type="button" id="drone-mute-btn" class="drone-mute-btn" onclick="toggleDroneMute(this)" title="ปิด/เปิดเสียงเพลง">🔊</button>
   </span>
 </div>
-<audio id="horror-bgm" loop preload="none" style="display:none">
+<audio id="horror-bgm" loop preload="auto" playsinline webkit-playsinline style="display:none">
   <source src="music/The_Cold_Stream_Lament.mp3" type="audio/mpeg">
 </audio>
 
@@ -857,7 +871,7 @@ function setTheme(theme){
   else { document.documentElement.setAttribute('data-theme', theme); }
   try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
   updateThemeToggleUI(theme);
-  if (theme === 'horror') { startGhostRotation(); playHooSound(); playHorrorBgm(); }
+  if (theme === 'horror') { playHorrorBgm(); startGhostRotation(); playHooSound(); }
   else { stopGhostRotation(); stopHorrorBgm(); }
 }
 const DRONE_MUTE_KEY = 'codex-drone-muted';
@@ -866,8 +880,10 @@ function playHorrorBgm(){
   if (!bgm) return;
   let muted = false;
   try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  bgm.muted = false;
   bgm.volume = muted ? 0 : 0.35;
-  bgm.play().catch(() => {});
+  const p = bgm.play();
+  if (p && p.catch) p.catch(() => { bgm.load(); bgm.play().catch(() => {}); });
 }
 function stopHorrorBgm(){
   const bgm = document.getElementById('horror-bgm');
@@ -927,11 +943,47 @@ const GHOST_IMAGES = [
   'pics/Pixel/icon/ผีรวม 5_10.png','pics/Pixel/icon/ผีรวม 5_11.png','pics/Pixel/icon/ผีรวม 5_12.png',
   'pics/Pixel/icon/ผีรวม 5_20.png','pics/Pixel/icon/ผีรวม 5_21.png','pics/Pixel/icon/ผีรวม 5_22.png',
 ];
+const GHOST_PHRASES = [
+  "แบร่~","หลอกจ้า","อ่านให้ครบสิ","มาตรานี้ออกสอบนะ","เปิดฎีกาด้วย","จำผิดแล้ว","วรรคสองล่ะ?","ยังไม่จบ","อ่านใหม่","ข้ามไม่ได้",
+  "ตกแน่","สอบพรุ่งนี้แล้ว","ตีความสิ","อ้างมาตราให้ครบ","อย่ามั่ว","ฟ้องได้ไหม?","โมฆะนะ","เป็นโมฆียะ!","สิทธิของใคร?","หน้าที่ของใคร?",
+  "พิสูจน์ก่อน","ภาระการพิสูจน์อยู่ไหน?","ข้อเท็จจริงไม่พอ","กฎหมายใช้ไม่ได้","คนละฐาน","คนละกรณี","คำตอบยังไม่ครบ","ลืมข้อยกเว้น","มีบทเฉพาะกาล","ระวังมาตราแฝง",
+  "คิดใหม่","อ่านเชิงระบบ","อย่าท่องอย่างเดียว","เหตุผลล่ะ?","ฎีกาว่าไง?","อาจารย์ชอบถาม","อย่าปิดไฟ","ผีอ่านด้วย","ขอนั่งข้าง ๆ","พลิกหน้าเร็ว",
+  "หน้านี้สำคัญ","จำให้ได้","อย่าหลับ","อีกบทเดียว","อีกมาตราเดียว","อีกฎีกาเดียว","ตีสองแล้วนะ","กาแฟหมดแล้ว","น้ำแดงมีไหม?","กุมารหิว",
+  "ศาลยังไม่หลับ","ผู้พิพากษามองอยู่","เนติรออยู่","ธงคำตอบอยู่ไหน?","อย่าตอบกำปั้นทุบดิน","อย่าเดา","เขียนให้ครบองค์ประกอบ","หลักก่อน ข้อยกเว้นทีหลัง","อย่าลืมนิยาม","อ่านมาตราเต็ม",
+  "เช็กคำว่า \"ย่อม\"","เช็กคำว่า \"ต้อง\"","เช็กคำว่า \"อาจ\"","คนละเจตนา","คนละผลทางกฎหมาย","ยังไม่เข้าองค์ประกอบ","ฟังผีสิ","ผีเคยตกมาแล้ว","ผีซ่อมสามรอบ","ผีเป็นรุ่นพี่",
+  "ผีจบนิติแล้ว","ผีรอเพื่อน","อ่านดัง ๆ สิ","อย่าท่องผิด","อย่าจำเลขมั่ว","ตัวบทอยู่ไหน?","ข้อสอบยิ้มแล้ว","อาจารย์ยิ้มอยู่","คะแนนบินไปแล้ว","อย่าหาว่าผีไม่เตือน",
+  "ผีเปิดตำราให้","ผีปิดไฟนะ","หันหลังมาสิ","ข้างหลังมี...","เงียบจังเลย","ได้ยินไหม?","เปิดหน้าต่างทำไม?","ลมเย็นไหม?","ใครนั่งอีกตัว?","หนังสือขยับเอง",
+  "ดินสอหายอีกแล้ว","ปากกาหมึกหมด","ผีช่วยติว","ผีออกข้อสอบ","ผีให้คำใบ้","เจอกันในห้องสอบ","ถ้าจำได้...รอด","ถ้าจำไม่ได้...เจอกันคืนนี้","ใครอ่านหนังสือดึกคนเดียว ระวังผีหลอก","กุมารทองชอบน้ำแดง... แต่หัวใจสีแดงชอบคนเอาใจ ❤️👻",
+];
 let ghostEl = null, ghostRotateTimer = null, ghostPulseTimer = null, ghostIndex = 0;
+let ghostSpeechEl = null, ghostSpeechTimer = null;
+function ensureGhostSpeechEl(){
+  if (ghostSpeechEl) return ghostSpeechEl;
+  const el = document.createElement('div');
+  el.className = 'ghost-speech';
+  document.body.appendChild(el);
+  ghostSpeechEl = el; return el;
+}
+function showGhostSpeech(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const ghost = ensureGhostEl();
+  const bubble = ensureGhostSpeechEl();
+  bubble.textContent = GHOST_PHRASES[Math.floor(Math.random() * GHOST_PHRASES.length)];
+  const rect = ghost.getBoundingClientRect();
+  bubble.style.right = (window.innerWidth - rect.right) + 'px';
+  bubble.style.bottom = (window.innerHeight - rect.top + 10) + 'px';
+  bubble.classList.add('visible');
+  clearTimeout(ghostSpeechTimer);
+  ghostSpeechTimer = setTimeout(() => bubble.classList.remove('visible'), 2600);
+  pulseGhost();
+  playHooSound();
+}
 function ensureGhostEl(){
   if (ghostEl) return ghostEl;
   const img = document.createElement('img');
   img.src = GHOST_IMAGES[0]; img.alt = ''; img.setAttribute('aria-hidden', 'true'); img.className = 'ghost-companion';
+  img.addEventListener('mouseenter', showGhostSpeech);
+  img.addEventListener('click', showGhostSpeech);
   document.body.appendChild(img); ghostEl = img; return img;
 }
 function startGhostRotation(){
