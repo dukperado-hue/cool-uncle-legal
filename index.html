@@ -435,6 +435,9 @@ footer{
 <audio id="horror-bgm" loop preload="auto" playsinline webkit-playsinline style="display:none">
   <source src="music/The_Cold_Stream_Lament.mp3" type="audio/mpeg">
 </audio>
+<audio id="dog-howl" preload="auto" playsinline webkit-playsinline style="display:none">
+  <source src="music/หมาหอน.mp3" type="audio/mpeg">
+</audio>
 
 <div class="wrap">
 
@@ -871,8 +874,8 @@ function setTheme(theme){
   else { document.documentElement.setAttribute('data-theme', theme); }
   try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
   updateThemeToggleUI(theme);
-  if (theme === 'horror') { playHorrorBgm(); startGhostRotation(); playHooSound(); }
-  else { stopGhostRotation(); stopHorrorBgm(); }
+  if (theme === 'horror') { playHorrorBgm(); startGhostRotation(); playHooSound(); scheduleDogHowl(); }
+  else { stopGhostRotation(); stopHorrorBgm(); stopDogHowl(); }
 }
 const DRONE_MUTE_KEY = 'codex-drone-muted';
 function playHorrorBgm(){
@@ -888,6 +891,28 @@ function playHorrorBgm(){
 function stopHorrorBgm(){
   const bgm = document.getElementById('horror-bgm');
   if (bgm) bgm.pause();
+}
+let dogHowlTimer = null;
+function scheduleDogHowl(){
+  clearTimeout(dogHowlTimer);
+  const delay = 18000 + Math.random() * 22000; // every ~18-40s
+  dogHowlTimer = setTimeout(() => { playDogHowl(); scheduleDogHowl(); }, delay);
+}
+function playDogHowl(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const howl = document.getElementById('dog-howl');
+  if (!howl) return;
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  if (muted) return;
+  howl.currentTime = 0;
+  howl.volume = 0.4;
+  howl.play().catch(() => {});
+}
+function stopDogHowl(){
+  clearTimeout(dogHowlTimer); dogHowlTimer = null;
+  const howl = document.getElementById('dog-howl');
+  if (howl) howl.pause();
 }
 function toggleDroneMute(btn){
   let muted = false;
@@ -1048,7 +1073,7 @@ function playHooSound(){
 document.addEventListener('DOMContentLoaded', () => {
   const current = document.documentElement.getAttribute('data-theme') || 'light';
   updateThemeToggleUI(current);
-  if (current === 'horror') startGhostRotation();
+  if (current === 'horror') { startGhostRotation(); scheduleDogHowl(); }
   const droneMuteBtn = document.getElementById('drone-mute-btn');
   if (droneMuteBtn) {
     let muted = false;

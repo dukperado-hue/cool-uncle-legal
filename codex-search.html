@@ -352,6 +352,9 @@ button{
 <audio id="horror-bgm" loop preload="auto" playsinline webkit-playsinline style="display:none">
   <source src="music/The_Cold_Stream_Lament.mp3" type="audio/mpeg">
 </audio>
+<audio id="dog-howl" preload="auto" playsinline webkit-playsinline style="display:none">
+  <source src="music/หมาหอน.mp3" type="audio/mpeg">
+</audio>
 
 <div class="wrap">
   
@@ -441,8 +444,30 @@ function setTheme(theme){
   }
   try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
   updateThemeToggleUI(theme);
-  if (theme === 'horror') { playHorrorBgm(); startGhostRotation(); playHooSound(); startAmbientDrone(); }
-  else { stopGhostRotation(); stopAmbientDrone(); }
+  if (theme === 'horror') { playHorrorBgm(); startGhostRotation(); playHooSound(); startAmbientDrone(); scheduleDogHowl(); }
+  else { stopGhostRotation(); stopAmbientDrone(); stopDogHowl(); }
+}
+let dogHowlTimer = null;
+function scheduleDogHowl(){
+  clearTimeout(dogHowlTimer);
+  const delay = 18000 + Math.random() * 22000;
+  dogHowlTimer = setTimeout(() => { playDogHowl(); scheduleDogHowl(); }, delay);
+}
+function playDogHowl(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const howl = document.getElementById('dog-howl');
+  if (!howl) return;
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  if (muted) return;
+  howl.currentTime = 0;
+  howl.volume = 0.4;
+  howl.play().catch(() => {});
+}
+function stopDogHowl(){
+  clearTimeout(dogHowlTimer); dogHowlTimer = null;
+  const howl = document.getElementById('dog-howl');
+  if (howl) howl.pause();
 }
 
 /* ================================================================
@@ -1160,7 +1185,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateThemeToggleUI(currentTheme);
   const droneMuteBtn = document.getElementById('drone-mute-btn');
   if (droneMuteBtn) droneMuteBtn.textContent = __droneMuted ? '🔇' : '🔊';
-  if (currentTheme === 'horror') { startGhostRotation(); startAmbientDrone(); }
+  if (currentTheme === 'horror') { startGhostRotation(); startAmbientDrone(); scheduleDogHowl(); }
 
   await loadCodexData();
 
