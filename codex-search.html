@@ -333,6 +333,9 @@ button{
   </div>
   <button type="button" id="drone-mute-btn" class="drone-mute-btn" onclick="toggleDroneMute(this)" title="ปิด/เปิดเสียงบรรยากาศ">🔊</button>
 </div>
+<audio id="horror-bgm" loop preload="none" style="display:none">
+  <source src="music/The_Cold_Stream_Lament.mp3" type="audio/mpeg">
+</audio>
 
 <div class="wrap">
   
@@ -468,6 +471,20 @@ function startAmbientDrone(){
     __droneNodes = { master, nodes: [o1, o2, pad, padLfo], noiseTimer: null };
     scheduleNoiseSwell();
   } catch(e){}
+  playHorrorBgm();
+}
+
+function playHorrorBgm(){
+  const bgm = document.getElementById('horror-bgm');
+  if (!bgm) return;
+  bgm.volume = __droneMuted ? 0 : 0.35;
+  bgm.play().catch(() => {});
+}
+
+function stopHorrorBgm(){
+  const bgm = document.getElementById('horror-bgm');
+  if (!bgm) return;
+  bgm.pause();
 }
 
 function scheduleNoiseSwell(){
@@ -506,6 +523,7 @@ function stopAmbientDrone(){
   clearTimeout(__droneNodes.noiseTimer);
   setTimeout(() => { nodesToStop.forEach(n => { try { n.stop(); } catch(e){} }); }, 1300);
   __droneNodes = null;
+  stopHorrorBgm();
 }
 
 function toggleDroneMute(btn){
@@ -518,6 +536,8 @@ function toggleDroneMute(btn){
     __droneNodes.master.gain.setValueAtTime(__droneNodes.master.gain.value, t0);
     __droneNodes.master.gain.linearRampToValueAtTime(__droneMuted ? 0.0001 : 0.05, t0 + 0.8);
   }
+  const bgm = document.getElementById('horror-bgm');
+  if (bgm) bgm.volume = __droneMuted ? 0 : 0.35;
 }
 
 function updateThemeToggleUI(theme){

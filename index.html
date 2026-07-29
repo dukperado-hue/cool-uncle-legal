@@ -73,6 +73,18 @@
 .theme-toggle button{border:none;background:transparent;border-radius:999px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .2s;font-family:inherit}
 .theme-toggle button.active{background:var(--accent);box-shadow:0 0 0 1px var(--accent)}
 .theme-toggle button:hover{background:var(--line)}
+.drone-mute-btn{
+  display:none;
+  margin-left:6px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:999px;
+  width:28px;height:28px;
+  align-items:center;justify-content:center;
+  cursor:pointer;font-size:13px;
+}
+:root[data-theme="horror"] .drone-mute-btn{ display:flex; }
+:root[data-theme="horror"] .drone-mute-btn:hover{ background:var(--line); }
 
 /* GHOST COMPANION (horror mode — rotating cast of 4) */
 .ghost-companion{position:fixed;right:16px;bottom:16px;width:100px;height:auto;pointer-events:none;opacity:0;transform:translateY(8px);transition:opacity .6s ease;z-index:999;filter:drop-shadow(0 0 16px rgba(180,20,40,.45));animation:ghost-float 3.4s ease-in-out infinite}
@@ -403,8 +415,12 @@ footer{
       <button type="button" data-theme-btn="dark" onclick="setTheme('dark')" onmouseenter="playHoverSound()" title="โหมดมืด">🌙</button>
       <button type="button" data-theme-btn="horror" onclick="setTheme('horror')" onmouseenter="playHoverSound()" title="โหมดสยองขวัญ">👻</button>
     </div>
+    <button type="button" id="drone-mute-btn" class="drone-mute-btn" onclick="toggleDroneMute(this)" title="ปิด/เปิดเสียงเพลง">🔊</button>
   </span>
 </div>
+<audio id="horror-bgm" loop preload="none" style="display:none">
+  <source src="music/The_Cold_Stream_Lament.mp3" type="audio/mpeg">
+</audio>
 
 <div class="wrap">
 
@@ -417,7 +433,7 @@ footer{
         <h1>Cool Uncle<br>Legal Lab</h1>
         <p class="lede">ระบบเรียนกฎหมายแบบเกม เตรียมสอบปริญญาตรี เนติฯ ตั๋วทนาย ที่เดียว</p>
       </div>
-      <img src="pics/croc.png" alt="" aria-hidden="true" class="hero-mascot croc">
+      <img src="pics/croc2.png" alt="" aria-hidden="true" class="hero-mascot croc">
     </div>
   </section>
 
@@ -841,8 +857,30 @@ function setTheme(theme){
   else { document.documentElement.setAttribute('data-theme', theme); }
   try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
   updateThemeToggleUI(theme);
-  if (theme === 'horror') { startGhostRotation(); playHooSound(); }
-  else { stopGhostRotation(); }
+  if (theme === 'horror') { startGhostRotation(); playHooSound(); playHorrorBgm(); }
+  else { stopGhostRotation(); stopHorrorBgm(); }
+}
+const DRONE_MUTE_KEY = 'codex-drone-muted';
+function playHorrorBgm(){
+  const bgm = document.getElementById('horror-bgm');
+  if (!bgm) return;
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  bgm.volume = muted ? 0 : 0.35;
+  bgm.play().catch(() => {});
+}
+function stopHorrorBgm(){
+  const bgm = document.getElementById('horror-bgm');
+  if (bgm) bgm.pause();
+}
+function toggleDroneMute(btn){
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  muted = !muted;
+  try { localStorage.setItem(DRONE_MUTE_KEY, muted ? '1' : '0'); } catch(e){}
+  if (btn) btn.textContent = muted ? '🔇' : '🔊';
+  const bgm = document.getElementById('horror-bgm');
+  if (bgm) bgm.volume = muted ? 0 : 0.35;
 }
 function updateThemeToggleUI(theme){
   document.querySelectorAll('.theme-toggle button').forEach(b => {
@@ -851,13 +889,43 @@ function updateThemeToggleUI(theme){
 }
 const GHOST_IMAGES = [
   'pics/Pixel/icon/ตะเคียน 1.png','pics/Pixel/icon/ตะเคียน 2.png',
-  'pics/Pixel/icon/ตานี.png','pics/Pixel/icon/ตานี 2.png',
+  'pics/Pixel/icon/ตานี 2.png',
   'pics/Pixel/icon/นางกวัก 1.png','pics/Pixel/icon/นางกวัก 2.png','pics/Pixel/icon/นางกวัก 3.png',
   'pics/Pixel/icon/ปอป 1.png','pics/Pixel/icon/ปอป 2.png','pics/Pixel/icon/ปอป 3.png',
   'pics/Pixel/icon/ปอปชาย 1.png','pics/Pixel/icon/ปอปชาย 2.png',
   'pics/Pixel/icon/ผีแมว 1.png','pics/Pixel/icon/ผีแมว 2.png','pics/Pixel/icon/ผีแมว 3.png',
   'pics/Pixel/icon/ผีโพง 1.png',
   'pics/Pixel/icon/แม่นาค 1.png','pics/Pixel/icon/แม่นาค 2.png','pics/Pixel/icon/แม่นาค 3.png',
+  'pics/Pixel/icon/กระสือ_00.png','pics/Pixel/icon/กระสือ_01.png','pics/Pixel/icon/กระสือ_02.png',
+  'pics/Pixel/icon/กระสือ_10.png','pics/Pixel/icon/กระสือ_11.png','pics/Pixel/icon/กระสือ_12.png',
+  'pics/Pixel/icon/กระสือ_20.png','pics/Pixel/icon/กระสือ_21.png','pics/Pixel/icon/กระสือ_22.png',
+  'pics/Pixel/icon/กุมาร 1_00.png','pics/Pixel/icon/กุมาร 1_01.png','pics/Pixel/icon/กุมาร 1_02.png',
+  'pics/Pixel/icon/กุมาร 1_10.png','pics/Pixel/icon/กุมาร 1_11.png','pics/Pixel/icon/กุมาร 1_12.png',
+  'pics/Pixel/icon/กุมาร 1_21.png',
+  'pics/Pixel/icon/กุมาร 2_00.png','pics/Pixel/icon/กุมาร 2_01.png','pics/Pixel/icon/กุมาร 2_02.png',
+  'pics/Pixel/icon/กุมาร 2_10.png','pics/Pixel/icon/กุมาร 2_11.png','pics/Pixel/icon/กุมาร 2_12.png',
+  'pics/Pixel/icon/กุมาร 2_20.png','pics/Pixel/icon/กุมาร 2_21.png','pics/Pixel/icon/กุมาร 2_22.png',
+  'pics/Pixel/icon/ควายธนู_00.png','pics/Pixel/icon/ควายธนู_01.png','pics/Pixel/icon/ควายธนู_02.png',
+  'pics/Pixel/icon/ควายธนู_10.png','pics/Pixel/icon/ควายธนู_11.png','pics/Pixel/icon/ควายธนู_12.png',
+  'pics/Pixel/icon/ควายธนู_20.png','pics/Pixel/icon/ควายธนู_21.png','pics/Pixel/icon/ควายธนู_22.png',
+  'pics/Pixel/icon/ตานี_00.png','pics/Pixel/icon/ตานี_01.png','pics/Pixel/icon/ตานี_02.png',
+  'pics/Pixel/icon/ตานี_10.png','pics/Pixel/icon/ตานี_11.png','pics/Pixel/icon/ตานี_12.png',
+  'pics/Pixel/icon/ตานี_20.png','pics/Pixel/icon/ตานี_21.png','pics/Pixel/icon/ตานี_22.png',
+  'pics/Pixel/icon/ผีรวม 1_00.png','pics/Pixel/icon/ผีรวม 1_01.png','pics/Pixel/icon/ผีรวม 1_02.png',
+  'pics/Pixel/icon/ผีรวม 1_10.png','pics/Pixel/icon/ผีรวม 1_11.png','pics/Pixel/icon/ผีรวม 1_12.png',
+  'pics/Pixel/icon/ผีรวม 1_20.png','pics/Pixel/icon/ผีรวม 1_21.png','pics/Pixel/icon/ผีรวม 1_22.png',
+  'pics/Pixel/icon/ผีรวม 2_00.png','pics/Pixel/icon/ผีรวม 2_01.png','pics/Pixel/icon/ผีรวม 2_02.png',
+  'pics/Pixel/icon/ผีรวม 2_10.png','pics/Pixel/icon/ผีรวม 2_11.png','pics/Pixel/icon/ผีรวม 2_12.png',
+  'pics/Pixel/icon/ผีรวม 2_20.png','pics/Pixel/icon/ผีรวม 2_21.png','pics/Pixel/icon/ผีรวม 2_22.png',
+  'pics/Pixel/icon/ผีรวม 3_00.png','pics/Pixel/icon/ผีรวม 3_01.png','pics/Pixel/icon/ผีรวม 3_02.png',
+  'pics/Pixel/icon/ผีรวม 3_10.png','pics/Pixel/icon/ผีรวม 3_11.png','pics/Pixel/icon/ผีรวม 3_12.png',
+  'pics/Pixel/icon/ผีรวม 3_20.png','pics/Pixel/icon/ผีรวม 3_21.png','pics/Pixel/icon/ผีรวม 3_22.png',
+  'pics/Pixel/icon/ผีรวม 4_00.png','pics/Pixel/icon/ผีรวม 4_01.png','pics/Pixel/icon/ผีรวม 4_02.png',
+  'pics/Pixel/icon/ผีรวม 4_10.png','pics/Pixel/icon/ผีรวม 4_11.png','pics/Pixel/icon/ผีรวม 4_12.png',
+  'pics/Pixel/icon/ผีรวม 4_20.png','pics/Pixel/icon/ผีรวม 4_21.png','pics/Pixel/icon/ผีรวม 4_22.png',
+  'pics/Pixel/icon/ผีรวม 5_00.png','pics/Pixel/icon/ผีรวม 5_01.png','pics/Pixel/icon/ผีรวม 5_02.png',
+  'pics/Pixel/icon/ผีรวม 5_10.png','pics/Pixel/icon/ผีรวม 5_11.png','pics/Pixel/icon/ผีรวม 5_12.png',
+  'pics/Pixel/icon/ผีรวม 5_20.png','pics/Pixel/icon/ผีรวม 5_21.png','pics/Pixel/icon/ผีรวม 5_22.png',
 ];
 let ghostEl = null, ghostRotateTimer = null, ghostPulseTimer = null, ghostIndex = 0;
 function ensureGhostEl(){
@@ -929,6 +997,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const current = document.documentElement.getAttribute('data-theme') || 'light';
   updateThemeToggleUI(current);
   if (current === 'horror') startGhostRotation();
+  const droneMuteBtn = document.getElementById('drone-mute-btn');
+  if (droneMuteBtn) {
+    let muted = false;
+    try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+    droneMuteBtn.textContent = muted ? '🔇' : '🔊';
+  }
 });
 </script>
 </body>
