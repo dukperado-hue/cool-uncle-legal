@@ -653,7 +653,7 @@ let currentResults = [];
 // Load data on page load
 async function loadCodexData() {
   try {
-    const response = await fetch('codex-data.json?v=20260729b');
+    const response = await fetch('codex-data.json?v=20260729c');
     if (!response.ok) throw new Error('Failed to load codex data');
     codexData = await response.json();
     console.log('✅ Codex loaded:', Object.fromEntries(
@@ -781,11 +781,44 @@ function lectureNotesHtml(article) {
         <div style="font-size:13.5px;color:var(--ink);white-space:pre-line;line-height:1.7;">${escapeHtml(n.text || '')}</div>
       </div>`).join('');
   const source = article.lectureNotes[0].source || '';
+  // adj.prev/adj.next come from getAdjacentArticleNumbers, which walks the
+  // sorted list of article numbers that actually exist — so at the first
+  // article prev is null (never a fabricated "มาตรา 0"), same for last/next.
+  const adj = getAdjacentArticleNumbers(article.bookType, article.number);
   return `
     <div class="lecture-notes" style="margin:14px 0;padding:14px;background:rgba(46,74,122,.05);border:1px solid var(--line);border-radius:10px;">
       ${notes}
       <div style="font-size:11.5px;color:var(--ink-faint);border-top:1px dashed var(--line);padding-top:8px;margin-top:4px;">ℹ️ ${escapeHtml(source)}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;">
+        <button type="button" class="icon-btn" onclick="navigateArticle('${article.bookType}','${article.number}','prev')" onmouseenter="playHoverSound()" ${adj.prev ? '' : 'disabled'}>‹ มาตราก่อนหน้า</button>
+        <button type="button" class="icon-btn" onclick="navigateArticle('${article.bookType}','${article.number}','next')" onmouseenter="playHoverSound()" ${adj.next ? '' : 'disabled'}>มาตราถัดไป ›</button>
+        <button type="button" class="icon-btn" id="lec-read-${article.id}" onclick="speakLectureNotes('${article.id}', this)" onmouseenter="playHoverSound()">🔊 อ่านคำบรรยาย</button>
+      </div>
     </div>`;
+}
+
+function speakLectureNotes(articleId, btn) {
+  if (!('speechSynthesis' in window)) {
+    alert('เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง');
+    return;
+  }
+  const wasSpeaking = btn.dataset.speaking === '1';
+  window.speechSynthesis.cancel();
+  document.querySelectorAll('[id^="lec-read-"]').forEach(b => {
+    b.dataset.speaking = '';
+    b.textContent = '🔊 อ่านคำบรรยาย';
+  });
+  if (wasSpeaking) return; // this button was already reading -> treat click as stop
+
+  const article = currentResults.find(a => a.id === articleId);
+  if (!article || !article.lectureNotes) return;
+  const fullText = article.lectureNotes.map(n => `${n.topic}. ${n.text}`).join(' ');
+  const utter = new SpeechSynthesisUtterance(fullText);
+  utter.lang = 'th-TH';
+  utter.onstart = () => { btn.dataset.speaking = '1'; btn.textContent = '⏸️ หยุด'; };
+  utter.onend = () => { btn.dataset.speaking = ''; btn.textContent = '🔊 อ่านคำบรรยาย'; };
+  utter.onerror = () => { btn.dataset.speaking = ''; btn.textContent = '🔊 อ่านคำบรรยาย'; };
+  window.speechSynthesis.speak(utter);
 }
 
 function renderArticleTextHtml(text, bookType, currentNumber) {
