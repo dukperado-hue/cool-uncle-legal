@@ -1,0 +1,2802 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ห้องซ้อมสอบ วิชาทรัพย์สิน — ป.พ.พ. บรรพ 1, 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;900&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+<style>
+:root{
+  --paper:#FBF9F4;
+  --card:#FFFFFF;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --gold-soft:#F3E8CF;
+  --ok:#1E7A4F;
+  --ok-bg:#E6F4EC;
+  --bad:#B23A3A;
+  --bad-bg:#FBEAEA;
+  --accent:#2E4A7A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+}
+
+/* ============ THEME: DARK ============ */
+:root[data-theme="dark"]{
+  --paper:#14161f;--card:#1c2030;--ink:#E9E7E1;--ink-soft:#A9AEC2;--ink-faint:#6C7188;
+  --line:#2E3348;--gold:#E0BD73;--gold-soft:#3A3320;--ok:#4FCB8D;--ok-bg:#173425;
+  --bad:#E2685F;--bad-bg:#3A1E1C;--accent:#84A6E8;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.45);
+}
+/* ============ THEME: HORROR (กระสือ mode) ============ */
+:root[data-theme="horror"]{
+  --paper:#0A070C;--card:#151019;--ink:#D9D2C9;--ink-soft:#9C8F93;--ink-faint:#5C5460;
+  --line:#2B1F26;--gold:#8F1F2B;--gold-soft:#301418;--ok:#3F7A4F;--ok-bg:#16241a;
+  --bad:#FF3355;--bad-bg:#301018;--accent:#4A8F5C;
+  --shadow:0 1px 2px rgba(0,0,0,.6),0 10px 28px rgba(0,0,0,.6);
+}
+:root[data-theme="dark"] body,:root[data-theme="horror"] body{background:var(--paper)}
+:root[data-theme="dark"] .home-bar,:root[data-theme="horror"] .home-bar{background:var(--card);border-bottom-color:var(--line)}
+
+/* THEME TOGGLE */
+.theme-toggle{display:flex;gap:3px;margin-left:auto;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+.theme-toggle button{border:none;background:transparent;border-radius:999px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .2s;font-family:inherit}
+.theme-toggle button.active{background:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.theme-toggle button:hover{background:var(--line)}
+
+/* GHOST COMPANION (horror mode — rotating cast of 4) */
+.ghost-companion{position:fixed;right:16px;bottom:16px;width:100px;height:auto;pointer-events:none;opacity:0;transform:translateY(8px);transition:opacity .6s ease;z-index:999;filter:drop-shadow(0 0 16px rgba(180,20,40,.45));animation:ghost-float 3.4s ease-in-out infinite}
+.ghost-companion.visible{opacity:1}
+.ghost-companion.pulse{filter:drop-shadow(0 0 26px rgba(180,20,40,.8)) drop-shadow(0 0 10px rgba(255,255,255,.3))}
+@keyframes ghost-float{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+/* ---------- top home bar (flat, for future multi-subject hub) ---------- */
+.home-bar{
+  display:flex;align-items:center;gap:10px;
+  background:#EFEAE0;border-bottom:1px solid var(--line);
+  padding:10px 16px;font-size:13px;color:var(--ink-soft);
+}
+.home-bar-logo{
+  font-size:22px;line-height:1;display:inline-flex;align-items:center;
+  text-decoration:none;margin-right:2px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.12));
+  transition:transform .15s;
+}
+.home-bar-logo:hover{transform:scale(1.1)}
+.home-bar-link{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.home-bar-link:hover{text-decoration:underline}
+.home-bar-sep{color:var(--ink-faint)}
+.home-bar-current{font-weight:600;color:var(--ink-soft)}
+.home-bar-score{
+  margin-left:auto;font-weight:800;color:#8F6511;background:var(--gold-soft);
+  padding:4px 12px;border-radius:999px;font-size:13px;white-space:nowrap;
+  transition:transform .15s;
+}
+.home-bar-score.score-pop{animation:scorePop .4s ease}
+@keyframes scorePop{
+  0%{transform:scale(1)}
+  35%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),
+    var(--paper);
+  color:var(--ink);
+  min-height:100vh;
+  padding:20px 14px 60px;
+  font-size:16px;
+  line-height:1.75;
+}
+.wrap{max-width:860px;margin:0 auto}
+
+/* ---------- header ---------- */
+header{text-align:center;margin-bottom:22px;transition:opacity .15s}
+header.compact{margin-bottom:10px}
+header.compact .crest{display:none}
+header.compact h1{font-size:19px}
+header.compact .subtitle{display:none}
+.crest{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Noto Serif Thai',serif;
+  font-size:13px;letter-spacing:.35em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:6px;
+}
+.crest::before,.crest::after{content:"";width:44px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+.crest::after{background:linear-gradient(90deg,var(--gold),transparent);}
+h1{
+  font-family:'Noto Serif Thai',serif;
+  font-size:clamp(24px,5vw,36px);
+  font-weight:700;line-height:1.3;
+}
+.subtitle{color:var(--ink-soft);font-size:15px;margin-top:2px}
+
+/* ---------- tabs ---------- */
+.tabbar{
+  display:flex;gap:6px;background:#F1EDE2;border:1px solid var(--line);
+  border-radius:999px;padding:5px;margin:20px auto 26px;max-width:600px;
+}
+.tabbar button{
+  flex:1;border:none;background:transparent;border-radius:999px;
+  padding:10px 5px;font-family:inherit;font-size:13.5px;font-weight:600;
+  color:var(--ink-soft);cursor:pointer;transition:all .2s;
+}
+.tabbar button.on{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+.tabbar button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#btn-reset,#btn-sound{
+  flex:0 0 38px;font-size:15px;color:var(--ink-faint);
+}
+#btn-reset:hover{color:var(--bad)}
+#btn-sound:hover{color:var(--accent)}
+
+/* ---------- sticky bottom action bar ---------- */
+.sticky-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
+  background:linear-gradient(180deg,rgba(251,249,244,0) 0%,var(--paper) 35%);
+  padding:22px 14px calc(14px + env(safe-area-inset-bottom,0px));
+}
+.sticky-bar-inner{max-width:860px;margin:0 auto;display:flex;gap:10px}
+.sticky-bar-inner button{
+  flex:1;box-shadow:0 6px 20px rgba(34,40,58,.22);
+  padding:18px 20px;font-size:17.5px;font-weight:700;border-radius:14px;
+  letter-spacing:.01em;
+}
+body.has-sticky-bar{padding-bottom:92px}
+@media(max-width:520px){
+  .sticky-bar{padding:18px 10px calc(12px + env(safe-area-inset-bottom,0px))}
+  .sticky-bar-inner button{padding:16px 14px;font-size:16px}
+}
+.irac-caselist{display:flex;flex-direction:column;gap:10px}
+.irac-case-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;text-align:left;cursor:pointer;transition:border-color .15s;
+}
+.irac-case-card:hover{border-color:var(--gold)}
+.irac-case-card .icref{font-size:12px;color:var(--ink-faint);margin-bottom:4px}
+.irac-case-card .ictitle{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:600}
+.irac-case-card .icprog{font-size:12.5px;color:var(--gold);margin-top:6px;font-weight:600}
+
+.irac-facts{
+  background:#FBF6E8;border:1px solid var(--gold-soft);border-radius:var(--radius);
+  padding:14px 16px;margin-bottom:6px;font-size:15px;line-height:1.85;color:var(--ink);
+  max-height:92px;overflow:hidden;position:relative;
+}
+.irac-facts::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:34px;
+  background:linear-gradient(180deg,transparent,#FBF6E8);pointer-events:none;
+}
+.irac-facts.expanded{max-height:none}
+.irac-facts.expanded::after{display:none}
+.irac-facts-toggle{
+  display:block;width:100%;text-align:center;font-size:13px;color:var(--accent);font-weight:600;
+  background:none;border:none;padding:5px 0 14px;cursor:pointer;
+}
+
+.irac-stepper{display:flex;gap:5px;margin-bottom:8px}
+.irac-step{
+  flex:1;text-align:center;font-size:11px;font-weight:600;color:var(--ink-faint);
+  padding:5px 2px;border-radius:8px;background:#EEEBE0;border:1px solid transparent;
+}
+.irac-step.active{background:var(--accent);color:#fff}
+.irac-step.done{background:var(--ok-bg);color:var(--ok);border-color:#BFE3CE}
+
+.irac-progress-label{font-size:12.5px;color:var(--ink-soft);margin-bottom:6px;font-weight:600}
+.irac-back{background:none;border:none;color:var(--ink-faint);font-size:13px;cursor:pointer;margin-bottom:12px;padding:0}
+.irac-back:hover{color:var(--accent)}
+
+.irac-issue-recap{
+  background:var(--ok-bg);border:1px solid #BFE3CE;border-radius:var(--radius);
+  padding:16px 18px;text-align:center;
+}
+.irac-issue-recap .big{font-family:'Noto Serif Thai',serif;font-size:18px;font-weight:700;color:#14563A;margin-bottom:6px}
+
+/* ---------- stage banner (แถบธีมตามหมวด แทน SVG scene) ---------- */
+.stage{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  margin-bottom:14px;min-height:74px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px;border:1px solid rgba(0,0,0,.06);
+}
+.stage .stage-icon{font-size:30px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.15))}
+.stage .stage-label{font-family:'Noto Serif Thai',serif;font-weight:700;font-size:15px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.stage .stage-src{font-size:11.5px;color:rgba(255,255,255,.85);margin-top:2px;display:block}
+@media(max-width:520px){.stage{min-height:60px;padding:10px}.stage .stage-icon{font-size:24px}.stage .stage-label{font-size:13px}}
+
+/* ---------- มาตรา chip strip (โหมดการ์ด) ---------- */
+.matra-chips{display:none;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:14px}
+.matra-chips-label{font-size:12.5px;color:var(--ink-faint);font-weight:600;margin-right:2px}
+.matra-chip{
+  --chip-color:#888;
+  font-family:'Noto Serif Thai',serif;font-size:12.5px;font-weight:700;
+  background:var(--card);border:1.5px solid var(--line);color:var(--ink-soft);
+  border-radius:999px;padding:5px 12px;cursor:pointer;transition:all .15s;
+}
+.matra-chip:hover{border-color:var(--chip-color);color:var(--chip-color)}
+.matra-chip.active{background:var(--chip-color);border-color:var(--chip-color);color:#fff}
+
+button{font-family:inherit}
+select{
+  font-family:inherit;font-size:15px;color:var(--ink);
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:10px 12px;width:100%;
+}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.row select{flex:1;min-width:170px;width:auto}
+.muted{color:var(--ink-soft);font-size:14px;white-space:nowrap}
+
+/* ---------- flashcard ---------- */
+.flip-stage{perspective:1200px}
+.flashcard{
+  position:relative;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  min-height:250px;padding:34px 26px 30px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:10px;overflow:hidden;
+  transition:transform .16s ease;
+}
+.flashcard.flipping{transform:rotateY(90deg)}
+@media (prefers-reduced-motion:reduce){.flashcard.flipping{transform:none}}
+.ribbon{
+  position:absolute;top:0;left:26px;width:34px;height:56px;
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%);
+}
+.chapter-tag{
+  font-size:12.5px;font-weight:700;letter-spacing:.02em;
+  padding:4px 14px;border-radius:999px;
+}
+.src-tag{font-size:11.5px;color:var(--ink-faint);margin-top:2px;font-weight:600}
+.sec-no{
+  font-family:'Noto Serif Thai',serif;font-size:clamp(30px,7vw,44px);
+  font-weight:700;line-height:1.25;
+}
+.stars{color:var(--gold);font-size:16px;letter-spacing:.15em}
+.hint{font-size:13px;color:var(--ink-faint);margin-top:10px}
+.face-back .card-title{font-family:'Noto Serif Thai',serif;font-size:17px;font-weight:600;line-height:1.6}
+.face-back .card-result{font-size:16px;margin-top:10px;line-height:1.8}
+.face-back .card-note{
+  font-size:14px;color:var(--ink-soft);margin-top:12px;line-height:1.7;
+  border-top:1px dashed var(--line);padding-top:10px;max-width:560px;
+}
+.nav3{display:flex;gap:10px;margin-top:14px}
+.nav3 button{
+  flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:12px;font-size:14.5px;font-weight:600;color:var(--ink);cursor:pointer;
+  transition:border-color .15s, transform .1s;
+}
+.nav3 button:hover{border-color:var(--ink-faint)}
+.nav3 button:active{transform:scale(.98)}
+.nav3 button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- sequence list ---------- */
+.seq-item{
+  background:var(--card);border:1px solid var(--line);border-left-width:6px;
+  border-radius:12px;padding:14px 16px;margin-bottom:10px;
+  display:flex;gap:12px;box-shadow:0 1px 2px rgba(34,40,58,.04);
+}
+.seq-num{
+  font-family:'Noto Serif Thai',serif;font-weight:700;font-size:15px;
+  color:var(--ink-faint);min-width:22px;padding-top:3px;
+}
+.seq-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.seq-sec{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:700}
+.seq-title{font-size:15px;font-weight:600}
+.seq-res{font-size:14.5px;margin-top:4px;line-height:1.7}
+.seq-note{font-size:13.5px;color:var(--ink-soft);margin-top:5px;line-height:1.65;border-top:1px dashed var(--line);padding-top:5px}
+.seq-stars{color:var(--gold);font-size:12px;letter-spacing:.1em}
+.seq-src{font-size:12px;color:var(--ink-faint);font-weight:600}
+
+/* ---------- quiz ---------- */
+.lvlbar{display:flex;gap:8px;margin-bottom:14px}
+.lvlbar button{
+  flex:1;border:1.5px solid var(--line);background:var(--card);border-radius:12px;
+  padding:12px 8px;font-size:14.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+}
+.lvlbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.lvlbar .lvl-desc{display:block;font-size:12px;font-weight:400;color:var(--ink-faint);margin-top:2px}
+.lvlbar button.on .lvl-desc{color:var(--accent)}
+
+.setbar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.setbar button{
+  border:1px solid var(--line);background:var(--card);border-radius:999px;
+  padding:7px 15px;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.setbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.setbar .best{color:var(--gold);font-size:12px;font-weight:700}
+
+.progressbar{height:6px;background:#EDE9DD;border-radius:99px;overflow:hidden;margin-bottom:8px}
+.progressbar>div{height:100%;background:linear-gradient(90deg,var(--accent),#5E7BB0);border-radius:99px;transition:width .3s}
+.quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:14px;gap:10px}
+.quiz-timer{
+  font-weight:700;color:var(--ink-soft);background:#EEEBE0;border-radius:999px;
+  padding:3px 10px;font-size:13px;white-space:nowrap;
+}
+.quiz-timer.timer-fast{background:var(--ok-bg);color:var(--ok)}
+.quiz-meta .score{font-weight:700}
+
+.scenario{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:20px 22px;margin-bottom:14px;
+}
+.scenario .qtext{font-size:16.5px;line-height:1.9}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opts button{
+  text-align:left;background:var(--card);border:1.5px solid var(--line);
+  border-radius:12px;padding:14px 16px;font-size:15px;line-height:1.7;
+  color:var(--ink);cursor:pointer;transition:border-color .15s, background .15s;
+  display:flex;gap:10px;
+}
+.opts button:hover:not(:disabled){border-color:var(--ink-faint)}
+.opts button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opts .abc{
+  font-family:'Noto Serif Thai',serif;font-weight:700;color:var(--ink-faint);
+  min-width:20px;
+}
+.opts button.correct{border-color:var(--ok);background:var(--ok-bg)}
+.opts button.correct .abc{color:var(--ok)}
+.opts button.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opts button.wrong .abc{color:var(--bad)}
+.opts button:disabled{cursor:default;opacity:.92}
+
+.explain{
+  display:none;margin-top:14px;border-radius:12px;padding:16px 18px;
+  font-size:15px;line-height:1.85;border:1px solid;
+}
+.explain.ok{background:var(--ok-bg);border-color:#BFE3CE;color:#14563A}
+.explain.bad{background:var(--bad-bg);border-color:#F0C9C9;color:#7C2A2A}
+.explain b{display:block;margin-bottom:4px;font-size:15.5px}
+.pts-earned{
+  display:inline-block;background:var(--gold);color:#fff;font-weight:800;
+  font-size:12.5px;padding:2px 9px;border-radius:999px;margin-left:6px;vertical-align:middle;
+}
+
+.btn-primary{background:var(--accent);color:#fff;border:none}
+.btn-primary:hover{background:#26406B}
+.btn-ghost{background:var(--card);border:1.5px solid var(--line) !important;color:var(--ink)}
+
+/* ---------- summary ---------- */
+.summary{
+  display:none;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:34px 24px;text-align:center;
+}
+.summary .grade{font-family:'Noto Serif Thai',serif;font-size:24px;font-weight:700;margin-top:8px}
+.summary .bigscore{font-family:'Noto Serif Thai',serif;font-size:52px;font-weight:700;color:var(--accent);line-height:1.2}
+.summary .of{font-size:15px;color:var(--ink-soft)}
+.summary .gstars{color:var(--gold);font-size:22px;letter-spacing:.2em;margin-top:6px}
+.summary .sum-actions{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+.summary .sum-actions button{
+  border-radius:12px;padding:12px 22px;font-size:14.5px;font-weight:700;cursor:pointer;border:none;
+}
+footer{
+  margin-top:40px;text-align:center;font-size:12.5px;color:var(--ink-faint);
+  border-top:1px solid var(--line);padding-top:16px;
+}
+.view{display:none}
+.view.on{display:block}
+
+/* ---------- โหมด 5: สรุปเนื้อหา ---------- */
+.study-nav3{display:flex;gap:10px}
+.study-disclaimer{
+  background:#FFF6E0;border:1px solid #F0D896;color:#7A5A0A;
+  border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;
+  text-align:center;margin-bottom:14px;
+}
+.study-nav3 button{
+  flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:11px;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer;
+}
+.study-nav3 button:hover{border-color:var(--ink-faint)}
+.study-panel{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:22px 24px;margin:14px 0;
+}
+.study-title{
+  font-family:'Noto Serif Thai',serif;font-size:19px;font-weight:700;color:var(--accent);
+  margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid var(--gold-soft);
+}
+.study-toc{
+  background:#F6F3EA;border:1px solid var(--gold-soft);border-radius:12px;
+  padding:12px 14px;margin-bottom:22px;
+}
+.study-toc-label{font-size:12.5px;font-weight:700;color:var(--gold);margin-bottom:8px}
+.study-toc-list{display:flex;flex-wrap:wrap;gap:6px 8px}
+.study-toc-item{
+  font-size:12.5px;text-decoration:none;padding:5px 10px;border-radius:999px;
+  background:var(--card);border:1px solid var(--line);color:var(--ink-soft);
+  transition:border-color .15s,color .15s;
+}
+.study-toc-item:hover{border-color:var(--accent);color:var(--accent)}
+.study-toc-item.toc-major{
+  background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700;
+  flex-basis:100%;border-radius:8px;padding:7px 12px;
+}
+.study-toc-item.toc-major:hover{background:#26406B;color:#fff}
+.study-content{font-size:15px;line-height:1.9;color:var(--ink)}
+.study-content h4,.study-content h5,.study-content h6{
+  font-family:'Noto Serif Thai',serif;color:var(--accent);line-height:1.5;
+}
+.study-content h4{font-size:18px;margin:40px 0 14px;padding-top:14px;border-top:1px solid var(--line)}
+.study-content h4:first-child{margin-top:0;padding-top:0;border-top:none}
+.study-content h5{font-size:16.5px;margin:30px 0 10px}
+.study-content h6{font-size:15.5px;color:var(--gold);margin:22px 0 8px}
+.study-content p{margin:8px 0}
+.study-content ul,.study-content ol{margin:6px 0 10px 22px}
+.study-content li{margin:4px 0}
+.study-content b{color:var(--ink);font-weight:700}
+.study-content hr{border:none;border-top:1px dashed var(--line);margin:18px 0}
+.study-content a{color:var(--accent)}
+.study-content .muted{color:var(--ink-faint);font-style:italic}
+.study-content .tbl-wrap{overflow-x:auto;margin:10px 0}
+.study-content table{border-collapse:collapse;width:100%;font-size:14px}
+.study-content th,.study-content td{
+  border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;
+}
+.study-content th{background:var(--gold-soft);color:#5A4415;font-weight:700}
+.study-content tr:nth-child(even) td{background:#FBF9F3}
+@media(max-width:640px){
+  .tabbar{flex-wrap:wrap;border-radius:16px;max-width:100%}
+  .tabbar button{flex:1 1 30%}
+  #btn-reset,#btn-sound{flex:0 0 auto}
+}
+@media(max-width:520px){
+  .study-panel{padding:16px}
+  .study-title{font-size:17px}
+}
+@media(max-width:520px){
+  body{padding:14px 10px 50px}
+  .flashcard{padding:28px 16px 24px}
+  .scenario{padding:16px}
+}
+
+/* ==================================================
+   Subject-specific additions (กฎหมายลักษณะทรัพย์สิน ป.พ.พ. บรรพ 1, 4)
+   ================================================== */
+
+/* Header score badge (moved from removed home-bar) */
+.header-score{
+  position:absolute;top:14px;right:14px;
+  background:var(--gold-soft);color:#7A5A0A;
+  padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700;
+  border:1px solid #E5C87A;
+}
+.header-score.score-pop{animation:score-pop .3s ease}
+@keyframes score-pop{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+#page-header{position:relative}
+@media(max-width:600px){
+  .header-score{position:static;display:inline-block;margin-top:8px}
+}
+
+/* Mode 1 flashcard — color change on flip */
+.flashcard{transition:transform .16s ease, background-color .3s ease, border-color .3s ease}
+.flashcard.is-back{box-shadow:0 2px 4px rgba(34,40,58,.06),0 10px 26px rgba(34,40,58,.1)}
+
+/* Mode 2 flip-card grid */
+.seq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;perspective:1200px}
+.seq-card{
+  position:relative;background:var(--card);border:1.5px solid var(--line);
+  border-radius:14px;box-shadow:var(--shadow);cursor:pointer;
+  min-height:168px;padding:18px 18px 16px;display:flex;flex-direction:column;
+  transition:transform .16s ease, background-color .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.seq-card.flipping{transform:rotateY(90deg)}
+@media (prefers-reduced-motion:reduce){.seq-card.flipping{transform:none}}
+.seq-card.is-back{box-shadow:0 2px 4px rgba(34,40,58,.06),0 10px 26px rgba(34,40,58,.1)}
+.seq-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.seq-num{
+  font-family:'Noto Serif Thai',serif;font-weight:700;color:var(--ink-faint);
+  background:#EEF2F9;border-radius:999px;width:24px;height:24px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:12.5px;padding-top:0;min-width:24px;
+}
+.seq-sec{font-family:'Noto Serif Thai',serif;font-size:19px;font-weight:700}
+.seq-front-title{font-size:14.5px;font-weight:600;margin-top:10px;line-height:1.6;flex:1}
+.seq-front-hint{font-size:11.5px;color:var(--ink-faint);margin-top:auto;padding-top:8px}
+.seq-res{font-size:13.5px;line-height:1.7;margin-top:8px}
+.seq-note{font-size:12.5px;color:var(--ink-soft);margin-top:10px;line-height:1.6;border-top:1px dashed var(--line);padding-top:8px}
+.seq-back{display:none}
+.seq-card.is-back .seq-front{display:none}
+.seq-card.is-back .seq-back{display:block}
+.seq-progress{font-size:13px;color:var(--ink-faint);margin-bottom:12px}
+
+/* Mode 5 — สรุปเนื้อหา (readable spacing) */
+.study-disclaimer{
+  background:#FFF6E0;border:1px solid #F0D896;color:#7A5A0A;
+  border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;
+  text-align:center;margin-bottom:14px;
+}
+.study-nav3{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.study-nav3 button{
+  flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:11px;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer;
+  min-width:130px;
+}
+.study-nav3 button:hover{border-color:var(--ink-faint)}
+.study-nav3 button.active{color:#fff}
+
+/* TTS bar */
+.tts-bar{
+  display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+  background:#F1EDE2;border:1px solid var(--line);border-radius:12px;
+  padding:8px 12px;margin-bottom:14px;
+}
+.tts-btn{
+  background:var(--accent);color:#fff;border:none;border-radius:8px;
+  padding:8px 14px;font-size:13.5px;font-weight:600;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;font-family:inherit;
+}
+.tts-btn:hover{opacity:.9}
+.tts-btn-ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.tts-btn-ghost:hover{border-color:var(--bad);color:var(--bad)}
+.tts-ico{font-size:11px}
+.tts-rate{font-size:12.5px;color:var(--ink-soft);margin-left:auto;display:inline-flex;align-items:center;gap:6px}
+.tts-rate select{
+  background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:5px 8px;font-family:inherit;font-size:12.5px;cursor:pointer;
+}
+
+/* Study panel — MORE readable spacing (larger fonts, taller line-height, more paragraph gap) */
+.study-panel{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:30px 32px;margin:14px 0;
+}
+@media(max-width:640px){.study-panel{padding:22px 20px}}
+.study-title{
+  font-family:'Noto Serif Thai',serif;font-size:20px;font-weight:700;
+  margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--line);
+}
+.study-toc{
+  margin-bottom:22px;padding:12px 14px;background:#F8F5EC;
+  border:1px solid var(--line);border-radius:10px;
+}
+.study-toc-title{font-size:12px;font-weight:700;color:var(--ink-faint);letter-spacing:.05em;margin-bottom:6px;text-transform:uppercase}
+.study-toc a{
+  display:block;padding:6px 10px;font-size:14px;color:var(--accent);
+  text-decoration:none;border-radius:6px;
+}
+.study-toc a:hover{background:#EEF2F9}
+.study-toc a.toc-major{font-weight:700}
+.study-toc a.toc-item{padding-left:24px;font-weight:500;color:var(--ink-soft);font-size:13.5px}
+.study-panel h4{
+  font-family:'Noto Serif Thai',serif;font-size:17.5px;font-weight:700;
+  margin:32px 0 12px;scroll-margin-top:20px;color:var(--ink);
+  padding-left:12px;border-left:4px solid var(--gold);
+}
+.study-panel h4:first-child{margin-top:8px}
+.study-panel h5{font-size:15px;font-weight:700;margin:18px 0 8px;color:#8A6A25}
+.study-panel p{font-size:15.5px;line-height:2.0;margin:14px 0;color:var(--ink-soft)}
+.study-panel ul,.study-panel ol{font-size:15.5px;line-height:2.0;margin:14px 0 14px 24px;color:var(--ink-soft)}
+.study-panel li{margin-bottom:8px;padding-left:4px}
+.study-panel b{color:var(--ink);font-weight:700}
+.study-panel u{text-decoration-color:var(--gold);text-underline-offset:3px}
+.study-exam-box{
+  background:#FBF6E8;border:1.5px solid var(--gold-soft);border-radius:var(--radius);
+  padding:20px 22px;margin:22px 0;
+}
+.study-exam-box h5{margin-top:0;color:#8A6A25;font-size:15px;border-left:none;padding-left:0}
+.study-exam-box p{font-size:14.5px;line-height:1.9;color:var(--ink-soft);margin:10px 0}
+.study-exam-box ul,.study-exam-box ol{font-size:14.5px;line-height:1.9;color:var(--ink-soft);margin:10px 0 10px 22px}
+.study-exam-box li{margin-bottom:6px}
+.study-progress{font-size:13px;color:var(--ink-faint);margin-bottom:12px}
+
+/* TTS currently-reading highlight */
+.tts-reading{background:linear-gradient(120deg,#FFF3C7 0%,#FFEFB0 100%);border-radius:4px;padding:2px 4px;transition:background .2s}
+
+</style>
+</head>
+<body>
+<script>
+(function(){
+  try {
+    var t = localStorage.getItem('codex-theme');
+    if (t === 'dark' || t === 'horror') document.documentElement.setAttribute('data-theme', t);
+  } catch(e){}
+})();
+</script>
+<div class="home-bar">
+  <a href="index.html" class="home-bar-logo" title="กลับหน้าหลัก" onmouseenter="playHoverSound()">👴🏻</a>
+  <a href="index.html" class="home-bar-link" onmouseenter="playHoverSound()">← กลับหน้าหลัก</a>
+  <span class="home-bar-sep">·</span>
+  <span class="home-bar-current">ป.พ.พ. บรรพ 1, 4 — กฎหมายลักษณะทรัพย์สิน</span>
+  <div class="theme-toggle" role="group" aria-label="เลือกธีม">
+    <button type="button" data-theme-btn="light" onclick="setTheme('light')" onmouseenter="playHoverSound()" title="โหมดสว่าง">☀️</button>
+    <button type="button" data-theme-btn="dark" onclick="setTheme('dark')" onmouseenter="playHoverSound()" title="โหมดมืด">🌙</button>
+    <button type="button" data-theme-btn="horror" onclick="setTheme('horror')" onmouseenter="playHoverSound()" title="โหมดสยองขวัญ">👻</button>
+  </div>
+</div>
+<script>
+let __hbAudioCtx;
+function playHoverSound(){
+  try{
+    __hbAudioCtx = __hbAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __hbAudioCtx;
+    if(c.state === 'suspended') c.resume();
+    const t0 = c.currentTime;
+    const osc = c.createOscillator(), gain = c.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(0.05, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+0.09);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+0.1);
+  }catch(e){}
+}
+</script>
+<div class="wrap">
+
+<header id="page-header">
+  <div class="crest" id="hd-crest">ป.พ.พ. บรรพ 1, 4 — กฎหมายลักษณะทรัพย์สิน</div>
+  <h1 id="hd-title">ห้องซ้อมสอบ วิชาทรัพย์สิน</h1>
+  <div class="subtitle" id="hd-sub">ป.พ.พ. บรรพ 1 (นิยามทรัพย์) และบรรพ 4 (ทรัพยสิทธิ)</div>
+  <div class="header-score" id="global-score">🏆 <span id="score-value">0</span> คะแนน</div>
+</header>
+
+<nav class="tabbar" aria-label="โหมดเกม">
+  <button id="tab-card" class="on">การ์ดจำมาตรา</button>
+  <button id="tab-seq">เรียงมาตรา</button>
+  <button id="tab-quiz">วิเคราะห์โจทย์</button>
+  <button id="tab-irac">ฝึก IRAC</button>
+  <button id="tab-study">สรุปเนื้อหา</button>
+  <button id="btn-sound" title="ปิด/เปิดเสียง" aria-label="ปิด/เปิดเสียง">🔊</button>
+  <button id="btn-reset" title="รีเซ็ตทั้งหมด" aria-label="รีเซ็ตทั้งหมด">↺</button>
+</nav>
+
+<!-- ============ โหมด 1: การ์ด ============ -->
+<section id="view-card" class="view on">
+  <div class="row">
+    <select id="cat-select" aria-label="เลือกหมวด"></select>
+    <span class="muted" id="card-progress"></span>
+  </div>
+  <div class="matra-chips" id="matra-chips"></div>
+  <div class="stage" id="card-stage" aria-hidden="true"></div>
+  <div class="flip-stage">
+    <div class="flashcard" id="flip-card" role="button" tabindex="0" aria-label="แตะเพื่อพลิกการ์ด">
+      <div class="ribbon" id="card-ribbon"></div>
+      <div class="chapter-tag" id="cat-badge"></div>
+      <div class="face-front" id="face-front">
+        <div class="sec-no" id="card-section"></div>
+        <div class="src-tag" id="card-src-front"></div>
+        <div class="stars" id="card-stars"></div>
+        <div class="hint">แตะการ์ดเพื่อดูคำตอบ · ปุ่มลูกศรเลื่อนการ์ด</div>
+      </div>
+      <div class="face-back" id="face-back" style="display:none">
+        <div class="card-title" id="card-title"></div>
+        <div class="src-tag" id="card-src-back"></div>
+        <div class="card-result" id="card-result"></div>
+        <div class="card-note" id="card-note"></div>
+      </div>
+    </div>
+  </div>
+  <div class="nav3">
+    <button id="btn-prev">← ก่อนหน้า</button>
+    <button id="btn-shuffle">⇄ สุ่มใหม่</button>
+    <button id="btn-next">ถัดไป →</button>
+  </div>
+</section>
+
+<!-- ============ โหมด 2: เรียงมาตรา ============ -->
+<section id="view-seq" class="view">
+  <div class="row"><select id="seq-select" aria-label="เลือกหมวดเรียงมาตรา"></select></div>
+  <div id="seq-list"></div>
+</section>
+
+<!-- ============ โหมด 3: วิเคราะห์โจทย์ ============ -->
+<section id="view-quiz" class="view">
+  <div class="lvlbar">
+    <button id="lvl-basic" class="on">พื้นฐาน<span class="lvl-desc">ท่องจำมาตรา–ผลกฎหมาย</span></button>
+    <button id="lvl-adv">ข้อสอบจริง<span class="lvl-desc">โจทย์สถานการณ์แนวข้อสอบ</span></button>
+  </div>
+  <div class="setbar" id="set-picker"></div>
+
+  <div id="quiz-play">
+    <div class="progressbar"><div id="pbar" style="width:0%"></div></div>
+    <div class="quiz-meta">
+      <span class="muted" id="quiz-progress"></span>
+      <span class="quiz-timer" id="quiz-timer">⏱ 0.0s</span>
+      <span class="score" id="quiz-score"></span>
+    </div>
+    <div class="chapter-tag" id="quiz-tag" style="display:inline-block;margin-bottom:10px"></div>
+    <div class="stage" id="quiz-stage" aria-hidden="true"></div>
+    <div class="scenario"><div class="qtext" id="quiz-scenario"></div></div>
+    <div class="opts" id="quiz-options"></div>
+    <div class="explain" id="quiz-explain"></div>
+  </div>
+
+  <div class="summary" id="quiz-summary">
+    <div class="muted" id="sum-set-label"></div>
+    <div class="bigscore" id="sum-score">0</div>
+    <div class="of" id="sum-of">จาก 10 ข้อ</div>
+    <div class="gstars" id="sum-stars"></div>
+    <div class="grade" id="sum-grade"></div>
+    <div class="muted" id="sum-best" style="margin-top:6px"></div>
+    <div class="sum-actions">
+      <button id="sum-review" class="btn-ghost" style="display:none">ทบทวนข้อที่ผิด</button>
+      <button id="sum-retry" class="btn-ghost">ทำชุดนี้ซ้ำ</button>
+      <button id="sum-nextset" class="btn-primary" style="display:none">ชุดถัดไป →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ โหมด 4: ฝึก IRAC ============ -->
+<section id="view-irac" class="view">
+  <div id="irac-picker">
+    <p class="muted" style="margin-bottom:14px;font-size:14px">เลือกข้อสอบจริงที่จะฝึกวินิจฉัยแบบ IRAC ทีละประเด็น: ตั้งประเด็น → เลือกมาตรา → ปรับบท → สรุปผล</p>
+    <div class="irac-caselist" id="irac-caselist"></div>
+  </div>
+
+  <div id="irac-play" style="display:none">
+    <button class="irac-back" id="irac-back">← กลับไปเลือกข้อสอบ</button>
+    <div class="chapter-tag" id="irac-case-tag" style="display:inline-block;margin-bottom:6px"></div>
+    <div class="irac-facts" id="irac-facts"></div>
+    <button class="irac-facts-toggle" id="irac-facts-toggle">ขยายอ่านโจทย์เต็ม ▾</button>
+
+    <div style="margin-top:2px">
+      <div class="irac-progress-label" id="irac-progress-label"></div>
+      <span class="quiz-timer" id="irac-timer">⏱ 0.0s</span>
+      <div class="irac-stepper" id="irac-stepper">
+        <div class="irac-step" data-step="issue">1. ประเด็น</div>
+        <div class="irac-step" data-step="rule">2. มาตรา</div>
+        <div class="irac-step" data-step="app">3. ปรับบท</div>
+        <div class="irac-step" data-step="conc">4. สรุปผล</div>
+      </div>
+    </div>
+
+    <div id="irac-stage-box">
+      <div class="scenario" style="padding:16px 18px;margin-bottom:10px"><div class="qtext" id="irac-question" style="font-size:16.5px"></div></div>
+      <div class="opts" id="irac-options"></div>
+      <div class="explain" id="irac-explain"></div>
+    </div>
+
+    <div id="irac-recap-box" style="display:none">
+      <div class="irac-issue-recap">
+        <div class="big" id="irac-recap-title"></div>
+        <div id="irac-recap-text" style="font-size:14.5px;line-height:1.8;color:#14563A"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary" id="irac-summary">
+    <div class="muted" id="irac-sum-label"></div>
+    <div class="bigscore" id="irac-sum-score">0</div>
+    <div class="of" id="irac-sum-of"></div>
+    <div class="gstars" id="irac-sum-stars"></div>
+    <div class="grade" id="irac-sum-grade"></div>
+    <div class="sum-actions">
+      <button id="irac-sum-retry" class="btn-ghost">ทำข้อนี้ซ้ำ</button>
+      <button id="irac-sum-back" class="btn-ghost">เลือกข้อสอบอื่น</button>
+      <button id="irac-sum-nextcase" class="btn-primary" style="display:none">ข้อถัดไป →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ โหมด 5: สรุปเนื้อหา ============ -->
+<section id="view-study" class="view">
+  <div class="study-disclaimer">⚠️ ใช้ประกอบการอ่านตำราหลักเท่านั้น</div>
+  <div class="study-progress" id="study-progress"></div>
+  <div class="study-nav3" id="study-nav"></div>
+  <div class="tts-bar" id="tts-bar" style="display:none">
+    <button id="tts-play" class="tts-btn" title="อ่านออกเสียง"><span class="tts-ico">▶</span> อ่านออกเสียง</button>
+    <button id="tts-pause" class="tts-btn" title="หยุดชั่วคราว/เล่นต่อ" style="display:none"><span class="tts-ico">⏸</span> หยุดชั่วคราว</button>
+    <button id="tts-stop" class="tts-btn tts-btn-ghost" title="หยุด" style="display:none"><span class="tts-ico">■</span> หยุด</button>
+    <label class="tts-rate">ความเร็ว <select id="tts-rate">
+      <option value="0.8">0.8×</option>
+      <option value="1" selected>1.0×</option>
+      <option value="1.2">1.2×</option>
+      <option value="1.5">1.5×</option>
+    </select></label>
+  </div>
+  <div class="study-panel" id="study-panel"></div>
+</section>
+
+<footer>
+  ใช้อ่านประกอบเท่านั้น
+</footer>
+</div>
+
+<div class="sticky-bar" id="sticky-bar">
+  <div class="sticky-bar-inner">
+    <button id="quiz-next" class="btn-primary" style="display:none">ข้อถัดไป →</button>
+    <button id="quiz-finish" class="btn-primary" style="display:none">ดูสรุปผล</button>
+    <button id="irac-next" class="btn-primary" style="display:none">ถัดไป →</button>
+    <button id="irac-recap-next" class="btn-primary" style="display:none">ประเด็นถัดไป →</button>
+  </div>
+</div>
+
+
+<script>
+const CONFIG = {
+  crest: "ป.พ.พ. บรรพ 1, 4 — กฎหมายลักษณะทรัพย์สิน",
+  title: "ห้องซ้อมสอบ วิชาทรัพย์สิน",
+  subtitle: "ป.พ.พ. บรรพ 1 (นิยามทรัพย์) และบรรพ 4 (ทรัพยสิทธิ)",
+  storageKey: "lawprop_bestScores_v1"
+};
+
+const CATEGORIES = {
+  definition: { label: "1) นิยามและประเภทของทรัพย์", soft: "#E6F4EC", strong: "#1E7A4F", icon: "📦", source: "ป.พ.พ." },
+  accessory: { label: "2) ส่วนควบ อุปกรณ์ และดอกผล ⭐", soft: "#FBEAEA", strong: "#B23A3A", icon: "🌳", source: "ป.พ.พ." },
+  registration: { label: "3) การก่อตั้ง–ได้มาซึ่งทรัพยสิทธิ (ทะเบียน)", soft: "#E7EAF6", strong: "#2E4A7A", icon: "📋", source: "ป.พ.พ." },
+  publicdomain: { label: "4) สาธารณสมบัติของแผ่นดิน", soft: "#F3E8CF", strong: "#8A6A25", icon: "🏞️", source: "ป.พ.พ." },
+  goodfaith: { label: "5) แย่งชิงสังหาฯ และคุ้มครองบุคคลภายนอก", soft: "#EDE3F7", strong: "#6B3FA0", icon: "🤝", source: "ป.พ.พ." },
+  accession: { label: "6) ได้กรรมสิทธิ์โดยผลกฎหมาย (นิติเหตุ)", soft: "#DFF3F0", strong: "#157A6E", icon: "🏗️", source: "ป.พ.พ." },
+  ownership: { label: "7) แดนแห่งกรรมสิทธิ์และการใช้กรรมสิทธิ์", soft: "#FBEBDA", strong: "#C1631A", icon: "🗝️", source: "ป.พ.พ." },
+  necessaryway: { label: "8) ทางจำเป็น", soft: "#E4E9ED", strong: "#3A4A5A", icon: "🛤️", source: "ป.พ.พ." },
+  possession: { label: "9) สิทธิครอบครอง–ครอบครองปรปักษ์ ⭐", soft: "#FDEBD3", strong: "#A6460A", icon: "⏳", source: "ป.พ.พ." },
+  coownership: { label: "10) กรรมสิทธิ์รวม", soft: "#EAF0E0", strong: "#4C6B2E", icon: "👥", source: "ป.พ.พ." }
+};
+
+const CARDS = [
+  // ===== 1) นิยามและประเภทของทรัพย์ (บรรพ 1) =====
+  { cat:"definition", section:"ม.137", title:"นิยาม ทรัพย์", result:"ทรัพย์ คือ วัตถุมีรูปร่าง กล่าวคือมีรูปทรงที่สัมผัสจับต้องได้", note:"เป็นฐานของคำว่า 'ทรัพย์สิน' ในมาตราถัดไป ต้องแยกให้ออกจากสิทธิที่ไม่มีรูปร่าง", stars:4, source:"ป.พ.พ." },
+  { cat:"definition", section:"ม.138", title:"นิยาม ทรัพย์สิน", result:"ทรัพย์สิน หมายความรวมทั้งทรัพย์ และวัตถุไม่มีรูปร่าง ซึ่งอาจมีราคาและอาจถือเอาได้ เช่น กระแสไฟฟ้า สิทธิบัตร ลิขสิทธิ์", note:"ทรัพย์สิน = ทรัพย์ (มีรูปร่าง) + วัตถุไม่มีรูปร่างที่มีราคาและถือเอาได้ — กระแสไฟฟ้าจึงเป็น 'ทรัพย์สิน' แม้ไม่ใช่ 'ทรัพย์'", stars:5, source:"ป.พ.พ." },
+  { cat:"definition", section:"ม.139", title:"นิยาม อสังหาริมทรัพย์", result:"อสังหาริมทรัพย์ หมายความว่า ที่ดินและทรัพย์อันติดอยู่กับที่ดินมีลักษณะเป็นการถาวรหรือประกอบเป็นอันเดียวกับที่ดินนั้น และหมายความรวมถึงทรัพยสิทธิอันเกี่ยวกับที่ดิน หรือทรัพย์อันติดอยู่กับที่ดินนั้นด้วย", note:"3 กลุ่ม: (1) ที่ดิน (2) สิ่งที่ติดที่ดินถาวร/ประกอบเป็นอันเดียวกับที่ดิน (3) ทรัพยสิทธิที่เกี่ยวกับที่ดิน", stars:5, source:"ป.พ.พ." },
+  { cat:"definition", section:"ม.140", title:"นิยาม สังหาริมทรัพย์", result:"สังหาริมทรัพย์ หมายความว่า ทรัพย์สินอื่นนอกจากอสังหาริมทรัพย์ และหมายความรวมถึงสิทธิอันเกี่ยวกับทรัพย์สินนั้นด้วย", note:"เป็นบทนิยามแบบ 'กันเอาไว้' (residual) — ทรัพย์สินใดไม่เข้า ม.139 ก็เป็นสังหาริมทรัพย์ทั้งหมด", stars:4, source:"ป.พ.พ." },
+
+  // ===== 2) ส่วนควบ อุปกรณ์ และดอกผล (จุดเน้นข้อสอบ ⭐) =====
+  { cat:"accessory", section:"ม.144", title:"หลักส่วนควบ", result:"ส่วนควบของทรัพย์ คือส่วนซึ่งโดยสภาพแห่งทรัพย์หรือโดยจารีตประเพณีแห่งท้องถิ่นเป็นสาระสำคัญในความเป็นอยู่ของทรัพย์นั้น และไม่อาจแยกจากกันได้ นอกจากจะทำลาย ทำให้บุบสลาย หรือทำให้ทรัพย์นั้นเปลี่ยนแปลงรูปทรงหรือสภาพไป เจ้าของทรัพย์ย่อมมีกรรมสิทธิ์ในส่วนควบของทรัพย์นั้น", note:"หัวใจของหลักส่วนควบ: (1) เป็นสาระสำคัญ (2) แยกไม่ได้โดยไม่ทำลาย/เสียหาย ผลคือเจ้าของทรัพย์ประธานได้กรรมสิทธิ์ในส่วนควบไปโดยอัตโนมัติ", stars:5, source:"ป.พ.พ." },
+  { cat:"accessory", section:"ม.145 ว.1", title:"ไม้ยืนต้นเป็นส่วนควบของที่ดิน", result:"ไม้ยืนต้นเป็นส่วนควบกับที่ดินที่ไม้นั้นขึ้นอยู่", note:"เช่น ต้นมะม่วง ต้นสัก ที่ปลูกในที่ดิน ย่อมตกเป็นส่วนควบของที่ดิน เจ้าของที่ดินจึงเป็นเจ้าของต้นไม้นั้นด้วย", stars:5, source:"ป.พ.พ." },
+  { cat:"accessory", section:"ม.145 ว.2", title:"ไม้ล้มลุก/ธัญชาติไม่เป็นส่วนควบ", result:"ไม้ล้มลุกหรือธัญชาติอันจะเก็บเกี่ยวรวงผลได้คราวหนึ่งหรือหลายคราวต่อปีไม่ใช่ส่วนควบกับที่ดิน", note:"ข้อยกเว้นสวนทางกับ ว.1 — ข้าว อ้อย ผัก ที่เก็บเกี่ยวเป็นรอบ ไม่ตกเป็นส่วนควบของที่ดิน แม้จะปลูกฝังอยู่กับดินก็ตาม", stars:5, source:"ป.พ.พ." },
+  { cat:"accessory", section:"ม.146", title:"ข้อยกเว้นไม่เป็นส่วนควบ", result:"ทรัพย์ซึ่งติดกับที่ดินหรือโรงเรือนเพียงชั่วคราวไม่ถือว่าเป็นส่วนควบกับที่ดินหรือโรงเรือนนั้น ความข้อนี้ให้ใช้บังคับแก่โรงเรือนหรือสิ่งปลูกสร้างอย่างอื่น ซึ่งผู้มีสิทธิในที่ดินของผู้อื่นใช้สิทธินั้นปลูกสร้างไว้ในที่ดินนั้นด้วย", note:"เช่น ผู้เช่าที่ดินปลูกบ้านโดยมีสิทธิตามสัญญาเช่า บ้านนั้นไม่ตกเป็นส่วนควบของเจ้าของที่ดิน แม้จะติดกับที่ดินก็ตาม", stars:5, source:"ป.พ.พ." },
+  { cat:"accessory", section:"ม.147", title:"อุปกรณ์", result:"อุปกรณ์ คือสังหาริมทรัพย์ซึ่งโดยปกตินิยมเฉพาะถิ่นหรือโดยเจตนาชัดแจ้งของเจ้าของทรัพย์ที่เป็นประธาน เป็นของใช้ประจำอยู่กับทรัพย์ที่เป็นประธานเป็นอาจิณเพื่อประโยชน์แก่การจัดดูแล ใช้สอย หรือรักษาทรัพย์ที่เป็นประธาน และเจ้าของทรัพย์ได้นำมาสู่ทรัพย์ที่เป็นประธานโดยการนำมาติดต่อหรือปรับเข้าไว้ หรือทำโดยประการอื่นใดในฐานะเป็นของใช้ประกอบกับทรัพย์ที่เป็นประธานนั้น นิติกรรมใดมีทรัพย์ที่เป็นประธานเป็นมูลพิพากษา อุปกรณ์ย่อมตกไปกับทรัพย์นั้น เว้นแต่จะมีการกำหนดไว้เป็นอย่างอื่น", note:"ต่างจากส่วนควบตรงที่ อุปกรณ์ถอดแยกออกจากทรัพย์ประธานได้โดยไม่เสียหาย (เช่น ยางอะไหล่รถยนต์ กุญแจบ้าน) แต่กฎหมายให้ตกติดไปกับทรัพย์ประธานเมื่อมีนิติกรรมเกี่ยวกับทรัพย์ประธาน เว้นแต่ตกลงเป็นอย่างอื่น", stars:5, source:"ป.พ.พ." },
+  { cat:"accessory", section:"ม.148", title:"ดอกผล", result:"ดอกผลมี 2 ประเภท คือ ดอกผลธรรมดาและดอกผลนิตินัย ดอกผลธรรมดา หมายความว่า สิ่งที่เกิดขึ้นตามธรรมชาติของทรัพย์ ซึ่งได้มาจากตัวทรัพย์โดยการมีหรือใช้ทรัพย์นั้นตามปกตินิยม และสามารถถือเอาได้เมื่อขาดจากทรัพย์นั้น ดอกผลนิตินัย หมายความว่า ทรัพย์หรือประโยชน์อย่างอื่นที่ได้มาเป็นครั้งคราวแก่เจ้าของทรัพย์จากผู้อื่นเพื่อการที่ได้ใช้ทรัพย์นั้น และสามารถคำนวณและถือเอาได้เป็นรายวันหรือตามระยะเวลาที่กำหนดไว้", note:"ดอกผลธรรมดา = ลูกไม้ ลูกสัตว์ (เกิดจากธรรมชาติของทรัพย์) / ดอกผลนิตินัย = ค่าเช่า ดอกเบี้ย (เป็นค่าตอบแทนจากการให้ผู้อื่นใช้ทรัพย์)", stars:5, source:"ป.พ.พ." },
+
+  // ===== 3) การก่อตั้งและการได้มาซึ่งทรัพยสิทธิ (ระบบทะเบียน) =====
+  { cat:"registration", section:"ม.1298", title:"หลัก Numerus Clausus", result:"ทรัพยสิทธิทั้งหลายนั้น ท่านว่าจะก่อตั้งขึ้นได้แต่ด้วยอาศัยอำนาจในประมวลกฎหมายนี้หรือกฎหมายอื่น", note:"คู่สัญญาจะตกลงสร้าง 'ทรัพยสิทธิ' ชนิดใหม่ขึ้นเองตามใจชอบไม่ได้ ต้องมีกฎหมายบัญญัติรับรองไว้เท่านั้น (ต่างจากบุคคลสิทธิที่ตกลงกันเองได้เสรีตามหลักเสรีภาพในการทำสัญญา)", stars:5, source:"ป.พ.พ." },
+  { cat:"registration", section:"ม.1299 ว.1", title:"ได้ทรัพยสิทธิทางนิติกรรม (อสังหาฯ)", result:"ภายในบังคับแห่งบทบัญญัติในประมวลกฎหมายนี้หรือกฎหมายอื่น ท่านว่าการได้มาโดยนิติกรรมซึ่งอสังหาริมทรัพย์หรือทรัพยสิทธิอันเกี่ยวกับอสังหาริมทรัพย์นั้นไม่บริบูรณ์ เว้นแต่นิติกรรมจะได้ทำเป็นหนังสือและได้จดทะเบียนการได้มากับพนักงานเจ้าหน้าที่", note:"ผลคือ 'ไม่บริบูรณ์' เป็นทรัพยสิทธิ (ยันบุคคลทั่วไปไม่ได้) เท่านั้น ไม่ใช่โมฆะ — ยังคงใช้บังคับกันได้ระหว่างคู่สัญญาในฐานะบุคคลสิทธิ", stars:5, source:"ป.พ.พ." },
+  { cat:"registration", section:"ม.1299 ว.2", title:"ได้ทรัพยสิทธิทางอื่นนอกจากนิติกรรม", result:"ถ้ามีผู้ได้มาซึ่งอสังหาริมทรัพย์หรือทรัพยสิทธิอันเกี่ยวกับอสังหาริมทรัพย์โดยทางอื่นนอกจากนิติกรรม สิทธิของผู้ได้มานั้น ถ้ายังมิได้จดทะเบียนไซร้ ท่านว่าจะมีการเปลี่ยนแปลงทางทะเบียนไม่ได้ และสิทธิอันยังมิได้จดทะเบียนนั้น มิให้ยกขึ้นเป็นข้อต่อสู้บุคคลภายนอกผู้ได้สิทธิมาโดยเสียค่าตอบแทนและโดยสุจริต และได้จดทะเบียนสิทธิโดยสุจริตแล้ว", note:"เช่น ได้กรรมสิทธิ์โดยการครอบครองปรปักษ์หรือรับมรดก — สิทธิสมบูรณ์ทันทีตั้งแต่เข้าเงื่อนไข แต่จะไปเปลี่ยนแปลงทางทะเบียนไม่ได้จนกว่าจะจด และห้ามยกขึ้นต่อสู้บุคคลภายนอกผู้สุจริต เสียค่าตอบแทน และจดทะเบียนโดยสุจริตแล้ว", stars:5, source:"ป.พ.พ." },
+  { cat:"registration", section:"ม.1300", title:"ฟ้องเพิกถอนการจดทะเบียนตัดหน้า", result:"ถ้าได้จดทะเบียนการโอนอสังหาริมทรัพย์หรือทรัพยสิทธิอันเกี่ยวกับอสังหาริมทรัพย์เป็นทางเสียเปรียบแก่บุคคลผู้อยู่ในฐานะอันจะให้จดทะเบียนสิทธิของตนได้อยู่ก่อนไซร้ ท่านว่าบุคคลนั้นอาจเรียกให้เพิกถอนการจดทะเบียนนั้นได้ แต่การเรียกเช่นนี้ท่านมิให้ใช้บังคับ ถ้าผู้รับโอนคนหลังนั้นได้จดทะเบียนโดยสุจริตและเสียค่าตอบแทน", note:"บุคคลที่อยู่ในฐานะจะจดทะเบียนได้อยู่ก่อน (เช่น ผู้ซื้อคนแรกที่ยังไม่ได้จด) มีสิทธิฟ้องเพิกถอนผู้ที่มาจดทะเบียนตัดหน้าได้ เว้นแต่ผู้รับโอนคนหลังจะสุจริตและเสียค่าตอบแทน", stars:5, source:"ป.พ.พ." },
+  { cat:"registration", section:"ม.1302", title:"สังหาริมทรัพย์ชนิดพิเศษ", result:"ท่านให้ใช้บทบัญญัติมาตรา 1299 และมาตรา 1300 บังคับตลอดถึงการได้ทรัพยสิทธิในเรือกำปั่นหรือเรือมีระวางตั้งแต่ห้าตันขึ้นไป ทั้งแพและสัตว์พาหนะด้วยโดยอนุโลม", note:"สังหาริมทรัพย์ชนิดพิเศษ 3 อย่าง (เรือ 5 ตันขึ้นไป, แพ, สัตว์พาหนะ) ต้องมีทะเบียนเช่นเดียวกับอสังหาริมทรัพย์ จึงนำหลักเรื่องระบบทะเบียนของอสังหาฯ มาใช้อนุโลม", stars:4, source:"ป.พ.พ." },
+
+  // ===== 4) สาธารณสมบัติของแผ่นดิน =====
+  { cat:"publicdomain", section:"ม.1304", title:"สาธารณสมบัติของแผ่นดิน", result:"สาธารณสมบัติของแผ่นดินนั้น รวมทรัพย์สินทุกชนิดของแผ่นดินซึ่งใช้เพื่อสาธารณประโยชน์หรือสงวนไว้เพื่อประโยชน์ร่วมกัน เช่น (1) ที่ดินรกร้างว่างเปล่า และที่ดินซึ่งมีผู้เวนคืนหรือทอดทิ้งหรือกลับมาเป็นของแผ่นดินโดยประการอื่นตามกฎหมายที่ดิน (2) ทรัพย์สินสำหรับพลเมืองใช้ร่วมกัน เช่น ที่ชายตลิ่ง ทางน้ำ ทางหลวง ทะเลสาบ (3) ทรัพย์สินใช้เพื่อประโยชน์ของแผ่นดินโดยเฉพาะ เช่น ป้อมและโรงทหาร สำนักราชการบ้านเมือง", note:"อนุมาตรา (2) ทรัพย์ที่พลเมืองใช้ร่วมกัน (ถนน ทางน้ำ) เป็นจุดที่ออกข้อสอบบ่อยที่สุด เพราะเป็นเรื่องใกล้ตัวและปะทะกับสิทธิเอกชนบ่อย", stars:5, source:"ป.พ.พ." },
+  { cat:"publicdomain", section:"ม.1305", title:"ห้ามโอนสาธารณสมบัติของแผ่นดิน", result:"ทรัพย์สินซึ่งเป็นสาธารณสมบัติของแผ่นดินนั้นจะโอนแก่กันมิได้ เว้นแต่อาศัยอำนาจแห่งบทกฎหมายเฉพาะหรือพระราชกฤษฎีกา", note:"เป็นเกราะคุ้มครองไม่ให้เอกชนหรือแม้แต่รัฐเองโอนทรัพย์สาธารณะไปได้ตามอำเภอใจ", stars:4, source:"ป.พ.พ." },
+  { cat:"publicdomain", section:"ม.1306", title:"ห้ามยกอายุความครอบครองปรปักษ์ขึ้นสู้รัฐ", result:"ท่านห้ามมิให้ยกอายุความขึ้นเป็นข้อต่อสู้กับแผ่นดิน ในเรื่องทรัพย์สินอันเป็นสาธารณสมบัติของแผ่นดิน", note:"แม้เอกชนจะครอบครองที่สาธารณะนานเพียงใด ก็ไม่มีทางได้กรรมสิทธิ์โดยการครอบครองปรปักษ์ (ม.1382) เพราะกฎหมายห้ามไว้โดยเฉพาะ", stars:5, source:"ป.พ.พ." },
+  { cat:"publicdomain", section:"ม.1307", title:"ห้ามยึดทรัพย์ของแผ่นดิน", result:"ท่านห้ามมิให้ยึดทรัพย์สินของแผ่นดินไม่ว่าทรัพย์สินนั้นจะเป็นสาธารณสมบัติของแผ่นดินหรือไม่", note:"ครอบคลุมกว้างกว่า ม.1305-1306 เพราะห้ามยึดทรัพย์สินของแผ่นดินทุกประเภท ไม่จำกัดเฉพาะสาธารณสมบัติ", stars:4, source:"ป.พ.พ." },
+
+  // ===== 5) การแย่งชิงสังหาริมทรัพย์ และการคุ้มครองบุคคลภายนอก =====
+  { cat:"goodfaith", section:"ม.1303", title:"การแย่งชิงสังหาริมทรัพย์ทั่วไป", result:"ถ้าทรัพย์สินอันตนได้มาโดยสุจริต เป็นสังหาริมทรัพย์ซึ่งไม่ต้องจดทะเบียน และได้เสียค่าตอบแทน แม้ภายหลังพิสูจน์ได้ว่าผู้โอนทรัพย์สินไม่ใช่เจ้าของ ผู้รับโอนก็ยังคงได้กรรมสิทธิ์ เว้นแต่ทรัพย์สินนั้นเป็นทรัพย์สินที่หายหรือทรัพย์สินที่ได้มาโดยการกระทำผิดอาญา ซึ่งเจ้าของแท้จริงเรียกคืนได้ภายใน 1 ปี", note:"หลัก: ครอบครอง + เสียค่าตอบแทน + สุจริต ผู้รับโอนชนะ / ข้อยกเว้น: ทรัพย์หายหรือทรัพย์จากการกระทำผิดอาญา เจ้าของเดิมติดตามเอาคืนได้ (ภายในเงื่อนไข ม.1332)", stars:5, source:"ป.พ.พ." },
+  { cat:"goodfaith", section:"ม.1329", title:"ได้ทรัพย์จากนิติกรรมโมฆียะ", result:"สิทธิของบุคคลผู้ได้มาซึ่งทรัพย์สินโดยมีค่าตอบแทน และโดยสุจริตนั้น ท่านว่ามิเสียไป ถึงแม้ว่าผู้โอนทรัพย์สินให้จะได้ทรัพย์สินนั้นมาโดยนิติกรรมอันเป็นโมฆียะ และนิติกรรมนั้นได้ถูกบอกล้างภายหลัง", note:"บุคคลภายนอกที่รับโอนทรัพย์มาก่อนที่จะมีการบอกล้างโมฆียะกรรม โดยสุจริตและเสียค่าตอบแทน ได้รับความคุ้มครอง แม้ภายหลังนิติกรรมต้นทางถูกบอกล้างเป็นโมฆะย้อนหลัง", stars:5, source:"ป.พ.พ." },
+  { cat:"goodfaith", section:"ม.1330", title:"ซื้อจากการขายทอดตลาดตามคำสั่งศาล", result:"สิทธิของบุคคลผู้ซื้อทรัพย์สินโดยสุจริตในการขายทอดตลาดตามคำสั่งศาล หรือคำสั่งเจ้าพนักงานรักษาทรัพย์ในคดีล้มละลายนั้น ท่านว่ามิเสียไป ถึงแม้ภายหลังจะพิสูจน์ได้ว่าทรัพย์สินนั้นมิใช่ของจำเลย หรือลูกหนี้โดยคำพิพากษา หรือผู้ล้มละลาย", note:"ผู้ซื้อทรัพย์จากการขายทอดตลาดตามคำสั่งศาลโดยสุจริต ได้กรรมสิทธิ์เด็ดขาด แม้ภายหลังจะพบว่าทรัพย์นั้นไม่ใช่ของลูกหนี้ตัวจริงก็ตาม", stars:4, source:"ป.พ.พ." },
+  { cat:"goodfaith", section:"ม.1331", title:"การได้มาซึ่งเงินตรา", result:"สิทธิของบุคคลผู้ได้เงินตรามาโดยสุจริตนั้น ท่านว่ามิเสียไป ถึงแม้ภายหลังจะพิสูจน์ได้ว่าเงินนั้นมิใช่ของบุคคลซึ่งได้โอนให้มา", note:"เงินตราได้รับความคุ้มครองพิเศษกว่าทรัพย์สินอื่น เพราะเป็นสื่อกลางการแลกเปลี่ยนที่ต้องหมุนเวียนคล่องตัว — เพียงสุจริตก็เพียงพอ ไม่ต้องพิจารณาว่าเสียค่าตอบแทนหรือไม่", stars:4, source:"ป.พ.พ." },
+  { cat:"goodfaith", section:"ม.1332", title:"ซื้อจากตลาดเปิดเผย/ท้องตลาด/พ่อค้า", result:"บุคคลผู้ซื้อทรัพย์สินมาโดยสุจริตในการขายทอดตลาด หรือในท้องตลาด หรือจากพ่อค้าซึ่งขายของชนิดนั้น ไม่จำต้องคืนให้แก่เจ้าของแท้จริง เว้นแต่เจ้าของจะชดใช้ราคาที่ซื้อมา", note:"ครอบคลุม 3 ช่องทาง: (1) ขายทอดตลาด (2) ท้องตลาด (3) พ่อค้าขายของชนิดนั้น — ผู้ซื้อสุจริตไม่ต้องคืนทรัพย์ เว้นแต่เจ้าของเดิมยอมจ่ายราคาคืนให้ผู้ซื้อ (แม้เป็นทรัพย์ที่หายหรือถูกลักไปก็ตาม)", stars:5, source:"ป.พ.พ." },
+
+  // ===== 6) การได้มาซึ่งกรรมสิทธิ์โดยผลของกฎหมาย (นิติเหตุ) =====
+  { cat:"accession", section:"ม.1308", title:"ที่งอกริมตลิ่ง", result:"ที่ดินแปลงใดเกิดที่งอกริมตลิ่ง ที่งอกย่อมเป็นทรัพย์สินของเจ้าของที่ดินแปลงนั้น", note:"ต้องเป็นที่งอกที่เกิดขึ้นเองตามธรรมชาติ (ตะกอนน้ำพัดพาสะสม) ไม่ใช่การถมดินขึ้นเอง จึงจะตกเป็นกรรมสิทธิ์ของเจ้าของที่ดินริมตลิ่งแปลงนั้นโดยอัตโนมัติ", stars:4, source:"ป.พ.พ." },
+  { cat:"accession", section:"ม.1310", title:"ปลูกโรงเรือนในที่ดินผู้อื่นโดยสุจริต", result:"บุคคลใดสร้างโรงเรือนในที่ดินของผู้อื่นโดยสุจริตไซร้ ท่านว่าเจ้าของที่ดินเป็นเจ้าของโรงเรือนนั้น ๆ แต่ต้องใช้ค่าแห่งที่ดินเพียงที่เพิ่มขึ้นเพราะสร้างโรงเรือนนั้นให้แก่ผู้สร้าง", note:"เจ้าของที่ดินได้บ้านไปโดยอัตโนมัติ (ส่วนควบ) แต่ต้องจ่ายค่าที่ดินส่วนที่ราคาเพิ่มขึ้นเพราะมีบ้านหลังนั้นให้แก่ผู้สร้าง — ผู้สร้างไม่มีสิทธิรื้อถอนเอาไป", stars:5, source:"ป.พ.พ." },
+  { cat:"accession", section:"ม.1311", title:"ปลูกโรงเรือนในที่ดินผู้อื่นโดยไม่สุจริต", result:"ถ้าบุคคลผู้สร้างโรงเรือนนั้นกระทำการโดยไม่สุจริตไซร้ ท่านว่าเจ้าของที่ดินจะเรียกให้ผู้สร้างรื้อถอนไป และทำที่ดินให้เป็นตามเดิมโดยผู้สร้างเป็นผู้ออกค่าใช้จ่ายก็ได้", note:"ต่างจาก ม.1310 ตรงที่เจ้าของที่ดินมีทางเลือก 2 ทาง คือรับเอาโรงเรือนไว้ (จ่ายค่าที่ดินเพิ่มขึ้นเหมือน ม.1310) หรือสั่งให้รื้อถอนออกไปโดยผู้สร้างออกค่าใช้จ่ายเองก็ได้", stars:5, source:"ป.พ.พ." },
+  { cat:"accession", section:"ม.1312 ว.1", title:"สร้างโรงเรือนรุกล้ำโดยสุจริต", result:"บุคคลใดสร้างโรงเรือนรุกล้ำเข้าไปในที่ดินของผู้อื่นโดยสุจริตไซร้ ท่านว่าบุคคลนั้นเป็นเจ้าของโรงเรือนที่สร้างขึ้น แต่ต้องเสียเงินให้แก่เจ้าของที่ดินเป็นค่าใช้ที่ดินนั้น และให้จดทะเบียนสิทธิเป็นภาระจำยอม", note:"ต่างจากปลูกทั้งหลัง (ม.1310) ตรงนี้เป็นกรณี 'รุกล้ำ' คือบ้านส่วนใหญ่อยู่ในที่ดินตน แต่ชายคาหรือมุมบ้านล้ำเข้าที่ดินข้างเคียง — ผู้สร้างยังคงเป็นเจ้าของบ้านทั้งหลัง เพียงต้องจ่ายค่าที่ดินส่วนที่รุกล้ำและจดภาระจำยอม", stars:5, source:"ป.พ.พ." },
+  { cat:"accession", section:"ม.1312 ว.2", title:"สร้างโรงเรือนรุกล้ำโดยไม่สุจริต", result:"ถ้าบุคคลผู้สร้างโรงเรือนนั้นกระทำการโดยไม่สุจริต ท่านว่าเจ้าของที่ดินจะเรียกให้ผู้สร้างรื้อถอนส่วนที่รุกล้ำนั้นออกไป และทำที่ดินให้เป็นตามเดิมโดยผู้สร้างเป็นผู้ออกค่าใช้จ่ายก็ได้", note:"ผู้สร้างไม่สุจริตไม่ได้รับความคุ้มครองเรื่องภาระจำยอม เจ้าของที่ดินสั่งให้รื้อเฉพาะส่วนที่รุกล้ำออกไปได้เลย", stars:4, source:"ป.พ.พ." },
+  { cat:"accession", section:"ม.1316", title:"นำสังหาริมทรัพย์มาปะปน/รวมกัน", result:"บุคคลหลายคนเป็นเจ้าของรวมแห่งทรัพย์สินโดยเหตุที่ได้เอาทรัพย์สินหลายรายมาผสมกันเข้าจนเป็นส่วนควบแก่กันหรือแบ่งแยกจากกันไม่ได้ ท่านว่าบุคคลเหล่านั้นเป็นเจ้าของรวมแห่งทรัพย์ที่ผสมกันแล้วนั้น แต่ถ้าทรัพย์สินอันหนึ่งอาจถือได้ว่าเป็นทรัพย์ประธาน ท่านให้ตกเป็นของเจ้าของทรัพย์ประธานแต่ผู้เดียว แต่ต้องใช้ค่าแห่งทรัพย์สินนั้น ๆ ให้แก่เจ้าของทรัพย์อื่น", note:"หลักทั่วไป: เป็นเจ้าของรวมตามสัดส่วน (ไม่มีทรัพย์ประธานชัดเจน) / ข้อยกเว้น: มีทรัพย์ประธาน → เจ้าของทรัพย์ประธานกินรวบ แต่ต้องจ่ายเงินชดใช้ให้เจ้าของทรัพย์ส่วนน้อย", stars:4, source:"ป.พ.พ." },
+  { cat:"accession", section:"ม.1317", title:"ทำสิ่งใหม่ขึ้นด้วยสัมภาระของผู้อื่น", result:"บุคคลใดใช้สัมภาระของผู้อื่นทำเป็นของขึ้นใหม่ไซร้ ท่านว่าของใหม่นั้นตกเป็นของเจ้าของสัมภาระ ถ้าค่าแรงงานสูงกว่าค่าสัมภาระเป็นอันมาก ของใหม่ตกเป็นของผู้ทำ ในกรณีเช่นนี้ ผู้ทำต้องใช้ค่าสัมภาระให้แก่เจ้าของสัมภาระ", note:"หลักคือดูเปรียบเทียบ 'ค่าแรง' vs 'ค่าสัมภาระ' — ถ้าค่าแรงสูงกว่าค่าสัมภาระมาก ผู้ลงแรงได้เป็นเจ้าของ (แต่ต้องชดใช้ค่าสัมภาระ) มิฉะนั้นของใหม่ตกเป็นของเจ้าของสัมภาระตามหลักทั่วไป", stars:4, source:"ป.พ.พ." },
+  { cat:"accession", section:"ม.1323-1325", title:"หน้าที่ของผู้เก็บทรัพย์สินหาย", result:"ผู้เก็บได้ซึ่งทรัพย์สินหายต้องแจ้งแก่เจ้าของโดยไม่ชักช้า หรือประกาศแจ้งความ หากหาเจ้าของไม่พบ ต้องส่งมอบทรัพย์นั้นแก่พนักงานเจ้าหน้าที่ภายใน 3 วัน มิฉะนั้นอาจต้องรับผิดในความสูญหายหรือบุบสลาย", note:"ผู้เก็บได้มีสถานะเป็นเพียงผู้ครอบครองแทนชั่วคราว ยังไม่ได้กรรมสิทธิ์ทันที ต้องปฏิบัติตามขั้นตอนแจ้ง/คืน/ส่งมอบให้ครบก่อน", stars:3, source:"ป.พ.พ." },
+  { cat:"accession", section:"ม.1327", title:"กรรมสิทธิ์ในทรัพย์สินหายตกเป็นของผู้เก็บได้", result:"ถ้าเจ้าของไม่มารับทรัพย์สินภายใน 1 ปีนับแต่วันที่ได้ส่งมอบทรัพย์นั้นไว้แก่พนักงานเจ้าหน้าที่ ท่านว่ากรรมสิทธิ์แห่งทรัพย์สินนั้นตกแก่ผู้เก็บได้", note:"เป็นการได้กรรมสิทธิ์โดยผลของกฎหมาย (นิติเหตุ) เมื่อครบเงื่อนไข 3 ขั้น: เก็บได้ → ส่งมอบเจ้าหน้าที่ภายใน 3 วัน → พ้น 1 ปีไม่มีผู้มารับ", stars:4, source:"ป.พ.พ." },
+
+  // ===== 7) แดนแห่งกรรมสิทธิ์และการใช้กรรมสิทธิ์ =====
+  { cat:"ownership", section:"ม.1335", title:"แดนแห่งกรรมสิทธิ์", result:"ภายในบังคับแห่งบทบัญญัติในประมวลกฎหมายนี้หรือกฎหมายอื่น ท่านว่าแดนแห่งกรรมสิทธิ์ที่ดินนั้นกินทั้งเหนือพื้นดินและใต้พื้นดินด้วย", note:"เจ้าของที่ดินมีสิทธิครอบคลุมทั้งห้วงอากาศเหนือที่ดินและพื้นที่ใต้ดินของแปลงนั้น ไม่ใช่แค่ผิวดินเท่านั้น", stars:4, source:"ป.พ.พ." },
+  { cat:"ownership", section:"ม.1336", title:"สิทธิแห่งกรรมสิทธิ์ 5 ประการ", result:"ภายในบังคับแห่งกฎหมาย เจ้าของทรัพย์สินมีสิทธิใช้สอยและจำหน่ายทรัพย์สินของตนและได้ซึ่งดอกผลแห่งทรัพย์สินนั้น กับทั้งมีสิทธิติดตามและเอาคืนซึ่งทรัพย์สินของตนจากบุคคลผู้ไม่มีสิทธิจะยึดถือไว้ และมีสิทธิขัดขวางมิให้ผู้อื่นสอดเข้าเกี่ยวข้องกับทรัพย์สินนั้นโดยมิชอบด้วยกฎหมาย", note:"5 สิทธิ: (1) ใช้สอย (2) จำหน่าย (3) ได้ดอกผล (4) ติดตามเอาคืน (5) ขัดขวางการสอดเข้าเกี่ยวข้องโดยมิชอบ — เป็นแม่บทของ 'กรรมสิทธิ์' ทั้งหมด", stars:5, source:"ป.พ.พ." },
+  { cat:"ownership", section:"ม.1337", title:"ความเดือดร้อนรำคาญ", result:"บุคคลใดใช้สิทธิของตนเป็นเหตุให้เจ้าของอสังหาริมทรัพย์ได้รับความเสียหาย หรือเดือดร้อนเกินที่ควรคิดหรือคาดหมายได้ว่าจะเป็นไปตามปกติและเหตุอันควรในเมื่อเอาสภาพและตำแหน่งที่อยู่แห่งทรัพย์สินนั้นมาคำนึงประกอบไซร้ ท่านว่าเจ้าของอสังหาริมทรัพย์มีสิทธิจะปฏิบัติการเพื่อยังความเสียหายหรือเดือดร้อนนั้นให้สิ้นไป ทั้งมีสิทธิเรียกเอาค่าทดแทนจากผู้ก่อความเสียหายหรือเดือดร้อนนั้นด้วย", note:"มาตรฐานวัดคือ 'วิญญูชน' — ต้องเกินกว่าที่บุคคลทั่วไปคาดหมายได้ตามปกติ เช่น กลิ่นเหม็นจากโรงงาน เสียงดังผิดปกติ ไม่ใช่แค่ความรำคาญเล็กน้อยทั่วไป", stars:5, source:"ป.พ.พ." },
+
+  // ===== 8) ทางจำเป็น =====
+  { cat:"necessaryway", section:"ม.1349", title:"ทางจำเป็นทั่วไป", result:"ที่ดินแปลงใดมีที่ดินแปลงอื่นล้อมอยู่จนไม่มีทางออกถึงทางสาธารณะได้ไซร้ ท่านว่าเจ้าของที่ดินแปลงนั้นจะผ่านที่ดินซึ่งล้อมอยู่ไปสู่ทางสาธารณะได้ ที่และวิธีทำทางผ่านนั้นต้องเลือกให้พอควรแก่ความจำเป็นของผู้มีสิทธิจะผ่าน กับทั้งให้คำนึงถึงที่ดินที่ล้อมอยู่ให้เสียหายแต่น้อยที่สุดที่จะเป็นได้ ผู้มีสิทธิจะผ่านต้องใช้ค่าทดแทนให้แก่เจ้าของที่ดินที่ล้อมอยู่", note:"เข้าเงื่อนไข 'ที่ดินตาบอด' ได้ 2 ทาง: ไม่มีทางออกเลย หรือมีทางออกแต่ต้องข้ามสระน้ำ บึง หรือที่ชันมากจนใช้ประโยชน์ไม่ได้ ผู้ขอเปิดทางต้องเสียค่าทดแทนแก่เจ้าของที่ดินที่ถูกเปิดทางเสมอ", stars:5, source:"ป.พ.พ." },
+  { cat:"necessaryway", section:"ม.1350", title:"ทางจำเป็นกรณีแบ่งแยก/แบ่งโอนที่ดิน", result:"ถ้าที่ดินแบ่งแยกหรือแบ่งโอนกันเป็นเหตุให้แปลงหนึ่งไม่มีทางออกไปสู่ทางสาธารณะไซร้ ท่านว่าเจ้าของที่ดินแปลงนั้นมีสิทธิเรียกร้องเอาทางเดินตามมาตราก่อนได้เฉพาะบนที่ดินแปลงที่ได้แบ่งแยกหรือแบ่งโอนกันและไม่ต้องเสียค่าทดแทน", note:"เป็นข้อยกเว้นของ ม.1349 — เมื่อที่ดินตาบอดเกิดจากการแบ่งแยก/แบ่งโอนของเจ้าของเดิม ต้องขอเปิดทางเฉพาะจากแปลงที่แยกออกมาด้วยกันเท่านั้น (ไม่ใช่แปลงข้างเคียงอื่น) และไม่ต้องเสียค่าทดแทนเลย", stars:5, source:"ป.พ.พ." },
+
+  // ===== 9) สิทธิครอบครอง และการครอบครองปรปักษ์ (หัวใจสำคัญ ⭐) =====
+  { cat:"possession", section:"ม.1367", title:"การได้มาซึ่งสิทธิครอบครอง", result:"บุคคลใดยึดถือทรัพย์สินโดยเจตนาจะยึดถือเพื่อตน ท่านว่าบุคคลนั้นได้ซึ่งสิทธิครอบครอง", note:"2 องค์ประกอบต้องครบพร้อมกัน: (1) Corpus — ยึดถือทางกายภาพ (2) Animus — เจตนายึดถือเพื่อตนเอง ขาดองค์ประกอบใดไม่เป็นผู้มีสิทธิครอบครอง", stars:5, source:"ป.พ.พ." },
+  { cat:"possession", section:"ม.1368", title:"ผู้ยึดถือแทน", result:"บุคคลอาจได้มาซึ่งสิทธิครอบครองโดยผู้อื่นซึ่งยึดถือทรัพย์สินไว้ให้", note:"เช่น เจ้าของบ้านให้เช่า ผู้เช่าเป็นผู้ยึดถือแทน แต่สิทธิครอบครองยังคงอยู่ที่ผู้ให้เช่า(เจ้าของ) — ตัวอย่างคลาสสิกของ 'ยึดถือแทน'", stars:5, source:"ป.พ.พ." },
+  { cat:"possession", section:"ม.1374", title:"การรบกวนการครอบครอง", result:"ถ้าผู้ครอบครองถูกรบกวนในการครอบครองทรัพย์สินโดยมิชอบด้วยกฎหมายไซร้ ท่านว่าผู้ครอบครองมีสิทธิจะให้ปลดเปลื้องการรบกวนนั้นได้ ถ้าเป็นที่น่าวิตกว่าจะยังมีการรบกวนอีก ผู้ครอบครองจะขอต่อศาลให้สั่งห้ามก็ได้ การฟ้องคดีเพื่อปลดเปลื้องการรบกวนนั้น ท่านว่าต้องฟ้องภายใน 1 ปีนับแต่เวลาถูกรบกวน", note:"ต่างจากการ 'แย่งการครอบครอง' (ม.1375) ตรงที่ผู้ครอบครองยังคงครอบครองทรัพย์อยู่ เพียงถูกรบกวน/ก่อกวนเท่านั้น ไม่ได้ถูกแย่งไปจากมือ", stars:5, source:"ป.พ.พ." },
+  { cat:"possession", section:"ม.1375", title:"การถูกแย่งการครอบครอง", result:"ถ้าผู้ครอบครองถูกแย่งการครอบครองโดยมิชอบด้วยกฎหมายไซร้ ท่านว่าผู้ครอบครองมีสิทธิจะได้คืนซึ่งการครอบครอง เว้นแต่อีกฝ่ายหนึ่งมีสิทธิเหนือทรัพย์สินดีกว่าและใช้สิทธิภายในหนึ่งปีนับแต่เวลาถูกแย่งการครอบครอง การฟ้องคดีเพื่อเอาคืนซึ่งการครอบครองนั้น ท่านว่าต้องฟ้องภายในหนึ่งปีนับแต่เวลาถูกแย่งการครอบครอง", note:"ใช้บ่อยกับที่ดิน น.ส.3 (ที่ไม่มีโฉนด สิทธิเป็นแค่สิทธิครอบครอง) — ถ้ารู้ตัวช้าเกิน 1 ปีนับแต่ถูกแย่ง สิทธิฟ้องเอาคืนขาดไปทันที แม้จะเพิ่งรู้ก็ตาม", stars:5, source:"ป.พ.พ." },
+  { cat:"possession", section:"ม.1377 ว.1", title:"การสละเจตนาครอบครอง", result:"การครอบครองสิ้นสุดลงเมื่อผู้ครอบครองสละเจตนาครอบครอง หรือไม่ยึดถือทรัพย์สินนั้นต่อไป", note:"ต้องมีทั้งสละ 'เจตนา' และ/หรือหยุด 'ยึดถือ' จริง — ถ้ายังยึดถือกายภาพอยู่แต่แค่คิดว่าจะเลิกก็ยังไม่ถือว่าสิ้นสุดจนกว่าจะสละยึดถือจริง", stars:4, source:"ป.พ.พ." },
+  { cat:"possession", section:"ม.1377 ว.2", title:"เหตุชั่วคราวขัดขวางไม่ทำให้ครอบครองสิ้นสุด", result:"ถ้าเป็นแต่เหตุชั่วคราวมีเหตุขัดขวางมิให้ยึดถือทรัพย์สินไซร้ ท่านว่าการครอบครองไม่สุดสิ้นลง", note:"เช่น น้ำท่วมทำให้เข้าที่ดินไม่ได้ชั่วคราว หรือเจ้าของถูกจำคุกระยะสั้น ๆ กรณีเหล่านี้ถือว่าการครอบครองยังไม่ขาดตอน เพราะเป็นเหตุขัดขวางชั่วคราวเท่านั้น", stars:4, source:"ป.พ.พ." },
+  { cat:"possession", section:"ม.1381", title:"การเปลี่ยนลักษณะแห่งการยึดถือ", result:"บุคคลใดยึดถือทรัพย์สินอยู่ในฐานะเป็นผู้แทนสิทธิครอบครองของบุคคลอื่น จะเปลี่ยนลักษณะแห่งการยึดถือได้ก็แต่โดยบอกกล่าวไปยังผู้แทนสิทธิครอบครองว่าไม่เจตนาจะยึดถือทรัพย์สินแทนผู้นั้นต่อไป หรือตนเองเป็นผู้แสดงเจตนาสุจริตว่าตนเป็นผู้ยึดถือทรัพย์สินโดยฐานะเป็นเจ้าของ", note:"ผู้ยึดถือแทน (เช่น ผู้เช่า) จะเปลี่ยนตัวมาเป็นผู้ครอบครองเพื่อตนเอง (จะเริ่มนับเวลาครอบครองปรปักษ์) ต้อง 'บอกกล่าว' ไปยังผู้ครอบครองเดิมอย่างชัดแจ้งเท่านั้น เพียงคิดในใจไม่พอ", stars:5, source:"ป.พ.พ." },
+  { cat:"possession", section:"ม.1382", title:"การครอบครองปรปักษ์", result:"บุคคลใดครอบครองทรัพย์สินของผู้อื่นไว้โดยความสงบและโดยเปิดเผยด้วยเจตนาเป็นเจ้าของ ถ้าเป็นอสังหาริมทรัพย์ได้ครอบครองติดต่อกันเป็นเวลาสิบปี ถ้าเป็นสังหาริมทรัพย์ได้ครอบครองติดต่อกันเป็นเวลาห้าปีไซร้ ท่านว่าบุคคลนั้นได้กรรมสิทธิ์", note:"5 องค์ประกอบต้องครบ: (1) ทรัพย์ของผู้อื่น (2) ครอบครองโดยสงบ (3) โดยเปิดเผย (4) ด้วยเจตนาเป็นเจ้าของ (5) ติดต่อกัน 10 ปี(อสังหาฯ)/5 ปี(สังหาฯ) — มาตรานี้ต้องท่องให้ขึ้นใจ เพราะเป็นแกนกลางของข้อสอบวิชาทรัพย์แทบทุกปี", stars:5, source:"ป.พ.พ." },
+  { cat:"possession", section:"ม.1384", title:"การสมานเวลาครอบครอง", result:"ถ้าผู้ครอบครองขาดยึดถือทรัพย์สินไปโดยมิได้เจตนาสละการครอบครอง แต่ได้คืนภายในเวลาปีหนึ่งนับแต่วันขาดยึดถือ หรือได้คืนโดยฟ้องเรียกคืนภายในกำหนดนั้น ท่านให้ถือว่าการครอบครองไม่ขาดตอน", note:"เป็นบทช่วยเหลือผู้ครอบครองที่ทรัพย์หลุดมือไปชั่วคราวโดยไม่เจตนา (เช่นถูกแย่งไป) — ถ้าเอาคืนมาได้เอง หรือฟ้องเรียกคืนได้ภายใน 1 ปี ให้ถือว่าไม่เคยขาดตอนเลย นับเวลาต่อเนื่องได้", stars:5, source:"ป.พ.พ." },
+  { cat:"possession", section:"ม.1385", title:"การโอนการครอบครอง (นับเวลาต่อ)", result:"ถ้าบุคคลใดโอนไปซึ่งการครอบครองทรัพย์สิน ผู้รับโอนจะนับเวลาซึ่งผู้โอนครอบครองอยู่ก่อนนั้นรวมเข้ากับเวลาครอบครองของตนเองก็ได้ ถ้าผู้รับโอนนับรวมเวลาครอบครองของผู้โอนเข้าด้วยและถือเอาเวลาครอบครองของตนสืบต่อจากผู้โอน ผู้รับโอนต้องรับสภาพการครอบครองของผู้โอนไว้ทุกประการ", note:"ผู้รับโอนสิทธิ 'โดยนิติกรรม' (เช่น ซื้อขาย ให้) นับเวลาต่อจากคนเก่าได้ แต่กรณีเจ้ามรดกตาย ทายาทรับมรดกไม่ใช่ 'การโอน' ตามมาตรานี้ ทายาทจึงต้องเริ่มนับเวลาครอบครองปรปักษ์ใหม่ตั้งแต่ต้น — จุดที่อาจารย์เน้นย้ำเป็นพิเศษในห้องเรียน", stars:5, source:"ป.พ.พ." },
+
+  // ===== 10) กรรมสิทธิ์รวม =====
+  { cat:"coownership", section:"ม.1356", title:"หลักทั่วไปกรรมสิทธิ์รวม", result:"ถ้าทรัพย์สินเป็นของบุคคลหลายคนรวมกัน ท่านให้ใช้บทบัญญัติในหมวดนี้บังคับ เว้นแต่จะมีกฎหมายบัญญัติไว้เป็นอย่างอื่น", note:"เป็นบทเปิดหมวดกรรมสิทธิ์รวม (ม.1356-1366) ใช้เมื่อทรัพย์สินหนึ่งมีเจ้าของร่วมกันหลายคน", stars:3, source:"ป.พ.พ." },
+  { cat:"coownership", section:"ม.1357", title:"ข้อสันนิษฐานส่วนเท่ากัน", result:"ท่านให้สันนิษฐานไว้ก่อนว่าผู้เป็นเจ้าของรวมกันมีส่วนเท่ากัน", note:"เป็นเพียง 'ข้อสันนิษฐาน' ใช้เมื่อไม่ปรากฏหลักฐานอื่นว่าแต่ละคนมีสัดส่วนเท่าใด สามารถหักล้างได้ด้วยพยานหลักฐานอื่น", stars:4, source:"ป.พ.พ." },
+  { cat:"coownership", section:"ม.1358", title:"การจัดการทรัพย์สินรวม", result:"เจ้าของรวมมีสิทธิจัดการทรัพย์สินรวม ในเรื่องจัดการอันเป็นสาระสำคัญ ต้องได้รับความยินยอมของเจ้าของรวมเป็นเสียงข้างมาก และเสียงข้างมากนั้นต้องมีส่วนไม่ต่ำกว่าครึ่งหนึ่งแห่งค่าทรัพย์สิน ส่วนการจัดการอันเป็นสงวนบำรุงรักษาทรัพย์สินและเรียกเก็บผลประโยชน์เล็กน้อย เจ้าของรวมคนหนึ่งคนใดจะจัดทำก็ได้เสมอ", note:"แยก 3 ระดับ: (1) การจัดการธรรมดา — คนใดคนหนึ่งทำได้เลย (2) การจัดการอันเป็นสาระสำคัญ — ต้องใช้เสียงข้างมากของจำนวนคน และสัดส่วนความเป็นเจ้าของรวมกันไม่ต่ำกว่าครึ่งหนึ่ง (3) การสงวนรักษาทรัพย์ — คนใดคนหนึ่งทำได้เสมอเพื่อประโยชน์ของทรัพย์", stars:5, source:"ป.พ.พ." }
+];
+
+const QUIZ_ADV = [
+  {
+    cat:"definition",
+    q:"ก. ลักลอบต่อสายไฟดึงกระแสไฟฟ้าจากมิเตอร์ของเพื่อนบ้านไปใช้ในบ้านตนเองโดยไม่ได้รับอนุญาต ข้อใดถูกต้องเกี่ยวกับสถานะทางกฎหมายของกระแสไฟฟ้า",
+    opts:["กระแสไฟฟ้าไม่ใช่ทรัพย์สินตามกฎหมายเลย เพราะไม่มีรูปร่างให้สัมผัสจับต้องได้","กระแสไฟฟ้าเป็น ทรัพย์สิน ตาม ม.138 แม้จะไม่เป็น ทรัพย์ ตาม ม.137 เพราะเป็นวัตถุไม่มีรูปร่างซึ่งอาจมีราคาและถือเอาได้","กระแสไฟฟ้าเป็นสาธารณสมบัติของแผ่นดินเสมอไม่ว่ากรณีใด","กระแสไฟฟ้าไม่อาจเป็นวัตถุแห่งสิทธิใด ๆ ได้เพราะจับต้องไม่ได้"],
+    ans:1,
+    explain:"ตาม <b>ม.137</b> ทรัพย์ต้องมีรูปร่าง แต่ <b>ม.138</b> ขยายคำว่าทรัพย์สินให้ครอบคลุมวัตถุไม่มีรูปร่างที่อาจมีราคาและถือเอาได้ด้วย เช่น กระแสไฟฟ้า จึงเป็นทรัพย์สินตามกฎหมายแม้จะไม่เข้านิยาม ทรัพย์ ตาม ม.137 โดยตรง"
+  },
+  {
+    cat:"accessory",
+    q:"นาย ก เป็นเจ้าของที่ดินแปลงหนึ่ง ปลูกต้นทุเรียน (ไม้ยืนต้น) ไว้หลายต้น และปลูกข้าวโพด (พืชเก็บเกี่ยวรายปี) แซมไว้ด้วย ต่อมา ก ขายที่ดินแปลงนี้ให้ ข โดยสัญญาซื้อขายไม่ได้พูดถึงต้นไม้และพืชผลไว้เลย ข้อใดถูกต้อง",
+    opts:["ต้นทุเรียนและข้าวโพดตกเป็นของ ข ทั้งหมด เพราะเป็นส่วนควบของที่ดินเหมือนกัน","ต้นทุเรียนตกเป็นส่วนควบของที่ดินจึงเป็นของ ข แต่ข้าวโพดไม่ใช่ส่วนควบตาม ม.145 วรรคสอง จึงยังเป็นของ ก","ทั้งต้นทุเรียนและข้าวโพดไม่ใช่ส่วนควบของที่ดินเลย ยังเป็นของ ก ทั้งหมด","ต้นทุเรียนไม่ใช่ส่วนควบเพราะปลูกภายหลังการได้ที่ดินมา"],
+    ans:1,
+    explain:"<b>ม.145 วรรคหนึ่ง</b> ไม้ยืนต้นเป็นส่วนควบกับที่ดินที่ปลูกอยู่ (ทุเรียนจึงตกเป็นของ ข ผู้ซื้อ) ส่วน <b>วรรคสอง</b> ไม้ล้มลุกหรือธัญชาติที่เก็บเกี่ยวได้เป็นรอบ (ข้าวโพด) ไม่ใช่ส่วนควบกับที่ดิน จึงยังเป็นกรรมสิทธิ์ของ ก อยู่"
+  },
+  {
+    cat:"accessory",
+    q:"ก ขายรถยนต์คันหนึ่งให้ ข โดยสัญญาซื้อขายมิได้กล่าวถึงยางอะไหล่ที่เก็บไว้ในท้ายรถเป็นการเฉพาะเจาะจง ข้อใดถูกต้อง",
+    opts:["ยางอะไหล่ไม่ตกเป็นของ ข เพราะไม่ใช่ส่วนควบ ต้องระบุแยกไว้ในสัญญาเสมอ","ยางอะไหล่เป็นอุปกรณ์ตาม ม.147 ซึ่งเป็นของใช้ประจำอยู่กับรถยนต์เพื่อประโยชน์ในการใช้สอย จึงตกติดไปกับรถยนต์ซึ่งเป็นทรัพย์ประธานโดยไม่ต้องระบุ เว้นแต่จะตกลงกันไว้เป็นอย่างอื่น","ยางอะไหล่เป็นส่วนควบของรถยนต์ เพราะแยกออกจากกันไม่ได้เลย","ยางอะไหล่ไม่ใช่ทรัพย์สินตามกฎหมายเพราะเป็นของเล็กน้อย"],
+    ans:1,
+    explain:"<b>ม.147</b> อุปกรณ์คือสังหาริมทรัพย์ที่เป็นของใช้ประจำอยู่กับทรัพย์ประธานเพื่อประโยชน์แก่การใช้สอย ยางอะไหล่ถอดแยกได้โดยไม่เสียหายจึงไม่ใช่ส่วนควบตาม ม.144 แต่เป็นอุปกรณ์ นิติกรรมใดมีทรัพย์ประธานเป็นมูล อุปกรณ์ย่อมตกไปด้วยเสมอ เว้นแต่จะตกลงกันไว้เป็นอย่างอื่น"
+  },
+  {
+    cat:"accessory",
+    q:"ก ให้ ข เช่าสวนมะม่วง ตกลงค่าเช่าเดือนละ 5,000 บาท ระหว่างระยะเวลาเช่า ต้นมะม่วงออกลูกจำนวนมาก ข้อใดถูกต้องเกี่ยวกับสถานะของลูกมะม่วงและค่าเช่าตาม ม.148",
+    opts:["ลูกมะม่วงและค่าเช่าเป็นดอกผลธรรมดาทั้งคู่","ลูกมะม่วงเป็นดอกผลธรรมดา เพราะเกิดขึ้นตามธรรมชาติของทรัพย์ ส่วนค่าเช่าเป็นดอกผลนิตินัย เพราะเป็นค่าตอบแทนที่ได้จากการให้ผู้อื่นใช้ทรัพย์","ค่าเช่าเป็นดอกผลธรรมดา ส่วนลูกมะม่วงเป็นดอกผลนิตินัย","ทั้งลูกมะม่วงและค่าเช่าไม่ใช่ดอกผลตามความหมายของกฎหมาย"],
+    ans:1,
+    explain:"<b>ม.148</b> แบ่งดอกผลเป็น 2 ประเภท คือ ดอกผลธรรมดา (สิ่งที่เกิดขึ้นตามธรรมชาติของทรัพย์ เช่น ลูกมะม่วง) และดอกผลนิตินัย (ทรัพย์หรือประโยชน์ที่ได้เป็นครั้งคราวจากผู้อื่นเพื่อการใช้ทรัพย์ คำนวณเป็นรายวันหรือตามระยะเวลา เช่น ค่าเช่า)"
+  },
+  {
+    cat:"registration",
+    q:"ก ทำสัญญาขายที่ดินให้ ข เป็นหนังสือ แต่ทั้งสองฝ่ายยังไม่ได้ไปจดทะเบียนโอนต่อพนักงานเจ้าหน้าที่ ข้อใดถูกต้องเกี่ยวกับผลทางกฎหมาย",
+    opts:["สัญญาเป็นโมฆะทันที เพราะไม่จดทะเบียนโอน","การได้มาซึ่งกรรมสิทธิ์ในที่ดิน (ทรัพยสิทธิ) ยังไม่บริบูรณ์ตาม ม.1299 วรรคหนึ่ง แต่สัญญายังผูกพันคู่สัญญาในฐานะบุคคลสิทธิ ข ฟ้องบังคับให้ ก ไปจดทะเบียนโอนได้","ข ได้กรรมสิทธิ์ในที่ดินทันทีที่ทำสัญญาเป็นหนังสือ ไม่ต้องจดทะเบียนอีก","ก ยังคงเป็นเจ้าของที่ดินตลอดไป แม้ภายหลังจะไปจดทะเบียนโอนให้ ข ก็ตาม"],
+    ans:1,
+    explain:"<b>ม.1299 วรรคหนึ่ง</b> การได้มาซึ่งอสังหาริมทรัพย์โดยนิติกรรมไม่บริบูรณ์เป็นทรัพยสิทธิ เว้นแต่จะทำเป็นหนังสือและจดทะเบียนกับพนักงานเจ้าหน้าที่ แต่สัญญาไม่ได้เป็นโมฆะ ยังคงใช้บังคับกันได้ในฐานะบุคคลสิทธิระหว่างคู่สัญญา ข จึงฟ้องบังคับให้ ก ไปจดทะเบียนโอนได้"
+  },
+  {
+    cat:"registration",
+    q:"ก ทำสัญญาขายที่ดินให้ ข แล้ว แต่ยังไม่ได้จดทะเบียน ต่อมา ก กลับไปจดทะเบียนโอนที่ดินแปลงเดียวกันให้ ค ซึ่งรู้อยู่แล้วว่า ก เคยขายที่ดินแปลงนี้ให้ ข ไปก่อน โดย ค รับโอนมาเปล่า ๆ ไม่ได้จ่ายค่าตอบแทนใด ๆ ข้อใดถูกต้อง",
+    opts:["ข ฟ้องเพิกถอนการจดทะเบียนระหว่าง ก กับ ค ไม่ได้ เพราะ ค จดทะเบียนไปแล้ว","ข ฟ้องเพิกถอนการจดทะเบียนระหว่าง ก กับ ค ได้ตาม ม.1300 เพราะ ค รับโอนมาโดยไม่สุจริตและไม่ได้เสียค่าตอบแทน จึงไม่ได้รับความคุ้มครอง","ข ไม่มีสิทธิใด ๆ เลย เพราะไม่เคยจดทะเบียนสิทธิของตนไว้ก่อน","ค ได้กรรมสิทธิ์เด็ดขาดเสมอเพราะเป็นผู้จดทะเบียนก่อน ไม่ว่าจะสุจริตหรือไม่"],
+    ans:1,
+    explain:"<b>ม.1300</b> บุคคลผู้อยู่ในฐานะจะจดทะเบียนสิทธิของตนได้อยู่ก่อน (ข ผู้ซื้อคนแรก) ฟ้องเพิกถอนผู้รับโอนที่จดทะเบียนตัดหน้าได้ เว้นแต่ผู้รับโอนคนหลังจะสุจริตและเสียค่าตอบแทน แต่ ค ทั้งรู้อยู่ว่า ก เคยขายให้ ข แล้ว (ไม่สุจริต) และรับโอนมาเปล่า (ไม่มีค่าตอบแทน) จึงไม่ได้รับความคุ้มครอง ข ฟ้องเพิกถอนได้"
+  },
+  {
+    cat:"publicdomain",
+    q:"ก สร้างรั้วรุกล้ำเข้าไปในถนนสาธารณะหน้าบ้านตนมาเป็นเวลา 15 ปีแล้วโดยไม่มีใครทักท้วง ก อ้างว่าตนได้กรรมสิทธิ์ในที่ดินส่วนนั้นแล้วโดยการครอบครองปรปักษ์ ข้อใดถูกต้อง",
+    opts:["ก ได้กรรมสิทธิ์แล้ว เพราะครอบครองเกิน 10 ปีตาม ม.1382","ก ไม่ได้กรรมสิทธิ์ เพราะถนนสาธารณะเป็นสาธารณสมบัติของแผ่นดินตาม ม.1304 และ ม.1306 ห้ามยกอายุความครอบครองปรปักษ์ขึ้นต่อสู้แผ่นดินไม่ว่าจะครอบครองนานเพียงใด","ก ได้กรรมสิทธิ์ เพราะรัฐไม่ได้ใช้ประโยชน์จากที่ดินส่วนนั้นเลย","ต้องแบ่งกรรมสิทธิ์กันระหว่าง ก กับรัฐตามสัดส่วนที่รุกล้ำ"],
+    ans:1,
+    explain:"<b>ม.1304(2)</b> ถนนเป็นทรัพย์สินสำหรับพลเมืองใช้ร่วมกัน จึงเป็นสาธารณสมบัติของแผ่นดิน และ <b>ม.1306</b> ห้ามยกอายุความครอบครองปรปักษ์ขึ้นต่อสู้แผ่นดินในเรื่องทรัพย์สินที่เป็นสาธารณสมบัติ ไม่ว่าจะครอบครองนานเพียงใดก็ไม่ได้กรรมสิทธิ์"
+  },
+  {
+    cat:"publicdomain",
+    q:"หน่วยงานราชการแห่งหนึ่งเป็นหนี้บริษัทเอกชนรายหนึ่ง บริษัทจึงขอให้เจ้าพนักงานบังคับคดียึดรถยนต์ราชการที่จอดในสำนักงานเพื่อขายทอดตลาดชำระหนี้ ข้อใดถูกต้อง",
+    opts:["บริษัททำได้ เพราะเป็นการบังคับคดีตามกระบวนการปกติ","บริษัททำไม่ได้ เพราะ ม.1307 ห้ามยึดทรัพย์สินของแผ่นดินไม่ว่าจะเป็นสาธารณสมบัติของแผ่นดินหรือไม่ก็ตาม","บริษัททำได้ต่อเมื่อได้รับอนุญาตจากศาลปกครองเสียก่อนเท่านั้น","บริษัทต้องฟ้องให้หน่วยงานราชการนั้นล้มละลายก่อนจึงจะยึดทรัพย์ได้"],
+    ans:1,
+    explain:"<b>ม.1307</b> ห้ามยึดทรัพย์สินของแผ่นดินไม่ว่าจะเป็นสาธารณสมบัติของแผ่นดินหรือไม่ก็ตาม รถยนต์ราชการแม้จะไม่ใช่สาธารณสมบัติของแผ่นดินโดยตรง (เป็นทรัพย์ที่ใช้เพื่อประโยชน์ของแผ่นดินโดยเฉพาะ) ก็ยังอยู่ในความคุ้มครองห้ามยึดตามมาตรานี้"
+  },
+  {
+    cat:"goodfaith",
+    q:"กระเป๋าสตางค์ของ ก หายไป ต่อมา ข เก็บได้แล้วนำไปขายต่อให้ ค ซึ่งซื้อโดยสุจริตในราคาเหมาะสม ณ ท้องตลาดทั่วไป ก ตามพบกระเป๋าอยู่ที่ ค และต้องการเรียกคืน ข้อใดถูกต้อง",
+    opts:["ก เรียกคืนไม่ได้เลย เพราะ ค ซื้อมาโดยสุจริต","ก เรียกคืนได้ตาม ม.1303 เพราะเป็นทรัพย์ที่หาย แต่ต้องใช้ราคาที่ ค ซื้อมาคืนให้ ค ตาม ม.1332 เพราะ ค ซื้อมาโดยสุจริตในท้องตลาด","ก เรียกคืนได้โดยไม่ต้องจ่ายเงินคืนให้ ค เพราะเป็นทรัพย์ของตนเองอยู่แล้ว","ค ต้องคืนกระเป๋าให้ ข ผู้เก็บได้ ไม่ใช่คืนให้ ก"],
+    ans:1,
+    explain:"<b>ม.1303</b> ทรัพย์ที่หายไม่ได้รับความคุ้มครองตามหลักทั่วไป เจ้าของเดิมติดตามเรียกคืนได้เสมอ แต่เมื่อ ค ซื้อมาโดยสุจริตในท้องตลาดตาม <b>ม.1332</b> กฎหมายกำหนดให้เจ้าของเดิม (ก) ต้องชดใช้ราคาที่ ค ซื้อมาคืนให้ ค จึงจะได้กระเป๋าคืน"
+  },
+  {
+    cat:"goodfaith",
+    q:"ก ถูกข่มขู่ให้ทำสัญญาขายนาฬิกาเรือนหนึ่งให้ ข ในราคาต่ำกว่าตลาดมาก ต่อมา ข ขายนาฬิกาต่อให้ ค ซึ่งซื้อมาโดยสุจริตและเสียค่าตอบแทนตามราคาตลาด หลังจากนั้น ก จึงบอกล้างสัญญาที่ถูกข่มขู่ ข้อใดถูกต้องเกี่ยวกับสิทธิของ ค",
+    opts:["ค ต้องคืนนาฬิกาให้ ก เพราะสัญญาเดิมเป็นโมฆียะและถูกบอกล้างแล้ว","สิทธิของ ค ซึ่งได้นาฬิกามาโดยสุจริตและเสียค่าตอบแทนก่อนมีการบอกล้าง ไม่เสียไปตาม ม.1329 แม้สัญญาต้นทางจะถูกบอกล้างเป็นโมฆะย้อนหลังภายหลังก็ตาม","ก ไม่มีสิทธิบอกล้างสัญญาอีกต่อไปเพราะนาฬิกาถูกขายไปแล้ว","ข ต้องคืนนาฬิกาเรือนใหม่ให้ ก แทนเรือนเดิม"],
+    ans:1,
+    explain:"<b>ม.1329</b> คุ้มครองบุคคลภายนอกที่ได้ทรัพย์มาโดยสุจริตและเสียค่าตอบแทนก่อนมีการบอกล้างโมฆียะกรรม สิทธิของ ค จึงไม่เสียไป แม้สัญญาระหว่าง ก กับ ข จะถูกบอกล้างเป็นโมฆะย้อนหลังภายหลังก็ตาม ก มีสิทธิเพียงเรียกค่าเสียหายจาก ข เท่านั้น"
+  },
+  {
+    cat:"accession",
+    q:"ก สร้างบ้านลงในที่ดินของ ข โดยเข้าใจผิดโดยสุจริตว่าเป็นที่ดินของตนเอง (คำนวณแนวเขตผิดพลาด) ข้อใดถูกต้อง",
+    opts:["ข เป็นเจ้าของบ้านหลังนั้นทันที แต่ต้องใช้ค่าที่ดินส่วนที่เพิ่มขึ้นเพราะมีบ้านให้แก่ ก ตาม ม.1310","ข มีสิทธิเลือกสั่งให้ ก รื้อถอนบ้านออกไปได้เสมอ เพราะบ้านอยู่ในที่ดินของตน","ก เป็นเจ้าของบ้านต่อไป ข ไม่มีสิทธิใด ๆ ในบ้านหลังนั้นเลย","บ้านหลังนั้นตกเป็นสาธารณสมบัติของแผ่นดินโดยอัตโนมัติ"],
+    ans:0,
+    explain:"<b>ม.1310</b> กรณีสร้างโรงเรือนในที่ดินผู้อื่นโดยสุจริต เจ้าของที่ดินเป็นเจ้าของโรงเรือนนั้นไปเลย แต่ต้องใช้ค่าที่ดินเพียงส่วนที่เพิ่มขึ้นเพราะสร้างโรงเรือนนั้นให้แก่ผู้สร้าง ต่างจาก ม.1311 ซึ่งเป็นกรณีไม่สุจริตที่เจ้าของที่ดินมีทางเลือกสั่งรื้อถอนได้ด้วย"
+  },
+  {
+    cat:"accession",
+    q:"ก สร้างบ้านในที่ดินของตนเองโดยสุจริต แต่เนื่องจากคำนวณแนวเขตผิดพลาดเล็กน้อย ทำให้ชายคาบ้านรุกล้ำเข้าไปในที่ดินของ ข เพื่อนบ้านประมาณ 30 เซนติเมตร ข้อใดถูกต้อง",
+    opts:["ข มีสิทธิเรียกให้ ก รื้อถอนส่วนที่รุกล้ำออกไปได้ทันที","ก เป็นเจ้าของบ้านทั้งหลังต่อไป แต่ต้องเสียเงินค่าใช้ที่ดินส่วนที่รุกล้ำให้ ข และให้จดทะเบียนสิทธิเป็นภาระจำยอมตาม ม.1312 วรรคหนึ่ง","บ้านทั้งหลังตกเป็นของ ข เพราะมีส่วนหนึ่งรุกล้ำเข้าไปในที่ดินของ ข","ก ต้องรื้อบ้านทั้งหลังออกไปทั้งหมด ไม่ใช่เฉพาะส่วนที่รุกล้ำ"],
+    ans:1,
+    explain:"<b>ม.1312 วรรคหนึ่ง</b> กรณีสร้างโรงเรือนรุกล้ำเข้าไปในที่ดินผู้อื่นโดยสุจริต ผู้สร้างยังคงเป็นเจ้าของโรงเรือนทั้งหลัง เพียงแต่ต้องเสียเงินค่าใช้ที่ดินส่วนที่รุกล้ำ และให้จดทะเบียนสิทธิเป็นภาระจำยอมแก่เจ้าของที่ดินที่ถูกรุกล้ำ ไม่ต้องรื้อถอน"
+  },
+  {
+    cat:"accession",
+    q:"ช่างแกะสลักผู้มีฝีมือนำไม้ท่อนหนึ่งซึ่งเข้าใจผิดโดยสุจริตว่าเป็นของตนเอง (แต่แท้จริงเป็นของผู้อื่น) มาแกะสลักเป็นประติมากรรมมูลค่าสูงมาก โดยค่าฝีมือแรงงานสูงกว่าค่าไม้เดิมหลายสิบเท่า ข้อใดถูกต้อง",
+    opts:["ประติมากรรมตกเป็นของเจ้าของไม้เดิมเสมอ เพราะไม้เป็นสัมภาระ","ประติมากรรมตกเป็นของช่างแกะสลักผู้ทำตาม ม.1317 เพราะค่าแรงงานสูงกว่าค่าสัมภาระเป็นอันมาก แต่ช่างต้องใช้ค่าสัมภาระ(ค่าไม้)ให้แก่เจ้าของไม้เดิม","ต้องแบ่งกรรมสิทธิ์กันคนละครึ่งระหว่างช่างกับเจ้าของไม้","ประติมากรรมตกเป็นของทั้งสองฝ่ายร่วมกันตามสัดส่วนค่าแรงและค่าไม้เสมอ"],
+    ans:1,
+    explain:"<b>ม.1317</b> หลักทั่วไปของใหม่ตกเป็นของเจ้าของสัมภาระ แต่ข้อยกเว้นคือถ้าค่าแรงงานสูงกว่าค่าสัมภาระเป็นอันมาก ของใหม่ตกเป็นของผู้ทำ โดยผู้ทำต้องใช้ค่าสัมภาระให้แก่เจ้าของสัมภาระเดิม"
+  },
+  {
+    cat:"ownership",
+    q:"รถจักรยานยนต์ของ ก ถูกลักไปโดย ข และ ข นำไปขายต่อให้ ค ซึ่งไม่สุจริต (รู้อยู่แล้วว่าเป็นของที่ถูกขโมยมา) ก ต้องการเอารถคืนจาก ค ข้อใดถูกต้อง",
+    opts:["ก ไม่มีสิทธิเรียกคืนอีกแล้ว เพราะไม่ได้ครอบครองรถอยู่","ก มีสิทธิติดตามและเอาคืนซึ่งทรัพย์สินของตนจากผู้ไม่มีสิทธิยึดถือไว้ตาม ม.1336 ได้โดยไม่ต้องจ่ายค่าตอบแทนใด ๆ เพราะ ค ไม่สุจริต","ก ต้องซื้อรถคืนจาก ค ในราคาตลาดเสมอ","รถตกเป็นกรรมสิทธิ์ของ ค เพราะเป็นผู้ครอบครองอยู่ในปัจจุบัน"],
+    ans:1,
+    explain:"<b>ม.1336</b> ให้สิทธิเจ้าของทรัพย์ติดตามและเอาคืนซึ่งทรัพย์สินของตนจากบุคคลผู้ไม่มีสิทธิจะยึดถือไว้ เมื่อ ค รับซื้อมาโดยไม่สุจริต จึงไม่ได้รับความคุ้มครองตาม ม.1332 (ซึ่งต้องสุจริต) ก จึงติดตามเอาคืนได้โดยไม่ต้องจ่ายค่าตอบแทนใด ๆ"
+  },
+  {
+    cat:"ownership",
+    q:"โรงงานผลิตยางแห่งหนึ่งปล่อยกลิ่นเหม็นรุนแรงและควันดำตลอดเวลาทำการ ทำให้บ้านเรือนบริเวณใกล้เคียงได้รับความเดือดร้อนเกินกว่าที่ควรคาดหมายได้ตามปกติ แม้โรงงานจะมีใบอนุญาตประกอบกิจการถูกต้องก็ตาม ข้อใดถูกต้อง",
+    opts:["เจ้าของบ้านทำอะไรไม่ได้เลย เพราะโรงงานมีใบอนุญาตประกอบกิจการถูกต้อง","เจ้าของบ้านมีสิทธิฟ้องให้ระงับเหตุเดือดร้อนรำคาญและเรียกค่าทดแทนจากโรงงานได้ตาม ม.1337 แม้โรงงานจะมีใบอนุญาตก็ตาม","เจ้าของบ้านต้องทนรับสภาพนั้นไปเพราะเป็นเรื่องปกติของย่านอุตสาหกรรม","เจ้าของบ้านฟ้องได้เฉพาะให้ปิดโรงงานเท่านั้น ไม่มีสิทธิเรียกค่าทดแทน"],
+    ans:1,
+    explain:"<b>ม.1337</b> ให้สิทธิเจ้าของอสังหาริมทรัพย์ที่ได้รับความเสียหายหรือเดือดร้อนเกินกว่าที่ควรคาดหมายได้ตามปกติ ฟ้องให้ระงับเหตุและเรียกค่าทดแทนได้ ไม่ว่าผู้ก่อเหตุจะมีใบอนุญาตประกอบกิจการตามกฎหมายอื่นหรือไม่ก็ตาม เพราะเป็นคนละเรื่องกับกฎหมายปกครอง"
+  },
+  {
+    cat:"necessaryway",
+    q:"นาย ก มีที่ดินแปลงใหญ่แปลงหนึ่ง ต่อมาแบ่งขายเป็น 3 แปลงย่อยให้ ข ค และ ง โดยแปลงของ ง ซึ่งอยู่ตรงกลางไม่มีทางออกสู่ทางสาธารณะเลย ง จึงต้องการขอเปิดทางผ่าน ข้อใดถูกต้อง",
+    opts:["ง มีสิทธิเลือกขอเปิดทางผ่านที่ดินแปลงใดก็ได้ที่ล้อมอยู่ รวมถึงแปลงอื่นที่ไม่เกี่ยวกับการแบ่งแยกครั้งนี้ และต้องเสียค่าทดแทนเสมอ","ง ต้องขอเปิดทางเฉพาะบนที่ดินแปลงของ ข หรือ ค ซึ่งเป็นแปลงที่แบ่งแยกออกมาด้วยกันเท่านั้นตาม ม.1350 และไม่ต้องเสียค่าทดแทน","ง ไม่มีสิทธิขอเปิดทางเลย เพราะยินยอมซื้อที่ดินที่ไม่มีทางออกด้วยตนเอง","ง ต้องฟ้องให้หน่วยงานรัฐเวนคืนที่ดินข้างเคียงให้ตน"],
+    ans:1,
+    explain:"<b>ม.1350</b> เป็นข้อยกเว้นของ ม.1349 เมื่อที่ดินตาบอดเกิดจากการแบ่งแยกที่ดินแปลงใหญ่ กฎหมายบังคับให้ขอเปิดทางเฉพาะจากที่ดินแปลงที่แบ่งแยกออกมาด้วยกัน (ของ ข หรือ ค) เท่านั้น และไม่ต้องเสียค่าทดแทน ต่างจาก ม.1349 ทั่วไปที่เลือกแปลงใดก็ได้แต่ต้องเสียค่าทดแทน"
+  },
+  {
+    cat:"possession",
+    q:"เด็กชาย ก อายุ 8 ขวบ เก็บนาฬิกาเรือนหนึ่งที่ตกอยู่ริมถนนแล้วหยิบใส่กระเป๋าตนเองไปโดยไม่บอกใคร ข้อใดเกี่ยวกับสิทธิครอบครองถูกต้องที่สุด",
+    opts:["เด็กชาย ก ไม่มีสิทธิครอบครองเลย เพราะยังเป็นผู้เยาว์ไม่มีความสามารถทำนิติกรรม","เด็กชาย ก ได้สิทธิครอบครองนาฬิกาเพราะมีทั้งการยึดถือทางกายภาพ(หยิบใส่กระเป๋า)และเจตนายึดถือเพื่อตนเอง ครบองค์ประกอบตาม ม.1367","ต้องรอให้เด็กชาย ก บรรลุนิติภาวะก่อน จึงจะมีสิทธิครอบครองได้","สิทธิครอบครองยังคงเป็นของเจ้าของเดิมตลอดไปไม่ว่ากรณีใด"],
+    ans:1,
+    explain:"<b>ม.1367</b> การได้สิทธิครอบครองอาศัยเพียง 2 องค์ประกอบ คือการยึดถือทางกายภาพ (Corpus) และเจตนายึดถือเพื่อตนเอง (Animus) การครอบครองเป็นสภาพข้อเท็จจริง ไม่ใช่นิติกรรมที่ต้องอาศัยความสามารถสมบูรณ์เช่นเดียวกับผู้ทำนิติกรรม"
+  },
+  {
+    cat:"possession",
+    q:"ข เช่าที่ดินจาก ก มาปลูกบ้านอยู่อาศัยเป็นเวลา 12 ปี โดยตลอดมา ข ยึดถือที่ดินในฐานะผู้เช่า(ยึดถือแทน ก) โดยไม่เคยบอกกล่าวเปลี่ยนลักษณะการยึดถือแต่อย่างใด ข อ้างว่าตนได้กรรมสิทธิ์ในที่ดินแล้วโดยการครอบครองปรปักษ์ ข้อใดถูกต้อง",
+    opts:["ข ได้กรรมสิทธิ์แล้ว เพราะครอบครองเกิน 10 ปีตาม ม.1382","ข ยังไม่ได้กรรมสิทธิ์ เพราะเป็นการยึดถือแทน ก ตาม ม.1368 หากไม่บอกกล่าวเปลี่ยนลักษณะการยึดถือไปยัง ก ตาม ม.1381 การนับเวลาครอบครองปรปักษ์เพื่อตนเองย่อมไม่เริ่มต้น","ข ได้กรรมสิทธิ์ทันทีที่ครบกำหนดสัญญาเช่า","ก สูญเสียกรรมสิทธิ์ในที่ดินไปตั้งแต่วันที่ให้เช่าแล้ว"],
+    ans:1,
+    explain:"ผู้เช่ายึดถือที่ดินแทนผู้ให้เช่าตาม <b>ม.1368</b> แม้จะครอบครองนานเพียงใดก็ไม่นับเป็นการครอบครองปรปักษ์เพื่อตนเอง เว้นแต่จะบอกกล่าวเปลี่ยนลักษณะการยึดถือไปยังผู้ให้เช่าตาม <b>ม.1381</b> อย่างชัดแจ้งเสียก่อน จึงจะเริ่มนับเวลาครอบครองปรปักษ์ของตนเองได้"
+  },
+  {
+    cat:"possession",
+    q:"นาย ก ครอบครองที่ดินของผู้อื่นโดยสงบเปิดเผยด้วยเจตนาเป็นเจ้าของมาแล้ว 7 ปี แล้วถึงแก่ความตาย นาย ข บุตรชายรับมรดกที่ดินแปลงนี้ต่อมาและครอบครองต่อเนื่องอีก 4 ปี รวมเป็น 11 ปี นาย ข อ้างว่าตนได้กรรมสิทธิ์โดยครอบครองปรปักษ์แล้ว ข้อใดถูกต้อง",
+    opts:["ข ได้กรรมสิทธิ์แล้ว เพราะนับเวลารวมของ ก กับ ข ได้ 11 ปี เกิน 10 ปีตาม ม.1385","ข ยังไม่ได้กรรมสิทธิ์ เพราะการรับมรดกไม่ใช่ การโอนการครอบครอง ตาม ม.1385 ทายาทต้องเริ่มนับเวลาครอบครองปรปักษ์ของตนเองใหม่ตั้งแต่ต้น ซึ่ง ข ครอบครองมาเพียง 4 ปี ยังไม่ครบ 10 ปี","ข ได้กรรมสิทธิ์ทันทีที่รับมรดก โดยไม่ต้องนับเวลาครอบครองเลย","ต้องนับเฉพาะเวลาของ ก เท่านั้น ข ไม่มีสิทธินับเวลาเลย"],
+    ans:1,
+    explain:"จุดที่อาจารย์เน้นเป็นพิเศษ <b>ม.1385</b> ให้ผู้รับโอนนับเวลาครอบครองของผู้โอนต่อได้เฉพาะกรณี โอนการครอบครอง (เช่น ซื้อขาย ให้) แต่กรณีเจ้ามรดกตายแล้วทายาทรับมรดกไม่ใช่การโอนตามความหมายนี้ ทายาทจึงต้องเริ่มนับเวลาครอบครองปรปักษ์เพื่อตนเองใหม่ตั้งแต่ต้น ข จึงครอบครองมาเพียง 4 ปี ยังไม่ครบ 10 ปีตาม ม.1382"
+  },
+  {
+    cat:"possession",
+    q:"ก มีที่ดิน น.ส.3 แปลงหนึ่งซึ่งตนครอบครองอยู่ ต่อมา ข บุกรุกเข้ายึดถือครอบครองที่ดินแปลงนั้นแทน ก โดย ก ทราบเรื่องทันทีแต่ปล่อยปละละเลยไม่ดำเนินการใด ๆ นานถึง 2 ปี จึงเพิ่งมาฟ้องขอให้ ข ออกจากที่ดินและคืนการครอบครองให้ตน ข้อใดถูกต้อง",
+    opts:["ก ฟ้องได้เสมอ เพราะที่ดินยังเป็นของ ก อยู่ไม่ว่าเวลาจะผ่านไปนานเท่าใด","สิทธิฟ้องเรียกคืนการครอบครองของ ก ขาดไปแล้ว เพราะ ม.1375 กำหนดให้ต้องฟ้องภายใน 1 ปีนับแต่เวลาถูกแย่งการครอบครอง","ก มีเวลาฟ้องได้ถึง 10 ปี เช่นเดียวกับอายุความครอบครองปรปักษ์","ข ต้องพิสูจน์ว่าตนสุจริตก่อน ก จึงจะหมดสิทธิฟ้อง"],
+    ans:1,
+    explain:"<b>ม.1375</b> กำหนดให้ผู้ถูกแย่งการครอบครองต้องฟ้องเรียกคืนภายใน 1 ปีนับแต่เวลาถูกแย่งการครอบครอง เมื่อ ก ปล่อยเวลาล่วงเลยไปถึง 2 ปีจึงมาฟ้อง สิทธิฟ้องเรียกคืนการครอบครองย่อมขาดไปแล้ว แม้ ก จะยังเป็นเจ้าของกรรมสิทธิ์อยู่ก็ตาม"
+  },
+  {
+    cat:"coownership",
+    q:"ก ข และ ค เป็นเจ้าของรวมในที่ดินแปลงหนึ่งคนละเท่า ๆ กัน ก ต้องการรื้อถอนอาคารเดิมแล้วปลูกสร้างอาคารพาณิชย์ใหม่ทั้งหมด (ถือเป็นการจัดการอันเป็นสาระสำคัญ) แต่ ข และ ค ไม่เห็นด้วย ข้อใดถูกต้อง",
+    opts:["ก มีสิทธิดำเนินการคนเดียวได้เลย เพราะเป็นเจ้าของรวมคนหนึ่งเช่นเดียวกัน","ก ไม่มีสิทธิดำเนินการโดยลำพัง เพราะการจัดการอันเป็นสาระสำคัญตาม ม.1358 ต้องได้รับความยินยอมจากเจ้าของรวมเสียงข้างมากซึ่งมีส่วนไม่ต่ำกว่าครึ่งหนึ่งของทรัพย์สิน เมื่อ ข และ ค ไม่เห็นด้วย ก จึงทำคนเดียวไม่ได้","ต้องได้รับความยินยอมจากเจ้าของรวมทุกคนโดยไม่มีข้อยกเว้นใด ๆ","เรื่องนี้ไม่ใช่การจัดการอันเป็นสาระสำคัญ ก จึงมีสิทธิทำคนเดียวได้"],
+    ans:1,
+    explain:"<b>ม.1358</b> การจัดการอันเป็นสาระสำคัญของทรัพย์สินรวม (เช่น รื้อถอนแล้วสร้างใหม่) ต้องได้รับความยินยอมของเจ้าของรวมเสียงข้างมากซึ่งมีส่วนไม่ต่ำกว่าครึ่งหนึ่งของทรัพย์สิน ต่างจากการจัดการธรรมดาหรือการสงวนรักษาทรัพย์ที่คนใดคนหนึ่งทำได้เลย เมื่อ ก มีเสียงเพียง 1 ใน 3 และ ข ค ไม่เห็นด้วย ก จึงทำคนเดียวไม่ได้"
+  }
+];
+
+const IRAC_CASES = [
+  {
+    id:"case_accessory1",
+    examRef:"ข้อสอบตัวอย่าง วิชาทรัพย์สิน ข้อ 1",
+    title:"บ้านปลูกบนที่เช่า: ส่วนควบหรือไม่",
+    cat:"accessory",
+    facts:"ก เช่าที่ดินของ ข มีกำหนด 10 ปี เพื่อปลูกบ้านอยู่อาศัย โดยสัญญาเช่าระบุชัดเจนว่า ก มีสิทธิปลูกสร้างอาคารบนที่ดินที่เช่าได้ ก จึงปลูกบ้านไม้ชั้นเดียวลงบนที่ดินนั้น ต่อมาเมื่อครบกำหนดสัญญาเช่า ข ซึ่งเป็นเจ้าของที่ดินอ้างว่าบ้านหลังนั้นตกเป็นส่วนควบของที่ดินตาม ม.144 จึงเป็นกรรมสิทธิ์ของตนไปโดยอัตโนมัติ ก จึงไม่มีสิทธิรื้อถอนบ้านออกไปหรือเรียกร้องค่าตอบแทนใด ๆ ก ไม่เห็นด้วยและอ้างว่าบ้านยังคงเป็นกรรมสิทธิ์ของตน",
+    issues:[
+      {
+        label:"ประเด็นที่ 1 — บ้านที่ ก ปลูกบนที่ดินเช่าของ ข ตกเป็นส่วนควบของที่ดินหรือไม่",
+        issueQ:"ประเด็นแรกที่ต้องวินิจฉัยคือเรื่องใด",
+        issueOpts:["บ้านที่ ก ปลูกบนที่ดินที่เช่าจาก ข โดยมีสิทธิตามสัญญาเช่า ตกเป็นส่วนควบของที่ดินหรือไม่","สัญญาเช่าที่ดินระหว่าง ก กับ ข เป็นโมฆะหรือไม่","ก มีสิทธิบอกเลิกสัญญาเช่าก่อนกำหนดหรือไม่","ข มีสิทธิขึ้นค่าเช่าหรือไม่"],
+        issueAns:0,
+        issueFeedback:"ถูกต้อง — ข้อพิพาทหลักคือสถานะทางกฎหมายของบ้านที่ปลูกบนที่ดินเช่า ว่าตกเป็นส่วนควบของที่ดินตามหลักทั่วไปหรือไม่",
+        ruleQ:"ควรใช้มาตราใดในการวินิจฉัยประเด็นนี้",
+        ruleOpts:["ม.146 (ข้อยกเว้นไม่เป็นส่วนควบ กรณีผู้มีสิทธิในที่ดินของผู้อื่นปลูกสร้าง) ประกอบ ม.144 (หลักส่วนควบ)","ม.1310 (ปลูกโรงเรือนในที่ดินผู้อื่นโดยสุจริต)","ม.1382 (การครอบครองปรปักษ์)","ม.1349 (ทางจำเป็น)"],
+        ruleAns:0,
+        ruleFeedback:"ถูกต้อง — ม.144 วางหลักทั่วไปเรื่องส่วนควบ แต่ ม.146 บัญญัติข้อยกเว้นไว้ชัดเจนสำหรับกรณีผู้มีสิทธิในที่ดินของผู้อื่น (เช่น ผู้เช่า) ใช้สิทธินั้นปลูกสร้างโรงเรือนหรือสิ่งปลูกสร้างอย่างอื่นลงในที่ดินนั้น",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["บ้านของ ก เป็นสิ่งปลูกสร้างถาวรติดกับที่ดิน จึงต้องเป็นส่วนควบตาม ม.144 เสมอ ไม่มีข้อยกเว้น","ก เป็นผู้มีสิทธิในที่ดินของ ข (ตามสัญญาเช่าซึ่งให้สิทธิปลูกสร้างได้) และใช้สิทธินั้นปลูกบ้านลงในที่ดิน จึงเข้าข้อยกเว้นตาม ม.146 บ้านหลังนั้นจึงไม่ตกเป็นส่วนควบของที่ดิน แม้จะติดกับที่ดินอย่างถาวรก็ตาม","บ้านไม่ใช่ทรัพย์เลยตามกฎหมาย จึงไม่มีปัญหาเรื่องส่วนควบ","ต้องดูว่า ก จ่ายค่าเช่าครบถ้วนหรือไม่ก่อนจึงจะวินิจฉัยได้"],
+        appAns:1,
+        appFeedback:"ถูกต้อง — ม.146 กำหนดชัดเจนว่าข้อยกเว้นไม่เป็นส่วนควบใช้บังคับแก่โรงเรือนหรือสิ่งปลูกสร้างอย่างอื่นซึ่งผู้มีสิทธิในที่ดินของผู้อื่น (ในที่นี้คือผู้เช่าที่มีสิทธิตามสัญญาเช่า) ใช้สิทธินั้นปลูกสร้างไว้ในที่ดินนั้นด้วย แม้บ้านจะติดกับที่ดินอย่างถาวรตามหลักทั่วไปของ ม.144 ก็ตาม กรณีของ ก เข้าเงื่อนไขนี้ครบถ้วนเพราะสัญญาเช่าให้สิทธิปลูกสร้างไว้ชัดเจน",
+        concQ:"สรุปผลของประเด็นนี้ควรเป็นอย่างไร",
+        concOpts:["บ้านของ ก ไม่ตกเป็นส่วนควบของที่ดิน ยังคงเป็นกรรมสิทธิ์ของ ก แม้สัญญาเช่าจะครบกำหนดแล้ว ข อ้าง ม.144 มายึดบ้านไปเป็นของตนไม่ได้","บ้านตกเป็นส่วนควบของที่ดินและเป็นกรรมสิทธิ์ของ ข ทันทีที่ปลูกเสร็จ","บ้านตกเป็นของทั้งสองฝ่ายร่วมกัน","ต้องให้ศาลตัดสินแบ่งบ้านออกเป็นสัดส่วน"],
+        concAns:0,
+        concFeedback:"สรุป: เนื่องจาก ก ปลูกบ้านโดยใช้สิทธิตามสัญญาเช่าที่ดินซึ่งเป็นสิทธิในที่ดินของผู้อื่น กรณีจึงเข้าข้อยกเว้นตาม ม.146 บ้านหลังนั้นจึงไม่ตกเป็นส่วนควบของที่ดิน และยังคงเป็นกรรมสิทธิ์ของ ก ต่อไปแม้สัญญาเช่าที่ดินจะสิ้นสุดลงแล้ว ข ไม่มีสิทธิอ้าง ม.144 มายึดเอาบ้านไปเป็นของตน"
+      }
+    ]
+  },
+  {
+    id:"case_accessory2",
+    examRef:"ข้อสอบตัวอย่าง วิชาทรัพย์สิน ข้อ 2",
+    title:"เครื่องจักรในโรงงาน: อุปกรณ์หรือส่วนควบ",
+    cat:"accessory",
+    facts:"ก เป็นเจ้าของโรงงานทอผ้าแห่งหนึ่ง ภายในโรงงานติดตั้งเครื่องทอผ้าไฟฟ้าหลายเครื่องซึ่งยึดน็อตกับพื้นคอนกรีตเพื่อป้องกันการสั่นสะเทือน แต่สามารถถอดน็อตและเคลื่อนย้ายเครื่องจักรออกไปได้โดยไม่ทำให้ตัวอาคารหรือเครื่องจักรเสียหาย ก จำนองอาคารโรงงานไว้กับธนาคาร ข โดยในสัญญาจำนองไม่ได้ระบุถึงเครื่องจักรเหล่านั้นเป็นการเฉพาะ ต่อมา ก ผิดนัดชำระหนี้ ธนาคาร ข จึงบังคับจำนองยึดอาคารโรงงานขายทอดตลาด และอ้างว่าเครื่องจักรทุกเครื่องต้องตกไปกับอาคารโรงงานด้วยเพราะเป็นทรัพย์ที่ใช้ประจำอยู่กับอาคาร ก คัดค้านว่าเครื่องจักรเป็นทรัพย์ของตนต่างหาก ไม่เกี่ยวกับการจำนองอาคาร",
+    issues:[
+      {
+        label:"ประเด็นที่ 1 — เครื่องจักรตกไปพร้อมกับการบังคับจำนองอาคารโรงงานหรือไม่",
+        issueQ:"ประเด็นแรกที่ต้องวินิจฉัยคือเรื่องใด",
+        issueOpts:["เครื่องจักรซึ่งเป็นของใช้ประจำอยู่กับอาคารโรงงานเพื่อประโยชน์ในการใช้สอย ตกไปพร้อมกับนิติกรรม(การบังคับจำนอง)ที่มีอาคารเป็นทรัพย์ประธานหรือไม่","สัญญาจำนองเป็นโมฆะหรือไม่เพราะไม่ได้ระบุเครื่องจักรไว้","ธนาคาร ข มีสิทธิบังคับจำนองได้หรือไม่","ก ผิดนัดชำระหนี้แล้วจริงหรือไม่"],
+        issueAns:0,
+        issueFeedback:"ถูกต้อง — ประเด็นคือสถานะของเครื่องจักรว่าเป็น อุปกรณ์ ของอาคารโรงงาน (ทรัพย์ประธาน) ซึ่งตกไปพร้อมกับนิติกรรมที่มีทรัพย์ประธานเป็นมูลหรือไม่",
+        ruleQ:"ควรใช้มาตราใดในการวินิจฉัย",
+        ruleOpts:["ม.147 (อุปกรณ์) ประกอบ ม.144 (ส่วนควบ)","ม.1308 (ที่งอกริมตลิ่ง)","ม.1332 (ซื้อจากท้องตลาด)","ม.1300 (ฟ้องเพิกถอนการจดทะเบียนตัดหน้า)"],
+        ruleAns:0,
+        ruleFeedback:"ถูกต้อง — ต้องแยกก่อนว่าเครื่องจักรเป็นส่วนควบตาม ม.144 (แยกไม่ได้โดยไม่ทำลาย) หรือเป็นเพียงอุปกรณ์ตาม ม.147 (ถอดแยกได้โดยไม่เสียหาย แต่เป็นของใช้ประจำ) เพื่อดูผลทางกฎหมายที่แตกต่างกัน",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["เครื่องจักรถอดน็อตและเคลื่อนย้ายออกไปได้โดยไม่ทำให้อาคารหรือเครื่องจักรเสียหาย จึงไม่ใช่ส่วนควบตาม ม.144 แต่เป็นสังหาริมทรัพย์ที่เป็นของใช้ประจำอยู่กับอาคารเพื่อประโยชน์ในการใช้สอยตามลักษณะโรงงาน จึงเข้าลักษณะอุปกรณ์ตาม ม.147 ซึ่งตกไปพร้อมกับนิติกรรมจำนองที่มีอาคารเป็นทรัพย์ประธาน เว้นแต่คู่สัญญาจะตกลงกันไว้เป็นอย่างอื่น","เครื่องจักรเป็นส่วนควบของอาคารเสมอเพราะติดตั้งอยู่ในอาคาร","เครื่องจักรไม่เกี่ยวข้องกับอาคารเลยเพราะเป็นเครื่องมือการผลิตคนละประเภท","ต้องแยกพิจารณาเป็นรายเครื่องตามน้ำหนักเท่านั้น"],
+        appAns:0,
+        appFeedback:"ถูกต้อง — เครื่องจักรถอดแยกออกจากอาคารได้โดยไม่ทำให้ทั้งอาคารและเครื่องจักรเสียหาย จึงไม่เข้าเกณฑ์ส่วนควบตาม ม.144 แต่การที่เครื่องจักรเป็นของใช้ประจำเพื่อประโยชน์ในการใช้สอยอาคารในฐานะโรงงาน ตรงกับนิยามอุปกรณ์ตาม ม.147 ซึ่งกฎหมายกำหนดให้ตกไปพร้อมกับนิติกรรมที่มีทรัพย์ประธานเป็นมูล เว้นแต่จะตกลงกันไว้เป็นอย่างอื่น ซึ่งในกรณีนี้ไม่ปรากฏข้อตกลงยกเว้น",
+        concQ:"สรุปผลของประเด็นนี้ควรเป็นอย่างไร",
+        concOpts:["เครื่องจักรตกไปพร้อมกับการบังคับจำนองอาคารโรงงานในฐานะอุปกรณ์ตาม ม.147 ธนาคาร ข จึงมีสิทธิบังคับเอาเครื่องจักรไปด้วย","เครื่องจักรไม่ตกไปกับอาคารเลยเพราะไม่ใช่ส่วนควบ","ต้องแบ่งเครื่องจักรคนละครึ่งระหว่าง ก กับธนาคาร","เครื่องจักรตกเป็นของรัฐเพราะเป็นทรัพย์พิพาท"],
+        concAns:0,
+        concFeedback:"สรุป: เครื่องจักรในโรงงานของ ก ซึ่งเป็นของใช้ประจำเพื่อประโยชน์การใช้สอยอาคารโรงงาน เข้าลักษณะอุปกรณ์ตาม ม.147 แม้ไม่ใช่ส่วนควบตาม ม.144 ก็ตาม เมื่อสัญญาจำนองไม่ได้ตกลงยกเว้นไว้เป็นอย่างอื่น เครื่องจักรจึงตกไปพร้อมกับอาคารโรงงานซึ่งเป็นทรัพย์ประธานในการบังคับจำนอง ธนาคาร ข มีสิทธิบังคับเอาเครื่องจักรไปด้วยพร้อมกับอาคาร"
+      }
+    ]
+  },
+  {
+    id:"case_reg1",
+    examRef:"ข้อสอบตัวอย่าง วิชาทรัพย์สิน ข้อ 3",
+    title:"ซื้อที่ดินซ้อน: จดทะเบียนตัดหน้าโดยไม่สุจริต",
+    cat:"registration",
+    facts:"ก ทำสัญญาซื้อขายที่ดินให้แก่ ข เป็นหนังสือและรับเงินมัดจำไปแล้วบางส่วน แต่ทั้งสองฝ่ายยังไม่ได้ไปจดทะเบียนโอนกรรมสิทธิ์ที่สำนักงานที่ดิน เนื่องจากนัดวันไปจดทะเบียนในอีก 2 สัปดาห์ถัดมา ระหว่างนั้น ก เกิดความโลภเพราะมีนายหน้าอสังหาริมทรัพย์นำ ค มาเสนอซื้อที่ดินแปลงเดียวกันในราคาสูงกว่าที่ตกลงกับ ข มาก ก จึงตัดสินใจไปจดทะเบียนโอนขายที่ดินให้ ค ทันที โดยที่ ค เองก็ทราบดีอยู่แล้วจากนายหน้าว่า ก เคยทำสัญญาขายที่ดินแปลงนี้ให้ ข ไปก่อนแล้ว เมื่อ ข ทราบเรื่องจึงมาขอเปิดดูโฉนดพบว่า ค ได้จดทะเบียนรับโอนกรรมสิทธิ์ในที่ดินไปแล้ว ข จึงฟ้องขอให้เพิกถอนการจดทะเบียนโอนระหว่าง ก กับ ค",
+    issues:[
+      {
+        label:"ประเด็นที่ 1 — ข ฟ้องเพิกถอนการจดทะเบียนโอนที่ดินระหว่าง ก กับ ค ได้หรือไม่",
+        issueQ:"ประเด็นแรกที่ต้องวินิจฉัยคือเรื่องใด",
+        issueOpts:["ข ฟ้องเพิกถอนการจดทะเบียนระหว่าง ก กับ ค ได้หรือไม่ เมื่อ ค จดทะเบียนตัดหน้าสิทธิของ ข ที่มีอยู่ก่อน","สัญญาระหว่าง ก กับ ข เป็นโมฆะหรือไม่เพราะไม่ได้จดทะเบียน","ข มีสิทธิเรียกมัดจำคืนจาก ก เป็นสองเท่าหรือไม่","ค ต้องรับผิดทางอาญาฐานฉ้อโกงหรือไม่"],
+        issueAns:0,
+        issueFeedback:"ถูกต้อง — ข้อพิพาทหลักคือสิทธิของ ข ผู้ทำสัญญาซื้อขายไว้ก่อนแต่ยังไม่ได้จดทะเบียน จะฟ้องเพิกถอนการจดทะเบียนของ ค ผู้รับโอนที่จดทะเบียนตัดหน้าได้หรือไม่",
+        ruleQ:"ควรใช้มาตราใดในการวินิจฉัย",
+        ruleOpts:["ม.1300 (ฟ้องเพิกถอนการจดทะเบียนที่เป็นทางเสียเปรียบแก่ผู้อยู่ในฐานะจะจดทะเบียนสิทธิได้อยู่ก่อน)","ม.1382 (การครอบครองปรปักษ์)","ม.1332 (ซื้อจากท้องตลาด)","ม.1306 (ห้ามยกอายุความต่อสู้แผ่นดิน)"],
+        ruleAns:0,
+        ruleFeedback:"ถูกต้อง — ม.1300 คุ้มครองบุคคลที่อยู่ในฐานะอันจะให้จดทะเบียนสิทธิของตนได้อยู่ก่อน (ข ผู้ทำสัญญาซื้อขายไว้ก่อนแต่ยังไม่จด) ให้ฟ้องเพิกถอนผู้รับโอนที่จดทะเบียนตัดหน้าได้ เว้นแต่ผู้รับโอนคนหลังจะสุจริตและเสียค่าตอบแทน",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["ข อยู่ในฐานะที่จะจดทะเบียนสิทธิของตนได้อยู่ก่อนจากสัญญาซื้อขายที่ทำไว้กับ ก ส่วน ค แม้จะเสียค่าตอบแทน (ซื้อในราคาสูง) แต่ทราบอยู่แล้วว่า ก เคยทำสัญญาขายที่ดินแปลงนี้ให้ ข ไปก่อน จึงไม่ใช่ผู้สุจริต ค จึงไม่ได้รับความคุ้มครองตาม ม.1300","ค ได้รับความคุ้มครองเสมอเพราะเสียค่าตอบแทนแล้ว ไม่ว่าจะทราบเรื่องหรือไม่","ข ไม่มีสิทธิใด ๆ เพราะไม่เคยจดทะเบียนสิทธิของตนไว้ก่อนเลย","ก ต้องรับผิดทางอาญาฐานยักยอกทรัพย์เท่านั้น ไม่เกี่ยวกับสิทธิทางแพ่งของ ข"],
+        appAns:0,
+        appFeedback:"ถูกต้อง — เกณฑ์ตาม ม.1300 คือผู้รับโอนคนหลังต้องสุจริตและเสียค่าตอบแทนทั้งสองประการจึงจะได้รับความคุ้มครอง เมื่อ ค ทราบอยู่แล้วว่า ก เคยขายที่ดินแปลงนี้ให้ ข ไปก่อน แม้จะเสียค่าตอบแทนสูงก็ตาม ค ก็ยังขาดคุณสมบัติสุจริต จึงไม่ได้รับความคุ้มครองตามมาตรานี้",
+        concQ:"สรุปผลของประเด็นนี้ควรเป็นอย่างไร",
+        concOpts:["ข มีสิทธิฟ้องขอให้เพิกถอนการจดทะเบียนโอนที่ดินระหว่าง ก กับ ค ได้ตาม ม.1300 เพราะ ค ไม่สุจริต","ข ไม่มีสิทธิฟ้องเพิกถอนเลยเพราะ ค จดทะเบียนไปแล้ว","ที่ดินต้องแบ่งกันระหว่าง ข กับ ค คนละครึ่ง","ข ต้องฟ้องเรียกเฉพาะค่าเสียหายจาก ก เท่านั้น ฟ้องเพิกถอนไม่ได้"],
+        concAns:0,
+        concFeedback:"สรุป: เมื่อ ค ผู้รับโอนคนหลังทราบอยู่แล้วว่า ก เคยทำสัญญาขายที่ดินแปลงเดียวกันนี้ให้ ข ไปก่อน จึงไม่ใช่ผู้สุจริตตามเงื่อนไขข้อยกเว้นของ ม.1300 แม้จะเสียค่าตอบแทนก็ตาม ข ผู้อยู่ในฐานะจะจดทะเบียนสิทธิของตนได้อยู่ก่อนจึงมีสิทธิฟ้องขอให้เพิกถอนการจดทะเบียนโอนที่ดินระหว่าง ก กับ ค ได้"
+      }
+    ]
+  },
+  {
+    id:"case_public1",
+    examRef:"ข้อสอบตัวอย่าง วิชาทรัพย์สิน ข้อ 4",
+    title:"ปลูกสร้างรุกล้ำทางน้ำสาธารณะ",
+    cat:"publicdomain",
+    facts:"ก มีบ้านพักตากอากาศริมคลองสาธารณะแห่งหนึ่ง เนื่องจากต้องการขยายพื้นที่ใช้สอย ก จึงถมดินและปลูกสร้างระเบียงไม้ยื่นล้ำเข้าไปในเขตคลองสาธารณะเป็นระยะทางประมาณ 3 เมตร และใช้ประโยชน์เป็นที่จอดเรือส่วนตัวมาต่อเนื่องเป็นเวลา 20 ปีแล้วโดยไม่มีหน่วยงานใดทักท้วง ต่อมากรมเจ้าท่าตรวจพบและมีคำสั่งให้ ก รื้อถอนระเบียงไม้ส่วนที่รุกล้ำออกจากเขตคลองสาธารณะ ก ยื่นคำร้องคัดค้านโดยอ้างว่าตนได้กรรมสิทธิ์ในพื้นที่ส่วนนั้นแล้วโดยการครอบครองปรปักษ์เป็นเวลาเกิน 10 ปี",
+    issues:[
+      {
+        label:"ประเด็นที่ 1 — ก ได้กรรมสิทธิ์ในพื้นที่คลองสาธารณะที่ตนรุกล้ำโดยการครอบครองปรปักษ์แล้วหรือไม่",
+        issueQ:"ประเด็นแรกที่ต้องวินิจฉัยคือเรื่องใด",
+        issueOpts:["ก ได้กรรมสิทธิ์ในพื้นที่คลองสาธารณะที่ตนครอบครองมาเกิน 10 ปีแล้วโดยการครอบครองปรปักษ์หรือไม่","กรมเจ้าท่ามีอำนาจสั่งรื้อถอนได้หรือไม่ตามกฎหมายปกครอง","ก ต้องรับผิดทางอาญาฐานบุกรุกหรือไม่","ก มีสิทธิเรียกค่าทดแทนจากรัฐหรือไม่"],
+        issueAns:0,
+        issueFeedback:"ถูกต้อง — ประเด็นหลักในทางแพ่งคือ ก จะอ้างการครอบครองปรปักษ์เพื่อได้กรรมสิทธิ์ในพื้นที่คลองสาธารณะได้หรือไม่",
+        ruleQ:"ควรใช้มาตราใดในการวินิจฉัย",
+        ruleOpts:["ม.1304 (สาธารณสมบัติของแผ่นดิน) ประกอบ ม.1306 (ห้ามยกอายุความครอบครองปรปักษ์ขึ้นต่อสู้แผ่นดิน)","ม.1382 (การครอบครองปรปักษ์) เพียงมาตราเดียว","ม.1349 (ทางจำเป็น)","ม.1316 (นำสังหาริมทรัพย์มาปะปนกัน)"],
+        ruleAns:0,
+        ruleFeedback:"ถูกต้อง — คลองเป็นทางน้ำซึ่งเป็นสาธารณสมบัติของแผ่นดินตาม ม.1304(2) จึงต้องพิจารณาประกอบกับข้อห้ามตาม ม.1306 ที่ห้ามยกอายุความครอบครองปรปักษ์ขึ้นต่อสู้แผ่นดินในเรื่องทรัพย์สินที่เป็นสาธารณสมบัติ",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["คลองเป็นทางน้ำซึ่งเป็นทรัพย์สินสำหรับพลเมืองใช้ร่วมกันตาม ม.1304(2) จึงเป็นสาธารณสมบัติของแผ่นดิน แม้ ก จะครอบครองพื้นที่ส่วนที่รุกล้ำมานานเกิน 10 ปีโดยสงบเปิดเผยด้วยเจตนาเป็นเจ้าของ ก็ไม่อาจอ้างอายุความครอบครองปรปักษ์ขึ้นต่อสู้กับรัฐได้เลยตาม ม.1306","ก ได้กรรมสิทธิ์แล้วเพราะครอบครองครบ 10 ปีตามหลักทั่วไปของ ม.1382","เนื่องจากไม่มีหน่วยงานทักท้วงมา 20 ปี ถือว่ารัฐสละสิทธิในที่ดินส่วนนั้นแล้ว","ต้องแบ่งกรรมสิทธิ์กันระหว่าง ก กับรัฐตามระยะเวลาที่ครอบครอง"],
+        appAns:0,
+        appFeedback:"ถูกต้อง — แม้ ก จะครอบครองพื้นที่ส่วนที่รุกล้ำโดยสงบ เปิดเผย ด้วยเจตนาเป็นเจ้าของ และครบระยะเวลาเกิน 10 ปีตามเงื่อนไขทั่วไปของ ม.1382 ก็ตาม แต่เมื่อพื้นที่นั้นเป็นส่วนหนึ่งของคลองสาธารณะอันเป็นสาธารณสมบัติของแผ่นดินตาม ม.1304(2) กฎหมายห้ามยกอายุความครอบครองปรปักษ์ขึ้นต่อสู้แผ่นดินไว้โดยเฉพาะตาม ม.1306 ก จึงไม่อาจอ้างสิทธิดังกล่าวได้ไม่ว่าจะครอบครองนานเพียงใด",
+        concQ:"สรุปผลของประเด็นนี้ควรเป็นอย่างไร",
+        concOpts:["ก ไม่ได้กรรมสิทธิ์ในพื้นที่คลองสาธารณะที่ตนรุกล้ำ แม้จะครอบครองมานานเกิน 10 ปีก็ตาม และต้องรื้อถอนระเบียงไม้ส่วนที่รุกล้ำตามคำสั่งกรมเจ้าท่า","ก ได้กรรมสิทธิ์แล้วโดยสมบูรณ์ ไม่ต้องรื้อถอน","ก ได้เพียงสิทธิครอบครอง ไม่ใช่กรรมสิทธิ์","ต้องรอให้ศาลตัดสินสัดส่วนก่อนจึงจะรื้อถอนได้"],
+        concAns:0,
+        concFeedback:"สรุป: เนื่องจากพื้นที่ที่ ก รุกล้ำเป็นส่วนหนึ่งของคลองสาธารณะซึ่งเป็นสาธารณสมบัติของแผ่นดิน ก จึงไม่อาจอ้างอายุความครอบครองปรปักษ์ตาม ม.1382 ขึ้นต่อสู้กับรัฐได้เลยตามข้อห้ามใน ม.1306 ไม่ว่าจะครอบครองมานานเพียงใด ก จึงไม่ได้กรรมสิทธิ์ในพื้นที่ส่วนนั้น และต้องรื้อถอนระเบียงไม้ส่วนที่รุกล้ำออกจากเขตคลองสาธารณะตามคำสั่งของกรมเจ้าท่า"
+      }
+    ]
+  },
+  {
+    id:"case_goodfaith1",
+    examRef:"ข้อสอบตัวอย่าง วิชาทรัพย์สิน ข้อ 5",
+    title:"ซื้อแหวนเพชรจากร้านทองในตลาด",
+    cat:"goodfaith",
+    facts:"แหวนเพชรของนางสาว ก ถูกคนร้ายลักไปจากบ้านพัก ต่อมาคนร้ายนำแหวนเพชรวงนั้นไปขายต่อให้ร้านทอง ข ซึ่งเป็นร้านค้าเปิดเผยเป็นปกติทั่วไปในตลาดสด โดยร้านทอง ข รับซื้อไว้ในราคาที่เหมาะสมตามน้ำหนักทองและเพชรโดยไม่ทราบว่าเป็นทรัพย์ที่ถูกลักมา ต่อมานาง ก ตามพบแหวนวางขายอยู่ในร้านทอง ข และแจ้งความจับกุมคนร้ายได้ นาง ก จึงขอให้ร้านทอง ข คืนแหวนเพชรให้ตนโดยไม่ยอมจ่ายเงินใด ๆ เพราะเป็นทรัพย์ของตนที่ถูกขโมยไป ร้านทอง ข ปฏิเสธและอ้างว่าตนซื้อมาโดยสุจริตจากท้องตลาด",
+    issues:[
+      {
+        label:"ประเด็นที่ 1 — นาง ก จะเรียกคืนแหวนเพชรจากร้านทอง ข ได้โดยไม่ต้องจ่ายเงินหรือไม่",
+        issueQ:"ประเด็นแรกที่ต้องวินิจฉัยคือเรื่องใด",
+        issueOpts:["นาง ก มีสิทธิเรียกคืนแหวนเพชรจากร้านทอง ข ได้โดยไม่ต้องจ่ายเงินคืนใด ๆ เลยหรือไม่","ร้านทอง ข ต้องรับผิดทางอาญาฐานรับของโจรหรือไม่","สัญญาซื้อขายระหว่างคนร้ายกับร้านทอง ข เป็นโมฆะหรือไม่","นาง ก มีสิทธิเรียกค่าเสียหายจากคนร้ายเท่านั้นหรือไม่"],
+        issueAns:0,
+        issueFeedback:"ถูกต้อง — ประเด็นคือสิทธิของเจ้าของเดิม (นาง ก) ในการเรียกทรัพย์ที่ถูกลักคืนจากผู้รับซื้อสุจริต จะเรียกคืนได้โดยไม่ต้องจ่ายค่าตอบแทนหรือไม่",
+        ruleQ:"ควรใช้มาตราใดในการวินิจฉัย",
+        ruleOpts:["ม.1303 (การแย่งชิงสังหาริมทรัพย์ — ข้อยกเว้นทรัพย์ที่ได้จากการกระทำผิดอาญา) ประกอบ ม.1332 (ซื้อจากท้องตลาดโดยสุจริต)","ม.1331 (การได้มาซึ่งเงินตรา)","ม.1329 (ได้ทรัพย์จากนิติกรรมโมฆียะ)","ม.1330 (ซื้อจากการขายทอดตลาดตามคำสั่งศาล)"],
+        ruleAns:0,
+        ruleFeedback:"ถูกต้อง — แหวนเพชรเป็นทรัพย์ที่ได้มาจากการกระทำผิดอาญา (ลักทรัพย์) ซึ่งเป็นข้อยกเว้นตาม ม.1303 วรรคสอง ที่เจ้าของเดิมยังคงติดตามเรียกคืนได้ แต่เมื่อร้านทอง ข ซื้อไว้โดยสุจริตในท้องตลาด ต้องพิจารณาประกอบ ม.1332 ด้วยว่าจะต้องจ่ายค่าตอบแทนคืนหรือไม่",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["แม้แหวนเพชรจะเป็นทรัพย์ที่ได้จากการกระทำผิดอาญาซึ่งนาง ก เจ้าของเดิมติดตามเรียกคืนได้ตาม ม.1303 วรรคสอง แต่เมื่อร้านทอง ข ซื้อไว้โดยสุจริตในท้องตลาด (ร้านค้าที่เปิดเผยเป็นปกติ) ตาม ม.1332 นาง ก จะเรียกคืนได้ก็ต่อเมื่อชดใช้ราคาที่ร้านทอง ข ซื้อมาให้แก่ร้านทอง ข เท่านั้น จะเรียกคืนเปล่า ๆ ไม่ได้","นาง ก เรียกคืนได้เปล่า ๆ โดยไม่ต้องจ่ายเงินเลย เพราะเป็นทรัพย์ที่ถูกลักไป","นาง ก ไม่มีสิทธิเรียกคืนเลยเพราะร้านทอง ข สุจริต","ร้านทอง ข ต้องคืนแหวนให้คนร้ายก่อน แล้วคนร้ายจึงคืนให้นาง ก"],
+        appAns:0,
+        appFeedback:"ถูกต้อง — ม.1332 กำหนดให้ผู้ซื้อทรัพย์มาโดยสุจริตในท้องตลาดไม่จำต้องคืนทรัพย์ให้แก่เจ้าของแท้จริง เว้นแต่เจ้าของจะชดใช้ราคาที่ซื้อมาให้ ดังนั้นแม้แหวนจะเป็นทรัพย์ที่ได้จากการกระทำผิดอาญาซึ่งนาง ก ยังติดตามเรียกคืนได้ตาม ม.1303 วรรคสอง นาง ก ก็ต้องจ่ายราคาคืนให้ร้านทอง ข ก่อนจึงจะได้แหวนคืน",
+        concQ:"สรุปผลของประเด็นนี้ควรเป็นอย่างไร",
+        concOpts:["นาง ก มีสิทธิเรียกคืนแหวนเพชรจากร้านทอง ข ได้ แต่ต้องชดใช้ราคาที่ร้านทอง ข ซื้อมาให้แก่ร้านทอง ข ตาม ม.1332","นาง ก ไม่มีสิทธิเรียกคืนแหวนเพชรได้เลยไม่ว่ากรณีใด","ร้านทอง ข ต้องคืนแหวนให้นาง ก โดยไม่มีสิทธิเรียกเงินคืนเลย","แหวนตกเป็นกรรมสิทธิ์ของร้านทอง ข อย่างเด็ดขาด"],
+        concAns:0,
+        concFeedback:"สรุป: แหวนเพชรเป็นทรัพย์ที่ได้จากการกระทำผิดอาญาซึ่งนาง ก เจ้าของเดิมยังคงมีสิทธิติดตามเรียกคืนได้ตาม ม.1303 วรรคสอง แต่เนื่องจากร้านทอง ข ซื้อไว้โดยสุจริตในท้องตลาดตามเงื่อนไขของ ม.1332 นาง ก จึงมีสิทธิเรียกคืนแหวนได้ แต่ต้องชดใช้ราคาที่ร้านทอง ข ซื้อมาคืนให้แก่ร้านทอง ข ก่อน จะเรียกคืนเปล่า ๆ โดยไม่จ่ายเงินไม่ได้"
+      }
+    ]
+  },
+  {
+    id:"case_accession1",
+    examRef:"ข้อสอบตัวอย่าง วิชาทรัพย์สิน ข้อ 6",
+    title:"ปลูกบ้านรุกล้ำที่ดินข้างเคียงโดยไม่สุจริต",
+    cat:"accession",
+    facts:"ก และ ข เป็นเจ้าของที่ดินติดกัน ก ทราบอยู่แล้วว่าแนวเขตที่ดินของตนกับ ข อยู่ตรงไหนอย่างชัดเจน (เคยมีการรังวัดและปักหลักเขตไว้ก่อนแล้ว) แต่ ก จงใจสร้างรั้วและส่วนต่อเติมบ้านรุกล้ำเข้าไปในที่ดินของ ข ประมาณ 2 เมตร เพื่อขยายพื้นที่ใช้สอยของตนโดยรู้อยู่แล้วว่าเป็นที่ดินของ ข เมื่อ ข ทราบเรื่องจึงเรียกร้องให้ ก รื้อถอนส่วนต่อเติมที่รุกล้ำออกไปและทำที่ดินให้กลับสู่สภาพเดิม แต่ ก อ้างว่าตนมีสิทธิเพียงจ่ายค่าใช้ที่ดินและขอจดทะเบียนภาระจำยอมเท่านั้น ไม่ต้องรื้อถอน",
+    issues:[
+      {
+        label:"ประเด็นที่ 1 — ก มีสิทธิเพียงจ่ายค่าใช้ที่ดินและขอภาระจำยอม หรือต้องรื้อถอนส่วนที่รุกล้ำออกไป",
+        issueQ:"ประเด็นแรกที่ต้องวินิจฉัยคือเรื่องใด",
+        issueOpts:["ก ผู้สร้างส่วนต่อเติมรุกล้ำที่ดินของ ข มีสิทธิเพียงจ่ายค่าใช้ที่ดินและขอจดทะเบียนภาระจำยอม หรือ ข มีสิทธิเรียกให้รื้อถอนได้","สัญญาซื้อขายที่ดินระหว่าง ก กับผู้ขายเดิมเป็นโมฆะหรือไม่","ข มีสิทธิฟ้องเรียกค่าเช่าที่ดินย้อนหลังหรือไม่","ก มีสิทธิซื้อที่ดินส่วนที่รุกล้ำจาก ข ในราคาตลาดหรือไม่"],
+        issueAns:0,
+        issueFeedback:"ถูกต้อง — ประเด็นสำคัญคือผลทางกฎหมายของการสร้างโรงเรือนรุกล้ำที่ดินผู้อื่น ขึ้นอยู่กับว่าผู้สร้างสุจริตหรือไม่สุจริต",
+        ruleQ:"ควรใช้มาตราใดในการวินิจฉัย",
+        ruleOpts:["ม.1312 วรรคสอง (สร้างโรงเรือนรุกล้ำโดยไม่สุจริต)","ม.1312 วรรคหนึ่ง (สร้างโรงเรือนรุกล้ำโดยสุจริต)","ม.1310 (ปลูกโรงเรือนทั้งหลังในที่ดินผู้อื่นโดยสุจริต)","ม.1316 (นำสังหาริมทรัพย์มาปะปนกัน)"],
+        ruleAns:0,
+        ruleFeedback:"ถูกต้อง — เมื่อข้อเท็จจริงปรากฏชัดว่า ก ทราบแนวเขตที่ดินอยู่แล้วแต่จงใจสร้างรุกล้ำ จึงเป็นกรณีรุกล้ำโดยไม่สุจริต ต้องใช้ ม.1312 วรรคสอง ไม่ใช่วรรคหนึ่งซึ่งใช้เฉพาะกรณีสุจริตเท่านั้น",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["ก ทราบแนวเขตที่ดินอยู่แล้วจากการรังวัดและปักหลักเขตไว้ก่อน แต่จงใจสร้างส่วนต่อเติมรุกล้ำเข้าไปในที่ดินของ ข การกระทำของ ก จึงเป็นการรุกล้ำโดยไม่สุจริต เข้าเงื่อนไข ม.1312 วรรคสอง ซึ่งเจ้าของที่ดิน (ข) มีสิทธิเรียกให้รื้อถอนส่วนที่รุกล้ำออกไปได้ ก ไม่ได้รับสิทธิพิเศษเรื่องภาระจำยอมเหมือนกรณีสุจริต","ก มีสิทธิได้รับความคุ้มครองตาม ม.1312 วรรคหนึ่งเสมอไม่ว่าจะสุจริตหรือไม่","ก ไม่ต้องรับผิดใด ๆ เพราะเป็นเพียงส่วนต่อเติมเล็กน้อย","ข ต้องพิสูจน์ความเสียหายที่เป็นตัวเงินก่อนจึงจะเรียกให้รื้อถอนได้"],
+        appAns:0,
+        appFeedback:"ถูกต้อง — ม.1312 วรรคสองใช้เมื่อผู้สร้างไม่สุจริต ซึ่งในที่นี้ ก ทราบแนวเขตอยู่แล้วแต่จงใจรุกล้ำ จึงไม่ได้รับความคุ้มครองเรื่องภาระจำยอมเหมือนกรณีสุจริตตามวรรคหนึ่ง เจ้าของที่ดินที่ถูกรุกล้ำ (ข) จึงมีสิทธิเรียกให้ ก รื้อถอนส่วนที่รุกล้ำออกไปและทำที่ดินให้กลับสู่สภาพเดิมโดย ก เป็นผู้ออกค่าใช้จ่ายเอง",
+        concQ:"สรุปผลของประเด็นนี้ควรเป็นอย่างไร",
+        concOpts:["ข มีสิทธิเรียกให้ ก รื้อถอนส่วนต่อเติมที่รุกล้ำออกไปและทำที่ดินให้กลับสู่สภาพเดิมโดย ก เป็นผู้ออกค่าใช้จ่ายเอง เพราะ ก รุกล้ำโดยไม่สุจริต","ก มีสิทธิเพียงจ่ายค่าใช้ที่ดินและขอจดทะเบียนภาระจำยอมเท่านั้น ไม่ต้องรื้อถอน","ที่ดินส่วนที่รุกล้ำตกเป็นของ ก โดยอัตโนมัติ","ข ต้องยอมให้ ก ใช้ที่ดินต่อไปเพราะสร้างไปแล้ว"],
+        concAns:0,
+        concFeedback:"สรุป: เมื่อ ก สร้างส่วนต่อเติมรุกล้ำที่ดินของ ข โดยไม่สุจริต (ทราบแนวเขตอยู่แล้วแต่จงใจรุกล้ำ) กรณีจึงเข้า ม.1312 วรรคสอง ซึ่งต่างจากกรณีสุจริตตามวรรคหนึ่งที่ผู้สร้างเพียงจ่ายค่าใช้ที่ดินและขอภาระจำยอม ในกรณีไม่สุจริตนี้ เจ้าของที่ดิน (ข) มีสิทธิเรียกให้ ก รื้อถอนส่วนที่รุกล้ำออกไปและทำที่ดินให้กลับสู่สภาพเดิมโดย ก เป็นผู้ออกค่าใช้จ่ายเองทั้งหมด"
+      }
+    ]
+  },
+  {
+    id:"case_ownership1",
+    examRef:"ข้อสอบตัวอย่าง วิชาทรัพย์สิน ข้อ 7",
+    title:"เสียงดังจากสนามซ้อมยิงปืน",
+    cat:"ownership",
+    facts:"ก เป็นเจ้าของบ้านพักอาศัยอยู่ติดกับที่ดินของ ข ซึ่ง ข ได้เปิดเป็นสนามซ้อมยิงปืนสำหรับสมาชิกเข้าใช้บริการทุกวัน ตั้งแต่เวลา 08.00-20.00 น. เสียงปืนดังสนั่นตลอดทั้งวันทำให้ ก และครอบครัวไม่สามารถพักผ่อนหรือทำงานที่บ้านได้ตามปกติ แม้ ข จะสร้างกำแพงกันเสียงไว้บางส่วนแต่ก็ยังลดเสียงได้ไม่มากนัก ก จึงฟ้องเรียกให้ ข ระงับเหตุเดือดร้อนรำคาญและเรียกค่าทดแทนความเสียหาย ข ต่อสู้ว่าสนามยิงปืนของตนได้รับใบอนุญาตประกอบกิจการถูกต้องตามกฎหมายควบคุมอาวุธปืนแล้ว จึงไม่ต้องรับผิดใด ๆ",
+    issues:[
+      {
+        label:"ประเด็นที่ 1 — ก มีสิทธิฟ้องให้ระงับเหตุและเรียกค่าทดแทนจาก ข ได้หรือไม่ แม้ ข จะมีใบอนุญาตประกอบกิจการถูกต้อง",
+        issueQ:"ประเด็นแรกที่ต้องวินิจฉัยคือเรื่องใด",
+        issueOpts:["ก มีสิทธิฟ้องให้ระงับเหตุเดือดร้อนรำคาญและเรียกค่าทดแทนจาก ข ได้หรือไม่ แม้ ข จะมีใบอนุญาตประกอบกิจการถูกต้อง","ข ต้องปิดกิจการสนามยิงปืนถาวรตามกฎหมายอาญาหรือไม่","ก มีสิทธิเรียกให้เพิกถอนใบอนุญาตของ ข หรือไม่","สัญญาเช่าที่ดินของ ข เป็นโมฆะหรือไม่"],
+        issueAns:0,
+        issueFeedback:"ถูกต้อง — ประเด็นคือสิทธิของเจ้าของอสังหาริมทรัพย์ข้างเคียงที่ได้รับความเดือดร้อนเกินปกติ จะฟ้องระงับเหตุและเรียกค่าทดแทนได้หรือไม่ แม้ผู้ก่อเหตุจะมีใบอนุญาตตามกฎหมายอื่น",
+        ruleQ:"ควรใช้มาตราใดในการวินิจฉัย",
+        ruleOpts:["ม.1337 (ความเดือดร้อนรำคาญ)","ม.1349 (ทางจำเป็น)","ม.1304 (สาธารณสมบัติของแผ่นดิน)","ม.1303 (การแย่งชิงสังหาริมทรัพย์)"],
+        ruleAns:0,
+        ruleFeedback:"ถูกต้อง — ม.1337 ให้สิทธิเจ้าของอสังหาริมทรัพย์ที่ได้รับความเสียหายหรือเดือดร้อนเกินกว่าที่ควรคาดหมายได้ตามปกติ ฟ้องให้ระงับเหตุและเรียกค่าทดแทนได้ เป็นบทบัญญัติเฉพาะทางแพ่งซึ่งแยกต่างหากจากใบอนุญาตประกอบกิจการตามกฎหมายปกครอง",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["เสียงปืนดังตลอดทั้งวันเกินกว่าที่วิญญูชนจะคาดหมายได้ตามปกติเมื่อคำนึงถึงสภาพและตำแหน่งที่อยู่ของบ้าน ก แม้ ข จะมีใบอนุญาตประกอบกิจการตามกฎหมายควบคุมอาวุธปืนก็เป็นคนละเรื่องกับสิทธิทางแพ่งของ ก ตาม ม.1337 ซึ่งไม่ได้ถูกตัดสิทธิไปเพราะมีใบอนุญาตนั้น","เมื่อ ข มีใบอนุญาตถูกต้องแล้ว ก ไม่มีสิทธิใด ๆ ทางแพ่งอีกเลย","ก ต้องพิสูจน์ว่า ข มีเจตนากลั่นแกล้งตนเท่านั้นจึงจะฟ้องได้","เรื่องนี้ต้องฟ้องเป็นคดีอาญาเท่านั้น ฟ้องแพ่งไม่ได้"],
+        appAns:0,
+        appFeedback:"ถูกต้อง — ใบอนุญาตประกอบกิจการตามกฎหมายควบคุมอาวุธปืนเป็นคนละเรื่องกับสิทธิเรียกร้องทางแพ่งตาม ม.1337 ซึ่งพิจารณาจากมาตรฐานวิญญูชนว่าความเดือดร้อนนั้นเกินกว่าที่ควรคาดหมายได้ตามปกติหรือไม่ เมื่อเสียงปืนดังตลอดทั้งวันสร้างความเดือดร้อนแก่ ก เกินกว่าปกติ ก จึงมีสิทธิตาม ม.1337 แม้ ข จะมีใบอนุญาตก็ตาม",
+        concQ:"สรุปผลของประเด็นนี้ควรเป็นอย่างไร",
+        concOpts:["ก มีสิทธิฟ้องให้ ข ระงับเหตุเดือดร้อนรำคาญและเรียกค่าทดแทนได้ตาม ม.1337 แม้ ข จะมีใบอนุญาตประกอบกิจการถูกต้องตามกฎหมายอื่นก็ตาม","ก ไม่มีสิทธิใด ๆ เลยเพราะ ข มีใบอนุญาตถูกต้อง","ก มีสิทธิเพียงฟ้องปิดกิจการเท่านั้น เรียกค่าทดแทนไม่ได้","ต้องรอให้หน่วยงานรัฐเพิกถอนใบอนุญาตก่อน ก จึงจะฟ้องได้"],
+        concAns:0,
+        concFeedback:"สรุป: การมีใบอนุญาตประกอบกิจการตามกฎหมายควบคุมอาวุธปืนไม่ตัดสิทธิทางแพ่งของ ก ตาม ม.1337 เมื่อเสียงปืนจากสนามยิงปืนของ ข สร้างความเดือดร้อนรำคาญเกินกว่าที่วิญญูชนจะคาดหมายได้ตามปกติแก่ ก ซึ่งเป็นเจ้าของอสังหาริมทรัพย์ข้างเคียง ก จึงมีสิทธิฟ้องให้ ข ระงับเหตุและเรียกค่าทดแทนความเสียหายได้"
+      }
+    ]
+  },
+  {
+    id:"case_way1",
+    examRef:"ข้อสอบตัวอย่าง วิชาทรัพย์สิน ข้อ 8",
+    title:"ที่ดินตาบอดจากการแบ่งมรดก",
+    cat:"necessaryway",
+    facts:"นายใหญ่มีที่ดินแปลงใหญ่แปลงหนึ่งซึ่งมีทางออกสู่ถนนสาธารณะด้านหน้า เมื่อนายใหญ่เสียชีวิต ทายาททั้ง 3 คนคือ ก ข และ ค ตกลงแบ่งมรดกที่ดินออกเป็น 3 แปลงเท่า ๆ กัน โดยแปลงของ ก อยู่ริมถนนสาธารณะมีทางออกตามปกติ แปลงของ ข อยู่ตรงกลางไม่มีทางออกสู่ถนนเลย ส่วนแปลงของ ค อยู่ด้านในสุดก็ไม่มีทางออกเช่นกัน ข ต้องการขอเปิดทางผ่านไปสู่ถนนสาธารณะ จึงไปขอเปิดทางผ่านที่ดินของนายเจริญซึ่งเป็นเพื่อนบ้านอยู่ติดกับแปลงของตนอีกด้านหนึ่ง (ไม่ใช่ที่ดินที่แบ่งมรดกด้วยกัน) โดยอ้างว่าเป็นทางที่สะดวกและใกล้ที่สุด นายเจริญไม่ยินยอมและอ้างว่า ข ต้องขอเปิดทางผ่านที่ดินของ ก เท่านั้น เพราะเป็นที่ดินที่แบ่งแยกมาด้วยกัน",
+    issues:[
+      {
+        label:"ประเด็นที่ 1 — ข มีสิทธิขอเปิดทางผ่านที่ดินของนายเจริญ หรือต้องขอเปิดทางผ่านที่ดินของ ก เท่านั้น",
+        issueQ:"ประเด็นแรกที่ต้องวินิจฉัยคือเรื่องใด",
+        issueOpts:["ข ผู้มีที่ดินตาบอดจากการแบ่งมรดก มีสิทธิเลือกขอเปิดทางผ่านที่ดินแปลงใดก็ได้ที่ล้อมอยู่ รวมถึงที่ดินของนายเจริญซึ่งไม่เกี่ยวกับการแบ่งมรดกครั้งนี้","ข ต้องขอเปิดทางผ่านเฉพาะที่ดินที่แบ่งแยกมาด้วยกัน (แปลงของ ก หรือ ค) เท่านั้น จะขอเปิดทางผ่านที่ดินของนายเจริญไม่ได้","ข ไม่มีสิทธิขอเปิดทางเลยเพราะยินยอมรับแบ่งมรดกที่ดินตาบอดเอง","ข ต้องฟ้องขอให้เพิกถอนการแบ่งมรดกทั้งหมด"],
+        issueAns:1,
+        issueFeedback:"ถูกต้อง — เมื่อที่ดินตาบอดของ ข เกิดจากการแบ่งแยกที่ดินมรดกแปลงใหญ่ กฎหมายกำหนดให้ต้องขอเปิดทางเฉพาะจากที่ดินแปลงที่แบ่งแยกออกมาด้วยกันเท่านั้น จึงต้องพิจารณาว่านายเจริญซึ่งไม่เกี่ยวกับการแบ่งมรดกครั้งนี้มีหน้าที่ต้องเปิดทางให้หรือไม่",
+        ruleQ:"ควรใช้มาตราใดในการวินิจฉัย",
+        ruleOpts:["ม.1350 (ทางจำเป็นกรณีแบ่งแยก/แบ่งโอนที่ดิน)","ม.1349 (ทางจำเป็นทั่วไป) เพียงมาตราเดียว","ม.1308 (ที่งอกริมตลิ่ง)","ม.1385 (การโอนการครอบครอง)"],
+        ruleAns:0,
+        ruleFeedback:"ถูกต้อง — ม.1350 เป็นบทบัญญัติเฉพาะที่ใช้เมื่อที่ดินตาบอดเกิดขึ้นจากการแบ่งแยกหรือแบ่งโอนที่ดินแปลงใหญ่ (รวมถึงการแบ่งมรดก) ซึ่งมีผลบังคับต่างจาก ม.1349 ทั่วไป",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["ที่ดินของ ข ตาบอดเพราะเกิดจากการแบ่งมรดกที่ดินแปลงใหญ่ของนายใหญ่ออกเป็น 3 แปลง อันเป็นการแบ่งแยกตาม ม.1350 ข จึงต้องขอเปิดทางผ่านเฉพาะที่ดินของ ก หรือ ค ซึ่งเป็นแปลงที่แบ่งแยกออกมาด้วยกันเท่านั้น จะไปขอเปิดทางผ่านที่ดินของนายเจริญซึ่งไม่เกี่ยวข้องกับการแบ่งมรดกครั้งนี้ไม่ได้ แม้จะเป็นทางที่สะดวกกว่าก็ตาม","ข มีสิทธิเลือกทางที่สะดวกที่สุดได้เสมอไม่ว่าจะเป็นที่ดินแปลงใด","เนื่องจากเป็นการแบ่งมรดกไม่ใช่การซื้อขาย ม.1350 จึงใช้ไม่ได้ ต้องใช้ ม.1349 ทั่วไปแทน","ข ไม่มีสิทธิขอเปิดทางจากที่ดินแปลงใดเลย เพราะทายาทแต่ละคนต้องรับผิดชอบที่ดินตาบอดของตนเองโดยลำพัง"],
+        appAns:0,
+        appFeedback:"ถูกต้อง — ม.1350 ใช้กับกรณีที่ดินตาบอดเกิดจากการแบ่งแยกหรือแบ่งโอนที่ครอบคลุมถึงการแบ่งมรดกที่ดินแปลงใหญ่ด้วย เมื่อที่ดินของ ข ตาบอดเพราะการแบ่งมรดกครั้งนี้ ข จึงต้องขอเปิดทางเฉพาะจากที่ดินแปลงที่แบ่งแยกออกมาด้วยกัน (ของ ก หรือ ค) เท่านั้น จะไปเรียกร้องเอาจากที่ดินของนายเจริญซึ่งเป็นบุคคลภายนอกที่ไม่เกี่ยวข้องกับการแบ่งแยกครั้งนี้ไม่ได้ แม้จะสะดวกกว่าก็ตาม",
+        concQ:"สรุปผลของประเด็นนี้ควรเป็นอย่างไร",
+        concOpts:["ข ไม่มีสิทธิขอเปิดทางผ่านที่ดินของนายเจริญ ต้องขอเปิดทางผ่านที่ดินของ ก หรือ ค ซึ่งเป็นแปลงที่แบ่งแยกมาด้วยกันเท่านั้นตาม ม.1350 และไม่ต้องเสียค่าทดแทน","ข มีสิทธิขอเปิดทางผ่านที่ดินของนายเจริญได้เพราะสะดวกกว่า","ข ต้องเสียค่าทดแทนไม่ว่าจะขอเปิดทางผ่านแปลงใด","ข ไม่มีสิทธิขอเปิดทางเลยไม่ว่ากรณีใด"],
+        concAns:0,
+        concFeedback:"สรุป: ที่ดินของ ข ตาบอดเนื่องจากการแบ่งมรดกที่ดินแปลงใหญ่ ซึ่งเข้าเงื่อนไข ม.1350 ข จึงมีสิทธิเรียกร้องขอเปิดทางจำเป็นได้เฉพาะบนที่ดินแปลงที่แบ่งแยกออกมาด้วยกัน คือแปลงของ ก หรือ ค เท่านั้น และไม่ต้องเสียค่าทดแทนให้แก่เจ้าของที่ดินแปลงนั้น จะไปเรียกร้องเอาจากที่ดินของนายเจริญซึ่งเป็นบุคคลภายนอกไม่ได้"
+      }
+    ]
+  },
+  {
+    id:"case_possess1",
+    examRef:"ข้อสอบตัวอย่าง วิชาทรัพย์สิน ข้อ 9",
+    title:"เปลี่ยนลักษณะการยึดถือ: จากผู้เช่าเป็นเจ้าของ",
+    cat:"possession",
+    facts:"ก เป็นเจ้าของที่ดินแปลงหนึ่ง ให้ ข เช่าที่ดินปลูกพืชผลมาตั้งแต่ปี 2548 โดยชำระค่าเช่าให้ ก ทุกปีอย่างสม่ำเสมอจนถึงปี 2555 ต่อมาปี 2556 ข หยุดชำระค่าเช่าและไม่เคยติดต่อ ก อีกเลย โดย ข ยังคงครอบครองทำประโยชน์ในที่ดินต่อไปอย่างเปิดเผยราวกับเป็นเจ้าของเอง ปลูกบ้านถาวรอยู่อาศัยในที่ดิน และเสียภาษีบำรุงท้องที่ในนามตนเองตั้งแต่ปี 2556 เป็นต้นมา แต่ ข ไม่เคยบอกกล่าวแจ้งไปยัง ก อย่างชัดแจ้งเลยว่าตนไม่มีเจตนายึดถือที่ดินแทน ก อีกต่อไป จนกระทั่งปี 2570 (ครบ 14 ปีนับแต่หยุดชำระค่าเช่า) ก จึงมาทวงถามและพบว่า ข ปลูกบ้านอยู่ในที่ดินของตน ข อ้างว่าตนได้กรรมสิทธิ์ในที่ดินแล้วโดยการครอบครองปรปักษ์เพราะครอบครองเกิน 10 ปีนับแต่หยุดจ่ายค่าเช่า",
+    issues:[
+      {
+        label:"ประเด็นที่ 1 — ข ได้กรรมสิทธิ์ในที่ดินโดยการครอบครองปรปักษ์แล้วหรือไม่",
+        issueQ:"ประเด็นแรกที่ต้องวินิจฉัยคือเรื่องใด",
+        issueOpts:["ข ได้กรรมสิทธิ์ในที่ดินของ ก แล้วโดยการครอบครองปรปักษ์นับแต่วันที่หยุดชำระค่าเช่าหรือไม่","สัญญาเช่าที่ดินระหว่าง ก กับ ข สิ้นสุดลงแล้วหรือยัง","ก มีสิทธิฟ้องขับไล่ ข ออกจากที่ดินได้ทันทีโดยไม่ต้องพิจารณาเรื่องครอบครองปรปักษ์เลยหรือไม่","ข ต้องชำระค่าเช่าที่ค้างทั้งหมดก่อนหรือไม่"],
+        issueAns:0,
+        issueFeedback:"ถูกต้อง — ประเด็นหลักคือ ข ผู้เคยยึดถือที่ดินในฐานะผู้เช่า(ยึดถือแทน ก) จะเปลี่ยนสถานะมาเป็นผู้ครอบครองปรปักษ์เพื่อตนเองได้หรือไม่ เพียงเพราะหยุดจ่ายค่าเช่าและครอบครองต่อไปเงียบ ๆ",
+        ruleQ:"ควรใช้มาตราใดในการวินิจฉัย",
+        ruleOpts:["ม.1381 (การเปลี่ยนลักษณะแห่งการยึดถือ) ประกอบ ม.1382 (การครอบครองปรปักษ์)","ม.1375 (การถูกแย่งการครอบครอง)","ม.1308 (ที่งอกริมตลิ่ง)","ม.1316 (นำสังหาริมทรัพย์มาปะปนกัน)"],
+        ruleAns:0,
+        ruleFeedback:"ถูกต้อง — ข เดิมยึดถือที่ดินในฐานะผู้เช่าซึ่งเป็นผู้ยึดถือแทน ก ตาม ม.1368 การจะเริ่มนับเวลาครอบครองปรปักษ์เพื่อตนเองตาม ม.1382 ได้ ข ต้องเปลี่ยนลักษณะแห่งการยึดถือตามเงื่อนไขที่ ม.1381 กำหนดไว้เสียก่อน",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["แม้ ข จะหยุดชำระค่าเช่าและครอบครองที่ดินอย่างเปิดเผยราวกับเป็นเจ้าของตั้งแต่ปี 2556 แต่ ข ไม่เคยบอกกล่าวไปยัง ก อย่างชัดแจ้งว่าตนไม่มีเจตนายึดถือแทน ก อีกต่อไปตามที่ ม.1381 กำหนด การครอบครองของ ข จึงยังคงเป็นการยึดถือแทน ก อยู่ตลอดมา ไม่อาจเริ่มนับเวลาครอบครองปรปักษ์เพื่อตนเองได้ แม้จะครอบครองต่อเนื่องนานเกิน 10 ปีแล้วก็ตาม","การหยุดจ่ายค่าเช่าถือเป็นการบอกกล่าวเปลี่ยนลักษณะการยึดถือโดยปริยายแล้วตาม ม.1381","ข ได้กรรมสิทธิ์แล้วเพราะครอบครองนานเกิน 10 ปีโดยไม่มีเงื่อนไขอื่นอีก","การเสียภาษีบำรุงท้องที่ในนามตนเองถือเป็นการบอกกล่าวที่สมบูรณ์ตาม ม.1381 แล้ว"],
+        appAns:0,
+        appFeedback:"ถูกต้อง — ม.1381 กำหนดชัดเจนว่าผู้ยึดถือแทนจะเปลี่ยนลักษณะแห่งการยึดถือได้ก็แต่โดยบอกกล่าวไปยังผู้แทนสิทธิครอบครองเดิมว่าไม่เจตนายึดถือแทนอีกต่อไป การกระทำฝ่ายเดียวเงียบ ๆ เช่น หยุดจ่ายค่าเช่า ปลูกบ้าน หรือเสียภาษีในนามตนเอง แม้จะแสดงเจตนาเป็นเจ้าของอยู่ในใจ ก็ไม่ถือเป็นการบอกกล่าวตามมาตรานี้ ตราบใดที่ยังไม่บอกกล่าวไปยัง ก อย่างชัดแจ้ง การครอบครองของ ข ก็ยังคงเป็นการยึดถือแทนอยู่เช่นเดิม เวลาครอบครองปรปักษ์เพื่อตนเองจึงยังไม่เริ่มนับ",
+        concQ:"สรุปผลของประเด็นนี้ควรเป็นอย่างไร",
+        concOpts:["ข ยังไม่ได้กรรมสิทธิ์ในที่ดินโดยการครอบครองปรปักษ์ เพราะไม่เคยบอกกล่าวเปลี่ยนลักษณะการยึดถือไปยัง ก ตาม ม.1381 เวลาครอบครองปรปักษ์เพื่อตนเองจึงยังไม่เริ่มนับ","ข ได้กรรมสิทธิ์แล้วนับแต่วันที่หยุดชำระค่าเช่าในปี 2556","ข ได้กรรมสิทธิ์แล้วนับแต่วันที่เริ่มเสียภาษีบำรุงท้องที่ในนามตนเอง","ก สูญเสียกรรมสิทธิ์ไปแล้วโดยอัตโนมัติเพราะไม่ได้ติดต่อ ข นานเกิน 10 ปี"],
+        concAns:0,
+        concFeedback:"สรุป: ข ยึดถือที่ดินในฐานะผู้เช่าซึ่งเป็นผู้ยึดถือแทน ก มาตั้งแต่ต้น การที่ ข เพียงหยุดชำระค่าเช่าและครอบครองต่อไปอย่างเงียบ ๆ โดยไม่เคยบอกกล่าวไปยัง ก อย่างชัดแจ้งว่าไม่มีเจตนายึดถือแทนอีกต่อไปตามที่ ม.1381 กำหนด ย่อมไม่ทำให้การครอบครองเปลี่ยนลักษณะเป็นการครอบครองเพื่อตนเอง แม้จะครอบครองต่อเนื่องมานานเกิน 10 ปีแล้วก็ตาม ข จึงยังไม่ได้กรรมสิทธิ์ในที่ดินโดยการครอบครองปรปักษ์ตาม ม.1382"
+      }
+    ]
+  },
+  {
+    id:"case_possess2",
+    examRef:"ข้อสอบตัวอย่าง วิชาทรัพย์สิน ข้อ 10",
+    title:"ซื้อที่ดินจากผู้ครอบครองปรปักษ์: นับเวลาต่อได้หรือไม่",
+    cat:"possession",
+    facts:"นาย ก ครอบครองที่ดินแปลงหนึ่งซึ่งเดิมเป็นของนาย ง โดยสงบ เปิดเผย ด้วยเจตนาเป็นเจ้าของมาแล้วเป็นเวลา 8 ปี โดยนาย ง เจ้าของเดิมไม่เคยเข้ามายุ่งเกี่ยวหรือทักท้วงเลย ต่อมานาย ก ตัดสินใจขายสิทธิครอบครองในที่ดินแปลงนั้นให้แก่นาย ข โดยทำสัญญาซื้อขายและส่งมอบการครอบครองที่ดินให้นาย ข ไปครอบครองต่อ นาย ข ครอบครองที่ดินต่อเนื่องมาโดยสงบ เปิดเผย ด้วยเจตนาเป็นเจ้าของอีก 3 ปี รวมเวลาของนาย ก กับนาย ข ได้ 11 ปี นาย ข จึงไปยื่นคำร้องต่อศาลขอให้มีคำสั่งแสดงว่าตนได้กรรมสิทธิ์ในที่ดินแปลงนั้นแล้วโดยการครอบครองปรปักษ์ นาย ง เจ้าของเดิมคัดค้านโดยอ้างว่านาย ข ครอบครองมาเพียง 3 ปีเท่านั้น ยังไม่ครบ 10 ปี จึงยังไม่ได้กรรมสิทธิ์",
+    issues:[
+      {
+        label:"ประเด็นที่ 1 — นาย ข มีสิทธินับเวลาครอบครองของนาย ก รวมเข้ากับเวลาของตนเองได้หรือไม่",
+        issueQ:"ประเด็นแรกที่ต้องวินิจฉัยคือเรื่องใด",
+        issueOpts:["นาย ข ผู้รับโอนการครอบครองที่ดินมาจากนาย ก โดยการซื้อขาย มีสิทธินับเวลาครอบครองของนาย ก รวมเข้ากับเวลาครอบครองของตนเองได้หรือไม่","สัญญาซื้อขายสิทธิครอบครองระหว่าง ก กับ ข สมบูรณ์หรือไม่","นาย ง เจ้าของเดิมมีสิทธิเรียกค่าเช่าที่ดินย้อนหลังหรือไม่","นาย ข ต้องจดทะเบียนสิทธิครอบครองก่อนจึงจะนับเวลาต่อได้หรือไม่"],
+        issueAns:0,
+        issueFeedback:"ถูกต้อง — ประเด็นคือผลของการโอนการครอบครองโดยนิติกรรม (ซื้อขาย) ต่อการนับระยะเวลาครอบครองปรปักษ์ของผู้รับโอน",
+        ruleQ:"ควรใช้มาตราใดในการวินิจฉัย",
+        ruleOpts:["ม.1385 (การโอนการครอบครอง — นับเวลาต่อจากผู้โอนได้)","ม.1384 (การสมานเวลาครอบครอง)","ม.1377 (การสละเจตนาครอบครอง)","ม.1368 (ผู้ยึดถือแทน)"],
+        ruleAns:0,
+        ruleFeedback:"ถูกต้อง — ม.1385 กำหนดหลักว่าเมื่อมีการโอนการครอบครองทรัพย์สิน ผู้รับโอนมีสิทธินับเวลาครอบครองของผู้โอนรวมเข้ากับเวลาของตนเองได้ ต่างจากกรณีรับมรดกซึ่งไม่ถือเป็นการโอนตามความหมายของมาตรานี้",
+        appQ:"ปรับข้อเท็จจริงเข้ากับมาตราอย่างไร",
+        appOpts:["การซื้อขายสิทธิครอบครองระหว่างนาย ก กับนาย ข พร้อมส่งมอบการครอบครองที่ดิน ถือเป็นการโอนการครอบครองโดยนิติกรรมตาม ม.1385 นาย ข ผู้รับโอนจึงมีสิทธินับเวลาครอบครองของนาย ก (8 ปี) รวมเข้ากับเวลาครอบครองของตนเอง (3 ปี) ได้ รวมเป็น 11 ปี ซึ่งเกินกว่า 10 ปีตาม ม.1382 แล้ว","นาย ข ต้องเริ่มนับเวลาครอบครองปรปักษ์ของตนเองใหม่ทั้งหมด เพราะการซื้อขายไม่ใช่การโอนตาม ม.1385","นาย ข นับเวลาต่อได้เฉพาะกรณีที่นาย ก ยังมีชีวิตอยู่และมาเป็นพยานในศาลเท่านั้น","ต้องนับเวลาของนาย ก และนาย ข แยกกันคนละคดี"],
+        appAns:0,
+        appFeedback:"ถูกต้อง — ม.1385 ใช้กับการโอนการครอบครองโดยนิติกรรม เช่น ซื้อขาย ให้ แลกเปลี่ยน ซึ่งต่างจากการรับมรดกที่ไม่ใช่การโอนตามความหมายมาตรานี้ เมื่อนาย ก ขายสิทธิครอบครองและส่งมอบให้นาย ข ไปโดยชอบ นาย ข จึงมีสิทธินับเวลาครอบครองของนาย ก ต่อได้เต็มจำนวน",
+        concQ:"สรุปผลของประเด็นนี้ควรเป็นอย่างไร",
+        concOpts:["นาย ข ได้กรรมสิทธิ์ในที่ดินแล้วโดยการครอบครองปรปักษ์ตาม ม.1382 เพราะนับเวลารวมของนาย ก กับตนเองได้ 11 ปี เกินกว่า 10 ปีตามที่กฎหมายกำหนด","นาย ข ยังไม่ได้กรรมสิทธิ์ เพราะครอบครองมาเพียง 3 ปีเท่านั้น","ต้องรอให้นาย ง เจ้าของเดิมยินยอมก่อนจึงจะได้กรรมสิทธิ์","นาย ก ยังคงเป็นผู้มีสิทธิครอบครองปรปักษ์อยู่ ไม่ใช่นาย ข"],
+        concAns:0,
+        concFeedback:"สรุป: การซื้อขายสิทธิครอบครองพร้อมส่งมอบที่ดินระหว่างนาย ก กับนาย ข เป็นการโอนการครอบครองโดยนิติกรรมตาม ม.1385 นาย ข จึงมีสิทธินับเวลาครอบครองของนาย ก ที่ครอบครองมาก่อน (8 ปี) รวมเข้ากับเวลาครอบครองของตนเอง (3 ปี) ได้ รวมเป็น 11 ปี ซึ่งครบตามเงื่อนไข 10 ปีของอสังหาริมทรัพย์ตาม ม.1382 แล้ว นาย ข จึงได้กรรมสิทธิ์ในที่ดินแปลงนั้นโดยการครอบครองปรปักษ์"
+      }
+    ]
+  }
+];
+
+
+
+const SUMMARY_TOPICS = [
+  {
+    id: "s1_intro",
+    label: "1. ภาพรวมและนิยามทรัพย์ (บรรพ 1)",
+    cat: "definition",
+    html: `
+<h4 id="s1-h1">โครงสร้างของกฎหมายลักษณะทรัพย์สิน</h4>
+<p>วิชานี้อาศัยฐานจาก 2 ส่วนของประมวลกฎหมายแพ่งและพาณิชย์: <b>บรรพ 1</b> ให้นิยามพื้นฐานว่า "ทรัพย์" และ "ทรัพย์สิน" คืออะไร (ม.137-148) ส่วน <b>บรรพ 4</b> ว่าด้วยทรัพยสิทธิ กรรมสิทธิ์ สิทธิครอบครอง และการได้มา-เสียไปซึ่งสิทธิเหล่านั้น (ม.1298 เป็นต้นไป) เกมนี้จัดกลุ่มเนื้อหาออกเป็น 10 หมวดตามลำดับที่ควรอ่าน</p>
+
+<h4 id="s1-h2">นิยาม ทรัพย์ (ม.137) และ ทรัพย์สิน (ม.138)</h4>
+<p><b>ทรัพย์</b> ตาม ม.137 หมายถึงวัตถุมีรูปร่าง คือสัมผัสจับต้องได้ ส่วน <b>ทรัพย์สิน</b> ตาม ม.138 มีความหมายกว้างกว่า เพราะรวมทั้งทรัพย์ (มีรูปร่าง) และวัตถุไม่มีรูปร่างซึ่งอาจมีราคาและอาจถือเอาได้ เช่น กระแสไฟฟ้า สิทธิบัตร ลิขสิทธิ์</p>
+<p>จุดสำคัญคือ กระแสไฟฟ้าไม่ใช่ "ทรัพย์" ตาม ม.137 (เพราะไม่มีรูปร่าง) แต่เป็น "ทรัพย์สิน" ตาม ม.138 ได้ (เพราะมีราคาและถือเอาได้)</p>
+
+<h4 id="s1-h3">อสังหาริมทรัพย์ (ม.139) และสังหาริมทรัพย์ (ม.140)</h4>
+<p><b>อสังหาริมทรัพย์</b> มี 3 กลุ่ม: (1) ที่ดิน (2) ทรัพย์ที่ติดกับที่ดินถาวรหรือประกอบเป็นอันเดียวกับที่ดิน (3) ทรัพยสิทธิที่เกี่ยวกับที่ดิน ส่วน <b>สังหาริมทรัพย์</b> ตาม ม.140 เป็นบทนิยามแบบกันเอาไว้ (residual) คือทรัพย์สินใดที่ไม่เข้า ม.139 ถือเป็นสังหาริมทรัพย์ทั้งหมด รวมถึงสิทธิที่เกี่ยวกับสังหาริมทรัพย์นั้นด้วย</p>
+
+<div class="study-exam-box">
+<h5>📝 กรอบโจทย์สอบ — เปรียบเทียบนิยาม</h5>
+<p>ข้อสอบมักถามให้จำแนกทรัพย์แต่ละชนิดว่าเป็น ทรัพย์/ทรัพย์สิน และ อสังหาริมทรัพย์/สังหาริมทรัพย์ หรือไม่ — เทคนิคคือเช็ค ม.137-138 ก่อน (มีรูปร่างหรือไม่ มีราคาถือเอาได้หรือไม่) แล้วจึงเช็ค ม.139-140 (ติดกับที่ดินถาวรหรือไม่)</p>
+</div>
+`,
+    toc: [
+      {id:"s1-h1", level:"major", text:"โครงสร้างของกฎหมายลักษณะทรัพย์สิน"},
+      {id:"s1-h2", level:"major", text:"ทรัพย์ (ม.137) และทรัพย์สิน (ม.138)"},
+      {id:"s1-h3", level:"major", text:"อสังหาริมทรัพย์ (ม.139) / สังหาริมทรัพย์ (ม.140)"}
+    ]
+  },
+  {
+    id: "s2_accessory",
+    label: "2. ส่วนควบ อุปกรณ์ และดอกผล ★★★",
+    cat: "accessory",
+    html: `
+<h4 id="s2-h1">หลักส่วนควบ (ม.144)</h4>
+<p>ส่วนควบของทรัพย์คือส่วนซึ่งโดยสภาพแห่งทรัพย์หรือโดยจารีตประเพณีแห่งท้องถิ่นเป็น <b>สาระสำคัญ</b> ในความเป็นอยู่ของทรัพย์นั้น และ <b>ไม่อาจแยกจากกันได้</b> นอกจากจะทำลาย บุบสลาย หรือเปลี่ยนแปลงรูปทรง เจ้าของทรัพย์ประธานย่อมได้กรรมสิทธิ์ในส่วนควบไปโดยอัตโนมัติ</p>
+
+<h4 id="s2-h2">ไม้ยืนต้น vs ไม้ล้มลุก (ม.145)</h4>
+<ul>
+<li><b>ว.1:</b> ไม้ยืนต้นเป็นส่วนควบกับที่ดินที่ไม้นั้นขึ้นอยู่</li>
+<li><b>ว.2:</b> ไม้ล้มลุกหรือธัญชาติที่เก็บเกี่ยวรวงผลได้คราวหนึ่งหรือหลายคราวต่อปี <u>ไม่ใช่</u>ส่วนควบกับที่ดิน</li>
+</ul>
+
+<h4 id="s2-h3">ข้อยกเว้นไม่เป็นส่วนควบ (ม.146)</h4>
+<p>ทรัพย์ซึ่งติดกับที่ดินหรือโรงเรือนเพียงชั่วคราว <u>ไม่</u>เป็นส่วนควบ และข้อยกเว้นที่สำคัญที่สุดคือ: <b>โรงเรือนหรือสิ่งปลูกสร้างที่ผู้มีสิทธิในที่ดินของผู้อื่นใช้สิทธินั้นปลูกสร้างไว้</b> (เช่น ผู้เช่าที่ดินปลูกบ้านโดยมีสิทธิตามสัญญาเช่า) ก็ไม่ตกเป็นส่วนควบของเจ้าของที่ดินเช่นกัน</p>
+
+<div class="study-exam-box">
+<h5>⚠️ จุดที่ออกสอบบ่อยที่สุด — ม.146</h5>
+<p>โจทย์มักตั้งสถานการณ์ให้ผู้เช่าที่ดินปลูกบ้านตามสิทธิในสัญญาเช่า แล้วถามว่าเมื่อครบสัญญาเช่า บ้านตกเป็นของเจ้าของที่ดินหรือไม่ — <b>คำตอบคือไม่ตก</b> เพราะเข้าข้อยกเว้น ม.146 แม้บ้านจะติดกับที่ดินอย่างถาวรตามหลักทั่วไปของ ม.144 ก็ตาม ต้องระวังอย่าตอบว่าเป็นส่วนควบเพียงเพราะ "ติดกับพื้นดิน"</p>
+</div>
+
+<h4 id="s2-h4">อุปกรณ์ (ม.147)</h4>
+<p>อุปกรณ์คือสังหาริมทรัพย์ซึ่งเป็นของใช้ประจำอยู่กับทรัพย์ประธานเพื่อประโยชน์แก่การจัดดูแล ใช้สอย หรือรักษาทรัพย์ประธาน (เช่น ยางอะไหล่รถยนต์ กุญแจบ้าน) <b>ต่างจากส่วนควบตรงที่ถอดแยกออกจากทรัพย์ประธานได้โดยไม่เสียหาย</b> แต่กฎหมายให้ตกติดไปกับทรัพย์ประธานเมื่อมีนิติกรรมเกี่ยวกับทรัพย์ประธาน เว้นแต่จะตกลงกันไว้เป็นอย่างอื่น</p>
+
+<h4 id="s2-h5">ดอกผล (ม.148)</h4>
+<p>ดอกผลมี 2 ประเภท:</p>
+<ul>
+<li><b>ดอกผลธรรมดา</b> — สิ่งที่เกิดขึ้นตามธรรมชาติของทรัพย์ (เช่น ลูกไม้ ลูกสัตว์)</li>
+<li><b>ดอกผลนิตินัย</b> — ทรัพย์หรือประโยชน์ที่ได้เป็นครั้งคราวจากผู้อื่นเพื่อการใช้ทรัพย์ คำนวณเป็นรายวันหรือตามระยะเวลาที่กำหนด (เช่น ค่าเช่า ดอกเบี้ย)</li>
+</ul>
+
+<div class="study-exam-box">
+<h5>📝 สรุปเปรียบเทียบ 4 คำที่มักสับสน</h5>
+<p><b>ส่วนควบ</b> (ม.144) แยกไม่ได้โดยไม่เสียหาย / <b>อุปกรณ์</b> (ม.147) แยกได้แต่เป็นของใช้ประจำ / <b>ดอกผลธรรมดา</b> (ม.148) เกิดขึ้นเองตามธรรมชาติของทรัพย์ / <b>ดอกผลนิตินัย</b> (ม.148) เป็นค่าตอบแทนจากการให้ผู้อื่นใช้ทรัพย์ — ทั้ง 4 คำนี้ออกสอบทุกปีในลักษณะให้จำแนกจากสถานการณ์ตัวอย่าง</p>
+</div>
+`,
+    toc: [
+      {id:"s2-h1", level:"major", text:"หลักส่วนควบ (ม.144)"},
+      {id:"s2-h2", level:"major", text:"ไม้ยืนต้น vs ไม้ล้มลุก (ม.145)"},
+      {id:"s2-h3", level:"major", text:"ข้อยกเว้นไม่เป็นส่วนควบ (ม.146) ★★★"},
+      {id:"s2-h4", level:"major", text:"อุปกรณ์ (ม.147)"},
+      {id:"s2-h5", level:"major", text:"ดอกผล (ม.148)"}
+    ]
+  },
+  {
+    id: "s3_registration",
+    label: "3. ระบบทะเบียนและการได้มาซึ่งทรัพยสิทธิ",
+    cat: "registration",
+    html: `
+<h4 id="s3-h1">หลัก Numerus Clausus (ม.1298)</h4>
+<p>ทรัพยสิทธิจะก่อตั้งขึ้นได้แต่โดยอาศัยอำนาจในประมวลกฎหมายนี้หรือกฎหมายอื่นเท่านั้น คู่สัญญาจะตกลงสร้างทรัพยสิทธิชนิดใหม่ขึ้นเองตามใจชอบไม่ได้ ต่างจากบุคคลสิทธิที่ตกลงกันเองได้เสรีตามหลักเสรีภาพในการทำสัญญา</p>
+
+<h4 id="s3-h2">ได้มาโดยนิติกรรม vs ได้มาโดยทางอื่น (ม.1299)</h4>
+<ul>
+<li><b>ว.1 — ได้มาโดยนิติกรรม:</b> การได้มาซึ่งอสังหาริมทรัพย์หรือทรัพยสิทธิที่เกี่ยวกับอสังหาริมทรัพย์โดยนิติกรรม <u>ไม่บริบูรณ์</u> เว้นแต่จะทำเป็นหนังสือและจดทะเบียนกับพนักงานเจ้าหน้าที่ (แต่ไม่ใช่โมฆะ — ยังผูกพันกันได้ในฐานะบุคคลสิทธิ)</li>
+<li><b>ว.2 — ได้มาโดยทางอื่น:</b> เช่น ครอบครองปรปักษ์ หรือรับมรดก สิทธิสมบูรณ์ทันที แต่จะเปลี่ยนแปลงทางทะเบียนไม่ได้จนกว่าจะจด และห้ามยกขึ้นต่อสู้บุคคลภายนอกผู้รับโอนโดยสุจริต เสียค่าตอบแทน และจดทะเบียนโดยสุจริต</li>
+</ul>
+
+<h4 id="s3-h3">ฟ้องเพิกถอนการจดทะเบียนตัดหน้า (ม.1300)</h4>
+<p>บุคคลที่อยู่ในฐานะจะให้จดทะเบียนสิทธิของตนได้อยู่ก่อน (เช่น ผู้ซื้อคนแรกที่ยังไม่จด) ฟ้องเพิกถอนบุคคลที่มาจดทะเบียนตัดหน้าได้ <b>เว้นแต่</b> ผู้รับโอนคนหลังจะสุจริตและเสียค่าตอบแทนทั้งสองประการ</p>
+
+<div class="study-exam-box">
+<h5>📝 กรอบโจทย์สอบ — ม.1300</h5>
+<p>สูตรตรวจสอบ: (1) ผู้ฟ้องอยู่ในฐานะจะจดทะเบียนสิทธิได้อยู่ก่อนหรือไม่ (2) ผู้รับโอนคนหลังสุจริตหรือไม่ (3) ผู้รับโอนคนหลังเสียค่าตอบแทนหรือไม่ — ต้องสุจริต<b>และ</b>เสียค่าตอบแทนครบทั้งสองข้อจึงจะพ้นการถูกเพิกถอน ขาดข้อใดข้อหนึ่งก็ถูกเพิกถอนได้</p>
+</div>
+
+<h4 id="s3-h4">สังหาริมทรัพย์ชนิดพิเศษ (ม.1302)</h4>
+<p>เรือกำปั่นหรือเรือมีระวางตั้งแต่ 5 ตันขึ้นไป แพ และสัตว์พาหนะ แม้เป็นสังหาริมทรัพย์ แต่มีระบบทะเบียนเช่นเดียวกับอสังหาริมทรัพย์ จึงนำ ม.1299 และ ม.1300 มาใช้บังคับโดยอนุโลม</p>
+`,
+    toc: [
+      {id:"s3-h1", level:"major", text:"หลัก Numerus Clausus (ม.1298)"},
+      {id:"s3-h2", level:"major", text:"ได้มาโดยนิติกรรม vs ทางอื่น (ม.1299)"},
+      {id:"s3-h3", level:"major", text:"ฟ้องเพิกถอนการจดทะเบียนตัดหน้า (ม.1300)"},
+      {id:"s3-h4", level:"item", text:"สังหาริมทรัพย์ชนิดพิเศษ (ม.1302)"}
+    ]
+  },
+  {
+    id: "s4_publicdomain",
+    label: "4. สาธารณสมบัติของแผ่นดิน",
+    cat: "publicdomain",
+    html: `
+<h4 id="s4-h1">นิยามสาธารณสมบัติของแผ่นดิน (ม.1304)</h4>
+<p>ทรัพย์สินทุกชนิดของแผ่นดินซึ่งใช้เพื่อสาธารณประโยชน์หรือสงวนไว้เพื่อประโยชน์ร่วมกัน แบ่งเป็น 3 กลุ่ม: (1) ที่ดินรกร้างว่างเปล่าและที่ดินที่กลับมาเป็นของแผ่นดิน (2) ทรัพย์สินสำหรับพลเมืองใช้ร่วมกัน เช่น ที่ชายตลิ่ง ทางน้ำ ทางหลวง (3) ทรัพย์สินที่ใช้เพื่อประโยชน์ของแผ่นดินโดยเฉพาะ เช่น ป้อม สำนักราชการ</p>
+
+<h4 id="s4-h2">เกราะคุ้มครอง 3 ชั้น (ม.1305-1307)</h4>
+<ul>
+<li><b>ม.1305:</b> ห้ามโอนสาธารณสมบัติของแผ่นดิน เว้นแต่อาศัยอำนาจบทกฎหมายเฉพาะหรือพระราชกฤษฎีกา</li>
+<li><b>ม.1306:</b> ห้ามยกอายุความครอบครองปรปักษ์ขึ้นต่อสู้แผ่นดินในเรื่องสาธารณสมบัติ</li>
+<li><b>ม.1307:</b> ห้ามยึดทรัพย์สินของแผ่นดิน ไม่ว่าจะเป็นสาธารณสมบัติหรือไม่ก็ตาม</li>
+</ul>
+
+<div class="study-exam-box">
+<h5>⚠️ จุดที่ออกสอบบ่อย — ม.1306</h5>
+<p>โจทย์มักให้เอกชนครอบครองที่ดินสาธารณะ (เช่น รุกล้ำถนน คลอง) มานานเกิน 10 ปีแล้วอ้างครอบครองปรปักษ์ตาม ม.1382 — <b>คำตอบเสมอคือไม่ได้กรรมสิทธิ์</b> เพราะ ม.1306 ห้ามยกอายุความครอบครองปรปักษ์ขึ้นต่อสู้แผ่นดินไม่ว่าจะครอบครองนานเพียงใด นี่คือข้อยกเว้นเดียวที่ทำให้ ม.1382 ใช้ไม่ได้เลย</p>
+</div>
+`,
+    toc: [
+      {id:"s4-h1", level:"major", text:"นิยามสาธารณสมบัติของแผ่นดิน (ม.1304)"},
+      {id:"s4-h2", level:"major", text:"เกราะคุ้มครอง 3 ชั้น (ม.1305-1307)"}
+    ]
+  },
+  {
+    id: "s5_goodfaith",
+    label: "5. การแย่งชิงสังหาฯ และคุ้มครองบุคคลภายนอกผู้สุจริต",
+    cat: "goodfaith",
+    html: `
+<h4 id="s5-h1">หลักทั่วไป — การแย่งชิงสังหาริมทรัพย์ (ม.1303)</h4>
+<p>ใครได้สังหาริมทรัพย์มาโดยครอบครอง เสียค่าตอบแทน และสุจริต ผู้นั้นชนะแม้ผู้โอนจะไม่ใช่เจ้าของแท้จริง <b>ข้อยกเว้น (ว.2):</b> ไม่คุ้มครองทรัพย์ที่หาย หรือทรัพย์ที่ได้จากการกระทำผิดอาญา — เจ้าของเดิมยังคงติดตามเรียกคืนได้</p>
+
+<h4 id="s5-h2">4 มาตราคุ้มครองบุคคลภายนอกผู้สุจริต</h4>
+<ul>
+<li><b>ม.1329:</b> ได้ทรัพย์จากนิติกรรมโมฆียะ — สุจริต + เสียค่าตอบแทน + ได้มาก่อนบอกล้าง = ได้รับความคุ้มครอง</li>
+<li><b>ม.1330:</b> ซื้อจากการขายทอดตลาดตามคำสั่งศาลโดยสุจริต = ได้กรรมสิทธิ์เด็ดขาด แม้ภายหลังพิสูจน์ได้ว่าไม่ใช่ของลูกหนี้</li>
+<li><b>ม.1331:</b> ได้เงินตรามาโดยสุจริต = ได้รับความคุ้มครองเสมอ (ไม่ต้องพิจารณาเรื่องค่าตอบแทนเลย)</li>
+<li><b>ม.1332:</b> ซื้อโดยสุจริตจาก (1) ขายทอดตลาด (2) ท้องตลาด หรือ (3) พ่อค้าขายของชนิดนั้น = ไม่ต้องคืนทรัพย์ เว้นแต่เจ้าของเดิมจะชดใช้ราคาที่ซื้อมาให้</li>
+</ul>
+
+<div class="study-exam-box">
+<h5>📝 กรอบโจทย์สอบ — ทรัพย์หาย/ถูกลัก แล้วถูกขายต่อในท้องตลาด</h5>
+<p>โครงสร้างคำตอบมาตรฐาน: (1) ทรัพย์นั้นหายหรือถูกลักหรือไม่ → ถ้าใช่ เจ้าของเดิมยังติดตามเรียกคืนได้ตาม ม.1303 ว.2 (2) ผู้ครอบครองปัจจุบันได้มาจากท้องตลาด/พ่อค้าขายของชนิดนั้นโดยสุจริตหรือไม่ → ถ้าใช่ เข้า ม.1332 (3) สรุป: เจ้าของเดิมเรียกคืนได้ <b>แต่ต้องชดใช้ราคาที่ผู้ครอบครองปัจจุบันซื้อมา</b> จะเรียกคืนเปล่า ๆ ไม่ได้</p>
+</div>
+`,
+    toc: [
+      {id:"s5-h1", level:"major", text:"การแย่งชิงสังหาริมทรัพย์ (ม.1303)"},
+      {id:"s5-h2", level:"major", text:"4 มาตราคุ้มครองบุคคลภายนอกผู้สุจริต"}
+    ]
+  },
+  {
+    id: "s6_accession",
+    label: "6. การได้กรรมสิทธิ์โดยผลของกฎหมาย (นิติเหตุ)",
+    cat: "accession",
+    html: `
+<h4 id="s6-h1">ที่งอกริมตลิ่ง (ม.1308)</h4>
+<p>ที่ดินงอกตามธรรมชาติ (ตะกอนพัดพาสะสม) ตกเป็นกรรมสิทธิ์ของเจ้าของที่ดินริมตลิ่งแปลงนั้นโดยอัตโนมัติ</p>
+
+<h4 id="s6-h2">ปลูกโรงเรือนในที่ดินผู้อื่น (ม.1310-1311)</h4>
+<ul>
+<li><b>สุจริต (ม.1310):</b> เจ้าของที่ดินเป็นเจ้าของโรงเรือน แต่ต้องใช้ค่าที่ดินที่เพิ่มขึ้นให้ผู้ปลูก</li>
+<li><b>ไม่สุจริต (ม.1311):</b> เจ้าของที่ดินมีทางเลือกสั่งให้รื้อถอนและทำที่ดินให้กลับเป็นตามเดิมได้ (ผู้สร้างออกค่าใช้จ่ายเอง)</li>
+</ul>
+
+<h4 id="s6-h3">สร้างโรงเรือนรุกล้ำ (ม.1312)</h4>
+<ul>
+<li><b>ว.1 — สุจริต:</b> ผู้สร้างยังเป็นเจ้าของโรงเรือนทั้งหลัง แต่ต้องจ่ายค่าใช้ที่ดินและจดทะเบียนภาระจำยอมส่วนที่รุกล้ำ</li>
+<li><b>ว.2 — ไม่สุจริต:</b> เจ้าของที่ดินสั่งให้รื้อเฉพาะส่วนที่รุกล้ำออกไปได้</li>
+</ul>
+
+<div class="study-exam-box">
+<h5>⚠️ อย่าสับสน: ม.1310/1311 (ปลูกทั้งหลัง) vs ม.1312 (รุกล้ำบางส่วน)</h5>
+<p>ม.1310-1311 ใช้เมื่อ<b>โรงเรือนทั้งหลัง</b>อยู่ในที่ดินผู้อื่น ส่วน ม.1312 ใช้เมื่อโรงเรือนส่วนใหญ่อยู่ในที่ดินตนเอง แต่มีเพียง<b>บางส่วน</b> (เช่น ชายคา มุมบ้าน) ที่ล้ำเข้าไปในที่ดินข้างเคียง — ผลทางกฎหมายต่างกันโดยสิ้นเชิง โจทย์มักซ่อนรายละเอียดนี้ไว้เพื่อทดสอบว่าแยกออกหรือไม่</p>
+</div>
+
+<h4 id="s6-h4">ปะปนกันของสังหาริมทรัพย์ และทำของใหม่ (ม.1316-1317)</h4>
+<p><b>ม.1316:</b> นำสังหาริมทรัพย์มาปะปนกันจนแยกไม่ออก → เป็นเจ้าของรวมตามสัดส่วน เว้นแต่มีทรัพย์ประธาน เจ้าของทรัพย์ประธานกินรวบแต่ต้องจ่ายเงินชดใช้</p>
+<p><b>ม.1317:</b> ทำของใหม่ด้วยสัมภาระผู้อื่น — ดูที่ "ค่าแรง" เทียบกับ "ค่าสัมภาระ" ถ้าค่าแรงสูงกว่ามาก ผู้ทำได้เป็นเจ้าของ (ต้องชดใช้ค่าสัมภาระ) มิฉะนั้นตกเป็นของเจ้าของสัมภาระ</p>
+
+<h4 id="s6-h5">ทรัพย์สินหาย (ม.1323-1327)</h4>
+<p>ผู้เก็บได้ต้องแจ้งเจ้าของหรือส่งมอบพนักงานเจ้าหน้าที่ภายใน 3 วัน หากเกิน 1 ปีไม่มีผู้มารับ กรรมสิทธิ์ตกเป็นของผู้เก็บได้</p>
+`,
+    toc: [
+      {id:"s6-h1", level:"item", text:"ที่งอกริมตลิ่ง (ม.1308)"},
+      {id:"s6-h2", level:"major", text:"ปลูกโรงเรือนในที่ดินผู้อื่น (ม.1310-1311)"},
+      {id:"s6-h3", level:"major", text:"สร้างโรงเรือนรุกล้ำ (ม.1312)"},
+      {id:"s6-h4", level:"item", text:"ปะปนกัน / ทำของใหม่ (ม.1316-1317)"},
+      {id:"s6-h5", level:"item", text:"ทรัพย์สินหาย (ม.1323-1327)"}
+    ]
+  },
+  {
+    id: "s7_ownership",
+    label: "7. แดนแห่งกรรมสิทธิ์และการใช้กรรมสิทธิ์",
+    cat: "ownership",
+    html: `
+<h4 id="s7-h1">แดนแห่งกรรมสิทธิ์ (ม.1335)</h4>
+<p>สิทธิของเจ้าของที่ดินครอบคลุมทั้งพื้นที่เหนือพื้นดิน (ห้วงอากาศ) และใต้พื้นดิน ไม่ใช่เพียงผิวดินเท่านั้น</p>
+
+<h4 id="s7-h2">สิทธิแห่งกรรมสิทธิ์ 5 ประการ (ม.1336)</h4>
+<p>เจ้าของทรัพย์สินมีสิทธิ 5 ประการ: (1) ใช้สอย (2) จำหน่าย (3) ได้ซึ่งดอกผล (4) ติดตามและเอาคืนซึ่งทรัพย์สินจากผู้ไม่มีสิทธิยึดถือ (5) ขัดขวางมิให้ผู้อื่นสอดเข้าเกี่ยวข้องโดยมิชอบ — เป็นแม่บทของคำว่า "กรรมสิทธิ์" ทั้งหมด</p>
+
+<h4 id="s7-h3">ความเดือดร้อนรำคาญ (ม.1337)</h4>
+<p>หากมีผู้ใช้สิทธิของตนจนก่อความเสียหายหรือเดือดร้อนแก่เจ้าของอสังหาริมทรัพย์ <b>เกินกว่าที่วิญญูชนจะคาดหมายได้ตามปกติ</b> (พิจารณาจากสภาพและตำแหน่งที่อยู่ของทรัพย์สินประกอบ) เจ้าของอสังหาริมทรัพย์มีสิทธิฟ้องให้ระงับเหตุและเรียกค่าทดแทนได้</p>
+
+<div class="study-exam-box">
+<h5>📝 กรอบโจทย์สอบ — ม.1337 กับใบอนุญาตตามกฎหมายอื่น</h5>
+<p>โจทย์มักให้ผู้ก่อเหตุ (โรงงาน สนามยิงปืน ฟาร์มเลี้ยงสัตว์) อ้างว่าตนมีใบอนุญาตประกอบกิจการถูกต้องตามกฎหมายปกครอง — <b>ข้อต่อสู้นี้ฟังไม่ขึ้น</b> เพราะสิทธิทางแพ่งตาม ม.1337 เป็นคนละเรื่องกับใบอนุญาตทางปกครอง เจ้าของอสังหาริมทรัพย์ที่ได้รับความเดือดร้อนเกินปกติยังคงมีสิทธิฟ้องระงับเหตุและเรียกค่าทดแทนได้เสมอ</p>
+</div>
+`,
+    toc: [
+      {id:"s7-h1", level:"item", text:"แดนแห่งกรรมสิทธิ์ (ม.1335)"},
+      {id:"s7-h2", level:"major", text:"สิทธิแห่งกรรมสิทธิ์ 5 ประการ (ม.1336)"},
+      {id:"s7-h3", level:"major", text:"ความเดือดร้อนรำคาญ (ม.1337)"}
+    ]
+  },
+  {
+    id: "s8_necessaryway",
+    label: "8. ทางจำเป็น",
+    cat: "necessaryway",
+    html: `
+<h4 id="s8-h1">ทางจำเป็นทั่วไป (ม.1349)</h4>
+<p>ที่ดินตาบอด (ไม่มีทางออกสู่ทางสาธารณะเลย หรือมีทางออกแต่ต้องข้ามสระน้ำ บึง หรือที่สูงชันมากจนใช้ประโยชน์ไม่ได้) มีสิทธิฟ้องบังคับขอเปิดทางผ่านที่ดินแปลงอื่นที่ล้อมอยู่ได้ โดยเลือกที่และวิธีทำทางที่พอควรแก่ความจำเป็นและให้เสียหายแก่ที่ดินที่ถูกเปิดทางน้อยที่สุด <b>แต่ต้องเสียค่าทดแทนเสมอ</b></p>
+
+<h4 id="s8-h2">ทางจำเป็นกรณีแบ่งแยก/แบ่งโอนที่ดิน (ม.1350)</h4>
+<p>เมื่อที่ดินตาบอดเกิดจากการ "แบ่งแยกหรือแบ่งโอน" ที่ดินแปลงใหญ่ (รวมถึงการแบ่งมรดก) กฎหมายบังคับให้ต้องขอเปิดทางเฉพาะจากที่ดินแปลงที่แบ่งแยกออกมาด้วยกันเท่านั้น และ <b>ไม่ต้องเสียค่าทดแทน</b></p>
+
+<div class="study-exam-box">
+<h5>⚠️ จุดที่ต้องแยกให้ขาด — ม.1349 vs ม.1350</h5>
+<p>คำถามแรกที่ต้องตอบเสมอคือ "ที่ดินตาบอดเพราะเหตุใด" — ถ้าตาบอดมาแต่เดิม (ไม่เกี่ยวกับการแบ่งแยก) ใช้ ม.1349 เลือกแปลงใดก็ได้แต่ต้องจ่ายค่าทดแทน / ถ้าตาบอดเพราะการแบ่งแยกหรือแบ่งโอนที่ดินแปลงใหญ่ครั้งล่าสุด ใช้ ม.1350 ต้องขอเปิดทางเฉพาะแปลงที่แบ่งมาด้วยกันเท่านั้นและไม่ต้องจ่ายค่าทดแทน มักออกสอบโดยผสมทั้งสองสถานการณ์ในโจทย์เดียวเพื่อทดสอบว่าเลือกใช้มาตราถูกหรือไม่</p>
+</div>
+`,
+    toc: [
+      {id:"s8-h1", level:"major", text:"ทางจำเป็นทั่วไป (ม.1349)"},
+      {id:"s8-h2", level:"major", text:"ทางจำเป็นกรณีแบ่งแยก/แบ่งโอน (ม.1350)"}
+    ]
+  },
+  {
+    id: "s9_possession",
+    label: "9. สิทธิครอบครอง และการครอบครองปรปักษ์ ★★★",
+    cat: "possession",
+    html: `
+<h4 id="s9-h1">การได้มาซึ่งสิทธิครอบครอง (ม.1367-1368)</h4>
+<p>ต้องมี 2 องค์ประกอบพร้อมกัน: <b>Corpus</b> (ยึดถือทางกายภาพ) และ <b>Animus</b> (เจตนายึดถือเพื่อตน) (ม.1367) บุคคลอาจได้สิทธิครอบครองโดยผู้อื่นยึดถือไว้ให้ก็ได้ (ม.1368) เช่น ผู้ให้เช่ามีสิทธิครอบครองโดยมีผู้เช่าเป็นผู้ยึดถือแทนในพื้นที่</p>
+
+<h4 id="s9-h2">ถูกรบกวน vs ถูกแย่งการครอบครอง (ม.1374-1375)</h4>
+<ul>
+<li><b>ม.1374 — ถูกรบกวน:</b> ผู้ครอบครองยังคงครอบครองอยู่ เพียงถูกรบกวน มีสิทธิฟ้องปลดเปลื้องภายใน 1 ปีนับแต่ถูกรบกวน</li>
+<li><b>ม.1375 — ถูกแย่ง:</b> ทรัพย์หลุดจากมือไปทั้งหมด ต้องฟ้องเอาคืนภายใน 1 ปีนับแต่เวลาที่ถูกแย่ง (ใช้มากกับที่ดิน น.ส.3) — รู้ตัวช้าเกิน 1 ปี สิทธิขาดทันที</li>
+</ul>
+
+<h4 id="s9-h3">การเปลี่ยนลักษณะแห่งการยึดถือ (ม.1381) ★★★</h4>
+<p>ผู้ยึดถือแทน (เช่น ผู้เช่า) จะเปลี่ยนตัวมาเป็นผู้ครอบครองเพื่อตนเอง (เพื่อเริ่มนับเวลาครอบครองปรปักษ์) ต้อง "<b>บอกกล่าว</b>" ไปยังผู้ครอบครองเดิมอย่างชัดแจ้งเท่านั้น การกระทำฝ่ายเดียวเงียบ ๆ เช่น หยุดจ่ายค่าเช่า เสียภาษีในนามตนเอง แม้แสดงเจตนาเป็นเจ้าของอยู่ในใจ ก็ไม่ถือเป็นการบอกกล่าวตามมาตรานี้</p>
+
+<h4 id="s9-h4">องค์ประกอบครอบครองปรปักษ์ (ม.1382)</h4>
+<p>ครอบครองทรัพย์สินของผู้อื่น (1) โดยสงบ (2) โดยเปิดเผย (3) ด้วยเจตนาเป็นเจ้าของ (4) ติดต่อกัน <b>10 ปี</b> สำหรับอสังหาริมทรัพย์ หรือ <b>5 ปี</b> สำหรับสังหาริมทรัพย์ ย่อมได้กรรมสิทธิ์ — ต้องท่องให้ขึ้นใจ เพราะเป็นแกนกลางของข้อสอบวิชาทรัพย์แทบทุกปี</p>
+
+<h4 id="s9-h5">การนับเวลาครอบครอง (ม.1384-1385)</h4>
+<ul>
+<li><b>ม.1384 — การสมานเวลา:</b> ขาดการครอบครองไปแต่ได้คืนมาหรือฟ้องคดีภายใน 1 ปี ให้ถือว่าไม่เคยขาดตอนเลย</li>
+<li><b>ม.1385 — การโอนการครอบครอง:</b> ผู้รับโอนนับเวลาของผู้โอน (คนเก่า) รวมกับเวลาของตนเองได้</li>
+</ul>
+
+<div class="study-exam-box">
+<h5>⚠️ จุดที่อาจารย์เน้นย้ำที่สุด — มรดกไม่ใช่ "การโอน" ตาม ม.1385</h5>
+<p>ม.1385 ใช้ได้เฉพาะการโอนการครอบครอง<b>โดยนิติกรรม</b> เช่น ซื้อขาย ให้ แลกเปลี่ยน แต่กรณีเจ้ามรดกตายแล้วทายาทรับมรดกที่ดินซึ่งเจ้ามรดกครอบครองปรปักษ์ค้างอยู่ <b>ทายาทจะใช้ ม.1385 นับเวลาต่อไม่ได้</b> ต้องเริ่มนับหนึ่งใหม่ตั้งแต่วันที่ตนเริ่มครอบครองเอง — นี่คือกับดักข้อสอบที่พบบ่อยที่สุดในหมวดนี้</p>
+</div>
+`,
+    toc: [
+      {id:"s9-h1", level:"major", text:"การได้มาซึ่งสิทธิครอบครอง (ม.1367-1368)"},
+      {id:"s9-h2", level:"major", text:"ถูกรบกวน vs ถูกแย่ง (ม.1374-1375)"},
+      {id:"s9-h3", level:"major", text:"การเปลี่ยนลักษณะแห่งการยึดถือ (ม.1381) ★★★"},
+      {id:"s9-h4", level:"major", text:"องค์ประกอบครอบครองปรปักษ์ (ม.1382)"},
+      {id:"s9-h5", level:"major", text:"การนับเวลาครอบครอง (ม.1384-1385) ★★★"}
+    ]
+  },
+  {
+    id: "s10_coownership",
+    label: "10. กรรมสิทธิ์รวม",
+    cat: "coownership",
+    html: `
+<h4 id="s10-h1">หลักทั่วไปและข้อสันนิษฐาน (ม.1356-1357)</h4>
+<p>เมื่อทรัพย์สินเป็นของบุคคลหลายคนรวมกัน ให้ใช้กฎหมายหมวดกรรมสิทธิ์รวม (ม.1356) และให้สันนิษฐานไว้ก่อนว่าเจ้าของรวมมีสัดส่วนความเป็นเจ้าของ <b>เท่ากัน</b> เว้นแต่จะพิสูจน์เป็นอย่างอื่น (ม.1357)</p>
+
+<h4 id="s10-h2">การจัดการทรัพย์สินรวม (ม.1358)</h4>
+<p>แยกออกเป็น 3 ระดับ:</p>
+<ul>
+<li><b>การจัดการธรรมดา</b> — เจ้าของรวมคนใดคนหนึ่งทำได้เลย</li>
+<li><b>การจัดการอันเป็นสาระสำคัญ</b> (เช่น รื้อถอนแล้วสร้างใหม่) — ต้องใช้มติเสียงข้างมากของจำนวนคน และสัดส่วนความเป็นเจ้าของรวมกันต้องไม่ต่ำกว่าครึ่งหนึ่ง</li>
+<li><b>การจัดการเพื่อรักษาทรัพย์</b> — เจ้าของรวมคนใดคนหนึ่งทำได้เสมอเพื่อประโยชน์ของทรัพย์</li>
+</ul>
+
+<div class="study-exam-box">
+<h5>📝 กรอบโจทย์สอบ — แยกระดับการจัดการ</h5>
+<p>เทคนิคทำโจทย์: อ่านสถานการณ์แล้วถามตัวเองว่า "ถ้าไม่ทำจะเสียหายทันทีหรือไม่" (ถ้าใช่ = การรักษาทรัพย์ คนเดียวทำได้) หรือ "เป็นเรื่องเปลี่ยนแปลงสภาพทรัพย์อย่างมีนัยสำคัญหรือไม่" (ถ้าใช่ = สาระสำคัญ ต้องเสียงข้างมาก+ครึ่งหนึ่งของสัดส่วน) มิฉะนั้นถือเป็นการจัดการธรรมดาที่ทำคนเดียวได้</p>
+</div>
+`,
+    toc: [
+      {id:"s10-h1", level:"major", text:"หลักทั่วไปและข้อสันนิษฐาน (ม.1356-1357)"},
+      {id:"s10-h2", level:"major", text:"การจัดการทรัพย์สินรวม (ม.1358)"}
+    ]
+  }
+];
+
+</script>
+<script>
+/* ================================================================
+   ENGINE — โครงเกม
+   ================================================================ */
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function pickDistractors(pool, excludeIdx, n){
+  const idxs = pool.map((_,i)=>i).filter(i=>i!==excludeIdx);
+  return shuffle(idxs).slice(0,n);
+}
+function chunk(arr, size){
+  const out = [];
+  for(let i=0;i<arr.length;i+=size) out.push(arr.slice(i, i+size));
+  return out;
+}
+function esc(s){
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+const SoundFX = (function(){
+  let ctx = null;
+  let enabled = true;
+  try{ enabled = localStorage.getItem('lawprop_sound') !== 'off'; }catch(e){}
+  function ensureCtx(){
+    if(!ctx){
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if(AC) ctx = new AC();
+    }
+    if(ctx && ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+  function tone(freq, dur, type, gainVal, delay){
+    if(!enabled) return;
+    const c = ensureCtx();
+    if(!c) return;
+    const t0 = c.currentTime + (delay||0);
+    const osc = c.createOscillator();
+    const gain = c.createGain();
+    osc.type = type || 'sine';
+    osc.frequency.setValueAtTime(freq, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(gainVal||0.1, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+dur);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+dur+0.02);
+  }
+  return {
+    click(){ tone(560,0.05,'square',0.05); },
+    flip(){ tone(700,0.04,'triangle',0.06); tone(420,0.05,'triangle',0.05,0.05); },
+    tab(){ tone(820,0.035,'sine',0.05); },
+    correct(){ tone(523,0.09,'triangle',0.08); tone(659,0.09,'triangle',0.08,0.09); tone(784,0.14,'triangle',0.09,0.18); },
+    wrong(){ tone(220,0.16,'sawtooth',0.07); tone(160,0.2,'sawtooth',0.06,0.06); },
+    score(){ tone(1046,0.1,'sine',0.07); tone(1568,0.12,'sine',0.06,0.08); },
+    isOn(){ return enabled; },
+    toggle(){
+      enabled = !enabled;
+      try{ localStorage.setItem('lawprop_sound', enabled ? 'on' : 'off'); }catch(e){}
+      return enabled;
+    }
+  };
+})();
+
+/* =========================================================
+   GAMIFICATION — คะแนนรวม (มุมขวาบน)
+   ========================================================= */
+const SCORE_KEY = 'lawprop_score_v1';
+function loadScore(){ try{ return parseInt(localStorage.getItem(SCORE_KEY)||'0',10)||0; }catch(e){ return 0; } }
+let totalScore = loadScore();
+function saveScoreValue(){ try{ localStorage.setItem(SCORE_KEY, String(totalScore)); }catch(e){} }
+function renderScoreDisplay(){
+  const el = document.getElementById('score-value');
+  if(el) el.textContent = totalScore;
+}
+function addScore(n){
+  totalScore += n;
+  saveScoreValue();
+  renderScoreDisplay();
+  const badge = document.getElementById('global-score');
+  if(badge){
+    badge.classList.remove('score-pop');
+    void badge.offsetWidth;
+    badge.classList.add('score-pop');
+  }
+}
+function loadSeenSet(key){
+  try{ return new Set(JSON.parse(localStorage.getItem(key) || '[]')); }
+  catch(e){ return new Set(); }
+}
+function saveSeenSet(key, set){
+  try{ localStorage.setItem(key, JSON.stringify(Array.from(set))); }
+  catch(e){}
+}
+const cardSeenSet = loadSeenSet('lawprop_cardsSeen');
+const seqSeenSet = loadSeenSet('lawprop_seqSeen');
+
+function makeQuestionTimer(elId, fastThreshold){
+  let startTs = 0, intervalId = null;
+  function update(){
+    const el = document.getElementById(elId);
+    if(!el) return;
+    const sec = (Date.now() - startTs) / 1000;
+    el.textContent = '⏱ ' + sec.toFixed(1) + 's';
+    el.classList.toggle('timer-fast', sec <= fastThreshold);
+  }
+  return {
+    start(){
+      startTs = Date.now();
+      clearInterval(intervalId);
+      intervalId = setInterval(update, 100);
+      update();
+    },
+    stop(){
+      clearInterval(intervalId);
+      return (Date.now() - startTs) / 1000;
+    }
+  };
+}
+const QUIZ_FAST_THRESHOLD = 8;
+const quizTimer = makeQuestionTimer('quiz-timer', QUIZ_FAST_THRESHOLD);
+const iracTimer = makeQuestionTimer('irac-timer', QUIZ_FAST_THRESHOLD);
+
+/* ---- สร้างโจทย์ระดับพื้นฐานอัตโนมัติจาก CARDS ---- */
+function buildBasicPool(){
+  const qs = [];
+  CARDS.forEach((c, idx)=>{
+    const dIdx = pickDistractors(CARDS, idx, 3);
+    const opts = [c.result, ...dIdx.map(i=>CARDS[i].result)];
+    const order = shuffle(opts.map((_,i)=>i));
+    qs.push({cat:c.cat, q: c.section + ' (' + c.title + ') มีผลทางกฎหมายอย่างไร',
+      opts: order.map(i=>opts[i]), ans: order.indexOf(0),
+      explain: c.section + ' [' + c.source + ']: ' + c.result + (c.note? ' ' + c.note : '')});
+  });
+  CARDS.forEach((c, idx)=>{
+    if(idx % 2 === 1) return;
+    const dIdx = pickDistractors(CARDS, idx, 3);
+    const opts = [c.section, ...dIdx.map(i=>CARDS[i].section)];
+    const order = shuffle(opts.map((_,i)=>i));
+    qs.push({cat:c.cat, q: '"' + c.result + '" (เรื่อง ' + c.title + ') ตรงกับมาตราใด',
+      opts: order.map(i=>opts[i]), ans: order.indexOf(0),
+      explain: c.title + ' บัญญัติอยู่ใน ' + c.section + ' [' + c.source + ']'});
+  });
+  return shuffle(qs);
+}
+
+const BASIC_POOL = buildBasicPool();
+const ADV_POOL   = shuffle(QUIZ_ADV);
+const BASIC_SETS = chunk(BASIC_POOL, 10);
+const ADV_SETS   = chunk(ADV_POOL, 10);
+
+/* ---------- header text ---------- */
+document.getElementById('hd-crest').textContent = CONFIG.crest;
+document.getElementById('hd-title').textContent = CONFIG.title;
+document.getElementById('hd-sub').textContent = CONFIG.subtitle;
+
+/* ---------- badge / stage painters ---------- */
+function paintBadge(el, catKey){
+  const c = CATEGORIES[catKey];
+  el.style.background = c.soft;
+  el.style.color = c.strong;
+  el.textContent = c.label;
+}
+function paintCardFrame(cardEl, ribbonEl, secEl, catKey, isBack){
+  const c = CATEGORIES[catKey];
+  ribbonEl.style.background = c.strong;
+  secEl.style.color = c.strong;
+  cardEl.classList.toggle('is-back', !!isBack);
+  if(isBack){
+    cardEl.style.background = c.soft;
+    cardEl.style.borderColor = c.strong;
+  } else {
+    cardEl.style.background = '';
+    cardEl.style.borderColor = '';
+  }
+}
+function paintStage(elId, catKey){
+  const el = document.getElementById(elId);
+  const c = CATEGORIES[catKey];
+  el.style.background = 'linear-gradient(135deg,' + c.strong + ' 0%, ' + c.strong + 'CC 100%)';
+  el.innerHTML =
+    '<span class="stage-icon">' + c.icon + '</span>' +
+    '<span><span class="stage-label">' + esc(c.label) + '</span>' +
+    '<span class="stage-src">' + esc(c.source) + '</span></span>';
+}
+
+/* =========================================================
+   โหมด 1: การ์ดจำมาตรา
+   ========================================================= */
+let deck = shuffle(CARDS);
+let cardIdx = 0;
+let flipped = false;
+
+const catSelect = document.getElementById('cat-select');
+(function initCatSelect(){
+  const optAll = document.createElement('option');
+  optAll.value = 'all'; optAll.textContent = 'ทุกหมวด';
+  catSelect.appendChild(optAll);
+  Object.keys(CATEGORIES).forEach(k=>{
+    const o = document.createElement('option');
+    o.value = k; o.textContent = CATEGORIES[k].label;
+    catSelect.appendChild(o);
+  });
+})();
+catSelect.addEventListener('change', ()=>{
+  const val = catSelect.value;
+  deck = val === 'all' ? shuffle(CARDS) : shuffle(CARDS.filter(c=>c.cat===val));
+  cardIdx = 0; flipped = false;
+  renderMatraChips(val);
+  renderCard();
+});
+
+function renderMatraChips(catVal){
+  const wrap = document.getElementById('matra-chips');
+  wrap.innerHTML = '';
+  if(catVal === 'all'){ wrap.style.display = 'none'; return; }
+  const items = CARDS.filter(c=>c.cat===catVal);
+  const cCat = CATEGORIES[catVal];
+  wrap.style.display = 'flex';
+  const label = document.createElement('span');
+  label.className = 'matra-chips-label';
+  label.textContent = 'มาตราในหมวดนี้:';
+  wrap.appendChild(label);
+  items.forEach(item=>{
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'matra-chip';
+    chip.textContent = item.section;
+    chip.style.setProperty('--chip-color', cCat.strong);
+    chip.title = item.title;
+    chip.addEventListener('click', ()=>{
+      SoundFX.click();
+      const idx = deck.findIndex(d=>d.section===item.section && d.cat===item.cat);
+      if(idx >= 0){ cardIdx = idx; flipped = false; renderCard(); }
+    });
+    wrap.appendChild(chip);
+  });
+}
+function updateMatraChipActive(section){
+  document.querySelectorAll('#matra-chips .matra-chip').forEach(el=>{
+    el.classList.toggle('active', el.textContent === section);
+  });
+}
+
+function renderCard(){
+  if(deck.length === 0) return;
+  const c = deck[cardIdx];
+  document.getElementById('card-section').textContent = c.section;
+  document.getElementById('card-src-front').textContent = c.source;
+  document.getElementById('card-stars').textContent = '★'.repeat(c.stars) + '☆'.repeat(5-c.stars);
+  document.getElementById('card-title').textContent = c.title;
+  document.getElementById('card-src-back').textContent = c.source;
+  document.getElementById('card-result').textContent = c.result;
+  document.getElementById('card-note').textContent = c.note || '';
+  document.getElementById('card-note').style.display = c.note ? 'block' : 'none';
+  document.getElementById('card-progress').textContent = (cardIdx+1) + ' / ' + deck.length;
+  document.getElementById('face-front').style.display = flipped ? 'none' : 'flex';
+  document.getElementById('face-back').style.display = flipped ? 'block' : 'none';
+  paintBadge(document.getElementById('cat-badge'), c.cat);
+  paintCardFrame(document.getElementById('flip-card'), document.getElementById('card-ribbon'), document.getElementById('card-section'), c.cat, flipped);
+  paintStage('card-stage', c.cat);
+  updateMatraChipActive(c.section);
+}
+const flipCardEl = document.getElementById('flip-card');
+function doFlip(){
+  SoundFX.flip();
+  flipCardEl.classList.add('flipping');
+  setTimeout(()=>{
+    flipped = !flipped;
+    renderCard();
+    flipCardEl.classList.remove('flipping');
+    if(flipped){
+      const c = deck[cardIdx];
+      const key = c.cat + '|' + c.section;
+      if(!cardSeenSet.has(key)){
+        cardSeenSet.add(key);
+        saveSeenSet('lawprop_cardsSeen', cardSeenSet);
+        SoundFX.score();
+        addScore(10);
+      }
+    }
+  }, 90);
+}
+flipCardEl.addEventListener('click', doFlip);
+flipCardEl.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); doFlip(); } });
+document.getElementById('btn-next').addEventListener('click', ()=>{ SoundFX.click(); cardIdx=(cardIdx+1)%deck.length; flipped=false; renderCard(); });
+document.getElementById('btn-prev').addEventListener('click', ()=>{ SoundFX.click(); cardIdx=(cardIdx-1+deck.length)%deck.length; flipped=false; renderCard(); });
+document.getElementById('btn-shuffle').addEventListener('click', ()=>{ SoundFX.click(); deck=shuffle(deck); cardIdx=0; flipped=false; renderCard(); });
+
+/* =========================================================
+   โหมด 2: เรียงมาตราจำเป็นกลุ่ม
+   ========================================================= */
+const SEQ_ORDER = Object.keys(CATEGORIES);
+const seqSelect = document.getElementById('seq-select');
+SEQ_ORDER.forEach(val=>{
+  const o = document.createElement('option');
+  o.value = val; o.textContent = CATEGORIES[val].label;
+  seqSelect.appendChild(o);
+});
+function renderSeq(){
+  const val = seqSelect.value;
+  const items = CARDS.filter(c=>c.cat===val);
+  const c = CATEGORIES[val];
+  const listEl = document.getElementById('seq-list');
+  listEl.innerHTML = '';
+
+  const progress = document.createElement('div');
+  progress.className = 'seq-progress';
+  progress.id = 'seq-progress';
+  listEl.appendChild(progress);
+
+  const grid = document.createElement('div');
+  grid.className = 'seq-grid';
+
+  items.forEach((item,i)=>{
+    const card = document.createElement('div');
+    card.className = 'seq-card';
+    card.tabIndex = 0;
+    card.setAttribute('role','button');
+    card.setAttribute('aria-label','แตะเพื่อดูคำตอบ');
+    let noteHtml = item.note ? '<div class="seq-note">'+esc(item.note)+'</div>' : '';
+    card.innerHTML =
+      '<div class="seq-front">'+
+        '<div class="seq-card-top">'+
+          '<span class="seq-num">'+(i+1)+'</span>'+
+          '<span class="seq-stars">'+('★'.repeat(item.stars))+'</span>'+
+        '</div>'+
+        '<div class="seq-sec">'+esc(item.section)+'</div>'+
+        '<div class="seq-front-title">'+esc(item.title)+'</div>'+
+        '<div class="seq-front-hint">แตะเพื่อดูคำตอบ</div>'+
+      '</div>'+
+      '<div class="seq-back">'+
+        '<div class="seq-card-top">'+
+          '<span class="seq-sec">'+esc(item.section)+'</span>'+
+          '<span class="seq-src">['+esc(item.source)+']</span>'+
+        '</div>'+
+        '<div class="seq-res">'+esc(item.result)+'</div>'+
+        noteHtml+
+      '</div>';
+    function toggle(){
+      SoundFX.flip();
+      card.classList.add('flipping');
+      setTimeout(()=>{
+        const nowBack = !card.classList.contains('is-back');
+        card.classList.toggle('is-back', nowBack);
+        card.classList.remove('flipping');
+        if(nowBack){
+          card.style.background = c.soft;
+          card.style.borderColor = c.strong;
+          const key = item.cat + '|' + item.section;
+          if(!cardSeenSet.has(key)){
+            cardSeenSet.add(key);
+            saveSeenSet('lawprop_cardsSeen', cardSeenSet);
+            SoundFX.score();
+            addScore(10);
+          }
+        } else {
+          card.style.background = '';
+          card.style.borderColor = '';
+        }
+        updateSeqProgress(val);
+      }, 90);
+    }
+    card.addEventListener('click', toggle);
+    card.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
+    grid.appendChild(card);
+  });
+  listEl.appendChild(grid);
+  updateSeqProgress(val);
+}
+function updateSeqProgress(catVal){
+  const el = document.getElementById('seq-progress');
+  if(!el) return;
+  const items = CARDS.filter(c=>c.cat===catVal);
+  const seen = items.filter(c=>cardSeenSet.has(c.cat+'|'+c.section)).length;
+  el.textContent = 'ดูแล้ว ' + seen + ' / ' + items.length + ' มาตรา — แตะการ์ดเพื่อพลิกดูคำตอบ';
+}
+seqSelect.addEventListener('change', renderSeq);
+
+/* =========================================================
+   โหมด 3: วิเคราะห์โจทย์
+   ========================================================= */
+let quizLevel = 'basic';
+let currentSetIdx = 0;
+let quizPool = BASIC_SETS[0];
+let quizOrder = shuffle(quizPool.map((_,i)=>i));
+let quizIdx = 0;
+let score = 0;
+let answered = false;
+let wrongIdxs = [];
+let reviewMode = false;
+
+function currentSets(){ return quizLevel === 'basic' ? BASIC_SETS : ADV_SETS; }
+
+function loadBest(){
+  try{ return JSON.parse(localStorage.getItem(CONFIG.storageKey) || '{}'); }
+  catch(e){ return {}; }
+}
+function saveBest(level, setIdx, score, total){
+  const data = loadBest();
+  const key = level + '_' + setIdx;
+  if(!data[key] || score > data[key].score){
+    data[key] = {score, total};
+    try{ localStorage.setItem(CONFIG.storageKey, JSON.stringify(data)); }catch(e){}
+  }
+}
+function getBest(level, setIdx){
+  const data = loadBest();
+  return data[level + '_' + setIdx] || null;
+}
+
+function renderSetPicker(){
+  const sets = currentSets();
+  const picker = document.getElementById('set-picker');
+  picker.innerHTML = '';
+  sets.forEach((s,i)=>{
+    const btn = document.createElement('button');
+    const best = getBest(quizLevel, i);
+    btn.innerHTML = 'ชุด ' + (i+1) + (best ? ' <span class="best">'+best.score+'/'+best.total+'</span>' : '');
+    if(i === currentSetIdx) btn.classList.add('on');
+    btn.addEventListener('click', ()=>{ SoundFX.click(); selectSet(i); });
+    picker.appendChild(btn);
+  });
+}
+
+function selectSet(i){
+  currentSetIdx = i;
+  quizPool = currentSets()[i];
+  quizOrder = shuffle(quizPool.map((_,k)=>k));
+  quizIdx = 0; score = 0; wrongIdxs = []; reviewMode = false;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderSetPicker();
+  renderQuiz();
+}
+
+function setLevel(lvl){
+  quizLevel = lvl;
+  currentSetIdx = 0;
+  quizPool = currentSets()[0];
+  quizOrder = shuffle(quizPool.map((_,i)=>i));
+  quizIdx = 0; score = 0; wrongIdxs = []; reviewMode = false;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  document.getElementById('lvl-basic').classList.toggle('on', lvl==='basic');
+  document.getElementById('lvl-adv').classList.toggle('on', lvl==='adv');
+  renderSetPicker();
+  renderQuiz();
+}
+
+function syncStickyBar(){
+  const quizOn = viewQuiz.classList.contains('on') && document.getElementById('quiz-play').style.display !== 'none';
+  const iracOn = viewIrac.classList.contains('on') && document.getElementById('irac-play').style.display === 'block';
+  const show = quizOn || iracOn;
+  document.getElementById('sticky-bar').style.display = show ? 'block' : 'none';
+  document.body.classList.toggle('has-sticky-bar', show);
+}
+
+function renderQuiz(){
+  const item = quizPool[quizOrder[quizIdx]];
+  document.getElementById('quiz-scenario').textContent = item.q;
+  const label = reviewMode ? 'ทบทวนข้อผิด' : ('ชุด ' + (currentSetIdx+1));
+  document.getElementById('quiz-progress').textContent = label + ' • ข้อ ' + (quizIdx+1) + ' / ' + quizPool.length;
+  document.getElementById('quiz-score').textContent = 'คะแนน ' + score + ' / ' + quizPool.length;
+  document.getElementById('pbar').style.width = (((quizIdx)/quizPool.length)*100) + '%';
+  paintBadge(document.getElementById('quiz-tag'), item.cat);
+  paintStage('quiz-stage', item.cat);
+  const optsDiv = document.getElementById('quiz-options');
+  optsDiv.innerHTML = '';
+  const letters = ['ก','ข','ค','ง'];
+  item.opts.forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.innerHTML = '<span class="abc">'+letters[i]+'</span><span>'+esc(opt)+'</span>';
+    btn.addEventListener('click', ()=> selectAnswer(i));
+    optsDiv.appendChild(btn);
+  });
+  document.getElementById('quiz-explain').style.display = 'none';
+  document.getElementById('quiz-explain').className = 'explain';
+  document.getElementById('quiz-next').style.display = 'none';
+  document.getElementById('quiz-finish').style.display = 'none';
+  answered = false;
+  syncStickyBar();
+  quizTimer.start();
+}
+
+function selectAnswer(i){
+  if(answered) return;
+  answered = true;
+  const elapsed = quizTimer.stop();
+  const item = quizPool[quizOrder[quizIdx]];
+  const optsDiv = document.getElementById('quiz-options');
+  const btns = optsDiv.querySelectorAll('button');
+  btns.forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx === item.ans) b.classList.add('correct');
+    else if(idx === i) b.classList.add('wrong');
+  });
+  const isCorrect = (i === item.ans);
+  let ptsMsg = '';
+  if(isCorrect){
+    score++; SoundFX.correct();
+    const pts = elapsed <= QUIZ_FAST_THRESHOLD ? 20 : 1;
+    addScore(pts);
+    ptsMsg = ' <span class="pts-earned">+' + pts + ' คะแนน' + (elapsed <= QUIZ_FAST_THRESHOLD ? ' ตอบเร็ว!' : '') + '</span>';
+  } else {
+    SoundFX.wrong(); if(!reviewMode) wrongIdxs.push(quizOrder[quizIdx]);
+  }
+  document.getElementById('quiz-score').textContent = 'คะแนน ' + score + ' / ' + quizPool.length;
+  document.getElementById('pbar').style.width = (((quizIdx+1)/quizPool.length)*100) + '%';
+  const explainDiv = document.getElementById('quiz-explain');
+  explainDiv.className = 'explain ' + (isCorrect ? 'ok' : 'bad');
+  explainDiv.innerHTML = '<b>' + (isCorrect ? '✓ ถูกต้อง' : '✗ ยังไม่ถูก — เฉลยคือ ' + letters_ans(item)) + ptsMsg + '</b>' + item.explain;
+  explainDiv.style.display = 'block';
+  if(quizIdx < quizPool.length - 1){
+    document.getElementById('quiz-next').style.display = 'block';
+  } else {
+    document.getElementById('quiz-finish').style.display = 'block';
+  }
+}
+function letters_ans(item){
+  return ['ก','ข','ค','ง'][item.ans];
+}
+
+document.getElementById('quiz-next').addEventListener('click', ()=>{ quizIdx++; renderQuiz(); });
+
+document.getElementById('quiz-finish').addEventListener('click', showSummary);
+
+function showSummary(){
+  document.getElementById('quiz-play').style.display = 'none';
+  syncStickyBar();
+  const summary = document.getElementById('quiz-summary');
+  summary.style.display = 'block';
+  const total = quizPool.length;
+  document.getElementById('sum-set-label').textContent = reviewMode ? 'ทบทวนข้อที่ผิด' : ('ระดับ' + (quizLevel==='basic'?'พื้นฐาน':'ข้อสอบจริง') + ' • ชุด ' + (currentSetIdx+1));
+  document.getElementById('sum-score').textContent = score;
+  document.getElementById('sum-of').textContent = 'จาก ' + total + ' ข้อ';
+  const pct = total ? score/total : 0;
+  const starCount = Math.max(1, Math.round(pct*5));
+  document.getElementById('sum-stars').textContent = '★'.repeat(starCount) + '☆'.repeat(5-starCount);
+  let grade = 'ลุยต่อได้เลย';
+  if(pct >= 0.9) grade = 'เยี่ยมมาก แม่นจริง';
+  else if(pct >= 0.7) grade = 'ดีมาก ใกล้เต็มแล้ว';
+  else if(pct >= 0.5) grade = 'พอใช้ ทบทวนอีกนิด';
+  else grade = 'ลองทบทวนการ์ดแล้วมาสู้ใหม่';
+  document.getElementById('sum-grade').textContent = grade;
+
+  if(!reviewMode){
+    saveBest(quizLevel, currentSetIdx, score, total);
+    const best = getBest(quizLevel, currentSetIdx);
+    document.getElementById('sum-best').textContent = best ? ('คะแนนดีที่สุดของชุดนี้: ' + best.score + '/' + best.total) : '';
+  } else {
+    document.getElementById('sum-best').textContent = '';
+  }
+
+  const sets = currentSets();
+  document.getElementById('sum-nextset').style.display = (!reviewMode && currentSetIdx < sets.length - 1) ? 'inline-block' : 'none';
+  document.getElementById('sum-review').style.display = (!reviewMode && wrongIdxs.length > 0) ? 'inline-block' : 'none';
+}
+
+document.getElementById('sum-retry').addEventListener('click', ()=>{
+  if(reviewMode){
+    quizOrder = shuffle(quizPool.map((_,i)=>i));
+  } else {
+    quizOrder = shuffle(quizPool.map((_,i)=>i));
+    wrongIdxs = [];
+  }
+  quizIdx = 0; score = 0;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderQuiz();
+});
+document.getElementById('sum-nextset').addEventListener('click', ()=>{ selectSet(currentSetIdx + 1); });
+document.getElementById('sum-review').addEventListener('click', ()=>{
+  reviewMode = true;
+  const basePool = quizPool;
+  quizPool = wrongIdxs.map(i => basePool[i]);
+  quizOrder = shuffle(quizPool.map((_,i)=>i));
+  quizIdx = 0; score = 0;
+  document.getElementById('quiz-play').style.display = 'block';
+  document.getElementById('quiz-summary').style.display = 'none';
+  renderQuiz();
+});
+
+document.getElementById('lvl-basic').addEventListener('click', ()=>{ SoundFX.click(); setLevel('basic'); });
+document.getElementById('lvl-adv').addEventListener('click', ()=>{ SoundFX.click(); setLevel('adv'); });
+
+/* =========================================================
+   แท็บหลัก + รีเซ็ต
+   ========================================================= */
+const tabCard = document.getElementById('tab-card');
+const tabSeq  = document.getElementById('tab-seq');
+const tabQuiz = document.getElementById('tab-quiz');
+const tabIrac = document.getElementById('tab-irac');
+const tabStudy = document.getElementById('tab-study');
+const viewCard = document.getElementById('view-card');
+const viewSeq  = document.getElementById('view-seq');
+const viewQuiz = document.getElementById('view-quiz');
+const viewIrac = document.getElementById('view-irac');
+const viewStudy = document.getElementById('view-study');
+
+function setTab(which){
+  viewCard.classList.toggle('on', which==='card');
+  viewSeq.classList.toggle('on', which==='seq');
+  viewQuiz.classList.toggle('on', which==='quiz');
+  viewIrac.classList.toggle('on', which==='irac');
+  viewStudy.classList.toggle('on', which==='study');
+  tabCard.classList.toggle('on', which==='card');
+  tabSeq.classList.toggle('on', which==='seq');
+  tabQuiz.classList.toggle('on', which==='quiz');
+  tabIrac.classList.toggle('on', which==='irac');
+  tabStudy.classList.toggle('on', which==='study');
+  const headerEl = document.getElementById('page-header');
+  if(which === 'quiz'){
+    headerEl.classList.add('compact');
+  } else if(which !== 'irac' || document.getElementById('irac-play').style.display === 'none'){
+    headerEl.classList.remove('compact');
+  }
+  if(which === 'study' && !studyInitDone){ renderStudy(0); studyInitDone = true; }
+  if(which !== 'study' && typeof TTS !== 'undefined') TTS.stop();
+  syncStickyBar();
+}
+tabCard.addEventListener('click', ()=>{ SoundFX.tab(); setTab('card'); });
+tabSeq.addEventListener('click', ()=>{ SoundFX.tab(); setTab('seq'); });
+tabQuiz.addEventListener('click', ()=>{ SoundFX.tab(); setTab('quiz'); });
+tabIrac.addEventListener('click', ()=>{ SoundFX.tab(); setTab('irac'); });
+tabStudy.addEventListener('click', ()=>{ SoundFX.tab(); setTab('study'); });
+
+const btnSound = document.getElementById('btn-sound');
+btnSound.textContent = SoundFX.isOn() ? '🔊' : '🔇';
+btnSound.addEventListener('click', ()=>{
+  const on = SoundFX.toggle();
+  btnSound.textContent = on ? '🔊' : '🔇';
+  if(on) SoundFX.click();
+});
+
+document.getElementById('btn-reset').addEventListener('click', ()=>{
+  if(!confirm('รีเซ็ตหน้าจอทั้งหมด (คะแนนดีที่สุดที่บันทึกไว้จะยังอยู่) ต้องการดำเนินการต่อหรือไม่?')) return;
+  catSelect.value = 'all';
+  deck = shuffle(CARDS); cardIdx = 0; flipped = false;
+  renderMatraChips('all');
+  renderCard();
+  seqSelect.value = SEQ_ORDER[0];
+  renderSeq();
+  setLevel('basic');
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('irac-play').style.display = 'none';
+  document.getElementById('irac-summary').style.display = 'none';
+  renderCasePicker();
+  setTab('card');
+});
+
+/* =========================================================
+   โหมด 4: ฝึก IRAC
+   ========================================================= */
+let iracCaseIdx = 0;
+let iracIssueIdx = 0;
+let iracStage = 'issue'; // issue -> rule -> app -> conc
+let iracScore = 0;
+let iracTotal = 0;
+
+function renderCasePicker(){
+  const el = document.getElementById('irac-caselist');
+  el.innerHTML = '';
+  IRAC_CASES.forEach((c, i)=>{
+    const card = document.createElement('button');
+    card.className = 'irac-case-card';
+    card.innerHTML =
+      '<div class="icref">'+esc(c.examRef)+' · '+esc(CATEGORIES[c.cat].label)+'</div>'+
+      '<div class="ictitle">'+esc(c.title)+'</div>'+
+      '<div class="icprog">'+c.issues.length+' ประเด็น · '+(c.issues.length*4)+' ขั้นตอน</div>';
+    card.addEventListener('click', ()=>{ SoundFX.click(); startIracCase(i); });
+    el.appendChild(card);
+  });
+}
+
+function startIracCase(idx){
+  iracCaseIdx = idx;
+  iracIssueIdx = 0;
+  iracStage = 'issue';
+  iracScore = 0;
+  iracTotal = IRAC_CASES[idx].issues.length * 4;
+  document.getElementById('irac-picker').style.display = 'none';
+  document.getElementById('irac-play').style.display = 'block';
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('irac-recap-box').style.display = 'none';
+  document.getElementById('irac-stage-box').style.display = 'block';
+  document.getElementById('page-header').classList.add('compact');
+  const c = IRAC_CASES[idx];
+  paintBadge(document.getElementById('irac-case-tag'), c.cat);
+  const factsEl = document.getElementById('irac-facts');
+  factsEl.innerHTML = c.facts;
+  factsEl.classList.remove('expanded');
+  document.getElementById('irac-facts-toggle').textContent = 'ขยายอ่านโจทย์เต็ม ▾';
+  syncStickyBar();
+  renderIracStep();
+}
+
+document.getElementById('irac-facts-toggle').addEventListener('click', ()=>{
+  const factsEl = document.getElementById('irac-facts');
+  const expanded = factsEl.classList.toggle('expanded');
+  document.getElementById('irac-facts-toggle').textContent = expanded ? 'ย่อโจทย์ ▴' : 'ขยายอ่านโจทย์เต็ม ▾';
+});
+
+document.getElementById('irac-back').addEventListener('click', ()=>{
+  SoundFX.click();
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('irac-play').style.display = 'none';
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('page-header').classList.remove('compact');
+  syncStickyBar();
+  renderCasePicker();
+});
+
+const IRAC_STAGE_INFO = {
+  issue:{key:'issue', qKey:'issueQ', optsKey:'issueOpts', ansKey:'issueAns', fbKey:'issueFeedback', label:'เลือกประเด็น', next:'rule'},
+  rule: {key:'rule',  qKey:'ruleQ',  optsKey:'ruleOpts',  ansKey:'ruleAns',  fbKey:'ruleFeedback',  label:'เลือกมาตรา', next:'app'},
+  app:  {key:'app',   qKey:'appQ',   optsKey:'appOpts',   ansKey:'appAns',   fbKey:'appFeedback',   label:'ปรับบท',     next:'conc'},
+  conc: {key:'conc',  qKey:'concQ',  optsKey:'concOpts',  ansKey:'concAns',  fbKey:'concFeedback',  label:'สรุปผล',     next:null}
+};
+
+function renderIracStep(){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  const info = IRAC_STAGE_INFO[iracStage];
+
+  document.getElementById('irac-progress-label').textContent =
+    issue.label + ' · ประเด็น ' + (iracIssueIdx+1) + '/' + c.issues.length + ' · ขั้นตอน: ' + info.label;
+
+  const order = ['issue','rule','app','conc'];
+  const curIdx = order.indexOf(iracStage);
+  document.querySelectorAll('#irac-stepper .irac-step').forEach((el)=>{
+    const step = el.getAttribute('data-step');
+    const stepIdx = order.indexOf(step);
+    el.classList.remove('active','done');
+    if(stepIdx < curIdx) el.classList.add('done');
+    else if(stepIdx === curIdx) el.classList.add('active');
+  });
+
+  document.getElementById('irac-question').textContent = issue[info.qKey];
+  const optsDiv = document.getElementById('irac-options');
+  optsDiv.innerHTML = '';
+  const letters = ['ก','ข','ค','ง'];
+  issue[info.optsKey].forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.innerHTML = '<span class="abc">'+letters[i]+'</span><span>'+esc(opt)+'</span>';
+    btn.addEventListener('click', ()=> selectIracOption(i));
+    optsDiv.appendChild(btn);
+  });
+  document.getElementById('irac-explain').style.display = 'none';
+  document.getElementById('irac-explain').className = 'explain';
+  document.getElementById('irac-next').style.display = 'none';
+  document.getElementById('irac-recap-next').style.display = 'none';
+  iracTimer.start();
+}
+
+function selectIracOption(i){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  const info = IRAC_STAGE_INFO[iracStage];
+  const optsDiv = document.getElementById('irac-options');
+  const btns = optsDiv.querySelectorAll('button');
+  if(btns[0].disabled) return;
+  const elapsed = iracTimer.stop();
+  const ans = issue[info.ansKey];
+  btns.forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx === ans) b.classList.add('correct');
+    else if(idx === i) b.classList.add('wrong');
+  });
+  const isCorrect = (i === ans);
+  let ptsMsg = '';
+  if(isCorrect){
+    iracScore++; SoundFX.correct();
+    const pts = elapsed <= QUIZ_FAST_THRESHOLD ? 20 : 1;
+    addScore(pts);
+    ptsMsg = ' <span class="pts-earned">+' + pts + ' คะแนน' + (elapsed <= QUIZ_FAST_THRESHOLD ? ' ตอบเร็ว!' : '') + '</span>';
+  } else {
+    SoundFX.wrong();
+  }
+  const explainDiv = document.getElementById('irac-explain');
+  explainDiv.className = 'explain ' + (isCorrect ? 'ok' : 'bad');
+  explainDiv.innerHTML = '<b>' + (isCorrect ? '✓ ถูกต้อง' : '✗ ยังไม่ถูก — คำตอบที่ควรเลือกคือ ข้อ ' + ['ก','ข','ค','ง'][ans]) + ptsMsg + '</b>' + issue[info.fbKey];
+  explainDiv.style.display = 'block';
+  document.getElementById('irac-next').style.display = 'block';
+  syncStickyBar();
+}
+
+document.getElementById('irac-next').addEventListener('click', ()=>{
+  SoundFX.click();
+  const info = IRAC_STAGE_INFO[iracStage];
+  if(info.next){
+    iracStage = info.next;
+    renderIracStep();
+  } else {
+    showIssueRecap();
+  }
+});
+
+function showIssueRecap(){
+  const c = IRAC_CASES[iracCaseIdx];
+  const issue = c.issues[iracIssueIdx];
+  document.getElementById('irac-stage-box').style.display = 'none';
+  const recapBox = document.getElementById('irac-recap-box');
+  recapBox.style.display = 'block';
+  const isLast = iracIssueIdx >= c.issues.length - 1;
+  document.getElementById('irac-recap-title').textContent = 'ทำครบ ' + issue.label + ' แล้ว';
+  document.getElementById('irac-recap-text').innerHTML = issue.concFeedback;
+  document.getElementById('irac-next').style.display = 'none';
+  document.getElementById('irac-recap-next').textContent = isLast ? 'ดูสรุปผลทั้งข้อ →' : 'ประเด็นถัดไป →';
+  document.getElementById('irac-recap-next').style.display = 'block';
+}
+
+document.getElementById('irac-recap-next').addEventListener('click', ()=>{
+  SoundFX.click();
+  const c = IRAC_CASES[iracCaseIdx];
+  document.getElementById('irac-recap-box').style.display = 'none';
+  document.getElementById('irac-recap-next').style.display = 'none';
+  if(iracIssueIdx >= c.issues.length - 1){
+    showIracCaseSummary();
+  } else {
+    iracIssueIdx++;
+    iracStage = 'issue';
+    document.getElementById('irac-stage-box').style.display = 'block';
+    renderIracStep();
+  }
+});
+
+function showIracCaseSummary(){
+  document.getElementById('irac-play').style.display = 'none';
+  syncStickyBar();
+  const summary = document.getElementById('irac-summary');
+  summary.style.display = 'block';
+  const c = IRAC_CASES[iracCaseIdx];
+  document.getElementById('irac-sum-label').textContent = c.title;
+  document.getElementById('irac-sum-score').textContent = iracScore;
+  document.getElementById('irac-sum-of').textContent = 'จาก ' + iracTotal + ' ขั้นตอน';
+  const pct = iracTotal ? iracScore/iracTotal : 0;
+  const starCount = Math.max(1, Math.round(pct*5));
+  document.getElementById('irac-sum-stars').textContent = '★'.repeat(starCount) + '☆'.repeat(5-starCount);
+  let grade = 'ลุยต่อได้เลย';
+  if(pct >= 0.9) grade = 'วินิจฉัยแม่นมาก เก่งมาก!';
+  else if(pct >= 0.7) grade = 'ดีมาก ใกล้ครบทุกประเด็นแล้ว';
+  else if(pct >= 0.5) grade = 'พอใช้ ลองย้อนทบทวนประเด็นที่พลาด';
+  else grade = 'ลองอ่านโจทย์อีกครั้งแล้วไล่ทีละประเด็นใหม่';
+  document.getElementById('irac-sum-grade').textContent = grade;
+  document.getElementById('irac-sum-nextcase').style.display = (iracCaseIdx < IRAC_CASES.length - 1) ? 'inline-block' : 'none';
+}
+
+document.getElementById('irac-sum-retry').addEventListener('click', ()=>{
+  SoundFX.click();
+  startIracCase(iracCaseIdx);
+});
+document.getElementById('irac-sum-back').addEventListener('click', ()=>{
+  SoundFX.click();
+  document.getElementById('irac-summary').style.display = 'none';
+  document.getElementById('irac-picker').style.display = 'block';
+  document.getElementById('page-header').classList.remove('compact');
+  renderCasePicker();
+});
+document.getElementById('irac-sum-nextcase').addEventListener('click', ()=>{
+  SoundFX.click();
+  startIracCase(iracCaseIdx + 1);
+});
+
+renderCasePicker();
+
+
+/* =========================================================
+   โหมด 5: สรุปเนื้อหา
+   ========================================================= */
+let studyInitDone = false;
+let studyIdx = 0;
+const studySeenSet = loadSeenSet('lawprop_studySeen');
+
+/* ---- Web Speech TTS ---- */
+const TTS = (function(){
+  const supported = typeof window !== 'undefined' && 'speechSynthesis' in window;
+  let queue = [], qIdx = 0, currentEl = null, paused = false, rate = 1;
+  function pickThaiVoice(){
+    const vs = window.speechSynthesis.getVoices();
+    return vs.find(v => v.lang && v.lang.toLowerCase().startsWith('th')) || vs[0];
+  }
+  function clearHighlight(){
+    if(currentEl){ currentEl.classList.remove('tts-reading'); currentEl = null; }
+  }
+  function speakNext(){
+    if(qIdx >= queue.length){ clearHighlight(); setBtns('idle'); return; }
+    const item = queue[qIdx];
+    clearHighlight();
+    currentEl = item.el;
+    if(currentEl){
+      currentEl.classList.add('tts-reading');
+      currentEl.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+    const u = new SpeechSynthesisUtterance(item.text);
+    const v = pickThaiVoice();
+    if(v) u.voice = v;
+    u.lang = (v && v.lang) || 'th-TH';
+    u.rate = rate;
+    u.onend = ()=>{ qIdx++; speakNext(); };
+    u.onerror = ()=>{ qIdx++; speakNext(); };
+    window.speechSynthesis.speak(u);
+  }
+  function setBtns(state){
+    const p = document.getElementById('tts-play');
+    const pa = document.getElementById('tts-pause');
+    const s = document.getElementById('tts-stop');
+    if(!p) return;
+    if(state === 'playing'){
+      p.style.display = 'none'; pa.style.display = 'inline-flex'; s.style.display = 'inline-flex';
+      pa.innerHTML = '<span class="tts-ico">⏸</span> หยุดชั่วคราว';
+    } else if(state === 'paused'){
+      pa.innerHTML = '<span class="tts-ico">▶</span> เล่นต่อ';
+    } else { // idle
+      p.style.display = 'inline-flex'; pa.style.display = 'none'; s.style.display = 'none';
+    }
+  }
+  function play(){
+    if(!supported) return;
+    const panel = document.getElementById('study-panel');
+    if(!panel) return;
+    if(window.speechSynthesis.paused){
+      window.speechSynthesis.resume();
+      paused = false;
+      setBtns('playing');
+      return;
+    }
+    stop();
+    // Build queue from readable elements (title, h4, h5, p, li — skip toc)
+    const readable = panel.querySelectorAll('.study-title, h4, h5, p, li');
+    queue = [];
+    readable.forEach(el=>{
+      // Skip toc anchors
+      if(el.closest('.study-toc')) return;
+      const txt = el.textContent.trim();
+      if(txt.length > 0) queue.push({el, text: txt});
+    });
+    if(queue.length === 0) return;
+    qIdx = 0;
+    setBtns('playing');
+    speakNext();
+  }
+  function pauseToggle(){
+    if(!supported) return;
+    if(window.speechSynthesis.paused){
+      window.speechSynthesis.resume();
+      paused = false;
+      setBtns('playing');
+    } else if(window.speechSynthesis.speaking){
+      window.speechSynthesis.pause();
+      paused = true;
+      setBtns('paused');
+    }
+  }
+  function stop(){
+    if(!supported) return;
+    window.speechSynthesis.cancel();
+    clearHighlight();
+    queue = []; qIdx = 0; paused = false;
+    setBtns('idle');
+  }
+  function setRate(r){ rate = r; }
+  return {supported, play, pauseToggle, stop, setRate};
+})();
+
+function renderStudy(idx){
+  if(typeof SUMMARY_TOPICS === 'undefined' || !SUMMARY_TOPICS.length) return;
+  TTS.stop();
+  studyIdx = idx;
+  const nav = document.getElementById('study-nav');
+  nav.innerHTML = '';
+  SUMMARY_TOPICS.forEach((t,i)=>{
+    const btn = document.createElement('button');
+    btn.textContent = t.label;
+    btn.className = i === idx ? 'active' : '';
+    const cat = CATEGORIES[t.cat];
+    if(i === idx){
+      btn.style.background = cat.strong;
+      btn.style.borderColor = cat.strong;
+    }
+    btn.addEventListener('click', ()=>{ SoundFX.click(); renderStudy(i); });
+    nav.appendChild(btn);
+  });
+  const topic = SUMMARY_TOPICS[idx];
+  const cat = CATEGORIES[topic.cat];
+  const panel = document.getElementById('study-panel');
+  panel.style.borderTopColor = cat.strong;
+  panel.style.borderTopWidth = '3px';
+
+  let tocHtml = '';
+  if(topic.toc && topic.toc.length >= 2){
+    tocHtml = '<div class="study-toc"><div class="study-toc-title">สารบัญหัวข้อ</div>';
+    topic.toc.forEach(t=>{
+      tocHtml += '<a href="#'+t.id+'" class="toc-'+t.level+'">'+esc(t.text)+'</a>';
+    });
+    tocHtml += '</div>';
+  }
+  panel.innerHTML = '<div class="study-title" style="color:'+cat.strong+'">'+esc(topic.label)+'</div>' + tocHtml + topic.html;
+
+  panel.querySelectorAll('.study-toc a').forEach(a=>{
+    a.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const target = document.getElementById(a.getAttribute('href').slice(1));
+      if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  // Show TTS bar if supported
+  const ttsBar = document.getElementById('tts-bar');
+  if(ttsBar) ttsBar.style.display = TTS.supported ? 'flex' : 'none';
+
+  if(!studySeenSet.has(topic.id)){
+    studySeenSet.add(topic.id);
+    saveSeenSet('lawprop_studySeen', studySeenSet);
+    SoundFX.score();
+    addScore(50);
+  }
+  updateStudyProgress();
+}
+function updateStudyProgress(){
+  const el = document.getElementById('study-progress');
+  if(!el || typeof SUMMARY_TOPICS === 'undefined') return;
+  const seen = SUMMARY_TOPICS.filter(t=>studySeenSet.has(t.id)).length;
+  el.textContent = 'อ่านแล้ว ' + seen + ' / ' + SUMMARY_TOPICS.length + ' หัวข้อ';
+}
+
+// Wire TTS buttons after DOM ready
+(function initTTS(){
+  const play = document.getElementById('tts-play');
+  const pause = document.getElementById('tts-pause');
+  const stop = document.getElementById('tts-stop');
+  const rate = document.getElementById('tts-rate');
+  if(play) play.addEventListener('click', ()=> TTS.play());
+  if(pause) pause.addEventListener('click', ()=> TTS.pauseToggle());
+  if(stop) stop.addEventListener('click', ()=> TTS.stop());
+  if(rate) rate.addEventListener('change', ()=> TTS.setRate(parseFloat(rate.value)));
+  // Preload voices (Chrome quirk)
+  if('speechSynthesis' in window){
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = ()=>{ window.speechSynthesis.getVoices(); };
+  }
+})();
+
+/* ---------- init ---------- */
+renderScoreDisplay();
+renderCard();
+seqSelect.value = SEQ_ORDER[0];
+renderSeq();
+renderSetPicker();
+setLevel('basic');
+setTab('card');
+</script>
+<script>
+const THEME_KEY = 'codex-theme';
+function setTheme(theme){
+  if (theme === 'light') { document.documentElement.removeAttribute('data-theme'); }
+  else { document.documentElement.setAttribute('data-theme', theme); }
+  try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
+  updateThemeToggleUI(theme);
+  if (theme === 'horror') { startGhostRotation(); playHooSound(); }
+  else { stopGhostRotation(); }
+}
+function updateThemeToggleUI(theme){
+  document.querySelectorAll('.theme-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.themeBtn === theme);
+  });
+}
+const GHOST_IMAGES = ['pics/krasue-companion.png','pics/phijeen-companion.png','pics/phikeaw-companion.png','pics/nangtanee-companion.png'];
+let ghostEl = null, ghostRotateTimer = null, ghostPulseTimer = null, ghostIndex = 0;
+function ensureGhostEl(){
+  if (ghostEl) return ghostEl;
+  const img = document.createElement('img');
+  img.src = GHOST_IMAGES[0]; img.alt = ''; img.setAttribute('aria-hidden', 'true'); img.className = 'ghost-companion';
+  document.body.appendChild(img); ghostEl = img; return img;
+}
+function startGhostRotation(){
+  const el = ensureGhostEl(); ghostIndex = 0; el.src = GHOST_IMAGES[ghostIndex]; el.classList.add('visible');
+  clearInterval(ghostRotateTimer); ghostRotateTimer = setInterval(rotateGhost, 5000);
+}
+function rotateGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl(); ghostIndex = (ghostIndex + 1) % GHOST_IMAGES.length;
+  el.style.opacity = '0.15';
+  setTimeout(() => { el.src = GHOST_IMAGES[ghostIndex]; el.style.opacity = ''; }, 220);
+  playHooSound();
+}
+function stopGhostRotation(){
+  clearInterval(ghostRotateTimer); ghostRotateTimer = null;
+  if (ghostEl) { ghostEl.classList.remove('visible'); ghostEl.style.opacity = ''; }
+}
+function pulseGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl(); el.classList.add('pulse');
+  clearTimeout(ghostPulseTimer); ghostPulseTimer = setTimeout(() => el.classList.remove('pulse'), 350);
+}
+document.addEventListener('input', (e) => {
+  const t = e.target;
+  if (!t) return;
+  if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || (t.classList && t.classList.contains('note-input'))) pulseGhost();
+});
+let __ghostAudioCtx;
+function playHooSound(){
+  try{
+    __ghostAudioCtx = __ghostAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __ghostAudioCtx;
+    if (c.state === 'suspended') c.resume();
+    const t0 = c.currentTime, dur = 1.6;
+    const baseFreq = 180 + Math.random() * 50;
+    const osc = c.createOscillator(); osc.type = 'sine'; osc.frequency.setValueAtTime(baseFreq, t0);
+    const lfo = c.createOscillator(); lfo.type = 'sine'; lfo.frequency.setValueAtTime(4.2, t0);
+    const lfoGain = c.createGain(); lfoGain.gain.setValueAtTime(6, t0);
+    lfo.connect(lfoGain); lfoGain.connect(osc.frequency);
+    const mainGain = c.createGain();
+    mainGain.gain.setValueAtTime(0.0001, t0);
+    mainGain.gain.exponentialRampToValueAtTime(0.035, t0 + 0.55);
+    mainGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    const bufferSize = Math.floor(c.sampleRate * dur);
+    const noiseBuffer = c.createBuffer(1, bufferSize, c.sampleRate);
+    const data = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+    const noise = c.createBufferSource(); noise.buffer = noiseBuffer;
+    const noiseFilter = c.createBiquadFilter();
+    noiseFilter.type = 'bandpass'; noiseFilter.frequency.setValueAtTime(baseFreq * 1.6, t0); noiseFilter.Q.setValueAtTime(0.7, t0);
+    const noiseGain = c.createGain();
+    noiseGain.gain.setValueAtTime(0.0001, t0);
+    noiseGain.gain.exponentialRampToValueAtTime(0.01, t0 + 0.55);
+    noiseGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    osc.connect(mainGain); mainGain.connect(c.destination);
+    noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(c.destination);
+    osc.start(t0); osc.stop(t0 + dur);
+    lfo.start(t0); lfo.stop(t0 + dur);
+    noise.start(t0); noise.stop(t0 + dur);
+  } catch(e){}
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  updateThemeToggleUI(current);
+  if (current === 'horror') startGhostRotation();
+});
+</script>
+</html>
