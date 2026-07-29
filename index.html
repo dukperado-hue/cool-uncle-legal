@@ -241,11 +241,18 @@ h1,h2,h3{font-family:'Noto Serif Thai',serif}
   border-radius:var(--radius);border:2px dashed var(--gold);
 }
 .codex-header{
-  display:flex;align-items:center;gap:12px;margin-bottom:20px;
+  display:flex;align-items:center;gap:12px;margin-bottom:20px;position:relative;
 }
 .codex-icon{font-size:36px}
 .codex-header-text h2{font-size:22px;font-weight:900;color:var(--ink);margin-bottom:4px}
 .codex-header-text p{font-size:13px;color:var(--ink-soft)}
+
+/* CODEX HORROR MASCOT — สิงโตดูดน้ำแดง, peeks above the codex header in horror theme only */
+.codex-lion-mascot{display:none}
+:root[data-theme="horror"] .codex-lion-mascot{
+  display:block;position:absolute;top:-100px;right:12px;width:110px;height:auto;
+  pointer-events:none;filter:drop-shadow(0 8px 16px rgba(0,0,0,.4));z-index:3;
+}
 
 .codex-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;
@@ -360,6 +367,7 @@ footer{
   .year-section,.branch-section{padding:16px}
   .topbar{flex-wrap:wrap}
   .topbar-right{width:100%;justify-content:space-between;margin-left:0;margin-top:8px}
+  :root[data-theme="horror"] .codex-lion-mascot{width:76px;top:-68px;right:0}
 }
 </style>
 </head>
@@ -530,6 +538,7 @@ footer{
   <div id="tab-codex" class="tab-content">
     <div class="codex-section">
       <div class="codex-header">
+        <img src="pics/lion.png" alt="" aria-hidden="true" class="codex-lion-mascot">
         <div class="codex-icon">📚</div>
         <div class="codex-header-text">
           <h2>ประมวลกฎหมาย</h2>
