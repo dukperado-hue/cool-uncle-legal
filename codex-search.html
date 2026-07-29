@@ -351,7 +351,7 @@ button{
       </div>
       <div class="form-group">
         <label for="search-article">เลขมาตรา</label>
-        <input type="number" id="search-article" placeholder="เช่น 276" onkeydown="if(event.key==='Enter') search()">
+        <input type="text" inputmode="numeric" id="search-article" placeholder="เช่น 276 หรือ 193/1" onkeydown="if(event.key==='Enter') search()">
       </div>
     </div>
 
@@ -653,7 +653,7 @@ let currentResults = [];
 // Load data on page load
 async function loadCodexData() {
   try {
-    const response = await fetch('codex-data.json?v=20260729c');
+    const response = await fetch('codex-data.json?v=20260729d');
     if (!response.ok) throw new Error('Failed to load codex data');
     codexData = await response.json();
     console.log('✅ Codex loaded:', Object.fromEntries(
@@ -729,13 +729,25 @@ function getAdjacentArticleNumbers(bookType, number) {
 
 // Re-runs the existing search flow scoped to one specific article number,
 // so prev/next paging stays inside the same results-list UI.
-function navigateArticle(bookType, currentNum, direction) {
+// btn/role let us re-anchor scroll to whichever button was clicked (header
+// prev/next vs the lecture-box prev/next are different vertical positions),
+// so repeat clicks land on the same screen spot instead of the page jumping.
+function navigateArticle(bookType, currentNum, direction, btn, role) {
   const adj = getAdjacentArticleNumbers(bookType, currentNum);
   const target = direction === 'prev' ? adj.prev : adj.next;
   if (!target) return;
+  const beforeTop = btn ? btn.getBoundingClientRect().top : null;
   document.getElementById('search-text').value = '';
   document.getElementById('search-article').value = target;
   search();
+  if (beforeTop !== null && role) {
+    const newBtn = document.querySelector(`[data-navrole="${role}"]`);
+    if (newBtn) {
+      const afterTop = newBtn.getBoundingClientRect().top;
+      window.scrollBy(0, afterTop - beforeTop);
+      return;
+    }
+  }
   document.getElementById('results-list').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -790,8 +802,8 @@ function lectureNotesHtml(article) {
       ${notes}
       <div style="font-size:11.5px;color:var(--ink-faint);border-top:1px dashed var(--line);padding-top:8px;margin-top:4px;">ℹ️ ${escapeHtml(source)}</div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;">
-        <button type="button" class="icon-btn" onclick="navigateArticle('${article.bookType}','${article.number}','prev')" onmouseenter="playHoverSound()" ${adj.prev ? '' : 'disabled'}>‹ มาตราก่อนหน้า</button>
-        <button type="button" class="icon-btn" onclick="navigateArticle('${article.bookType}','${article.number}','next')" onmouseenter="playHoverSound()" ${adj.next ? '' : 'disabled'}>มาตราถัดไป ›</button>
+        <button type="button" class="icon-btn" data-navrole="lec-prev" onclick="navigateArticle('${article.bookType}','${article.number}','prev',this,'lec-prev')" onmouseenter="playHoverSound()" ${adj.prev ? '' : 'disabled'}>‹ มาตราก่อนหน้า</button>
+        <button type="button" class="icon-btn" data-navrole="lec-next" onclick="navigateArticle('${article.bookType}','${article.number}','next',this,'lec-next')" onmouseenter="playHoverSound()" ${adj.next ? '' : 'disabled'}>มาตราถัดไป ›</button>
         <button type="button" class="icon-btn" id="lec-read-${article.id}" onclick="speakLectureNotes('${article.id}', this)" onmouseenter="playHoverSound()">🔊 อ่านคำบรรยาย</button>
       </div>
     </div>`;
@@ -957,8 +969,8 @@ function displayResults(results) {
         <div class="article-number">มาตรา ${article.number}</div>
         <div class="article-actions">
           ${article.cancelled ? '<span class="cancelled-badge">ยกเลิกแล้ว</span>' : ''}
-          <button type="button" class="icon-btn" title="มาตราก่อนหน้า" onclick="navigateArticle('${article.bookType}','${article.number}','prev')" onmouseenter="playHoverSound()" ${adj.prev ? '' : 'disabled'}>‹ ก่อนหน้า</button>
-          <button type="button" class="icon-btn" title="มาตราถัดไป" onclick="navigateArticle('${article.bookType}','${article.number}','next')" onmouseenter="playHoverSound()" ${adj.next ? '' : 'disabled'}>ถัดไป ›</button>
+          <button type="button" class="icon-btn" data-navrole="hdr-prev" title="มาตราก่อนหน้า" onclick="navigateArticle('${article.bookType}','${article.number}','prev',this,'hdr-prev')" onmouseenter="playHoverSound()" ${adj.prev ? '' : 'disabled'}>‹ ก่อนหน้า</button>
+          <button type="button" class="icon-btn" data-navrole="hdr-next" title="มาตราถัดไป" onclick="navigateArticle('${article.bookType}','${article.number}','next',this,'hdr-next')" onmouseenter="playHoverSound()" ${adj.next ? '' : 'disabled'}>ถัดไป ›</button>
           <button type="button" class="icon-btn btn-read" title="อ่านออกเสียงมาตรานี้" onclick="speakArticle(this)" onmouseenter="playHoverSound()">🔊 อ่าน</button>
           <button type="button" class="icon-btn" title="พิมพ์เฉพาะมาตรานี้" onclick="printArticle(this)" onmouseenter="playHoverSound()">🖨️ พิมพ์</button>
         </div>
