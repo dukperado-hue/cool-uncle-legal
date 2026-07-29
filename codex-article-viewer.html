@@ -1378,7 +1378,7 @@ async function loadAndRender() {
   currentNumber = id.slice(id.indexOf('_') + 1);
 
   try {
-    const res = await fetch('codex-data.json?v=20260729ab');
+    const res = await fetch('codex-data.json?v=20260729ac');
     if (!res.ok) throw new Error('fetch failed');
     codexData = await res.json();
   } catch (e) {
