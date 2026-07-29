@@ -121,7 +121,9 @@ h1,h2,h3{font-family:'Noto Serif Thai',serif}
 .wrap{max-width:1200px;margin:0 auto;padding:0 18px 80px}
 
 /* HERO */
-.hero{text-align:center;padding:28px 10px 32px}
+.hero{padding:28px 10px 32px}
+.hero-row{display:flex;align-items:center;justify-content:center;gap:18px}
+.hero-content{text-align:center}
 
 .eyebrow{
   font-size:12.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);
@@ -133,6 +135,15 @@ h1,h2,h3{font-family:'Noto Serif Thai',serif}
 .hero .lede{
   max-width:560px;margin:16px auto 0;color:var(--ink-soft);font-size:16px;line-height:1.85;
 }
+
+/* HERO HORROR MASCOTS — flank the hero text (5-part row: mascot | hero content | mascot) */
+.hero-mascot{display:none}
+:root[data-theme="horror"] .hero-mascot{
+  display:block;flex:0 0 auto;height:auto;pointer-events:none;
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,.4));
+}
+:root[data-theme="horror"] .hero-mascot.lion{width:150px}
+:root[data-theme="horror"] .hero-mascot.croc{width:210px}
 
 /* TABS */
 .tab-buttons{
@@ -241,22 +252,11 @@ h1,h2,h3{font-family:'Noto Serif Thai',serif}
   border-radius:var(--radius);border:2px dashed var(--gold);
 }
 .codex-header{
-  display:flex;align-items:center;gap:12px;margin-bottom:20px;position:relative;
+  display:flex;align-items:center;gap:12px;margin-bottom:20px;
 }
 .codex-icon{font-size:36px}
 .codex-header-text h2{font-size:22px;font-weight:900;color:var(--ink);margin-bottom:4px}
 .codex-header-text p{font-size:13px;color:var(--ink-soft)}
-
-/* CODEX HORROR MASCOTS — peek above the codex header in horror theme only */
-.codex-lion-mascot,.codex-croc-mascot{display:none}
-:root[data-theme="horror"] .codex-lion-mascot{
-  display:block;position:absolute;top:-128px;right:140px;width:135px;height:auto;
-  pointer-events:none;filter:drop-shadow(0 8px 16px rgba(0,0,0,.4));z-index:3;
-}
-:root[data-theme="horror"] .codex-croc-mascot{
-  display:block;position:absolute;top:-52px;right:8px;width:120px;height:auto;
-  pointer-events:none;filter:drop-shadow(0 6px 14px rgba(0,0,0,.4));z-index:3;
-}
 
 .codex-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;
@@ -372,8 +372,7 @@ footer{
   .year-section,.branch-section{padding:16px}
   .topbar{flex-wrap:wrap}
   .topbar-right{width:100%;justify-content:space-between;margin-left:0;margin-top:8px}
-  :root[data-theme="horror"] .codex-lion-mascot{width:88px;top:-82px;right:76px}
-  :root[data-theme="horror"] .codex-croc-mascot{width:76px;top:-34px;right:0}
+  .hero-mascot{display:none !important}
 }
 </style>
 </head>
@@ -411,9 +410,15 @@ footer{
 
   <!-- HERO -->
   <section class="hero">
-    <div class="eyebrow">ห้องเรียนกฎหมาย</div>
-    <h1>Cool Uncle<br>Legal Lab</h1>
-    <p class="lede">ระบบเรียนกฎหมายแบบเกม เตรียมสอบปริญญาตรี เนติฯ ตั๋วทนาย ที่เดียว</p>
+    <div class="hero-row">
+      <img src="pics/lion.png" alt="" aria-hidden="true" class="hero-mascot lion">
+      <div class="hero-content">
+        <div class="eyebrow">ห้องเรียนกฎหมาย</div>
+        <h1>Cool Uncle<br>Legal Lab</h1>
+        <p class="lede">ระบบเรียนกฎหมายแบบเกม เตรียมสอบปริญญาตรี เนติฯ ตั๋วทนาย ที่เดียว</p>
+      </div>
+      <img src="pics/croc.png" alt="" aria-hidden="true" class="hero-mascot croc">
+    </div>
   </section>
 
   <!-- TAB BUTTONS -->
@@ -544,8 +549,6 @@ footer{
   <div id="tab-codex" class="tab-content">
     <div class="codex-section">
       <div class="codex-header">
-        <img src="pics/lion.png" alt="" aria-hidden="true" class="codex-lion-mascot">
-        <img src="pics/croc.png" alt="" aria-hidden="true" class="codex-croc-mascot">
         <div class="codex-icon">📚</div>
         <div class="codex-header-text">
           <h2>ประมวลกฎหมาย</h2>
@@ -846,7 +849,16 @@ function updateThemeToggleUI(theme){
     b.classList.toggle('active', b.dataset.themeBtn === theme);
   });
 }
-const GHOST_IMAGES = ['pics/krasue-companion.png','pics/phijeen-companion.png','pics/phikeaw-companion.png','pics/nangtanee-companion.png'];
+const GHOST_IMAGES = [
+  'pics/Pixel/icon/ตะเคียน 1.png','pics/Pixel/icon/ตะเคียน 2.png',
+  'pics/Pixel/icon/ตานี.png','pics/Pixel/icon/ตานี 2.png',
+  'pics/Pixel/icon/นางกวัก 1.png','pics/Pixel/icon/นางกวัก 2.png','pics/Pixel/icon/นางกวัก 3.png',
+  'pics/Pixel/icon/ปอป 1.png','pics/Pixel/icon/ปอป 2.png','pics/Pixel/icon/ปอป 3.png',
+  'pics/Pixel/icon/ปอปชาย 1.png','pics/Pixel/icon/ปอปชาย 2.png',
+  'pics/Pixel/icon/ผีแมว 1.png','pics/Pixel/icon/ผีแมว 2.png','pics/Pixel/icon/ผีแมว 3.png',
+  'pics/Pixel/icon/ผีโพง 1.png',
+  'pics/Pixel/icon/แม่นาค 1.png','pics/Pixel/icon/แม่นาค 2.png','pics/Pixel/icon/แม่นาค 3.png',
+];
 let ghostEl = null, ghostRotateTimer = null, ghostPulseTimer = null, ghostIndex = 0;
 function ensureGhostEl(){
   if (ghostEl) return ghostEl;
