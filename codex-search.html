@@ -653,7 +653,7 @@ let currentResults = [];
 // Load data on page load
 async function loadCodexData() {
   try {
-    const response = await fetch('codex-data.json?v=20260729d');
+    const response = await fetch('codex-data.json?v=20260729e');
     if (!response.ok) throw new Error('Failed to load codex data');
     codexData = await response.json();
     console.log('✅ Codex loaded:', Object.fromEntries(
@@ -1038,10 +1038,13 @@ function printArticle(btn) {
   const numberText = card.querySelector('.article-number').textContent;
   const bodyHtml = card.querySelector('.article-text').innerHTML;
   const breadcrumbHtml = card.querySelector('.article-breadcrumb') ? card.querySelector('.article-breadcrumb').innerHTML : '';
+  const lectureEl = card.querySelector('.lecture-notes');
+  const lectureHtml = lectureEl ? `<div style="margin-top:18px;padding-top:14px;border-top:2px solid #ccc;">${lectureEl.innerHTML}</div>` : '';
   printArea.innerHTML = `
     <h2 style="font-family:'Noto Serif Thai',serif;margin-bottom:14px;">${numberText}</h2>
     <div class="article-text">${bodyHtml}</div>
     <div class="article-breadcrumb">${breadcrumbHtml}</div>
+    ${lectureHtml}
   `;
   document.body.classList.add('printing-one');
   window.print();
