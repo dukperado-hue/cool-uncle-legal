@@ -339,7 +339,7 @@ button{
 </script>
 
 <div class="topbar">
-  <span class="topbar-brand">📚 Cool Uncle</span>
+  <a href="index.html" class="topbar-brand" style="text-decoration:none">📚 Cool Uncle</a>
   <span style="color:var(--ink-faint)">·</span>
   <span>ประมวลกฎหมาย</span>
   <div class="theme-toggle" role="group" aria-label="เลือกธีม">
@@ -798,7 +798,7 @@ let currentResults = [];
 // Load data on page load
 async function loadCodexData() {
   try {
-    const response = await fetch('codex-data.json?v=20260730y');
+    const response = await fetch('codex-data.json?v=20260730z');
     if (!response.ok) throw new Error('Failed to load codex data');
     codexData = await response.json();
     console.log('✅ Codex loaded:', Object.fromEntries(
@@ -1017,6 +1017,7 @@ function showAdminBookPicker() {
   picker.innerHTML = `
     <button type="button" class="book-btn" onclick="pickAdminBook('adminproc')" onmouseenter="playHoverSound()">📝 วิ.ปฏิบัติราชการทางปกครอง</button>
     <button type="button" class="book-btn" onclick="pickAdminBook('admincourt')" onmouseenter="playHoverSound()">🏢 จัดตั้งศาลปกครองฯ</button>
+    <button type="button" class="book-btn" onclick="pickAdminBook('tortofficials')" onmouseenter="playHoverSound()">⚠️ ความรับผิดทางละเมิดของเจ้าหน้าที่</button>
   `;
   document.querySelector('.search-container').appendChild(picker);
 }

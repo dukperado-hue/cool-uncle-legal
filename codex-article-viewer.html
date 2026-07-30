@@ -717,7 +717,7 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
 </script>
 
 <div class="topbar">
-  <span style="font-weight:800; color:var(--ink);">📚 Cool Uncle</span>
+  <a href="index.html" style="font-weight:800; color:var(--ink); text-decoration:none;">📚 Cool Uncle</a>
   <span style="color:var(--ink-faint)">·</span>
   <span>ประมวลกฎหมาย</span>
   <div class="theme-toggle" role="group" aria-label="เลือกธีม">
@@ -1467,7 +1467,7 @@ async function loadAndRender() {
   currentNumber = id.slice(id.indexOf('_') + 1);
 
   try {
-    const res = await fetch('codex-data.json?v=20260730y');
+    const res = await fetch('codex-data.json?v=20260730z');
     if (!res.ok) throw new Error('fetch failed');
     codexData = await res.json();
   } catch (e) {
