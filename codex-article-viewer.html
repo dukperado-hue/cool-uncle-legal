@@ -851,6 +851,7 @@ function playDogHowl(){
   howl.currentTime = 0;
   howl.volume = 0.4;
   howl.play().catch(() => {});
+  setTimeout(() => { if (!howl.paused) howl.pause(); }, 3000);
 }
 function stopDogHowl(){
   clearTimeout(dogHowlTimer); dogHowlTimer = null;
@@ -1414,7 +1415,14 @@ async function loadAndRender() {
   updateThemeToggleUI(currentTheme);
   const droneMuteBtn = document.getElementById('drone-mute-btn');
   if (droneMuteBtn) droneMuteBtn.textContent = __droneMuted ? '🔇' : '🔊';
-  if (currentTheme === 'horror') { startGhostRotation(); startAmbientDrone(); scheduleDogHowl(); }
+  if (currentTheme === 'horror') { playHorrorBgm(); startGhostRotation(); startAmbientDrone(); scheduleDogHowl(); }
+  ['click','touchstart','keydown'].forEach(evt => {
+    document.addEventListener(evt, function resumeBgmOnce(){
+      const bgm = document.getElementById('horror-bgm');
+      if (document.documentElement.getAttribute('data-theme') === 'horror' && bgm && bgm.paused) playHorrorBgm();
+      ['click','touchstart','keydown'].forEach(e2 => document.removeEventListener(e2, resumeBgmOnce));
+    }, { once: true });
+  });
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');

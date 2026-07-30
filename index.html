@@ -908,6 +908,7 @@ function playDogHowl(){
   howl.currentTime = 0;
   howl.volume = 0.4;
   howl.play().catch(() => {});
+  setTimeout(() => { if (!howl.paused) howl.pause(); }, 3000);
 }
 function stopDogHowl(){
   clearTimeout(dogHowlTimer); dogHowlTimer = null;
@@ -1073,13 +1074,20 @@ function playHooSound(){
 document.addEventListener('DOMContentLoaded', () => {
   const current = document.documentElement.getAttribute('data-theme') || 'light';
   updateThemeToggleUI(current);
-  if (current === 'horror') { startGhostRotation(); scheduleDogHowl(); }
+  if (current === 'horror') { playHorrorBgm(); startGhostRotation(); scheduleDogHowl(); }
   const droneMuteBtn = document.getElementById('drone-mute-btn');
   if (droneMuteBtn) {
     let muted = false;
     try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
     droneMuteBtn.textContent = muted ? '🔇' : '🔊';
   }
+  ['click','touchstart','keydown'].forEach(evt => {
+    document.addEventListener(evt, function resumeBgmOnce(){
+      const bgm = document.getElementById('horror-bgm');
+      if (document.documentElement.getAttribute('data-theme') === 'horror' && bgm && bgm.paused) playHorrorBgm();
+      ['click','touchstart','keydown'].forEach(e2 => document.removeEventListener(e2, resumeBgmOnce));
+    }, { once: true });
+  });
 });
 </script>
 </body>
