@@ -377,6 +377,8 @@ button{
       </div>
     </div>
 
+    <div id="group-search-row" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px"></div>
+
     <div style="display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end">
       <button class="btn-primary" onclick="search()">🔍 ค้นหา</button>
       <button class="btn-secondary" onclick="clearSearch()">ล้าง</button>
@@ -1045,6 +1047,7 @@ function pickAdminBook(book) {
 
 function applyBookLock(book) {
   selectedBook = book;
+  renderGroupSearchButtons();
   const info = BOOK_INFO[book];
   if (!info) return;
   document.querySelector('.search-header h1').textContent = `${info.icon} ค้นหา${info.title}`;
@@ -1067,6 +1070,58 @@ function applyBookLock(book) {
     document.getElementById('search-article').value = '';
     search();
   }
+}
+
+// --- quick group-search (ป.พ.พ. only) -----------------------------------
+// Matches by the real บรรพ/ลักษณะ metadata already on each article (not
+// hardcoded มาตรา ranges) so this stays correct even if article numbering
+// has gaps/sub-articles.
+const GROUP_FILTERS = {
+  'นิติกรรม': [{ phaak: 'บรรพ 1', laksana: 'ลักษณะ 4' }],
+  'นิติกรรม (รวมสัญญา)': [{ phaak: 'บรรพ 1', laksana: 'ลักษณะ 4' }, { phaak: 'บรรพ 2', laksana: 'ลักษณะ 2' }],
+  'หนี้': [{ phaak: 'บรรพ 2', laksana: 'ลักษณะ 1' }],
+  'ทรัพย์': [{ phaak: 'บรรพ 1', laksana: 'ลักษณะ 3' }, { phaak: 'บรรพ 4' }],
+  'สัญญา(ซื้อขาย)': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 1' }],
+  'สัญญา(ให้)': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 3' }],
+  'สัญญา(เช่าทรัพย์)': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 4' }],
+  'สัญญา(เช่าซื้อ)': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 5' }],
+  'จ้างทำของ': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 7' }],
+  'สัญญา(ยืม)': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 9' }],
+  'สัญญา(ตัวแทน)': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 15' }],
+  'ละเมิด': [{ phaak: 'บรรพ 2', laksana: 'ลักษณะ 5' }],
+  'ครอบครัว': [{ phaak: 'บรรพ 5' }],
+};
+
+function renderGroupSearchButtons() {
+  const row = document.getElementById('group-search-row');
+  if (!row || selectedBook !== 'civil') { if (row) row.innerHTML = ''; return; }
+  row.innerHTML = Object.keys(GROUP_FILTERS).map(name =>
+    `<button type="button" class="icon-btn" style="font-size:12px;padding:4px 10px" onclick="searchGroup('${name.replace(/'/g, "\\'")}')" onmouseenter="playHoverSound()">${name}</button>`
+  ).join('');
+}
+
+function searchGroup(name) {
+  const filters = GROUP_FILTERS[name];
+  if (!filters || !codexData || !codexData.books[selectedBook]) return;
+  document.getElementById('search-text').value = '';
+  document.getElementById('search-article').value = '';
+  const articles = codexData.books[selectedBook].articles;
+  let results = Object.values(articles).filter(article => {
+    const m = article.meta || {};
+    return filters.some(f =>
+      (!f.phaak || (m.phaak || '').includes(f.phaak)) &&
+      (!f.laksana || (m.laksana || '').includes(f.laksana))
+    );
+  }).map(article => ({ ...article, bookType: selectedBook }));
+
+  results.sort((a, b) => {
+    const an = parseInt(a.number), bn = parseInt(b.number);
+    return an !== bn ? an - bn : a.number.localeCompare(b.number);
+  });
+
+  currentResults = results;
+  currentPage = 0;
+  displayResults(results);
 }
 
 function search() {
