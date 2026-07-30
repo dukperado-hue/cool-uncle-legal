@@ -1132,6 +1132,7 @@ const BOOK_TITLES = {
   constitution: 'พระธรรมนูญศาลยุติธรรม',
   adminproc: 'พระราชบัญญัติวิธีปฏิบัติราชการทางปกครอง',
   admincourt: 'พระราชบัญญัติจัดตั้งศาลปกครองและวิธีพิจารณาคดีปกครอง',
+  tortofficials: 'พระราชบัญญัติความรับผิดทางละเมิดของเจ้าหน้าที่',
   const2560: 'รัฐธรรมนูญแห่งราชอาณาจักรไทย พุทธศักราช 2560',
 };
 
@@ -1466,7 +1467,7 @@ async function loadAndRender() {
   currentNumber = id.slice(id.indexOf('_') + 1);
 
   try {
-    const res = await fetch('codex-data.json?v=20260730q');
+    const res = await fetch('codex-data.json?v=20260730r');
     if (!res.ok) throw new Error('fetch failed');
     codexData = await res.json();
   } catch (e) {

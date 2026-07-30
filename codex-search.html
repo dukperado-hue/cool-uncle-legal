@@ -798,7 +798,7 @@ let currentResults = [];
 // Load data on page load
 async function loadCodexData() {
   try {
-    const response = await fetch('codex-data.json?v=20260730q');
+    const response = await fetch('codex-data.json?v=20260730r');
     if (!response.ok) throw new Error('Failed to load codex data');
     codexData = await response.json();
     console.log('✅ Codex loaded:', Object.fromEntries(
@@ -818,6 +818,7 @@ const BOOK_INFO = {
   constitution: { title: 'พระธรรมนูญศาลยุติธรรม', short: 'พระธรรมนูญศาลยุติธรรม', icon: '🏛️' },
   adminproc: { title: 'พระราชบัญญัติวิธีปฏิบัติราชการทางปกครอง', short: 'วิ.ปฏิบัติราชการ', icon: '📝' },
   admincourt: { title: 'พระราชบัญญัติจัดตั้งศาลปกครองและวิธีพิจารณาคดีปกครอง', short: 'ศาลปกครอง', icon: '🏢' },
+  tortofficials: { title: 'พระราชบัญญัติความรับผิดทางละเมิดของเจ้าหน้าที่', short: 'ละเมิดเจ้าหน้าที่', icon: '⚠️' },
   const2560: { title: 'รัฐธรรมนูญแห่งราชอาณาจักรไทย พุทธศักราช 2560', short: 'รัฐธรรมนูญ 2560', icon: '📜' },
 };
 const MAX_RESULTS = 50;
