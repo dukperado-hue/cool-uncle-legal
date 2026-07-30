@@ -806,6 +806,7 @@ function playHooSound(){
 let codexData = null;
 let selectedBook = 'civil';
 let currentResults = [];
+let currentPage = 0;
 
 // Load data on page load
 async function loadCodexData() {
@@ -1100,7 +1101,14 @@ function search() {
   });
 
   currentResults = results;
+  currentPage = 0;
   displayResults(results);
+}
+
+function goToPage(delta) {
+  currentPage += delta;
+  displayResults(currentResults);
+  document.querySelector('.search-container')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function displayResults(results) {
@@ -1119,9 +1127,12 @@ function displayResults(results) {
     return;
   }
 
-  const shown = results.slice(0, MAX_RESULTS);
+  const totalPages = Math.max(1, Math.ceil(results.length / MAX_RESULTS));
+  currentPage = Math.min(Math.max(0, currentPage), totalPages - 1);
+  const start = currentPage * MAX_RESULTS;
+  const shown = results.slice(start, start + MAX_RESULTS);
   resultCount.textContent = results.length > MAX_RESULTS
-    ? `พบ ${results.length} มาตรา (แสดง ${MAX_RESULTS} รายการแรก — ลองค้นหาให้เจาะจงขึ้น)`
+    ? `พบ ${results.length} มาตรา (หน้า ${currentPage + 1}/${totalPages} — แสดงมาตรา ${start + 1}-${start + shown.length})`
     : `พบ ${results.length} มาตรา`;
 
   resultsList.innerHTML = shown.map(article => {
@@ -1155,6 +1166,16 @@ function displayResults(results) {
     </article>
   `;
   }).join('');
+
+  if (results.length > MAX_RESULTS) {
+    resultsList.innerHTML += `
+      <div class="page-nav" style="display:flex;justify-content:center;gap:10px;margin:20px 0;">
+        <button type="button" class="icon-btn" onclick="goToPage(-1)" onmouseenter="playHoverSound()" ${currentPage <= 0 ? 'disabled' : ''}>‹ ย้อนกลับ 50 มาตรา</button>
+        <span style="align-self:center;color:var(--ink-faint)">หน้า ${currentPage + 1}/${totalPages}</span>
+        <button type="button" class="icon-btn" onclick="goToPage(1)" onmouseenter="playHoverSound()" ${currentPage >= totalPages - 1 ? 'disabled' : ''}>ชุดถัดไป 50 มาตรา ›</button>
+      </div>
+    `;
+  }
 
   resultsList.querySelectorAll('.note-input').forEach(bindNoteInput);
 }
