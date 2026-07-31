@@ -764,6 +764,8 @@ function startGhostRotation(){
   ghostIndex = 0;
   el.src = GHOST_IMAGES[ghostIndex];
   el.classList.add('visible');
+  const heroEl = document.querySelector('.hero-ghost');
+  if (heroEl) heroEl.src = GHOST_IMAGES[ghostIndex];
   clearInterval(ghostRotateTimer);
   ghostRotateTimer = setInterval(rotateGhost, 5000);
 }
@@ -773,7 +775,12 @@ function rotateGhost(){
   const el = ensureGhostEl();
   ghostIndex = (ghostIndex + 1) % GHOST_IMAGES.length;
   el.style.opacity = '0.15';
-  setTimeout(() => { el.src = GHOST_IMAGES[ghostIndex]; el.style.opacity = ''; }, 220);
+  const heroEl = document.querySelector('.hero-ghost');
+  if (heroEl) heroEl.style.opacity = '0.15';
+  setTimeout(() => {
+    el.src = GHOST_IMAGES[ghostIndex]; el.style.opacity = '';
+    if (heroEl) { heroEl.src = GHOST_IMAGES[ghostIndex]; heroEl.style.opacity = ''; }
+  }, 220);
   playHooSound();
 }
 
@@ -1352,7 +1359,7 @@ function displayResults(results) {
     return `
     <article class="article-card${isSingle ? ' single-hero' : ''}" data-article-id="${article.id}">
       ${isSingle
-        ? `<div class="hero-row"><img class="hero-ghost" src="pics/krasue-companion.png" alt="" aria-hidden="true">${headerHtml}</div>`
+        ? `<div class="hero-row"><img class="hero-ghost" src="${GHOST_IMAGES[ghostIndex]}" alt="" aria-hidden="true">${headerHtml}</div>`
         : headerHtml}
 
       <div class="article-text">${renderArticleTextHtml(article.text, article.bookType, article.number)}</div>
