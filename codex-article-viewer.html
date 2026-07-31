@@ -1242,7 +1242,7 @@ function renderLectureNotes(article) {
       ${article.lectureNotes.map(n => `
         <div class="case-item">
           <div class="case-number">🎓 ${escapeHtml(n.topic || '')}</div>
-          <div class="case-summary" style="white-space:pre-line">${escapeHtml(n.text || '')}</div>
+          <div class="case-summary" style="white-space:pre-line">${linkifyMatraRefs(escapeHtml(n.text || ''), currentBookType, article.number)}</div>
           <div style="margin-top:10px;font-size:12px;color:var(--ink-faint);border-top:1px dashed var(--line);padding-top:8px;">
             ℹ️ ${escapeHtml(n.source || 'สรุปโดย AI จากคำบรรยาย — โปรดตรวจสอบความถูกต้องก่อนใช้อ้างอิง')}
           </div>

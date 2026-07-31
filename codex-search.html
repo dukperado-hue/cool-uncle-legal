@@ -960,7 +960,7 @@ function lectureNotesHtml(article) {
   const notes = article.lectureNotes.map(n => `
       <div style="margin-bottom:10px;">
         <div style="font-weight:700;color:var(--accent);font-size:13.5px;margin-bottom:4px;">🎓 ${escapeHtml(n.topic || '')}</div>
-        <div style="font-size:13.5px;color:var(--ink);white-space:pre-line;line-height:1.7;">${escapeHtml(n.text || '')}</div>
+        <div style="font-size:13.5px;color:var(--ink);white-space:pre-line;line-height:1.7;">${linkifyMatraRefs(escapeHtml(n.text || ''), article.bookType, article.number)}</div>
       </div>`).join('');
   const source = article.lectureNotes[0].source || '';
   // adj.prev/adj.next come from getAdjacentArticleNumbers, which walks the
