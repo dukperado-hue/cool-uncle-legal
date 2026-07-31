@@ -259,18 +259,32 @@ button{
 
 .article-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:10px;gap:12px}
 
-/* Single-มาตรา result: peeking horror-mode ghost, mirrors codex-article-viewer.html */
-.hero-row{display:flex;align-items:flex-start;gap:16px}
-.hero-row .article-header{flex:1;min-width:0}
+/* Single-มาตรา result: peeking horror-mode ghost + comic speech-bubble header,
+   mirrors codex-article-viewer.html's .hero-row/.hero-ghost/.speech-bubble exactly
+   (scoped to .single-hero so multi-result cards and other themes are untouched). */
+.hero-row{display:flex;align-items:flex-start;gap:16px;margin-bottom:10px}
+.hero-row .article-header{flex:1;min-width:0;margin-bottom:0}
 .hero-ghost{display:none;flex-shrink:0}
 :root[data-theme="horror"] .hero-ghost{
-  display:block;width:110px;height:auto;margin-top:-40px;
+  display:block;width:132px;height:auto;margin-top:-56px;
   filter:drop-shadow(0 0 18px rgba(74,107,83,.55)) drop-shadow(0 6px 10px rgba(0,0,0,.5));
 }
-:root[data-theme="horror"] .article-card.single-hero{
-  border:1px solid #4a6b53;
-  box-shadow:0 0 0 1px rgba(74,107,83,.25), 0 0 32px rgba(74,107,83,.28), var(--shadow);
+:root[data-theme="horror"] .single-hero .hero-row .article-header{
+  position:relative;
+  background:#e8f4ec;color:#1f3d2b;
+  border-radius:18px;padding:14px 18px;
+  box-shadow:0 6px 16px rgba(0,0,0,.4);
 }
+:root[data-theme="horror"] .single-hero .hero-row .article-header::before{
+  content:"";position:absolute;left:-14px;top:26px;width:0;height:0;
+  border:11px solid transparent;border-right-color:#e8f4ec;
+}
+:root[data-theme="horror"] .single-hero .hero-row .article-number{color:#1f3d2b;font-size:22px}
+:root[data-theme="horror"] .single-hero .hero-row .icon-btn{
+  background:#F5F3F0;color:#1f3d2b;border-color:rgba(0,0,0,.15);
+}
+:root[data-theme="horror"] .single-hero .hero-row .icon-btn:hover{background:#fff;border-color:#4a6b53}
+:root[data-theme="horror"] .single-hero .hero-row .icon-btn:disabled{opacity:.4}
 
 .article-number{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--accent)}
 
