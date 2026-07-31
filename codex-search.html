@@ -259,6 +259,19 @@ button{
 
 .article-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:10px;gap:12px}
 
+/* Single-มาตรา result: peeking horror-mode ghost, mirrors codex-article-viewer.html */
+.hero-row{display:flex;align-items:flex-start;gap:16px}
+.hero-row .article-header{flex:1;min-width:0}
+.hero-ghost{display:none;flex-shrink:0}
+:root[data-theme="horror"] .hero-ghost{
+  display:block;width:110px;height:auto;margin-top:-40px;
+  filter:drop-shadow(0 0 18px rgba(74,107,83,.55)) drop-shadow(0 6px 10px rgba(0,0,0,.5));
+}
+:root[data-theme="horror"] .article-card.single-hero{
+  border:1px solid #4a6b53;
+  box-shadow:0 0 0 1px rgba(74,107,83,.25), 0 0 32px rgba(74,107,83,.28), var(--shadow);
+}
+
 .article-number{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--accent)}
 
 .article-meta{font-size:11px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.05em;display:flex;gap:8px}
@@ -1308,10 +1321,10 @@ function displayResults(results) {
     ? `พบ ${results.length} มาตรา (หน้า ${currentPage + 1}/${totalPages} — แสดงมาตรา ${start + 1}-${start + shown.length})`
     : `พบ ${results.length} มาตรา`;
 
+  const isSingle = shown.length === 1;
   resultsList.innerHTML = shown.map(article => {
     const adj = getAdjacentArticleNumbers(article.bookType, article.number);
-    return `
-    <article class="article-card" data-article-id="${article.id}">
+    const headerHtml = `
       <div class="article-header">
         <div class="article-number">มาตรา ${article.number}</div>
         <div class="article-actions">
@@ -1321,7 +1334,12 @@ function displayResults(results) {
           <button type="button" class="icon-btn btn-read" title="อ่านออกเสียงมาตรานี้" onclick="speakArticle(this)" onmouseenter="playHoverSound()">🔊 อ่าน</button>
           <button type="button" class="icon-btn" title="พิมพ์เฉพาะมาตรานี้" onclick="printArticle(this)" onmouseenter="playHoverSound()">🖨️ พิมพ์</button>
         </div>
-      </div>
+      </div>`;
+    return `
+    <article class="article-card${isSingle ? ' single-hero' : ''}" data-article-id="${article.id}">
+      ${isSingle
+        ? `<div class="hero-row"><img class="hero-ghost" src="pics/krasue-companion.png" alt="" aria-hidden="true">${headerHtml}</div>`
+        : headerHtml}
 
       <div class="article-text">${renderArticleTextHtml(article.text, article.bookType, article.number)}</div>
 
