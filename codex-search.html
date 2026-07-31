@@ -1359,7 +1359,7 @@ function displayResults(results) {
     return `
     <article class="article-card${isSingle ? ' single-hero' : ''}" data-article-id="${article.id}">
       ${isSingle
-        ? `<div class="hero-row"><img class="hero-ghost" src="${GHOST_IMAGES[ghostIndex]}" alt="" aria-hidden="true">${headerHtml}</div>`
+        ? `<div class="hero-row"><img class="hero-ghost" width="132" height="132" src="${GHOST_IMAGES[ghostIndex]}" alt="" aria-hidden="true">${headerHtml}</div>`
         : headerHtml}
 
       <div class="article-text">${renderArticleTextHtml(article.text, article.bookType, article.number)}</div>
