@@ -816,7 +816,7 @@ let currentPage = 0;
 // Load data on page load
 async function loadCodexData() {
   try {
-    const response = await fetch('codex-data.json?v=20260731v');
+    const response = await fetch('codex-data.json?v=20260731w');
     if (!response.ok) throw new Error('Failed to load codex data');
     codexData = await response.json();
     console.log('✅ Codex loaded:', Object.fromEntries(
@@ -897,11 +897,21 @@ function getAdjacentArticleNumbers(bookType, number) {
   };
 }
 
-// Re-runs the existing search flow scoped to one specific article number,
-// so prev/next paging stays inside the same results-list UI.
+// Jumps to exactly one article by its exact key (bypasses search()'s fuzzy
+// numberMatch, which intentionally startsWith-matches "83" against sub/​sibling
+// numbers like "83/1" and "83 ทวิ" for manual typing - that fuzzy match would
+// otherwise dump an article's whole suffix family (83, 83 ทวิ, 83 ตรี, 83
+// จัตวา, 83 เบญจ, 83 ฉ, ...) onto the page when prev/next lands on a base
+// number that happens to have ทวิ/ตรี/ฯลฯ siblings), so prev/next paging
+// always shows exactly the one target article.
 // btn/role let us re-anchor scroll to whichever button was clicked (header
 // prev/next vs the lecture-box prev/next are different vertical positions),
 // so repeat clicks land on the same screen spot instead of the page jumping.
+// The re-anchor always looks for the header nav button (hdr-prev/hdr-next)
+// rather than the exact role that was clicked, because the lecture-box
+// prev/next button only exists when the target article has lectureNotes -
+// anchoring on that role after landing on a lectureNotes-less article would
+// find nothing and fall through to the jarring scrollIntoView(top) below.
 function navigateArticle(bookType, currentNum, direction, btn, role) {
   const adj = getAdjacentArticleNumbers(bookType, currentNum);
   const target = direction === 'prev' ? adj.prev : adj.next;
@@ -909,9 +919,13 @@ function navigateArticle(bookType, currentNum, direction, btn, role) {
   const beforeTop = btn ? btn.getBoundingClientRect().top : null;
   document.getElementById('search-text').value = '';
   document.getElementById('search-article').value = target;
-  search();
-  if (beforeTop !== null && role) {
-    const newBtn = document.querySelector(`[data-navrole="${role}"]`);
+  const article = codexData.books[bookType].articles[target];
+  currentResults = article ? [{ ...article, bookType }] : [];
+  currentPage = 0;
+  displayResults(currentResults);
+  if (beforeTop !== null) {
+    const newBtn = document.querySelector(`[data-navrole="hdr-${direction}"]`) ||
+      (role ? document.querySelector(`[data-navrole="${role}"]`) : null);
     if (newBtn) {
       const afterTop = newBtn.getBoundingClientRect().top;
       window.scrollBy(0, afterTop - beforeTop);
