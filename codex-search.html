@@ -833,7 +833,7 @@ let currentPage = 0;
 // Load data on page load
 async function loadCodexData() {
   try {
-    const response = await fetch('codex-data.json?v=20260731x');
+    const response = await fetch('codex-data.json?v=20260731y');
     if (!response.ok) throw new Error('Failed to load codex data');
     codexData = await response.json();
     console.log('✅ Codex loaded:', Object.fromEntries(
@@ -855,6 +855,11 @@ const BOOK_INFO = {
   admincourt: { title: 'พระราชบัญญัติจัดตั้งศาลปกครองและวิธีพิจารณาคดีปกครอง', short: 'ศาลปกครอง', icon: '🏢' },
   tortofficials: { title: 'พระราชบัญญัติความรับผิดทางละเมิดของเจ้าหน้าที่', short: 'ละเมิดเจ้าหน้าที่', icon: '⚠️' },
   const2560: { title: 'รัฐธรรมนูญแห่งราชอาณาจักรไทย พุทธศักราช 2560', short: 'รัฐธรรมนูญ 2560', icon: '📜' },
+  copyright: { title: 'พระราชบัญญัติลิขสิทธิ์ พ.ศ. 2537', short: 'ลิขสิทธิ์', icon: '©️' },
+  patent: { title: 'พระราชบัญญัติสิทธิบัตร พ.ศ. 2522', short: 'สิทธิบัตร', icon: '🔬' },
+  trademark: { title: 'พระราชบัญญัติเครื่องหมายการค้า พ.ศ. 2534', short: 'เครื่องหมายการค้า', icon: '™️' },
+  carriage: { title: 'พระราชบัญญัติการรับขนของทางทะเล พ.ศ. 2534', short: 'รับขนของทางทะเล', icon: '🚢' },
+  ipcourt: { title: 'พระราชบัญญัติจัดตั้งศาลทรัพย์สินทางปัญญาและการค้าระหว่างประเทศฯ พ.ศ. 2539', short: 'ศาลทรัพย์สินทางปัญญาฯ', icon: '⚖️' },
 };
 const MAX_RESULTS = 50;
 
@@ -1075,6 +1080,36 @@ function showAdminBookPicker() {
     <button type="button" class="book-btn" onclick="pickAdminBook('tortofficials')" onmouseenter="playHoverSound()">⚠️ ความรับผิดทางละเมิดของเจ้าหน้าที่</button>
   `;
   document.querySelector('.search-container').appendChild(picker);
+}
+
+// "ทรัพย์สินทางปัญญา" compact card on index.html links here with
+// ?book=ip — a pseudo-value covering 5 real books.
+function showIpBookPicker() {
+  document.querySelector('.search-header h1').textContent = '💡 เลือกฉบับกฎหมายทรัพย์สินทางปัญญา';
+  document.querySelector('.search-header p').textContent = 'เลือกฉบับที่ต้องการค้นหามาตรา';
+  document.getElementById('search-text').disabled = true;
+  document.getElementById('search-article').disabled = true;
+  const existing = document.getElementById('ip-book-picker');
+  if (existing) existing.remove();
+  const picker = document.createElement('div');
+  picker.id = 'ip-book-picker';
+  picker.className = 'book-selector';
+  picker.innerHTML = `
+    <button type="button" class="book-btn" onclick="pickIpBook('copyright')" onmouseenter="playHoverSound()">©️ ลิขสิทธิ์</button>
+    <button type="button" class="book-btn" onclick="pickIpBook('patent')" onmouseenter="playHoverSound()">🔬 สิทธิบัตร</button>
+    <button type="button" class="book-btn" onclick="pickIpBook('trademark')" onmouseenter="playHoverSound()">™️ เครื่องหมายการค้า</button>
+    <button type="button" class="book-btn" onclick="pickIpBook('carriage')" onmouseenter="playHoverSound()">🚢 การรับขนของทางทะเล</button>
+    <button type="button" class="book-btn" onclick="pickIpBook('ipcourt')" onmouseenter="playHoverSound()">⚖️ ศาลทรัพย์สินทางปัญญาฯ</button>
+  `;
+  document.querySelector('.search-container').appendChild(picker);
+}
+
+function pickIpBook(book) {
+  const picker = document.getElementById('ip-book-picker');
+  if (picker) picker.remove();
+  document.getElementById('search-text').disabled = false;
+  document.getElementById('search-article').disabled = false;
+  applyBookLock(book);
 }
 
 function pickAdminBook(book) {
@@ -1446,6 +1481,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const book = params.get('book');
   if (book === 'admin') {
     showAdminBookPicker();
+  } else if (book === 'ip') {
+    showIpBookPicker();
   } else if (book && BOOK_INFO[book]) {
     applyBookLock(book);
   }

@@ -1153,6 +1153,11 @@ const BOOK_TITLES = {
   admincourt: 'พระราชบัญญัติจัดตั้งศาลปกครองและวิธีพิจารณาคดีปกครอง',
   tortofficials: 'พระราชบัญญัติความรับผิดทางละเมิดของเจ้าหน้าที่',
   const2560: 'รัฐธรรมนูญแห่งราชอาณาจักรไทย พุทธศักราช 2560',
+  copyright: 'พระราชบัญญัติลิขสิทธิ์ พ.ศ. 2537',
+  patent: 'พระราชบัญญัติสิทธิบัตร พ.ศ. 2522',
+  trademark: 'พระราชบัญญัติเครื่องหมายการค้า พ.ศ. 2534',
+  carriage: 'พระราชบัญญัติการรับขนของทางทะเล พ.ศ. 2534',
+  ipcourt: 'พระราชบัญญัติจัดตั้งศาลทรัพย์สินทางปัญญาและการค้าระหว่างประเทศฯ พ.ศ. 2539',
 };
 
 let codexData = null;
@@ -1492,7 +1497,7 @@ async function loadAndRender() {
   currentNumber = id.slice(id.indexOf('_') + 1);
 
   try {
-    const res = await fetch('codex-data.json?v=20260731x');
+    const res = await fetch('codex-data.json?v=20260731y');
     if (!res.ok) throw new Error('fetch failed');
     codexData = await res.json();
   } catch (e) {
