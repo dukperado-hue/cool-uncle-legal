@@ -1250,19 +1250,25 @@ function renderLectureNotes(article) {
     </div>`;
 }
 
-const SUFFIX_RANK = { '': 0, 'ทวิ': 1, 'ตรี': 2, 'จัตวา': 3, 'เบญจ': 4, 'ฉ': 5, 'สัตต': 6, 'อัฏฐ': 7, 'นว': 8, 'ทศ': 9 };
+const SUFFIX_RANK = { '': 0, 'ทวิ': 1, 'ตรี': 2, 'จัตวา': 3, 'เบญจ': 4, 'ฉ': 5, 'สัตต': 6, 'อัฎฐ': 7, 'นว': 8, 'ทศ': 9 };
 
 function sortKey(numStr) {
   const spaceIdx = numStr.indexOf(' ');
   const numPart = spaceIdx === -1 ? numStr : numStr.slice(0, spaceIdx);
-  const suffix = spaceIdx === -1 ? '' : numStr.slice(spaceIdx + 1);
+  let suffix = spaceIdx === -1 ? '' : numStr.slice(spaceIdx + 1);
   const [main, sub] = numPart.split('/').map(Number);
-  return [main, sub || 0, SUFFIX_RANK[suffix] ?? 0];
+  let suffixSub = 0;
+  const suffixSlashIdx = suffix.indexOf('/');
+  if (suffixSlashIdx !== -1) {
+    suffixSub = Number(suffix.slice(suffixSlashIdx + 1)) || 0;
+    suffix = suffix.slice(0, suffixSlashIdx);
+  }
+  return [main, sub || 0, SUFFIX_RANK[suffix] ?? 0, suffixSub];
 }
 
 function compareNumbers(a, b) {
   const ka = sortKey(a), kb = sortKey(b);
-  for (let i = 0; i < 3; i++) if (ka[i] !== kb[i]) return ka[i] - kb[i];
+  for (let i = 0; i < 4; i++) if (ka[i] !== kb[i]) return ka[i] - kb[i];
   return 0;
 }
 
