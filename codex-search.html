@@ -185,6 +185,7 @@ h1,h2,h3{font-family:'Noto Serif Thai',serif}
 .book-btn:hover,.book-btn.active{
   border-color:var(--gold);background:var(--card);color:var(--ink);box-shadow:var(--shadow);
 }
+.book-btn.book-btn-sm{padding:8px 10px;font-size:11px;line-height:1.35;}
 
 .search-form{
   display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;
@@ -1095,11 +1096,11 @@ function showIpBookPicker() {
   picker.id = 'ip-book-picker';
   picker.className = 'book-selector';
   picker.innerHTML = `
-    <button type="button" class="book-btn" onclick="pickIpBook('copyright')" onmouseenter="playHoverSound()">©️ ลิขสิทธิ์</button>
-    <button type="button" class="book-btn" onclick="pickIpBook('patent')" onmouseenter="playHoverSound()">🔬 สิทธิบัตร</button>
-    <button type="button" class="book-btn" onclick="pickIpBook('trademark')" onmouseenter="playHoverSound()">™️ เครื่องหมายการค้า</button>
-    <button type="button" class="book-btn" onclick="pickIpBook('carriage')" onmouseenter="playHoverSound()">🚢 การรับขนของทางทะเล</button>
-    <button type="button" class="book-btn" onclick="pickIpBook('ipcourt')" onmouseenter="playHoverSound()">⚖️ ศาลทรัพย์สินทางปัญญาฯ</button>
+    <button type="button" class="book-btn book-btn-sm" onclick="pickIpBook('copyright')" onmouseenter="playHoverSound()">©️ พระราชบัญญัติลิขสิทธิ์ พ.ศ. ๒๕๓๗</button>
+    <button type="button" class="book-btn book-btn-sm" onclick="pickIpBook('patent')" onmouseenter="playHoverSound()">🔬 พระราชบัญญัติสิทธิบัตร พ.ศ. ๒๕๒๒</button>
+    <button type="button" class="book-btn book-btn-sm" onclick="pickIpBook('trademark')" onmouseenter="playHoverSound()">™️ พระราชบัญญัติเครื่องหมายการค้า พ.ศ. ๒๕๓๔</button>
+    <button type="button" class="book-btn book-btn-sm" onclick="pickIpBook('carriage')" onmouseenter="playHoverSound()">🚢 พระราชบัญญัติการรับขนของทางทะเล พ.ศ. ๒๕๓๔</button>
+    <button type="button" class="book-btn book-btn-sm" onclick="pickIpBook('ipcourt')" onmouseenter="playHoverSound()">⚖️ พระราชบัญญัติจัดตั้งศาลทรัพย์สินทางปัญญาและการค้าระหว่างประเทศ และวิธีพิจารณาคดีทรัพย์สินทางปัญญาและการค้าระหว่างประเทศ พ.ศ. ๒๕๓๙</button>
   `;
   document.querySelector('.search-container').appendChild(picker);
 }
