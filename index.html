@@ -264,10 +264,6 @@ h1,h2,h3{font-family:'Noto Serif Thai',serif}
 .subject-icon{
   font-size:32px;height:40px;display:flex;align-items:center;
 }
-.subject-code{
-  font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--ink-faint);
-  text-transform:uppercase;
-}
 .subject-name{
   font-size:15px;font-weight:700;color:var(--ink);line-height:1.3;
 }
@@ -731,66 +727,66 @@ function playHoverSound(){
 
 const SUBJECTS = {
   year2: [
-    { name: "Contract Law", code: "LA101", desc: "นิติกรรมและสัญญา", icon: "📜", href: "contract-law.html", status: "ready" },
-    { name: "Criminal General", code: "LA102", desc: "กฎหมายอาญาภาคทั่วไป", icon: "🔨", href: "crimgen.html", status: "ready" },
-    { name: "Tort Law", code: "LA103", desc: "กฎหมายละเมิด", icon: "⚡", href: "tort.html", status: "ready" },
-    { name: "Property", code: "LA104", desc: "ทรัพย์สิน", icon: "🏠", href: "property.html", status: "ready" },
-    { name: "Debt", code: "LA105", desc: "กฎหมายหนี้สิน", icon: "💰", href: "debt.html", status: "ready" },
-    { name: "Commercial Contract", code: "LA106", desc: "สัญญาทางพาณิชย์", icon: "💼", href: "commcontract.html", status: "ready" },
-    { name: "Criminal Liability", code: "LA107", desc: "ความผิดทางอาญา", icon: "⚠️", href: "crimliab.html", status: "coming-soon" },
+    { name: "Contract Law", desc: "นิติกรรมและสัญญา", icon: "📜", href: "contract-law.html", status: "ready" },
+    { name: "Criminal General", desc: "กฎหมายอาญาภาคทั่วไป", icon: "🔨", href: "crimgen.html", status: "ready" },
+    { name: "Tort Law", desc: "กฎหมายละเมิด", icon: "⚡", href: "tort.html", status: "ready" },
+    { name: "Property", desc: "ทรัพย์สิน", icon: "🏠", href: "property.html", status: "ready" },
+    { name: "Debt", desc: "กฎหมายหนี้สิน", icon: "💰", href: "debt.html", status: "ready" },
+    { name: "Commercial Contract", desc: "สัญญาทางพาณิชย์", icon: "💼", href: "commcontract.html", status: "ready" },
+    { name: "Criminal Liability", desc: "ความผิดทางอาญา", icon: "⚠️", href: "crimliab.html", status: "coming-soon" },
   ],
   year3: [
-    { name: "Family Law", code: "LA201", desc: "กฎหมายครอบครัว", icon: "👨‍👩‍👧", href: "familylaw.html", status: "ready" },
-    { name: "Inheritance", code: "LA202", desc: "กฎหมายมรดก", icon: "🏛️", href: "inheritance.html", status: "ready" },
-    { name: "Business Organization", code: "LA203", desc: "องค์กรธุรกิจ", icon: "🏢", href: "biz-org.html", status: "ready" },
-    { name: "Civil Procedure", code: "LA204", desc: "วิธีพิจารณาความแพ่ง", icon: "📋", href: "civpro.html", status: "ready" },
-    { name: "Legal History", code: "LA205", desc: "ประวัติศาสตร์กฎหมายไทย", icon: "📖", href: "legalhist.html", status: "ready" },
-    { name: "Legal Philosophy", code: "LA206", desc: "นิติศาสตร์และปรัชญา", icon: "🤔", href: "legalphil.html", status: "ready" },
-    { name: "Intl Commercial Law", code: "LA207", desc: "กฎหมายระหว่างประเทศแผนกคดีเมือง", icon: "🌍", href: "intlcommlaw.html", status: "coming-soon" },
-    { name: "Administrative Law", code: "LA208", desc: "กฎหมายปกครอง", icon: "🏛️", href: "adminlaw.html", status: "ready" },
-    { name: "Constitutional Law", code: "LA209", desc: "กฎหมายรัฐธรรมนูญ", icon: "📜", href: "constlaw.html", status: "ready" },
+    { name: "Family Law", desc: "กฎหมายครอบครัว", icon: "👨‍👩‍👧", href: "familylaw.html", status: "ready" },
+    { name: "Inheritance", desc: "กฎหมายมรดก", icon: "🏛️", href: "inheritance.html", status: "ready" },
+    { name: "Business Organization", desc: "องค์กรธุรกิจ", icon: "🏢", href: "biz-org.html", status: "ready" },
+    { name: "Civil Procedure", desc: "วิธีพิจารณาความแพ่ง", icon: "📋", href: "civpro.html", status: "ready" },
+    { name: "Legal History", desc: "ประวัติศาสตร์กฎหมายไทย", icon: "📖", href: "legalhist.html", status: "ready" },
+    { name: "Legal Philosophy", desc: "นิติศาสตร์และปรัชญา", icon: "🤔", href: "legalphil.html", status: "ready" },
+    { name: "Intl Commercial Law", desc: "กฎหมายระหว่างประเทศแผนกคดีเมือง", icon: "🌍", href: "intlcommlaw.html", status: "coming-soon" },
+    { name: "Administrative Law", desc: "กฎหมายปกครอง", icon: "🏛️", href: "adminlaw.html", status: "ready" },
+    { name: "Constitutional Law", desc: "กฎหมายรัฐธรรมนูญ", icon: "📜", href: "constlaw.html", status: "ready" },
   ],
   year4: [
-    { name: "Criminal Procedure", code: "LA311", desc: "วิธีพิจารณาความอาญา", icon: "🔍", href: "crimpro.html", status: "coming-soon", exam: "23 พ.ย. 2569" },
-    { name: "Admin & Const Procedure", code: "LA351", desc: "วิธีพิจารณาความปกครองและรัฐธรรมนูญ", icon: "⚙️", href: "constproc.html", status: "coming-soon", exam: "7 พ.ย. 2569" },
-    { name: "Legal English", code: "LA270", desc: "ภาษาอังกฤษของนักกฎหมาย", icon: "🌐", href: "legaleng.html", status: "coming-soon", exam: "28 พ.ย. 2569" },
-    { name: "Evidence", code: "LA312", desc: "กฎหมายลักษณะพยาน", icon: "🔬", href: "evidence.html", status: "ready" },
-    { name: "Private International Law", code: "LA313", desc: "กฎหมายระหว่างประเทศแผนกคดีบุคคล", icon: "🌏", href: "privateintl.html", status: "ready" },
-    { name: "Legal Profession", code: "LA314", desc: "หลักวิชาชีพสำหรับนักกฎหมาย", icon: "🧑‍⚖️", href: "legalprofession.html", status: "ready" },
-    { name: "Intellectual Property Law", code: "LA335", desc: "กฎหมายทรัพย์สินทางปัญญา", icon: "💡", href: "iplaw.html", status: "ready", exam: "28 พ.ย. 2569" },
-    { name: "Constitutional Court Cases", code: "LA259", desc: "ศาลรัฐธรรมนูญ", icon: "🏛️", href: "constcourt.html", status: "ready", exam: "1 ธ.ค. 2569" },
+    { name: "Criminal Procedure", desc: "วิธีพิจารณาความอาญา", icon: "🔍", href: "crimpro.html", status: "coming-soon", exam: "23 พ.ย. 2569" },
+    { name: "Admin & Const Procedure", desc: "วิธีพิจารณาความปกครองและรัฐธรรมนูญ", icon: "⚙️", href: "constproc.html", status: "coming-soon", exam: "7 พ.ย. 2569" },
+    { name: "Legal English", desc: "ภาษาอังกฤษของนักกฎหมาย", icon: "🌐", href: "legaleng.html", status: "coming-soon", exam: "28 พ.ย. 2569" },
+    { name: "Evidence", desc: "กฎหมายลักษณะพยาน", icon: "🔬", href: "evidence.html", status: "ready" },
+    { name: "Private International Law", desc: "กฎหมายระหว่างประเทศแผนกคดีบุคคล", icon: "🌏", href: "privateintl.html", status: "ready" },
+    { name: "Legal Profession", desc: "หลักวิชาชีพสำหรับนักกฎหมาย", icon: "🧑‍⚖️", href: "legalprofession.html", status: "ready" },
+    { name: "Intellectual Property Law", desc: "กฎหมายทรัพย์สินทางปัญญา", icon: "💡", href: "iplaw.html", status: "ready", exam: "28 พ.ย. 2569" },
+    { name: "Constitutional Court Cases", desc: "ศาลรัฐธรรมนูญ", icon: "🏛️", href: "constcourt.html", status: "ready", exam: "1 ธ.ค. 2569" },
   ],
   civil: [
-    { name: "Civil & Commercial Code", code: "NB-CIV1", desc: "กฎหมายแพ่งและพาณิชย์ทั้งหมด", icon: "📜", href: "#", status: "coming-soon" },
-    { name: "Intellectual Property", code: "NB-CIV2", desc: "ทรัพย์สินทางปัญญา", icon: "💡", href: "#", status: "coming-soon" },
-    { name: "International Trade Law", code: "NB-CIV3", desc: "กฎหมายค้าระหว่างประเทศ", icon: "🌍", href: "#", status: "coming-soon" },
+    { name: "Civil & Commercial Code", desc: "กฎหมายแพ่งและพาณิชย์ทั้งหมด", icon: "📜", href: "#", status: "coming-soon" },
+    { name: "Intellectual Property", desc: "ทรัพย์สินทางปัญญา", icon: "💡", href: "#", status: "coming-soon" },
+    { name: "International Trade Law", desc: "กฎหมายค้าระหว่างประเทศ", icon: "🌍", href: "#", status: "coming-soon" },
   ],
   criminal: [
-    { name: "Criminal Law", code: "NB-CRIM1", desc: "กฎหมายอาญา", icon: "🔨", href: "#", status: "coming-soon" },
-    { name: "Labor Law", code: "NB-CRIM2", desc: "กฎหมายแรงงาน", icon: "👷", href: "#", status: "coming-soon" },
-    { name: "Tax Law", code: "NB-CRIM3", desc: "กฎหมายภาษีอากร", icon: "💰", href: "#", status: "coming-soon" },
-    { name: "Constitutional Law", code: "NB-CRIM4", desc: "กฎหมายรัฐธรรมนูญ", icon: "📜", href: "#", status: "coming-soon" },
-    { name: "Administrative Law", code: "NB-CRIM5", desc: "กฎหมายปกครอง", icon: "🏛️", href: "#", status: "coming-soon" },
+    { name: "Criminal Law", desc: "กฎหมายอาญา", icon: "🔨", href: "#", status: "coming-soon" },
+    { name: "Labor Law", desc: "กฎหมายแรงงาน", icon: "👷", href: "#", status: "coming-soon" },
+    { name: "Tax Law", desc: "กฎหมายภาษีอากร", icon: "💰", href: "#", status: "coming-soon" },
+    { name: "Constitutional Law", desc: "กฎหมายรัฐธรรมนูญ", icon: "📜", href: "#", status: "coming-soon" },
+    { name: "Administrative Law", desc: "กฎหมายปกครอง", icon: "🏛️", href: "#", status: "coming-soon" },
   ],
   civpro: [
-    { name: "Civil Procedure", code: "NB-CIVPRO1", desc: "วิธีพิจารณาความแพ่ง", icon: "📋", href: "#", status: "coming-soon" },
-    { name: "Bankruptcy & Rehabilitation", code: "NB-CIVPRO2", desc: "กฎหมายล้มละลายและฟื้นฟูกิจการ", icon: "🏦", href: "#", status: "coming-soon" },
-    { name: "Courts Organization Act", code: "NB-CIVPRO3", desc: "พระธรรมนูญศาลยุติธรรม", icon: "🏛️", href: "#", status: "coming-soon" },
+    { name: "Civil Procedure", desc: "วิธีพิจารณาความแพ่ง", icon: "📋", href: "#", status: "coming-soon" },
+    { name: "Bankruptcy & Rehabilitation", desc: "กฎหมายล้มละลายและฟื้นฟูกิจการ", icon: "🏦", href: "#", status: "coming-soon" },
+    { name: "Courts Organization Act", desc: "พระธรรมนูญศาลยุติธรรม", icon: "🏛️", href: "#", status: "coming-soon" },
   ],
   crimproc: [
-    { name: "Criminal Procedure", code: "NB-CRIMPROC1", desc: "วิธีพิจารณาความอาญา", icon: "🔍", href: "#", status: "coming-soon" },
-    { name: "Evidence", code: "NB-CRIMPROC2", desc: "พยานหลักฐาน", icon: "🔬", href: "#", status: "coming-soon" },
-    { name: "Legal Document Drafting", code: "NB-CRIMPROC3", desc: "การจัดทำเอกสารทางกฎหมาย", icon: "📝", href: "#", status: "coming-soon" },
+    { name: "Criminal Procedure", desc: "วิธีพิจารณาความอาญา", icon: "🔍", href: "#", status: "coming-soon" },
+    { name: "Evidence", desc: "พยานหลักฐาน", icon: "🔬", href: "#", status: "coming-soon" },
+    { name: "Legal Document Drafting", desc: "การจัดทำเอกสารทางกฎหมาย", icon: "📝", href: "#", status: "coming-soon" },
   ]
 };
 
 /* EXAM DATES */
 const EXAM_DATES = [
-  { code: "LA351", date: "2569-11-07", time: "17:30", name: "Constitutional Procedural Law" },
-  { code: "LA311", date: "2569-11-23", time: "17:30", name: "Criminal Procedure" },
-  { code: "LA270", date: "2569-11-28", time: "17:30", name: "Legal English" },
-  { code: "LA335", date: "2569-11-28", time: "09:00", name: "Intellectual Property Law" },
-  { code: "LA259", date: "2569-12-01", time: "17:30", name: "Constitutional Court Cases" },
+  { date: "2569-11-07", time: "17:30", name: "Constitutional Procedural Law" },
+  { date: "2569-11-23", time: "17:30", name: "Criminal Procedure" },
+  { date: "2569-11-28", time: "17:30", name: "Legal English" },
+  { date: "2569-11-28", time: "09:00", name: "Intellectual Property Law" },
+  { date: "2569-12-01", time: "17:30", name: "Constitutional Court Cases" },
 ];
 
 /* RENDER FUNCTIONS */
@@ -802,7 +798,6 @@ function renderSubjects(category, containerId) {
     <a href="${s.href}" class="subject-card" ${s.status === 'coming-soon' ? 'onclick="return false;style.cursor=\'not-allowed\'"' : ''}>
       <div class="status-pill">${s.status === 'ready' ? '✓ พร้อม' : '⏳ เร็ว ๆ'}</div>
       <div class="subject-icon">${s.icon}</div>
-      <div class="subject-code">${s.code}</div>
       <div class="subject-name">${s.name}</div>
       <div class="subject-desc">${s.desc}</div>
       <div class="subject-cta">${s.status === 'ready' ? 'เข้าเรียน →' : 'กำลังจัดทำ'}</div>
@@ -877,7 +872,7 @@ function updateCountdown() {
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
   const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
-  el.textContent = `📅 สอบ ${exam.code} ${exam.name}: ${days}d ${hours}h`;
+  el.textContent = `📅 สอบ ${exam.name}: ${days}d ${hours}h`;
 }
 
 function rotateCountdown() {
