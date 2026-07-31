@@ -1081,14 +1081,18 @@ function applyBookLock(book) {
   }
 }
 
-// --- quick group-search (ป.พ.พ. only) -----------------------------------
-// Two filter shapes:
+// --- quick group-search (per-book topic buttons) -------------------------
+// Three filter shapes:
 //  - meta-based: { phaak, laksana } matched against article.meta (works
 //    even with gaps/sub-articles since it doesn't depend on numbering)
 //  - numberRange-based: { numberRange: [[start,end],...], exclude: [[s,e],...] }
 //    used where the real teaching boundary cuts across a ลักษณะ/หมวด instead
 //    of matching it exactly. Ranges compare via parseArticleKey() so
 //    sub-numbered articles like "193/5" sort correctly within their range.
+//  - numbers-based: { numbers: [...] } exact article.number match, for
+//    scattered non-contiguous lists (e.g. ม.4, ม.4 ทวิ, ม.55 together) where
+//    a numeric range would also sweep in unrelated sibling articles that
+//    happen to share the same integer part (ม.20 vs ม.20 ทวิ both key to 20).
 function parseArticleKey(numStr) {
   const parts = String(numStr).split('/');
   const main = parseInt(parts[0], 10);
@@ -1096,29 +1100,45 @@ function parseArticleKey(numStr) {
   return main + sub / 1000;
 }
 
-const GROUP_FILTERS = {
-  'นิติกรรมและสัญญา': [
-    { phaak: 'บรรพ 1', laksana: 'ลักษณะ 4' },
-    { phaak: 'บรรพ 2', laksana: 'ลักษณะ 2' },
-    { numberRange: [[193.001, 193.015], [193.030, 193.034]] },
-  ],
-  'หนี้': [{ phaak: 'บรรพ 2', laksana: 'ลักษณะ 1' }],
-  'ทรัพย์': [{ phaak: 'บรรพ 1', laksana: 'ลักษณะ 3' }, { phaak: 'บรรพ 4' }],
-  'ซื้อขาย': [{ numberRange: [[453, 517]], exclude: [[491, 502]] }],
-  'แลกเปลี่ยน': [{ numberRange: [[518, 520]] }],
-  'ให้': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 3' }],
-  'เช่าทรัพย์': [{ numberRange: [[537, 571]] }],
-  'เช่าซื้อ': [{ numberRange: [[572, 574]] }],
-  'ขายฝาก': [{ numberRange: [[491, 502]] }],
-  'ยืม': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 9' }],
-  'จ้างทำของ': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 7' }],
-  'ตัวแทน': [{ numberRange: [[798, 844]] }],
-  'ละเมิด': [{ phaak: 'บรรพ 2', laksana: 'ลักษณะ 5' }],
-  'ครอบครัว': [{ phaak: 'บรรพ 5' }],
-  'มรดก': [{ phaak: 'บรรพ 6' }],
+const GROUP_FILTERS_BY_BOOK = {
+  civil: {
+    'นิติกรรมและสัญญา': [
+      { phaak: 'บรรพ 1', laksana: 'ลักษณะ 4' },
+      { phaak: 'บรรพ 2', laksana: 'ลักษณะ 2' },
+      { numberRange: [[193.001, 193.015], [193.030, 193.034]] },
+    ],
+    'หนี้': [{ phaak: 'บรรพ 2', laksana: 'ลักษณะ 1' }],
+    'ทรัพย์': [{ phaak: 'บรรพ 1', laksana: 'ลักษณะ 3' }, { phaak: 'บรรพ 4' }],
+    'ซื้อขาย': [{ numberRange: [[453, 517]], exclude: [[491, 502]] }],
+    'แลกเปลี่ยน': [{ numberRange: [[518, 520]] }],
+    'ให้': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 3' }],
+    'เช่าทรัพย์': [{ numberRange: [[537, 571]] }],
+    'เช่าซื้อ': [{ numberRange: [[572, 574]] }],
+    'ขายฝาก': [{ numberRange: [[491, 502]] }],
+    'ยืม': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 9' }],
+    'จ้างทำของ': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 7' }],
+    'ตัวแทน': [{ numberRange: [[798, 844]] }],
+    'ละเมิด': [{ phaak: 'บรรพ 2', laksana: 'ลักษณะ 5' }],
+    'ครอบครัว': [{ phaak: 'บรรพ 5' }],
+    'มรดก': [{ phaak: 'บรรพ 6' }],
+  },
+  civpro: {
+    'อำนาจฟ้อง/เขตอำนาจศาล': [{ numbers: ['4', '4 ทวิ', '4 ตรี', '4 จัตวา', '4 เบญจ', '4 ฉ', '5', '7', '55', '56'] }],
+    'คำคู่ความ/ร้องสอด/ค่าฤชาธรรมเนียม': [{ numbers: ['1', '18', '57', '58', '59', '149', '156', '161'] }],
+    'ยื่น-ส่งคำคู่ความ': [{ numbers: ['67', '69', '73', '74', '75', '76', '78', '79'] }],
+    'คำให้การ/ฟ้องแย้ง/ถอนฟ้อง': [{ numberRange: [[174, 180]] }],
+    'นัดพิจารณา/ไกล่เกลี่ย': [{ numbers: ['19', '20 ทวิ', '138'] }],
+    'ฟ้องซ้อน/ฟ้องซ้ำ': [{ numbers: ['144', '148', '173'] }],
+    'คดีมโนสาเร่': [{ numbers: ['189', '190', '190 จัตวา', '191', '193', '193 ทวิ', '193 ตรี', '196'] }],
+    'ขาดนัด': [{ numbers: ['197', '198', '198 ทวิ', '198 ตรี', '199', '199 ตรี', '200', '201', '202', '204', '206', '207'] }],
+    'อุทธรณ์/ฎีกา': [{ numbers: ['223', '224', '225', '226', '227', '228', '244/1', '247', '249'] }],
+  },
 };
 
 function matchesGroupFilter(article, f, key) {
+  if (f.numbers) {
+    return f.numbers.includes(article.number);
+  }
   if (f.numberRange) {
     const inRange = f.numberRange.some(([s, e]) => key >= s && key <= e);
     if (!inRange) return false;
@@ -1132,14 +1152,15 @@ function matchesGroupFilter(article, f, key) {
 
 function renderGroupSearchButtons() {
   const row = document.getElementById('group-search-row');
-  if (!row || selectedBook !== 'civil') { if (row) row.innerHTML = ''; return; }
-  row.innerHTML = Object.keys(GROUP_FILTERS).map(name =>
+  const groupFilters = GROUP_FILTERS_BY_BOOK[selectedBook];
+  if (!row || !groupFilters) { if (row) row.innerHTML = ''; return; }
+  row.innerHTML = Object.keys(groupFilters).map(name =>
     `<button type="button" class="icon-btn" style="font-size:12px;padding:4px 10px" onclick="searchGroup('${name.replace(/'/g, "\\'")}')" onmouseenter="playHoverSound()">${name}</button>`
   ).join('');
 }
 
 function searchGroup(name) {
-  const filters = GROUP_FILTERS[name];
+  const filters = (GROUP_FILTERS_BY_BOOK[selectedBook] || {})[name];
   if (!filters || !codexData || !codexData.books[selectedBook]) return;
   document.getElementById('search-text').value = '';
   document.getElementById('search-article').value = '';
