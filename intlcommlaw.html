@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>กฎหมายระหว่างประเทศแผนกคดีเมือง · Cool Uncle Legal Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;800&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF9F4;
+  --card:#FDFCF8;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --gold-soft:#F3E8CF;
+  --ok:#1E7A4F;
+  --ok-bg:#E6F4EC;
+  --bad:#B23A3A;
+  --bad-bg:#FBEAEA;
+  --accent:#2E4A7A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+}
+
+/* ============ THEME: DARK ============ */
+:root[data-theme="dark"]{
+  --paper:#14161f;--card:#1c2030;--ink:#E9E7E1;--ink-soft:#A9AEC2;--ink-faint:#6C7188;
+  --line:#2E3348;--gold:#E0BD73;--gold-soft:#3A3320;--ok:#4FCB8D;--ok-bg:#173425;
+  --bad:#E2685F;--bad-bg:#3A1E1C;--accent:#84A6E8;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.45);
+}
+/* ============ THEME: HORROR (กระสือ mode) ============ */
+:root[data-theme="horror"]{
+  --paper:#0A070C;--card:#151019;--ink:#D9D2C9;--ink-soft:#9C8F93;--ink-faint:#5C5460;
+  --line:#2B1F26;--gold:#8F1F2B;--gold-soft:#301418;--ok:#3F7A4F;--ok-bg:#16241a;
+  --bad:#FF3355;--bad-bg:#301018;--accent:#4A8F5C;
+  --shadow:0 1px 2px rgba(0,0,0,.6),0 10px 28px rgba(0,0,0,.6);
+}
+:root[data-theme="dark"] body,:root[data-theme="horror"] body{background:var(--paper)}
+:root[data-theme="dark"] .home-bar,:root[data-theme="horror"] .home-bar{background:var(--card);border-bottom-color:var(--line)}
+:root[data-theme="dark"] .notice,:root[data-theme="horror"] .notice{background:rgba(255,255,255,.04)}
+:root[data-theme="dark"] .lecture-row:hover,:root[data-theme="horror"] .lecture-row:hover{border-color:var(--gold)}
+:root[data-theme="dark"] .mode-tab,:root[data-theme="horror"] .mode-tab{background:var(--card)}
+:root[data-theme="dark"] .case-card,:root[data-theme="horror"] .case-card{background:var(--card)}
+
+/* THEME TOGGLE */
+.theme-toggle{display:flex;gap:3px;margin-left:auto;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+.theme-toggle button{border:none;background:transparent;border-radius:999px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .2s;font-family:inherit}
+.theme-toggle button.active{background:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.theme-toggle button:hover{background:var(--line)}
+
+.drone-mute-btn{
+  display:none;
+  margin-left:6px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:999px;
+  width:28px;height:28px;
+  align-items:center;justify-content:center;
+  cursor:pointer;font-size:13px;
+}
+:root[data-theme="horror"] .drone-mute-btn{ display:flex; }
+:root[data-theme="horror"] .drone-mute-btn:hover{ background:var(--line); }
+
+/* GHOST COMPANION */
+.ghost-companion{position:fixed;right:16px;bottom:16px;width:200px;height:auto;pointer-events:auto;cursor:pointer;opacity:0;transform:translateY(8px);transition:opacity .6s ease;z-index:999;filter:drop-shadow(0 0 16px rgba(180,20,40,.45));animation:ghost-float 3.4s ease-in-out infinite}
+.ghost-companion.visible{opacity:1}
+.ghost-companion.pulse{filter:drop-shadow(0 0 26px rgba(180,20,40,.8)) drop-shadow(0 0 10px rgba(255,255,255,.3))}
+@keyframes ghost-float{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
+.ghost-speech{
+  position:fixed;max-width:200px;background:#fff;color:#1a1a1a;
+  border-radius:14px;padding:8px 13px;font-size:13px;font-weight:700;
+  font-family:'Sarabun',system-ui,sans-serif;line-height:1.4;
+  box-shadow:0 8px 20px rgba(0,0,0,.4);z-index:1000;
+  opacity:0;pointer-events:none;transform:translateY(6px) scale(.96);
+  transition:opacity .2s ease,transform .2s ease;text-align:center;
+}
+.ghost-speech.visible{opacity:1;transform:translateY(0) scale(1)}
+.ghost-speech::after{
+  content:"";position:absolute;right:28px;bottom:-8px;width:0;height:0;
+  border:8px solid transparent;border-top-color:#fff;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+.home-bar{
+  display:flex;align-items:center;gap:10px;
+  background:#EFEAE0;border-bottom:1px solid var(--line);
+  padding:10px 16px;font-size:13px;color:var(--ink-soft);
+}
+.home-bar-logo{
+  font-size:22px;line-height:1;display:inline-flex;align-items:center;
+  text-decoration:none;margin-right:2px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.12));
+  transition:transform .15s;
+}
+.home-bar-logo:hover{transform:scale(1.1)}
+.home-bar-link{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.home-bar-link:hover{text-decoration:underline}
+.home-bar-sep{color:var(--ink-faint)}
+.home-bar-current{font-weight:600;color:var(--ink-soft)}
+
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),var(--paper);
+  color:var(--ink);min-height:100vh;font-size:16px;line-height:1.75;
+}
+h1,h2{font-family:'Noto Serif Thai',serif}
+
+.wrap{max-width:860px;margin:0 auto;padding:28px 16px 60px}
+
+.page-head{text-align:center;margin-bottom:22px}
+.page-head .crest{
+  width:64px;height:64px;border-radius:50%;margin:0 auto 14px;
+  background:radial-gradient(circle at 32% 28%, #E7C983, var(--gold) 55%, #8F6511 100%);
+  display:flex;align-items:center;justify-content:center;font-size:28px;
+  box-shadow:0 6px 18px rgba(176,138,60,.35), inset 0 2px 3px rgba(255,255,255,.5);
+}
+.page-head h1{font-size:24px;font-weight:800;color:var(--ink)}
+.page-head .subtitle{color:var(--ink-soft);margin-top:8px;font-size:14.5px}
+
+.notice{
+  background:#FBF6E8;border:1.5px dashed var(--gold);border-radius:var(--radius);
+  padding:12px 16px;margin:20px 0;font-size:13px;color:var(--ink-soft);
+  display:flex;align-items:center;gap:10px;
+}
+
+/* mode tabs */
+.mode-tabs{display:flex;gap:8px;margin:18px 0;flex-wrap:wrap}
+.mode-tab{
+  flex:1;min-width:150px;background:#fff;border:1px solid var(--line);border-radius:12px;
+  padding:12px 14px;font-family:inherit;font-size:14px;font-weight:700;color:var(--ink-soft);
+  cursor:pointer;transition:all .15s;text-align:center;
+}
+.mode-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.mode-tab:hover:not(.active){border-color:var(--gold)}
+.mode-panel{display:none}
+.mode-panel.active{display:block}
+
+/* reading mode */
+.part-heading{
+  font-weight:800;color:var(--gold);font-size:13.5px;margin:22px 0 10px;
+  text-transform:uppercase;letter-spacing:.03em;
+}
+.part-heading:first-child{margin-top:0}
+.lecture-list{display:flex;flex-direction:column;gap:10px}
+.lecture-row{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.lecture-head{
+  display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;
+}
+.lecture-num{
+  width:34px;height:34px;flex-shrink:0;border-radius:50%;background:var(--gold-soft);
+  color:#8F6511;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13.5px;
+}
+.lecture-title{flex:1;font-weight:700;color:var(--ink);font-size:14.5px}
+.lecture-toggle{color:var(--ink-faint);font-size:13px;flex-shrink:0;transition:transform .2s}
+.lecture-row.open .lecture-toggle{transform:rotate(180deg)}
+.lecture-body{display:none;padding:0 16px 16px 64px;font-size:14px;color:var(--ink-soft);white-space:pre-line;line-height:1.75}
+.lecture-row.open .lecture-body{display:block}
+
+/* analysis mode */
+.case-list{display:flex;flex-direction:column;gap:14px}
+.case-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;box-shadow:var(--shadow);
+}
+.case-tag{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);background:var(--gold-soft);padding:3px 10px;border-radius:999px;margin-bottom:8px}
+.case-facts{font-weight:700;color:var(--ink);font-size:14.5px;margin-bottom:10px;line-height:1.6}
+.case-reveal-btn{
+  font-size:12.5px;font-weight:700;color:var(--accent);background:none;border:1px solid var(--line);
+  border-radius:999px;padding:6px 14px;cursor:pointer;font-family:inherit;
+}
+.case-reveal-btn:hover{background:var(--gold-soft);border-color:var(--gold)}
+.case-answer{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:13.5px;color:var(--ink-soft);white-space:pre-line;line-height:1.75}
+.case-card.open .case-answer{display:block}
+
+footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)}
+.coffee-widget{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  margin:28px auto 0;padding:18px;max-width:280px;
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+}
+.coffee-widget img{width:130px;height:130px;border-radius:8px;background:#fff;padding:6px}
+.coffee-widget a.coffee-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#FFDD00;color:#1a1a1a;font-weight:700;font-size:13px;
+  padding:8px 16px;border-radius:8px;text-decoration:none;transition:transform .15s;
+}
+.coffee-widget a.coffee-btn:hover{transform:scale(1.04)}
+.coffee-widget p{margin:0;font-size:12px;color:var(--ink-faint);text-align:center}
+.coffee-widget .data-source-note a{color:inherit}
+</style>
+</head>
+<body>
+<script>
+(function(){
+  try {
+    var t = localStorage.getItem('codex-theme');
+    if (t === 'dark' || t === 'horror') document.documentElement.setAttribute('data-theme', t);
+  } catch(e){}
+})();
+</script>
+<div class="home-bar">
+  <a href="index.html" class="home-bar-logo" title="กลับหน้าหลัก" onmouseenter="playHoverSound()">👴🏻</a>
+  <a href="index.html" class="home-bar-link" onmouseenter="playHoverSound()">← กลับหน้าหลัก</a>
+  <span class="home-bar-sep">·</span>
+  <span class="home-bar-current">กฎหมายระหว่างประเทศแผนกคดีเมือง</span>
+  <div class="theme-toggle" role="group" aria-label="เลือกธีม">
+    <button type="button" data-theme-btn="light" onclick="setTheme('light')" onmouseenter="playHoverSound()" title="โหมดสว่าง">☀️</button>
+    <button type="button" data-theme-btn="dark" onclick="setTheme('dark')" onmouseenter="playHoverSound()" title="โหมดมืด">🌙</button>
+    <button type="button" data-theme-btn="horror" onclick="setTheme('horror')" onmouseenter="playHoverSound()" title="โหมดสยองขวัญ">👻</button>
+  </div>
+  <button type="button" id="drone-mute-btn" class="drone-mute-btn" onclick="toggleDroneMute(this)" title="ปิด/เปิดเสียงเพลง">🔊</button>
+</div>
+<audio id="horror-bgm" loop preload="auto" playsinline webkit-playsinline style="display:none">
+  <source src="music/The_Cold_Stream_Lament.mp3" type="audio/mpeg">
+</audio>
+<audio id="dog-howl" preload="auto" playsinline webkit-playsinline style="display:none">
+  <source src="music/หมาหอน.mp3" type="audio/mpeg">
+</audio>
+
+<div class="wrap">
+  <header class="page-head">
+    <div class="crest">🌍</div>
+    <h1>กฎหมายระหว่างประเทศแผนกคดีเมือง</h1>
+    <p class="subtitle">สรุปเนื้อหาบรรยายรายครั้ง + โจทย์วิเคราะห์</p>
+  </header>
+
+  <div class="notice">⚠️ สรุปโดย AI จากเอกสารประกอบวิชา — โปรดตรวจสอบกับคำบรรยายจริงหรืออาจารย์ผู้สอนก่อนใช้อ้างอิง</div>
+
+  <div class="mode-tabs">
+    <button type="button" class="mode-tab active" data-mode="read" onclick="switchMode('read')" onmouseenter="playHoverSound()">📖 โหมดอ่าน</button>
+    <button type="button" class="mode-tab" data-mode="analyze" onclick="switchMode('analyze')" onmouseenter="playHoverSound()">🧩 โหมดวิเคราะห์โจทย์</button>
+  </div>
+
+  <div class="mode-panel active" id="panel-read">
+    <div class="lecture-list" id="lectureList"></div>
+  </div>
+
+  <div class="mode-panel" id="panel-analyze">
+    <div class="case-list" id="caseList"></div>
+  </div>
+
+  <div class="coffee-widget">
+  <p>ถ้าเว็บนี้มีประโยชน์ เลี้ยงกาแฟ Cool Uncle สักแก้วได้นะ ☕</p>
+  <img src="pics/coffee/bmc_qr.png" alt="QR code เลี้ยงกาแฟผ่าน Buy Me a Coffee" loading="lazy">
+  <a href="https://buymeacoffee.com/dukperadom" target="_blank" rel="noopener" class="coffee-btn" onmouseenter="playHoverSound()">☕ Buy Me a Coffee</a>
+  <p class="data-source-note">ข้อมูลกฎหมายอ้างอิงจากฐานข้อมูลกฤษฎีกา <a href="https://www.ocs.go.th/searchlaw-law" target="_blank" rel="noopener">https://www.ocs.go.th/searchlaw-law</a> · สืบค้นล่าสุด 31 กรกฎาคม 2569</p>
+</div>
+<footer>สร้างด้วย Claude · ⚠️ ใช้อ่านเสริมหลักสูตรเท่านั้น โปรดตรวจสอบความถูกต้องของข้อมูล · Cool Uncle Legal Lab 2024</footer>
+</div>
+
+<script>
+let __hbAudioCtx;
+function playHoverSound(){
+  try{
+    __hbAudioCtx = __hbAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __hbAudioCtx;
+    if(c.state === 'suspended') c.resume();
+    const t0 = c.currentTime;
+    const osc = c.createOscillator(), gain = c.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(0.05, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+0.09);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+0.1);
+  }catch(e){}
+}
+
+function switchMode(mode){
+  document.querySelectorAll('.mode-tab').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+  document.getElementById('panel-read').classList.toggle('active', mode === 'read');
+  document.getElementById('panel-analyze').classList.toggle('active', mode === 'analyze');
+}
+
+/* ================================================================
+   โหมดอ่าน — สรุปเนื้อหาบรรยาย 20 ครั้ง แบ่ง 4 ส่วนตามหัวข้อหลัก
+   ================================================================ */
+const LECTURES = [
+  { part: "ส่วนที่ 1 — พื้นฐานกฎหมายระหว่างประเทศ", n: 1, title: "สังคมระหว่างประเทศและกฎหมายระหว่างประเทศ", text:
+`หลักการสำคัญ: สังคมระหว่างประเทศมีลักษณะ "กระจายอำนาจ" (Decentralized) ต่างจากสังคมภายในที่รวมศูนย์อำนาจ เพราะไม่มีรัฐบาลโลกหรือองค์กรสูงสุดเหนือรัฐ รัฐทุกรัฐมีอำนาจอธิปไตยและความเท่าเทียมกันไม่ว่าขนาดหรืออำนาจทางเศรษฐกิจจะต่างกันเพียงใด
+
+หลักความยินยอมของรัฐ (State Consent): เนื่องจากไม่มีองค์กรอำนาจสูงสุดบังคับ กฎหมายระหว่างประเทศจึงตั้งอยู่บนความยินยอมของรัฐเป็นหลัก ทั้งการเกิดกฎเกณฑ์ การบังคับใช้ และการระงับข้อพิพาท
+
+ข้อยกเว้นของหลักความยินยอม — กฎหมายบังคับเด็ดขาด (Jus Cogens): บรรทัดฐานที่ประชาคมระหว่างประเทศยอมรับว่าเป็นคุณค่าพื้นฐานสูงสุด รัฐตกลงทำสนธิสัญญาเพื่อละเมิดไม่ได้ (เช่น ห้ามค้าทาส ห้ามฆ่าล้างเผ่าพันธุ์ ห้ามรุกราน)` },
+  { part: "ส่วนที่ 1 — พื้นฐานกฎหมายระหว่างประเทศ", n: 2, title: "บ่อเกิดของกฎหมายระหว่างประเทศ", text:
+`หลักการสำคัญ: ธรรมนูญศาลยุติธรรมระหว่างประเทศ (ICJ) มาตรา 38 ถือเป็นรายชื่อ "บ่อเกิด" ของกฎหมายระหว่างประเทศ แบ่งเป็นบ่อเกิดหลัก 3 อย่าง: (1) สนธิสัญญา (2) จารีตประเพณีระหว่างประเทศ (3) หลักกฎหมายทั่วไป และเครื่องมือช่วยชี้กฎหมาย (คำพิพากษาศาล + คำสอนนักนิติศาสตร์)
+
+จารีตประเพณีระหว่างประเทศ (CIL) ต้องมี 2 องค์ประกอบ: (1) ทางปฏิบัติทั่วไปของรัฐ (General Practice) — ต้องแพร่หลายและสม่ำเสมอ ไม่จำเป็นต้องใช้เวลานานหากปฏิบัติกว้างขวางและรัฐที่ได้รับผลกระทบพิเศษยึดถือด้วย (North Sea Continental Shelf Case) (2) การยอมรับว่าเป็นกฎหมาย (Opinio Juris) — ต้องกระทำด้วยความเชื่อว่ามีพันธกรณีตามกฎหมาย ไม่ใช่แค่ธรรมเนียมทางการทูตหรือมารยาท
+
+ข้อสังเกต: จารีตประเพณีอาจเป็นระดับภูมิภาคหรือระหว่าง 2 รัฐก็ได้ (Right of Passage Case, Asylum Case) และรัฐที่คัดค้านอย่างสม่ำเสมอตั้งแต่กฎเกณฑ์กำลังก่อตัว (Persistent Objector) จะไม่ถูกผูกพัน
+
+หลักกฎหมายทั่วไปที่อารยประเทศยอมรับ: ช่วยอุดช่องว่างเมื่อไม่มีสนธิสัญญาหรือจารีตประเพณีครอบคลุม เช่น หลักสุจริต หลักกฎหมายปิดปาก (Estoppel) หลักละเมิดพันธกรณีต้องชดใช้ความเสียหาย` },
+  { part: "ส่วนที่ 1 — พื้นฐานกฎหมายระหว่างประเทศ", n: 3, title: "สนธิสัญญา (1) — ความหมาย กระบวนการจัดทำ ข้อสงวน", text:
+`หลักการสำคัญ: สนธิสัญญาตาม VCLT 1969 คือข้อตกลงระหว่างรัฐ เป็นลายลักษณ์อักษร อยู่ภายใต้กฎหมายระหว่างประเทศ ไม่ว่าเรียกชื่อว่าอะไร (อนุสัญญา กติกา พิธีสาร กฎบัตร)
+
+กระบวนการจัดทำ: เจรจา/ยกร่าง → รับตัวบทและยืนยันความถูกต้อง (ลงนามอาจยังไม่ผูกพัน) → แสดงเจตนายินยอมผูกพัน (ลงนาม/ให้สัตยาบัน/การภาคยานุวัติ)
+
+ข้อสงวน (Reservations): คำประกาศฝ่ายเดียวเพื่อยกเว้นหรือแก้ไขผลบางข้อบท ทำได้เว้นแต่สนธิสัญญาห้ามไว้ หรือขัดต่อวัตถุประสงค์และเป้าหมายของสนธิสัญญา ผลทางกฎหมายขึ้นกับปฏิกิริยาของรัฐอื่น: ยอมรับ = ผูกพันตามที่แก้ไข, คัดค้านและปฏิเสธทั้งฉบับ = สนธิสัญญาไม่มีผลระหว่างกันเลย, คัดค้านเฉพาะข้อสงวน = เฉพาะข้อนั้นไม่ใช้บังคับ` },
+  { part: "ส่วนที่ 1 — พื้นฐานกฎหมายระหว่างประเทศ", n: 4, title: "สนธิสัญญา (2) — ความไม่สมบูรณ์ การตีความ การสิ้นสุด", text:
+`ความไม่สมบูรณ์ของสนธิสัญญา: (1) ความบกพร่องของเจตนา (ปราศจากอำนาจ สำคัญผิด กลฉ้อฉล ทุจริต) = โมฆะแยกส่วนได้ (2) การบังคับข่มขู่ผู้แทนรัฐหรือใช้กำลังทหาร = โมฆะทั้งฉบับ (3) ขัดต่อ Jus Cogens = โมฆะตั้งแต่แรก
+
+การตีความสนธิสัญญา (VCLT ข้อ 31-33): กฎเกณฑ์ทั่วไป (ข้อ 31) ตีความโดยสุจริตตามความหมายปกติของถ้อยคำ พิจารณาบริบทและวัตถุประสงค์ วิธีเสริม (ข้อ 32) ใช้เมื่อความหมายกำกวม — พิจารณางานเตรียมร่าง (Travaux Préparatoires) หลายภาษา (ข้อ 33) แต่ละภาษาผูกพันเท่าเทียมกัน
+
+การสิ้นสุดของสนธิสัญญา 3 สาเหตุ: (1) เจตนาของภาคี (ตกลงเลิก หรือทำสัญญาใหม่ขัดแย้งกับของเดิม) (2) เหตุภายนอก — การปฏิบัติตกเป็นพ้นวิสัย (Impossibility) หรือการเปลี่ยนแปลงสถานการณ์รากฐาน (Rebus Sic Stantibus — อ้างไม่ได้กับสนธิสัญญาเขตแดน) (3) การละเมิดพันธกรณีสำคัญอย่างร้ายแรง (Material Breach)` },
+  { part: "ส่วนที่ 1 — พื้นฐานกฎหมายระหว่างประเทศ", n: 5, title: "กฎหมายระหว่างประเทศที่มีลักษณะพิเศษ และ Soft Law", text:
+`Jus Cogens (VCLT ข้อ 53): บรรทัดฐานที่ตกลงแตกต่างในทางลดทอนมิได้ มีลำดับศักดิ์สูงกว่ากฎเกณฑ์อื่น สนธิสัญญาที่ขัดย่อมเป็นโมฆะ (ทั้งขัดตั้งแต่แรกตามข้อ 53 และเกิด Jus Cogens ใหม่ภายหลังตามข้อ 64)
+
+พันธกรณี Erga Omnes: พันธกรณีที่มีต่อประชาคมระหว่างประเทศโดยรวม ต่างจากพันธกรณีต่างตอบแทนปกติ — ทุกรัฐมีสถานะผู้ทรงสิทธิ แม้ไม่ใช่ผู้เสียหายโดยตรงก็เรียกร้องความรับผิดได้
+
+กฎบัตรสหประชาชาติ: มีสถานะพิเศษเหนือสนธิสัญญาอื่นตามมาตรา 103 (พันธกรณีตามกฎบัตรชนะเมื่อขัดกัน) และมาตรา 2(6) ให้ผูกพันแม้รัฐที่ไม่ได้เป็นสมาชิกเท่าที่จำเป็นเพื่อสันติภาพ — เป็นข้อยกเว้นหลักความยินยอมที่ชัดเจน
+
+Soft Law: (1) บรรทัดฐานที่ยังไม่ผูกพันแต่ "ควรเป็นกฎหมาย" ในอนาคต (ปฏิญญา/ข้อมติ) (2) ถ้อยคำในตราสารที่เป็นกฎหมายแต่เขียนกว้าง/ยืดหยุ่น ทำให้สภาพบังคับอ่อน` },
+  { part: "ส่วนที่ 1 — พื้นฐานกฎหมายระหว่างประเทศ", n: 6, title: "ความสัมพันธ์ระหว่างกฎหมายระหว่างประเทศและกฎหมายภายใน", text:
+`ทฤษฎีเอกนิยม (Monism): กฎหมายระหว่างประเทศและกฎหมายภายในอยู่ระบบเดียวกัน มีผลบังคับในรัฐได้โดยตรง ศาลภายในหยิบยกมาปรับใช้ได้เลยไม่ต้องแปลงสภาพ
+
+ทฤษฎีทวินิยม (Dualism): อยู่คนละระบบกันสิ้นเชิง กฎหมายระหว่างประเทศไม่กระทบกิจการภายในจนกว่าจะอนุวัติการเป็นกฎหมายภายในก่อน ตั้งอยู่บนหลักเคารพอำนาจอธิปไตย
+
+ทางปฏิบัติจริง: รัฐส่วนใหญ่ผสมผสานแยกตามบ่อเกิด — สนธิสัญญามักใช้ทวินิยม (ต้องออกกฎหมายอนุวัติการก่อน ไทยก็ใช้ระบบนี้กับสนธิสัญญา) ส่วนจารีตประเพณีและหลักกฎหมายทั่วไปมักใช้เอกนิยม (ปรับใช้ได้เลย)
+
+สถานะกฎหมายภายในต่อหน้าศาลระหว่างประเทศ: รัฐอ้างกฎหมายภายในเพื่อหลีกเลี่ยงความรับผิดไม่ได้ (ARSIWA ข้อ 3) กฎหมายภายในเป็นเพียง "ข้อเท็จจริง" ที่ต้องนำสืบ แต่ใช้เป็นหลักฐานของทางปฏิบัติทั่วไป/Opinio Juris ได้` },
+
+  { part: "ส่วนที่ 2 — ความเป็นรัฐและการใช้กำลัง", n: 7, title: "ความเป็นรัฐ (Statehood) และการรับรองรัฐ", text:
+`องค์ประกอบของรัฐ (อนุสัญญามอนเตวิเดโอ 1933 ข้อ 1) มี 4 ประการ: (1) ประชากรประจำ — ไม่กำหนดจำนวนขั้นต่ำ (2) ดินแดนที่กำหนดแน่นอน — ไม่ต้องมีเขตแดนชัดเจนทุกจุด (3) รัฐบาลที่มีประสิทธิภาพควบคุม (4) ความสามารถดำเนินความสัมพันธ์กับรัฐอื่น
+
+การรับรองรัฐ 2 ทฤษฎี: ทฤษฎีประกาศ (Declaratory) — การรับรองเป็นเพียงประกาศข้อเท็จจริง มีองค์ประกอบครบ 4 ก็เป็นรัฐแล้ว (สอดคล้องมาตรา 3 ของอนุสัญญาฯ) / ทฤษฎีก่อตั้ง (Constitutive) — ต้องได้รับการรับรองจากรัฐอื่นจึงจะมีสภาพบุคคลตามกฎหมายระหว่างประเทศ (มีประโยชน์อธิบายกรณีรัฐหมู่เกาะที่กำลังจมน้ำ เช่น คิริบาส ตูวาลู)` },
+  { part: "ส่วนที่ 2 — ความเป็นรัฐและการใช้กำลัง", n: 8, title: "เขตแดน (Territory)", text:
+`เขตแดนทางอากาศ: อำนาจอธิปไตยเด็ดขาดเหนือน่านฟ้าเหนือพื้นดิน/ทะเลอาณาเขต ส่วนอวกาศเป็นพื้นที่ส่วนรวมของมนุษยชาติ อ้างอธิปไตยไม่ได้
+
+เขตแดนทางทะเล (UNCLOS) — ยิ่งใกล้ฝั่งยิ่งมีอำนาจมาก: ทะเลอาณาเขต (ไม่เกิน 12 ไมล์ทะเล) อธิปไตยสมบูรณ์แต่ต้องให้เรือต่างชาติผ่านโดยสุจริต / เขตต่อเนื่อง (24 ไมล์) อำนาจจำกัด 4 เรื่อง (ศุลกากร การคลัง ตรวจคนเข้าเมือง สาธารณสุข) / EEZ (200 ไมล์) และไหล่ทวีป มี "สิทธิอธิปไตย" แสวงประโยชน์ทรัพยากร / ทะเลหลวง เสรีภาพเดินเรือ ไม่มีรัฐใดมีอธิปไตย
+
+การได้มาซึ่งดินแดนทางบก: Terra Nullius + Occupation (ดินแดนไม่มีเจ้าของ), Effective Control (ควบคุมต่อเนื่อง สงบ เปิดเผย มีประสิทธิผล — คดี Island of Palmas), Cession (โอนดินแดนโดยสนธิสัญญา)` },
+  { part: "ส่วนที่ 2 — ความเป็นรัฐและการใช้กำลัง", n: 9, title: "การใช้กำลังเพื่อป้องกันตนเองของรัฐ", text:
+`หลักห้ามใช้กำลัง (กฎบัตร UN มาตรา 2(4)): ห้ามใช้หรือขู่ใช้กำลังทหารละเมิดบูรณภาพดินแดน/เอกราชทางการเมืองของรัฐอื่น — ปัจจุบันเป็นทั้งจารีตประเพณีและ Jus Cogens
+
+ข้อยกเว้น 2 กรณี: (1) การป้องกันตนเอง (มาตรา 51) (2) การใช้กำลังร่วมผ่าน UNSC ตามหมวด 7
+
+เงื่อนไขป้องกันตนเอง: ต้องถูกโจมตีด้วยกำลังอาวุธแล้ว (Armed attack occurs), เป็นสิทธิชั่วคราวจนกว่า UNSC จะดำเนินมาตรการ, ต้องรายงาน UNSC ทันที + ตามจารีตประเพณี (คดี Caroline) ต้องมีความจำเป็นเร่งด่วน (Necessity) และได้สัดส่วน (Proportionality)
+
+Armed Attack ต้องรุนแรงระดับสูง (คดี Nicaragua) — แค่สนับสนุนเงิน/อาวุธ/ฝึกกบฏไม่ถึงขั้น Armed Attack (อาจผิดฐานแทรกแซงกิจการภายในแทน) การป้องกันตนเองล่วงหน้า (Anticipatory) ยังเป็นข้อถกเถียง ต้องมีภัยคุกคาม "ใกล้จะเกิดขึ้นอย่างหลีกเลี่ยงไม่ได้"` },
+  { part: "ส่วนที่ 2 — ความเป็นรัฐและการใช้กำลัง", n: 10, title: "องค์การสหประชาชาติเพื่อรักษาสันติภาพและความมั่นคง", text:
+`คณะมนตรีความมั่นคง (UNSC): มาตรา 24 ให้ความรับผิดชอบขั้นต้นในการธำรงสันติภาพ กระทำการแทนสมาชิกทั้งหมด สมาชิกถาวร 5 ชาติ (P5) มีอำนาจวีโต้
+
+กลไกหมวด 7: มาตรา 39 — UNSC วินิจฉัยว่าเป็นการคุกคามสันติภาพ/ละเมิดสันติภาพ/การรุกรานหรือไม่ก่อน มาตรา 41 — มาตรการไม่ใช้กำลัง (คว่ำบาตร ตัดสัมพันธ์ทางการทูต) มาตรา 42 — มาตรการใช้กำลังทหารเมื่อมาตรา 41 ไม่พอ
+
+ผลผูกพัน: มาตรา 25 สมาชิกต้องปฏิบัติตามข้อมติ UNSC มาตรา 103 พันธกรณีตามกฎบัตร (รวมข้อมติ UNSC) เหนือกว่าสนธิสัญญาอื่น
+
+กองกำลังรักษาสันติภาพ (Peacekeeping): ไม่ได้อยู่ในหมวด 6 หรือ 7 ชัดเจน เข้าไปหลังความขัดแย้งเพื่อสังเกตการณ์/ฟื้นฟู ไม่ติดอาวุธหรือติดเบา ใช้กำลังได้เพียงป้องกันตนเอง` },
+
+  { part: "ส่วนที่ 3 — เขตอำนาจ ความรับผิด และการระงับข้อพิพาท", n: 11, title: "เขตอำนาจของรัฐ (Jurisdiction)", text:
+`ความหมาย: อำนาจรัฐในการกำกับบุคคล/ทรัพย์/เหตุการณ์ผ่านกฎหมายภายใน แบ่ง 3 ประเภท: Prescriptive (ออกกฎหมาย) / Enforcement (บังคับใช้) / Adjudicative (ชี้ขาดคดี)
+
+หลักเกณฑ์อ้างเขตอำนาจออกกฎหมาย 4 หลัก: (1) หลักดินแดน (Territoriality) — เกิดหรือผลสำเร็จในดินแดน (2) หลักบุคคล (Personality) — เชิงรุก (ผู้กระทำเป็นคนชาติตน) / เชิงรับ (เหยื่อเป็นคนชาติตน) (3) หลักป้องกัน (Protective) — กระทบความมั่นคง/ผลประโยชน์สำคัญของรัฐ (4) หลักสากล (Universal) — ความผิดร้ายแรงระดับประชาคมโลก (โจรสลัด อาชญากรรมสงคราม ฆ่าล้างเผ่าพันธุ์ ทรมาน) ไม่ต้องมีจุดเกาะเกี่ยวใดๆ
+
+เขตอำนาจบังคับใช้กฎหมาย: ต้องกระทำในดินแดนตนเท่านั้น ส่งเจ้าหน้าที่ไปบังคับในดินแดนรัฐอื่นไม่ได้ เว้นแต่ได้รับความยินยอมหรือมีสนธิสัญญาอนุญาต` },
+  { part: "ส่วนที่ 3 — เขตอำนาจ ความรับผิด และการระงับข้อพิพาท", n: 12, title: "ความคุ้มกันจากเขตอำนาจของรัฐ (State Immunity)", text:
+`หลักการ: "ผู้ที่เสมอกัน ย่อมไม่มีอำนาจเหนือกัน" (Par in parem non habet imperium) แบ่ง 3 ประเภท
+
+ความคุ้มกันในคดีแพ่ง: ปัจจุบันเป็น Restrictive Immunity — คุ้มกันเฉพาะการกระทำในทางอำนาจรัฐ (Acta jure imperii) ไม่คุ้มกันเมื่อ: ธุรกรรมเชิงพาณิชย์, สัญญาจ้างแรงงาน, ทำละเมิดในดินแดนรัฐศาล — แม้ถูกกล่าวหาละเมิดสิทธิมนุษยชนร้ายแรง (ขัด Jus Cogens) ก็ยังอ้างความคุ้มกันคดีแพ่งได้ (คดี Germany v. Italy 2012)
+
+ความคุ้มกันเจ้าหน้าที่รัฐในคดีอาญา (คดี Arrest Warrant): Immunity ratione personae — Troika 3 ตำแหน่ง (ประมุขรัฐ/หัวหน้ารัฐบาล/รมว.ต่างประเทศ) คุ้มกันเบ็ดเสร็จทุกการกระทำระหว่างดำรงตำแหน่ง / Immunity ratione materiae — เจ้าหน้าที่ทั่วไปคุ้มกันเฉพาะการกระทำในหน้าที่
+
+ความคุ้มกันทางการทูต (VCDR 1961): สถานที่คณะทูตล่วงละเมิดมิได้ ตัวนักการทูต — คดีอาญาคุ้มกันเบ็ดเสร็จ คดีแพ่ง/ปกครองคุ้มกันเว้น 3 กรณี (อสังหาริมทรัพย์ส่วนตัว, มรดกในฐานะส่วนตัว, กิจกรรมพาณิชย์นอกหน้าที่)` },
+  { part: "ส่วนที่ 3 — เขตอำนาจ ความรับผิด และการระงับข้อพิพาท", n: 13, title: "ความรับผิดของรัฐ (1) — องค์ประกอบและพฤติการณ์ยกเว้น", text:
+`ARSIWA (2001, ILC): ปัจจุบันเป็นจารีตประเพณีระหว่างประเทศ ใช้เป็นกฎกลางเรื่องความรับผิดของรัฐทุกสาขา แยก "Responsibility" (ฝ่าฝืนกฎหมาย) กับ "Liability" (ความรับผิดเด็ดขาดแม้ไม่ฝ่าฝืน)
+
+องค์ประกอบ 2 อย่าง: (1) การกระทำถือเป็นของรัฐ (Attribution) — องค์กรของรัฐ (ข้อ 4), องค์กรที่ได้รับมอบอำนาจใช้อำนาจรัฐ (ข้อ 5), การกระทำภายใต้การควบคุมอย่างมีประสิทธิผลของรัฐ (ข้อ 8), การกระทำที่รัฐรับรองภายหลัง (ข้อ 11 — คดี Tehran Hostages) (2) ฝ่าฝืนพันธกรณีระหว่างประเทศ
+
+พฤติการณ์ยกเว้นความผิด (ไม่ทำให้พันธกรณีสิ้นสุด): ความยินยอม (ข้อ 20), การป้องกันตนเอง (ข้อ 21), มาตรการตอบโต้ (Countermeasures ข้อ 22 — ต้องได้สัดส่วน ห้ามใช้กำลัง ห้ามละเมิด Jus Cogens), เหตุสุดวิสัย (ข้อ 23), เหตุภยันตราย (ข้อ 24), ความจำเป็น (ข้อ 25)` },
+  { part: "ส่วนที่ 3 — เขตอำนาจ ความรับผิด และการระงับข้อพิพาท", n: 14, title: "ความรับผิดของรัฐ (2) — ผลของความรับผิดและการบังคับการ", text:
+`ผลของการกระทำผิด: (1) ยุติการกระทำและให้หลักประกันไม่ทำซ้ำ (ข้อ 30) (2) เยียวยาให้สมบูรณ์ (Full Reparation ข้อ 31) แบ่ง 3 รูปแบบตามลำดับ: การคืนสภาพเดิม (Restitution) → ชดใช้ค่าสินไหม (Compensation) → การทำให้พอใจ (Satisfaction — เช่น ขอโทษอย่างเป็นทางการ)
+
+ผู้มีสิทธิเรียกร้องความรับผิด: รัฐผู้เสียหายโดยตรง (ข้อ 42) และรัฐอื่นที่ไม่ใช่ผู้เสียหายโดยตรง (ข้อ 48) หากละเมิดพันธกรณี Erga Omnes Partes (ต่อกลุ่มรัฐภาคี เช่น สนธิสัญญาต่อต้านทรมาน — คดี Belgium v. Senegal) หรือ Erga Omnes (ต่อประชาคมโลก เช่น ฆ่าล้างเผ่าพันธุ์ — คดี Gambia v. Myanmar)` },
+  { part: "ส่วนที่ 3 — เขตอำนาจ ความรับผิด และการระงับข้อพิพาท", n: 16, title: "สถานะของบุคคลธรรมดาและบริษัทในกฎหมายระหว่างประเทศ", text:
+`พัฒนาการ: อดีตบุคคล/บริษัทไม่มีสิทธิหน้าที่โดยตรง เป็น "วัตถุ" ของกฎหมาย ปัจจุบันมี "สภาพบุคคลแบบจำกัด" — เป็นผู้ทรงสิทธิ/หน้าที่ได้เมื่อมีกฎหมายระหว่างประเทศรับรองไว้เฉพาะ
+
+มาตรฐานขั้นต่ำระหว่างประเทศ: รัฐต้องปฏิบัติต่อคนต่างด้าว/บริษัทต่างชาติไม่ต่ำกว่ามาตรฐานสากล (ปฏิเสธเข้าถึงกระบวนการยุติธรรม จับกุมมิชอบ เวนคืนไม่จ่ายชดเชย = ละเมิด)
+
+สิทธิของนักลงทุนต่างชาติ: มาตรฐาน Fair and Equitable Treatment (FET) และกลไก Investor-State Dispute Settlement (ISDS) ให้นักลงทุนฟ้องรัฐโดยตรงได้ผ่านอนุญาโตตุลาการ
+
+การให้ความคุ้มครองทางการทูต (Diplomatic Protection): เป็น "สิทธิของรัฐ" ไม่ใช่สิทธิเอกชน รัฐมีดุลพินิจเต็มที่ เงื่อนไข: (1) สัญชาติต่อเนื่อง + จุดเกาะเกี่ยวแท้จริง (Genuine connection — คดี Nottebohm) สำหรับบุคคล / จุดเกาะเกี่ยวใกล้ชิดถาวรสำหรับนิติบุคคล (คดี Barcelona Traction) (2) ใช้ช่องทางเยียวยาภายในให้หมดสิ้นก่อน (Exhaustion of Local Remedies)` },
+  { part: "ส่วนที่ 3 — เขตอำนาจ ความรับผิด และการระงับข้อพิพาท", n: 17, title: "การระงับข้อพิพาทระหว่างประเทศ", text:
+`หลักการพื้นฐาน: รัฐมีหน้าที่ระงับข้อพิพาทโดยสันติวิธี ห้ามใช้กำลัง (กฎบัตร UN ข้อ 2(3), 33) และมีเสรีภาพเลือกวิธีการ (Free choice of means) — ศาลไม่มีเขตอำนาจหากรัฐไม่ยินยอม
+
+วิธีทางการทูต (ไม่ผูกพันทางกฎหมาย): การเจรจา, การไต่สวน, การไกล่เกลี่ย/สื่อกลาง, การประนีประนอม
+
+วิธีทางกฎหมาย (ผูกพันทางกฎหมาย): อนุญาโตตุลาการ (เลือกผู้พิจารณาและวิธีพิจารณาเองได้) และศาลระหว่างประเทศถาวร (เช่น ICJ)
+
+ศาลยุติธรรมระหว่างประเทศ (ICJ): คดีมีข้อพิพาท — เฉพาะรัฐเป็นคู่ความได้ ต้องได้รับความยินยอม 4 วิธี: ข้อตกลงพิเศษ (Compromis), ข้อบทในสนธิสัญญา (Compromissory Clause), ประกาศยอมรับเขตอำนาจล่วงหน้า (Optional Clause ตามมาตรา 36(2)), ความยินยอมโดยปริยาย (Forum Prorogatum) ความเห็นเชิงแนะนำ (Advisory Opinion) — ตอบเฉพาะองค์กร UN/ทบวงชำนาญพิเศษ ไม่ผูกพันทางกฎหมายแต่มีน้ำหนักสูง` },
+
+  { part: "ส่วนที่ 4 — กฎหมายเศรษฐกิจระหว่างประเทศ", n: 18, title: "กฎหมายเศรษฐกิจระหว่างประเทศ — บททั่วไปและ WTO", text:
+`แนวคิดพื้นฐาน: ระบบ WTO สนับสนุนการเปิดเสรีทางการค้า ลดการกีดกันทางการค้า
+
+หลักการสำคัญของ WTO 5 ข้อ: (1) ต่างตอบแทน (Reciprocity) ป้องกัน Free Rider (2) ความผูกพันบังคับใช้ได้ — Single Undertaking เลือกรับเฉพาะบางฉบับไม่ได้ (3) ความโปร่งใส (4) การไม่เลือกปฏิบัติ (MFN + NT) (5) เคารพอำนาจอธิปไตยรัฐผ่านข้อยกเว้น
+
+กลไกระงับข้อพิพาท (DSU): ลักษณะกึ่งตุลาการ ผสมการทูตกับกระบวนการบังคับ หากแพ้คดีและไม่แก้กฎหมาย ใช้ "การงดเว้นสิทธิประโยชน์" (ตอบโต้ทางการค้า) แทนการปรับเป็นเงิน` },
+  { part: "ส่วนที่ 4 — กฎหมายเศรษฐกิจระหว่างประเทศ", n: 19, title: "หลักการไม่เลือกปฏิบัติ — MFN และ National Treatment", text:
+`MFN (มาตรา I:1 GATT): ควบคุมการเลือกปฏิบัติ ณ จุดผ่านแดน — สิทธิประโยชน์ทางภาษี/นำเข้าส่งออกที่ให้สินค้าประเทศหนึ่ง ต้องให้สินค้าที่เหมือนกัน (Like Products) จากสมาชิกอื่นทันทีไม่มีเงื่อนไข ครอบคลุมทั้งเลือกปฏิบัติชัดแจ้ง (De jure) และแอบแฝง (De facto — คดี Canada-Auto) การพิจารณา Like Products (คดี Spain-Unroasted Coffee) ดู 4 ปัจจัย: ลักษณะทางกายภาพ, การใช้ประโยชน์, พิกัดศุลกากร, รสนิยมผู้บริโภค
+
+National Treatment (มาตรา III GATT): ควบคุมการเลือกปฏิบัติภายในตลาดประเทศผู้นำเข้า ป้องกัน Protectionism — มาตรา III:2 ภาษีภายในห้ามเก็บเกินกว่าสินค้าในประเทศ / มาตรา III:4 กฎระเบียบไม่ใช่ภาษีต้อง "ไม่ด้อยไปกว่า" (หมายถึงโอกาสแข่งขันเท่าเทียม ไม่ใช่ต้องเหมือนกันเป๊ะ) คดี EC-Asbestos: ความเสี่ยงต่อสุขภาพ (Toxicity) นับเป็นส่วนหนึ่งของ Like Products ได้ — แร่ใยหินก่อมะเร็งจึงไม่เหมือนเส้นใยทดแทนปลอดภัย` },
+  { part: "ส่วนที่ 4 — กฎหมายเศรษฐกิจระหว่างประเทศ", n: 20, title: "ข้อยกเว้นทั่วไปของ GATT", text:
+`หลักการ (มาตรา XX GATT): สร้างสมดุลระหว่างเปิดเสรีการค้ากับเป้าหมายนโยบายสาธารณะ — พิสูจน์ได้ก็ฝ่าฝืน MFN/NT ได้
+
+การพิจารณา 2 ขั้นตอน: (1) เข้าเงื่อนไขวรรคย่อย (a)-(j) ข้อใดข้อหนึ่ง (2) ผ่านวรรคนำ (Chapeau) — ต้องไม่เลือกปฏิบัติตามอำเภอใจ/ไม่สมเหตุสมผล หรือกีดกันการค้าแอบแฝง
+
+วรรคย่อยสำคัญ: (a) ปกป้องศีลธรรมสาธารณะ (b) มาตรการ "จำเป็น" ปกป้องชีวิต/สุขภาพคน สัตว์ พืช — ต้องชั่งน้ำหนักว่ามีทางเลือกกีดกันการค้าน้อยกว่าหรือไม่ (คดี Brazil-Tyres) (d) มาตรการจำเป็นให้ปฏิบัติตามกฎหมายภายในที่ไม่ขัด GATT (g) เกี่ยวข้องกับอนุรักษ์ทรัพยากรธรรมชาติที่ใช้แล้วหมดไป ต้องควบคู่กับควบคุมการผลิต/บริโภคในประเทศด้วย (คดี US-Shrimp Turtle)
+
+ข้อยกเว้นความมั่นคง (มาตรา XXI): รัฐยกเว้นเปิดเสรีการค้าได้หากกระทบความมั่นคงหรือภาวะสงคราม` },
+];
+
+function renderLectures(){
+  const el = document.getElementById('lectureList');
+  const parts = [...new Set(LECTURES.map(l => l.part))];
+  el.innerHTML = parts.map(part => `
+    <div class="part-heading">${part}</div>
+    <div class="lecture-list">
+      ${LECTURES.filter(l => l.part === part).map(l => `
+        <div class="lecture-row" id="lec-${l.n}">
+          <div class="lecture-head" onclick="toggleLecture(${l.n})">
+            <div class="lecture-num">${l.n}</div>
+            <div class="lecture-title">${l.title}</div>
+            <div class="lecture-toggle">▾</div>
+          </div>
+          <div class="lecture-body">${l.text.replace(/</g,'&lt;')}</div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+function toggleLecture(n){
+  const row = document.getElementById('lec-' + n);
+  row.classList.toggle('open');
+  playHoverSound();
+}
+renderLectures();
+
+/* ================================================================
+   โหมดวิเคราะห์โจทย์ — โจทย์สถานการณ์สมมติ + แนวคำตอบ
+   ================================================================ */
+const ANALYSIS_CASES = [
+  { tag: "บ่อเกิดของกฎหมาย", facts: "รัฐ A และรัฐ B ซึ่งเป็นประเทศเพื่อนบ้าน ปฏิบัติทางการค้าชายแดนแบบเดียวกันมาต่อเนื่อง 15 ปี โดยทั้งสองรัฐเชื่อว่าตนมีพันธกรณีต้องปฏิบัติเช่นนั้น แต่ไม่เคยมีสนธิสัญญาเป็นลายลักษณ์อักษร ต่อมารัฐ A ต้องการยกเลิกทางปฏิบัตินี้ฝ่ายเดียว รัฐ B โต้แย้งว่าผูกพันตามกฎหมายแล้ว", answer:
+`วิเคราะห์: ประเด็นคือทางปฏิบัตินี้ก่อตัวเป็นจารีตประเพณีระหว่างประเทศ (CIL) ระดับทวิภาคีหรือไม่ ต้องพิจารณา 2 องค์ประกอบ: (1) ทางปฏิบัติทั่วไป — 15 ปีที่ต่อเนื่องสม่ำเสมอเข้าเกณฑ์ แม้เป็นแค่ 2 รัฐ จารีตประเพณีทวิภาคีก็เกิดขึ้นได้ (Right of Passage Case) (2) Opinio Juris — ทั้งสองรัฐเชื่อว่าตนมีพันธกรณีตามกฎหมาย ไม่ใช่แค่ธรรมเนียมปฏิบัติ จึงเข้าองค์ประกอบครบ สรุป: ทางปฏิบัตินี้ก่อตัวเป็นจารีตประเพณีระหว่างประเทศทวิภาคีที่ผูกพันรัฐ A แล้ว รัฐ A จะยกเลิกฝ่ายเดียวโดยไม่ผ่านกระบวนการที่ชอบไม่ได้ เว้นแต่จะเข้าเกณฑ์ Persistent Objector ซึ่งต้องคัดค้านตั้งแต่กฎเกณฑ์กำลังก่อตัว ไม่ใช่มาคัดค้านหลังผูกพันไปแล้ว` },
+  { tag: "สนธิสัญญา", facts: "รัฐ C เข้าเป็นภาคีอนุสัญญาพหุภาคีฉบับหนึ่ง โดยตั้งข้อสงวนไม่ยอมรับข้อบทหนึ่งที่กำหนดกลไกระงับข้อพิพาทผ่านศาลระหว่างประเทศ รัฐ D ซึ่งเป็นภาคีอีกฝ่ายคัดค้านข้อสงวนนี้ แต่ไม่ได้ปฏิเสธความสัมพันธ์ตามสนธิสัญญาทั้งฉบับกับรัฐ C", answer:
+`วิเคราะห์: ต้องดูก่อนว่าข้อสงวนนี้ขัดต่อวัตถุประสงค์และเป้าหมายของสนธิสัญญาหรือไม่ (Incompatible with object and purpose) หากไม่ขัด ข้อสงวนย่อมทำได้ตามหลักทั่วไป ผลของการที่รัฐ D คัดค้านเฉพาะข้อสงวนแต่ไม่ปฏิเสธสนธิสัญญาทั้งฉบับ คือ: ข้อบทเรื่องกลไกระงับข้อพิพาทผ่านศาลจะไม่ถูกนำมาใช้บังคับระหว่างรัฐ C กับรัฐ D เท่านั้น ส่วนข้อบทอื่นๆ ในสนธิสัญญายังมีผลบังคับใช้ตามปกติระหว่างสองรัฐ — ไม่ใช่กรณีสนธิสัญญาทั้งฉบับไม่มีผล (ซึ่งจะเกิดเฉพาะเมื่อรัฐที่คัดค้านปฏิเสธความสัมพันธ์ตามสนธิสัญญาทั้งฉบับไปเลย)` },
+  { tag: "ความเป็นรัฐ", facts: "กลุ่มประชากรบนเกาะแห่งหนึ่งประกาศเอกราชแยกตัว มีรัฐบาลที่ควบคุมพื้นที่ได้อย่างมีประสิทธิภาพ มีประชากรอาศัยถาวร และเริ่มเจรจาทำความตกลงทางการค้ากับบางประเทศ แต่ประเทศส่วนใหญ่ในโลกยังไม่รับรอง เพราะมีรัฐเดิมอ้างว่าเกาะนี้ยังเป็นส่วนหนึ่งของตน", answer:
+`วิเคราะห์: ตรวจองค์ประกอบ 4 ประการตามอนุสัญญามอนเตวิเดโอ — ประชากรประจำ ✓, ดินแดนกำหนดแน่นอน ✓ (แม้มีข้อพิพาทกับรัฐเดิม เขตแดนไม่ต้องยุติทุกจุด), รัฐบาลที่มีประสิทธิภาพควบคุม ✓, ความสามารถดำเนินความสัมพันธ์กับรัฐอื่น ✓ (เริ่มเจรจาการค้าแล้ว) องค์ประกอบครบทั้ง 4 ตามทฤษฎีประกาศ (Declaratory Theory) จึงถือว่าเป็นรัฐแล้วโดยสมบูรณ์ ไม่ต้องรอการรับรองจากรัฐอื่น แต่หากยึดทฤษฎีก่อตั้ง (Constitutive Theory) การที่รัฐส่วนใหญ่ยังไม่รับรองจะทำให้สถานะความเป็นรัฐยังไม่สมบูรณ์ในทางปฏิบัติ แม้จะมีองค์ประกอบครบก็ตาม — คำตอบข้อสอบควรเสนอทั้งสองทฤษฎีและชี้ผลต่างที่เกิดขึ้น` },
+  { tag: "การป้องกันตนเอง", facts: "รัฐ E ตรวจพบว่ากลุ่มติดอาวุธซึ่งได้รับเงินทุนและการฝึกจากรัฐ F เข้ามาก่อวินาศกรรมโรงไฟฟ้าในดินแดนตน รัฐ E จึงส่งกองทัพบุกโจมตีฐานที่มั่นของรัฐ F โดยอ้างว่าใช้สิทธิป้องกันตนเองตามมาตรา 51", answer:
+`วิเคราะห์: ประเด็นคือการสนับสนุนเงินทุน+ฝึกกลุ่มติดอาวุธของรัฐ F เข้าเกณฑ์ "Armed Attack" ที่จะก่อสิทธิป้องกันตนเองของรัฐ E หรือไม่ ตามบรรทัดฐานคดี Nicaragua ศาลโลกวางหลักว่า Armed Attack ต้องเป็นการใช้กำลังที่รุนแรงระดับสูง เช่น ส่งกองกำลังทหารเข้าโจมตีเอง การให้เพียงเงินทุน อาวุธ หรือการฝึกอบรมแก่กลุ่มกบฏ ไม่ถือเป็น Armed Attack ที่จะทำให้รัฐเป้าหมายมีสิทธิใช้กำลังทหารตอบโต้รัฐ F ได้โดยชอบ (แม้รัฐ F อาจมีความผิดฐานแทรกแซงกิจการภายในของรัฐ E ก็ตาม) สรุป: การที่รัฐ E ส่งกองทัพบุกโจมตีรัฐ F ไม่เข้าเงื่อนไขการป้องกันตนเองตามมาตรา 51 เพราะยังไม่มี Armed Attack จากรัฐ F เกิดขึ้น จึงเป็นการใช้กำลังที่ฝ่าฝืนมาตรา 2(4) ของกฎบัตร UN` },
+  { tag: "State Immunity", facts: "บริษัทเอกชนของรัฐ G ทำสัญญาซื้อขายเครื่องจักรกับรัฐ H เพื่อนำไปใช้ในโรงงานของรัฐ (ไม่เกี่ยวกับกิจการทหารหรือการปกครอง) ต่อมารัฐ H ผิดสัญญาไม่ชำระเงิน บริษัทจึงฟ้องรัฐ H ต่อศาลของรัฐ G รัฐ H ยกข้อต่อสู้ว่าตนมีความคุ้มกันในฐานะรัฐต่างประเทศ", answer:
+`วิเคราะห์: ประเด็นคือธุรกรรมนี้เป็น Acta jure imperii (การกระทำในทางอำนาจรัฐ ได้รับความคุ้มกัน) หรือ Acta jure gestionis (ธุรกรรมเชิงพาณิชย์ ไม่ได้รับความคุ้มกัน) ตามหลัก Restrictive Immunity ที่ใช้กันในปัจจุบัน การซื้อขายเครื่องจักรเพื่อใช้ในโรงงาน มีลักษณะเป็นธุรกรรมเชิงพาณิชย์ทั่วไปที่เอกชนก็ทำได้เช่นเดียวกัน (พิจารณาจากลักษณะเนื้อหาของธุรกรรม ไม่ใช่วัตถุประสงค์ปลายทาง) จึงเข้าข้อยกเว้นเรื่องธุรกรรมเชิงพาณิชย์ สรุป: รัฐ H ไม่สามารถอ้างความคุ้มกันเพื่อปฏิเสธเขตอำนาจศาลของรัฐ G ได้ บริษัทฟ้องรัฐ H ในคดีแพ่งได้` },
+  { tag: "ความรับผิดของรัฐ", facts: "กลุ่มม็อบเอกชนบุกทำลายสถานทูตของรัฐ I ในประเทศรัฐ J โดยรัฐบาลรัฐ J ไม่ได้สั่งการหรือควบคุมกลุ่มม็อบนี้แต่แรก แต่ภายหลังเหตุการณ์ ผู้นำรัฐ J ออกแถลงการณ์ชื่นชมการกระทำของกลุ่มม็อบว่าเป็นการแสดงออกที่ถูกต้อง และปฏิเสธไม่ดำเนินคดีกับผู้ก่อเหตุ", answer:
+`วิเคราะห์: ประเด็นคือการกระทำของเอกชน (กลุ่มม็อบ) จะถือเป็นการกระทำของรัฐ J (Attribution) ได้หรือไม่ ตาม ARSIWA โดยหลักรัฐไม่ต้องรับผิดจากการกระทำของเอกชน เว้นแต่เข้าข้อยกเว้น ในที่นี้ไม่เข้าข้อ 8 (ไม่ได้อยู่ภายใต้การควบคุมของรัฐตั้งแต่แรก) แต่เข้าข้อ 11 — การกระทำที่รัฐให้การรับรองในภายหลัง (Acknowledgment and adoption) เทียบเคียงกับคดี Tehran Hostages ที่รัฐอิหร่านออกมารับรองการยึดสถานทูตของนักศึกษาว่าเป็นการกระทำของรัฐ การที่ผู้นำรัฐ J ออกแถลงการณ์ชื่นชมและปฏิเสธดำเนินคดี ถือเป็นการรับรองและถือเอาการกระทำนั้นเป็นของตน สรุป: การกระทำของกลุ่มม็อบถูก Attribute ให้เป็นการกระทำของรัฐ J ตามข้อ 11 ของ ARSIWA รัฐ J จึงต้องรับผิดฐานละเมิดความคุ้มกันของสถานที่คณะทูตตาม VCDR` },
+  { tag: "WTO — MFN/National Treatment", facts: "ประเทศ K ออกกฎหมายเก็บภาษีสรรพสามิตเครื่องดื่มแอลกอฮอล์นำเข้าในอัตราสูงกว่าเครื่องดื่มแอลกอฮอล์ที่ผลิตในประเทศ โดยอ้างว่าเป็นการปกป้องอุตสาหกรรมท้องถิ่น", answer:
+`วิเคราะห์: ประเด็นคือมาตรการนี้ขัดหลัก National Treatment ตามมาตรา III:2 ของ GATT หรือไม่ ต้องพิจารณาว่าเครื่องดื่มนำเข้ากับเครื่องดื่มในประเทศเป็น "สินค้าที่เหมือนกัน" (Like Products) หรือไม่ โดยดู 4 ปัจจัย (ลักษณะทางกายภาพ การใช้ประโยชน์ พิกัดศุลกากร รสนิยมผู้บริโภค) หากเป็นสินค้าประเภทเดียวกัน (เช่น เบียร์กับเบียร์) การเก็บภาษีในอัตราสูงกว่าสินค้านำเข้า ("in excess of" ตามมาตรา III:2) ถือเป็นการเลือกปฏิบัติที่ขัดหลัก National Treatment ทันที ข้ออ้างเรื่องปกป้องอุตสาหกรรมท้องถิ่นไม่ใช่ข้อยกเว้นตามมาตรา XX ที่ยกขึ้นต่อสู้ได้ตรงๆ (ไม่เข้ากรณีคุ้มครองชีวิต/สุขภาพ หรือศีลธรรมสาธารณะโดยตัวมันเอง) สรุป: มาตรการของประเทศ K ขัดหลัก National Treatment ตามมาตรา III:2 ของ GATT` },
+];
+
+function renderCases(){
+  const el = document.getElementById('caseList');
+  el.innerHTML = ANALYSIS_CASES.map((c, i) => `
+    <div class="case-card" id="case-${i}">
+      <span class="case-tag">${c.tag}</span>
+      <div class="case-facts">${c.facts}</div>
+      <button type="button" class="case-reveal-btn" onclick="toggleCase(${i})" onmouseenter="playHoverSound()">ดูแนวคำตอบ</button>
+      <div class="case-answer">${c.answer.replace(/</g,'&lt;')}</div>
+    </div>
+  `).join('');
+}
+function toggleCase(i){
+  document.getElementById('case-' + i).classList.toggle('open');
+  playHoverSound();
+}
+renderCases();
+</script>
+<script>
+const THEME_KEY = 'codex-theme';
+
+function setTheme(theme){
+  if (theme === 'light') { document.documentElement.removeAttribute('data-theme'); }
+  else { document.documentElement.setAttribute('data-theme', theme); }
+  try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
+  updateThemeToggleUI(theme);
+  if (theme === 'horror') { playHorrorBgm(); startGhostRotation(); playHooSound(); scheduleDogHowl(); }
+  else { stopGhostRotation(); stopHorrorBgm(); stopDogHowl(); }
+}
+const DRONE_MUTE_KEY = 'codex-drone-muted';
+function playHorrorBgm(){
+  const bgm = document.getElementById('horror-bgm');
+  if (!bgm) return;
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  bgm.muted = false;
+  bgm.volume = muted ? 0 : 0.35;
+  const p = bgm.play();
+  if (p && p.catch) p.catch(() => { bgm.load(); bgm.play().catch(() => {}); });
+}
+function stopHorrorBgm(){
+  const bgm = document.getElementById('horror-bgm');
+  if (bgm) bgm.pause();
+}
+let dogHowlTimer = null;
+function scheduleDogHowl(){
+  clearTimeout(dogHowlTimer);
+  const delay = 18000 + Math.random() * 22000;
+  dogHowlTimer = setTimeout(() => { playDogHowl(); scheduleDogHowl(); }, delay);
+}
+function playDogHowl(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const howl = document.getElementById('dog-howl');
+  if (!howl) return;
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  if (muted) return;
+  howl.currentTime = 0;
+  howl.volume = 0.4;
+  howl.play().catch(() => {});
+  setTimeout(() => { if (!howl.paused) howl.pause(); }, 3000);
+}
+function stopDogHowl(){
+  clearTimeout(dogHowlTimer); dogHowlTimer = null;
+  const howl = document.getElementById('dog-howl');
+  if (howl) howl.pause();
+}
+function toggleDroneMute(btn){
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  muted = !muted;
+  try { localStorage.setItem(DRONE_MUTE_KEY, muted ? '1' : '0'); } catch(e){}
+  if (btn) btn.textContent = muted ? '🔇' : '🔊';
+  const bgm = document.getElementById('horror-bgm');
+  if (bgm) bgm.volume = muted ? 0 : 0.35;
+}
+function updateThemeToggleUI(theme){
+  document.querySelectorAll('.theme-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.themeBtn === theme);
+  });
+}
+const GHOST_IMAGES = [
+  'pics/Pixel/icon/ตะเคียน 1.png','pics/Pixel/icon/ตะเคียน 2.png',
+  'pics/Pixel/icon/ตานี 2.png',
+  'pics/Pixel/icon/นางกวัก 1.png','pics/Pixel/icon/นางกวัก 2.png','pics/Pixel/icon/นางกวัก 3.png',
+  'pics/Pixel/icon/ปอป 1.png','pics/Pixel/icon/ปอป 2.png','pics/Pixel/icon/ปอป 3.png',
+  'pics/Pixel/icon/ปอปชาย 1.png','pics/Pixel/icon/ปอปชาย 2.png',
+  'pics/Pixel/icon/ผีแมว 1.png','pics/Pixel/icon/ผีแมว 2.png','pics/Pixel/icon/ผีแมว 3.png',
+  'pics/Pixel/icon/ผีโพง 1.png',
+  'pics/Pixel/icon/แม่นาค 1.png','pics/Pixel/icon/แม่นาค 2.png','pics/Pixel/icon/แม่นาค 3.png',
+  'pics/Pixel/icon/กระสือ_00.png','pics/Pixel/icon/กระสือ_01.png','pics/Pixel/icon/กระสือ_02.png',
+  'pics/Pixel/icon/กระสือ_10.png','pics/Pixel/icon/กระสือ_11.png','pics/Pixel/icon/กระสือ_12.png',
+  'pics/Pixel/icon/กระสือ_20.png','pics/Pixel/icon/กระสือ_21.png','pics/Pixel/icon/กระสือ_22.png',
+  'pics/Pixel/icon/กุมาร 1_00.png','pics/Pixel/icon/กุมาร 1_01.png','pics/Pixel/icon/กุมาร 1_02.png',
+  'pics/Pixel/icon/กุมาร 1_10.png','pics/Pixel/icon/กุมาร 1_11.png','pics/Pixel/icon/กุมาร 1_12.png',
+  'pics/Pixel/icon/กุมาร 1_21.png',
+  'pics/Pixel/icon/กุมาร 2_00.png','pics/Pixel/icon/กุมาร 2_01.png','pics/Pixel/icon/กุมาร 2_02.png',
+  'pics/Pixel/icon/กุมาร 2_10.png','pics/Pixel/icon/กุมาร 2_11.png','pics/Pixel/icon/กุมาร 2_12.png',
+  'pics/Pixel/icon/กุมาร 2_20.png','pics/Pixel/icon/กุมาร 2_21.png','pics/Pixel/icon/กุมาร 2_22.png',
+  'pics/Pixel/icon/ควายธนู_00.png','pics/Pixel/icon/ควายธนู_01.png','pics/Pixel/icon/ควายธนู_02.png',
+  'pics/Pixel/icon/ควายธนู_10.png','pics/Pixel/icon/ควายธนู_11.png','pics/Pixel/icon/ควายธนู_12.png',
+  'pics/Pixel/icon/ควายธนู_20.png','pics/Pixel/icon/ควายธนู_21.png','pics/Pixel/icon/ควายธนู_22.png',
+  'pics/Pixel/icon/ตานี_00.png','pics/Pixel/icon/ตานี_01.png','pics/Pixel/icon/ตานี_02.png',
+  'pics/Pixel/icon/ตานี_10.png','pics/Pixel/icon/ตานี_11.png','pics/Pixel/icon/ตานี_12.png',
+  'pics/Pixel/icon/ตานี_20.png','pics/Pixel/icon/ตานี_21.png','pics/Pixel/icon/ตานี_22.png',
+  'pics/Pixel/icon/ผีรวม 1_00.png','pics/Pixel/icon/ผีรวม 1_01.png','pics/Pixel/icon/ผีรวม 1_02.png',
+  'pics/Pixel/icon/ผีรวม 1_10.png','pics/Pixel/icon/ผีรวม 1_11.png','pics/Pixel/icon/ผีรวม 1_12.png',
+  'pics/Pixel/icon/ผีรวม 1_20.png','pics/Pixel/icon/ผีรวม 1_21.png','pics/Pixel/icon/ผีรวม 1_22.png',
+  'pics/Pixel/icon/ผีรวม 2_00.png','pics/Pixel/icon/ผีรวม 2_01.png','pics/Pixel/icon/ผีรวม 2_02.png',
+  'pics/Pixel/icon/ผีรวม 2_10.png','pics/Pixel/icon/ผีรวม 2_11.png','pics/Pixel/icon/ผีรวม 2_12.png',
+  'pics/Pixel/icon/ผีรวม 2_20.png','pics/Pixel/icon/ผีรวม 2_21.png','pics/Pixel/icon/ผีรวม 2_22.png',
+  'pics/Pixel/icon/ผีรวม 3_00.png','pics/Pixel/icon/ผีรวม 3_01.png','pics/Pixel/icon/ผีรวม 3_02.png',
+  'pics/Pixel/icon/ผีรวม 3_10.png','pics/Pixel/icon/ผีรวม 3_11.png','pics/Pixel/icon/ผีรวม 3_12.png',
+  'pics/Pixel/icon/ผีรวม 3_20.png','pics/Pixel/icon/ผีรวม 3_21.png','pics/Pixel/icon/ผีรวม 3_22.png',
+  'pics/Pixel/icon/ผีรวม 4_00.png','pics/Pixel/icon/ผีรวม 4_01.png','pics/Pixel/icon/ผีรวม 4_02.png',
+  'pics/Pixel/icon/ผีรวม 4_10.png','pics/Pixel/icon/ผีรวม 4_11.png','pics/Pixel/icon/ผีรวม 4_12.png',
+  'pics/Pixel/icon/ผีรวม 4_20.png','pics/Pixel/icon/ผีรวม 4_21.png','pics/Pixel/icon/ผีรวม 4_22.png',
+  'pics/Pixel/icon/ผีรวม 5_00.png','pics/Pixel/icon/ผีรวม 5_01.png','pics/Pixel/icon/ผีรวม 5_02.png',
+  'pics/Pixel/icon/ผีรวม 5_10.png','pics/Pixel/icon/ผีรวม 5_11.png','pics/Pixel/icon/ผีรวม 5_12.png',
+  'pics/Pixel/icon/ผีรวม 5_20.png','pics/Pixel/icon/ผีรวม 5_21.png','pics/Pixel/icon/ผีรวม 5_22.png',
+  'pics/Pixel/icon/ผีรวม 6_00.png','pics/Pixel/icon/ผีรวม 6_01.png','pics/Pixel/icon/ผีรวม 6_02.png',
+  'pics/Pixel/icon/ผีรวม 6_10.png','pics/Pixel/icon/ผีรวม 6_11.png','pics/Pixel/icon/ผีรวม 6_12.png',
+  'pics/Pixel/icon/ผีรวม 6_20.png','pics/Pixel/icon/ผีรวม 6_21.png','pics/Pixel/icon/ผีรวม 6_22.png',
+  'pics/Pixel/icon/ผีรวม 7_00.png','pics/Pixel/icon/ผีรวม 7_01.png','pics/Pixel/icon/ผีรวม 7_02.png',
+  'pics/Pixel/icon/ผีรวม 7_10.png','pics/Pixel/icon/ผีรวม 7_11.png','pics/Pixel/icon/ผีรวม 7_12.png',
+  'pics/Pixel/icon/ผีรวม 7_20.png','pics/Pixel/icon/ผีรวม 7_21.png','pics/Pixel/icon/ผีรวม 7_22.png',
+  'pics/Pixel/icon/ผีรวม 8_00.png','pics/Pixel/icon/ผีรวม 8_01.png','pics/Pixel/icon/ผีรวม 8_02.png',
+  'pics/Pixel/icon/ผีรวม 8_03.png','pics/Pixel/icon/ผีรวม 8_10.png','pics/Pixel/icon/ผีรวม 8_11.png',
+  'pics/Pixel/icon/ผีรวม 8_12.png','pics/Pixel/icon/ผีรวม 8_13.png','pics/Pixel/icon/ผีรวม 8_20.png',
+  'pics/Pixel/icon/ผีรวม 8_21.png','pics/Pixel/icon/ผีรวม 8_22.png','pics/Pixel/icon/ผีรวม 8_23.png',
+  'pics/Pixel/icon/ผีรวม 9_00.png','pics/Pixel/icon/ผีรวม 9_01.png','pics/Pixel/icon/ผีรวม 9_02.png',
+  'pics/Pixel/icon/ผีรวม 9_10.png','pics/Pixel/icon/ผีรวม 9_11.png','pics/Pixel/icon/ผีรวม 9_12.png',
+  'pics/Pixel/icon/ผีรวม 9_20.png','pics/Pixel/icon/ผีรวม 9_21.png','pics/Pixel/icon/ผีรวม 9_22.png',
+  'pics/Pixel/icon/ผีรวม 10_00.png','pics/Pixel/icon/ผีรวม 10_01.png','pics/Pixel/icon/ผีรวม 10_02.png',
+  'pics/Pixel/icon/ผีรวม 10_10.png','pics/Pixel/icon/ผีรวม 10_11.png','pics/Pixel/icon/ผีรวม 10_12.png',
+  'pics/Pixel/icon/ผีรวม 10_20.png','pics/Pixel/icon/ผีรวม 10_21.png','pics/Pixel/icon/ผีรวม 10_22.png',
+  'pics/Pixel/icon/ผีรวม 11_00.png','pics/Pixel/icon/ผีรวม 11_01.png','pics/Pixel/icon/ผีรวม 11_02.png',
+  'pics/Pixel/icon/ผีรวม 11_10.png','pics/Pixel/icon/ผีรวม 11_11.png','pics/Pixel/icon/ผีรวม 11_12.png',
+  'pics/Pixel/icon/ผีรวม 11_20.png','pics/Pixel/icon/ผีรวม 11_21.png','pics/Pixel/icon/ผีรวม 11_22.png',
+];
+const GHOST_PHRASES = [
+  "แบร่~","หลอกจ้า","อ่านให้ครบสิ","มาตรานี้ออกสอบนะ","เปิดฎีกาด้วย","จำผิดแล้ว","วรรคสองล่ะ?","ยังไม่จบ","อ่านใหม่","ข้ามไม่ได้",
+  "ตกแน่","สอบพรุ่งนี้แล้ว","ตีความสิ","อ้างมาตราให้ครบ","อย่ามั่ว","ฟ้องได้ไหม?","โมฆะนะ","เป็นโมฆียะ!","สิทธิของใคร?","หน้าที่ของใคร?",
+  "พิสูจน์ก่อน","ภาระการพิสูจน์อยู่ไหน?","ข้อเท็จจริงไม่พอ","กฎหมายใช้ไม่ได้","คนละฐาน","คนละกรณี","คำตอบยังไม่ครบ","ลืมข้อยกเว้น","มีบทเฉพาะกาล","ระวังมาตราแฝง",
+  "คิดใหม่","อ่านเชิงระบบ","อย่าท่องอย่างเดียว","เหตุผลล่ะ?","ฎีกาว่าไง?","อาจารย์ชอบถาม","อย่าปิดไฟ","ผีอ่านด้วย","ขอนั่งข้าง ๆ","พลิกหน้าเร็ว",
+  "หน้านี้สำคัญ","จำให้ได้","อย่าหลับ","อีกบทเดียว","อีกมาตราเดียว","อีกฎีกาเดียว","ตีสองแล้วนะ","กาแฟหมดแล้ว","น้ำแดงมีไหม?","กุมารหิว",
+  "ศาลยังไม่หลับ","ผู้พิพากษามองอยู่","เนติรออยู่","ธงคำตอบอยู่ไหน?","อย่าตอบกำปั้นทุบดิน","อย่าเดา","เขียนให้ครบองค์ประกอบ","หลักก่อน ข้อยกเว้นทีหลัง","อย่าลืมนิยาม","อ่านมาตราเต็ม",
+];
+let ghostEl = null, ghostRotateTimer = null, ghostPulseTimer = null, ghostIndex = 0;
+let ghostSpeechEl = null, ghostSpeechTimer = null;
+function ensureGhostSpeechEl(){
+  if (ghostSpeechEl) return ghostSpeechEl;
+  const el = document.createElement('div');
+  el.className = 'ghost-speech';
+  document.body.appendChild(el);
+  ghostSpeechEl = el; return el;
+}
+function showGhostSpeech(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const ghost = ensureGhostEl();
+  const bubble = ensureGhostSpeechEl();
+  bubble.textContent = GHOST_PHRASES[Math.floor(Math.random() * GHOST_PHRASES.length)];
+  const rect = ghost.getBoundingClientRect();
+  bubble.style.right = (window.innerWidth - rect.right) + 'px';
+  bubble.style.bottom = (window.innerHeight - rect.top + 10) + 'px';
+  bubble.classList.add('visible');
+  clearTimeout(ghostSpeechTimer);
+  ghostSpeechTimer = setTimeout(() => bubble.classList.remove('visible'), 2600);
+  pulseGhost();
+  playHooSound();
+}
+function ensureGhostEl(){
+  if (ghostEl) return ghostEl;
+  const img = document.createElement('img');
+  img.src = GHOST_IMAGES[0]; img.alt = ''; img.setAttribute('aria-hidden', 'true'); img.className = 'ghost-companion';
+  img.addEventListener('mouseenter', showGhostSpeech);
+  img.addEventListener('click', showGhostSpeech);
+  document.body.appendChild(img); ghostEl = img; return img;
+}
+function startGhostRotation(){
+  const el = ensureGhostEl(); ghostIndex = 0; el.src = GHOST_IMAGES[ghostIndex]; el.classList.add('visible');
+  clearInterval(ghostRotateTimer); ghostRotateTimer = setInterval(rotateGhost, 5000);
+}
+function rotateGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl(); ghostIndex = (ghostIndex + 1) % GHOST_IMAGES.length;
+  el.style.opacity = '0.15';
+  setTimeout(() => { el.src = GHOST_IMAGES[ghostIndex]; el.style.opacity = ''; }, 220);
+  playHooSound();
+}
+function stopGhostRotation(){
+  clearInterval(ghostRotateTimer); ghostRotateTimer = null;
+  if (ghostEl) { ghostEl.classList.remove('visible'); ghostEl.style.opacity = ''; }
+}
+function pulseGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl(); el.classList.add('pulse');
+  clearTimeout(ghostPulseTimer); ghostPulseTimer = setTimeout(() => el.classList.remove('pulse'), 350);
+}
+document.addEventListener('input', (e) => {
+  const t = e.target;
+  if (!t) return;
+  if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || (t.classList && t.classList.contains('note-input'))) pulseGhost();
+});
+let __ghostAudioCtx;
+function playHooSound(){
+  try{
+    __ghostAudioCtx = __ghostAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __ghostAudioCtx;
+    if (c.state === 'suspended') c.resume();
+    const t0 = c.currentTime, dur = 1.6;
+    const baseFreq = 180 + Math.random() * 50;
+    const osc = c.createOscillator(); osc.type = 'sine'; osc.frequency.setValueAtTime(baseFreq, t0);
+    const lfo = c.createOscillator(); lfo.type = 'sine'; lfo.frequency.setValueAtTime(4.2, t0);
+    const lfoGain = c.createGain(); lfoGain.gain.setValueAtTime(6, t0);
+    lfo.connect(lfoGain); lfoGain.connect(osc.frequency);
+    const mainGain = c.createGain();
+    mainGain.gain.setValueAtTime(0.0001, t0);
+    mainGain.gain.exponentialRampToValueAtTime(0.035, t0 + 0.55);
+    mainGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    const bufferSize = Math.floor(c.sampleRate * dur);
+    const noiseBuffer = c.createBuffer(1, bufferSize, c.sampleRate);
+    const data = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+    const noise = c.createBufferSource(); noise.buffer = noiseBuffer;
+    const noiseFilter = c.createBiquadFilter();
+    noiseFilter.type = 'bandpass'; noiseFilter.frequency.setValueAtTime(baseFreq * 1.6, t0); noiseFilter.Q.setValueAtTime(0.7, t0);
+    const noiseGain = c.createGain();
+    noiseGain.gain.setValueAtTime(0.0001, t0);
+    noiseGain.gain.exponentialRampToValueAtTime(0.01, t0 + 0.55);
+    noiseGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    osc.connect(mainGain); mainGain.connect(c.destination);
+    noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(c.destination);
+    osc.start(t0); osc.stop(t0 + dur);
+    lfo.start(t0); lfo.stop(t0 + dur);
+    noise.start(t0); noise.stop(t0 + dur);
+  } catch(e){}
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  updateThemeToggleUI(current);
+  if (current === 'horror') { playHorrorBgm(); startGhostRotation(); scheduleDogHowl(); }
+  const droneMuteBtn = document.getElementById('drone-mute-btn');
+  if (droneMuteBtn) {
+    let muted = false;
+    try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+    droneMuteBtn.textContent = muted ? '🔇' : '🔊';
+  }
+  ['click','touchstart','keydown'].forEach(evt => {
+    document.addEventListener(evt, function resumeBgmOnce(){
+      const bgm = document.getElementById('horror-bgm');
+      if (document.documentElement.getAttribute('data-theme') === 'horror' && bgm && bgm.paused) playHorrorBgm();
+      ['click','touchstart','keydown'].forEach(e2 => document.removeEventListener(e2, resumeBgmOnce));
+    }, { once: true });
+  });
+});
+</script>
+</body>
+</html>
