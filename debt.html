@@ -51,10 +51,37 @@
 .theme-toggle button:hover{background:var(--line)}
 
 /* GHOST COMPANION (horror mode — rotating cast of 4) */
-.ghost-companion{position:fixed;right:16px;bottom:16px;width:100px;height:auto;pointer-events:none;opacity:0;transform:translateY(8px);transition:opacity .6s ease;z-index:999;filter:drop-shadow(0 0 16px rgba(180,20,40,.45));animation:ghost-float 3.4s ease-in-out infinite}
+.drone-mute-btn{
+  display:none;
+  margin-left:6px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:999px;
+  width:28px;height:28px;
+  align-items:center;justify-content:center;
+  cursor:pointer;font-size:13px;
+}
+:root[data-theme="horror"] .drone-mute-btn{ display:flex; }
+:root[data-theme="horror"] .drone-mute-btn:hover{ background:var(--line); }
+
+/* GHOST COMPANION (horror mode — rotating cast of 4) */
+.ghost-companion{position:fixed;right:16px;bottom:16px;width:200px;height:auto;pointer-events:auto;cursor:pointer;opacity:0;transform:translateY(8px);transition:opacity .6s ease;z-index:999;filter:drop-shadow(0 0 16px rgba(180,20,40,.45));animation:ghost-float 3.4s ease-in-out infinite}
 .ghost-companion.visible{opacity:1}
 .ghost-companion.pulse{filter:drop-shadow(0 0 26px rgba(180,20,40,.8)) drop-shadow(0 0 10px rgba(255,255,255,.3))}
 @keyframes ghost-float{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
+.ghost-speech{
+  position:fixed;max-width:200px;background:#fff;color:#1a1a1a;
+  border-radius:14px;padding:8px 13px;font-size:13px;font-weight:700;
+  font-family:'Sarabun',system-ui,sans-serif;line-height:1.4;
+  box-shadow:0 8px 20px rgba(0,0,0,.4);z-index:1000;
+  opacity:0;pointer-events:none;transform:translateY(6px) scale(.96);
+  transition:opacity .2s ease,transform .2s ease;text-align:center;
+}
+.ghost-speech.visible{opacity:1;transform:translateY(0) scale(1)}
+.ghost-speech::after{
+  content:"";position:absolute;right:28px;bottom:-8px;width:0;height:0;
+  border:8px solid transparent;border-top-color:#fff;
+}
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
@@ -614,7 +641,14 @@ footer{
     <button type="button" data-theme-btn="dark" onclick="setTheme('dark')" onmouseenter="playHoverSound()" title="โหมดมืด">🌙</button>
     <button type="button" data-theme-btn="horror" onclick="setTheme('horror')" onmouseenter="playHoverSound()" title="โหมดสยองขวัญ">👻</button>
   </div>
+  <button type="button" id="drone-mute-btn" class="drone-mute-btn" onclick="toggleDroneMute(this)" title="ปิด/เปิดเสียงเพลง">🔊</button>
 </div>
+<audio id="horror-bgm" loop preload="auto" playsinline webkit-playsinline style="display:none">
+  <source src="music/The_Cold_Stream_Lament.mp3" type="audio/mpeg">
+</audio>
+<audio id="dog-howl" preload="auto" playsinline webkit-playsinline style="display:none">
+  <source src="music/หมาหอน.mp3" type="audio/mpeg">
+</audio>
 <script>
 let __hbAudioCtx;
 function playHoverSound(){
@@ -2453,20 +2487,183 @@ function setTheme(theme){
   else { document.documentElement.setAttribute('data-theme', theme); }
   try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
   updateThemeToggleUI(theme);
-  if (theme === 'horror') { startGhostRotation(); playHooSound(); }
-  else { stopGhostRotation(); }
+  if (theme === 'horror') { playHorrorBgm(); startGhostRotation(); playHooSound(); scheduleDogHowl(); }
+  else { stopGhostRotation(); stopHorrorBgm(); stopDogHowl(); }
+}
+const DRONE_MUTE_KEY = 'codex-drone-muted';
+function playHorrorBgm(){
+  const bgm = document.getElementById('horror-bgm');
+  if (!bgm) return;
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  bgm.muted = false;
+  bgm.volume = muted ? 0 : 0.35;
+  const p = bgm.play();
+  if (p && p.catch) p.catch(() => { bgm.load(); bgm.play().catch(() => {}); });
+}
+function stopHorrorBgm(){
+  const bgm = document.getElementById('horror-bgm');
+  if (bgm) bgm.pause();
+}
+let dogHowlTimer = null;
+function scheduleDogHowl(){
+  clearTimeout(dogHowlTimer);
+  const delay = 18000 + Math.random() * 22000; // every ~18-40s
+  dogHowlTimer = setTimeout(() => { playDogHowl(); scheduleDogHowl(); }, delay);
+}
+function playDogHowl(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const howl = document.getElementById('dog-howl');
+  if (!howl) return;
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  if (muted) return;
+  howl.currentTime = 0;
+  howl.volume = 0.4;
+  howl.play().catch(() => {});
+  setTimeout(() => { if (!howl.paused) howl.pause(); }, 3000);
+}
+function stopDogHowl(){
+  clearTimeout(dogHowlTimer); dogHowlTimer = null;
+  const howl = document.getElementById('dog-howl');
+  if (howl) howl.pause();
+}
+function toggleDroneMute(btn){
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  muted = !muted;
+  try { localStorage.setItem(DRONE_MUTE_KEY, muted ? '1' : '0'); } catch(e){}
+  if (btn) btn.textContent = muted ? '🔇' : '🔊';
+  const bgm = document.getElementById('horror-bgm');
+  if (bgm) bgm.volume = muted ? 0 : 0.35;
 }
 function updateThemeToggleUI(theme){
   document.querySelectorAll('.theme-toggle button').forEach(b => {
     b.classList.toggle('active', b.dataset.themeBtn === theme);
   });
 }
-const GHOST_IMAGES = ['pics/krasue-companion.png','pics/phijeen-companion.png','pics/phikeaw-companion.png','pics/nangtanee-companion.png'];
+const GHOST_IMAGES = [
+  'pics/Pixel/icon/ตะเคียน 1.png','pics/Pixel/icon/ตะเคียน 2.png',
+  'pics/Pixel/icon/ตานี 2.png',
+  'pics/Pixel/icon/นางกวัก 1.png','pics/Pixel/icon/นางกวัก 2.png','pics/Pixel/icon/นางกวัก 3.png',
+  'pics/Pixel/icon/ปอป 1.png','pics/Pixel/icon/ปอป 2.png','pics/Pixel/icon/ปอป 3.png',
+  'pics/Pixel/icon/ปอปชาย 1.png','pics/Pixel/icon/ปอปชาย 2.png',
+  'pics/Pixel/icon/ผีแมว 1.png','pics/Pixel/icon/ผีแมว 2.png','pics/Pixel/icon/ผีแมว 3.png',
+  'pics/Pixel/icon/ผีโพง 1.png',
+  'pics/Pixel/icon/แม่นาค 1.png','pics/Pixel/icon/แม่นาค 2.png','pics/Pixel/icon/แม่นาค 3.png',
+  'pics/Pixel/icon/กระสือ_00.png','pics/Pixel/icon/กระสือ_01.png','pics/Pixel/icon/กระสือ_02.png',
+  'pics/Pixel/icon/กระสือ_10.png','pics/Pixel/icon/กระสือ_11.png','pics/Pixel/icon/กระสือ_12.png',
+  'pics/Pixel/icon/กระสือ_20.png','pics/Pixel/icon/กระสือ_21.png','pics/Pixel/icon/กระสือ_22.png',
+  'pics/Pixel/icon/กุมาร 1_00.png','pics/Pixel/icon/กุมาร 1_01.png','pics/Pixel/icon/กุมาร 1_02.png',
+  'pics/Pixel/icon/กุมาร 1_10.png','pics/Pixel/icon/กุมาร 1_11.png','pics/Pixel/icon/กุมาร 1_12.png',
+  'pics/Pixel/icon/กุมาร 1_21.png',
+  'pics/Pixel/icon/กุมาร 2_00.png','pics/Pixel/icon/กุมาร 2_01.png','pics/Pixel/icon/กุมาร 2_02.png',
+  'pics/Pixel/icon/กุมาร 2_10.png','pics/Pixel/icon/กุมาร 2_11.png','pics/Pixel/icon/กุมาร 2_12.png',
+  'pics/Pixel/icon/กุมาร 2_20.png','pics/Pixel/icon/กุมาร 2_21.png','pics/Pixel/icon/กุมาร 2_22.png',
+  'pics/Pixel/icon/ควายธนู_00.png','pics/Pixel/icon/ควายธนู_01.png','pics/Pixel/icon/ควายธนู_02.png',
+  'pics/Pixel/icon/ควายธนู_10.png','pics/Pixel/icon/ควายธนู_11.png','pics/Pixel/icon/ควายธนู_12.png',
+  'pics/Pixel/icon/ควายธนู_20.png','pics/Pixel/icon/ควายธนู_21.png','pics/Pixel/icon/ควายธนู_22.png',
+  'pics/Pixel/icon/ตานี_00.png','pics/Pixel/icon/ตานี_01.png','pics/Pixel/icon/ตานี_02.png',
+  'pics/Pixel/icon/ตานี_10.png','pics/Pixel/icon/ตานี_11.png','pics/Pixel/icon/ตานี_12.png',
+  'pics/Pixel/icon/ตานี_20.png','pics/Pixel/icon/ตานี_21.png','pics/Pixel/icon/ตานี_22.png',
+  'pics/Pixel/icon/ผีรวม 1_00.png','pics/Pixel/icon/ผีรวม 1_01.png','pics/Pixel/icon/ผีรวม 1_02.png',
+  'pics/Pixel/icon/ผีรวม 1_10.png','pics/Pixel/icon/ผีรวม 1_11.png','pics/Pixel/icon/ผีรวม 1_12.png',
+  'pics/Pixel/icon/ผีรวม 1_20.png','pics/Pixel/icon/ผีรวม 1_21.png','pics/Pixel/icon/ผีรวม 1_22.png',
+  'pics/Pixel/icon/ผีรวม 2_00.png','pics/Pixel/icon/ผีรวม 2_01.png','pics/Pixel/icon/ผีรวม 2_02.png',
+  'pics/Pixel/icon/ผีรวม 2_10.png','pics/Pixel/icon/ผีรวม 2_11.png','pics/Pixel/icon/ผีรวม 2_12.png',
+  'pics/Pixel/icon/ผีรวม 2_20.png','pics/Pixel/icon/ผีรวม 2_21.png','pics/Pixel/icon/ผีรวม 2_22.png',
+  'pics/Pixel/icon/ผีรวม 3_00.png','pics/Pixel/icon/ผีรวม 3_01.png','pics/Pixel/icon/ผีรวม 3_02.png',
+  'pics/Pixel/icon/ผีรวม 3_10.png','pics/Pixel/icon/ผีรวม 3_11.png','pics/Pixel/icon/ผีรวม 3_12.png',
+  'pics/Pixel/icon/ผีรวม 3_20.png','pics/Pixel/icon/ผีรวม 3_21.png','pics/Pixel/icon/ผีรวม 3_22.png',
+  'pics/Pixel/icon/ผีรวม 4_00.png','pics/Pixel/icon/ผีรวม 4_01.png','pics/Pixel/icon/ผีรวม 4_02.png',
+  'pics/Pixel/icon/ผีรวม 4_10.png','pics/Pixel/icon/ผีรวม 4_11.png','pics/Pixel/icon/ผีรวม 4_12.png',
+  'pics/Pixel/icon/ผีรวม 4_20.png','pics/Pixel/icon/ผีรวม 4_21.png','pics/Pixel/icon/ผีรวม 4_22.png',
+  'pics/Pixel/icon/ผีรวม 5_00.png','pics/Pixel/icon/ผีรวม 5_01.png','pics/Pixel/icon/ผีรวม 5_02.png',
+  'pics/Pixel/icon/ผีรวม 5_10.png','pics/Pixel/icon/ผีรวม 5_11.png','pics/Pixel/icon/ผีรวม 5_12.png',
+  'pics/Pixel/icon/ผีรวม 5_20.png','pics/Pixel/icon/ผีรวม 5_21.png','pics/Pixel/icon/ผีรวม 5_22.png',
+  'pics/Pixel/icon/ผีรวม 6_00.png','pics/Pixel/icon/ผีรวม 6_01.png','pics/Pixel/icon/ผีรวม 6_02.png',
+  'pics/Pixel/icon/ผีรวม 6_10.png','pics/Pixel/icon/ผีรวม 6_11.png','pics/Pixel/icon/ผีรวม 6_12.png',
+  'pics/Pixel/icon/ผีรวม 6_20.png','pics/Pixel/icon/ผีรวม 6_21.png','pics/Pixel/icon/ผีรวม 6_22.png',
+  'pics/Pixel/icon/ผีรวม 7_00.png','pics/Pixel/icon/ผีรวม 7_01.png','pics/Pixel/icon/ผีรวม 7_02.png',
+  'pics/Pixel/icon/ผีรวม 7_10.png','pics/Pixel/icon/ผีรวม 7_11.png','pics/Pixel/icon/ผีรวม 7_12.png',
+  'pics/Pixel/icon/ผีรวม 7_20.png','pics/Pixel/icon/ผีรวม 7_21.png','pics/Pixel/icon/ผีรวม 7_22.png',
+  'pics/Pixel/icon/ผีรวม 8_00.png','pics/Pixel/icon/ผีรวม 8_01.png','pics/Pixel/icon/ผีรวม 8_02.png',
+  'pics/Pixel/icon/ผีรวม 8_03.png','pics/Pixel/icon/ผีรวม 8_10.png','pics/Pixel/icon/ผีรวม 8_11.png',
+  'pics/Pixel/icon/ผีรวม 8_12.png','pics/Pixel/icon/ผีรวม 8_13.png','pics/Pixel/icon/ผีรวม 8_20.png',
+  'pics/Pixel/icon/ผีรวม 8_21.png','pics/Pixel/icon/ผีรวม 8_22.png','pics/Pixel/icon/ผีรวม 8_23.png',
+  'pics/Pixel/icon/ผีรวม 9_00.png','pics/Pixel/icon/ผีรวม 9_01.png','pics/Pixel/icon/ผีรวม 9_02.png',
+  'pics/Pixel/icon/ผีรวม 9_10.png','pics/Pixel/icon/ผีรวม 9_11.png','pics/Pixel/icon/ผีรวม 9_12.png',
+  'pics/Pixel/icon/ผีรวม 9_20.png','pics/Pixel/icon/ผีรวม 9_21.png','pics/Pixel/icon/ผีรวม 9_22.png',
+  'pics/Pixel/icon/ผีรวม 10_00.png','pics/Pixel/icon/ผีรวม 10_01.png','pics/Pixel/icon/ผีรวม 10_02.png',
+  'pics/Pixel/icon/ผีรวม 10_10.png','pics/Pixel/icon/ผีรวม 10_11.png','pics/Pixel/icon/ผีรวม 10_12.png',
+  'pics/Pixel/icon/ผีรวม 10_20.png','pics/Pixel/icon/ผีรวม 10_21.png','pics/Pixel/icon/ผีรวม 10_22.png',
+  'pics/Pixel/icon/ผีรวม 11_00.png','pics/Pixel/icon/ผีรวม 11_01.png','pics/Pixel/icon/ผีรวม 11_02.png',
+  'pics/Pixel/icon/ผีรวม 11_10.png','pics/Pixel/icon/ผีรวม 11_11.png','pics/Pixel/icon/ผีรวม 11_12.png',
+  'pics/Pixel/icon/ผีรวม 11_20.png','pics/Pixel/icon/ผีรวม 11_21.png','pics/Pixel/icon/ผีรวม 11_22.png',
+];
+const GHOST_PHRASES = [
+  "แบร่~","หลอกจ้า","อ่านให้ครบสิ","มาตรานี้ออกสอบนะ","เปิดฎีกาด้วย","จำผิดแล้ว","วรรคสองล่ะ?","ยังไม่จบ","อ่านใหม่","ข้ามไม่ได้",
+  "ตกแน่","สอบพรุ่งนี้แล้ว","ตีความสิ","อ้างมาตราให้ครบ","อย่ามั่ว","ฟ้องได้ไหม?","โมฆะนะ","เป็นโมฆียะ!","สิทธิของใคร?","หน้าที่ของใคร?",
+  "พิสูจน์ก่อน","ภาระการพิสูจน์อยู่ไหน?","ข้อเท็จจริงไม่พอ","กฎหมายใช้ไม่ได้","คนละฐาน","คนละกรณี","คำตอบยังไม่ครบ","ลืมข้อยกเว้น","มีบทเฉพาะกาล","ระวังมาตราแฝง",
+  "คิดใหม่","อ่านเชิงระบบ","อย่าท่องอย่างเดียว","เหตุผลล่ะ?","ฎีกาว่าไง?","อาจารย์ชอบถาม","อย่าปิดไฟ","ผีอ่านด้วย","ขอนั่งข้าง ๆ","พลิกหน้าเร็ว",
+  "หน้านี้สำคัญ","จำให้ได้","อย่าหลับ","อีกบทเดียว","อีกมาตราเดียว","อีกฎีกาเดียว","ตีสองแล้วนะ","กาแฟหมดแล้ว","น้ำแดงมีไหม?","กุมารหิว",
+  "ศาลยังไม่หลับ","ผู้พิพากษามองอยู่","เนติรออยู่","ธงคำตอบอยู่ไหน?","อย่าตอบกำปั้นทุบดิน","อย่าเดา","เขียนให้ครบองค์ประกอบ","หลักก่อน ข้อยกเว้นทีหลัง","อย่าลืมนิยาม","อ่านมาตราเต็ม",
+  "เช็กคำว่า \"ย่อม\"","เช็กคำว่า \"ต้อง\"","เช็กคำว่า \"อาจ\"","คนละเจตนา","คนละผลทางกฎหมาย","ยังไม่เข้าองค์ประกอบ","ฟังผีสิ","ผีเคยตกมาแล้ว","ผีซ่อมสามรอบ","ผีเป็นรุ่นพี่",
+  "ผีจบนิติแล้ว","ผีรอเพื่อน","อ่านดัง ๆ สิ","อย่าท่องผิด","อย่าจำเลขมั่ว","ตัวบทอยู่ไหน?","ข้อสอบยิ้มแล้ว","อาจารย์ยิ้มอยู่","คะแนนบินไปแล้ว","อย่าหาว่าผีไม่เตือน",
+  "ผีเปิดตำราให้","ผีปิดไฟนะ","หันหลังมาสิ","ข้างหลังมี...","เงียบจังเลย","ได้ยินไหม?","เปิดหน้าต่างทำไม?","ลมเย็นไหม?","ใครนั่งอีกตัว?","หนังสือขยับเอง",
+  "ดินสอหายอีกแล้ว","ปากกาหมึกหมด","ผีช่วยติว","ผีออกข้อสอบ","ผีให้คำใบ้","เจอกันในห้องสอบ","ถ้าจำได้...รอด","ถ้าจำไม่ได้...เจอกันคืนนี้","ใครอ่านหนังสือดึกคนเดียว ระวังผีหลอก","กุมารทองชอบน้ำแดง... แต่หัวใจสีแดงชอบคนเอาใจ ❤️👻",
+  "สอบเสร็จกินข้าวต้มไหม","สอบตกน่ากลัวกว่าผีหลอก","มาตรานี้ไม่ออกสอบ...","อาจารย์หลอกเก่งกว่าผี","เพื่อนยืมปากกา ยังไม่คืน","สิ่งศักดิ์สิทธิ์ สิ่งศักดิ์สิทธิ์ สิ่งศักดิ์สิทธิ์","ดาว เอาไฮไลท์พี่มาคืนด้วย","สอบเสร็จกินเบียร์","เดี๋ยวค่อยซ่อม","อกหักดีกว่าสอบตก",
+  "อย่าหันมามอง","อย่าลืมโอนค่ากาแฟ","Cool Uncle! Cool Uncle!","555 หัวเราะในชะตากรรม","จะสอบแล้วทำไมเพิ่งมาอ่าน","น้ำตาจิไหล","แบร่ แบร่~","เหงาไหม ถ้าเหงาผีจิออกมาเป็นเพื่อน","ไม่เปิดแอร์ทำไมหนาว... เพราะฉันอยู่ข้าง ๆ","นี่ไง",
+  "กลางวันทำอะไรไว้","เอาประมวลมาคืนเพื่อน","ไม่ต้องมาหานิติปรัชญาในเล่มนี้","ทำไมตอนเรียนไม่จด","อ่านซ้ำแล้ว","เมื่อกี้น้องเรียก... (แต่เราไม่มีน้อง)","แมวดำกระโดดข้ามแล้วนะ","ข้อสอบกำลังยิ้ม","เปิดผิดมาตราอีกแล้ว","ฎีกาอยู่คนละเล่ม",
+  "อาจารย์ไม่ใจดีเหมือนผี","ขอเปิดไฟหน่อย","หนังสือเปิดเองได้ด้วย","ปากกาหายอีกแล้ว","อย่าปิดหน้าต่าง","เมื่อคืนอ่านถึงไหนแล้ว","จำได้แค่นี้เหรอ","อ่านอีกหนึ่งรอบ","อีกห้าหน้าพอ","ไม่ง่วง... จริงเหรอ",
+  "อย่ามองกระจก","ใต้โต๊ะมีอะไร","ข้างหลังมีเก้าอี้ว่างไหม","เสียงใครพลิกหนังสือ","เงียบแบบนี้น่ากลัว","ไฟกะพริบแล้ว","ลมมาจากไหน","เปิดเพลงอ่านหนังสือสิ","นาฬิกาตีสามแล้ว","ขอไฮไลท์หน่อย",
+  "ไฮไลท์ผิดบรรทัด","ตัวบทไม่เคยโกหก","แต่เพื่อนโกหกว่าไม่ออกสอบ","เชื่อเพื่อนหรือเชื่อผี","ผีเคยสอบมาก่อน","ผีรู้ข้อสอบ... แต่ไม่บอก","อ่านไม่ทันก็ยิ้มไว้","จำเลขมาตราได้ไหม","จำชื่อวิชาได้ไหม","เข้าห้องผิดหรือเปล่า",
+  "นี่สอบวิชาอะไรนะ","เปิดประมวลผิดเล่ม","อย่าทำหน้าตกใจ","ผีตกใจเธอเหมือนกัน","อ่านไปก็ลืมไป","ท่องไปก็สลายไป","วันนี้มีบุญหรือยัง","ไหว้ครบหรือยัง","น้ำแดงหมดแล้ว","ขออีกขวด",
+  "ธูปหมดหรือยัง","ขอให้ผ่านด้วยเถอะ","ถ้าผ่านจะมาแก้บน","ถ้าไม่ผ่าน... เจอกันซ่อม","ซ่อมก็สนุกดี... มั้ง","รุ่นพี่รออยู่","ผีก็รออยู่","อย่าเพิ่งร้องไห้","ร้องหลังประกาศคะแนน","คะแนนยังไม่ออก อย่าเพิ่งตายใจ",
+  "GPA สั่นแล้ว","ความหวังเหลือ 1%","ความจำเหลือ 0%","สติหายไปไหน","ใครเอาสติไป","สมองกำลังรีบูต","โหลดไม่เสร็จ","อ่านแล้วไม่เข้าหัว","หัวเข้าหนังสือแทน","อย่าหลับนะ",
+  "ตื่นก่อนสอบด้วย","ตื่นผิดวันก็มี","ฝันว่าผ่าน","ตื่นมาสอบจริง","อย่าเช็กเฉลยตอนพัก","อย่าถามเพื่อนว่าตอบอะไร","ความสุขหลังสอบมีจริง","เบียร์เย็นรออยู่","แต่คะแนนก็รออยู่","ผ่านเถอะ... สาธุ",
+  "ถ้าเห็นข้อความนี้ แปลว่าผียังอ่านหนังสือเป็นเพื่อนอยู่ 👻📚","วันนี้อ่านมาตรา พรุ่งนี้อ่านใจอาจารย์","ประมวลหนากว่าความหวัง","ข้อสอบไม่ยาก... แต่คำตอบยาก","นิติปรัชญาไม่มีในเล่มนี้","ฎีกาไม่ใช่นิยาย แต่ทำให้นอนไม่หลับ","เพื่อนบอก \"ไม่อ่าน\" แล้วได้ A","ผีไม่หลอกหรอก GPA ต่างหากที่หลอก","อาจารย์บอก \"ง่าย ๆ\" นั่นแหละน่ากลัวที่สุด","อ่านมาตราครบ แต่ลืมเขียนชื่อ",
+  "ผียังสงสารคนอ่านคืนก่อนสอบ","หลับก่อนเดี๋ยวตื่นมาอ่าน","60 เป๊ะ","ทำบุญเยอะๆ",
+  "ผีมา... แต่เค้าจากไป","คนไม่มีใจ เจ็บกว่าผีหลอก","คน ผี ทะเล... อะไรน่ากลัวกว่ากัน","มาตรา 59 ผู้ใด... หรือบุคคลใดหว่า","ละเมิดคือบ่อเกิดแห่งหนี้ ละโมภจะเจอผี","ละเมอ... จะเจอเค้า","สิงโตชอบกินน้ำแดง","ผีบางทีก็อยู่รวมกับเรา","เพื่อนที่นั่งหลังห้อง... ตอนนี้ไปไหน","เคยสังเกตเพื่อนที่หายไปไหม",
+  "คนนั้นที่เราไม่เคยคุยด้วย... หายไปแล้ว","เรากับเพื่อนฝันเรื่องเดียวกัน","ทำไมรู้สึกว่าเคยอ่านมาตรานี้มาแล้ว","ระวังเด็กชายที่ชอบพกตะปูติดเสื้อ","ได้ยินเสียง... หยดน้ำไหม","ทำไมเพดานชอบบิด","พี่สาวคนนั้นถ่ายรูปทีไร... เบลอทุกครั้ง","เคยเห็นคนตัวโปร่งแสงในห้องสมุดไหม","ห้องน้ำไฟปิดเองอีกแล้ว","เคยได้กลิ่นธูป... แต่ไม่เห็นใครไหม",
+  "แมวตัวนั้นชอบมองมุมเดิมทุกคืน","ได้ยินเสียงหมาหอนไหม","ผีไม่หลอก... แต่ความทรงจำหลอก","คนที่ยิ้มให้ทุกวัน วันนี้หายไป","อย่าทัก... ถ้าไม่แน่ใจว่าเป็นเพื่อน","บางคนจำหน้าเราได้... ทั้งที่เราไม่เคยเจอ","เธอเคยเดินผ่านเรา... หรือเปล่า","ลองนับจำนวนคนในห้องใหม่","มีเก้าอี้เพิ่มมาตัวหนึ่งไหม","รูปหมู่ใบนี้... ใครคนนั้น",
+  "ยิ่งมอง ยิ่งมีคนเพิ่ม","อย่าซูมรูป","กระจกไม่ได้สะท้อนทุกอย่าง","กระจกบางบาน... ช้ากว่าเรา","อย่ากะพริบตาตอนมองกระจก","เคยรู้สึกว่ามีคนเดินตาม... ในห้องสมุด","ชั้นหนังสือแถวนี้... เหมือนยาวขึ้น","เมื่อคืนหนังสืออยู่คนละชั้น","ตัวหนังสือเรียงไม่เหมือนเดิม","หน้านี้เมื่อวานไม่มี",
+  "มาตรานี้... เพิ่มขึ้นเองหรือเปล่า","ประมวลหนักขึ้นทุกคืน","มีรอยนิ้วมือบนหน้าที่ยังไม่เคยเปิด","มีคนขีดไฮไลท์ไว้ก่อนเรา","แต่ลายมือเหมือนของเรา","อย่าตามเสียงเรียก","โดยเฉพาะถ้าเรียกชื่อเต็ม","ถ้าเรียกสามครั้ง... อย่าหัน","ถ้าหันแล้ว... ยิ้มไว้","เธอเห็นคนนั้นเหมือนเราไหม",
+  "หรือเห็นแค่เราคนเดียว","วันนี้เพื่อนดูตัวสูงขึ้นไหม","หรือพื้นต่ำลง","บันไดเมื่อกี้มีกี่ขั้น","นับใหม่อีกที","เดินวนหรือยัง","ทางเดิม... แต่ไม่ใช่ที่เดิม","ห้องนี้เคยเล็กกว่านี้ไหม","ประตูอยู่ตรงนี้มาตลอดหรือเปล่า","เสียงเปิดประมวลดังเอง",
+  "ลมเปิด... หรือใครเปิด","ข้างหลังมีที่ว่างไหม","อย่าถามว่ามีใครนั่งไหม","เพราะอาจมีคนตอบ","ผมเส้นนั้น... ไม่ใช่ของเรา","รองเท้าคู่นั้น... ไม่มีเจ้าของ","ได้ยินเสียงเดิน... แต่ไม่มีเงา","เงาบางอัน... ไม่มีคน","คนบางคน... ไม่มีเงา","เธอเคยเห็นรอยยิ้มที่กว้างเกินไปไหม",
+  "อย่ายิ้มตาม","คนที่หัวเราะคนเดียว... อาจไม่ได้อยู่คนเดียว","ความเงียบมีเสียง","ได้ยินไหม","เหมือนมีใครอ่านหนังสือพร้อมเรา","พลิกหน้าพร้อมกันเลย","แต่เรามาคนเดียว","เธอก็ได้ยินใช่ไหม","อย่าตอบ","ถ้าไม่มีใครถาม",
+  "ถ้ามีคนถามว่า \"จำเราได้ไหม\"","อย่ารีบตอบ","บางคำถามไม่มีคำตอบ","บางคำตอบ... ไม่มีคนถาม","คนที่เราคิดถึง... อาจกำลังคิดถึงเรา","หรือกำลังมองอยู่","เค้าไม่ได้หายไป","แค่เรา... มองไม่เห็น","ผีไม่น่ากลัวเท่าคนที่อ่านแล้วไม่คืนประมวล","อย่ายืมไฮไลท์แล้วหาย",
+  "คนยืมประมวลไม่คืน... หลอนกว่าผี","อ่านมาตรา... แต่อย่าอ่านชื่อข้างหลัง","อย่าจดชื่อไว้ในประมวลของคนอื่น","ถ้าประมวลเรียกชื่อเรา... อย่าเปิด","บางหน้ามีคนอ่านอยู่ก่อนแล้ว","ความรักก็เหมือนมาตรา... อ่านผิด ชีวิตเปลี่ยน","เค้าไม่ตอบแชต... แต่ผีตอบ","เธอเลือกเค้า... ผีเลือกเธอ","ลองนับเพื่อนในห้องอีกครั้ง... แล้วอย่าลืมนับตัวเองด้วย",
+];
 let ghostEl = null, ghostRotateTimer = null, ghostPulseTimer = null, ghostIndex = 0;
+let ghostSpeechEl = null, ghostSpeechTimer = null;
+function ensureGhostSpeechEl(){
+  if (ghostSpeechEl) return ghostSpeechEl;
+  const el = document.createElement('div');
+  el.className = 'ghost-speech';
+  document.body.appendChild(el);
+  ghostSpeechEl = el; return el;
+}
+function showGhostSpeech(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const ghost = ensureGhostEl();
+  const bubble = ensureGhostSpeechEl();
+  bubble.textContent = GHOST_PHRASES[Math.floor(Math.random() * GHOST_PHRASES.length)];
+  const rect = ghost.getBoundingClientRect();
+  bubble.style.right = (window.innerWidth - rect.right) + 'px';
+  bubble.style.bottom = (window.innerHeight - rect.top + 10) + 'px';
+  bubble.classList.add('visible');
+  clearTimeout(ghostSpeechTimer);
+  ghostSpeechTimer = setTimeout(() => bubble.classList.remove('visible'), 2600);
+  pulseGhost();
+  playHooSound();
+}
 function ensureGhostEl(){
   if (ghostEl) return ghostEl;
   const img = document.createElement('img');
   img.src = GHOST_IMAGES[0]; img.alt = ''; img.setAttribute('aria-hidden', 'true'); img.className = 'ghost-companion';
+  img.addEventListener('mouseenter', showGhostSpeech);
+  img.addEventListener('click', showGhostSpeech);
   document.body.appendChild(img); ghostEl = img; return img;
 }
 function startGhostRotation(){
@@ -2531,7 +2728,20 @@ function playHooSound(){
 document.addEventListener('DOMContentLoaded', () => {
   const current = document.documentElement.getAttribute('data-theme') || 'light';
   updateThemeToggleUI(current);
-  if (current === 'horror') startGhostRotation();
+  if (current === 'horror') { playHorrorBgm(); startGhostRotation(); scheduleDogHowl(); }
+  const droneMuteBtn = document.getElementById('drone-mute-btn');
+  if (droneMuteBtn) {
+    let muted = false;
+    try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+    droneMuteBtn.textContent = muted ? '🔇' : '🔊';
+  }
+  ['click','touchstart','keydown'].forEach(evt => {
+    document.addEventListener(evt, function resumeBgmOnce(){
+      const bgm = document.getElementById('horror-bgm');
+      if (document.documentElement.getAttribute('data-theme') === 'horror' && bgm && bgm.paused) playHorrorBgm();
+      ['click','touchstart','keydown'].forEach(e2 => document.removeEventListener(e2, resumeBgmOnce));
+    }, { once: true });
+  });
 });
 </script>
 </html>
