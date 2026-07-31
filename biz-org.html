@@ -486,6 +486,20 @@ footer{
   .flashcard{padding:28px 16px 24px}
   .scenario{padding:16px}
 }
+.coffee-widget{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  margin:28px auto 0;padding:18px;max-width:280px;
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+}
+.coffee-widget img{width:130px;height:130px;border-radius:8px;background:#fff;padding:6px}
+.coffee-widget a.coffee-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#FFDD00;color:#1a1a1a;font-weight:700;font-size:13px;
+  padding:8px 16px;border-radius:8px;text-decoration:none;transition:transform .15s;
+}
+.coffee-widget a.coffee-btn:hover{transform:scale(1.04)}
+.coffee-widget p{margin:0;font-size:12px;color:var(--ink-faint);text-align:center}
+.coffee-widget .data-source-note a{color:inherit}
 </style>
 </head>
 <body>
@@ -703,6 +717,12 @@ function playHoverSound(){
   <p class="muted" style="margin-top:14px;font-size:12.5px;line-height:1.7">⚠️ ใช้ทบทวนเท่านั้น ก่อนนำไปใช้งานจริงโปรดตรวจสอบอีกครั้ง</p>
 </section>
 
+<div class="coffee-widget">
+  <p>ถ้าเว็บนี้มีประโยชน์ เลี้ยงกาแฟ Cool Uncle สักแก้วได้นะ ☕</p>
+  <img src="pics/coffee/bmc_qr.png" alt="QR code เลี้ยงกาแฟผ่าน Buy Me a Coffee" loading="lazy">
+  <a href="https://buymeacoffee.com/dukperadom" target="_blank" rel="noopener" class="coffee-btn" onmouseenter="playHoverSound()">☕ Buy Me a Coffee</a>
+  <p class="data-source-note">ข้อมูลกฎหมายอ้างอิงจากฐานข้อมูลกฤษฎีกา <a href="https://www.ocs.go.th/searchlaw-law" target="_blank" rel="noopener">https://www.ocs.go.th/searchlaw-law</a> · สืบค้นล่าสุด 31 กรกฎาคม 2569</p>
+</div>
 <footer>
   สร้างด้วย Claude · ข้อมูลจากเอกสารสรุป น.330 กฎหมายองค์กรธุรกิจ (ยังไม่ครบหมวด จ) ควบ/แปรสภาพ — จะเพิ่มเติมภายหลัง
 </footer>
