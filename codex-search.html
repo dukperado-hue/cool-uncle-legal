@@ -1073,24 +1073,53 @@ function applyBookLock(book) {
 }
 
 // --- quick group-search (ป.พ.พ. only) -----------------------------------
-// Matches by the real บรรพ/ลักษณะ metadata already on each article (not
-// hardcoded มาตรา ranges) so this stays correct even if article numbering
-// has gaps/sub-articles.
+// Two filter shapes:
+//  - meta-based: { phaak, laksana } matched against article.meta (works
+//    even with gaps/sub-articles since it doesn't depend on numbering)
+//  - numberRange-based: { numberRange: [[start,end],...], exclude: [[s,e],...] }
+//    used where the real teaching boundary cuts across a ลักษณะ/หมวด instead
+//    of matching it exactly. Ranges compare via parseArticleKey() so
+//    sub-numbered articles like "193/5" sort correctly within their range.
+function parseArticleKey(numStr) {
+  const parts = String(numStr).split('/');
+  const main = parseInt(parts[0], 10);
+  const sub = parts[1] ? parseInt(parts[1], 10) : 0;
+  return main + sub / 1000;
+}
+
 const GROUP_FILTERS = {
-  'นิติกรรม': [{ phaak: 'บรรพ 1', laksana: 'ลักษณะ 4' }],
-  'นิติกรรม (รวมสัญญา)': [{ phaak: 'บรรพ 1', laksana: 'ลักษณะ 4' }, { phaak: 'บรรพ 2', laksana: 'ลักษณะ 2' }],
+  'นิติกรรมและสัญญา': [
+    { phaak: 'บรรพ 1', laksana: 'ลักษณะ 4' },
+    { phaak: 'บรรพ 2', laksana: 'ลักษณะ 2' },
+    { numberRange: [[193.001, 193.015], [193.030, 193.034]] },
+  ],
   'หนี้': [{ phaak: 'บรรพ 2', laksana: 'ลักษณะ 1' }],
   'ทรัพย์': [{ phaak: 'บรรพ 1', laksana: 'ลักษณะ 3' }, { phaak: 'บรรพ 4' }],
-  'สัญญา(ซื้อขาย)': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 1' }],
-  'สัญญา(ให้)': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 3' }],
-  'สัญญา(เช่าทรัพย์)': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 4' }],
-  'สัญญา(เช่าซื้อ)': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 5' }],
+  'ซื้อขาย': [{ numberRange: [[453, 517]], exclude: [[491, 502]] }],
+  'แลกเปลี่ยน': [{ numberRange: [[518, 520]] }],
+  'ให้': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 3' }],
+  'เช่าทรัพย์': [{ numberRange: [[537, 571]] }],
+  'เช่าซื้อ': [{ numberRange: [[572, 574]] }],
+  'ขายฝาก': [{ numberRange: [[491, 502]] }],
+  'ยืม': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 9' }],
   'จ้างทำของ': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 7' }],
-  'สัญญา(ยืม)': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 9' }],
-  'สัญญา(ตัวแทน)': [{ phaak: 'บรรพ 3', laksana: 'ลักษณะ 15' }],
+  'ตัวแทน': [{ numberRange: [[798, 844]] }],
   'ละเมิด': [{ phaak: 'บรรพ 2', laksana: 'ลักษณะ 5' }],
   'ครอบครัว': [{ phaak: 'บรรพ 5' }],
+  'มรดก': [{ phaak: 'บรรพ 6' }],
 };
+
+function matchesGroupFilter(article, f, key) {
+  if (f.numberRange) {
+    const inRange = f.numberRange.some(([s, e]) => key >= s && key <= e);
+    if (!inRange) return false;
+    if (f.exclude && f.exclude.some(([s, e]) => key >= s && key <= e)) return false;
+    return true;
+  }
+  const m = article.meta || {};
+  return (!f.phaak || (m.phaak || '').includes(f.phaak)) &&
+    (!f.laksana || (m.laksana || '').includes(f.laksana));
+}
 
 function renderGroupSearchButtons() {
   const row = document.getElementById('group-search-row');
@@ -1107,11 +1136,8 @@ function searchGroup(name) {
   document.getElementById('search-article').value = '';
   const articles = codexData.books[selectedBook].articles;
   let results = Object.values(articles).filter(article => {
-    const m = article.meta || {};
-    return filters.some(f =>
-      (!f.phaak || (m.phaak || '').includes(f.phaak)) &&
-      (!f.laksana || (m.laksana || '').includes(f.laksana))
-    );
+    const key = parseArticleKey(article.number);
+    return filters.some(f => matchesGroupFilter(article, f, key));
   }).map(article => ({ ...article, bookType: selectedBook }));
 
   results.sort((a, b) => {
