@@ -387,7 +387,10 @@ button{
 
   <div class="results-container" id="results-container">
     <main class="results-main" style="grid-column:1/-1">
-      <div class="result-count" id="result-count">ค้นหามาตรา 0 รายการ</div>
+      <div class="result-count" id="result-count" style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+        <span id="result-count-text">ค้นหามาตรา 0 รายการ</span>
+        <button type="button" class="icon-btn" title="พิมพ์มาตราทั้งหมดในผลลัพธ์นี้" onclick="printAllResults()" onmouseenter="playHoverSound()">🖨️ พิมพ์ทั้งหมวด</button>
+      </div>
 
       <div id="results-list">
         <div class="empty-state">
@@ -1064,7 +1067,7 @@ function applyBookLock(book) {
         <h3>ยังไม่มีข้อมูล</h3>
         <p>${info.title} กำลังอยู่ระหว่างจัดทำ</p>
       </div>`;
-    document.getElementById('result-count').textContent = '';
+    document.getElementById('result-count-text').textContent = '';
   } else {
     document.getElementById('search-text').value = '';
     document.getElementById('search-article').value = '';
@@ -1194,7 +1197,7 @@ function goToPage(delta) {
 
 function displayResults(results) {
   const resultsList = document.getElementById('results-list');
-  const resultCount = document.getElementById('result-count');
+  const resultCount = document.getElementById('result-count-text');
 
   if (results.length === 0) {
     resultsList.innerHTML = `
@@ -1315,6 +1318,29 @@ function printArticle(btn) {
   window.print();
 }
 
+function printAllResults() {
+  const printArea = document.getElementById('print-area');
+  if (!printArea || !currentResults || currentResults.length === 0) return;
+  const groupTitle = document.getElementById('result-count-text')?.textContent.split('(')[0].trim() || 'ผลการค้นหา';
+  printArea.innerHTML = `
+    <h1 style="font-family:'Noto Serif Thai',serif;margin-bottom:20px;">${groupTitle}</h1>
+    ${currentResults.map(article => {
+      const breadcrumb = [article.meta?.phaak, article.meta?.laksana, article.meta?.muad, article.meta?.suan]
+        .filter(Boolean).map(v => ' › ' + v).join('');
+      const lectureHtml = lectureNotesHtml(article);
+      return `
+      <div style="margin-bottom:26px;padding-bottom:20px;border-bottom:1px solid #ccc;break-inside:avoid;">
+        <h2 style="font-family:'Noto Serif Thai',serif;margin-bottom:10px;">มาตรา ${article.number}</h2>
+        <div class="article-text">${renderArticleTextHtml(article.text, article.bookType, article.number)}</div>
+        <div class="article-breadcrumb">📍 ${BOOK_INFO[article.bookType].short}${breadcrumb}</div>
+        ${lectureHtml ? `<div style="margin-top:14px;padding-top:10px;border-top:2px solid #ccc;">${lectureHtml}</div>` : ''}
+      </div>`;
+    }).join('')}
+  `;
+  document.body.classList.add('printing-one');
+  window.print();
+}
+
 window.addEventListener('afterprint', () => {
   document.body.classList.remove('printing-one');
   const printArea = document.getElementById('print-area');
@@ -1332,7 +1358,7 @@ function clearSearch() {
       <p>ใส่คำค้นหาหรือเลขมาตราแล้วกด ค้นหา หรือ Enter</p>
     </div>
   `;
-  document.getElementById('result-count').textContent = 'ค้นหามาตรา 0 รายการ';
+  document.getElementById('result-count-text').textContent = 'ค้นหามาตรา 0 รายการ';
 }
 
 function showError(msg) {
