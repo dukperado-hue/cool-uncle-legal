@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เกมสถานการณ์ · Cool Uncle Legal Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;800&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF9F4;
+  --card:#FDFCF8;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --gold-soft:#F3E8CF;
+  --ok:#1E7A4F;
+  --ok-bg:#E6F4EC;
+  --bad:#B23A3A;
+  --bad-bg:#FBEAEA;
+  --accent:#2E4A7A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+}
+
+/* ============ THEME: DARK ============ */
+:root[data-theme="dark"]{
+  --paper:#14161f;--card:#1c2030;--ink:#E9E7E1;--ink-soft:#A9AEC2;--ink-faint:#6C7188;
+  --line:#2E3348;--gold:#E0BD73;--gold-soft:#3A3320;--ok:#4FCB8D;--ok-bg:#173425;
+  --bad:#E2685F;--bad-bg:#3A1E1C;--accent:#84A6E8;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.45);
+}
+/* ============ THEME: HORROR (กระสือ mode) ============ */
+:root[data-theme="horror"]{
+  --paper:#0A070C;--card:#151019;--ink:#D9D2C9;--ink-soft:#9C8F93;--ink-faint:#5C5460;
+  --line:#2B1F26;--gold:#8F1F2B;--gold-soft:#301418;--ok:#3F7A4F;--ok-bg:#16241a;
+  --bad:#FF3355;--bad-bg:#301018;--accent:#4A8F5C;
+  --shadow:0 1px 2px rgba(0,0,0,.6),0 10px 28px rgba(0,0,0,.6);
+}
+:root[data-theme="dark"] body,:root[data-theme="horror"] body{background:var(--paper)}
+:root[data-theme="dark"] .home-bar,:root[data-theme="horror"] .home-bar{background:var(--card);border-bottom-color:var(--line)}
+:root[data-theme="dark"] .notice,:root[data-theme="horror"] .notice{background:rgba(255,255,255,.04)}
+:root[data-theme="dark"] .scenario-card,:root[data-theme="horror"] .scenario-card{background:var(--card)}
+:root[data-theme="dark"] .caption-box,:root[data-theme="horror"] .caption-box{background:var(--card)}
+:root[data-theme="dark"] .mc-option,:root[data-theme="horror"] .mc-option{background:var(--card)}
+:root[data-theme="dark"] .big-choice,:root[data-theme="horror"] .big-choice{background:var(--card)}
+:root[data-theme="dark"] .result-card,:root[data-theme="horror"] .result-card{background:var(--card)}
+
+/* THEME TOGGLE */
+.theme-toggle{display:flex;gap:3px;margin-left:auto;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+.theme-toggle button{border:none;background:transparent;border-radius:999px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .2s;font-family:inherit}
+.theme-toggle button.active{background:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.theme-toggle button:hover{background:var(--line)}
+
+.drone-mute-btn{
+  display:none;
+  margin-left:6px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:999px;
+  width:28px;height:28px;
+  align-items:center;justify-content:center;
+  cursor:pointer;font-size:13px;
+}
+:root[data-theme="horror"] .drone-mute-btn{ display:flex; }
+:root[data-theme="horror"] .drone-mute-btn:hover{ background:var(--line); }
+
+/* GHOST COMPANION */
+.ghost-companion{position:fixed;right:16px;bottom:16px;width:200px;height:auto;pointer-events:auto;cursor:pointer;opacity:0;transform:translateY(8px);transition:opacity .6s ease;z-index:999;filter:drop-shadow(0 0 16px rgba(180,20,40,.45));animation:ghost-float 3.4s ease-in-out infinite}
+.ghost-companion.visible{opacity:1}
+.ghost-companion.pulse{filter:drop-shadow(0 0 26px rgba(180,20,40,.8)) drop-shadow(0 0 10px rgba(255,255,255,.3))}
+@keyframes ghost-float{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
+.ghost-speech{
+  position:fixed;max-width:200px;background:#fff;color:#1a1a1a;
+  border-radius:14px;padding:8px 13px;font-size:13px;font-weight:700;
+  font-family:'Sarabun',system-ui,sans-serif;line-height:1.4;
+  box-shadow:0 8px 20px rgba(0,0,0,.4);z-index:1000;
+  opacity:0;pointer-events:none;transform:translateY(6px) scale(.96);
+  transition:opacity .2s ease,transform .2s ease;text-align:center;
+}
+.ghost-speech.visible{opacity:1;transform:translateY(0) scale(1)}
+.ghost-speech::after{
+  content:"";position:absolute;right:28px;bottom:-8px;width:0;height:0;
+  border:8px solid transparent;border-top-color:#fff;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+.home-bar{
+  display:flex;align-items:center;gap:10px;
+  background:#EFEAE0;border-bottom:1px solid var(--line);
+  padding:10px 16px;font-size:13px;color:var(--ink-soft);
+}
+.home-bar-logo{
+  font-size:22px;line-height:1;display:inline-flex;align-items:center;
+  text-decoration:none;margin-right:2px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.12));
+  transition:transform .15s;
+}
+.home-bar-logo:hover{transform:scale(1.1)}
+.home-bar-link{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.home-bar-link:hover{text-decoration:underline}
+.home-bar-sep{color:var(--ink-faint)}
+.home-bar-current{font-weight:600;color:var(--ink-soft)}
+
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),var(--paper);
+  color:var(--ink);min-height:100vh;font-size:16px;line-height:1.75;
+}
+h1,h2{font-family:'Noto Serif Thai',serif}
+
+.wrap{max-width:640px;margin:0 auto;padding:24px 16px 60px}
+
+.page-head{text-align:center;margin-bottom:18px}
+.page-head .crest{
+  width:60px;height:60px;border-radius:50%;margin:0 auto 12px;
+  background:radial-gradient(circle at 32% 28%, #E7C983, var(--gold) 55%, #8F6511 100%);
+  display:flex;align-items:center;justify-content:center;font-size:26px;
+  box-shadow:0 6px 18px rgba(176,138,60,.35), inset 0 2px 3px rgba(255,255,255,.5);
+}
+.page-head h1{font-size:22px;font-weight:800;color:var(--ink)}
+.page-head .subtitle{color:var(--ink-soft);margin-top:6px;font-size:14px}
+
+.notice{
+  background:#FBF6E8;border:1.5px dashed var(--gold);border-radius:var(--radius);
+  padding:12px 16px;margin:16px 0;font-size:12.5px;color:var(--ink-soft);
+  display:flex;align-items:center;gap:10px;
+}
+
+/* ===== PICKER ===== */
+.scenario-list{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.scenario-card{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px;box-shadow:var(--shadow);cursor:pointer;font-family:inherit;
+  transition:transform .15s,border-color .15s;width:100%;
+}
+.scenario-card:hover{transform:translateY(-2px);border-color:var(--gold)}
+.scenario-card .sc-icon{font-size:36px;flex-shrink:0}
+.scenario-card .sc-text{flex:1}
+.scenario-card .sc-title{font-weight:800;font-size:15.5px;color:var(--ink)}
+.scenario-card .sc-desc{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.scenario-card .sc-go{color:var(--accent);font-weight:700;font-size:20px;flex-shrink:0}
+.scenario-card.disabled{opacity:.5;cursor:not-allowed}
+.scenario-card.disabled:hover{transform:none;border-color:var(--line)}
+
+/* ===== BIG BUTTONS (duolingo-style) ===== */
+.big-btn{
+  display:block;width:100%;text-align:center;font-family:inherit;
+  background:var(--accent);color:#fff;font-weight:800;font-size:15.5px;
+  padding:15px 20px;border-radius:999px;border:none;cursor:pointer;
+  box-shadow:0 4px 0 rgba(0,0,0,.15);transition:transform .1s,box-shadow .1s;
+  margin-top:14px;
+}
+.big-btn:hover{transform:translateY(-1px)}
+.big-btn:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.15)}
+.big-btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none;transform:none}
+.big-btn.secondary{background:var(--card);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.big-btn.secondary:hover{border-color:var(--gold)}
+
+/* ===== SCENE / STAGE ===== */
+.scene-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-size:12.5px;color:var(--ink-faint);font-weight:700}
+.beat-dots{display:flex;gap:5px}
+.beat-dot{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.beat-dot.done{background:var(--gold)}
+.beat-dot.current{background:var(--accent)}
+
+.stage{
+  position:relative;width:100%;aspect-ratio:4/3;border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);
+}
+.stage-bg-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:64px;opacity:.35}
+.stage-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.stage-label{position:absolute;top:8px;left:10px;background:rgba(0,0,0,.35);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;letter-spacing:.02em}
+
+.sprite{
+  position:absolute;bottom:6%;width:20%;max-width:110px;min-width:64px;
+  text-align:center;opacity:0;pointer-events:none;
+  transform:translateX(-50%) scale(.85);
+  transition:left .55s cubic-bezier(.4,0,.2,1),opacity .35s ease,transform .35s ease;
+}
+.sprite.visible{opacity:1;transform:translateX(-50%) scale(1)}
+.sprite-avatar{
+  position:relative;width:64%;aspect-ratio:1/1;margin:0 auto;border-radius:22%;
+  display:flex;align-items:center;justify-content:center;font-size:26px;
+  box-shadow:0 3px 8px rgba(0,0,0,.25);border:2px solid rgba(255,255,255,.6);
+}
+.sprite.active .sprite-avatar{box-shadow:0 0 0 3px var(--gold),0 3px 10px rgba(0,0,0,.3)}
+.sprite-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:20%}
+.sprite-name{
+  margin-top:4px;font-size:10.5px;font-weight:800;color:#fff;
+  text-shadow:0 1px 3px rgba(0,0,0,.75);white-space:nowrap;
+}
+
+.caption-box{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px 16px;margin-top:12px;font-size:14.5px;color:var(--ink);
+  min-height:64px;box-shadow:var(--shadow);line-height:1.7;
+}
+
+/* ===== COMPREHENSION / RECAP ===== */
+.big-choice-wrap{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.big-choice{
+  display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--line);
+  border-radius:var(--radius);padding:14px 16px;font-family:inherit;font-size:14.5px;
+  font-weight:700;color:var(--ink);cursor:pointer;transition:all .15s;text-align:left;
+}
+.big-choice:hover{border-color:var(--gold);transform:translateY(-1px)}
+.recap-text{white-space:pre-line;font-size:13.5px;color:var(--ink-soft);line-height:1.8}
+
+/* ===== COURTROOM ===== */
+.defendant-box{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;margin-top:12px;box-shadow:var(--shadow)}
+.defendant-avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;border:2px solid rgba(255,255,255,.6);box-shadow:0 2px 6px rgba(0,0,0,.2);position:relative;overflow:hidden}
+.defendant-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.defendant-meta .d-label{font-size:11px;color:var(--ink-faint);font-weight:700}
+.defendant-meta .d-name{font-size:15px;font-weight:800;color:var(--ink)}
+
+.q-act{font-size:14px;color:var(--ink-soft);margin:12px 0 4px;line-height:1.7}
+.q-prompt{font-weight:800;font-size:14.5px;color:var(--ink);margin-bottom:10px}
+
+.mc-list{display:flex;flex-direction:column;gap:9px}
+.mc-option{
+  display:flex;align-items:flex-start;gap:10px;background:#fff;border:1.5px solid var(--line);
+  border-radius:12px;padding:12px 14px;font-family:inherit;font-size:13.5px;color:var(--ink);
+  cursor:pointer;text-align:left;transition:all .15s;line-height:1.6;
+}
+.mc-option:hover:not(:disabled){border-color:var(--gold);background:var(--gold-soft)}
+.mc-option:disabled{cursor:default}
+.mc-option .mc-letter{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--gold-soft);color:#8F6511;font-weight:800;font-size:11.5px;display:flex;align-items:center;justify-content:center}
+.mc-option.correct{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.mc-option.correct .mc-letter{background:var(--ok);color:#fff}
+.mc-option.wrong{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+.mc-option.wrong .mc-letter{background:var(--bad);color:#fff}
+.mc-option.muted{opacity:.55}
+
+.reveal-box{
+  margin-top:14px;padding:14px 16px;background:var(--gold-soft);border:1px dashed var(--gold);
+  border-radius:var(--radius);font-size:13.5px;color:var(--ink-soft);line-height:1.8;
+}
+.reveal-box .rv-title{font-weight:800;color:var(--ink);margin-bottom:6px;font-size:13.5px}
+.q-progress{font-size:12px;color:var(--ink-faint);font-weight:700;margin-top:4px}
+
+/* ===== RESULTS ===== */
+.result-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 18px;text-align:center;box-shadow:var(--shadow);margin-top:8px}
+.result-score{font-size:38px;font-weight:800;color:var(--accent);margin:6px 0}
+.result-msg{color:var(--ink-soft);font-size:14px}
+
+footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)}
+.coffee-widget{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  margin:28px auto 0;padding:18px;max-width:280px;
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+}
+.coffee-widget img{width:130px;height:130px;border-radius:8px;background:#fff;padding:6px}
+.coffee-widget a.coffee-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#FFDD00;color:#1a1a1a;font-weight:700;font-size:13px;
+  padding:8px 16px;border-radius:8px;text-decoration:none;transition:transform .15s;
+}
+.coffee-widget a.coffee-btn:hover{transform:scale(1.04)}
+.coffee-widget p{margin:0;font-size:12px;color:var(--ink-faint);text-align:center}
+.coffee-widget .data-source-note a{color:inherit}
+</style>
+</head>
+<body>
+<script>
+(function(){
+  try {
+    var t = localStorage.getItem('codex-theme');
+    if (t === 'dark' || t === 'horror') document.documentElement.setAttribute('data-theme', t);
+  } catch(e){}
+})();
+</script>
+<div class="home-bar">
+  <a href="index.html" class="home-bar-logo" title="กลับหน้าหลัก" onmouseenter="playHoverSound()">👴🏻</a>
+  <a href="index.html" class="home-bar-link" onmouseenter="playHoverSound()">← กลับหน้าหลัก</a>
+  <span class="home-bar-sep">·</span>
+  <span class="home-bar-current">เกมสถานการณ์</span>
+  <div class="theme-toggle" role="group" aria-label="เลือกธีม">
+    <button type="button" data-theme-btn="light" onclick="setTheme('light')" onmouseenter="playHoverSound()" title="โหมดสว่าง">☀️</button>
+    <button type="button" data-theme-btn="dark" onclick="setTheme('dark')" onmouseenter="playHoverSound()" title="โหมดมืด">🌙</button>
+    <button type="button" data-theme-btn="horror" onclick="setTheme('horror')" onmouseenter="playHoverSound()" title="โหมดสยองขวัญ">👻</button>
+  </div>
+  <button type="button" id="drone-mute-btn" class="drone-mute-btn" onclick="toggleDroneMute(this)" title="ปิด/เปิดเสียงเพลง">🔊</button>
+</div>
+<audio id="horror-bgm" loop preload="auto" playsinline webkit-playsinline style="display:none">
+  <source src="music/The_Cold_Stream_Lament.mp3" type="audio/mpeg">
+</audio>
+<audio id="dog-howl" preload="auto" playsinline webkit-playsinline style="display:none">
+  <source src="music/หมาหอน.mp3" type="audio/mpeg">
+</audio>
+
+<div class="wrap">
+  <header class="page-head">
+    <div class="crest">🎮</div>
+    <h1>เกมสถานการณ์</h1>
+    <p class="subtitle">ฝึกวิเคราะห์โจทย์ทีละขั้น สไตล์ visual novel</p>
+  </header>
+
+  <div class="notice">⚠️ เนื้อหาโดย AI จากโจทย์ตัวอย่าง — ใช้ฝึกทำความเข้าใจเท่านั้น โปรดตรวจสอบกับตำราและอาจารย์ผู้สอนก่อนใช้อ้างอิงจริง</div>
+
+  <div id="app-root"></div>
+
+  <div class="coffee-widget">
+  <p>ถ้าเว็บนี้มีประโยชน์ เลี้ยงกาแฟ Cool Uncle สักแก้วได้นะ ☕</p>
+  <img src="pics/coffee/bmc_qr.png" alt="QR code เลี้ยงกาแฟผ่าน Buy Me a Coffee" loading="lazy">
+  <a href="https://buymeacoffee.com/dukperadom" target="_blank" rel="noopener" class="coffee-btn" onmouseenter="playHoverSound()">☕ Buy Me a Coffee</a>
+  <p class="data-source-note">เนื้อหากฎหมายอ้างอิงประมวลกฎหมายอาญาไทย · ใช้ฝึกฝนเชิงการศึกษาเท่านั้น</p>
+</div>
+<footer>สร้างด้วย Claude · ⚠️ ใช้ฝึกฝนเสริมหลักสูตรเท่านั้น โปรดตรวจสอบความถูกต้องของข้อมูล · Cool Uncle Legal Lab 2024</footer>
+</div>
+
+<script>
+/* ================================================================
+   HOVER SOUND (verbatim site boilerplate)
+   ================================================================ */
+let __hbAudioCtx;
+function playHoverSound(){
+  try{
+    __hbAudioCtx = __hbAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __hbAudioCtx;
+    if(c.state === 'suspended') c.resume();
+    const t0 = c.currentTime;
+    const osc = c.createOscillator(), gain = c.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(0.05, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+0.09);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+0.1);
+  }catch(e){}
+}
+
+/* ================================================================
+   SPRITE + BACKGROUND LIBRARY (recyclable across future scenarios)
+   Upgrade path: drop an image at pics/game/sprites/<id>.png or
+   pics/game/backgrounds/<id>.jpg and it replaces the emoji/gradient
+   placeholder automatically (onerror fallback keeps the placeholder
+   if the file is missing) — zero code changes needed.
+   ================================================================ */
+const SPRITES = {
+  male_teen:         { emoji: '🧑', color: '#8FB6E0' },
+  female_teen:        { emoji: '👧', color: '#F2AFC4' },
+  female_influencer:  { emoji: '💁‍♀️', color: '#D9A8E8' },
+  male_fan:           { emoji: '🙋‍♂️', color: '#9CDCB4' },
+  hippo_baby:         { emoji: '🦛', color: '#F2CB86' },
+  hippo_mother:       { emoji: '🦛', color: '#C79A66' },
+};
+const BACKGROUNDS = {
+  zoo_pool:   { emoji: '🌴', gradient: 'linear-gradient(180deg,#CDEBD9 0%,#8FCBA8 55%,#4F8E6C 100%)' },
+  courtroom:  { emoji: '⚖️', gradient: 'linear-gradient(180deg,#EFE3C4 0%,#D6C295 55%,#9C8355 100%)' },
+};
+function spritePath(id){ return 'pics/game/sprites/' + id + '.png'; }
+function bgPath(id){ return 'pics/game/backgrounds/' + id + '.jpg'; }
+
+function renderSpriteAvatarHTML(spriteId){
+  const sp = SPRITES[spriteId] || { emoji: '❓', color: '#ccc' };
+  return `<div class="sprite-avatar" style="background:${sp.color}">`
+       + `<span class="sprite-emoji">${sp.emoji}</span>`
+       + `<img src="${spritePath(spriteId)}" alt="" onerror="this.remove()">`
+       + `</div>`;
+}
+function renderStageBgHTML(bgId){
+  const bg = BACKGROUNDS[bgId] || { emoji: '🖼️', gradient: '#ddd' };
+  return `<div class="stage-bg-emoji">${bg.emoji}</div>`
+       + `<img class="stage-bg-img" src="${bgPath(bgId)}" alt="" onerror="this.remove()">`;
+}
+
+/* ================================================================
+   SCENARIO DATA — one entry = one fully self-contained minigame.
+   Adding scenario #2 later means adding another object to this
+   array only; the engine below never needs to change.
+   ================================================================ */
+const SCENARIOS = [
+  {
+    id: 'zoo-hippo-case',
+    icon: '🦛',
+    title: 'คดีที่สวนสัตว์',
+    blurb: 'สถานการณ์อาญาที่สวนสัตว์เปิด — วิเคราะห์ว่าใครมีความผิดฐานใดบ้าง',
+    characters: {
+      male_teen:        { name: 'นายแดง' },
+      female_teen:       { name: 'นส.เหลือง' },
+      female_influencer: { name: 'นางดำ' },
+      male_fan:          { name: 'นายเขียว' },
+      hippo_baby:        { name: 'หมูเด้ง' },
+      hippo_mother:      { name: 'โจนาห์' },
+    },
+    bg: 'zoo_pool',
+    beats: [
+      { caption: 'นายแดง (อายุ 16 ปี) แอบหยิบแหวนทองของแม่ไปจำนำ เอาเงินมาชวน นส.เหลือง แฟนสาว มาเที่ยวดูหมูเด้งที่สวนสัตว์เปิดเขาเขียว',
+        actors: [ { id:'male_teen', x:28, active:true }, { id:'female_teen', x:44 } ] },
+      { caption: 'ระหว่างต่อคิวดูหมูเด้ง นางดำ ซึ่งอ้างตัวเป็นอินฟลูเอนเซอร์ถ่ายคอนเทนต์ เดินแซงคิวเบียดเสียดผู้คนอย่างไม่แคร์ใคร',
+        actors: [ { id:'male_teen', x:24 }, { id:'female_teen', x:40 }, { id:'female_influencer', x:60, active:true, pose:'🏃‍♀️' } ] },
+      { caption: 'นางดำเบียดจนชน นส.เหลือง เซถลาตกลงไปในบ่อหมูเด้ง (บ่อไม่ลึกมากนัก)',
+        actors: [ { id:'male_teen', x:22, pose:'😨' }, { id:'female_teen', x:48, active:true, pose:'😱' }, { id:'female_influencer', x:56 } ] },
+      { caption: 'โจนาห์ แม่ฮิปโปแคระ ตกใจ วิ่งเข้าใส่กัด นส.เหลือง จนได้รับบาดเจ็บสาหัส',
+        actors: [ { id:'male_teen', x:20, pose:'😱' }, { id:'female_teen', x:48, pose:'🤕' }, { id:'hippo_mother', x:44, active:true, pose:'😡' }, { id:'female_influencer', x:60 } ] },
+      { caption: 'นายแดงเห็นแฟนสาวถูกกัดจนโกรธจัด แย่งขาตั้งกล้องจากนางดำมากระหน่ำตี ทำให้นางดำบาดเจ็บที่แขนและขา',
+        actors: [ { id:'male_teen', x:52, active:true, pose:'😡' }, { id:'female_influencer', x:60, pose:'🤕' }, { id:'female_teen', x:32, pose:'🤕' } ] },
+      { caption: 'นายเขียว แฟนคลับที่จำนางดำได้ วิ่งเข้าไปผลักนายแดงเพื่อให้หยุดทำร้ายนางดำ',
+        actors: [ { id:'male_fan', x:50, active:true, pose:'😤' }, { id:'male_teen', x:56, pose:'😲' }, { id:'female_influencer', x:64, pose:'🤕' } ] },
+      { caption: 'แรงผลักทำให้นายแดงเซถลาตกบ่อหมูเด้งไปอีกคน หมูเด้ง (ลูกฮิปโป) วิ่งเข้ามางับขา — เจ็บๆ คันๆ แต่หมูเด้งกลับมีความสุข นายแดงยังมีแผลถลอกตามตัวจากการตกกระแทกพื้นด้วย',
+        actors: [ { id:'male_teen', x:44, active:true, pose:'😖' }, { id:'hippo_baby', x:40, active:true, pose:'🥰' }, { id:'male_fan', x:58 } ] },
+      { caption: 'สามวันต่อมา นางดำ อินฟลูเอนเซอร์สายมูเตลู เสียชีวิตขณะไลฟ์สดขายของ สาเหตุคือแผลติดเชื้อในกระแสเลือด — เพราะเธอไม่ยอมไปหาหมอ แต่เลือกดื่ม/อาบน้ำมนต์รักษาแผลแทน',
+        actors: [ { id:'female_influencer', x:50, active:true, pose:'😇' } ] },
+    ],
+    comprehension: { question: 'เข้าใจโจทย์ไหม?' },
+    courtroomBg: 'courtroom',
+    questions: [
+      {
+        defendantSprite: 'female_influencer',
+        defendantName: 'นางดำ',
+        note: '(สมมติว่านางดำยังมีชีวิตอยู่ในเหตุการณ์นี้)',
+        act: 'นางดำเบียดคิวเดินชนคนจนทำให้ นส.เหลือง ตกบ่อหมูเด้ง แล้วถูกโจนาห์กัดจนบาดเจ็บสาหัส',
+        options: [
+          { text: 'มีความผิดฐานทำร้ายร่างกาย (มาตรา 295)', correct: false },
+          { text: 'มีความผิดฐานกระทำโดยประมาทเป็นเหตุให้ผู้อื่นรับอันตรายสาหัส (มาตรา 300)', correct: true },
+          { text: 'มีความผิดฐานประมาทเป็นเหตุให้ผู้อื่นรับอันตรายแก่กายหรือจิตใจ (มาตรา 390)', correct: false },
+          { text: 'ไม่มีความผิด เพราะหมูเด้งและโจนาห์เป็นผู้ลงมือทำร้ายเอง ไม่ใช่นางดำ', correct: false },
+        ],
+        reveal: 'แม้นางดำไม่มีเจตนาทำร้ายใคร แต่การเบียดคิวจนคนอื่นตกบ่อสัตว์ในสวนสัตว์เป็นการขาดความระมัดระวังที่วิญญูชนพึงมีตามภาวะเช่นนั้น ผลที่สัตว์ทำร้ายผู้ตกบ่อถือเป็นผลตามธรรมชาติที่คาดหมายได้ตามทฤษฎีเหตุที่เหมาะสม (สายเหตุไม่ขาดตอน) นางดำจึงมีความผิดฐานกระทำโดยประมาทเป็นเหตุให้ผู้อื่นรับอันตรายสาหัส ตามมาตรา 300 — ไม่ใช่มาตรา 295 เพราะไม่มีเจตนาทำร้าย และไม่ใช่มาตรา 390 เพราะผลถึงขั้นสาหัสต้องปรับด้วยมาตรา 300',
+      },
+      {
+        defendantSprite: 'male_teen',
+        defendantName: 'นายแดง',
+        note: 'การกระทำที่ 1 จาก 3',
+        act: 'นายแดงแอบหยิบแหวนทองของมารดาไปจำนำเพื่อเอาเงินมาเที่ยว',
+        options: [
+          { text: 'มีความผิดฐานลักทรัพย์ (มาตรา 334) และต้องรับโทษเต็มตามกฎหมาย', correct: false },
+          { text: 'มีความผิดฐานลักทรัพย์ (มาตรา 334) สำเร็จ แต่ไม่ต้องรับโทษ เพราะเป็นทรัพย์ของบุพการี (มาตรา 71 วรรคแรก)', correct: true },
+          { text: 'ไม่มีความผิดเลย เพราะเป็นทรัพย์ของมารดาตนเอง', correct: false },
+          { text: 'มีความผิดฐานยักยอกทรัพย์', correct: false },
+        ],
+        reveal: 'การกระทำครบองค์ประกอบความผิดฐานลักทรัพย์ตามมาตรา 334 แต่กฎหมายยกเว้น "โทษ" (ไม่ใช่ยกเว้นความผิด) ให้แก่ผู้กระทำต่อทรัพย์ของบุพการีตามมาตรา 71 วรรคแรก เพราะแหวนเป็นทรัพย์ของมารดา นายแดงจึงยังคง "มีความผิด" ฐานลักทรัพย์อยู่ เพียงแต่ไม่ต้องรับโทษเท่านั้น',
+      },
+      {
+        defendantSprite: 'male_teen',
+        defendantName: 'นายแดง',
+        note: 'การกระทำที่ 2 จาก 3',
+        act: 'นายแดงแย่งขาตั้งกล้องจากนางดำมากระหน่ำตี จนนางดำบาดเจ็บที่แขนและขา (3 วันต่อมานางดำเสียชีวิตเพราะแผลติดเชื้อ — แต่เกิดเพราะนางดำเองปฏิเสธไปหาหมอ เลือกดื่ม/อาบน้ำมนต์แทน)',
+        options: [
+          { text: 'มีความผิดฐานฆ่าคนตายโดยเจตนา (มาตรา 288) เพราะนางดำเสียชีวิตในเวลาต่อมา', correct: false },
+          { text: 'มีความผิดฐานทำร้ายร่างกายจนเป็นเหตุถึงแก่ความตาย (มาตรา 290) เพราะเป็นต้นเหตุของบาดแผล', correct: false },
+          { text: 'มีความผิดฐานทำร้ายร่างกาย (มาตรา 295) เท่านั้น — ไม่ต้องรับผิดในความตายของนางดำ เพราะสายเหตุถูกตัดขาดจากการที่นางดำเองปฏิเสธการรักษา', correct: true },
+          { text: 'ไม่มีความผิดเลย เพราะกระทำไปโดยบันดาลโทสะ', correct: false },
+        ],
+        reveal: 'นายแดงมีเจตนาทำร้ายและเป็นผลให้นางดำบาดเจ็บ (ยังไม่ถึงขั้นสาหัส) จึงมีความผิดฐานทำร้ายร่างกายตามมาตรา 295 — เนื่องจากอายุ 16 ปี (เกิน 15 แต่ไม่เกิน 18) เข้ามาตรา 75 ศาลอาจลดมาตราส่วนโทษลงหนึ่งในสามหรือกึ่งหนึ่ง แต่นายแดงไม่ต้องรับผิดในผลถึงแก่ความตายของนางดำ เพราะนางดำปฏิเสธการรักษาทางการแพทย์ไปดื่ม/อาบน้ำมนต์แทน ถือเป็นเหตุแทรกแซงที่ผิดปกติวิสัยของบุคคลทั่วไป ตัดความสัมพันธ์ระหว่างการกระทำกับผลแห่งความตายตามทฤษฎีเหตุที่เหมาะสม (โจทย์ข้อนี้ไม่ต้องพิจารณาประเด็นบันดาลโทสะ)',
+      },
+      {
+        defendantSprite: 'male_teen',
+        defendantName: 'นายแดง',
+        note: 'การกระทำที่ 3 จาก 3',
+        act: 'นายแดงเองถูกผลักตกบ่อหมูเด้งไปด้วย ถูกหมูเด้ง (ลูก) งับขา และมีแผลถลอกตามตัวจากการตกกระแทกพื้น',
+        options: [
+          { text: 'มีความผิดฐานประมาทเป็นเหตุให้ตนเองได้รับอันตราย', correct: false },
+          { text: 'ไม่ใช่ผู้กระทำความผิดในเหตุการณ์นี้ — นายแดงเป็นผู้เสียหาย ไม่ใช่ผู้กระทำ', correct: true },
+          { text: 'มีความผิดฐานกระทำโดยประมาทเป็นเหตุให้ผู้อื่นรับอันตรายสาหัส (มาตรา 300) เพราะเป็นต้นเหตุของเหตุการณ์ทั้งหมด', correct: false },
+        ],
+        reveal: 'ในเหตุการณ์ตอนนี้นายแดงเป็นฝ่าย "ถูกกระทำ" (ถูกผลักตกบ่อและถูกหมูเด้งกัด) ไม่ใช่ผู้กระทำต่อผู้อื่น จึงไม่มีความผิดใด ๆ เกิดขึ้นจากตอนนี้ — เขาเป็นผู้เสียหายในเหตุการณ์นี้เอง',
+      },
+      {
+        defendantSprite: 'male_fan',
+        defendantName: 'นายเขียว',
+        note: '',
+        act: 'นายเขียว (แฟนคลับที่จำนางดำได้) วิ่งเข้าไปผลักนายแดงเพื่อหยุดไม่ให้ทำร้ายนางดำต่อ ทำให้นายแดงตกบ่อหมูเด้งไปอีกคนและถูกกัด',
+        options: [
+          { text: 'มีความผิดฐานทำร้ายร่างกาย (มาตรา 295)', correct: false },
+          { text: 'มีความผิด แต่เป็นการป้องกันเกินสมควรแก่เหตุ (มาตรา 69)', correct: false },
+          { text: 'ไม่มีความผิด เพราะเป็นการป้องกันผู้อื่นโดยชอบด้วยกฎหมาย (มาตรา 68)', correct: true },
+        ],
+        reveal: 'นายเขียวกระทำไปเพื่อป้องกันนางดำจากภยันตรายที่ใกล้จะถึงจากการประทุษร้ายอันละเมิดต่อกฎหมายของนายแดง การผลักเพื่อหยุดคนที่กำลังใช้อาวุธ (ขาตั้งกล้อง) ทำร้ายผู้อื่น เป็นวิธีที่พอสมควรแก่เหตุ จึงเข้าเหตุยกเว้นความผิดฐานป้องกันโดยชอบด้วยกฎหมายตามมาตรา 68 ไม่มีความผิด — ผลพลอยได้ที่นายแดงตกบ่อโดนกัดเป็นผลจากการกระทำที่ชอบด้วยกฎหมายอยู่แล้ว จึงไม่ต้องรับผิดในผลนั้นด้วย',
+      },
+    ],
+  },
+];
+
+/* ================================================================
+   ENGINE — data-driven, generic across any SCENARIOS entry.
+   ================================================================ */
+const state = {
+  screen: 'picker',   // picker | scene | comprehension | recap | courtroom | results
+  scenario: null,
+  beatIndex: 0,
+  qIndex: 0,
+  selected: null,
+  answered: false,
+  score: 0,
+};
+
+const root = document.getElementById('app-root');
+
+function esc(s){ return String(s).replace(/</g,'&lt;'); }
+
+function startScenario(scenario){
+  state.scenario = scenario;
+  state.beatIndex = 0;
+  state.qIndex = 0;
+  state.selected = null;
+  state.answered = false;
+  state.score = 0;
+  state.screen = 'scene';
+  render();
+}
+
+function render(){
+  if (state.screen === 'picker') return renderPicker();
+  if (state.screen === 'scene') return renderScene();
+  if (state.screen === 'comprehension') return renderComprehension();
+  if (state.screen === 'recap') return renderRecap();
+  if (state.screen === 'courtroom') return renderCourtroom();
+  if (state.screen === 'results') return renderResults();
+}
+
+/* ---------- PICKER ---------- */
+function renderPicker(){
+  root.innerHTML = `
+    <div class="scenario-list">
+      ${SCENARIOS.map((s, i) => `
+        <button type="button" class="scenario-card" onclick="startScenario(SCENARIOS[${i}])" onmouseenter="playHoverSound()">
+          <div class="sc-icon">${s.icon}</div>
+          <div class="sc-text">
+            <div class="sc-title">${esc(s.title)}</div>
+            <div class="sc-desc">${esc(s.blurb)}</div>
+          </div>
+          <div class="sc-go">▶</div>
+        </button>
+      `).join('')}
+      <div class="scenario-card disabled">
+        <div class="sc-icon">➕</div>
+        <div class="sc-text">
+          <div class="sc-title">สถานการณ์ใหม่ ๆ</div>
+          <div class="sc-desc">กำลังจะมาเพิ่มเรื่อย ๆ</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ---------- SCENE (auto-play beats) ---------- */
+function renderScene(){
+  const s = state.scenario;
+  root.innerHTML = `
+    <div class="scene-topbar">
+      <span>${esc(s.title)}</span>
+      <span class="beat-dots">${s.beats.map((b,i) => `<span class="beat-dot${i < state.beatIndex ? ' done' : ''}${i === state.beatIndex ? ' current' : ''}"></span>`).join('')}</span>
+    </div>
+    <div class="stage" id="stage">
+      ${renderStageBgHTML(s.bg)}
+      ${Object.keys(s.characters).map(id => `
+        <div class="sprite" id="sprite-${id}">
+          ${renderSpriteAvatarHTML(id)}
+          <div class="sprite-name">${esc(s.characters[id].name)}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="caption-box" id="caption-box"></div>
+    <button type="button" class="big-btn" id="scene-next-btn" onclick="nextBeat()" onmouseenter="playHoverSound()">ถัดไป ›</button>
+  `;
+  syncBeat();
+}
+function syncBeat(){
+  const s = state.scenario;
+  const beat = s.beats[state.beatIndex];
+  const activeIds = new Set(beat.actors.map(a => a.id));
+  Object.keys(s.characters).forEach(id => {
+    const el = document.getElementById('sprite-' + id);
+    if (!el) return;
+    const a = beat.actors.find(a => a.id === id);
+    if (a) {
+      el.classList.add('visible');
+      el.classList.toggle('active', !!a.active);
+      el.style.left = a.x + '%';
+      const emojiEl = el.querySelector('.sprite-emoji');
+      if (emojiEl) emojiEl.textContent = a.pose || SPRITES[id].emoji;
+    } else {
+      el.classList.remove('visible');
+      el.classList.remove('active');
+    }
+  });
+  document.getElementById('caption-box').textContent = beat.caption;
+  const btn = document.getElementById('scene-next-btn');
+  btn.textContent = (state.beatIndex === s.beats.length - 1) ? 'เข้าใจโจทย์ไหม? ›' : 'ถัดไป ›';
+}
+function nextBeat(){
+  const s = state.scenario;
+  if (state.beatIndex < s.beats.length - 1) {
+    state.beatIndex++;
+    syncBeat();
+    updateBeatDots();
+  } else {
+    state.screen = 'comprehension';
+    render();
+  }
+}
+function updateBeatDots(){
+  document.querySelectorAll('.beat-dot').forEach((el, i) => {
+    el.classList.toggle('done', i < state.beatIndex);
+    el.classList.toggle('current', i === state.beatIndex);
+  });
+}
+
+/* ---------- COMPREHENSION CHECK ---------- */
+function renderComprehension(){
+  const s = state.scenario;
+  root.innerHTML = `
+    <div class="caption-box" style="text-align:center;font-weight:800;font-size:16px;">🤔 ${esc(s.comprehension.question)}</div>
+    <div class="big-choice-wrap">
+      <button type="button" class="big-choice" onclick="goRecap()" onmouseenter="playHoverSound()">😵 ยังไม่เข้าใจ — ขอทบทวนอีกครั้ง</button>
+      <button type="button" class="big-choice" onclick="goCourtroom()" onmouseenter="playHoverSound()">✅ เข้าใจแล้ว — ไปห้องพิจารณาคดี</button>
+    </div>
+  `;
+}
+function goRecap(){ state.screen = 'recap'; render(); }
+function replayScene(){ state.beatIndex = 0; state.screen = 'scene'; render(); }
+function goCourtroom(){ state.qIndex = 0; state.selected = null; state.answered = false; state.screen = 'courtroom'; render(); }
+
+/* ---------- RECAP (plain-text, offered when "ยังไม่เข้าใจ") ---------- */
+function renderRecap(){
+  const s = state.scenario;
+  root.innerHTML = `
+    <div class="caption-box">
+      <strong>สรุปเหตุการณ์:</strong>
+      <div class="recap-text">${s.beats.map((b,i) => (i+1) + '. ' + esc(b.caption)).join('\\n\\n')}</div>
+    </div>
+    <button type="button" class="big-btn" onclick="replayScene()" onmouseenter="playHoverSound()">🔁 ดูฉากอีกครั้ง</button>
+    <button type="button" class="big-btn secondary" onclick="goCourtroom()" onmouseenter="playHoverSound()">✅ เข้าใจแล้ว — ไปห้องพิจารณาคดี</button>
+  `;
+}
+
+/* ---------- COURTROOM ---------- */
+const LETTERS = ['ก','ข','ค','ง','จ'];
+function renderCourtroom(){
+  const s = state.scenario;
+  const q = s.questions[state.qIndex];
+  root.innerHTML = `
+    <div class="scene-topbar">
+      <span>ห้องพิจารณาคดี</span>
+      <span class="q-progress">คำถาม ${state.qIndex + 1} / ${s.questions.length}</span>
+    </div>
+    <div class="stage" style="aspect-ratio:16/7">
+      ${renderStageBgHTML(s.courtroomBg)}
+    </div>
+    <div class="defendant-box">
+      <div class="defendant-avatar" style="background:${(SPRITES[q.defendantSprite]||{}).color || '#ccc'}">
+        <span>${(SPRITES[q.defendantSprite]||{}).emoji || '❓'}</span>
+        <img src="${spritePath(q.defendantSprite)}" alt="" onerror="this.remove()">
+      </div>
+      <div class="defendant-meta">
+        <div class="d-label">จำเลย ${q.note ? '· ' + esc(q.note) : ''}</div>
+        <div class="d-name">${esc(q.defendantName)}</div>
+      </div>
+    </div>
+    <div class="q-act">${esc(q.act)}</div>
+    <div class="q-prompt">บุคคลนี้มีความผิดฐานใด (หรือไม่มีความผิด) เพราะเหตุใด?</div>
+    <div class="mc-list" id="mc-list">
+      ${q.options.map((opt, i) => `
+        <button type="button" class="mc-option" id="mc-opt-${i}" onclick="answer(${i})" onmouseenter="playHoverSound()">
+          <span class="mc-letter">${LETTERS[i]}</span>
+          <span>${esc(opt.text)}</span>
+        </button>
+      `).join('')}
+    </div>
+    <div id="reveal-slot"></div>
+    <button type="button" class="big-btn" id="q-next-btn" style="display:none" onclick="nextQuestion()" onmouseenter="playHoverSound()">
+      ${state.qIndex === s.questions.length - 1 ? 'ดูผลสรุป ›' : 'ข้อถัดไป ›'}
+    </button>
+  `;
+}
+function answer(i){
+  if (state.answered) return;
+  const s = state.scenario;
+  const q = s.questions[state.qIndex];
+  state.answered = true;
+  state.selected = i;
+  const correctIndex = q.options.findIndex(o => o.correct);
+  if (i === correctIndex) state.score++;
+  q.options.forEach((opt, idx) => {
+    const btn = document.getElementById('mc-opt-' + idx);
+    btn.disabled = true;
+    if (idx === correctIndex) btn.classList.add('correct');
+    else if (idx === i) btn.classList.add('wrong');
+    else btn.classList.add('muted');
+  });
+  document.getElementById('reveal-slot').innerHTML = `
+    <div class="reveal-box">
+      <div class="rv-title">${i === correctIndex ? '✅ ถูกต้อง!' : '❌ ยังไม่ถูก — เฉลย:'}</div>
+      ${esc(q.reveal)}
+    </div>
+  `;
+  document.getElementById('q-next-btn').style.display = 'block';
+  playHoverSound();
+}
+function nextQuestion(){
+  const s = state.scenario;
+  if (state.qIndex < s.questions.length - 1) {
+    state.qIndex++;
+    state.selected = null;
+    state.answered = false;
+    render();
+  } else {
+    state.screen = 'results';
+    render();
+  }
+}
+
+/* ---------- RESULTS ---------- */
+function renderResults(){
+  const s = state.scenario;
+  const total = s.questions.length;
+  const pct = Math.round((state.score / total) * 100);
+  let msg = 'ลองทบทวนหลักกฎหมายอีกรอบแล้วมาลองใหม่นะ';
+  if (pct === 100) msg = 'เก่งมาก! วิเคราะห์ได้ครบถ้วนทุกข้อ 🎉';
+  else if (pct >= 60) msg = 'ทำได้ดี! เกือบครบแล้ว ลองอ่านเฉลยอีกรอบเพื่อความชัวร์';
+  root.innerHTML = `
+    <div class="result-card">
+      <div style="font-size:40px">🏆</div>
+      <div class="result-score">${state.score} / ${total}</div>
+      <div class="result-msg">${msg}</div>
+    </div>
+    <button type="button" class="big-btn" onclick="startScenario(state.scenario)" onmouseenter="playHoverSound()">🔁 เล่นใหม่ตั้งแต่ต้น</button>
+    <button type="button" class="big-btn secondary" onclick="backToPicker()" onmouseenter="playHoverSound()">🏠 กลับหน้าเลือกสถานการณ์</button>
+  `;
+}
+function backToPicker(){ state.screen = 'picker'; state.scenario = null; render(); }
+
+render();
+</script>
+<script>
+/* ================================================================
+   THEME / GHOST COMPANION / HORROR MODE (verbatim site boilerplate)
+   ================================================================ */
+const THEME_KEY = 'codex-theme';
+
+function setTheme(theme){
+  if (theme === 'light') { document.documentElement.removeAttribute('data-theme'); }
+  else { document.documentElement.setAttribute('data-theme', theme); }
+  try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
+  updateThemeToggleUI(theme);
+  if (theme === 'horror') { playHorrorBgm(); startGhostRotation(); playHooSound(); scheduleDogHowl(); }
+  else { stopGhostRotation(); stopHorrorBgm(); stopDogHowl(); }
+}
+const DRONE_MUTE_KEY = 'codex-drone-muted';
+function playHorrorBgm(){
+  const bgm = document.getElementById('horror-bgm');
+  if (!bgm) return;
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  bgm.muted = false;
+  bgm.volume = muted ? 0 : 0.35;
+  const p = bgm.play();
+  if (p && p.catch) p.catch(() => { bgm.load(); bgm.play().catch(() => {}); });
+}
+function stopHorrorBgm(){
+  const bgm = document.getElementById('horror-bgm');
+  if (bgm) bgm.pause();
+}
+let dogHowlTimer = null;
+function scheduleDogHowl(){
+  clearTimeout(dogHowlTimer);
+  const delay = 18000 + Math.random() * 22000;
+  dogHowlTimer = setTimeout(() => { playDogHowl(); scheduleDogHowl(); }, delay);
+}
+function playDogHowl(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const howl = document.getElementById('dog-howl');
+  if (!howl) return;
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  if (muted) return;
+  howl.currentTime = 0;
+  howl.volume = 0.4;
+  howl.play().catch(() => {});
+  setTimeout(() => { if (!howl.paused) howl.pause(); }, 3000);
+}
+function stopDogHowl(){
+  clearTimeout(dogHowlTimer); dogHowlTimer = null;
+  const howl = document.getElementById('dog-howl');
+  if (howl) howl.pause();
+}
+function toggleDroneMute(btn){
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  muted = !muted;
+  try { localStorage.setItem(DRONE_MUTE_KEY, muted ? '1' : '0'); } catch(e){}
+  if (btn) btn.textContent = muted ? '🔇' : '🔊';
+  const bgm = document.getElementById('horror-bgm');
+  if (bgm) bgm.volume = muted ? 0 : 0.35;
+}
+function updateThemeToggleUI(theme){
+  document.querySelectorAll('.theme-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.themeBtn === theme);
+  });
+}
+const GHOST_IMAGES = [
+  'pics/Pixel/icon/ตะเคียน 1.png','pics/Pixel/icon/ตะเคียน 2.png',
+  'pics/Pixel/icon/ตานี 2.png',
+  'pics/Pixel/icon/นางกวัก 1.png','pics/Pixel/icon/นางกวัก 2.png','pics/Pixel/icon/นางกวัก 3.png',
+  'pics/Pixel/icon/ปอป 1.png','pics/Pixel/icon/ปอป 2.png','pics/Pixel/icon/ปอป 3.png',
+  'pics/Pixel/icon/ปอปชาย 1.png','pics/Pixel/icon/ปอปชาย 2.png',
+  'pics/Pixel/icon/ผีแมว 1.png','pics/Pixel/icon/ผีแมว 2.png','pics/Pixel/icon/ผีแมว 3.png',
+  'pics/Pixel/icon/ผีโพง 1.png',
+  'pics/Pixel/icon/แม่นาค 1.png','pics/Pixel/icon/แม่นาค 2.png','pics/Pixel/icon/แม่นาค 3.png',
+  'pics/Pixel/icon/กระสือ_00.png','pics/Pixel/icon/กระสือ_01.png','pics/Pixel/icon/กระสือ_02.png',
+  'pics/Pixel/icon/กระสือ_10.png','pics/Pixel/icon/กระสือ_11.png','pics/Pixel/icon/กระสือ_12.png',
+  'pics/Pixel/icon/กระสือ_20.png','pics/Pixel/icon/กระสือ_21.png','pics/Pixel/icon/กระสือ_22.png',
+  'pics/Pixel/icon/กุมาร 1_00.png','pics/Pixel/icon/กุมาร 1_01.png','pics/Pixel/icon/กุมาร 1_02.png',
+  'pics/Pixel/icon/กุมาร 1_10.png','pics/Pixel/icon/กุมาร 1_11.png','pics/Pixel/icon/กุมาร 1_12.png',
+  'pics/Pixel/icon/กุมาร 1_21.png',
+  'pics/Pixel/icon/กุมาร 2_00.png','pics/Pixel/icon/กุมาร 2_01.png','pics/Pixel/icon/กุมาร 2_02.png',
+  'pics/Pixel/icon/กุมาร 2_10.png','pics/Pixel/icon/กุมาร 2_11.png','pics/Pixel/icon/กุมาร 2_12.png',
+  'pics/Pixel/icon/กุมาร 2_20.png','pics/Pixel/icon/กุมาร 2_21.png','pics/Pixel/icon/กุมาร 2_22.png',
+  'pics/Pixel/icon/ควายธนู_00.png','pics/Pixel/icon/ควายธนู_01.png','pics/Pixel/icon/ควายธนู_02.png',
+  'pics/Pixel/icon/ควายธนู_10.png','pics/Pixel/icon/ควายธนู_11.png','pics/Pixel/icon/ควายธนู_12.png',
+  'pics/Pixel/icon/ควายธนู_20.png','pics/Pixel/icon/ควายธนู_21.png','pics/Pixel/icon/ควายธนู_22.png',
+  'pics/Pixel/icon/ตานี_00.png','pics/Pixel/icon/ตานี_01.png','pics/Pixel/icon/ตานี_02.png',
+  'pics/Pixel/icon/ตานี_10.png','pics/Pixel/icon/ตานี_11.png','pics/Pixel/icon/ตานี_12.png',
+  'pics/Pixel/icon/ตานี_20.png','pics/Pixel/icon/ตานี_21.png','pics/Pixel/icon/ตานี_22.png',
+  'pics/Pixel/icon/ผีรวม 1_00.png','pics/Pixel/icon/ผีรวม 1_01.png','pics/Pixel/icon/ผีรวม 1_02.png',
+  'pics/Pixel/icon/ผีรวม 1_10.png','pics/Pixel/icon/ผีรวม 1_11.png','pics/Pixel/icon/ผีรวม 1_12.png',
+  'pics/Pixel/icon/ผีรวม 1_20.png','pics/Pixel/icon/ผีรวม 1_21.png','pics/Pixel/icon/ผีรวม 1_22.png',
+  'pics/Pixel/icon/ผีรวม 2_00.png','pics/Pixel/icon/ผีรวม 2_01.png','pics/Pixel/icon/ผีรวม 2_02.png',
+  'pics/Pixel/icon/ผีรวม 2_10.png','pics/Pixel/icon/ผีรวม 2_11.png','pics/Pixel/icon/ผีรวม 2_12.png',
+  'pics/Pixel/icon/ผีรวม 2_20.png','pics/Pixel/icon/ผีรวม 2_21.png','pics/Pixel/icon/ผีรวม 2_22.png',
+  'pics/Pixel/icon/ผีรวม 3_00.png','pics/Pixel/icon/ผีรวม 3_01.png','pics/Pixel/icon/ผีรวม 3_02.png',
+  'pics/Pixel/icon/ผีรวม 3_10.png','pics/Pixel/icon/ผีรวม 3_11.png','pics/Pixel/icon/ผีรวม 3_12.png',
+  'pics/Pixel/icon/ผีรวม 3_20.png','pics/Pixel/icon/ผีรวม 3_21.png','pics/Pixel/icon/ผีรวม 3_22.png',
+  'pics/Pixel/icon/ผีรวม 4_00.png','pics/Pixel/icon/ผีรวม 4_01.png','pics/Pixel/icon/ผีรวม 4_02.png',
+  'pics/Pixel/icon/ผีรวม 4_10.png','pics/Pixel/icon/ผีรวม 4_11.png','pics/Pixel/icon/ผีรวม 4_12.png',
+  'pics/Pixel/icon/ผีรวม 4_20.png','pics/Pixel/icon/ผีรวม 4_21.png','pics/Pixel/icon/ผีรวม 4_22.png',
+  'pics/Pixel/icon/ผีรวม 5_00.png','pics/Pixel/icon/ผีรวม 5_01.png','pics/Pixel/icon/ผีรวม 5_02.png',
+  'pics/Pixel/icon/ผีรวม 5_10.png','pics/Pixel/icon/ผีรวม 5_11.png','pics/Pixel/icon/ผีรวม 5_12.png',
+  'pics/Pixel/icon/ผีรวม 5_20.png','pics/Pixel/icon/ผีรวม 5_21.png','pics/Pixel/icon/ผีรวม 5_22.png',
+  'pics/Pixel/icon/ผีรวม 6_00.png','pics/Pixel/icon/ผีรวม 6_01.png','pics/Pixel/icon/ผีรวม 6_02.png',
+  'pics/Pixel/icon/ผีรวม 6_10.png','pics/Pixel/icon/ผีรวม 6_11.png','pics/Pixel/icon/ผีรวม 6_12.png',
+  'pics/Pixel/icon/ผีรวม 6_20.png','pics/Pixel/icon/ผีรวม 6_21.png','pics/Pixel/icon/ผีรวม 6_22.png',
+  'pics/Pixel/icon/ผีรวม 7_00.png','pics/Pixel/icon/ผีรวม 7_01.png','pics/Pixel/icon/ผีรวม 7_02.png',
+  'pics/Pixel/icon/ผีรวม 7_10.png','pics/Pixel/icon/ผีรวม 7_11.png','pics/Pixel/icon/ผีรวม 7_12.png',
+  'pics/Pixel/icon/ผีรวม 7_20.png','pics/Pixel/icon/ผีรวม 7_21.png','pics/Pixel/icon/ผีรวม 7_22.png',
+  'pics/Pixel/icon/ผีรวม 8_00.png','pics/Pixel/icon/ผีรวม 8_01.png','pics/Pixel/icon/ผีรวม 8_02.png',
+  'pics/Pixel/icon/ผีรวม 8_03.png','pics/Pixel/icon/ผีรวม 8_10.png','pics/Pixel/icon/ผีรวม 8_11.png',
+  'pics/Pixel/icon/ผีรวม 8_12.png','pics/Pixel/icon/ผีรวม 8_13.png','pics/Pixel/icon/ผีรวม 8_20.png',
+  'pics/Pixel/icon/ผีรวม 8_21.png','pics/Pixel/icon/ผีรวม 8_22.png','pics/Pixel/icon/ผีรวม 8_23.png',
+  'pics/Pixel/icon/ผีรวม 9_00.png','pics/Pixel/icon/ผีรวม 9_01.png','pics/Pixel/icon/ผีรวม 9_02.png',
+  'pics/Pixel/icon/ผีรวม 9_10.png','pics/Pixel/icon/ผีรวม 9_11.png','pics/Pixel/icon/ผีรวม 9_12.png',
+  'pics/Pixel/icon/ผีรวม 9_20.png','pics/Pixel/icon/ผีรวม 9_21.png','pics/Pixel/icon/ผีรวม 9_22.png',
+  'pics/Pixel/icon/ผีรวม 10_00.png','pics/Pixel/icon/ผีรวม 10_01.png','pics/Pixel/icon/ผีรวม 10_02.png',
+  'pics/Pixel/icon/ผีรวม 10_10.png','pics/Pixel/icon/ผีรวม 10_11.png','pics/Pixel/icon/ผีรวม 10_12.png',
+  'pics/Pixel/icon/ผีรวม 10_20.png','pics/Pixel/icon/ผีรวม 10_21.png','pics/Pixel/icon/ผีรวม 10_22.png',
+  'pics/Pixel/icon/ผีรวม 11_00.png','pics/Pixel/icon/ผีรวม 11_01.png','pics/Pixel/icon/ผีรวม 11_02.png',
+  'pics/Pixel/icon/ผีรวม 11_10.png','pics/Pixel/icon/ผีรวม 11_11.png','pics/Pixel/icon/ผีรวม 11_12.png',
+  'pics/Pixel/icon/ผีรวม 11_20.png','pics/Pixel/icon/ผีรวม 11_21.png','pics/Pixel/icon/ผีรวม 11_22.png',
+];
+const GHOST_PHRASES = [
+  "แบร่~","หลอกจ้า","อ่านให้ครบสิ","มาตรานี้ออกสอบนะ","เปิดฎีกาด้วย","จำผิดแล้ว","วรรคสองล่ะ?","ยังไม่จบ","อ่านใหม่","ข้ามไม่ได้",
+  "ตกแน่","สอบพรุ่งนี้แล้ว","ตีความสิ","อ้างมาตราให้ครบ","อย่ามั่ว","ฟ้องได้ไหม?","โมฆะนะ","เป็นโมฆียะ!","สิทธิของใคร?","หน้าที่ของใคร?",
+  "พิสูจน์ก่อน","ภาระการพิสูจน์อยู่ไหน?","ข้อเท็จจริงไม่พอ","กฎหมายใช้ไม่ได้","คนละฐาน","คนละกรณี","คำตอบยังไม่ครบ","ลืมข้อยกเว้น","มีบทเฉพาะกาล","ระวังมาตราแฝง",
+  "คิดใหม่","อ่านเชิงระบบ","อย่าท่องอย่างเดียว","เหตุผลล่ะ?","ฎีกาว่าไง?","อาจารย์ชอบถาม","อย่าปิดไฟ","ผีอ่านด้วย","ขอนั่งข้าง ๆ","พลิกหน้าเร็ว",
+  "หน้านี้สำคัญ","จำให้ได้","อย่าหลับ","อีกบทเดียว","อีกมาตราเดียว","อีกฎีกาเดียว","ตีสองแล้วนะ","กาแฟหมดแล้ว","น้ำแดงมีไหม?","กุมารหิว",
+  "ศาลยังไม่หลับ","ผู้พิพากษามองอยู่","เนติรออยู่","ธงคำตอบอยู่ไหน?","อย่าตอบกำปั้นทุบดิน","อย่าเดา","เขียนให้ครบองค์ประกอบ","หลักก่อน ข้อยกเว้นทีหลัง","อย่าลืมนิยาม","อ่านมาตราเต็ม",
+];
+let ghostEl = null, ghostRotateTimer = null, ghostPulseTimer = null, ghostIndex = 0;
+let ghostSpeechEl = null, ghostSpeechTimer = null;
+function ensureGhostSpeechEl(){
+  if (ghostSpeechEl) return ghostSpeechEl;
+  const el = document.createElement('div');
+  el.className = 'ghost-speech';
+  document.body.appendChild(el);
+  ghostSpeechEl = el; return el;
+}
+function showGhostSpeech(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const ghost = ensureGhostEl();
+  const bubble = ensureGhostSpeechEl();
+  bubble.textContent = GHOST_PHRASES[Math.floor(Math.random() * GHOST_PHRASES.length)];
+  const rect = ghost.getBoundingClientRect();
+  bubble.style.right = (window.innerWidth - rect.right) + 'px';
+  bubble.style.bottom = (window.innerHeight - rect.top + 10) + 'px';
+  bubble.classList.add('visible');
+  clearTimeout(ghostSpeechTimer);
+  ghostSpeechTimer = setTimeout(() => bubble.classList.remove('visible'), 2600);
+  pulseGhost();
+  playHooSound();
+}
+function ensureGhostEl(){
+  if (ghostEl) return ghostEl;
+  const img = document.createElement('img');
+  img.src = GHOST_IMAGES[0]; img.alt = ''; img.setAttribute('aria-hidden', 'true'); img.className = 'ghost-companion';
+  img.addEventListener('mouseenter', showGhostSpeech);
+  img.addEventListener('click', showGhostSpeech);
+  document.body.appendChild(img); ghostEl = img; return img;
+}
+function startGhostRotation(){
+  const el = ensureGhostEl(); ghostIndex = 0; el.src = GHOST_IMAGES[ghostIndex]; el.classList.add('visible');
+  clearInterval(ghostRotateTimer); ghostRotateTimer = setInterval(rotateGhost, 5000);
+}
+function rotateGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl(); ghostIndex = (ghostIndex + 1) % GHOST_IMAGES.length;
+  el.style.opacity = '0.15';
+  setTimeout(() => { el.src = GHOST_IMAGES[ghostIndex]; el.style.opacity = ''; }, 220);
+  playHooSound();
+}
+function stopGhostRotation(){
+  clearInterval(ghostRotateTimer); ghostRotateTimer = null;
+  if (ghostEl) { ghostEl.classList.remove('visible'); ghostEl.style.opacity = ''; }
+}
+function pulseGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl(); el.classList.add('pulse');
+  clearTimeout(ghostPulseTimer); ghostPulseTimer = setTimeout(() => el.classList.remove('pulse'), 350);
+}
+document.addEventListener('input', (e) => {
+  const t = e.target;
+  if (!t) return;
+  if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || (t.classList && t.classList.contains('note-input'))) pulseGhost();
+});
+let __ghostAudioCtx;
+function playHooSound(){
+  try{
+    __ghostAudioCtx = __ghostAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __ghostAudioCtx;
+    if (c.state === 'suspended') c.resume();
+    const t0 = c.currentTime, dur = 1.6;
+    const baseFreq = 180 + Math.random() * 50;
+    const osc = c.createOscillator(); osc.type = 'sine'; osc.frequency.setValueAtTime(baseFreq, t0);
+    const lfo = c.createOscillator(); lfo.type = 'sine'; lfo.frequency.setValueAtTime(4.2, t0);
+    const lfoGain = c.createGain(); lfoGain.gain.setValueAtTime(6, t0);
+    lfo.connect(lfoGain); lfoGain.connect(osc.frequency);
+    const mainGain = c.createGain();
+    mainGain.gain.setValueAtTime(0.0001, t0);
+    mainGain.gain.exponentialRampToValueAtTime(0.035, t0 + 0.55);
+    mainGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    const bufferSize = Math.floor(c.sampleRate * dur);
+    const noiseBuffer = c.createBuffer(1, bufferSize, c.sampleRate);
+    const data = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+    const noise = c.createBufferSource(); noise.buffer = noiseBuffer;
+    const noiseFilter = c.createBiquadFilter();
+    noiseFilter.type = 'bandpass'; noiseFilter.frequency.setValueAtTime(baseFreq * 1.6, t0); noiseFilter.Q.setValueAtTime(0.7, t0);
+    const noiseGain = c.createGain();
+    noiseGain.gain.setValueAtTime(0.0001, t0);
+    noiseGain.gain.exponentialRampToValueAtTime(0.01, t0 + 0.55);
+    noiseGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    osc.connect(mainGain); mainGain.connect(c.destination);
+    noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(c.destination);
+    osc.start(t0); osc.stop(t0 + dur);
+    lfo.start(t0); lfo.stop(t0 + dur);
+    noise.start(t0); noise.stop(t0 + dur);
+  } catch(e){}
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  updateThemeToggleUI(current);
+  if (current === 'horror') { playHorrorBgm(); startGhostRotation(); scheduleDogHowl(); }
+  const droneMuteBtn = document.getElementById('drone-mute-btn');
+  if (droneMuteBtn) {
+    let muted = false;
+    try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+    droneMuteBtn.textContent = muted ? '🔇' : '🔊';
+  }
+  ['click','touchstart','keydown'].forEach(evt => {
+    document.addEventListener(evt, function resumeBgmOnce(){
+      const bgm = document.getElementById('horror-bgm');
+      if (document.documentElement.getAttribute('data-theme') === 'horror' && bgm && bgm.paused) playHorrorBgm();
+      ['click','touchstart','keydown'].forEach(e2 => document.removeEventListener(e2, resumeBgmOnce));
+    }, { once: true });
+  });
+});
+</script>
+</body>
+</html>
