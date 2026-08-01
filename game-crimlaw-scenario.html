@@ -47,6 +47,7 @@
 :root[data-theme="dark"] .mc-option,:root[data-theme="horror"] .mc-option{background:var(--card)}
 :root[data-theme="dark"] .big-choice,:root[data-theme="horror"] .big-choice{background:var(--card)}
 :root[data-theme="dark"] .result-card,:root[data-theme="horror"] .result-card{background:var(--card)}
+:root[data-theme="dark"] .trial-textbox,:root[data-theme="horror"] .trial-textbox{background:var(--card)}
 
 /* THEME TOGGLE */
 .theme-toggle{display:flex;gap:3px;margin-left:auto;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
@@ -246,6 +247,33 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 .reveal-box .rv-title{font-weight:800;color:var(--ink);margin-bottom:6px;font-size:13.5px}
 .q-progress{font-size:12px;color:var(--ink-faint);font-weight:700;margin-top:4px}
 
+/* ===== TRIAL (Ace Attorney-style dialogue: big portrait + name box + textbox) ===== */
+.trial-stage{
+  position:relative;width:100%;aspect-ratio:4/3;border-radius:var(--radius) var(--radius) 0 0;
+  overflow:hidden;border:1px solid var(--line);border-bottom:none;box-shadow:var(--shadow);
+}
+.trial-portrait-wrap{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  height:90%;width:62%;max-width:260px;display:flex;align-items:flex-end;justify-content:center;
+}
+.trial-portrait-wrap img{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  height:100%;width:auto;object-fit:contain;filter:drop-shadow(0 10px 16px rgba(0,0,0,.35));
+}
+.trial-portrait-fallback{
+  width:150px;height:150px;border-radius:24%;display:flex;align-items:center;justify-content:center;
+  font-size:64px;box-shadow:0 4px 14px rgba(0,0,0,.3);border:3px solid rgba(255,255,255,.6);margin-bottom:4%;
+}
+.trial-textbox{
+  position:relative;background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 var(--radius) var(--radius);box-shadow:var(--shadow);overflow:hidden;
+}
+.trial-namebox{
+  display:inline-block;background:var(--accent);color:#fff;font-weight:800;font-size:13px;
+  padding:6px 18px;border-radius:0 12px 0 12px;
+}
+.trial-caption{padding:12px 16px 16px;font-size:14.5px;line-height:1.75;min-height:64px;color:var(--ink)}
+
 /* ===== RESULTS ===== */
 .result-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 18px;text-align:center;box-shadow:var(--shadow);margin-top:8px}
 .result-score{font-size:38px;font-weight:800;color:var(--accent);margin:6px 0}
@@ -352,6 +380,19 @@ const SPRITES = {
   male_fan:           { emoji: '🙋‍♂️', color: '#9CDCB4' },
   hippo_baby:         { emoji: '🦛', color: '#F2CB86' },
   hippo_mother:       { emoji: '🦛', color: '#C79A66' },
+  judge:              { emoji: '⚖️', color: '#C7B399' },
+  prosecutor:         { emoji: '🧑‍⚖️', color: '#B0847A' },
+  defense_lawyer:     { emoji: '👩‍💼', color: '#7E9BC7' },
+  courtroom_cat:      { emoji: '🐈', color: '#B8977A' },
+};
+/* Court personnel are a fixed reusable cast (not tied to any one scenario's
+   `characters` map) so future scenarios can reference them without redefining
+   names — see project_courtroom_game_character_pool_scaling memory. */
+const COURT_CAST = {
+  judge:          'ผู้พิพากษา',
+  prosecutor:     'อัยการ',
+  defense_lawyer: 'ทนายจำเลย',
+  courtroom_cat:  'แมวศาล',
 };
 const BACKGROUNDS = {
   zoo_pool:   { emoji: '🌴', gradient: 'linear-gradient(180deg,#CDEBD9 0%,#8FCBA8 55%,#4F8E6C 100%)' },
@@ -359,6 +400,23 @@ const BACKGROUNDS = {
 };
 function spritePath(id){ return 'pics/game/sprites/' + id + '.png'; }
 function bgPath(id){ return 'pics/game/backgrounds/' + id + '.jpg'; }
+function portraitPath(id, expression){ return 'pics/game/portraits/' + id + '_' + (expression || 'neutral') + '.png'; }
+function courtDisplayName(id){
+  if (COURT_CAST[id]) return COURT_CAST[id];
+  const s = state.scenario;
+  return (s && s.characters[id] && s.characters[id].name) || id;
+}
+function renderTrialPortraitHTML(spriteId, pose){
+  const sp = SPRITES[spriteId] || { emoji: '❓', color: '#ccc' };
+  const pngPath = portraitPath(spriteId, pose);
+  const jpgPath = pngPath.replace(/\.png$/, '.jpg');
+  /* portrait files were generated in a mix of .png/.jpg per character —
+     try .png first, fall back to .jpg, then fall back to the emoji box. */
+  return `<div class="trial-portrait-wrap">`
+       + `<div class="trial-portrait-fallback" style="background:${sp.color}">${sp.emoji}</div>`
+       + `<img src="${pngPath}" alt="" onerror="this.onerror=function(){this.remove()};this.src='${jpgPath}';">`
+       + `</div>`;
+}
 
 function renderSpriteAvatarHTML(spriteId){
   const sp = SPRITES[spriteId] || { emoji: '❓', color: '#ccc' };
@@ -478,6 +536,59 @@ const SCENARIOS = [
         reveal: 'นายเขียวกระทำไปเพื่อป้องกันนางดำจากภยันตรายที่ใกล้จะถึงจากการประทุษร้ายอันละเมิดต่อกฎหมายของนายแดง การผลักเพื่อหยุดคนที่กำลังใช้อาวุธ (ขาตั้งกล้อง) ทำร้ายผู้อื่น เป็นวิธีที่พอสมควรแก่เหตุ จึงเข้าเหตุยกเว้นความผิดฐานป้องกันโดยชอบด้วยกฎหมายตามมาตรา 68 ไม่มีความผิด — ผลพลอยได้ที่นายแดงตกบ่อโดนกัดเป็นผลจากการกระทำที่ชอบด้วยกฎหมายอยู่แล้ว จึงไม่ต้องรับผิดในผลนั้นด้วย',
       },
     ],
+    /* Ace Attorney-style dramatized trial script — see COURTROOM_SCRIPT.md.
+       type:'dialogue' beats play as portrait+textbox lines; type:'question'
+       entries pause the trial and render the existing questions[qIndex] MC UI
+       unchanged (same options/correct/reveal data, no new assessment logic).
+       The judge's spoken "ศาลพิพากษา" ruling lines from the script are
+       intentionally omitted here since that exact text already appears in
+       each question's reveal box right after — repeating it as a dialogue
+       line too would just be the same paragraph twice. */
+    trial: [
+      { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ศาลนี้นัดพิจารณาคดีที่สวนสัตว์เปิดเขาเขียว มีผู้ถูกกล่าวหาหลายคน หลายข้อหา — เริ่มจากคนแรก' },
+
+      { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ข้อหาแรก: นางดำเบียดคิวเดินชนคนจนทำให้ นส.เหลือง ตกบ่อหมูเด้ง แล้วถูกโจนาห์กัดจนบาดเจ็บสาหัส' },
+      { type:'dialogue', speaker:'prosecutor', pose:'confident', caption:'อัยการ: จำเลยเบียดจนผู้เสียหายบาดเจ็บสาหัส ต้องรับผิดฐานทำร้ายร่างกายตามมาตรา 295 โดยตรง!' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! ลูกความของดิฉันไม่มีเจตนาทำร้ายใครทั้งสิ้น เป็นเพียงอุบัติเหตุจากความไม่ระมัดระวัง' },
+      { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ศาลฟังทั้งสองฝ่ายแล้ว ท่านผู้ตัดสิน — ท่านเห็นว่าข้อกล่าวหาใดตรงตามหลักกฎหมายที่สุด?' },
+      { type:'question', qIndex: 0 },
+      { type:'dialogue', speaker:'prosecutor', pose:'sad', caption:'อัยการ: ...ศาลว่าตามนั้น' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'neutral', caption:'ทนายจำเลย: (พยักหน้ารับคำพิพากษา)' },
+
+      { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ข้อหาต่อไป: นายแดงแอบหยิบแหวนทองของมารดาไปจำนำเพื่อเอาเงินมาเที่ยว' },
+      { type:'dialogue', speaker:'prosecutor', pose:'confident', caption:'อัยการ: จำเลยลักทรัพย์ตามมาตรา 334 ต้องรับโทษเต็มตามกฎหมาย!' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! แหวนวงนี้เป็นของมารดาลูกความดิฉันเอง กฎหมายยกเว้นโทษให้กรณีเช่นนี้ไว้ชัดเจน' },
+      { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ท่านผู้ตัดสิน — คดีนี้ควรจบลงอย่างไร?' },
+      { type:'question', qIndex: 1 },
+
+      { type:'dialogue', speaker:'judge', pose:'sad', caption:'ข้อหาที่หนักที่สุด: นายแดงแย่งขาตั้งกล้องจากนางดำมากระหน่ำตี จนนางดำบาดเจ็บที่แขนและขา สามวันต่อมานางดำเสียชีวิตเพราะแผลติดเชื้อ — แต่เธอปฏิเสธไปหาหมอ เลือกดื่ม/อาบน้ำมนต์แทน' },
+      { type:'dialogue', speaker:'prosecutor', pose:'angry', caption:'อัยการ: ผู้ตายเสียชีวิตจากบาดแผลที่จำเลยเป็นผู้ก่อ จำเลยต้องรับผิดฐานทำร้ายร่างกายจนเป็นเหตุถึงแก่ความตายตามมาตรา 290!' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! ผู้ตายเองเป็นผู้ปฏิเสธการรักษาทางการแพทย์ นี่คือเหตุแทรกแซงที่ตัดความสัมพันธ์ระหว่างการกระทำกับผลแห่งความตาย' },
+      { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ท่านผู้ตัดสิน — จำเลยต้องรับผิดในความตายนี้หรือไม่?' },
+      { type:'question', qIndex: 2 },
+      { type:'dialogue', speaker:'prosecutor', pose:'shocked', caption:'อัยการ: (ถอนหายใจ) ...รับทราบคำพิพากษา' },
+
+      { type:'dialogue', speaker:'courtroom_cat', pose:'neutral', caption:'(เงียบไปครู่หนึ่ง... จู่ ๆ แมวศาลตัวหนึ่งก็เดินยิ้มเข้ามากลางห้องพิจารณาคดีอย่างไม่สนใจใคร)' },
+      { type:'dialogue', speaker:'judge', pose:'shocked', caption:'ผู้พิพากษา: เอ่อ... ใครก็ได้พาแมวออกไปที... (ยังพยายามคงความสงบขององค์คณะ)' },
+      { type:'dialogue', speaker:'courtroom_cat', pose:'sleepy', caption:'(แมวศาลไม่สนใจ นอนหมอบใต้บัลลังก์ผู้พิพากษาอย่างสบายใจ)' },
+      { type:'dialogue', speaker:'prosecutor', pose:'neutral', caption:'อัยการ: (อดยิ้มไม่ได้) ...ศาลที่เคารพ ขอเราพักสัก 1 นาทีได้ไหมครับ' },
+      { type:'dialogue', speaker:'judge', pose:'confident', caption:'ผู้พิพากษา: (สูดหายใจลึก) ได้... พักสั้น ๆ แล้วกลับมาว่าความกันต่อ' },
+
+      { type:'dialogue', speaker:'judge', pose:'neutral', caption:'กลับเข้าสู่การพิจารณา — เหตุการณ์ต่อไป: นายแดงเองถูกผลักตกบ่อหมูเด้งไปด้วย ถูกหมูเด้ง (ลูก) งับขา และมีแผลถลอกตามตัว' },
+      { type:'dialogue', speaker:'prosecutor', pose:'neutral', caption:'อัยการ: จำเลยเป็นต้นเหตุของเหตุการณ์วุ่นวายทั้งหมดคืนนี้ ต้องรับผิดด้วยหรือไม่?' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! ตอนนี้ลูกความดิฉันเป็นฝ่ายถูกกระทำต่างหาก ไม่ใช่ผู้กระทำต่อผู้ใดเลย' },
+      { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ท่านผู้ตัดสิน — เหตุการณ์ตอนนี้ นายแดงมีความผิดหรือไม่?' },
+      { type:'question', qIndex: 3 },
+
+      { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ข้อหาสุดท้าย: นายเขียว แฟนคลับที่จำนางดำได้ วิ่งเข้าไปผลักนายแดงเพื่อหยุดไม่ให้ทำร้ายนางดำต่อ ทำให้นายแดงตกบ่อหมูเด้งไปอีกคนและถูกกัด' },
+      { type:'dialogue', speaker:'prosecutor', pose:'confident', caption:'อัยการ: จำเลยผลักผู้อื่นจนได้รับบาดเจ็บ ต้องมีความผิดฐานทำร้ายร่างกายตามมาตรา 295!' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! ลูกความดิฉันกระทำไปเพื่อป้องกันผู้อื่นจากภยันตรายที่ใกล้จะถึงโดยชอบด้วยกฎหมายเท่านั้น' },
+      { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ท่านผู้ตัดสิน — นี่คือการป้องกันโดยชอบ หรือความผิดฐานทำร้ายร่างกาย?' },
+      { type:'question', qIndex: 4 },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: ยุติธรรมสมกับที่รอคอย!' },
+
+      { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ศาลได้พิจารณาครบทุกข้อกล่าวหาแล้ว ขอบคุณทุกฝ่ายที่มาให้ปากคำในวันนี้ — ปิดการพิจารณาคดี' },
+    ],
   },
 ];
 
@@ -488,6 +599,7 @@ const state = {
   screen: 'picker',   // picker | scene | comprehension | recap | courtroom | results
   scenario: null,
   beatIndex: 0,
+  trialIndex: 0,
   qIndex: 0,
   selected: null,
   answered: false,
@@ -501,6 +613,7 @@ function esc(s){ return String(s).replace(/</g,'&lt;'); }
 function startScenario(scenario){
   state.scenario = scenario;
   state.beatIndex = 0;
+  state.trialIndex = 0;
   state.qIndex = 0;
   state.selected = null;
   state.answered = false;
@@ -514,7 +627,7 @@ function render(){
   if (state.screen === 'scene') return renderScene();
   if (state.screen === 'comprehension') return renderComprehension();
   if (state.screen === 'recap') return renderRecap();
-  if (state.screen === 'courtroom') return renderCourtroom();
+  if (state.screen === 'courtroom') return renderTrial();
   if (state.screen === 'results') return renderResults();
 }
 
@@ -619,7 +732,7 @@ function renderComprehension(){
 }
 function goRecap(){ state.screen = 'recap'; render(); }
 function replayScene(){ state.beatIndex = 0; state.screen = 'scene'; render(); }
-function goCourtroom(){ state.qIndex = 0; state.selected = null; state.answered = false; state.screen = 'courtroom'; render(); }
+function goCourtroom(){ state.qIndex = 0; state.trialIndex = 0; state.selected = null; state.answered = false; state.screen = 'courtroom'; render(); }
 
 /* ---------- RECAP (plain-text, offered when "ยังไม่เข้าใจ") ---------- */
 function renderRecap(){
@@ -634,15 +747,46 @@ function renderRecap(){
   `;
 }
 
-/* ---------- COURTROOM ---------- */
+/* ---------- COURTROOM TRIAL (Ace Attorney-style dialogue + MC) ---------- */
 const LETTERS = ['ก','ข','ค','ง','จ'];
-function renderCourtroom(){
+function renderTrial(){
   const s = state.scenario;
-  const q = s.questions[state.qIndex];
+  const entry = s.trial[state.trialIndex];
+  if (entry.type === 'question') {
+    state.qIndex = entry.qIndex;
+    state.selected = null;
+    state.answered = false;
+    renderTrialQuestion(entry.qIndex);
+  } else {
+    renderTrialDialogue(entry);
+  }
+}
+function renderTrialDialogue(entry){
+  const s = state.scenario;
+  const isLast = state.trialIndex === s.trial.length - 1;
   root.innerHTML = `
     <div class="scene-topbar">
       <span>ห้องพิจารณาคดี</span>
-      <span class="q-progress">คำถาม ${state.qIndex + 1} / ${s.questions.length}</span>
+      <span></span>
+    </div>
+    <div class="trial-stage">
+      ${renderStageBgHTML(s.courtroomBg)}
+      ${renderTrialPortraitHTML(entry.speaker, entry.pose)}
+    </div>
+    <div class="trial-textbox">
+      <div class="trial-namebox">${esc(courtDisplayName(entry.speaker))}</div>
+      <div class="trial-caption">${esc(entry.caption)}</div>
+    </div>
+    <button type="button" class="big-btn" onclick="nextTrialStep()" onmouseenter="playHoverSound()">${isLast ? 'ดูผลสรุป ›' : 'ถัดไป ›'}</button>
+  `;
+}
+function renderTrialQuestion(qIndex){
+  const s = state.scenario;
+  const q = s.questions[qIndex];
+  root.innerHTML = `
+    <div class="scene-topbar">
+      <span>ห้องพิจารณาคดี</span>
+      <span class="q-progress">คำถาม ${qIndex + 1} / ${s.questions.length}</span>
     </div>
     <div class="stage" style="aspect-ratio:16/7">
       ${renderStageBgHTML(s.courtroomBg)}
@@ -668,8 +812,8 @@ function renderCourtroom(){
       `).join('')}
     </div>
     <div id="reveal-slot"></div>
-    <button type="button" class="big-btn" id="q-next-btn" style="display:none" onclick="nextQuestion()" onmouseenter="playHoverSound()">
-      ${state.qIndex === s.questions.length - 1 ? 'ดูผลสรุป ›' : 'ข้อถัดไป ›'}
+    <button type="button" class="big-btn" id="q-next-btn" style="display:none" onclick="nextTrialStep()" onmouseenter="playHoverSound()">
+      ${state.trialIndex === s.trial.length - 1 ? 'ดูผลสรุป ›' : 'ถัดไป ›'}
     </button>
   `;
 }
@@ -697,12 +841,10 @@ function answer(i){
   document.getElementById('q-next-btn').style.display = 'block';
   playHoverSound();
 }
-function nextQuestion(){
+function nextTrialStep(){
   const s = state.scenario;
-  if (state.qIndex < s.questions.length - 1) {
-    state.qIndex++;
-    state.selected = null;
-    state.answered = false;
+  if (state.trialIndex < s.trial.length - 1) {
+    state.trialIndex++;
     render();
   } else {
     state.screen = 'results';
