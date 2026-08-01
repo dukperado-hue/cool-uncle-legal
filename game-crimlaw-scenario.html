@@ -180,6 +180,14 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 .stage-bg-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:64px;opacity:.35}
 .stage-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .stage-label{position:absolute;top:8px;left:10px;background:rgba(0,0,0,.35);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;letter-spacing:.02em}
+.funeral-badge{
+  position:absolute;top:8px;right:10px;font-size:18px;letter-spacing:2px;
+  background:rgba(0,0,0,.4);padding:4px 10px;border-radius:999px;
+  opacity:0;transform:translateY(-6px);
+  transition:opacity .4s ease,transform .4s ease;pointer-events:none;
+}
+.funeral-badge.show{opacity:1;transform:translateY(0)}
+.stage.mourning{filter:grayscale(.35) brightness(.9)}
 
 /* Actor layer sits on top of .stage but is intentionally NOT clipped, so
    full-body standee cutouts can pop out above the frame's top edge instead
@@ -191,12 +199,12 @@ h1,h2{font-family:'Noto Serif Thai',serif}
   height:118%;
   display:flex;flex-direction:column;align-items:center;
   opacity:0;pointer-events:none;
-  transform:translateX(-50%) scale(.85);transform-origin:bottom center;
+  transform:translateX(-50%) scale(calc(.85 * var(--actor-scale,1)));transform-origin:bottom center;
   transition:left .55s cubic-bezier(.4,0,.2,1),opacity .35s ease,transform .35s ease;
 }
-.sprite.visible{opacity:1;transform:translateX(-50%) scale(1)}
+.sprite.visible{opacity:1;transform:translateX(-50%) scale(var(--actor-scale,1))}
 .sprite-figure-wrap{
-  order:1;flex:1 1 auto;min-height:0;width:100%;
+  position:relative;order:1;flex:1 1 auto;min-height:0;width:100%;
   display:flex;align-items:flex-end;justify-content:center;
 }
 .sprite-fallback{
@@ -215,6 +223,32 @@ h1,h2{font-family:'Noto Serif Thai',serif}
   order:2;margin-top:4px;font-size:10.5px;font-weight:800;color:#fff;
   text-shadow:0 1px 3px rgba(0,0,0,.75);white-space:nowrap;flex:0 0 auto;
 }
+
+/* falling-in-the-water beat: brief splash burst + a wobble/dunk on the figure */
+.splash-fx{
+  position:absolute;left:50%;bottom:6%;transform:translateX(-50%);
+  font-size:22px;opacity:0;pointer-events:none;
+}
+.sprite.fx-active .splash-fx{animation:splashPop .9s ease-out}
+.sprite.fx-active .sprite-figure{animation:wobbleDunk .6s ease-in-out}
+@keyframes splashPop{
+  0%{opacity:0;transform:translateX(-50%) translateY(6px) scale(.6)}
+  30%{opacity:1;transform:translateX(-50%) translateY(-10px) scale(1.15)}
+  100%{opacity:0;transform:translateX(-50%) translateY(-32px) scale(.9)}
+}
+@keyframes wobbleDunk{
+  0%{transform:rotate(0deg) translateY(0)}
+  25%{transform:rotate(-8deg) translateY(4px)}
+  55%{transform:rotate(6deg) translateY(2px)}
+  100%{transform:rotate(0deg) translateY(0)}
+}
+
+/* injury bandage badge, toggled per-beat via .sprite.bandaged */
+.bandage-badge{
+  position:absolute;left:60%;bottom:16%;font-size:15px;display:none;
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.4));
+}
+.sprite.bandaged .bandage-badge{display:block}
 
 .caption-box{
   background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -444,6 +478,8 @@ function renderSpriteAvatarHTML(spriteId){
        + `<div class="sprite-fallback" style="background:${sp.color}"><span class="sprite-emoji">${sp.emoji}</span></div>`
        + `<img class="sprite-figure" src="${standeePath(spriteId)}" alt="" `
        + `onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">`
+       + `<span class="bandage-badge">🩹</span>`
+       + `<span class="splash-fx">💦</span>`
        + `</div>`;
 }
 function renderStageBgHTML(bgId){
@@ -478,17 +514,17 @@ const SCENARIOS = [
       { caption: 'ระหว่างต่อคิวดูหมูเด้ง นางดำ ซึ่งอ้างตัวเป็นอินฟลูเอนเซอร์ถ่ายคอนเทนต์ เดินแซงคิวเบียดเสียดผู้คนอย่างไม่แคร์ใคร',
         actors: [ { id:'male_teen', x:24 }, { id:'female_teen', x:40 }, { id:'female_influencer', x:60, active:true, pose:'🏃‍♀️' } ] },
       { caption: 'นางดำเบียดจนชน นส.เหลือง เซถลาตกลงไปในบ่อหมูเด้ง (บ่อไม่ลึกมากนัก)',
-        actors: [ { id:'male_teen', x:22, pose:'😨' }, { id:'female_teen', x:48, active:true, pose:'😱' }, { id:'female_influencer', x:56 } ] },
+        actors: [ { id:'male_teen', x:22, pose:'😨' }, { id:'female_teen', x:48, active:true, pose:'😱', scale:0.55, effect:'splash' }, { id:'female_influencer', x:56 } ] },
       { caption: 'โจนาห์ แม่ฮิปโปแคระ ตกใจ วิ่งเข้าใส่กัด นส.เหลือง จนได้รับบาดเจ็บสาหัส',
-        actors: [ { id:'male_teen', x:20, pose:'😱' }, { id:'female_teen', x:48, pose:'🤕' }, { id:'hippo_mother', x:44, active:true, pose:'😡' }, { id:'female_influencer', x:60 } ] },
+        actors: [ { id:'male_teen', x:20, pose:'😱' }, { id:'female_teen', x:48, pose:'🤕', bandaged:true }, { id:'hippo_mother', x:44, active:true, pose:'😡' }, { id:'female_influencer', x:60 } ] },
       { caption: 'นายแดงเห็นแฟนสาวถูกกัดจนโกรธจัด แย่งขาตั้งกล้องจากนางดำมากระหน่ำตี ทำให้นางดำบาดเจ็บที่แขนและขา',
-        actors: [ { id:'male_teen', x:52, active:true, pose:'😡' }, { id:'female_influencer', x:60, pose:'🤕' }, { id:'female_teen', x:32, pose:'🤕' } ] },
+        actors: [ { id:'male_teen', x:52, active:true, pose:'😡' }, { id:'female_influencer', x:60, pose:'🤕' }, { id:'female_teen', x:32, pose:'🤕', bandaged:true } ] },
       { caption: 'นายเขียว แฟนคลับที่จำนางดำได้ วิ่งเข้าไปผลักนายแดงเพื่อให้หยุดทำร้ายนางดำ',
         actors: [ { id:'male_fan', x:50, active:true, pose:'😤' }, { id:'male_teen', x:56, pose:'😲' }, { id:'female_influencer', x:64, pose:'🤕' } ] },
       { caption: 'แรงผลักทำให้นายแดงเซถลาตกบ่อหมูเด้งไปอีกคน หมูเด้ง (ลูกฮิปโป) วิ่งเข้ามางับขา — เจ็บๆ คันๆ แต่หมูเด้งกลับมีความสุข นายแดงยังมีแผลถลอกตามตัวจากการตกกระแทกพื้นด้วย',
         actors: [ { id:'male_teen', x:44, active:true, pose:'😖' }, { id:'hippo_baby', x:40, active:true, pose:'🥰' }, { id:'male_fan', x:58 } ] },
       { caption: 'สามวันต่อมา นางดำ อินฟลูเอนเซอร์สายมูเตลู เสียชีวิตขณะไลฟ์สดขายของ สาเหตุคือแผลติดเชื้อในกระแสเลือด — เพราะเธอไม่ยอมไปหาหมอ แต่เลือกดื่ม/อาบน้ำมนต์รักษาแผลแทน',
-        actors: [ { id:'female_influencer', x:50, active:true, pose:'😇' } ] },
+        actors: [ { id:'female_influencer', x:50, active:true, pose:'😇' } ], funeral:true },
     ],
     comprehension: { question: 'เข้าใจโจทย์ไหม?' },
     courtroomBg: 'courtroom',
@@ -689,7 +725,11 @@ function renderScene(){
     <div class="stage-frame">
       <div class="stage" id="stage">
         ${renderStageBgHTML(s.bg)}
+        <div class="funeral-badge" id="funeral-badge">🕯️ 🤍 🎗️</div>
       </div>
+      <audio id="funeral-audio" preload="none">
+        <source src="music/อย่าหันหลังกลับ.mp3" type="audio/mpeg">
+      </audio>
       <div class="stage-actors">
         ${Object.keys(s.characters).map(id => `
           <div class="sprite" id="sprite-${id}">
@@ -718,12 +758,23 @@ function syncBeat(){
     if (a) {
       el.classList.add('visible');
       el.classList.toggle('active', !!a.active);
+      el.classList.toggle('bandaged', !!a.bandaged);
       el.style.left = a.x + '%';
+      el.style.setProperty('--actor-scale', a.scale != null ? a.scale : 1);
       const emojiEl = el.querySelector('.sprite-emoji');
       if (emojiEl) emojiEl.textContent = a.pose || SPRITES[id].emoji;
+      if (a.effect === 'splash') {
+        el.classList.remove('fx-active');
+        void el.offsetWidth; // force reflow so the animation can retrigger
+        el.classList.add('fx-active');
+      } else {
+        el.classList.remove('fx-active');
+      }
     } else {
       el.classList.remove('visible');
       el.classList.remove('active');
+      el.classList.remove('bandaged');
+      el.classList.remove('fx-active');
     }
   });
   typeCaption(beat.caption);
@@ -731,6 +782,18 @@ function syncBeat(){
   nextBtn.textContent = (state.beatIndex === s.beats.length - 1) ? 'เข้าใจโจทย์ไหม? ›' : 'ถัดไป ›';
   const prevBtn = document.getElementById('scene-prev-btn');
   if (prevBtn) prevBtn.disabled = (state.beatIndex === 0);
+  const stageEl = document.getElementById('stage');
+  const funeralBadge = document.getElementById('funeral-badge');
+  const funeralAudio = document.getElementById('funeral-audio');
+  if (beat.funeral) {
+    if (stageEl) stageEl.classList.add('mourning');
+    if (funeralBadge) funeralBadge.classList.add('show');
+    if (funeralAudio) { funeralAudio.currentTime = 0; funeralAudio.volume = 0.5; funeralAudio.play().catch(() => {}); }
+  } else {
+    if (stageEl) stageEl.classList.remove('mourning');
+    if (funeralBadge) funeralBadge.classList.remove('show');
+    if (funeralAudio) funeralAudio.pause();
+  }
 }
 function typeCaption(text){
   const el = document.getElementById('caption-box');
