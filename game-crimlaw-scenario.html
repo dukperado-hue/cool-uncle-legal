@@ -250,16 +250,16 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 }
 .sprite.bandaged .bandage-badge{display:block}
 
-/* small emotion-face reaction bubble, peeking above the character's head —
+/* half-body emotion cut-in, standing beside the character —
    swapped per beat from the actor's expression portrait set */
 .reaction-badge{
-  position:absolute;top:-6%;right:-4%;width:40%;max-width:52px;
-  aspect-ratio:1/1;border-radius:50%;object-fit:cover;object-position:top center;
-  border:2px solid rgba(255,255,255,.9);box-shadow:0 3px 8px rgba(0,0,0,.35);
-  background:var(--card);opacity:0;transform:scale(.6);
+  position:absolute;bottom:0;right:-32%;width:64%;max-width:84px;
+  height:auto;max-height:60%;object-fit:contain;object-position:bottom center;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.4));
+  opacity:0;transform:scale(.6) translateY(6px);transform-origin:bottom right;
   transition:opacity .25s ease,transform .25s ease;
 }
-.reaction-badge.show{opacity:1;transform:scale(1)}
+.reaction-badge.show{opacity:1;transform:scale(1) translateY(0)}
 
 .caption-box{
   background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -622,14 +622,16 @@ const SCENARIOS = [
       { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! ลูกความของดิฉันไม่มีเจตนาทำร้ายใครทั้งสิ้น เป็นเพียงอุบัติเหตุจากความไม่ระมัดระวัง' },
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ศาลฟังทั้งสองฝ่ายแล้ว ท่านผู้ตัดสิน — ท่านเห็นว่าข้อกล่าวหาใดตรงตามหลักกฎหมายที่สุด?' },
       { type:'question', qIndex: 0 },
-      { type:'dialogue', speaker:'prosecutor', pose:'sad', caption:'อัยการ: ...ศาลว่าตามนั้น' },
-      { type:'dialogue', speaker:'defense_lawyer', pose:'neutral', caption:'ทนายจำเลย: (พยักหน้ารับคำพิพากษา)' },
+      { type:'dialogue', speaker:'prosecutor', pose:'confident', caption:'อัยการ: (พยักหน้า) ...ศาลเห็นตรงกับข้อกล่าวหาหลักของเราว่าจำเลยต้องรับผิด แม้จะปรับบทเป็นมาตรา 300 แทนก็ตาม' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'sad', caption:'ทนายจำเลย: (ถอนหายใจ) ...ข้อต่อสู้เรื่องไม่มีเจตนาฟังไม่ขึ้น ศาลยังเห็นว่าลูกความดิฉันประมาท' },
 
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ข้อหาต่อไป: นายแดงแอบหยิบแหวนทองของมารดาไปจำนำเพื่อเอาเงินมาเที่ยว' },
       { type:'dialogue', speaker:'prosecutor', pose:'confident', caption:'อัยการ: จำเลยลักทรัพย์ตามมาตรา 334 ต้องรับโทษเต็มตามกฎหมาย!' },
       { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! แหวนวงนี้เป็นของมารดาลูกความดิฉันเอง กฎหมายยกเว้นโทษให้กรณีเช่นนี้ไว้ชัดเจน' },
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ท่านผู้ตัดสิน — คดีนี้ควรจบลงอย่างไร?' },
       { type:'question', qIndex: 1 },
+      { type:'dialogue', speaker:'prosecutor', pose:'neutral', caption:'อัยการ: ครบองค์ประกอบความผิดจริง แต่ยอมรับว่ากฎหมายยกเว้นโทษกรณีทรัพย์ของบุพการีไว้ชัดเจน' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: ใช่ค่ะ — ลูกความดิฉันยังคง "มีความผิด" แต่ไม่ต้องรับ "โทษ" ตามมาตรา 71 นี่คือความแตกต่างที่สำคัญ' },
 
       { type:'dialogue', speaker:'judge', pose:'sad', caption:'ข้อหาที่หนักที่สุด: นายแดงแย่งขาตั้งกล้องจากนางดำมากระหน่ำตี จนนางดำบาดเจ็บที่แขนและขา สามวันต่อมานางดำเสียชีวิตเพราะแผลติดเชื้อ — แต่เธอปฏิเสธไปหาหมอ เลือกดื่ม/อาบน้ำมนต์แทน' },
       { type:'dialogue', speaker:'prosecutor', pose:'angry', caption:'อัยการ: ผู้ตายเสียชีวิตจากบาดแผลที่จำเลยเป็นผู้ก่อ จำเลยต้องรับผิดฐานทำร้ายร่างกายจนเป็นเหตุถึงแก่ความตายตามมาตรา 290!' },
@@ -741,7 +743,7 @@ function renderScene(){
         <div class="funeral-badge" id="funeral-badge">🕯️ 🤍 🎗️</div>
       </div>
       <audio id="funeral-audio" preload="none">
-        <source src="music/อย่าหันหลังกลับ.mp3" type="audio/mpeg">
+        <source src="games/sound/music/freesound_community-funeral-music-close-23823.mp3" type="audio/mpeg">
       </audio>
       <div class="stage-actors">
         ${Object.keys(s.characters).map(id => `
@@ -810,7 +812,7 @@ function syncBeat(){
   if (beat.funeral) {
     if (stageEl) stageEl.classList.add('mourning');
     if (funeralBadge) funeralBadge.classList.add('show');
-    if (funeralAudio) { funeralAudio.currentTime = 0; funeralAudio.volume = 0.5; funeralAudio.play().catch(() => {}); }
+    if (funeralAudio) { funeralAudio.muted = false; funeralAudio.currentTime = 0; funeralAudio.volume = 0.5; funeralAudio.play().catch(() => {}); }
   } else {
     if (stageEl) stageEl.classList.remove('mourning');
     if (funeralBadge) funeralBadge.classList.remove('show');
