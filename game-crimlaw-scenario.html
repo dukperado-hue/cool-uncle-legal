@@ -172,7 +172,7 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 .beat-dot.done{background:var(--gold)}
 .beat-dot.current{background:var(--accent)}
 
-.stage-frame{position:relative;margin-top:26px}
+.stage-frame{position:relative;margin-top:48px}
 .stage{
   position:relative;width:100%;aspect-ratio:4/3;border-radius:var(--radius);
   overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);
@@ -249,6 +249,17 @@ h1,h2{font-family:'Noto Serif Thai',serif}
   filter:drop-shadow(0 1px 2px rgba(0,0,0,.4));
 }
 .sprite.bandaged .bandage-badge{display:block}
+
+/* small emotion-face reaction bubble, peeking above the character's head —
+   swapped per beat from the actor's expression portrait set */
+.reaction-badge{
+  position:absolute;top:-6%;right:-4%;width:40%;max-width:52px;
+  aspect-ratio:1/1;border-radius:50%;object-fit:cover;object-position:top center;
+  border:2px solid rgba(255,255,255,.9);box-shadow:0 3px 8px rgba(0,0,0,.35);
+  background:var(--card);opacity:0;transform:scale(.6);
+  transition:opacity .25s ease,transform .25s ease;
+}
+.reaction-badge.show{opacity:1;transform:scale(1)}
 
 .caption-box{
   background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -453,6 +464,7 @@ const BACKGROUNDS = {
 };
 function spritePath(id){ return 'pics/game/sprites/' + id + '.png'; }
 function standeePath(id){ return 'pics/game/standees/' + id + '.png'; }
+function reactionPath(id, expr){ return 'pics/game/reactions/' + id + '_' + expr + '.png'; }
 function bgPath(id){ return 'pics/game/backgrounds/' + id + '.jpg'; }
 function portraitPath(id, expression){ return 'pics/game/portraits/' + id + '_' + (expression || 'neutral') + '.png'; }
 function courtDisplayName(id){
@@ -480,6 +492,7 @@ function renderSpriteAvatarHTML(spriteId){
        + `onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">`
        + `<span class="bandage-badge">🩹</span>`
        + `<span class="splash-fx">💦</span>`
+       + `<img class="reaction-badge" src="" alt="" onerror="this.classList.remove('show')">`
        + `</div>`;
 }
 function renderStageBgHTML(bgId){
@@ -512,19 +525,19 @@ const SCENARIOS = [
       { caption: 'นายแดง (อายุ 16 ปี) แอบหยิบแหวนทองของแม่ไปจำนำ เอาเงินมาชวน นส.เหลือง แฟนสาว มาเที่ยวดูหมูเด้งที่สวนสัตว์เปิดเขาเขียว',
         actors: [ { id:'male_teen', x:28, active:true }, { id:'female_teen', x:44 } ] },
       { caption: 'ระหว่างต่อคิวดูหมูเด้ง นางดำ ซึ่งอ้างตัวเป็นอินฟลูเอนเซอร์ถ่ายคอนเทนต์ เดินแซงคิวเบียดเสียดผู้คนอย่างไม่แคร์ใคร',
-        actors: [ { id:'male_teen', x:24 }, { id:'female_teen', x:40 }, { id:'female_influencer', x:60, active:true, pose:'🏃‍♀️' } ] },
+        actors: [ { id:'male_teen', x:24 }, { id:'female_teen', x:40 }, { id:'female_influencer', x:60, active:true, pose:'🏃‍♀️', expr:'confident' } ] },
       { caption: 'นางดำเบียดจนชน นส.เหลือง เซถลาตกลงไปในบ่อหมูเด้ง (บ่อไม่ลึกมากนัก)',
-        actors: [ { id:'male_teen', x:22, pose:'😨' }, { id:'female_teen', x:48, active:true, pose:'😱', scale:0.55, effect:'splash' }, { id:'female_influencer', x:56 } ] },
+        actors: [ { id:'male_teen', x:22, pose:'😨', expr:'shocked' }, { id:'female_teen', x:48, active:true, pose:'😱', scale:0.55, effect:'splash', expr:'shocked' }, { id:'female_influencer', x:56 } ] },
       { caption: 'โจนาห์ แม่ฮิปโปแคระ ตกใจ วิ่งเข้าใส่กัด นส.เหลือง จนได้รับบาดเจ็บสาหัส',
-        actors: [ { id:'male_teen', x:20, pose:'😱' }, { id:'female_teen', x:48, pose:'🤕', bandaged:true }, { id:'hippo_mother', x:44, active:true, pose:'😡' }, { id:'female_influencer', x:60 } ] },
+        actors: [ { id:'female_teen', x:38, pose:'🤕', bandaged:true, expr:'shocked' }, { id:'hippo_mother', x:58, active:true, pose:'😡', expr:'angry' } ] },
       { caption: 'นายแดงเห็นแฟนสาวถูกกัดจนโกรธจัด แย่งขาตั้งกล้องจากนางดำมากระหน่ำตี ทำให้นางดำบาดเจ็บที่แขนและขา',
-        actors: [ { id:'male_teen', x:52, active:true, pose:'😡' }, { id:'female_influencer', x:60, pose:'🤕' }, { id:'female_teen', x:32, pose:'🤕', bandaged:true } ] },
+        actors: [ { id:'male_teen', x:42, active:true, pose:'😡', expr:'angry' }, { id:'female_influencer', x:58, pose:'🤕', expr:'shocked' } ] },
       { caption: 'นายเขียว แฟนคลับที่จำนางดำได้ วิ่งเข้าไปผลักนายแดงเพื่อให้หยุดทำร้ายนางดำ',
-        actors: [ { id:'male_fan', x:50, active:true, pose:'😤' }, { id:'male_teen', x:56, pose:'😲' }, { id:'female_influencer', x:64, pose:'🤕' } ] },
+        actors: [ { id:'male_fan', x:50, active:true, pose:'😤', expr:'angry' }, { id:'male_teen', x:56, pose:'😲', expr:'shocked' }, { id:'female_influencer', x:64, pose:'🤕', expr:'sad' } ] },
       { caption: 'แรงผลักทำให้นายแดงเซถลาตกบ่อหมูเด้งไปอีกคน หมูเด้ง (ลูกฮิปโป) วิ่งเข้ามางับขา — เจ็บๆ คันๆ แต่หมูเด้งกลับมีความสุข นายแดงยังมีแผลถลอกตามตัวจากการตกกระแทกพื้นด้วย',
-        actors: [ { id:'male_teen', x:44, active:true, pose:'😖' }, { id:'hippo_baby', x:40, active:true, pose:'🥰' }, { id:'male_fan', x:58 } ] },
+        actors: [ { id:'male_teen', x:44, active:true, pose:'😖', expr:'shocked' }, { id:'hippo_baby', x:40, active:true, pose:'🥰' }, { id:'male_fan', x:58 } ] },
       { caption: 'สามวันต่อมา นางดำ อินฟลูเอนเซอร์สายมูเตลู เสียชีวิตขณะไลฟ์สดขายของ สาเหตุคือแผลติดเชื้อในกระแสเลือด — เพราะเธอไม่ยอมไปหาหมอ แต่เลือกดื่ม/อาบน้ำมนต์รักษาแผลแทน',
-        actors: [ { id:'female_influencer', x:50, active:true, pose:'😇' } ], funeral:true },
+        actors: [ { id:'female_influencer', x:50, active:true, pose:'😇', expr:'sad' } ], funeral:true },
     ],
     comprehension: { question: 'เข้าใจโจทย์ไหม?' },
     courtroomBg: 'courtroom',
@@ -763,6 +776,15 @@ function syncBeat(){
       el.style.setProperty('--actor-scale', a.scale != null ? a.scale : 1);
       const emojiEl = el.querySelector('.sprite-emoji');
       if (emojiEl) emojiEl.textContent = a.pose || SPRITES[id].emoji;
+      const reactionEl = el.querySelector('.reaction-badge');
+      if (reactionEl) {
+        if (a.expr) {
+          reactionEl.src = reactionPath(id, a.expr);
+          reactionEl.classList.add('show');
+        } else {
+          reactionEl.classList.remove('show');
+        }
+      }
       if (a.effect === 'splash') {
         el.classList.remove('fx-active');
         void el.offsetWidth; // force reflow so the animation can retrigger
