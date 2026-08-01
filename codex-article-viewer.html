@@ -364,6 +364,94 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
 }
 .icon-btn:hover { background: var(--card); border-color: var(--gold); }
 
+/* HIGHLIGHT TOGGLE + TOOLBAR (manual + auto modes) */
+.bubble-btn.hl-active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.hl-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  background: #F9F7F2;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+.hl-mode-switch {
+  display: flex;
+  gap: 4px;
+}
+.hl-mode-btn {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--ink-soft);
+  font-family: inherit;
+}
+.hl-mode-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.hl-manual-controls, .hl-auto-note { display: flex; flex-direction: column; gap: 8px; }
+.hl-legend {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+}
+.hl-legend-item { display: inline-flex; align-items: center; gap: 5px; }
+.hl-legend-label { font-size: 12px; color: var(--ink-soft); }
+.hl-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+.hl-swatch-orange { background: #FFC98A; }
+.hl-swatch-blue { background: #9FD8F0; }
+.hl-swatch-pink { background: #F4A6C6; }
+.hl-swatch-green { background: #8FD9A8; }
+.hl-swatch-yellow { background: #FFE066; }
+.hl-swatch.active { border-color: var(--accent); box-shadow: 0 0 0 2px var(--card), 0 0 0 3px var(--accent); }
+.hl-eraser-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--ink);
+  font-family: inherit;
+}
+.hl-eraser-btn.active { background: var(--bad); color: #fff; border-color: var(--bad); }
+.hl-hint { color: var(--ink-faint); font-size: 11px; }
+.hl-auto-note { line-height: 1.7; font-size: 12px; }
+mark.codex-hl {
+  padding: 1px 2px;
+  border-radius: 3px;
+}
+mark.codex-hl-manual { cursor: pointer; }
+mark.codex-hl-auto { cursor: default; }
+mark.codex-hl-orange { background: #FFC98A; color: #6b3d05; }
+mark.codex-hl-blue { background: #9FD8F0; color: #08415c; }
+mark.codex-hl-pink { background: #F4A6C6; color: #4a1030; }
+mark.codex-hl-green { background: #8FD9A8; color: #0f3d20; }
+mark.codex-hl-yellow { background: #FFE066; color: #3a3212; }
+
 /* PERSONAL NOTE */
 .article-note { margin-top: 20px; }
 .note-input {
@@ -386,6 +474,11 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
 @media print {
   body.printing-one > *:not(#print-area) { display: none !important; }
   body.printing-one #print-area { display: block !important; padding: 24px; }
+  /* Belt-and-suspenders: hide interactive chrome even on a raw browser
+     print (Ctrl+P) that never went through printCurrentArticle(). */
+  .topbar, .back-button, .speech-bubble-actions, #audio-controls,
+  #chapter-audio, .article-nav, .hl-toolbar, .drone-mute-btn,
+  .theme-toggle { display: none !important; }
 }
 
 /* CHAPTER READ-ALOUD */
@@ -758,6 +851,7 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
           <a href="#" id="nav-next-btn" class="bubble-btn" onmouseenter="playHoverSound()" disabled>ถัดไป ›</a>
           <button type="button" id="btn-header-read" class="bubble-btn" onclick="toggleHeaderRead(this)" onmouseenter="playHoverSound()">🔊 อ่าน</button>
           <button type="button" class="bubble-btn" title="พิมพ์มาตรานี้" onclick="printCurrentArticle()" onmouseenter="playHoverSound()">🖨️ พิมพ์</button>
+          <button type="button" id="btn-highlight-toggle" class="bubble-btn" onclick="toggleHighlightMode()" onmouseenter="playHoverSound()">🖍️ ไฮไลต์: ปิด</button>
         </div>
       </div>
     </div>
@@ -768,6 +862,34 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
 
     <!-- READ WHOLE หมวด -->
     <div id="chapter-audio"></div>
+
+    <!-- HIGHLIGHT TOOLBAR (shown when highlight mode is on) -->
+    <div class="hl-toolbar" id="hl-toolbar" style="display:none">
+      <div class="hl-mode-switch">
+        <button type="button" class="hl-mode-btn active" data-mode="manual" onclick="setHighlightViewMode('manual')">✍️ Highlight</button>
+        <button type="button" class="hl-mode-btn" data-mode="auto" onclick="setHighlightViewMode('auto')">🤖 AI Highlight</button>
+      </div>
+      <div class="hl-manual-controls" id="hl-manual-controls">
+        <div class="hl-legend">
+          <span class="hl-legend-item"><button type="button" class="hl-swatch hl-swatch-orange active" data-color="orange" onclick="setHighlightColor('orange')"></button><span class="hl-legend-label">ส้ม = คำสำคัญของมาตรา</span></span>
+          <span class="hl-legend-item"><button type="button" class="hl-swatch hl-swatch-blue" data-color="blue" onclick="setHighlightColor('blue')"></button><span class="hl-legend-label">ฟ้า = ข้อยกเว้น</span></span>
+          <span class="hl-legend-item"><button type="button" class="hl-swatch hl-swatch-pink" data-color="pink" onclick="setHighlightColor('pink')"></button><span class="hl-legend-label">ชมพู = ต้องขยายความ/เชื่อมมาตราอื่น</span></span>
+          <span class="hl-legend-item"><button type="button" class="hl-swatch hl-swatch-green" data-color="green" onclick="setHighlightColor('green')"></button><span class="hl-legend-label">เขียว = วิธีดำเนินการ/ระยะเวลา</span></span>
+          <button type="button" id="hl-eraser-btn" class="hl-eraser-btn" onclick="setHighlightTool('eraser')" title="ลากทับข้อความที่ไฮไลต์ไว้เพื่อลบ">🧽 ยางลบ</button>
+        </div>
+        <span class="hl-hint">ลากเลือกข้อความเพื่อไฮไลต์ด้วยสีที่เลือก · คลิกที่ข้อความไฮไลต์เพื่อลบทันที</span>
+      </div>
+      <div class="hl-auto-note" id="hl-auto-note" style="display:none">
+        <span class="hl-hint">โปรดตรวจสอบเนื้อหาอีกครั้ง</span>
+        <div class="hl-legend">
+          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-orange" style="cursor:default"></span><span class="hl-legend-label">ส้ม = คำสำคัญ</span></span>
+          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-blue" style="cursor:default"></span><span class="hl-legend-label">ฟ้า = ข้อยกเว้น</span></span>
+          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-pink" style="cursor:default"></span><span class="hl-legend-label">ชมพู = อ้างอิงมาตราอื่น</span></span>
+          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-green" style="cursor:default"></span><span class="hl-legend-label">เขียว = ระยะเวลา/ขั้นตอน</span></span>
+          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-yellow" style="cursor:default"></span><span class="hl-legend-label">เหลือง = ข้อความในเครื่องหมายคำพูด</span></span>
+        </div>
+      </div>
+    </div>
 
     <!-- ARTICLE TEXT -->
     <div class="article-body" id="article-text">
@@ -1222,12 +1344,17 @@ function linkifyMatraRefs(escapedText, bookType, currentNumber) {
 function renderArticleBody(article) {
   const el = document.getElementById('article-text');
   const chunks = article.text.split('\n').filter(p => p.trim());
+  const useAuto = highlightModeOn && highlightViewMode === 'auto';
+  const manualHighlights = useAuto ? null : getHighlights(article.id);
   if (chunks.length <= 1) {
-    el.innerHTML = linkifyMatraRefs(escapeHtml(article.text), currentBookType, article.number);
+    el.setAttribute('data-chunk-index', '0');
+    const ranges = useAuto ? computeAutoHighlightsForChunk(article.text, article, 0) : highlightsForChunk(manualHighlights, 0);
+    el.innerHTML = buildChunkHtml(article.text, ranges, currentBookType, article.number, useAuto);
     return;
   }
+  el.removeAttribute('data-chunk-index');
   let warakN = 0;
-  el.innerHTML = chunks.map(p => {
+  el.innerHTML = chunks.map((p, i) => {
     const anuMatch = p.match(/^\(([๐-๙0-9]+)\)/);
     let label;
     if (anuMatch) {
@@ -1236,12 +1363,254 @@ function renderArticleBody(article) {
       warakN++;
       label = `วรรค${thaiOrdinalWord(warakN)}`;
     }
+    const ranges = useAuto ? computeAutoHighlightsForChunk(p, article, i) : highlightsForChunk(manualHighlights, i);
     return `
     <div class="warak-row">
       <div class="warak-label">${label}</div>
-      <div class="warak-text">${linkifyMatraRefs(escapeHtml(p), currentBookType, article.number)}</div>
+      <div class="warak-text" data-chunk-index="${i}">${buildChunkHtml(p, ranges, currentBookType, article.number, useAuto)}</div>
     </div>`;
   }).join('');
+}
+
+/* ================================================================
+   HIGHLIGHT (feature 1 of the gamified-features plan) — text
+   highlighting in 4 colors matching "เทคนิคการใช้ปากกาไฮไลท์...
+   สำหรับมนุษย์ประมวล": ส้ม=คำสำคัญ, ฟ้า=ข้อยกเว้น,
+   ชมพู=ต้องขยายความ/เชื่อมมาตราอื่น, เขียว=วิธีดำเนินการ/ระยะเวลา.
+   Two view modes:
+     - manual: user drags to highlight with a chosen color (+ eraser
+       tool to trim/remove), persisted per article as plain-text
+       offset ranges (not DOM ranges) so they survive re-render.
+     - auto: read-only, computed on the fly from regex rules over
+       the article text — no storage, recomputed every render. ส้ม
+       (keyword) is intentionally never auto-picked since judging
+       "the important phrase" needs legal understanding the site
+       doesn't have; auto only covers patterns that are reliably
+       mechanical (เว้นแต่/ยกเว้น, มาตรา cross-refs, เวลา/ขั้นตอน).
+   Started on article-viewer first since it loads one article
+   statically (unlike codex-search.html, which rebuilds its whole
+   result list on every search).
+   ================================================================ */
+const HL_MODE_KEY = 'codex-highlight-mode';
+const HL_COLOR_KEY = 'codex-highlight-color';
+const HL_VIEW_MODE_KEY = 'codex-highlight-view-mode';
+const HL_TOOL_KEY = 'codex-highlight-tool';
+let highlightModeOn = false;
+let highlightColor = 'orange';
+let highlightViewMode = 'manual'; // 'manual' | 'auto'
+let highlightTool = 'color'; // 'color' | 'eraser'
+let currentArticleObj = null;
+
+function highlightStorageKey(articleId) { return 'codex-highlight-' + articleId; }
+
+function getHighlights(articleId) {
+  try { return JSON.parse(localStorage.getItem(highlightStorageKey(articleId)) || '[]'); }
+  catch (e) { return []; }
+}
+
+function saveHighlights(articleId, list) {
+  try { localStorage.setItem(highlightStorageKey(articleId), JSON.stringify(list)); }
+  catch (e) { /* storage unavailable/full */ }
+}
+
+function highlightsForChunk(highlights, chunkIndex) {
+  return highlights.filter(h => h.chunkIndex === chunkIndex).sort((a, b) => a.start - b.start);
+}
+
+// --- auto-mode rule engine -----------------------------------------------
+// Mechanical, text-pattern rules for ฟ้า/ชมพู/เขียว — no legal judgment
+// involved. ส้ม (the "important keyword" color) can't be found this way,
+// so it comes only from article.aiHighlights: a short list of hand-picked
+// keyword phrases, curated per article the same way lectureNotes are —
+// a human/AI actually reads the real statute text and marks it, nothing
+// invented. Only a handful of articles have this curated yet.
+const THAI_NUM_WORD_RE = '(?:ยี่สิบ|สามสิบ|สี่สิบ|ห้าสิบ|หกสิบ|เจ็ดสิบ|แปดสิบ|เก้าสิบ|สิบ)(?:เอ็ด|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?|หนึ่ง|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า|ร้อย';
+
+function computeAutoHighlightsForChunk(text, article, chunkIndex) {
+  const ranges = [];
+  const pushAll = (re, color) => {
+    let m;
+    while ((m = re.exec(text))) {
+      if (m[0].length === 0) { re.lastIndex++; continue; }
+      ranges.push({ start: m.index, end: m.index + m[0].length, color });
+    }
+  };
+  pushAll(/“[^“”]*”|"[^"]*"/g, 'yellow');
+  pushAll(/เว้นแต่(?:จะ)?|เว้นเสียแต่(?:จะ)?|ยกเว้น(?:กรณี)?/g, 'blue');
+  pushAll(new RegExp(MATRA_REF_RE.source, 'g'), 'pink');
+  pushAll(new RegExp('(?:ภายใน|เกิน|ไม่เกิน|มีกำหนด)\\s*(?:[0-9๐-๙]+|' + THAI_NUM_WORD_RE + ')\\s*(?:วัน|เดือน|ปี|ชั่วโมง|นาที)', 'g'), 'green');
+  pushAll(/ต้องทำเป็นหนังสือ(?:และจดทะเบียนต่อพนักงานเจ้าหน้าที่)?/g, 'green');
+  // AI-curated ส้ม keyword picks, if this article has any.
+  (article && article.aiHighlights || []).forEach(h => {
+    if (h.chunk !== chunkIndex) return;
+    const idx = text.indexOf(h.phrase);
+    if (idx === -1) return; // data/text drifted apart — skip rather than mis-highlight
+    ranges.push({ start: idx, end: idx + h.phrase.length, color: h.color || 'orange' });
+  });
+  ranges.sort((a, b) => a.start - b.start);
+  // drop overlaps in favor of whichever rule matched first (earlier in the list above)
+  const cleaned = [];
+  ranges.forEach(r => {
+    if (!cleaned.length || r.start >= cleaned[cleaned.length - 1].end) cleaned.push(r);
+  });
+  return cleaned;
+}
+
+// Builds a chunk's inner HTML by escaping + linkifying each segment
+// around highlight ranges, wrapping highlighted segments in <mark>.
+// Keeps มาตรา cross-reference links working inside and around
+// highlighted text. `isAuto` controls the mark's class (auto marks
+// aren't click-to-remove, since they're not stored) and id.
+function buildChunkHtml(text, ranges, bookType, articleNumber, isAuto) {
+  if (!ranges.length) return linkifyMatraRefs(escapeHtml(text), bookType, articleNumber);
+  let html = '';
+  let pos = 0;
+  ranges.forEach(r => {
+    const s = Math.max(pos, Math.min(text.length, r.start));
+    const e = Math.max(s, Math.min(text.length, r.end));
+    if (s > pos) html += linkifyMatraRefs(escapeHtml(text.slice(pos, s)), bookType, articleNumber);
+    if (e > s) {
+      const cls = isAuto ? `codex-hl codex-hl-auto codex-hl-${r.color}` : `codex-hl codex-hl-manual codex-hl-${r.color}`;
+      const idAttr = isAuto ? '' : ` data-hl-id="${r.id}"`;
+      const titleAttr = isAuto ? ' title="ไฮไลต์อัตโนมัติ — ตรวจสอบเองอีกครั้ง"' : ' title="คลิกเพื่อลบไฮไลต์"';
+      html += `<mark class="${cls}"${idAttr}${titleAttr}>${linkifyMatraRefs(escapeHtml(text.slice(s, e)), bookType, articleNumber)}</mark>`;
+    }
+    pos = Math.max(pos, e);
+  });
+  if (pos < text.length) html += linkifyMatraRefs(escapeHtml(text.slice(pos)), bookType, articleNumber);
+  return html;
+}
+
+function addHighlight(article, chunkIndex, start, end, color) {
+  let list = getHighlights(article.id);
+  // Drop any existing highlight that overlaps the new selection in this chunk.
+  list = list.filter(h => !(h.chunkIndex === chunkIndex && h.end > start && h.start < end));
+  list.push({ id: 'hl' + Date.now() + Math.floor(Math.random() * 1000), chunkIndex, start, end, color });
+  saveHighlights(article.id, list);
+  renderArticleBody(article);
+}
+
+function removeHighlight(article, hlId) {
+  const list = getHighlights(article.id).filter(h => h.id !== hlId);
+  saveHighlights(article.id, list);
+  renderArticleBody(article);
+}
+
+// Eraser: trims/splits/removes any stored highlight overlapping
+// [start,end) in the given chunk, like dragging a physical eraser
+// tip over already-highlighted text.
+function eraseRange(article, chunkIndex, start, end) {
+  const list = getHighlights(article.id);
+  const result = [];
+  list.forEach(h => {
+    if (h.chunkIndex !== chunkIndex || h.end <= start || h.start >= end) {
+      result.push(h);
+      return;
+    }
+    if (h.start < start) result.push({ ...h, end: start });
+    if (h.end > end) result.push({ ...h, id: (h.start < start ? ('hl' + Date.now() + Math.floor(Math.random() * 1000)) : h.id), start: end });
+  });
+  saveHighlights(article.id, result);
+  renderArticleBody(article);
+}
+
+// Walks a container's text nodes to translate a DOM (node, offset)
+// position into a plain-text character offset within that container.
+function getOffsetWithin(container, node, nodeOffset) {
+  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+  let offset = 0, n;
+  while ((n = walker.nextNode())) {
+    if (n === node) return offset + nodeOffset;
+    offset += n.textContent.length;
+  }
+  return offset;
+}
+
+function toggleHighlightMode() {
+  highlightModeOn = !highlightModeOn;
+  try { localStorage.setItem(HL_MODE_KEY, highlightModeOn ? '1' : '0'); } catch (e) {}
+  updateHighlightUI();
+  if (currentArticleObj) renderArticleBody(currentArticleObj);
+}
+
+function setHighlightViewMode(mode) {
+  highlightViewMode = mode;
+  try { localStorage.setItem(HL_VIEW_MODE_KEY, mode); } catch (e) {}
+  updateHighlightUI();
+  if (currentArticleObj) renderArticleBody(currentArticleObj);
+}
+
+function setHighlightColor(color) {
+  highlightColor = color;
+  highlightTool = 'color';
+  try {
+    localStorage.setItem(HL_COLOR_KEY, color);
+    localStorage.setItem(HL_TOOL_KEY, 'color');
+  } catch (e) {}
+  updateHighlightUI();
+}
+
+function setHighlightTool(tool) {
+  highlightTool = tool;
+  try { localStorage.setItem(HL_TOOL_KEY, tool); } catch (e) {}
+  updateHighlightUI();
+}
+
+function updateHighlightUI() {
+  const btn = document.getElementById('btn-highlight-toggle');
+  const toolbar = document.getElementById('hl-toolbar');
+  const manualControls = document.getElementById('hl-manual-controls');
+  const autoNote = document.getElementById('hl-auto-note');
+  if (btn) {
+    btn.textContent = highlightModeOn ? '🖍️ ไฮไลต์: เปิด' : '🖍️ ไฮไลต์: ปิด';
+    btn.classList.toggle('hl-active', highlightModeOn);
+  }
+  if (toolbar) toolbar.style.display = highlightModeOn ? 'flex' : 'none';
+  if (manualControls) manualControls.style.display = highlightViewMode === 'manual' ? 'flex' : 'none';
+  if (autoNote) autoNote.style.display = highlightViewMode === 'auto' ? 'flex' : 'none';
+  document.querySelectorAll('.hl-mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === highlightViewMode));
+  document.querySelectorAll('.hl-swatch[data-color]').forEach(s => s.classList.toggle('active', highlightTool === 'color' && s.dataset.color === highlightColor));
+  const eraserBtn = document.getElementById('hl-eraser-btn');
+  if (eraserBtn) eraserBtn.classList.toggle('active', highlightTool === 'eraser');
+}
+
+function onArticleTextMouseUp() {
+  if (!highlightModeOn || highlightViewMode !== 'manual' || !currentArticleObj) return;
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed || sel.rangeCount === 0) return;
+  const range = sel.getRangeAt(0);
+  let container = range.commonAncestorContainer;
+  if (container.nodeType === 3) container = container.parentElement;
+  const chunkEl = container.closest('[data-chunk-index]');
+  if (!chunkEl) { sel.removeAllRanges(); return; }
+  const chunkIndex = Number(chunkEl.dataset.chunkIndex);
+  const start = getOffsetWithin(chunkEl, range.startContainer, range.startOffset);
+  const end = getOffsetWithin(chunkEl, range.endContainer, range.endOffset);
+  sel.removeAllRanges();
+  if (end <= start) return;
+  if (highlightTool === 'eraser') eraseRange(currentArticleObj, chunkIndex, start, end);
+  else addHighlight(currentArticleObj, chunkIndex, start, end, highlightColor);
+}
+
+function onArticleTextClick(e) {
+  const mark = e.target.closest('mark.codex-hl-manual');
+  if (!mark || e.target.closest('a') || !currentArticleObj) return;
+  removeHighlight(currentArticleObj, mark.dataset.hlId);
+}
+
+function initHighlightFeature() {
+  try {
+    highlightModeOn = localStorage.getItem(HL_MODE_KEY) === '1';
+    highlightColor = localStorage.getItem(HL_COLOR_KEY) || 'orange';
+    highlightViewMode = localStorage.getItem(HL_VIEW_MODE_KEY) || 'manual';
+    highlightTool = localStorage.getItem(HL_TOOL_KEY) || 'color';
+  } catch (e) {}
+  updateHighlightUI();
+  const el = document.getElementById('article-text');
+  if (el) {
+    el.addEventListener('mouseup', onArticleTextMouseUp);
+    el.addEventListener('click', onArticleTextClick);
+  }
 }
 
 function emptyState(icon, text) {
@@ -1362,10 +1731,16 @@ function printCurrentArticle() {
   const numberText = document.getElementById('article-number').textContent;
   const subtitleText = document.getElementById('article-subtitle').textContent;
   const bodyHtml = document.getElementById('article-text').innerHTML;
+  const noteEl = document.getElementById('article-note-input');
+  const noteText = noteEl ? noteEl.value.trim() : '';
+  const noteHtml = noteText
+    ? `<div style="margin-top:16px;padding-top:12px;border-top:1px dashed #999;font-size:13px;white-space:pre-line;"><strong>note:</strong> ${escapeHtml(noteText)}</div>`
+    : '';
   printArea.innerHTML = `
     <h2 style="font-family:'Noto Serif Thai',serif;margin-bottom:6px;">มาตรา ${numberText}</h2>
     <div style="font-size:13px;color:var(--ink-soft);margin-bottom:14px;">${subtitleText}</div>
     <div class="article-body" style="border:none;padding:0;background:none;">${bodyHtml}</div>
+    ${noteHtml}
   `;
   document.body.classList.add('printing-one');
   window.print();
@@ -1497,7 +1872,7 @@ async function loadAndRender() {
   currentNumber = id.slice(id.indexOf('_') + 1);
 
   try {
-    const res = await fetch('codex-data.json?v=20260731z');
+    const res = await fetch('codex-data.json?v=20260801a');
     if (!res.ok) throw new Error('fetch failed');
     codexData = await res.json();
   } catch (e) {
@@ -1508,6 +1883,8 @@ async function loadAndRender() {
   const book = codexData.books[currentBookType];
   const article = book && book.articles[currentNumber];
   if (!article) { showNotFound(`ไม่พบมาตรา ${currentNumber}`); return; }
+  currentArticleObj = article;
+  initHighlightFeature();
 
   const crumbParts = [BOOK_TITLES[currentBookType] || currentBookType];
   const m = article.meta || {};

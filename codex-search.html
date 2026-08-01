@@ -320,6 +320,10 @@ button{
 @media print{
   body.printing-one > *:not(#print-area){display:none !important}
   body.printing-one #print-area{display:block !important;padding:24px}
+  /* Belt-and-suspenders: hide interactive chrome even on a raw browser
+     print (Ctrl+P) that never went through printArticle()/printAllResults(). */
+  .topbar, .back-button, .search-form, #group-search-row, .article-actions,
+  .page-nav, .theme-toggle { display:none !important; }
 }
 
 .warak-row{display:grid;grid-template-columns:78px 1fr;gap:12px;align-items:baseline}
@@ -405,7 +409,7 @@ button{
       </div>
     </div>
 
-    <div id="group-search-row" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px"></div>
+    <div id="group-search-row" style="margin-bottom:14px"></div>
 
     <div style="display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end">
       <button class="btn-primary" onclick="search()">🔍 ค้นหา</button>
@@ -868,7 +872,7 @@ let currentPage = 0;
 // Load data on page load
 async function loadCodexData() {
   try {
-    const response = await fetch('codex-data.json?v=20260731z');
+    const response = await fetch('codex-data.json?v=20260801a');
     if (!response.ok) throw new Error('Failed to load codex data');
     codexData = await response.json();
     console.log('✅ Codex loaded:', Object.fromEntries(
@@ -1235,6 +1239,37 @@ const GROUP_FILTERS_BY_BOOK = {
     'ขาดนัด': [{ numbers: ['197', '198', '198 ทวิ', '198 ตรี', '199', '199 ตรี', '200', '201', '202', '204', '206', '207'] }],
     'อุทธรณ์/ฎีกา': [{ numbers: ['223', '224', '225', '226', '227', '228', '244/1', '247', '249'] }],
   },
+  criminal: {
+    // ภาคทั่วไป (ประมวลกฎหมายอาญา ภาค 1) — จัดตามเค้าโครงรายวิชา LA110/210
+    'บทนำ/หลักไม่มีความผิดไม่มีโทษ': [{ numbers: ['1', '2', '3'] }],
+    'การกระทำ/เจตนา-ประมาท/พลาด-สำคัญผิด': [{ numbers: ['59', '60', '61', '62'] }],
+    'เหตุยกเว้นความผิด/เหตุยกเว้นโทษ': [{ numbers: ['65', '66', '67', '68', '69', '70', '71', '73', '74'] }],
+    'เหตุลดโทษ/บรรเทาโทษ': [{ numbers: ['72', '78'] }],
+    'พยายามกระทำความผิด': [{ numbers: ['80', '81', '82'] }],
+    'ตัวการ/ผู้ใช้/ผู้สนับสนุน': [{ numbers: ['83', '84', '85', '86', '87', '88', '89'] }],
+    'ขอบเขตการบังคับใช้กฎหมาย': [{ numberRange: [[4, 11]] }],
+    'โทษ/การระงับโทษ': [{ numbers: ['18', '29', '32', '33', '34', '35', '36', '37', '38', '52', '56', '90', '91'] }],
+    // ภาคความผิด (ประมวลกฎหมายอาญา ภาค 2) — 9 กลุ่มตามคุณธรรมทางกฎหมายที่คุ้มครอง
+    'ความมั่นคง/ก่อการร้าย': [{ numberRange: [[107, 135.004]] }],
+    'การปกครอง/กระบวนการยุติธรรม': [{ numberRange: [[136, 205]] }],
+    'ความสงบสุข/ศาสนา': [{ numberRange: [[206, 216]] }],
+    'ภยันตรายต่อประชาชน': [{ numberRange: [[217, 239]] }],
+    'ปลอมแปลง/การค้า': [{ numberRange: [[240, 275]] }],
+    'ความผิดเกี่ยวกับเพศ': [{ numberRange: [[276, 287.002]] }],
+    'ชีวิต/ร่างกาย/เสรีภาพ/ชื่อเสียง': [{ numberRange: [[288, 333]] }],
+    'ทรัพย์': [{ numberRange: [[334, 366]] }],
+    'ศพ': [{ numberRange: [[366.001, 366.999]] }],
+  },
+};
+
+// Books whose group buttons render as multiple labeled rows instead of one
+// flat wrapping row — each inner array is the ordered list of group names
+// (must exist as keys in GROUP_FILTERS_BY_BOOK[book]) for that row.
+const GROUP_ROWS_BY_BOOK = {
+  criminal: [
+    ['บทนำ/หลักไม่มีความผิดไม่มีโทษ', 'การกระทำ/เจตนา-ประมาท/พลาด-สำคัญผิด', 'เหตุยกเว้นความผิด/เหตุยกเว้นโทษ', 'เหตุลดโทษ/บรรเทาโทษ', 'พยายามกระทำความผิด', 'ตัวการ/ผู้ใช้/ผู้สนับสนุน', 'ขอบเขตการบังคับใช้กฎหมาย', 'โทษ/การระงับโทษ'],
+    ['ความมั่นคง/ก่อการร้าย', 'การปกครอง/กระบวนการยุติธรรม', 'ความสงบสุข/ศาสนา', 'ภยันตรายต่อประชาชน', 'ปลอมแปลง/การค้า', 'ความผิดเกี่ยวกับเพศ', 'ชีวิต/ร่างกาย/เสรีภาพ/ชื่อเสียง', 'ทรัพย์', 'ศพ'],
+  ],
 };
 
 function matchesGroupFilter(article, f, key) {
@@ -1256,8 +1291,11 @@ function renderGroupSearchButtons() {
   const row = document.getElementById('group-search-row');
   const groupFilters = GROUP_FILTERS_BY_BOOK[selectedBook];
   if (!row || !groupFilters) { if (row) row.innerHTML = ''; return; }
-  row.innerHTML = Object.keys(groupFilters).map(name =>
-    `<button type="button" class="icon-btn" style="font-size:12px;padding:4px 10px" onclick="searchGroup('${name.replace(/'/g, "\\'")}')" onmouseenter="playHoverSound()">${name}</button>`
+  const btnHtml = name =>
+    `<button type="button" class="icon-btn" style="font-size:12px;padding:4px 10px" onclick="searchGroup('${name.replace(/'/g, "\\'")}')" onmouseenter="playHoverSound()">${name}</button>`;
+  const rows = GROUP_ROWS_BY_BOOK[selectedBook] || [Object.keys(groupFilters)];
+  row.innerHTML = rows.map(names =>
+    `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px">${names.map(btnHtml).join('')}</div>`
   ).join('');
 }
 
@@ -1436,11 +1474,17 @@ function printArticle(btn) {
   const breadcrumbHtml = card.querySelector('.article-breadcrumb') ? card.querySelector('.article-breadcrumb').innerHTML : '';
   const lectureEl = card.querySelector('.lecture-notes');
   const lectureHtml = lectureEl ? `<div style="margin-top:18px;padding-top:14px;border-top:2px solid #ccc;">${lectureEl.innerHTML}</div>` : '';
+  const noteEl = card.querySelector('.note-input');
+  const noteText = noteEl ? noteEl.value.trim() : '';
+  const noteHtml = noteText
+    ? `<div style="margin-top:16px;padding-top:12px;border-top:1px dashed #999;font-size:13px;white-space:pre-line;"><strong>note:</strong> ${escapeHtml(noteText)}</div>`
+    : '';
   printArea.innerHTML = `
     <h2 style="font-family:'Noto Serif Thai',serif;margin-bottom:14px;">${numberText}</h2>
     <div class="article-text">${bodyHtml}</div>
     <div class="article-breadcrumb">${breadcrumbHtml}</div>
     ${lectureHtml}
+    ${noteHtml}
   `;
   document.body.classList.add('printing-one');
   window.print();
@@ -1456,12 +1500,18 @@ function printAllResults() {
       const breadcrumb = [article.meta?.phaak, article.meta?.laksana, article.meta?.muad, article.meta?.suan]
         .filter(Boolean).map(v => ' › ' + v).join('');
       const lectureHtml = lectureNotesHtml(article);
+      let noteText = '';
+      try { noteText = (localStorage.getItem('codex-note-' + article.id) || '').trim(); } catch (e) {}
+      const noteHtml = noteText
+        ? `<div style="margin-top:14px;padding-top:10px;border-top:1px dashed #999;font-size:13px;white-space:pre-line;"><strong>note:</strong> ${escapeHtml(noteText)}</div>`
+        : '';
       return `
       <div style="margin-bottom:26px;padding-bottom:20px;border-bottom:1px solid #ccc;break-inside:avoid;">
         <h2 style="font-family:'Noto Serif Thai',serif;margin-bottom:10px;">มาตรา ${article.number}</h2>
         <div class="article-text">${renderArticleTextHtml(article.text, article.bookType, article.number)}</div>
         <div class="article-breadcrumb">📍 ${BOOK_INFO[article.bookType].short}${breadcrumb}</div>
         ${lectureHtml ? `<div style="margin-top:14px;padding-top:10px;border-top:2px solid #ccc;">${lectureHtml}</div>` : ''}
+        ${noteHtml}
       </div>`;
     }).join('')}
   `;
