@@ -384,7 +384,9 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
 }
 .hl-mode-switch {
   display: flex;
-  gap: 4px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 10px;
 }
 .hl-mode-btn {
   border: 1px solid var(--line);
@@ -868,6 +870,7 @@ mark.codex-hl-yellow { background: #FFE066; color: #3a3212; }
       <div class="hl-mode-switch">
         <button type="button" class="hl-mode-btn active" data-mode="manual" onclick="setHighlightViewMode('manual')">✍️ Highlight</button>
         <button type="button" class="hl-mode-btn" data-mode="auto" onclick="setHighlightViewMode('auto')">🤖 AI Highlight</button>
+        <span class="hl-hint" id="hl-manual-hint">ลากเลือกข้อความเพื่อไฮไลต์ด้วยสีที่เลือก · คลิกที่ข้อความไฮไลต์เพื่อลบทันที</span>
       </div>
       <div class="hl-manual-controls" id="hl-manual-controls">
         <div class="hl-legend">
@@ -877,7 +880,6 @@ mark.codex-hl-yellow { background: #FFE066; color: #3a3212; }
           <span class="hl-legend-item"><button type="button" class="hl-swatch hl-swatch-green" data-color="green" onclick="setHighlightColor('green')"></button><span class="hl-legend-label">เขียว = วิธีดำเนินการ/ระยะเวลา</span></span>
           <button type="button" id="hl-eraser-btn" class="hl-eraser-btn" onclick="setHighlightTool('eraser')" title="ลากทับข้อความที่ไฮไลต์ไว้เพื่อลบ">🧽 ยางลบ</button>
         </div>
-        <span class="hl-hint">ลากเลือกข้อความเพื่อไฮไลต์ด้วยสีที่เลือก · คลิกที่ข้อความไฮไลต์เพื่อลบทันที</span>
       </div>
       <div class="hl-auto-note" id="hl-auto-note" style="display:none">
         <span class="hl-hint">โปรดตรวจสอบเนื้อหาอีกครั้ง</span>
@@ -1560,6 +1562,7 @@ function updateHighlightUI() {
   const btn = document.getElementById('btn-highlight-toggle');
   const toolbar = document.getElementById('hl-toolbar');
   const manualControls = document.getElementById('hl-manual-controls');
+  const manualHint = document.getElementById('hl-manual-hint');
   const autoNote = document.getElementById('hl-auto-note');
   if (btn) {
     btn.textContent = highlightModeOn ? '🖍️ ไฮไลต์: เปิด' : '🖍️ ไฮไลต์: ปิด';
@@ -1567,6 +1570,7 @@ function updateHighlightUI() {
   }
   if (toolbar) toolbar.style.display = highlightModeOn ? 'flex' : 'none';
   if (manualControls) manualControls.style.display = highlightViewMode === 'manual' ? 'flex' : 'none';
+  if (manualHint) manualHint.style.display = highlightViewMode === 'manual' ? 'inline' : 'none';
   if (autoNote) autoNote.style.display = highlightViewMode === 'auto' ? 'flex' : 'none';
   document.querySelectorAll('.hl-mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === highlightViewMode));
   document.querySelectorAll('.hl-swatch[data-color]').forEach(s => s.classList.toggle('active', highlightTool === 'color' && s.dataset.color === highlightColor));
