@@ -172,6 +172,7 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 .beat-dot.done{background:var(--gold)}
 .beat-dot.current{background:var(--accent)}
 
+.stage-frame{position:relative;margin-top:26px}
 .stage{
   position:relative;width:100%;aspect-ratio:4/3;border-radius:var(--radius);
   overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);
@@ -180,30 +181,48 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 .stage-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .stage-label{position:absolute;top:8px;left:10px;background:rgba(0,0,0,.35);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;letter-spacing:.02em}
 
+/* Actor layer sits on top of .stage but is intentionally NOT clipped, so
+   full-body standee cutouts can pop out above the frame's top edge instead
+   of being cropped by .stage's overflow:hidden. */
+.stage-actors{position:absolute;inset:0;z-index:2}
+
 .sprite{
-  position:absolute;bottom:6%;width:20%;max-width:110px;min-width:64px;
-  text-align:center;opacity:0;pointer-events:none;
-  transform:translateX(-50%) scale(.85);
+  position:absolute;bottom:2%;width:24%;max-width:130px;min-width:72px;
+  height:118%;
+  display:flex;flex-direction:column;align-items:center;
+  opacity:0;pointer-events:none;
+  transform:translateX(-50%) scale(.85);transform-origin:bottom center;
   transition:left .55s cubic-bezier(.4,0,.2,1),opacity .35s ease,transform .35s ease;
 }
 .sprite.visible{opacity:1;transform:translateX(-50%) scale(1)}
-.sprite-avatar{
-  position:relative;width:64%;aspect-ratio:1/1;margin:0 auto;border-radius:22%;
+.sprite-figure-wrap{
+  order:1;flex:1 1 auto;min-height:0;width:100%;
+  display:flex;align-items:flex-end;justify-content:center;
+}
+.sprite-fallback{
+  width:56px;height:56px;border-radius:22%;margin:0 auto;
   display:flex;align-items:center;justify-content:center;font-size:26px;
   box-shadow:0 3px 8px rgba(0,0,0,.25);border:2px solid rgba(255,255,255,.6);
 }
-.sprite.active .sprite-avatar{box-shadow:0 0 0 3px var(--gold),0 3px 10px rgba(0,0,0,.3)}
-.sprite-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:20%}
+.sprite-figure{
+  max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;
+  filter:drop-shadow(0 8px 10px rgba(0,0,0,.35));
+  transition:filter .25s ease,transform .25s ease;
+}
+.sprite.active .sprite-fallback{box-shadow:0 0 0 3px var(--gold),0 3px 10px rgba(0,0,0,.3)}
+.sprite.active .sprite-figure{filter:drop-shadow(0 0 12px var(--gold)) drop-shadow(0 8px 10px rgba(0,0,0,.35));transform:scale(1.04)}
 .sprite-name{
-  margin-top:4px;font-size:10.5px;font-weight:800;color:#fff;
-  text-shadow:0 1px 3px rgba(0,0,0,.75);white-space:nowrap;
+  order:2;margin-top:4px;font-size:10.5px;font-weight:800;color:#fff;
+  text-shadow:0 1px 3px rgba(0,0,0,.75);white-space:nowrap;flex:0 0 auto;
 }
 
 .caption-box{
   background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
   padding:14px 16px;margin-top:12px;font-size:14.5px;color:var(--ink);
-  min-height:64px;box-shadow:var(--shadow);line-height:1.7;
+  min-height:64px;box-shadow:var(--shadow);line-height:1.7;cursor:pointer;
 }
+.scene-nav-row{display:flex;gap:8px;margin-top:14px}
+.scene-nav-row .big-btn{margin-top:0;flex:1}
 
 /* ===== COMPREHENSION / RECAP ===== */
 .big-choice-wrap{display:flex;flex-direction:column;gap:10px;margin-top:16px}
@@ -399,6 +418,7 @@ const BACKGROUNDS = {
   courtroom:  { emoji: '⚖️', gradient: 'linear-gradient(180deg,#EFE3C4 0%,#D6C295 55%,#9C8355 100%)' },
 };
 function spritePath(id){ return 'pics/game/sprites/' + id + '.png'; }
+function standeePath(id){ return 'pics/game/standees/' + id + '.png'; }
 function bgPath(id){ return 'pics/game/backgrounds/' + id + '.jpg'; }
 function portraitPath(id, expression){ return 'pics/game/portraits/' + id + '_' + (expression || 'neutral') + '.png'; }
 function courtDisplayName(id){
@@ -420,9 +440,10 @@ function renderTrialPortraitHTML(spriteId, pose){
 
 function renderSpriteAvatarHTML(spriteId){
   const sp = SPRITES[spriteId] || { emoji: '❓', color: '#ccc' };
-  return `<div class="sprite-avatar" style="background:${sp.color}">`
-       + `<span class="sprite-emoji">${sp.emoji}</span>`
-       + `<img src="${spritePath(spriteId)}" alt="" onerror="this.remove()">`
+  return `<div class="sprite-figure-wrap">`
+       + `<div class="sprite-fallback" style="background:${sp.color}"><span class="sprite-emoji">${sp.emoji}</span></div>`
+       + `<img class="sprite-figure" src="${standeePath(spriteId)}" alt="" `
+       + `onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">`
        + `</div>`;
 }
 function renderStageBgHTML(bgId){
@@ -604,6 +625,7 @@ const state = {
   selected: null,
   answered: false,
   score: 0,
+  typeTimer: null,
 };
 
 const root = document.getElementById('app-root');
@@ -664,17 +686,24 @@ function renderScene(){
       <span>${esc(s.title)}</span>
       <span class="beat-dots">${s.beats.map((b,i) => `<span class="beat-dot${i < state.beatIndex ? ' done' : ''}${i === state.beatIndex ? ' current' : ''}"></span>`).join('')}</span>
     </div>
-    <div class="stage" id="stage">
-      ${renderStageBgHTML(s.bg)}
-      ${Object.keys(s.characters).map(id => `
-        <div class="sprite" id="sprite-${id}">
-          ${renderSpriteAvatarHTML(id)}
-          <div class="sprite-name">${esc(s.characters[id].name)}</div>
-        </div>
-      `).join('')}
+    <div class="stage-frame">
+      <div class="stage" id="stage">
+        ${renderStageBgHTML(s.bg)}
+      </div>
+      <div class="stage-actors">
+        ${Object.keys(s.characters).map(id => `
+          <div class="sprite" id="sprite-${id}">
+            ${renderSpriteAvatarHTML(id)}
+            <div class="sprite-name">${esc(s.characters[id].name)}</div>
+          </div>
+        `).join('')}
+      </div>
     </div>
-    <div class="caption-box" id="caption-box"></div>
-    <button type="button" class="big-btn" id="scene-next-btn" onclick="nextBeat()" onmouseenter="playHoverSound()">ถัดไป ›</button>
+    <div class="caption-box" id="caption-box" onclick="skipTyping()"></div>
+    <div class="scene-nav-row">
+      <button type="button" class="big-btn secondary" id="scene-prev-btn" onclick="prevBeat()" onmouseenter="playHoverSound()">‹ ย้อนกลับ</button>
+      <button type="button" class="big-btn" id="scene-next-btn" onclick="nextBeat()" onmouseenter="playHoverSound()">ถัดไป ›</button>
+    </div>
   `;
   syncBeat();
 }
@@ -697,9 +726,41 @@ function syncBeat(){
       el.classList.remove('active');
     }
   });
-  document.getElementById('caption-box').textContent = beat.caption;
-  const btn = document.getElementById('scene-next-btn');
-  btn.textContent = (state.beatIndex === s.beats.length - 1) ? 'เข้าใจโจทย์ไหม? ›' : 'ถัดไป ›';
+  typeCaption(beat.caption);
+  const nextBtn = document.getElementById('scene-next-btn');
+  nextBtn.textContent = (state.beatIndex === s.beats.length - 1) ? 'เข้าใจโจทย์ไหม? ›' : 'ถัดไป ›';
+  const prevBtn = document.getElementById('scene-prev-btn');
+  if (prevBtn) prevBtn.disabled = (state.beatIndex === 0);
+}
+function typeCaption(text){
+  const el = document.getElementById('caption-box');
+  if (!el) return;
+  if (state.typeTimer) { clearInterval(state.typeTimer); state.typeTimer = null; }
+  let chars;
+  try {
+    chars = Array.from(new Intl.Segmenter('th', { granularity: 'grapheme' }).segment(text), seg => seg.segment);
+  } catch (e) {
+    chars = Array.from(text);
+  }
+  el.textContent = '';
+  el.dataset.fullText = text;
+  let i = 0;
+  state.typeTimer = setInterval(() => {
+    i++;
+    el.textContent = chars.slice(0, i).join('');
+    if (i >= chars.length) {
+      clearInterval(state.typeTimer);
+      state.typeTimer = null;
+    }
+  }, 22);
+}
+function skipTyping(){
+  const el = document.getElementById('caption-box');
+  if (state.typeTimer) {
+    clearInterval(state.typeTimer);
+    state.typeTimer = null;
+    el.textContent = el.dataset.fullText || el.textContent;
+  }
 }
 function nextBeat(){
   const s = state.scenario;
@@ -710,6 +771,13 @@ function nextBeat(){
   } else {
     state.screen = 'comprehension';
     render();
+  }
+}
+function prevBeat(){
+  if (state.beatIndex > 0) {
+    state.beatIndex--;
+    syncBeat();
+    updateBeatDots();
   }
 }
 function updateBeatDots(){
