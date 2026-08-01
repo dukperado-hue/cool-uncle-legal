@@ -317,6 +317,16 @@ button{
 .note-input:focus{outline:none;border-color:var(--gold);background:#fff}
 
 /* HIGHLIGHT TOGGLE + TOOLBAR (manual + auto modes) — mirrors codex-article-viewer.html */
+#hl-global-bar{
+  position:sticky;
+  z-index:90;
+  background:var(--paper);
+  padding:10px 0 14px;
+  margin-bottom:14px;
+  border-bottom:1px solid var(--line);
+}
+:root[data-theme="dark"] #hl-global-bar,
+:root[data-theme="horror"] #hl-global-bar{background:var(--paper)}
 .hl-toolbar{display:flex;flex-direction:column;gap:8px;padding:10px 12px;background:#F9F7F2;border:1px dashed var(--line);border-radius:8px;font-size:12px;color:var(--ink-soft)}
 .hl-mode-switch{display:flex;gap:4px}
 .hl-mode-btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700;cursor:pointer;color:var(--ink-soft);font-family:inherit}
@@ -444,33 +454,36 @@ mark.codex-hl-yellow{background:#FFE066;color:#3a3212}
       <button class="btn-primary" onclick="search()">🔍 ค้นหา</button>
       <button class="btn-secondary" onclick="clearSearch()">ล้าง</button>
     </div>
+  </div>
 
-    <div id="hl-global-bar" style="margin-top:14px">
-      <button type="button" id="btn-highlight-toggle" class="icon-btn" style="font-size:13px;padding:6px 12px" onclick="toggleHighlightMode()" onmouseenter="playHoverSound()">🖍️ ไฮไลต์: ปิด</button>
-      <div class="hl-toolbar" id="hl-toolbar" style="display:none;margin-top:8px">
-        <div class="hl-mode-switch">
-          <button type="button" class="hl-mode-btn active" data-mode="manual" onclick="setHighlightViewMode('manual')">✍️ Highlight</button>
-          <button type="button" class="hl-mode-btn" data-mode="auto" onclick="setHighlightViewMode('auto')">🤖 AI Highlight</button>
+  <!-- Sibling of .search-container (not nested inside it) so its sticky
+       position holds for the full scroll height of the results list below,
+       not just the search form's own height. -->
+  <div id="hl-global-bar">
+    <button type="button" id="btn-highlight-toggle" class="icon-btn" style="font-size:13px;padding:6px 12px" onclick="toggleHighlightMode()" onmouseenter="playHoverSound()">🖍️ ไฮไลต์: ปิด</button>
+    <div class="hl-toolbar" id="hl-toolbar" style="display:none;margin-top:8px">
+      <div class="hl-mode-switch">
+        <button type="button" class="hl-mode-btn active" data-mode="manual" onclick="setHighlightViewMode('manual')">✍️ Highlight</button>
+        <button type="button" class="hl-mode-btn" data-mode="auto" onclick="setHighlightViewMode('auto')">🤖 AI Highlight</button>
+      </div>
+      <div class="hl-manual-controls" id="hl-manual-controls">
+        <div class="hl-legend">
+          <span class="hl-legend-item"><button type="button" class="hl-swatch hl-swatch-orange active" data-color="orange" onclick="setHighlightColor('orange')"></button><span class="hl-legend-label">ส้ม = คำสำคัญของมาตรา</span></span>
+          <span class="hl-legend-item"><button type="button" class="hl-swatch hl-swatch-blue" data-color="blue" onclick="setHighlightColor('blue')"></button><span class="hl-legend-label">ฟ้า = ข้อยกเว้น</span></span>
+          <span class="hl-legend-item"><button type="button" class="hl-swatch hl-swatch-pink" data-color="pink" onclick="setHighlightColor('pink')"></button><span class="hl-legend-label">ชมพู = ต้องขยายความ/เชื่อมมาตราอื่น</span></span>
+          <span class="hl-legend-item"><button type="button" class="hl-swatch hl-swatch-green" data-color="green" onclick="setHighlightColor('green')"></button><span class="hl-legend-label">เขียว = วิธีดำเนินการ/ระยะเวลา</span></span>
+          <button type="button" id="hl-eraser-btn" class="hl-eraser-btn" onclick="setHighlightTool('eraser')" title="ลากทับข้อความที่ไฮไลต์ไว้เพื่อลบ">🧽 ยางลบ</button>
         </div>
-        <div class="hl-manual-controls" id="hl-manual-controls">
-          <div class="hl-legend">
-            <span class="hl-legend-item"><button type="button" class="hl-swatch hl-swatch-orange active" data-color="orange" onclick="setHighlightColor('orange')"></button><span class="hl-legend-label">ส้ม = คำสำคัญของมาตรา</span></span>
-            <span class="hl-legend-item"><button type="button" class="hl-swatch hl-swatch-blue" data-color="blue" onclick="setHighlightColor('blue')"></button><span class="hl-legend-label">ฟ้า = ข้อยกเว้น</span></span>
-            <span class="hl-legend-item"><button type="button" class="hl-swatch hl-swatch-pink" data-color="pink" onclick="setHighlightColor('pink')"></button><span class="hl-legend-label">ชมพู = ต้องขยายความ/เชื่อมมาตราอื่น</span></span>
-            <span class="hl-legend-item"><button type="button" class="hl-swatch hl-swatch-green" data-color="green" onclick="setHighlightColor('green')"></button><span class="hl-legend-label">เขียว = วิธีดำเนินการ/ระยะเวลา</span></span>
-            <button type="button" id="hl-eraser-btn" class="hl-eraser-btn" onclick="setHighlightTool('eraser')" title="ลากทับข้อความที่ไฮไลต์ไว้เพื่อลบ">🧽 ยางลบ</button>
-          </div>
-          <span class="hl-hint">ลากเลือกข้อความเพื่อไฮไลต์ด้วยสีที่เลือก · คลิกที่ข้อความไฮไลต์เพื่อลบทันที</span>
-        </div>
-        <div class="hl-auto-note" id="hl-auto-note" style="display:none">
-          <span class="hl-hint">โปรดตรวจสอบเนื้อหาอีกครั้ง</span>
-          <div class="hl-legend">
-            <span class="hl-legend-item"><span class="hl-swatch hl-swatch-orange" style="cursor:default"></span><span class="hl-legend-label">ส้ม = คำสำคัญ</span></span>
-            <span class="hl-legend-item"><span class="hl-swatch hl-swatch-blue" style="cursor:default"></span><span class="hl-legend-label">ฟ้า = ข้อยกเว้น</span></span>
-            <span class="hl-legend-item"><span class="hl-swatch hl-swatch-pink" style="cursor:default"></span><span class="hl-legend-label">ชมพู = อ้างอิงมาตราอื่น</span></span>
-            <span class="hl-legend-item"><span class="hl-swatch hl-swatch-green" style="cursor:default"></span><span class="hl-legend-label">เขียว = ระยะเวลา/ขั้นตอน</span></span>
-            <span class="hl-legend-item"><span class="hl-swatch hl-swatch-yellow" style="cursor:default"></span><span class="hl-legend-label">เหลือง = ข้อความในเครื่องหมายคำพูด</span></span>
-          </div>
+        <span class="hl-hint">ลากเลือกข้อความเพื่อไฮไลต์ด้วยสีที่เลือก · คลิกที่ข้อความไฮไลต์เพื่อลบทันที</span>
+      </div>
+      <div class="hl-auto-note" id="hl-auto-note" style="display:none">
+        <span class="hl-hint">โปรดตรวจสอบเนื้อหาอีกครั้ง</span>
+        <div class="hl-legend">
+          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-orange" style="cursor:default"></span><span class="hl-legend-label">ส้ม = คำสำคัญ</span></span>
+          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-blue" style="cursor:default"></span><span class="hl-legend-label">ฟ้า = ข้อยกเว้น</span></span>
+          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-pink" style="cursor:default"></span><span class="hl-legend-label">ชมพู = อ้างอิงมาตราอื่น</span></span>
+          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-green" style="cursor:default"></span><span class="hl-legend-label">เขียว = ระยะเวลา/ขั้นตอน</span></span>
+          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-yellow" style="cursor:default"></span><span class="hl-legend-label">เหลือง = ข้อความในเครื่องหมายคำพูด</span></span>
         </div>
       </div>
     </div>
@@ -931,7 +944,7 @@ let currentPage = 0;
 // Load data on page load
 async function loadCodexData() {
   try {
-    const response = await fetch('codex-data.json?v=20260801a');
+    const response = await fetch('codex-data.json?v=20260801b');
     if (!response.ok) throw new Error('Failed to load codex data');
     codexData = await response.json();
     console.log('✅ Codex loaded:', Object.fromEntries(
@@ -1398,6 +1411,16 @@ function initHighlightFeature() {
     el.addEventListener('mouseup', onResultsMouseUp);
     el.addEventListener('click', onResultsClick);
   }
+  syncHlBarStickyOffset();
+  window.addEventListener('resize', syncHlBarStickyOffset);
+}
+
+// Keeps #hl-global-bar pinned directly under the topbar regardless of the
+// topbar's actual rendered height (varies slightly by theme/font-load).
+function syncHlBarStickyOffset() {
+  const topbar = document.querySelector('.topbar');
+  const bar = document.getElementById('hl-global-bar');
+  if (topbar && bar) bar.style.top = topbar.offsetHeight + 'px';
 }
 
 // "กฎหมายปกครอง" merged compact card on index.html links here with
