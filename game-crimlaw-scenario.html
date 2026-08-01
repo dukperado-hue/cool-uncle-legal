@@ -489,7 +489,7 @@ function renderSpriteAvatarHTML(spriteId){
   return `<div class="sprite-figure-wrap">`
        + `<div class="sprite-fallback" style="background:${sp.color}"><span class="sprite-emoji">${sp.emoji}</span></div>`
        + `<img class="sprite-figure" src="${standeePath(spriteId)}" alt="" `
-       + `onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">`
+       + `onload="this.previousElementSibling.style.display='none';this.style.display='';" onerror="this.style.display='none'">`
        + `<span class="bandage-badge">🩹</span>`
        + `<span class="splash-fx">💦</span>`
        + `<img class="reaction-badge" src="" alt="" onerror="this.classList.remove('show')">`
@@ -525,19 +525,26 @@ const SCENARIOS = [
       { caption: 'นายแดง (อายุ 16 ปี) แอบหยิบแหวนทองของแม่ไปจำนำ เอาเงินมาชวน นส.เหลือง แฟนสาว มาเที่ยวดูหมูเด้งที่สวนสัตว์เปิดเขาเขียว',
         actors: [ { id:'male_teen', x:28, active:true }, { id:'female_teen', x:44 } ] },
       { caption: 'ระหว่างต่อคิวดูหมูเด้ง นางดำ ซึ่งอ้างตัวเป็นอินฟลูเอนเซอร์ถ่ายคอนเทนต์ เดินแซงคิวเบียดเสียดผู้คนอย่างไม่แคร์ใคร',
-        actors: [ { id:'male_teen', x:24 }, { id:'female_teen', x:40 }, { id:'female_influencer', x:60, active:true, pose:'🏃‍♀️', expr:'confident' } ] },
+        actors: [ { id:'male_teen', x:22, portrait:true, expr:'neutral' }, { id:'female_teen', x:42, portrait:true, expr:'neutral' }, { id:'female_influencer', x:66, active:true, pose:'🏃‍♀️', portrait:true, expr:'confident', scale:1.5 } ],
+        sfx:'weldert-crowd-talking-138493.mp3' },
       { caption: 'นางดำเบียดจนชน นส.เหลือง เซถลาตกลงไปในบ่อหมูเด้ง (บ่อไม่ลึกมากนัก)',
-        actors: [ { id:'male_teen', x:22, pose:'😨', expr:'shocked' }, { id:'female_teen', x:48, active:true, pose:'😱', scale:0.55, effect:'splash', expr:'shocked' }, { id:'female_influencer', x:56 } ] },
+        actors: [ { id:'male_teen', x:22, pose:'😨', expr:'shocked' }, { id:'female_teen', x:52, active:true, pose:'😱', effect:'splash', portrait:true, expr:'shocked', scale:1.5 }, { id:'female_influencer', x:56 } ],
+        sfx:'40727898-tap-water-splashes-176708.mp3' },
       { caption: 'โจนาห์ แม่ฮิปโปแคระ ตกใจ วิ่งเข้าใส่กัด นส.เหลือง จนได้รับบาดเจ็บสาหัส',
-        actors: [ { id:'female_teen', x:38, pose:'🤕', bandaged:true, expr:'shocked' }, { id:'hippo_mother', x:58, active:true, pose:'😡', expr:'angry' } ] },
+        actors: [ { id:'female_teen', x:32, pose:'🤕', bandaged:true, expr:'shocked' }, { id:'hippo_mother', x:62, active:true, pose:'😡', portrait:true, expr:'angry', scale:1.4 } ],
+        sfx:'freesound_community-hippos-2-75671.mp3' },
       { caption: 'นายแดงเห็นแฟนสาวถูกกัดจนโกรธจัด แย่งขาตั้งกล้องจากนางดำมากระหน่ำตี ทำให้นางดำบาดเจ็บที่แขนและขา',
-        actors: [ { id:'male_teen', x:42, active:true, pose:'😡', expr:'angry' }, { id:'female_influencer', x:58, pose:'🤕', expr:'shocked' } ] },
+        actors: [ { id:'male_teen', x:42, active:true, pose:'😡', portrait:true, expr:'angry', scale:1.5 }, { id:'female_influencer', x:58, pose:'🤕', expr:'shocked' } ],
+        sfx:'universfield-man-scream-011-278818.mp3' },
       { caption: 'นายเขียว แฟนคลับที่จำนางดำได้ วิ่งเข้าไปผลักนายแดงเพื่อให้หยุดทำร้ายนางดำ',
-        actors: [ { id:'male_fan', x:50, active:true, pose:'😤', expr:'angry' }, { id:'male_teen', x:56, pose:'😲', expr:'shocked' }, { id:'female_influencer', x:64, pose:'🤕', expr:'sad' } ] },
+        actors: [ { id:'male_fan', x:50, active:true, pose:'😤', portrait:true, expr:'angry', scale:1.5 } ],
+        sfx:'dragon-studio-whoosh-effect-382717.mp3' },
       { caption: 'แรงผลักทำให้นายแดงเซถลาตกบ่อหมูเด้งไปอีกคน หมูเด้ง (ลูกฮิปโป) วิ่งเข้ามางับขา — เจ็บๆ คันๆ แต่หมูเด้งกลับมีความสุข นายแดงยังมีแผลถลอกตามตัวจากการตกกระแทกพื้นด้วย',
-        actors: [ { id:'male_teen', x:44, active:true, pose:'😖', expr:'shocked' }, { id:'hippo_baby', x:40, active:true, pose:'🥰' }, { id:'male_fan', x:58 } ] },
+        actors: [ { id:'male_teen', x:44, active:true, pose:'😖', expr:'shocked' }, { id:'hippo_baby', x:40, active:true, pose:'🥰' }, { id:'male_fan', x:58 } ],
+        sfx:'40727898-tap-water-splashes-176708.mp3' },
       { caption: 'สามวันต่อมา นางดำ อินฟลูเอนเซอร์สายมูเตลู เสียชีวิตขณะไลฟ์สดขายของ สาเหตุคือแผลติดเชื้อในกระแสเลือด — เพราะเธอไม่ยอมไปหาหมอ แต่เลือกดื่ม/อาบน้ำมนต์รักษาแผลแทน',
-        actors: [ { id:'female_influencer', x:50, active:true, pose:'😇', expr:'sad' } ], funeral:true },
+        actors: [ { id:'female_influencer', x:50, active:true, pose:'😇', expr:'sad' } ], funeral:true,
+        sfx:'freesound_community-heart-monitor-beep-96554.mp3' },
     ],
     comprehension: { question: 'เข้าใจโจทย์ไหม?' },
     courtroomBg: 'courtroom',
@@ -745,6 +752,7 @@ function renderScene(){
       <audio id="funeral-audio" preload="none">
         <source src="games/sound/music/freesound_community-funeral-music-close-23823.mp3" type="audio/mpeg">
       </audio>
+      <audio id="beat-sfx" preload="none"></audio>
       <div class="stage-actors">
         ${Object.keys(s.characters).map(id => `
           <div class="sprite" id="sprite-${id}">
@@ -778,9 +786,11 @@ function syncBeat(){
       el.style.setProperty('--actor-scale', a.scale != null ? a.scale : 1);
       const emojiEl = el.querySelector('.sprite-emoji');
       if (emojiEl) emojiEl.textContent = a.pose || SPRITES[id].emoji;
+      const figureEl = el.querySelector('.sprite-figure');
+      if (figureEl) figureEl.src = a.portrait ? reactionPath(id, a.expr || 'neutral') : standeePath(id);
       const reactionEl = el.querySelector('.reaction-badge');
       if (reactionEl) {
-        if (a.expr) {
+        if (!a.portrait && a.expr) {
           reactionEl.src = reactionPath(id, a.expr);
           reactionEl.classList.add('show');
         } else {
@@ -817,6 +827,12 @@ function syncBeat(){
     if (stageEl) stageEl.classList.remove('mourning');
     if (funeralBadge) funeralBadge.classList.remove('show');
     if (funeralAudio) funeralAudio.pause();
+  }
+  const sfxAudio = document.getElementById('beat-sfx');
+  if (sfxAudio && beat.sfx) {
+    sfxAudio.src = 'games/sound/effect/' + beat.sfx;
+    sfxAudio.volume = 0.55;
+    sfxAudio.play().catch(() => {});
   }
 }
 function typeCaption(text){
