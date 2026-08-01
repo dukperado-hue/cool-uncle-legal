@@ -362,7 +362,8 @@ mark.codex-hl-yellow{background:#FFE066;color:#3a3212}
   /* Belt-and-suspenders: hide interactive chrome even on a raw browser
      print (Ctrl+P) that never went through printArticle()/printAllResults(). */
   .topbar, .back-button, .search-form, #group-search-row, .article-actions,
-  .page-nav, .theme-toggle, #hl-global-bar { display:none !important; }
+  .page-nav, .theme-toggle, #hl-global-bar, .lecture-notes-actions,
+  .article-breadcrumb, .print-omit { display:none !important; }
 }
 
 .warak-row{display:grid;grid-template-columns:78px 1fr;gap:12px;align-items:baseline}
@@ -1102,7 +1103,7 @@ function linkifyMatraRefs(escapedText, bookType, currentNumber) {
   });
 }
 
-function lectureNotesHtml(article) {
+function lectureNotesHtml(article, includeActions = true) {
   if (!article.lectureNotes || !article.lectureNotes.length) return '';
   const notes = article.lectureNotes.map(n => `
       <div style="margin-bottom:10px;">
@@ -1118,11 +1119,12 @@ function lectureNotesHtml(article) {
     <div class="lecture-notes" style="margin:14px 0;padding:14px;background:rgba(46,74,122,.05);border:1px solid var(--line);border-radius:10px;">
       ${notes}
       <div style="font-size:11.5px;color:var(--ink-faint);border-top:1px dashed var(--line);padding-top:8px;margin-top:4px;">ℹ️ ${escapeHtml(source)}</div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;">
+      ${includeActions ? `
+      <div class="lecture-notes-actions" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;">
         <button type="button" class="icon-btn" data-navrole="lec-prev" onclick="navigateArticle('${article.bookType}','${article.number}','prev',this,'lec-prev')" onmouseenter="playHoverSound()" ${adj.prev ? '' : 'disabled'}>‹ มาตราก่อนหน้า</button>
         <button type="button" class="icon-btn" data-navrole="lec-next" onclick="navigateArticle('${article.bookType}','${article.number}','next',this,'lec-next')" onmouseenter="playHoverSound()" ${adj.next ? '' : 'disabled'}>มาตราถัดไป ›</button>
         <button type="button" class="icon-btn" id="lec-read-${article.id}" onclick="speakLectureNotes('${article.id}', this)" onmouseenter="playHoverSound()">🔊 อ่านคำบรรยาย</button>
-      </div>
+      </div>` : ''}
     </div>`;
 }
 
@@ -1791,24 +1793,32 @@ function speakArticle(btn) {
   window.speechSynthesis.speak(utter);
 }
 
+// Date-only stamp (no time), rendered top-left of the printed page.
+function printDateStamp() {
+  const txt = new Date().toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' });
+  return `<div style="font-size:11px;color:#666;margin-bottom:10px;">พิมพ์เมื่อ ${txt}</div>`;
+}
+
 function printArticle(btn) {
   const card = btn.closest('.article-card');
   const printArea = document.getElementById('print-area');
   if (!card || !printArea) return;
   const numberText = card.querySelector('.article-number').textContent;
   const bodyHtml = card.querySelector('.article-text').innerHTML;
-  const breadcrumbHtml = card.querySelector('.article-breadcrumb') ? card.querySelector('.article-breadcrumb').innerHTML : '';
   const lectureEl = card.querySelector('.lecture-notes');
-  const lectureHtml = lectureEl ? `<div style="margin-top:18px;padding-top:14px;border-top:2px solid #ccc;">${lectureEl.innerHTML}</div>` : '';
+  const lectureActionsHtml = lectureEl ? lectureEl.querySelector('.lecture-notes-actions')?.outerHTML : '';
+  let lectureHtml = lectureEl ? lectureEl.innerHTML : '';
+  if (lectureActionsHtml) lectureHtml = lectureHtml.replace(lectureActionsHtml, '');
+  lectureHtml = lectureEl ? `<div style="margin-top:18px;padding-top:14px;border-top:2px solid #ccc;">${lectureHtml}</div>` : '';
   const noteEl = card.querySelector('.note-input');
   const noteText = noteEl ? noteEl.value.trim() : '';
   const noteHtml = noteText
     ? `<div style="margin-top:16px;padding-top:12px;border-top:1px dashed #999;font-size:13px;white-space:pre-line;"><strong>note:</strong> ${escapeHtml(noteText)}</div>`
     : '';
   printArea.innerHTML = `
+    ${printDateStamp()}
     <h2 style="font-family:'Noto Serif Thai',serif;margin-bottom:14px;">${numberText}</h2>
     <div class="article-text">${bodyHtml}</div>
-    <div class="article-breadcrumb">${breadcrumbHtml}</div>
     ${lectureHtml}
     ${noteHtml}
   `;
@@ -1821,11 +1831,10 @@ function printAllResults() {
   if (!printArea || !currentResults || currentResults.length === 0) return;
   const groupTitle = document.getElementById('result-count-text')?.textContent.split('(')[0].trim() || 'ผลการค้นหา';
   printArea.innerHTML = `
+    ${printDateStamp()}
     <h1 style="font-family:'Noto Serif Thai',serif;margin-bottom:20px;">${groupTitle}</h1>
     ${currentResults.map(article => {
-      const breadcrumb = [article.meta?.phaak, article.meta?.laksana, article.meta?.muad, article.meta?.suan]
-        .filter(Boolean).map(v => ' › ' + v).join('');
-      const lectureHtml = lectureNotesHtml(article);
+      const lectureHtml = lectureNotesHtml(article, false);
       let noteText = '';
       try { noteText = (localStorage.getItem('codex-note-' + article.id) || '').trim(); } catch (e) {}
       const noteHtml = noteText
@@ -1835,7 +1844,6 @@ function printAllResults() {
       <div style="margin-bottom:26px;padding-bottom:20px;border-bottom:1px solid #ccc;break-inside:avoid;">
         <h2 style="font-family:'Noto Serif Thai',serif;margin-bottom:10px;">มาตรา ${article.number}</h2>
         <div class="article-text" data-chunk-index="0">${renderArticleTextHtml(article)}</div>
-        <div class="article-breadcrumb">📍 ${BOOK_INFO[article.bookType].short}${breadcrumb}</div>
         ${lectureHtml ? `<div style="margin-top:14px;padding-top:10px;border-top:2px solid #ccc;">${lectureHtml}</div>` : ''}
         ${noteHtml}
       </div>`;

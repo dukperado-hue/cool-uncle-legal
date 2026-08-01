@@ -478,7 +478,7 @@ mark.codex-hl-yellow { background: #FFE066; color: #3a3212; }
   body.printing-one #print-area { display: block !important; padding: 24px; }
   /* Belt-and-suspenders: hide interactive chrome even on a raw browser
      print (Ctrl+P) that never went through printCurrentArticle(). */
-  .topbar, .back-button, .speech-bubble-actions, #audio-controls,
+  .topbar, .back-button, .breadcrumb, .speech-bubble-actions, #audio-controls,
   #chapter-audio, .article-nav, .hl-toolbar, .drone-mute-btn,
   .theme-toggle { display: none !important; }
 }
@@ -1728,12 +1728,17 @@ function bindNoteInput(article) {
 
 // --- print just this article --------------------------------------------
 
+// Date-only stamp (no time), rendered top-left of the printed page.
+function printDateStamp() {
+  const txt = new Date().toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' });
+  return `<div style="font-size:11px;color:#666;margin-bottom:10px;">พิมพ์เมื่อ ${txt}</div>`;
+}
+
 function printCurrentArticle() {
   const card = document.getElementById('article-card');
   const printArea = document.getElementById('print-area');
   if (!card || !printArea) return;
   const numberText = document.getElementById('article-number').textContent;
-  const subtitleText = document.getElementById('article-subtitle').textContent;
   const bodyHtml = document.getElementById('article-text').innerHTML;
   const noteEl = document.getElementById('article-note-input');
   const noteText = noteEl ? noteEl.value.trim() : '';
@@ -1741,8 +1746,8 @@ function printCurrentArticle() {
     ? `<div style="margin-top:16px;padding-top:12px;border-top:1px dashed #999;font-size:13px;white-space:pre-line;"><strong>note:</strong> ${escapeHtml(noteText)}</div>`
     : '';
   printArea.innerHTML = `
-    <h2 style="font-family:'Noto Serif Thai',serif;margin-bottom:6px;">มาตรา ${numberText}</h2>
-    <div style="font-size:13px;color:var(--ink-soft);margin-bottom:14px;">${subtitleText}</div>
+    ${printDateStamp()}
+    <h2 style="font-family:'Noto Serif Thai',serif;margin-bottom:14px;">มาตรา ${numberText}</h2>
     <div class="article-body" style="border:none;padding:0;background:none;">${bodyHtml}</div>
     ${noteHtml}
   `;
