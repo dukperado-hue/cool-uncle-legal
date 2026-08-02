@@ -945,6 +945,85 @@ plain flat light-gray background, no text.
 
 ---
 
+## 2j. Four more famous-artist-style characters (added 2026-08-02) — finishes the samurai batch
+
+Completes the 5-character famous-living-artist-style request (`samurai` was
+the first, done in commit `7710cca`). Same style-genericization policy as
+`samurai`: real artist names/franchise names never appear in the actual
+Gemini prompt text, only generic descriptions of the visual style. Same
+neutral-idle-pose-only convention as the rest of the pool (confirmed again —
+`basketball_player` holds a basketball at rest, not mid-dribble/mid-shot).
+
+| sprite id | style reference (generic-only in prompts) | note |
+|---|---|---|
+| `basketball_player` | dynamic sports-manga realism (athletic proportions, expressive grounded anatomy, clean confident linework) | deliberate teal-and-gold jersey, avoids the famous orange/red palette of well-known basketball anime/teams |
+| `flamboyant_dandy` | flamboyant high-fashion silhouette (ornate jewelry, thick expressive linework, dramatic bold poses) | emerald-green/gold/purple high-collar coat, rings, brooch, pocket watch |
+| `elegant_socialite` | same flamboyant high-fashion silhouette style as `flamboyant_dandy` | deep crimson/black gown with silver trim, statement choker, ornate hairpin — second of the two requested characters in this style |
+| `armored_bodyguard` | hyper-detailed dense linework (realistic exaggerated musculature, intricate mechanical/armor plating detail) | steel-gray and burnt-orange segmented tactical armor, intense stare |
+
+All 4 generated cleanly on the first attempt, single 4-view sheets, no
+grid-merge or drift issues (short session, no restart needed). Saved to
+`pics/game/character-sheets/{basketball_player,flamboyant_dandy,elegant_socialite,armored_bodyguard}.png`,
+added to `SPRITES` in `game-crimlaw-scenario.html`. Not named in-story or
+cast into any scenario yet, per the usual just-in-time policy.
+
+**Turnaround-sheet prompts sent:**
+```
+Character brief: "a basketball player", young adult male, dynamic
+sports-manga realism style — athletic proportions, expressive but grounded
+anatomy, clean confident linework, semi-realistic facial structure, short
+cropped hair, focused confident expression. Wearing a basketball jersey and
+shorts in a deliberate teal-and-gold color scheme (not the famous
+orange-and-red of any specific real team or franchise), holding a basketball
+at rest against his hip, standing neutral idle pose (not mid-action). Same
+fixed layout as other characters: four views side by side (front, 3/4 front,
+side, back), same design/colors across all four, plain flat light-gray
+background, no props besides the basketball, no text.
+```
+```
+Character brief: "a flamboyant high-society dandy", adult male, flamboyant
+high-fashion silhouette style — ornate jewelry and accessories (large rings,
+layered necklaces, an ornate brooch), bold confident theatrical demeanor,
+thick expressive linework, dramatic angular facial structure, sharp
+cheekbones, wind-swept voluminous hair. Deliberate unusual color scheme:
+emerald-green and gold high-collar coat with purple accents (avoid the exact
+palette of any famous existing character). Standing in a neutral idle pose
+(theatrical confident expression is fine, but the POSE itself stays flat
+neutral-standing, not a dynamic action pose). Same fixed layout as other
+characters: four views side by side (front, 3/4 front, side, back), same
+design/colors across all four, plain flat light-gray background, no props,
+no text.
+```
+```
+Character brief: "an elegant high-society socialite", adult female,
+flamboyant high-fashion silhouette style — ornate jewelry and accessories (a
+large statement choker necklace, dangling gem earrings, an ornate hairpin),
+bold confident theatrical demeanor, thick expressive linework, dramatic
+angular facial structure, sharp cheekbones, long flowing dramatic hair with a
+bold streak. Deliberate unusual color scheme: deep crimson-red and black
+high-fashion gown with silver trim (avoid the exact palette of any famous
+existing character). Standing in a neutral idle pose (theatrical confident
+expression is fine, but the POSE itself stays flat neutral-standing, not a
+dynamic action pose). Same fixed layout as other characters: four views side
+by side (front, 3/4 front, side, back), same design/colors across all four,
+plain flat light-gray background, no props, no text.
+```
+```
+Character brief: "an armored bodyguard", adult male, hyper-detailed dense
+linework style — realistic exaggerated musculature, intricate
+mechanical/armor plating detail, dramatic intense expression, heavy brow,
+close-cropped hair or shaved head. Wearing form-fitting segmented tactical
+body armor with intricate greebled plating and fine surface detail, in a
+deliberate steel-gray and burnt-orange color scheme (avoid the exact palette
+of any famous existing character). Standing in a neutral idle pose, arms at
+sides, intense focused stare (no dynamic action pose). Same fixed layout as
+other characters: four views side by side (front, 3/4 front, side, back),
+same design/colors across all four, plain flat light-gray background, no
+props, no text.
+```
+
+---
+
 ## 2h. Three more characters (added 2026-08-02, same session): ซ้อกาด + 2 gender-diversity remixes
 
 **`saw_kad`** — the long-queued 16th batch-2 character, finally generated. Brief
