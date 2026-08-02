@@ -648,9 +648,11 @@ Gemini prompt text.
 | `plaintiff_lawyer` | ทนายฝ่ายโจทก์ (civil) | user confirmed generic lawyer archetype, not a specific real lawyer — also fills the "civil plaintiff's lawyer" gap flagged in the character-pool-scaling memory (existing `prosecutor`/`defense_lawyer` only cover criminal cases) |
 | `comedian_uncle` | ลุงตลกหัวล้าน | vibe of a beloved bald Thai comedian archetype (the "น้าค่อม" reference) — **user explicitly confirmed vibe-only, do not name the real person** |
 
-Still pending clarification from the user: a 16th requested character referred to
-only as **"ซ้อกาด"** — meaning/reference unclear (not a recognized name/character to
-me), asked the user to clarify before generating. Not designed yet.
+**"ซ้อกาด" clarified (2026-08-02): a petite, pretty young woman (หญิงสาวสวยร่างเล็ก).**
+No further reference/archetype given beyond that — treat as a generic build description,
+not tied to any named real person or IP. Not designed/prompted yet; queued as the 16th
+turnaround sheet for the next art-generation session, same Track B pipeline as the rest
+of section 2e (Gem model sheet first, close-ups later).
 
 **Turnaround-sheet prompts** (send to the Gem, same fixed 4-view layout as
 section 2/3 — front / 3-4 front / side / back, plain flat light-gray background):
