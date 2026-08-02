@@ -56,7 +56,7 @@
 .theme-toggle button:hover{background:var(--line)}
 
 .drone-mute-btn{
-  display:none;
+  display:flex;
   margin-left:6px;
   background:var(--card);
   border:1px solid var(--line);
@@ -65,8 +65,7 @@
   align-items:center;justify-content:center;
   cursor:pointer;font-size:13px;
 }
-:root[data-theme="horror"] .drone-mute-btn{ display:flex; }
-:root[data-theme="horror"] .drone-mute-btn:hover{ background:var(--line); }
+.drone-mute-btn:hover{ background:var(--line); }
 
 /* GHOST COMPANION */
 .ghost-companion{position:fixed;right:16px;bottom:16px;width:200px;height:auto;pointer-events:auto;cursor:pointer;opacity:0;transform:translateY(8px);transition:opacity .6s ease;z-index:999;filter:drop-shadow(0 0 16px rgba(180,20,40,.45));animation:ghost-float 3.4s ease-in-out infinite}
@@ -379,7 +378,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
     <button type="button" data-theme-btn="dark" onclick="setTheme('dark')" onmouseenter="playHoverSound()" title="โหมดมืด">🌙</button>
     <button type="button" data-theme-btn="horror" onclick="setTheme('horror')" onmouseenter="playHoverSound()" title="โหมดสยองขวัญ">👻</button>
   </div>
-  <button type="button" id="drone-mute-btn" class="drone-mute-btn" onclick="toggleDroneMute(this)" title="ปิด/เปิดเสียงเพลง">🔊</button>
+  <button type="button" id="drone-mute-btn" class="drone-mute-btn" onclick="toggleDroneMute(this)" title="ปิด/เปิดเสียงในเกม">🔊</button>
 </div>
 <audio id="horror-bgm" loop preload="auto" playsinline webkit-playsinline style="display:none">
   <source src="music/The_Cold_Stream_Lament.mp3" type="audio/mpeg">
@@ -412,8 +411,13 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
 /* ================================================================
    HOVER SOUND (verbatim site boilerplate)
    ================================================================ */
+const DRONE_MUTE_KEY = 'codex-drone-muted';
+function isSoundMuted(){
+  try { return localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){ return false; }
+}
 let __hbAudioCtx;
 function playHoverSound(){
+  if (isSoundMuted()) return;
   try{
     __hbAudioCtx = __hbAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
     const c = __hbAudioCtx;
@@ -1255,14 +1259,14 @@ function syncBeat(){
   if (beat.funeral) {
     if (stageEl) stageEl.classList.add('mourning');
     if (funeralBadge) funeralBadge.classList.add('show');
-    if (funeralAudio) { funeralAudio.muted = false; funeralAudio.currentTime = 0; funeralAudio.volume = 0.5; funeralAudio.play().catch(() => {}); }
+    if (funeralAudio && !isSoundMuted()) { funeralAudio.muted = false; funeralAudio.currentTime = 0; funeralAudio.volume = 0.5; funeralAudio.play().catch(() => {}); }
   } else {
     if (stageEl) stageEl.classList.remove('mourning');
     if (funeralBadge) funeralBadge.classList.remove('show');
     if (funeralAudio) funeralAudio.pause();
   }
   const sfxAudio = document.getElementById('beat-sfx');
-  if (sfxAudio && beat.sfx) {
+  if (sfxAudio && beat.sfx && !isSoundMuted()) {
     sfxAudio.src = 'games/sound/effect/' + beat.sfx;
     sfxAudio.volume = 0.55;
     sfxAudio.play().catch(() => {});
@@ -1492,7 +1496,6 @@ function setTheme(theme){
   if (theme === 'horror') { playHorrorBgm(); startGhostRotation(); playHooSound(); scheduleDogHowl(); }
   else { stopGhostRotation(); stopHorrorBgm(); stopDogHowl(); }
 }
-const DRONE_MUTE_KEY = 'codex-drone-muted';
 function playHorrorBgm(){
   const bgm = document.getElementById('horror-bgm');
   if (!bgm) return;
@@ -1669,6 +1672,7 @@ document.addEventListener('input', (e) => {
 });
 let __ghostAudioCtx;
 function playHooSound(){
+  if (isSoundMuted()) return;
   try{
     __ghostAudioCtx = __ghostAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
     const c = __ghostAudioCtx;
