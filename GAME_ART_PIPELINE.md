@@ -984,6 +984,56 @@ no portraits/standees yet). Not named in-story or cast into any scenario yet.
 
 ---
 
+## 2i. Eight more characters (added 2026-08-02, same session): comedy/variety batch
+
+User asked for a "comedy and variety" round: an elderly person, a muscular
+person, 2-3 "eccentric" characters, and a comedically ghost-looking person —
+then, mid-batch, added a request for "cool anime hero"-style characters and
+"over-acting horror-manga" characters, explicitly citing real artists
+(Akira Toriyama, Junji Ito) and a real franchise catchphrase (JoJo's "ora
+ora") as reference points.
+
+**How the real-artist/franchise references were handled**: per this
+project's standing policy (see section 2e's real-person/IP note and
+[[feedback_fictionalize_exam_sourced_names]]-adjacent reasoning), style
+references to real artists were treated as vibe-only — described generically
+in the actual Gemini prompts ("bold clean confident linework", "exaggerated
+horror-manga style... fine detailed crosshatch shading") without ever naming
+the artist. The "ora ora" JoJo sound-effect request was declined outright
+(not just vibe-ified) since it's a literal trademarked catchphrase/audio
+motif tied to one specific commercial franchise, not a generalizable art
+style — a different category from "draw in a style reminiscent of X".
+
+**`hero_boy` needed a redo**: the first attempt (spiky black hair + orange gi
++ blue undershirt + black belt) came back reading as a specific, instantly
+recognizable existing anime character's exact iconic color formula, not a
+generic archetype — too close a copy to keep. Redone in the same chat with
+an explicit correction (different color scheme: teal-and-charcoal tunic
+instead of orange/blue, longer swept-back hair instead of spiky, red
+wristband) — the retry read as clearly original. **Lesson: shonen-anime
+"cool hero" briefs need an explicit color-scheme different from the two or
+three most famous existing characters in that genre, or Gemini defaults
+toward the most iconic exemplar of the archetype.** The two horror-manga
+characters avoided this failure mode by not requesting spiral motifs (Junji
+Ito's single most iconic signature image, from *Uzumaki*) — stuck to generic
+"exaggerated terror" / "unnerving fixed smile" instead, both came back
+original on the first try.
+
+Final roster this batch, all clean turnaround sheets:
+- `elderly_woman` — คุณยาย, silver-bun hair, floral blouse, cane
+- `muscular_man` — คนมีกล้าม, comedic bodybuilder, flexing pose, protein shaker
+- `ghost_looking_man` — ผีตลก, pale gaunt office worker, explicitly human not supernatural
+- `hero_boy` — ฮีโร่หนุ่มนักสู้, teal-and-charcoal battle tunic (redone once, see above)
+- `hero_girl` — นักสู้สาวเท่ห์, purple-and-silver armor, spiky ponytail
+- `hero_rival` — คู่ปรับเท่ห์, crimson-and-black coat, smug anti-hero
+- `horror_schoolgirl` — นักเรียนสาวขี้ตกใจ, over-acting terrified scream
+- `horror_neighbor` — เพื่อนบ้านยิ้มประหลาด, unnervingly calm fixed grin
+
+Saved to `pics/game/character-sheets/{elderly_woman,muscular_man,ghost_looking_man,hero_boy,hero_girl,hero_rival,horror_schoolgirl,horror_neighbor}.png`,
+added to `SPRITES`. Not named in-story or cast into any scenario yet.
+
+---
+
 ## 8. Item props (Track C — simple prop icons, added 2026-08-02)
 
 Small reusable prop images for scenario beats (a weapon shown in a charge, a
