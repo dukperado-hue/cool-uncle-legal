@@ -1598,6 +1598,16 @@ function renderResults(){
 }
 function backToPicker(){ state.screen = 'picker'; state.scenario = null; render(); }
 
+/* Let games.html (the games hub) send you straight into a category —
+   e.g. game-crimlaw-scenario.html?cat=civil — instead of always landing
+   on "รวม". Falls back to 'all' silently if the param is missing/invalid. */
+(function initPickerCategoryFromURL(){
+  try {
+    const cat = new URLSearchParams(location.search).get('cat');
+    if (cat && CATEGORIES.some(c => c.id === cat)) state.pickerCategory = cat;
+  } catch(e){}
+})();
+
 render();
 </script>
 <script>
