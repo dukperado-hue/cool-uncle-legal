@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ภาษาอังกฤษของนักกฎหมาย · Cool Uncle Legal Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;800&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF9F4;
+  --card:#FDFCF8;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --gold-soft:#F3E8CF;
+  --ok:#1E7A4F;
+  --ok-bg:#E6F4EC;
+  --bad:#B23A3A;
+  --bad-bg:#FBEAEA;
+  --accent:#2E4A7A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+}
+
+/* ============ THEME: DARK ============ */
+:root[data-theme="dark"]{
+  --paper:#14161f;--card:#1c2030;--ink:#E9E7E1;--ink-soft:#A9AEC2;--ink-faint:#6C7188;
+  --line:#2E3348;--gold:#E0BD73;--gold-soft:#3A3320;--ok:#4FCB8D;--ok-bg:#173425;
+  --bad:#E2685F;--bad-bg:#3A1E1C;--accent:#84A6E8;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.45);
+}
+/* ============ THEME: HORROR (กระสือ mode) ============ */
+:root[data-theme="horror"]{
+  --paper:#0A070C;--card:#151019;--ink:#D9D2C9;--ink-soft:#9C8F93;--ink-faint:#5C5460;
+  --line:#2B1F26;--gold:#8F1F2B;--gold-soft:#301418;--ok:#3F7A4F;--ok-bg:#16241a;
+  --bad:#FF3355;--bad-bg:#301018;--accent:#4A8F5C;
+  --shadow:0 1px 2px rgba(0,0,0,.6),0 10px 28px rgba(0,0,0,.6);
+}
+:root[data-theme="dark"] body,:root[data-theme="horror"] body{background:var(--paper)}
+:root[data-theme="dark"] .home-bar,:root[data-theme="horror"] .home-bar{background:var(--card);border-bottom-color:var(--line)}
+:root[data-theme="dark"] .notice,:root[data-theme="horror"] .notice{background:rgba(255,255,255,.04)}
+:root[data-theme="dark"] .lecture-row:hover,:root[data-theme="horror"] .lecture-row:hover{border-color:var(--gold)}
+:root[data-theme="dark"] .mode-tab,:root[data-theme="horror"] .mode-tab{background:var(--card)}
+:root[data-theme="dark"] .case-card,:root[data-theme="horror"] .case-card{background:var(--card)}
+
+/* THEME TOGGLE */
+.theme-toggle{display:flex;gap:3px;margin-left:auto;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+.theme-toggle button{border:none;background:transparent;border-radius:999px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .2s;font-family:inherit}
+.theme-toggle button.active{background:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.theme-toggle button:hover{background:var(--line)}
+
+.drone-mute-btn{
+  display:none;
+  margin-left:6px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:999px;
+  width:28px;height:28px;
+  align-items:center;justify-content:center;
+  cursor:pointer;font-size:13px;
+}
+:root[data-theme="horror"] .drone-mute-btn{ display:flex; }
+:root[data-theme="horror"] .drone-mute-btn:hover{ background:var(--line); }
+
+/* GHOST COMPANION */
+.ghost-companion{position:fixed;right:16px;bottom:16px;width:200px;height:auto;pointer-events:auto;cursor:pointer;opacity:0;transform:translateY(8px);transition:opacity .6s ease;z-index:999;filter:drop-shadow(0 0 16px rgba(180,20,40,.45));animation:ghost-float 3.4s ease-in-out infinite}
+.ghost-companion.visible{opacity:1}
+.ghost-companion.pulse{filter:drop-shadow(0 0 26px rgba(180,20,40,.8)) drop-shadow(0 0 10px rgba(255,255,255,.3))}
+@keyframes ghost-float{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
+.ghost-speech{
+  position:fixed;max-width:200px;background:#fff;color:#1a1a1a;
+  border-radius:14px;padding:8px 13px;font-size:13px;font-weight:700;
+  font-family:'Sarabun',system-ui,sans-serif;line-height:1.4;
+  box-shadow:0 8px 20px rgba(0,0,0,.4);z-index:1000;
+  opacity:0;pointer-events:none;transform:translateY(6px) scale(.96);
+  transition:opacity .2s ease,transform .2s ease;text-align:center;
+}
+.ghost-speech.visible{opacity:1;transform:translateY(0) scale(1)}
+.ghost-speech::after{
+  content:"";position:absolute;right:28px;bottom:-8px;width:0;height:0;
+  border:8px solid transparent;border-top-color:#fff;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+.home-bar{
+  display:flex;align-items:center;gap:10px;
+  background:#EFEAE0;border-bottom:1px solid var(--line);
+  padding:10px 16px;font-size:13px;color:var(--ink-soft);
+}
+.home-bar-logo{
+  font-size:22px;line-height:1;display:inline-flex;align-items:center;
+  text-decoration:none;margin-right:2px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.12));
+  transition:transform .15s;
+}
+.home-bar-logo:hover{transform:scale(1.1)}
+.home-bar-link{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.home-bar-link:hover{text-decoration:underline}
+.home-bar-sep{color:var(--ink-faint)}
+.home-bar-current{font-weight:600;color:var(--ink-soft)}
+
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),var(--paper);
+  color:var(--ink);min-height:100vh;font-size:16px;line-height:1.75;
+}
+h1,h2{font-family:'Noto Serif Thai',serif}
+
+.wrap{max-width:860px;margin:0 auto;padding:28px 16px 60px}
+
+.page-head{text-align:center;margin-bottom:22px}
+.page-head .crest{
+  width:64px;height:64px;border-radius:50%;margin:0 auto 14px;
+  background:radial-gradient(circle at 32% 28%, #E7C983, var(--gold) 55%, #8F6511 100%);
+  display:flex;align-items:center;justify-content:center;font-size:28px;
+  box-shadow:0 6px 18px rgba(176,138,60,.35), inset 0 2px 3px rgba(255,255,255,.5);
+}
+.page-head h1{font-size:24px;font-weight:800;color:var(--ink)}
+.page-head .subtitle{color:var(--ink-soft);margin-top:8px;font-size:14.5px}
+
+.notice{
+  background:#FBF6E8;border:1.5px dashed var(--gold);border-radius:var(--radius);
+  padding:12px 16px;margin:20px 0;font-size:13px;color:var(--ink-soft);
+  display:flex;align-items:center;gap:10px;
+}
+
+/* mode tabs */
+.mode-tabs{display:flex;gap:8px;margin:18px 0;flex-wrap:wrap}
+.mode-tab{
+  flex:1;min-width:150px;background:#fff;border:1px solid var(--line);border-radius:12px;
+  padding:12px 14px;font-family:inherit;font-size:14px;font-weight:700;color:var(--ink-soft);
+  cursor:pointer;transition:all .15s;text-align:center;
+}
+.mode-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.mode-tab:hover:not(.active){border-color:var(--gold)}
+.mode-panel{display:none}
+.mode-panel.active{display:block}
+
+/* reading mode */
+.part-heading{
+  font-weight:800;color:var(--gold);font-size:13.5px;margin:22px 0 10px;
+  text-transform:uppercase;letter-spacing:.03em;
+}
+.part-heading:first-child{margin-top:0}
+.lecture-list{display:flex;flex-direction:column;gap:10px}
+.lecture-row{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.lecture-head{
+  display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;
+}
+.lecture-num{
+  width:34px;height:34px;flex-shrink:0;border-radius:50%;background:var(--gold-soft);
+  color:#8F6511;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13.5px;
+}
+.lecture-title{flex:1;font-weight:700;color:var(--ink);font-size:14.5px}
+.lecture-toggle{color:var(--ink-faint);font-size:13px;flex-shrink:0;transition:transform .2s}
+.lecture-row.open .lecture-toggle{transform:rotate(180deg)}
+.lecture-body{display:none;padding:0 16px 16px 64px;font-size:14px;color:var(--ink-soft);white-space:pre-line;line-height:1.75}
+.lecture-row.open .lecture-body{display:block}
+
+/* analysis mode */
+.case-list{display:flex;flex-direction:column;gap:14px}
+.case-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;box-shadow:var(--shadow);
+}
+.case-tag{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);background:var(--gold-soft);padding:3px 10px;border-radius:999px;margin-bottom:8px}
+.case-facts{font-weight:700;color:var(--ink);font-size:14.5px;margin-bottom:10px;line-height:1.6}
+.case-reveal-btn{
+  font-size:12.5px;font-weight:700;color:var(--accent);background:none;border:1px solid var(--line);
+  border-radius:999px;padding:6px 14px;cursor:pointer;font-family:inherit;
+}
+.case-reveal-btn:hover{background:var(--gold-soft);border-color:var(--gold)}
+.case-answer{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:13.5px;color:var(--ink-soft);white-space:pre-line;line-height:1.75}
+.case-card.open .case-answer{display:block}
+
+footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)}
+.coffee-widget{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  margin:28px auto 0;padding:18px;max-width:280px;
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+}
+.coffee-widget img{width:130px;height:130px;border-radius:8px;background:#fff;padding:6px}
+.coffee-widget a.coffee-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#FFDD00;color:#1a1a1a;font-weight:700;font-size:13px;
+  padding:8px 16px;border-radius:8px;text-decoration:none;transition:transform .15s;
+}
+.coffee-widget a.coffee-btn:hover{transform:scale(1.04)}
+.coffee-widget p{margin:0;font-size:12px;color:var(--ink-faint);text-align:center}
+.coffee-widget .data-source-note a{color:inherit}
+</style>
+</head>
+<body>
+<script>
+(function(){
+  try {
+    var t = localStorage.getItem('codex-theme');
+    if (t === 'dark' || t === 'horror') document.documentElement.setAttribute('data-theme', t);
+  } catch(e){}
+})();
+</script>
+<div class="home-bar">
+  <a href="index.html" class="home-bar-logo" title="กลับหน้าหลัก" onmouseenter="playHoverSound()">👴🏻</a>
+  <a href="index.html" class="home-bar-link" onmouseenter="playHoverSound()">← กลับหน้าหลัก</a>
+  <span class="home-bar-sep">·</span>
+  <span class="home-bar-current">ภาษาอังกฤษของนักกฎหมาย</span>
+  <div class="theme-toggle" role="group" aria-label="เลือกธีม">
+    <button type="button" data-theme-btn="light" onclick="setTheme('light')" onmouseenter="playHoverSound()" title="โหมดสว่าง">☀️</button>
+    <button type="button" data-theme-btn="dark" onclick="setTheme('dark')" onmouseenter="playHoverSound()" title="โหมดมืด">🌙</button>
+    <button type="button" data-theme-btn="horror" onclick="setTheme('horror')" onmouseenter="playHoverSound()" title="โหมดสยองขวัญ">👻</button>
+  </div>
+  <button type="button" id="drone-mute-btn" class="drone-mute-btn" onclick="toggleDroneMute(this)" title="ปิด/เปิดเสียงเพลง">🔊</button>
+</div>
+<audio id="horror-bgm" loop preload="auto" playsinline webkit-playsinline style="display:none">
+  <source src="music/The_Cold_Stream_Lament.mp3" type="audio/mpeg">
+</audio>
+<audio id="dog-howl" preload="auto" playsinline webkit-playsinline style="display:none">
+  <source src="music/หมาหอน.mp3" type="audio/mpeg">
+</audio>
+
+<div class="wrap">
+  <header class="page-head">
+    <div class="crest">🌐</div>
+    <h1>ภาษาอังกฤษของนักกฎหมาย</h1>
+    <p class="subtitle">Legal English · คำศัพท์+ตัวอย่างประโยค 6 หมวด จากตำราและข้อสอบเก่า</p>
+  </header>
+
+  <div class="notice">⚠️ สรุปโดย AI จากตำรา Legal English และข้อสอบเก่า — โปรดตรวจสอบกับคำบรรยายจริงหรืออาจารย์ผู้สอนก่อนใช้อ้างอิง</div>
+
+  <div class="mode-panel active" id="panel-read">
+    <div class="lecture-list" id="lectureList"></div>
+  </div>
+
+  <div class="coffee-widget">
+  <p>ถ้าเว็บนี้มีประโยชน์ เลี้ยงกาแฟ Cool Uncle สักแก้วได้นะ ☕</p>
+  <img src="pics/coffee/bmc_qr.png" alt="QR code เลี้ยงกาแฟผ่าน Buy Me a Coffee" loading="lazy">
+  <a href="https://buymeacoffee.com/dukperadom" target="_blank" rel="noopener" class="coffee-btn" onmouseenter="playHoverSound()">☕ Buy Me a Coffee</a>
+  <p class="data-source-note">ข้อมูลกฎหมายอ้างอิงจากฐานข้อมูลกฤษฎีกา <a href="https://www.ocs.go.th/searchlaw-law" target="_blank" rel="noopener">https://www.ocs.go.th/searchlaw-law</a> · สืบค้นล่าสุด 2 สิงหาคม 2569</p>
+</div>
+<footer>สร้างด้วย Claude · ⚠️ ใช้อ่านเสริมหลักสูตรเท่านั้น โปรดตรวจสอบความถูกต้องของข้อมูล · Cool Uncle Legal Lab 2024</footer>
+</div>
+
+<script>
+let __hbAudioCtx;
+function playHoverSound(){
+  try{
+    __hbAudioCtx = __hbAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __hbAudioCtx;
+    if(c.state === 'suspended') c.resume();
+    const t0 = c.currentTime;
+    const osc = c.createOscillator(), gain = c.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(0.05, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+0.09);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+0.1);
+  }catch(e){}
+}
+
+/* ================================================================
+   โหมดอ่าน — สรุปเนื้อหาบรรยาย 20 ครั้ง แบ่ง 4 ส่วนตามหัวข้อหลัก
+   ================================================================ */
+const LECTURES = [
+  { n: 1, title: "Types of Laws & Procedural Law — ประเภทของกฎหมาย", text:
+`จากหนังสือ "LEGAL ENGLISH ภาษาอังกฤษกฎหมาย" โดย สรวิศ ลิมปรังษี ในหัวข้อ Types of Laws
+(ประเภทของกฎหมาย) และ Procedural Law (กฎหมายวิธีสบัญญัติ)
+มีการอธิบายคำศัพท์และหลักการที่สำคัญไว้ดังนี้ครับ:
+
+หมวด Types of Laws (ประเภทของกฎหมาย)
+หลักการสำคัญในหัวข้อนี้คือการแยกความแตกต่างระหว่างกฎหมายที่บัญญัติถึงเนื้อหาของสิทธิและหน้าที่
+(Substantive law) กับกฎหมายที่กำหนดขั้นตอนกระบวนการ (Procedural law)
+
+1. Substantive law แปลว่า กฎหมายสารบัญญัติ
+* หลักการ/บริบท: กฎหมายที่กำหนดเกี่ยวกับเนื้อหาหรือสาระแห่งสิทธิและหน้าที่ของบุคคล เช่น
+ในกฎหมายอาญาจะนิยามว่าพฤติกรรมใดเป็นความผิดและกำหนดโทษไว้
+* ตัวอย่างประโยค: "The substantive law will clearly define the elements
+of the crime..." (กฎหมายสารบัญญัติจะนิยามอย่างชัดแจ้งเกี่ยวกับองค์ประกอบของความผิด)
+
+2. Procedural law แปลว่า กฎหมายวิธีสบัญญัติ
+* หลักการ/บริบท: กฎหมายที่กำหนดกฎเกณฑ์เกี่ยวกับขั้นตอนและกระบวนการ
+โดยเฉพาะขั้นตอนการดำเนินคดีในศาล
+* ตัวอย่างประโยค: "Procedural law governs the process of the law."
+(กฎหมายวิธีสบัญญัติใช้บังคับต่อกระบวนการทางกฎหมาย)
+
+3. Prescribe แปลว่า บัญญัติ / กำหนด
+* หลักการ/บริบท: มักใช้ในความหมายที่กฎหมายบัญญัติหรือกำหนดเรื่องใดเรื่องหนึ่ง เช่น กำหนดโทษ
+* ตัวอย่างประโยค: "The substantive law will... prescribe the kind of
+punishment..." (กฎหมายสารบัญญัติจะ... บัญญัติประเภทของโทษ...)
+
+4. Element แปลว่า องค์ประกอบ
+* หลักการ/บริบท: ใช้เรียกองค์ประกอบของความผิดทางอาญา
+* ตัวอย่างประโยค: "The substantive law will clearly define the elements
+of the crime..." (กฎหมายสารบัญญัติจะนิยามอย่างชัดแจ้งเกี่ยวกับองค์ประกอบของความผิด...)
+
+5. Crime แปลว่า ความผิดอาญา
+* หลักการ/บริบท: พฤติกรรมที่เป็นปฏิปักษ์ต่อสังคมและต้องรับโทษทางอาญา
+* ตัวอย่างประโยค: "The substantive law will clearly define the elements of
+the crime..."
+
+6. Punishment แปลว่า โทษ
+* หลักการ/บริบท: ผลของการกระทำความผิดที่กฎหมายกำหนดไว้
+* ตัวอย่างประโยค: "...prescribe the kind of punishment that will be
+imposed for engaging in it."
+(...และบัญญัติประเภทของโทษที่จะลงสำหรับการกระทำการเหล่านั้น)
+
+7. Imprisonment แปลว่า การจำคุก
+* หลักการ/บริบท: มาจากการนำคำว่า Im (ใน) เติมหน้าคำว่า Prison (คุก/เรือนจำ)
+มีความหมายถึงการนำบุคคลเข้าไปไว้ในคุก
+* ตัวอย่างประโยค: "...the range of punishment (five to ten years'
+imprisonment)..." (...ขอบเขตของโทษ (จำคุกห้าปีถึงสิบปี)...)
+
+8. Conviction แปลว่า การตัดสินว่ามีความผิดอาญา
+* หลักการ/บริบท:
+การที่กระบวนการดำเนินคดีอาญายุติและศาลมีคำพิพากษาหรือตัดสินแล้วว่าจำเลยมีความผิดจริง
+* ตัวอย่างประโยค: "...that may be handed out upon conviction."
+(...ที่จะลงเมื่อมีคำตัดสินว่ามีความผิดอาญา)
+
+9. Promulgate แปลว่า ประกาศใช้ (กฎหมาย)
+* หลักการ/บริบท: การประกาศอย่างเป็นทางการและทำให้สิ่งที่ประกาศมีผลบังคับใช้ทางกฎหมาย
+คำนามคือ Promulgation
+* ตัวอย่างประโยค: "The Parliament has promulgated a new law..."
+(รัฐสภาได้ออกกฎหมายใหม่...)
+
+10. Enact แปลว่า ตรากฎหมาย / ประกาศให้มีผล
+* หลักการ/บริบท: กระบวนการประกาศทำให้มีผลทางกฎหมาย คล้ายคลึงกับ Promulgate คำนามคือ
+Enactment
+* ตัวอย่างประโยค: "The Central Intellectual Property and International Trade
+Court enacts a new rule..."
+(ศาลทรัพย์สินทางปัญญาและการค้าระหว่างประเทศกลางออกข้อกำหนดใหม่...)
+
+---
+
+หมวด Procedural Law (กฎหมายวิธีสบัญญัติ)
+หลักการสำคัญในหัวข้อนี้เกี่ยวข้องกับ กระบวนการยุติธรรมและการคุ้มครองสิทธิ
+โดยเน้นว่ารัฐต้องใช้อำนาจภายใต้กฎหมาย ไม่กระทำตามอำเภอใจ
+และต้องให้ความเป็นธรรมแก่ผู้ถูกกล่าวหา
+
+11. Due process of law แปลว่า การปฏิบัติอย่างเป็นธรรมตามกฎหมาย /
+กระบวนการอันควรแห่งกฎหมาย
+* หลักการ/บริบท: การบังคับใช้กฎหมายที่ให้ความคุ้มครองในเชิงกระบวนการ
+ทำให้ทุกคนได้รับการปฏิบัติอย่างเป็นธรรมตามสิทธิที่ควรจะได้ (ไม่ได้แปลว่าจะชนะคดีเสมอไป
+แต่แปลว่ากระบวนการต้องยุติธรรม)
+* ตัวอย่างประโยค: "...we guarantee everyone... due process of law."
+(...เราจึงให้การรับประกันกับทุกๆ คน... ให้ได้รับการปฏิบัติอย่างเป็นธรรมตามกฎหมาย)
+
+12. Charge แปลว่า ตั้งข้อหา
+* หลักการ/บริบท: หากใช้เป็นคำกริยา หมายถึงการตั้งข้อกล่าวหาว่ากระทำความผิดอาญา
+* ตัวอย่างประโยค: "...especially those charged with criminal offenses..."
+(...โดยเฉพาะอย่างยิ่งบรรดาผู้ที่ถูกตั้งข้อหาว่ากระทำความผิดอาญา)
+
+13. Offense (หรือ Offence) แปลว่า ข้อหา / ฐานความผิด
+* หลักการ/บริบท: ใช้ระบุข้อหาหรือฐานความผิดทางอาญาเป็นข้อๆ หรือการฝ่าฝืนกฎหมายที่มีโทษ
+* ตัวอย่างประโยค: "Danny committed the offense of perjury."
+(แดนนี่ได้กระทำความผิดฐานเบิกความเท็จ)
+
+14. Rule of law แปลว่า หลักนิติรัฐ
+* หลักการ/บริบท: หลักการที่อำนาจรัฐมีขีดจำกัด ผู้ทรงอำนาจต้องยึดถือตามกฎหมาย
+ไม่กระทำการตามอำเภอใจ
+* ตัวอย่างประโยค: "...even those in authority must adhere to the rule of
+law." (...แม้กระทั่งผู้ทรงอำนาจทั้งหลายทั้งปวงยังต้องยึดถือตามหลักนิติรัฐ)
+
+15. Arbitrary แปลว่า ตามอำเภอใจ
+* หลักการ/บริบท: การกระทำที่ไร้เหตุผลหรือทำตามความรู้สึกส่วนตัว
+ซึ่งหลักนิติรัฐมุ่งป้องกันไม่ให้รัฐใช้อำนาจในลักษณะนี้
+* ตัวอย่างประโยค: "We wish to prevent government from acting toward us in an
+arbitrary fashion..." (เราปรารถนาที่จะป้องกันมิให้รัฐกระทำการใดๆ
+ต่อเราในลักษณะตามอำเภอใจ...)
+
+16. Preordained แปลว่า ที่กำหนดไว้ล่วงหน้าแล้ว
+* หลักการ/บริบท: หมายถึงกฎเกณฑ์ กระบวนการ
+หรือขั้นตอนแห่งความยุติธรรมที่ได้ถูกวางหรือกำหนดไว้ล่วงหน้าก่อนแล้ว ไม่ใช่เพิ่งนึกอยากจะทำก็ทำ
+* ตัวอย่างประโยค: "...governed by a set of preordained rules of
+fairness." (...ซึ่งจะอยู่ภายใต้บังคับของกฎเกณฑ์แห่งความยุติธรรมที่กำหนดไว้ล่วงหน้า)
+
+17. Accused แปลว่า ผู้ถูกกล่าวหา / ผู้ต้องหา
+* หลักการ/บริบท:
+บุคคลที่ถูกเจ้าพนักงานสืบสวนและเรียกตัวมาแจ้งข้อกล่าวหาอย่างเป็นทางการในคดีอาญา (มาจากคำกริยา
+accuse ที่แปลว่ากล่าวหา)
+* ตัวอย่างประโยค: "Thus, we guarantee the accused the right to remain
+silent..." (ดังนั้น เราจึงให้การรับประกันต่อผู้ถูกกล่าวหาให้มีสิทธิที่จะไม่ให้การ...)
+
+18. Trial แปลว่า การพิจารณาคดี
+* หลักการ/บริบท: กระบวนพิจารณาของศาลทั้งหมด
+ไม่ว่าจะเป็นการสืบพยานข้อเท็จจริงหรือการชี้ขาดปัญหาข้อกฎหมาย
+* ตัวอย่างประโยค: "...the right to a trial by jury..."
+(...สิทธิที่จะได้รับการพิจารณาคดีโดยคณะลูกขุน...)` },
+  { n: 2, title: "Nature of Contract Law — ธรรมชาติของกฎหมายสัญญา", text:
+`จากหนังสือ "LEGAL ENGLISH ภาษาอังกฤษกฎหมาย" โดย สรวิศ ลิมปรังษี ในหัวข้อ Nature of
+Contract Law (ธรรมชาติของกฎหมายสัญญาและการเกิดหนี้)
+มีการอธิบายคำศัพท์และหลักการสำคัญทางกฎหมายสัญญาไว้ดังนี้ครับ:
+
+1. Promissory แปลว่า มีลักษณะของคำสัญญา / ที่เกิดจากคำสัญญา
+*   หลักการ/บริบท:
+กฎหมายสัญญาในเบื้องต้นจะเกี่ยวข้องกับการบังคับตามหนี้ที่เกิดจากคำสัญญาที่ให้ไว้ (promissory
+obligations)
+*   ตัวอย่างประโยค: "The law of contracts is concerned primarily with the
+enforcement of promissory obligations."
+(กฎหมายว่าด้วยสัญญาเกี่ยวข้องในเบื้องต้นกับการบังคับตามหนี้ที่เกิดจากคำสัญญาที่ให้ไว้)
+
+2. Obligation แปลว่า หนี้ / ความผูกพัน
+*   หลักการ/บริบท: หนี้ที่บุคคลหนึ่งมีหน้าที่ต้องกระทำการ งดเว้นกระทำการ
+หรือส่งมอบทรัพย์สินให้แก่อีกบุคคลหนึ่งที่มีสถานะเป็นเจ้าหนี้
+*   ตัวอย่างประโยค: "In a loan agreement, the principal obligation of the
+borrower is to repay the loan to the lender." (ในสัญญากู้ยืมเงิน
+หนี้ประธานของผู้กู้คือการชำระคืนเงินกู้ให้แก่ผู้ให้กู้)
+
+3. Contractual แปลว่า อันเกิดจากสัญญา
+*   หลักการ/บริบท: เป็นคำคุณศัพท์ที่หมายถึงความผูกพันหรือความรับผิดที่เกิดขึ้นจากสัญญา
+ไม่ว่าสัญญาหรือความตกลงนั้นจะถูกเรียกว่า Contract หรือ Agreement ก็ตาม
+*   ตัวอย่างประโยค: "Company A has a contractual obligation to pay the
+price of the goods after it has taken delivery of the goods." (บริษัท เอ
+มีหนี้อันเกิดจากสัญญาที่จะต้องชำระราคาสินค้าภายหลังจากที่ได้รับมอบสินค้าไปแล้ว)
+
+4. Liability แปลว่า ความรับผิด
+*   หลักการ/บริบท: มีความหมายกว้างครอบคลุมถึงหนี้ ความผูกพัน
+และความรับผิดชอบทั้งปวงที่อาจเกิดจากสัญญา ละเมิด หรือลาภมิควรได้
+*   ตัวอย่างประโยค: "Contractual liability may be based on consent..."
+(ความรับผิดทางสัญญาอาจจะวางอยู่บนพื้นฐานของความยินยอม...)
+
+5. Consent แปลว่า ความยินยอม
+*   หลักการ/บริบท: ความตกลงในการก่อให้เกิดความสัมพันธ์ทางด้านกฎหมายระหว่างผู้ที่เกี่ยวข้อง
+ซึ่งเป็นที่มาของความรับผิดหรือหนี้ตามสัญญา
+*   ตัวอย่างประโยค: "Contractual liability may be based on consent given
+in the form of an express promise..."
+(ความรับผิดทางสัญญาอาจจะวางอยู่บนพื้นฐานของความยินยอมที่ให้ไว้ในรูปของคำสัญญาโดยชัดแจ้ง...)
+
+6. Unjust enrichment แปลว่า ลาภมิควรได้
+*   หลักการ/บริบท:
+เป็นหลักการที่ศาลอาจกำหนดความรับผิดให้แก่บุคคลเพื่อเยียวยาและหลีกเลี่ยงการได้ลาภมิควรได้
+แม้บุคคลนั้นจะไม่ได้ให้ความยินยอมหรือทำสัญญาไว้ก็ตาม
+*   ตัวอย่างประโยค: "...a court will impose liability on a person for
+restitution in order to avoid unjust enrichment despite lack of consent by
+that person."
+(...ศาลอาจจะกำหนดความรับผิดให้แก่บุคคลหนึ่งสำหรับการเยียวยาเพื่อหลีกเลี่ยงการได้ลาภมิควรได้แม้ว่าบุ
+คคลนั้นจะไม่ได้ให้ความยินยอมก็ตาม)
+
+7. Promise แปลว่า ให้สัญญา / คำมั่นสัญญา
+*   หลักการ/บริบท:
+การแสดงเจตนาว่าจะทำหรือจะงดเว้นกระทำการอย่างใดอย่างหนึ่งต่ออีกบุคคลหนึ่ง
+(ซึ่งอาจจะเป็นหรือไม่เป็นสัญญาที่บังคับได้ตามกฎหมายก็ได้ ขึ้นอยู่กับองค์ประกอบอื่น)
+*   ตัวอย่างประโยค: "The borrower promises to repay the loan within the
+period of 5 years from the drawdown date."
+(ผู้กู้สัญญาจะชำระเงินกู้คืนภายในระยะเวลาห้าปีนับแต่วันที่เบิกถอนเงินกู้ไป)
+
+8. Principal obligation แปลว่า หนี้ประธาน
+*   หลักการ/บริบท: หนี้ที่เป็นวัตถุประสงค์หลักหรืออันสำคัญในการทำสัญญาระหว่างคู่สัญญา เช่น
+หนี้ในการโอนกรรมสิทธิ์ในทรัพย์สินตามสัญญาซื้อขาย
+*   ตัวอย่างประโยค: "In a loan agreement, the principal obligation of the
+borrower is to repay the loan to the lender." (ในสัญญากู้ยืมเงิน
+หนี้ประธานของผู้กู้คือการชำระคืนเงินกู้ให้แก่ผู้ให้กู้)
+
+9. Accessory obligation แปลว่า หนี้อุปกรณ์
+*   หลักการ/บริบท: หนี้หรือหน้าที่ประการอื่นที่มีความผูกพันอยู่กับหนี้ประธาน
+เพื่อช่วยให้การชำระหนี้ประธานบรรลุผล เช่น หน้าที่ส่งงบการเงินของผู้กู้ หรือหนี้ในการจ่ายค่าปรับ
+*   ตัวอย่างประโยค: "Other obligations of the borrower such as the duty to
+send the lender a copy of the borrower's annual financial statement are
+considered to be the accessory obligations."
+(หนี้ประการอื่นของผู้กู้เช่นหน้าที่ที่ต้องส่งงบการเงินประจำปีให้แก่ผู้ให้กู้ถือว่าเป็นหนี้อุปกรณ์)
+
+10. Primary obligation แปลว่า หนี้ชั้นต้น
+*   หลักการ/บริบท: เป็นหนี้ที่ลูกหนี้ต้องชำระเป็นอันดับแรกตามสัญญา
+*   ตัวอย่างประโยค: หนี้ในการโอนกรรมสิทธิ์และการส่งมอบทรัพย์สินให้แก่ผู้ซื้อตามสัญญาซื้อขาย
+ถือเป็น Primary obligation (หนี้ชั้นต้น)
+
+11. Secondary obligation แปลว่า หนี้ลำดับรอง
+*   หลักการ/บริบท:
+หนี้ที่เกิดขึ้นจากมูลหนี้เดียวกันแต่จะเกิดขึ้นเมื่อลูกหนี้ไม่สามารถปฏิบัติการชำระหนี้ส่วนที่เป็นหนี้ชั้นต้นได้ เช่น
+หนี้ค่าเสียหายชดเชยเมื่อไม่สามารถส่งมอบทรัพย์สินได้
+*   ตัวอย่างประโยค: การต้องชำระค่าเสียหายให้แก่ผู้ซื้อเพื่อชดเชยการไม่ได้รับมอบทรัพย์สิน
+ถือว่าเป็น Secondary obligation (หนี้ลำดับรอง)
+
+12. Contract แปลว่า สัญญา
+*   หลักการ/บริบท: เป็นนิติสัมพันธ์ที่เกิดขึ้นจากการแสดงเจตนาที่ถูกต้องตรงกันของบุคคล
+(เป็นสับเซตของคำว่า Agreement)
+*   ตัวอย่างประโยค: "Company A and Company B have entered into a contract
+for the sale of the headquarter building..." (บริษัท เอ และบริษัท บี
+ได้ทำสัญญาขายอาคารสำนักงานใหญ่...)
+
+13. Agreement แปลว่า ความตกลง / สัญญา
+*   หลักการ/บริบท: การแสดงเจตนาของบุคคลตั้งแต่สองฝ่ายขึ้นไปที่ตรงกัน ซึ่งมีความหมายกว้างกว่า
+Contract เพราะ Agreement บางลักษณะอาจไม่เกิดการผูกนิติสัมพันธ์ทางกฎหมายเสมอไป
+*   ตัวอย่างประโยค: "...can be considered as a sale agreement between
+Company A and Company B." (...อาจถือได้ว่าเป็นสัญญาซื้อขายระหว่างบริษัท เอ และบริษัท บี แล้ว)
+
+14. Express consent แปลว่า ความยินยอมโดยชัดแจ้ง
+*   หลักการ/บริบท:
+การให้ความยินยอมที่ผู้ให้ได้แสดงเจตนาออกมาอย่างชัดเจนปราศจากความเคลือบคลุมและไม่ต้องตีความ
+*   ตัวอย่างประโยค: "...consent given in the form of an express
+promise..." (...ความยินยอมที่ให้ไว้ในรูปของคำสัญญาโดยชัดแจ้ง...)
+
+15. Implied consent แปลว่า ความยินยอมโดยปริยาย
+*   หลักการ/บริบท: การให้ความยินยอมที่ผู้ให้อาจไม่ได้ใช้ถ้อยคำที่ชัดเจน
+แต่เป็นการตีความจากพฤติกรรม การนิ่ง หรือข้อเท็จจริงอย่างใดอย่างหนึ่ง
+*   ตัวอย่างประโยค: "...or one implied in fact from the acts of the
+parties." (...หรือโดยปริยายจากข้อเท็จจริงที่เป็นการกระทำของคู่สัญญา)` },
+  { n: 3, title: "Res ipsa loquitur & Wackiest Lawsuits — ละเมิด/ความประมาทเลินเล่อ", text:
+`จากหนังสือ "LEGAL ENGLISH ภาษาอังกฤษกฎหมาย" โดย สรวิศ ลิมปรังษี ในหัวข้อ Res ipsa
+loquitur และ World Wackiest Lawsuit 1 & 2
+สามารถสรุปคำศัพท์และหลักการสำคัญพร้อมตัวอย่างบริบทการใช้ได้ดังนี้
+
+หมวด Res ipsa loquitur (ข้อเท็จจริงพิสูจน์ได้ด้วยตัวเอง)
+หลักการสำคัญของหัวข้อนี้คือ เป็นข้อยกเว้นในคดีละเมิด (ความประมาทเลินเล่อ)
+ที่โจทก์ไม่จำเป็นต้องนำสืบพยานหลักฐานถึงขนาดปราศจากความสงสัย
+แต่เพียงแค่มีข้อเท็จจริงของอุบัติเหตุบางอย่างเกิดขึ้น (เช่น ของหนักตกลงมาจากหน้าต่าง)
+ก็เพียงพอที่จะเป็นหลักฐานสันนิษฐานความประมาทของจำเลยได้
+
+1. Res ipsa loquitur แปลว่า ข้อเท็จจริงพิสูจน์ได้ด้วยตัวเอง / The thing speaks for
+itself
+*   หลักการ/บริบท: วลีภาษาละตินที่ใช้ในกฎหมายละเมิด
+หมายถึงกรณีที่ข้อเท็จจริงของอุบัติเหตุที่เกิดขึ้นก็เป็นหลักฐานแสดงถึงความประมาทเลินเล่อได้โดยไม่ต้องพิสูจน์
+เชิงลึก
+*   ตัวอย่างประโยค: "There are certain cases of which it may be said res
+ipsa loquitur, the thing speaks for itself..."
+(มีบางคดีที่อาจกล่าวได้ว่าเป็นกรณีของข้อเท็จจริงที่พิสูจน์ได้ด้วยตัวเอง...)
+
+2. Plaintiff แปลว่า โจทก์
+*   หลักการ/บริบท: คู่ความที่เริ่มต้นคดีด้วยการยื่นคำฟ้อง (Plaint/Complaint)
+ต่อศาลเพื่อเรียกร้องการเยียวยา
+*   ตัวอย่างประโยค: "The law does not require a plaintiff in a negligence
+case to prove negligence beyond a reasonable doubt..."
+(กฎหมายไม่ได้กำหนดให้โจทก์ในคดีฟ้องให้รับผิดในความประมาทต้องพิสูจน์จนปราศจากความสงสัยตามสมควร
+)
+
+3. Negligence แปลว่า ความประมาทเลินเล่อ
+*   หลักการ/บริบท: การละเลยที่จะใช้ความระมัดระวังอันสมควร (Due care)
+อย่างที่วิญญูชนพึงใช้ในสถานการณ์เดียวกัน
+*   ตัวอย่างประโยค: "...the likelihood of its custodian's negligence is
+quite high." (...ความเป็นไปได้ที่จะเกิดจากความประมาทเลินเล่อของผู้ดูแลรักษาอาคารมีอยู่สูงมาก)
+
+4. Beyond a reasonable doubt แปลว่า ปราศจากความสงสัยตามสมควร
+*   หลักการ/บริบท: มาตรฐานการพิสูจน์ที่มักใช้ในคดีอาญา แต่ในคดีละเมิด (แพ่ง)
+โจทก์ไม่ต้องพิสูจน์ความประมาทเลินเล่อให้ถึงระดับนี้
+*   ตัวอย่างประโยค: "The law does not require a plaintiff in a negligence
+case to prove negligence beyond a reasonable doubt..."
+(กฎหมายไม่ได้กำหนดให้โจทก์ในคดีฟ้องให้รับผิดในความประมาทต้องพิสูจน์จนปราศจากความสงสัยตามสมควร
+)
+
+5. Preponderance of the evidence แปลว่า พยานหลักฐานมีน้ำหนักน่าเชื่อมากกว่า
+*   หลักการ/บริบท: มาตรฐานการชั่งน้ำหนักพยานหลักฐานในคดีแพ่ง
+ซึ่งโจทก์ใช้พิสูจน์ว่าจำเลยละเลยความระมัดระวัง
+*   ตัวอย่างประโยค: "...plaintiff needs only to establish by a
+preponderance of the evidence that the defendant failed to use due care."
+(...โจทก์เพียงแต่ต้องพิสูจน์ให้พยานหลักฐานมีน้ำหนักน่าเชื่อมากกว่าว่าจำเลยละเลยที่จะใช้ความระมัดระวัง
+อันสมควร)
+
+6. Due care แปลว่า ความระมัดระวังอันสมควร
+*   หลักการ/บริบท: ระดับความระมัดระวังที่บุคคลทั่วไปพึงมี
+การละเลยไม่ใช้สิ่งนี้จะก่อให้เกิดความประมาท
+*   ตัวอย่างประโยค: "...the defendant failed to use due care."
+(...จำเลยละเลยที่จะใช้ความระมัดระวังอันสมควร)
+
+7. Circumstantial evidence แปลว่า พยานหลักฐานแวดล้อม
+*   หลักการ/บริบท: หลักฐานที่ไม่ได้ชี้ชัดโดยตรง แต่ชี้ให้เห็นถึงความเชื่อมโยงของข้อเท็จจริง
+*   ตัวอย่างประโยค: "...he adduced circumstantial evidence tending to
+show that the storekeeper was negligent."
+(...เขานำสืบพยานหลักฐานแวดล้อมที่แสดงให้เห็นว่าเจ้าของร้านกระทำด้วยความประมาท)
+
+---
+
+หมวด World Wackiest Lawsuit 1 & 2 (เกร็ดคดีฟ้องร้องที่แปลกประหลาด)
+หลักการสำคัญคือการนำเสนอคดีฟ้องร้องในต่างประเทศที่มีแง่มุมแปลกๆ เช่น
+ลูกค้าชายใส่กางเกงบิกินีซีทรูแล้วอ้างว่ากางเกงในทำให้เกิดการฟ้องร้องเรื่องคุกคามทางเพศต่อร้านค้า หรือคดีที่หญิงตั้งครรภ์ฟ้องบริษัทประกันที่ไม่ยอมจ่ายค่าคลอดบุตรเพราะเธอออกเดินทางเกินรัศมี 30
+ไมล์จากโรงพยาบาลที่กำหนดตามกฎของบริษัทประกัน
+
+8. Lawsuit แปลว่า คดีฟ้องร้อง / กระบวนการทางกฎหมาย
+*   หลักการ/บริบท: กระบวนการที่คู่กรณีเริ่มต้นขึ้นเพื่อขอให้ศาลบังคับการให้เป็นไปตามสิทธิของตน
+*   ตัวอย่างประโยค: "...claimed a woman in a lawsuit against her health
+insurance company." (...สุภาพสตรีรายหนึ่งอ้างในคดีที่ฟ้องบริษัทประกันภัยสุขภาพของเธอ)
+
+9. Sexual harassment แปลว่า การคุกคามทางเพศ
+*   หลักการ/บริบท: การแสดงพฤติกรรม สื่อความหมาย
+หรือใช้ถ้อยคำในทางเพศที่ผู้ถูกกระทำไม่ได้ต้องการหรือยินยอม
+*   ตัวอย่างประโยค: "A male customer in tight-fitting, see-through bikini
+pants, says underwear caused a sexual harassment suit..."
+(ลูกค้าชายคนหนึ่งซึ่งแต่งกายด้วยกางเกงแบบบิกินี่แนบลำตัว...บอกว่ากางเกงชั้นในเป็นเหตุให้เกิดการฟ้องร้
+องเกี่ยวกับการคุกคามทางเพศ...)
+
+10. File the suit แปลว่า ยื่นฟ้องคดี
+*   หลักการ/บริบท: การที่โจทก์นำข้อพิพาทขึ้นสู่การพิจารณาของศาลอย่างเป็นทางการ
+*   ตัวอย่างประโยค: "Several employees of the store filed the suit."
+(พนักงานหลายคนของร้านได้ยื่นฟ้องคดีดังกล่าว)
+
+11. Discrimination แปลว่า การเลือกปฏิบัติ
+*   หลักการ/บริบท: การปฏิบัติต่อบุคคลอย่างไม่เท่าเทียมหรือไม่เป็นธรรมในสังคม
+*   ตัวอย่างประโยค: "...the store fostered an atmosphere of
+discrimination and sexual harassment."
+(...ร้านค้าส่งเสริมให้เกิดบรรยากาศของการเลือกปฏิบัติและการคุกคามทางเพศ)
+
+12. Claim แปลว่า กล่าวอ้าง / เรียกร้อง
+*   หลักการ/บริบท: ใช้ในความหมายของการกล่าวอ้างเหตุผลสนับสนุนคำฟ้อง
+หรือการใช้สิทธิเรียกร้องตามกฎหมาย
+*   ตัวอย่างประโยค: "It's ludicrous... claimed a woman in a lawsuit
+against her health insurance company." ("มันเป็นเรื่องน่าตลกมาก..."
+สุภาพสตรีรายหนึ่งอ้างในคดีที่ฟ้องบริษัทประกันภัยสุขภาพของเธอ)` },
+  { n: 4, title: "Criminal Law Vocabulary — คำศัพท์กฎหมายอาญา", text:
+`จากหนังสือ "LEGAL ENGLISH ภาษาอังกฤษกฎหมาย" โดย สรวิศ ลิมปรังษี ในหัวข้อ Criminal Law
+(กฎหมายอาญา) มีการอธิบายหลักการและคำศัพท์สำคัญที่เกี่ยวข้องกับฐานความผิดต่างๆ
+และข้อต่อสู้ทางกฎหมายอาญาไว้ดังนี้ครับ
+
+หมวด Murder (ความผิดฐานฆ่าคนตาย)
+หลักการสำคัญ: เป็นการฆ่าคนตายโดยเจตนา ซึ่งอาจมีเหตุฉกรรจ์ (First degree) เช่น
+การไตร่ตรองไว้ก่อน หรือกระทำโดยทารุณโหดร้าย
+
+1. Murder แปลว่า ความผิดฐานฆ่าคนตายโดยเจตนา
+*   บริบท: การกระทำความผิดฐานฆ่าคนตายที่ต้องมีองค์ประกอบของเจตนา
+*   ตัวอย่างประโยค: "The substantive criminal law defines murder..."
+(กฎหมายสารบัญญัติทางอาญาให้นิยามคำว่าฆ่าคนตายโดยเจตนา...)
+
+2. Malice aforethought แปลว่า เจตนาที่จะกระทำความผิด
+*   บริบท: องค์ประกอบสำคัญที่ทำให้การกระทำเป็นความผิดฐานฆ่าคนตาย คือการกระทำการใดๆ
+โดยมีเจตนาที่จะกระทำความผิดเช่นนั้น
+
+3. First degree murder แปลว่า ความผิดฐานฆ่าคนตายโดยไตร่ตรองไว้ก่อน /
+โดยมีเหตุฉกรรจ์
+*   บริบท: การฆ่าคนตายที่มีความร้ายแรง เช่น มีการไตร่ตรองไว้ก่อน (เทียบได้กับ ป.อ. มาตรา
+289(4)) หรือการฆ่าโดยทรมานหรือทารุณโหดร้าย
+*   ตัวอย่างประโยค: "Eric is charged with first degree murder because he
+planned how he would kill Danny since last month."
+(เอริคถูกตั้งข้อหาว่ากระทำความผิดฐานฆ่าคนตายโดยไตร่ตรองไว้ก่อน
+เพราะเขาได้วางแผนว่าจะลงมือฆ่าแดนนี่อย่างไรตั้งแต่เมื่อเดือนที่แล้ว)
+
+4. Premeditated แปลว่า ไตร่ตรองไว้ก่อน / วางแผนไว้ล่วงหน้า
+*   บริบท: ใช้ขยายความเจตนาฆ่าว่ามีการคิดหรือวางแผนไว้ล่วงหน้าก่อนลงมือกระทำ
+
+หมวด Larceny (ความผิดฐานลักทรัพย์)
+หลักการสำคัญ: การเอาทรัพย์ของบุคคลอื่นไป (Taking away) โดยไม่ได้รับความยินยอม (Without
+consent) และมีเจตนาอันมิชอบที่จะนำทรัพย์นั้นไปใช้เพื่อประโยชน์ของบุคคลอื่น
+
+5. Larceny แปลว่า ความผิดฐานลักทรัพย์
+*   บริบท: การเอาทรัพย์ของบุคคลอื่นไปโดยไม่ได้รับความยินยอมและฝ่าฝืนต่อเจตจำนงของเจ้าของ
+
+6. Felonious intent แปลว่า เจตนาอันมิชอบ
+*   บริบท:
+เจตนาในการกระทำความผิดที่จะนำทรัพย์ไปใช้เพื่อประโยชน์ของบุคคลอื่นนอกเหนือจากเจ้าของ
+
+7. Grand Larceny / Petit Larceny แปลว่า การลักทรัพย์ที่มีมูลค่ามาก /
+การลักทรัพย์ที่มีมูลค่าน้อย
+*   บริบท: การแบ่งประเภทของความผิดฐานลักทรัพย์โดยดูจาก "มูลค่าหรือราคา" ของสิ่งที่ถูกลัก
+หากเกินกว่าเกณฑ์ที่กฎหมายกำหนดจะเป็น Grand Larceny
+
+8. Misappropriation แปลว่า ความผิดฐานยักยอก
+*   บริบท: คำศัพท์ที่ใช้แทนลักษณะความผิดแบบเดียวกับการยักยอก เช่น Larceny of property
+lost (การยักยอกทรัพย์สินหายที่ผู้เก็บได้มีเจตนาเบียดบัง) หรือ Larceny of property delivered
+by mistake (การยักยอกทรัพย์ที่ส่งมอบผิด)
+
+หมวด Burglary และ Trespass (ความผิดฐานบุกรุก)
+หลักการสำคัญ: ความผิดฐาน Trespass คือการเข้าไปในอสังหาริมทรัพย์โดยไม่มีสิทธิ ส่วน Burglary
+จะต้องเป็นกรณีที่เข้าไปในอาคาร "โดยมีเจตนาจะกระทำความผิดอาญา" ประกอบด้วย
+
+9. Burglary แปลว่า ความผิดฐานบุกรุก (ที่มีเจตนากระทำความผิดอาญาในอาคาร)
+*   บริบท: การเข้าไปหรือฝ่าฝืนไม่ยอมออกจากอาคารโดยไม่มีเหตุอันชอบด้วยกฎหมาย
+โดยมีเจตนาที่จะเข้าไปกระทำความผิดอาญาในอาคารนั้น
+
+10. Trespass แปลว่า ความผิดฐานบุกรุก (โดยไม่มีสิทธิ)
+*   บริบท: การเข้าไปหรือการไม่ยอมออกจากสถานที่โดยไม่มีเหตุอันชอบด้วยกฎหมาย
+*   ตัวอย่างประโยค: "A person is guilty of trespass when he knowingly
+enters or remains unlawfully in or upon premises."
+(บุคคลมีความผิดฐานบุกรุกเมื่อเขาจงใจเข้าไปหรืออยู่โดยไม่ชอบด้วยกฎหมายในสถานที่)
+
+11. Unlawfully แปลว่า โดยไม่มีเหตุอันชอบด้วยกฎหมาย
+*   บริบท: หมายถึงการเข้าไปในสถานที่ในกรณีที่ผู้กระทำ "ไม่มีสิทธิหรือไม่ได้รับเอกสิทธิ์" (not
+licensed or privileged) ให้เข้าไป
+
+หมวด Insanity Defense (ข้อต่อสู้เรื่องจิตฟั่นเฟือน)
+หลักการสำคัญ:
+จำเลยไม่ต้องรับผิดหากในขณะกระทำผิดสูญเสียความสามารถในการรู้ผิดชอบหรือบังคับพฤติกรรมตนเอง
+ซึ่งเป็นผลมาจากโรคหรือข้อบกพร่องทางจิต
+
+12. Insanity แปลว่า สภาวะที่จิตบกพร่องหรือฟั่นเฟือน
+*   บริบท: ข้อต่อสู้ของจำเลยเกี่ยวกับความรับผิดทางอาญาที่เกิดจากสภาวะทางจิต
+ทำให้ไม่สามารถตัดสินใจกระทำการต่างๆ ได้ตามปกติ
+
+13. Mental disease or defect แปลว่า โรคหรือข้อบกพร่องทางจิต
+*   บริบท: สาเหตุสำคัญที่ทำให้จำเลยสูญเสียความสามารถในการ "รู้ผิดชอบ"
+หรือการควบคุมพฤติกรรมให้เป็นไปตามกฎหมาย
+
+14. Irresistible impulse แปลว่า แรงกระตุ้นที่ไม่อาจขัดขืนได้
+*   บริบท: ข้อต่อสู้ว่าจำเลยกระทำความผิดเพราะมีแรงกระตุ้นที่บีบบังคับให้ต้องกระทำ
+ซึ่งเป็นผลมาจากโรคทางจิตทำลายความสามารถในการควบคุมตนเอง (self-control)
+แม้จำเลยจะรู้ว่าสิ่งที่ทำนั้นผิดก็ตาม
+
+หมวด Self-defense (การป้องกันตัว)
+หลักการสำคัญ: บุคคลมีเหตุอันควรที่จะใช้กำลังต่อผู้ประทุษร้ายเพื่อปกป้องตนเองได้
+หากภัยนั้นเป็นภยันตรายที่ใกล้จะถึงและไม่อาจหลีกเลี่ยงได้
+
+15. Self-defense แปลว่า การป้องกัน / การป้องกันตัว
+*   บริบท: ข้อจำกัดความรับผิดทางอาญาเมื่อผู้กระทำใช้กำลังเพื่อปกป้องตนเองจากผู้ประทุษร้าย
+*   ตัวอย่างประโยค: "A person is justified in the use of force against an
+aggressor when... such conduct is necessary to defend himself..."
+(บุคคลมีเหตุอันควรที่จะใช้กำลังต่อผู้ประทุษร้ายเมื่อ... การกระทำดังกล่าวจำเป็นต่อการปกป้องตนเอง...)
+
+16. Imminent danger / Immediate danger แปลว่า ภยันตรายที่ใกล้จะถึง
+*   บริบท: ภยันตรายที่จำเป็นต้องลงมือใช้กำลังป้องกันในทันทีทันใด
+ไม่สามารถหลีกเลี่ยงได้ด้วยการขอความช่วยเหลือจากบุคคลอื่นหรือเจ้าหน้าที่ตำรวจ
+
+17. Apparent danger แปลว่า ภยันตรายที่ปรากฏให้เห็นประจักษ์
+*   บริบท:
+การกระทำของผู้ประทุษร้ายที่แสดงให้เห็นถึงเจตนาที่จะทำอันตรายต่อชีวิตหรือได้รับอันตรายสาหัส
+ทำให้เกิดความจำเป็นต้องกระทำการป้องกันเพื่อรักษาชีวิตของตนเอง` },
+  { n: 5, title: "คำศัพท์จากข้อสอบเก่า น.270 (กลุ่ม 1)", text:
+`จากข้อสอบปลายภาควิชา น.270 ภาษาอังกฤษทางกฎหมาย (กลุ่ม 1)
+มีคำศัพท์ที่ออกสอบในส่วนข้อสอบอัตนัยทั้งหมด 20 คำ แบ่งเป็นการแปลจากภาษาอังกฤษเป็นภาษาไทย 10 คำ
+และแปลจากภาษาไทยเป็นภาษาอังกฤษ 10 คำ
+
+สามารถรวบรวมและจัดทำเป็นตารางพร้อมคำแปลทางกฎหมายที่ถูกต้องได้ดังนี้ครับ
+
+ส่วนที่ 1: การแปลคำศัพท์จากภาษาอังกฤษเป็นภาษาไทย (English to Thai)
+
+| ข้อ | คำศัพท์ภาษาอังกฤษ | คำแปลภาษาไทยทางกฎหมาย |
+| :--- | :--- | :--- |
+| 1 | Countersignature | การลงนามกำกับ / การลงนามร่วม |
+| 2 | Hearing | การพิจารณาคดี / การไต่สวน / การนั่งพิจารณา |
+| 3 | Uphold | พิพากษายืน / ยืนตาม (เช่น ศาลสูงยืนตามคำพิพากษาศาลล่าง) |
+| 4 | Repeal | ยกเลิก (ใช้กับกฎหมาย) / เพิกถอน |
+| 5 | Recital | ข้อความเบื้องต้น / อารัมภบท (ในสัญญา) |
+| 6 | Negotiation | การเจรจา / การเจรจาต่อรอง |
+| 7 | Insolvency | การมีหนี้สินล้นพ้นตัว / ภาวะล้มละลาย |
+| 8 | Award | คำชี้ขาด (ของอนุญาโตตุลาการ) / ค่าเสียหายชดเชย |
+| 9 | Inequitable | ที่ไม่เป็นธรรม / ที่ไม่ยุติธรรม |
+| 10 | Malicious | โดยมุ่งร้าย / โดยมีเจตนาร้าย / โดยคิดร้าย |
+
+<br>
+
+ส่วนที่ 2: การแปลคำศัพท์จากภาษาไทยเป็นภาษาอังกฤษ (Thai to English)
+
+| ข้อ | คำศัพท์ภาษาไทย | คำแปลภาษาอังกฤษทางกฎหมาย |
+| :--- | :--- | :--- |
+| 11 | คำมั่น | Promise / Firm offer / Pledge |
+| 12 | ข้อหา | Charge / Offense / Count |
+| 13 | จดทะเบียนเป็นนิติบุคคล | Incorporate / Register as a juristic person /
+Registration of incorporation |
+| 14 | การยื่นข้อพิพาทให้ผู้เชี่ยวชาญวินิจฉัย | Expert determination |
+| 15 | บังคับใช้ | Enforce / Execute |
+| 16 | ประจักษ์พยาน | Eyewitness / Direct witness |
+| 17 | แบบพิธี | Formality / Formalities |
+| 18 | การฟ้องร้อง, การต่อสู้คดี | Litigation / Proceeding / Lawsuit |
+| 19 | การประนอมข้อพิพาท | Compromise / Conciliation / Mediation |
+| 20 | ยื่นฟ้อง | File a lawsuit / File a suit / File a complaint / Sue |
+
+*(หมายเหตุ:
+คำแปลข้างต้นอ้างอิงจากหลักการแปลความหมายทางกฎหมายสากลและคำศัพท์ที่ปรากฏในหนังสือ LEGAL
+ENGLISH สำหรับบางคำที่สามารถแปลได้หลายความหมาย จะขึ้นอยู่กับบริบทการนำไปใช้งานในเอกสารนั้นๆ
+ครับ)*` },
+  { n: 6, title: "โครงสร้างประโยคแปลกฎหมายจากข้อสอบเก่า น.270 (กลุ่ม 2)", text:
+`จากข้อสอบปลายภาควิชา น.270 ภาษาอังกฤษทางกฎหมาย (กลุ่ม 2)
+ซึ่งเน้นการแปลระดับประโยคหรือข้อความ (Passage) สามารถสรุปคำศัพท์สำคัญ
+(อ้างอิงจากคำศัพท์ท้ายข้อสอบ) และโครงสร้างประโยคที่ใช้บ่อยแบ่งตามบริบทต่างๆ ได้ดังนี้ครับ
+
+1. บริบทระบบกฎหมายและองค์กรศาล (Legal System / Court Organization)
+ในส่วนนี้เป็นข้อสอบแปลจากภาษาไทยเป็นภาษาอังกฤษ
+โดยเน้นที่โครงสร้างของระบบกฎหมายลายลักษณ์อักษรและการจัดตั้งองค์กรศาล
+
+คำศัพท์สำคัญที่ให้มาในข้อสอบ:
+*   Source: บ่อเกิด / ที่มา
+*   Juristic method: นิติวิธี / วิธีใช้กฎหมาย
+*   Tradition: จารีต / ประเพณี / ขนบธรรมเนียม
+*   Provision: บทบัญญัติ / ข้อกำหนด
+*   Applicable: ปรับใช้ได้ / เหมาะสม
+*   Adjudicate: พิจารณาวินิจฉัย / ตัดสิน / ชี้ขาด
+*   Constitution: รัฐธรรมนูญ
+*   Directly: โดยตรง
+*   First Instance: ศาลชั้นต้น (Court of First Instance)
+*   Appellate: เกี่ยวกับอุทธรณ์ / ชั้นอุทธรณ์
+
+ตัวอย่างโครงสร้างประโยค (ไทยเป็นอังกฤษ):
+*   ประโยค: "ประเทศไทยใช้ระบบกฎหมายลายลักษณ์อักษรหรือระบบประมวลกฎหมาย ดังนั้น
+ประมวลกฎหมายทั้งหลายจึงเป็นบ่อเกิดหลักของกฎหมาย"
+    *   *โครงสร้างหลัก:* ...uses the civil law system... therefore, codes are the
+main sources of law.
+*   ประโยค: "...บทบัญญัติดังกล่าวก็เป็นนิติวิธีพื้นฐานที่ปรับใช้ได้กับทุกกฎหมายทุกสาขา"
+    *   *โครงสร้างหลัก:* ...such provision is a basic juristic method
+that is applicable to all branches of law.
+*   ประโยค:
+"ศาลฎีกามีอำนาจพิจารณาวินิจฉัยคดีทั้งหลายโดยตรงเฉพาะที่กำหนดโดยรัฐธรรมนูญ..."
+    *   *โครงสร้างหลัก:* The Supreme Court has the power to adjudicate cases
+directly only as prescribed by the Constitution...
+
+---
+
+2. บริบทกฎหมายอาญา (Criminal Law)
+ในส่วนนี้เป็นข้อสอบแปลจากภาษาอังกฤษเป็นภาษาไทย เน้นรูปประโยคเกี่ยวกับการดำเนินคดีอาญา ข้อต่อสู้
+และการลงโทษ
+
+คำศัพท์สำคัญที่ให้มาในข้อสอบ:
+*   Defendant: จำเลย
+*   Try: ดำเนินคดี / พิจารณาคดี
+*   Murder: ฆาตกรรม / การฆ่า
+*   Detain: กัก / คุมขัง
+*   Guilty: ผิดจริง (เช่น Pleaded not guilty = ให้การปฏิเสธข้อกล่าวหา)
+*   Claim: อ้าง / ยืนยัน
+*   Affair: เรื่องชู้
+*   Bail: ประกันตัว / เงินประกัน
+*   Imprisonment: จำคุก
+
+ตัวอย่างโครงสร้างประโยค (อังกฤษเป็นไทย):
+*   ประโยค: "John, the defendant, was tried for the murder of
+his wife."
+    *   *คำแปล:* จอห์น จำเลย ถูกดำเนินคดีในข้อหาฆาตกรรมภรรยาของเขา
+*   ประโยค: "Initially, he pleaded not guilty, claiming that he
+shot his wife with a gun in self-defense."
+    *   *คำแปล:* ในตอนแรก เขาให้การปฏิเสธ (ว่าไม่ได้กระทำผิดจริง)
+โดยอ้างว่าเขายิงภรรยาด้วยปืนเป็นการป้องกันตัว
+*   ประโยค: "He was then held without bail until the Court read the
+judgement, sentencing him to life imprisonment."
+    *   *คำแปล:* เขาจึงถูกคุมขังโดยไม่ให้ประกันตัวจนกระทั่งศาลอ่านคำพิพากษา
+ตัดสินลงโทษจำคุกเขาตลอดชีวิต
+
+---
+
+3. บริบทกฎหมายสัญญา (Contract Law)
+ในส่วนนี้เป็นข้อสอบแปลจากภาษาอังกฤษเป็นภาษาไทย เน้นการผิดสัญญาและการเรียกค่าเสียหายชดเชย
+
+คำศัพท์สำคัญที่ให้มาในข้อสอบ:
+*   Performance: การชำระหนี้ / การปฏิบัติตามสัญญา
+*   Failure: ความล้มเหลว / การไม่ปฏิบัติ
+*   Debtor: ลูกหนี้
+*   Injure: ทำให้บาดเจ็บ / ทำให้เสียหาย (Injured party = ฝ่ายที่ได้รับความเสียหาย)
+*   Remedies: การเยียวยา / วิธีบังคับสิทธิเยียวยา
+*   Pecuniary: เป็นตัวเงิน
+*   Compensation: ค่าชดเชย / ค่าตอบแทน / ค่าสินไหมทดแทน
+*   Loss: ความสูญเสีย / ความเสียหาย
+*   Benefits: ประโยชน์ / สิทธิพิเศษ
+
+ตัวอย่างโครงสร้างประโยค (อังกฤษเป็นไทย):
+*   ประโยค: "If one of the parties does not fulfill her obligation in the
+contract, that failure of performance is called a breach of contract."
+    *   *คำแปล:* หากคู่สัญญาฝ่ายใดฝ่ายหนึ่งไม่ปฏิบัติตามหน้าที่ (หนี้) ของตนในสัญญา
+การไม่ปฏิบัติตามการชำระหนี้นั้นเรียกว่าการผิดสัญญา
+*   ประโยค: "Consequently, an injured party could seek remedies
+from the debtor."
+    *   *คำแปล:* ดังนั้น (ซึ่งเป็นผลสืบเนื่องมา)
+ฝ่ายที่ได้รับความเสียหายจึงสามารถแสวงหาการเยียวยาจากลูกหนี้ได้
+*   ประโยค: "The most common remedy for nonfulfillment of the contract
+is to claim pecuniary compensation for normal loss..."
+    *   *คำแปล:* วิธีการเยียวยาที่พบได้ทั่วไปที่สุดสำหรับการไม่ปฏิบัติตามสัญญา
+คือการเรียกร้องค่าชดเชยเป็นตัวเงินสำหรับความเสียหายปกติ...` }
+];
+
+function renderLectures(){
+  const el = document.getElementById('lectureList');
+  el.innerHTML = LECTURES.map(l => `
+    <div class="lecture-row" id="lec-${l.n}">
+      <div class="lecture-head" onclick="toggleLecture(${l.n})">
+        <div class="lecture-num">${l.n}</div>
+        <div class="lecture-title">${l.title}</div>
+        <div class="lecture-toggle">▾</div>
+      </div>
+      <div class="lecture-body">${l.text.replace(/</g,'&lt;')}</div>
+    </div>
+  `).join('');
+}
+function toggleLecture(n){
+  const row = document.getElementById('lec-' + n);
+  row.classList.toggle('open');
+  playHoverSound();
+}
+renderLectures();
+
+/* ================================================================
+   โหมดวิเคราะห์โจทย์ — โจทย์สถานการณ์สมมติ + แนวคำตอบ
+   ================================================================ */
+</script>
+<script>
+const THEME_KEY = 'codex-theme';
+
+function setTheme(theme){
+  if (theme === 'light') { document.documentElement.removeAttribute('data-theme'); }
+  else { document.documentElement.setAttribute('data-theme', theme); }
+  try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
+  updateThemeToggleUI(theme);
+  if (theme === 'horror') { playHorrorBgm(); startGhostRotation(); playHooSound(); scheduleDogHowl(); }
+  else { stopGhostRotation(); stopHorrorBgm(); stopDogHowl(); }
+}
+const DRONE_MUTE_KEY = 'codex-drone-muted';
+function playHorrorBgm(){
+  const bgm = document.getElementById('horror-bgm');
+  if (!bgm) return;
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  bgm.muted = false;
+  bgm.volume = muted ? 0 : 0.35;
+  const p = bgm.play();
+  if (p && p.catch) p.catch(() => { bgm.load(); bgm.play().catch(() => {}); });
+}
+function stopHorrorBgm(){
+  const bgm = document.getElementById('horror-bgm');
+  if (bgm) bgm.pause();
+}
+let dogHowlTimer = null;
+function scheduleDogHowl(){
+  clearTimeout(dogHowlTimer);
+  const delay = 18000 + Math.random() * 22000;
+  dogHowlTimer = setTimeout(() => { playDogHowl(); scheduleDogHowl(); }, delay);
+}
+function playDogHowl(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const howl = document.getElementById('dog-howl');
+  if (!howl) return;
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  if (muted) return;
+  howl.currentTime = 0;
+  howl.volume = 0.4;
+  howl.play().catch(() => {});
+  setTimeout(() => { if (!howl.paused) howl.pause(); }, 3000);
+}
+function stopDogHowl(){
+  clearTimeout(dogHowlTimer); dogHowlTimer = null;
+  const howl = document.getElementById('dog-howl');
+  if (howl) howl.pause();
+}
+function toggleDroneMute(btn){
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  muted = !muted;
+  try { localStorage.setItem(DRONE_MUTE_KEY, muted ? '1' : '0'); } catch(e){}
+  if (btn) btn.textContent = muted ? '🔇' : '🔊';
+  const bgm = document.getElementById('horror-bgm');
+  if (bgm) bgm.volume = muted ? 0 : 0.35;
+}
+function updateThemeToggleUI(theme){
+  document.querySelectorAll('.theme-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.themeBtn === theme);
+  });
+}
+const GHOST_IMAGES = [
+  'pics/Pixel/icon/ตะเคียน 1.png','pics/Pixel/icon/ตะเคียน 2.png',
+  'pics/Pixel/icon/ตานี 2.png',
+  'pics/Pixel/icon/นางกวัก 1.png','pics/Pixel/icon/นางกวัก 2.png','pics/Pixel/icon/นางกวัก 3.png',
+  'pics/Pixel/icon/ปอป 1.png','pics/Pixel/icon/ปอป 2.png','pics/Pixel/icon/ปอป 3.png',
+  'pics/Pixel/icon/ปอปชาย 1.png','pics/Pixel/icon/ปอปชาย 2.png',
+  'pics/Pixel/icon/ผีแมว 1.png','pics/Pixel/icon/ผีแมว 2.png','pics/Pixel/icon/ผีแมว 3.png',
+  'pics/Pixel/icon/ผีโพง 1.png',
+  'pics/Pixel/icon/แม่นาค 1.png','pics/Pixel/icon/แม่นาค 2.png','pics/Pixel/icon/แม่นาค 3.png',
+  'pics/Pixel/icon/กระสือ_00.png','pics/Pixel/icon/กระสือ_01.png','pics/Pixel/icon/กระสือ_02.png',
+  'pics/Pixel/icon/กระสือ_10.png','pics/Pixel/icon/กระสือ_11.png','pics/Pixel/icon/กระสือ_12.png',
+  'pics/Pixel/icon/กระสือ_20.png','pics/Pixel/icon/กระสือ_21.png','pics/Pixel/icon/กระสือ_22.png',
+  'pics/Pixel/icon/กุมาร 1_00.png','pics/Pixel/icon/กุมาร 1_01.png','pics/Pixel/icon/กุมาร 1_02.png',
+  'pics/Pixel/icon/กุมาร 1_10.png','pics/Pixel/icon/กุมาร 1_11.png','pics/Pixel/icon/กุมาร 1_12.png',
+  'pics/Pixel/icon/กุมาร 1_21.png',
+  'pics/Pixel/icon/กุมาร 2_00.png','pics/Pixel/icon/กุมาร 2_01.png','pics/Pixel/icon/กุมาร 2_02.png',
+  'pics/Pixel/icon/กุมาร 2_10.png','pics/Pixel/icon/กุมาร 2_11.png','pics/Pixel/icon/กุมาร 2_12.png',
+  'pics/Pixel/icon/กุมาร 2_20.png','pics/Pixel/icon/กุมาร 2_21.png','pics/Pixel/icon/กุมาร 2_22.png',
+  'pics/Pixel/icon/ควายธนู_00.png','pics/Pixel/icon/ควายธนู_01.png','pics/Pixel/icon/ควายธนู_02.png',
+  'pics/Pixel/icon/ควายธนู_10.png','pics/Pixel/icon/ควายธนู_11.png','pics/Pixel/icon/ควายธนู_12.png',
+  'pics/Pixel/icon/ควายธนู_20.png','pics/Pixel/icon/ควายธนู_21.png','pics/Pixel/icon/ควายธนู_22.png',
+  'pics/Pixel/icon/ตานี_00.png','pics/Pixel/icon/ตานี_01.png','pics/Pixel/icon/ตานี_02.png',
+  'pics/Pixel/icon/ตานี_10.png','pics/Pixel/icon/ตานี_11.png','pics/Pixel/icon/ตานี_12.png',
+  'pics/Pixel/icon/ตานี_20.png','pics/Pixel/icon/ตานี_21.png','pics/Pixel/icon/ตานี_22.png',
+  'pics/Pixel/icon/ผีรวม 1_00.png','pics/Pixel/icon/ผีรวม 1_01.png','pics/Pixel/icon/ผีรวม 1_02.png',
+  'pics/Pixel/icon/ผีรวม 1_10.png','pics/Pixel/icon/ผีรวม 1_11.png','pics/Pixel/icon/ผีรวม 1_12.png',
+  'pics/Pixel/icon/ผีรวม 1_20.png','pics/Pixel/icon/ผีรวม 1_21.png','pics/Pixel/icon/ผีรวม 1_22.png',
+  'pics/Pixel/icon/ผีรวม 2_00.png','pics/Pixel/icon/ผีรวม 2_01.png','pics/Pixel/icon/ผีรวม 2_02.png',
+  'pics/Pixel/icon/ผีรวม 2_10.png','pics/Pixel/icon/ผีรวม 2_11.png','pics/Pixel/icon/ผีรวม 2_12.png',
+  'pics/Pixel/icon/ผีรวม 2_20.png','pics/Pixel/icon/ผีรวม 2_21.png','pics/Pixel/icon/ผีรวม 2_22.png',
+  'pics/Pixel/icon/ผีรวม 3_00.png','pics/Pixel/icon/ผีรวม 3_01.png','pics/Pixel/icon/ผีรวม 3_02.png',
+  'pics/Pixel/icon/ผีรวม 3_10.png','pics/Pixel/icon/ผีรวม 3_11.png','pics/Pixel/icon/ผีรวม 3_12.png',
+  'pics/Pixel/icon/ผีรวม 3_20.png','pics/Pixel/icon/ผีรวม 3_21.png','pics/Pixel/icon/ผีรวม 3_22.png',
+  'pics/Pixel/icon/ผีรวม 4_00.png','pics/Pixel/icon/ผีรวม 4_01.png','pics/Pixel/icon/ผีรวม 4_02.png',
+  'pics/Pixel/icon/ผีรวม 4_10.png','pics/Pixel/icon/ผีรวม 4_11.png','pics/Pixel/icon/ผีรวม 4_12.png',
+  'pics/Pixel/icon/ผีรวม 4_20.png','pics/Pixel/icon/ผีรวม 4_21.png','pics/Pixel/icon/ผีรวม 4_22.png',
+  'pics/Pixel/icon/ผีรวม 5_00.png','pics/Pixel/icon/ผีรวม 5_01.png','pics/Pixel/icon/ผีรวม 5_02.png',
+  'pics/Pixel/icon/ผีรวม 5_10.png','pics/Pixel/icon/ผีรวม 5_11.png','pics/Pixel/icon/ผีรวม 5_12.png',
+  'pics/Pixel/icon/ผีรวม 5_20.png','pics/Pixel/icon/ผีรวม 5_21.png','pics/Pixel/icon/ผีรวม 5_22.png',
+  'pics/Pixel/icon/ผีรวม 6_00.png','pics/Pixel/icon/ผีรวม 6_01.png','pics/Pixel/icon/ผีรวม 6_02.png',
+  'pics/Pixel/icon/ผีรวม 6_10.png','pics/Pixel/icon/ผีรวม 6_11.png','pics/Pixel/icon/ผีรวม 6_12.png',
+  'pics/Pixel/icon/ผีรวม 6_20.png','pics/Pixel/icon/ผีรวม 6_21.png','pics/Pixel/icon/ผีรวม 6_22.png',
+  'pics/Pixel/icon/ผีรวม 7_00.png','pics/Pixel/icon/ผีรวม 7_01.png','pics/Pixel/icon/ผีรวม 7_02.png',
+  'pics/Pixel/icon/ผีรวม 7_10.png','pics/Pixel/icon/ผีรวม 7_11.png','pics/Pixel/icon/ผีรวม 7_12.png',
+  'pics/Pixel/icon/ผีรวม 7_20.png','pics/Pixel/icon/ผีรวม 7_21.png','pics/Pixel/icon/ผีรวม 7_22.png',
+  'pics/Pixel/icon/ผีรวม 8_00.png','pics/Pixel/icon/ผีรวม 8_01.png','pics/Pixel/icon/ผีรวม 8_02.png',
+  'pics/Pixel/icon/ผีรวม 8_03.png','pics/Pixel/icon/ผีรวม 8_10.png','pics/Pixel/icon/ผีรวม 8_11.png',
+  'pics/Pixel/icon/ผีรวม 8_12.png','pics/Pixel/icon/ผีรวม 8_13.png','pics/Pixel/icon/ผีรวม 8_20.png',
+  'pics/Pixel/icon/ผีรวม 8_21.png','pics/Pixel/icon/ผีรวม 8_22.png','pics/Pixel/icon/ผีรวม 8_23.png',
+  'pics/Pixel/icon/ผีรวม 9_00.png','pics/Pixel/icon/ผีรวม 9_01.png','pics/Pixel/icon/ผีรวม 9_02.png',
+  'pics/Pixel/icon/ผีรวม 9_10.png','pics/Pixel/icon/ผีรวม 9_11.png','pics/Pixel/icon/ผีรวม 9_12.png',
+  'pics/Pixel/icon/ผีรวม 9_20.png','pics/Pixel/icon/ผีรวม 9_21.png','pics/Pixel/icon/ผีรวม 9_22.png',
+  'pics/Pixel/icon/ผีรวม 10_00.png','pics/Pixel/icon/ผีรวม 10_01.png','pics/Pixel/icon/ผีรวม 10_02.png',
+  'pics/Pixel/icon/ผีรวม 10_10.png','pics/Pixel/icon/ผีรวม 10_11.png','pics/Pixel/icon/ผีรวม 10_12.png',
+  'pics/Pixel/icon/ผีรวม 10_20.png','pics/Pixel/icon/ผีรวม 10_21.png','pics/Pixel/icon/ผีรวม 10_22.png',
+  'pics/Pixel/icon/ผีรวม 11_00.png','pics/Pixel/icon/ผีรวม 11_01.png','pics/Pixel/icon/ผีรวม 11_02.png',
+  'pics/Pixel/icon/ผีรวม 11_10.png','pics/Pixel/icon/ผีรวม 11_11.png','pics/Pixel/icon/ผีรวม 11_12.png',
+  'pics/Pixel/icon/ผีรวม 11_20.png','pics/Pixel/icon/ผีรวม 11_21.png','pics/Pixel/icon/ผีรวม 11_22.png',
+];
+const GHOST_PHRASES = [
+  "แบร่~","หลอกจ้า","อ่านให้ครบสิ","มาตรานี้ออกสอบนะ","เปิดฎีกาด้วย","จำผิดแล้ว","วรรคสองล่ะ?","ยังไม่จบ","อ่านใหม่","ข้ามไม่ได้",
+  "ตกแน่","สอบพรุ่งนี้แล้ว","ตีความสิ","อ้างมาตราให้ครบ","อย่ามั่ว","ฟ้องได้ไหม?","โมฆะนะ","เป็นโมฆียะ!","สิทธิของใคร?","หน้าที่ของใคร?",
+  "พิสูจน์ก่อน","ภาระการพิสูจน์อยู่ไหน?","ข้อเท็จจริงไม่พอ","กฎหมายใช้ไม่ได้","คนละฐาน","คนละกรณี","คำตอบยังไม่ครบ","ลืมข้อยกเว้น","มีบทเฉพาะกาล","ระวังมาตราแฝง",
+  "คิดใหม่","อ่านเชิงระบบ","อย่าท่องอย่างเดียว","เหตุผลล่ะ?","ฎีกาว่าไง?","อาจารย์ชอบถาม","อย่าปิดไฟ","ผีอ่านด้วย","ขอนั่งข้าง ๆ","พลิกหน้าเร็ว",
+  "หน้านี้สำคัญ","จำให้ได้","อย่าหลับ","อีกบทเดียว","อีกมาตราเดียว","อีกฎีกาเดียว","ตีสองแล้วนะ","กาแฟหมดแล้ว","น้ำแดงมีไหม?","กุมารหิว",
+  "ศาลยังไม่หลับ","ผู้พิพากษามองอยู่","เนติรออยู่","ธงคำตอบอยู่ไหน?","อย่าตอบกำปั้นทุบดิน","อย่าเดา","เขียนให้ครบองค์ประกอบ","หลักก่อน ข้อยกเว้นทีหลัง","อย่าลืมนิยาม","อ่านมาตราเต็ม",
+];
+let ghostEl = null, ghostRotateTimer = null, ghostPulseTimer = null, ghostIndex = 0;
+let ghostSpeechEl = null, ghostSpeechTimer = null;
+function ensureGhostSpeechEl(){
+  if (ghostSpeechEl) return ghostSpeechEl;
+  const el = document.createElement('div');
+  el.className = 'ghost-speech';
+  document.body.appendChild(el);
+  ghostSpeechEl = el; return el;
+}
+function showGhostSpeech(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const ghost = ensureGhostEl();
+  const bubble = ensureGhostSpeechEl();
+  bubble.textContent = GHOST_PHRASES[Math.floor(Math.random() * GHOST_PHRASES.length)];
+  const rect = ghost.getBoundingClientRect();
+  bubble.style.right = (window.innerWidth - rect.right) + 'px';
+  bubble.style.bottom = (window.innerHeight - rect.top + 10) + 'px';
+  bubble.classList.add('visible');
+  clearTimeout(ghostSpeechTimer);
+  ghostSpeechTimer = setTimeout(() => bubble.classList.remove('visible'), 2600);
+  pulseGhost();
+  playHooSound();
+}
+function ensureGhostEl(){
+  if (ghostEl) return ghostEl;
+  const img = document.createElement('img');
+  img.src = GHOST_IMAGES[0]; img.alt = ''; img.setAttribute('aria-hidden', 'true'); img.className = 'ghost-companion';
+  img.addEventListener('mouseenter', showGhostSpeech);
+  img.addEventListener('click', showGhostSpeech);
+  document.body.appendChild(img); ghostEl = img; return img;
+}
+function startGhostRotation(){
+  const el = ensureGhostEl(); ghostIndex = 0; el.src = GHOST_IMAGES[ghostIndex]; el.classList.add('visible');
+  clearInterval(ghostRotateTimer); ghostRotateTimer = setInterval(rotateGhost, 5000);
+}
+function rotateGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl(); ghostIndex = (ghostIndex + 1) % GHOST_IMAGES.length;
+  el.style.opacity = '0.15';
+  setTimeout(() => { el.src = GHOST_IMAGES[ghostIndex]; el.style.opacity = ''; }, 220);
+  playHooSound();
+}
+function stopGhostRotation(){
+  clearInterval(ghostRotateTimer); ghostRotateTimer = null;
+  if (ghostEl) { ghostEl.classList.remove('visible'); ghostEl.style.opacity = ''; }
+}
+function pulseGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl(); el.classList.add('pulse');
+  clearTimeout(ghostPulseTimer); ghostPulseTimer = setTimeout(() => el.classList.remove('pulse'), 350);
+}
+document.addEventListener('input', (e) => {
+  const t = e.target;
+  if (!t) return;
+  if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || (t.classList && t.classList.contains('note-input'))) pulseGhost();
+});
+let __ghostAudioCtx;
+function playHooSound(){
+  try{
+    __ghostAudioCtx = __ghostAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __ghostAudioCtx;
+    if (c.state === 'suspended') c.resume();
+    const t0 = c.currentTime, dur = 1.6;
+    const baseFreq = 180 + Math.random() * 50;
+    const osc = c.createOscillator(); osc.type = 'sine'; osc.frequency.setValueAtTime(baseFreq, t0);
+    const lfo = c.createOscillator(); lfo.type = 'sine'; lfo.frequency.setValueAtTime(4.2, t0);
+    const lfoGain = c.createGain(); lfoGain.gain.setValueAtTime(6, t0);
+    lfo.connect(lfoGain); lfoGain.connect(osc.frequency);
+    const mainGain = c.createGain();
+    mainGain.gain.setValueAtTime(0.0001, t0);
+    mainGain.gain.exponentialRampToValueAtTime(0.035, t0 + 0.55);
+    mainGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    const bufferSize = Math.floor(c.sampleRate * dur);
+    const noiseBuffer = c.createBuffer(1, bufferSize, c.sampleRate);
+    const data = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+    const noise = c.createBufferSource(); noise.buffer = noiseBuffer;
+    const noiseFilter = c.createBiquadFilter();
+    noiseFilter.type = 'bandpass'; noiseFilter.frequency.setValueAtTime(baseFreq * 1.6, t0); noiseFilter.Q.setValueAtTime(0.7, t0);
+    const noiseGain = c.createGain();
+    noiseGain.gain.setValueAtTime(0.0001, t0);
+    noiseGain.gain.exponentialRampToValueAtTime(0.01, t0 + 0.55);
+    noiseGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    osc.connect(mainGain); mainGain.connect(c.destination);
+    noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(c.destination);
+    osc.start(t0); osc.stop(t0 + dur);
+    lfo.start(t0); lfo.stop(t0 + dur);
+    noise.start(t0); noise.stop(t0 + dur);
+  } catch(e){}
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  updateThemeToggleUI(current);
+  if (current === 'horror') { playHorrorBgm(); startGhostRotation(); scheduleDogHowl(); }
+  const droneMuteBtn = document.getElementById('drone-mute-btn');
+  if (droneMuteBtn) {
+    let muted = false;
+    try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+    droneMuteBtn.textContent = muted ? '🔇' : '🔊';
+  }
+  ['click','touchstart','keydown'].forEach(evt => {
+    document.addEventListener(evt, function resumeBgmOnce(){
+      const bgm = document.getElementById('horror-bgm');
+      if (document.documentElement.getAttribute('data-theme') === 'horror' && bgm && bgm.paused) playHorrorBgm();
+      ['click','touchstart','keydown'].forEach(e2 => document.removeEventListener(e2, resumeBgmOnce));
+    }, { once: true });
+  });
+});
+</script>
+</body>
+</html>
