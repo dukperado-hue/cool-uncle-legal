@@ -453,6 +453,8 @@ const SPRITES = {
   patron_three:       { emoji: '👨', color: '#9CDCB4' },
   patron_four:        { emoji: '🧑‍🦱', color: '#D9A8E8' },
   patron_five:        { emoji: '🧓', color: '#B8977A' },
+  rural_uncle:        { emoji: '🧑‍🌾', color: '#B98B54' },
+  delinquent:         { emoji: '👦', color: '#5C6BC0' },
 };
 /* Court personnel are a fixed reusable cast (not tied to any one scenario's
    `characters` map) so future scenarios can reference them without redefining
@@ -467,6 +469,7 @@ const BACKGROUNDS = {
   zoo_pool:         { emoji: '🌴', gradient: 'linear-gradient(180deg,#CDEBD9 0%,#8FCBA8 55%,#4F8E6C 100%)' },
   courtroom:        { emoji: '⚖️', gradient: 'linear-gradient(180deg,#EFE3C4 0%,#D6C295 55%,#9C8355 100%)' },
   shabu_restaurant: { emoji: '🍲', gradient: 'linear-gradient(180deg,#FCE8C7 0%,#E8B975 55%,#A9713A 100%)' },
+  logging_truck_accident: { emoji: '🪵', gradient: 'linear-gradient(180deg,#3B3226 0%,#241C14 55%,#120D08 100%)' },
 };
 function spritePath(id){ return 'pics/game/sprites/' + id + '.png'; }
 function standeePath(id){ return 'pics/game/standees/' + id + '.png'; }
@@ -503,8 +506,12 @@ function renderSpriteAvatarHTML(spriteId){
 }
 function renderStageBgHTML(bgId){
   const bg = BACKGROUNDS[bgId] || { emoji: '🖼️', gradient: '#ddd' };
+  const jpgPath = bgPath(bgId);
+  const pngPath = jpgPath.replace(/\.jpg$/, '.png');
+  /* background files were generated in a mix of .jpg (batch 1) / .png (batch 2)
+     per character — try .jpg first, fall back to .png, then the emoji/gradient. */
   return `<div class="stage-bg-emoji">${bg.emoji}</div>`
-       + `<img class="stage-bg-img" src="${bgPath(bgId)}" alt="" onerror="this.remove()">`;
+       + `<img class="stage-bg-img" src="${jpgPath}" alt="" onerror="this.onerror=function(){this.remove()};this.src='${pngPath}';">`;
 }
 
 /* ================================================================
@@ -844,6 +851,64 @@ const SCENARIOS = [
       { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: ความรับผิดทั้งหมดตกอยู่ที่นายสองแต่ผู้เดียวค่ะ' },
 
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ศาลได้พิจารณาครบทุกข้อกล่าวหาแล้ว ขอบคุณทุกฝ่ายที่มาให้ปากคำในวันนี้ — ปิดการพิจารณาคดี' },
+    ],
+  },
+  {
+    id: 'logging-truck-case',
+    icon: '🪵',
+    title: 'คดีไม้ซุงหล่นกลางถนน',
+    blurb: 'รถบรรทุกไม้ซุงหลบสุนัขจนไม้ซุงหล่นขวางถนนยามค่ำคืน แล้วไม่รีบเตือนใคร — ต้องรับผิดแค่ไหน?',
+    characters: {
+      rural_uncle: { name: 'ลุงเปี๊ยก' },
+      delinquent:  { name: 'นายซิ่ง' },
+    },
+    bg: 'logging_truck_accident',
+    beats: [
+      { caption: 'ลุงเปี๊ยก พนักงานขับรถบรรทุกของบริษัทขนส่งไม้ซุง ขับรถบรรทุกไม้ซุงเต็มคันบนถนนสายรองในยามค่ำคืน มุ่งหน้ากลับโรงเลื่อย',
+        actors: [ { id:'rural_uncle', x:40, active:true } ] },
+      { caption: 'จู่ ๆ มีสุนัขจรจัดวิ่งตัดหน้ารถกะทันหัน ลุงเปี๊ยกจำเป็นต้องหักหลบอย่างกะทันหันเพื่อไม่ให้ชนสุนัข',
+        actors: [ { id:'rural_uncle', x:40, active:true, pose:'😨' } ],
+        sfx:'dragon-studio-barking-dog-cute-sound-463192.mp3' },
+      { caption: 'แรงหักหลบทำให้เชือกที่รัดไม้ซุงหลุด ไม้ซุงหลายท่อนหล่นกระจายลงมาขวางเต็มถนน',
+        actors: [ { id:'rural_uncle', x:40, active:true, pose:'😱' } ] },
+      { caption: 'ลุงเปี๊ยกจอดรถลงมาดู เห็นว่าตัวเองปลอดภัยดี จึงรีบโทรศัพท์แจ้งบริษัทและขอความช่วยเหลือ แต่มัวคุยโทรศัพท์อยู่นาน โดยไม่รีบทำเครื่องหมายหรือสัญญาณเตือนผู้ใช้ทางคนอื่นเลย',
+        actors: [ { id:'rural_uncle', x:40, active:true, pose:'📱' } ] },
+      { caption: 'นายซิ่ง ขี่รถจักรยานยนต์มาตามถนนสายเดียวกันในความมืด ไม่มีสัญญาณเตือนใด ๆ ให้เห็นกองไม้ซุงที่ขวางอยู่ข้างหน้า',
+        actors: [ { id:'delinquent', x:65, active:true }, { id:'rural_uncle', x:30, pose:'📱' } ] },
+      { caption: 'นายซิ่งพุ่งชนกองไม้ซุงเต็มแรงในความมืด ล้มกระเด็นได้รับบาดเจ็บสาหัส',
+        actors: [ { id:'delinquent', x:55, active:true, pose:'🤕' } ],
+        sfx:'universfield-male-falling-scream-326183.mp3' },
+      { caption: 'ลุงเปี๊ยกวางสายโทรศัพท์ลงพอดี เห็นเหตุการณ์ตรงหน้า จึงรีบวิ่งเข้าไปช่วยเหลือและโทรแจ้งรถพยาบาลทันที — แต่ความช่วยเหลือมาช้าไปเสียแล้ว',
+        actors: [ { id:'rural_uncle', x:35, active:true, pose:'😨' }, { id:'delinquent', x:60, pose:'🤕' } ],
+        sfx:'freesound_community-heart-monitor-beep-96554.mp3' },
+    ],
+    comprehension: { question: 'เข้าใจโจทย์ไหม?' },
+    courtroomBg: 'courtroom',
+    questions: [
+      {
+        defendantSprite: 'rural_uncle',
+        defendantName: 'ลุงเปี๊ยก',
+        act: 'ลุงเปี๊ยกหักหลบสุนัขจนไม้ซุงหล่นขวางถนน แต่มัวแต่โทรศัพท์ขอความช่วยเหลือโดยไม่รีบทำเครื่องหมายเตือนผู้ใช้ทาง จนนายซิ่งขี่รถจักรยานยนต์มาชนไม้ซุงได้รับบาดเจ็บสาหัสในความมืด',
+        options: [
+          { text: 'ไม่มีความผิดเพราะไม่ได้ตั้งใจให้ไม้ซุงหล่น', correct: false },
+          { text: 'มีความผิดฐานกระทำโดยประมาทเป็นเหตุให้ผู้อื่นรับอันตรายสาหัสตาม ม.59 วรรคห้า (งดเว้น) ประกอบ ม.300 เพราะมีหน้าที่ต้องป้องกันอันตรายที่เกิดจากไม้ซุงที่ตนทำหล่น แต่งดเว้นไม่รีบทำเครื่องหมายเตือน', correct: true },
+          { text: 'มีความผิดฐานทำร้ายร่างกายโดยเจตนา', correct: false },
+          { text: 'ไม่มีความผิดเพราะเป็นเหตุสุดวิสัยที่สุนัขวิ่งตัดหน้า', correct: false },
+        ],
+        reveal: 'แม้การที่ไม้ซุงหล่นครั้งแรกจะไม่ใช่ความผิดของลุงเปี๊ยก (หลบสุนัขโดยจำเป็น) แต่เมื่อไม้ซุงตกขวางถนนแล้ว ลุงเปี๊ยกย่อมมีหน้าที่ตามวิสัยที่ควรกระทำเพื่อป้องกันอันตรายที่อาจเกิดแก่ผู้ใช้ทางคนอื่น การไม่รีบทำเครื่องหมายเตือนจึงเป็นการงดเว้นตาม ม.59 วรรคห้า และเป็นความประมาท เพราะย่อมคาดหมายได้ว่าจะมีรถมาชนในที่มืด',
+      },
+    ],
+    trial: [
+      { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ศาลนี้นัดพิจารณาคดีไม้ซุงหล่นขวางถนนยามค่ำคืน เป็นเหตุให้มีผู้บาดเจ็บสาหัส — เริ่มพิจารณาข้อกล่าวหาต่อลุงเปี๊ยก พนักงานขับรถบรรทุกไม้ซุง' },
+      { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ข้อเท็จจริง: ลุงเปี๊ยกหักหลบสุนัขจนไม้ซุงหล่นขวางถนน แต่มัวแต่โทรศัพท์ขอความช่วยเหลือโดยไม่รีบทำเครื่องหมายเตือนผู้ใช้ทาง จนนายซิ่งขี่รถจักรยานยนต์มาชนไม้ซุงได้รับบาดเจ็บสาหัสในความมืด' },
+      { type:'dialogue', speaker:'prosecutor', pose:'confident', caption:'อัยการ: จำเลยเป็นต้นเหตุของไม้ซุงที่หล่นขวางถนน ต้องรับผิดต่อความบาดเจ็บสาหัสของผู้เสียหายอย่างเต็มที่!' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! ลูกความดิฉันจำเป็นต้องหักหลบสุนัขที่วิ่งตัดหน้า ไม่ได้ตั้งใจให้ไม้ซุงหล่นเลยแม้แต่น้อย' },
+      { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ท่านผู้ตัดสิน — กรณีนี้ควรวินิจฉัยอย่างไร?' },
+      { type:'question', qIndex: 0 },
+      { type:'dialogue', speaker:'prosecutor', pose:'confident', caption:'อัยการ: ศาลว่าตามนั้น — จุดที่ทำให้จำเลยต้องรับผิดคือการไม่รีบทำเครื่องหมายเตือนหลังไม้ซุงหล่นแล้วต่างหาก ไม่ใช่ตอนหักหลบสุนัข' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'sad', caption:'ทนายจำเลย: (ถอนหายใจ) ...ยอมรับค่ะ ลูกความดิฉันมีหน้าที่ต้องเตือนแล้วไม่ได้ทำจริง ๆ' },
+      { type:'dialogue', speaker:'courtroom_cat', pose:'neutral', caption:'(แมวศาลเดินมานั่งขดตัวอยู่บนแท่นพยานเฉย ๆ ราวกับไม่มีอะไรเกิดขึ้น)' },
+      { type:'dialogue', speaker:'judge', pose:'confident', caption:'ผู้พิพากษา: (อดยิ้มไม่ได้) เอาล่ะ... ศาลได้พิจารณาข้อกล่าวหาแล้ว ขอบคุณทุกฝ่ายที่มาให้ปากคำในวันนี้ — ปิดการพิจารณาคดี' },
     ],
   },
 ];
