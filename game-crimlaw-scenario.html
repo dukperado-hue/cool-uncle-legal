@@ -134,6 +134,18 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 }
 
 /* ===== PICKER ===== */
+.category-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.category-tab{
+  border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
+  border-radius:999px;padding:6px 14px;font-size:13px;font-weight:700;
+  cursor:pointer;font-family:inherit;transition:all .15s;
+}
+.category-tab:hover{border-color:var(--gold)}
+.category-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.category-empty{
+  text-align:center;color:var(--ink-faint);font-size:13px;
+  padding:32px 16px;border:1.5px dashed var(--line);border-radius:var(--radius);margin-top:12px;
+}
 .scenario-list{display:flex;flex-direction:column;gap:12px;margin-top:8px}
 .scenario-card{
   display:flex;align-items:center;gap:14px;text-align:left;
@@ -538,6 +550,7 @@ function renderStageBgHTML(bgId){
 const SCENARIOS = [
   {
     id: 'zoo-hippo-case',
+    category: 'criminal',
     icon: '🦛',
     title: 'คดีที่สวนสัตว์',
     blurb: 'สถานการณ์อาญาที่สวนสัตว์เปิด — วิเคราะห์ว่าใครมีความผิดฐานใดบ้าง',
@@ -700,6 +713,7 @@ const SCENARIOS = [
   },
   {
     id: 'shabu-football-case',
+    category: 'criminal',
     icon: '🍲',
     title: 'คดีร้านชาบูวันแดงเดือด',
     blurb: 'ศึกลิเวอร์พูล-แมนยูลามจากโต๊ะชาบูสู่ห้องพิจารณาคดี — ใครผิดฐานอะไรบ้าง?',
@@ -871,6 +885,7 @@ const SCENARIOS = [
   },
   {
     id: 'logging-truck-case',
+    category: 'criminal',
     icon: '🪵',
     title: 'คดีไม้ซุงหล่นกลางถนน',
     blurb: 'รถบรรทุกไม้ซุงหลบสุนัขจนไม้ซุงหล่นขวางถนนยามค่ำคืน แล้วไม่รีบเตือนใคร — ต้องรับผิดแค่ไหน?',
@@ -929,6 +944,7 @@ const SCENARIOS = [
   },
   {
     id: 'mistaken-identity-brawl-case',
+    category: 'criminal',
     icon: '🏍️',
     title: 'คดีรุมทำร้ายเข้าใจผิดตัวบุคคล',
     blurb: 'ขี่มอเตอร์ไซค์ไปหาเรื่องโรงเรียนคู่อริ แต่ทำร้ายผิดคน แล้วมีคนชักปืนช่วย กระสุนพลาดไปโดนตำรวจ — ใครรับผิดแค่ไหน?',
@@ -1056,6 +1072,7 @@ const SCENARIOS = [
   },
   {
     id: 'mistaken-intruder-shooting-case',
+    category: 'criminal',
     icon: '🌙',
     title: 'คดียิงคนร้ายเข้าใจผิดเป็นภรรยาตนเอง',
     blurb: 'ยิงป้องกันคนร้ายบุกบ้านยามดึก แต่แท้จริงคือภรรยาตนเอง — สำคัญผิดโดยมีมูล จะพ้นผิดได้หรือไม่?',
@@ -1113,6 +1130,7 @@ const SCENARIOS = [
   },
   {
     id: 'house-sale-promise-case',
+    category: 'civil',
     icon: '🔑',
     title: 'คดีคำมั่นซื้อบ้านเลขที่ 230',
     blurb: 'ตกลงซื้อขายบ้านด้วยวาจา วางมัดจำหมื่นบาท แล้วเบี้ยวไม่ทำสัญญาตามนัด — เป็นคำมั่นหรือสัญญาจะซื้อจะขาย ฟ้องร้องบังคับคดีได้ไหม?',
@@ -1189,8 +1207,18 @@ const SCENARIOS = [
 /* ================================================================
    ENGINE — data-driven, generic across any SCENARIOS entry.
    ================================================================ */
+/* Category tabs for the picker — one shared engine/state/scoring system
+   underneath every tab, this only filters which SCENARIOS[] cards show. */
+const CATEGORIES = [
+  { id: 'all',     label: 'รวม' },
+  { id: 'civil',   label: 'แพ่ง' },
+  { id: 'criminal',label: 'อาญา' },
+  { id: 'civpro',  label: 'วิแพ่ง' },
+  { id: 'crimpro', label: 'วิอาญา' },
+];
 const state = {
   screen: 'picker',   // picker | scene | comprehension | recap | courtroom | results
+  pickerCategory: 'all',
   scenario: null,
   beatIndex: 0,
   trialIndex: 0,
@@ -1227,11 +1255,22 @@ function render(){
 }
 
 /* ---------- PICKER ---------- */
+function setPickerCategory(cat){
+  state.pickerCategory = cat;
+  render();
+}
 function renderPicker(){
+  const cat = state.pickerCategory;
+  const filtered = cat === 'all' ? SCENARIOS : SCENARIOS.filter(s => s.category === cat);
   root.innerHTML = `
+    <div class="category-tabs">
+      ${CATEGORIES.map(c => `
+        <button type="button" class="category-tab${c.id === cat ? ' active' : ''}" onclick="setPickerCategory('${c.id}')" onmouseenter="playHoverSound()">${esc(c.label)}</button>
+      `).join('')}
+    </div>
     <div class="scenario-list">
-      ${SCENARIOS.map((s, i) => `
-        <button type="button" class="scenario-card" onclick="startScenario(SCENARIOS[${i}])" onmouseenter="playHoverSound()">
+      ${filtered.map((s) => `
+        <button type="button" class="scenario-card" onclick="startScenario(SCENARIOS[${SCENARIOS.indexOf(s)}])" onmouseenter="playHoverSound()">
           <div class="sc-icon">${s.icon}</div>
           <div class="sc-text">
             <div class="sc-title">${esc(s.title)}</div>
@@ -1240,6 +1279,7 @@ function renderPicker(){
           <div class="sc-go">▶</div>
         </button>
       `).join('')}
+      ${filtered.length === 0 ? `<div class="category-empty">ยังไม่มีสถานการณ์ในหมวดนี้ — กำลังจะมาเพิ่มเรื่อย ๆ 🚧</div>` : ''}
       <div class="scenario-card disabled">
         <div class="sc-icon">➕</div>
         <div class="sc-text">
