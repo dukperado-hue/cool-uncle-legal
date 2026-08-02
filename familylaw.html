@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;900&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-<style>
 :root{
   --paper:#FBF9F4;
   --card:#FDFCF8;
@@ -23,26 +22,34 @@
   --bad:#B23A3A;
   --bad-bg:#FBEAEA;
   --accent:#2E4A7A;
+  --accent-soft:#EEF2F9;
   --radius:14px;
   --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+  --hero-glow:#F2EDDF;
+  --on-light-ink:#22283A;
+  --on-light-ink-soft:#5A6072;
+  --on-light-ink-faint:#9AA0B0;
 }
 
 /* ============ THEME: DARK ============ */
 :root[data-theme="dark"]{
   --paper:#14161f;--card:#1c2030;--ink:#E9E7E1;--ink-soft:#A9AEC2;--ink-faint:#6C7188;
   --line:#2E3348;--gold:#E0BD73;--gold-soft:#3A3320;--ok:#4FCB8D;--ok-bg:#173425;
-  --bad:#E2685F;--bad-bg:#3A1E1C;--accent:#84A6E8;
+  --bad:#E2685F;--bad-bg:#3A1E1C;--accent:#84A6E8;--accent-soft:#22304F;
   --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.45);
+  --hero-glow:#232742;
 }
 /* ============ THEME: HORROR (กระสือ mode) ============ */
 :root[data-theme="horror"]{
   --paper:#0A070C;--card:#151019;--ink:#D9D2C9;--ink-soft:#9C8F93;--ink-faint:#5C5460;
   --line:#2B1F26;--gold:#8F1F2B;--gold-soft:#301418;--ok:#3F7A4F;--ok-bg:#16241a;
-  --bad:#FF3355;--bad-bg:#301018;--accent:#4A8F5C;
+  --bad:#FF3355;--bad-bg:#301018;--accent:#4A8F5C;--accent-soft:#132A1A;
   --shadow:0 1px 2px rgba(0,0,0,.6),0 10px 28px rgba(0,0,0,.6);
+  --hero-glow:#1E1015;
 }
 :root[data-theme="dark"] body,:root[data-theme="horror"] body{background:var(--paper)}
 :root[data-theme="dark"] .home-bar,:root[data-theme="horror"] .home-bar{background:var(--card);border-bottom-color:var(--line)}
+:root[data-theme="dark"] .tabbar,:root[data-theme="horror"] .tabbar{background:var(--paper)}
 
 /* THEME TOGGLE */
 .theme-toggle{display:flex;gap:3px;margin-left:auto;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
@@ -106,7 +113,7 @@ html{-webkit-text-size-adjust:100%}
 .home-bar-sep{color:var(--ink-faint)}
 .home-bar-current{font-weight:600;color:var(--ink-soft)}
 .home-bar-score{
-  margin-left:auto;font-weight:800;color:#8F6511;background:var(--gold-soft);
+  margin-left:auto;font-weight:800;color:#8F6511;background:#F3E8CF;
   padding:4px 12px;border-radius:999px;font-size:13px;white-space:nowrap;
   transition:transform .15s;
 }
@@ -120,7 +127,7 @@ html{-webkit-text-size-adjust:100%}
 body{
   font-family:'Sarabun',system-ui,sans-serif;
   background:
-    radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),
+    radial-gradient(1200px 500px at 50% -200px, var(--hero-glow) 0%, transparent 60%),
     var(--paper);
   color:var(--ink);
   min-height:100vh;
@@ -197,8 +204,8 @@ body.has-sticky-bar{padding-bottom:92px}
 .irac-case-card .icprog{font-size:12.5px;color:var(--gold);margin-top:6px;font-weight:600}
 
 .irac-facts{
-  background:#FBF6E8;border:1px solid var(--gold-soft);border-radius:var(--radius);
-  padding:14px 16px;margin-bottom:6px;font-size:15px;line-height:1.85;color:var(--ink);
+  background:#FBF6E8;border:1px solid #F0D896;border-radius:var(--radius);
+  padding:14px 16px;margin-bottom:6px;font-size:15px;line-height:1.85;color:var(--on-light-ink);
   max-height:92px;overflow:hidden;position:relative;
 }
 .irac-facts::after{
@@ -208,14 +215,14 @@ body.has-sticky-bar{padding-bottom:92px}
 .irac-facts.expanded{max-height:none}
 .irac-facts.expanded::after{display:none}
 .irac-facts-toggle{
-  display:block;width:100%;text-align:center;font-size:13px;color:var(--accent);font-weight:600;
+  display:block;width:100%;text-align:center;font-size:13px;color:#2E4A7A;font-weight:600;
   background:none;border:none;padding:5px 0 14px;cursor:pointer;
 }
 
 .irac-stepper{display:flex;gap:5px;margin-bottom:8px}
 .irac-step{
-  flex:1;text-align:center;font-size:11px;font-weight:600;color:var(--ink-faint);
-  padding:5px 2px;border-radius:8px;background:#EEEBE0;border:1px solid transparent;
+  flex:1;text-align:center;font-size:11px;font-weight:600;color:var(--ink-soft);
+  padding:5px 2px;border-radius:8px;background:var(--line);border:1px solid transparent;
 }
 .irac-step.active{background:var(--accent);color:#fff}
 .irac-step.done{background:var(--ok-bg);color:var(--ok);border-color:#BFE3CE}
@@ -228,7 +235,8 @@ body.has-sticky-bar{padding-bottom:92px}
   background:var(--ok-bg);border:1px solid #BFE3CE;border-radius:var(--radius);
   padding:16px 18px;text-align:center;
 }
-.irac-issue-recap .big{font-family:'Noto Serif Thai',serif;font-size:18px;font-weight:700;color:#14563A;margin-bottom:6px}
+.irac-issue-recap .big{font-family:'Noto Serif Thai',serif;font-size:18px;font-weight:700;color:var(--ok);margin-bottom:6px}
+.irac-issue-recap{color:var(--ink)}
 
 /* ---------- stage banner (แถบธีมตามหมวด แทน SVG scene) ---------- */
 .stage{
@@ -276,8 +284,13 @@ select{
 }
 .flashcard.flipping{transform:rotateY(90deg)}
 @media (prefers-reduced-motion:reduce){.flashcard.flipping{transform:none}}
-/* ---------- flashcard สีหมวด ---------- */
-.flashcard[data-face="front"]{background:var(--card-soft,var(--card));border-top:4px solid var(--card-strong,var(--line))}
+/* ---------- flashcard สีหมวด ----------
+   front face keeps a fixed pastel category colour regardless of site theme
+   (JS-set --card-soft/--card-strong), so its text must stay fixed dark ink
+   too — otherwise dark/horror mode's light --ink text goes invisible on it */
+.flashcard[data-face="front"]{background:var(--card-soft,var(--card));border-top:4px solid var(--card-strong,var(--line));color:var(--on-light-ink)}
+.flashcard[data-face="front"] .src-tag{color:var(--on-light-ink-faint)}
+.flashcard[data-face="front"] .hint{color:var(--on-light-ink-faint)}
 .flashcard[data-face="back"]{background:var(--card-strong,var(--accent));border-top:none}
 .flashcard[data-face="back"] .card-title,
 .flashcard[data-face="back"] .card-result,
@@ -343,7 +356,7 @@ select{
   flex:1;border:1.5px solid var(--line);background:var(--card);border-radius:12px;
   padding:12px 8px;font-size:14.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
 }
-.lvlbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.lvlbar button.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
 .lvlbar .lvl-desc{display:block;font-size:12px;font-weight:400;color:var(--ink-faint);margin-top:2px}
 .lvlbar button.on .lvl-desc{color:var(--accent)}
 
@@ -353,14 +366,14 @@ select{
   padding:7px 15px;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
   display:inline-flex;align-items:center;gap:6px;
 }
-.setbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.setbar button.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
 .setbar .best{color:var(--gold);font-size:12px;font-weight:700}
 
-.progressbar{height:6px;background:#EDE9DD;border-radius:99px;overflow:hidden;margin-bottom:8px}
+.progressbar{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:8px}
 .progressbar>div{height:100%;background:linear-gradient(90deg,var(--accent),#5E7BB0);border-radius:99px;transition:width .3s}
 .quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:14px;gap:10px}
 .quiz-timer{
-  font-weight:700;color:var(--ink-soft);background:#EEEBE0;border-radius:999px;
+  font-weight:700;color:var(--ink-soft);background:var(--line);border-radius:999px;
   padding:3px 10px;font-size:13px;white-space:nowrap;
 }
 .quiz-timer.timer-fast{background:var(--ok-bg);color:var(--ok)}
@@ -394,8 +407,8 @@ select{
   display:none;margin-top:14px;border-radius:12px;padding:16px 18px;
   font-size:15px;line-height:1.85;border:1px solid;
 }
-.explain.ok{background:var(--ok-bg);border-color:#BFE3CE;color:#14563A}
-.explain.bad{background:var(--bad-bg);border-color:#F0C9C9;color:#7C2A2A}
+.explain.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.explain.bad{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
 .explain b{display:block;margin-bottom:4px;font-size:15.5px}
 .pts-earned{
   display:inline-block;background:var(--gold);color:#fff;font-weight:800;
@@ -426,31 +439,34 @@ footer{
 .view{display:none}
 .view.on{display:block}
 
-/* ---------- โหมด 5: สรุปเนื้อหา ---------- */
-.study-nav3{display:flex;gap:10px}
+/* ---------- โหมด 5: โหมดอ่าน (สรุปเนื้อหาบรรยาย) ---------- */
+.study-nav3{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .study-disclaimer{
   background:#FFF6E0;border:1px solid #F0D896;color:#7A5A0A;
   border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;
   text-align:center;margin-bottom:14px;
 }
+.study-progress{font-size:13px;color:var(--ink-faint);margin-bottom:12px}
 .study-nav3 button{
-  flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
-  padding:11px;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer;
+  flex:1 1 auto;min-width:120px;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:11px 8px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;
 }
 .study-nav3 button:hover{border-color:var(--ink-faint)}
+.study-nav3 button.on{border-color:var(--accent);color:#fff;background:var(--accent)}
 .study-panel{
   background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
   box-shadow:var(--shadow);padding:22px 24px;margin:14px 0;
 }
+@media(max-width:640px){.study-panel{padding:18px}}
 .study-title{
   font-family:'Noto Serif Thai',serif;font-size:19px;font-weight:700;color:var(--accent);
   margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid var(--gold-soft);
 }
 .study-toc{
-  background:#F6F3EA;border:1px solid var(--gold-soft);border-radius:12px;
+  background:var(--gold-soft);border:1px solid var(--line);border-radius:12px;
   padding:12px 14px;margin-bottom:22px;
 }
-.study-toc-label{font-size:12.5px;font-weight:700;color:var(--gold);margin-bottom:8px}
+.study-toc-label{font-size:12.5px;font-weight:700;color:var(--ink-soft);margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em}
 .study-toc-list{display:flex;flex-wrap:wrap;gap:6px 8px}
 .study-toc-item{
   font-size:12.5px;text-decoration:none;padding:5px 10px;border-radius:999px;
@@ -462,18 +478,18 @@ footer{
   background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700;
   flex-basis:100%;border-radius:8px;padding:7px 12px;
 }
-.study-toc-item.toc-major:hover{background:#26406B;color:#fff}
-.study-content{font-size:15px;line-height:1.9;color:var(--ink)}
+.study-toc-item.toc-major:hover{opacity:.88;color:#fff}
+.study-content{font-size:15.5px;line-height:1.95;color:var(--ink)}
 .study-content h4,.study-content h5,.study-content h6{
   font-family:'Noto Serif Thai',serif;color:var(--accent);line-height:1.5;
 }
-.study-content h4{font-size:18px;margin:40px 0 14px;padding-top:14px;border-top:1px solid var(--line)}
+.study-content h4{font-size:18px;margin:36px 0 14px;padding-top:14px;border-top:1px solid var(--line)}
 .study-content h4:first-child{margin-top:0;padding-top:0;border-top:none}
-.study-content h5{font-size:16.5px;margin:30px 0 10px}
-.study-content h6{font-size:15.5px;color:var(--gold);margin:22px 0 8px}
-.study-content p{margin:8px 0}
-.study-content ul,.study-content ol{margin:6px 0 10px 22px}
-.study-content li{margin:4px 0}
+.study-content h5{font-size:16.5px;margin:26px 0 10px}
+.study-content h6{font-size:15.5px;color:var(--gold);margin:20px 0 8px}
+.study-content p{margin:10px 0;color:var(--ink-soft)}
+.study-content ul,.study-content ol{margin:8px 0 12px 22px;color:var(--ink-soft)}
+.study-content li{margin:5px 0}
 .study-content b{color:var(--ink);font-weight:700}
 .study-content hr{border:none;border-top:1px dashed var(--line);margin:18px 0}
 .study-content a{color:var(--accent)}
@@ -483,8 +499,16 @@ footer{
 .study-content th,.study-content td{
   border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;
 }
-.study-content th{background:var(--gold-soft);color:#5A4415;font-weight:700}
-.study-content tr:nth-child(even) td{background:#FBF9F3}
+.study-content th{background:var(--gold-soft);color:var(--ink);font-weight:700}
+.study-content tr:nth-child(even) td{background:rgba(176,138,60,.08)}
+.study-exam-box{
+  background:var(--gold-soft);border:1.5px solid var(--gold);border-radius:var(--radius);
+  padding:18px 20px;margin:22px 0;
+}
+.study-exam-box h5{margin-top:0;color:var(--ink);font-size:15px}
+.study-exam-box p{font-size:14.5px;line-height:1.9;color:var(--ink-soft);margin:8px 0 0}
+.study-exam-box ul,.study-exam-box ol{font-size:14.5px;line-height:1.9;color:var(--ink-soft);margin:8px 0 0 20px}
+.study-exam-box li{margin-bottom:6px}
 @media(max-width:640px){
   .tabbar{flex-wrap:wrap;border-radius:16px;max-width:100%}
   .tabbar button{flex:1 1 30%}
@@ -513,8 +537,6 @@ footer{
 .coffee-widget a.coffee-btn:hover{transform:scale(1.04)}
 .coffee-widget p{margin:0;font-size:12px;color:var(--ink-faint);text-align:center}
 .coffee-widget .data-source-note a{color:inherit}
-</style>
-
 </style>
 </head>
 <body>
@@ -577,6 +599,7 @@ function playHoverSound(){
   <button id="tab-seq">เรียงมาตรา</button>
   <button id="tab-quiz">วิเคราะห์โจทย์</button>
   <button id="tab-irac">ฝึก IRAC</button>
+  <button id="tab-study">📖 โหมดอ่าน</button>
   <button id="tab-order" style="display:none">เรียงขั้นตอน</button>
   <button id="btn-sound" title="ปิด/เปิดเสียง" aria-label="ปิด/เปิดเสียง">🔊</button>
   <button id="btn-reset" title="รีเซ็ตทั้งหมด" aria-label="รีเซ็ตทั้งหมด">↺</button>
@@ -691,7 +714,7 @@ function playHoverSound(){
     <div id="irac-recap-box" style="display:none">
       <div class="irac-issue-recap">
         <div class="big" id="irac-recap-title"></div>
-        <div id="irac-recap-text" style="font-size:14.5px;line-height:1.8;color:#14563A"></div>
+        <div id="irac-recap-text" style="font-size:14.5px;line-height:1.8;color:var(--ok)"></div>
       </div>
     </div>
   </div>
@@ -732,6 +755,14 @@ function playHoverSound(){
       <button id="order-nextcase" class="btn-primary" style="display:none">ข้อถัดไป →</button>
     </div>
   </div>
+</section>
+
+<!-- ============ โหมด 6: โหมดอ่าน (สรุปเนื้อหาบรรยาย) ============ -->
+<section id="view-study" class="view">
+  <div class="study-disclaimer">⚠️ สรุปจากคำบรรยายผ่าน NotebookLM — ใช้ประกอบการอ่านตำราหลักเท่านั้น</div>
+  <div class="study-progress" id="study-progress"></div>
+  <div class="study-nav3" id="study-nav"></div>
+  <div class="study-panel" id="study-panel"></div>
 </section>
 
 <div class="coffee-widget">
@@ -1345,6 +1376,221 @@ const IRAC_CASES = [
 ];
 
 const ORDER_CASES = []; /* วิชานี้เป็นสารบัญญัติ ไม่มีโหมดเรียงขั้นตอน */
+
+/* โหมดอ่าน — สรุปเนื้อหาบรรยาย 6 หมวด (จาก NotebookLM "กฎหมายครอบครัว") */
+const SUMMARY_TOPICS = [
+{
+  id: "s1_betroth", label: "๑) การหมั้น", cat: "betroth",
+  toc: [
+    {id:"s1-h1", text:"โครงสร้างกฎหมายครอบครัว (บรรพ 5)"},
+    {id:"s1-h2", text:"จุดเปลี่ยนจากสมรสเท่าเทียม 2567"},
+    {id:"s1-h3", text:"เงื่อนไขของการหมั้น"},
+    {id:"s1-h4", text:"ของหมั้นและสินสอด"},
+    {id:"s1-h5", text:"ผิดสัญญาหมั้น & ค่าทดแทน"},
+    {id:"s1-h6", text:"อายุความ"}
+  ],
+  html: `
+<h4 id="s1-h1">โครงสร้างของกฎหมายครอบครัว (ป.พ.พ. บรรพ 5)</h4>
+<p>บรรพ 5 ว่าด้วย "ครอบครัว" จัดระเบียบความสัมพันธ์ของบุคคลตั้งแต่เริ่มต้นสร้างครอบครัวไปจนถึงสิ้นสุดความสัมพันธ์ แบ่งเป็น 3 ลักษณะหลัก:</p>
+<ul>
+<li><b>ลักษณะ 1 การสมรส</b> — ตั้งแต่การหมั้น เงื่อนไขความสมบูรณ์ของการสมรส ความสัมพันธ์และทรัพย์สินระหว่างคู่สมรส ความเป็นโมฆะ/โมฆียะ ไปจนถึงการสิ้นสุดการสมรส (ตาย/หย่า)</li>
+<li><b>ลักษณะ 2 บิดามารดากับบุตร</b> — ข้อสันนิษฐานความเป็นบุตรชอบด้วยกฎหมาย สิทธิหน้าที่และอำนาจปกครองบุตร ความปกครอง และบุตรบุญธรรม</li>
+<li><b>ลักษณะ 3 ค่าอุปการะเลี้ยงดู</b> — สิทธิเรียกร้องค่าอุปการะเลี้ยงดู/ค่าเลี้ยงชีพระหว่างบุคคลในครอบครัว</li>
+</ul>
+<p class="muted">เกมนี้จัดกลุ่มเนื้อหาทั้ง 3 ลักษณะออกเป็น 6 หมวดตามลำดับที่ควรอ่าน</p>
+
+<h4 id="s1-h2">จุดเปลี่ยนสำคัญจากกฎหมายสมรสเท่าเทียม พ.ศ. 2567</h4>
+<p>พ.ร.บ.แก้ไขเพิ่มเติม ป.พ.พ. (ฉบับที่ 24) พ.ศ. 2567 แก้ถ้อยคำและหลักการทั่วทั้งบรรพ 5 เพื่อรองรับสิทธิก่อตั้งครอบครัวของบุคคลทุกเพศ จุดที่ต้องจำ:</p>
+<ul>
+<li><b>ปรับถ้อยคำเป็นกลางทางเพศ:</b> "ชาย/หญิง" → "บุคคล/บุคคลทั้งสองฝ่าย", "ฝ่ายชาย/ฝ่ายหญิง" (หมั้น) → "ผู้หมั้น/ผู้รับหมั้น", "สามีภริยา" → "คู่สมรส" ตลอดทั้งบรรพ</li>
+<li><b>อายุขั้นต่ำเพิ่มจาก 17 เป็น 18 ปีบริบูรณ์</b> ทั้งการหมั้น (ม.1435) และการสมรส (ม.1448) ให้สอดคล้องอนุสัญญาสิทธิเด็ก</li>
+<li><b>ความเสมอภาคเต็มรูปแบบ:</b> คู่สมรสทุกเพศมีสิทธิหน้าที่เท่ากันทุกประการ ทั้งมรดกทายาทโดยธรรม การจัดการสินสมรส การรับบุตรบุญธรรมร่วมกัน และฟ้องเรียกค่าทดแทนจากชู้โดยไม่จำกัดเพศของชู้</li>
+<li>กฎหมาย/ระเบียบอื่นที่อ้างถึง "สามีภริยา" ให้ถือว่ารวม "คู่สมรส" ตามกฎหมายใหม่ด้วย เว้นแต่มีกฎหมายเฉพาะระบุไว้ต่างกัน</li>
+</ul>
+
+<h4 id="s1-h3">เงื่อนไขของการหมั้น (ม.1435–1436)</h4>
+<p><b>ม.1435:</b> การหมั้นทำได้เมื่อบุคคลทั้งสองฝ่ายมีอายุ 18 ปีบริบูรณ์แล้ว ฝ่าฝืนตกเป็น <b>"โมฆะ"</b></p>
+<p><b>ม.1436:</b> ผู้เยาว์ทำการหมั้นต้องได้รับความยินยอมของบิดามารดา/ผู้รับบุตรบุญธรรม/ผู้ปกครอง ถ้าไม่ได้รับความยินยอมตกเป็น <b>"โมฆียะ"</b></p>
+
+<h4 id="s1-h4">ของหมั้นและสินสอด (ม.1437)</h4>
+<p>การหมั้นสมบูรณ์เมื่อ "ฝ่ายผู้หมั้น" ส่งมอบหรือโอนทรัพย์สินอันเป็น <b>ของหมั้น</b> ให้แก่ "ผู้รับหมั้น" — ของหมั้นตกเป็นสิทธิแก่ผู้รับหมั้นทันที</p>
+<p><b>สินสอด</b> (ม.1437 ว.3) คือทรัพย์สินที่ฝ่ายผู้หมั้นให้แก่บิดามารดา/ผู้รับบุตรบุญธรรม/ผู้ปกครองฝ่ายผู้รับหมั้น เพื่อตอบแทนการที่ผู้รับหมั้นยอมสมรส หากไม่มีการสมรสโดยเหตุสำคัญอันเกิดแก่ผู้รับหมั้น ฝ่ายผู้หมั้นเรียกสินสอดคืนได้</p>
+
+<h4 id="s1-h5">ผิดสัญญาหมั้นและค่าทดแทน (ม.1438–1446)</h4>
+<p>การหมั้นไม่เป็นเหตุร้องขอให้ศาลบังคับให้สมรสได้ (ม.1438) และข้อตกลงเบี้ยปรับหากผิดสัญญาหมั้นเป็นโมฆะ</p>
+<p>เมื่อผิดสัญญาหมั้น (ม.1439) ฝ่ายผิดต้องรับผิดค่าทดแทน และถ้าผู้รับหมั้นเป็นฝ่ายผิดต้องคืนของหมั้นด้วย — <b>ค่าทดแทนมี 3 ประเภท</b> (ม.1440): (1) ความเสียหายต่อกาย/ชื่อเสียง (2) ค่าใช้จ่าย/หนี้ที่ก่อโดยสุจริตเพื่อเตรียมการสมรส (3) การจัดการทรัพย์สิน/การงานอาชีพโดยคาดว่าจะได้สมรส</p>
+<p>ถ้าคู่หมั้นตายก่อนสมรส (ม.1441) อีกฝ่ายเรียกค่าทดแทนไม่ได้และไม่ต้องคืนของหมั้น/สินสอด เพราะความตายไม่ใช่การผิดสัญญา ส่วน "เหตุสำคัญ" ที่ทำให้บอกเลิกสัญญาหมั้นได้แยกเป็น 2 กรณี: เหตุเกิดแก่ผู้รับหมั้น (ม.1442 — ผู้รับหมั้นต้องคืนของหมั้น) กับเหตุเกิดแก่ผู้หมั้น (ม.1443 — ผู้รับหมั้นไม่ต้องคืน) นอกจากนี้ผู้หมั้นยังเรียกค่าทดแทนจากบุคคลภายนอกที่ร่วมประเวณี (ม.1445) หรือข่มขืน/พยายามข่มขืนคู่หมั้น (ม.1446) ได้เช่นกัน</p>
+
+<h4 id="s1-h6">อายุความ (ม.1447/1–2)</h4>
+<p>สิทธิเรียกร้องค่าทดแทน และสิทธิเรียกคืนของหมั้น/สินสอด มีอายุความสั้นเพียง <b>6 เดือน</b> นับแต่วันผิดสัญญาหมั้นหรือวันบอกเลิกสัญญาหมั้น</p>
+
+<div class="study-exam-box">
+<h5>📝 จุดที่ออกสอบบ่อย — หมวดการหมั้น</h5>
+<p><b>โมฆะ vs โมฆียะ:</b> ฝ่าฝืนเงื่อนไขอายุ (ม.1435) = โมฆะเสมอ ส่วนผู้เยาว์ไม่ได้รับความยินยอม (ม.1436) = โมฆียะเท่านั้น — คนละผลกัน</p>
+<p><b>ของหมั้น vs สินสอด:</b> ของหมั้นให้แก่ตัวผู้รับหมั้นโดยตรง ส่วนสินสอดให้แก่ผู้ปกครองของฝ่ายผู้รับหมั้น — เวลาโจทย์บรรยายว่า "ให้แหวนแก่คู่หมั้น" กับ "ให้เงินแก่พ่อแม่ฝ่ายหญิง" ต้องแยกให้ถูก</p>
+<p><b>เหตุสำคัญ ม.1442 vs ม.1443:</b> ดูว่าเหตุเกิดที่ฝ่ายไหน ฝ่ายนั้นเป็นฝ่าย "ต้องคืนของหมั้น" เสมอ</p>
+</div>
+`
+},
+{
+  id: "s2_marriage", label: "๒) การสมรส & โมฆะ-โมฆียะ", cat: "marriage",
+  toc: [
+    {id:"s2-h1", text:"เงื่อนไขแห่งการสมรส"},
+    {id:"s2-h2", text:"แบบพิธีการสมรส"},
+    {id:"s2-h3", text:"ความเป็นโมฆะของการสมรส"},
+    {id:"s2-h4", text:"ความเป็นโมฆียะของการสมรส"}
+  ],
+  html: `
+<h4 id="s2-h1">เงื่อนไขแห่งการสมรส (ม.1448–1453)</h4>
+<p>การสมรสทำได้เมื่อบุคคลทั้งสองมีอายุ 18 ปีบริบูรณ์ (ม.1448 — ศาลอาจอนุญาตให้สมรสก่อนได้เมื่อมีเหตุอันสมควร) และต้องไม่ต้องห้ามตามเงื่อนไขต่อไปนี้:</p>
+<ul>
+<li><b>ม.1449:</b> ห้ามสมรสกับคนวิกลจริต หรือบุคคลที่ศาลสั่งให้เป็นคนไร้ความสามารถ</li>
+<li><b>ม.1450:</b> ห้ามสมรสกับญาติสืบสายโลหิตโดยตรง หรือพี่น้องร่วมบิดามารดา/ร่วมแต่บิดาหรือมารดา (นับตามสายโลหิตจริง ไม่ว่าชอบด้วยกฎหมายหรือไม่)</li>
+<li><b>ม.1451:</b> ผู้รับบุตรบุญธรรมกับบุตรบุญธรรมสมรสกันไม่ได้ (ฝ่าฝืนไม่ถึงกับโมฆะ แต่ความเป็นบุตรบุญธรรมสิ้นสุดลง)</li>
+<li><b>ม.1452:</b> ห้ามสมรสซ้อน — มีคู่สมรสอยู่แล้วจะสมรสใหม่ไม่ได้</li>
+<li><b>ม.1453:</b> หญิง (หรือผู้ตั้งครรภ์ได้) ที่การสมรสสิ้นสุดต้องรอ 310 วันจึงสมรสใหม่ได้ เว้นแต่คลอดบุตรแล้ว/สมรสกับคู่เดิม/มีใบรับรองแพทย์ว่าไม่ตั้งครรภ์/ศาลสั่งอนุญาต — ข้อนี้เป็นเพียง "ข้อห้ามนายทะเบียน" ฝ่าฝืนแล้วจดไปแล้วไม่ตกเป็นโมฆะหรือโมฆียะ</li>
+</ul>
+
+<h4 id="s2-h2">แบบพิธีการสมรส (ม.1457–1460)</h4>
+<p>การสมรสมีได้เฉพาะเมื่อจดทะเบียนแล้วเท่านั้น (ม.1457) — อยู่กินฉันคู่สมรสโดยไม่จดทะเบียนไม่เป็นการสมรสตามกฎหมาย ต้องแสดงความยินยอมเป็นคู่สมรสกันโดยเปิดเผยต่อหน้านายทะเบียน (ม.1458) ยกเว้นในพฤติการณ์พิเศษ เช่น ภาวะสงคราม/ภัยอันตราย อาจแสดงเจตนาต่อหน้าผู้บรรลุนิติภาวะที่อยู่ ณ ที่นั้นแล้วจดทะเบียนภายหลังได้ (ม.1460)</p>
+
+<h4 id="s2-h3">ความเป็นโมฆะของการสมรส (ม.1495)</h4>
+<p>การสมรสตกเป็น<b>โมฆะ</b>เมื่อฝ่าฝืน 4 เหตุ คือ ม.1449 (วิกลจริต) ม.1450 (ญาติสายโลหิต) ม.1452 (สมรสซ้อน) และ ม.1458 (ไม่ได้ยินยอม) — โมฆะเสียเปล่ามาแต่ต้น ผู้มีส่วนได้เสียกล่าวอ้างได้เอง (สมรสซ้อนตาม ม.1497 กล่าวอ้างได้เองโดยไม่ต้องมีคำพิพากษา) แต่เหตุโมฆะอื่นต้องมีคำพิพากษาศาลจึงจะแสดงผลว่าเป็นโมฆะ (ม.1496)</p>
+
+<h4 id="s2-h4">ความเป็นโมฆียะของการสมรส (ม.1503, 1505–1507)</h4>
+<p>เหตุขอให้ศาลเพิกถอนเพราะเป็น<b>โมฆียะ</b> (ม.1503) มีเฉพาะ: ฝ่าฝืนอายุ (ม.1448) สำคัญผิดตัวคู่สมรส (ม.1505) ถูกกลฉ้อฉลถึงขนาดที่ถ้าไม่มีคงไม่สมรส (ม.1506) ถูกข่มขู่ (ม.1507) และไม่ได้รับความยินยอมของบิดามารดา (ม.1509) — โมฆียะต้อง "ขอให้ศาลเพิกถอน" ก่อนจึงสิ้นผล ต่างจากโมฆะที่เสียเปล่ามาแต่ต้นทันที</p>
+
+<div class="study-exam-box">
+<h5>📝 จุดที่ออกสอบบ่อย — หมวดการสมรส</h5>
+<p><b>จำ 4 เหตุโมฆะ:</b> วิกลจริต / ญาติสายโลหิต / สมรสซ้อน / ไม่ยินยอม — นอกเหนือจากนี้ (อายุ, สำคัญผิด, กลฉ้อฉล, ข่มขู่, ไม่ได้รับความยินยอมบิดามารดา) เป็นโมฆียะทั้งหมด</p>
+<p><b>โมฆะ vs โมฆียะ:</b> โมฆะ = เสียเปล่ามาแต่ต้น ใครก็กล่าวอ้างได้ / โมฆียะ = สมบูรณ์จนกว่าจะถูกศาลเพิกถอน เฉพาะผู้มีสิทธิเท่านั้นที่ขอเพิกถอนได้ และมีอายุความจำกัด</p>
+<p><b>สำคัญผิด (ม.1505):</b> ต้องเป็นสำคัญผิด "ตัวคู่สมรส" เท่านั้น ไม่รวมสำคัญผิดในคุณสมบัติอื่น เช่น ฐานะการเงินหรือประวัติส่วนตัว</p>
+</div>
+`
+},
+{
+  id: "s3_property", label: "๓) ทรัพย์สินระหว่างคู่สมรส", cat: "property",
+  toc: [
+    {id:"s3-h1", text:"สัญญาก่อนสมรส"},
+    {id:"s3-h2", text:"สินส่วนตัว vs สินสมรส"},
+    {id:"s3-h3", text:"การจัดการสินสมรส"},
+    {id:"s3-h4", text:"หนี้ร่วมระหว่างคู่สมรส"},
+    {id:"s3-h5", text:"แบ่งสินสมรสเมื่อหย่า"}
+  ],
+  html: `
+<h4 id="s3-h1">สัญญาก่อนสมรส (ม.1465–1466, 1469)</h4>
+<p>ถ้าคู่สมรสไม่ได้ทำสัญญาไว้เป็นพิเศษก่อนสมรส ให้ใช้บทบัญญัติในหมวดทรัพย์สินนี้บังคับ — ข้อความในสัญญาก่อนสมรสที่ขัดความสงบเรียบร้อย/ศีลธรรมอันดี หรือให้ใช้กฎหมายต่างประเทศบังคับ เป็นโมฆะ (ม.1465) สัญญาก่อนสมรสต้องจดแจ้งในทะเบียนสมรส หรือทำเป็นหนังสือลงลายมือชื่อคู่สมรสและพยานอย่างน้อย 2 คนแนบท้ายทะเบียนสมรส มิฉะนั้นเป็นโมฆะ (ม.1466) ส่วนสัญญาเกี่ยวกับทรัพย์สินที่ทำกันเองระหว่างเป็นคู่สมรส ฝ่ายใดฝ่ายหนึ่งบอกล้างได้ในระหว่างสมรสหรือภายใน 1 ปีนับแต่ขาดจากการสมรส เพื่อคุ้มครองบุคคลภายนอกผู้สุจริต (ม.1469)</p>
+
+<h4 id="s3-h2">สินส่วนตัว vs สินสมรส (ม.1471–1474)</h4>
+<p><b>สินส่วนตัว</b> (ม.1471) ได้แก่ (1) ทรัพย์ที่มีอยู่ก่อนสมรส (2) เครื่องใช้สอยส่วนตัว/เครื่องมือประกอบอาชีพ (3) ทรัพย์ที่ได้มาระหว่างสมรสโดยรับมรดกหรือการให้โดยเสน่หา (4) ของหมั้น — มรดก/ของขวัญที่ได้ระหว่างสมรสเป็นสินส่วนตัวเสมอ และหลัก "ช่วงทรัพย์" (ม.1472) ทำให้ทรัพย์ที่ได้มาแทนสินส่วนตัว (แลกเปลี่ยน/ขาย/ซื้อใหม่ด้วยเงินสินส่วนตัว) ยังคงเป็นสินส่วนตัว คู่สมรสฝ่ายใดจัดการสินส่วนตัวของตนเอง (ม.1473)</p>
+<p><b>สินสมรส</b> (ม.1474) ได้แก่ (1) ทรัพย์ที่ได้มาระหว่างสมรส (2) ทรัพย์ที่ได้มาโดยพินัยกรรม/การให้เป็นหนังสือที่ระบุว่าเป็นสินสมรส (3) ดอกผลของสินส่วนตัว — ถ้าสงสัยว่าเป็นสินสมรสหรือไม่ กฎหมายให้<b>สันนิษฐานว่าเป็นสินสมรส</b>ไว้ก่อน</p>
+
+<h4 id="s3-h3">การจัดการสินสมรส (ม.1476, 1476/1, 1480, 1484)</h4>
+<p>เรื่องสำคัญตาม ม.1476 ต้องจัดการร่วมกันหรือได้รับความยินยอมจากอีกฝ่าย เช่น ขาย/ขายฝาก/แลกเปลี่ยน/จำนอง/ปลดจำนองอสังหาริมทรัพย์, ให้เช่าอสังหาฯ เกิน 3 ปี, ให้กู้ยืมเงิน, ให้โดยเสน่หา, ประนีประนอมยอมความ — นอกรายการนี้จัดการได้โดยลำพัง (คู่สมรสอาจตกลงเปลี่ยนแปลงบางส่วนได้ตามสัญญาก่อนสมรส ม.1476/1) หากทำนิติกรรมที่ต้องยินยอมร่วมกันไปโดยลำพัง อีกฝ่ายฟ้องเพิกถอนได้ภายใน 1 ปีนับแต่รู้เหตุ หรือ 10 ปีนับแต่ทำนิติกรรม แต่คุ้มครองบุคคลภายนอกสุจริตและเสียค่าตอบแทน (ม.1480) และหากฝ่ายที่มีอำนาจจัดการทำเสียหาย/ไม่อุปการะเลี้ยงดู/มีหนี้สินล้นพ้นตัว อีกฝ่ายร้องขอศาลให้ตนจัดการแต่ผู้เดียวหรือสั่งแยกสินสมรสได้ (ม.1484)</p>
+
+<h4 id="s3-h4">หนี้ร่วมระหว่างคู่สมรส (ม.1490)</h4>
+<p>หนี้ร่วม 4 กรณี: (1) หนี้เพื่อจัดการบ้านเรือน/จัดหาสิ่งจำเป็น/อุปการะเลี้ยงดู/รักษาพยาบาลคนในครอบครัว/การศึกษาบุตรตามสมควร (2) หนี้เกี่ยวกับสินสมรส (3) หนี้จากการงานที่ทำด้วยกัน (4) หนี้ที่ฝ่ายหนึ่งก่อเพื่อประโยชน์ตนฝ่ายเดียวแต่อีกฝ่ายให้สัตยาบัน — หนี้ร่วมบังคับได้ทั้งสินสมรสและสินส่วนตัวของทั้งสองฝ่าย ส่วนหนี้ส่วนตัวบังคับจากสินส่วนตัวของฝ่ายนั้นก่อน</p>
+
+<h4 id="s3-h5">การแบ่งสินสมรสเมื่อหย่า (ม.1533)</h4>
+<p>เมื่อหย่ากันให้แบ่งสินสมรสให้คู่สมรสได้ส่วนเท่ากัน — หลัก "แบ่งครึ่ง" ใช้กับสินสมรสเท่านั้น สินส่วนตัวไม่ต้องแบ่ง</p>
+
+<div class="study-exam-box">
+<h5>📝 จุดที่ออกสอบบ่อย — หมวดทรัพย์สินระหว่างคู่สมรส</h5>
+<p><b>เทคนิคจำแนกสินส่วนตัว/สินสมรส:</b> เช็คก่อนว่า "ได้มาก่อนหรือหลังสมรส" → ถ้าหลังสมรส เช็คว่าได้มาโดยมรดก/การให้เสน่หาหรือไม่ (สินส่วนตัว) หรือได้มาด้วยวิธีอื่น (สินสมรส) และถ้าสงสัยให้เอียงไปทาง "สินสมรส" ไว้ก่อนเสมอ</p>
+<p><b>ดอกผลของสินส่วนตัว = สินสมรส</b> เป็นจุดที่นักศึกษาสับสนบ่อย เช่น ค่าเช่าบ้านที่เป็นสินส่วนตัว ดอกผลนั้นกลายเป็นสินสมรส</p>
+</div>
+`
+},
+{
+  id: "s4_divorce", label: "๔) การหย่า", cat: "divorce",
+  toc: [
+    {id:"s4-h1", text:"การสิ้นสุดแห่งการสมรส"},
+    {id:"s4-h2", text:"วิธีการหย่า 2 ทาง"},
+    {id:"s4-h3", text:"เหตุฟ้องหย่า 10 ประการ"},
+    {id:"s4-h4", text:"ผลของการหย่า"}
+  ],
+  html: `
+<h4 id="s4-h1">การสิ้นสุดแห่งการสมรส (ม.1501)</h4>
+<p>การสมรสสิ้นสุดลงด้วย (1) ความตาย (2) การหย่า หรือ (3) ศาลพิพากษาให้เพิกถอน (กรณีโมฆียะ)</p>
+
+<h4 id="s4-h2">วิธีการหย่า 2 ทาง (ม.1514–1515)</h4>
+<p>การหย่าทำได้ 2 วิธี คือ <b>โดยความยินยอม</b>ของทั้งสองฝ่าย หรือ<b>โดยคำพิพากษาของศาล</b> — การหย่าโดยความยินยอมต้องทำเป็นหนังสือมีพยานลงลายมือชื่ออย่างน้อย 2 คน และมีผลสมบูรณ์เมื่อจดทะเบียนหย่าแล้วเท่านั้น (หนังสือหย่าอย่างเดียวยังไม่พอ)</p>
+
+<h4 id="s4-h3">เหตุฟ้องหย่า 10 ประการ (ม.1516) & ข้อจำกัดสิทธิ (ม.1517–1518)</h4>
+<p>เหตุฟ้องหย่าที่สำคัญ เช่น (1) อุปการะ/ยกย่องผู้อื่นฉันคู่สมรส เป็นชู้ หรือมีชู้ (2) ประพฤติชั่ว (3) ทำร้าย/หมิ่นประมาทเหยียดหยามอย่างร้ายแรง (4) จงใจละทิ้งร้างเกิน 1 ปี (4/2) แยกกันอยู่เกิน 3 ปี (6) ไม่ช่วยเหลืออุปการะ/เป็นปฏิปักษ์อย่างร้ายแรง (9) เป็นโรคติดต่อร้ายแรง (10) มีสภาพไม่อาจร่วมประเวณีได้ตลอดกาล — ถ้อยคำใช้ "คู่สมรส" เป็นกลางทางเพศตามสมรสเท่าเทียม</p>
+<p>เหตุ (1) และ (2) ถ้าฝ่ายที่จะฟ้องได้ยินยอมหรือรู้เห็นเป็นใจในการกระทำนั้น จะยกเป็นเหตุฟ้องหย่าไม่ได้ (ม.1517) และสิทธิฟ้องหย่าย่อมหมดไปเมื่อฝ่ายมีสิทธิได้ให้อภัยในการกระทำนั้นแล้ว (ม.1518)</p>
+
+<h4 id="s4-h4">ผลของการหย่า: อำนาจปกครองบุตร / ค่าทดแทน / ค่าเลี้ยงชีพ</h4>
+<p>การหย่าโดยยินยอมให้ตกลงกันว่าฝ่ายใดใช้อำนาจปกครองบุตร ถ้าไม่ตกลงหรือหย่าโดยคำพิพากษา ให้ศาลชี้ขาด (ม.1520) เมื่อหย่าโดยเหตุมีชู้ (ม.1516(1)) เรียกค่าทดแทนได้ทั้งจากคู่สมรสอีกฝ่ายและจากผู้เป็นชู้ รวมถึงผู้ที่ล่วงเกินคู่สมรสในทำนองชู้สาว (ม.1523) และถ้าการหย่าเป็นความผิดของฝ่ายใดฝ่ายหนึ่งแต่ฝ่ายเดียว และทำให้อีกฝ่ายยากจนลงเพราะไม่มีรายได้พอ อีกฝ่ายขอ<b>ค่าเลี้ยงชีพ</b>ได้ (ม.1526)</p>
+
+<div class="study-exam-box">
+<h5>📝 จุดที่ออกสอบบ่อย — หมวดการหย่า</h5>
+<p><b>แยก 3 คำที่มักสับสน:</b> "ค่าทดแทน" (ม.1523 — จ่ายให้คู่สมรสฝ่ายที่ถูกกระทำ โดยฝ่ายผิดและตัวชู้ร่วมกันจ่าย) vs "ค่าเลี้ยงชีพ" (ม.1526 — จ่ายให้คู่สมรสฝ่ายที่ยากจนลงจากการหย่า) vs "ค่าอุปการะเลี้ยงดูบุตร" (จ่ายเพื่อบุตร ไม่ใช่ตัวคู่สมรส)</p>
+<p><b>เหตุฟ้องหย่าที่ยกไม่ได้:</b> ถ้าฟ้องด้วยเหตุ (1)-(2) แต่ตัวเองยินยอม/รู้เห็นเป็นใจ หรือเคยให้อภัยไปแล้ว จะยกเหตุนั้นมาฟ้องหย่าอีกไม่ได้</p>
+</div>
+`
+},
+{
+  id: "s5_parentchild", label: "๕) บิดามารดา–บุตร & ค่าอุปการะเลี้ยงดู", cat: "parentchild",
+  toc: [
+    {id:"s5-h1", text:"ข้อสันนิษฐานความเป็นบุตรชอบด้วยกฎหมาย"},
+    {id:"s5-h2", text:"บุตรนอกสมรส → บุตรชอบด้วยกฎหมายของบิดา"},
+    {id:"s5-h3", text:"สิทธิหน้าที่ & อำนาจปกครองบุตร"},
+    {id:"s5-h4", text:"ค่าอุปการะเลี้ยงดู (ลักษณะ 3)"}
+  ],
+  html: `
+<h4 id="s5-h1">ข้อสันนิษฐานความเป็นบุตรชอบด้วยกฎหมาย (ม.1536–1542)</h4>
+<p>เด็กที่เกิดแต่หญิงขณะเป็นคู่สมรส หรือภายใน 310 วันนับแต่การสมรสสิ้นสุด ให้สันนิษฐานว่าเป็นบุตรชอบด้วยกฎหมายของชายผู้เป็นหรือเคยเป็นคู่สมรส (ม.1536 — ถ้อยคำใหม่ใช้ "ชายผู้เป็นคู่สมรส" แทน "สามี" เพื่อรองรับสมรสเท่าเทียม) หากหญิงสมรสใหม่และคลอดบุตรภายใน 310 วันนับแต่การสมรสเดิมสิ้นสุด กฎหมายให้สันนิษฐานว่าเป็นบุตรของคู่สมรส "คนใหม่" ไว้ก่อน (ม.1537) ชายผู้เป็นหรือเคยเป็นคู่สมรสอาจฟ้องคดีไม่รับเด็กเป็นบุตรเพื่อหักล้างข้อสันนิษฐานนี้ได้ โดยพิสูจน์ว่าไม่ได้อยู่ร่วมกับมารดาเด็กในระยะที่อาจตั้งครรภ์ (180–310 วันก่อนเด็กเกิด) (ม.1539) แต่ต้องฟ้องภายใน 1 ปีนับแต่รู้การเกิดของเด็ก และห้ามฟ้องเมื่อพ้น 10 ปีนับแต่วันเกิด (ม.1542)</p>
+
+<h4 id="s5-h2">บุตรนอกสมรส → บุตรชอบด้วยกฎหมายของบิดา (ม.1546–1557)</h4>
+<p>เด็กที่เกิดจากหญิงที่มิได้สมรสกับชาย ถือเป็นบุตรชอบด้วยกฎหมายของหญิงนั้นเสมอ (ม.1546 — เป็นบุตรของแม่โดยอัตโนมัติ แต่ยังไม่ใช่บุตรชอบด้วยกฎหมายของพ่อ) เด็กจะเป็นบุตรชอบด้วยกฎหมายของบิดาได้ <b>3 ทาง</b> (ม.1547): (1) บิดามารดาสมรสกันภายหลัง (2) บิดาจดทะเบียนรับรองบุตร หรือ (3) ศาลพิพากษาว่าเป็นบุตร — การจดทะเบียนรับรองบุตรต้องได้รับความยินยอมของทั้งเด็กและมารดาเด็ก หากไม่อาจให้ความยินยอมหรือคัดค้าน บิดาต้องร้องขอต่อศาล (ม.1548) และผลของการเป็นบุตรชอบด้วยกฎหมายตาม ม.1547 มีผลย้อนหลังไปนับแต่วันที่เด็กเกิด ซึ่งกระทบสิทธิรับมรดกด้วย (ม.1557)</p>
+
+<h4 id="s5-h3">สิทธิหน้าที่ระหว่างบิดามารดากับบุตร & อำนาจปกครองบุตร (ม.1561–1582)</h4>
+<p>บุตรมีสิทธิใช้ชื่อสกุลบิดา (ถ้าไม่ปรากฏบิดาใช้ของมารดา) และห้ามบุตรฟ้องบุพการีเป็นคดีแพ่ง/อาญา ("คดีอุทลุม") เว้นแต่อัยการหรือญาติสนิทดำเนินการแทน (ม.1561–1562) บุตรมีหน้าที่อุปการะเลี้ยงดูบิดามารดา และบิดามารดามีหน้าที่อุปการะเลี้ยงดู/ให้การศึกษาแก่บุตรผู้เยาว์ เป็นหน้าที่ต่างตอบแทนกัน (ม.1563–1564) บุตรผู้เยาว์อยู่ใต้อำนาจปกครองของบิดามารดาร่วมกันเป็นหลัก (ม.1566) ผู้ใช้อำนาจปกครองมีสิทธิกำหนดที่อยู่บุตร ทำโทษตามสมควรเพื่อว่ากล่าวสั่งสอน (ห้ามใช้ความรุนแรง/ทารุณ ตามที่แก้ไข พ.ศ. 2565) ให้บุตรทำการงานตามสมควร และเรียกบุตรคืนจากผู้กักไว้โดยมิชอบ (ม.1567) การจัดการทรัพย์สินสำคัญของบุตร เช่น ขาย/จำนองอสังหาริมทรัพย์ของบุตร ต้องขออนุญาตศาลก่อน (ม.1574) และหากผู้ใช้อำนาจปกครองใช้อำนาจโดยมิชอบ ศาลอาจสั่งถอนอำนาจปกครองบางส่วนหรือทั้งหมดได้ (ม.1582)</p>
+
+<h4 id="s5-h4">ค่าอุปการะเลี้ยงดู (ลักษณะ 3 — ม.1598/38–1598/41)</h4>
+<p>ค่าอุปการะเลี้ยงดูเป็นสิทธิเรียกร้องได้ระหว่างคู่สมรส หรือระหว่างบิดามารดากับบุตร (ต้องเป็นคู่สมรสหรือบุตรที่ชอบด้วยกฎหมายเท่านั้น) เรียกร้องได้เมื่อฝ่ายที่ควรได้รับไม่ได้รับการอุปการะเลี้ยงดูเลย หรือได้รับแต่ไม่เพียงพอแก่อัตภาพ (ม.1598/38)</p>
+<p><b>วิธีกำหนดจำนวน:</b> ศาลพิจารณาจาก 3 องค์ประกอบควบคู่กัน — (1) ความสามารถของผู้มีหน้าที่ต้องให้ (2) ฐานะของผู้รับ (3) พฤติการณ์แห่งกรณี หากผู้มีหน้าที่ไม่มีรายได้ ศาลก็ไม่อาจบังคับให้จ่ายได้ โดยหลักชำระเป็นเงินเป็นงวด ๆ เว้นแต่ตกลงกันเป็นอย่างอื่น หรือศาลเห็นสมควรเพื่อประโยชน์บุตรจึงกำหนดวิธีอื่น เช่น จ่ายตรงไปยังสถานศึกษา หรือให้สิทธิอาศัยแทนเงินสด</p>
+<p><b>เปลี่ยนแปลงจำนวนได้เสมอ</b> (ม.1598/39): เมื่อพฤติการณ์ รายได้ หรือฐานะเปลี่ยนไป ผู้มีส่วนได้เสียร้องขอศาลให้เพิกถอน ลด เพิ่ม หรือกลับให้ค่าอุปการะเลี้ยงดูใหม่ได้เสมอ ไม่ใช่คำสั่งตายตัว</p>
+<p><b>สิทธิเฉพาะตัว</b> (ม.1598/41): สิทธิรับค่าอุปการะเลี้ยงดู "จะสละหรือโอนไม่ได้ และไม่อยู่ในข่ายแห่งการบังคับคดี" — เมื่อฝ่ายมีหน้าที่หรือฝ่ายมีสิทธิตาย สิทธิหน้าที่สิ้นสุดทันที ไม่ตกทอดเป็นมรดก ส่วนกรณีบิดาหรือมารดาฝ่ายเดียวออกค่าอุปการะเลี้ยงดูบุตรไปก่อน มีสิทธิไล่เบี้ยเรียกคืนจากอีกฝ่ายได้ แต่ต้องฟ้องภายในอายุความ 5 ปี นับแต่วันชำระแต่ละงวด</p>
+
+<div class="study-exam-box">
+<h5>📝 จุดที่ออกสอบบ่อย — หมวดบิดามารดา-บุตร</h5>
+<p><b>3 ทางที่บุตรนอกสมรสเป็นบุตรชอบด้วยกฎหมายของบิดา:</b> สมรสภายหลัง / จดทะเบียนรับรองบุตร / ศาลพิพากษา — จำครบ 3 ทาง และผลย้อนหลังไปถึงวันเกิด</p>
+<p><b>ค่าอุปการะเลี้ยงดูเป็นสิทธิเฉพาะตัว:</b> ตายแล้วสิทธิ/หน้าที่ระงับทันที ไม่ไปเรียกจากกองมรดกได้ — ข้อสอบชอบตั้งสถานการณ์ "พ่อตกลงจ่าย 20 ปี จ่ายได้ 2 ปีพ่อตาย" แล้วถามว่าเรียกจากกองมรดกได้ไหม คำตอบคือไม่ได้</p>
+</div>
+`
+},
+{
+  id: "s6_guardian_adopt", label: "๖) ผู้ปกครอง & บุตรบุญธรรม", cat: "guardian_adopt",
+  toc: [
+    {id:"s6-h1", text:"ความปกครอง"},
+    {id:"s6-h2", text:"เงื่อนไข-ความยินยอมของบุตรบุญธรรม"},
+    {id:"s6-h3", text:"ผลทางกฎหมาย & การจดทะเบียน"},
+    {id:"s6-h4", text:"การเลิกรับบุตรบุญธรรม"}
+  ],
+  html: `
+<h4 id="s6-h1">ความปกครอง (ม.1585–1587)</h4>
+<p>ผู้เยาว์ที่ไม่มีบิดามารดา หรือบิดามารดาถูกถอนอำนาจปกครอง อาจมีการตั้ง <b>"ผู้ปกครอง"</b> ขึ้นดูแลระหว่างเป็นผู้เยาว์ได้ — ใช้เมื่อไม่มีผู้ใช้อำนาจปกครองแล้วเท่านั้น (ม.1585) ตั้งขึ้นโดยคำสั่งศาล หรือโดยพินัยกรรมของบิดาหรือมารดาซึ่งตายทีหลัง (ม.1586) ผู้จะเป็นผู้ปกครองต้องบรรลุนิติภาวะ และไม่เป็นบุคคลต้องห้าม เช่น คนไร้/เสมือนไร้ความสามารถ บุคคลล้มละลาย หรือผู้ที่ศาลเห็นว่าไม่เหมาะสม (ม.1587)</p>
+
+<h4 id="s6-h2">เงื่อนไขและความยินยอมของการรับบุตรบุญธรรม (ม.1598/19–26)</h4>
+<p>ผู้รับบุตรบุญธรรมต้องมีอายุไม่ต่ำกว่า <b>25 ปี</b> และแก่กว่าผู้จะเป็นบุตรบุญธรรมอย่างน้อย <b>15 ปี</b> (ม.1598/19) ต้องได้รับความยินยอม 3 ระดับตามสถานการณ์: (1) ตัวผู้จะเป็นบุตรบุญธรรมเอง หากอายุไม่ต่ำกว่า 15 ปี (ม.1598/20) (2) บิดาและมารดาของผู้จะเป็นบุตรบุญธรรม ถ้าฝ่ายใดตายหรือถูกถอนอำนาจปกครองให้ฝ่ายที่เหลือให้ความยินยอม (ม.1598/21 — ถ้าไม่ให้ความยินยอมโดยไม่มีเหตุอันสมควร ร้องขอศาลอนุญาตแทนได้ตาม ม.1598/23) และ (3) คู่สมรสของผู้รับหรือผู้จะเป็นบุตรบุญธรรม หากมีคู่สมรสอยู่ (ม.1598/25) ทั้งนี้คู่สมรสเพศเดียวกันสามารถร่วมกันรับบุตรบุญธรรมได้ตามกฎหมายสมรสเท่าเทียม (ม.1598/26)</p>
+
+<h4 id="s6-h3">ผลทางกฎหมายและการจดทะเบียน (ม.1598/27–28)</h4>
+<p>การรับบุตรบุญธรรมสมบูรณ์เมื่อจดทะเบียนตามกฎหมายแล้วเท่านั้น หากผู้จะเป็นบุตรบุญธรรมเป็นผู้เยาว์ต้องปฏิบัติตาม พ.ร.บ.การรับเด็กเป็นบุตรบุญธรรมด้วย (ม.1598/27) บุตรบุญธรรมมีฐานะอย่างเดียวกับบุตรชอบด้วยกฎหมายของผู้รับบุตรบุญธรรม แต่ไม่สูญเสียสิทธิหน้าที่ในครอบครัวที่กำเนิดมา — ข้อสำคัญคือ <b>"ผู้รับบุตรบุญธรรม" ไม่มีสิทธิรับมรดกของบุตรบุญธรรมในฐานะทายาทโดยธรรม</b> แม้บุตรบุญธรรมจะรับมรดกจากทั้งครอบครัวเดิมและครอบครัวบุญธรรมได้ (ม.1598/28)</p>
+
+<h4 id="s6-h4">การเลิกรับบุตรบุญธรรม (ม.1598/32)</h4>
+<p>เลิกกันได้ด้วยความตกลง โดยคำพิพากษาของศาล หรือเมื่อมีการสมรสระหว่างผู้รับบุตรบุญธรรมกับบุตรบุญธรรม (ซึ่งฝ่าฝืนข้อห้ามตาม ม.1451 อยู่แล้ว)</p>
+
+<div class="study-exam-box">
+<h5>📝 จุดที่ออกสอบบ่อย — หมวดผู้ปกครอง & บุตรบุญธรรม</h5>
+<p><b>จำตัวเลข:</b> ผู้รับบุตรบุญธรรมอายุไม่ต่ำกว่า 25 ปี และห่างจากผู้จะเป็นบุตรบุญธรรมอย่างน้อย 15 ปี</p>
+<p><b>ความยินยอม 3 ระดับ:</b> เด็กเอง (ถ้า ≥15 ปี) + บิดามารดาเด็ก + คู่สมรสของผู้เกี่ยวข้อง — โจทย์มักตัดความยินยอมฝ่ายใดฝ่ายหนึ่งออกแล้วถามว่าจดทะเบียนได้หรือไม่</p>
+<p><b>พ่อแม่บุญธรรมไม่ใช่ทายาทของบุตรบุญธรรม:</b> เป็นความสัมพันธ์ทางเดียว มักออกเป็นข้อสอบเปรียบเทียบกับวิชามรดก</p>
+</div>
+`
+}
+];
 </script>
 
 <script>
@@ -1449,6 +1695,7 @@ function saveSeenSet(key, set){
 }
 const cardSeenSet = loadSeenSet('famlaw_cardsSeen');
 const seqSeenSet = loadSeenSet('famlaw_seqSeen');
+const studySeenSet = loadSeenSet('famlaw_studySeen');
 
 function makeQuestionTimer(elId, fastThreshold){
   let startTs = 0, intervalId = null;
@@ -1533,6 +1780,58 @@ function paintStage(elId, catKey){
     '<span class="stage-icon">' + c.icon + '</span>' +
     '<span><span class="stage-label">' + esc(c.label) + '</span>' +
     '<span class="stage-src">' + esc(c.source) + '</span></span>';
+}
+
+/* =========================================================
+   โหมด 6: โหมดอ่าน (สรุปเนื้อหาบรรยาย)
+   ========================================================= */
+let studyIdx = 0;
+function renderStudy(idx){
+  if(!SUMMARY_TOPICS.length) return;
+  studyIdx = idx;
+  const nav = document.getElementById('study-nav');
+  nav.innerHTML = '';
+  SUMMARY_TOPICS.forEach((t,i)=>{
+    const btn = document.createElement('button');
+    btn.textContent = t.label;
+    btn.className = i === idx ? 'on' : '';
+    btn.addEventListener('click', ()=>{ SoundFX.click(); renderStudy(i); });
+    nav.appendChild(btn);
+  });
+  const topic = SUMMARY_TOPICS[idx];
+  const panel = document.getElementById('study-panel');
+
+  let tocHtml = '';
+  if(topic.toc && topic.toc.length >= 2){
+    tocHtml = '<div class="study-toc"><div class="study-toc-label">สารบัญหัวข้อ</div><div class="study-toc-list">';
+    topic.toc.forEach(t=>{
+      tocHtml += '<a href="#'+t.id+'" class="study-toc-item toc-major">'+esc(t.text)+'</a>';
+    });
+    tocHtml += '</div></div>';
+  }
+  panel.innerHTML = '<div class="study-title">' + esc(topic.label) + '</div>' + tocHtml + '<div class="study-content">' + topic.html + '</div>';
+
+  panel.querySelectorAll('.study-toc a').forEach(a=>{
+    a.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const target = document.getElementById(a.getAttribute('href').slice(1));
+      if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  if(!studySeenSet.has(topic.id)){
+    studySeenSet.add(topic.id);
+    saveSeenSet('famlaw_studySeen', studySeenSet);
+    SoundFX.score();
+    addScore(20);
+  }
+  updateStudyProgress();
+}
+function updateStudyProgress(){
+  const el = document.getElementById('study-progress');
+  if(!el || !SUMMARY_TOPICS.length) return;
+  const seen = SUMMARY_TOPICS.filter(t=>studySeenSet.has(t.id)).length;
+  el.textContent = 'อ่านแล้ว ' + seen + ' / ' + SUMMARY_TOPICS.length + ' หัวข้อ';
 }
 
 /* =========================================================
@@ -1916,11 +2215,14 @@ const tabSeq  = document.getElementById('tab-seq');
 const tabQuiz = document.getElementById('tab-quiz');
 const tabIrac = document.getElementById('tab-irac');
 const tabOrder = document.getElementById('tab-order');
+const tabStudy = document.getElementById('tab-study');
 const viewCard = document.getElementById('view-card');
 const viewSeq  = document.getElementById('view-seq');
 const viewQuiz = document.getElementById('view-quiz');
 const viewIrac = document.getElementById('view-irac');
 const viewOrder = document.getElementById('view-order');
+const viewStudy = document.getElementById('view-study');
+let studyInitDone = false;
 
 function setTab(which){
   viewCard.classList.toggle('on', which==='card');
@@ -1928,17 +2230,20 @@ function setTab(which){
   viewQuiz.classList.toggle('on', which==='quiz');
   viewIrac.classList.toggle('on', which==='irac');
   viewOrder.classList.toggle('on', which==='order');
+  viewStudy.classList.toggle('on', which==='study');
   tabCard.classList.toggle('on', which==='card');
   tabSeq.classList.toggle('on', which==='seq');
   tabQuiz.classList.toggle('on', which==='quiz');
   tabIrac.classList.toggle('on', which==='irac');
   tabOrder.classList.toggle('on', which==='order');
+  tabStudy.classList.toggle('on', which==='study');
   const headerEl = document.getElementById('page-header');
   if(which === 'quiz' || which === 'order'){
     headerEl.classList.add('compact');
   } else if(which !== 'irac' || document.getElementById('irac-play').style.display === 'none'){
     headerEl.classList.remove('compact');
   }
+  if(which === 'study' && !studyInitDone){ renderStudy(0); studyInitDone = true; }
   syncStickyBar();
 }
 tabCard.addEventListener('click', ()=>{ SoundFX.tab(); setTab('card'); });
@@ -1946,6 +2251,7 @@ tabSeq.addEventListener('click', ()=>{ SoundFX.tab(); setTab('seq'); });
 tabQuiz.addEventListener('click', ()=>{ SoundFX.tab(); setTab('quiz'); });
 tabIrac.addEventListener('click', ()=>{ SoundFX.tab(); setTab('irac'); });
 tabOrder.addEventListener('click', ()=>{ SoundFX.tab(); setTab('order'); renderOrderPicker(); });
+tabStudy.addEventListener('click', ()=>{ SoundFX.tab(); setTab('study'); });
 
 const btnSound = document.getElementById('btn-sound');
 btnSound.textContent = SoundFX.isOn() ? '🔊' : '🔇';
