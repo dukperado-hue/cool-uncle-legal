@@ -905,6 +905,46 @@ project policy.
 
 ---
 
+## 2g. Remix technique — deriving a new character from an existing archetype (added 2026-08-02)
+
+User asked whether an existing character could be reused as a starting point
+for a new one by just changing the hairstyle/outfit color, instead of always
+writing a fully original brief — confirmed this works well with the Gem.
+**Technique**: in the character brief prompt, explicitly reference the
+*archetype* of an existing character ("a similar broad muscular build and
+intimidating scowl as [existing character]'s villain archetype") while
+listing concrete differences (different hairstyle, different jacket color,
+different props) and an explicit instruction that it must read as a
+**visually distinct individual**, not a recolor of the same person. No image
+upload/attachment needed — same text-only-redescription approach already
+proven for the close-up pass (section 4b) — just describe the base archetype
+in words rather than re-attaching the original's image.
+
+**First use**: `biker_gunman` ("นักบิดมือปืน", a motorcycle-gang gunman),
+derived from `crime_boss`'s "broad muscular build, intimidating scowl,
+menacing villain" archetype but with an undercut hairstyle (vs. `crime_boss`'s
+spiked/slicked hair), a dark red leather motorcycle jacket with silver
+zippers (vs. `crime_boss`'s black jacket), fingerless gloves, a bandana, no
+facial scars, and holding a handgun. Generated cleanly on the first attempt,
+one clean 4-view sheet, no grid-merge issues. Saved to
+`pics/game/character-sheets/biker_gunman.png`, added to `SPRITES` in
+`game-crimlaw-scenario.html` (emoji `🏍️`, color `#8B2E2E`) — not yet named or
+cast into a scenario, per the usual just-in-time policy.
+
+```
+Character brief: "นักบิดมือปืน" (a motorcycle-gang gunman), adult male. Use a
+similar broad muscular build and intimidating scowl archetype as a menacing
+villain, but make this a visually DISTINCT individual: an undercut hairstyle
+(shaved sides, longer top swept back) instead of spiked/slicked hair, a dark
+red motorcycle leather jacket with silver zippers (not black), fingerless
+gloves, a bandana tied around the neck, holding a handgun down at his side,
+no scars on the face. Same fixed layout as other characters: four views side
+by side (front, 3/4 front, side, back), same design/colors across all four,
+plain flat light-gray background, no text.
+```
+
+---
+
 ## 8. Item props (Track C — simple prop icons, added 2026-08-02)
 
 Small reusable prop images for scenario beats (a weapon shown in a charge, a
