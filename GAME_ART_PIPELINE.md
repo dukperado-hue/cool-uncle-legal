@@ -447,6 +447,70 @@ art actually exists — today's scope is asset planning + generation only.
 
 ---
 
+## Progress log (batch 2, 2026-08-02)
+
+**All 15 new generic-pool character turnaround sheets + 3 item props + 6 new background scenes generated and saved, same session.** Driven directly via browser automation into the Gem (same pattern as the courtroom-cast session). Files:
+- `pics/game/character-sheets/{court_clerk,crime_boss,delinquent,rural_uncle,japanese_fighter,japanese_uncle_reviewer,monk_young,monk_elder,dog_golden,rabbit,dog_labrador,romantic_hero,romantic_heroine,plaintiff_lawyer,comedian_uncle}.png`
+- `pics/game/items/{item_gun,item_knife,item_keys}.png` (new folder/convention, section 8)
+- `pics/game/backgrounds/{house,car,boat,plane,restaurant,logging_truck_accident}.png`
+
+All real-person/copyrighted-IP references (สีเทา, น้าค่อม, Ryu, Orange Road, Hokuto no Ken villain) were kept vibe/archetype-only per section 2e's policy — none named in the actual prompts sent to Gemini.
+
+**Downloads land as `.tmp` files on this machine, not final-named files** — some corporate download-scanning/quarantine step holds them as randomly-named `.tmp` in the Downloads folder before (if ever) finalizing to the real filename. Workaround used throughout: note a timestamp immediately before clicking the download icon, then `find Downloads -newermt "<timestamp>" -iname "*.tmp"` to locate the just-downloaded file, verify its content matches the expected character (via the Read tool, image dimensions/content — don't trust file order alone), then `cp` it to the correct destination path with the right name and delete the `.tmp` original. A stale pre-existing `.tmp`/`.png` in Downloads from an unrelated earlier session caused one wrong-file mistake early in this session (a curly-haired man in a red shirt got saved as `court_clerk.png` at first) — always verify by viewing the actual image content, never assume the newest-by-`ls -t` file is the right one without checking its timestamp is genuinely fresh.
+
+**Download button needs two clicks**: the first click on a hovered download icon only surfaces a "Download full size" tooltip; the actual click-through needs a second click at the same coordinates. Clicking directly on a generated image (not hover-hover-click) opens a full-screen image editor overlay instead, which also works fine — its own download icon (top toolbar, same two-click pattern) then triggers the save; close the overlay via the back arrow (top-left) afterward.
+
+**One generation (`romantic_hero`) got stuck for 3+ minutes ("Formulating Character Design" never progressing)** after ~11 turns in the same Gem chat — matches this project's known "long chat thread reliability degrades" pattern (see section 4b). Clicking "Answer now" to force it did NOT help — it silently cancelled the response ("You stopped this response") rather than producing an answer. Fix: abandon the stuck chat, navigate to a fresh `gemini.google.com/gem/<id>` chat, resend the same prompt — resolved instantly. Reused the fresh chat for the remaining ~9 generations (romantic_heroine through the final background) without issue since it stayed short. **Lesson for future large batches: proactively start a new chat every ~8-10 generations rather than waiting for a stall.**
+
+**Close-up expression pass (batch 2) — blocked mid-start (2026-08-02).** Started
+the close-up pass using a text-only redescription approach (no image attachment
+needed — the file-upload UI's hidden `<input type=file>` isn't reachable via
+this harness' accessibility-tree-based `find`/`read_page`, so re-describing the
+exact original brief text in a fresh chat was used instead, which worked
+perfectly: `court_clerk_neutral` came back looking closely consistent with the
+turnaround sheet). However, **downloading it failed** — after roughly 30
+successful downloads earlier in the session, every download trigger (hover
+icon, image-editor toolbar, "..." → Download image, right-click) stopped
+producing any file at all. Confirmed via a real-time `FileSystemWatcher`
+(PowerShell, not polling) watching Downloads/Desktop/Documents/home/Temp/
+Pictures/Chrome-profile simultaneously — zero file-system events fired
+anywhere for any of several retry attempts, even though Gemini's own UI showed
+a "Downloading full size..." toast each time. Strong hypothesis: Chrome's
+"site is trying to download multiple files" throttle silently kicked in after
+this session's high download volume and is now blocking further downloads
+pending a permission prompt — that prompt lives in the browser's native
+chrome (omnibox area), which is outside what this automation harness can see
+(screenshots only capture the tab's render surface) or click. `chrome://`
+settings pages are also blocked from navigation by the harness, so this
+couldn't be fixed from the automation side either.
+
+**Needs the user's own action to unblock**: check the Chrome window for a
+download-blocked prompt/icon in the address-bar area for gemini.google.com
+and click Allow, or manually check
+`chrome://settings/content/all` → gemini.google.com → Automatic downloads.
+Once unblocked, the text-only close-up approach (no image upload needed) is
+proven to work — just resume the same pattern: fresh chat per character,
+redescribe the exact original visual brief, expression, and the anti-grid
+reinforcement line, 5 expressions per human character
+(neutral/shocked/angry/sad/confident) or 3 per animal
+(neutral/shocked/angry), same `pics/game/portraits/<sprite_id>_<key>.png`
+convention as batch 1.
+
+**Close-up pass progress (2026-08-02, resumed after download throttle cleared):** `court_clerk` (neutral/shocked/angry/sad/confident) and `crime_boss` (neutral/shocked/angry/sad/confident) both fully done, 10/69 portraits saved in `pics/game/portraits/`. Text-only redescription (no image attachment) continues to work well for consistency. Remaining: `delinquent`, `rural_uncle`, `japanese_fighter`, `japanese_uncle_reviewer`, `monk_young`, `monk_elder`, `romantic_hero`, `romantic_heroine`, `plaintiff_lawyer`, `comedian_uncle` (5 expressions each) + `dog_golden`, `rabbit`, `dog_labrador` (3 expressions each: neutral/shocked/angry) — same pattern, one fresh Gem chat per character, exact original visual brief text + expression + anti-grid line, download via hover-icon (2 clicks) or "..." → Download image, verify via the `.tmp`-in-Downloads-folder pickup method.
+
+**User decision (2026-08-02): stop generating more close-ups for now, start wiring into the actual game.** With 15 turnaround sheets + 2 characters' full 5-expression portrait sets already in hand, that's enough to start integration work rather than finishing all 69 portraits first.
+
+**In-story names confirmed (2026-08-02)** — "เปลี่ยนชื่อ" meant: give each generic-pool sprite-id an in-story Thai display name, same pattern as `female_influencer`="นางดำ" in the zoo case:
+- `court_clerk` → **คุณแสนดี** (เสมียนสาว)
+- `crime_boss` → **นายเหี้ยม**
+Remaining 13 characters (delinquent, rural_uncle, japanese_fighter, japanese_uncle_reviewer, monk_young, monk_elder, dog_golden, rabbit, dog_labrador, romantic_hero, romantic_heroine, plaintiff_lawyer, comedian_uncle) still need names assigned — ask the user for these too, likely per-scenario rather than all at once since they're meant to be reusable across different scenario casts.
+
+**Not started yet, this is the real next task**: the AA-style engine change to actually render these assets in `game-crimlaw-scenario.html` — this was flagged as a separate follow-up back in section 6/7 and still hasn't been done. Needs: wiring `portraitPath()`-style lookups for the new sprite ids, deciding which of the 15 new characters get used in which upcoming scenario (the ทนายฝ่ายโจทก์/plaintiff_lawyer character in particular fills a real gap — civil cases have no lawyer character yet), and giving each generic character an in-story name per scenario. Recommend doing this in a fresh session with full context budget rather than continuing here — this session is already deep into context usage from the asset-generation batch.
+
+**Still pending**: a 16th requested character, "ซ้อกาด" — user's clarification never resolved this session (the AskUserQuestion answer came back as just the raw option label with no free-text explanation). Ask again before generating. No close-up expression pass done for any of this batch's characters yet — turnaround sheets only, matching the original batch's phased approach (turnaround first, expressions later once the user picks which characters actually get used in a script).
+
+---
+
 ## Progress log
 
 **2026-08-01 — first asset batch generated and organized.** All 6 character
@@ -546,6 +610,260 @@ only start fresh when the anti-drift benefit is worth the reliability cost.
 circular sprite-avatar system in `game-crimlaw-scenario.html` with a real
 Ace-Attorney-style portrait (large, bottom-anchored) + name box + dialogue
 textbox, wired to swap `pics/game/portraits/<id>_<expression>.png` per beat.
+
+---
+
+## 2e. Generic character pool, batch 2 (added 2026-08-02) — 15 new archetypes
+
+Per [[project_courtroom_game_character_pool_scaling]]'s "variable pool" idea: these
+are reusable generic faces the engine can reassign to whatever defendant/victim/
+witness/bystander role a future scenario's script needs, not one-off cast members
+tied to a single case. Same Track B pipeline as section 2 (Gem model sheet first,
+close-up expression pass later — this round is turnaround sheets only).
+
+**Real-person / copyrighted-IP handling policy (confirmed with user 2026-08-02):**
+several briefs below were pitched as "looks like [a real actor/comedian]" or "looks
+like [a copyrighted anime/game character]". Per the same personality-rights/consent
+reasoning as section 2's นางดำ note, and per explicit user confirmation this round —
+**every one of these is vibe/archetype-only, never an exact likeness.** Prompts
+below deliberately describe the *visual archetype* (build, hairstyle, era, outfit,
+demeanor) and never name the real person or copyrighted character in the actual
+Gemini prompt text.
+
+| sprite id | Thai brief | real-person/IP note |
+|---|---|---|
+| `court_clerk` | เสมียนศาล เซ็กซี่ | vibe of early-90s American supermodel glamour (Cindy Crawford/Denise Richards era) — described generically, not named |
+| `crime_boss` | คนร้ายหน้าตาดุ | vibe of a Hokuto no Ken (เทพเจ้าดาวเหนือ)-style manga villain — archetype only, not a copy of any specific character |
+| `delinquent` | นักเลงหน้าตาคูนิโอะ | vibe of the Kunio-kun/River City Ransom delinquent-schoolboy archetype |
+| `rural_uncle` | ลุงต่างจังหวัด | vibe of a Thai country-bumpkin character-actor archetype (the "สีเทา" reference) — **user explicitly confirmed vibe-only, do not name the real actor** |
+| `japanese_fighter` | คนญี่ปุ่นหน้าตาริว | vibe of an iconic white-headband martial-artist archetype — not a copy of any specific game character |
+| `japanese_uncle_reviewer` | ลุงญี่ปุ่นนักรีวิวเบียร์ช้าง | user confirmed this is a generic archetype, not a specific real YouTuber — casual, jovial, mid-review-video vibe |
+| `monk_young` | พระเด็ก | generic, no real-person issue |
+| `monk_elder` | พระผู้ใหญ่ | generic, no real-person issue |
+| `dog_golden` | หมาโกลเด้น | animal, no real-person issue |
+| `rabbit` | กระต่าย | animal, no real-person issue |
+| `dog_labrador` | หมาลาบราดอร์ | animal, no real-person issue |
+| `romantic_hero` | พระเอกวัยรุ่น (Orange Road vibe) | vibe of an 80s romantic-comedy anime male lead archetype — not a copy of any specific IP character |
+| `romantic_heroine` | นางเอกวัยรุ่น (Orange Road vibe) | vibe of an 80s romantic-comedy anime cool/aloof female lead archetype |
+| `plaintiff_lawyer` | ทนายฝ่ายโจทก์ (civil) | user confirmed generic lawyer archetype, not a specific real lawyer — also fills the "civil plaintiff's lawyer" gap flagged in the character-pool-scaling memory (existing `prosecutor`/`defense_lawyer` only cover criminal cases) |
+| `comedian_uncle` | ลุงตลกหัวล้าน | vibe of a beloved bald Thai comedian archetype (the "น้าค่อม" reference) — **user explicitly confirmed vibe-only, do not name the real person** |
+
+Still pending clarification from the user: a 16th requested character referred to
+only as **"ซ้อกาด"** — meaning/reference unclear (not a recognized name/character to
+me), asked the user to clarify before generating. Not designed yet.
+
+**Turnaround-sheet prompts** (send to the Gem, same fixed 4-view layout as
+section 2/3 — front / 3-4 front / side / back, plain flat light-gray background):
+
+```
+Character brief: "เสมียนศาล" (a young female court clerk), adult, early-90s
+American-supermodel-glamour vibe — sharp cheekbones, confident sultry
+expression, glossy voluminous hair, fitted but professional court-clerk blazer
+and blouse, holding a folder/stamp. Same fixed layout as other characters: four
+views side by side (front, 3/4 front, side, back), same design/colors across
+all four, plain flat light-gray background, no props besides the folder, no
+text.
+```
+```
+Character brief: "คนร้าย" (a menacing crime boss), adult male, exaggerated
+1980s manga-villain archetype — broad muscular build, angular jaw, scars,
+spiked or slicked-back dramatic hair, dark leather/bondage-influenced jacket,
+intimidating scowl. Same fixed layout as other characters: four views side by
+side (front, 3/4 front, side, back), same design/colors across all four, plain
+flat light-gray background, no props, no text.
+```
+```
+Character brief: "นักเลง" (a teenage delinquent thug), male teen, Japanese
+delinquent-schoolboy archetype — tall pompadour hairstyle, long dark school
+uniform jacket (gakuran-style) worn open, cocky sneer, hands in pockets. Same
+fixed layout as other characters: four views side by side (front, 3/4 front,
+side, back), same design/colors across all four, plain flat light-gray
+background, no props, no text.
+```
+```
+Character brief: "ลุงต่างจังหวัด" (a rural Thai uncle), older adult male,
+country-bumpkin character-actor archetype — weathered tan face, big warm
+comedic grin, simple rolled-up-sleeve shirt and old trousers, sandals, relaxed
+provincial posture. Same fixed layout as other characters: four views side by
+side (front, 3/4 front, side, back), same design/colors across all four, plain
+flat light-gray background, no props, no text.
+```
+```
+Character brief: "คนญี่ปุ่นนักสู้" (a Japanese martial artist), adult male,
+iconic white headband, red fingerless gloves, sleeveless white martial-arts gi,
+lean muscular build, determined focused expression. Same fixed layout as other
+characters: four views side by side (front, 3/4 front, side, back), same
+design/colors across all four, plain flat light-gray background, no props, no
+text.
+```
+```
+Character brief: "ลุงญี่ปุ่นนักรีวิว" (a jovial Japanese uncle reviewer),
+middle-aged male, casual polo shirt, slightly flushed cheeks mid-review,
+holding a beer can, big friendly laughing expression, relaxed slouched
+posture. Same fixed layout as other characters: four views side by side
+(front, 3/4 front, side, back), same design/colors across all four, plain flat
+light-gray background, no props besides the beer can, no text.
+```
+```
+Character brief: "พระเด็ก" (a young Buddhist novice monk), child/pre-teen,
+saffron-orange robes worn traditionally, shaved head, gentle innocent
+expression. Same fixed layout as other characters: four views side by side
+(front, 3/4 front, side, back), same design/colors across all four, plain flat
+light-gray background, no props, no text.
+```
+```
+Character brief: "พระผู้ใหญ่" (a senior Buddhist monk), elderly male, deep
+saffron/maroon robes, shaved head, serene wise expression, slight stoop. Same
+fixed layout as other characters: four views side by side (front, 3/4 front,
+side, back), same design/colors across all four, plain flat light-gray
+background, no props, no text.
+```
+```
+Character brief: "หมาโกลเด้น" (a golden retriever dog), friendly adult dog,
+golden fluffy fur, tongue out, happy alert posture, Studio-Ghibli-inflected
+soft linework matching the existing หมูเด้ง/โจนาห์ animal characters. Same
+fixed layout: four views side by side (front, 3/4 front, side, back), same
+design/colors across all four, plain flat light-gray background, no props, no
+text.
+```
+```
+Character brief: "กระต่าย" (a rabbit), small cute rabbit, soft white/brown fur,
+long upright ears, same Studio-Ghibli-inflected soft linework as the other
+animal characters. Same fixed layout: four views side by side (front, 3/4
+front, side, back), same design/colors across all four, plain flat light-gray
+background, no props, no text.
+```
+```
+Character brief: "หมาลาบราดอร์" (a labrador dog), adult dog, short cream or
+chocolate-brown coat, calm gentle expression, same Studio-Ghibli-inflected soft
+linework as the other animal characters — visually distinct build/coat from
+the golden retriever character (stockier, shorter coat) so the two read as
+different dogs on screen. Same fixed layout: four views side by side (front,
+3/4 front, side, back), same design/colors across all four, plain flat
+light-gray background, no props, no text.
+```
+```
+Character brief: "พระเอกวัยรุ่น" (a teen romantic male lead), male teen,
+80s-retro casual school-uniform-adjacent look, floppy feathered hair, easygoing
+warm smile, hands-in-pockets relaxed stance. Same fixed layout: four views side
+by side (front, 3/4 front, side, back), same design/colors across all four,
+plain flat light-gray background, no props, no text.
+```
+```
+Character brief: "นางเอกวัยรุ่น" (a teen romantic female lead), female teen,
+80s-retro cool/aloof archetype, long straight dark hair, sharp confident stare,
+stylish casual outfit (skirt + blazer or fitted top), arms crossed. Same fixed
+layout: four views side by side (front, 3/4 front, side, back), same
+design/colors across all four, plain flat light-gray background, no props, no
+text.
+```
+```
+Character brief: "ทนายฝ่ายโจทก์" (a civil plaintiff's lawyer), adult, formal
+business-formal suit distinct in color from the existing `defense_lawyer`
+(navy) and `prosecutor` (dark navy/red-tie) characters — use a charcoal-gray
+suit with a subtle patterned tie — holding a folder of documents, composed and
+earnest demeanor arguing a civil claim. Same fixed layout: four views side by
+side (front, 3/4 front, side, back), same design/colors across all four, plain
+flat light-gray background, no props besides the folder, no text.
+```
+```
+Character brief: "ลุงตลก" (a beloved comedic Thai uncle), older adult male,
+bald head, warm exaggerated comedic grin, mustache, simple loud/colorful
+casual shirt, animated comedic posture. Same fixed layout: four views side by
+side (front, 3/4 front, side, back), same design/colors across all four, plain
+flat light-gray background, no props, no text.
+```
+
+---
+
+## 8. Item props (Track C — simple prop icons, added 2026-08-02)
+
+Small reusable prop images for scenario beats (a weapon shown in a charge, a
+key evidence item, etc.) — not character portraits, so a lighter style: a single
+object rendered in the same clean anime/webtoon linework as the character
+portraits, isolated on a plain background so it can be dropped into a dialogue
+beat or evidence-display UI later.
+
+Style tag to append to every item prompt:
+```
+single isolated object illustration, clean anime/webtoon linework, soft
+painterly shading, plain flat light-gray background, no hands, no characters,
+no text, no logo, centered composition
+```
+
+New folder/convention: `pics/game/items/<id>.png`
+
+| id | Thai | note |
+|---|---|---|
+| `item_gun` | ปืน | stylized handgun silhouette, not graphic/realistic detail (all-ages educational site) |
+| `item_knife` | มีด | stylized knife, not graphic/realistic detail |
+| `item_keys` | กุญแจ | a simple keyring with 2-3 keys |
+
+```
+Object: a stylized handgun (pistol), simple clean silhouette-style rendering
+appropriate for an all-ages educational game (not graphic/hyper-realistic),
+[style tag above]
+```
+```
+Object: a stylized knife, simple clean silhouette-style rendering appropriate
+for an all-ages educational game (not graphic/hyper-realistic), [style tag
+above]
+```
+```
+Object: a simple keyring holding 2-3 keys, [style tag above]
+```
+
+(The 4th requested item, "รถขนซุงที่ตก" — a fallen/crashed log truck — is a full
+scene, not a small prop; see section 9's `logging_truck_accident` background
+instead.)
+
+---
+
+## 9. New background scenes, batch 2 (Track A, added 2026-08-02)
+
+Same isometric Track A style as section 5 — style tag to append to every prompt:
+```
+isometric 3/4 top-down game-asset illustration, clean semi-realistic
+anime-influenced cartoon style, soft cel shading, no heavy outlines, warm
+cinematic lighting, highly detailed environment, single wide establishing
+shot, no visible UI or text
+```
+
+| id | Thai | note |
+|---|---|---|
+| `house` | บ้าน | generic Thai home interior/exterior |
+| `car` | รถ | car interior or roadside exterior |
+| `boat` | เรือ | boat deck/interior |
+| `plane` | เครื่องบิน | airplane cabin interior |
+| `restaurant` | ร้านอาหาร | restaurant interior |
+| `logging_truck_accident` | รถขนซุงที่ตก | the fallen-log-truck fact pattern from the example scenario — a truck off the road with logs scattered across it |
+
+```
+A cozy traditional Thai house, interior living area visible with some exterior
+yard, isometric 3/4 top-down view, warm domestic lighting, [style tag from
+section 5]
+```
+```
+A car scene — roadside exterior view of a parked sedan at dusk with headlights
+on, isometric 3/4 top-down view, [style tag from section 5]
+```
+```
+The deck of a small wooden boat on calm water, isometric 3/4 top-down view,
+[style tag from section 5]
+```
+```
+The interior cabin of a commercial airplane, rows of seats and overhead bins,
+isometric 3/4 top-down view, [style tag from section 5]
+```
+```
+A cozy Thai restaurant interior, dining tables and a service counter,
+isometric 3/4 top-down view, [style tag from section 5]
+```
+```
+A large logging truck overturned/skidded off a rural road at dusk, several
+large cut logs scattered across the roadway, damaged guardrail, dim headlight
+glow, isometric 3/4 top-down view, [style tag from section 5]
+```
 
 ---
 
