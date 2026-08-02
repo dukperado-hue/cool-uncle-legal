@@ -778,6 +778,133 @@ flat light-gray background, no props, no text.
 
 ---
 
+## 2f. Generic character pool, batch 3 (added 2026-08-02) — 10 new archetypes covering non-criminal-law subjects
+
+Batch 1 (section 2) and batch 2 (section 2e) both skew heavily toward
+criminal-law scenarios: patrons, a delinquent, a crime boss, monks, animals,
+a romantic couple. But the site covers many more law subjects — family,
+property, labor/contract, tort, administrative law — that had zero matching
+character archetypes. This batch fills that gap with 10 new reusable generic
+archetypes: a doctor (medical negligence/tort), a married couple (family
+law), a landlord/tenant pair (lease disputes), an employer/employee pair
+(labor law), a driver (traffic/tort), a civil servant (administrative law),
+and a real estate agent (property transactions). Same Track B pipeline as
+sections 2/2e (Gem model sheet only this round — no close-up expression pass
+yet, matching the phased approach of prior batches). No real-person/
+copyrighted-IP references were used for any of these — all purely generic
+archetypes.
+
+| sprite id | Thai brief | note |
+|---|---|---|
+| `doctor` | หมอ | hospital doctor, white coat, stethoscope, ID badge — fills medical-negligence/tort gap |
+| `husband` | สามี | married adult man, mature married-life archetype, visually distinct from the existing teen romantic-lead characters — fills family-law gap |
+| `wife` | ภรรยา | married adult woman, same mature married-life archetype, visually distinct from the existing teen romantic-lead characters — fills family-law gap |
+| `landlord` | เจ้าของบ้านเช่า | stern older landlord holding a clipboard/rent ledger — fills lease-dispute gap |
+| `tenant` | ผู้เช่า | stressed young-adult tenant holding a phone — fills lease-dispute gap |
+| `employer` | นายจ้าง | confident business owner/employer in business-casual, holding a folder — fills labor-law gap |
+| `employee` | ลูกจ้างออฟฟิศ | tired overworked office employee with ID lanyard, holding documents — fills labor-law gap |
+| `driver` | คนขับรถ | alert/nervous driver in cap and polo, steering-wheel gripping gesture — fills traffic/tort gap |
+| `civil_servant` | ข้าราชการ | Thai government officer in khaki uniform with name badge, holding a folder — fills administrative-law gap |
+| `estate_agent` | นายหน้าอสังหาริมทรัพย์ | persuasive real estate agent in business-casual suit, holding a tablet with a house/key icon — fills property-transaction gap |
+
+**Turnaround-sheet prompts** (sent to the Gem, same fixed 4-view layout as
+sections 2/2e/3 — front / 3-4 front / side / back, plain flat light-gray
+background):
+
+```
+Character brief: "หมอ" (a hospital doctor), adult, white doctor's coat over
+shirt and tie, stethoscope around neck, ID badge clipped to coat, calm
+composed professional expression. Same fixed layout as other characters:
+four views side by side (front, 3/4 front, side, back), same design/colors
+across all four, plain flat light-gray background, no text.
+```
+```
+Character brief: "สามี" (a married adult man), middle-aged, simple
+button-down shirt or polo, plain wedding ring, warm but slightly tired
+everyday-life demeanor -- visually distinct from any teen/young-romantic-lead
+character (this is a mature married-life archetype, not a young couple).
+Same fixed layout as other characters: four views side by side (front, 3/4
+front, side, back), same design/colors across all four, plain flat
+light-gray background, no text.
+```
+```
+Character brief: "ภรรยา" (a married adult woman), middle-aged, simple
+cardigan or blouse, plain wedding ring, hair tied back, caring but slightly
+tired everyday-life demeanor -- visually distinct from any teen/
+young-romantic-lead character. Same fixed layout as other characters: four
+views side by side (front, 3/4 front, side, back), same design/colors across
+all four, plain flat light-gray background, no text.
+```
+```
+Character brief: "เจ้าของบ้านเช่า" (a landlord), older adult, stern
+money-conscious demeanor, plain polo shirt, holding a clipboard or rent
+ledger, slightly impatient expression. Same fixed layout as other
+characters: four views side by side (front, 3/4 front, side, back), same
+design/colors across all four, plain flat light-gray background, no text.
+```
+```
+Character brief: "ผู้เช่า" (a tenant), young adult, casual worker/student
+outfit, looks a bit stressed or apologetic, holding a phone. Same fixed
+layout as other characters: four views side by side (front, 3/4 front, side,
+back), same design/colors across all four, plain flat light-gray background,
+no text.
+```
+```
+Character brief: "นายจ้าง" (a business owner/employer), adult, sharp
+business-casual outfit, confident commanding posture, arms crossed or
+holding a folder. Same fixed layout as other characters: four views side by
+side (front, 3/4 front, side, back), same design/colors across all four,
+plain flat light-gray background, no text.
+```
+```
+Character brief: "ลูกจ้างออฟฟิศ" (an office employee), adult, simple
+button-down shirt with an ID lanyard, tired overworked expression, holding a
+laptop or a stack of documents. Same fixed layout as other characters: four
+views side by side (front, 3/4 front, side, back), same design/colors across
+all four, plain flat light-gray background, no text.
+```
+```
+Character brief: "คนขับรถ" (a driver), adult male, casual driver polo shirt
+and cap, gripping-a-steering-wheel gesture, alert/nervous expression. Same
+fixed layout as other characters: four views side by side (front, 3/4 front,
+side, back), same design/colors across all four, plain flat light-gray
+background, no text.
+```
+```
+Character brief: "ข้าราชการ" (a Thai civil servant), adult, formal khaki
+government-uniform-style shirt with a name badge, composed bureaucratic
+expression, holding a document folder or a stamp. Same fixed layout as other
+characters: four views side by side (front, 3/4 front, side, back), same
+design/colors across all four, plain flat light-gray background, no text.
+```
+```
+Character brief: "นายหน้าอสังหาริมทรัพย์" (a real estate agent), adult,
+sharp business-casual suit, holding a tablet or a small house-key model,
+persuasive salesperson smile. Same fixed layout as other characters: four
+views side by side (front, 3/4 front, side, back), same design/colors across
+all four, plain flat light-gray background, no text.
+```
+
+**Result: all 10/10 succeeded**, no download-throttle block hit this
+session. Generated across two Gem chats (8 characters in the first chat,
+then a fresh chat for the last 2 — `civil_servant`/`estate_agent` — per the
+"restart every ~8 generations" mitigation from the batch-2 progress log).
+The fresh-chat restart hit the known "text drops on a genuinely fresh Gem
+home page" gotcha (see the batch-2 "Lesson for next session's automation
+attempts" note) — the first prompt attempt landed as truncated Thai text
+with a "Something went wrong" toast; clearing the input, waiting ~3s, and
+retyping fixed it immediately. Every file was verified by viewing the actual
+downloaded image content (not assumed from filename or download order)
+before being saved into `pics/game/character-sheets/`. Files saved:
+`pics/game/character-sheets/{doctor,husband,wife,landlord,tenant,employer,employee,driver,civil_servant,estate_agent}.png`.
+
+**Not started, same as prior batches**: the close-up expression pass and
+in-story naming — these are reusable generic-pool sprites only, to be given
+expressions/names once an actual scenario needs them, per established
+project policy.
+
+---
+
 ## 8. Item props (Track C — simple prop icons, added 2026-08-02)
 
 Small reusable prop images for scenario beats (a weapon shown in a charge, a
