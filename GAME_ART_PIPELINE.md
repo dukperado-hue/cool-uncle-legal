@@ -599,6 +599,42 @@ error requiring a fresh chat). Result as of pause:
 
 **Not started at all:** แมวศาล (`courtroom_cat`) close-up pass (3 expressions).
 
+### 2k. Close-up passes for 4 already-cast characters (added 2026-08-02/03) — `rural_uncle`, `delinquent`, `japanese_uncle_reviewer`, `romantic_heroine`
+
+These 4 already have in-story names and are live in shipped scenarios (ลุงเปี๊ยก,
+นายซิ่ง, นายมั่น, นางพลอย) but were rendering as emoji-fallback with zero
+portrait art. Ran the standard 5-expression close-up pass
+(neutral/shocked/angry/sad/confident) off each character's original brief
+text (section 2/2e), using the text-redescription workaround (no image
+upload) plus the section 4b anti-grid reinforcement line prepended to every
+prompt. All 20 files generated and saved to `pics/game/portraits/`.
+
+**Gotcha hit for `romantic_heroine`'s first (neutral) generation**: despite
+the anti-grid reinforcement line, the Gem still generated a full-body 4-view
+turnaround sheet instead of a single close-up bust — it even self-narrated
+the mistake in its text response ("Note that the output repeated a
+multi-panel full-body grid layout..."). Fixed by replying in the same chat
+with an explicit correction ("That was wrong - it's a full body 4-view
+turnaround grid... output exactly ONE single image... close-up BUST portrait
+(chest-up/shoulders-up crop only, not full body, not a turnaround sheet)")
+— worked cleanly on retry and for all 4 subsequent expressions in the same
+chat. **Lesson: the anti-grid line alone doesn't always stop full-body/
+turnaround drift specifically — if it recurs, explicitly call out "not full
+body, not a turnaround sheet" in addition to "not a grid/comparison sheet".**
+
+Minor character-consistency drift observed across generations within the
+same chat (same tolerance as previously accepted for other characters,
+e.g. `delinquent`'s shirt color, `saw_kad`'s batch): `delinquent`'s
+jacket/shirt undertone shifted slightly between expressions;
+`romantic_heroine`'s blazer color shifted between crimson-red and gray
+across her 5 expressions. Face/hairstyle/general silhouette stayed
+consistent throughout — acceptable for dialogue-box-sized rendering, not
+worth a redo round.
+
+Files: `pics/game/portraits/{rural_uncle,delinquent,japanese_uncle_reviewer,romantic_heroine}_{neutral,shocked,angry,sad,confident}.png`
+(20 files total). Committed incrementally, one commit per character's
+5-portrait set.
+
 **Lesson for next session's automation attempts:** typing into a genuinely
 fresh Gem-home-page input sometimes drops the text unless you wait ~2-3s after
 clicking before typing (page seems to re-hydrate the input once). Continuing
