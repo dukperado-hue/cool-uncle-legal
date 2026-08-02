@@ -183,6 +183,21 @@ h1,h2,h3{font-family:'Noto Serif Thai',serif}
 :root[data-theme="horror"] .hero-mascot.lion{width:150px}
 :root[data-theme="horror"] .hero-mascot.croc{width:210px}
 
+/* EMBED MODE — used by ประมวล.com's iframe wrapper (?tab=codex&embed=1) so it
+   reads as its own focused page instead of the full homepage with a tab
+   pre-selected. Hides the topbar/hero/tab-nav chrome, keeps only the
+   requested tab's content plus a small back-link to the real homepage. */
+body.embed-mode .topbar,
+body.embed-mode .hero,
+body.embed-mode .tab-buttons{display:none}
+.embed-header{
+  display:none;align-items:center;gap:8px;padding:14px 18px;font-size:13px;
+  color:var(--ink-soft);border-bottom:1px solid var(--line);background:#EFEAE0;
+}
+body.embed-mode .embed-header{display:flex}
+.embed-header a{color:var(--ink);font-weight:800;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.embed-header a:hover{text-decoration:underline}
+
 /* TABS */
 .tab-buttons{
   display:flex;gap:6px;background:#F1EDE2;border:1px solid var(--line);
@@ -456,6 +471,13 @@ footer{
     </div>
     <button type="button" id="drone-mute-btn" class="drone-mute-btn" onclick="toggleDroneMute(this)" title="ปิด/เปิดเสียงเพลง">🔊</button>
   </span>
+</div>
+
+<!-- EMBED-MODE HEADER — only shown when loaded as ?embed=1 (see .embed-header CSS) -->
+<div class="embed-header">
+  <span>👴🏻</span>
+  <a href="https://coolunclelab.com/" target="_top">Cool Uncle Legal Lab</a>
+  <span>· ประมวลกฎหมาย</span>
 </div>
 <audio id="horror-bgm" loop preload="auto" playsinline webkit-playsinline style="display:none">
   <source src="music/The_Cold_Stream_Lament.mp3" type="audio/mpeg">
@@ -903,6 +925,13 @@ const requestedTab = new URLSearchParams(location.search).get('tab');
 if (requestedTab && document.getElementById('tab-' + requestedTab)) {
   switchTab(requestedTab);
   document.querySelector(`.tab-btn[onclick="switchTab('${requestedTab}')"]`)?.classList.add('active');
+}
+
+// Embed mode (?embed=1) — used by ประมวล.com's iframe wrapper so it reads as
+// its own focused page (see .embed-header / body.embed-mode CSS) instead of
+// the full homepage with a tab merely pre-selected.
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.body.classList.add('embed-mode');
 }
 </script>
 <script>
