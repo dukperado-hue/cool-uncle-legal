@@ -945,6 +945,45 @@ plain flat light-gray background, no text.
 
 ---
 
+## 2h. Three more characters (added 2026-08-02, same session): ซ้อกาด + 2 gender-diversity remixes
+
+**`saw_kad`** — the long-queued 16th batch-2 character, finally generated. Brief
+per the user's original clarification (petite, pretty young woman, generic
+build, no real-person/IP reference): "ซ้อกาด", adult, small slender build,
+long dark hair worn loose, simple everyday casual outfit (soft-colored blouse
+and jeans), warm friendly expression. Clean sheet, no issues. Original design,
+not a remix.
+
+**Two gender-diversity remixes**, prompted by noticing batch 3's professional
+roles (doctor, employer, employee, landlord, tenant, driver, civil_servant,
+estate_agent) render entirely male-presenting except `wife`. Both use the
+section 2g remix technique (describe the base archetype in words, list
+concrete differences, require a visually distinct result):
+
+- **`civil_servant_female`** — "ข้าราชการหญิง", remixed from `civil_servant`'s
+  khaki-uniform bureaucratic archetype, but hair in a neat bun, a fitted khaki
+  blouse+skirt (not trousers), holding a folder. Clean on first attempt.
+- **`driver_female`** — "คนขับรถหญิง", remixed from `driver`'s casual-driver
+  archetype, ponytail, light-colored blouse, worried expression.
+  **First attempt failed the standing-idle convention**: including
+  "gripping-a-steering-wheel gesture" in the brief made Gemini render a
+  literal seated driving pose (sitting, hands gripping an implied wheel)
+  instead of the standing neutral pose every other character sheet uses —
+  broke consistency with the rest of the pool. Fixed by re-sending in the
+  same chat: explicitly said the previous pose was wrong, required "STANDING
+  upright in a plain neutral idle pose — do NOT show her sitting, do NOT show
+  a steering wheel or car", worked cleanly on retry. **Lesson: avoid
+  action/prop gestures like "gripping a steering wheel" in turnaround briefs
+  even for driver-type characters — describe the demeanor/expression instead
+  (e.g. "alert, slightly anxious") and let action context happen at the
+  scenario-beat level, not in the base reference sheet.**
+
+All three saved to `pics/game/character-sheets/{saw_kad,civil_servant_female,driver_female}.png`,
+added to `SPRITES` in `game-crimlaw-scenario.html` (emoji/color placeholders,
+no portraits/standees yet). Not named in-story or cast into any scenario yet.
+
+---
+
 ## 8. Item props (Track C — simple prop icons, added 2026-08-02)
 
 Small reusable prop images for scenario beats (a weapon shown in a charge, a
