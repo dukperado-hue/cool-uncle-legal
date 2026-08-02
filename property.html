@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;900&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-<style>
 :root{
   --paper:#FBF9F4;
   --card:#FDFCF8;
@@ -23,26 +22,34 @@
   --bad:#B23A3A;
   --bad-bg:#FBEAEA;
   --accent:#2E4A7A;
+  --accent-soft:#EEF2F9;
   --radius:14px;
   --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+  --hero-glow:#F2EDDF;
+  --on-light-ink:#22283A;
+  --on-light-ink-soft:#5A6072;
+  --on-light-ink-faint:#9AA0B0;
 }
 
 /* ============ THEME: DARK ============ */
 :root[data-theme="dark"]{
   --paper:#14161f;--card:#1c2030;--ink:#E9E7E1;--ink-soft:#A9AEC2;--ink-faint:#6C7188;
   --line:#2E3348;--gold:#E0BD73;--gold-soft:#3A3320;--ok:#4FCB8D;--ok-bg:#173425;
-  --bad:#E2685F;--bad-bg:#3A1E1C;--accent:#84A6E8;
+  --bad:#E2685F;--bad-bg:#3A1E1C;--accent:#84A6E8;--accent-soft:#22304F;
   --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.45);
+  --hero-glow:#232742;
 }
 /* ============ THEME: HORROR (กระสือ mode) ============ */
 :root[data-theme="horror"]{
   --paper:#0A070C;--card:#151019;--ink:#D9D2C9;--ink-soft:#9C8F93;--ink-faint:#5C5460;
   --line:#2B1F26;--gold:#8F1F2B;--gold-soft:#301418;--ok:#3F7A4F;--ok-bg:#16241a;
-  --bad:#FF3355;--bad-bg:#301018;--accent:#4A8F5C;
+  --bad:#FF3355;--bad-bg:#301018;--accent:#4A8F5C;--accent-soft:#132A1A;
   --shadow:0 1px 2px rgba(0,0,0,.6),0 10px 28px rgba(0,0,0,.6);
+  --hero-glow:#1E1015;
 }
 :root[data-theme="dark"] body,:root[data-theme="horror"] body{background:var(--paper)}
 :root[data-theme="dark"] .home-bar,:root[data-theme="horror"] .home-bar{background:var(--card);border-bottom-color:var(--line)}
+:root[data-theme="dark"] .tabbar,:root[data-theme="horror"] .tabbar{background:var(--paper)}
 
 /* THEME TOGGLE */
 .theme-toggle{display:flex;gap:3px;margin-left:auto;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
@@ -106,7 +113,7 @@ html{-webkit-text-size-adjust:100%}
 .home-bar-sep{color:var(--ink-faint)}
 .home-bar-current{font-weight:600;color:var(--ink-soft)}
 .home-bar-score{
-  margin-left:auto;font-weight:800;color:#8F6511;background:var(--gold-soft);
+  margin-left:auto;font-weight:800;color:#8F6511;background:#F3E8CF;
   padding:4px 12px;border-radius:999px;font-size:13px;white-space:nowrap;
   transition:transform .15s;
 }
@@ -120,7 +127,7 @@ html{-webkit-text-size-adjust:100%}
 body{
   font-family:'Sarabun',system-ui,sans-serif;
   background:
-    radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),
+    radial-gradient(1200px 500px at 50% -200px, var(--hero-glow) 0%, transparent 60%),
     var(--paper);
   color:var(--ink);
   min-height:100vh;
@@ -197,8 +204,8 @@ body.has-sticky-bar{padding-bottom:92px}
 .irac-case-card .icprog{font-size:12.5px;color:var(--gold);margin-top:6px;font-weight:600}
 
 .irac-facts{
-  background:#FBF6E8;border:1px solid var(--gold-soft);border-radius:var(--radius);
-  padding:14px 16px;margin-bottom:6px;font-size:15px;line-height:1.85;color:var(--ink);
+  background:#FBF6E8;border:1px solid #F0D896;border-radius:var(--radius);
+  padding:14px 16px;margin-bottom:6px;font-size:15px;line-height:1.85;color:var(--on-light-ink);
   max-height:92px;overflow:hidden;position:relative;
 }
 .irac-facts::after{
@@ -208,14 +215,14 @@ body.has-sticky-bar{padding-bottom:92px}
 .irac-facts.expanded{max-height:none}
 .irac-facts.expanded::after{display:none}
 .irac-facts-toggle{
-  display:block;width:100%;text-align:center;font-size:13px;color:var(--accent);font-weight:600;
+  display:block;width:100%;text-align:center;font-size:13px;color:#2E4A7A;font-weight:600;
   background:none;border:none;padding:5px 0 14px;cursor:pointer;
 }
 
 .irac-stepper{display:flex;gap:5px;margin-bottom:8px}
 .irac-step{
-  flex:1;text-align:center;font-size:11px;font-weight:600;color:var(--ink-faint);
-  padding:5px 2px;border-radius:8px;background:#EEEBE0;border:1px solid transparent;
+  flex:1;text-align:center;font-size:11px;font-weight:600;color:var(--ink-soft);
+  padding:5px 2px;border-radius:8px;background:var(--line);border:1px solid transparent;
 }
 .irac-step.active{background:var(--accent);color:#fff}
 .irac-step.done{background:var(--ok-bg);color:var(--ok);border-color:#BFE3CE}
@@ -226,9 +233,9 @@ body.has-sticky-bar{padding-bottom:92px}
 
 .irac-issue-recap{
   background:var(--ok-bg);border:1px solid #BFE3CE;border-radius:var(--radius);
-  padding:16px 18px;text-align:center;
+  padding:16px 18px;text-align:center;color:var(--ink);
 }
-.irac-issue-recap .big{font-family:'Noto Serif Thai',serif;font-size:18px;font-weight:700;color:#14563A;margin-bottom:6px}
+.irac-issue-recap .big{font-family:'Noto Serif Thai',serif;font-size:18px;font-weight:700;color:var(--ok);margin-bottom:6px}
 
 /* ---------- stage banner (แถบธีมตามหมวด แทน SVG scene) ---------- */
 .stage{
@@ -331,7 +338,7 @@ select{
   flex:1;border:1.5px solid var(--line);background:var(--card);border-radius:12px;
   padding:12px 8px;font-size:14.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
 }
-.lvlbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.lvlbar button.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
 .lvlbar .lvl-desc{display:block;font-size:12px;font-weight:400;color:var(--ink-faint);margin-top:2px}
 .lvlbar button.on .lvl-desc{color:var(--accent)}
 
@@ -341,14 +348,14 @@ select{
   padding:7px 15px;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
   display:inline-flex;align-items:center;gap:6px;
 }
-.setbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.setbar button.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
 .setbar .best{color:var(--gold);font-size:12px;font-weight:700}
 
-.progressbar{height:6px;background:#EDE9DD;border-radius:99px;overflow:hidden;margin-bottom:8px}
+.progressbar{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:8px}
 .progressbar>div{height:100%;background:linear-gradient(90deg,var(--accent),#5E7BB0);border-radius:99px;transition:width .3s}
 .quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:14px;gap:10px}
 .quiz-timer{
-  font-weight:700;color:var(--ink-soft);background:#EEEBE0;border-radius:999px;
+  font-weight:700;color:var(--ink-soft);background:var(--line);border-radius:999px;
   padding:3px 10px;font-size:13px;white-space:nowrap;
 }
 .quiz-timer.timer-fast{background:var(--ok-bg);color:var(--ok)}
@@ -382,8 +389,8 @@ select{
   display:none;margin-top:14px;border-radius:12px;padding:16px 18px;
   font-size:15px;line-height:1.85;border:1px solid;
 }
-.explain.ok{background:var(--ok-bg);border-color:#BFE3CE;color:#14563A}
-.explain.bad{background:var(--bad-bg);border-color:#F0C9C9;color:#7C2A2A}
+.explain.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.explain.bad{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
 .explain b{display:block;margin-bottom:4px;font-size:15.5px}
 .pts-earned{
   display:inline-block;background:var(--gold);color:#fff;font-weight:800;
@@ -471,8 +478,8 @@ footer{
 .study-content th,.study-content td{
   border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;
 }
-.study-content th{background:var(--gold-soft);color:#5A4415;font-weight:700}
-.study-content tr:nth-child(even) td{background:#FBF9F3}
+.study-content th{background:var(--gold-soft);color:var(--ink);font-weight:700}
+.study-content tr:nth-child(even) td{background:rgba(176,138,60,.08)}
 @media(max-width:640px){
   .tabbar{flex-wrap:wrap;border-radius:16px;max-width:100%}
   .tabbar button{flex:1 1 30%}
@@ -495,7 +502,7 @@ footer{
 /* Header score badge (moved from removed home-bar) */
 .header-score{
   position:absolute;top:14px;right:14px;
-  background:var(--gold-soft);color:#7A5A0A;
+  background:#F3E8CF;color:#7A5A0A;
   padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700;
   border:1px solid #E5C87A;
 }
@@ -523,7 +530,7 @@ footer{
 .seq-card.is-back{box-shadow:0 2px 4px rgba(34,40,58,.06),0 10px 26px rgba(34,40,58,.1)}
 .seq-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
 .seq-num{
-  font-family:'Noto Serif Thai',serif;font-weight:700;color:var(--ink-faint);
+  font-family:'Noto Serif Thai',serif;font-weight:700;color:#5A6072;
   background:#EEF2F9;border-radius:999px;width:24px;height:24px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;font-size:12.5px;padding-top:0;min-width:24px;
 }
@@ -567,7 +574,7 @@ footer{
 .tts-btn-ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
 .tts-btn-ghost:hover{border-color:var(--bad);color:var(--bad)}
 .tts-ico{font-size:11px}
-.tts-rate{font-size:12.5px;color:var(--ink-soft);margin-left:auto;display:inline-flex;align-items:center;gap:6px}
+.tts-rate{font-size:12.5px;color:#5A6072;margin-left:auto;display:inline-flex;align-items:center;gap:6px}
 .tts-rate select{
   background:var(--card);border:1px solid var(--line);border-radius:6px;
   padding:5px 8px;font-family:inherit;font-size:12.5px;cursor:pointer;
@@ -587,14 +594,14 @@ footer{
   margin-bottom:22px;padding:12px 14px;background:#F8F5EC;
   border:1px solid var(--line);border-radius:10px;
 }
-.study-toc-title{font-size:12px;font-weight:700;color:var(--ink-faint);letter-spacing:.05em;margin-bottom:6px;text-transform:uppercase}
+.study-toc-title{font-size:12px;font-weight:700;color:#9AA0B0;letter-spacing:.05em;margin-bottom:6px;text-transform:uppercase}
 .study-toc a{
-  display:block;padding:6px 10px;font-size:14px;color:var(--accent);
+  display:block;padding:6px 10px;font-size:14px;color:#2E4A7A;
   text-decoration:none;border-radius:6px;
 }
 .study-toc a:hover{background:#EEF2F9}
 .study-toc a.toc-major{font-weight:700}
-.study-toc a.toc-item{padding-left:24px;font-weight:500;color:var(--ink-soft);font-size:13.5px}
+.study-toc a.toc-item{padding-left:24px;font-weight:500;color:#5A6072;font-size:13.5px}
 .study-panel h4{
   font-family:'Noto Serif Thai',serif;font-size:17.5px;font-weight:700;
   margin:32px 0 12px;scroll-margin-top:20px;color:var(--ink);
@@ -612,10 +619,27 @@ footer{
   padding:20px 22px;margin:22px 0;
 }
 .study-exam-box h5{margin-top:0;color:#8A6A25;font-size:15px;border-left:none;padding-left:0}
-.study-exam-box p{font-size:14.5px;line-height:1.9;color:var(--ink-soft);margin:10px 0}
-.study-exam-box ul,.study-exam-box ol{font-size:14.5px;line-height:1.9;color:var(--ink-soft);margin:10px 0 10px 22px}
+.study-exam-box p{font-size:14.5px;line-height:1.9;color:#5A6072;margin:10px 0}
+.study-exam-box ul,.study-exam-box ol{font-size:14.5px;line-height:1.9;color:#5A6072;margin:10px 0 10px 22px}
 .study-exam-box li{margin-bottom:6px}
 .study-progress{font-size:13px;color:var(--ink-faint);margin-bottom:12px}
+
+/* ---------- มาตราซ่อนแอบ: คลิกมาตราในโหมดสรุปเนื้อหาเพื่อดูตัวบทเต็ม ---------- */
+.art-ref{
+  font-weight:700;text-decoration:underline;text-underline-offset:2px;
+  color:var(--accent);cursor:pointer;
+}
+.art-ref:hover{opacity:.78}
+.art-ref.active{opacity:.78}
+.art-full{
+  display:none;margin:8px 0;padding:12px 14px;background:var(--gold-soft);
+  border-left:3px solid var(--gold);border-radius:8px;font-size:13.5px;
+  line-height:1.8;color:var(--ink);white-space:pre-line;
+}
+.art-full.open{display:block}
+.art-full .art-full-num{color:var(--accent);display:block;margin-bottom:4px;font-size:13px;font-weight:700}
+.art-full .art-full-item{margin-top:10px}
+.art-full .art-full-item:first-child{margin-top:0}
 
 /* TTS currently-reading highlight */
 .tts-reading{background:linear-gradient(120deg,#FFF3C7 0%,#FFEFB0 100%);border-radius:4px;padding:2px 4px;transition:background .2s}
@@ -810,7 +834,7 @@ function playHoverSound(){
     <div id="irac-recap-box" style="display:none">
       <div class="irac-issue-recap">
         <div class="big" id="irac-recap-title"></div>
-        <div id="irac-recap-text" style="font-size:14.5px;line-height:1.8;color:#14563A"></div>
+        <div id="irac-recap-text" style="font-size:14.5px;line-height:1.8;color:var(--ok)"></div>
       </div>
     </div>
   </div>
@@ -1397,6 +1421,9 @@ const IRAC_CASES = [
 ];
 
 
+
+/* มาตราซ่อนแอบ — ตัวบทมาตราเต็มของทุกมาตราที่ถูกอ้างถึงใน SUMMARY_TOPICS (จาก ป.พ.พ. จริง) */
+const ARTICLE_TEXT = {"137":"ทรัพย์ หมายความว่า วัตถุมีรูปร่าง","138":"ทรัพย์สิน หมายความรวมทั้งทรัพย์และวัตถุไม่มีรูปร่าง ซึ่งอาจมีราคาและอาจถือเอาได้","139":"อสังหาริมทรัพย์ หมายความว่า ที่ดินและทรัพย์อันติดอยู่กับที่ดินมีลักษณะเป็นการถาวรหรือประกอบเป็นอันเดียวกับที่ดินนั้น และหมายความรวมถึงทรัพยสิทธิอันเกี่ยวกับที่ดิน หรือทรัพย์อันติดอยู่กับที่ดินหรือประกอบเป็นอันเดียวกับที่ดินนั้นด้วย","140":"สังหาริมทรัพย์ หมายความว่า ทรัพย์สินอื่นนอกจากอสังหาริมทรัพย์ และหมายความรวมถึงสิทธิอันเกี่ยวกับทรัพย์สินนั้นด้วย","141":"ทรัพย์แบ่งได้ หมายความว่า ทรัพย์อันอาจแยกออกจากกันเป็นส่วน ๆ ได้จริงถนัดชัดแจ้ง แต่ละส่วนได้รูปบริบูรณ์ลำพังตัว","142":"ทรัพย์แบ่งไม่ได้ หมายความว่า ทรัพย์อันจะแยกออกจากกันไม่ได้นอกจากเปลี่ยนแปลงภาวะของทรัพย์ และหมายความรวมถึงทรัพย์ที่มีกฎหมายบัญญัติว่าแบ่งไม่ได้ด้วย","143":"ทรัพย์นอกพาณิชย์ หมายความว่า ทรัพย์ที่ไม่สามารถถือเอาได้และทรัพย์ที่โอนแก่กันมิได้โดยชอบด้วยกฎหมาย","144":"ส่วนควบของทรัพย์ หมายความว่า ส่วนซึ่งโดยสภาพแห่งทรัพย์หรือโดยจารีตประเพณีแห่งท้องถิ่นเป็นสาระสำคัญในความเป็นอยู่ของทรัพย์นั้น และไม่อาจแยกจากกันได้นอกจากจะทำลาย ทำให้บุบสลาย หรือทำให้ทรัพย์นั้นเปลี่ยนแปลงรูปทรงหรือสภาพไป\nเจ้าของทรัพย์ย่อมมีกรรมสิทธิ์ในส่วนควบของทรัพย์นั้น","145":"ไม้ยืนต้นเป็นส่วนควบกับที่ดินที่ไม้นั้นขึ้นอยู่ ไม้ล้มลุกหรือธัญชาติอันจะเก็บเกี่ยวรวงผลได้คราวหนึ่งหรือหลายคราวต่อปีไม่เป็นส่วนควบกับที่ดิน","146":"ทรัพย์ซึ่งติดกับที่ดินหรือติดกับโรงเรือนเพียงชั่วคราวไม่ถือว่าเป็นส่วนควบกับที่ดินหรือโรงเรือนนั้น ความข้อนี้ให้ใช้บังคับแก่โรงเรือนหรือสิ่งปลูกสร้างอย่างอื่น ซึ่งผู้มีสิทธิในที่ดินของผู้อื่นใช้สิทธินั้นปลูกสร้างไว้ในที่ดินนั้นด้วย","147":"อุปกรณ์ หมายความว่า สังหาริมทรัพย์ซึ่งโดยปกตินิยมเฉพาะถิ่นหรือโดยเจตนาชัดแจ้งของเจ้าของทรัพย์ที่เป็นประธาน เป็นของใช้ประจำอยู่กับทรัพย์ที่เป็นประธานเป็นอาจิณเพื่อประโยชน์แก่การจัดดูแล ใช้สอย หรือรักษาทรัพย์ที่เป็นประธาน และเจ้าของทรัพย์ได้นำมาสู่ทรัพย์ที่เป็นประธานโดยการนำมาติดต่อหรือปรับเข้าไว้ หรือทำโดยประการอื่นใดในฐานะเป็นของใช้ประกอบกับทรัพย์ที่เป็นประธานนั้น\nอุปกรณ์ที่แยกออกจากทรัพย์ที่เป็นประธานเป็นการชั่วคราวก็ยังไม่ขาดจากการเป็นอุปกรณ์ของทรัพย์ที่เป็นประธานนั้น\nอุปกรณ์ย่อมตกติดไปกับทรัพย์ที่เป็นประธาน เว้นแต่จะมีการกำหนดไว้เป็นอย่างอื่น","148":"ดอกผลของทรัพย์ ได้แก่ ดอกผลธรรมดาและดอกผลนิตินัย\nดอกผลธรรมดา หมายความว่า สิ่งที่เกิดขึ้นตามธรรมชาติของทรัพย์ ซึ่งได้มาจากตัวทรัพย์ โดยการมีหรือใช้ทรัพย์นั้นตามปกตินิยม และสามารถถือเอาได้เมื่อขาดจากทรัพย์นั้น\nดอกผลนิตินัย หมายความว่า ทรัพย์หรือประโยชน์อย่างอื่นที่ได้มาเป็นครั้งคราวแก่เจ้าของทรัพย์จากผู้อื่นเพื่อการที่ได้ใช้ทรัพย์นั้น และสามารถคำนวณและถือเอาได้เป็นรายวันหรือตามระยะเวลาที่กำหนดไว้","1298":"ทรัพยสิทธิทั้งหลายนั้น ท่านว่าจะก่อตั้งขึ้นได้แต่ด้วยอาศัยอำนาจในประมวลกฎหมายนี้หรือกฎหมายอื่น","1299":"ภายในบังคับแห่งบทบัญญัติในประมวลกฎหมายนี้หรือกฎหมายอื่นท่านว่าการได้มาโดยนิติกรรมซึ่งอสังหาริมทรัพย์หรือทรัพยสิทธิอันเกี่ยวกับอสังหาริมทรัพย์นั้นไม่บริบูรณ์ เว้นแต่นิติกรรมจะได้ทำเป็นหนังสือและได้จดทะเบียนการได้มากับพนักงานเจ้าหน้าที่ ถ้ามีผู้ได้มาซึ่งอสังหาริมทรัพย์หรือทรัพยสิทธิอันเกี่ยวกับอสังหาริมทรัพย์โดยทางอื่นนอกจากนิติกรรม สิทธิของผู้ได้มานั้น ถ้ายังมิได้จดทะเบียนไซร้ ท่านว่าจะมีการเปลี่ยนแปลงทางทะเบียนไม่ได้ และสิทธิอันยังมิได้จดทะเบียนนั้น มิให้ยกขึ้นเป็นข้อต่อสู้บุคคลภายนอกผู้ได้สิทธิมาโดยเสียค่าตอบแทนและโดยสุจริต และได้จดทะเบียนสิทธิโดยสุจริตแล้ว","1300":"ถ้าได้จดทะเบียนการโอนอสังหาริมทรัพย์หรือทรัพยสิทธิอันเกี่ยวกับอสังหาริมทรัพย์เป็นทางเสียเปรียบแก่บุคคลผู้อยู่ในฐานะอันจะให้จดทะเบียนสิทธิของตนได้อยู่ก่อนไซร้ ท่านว่าบุคคลนั้นอาจเรียกให้เพิกถอนการจดทะเบียนนั้นได้ แต่การโอนอันมีค่าตอบแทน ซึ่งผู้รับโอนกระทำการโดยสุจริตนั้น ไม่ว่ากรณีจะเป็นประการใด ท่านว่าจะเรียกให้เพิกถอนทะเบียนไม่ได้","1302":"บทบัญญัติแห่งสามมาตราก่อนนี้ ให้ใช้บังคับถึงเรือมีระวางตั้งแต่ห้าตันขึ้นไป ทั้งแพและสัตว์พาหนะด้วยโดยอนุโลม","1303":"ถ้าบุคคลหลายคนเรียกเอาสังหาริมทรัพย์เดียวกัน โดยอาศัยหลักกรรมสิทธิ์ต่างกันไซร้ ท่านว่าทรัพย์สินตกอยู่ในครอบครองของบุคคลใด บุคคลนั้นมีสิทธิยิ่งกว่าบุคคลอื่น ๆ แต่ต้องได้ทรัพย์นั้นมาโดยมีค่าตอบแทนและได้การครอบครองโดยสุจริต ท่านมิให้ใช้มาตรานี้บังคับถึงสังหาริมทรัพย์ซึ่งระบุไว้ในมาตราก่อนและในเรื่องทรัพย์สินหาย กับทรัพย์สินที่ได้มาโดยการกระทำผิด","1304":"สาธารณสมบัติของแผ่นดินนั้น รวมทรัพย์สินทุกชนิดของแผ่นดินซึ่งใช้เพื่อสาธารณประโยชน์หรือสงวนไว้เพื่อประโยชน์ร่วมกัน เช่น\n(๑) ที่ดินรกร้างว่างเปล่า และที่ดินซึ่งมีผู้เวนคืนหรือทอดทิ้งหรือกลับมาเป็นของแผ่นดินโดยประการอื่น ตามกฎหมายที่ดิน\n(๒) ทรัพย์สินสำหรับพลเมืองใช้ร่วมกัน เป็นต้นว่า ที่ชายตลิ่ง ทางน้ำ ทางหลวง ทะเลสาบ\n(๓) ทรัพย์สินใช้เพื่อประโยชน์ของแผ่นดินโดยเฉพาะ เป็นต้นว่า ป้อมและโรงทหาร สำนักราชการบ้านเมือง เรือรบ อาวุธยุทธภัณฑ์","1305":"ทรัพย์สินซึ่งเป็นสาธารณสมบัติของแผ่นดินนั้นจะโอนแก่กันมิได้ เว้นแต่อาศัยอำนาจแห่งบทกฎหมายเฉพาะหรือพระราชกฤษฎีกา","1306":"ท่านห้ามมิให้ยกอายุความขึ้นเป็นข้อต่อสู้กับแผ่นดินในเรื่องทรัพย์สินอันเป็นสาธารณสมบัติของแผ่นดิน","1307":"ท่านห้ามมิให้ยึดทรัพย์สินของแผ่นดินไม่ว่าทรัพย์สินนั้นจะเป็นสาธารณสมบัติของแผ่นดินหรือไม่","1308":"ที่ดินแปลงใดเกิดที่งอกริมตลิ่ง ที่งอกย่อมเป็นทรัพย์สินของเจ้าของที่ดินแปลงนั้น","1310":"บุคคลใดสร้างโรงเรือนในที่ดินของผู้อื่นโดยสุจริตไซร้ ท่านว่าเจ้าของที่ดินเป็นเจ้าของโรงเรือนนั้น ๆ แต่ต้องใช้ค่าแห่งที่ดินเพียงที่เพิ่มขึ้นเพราะสร้างโรงเรือนนั้นให้แก่ผู้สร้าง\nแต่ถ้าเจ้าของที่ดินสามารถแสดงได้ว่า มิได้มีความประมาทเลินเล่อ จะบอกปัดไม่ยอมรับโรงเรือนนั้นและเรียกให้ผู้สร้างรื้อถอนไป และทำที่ดินให้เป็นตามเดิมก็ได้ เว้นไว้แต่ถ้าการนี้จะทำไม่ได้โดยใช้เงินพอสมควรไซร้ ท่านว่าเจ้าของที่ดินจะเรียกให้ผู้สร้างซื้อที่ดินทั้งหมดหรือแต่บางส่วนตามราคาตลาดก็ได้","1311":"บุคคลใดสร้างโรงเรือนในที่ดินของผู้อื่นโดยไม่สุจริตไซร้ ท่านว่าบุคคลนั้นต้องทำที่ดินให้เป็นตามเดิมแล้วส่งคืนเจ้าของ เว้นแต่เจ้าของจะเลือกให้ส่งคืนตามที่เป็นอยู่ ในกรณีเช่นนี้เจ้าของที่ดินต้องใช้ราคาโรงเรือนหรือใช้ค่าแห่งที่ดินเพียงที่เพิ่มขึ้นเพราะสร้างโรงเรือน นั้นแล้วแต่จะเลือก","1312":"บุคคลใดสร้างโรงเรือนรุกล้ำเข้าไปในที่ดินของผู้อื่นโดยสุจริตไซร้ ท่านว่าบุคคลนั้นเป็นเจ้าของโรงเรือนที่สร้างขึ้น แต่ต้องเสียเงินให้แก่เจ้าของที่ดินเป็นค่าใช้ที่ดินนั้น และจดทะเบียนสิทธิเป็นภาระจำยอม ต่อภายหลังถ้าโรงเรือนนั้นสลายไปทั้งหมด เจ้าของที่ดินจะเรียกให้เพิกถอนการจดทะเบียนเสียก็ได้\nถ้าบุคคลผู้สร้างโรงเรือนนั้นกระทำการโดยไม่สุจริต ท่านว่าเจ้าของที่ดินจะเรียกให้ผู้สร้างรื้อถอนไป และทำที่ดินให้เป็นตามเดิมโดยผู้สร้างเป็นผู้ออกค่าใช้จ่ายก็ได้","1316":"ถ้าเอาสังหาริมทรัพย์ของบุคคลหลายคนมารวมเข้ากันจนเป็นส่วนควบหรือแบ่งแยกไม่ได้ไซร้ ท่านว่าบุคคลเหล่านั้นเป็นเจ้าของรวมแห่งทรัพย์ที่รวมเข้ากัน แต่ละคนมีส่วนตามค่าแห่งทรัพย์ของตนในเวลาที่รวมเข้ากับทรัพย์อื่น\nถ้าทรัพย์อันหนึ่งอาจถือได้ว่าเป็นทรัพย์ประธานไซร้ ท่านว่าเจ้าของทรัพย์นั้นเป็นเจ้าของทรัพย์ที่รวมเข้ากันแต่ผู้เดียว แต่ต้องใช้ค่าแห่งทรัพย์อื่น ๆ ให้แก่เจ้าของทรัพย์นั้น ๆ","1317":"บุคคลใดใช้สัมภาระของบุคคลอื่นทำสิ่งใดขึ้นใหม่ไซร้ ท่านว่าเจ้าของสัมภาระเป็นเจ้าของสิ่งนั้นโดยมิต้องคำนึงว่าสัมภาระนั้นจะกลับคืนตามเดิมได้หรือไม่ แต่ต้องใช้ค่าแรงงาน\nแต่ถ้าค่าแรงงานเกินกว่าค่าสัมภาระที่ใช้นั้นมากไซร้ ท่านว่าผู้ทำเป็นเจ้าของทรัพย์ที่ทำขึ้น แต่ต้องใช้ค่าสัมภาระ","1323":"บุคคลเก็บได้ซึ่งทรัพย์สินหาย ต้องทำอย่างหนึ่งอย่างใดดังต่อไปนี้\n(๑) ส่งมอบทรัพย์สินนั้นแก่ผู้ของหายหรือเจ้าของ หรือบุคคลอื่นผู้มีสิทธิจะรับทรัพย์สินนั้น หรือ\n(๒) แจ้งแก่ผู้ของหายหรือเจ้าของ หรือบุคคลอื่นผู้มีสิทธิจะรับทรัพย์สินนั้นโดยมิชักช้า หรือ\n(๓) ส่งมอบทรัพย์สินนั้นแก่เจ้าพนักงานตำรวจ หรือพนักงานเจ้าหน้าที่อื่นภายในสามวันและแจ้งพฤติการณ์ตามที่ทราบอันอาจเป็นเครื่องช่วยในการสืบหาตัวบุคคลผู้มีสิทธิจะรับทรัพย์สินนั้น\nแต่ถ้าไม่ทราบตัวผู้ของหาย เจ้าของ หรือบุคคลอื่นผู้มีสิทธิจะรับทรัพย์สินก็ดี หรือบุคคลดังระบุนั้นไม่รับมอบทรัพย์สินก็ดี ท่านให้ดำเนินการตามวิธีอันบัญญัติไว้ในอนุมาตรา (๓)\nทั้งนี้ ท่านว่าผู้เก็บได้ซึ่งทรัพย์สินหายต้องรักษาทรัพย์สินนั้นไว้ด้วยความระมัดระวังอันสมควรจนกว่าจะส่งมอบ","1324":"ผู้เก็บได้ซึ่งทรัพย์สินหาย อาจเรียกร้องเอารางวัลจากบุคคลผู้มีสิทธิจะรับทรัพย์สินนั้นเป็นจำนวนร้อยละสิบแห่งค่าทรัพย์สินภายในราคาสามหมื่นบาท และถ้าราคาสูงกว่านั้นขึ้นไปให้คิดให้อีกร้อยละห้าในจำนวนที่เพิ่มขึ้น แต่ถ้าผู้เก็บได้ซึ่งทรัพย์สินหายได้ส่งมอบทรัพย์สินแก่เจ้าพนักงานตำรวจหรือพนักงานเจ้าหน้าที่อื่น ให้เสียเงินอีกร้อยละสองครึ่งแห่งค่าทรัพย์สินเป็นค่าธรรมเนียมแก่ทบวงการนั้น ๆ เพิ่มขึ้นเป็นส่วนหนึ่งต่างหากจากรางวัลซึ่งให้แก่ผู้เก็บได้ แต่ค่าธรรมเนียมนี้ให้จำกัดไว้ไม่เกินหนึ่งพันบาท\nถ้าผู้เก็บได้ซึ่งทรัพย์สินหายมิได้ปฏิบัติตามบทบัญญัติในมาตราก่อนไซร้ท่านว่าผู้นั้นไม่มีสิทธิจะรับรางวัล","1325":"ถ้าผู้เก็บได้ซึ่งทรัพย์สินหายได้ปฏิบัติตามบทบัญญัติมาตรา ๑๓๒๓ แล้ว และผู้มีสิทธิจะรับทรัพย์สินนั้นมิได้เรียกเอาภายในหนึ่งปีนับแต่วันที่เก็บได้ไซร้ ท่านว่ากรรมสิทธิ์ตกแก่ผู้เก็บได้ แต่ถ้าทรัพย์สินซึ่งไม่มีผู้เรียกเอานั้นเป็นโบราณวัตถุไซร้ กรรมสิทธิ์แห่งทรัพย์สินนั้นตกแก่แผ่นดิน แต่ผู้เก็บได้มีสิทธิจะได้รับรางวัลร้อยละสิบแห่งค่าทรัพย์สินนั้น","1326":"การเก็บได้ซึ่งทรัพย์สินอันตกหรือทิ้งทะเล หรือทางน้ำ หรือน้ำซัดขึ้นฝั่งนั้น ท่านให้บังคับตามกฎหมายและกฎข้อบังคับว่าด้วยการนั้น","1327":"ภายในบังคับแห่งกฎหมายอาชญา กรรมสิทธิ์แห่งสิ่งใด ๆ ซึ่งได้ใช้ในการกระทำผิด หรือได้มาโดยการกระทำผิด หรือเกี่ยวกับการกระทำผิดโดยประการอื่น และได้ส่งไว้ในความรักษาของกรมในรัฐบาลนั้น ท่านว่าตกเป็นของแผ่นดิน ถ้าเจ้าของมิได้เรียกเอาภายในหนึ่งปีนับแต่วันส่ง หรือถ้าได้ฟ้องคดีอาชญาต่อศาลแล้วนับแต่วันที่คำพิพากษาถึงที่สุด แต่ถ้าไม่ทราบตัวเจ้าของ ท่านให้ผ่อนเวลาออกไปเป็นห้าปี\nถ้าทรัพย์สินเป็นของเสียง่าย หรือถ้าหน่วงช้าไว้จะเป็นการเสี่ยงความเสียหายหรือค่าใช้จ่ายจะเกินส่วนกับค่าของทรัพย์สินนั้นไซร้ ท่านว่ากรมในรัฐบาลจะจัดให้เอาออกขายทอดตลาดก่อนถึงกำหนดก็ได้ แต่ก่อนที่จะขายให้จัดการตามควรเพื่อบันทึกรายการอันเป็นเครื่องให้บุคคลผู้มีสิทธิจะรับทรัพย์สินนั้นอาจทราบว่าเป็นทรัพย์สินของตนและพิสูจน์สิทธิได้ เมื่อขายแล้วได้เงินเป็นจำนวนสุทธิเท่าใดให้ถือไว้แทนตัวทรัพย์สิน","1329":"สิทธิของบุคคลผู้ได้มาซึ่งทรัพย์สินโดยมีค่าตอบแทนและโดยสุจริตนั้น ท่านว่ามิเสียไป ถึงแม้ว่าผู้โอนทรัพย์สินให้จะได้ทรัพย์สินนั้นมาโดยนิติกรรมอันเป็นโมฆียะ และนิติกรรมนั้นได้ถูกบอกล้างภายหลัง","1330":"สิทธิของบุคคลผู้ซื้อทรัพย์สินโดยสุจริตในการขายทอดตลาดตามคำสั่งศาล หรือคำสั่งเจ้าพนักงานรักษาทรัพย์ในคดีล้มละลายนั้น ท่านว่ามิเสียไป ถึงแม้ภายหลังจะพิสูจน์ได้ว่าทรัพย์สินนั้นมิใช่ของจำเลย หรือลูกหนี้โดยคำพิพากษา หรือผู้ล้มละลาย","1331":"สิทธิของบุคคลผู้ได้เงินตรามาโดยสุจริตนั้น ท่านว่ามิเสียไป ถึงแม้ภายหลังจะพิสูจน์ได้ว่าเงินนั้นมิใช่ของบุคคลซึ่งได้โอนให้มา","1332":"บุคคลผู้ซื้อทรัพย์สินมาโดยสุจริตในการขายทอดตลาด หรือในท้องตลาด หรือจากพ่อค้าซึ่งขายของชนิดนั้น ไม่จำต้องคืนให้แก่เจ้าของแท้จริง เว้นแต่เจ้าของจะชดใช้ราคาที่ซื้อมา","1335":"ภายในบังคับแห่งบทบัญญัติในประมวลกฎหมายนี้หรือกฎหมายอื่น ท่านว่าแดนแห่งกรรมสิทธิ์ที่ดินนั้นกินทั้งเหนือพื้นดินและใต้พื้นดินด้วย","1336":"ภายในบังคับแห่งกฎหมาย เจ้าของทรัพย์สินมีสิทธิใช้สอยและจำหน่ายทรัพย์สินของตนและได้ซึ่งดอกผลแห่งทรัพย์สินนั้น กับทั้งมีสิทธิติดตามและเอาคืนซึ่งทรัพย์สินของตนจากบุคคลผู้ไม่มีสิทธิจะยึดถือไว้ และมีสิทธิขัดขวางมิให้ผู้อื่นสอดเข้าเกี่ยวข้องกับทรัพย์สินนั้นโดยมิชอบด้วยกฎหมาย","1337":"บุคคลใดใช้สิทธิของตนเป็นเหตุให้เจ้าของอสังหาริมทรัพย์ได้รับความเสียหาย หรือเดือดร้อนเกินที่ควรคิดหรือคาดหมายได้ว่าจะเป็นไปตามปกติและเหตุอันควรในเมื่อเอาสภาพและตำแหน่งที่อยู่แห่งทรัพย์สินนั้นมาคำนึงประกอบไซร้ ท่านว่าเจ้าของอสังหาริมทรัพย์มีสิทธิจะปฏิบัติการเพื่อยังความเสียหายหรือเดือดร้อนนั้นให้สิ้นไป  ทั้งนี้ ไม่ลบล้างสิทธิที่จะเรียกเอาค่าทดแทน","1349":"ที่ดินแปลงใดมีที่ดินแปลงอื่นล้อมอยู่จนไม่มีทางออกถึงทางสาธารณะได้ไซร้ ท่านว่าเจ้าของที่ดินแปลงนั้นจะผ่านที่ดินซึ่งล้อมอยู่ไปสู่ทางสาธารณะได้\nที่ดินแปลงใดมีทางออกได้แต่เมื่อต้องข้ามสระ บึง หรือทะเล หรือมีที่ชันอันระดับที่ดินกับทางสาธารณะสูงกว่ากันมากไซร้ ท่านว่าให้ใช้ความในวรรคต้นบังคับ\nที่และวิธีทำทางผ่านนั้นต้องเลือกให้พอควรแก่ความจำเป็นของผู้มีสิทธิจะผ่าน กับทั้งให้คำนึงถึงที่ดินที่ล้อมอยู่ให้เสียหายแต่น้อยที่สุดที่จะเป็นได้ ถ้าจำเป็นผู้มีสิทธิจะผ่านจะสร้างถนนเป็นทางผ่านก็ได้ ผู้มีสิทธิจะผ่านต้องใช้ค่าทดแทนให้แก่เจ้าของที่ดินที่ล้อมอยู่เพื่อความเสียหายอันเกิดแต่เหตุที่มีทางผ่านนั้น ค่าทดแทนนั้นนอกจากค่าเสียหายเพราะสร้างถนน ท่านว่าจะกำหนดเป็นเงินรายปีก็ได้","1350":"ถ้าที่ดินแบ่งแยกหรือแบ่งโอนกันเป็นเหตุให้แปลงหนึ่งไม่มีทางออกไปสู่ทางสาธารณะไซร้ ท่านว่าเจ้าของที่ดินแปลงนั้นมีสิทธิเรียกร้องเอาทางเดินตามมาตราก่อนได้เฉพาะบนที่ดินแปลงที่ได้แบ่งแยกหรือแบ่งโอนกันและไม่ต้องเสียค่าทดแทน","1356":"ถ้าทรัพย์สินเป็นของบุคคลหลายคนรวมกัน ท่านให้ใช้บทบัญญัติในหมวดนี้บังคับ เว้นแต่จะมีกฎหมายบัญญัติไว้เป็นอย่างอื่น","1357":"ท่านให้สันนิษฐานไว้ก่อนว่าผู้เป็นเจ้าของรวมกันมีส่วนเท่ากัน","1358":"ท่านให้สันนิษฐานไว้ก่อนว่าเจ้าของรวมมีสิทธิจัดการทรัพย์สินรวมกัน\nในเรื่องจัดการตามธรรมดา ท่านว่าพึงตกลงโดยคะแนนข้างมากแห่งเจ้าของรวม แต่เจ้าของรวมคนหนึ่ง ๆ อาจทำสิ่งใดสิ่งหนึ่งในทางจัดการตามธรรมดาได้ เว้นแต่ฝ่ายข้างมากได้ตกลงไว้เป็นอย่างอื่น แต่เจ้าของรวมคนหนึ่ง ๆ อาจทำการเพื่อรักษาทรัพย์สินได้เสมอ\nในเรื่องจัดการอันเป็นสาระสำคัญ ท่านว่าต้องตกลงกันโดยคะแนนข้างมากแห่งเจ้าของรวม และคะแนนข้างมากนั้นต้องมีส่วนไม่ต่ำกว่าครึ่งหนึ่งแห่งค่าทรัพย์สิน\nการเปลี่ยนแปลงวัตถุที่ประสงค์นั้น ท่านว่าจะตกลงกันได้ก็แต่เมื่อเจ้าของรวมเห็นชอบทุกคน","1367":"บุคคลใดยึดถือทรัพย์สินโดยเจตนาจะยึดถือเพื่อตน ท่านว่าบุคคลนั้นได้ซึ่งสิทธิครอบครอง","1368":"บุคคลอาจได้มาซึ่งสิทธิครอบครองโดยผู้อื่นยึดถือไว้ให้","1374":"ถ้าผู้ครอบครองถูกรบกวนในการครอบครองทรัพย์สิน เพราะมีผู้สอดเข้าเกี่ยวข้องโดยมิชอบด้วยกฎหมายไซร้ ท่านว่าผู้ครอบครองมีสิทธิจะให้ปลดเปลื้องการรบกวนนั้นได้ ถ้าเป็นที่น่าวิตกว่าจะยังมีการรบกวนอีก ผู้ครอบครองจะขอต่อศาลให้สั่งห้ามก็ได้\nการฟ้องคดีเพื่อปลดเปลื้องการรบกวนนั้น ท่านว่าต้องฟ้องภายในปีหนึ่งนับแต่เวลาถูกรบกวน","1375":"ถ้าผู้ครอบครองถูกแย่งการครอบครองโดยมิชอบด้วยกฎหมายไซร้ ท่านว่าผู้ครอบครองมีสิทธิจะได้คืนซึ่งการครอบครอง เว้นแต่อีกฝ่ายหนึ่งมีสิทธิเหนือทรัพย์สินดีกว่าซึ่งจะเป็นเหตุให้เรียกคืนจากผู้ครอบครองได้\nการฟ้องคดีเพื่อเอาคืนซึ่งการครอบครองนั้น ท่านว่าต้องฟ้องภายในปีหนึ่งนับแต่เวลาถูกแย่งการครอบครอง","1381":"บุคคลใดยึดถือทรัพย์สินอยู่ในฐานะเป็นผู้แทนผู้ครอบครอง บุคคลนั้นจะเปลี่ยนลักษณะแห่งการยึดถือได้ ก็แต่โดยบอกกล่าวไปยังผู้ครอบครองว่าไม่เจตนาจะยึดถือทรัพย์สินแทนผู้ครอบครองต่อไป หรือตนเองเป็นผู้ครอบครองโดยสุจริต อาศัยอำนาจใหม่อันได้จากบุคคลภายนอก","1382":"บุคคลใดครอบครองทรัพย์สินของผู้อื่นไว้โดยความสงบและโดยเปิดเผยด้วยเจตนาเป็นเจ้าของ ถ้าเป็นอสังหาริมทรัพย์ได้ครอบครองติดต่อกันเป็นเวลาสิบปี ถ้าเป็นสังหาริมทรัพย์ได้ครอบครองติดต่อกันเป็นเวลาห้าปีไซร้ ท่านว่าบุคคลนั้นได้กรรมสิทธิ์","1384":"ถ้าผู้ครอบครองขาดยึดถือทรัพย์สินโดยไม่สมัครและได้คืนภายในเวลาปีหนึ่งนับตั้งแต่วันขาดยึดถือหรือได้คืนโดยฟ้องคดีภายในกำหนดนั้นไซร้ ท่านมิให้ถือว่าการครอบครองสะดุดหยุดลง","1385":"ถ้าโอนการครอบครองแก่กัน ผู้รับโอนจะนับเวลาซึ่งผู้โอนครอบครองอยู่ก่อนนั้นรวมเข้ากับเวลาครอบครองของตนก็ได้ ถ้าผู้รับโอนนับรวมเช่นนั้น และถ้ามีข้อบกพร่องในระหว่างครอบครองของผู้โอนไซร้ ท่านว่าข้อบกพร่องนั้นอาจยกขึ้นเป็นข้อต่อสู้ผู้รับโอนได้"};
 
 const SUMMARY_TOPICS = [
   {
@@ -2587,6 +2614,37 @@ let studyInitDone = false;
 let studyIdx = 0;
 const studySeenSet = loadSeenSet('lawprop_studySeen');
 
+/* ---------- มาตราซ่อนแอบ ---------- */
+const ART_REF_RE = /ม\.\s*(\d+(?:\/\d+)?(?:\s*(?:,|-|–)\s*\d+(?:\/\d+)?)*)/g;
+function expandArtNums(raw){
+  const out = [];
+  raw.split(/\s*,\s*/).forEach(p=>{
+    const m = p.trim().match(/^(\d+)\s*(?:-|–)\s*(\d+)$/);
+    if(m){ for(let i=parseInt(m[1],10); i<=parseInt(m[2],10); i++) out.push(String(i)); }
+    else out.push(p.trim());
+  });
+  return out;
+}
+function linkArticles(html){
+  return html.replace(ART_REF_RE, (whole, numsRaw)=>{
+    const known = expandArtNums(numsRaw).filter(a => ARTICLE_TEXT[a]);
+    if(!known.length) return whole;
+    return '<span class="art-ref" data-arts="'+known.join(',')+'" onclick="toggleArtFull(this)" tabindex="0" role="button">'+whole+'</span><span class="art-full"></span>';
+  });
+}
+function toggleArtFull(refEl){
+  const full = refEl.nextElementSibling;
+  if(!full.dataset.loaded){
+    full.innerHTML = refEl.dataset.arts.split(',').map(a=>
+      '<span class="art-full-item"><span class="art-full-num">ม.'+esc(a)+'</span>'+esc(ARTICLE_TEXT[a] || 'ไม่พบตัวบท')+'</span>'
+    ).join('');
+    full.dataset.loaded = '1';
+  }
+  full.classList.toggle('open');
+  refEl.classList.toggle('active');
+  SoundFX.click();
+}
+
 /* ---- Web Speech TTS ---- */
 const TTS = (function(){
   const supported = typeof window !== 'undefined' && 'speechSynthesis' in window;
@@ -2710,7 +2768,7 @@ function renderStudy(idx){
     });
     tocHtml += '</div>';
   }
-  panel.innerHTML = '<div class="study-title" style="color:'+cat.strong+'">'+esc(topic.label)+'</div>' + tocHtml + topic.html;
+  panel.innerHTML = '<div class="study-title" style="color:'+cat.strong+'">'+esc(topic.label)+'</div>' + tocHtml + linkArticles(topic.html);
 
   panel.querySelectorAll('.study-toc a').forEach(a=>{
     a.addEventListener('click', (e)=>{
