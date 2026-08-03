@@ -122,30 +122,71 @@ body{
 
 h1,h2,h3{font-family:'Noto Serif Thai',serif}
 
-/* TOP BAR */
+/* TOP BAR (Udemy-style: brand | search | icon cluster) */
 .topbar{
-  display:flex;align-items:center;gap:10px;
+  display:flex;align-items:center;gap:16px;
   background:#EFEAE0;border-bottom:1px solid var(--line);
-  padding:10px 18px;font-size:13px;color:var(--ink-soft);
+  padding:10px 20px;font-size:13px;color:var(--ink-soft);
   position:sticky;top:0;z-index:100;
 }
-.topbar-brand{font-weight:800;color:var(--ink);display:flex;align-items:center;gap:8px;text-decoration:none}
+.topbar-brand{flex:0 0 auto;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:8px;text-decoration:none}
 .topbar-logo{
-  font-size:30px;line-height:1;display:inline-flex;align-items:center;
+  font-size:28px;line-height:1;display:inline-flex;align-items:center;
   filter:drop-shadow(0 1px 1px rgba(0,0,0,.15));transition:transform .15s;
 }
 .topbar-brand:hover .topbar-logo{transform:scale(1.1)}
-.topbar-sep{color:var(--ink-faint)}
-.topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.topbar-brand-text{white-space:nowrap;font-size:15px}
+.topbar-brand-sub{font-weight:600;color:var(--ink-soft);margin-left:4px}
+
+/* SEARCH */
+.topbar-search{position:relative;flex:1 1 auto;max-width:480px;min-width:0}
+.topbar-search-icon{
+  position:absolute;left:13px;top:50%;transform:translateY(-50%);
+  font-size:14px;pointer-events:none;opacity:.6;
+}
+.topbar-search input{
+  width:100%;border:1px solid transparent;background:#F1EDE2;color:var(--ink);
+  border-radius:999px;padding:9px 14px 9px 36px;font-family:inherit;font-size:13.5px;
+  transition:all .15s;
+}
+.topbar-search input::placeholder{color:var(--ink-faint)}
+.topbar-search input:focus{
+  outline:none;background:var(--card);border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(176,138,60,.14);
+}
+.search-results{
+  display:none;position:absolute;top:calc(100% + 8px);left:0;right:0;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--shadow);max-height:400px;overflow-y:auto;z-index:200;padding:6px;
+}
+.search-results.active{display:block}
+.search-result-item{
+  display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;
+  text-decoration:none;color:inherit;transition:background .12s;
+}
+.search-result-item:hover{background:var(--gold-soft)}
+.sr-icon{font-size:19px;flex:0 0 auto;width:26px;text-align:center}
+.sr-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.sr-name{font-size:13.5px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sr-desc{font-size:11.5px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sr-tag{
+  flex:0 0 auto;font-size:10px;font-weight:700;color:var(--gold);
+  background:var(--gold-soft);padding:2px 8px;border-radius:999px;
+}
+.search-empty{padding:14px 10px;text-align:center;font-size:12.5px;color:var(--ink-faint)}
+
+/* ICON CLUSTER */
+.topbar-right{flex:0 0 auto;margin-left:auto;display:flex;align-items:center;gap:8px}
+.topbar-divider{width:1px;height:20px;background:var(--line);flex:0 0 auto}
 .topbar-yt-icon{
   display:inline-flex;align-items:center;justify-content:center;
-  width:26px;height:26px;border-radius:50%;background:#FF0000;color:#fff;
+  width:30px;height:30px;border-radius:50%;background:#FF0000;color:#fff;
   font-size:13px;text-decoration:none;transition:transform .15s;flex:0 0 auto;
 }
 .topbar-yt-icon:hover{transform:scale(1.12)}
 .topbar-coffee-icon{
   display:inline-flex;align-items:center;justify-content:center;
-  width:26px;height:26px;border-radius:50%;background:#FFDD00;color:#1a1a1a;
+  width:30px;height:30px;border-radius:50%;background:#FFDD00;color:#1a1a1a;
   font-size:13px;text-decoration:none;transition:transform .15s;flex:0 0 auto;
 }
 .topbar-coffee-icon:hover{transform:scale(1.12)}
@@ -153,6 +194,7 @@ h1,h2,h3{font-family:'Noto Serif Thai',serif}
   display:flex;align-items:center;gap:6px;
   background:var(--bad-bg);color:var(--bad);
   padding:4px 10px;border-radius:6px;font-weight:600;font-size:12px;
+  white-space:nowrap;
 }
 
 /* WRAP */
@@ -265,36 +307,69 @@ a.tab-btn{text-decoration:none;display:inline-flex;align-items:center;justify-co
 .section-title h2{font-size:18px;font-weight:700;color:var(--ink)}
 .section-subtitle{font-size:12px;color:var(--ink-soft);margin-top:2px}
 
-/* SUBJECT GRID */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:16px}
+/* SUBJECT GRID — Udemy-style course cards (thumbnail + badge ribbon + footer) */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;margin-top:20px}
 .subject-card{
-  position:relative;background:var(--card);border:1px solid var(--line);
-  border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;gap:10px;
-  text-decoration:none;color:inherit;cursor:pointer;
+  display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);
+  border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;cursor:pointer;
   transition:transform .18s, box-shadow .18s, border-color .18s;
 }
 .subject-card:hover{
-  transform:translateY(-3px);box-shadow:0 8px 24px rgba(34,40,58,.12);
+  transform:translateY(-4px);box-shadow:0 12px 28px rgba(34,40,58,.14);
   border-color:var(--gold);
 }
-.subject-icon{
-  font-size:32px;height:40px;display:flex;align-items:center;
+.subject-thumb{
+  position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--gold-soft) 0%,rgba(46,74,122,.14) 100%);
 }
+.subject-card.coming-soon .subject-thumb{filter:grayscale(.35);opacity:.75}
+.subject-icon{font-size:40px;line-height:1}
+
+/* BRAND THUMBS — Harvard/Coursera-style: flat color-coded block + minimal icon badge, no busy scene */
+.subject-thumb.brand-navy{background:linear-gradient(135deg,#2E5C92 0%,#1B3A5C 100%)}
+.subject-thumb.brand-crimson{background:linear-gradient(135deg,#B8253D 0%,#84121F 100%)}
+.subject-thumb.brand-emerald{background:linear-gradient(135deg,#1E8A5F 0%,#125C3E 100%)}
+.subject-thumb.brand-purple{background:linear-gradient(135deg,#6A3FA0 0%,#452870 100%)}
+.subject-thumb.brand-sky{background:linear-gradient(135deg,#2E86AB 0%,#1C5A73 100%)}
+.thumb-badge{
+  width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.96);
+  display:flex;align-items:center;justify-content:center;font-size:25px;
+  box-shadow:0 4px 14px rgba(0,0,0,.22);transition:transform .18s;
+}
+.subject-card:hover .thumb-badge{transform:scale(1.08)}
+.subject-card.brand-navy:hover{border-color:#2E5C92}
+.subject-card.brand-crimson:hover{border-color:#B8253D}
+.subject-card.brand-emerald:hover{border-color:#1E8A5F}
+.subject-card.brand-purple:hover{border-color:#6A3FA0}
+.subject-card.brand-sky:hover{border-color:#2E86AB}
+.subject-card.brand-navy .subject-cta{color:#2E5C92}
+.subject-card.brand-crimson .subject-cta{color:#B8253D}
+.subject-card.brand-emerald .subject-cta{color:#1E8A5F}
+.subject-card.brand-purple .subject-cta{color:#6A3FA0}
+.subject-card.brand-sky .subject-cta{color:#2E86AB}
+.status-pill{
+  position:absolute;top:8px;left:8px;
+  font-size:10px;font-weight:800;letter-spacing:.01em;padding:3px 8px;border-radius:4px;
+  text-transform:uppercase;background:var(--ok);color:#fff;
+}
+.subject-card.coming-soon .status-pill{background:var(--ink-faint)}
+.subject-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
 .subject-name{
-  font-size:15px;font-weight:700;color:var(--ink);line-height:1.3;
+  font-family:'Noto Serif Thai',serif;
+  font-size:16px;font-weight:700;color:var(--ink);line-height:1.35;letter-spacing:.01em;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
 .subject-desc{
-  font-size:12px;color:var(--ink-soft);line-height:1.6;flex:1;
+  font-size:12px;color:var(--ink-soft);line-height:1.5;letter-spacing:.01em;
+  display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;
 }
-.subject-cta{
-  font-size:12px;font-weight:600;color:var(--gold);margin-top:6px;
-  padding-top:10px;border-top:1px dashed var(--line);
+.subject-footer{
+  margin-top:auto;padding-top:9px;display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--line);
 }
-.status-pill{
-  position:absolute;top:12px;right:12px;
-  font-size:10px;font-weight:700;padding:3px 8px;border-radius:999px;
-  background:var(--ok-bg);color:var(--ok);
-}
+.subject-price{font-size:12.5px;font-weight:800;color:var(--ink)}
+.subject-cta{font-size:11.5px;font-weight:700;color:var(--gold)}
+.subject-card.coming-soon .subject-cta{color:var(--ink-faint)}
 
 /* CODEX SECTION */
 .codex-section{
@@ -435,7 +510,10 @@ footer{
   .codex-grid{grid-template-columns:repeat(2,1fr)}
   .year-section,.branch-section{padding:16px}
   .topbar{flex-wrap:wrap}
-  .topbar-right{width:100%;justify-content:space-between;margin-left:0;margin-top:8px}
+  .topbar-brand{order:1}
+  .topbar-right{order:2;margin-left:auto;justify-content:flex-end}
+  .topbar-search{order:3;flex-basis:100%;max-width:100%;margin-top:2px}
+  .topbar-countdown{display:none}
   .hero-mascot{display:none !important}
   .ghost-companion{width:38vw;max-width:160px;right:10px;bottom:10px}
 }
@@ -454,16 +532,23 @@ footer{
 <!-- TOP BAR -->
 <div class="topbar">
   <a href="index.html" class="topbar-brand" onmouseenter="playHoverSound()">
-    <span class="topbar-logo">👴🏻</span> Cool Uncle
+    <span class="topbar-logo">👴🏻</span>
+    <span class="topbar-brand-text">Cool Uncle<span class="topbar-brand-sub">Legal Lab</span></span>
   </a>
-  <span class="topbar-sep">·</span>
-  <span>Legal Lab</span>
+
+  <div class="topbar-search">
+    <span class="topbar-search-icon">🔍</span>
+    <input type="text" id="global-search-input" placeholder="ค้นหาวิชา, ประมวลกฎหมาย, เกม..." autocomplete="off" aria-label="ค้นหา">
+    <div class="search-results" id="global-search-results"></div>
+  </div>
+
   <span class="topbar-right">
     <a href="https://www.youtube.com/@CoolUncleLaw/videos" target="_blank" rel="noopener" class="topbar-yt-icon" title="Cool Uncle Law · YouTube Channel" onmouseenter="playHoverSound()">📺</a>
     <a href="https://buymeacoffee.com/dukperadom" target="_blank" rel="noopener" class="topbar-coffee-icon" title="เลี้ยงกาแฟ Cool Uncle สักแก้ว ☕" onmouseenter="playHoverSound()">☕</a>
     <div class="topbar-countdown" id="exam-countdown">
       📅 ถึงสอบ: ...
     </div>
+    <span class="topbar-divider"></span>
     <div class="theme-toggle" role="group" aria-label="เลือกธีม">
       <button type="button" data-theme-btn="light" onclick="setTheme('light')" onmouseenter="playHoverSound()" title="โหมดสว่าง">☀️</button>
       <button type="button" data-theme-btn="dark" onclick="setTheme('dark')" onmouseenter="playHoverSound()" title="โหมดมืด">🌙</button>
@@ -758,35 +843,35 @@ function playHoverSound(){
 
 const SUBJECTS = {
   year2: [
-    { name: "Contract Law", desc: "นิติกรรมและสัญญา", icon: "📜", href: "contract-law.html", status: "ready" },
-    { name: "Criminal General", desc: "กฎหมายอาญาภาคทั่วไป", icon: "🔨", href: "crimgen.html", status: "ready" },
-    { name: "Tort Law", desc: "กฎหมายละเมิด", icon: "⚡", href: "tort.html", status: "ready" },
-    { name: "Property", desc: "ทรัพย์สิน", icon: "🏠", href: "property.html", status: "ready" },
-    { name: "Debt", desc: "กฎหมายหนี้สิน", icon: "💰", href: "debt.html", status: "ready" },
-    { name: "Commercial Contract", desc: "สัญญาทางพาณิชย์", icon: "💼", href: "commcontract.html", status: "ready" },
-    { name: "Criminal Liability", desc: "ความผิดทางอาญา", icon: "⚠️", href: "crimliab.html", status: "ready" },
-    { name: "เกมสถานการณ์", desc: "ฝึกวิเคราะห์โจทย์อาญาแบบมินิเกม (visual novel)", icon: "🎮", href: "game-crimlaw-scenario.html", status: "ready" },
+    { name: "Contract Law", desc: "นิติกรรมและสัญญา", icon: "📜", brand: "navy", href: "contract-law.html", status: "ready" },
+    { name: "Criminal General", desc: "กฎหมายอาญาภาคทั่วไป", icon: "⚖️", brand: "crimson", href: "crimgen.html", status: "ready" },
+    { name: "Tort Law", desc: "กฎหมายละเมิด", icon: "⚡", brand: "navy", href: "tort.html", status: "ready" },
+    { name: "Property", desc: "ทรัพย์สิน", icon: "🏠", brand: "navy", href: "property.html", status: "ready" },
+    { name: "Debt", desc: "กฎหมายหนี้สิน", icon: "💰", brand: "navy", href: "debt.html", status: "ready" },
+    { name: "Commercial Contract", desc: "สัญญาทางพาณิชย์", icon: "💼", brand: "navy", href: "commcontract.html", status: "ready" },
+    { name: "Criminal Liability", desc: "ความผิดทางอาญา", icon: "⚠️", brand: "crimson", href: "crimliab.html", status: "ready" },
+    { name: "เกมสถานการณ์", desc: "ฝึกวิเคราะห์โจทย์อาญาแบบมินิเกม (visual novel)", icon: "🎮", brand: "crimson", href: "game-crimlaw-scenario.html", status: "ready" },
   ],
   year3: [
-    { name: "Family Law", desc: "กฎหมายครอบครัว", icon: "👨‍👩‍👧", href: "familylaw.html", status: "ready" },
-    { name: "Inheritance", desc: "กฎหมายมรดก", icon: "🏛️", href: "inheritance.html", status: "ready" },
-    { name: "Business Organization", desc: "องค์กรธุรกิจ", icon: "🏢", href: "biz-org.html", status: "ready" },
-    { name: "Civil Procedure", desc: "วิธีพิจารณาความแพ่ง", icon: "📋", href: "civpro.html", status: "ready" },
-    { name: "Legal History", desc: "ประวัติศาสตร์กฎหมายไทย", icon: "📖", href: "legalhist.html", status: "ready" },
-    { name: "Legal Philosophy", desc: "นิติศาสตร์และปรัชญา", icon: "🤔", href: "legalphil.html", status: "ready" },
-    { name: "Intl Commercial Law", desc: "กฎหมายระหว่างประเทศแผนกคดีเมือง", icon: "🌍", href: "intlcommlaw.html", status: "ready" },
-    { name: "Administrative Law", desc: "กฎหมายปกครอง", icon: "🏛️", href: "adminlaw.html", status: "ready" },
-    { name: "Constitutional Law", desc: "กฎหมายรัฐธรรมนูญ", icon: "📜", href: "constlaw.html", status: "ready" },
+    { name: "Family Law", desc: "กฎหมายครอบครัว", icon: "👨‍👩‍👧", brand: "purple", href: "familylaw.html", status: "ready" },
+    { name: "Inheritance", desc: "กฎหมายมรดก", icon: "🏛️", brand: "purple", href: "inheritance.html", status: "ready" },
+    { name: "Business Organization", desc: "องค์กรธุรกิจ", icon: "🏢", brand: "navy", href: "biz-org.html", status: "ready" },
+    { name: "Civil Procedure", desc: "วิธีพิจารณาความแพ่ง", icon: "📋", brand: "navy", href: "civpro.html", status: "ready" },
+    { name: "Legal History", desc: "ประวัติศาสตร์กฎหมายไทย", icon: "📖", brand: "sky", href: "legalhist.html", status: "ready" },
+    { name: "Legal Philosophy", desc: "นิติศาสตร์และปรัชญา", icon: "🤔", brand: "sky", href: "legalphil.html", status: "ready" },
+    { name: "Intl Commercial Law", desc: "กฎหมายระหว่างประเทศแผนกคดีเมือง", icon: "🌍", brand: "sky", href: "intlcommlaw.html", status: "ready" },
+    { name: "Administrative Law", desc: "กฎหมายปกครอง", icon: "🏛️", brand: "emerald", href: "adminlaw.html", status: "ready" },
+    { name: "Constitutional Law", desc: "กฎหมายรัฐธรรมนูญ", icon: "📜", brand: "emerald", href: "constlaw.html", status: "ready" },
   ],
   year4: [
-    { name: "Criminal Procedure", desc: "วิธีพิจารณาความอาญา", icon: "🔍", href: "crimpro.html", status: "ready", exam: "23 พ.ย. 2569" },
-    { name: "Admin & Const Procedure", desc: "วิธีพิจารณาความปกครองและรัฐธรรมนูญ", icon: "⚙️", href: "constproc.html", status: "coming-soon", exam: "7 พ.ย. 2569" },
-    { name: "Legal English", desc: "ภาษาอังกฤษของนักกฎหมาย", icon: "🌐", href: "legaleng.html", status: "ready", exam: "28 พ.ย. 2569" },
-    { name: "Evidence", desc: "กฎหมายลักษณะพยาน", icon: "🔬", href: "evidence.html", status: "ready" },
-    { name: "Private International Law", desc: "กฎหมายระหว่างประเทศแผนกคดีบุคคล", icon: "🌏", href: "privateintl.html", status: "ready" },
-    { name: "Legal Profession", desc: "หลักวิชาชีพสำหรับนักกฎหมาย", icon: "🧑‍⚖️", href: "legalprofession.html", status: "ready" },
-    { name: "Intellectual Property Law", desc: "กฎหมายทรัพย์สินทางปัญญา", icon: "💡", href: "iplaw.html", status: "ready", exam: "28 พ.ย. 2569" },
-    { name: "Constitutional Court Cases", desc: "ศาลรัฐธรรมนูญ", icon: "🏛️", href: "constcourt.html", status: "ready", exam: "1 ธ.ค. 2569" },
+    { name: "Criminal Procedure", desc: "วิธีพิจารณาความอาญา", icon: "🔍", brand: "crimson", href: "crimpro.html", status: "ready", exam: "23 พ.ย. 2569" },
+    { name: "Admin & Const Procedure", desc: "วิธีพิจารณาความปกครองและรัฐธรรมนูญ", icon: "⚙️", brand: "emerald", href: "constproc.html", status: "coming-soon", exam: "7 พ.ย. 2569" },
+    { name: "Legal English", desc: "ภาษาอังกฤษของนักกฎหมาย", icon: "🌐", brand: "sky", href: "legaleng.html", status: "ready", exam: "28 พ.ย. 2569" },
+    { name: "Evidence", desc: "กฎหมายลักษณะพยาน", icon: "🔬", brand: "sky", href: "evidence.html", status: "ready" },
+    { name: "Private International Law", desc: "กฎหมายระหว่างประเทศแผนกคดีบุคคล", icon: "🌏", brand: "sky", href: "privateintl.html", status: "ready" },
+    { name: "Legal Profession", desc: "หลักวิชาชีพสำหรับนักกฎหมาย", icon: "🧑‍⚖️", brand: "sky", href: "legalprofession.html", status: "ready" },
+    { name: "Intellectual Property Law", desc: "กฎหมายทรัพย์สินทางปัญญา", icon: "💡", brand: "sky", href: "iplaw.html", status: "ready", exam: "28 พ.ย. 2569" },
+    { name: "Constitutional Court Cases", desc: "ศาลรัฐธรรมนูญ", icon: "🏛️", brand: "emerald", href: "constcourt.html", status: "ready", exam: "1 ธ.ค. 2569" },
   ],
   civil: [
     { name: "Civil & Commercial Code", desc: "กฎหมายแพ่งและพาณิชย์ทั้งหมด", icon: "📜", href: "#", status: "coming-soon" },
@@ -812,6 +897,81 @@ const SUBJECTS = {
   ]
 };
 
+/* GLOBAL SEARCH (topbar) — flattens SUBJECTS + the ประมวล books + games into one index */
+const CODEX_BOOKS = [
+  { name: "ประมวลแพ่ง", desc: "1,841 มาตรา", icon: "📜", href: "codex-search.html?book=civil" },
+  { name: "ประมวลอาญา", desc: "443 มาตรา", icon: "📋", href: "codex-search.html?book=criminal" },
+  { name: "ประมวลวิแพ่ง", desc: "473 มาตรา", icon: "⚖️", href: "codex-search.html?book=civpro" },
+  { name: "ประมวลวิอาญา", desc: "325 มาตรา", icon: "🔍", href: "codex-search.html?book=crimpro" },
+  { name: "พระธรรมนูญ", desc: "34 มาตรา", icon: "🏛️", href: "codex-search.html?book=constitution" },
+  { name: "รัฐธรรมนูญ 2560", desc: "279 มาตรา", icon: "🇹🇭", href: "codex-search.html?book=const2560" },
+  { name: "กฎหมายปกครอง", desc: "2 ฉบับ", icon: "🏢", href: "codex-search.html?book=admin" },
+  { name: "ทรัพย์สินทางปัญญา", desc: "5 ฉบับ", icon: "💡", href: "codex-search.html?book=ip" },
+];
+
+function buildSearchIndex(){
+  const seen = new Set();
+  const items = [];
+  Object.values(SUBJECTS).flat().forEach(s => {
+    if (s.href === '#' || seen.has(s.href)) return;
+    seen.add(s.href);
+    items.push({ name: s.name, desc: s.desc, icon: s.icon, href: s.href, tag: 'วิชา' });
+  });
+  CODEX_BOOKS.forEach(b => items.push({ ...b, tag: 'ประมวล' }));
+  items.push({ name: 'เกม', desc: 'เกมสถานการณ์และเกมทั้งหมด', icon: '🎮', href: 'games.html', tag: 'เกม' });
+  return items;
+}
+const SEARCH_INDEX = buildSearchIndex();
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+
+function runGlobalSearch(query){
+  const resultsEl = document.getElementById('global-search-results');
+  const q = query.trim().toLowerCase();
+  if (!q) { resultsEl.classList.remove('active'); resultsEl.innerHTML = ''; return; }
+
+  const matches = SEARCH_INDEX.filter(it =>
+    it.name.toLowerCase().includes(q) || (it.desc && it.desc.toLowerCase().includes(q))
+  ).slice(0, 8);
+
+  resultsEl.innerHTML = matches.length
+    ? matches.map(m => `
+      <a href="${m.href}" class="search-result-item" onmouseenter="playHoverSound()">
+        <span class="sr-icon">${m.icon}</span>
+        <span class="sr-text">
+          <span class="sr-name">${escapeHtml(m.name)}</span>
+          <span class="sr-desc">${escapeHtml(m.desc || '')}</span>
+        </span>
+        <span class="sr-tag">${m.tag}</span>
+      </a>
+    `).join('')
+    : `<div class="search-empty">ไม่พบผลลัพธ์สำหรับ "${escapeHtml(query)}"</div>`;
+
+  resultsEl.classList.add('active');
+}
+
+(function initGlobalSearch(){
+  const input = document.getElementById('global-search-input');
+  const results = document.getElementById('global-search-results');
+  if (!input || !results) return;
+
+  input.addEventListener('input', e => runGlobalSearch(e.target.value));
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      const first = results.querySelector('.search-result-item');
+      if (first) window.location.href = first.getAttribute('href');
+    } else if (e.key === 'Escape') {
+      results.classList.remove('active');
+      input.blur();
+    }
+  });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.topbar-search')) results.classList.remove('active');
+  });
+})();
+
 /* EXAM DATES */
 const EXAM_DATES = [
   { date: "2569-11-07", time: "17:30", name: "Constitutional Procedural Law" },
@@ -826,13 +986,21 @@ function renderSubjects(category, containerId) {
   const container = document.getElementById(containerId);
   if (!container || !SUBJECTS[category]) return;
   
+  const isReady = s => s.status === 'ready';
   container.innerHTML = SUBJECTS[category].map(s => `
-    <a href="${s.href}" class="subject-card" ${s.status === 'coming-soon' ? 'onclick="return false;style.cursor=\'not-allowed\'"' : ''}>
-      <div class="status-pill">${s.status === 'ready' ? '✓ พร้อม' : '⏳ เร็ว ๆ'}</div>
-      <div class="subject-icon">${s.icon}</div>
-      <div class="subject-name">${s.name}</div>
-      <div class="subject-desc">${s.desc}</div>
-      <div class="subject-cta">${s.status === 'ready' ? 'เข้าเรียน →' : 'กำลังจัดทำ'}</div>
+    <a href="${s.href}" class="subject-card${isReady(s) ? '' : ' coming-soon'}${s.brand ? ` brand-${s.brand}` : ''}" onmouseenter="playHoverSound()" ${isReady(s) ? '' : 'onclick="return false;style.cursor=\'not-allowed\'"'}>
+      <div class="subject-thumb${s.brand ? ` brand-${s.brand}` : ''}">
+        <div class="status-pill">${isReady(s) ? '✓ พร้อม' : '⏳ เร็ว ๆ นี้'}</div>
+        ${s.brand ? `<div class="thumb-badge">${s.icon}</div>` : `<div class="subject-icon">${s.icon}</div>`}
+      </div>
+      <div class="subject-body">
+        <div class="subject-name">${s.name}</div>
+        <div class="subject-desc">${s.desc}</div>
+        <div class="subject-footer">
+          <span class="subject-price">ฟรี</span>
+          <span class="subject-cta">${isReady(s) ? 'เข้าเรียน →' : 'กำลังจัดทำ'}</span>
+        </div>
+      </div>
     </a>
   `).join('');
 }
