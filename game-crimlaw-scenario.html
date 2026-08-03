@@ -242,6 +242,8 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 }
 .sprite.fx-active .splash-fx{animation:splashPop .9s ease-out}
 .sprite.fx-active .sprite-figure{animation:wobbleDunk .6s ease-in-out}
+.scene-portrait-wrap.fx-active .splash-fx{animation:splashPop .9s ease-out}
+.scene-portrait-wrap.fx-active img{animation:wobbleDunk .6s ease-in-out}
 @keyframes splashPop{
   0%{opacity:0;transform:translateX(-50%) translateY(6px) scale(.6)}
   30%{opacity:1;transform:translateX(-50%) translateY(-10px) scale(1.15)}
@@ -259,7 +261,8 @@ h1,h2{font-family:'Noto Serif Thai',serif}
   position:absolute;left:60%;bottom:16%;font-size:15px;display:none;
   filter:drop-shadow(0 1px 2px rgba(0,0,0,.4));
 }
-.sprite.bandaged .bandage-badge{display:block}
+.sprite.bandaged .bandage-badge,.scene-portrait-wrap.bandaged .bandage-badge{display:block}
+.scene-portrait-wrap .bandage-badge{left:8%;bottom:8%;font-size:24px}
 
 /* half-body emotion cut-in, standing beside the character —
    swapped per beat from the actor's expression portrait set */
@@ -271,6 +274,25 @@ h1,h2{font-family:'Noto Serif Thai',serif}
   transition:opacity .25s ease,transform .25s ease;
 }
 .reaction-badge.show{opacity:1;transform:scale(1) translateY(0)}
+
+/* AA-style big bottom-anchored portrait for the beat's "active" actor —
+   lives in the uncropped .stage-actors layer (not .stage's clipped box)
+   so tall portrait art can pop above the frame same as standees do. */
+.scene-portrait-wrap{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  height:105%;width:62%;max-width:260px;display:flex;align-items:flex-end;justify-content:center;
+  pointer-events:none;
+}
+.scene-portrait-wrap img{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  height:100%;width:auto;object-fit:contain;filter:drop-shadow(0 10px 16px rgba(0,0,0,.35));
+}
+.scene-portrait-fallback{
+  width:150px;height:150px;border-radius:24%;display:flex;align-items:center;justify-content:center;
+  font-size:64px;box-shadow:0 4px 14px rgba(0,0,0,.3);border:3px solid rgba(255,255,255,.6);margin-bottom:4%;
+}
+.stage.stage-flush{border-radius:var(--radius) var(--radius) 0 0;border-bottom:none}
+.trial-caption.clickable{cursor:pointer}
 
 .caption-box{
   background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -536,6 +558,23 @@ function renderTrialPortraitHTML(spriteId, pose){
   return `<div class="trial-portrait-wrap">`
        + `<div class="trial-portrait-fallback" style="background:${sp.color}">${sp.emoji}</div>`
        + `<img src="${pngPath}" alt="" onerror="this.onerror=function(){this.remove()};this.src='${jpgPath}';">`
+       + `</div>`;
+}
+
+/* Same big-portrait + graceful-fallback approach as renderTrialPortraitHTML,
+   just wrapped in the scene's own (uncropped, slightly taller) CSS class so
+   it doesn't fight .trial-stage's clipping rules. Used for the beat's
+   "active" actor in the pre-trial cutscene stage. */
+function renderScenePortraitHTML(spriteId, pose, bandaged, splash){
+  const sp = SPRITES[spriteId] || { emoji: '❓', color: '#ccc' };
+  const pngPath = portraitPath(spriteId, pose);
+  const jpgPath = pngPath.replace(/\.png$/, '.jpg');
+  const cls = 'scene-portrait-wrap' + (bandaged ? ' bandaged' : '') + (splash ? ' fx-active' : '');
+  return `<div class="${cls}">`
+       + `<div class="scene-portrait-fallback" style="background:${sp.color}">${sp.emoji}</div>`
+       + `<img src="${pngPath}" alt="" onerror="this.onerror=function(){this.remove()};this.src='${jpgPath}';">`
+       + `<span class="bandage-badge">🩹</span>`
+       + `<span class="splash-fx">💦</span>`
        + `</div>`;
 }
 
@@ -1293,6 +1332,64 @@ const SCENARIOS = [
       { type:'dialogue', speaker:'judge', pose:'confident', caption:'ผู้พิพากษา: ศาลได้พิจารณาคดีนี้แล้ว ขอบคุณทุกฝ่ายที่มาให้ปากคำในวันนี้ — ปิดการพิจารณาคดี' },
     ],
   },
+  {
+    id: 'estate-administrator-removal-case',
+    category: 'civpro',
+    icon: '📜',
+    title: 'คดีถอนผู้จัดการมรดก กับการวินิจฉัยชี้ขาดเบื้องต้น',
+    blurb: 'ลูกชายถูกตั้งเป็นผู้จัดการมรดกตามพินัยกรรม แม่ยื่นคัดค้านว่าพินัยกรรมปลอม ลูกชายขอให้ศาลชี้ขาดข้อกฎหมายก่อนสืบพยาน — ศาลต้องรีบวินิจฉัยให้ทันทีหรือไม่?',
+    characters: {
+      employer: { name: 'นายเอกชัย' },
+      elderly_woman: { name: 'นางประไพ' },
+    },
+    bg: 'courtroom',
+    beats: [
+      { caption: 'นายวิสูตรเสียชีวิตลง ทิ้งพินัยกรรมฉบับหนึ่งไว้ ศาลชั้นต้นไต่สวนแล้วมีคำสั่งตั้งนายเอกชัยบุตรชายเป็นผู้จัดการมรดกของผู้ตายตามพินัยกรรมฉบับนั้น',
+        actors: [ { id:'employer', x:50, active:true } ] },
+      { caption: 'นางประไพ ภริยาโดยชอบด้วยกฎหมายของนายวิสูตรและมารดาของนายเอกชัย ยื่นคำร้องคัดค้านต่อศาล อ้างว่านายเอกชัยมีพฤติกรรมไม่น่าไว้วางใจ และพินัยกรรมที่นำมาอ้างเป็นพินัยกรรมปลอม ขอให้ถอนนายเอกชัยแล้วตั้งตนเป็นผู้จัดการมรดกแทน',
+        actors: [ { id:'elderly_woman', x:38, active:true, pose:'😠' }, { id:'employer', x:62, pose:'😟' } ] },
+      { caption: 'นายเอกชัยยื่นคำคัดค้านสู้ว่า ตนดำเนินการตามหน้าที่ผู้จัดการมรดกโดยตลอด อยู่ระหว่างรวบรวมทรัพย์มรดก ไม่ได้ละเลยหรือทำผิดหน้าที่แต่อย่างใด และพินัยกรรมฉบับนั้นก็ไม่ใช่พินัยกรรมปลอมตามที่กล่าวหา',
+        actors: [ { id:'employer', x:45, active:true, pose:'🙅' }, { id:'elderly_woman', x:65, pose:'😤' } ] },
+      { caption: 'ระหว่างพิจารณาคดี นายเอกชัยยื่นคำขอให้ศาลชี้ขาดเบื้องต้นในปัญหาข้อกฎหมายว่า นางประไพถูกกำจัดมิให้รับมรดกแล้ว เพราะปิดบังซ่อนเร้นและยักยอกทรัพย์มรดกตามประมวลกฎหมายแพ่งและพาณิชย์ มาตรา 1605 — หากวินิจฉัยเป็นคุณแก่ตน ก็ไม่จำต้องพิจารณาคดีต่อไปอีก',
+        actors: [ { id:'employer', x:50, active:true, pose:'📜' } ] },
+      { caption: 'ศาลชั้นต้นพิเคราะห์คำขอแล้ว มีคำสั่งให้รอไว้วินิจฉัยประเด็นนี้ในชั้นตัดสินคดี และให้สืบพยานหลักฐานของทั้งสองฝ่ายกันต่อไปก่อน',
+        actors: [ { id:'elderly_woman', x:40, active:true }, { id:'employer', x:62, pose:'😐' } ] },
+      { caption: 'หลังสืบพยานเสร็จสิ้น ศาลชั้นต้นมีคำสั่งถอนนายเอกชัยจากการเป็นผู้จัดการมรดกของผู้ตาย',
+        actors: [ { id:'employer', x:50, active:true, pose:'😨' } ] },
+      { caption: 'นายเอกชัยไม่เห็นด้วย จึงยื่นอุทธรณ์ว่า ประเด็นตามมาตรา 1605 เป็นปัญหาข้อกฎหมายที่ศาลชั้นต้นต้องวินิจฉัยชี้ขาดเบื้องต้นตามประมวลกฎหมายวิธีพิจารณาความแพ่ง มาตรา 24 ทันที การที่ศาลไม่วินิจฉัยให้ก่อน จึงทำให้คำสั่งถอนตนออกจากผู้จัดการมรดกไม่ชอบด้วยกฎหมาย',
+        actors: [ { id:'employer', x:50, active:true, pose:'😤' } ] },
+    ],
+    comprehension: { question: 'เข้าใจโจทย์ไหม?' },
+    courtroomBg: 'courtroom',
+    questions: [
+      {
+        defendantSprite: 'employer',
+        defendantName: 'นายเอกชัย',
+        note: 'ประเด็นเดียว',
+        act: 'นายเอกชัยอุทธรณ์ว่า ศาลชั้นต้นต้องวินิจฉัยชี้ขาดเบื้องต้นในปัญหาข้อกฎหมายตามประมวลกฎหมายวิธีพิจารณาความแพ่ง มาตรา 24 ทันทีว่านางประไพถูกกำจัดจากกองมรดกตามมาตรา 1605 หรือไม่ ก่อนพิจารณาคดีต่อไป แต่ศาลชั้นต้นกลับสั่งให้รอไว้วินิจฉัยในชั้นตัดสินคดีและให้สืบพยานกันต่อไปก่อน อุทธรณ์ของนายเอกชัยฟังขึ้นหรือไม่?',
+        options: [
+          { text: 'ฟังไม่ขึ้น เพราะมาตรา 24 ให้อำนาจศาลใช้ดุลพินิจว่าจะวินิจฉัยชี้ขาดเบื้องต้นหรือไม่ ("เมื่อศาลเห็นสมควร") มิใช่บทบังคับที่ต้องวินิจฉัยทันทีทุกครั้งที่คู่ความร้องขอ อีกทั้งประเด็นว่านางประไพปิดบังซ่อนเร้นหรือยักยอกทรัพย์มรดกจริงหรือไม่ เป็นปัญหาข้อเท็จจริงที่ต้องสืบพยานให้ได้ความเสียก่อน มิใช่ปัญหาข้อกฎหมายล้วนที่จะชี้ขาดเบื้องต้นได้ทันที', correct: true },
+          { text: 'ฟังขึ้น เพราะเมื่อคู่ความฝ่ายใดยื่นคำขอให้ศาลชี้ขาดเบื้องต้นตามมาตรา 24 แล้ว ศาลจำต้องวินิจฉัยให้ทันทีเสมอ จะปฏิเสธไม่ได้', correct: false },
+          { text: 'ฟังขึ้น เพราะการกำจัดมิให้รับมรดกตามมาตรา 1605 เป็นปัญหาข้อกฎหมายล้วน ไม่จำต้องสืบพยานก่อนแต่อย่างใด', correct: false },
+          { text: 'ฟังไม่ขึ้น เพราะศาลชั้นต้นไม่มีอำนาจวินิจฉัยชี้ขาดเบื้องต้นในคดีที่เกี่ยวกับผู้จัดการมรดกได้เลยไม่ว่ากรณีใด', correct: false },
+        ],
+        reveal: 'ตาม ป.วิ.พ. มาตรา 24 หลักเกณฑ์ในการที่ศาลจะมีคำสั่งวินิจฉัยชี้ขาดเบื้องต้นนั้น กฎหมายให้อำนาจศาลใช้ดุลพินิจ ("เมื่อศาลเห็นสมควร") ศาลจึงไม่ได้ถูกบังคับว่าเมื่อคู่ความมีคำขอแล้วจะต้องมีคำสั่งชี้ขาดเบื้องต้นให้เสมอไป นอกจากนี้ ปัญหาที่จะขอให้ศาลชี้ขาดเบื้องต้นตามมาตรานี้ต้องเป็น "ปัญหาข้อกฎหมาย" เท่านั้น มิใช่ปัญหาข้อเท็จจริง — การที่นายเอกชัยขอให้ศาลวินิจฉัยว่านางประไพถูกกำจัดมิให้รับมรดกฐานปิดบังซ่อนเร้นและยักยอกทรัพย์มรดกตาม ป.พ.พ. มาตรา 1605 หรือไม่นั้น ศาลยังไม่อาจชี้ขาดในทางกฎหมายได้ทันที เพราะจำเป็นต้องค้นหาความจริงเสียก่อนว่านางประไพได้กระทำการปิดบังซ่อนเร้นหรือยักยอกทรัพย์มรดกจริงหรือไม่ ซึ่งเป็น "ปัญหาข้อเท็จจริง" ที่ต้องสืบพยานหลักฐานของคู่ความกันเสียก่อน จึงจะนำข้อกฎหมายมาปรับใช้ได้ การที่ศาลชั้นต้นมีคำสั่งให้รอไว้วินิจฉัยในชั้นตัดสินคดีและให้สืบพยานกันต่อไป จึงเป็นการใช้ดุลพินิจที่ชอบด้วยมาตรา 24 แล้ว คำสั่งของศาลชั้นต้นชอบด้วยกฎหมาย อุทธรณ์ของนายเอกชัยจึงฟังไม่ขึ้น',
+      },
+    ],
+    trial: [
+      { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ศาลอุทธรณ์นัดฟังคำวินิจฉัยวันนี้ — เสมียนศาล คดีนี้คือคดีอะไร?' },
+      { type:'dialogue', speaker:'court_clerk', pose:'neutral', caption:'เสมียนศาล: คดีอุทธรณ์คำสั่งถอนผู้จัดการมรดก ระหว่างนายเอกชัยผู้อุทธรณ์ กับนางประไพผู้คัดค้านเจ้าค่ะท่าน' },
+      { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ข้อเท็จจริง: ศาลชั้นต้นตั้งนายเอกชัยเป็นผู้จัดการมรดกตามพินัยกรรม นางประไพคัดค้านว่าพินัยกรรมปลอม นายเอกชัยขอให้ศาลชี้ขาดเบื้องต้นว่านางประไพถูกกำจัดจากกองมรดกตามมาตรา 1605 แต่ศาลชั้นต้นสั่งรอไว้วินิจฉัยพร้อมสืบพยาน แล้วมีคำสั่งถอนนายเอกชัยในที่สุด' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายฝ่ายนายเอกชัย: ลูกความดิฉันยื่นคำขอให้ศาลชี้ขาดเบื้องต้นตามมาตรา 24 ไว้ชัดเจนแล้ว ศาลชั้นต้นละเลยไม่วินิจฉัยให้ก่อน คำสั่งถอนจึงไม่ชอบค่ะ' },
+      { type:'dialogue', speaker:'plaintiff_lawyer', pose:'confident', caption:'ทนายฝ่ายนางประไพ: คัดค้าน! มาตรา 24 ใช้คำว่า "เมื่อศาลเห็นสมควร" ศาลย่อมมีดุลพินิจ ไม่ใช่หน้าที่บังคับที่ต้องทำทันทีทุกครั้ง' },
+      { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ท่านผู้ตัดสิน — อุทธรณ์ของนายเอกชัยที่ว่าศาลชั้นต้นต้องชี้ขาดเบื้องต้นตามมาตรา 24 ทันที โดยไม่รอสืบพยานนั้น ฟังขึ้นหรือไม่?' },
+      { type:'question', qIndex: 0 },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'shocked', caption:'ทนายฝ่ายนายเอกชัย: (อึ้ง) ...ประเด็นว่านางประไพปิดบังซ่อนเร้นทรัพย์มรดกจริงหรือไม่ ยังต้องพิสูจน์ข้อเท็จจริงอยู่ดีสินะคะ' },
+      { type:'dialogue', speaker:'plaintiff_lawyer', pose:'confident', caption:'ทนายฝ่ายนางประไพ: ถูกต้องค่ะ ศาลชั้นต้นจึงใช้ดุลพินิจถูกต้องแล้วที่ให้สืบพยานกันต่อไปก่อนจะวินิจฉัย' },
+      { type:'dialogue', speaker:'court_clerk', pose:'neutral', caption:'เสมียนศาล: (จดบันทึกคำวินิจฉัยลงแฟ้ม) เจ้าค่ะท่าน' },
+      { type:'dialogue', speaker:'judge', pose:'confident', caption:'ผู้พิพากษา: ศาลได้พิจารณาคดีนี้แล้ว ขอบคุณทุกฝ่ายที่มาให้ปากคำในวันนี้ — ปิดการพิจารณาคดี' },
+    ],
+  },
 ];
 
 /* ================================================================
@@ -1391,7 +1488,7 @@ function renderScene(){
       <span class="beat-dots">${s.beats.map((b,i) => `<span class="beat-dot${i < state.beatIndex ? ' done' : ''}${i === state.beatIndex ? ' current' : ''}"></span>`).join('')}</span>
     </div>
     <div class="stage-frame">
-      <div class="stage" id="stage">
+      <div class="stage stage-flush" id="stage">
         ${renderStageBgHTML(s.bg)}
         <div class="funeral-badge" id="funeral-badge">🕯️ 🤍 🎗️</div>
       </div>
@@ -1400,6 +1497,7 @@ function renderScene(){
       </audio>
       <audio id="beat-sfx" preload="none"></audio>
       <div class="stage-actors">
+        <div id="scene-portrait"></div>
         ${Object.keys(s.characters).map(id => `
           <div class="sprite" id="sprite-${id}">
             ${renderSpriteAvatarHTML(id)}
@@ -1408,7 +1506,10 @@ function renderScene(){
         `).join('')}
       </div>
     </div>
-    <div class="caption-box" id="caption-box" onclick="skipTyping()"></div>
+    <div class="trial-textbox">
+      <div class="trial-namebox" id="scene-namebox"></div>
+      <div class="trial-caption clickable" id="caption-box" onclick="skipTyping()"></div>
+    </div>
     <div class="scene-nav-row">
       <button type="button" class="big-btn secondary" id="scene-prev-btn" onclick="prevBeat()" onmouseenter="playHoverSound()">‹ ย้อนกลับ</button>
       <button type="button" class="big-btn" id="scene-next-btn" onclick="nextBeat()" onmouseenter="playHoverSound()">ถัดไป ›</button>
@@ -1420,10 +1521,23 @@ function syncBeat(){
   const s = state.scenario;
   const beat = s.beats[state.beatIndex];
   const activeIds = new Set(beat.actors.map(a => a.id));
+  /* The beat's "active" actor gets the big AA-style bottom-anchored portrait
+     instead of a small on-stage standee (see .scene-portrait-wrap). */
+  const activeActor = beat.actors.find(a => a.active) || beat.actors[0] || null;
+  const portraitSlot = document.getElementById('scene-portrait');
+  const namebox = document.getElementById('scene-namebox');
+  if (activeActor && portraitSlot) {
+    portraitSlot.innerHTML = renderScenePortraitHTML(activeActor.id, activeActor.expr || 'neutral', !!activeActor.bandaged, activeActor.effect === 'splash');
+    if (namebox) namebox.textContent = courtDisplayName(activeActor.id);
+  } else {
+    if (portraitSlot) portraitSlot.innerHTML = '';
+    if (namebox) namebox.textContent = '';
+  }
   Object.keys(s.characters).forEach(id => {
     const el = document.getElementById('sprite-' + id);
     if (!el) return;
-    const a = beat.actors.find(a => a.id === id);
+    const isActivePortrait = !!(activeActor && id === activeActor.id);
+    const a = !isActivePortrait && beat.actors.find(a => a.id === id);
     if (a) {
       el.classList.add('visible');
       el.classList.toggle('active', !!a.active);
