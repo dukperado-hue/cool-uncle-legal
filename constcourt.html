@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ศาลรัฐธรรมนูญ · Cool Uncle Legal Lab</title>
+<title>ศาลรัฐธรรมนูญและคดีรัฐธรรมนูญ · Cool Uncle Legal Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;800&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -134,27 +134,25 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 
 .lecture-list{display:flex;flex-direction:column;gap:10px;margin-top:16px}
 .lecture-row{
-  display:flex;align-items:center;gap:14px;background:var(--card);
-  border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;
-  box-shadow:var(--shadow);transition:border-color .15s;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;transition:border-color .15s;
 }
 .lecture-row:hover{border-color:var(--gold)}
+.lecture-head{display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer}
+.lecture-row.pending .lecture-head{cursor:default}
 .lecture-num{
   width:36px;height:36px;flex-shrink:0;border-radius:50%;background:var(--gold-soft);
   color:#8F6511;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;
 }
-.lecture-info{flex:1;min-width:0}
-.lecture-title{font-weight:700;color:var(--ink);font-size:15px}
-.lecture-status{font-size:12.5px;color:var(--ink-faint);margin-top:2px}
+.lecture-title{flex:1;min-width:0;font-weight:700;color:var(--ink);font-size:15px}
+.lecture-toggle{color:var(--ink-faint);font-size:13px;flex-shrink:0;transition:transform .2s}
+.lecture-row.open .lecture-toggle{transform:rotate(180deg)}
+.lecture-body{display:none;padding:0 16px 16px 66px;font-size:14px;color:var(--ink-soft);white-space:pre-line;line-height:1.8}
+.lecture-row.open .lecture-body{display:block}
 .lecture-pending{
   font-size:12px;font-weight:700;color:var(--ink-faint);background:#F1EDE2;
   padding:5px 12px;border-radius:999px;white-space:nowrap;flex-shrink:0;
 }
-.lecture-open{
-  font-size:12.5px;font-weight:700;color:var(--accent);text-decoration:none;
-  border:1px solid var(--line);border-radius:999px;padding:6px 14px;white-space:nowrap;flex-shrink:0;
-}
-.lecture-open:hover{background:var(--gold-soft);border-color:var(--gold)}
 
 footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)}
 .coffee-widget{
@@ -188,7 +186,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
   <a href="index.html" class="home-bar-logo" title="กลับหน้าหลัก" onmouseenter="playHoverSound()">👴🏻</a>
   <a href="index.html" class="home-bar-link" onmouseenter="playHoverSound()">← กลับหน้าหลัก</a>
   <span class="home-bar-sep">·</span>
-  <span class="home-bar-current">ศาลรัฐธรรมนูญ</span>
+  <span class="home-bar-current">ศาลรัฐธรรมนูญและคดีรัฐธรรมนูญ</span>
   <div class="theme-toggle" role="group" aria-label="เลือกธีม">
     <button type="button" data-theme-btn="light" onclick="setTheme('light')" onmouseenter="playHoverSound()" title="โหมดสว่าง">☀️</button>
     <button type="button" data-theme-btn="dark" onclick="setTheme('dark')" onmouseenter="playHoverSound()" title="โหมดมืด">🌙</button>
@@ -206,11 +204,11 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
 <div class="wrap">
   <header class="page-head">
     <div class="crest">🏛️</div>
-    <h1>ศาลรัฐธรรมนูญ</h1>
-    <p class="subtitle">สรุปเนื้อหาบรรยายรายครั้ง · ปี 4</p>
+    <h1>ศาลรัฐธรรมนูญและคดีรัฐธรรมนูญ</h1>
+    <p class="subtitle">Constitutional Court and Constitutional Case · สรุปเนื้อหาบรรยายรายครั้ง · ปี 4</p>
   </header>
 
-  <div class="notice">⏳ หน้านี้เตรียมไว้สำหรับสรุปเนื้อหาบรรยาย 15 ครั้ง — จะทยอยอัปโหลดไฟล์ PDF ทีหลัง</div>
+  <div class="notice">⏳ หน้านี้เตรียมไว้สำหรับสรุปเนื้อหาบรรยาย 15 ครั้ง — จะทยอยอัปเดตทีละครั้ง</div>
 
   <div class="lecture-list" id="lectureList"></div>
 
@@ -242,23 +240,53 @@ function playHoverSound(){
   }catch(e){}
 }
 
-/* Each entry: { n, pdf }. Set pdf: "pdfs/xxx.pdf" once a file is uploaded to switch the row from "pending" to a real link. */
-const LECTURES = Array.from({length: 15}, (_, i) => ({ n: i + 1, pdf: null }));
+/* Each entry: { n, title, text }. title/text present = ready to read; absent = still pending. */
+const LECTURES = [
+  { n: 1, title: "แนวคิดพื้นฐานเรื่องรัฐธรรมนูญและทฤษฎีศาลรัฐธรรมนูญ", text:
+`หลักการสำคัญ: รัฐธรรมนูญแบ่งได้เป็น 2 ลักษณะ — Large-C Constitution (Codified) คือรัฐธรรมนูญที่จัดทำเป็นลายลักษณ์อักษรรวบรวมไว้ฉบับเดียวและมีสถานะเป็นกฎหมายสูงสุด เช่น รัฐธรรมนูญไทยหรือสหรัฐอเมริกา ส่วน small-c constitution (Uncodified) คือรัฐธรรมนูญที่ไม่ได้ประมวลไว้ฉบับเดียว แต่กระจายอยู่ในพระราชบัญญัติ ธรรมเนียมปฏิบัติทางรัฐธรรมนูญ และคำพิพากษาบรรทัดฐาน เช่นกรณีสหราชอาณาจักร
+
+รัฐธรรมนูญนิยมแบบเสรีนิยม (Liberal Constitutionalism) มีองค์ประกอบสำคัญ 4 ประการ: (1) การเคารพอัตตาณัติและศักดิ์ศรีความเป็นมนุษย์ของปัจเจกชน (2) ความเป็นรัฐที่เป็นกลาง ไม่ยัดเยียดนิยาม "ชีวิตที่ดี" ให้ปัจเจกชน (3) ความเป็นรัฐฆราวาส แยกพื้นที่ทางการเมืองออกจากศาสนา (4) รัฐบาลที่มีอำนาจจำกัดซึ่งถูกตรวจสอบถ่วงดุลได้
+
+วัตถุประสงค์ของกฎหมายรัฐธรรมนูญมี 2 ด้านหลัก คือ การวางโครงสร้างสถาบันทางการเมืองและกำหนดความสัมพันธ์ระหว่างสถาบันต่างๆ รวมถึงระหว่างรัฐกับประชาชน (ตามแนวคิดของ Berman และ Keith Syrett) และการกำหนด "คุณค่าร่วมกัน" ของรัฐ เช่น การกำหนด "บทนิรันดร" (Eternity Clause) ที่ห้ามแก้ไขเปลี่ยนแปลงรูปพรรณของรัฐหรือระบอบการปกครอง
+
+แนวคิด "The agony of heteronomy" ของฮันส์ เคลเซน (Hans Kelsen) อธิบายว่ากฎหมายมหาชนเกิดขึ้นเพื่อจัดการความขัดแย้งระหว่างความจำเป็นที่รัฐต้องรวมศูนย์อำนาจบังคับ กับความอึดอัดขัดข้องใจของปัจเจกชนผู้มีเสรีภาพที่ต้องตกอยู่ภายใต้อำนาจบังคับของผู้อื่น
+
+ทฤษฎีว่าด้วยผู้พิทักษ์รัฐธรรมนูญ: เคลเซนเสนอรูปแบบการควบคุมความชอบด้วยรัฐธรรมนูญแบบรวมศูนย์ (Centralised model) โดยให้ศาลรัฐธรรมนูญทำหน้าที่เป็น "ผู้พิทักษ์รัฐธรรมนูญ" เพื่อรักษากลไกการประนีประนอมทางการเมืองในระบอบประชาธิปไตย ขณะที่คาร์ล ชมิตต์ (Carl Schmitt) โต้แย้งว่าศาลไม่ควรทำหน้าที่นี้ แต่ประมุขของรัฐต่างหากที่ควรเป็นผู้พิทักษ์รัฐธรรมนูญ — ข้อถกเถียงนี้สะท้อนจุดเด่นและข้อจำกัดของทฤษฎีศาลรัฐธรรมนูญได้ชัดเจน
+
+รูปแบบการตรวจสอบความชอบด้วยรัฐธรรมนูญแบ่งเป็น Centralised model (แบบรวมศูนย์ ให้อำนาจศาลรัฐธรรมนูญเฉพาะ ต้นแบบจากออสเตรีย ปี 1920) และ Decentralised model (แบบกระจายอำนาจ ให้ศาลทั่วไปทุกศาลตรวจสอบได้ ต้นแบบจากสหรัฐอเมริกา คดี Marbury v. Madison) รวมถึงการตรวจสอบก่อนบังคับใช้ (Abstract review) และหลังบังคับใช้ (Concrete review) ซึ่งจะศึกษาเจาะลึกในสัปดาห์ถัดไป
+
+โครงสร้างรายวิชา: แบ่งการบรรยายเป็น 15 ครั้ง ครอบคลุม 3 กลุ่มเนื้อหาหลัก — ทฤษฎีพื้นฐาน คดีการกระทำทางรัฐบาล (Act of Government) การแก้ไขเพิ่มเติมรัฐธรรมนูญ และบทบาทศาลในการคุ้มครองสิทธิเสรีภาพ, การตรวจสอบความชอบด้วยรัฐธรรมนูญของกฎหมายทั้งก่อนและหลังบังคับใช้, และอำนาจหน้าที่ขององค์กรตามรัฐธรรมนูญรวมถึงคดีทางการเมือง เช่น คดียุบพรรคการเมือง ประเมินผลด้วยการสอบปลายภาค 100% เน้นทักษะการวิเคราะห์มากกว่าการท่องจำ
+
+เนื้อหาที่ให้อ่านล่วงหน้า (จากบทความ Constitutional Courts in Asia ของ Albert H.Y. Chen) สรุปภาพรวมการตรวจสอบความชอบด้วยรัฐธรรมนูญ 2 รูปแบบหลักในโลก — รูปแบบอเมริกัน (Decentralized) ให้ศาลทั่วไปตรวจสอบได้ กับรูปแบบยุโรป (Centralized) ที่ตั้งศาลรัฐธรรมนูญเฉพาะ ซึ่งเป็นที่นิยมในประเทศระบบประมวลกฎหมาย (Civil law) และในประเทศที่เพิ่งเปลี่ยนผ่านจากเผด็จการสู่ประชาธิปไตย เนื่องจากศาลรัฐธรรมนูญใหม่เป็น "สัญลักษณ์ของระบอบประชาธิปไตยและหลักนิติธรรมใหม่"
+
+จากประสบการณ์ศาลรัฐธรรมนูญ 7 แห่งในเอเชีย (ไต้หวัน เกาหลีใต้ อินโดนีเซีย ไทย มองโกเลีย กัมพูชา เมียนมา) ผู้เขียนประเมินว่ากลุ่มที่ประสบความสำเร็จสูงสุด ("The Trinity") ได้แก่ ไต้หวัน เกาหลีใต้ และอินโดนีเซีย เพราะใช้อำนาจเชิงรุกระดับปานกลาง มีความเป็นอิสระสูง และได้รับความไว้วางใจจากสาธารณชน ส่วนกรณีศาลรัฐธรรมนูญไทย (ก่อตั้งปี 2541) ผู้เขียนชี้ว่าเป็นกรณีศึกษาที่น่าสนใจ เพราะรัฐธรรมนูญให้อำนาจศาลไว้กว้างขวางมาก แต่ศาลกลับ "ใช้อำนาจแบบรุกคืบอย่างสุดโต่ง" หลังปี 2549 จนนำไปสู่คำตัดสินที่สร้างข้อถกเถียงรุนแรง (เช่น การยุบพรรคการเมืองใหญ่ การสั่งเลือกตั้งเป็นโมฆะ) และเกิดคำถามว่าความล้มเหลวนี้เกิดจากการให้อำนาจที่ล้นเหลือ หรือจากการแบ่งขั้วทางการเมืองในสังคมไทยเองกันแน่` },
+  ...Array.from({length: 14}, (_, i) => ({ n: i + 2, title: null, text: null }))
+];
 
 function renderLectures(){
   const el = document.getElementById('lectureList');
-  el.innerHTML = LECTURES.map(l => `
-    <div class="lecture-row">
-      <div class="lecture-num">${l.n}</div>
-      <div class="lecture-info">
-        <div class="lecture-title">บรรยายครั้งที่ ${l.n}</div>
-        <div class="lecture-status">${l.pdf ? 'พร้อมอ่าน' : 'รออัปโหลด PDF สรุปเนื้อหา'}</div>
+  el.innerHTML = LECTURES.map(l => l.text ? `
+    <div class="lecture-row" id="lec-${l.n}">
+      <div class="lecture-head" onclick="toggleLecture(${l.n})">
+        <div class="lecture-num">${l.n}</div>
+        <div class="lecture-title">${l.title}</div>
+        <div class="lecture-toggle">▾</div>
       </div>
-      ${l.pdf
-        ? `<a href="${l.pdf}" class="lecture-open" target="_blank" rel="noopener" onmouseenter="playHoverSound()">เปิด PDF →</a>`
-        : `<span class="lecture-pending">⏳ รออัปโหลด</span>`}
+      <div class="lecture-body">${l.text.replace(/</g,'&lt;')}</div>
+    </div>
+  ` : `
+    <div class="lecture-row pending">
+      <div class="lecture-head">
+        <div class="lecture-num">${l.n}</div>
+        <div class="lecture-title">บรรยายครั้งที่ ${l.n}</div>
+        <span class="lecture-pending">⏳ รอสรุปเนื้อหา</span>
+      </div>
     </div>
   `).join('');
+}
+function toggleLecture(n){
+  const row = document.getElementById('lec-' + n);
+  if (row) { row.classList.toggle('open'); playHoverSound(); }
 }
 renderLectures();
 </script>
