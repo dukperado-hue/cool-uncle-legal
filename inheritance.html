@@ -22,26 +22,34 @@
   --bad:#B23A3A;
   --bad-bg:#FBEAEA;
   --accent:#2E4A7A;
+  --accent-soft:#EEF2F9;
   --radius:14px;
   --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+  --hero-glow:#F2EDDF;
+  --on-light-ink:#22283A;
+  --on-light-ink-soft:#5A6072;
+  --on-light-ink-faint:#9AA0B0;
 }
 
 /* ============ THEME: DARK ============ */
 :root[data-theme="dark"]{
   --paper:#14161f;--card:#1c2030;--ink:#E9E7E1;--ink-soft:#A9AEC2;--ink-faint:#6C7188;
   --line:#2E3348;--gold:#E0BD73;--gold-soft:#3A3320;--ok:#4FCB8D;--ok-bg:#173425;
-  --bad:#E2685F;--bad-bg:#3A1E1C;--accent:#84A6E8;
+  --bad:#E2685F;--bad-bg:#3A1E1C;--accent:#84A6E8;--accent-soft:#22304F;
   --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.45);
+  --hero-glow:#232742;
 }
 /* ============ THEME: HORROR (กระสือ mode) ============ */
 :root[data-theme="horror"]{
   --paper:#0A070C;--card:#151019;--ink:#D9D2C9;--ink-soft:#9C8F93;--ink-faint:#5C5460;
   --line:#2B1F26;--gold:#8F1F2B;--gold-soft:#301418;--ok:#3F7A4F;--ok-bg:#16241a;
-  --bad:#FF3355;--bad-bg:#301018;--accent:#4A8F5C;
+  --bad:#FF3355;--bad-bg:#301018;--accent:#4A8F5C;--accent-soft:#132A1A;
   --shadow:0 1px 2px rgba(0,0,0,.6),0 10px 28px rgba(0,0,0,.6);
+  --hero-glow:#1E1015;
 }
 :root[data-theme="dark"] body,:root[data-theme="horror"] body{background:var(--paper)}
 :root[data-theme="dark"] .home-bar,:root[data-theme="horror"] .home-bar{background:var(--card);border-bottom-color:var(--line)}
+:root[data-theme="dark"] .tabbar,:root[data-theme="horror"] .tabbar{background:var(--paper)}
 
 /* THEME TOGGLE */
 .theme-toggle{display:flex;gap:3px;margin-left:auto;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
@@ -105,7 +113,7 @@ html{-webkit-text-size-adjust:100%}
 .home-bar-sep{color:var(--ink-faint)}
 .home-bar-current{font-weight:600;color:var(--ink-soft)}
 .home-bar-score{
-  margin-left:auto;font-weight:800;color:#8F6511;background:var(--gold-soft);
+  margin-left:auto;font-weight:800;color:#8F6511;background:#F3E8CF;
   padding:4px 12px;border-radius:999px;font-size:13px;white-space:nowrap;
   transition:transform .15s;
 }
@@ -119,7 +127,7 @@ html{-webkit-text-size-adjust:100%}
 body{
   font-family:'Sarabun',system-ui,sans-serif;
   background:
-    radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),
+    radial-gradient(1200px 500px at 50% -200px, var(--hero-glow) 0%, transparent 60%),
     var(--paper);
   color:var(--ink);
   min-height:100vh;
@@ -196,8 +204,8 @@ body.has-sticky-bar{padding-bottom:92px}
 .irac-case-card .icprog{font-size:12.5px;color:var(--gold);margin-top:6px;font-weight:600}
 
 .irac-facts{
-  background:#FBF6E8;border:1px solid var(--gold-soft);border-radius:var(--radius);
-  padding:14px 16px;margin-bottom:6px;font-size:15px;line-height:1.85;color:var(--ink);
+  background:#FBF6E8;border:1px solid #F0D896;border-radius:var(--radius);
+  padding:14px 16px;margin-bottom:6px;font-size:15px;line-height:1.85;color:var(--on-light-ink);
   max-height:92px;overflow:hidden;position:relative;
 }
 .irac-facts::after{
@@ -207,14 +215,14 @@ body.has-sticky-bar{padding-bottom:92px}
 .irac-facts.expanded{max-height:none}
 .irac-facts.expanded::after{display:none}
 .irac-facts-toggle{
-  display:block;width:100%;text-align:center;font-size:13px;color:var(--accent);font-weight:600;
+  display:block;width:100%;text-align:center;font-size:13px;color:#2E4A7A;font-weight:600;
   background:none;border:none;padding:5px 0 14px;cursor:pointer;
 }
 
 .irac-stepper{display:flex;gap:5px;margin-bottom:8px}
 .irac-step{
-  flex:1;text-align:center;font-size:11px;font-weight:600;color:var(--ink-faint);
-  padding:5px 2px;border-radius:8px;background:#EEEBE0;border:1px solid transparent;
+  flex:1;text-align:center;font-size:11px;font-weight:600;color:var(--ink-soft);
+  padding:5px 2px;border-radius:8px;background:var(--line);border:1px solid transparent;
 }
 .irac-step.active{background:var(--accent);color:#fff}
 .irac-step.done{background:var(--ok-bg);color:var(--ok);border-color:#BFE3CE}
@@ -225,9 +233,9 @@ body.has-sticky-bar{padding-bottom:92px}
 
 .irac-issue-recap{
   background:var(--ok-bg);border:1px solid #BFE3CE;border-radius:var(--radius);
-  padding:16px 18px;text-align:center;
+  padding:16px 18px;text-align:center;color:var(--ink);
 }
-.irac-issue-recap .big{font-family:'Noto Serif Thai',serif;font-size:18px;font-weight:700;color:#14563A;margin-bottom:6px}
+.irac-issue-recap .big{font-family:'Noto Serif Thai',serif;font-size:18px;font-weight:700;color:var(--ok);margin-bottom:6px}
 
 /* ---------- stage banner (แถบธีมตามหมวด แทน SVG scene) ---------- */
 .stage{
@@ -330,7 +338,7 @@ select{
   flex:1;border:1.5px solid var(--line);background:var(--card);border-radius:12px;
   padding:12px 8px;font-size:14.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
 }
-.lvlbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.lvlbar button.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
 .lvlbar .lvl-desc{display:block;font-size:12px;font-weight:400;color:var(--ink-faint);margin-top:2px}
 .lvlbar button.on .lvl-desc{color:var(--accent)}
 
@@ -340,14 +348,14 @@ select{
   padding:7px 15px;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
   display:inline-flex;align-items:center;gap:6px;
 }
-.setbar button.on{border-color:var(--accent);color:var(--accent);background:#EEF2F9}
+.setbar button.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
 .setbar .best{color:var(--gold);font-size:12px;font-weight:700}
 
-.progressbar{height:6px;background:#EDE9DD;border-radius:99px;overflow:hidden;margin-bottom:8px}
+.progressbar{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:8px}
 .progressbar>div{height:100%;background:linear-gradient(90deg,var(--accent),#5E7BB0);border-radius:99px;transition:width .3s}
 .quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:14px;gap:10px}
 .quiz-timer{
-  font-weight:700;color:var(--ink-soft);background:#EEEBE0;border-radius:999px;
+  font-weight:700;color:var(--ink-soft);background:var(--line);border-radius:999px;
   padding:3px 10px;font-size:13px;white-space:nowrap;
 }
 .quiz-timer.timer-fast{background:var(--ok-bg);color:var(--ok)}
@@ -381,8 +389,8 @@ select{
   display:none;margin-top:14px;border-radius:12px;padding:16px 18px;
   font-size:15px;line-height:1.85;border:1px solid;
 }
-.explain.ok{background:var(--ok-bg);border-color:#BFE3CE;color:#14563A}
-.explain.bad{background:var(--bad-bg);border-color:#F0C9C9;color:#7C2A2A}
+.explain.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.explain.bad{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
 .explain b{display:block;margin-bottom:4px;font-size:15.5px}
 .pts-earned{
   display:inline-block;background:var(--gold);color:#fff;font-weight:800;
@@ -470,8 +478,8 @@ footer{
 .study-content th,.study-content td{
   border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;
 }
-.study-content th{background:var(--gold-soft);color:#5A4415;font-weight:700}
-.study-content tr:nth-child(even) td{background:#FBF9F3}
+.study-content th{background:var(--gold-soft);color:var(--ink);font-weight:700}
+.study-content tr:nth-child(even) td{background:rgba(176,138,60,.08)}
 @media(max-width:640px){
   .tabbar{flex-wrap:wrap;border-radius:16px;max-width:100%}
   .tabbar button{flex:1 1 30%}
@@ -705,7 +713,7 @@ function playHoverSound(){
     <div id="irac-recap-box" style="display:none">
       <div class="irac-issue-recap">
         <div class="big" id="irac-recap-title"></div>
-        <div id="irac-recap-text" style="font-size:14.5px;line-height:1.8;color:#14563A"></div>
+        <div id="irac-recap-text" style="font-size:14.5px;line-height:1.8;color:var(--ok)"></div>
       </div>
     </div>
   </div>
@@ -823,7 +831,7 @@ const CATEGORIES = {
 
 const CARDS = [
   /* ---------- ๑ บทนำ & กองมรดก ---------- */
-  { cat:"intro", section:"ม.1599", title:"มรดกตกทอดเมื่อตาย", result:"เมื่อบุคคลใดตาย มรดกของบุคคลนั้นตกทอดแก่ทายาททันทีโดยผลของกฎหมาย ทายาทอาจเสียไปซึ่งสิทธิในมรดกได้แต่ตามบทบัญญัติแห่งประมวลกฎหมายนี้", note:"อ.ธนภัทรแนะให้เริ่มเขียนตอบข้อสอบด้วย ม.1599 เสมอ เพื่อชี้ว่ามรดกเกิดขึ้นเมื่อใด", stars:5, source:"ป.พ.พ." },
+  { cat:"intro", section:"ม.1599", title:"มรดกตกทอดเมื่อตาย", result:"เมื่อบุคคลใดตาย มรดกของบุคคลนั้นตกทอดแก่ทายาททันทีโดยผลของกฎหมาย ทายาทอาจเสียไปซึ่งสิทธิในมรดกได้แต่ตามบทบัญญัติแห่งประมวลกฎหมายนี้", note:"เทคนิคข้อสอบ: ให้เริ่มเขียนตอบด้วย ม.1599 เสมอ เพื่อชี้ว่ามรดกเกิดขึ้นเมื่อใด", stars:5, source:"ป.พ.พ." },
   { cat:"intro", section:"ม.1600", title:"กองมรดกมีอะไรบ้าง", result:"กองมรดกได้แก่ ทรัพย์สินทุกชนิดของผู้ตาย ตลอดทั้งสิทธิ หน้าที่ และความรับผิดต่าง ๆ เว้นแต่ตามกฎหมายหรือโดยสภาพเป็นการเฉพาะตัวของผู้ตายโดยแท้", note:"สิทธิเฉพาะตัวโดยสภาพ เช่น สิทธิตามสัญญาจ้างแรงงาน สิทธิรับค่าอุปการะเลี้ยงดู ไม่ตกทอด", stars:5, source:"ป.พ.พ." },
   { cat:"intro", section:"ม.1601", title:"ทายาทรับผิดไม่เกินทรัพย์มรดก", result:"ทายาทไม่จำต้องรับผิดเกินกว่าทรัพย์มรดกที่ตกทอดได้แก่ตน", note:"ฎ.2161/2558 เจ้าหนี้กองมรดกบังคับได้เฉพาะทรัพย์ในกองมรดก ไม่ถึงทรัพย์ส่วนตัวของทายาท", stars:4, source:"ป.พ.พ." },
   { cat:"intro", section:"ม.1602", title:"สาบสูญ = ถึงแก่ความตาย", result:"เมื่อบุคคลใดต้องถือว่าถึงแก่ความตายตามบทบัญญัติเรื่องสาบสูญ (ม.62) มรดกของบุคคลนั้นตกทอดแก่ทายาท", note:"ผลของคำสั่งศาลให้เป็นคนสาบสูญ ทำให้เกิดมรดกได้เช่นเดียวกับการตายจริง", stars:3, source:"ป.พ.พ." },
@@ -1022,7 +1030,7 @@ const QUIZ_ADV = [
   },
   {
     cat:"intro",
-    q:"ก่อนตาย นายดำได้ทำสัญญาประนีประนอมยอมความในคดีละเมิด โดยคู่กรณีตกลงชดใช้ค่าสินไหมทดแทน 5 แสนบาท แต่นายดำตายก่อนไปรับเช็ค สิทธิเรียกค่าสินไหมนี้ตกทอดเป็นมรดกหรือไม่ (ปรับจากสัมมนา อ.ศุภวิช)",
+    q:"ก่อนตาย นายดำได้ทำสัญญาประนีประนอมยอมความในคดีละเมิด โดยคู่กรณีตกลงชดใช้ค่าสินไหมทดแทน 5 แสนบาท แต่นายดำตายก่อนไปรับเช็ค สิทธิเรียกค่าสินไหมนี้ตกทอดเป็นมรดกหรือไม่ (ปรับจากสัมมนากฎหมายมรดก)",
     opts:[
       "ไม่ตกทอด เพราะเป็นสิทธิเฉพาะตัว",
       "ตกทอดเป็นมรดกตาม ม.1600 เพราะเป็นสิทธิเรียกร้องในทางทรัพย์สินที่เกิดขึ้นแล้วและไม่ใช่สิทธิเฉพาะตัวโดยสภาพ",
@@ -1048,8 +1056,8 @@ const QUIZ_ADV = [
 
 /* ================================================================
    IRAC_CASES — วินิจฉัยทีละประเด็นแบบ IRAC
-   ประเด็นแรกของทุกคดีเริ่มด้วยการตั้งกองมรดก (ม.1599–1600) ตามแนว
-   วิธีตอบข้อสอบของ อ.ธนภัทร
+   ประเด็นแรกของทุกคดีเริ่มด้วยการตั้งกองมรดก (ม.1599–1600) ตามวิธี
+   ตอบข้อสอบมรดกแบบเป็นระบบ
    ================================================================ */
 const IRAC_CASES = [
   {
@@ -1069,7 +1077,7 @@ const IRAC_CASES = [
           "สิทธิของเจ้าหนี้ก่อนเสมอ"
         ],
         issueAns:0,
-        issueFeedback:"ถูกต้อง ตามแนว อ.ธนภัทร เริ่มด้วย ม.1599 (มรดกเกิดเมื่อภิกษุสนมรณภาพ) แล้วจึงตั้งกองมรดกตาม ม.1600",
+        issueFeedback:"ถูกต้อง เทคนิคการวิเคราะห์ข้อสอบมรดกคือเริ่มด้วย ม.1599 (มรดกเกิดเมื่อภิกษุสนมรณภาพ) แล้วจึงตั้งกองมรดกตาม ม.1600",
         ruleQ:"บทกฎหมายใดใช้แยกว่าทรัพย์ใดตกวัด ทรัพย์ใดเป็นมรดก",
         ruleOpts:[
           "ม.1623 (ทรัพย์ระหว่างสมณเพศตกวัด) ประกอบ ม.1624 (ทรัพย์ก่อนบวช/นอกสมณเพศตกทายาท)",
@@ -1315,7 +1323,7 @@ const IRAC_CASES = [
   },
   {
     id:"case4",
-    examRef:"ปรับจากสัมมนา อ.ศุภวิช (นายดำ)",
+    examRef:"ปรับจากสัมมนากฎหมายมรดก (นายดำ)",
     title:"สิทธิที่ตกทอด/ไม่ตกทอดเป็นมรดก",
     cat:"intro",
     facts:"นายดำอายุ 25 ปี เป็นกำพร้าบิดามารดาตั้งแต่เด็ก ประสบอุบัติเหตุเสียชีวิตกะทันหัน ก่อนตายนายดำทำสัญญาต่างตอบแทนพิเศษยิ่งกว่าสัญญาเช่าธรรมดา เช่าที่ดิน 1 ไร่จากนายแดง 20 ปีเพื่อทำตลาดนัด (มีการพัฒนาที่ดินแล้ว) เพิ่งชนะคดีได้ค่าสินไหมทดแทนจากมูลละเมิด 300,000 บาท และเพิ่งได้รับที่ดิน 1 ไร่ตามพินัยกรรม นายดำมีนางเหลืองน้าสาวที่รับนายดำเป็นบุตรบุญธรรมตั้งแต่แบเบาะ นายทองสามีใหม่ของนางเหลือง และ น.ส.ส้มบุตรสาวของนางเหลือง<br><br>ให้พิจารณาว่าผู้ใดมีสิทธิรับมรดกของนายดำ และทรัพย์/สิทธิใดตกทอดเป็นมรดกได้",
@@ -1408,7 +1416,7 @@ const IRAC_CASES = [
 const ORDER_CASES = [
   {
     id:"order1",
-    title:"ขั้นตอนวิเคราะห์ข้อสอบแบ่งมรดก (แนว อ.ธนภัทร)",
+    title:"ขั้นตอนวิเคราะห์ข้อสอบแบ่งมรดก",
     cat:"intro",
     steps:[
       "อ่านคำถามท้ายโจทย์ก่อน เพื่อจับประเด็นที่ต้องตอบ แล้วค่อยอ่านข้อเท็จจริงโดยวงเฉพาะส่วนที่เกี่ยวข้อง",
