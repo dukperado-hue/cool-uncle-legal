@@ -331,6 +331,7 @@ a.tab-btn{text-decoration:none;display:inline-flex;align-items:center;justify-co
 .subject-thumb.brand-emerald{background:linear-gradient(135deg,#1E8A5F 0%,#125C3E 100%)}
 .subject-thumb.brand-purple{background:linear-gradient(135deg,#6A3FA0 0%,#452870 100%)}
 .subject-thumb.brand-sky{background:linear-gradient(135deg,#2E86AB 0%,#1C5A73 100%)}
+.subject-thumb.has-img{background-size:cover;background-position:center}
 .thumb-badge{
   width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.96);
   display:flex;align-items:center;justify-content:center;font-size:25px;
@@ -843,13 +844,13 @@ function playHoverSound(){
 
 const SUBJECTS = {
   year2: [
-    { name: "Contract Law", desc: "นิติกรรมและสัญญา", icon: "📜", brand: "navy", href: "contract-law.html", status: "ready" },
-    { name: "Criminal General", desc: "กฎหมายอาญาภาคทั่วไป", icon: "⚖️", brand: "crimson", href: "crimgen.html", status: "ready" },
-    { name: "Tort Law", desc: "กฎหมายละเมิด", icon: "⚡", brand: "navy", href: "tort.html", status: "ready" },
+    { name: "Contract Law", desc: "นิติกรรมและสัญญา", icon: "📜", brand: "navy", img: "pics/course-thumbs/contract-law.jpg", href: "contract-law.html", status: "ready" },
+    { name: "Criminal General", desc: "กฎหมายอาญาภาคทั่วไป", icon: "⚖️", brand: "crimson", img: "pics/course-thumbs/criminal-general.jpg", href: "crimgen.html", status: "ready" },
+    { name: "Tort Law", desc: "กฎหมายละเมิด", icon: "⚡", brand: "navy", img: "pics/course-thumbs/tort.jpg", href: "tort.html", status: "ready" },
     { name: "Property", desc: "ทรัพย์สิน", icon: "🏠", brand: "navy", href: "property.html", status: "ready" },
     { name: "Debt", desc: "กฎหมายหนี้สิน", icon: "💰", brand: "navy", href: "debt.html", status: "ready" },
     { name: "Commercial Contract", desc: "สัญญาทางพาณิชย์", icon: "💼", brand: "navy", href: "commcontract.html", status: "ready" },
-    { name: "Criminal Liability", desc: "ความผิดทางอาญา", icon: "⚠️", brand: "crimson", href: "crimliab.html", status: "ready" },
+    { name: "Criminal Liability", desc: "ความผิดทางอาญา", icon: "⚠️", brand: "crimson", img: "pics/course-thumbs/crimliab.jpg", href: "crimliab.html", status: "ready" },
     { name: "เกมสถานการณ์", desc: "ฝึกวิเคราะห์โจทย์อาญาแบบมินิเกม (visual novel)", icon: "🎮", brand: "crimson", href: "game-crimlaw-scenario.html", status: "ready" },
   ],
   year3: [
@@ -989,9 +990,9 @@ function renderSubjects(category, containerId) {
   const isReady = s => s.status === 'ready';
   container.innerHTML = SUBJECTS[category].map(s => `
     <a href="${s.href}" class="subject-card${isReady(s) ? '' : ' coming-soon'}${s.brand ? ` brand-${s.brand}` : ''}" onmouseenter="playHoverSound()" ${isReady(s) ? '' : 'onclick="return false;style.cursor=\'not-allowed\'"'}>
-      <div class="subject-thumb${s.brand ? ` brand-${s.brand}` : ''}">
+      <div class="subject-thumb${s.brand ? ` brand-${s.brand}` : ''}${s.img ? ' has-img' : ''}"${s.img ? ` style="background-image:url('${s.img}')"` : ''}>
         <div class="status-pill">${isReady(s) ? '✓ พร้อม' : '⏳ เร็ว ๆ นี้'}</div>
-        ${s.brand ? `<div class="thumb-badge">${s.icon}</div>` : `<div class="subject-icon">${s.icon}</div>`}
+        ${s.img ? '' : s.brand ? `<div class="thumb-badge">${s.icon}</div>` : `<div class="subject-icon">${s.icon}</div>`}
       </div>
       <div class="subject-body">
         <div class="subject-name">${s.name}</div>
