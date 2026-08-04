@@ -158,6 +158,27 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 .lecture-row.open .lecture-toggle{transform:rotate(180deg)}
 .lecture-body{display:none;padding:0 16px 16px 66px;font-size:14px;color:var(--ink-soft);white-space:pre-line;line-height:1.8}
 .lecture-row.open .lecture-body{display:block}
+/* TTS bar */
+.tts-bar{
+  display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+  background:#F1EDE2;border:1px solid var(--line);border-radius:12px;
+  padding:8px 12px;margin:16px 0;
+}
+.tts-btn{
+  background:var(--accent);color:#fff;border:none;border-radius:8px;
+  padding:8px 14px;font-size:13.5px;font-weight:600;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;font-family:inherit;
+}
+.tts-btn:hover{opacity:.9}
+.tts-btn-ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.tts-btn-ghost:hover{border-color:var(--bad);color:var(--bad)}
+.tts-ico{font-size:11px}
+.tts-rate{font-size:12.5px;color:var(--ink-soft);margin-left:auto;display:inline-flex;align-items:center;gap:6px}
+.tts-rate select{
+  background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:5px 8px;font-family:inherit;font-size:12.5px;cursor:pointer;
+}
+.tts-hint{font-size:12px;color:var(--ink-faint)}
 .lecture-pending{
   font-size:12px;font-weight:700;color:var(--ink-faint);background:#F1EDE2;
   padding:5px 12px;border-radius:999px;white-space:nowrap;flex-shrink:0;
@@ -229,6 +250,18 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
 
   <div class="notice">⏳ หน้านี้เตรียมไว้สำหรับสรุปเนื้อหาบรรยาย 15 ครั้ง — จะทยอยอัปเดตทีละครั้ง</div>
 
+  <div class="tts-bar" id="tts-bar" style="display:none">
+    <button id="tts-play" class="tts-btn" title="อ่านออกเสียงบรรยายที่เปิดอยู่"><span class="tts-ico">▶</span> อ่านออกเสียง</button>
+    <button id="tts-pause" class="tts-btn" title="หยุดชั่วคราว/เล่นต่อ" style="display:none"><span class="tts-ico">⏸</span> หยุดชั่วคราว</button>
+    <button id="tts-stop" class="tts-btn tts-btn-ghost" title="หยุด" style="display:none"><span class="tts-ico">■</span> หยุด</button>
+    <label class="tts-rate">ความเร็ว <select id="tts-rate">
+      <option value="0.8">0.8×</option>
+      <option value="1" selected>1.0×</option>
+      <option value="1.2">1.2×</option>
+      <option value="1.5">1.5×</option>
+    </select></label>
+    <span class="tts-hint">เปิดบรรยายครั้งที่ต้องการก่อน แล้วกด "อ่านออกเสียง"</span>
+  </div>
   <div class="lecture-list" id="lectureList"></div>
 
   <div class="reading-header">📚 อ่านเสริมประกอบการบรรยายครั้งที่ 1</div>
@@ -303,6 +336,95 @@ function highlightText(escapedHtml){
   return escapedHtml.replace(new RegExp('(' + pattern + ')', 'g'), '<mark class="hl">$1</mark>');
 }
 
+/* ---- Web Speech TTS (reads whichever lecture row is currently open) ---- */
+const TTS = (function(){
+  const supported = typeof window !== 'undefined' && 'speechSynthesis' in window;
+  let queue = [], qIdx = 0, rate = 1;
+  function pickThaiVoice(){
+    const vs = window.speechSynthesis.getVoices();
+    return vs.find(v => v.lang && v.lang.toLowerCase().startsWith('th')) || vs[0];
+  }
+  function speakNext(){
+    if(qIdx >= queue.length){ setBtns('idle'); return; }
+    const u = new SpeechSynthesisUtterance(queue[qIdx]);
+    const v = pickThaiVoice();
+    if(v) u.voice = v;
+    u.lang = (v && v.lang) || 'th-TH';
+    u.rate = rate;
+    u.onend = ()=>{ qIdx++; speakNext(); };
+    u.onerror = ()=>{ qIdx++; speakNext(); };
+    window.speechSynthesis.speak(u);
+  }
+  function setBtns(state){
+    const p = document.getElementById('tts-play');
+    const pa = document.getElementById('tts-pause');
+    const s = document.getElementById('tts-stop');
+    if(!p) return;
+    if(state === 'playing'){
+      p.style.display = 'none'; pa.style.display = 'inline-flex'; s.style.display = 'inline-flex';
+      pa.innerHTML = '<span class="tts-ico">⏸</span> หยุดชั่วคราว';
+    } else if(state === 'paused'){
+      pa.innerHTML = '<span class="tts-ico">▶</span> เล่นต่อ';
+    } else {
+      p.style.display = 'inline-flex'; pa.style.display = 'none'; s.style.display = 'none';
+    }
+  }
+  function play(){
+    if(!supported) return;
+    if(window.speechSynthesis.paused){
+      window.speechSynthesis.resume();
+      setBtns('playing');
+      return;
+    }
+    stop();
+    const openRow = document.querySelector('.lecture-row.open');
+    if(!openRow) return;
+    const titleEl = openRow.querySelector('.lecture-title');
+    const bodyEl = openRow.querySelector('.lecture-body');
+    if(!bodyEl) return;
+    const paras = bodyEl.textContent.split(/\n\s*\n/).map(s=>s.trim()).filter(Boolean);
+    queue = titleEl ? [titleEl.textContent.trim(), ...paras] : paras;
+    if(queue.length === 0) return;
+    qIdx = 0;
+    setBtns('playing');
+    speakNext();
+  }
+  function pauseToggle(){
+    if(!supported) return;
+    if(window.speechSynthesis.paused){
+      window.speechSynthesis.resume();
+      setBtns('playing');
+    } else if(window.speechSynthesis.speaking){
+      window.speechSynthesis.pause();
+      setBtns('paused');
+    }
+  }
+  function stop(){
+    if(!supported) return;
+    window.speechSynthesis.cancel();
+    queue = []; qIdx = 0;
+    setBtns('idle');
+  }
+  function setRate(r){ rate = r; }
+  return {supported, play, pauseToggle, stop, setRate};
+})();
+(function initTTS(){
+  const play = document.getElementById('tts-play');
+  const pause = document.getElementById('tts-pause');
+  const stop = document.getElementById('tts-stop');
+  const rate = document.getElementById('tts-rate');
+  const bar = document.getElementById('tts-bar');
+  if(bar) bar.style.display = TTS.supported ? 'flex' : 'none';
+  if(play) play.addEventListener('click', ()=> TTS.play());
+  if(pause) pause.addEventListener('click', ()=> TTS.pauseToggle());
+  if(stop) stop.addEventListener('click', ()=> TTS.stop());
+  if(rate) rate.addEventListener('change', ()=> TTS.setRate(parseFloat(rate.value)));
+  if('speechSynthesis' in window){
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = ()=>{ window.speechSynthesis.getVoices(); };
+  }
+})();
+
 function renderLectures(){
   const el = document.getElementById('lectureList');
   el.innerHTML = LECTURES.map(l => l.text ? `
@@ -326,7 +448,12 @@ function renderLectures(){
 }
 function toggleLecture(n){
   const row = document.getElementById('lec-' + n);
-  if (row) { row.classList.toggle('open'); playHoverSound(); }
+  if (row) {
+    const wasOpen = row.classList.contains('open');
+    TTS.stop();
+    row.classList.toggle('open');
+    playHoverSound();
+  }
 }
 renderLectures();
 
