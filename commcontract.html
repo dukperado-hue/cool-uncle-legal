@@ -442,6 +442,28 @@ footer{
   padding:11px;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer;
 }
 .study-nav3 button:hover{border-color:var(--ink-faint)}
+/* TTS bar */
+.tts-bar{
+  display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+  background:#F1EDE2;border:1px solid var(--line);border-radius:12px;
+  padding:8px 12px;margin-bottom:14px;
+}
+.tts-btn{
+  background:var(--accent);color:#fff;border:none;border-radius:8px;
+  padding:8px 14px;font-size:13.5px;font-weight:600;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;font-family:inherit;
+}
+.tts-btn:hover{opacity:.9}
+.tts-btn-ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.tts-btn-ghost:hover{border-color:var(--bad);color:var(--bad)}
+.tts-ico{font-size:11px}
+.tts-rate{font-size:12.5px;color:var(--ink-soft);margin-left:auto;display:inline-flex;align-items:center;gap:6px}
+.tts-rate select{
+  background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:5px 8px;font-family:inherit;font-size:12.5px;cursor:pointer;
+}
+.tts-reading{background:linear-gradient(120deg,#FFF3C7 0%,#FFEFB0 100%);border-radius:4px;padding:2px 4px;transition:background .2s}
+
 .study-panel{
   background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
   box-shadow:var(--shadow);padding:22px 24px;margin:14px 0;
@@ -752,6 +774,17 @@ function playHoverSound(){
 <!-- ============ โหมด 5: สรุปเนื้อหา ============ -->
 <section id="view-study" class="view">
   <div class="row"><select id="study-select" aria-label="เลือกหัวข้อสรุป"></select></div>
+  <div class="tts-bar" id="tts-bar" style="display:none">
+    <button id="tts-play" class="tts-btn" title="อ่านออกเสียง"><span class="tts-ico">▶</span> อ่านออกเสียง</button>
+    <button id="tts-pause" class="tts-btn" title="หยุดชั่วคราว/เล่นต่อ" style="display:none"><span class="tts-ico">⏸</span> หยุดชั่วคราว</button>
+    <button id="tts-stop" class="tts-btn tts-btn-ghost" title="หยุด" style="display:none"><span class="tts-ico">■</span> หยุด</button>
+    <label class="tts-rate">ความเร็ว <select id="tts-rate">
+      <option value="0.8">0.8×</option>
+      <option value="1" selected>1.0×</option>
+      <option value="1.2">1.2×</option>
+      <option value="1.5">1.5×</option>
+    </select></label>
+  </div>
   <div class="study-panel" id="study-panel"></div>
   <div id="study-bottom-sentinel"></div>
 </section>
@@ -2388,11 +2421,117 @@ function renderStudySelect(){
   });
 }
 
+/* ---- Web Speech TTS ---- */
+const TTS = (function(){
+  const supported = typeof window !== 'undefined' && 'speechSynthesis' in window;
+  let queue = [], qIdx = 0, currentEl = null, paused = false, rate = 1;
+  function pickThaiVoice(){
+    const vs = window.speechSynthesis.getVoices();
+    return vs.find(v => v.lang && v.lang.toLowerCase().startsWith('th')) || vs[0];
+  }
+  function clearHighlight(){
+    if(currentEl){ currentEl.classList.remove('tts-reading'); currentEl = null; }
+  }
+  function speakNext(){
+    if(qIdx >= queue.length){ clearHighlight(); setBtns('idle'); return; }
+    const item = queue[qIdx];
+    clearHighlight();
+    currentEl = item.el;
+    if(currentEl){
+      currentEl.classList.add('tts-reading');
+      currentEl.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+    const u = new SpeechSynthesisUtterance(item.text);
+    const v = pickThaiVoice();
+    if(v) u.voice = v;
+    u.lang = (v && v.lang) || 'th-TH';
+    u.rate = rate;
+    u.onend = ()=>{ qIdx++; speakNext(); };
+    u.onerror = ()=>{ qIdx++; speakNext(); };
+    window.speechSynthesis.speak(u);
+  }
+  function setBtns(state){
+    const p = document.getElementById('tts-play');
+    const pa = document.getElementById('tts-pause');
+    const s = document.getElementById('tts-stop');
+    if(!p) return;
+    if(state === 'playing'){
+      p.style.display = 'none'; pa.style.display = 'inline-flex'; s.style.display = 'inline-flex';
+      pa.innerHTML = '<span class="tts-ico">⏸</span> หยุดชั่วคราว';
+    } else if(state === 'paused'){
+      pa.innerHTML = '<span class="tts-ico">▶</span> เล่นต่อ';
+    } else { // idle
+      p.style.display = 'inline-flex'; pa.style.display = 'none'; s.style.display = 'none';
+    }
+  }
+  function play(){
+    if(!supported) return;
+    const panel = document.getElementById('study-panel');
+    if(!panel) return;
+    if(window.speechSynthesis.paused){
+      window.speechSynthesis.resume();
+      paused = false;
+      setBtns('playing');
+      return;
+    }
+    stop();
+    const readable = panel.querySelectorAll('.study-title, h4, h5, p, li');
+    queue = [];
+    readable.forEach(el=>{
+      if(el.closest('.study-toc')) return;
+      const txt = el.textContent.trim();
+      if(txt.length > 0) queue.push({el, text: txt});
+    });
+    if(queue.length === 0) return;
+    qIdx = 0;
+    setBtns('playing');
+    speakNext();
+  }
+  function pauseToggle(){
+    if(!supported) return;
+    if(window.speechSynthesis.paused){
+      window.speechSynthesis.resume();
+      paused = false;
+      setBtns('playing');
+    } else if(window.speechSynthesis.speaking){
+      window.speechSynthesis.pause();
+      paused = true;
+      setBtns('paused');
+    }
+  }
+  function stop(){
+    if(!supported) return;
+    window.speechSynthesis.cancel();
+    clearHighlight();
+    queue = []; qIdx = 0; paused = false;
+    setBtns('idle');
+  }
+  function setRate(r){ rate = r; }
+  return {supported, play, pauseToggle, stop, setRate};
+})();
+(function initTTS(){
+  const play = document.getElementById('tts-play');
+  const pause = document.getElementById('tts-pause');
+  const stop = document.getElementById('tts-stop');
+  const rate = document.getElementById('tts-rate');
+  if(play) play.addEventListener('click', ()=> TTS.play());
+  if(pause) pause.addEventListener('click', ()=> TTS.pauseToggle());
+  if(stop) stop.addEventListener('click', ()=> TTS.stop());
+  if(rate) rate.addEventListener('change', ()=> TTS.setRate(parseFloat(rate.value)));
+  if('speechSynthesis' in window){
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = ()=>{ window.speechSynthesis.getVoices(); };
+  }
+})();
+
 function renderStudyTopic(){
+  TTS.stop();
   const sel = document.getElementById('study-select');
   const topic = SUMMARY_TOPICS.find(t=>t.id === sel.value) || SUMMARY_TOPICS[0];
   const panel = document.getElementById('study-panel');
   panel.innerHTML = linkArticles(topic.html);
+  const ttsBar = document.getElementById('tts-bar');
+  if(ttsBar) ttsBar.style.display = TTS.supported ? 'flex' : 'none';
   panel.style.borderLeftColor = CATEGORIES[topic.cat] ? CATEGORIES[topic.cat].strong : '#1F6B45';
   panel.scrollTop = 0;
   setupStudyObserver(topic.id);
