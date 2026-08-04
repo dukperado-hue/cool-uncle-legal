@@ -352,6 +352,7 @@ const READINGS = [
 ข้อสรุปทางทฤษฎี: บทสรุปสำคัญของเชนคือ การมีศาลรัฐธรรมนูญ หรือแม้แต่การให้อำนาจศาลไว้กว้างขวางในรัฐธรรมนูญ ไม่ได้เป็นหลักประกันอัตโนมัติว่าศาลจะทำหน้าที่ "ผู้พิทักษ์รัฐธรรมนูญ" ได้อย่างมีประสิทธิภาพและได้รับความเชื่อถือ ความสำเร็จขึ้นอยู่กับปัจจัยเชิงบริบทหลายชั้น ทั้งวัฒนธรรมทางกฎหมาย ความเป็นสถาบันของฝ่ายตุลาการ และเสถียรภาพทางการเมืองของแต่ละประเทศ — ประเด็นที่ควรนำไปเชื่อมโยงกับทฤษฎีของเคลเซนและชมิตต์เรื่อง "ผู้พิทักษ์รัฐธรรมนูญ" ที่เรียนในบรรยายครั้งที่ 1`,
     source: 'หมายเหตุ: สรุปโดยสังเคราะห์จากโครงเรื่อง/บทคัดย่อที่เผยแพร่สาธารณะของงานวิจัยต้นทาง "Constitutional Courts in Asia: Western Origins and Asian Practice" (HKU Faculty of Law Research Paper 2019/088) ซึ่งเป็นต้นฉบับของ Chapter 1 และจากเนื้อหาที่เรียนในบรรยายครั้งที่ 1 — ไม่ใช่การคัดลอกข้อความจากต้นฉบับ โปรดอ่านบทเต็มประกอบก่อนใช้อ้างอิงสอบ' },
   { id: 'kelsen-bio', icon: '👤', title: 'ประวัติ Hans Kelsen (ฮันส์ เคลเซน)',
+    image: 'pics/kelsen.jpg', imageAlt: 'Hans Kelsen',
     meta: '1881–1973 · นักนิติศาสตร์ชาวออสเตรีย ผู้บุกเบิกทฤษฎีบริสุทธิ์แห่งกฎหมาย และสถาปนิกศาลรัฐธรรมนูญแห่งแรกของโลก',
     text:
 `ชีวิตช่วงต้น: ฮันส์ เคลเซน เกิดเมื่อวันที่ 11 ตุลาคม ค.ศ. 1881 ที่กรุงปราก ซึ่งขณะนั้นเป็นส่วนหนึ่งของจักรวรรดิออสเตรีย-ฮังการี ครอบครัวเป็นชาวยิวเชื้อสายเยอรมัน ต่อมาย้ายไปตั้งรกรากที่กรุงเวียนนาตั้งแต่เคลเซนยังเป็นเด็ก เขาศึกษากฎหมายที่มหาวิทยาลัยเวียนนา ก่อนไปศึกษาต่อที่ไฮเดลเบิร์กและเบอร์ลิน และได้รับอิทธิพลอย่างมากจากปรัชญาสำนักนีโอ-คานต์ (Neo-Kantian) ซึ่งเน้นการแยก "สิ่งที่เป็นอยู่" (Sein/Is) ออกจาก "สิ่งที่ควรจะเป็น" (Sollen/Ought) อย่างเคร่งครัด แนวคิดนี้กลายเป็นรากฐานสำคัญของทฤษฎีกฎหมายที่เขาสร้างขึ้นในเวลาต่อมา
@@ -377,7 +378,7 @@ function renderReadings(){
         <div class="lecture-title">${r.title}</div>
         <div class="lecture-toggle">▾</div>
       </div>
-      <div class="lecture-body">${highlightText(r.meta.replace(/</g,'&lt;'))}
+      <div class="lecture-body">${r.image ? `<figure style="margin:0 0 16px;text-align:center"><img src="${r.image}" alt="${r.imageAlt||''}" style="max-width:200px;width:100%;border-radius:var(--radius,10px);border:1px solid var(--line);box-shadow:var(--shadow,0 2px 8px rgba(0,0,0,.08))" loading="lazy"><figcaption style="font-size:12px;color:var(--ink-faint);margin-top:6px">${r.imageAlt||''}</figcaption></figure>` : ''}${highlightText(r.meta.replace(/</g,'&lt;'))}
 
 ${highlightText(r.text.replace(/</g,'&lt;'))}
 <div class="reading-source">${r.source.replace(/</g,'&lt;')}</div></div>

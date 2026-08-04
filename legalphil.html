@@ -250,6 +250,8 @@ table.cmp tr:nth-child(even) td{background:#FAF8F2}
 .thinker-card{
   background:#FAF8F2;border:1px solid var(--line);border-radius:10px;padding:12px 14px;
 }
+.thinker-card.has-portrait{display:flex;gap:10px;align-items:flex-start}
+.thinker-card .portrait{width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1px solid var(--line)}
 .thinker-card .name{font-family:'Noto Serif Thai',serif;font-weight:700;color:var(--ink);font-size:14.5px}
 .thinker-card .years{color:var(--ink-faint);font-size:12px;margin-bottom:6px}
 .thinker-card .desc{font-size:13.5px;color:var(--ink-soft);line-height:1.7}
@@ -705,9 +707,12 @@ function playHoverSound(){
           <div class="name">จอห์น ออสติน (John Austin, 1790–1859)</div>
           <div class="desc">ผู้ก่อตั้ง Command Theory: "กฎหมายคือคำสั่งของรัฏฐาธิปัตย์ ซึ่งได้รับการสนับสนุนด้วยการข่มขู่ลงโทษ" องค์ประกอบหลัก 3 อย่าง คือ คำสั่ง (Command), รัฏฐาธิปัตย์ (Sovereign), สภาพบังคับ (Sanction)</div>
         </div>
-        <div class="thinker-card">
-          <div class="name">ฮันส์ เคลเซ่น (Hans Kelsen)</div>
-          <div class="desc">เจ้าของ Pure Theory of Law ปฏิเสธแนวคิด "คำสั่ง/เจตจำนง" ของออสติน ต้องการแยกกฎหมายออกจากศีลธรรม การเมือง ศาสนาอย่างเด็ดขาด เพื่อวิเคราะห์กฎหมายจากตัวบทล้วนๆ ผ่านแนวคิด Grundnorm (บรรทัดฐานพื้นฐาน)</div>
+        <div class="thinker-card has-portrait">
+          <img class="portrait" src="pics/kelsen.jpg" alt="Hans Kelsen" loading="lazy">
+          <div>
+            <div class="name">ฮันส์ เคลเซ่น (Hans Kelsen)</div>
+            <div class="desc">เจ้าของ Pure Theory of Law ปฏิเสธแนวคิด "คำสั่ง/เจตจำนง" ของออสติน ต้องการแยกกฎหมายออกจากศีลธรรม การเมือง ศาสนาอย่างเด็ดขาด เพื่อวิเคราะห์กฎหมายจากตัวบทล้วนๆ ผ่านแนวคิด Grundnorm (บรรทัดฐานพื้นฐาน)</div>
+          </div>
         </div>
         <div class="thinker-card">
           <div class="name">H.L.A. Hart</div>
