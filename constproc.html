@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FC9EVYB1YG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FC9EVYB1YG');
+</script>
+
+<title>วิธีพิจารณาคดีรัฐธรรมนูญและคดีปกครอง · Cool Uncle Legal Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;800&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF9F4;
+  --card:#FDFCF8;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --gold-soft:#F3E8CF;
+  --ok:#1E7A4F;
+  --ok-bg:#E6F4EC;
+  --bad:#B23A3A;
+  --bad-bg:#FBEAEA;
+  --accent:#2E4A7A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+}
+
+/* ============ THEME: DARK ============ */
+:root[data-theme="dark"]{
+  --paper:#14161f;--card:#1c2030;--ink:#E9E7E1;--ink-soft:#A9AEC2;--ink-faint:#6C7188;
+  --line:#2E3348;--gold:#E0BD73;--gold-soft:#3A3320;--ok:#4FCB8D;--ok-bg:#173425;
+  --bad:#E2685F;--bad-bg:#3A1E1C;--accent:#84A6E8;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.45);
+}
+/* ============ THEME: HORROR (กระสือ mode) ============ */
+:root[data-theme="horror"]{
+  --paper:#0A070C;--card:#151019;--ink:#D9D2C9;--ink-soft:#9C8F93;--ink-faint:#5C5460;
+  --line:#2B1F26;--gold:#8F1F2B;--gold-soft:#301418;--ok:#3F7A4F;--ok-bg:#16241a;
+  --bad:#FF3355;--bad-bg:#301018;--accent:#4A8F5C;
+  --shadow:0 1px 2px rgba(0,0,0,.6),0 10px 28px rgba(0,0,0,.6);
+}
+:root[data-theme="dark"] body,:root[data-theme="horror"] body{background:var(--paper)}
+:root[data-theme="dark"] .home-bar,:root[data-theme="horror"] .home-bar{background:var(--card);border-bottom-color:var(--line)}
+:root[data-theme="dark"] .notice,:root[data-theme="horror"] .notice{background:rgba(255,255,255,.04)}
+:root[data-theme="dark"] .lecture-pending,:root[data-theme="horror"] .lecture-pending{background:rgba(255,255,255,.06);color:var(--ink-faint)}
+:root[data-theme="dark"] .lecture-row:hover,:root[data-theme="horror"] .lecture-row:hover{border-color:var(--gold)}
+
+/* THEME TOGGLE */
+.theme-toggle{display:flex;gap:3px;margin-left:auto;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+.theme-toggle button{border:none;background:transparent;border-radius:999px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .2s;font-family:inherit}
+.theme-toggle button.active{background:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.theme-toggle button:hover{background:var(--line)}
+
+/* GHOST COMPANION (horror mode — rotating cast of 4) */
+.drone-mute-btn{
+  display:none;
+  margin-left:6px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:999px;
+  width:28px;height:28px;
+  align-items:center;justify-content:center;
+  cursor:pointer;font-size:13px;
+}
+:root[data-theme="horror"] .drone-mute-btn{ display:flex; }
+:root[data-theme="horror"] .drone-mute-btn:hover{ background:var(--line); }
+
+/* GHOST COMPANION (horror mode — rotating cast of 4) */
+.ghost-companion{position:fixed;right:16px;bottom:16px;width:200px;height:auto;pointer-events:auto;cursor:pointer;opacity:0;transform:translateY(8px);transition:opacity .6s ease;z-index:999;filter:drop-shadow(0 0 16px rgba(180,20,40,.45));animation:ghost-float 3.4s ease-in-out infinite}
+.ghost-companion.visible{opacity:1}
+.ghost-companion.pulse{filter:drop-shadow(0 0 26px rgba(180,20,40,.8)) drop-shadow(0 0 10px rgba(255,255,255,.3))}
+@keyframes ghost-float{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
+.ghost-speech{
+  position:fixed;max-width:200px;background:#fff;color:#1a1a1a;
+  border-radius:14px;padding:8px 13px;font-size:13px;font-weight:700;
+  font-family:'Sarabun',system-ui,sans-serif;line-height:1.4;
+  box-shadow:0 8px 20px rgba(0,0,0,.4);z-index:1000;
+  opacity:0;pointer-events:none;transform:translateY(6px) scale(.96);
+  transition:opacity .2s ease,transform .2s ease;text-align:center;
+}
+.ghost-speech.visible{opacity:1;transform:translateY(0) scale(1)}
+.ghost-speech::after{
+  content:"";position:absolute;right:28px;bottom:-8px;width:0;height:0;
+  border:8px solid transparent;border-top-color:#fff;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+/* ---------- top home bar ---------- */
+.home-bar{
+  display:flex;align-items:center;gap:10px;
+  background:#EFEAE0;border-bottom:1px solid var(--line);
+  padding:10px 16px;font-size:13px;color:var(--ink-soft);
+}
+.home-bar-logo{
+  font-size:22px;line-height:1;display:inline-flex;align-items:center;
+  text-decoration:none;margin-right:2px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.12));
+  transition:transform .15s;
+}
+.home-bar-logo:hover{transform:scale(1.1)}
+.home-bar-link{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.home-bar-link:hover{text-decoration:underline}
+.home-bar-sep{color:var(--ink-faint)}
+.home-bar-current{font-weight:600;color:var(--ink-soft)}
+
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),var(--paper);
+  color:var(--ink);min-height:100vh;font-size:16px;line-height:1.75;
+}
+h1,h2{font-family:'Noto Serif Thai',serif}
+
+.wrap{max-width:820px;margin:0 auto;padding:28px 16px 60px}
+
+.page-head{text-align:center;margin-bottom:28px}
+.page-head .crest{
+  width:64px;height:64px;border-radius:50%;margin:0 auto 14px;
+  background:radial-gradient(circle at 32% 28%, #E7C983, var(--gold) 55%, #8F6511 100%);
+  display:flex;align-items:center;justify-content:center;font-size:28px;
+  box-shadow:0 6px 18px rgba(176,138,60,.35), inset 0 2px 3px rgba(255,255,255,.5);
+}
+.page-head h1{font-size:26px;font-weight:800;color:var(--ink)}
+.page-head .subtitle{color:var(--ink-soft);margin-top:8px;font-size:14.5px}
+
+.notice{
+  background:#FBF6E8;border:1.5px dashed var(--gold);border-radius:var(--radius);
+  padding:14px 16px;margin:24px 0;font-size:14px;color:var(--ink-soft);
+  display:flex;align-items:center;gap:10px;
+}
+
+.lecture-list{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.lecture-row{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;transition:border-color .15s;
+}
+.lecture-row:hover{border-color:var(--gold)}
+.lecture-head{display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer}
+.lecture-row.pending .lecture-head{cursor:default}
+.lecture-num{
+  width:36px;height:36px;flex-shrink:0;border-radius:50%;background:var(--gold-soft);
+  color:#8F6511;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;
+}
+.lecture-title{flex:1;min-width:0;font-weight:700;color:var(--ink);font-size:15px}
+.lecture-toggle{color:var(--ink-faint);font-size:13px;flex-shrink:0;transition:transform .2s}
+.lecture-row.open .lecture-toggle{transform:rotate(180deg)}
+.lecture-body{display:none;padding:0 16px 16px 66px;font-size:14px;color:var(--ink-soft);white-space:pre-line;line-height:1.8}
+.lecture-row.open .lecture-body{display:block}
+.lecture-pending{
+  font-size:12px;font-weight:700;color:var(--ink-faint);background:#F1EDE2;
+  padding:5px 12px;border-radius:999px;white-space:nowrap;flex-shrink:0;
+}
+mark.hl{background:var(--gold-soft);color:var(--ink);padding:0 3px;border-radius:3px;font-weight:700;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)}
+.coffee-widget{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  margin:28px auto 0;padding:18px;max-width:280px;
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+}
+.coffee-widget img{width:130px;height:130px;border-radius:8px;background:#fff;padding:6px}
+.coffee-widget a.coffee-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#FFDD00;color:#1a1a1a;font-weight:700;font-size:13px;
+  padding:8px 16px;border-radius:8px;text-decoration:none;transition:transform .15s;
+}
+.coffee-widget a.coffee-btn:hover{transform:scale(1.04)}
+.coffee-widget p{margin:0;font-size:12px;color:var(--ink-faint);text-align:center}
+.coffee-widget .data-source-note a{color:inherit}
+</style>
+</head>
+<body>
+<script>
+// Apply the persisted theme as early as possible to avoid a flash of the
+// wrong theme (light/dark/horror shared site-wide via localStorage).
+(function(){
+  try {
+    var t = localStorage.getItem('codex-theme');
+    if (t === 'dark' || t === 'horror') document.documentElement.setAttribute('data-theme', t);
+  } catch(e){}
+})();
+</script>
+<div class="home-bar">
+  <a href="index.html" class="home-bar-logo" title="กลับหน้าหลัก" onmouseenter="playHoverSound()">👴🏻</a>
+  <a href="index.html" class="home-bar-link" onmouseenter="playHoverSound()">← กลับหน้าหลัก</a>
+  <span class="home-bar-sep">·</span>
+  <span class="home-bar-current">วิธีพิจารณาคดีรัฐธรรมนูญและคดีปกครอง</span>
+  <div class="theme-toggle" role="group" aria-label="เลือกธีม">
+    <button type="button" data-theme-btn="light" onclick="setTheme('light')" onmouseenter="playHoverSound()" title="โหมดสว่าง">☀️</button>
+    <button type="button" data-theme-btn="dark" onclick="setTheme('dark')" onmouseenter="playHoverSound()" title="โหมดมืด">🌙</button>
+    <button type="button" data-theme-btn="horror" onclick="setTheme('horror')" onmouseenter="playHoverSound()" title="โหมดสยองขวัญ">👻</button>
+  </div>
+  <button type="button" id="drone-mute-btn" class="drone-mute-btn" onclick="toggleDroneMute(this)" title="ปิด/เปิดเสียงเพลง">🔊</button>
+</div>
+<audio id="horror-bgm" loop preload="auto" playsinline webkit-playsinline style="display:none">
+  <source src="music/The_Cold_Stream_Lament.mp3" type="audio/mpeg">
+</audio>
+<audio id="dog-howl" preload="auto" playsinline webkit-playsinline style="display:none">
+  <source src="music/หมาหอน.mp3" type="audio/mpeg">
+</audio>
+
+<div class="wrap">
+  <header class="page-head">
+    <div class="crest">⚙️</div>
+    <h1>วิธีพิจารณาคดีรัฐธรรมนูญและคดีปกครอง</h1>
+    <p class="subtitle">Constitutional Procedural Law and Administrative Procedural Law · สรุปเนื้อหาบรรยายรายครั้ง · ปี 4</p>
+  </header>
+
+  <div class="notice">⏳ หน้านี้เตรียมไว้สำหรับสรุปเนื้อหาบรรยาย 15 ครั้ง — จะทยอยอัปเดตทีละครั้ง</div>
+
+  <div class="lecture-list" id="lectureList"></div>
+
+  <div class="coffee-widget">
+  <p>ถ้าเว็บนี้มีประโยชน์ เลี้ยงกาแฟ Cool Uncle สักแก้วได้นะ ☕</p>
+  <img src="pics/coffee/bmc_qr.png" alt="QR code เลี้ยงกาแฟผ่าน Buy Me a Coffee" loading="lazy">
+  <a href="https://buymeacoffee.com/dukperadom" target="_blank" rel="noopener" class="coffee-btn" onmouseenter="playHoverSound()">☕ Buy Me a Coffee</a>
+  <p class="data-source-note">ข้อมูลกฎหมายอ้างอิงจากฐานข้อมูลกฤษฎีกา <a href="https://www.ocs.go.th/searchlaw-law" target="_blank" rel="noopener">https://www.ocs.go.th/searchlaw-law</a> · สืบค้นล่าสุด 31 กรกฎาคม 2569</p>
+</div>
+<footer>สร้างด้วย Claude · ⚠️ ใช้อ่านเสริมหลักสูตรเท่านั้น โปรดตรวจสอบความถูกต้องของข้อมูล · Cool Uncle Legal Lab 2024</footer>
+</div>
+
+<script>
+let __hbAudioCtx;
+function playHoverSound(){
+  try{
+    __hbAudioCtx = __hbAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __hbAudioCtx;
+    if(c.state === 'suspended') c.resume();
+    const t0 = c.currentTime;
+    const osc = c.createOscillator(), gain = c.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(0.05, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+0.09);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+0.1);
+  }catch(e){}
+}
+
+/* Each entry: { n, title, text }. title/text present = ready to read; absent = still pending. */
+const LECTURES = [
+  { n: 1, title: "แนะนำรายวิชา และข้อความคิดว่าด้วยวิธีพิจารณาคดีมหาชน", text:
+`ภาพรวมวิชาและโครงสร้างข้อสอบ: วิชานี้ศึกษาโครงสร้าง ภารกิจ เขตอำนาจศาล หลักการพื้นฐานของวิธีพิจารณา ประเภทคดี เงื่อนไขการฟ้องคดี การดำเนินกระบวนพิจารณา การทำคำวินิจฉัย/คำพิพากษา ผลของคำชี้ขาด การคุ้มครองชั่วคราว และการบังคับคดี ของทั้งศาลรัฐธรรมนูญและศาลปกครอง รวม 15 ครั้งตลอดภาคการศึกษา ตามหลักสูตรปกติจะเริ่มเรียนฝั่งกฎหมายรัฐธรรมนูญก่อน แต่ในภาคนี้มีการสลับให้เรียนฝั่ง "คดีปกครอง" ขึ้นมาก่อนเป็น 7 ครั้งแรก ก่อนต่อด้วยฝั่งศาลรัฐธรรมนูญอีก 8 ครั้งที่เหลือ ประเมินผลด้วยการสอบปลายภาคเพียงอย่างเดียว 100 คะแนน ไม่มีคะแนนเก็บหรือสอบกลางภาค ฝั่งคดีปกครองซึ่งสอนใน 7 ครั้งแรกจะออกข้อสอบ 2 ข้อ: ข้อแรกเน้นประเภทของคดีปกครองตามกฎหมายจัดตั้งศาลปกครองฯ มาตรา 9 และอำนาจทำคำบังคับของศาลที่ต่างกันไปตามประเภทคดี ข้อที่สองเน้นวิธีพิจารณาคดีเมื่อคดีขึ้นสู่ศาลแล้ว เริ่มตั้งแต่เงื่อนไขผู้มีสิทธิฟ้องคดีตามมาตรา 42 (ผู้เดือดร้อนเสียหาย) ไปจนถึงบทบาทขององค์คณะ (ตุลาการเจ้าของสำนวน และตุลาการผู้แถลงคดี) และการทำคำพิพากษา
+
+ข้อความคิดพื้นฐาน — ทำไมต้องมีวิธีพิจารณาคดีมหาชนแยกต่างหาก: จุดตั้งต้นของวิชานี้คือคดีปกครองมีลักษณะต่างจากคดีแพ่ง/เอกชนทั่วไปโดยพื้นฐาน เพราะความสัมพันธ์ระหว่างคู่กรณีในคดีปกครองไม่เท่าเทียมกันเหมือนคดีเอกชน แต่เป็นกรณีที่เอกชนตกอยู่ภายใต้การใช้อำนาจของฝ่ายปกครอง เมื่อฝ่ายปกครองใช้อำนาจออกคำสั่งทางปกครองหรือออกกฎมากระทบสิทธิ และเอกชนต้องการโต้แย้งว่าการใช้อำนาจนั้นไม่ชอบด้วยกฎหมาย ระบบวิธีพิจารณาคดีมหาชนจึงต้องถูกออกแบบมาเพื่อตรวจสอบและคานอำนาจที่ไม่เท่าเทียมกันนี้โดยเฉพาะ ต่างจากคดีแพ่งทั่วไปที่คู่กรณีสองฝ่ายต่างเป็นเอกชนที่มีสถานะเท่าเทียมกัน
+
+วัตถุประสงค์ในการฟ้องคดีปกครอง 2 แบบ (ม.9 วรรคหนึ่ง): วิธีพิจารณาคดีมหาชนต้องแยกประเภทคดีตาม "วัตถุประสงค์ในการขอความคุ้มครองสิทธิ" ของผู้ฟ้องคดี เพราะความเดือดร้อนที่เกิดจากรัฐมีมิติซับซ้อนกว่าคดีเอกชนทั่วไป แบ่งได้เป็น 2 แบบใหญ่ ๆ คือ (1) การฟ้องเพื่อทำลายการกระทำที่ไม่ชอบ (เพิกถอน — ม.9 วรรคหนึ่ง (1)) เกิดขึ้นเมื่อเอกชนถูกกระทบสิทธิจากการที่ฝ่ายปกครอง "ใช้อำนาจ" ออกคำสั่งหรือกฎที่ไม่ชอบด้วยกฎหมาย วัตถุประสงค์คือให้ศาลเพิกถอนหรือทำลายผลทางกฎหมายของการกระทำนั้น เพื่อนำสิทธิของผู้ฟ้องคดีกลับคืนสู่ "สถานะดั้งเดิม" ก่อนถูกกระทบ และ (2) การฟ้องเพื่อให้ฝ่ายปกครองปฏิบัติตามหน้าที่ (ละเลย/ล่าช้า — ม.9 วรรคหนึ่ง (2)) เกิดขึ้นเมื่อเอกชนเดือดร้อนเพราะฝ่ายปกครองนิ่งเฉยหรือไม่ยอมใช้อำนาจหน้าที่ตามที่กฎหมายกำหนด เช่น ยื่นขอใบอนุญาตเปิดโรงงานหรือก่อสร้างอาคารแล้วฝ่ายปกครองเพิกเฉยไม่พิจารณา วัตถุประสงค์ในคดีนี้ไม่ใช่การกลับสู่สถานะดั้งเดิม (เพราะเดิมเอกชนยังไม่เคยมีใบอนุญาตอยู่แล้ว) แต่เป็นการฟ้องเพื่อให้ศาลสั่งบังคับให้ฝ่ายปกครองยอมใช้อำนาจหรือหน้าที่ตามกฎหมาย เพื่อให้เอกชนได้ใช้สิทธิที่ควรจะมี
+
+ความตึงเครียดกับหลักการแบ่งแยกอำนาจ: เหตุผลสำคัญที่สุดที่ทำให้ต้องมีวิธีพิจารณาคดีมหาชนเฉพาะ คือประเด็นเรื่องขอบเขตอำนาจระหว่างแดนตุลาการและแดนบริหาร ในคดีเพิกถอน (แบบแรก) ศาลเพียงวินิจฉัยทำลายการกระทำที่เกิดขึ้นแล้วเท่านั้น แต่ในคดีละเลย/ล่าช้า (แบบที่สอง) ผู้ฟ้องคดีมักต้องการให้ศาลสั่งการไปยังฝ่ายบริหารโดยตรง เช่น สั่งให้ฝ่ายปกครองออกใบอนุญาตให้ตนทันที จุดนี้ทำให้เกิดข้อถกเถียงระดับโลกว่า ศาลซึ่งเป็นองค์กรตุลาการจะก้าวล่วงไปออกคำสั่งบังคับหรือจับมือฝ่ายปกครองซึ่งเป็นองค์กรบริหารให้กระทำการทางบริหารได้มากน้อยเพียงใด — คำตอบของแต่ละประเทศต่อคำถามนี้เองคือที่มาของหลักการ 2 ข้อที่ใช้จำแนกลักษณะเฉพาะของระบบศาลปกครองทั่วโลก
+
+หลักการที่ 1 — ศาลปกครองที่มีภารกิจคุ้มครองสิทธิของประชาชน (Rights Protection / Subjective Model, ต้นแบบเยอรมนี): เป็นระบบที่จัดตั้งขึ้นโดยเอาสิทธิของประชาชนเป็นตัวตั้ง มีพันธกิจหลักคือเยียวยาและคุ้มครองสิทธิของประชาชนที่ถูกกระทบจากการใช้อำนาจรัฐ ไม่ว่าจะถูกกระทบจากการที่ฝ่ายปกครอง "ใช้อำนาจ" หรือ "ไม่ยอมใช้อำนาจ" ก็ตาม ศาลในระบบนี้มีอำนาจเข้มข้นและกว้างขวาง ยินดีก้าวล่วงเข้าไปใช้อำนาจสั่งการหรือออกคำสั่ง (Injunction) บังคับฝ่ายบริหารโดยตรงเพื่อให้ความยุติธรรมแก่เอกชนรายบุคคล แม้จะมีความเสี่ยงถูกมองว่าขัดหลักแบ่งแยกอำนาจก็ตาม วิธีพิจารณาเป็นแบบอัตวิสัย (Subjective) มุ่งเยียวยาสิทธิเฉพาะรายเป็นสำคัญ เงื่อนไขการฟ้องคดี (Standing) มี "ทางเข้าแคบ" ผู้ฟ้องคดีต้องพิสูจน์ให้ได้ว่าตนเองเป็นผู้ถูกละเมิดหรือกระทบสิทธิโดยตรง (Rechtsverletzung) จะอ้างเพียงความเป็นเพื่อนบ้านหรือผู้หวังดีเข้ามาตรวจสอบเฉย ๆ ไม่ได้ แต่เมื่อผ่านด่านแรกเข้ามาได้ ศาลจะคุ้มครองอย่างกว้างขวาง การฟ้องคดีในระบบนี้โดยหลักมีผลทุเลาการบังคับคำสั่งทางปกครองทันทีโดยอัตโนมัติ (Suspensive Effect) เพราะหากไม่ทุเลาไว้ก่อน สิทธิของผู้ฟ้องคดีอาจถูกทำลายไประหว่างพิจารณาคดีจนกู้คืนไม่ได้แม้ศาลจะพิพากษาให้ชนะในภายหลัง ตัวอย่างที่ยกให้เห็นภาพ: หากเอกชนยื่นขอใบอนุญาตแล้วฝ่ายปกครองปฏิเสธ ศาลปกครองเยอรมันมีอำนาจวินิจฉัยเนื้อหาได้เลยว่าเอกชนมีสิทธิได้ใบอนุญาตหรือไม่ หากมีสิทธิ ศาลสั่งให้ฝ่ายปกครอง "ต้องออกใบอนุญาตหรือคำสั่งทางปกครองตามที่เอกชนร้องขอ" ได้ทันที
+
+หลักการที่ 2 — ศาลปกครองที่ต้องผูกพันกับหลักการแบ่งแยกอำนาจโดยเคร่งครัด (Strict Separation of Powers / Objective Model, ต้นแบบฝรั่งเศสยุคดั้งเดิมก่อนปี 1995): เป็นระบบที่ตั้งอยู่บนฐานคิดว่าศาลเป็นเพียงผู้ตรวจสอบความชอบด้วยกฎหมายของการกระทำทางปกครอง เพื่อรักษาความถูกต้องของระบบกฎหมาย (Objective) ศาลในระบบนี้จำกัดอำนาจตนเอง (Self-restraint) อย่างเคร่งครัด ทำหน้าที่เพียงเพิกถอน (Annulment) การกระทำที่มิชอบทิ้งไปเท่านั้น ไม่มีอำนาจเข้าไปก้าวล่วงใช้อำนาจแทนฝ่ายบริหาร หรือออกคำสั่งบังคับให้ฝ่ายปกครองต้องทำกิจกรรมทางบริหารอย่างใดอย่างหนึ่ง วิธีพิจารณาเป็นแบบภาวะวิสัย (Objective) ศาลไม่ได้รับคดีเพื่อคุ้มครองสิทธิส่วนตัวของผู้ฟ้องคดีโดยตรง แต่รับไว้เพื่อควบคุมตรวจสอบความชอบด้วยกฎหมายของฝ่ายบริหาร โดยมองผู้ฟ้องคดีเป็นเพียงผู้นำคดีมาสู่ศาล เงื่อนไขการฟ้องคดีมี "ทางเข้ากว้าง" เพื่อให้ศาลตรวจสอบฝ่ายปกครองได้มากที่สุด ใช้หลักผู้มีประโยชน์ได้เสีย (Intérêt pour agir) เพียงมีความเกี่ยวข้องหรือได้รับผลกระทบอยู่บ้างศาลก็รับฟ้องแล้ว การฟ้องคดีไม่มีผลทุเลาการบังคับโดยอัตโนมัติ คำสั่งทางปกครองยังคงมีผลใช้บังคับต่อไป เพราะศาลมุ่งตรวจความถูกต้องของกฎหมายไม่ได้เน้นคุ้มครองสิทธิเฉพาะราย จึงไม่มีเหตุผลต้องหน่วงเหนี่ยวการใช้อำนาจรัฐเพื่อประโยชน์สาธารณะ ตัวอย่างที่ยกให้เห็นภาพ: ในระบบฝรั่งเศสดั้งเดิม หากเอกชนยื่นขอใบอนุญาตแล้วโดนปฏิเสธ ศาลมีอำนาจเพียงสั่งเพิกถอนคำสั่งปฏิเสธนั้นเท่านั้น แต่ไม่มีอำนาจสั่งให้ฝ่ายปกครองต้องออกใบอนุญาตให้เอกชน ส่งผลให้เกิด "ช่องโหว่ในการคุ้มครองสิทธิ" เพราะแม้ชนะคดีเอกชนก็ยังไม่ได้ใบอนุญาตอยู่ดี จนกระทั่งเกิดการปฏิรูปใหญ่ในปี 1995 (Major Reform 1995) ที่ยอมก้าวข้ามจารีตเดิมและให้อำนาจศาลออกคำสั่งบังคับ (Injunction) ฝ่ายปกครองได้เช่นกัน
+
+ข้อสังเกตต่อระบบศาลปกครองไทย: ประเทศไทยจัดตั้งศาลปกครองขึ้นในปี พ.ศ. 2542 (หลังฝรั่งเศสปฏิรูปใหญ่ 4 ปี) แต่ผู้ร่างกฎหมายไม่ได้เลือกหลักการใดหลักการหนึ่งให้ชัดเจน และใช้วิธีลอกเอาอำนาจหน้าที่ของ "คณะกรรมการวินิจฉัยเรื่องร้องทุกข์ สำนักงานคณะกรรมการกฤษฎีกา" ตามกฎหมายกฤษฎีกา พ.ศ. 2522 มาใส่ไว้ ส่งผลให้ศาลไทยติดหล่มโมเดลฝรั่งเศสโบราณ (เพิกถอนได้แต่ไม่มีอำนาจสั่งการให้ฝ่ายบริหารออกคำสั่งตามที่ร้องขอ) ขณะเดียวกันบทบัญญัติเรื่องผู้เดือดร้อนเสียหายในมาตรา 42 ก็เกิดความลักลั่น "แกว่ง" ไปมาระหว่างการตีความตามแนวทางอัตวิสัย (เยอรมัน) และภาวะวิสัย (ฝรั่งเศส) อยู่จนถึงปัจจุบัน — นี่คือช่องโหว่ในการคุ้มครองสิทธิที่วิชานี้จะกลับมาพูดถึงซ้ำในบรรยายครั้งถัดไป
+
+ประเภทคดีรัฐธรรมนูญ 5 ประเภท: อีกส่วนหนึ่งของบรรยายครั้งนี้ปูพื้นภาพรวมของฝั่งศาลรัฐธรรมนูญ โดยจำแนกคดีรัฐธรรมนูญในระดับสากลออกเป็น 5 ประเภทหลักตามเนื้อหาและลักษณะคดี ซึ่งจะศึกษาแต่ละประเภทโดยละเอียดในบรรยายครั้งถัด ๆ ไป
+
+(1) คดีตรวจสอบความชอบด้วยรัฐธรรมนูญของกฎหมาย (Judicial Review): เป็นอำนาจหลักขั้นพื้นฐานและเป็น "คดียืนพื้น" ที่ศาลรัฐธรรมนูญทุกประเทศต้องมีร่วมกัน มีวัตถุประสงค์เพื่อตรวจสอบว่ากฎหมายระดับพระราชบัญญัติที่ตราขึ้นโดยรัฐสภามีเนื้อหาขัดหรือแย้งต่อรัฐธรรมนูญซึ่งเป็นกฎหมายสูงสุดของประเทศหรือไม่ เป็นคดีที่มีลักษณะภาวะวิสัย (Objective) มุ่งพิทักษ์ความศักดิ์สิทธิ์สูงสุดของรัฐธรรมนูญ ไม่ใช่เพื่อคุ้มครองสิทธิส่วนตัวของผู้เสนอคดี โดยทั่วไปจึงไม่เปิดโอกาสให้ประชาชนฟ้องร้องโดยตรง แต่จำกัดสิทธิเฉพาะองค์กรทางการเมือง เช่น รัฐบาล ส.ส. หรือ ส.ว. เป็นผู้เสนอคดี กรณีพิเศษคือ Concrete Judicial Review — เมื่อผู้ดำเนินคดีอาญาหรือคดีแพ่งในศาลยุติธรรมยกข้อต่อสู้ว่ากฎหมายที่ศาลกำลังจะนำมาใช้บังคับแก่คดีของตนขัดต่อรัฐธรรมนูญ ศาลยุติธรรมจึงต้องส่งเรื่องไปให้ศาลรัฐธรรมนูญตรวจสอบ แม้จะเกิดในคดีเฉพาะราย แต่เป้าหมายหลักยังคงเป็นการตรวจสอบความชอบด้วยรัฐธรรมนูญของกฎหมายในเชิงระบบ (Objective) ไม่ใช่คดีร้องทุกข์ทางรัฐธรรมนูญโดยตรง
+
+(2) คดีชี้ขาดข้อพิพาทระหว่างองค์กรตามรัฐธรรมนูญ: เป็นคดีที่เกิดขึ้นเพื่อแก้ไขข้อขัดแย้งเกี่ยวกับอำนาจหน้าที่ตามรัฐธรรมนูญระหว่างองค์กรของรัฐตั้งแต่สององค์กรขึ้นไป เช่น ข้อพิพาทเรื่องขอบเขตอำนาจระหว่างรัฐสภากับรัฐบาล หรือองค์กรอิสระต่าง ๆ เป็นคดีพิพาทเชิงคู่กรณีโดยตรง (Subjective) มีวัตถุประสงค์เพื่อระงับข้อขัดแย้งของฝ่ายการเมืองโดยวิถีทางกฎหมาย ป้องกันไม่ให้ฝ่ายการเมืองหันไปใช้กำลัง ทหาร หรือนำมวลชนลงถนนตัดสินปัญหา คดีประเภทนี้ส่งผลกระทบและอ่อนไหวทางการเมืองสูงมาก หลายประเทศจึงไม่ยอมใส่คดีนี้ไว้ในเขตอำนาจศาลรัฐธรรมนูญเพราะเกรงฝ่ายการเมืองจะไม่ยอมรับคำตัดสิน แต่เยอรมนีมีคดีประเภทนี้ เนื่องจากมีวัฒนธรรมทางการเมืองที่ยอมรับและเคารพคำวินิจฉัยของศาลรัฐธรรมนูญอย่างสูง
+
+(3) คดีร้องทุกข์ทางรัฐธรรมนูญ (Constitutional Complaint): เป็นคดีประเภทพิเศษและเป็นช่องทางเดียวที่เปิดโอกาสให้ประชาชนคนธรรมดายื่นฟ้องตรงต่อศาลรัฐธรรมนูญได้เอง หากตนได้รับความเสียหายหรือถูกละเมิดสิทธิขั้นพื้นฐานที่รัฐธรรมนูญรับรองไว้โดยตรงจากการใช้อำนาจรัฐ เป็นคดีแบบอัตวิสัย (Subjective) สูงสุด มุ่งปกป้องคุ้มครองสิทธิปัจเจกบุคคลเป็นหลัก แต่มีกลไก "ตัวกรอง" (Filters) ที่เข้มงวดมากเพื่อป้องกันไม่ให้ประชาชนฟ้องคดีพร่ำเพรื่อจนศาลทำงานไม่ได้ เช่น ต้องใช้สิทธิเยียวยาในระบบศาลอื่นจนหมดสิ้นก่อน (Exhaustion of remedies) หรือห้ามฟ้องกรณีเป็นการดำเนินนโยบายทั่วไปของรัฐบาล ตัวอย่างเปรียบเทียบ: เยอรมนีมีประชาชนยื่นคดีร้องทุกข์ทางรัฐธรรมนูญสูงถึงปีละเป็นหมื่นคดี ส่วนไทยมีช่องทางนี้ปรากฏอยู่ในรัฐธรรมนูญมาตรา 213 แต่เนื่องจากพระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยวิธีพิจารณาของศาลรัฐธรรมนูญมีระบบตัวกรองที่เข้มงวดและจำกัดสิทธิอย่างมาก ทำให้ตั้งแต่ตั้งศาลมาจนถึงปัจจุบัน มีคดีร้องทุกข์ของประชาชนที่หลุดรอดผ่านตัวกรองขึ้นสู่การพิจารณาเนื้อหาจริงของศาลรัฐธรรมนูญไทยเพียงแค่ 5 คดีเท่านั้น
+
+(4) คดีรัฐธรรมนูญตามหลักประชาธิปไตยที่ปกป้องตนเองได้ (Militant Democracy): เป็นแนวคิดคดีรัฐธรรมนูญเชิงรุกที่มุ่งสกัดกั้น ยุติ หรือป้องกันการพยายามล้มล้างระบอบการปกครองแบบประชาธิปไตย หรือการใช้สิทธิเสรีภาพตามรัฐธรรมนูญเพื่อไปทำลายตัวรัฐธรรมนูญและระบอบประชาธิปไตยเสียเอง ตัวอย่างที่ยกในคำบรรยาย ได้แก่ คดียุบพรรคการเมืองที่ดำเนินกิจกรรมเป็นภัยหรือมุ่งทำลายระบอบประชาธิปไตย และคดียึดหรือเพิกถอนสิทธิขั้นพื้นฐานตามรัฐธรรมนูญของบุคคล หากบุคคลนั้นใช้สิทธิเสรีภาพในการทำลายระบอบการปกครอง (เช่นในระบบเยอรมัน) ข้อควรระวังที่ถูกเน้นย้ำ: คดีประเภทนี้หากใช้อย่างไม่จำกัดขอบเขตและไม่ระมัดระวัง ตัวศาลรัฐธรรมนูญเองอาจกลายเป็น "องค์กรเผด็จการ" เสียเอง
+
+(5) คดีอื่นๆ: คดีพิเศษเพิ่มเติมอื่น ๆ ที่รัฐธรรมนูญของแต่ละประเทศอาจเลือกมอบหมายให้อยู่ในอำนาจพิจารณาชี้ขาดของศาลรัฐธรรมนูญ เช่น คดีตรวจสอบผลการเลือกตั้ง และคดีตรวจสอบคุณสมบัติหรือลักษณะต้องห้ามของผู้ดำรงตำแหน่งทางการเมือง` },
+  { n: 2, title: "กฎหมายวิธีพิจารณาคดีปกครอง", text: null },
+  { n: 3, title: "กฎหมายวิธีพิจารณาคดีปกครอง", text: null },
+  { n: 4, title: "กฎหมายวิธีพิจารณาคดีปกครอง", text: null },
+  { n: 5, title: "วิธีพิจารณาคดีปกครอง (1)", text: null },
+  { n: 6, title: "วิธีพิจารณาคดีปกครอง (2)", text: null },
+  { n: 7, title: "วิธีพิจารณาคดีปกครอง (3)", text: null },
+  { n: 8, title: "วิธีพิจารณาคดีปกครอง (4)", text: null },
+  { n: 9, title: "ความเบื้องต้นเกี่ยวกับศาลรัฐธรรมนูญ คดีรัฐธรรมนูญ และกฎหมายวิธีพิจารณาคดีรัฐธรรมนูญ", text: null },
+  { n: 10, title: "องค์คณะตุลาการศาลรัฐธรรมนูญ", text: null },
+  { n: 11, title: "เขตอำนาจศาลรัฐธรรมนูญ", text: null },
+  { n: 12, title: "การเสนอคดีต่อศาลรัฐธรรมนูญ (1)", text: null },
+  { n: 13, title: "การเสนอคดีต่อศาลรัฐธรรมนูญ (2)", text: null },
+  { n: 14, title: "การพิจารณาคดีของศาลรัฐธรรมนูญ", text: null },
+  { n: 15, title: "คำวินิจฉัยและผลของคำวินิจฉัยของศาลรัฐธรรมนูญ", text: null }
+];
+
+/* Key terms from lecture 1 highlighted per user request — matched longest-first so
+   multi-word phrases win over any word that's also a substring of another term. */
+const HIGHLIGHT_TERMS = [
+  'Rights Protection / Subjective Model',
+  'Strict Separation of Powers / Objective Model',
+  'Militant Democracy',
+  'คดีร้องทุกข์ทางรัฐธรรมนูญ',
+  'Judicial Review',
+];
+function highlightText(escapedHtml){
+  if (!HIGHLIGHT_TERMS.length) return escapedHtml;
+  const pattern = HIGHLIGHT_TERMS
+    .slice().sort((a, b) => b.length - a.length)
+    .map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+    .join('|');
+  return escapedHtml.replace(new RegExp('(' + pattern + ')', 'g'), '<mark class="hl">$1</mark>');
+}
+
+function renderLectures(){
+  const el = document.getElementById('lectureList');
+  el.innerHTML = LECTURES.map(l => l.text ? `
+    <div class="lecture-row" id="lec-${l.n}">
+      <div class="lecture-head" onclick="toggleLecture(${l.n})">
+        <div class="lecture-num">${l.n}</div>
+        <div class="lecture-title">${l.title}</div>
+        <div class="lecture-toggle">▾</div>
+      </div>
+      <div class="lecture-body">${highlightText(l.text.replace(/</g,'&lt;'))}</div>
+    </div>
+  ` : `
+    <div class="lecture-row pending">
+      <div class="lecture-head">
+        <div class="lecture-num">${l.n}</div>
+        <div class="lecture-title">${l.title || ('บรรยายครั้งที่ ' + l.n)}</div>
+        <span class="lecture-pending">⏳ รอสรุปเนื้อหา</span>
+      </div>
+    </div>
+  `).join('');
+}
+function toggleLecture(n){
+  const row = document.getElementById('lec-' + n);
+  if (row) { row.classList.toggle('open'); playHoverSound(); }
+}
+renderLectures();
+
+</script>
+<script>
+/* ================================================================
+   THEME SYSTEM (light / dark / horror) — persisted site-wide via
+   localStorage key "codex-theme" (shared with every other page).
+   ================================================================ */
+const THEME_KEY = 'codex-theme';
+
+function setTheme(theme){
+  if (theme === 'light') { document.documentElement.removeAttribute('data-theme'); }
+  else { document.documentElement.setAttribute('data-theme', theme); }
+  try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
+  updateThemeToggleUI(theme);
+  if (theme === 'horror') { playHorrorBgm(); startGhostRotation(); playHooSound(); scheduleDogHowl(); }
+  else { stopGhostRotation(); stopHorrorBgm(); stopDogHowl(); }
+}
+const DRONE_MUTE_KEY = 'codex-drone-muted';
+function playHorrorBgm(){
+  const bgm = document.getElementById('horror-bgm');
+  if (!bgm) return;
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  bgm.muted = false;
+  bgm.volume = muted ? 0 : 0.35;
+  const p = bgm.play();
+  if (p && p.catch) p.catch(() => { bgm.load(); bgm.play().catch(() => {}); });
+}
+function stopHorrorBgm(){
+  const bgm = document.getElementById('horror-bgm');
+  if (bgm) bgm.pause();
+}
+let dogHowlTimer = null;
+function scheduleDogHowl(){
+  clearTimeout(dogHowlTimer);
+  const delay = 18000 + Math.random() * 22000; // every ~18-40s
+  dogHowlTimer = setTimeout(() => { playDogHowl(); scheduleDogHowl(); }, delay);
+}
+function playDogHowl(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const howl = document.getElementById('dog-howl');
+  if (!howl) return;
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  if (muted) return;
+  howl.currentTime = 0;
+  howl.volume = 0.4;
+  howl.play().catch(() => {});
+  setTimeout(() => { if (!howl.paused) howl.pause(); }, 3000);
+}
+function stopDogHowl(){
+  clearTimeout(dogHowlTimer); dogHowlTimer = null;
+  const howl = document.getElementById('dog-howl');
+  if (howl) howl.pause();
+}
+function toggleDroneMute(btn){
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  muted = !muted;
+  try { localStorage.setItem(DRONE_MUTE_KEY, muted ? '1' : '0'); } catch(e){}
+  if (btn) btn.textContent = muted ? '🔇' : '🔊';
+  const bgm = document.getElementById('horror-bgm');
+  if (bgm) bgm.volume = muted ? 0 : 0.35;
+}
+function updateThemeToggleUI(theme){
+  document.querySelectorAll('.theme-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.themeBtn === theme);
+  });
+}
+const GHOST_IMAGES = [
+  'pics/Pixel/icon/ตะเคียน 1.png','pics/Pixel/icon/ตะเคียน 2.png',
+  'pics/Pixel/icon/ตานี 2.png',
+  'pics/Pixel/icon/นางกวัก 1.png','pics/Pixel/icon/นางกวัก 2.png','pics/Pixel/icon/นางกวัก 3.png',
+  'pics/Pixel/icon/ปอป 1.png','pics/Pixel/icon/ปอป 2.png','pics/Pixel/icon/ปอป 3.png',
+  'pics/Pixel/icon/ปอปชาย 1.png','pics/Pixel/icon/ปอปชาย 2.png',
+  'pics/Pixel/icon/ผีแมว 1.png','pics/Pixel/icon/ผีแมว 2.png','pics/Pixel/icon/ผีแมว 3.png',
+  'pics/Pixel/icon/ผีโพง 1.png',
+  'pics/Pixel/icon/แม่นาค 1.png','pics/Pixel/icon/แม่นาค 2.png','pics/Pixel/icon/แม่นาค 3.png',
+  'pics/Pixel/icon/กระสือ_00.png','pics/Pixel/icon/กระสือ_01.png','pics/Pixel/icon/กระสือ_02.png',
+  'pics/Pixel/icon/กระสือ_10.png','pics/Pixel/icon/กระสือ_11.png','pics/Pixel/icon/กระสือ_12.png',
+  'pics/Pixel/icon/กระสือ_20.png','pics/Pixel/icon/กระสือ_21.png','pics/Pixel/icon/กระสือ_22.png',
+  'pics/Pixel/icon/กุมาร 1_00.png','pics/Pixel/icon/กุมาร 1_01.png','pics/Pixel/icon/กุมาร 1_02.png',
+  'pics/Pixel/icon/กุมาร 1_10.png','pics/Pixel/icon/กุมาร 1_11.png','pics/Pixel/icon/กุมาร 1_12.png',
+  'pics/Pixel/icon/กุมาร 1_21.png',
+  'pics/Pixel/icon/กุมาร 2_00.png','pics/Pixel/icon/กุมาร 2_01.png','pics/Pixel/icon/กุมาร 2_02.png',
+  'pics/Pixel/icon/กุมาร 2_10.png','pics/Pixel/icon/กุมาร 2_11.png','pics/Pixel/icon/กุมาร 2_12.png',
+  'pics/Pixel/icon/กุมาร 2_20.png','pics/Pixel/icon/กุมาร 2_21.png','pics/Pixel/icon/กุมาร 2_22.png',
+  'pics/Pixel/icon/ควายธนู_00.png','pics/Pixel/icon/ควายธนู_01.png','pics/Pixel/icon/ควายธนู_02.png',
+  'pics/Pixel/icon/ควายธนู_10.png','pics/Pixel/icon/ควายธนู_11.png','pics/Pixel/icon/ควายธนู_12.png',
+  'pics/Pixel/icon/ควายธนู_20.png','pics/Pixel/icon/ควายธนู_21.png','pics/Pixel/icon/ควายธนู_22.png',
+  'pics/Pixel/icon/ตานี_00.png','pics/Pixel/icon/ตานี_01.png','pics/Pixel/icon/ตานี_02.png',
+  'pics/Pixel/icon/ตานี_10.png','pics/Pixel/icon/ตานี_11.png','pics/Pixel/icon/ตานี_12.png',
+  'pics/Pixel/icon/ตานี_20.png','pics/Pixel/icon/ตานี_21.png','pics/Pixel/icon/ตานี_22.png',
+  'pics/Pixel/icon/ผีรวม 1_00.png','pics/Pixel/icon/ผีรวม 1_01.png','pics/Pixel/icon/ผีรวม 1_02.png',
+  'pics/Pixel/icon/ผีรวม 1_10.png','pics/Pixel/icon/ผีรวม 1_11.png','pics/Pixel/icon/ผีรวม 1_12.png',
+  'pics/Pixel/icon/ผีรวม 1_20.png','pics/Pixel/icon/ผีรวม 1_21.png','pics/Pixel/icon/ผีรวม 1_22.png',
+  'pics/Pixel/icon/ผีรวม 2_00.png','pics/Pixel/icon/ผีรวม 2_01.png','pics/Pixel/icon/ผีรวม 2_02.png',
+  'pics/Pixel/icon/ผีรวม 2_10.png','pics/Pixel/icon/ผีรวม 2_11.png','pics/Pixel/icon/ผีรวม 2_12.png',
+  'pics/Pixel/icon/ผีรวม 2_20.png','pics/Pixel/icon/ผีรวม 2_21.png','pics/Pixel/icon/ผีรวม 2_22.png',
+  'pics/Pixel/icon/ผีรวม 3_00.png','pics/Pixel/icon/ผีรวม 3_01.png','pics/Pixel/icon/ผีรวม 3_02.png',
+  'pics/Pixel/icon/ผีรวม 3_10.png','pics/Pixel/icon/ผีรวม 3_11.png','pics/Pixel/icon/ผีรวม 3_12.png',
+  'pics/Pixel/icon/ผีรวม 3_20.png','pics/Pixel/icon/ผีรวม 3_21.png','pics/Pixel/icon/ผีรวม 3_22.png',
+  'pics/Pixel/icon/ผีรวม 4_00.png','pics/Pixel/icon/ผีรวม 4_01.png','pics/Pixel/icon/ผีรวม 4_02.png',
+  'pics/Pixel/icon/ผีรวม 4_10.png','pics/Pixel/icon/ผีรวม 4_11.png','pics/Pixel/icon/ผีรวม 4_12.png',
+  'pics/Pixel/icon/ผีรวม 4_20.png','pics/Pixel/icon/ผีรวม 4_21.png','pics/Pixel/icon/ผีรวม 4_22.png',
+  'pics/Pixel/icon/ผีรวม 5_00.png','pics/Pixel/icon/ผีรวม 5_01.png','pics/Pixel/icon/ผีรวม 5_02.png',
+  'pics/Pixel/icon/ผีรวม 5_10.png','pics/Pixel/icon/ผีรวม 5_11.png','pics/Pixel/icon/ผีรวม 5_12.png',
+  'pics/Pixel/icon/ผีรวม 5_20.png','pics/Pixel/icon/ผีรวม 5_21.png','pics/Pixel/icon/ผีรวม 5_22.png',
+  'pics/Pixel/icon/ผีรวม 6_00.png','pics/Pixel/icon/ผีรวม 6_01.png','pics/Pixel/icon/ผีรวม 6_02.png',
+  'pics/Pixel/icon/ผีรวม 6_10.png','pics/Pixel/icon/ผีรวม 6_11.png','pics/Pixel/icon/ผีรวม 6_12.png',
+  'pics/Pixel/icon/ผีรวม 6_20.png','pics/Pixel/icon/ผีรวม 6_21.png','pics/Pixel/icon/ผีรวม 6_22.png',
+  'pics/Pixel/icon/ผีรวม 7_00.png','pics/Pixel/icon/ผีรวม 7_01.png','pics/Pixel/icon/ผีรวม 7_02.png',
+  'pics/Pixel/icon/ผีรวม 7_10.png','pics/Pixel/icon/ผีรวม 7_11.png','pics/Pixel/icon/ผีรวม 7_12.png',
+  'pics/Pixel/icon/ผีรวม 7_20.png','pics/Pixel/icon/ผีรวม 7_21.png','pics/Pixel/icon/ผีรวม 7_22.png',
+  'pics/Pixel/icon/ผีรวม 8_00.png','pics/Pixel/icon/ผีรวม 8_01.png','pics/Pixel/icon/ผีรวม 8_02.png',
+  'pics/Pixel/icon/ผีรวม 8_03.png','pics/Pixel/icon/ผีรวม 8_10.png','pics/Pixel/icon/ผีรวม 8_11.png',
+  'pics/Pixel/icon/ผีรวม 8_12.png','pics/Pixel/icon/ผีรวม 8_13.png','pics/Pixel/icon/ผีรวม 8_20.png',
+  'pics/Pixel/icon/ผีรวม 8_21.png','pics/Pixel/icon/ผีรวม 8_22.png','pics/Pixel/icon/ผีรวม 8_23.png',
+  'pics/Pixel/icon/ผีรวม 9_00.png','pics/Pixel/icon/ผีรวม 9_01.png','pics/Pixel/icon/ผีรวม 9_02.png',
+  'pics/Pixel/icon/ผีรวม 9_10.png','pics/Pixel/icon/ผีรวม 9_11.png','pics/Pixel/icon/ผีรวม 9_12.png',
+  'pics/Pixel/icon/ผีรวม 9_20.png','pics/Pixel/icon/ผีรวม 9_21.png','pics/Pixel/icon/ผีรวม 9_22.png',
+  'pics/Pixel/icon/ผีรวม 10_00.png','pics/Pixel/icon/ผีรวม 10_01.png','pics/Pixel/icon/ผีรวม 10_02.png',
+  'pics/Pixel/icon/ผีรวม 10_10.png','pics/Pixel/icon/ผีรวม 10_11.png','pics/Pixel/icon/ผีรวม 10_12.png',
+  'pics/Pixel/icon/ผีรวม 10_20.png','pics/Pixel/icon/ผีรวม 10_21.png','pics/Pixel/icon/ผีรวม 10_22.png',
+  'pics/Pixel/icon/ผีรวม 11_00.png','pics/Pixel/icon/ผีรวม 11_01.png','pics/Pixel/icon/ผีรวม 11_02.png',
+  'pics/Pixel/icon/ผีรวม 11_10.png','pics/Pixel/icon/ผีรวม 11_11.png','pics/Pixel/icon/ผีรวม 11_12.png',
+  'pics/Pixel/icon/ผีรวม 11_20.png','pics/Pixel/icon/ผีรวม 11_21.png','pics/Pixel/icon/ผีรวม 11_22.png',
+];
+const GHOST_PHRASES = [
+  "แบร่~","หลอกจ้า","อ่านให้ครบสิ","มาตรานี้ออกสอบนะ","เปิดฎีกาด้วย","จำผิดแล้ว","วรรคสองล่ะ?","ยังไม่จบ","อ่านใหม่","ข้ามไม่ได้",
+  "ตกแน่","สอบพรุ่งนี้แล้ว","ตีความสิ","อ้างมาตราให้ครบ","อย่ามั่ว","ฟ้องได้ไหม?","โมฆะนะ","เป็นโมฆียะ!","สิทธิของใคร?","หน้าที่ของใคร?",
+  "พิสูจน์ก่อน","ภาระการพิสูจน์อยู่ไหน?","ข้อเท็จจริงไม่พอ","กฎหมายใช้ไม่ได้","คนละฐาน","คนละกรณี","คำตอบยังไม่ครบ","ลืมข้อยกเว้น","มีบทเฉพาะกาล","ระวังมาตราแฝง",
+  "คิดใหม่","อ่านเชิงระบบ","อย่าท่องอย่างเดียว","เหตุผลล่ะ?","ฎีกาว่าไง?","อาจารย์ชอบถาม","อย่าปิดไฟ","ผีอ่านด้วย","ขอนั่งข้าง ๆ","พลิกหน้าเร็ว",
+  "หน้านี้สำคัญ","จำให้ได้","อย่าหลับ","อีกบทเดียว","อีกมาตราเดียว","อีกฎีกาเดียว","ตีสองแล้วนะ","กาแฟหมดแล้ว","น้ำแดงมีไหม?","กุมารหิว",
+  "ศาลยังไม่หลับ","ผู้พิพากษามองอยู่","เนติรออยู่","ธงคำตอบอยู่ไหน?","อย่าตอบกำปั้นทุบดิน","อย่าเดา","เขียนให้ครบองค์ประกอบ","หลักก่อน ข้อยกเว้นทีหลัง","อย่าลืมนิยาม","อ่านมาตราเต็ม",
+  "เช็กคำว่า \"ย่อม\"","เช็กคำว่า \"ต้อง\"","เช็กคำว่า \"อาจ\"","คนละเจตนา","คนละผลทางกฎหมาย","ยังไม่เข้าองค์ประกอบ","ฟังผีสิ","ผีเคยตกมาแล้ว","ผีซ่อมสามรอบ","ผีเป็นรุ่นพี่",
+  "ผีจบนิติแล้ว","ผีรอเพื่อน","อ่านดัง ๆ สิ","อย่าท่องผิด","อย่าจำเลขมั่ว","ตัวบทอยู่ไหน?","ข้อสอบยิ้มแล้ว","อาจารย์ยิ้มอยู่","คะแนนบินไปแล้ว","อย่าหาว่าผีไม่เตือน",
+  "ผีเปิดตำราให้","ผีปิดไฟนะ","หันหลังมาสิ","ข้างหลังมี...","เงียบจังเลย","ได้ยินไหม?","เปิดหน้าต่างทำไม?","ลมเย็นไหม?","ใครนั่งอีกตัว?","หนังสือขยับเอง",
+  "ดินสอหายอีกแล้ว","ปากกาหมึกหมด","ผีช่วยติว","ผีออกข้อสอบ","ผีให้คำใบ้","เจอกันในห้องสอบ","ถ้าจำได้...รอด","ถ้าจำไม่ได้...เจอกันคืนนี้","ใครอ่านหนังสือดึกคนเดียว ระวังผีหลอก","กุมารทองชอบน้ำแดง... แต่หัวใจสีแดงชอบคนเอาใจ ❤️👻",
+  "สอบเสร็จกินข้าวต้มไหม","สอบตกน่ากลัวกว่าผีหลอก","มาตรานี้ไม่ออกสอบ...","อาจารย์หลอกเก่งกว่าผี","เพื่อนยืมปากกา ยังไม่คืน","สิ่งศักดิ์สิทธิ์ สิ่งศักดิ์สิทธิ์ สิ่งศักดิ์สิทธิ์","ดาว เอาไฮไลท์พี่มาคืนด้วย","สอบเสร็จกินเบียร์","เดี๋ยวค่อยซ่อม","อกหักดีกว่าสอบตก",
+  "อย่าหันมามอง","อย่าลืมโอนค่ากาแฟ","Cool Uncle! Cool Uncle!","555 หัวเราะในชะตากรรม","จะสอบแล้วทำไมเพิ่งมาอ่าน","น้ำตาจิไหล","แบร่ แบร่~","เหงาไหม ถ้าเหงาผีจิออกมาเป็นเพื่อน","ไม่เปิดแอร์ทำไมหนาว... เพราะฉันอยู่ข้าง ๆ","นี่ไง",
+  "กลางวันทำอะไรไว้","เอาประมวลมาคืนเพื่อน","ไม่ต้องมาหานิติปรัชญาในเล่มนี้","ทำไมตอนเรียนไม่จด","อ่านซ้ำแล้ว","เมื่อกี้น้องเรียก... (แต่เราไม่มีน้อง)","แมวดำกระโดดข้ามแล้วนะ","ข้อสอบกำลังยิ้ม","เปิดผิดมาตราอีกแล้ว","ฎีกาอยู่คนละเล่ม",
+  "อาจารย์ไม่ใจดีเหมือนผี","ขอเปิดไฟหน่อย","หนังสือเปิดเองได้ด้วย","ปากกาหายอีกแล้ว","อย่าปิดหน้าต่าง","เมื่อคืนอ่านถึงไหนแล้ว","จำได้แค่นี้เหรอ","อ่านอีกหนึ่งรอบ","อีกห้าหน้าพอ","ไม่ง่วง... จริงเหรอ",
+  "อย่ามองกระจก","ใต้โต๊ะมีอะไร","ข้างหลังมีเก้าอี้ว่างไหม","เสียงใครพลิกหนังสือ","เงียบแบบนี้น่ากลัว","ไฟกะพริบแล้ว","ลมมาจากไหน","เปิดเพลงอ่านหนังสือสิ","นาฬิกาตีสามแล้ว","ขอไฮไลท์หน่อย",
+  "ไฮไลท์ผิดบรรทัด","ตัวบทไม่เคยโกหก","แต่เพื่อนโกหกว่าไม่ออกสอบ","เชื่อเพื่อนหรือเชื่อผี","ผีเคยสอบมาก่อน","ผีรู้ข้อสอบ... แต่ไม่บอก","อ่านไม่ทันก็ยิ้มไว้","จำเลขมาตราได้ไหม","จำชื่อวิชาได้ไหม","เข้าห้องผิดหรือเปล่า",
+  "นี่สอบวิชาอะไรนะ","เปิดประมวลผิดเล่ม","อย่าทำหน้าตกใจ","ผีตกใจเธอเหมือนกัน","อ่านไปก็ลืมไป","ท่องไปก็สลายไป","วันนี้มีบุญหรือยัง","ไหว้ครบหรือยัง","น้ำแดงหมดแล้ว","ขออีกขวด",
+  "ธูปหมดหรือยัง","ขอให้ผ่านด้วยเถอะ","ถ้าผ่านจะมาแก้บน","ถ้าไม่ผ่าน... เจอกันซ่อม","ซ่อมก็สนุกดี... มั้ง","รุ่นพี่รออยู่","ผีก็รออยู่","อย่าเพิ่งร้องไห้","ร้องหลังประกาศคะแนน","คะแนนยังไม่ออก อย่าเพิ่งตายใจ",
+  "GPA สั่นแล้ว","ความหวังเหลือ 1%","ความจำเหลือ 0%","สติหายไปไหน","ใครเอาสติไป","สมองกำลังรีบูต","โหลดไม่เสร็จ","อ่านแล้วไม่เข้าหัว","หัวเข้าหนังสือแทน","อย่าหลับนะ",
+  "ตื่นก่อนสอบด้วย","ตื่นผิดวันก็มี","ฝันว่าผ่าน","ตื่นมาสอบจริง","อย่าเช็กเฉลยตอนพัก","อย่าถามเพื่อนว่าตอบอะไร","ความสุขหลังสอบมีจริง","เบียร์เย็นรออยู่","แต่คะแนนก็รออยู่","ผ่านเถอะ... สาธุ",
+  "ถ้าเห็นข้อความนี้ แปลว่าผียังอ่านหนังสือเป็นเพื่อนอยู่ 👻📚","วันนี้อ่านมาตรา พรุ่งนี้อ่านใจอาจารย์","ประมวลหนากว่าความหวัง","ข้อสอบไม่ยาก... แต่คำตอบยาก","นิติปรัชญาไม่มีในเล่มนี้","ฎีกาไม่ใช่นิยาย แต่ทำให้นอนไม่หลับ","เพื่อนบอก \"ไม่อ่าน\" แล้วได้ A","ผีไม่หลอกหรอก GPA ต่างหากที่หลอก","อาจารย์บอก \"ง่าย ๆ\" นั่นแหละน่ากลัวที่สุด","อ่านมาตราครบ แต่ลืมเขียนชื่อ",
+  "ผียังสงสารคนอ่านคืนก่อนสอบ","หลับก่อนเดี๋ยวตื่นมาอ่าน","60 เป๊ะ","ทำบุญเยอะๆ",
+  "ผีมา... แต่เค้าจากไป","คนไม่มีใจ เจ็บกว่าผีหลอก","คน ผี ทะเล... อะไรน่ากลัวกว่ากัน","มาตรา 59 ผู้ใด... หรือบุคคลใดหว่า","ละเมิดคือบ่อเกิดแห่งหนี้ ละโมภจะเจอผี","ละเมอ... จะเจอเค้า","สิงโตชอบกินน้ำแดง","ผีบางทีก็อยู่รวมกับเรา","เพื่อนที่นั่งหลังห้อง... ตอนนี้ไปไหน","เคยสังเกตเพื่อนที่หายไปไหม",
+  "คนนั้นที่เราไม่เคยคุยด้วย... หายไปแล้ว","เรากับเพื่อนฝันเรื่องเดียวกัน","ทำไมรู้สึกว่าเคยอ่านมาตรานี้มาแล้ว","ระวังเด็กชายที่ชอบพกตะปูติดเสื้อ","ได้ยินเสียง... หยดน้ำไหม","ทำไมเพดานชอบบิด","พี่สาวคนนั้นถ่ายรูปทีไร... เบลอทุกครั้ง","เคยเห็นคนตัวโปร่งแสงในห้องสมุดไหม","ห้องน้ำไฟปิดเองอีกแล้ว","เคยได้กลิ่นธูป... แต่ไม่เห็นใครไหม",
+  "แมวตัวนั้นชอบมองมุมเดิมทุกคืน","ได้ยินเสียงหมาหอนไหม","ผีไม่หลอก... แต่ความทรงจำหลอก","คนที่ยิ้มให้ทุกวัน วันนี้หายไป","อย่าทัก... ถ้าไม่แน่ใจว่าเป็นเพื่อน","บางคนจำหน้าเราได้... ทั้งที่เราไม่เคยเจอ","เธอเคยเดินผ่านเรา... หรือเปล่า","ลองนับจำนวนคนในห้องใหม่","มีเก้าอี้เพิ่มมาตัวหนึ่งไหม","รูปหมู่ใบนี้... ใครคนนั้น",
+  "ยิ่งมอง ยิ่งมีคนเพิ่ม","อย่าซูมรูป","กระจกไม่ได้สะท้อนทุกอย่าง","กระจกบางบาน... ช้ากว่าเรา","อย่ากะพริบตาตอนมองกระจก","เคยรู้สึกว่ามีคนเดินตาม... ในห้องสมุด","ชั้นหนังสือแถวนี้... เหมือนยาวขึ้น","เมื่อคืนหนังสืออยู่คนละชั้น","ตัวหนังสือเรียงไม่เหมือนเดิม","หน้านี้เมื่อวานไม่มี",
+  "มาตรานี้... เพิ่มขึ้นเองหรือเปล่า","ประมวลหนักขึ้นทุกคืน","มีรอยนิ้วมือบนหน้าที่ยังไม่เคยเปิด","มีคนขีดไฮไลท์ไว้ก่อนเรา","แต่ลายมือเหมือนของเรา","อย่าตามเสียงเรียก","โดยเฉพาะถ้าเรียกชื่อเต็ม","ถ้าเรียกสามครั้ง... อย่าหัน","ถ้าหันแล้ว... ยิ้มไว้","เธอเห็นคนนั้นเหมือนเราไหม",
+  "หรือเห็นแค่เราคนเดียว","วันนี้เพื่อนดูตัวสูงขึ้นไหม","หรือพื้นต่ำลง","บันไดเมื่อกี้มีกี่ขั้น","นับใหม่อีกที","เดินวนหรือยัง","ทางเดิม... แต่ไม่ใช่ที่เดิม","ห้องนี้เคยเล็กกว่านี้ไหม","ประตูอยู่ตรงนี้มาตลอดหรือเปล่า","เสียงเปิดประมวลดังเอง",
+  "ลมเปิด... หรือใครเปิด","ข้างหลังมีที่ว่างไหม","อย่าถามว่ามีใครนั่งไหม","เพราะอาจมีคนตอบ","ผมเส้นนั้น... ไม่ใช่ของเรา","รองเท้าคู่นั้น... ไม่มีเจ้าของ","ได้ยินเสียงเดิน... แต่ไม่มีเงา","เงาบางอัน... ไม่มีคน","คนบางคน... ไม่มีเงา","เธอเคยเห็นรอยยิ้มที่กว้างเกินไปไหม",
+  "อย่ายิ้มตาม","คนที่หัวเราะคนเดียว... อาจไม่ได้อยู่คนเดียว","ความเงียบมีเสียง","ได้ยินไหม","เหมือนมีใครอ่านหนังสือพร้อมเรา","พลิกหน้าพร้อมกันเลย","แต่เรามาคนเดียว","เธอก็ได้ยินใช่ไหม","อย่าตอบ","ถ้าไม่มีใครถาม",
+  "ถ้ามีคนถามว่า \"จำเราได้ไหม\"","อย่ารีบตอบ","บางคำถามไม่มีคำตอบ","บางคำตอบ... ไม่มีคนถาม","คนที่เราคิดถึง... อาจกำลังคิดถึงเรา","หรือกำลังมองอยู่","เค้าไม่ได้หายไป","แค่เรา... มองไม่เห็น","ผีไม่น่ากลัวเท่าคนที่อ่านแล้วไม่คืนประมวล","อย่ายืมไฮไลท์แล้วหาย",
+  "คนยืมประมวลไม่คืน... หลอนกว่าผี","อ่านมาตรา... แต่อย่าอ่านชื่อข้างหลัง","อย่าจดชื่อไว้ในประมวลของคนอื่น","ถ้าประมวลเรียกชื่อเรา... อย่าเปิด","บางหน้ามีคนอ่านอยู่ก่อนแล้ว","ความรักก็เหมือนมาตรา... อ่านผิด ชีวิตเปลี่ยน","เค้าไม่ตอบแชต... แต่ผีตอบ","เธอเลือกเค้า... ผีเลือกเธอ","ลองนับเพื่อนในห้องอีกครั้ง... แล้วอย่าลืมนับตัวเองด้วย",
+];
+let ghostEl = null, ghostRotateTimer = null, ghostPulseTimer = null, ghostIndex = 0;
+let ghostSpeechEl = null, ghostSpeechTimer = null;
+function ensureGhostSpeechEl(){
+  if (ghostSpeechEl) return ghostSpeechEl;
+  const el = document.createElement('div');
+  el.className = 'ghost-speech';
+  document.body.appendChild(el);
+  ghostSpeechEl = el; return el;
+}
+function showGhostSpeech(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const ghost = ensureGhostEl();
+  const bubble = ensureGhostSpeechEl();
+  bubble.textContent = GHOST_PHRASES[Math.floor(Math.random() * GHOST_PHRASES.length)];
+  const rect = ghost.getBoundingClientRect();
+  bubble.style.right = (window.innerWidth - rect.right) + 'px';
+  bubble.style.bottom = (window.innerHeight - rect.top + 10) + 'px';
+  bubble.classList.add('visible');
+  clearTimeout(ghostSpeechTimer);
+  ghostSpeechTimer = setTimeout(() => bubble.classList.remove('visible'), 2600);
+  pulseGhost();
+  playHooSound();
+}
+function ensureGhostEl(){
+  if (ghostEl) return ghostEl;
+  const img = document.createElement('img');
+  img.src = GHOST_IMAGES[0]; img.alt = ''; img.setAttribute('aria-hidden', 'true'); img.className = 'ghost-companion';
+  img.addEventListener('mouseenter', showGhostSpeech);
+  img.addEventListener('click', showGhostSpeech);
+  document.body.appendChild(img); ghostEl = img; return img;
+}
+function startGhostRotation(){
+  const el = ensureGhostEl(); ghostIndex = 0; el.src = GHOST_IMAGES[ghostIndex]; el.classList.add('visible');
+  clearInterval(ghostRotateTimer); ghostRotateTimer = setInterval(rotateGhost, 5000);
+}
+function rotateGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl(); ghostIndex = (ghostIndex + 1) % GHOST_IMAGES.length;
+  el.style.opacity = '0.15';
+  setTimeout(() => { el.src = GHOST_IMAGES[ghostIndex]; el.style.opacity = ''; }, 220);
+  playHooSound();
+}
+function stopGhostRotation(){
+  clearInterval(ghostRotateTimer); ghostRotateTimer = null;
+  if (ghostEl) { ghostEl.classList.remove('visible'); ghostEl.style.opacity = ''; }
+}
+function pulseGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl(); el.classList.add('pulse');
+  clearTimeout(ghostPulseTimer); ghostPulseTimer = setTimeout(() => el.classList.remove('pulse'), 350);
+}
+document.addEventListener('input', (e) => {
+  const t = e.target;
+  if (!t) return;
+  if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || (t.classList && t.classList.contains('note-input'))) pulseGhost();
+});
+let __ghostAudioCtx;
+function playHooSound(){
+  try{
+    __ghostAudioCtx = __ghostAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __ghostAudioCtx;
+    if (c.state === 'suspended') c.resume();
+    const t0 = c.currentTime, dur = 1.6;
+    const baseFreq = 180 + Math.random() * 50;
+    const osc = c.createOscillator(); osc.type = 'sine'; osc.frequency.setValueAtTime(baseFreq, t0);
+    const lfo = c.createOscillator(); lfo.type = 'sine'; lfo.frequency.setValueAtTime(4.2, t0);
+    const lfoGain = c.createGain(); lfoGain.gain.setValueAtTime(6, t0);
+    lfo.connect(lfoGain); lfoGain.connect(osc.frequency);
+    const mainGain = c.createGain();
+    mainGain.gain.setValueAtTime(0.0001, t0);
+    mainGain.gain.exponentialRampToValueAtTime(0.035, t0 + 0.55);
+    mainGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    const bufferSize = Math.floor(c.sampleRate * dur);
+    const noiseBuffer = c.createBuffer(1, bufferSize, c.sampleRate);
+    const data = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+    const noise = c.createBufferSource(); noise.buffer = noiseBuffer;
+    const noiseFilter = c.createBiquadFilter();
+    noiseFilter.type = 'bandpass'; noiseFilter.frequency.setValueAtTime(baseFreq * 1.6, t0); noiseFilter.Q.setValueAtTime(0.7, t0);
+    const noiseGain = c.createGain();
+    noiseGain.gain.setValueAtTime(0.0001, t0);
+    noiseGain.gain.exponentialRampToValueAtTime(0.01, t0 + 0.55);
+    noiseGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    osc.connect(mainGain); mainGain.connect(c.destination);
+    noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(c.destination);
+    osc.start(t0); osc.stop(t0 + dur);
+    lfo.start(t0); lfo.stop(t0 + dur);
+    noise.start(t0); noise.stop(t0 + dur);
+  } catch(e){}
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  updateThemeToggleUI(current);
+  if (current === 'horror') { playHorrorBgm(); startGhostRotation(); scheduleDogHowl(); }
+  const droneMuteBtn = document.getElementById('drone-mute-btn');
+  if (droneMuteBtn) {
+    let muted = false;
+    try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+    droneMuteBtn.textContent = muted ? '🔇' : '🔊';
+  }
+  ['click','touchstart','keydown'].forEach(evt => {
+    document.addEventListener(evt, function resumeBgmOnce(){
+      const bgm = document.getElementById('horror-bgm');
+      if (document.documentElement.getAttribute('data-theme') === 'horror' && bgm && bgm.paused) playHorrorBgm();
+      ['click','touchstart','keydown'].forEach(e2 => document.removeEventListener(e2, resumeBgmOnce));
+    }, { once: true });
+  });
+});
+</script>
+</body>
+</html>
