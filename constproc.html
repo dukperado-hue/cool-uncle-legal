@@ -158,6 +158,9 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 .lecture-row.open .lecture-toggle{transform:rotate(180deg)}
 .lecture-body{display:none;padding:0 16px 16px 66px;font-size:14px;color:var(--ink-soft);white-space:pre-line;line-height:1.8}
 .lecture-row.open .lecture-body{display:block}
+.lecture-video{margin:12px 0 16px}
+.lecture-video .video-frame-wrap{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:10px;overflow:hidden}
+.lecture-video .video-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .lecture-pending{
   font-size:12px;font-weight:700;color:var(--ink-faint);background:#F1EDE2;
   padding:5px 12px;border-radius:999px;white-space:nowrap;flex-shrink:0;
@@ -252,7 +255,7 @@ function playHoverSound(){
 
 /* Each entry: { n, title, text }. title/text present = ready to read; absent = still pending. */
 const LECTURES = [
-  { n: 1, title: "แนะนำรายวิชา และข้อความคิดว่าด้วยวิธีพิจารณาคดีมหาชน", text:
+  { n: 1, title: "แนะนำรายวิชา และข้อความคิดว่าด้วยวิธีพิจารณาคดีมหาชน", video: "oY4WqRL80Yo", text:
 `ภาพรวมวิชาและโครงสร้างข้อสอบ: วิชานี้ศึกษาโครงสร้าง ภารกิจ เขตอำนาจศาล หลักการพื้นฐานของวิธีพิจารณา ประเภทคดี เงื่อนไขการฟ้องคดี การดำเนินกระบวนพิจารณา การทำคำวินิจฉัย/คำพิพากษา ผลของคำชี้ขาด การคุ้มครองชั่วคราว และการบังคับคดี ของทั้งศาลรัฐธรรมนูญและศาลปกครอง รวม 15 ครั้งตลอดภาคการศึกษา ตามหลักสูตรปกติจะเริ่มเรียนฝั่งกฎหมายรัฐธรรมนูญก่อน แต่ในภาคนี้มีการสลับให้เรียนฝั่ง "คดีปกครอง" ขึ้นมาก่อนเป็น 7 ครั้งแรก ก่อนต่อด้วยฝั่งศาลรัฐธรรมนูญอีก 8 ครั้งที่เหลือ ประเมินผลด้วยการสอบปลายภาคเพียงอย่างเดียว 100 คะแนน ไม่มีคะแนนเก็บหรือสอบกลางภาค ฝั่งคดีปกครองซึ่งสอนใน 7 ครั้งแรกจะออกข้อสอบ 2 ข้อ: ข้อแรกเน้นประเภทของคดีปกครองตามกฎหมายจัดตั้งศาลปกครองฯ มาตรา 9 และอำนาจทำคำบังคับของศาลที่ต่างกันไปตามประเภทคดี ข้อที่สองเน้นวิธีพิจารณาคดีเมื่อคดีขึ้นสู่ศาลแล้ว เริ่มตั้งแต่เงื่อนไขผู้มีสิทธิฟ้องคดีตามมาตรา 42 (ผู้เดือดร้อนเสียหาย) ไปจนถึงบทบาทขององค์คณะ (ตุลาการเจ้าของสำนวน และตุลาการผู้แถลงคดี) และการทำคำพิพากษา
 
 ข้อความคิดพื้นฐาน — ทำไมต้องมีวิธีพิจารณาคดีมหาชนแยกต่างหาก: จุดตั้งต้นของวิชานี้คือคดีปกครองมีลักษณะต่างจากคดีแพ่ง/เอกชนทั่วไปโดยพื้นฐาน เพราะความสัมพันธ์ระหว่างคู่กรณีในคดีปกครองไม่เท่าเทียมกันเหมือนคดีเอกชน แต่เป็นกรณีที่เอกชนตกอยู่ภายใต้การใช้อำนาจของฝ่ายปกครอง เมื่อฝ่ายปกครองใช้อำนาจออกคำสั่งทางปกครองหรือออกกฎมากระทบสิทธิ และเอกชนต้องการโต้แย้งว่าการใช้อำนาจนั้นไม่ชอบด้วยกฎหมาย ระบบวิธีพิจารณาคดีมหาชนจึงต้องถูกออกแบบมาเพื่อตรวจสอบและคานอำนาจที่ไม่เท่าเทียมกันนี้โดยเฉพาะ ต่างจากคดีแพ่งทั่วไปที่คู่กรณีสองฝ่ายต่างเป็นเอกชนที่มีสถานะเท่าเทียมกัน
@@ -321,7 +324,7 @@ function renderLectures(){
         <div class="lecture-title">${l.title}</div>
         <div class="lecture-toggle">▾</div>
       </div>
-      <div class="lecture-body">${highlightText(l.text.replace(/</g,'&lt;'))}</div>
+      <div class="lecture-body">${l.video ? `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${l.video}" title="วิดีโอประกอบบรรยายครั้งที่ ${l.n}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div></div>` : ''}${highlightText(l.text.replace(/</g,'&lt;'))}</div>
     </div>
   ` : `
     <div class="lecture-row pending">
