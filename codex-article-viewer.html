@@ -306,6 +306,18 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
   color: var(--accent);
 }
 
+.exam-freq-badge {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-left: 6px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
 .article-subtitle {
   font-size: 14px;
   color: var(--ink-soft);
@@ -855,6 +867,7 @@ mark.codex-hl-yellow { background: #FFE066; color: #3a3212; }
         <div class="speech-bubble-top">
           <span class="article-number-label">มาตรา</span>
           <span class="article-number" id="article-number">-</span>
+          <span id="article-examfreq-badge"></span>
           <span id="article-cancelled-badge"></span>
         </div>
         <div class="speech-bubble-actions">
@@ -1909,6 +1922,9 @@ async function loadAndRender() {
   [m.phaak, m.laksana, m.muad, m.suan].forEach(part => { if (part) crumbParts.push(part); });
   document.getElementById('breadcrumb').textContent = `📍 ${crumbParts.join(' › ')}`;
   document.getElementById('article-number').textContent = article.number;
+  document.getElementById('article-examfreq-badge').innerHTML = article.examFreq
+    ? `<span class="exam-freq-badge" title="ออกสอบเนติ ${article.examFreq.count} ครั้ง">${'★'.repeat(article.examFreq.stars)}</span>`
+    : '';
   document.getElementById('article-cancelled-badge').innerHTML = article.cancelled
     ? '<span style="color:var(--bad);font-size:13px;font-weight:700;border:1px solid var(--bad);border-radius:4px;padding:2px 8px;">ยกเลิกแล้ว</span>'
     : '';

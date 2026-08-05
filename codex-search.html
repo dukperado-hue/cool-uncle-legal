@@ -384,6 +384,8 @@ mark.codex-hl-yellow{background:#FFE066;color:#3a3212}
 
 .cancelled-badge{color:var(--bad);font-size:12px;font-weight:700;border:1px solid var(--bad);border-radius:4px;padding:2px 6px}
 
+.exam-freq-badge{color:var(--gold);font-size:12px;font-weight:700;border:1px solid var(--gold);border-radius:4px;padding:2px 6px;margin-left:6px;letter-spacing:1px;white-space:nowrap}
+
 .empty-state{text-align:center;padding:60px 20px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius)}
 
 .empty-state .icon{font-size:48px;margin-bottom:16px}
@@ -1731,7 +1733,7 @@ function displayResults(results) {
     const adj = getAdjacentArticleNumbers(article.bookType, article.number);
     const headerHtml = `
       <div class="article-header">
-        <div class="article-number">มาตรา ${article.number}</div>
+        <div class="article-number">มาตรา ${article.number}${article.examFreq ? ` <span class="exam-freq-badge" title="ออกสอบเนติ ${article.examFreq.count} ครั้ง">${'★'.repeat(article.examFreq.stars)}</span>` : ''}</div>
         <div class="article-actions">
           ${article.cancelled ? '<span class="cancelled-badge">ยกเลิกแล้ว</span>' : ''}
           <button type="button" class="icon-btn" data-navrole="hdr-prev" title="มาตราก่อนหน้า" onclick="navigateArticle('${article.bookType}','${article.number}','prev',this,'hdr-prev')" onmouseenter="playHoverSound()" ${adj.prev ? '' : 'disabled'}>‹ ก่อนหน้า</button>
