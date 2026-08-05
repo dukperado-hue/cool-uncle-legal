@@ -126,16 +126,19 @@ body{
 h1,h2{font-family:'Noto Serif Thai',serif}
 
 .wrap{max-width:640px;margin:0 auto;padding:24px 16px 60px}
+.wrap.wide{max-width:940px}
 
 .page-head{text-align:center;margin-bottom:18px}
 .page-head .crest{
-  width:60px;height:60px;border-radius:50%;margin:0 auto 12px;
+  width:84px;height:84px;border-radius:50%;margin:0 auto 14px;
   background:radial-gradient(circle at 32% 28%, #E7C983, var(--gold) 55%, #8F6511 100%);
-  display:flex;align-items:center;justify-content:center;font-size:26px;
-  box-shadow:0 6px 18px rgba(176,138,60,.35), inset 0 2px 3px rgba(255,255,255,.5);
+  display:flex;align-items:center;justify-content:center;font-size:38px;
+  box-shadow:0 8px 24px rgba(176,138,60,.4), inset 0 2px 4px rgba(255,255,255,.5);
 }
-.page-head h1{font-size:22px;font-weight:800;color:var(--ink)}
-.page-head .subtitle{color:var(--ink-soft);margin-top:6px;font-size:14px}
+.page-head h1{font-size:32px;font-weight:800;color:var(--ink);letter-spacing:.02em}
+.page-head .title-rule{width:80px;height:3px;margin:10px auto 0;border-radius:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.page-head .subtitle{color:var(--ink-soft);margin-top:10px;font-size:14px}
 
 .notice{
   background:#FBF6E8;border:1.5px dashed var(--gold);border-radius:var(--radius);
@@ -160,6 +163,69 @@ a.scenario-card{text-decoration:none;color:inherit}
 .scenario-card .sc-go{color:var(--accent);font-weight:700;font-size:20px;flex-shrink:0}
 .scenario-card.disabled{opacity:.5;cursor:not-allowed}
 .scenario-card.disabled:hover{transform:none;border-color:var(--line)}
+
+/* ===== Ace Attorney-style hero banner v2 — static key-art poster per game (experimental, games.html only) ===== */
+.ace-hero{
+  position:relative;border-radius:18px;overflow:hidden;min-height:560px;
+  background:#1a1a1a center/cover no-repeat;
+  box-shadow:0 14px 40px rgba(0,0,0,.35);
+  transition:background-image .5s ease;
+}
+.ace-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(100deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.42) 32%, rgba(0,0,0,.05) 58%, transparent 72%);
+}
+.ace-hero.soon{background:linear-gradient(135deg,#232323 0%,#4a4a4a 55%,#6e6e6e 100%)}
+.ace-content{
+  position:relative;z-index:5;padding:40px 34px;max-width:50%;
+  display:flex;flex-direction:column;justify-content:flex-end;min-height:560px;
+}
+.ace-badge{
+  display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);
+  color:#fff;font-weight:800;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 12px;border-radius:999px;margin-bottom:16px;width:fit-content;
+  opacity:0;animation:aceUp .5s ease forwards;animation-delay:.05s;
+}
+.ace-title{
+  font-family:'Noto Serif Thai',serif;font-weight:800;font-size:38px;line-height:1.18;
+  color:#fff;text-shadow:0 4px 18px rgba(0,0,0,.6);position:relative;padding-left:18px;
+  opacity:0;animation:aceUp .5s ease forwards;animation-delay:.15s;
+}
+.ace-title::before{
+  content:"";position:absolute;left:0;top:3px;bottom:3px;width:5px;border-radius:3px;
+  background:linear-gradient(#fff,rgba(255,255,255,.4));
+}
+.ace-desc{
+  color:rgba(255,255,255,.88);font-size:14px;line-height:1.75;margin:16px 0 22px;max-width:340px;
+  text-shadow:0 2px 10px rgba(0,0,0,.5);
+  opacity:0;animation:aceUp .5s ease forwards;animation-delay:.25s;
+}
+.ace-play{
+  display:inline-flex;align-items:center;gap:8px;background:#fff;color:#1a1a1a;
+  font-weight:800;font-size:14.5px;padding:13px 28px;border-radius:999px;text-decoration:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.35);transition:transform .15s ease,box-shadow .15s ease;
+  width:fit-content;opacity:0;animation:aceUp .5s ease forwards;animation-delay:.35s;
+}
+.ace-play:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 8px 22px rgba(0,0,0,.4)}
+@keyframes aceUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.ace-selector{display:flex;gap:10px;margin-top:18px;justify-content:center;flex-wrap:wrap}
+.ace-thumb{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  background:var(--card);border:2px solid var(--line);border-radius:12px;
+  padding:10px 18px;cursor:pointer;font-size:22px;transition:all .18s ease;
+  font-family:inherit;color:var(--ink-soft);font-weight:700;
+}
+.ace-thumb span{font-size:11px}
+.ace-thumb:hover:not(:disabled){border-color:var(--gold);transform:translateY(-2px)}
+.ace-thumb.active{border-color:var(--accent);background:var(--gold-soft);box-shadow:0 0 0 1px var(--accent) inset}
+.ace-thumb:disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:680px){
+  .ace-hero{min-height:420px}
+  .ace-content{max-width:100%;padding:26px 22px;min-height:420px}
+  .ace-title{font-size:26px}
+  .ace-desc{font-size:12.5px}
+  .ace-hero::after{background:linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.82) 78%)}
+}
 
 /* ===== BIG BUTTONS (duolingo-style) ===== */
 .big-btn{
@@ -334,45 +400,28 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
   <source src="music/หมาหอน.mp3" type="audio/mpeg">
 </audio>
 
-<div class="wrap">
+<div class="wrap wide">
   <header class="page-head">
     <div class="crest">🎮</div>
     <h1>ศูนย์รวมเกม</h1>
+    <div class="title-rule"></div>
     <p class="subtitle">เลือกโหมดเกมที่อยากเล่น — เรียนกฎหมายไปพร้อมกับเล่นเกม</p>
   </header>
 
-  <div class="scenario-list">
-    <a href="game-crimlaw-scenario.html?cat=criminal" class="scenario-card" onmouseenter="playHoverSound()">
-      <div class="sc-icon">⚖️</div>
-      <div class="sc-text">
-        <div class="sc-title">เกมสถานการณ์อาญา</div>
-        <div class="sc-desc">วิเคราะห์โจทย์อาญาแบบมินิเกม visual novel + ห้องพิจารณาคดีสไตล์ Ace Attorney</div>
-      </div>
-      <div class="sc-go">▶</div>
-    </a>
-    <a href="game-crimlaw-scenario.html?cat=civil" class="scenario-card" onmouseenter="playHoverSound()">
-      <div class="sc-icon">🔑</div>
-      <div class="sc-text">
-        <div class="sc-title">เกมสถานการณ์แพ่ง</div>
-        <div class="sc-desc">วิเคราะห์โจทย์แพ่ง/สัญญาแบบมินิเกม visual novel + ห้องพิจารณาคดีสไตล์ Ace Attorney</div>
-      </div>
-      <div class="sc-go">▶</div>
-    </a>
-    <a href="game-crimlaw-scenario.html?cat=civpro" class="scenario-card" onmouseenter="playHoverSound()">
-      <div class="sc-icon">📜</div>
-      <div class="sc-text">
-        <div class="sc-title">เกมสถานการณ์วิแพ่ง</div>
-        <div class="sc-desc">ฝึกขั้นตอนการดำเนินคดีในศาลแพ่งแบบมินิเกม visual novel + ห้องพิจารณาคดีสไตล์ Ace Attorney</div>
-      </div>
-      <div class="sc-go">▶</div>
-    </a>
-    <div class="scenario-card disabled">
-      <div class="sc-icon">➕</div>
-      <div class="sc-text">
-        <div class="sc-title">เกมใหม่ ๆ</div>
-        <div class="sc-desc">กำลังจะมาเพิ่มเรื่อย ๆ (วิอาญา)</div>
-      </div>
+  <div class="ace-hero" id="aceHero">
+    <div class="ace-content">
+      <div class="ace-badge" id="aceBadge">Visual Novel</div>
+      <h2 class="ace-title" id="aceTitle">เกมสถานการณ์<br>อาญา</h2>
+      <p class="ace-desc" id="aceDesc">วิเคราะห์โจทย์อาญาแบบมินิเกม + ห้องพิจารณาคดีสไตล์ Ace Attorney</p>
+      <a href="game-crimlaw-scenario.html?cat=criminal" class="ace-play" id="acePlay" onmouseenter="playHoverSound()">▶ เล่นเลย</a>
     </div>
+  </div>
+
+  <div class="ace-selector" id="aceSelector">
+    <button type="button" class="ace-thumb active" data-game="criminal" onmouseenter="playHoverSound()">⚖️<span>อาญา</span></button>
+    <button type="button" class="ace-thumb" data-game="civil" onmouseenter="playHoverSound()">🔑<span>แพ่ง</span></button>
+    <button type="button" class="ace-thumb" data-game="civpro" onmouseenter="playHoverSound()">📜<span>วิแพ่ง</span></button>
+    <button type="button" class="ace-thumb" data-game="soon" disabled>➕<span>เร็ว ๆ นี้</span></button>
   </div>
 
   <div class="coffee-widget">
@@ -388,6 +437,55 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
 /* ================================================================
    HOVER SOUND (verbatim site boilerplate)
    ================================================================ */
+/* ================================================================
+   ACE ATTORNEY-STYLE HERO SELECTOR
+   ================================================================ */
+const ACE_GAMES = {
+  criminal: {
+    bg:'pics/game/hero/criminal.jpg', badge:'Visual Novel', title:'เกมสถานการณ์<br>อาญา',
+    desc:'วิเคราะห์โจทย์อาญาแบบมินิเกม + ห้องพิจารณาคดีสไตล์ Ace Attorney',
+    href:'game-crimlaw-scenario.html?cat=criminal',
+  },
+  civil: {
+    bg:'pics/game/hero/civil.jpg', badge:'Visual Novel', title:'เกมสถานการณ์<br>แพ่ง',
+    desc:'วิเคราะห์โจทย์แพ่ง/สัญญาแบบมินิเกม + ห้องพิจารณาคดีสไตล์ Ace Attorney',
+    href:'game-crimlaw-scenario.html?cat=civil',
+  },
+  civpro: {
+    bg:'pics/game/hero/civpro.jpg', badge:'Visual Novel', title:'เกมสถานการณ์<br>วิแพ่ง',
+    desc:'ฝึกขั้นตอนดำเนินคดีในศาลแพ่งแบบมินิเกม + ห้องพิจารณาคดีสไตล์ Ace Attorney',
+    href:'game-crimlaw-scenario.html?cat=civpro',
+  },
+  soon: {
+    bg:null, badge:'เร็ว ๆ นี้', title:'เกมใหม่ ๆ<br>กำลังจะมา',
+    desc:'วิอาญา และเกมอื่น ๆ อีกเรื่อย ๆ',
+    href:null,
+  }
+};
+function setAceGame(key){
+  const g = ACE_GAMES[key];
+  if (!g) return;
+  const hero = document.getElementById('aceHero');
+  hero.classList.toggle('soon', !g.bg);
+  hero.style.backgroundImage = g.bg ? `url('${g.bg}')` : '';
+  document.getElementById('aceBadge').textContent = g.badge;
+  document.getElementById('aceTitle').innerHTML = g.title;
+  document.getElementById('aceDesc').textContent = g.desc;
+  const playBtn = document.getElementById('acePlay');
+  if (g.href) { playBtn.href = g.href; playBtn.style.display = ''; }
+  else { playBtn.style.display = 'none'; }
+  document.querySelectorAll('.ace-thumb').forEach(b => b.classList.toggle('active', b.dataset.game === key));
+  document.querySelectorAll('.ace-badge,.ace-title,.ace-desc,.ace-play').forEach(el => {
+    el.style.animation = 'none';
+    void el.offsetWidth;
+    el.style.animation = '';
+  });
+}
+document.querySelectorAll('.ace-thumb').forEach(btn => {
+  btn.addEventListener('click', () => { if (!btn.disabled) setAceGame(btn.dataset.game); });
+});
+setAceGame('criminal');
+
 let __hbAudioCtx;
 function playHoverSound(){
   try{
