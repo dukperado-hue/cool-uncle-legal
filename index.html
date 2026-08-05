@@ -389,9 +389,17 @@ a.tab-btn{text-decoration:none;display:inline-flex;align-items:center;justify-co
 .codex-header{
   display:flex;align-items:center;gap:12px;margin-bottom:20px;
 }
-.codex-icon{font-size:36px}
+.codex-icon{display:flex;align-items:center;justify-content:center;flex:0 0 auto}
 .codex-header-text h2{font-size:22px;font-weight:900;color:var(--ink);margin-bottom:4px}
 .codex-header-text p{font-size:13px;color:var(--ink-soft)}
+
+/* CODEX MASCOT — capybara detective (light/dark) swaps for a horror-comic
+   variant (ghost) when the horror theme is active, same swap mechanism as
+   .hero-mascot above but inverted (detective is the default-visible one). */
+.codex-mascot{display:none;height:64px;width:auto;pointer-events:none;border-radius:6px}
+.codex-mascot.detective{display:block}
+:root[data-theme="horror"] .codex-mascot.detective{display:none}
+:root[data-theme="horror"] .codex-mascot.ghost{display:block;filter:drop-shadow(0 4px 10px rgba(0,0,0,.5))}
 
 .codex-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;
@@ -725,7 +733,10 @@ footer{
   <div id="tab-codex" class="tab-content">
     <div class="codex-section">
       <div class="codex-header">
-        <div class="codex-icon">📚</div>
+        <div class="codex-icon">
+          <img src="pics/capybara-detective.png" alt="" aria-hidden="true" class="codex-mascot detective">
+          <img src="pics/capybara-ghost.png" alt="" aria-hidden="true" class="codex-mascot ghost">
+        </div>
         <div class="codex-header-text">
           <h2>ประมวลกฎหมาย</h2>
           <p>ค้นหาและเรียนรู้มาตราของประมวลกฎหมายแต่ละฉบับ</p>
