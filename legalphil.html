@@ -255,6 +255,7 @@ table.cmp tr:nth-child(even) td{background:#FAF8F2}
 .thinker-card .name{font-family:'Noto Serif Thai',serif;font-weight:700;color:var(--ink);font-size:14.5px}
 .thinker-card .years{color:var(--ink-faint);font-size:12px;margin-bottom:6px}
 .thinker-card .desc{font-size:13.5px;color:var(--ink-soft);line-height:1.7}
+.inline-portrait{float:right;width:112px;max-width:32%;height:auto;border-radius:8px;margin:2px 0 10px 16px;border:1px solid var(--line);box-shadow:var(--shadow)}
 
 .nav-arrows{
   display:flex;justify-content:space-between;gap:12px;margin-top:16px;
@@ -598,10 +599,13 @@ function playHoverSound(){
           <div class="years">ทฤษฎีแห่งแบบ / ราชาปราชญ์</div>
           <div class="desc">กฎหมายธรรมชาติคือ "แบบ" อันไม่เปลี่ยนแปลง ใช้เป็นบรรทัดฐานของกฎหมายบ้านเมือง มีเพียงราชาปราชญ์ผู้มีญาณอันบริสุทธิ์เท่านั้นที่เข้าถึงได้ (ใน <em>The Republic</em>) แต่ในบั้นปลายชีวิต (<em>The Laws</em>) เพลโตกลับยอมรับว่า "รัฐกฎหมาย" ที่ผู้ปกครองต้องอยู่ใต้กฎหมาย เป็นทางเลือกที่ดีที่สุดอันดับสอง เพราะราชาปราชญ์ที่สมบูรณ์แบบหาได้ยาก</div>
         </div>
-        <div class="thinker-card">
-          <div class="name">อริสโตเติล (Aristotle)</div>
-          <div class="years">ศิษย์เพลโต ผู้แย้งเรื่องราชาปราชญ์</div>
-          <div class="desc">เชื่อว่ามนุษย์ทุกคนมีเหตุผลในตัวเอง ไม่จำเป็นต้องมีราชาปราชญ์ชี้นำ สนับสนุนการปกครองโดยกฎหมาย (กฎหมายคือ "เหตุผลที่ปราศจากกิเลสตัณหา") แบ่งความยุติธรรมเป็น Distributive (แบ่งสรรตามสัดส่วน) และ Commutative/Corrective (ชดเชยทดแทน) และเสนอหลัก Equity (epieikeia) เพื่อแก้ข้อบกพร่องของกฎเกณฑ์ตายตัว</div>
+        <div class="thinker-card has-portrait">
+          <img class="portrait" src="pics/legal history/Aristotle.jpg" alt="Aristotle" loading="lazy">
+          <div>
+            <div class="name">อริสโตเติล (Aristotle)</div>
+            <div class="years">ศิษย์เพลโต ผู้แย้งเรื่องราชาปราชญ์</div>
+            <div class="desc">เชื่อว่ามนุษย์ทุกคนมีเหตุผลในตัวเอง ไม่จำเป็นต้องมีราชาปราชญ์ชี้นำ สนับสนุนการปกครองโดยกฎหมาย (กฎหมายคือ "เหตุผลที่ปราศจากกิเลสตัณหา") แบ่งความยุติธรรมเป็น Distributive (แบ่งสรรตามสัดส่วน) และ Commutative/Corrective (ชดเชยทดแทน) และเสนอหลัก Equity (epieikeia) เพื่อแก้ข้อบกพร่องของกฎเกณฑ์ตายตัว</div>
+          </div>
         </div>
         <div class="thinker-card">
           <div class="name">สำนักสโตอิก (Zeno)</div>
@@ -647,11 +651,13 @@ function playHoverSound(){
 
       <div class="block">
         <h3>นักบุญออกัสติน (St. Augustine, ค.ศ. 354–430)</h3>
+        <img class="inline-portrait" src="pics/legal history/augustin.jpg" alt="St. Augustine" loading="lazy">
         <p>เขียน <em>De Civitate Dei</em> (นครแห่งพระเจ้า) ผสานปรัชญากรีกแบบเพลโตเข้ากับศาสนาคริสต์ แบ่งกฎหมายเป็น 3 ระดับ: <span class="term">Lex Aeterna</span> (กฎหมายนิรันดร — พระประสงค์ของพระเจ้า), <span class="term">Lex Naturalis</span> (กฎหมายธรรมชาติ — รอยพิมพ์ไม่สมบูรณ์ของกฎหมายนิรันดรในใจมนุษย์), และ <span class="term">Lex Temporalis</span> (กฎหมายเฉพาะกาล — กฎหมายบ้านเมือง ซึ่งขัดกับกฎที่สูงกว่าไม่ได้)</p>
       </div>
 
       <div class="block">
         <h3>นักบุญโทมัส อไควนัส (St. Thomas Aquinas, ค.ศ. 1225–1274)</h3>
+        <img class="inline-portrait" src="pics/legal history/stThomas.png" alt="St. Thomas Aquinas" loading="lazy">
         <p>บิดาแห่งสำนัก Scholasticism สังเคราะห์ปรัชญาอริสโตเติลเข้ากับเทววิทยาคริสต์ นิยามกฎหมายว่าคือ <em>"บัญญัติแห่งเหตุผลเพื่อความดีส่วนรวม (bonum commune) ที่กำหนดโดยผู้ดูแลชุมชนและประกาศใช้"</em> และจัดลำดับชั้นกฎหมายไว้ 4 ระดับ:</p>
         <table class="cmp">
           <tr><th>ลำดับ</th><th>ชื่อ</th><th>ความหมาย</th></tr>
@@ -699,24 +705,33 @@ function playHoverSound(){
       </div>
 
       <div class="thinkers">
-        <div class="thinker-card">
-          <div class="name">โทมัส ฮอบส์ (Thomas Hobbes)</div>
-          <div class="desc">เชื่อว่ามนุษย์เห็นแก่ตัวและโหดร้ายตามธรรมชาติ จึงต้องทำสัญญาภักดี (Pactum Subjectionis) มอบอำนาจเด็ดขาดให้รัฏฐาธิปัตย์ เป็นรากฐานของสมบูรณาญาสิทธิราชย์ และเป็นที่มาของแนวคิดที่ว่า "คำสั่ง" ของรัฏฐาธิปัตย์คือกฎหมาย</div>
-        </div>
-        <div class="thinker-card">
-          <div class="name">จอห์น ออสติน (John Austin, 1790–1859)</div>
-          <div class="desc">ผู้ก่อตั้ง Command Theory: "กฎหมายคือคำสั่งของรัฏฐาธิปัตย์ ซึ่งได้รับการสนับสนุนด้วยการข่มขู่ลงโทษ" องค์ประกอบหลัก 3 อย่าง คือ คำสั่ง (Command), รัฏฐาธิปัตย์ (Sovereign), สภาพบังคับ (Sanction)</div>
+        <div class="thinker-card has-portrait">
+          <img class="portrait" src="pics/legal history/Thomas_Hobbes_(portrait).jpg" alt="Thomas Hobbes" loading="lazy">
+          <div>
+            <div class="name">โทมัส ฮอบส์ (Thomas Hobbes)</div>
+            <div class="desc">เชื่อว่ามนุษย์เห็นแก่ตัวและโหดร้ายตามธรรมชาติ จึงต้องทำสัญญาภักดี (Pactum Subjectionis) มอบอำนาจเด็ดขาดให้รัฏฐาธิปัตย์ เป็นรากฐานของสมบูรณาญาสิทธิราชย์ และเป็นที่มาของแนวคิดที่ว่า "คำสั่ง" ของรัฏฐาธิปัตย์คือกฎหมาย</div>
+          </div>
         </div>
         <div class="thinker-card has-portrait">
-          <img class="portrait" src="pics/kelsen.jpg" alt="Hans Kelsen" loading="lazy">
+          <img class="portrait" src="pics/legal history/John_Austin_(cropped).jpg" alt="John Austin" loading="lazy">
+          <div>
+            <div class="name">จอห์น ออสติน (John Austin, 1790–1859)</div>
+            <div class="desc">ผู้ก่อตั้ง Command Theory: "กฎหมายคือคำสั่งของรัฏฐาธิปัตย์ ซึ่งได้รับการสนับสนุนด้วยการข่มขู่ลงโทษ" องค์ประกอบหลัก 3 อย่าง คือ คำสั่ง (Command), รัฏฐาธิปัตย์ (Sovereign), สภาพบังคับ (Sanction)</div>
+          </div>
+        </div>
+        <div class="thinker-card has-portrait">
+          <img class="portrait" src="pics/legal history/kelsen.jpg" alt="Hans Kelsen" loading="lazy">
           <div>
             <div class="name">ฮันส์ เคลเซ่น (Hans Kelsen)</div>
             <div class="desc">เจ้าของ Pure Theory of Law ปฏิเสธแนวคิด "คำสั่ง/เจตจำนง" ของออสติน ต้องการแยกกฎหมายออกจากศีลธรรม การเมือง ศาสนาอย่างเด็ดขาด เพื่อวิเคราะห์กฎหมายจากตัวบทล้วนๆ ผ่านแนวคิด Grundnorm (บรรทัดฐานพื้นฐาน)</div>
           </div>
         </div>
-        <div class="thinker-card">
-          <div class="name">H.L.A. Hart</div>
-          <div class="desc">วิจารณ์ออสตินว่าเรียบง่ายเกินไป เสนอว่ากฎหมายคือ "ระบบของกฎเกณฑ์" ประกอบด้วย <em>กฎปฐมภูมิ (Primary Rules)</em> ที่กำหนดหน้าที่ และ <em>กฎทุติยภูมิ (Secondary Rules)</em> ที่เป็น "กฎเกี่ยวกับกฎ" เช่น กฎการรับรอง (Rule of Recognition) ยอมรับว่ามี "เนื้อหาอย่างน้อยที่สุดของกฎหมายธรรมชาติ" (Minimum Content of Natural Law)</div>
+        <div class="thinker-card has-portrait">
+          <img class="portrait" src="pics/legal history/Herbert_Hart.jpg" alt="H.L.A. Hart" loading="lazy">
+          <div>
+            <div class="name">H.L.A. Hart</div>
+            <div class="desc">วิจารณ์ออสตินว่าเรียบง่ายเกินไป เสนอว่ากฎหมายคือ "ระบบของกฎเกณฑ์" ประกอบด้วย <em>กฎปฐมภูมิ (Primary Rules)</em> ที่กำหนดหน้าที่ และ <em>กฎทุติยภูมิ (Secondary Rules)</em> ที่เป็น "กฎเกี่ยวกับกฎ" เช่น กฎการรับรอง (Rule of Recognition) ยอมรับว่ามี "เนื้อหาอย่างน้อยที่สุดของกฎหมายธรรมชาติ" (Minimum Content of Natural Law)</div>
+          </div>
         </div>
       </div>
 
@@ -751,11 +766,13 @@ function playHoverSound(){
 
       <div class="block">
         <h3>การแปรสภาพจากศาสนาสู่เหตุผล</h3>
+        <img class="inline-portrait" src="pics/legal history/Hugo_Grotius.jpg" alt="Hugo Grotius" loading="lazy">
         <p><span class="term">ฮิวโก โกรเชียส (Hugo Grotius)</span> เสนอว่ากฎหมายธรรมชาติย่อมดำรงอยู่ได้ แม้สมมติว่าไม่มีพระเจ้าอยู่จริง (etsi Deus non daretur) เป็นจุดเปลี่ยนสำคัญที่ทำให้กฎหมายธรรมชาติยึดโยงกับ "เหตุผลของมนุษย์" แทนความเชื่อทางศาสนา สอดคล้องกับยุคฟื้นฟูศิลปวิทยาการ การปฏิรูปศาสนา และความเชื่อมั่นในเหตุผลนิยม (Rationalism)</p>
       </div>
 
       <div class="block">
         <h3>ทฤษฎีสัญญาประชาคม (Social Contract Theory)</h3>
+        <img class="inline-portrait" src="pics/legal history/Rousseau.avif" alt="Jean-Jacques Rousseau" loading="lazy">
         <table class="cmp">
           <tr><th>นักคิด</th><th>มุมมองต่อธรรมชาติมนุษย์</th><th>รูปแบบสัญญา / ผล</th></tr>
           <tr><td><strong>Thomas Hobbes</strong></td><td>เห็นแก่ตัวและโหดร้าย</td><td>สัญญาภักดี (Pactum Subjectionis) — มอบอำนาจเด็ดขาดแก่ผู้ปกครอง → สมบูรณาญาสิทธิราชย์</td></tr>
@@ -767,6 +784,7 @@ function playHoverSound(){
 
       <div class="block">
         <h3>อิมมานูเอล คานท์ (Kant)</h3>
+        <img class="inline-portrait" src="pics/legal history/kant.webp" alt="Immanuel Kant" loading="lazy">
         <p>แยกโลกแห่งเหตุผลบริสุทธิ์ (สิ่งที่เป็นอยู่) กับโลกแห่งสติปัญญา (สิ่งที่ควรจะเป็น/เสรีภาพ) นิยามกฎหมายว่าเป็นสภาพการณ์ที่การเลือกอย่างอิสระของบุคคลหนึ่งดำรงอยู่ร่วมกันได้กับการเลือกอย่างอิสระของผู้อื่น คานท์วิจารณ์กฎหมายธรรมชาติแบบตายตัวว่าไม่สอดคล้องกับโลกแห่งประสบการณ์จริง — เป็นจุดเปลี่ยนที่ปูทางไปสู่สำนักประวัติศาสตร์</p>
       </div>
 
