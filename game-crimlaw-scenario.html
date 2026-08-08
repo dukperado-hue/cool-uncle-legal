@@ -472,10 +472,33 @@ function playHoverSound(){
     osc.type = 'sine';
     osc.frequency.setValueAtTime(880, t0);
     gain.gain.setValueAtTime(0.0001, t0);
-    gain.gain.exponentialRampToValueAtTime(0.05, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.09, t0+0.008);
     gain.gain.exponentialRampToValueAtTime(0.0001, t0+0.09);
     osc.connect(gain); gain.connect(c.destination);
     osc.start(t0); osc.stop(t0+0.1);
+  }catch(e){}
+}
+/* Visual-novel style typing blip — a tiny pitched tick synced to the
+   typewriter reveal, throttled to every other character so it reads as a
+   "voice murmur" instead of a machine-gun click. */
+let __blipAudioCtx, __blipToggle = false;
+function playTypeBlip(){
+  if (isSoundMuted()) return;
+  __blipToggle = !__blipToggle;
+  if (!__blipToggle) return;
+  try{
+    __blipAudioCtx = __blipAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __blipAudioCtx;
+    if(c.state === 'suspended') c.resume();
+    const t0 = c.currentTime;
+    const osc = c.createOscillator(), gain = c.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(280 + Math.random()*90, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(0.045, t0+0.004);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+0.045);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+0.05);
   }catch(e){}
 }
 
@@ -1690,7 +1713,7 @@ function playScenarioBgm(key){
   if (el.dataset.trackKey === key && !el.paused) return; // already playing this track
   el.dataset.trackKey = key;
   el.src = BGM_TRACKS[key];
-  el.volume = 0.3;
+  el.volume = 0.22;
   el.currentTime = 0;
   el.play().catch(() => {});
 }
@@ -1704,7 +1727,7 @@ function playTrialSfx(entry){
   const sfxAudio = document.getElementById('beat-sfx');
   if (sfxAudio && entry.sfx && !isSoundMuted()) {
     sfxAudio.src = 'games/sound/effect/' + entry.sfx;
-    sfxAudio.volume = 0.55;
+    sfxAudio.volume = 0.7;
     sfxAudio.play().catch(() => {});
   }
 }
@@ -1784,7 +1807,7 @@ function renderScene(){
     </div>
     <div class="trial-textbox">
       <div class="trial-namebox" id="scene-namebox"></div>
-      <div class="trial-caption clickable" id="caption-box" onclick="skipTyping()"></div>
+      <div class="trial-caption clickable" id="caption-box" onclick="skipTyping('caption-box')"></div>
     </div>
     <div class="scene-nav-row">
       <button type="button" class="big-btn secondary" id="scene-prev-btn" onclick="prevBeat()" onmouseenter="playHoverSound()">‹ ย้อนกลับ</button>
@@ -1848,7 +1871,7 @@ function syncBeat(){
       el.classList.remove('fx-active');
     }
   });
-  typeCaption(beat.caption);
+  typeCaption('caption-box', beat.caption);
   const nextBtn = document.getElementById('scene-next-btn');
   nextBtn.textContent = (state.beatIndex === s.beats.length - 1) ? 'เข้าใจโจทย์ไหม? ›' : 'ถัดไป ›';
   const prevBtn = document.getElementById('scene-prev-btn');
@@ -1868,12 +1891,12 @@ function syncBeat(){
   const sfxAudio = document.getElementById('beat-sfx');
   if (sfxAudio && beat.sfx && !isSoundMuted()) {
     sfxAudio.src = 'games/sound/effect/' + beat.sfx;
-    sfxAudio.volume = 0.55;
+    sfxAudio.volume = 0.7;
     sfxAudio.play().catch(() => {});
   }
 }
-function typeCaption(text){
-  const el = document.getElementById('caption-box');
+function typeCaption(elId, text){
+  const el = document.getElementById(elId);
   if (!el) return;
   if (state.typeTimer) { clearInterval(state.typeTimer); state.typeTimer = null; }
   let chars;
@@ -1888,14 +1911,15 @@ function typeCaption(text){
   state.typeTimer = setInterval(() => {
     i++;
     el.textContent = chars.slice(0, i).join('');
+    if (chars[i-1] && chars[i-1].trim()) playTypeBlip();
     if (i >= chars.length) {
       clearInterval(state.typeTimer);
       state.typeTimer = null;
     }
   }, 22);
 }
-function skipTyping(){
-  const el = document.getElementById('caption-box');
+function skipTyping(elId){
+  const el = document.getElementById(elId);
   if (state.typeTimer) {
     clearInterval(state.typeTimer);
     state.typeTimer = null;
@@ -1984,10 +2008,11 @@ function renderTrialDialogue(entry){
     </div>
     <div class="trial-textbox">
       <div class="trial-namebox">${esc(courtDisplayName(entry.speaker))}</div>
-      <div class="trial-caption">${esc(entry.caption)}</div>
+      <div class="trial-caption clickable" id="trial-caption-box" onclick="skipTyping('trial-caption-box')"></div>
     </div>
     <button type="button" class="big-btn" onclick="nextTrialStep()" onmouseenter="playHoverSound()">${isLast ? 'ดูผลสรุป ›' : 'ถัดไป ›'}</button>
   `;
+  typeCaption('trial-caption-box', entry.caption);
   playTrialSfx(entry);
 }
 function renderTrialQuestion(qIndex){
@@ -2160,7 +2185,7 @@ function toggleDroneMute(btn){
   const sBgm = document.getElementById('scenario-bgm');
   if (sBgm) {
     if (muted) { sBgm.pause(); }
-    else { sBgm.volume = 0.3; if (sBgm.src && sBgm.paused) sBgm.play().catch(() => {}); }
+    else { sBgm.volume = 0.22; if (sBgm.src && sBgm.paused) sBgm.play().catch(() => {}); }
   }
 }
 function updateThemeToggleUI(theme){

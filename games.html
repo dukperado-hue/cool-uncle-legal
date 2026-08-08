@@ -399,6 +399,9 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
 <audio id="dog-howl" preload="auto" playsinline webkit-playsinline style="display:none">
   <source src="music/หมาหอน.mp3" type="audio/mpeg">
 </audio>
+<audio id="hub-bgm" loop preload="auto" playsinline webkit-playsinline style="display:none">
+  <source src="games/sound/music/moodmode-level-vii-258783.mp3" type="audio/mpeg">
+</audio>
 
 <div class="wrap wide">
   <header class="page-head">
@@ -497,11 +500,20 @@ function playHoverSound(){
     osc.type = 'sine';
     osc.frequency.setValueAtTime(880, t0);
     gain.gain.setValueAtTime(0.0001, t0);
-    gain.gain.exponentialRampToValueAtTime(0.05, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.09, t0+0.008);
     gain.gain.exponentialRampToValueAtTime(0.0001, t0+0.09);
     osc.connect(gain); gain.connect(c.destination);
     osc.start(t0); osc.stop(t0+0.1);
   }catch(e){}
+}
+function playHubBgm(){
+  const bgm = document.getElementById('hub-bgm');
+  if (!bgm) return;
+  let muted = false;
+  try { muted = localStorage.getItem('codex-drone-muted') === '1'; } catch(e){}
+  if (muted) return;
+  bgm.volume = 0.22;
+  bgm.play().catch(() => {});
 }
 
 </script>
@@ -516,8 +528,14 @@ function setTheme(theme){
   else { document.documentElement.setAttribute('data-theme', theme); }
   try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
   updateThemeToggleUI(theme);
-  if (theme === 'horror') { playHorrorBgm(); startGhostRotation(); playHooSound(); scheduleDogHowl(); }
-  else { stopGhostRotation(); stopHorrorBgm(); stopDogHowl(); }
+  if (theme === 'horror') {
+    playHorrorBgm(); startGhostRotation(); playHooSound(); scheduleDogHowl();
+    const hubBgm = document.getElementById('hub-bgm');
+    if (hubBgm) hubBgm.pause();
+  } else {
+    stopGhostRotation(); stopHorrorBgm(); stopDogHowl();
+    playHubBgm();
+  }
 }
 const DRONE_MUTE_KEY = 'codex-drone-muted';
 function playHorrorBgm(){
@@ -565,6 +583,11 @@ function toggleDroneMute(btn){
   if (btn) btn.textContent = muted ? '🔇' : '🔊';
   const bgm = document.getElementById('horror-bgm');
   if (bgm) bgm.volume = muted ? 0 : 0.35;
+  const hubBgm = document.getElementById('hub-bgm');
+  if (hubBgm) {
+    if (muted || document.documentElement.getAttribute('data-theme') === 'horror') { hubBgm.pause(); }
+    else { hubBgm.volume = 0.22; if (hubBgm.paused) hubBgm.play().catch(() => {}); }
+  }
 }
 function updateThemeToggleUI(theme){
   document.querySelectorAll('.theme-toggle button').forEach(b => {
@@ -732,6 +755,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const current = document.documentElement.getAttribute('data-theme') || 'light';
   updateThemeToggleUI(current);
   if (current === 'horror') { playHorrorBgm(); startGhostRotation(); scheduleDogHowl(); }
+  else { playHubBgm(); }
   const droneMuteBtn = document.getElementById('drone-mute-btn');
   if (droneMuteBtn) {
     let muted = false;
@@ -742,6 +766,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener(evt, function resumeBgmOnce(){
       const bgm = document.getElementById('horror-bgm');
       if (document.documentElement.getAttribute('data-theme') === 'horror' && bgm && bgm.paused) playHorrorBgm();
+      const hubBgm = document.getElementById('hub-bgm');
+      let muted = false;
+      try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+      if (hubBgm && hubBgm.paused && !muted && document.documentElement.getAttribute('data-theme') !== 'horror') playHubBgm();
       ['click','touchstart','keydown'].forEach(e2 => document.removeEventListener(e2, resumeBgmOnce));
     }, { once: true });
   });
