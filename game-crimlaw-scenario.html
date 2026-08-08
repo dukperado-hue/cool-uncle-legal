@@ -430,6 +430,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
   <source src="music/หมาหอน.mp3" type="audio/mpeg">
 </audio>
 <audio id="scenario-bgm" loop preload="none" playsinline webkit-playsinline style="display:none"></audio>
+<audio id="beat-sfx" preload="none" style="display:none"></audio>
 
 <div class="wrap">
   <header class="page-head">
@@ -733,27 +734,33 @@ const SCENARIOS = [
        each question's reveal box right after — repeating it as a dialogue
        line too would just be the same paragraph twice. */
     trial: [
+      { type:'dialogue', speaker:'court_clerk', pose:'confident', caption:'เสมียนศาล: ศาลนี้นัดพิจารณาคดีที่สวนสัตว์เปิดเขาเขียวเจ้าค่ะ มีผู้ถูกกล่าวหาหลายคน หลายข้อหา ขอเบิกตัวผู้เกี่ยวข้องเข้าห้องพิจารณาคดีค่ะ', sfx:'soundreality-riser-sync-391177.mp3' },
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ศาลนี้นัดพิจารณาคดีที่สวนสัตว์เปิดเขาเขียว มีผู้ถูกกล่าวหาหลายคน หลายข้อหา — เริ่มจากคนแรก' },
 
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ข้อหาแรก: นางดำเบียดคิวเดินชนคนจนทำให้ นส.เหลือง ตกบ่อหมูเด้ง แล้วถูกโจนาห์กัดจนบาดเจ็บสาหัส' },
+      { type:'dialogue', speaker:'female_influencer', pose:'confident', caption:'นางดำ: ดิฉันแค่เดินเร็วไปหน่อยเองค่ะ ไม่ได้ตั้งใจจะเบียดใครทั้งนั้น! ใครจะไปรู้ว่าจะมีคนตกบ่อ', bgm:'defendant' },
+      { type:'dialogue', speaker:'female_teen', pose:'sad', caption:'นส.เหลือง: หนูเจ็บมากนะคะ... ถ้าพี่เขาไม่เบียด หนูคงไม่ตกบ่อหมูเด้งไปโดนกัดขนาดนี้', bgm:'plaintiff' },
       { type:'dialogue', speaker:'prosecutor', pose:'confident', caption:'อัยการ: จำเลยเบียดจนผู้เสียหายบาดเจ็บสาหัส ต้องรับผิดฐานทำร้ายร่างกายตามมาตรา 295 โดยตรง!' },
-      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! ลูกความของดิฉันไม่มีเจตนาทำร้ายใครทั้งสิ้น เป็นเพียงอุบัติเหตุจากความไม่ระมัดระวัง' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! ลูกความของดิฉันไม่มีเจตนาทำร้ายใครทั้งสิ้น เป็นเพียงอุบัติเหตุจากความไม่ระมัดระวัง', sfx:'dragon-studio-whoosh-effect-382717.mp3' },
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ศาลฟังทั้งสองฝ่ายแล้ว ท่านผู้ตัดสิน — ท่านเห็นว่าข้อกล่าวหาใดตรงตามหลักกฎหมายที่สุด?' },
       { type:'question', qIndex: 0 },
       { type:'dialogue', speaker:'prosecutor', pose:'confident', caption:'อัยการ: (พยักหน้า) ...ศาลเห็นตรงกับข้อกล่าวหาหลักของเราว่าจำเลยต้องรับผิด แม้จะปรับบทเป็นมาตรา 300 แทนก็ตาม' },
       { type:'dialogue', speaker:'defense_lawyer', pose:'sad', caption:'ทนายจำเลย: (ถอนหายใจ) ...ข้อต่อสู้เรื่องไม่มีเจตนาฟังไม่ขึ้น ศาลยังเห็นว่าลูกความดิฉันประมาท' },
+      { type:'dialogue', speaker:'female_influencer', pose:'sad', caption:'นางดำ: (ถอนหายใจ) ...งั้นดิฉันขอโทษนะคะ ไม่ได้ตั้งใจจริง ๆ', bgm:'defendant' },
 
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ข้อหาต่อไป: นายแดงแอบหยิบแหวนทองของมารดาไปจำนำเพื่อเอาเงินมาเที่ยว' },
+      { type:'dialogue', speaker:'male_teen', pose:'sad', caption:'นายแดง: ผมแค่... อยากพา นส.เหลือง ไปเที่ยวดูหมูเด้งด้วยกันครับ ตั้งใจจะเอาไปไถ่คืนก่อนแม่รู้', bgm:'defendant' },
       { type:'dialogue', speaker:'prosecutor', pose:'confident', caption:'อัยการ: จำเลยลักทรัพย์ตามมาตรา 334 ต้องรับโทษเต็มตามกฎหมาย!' },
-      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! แหวนวงนี้เป็นของมารดาลูกความดิฉันเอง กฎหมายยกเว้นโทษให้กรณีเช่นนี้ไว้ชัดเจน' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! แหวนวงนี้เป็นของมารดาลูกความดิฉันเอง กฎหมายยกเว้นโทษให้กรณีเช่นนี้ไว้ชัดเจน', sfx:'dragon-studio-whoosh-effect-382717.mp3' },
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ท่านผู้ตัดสิน — คดีนี้ควรจบลงอย่างไร?' },
       { type:'question', qIndex: 1 },
       { type:'dialogue', speaker:'prosecutor', pose:'neutral', caption:'อัยการ: ครบองค์ประกอบความผิดจริง แต่ยอมรับว่ากฎหมายยกเว้นโทษกรณีทรัพย์ของบุพการีไว้ชัดเจน' },
       { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: ใช่ค่ะ — ลูกความดิฉันยังคง "มีความผิด" แต่ไม่ต้องรับ "โทษ" ตามมาตรา 71 นี่คือความแตกต่างที่สำคัญ' },
 
       { type:'dialogue', speaker:'judge', pose:'sad', caption:'ข้อหาที่หนักที่สุด: นายแดงแย่งขาตั้งกล้องจากนางดำมากระหน่ำตี จนนางดำบาดเจ็บที่แขนและขา สามวันต่อมานางดำเสียชีวิตเพราะแผลติดเชื้อ — แต่เธอปฏิเสธไปหาหมอ เลือกดื่ม/อาบน้ำมนต์แทน' },
+      { type:'dialogue', speaker:'male_teen', pose:'shocked', caption:'นายแดง: ผม... ผมแค่โมโหที่เขาทำ นส.เหลือง เจ็บครับ ไม่คิดว่าจะบานปลายจนถึงขั้นนี้... (เสียงสั่น)', bgm:'defendant' },
       { type:'dialogue', speaker:'prosecutor', pose:'angry', caption:'อัยการ: ผู้ตายเสียชีวิตจากบาดแผลที่จำเลยเป็นผู้ก่อ จำเลยต้องรับผิดฐานทำร้ายร่างกายจนเป็นเหตุถึงแก่ความตายตามมาตรา 290!' },
-      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! ผู้ตายเองเป็นผู้ปฏิเสธการรักษาทางการแพทย์ นี่คือเหตุแทรกแซงที่ตัดความสัมพันธ์ระหว่างการกระทำกับผลแห่งความตาย' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! ผู้ตายเองเป็นผู้ปฏิเสธการรักษาทางการแพทย์ นี่คือเหตุแทรกแซงที่ตัดความสัมพันธ์ระหว่างการกระทำกับผลแห่งความตาย', sfx:'dragon-studio-whoosh-effect-382717.mp3' },
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ท่านผู้ตัดสิน — จำเลยต้องรับผิดในความตายนี้หรือไม่?' },
       { type:'question', qIndex: 2 },
       { type:'dialogue', speaker:'prosecutor', pose:'shocked', caption:'อัยการ: (ถอนหายใจ) ...รับทราบคำพิพากษา' },
@@ -766,17 +773,20 @@ const SCENARIOS = [
 
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'กลับเข้าสู่การพิจารณา — เหตุการณ์ต่อไป: นายแดงเองถูกผลักตกบ่อหมูเด้งไปด้วย ถูกหมูเด้ง (ลูก) งับขา และมีแผลถลอกตามตัว' },
       { type:'dialogue', speaker:'prosecutor', pose:'neutral', caption:'อัยการ: จำเลยเป็นต้นเหตุของเหตุการณ์วุ่นวายทั้งหมดคืนนี้ ต้องรับผิดด้วยหรือไม่?' },
-      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! ตอนนี้ลูกความดิฉันเป็นฝ่ายถูกกระทำต่างหาก ไม่ใช่ผู้กระทำต่อผู้ใดเลย' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! ตอนนี้ลูกความดิฉันเป็นฝ่ายถูกกระทำต่างหาก ไม่ใช่ผู้กระทำต่อผู้ใดเลย', sfx:'dragon-studio-whoosh-effect-382717.mp3' },
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ท่านผู้ตัดสิน — เหตุการณ์ตอนนี้ นายแดงมีความผิดหรือไม่?' },
       { type:'question', qIndex: 3 },
 
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ข้อหาสุดท้าย: นายเขียว แฟนคลับที่จำนางดำได้ วิ่งเข้าไปผลักนายแดงเพื่อหยุดไม่ให้ทำร้ายนางดำต่อ ทำให้นายแดงตกบ่อหมูเด้งไปอีกคนและถูกกัด' },
+      { type:'dialogue', speaker:'male_fan', pose:'confident', caption:'นายเขียว: ผมเห็นเขากำลังจะทำร้ายนางดำซ้ำ เลยรีบเข้าไปช่วยครับ ตอนนั้นคิดอย่างเดียวว่าต้องหยุดให้ได้', bgm:'defendant' },
       { type:'dialogue', speaker:'prosecutor', pose:'confident', caption:'อัยการ: จำเลยผลักผู้อื่นจนได้รับบาดเจ็บ ต้องมีความผิดฐานทำร้ายร่างกายตามมาตรา 295!' },
-      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! ลูกความดิฉันกระทำไปเพื่อป้องกันผู้อื่นจากภยันตรายที่ใกล้จะถึงโดยชอบด้วยกฎหมายเท่านั้น' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: คัดค้าน! ลูกความดิฉันกระทำไปเพื่อป้องกันผู้อื่นจากภยันตรายที่ใกล้จะถึงโดยชอบด้วยกฎหมายเท่านั้น', sfx:'dragon-studio-whoosh-effect-382717.mp3' },
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ท่านผู้ตัดสิน — นี่คือการป้องกันโดยชอบ หรือความผิดฐานทำร้ายร่างกาย?' },
       { type:'question', qIndex: 4 },
       { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายจำเลย: ยุติธรรมสมกับที่รอคอย!' },
+      { type:'dialogue', speaker:'male_fan', pose:'confident', caption:'นายเขียว: ขอบคุณครับ ที่ท่านให้ความยุติธรรม', bgm:'defendant' },
 
+      { type:'dialogue', speaker:'court_clerk', pose:'neutral', caption:'เสมียนศาล: ศาลได้พิจารณาครบทุกข้อกล่าวหาแล้วเจ้าค่ะ ขอบคุณทุกฝ่ายที่มาให้ปากคำในวันนี้' },
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ศาลได้พิจารณาครบทุกข้อกล่าวหาแล้ว ขอบคุณทุกฝ่ายที่มาให้ปากคำในวันนี้ — ปิดการพิจารณาคดี' },
     ],
   },
@@ -1624,13 +1634,32 @@ function startScenario(scenario){
   render();
 }
 
-/* ---------- SCENARIO BGM (switches per screen/moment) ---------- */
+/* ---------- SCENARIO BGM (Ace Attorney-style: one leitmotif per character) ---------- */
 const BGM_TRACKS = {
-  picker:  'games/sound/music/moodmode-level-vii-258783.mp3',        // เข้าไปหมวดเกม
-  scene:   'games/sound/music/nojisuma-a-109881.mp3',                 // เล่าคดี
-  clerk:   'games/sound/music/maksymmalko-funny-cartoon-music-532611.mp3', // เสมียนศาลออกมา
-  verdict: 'games/sound/music/omarfarukjafree-shadows-beneath-horror-bgm-429490.mp3', // ศาลจะตัดสิน
+  picker:           'games/sound/music/moodmode-level-vii-258783.mp3',                 // เข้าไปหมวดเกม
+  scene:            'games/sound/music/nojisuma-a-109881.mp3',                          // เล่าคดี
+  judge:            'games/sound/music/omarfarukjafree-shadows-beneath-horror-bgm-429490.mp3',
+  prosecutor:       'games/sound/music/omarfarukjafree-dread-signal-horror-bgm-429495.mp3',
+  defense_lawyer:   'games/sound/music/excite.mp3',
+  plaintiff_lawyer: 'games/sound/music/alexzavesa-calm-inspiring-piano-logo-short-version-518990.mp3',
+  court_clerk:      'games/sound/music/maksymmalko-funny-cartoon-music-532611.mp3',
+  courtroom_cat:    'games/sound/music/monume-cartoon-cartoon-music-576983.mp3',
+  defendant:        'games/sound/music/koto-japan-soundtrack-versi-night-scene-_-sad-anime-1-470697.mp3',
+  plaintiff:        'games/sound/music/nojisuma-impatience-113686.mp3',
+  witness:          'games/sound/music/alexis_gaming_cam-alerte-346112.mp3',
+  verdict_moment:   'games/sound/music/universfield-horror-background-atmosphere-156462.mp3', // ศาลจะตัดสิน (คำถาม)
 };
+/* Resolve which track a trial dialogue entry should play:
+   1) an explicit entry.bgm override (needed when `speaker` is a case-specific
+      character id like 'male_teen' speaking as the defendant/plaintiff — the
+      engine can't guess their court role, so the content tags it directly)
+   2) a direct court-role match (judge/prosecutor/defense_lawyer/...)
+   3) fall back to 'judge' so an untagged speaker never leaves bgm silent */
+function bgmKeyFor(entry){
+  if (entry.bgm) return entry.bgm;
+  if (BGM_TRACKS[entry.speaker]) return entry.speaker;
+  return 'judge';
+}
 function playScenarioBgm(key){
   const el = document.getElementById('scenario-bgm');
   if (!el) return;
@@ -1647,6 +1676,14 @@ function stopScenarioBgm(){
   if (!el) return;
   el.pause();
   el.dataset.trackKey = '';
+}
+function playTrialSfx(entry){
+  const sfxAudio = document.getElementById('beat-sfx');
+  if (sfxAudio && entry.sfx && !isSoundMuted()) {
+    sfxAudio.src = 'games/sound/effect/' + entry.sfx;
+    sfxAudio.volume = 0.55;
+    sfxAudio.play().catch(() => {});
+  }
 }
 
 function render(){
@@ -1712,7 +1749,6 @@ function renderScene(){
       <audio id="funeral-audio" preload="none">
         <source src="games/sound/music/freesound_community-funeral-music-close-23823.mp3" type="audio/mpeg">
       </audio>
-      <audio id="beat-sfx" preload="none"></audio>
       <div class="stage-actors">
         <div id="scene-portrait"></div>
         ${Object.keys(s.characters).map(id => `
@@ -1913,7 +1949,7 @@ function renderTrial(){
 function renderTrialDialogue(entry){
   const s = state.scenario;
   const isLast = state.trialIndex === s.trial.length - 1;
-  playScenarioBgm(entry.speaker === 'court_clerk' ? 'clerk' : 'verdict');
+  playScenarioBgm(bgmKeyFor(entry));
   root.innerHTML = `
     <div class="scene-topbar">
       <span>ห้องพิจารณาคดี</span>
@@ -1929,11 +1965,12 @@ function renderTrialDialogue(entry){
     </div>
     <button type="button" class="big-btn" onclick="nextTrialStep()" onmouseenter="playHoverSound()">${isLast ? 'ดูผลสรุป ›' : 'ถัดไป ›'}</button>
   `;
+  playTrialSfx(entry);
 }
 function renderTrialQuestion(qIndex){
   const s = state.scenario;
   const q = s.questions[qIndex];
-  playScenarioBgm('verdict');
+  playScenarioBgm('verdict_moment');
   root.innerHTML = `
     <div class="scene-topbar">
       <span>ห้องพิจารณาคดี</span>
@@ -1990,7 +2027,9 @@ function answer(i){
     </div>
   `;
   document.getElementById('q-next-btn').style.display = 'block';
-  playHoverSound();
+  playTrialSfx({ sfx: i === correctIndex
+    ? 'alexzavesa-calm-elegant-logo-519008.mp3'
+    : 'universfield-funny-rimshot-250961.mp3' });
 }
 function nextTrialStep(){
   const s = state.scenario;
