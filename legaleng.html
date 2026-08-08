@@ -262,25 +262,38 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
   <header class="page-head">
     <div class="crest">🌐</div>
     <h1>ภาษาอังกฤษของนักกฎหมาย</h1>
-    <p class="subtitle">Legal English · คำศัพท์+ตัวอย่างประโยค 6 หมวด จากตำราและข้อสอบเก่า</p>
+    <p class="subtitle">Legal English · เนื้อหาโดยรวม · สรุปรายครั้ง · ข้อสอบเก่า</p>
   </header>
 
   <div class="notice">⚠️ สรุปโดย AI จากตำรา Legal English และข้อสอบเก่า — โปรดตรวจสอบกับคำบรรยายจริงหรืออาจารย์ผู้สอนก่อนใช้อ้างอิง</div>
 
-  <div class="mode-panel active" id="panel-read">
-    <div class="tts-bar" id="tts-bar" style="display:none">
-      <button id="tts-play" class="tts-btn" title="อ่านออกเสียงบรรยายที่เปิดอยู่"><span class="tts-ico">▶</span> อ่านออกเสียง</button>
-      <button id="tts-pause" class="tts-btn" title="หยุดชั่วคราว/เล่นต่อ" style="display:none"><span class="tts-ico">⏸</span> หยุดชั่วคราว</button>
-      <button id="tts-stop" class="tts-btn tts-btn-ghost" title="หยุด" style="display:none"><span class="tts-ico">■</span> หยุด</button>
-      <label class="tts-rate">ความเร็ว <select id="tts-rate">
-        <option value="0.8">0.8×</option>
-        <option value="1" selected>1.0×</option>
-        <option value="1.2">1.2×</option>
-        <option value="1.5">1.5×</option>
-      </select></label>
-      <span class="tts-hint">เปิดบรรยายครั้งที่ต้องการก่อน แล้วกด "อ่านออกเสียง"</span>
-    </div>
-    <div class="lecture-list" id="lectureList"></div>
+  <div class="mode-tabs">
+    <button type="button" class="mode-tab active" data-mode="content" onclick="switchMode('content')" onmouseenter="playHoverSound()">📖 เนื้อหาโดยรวม</button>
+    <button type="button" class="mode-tab" data-mode="summary" onclick="switchMode('summary')" onmouseenter="playHoverSound()">🗓️ สรุปรายครั้ง</button>
+    <button type="button" class="mode-tab" data-mode="exam" onclick="switchMode('exam')" onmouseenter="playHoverSound()">📝 ข้อสอบเก่า</button>
+  </div>
+
+  <div class="tts-bar" id="tts-bar" style="display:none">
+    <button id="tts-play" class="tts-btn" title="อ่านออกเสียงบรรยายที่เปิดอยู่"><span class="tts-ico">▶</span> อ่านออกเสียง</button>
+    <button id="tts-pause" class="tts-btn" title="หยุดชั่วคราว/เล่นต่อ" style="display:none"><span class="tts-ico">⏸</span> หยุดชั่วคราว</button>
+    <button id="tts-stop" class="tts-btn tts-btn-ghost" title="หยุด" style="display:none"><span class="tts-ico">■</span> หยุด</button>
+    <label class="tts-rate">ความเร็ว <select id="tts-rate">
+      <option value="0.8">0.8×</option>
+      <option value="1" selected>1.0×</option>
+      <option value="1.2">1.2×</option>
+      <option value="1.5">1.5×</option>
+    </select></label>
+    <span class="tts-hint">เปิดบรรยายครั้งที่ต้องการก่อน แล้วกด "อ่านออกเสียง"</span>
+  </div>
+
+  <div class="mode-panel active" id="panel-content">
+    <div class="lecture-list" id="lectureList-content"></div>
+  </div>
+  <div class="mode-panel" id="panel-summary">
+    <div class="lecture-list" id="lectureList-summary"></div>
+  </div>
+  <div class="mode-panel" id="panel-exam">
+    <div class="lecture-list" id="lectureList-exam"></div>
   </div>
 
   <div class="coffee-widget">
@@ -314,7 +327,7 @@ function playHoverSound(){
 /* ================================================================
    โหมดอ่าน — สรุปเนื้อหาบรรยาย 20 ครั้ง แบ่ง 4 ส่วนตามหัวข้อหลัก
    ================================================================ */
-const LECTURES = [
+const LECTURES_CONTENT = [
   { n: 1, title: "Types of Laws & Procedural Law — ประเภทของกฎหมาย", text:
 `จากหนังสือ "LEGAL ENGLISH ภาษาอังกฤษกฎหมาย" โดย สรวิศ ลิมปรังษี ในหัวข้อ Types of Laws
 (ประเภทของกฎหมาย) และ Procedural Law (กฎหมายวิธีสบัญญัติ)
@@ -751,144 +764,11 @@ aggressor when... such conduct is necessary to defend himself..."
 *   บริบท:
 การกระทำของผู้ประทุษร้ายที่แสดงให้เห็นถึงเจตนาที่จะทำอันตรายต่อชีวิตหรือได้รับอันตรายสาหัส
 ทำให้เกิดความจำเป็นต้องกระทำการป้องกันเพื่อรักษาชีวิตของตนเอง` },
-  { n: 5, title: "คำศัพท์จากข้อสอบเก่า น.270 (กลุ่ม 1)", text:
-`จากข้อสอบปลายภาควิชา น.270 ภาษาอังกฤษทางกฎหมาย (กลุ่ม 1)
-มีคำศัพท์ที่ออกสอบในส่วนข้อสอบอัตนัยทั้งหมด 20 คำ แบ่งเป็นการแปลจากภาษาอังกฤษเป็นภาษาไทย 10 คำ
-และแปลจากภาษาไทยเป็นภาษาอังกฤษ 10 คำ
 
-สามารถรวบรวมและจัดทำเป็นตารางพร้อมคำแปลทางกฎหมายที่ถูกต้องได้ดังนี้ครับ
+];
 
-ส่วนที่ 1: การแปลคำศัพท์จากภาษาอังกฤษเป็นภาษาไทย (English to Thai)
-
-| ข้อ | คำศัพท์ภาษาอังกฤษ | คำแปลภาษาไทยทางกฎหมาย |
-| :--- | :--- | :--- |
-| 1 | Countersignature | การลงนามกำกับ / การลงนามร่วม |
-| 2 | Hearing | การพิจารณาคดี / การไต่สวน / การนั่งพิจารณา |
-| 3 | Uphold | พิพากษายืน / ยืนตาม (เช่น ศาลสูงยืนตามคำพิพากษาศาลล่าง) |
-| 4 | Repeal | ยกเลิก (ใช้กับกฎหมาย) / เพิกถอน |
-| 5 | Recital | ข้อความเบื้องต้น / อารัมภบท (ในสัญญา) |
-| 6 | Negotiation | การเจรจา / การเจรจาต่อรอง |
-| 7 | Insolvency | การมีหนี้สินล้นพ้นตัว / ภาวะล้มละลาย |
-| 8 | Award | คำชี้ขาด (ของอนุญาโตตุลาการ) / ค่าเสียหายชดเชย |
-| 9 | Inequitable | ที่ไม่เป็นธรรม / ที่ไม่ยุติธรรม |
-| 10 | Malicious | โดยมุ่งร้าย / โดยมีเจตนาร้าย / โดยคิดร้าย |
-
-<br>
-
-ส่วนที่ 2: การแปลคำศัพท์จากภาษาไทยเป็นภาษาอังกฤษ (Thai to English)
-
-| ข้อ | คำศัพท์ภาษาไทย | คำแปลภาษาอังกฤษทางกฎหมาย |
-| :--- | :--- | :--- |
-| 11 | คำมั่น | Promise / Firm offer / Pledge |
-| 12 | ข้อหา | Charge / Offense / Count |
-| 13 | จดทะเบียนเป็นนิติบุคคล | Incorporate / Register as a juristic person /
-Registration of incorporation |
-| 14 | การยื่นข้อพิพาทให้ผู้เชี่ยวชาญวินิจฉัย | Expert determination |
-| 15 | บังคับใช้ | Enforce / Execute |
-| 16 | ประจักษ์พยาน | Eyewitness / Direct witness |
-| 17 | แบบพิธี | Formality / Formalities |
-| 18 | การฟ้องร้อง, การต่อสู้คดี | Litigation / Proceeding / Lawsuit |
-| 19 | การประนอมข้อพิพาท | Compromise / Conciliation / Mediation |
-| 20 | ยื่นฟ้อง | File a lawsuit / File a suit / File a complaint / Sue |
-
-*(หมายเหตุ:
-คำแปลข้างต้นอ้างอิงจากหลักการแปลความหมายทางกฎหมายสากลและคำศัพท์ที่ปรากฏในหนังสือ LEGAL
-ENGLISH สำหรับบางคำที่สามารถแปลได้หลายความหมาย จะขึ้นอยู่กับบริบทการนำไปใช้งานในเอกสารนั้นๆ
-ครับ)*` },
-  { n: 6, title: "โครงสร้างประโยคแปลกฎหมายจากข้อสอบเก่า น.270 (กลุ่ม 2)", text:
-`จากข้อสอบปลายภาควิชา น.270 ภาษาอังกฤษทางกฎหมาย (กลุ่ม 2)
-ซึ่งเน้นการแปลระดับประโยคหรือข้อความ (Passage) สามารถสรุปคำศัพท์สำคัญ
-(อ้างอิงจากคำศัพท์ท้ายข้อสอบ) และโครงสร้างประโยคที่ใช้บ่อยแบ่งตามบริบทต่างๆ ได้ดังนี้ครับ
-
-1. บริบทระบบกฎหมายและองค์กรศาล (Legal System / Court Organization)
-ในส่วนนี้เป็นข้อสอบแปลจากภาษาไทยเป็นภาษาอังกฤษ
-โดยเน้นที่โครงสร้างของระบบกฎหมายลายลักษณ์อักษรและการจัดตั้งองค์กรศาล
-
-คำศัพท์สำคัญที่ให้มาในข้อสอบ:
-*   Source: บ่อเกิด / ที่มา
-*   Juristic method: นิติวิธี / วิธีใช้กฎหมาย
-*   Tradition: จารีต / ประเพณี / ขนบธรรมเนียม
-*   Provision: บทบัญญัติ / ข้อกำหนด
-*   Applicable: ปรับใช้ได้ / เหมาะสม
-*   Adjudicate: พิจารณาวินิจฉัย / ตัดสิน / ชี้ขาด
-*   Constitution: รัฐธรรมนูญ
-*   Directly: โดยตรง
-*   First Instance: ศาลชั้นต้น (Court of First Instance)
-*   Appellate: เกี่ยวกับอุทธรณ์ / ชั้นอุทธรณ์
-
-ตัวอย่างโครงสร้างประโยค (ไทยเป็นอังกฤษ):
-*   ประโยค: "ประเทศไทยใช้ระบบกฎหมายลายลักษณ์อักษรหรือระบบประมวลกฎหมาย ดังนั้น
-ประมวลกฎหมายทั้งหลายจึงเป็นบ่อเกิดหลักของกฎหมาย"
-    *   *โครงสร้างหลัก:* ...uses the civil law system... therefore, codes are the
-main sources of law.
-*   ประโยค: "...บทบัญญัติดังกล่าวก็เป็นนิติวิธีพื้นฐานที่ปรับใช้ได้กับทุกกฎหมายทุกสาขา"
-    *   *โครงสร้างหลัก:* ...such provision is a basic juristic method
-that is applicable to all branches of law.
-*   ประโยค:
-"ศาลฎีกามีอำนาจพิจารณาวินิจฉัยคดีทั้งหลายโดยตรงเฉพาะที่กำหนดโดยรัฐธรรมนูญ..."
-    *   *โครงสร้างหลัก:* The Supreme Court has the power to adjudicate cases
-directly only as prescribed by the Constitution...
-
----
-
-2. บริบทกฎหมายอาญา (Criminal Law)
-ในส่วนนี้เป็นข้อสอบแปลจากภาษาอังกฤษเป็นภาษาไทย เน้นรูปประโยคเกี่ยวกับการดำเนินคดีอาญา ข้อต่อสู้
-และการลงโทษ
-
-คำศัพท์สำคัญที่ให้มาในข้อสอบ:
-*   Defendant: จำเลย
-*   Try: ดำเนินคดี / พิจารณาคดี
-*   Murder: ฆาตกรรม / การฆ่า
-*   Detain: กัก / คุมขัง
-*   Guilty: ผิดจริง (เช่น Pleaded not guilty = ให้การปฏิเสธข้อกล่าวหา)
-*   Claim: อ้าง / ยืนยัน
-*   Affair: เรื่องชู้
-*   Bail: ประกันตัว / เงินประกัน
-*   Imprisonment: จำคุก
-
-ตัวอย่างโครงสร้างประโยค (อังกฤษเป็นไทย):
-*   ประโยค: "John, the defendant, was tried for the murder of
-his wife."
-    *   *คำแปล:* จอห์น จำเลย ถูกดำเนินคดีในข้อหาฆาตกรรมภรรยาของเขา
-*   ประโยค: "Initially, he pleaded not guilty, claiming that he
-shot his wife with a gun in self-defense."
-    *   *คำแปล:* ในตอนแรก เขาให้การปฏิเสธ (ว่าไม่ได้กระทำผิดจริง)
-โดยอ้างว่าเขายิงภรรยาด้วยปืนเป็นการป้องกันตัว
-*   ประโยค: "He was then held without bail until the Court read the
-judgement, sentencing him to life imprisonment."
-    *   *คำแปล:* เขาจึงถูกคุมขังโดยไม่ให้ประกันตัวจนกระทั่งศาลอ่านคำพิพากษา
-ตัดสินลงโทษจำคุกเขาตลอดชีวิต
-
----
-
-3. บริบทกฎหมายสัญญา (Contract Law)
-ในส่วนนี้เป็นข้อสอบแปลจากภาษาอังกฤษเป็นภาษาไทย เน้นการผิดสัญญาและการเรียกค่าเสียหายชดเชย
-
-คำศัพท์สำคัญที่ให้มาในข้อสอบ:
-*   Performance: การชำระหนี้ / การปฏิบัติตามสัญญา
-*   Failure: ความล้มเหลว / การไม่ปฏิบัติ
-*   Debtor: ลูกหนี้
-*   Injure: ทำให้บาดเจ็บ / ทำให้เสียหาย (Injured party = ฝ่ายที่ได้รับความเสียหาย)
-*   Remedies: การเยียวยา / วิธีบังคับสิทธิเยียวยา
-*   Pecuniary: เป็นตัวเงิน
-*   Compensation: ค่าชดเชย / ค่าตอบแทน / ค่าสินไหมทดแทน
-*   Loss: ความสูญเสีย / ความเสียหาย
-*   Benefits: ประโยชน์ / สิทธิพิเศษ
-
-ตัวอย่างโครงสร้างประโยค (อังกฤษเป็นไทย):
-*   ประโยค: "If one of the parties does not fulfill her obligation in the
-contract, that failure of performance is called a breach of contract."
-    *   *คำแปล:* หากคู่สัญญาฝ่ายใดฝ่ายหนึ่งไม่ปฏิบัติตามหน้าที่ (หนี้) ของตนในสัญญา
-การไม่ปฏิบัติตามการชำระหนี้นั้นเรียกว่าการผิดสัญญา
-*   ประโยค: "Consequently, an injured party could seek remedies
-from the debtor."
-    *   *คำแปล:* ดังนั้น (ซึ่งเป็นผลสืบเนื่องมา)
-ฝ่ายที่ได้รับความเสียหายจึงสามารถแสวงหาการเยียวยาจากลูกหนี้ได้
-*   ประโยค: "The most common remedy for nonfulfillment of the contract
-is to claim pecuniary compensation for normal loss..."
-    *   *คำแปล:* วิธีการเยียวยาที่พบได้ทั่วไปที่สุดสำหรับการไม่ปฏิบัติตามสัญญา
-คือการเรียกร้องค่าชดเชยเป็นตัวเงินสำหรับความเสียหายปกติ...` },
-  { n: 7, title: "Legal Communication Skills & Fundamental Grammar — ทักษะสื่อสารทางกฎหมาย/ไวยากรณ์พื้นฐาน", text:
+const LECTURES_SUMMARY = [
+  { n: 1, title: "Legal Communication Skills & Fundamental Grammar — ทักษะสื่อสารทางกฎหมาย/ไวยากรณ์พื้นฐาน", text:
 `จากคาบเรียนแรกของรายวิชา ซึ่งปูพื้นฐานสำหรับการเรียนภาษาอังกฤษกฎหมายตลอดภาคเรียน
 แบ่งเป็น 2 ส่วนหลัก คือ ภาพรวมทักษะการสื่อสารที่นักกฎหมายควรพัฒนา
 และการทบทวนไวยากรณ์พื้นฐานเรื่อง Nouns กับ Articles ที่จะใช้ต่อยอดในการอ่าน/เขียนเอกสารกฎหมาย
@@ -985,6 +865,147 @@ law." (ผู้พิพากษาตัดสินว่ากรรมก�
 *(หมายเหตุ: สรุปจากคำบรรยายคาบแรกของรายวิชา ผ่าน NotebookLM — โปรดตรวจสอบกับคำบรรยายจริงหรืออาจารย์ผู้สอนก่อนใช้อ้างอิง)*` }
 ];
 
+const LECTURES_EXAM = [
+  { n: 1, title: "คำศัพท์จากข้อสอบเก่า น.270 (กลุ่ม 1)", text:
+`จากข้อสอบปลายภาควิชา น.270 ภาษาอังกฤษทางกฎหมาย (กลุ่ม 1)
+มีคำศัพท์ที่ออกสอบในส่วนข้อสอบอัตนัยทั้งหมด 20 คำ แบ่งเป็นการแปลจากภาษาอังกฤษเป็นภาษาไทย 10 คำ
+และแปลจากภาษาไทยเป็นภาษาอังกฤษ 10 คำ
+
+สามารถรวบรวมและจัดทำเป็นตารางพร้อมคำแปลทางกฎหมายที่ถูกต้องได้ดังนี้ครับ
+
+ส่วนที่ 1: การแปลคำศัพท์จากภาษาอังกฤษเป็นภาษาไทย (English to Thai)
+
+| ข้อ | คำศัพท์ภาษาอังกฤษ | คำแปลภาษาไทยทางกฎหมาย |
+| :--- | :--- | :--- |
+| 1 | Countersignature | การลงนามกำกับ / การลงนามร่วม |
+| 2 | Hearing | การพิจารณาคดี / การไต่สวน / การนั่งพิจารณา |
+| 3 | Uphold | พิพากษายืน / ยืนตาม (เช่น ศาลสูงยืนตามคำพิพากษาศาลล่าง) |
+| 4 | Repeal | ยกเลิก (ใช้กับกฎหมาย) / เพิกถอน |
+| 5 | Recital | ข้อความเบื้องต้น / อารัมภบท (ในสัญญา) |
+| 6 | Negotiation | การเจรจา / การเจรจาต่อรอง |
+| 7 | Insolvency | การมีหนี้สินล้นพ้นตัว / ภาวะล้มละลาย |
+| 8 | Award | คำชี้ขาด (ของอนุญาโตตุลาการ) / ค่าเสียหายชดเชย |
+| 9 | Inequitable | ที่ไม่เป็นธรรม / ที่ไม่ยุติธรรม |
+| 10 | Malicious | โดยมุ่งร้าย / โดยมีเจตนาร้าย / โดยคิดร้าย |
+
+<br>
+
+ส่วนที่ 2: การแปลคำศัพท์จากภาษาไทยเป็นภาษาอังกฤษ (Thai to English)
+
+| ข้อ | คำศัพท์ภาษาไทย | คำแปลภาษาอังกฤษทางกฎหมาย |
+| :--- | :--- | :--- |
+| 11 | คำมั่น | Promise / Firm offer / Pledge |
+| 12 | ข้อหา | Charge / Offense / Count |
+| 13 | จดทะเบียนเป็นนิติบุคคล | Incorporate / Register as a juristic person /
+Registration of incorporation |
+| 14 | การยื่นข้อพิพาทให้ผู้เชี่ยวชาญวินิจฉัย | Expert determination |
+| 15 | บังคับใช้ | Enforce / Execute |
+| 16 | ประจักษ์พยาน | Eyewitness / Direct witness |
+| 17 | แบบพิธี | Formality / Formalities |
+| 18 | การฟ้องร้อง, การต่อสู้คดี | Litigation / Proceeding / Lawsuit |
+| 19 | การประนอมข้อพิพาท | Compromise / Conciliation / Mediation |
+| 20 | ยื่นฟ้อง | File a lawsuit / File a suit / File a complaint / Sue |
+
+*(หมายเหตุ:
+คำแปลข้างต้นอ้างอิงจากหลักการแปลความหมายทางกฎหมายสากลและคำศัพท์ที่ปรากฏในหนังสือ LEGAL
+ENGLISH สำหรับบางคำที่สามารถแปลได้หลายความหมาย จะขึ้นอยู่กับบริบทการนำไปใช้งานในเอกสารนั้นๆ
+ครับ)*` },
+  { n: 2, title: "โครงสร้างประโยคแปลกฎหมายจากข้อสอบเก่า น.270 (กลุ่ม 2)", text:
+`จากข้อสอบปลายภาควิชา น.270 ภาษาอังกฤษทางกฎหมาย (กลุ่ม 2)
+ซึ่งเน้นการแปลระดับประโยคหรือข้อความ (Passage) สามารถสรุปคำศัพท์สำคัญ
+(อ้างอิงจากคำศัพท์ท้ายข้อสอบ) และโครงสร้างประโยคที่ใช้บ่อยแบ่งตามบริบทต่างๆ ได้ดังนี้ครับ
+
+1. บริบทระบบกฎหมายและองค์กรศาล (Legal System / Court Organization)
+ในส่วนนี้เป็นข้อสอบแปลจากภาษาไทยเป็นภาษาอังกฤษ
+โดยเน้นที่โครงสร้างของระบบกฎหมายลายลักษณ์อักษรและการจัดตั้งองค์กรศาล
+
+คำศัพท์สำคัญที่ให้มาในข้อสอบ:
+*   Source: บ่อเกิด / ที่มา
+*   Juristic method: นิติวิธี / วิธีใช้กฎหมาย
+*   Tradition: จารีต / ประเพณี / ขนบธรรมเนียม
+*   Provision: บทบัญญัติ / ข้อกำหนด
+*   Applicable: ปรับใช้ได้ / เหมาะสม
+*   Adjudicate: พิจารณาวินิจฉัย / ตัดสิน / ชี้ขาด
+*   Constitution: รัฐธรรมนูญ
+*   Directly: โดยตรง
+*   First Instance: ศาลชั้นต้น (Court of First Instance)
+*   Appellate: เกี่ยวกับอุทธรณ์ / ชั้นอุทธรณ์
+
+ตัวอย่างโครงสร้างประโยค (ไทยเป็นอังกฤษ):
+*   ประโยค: "ประเทศไทยใช้ระบบกฎหมายลายลักษณ์อักษรหรือระบบประมวลกฎหมาย ดังนั้น
+ประมวลกฎหมายทั้งหลายจึงเป็นบ่อเกิดหลักของกฎหมาย"
+    *   *โครงสร้างหลัก:* ...uses the civil law system... therefore, codes are the
+main sources of law.
+*   ประโยค: "...บทบัญญัติดังกล่าวก็เป็นนิติวิธีพื้นฐานที่ปรับใช้ได้กับทุกกฎหมายทุกสาขา"
+    *   *โครงสร้างหลัก:* ...such provision is a basic juristic method
+that is applicable to all branches of law.
+*   ประโยค:
+"ศาลฎีกามีอำนาจพิจารณาวินิจฉัยคดีทั้งหลายโดยตรงเฉพาะที่กำหนดโดยรัฐธรรมนูญ..."
+    *   *โครงสร้างหลัก:* The Supreme Court has the power to adjudicate cases
+directly only as prescribed by the Constitution...
+
+---
+
+2. บริบทกฎหมายอาญา (Criminal Law)
+ในส่วนนี้เป็นข้อสอบแปลจากภาษาอังกฤษเป็นภาษาไทย เน้นรูปประโยคเกี่ยวกับการดำเนินคดีอาญา ข้อต่อสู้
+และการลงโทษ
+
+คำศัพท์สำคัญที่ให้มาในข้อสอบ:
+*   Defendant: จำเลย
+*   Try: ดำเนินคดี / พิจารณาคดี
+*   Murder: ฆาตกรรม / การฆ่า
+*   Detain: กัก / คุมขัง
+*   Guilty: ผิดจริง (เช่น Pleaded not guilty = ให้การปฏิเสธข้อกล่าวหา)
+*   Claim: อ้าง / ยืนยัน
+*   Affair: เรื่องชู้
+*   Bail: ประกันตัว / เงินประกัน
+*   Imprisonment: จำคุก
+
+ตัวอย่างโครงสร้างประโยค (อังกฤษเป็นไทย):
+*   ประโยค: "John, the defendant, was tried for the murder of
+his wife."
+    *   *คำแปล:* จอห์น จำเลย ถูกดำเนินคดีในข้อหาฆาตกรรมภรรยาของเขา
+*   ประโยค: "Initially, he pleaded not guilty, claiming that he
+shot his wife with a gun in self-defense."
+    *   *คำแปล:* ในตอนแรก เขาให้การปฏิเสธ (ว่าไม่ได้กระทำผิดจริง)
+โดยอ้างว่าเขายิงภรรยาด้วยปืนเป็นการป้องกันตัว
+*   ประโยค: "He was then held without bail until the Court read the
+judgement, sentencing him to life imprisonment."
+    *   *คำแปล:* เขาจึงถูกคุมขังโดยไม่ให้ประกันตัวจนกระทั่งศาลอ่านคำพิพากษา
+ตัดสินลงโทษจำคุกเขาตลอดชีวิต
+
+---
+
+3. บริบทกฎหมายสัญญา (Contract Law)
+ในส่วนนี้เป็นข้อสอบแปลจากภาษาอังกฤษเป็นภาษาไทย เน้นการผิดสัญญาและการเรียกค่าเสียหายชดเชย
+
+คำศัพท์สำคัญที่ให้มาในข้อสอบ:
+*   Performance: การชำระหนี้ / การปฏิบัติตามสัญญา
+*   Failure: ความล้มเหลว / การไม่ปฏิบัติ
+*   Debtor: ลูกหนี้
+*   Injure: ทำให้บาดเจ็บ / ทำให้เสียหาย (Injured party = ฝ่ายที่ได้รับความเสียหาย)
+*   Remedies: การเยียวยา / วิธีบังคับสิทธิเยียวยา
+*   Pecuniary: เป็นตัวเงิน
+*   Compensation: ค่าชดเชย / ค่าตอบแทน / ค่าสินไหมทดแทน
+*   Loss: ความสูญเสีย / ความเสียหาย
+*   Benefits: ประโยชน์ / สิทธิพิเศษ
+
+ตัวอย่างโครงสร้างประโยค (อังกฤษเป็นไทย):
+*   ประโยค: "If one of the parties does not fulfill her obligation in the
+contract, that failure of performance is called a breach of contract."
+    *   *คำแปล:* หากคู่สัญญาฝ่ายใดฝ่ายหนึ่งไม่ปฏิบัติตามหน้าที่ (หนี้) ของตนในสัญญา
+การไม่ปฏิบัติตามการชำระหนี้นั้นเรียกว่าการผิดสัญญา
+*   ประโยค: "Consequently, an injured party could seek remedies
+from the debtor."
+    *   *คำแปล:* ดังนั้น (ซึ่งเป็นผลสืบเนื่องมา)
+ฝ่ายที่ได้รับความเสียหายจึงสามารถแสวงหาการเยียวยาจากลูกหนี้ได้
+*   ประโยค: "The most common remedy for nonfulfillment of the contract
+is to claim pecuniary compensation for normal loss..."
+    *   *คำแปล:* วิธีการเยียวยาที่พบได้ทั่วไปที่สุดสำหรับการไม่ปฏิบัติตามสัญญา
+คือการเรียกร้องค่าชดเชยเป็นตัวเงินสำหรับความเสียหายปกติ...` },
+
+];
+
 /* ---- Web Speech TTS (reads whichever lecture row is currently open) ---- */
 const TTS = (function(){
   const supported = typeof window !== 'undefined' && 'speechSynthesis' in window;
@@ -1026,7 +1047,7 @@ const TTS = (function(){
       return;
     }
     stop();
-    const openRow = document.querySelector('.lecture-row.open');
+    const openRow = document.querySelector('.mode-panel.active .lecture-row.open');
     if(!openRow) return;
     const titleEl = openRow.querySelector('.lecture-title');
     const bodyEl = openRow.querySelector('.lecture-body');
@@ -1074,11 +1095,11 @@ const TTS = (function(){
   }
 })();
 
-function renderLectures(){
-  const el = document.getElementById('lectureList');
-  el.innerHTML = LECTURES.map(l => `
-    <div class="lecture-row" id="lec-${l.n}">
-      <div class="lecture-head" onclick="toggleLecture(${l.n})">
+function renderLectures(list, containerId, prefix){
+  const el = document.getElementById(containerId);
+  el.innerHTML = list.map(l => `
+    <div class="lecture-row" id="lec-${prefix}-${l.n}">
+      <div class="lecture-head" onclick="toggleLecture('${prefix}', ${l.n})">
         <div class="lecture-num">${l.n}</div>
         <div class="lecture-title">${l.title}</div>
         <div class="lecture-toggle">▾</div>
@@ -1087,13 +1108,22 @@ function renderLectures(){
     </div>
   `).join('');
 }
-function toggleLecture(n){
-  const row = document.getElementById('lec-' + n);
+function toggleLecture(prefix, n){
+  const row = document.getElementById('lec-' + prefix + '-' + n);
   TTS.stop();
   row.classList.toggle('open');
   playHoverSound();
 }
-renderLectures();
+function switchMode(mode){
+  document.querySelectorAll('.mode-tab').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+  document.getElementById('panel-content').classList.toggle('active', mode === 'content');
+  document.getElementById('panel-summary').classList.toggle('active', mode === 'summary');
+  document.getElementById('panel-exam').classList.toggle('active', mode === 'exam');
+  TTS.stop();
+}
+renderLectures(LECTURES_CONTENT, 'lectureList-content', 'content');
+renderLectures(LECTURES_SUMMARY, 'lectureList-summary', 'summary');
+renderLectures(LECTURES_EXAM, 'lectureList-exam', 'exam');
 
 /* ================================================================
    โหมดวิเคราะห์โจทย์ — โจทย์สถานการณ์สมมติ + แนวคำตอบ
