@@ -429,6 +429,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
 <audio id="dog-howl" preload="auto" playsinline webkit-playsinline style="display:none">
   <source src="music/หมาหอน.mp3" type="audio/mpeg">
 </audio>
+<audio id="scenario-bgm" loop preload="none" playsinline webkit-playsinline style="display:none"></audio>
 
 <div class="wrap">
   <header class="page-head">
@@ -1623,6 +1624,31 @@ function startScenario(scenario){
   render();
 }
 
+/* ---------- SCENARIO BGM (switches per screen/moment) ---------- */
+const BGM_TRACKS = {
+  picker:  'games/sound/music/moodmode-level-vii-258783.mp3',        // เข้าไปหมวดเกม
+  scene:   'games/sound/music/nojisuma-a-109881.mp3',                 // เล่าคดี
+  clerk:   'games/sound/music/maksymmalko-funny-cartoon-music-532611.mp3', // เสมียนศาลออกมา
+  verdict: 'games/sound/music/omarfarukjafree-shadows-beneath-horror-bgm-429490.mp3', // ศาลจะตัดสิน
+};
+function playScenarioBgm(key){
+  const el = document.getElementById('scenario-bgm');
+  if (!el) return;
+  if (isSoundMuted()) { el.pause(); return; }
+  if (el.dataset.trackKey === key && !el.paused) return; // already playing this track
+  el.dataset.trackKey = key;
+  el.src = BGM_TRACKS[key];
+  el.volume = 0.3;
+  el.currentTime = 0;
+  el.play().catch(() => {});
+}
+function stopScenarioBgm(){
+  const el = document.getElementById('scenario-bgm');
+  if (!el) return;
+  el.pause();
+  el.dataset.trackKey = '';
+}
+
 function render(){
   if (state.screen === 'picker') return renderPicker();
   if (state.screen === 'scene') return renderScene();
@@ -1667,6 +1693,7 @@ function renderPicker(){
       </div>
     </div>
   `;
+  playScenarioBgm('picker');
 }
 
 /* ---------- SCENE (auto-play beats) ---------- */
@@ -1705,6 +1732,7 @@ function renderScene(){
       <button type="button" class="big-btn" id="scene-next-btn" onclick="nextBeat()" onmouseenter="playHoverSound()">ถัดไป ›</button>
     </div>
   `;
+  playScenarioBgm('scene');
   syncBeat();
 }
 function syncBeat(){
@@ -1885,6 +1913,7 @@ function renderTrial(){
 function renderTrialDialogue(entry){
   const s = state.scenario;
   const isLast = state.trialIndex === s.trial.length - 1;
+  playScenarioBgm(entry.speaker === 'court_clerk' ? 'clerk' : 'verdict');
   root.innerHTML = `
     <div class="scene-topbar">
       <span>ห้องพิจารณาคดี</span>
@@ -1904,6 +1933,7 @@ function renderTrialDialogue(entry){
 function renderTrialQuestion(qIndex){
   const s = state.scenario;
   const q = s.questions[qIndex];
+  playScenarioBgm('verdict');
   root.innerHTML = `
     <div class="scene-topbar">
       <span>ห้องพิจารณาคดี</span>
@@ -1981,6 +2011,7 @@ function renderResults(){
   let msg = 'ลองทบทวนหลักกฎหมายอีกรอบแล้วมาลองใหม่นะ';
   if (pct === 100) msg = 'เก่งมาก! วิเคราะห์ได้ครบถ้วนทุกข้อ 🎉';
   else if (pct >= 60) msg = 'ทำได้ดี! เกือบครบแล้ว ลองอ่านเฉลยอีกรอบเพื่อความชัวร์';
+  stopScenarioBgm();
   root.innerHTML = `
     <div class="result-card">
       <div style="font-size:40px">🏆</div>
@@ -2064,6 +2095,11 @@ function toggleDroneMute(btn){
   if (btn) btn.textContent = muted ? '🔇' : '🔊';
   const bgm = document.getElementById('horror-bgm');
   if (bgm) bgm.volume = muted ? 0 : 0.35;
+  const sBgm = document.getElementById('scenario-bgm');
+  if (sBgm) {
+    if (muted) { sBgm.pause(); }
+    else { sBgm.volume = 0.3; if (sBgm.src && sBgm.paused) sBgm.play().catch(() => {}); }
+  }
 }
 function updateThemeToggleUI(theme){
   document.querySelectorAll('.theme-toggle button').forEach(b => {
@@ -2242,6 +2278,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener(evt, function resumeBgmOnce(){
       const bgm = document.getElementById('horror-bgm');
       if (document.documentElement.getAttribute('data-theme') === 'horror' && bgm && bgm.paused) playHorrorBgm();
+      const sBgm = document.getElementById('scenario-bgm');
+      if (sBgm && sBgm.src && sBgm.paused && !isSoundMuted()) sBgm.play().catch(() => {});
       ['click','touchstart','keydown'].forEach(e2 => document.removeEventListener(e2, resumeBgmOnce));
     }, { once: true });
   });
