@@ -393,15 +393,32 @@ function speakMnemonicFallback(book, article){
 
 /* ============ image fallback (same graceful-degrade pattern as
    game-crimlaw-scenario.html's portraitPath/onerror trick) ============ */
-function spriteBox(src, emoji, extraClass){
+function spriteBox(src, emoji, extraClass, imgId){
   return '<div class="sprite-wrap ' + (extraClass||'') + '">'
     + '<div class="sprite-fallback">' + emoji + '</div>'
-    + '<img src="' + src + '" alt="" loading="lazy" onerror="this.remove()">'
+    + '<img' + (imgId ? ' id="' + imgId + '"' : '') + ' src="' + src + '" alt="" loading="lazy" onerror="this.remove()">'
     + '</div>';
 }
 function leeSpritePath(stage){ return 'pics/game/rpg/lee/' + stage.sprite + '.png'; }
 function monsterSpritePath(m){ return 'pics/game/rpg/monsters/' + m.sprite + '.png'; }
+function monsterAttackSpritePath(m){ return 'pics/game/rpg/monsters/' + m.sprite + '_attack.png'; }
 function subjectBgPath(subjectId){ return 'pics/game/rpg/backgrounds/' + subjectId + '.jpg'; }
+
+/* Swap the enemy sprite to its "_attack" pose art for a beat when it hits Lee.
+   Preloads first so a missing _attack file (most monsters don't have one yet)
+   silently no-ops instead of flashing a broken image. */
+function flashMonsterAttackPose(monster){
+  const img = document.getElementById('enemySpriteImg');
+  if (!img) return;
+  const idleSrc = monsterSpritePath(monster);
+  const attackSrc = monsterAttackSpritePath(monster);
+  const preload = new Image();
+  preload.onload = () => {
+    img.src = attackSrc;
+    setTimeout(() => { img.src = idleSrc; }, 550);
+  };
+  preload.src = attackSrc;
+}
 
 /* ============ boot ============ */
 fetch(DATA_URL).then(r => r.json()).then(json => {
@@ -634,6 +651,7 @@ function handleAnswer(index){
       const dmg = Math.round(b.monster.atk * (0.85 + Math.random()*0.3));
       b.playerHp = Math.max(0, b.playerHp - dmg);
       animateHit('player', dmg, false);
+      flashMonsterAttackPose(b.monster);
     }
   }
   refreshHudOnly();
@@ -708,7 +726,7 @@ function renderBattle(app){
             <div class="hp-track"><div class="hp-fill" id="enemyHudFill" style="width:100%"></div></div>
             <div class="hp-num" id="enemyHudNum">${b.monsterHp} / ${b.monsterMaxHp}</div>
           </div>
-          ${spriteBox(monsterSpritePath(b.monster), b.monster.emoji)}
+          ${spriteBox(monsterSpritePath(b.monster), b.monster.emoji, '', 'enemySpriteImg')}
         </div>
         <div class="combatant player">
           ${spriteBox(leeSpritePath(leeStageForLevel(state.save.level)), '🐱')}
