@@ -197,7 +197,8 @@ h1,h2{font-family:'Noto Serif Thai',serif}
   position:relative;width:100%;aspect-ratio:4/3;border-radius:var(--radius);
   overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);
 }
-.stage-bg-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:64px;opacity:.35}
+.stage-bg-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:64px}
+.stage-bg-emoji span{opacity:.35}
 .stage-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .stage-label{position:absolute;top:8px;left:10px;background:rgba(0,0,0,.35);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;letter-spacing:.02em}
 .funeral-badge{
@@ -633,7 +634,7 @@ function renderStageBgHTML(bgId){
   const pngPath = jpgPath.replace(/\.jpg$/, '.png');
   /* background files were generated in a mix of .jpg (batch 1) / .png (batch 2)
      per character — try .jpg first, fall back to .png, then the emoji/gradient. */
-  return `<div class="stage-bg-emoji">${bg.emoji}</div>`
+  return `<div class="stage-bg-emoji" style="background:${bg.gradient}"><span>${bg.emoji}</span></div>`
        + `<img class="stage-bg-img" src="${jpgPath}" alt="" onerror="this.onerror=function(){this.remove()};this.src='${pngPath}';">`;
 }
 
@@ -1653,7 +1654,7 @@ const SCENARIOS = [
     bg: 'temple',
     beats: [
       { caption: 'นาย ก. นาย ข. และนางสาว ค. เป็นพี่น้องร่วมบิดามารดาเดียวกัน กำพร้าพ่อแม่มาตั้งแต่เด็ก นาย ก. อยู่กินฉันสามีภริยากับนางกล้วยโดยไม่ได้จดทะเบียนสมรส ส่วนนาย ข. แต่งงานกับนางสาวปุ้ยและมีลูกชายด้วยกันหนึ่งคนคือ ด.ช.โดม',
-        actors: [ { id:'employer', x:38, active:true }, { id:'civil_servant_female', x:62, pose:'😊' } ] },
+        actors: [ { id:'employer', x:38, active:true }, { id:'civil_servant_female', x:85, pose:'😊' } ] },
       { caption: 'โชคร้ายที่นางสาว ค. น้องสาวคนเล็กซึ่งยังเป็นโสดและไม่มีบุตร ประสบอุบัติเหตุขับรถพลิกคว่ำขณะเมาแล้วขับ เสียชีวิตลงในวันเกิดของตัวเอง ทิ้งไว้เพียงพี่ชายสองคน',
         actors: [], funeral: true },
       { caption: 'หลังจากนั้นไม่นาน นาย ก. ตัดสินใจอุปสมบทเป็นพระภิกษุ ณ วัดหมอกธรรม ระหว่างอยู่ในสมณเพศ ชาวบ้านนำเงินมาทำบุญกับท่านรวม 500,000 บาท และมีผู้มาถวายพระพิฆเนศองค์หนึ่งมูลค่า 50,000 บาทด้วย',
@@ -1663,7 +1664,7 @@ const SCENARIOS = [
       { caption: 'หนึ่งสัปดาห์ให้หลัง พระภิกษุ ก. เกิดอาการหัวใจวายมรณภาพลงอย่างกะทันหันในกุฏิ ทิ้งไว้เพียงที่ดินแปลงหนึ่งในจังหวัดน่านซึ่งท่านมีอยู่ก่อนอุปสมบทเป็นทรัพย์สินติดตัว',
         actors: [ { id:'monk', x:50, active:true, expr:'sad' } ], funeral: true },
       { caption: 'หลังพิธีศพ ทั้งวัดหมอกธรรม นางกล้วย และนาย ข. ต่างเริ่มถกเถียงกันว่าใครมีสิทธิได้รับทรัพย์สินที่พระภิกษุ ก. ทิ้งไว้บ้าง จนต้องนำเรื่องขึ้นสู่ศาล',
-        actors: [ { id:'employer', x:38, active:true, pose:'😤' }, { id:'civil_servant_female', x:62, pose:'😟' } ] },
+        actors: [ { id:'employer', x:38, active:true, pose:'😤' }, { id:'civil_servant_female', x:85, pose:'😟' } ] },
     ],
     comprehension: { question: 'เข้าใจโจทย์ไหม?' },
     courtroomBg: 'courtroom',
@@ -1712,15 +1713,15 @@ const SCENARIOS = [
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ศาลนี้นัดพิจารณาคดีวันนี้ — เสมียนศาล คดีนี้คือคดีอะไร?' },
       { type:'dialogue', speaker:'court_clerk', pose:'neutral', caption:'เสมียนศาล: คดีร้องขอแบ่งทรัพย์มรดกของพระภิกษุ ก. ระหว่างนาย ข. น้องชาย นางกล้วยคู่อยู่กิน และวัดหมอกธรรมเจ้าค่ะท่าน', sfx:'soundreality-riser-sync-391177.mp3' },
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ข้อเท็จจริง: พระภิกษุ ก. มรณภาพหลังทำพินัยกรรมตัดนาย ข. ไม่ให้รับมรดก ทิ้งเงินทำบุญ 500,000 บาท พระพิฆเนศ 50,000 บาท และที่ดินจังหวัดน่านซึ่งมีมาก่อนอุปสมบท' },
-      { type:'dialogue', speaker:'plaintiff_lawyer', pose:'confident', caption:'ทนายฝ่ายวัดหมอกธรรม: เงินทำบุญและพระพิฆเนศได้มาระหว่างที่ท่านครองสมณเพศ ต้องตกเป็นของวัดตามกฎหมายค่ะ ไม่ใช่มรดก' },
-      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายฝ่ายทายาท: คัดค้าน! ทรัพย์สินทั้งหมดเป็นของพระภิกษุ ก. เอง ต้องนำมาแบ่งเป็นมรดกให้ทายาททุกรายการครับ', sfx:'dragon-studio-whoosh-effect-382717.mp3' },
+      { type:'dialogue', speaker:'plaintiff_lawyer', pose:'confident', caption:'ทนายฝ่ายวัดหมอกธรรม: เงินทำบุญและพระพิฆเนศได้มาระหว่างที่ท่านครองสมณเพศ ต้องตกเป็นของวัดตามกฎหมายครับ ไม่ใช่มรดก' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'confident', caption:'ทนายฝ่ายทายาท: คัดค้าน! ทรัพย์สินทั้งหมดเป็นของพระภิกษุ ก. เอง ต้องนำมาแบ่งเป็นมรดกให้ทายาททุกรายการค่ะ', sfx:'dragon-studio-whoosh-effect-382717.mp3' },
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ท่านผู้ตัดสิน — เงินทำบุญ 500,000 บาท และพระพิฆเนศ 50,000 บาท ตกเป็นของใคร?' },
       { type:'question', qIndex: 0 },
-      { type:'dialogue', speaker:'defense_lawyer', pose:'shocked', caption:'ทนายฝ่ายทายาท: (จำนน) ...พินัยกรรมมีแค่ข้อกำหนดตัดทายาท ไม่ได้จำหน่ายทรัพย์สินสองรายการนี้จริงด้วยครับ' },
+      { type:'dialogue', speaker:'defense_lawyer', pose:'shocked', caption:'ทนายฝ่ายทายาท: (จำนน) ...พินัยกรรมมีแค่ข้อกำหนดตัดทายาท ไม่ได้จำหน่ายทรัพย์สินสองรายการนี้จริงด้วยค่ะ' },
 
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ต่อไป เรื่องที่ดินจังหวัดน่าน นางกล้วย ท่านมีคำร้องอย่างไร?' },
       { type:'dialogue', speaker:'civil_servant_female', pose:'sad', caption:'นางกล้วย: ดิฉันอยู่กินดูแลนาย ก. มาก่อนท่านจะบวชนานหลายปีนะคะ ขอมีสิทธิได้รับมรดกที่ดินด้วยค่ะ', bgm:'plaintiff' },
-      { type:'dialogue', speaker:'plaintiff_lawyer', pose:'confident', caption:'ทนายฝ่ายวัดหมอกธรรม: คัดค้าน! นางกล้วยไม่เคยจดทะเบียนสมรสกับนาย ก. เลยตามมาตรา 1457 ค่ะ', sfx:'dragon-studio-whoosh-effect-382717.mp3' },
+      { type:'dialogue', speaker:'plaintiff_lawyer', pose:'confident', caption:'ทนายฝ่ายวัดหมอกธรรม: คัดค้าน! นางกล้วยไม่เคยจดทะเบียนสมรสกับนาย ก. เลยตามมาตรา 1457 ครับ', sfx:'dragon-studio-whoosh-effect-382717.mp3' },
       { type:'dialogue', speaker:'judge', pose:'neutral', caption:'ท่านผู้ตัดสิน — นางกล้วยมีสิทธิรับมรดกในฐานะคู่สมรสหรือไม่?' },
       { type:'question', qIndex: 1 },
       { type:'dialogue', speaker:'civil_servant_female', pose:'shocked', caption:'นางกล้วย: (ทรุด) ...ไม่เคยจดทะเบียนกันจริง ๆ ค่ะ', bgm:'defendant' },
