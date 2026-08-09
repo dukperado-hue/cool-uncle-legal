@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FC9EVYB1YG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FC9EVYB1YG');
+</script>
+<title>ลี นักสู้กฎหมาย · Cool Uncle Legal Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Noto+Serif+Thai:wght@600;700;900&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF9F4; --card:#FFFFFF; --ink:#22283A; --ink-soft:#5A6072; --ink-faint:#9AA0B0;
+  --line:#E5E1D6; --gold:#B08A3C; --gold-soft:#F3E8CF; --ok:#1E7A4F; --ok-bg:#E6F4EC;
+  --bad:#B23A3A; --bad-bg:#FBEAEA; --accent:#2E4A7A; --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+  /* retro-RPG battle palette (Mizuki/Junji Ito eerie night, cut with a warm cat gold) */
+  --rpg-bg0:#0b0e14; --rpg-bg1:#141a24; --rpg-panel:#161c2c; --rpg-panel-ink:#1e2740;
+  --rpg-border-lt:#5b6a8c; --rpg-border-dk:#04060a; --rpg-text:#EDEAE0;
+  --rpg-hp-hi:#3fbf6a; --rpg-hp-mid:#e0b23f; --rpg-hp-lo:#e0453f; --rpg-exp:#4a90e2;
+  --rpg-gold:#e0c34a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Sarabun',system-ui,sans-serif; background:var(--paper); color:var(--ink);
+  min-height:100vh; -webkit-text-size-adjust:100%;
+}
+h1,h2,h3{font-family:'Noto Serif Thai',serif}
+.pixel{font-family:'Press Start 2P','JetBrains Mono',monospace}
+button{font-family:inherit; cursor:pointer}
+img{max-width:100%; display:block}
+
+/* ============ TOP BAR (site-consistent) ============ */
+.topbar{
+  display:flex; align-items:center; gap:10px; background:#EFEAE0; border-bottom:1px solid var(--line);
+  padding:10px 16px; font-size:13px; color:var(--ink-soft); position:sticky; top:0; z-index:50;
+}
+.topbar a.back{color:var(--accent); font-weight:700; text-decoration:none; display:flex; align-items:center; gap:4px}
+.topbar a.back:hover{color:var(--ink)}
+.topbar .brand{font-weight:800; color:var(--ink); margin-left:4px}
+.topbar .right{margin-left:auto; display:flex; align-items:center; gap:10px}
+.mute-btn{
+  background:var(--card); border:1px solid var(--line); border-radius:999px; padding:6px 12px;
+  font-size:13px; color:var(--ink-soft);
+}
+.mute-btn.active{background:var(--gold-soft); color:#8F6511; border-color:var(--gold)}
+
+/* ============ APP SHELL ============ */
+.app{max-width:720px; margin:0 auto; padding:16px 14px 60px}
+
+/* ============ HOME / STATUS CARD ============ */
+.lee-status{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  box-shadow:var(--shadow); padding:18px; display:flex; gap:16px; align-items:center; margin-bottom:18px;
+}
+.lee-portrait{
+  position:relative; width:88px; height:88px; border-radius:16px; background:var(--gold-soft);
+  display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden;
+  border:2px solid var(--gold);
+}
+.lee-portrait .fallback{font-size:44px}
+.lee-portrait img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.lee-info{flex:1; min-width:0}
+.lee-info .name{font-weight:800; font-size:16px}
+.lee-info .title{color:var(--ink-soft); font-size:12.5px; margin-top:1px}
+.exp-track{height:9px; background:var(--line); border-radius:999px; margin-top:8px; overflow:hidden}
+.exp-fill{height:100%; background:linear-gradient(90deg,var(--accent),#5f86d1); border-radius:999px; transition:width .4s ease}
+.exp-label{font-size:11px; color:var(--ink-faint); margin-top:4px}
+
+.menu-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.menu-card{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:18px 14px; text-align:center; text-decoration:none; color:var(--ink); transition:transform .15s ease;
+}
+.menu-card:hover{transform:translateY(-2px); border-color:var(--gold)}
+.menu-card .icon{font-size:30px; margin-bottom:8px}
+.menu-card .label{font-weight:700; font-size:14.5px}
+.menu-card .sub{font-size:11.5px; color:var(--ink-soft); margin-top:2px}
+
+/* ============ QUEST BOARD ============ */
+.section-title{font-size:18px; font-weight:800; margin:4px 0 12px}
+.subject-tabs{display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; margin-bottom:14px}
+.subject-tab{
+  flex-shrink:0; background:var(--card); border:1px solid var(--line); border-radius:999px;
+  padding:7px 14px; font-size:13px; font-weight:700; color:var(--ink-soft); white-space:nowrap;
+}
+.subject-tab.active{background:var(--accent); color:#fff; border-color:var(--accent)}
+.subject-tab.locked{opacity:.5}
+.quest-card{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:14px; display:flex; gap:12px; align-items:center; margin-bottom:10px;
+}
+.quest-icon{font-size:28px; width:46px; text-align:center; flex-shrink:0}
+.quest-meta{flex:1; min-width:0}
+.quest-meta .name{font-weight:700; font-size:14.5px}
+.quest-meta .enemy{font-size:12px; color:var(--ink-soft); margin-top:1px}
+.quest-meta .stars{font-size:11px; color:var(--gold); margin-top:3px}
+.quest-play{
+  background:var(--accent); color:#fff; border:none; border-radius:10px; padding:9px 14px;
+  font-weight:700; font-size:12.5px; flex-shrink:0;
+}
+.quest-play:hover{filter:brightness(1.08)}
+.locked-note{
+  text-align:center; color:var(--ink-faint); font-size:13px; padding:30px 10px;
+  background:var(--card); border:1px dashed var(--line); border-radius:var(--radius);
+}
+
+/* ============ BATTLE SCREEN — early-2000s RPG chrome ============ */
+.battle-wrap{
+  background:
+    radial-gradient(120% 70% at 50% 0%, #1c2338 0%, var(--rpg-bg0) 70%);
+  border-radius:16px; padding:14px 12px 0; color:var(--rpg-text); overflow:hidden;
+  box-shadow:0 10px 32px rgba(0,0,0,.35);
+}
+.battle-stage{position:relative; min-height:230px; border-radius:10px; overflow:hidden;
+  background:linear-gradient(180deg,#232a42 0%,#141a2c 60%,#0b0e18 100%); margin-bottom:10px;}
+.battle-stage::before{ /* eerie fog */
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(60% 40% at 20% 90%, rgba(255,255,255,.05), transparent 70%);
+  pointer-events:none;
+}
+.combatant{position:absolute; display:flex; flex-direction:column; align-items:center; gap:6px}
+.combatant.enemy{top:14px; right:22px}
+.combatant.player{bottom:10px; left:18px}
+.sprite-wrap{position:relative; width:84px; height:84px; display:flex; align-items:center; justify-content:center}
+.sprite-fallback{font-size:52px; filter:drop-shadow(0 6px 8px rgba(0,0,0,.5))}
+.sprite-wrap img{position:absolute; inset:0; width:100%; height:100%; object-fit:contain}
+.combatant.enemy .sprite-fallback{filter:drop-shadow(0 6px 10px rgba(0,0,0,.6)) saturate(1.1)}
+.hit-shake{animation:hitShake .35s ease}
+@keyframes hitShake{
+  0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px) rotate(-2deg)}
+  40%{transform:translateX(5px) rotate(2deg)} 60%{transform:translateX(-4px)} 80%{transform:translateX(3px)}
+}
+.attack-lunge{animation:atkLunge .4s ease}
+@keyframes atkLunge{
+  0%,100%{transform:translateX(0)} 40%{transform:translateX(-14px) scale(1.06)}
+}
+.dmg-pop{
+  position:absolute; top:-6px; left:50%; transform:translateX(-50%);
+  font-family:'Press Start 2P',monospace; font-size:13px; color:var(--rpg-hp-lo);
+  text-shadow:2px 2px 0 #000; animation:dmgPop .8s ease forwards; pointer-events:none;
+}
+.dmg-pop.heal{color:var(--rpg-hp-hi)}
+@keyframes dmgPop{0%{opacity:0; transform:translate(-50%,4px)} 20%{opacity:1} 100%{opacity:0; transform:translate(-50%,-26px)}}
+
+.hud{width:150px; background:var(--rpg-panel); border:2px solid var(--rpg-border-dk);
+  box-shadow:0 0 0 2px var(--rpg-border-lt), 0 3px 0 rgba(0,0,0,.4); border-radius:4px; padding:6px 8px;}
+.hud .who{font-size:10.5px; font-weight:700; margin-bottom:4px; color:var(--rpg-gold); letter-spacing:.02em}
+.hp-track{height:10px; background:#3a0f10; border-radius:2px; overflow:hidden; box-shadow:inset 0 0 0 1px #000}
+.hp-fill{height:100%; background:linear-gradient(180deg,var(--rpg-hp-hi),#2c9450); transition:width .5s ease}
+.hp-fill.mid{background:linear-gradient(180deg,var(--rpg-hp-mid),#b5872c)}
+.hp-fill.lo{background:linear-gradient(180deg,var(--rpg-hp-lo),#a32a25)}
+.hp-num{font-size:9.5px; margin-top:3px; color:#c9cede; text-align:right; font-family:'JetBrains Mono',monospace}
+
+.timer-track{height:6px; background:#0d1120; border-radius:3px; overflow:hidden; margin:10px 0 8px}
+.timer-fill{height:100%; background:var(--rpg-hp-hi); transition:width .2s linear, background .3s}
+.timer-fill.mid{background:var(--rpg-hp-mid)}
+.timer-fill.lo{background:var(--rpg-hp-lo)}
+
+.dialogue-box{
+  background:var(--rpg-panel-ink); border:3px solid var(--rpg-border-dk);
+  box-shadow:0 0 0 2px var(--rpg-border-lt) inset; border-radius:6px;
+  padding:14px 14px 16px; margin-bottom:12px;
+}
+.dialogue-tag{font-size:10px; color:var(--rpg-gold); margin-bottom:6px; letter-spacing:.03em}
+.dialogue-text{font-size:14px; line-height:1.65; color:var(--rpg-text); min-height:44px}
+.answer-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px}
+.answer-btn{
+  background:#0f1424; border:2px solid var(--rpg-border-lt); color:var(--rpg-text);
+  border-radius:6px; padding:10px 10px; font-size:12.5px; text-align:left; line-height:1.4;
+  transition:all .12s ease;
+}
+.answer-btn:hover:not(:disabled){background:#1a2140; border-color:var(--rpg-gold)}
+.answer-btn:disabled{opacity:.55}
+.answer-btn.correct{background:#123a24; border-color:var(--rpg-hp-hi); color:#bdf5d2}
+.answer-btn.wrong{background:#3a1414; border-color:var(--rpg-hp-lo); color:#f5c7c3}
+@media(max-width:420px){.answer-grid{grid-template-columns:1fr}}
+
+.battle-footer{padding:12px 0 16px; text-align:center}
+.battle-footer .flavor{font-size:11.5px; color:#8891ab}
+
+.result-overlay{
+  position:fixed; inset:0; background:rgba(6,8,14,.86); z-index:100;
+  display:flex; align-items:center; justify-content:center; padding:20px;
+}
+.result-card{
+  background:var(--rpg-panel); border:3px solid var(--rpg-border-dk); box-shadow:0 0 0 2px var(--rpg-gold) inset;
+  border-radius:10px; padding:26px 22px; max-width:360px; width:100%; text-align:center; color:var(--rpg-text);
+}
+.result-card h2{font-family:'Press Start 2P',monospace; font-size:16px; margin-bottom:12px; line-height:1.6}
+.result-card.win h2{color:var(--rpg-hp-hi)}
+.result-card.lose h2{color:var(--rpg-hp-lo)}
+.result-card p{font-size:13px; color:#c9cede; margin-bottom:6px}
+.result-actions{display:flex; gap:8px; justify-content:center; margin-top:16px}
+.result-btn{
+  background:var(--rpg-gold); color:#1a1200; border:none; border-radius:8px; padding:10px 16px;
+  font-weight:800; font-size:12.5px;
+}
+.result-btn.secondary{background:transparent; border:1px solid var(--rpg-border-lt); color:var(--rpg-text)}
+.evo-banner{
+  font-family:'Press Start 2P',monospace; font-size:11px; color:var(--rpg-gold); margin:10px 0;
+  animation:evoGlow 1.4s ease-in-out infinite alternate;
+}
+@keyframes evoGlow{from{text-shadow:0 0 4px rgba(224,195,74,.3)} to{text-shadow:0 0 14px rgba(224,195,74,.9)}}
+
+/* ============ LAWBOOK ============ */
+.lawbook-entry{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:14px; margin-bottom:10px;
+}
+.lawbook-entry .head{display:flex; justify-content:space-between; align-items:center; gap:8px}
+.lawbook-entry .num{font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--accent); font-size:13px}
+.lawbook-entry .book{font-size:11px; color:var(--ink-faint)}
+.lawbook-entry .text{font-size:13.5px; line-height:1.7; margin-top:8px; white-space:pre-line}
+.lawbook-entry .mnemonic{
+  margin-top:10px; background:var(--gold-soft); border-radius:8px; padding:10px 12px; font-size:12.5px; color:#6b5320;
+}
+.play-audio-btn{
+  margin-top:8px; background:var(--accent); color:#fff; border:none; border-radius:999px;
+  padding:7px 14px; font-size:12px; font-weight:700; display:inline-flex; gap:6px; align-items:center;
+}
+.locked-entry{
+  background:#F4F2EC; border:1px dashed var(--line); border-radius:var(--radius); padding:12px 14px;
+  margin-bottom:10px; color:var(--ink-faint); font-size:12.5px; display:flex; justify-content:space-between; gap:8px;
+}
+.locked-entry .progress{font-family:'JetBrains Mono',monospace; font-size:11px}
+
+.loading-note{text-align:center; padding:40px 10px; color:var(--ink-faint); font-size:13.5px}
+.back-row{margin-bottom:14px}
+.back-row a{color:var(--accent); font-weight:700; font-size:13px; text-decoration:none}
+.training-flag{
+  background:var(--ok-bg); color:var(--ok); border-radius:8px; padding:8px 12px; font-size:12px;
+  margin-bottom:12px; font-weight:700; text-align:center;
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="back" href="games.html">← เกม</a>
+  <span class="brand">🐱 ลี นักสู้กฎหมาย</span>
+  <div class="right">
+    <button class="mute-btn" id="muteBtn" onclick="toggleMute()">🔊 เสียง</button>
+  </div>
+</div>
+
+<div class="app" id="app"></div>
+
+<audio id="rpg-bgm" preload="none"></audio>
+<audio id="rpg-sfx" preload="none"></audio>
+
+<script>
+/* ================================================================
+   ลี นักสู้กฎหมาย — turn-based law-quiz RPG
+   Self-contained page (no build step), following the same pattern as
+   game-crimlaw-scenario.html: one file, inline state machine, render()
+   dispatches on state.screen, graceful image fallback, shared mute key.
+   ================================================================ */
+
+const MUTE_KEY = 'codex-drone-muted'; // shared site-wide mute toggle
+const SAVE_KEY = 'leeRpgSave_v1';
+const DATA_URL = 'games/rpg-data.json';
+const CODEX_URL = 'codex-data.json';
+const UNLOCK_THRESHOLD = 3; // correct answers on a มาตรา before its Lawbook entry unlocks
+
+let DATA = null;
+let codexCache = null; // lazy-loaded full law database, only fetched when Lawbook opens
+
+const state = {
+  screen: 'loading', // loading|home|quest|training|lawbook|battle
+  questSubject: 'civil',
+  save: loadSave(),
+  battle: null,
+};
+
+function loadSave(){
+  try{
+    const raw = localStorage.getItem(SAVE_KEY);
+    if (raw) return JSON.parse(raw);
+  }catch(e){}
+  return { exp: 0, level: 1, unlockedLawRefs: {}, questClears: {} };
+}
+function saveSave(){ try{ localStorage.setItem(SAVE_KEY, JSON.stringify(state.save)); }catch(e){} }
+
+/* ============ leveling ============ */
+function expNeededForLevel(level){ return 30 + (level - 1) * 22; }
+function maxHpForLevel(level){ return 20 + level * 6; }
+function atkForLevel(level){ return 6 + level * 2; }
+function gainExp(amount){
+  const before = state.save.level;
+  state.save.exp += amount;
+  while (state.save.exp >= expNeededForLevel(state.save.level)) {
+    state.save.exp -= expNeededForLevel(state.save.level);
+    state.save.level++;
+  }
+  saveSave();
+  return state.save.level > before; // did Lee level up?
+}
+function leeStageForLevel(level){
+  const stages = DATA.leeEvolution;
+  let stage = stages[0];
+  for (const s of stages) { if (level >= s.level) stage = s; }
+  return stage;
+}
+function evolutionCrossed(oldLevel, newLevel){
+  return DATA.leeEvolution.find(s => s.level > oldLevel && s.level <= newLevel) || null;
+}
+
+/* ============ audio (reuses site-wide mute key) ============ */
+function isMuted(){ try{ return localStorage.getItem(MUTE_KEY) === '1'; }catch(e){ return false; } }
+function toggleMute(){
+  try{ localStorage.setItem(MUTE_KEY, isMuted() ? '0' : '1'); }catch(e){}
+  syncMuteBtn();
+  if (isMuted()) { const el = document.getElementById('rpg-bgm'); if (el) el.pause(); }
+}
+function syncMuteBtn(){
+  const btn = document.getElementById('muteBtn');
+  if (!btn) return;
+  btn.textContent = isMuted() ? '🔇 ปิดเสียง' : '🔊 เสียง';
+  btn.classList.toggle('active', !isMuted());
+}
+const BGM = {
+  quest: 'games/sound/music/rpg_quest_theme.mp3',
+  battle: 'games/sound/music/rpg_battle_theme.mp3',
+  boss: 'games/sound/music/rpg_boss_theme.mp3',
+};
+function playBgm(key){
+  const el = document.getElementById('rpg-bgm');
+  if (!el) return;
+  if (isMuted()) { el.pause(); return; }
+  const src = BGM[key];
+  if (!src) { el.pause(); return; }
+  if (el.dataset.key === key && !el.paused) return;
+  el.dataset.key = key; el.src = src; el.loop = true; el.volume = 0.25; el.currentTime = 0;
+  el.play().catch(() => {});
+}
+const SFX = {
+  attack: 'games/sound/effect/rpg_attack.mp3',
+  hit: 'games/sound/effect/rpg_hit.mp3',
+  correct: 'games/sound/effect/rpg_correct.mp3',
+  wrong: 'games/sound/effect/rpg_wrong.mp3',
+  levelup: 'games/sound/effect/rpg_levelup.mp3',
+  victory: 'games/sound/effect/rpg_victory.mp3',
+  defeat: 'games/sound/effect/rpg_defeat.mp3',
+};
+function playSfx(key){
+  if (isMuted()) return;
+  const el = document.getElementById('rpg-sfx');
+  const src = SFX[key];
+  if (!el || !src) return;
+  el.src = src; el.volume = 0.6; el.currentTime = 0;
+  el.play().catch(() => {});
+}
+/* mnemonic songs (Lawbook gimmick) — try a real recording first, fall back to
+   the browser's Thai text-to-speech reading the มาตรา's lecture note aloud */
+function playMnemonic(book, article){
+  const el = document.getElementById('rpg-sfx');
+  const path = 'games/sound/mnemonic/' + book + '_' + article + '.mp3';
+  if (isMuted() || !el) { speakMnemonicFallback(book, article); return; }
+  el.src = path; el.volume = 0.85; el.currentTime = 0;
+  el.onerror = () => { speakMnemonicFallback(book, article); };
+  el.play().catch(() => speakMnemonicFallback(book, article));
+}
+function speakMnemonicFallback(book, article){
+  if (!('speechSynthesis' in window) || !codexCache) return;
+  const art = codexCache.books[book] && codexCache.books[book].articles[article];
+  if (!art) return;
+  const note = art.lectureNotes && art.lectureNotes[0];
+  const text = (note ? note.text : art.text).slice(0, 500);
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'th-TH'; utter.rate = 1.0;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(utter);
+}
+
+/* ============ image fallback (same graceful-degrade pattern as
+   game-crimlaw-scenario.html's portraitPath/onerror trick) ============ */
+function spriteBox(src, emoji, extraClass){
+  return '<div class="sprite-wrap ' + (extraClass||'') + '">'
+    + '<div class="sprite-fallback">' + emoji + '</div>'
+    + '<img src="' + src + '" alt="" loading="lazy" onerror="this.remove()">'
+    + '</div>';
+}
+function leeSpritePath(stage){ return 'pics/game/rpg/lee/' + stage.sprite + '.png'; }
+function monsterSpritePath(m){ return 'pics/game/rpg/monsters/' + m.sprite + '.png'; }
+function subjectBgPath(subjectId){ return 'pics/game/rpg/backgrounds/' + subjectId + '.jpg'; }
+
+/* ============ boot ============ */
+fetch(DATA_URL).then(r => r.json()).then(json => {
+  DATA = json;
+  state.screen = 'home';
+  render();
+}).catch(() => {
+  document.getElementById('app').innerHTML = '<div class="loading-note">โหลดข้อมูลเกมไม่สำเร็จ ลองรีเฟรชหน้าอีกครั้ง</div>';
+});
+
+function render(){
+  syncMuteBtn();
+  const app = document.getElementById('app');
+  if (state.screen === 'loading') { app.innerHTML = '<div class="loading-note">กำลังโหลด...</div>'; return; }
+  if (state.screen === 'home') return renderHome(app);
+  if (state.screen === 'quest') return renderQuestBoard(app, false);
+  if (state.screen === 'training') return renderQuestBoard(app, true);
+  if (state.screen === 'lawbook') return renderLawbook(app);
+  if (state.screen === 'battle') return renderBattle(app);
+}
+
+/* ============ HOME ============ */
+function renderHome(app){
+  playBgm('quest');
+  const stage = leeStageForLevel(state.save.level);
+  const need = expNeededForLevel(state.save.level);
+  const pct = Math.min(100, Math.round(state.save.exp / need * 100));
+  app.innerHTML = `
+    <div class="lee-status">
+      <div class="lee-portrait">${spriteBox(leeSpritePath(stage), '🐱')}</div>
+      <div class="lee-info">
+        <div class="name">${stage.name} · Lv.${state.save.level}</div>
+        <div class="title">${stage.title}</div>
+        <div class="exp-track"><div class="exp-fill" style="width:${pct}%"></div></div>
+        <div class="exp-label">EXP ${state.save.exp} / ${need}</div>
+      </div>
+    </div>
+    <div class="menu-grid">
+      <a href="#" class="menu-card" onclick="goScreen(event,'quest')">
+        <div class="icon">🗺️</div><div class="label">Quest Board</div>
+        <div class="sub">เลือกด่านตามวิชา</div>
+      </a>
+      <a href="#" class="menu-card" onclick="goScreen(event,'training')">
+        <div class="icon">🎯</div><div class="label">Training Zone</div>
+        <div class="sub">ฝึกฟรี ไม่เสีย HP</div>
+      </a>
+      <a href="#" class="menu-card" onclick="goScreen(event,'lawbook')">
+        <div class="icon">📖</div><div class="label">Lawbook</div>
+        <div class="sub">คลังมาตราที่ปลดล็อก</div>
+      </a>
+      <a href="games.html" class="menu-card">
+        <div class="icon">🏠</div><div class="label">ศูนย์รวมเกม</div>
+        <div class="sub">กลับไปเกมอื่น ๆ</div>
+      </a>
+    </div>
+  `;
+}
+function goScreen(ev, screen){
+  ev.preventDefault();
+  state.screen = screen;
+  if (DATA.subjects.find(s => s.id === state.questSubject && s.playable) == null) {
+    state.questSubject = DATA.subjects.find(s => s.playable).id;
+  }
+  render();
+}
+
+/* ============ QUEST BOARD / TRAINING ZONE (shared list UI) ============ */
+function renderQuestBoard(app, isTraining){
+  const tabs = DATA.subjects.map(s => `
+    <button class="subject-tab ${s.id === state.questSubject ? 'active' : ''} ${s.playable ? '' : 'locked'}"
+      ${s.playable ? `onclick="selectSubject('${s.id}')"` : 'disabled'}>${s.icon} ${s.name}</button>
+  `).join('');
+
+  const subject = DATA.subjects.find(s => s.id === state.questSubject);
+  let body;
+  if (!subject || !subject.playable) {
+    body = '<div class="locked-note">วิชานี้กำลังจัดทำด่านอยู่ เร็ว ๆ นี้ 🚧</div>';
+  } else {
+    const quests = DATA.quests.filter(q => q.subjectId === subject.id);
+    body = quests.map(q => {
+      const enemy = DATA.monsters.find(m => m.id === q.enemyId);
+      const clears = state.save.questClears[q.id] || 0;
+      return `
+        <div class="quest-card">
+          <div class="quest-icon">${q.icon}</div>
+          <div class="quest-meta">
+            <div class="name">${q.name}</div>
+            <div class="enemy">ศัตรู: ${enemy.name} ${enemy.emoji}</div>
+            <div class="stars">Lv.แนะนำ ${q.recommendedLevel} ${clears ? '· ผ่านแล้ว ' + clears + ' ครั้ง ✅' : ''}</div>
+          </div>
+          <button class="quest-play" onclick="enterBattle('${q.id}', '${isTraining ? 'training' : 'battle'}')">
+            ${isTraining ? '🎯 ฝึก' : '⚔️ ลุย'}
+          </button>
+        </div>
+      `;
+    }).join('');
+  }
+
+  app.innerHTML = `
+    <div class="back-row"><a href="#" onclick="goScreen(event,'home')">← กลับหน้าหลัก</a></div>
+    <div class="section-title">${isTraining ? '🎯 Training Zone' : '🗺️ Quest Board'}</div>
+    ${isTraining ? '<div class="training-flag">โหมดฝึก: ตอบผิดไม่เสีย HP เล่นด่านไหนก็ได้ ไม่จำกัดเลเวล</div>' : ''}
+    <div class="subject-tabs">${tabs}</div>
+    ${body}
+  `;
+}
+function selectSubject(id){ state.questSubject = id; render(); }
+
+/* ============ BATTLE ENGINE ============ */
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+function enterBattle(questId, mode){
+  const quest = DATA.quests.find(q => q.id === questId);
+  const monster = DATA.monsters.find(m => m.id === quest.enemyId);
+  const playerMaxHp = maxHpForLevel(state.save.level);
+  state.battle = {
+    questId, mode, monster,
+    monsterHp: monster.hp, monsterMaxHp: monster.hp,
+    playerHp: playerMaxHp, playerMaxHp,
+    queue: shuffle(quest.questionIds.map(id => DATA.questions.find(q => q.id === id))),
+    qIndex: 0,
+    current: null,
+    timeLeft: 0, timerHandle: null,
+    locked: false,
+    result: null, // null | 'win' | 'lose'
+    expEarned: 0,
+  };
+  state.screen = 'battle';
+  render();
+  playBgm(quest.id.includes('288') || monster.atk >= 8 ? 'boss' : 'battle');
+  loadNextQuestion();
+}
+function loadNextQuestion(){
+  const b = state.battle;
+  if (b.qIndex >= b.queue.length) { b.queue = shuffle(b.queue); b.qIndex = 0; }
+  b.current = b.queue[b.qIndex++];
+  b.locked = false;
+  b.timeLeft = b.current.timeLimitSec;
+  renderBattleDialogue();
+  startTimer();
+}
+function startTimer(){
+  clearInterval(state.battle.timerHandle);
+  updateTimerBar();
+  state.battle.timerHandle = setInterval(() => {
+    state.battle.timeLeft -= 0.2;
+    if (state.battle.timeLeft <= 0) {
+      clearInterval(state.battle.timerHandle);
+      state.battle.timeLeft = 0;
+      updateTimerBar();
+      handleAnswer(-1);
+      return;
+    }
+    updateTimerBar();
+  }, 200);
+}
+function updateTimerBar(){
+  const b = state.battle;
+  const el = document.getElementById('timerFill');
+  if (!el) return;
+  const pct = Math.max(0, b.timeLeft / b.current.timeLimitSec * 100);
+  el.style.width = pct + '%';
+  el.className = 'timer-fill' + (pct < 25 ? ' lo' : pct < 55 ? ' mid' : '');
+}
+function handleAnswer(index){
+  const b = state.battle;
+  if (b.locked) return;
+  b.locked = true;
+  clearInterval(b.timerHandle);
+  const correct = index === b.current.correctIndex;
+
+  document.querySelectorAll('.answer-btn').forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === b.current.correctIndex) btn.classList.add('correct');
+    else if (i === index) btn.classList.add('wrong');
+  });
+
+  recordLawRefProgress(b.current.lawRef, correct);
+
+  if (correct) {
+    playSfx('correct');
+    const dmg = Math.round(atkForLevel(state.save.level) * (0.85 + Math.random()*0.3));
+    b.monsterHp = Math.max(0, b.monsterHp - dmg);
+    b.expEarned += b.current.expReward;
+    animateHit('enemy', dmg, false);
+    setTimeout(() => playSfx('attack'), 120);
+  } else {
+    playSfx('wrong');
+    if (b.mode !== 'training') {
+      const dmg = Math.round(b.monster.atk * (0.85 + Math.random()*0.3));
+      b.playerHp = Math.max(0, b.playerHp - dmg);
+      animateHit('player', dmg, false);
+    }
+  }
+  refreshHudOnly();
+
+  setTimeout(() => {
+    if (b.monsterHp <= 0) return finishBattle('win');
+    if (b.playerHp <= 0 && b.mode !== 'training') return finishBattle('lose');
+    loadNextQuestion();
+  }, 1100);
+}
+function animateHit(side, amount, heal){
+  const wrap = document.querySelector('.combatant.' + side + ' .sprite-wrap');
+  if (!wrap) return;
+  wrap.classList.remove('hit-shake'); void wrap.offsetWidth; wrap.classList.add('hit-shake');
+  const pop = document.createElement('div');
+  pop.className = 'dmg-pop' + (heal ? ' heal' : '');
+  pop.textContent = (heal ? '+' : '-') + amount;
+  wrap.appendChild(pop);
+  setTimeout(() => pop.remove(), 800);
+}
+function refreshHudOnly(){
+  const b = state.battle;
+  setHpBar('enemyHud', b.monsterHp, b.monsterMaxHp);
+  setHpBar('playerHud', b.playerHp, b.playerMaxHp);
+}
+function setHpBar(prefix, hp, maxHp){
+  const fill = document.getElementById(prefix + 'Fill');
+  const num = document.getElementById(prefix + 'Num');
+  if (!fill) return;
+  const pct = Math.max(0, hp / maxHp * 100);
+  fill.style.width = pct + '%';
+  fill.className = 'hp-fill' + (pct < 25 ? ' lo' : pct < 55 ? ' mid' : '');
+  if (num) num.textContent = Math.max(0, hp) + ' / ' + maxHp;
+}
+function recordLawRefProgress(lawRef, correct){
+  if (!correct) return;
+  const key = lawRef.book + ':' + lawRef.article;
+  const entry = state.save.unlockedLawRefs[key] || { correct: 0, unlocked: false };
+  entry.correct++;
+  if (entry.correct >= UNLOCK_THRESHOLD) entry.unlocked = true;
+  state.save.unlockedLawRefs[key] = entry;
+  saveSave();
+}
+function finishBattle(result){
+  const b = state.battle;
+  b.result = result;
+  let leveledUp = false, newStage = null;
+  if (result === 'win') {
+    playSfx('victory');
+    const clears = state.save.questClears[b.questId] || 0;
+    state.save.questClears[b.questId] = clears + 1;
+    const oldLevel = state.save.level;
+    leveledUp = gainExp(b.expEarned);
+    if (leveledUp) newStage = evolutionCrossed(oldLevel, state.save.level);
+    saveSave();
+  } else {
+    playSfx('defeat');
+  }
+  document.getElementById('rpg-bgm').pause();
+  renderBattleResult(leveledUp, newStage);
+}
+
+function renderBattle(app){
+  const b = state.battle;
+  app.innerHTML = `
+    <div class="back-row"><a href="#" onclick="confirmFlee(event)">← ล่าถอย</a></div>
+    <div class="battle-wrap">
+      <div class="battle-stage" id="battleStage" style="background-image:url('${subjectBgPath(DATA.quests.find(q=>q.id===b.questId).subjectId)}');background-size:cover;background-position:center">
+        <div class="combatant enemy">
+          <div class="hud" id="enemyHud">
+            <div class="who">${b.monster.name}</div>
+            <div class="hp-track"><div class="hp-fill" id="enemyHudFill" style="width:100%"></div></div>
+            <div class="hp-num" id="enemyHudNum">${b.monsterHp} / ${b.monsterMaxHp}</div>
+          </div>
+          ${spriteBox(monsterSpritePath(b.monster), b.monster.emoji)}
+        </div>
+        <div class="combatant player">
+          ${spriteBox(leeSpritePath(leeStageForLevel(state.save.level)), '🐱')}
+          <div class="hud" id="playerHud">
+            <div class="who">ลี Lv.${state.save.level}${b.mode==='training' ? ' (ฝึกซ้อม)' : ''}</div>
+            <div class="hp-track"><div class="hp-fill" id="playerHudFill" style="width:100%"></div></div>
+            <div class="hp-num" id="playerHudNum">${b.playerHp} / ${b.playerMaxHp}</div>
+          </div>
+        </div>
+      </div>
+      <div id="dialogueArea"></div>
+      <div class="battle-footer"><div class="flavor">${b.monster.flavor}</div></div>
+    </div>
+  `;
+  refreshHudOnly();
+}
+function renderBattleDialogue(){
+  const b = state.battle;
+  const q = b.current;
+  const area = document.getElementById('dialogueArea');
+  if (!area) return;
+  area.innerHTML = `
+    <div class="timer-track"><div class="timer-fill" id="timerFill" style="width:100%"></div></div>
+    <div class="dialogue-box">
+      <div class="dialogue-tag">🗡️ มาตรา ${q.lawRef.article} · ${q.lawRef.book === 'civil' ? 'ประมวลแพ่งฯ' : 'ประมวลอาญา'}</div>
+      <div class="dialogue-text">${q.prompt}</div>
+      <div class="answer-grid">
+        ${q.options.map((opt, i) => `<button class="answer-btn" onclick="handleAnswer(${i})">${opt}</button>`).join('')}
+      </div>
+    </div>
+  `;
+}
+function confirmFlee(ev){
+  ev.preventDefault();
+  clearInterval(state.battle && state.battle.timerHandle);
+  document.getElementById('rpg-bgm').pause();
+  state.screen = state.battle.mode === 'training' ? 'training' : 'quest';
+  state.battle = null;
+  render();
+}
+function renderBattleResult(leveledUp, newStage){
+  const b = state.battle;
+  const app = document.getElementById('app');
+  const overlay = document.createElement('div');
+  overlay.className = 'result-overlay';
+  overlay.innerHTML = b.result === 'win' ? `
+    <div class="result-card win">
+      <h2>🎉 ชนะแล้ว!</h2>
+      <p>ปราบ ${b.monster.name} สำเร็จ</p>
+      <p>ได้รับ EXP +${b.expEarned}</p>
+      ${leveledUp ? `<p class="evo-banner">⭐ เลเวลอัพ! ตอนนี้ Lv.${state.save.level}</p>` : ''}
+      ${newStage ? `<p class="evo-banner">🐱 ลีวิวัฒนาการ: ${newStage.title}!<br>${newStage.desc}</p>` : ''}
+      <div class="result-actions">
+        <button class="result-btn" onclick="rematch()">⚔️ สู้อีกครั้ง</button>
+        <button class="result-btn secondary" onclick="backToBoard()">กลับด่าน</button>
+      </div>
+    </div>
+  ` : `
+    <div class="result-card lose">
+      <h2>💀 พ่ายแพ้</h2>
+      <p>${b.monster.name} เอาชนะลีได้ในครั้งนี้</p>
+      <p>ลองทบทวนมาตรา ${b.current.lawRef.article} แล้วมาสู้ใหม่นะ</p>
+      <div class="result-actions">
+        <button class="result-btn" onclick="rematch()">🔄 ลองใหม่</button>
+        <button class="result-btn secondary" onclick="backToBoard()">กลับด่าน</button>
+      </div>
+    </div>
+  `;
+  app.appendChild(overlay);
+}
+function rematch(){
+  document.querySelector('.result-overlay').remove();
+  enterBattle(state.battle.questId, state.battle.mode);
+}
+function backToBoard(){
+  document.querySelector('.result-overlay').remove();
+  state.screen = state.battle.mode === 'training' ? 'training' : 'quest';
+  state.battle = null;
+  render();
+}
+
+/* ============ LAWBOOK ============ */
+function renderLawbook(app){
+  const entries = Object.keys(state.save.unlockedLawRefs);
+  app.innerHTML = `
+    <div class="back-row"><a href="#" onclick="goScreen(event,'home')">← กลับหน้าหลัก</a></div>
+    <div class="section-title">📖 Lawbook</div>
+    <div id="lawbookBody" class="loading-note">กำลังโหลดคลังมาตรา...</div>
+  `;
+  if (!entries.length) {
+    document.getElementById('lawbookBody').innerHTML = '<div class="locked-note">ยังไม่มีมาตราที่ปลดล็อก — ตอบคำถามให้ถูกสะสม ' + UNLOCK_THRESHOLD + ' ครั้งต่อมาตราในสนามรบเพื่อปลดล็อก</div>';
+    return;
+  }
+  ensureCodexLoaded().then(() => renderLawbookEntries(entries)).catch(() => {
+    document.getElementById('lawbookBody').innerHTML = '<div class="locked-note">โหลดคลังกฎหมายไม่สำเร็จ ลองใหม่อีกครั้ง</div>';
+  });
+}
+function ensureCodexLoaded(){
+  if (codexCache) return Promise.resolve(codexCache);
+  return fetch(CODEX_URL).then(r => r.json()).then(json => { codexCache = json; return json; });
+}
+function renderLawbookEntries(entries){
+  const body = document.getElementById('lawbookBody');
+  const html = entries.map(key => {
+    const [book, article] = key.split(':');
+    const progress = state.save.unlockedLawRefs[key];
+    if (!progress.unlocked) {
+      return `<div class="locked-entry"><span>🔒 ${book === 'civil' ? 'ประมวลแพ่งฯ' : 'ประมวลอาญา'} มาตรา ${article}</span><span class="progress">${progress.correct}/${UNLOCK_THRESHOLD}</span></div>`;
+    }
+    const art = codexCache.books[book] && codexCache.books[book].articles[article];
+    if (!art) return '';
+    const note = art.lectureNotes && art.lectureNotes[0];
+    return `
+      <div class="lawbook-entry">
+        <div class="head">
+          <span class="num">มาตรา ${article}</span>
+          <span class="book">${book === 'civil' ? 'ประมวลกฎหมายแพ่งและพาณิชย์' : 'ประมวลกฎหมายอาญา'}</span>
+        </div>
+        <div class="text">${art.text}</div>
+        ${note ? `<div class="mnemonic"><strong>เกร็ดช่วยจำ:</strong> ${note.text.slice(0,220)}${note.text.length>220?'…':''}</div>` : ''}
+        <button class="play-audio-btn" onclick="playMnemonic('${book}','${article}')">▶ ฟังเพลงช่วยจำ</button>
+      </div>
+    `;
+  }).join('');
+  body.className = '';
+  body.innerHTML = html;
+}
+</script>
+</body>
+</html>

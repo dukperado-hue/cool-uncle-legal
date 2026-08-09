@@ -1,0 +1,110 @@
+{
+  "version": "1.0",
+  "_comment": "Data for game-rpg-lee.html (แมวลี ผจญภัยประมวลกฎหมาย). lawRef points into codex-data.json (books.<book>.articles.<number>) so the Lawbook screen renders the real มาตรา text + lectureNotes instead of duplicating law content here. Extend by copying a quest/monster/question block — no code changes needed for new content within an existing subject.",
+
+  "leeEvolution": [
+    { "level": 1, "name": "ลี",             "title": "แมวเหมียวหน้าใหม่",        "sprite": "lee_lv1", "desc": "แมวสยามธรรมดา ตัวสีน้ำตาล หน้าดำ เพิ่งเริ่มอ่านประมวลกฎหมายเล่มแรก" },
+    { "level": 5, "name": "ลี",             "title": "ลีผู้ฝึกหัด",              "sprite": "lee_lv2", "desc": "ยืนสองขาได้แล้ว ถือค้อนไม้ของผู้พิพากษาเป็นอาวุธแรก" },
+    { "level": 10, "name": "ลี",            "title": "นิสิตนิติศาสตร์ลี",         "sprite": "lee_lv3", "desc": "สวมเสื้อคลุมนักศึกษานิติศาสตร์เก่า ๆ เริ่มมีรอยขีดเขียนตำราเต็มตัว" },
+    { "level": 16, "name": "ลี",            "title": "ทนายฝึกหัดลี",             "sprite": "lee_lv4", "desc": "สะพายกระเป๋าเอกสาร สวมเกราะทนายความบาง ๆ ทับเสื้อคลุม" },
+    { "level": 23, "name": "ลี",            "title": "เนติบัณฑิตลี",             "sprite": "lee_lv5", "desc": "เสื้อครุยสีเงินเริ่มเรืองแสงจาง ๆ รอบตัว" },
+    { "level": 31, "name": "ลี",            "title": "ผู้พิพากษาลี",             "sprite": "lee_lv6", "desc": "เกราะทองคำบางส่วนคลุมเสื้อครุย ถือประมวลกฎหมายเป็นโล่ป้องกัน" },
+    { "level": 40, "name": "ลี",            "title": "ราชสีห์แห่งประมวลกฎหมาย",   "sprite": "lee_lv7", "desc": "ชุดครุยทองเต็มยศ ถือประมวลกฎหมายแพ่งและพาณิชย์เรืองแสงเป็นอาวุธ" }
+  ],
+
+  "subjects": [
+    { "id": "civil",    "name": "ขาแพ่ง",               "icon": "🔑", "codexBook": "civil",    "playable": true },
+    { "id": "criminal", "name": "ขาอาญา",               "icon": "⚖️", "codexBook": "criminal", "playable": true },
+    { "id": "civpro",   "name": "วิ.แพ่ง",              "icon": "📜", "codexBook": "civpro",   "playable": false },
+    { "id": "crimpro",  "name": "วิ.อาญา",              "icon": "🚔", "codexBook": "crimpro",  "playable": false },
+    { "id": "admin",    "name": "กฎหมายปกครอง",         "icon": "🏛️", "codexBook": "adminproc","playable": false },
+    { "id": "intl",     "name": "กฎหมายระหว่างประเทศ",  "icon": "🌏", "codexBook": null,       "playable": false }
+  ],
+
+  "quests": [
+    { "id": "civil-tort-elements", "subjectId": "civil", "name": "ป่าละเมิดพิศวง", "icon": "🌫️", "recommendedLevel": 1,
+      "enemyId": "yokai_intent_negligence", "lawRef": { "book": "civil", "article": "420" },
+      "questionIds": ["q_civil_420_1", "q_civil_420_2"] },
+
+    { "id": "civil-tort-damages", "subjectId": "civil", "name": "หอคอยค่าสินไหม", "icon": "🗼", "recommendedLevel": 3,
+      "enemyId": "yokai_compensation_giant", "lawRef": { "book": "civil", "article": "438" },
+      "questionIds": ["q_civil_438_1", "q_civil_438_2"] },
+
+    { "id": "civil-tort-prescription", "subjectId": "civil", "name": "ป้อมปราการขาดอายุความ", "icon": "⏳", "recommendedLevel": 5,
+      "enemyId": "yokai_prescription_demon", "lawRef": { "book": "civil", "article": "448" },
+      "questionIds": ["q_civil_448_1", "q_civil_448_2"] },
+
+    { "id": "civil-inheritance-devolve", "subjectId": "civil", "name": "หุบเขาครอบครัวมรดก", "icon": "⛰️", "recommendedLevel": 4,
+      "enemyId": "yokai_heirless_ghost", "lawRef": { "book": "civil", "article": "1599" },
+      "questionIds": ["q_civil_1599_1", "q_civil_1599_2"] },
+
+    { "id": "civil-simulated-act", "subjectId": "civil", "name": "คฤหาสน์นิติกรรมลวง", "icon": "🏚️", "recommendedLevel": 7,
+      "enemyId": "golem_simulated_act", "lawRef": { "book": "civil", "article": "155" },
+      "questionIds": ["q_civil_155_1", "q_civil_155_2"] },
+
+    { "id": "criminal-mens-rea", "subjectId": "criminal", "name": "ป่าเจตนาประมาท", "icon": "🌲", "recommendedLevel": 2,
+      "enemyId": "yokai_two_faced_intent", "lawRef": { "book": "criminal", "article": "59" },
+      "questionIds": ["q_criminal_59_1", "q_criminal_59_2"] },
+
+    { "id": "criminal-murder", "subjectId": "criminal", "name": "ทุ่งมัจจุราช", "icon": "🩸", "recommendedLevel": 8,
+      "enemyId": "reaper_288", "lawRef": { "book": "criminal", "article": "288" },
+      "questionIds": ["q_criminal_288_1", "q_criminal_288_2"] },
+
+    { "id": "criminal-theft", "subjectId": "criminal", "name": "ตรอกลักทรัพย์", "icon": "🌙", "recommendedLevel": 3,
+      "enemyId": "yokai_quick_hands", "lawRef": { "book": "criminal", "article": "334" },
+      "questionIds": ["q_criminal_334_1", "q_criminal_334_2"] }
+  ],
+
+  "monsters": [
+    { "id": "yokai_intent_negligence",  "name": "ผีจงใจประมาท",         "subjectId": "civil",    "hp": 26, "atk": 5, "sprite": "monster_intent_negligence",  "emoji": "👻", "flavor": "ผีสองหน้า หน้าหนึ่งจงใจ อีกหน้าประมาทเลินเล่อ วนเวียนถามหาองค์ประกอบละเมิดไม่รู้จบ" },
+    { "id": "yokai_compensation_giant", "name": "ยักษ์ค่าสินไหมทดแทน",  "subjectId": "civil",    "hp": 34, "atk": 6, "sprite": "monster_compensation_giant", "emoji": "🗿", "flavor": "ยักษ์ถือตาชั่งพังคว่ำ ชั่งความเสียหายเกินจริงเสมอจนศาลต้องเข้ามาวินิจฉัยใหม่ทุกครั้ง" },
+    { "id": "yokai_prescription_demon", "name": "ปีศาจขาดอายุความ",    "subjectId": "civil",    "hp": 24, "atk": 4, "sprite": "monster_prescription_demon", "emoji": "⏳", "flavor": "ปีศาจนาฬิกาทรายที่ไล่ล่าเจ้าหนี้ผู้เชื่องช้า รอวันให้สิทธิเรียกร้องเสื่อมไปกับกาลเวลา" },
+    { "id": "yokai_heirless_ghost",     "name": "ผีทายาทไร้สิทธิ",     "subjectId": "civil",    "hp": 24, "atk": 4, "sprite": "monster_heirless_ghost",     "emoji": "🌫️", "flavor": "วิญญาณเจ้ามรดกที่หลงทางอยู่ในหุบเขา ไม่รู้ว่าทรัพย์สินของตนตกทอดไปหาใครแล้ว" },
+    { "id": "golem_simulated_act",      "name": "โกเลมนิติกรรมอำพราง", "subjectId": "civil",    "hp": 24, "atk": 4, "sprite": "monster_simulated_act_golem","emoji": "🎭", "flavor": "หุ่นดินสองหน้ากาก สวมทับนิติกรรมจริงไว้ข้างใน ลวงให้ทุกคนเข้าใจผิดโดยสมรู้กัน" },
+    { "id": "yokai_two_faced_intent",   "name": "ปีศาจสองหน้าเจตนา",   "subjectId": "criminal", "hp": 34, "atk": 6, "sprite": "monster_two_faced_intent",   "emoji": "🐍", "flavor": "ปีศาจที่สลับหน้ากากระหว่าง 'ประสงค์ต่อผล' กับ 'ย่อมเล็งเห็นผล' ตลอดเวลาจนแยกไม่ออก" },
+    { "id": "reaper_288",               "name": "มัจจุราชมาตรา 288",   "subjectId": "criminal", "hp": 42, "atk": 8, "sprite": "monster_reaper_288",         "emoji": "💀", "flavor": "บอสประจำทุ่งมัจจุราช ถือเคียวประหารชีวิต คำถามจากปากมันหนักที่สุดในเกม" },
+    { "id": "yokai_quick_hands",        "name": "ยักษ์มือไว",          "subjectId": "criminal", "hp": 34, "atk": 6, "sprite": "monster_quick_hands",        "emoji": "🖐️", "flavor": "ยักษ์มือหลายข้างที่หยิบฉวยทรัพย์ผู้อื่นไปโดยทุจริตก่อนใครทันตั้งตัว" }
+  ],
+
+  "questions": [
+    { "id": "q_civil_420_1", "lawRef": { "book": "civil", "article": "420" }, "prompt": "การกระทำละเมิดตามมาตรา 420 ต้องประกอบด้วยจิตใจของผู้กระทำแบบใด?",
+      "options": ["จงใจหรือประมาทเลินเล่อ", "เจตนาพิเศษเท่านั้น", "ประมาทเลินเล่ออย่างร้ายแรงเท่านั้น", "ไม่ต้องพิจารณาเจตนาเลย"], "correctIndex": 0, "timeLimitSec": 20, "expReward": 12 },
+    { "id": "q_civil_420_2", "lawRef": { "book": "civil", "article": "420" }, "prompt": "ตามมาตรา 420 สิทธิที่ได้รับความคุ้มครองจากการละเมิดมีอะไรบ้าง?",
+      "options": ["เฉพาะทรัพย์สินเท่านั้น", "ชีวิต ร่างกาย อนามัย เสรีภาพ ทรัพย์สิน หรือสิทธิอย่างหนึ่งอย่างใด", "เฉพาะชีวิตและร่างกายเท่านั้น", "เฉพาะกรณีมีสัญญาต่อกันอยู่ก่อน"], "correctIndex": 1, "timeLimitSec": 20, "expReward": 12 },
+
+    { "id": "q_civil_438_1", "lawRef": { "book": "civil", "article": "438" }, "prompt": "ศาลใช้หลักเกณฑ์ใดกำหนดค่าสินไหมทดแทนตามมาตรา 438?",
+      "options": ["ตามควรแก่พฤติการณ์และความร้ายแรงแห่งละเมิด", "จำนวนตายตัวตามบัญชีท้ายกฎหมาย", "ตามที่จำเลยยินยอมเท่านั้น", "ห้ามศาลใช้ดุลพินิจใด ๆ"], "correctIndex": 0, "timeLimitSec": 20, "expReward": 14 },
+    { "id": "q_civil_438_2", "lawRef": { "book": "civil", "article": "438" }, "prompt": "ค่าสินไหมทดแทนตามมาตรา 438 ครอบคลุมเรื่องใด?",
+      "options": ["เฉพาะค่าปรับทางอาญา", "เฉพาะดอกเบี้ยผิดนัดชำระหนี้", "การคืนทรัพย์สินหรือใช้ราคาทรัพย์สิน รวมค่าเสียหายอื่นที่ก่อขึ้น", "เฉพาะค่าขึ้นศาล"], "correctIndex": 2, "timeLimitSec": 20, "expReward": 14 },
+
+    { "id": "q_civil_448_1", "lawRef": { "book": "civil", "article": "448" }, "prompt": "สิทธิเรียกร้องค่าเสียหายจากมูลละเมิดขาดอายุความเมื่อใด (กรณีปกติ)?",
+      "options": ["3 ปีนับแต่วันทำละเมิดเสมอ", "1 ปีนับแต่รู้ถึงการละเมิดและรู้ตัวผู้ต้องรับผิด หรือ 10 ปีนับแต่วันทำละเมิด", "ไม่มีอายุความ", "5 ปีนับแต่วันฟ้องคดี"], "correctIndex": 1, "timeLimitSec": 18, "expReward": 16 },
+    { "id": "q_civil_448_2", "lawRef": { "book": "civil", "article": "448" }, "prompt": "ถ้าการละเมิดเป็นความผิดอาญาที่มีอายุความยาวกว่าอายุความละเมิดปกติ ต้องใช้อายุความใด?",
+      "options": ["ใช้ 1 ปีเสมอ", "ใช้ 10 ปีเสมอ", "ให้โจทก์เลือกอายุความที่สั้นที่สุด", "ใช้อายุความทางอาญาที่ยาวกว่านั้นบังคับ"], "correctIndex": 3, "timeLimitSec": 18, "expReward": 16 },
+
+    { "id": "q_civil_1599_1", "lawRef": { "book": "civil", "article": "1599" }, "prompt": "เมื่อบุคคลใดตาย มรดกของบุคคลนั้นตกทอดแก่ใคร?",
+      "options": ["ทายาท", "รัฐเสมอ", "เจ้าหนี้ทุกรายก่อน", "ผู้จัดการมรดกกลายเป็นเจ้าของ"], "correctIndex": 0, "timeLimitSec": 18, "expReward": 13 },
+    { "id": "q_civil_1599_2", "lawRef": { "book": "civil", "article": "1599" }, "prompt": "ทายาทจะเสียสิทธิในมรดกได้ด้วยเหตุใดตามมาตรา 1599?",
+      "options": ["สละสิทธิด้วยวาจาก็ได้เสมอ", "โดยบทบัญญัติแห่งประมวลกฎหมายนี้หรือกฎหมายอื่นเท่านั้น", "หมดสิทธิเมื่อย้ายภูมิลำเนา", "เจ้ามรดกตัดสิทธิทายาทไม่ได้เลย"], "correctIndex": 1, "timeLimitSec": 18, "expReward": 13 },
+
+    { "id": "q_civil_155_1", "lawRef": { "book": "civil", "article": "155" }, "prompt": "นิติกรรมที่แสดงเจตนาลวงโดยสมรู้กับคู่กรณีอีกฝ่ายมีผลอย่างไร?",
+      "options": ["ตกเป็นโมฆะ", "สมบูรณ์เสมอ", "เป็นโมฆียะ", "บังคับได้เฉพาะคู่สัญญาเท่านั้น"], "correctIndex": 0, "timeLimitSec": 20, "expReward": 18 },
+    { "id": "q_civil_155_2", "lawRef": { "book": "civil", "article": "155" }, "prompt": "ถ้าการแสดงเจตนาลวงทำขึ้นเพื่ออำพรางนิติกรรมอื่น ต้องบังคับอย่างไร?",
+      "options": ["ถือว่านิติกรรมทั้งสองเป็นโมฆะทั้งหมด", "ให้ใช้นิติกรรมอำพรางเป็นหลักเสมอ", "นำบทบัญญัติเกี่ยวกับนิติกรรมที่ถูกอำพรางมาใช้บังคับ", "ไม่มีผลทางกฎหมายใด ๆ เลย"], "correctIndex": 2, "timeLimitSec": 20, "expReward": 18 },
+
+    { "id": "q_criminal_59_1", "lawRef": { "book": "criminal", "article": "59" }, "prompt": "หลักทั่วไปทางอาญา บุคคลต้องรับผิดเมื่อกระทำโดยจิตใจแบบใด?",
+      "options": ["ประมาทเท่านั้น", "เจตนา เว้นแต่กฎหมายบัญญัติให้รับผิดฐานประมาทหรือไม่มีเจตนาไว้ชัดแจ้ง", "ไม่ต้องพิจารณาเจตนาเลย", "เจตนาพิเศษเท่านั้น"], "correctIndex": 1, "timeLimitSec": 20, "expReward": 14 },
+    { "id": "q_criminal_59_2", "lawRef": { "book": "criminal", "article": "59" }, "prompt": "การกระทำโดยประมาทตามมาตรา 59 หมายถึงอะไร?",
+      "options": ["กระทำโดยประสงค์ต่อผลเสมอ", "กระทำโดยไม่รู้กฎหมาย", "กระทำโดยปราศจากความระมัดระวังที่บุคคลในภาวะเช่นนั้นต้องมีตามวิสัยและพฤติการณ์", "กระทำตามคำสั่งผู้บังคับบัญชาเสมอ"], "correctIndex": 2, "timeLimitSec": 20, "expReward": 14 },
+
+    { "id": "q_criminal_288_1", "lawRef": { "book": "criminal", "article": "288" }, "prompt": "ผู้ใดฆ่าผู้อื่น ต้องระวางโทษสูงสุดเท่าใด?",
+      "options": ["ประหารชีวิต", "จำคุกไม่เกิน 20 ปี", "ปรับสถานเดียว", "จำคุกไม่เกิน 3 ปี"], "correctIndex": 0, "timeLimitSec": 15, "expReward": 22 },
+    { "id": "q_criminal_288_2", "lawRef": { "book": "criminal", "article": "288" }, "prompt": "มาตรา 288 กำหนดโทษจำคุกอย่างต่ำเท่าใด (กรณีไม่ประหารชีวิตหรือจำคุกตลอดชีวิต)?",
+      "options": ["1 ปี", "5 ปี", "15 ปี", "ไม่มีขั้นต่ำ"], "correctIndex": 2, "timeLimitSec": 15, "expReward": 22 },
+
+    { "id": "q_criminal_334_1", "lawRef": { "book": "criminal", "article": "334" }, "prompt": "การลักทรัพย์ตามมาตรา 334 ต้องเอาทรัพย์ของผู้อื่นไปอย่างไร?",
+      "options": ["โดยทุจริต", "โดยประมาท", "โดยไม่เจตนา", "โดยมีสัญญายินยอม"], "correctIndex": 0, "timeLimitSec": 18, "expReward": 15 },
+    { "id": "q_criminal_334_2", "lawRef": { "book": "criminal", "article": "334" }, "prompt": "โทษของความผิดฐานลักทรัพย์ตามมาตรา 334 คือเท่าใด?",
+      "options": ["จำคุกตลอดชีวิต", "จำคุกไม่เกิน 3 ปี และปรับไม่เกิน 6 หมื่นบาท", "ปรับสถานเดียวไม่เกิน 1 พันบาท", "ประหารชีวิต"], "correctIndex": 1, "timeLimitSec": 18, "expReward": 15 }
+  ]
+}
