@@ -22,35 +22,35 @@
   ],
 
   "quests": [
-    { "id": "civil-tort-elements", "subjectId": "civil", "name": "ป่าละเมิดพิศวง", "icon": "🌫️", "recommendedLevel": 1,
+    { "id": "civil-tort-elements", "subjectId": "civil", "topic": "ละเมิด", "name": "ป่าละเมิดพิศวง", "icon": "🌫️", "recommendedLevel": 1,
       "enemyId": "yokai_intent_negligence", "lawRef": { "book": "civil", "article": "420" },
       "questionIds": ["q_civil_420_1", "q_civil_420_2"] },
 
-    { "id": "civil-tort-damages", "subjectId": "civil", "name": "หอคอยค่าสินไหม", "icon": "🗼", "recommendedLevel": 3,
+    { "id": "civil-tort-damages", "subjectId": "civil", "topic": "ละเมิด", "name": "หอคอยค่าสินไหม", "icon": "🗼", "recommendedLevel": 3,
       "enemyId": "yokai_compensation_giant", "lawRef": { "book": "civil", "article": "438" },
       "questionIds": ["q_civil_438_1", "q_civil_438_2"] },
 
-    { "id": "civil-tort-prescription", "subjectId": "civil", "name": "ป้อมปราการขาดอายุความ", "icon": "⏳", "recommendedLevel": 5,
+    { "id": "civil-tort-prescription", "subjectId": "civil", "topic": "ละเมิด", "name": "ป้อมปราการขาดอายุความ", "icon": "⏳", "recommendedLevel": 5,
       "enemyId": "yokai_prescription_demon", "lawRef": { "book": "civil", "article": "448" },
       "questionIds": ["q_civil_448_1", "q_civil_448_2"] },
 
-    { "id": "civil-inheritance-devolve", "subjectId": "civil", "name": "หุบเขาครอบครัวมรดก", "icon": "⛰️", "recommendedLevel": 4,
+    { "id": "civil-inheritance-devolve", "subjectId": "civil", "topic": "มรดก", "name": "หุบเขาครอบครัวมรดก", "icon": "⛰️", "recommendedLevel": 4,
       "enemyId": "yokai_heirless_ghost", "lawRef": { "book": "civil", "article": "1599" },
       "questionIds": ["q_civil_1599_1", "q_civil_1599_2"] },
 
-    { "id": "civil-simulated-act", "subjectId": "civil", "name": "คฤหาสน์นิติกรรมลวง", "icon": "🏚️", "recommendedLevel": 7,
+    { "id": "civil-simulated-act", "subjectId": "civil", "topic": "นิติกรรม", "name": "คฤหาสน์นิติกรรมลวง", "icon": "🏚️", "recommendedLevel": 7,
       "enemyId": "golem_simulated_act", "lawRef": { "book": "civil", "article": "155" },
       "questionIds": ["q_civil_155_1", "q_civil_155_2"] },
 
-    { "id": "criminal-mens-rea", "subjectId": "criminal", "name": "ป่าเจตนาประมาท", "icon": "🌲", "recommendedLevel": 2,
+    { "id": "criminal-mens-rea", "subjectId": "criminal", "topic": "เจตนาและประมาท", "name": "ป่าเจตนาประมาท", "icon": "🌲", "recommendedLevel": 2,
       "enemyId": "yokai_two_faced_intent", "lawRef": { "book": "criminal", "article": "59" },
       "questionIds": ["q_criminal_59_1", "q_criminal_59_2"] },
 
-    { "id": "criminal-murder", "subjectId": "criminal", "name": "ทุ่งมัจจุราช", "icon": "🩸", "recommendedLevel": 8,
+    { "id": "criminal-murder", "subjectId": "criminal", "topic": "ความผิดต่อชีวิต", "name": "ทุ่งมัจจุราช", "icon": "🩸", "recommendedLevel": 8,
       "enemyId": "reaper_288", "lawRef": { "book": "criminal", "article": "288" },
       "questionIds": ["q_criminal_288_1", "q_criminal_288_2"] },
 
-    { "id": "criminal-theft", "subjectId": "criminal", "name": "ตรอกลักทรัพย์", "icon": "🌙", "recommendedLevel": 3,
+    { "id": "criminal-theft", "subjectId": "criminal", "topic": "ทรัพย์", "name": "ตรอกลักทรัพย์", "icon": "🌙", "recommendedLevel": 3,
       "enemyId": "yokai_quick_hands", "lawRef": { "book": "criminal", "article": "334" },
       "questionIds": ["q_criminal_334_1", "q_criminal_334_2"] }
   ],

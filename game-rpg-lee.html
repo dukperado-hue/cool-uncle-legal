@@ -52,7 +52,7 @@ img{max-width:100%; display:block}
 .mute-btn.active{background:var(--gold-soft); color:#8F6511; border-color:var(--gold)}
 
 /* ============ APP SHELL ============ */
-.app{max-width:720px; margin:0 auto; padding:16px 14px 60px}
+.app{max-width:960px; margin:0 auto; padding:20px 18px 70px}
 
 /* ============ HOME / STATUS CARD ============ */
 .lee-status{
@@ -60,11 +60,11 @@ img{max-width:100%; display:block}
   box-shadow:var(--shadow); padding:18px; display:flex; gap:16px; align-items:center; margin-bottom:18px;
 }
 .lee-portrait{
-  position:relative; width:88px; height:88px; border-radius:16px; background:var(--gold-soft);
+  position:relative; width:108px; height:108px; border-radius:18px; background:var(--gold-soft);
   display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden;
   border:2px solid var(--gold);
 }
-.lee-portrait .fallback{font-size:44px}
+.lee-portrait .fallback{font-size:54px}
 .lee-portrait img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
 .lee-info{flex:1; min-width:0}
 .lee-info .name{font-weight:800; font-size:16px}
@@ -73,15 +73,27 @@ img{max-width:100%; display:block}
 .exp-fill{height:100%; background:linear-gradient(90deg,var(--accent),#5f86d1); border-radius:999px; transition:width .4s ease}
 .exp-label{font-size:11px; color:var(--ink-faint); margin-top:4px}
 
-.menu-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.menu-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
 .menu-card{
   background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
-  padding:18px 14px; text-align:center; text-decoration:none; color:var(--ink); transition:transform .15s ease;
+  padding:26px 16px; text-align:center; text-decoration:none; color:var(--ink); transition:transform .15s ease;
 }
 .menu-card:hover{transform:translateY(-2px); border-color:var(--gold)}
-.menu-card .icon{font-size:30px; margin-bottom:8px}
-.menu-card .label{font-weight:700; font-size:14.5px}
-.menu-card .sub{font-size:11.5px; color:var(--ink-soft); margin-top:2px}
+.menu-card .icon{font-size:38px; margin-bottom:10px}
+.menu-card .label{font-weight:700; font-size:16px}
+.menu-card .sub{font-size:12.5px; color:var(--ink-soft); margin-top:3px}
+
+/* ============ QUEST MODE PICKER ============ */
+.mode-pick-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:6px}
+.mode-pick-card{
+  background:var(--card); border:2px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:30px 16px; text-align:center; color:var(--ink);
+}
+.mode-pick-card:hover{border-color:var(--accent); transform:translateY(-2px)}
+.mode-pick-card .icon{font-size:36px; margin-bottom:10px}
+.mode-pick-card .label{font-weight:800; font-size:16px}
+.mode-pick-card .sub{font-size:12.5px; color:var(--ink-soft); margin-top:4px; line-height:1.5}
+@media(max-width:480px){.mode-pick-grid{grid-template-columns:1fr}}
 
 /* ============ QUEST BOARD ============ */
 .section-title{font-size:18px; font-weight:800; margin:4px 0 12px}
@@ -118,18 +130,18 @@ img{max-width:100%; display:block}
   border-radius:16px; padding:14px 12px 0; color:var(--rpg-text); overflow:hidden;
   box-shadow:0 10px 32px rgba(0,0,0,.35);
 }
-.battle-stage{position:relative; min-height:230px; border-radius:10px; overflow:hidden;
+.battle-stage{position:relative; min-height:300px; border-radius:10px; overflow:hidden;
   background:linear-gradient(180deg,#232a42 0%,#141a2c 60%,#0b0e18 100%); margin-bottom:10px;}
 .battle-stage::before{ /* eerie fog */
   content:""; position:absolute; inset:0;
   background:radial-gradient(60% 40% at 20% 90%, rgba(255,255,255,.05), transparent 70%);
   pointer-events:none;
 }
-.combatant{position:absolute; display:flex; flex-direction:column; align-items:center; gap:6px}
-.combatant.enemy{top:14px; right:22px}
-.combatant.player{bottom:10px; left:18px}
-.sprite-wrap{position:relative; width:84px; height:84px; display:flex; align-items:center; justify-content:center}
-.sprite-fallback{font-size:52px; filter:drop-shadow(0 6px 8px rgba(0,0,0,.5))}
+.combatant{position:absolute; display:flex; flex-direction:column; align-items:center; gap:8px}
+.combatant.enemy{top:18px; right:28px}
+.combatant.player{bottom:14px; left:24px}
+.sprite-wrap{position:relative; width:108px; height:108px; display:flex; align-items:center; justify-content:center}
+.sprite-fallback{font-size:66px; filter:drop-shadow(0 6px 8px rgba(0,0,0,.5))}
 .sprite-wrap img{position:absolute; inset:0; width:100%; height:100%; object-fit:contain}
 .combatant.enemy .sprite-fallback{filter:drop-shadow(0 6px 10px rgba(0,0,0,.6)) saturate(1.1)}
 .hit-shake{animation:hitShake .35s ease}
@@ -149,7 +161,7 @@ img{max-width:100%; display:block}
 .dmg-pop.heal{color:var(--rpg-hp-hi)}
 @keyframes dmgPop{0%{opacity:0; transform:translate(-50%,4px)} 20%{opacity:1} 100%{opacity:0; transform:translate(-50%,-26px)}}
 
-.hud{width:150px; background:var(--rpg-panel); border:2px solid var(--rpg-border-dk);
+.hud{width:180px; background:var(--rpg-panel); border:2px solid var(--rpg-border-dk);
   box-shadow:0 0 0 2px var(--rpg-border-lt), 0 3px 0 rgba(0,0,0,.4); border-radius:4px; padding:6px 8px;}
 .hud .who{font-size:10.5px; font-weight:700; margin-bottom:4px; color:var(--rpg-gold); letter-spacing:.02em}
 .hp-track{height:10px; background:#3a0f10; border-radius:2px; overflow:hidden; box-shadow:inset 0 0 0 1px #000}
@@ -169,11 +181,11 @@ img{max-width:100%; display:block}
   padding:14px 14px 16px; margin-bottom:12px;
 }
 .dialogue-tag{font-size:10px; color:var(--rpg-gold); margin-bottom:6px; letter-spacing:.03em}
-.dialogue-text{font-size:14px; line-height:1.65; color:var(--rpg-text); min-height:44px}
-.answer-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px}
+.dialogue-text{font-size:15.5px; line-height:1.65; color:var(--rpg-text); min-height:44px}
+.answer-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px}
 .answer-btn{
   background:#0f1424; border:2px solid var(--rpg-border-lt); color:var(--rpg-text);
-  border-radius:6px; padding:10px 10px; font-size:12.5px; text-align:left; line-height:1.4;
+  border-radius:6px; padding:13px 12px; font-size:13.5px; text-align:left; line-height:1.45;
   transition:all .12s ease;
 }
 .answer-btn:hover:not(:disabled){background:#1a2140; border-color:var(--rpg-gold)}
@@ -405,6 +417,7 @@ function render(){
   const app = document.getElementById('app');
   if (state.screen === 'loading') { app.innerHTML = '<div class="loading-note">กำลังโหลด...</div>'; return; }
   if (state.screen === 'home') return renderHome(app);
+  if (state.screen === 'questModePick') return renderQuestModePick(app);
   if (state.screen === 'quest') return renderQuestBoard(app, false);
   if (state.screen === 'training') return renderQuestBoard(app, true);
   if (state.screen === 'lawbook') return renderLawbook(app);
@@ -428,9 +441,9 @@ function renderHome(app){
       </div>
     </div>
     <div class="menu-grid">
-      <a href="#" class="menu-card" onclick="goScreen(event,'quest')">
+      <a href="#" class="menu-card" onclick="goScreen(event,'questModePick')">
         <div class="icon">🗺️</div><div class="label">Quest Board</div>
-        <div class="sub">เลือกด่านตามวิชา</div>
+        <div class="sub">เลือกด่านตามขาหรือวิชา</div>
       </a>
       <a href="#" class="menu-card" onclick="goScreen(event,'training')">
         <div class="icon">🎯</div><div class="label">Training Zone</div>
@@ -456,47 +469,83 @@ function goScreen(ev, screen){
   render();
 }
 
-/* ============ QUEST BOARD / TRAINING ZONE (shared list UI) ============ */
-function renderQuestBoard(app, isTraining){
-  const tabs = DATA.subjects.map(s => `
-    <button class="subject-tab ${s.id === state.questSubject ? 'active' : ''} ${s.playable ? '' : 'locked'}"
-      ${s.playable ? `onclick="selectSubject('${s.id}')"` : 'disabled'}>${s.icon} ${s.name}</button>
-  `).join('');
-
-  const subject = DATA.subjects.find(s => s.id === state.questSubject);
-  let body;
-  if (!subject || !subject.playable) {
-    body = '<div class="locked-note">วิชานี้กำลังจัดทำด่านอยู่ เร็ว ๆ นี้ 🚧</div>';
-  } else {
-    const quests = DATA.quests.filter(q => q.subjectId === subject.id);
-    body = quests.map(q => {
-      const enemy = DATA.monsters.find(m => m.id === q.enemyId);
-      const clears = state.save.questClears[q.id] || 0;
-      return `
-        <div class="quest-card">
-          <div class="quest-icon">${q.icon}</div>
-          <div class="quest-meta">
-            <div class="name">${q.name}</div>
-            <div class="enemy">ศัตรู: ${enemy.name} ${enemy.emoji}</div>
-            <div class="stars">Lv.แนะนำ ${q.recommendedLevel} ${clears ? '· ผ่านแล้ว ' + clears + ' ครั้ง ✅' : ''}</div>
-          </div>
-          <button class="quest-play" onclick="enterBattle('${q.id}', '${isTraining ? 'training' : 'battle'}')">
-            ${isTraining ? '🎯 ฝึก' : '⚔️ ลุย'}
-          </button>
-        </div>
-      `;
-    }).join('');
+/* ============ QUEST MODE PICKER (แยกตามขา vs แยกตามวิชา) ============ */
+function pickQuestMode(mode){
+  state.questGroupMode = mode;
+  if (mode === 'wicha' && !state.questTopic) {
+    state.questTopic = [...new Set(DATA.quests.map(q => q.topic))][0];
   }
-
+  state.screen = 'quest';
+  render();
+}
+function renderQuestModePick(app){
   app.innerHTML = `
     <div class="back-row"><a href="#" onclick="goScreen(event,'home')">← กลับหน้าหลัก</a></div>
-    <div class="section-title">${isTraining ? '🎯 Training Zone' : '🗺️ Quest Board'}</div>
+    <div class="section-title">🗺️ Quest Board</div>
+    <div class="mode-pick-grid">
+      <a href="#" class="mode-pick-card" onclick="event.preventDefault(); pickQuestMode('khaa')">
+        <div class="icon">⚖️</div><div class="label">แยกตามขา</div>
+        <div class="sub">เลือกจากขาสอบ (ขาแพ่ง / ขาอาญา / วิ.แพ่ง ฯลฯ)</div>
+      </a>
+      <a href="#" class="mode-pick-card" onclick="event.preventDefault(); pickQuestMode('wicha')">
+        <div class="icon">📚</div><div class="label">แยกตามวิชา</div>
+        <div class="sub">เลือกจากหัวข้อวิชา (ละเมิด / นิติกรรม / มรดก ฯลฯ) ข้ามขาได้</div>
+      </a>
+    </div>
+  `;
+}
+
+/* ============ QUEST BOARD / TRAINING ZONE (shared list UI) ============ */
+function renderQuestBoard(app, isTraining){
+  const groupByTopic = !isTraining && state.questGroupMode === 'wicha';
+
+  let tabs, quests, lockedMsg = null;
+  if (groupByTopic) {
+    const topics = [...new Set(DATA.quests.map(q => q.topic))];
+    if (!state.questTopic || !topics.includes(state.questTopic)) state.questTopic = topics[0];
+    tabs = topics.map(t => {
+      const sampleIcon = DATA.quests.find(q => q.topic === t).icon;
+      return `<button class="subject-tab ${t === state.questTopic ? 'active' : ''}" onclick="selectTopic('${t}')">${sampleIcon} ${t}</button>`;
+    }).join('');
+    quests = DATA.quests.filter(q => q.topic === state.questTopic);
+  } else {
+    tabs = DATA.subjects.map(s => `
+      <button class="subject-tab ${s.id === state.questSubject ? 'active' : ''} ${s.playable ? '' : 'locked'}"
+        ${s.playable ? `onclick="selectSubject('${s.id}')"` : 'disabled'}>${s.icon} ${s.name}</button>
+    `).join('');
+    const subject = DATA.subjects.find(s => s.id === state.questSubject);
+    if (!subject || !subject.playable) { lockedMsg = 'วิชานี้กำลังจัดทำด่านอยู่ เร็ว ๆ นี้ 🚧'; quests = []; }
+    else quests = DATA.quests.filter(q => q.subjectId === subject.id);
+  }
+
+  const body = lockedMsg ? `<div class="locked-note">${lockedMsg}</div>` : quests.map(q => {
+    const enemy = DATA.monsters.find(m => m.id === q.enemyId);
+    const clears = state.save.questClears[q.id] || 0;
+    return `
+      <div class="quest-card">
+        <div class="quest-icon">${q.icon}</div>
+        <div class="quest-meta">
+          <div class="name">${q.name}</div>
+          <div class="enemy">ศัตรู: ${enemy.name} ${enemy.emoji}</div>
+          <div class="stars">Lv.แนะนำ ${q.recommendedLevel} ${clears ? '· ผ่านแล้ว ' + clears + ' ครั้ง ✅' : ''}</div>
+        </div>
+        <button class="quest-play" onclick="enterBattle('${q.id}', '${isTraining ? 'training' : 'battle'}')">
+          ${isTraining ? '🎯 ฝึก' : '⚔️ ลุย'}
+        </button>
+      </div>
+    `;
+  }).join('');
+
+  app.innerHTML = `
+    <div class="back-row"><a href="#" onclick="${isTraining ? "goScreen(event,'home')" : "goScreen(event,'questModePick')"}">← กลับ</a></div>
+    <div class="section-title">${isTraining ? '🎯 Training Zone' : '🗺️ Quest Board' + (groupByTopic ? ' · แยกตามวิชา' : ' · แยกตามขา')}</div>
     ${isTraining ? '<div class="training-flag">โหมดฝึก: ตอบผิดไม่เสีย HP เล่นด่านไหนก็ได้ ไม่จำกัดเลเวล</div>' : ''}
     <div class="subject-tabs">${tabs}</div>
     ${body}
   `;
 }
 function selectSubject(id){ state.questSubject = id; render(); }
+function selectTopic(topic){ state.questTopic = topic; render(); }
 
 /* ============ BATTLE ENGINE ============ */
 function shuffle(arr){
@@ -700,11 +749,19 @@ function confirmFlee(ev){
   state.battle = null;
   render();
 }
+function nextQuestFor(quest){
+  const siblings = DATA.quests
+    .filter(q => q.subjectId === quest.subjectId)
+    .sort((a, b) => a.recommendedLevel - b.recommendedLevel);
+  const idx = siblings.findIndex(q => q.id === quest.id);
+  return idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : null;
+}
 function renderBattleResult(leveledUp, newStage){
   const b = state.battle;
   const app = document.getElementById('app');
   const overlay = document.createElement('div');
   overlay.className = 'result-overlay';
+  const nextQuest = b.result === 'win' ? nextQuestFor(DATA.quests.find(q => q.id === b.questId)) : null;
   overlay.innerHTML = b.result === 'win' ? `
     <div class="result-card win">
       <h2>🎉 ชนะแล้ว!</h2>
@@ -713,7 +770,9 @@ function renderBattleResult(leveledUp, newStage){
       ${leveledUp ? `<p class="evo-banner">⭐ เลเวลอัพ! ตอนนี้ Lv.${state.save.level}</p>` : ''}
       ${newStage ? `<p class="evo-banner">🐱 ลีวิวัฒนาการ: ${newStage.title}!<br>${newStage.desc}</p>` : ''}
       <div class="result-actions">
-        <button class="result-btn" onclick="rematch()">⚔️ สู้อีกครั้ง</button>
+        ${nextQuest
+          ? `<button class="result-btn" onclick="goNextQuest('${nextQuest.id}')">▶ ด่านต่อไป: ${nextQuest.name}</button>`
+          : `<button class="result-btn" onclick="rematch()">⚔️ สู้อีกครั้ง</button>`}
         <button class="result-btn secondary" onclick="backToBoard()">กลับด่าน</button>
       </div>
     </div>
@@ -733,6 +792,11 @@ function renderBattleResult(leveledUp, newStage){
 function rematch(){
   document.querySelector('.result-overlay').remove();
   enterBattle(state.battle.questId, state.battle.mode);
+}
+function goNextQuest(questId){
+  const mode = state.battle.mode;
+  document.querySelector('.result-overlay').remove();
+  enterBattle(questId, mode);
 }
 function backToBoard(){
   document.querySelector('.result-overlay').remove();
