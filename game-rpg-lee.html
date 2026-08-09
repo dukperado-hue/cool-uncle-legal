@@ -82,6 +82,19 @@ img{max-width:100%; display:block}
 .menu-card .icon{font-size:38px; margin-bottom:10px}
 .menu-card .label{font-weight:700; font-size:16px}
 .menu-card .sub{font-size:12.5px; color:var(--ink-soft); margin-top:3px}
+.menu-card.hero-card{
+  grid-column:1 / -1; min-height:200px; padding:0; text-align:left; overflow:hidden;
+  background-size:cover; background-position:center 12%; position:relative; border-color:#000;
+}
+.menu-card.hero-card:hover{border-color:var(--rpg-gold)}
+.menu-card.hero-card .hero-overlay{
+  position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end;
+  padding:16px 18px; background:linear-gradient(180deg,rgba(10,10,14,0) 30%,rgba(10,10,14,.92) 100%);
+}
+.menu-card.hero-card .icon{font-size:30px; margin-bottom:4px; filter:drop-shadow(0 2px 4px #000)}
+.menu-card.hero-card .label{color:#fff; font-size:19px}
+.menu-card.hero-card .sub{color:#d8d4e8}
+@media(max-width:480px){.menu-card.hero-card{min-height:160px}}
 
 /* ============ QUEST MODE PICKER ============ */
 .mode-pick-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:6px}
@@ -221,6 +234,33 @@ img{max-width:100%; display:block}
 }
 @keyframes evoGlow{from{text-shadow:0 0 4px rgba(224,195,74,.3)} to{text-shadow:0 0 14px rgba(224,195,74,.9)}}
 
+/* ============ MONSTER GALLERY ============ */
+.ghost-gallery-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:12px}
+.ghost-card{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:12px 8px 10px; text-align:center; text-decoration:none; color:var(--ink); position:relative;
+  display:flex; flex-direction:column; align-items:center; gap:4px;
+}
+.ghost-card:hover{border-color:var(--gold); transform:translateY(-2px)}
+.ghost-card.locked{color:var(--ink-faint); cursor:default}
+.ghost-card.locked:hover{transform:none; border-color:var(--line)}
+.ghost-card-art{width:64px; height:64px; display:flex; align-items:center; justify-content:center; font-size:34px}
+.ghost-card-art img{max-width:100%; max-height:100%; object-fit:contain}
+.ghost-card-name{font-size:12px; font-weight:700}
+.rank-badge{
+  position:absolute; top:6px; right:6px; color:#fff; font-weight:800; font-size:10px;
+  border-radius:5px; padding:2px 5px; line-height:1.3; box-shadow:0 1px 3px rgba(0,0,0,.35);
+}
+.rank-badge.lg{position:static; font-size:13px; padding:4px 10px; border-radius:8px; margin-bottom:10px}
+.ghost-detail-card{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:28px 20px; text-align:center;
+}
+.ghost-detail-art{width:150px; height:150px; margin:0 auto 12px; display:flex; align-items:center; justify-content:center}
+.ghost-detail-art img{max-width:100%; max-height:100%; object-fit:contain}
+.ghost-detail-card h2{font-size:20px; margin-bottom:12px}
+.ghost-detail-story{color:var(--ink-soft); font-size:13.5px; line-height:1.8; text-align:left}
+
 /* ============ LAWBOOK ============ */
 .lawbook-entry{
   background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
@@ -294,9 +334,13 @@ const state = {
 function loadSave(){
   try{
     const raw = localStorage.getItem(SAVE_KEY);
-    if (raw) return JSON.parse(raw);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (!parsed.unlockedGhosts) parsed.unlockedGhosts = {};
+      return parsed;
+    }
   }catch(e){}
-  return { exp: 0, level: 1, unlockedLawRefs: {}, questClears: {} };
+  return { exp: 0, level: 1, unlockedLawRefs: {}, questClears: {}, unlockedGhosts: {} };
 }
 function saveSave(){ try{ localStorage.setItem(SAVE_KEY, JSON.stringify(state.save)); }catch(e){} }
 
@@ -400,9 +444,31 @@ function spriteBox(src, emoji, extraClass, imgId){
     + '</div>';
 }
 function leeSpritePath(stage){ return 'pics/game/rpg/lee/' + stage.sprite + '.png'; }
-function monsterSpritePath(m){ return 'pics/game/rpg/monsters/' + m.sprite + '.png'; }
-function monsterAttackSpritePath(m){ return 'pics/game/rpg/monsters/' + m.sprite + '_attack.png'; }
+function monsterSpritePath(m){ return 'pics/game/rpg/' + (m.spriteFolder || 'monsters') + '/' + m.sprite + '.png'; }
+function monsterAttackSpritePath(m){ return 'pics/game/rpg/' + (m.spriteFolder || 'monsters') + '/' + m.sprite + '_attack.png'; }
 function subjectBgPath(subjectId){ return 'pics/game/rpg/backgrounds/' + subjectId + '.jpg'; }
+
+/* ============ ล่าผี (ghost hunt) — random monster gallery ============ */
+const RANK_META = {
+  D:  { weight: 38, expMul: 1.0 },
+  C:  { weight: 28, expMul: 1.3 },
+  B:  { weight: 20, expMul: 1.7 },
+  A:  { weight: 10, expMul: 2.3 },
+  S:  { weight: 3,  expMul: 3.2 },
+  SS: { weight: 1,  expMul: 4.5 },
+};
+const RANK_ORDER = ['D','C','B','A','S','SS'];
+function isFreePractice(mode){ return mode === 'training' || mode === 'ghosthunt'; }
+function pickRandomGhost(){
+  const pool = DATA.folkGhosts;
+  const total = pool.reduce((sum, g) => sum + RANK_META[g.rank].weight, 0);
+  let r = Math.random() * total;
+  for (const g of pool) {
+    r -= RANK_META[g.rank].weight;
+    if (r <= 0) return g;
+  }
+  return pool[pool.length - 1];
+}
 
 /* Swap the enemy sprite to its "_attack" pose art for a beat when it hits Lee.
    Preloads first so a missing _attack file (most monsters don't have one yet)
@@ -429,6 +495,13 @@ fetch(DATA_URL).then(r => r.json()).then(json => {
   document.getElementById('app').innerHTML = '<div class="loading-note">โหลดข้อมูลเกมไม่สำเร็จ ลองรีเฟรชหน้าอีกครั้ง</div>';
 });
 
+/* Native/browser back button on Quest Board and ล่าผี should land back on this
+   page's home screen instead of leaving the app entirely (see goScreen). */
+window.addEventListener('popstate', () => {
+  state.screen = 'home';
+  render();
+});
+
 function render(){
   syncMuteBtn();
   const app = document.getElementById('app');
@@ -437,6 +510,9 @@ function render(){
   if (state.screen === 'questModePick') return renderQuestModePick(app);
   if (state.screen === 'quest') return renderQuestBoard(app, false);
   if (state.screen === 'training') return renderQuestBoard(app, true);
+  if (state.screen === 'ghosthunt') return renderGhostHunt(app);
+  if (state.screen === 'gallery') return renderGallery(app);
+  if (state.screen === 'galleryDetail') return renderGalleryDetail(app);
   if (state.screen === 'lawbook') return renderLawbook(app);
   if (state.screen === 'battle') return renderBattle(app);
 }
@@ -462,13 +538,15 @@ function renderHome(app){
         <div class="icon">🗺️</div><div class="label">Quest Board</div>
         <div class="sub">เลือกด่านตามขาหรือวิชา</div>
       </a>
-      <a href="#" class="menu-card" onclick="goScreen(event,'training')">
-        <div class="icon">🎯</div><div class="label">Training Zone</div>
-        <div class="sub">ฝึกฟรี ไม่เสีย HP</div>
+      <a href="#" class="menu-card hero-card" style="background-image:url('pics/game/hero/ghosthunt.jpg')" onclick="goScreen(event,'ghosthunt')">
+        <div class="hero-overlay">
+          <div class="icon">👻</div><div class="label">ล่าผี</div>
+          <div class="sub">สุ่มพบผีไทย ตอบถูกปลดล็อกลง Gallery</div>
+        </div>
       </a>
-      <a href="#" class="menu-card" onclick="goScreen(event,'lawbook')">
-        <div class="icon">📖</div><div class="label">Lawbook</div>
-        <div class="sub">คลังมาตราที่ปลดล็อก</div>
+      <a href="#" class="menu-card" onclick="goScreen(event,'gallery')">
+        <div class="icon">📔</div><div class="label">Monster Gallery</div>
+        <div class="sub">ผีไทยที่ปลดล็อกแล้ว ${Object.keys(state.save.unlockedGhosts).length}/${DATA.folkGhosts.length}</div>
       </a>
       <a href="games.html" class="menu-card">
         <div class="icon">🏠</div><div class="label">ศูนย์รวมเกม</div>
@@ -483,7 +561,13 @@ function goScreen(ev, screen){
   if (DATA.subjects.find(s => s.id === state.questSubject && s.playable) == null) {
     state.questSubject = DATA.subjects.find(s => s.playable).id;
   }
+  if (screen === 'ghosthunt') pushBackToHome();
   render();
+}
+/* Pushes a history entry so the device/browser back button returns to this
+   page's home screen instead of leaving the RPG entirely. See popstate listener. */
+function pushBackToHome(){
+  try{ history.pushState({ screen: 'home' }, '', location.pathname); }catch(e){}
 }
 
 /* ============ QUEST MODE PICKER (แยกตามขา vs แยกตามวิชา) ============ */
@@ -493,6 +577,7 @@ function pickQuestMode(mode){
     state.questTopic = [...new Set(DATA.quests.map(q => q.topic))][0];
   }
   state.screen = 'quest';
+  pushBackToHome();
   render();
 }
 function renderQuestModePick(app){
@@ -570,15 +655,13 @@ function shuffle(arr){
   for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
   return a;
 }
-function enterBattle(questId, mode){
-  const quest = DATA.quests.find(q => q.id === questId);
-  const monster = DATA.monsters.find(m => m.id === quest.enemyId);
+function startBattleState({ questId, mode, monster, subjectId, questionPool, bgmKey }){
   const playerMaxHp = maxHpForLevel(state.save.level);
   state.battle = {
-    questId, mode, monster,
+    questId, mode, monster, subjectId,
     monsterHp: monster.hp, monsterMaxHp: monster.hp,
     playerHp: playerMaxHp, playerMaxHp,
-    queue: shuffle(quest.questionIds.map(id => DATA.questions.find(q => q.id === id))),
+    queue: shuffle(questionPool),
     qIndex: 0,
     current: null,
     timeLeft: 0, timerHandle: null,
@@ -588,8 +671,26 @@ function enterBattle(questId, mode){
   };
   state.screen = 'battle';
   render();
-  playBgm(quest.id.includes('288') || monster.atk >= 8 ? 'boss' : 'battle');
+  playBgm(bgmKey || (monster.atk >= 8 ? 'boss' : 'battle'));
   loadNextQuestion();
+}
+function enterBattle(questId, mode){
+  const quest = DATA.quests.find(q => q.id === questId);
+  const monster = DATA.monsters.find(m => m.id === quest.enemyId);
+  startBattleState({
+    questId, mode, monster, subjectId: quest.subjectId,
+    questionPool: quest.questionIds.map(id => DATA.questions.find(q => q.id === id)),
+    bgmKey: quest.id.includes('288') ? 'boss' : undefined,
+  });
+}
+function startGhostHunt(){
+  const ghost = pickRandomGhost();
+  const playableSubjects = DATA.subjects.filter(s => s.playable).map(s => s.id);
+  const subjectId = playableSubjects[Math.floor(Math.random() * playableSubjects.length)];
+  startBattleState({
+    questId: null, mode: 'ghosthunt', monster: ghost, subjectId,
+    questionPool: shuffle(DATA.questions).slice(0, 3),
+  });
 }
 function loadNextQuestion(){
   const b = state.battle;
@@ -647,7 +748,7 @@ function handleAnswer(index){
     setTimeout(() => playSfx('attack'), 120);
   } else {
     playSfx('wrong');
-    if (b.mode !== 'training') {
+    if (!isFreePractice(b.mode)) {
       const dmg = Math.round(b.monster.atk * (0.85 + Math.random()*0.3));
       b.playerHp = Math.max(0, b.playerHp - dmg);
       animateHit('player', dmg, false);
@@ -658,7 +759,7 @@ function handleAnswer(index){
 
   setTimeout(() => {
     if (b.monsterHp <= 0) return finishBattle('win');
-    if (b.playerHp <= 0 && b.mode !== 'training') return finishBattle('lose');
+    if (b.playerHp <= 0 && !isFreePractice(b.mode)) return finishBattle('lose');
     loadNextQuestion();
   }, 1100);
 }
@@ -698,11 +799,17 @@ function recordLawRefProgress(lawRef, correct){
 function finishBattle(result){
   const b = state.battle;
   b.result = result;
-  let leveledUp = false, newStage = null;
+  let leveledUp = false, newStage = null, ghostUnlocked = false;
   if (result === 'win') {
     playSfx('victory');
-    const clears = state.save.questClears[b.questId] || 0;
-    state.save.questClears[b.questId] = clears + 1;
+    if (b.mode === 'ghosthunt') {
+      ghostUnlocked = !state.save.unlockedGhosts[b.monster.id];
+      state.save.unlockedGhosts[b.monster.id] = true;
+      b.expEarned = Math.round(b.expEarned * RANK_META[b.monster.rank].expMul);
+    } else {
+      const clears = state.save.questClears[b.questId] || 0;
+      state.save.questClears[b.questId] = clears + 1;
+    }
     const oldLevel = state.save.level;
     leveledUp = gainExp(b.expEarned);
     if (leveledUp) newStage = evolutionCrossed(oldLevel, state.save.level);
@@ -711,7 +818,7 @@ function finishBattle(result){
     playSfx('defeat');
   }
   document.getElementById('rpg-bgm').pause();
-  renderBattleResult(leveledUp, newStage);
+  renderBattleResult(leveledUp, newStage, ghostUnlocked);
 }
 
 function renderBattle(app){
@@ -719,7 +826,7 @@ function renderBattle(app){
   app.innerHTML = `
     <div class="back-row"><a href="#" onclick="confirmFlee(event)">← ล่าถอย</a></div>
     <div class="battle-wrap">
-      <div class="battle-stage" id="battleStage" style="background-image:url('${subjectBgPath(DATA.quests.find(q=>q.id===b.questId).subjectId)}');background-size:cover;background-position:center">
+      <div class="battle-stage" id="battleStage" style="background-image:url('${subjectBgPath(b.subjectId)}');background-size:cover;background-position:center">
         <div class="combatant enemy">
           <div class="hud" id="enemyHud">
             <div class="who">${b.monster.name}</div>
@@ -731,7 +838,7 @@ function renderBattle(app){
         <div class="combatant player">
           ${spriteBox(leeSpritePath(leeStageForLevel(state.save.level)), '🐱')}
           <div class="hud" id="playerHud">
-            <div class="who">ลี Lv.${state.save.level}${b.mode==='training' ? ' (ฝึกซ้อม)' : ''}</div>
+            <div class="who">ลี Lv.${state.save.level}${b.mode==='training' ? ' (ฝึกซ้อม)' : b.mode==='ghosthunt' ? ' (ล่าผี)' : ''}</div>
             <div class="hp-track"><div class="hp-fill" id="playerHudFill" style="width:100%"></div></div>
             <div class="hp-num" id="playerHudNum">${b.playerHp} / ${b.playerMaxHp}</div>
           </div>
@@ -763,7 +870,7 @@ function confirmFlee(ev){
   ev.preventDefault();
   clearInterval(state.battle && state.battle.timerHandle);
   document.getElementById('rpg-bgm').pause();
-  state.screen = state.battle.mode === 'training' ? 'training' : 'quest';
+  state.screen = state.battle.mode === 'training' ? 'training' : state.battle.mode === 'ghosthunt' ? 'ghosthunt' : 'quest';
   state.battle = null;
   render();
 }
@@ -774,24 +881,30 @@ function nextQuestFor(quest){
   const idx = siblings.findIndex(q => q.id === quest.id);
   return idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : null;
 }
-function renderBattleResult(leveledUp, newStage){
+function renderBattleResult(leveledUp, newStage, ghostUnlocked){
   const b = state.battle;
   const app = document.getElementById('app');
   const overlay = document.createElement('div');
   overlay.className = 'result-overlay';
-  const nextQuest = b.result === 'win' ? nextQuestFor(DATA.quests.find(q => q.id === b.questId)) : null;
+  const isHunt = b.mode === 'ghosthunt';
+  const nextQuest = (b.result === 'win' && !isHunt) ? nextQuestFor(DATA.quests.find(q => q.id === b.questId)) : null;
+  const backLabel = isHunt ? 'กลับ' : 'กลับด่าน';
+  const primaryWinBtn = isHunt
+    ? `<button class="result-btn" onclick="rematch()">👻 ล่าอีกตัว</button>`
+    : (nextQuest
+        ? `<button class="result-btn" onclick="goNextQuest('${nextQuest.id}')">▶ ด่านต่อไป: ${nextQuest.name}</button>`
+        : `<button class="result-btn" onclick="rematch()">⚔️ สู้อีกครั้ง</button>`);
   overlay.innerHTML = b.result === 'win' ? `
     <div class="result-card win">
       <h2>🎉 ชนะแล้ว!</h2>
       <p>ปราบ ${b.monster.name} สำเร็จ</p>
       <p>ได้รับ EXP +${b.expEarned}</p>
+      ${isHunt && ghostUnlocked ? `<p class="evo-banner">👻 ปลดล็อก "${b.monster.name}" ใน Monster Gallery แล้ว!</p>` : ''}
       ${leveledUp ? `<p class="evo-banner">⭐ เลเวลอัพ! ตอนนี้ Lv.${state.save.level}</p>` : ''}
       ${newStage ? `<p class="evo-banner">🐱 ลีวิวัฒนาการ: ${newStage.title}!<br>${newStage.desc}</p>` : ''}
       <div class="result-actions">
-        ${nextQuest
-          ? `<button class="result-btn" onclick="goNextQuest('${nextQuest.id}')">▶ ด่านต่อไป: ${nextQuest.name}</button>`
-          : `<button class="result-btn" onclick="rematch()">⚔️ สู้อีกครั้ง</button>`}
-        <button class="result-btn secondary" onclick="backToBoard()">กลับด่าน</button>
+        ${primaryWinBtn}
+        <button class="result-btn secondary" onclick="backToBoard()">${backLabel}</button>
       </div>
     </div>
   ` : `
@@ -801,7 +914,7 @@ function renderBattleResult(leveledUp, newStage){
       <p>ลองทบทวนมาตรา ${b.current.lawRef.article} แล้วมาสู้ใหม่นะ</p>
       <div class="result-actions">
         <button class="result-btn" onclick="rematch()">🔄 ลองใหม่</button>
-        <button class="result-btn secondary" onclick="backToBoard()">กลับด่าน</button>
+        <button class="result-btn secondary" onclick="backToBoard()">${backLabel}</button>
       </div>
     </div>
   `;
@@ -809,6 +922,7 @@ function renderBattleResult(leveledUp, newStage){
 }
 function rematch(){
   document.querySelector('.result-overlay').remove();
+  if (state.battle.mode === 'ghosthunt') { startGhostHunt(); return; }
   enterBattle(state.battle.questId, state.battle.mode);
 }
 function goNextQuest(questId){
@@ -818,9 +932,76 @@ function goNextQuest(questId){
 }
 function backToBoard(){
   document.querySelector('.result-overlay').remove();
-  state.screen = state.battle.mode === 'training' ? 'training' : 'quest';
+  state.screen = state.battle.mode === 'training' ? 'training' : state.battle.mode === 'ghosthunt' ? 'ghosthunt' : 'quest';
   state.battle = null;
   render();
+}
+
+/* ============ ล่าผี (ghost hunt launch screen) ============ */
+function renderGhostHunt(app){
+  playBgm('quest');
+  app.innerHTML = `
+    <div class="back-row"><a href="#" onclick="goScreen(event,'home')">← กลับหน้าหลัก</a></div>
+    <div class="section-title">👻 ล่าผี</div>
+    <div class="training-flag">โหมดฝึก: ตอบผิดไม่เสีย HP — ตอบถูกครบเพื่อปราบผีและปลดล็อกลง Monster Gallery</div>
+    <div class="quest-card" style="flex-direction:column; align-items:stretch; text-align:center; padding:28px 16px">
+      <div style="font-size:52px; margin-bottom:8px">🔮</div>
+      <p style="color:var(--ink-soft); font-size:13.5px; line-height:1.7; margin-bottom:18px">
+        แต่ละครั้งจะสุ่มพบผีไทยหนึ่งตัวจากตำนานพื้นบ้าน ยิ่งหายาก (rank สูง) ยิ่งพบเจอได้ยาก แต่ให้ EXP มากกว่า<br>
+        <span class="pixel" style="font-size:9px; letter-spacing:1px">D・C・B・A・S・SS</span>
+      </p>
+      <button class="quest-play" style="align-self:center; padding:12px 28px; font-size:14px" onclick="startGhostHunt()">🔮 ออกล่าผี</button>
+    </div>
+  `;
+}
+
+/* ============ MONSTER GALLERY ============ */
+const RANK_COLOR = { D:'#8a8f9e', C:'#3f9d5c', B:'#2e6fd6', A:'#a34ad6', S:'#d69a2e', SS:'#d6392e' };
+function renderGallery(app){
+  playBgm('quest');
+  const cards = DATA.folkGhosts.map(g => {
+    const unlocked = !!state.save.unlockedGhosts[g.id];
+    if (!unlocked) {
+      return `
+        <div class="ghost-card locked">
+          <div class="ghost-card-art">❓</div>
+          <div class="ghost-card-name">???</div>
+        </div>
+      `;
+    }
+    return `
+      <a href="#" class="ghost-card" onclick="openGalleryDetail(event,'${g.id}')">
+        <div class="ghost-card-art"><img src="${monsterSpritePath(g)}" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="ghost-card-name">${g.name}</div>
+        <div class="rank-badge" style="background:${RANK_COLOR[g.rank]}">${g.rank}</div>
+      </a>
+    `;
+  }).join('');
+  const unlockedCount = Object.keys(state.save.unlockedGhosts).length;
+  app.innerHTML = `
+    <div class="back-row"><a href="#" onclick="goScreen(event,'home')">← กลับหน้าหลัก</a></div>
+    <div class="section-title">📔 Monster Gallery <span style="color:var(--ink-faint); font-weight:400; font-size:13px">(${unlockedCount}/${DATA.folkGhosts.length})</span></div>
+    <div class="ghost-gallery-grid">${cards}</div>
+  `;
+}
+function openGalleryDetail(ev, ghostId){
+  ev.preventDefault();
+  state.galleryGhostId = ghostId;
+  state.screen = 'galleryDetail';
+  render();
+}
+function renderGalleryDetail(app){
+  const g = DATA.folkGhosts.find(x => x.id === state.galleryGhostId);
+  if (!g) { state.screen = 'gallery'; return render(); }
+  app.innerHTML = `
+    <div class="back-row"><a href="#" onclick="goScreen(event,'gallery')">← กลับ Gallery</a></div>
+    <div class="ghost-detail-card">
+      <div class="rank-badge lg" style="background:${RANK_COLOR[g.rank]}">${g.rank}</div>
+      <div class="ghost-detail-art"><img src="${monsterSpritePath(g)}" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+      <h2>${g.name}</h2>
+      <p class="ghost-detail-story">${g.story}</p>
+    </div>
+  `;
 }
 
 /* ============ LAWBOOK ============ */
