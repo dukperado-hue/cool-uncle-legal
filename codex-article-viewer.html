@@ -1659,6 +1659,7 @@ function renderLectureNotes(article) {
       ${article.lectureNotes.map(n => `
         <div class="case-item">
           <div class="case-number">🎓 ${escapeHtml(n.topic || '')}</div>
+          ${n.image ? `<img src="${n.image}" alt="" loading="lazy" style="max-width:100%;border-radius:10px;margin:10px 0;display:block" onerror="this.remove()">` : ''}
           <div class="case-summary" style="white-space:pre-line">${linkifyMatraRefs(escapeHtml(n.text || ''), currentBookType, article.number)}</div>
           <div style="margin-top:10px;font-size:12px;color:var(--ink-faint);border-top:1px dashed var(--line);padding-top:8px;">
             ℹ️ ${escapeHtml(n.source || 'สรุปโดย AI จากคำบรรยาย — โปรดตรวจสอบความถูกต้องก่อนใช้อ้างอิง')}
@@ -1903,7 +1904,7 @@ async function loadAndRender() {
   currentNumber = id.slice(id.indexOf('_') + 1);
 
   try {
-    const res = await fetch('codex-data.json?v=20260805a');
+    const res = await fetch('codex-data.json?v=20260809a');
     if (!res.ok) throw new Error('fetch failed');
     codexData = await res.json();
   } catch (e) {
