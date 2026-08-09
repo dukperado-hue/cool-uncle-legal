@@ -143,27 +143,44 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 
 .lecture-list{display:flex;flex-direction:column;gap:10px;margin-top:16px}
 .lecture-row{
-  display:flex;align-items:center;gap:14px;background:var(--card);
-  border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;
-  box-shadow:var(--shadow);transition:border-color .15s;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;
 }
 .lecture-row:hover{border-color:var(--gold)}
+.lecture-head{
+  display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;
+}
 .lecture-num{
-  width:36px;height:36px;flex-shrink:0;border-radius:50%;background:var(--gold-soft);
-  color:#8F6511;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;
+  width:34px;height:34px;flex-shrink:0;border-radius:50%;background:var(--gold-soft);
+  color:#8F6511;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13.5px;
 }
-.lecture-info{flex:1;min-width:0}
-.lecture-title{font-weight:700;color:var(--ink);font-size:15px}
-.lecture-status{font-size:12.5px;color:var(--ink-faint);margin-top:2px}
-.lecture-pending{
-  font-size:12px;font-weight:700;color:var(--ink-faint);background:#F1EDE2;
-  padding:5px 12px;border-radius:999px;white-space:nowrap;flex-shrink:0;
+.lecture-title{flex:1;font-weight:700;color:var(--ink);font-size:14.5px}
+.lecture-toggle{color:var(--ink-faint);font-size:13px;flex-shrink:0;transition:transform .2s}
+.lecture-row.open .lecture-toggle{transform:rotate(180deg)}
+.lecture-body{display:none;padding:0 16px 16px 64px;font-size:14px;color:var(--ink-soft);white-space:pre-line;line-height:1.75}
+.lecture-row.open .lecture-body{display:block}
+.lecture-img{max-width:100%;border-radius:10px;margin-bottom:12px;display:block}
+/* TTS bar */
+.tts-bar{
+  display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+  background:#F1EDE2;border:1px solid var(--line);border-radius:12px;
+  padding:8px 12px;margin:16px 0;
 }
-.lecture-open{
-  font-size:12.5px;font-weight:700;color:var(--accent);text-decoration:none;
-  border:1px solid var(--line);border-radius:999px;padding:6px 14px;white-space:nowrap;flex-shrink:0;
+.tts-btn{
+  background:var(--accent);color:#fff;border:none;border-radius:8px;
+  padding:8px 14px;font-size:13.5px;font-weight:600;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;font-family:inherit;
 }
-.lecture-open:hover{background:var(--gold-soft);border-color:var(--gold)}
+.tts-btn:hover{opacity:.9}
+.tts-btn-ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.tts-btn-ghost:hover{border-color:var(--bad);color:var(--bad)}
+.tts-ico{font-size:11px}
+.tts-rate{font-size:12.5px;color:var(--ink-soft);margin-left:auto;display:inline-flex;align-items:center;gap:6px}
+.tts-rate select{
+  background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:5px 8px;font-family:inherit;font-size:12.5px;cursor:pointer;
+}
+.tts-hint{font-size:12px;color:var(--ink-faint)}
 
 footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)}
 .coffee-widget{
@@ -216,10 +233,23 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
   <header class="page-head">
     <div class="crest">💡</div>
     <h1>กฎหมายทรัพย์สินทางปัญญา</h1>
-    <p class="subtitle">สรุปเนื้อหาบรรยายรายครั้ง · ปี 4</p>
+    <p class="subtitle">ลิขสิทธิ์ · เครื่องหมายการค้า · สิทธิบัตร — สรุปเนื้อหาบรรยายรายครั้ง</p>
   </header>
 
-  <div class="notice">⏳ หน้านี้เตรียมไว้สำหรับสรุปเนื้อหาบรรยาย 15 ครั้ง — จะทยอยอัปโหลดไฟล์ PDF ทีหลัง</div>
+  <div class="notice">⚠️ สรุปโดย AI จากเอกสารประกอบวิชา — โปรดตรวจสอบกับคำบรรยายจริงหรืออาจารย์ผู้สอนก่อนใช้อ้างอิง</div>
+
+  <div class="tts-bar" id="tts-bar" style="display:none">
+    <button id="tts-play" class="tts-btn" title="อ่านออกเสียงบรรยายที่เปิดอยู่"><span class="tts-ico">▶</span> อ่านออกเสียง</button>
+    <button id="tts-pause" class="tts-btn" title="หยุดชั่วคราว/เล่นต่อ" style="display:none"><span class="tts-ico">⏸</span> หยุดชั่วคราว</button>
+    <button id="tts-stop" class="tts-btn tts-btn-ghost" title="หยุด" style="display:none"><span class="tts-ico">■</span> หยุด</button>
+    <label class="tts-rate">ความเร็ว <select id="tts-rate">
+      <option value="0.8">0.8×</option>
+      <option value="1" selected>1.0×</option>
+      <option value="1.2">1.2×</option>
+      <option value="1.5">1.5×</option>
+    </select></label>
+    <span class="tts-hint">เปิดบรรยายครั้งที่ต้องการก่อน แล้วกด "อ่านออกเสียง"</span>
+  </div>
 
   <div class="lecture-list" id="lectureList"></div>
 
@@ -251,23 +281,228 @@ function playHoverSound(){
   }catch(e){}
 }
 
-/* Each entry: { n, pdf }. Set pdf: "pdfs/xxx.pdf" once a file is uploaded to switch the row from "pending" to a real link. */
-const LECTURES = Array.from({length: 15}, (_, i) => ({ n: i + 1, pdf: null }));
+const LECTURES = [
+  { n: 1, title: "ภาพรวมวิชาและแนวคิดพื้นฐานกฎหมายลิขสิทธิ์", text:
+`(1) โครงสร้างการเรียนและการสอบ
+วิชานี้ไม่มีการสอบกลางภาค เป็นการสอบประเมินผลปลายภาค 100% แบ่งเป็น 3 ส่วนตามสัดส่วนชั่วโมงเรียน
+*   ส่วนที่ 1 กฎหมายลิขสิทธิ์: ตั้งแต่สัปดาห์แรกถึงช่วงก่อนสอบกลางภาค คะแนนปลายภาค 40 คะแนน
+รูปแบบข้อสอบเป็นโจทย์ตุ๊กตา 2 ข้อ หรือข้อสอบอธิบายคอนเซปต์เชิงทฤษฎี 1 ข้อ คู่กับโจทย์ตุ๊กตาข้อสั้นอีก 1 ข้อ
+*   ส่วนที่ 2 กฎหมายเครื่องหมายการค้า: คะแนนปลายภาค 30 คะแนน
+*   ส่วนที่ 3 กฎหมายสิทธิบัตร: คะแนนปลายภาค 30 คะแนน
+
+(2) ความหมายและขอบเขตของทรัพย์สินทางปัญญา
+"ทรัพย์สินทางปัญญา" (Intellectual Property) เป็นคำรวม (Umbrella Term) ที่ถูกสร้างขึ้นมาทีหลัง
+(ประมาณ 100 ปี) เพื่อมัดรวมสิทธิ์ประเภทต่าง ๆ เช่น ลิขสิทธิ์ สิทธิบัตร และเครื่องหมายการค้า
+ซึ่งแต่ละเรื่องมีประวัติศาสตร์ยาวนานกว่า 300 ปีเข้าด้วยกัน ในทางปฏิบัติงานเหล่านี้มีความเชี่ยวชาญเฉพาะด้านสูงมาก
+จนยากที่จะมีใครเป็นผู้เชี่ยวชาญลึกซึ้งในทุกด้านพร้อมกัน
+การศึกษากฎหมายทรัพย์สินทางปัญญาต้องมองให้ไกลกว่าเพียงตัวบทกฎหมายหรือสิ่งที่เกิดขึ้นในห้องพิจารณาคดี
+ต้องเชื่อมโยงเข้ากับบริบททางเศรษฐกิจ สังคม และการค้าระหว่างประเทศ
+*   ตัวอย่าง: คดีพิพาทในจีนระหว่างแบรนด์หรู Louis Vuitton กับแบรนด์ท้องถิ่นจีน ฟ้องร้องเรื่องเครื่องหมายการค้า
+ลายดอกไม้ ซึ่งทางจีนโต้แย้งว่าลายดังกล่าวคล้ายลายดอกไม้โบราณที่พบในสวนซูโจวของจีน
+สะท้อนความตึงเครียดเรื่องการอ้างสิทธิ์เหนืองานวัฒนธรรมร่วม (Cultural Appropriation)
+
+(3) ทรัพย์สินทางปัญญาในชีวิตประจำวัน
+ทรัพย์สินทางปัญญาหลายประเภทอยู่ร่วมกันในผลิตภัณฑ์หรือธุรกิจเดียวกันได้ เช่น ในร้านกาแฟหนึ่งร้าน
+*   เครื่องหมายการค้า (Trademark): โลโก้ของร้าน เช่น โลโก้นางเงือกของ Starbucks
+*   สิทธิบัตร (Patent): เทคโนโลยีการประดิษฐ์และระบบการทำงานภายในของเครื่องชงกาแฟ
+*   การออกแบบผลิตภัณฑ์ (Design Patent): รูปร่าง หน้าตา รูปทรงภายนอกของเครื่องชงกาแฟที่ถูกดีไซน์มา
+*   ความลับทางการค้า (Trade Secret): สูตรหรือเคล็ดลับเฉพาะในกระบวนการชง
+*   สิ่งบ่งชี้ทางภูมิศาสตร์ (GI): แหล่งปลูกที่เชื่อมโยงกับคุณภาพผลผลิต เช่น แชมเปญที่ใช้ชื่อนี้ได้เฉพาะเมื่อผลิต
+ในแคว้นแชมเปญของฝรั่งเศส ในไทยก็มีข้าวสังข์หยดหรือทุเรียนตามชื่อพื้นที่ต่าง ๆ
+*   ลิขสิทธิ์ (Copyright): เพลงที่เปิดในร้าน หรือรูปภาพและภาพถ่ายที่ใช้ตกแต่งร้าน
+*   สิทธิคุ้มครองพันธุ์พืช: การพัฒนาและคุ้มครองสายพันธุ์พืชใหม่ ๆ
+
+(4) วัตถุแห่งลิขสิทธิ์ — คุ้มครองรูปแบบการแสดงออก ไม่คุ้มครองความคิด (มาตรา 6)
+งานอันมีลิขสิทธิ์ตามมาตรา 6 ได้แก่ วรรณกรรม นาฏกรรม ศิลปกรรม ดนตรีกรรม โสตทัศนวัสดุ ภาพยนตร์
+สิ่งบันทึกเสียง งานแพร่เสียงแพร่ภาพ หรืองานอื่นในแผนกวรรณคดี วิทยาศาสตร์ หรือศิลปะ
+กฎหมายคุ้มครองเฉพาะ "รูปแบบการแสดงออก" ไม่คุ้มครองความคิด ขั้นตอน กรรมวิธี หรือทฤษฎีทางวิทยาศาสตร์/คณิตศาสตร์
+วัตถุแห่งสิทธิ์เป็นสิ่งจับต้องไม่ได้ (Intangible) ไม่จำกัดทางกายภาพ คนจำนวนมากใช้งานชิ้นเดียวกันพร้อมกันได้
+(เช่น ดูหนังเรื่องเดียวกันพร้อมกันหลายคน) ต่างจากทรัพย์สินทั่วไปที่ครอบครองได้ทีละคน
+*   ศัพท์กฎหมายที่มักเข้าใจผิด: นาฏกรรม (Dramatic Work) หมายถึงบทประพันธ์ เช่น บทละคร/บทภาพยนตร์
+ไม่ใช่ตัวการแสดงรำหรือโขน; ดนตรีกรรม (Musical Work) หมายถึงตัวโน้ต คำร้อง ทำนอง ไม่รวมเสียงร้อง/เสียงดนตรี
+ที่บันทึกไว้ (นั่นคือ "สิ่งบันทึกเสียง" ซึ่งเป็นสิทธิคนละประเภท)
+*   กรณีศึกษา Taylor Swift: อัดเพลงเก่าใหม่ทั้งหมด (Taylor's Version) เพราะลิขสิทธิ์ใน Sound Recording
+ตกเป็นของค่ายเพลงเดิมตามสัญญา แต่เธอเป็นเจ้าของลิขสิทธิ์ในตัวดนตรีกรรม (Composition)
+จึงอัดเสียงร้อง/ดนตรีใหม่เพื่อสร้างสิ่งบันทึกเสียงชุดใหม่ที่ตนเป็นเจ้าของเองได้
+
+(5) ผู้สร้างสรรค์และเจ้าของสิทธิ์กรณีงานจ้าง (มาตรา 9, มาตรา 10)
+โดยหลักทั่วไป ผู้สร้างสรรค์งานเป็นเจ้าของลิขสิทธิ์คนแรก แต่มีข้อยกเว้นตามประเภทของสัญญาจ้าง
+*   สัญญาจ้างแรงงาน (มาตรา 9): งานที่ทำในฐานะลูกจ้าง หากไม่ได้ทำหนังสือตกลงไว้เป็นอย่างอื่น ลิขสิทธิ์เป็นของ
+ลูกจ้างผู้สร้างสรรค์ แต่นายจ้างมีสิทธินำงานออกเผยแพร่ต่อสาธารณชนได้ตามวัตถุประสงค์ของการจ้างนั้น
+(สวนทางกับความเข้าใจทั่วไปที่มักคิดว่านายจ้างเป็นเจ้าของงาน)
+*   สัญญาจ้างทำของ/ฟรีแลนซ์ (มาตรา 10): งานที่รับจ้างทำของ ลิขสิทธิ์ตกเป็นของผู้ว่าจ้างทันที
+เว้นแต่คู่สัญญาจะตกลงกันไว้เป็นอย่างอื่น
+*   ตัวอย่างโจทย์แนวข้อสอบเก่า: สำนักพิมพ์สยามบุ๊คว่าจ้าง "บาส" นักแปลอิสระให้แปลนิยายเรื่อง Sad Disco
+เป็นสัญญาจ้างทำของ ลิขสิทธิ์ในงานแปลจึงตกเป็นของสำนักพิมพ์ผู้ว่าจ้างทันที เว้นแต่จะตกลงกันไว้เป็นอย่างอื่น
+ต้องพิจารณาจากลักษณะความสัมพันธ์จริง (อยู่ภายใต้บังคับบัญชา = จ้างแรงงาน / อิสระในการทำงาน = จ้างทำของ)
+ไม่ใช่ดูจากชื่อสัญญาเพียงอย่างเดียว
+
+(6) สิทธิในทางทรัพย์สิน (Economic Rights) (มาตรา 15)
+เจ้าของลิขสิทธิ์มีสิทธิแต่เพียงผู้เดียว (Exclusive Rights) ในการ (1) ทำซ้ำหรือดัดแปลง (2) เผยแพร่ต่อสาธารณชน
+(3) ให้เช่าต้นฉบับ/สำเนางานบางประเภท (โปรแกรมคอมพิวเตอร์ โสตทัศนวัสดุ ภาพยนตร์ สิ่งบันทึกเสียง)
+(4) ให้ประโยชน์อันเกิดจากลิขสิทธิ์แก่ผู้อื่น และ (5) อนุญาตให้ผู้อื่นใช้สิทธิข้างต้นโดยกำหนดเงื่อนไขได้
+(แต่ห้ามเป็นเงื่อนไขจำกัดการแข่งขันโดยไม่เป็นธรรม)
+เจ้าของสิทธิ์นำสิทธิเหล่านี้ไปแสวงประโยชน์ได้ผ่านการอนุญาตให้ใช้สิทธิ์ (Licensing) หรือการโอนสิทธิ์เพื่อรับค่าตอบแทน
+ลิขสิทธิ์ถือเป็นทรัพย์สินประเภทหนึ่งที่โอนกันได้ตามกฎหมาย
+
+(7) ธรรมสิทธิ์ (Moral Rights) (มาตรา 18)
+ธรรมสิทธิ์เป็นสิทธิส่วนบุคคลของผู้สร้างสรรค์ แยกต่างหากจากสิทธิในทางทรัพย์สิน แม้โอนลิขสิทธิ์ให้ผู้อื่นไปแล้ว
+ธรรมสิทธิ์ก็ยังอยู่กับผู้สร้างสรรค์เสมอ (เว้นแต่ตกลงกันไว้เป็นลายลักษณ์อักษร) และทายาทมีสิทธิฟ้องบังคับตามสิทธินี้
+ได้ตลอดอายุการคุ้มครองลิขสิทธิ์เมื่อผู้สร้างสรรค์เสียชีวิต ธรรมสิทธิ์ประกอบด้วย 2 ส่วน
+(1) สิทธิที่จะแสดงตนว่าเป็นผู้สร้างสรรค์งาน (Right of Attribution) และ
+(2) สิทธิห้ามบิดเบือน ตัดทอน ดัดแปลงงานจนเกิดความเสียหายต่อชื่อเสียงหรือเกียรติคุณ (Right of Integrity)
+*   กรณีศึกษาคดีห่านป่า (Michael Snow v. Eaton Centre, แคนาดา 1982): ศิลปินสร้างประติมากรรมฝูงห่านป่าบิน
+ติดตั้งในห้างสรรพสินค้า ต่อมาห้างนำริบบิ้นแดงผูกคอห่านทุกตัวช่วงคริสต์มาส ศิลปินฟ้องโดยอ้างธรรมสิทธิ์
+(Right of Integrity) ว่าทำลายสุนทรียศาสตร์ของงานและเสียหายต่อชื่อเสียงทางวิชาชีพ ศาลพิพากษาให้ศิลปินชนะคดี
+
+(8) อายุการคุ้มครองและสมบัติสาธารณะ (มาตรา 19)
+ลิขสิทธิ์คุ้มครองตลอดอายุของผู้สร้างสรรค์ และคุ้มครองต่อไปอีก 50 ปีนับแต่ผู้สร้างสรรค์ถึงแก่ความตาย
+กรณีมีผู้สร้างสรรค์ร่วม นับ 50 ปีจากผู้สร้างสรรค์ร่วมคนสุดท้ายที่เสียชีวิต ถ้าทุกคนเสียชีวิตก่อนมีการโฆษณางาน
+ให้มีอายุ 50 ปีนับแต่โฆษณาครั้งแรก และกรณีนิติบุคคลเป็นผู้สร้างสรรค์ ให้มีอายุ 50 ปีนับแต่สร้างสรรค์ขึ้น
+เมื่อพ้นกำหนดอายุการคุ้มครอง งานจะตกเป็นสมบัติสาธารณะ (Public Domain) ซึ่งทุกคนนำไปใช้ประโยชน์ได้
+โดยไม่ต้องขออนุญาตหรือจ่ายค่าตอบแทนอีกต่อไป
+
+(9) ข้อยกเว้นการละเมิดลิขสิทธิ์ — ไม่ใช่ Fair Use แบบสหรัฐฯ (มาตรา 32)
+มาตรา 32 วางหลักเกณฑ์ 3 ขั้นบันได (Three-Step Test) ตามอนุสัญญาเบิร์น: (1) ต้องเข้าเงื่อนไขเฉพาะเจาะจง
+ตามที่กฎหมายกำหนด (2) ต้องไม่ขัดต่อการแสวงหาประโยชน์ตามปกติของเจ้าของลิขสิทธิ์ และ (3) ต้องไม่กระทบสิทธิ
+อันชอบธรรมของเจ้าของสิทธิ์เกินสมควร จากนั้นกฎหมายแจกแจงกรณีที่เข้าข้อยกเว้นไว้ชัดเจน เช่น วิจัย/ศึกษาที่ไม่ใช่
+เพื่อการค้า, ใช้เพื่อประโยชน์ส่วนตัวหรือครอบครัว/ญาติสนิท, ติชมวิจารณ์โดยรับรู้ความเป็นเจ้าของสิทธิ์,
+รายงานข่าวโดยสื่อมวลชน, ใช้ในกระบวนการศาล/เจ้าพนักงาน, ใช้สอนโดยไม่หากำไร, ทำสรุป/คัดลอกบางส่วนแจกจ่าย
+ผู้เรียนโดยไม่หากำไร, และใช้ในข้อสอบ
+ข้อควรระวังสำคัญ (อาจารย์เน้นย้ำ): มาตรา 32 ของไทยไม่ใช่หลัก Fair Use ของสหรัฐฯ — ของสหรัฐฯ เป็นการ
+ชั่งน้ำหนัก 4 ปัจจัยโดยศาล (ยืดหยุ่นสูงแต่คาดเดาผลยาก) ส่วนของไทยเป็นการเข้าเงื่อนไขเฉพาะเจาะจงตามที่กฎหมาย
+ระบุไว้เป็นข้อ ๆ นักกฎหมายไทยจึงไม่ควรอ้างคำว่า "Fair Use" ปะปนกับข้อต่อสู้ตามกฎหมายไทย
+ข้อสังเกตจากคำบรรยาย: เท่าที่ปรากฏในคำพิพากษาศาลฎีกาไทย ผู้ที่ยกข้อต่อสู้ตามมาตรา 32 ขึ้นสู้คดีแทบไม่เคย
+ประสบความสำเร็จ เนื่องจากเงื่อนไขและการตีความของศาลไทยค่อนข้างเข้มงวด (ไม่มีเลขฎีกาที่ระบุเจาะจงในเอกสารที่
+ตรวจสอบประกอบข้อสังเกตนี้)
+บริบทเพิ่มเติม — ความรับผิดทางอาญา: กฎหมายลิขสิทธิ์ไทยกำหนดโทษอาญาสำหรับการละเมิดโดยไม่มีเกณฑ์ขั้นต่ำ
+ของความรุนแรง/มูลค่าความเสียหาย ในอดีตมีการใช้กระบวนการอาญากดดันผู้ละเมิดรายย่อย ปัจจุบันเริ่มมีแนวโน้ม
+เปลี่ยนมาเน้นฟ้องคดีแพ่งเรียกค่าเสียหายแทน
+การประสานมาตรฐานระหว่างประเทศ: กฎหมายลิขสิทธิ์แต่ละประเทศถูกปรับให้เป็นมาตรฐานขั้นต่ำเดียวกันผ่าน
+อนุสัญญาเบิร์นและความตกลงทริปส์ (TRIPS) ภายใต้ WTO เพื่อลดอุปสรรคทางการค้าระหว่างประเทศ` },
+  { n: 2, title: "บรรยายครั้งที่ 2 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
+  { n: 3, title: "บรรยายครั้งที่ 3 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
+  { n: 4, title: "บรรยายครั้งที่ 4 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
+  { n: 5, title: "บรรยายครั้งที่ 5 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
+  { n: 6, title: "บรรยายครั้งที่ 6 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
+  { n: 7, title: "บรรยายครั้งที่ 7 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
+  { n: 8, title: "บรรยายครั้งที่ 8 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
+  { n: 9, title: "บรรยายครั้งที่ 9 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
+  { n: 10, title: "บรรยายครั้งที่ 10 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
+  { n: 11, title: "บรรยายครั้งที่ 11 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
+  { n: 12, title: "บรรยายครั้งที่ 12 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
+  { n: 13, title: "บรรยายครั้งที่ 13 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
+  { n: 14, title: "บรรยายครั้งที่ 14 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
+  { n: 15, title: "บรรยายครั้งที่ 15 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
+];
+
+/* ---- Web Speech TTS (reads whichever lecture row is currently open) ---- */
+const TTS = (function(){
+  const supported = typeof window !== 'undefined' && 'speechSynthesis' in window;
+  let queue = [], qIdx = 0, rate = 1;
+  function pickThaiVoice(){
+    const vs = window.speechSynthesis.getVoices();
+    return vs.find(v => v.lang && v.lang.toLowerCase().startsWith('th')) || vs[0];
+  }
+  function speakNext(){
+    if(qIdx >= queue.length){ setBtns('idle'); return; }
+    const u = new SpeechSynthesisUtterance(queue[qIdx]);
+    const v = pickThaiVoice();
+    if(v) u.voice = v;
+    u.lang = (v && v.lang) || 'th-TH';
+    u.rate = rate;
+    u.onend = ()=>{ qIdx++; speakNext(); };
+    u.onerror = ()=>{ qIdx++; speakNext(); };
+    window.speechSynthesis.speak(u);
+  }
+  function setBtns(state){
+    const p = document.getElementById('tts-play');
+    const pa = document.getElementById('tts-pause');
+    const s = document.getElementById('tts-stop');
+    if(!p) return;
+    if(state === 'playing'){
+      p.style.display = 'none'; pa.style.display = 'inline-flex'; s.style.display = 'inline-flex';
+      pa.innerHTML = '<span class="tts-ico">⏸</span> หยุดชั่วคราว';
+    } else if(state === 'paused'){
+      pa.innerHTML = '<span class="tts-ico">▶</span> เล่นต่อ';
+    } else {
+      p.style.display = 'inline-flex'; pa.style.display = 'none'; s.style.display = 'none';
+    }
+  }
+  function play(){
+    if(!supported) return;
+    if(window.speechSynthesis.paused){
+      window.speechSynthesis.resume();
+      setBtns('playing');
+      return;
+    }
+    stop();
+    const openRow = document.querySelector('.lecture-row.open');
+    if(!openRow) return;
+    const titleEl = openRow.querySelector('.lecture-title');
+    const bodyEl = openRow.querySelector('.lecture-body');
+    if(!bodyEl) return;
+    const paras = bodyEl.textContent.split(/\n\s*\n/).map(s=>s.trim()).filter(Boolean);
+    queue = titleEl ? [titleEl.textContent.trim(), ...paras] : paras;
+    if(queue.length === 0) return;
+    qIdx = 0;
+    setBtns('playing');
+    speakNext();
+  }
+  function pauseToggle(){
+    if(!supported) return;
+    if(window.speechSynthesis.paused){
+      window.speechSynthesis.resume();
+      setBtns('playing');
+    } else if(window.speechSynthesis.speaking){
+      window.speechSynthesis.pause();
+      setBtns('paused');
+    }
+  }
+  function stop(){
+    if(!supported) return;
+    window.speechSynthesis.cancel();
+    queue = []; qIdx = 0;
+    setBtns('idle');
+  }
+  function setRate(r){ rate = r; }
+  return {supported, play, pauseToggle, stop, setRate};
+})();
+(function initTTS(){
+  const play = document.getElementById('tts-play');
+  const pause = document.getElementById('tts-pause');
+  const stop = document.getElementById('tts-stop');
+  const rate = document.getElementById('tts-rate');
+  const bar = document.getElementById('tts-bar');
+  if(bar) bar.style.display = TTS.supported ? 'flex' : 'none';
+  if(play) play.addEventListener('click', ()=> TTS.play());
+  if(pause) pause.addEventListener('click', ()=> TTS.pauseToggle());
+  if(stop) stop.addEventListener('click', ()=> TTS.stop());
+  if(rate) rate.addEventListener('change', ()=> TTS.setRate(parseFloat(rate.value)));
+  if('speechSynthesis' in window){
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = ()=>{ window.speechSynthesis.getVoices(); };
+  }
+})();
 
 function renderLectures(){
   const el = document.getElementById('lectureList');
   el.innerHTML = LECTURES.map(l => `
-    <div class="lecture-row">
-      <div class="lecture-num">${l.n}</div>
-      <div class="lecture-info">
-        <div class="lecture-title">บรรยายครั้งที่ ${l.n}</div>
-        <div class="lecture-status">${l.pdf ? 'พร้อมอ่าน' : 'รออัปโหลด PDF สรุปเนื้อหา'}</div>
+    <div class="lecture-row" id="lec-${l.n}">
+      <div class="lecture-head" onclick="toggleLecture(${l.n})">
+        <div class="lecture-num">${l.n}</div>
+        <div class="lecture-title">${l.title}</div>
+        <div class="lecture-toggle">▾</div>
       </div>
-      ${l.pdf
-        ? `<a href="${l.pdf}" class="lecture-open" target="_blank" rel="noopener" onmouseenter="playHoverSound()">เปิด PDF →</a>`
-        : `<span class="lecture-pending">⏳ รออัปโหลด</span>`}
+      <div class="lecture-body">${l.text.replace(/</g,'&lt;')}</div>
     </div>
   `).join('');
+}
+function toggleLecture(n){
+  const row = document.getElementById('lec-' + n);
+  TTS.stop();
+  row.classList.toggle('open');
+  playHoverSound();
 }
 renderLectures();
 </script>
