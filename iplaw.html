@@ -160,6 +160,9 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 .lecture-body{display:none;padding:0 16px 16px 64px;font-size:14px;color:var(--ink-soft);white-space:pre-line;line-height:1.75}
 .lecture-row.open .lecture-body{display:block}
 .lecture-img{max-width:100%;border-radius:10px;margin-bottom:12px;display:block}
+.lecture-video{margin:12px 0 16px}
+.lecture-video .video-frame-wrap{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:10px;overflow:hidden}
+.lecture-video .video-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 /* TTS bar */
 .tts-bar{
   display:flex;gap:8px;align-items:center;flex-wrap:wrap;
@@ -485,6 +488,13 @@ const TTS = (function(){
   }
 })();
 
+function renderLectureBody(l){
+  const escaped = l.text.replace(/</g,'&lt;');
+  const video = l.video ? `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${l.video}" title="วิดีโอประกอบบรรยายครั้งที่ ${l.n}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div></div>` : '';
+  if (!l.image) return video + escaped;
+  const img = `<img src="${l.image}" alt="" loading="lazy" class="lecture-img" onerror="this.remove()">`;
+  return video + (escaped.includes('[[IMG]]') ? escaped.replace('[[IMG]]', img) : img + escaped);
+}
 function renderLectures(){
   const el = document.getElementById('lectureList');
   el.innerHTML = LECTURES.map(l => `
@@ -494,7 +504,7 @@ function renderLectures(){
         <div class="lecture-title">${l.title}</div>
         <div class="lecture-toggle">▾</div>
       </div>
-      <div class="lecture-body">${l.text.replace(/</g,'&lt;')}</div>
+      <div class="lecture-body">${renderLectureBody(l)}</div>
     </div>
   `).join('');
 }

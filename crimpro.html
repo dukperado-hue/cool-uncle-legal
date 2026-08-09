@@ -176,6 +176,9 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 .lecture-body{display:none;padding:0 16px 16px 64px;font-size:14px;color:var(--ink-soft);white-space:pre-line;line-height:1.75}
 .lecture-row.open .lecture-body{display:block}
 .lecture-img{max-width:100%;border-radius:10px;margin-bottom:12px;display:block}
+.lecture-video{margin:12px 0 16px}
+.lecture-video .video-frame-wrap{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:10px;overflow:hidden}
+.lecture-video .video-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .section-h2{font-size:17px;font-weight:800;color:var(--ink);margin:6px 0 4px}
 .section-sub{font-size:12.5px;color:var(--ink-faint);margin-bottom:14px;line-height:1.6}
 .section-sub a{color:var(--accent)}
@@ -286,8 +289,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
     </div>
 
     <h2 class="section-h2">📼 ครั้งที่เรียนจริงเทอมนี้ (จากคลิปบรรยาย/เอกสารจดครั้งจริง)</h2>
-    <p class="section-sub">ต่างจากคลังอ้างอิง 7 หมวดด้านล่าง — ส่วนนี้อัปเดตเฉพาะครั้งที่อาจารย์บรรยายไปแล้วจริงเทอมนี้เท่านั้น
-      (อ้างอิง: <a href="https://youtu.be/Namvefv3yf8" target="_blank" rel="noopener">คลิปบรรยายครั้งที่ 1</a>)</p>
+    <p class="section-sub">ต่างจากคลังอ้างอิง 7 หมวดด้านล่าง — ส่วนนี้อัปเดตเฉพาะครั้งที่อาจารย์บรรยายไปแล้วจริงเทอมนี้เท่านั้น พร้อมวิดีโอประกอบ</p>
     <div class="lecture-list" id="realLectureList"></div>
 
     <h2 class="section-h2" style="margin-top:32px">📚 คลังอ้างอิงตามหมวดกฎหมาย (ไม่ใช่ลำดับครั้งบรรยาย)</h2>
@@ -1077,7 +1079,7 @@ renderLectures();
    (แยกจาก LECTURES ด้านบนซึ่งเป็นคลังอ้างอิงตามหมวดกฎหมาย ไม่ใช่ลำดับครั้งบรรยาย)
    ================================================================ */
 const REAL_LECTURES = [
-  { n: 1, title: "ภาพรวมวิชา ปรัชญาพื้นฐาน และผู้เสียหายในคดีอาญา", text:
+  { n: 1, title: "ภาพรวมวิชา ปรัชญาพื้นฐาน และผู้เสียหายในคดีอาญา", video: "Namvefv3yf8", text:
 `(1) ภาพรวมวิชาและการจัดสัดส่วนเนื้อหา
 วิชานี้บรรยายทั้งหมด 15 ครั้ง ช่วงแรกเน้นภาค 1 ภาคทั่วไป ไปจนถึงการสอบสวนสามัญตามมาตรา 139
 ส่วนวิชาลักษณะพยานแยกไปรวมกับพยานหลักฐานทางแพ่งในอีกวิชาหนึ่ง หลังจากนั้นอาจารย์ท่านอื่นจะบรรยายต่อ
@@ -1152,9 +1154,10 @@ const REAL_LECTURES = [
 ];
 function renderLectureText2(l){
   const escaped = l.text.replace(/</g,'&lt;');
-  if (!l.image) return escaped;
+  const video = l.video ? `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${l.video}" title="วิดีโอประกอบบรรยายครั้งที่ ${l.n}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div></div>` : '';
+  if (!l.image) return video + escaped;
   const img = `<img src="${l.image}" alt="" loading="lazy" class="lecture-img" onerror="this.remove()">`;
-  return escaped.includes('[[IMG]]') ? escaped.replace('[[IMG]]', img) : img + escaped;
+  return video + (escaped.includes('[[IMG]]') ? escaped.replace('[[IMG]]', img) : img + escaped);
 }
 function renderRealLectures(){
   const el = document.getElementById('realLectureList');
