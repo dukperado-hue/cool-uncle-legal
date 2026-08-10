@@ -156,7 +156,8 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 .lecture-title{flex:1;min-width:0;font-weight:700;color:var(--ink);font-size:15px}
 .lecture-toggle{color:var(--ink-faint);font-size:13px;flex-shrink:0;transition:transform .2s}
 .lecture-row.open .lecture-toggle{transform:rotate(180deg)}
-.lecture-body{display:none;padding:0 16px 16px 66px;font-size:14px;color:var(--ink-soft);white-space:pre-line;line-height:1.8}
+.lecture-body{display:none;padding:0 16px 16px 66px;font-size:14px;color:var(--ink-soft);line-height:1.8}
+.lec-block-text{white-space:pre-line}
 .lecture-row.open .lecture-body{display:block}
 /* TTS bar */
 .tts-bar{
@@ -199,13 +200,20 @@ mark.hl{background:var(--gold-soft);color:var(--ink);padding:0 3px;border-radius
 .lecture-video .video-caption{font-size:12px;color:var(--ink-faint);margin-top:6px;text-align:center}
 .lec-heading{
   font-family:'Noto Serif Thai',serif;font-weight:800;font-size:15px;color:var(--accent);
-  margin:20px 0 10px;padding-top:16px;border-top:1px dashed var(--line);
+  margin:20px 0 4px;padding-top:16px;border-top:1px dashed var(--line);
 }
 .lec-block:first-child .lec-heading{margin-top:0;padding-top:0;border-top:none}
-.lec-img-row{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 12px}
+.lec-img-row{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 10px}
 .lec-img-card{flex:1 1 100px;max-width:150px;text-align:center}
 .lec-img-card img{width:100%;height:110px;object-fit:cover;border-radius:8px;border:1px solid var(--line);box-shadow:var(--shadow)}
 .lec-img-card figcaption{font-size:11px;color:var(--ink-faint);margin-top:4px;line-height:1.4}
+/* "through" layout: image floats beside the paragraph text and the text wraps
+   around it, for a single-portrait-plus-biography block instead of a full-width
+   gallery row sitting above the text. */
+.lec-img-float{float:right;margin:0 0 10px 14px;max-width:130px;text-align:center}
+.lec-img-float img{width:100%;border-radius:8px;border:1px solid var(--line);box-shadow:var(--shadow)}
+.lec-img-float figcaption{font-size:11px;color:var(--ink-faint);margin-top:4px;line-height:1.4}
+.lec-block::after{content:"";display:table;clear:both}
 .lec-table{width:100%;border-collapse:collapse;margin:10px 0 16px;font-size:13px}
 .lec-table th,.lec-table td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
 .lec-table th{background:var(--gold-soft);color:var(--ink);font-weight:700}
@@ -338,7 +346,6 @@ const LECTURES = [
 `ทบทวน: รัฐธรรมนูญที่เป็น Codified/Large-C จะมาพร้อมหลักความเป็นกฎหมายสูงสุด (Supremacy of the Constitution) ระบบกฎหมายทั้งระบบจึงมีลักษณะเป็นระบบปิดที่อ้างอิงความชอบธรรมในตัวเอง (Self-referential system) — กฎหมายลำดับรองอย่างพระราชบัญญัติจะมีผลบังคับใช้ได้ก็ต่อเมื่อสอดคล้องกับรัฐธรรมนูญเท่านั้น ความเป็นกฎหมายสูงสุดนี้ไม่ได้เกิดจากการมีตัวบทเขียนไว้เฉยๆ แต่พิสูจน์ผ่านกลไก 4 ประการ ได้แก่ (1) กระบวนการจัดทำรัฐธรรมนูญที่ใช้สถาบันพิเศษ เช่น สมัชชาร่างรัฐธรรมนูญ (2) การแก้ไขเพิ่มเติมที่ยากกว่ากฎหมายปกติ ซึ่งแบ่งเป็น 3 ลำดับชั้น — บทนิรันดร (Eternity Clause) ที่ห้ามแก้ไขเด็ดขาดเพื่อพิทักษ์อัตลักษณ์ทางรัฐธรรมนูญ, การแก้ไขขั้นพื้นฐานที่ต้องผ่านกระบวนการพิเศษเช่นประชามติ, และการแก้ไขทั่วไปตามกลไกสภาปกติ (3) กลไกประชาธิปไตยที่ปกป้องตนเอง (Militant Democracy Clause) และ (4) การมีกลไกตรวจสอบความชอบด้วยรัฐธรรมนูญและผู้พิทักษ์รัฐธรรมนูญ` },
       { heading: "บริบททางประวัติศาสตร์: สาธารณรัฐไวมาร์ และ Militant Democracy ของ Karl Loewenstein",
         images: [
-          { src: 'pics/legal history/la259/weimarflag.jpg', caption: 'ธงสาธารณรัฐไวมาร์' },
           { src: 'pics/legal history/la259/Heridenberg and hitler.jpg', caption: 'ประธานาธิบดีฮินเดนบูร์กแต่งตั้งฮิตเลอร์เป็นนายกรัฐมนตรี ค.ศ. 1933' },
         ],
         text:
@@ -367,22 +374,21 @@ Karl Loewenstein นักกฎหมายเยอรมันผู้ลี
 
 Chief Justice John Marshall วินิจฉัยเป็น 4 ขั้นตอน: Marbury มีสิทธิ์ตามกฎหมายจริง — แต่เครื่องมือที่ใช้ฟ้องคือ Judiciary Act of 1789 ที่ให้อำนาจศาลสูงสุดออก Writ of Mandamus ในคดีฟ้องตรง — เมื่อเทียบกับรัฐธรรมนูญที่จำกัดขอบเขตอำนาจฟ้องตรงต่อศาลสูงสุด (Original jurisdiction) ไว้เฉพาะบางกรณีซึ่งไม่รวมกรณีนี้ — Judiciary Act of 1789 จึงขัดรัฐธรรมนูญ ศาลปฏิเสธไม่บังคับใช้กฎหมายนั้น วางบรรทัดฐานระดับโลกว่ารัฐธรรมนูญไม่ใช่แค่คำประกาศเชิงอุดมการณ์ แต่เป็นกฎหมายที่บังคับใช้ได้จริงโดยศาล และสถาปนาหลัก Judicial Review ขึ้นเป็นครั้งแรก` },
       { heading: "เปรียบเทียบกรณีของไทย: คดีอาชญากรสงคราม (คำพิพากษาฎีกาที่ 1/2489)",
-        images: [ { src: 'pics/legal history/la259/จอมพล ป.jpg', caption: 'จอมพล ป. พิบูลสงคราม' } ],
+        images: [ { src: 'pics/legal history/la259/จอมพล ป.jpg', caption: 'จอมพล ป. พิบูลสงคราม' } ], imageLayout: 'float',
         text:
 `หลังสงครามโลกครั้งที่ 2 รัฐบาลไทยเกรงตกเป็นฝ่ายแพ้สงครามร่วมกับญี่ปุ่น จึงตรา พ.ร.บ.อาชญากรสงคราม พ.ศ. 2488 เพื่อจัดการผู้นำที่พาไทยเข้าสงคราม (รวมถึงจอมพล ป. พิบูลสงคราม) แต่กฎหมายนี้ขัดหลักห้ามใช้กฎหมายอาญาย้อนหลังเป็นโทษ ขณะที่รัฐธรรมนูญ 2475 มาตรา 62 บัญญัติว่าสภาผู้แทนราษฎรทรงไว้ซึ่งสิทธิเด็ดขาดในการตีความรัฐธรรมนูญ จึงเกิดคำถามว่าศาลฎีกามีอำนาจชี้ขาดเองได้หรือไม่ ศาลฎีกาวินิจฉัยแบบเดียวกับตรรกะคดี Marbury ว่า "...ไม่ใช่เป็นข้อบัญญัติตัดอำนาจศาลที่จะตีความบทบัญญัติแห่งรัฐธรรมนูญ ศาลจึงมีอำนาจตีความบทบัญญัติแห่งรัฐธรรมนูญได้ ในการใช้หรือบังคับตามกฎหมายนั้น ศาลย่อมต้องแปลหรือตีความหมายของกฎหมาย หากไม่ให้ศาลแปล ศาลก็ย่อมใช้กฎหมายไม่ได้" จึงประกาศว่า พ.ร.บ. ดังกล่าวในส่วนที่เป็นโทษย้อนหลังขัดรัฐธรรมนูญและเป็นโมฆะ จอมพล ป. จึงพ้นข้อหา นับเป็นตัวอย่างกลไก Decentralised Model ที่เกิดขึ้นชั่วคราวในไทยก่อนจะเปลี่ยนผ่านสู่ระบบศาลรัฐธรรมนูญในภายหลัง ส่วนกรณีแอฟริกาใต้แม้เป็นประเทศ Common Law แต่เลือกตั้งศาลรัฐธรรมนูญเฉพาะขึ้น เพื่อเป็นหลักประกันความยุติธรรมในช่วงเปลี่ยนผ่านจากระบอบ Apartheid` },
       { heading: "หลักรัฐธรรมนูญนิยมของสหราชอาณาจักร: สองเสาหลักของ A.V. Dicey",
-        images: [ { src: 'pics/legal history/la259/Albert Venn Dicey.jpg', caption: 'A.V. Dicey' } ],
+        images: [ { src: 'pics/legal history/la259/Albert Venn Dicey.jpg', caption: 'A.V. Dicey' } ], imageLayout: 'float',
         text:
 `สหราชอาณาจักรไม่มีประมวลรัฐธรรมนูญฉบับเดียว (Uncodified/small-c) มีฐานจากพระราชบัญญัติ ธรรมเนียมปฏิบัติ และคำพิพากษาบรรทัดฐาน A.V. Dicey วางเสาหลักไว้ 2 ประการ — เสาที่ 1 Parliamentary Sovereignty: รัฐสภามีอำนาจเด็ดขาดตราหรือยกเลิกกฎหมายใดก็ได้ ไม่มีองค์กรใดเพิกถอนกฎหมายที่รัฐสภาตราขึ้นได้ (ใช้อำนาจร่วมของ House of Commons, House of Lords และ Royal Assent) ผลคือ UK Supreme Court ไม่มีอำนาจเพิกถอนพระราชบัญญัติเหมือนศาลรัฐธรรมนูญไทยหรือศาลสูงสุดสหรัฐฯ — เสาที่ 2 The Rule of Law มี 3 มิติ คือ การใช้อำนาจรัฐต้องมีฐานกฎหมายรองรับเสมอ ห้ามใช้อำนาจตามอำเภอใจ, ความเสมอภาคต่อหน้ากฎหมายปกติโดย Dicey ปฏิเสธศาลปกครองพิเศษแบบ Conseil d'État ของฝรั่งเศส, และหลักรัฐธรรมนูญนิยมโดยธรรมเนียมศาล คือสิทธิเสรีภาพเกิดจากบรรทัดฐานคำพิพากษาสั่งสมมายาวนาน ไม่ได้มาจากตัวบทรัฐธรรมนูญที่เป็นกระดาษ` },
       { heading: "คำพิพากษาศาลอังกฤษที่วางหลักสิทธิเสรีภาพและขอบเขตอำนาจรัฐ",
-        images: [ { src: 'pics/legal history/la259/caseofplocamation.jpg', caption: 'Case of Proclamations (1611)' } ],
         video: '7TBtoi4F_kQ', videoCaption: 'Entick v. Carrington Case Brief Summary',
         text:
 `Case of Proclamations (1611) วางหลักว่ากษัตริย์โดยพระบรมราชโองการหรือวิธีอื่นใดไม่สามารถแก้ไขกฎหมายจารีตประเพณี กฎหมายลายลักษณ์อักษร หรือขนบธรรมเนียมของแผ่นดินได้ — ศาลนำโดย Coke CJ วางรากฐานว่าฝ่ายบริหารไม่มีอำนาจออกกฎเกณฑ์จำกัดสิทธิตามอำเภอใจ ต้องมีฐานกฎหมายจากรัฐสภารองรับเสมอ ส่วน Entick v Carrington (1765) วางหลัก "หากสิ่งนั้นเป็นกฎหมาย ย่อมต้องค้นพบได้ในประมวลกฎหมายของเรา" — เจ้าหน้าที่รัฐเข้าค้นบ้านและยึดเอกสารส่วนตัวโดยอ้างหมายค้นทั่วไปที่ออกโดยรัฐมนตรี ศาลนำโดย Lord Camden ตัดสินว่าการกระทำของรัฐที่กระทบสิทธิบุคคลทำไม่ได้เลยหากไม่มีกฎหมายให้อำนาจไว้ชัดแจ้ง (หลัก "ไม่มีกฎหมาย ไม่มีอำนาจ")
 
 ก่อนปี 1998 แม้ UK เป็นภาคี ECHR แต่เป็นระบบทวินิยม (Dualism) ต้องออกกฎหมายอนุวัตการก่อนศาลจึงนำมาตรฐานสิทธิมนุษยชนสากลไปตรวจสอบ พ.ร.บ. ได้ รัฐบาล Tony Blair จึงผ่าน Human Rights Act 1998 มาตรา 4 ให้ศาลออก "คำประกาศความไม่สอดคล้อง" (Declaration of Incompatibility) เมื่อพบว่ากฎหมายขัด ECHR — ศาลไม่มีอำนาจเพิกถอนกฎหมายนั้น (เคารพ Parliamentary Sovereignty) แต่คำประกาศเป็นแรงกดดันทางการเมืองให้รัฐสภาต้องแก้ไขในที่สุด ไม่เช่นนั้นประชาชนอาจไปฟ้องต่อศาลสิทธิมนุษยชนยุโรป (ECtHR) และรัฐบาลจะแพ้คดี` },
       { heading: "ข้อถกเถียงเรื่องผู้พิทักษ์รัฐธรรมนูญ (ภาคขยาย): Hans Kelsen vs Carl Schmitt",
-        images: [ { src: 'pics/legal history/la259/hans.jpg', caption: 'Hans Kelsen' } ],
+        images: [ { src: 'pics/legal history/la259/hans.jpg', caption: 'Hans Kelsen' } ], imageLayout: 'float',
         text:
 `เคลเซนมองว่าสังคมสมัยใหม่เป็นพหุสังคมเต็มไปด้วยความแตกต่างทางอุดมการณ์ ทางออกเดียวในระบอบเสรีประชาธิปไตยคือรักษา "การเมืองเชิงประนีประนอม" (Politics of compromise) ศาลรัฐธรรมนูญแบบรวมศูนย์จึงทำหน้าที่สกัดกั้นไม่ให้เสียงข้างมากทางการเมืองตรากฎหมายละเมิดสิทธิตามอำเภอใจ โดยเป็นเพียง "ผู้บัญญัติกฎหมายในทางลบ" (Negative Legislator) คือลบกฎหมายที่ขัดรัฐธรรมนูญออกจากระบบ ไม่ได้เขียนกฎหมายใหม่เอง ส่วนชมิตต์แย้งว่าการให้ศาลตัดสินประเด็นคุณค่าทางรัฐธรรมนูญจะดึงสถาบันที่ควรเป็นกลางเข้าไปติดหล่มการเมือง (Politicisation of the Judiciary) — ชมิตต์มองว่าการเมืองคือการแบ่งแยกเด็ดขาดระหว่าง "มิตรกับศัตรู" (Friend vs Enemy) รัฐอยู่รอดได้ด้วยเสถียรภาพและเอกภาพ ไม่ใช่กระบวนการประนีประนอมในสภาที่ชักช้า จึงเสนอว่าประมุขของรัฐต่างหากคือผู้พิทักษ์รัฐธรรมนูญที่แท้จริง เพราะได้รับฉันทานุมัติโดยตรงจากประชาชนและมีเครื่องมือตัดสินใจเด็ดขาด เช่น การประกาศสถานการณ์ฉุกเฉินตามมาตรา 48 ของรัฐธรรมนูญไวมาร์
 
@@ -511,8 +517,14 @@ function renderVideoHtml(id, caption){
   if (!id) return '';
   return `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${id}" title="${escapeHtml(caption||'วิดีโอประกอบบรรยาย')}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>${caption ? `<div class="video-caption">${escapeHtml(caption)}</div>` : ''}</div>`;
 }
-function renderImagesHtml(images){
+function renderImagesHtml(images, layout){
   if (!images || !images.length) return '';
+  if (layout === 'float') {
+    // single-portrait "through" layout: image floats beside the text, which
+    // wraps around it, instead of sitting in its own row above the text.
+    const im = images[0];
+    return `<figure class="lec-img-float"><img src="${im.src}" alt="${escapeHtml(im.caption||'')}" loading="lazy"><figcaption>${escapeHtml(im.caption||'')}</figcaption></figure>`;
+  }
   return `<div class="lec-img-row">${images.map(im => `<figure class="lec-img-card"><img src="${im.src}" alt="${escapeHtml(im.caption||'')}" loading="lazy"><figcaption>${escapeHtml(im.caption||'')}</figcaption></figure>`).join('')}</div>`;
 }
 function renderTableHtml(t){
@@ -521,17 +533,24 @@ function renderTableHtml(t){
 }
 function renderLectureBlocks(l){
   if (l.blocks) {
-    return l.blocks.map(b => `
-      <div class="lec-block">
-        ${b.heading ? `<div class="lec-heading">${escapeHtml(b.heading)}</div>` : ''}
-        ${renderImagesHtml(b.images)}
-        ${renderVideoHtml(b.video, b.videoCaption)}
-        ${renderTableHtml(b.table)}
-        ${highlightText(escapeHtml(b.text))}
-      </div>
-    `).join('');
+    return l.blocks.map(b => {
+      const parts = [];
+      if (b.heading) parts.push(`<div class="lec-heading">${escapeHtml(b.heading)}</div>`);
+      const imgHtml = renderImagesHtml(b.images, b.imageLayout);
+      if (imgHtml) parts.push(imgHtml);
+      const videoHtml = renderVideoHtml(b.video, b.videoCaption);
+      if (videoHtml) parts.push(videoHtml);
+      const tableHtml = renderTableHtml(b.table);
+      if (tableHtml) parts.push(tableHtml);
+      if (b.text) parts.push(`<div class="lec-block-text">${highlightText(escapeHtml(b.text))}</div>`);
+      return `<div class="lec-block">${parts.join('')}</div>`;
+    }).join('');
   }
-  return `${renderVideoHtml(l.video)}${highlightText(escapeHtml(l.text))}`;
+  const parts = [];
+  const videoHtml = renderVideoHtml(l.video);
+  if (videoHtml) parts.push(videoHtml);
+  if (l.text) parts.push(`<div class="lec-block-text">${highlightText(escapeHtml(l.text))}</div>`);
+  return parts.join('');
 }
 function renderLectures(){
   const el = document.getElementById('lectureList');
