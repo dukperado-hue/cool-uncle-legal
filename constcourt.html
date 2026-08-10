@@ -207,6 +207,8 @@ mark.hl{background:var(--gold-soft);color:var(--ink);padding:0 3px;border-radius
 .lec-img-card{flex:1 1 100px;max-width:150px;text-align:center}
 .lec-img-card img{width:100%;height:110px;object-fit:cover;border-radius:8px;border:1px solid var(--line);box-shadow:var(--shadow)}
 .lec-img-card figcaption{font-size:11px;color:var(--ink-faint);margin-top:4px;line-height:1.4}
+.lec-img-card--lg{max-width:320px}
+.lec-img-card--lg img{height:220px}
 /* "through" layout: image floats beside the paragraph text and the text wraps
    around it, for a single-portrait-plus-biography block instead of a full-width
    gallery row sitting above the text. */
@@ -346,7 +348,7 @@ const LECTURES = [
 `ทบทวน: รัฐธรรมนูญที่เป็น Codified/Large-C จะมาพร้อมหลักความเป็นกฎหมายสูงสุด (Supremacy of the Constitution) ระบบกฎหมายทั้งระบบจึงมีลักษณะเป็นระบบปิดที่อ้างอิงความชอบธรรมในตัวเอง (Self-referential system) — กฎหมายลำดับรองอย่างพระราชบัญญัติจะมีผลบังคับใช้ได้ก็ต่อเมื่อสอดคล้องกับรัฐธรรมนูญเท่านั้น ความเป็นกฎหมายสูงสุดนี้ไม่ได้เกิดจากการมีตัวบทเขียนไว้เฉยๆ แต่พิสูจน์ผ่านกลไก 4 ประการ ได้แก่ (1) กระบวนการจัดทำรัฐธรรมนูญที่ใช้สถาบันพิเศษ เช่น สมัชชาร่างรัฐธรรมนูญ (2) การแก้ไขเพิ่มเติมที่ยากกว่ากฎหมายปกติ ซึ่งแบ่งเป็น 3 ลำดับชั้น — บทนิรันดร (Eternity Clause) ที่ห้ามแก้ไขเด็ดขาดเพื่อพิทักษ์อัตลักษณ์ทางรัฐธรรมนูญ, การแก้ไขขั้นพื้นฐานที่ต้องผ่านกระบวนการพิเศษเช่นประชามติ, และการแก้ไขทั่วไปตามกลไกสภาปกติ (3) กลไกประชาธิปไตยที่ปกป้องตนเอง (Militant Democracy Clause) และ (4) การมีกลไกตรวจสอบความชอบด้วยรัฐธรรมนูญและผู้พิทักษ์รัฐธรรมนูญ` },
       { heading: "บริบททางประวัติศาสตร์: สาธารณรัฐไวมาร์ และ Militant Democracy ของ Karl Loewenstein",
         images: [
-          { src: 'pics/legal history/la259/Heridenberg and hitler.jpg', caption: 'ประธานาธิบดีฮินเดนบูร์กแต่งตั้งฮิตเลอร์เป็นนายกรัฐมนตรี ค.ศ. 1933' },
+          { src: 'pics/legal history/la259/Heridenberg and hitler.jpg', caption: 'ประธานาธิบดีฮินเดนบูร์กแต่งตั้งฮิตเลอร์เป็นนายกรัฐมนตรี ค.ศ. 1933', size: 'lg' },
         ],
         text:
 `หลังสงครามโลกครั้งที่ 1 เยอรมนีเปลี่ยนผ่านจากระบบไกเซอร์มาเป็นสาธารณรัฐไวมาร์ที่ปกครองแบบประชาธิปไตยเสรีนิยม แต่เป็นสังคมที่แตกแยกทางคุณค่าอย่างสุดโต่ง (Pluralism & Agony) มีกลุ่มการเมืองที่ไม่เชื่อในระบอบประชาธิปไตยแต่มีกองกำลังติดอาวุธของตนเอง ทั้งฝ่ายขวาจัด (พรรคนาซี NSDAP ของฮิตเลอร์) ฝ่ายซ้ายจัด (พรรคคอมมิวนิสต์ KPD) และกลุ่มขุนนางอนุรักษนิยม โดยมีเพียงพรรค SPD เท่านั้นที่พยายามพยุงระบอบไว้ จุดอ่อนสำคัญคือรัฐธรรมนูญไวมาร์เปิดสิทธิเสรีภาพและการแข่งขันทางการเมืองอย่างไร้ขอบเขต ปราศจากกลไกปกป้องตัวเอง ทำให้พรรคนาซีใช้กลไกการเลือกตั้งและสิทธิตามกฎหมายเข้ามาทำลายระบบประชาธิปไตยจากภายในได้สำเร็จ จนนำไปสู่การล่มสลายของระบอบในที่สุด
@@ -525,7 +527,7 @@ function renderImagesHtml(images, layout){
     const im = images[0];
     return `<figure class="lec-img-float"><img src="${im.src}" alt="${escapeHtml(im.caption||'')}" loading="lazy"><figcaption>${escapeHtml(im.caption||'')}</figcaption></figure>`;
   }
-  return `<div class="lec-img-row">${images.map(im => `<figure class="lec-img-card"><img src="${im.src}" alt="${escapeHtml(im.caption||'')}" loading="lazy"><figcaption>${escapeHtml(im.caption||'')}</figcaption></figure>`).join('')}</div>`;
+  return `<div class="lec-img-row">${images.map(im => `<figure class="lec-img-card${im.size==='lg'?' lec-img-card--lg':''}"><img src="${im.src}" alt="${escapeHtml(im.caption||'')}" loading="lazy"><figcaption>${escapeHtml(im.caption||'')}</figcaption></figure>`).join('')}</div>`;
 }
 function renderTableHtml(t){
   if (!t) return '';
