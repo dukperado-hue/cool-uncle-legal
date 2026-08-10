@@ -193,6 +193,23 @@ mark.hl{background:var(--gold-soft);color:var(--ink);padding:0 3px;border-radius
   font-size:12px;color:var(--ink-faint);margin-top:12px;padding-top:10px;
   border-top:1px dashed var(--line);font-style:italic;
 }
+.lecture-video{margin:4px 0 16px}
+.lecture-video .video-frame-wrap{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:10px;overflow:hidden}
+.lecture-video .video-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.lecture-video .video-caption{font-size:12px;color:var(--ink-faint);margin-top:6px;text-align:center}
+.lec-heading{
+  font-family:'Noto Serif Thai',serif;font-weight:800;font-size:15px;color:var(--accent);
+  margin:20px 0 10px;padding-top:16px;border-top:1px dashed var(--line);
+}
+.lec-block:first-child .lec-heading{margin-top:0;padding-top:0;border-top:none}
+.lec-img-row{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 12px}
+.lec-img-card{flex:1 1 100px;max-width:150px;text-align:center}
+.lec-img-card img{width:100%;height:110px;object-fit:cover;border-radius:8px;border:1px solid var(--line);box-shadow:var(--shadow)}
+.lec-img-card figcaption{font-size:11px;color:var(--ink-faint);margin-top:4px;line-height:1.4}
+.lec-table{width:100%;border-collapse:collapse;margin:10px 0 16px;font-size:13px}
+.lec-table th,.lec-table td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.lec-table th{background:var(--gold-soft);color:var(--ink);font-weight:700}
+.lec-table td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
 
 footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)}
 .coffee-widget{
@@ -315,7 +332,63 @@ const LECTURES = [
 เนื้อหาที่ให้อ่านล่วงหน้า (จากบทความ Constitutional Courts in Asia ของ Albert H.Y. Chen) สรุปภาพรวมการตรวจสอบความชอบด้วยรัฐธรรมนูญ 2 รูปแบบหลักในโลก — รูปแบบอเมริกัน (Decentralized) ให้ศาลทั่วไปตรวจสอบได้ กับรูปแบบยุโรป (Centralized) ที่ตั้งศาลรัฐธรรมนูญเฉพาะ ซึ่งเป็นที่นิยมในประเทศระบบประมวลกฎหมาย (Civil law) และในประเทศที่เพิ่งเปลี่ยนผ่านจากเผด็จการสู่ประชาธิปไตย เนื่องจากศาลรัฐธรรมนูญใหม่เป็น "สัญลักษณ์ของระบอบประชาธิปไตยและหลักนิติธรรมใหม่"
 
 จากประสบการณ์ศาลรัฐธรรมนูญ 7 แห่งในเอเชีย (ไต้หวัน เกาหลีใต้ อินโดนีเซีย ไทย มองโกเลีย กัมพูชา เมียนมา) ผู้เขียนประเมินว่ากลุ่มที่ประสบความสำเร็จสูงสุด ("The Trinity") ได้แก่ ไต้หวัน เกาหลีใต้ และอินโดนีเซีย เพราะใช้อำนาจเชิงรุกระดับปานกลาง มีความเป็นอิสระสูง และได้รับความไว้วางใจจากสาธารณชน ส่วนกรณีศาลรัฐธรรมนูญไทย (ก่อตั้งปี 2541) ผู้เขียนชี้ว่าเป็นกรณีศึกษาที่น่าสนใจ เพราะรัฐธรรมนูญให้อำนาจศาลไว้กว้างขวางมาก แต่ศาลกลับ "ใช้อำนาจแบบรุกคืบอย่างสุดโต่ง" หลังปี 2549 จนนำไปสู่คำตัดสินที่สร้างข้อถกเถียงรุนแรง (เช่น การยุบพรรคการเมืองใหญ่ การสั่งเลือกตั้งเป็นโมฆะ) และเกิดคำถามว่าความล้มเหลวนี้เกิดจากการให้อำนาจที่ล้นเหลือ หรือจากการแบ่งขั้วทางการเมืองในสังคมไทยเองกันแน่` },
-  ...Array.from({length: 14}, (_, i) => ({ n: i + 2, title: null, text: null }))
+  { n: 2, title: "ความเป็นกฎหมายสูงสุด ประชาธิปไตยที่ปกป้องตนเอง และโมเดลการควบคุมความชอบด้วยรัฐธรรมนูญ",
+    blocks: [
+      { text:
+`ทบทวน: รัฐธรรมนูญที่เป็น Codified/Large-C จะมาพร้อมหลักความเป็นกฎหมายสูงสุด (Supremacy of the Constitution) ระบบกฎหมายทั้งระบบจึงมีลักษณะเป็นระบบปิดที่อ้างอิงความชอบธรรมในตัวเอง (Self-referential system) — กฎหมายลำดับรองอย่างพระราชบัญญัติจะมีผลบังคับใช้ได้ก็ต่อเมื่อสอดคล้องกับรัฐธรรมนูญเท่านั้น ความเป็นกฎหมายสูงสุดนี้ไม่ได้เกิดจากการมีตัวบทเขียนไว้เฉยๆ แต่พิสูจน์ผ่านกลไก 4 ประการ ได้แก่ (1) กระบวนการจัดทำรัฐธรรมนูญที่ใช้สถาบันพิเศษ เช่น สมัชชาร่างรัฐธรรมนูญ (2) การแก้ไขเพิ่มเติมที่ยากกว่ากฎหมายปกติ ซึ่งแบ่งเป็น 3 ลำดับชั้น — บทนิรันดร (Eternity Clause) ที่ห้ามแก้ไขเด็ดขาดเพื่อพิทักษ์อัตลักษณ์ทางรัฐธรรมนูญ, การแก้ไขขั้นพื้นฐานที่ต้องผ่านกระบวนการพิเศษเช่นประชามติ, และการแก้ไขทั่วไปตามกลไกสภาปกติ (3) กลไกประชาธิปไตยที่ปกป้องตนเอง (Militant Democracy Clause) และ (4) การมีกลไกตรวจสอบความชอบด้วยรัฐธรรมนูญและผู้พิทักษ์รัฐธรรมนูญ` },
+      { heading: "บริบททางประวัติศาสตร์: สาธารณรัฐไวมาร์ และ Militant Democracy ของ Karl Loewenstein",
+        images: [
+          { src: 'pics/legal history/la259/weimarflag.jpg', caption: 'ธงสาธารณรัฐไวมาร์' },
+          { src: 'pics/legal history/la259/Heridenberg and hitler.jpg', caption: 'ประธานาธิบดีฮินเดนบูร์กแต่งตั้งฮิตเลอร์เป็นนายกรัฐมนตรี ค.ศ. 1933' },
+        ],
+        text:
+`หลังสงครามโลกครั้งที่ 1 เยอรมนีเปลี่ยนผ่านจากระบบไกเซอร์มาเป็นสาธารณรัฐไวมาร์ที่ปกครองแบบประชาธิปไตยเสรีนิยม แต่เป็นสังคมที่แตกแยกทางคุณค่าอย่างสุดโต่ง (Pluralism & Agony) มีกลุ่มการเมืองที่ไม่เชื่อในระบอบประชาธิปไตยแต่มีกองกำลังติดอาวุธของตนเอง ทั้งฝ่ายขวาจัด (พรรคนาซี NSDAP ของฮิตเลอร์) ฝ่ายซ้ายจัด (พรรคคอมมิวนิสต์ KPD) และกลุ่มขุนนางอนุรักษนิยม โดยมีเพียงพรรค SPD เท่านั้นที่พยายามพยุงระบอบไว้ จุดอ่อนสำคัญคือรัฐธรรมนูญไวมาร์เปิดสิทธิเสรีภาพและการแข่งขันทางการเมืองอย่างไร้ขอบเขต ปราศจากกลไกปกป้องตัวเอง ทำให้พรรคนาซีใช้กลไกการเลือกตั้งและสิทธิตามกฎหมายเข้ามาทำลายระบบประชาธิปไตยจากภายในได้สำเร็จ จนนำไปสู่การล่มสลายของระบอบในที่สุด
+
+Karl Loewenstein นักกฎหมายเยอรมันผู้ลี้ภัยไปสหรัฐฯ เขียนบทความ "Militant Democracy and Fundamental Rights" (1937) ชี้ว่าประชาธิปไตยมองโลกในแง่ดีอย่างเดียวไม่ได้ (ไม่ใช่แค่ Normative) แต่ต้องตระหนักถึงความจริง (Realistic) ว่ามีผู้ต้องการใช้เครื่องมือประชาธิปไตยมาทำลายประชาธิปไตยเอง จึงต้องมี "เขี้ยวเล็บ" ป้องกันตนเอง เช่น การยุบพรรคการเมืองที่มีวัตถุประสงค์ล้มล้างระบอบ หรือการตัดสิทธิ/แบนนักการเมืองที่เป็นปฏิปักษ์ต่อระบอบ — แนวคิด Militant Democracy นี้ปรากฏชัดในมาตรา 49 ของรัฐธรรมนูญไทยฉบับปัจจุบันที่ให้สิทธิร้องต่อศาลรัฐธรรมนูญเพื่อสั่งระงับการกระทำล้มล้างการปกครอง` },
+      { heading: "รูปแบบการควบคุมความชอบด้วยรัฐธรรมนูญ: Decentralised vs Centralised",
+        table: { headers: ['มิติเปรียบเทียบ', 'Decentralised (USA)', 'Centralised (Kelsen)'], rows: [
+          ['องค์กรผู้พิจารณา', 'ศาลยุติธรรมปกติทุกศาล', 'ศาลรัฐธรรมนูญเฉพาะ'],
+          ['ลักษณะข้อพิพาท', 'Concrete Review — มีข้อพิพาทจริงเป็นฐาน', 'Abstract Review — ตรวจสอบตัวบทโดยไม่ต้องรอคดีจริง'],
+          ['สถานะของประเด็น', 'Review Incidenter (ประเด็นประกอบ)', 'Review Principaliter (ประเด็นหลัก)'],
+          ['ผลของคำตัดสิน', 'ผูกพันคู่ความ (ขยายผลผ่านบรรทัดฐาน)', 'Erga Omnes — เพิกถอนกฎหมายเป็นการทั่วไป'],
+        ] },
+        text:
+`ระบบไม่รวมศูนย์ (Decentralised/American/Diffuse Model) ให้อำนาจศาลยุติธรรมปกติทุกศาลตีความและปฏิเสธกฎหมายที่ขัดรัฐธรรมนูญ ใช้ในประเทศ Common Law อย่างสหรัฐฯ มาเลเซีย อินเดีย และบางประเทศ Civil Law เช่นญี่ปุ่น เป็นการตรวจสอบแบบ Incidenter คือประเด็นรัฐธรรมนูญเป็นเพียงข้อต่อสู้ประกอบคดีปกติ (Concrete review) ส่วนระบบรวมศูนย์ (Centralised/European/Kelsenian Model) จัดตั้งศาลรัฐธรรมนูญเป็นสถาบันเฉพาะแยกจากศาลยุติธรรมปกติ ตรวจสอบความสอดคล้องของตัวบทกฎหมายโดยตรงเป็นประเด็นหลักของคดี (Review Principaliter) มักเป็นการตรวจสอบก่อนบังคับใช้ (Abstract review) ที่ยื่นโดยองค์กรของรัฐเอง` },
+      { heading: "กรณีศึกษาคดีประวัติศาสตร์: Marbury v. Madison (1803)",
+        images: [
+          { src: 'pics/legal history/la259/johnAdams.jpg', caption: 'John Adams' },
+          { src: 'pics/legal history/la259/James Meddison.jpg', caption: 'James Madison' },
+          { src: 'pics/legal history/la259/Johnmarshall.jpg', caption: 'Chief Justice John Marshall' },
+          { src: 'pics/legal history/la259/marburry v meddison.jpg', caption: 'Marbury v. Madison (1803)' },
+        ],
+        video: 'Ppw1JrtornU', videoCaption: 'Marbury v. Madison Explained',
+        text:
+`เบื้องหลังคือเหตุการณ์ "Midnight Judges" — ในการเลือกตั้งปี 1800 ประธานาธิบดี John Adams (Federalist) แพ้ให้ Thomas Jefferson จึงเร่งตรา Judiciary Act of 1801 แต่งตั้งผู้พิพากษาฝ่ายตนก่อนหมดวาระจำนวนมาก หนึ่งในนั้นคือ William Marbury ที่ได้รับแต่งตั้งเป็น Justice of the Peace แต่เอกสารตราตั้งส่งมอบไม่ทัน เมื่อ Jefferson ขึ้นมา จึงสั่งให้ James Madison รัฐมนตรีต่างประเทศระงับการส่งมอบ Marbury จึงฟ้องตรงต่อศาลสูงสุดขอ Writ of Mandamus บังคับให้ส่งมอบเอกสาร
+
+Chief Justice John Marshall วินิจฉัยเป็น 4 ขั้นตอน: Marbury มีสิทธิ์ตามกฎหมายจริง — แต่เครื่องมือที่ใช้ฟ้องคือ Judiciary Act of 1789 ที่ให้อำนาจศาลสูงสุดออก Writ of Mandamus ในคดีฟ้องตรง — เมื่อเทียบกับรัฐธรรมนูญที่จำกัดขอบเขตอำนาจฟ้องตรงต่อศาลสูงสุด (Original jurisdiction) ไว้เฉพาะบางกรณีซึ่งไม่รวมกรณีนี้ — Judiciary Act of 1789 จึงขัดรัฐธรรมนูญ ศาลปฏิเสธไม่บังคับใช้กฎหมายนั้น วางบรรทัดฐานระดับโลกว่ารัฐธรรมนูญไม่ใช่แค่คำประกาศเชิงอุดมการณ์ แต่เป็นกฎหมายที่บังคับใช้ได้จริงโดยศาล และสถาปนาหลัก Judicial Review ขึ้นเป็นครั้งแรก` },
+      { heading: "เปรียบเทียบกรณีของไทย: คดีอาชญากรสงคราม (คำพิพากษาฎีกาที่ 1/2489)",
+        images: [ { src: 'pics/legal history/la259/จอมพล ป.jpg', caption: 'จอมพล ป. พิบูลสงคราม' } ],
+        text:
+`หลังสงครามโลกครั้งที่ 2 รัฐบาลไทยเกรงตกเป็นฝ่ายแพ้สงครามร่วมกับญี่ปุ่น จึงตรา พ.ร.บ.อาชญากรสงคราม พ.ศ. 2488 เพื่อจัดการผู้นำที่พาไทยเข้าสงคราม (รวมถึงจอมพล ป. พิบูลสงคราม) แต่กฎหมายนี้ขัดหลักห้ามใช้กฎหมายอาญาย้อนหลังเป็นโทษ ขณะที่รัฐธรรมนูญ 2475 มาตรา 62 บัญญัติว่าสภาผู้แทนราษฎรทรงไว้ซึ่งสิทธิเด็ดขาดในการตีความรัฐธรรมนูญ จึงเกิดคำถามว่าศาลฎีกามีอำนาจชี้ขาดเองได้หรือไม่ ศาลฎีกาวินิจฉัยแบบเดียวกับตรรกะคดี Marbury ว่า "...ไม่ใช่เป็นข้อบัญญัติตัดอำนาจศาลที่จะตีความบทบัญญัติแห่งรัฐธรรมนูญ ศาลจึงมีอำนาจตีความบทบัญญัติแห่งรัฐธรรมนูญได้ ในการใช้หรือบังคับตามกฎหมายนั้น ศาลย่อมต้องแปลหรือตีความหมายของกฎหมาย หากไม่ให้ศาลแปล ศาลก็ย่อมใช้กฎหมายไม่ได้" จึงประกาศว่า พ.ร.บ. ดังกล่าวในส่วนที่เป็นโทษย้อนหลังขัดรัฐธรรมนูญและเป็นโมฆะ จอมพล ป. จึงพ้นข้อหา นับเป็นตัวอย่างกลไก Decentralised Model ที่เกิดขึ้นชั่วคราวในไทยก่อนจะเปลี่ยนผ่านสู่ระบบศาลรัฐธรรมนูญในภายหลัง ส่วนกรณีแอฟริกาใต้แม้เป็นประเทศ Common Law แต่เลือกตั้งศาลรัฐธรรมนูญเฉพาะขึ้น เพื่อเป็นหลักประกันความยุติธรรมในช่วงเปลี่ยนผ่านจากระบอบ Apartheid` },
+      { heading: "หลักรัฐธรรมนูญนิยมของสหราชอาณาจักร: สองเสาหลักของ A.V. Dicey",
+        images: [ { src: 'pics/legal history/la259/Albert Venn Dicey.jpg', caption: 'A.V. Dicey' } ],
+        text:
+`สหราชอาณาจักรไม่มีประมวลรัฐธรรมนูญฉบับเดียว (Uncodified/small-c) มีฐานจากพระราชบัญญัติ ธรรมเนียมปฏิบัติ และคำพิพากษาบรรทัดฐาน A.V. Dicey วางเสาหลักไว้ 2 ประการ — เสาที่ 1 Parliamentary Sovereignty: รัฐสภามีอำนาจเด็ดขาดตราหรือยกเลิกกฎหมายใดก็ได้ ไม่มีองค์กรใดเพิกถอนกฎหมายที่รัฐสภาตราขึ้นได้ (ใช้อำนาจร่วมของ House of Commons, House of Lords และ Royal Assent) ผลคือ UK Supreme Court ไม่มีอำนาจเพิกถอนพระราชบัญญัติเหมือนศาลรัฐธรรมนูญไทยหรือศาลสูงสุดสหรัฐฯ — เสาที่ 2 The Rule of Law มี 3 มิติ คือ การใช้อำนาจรัฐต้องมีฐานกฎหมายรองรับเสมอ ห้ามใช้อำนาจตามอำเภอใจ, ความเสมอภาคต่อหน้ากฎหมายปกติโดย Dicey ปฏิเสธศาลปกครองพิเศษแบบ Conseil d'État ของฝรั่งเศส, และหลักรัฐธรรมนูญนิยมโดยธรรมเนียมศาล คือสิทธิเสรีภาพเกิดจากบรรทัดฐานคำพิพากษาสั่งสมมายาวนาน ไม่ได้มาจากตัวบทรัฐธรรมนูญที่เป็นกระดาษ` },
+      { heading: "คำพิพากษาศาลอังกฤษที่วางหลักสิทธิเสรีภาพและขอบเขตอำนาจรัฐ",
+        images: [ { src: 'pics/legal history/la259/caseofplocamation.jpg', caption: 'Case of Proclamations (1611)' } ],
+        video: '7TBtoi4F_kQ', videoCaption: 'Entick v. Carrington Case Brief Summary',
+        text:
+`Case of Proclamations (1611) วางหลักว่ากษัตริย์โดยพระบรมราชโองการหรือวิธีอื่นใดไม่สามารถแก้ไขกฎหมายจารีตประเพณี กฎหมายลายลักษณ์อักษร หรือขนบธรรมเนียมของแผ่นดินได้ — ศาลนำโดย Coke CJ วางรากฐานว่าฝ่ายบริหารไม่มีอำนาจออกกฎเกณฑ์จำกัดสิทธิตามอำเภอใจ ต้องมีฐานกฎหมายจากรัฐสภารองรับเสมอ ส่วน Entick v Carrington (1765) วางหลัก "หากสิ่งนั้นเป็นกฎหมาย ย่อมต้องค้นพบได้ในประมวลกฎหมายของเรา" — เจ้าหน้าที่รัฐเข้าค้นบ้านและยึดเอกสารส่วนตัวโดยอ้างหมายค้นทั่วไปที่ออกโดยรัฐมนตรี ศาลนำโดย Lord Camden ตัดสินว่าการกระทำของรัฐที่กระทบสิทธิบุคคลทำไม่ได้เลยหากไม่มีกฎหมายให้อำนาจไว้ชัดแจ้ง (หลัก "ไม่มีกฎหมาย ไม่มีอำนาจ")
+
+ก่อนปี 1998 แม้ UK เป็นภาคี ECHR แต่เป็นระบบทวินิยม (Dualism) ต้องออกกฎหมายอนุวัตการก่อนศาลจึงนำมาตรฐานสิทธิมนุษยชนสากลไปตรวจสอบ พ.ร.บ. ได้ รัฐบาล Tony Blair จึงผ่าน Human Rights Act 1998 มาตรา 4 ให้ศาลออก "คำประกาศความไม่สอดคล้อง" (Declaration of Incompatibility) เมื่อพบว่ากฎหมายขัด ECHR — ศาลไม่มีอำนาจเพิกถอนกฎหมายนั้น (เคารพ Parliamentary Sovereignty) แต่คำประกาศเป็นแรงกดดันทางการเมืองให้รัฐสภาต้องแก้ไขในที่สุด ไม่เช่นนั้นประชาชนอาจไปฟ้องต่อศาลสิทธิมนุษยชนยุโรป (ECtHR) และรัฐบาลจะแพ้คดี` },
+      { heading: "ข้อถกเถียงเรื่องผู้พิทักษ์รัฐธรรมนูญ (ภาคขยาย): Hans Kelsen vs Carl Schmitt",
+        images: [ { src: 'pics/legal history/la259/hans.jpg', caption: 'Hans Kelsen' } ],
+        text:
+`เคลเซนมองว่าสังคมสมัยใหม่เป็นพหุสังคมเต็มไปด้วยความแตกต่างทางอุดมการณ์ ทางออกเดียวในระบอบเสรีประชาธิปไตยคือรักษา "การเมืองเชิงประนีประนอม" (Politics of compromise) ศาลรัฐธรรมนูญแบบรวมศูนย์จึงทำหน้าที่สกัดกั้นไม่ให้เสียงข้างมากทางการเมืองตรากฎหมายละเมิดสิทธิตามอำเภอใจ โดยเป็นเพียง "ผู้บัญญัติกฎหมายในทางลบ" (Negative Legislator) คือลบกฎหมายที่ขัดรัฐธรรมนูญออกจากระบบ ไม่ได้เขียนกฎหมายใหม่เอง ส่วนชมิตต์แย้งว่าการให้ศาลตัดสินประเด็นคุณค่าทางรัฐธรรมนูญจะดึงสถาบันที่ควรเป็นกลางเข้าไปติดหล่มการเมือง (Politicisation of the Judiciary) — ชมิตต์มองว่าการเมืองคือการแบ่งแยกเด็ดขาดระหว่าง "มิตรกับศัตรู" (Friend vs Enemy) รัฐอยู่รอดได้ด้วยเสถียรภาพและเอกภาพ ไม่ใช่กระบวนการประนีประนอมในสภาที่ชักช้า จึงเสนอว่าประมุขของรัฐต่างหากคือผู้พิทักษ์รัฐธรรมนูญที่แท้จริง เพราะได้รับฉันทานุมัติโดยตรงจากประชาชนและมีเครื่องมือตัดสินใจเด็ดขาด เช่น การประกาศสถานการณ์ฉุกเฉินตามมาตรา 48 ของรัฐธรรมนูญไวมาร์
+
+ประเด็นชวนคิดต่อครั้งหน้า: ระบบ Centralised และ Decentralised มีข้อดีข้อจำกัดอย่างไรในโลกจริง และครั้งต่อไปจะเจาะลึกทฤษฎีกฎหมายบริสุทธิ์ (Pure Theory of Law) ของเคลเซน รวมถึง Grundnorm หรือบรรทัดฐานขั้นพื้นฐานอันเป็นที่มาแห่งความชอบธรรมของระบบกฎหมายทั้งหมด` },
+    ] },
+  ...Array.from({length: 13}, (_, i) => ({ n: i + 3, title: null, text: null }))
 ];
 
 /* Key terms from lecture 1 highlighted per user request — matched longest-first so
@@ -326,6 +399,14 @@ const HIGHLIGHT_TERMS = [
   'Large-C Constitution',
   'small-c constitution',
   'บทนิรันดร',
+  'Militant Democracy',
+  'Marbury v. Madison',
+  'Judicial Review',
+  'Negative Legislator',
+  'Declaration of Incompatibility',
+  'Parliamentary Sovereignty',
+  'The Rule of Law',
+  'Erga Omnes',
 ];
 function highlightText(escapedHtml){
   if (!HIGHLIGHT_TERMS.length) return escapedHtml;
@@ -425,16 +506,43 @@ const TTS = (function(){
   }
 })();
 
+function escapeHtml(s){ return (s||'').replace(/</g,'&lt;'); }
+function renderVideoHtml(id, caption){
+  if (!id) return '';
+  return `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${id}" title="${escapeHtml(caption||'วิดีโอประกอบบรรยาย')}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>${caption ? `<div class="video-caption">${escapeHtml(caption)}</div>` : ''}</div>`;
+}
+function renderImagesHtml(images){
+  if (!images || !images.length) return '';
+  return `<div class="lec-img-row">${images.map(im => `<figure class="lec-img-card"><img src="${im.src}" alt="${escapeHtml(im.caption||'')}" loading="lazy"><figcaption>${escapeHtml(im.caption||'')}</figcaption></figure>`).join('')}</div>`;
+}
+function renderTableHtml(t){
+  if (!t) return '';
+  return `<table class="lec-table"><thead><tr>${t.headers.map(h => `<th>${escapeHtml(h)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(r => `<tr>${r.map(c => `<td>${escapeHtml(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+}
+function renderLectureBlocks(l){
+  if (l.blocks) {
+    return l.blocks.map(b => `
+      <div class="lec-block">
+        ${b.heading ? `<div class="lec-heading">${escapeHtml(b.heading)}</div>` : ''}
+        ${renderImagesHtml(b.images)}
+        ${renderVideoHtml(b.video, b.videoCaption)}
+        ${renderTableHtml(b.table)}
+        ${highlightText(escapeHtml(b.text))}
+      </div>
+    `).join('');
+  }
+  return `${renderVideoHtml(l.video)}${highlightText(escapeHtml(l.text))}`;
+}
 function renderLectures(){
   const el = document.getElementById('lectureList');
-  el.innerHTML = LECTURES.map(l => l.text ? `
+  el.innerHTML = LECTURES.map(l => (l.text || l.blocks) ? `
     <div class="lecture-row" id="lec-${l.n}">
       <div class="lecture-head" onclick="toggleLecture(${l.n})">
         <div class="lecture-num">${l.n}</div>
         <div class="lecture-title">${l.title}</div>
         <div class="lecture-toggle">▾</div>
       </div>
-      <div class="lecture-body">${highlightText(l.text.replace(/</g,'&lt;'))}</div>
+      <div class="lecture-body">${renderLectureBlocks(l)}</div>
     </div>
   ` : `
     <div class="lecture-row pending">
