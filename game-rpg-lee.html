@@ -289,6 +289,57 @@ img{max-width:100%; display:block}
 }
 .locked-entry .progress{font-family:'JetBrains Mono',monospace; font-size:11px}
 
+/* ============ QUEST BOARD (ท่องมาตรา typing mode) ============ */
+.recite-topic-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px}
+.recite-topic-card{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:20px 14px; text-align:center; color:var(--ink); text-decoration:none; display:block;
+}
+.recite-topic-card:hover{border-color:var(--accent); transform:translateY(-2px)}
+.recite-topic-card .icon{font-size:32px; margin-bottom:8px}
+.recite-topic-card .label{font-weight:800; font-size:14.5px}
+.recite-topic-card .count{font-size:11.5px; color:var(--ink-soft); margin-top:4px}
+.recite-topic-card.empty{opacity:.4; cursor:default; pointer-events:none}
+
+.recite-row{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:12px 14px; display:flex; align-items:center; gap:10px; margin-bottom:8px;
+}
+.recite-row .num{font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--accent); flex:1; display:flex; align-items:center; gap:6px}
+.recite-row .badge{font-size:11px; color:var(--ok); font-weight:700; white-space:nowrap}
+.recite-row .badge.new{color:var(--ink-faint)}
+.recite-row button{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:7px 14px; font-weight:700; font-size:12px; flex-shrink:0}
+
+.recite-wrap{
+  background:radial-gradient(120% 70% at 50% 0%, #1c2338 0%, var(--rpg-bg0) 70%);
+  border-radius:16px; padding:16px 14px; color:var(--rpg-text); box-shadow:0 10px 32px rgba(0,0,0,.35);
+}
+.recite-head{display:flex; justify-content:space-between; font-size:11px; color:var(--rpg-gold); margin-bottom:10px; letter-spacing:.02em}
+.recite-card{background:var(--rpg-panel); border:2px solid var(--rpg-border-dk); box-shadow:0 0 0 2px var(--rpg-border-lt) inset; border-radius:8px; padding:16px 16px 18px}
+.recite-num{font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--rpg-gold); margin-bottom:10px; display:flex; align-items:center; gap:8px}
+.recite-num .booklabel{margin-left:auto; font-size:10.5px; color:#8891ab; font-weight:400}
+.recite-target{
+  font-size:17px; line-height:2.1; letter-spacing:.01em; padding:14px; background:#0d1120;
+  border-radius:8px; margin-bottom:12px; font-family:'Sarabun',sans-serif; word-break:break-word;
+}
+.rc-pending{color:#5b6a8c}
+.rc-correct{color:#bdf5d2}
+.rc-incorrect{color:#f5c7c3; background:rgba(224,69,63,.28); border-radius:2px}
+.rc-current{color:#fff; border-bottom:2px solid var(--rpg-gold); animation:rcBlink 1s step-end infinite}
+@keyframes rcBlink{50%{border-color:transparent}}
+.recite-input{
+  width:100%; background:#0f1424; border:2px solid var(--rpg-border-lt); border-radius:8px; color:#fff;
+  padding:12px 14px; font-size:15px; font-family:'Sarabun',sans-serif; margin-bottom:10px;
+}
+.recite-input:focus{outline:none; border-color:var(--rpg-gold)}
+.recite-stats{display:flex; gap:16px; font-size:12px; color:#c9cede; font-family:'JetBrains Mono',monospace; flex-wrap:wrap}
+.recite-actions{margin-top:12px; text-align:right}
+.recite-actions a{color:#8891ab; font-size:12px; text-decoration:none}
+.recite-actions a:hover{color:var(--rpg-text)}
+.recite-dika{
+  margin-top:14px; background:var(--gold-soft); color:#6b5320; border-radius:8px; padding:10px 12px; font-size:12px; line-height:1.7;
+}
+
 .loading-note{text-align:center; padding:40px 10px; color:var(--ink-faint); font-size:13.5px}
 .back-row{margin-bottom:14px}
 .back-row a{color:var(--accent); font-weight:700; font-size:13px; text-decoration:none}
@@ -323,7 +374,7 @@ img{max-width:100%; display:block}
 
 const MUTE_KEY = 'codex-drone-muted'; // shared site-wide mute toggle
 const SAVE_KEY = 'leeRpgSave_v1';
-const DATA_URL = 'games/rpg-data.json?v=20260810b';
+const DATA_URL = 'games/rpg-data.json?v=20260810c';
 const CODEX_URL = 'codex-data.json';
 const UNLOCK_THRESHOLD = 3; // correct answers on a มาตรา before its Lawbook entry unlocks
 
@@ -331,10 +382,15 @@ let DATA = null;
 let codexCache = null; // lazy-loaded full law database, only fetched when Lawbook opens
 
 const state = {
-  screen: 'loading', // loading|home|quest|training|lawbook|battle
+  screen: 'loading', // loading|home|quest|training|lawbook|battle|reciteTopicPick|reciteSubgroupPick|reciteList|recite
   questSubject: 'civil',
   save: loadSave(),
   battle: null,
+  reciteTopicId: null,
+  reciteSubgroupId: null,
+  reciteList: null, // ordered [{book,article}] for the current topic/subgroup
+  reciteIdx: 0,
+  reciteRun: null, // {book,article,target,typed,startedAt,finished,result}
 };
 
 function loadSave(){
@@ -343,10 +399,11 @@ function loadSave(){
     if (raw) {
       const parsed = JSON.parse(raw);
       if (!parsed.unlockedGhosts) parsed.unlockedGhosts = {};
+      if (!parsed.reciteDone) parsed.reciteDone = {};
       return parsed;
     }
   }catch(e){}
-  return { exp: 0, level: 1, unlockedLawRefs: {}, questClears: {}, unlockedGhosts: {} };
+  return { exp: 0, level: 1, unlockedLawRefs: {}, questClears: {}, unlockedGhosts: {}, reciteDone: {} };
 }
 function saveSave(){ try{ localStorage.setItem(SAVE_KEY, JSON.stringify(state.save)); }catch(e){} }
 
@@ -521,6 +578,10 @@ function render(){
   if (state.screen === 'galleryDetail') return renderGalleryDetail(app);
   if (state.screen === 'lawbook') return renderLawbook(app);
   if (state.screen === 'battle') return renderBattle(app);
+  if (state.screen === 'reciteTopicPick') return renderReciteTopicPick(app);
+  if (state.screen === 'reciteSubgroupPick') return renderReciteSubgroupPick(app);
+  if (state.screen === 'reciteList') return renderReciteList(app);
+  if (state.screen === 'recite') return renderRecite(app);
 }
 
 /* ============ HOME ============ */
@@ -540,9 +601,13 @@ function renderHome(app){
       </div>
     </div>
     <div class="menu-grid">
-      <a href="#" class="menu-card" onclick="goScreen(event,'questModePick')">
+      <a href="#" class="menu-card" onclick="goScreen(event,'reciteTopicPick')">
         <div class="icon">🗺️</div><div class="label">Quest Board</div>
-        <div class="sub">เลือกด่านตามขาหรือวิชา</div>
+        <div class="sub">ท่องมาตราจริง พิมพ์แข่งเวลา ครบทุกวิชา</div>
+      </a>
+      <a href="#" class="menu-card" onclick="goScreen(event,'questModePick')">
+        <div class="icon">👹</div><div class="label">ล่าปีศาจ</div>
+        <div class="sub">ลุยด่าน ตอบคำถามปะทะปีศาจประจำมาตรา</div>
       </a>
       <a href="#" class="menu-card hero-card" style="background-image:url('pics/game/hero/ghosthunt.jpg')" onclick="goScreen(event,'ghosthunt')">
         <div class="hero-overlay">
@@ -567,7 +632,7 @@ function goScreen(ev, screen){
   if (DATA.subjects.find(s => s.id === state.questSubject && s.playable) == null) {
     state.questSubject = DATA.subjects.find(s => s.playable).id;
   }
-  if (screen === 'ghosthunt') pushBackToHome();
+  if (screen === 'ghosthunt' || screen === 'reciteTopicPick') pushBackToHome();
   render();
 }
 /* Pushes a history entry so the device/browser back button returns to this
@@ -589,7 +654,7 @@ function pickQuestMode(mode){
 function renderQuestModePick(app){
   app.innerHTML = `
     <div class="back-row"><a href="#" onclick="goScreen(event,'home')">← กลับหน้าหลัก</a></div>
-    <div class="section-title">🗺️ Quest Board</div>
+    <div class="section-title">👹 ล่าปีศาจ</div>
     <div class="mode-pick-grid">
       <a href="#" class="mode-pick-card" onclick="event.preventDefault(); pickQuestMode('khaa')">
         <div class="icon">⚖️</div><div class="label">แยกตามขา</div>
@@ -647,7 +712,7 @@ function renderQuestBoard(app, isTraining){
 
   app.innerHTML = `
     <div class="back-row"><a href="#" onclick="${isTraining ? "goScreen(event,'home')" : "goScreen(event,'questModePick')"}">← กลับ</a></div>
-    <div class="section-title">${isTraining ? '🎯 Training Zone' : '🗺️ Quest Board' + (groupByTopic ? ' · แยกตามวิชา' : ' · แยกตามขา')}</div>
+    <div class="section-title">${isTraining ? '🎯 Training Zone' : '👹 ล่าปีศาจ' + (groupByTopic ? ' · แยกตามวิชา' : ' · แยกตามขา')}</div>
     ${isTraining ? '<div class="training-flag">โหมดฝึก: ตอบผิดไม่เสีย HP เล่นด่านไหนก็ได้ ไม่จำกัดเลเวล</div>' : ''}
     <div class="subject-tabs">${tabs}</div>
     ${body}
@@ -655,6 +720,289 @@ function renderQuestBoard(app, isTraining){
 }
 function selectSubject(id){ state.questSubject = id; render(); }
 function selectTopic(topic){ state.questTopic = topic; render(); }
+
+/* ============ QUEST BOARD (ท่องมาตรา — typing-recite mode) ============
+   Reads real มาตรา text straight from codex-data.json (lazy-loaded, same as
+   Lawbook) instead of duplicating law text into rpg-data.json. DATA.reciteTopics
+   only stores which article numbers belong to which topic/subgroup. */
+const BOOK_LABEL = { civil: 'ป.พ.พ.', criminal: 'ป.อาญา' };
+let reciteTickHandle = null;
+
+function reciteDoneKey(book, article){ return book + ':' + article; }
+function reciteTopicArticleCount(topic){
+  if (topic.subgroups) return topic.subgroups.reduce((n, sg) => n + sg.articles.length, 0);
+  return topic.articles.length;
+}
+function reciteTopicDoneCount(list){
+  return list.filter(item => state.save.reciteDone[reciteDoneKey(item.book, item.article)]).length;
+}
+
+function renderReciteTopicPick(app){
+  const cards = DATA.reciteTopics.map(t => {
+    const total = reciteTopicArticleCount(t);
+    const allItems = t.subgroups
+      ? t.subgroups.flatMap(sg => sg.articles.map(a => ({ book: t.book, article: a })))
+      : t.articles.map(a => ({ book: t.book, article: a }));
+    const done = reciteTopicDoneCount(allItems);
+    const empty = total === 0;
+    return `
+      <a href="#" class="recite-topic-card ${empty ? 'empty' : ''}" onclick="event.preventDefault(); ${empty ? '' : `openReciteTopic('${t.id}')`}">
+        <div class="icon">${t.icon}</div>
+        <div class="label">${t.name}</div>
+        <div class="count">${empty ? 'กำลังจัดทำเนื้อหา' : `${done}/${total} ท่องแล้ว`}</div>
+      </a>
+    `;
+  }).join('');
+  app.innerHTML = `
+    <div class="back-row"><a href="#" onclick="goScreen(event,'home')">← กลับหน้าหลัก</a></div>
+    <div class="section-title">🗺️ Quest Board · ท่องมาตรา</div>
+    <div class="training-flag">พิมพ์ตัวบทจริงให้ตรงและเร็วที่สุด ยิ่งเร็ว+แม่นยำ ยิ่งได้ EXP เยอะ</div>
+    <div class="recite-topic-grid">${cards}</div>
+  `;
+}
+
+function openReciteTopic(topicId){
+  const topic = DATA.reciteTopics.find(t => t.id === topicId);
+  state.reciteTopicId = topicId;
+  if (topic.subgroups) {
+    state.screen = 'reciteSubgroupPick';
+  } else {
+    state.reciteList = topic.articles.map(a => ({ book: topic.book, article: a }));
+    state.reciteSubgroupId = null;
+    state.screen = 'reciteList';
+  }
+  pushBackToHome();
+  render();
+}
+
+function renderReciteSubgroupPick(app){
+  const topic = DATA.reciteTopics.find(t => t.id === state.reciteTopicId);
+  const cards = topic.subgroups.map(sg => {
+    const items = sg.articles.map(a => ({ book: topic.book, article: a }));
+    const done = reciteTopicDoneCount(items);
+    const empty = sg.articles.length === 0;
+    return `
+      <a href="#" class="recite-topic-card ${empty ? 'empty' : ''}" onclick="event.preventDefault(); ${empty ? '' : `openReciteSubgroup('${sg.id}')`}">
+        <div class="icon">${sg.icon}</div>
+        <div class="label">${sg.name}</div>
+        <div class="count">${empty ? 'กำลังจัดทำเนื้อหา' : `${done}/${sg.articles.length} ท่องแล้ว`}</div>
+      </a>
+    `;
+  }).join('');
+  app.innerHTML = `
+    <div class="back-row"><a href="#" onclick="goScreen(event,'reciteTopicPick')">← กลับ Quest Board</a></div>
+    <div class="section-title">${topic.icon} ${topic.name}</div>
+    <div class="recite-topic-grid">${cards}</div>
+  `;
+}
+function openReciteSubgroup(subgroupId){
+  const topic = DATA.reciteTopics.find(t => t.id === state.reciteTopicId);
+  const sg = topic.subgroups.find(s => s.id === subgroupId);
+  state.reciteSubgroupId = subgroupId;
+  state.reciteList = sg.articles.map(a => ({ book: topic.book, article: a }));
+  state.screen = 'reciteList';
+  render();
+}
+
+function renderReciteList(app){
+  const topic = DATA.reciteTopics.find(t => t.id === state.reciteTopicId);
+  const sg = topic.subgroups && state.reciteSubgroupId ? topic.subgroups.find(s => s.id === state.reciteSubgroupId) : null;
+  const backScreen = sg ? 'reciteSubgroupPick' : 'reciteTopicPick';
+  const rows = state.reciteList.map((item, idx) => {
+    const done = state.save.reciteDone[reciteDoneKey(item.book, item.article)];
+    return `
+      <div class="recite-row">
+        <span class="num">มาตรา ${item.article}</span>
+        <span class="badge ${done ? '' : 'new'}">${done ? `✅ ${done.bestAccuracy}% · ${done.bestCpm} ตัว/นาที` : 'ยังไม่ท่อง'}</span>
+        <button onclick="startReciteRun(${idx})">${done ? '↻ ท่องซ้ำ' : '✍ เริ่มท่อง'}</button>
+      </div>
+    `;
+  }).join('');
+  app.innerHTML = `
+    <div class="back-row"><a href="#" onclick="goScreen(event,'${backScreen}')">← กลับ</a></div>
+    <div class="section-title">${sg ? sg.icon + ' ' + sg.name : topic.icon + ' ' + topic.name}</div>
+    ${rows}
+  `;
+}
+
+function reciteTargetText(rawText){
+  if (!rawText) return '';
+  const paras = rawText.trim().split(/\n+/).map(s => s.trim()).filter(Boolean);
+  let out = paras[0] || '';
+  let i = 1;
+  while (i < paras.length && out.length < 160) { out += ' ' + paras[i]; i++; }
+  out = out.replace(/\s+/g, ' ').trim();
+  const CAP = 280;
+  if (out.length <= CAP) return out;
+  let cut = out.lastIndexOf(' ', CAP);
+  if (cut < 100) cut = CAP;
+  return out.slice(0, cut).trim();
+}
+function extractDikaSnippet(lectureNotes){
+  if (!lectureNotes) return null;
+  const joined = lectureNotes.map(n => n.text || '').join('\n');
+  const m = joined.match(/(?:คำพิพากษาศาลฎีกาที่|ฎีกาที่|ฎ\.)\s*[๐-๙0-9]+(?:\/[๐-๙0-9]+)?/);
+  if (!m) return null;
+  const idx = m.index;
+  const start = Math.max(0, joined.lastIndexOf('\n', idx) + 1);
+  const end = Math.min(joined.length, idx + 240);
+  let snippet = joined.slice(start, end).trim();
+  const lastPeriod = snippet.lastIndexOf('. ');
+  if (lastPeriod > 60 && end < joined.length) snippet = snippet.slice(0, lastPeriod + 1);
+  return snippet;
+}
+function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function renderCharSpans(typed, target){
+  let html = '';
+  for (let i = 0; i < target.length; i++) {
+    const ch = target[i];
+    const display = ch === ' ' ? '&nbsp;' : escapeHtml(ch);
+    let cls = 'rc-pending';
+    if (i < typed.length) cls = (typed[i] === ch) ? 'rc-correct' : 'rc-incorrect';
+    else if (i === typed.length) cls = 'rc-current';
+    html += `<span class="${cls}">${display}</span>`;
+  }
+  return html;
+}
+
+function startReciteRun(idx){
+  state.reciteIdx = idx;
+  const item = state.reciteList[idx];
+  app_showReciteLoading();
+  ensureCodexLoaded().then(() => {
+    const art = codexCache.books[item.book].articles[item.article];
+    const target = reciteTargetText(art.text);
+    state.reciteRun = { book: item.book, article: item.article, target, typed: '', startedAt: null, finished: false, result: null };
+    state.screen = 'recite';
+    render();
+  });
+}
+function app_showReciteLoading(){
+  const app = document.getElementById('app');
+  app.innerHTML = '<div class="loading-note">กำลังโหลดคลังกฎหมาย...</div>';
+}
+
+function renderRecite(app){
+  const run = state.reciteRun;
+  const item = state.reciteList[state.reciteIdx];
+  const topic = DATA.reciteTopics.find(t => t.id === state.reciteTopicId);
+  const label = topic.subgroups ? topic.subgroups.find(s => s.id === state.reciteSubgroupId).name : topic.name;
+  const codexArt = codexCache.books[item.book].articles[item.article];
+  const examFreq = codexArt.examFreq;
+  app.innerHTML = `
+    <div class="back-row"><a href="#" onclick="exitRecite(event)">← กลับรายการ</a></div>
+    <div class="recite-wrap">
+      <div class="recite-head"><span>${label}</span><span>${state.reciteIdx + 1}/${state.reciteList.length}</span></div>
+      <div class="recite-card">
+        <div class="recite-num">มาตรา ${item.article} ${examFreq && examFreq.stars >= 2 ? '⭐' : ''}<span class="booklabel">${BOOK_LABEL[item.book]}</span></div>
+        <div class="recite-target" id="reciteTarget">${renderCharSpans(run.typed, run.target)}</div>
+        ${run.finished ? '' : `
+          <input type="text" id="reciteInput" class="recite-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+            oninput="onReciteInput(event)" placeholder="เริ่มพิมพ์ตรงนี้ให้ตรงกับตัวบทด้านบน...">
+          <div class="recite-stats">
+            <span>⏱ <span id="reciteTime">0.0</span>s</span>
+            <span>⌨ <span id="reciteCpm">0</span> ตัว/นาที</span>
+            <span>🎯 <span id="reciteAcc">100</span>%</span>
+          </div>
+          <div class="recite-actions"><a href="#" onclick="skipRecite(event)">ข้ามมาตรานี้ →</a></div>
+        `}
+        ${run.finished ? renderReciteResultBlock(run) : ''}
+      </div>
+    </div>
+  `;
+  if (!run.finished) {
+    const inputEl = document.getElementById('reciteInput');
+    inputEl.focus();
+    startReciteTicker();
+  }
+}
+
+function startReciteTicker(){
+  stopReciteTicker();
+  reciteTickHandle = setInterval(() => {
+    const run = state.reciteRun;
+    if (!run || run.finished || !run.startedAt) return;
+    updateReciteStatsDom();
+  }, 200);
+}
+function stopReciteTicker(){
+  if (reciteTickHandle) { clearInterval(reciteTickHandle); reciteTickHandle = null; }
+}
+function updateReciteStatsDom(){
+  const run = state.reciteRun;
+  const timeEl = document.getElementById('reciteTime');
+  const cpmEl = document.getElementById('reciteCpm');
+  const accEl = document.getElementById('reciteAcc');
+  if (!timeEl || !run.startedAt) return;
+  const elapsedSec = (Date.now() - run.startedAt) / 1000;
+  const len = run.typed.length;
+  let correct = 0;
+  for (let i = 0; i < len; i++) { if (run.typed[i] === run.target[i]) correct++; }
+  timeEl.textContent = elapsedSec.toFixed(1);
+  cpmEl.textContent = elapsedSec > 0.3 ? Math.round((len / elapsedSec) * 60) : 0;
+  accEl.textContent = len > 0 ? Math.round((correct / len) * 100) : 100;
+}
+
+function onReciteInput(e){
+  const run = state.reciteRun;
+  if (!run || run.finished) return;
+  if (!run.startedAt) run.startedAt = Date.now();
+  run.typed = e.target.value.slice(0, run.target.length);
+  document.getElementById('reciteTarget').innerHTML = renderCharSpans(run.typed, run.target);
+  updateReciteStatsDom();
+  if (run.typed.length >= run.target.length) finishRecite();
+}
+
+function finishRecite(){
+  const run = state.reciteRun;
+  stopReciteTicker();
+  const elapsedSec = Math.max(0.4, (Date.now() - run.startedAt) / 1000);
+  let correct = 0;
+  for (let i = 0; i < run.target.length; i++) { if (run.typed[i] === run.target[i]) correct++; }
+  const accuracy = Math.round((correct / run.target.length) * 100);
+  const cpm = Math.round((run.target.length / elapsedSec) * 60);
+  let mult = 0.7, speedTier = 'ช้าและมั่นคง';
+  if (cpm >= 350) { mult = 2.0; speedTier = 'เร็วมาก!'; }
+  else if (cpm >= 220) { mult = 1.5; speedTier = 'เร็ว'; }
+  else if (cpm >= 120) { mult = 1.0; speedTier = 'ปกติ'; }
+  const score = Math.round(run.target.length * (accuracy / 100) * mult);
+  const expAwarded = Math.max(3, Math.round(score / 8));
+
+  const item = state.reciteList[state.reciteIdx];
+  const codexArt = codexCache.books[item.book].articles[item.article];
+  const dika = extractDikaSnippet(codexArt.lectureNotes);
+
+  const key = reciteDoneKey(item.book, item.article);
+  const prev = state.save.reciteDone[key];
+  state.save.reciteDone[key] = {
+    bestAccuracy: Math.max(accuracy, prev ? prev.bestAccuracy : 0),
+    bestCpm: Math.max(cpm, prev ? prev.bestCpm : 0),
+    bestScore: Math.max(score, prev ? prev.bestScore : 0),
+    times: (prev ? prev.times : 0) + 1,
+  };
+  const leveledUp = gainExp(expAwarded);
+
+  run.finished = true;
+  run.result = { accuracy, cpm, score, expAwarded, speedTier, dika, leveledUp };
+  playSfx(accuracy >= 90 ? 'correct' : 'hit');
+  render();
+}
+
+function renderReciteResultBlock(run){
+  const r = run.result;
+  const hasNext = state.reciteIdx + 1 < state.reciteList.length;
+  return `
+    <div class="training-flag">✅ ${r.speedTier} · ${r.cpm} ตัว/นาที · แม่นยำ ${r.accuracy}% · คะแนน ${r.score} · +${r.expAwarded} EXP${r.leveledUp ? ' · 🎉 เลเวลอัป!' : ''}</div>
+    ${r.dika ? `<div class="recite-dika">📜 <strong>ฎีกาที่เกี่ยวข้อง:</strong> ${escapeHtml(r.dika)}</div>` : ''}
+    <div class="recite-actions" style="margin-top:14px; text-align:center">
+      ${hasNext ? `<button class="result-btn" onclick="nextRecite()">▶ มาตราถัดไป</button>` : `<button class="result-btn" onclick="goScreen(event,'reciteList')">🏁 ครบทุกมาตราในหมวดนี้แล้ว</button>`}
+      <button class="result-btn secondary" onclick="goScreen(event,'reciteList')" style="margin-left:8px">📋 กลับรายการ</button>
+    </div>
+  `;
+}
+function nextRecite(){ startReciteRun(state.reciteIdx + 1); }
+function skipRecite(ev){ ev.preventDefault(); stopReciteTicker(); startReciteRun(Math.min(state.reciteIdx + 1, state.reciteList.length - 1)); }
+function exitRecite(ev){ ev.preventDefault(); stopReciteTicker(); state.screen = 'reciteList'; render(); }
 
 /* ============ BATTLE ENGINE ============ */
 function shuffle(arr){
