@@ -240,6 +240,71 @@ img{max-width:100%; display:block}
 }
 @keyframes evoGlow{from{text-shadow:0 0 4px rgba(224,195,74,.3)} to{text-shadow:0 0 14px rgba(224,195,74,.9)}}
 
+/* ============ VS INTRO (Capcom-style pre-fight stinger) ============ */
+.vs-intro-overlay{
+  position:fixed; inset:0; z-index:110; background:#000; overflow:hidden;
+  display:flex; align-items:center; justify-content:center; gap:18vw;
+  animation:vsBgFlash .5s ease;
+}
+.vs-intro-overlay.vs-out{animation:vsFadeOut .3s ease forwards}
+@keyframes vsBgFlash{0%{background:#fff} 35%{background:#0a0a0a} 100%{background:#000}}
+@keyframes vsFadeOut{to{opacity:0}}
+.vs-fighter{display:flex; flex-direction:column; align-items:center; gap:10px}
+.vs-fighter .sprite-wrap{width:118px; height:118px}
+.vs-fighter .sprite-fallback{font-size:70px}
+.vs-fighter-left{animation:vsInLeft .5s cubic-bezier(.2,.85,.25,1.15) both}
+.vs-fighter-right{animation:vsInRight .5s cubic-bezier(.2,.85,.25,1.15) both}
+@keyframes vsInLeft{from{transform:translateX(-50vw); opacity:0} to{transform:translateX(0); opacity:1}}
+@keyframes vsInRight{from{transform:translateX(50vw); opacity:0} to{transform:translateX(0); opacity:1}}
+.vs-name{font-family:'Press Start 2P',monospace; font-size:11px; color:var(--rpg-text); text-shadow:2px 2px 0 #000}
+.vs-text{
+  position:absolute; left:50%; top:50%; font-family:'Press Start 2P',monospace; font-size:clamp(38px,8vw,84px); color:var(--rpg-gold);
+  text-shadow:3px 3px 0 #000,-3px -3px 0 #000, 0 0 30px rgba(224,195,74,.8); opacity:0; white-space:nowrap;
+  animation:vsPop .45s cubic-bezier(.15,1.5,.4,1) .3s forwards;
+}
+@keyframes vsPop{
+  0%{transform:translate(-50%,-50%) scale(2.6) rotate(-10deg); opacity:0}
+  60%{transform:translate(-50%,-50%) scale(.88) rotate(4deg); opacity:1}
+  100%{transform:translate(-50%,-50%) scale(1) rotate(0deg); opacity:1}
+}
+@media(max-width:480px){
+  .vs-intro-overlay{gap:12vw}
+  .vs-fighter .sprite-wrap{width:78px; height:78px}
+  .vs-fighter .sprite-fallback{font-size:46px}
+  .vs-text{font-size:clamp(28px,11vw,40px)}
+}
+
+/* ============ GHOST DEFEATED FLASH (Mega-Man-style boss-down stinger) ============ */
+.defeat-flash-overlay{
+  position:fixed; inset:0; z-index:105; background:#000; overflow:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;
+  animation:defeatBgFlash .9s ease forwards;
+}
+@keyframes defeatBgFlash{0%{background:#fff} 10%{background:#fff} 22%{background:#050505} 100%{background:#050505}}
+.defeat-shadow-sweep{
+  position:absolute; inset:-30% -70%; z-index:1; pointer-events:none;
+  background:linear-gradient(100deg, transparent 42%, rgba(255,255,255,.22) 48%, rgba(255,255,255,.4) 50%, rgba(255,255,255,.22) 52%, transparent 58%);
+  transform:translateX(-140%); animation:defeatSweep .9s ease .18s forwards;
+}
+@keyframes defeatSweep{to{transform:translateX(140%)}}
+.defeat-ghost-wrap{
+  position:relative; z-index:2; width:150px; height:150px; opacity:0; transform:scale(.6);
+  animation:defeatGhostPop .45s cubic-bezier(.2,1.4,.35,1) .12s forwards;
+}
+.defeat-ghost-wrap .sprite-fallback{font-size:100px}
+@keyframes defeatGhostPop{to{opacity:1; transform:scale(1)}}
+.defeat-text{
+  position:relative; z-index:2; font-family:'Press Start 2P',monospace; font-size:15px; color:#fff;
+  text-shadow:2px 2px 0 #000,0 0 16px rgba(255,255,255,.6); letter-spacing:.03em; text-align:center;
+  opacity:0; transform:translateY(10px); animation:defeatTextIn .35s ease .58s forwards;
+}
+@keyframes defeatTextIn{to{opacity:1; transform:translateY(0)}}
+@media(max-width:480px){
+  .defeat-ghost-wrap{width:110px; height:110px}
+  .defeat-ghost-wrap .sprite-fallback{font-size:74px}
+  .defeat-text{font-size:12px; padding:0 20px}
+}
+
 /* ============ MONSTER GALLERY ============ */
 .ghost-gallery-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:12px}
 .ghost-card{
@@ -1027,7 +1092,47 @@ function startBattleState({ questId, mode, monster, subjectId, questionPool, bgm
   state.screen = 'battle';
   render();
   playBgm(bgmKey || (monster.atk >= 8 ? 'boss' : 'battle'));
-  loadNextQuestion();
+  showVsIntro(monster, () => loadNextQuestion());
+}
+/* Capcom-style "combatant slides in, VS pops" stinger shown right before the
+   first question loads — purely presentational, doesn't touch battle state. */
+function showVsIntro(monster, callback){
+  const app = document.getElementById('app');
+  const leeStage = leeStageForLevel(state.save.level);
+  const overlay = document.createElement('div');
+  overlay.className = 'vs-intro-overlay';
+  overlay.innerHTML = `
+    <div class="vs-fighter vs-fighter-left">
+      ${spriteBox(leeSpritePath(leeStage), '🐱')}
+      <div class="vs-name">ลี</div>
+    </div>
+    <div class="vs-fighter vs-fighter-right">
+      ${spriteBox(monsterSpritePath(monster), monster.emoji)}
+      <div class="vs-name">${monster.name}</div>
+    </div>
+    <div class="vs-text">VS</div>
+  `;
+  app.appendChild(overlay);
+  setTimeout(() => {
+    overlay.classList.add('vs-out');
+    setTimeout(() => { overlay.remove(); callback(); }, 300);
+  }, 1300);
+}
+/* Mega-Man-style boss-down stinger: one screen flash, the ghost's own sprite
+   pops to center with a faint light-sweep passing behind it, then its name
+   + "defeated" fades in below. Shown only for ล่าผี wins, right before the
+   normal result card. */
+function showDefeatFlash(monster, callback){
+  const app = document.getElementById('app');
+  const overlay = document.createElement('div');
+  overlay.className = 'defeat-flash-overlay';
+  overlay.innerHTML = `
+    <div class="defeat-shadow-sweep"></div>
+    <div class="defeat-ghost-wrap">${spriteBox(monsterSpritePath(monster), monster.emoji)}</div>
+    <div class="defeat-text">${monster.name} defeated</div>
+  `;
+  app.appendChild(overlay);
+  setTimeout(() => { overlay.remove(); callback(); }, 1600);
 }
 function enterBattle(questId, mode){
   const quest = DATA.quests.find(q => q.id === questId);
@@ -1169,10 +1274,15 @@ function finishBattle(result){
     leveledUp = gainExp(b.expEarned);
     if (leveledUp) newStage = evolutionCrossed(oldLevel, state.save.level);
     saveSave();
+    document.getElementById('rpg-bgm').pause();
+    if (b.mode === 'ghosthunt') {
+      showDefeatFlash(b.monster, () => renderBattleResult(leveledUp, newStage, ghostUnlocked));
+      return;
+    }
   } else {
     playSfx('defeat');
+    document.getElementById('rpg-bgm').pause();
   }
-  document.getElementById('rpg-bgm').pause();
   renderBattleResult(leveledUp, newStage, ghostUnlocked);
 }
 
