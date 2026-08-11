@@ -153,24 +153,41 @@ img{max-width:100%; display:block}
   background:var(--card); border:1px dashed var(--line); border-radius:var(--radius);
 }
 
-/* ============ ล่าผี STAGE SELECT (Street-Fighter-style pick grid) ============ */
-.stage-select-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
-.stage-card{
-  position:relative; display:block; min-height:130px; border-radius:12px; overflow:hidden;
-  background-size:cover; background-position:center; text-decoration:none; color:inherit;
-  border:2px solid #000; box-shadow:var(--shadow); transition:transform .15s ease, border-color .15s ease;
+/* ============ ล่าผี ROUTE MAP (Star-Fox-route-inspired winding path) ============ */
+.route-map{
+  position:relative; padding:18px 6px; border-radius:16px; overflow:hidden;
+  background:
+    radial-gradient(1px 1px at 10% 12%, #fff 100%, transparent), radial-gradient(1px 1px at 82% 8%, #fff 100%, transparent),
+    radial-gradient(1.5px 1.5px at 30% 32%, #fff 100%, transparent), radial-gradient(1px 1px at 70% 45%, #fff 100%, transparent),
+    radial-gradient(1.5px 1.5px at 15% 60%, #fff 100%, transparent), radial-gradient(1px 1px at 90% 70%, #fff 100%, transparent),
+    radial-gradient(1px 1px at 45% 85%, #fff 100%, transparent), radial-gradient(1.5px 1.5px at 60% 20%, #fff 100%, transparent),
+    radial-gradient(120% 60% at 50% 0%, #1c2338 0%, var(--rpg-bg0) 70%);
 }
-.stage-card:hover{transform:translateY(-3px) scale(1.02); border-color:var(--rpg-gold)}
-.stage-card-overlay{
-  position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end;
-  padding:10px 12px; background:linear-gradient(180deg,rgba(10,10,14,0) 40%,rgba(10,10,14,.88) 100%);
+.route-map::before{
+  content:''; position:absolute; left:50%; top:24px; bottom:24px; width:3px; z-index:0; transform:translateX(-50%);
+  background:repeating-linear-gradient(180deg, var(--rpg-gold) 0 8px, transparent 8px 16px); opacity:.55;
 }
-.stage-card-name{color:#fff; font-weight:800; font-size:14.5px; text-shadow:0 2px 4px #000}
-.stage-card-sub{color:#d8d4e8; font-size:11.5px; margin-top:2px}
-.stage-card.locked{filter:grayscale(.85) brightness(.55); cursor:not-allowed}
-.stage-card.locked .stage-card-lock{font-size:22px; margin-bottom:2px}
-.stage-card.locked:hover{transform:none; border-color:#000}
-@media(max-width:480px){.stage-select-grid{grid-template-columns:1fr}}
+.route-row{position:relative; z-index:1; display:flex; align-items:center; gap:10px; margin:14px 0; width:100%}
+.route-row.left{justify-content:flex-start; padding-right:52%}
+.route-row.right{justify-content:flex-end; padding-left:52%; flex-direction:row-reverse}
+.route-node{
+  position:relative; width:58px; height:58px; border-radius:50%; flex-shrink:0; display:flex;
+  align-items:center; justify-content:center; text-decoration:none; font-size:26px;
+  background:radial-gradient(circle at 35% 30%, #2a3350, var(--rpg-panel) 70%);
+  border:2px solid var(--rpg-border-lt); box-shadow:0 3px 0 rgba(0,0,0,.4);
+}
+.route-node.unlocked{border-color:var(--rpg-gold); box-shadow:0 0 0 3px rgba(224,195,74,.25), 0 3px 12px rgba(224,195,74,.35); animation:routeGlow 2.2s ease-in-out infinite}
+.route-node.unlocked:hover{transform:scale(1.08)}
+@keyframes routeGlow{0%,100%{box-shadow:0 0 0 3px rgba(224,195,74,.2), 0 3px 10px rgba(224,195,74,.25)} 50%{box-shadow:0 0 0 6px rgba(224,195,74,.35), 0 3px 18px rgba(224,195,74,.5)}}
+.route-node.locked{filter:grayscale(1) brightness(.6); cursor:not-allowed}
+.route-node-lock{position:absolute; bottom:-4px; right:-4px; font-size:14px; background:var(--rpg-bg0); border-radius:50%; padding:2px}
+.route-node-label{color:var(--rpg-text); font-size:12px; font-weight:700; opacity:.75; white-space:nowrap}
+.route-node-label.playable{opacity:1; color:var(--rpg-gold)}
+@media(max-width:420px){
+  .route-row.left{padding-right:44%} .route-row.right{padding-left:44%}
+  .route-node{width:50px; height:50px; font-size:22px}
+  .route-node-label{font-size:10.5px}
+}
 
 /* ============ BATTLE SCREEN — early-2000s RPG chrome ============ */
 .battle-wrap{
@@ -655,20 +672,38 @@ function leeSpritePath(stage){ return 'pics/game/rpg/lee/' + stage.sprite + '.pn
 function monsterSpritePath(m){ return 'pics/game/rpg/' + (m.spriteFolder || 'monsters') + '/' + m.sprite + '.png'; }
 function monsterAttackSpritePath(m){ return 'pics/game/rpg/' + (m.spriteFolder || 'monsters') + '/' + m.sprite + '_attack.png'; }
 function subjectBgPath(subjectId){ return 'pics/game/rpg/backgrounds/' + subjectId + '.jpg'; }
-/* One map area = one วิชา (subject) = one fixed background — Street-Fighter-
-   style stage select on the ล่าผี screen. Only subjects with real question
-   content (currently civil, criminal) are playable; the rest render locked
-   until their quest content ships. "shinjuku" is held in reserve for a
-   future 7th subject. */
-const GHOSTHUNT_AREAS = [
-  { subjectId: 'criminal', bg: 'cemetery' },
-  { subjectId: 'civil', bg: 'flowerfield' },
-  { subjectId: 'civpro', bg: 'sea' },
-  { subjectId: 'crimpro', bg: 'hospital' },
-  { subjectId: 'admin', bg: 'tokyo' },
-  { subjectId: 'intl', bg: 'alps' },
+/* Map nodes on the ล่าผี route-select screen — one node per หัวข้อวิชา (fine-
+   grained legal topic, per user's explicit list/order), NOT the coarse ขา
+   grouping used elsewhere. dataTopics maps a node to the underlying
+   DATA.quests `topic` tag(s) that supply its question pool — nodes with an
+   empty dataTopics array have no content yet and render locked. Only nodes
+   with content get a `bg` (used as that battle's fixed background); locked
+   nodes need no art since they're not playable. */
+const GHOSTHUNT_TOPICS = [
+  { topic: 'บุคคล', icon: '🧍', dataTopics: [] },
+  { topic: 'หนี้', icon: '⛓️', dataTopics: ['หนี้'], bg: 'sea' },
+  { topic: 'ทรัพย์', icon: '💎', dataTopics: ['ทรัพย์'], bg: 'alps' },
+  { topic: 'สัญญาทางพาณิชย์', icon: '🤝', dataTopics: [] },
+  { topic: 'นิติกรรม', icon: '📝', dataTopics: ['นิติกรรม'], bg: 'shinjuku' },
+  { topic: 'อาญา', icon: '⚔️', dataTopics: ['เจตนาและประมาท'], bg: 'tokyo' },
+  { topic: 'อาญาภาคความผิด', icon: '🚨', dataTopics: ['ความผิดต่อชีวิต'], bg: 'cemetery' },
+  { topic: 'ครอบครัว', icon: '👨‍👩‍👧', dataTopics: [] },
+  { topic: 'มรดก', icon: '🪦', dataTopics: ['มรดก'], bg: 'flowerfield' },
+  { topic: 'ละเมิด', icon: '🩹', dataTopics: ['ละเมิด'], bg: 'hospital' },
+  { topic: 'องค์กรธุรกิจ', icon: '🏢', dataTopics: [] },
+  { topic: 'วิแพ่ง', icon: '📋', dataTopics: [] },
+  { topic: 'ประวัติศาสตร์กฎหมาย', icon: '🏛️', dataTopics: [] },
+  { topic: 'นิติปรัชญา', icon: '🧠', dataTopics: [] },
+  { topic: 'คดีเมือง', icon: '🏙️', dataTopics: [] },
+  { topic: 'ปกครอง', icon: '🗳️', dataTopics: [] },
+  { topic: 'รัฐธรรมนูญ', icon: '📜', dataTopics: [] },
 ];
 function ghostHuntBgPath(bgKey){ return 'pics/game/rpg/backgrounds/ghosthunt/' + bgKey + '.jpg'; }
+function ghostHuntQuestionPoolFor(node){
+  const questionIds = new Set();
+  DATA.quests.filter(q => node.dataTopics.includes(q.topic)).forEach(q => q.questionIds.forEach(id => questionIds.add(id)));
+  return DATA.questions.filter(q => questionIds.has(q.id));
+}
 const GHOST_TOUGHNESS_MULT = 1.4;
 
 /* ============ ล่าผี (ghost hunt) — random monster gallery ============ */
@@ -1172,13 +1207,13 @@ function shuffle(arr){
   for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
   return a;
 }
-function startBattleState({ questId, mode, monster, subjectId, questionPool, bgmKey, bgPath }){
+function startBattleState({ questId, mode, monster, subjectId, topicKey, questionPool, bgmKey, bgPath }){
   const playerMaxHp = maxHpForLevel(state.save.level);
   // ล่าผี ghosts get tankier than their base data — makes battles last a
   // few more correct answers, so the score/ding loop has room to build up.
   const monsterHp = mode === 'ghosthunt' ? Math.round(monster.hp * GHOST_TOUGHNESS_MULT) : monster.hp;
   state.battle = {
-    questId, mode, monster, subjectId,
+    questId, mode, monster, subjectId, topicKey,
     bgPath: bgPath || subjectBgPath(subjectId),
     monsterHp, monsterMaxHp: monsterHp,
     playerHp: playerMaxHp, playerMaxHp,
@@ -1244,13 +1279,13 @@ function enterBattle(questId, mode){
     bgmKey: quest.id.includes('288') ? 'boss' : undefined,
   });
 }
-function startGhostHunt(subjectId){
+function startGhostHunt(topicKey){
   const ghost = pickRandomGhost();
-  const area = GHOSTHUNT_AREAS.find(a => a.subjectId === subjectId);
-  const pool = DATA.questions.filter(q => q.lawRef.book === subjectId);
+  const node = GHOSTHUNT_TOPICS.find(t => t.topic === topicKey);
+  const pool = node ? ghostHuntQuestionPoolFor(node) : [];
   startBattleState({
-    questId: null, mode: 'ghosthunt', monster: ghost, subjectId,
-    bgPath: area ? ghostHuntBgPath(area.bg) : undefined,
+    questId: null, mode: 'ghosthunt', monster: ghost, topicKey,
+    bgPath: node && node.bg ? ghostHuntBgPath(node.bg) : ghostHuntBgPath('tokyo'),
     questionPool: shuffle(pool.length ? pool : DATA.questions).slice(0, 3),
   });
 }
@@ -1490,7 +1525,7 @@ function renderBattleResult(leveledUp, newStage, ghostUnlocked){
 }
 function rematch(){
   document.querySelector('.result-overlay').remove();
-  if (state.battle.mode === 'ghosthunt') { startGhostHunt(state.battle.subjectId); return; }
+  if (state.battle.mode === 'ghosthunt') { startGhostHunt(state.battle.topicKey); return; }
   enterBattle(state.battle.questId, state.battle.mode);
 }
 function goNextQuest(questId){
@@ -1505,47 +1540,46 @@ function backToBoard(){
   render();
 }
 
-/* ============ ล่าผี (ghost hunt) — Street-Fighter-style stage select ============
-   one card per วิชา, each locked to its
-   own background (see GHOSTHUNT_AREAS). Unplayable subjects (no quest
-   content yet) render locked, same convention as the Quest Board's
-   .subject-tab.locked. */
+/* ============ ล่าผี (ghost hunt) — winding route-select map ============
+   Star-Fox-route-map-inspired: nodes strung along a connecting path over a
+   starfield instead of a flat card grid. One node per หัวข้อวิชา (fine
+   topic, see GHOSTHUNT_TOPICS) — nodes with question content unlocked and
+   glowing, the rest dim with a lock, same "locked until content ships"
+   convention as the Quest Board's subject tabs. */
 function renderGhostHunt(app){
   playBgm('quest');
-  const cards = GHOSTHUNT_AREAS.map(area => {
-    const subject = DATA.subjects.find(s => s.id === area.subjectId);
-    if (!subject) return '';
-    const locked = !subject.playable;
-    const bgUrl = ghostHuntBgPath(area.bg);
-    if (locked) {
+  const nodes = GHOSTHUNT_TOPICS.map((node, i) => {
+    const playable = node.dataTopics.length > 0;
+    const side = i % 2 === 0 ? 'left' : 'right';
+    if (!playable) {
       return `
-        <div class="stage-card locked" style="background-image:url('${bgUrl}')">
-          <div class="stage-card-overlay">
-            <div class="stage-card-lock">🔒</div>
-            <div class="stage-card-name">${subject.icon} ${subject.name}</div>
-            <div class="stage-card-sub">เร็ว ๆ นี้</div>
+        <div class="route-row ${side}">
+          <div class="route-node locked">
+            <div class="route-node-icon">${node.icon}</div>
+            <div class="route-node-lock">🔒</div>
           </div>
+          <div class="route-node-label">${node.topic}</div>
         </div>
       `;
     }
     return `
-      <a href="#" class="stage-card" style="background-image:url('${bgUrl}')" onclick="event.preventDefault(); startGhostHunt('${area.subjectId}')">
-        <div class="stage-card-overlay">
-          <div class="stage-card-name">${subject.icon} ${subject.name}</div>
-          <div class="stage-card-sub">ออกล่า →</div>
-        </div>
-      </a>
+      <div class="route-row ${side}">
+        <a href="#" class="route-node unlocked" onclick="event.preventDefault(); startGhostHunt('${node.topic}')">
+          <div class="route-node-icon">${node.icon}</div>
+        </a>
+        <div class="route-node-label playable">${node.topic}</div>
+      </div>
     `;
   }).join('');
   app.innerHTML = `
     <div class="back-row"><a href="#" onclick="goScreen(event,'home')">← กลับหน้าหลัก</a></div>
-    <div class="section-title">👻 ล่าผี — เลือกพื้นที่</div>
+    <div class="section-title">👻 ล่าผี — เลือกเส้นทาง</div>
     <div class="training-flag">โหมดฝึก: ตอบผิดไม่เสีย HP — ตอบถูกครบเพื่อปราบผีและปลดล็อกลง Monster Gallery</div>
     <p style="color:var(--ink-soft); font-size:12.5px; line-height:1.6; margin:10px 0 14px">
-      แต่ละพื้นที่ผูกกับวิชาของตัวเอง เลือกพื้นที่แล้วจะสุ่มพบผีไทยหนึ่งตัวจากตำนานพื้นบ้าน ยิ่งหายาก (rank สูง) ยิ่งพบเจอได้ยาก แต่ให้ EXP มากกว่า
+      แต่ละจุดผูกกับหัวข้อวิชาของตัวเอง เลือกจุดที่ปลดล็อกแล้วจะสุ่มพบผีไทยหนึ่งตัวจากตำนานพื้นบ้าน ยิ่งหายาก (rank สูง) ยิ่งพบเจอได้ยาก แต่ให้ EXP มากกว่า
       <span class="pixel" style="font-size:9px; letter-spacing:1px; display:block; margin-top:4px">D・C・B・A・S・SS</span>
     </p>
-    <div class="stage-select-grid">${cards}</div>
+    <div class="route-map">${nodes}</div>
   `;
 }
 
