@@ -575,6 +575,11 @@ function leeSpritePath(stage){ return 'pics/game/rpg/lee/' + stage.sprite + '.pn
 function monsterSpritePath(m){ return 'pics/game/rpg/' + (m.spriteFolder || 'monsters') + '/' + m.sprite + '.png'; }
 function monsterAttackSpritePath(m){ return 'pics/game/rpg/' + (m.spriteFolder || 'monsters') + '/' + m.sprite + '_attack.png'; }
 function subjectBgPath(subjectId){ return 'pics/game/rpg/backgrounds/' + subjectId + '.jpg'; }
+const GHOSTHUNT_BACKGROUNDS = ['cemetery','alps','flowerfield','hospital','sea','shinjuku','tokyo'];
+function ghostHuntBgPath(){
+  const pick = GHOSTHUNT_BACKGROUNDS[Math.floor(Math.random() * GHOSTHUNT_BACKGROUNDS.length)];
+  return 'pics/game/rpg/backgrounds/ghosthunt/' + pick + '.jpg';
+}
 
 /* ============ ล่าผี (ghost hunt) — random monster gallery ============ */
 const RANK_META = {
@@ -1079,6 +1084,7 @@ function startBattleState({ questId, mode, monster, subjectId, questionPool, bgm
   const playerMaxHp = maxHpForLevel(state.save.level);
   state.battle = {
     questId, mode, monster, subjectId,
+    bgPath: mode === 'ghosthunt' ? ghostHuntBgPath() : subjectBgPath(subjectId),
     monsterHp: monster.hp, monsterMaxHp: monster.hp,
     playerHp: playerMaxHp, playerMaxHp,
     queue: shuffle(questionPool),
@@ -1291,7 +1297,7 @@ function renderBattle(app){
   app.innerHTML = `
     <div class="back-row"><a href="#" onclick="confirmFlee(event)">← ล่าถอย</a></div>
     <div class="battle-wrap">
-      <div class="battle-stage" id="battleStage" style="background-image:url('${subjectBgPath(b.subjectId)}');background-size:cover;background-position:center">
+      <div class="battle-stage" id="battleStage" style="background-image:url('${b.bgPath}');background-size:cover;background-position:center">
         <div class="combatant enemy">
           <div class="hud" id="enemyHud">
             <div class="who">${b.monster.name}</div>
