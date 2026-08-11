@@ -416,7 +416,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
       <div class="ace-badge" id="aceBadge">Visual Novel</div>
       <h2 class="ace-title" id="aceTitle">เกมสถานการณ์<br>อาญา</h2>
       <p class="ace-desc" id="aceDesc">วิเคราะห์โจทย์อาญาแบบมินิเกม + ห้องพิจารณาคดีสไตล์ Ace Attorney</p>
-      <a href="game-crimlaw-scenario.html?cat=criminal" class="ace-play" id="acePlay" onmouseenter="playHoverSound()">▶ เล่นเลย</a>
+      <a href="game-crimlaw-scenario.html?cat=criminal" class="ace-play" id="acePlay" onmouseenter="playHoverSound()" onclick="playRpgEnterSound()">▶ เล่นเลย</a>
     </div>
   </div>
 
@@ -511,6 +511,13 @@ function playHoverSound(){
     osc.connect(gain); gain.connect(c.destination);
     osc.start(t0); osc.stop(t0+0.1);
   }catch(e){}
+}
+function playRpgEnterSound(){
+  const active = document.querySelector('.ace-thumb.active');
+  if (!active || active.dataset.game !== 'rpg') return;
+  const a = new Audio('games/sound/effect/tanweraman-big-thunder-rumble-321631.mp3');
+  a.volume = 0.5;
+  a.play().catch(() => {});
 }
 function playHubBgm(){
   const bgm = document.getElementById('hub-bgm');

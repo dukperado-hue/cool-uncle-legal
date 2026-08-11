@@ -153,41 +153,22 @@ img{max-width:100%; display:block}
   background:var(--card); border:1px dashed var(--line); border-radius:var(--radius);
 }
 
-/* ============ ล่าผี ROUTE MAP (Star-Fox-route-inspired winding path) ============ */
-.route-map{
-  position:relative; padding:18px 6px; border-radius:16px; overflow:hidden;
-  background:
-    radial-gradient(1px 1px at 10% 12%, #fff 100%, transparent), radial-gradient(1px 1px at 82% 8%, #fff 100%, transparent),
-    radial-gradient(1.5px 1.5px at 30% 32%, #fff 100%, transparent), radial-gradient(1px 1px at 70% 45%, #fff 100%, transparent),
-    radial-gradient(1.5px 1.5px at 15% 60%, #fff 100%, transparent), radial-gradient(1px 1px at 90% 70%, #fff 100%, transparent),
-    radial-gradient(1px 1px at 45% 85%, #fff 100%, transparent), radial-gradient(1.5px 1.5px at 60% 20%, #fff 100%, transparent),
-    radial-gradient(120% 60% at 50% 0%, #1c2338 0%, var(--rpg-bg0) 70%);
+/* ============ ล่าผี WORLD MAP ("LAW PLAYER SELECT" pixel-art illustration) ============ */
+.worldmap-wrap{
+  position:relative; width:100%; aspect-ratio:2752/1536; border-radius:16px; overflow:hidden;
+  background:#0d1120; border:3px solid var(--rpg-border-dk); box-shadow:0 0 0 2px var(--rpg-gold) inset;
 }
-.route-map::before{
-  content:''; position:absolute; left:50%; top:24px; bottom:24px; width:3px; z-index:0; transform:translateX(-50%);
-  background:repeating-linear-gradient(180deg, var(--rpg-gold) 0 8px, transparent 8px 16px); opacity:.55;
+.worldmap-wrap img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
+.worldmap-node{
+  position:absolute; transform:translate(-50%,-50%); width:9%; aspect-ratio:.72/1; border-radius:8px;
+  display:flex; align-items:center; justify-content:center; text-decoration:none;
 }
-.route-row{position:relative; z-index:1; display:flex; align-items:center; gap:10px; margin:14px 0; width:100%}
-.route-row.left{justify-content:flex-start; padding-right:52%}
-.route-row.right{justify-content:flex-end; padding-left:52%; flex-direction:row-reverse}
-.route-node{
-  position:relative; width:58px; height:58px; border-radius:50%; flex-shrink:0; display:flex;
-  align-items:center; justify-content:center; text-decoration:none; font-size:26px;
-  background:radial-gradient(circle at 35% 30%, #2a3350, var(--rpg-panel) 70%);
-  border:2px solid var(--rpg-border-lt); box-shadow:0 3px 0 rgba(0,0,0,.4);
-}
-.route-node.unlocked{border-color:var(--rpg-gold); box-shadow:0 0 0 3px rgba(224,195,74,.25), 0 3px 12px rgba(224,195,74,.35); animation:routeGlow 2.2s ease-in-out infinite}
-.route-node.unlocked:hover{transform:scale(1.08)}
-@keyframes routeGlow{0%,100%{box-shadow:0 0 0 3px rgba(224,195,74,.2), 0 3px 10px rgba(224,195,74,.25)} 50%{box-shadow:0 0 0 6px rgba(224,195,74,.35), 0 3px 18px rgba(224,195,74,.5)}}
-.route-node.locked{filter:grayscale(1) brightness(.6); cursor:not-allowed}
-.route-node-lock{position:absolute; bottom:-4px; right:-4px; font-size:14px; background:var(--rpg-bg0); border-radius:50%; padding:2px}
-.route-node-label{color:var(--rpg-text); font-size:12px; font-weight:700; opacity:.75; white-space:nowrap}
-.route-node-label.playable{opacity:1; color:var(--rpg-gold)}
-@media(max-width:420px){
-  .route-row.left{padding-right:44%} .route-row.right{padding-left:44%}
-  .route-node{width:50px; height:50px; font-size:22px}
-  .route-node-label{font-size:10.5px}
-}
+.worldmap-node.unlocked{cursor:pointer; box-shadow:0 0 0 3px rgba(224,195,74,.9), 0 0 16px rgba(224,195,74,.65); animation:worldmapPulse 1.6s ease-in-out infinite}
+.worldmap-node.unlocked:active{transform:translate(-50%,-50%) scale(.94)}
+@keyframes worldmapPulse{0%,100%{box-shadow:0 0 0 3px rgba(224,195,74,.85), 0 0 12px rgba(224,195,74,.55)} 50%{box-shadow:0 0 0 3px rgba(224,195,74,1), 0 0 24px rgba(224,195,74,.95)}}
+.worldmap-node.locked{background:rgba(6,8,14,.6)}
+.worldmap-lock{font-size:min(4vw,22px)}
+@media(max-width:420px){.worldmap-node{width:11%}}
 
 /* ============ BATTLE SCREEN — early-2000s RPG chrome ============ */
 .battle-wrap{
@@ -282,7 +263,7 @@ img{max-width:100%; display:block}
 }
 .result-btn.secondary{background:transparent; border:1px solid var(--rpg-border-lt); color:var(--rpg-text)}
 .evo-banner{
-  font-family:'Press Start 2P',monospace; font-size:11px; color:var(--rpg-gold); margin:10px 0;
+  font-family:'Press Start 2P',monospace; font-size:11px; color:var(--rpg-gold); line-height:1.9; margin:16px 4px;
   animation:evoGlow 1.4s ease-in-out infinite alternate;
 }
 @keyframes evoGlow{from{text-shadow:0 0 4px rgba(224,195,74,.3)} to{text-shadow:0 0 14px rgba(224,195,74,.9)}}
@@ -323,7 +304,7 @@ img{max-width:100%; display:block}
 
 /* ============ GHOST DEFEATED FLASH (Mega-Man-style boss-down stinger) ============ */
 .defeat-flash-overlay{
-  position:fixed; inset:0; z-index:105; background:#000; overflow:hidden;
+  position:fixed; inset:0; z-index:105; background:#000; overflow:hidden; cursor:pointer;
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;
   animation:defeatBgFlash .9s ease forwards;
 }
@@ -336,20 +317,36 @@ img{max-width:100%; display:block}
 @keyframes defeatSweep{to{transform:translateX(140%)}}
 .defeat-ghost-wrap{
   position:relative; z-index:2; width:150px; height:150px; opacity:0; transform:scale(.6);
-  animation:defeatGhostPop .45s cubic-bezier(.2,1.4,.35,1) .12s forwards;
+  animation:defeatGhostPop .75s cubic-bezier(.2,1.4,.35,1) .12s forwards;
 }
 .defeat-ghost-wrap .sprite-fallback{font-size:100px}
-@keyframes defeatGhostPop{to{opacity:1; transform:scale(1)}}
+@keyframes defeatGhostPop{
+  0%{opacity:0; transform:scale(.6) translateX(0)}
+  40%{opacity:1; transform:scale(1.06) translateX(0)}
+  48%{transform:scale(1) translateX(-7px)}
+  56%{transform:scale(1) translateX(6px)}
+  64%{transform:scale(1) translateX(-5px)}
+  72%{transform:scale(1) translateX(4px)}
+  80%{transform:scale(1) translateX(-2px)}
+  88%{transform:scale(1) translateX(1px)}
+  100%{opacity:1; transform:scale(1) translateX(0)}
+}
 .defeat-text{
   position:relative; z-index:2; font-family:'Press Start 2P',monospace; font-size:15px; color:#fff;
   text-shadow:2px 2px 0 #000,0 0 16px rgba(255,255,255,.6); letter-spacing:.03em; text-align:center;
-  opacity:0; transform:translateY(10px); animation:defeatTextIn .35s ease .58s forwards;
+  opacity:0; transform:translateY(10px); animation:defeatTextIn .35s ease .92s forwards;
 }
 @keyframes defeatTextIn{to{opacity:1; transform:translateY(0)}}
+.defeat-tap-hint{
+  position:relative; z-index:2; font-family:'Press Start 2P',monospace; font-size:9px; color:rgba(255,255,255,.7);
+  letter-spacing:.05em; margin-top:6px; opacity:0; animation:defeatHintPulse 1.6s ease 1.3s infinite;
+}
+@keyframes defeatHintPulse{0%{opacity:0} 30%{opacity:.85} 65%{opacity:.35} 100%{opacity:.85}}
 @media(max-width:480px){
   .defeat-ghost-wrap{width:110px; height:110px}
   .defeat-ghost-wrap .sprite-fallback{font-size:74px}
   .defeat-text{font-size:12px; padding:0 20px}
+  .defeat-tap-hint{font-size:8px}
 }
 
 /* ============ MONSTER GALLERY ============ */
@@ -487,7 +484,7 @@ img{max-width:100%; display:block}
 
 const MUTE_KEY = 'codex-drone-muted'; // shared site-wide mute toggle
 const SAVE_KEY = 'leeRpgSave_v1';
-const DATA_URL = 'games/rpg-data.json?v=20260811a';
+const DATA_URL = 'games/rpg-data.json?v=20260812a';
 const CODEX_URL = 'codex-data.json';
 const UNLOCK_THRESHOLD = 3; // correct answers on a มาตรา before its Lawbook entry unlocks
 
@@ -629,6 +626,8 @@ const SFX = {
   levelup: 'games/sound/effect/rpg_levelup.mp3',
   victory: 'games/sound/effect/rpg_victory.mp3',
   defeat: 'games/sound/effect/rpg_defeat.mp3',
+  rematch: 'games/sound/effect/dragon-studio-winter-wind-402331.mp3',
+  back: 'games/sound/effect/universfield-funny-rimshot-250961.mp3',
 };
 function playSfx(key){
   if (isMuted()) return;
@@ -679,24 +678,31 @@ function subjectBgPath(subjectId){ return 'pics/game/rpg/backgrounds/' + subject
    empty dataTopics array have no content yet and render locked. Only nodes
    with content get a `bg` (used as that battle's fixed background); locked
    nodes need no art since they're not playable. */
+const BOOK_LABELS = {
+  civil: 'ประมวลแพ่งฯ', criminal: 'ประมวลอาญา', civpro: 'ประมวลวิ.แพ่งฯ',
+  adminproc: 'กฎหมายปกครอง', constitution: 'พระธรรมนูญศาลฯ', const2560: 'รัฐธรรมนูญ 2560',
+};
+function bookLabel(book){ return BOOK_LABELS[book] || book; }
+function articleLabel(article){ return /^[0-9]+(\/[0-9]+)?$/.test(String(article)) ? ('มาตรา ' + article) : article; }
+const GHOSTHUNT_MAP_IMG = 'pics/game/rpg/map/law_player_select.jpg';
 const GHOSTHUNT_TOPICS = [
-  { topic: 'บุคคล', icon: '🧍', dataTopics: [] },
-  { topic: 'หนี้', icon: '⛓️', dataTopics: ['หนี้'], bg: 'sea' },
-  { topic: 'ทรัพย์', icon: '💎', dataTopics: ['ทรัพย์'], bg: 'alps' },
-  { topic: 'สัญญาทางพาณิชย์', icon: '🤝', dataTopics: [] },
-  { topic: 'นิติกรรม', icon: '📝', dataTopics: ['นิติกรรม'], bg: 'shinjuku' },
-  { topic: 'อาญา', icon: '⚔️', dataTopics: ['เจตนาและประมาท'], bg: 'tokyo' },
-  { topic: 'อาญาภาคความผิด', icon: '🚨', dataTopics: ['ความผิดต่อชีวิต'], bg: 'cemetery' },
-  { topic: 'ครอบครัว', icon: '👨‍👩‍👧', dataTopics: [] },
-  { topic: 'มรดก', icon: '🪦', dataTopics: ['มรดก'], bg: 'flowerfield' },
-  { topic: 'ละเมิด', icon: '🩹', dataTopics: ['ละเมิด'], bg: 'hospital' },
-  { topic: 'องค์กรธุรกิจ', icon: '🏢', dataTopics: [] },
-  { topic: 'วิแพ่ง', icon: '📋', dataTopics: [] },
-  { topic: 'ประวัติศาสตร์กฎหมาย', icon: '🏛️', dataTopics: [] },
-  { topic: 'นิติปรัชญา', icon: '🧠', dataTopics: [] },
-  { topic: 'คดีเมือง', icon: '🏙️', dataTopics: [] },
-  { topic: 'ปกครอง', icon: '🗳️', dataTopics: [] },
-  { topic: 'รัฐธรรมนูญ', icon: '📜', dataTopics: [] },
+  { topic: 'บุคคล', icon: '🧍', dataTopics: [], pos: { x: 13.1, y: 13.0 } },
+  { topic: 'หนี้', icon: '⛓️', dataTopics: ['หนี้'], bg: 'sea', pos: { x: 25.6, y: 13.0 } },
+  { topic: 'ทรัพย์', icon: '💎', dataTopics: ['ทรัพย์'], bg: 'alps', pos: { x: 51.6, y: 13.0 } },
+  { topic: 'สัญญาทางพาณิชย์', icon: '🤝', dataTopics: ['สัญญาทางพาณิชย์'], pos: { x: 65.4, y: 13.0 } },
+  { topic: 'นิติกรรม', icon: '📝', dataTopics: ['นิติกรรม'], bg: 'shinjuku', pos: { x: 89.1, y: 13.0 } },
+  { topic: 'อาญา', icon: '⚔️', dataTopics: ['เจตนาและประมาท'], bg: 'tokyo', pos: { x: 13.1, y: 34.5 } },
+  { topic: 'อาญาภาคความผิด', icon: '🚨', dataTopics: ['ความผิดต่อชีวิต'], bg: 'cemetery', pos: { x: 28.1, y: 39.5 } },
+  { topic: 'ครอบครัว', icon: '👨‍👩‍👧', dataTopics: ['ครอบครัว'], pos: { x: 70.1, y: 34.5 } },
+  { topic: 'มรดก', icon: '🪦', dataTopics: ['มรดก'], bg: 'flowerfield', pos: { x: 77.5, y: 20.5 } },
+  { topic: 'ละเมิด', icon: '🩹', dataTopics: ['ละเมิด'], bg: 'hospital', pos: { x: 89.1, y: 42.0 } },
+  { topic: 'องค์กรธุรกิจ', icon: '🏢', dataTopics: ['องค์กรธุรกิจ'], pos: { x: 45.9, y: 39.5 } },
+  { topic: 'วิแพ่ง', icon: '📋', dataTopics: ['วิแพ่ง'], pos: { x: 62.3, y: 59.0 } },
+  { topic: 'ประวัติศาสตร์กฎหมาย', icon: '🏛️', dataTopics: [], pos: { x: 33.3, y: 66.5 } },
+  { topic: 'นิติปรัชญา', icon: '🧠', dataTopics: [], pos: { x: 52.8, y: 66.5 } },
+  { topic: 'คดีเมือง', icon: '🏙️', dataTopics: [], pos: { x: 10.8, y: 74.5 } },
+  { topic: 'ปกครอง', icon: '🗳️', dataTopics: ['ปกครอง'], pos: { x: 70.0, y: 71.5 } },
+  { topic: 'รัฐธรรมนูญ', icon: '📜', dataTopics: ['รัฐธรรมนูญ'], pos: { x: 89.1, y: 74.5 } },
 ];
 function ghostHuntBgPath(bgKey){ return 'pics/game/rpg/backgrounds/ghosthunt/' + bgKey + '.jpg'; }
 function ghostHuntQuestionPoolFor(node){
@@ -1266,9 +1272,10 @@ function showDefeatFlash(monster, callback){
     <div class="defeat-shadow-sweep"></div>
     <div class="defeat-ghost-wrap">${spriteBox(monsterSpritePath(monster), monster.emoji)}</div>
     <div class="defeat-text">${monster.name} defeated</div>
+    <div class="defeat-tap-hint">แตะเพื่อไปต่อ</div>
   `;
   app.appendChild(overlay);
-  setTimeout(() => { overlay.remove(); callback(); }, 2400);
+  overlay.addEventListener('click', () => { overlay.remove(); callback(); });
 }
 function enterBattle(questId, mode){
   const quest = DATA.quests.find(q => q.id === questId);
@@ -1461,7 +1468,7 @@ function renderBattleDialogue(){
   area.innerHTML = `
     <div class="timer-track"><div class="timer-fill" id="timerFill" style="width:100%"></div></div>
     <div class="dialogue-box">
-      <div class="dialogue-tag">🗡️ มาตรา ${q.lawRef.article} · ${q.lawRef.book === 'civil' ? 'ประมวลแพ่งฯ' : 'ประมวลอาญา'}</div>
+      <div class="dialogue-tag">🗡️ ${articleLabel(q.lawRef.article)} · ${bookLabel(q.lawRef.book)}</div>
       <div class="dialogue-text">${q.prompt}</div>
       <div class="answer-grid">
         ${q.options.map((opt, i) => `<button class="answer-btn" onclick="handleAnswer(${i})">${opt}</button>`).join('')}
@@ -1493,7 +1500,7 @@ function renderBattleResult(leveledUp, newStage, ghostUnlocked){
   const nextQuest = (b.result === 'win' && !isHunt) ? nextQuestFor(DATA.quests.find(q => q.id === b.questId)) : null;
   const backLabel = isHunt ? 'กลับ' : 'กลับด่าน';
   const primaryWinBtn = isHunt
-    ? `<button class="result-btn" onclick="rematch()">👻 ล่าอีกตัว</button>`
+    ? `<button class="result-btn" onclick="playSfx('rematch'); rematch()">👻 ล่าอีกตัว</button>`
     : (nextQuest
         ? `<button class="result-btn" onclick="goNextQuest('${nextQuest.id}')">▶ ด่านต่อไป: ${nextQuest.name}</button>`
         : `<button class="result-btn" onclick="rematch()">⚔️ สู้อีกครั้ง</button>`);
@@ -1507,17 +1514,17 @@ function renderBattleResult(leveledUp, newStage, ghostUnlocked){
       ${newStage ? `<p class="evo-banner">🐱 สำลีวิวัฒนาการ: ${newStage.title}!<br>${newStage.desc}</p>` : ''}
       <div class="result-actions">
         ${primaryWinBtn}
-        <button class="result-btn secondary" onclick="backToBoard()">${backLabel}</button>
+        <button class="result-btn secondary" onclick="playSfx('back'); backToBoard()">${backLabel}</button>
       </div>
     </div>
   ` : `
     <div class="result-card lose">
       <h2>💀 พ่ายแพ้</h2>
       <p>${b.monster.name} เอาชนะสำลีได้ในครั้งนี้</p>
-      <p>ลองทบทวนมาตรา ${b.current.lawRef.article} แล้วมาสู้ใหม่นะ</p>
+      <p>ลองทบทวน${articleLabel(b.current.lawRef.article)} แล้วมาสู้ใหม่นะ</p>
       <div class="result-actions">
         <button class="result-btn" onclick="rematch()">🔄 ลองใหม่</button>
-        <button class="result-btn secondary" onclick="backToBoard()">${backLabel}</button>
+        <button class="result-btn secondary" onclick="playSfx('back'); backToBoard()">${backLabel}</button>
       </div>
     </div>
   `;
@@ -1540,46 +1547,38 @@ function backToBoard(){
   render();
 }
 
-/* ============ ล่าผี (ghost hunt) — winding route-select map ============
-   Star-Fox-route-map-inspired: nodes strung along a connecting path over a
-   starfield instead of a flat card grid. One node per หัวข้อวิชา (fine
-   topic, see GHOSTHUNT_TOPICS) — nodes with question content unlocked and
-   glowing, the rest dim with a lock, same "locked until content ships"
-   convention as the Quest Board's subject tabs. */
+/* ============ ล่าผี (ghost hunt) — "LAW PLAYER SELECT" world map ============
+   pics/game/rpg/map/law_player_select.jpg is a single pre-rendered 16-bit
+   arcade world-map illustration with one framed character card per หัวข้อ
+   วิชา (see GHOSTHUNT_TOPICS). Each node's `pos` is a hand-calibrated {x,y}
+   percentage of the image locating that card's character (verified by
+   overlaying test markers on the source image before wiring in) — nodes
+   are plain absolutely-positioned hit targets over the art, not drawn UI,
+   so the wrapper uses aspect-ratio to keep positions correct at any width.
+   Locked nodes (no dataTopics yet) get a dim overlay + 🔒, same "locked
+   until content ships" convention as the Quest Board's subject tabs. */
 function renderGhostHunt(app){
   playBgm('quest');
-  const nodes = GHOSTHUNT_TOPICS.map((node, i) => {
+  const nodes = GHOSTHUNT_TOPICS.map(node => {
     const playable = node.dataTopics.length > 0;
-    const side = i % 2 === 0 ? 'left' : 'right';
+    const style = `left:${node.pos.x}%; top:${node.pos.y}%`;
     if (!playable) {
-      return `
-        <div class="route-row ${side}">
-          <div class="route-node locked">
-            <div class="route-node-icon">${node.icon}</div>
-            <div class="route-node-lock">🔒</div>
-          </div>
-          <div class="route-node-label">${node.topic}</div>
-        </div>
-      `;
+      return `<div class="worldmap-node locked" style="${style}" title="${node.topic} (เร็ว ๆ นี้)"><span class="worldmap-lock">🔒</span></div>`;
     }
-    return `
-      <div class="route-row ${side}">
-        <a href="#" class="route-node unlocked" onclick="event.preventDefault(); startGhostHunt('${node.topic}')">
-          <div class="route-node-icon">${node.icon}</div>
-        </a>
-        <div class="route-node-label playable">${node.topic}</div>
-      </div>
-    `;
+    return `<a href="#" class="worldmap-node unlocked" style="${style}" title="${node.topic}" onclick="event.preventDefault(); startGhostHunt('${node.topic}')"></a>`;
   }).join('');
   app.innerHTML = `
     <div class="back-row"><a href="#" onclick="goScreen(event,'home')">← กลับหน้าหลัก</a></div>
     <div class="section-title">👻 ล่าผี — เลือกเส้นทาง</div>
     <div class="training-flag">โหมดฝึก: ตอบผิดไม่เสีย HP — ตอบถูกครบเพื่อปราบผีและปลดล็อกลง Monster Gallery</div>
     <p style="color:var(--ink-soft); font-size:12.5px; line-height:1.6; margin:10px 0 14px">
-      แต่ละจุดผูกกับหัวข้อวิชาของตัวเอง เลือกจุดที่ปลดล็อกแล้วจะสุ่มพบผีไทยหนึ่งตัวจากตำนานพื้นบ้าน ยิ่งหายาก (rank สูง) ยิ่งพบเจอได้ยาก แต่ให้ EXP มากกว่า
+      แตะการ์ดตัวละครบนแผนที่ (จุดที่ปลดล็อกแล้ว) จะสุ่มพบผีไทยหนึ่งตัวจากตำนานพื้นบ้าน ยิ่งหายาก (rank สูง) ยิ่งพบเจอได้ยาก แต่ให้ EXP มากกว่า
       <span class="pixel" style="font-size:9px; letter-spacing:1px; display:block; margin-top:4px">D・C・B・A・S・SS</span>
     </p>
-    <div class="route-map">${nodes}</div>
+    <div class="worldmap-wrap">
+      <img src="${GHOSTHUNT_MAP_IMG}" alt="LAW PLAYER SELECT">
+      ${nodes}
+    </div>
   `;
 }
 
@@ -1658,7 +1657,7 @@ function renderLawbookEntries(entries){
     const [book, article] = key.split(':');
     const progress = state.save.unlockedLawRefs[key];
     if (!progress.unlocked) {
-      return `<div class="locked-entry"><span>🔒 ${book === 'civil' ? 'ประมวลแพ่งฯ' : 'ประมวลอาญา'} มาตรา ${article}</span><span class="progress">${progress.correct}/${UNLOCK_THRESHOLD}</span></div>`;
+      return `<div class="locked-entry"><span>🔒 ${bookLabel(book)} ${articleLabel(article)}</span><span class="progress">${progress.correct}/${UNLOCK_THRESHOLD}</span></div>`;
     }
     const art = codexCache.books[book] && codexCache.books[book].articles[article];
     if (!art) return '';
@@ -1667,7 +1666,7 @@ function renderLawbookEntries(entries){
       <div class="lawbook-entry">
         <div class="head">
           <span class="num">มาตรา ${article}</span>
-          <span class="book">${book === 'civil' ? 'ประมวลกฎหมายแพ่งและพาณิชย์' : 'ประมวลกฎหมายอาญา'}</span>
+          <span class="book">${bookLabel(book)}</span>
         </div>
         <div class="text">${art.text}</div>
         ${note ? `<div class="mnemonic"><strong>เกร็ดช่วยจำ:</strong> ${note.text.slice(0,220)}${note.text.length>220?'…':''}</div>` : ''}
