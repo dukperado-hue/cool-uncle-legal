@@ -11,7 +11,7 @@
   gtag('js', new Date());
   gtag('config', 'G-FC9EVYB1YG');
 </script>
-<title>ลี นักสู้กฎหมาย · Cool Uncle Legal Lab</title>
+<title>สำลีแมวน้อยล่าผี · Cool Uncle Legal Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Noto+Serif+Thai:wght@600;700;900&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
@@ -418,7 +418,7 @@ img{max-width:100%; display:block}
 
 <div class="topbar">
   <a class="back" href="games.html">← เกม</a>
-  <span class="brand">🐱 ลี นักสู้กฎหมาย</span>
+  <span class="brand">🐱 สำลีแมวน้อยล่าผี</span>
   <div class="right">
     <button class="mute-btn" id="muteBtn" onclick="toggleMute()">🔊 เสียง</button>
   </div>
@@ -431,7 +431,7 @@ img{max-width:100%; display:block}
 
 <script>
 /* ================================================================
-   ลี นักสู้กฎหมาย — turn-based law-quiz RPG
+   สำลีแมวน้อยล่าผี — turn-based law-quiz RPG
    Self-contained page (no build step), following the same pattern as
    game-crimlaw-scenario.html: one file, inline state machine, render()
    dispatches on state.screen, graceful image fallback, shared mute key.
@@ -525,7 +525,7 @@ function playBgm(key){
   el.play().catch(() => {});
 }
 const SFX = {
-  attack: 'games/sound/effect/rpg_attack.mp3',
+  attack: 'games/sound/effect/virtual_vibes-real-cat-sound-effect-383821.mp3',
   hit: 'games/sound/effect/rpg_hit.mp3',
   correct: 'games/sound/effect/rpg_correct.mp3',
   wrong: 'games/sound/effect/rpg_wrong.mp3',
@@ -1104,7 +1104,7 @@ function showVsIntro(monster, callback){
   overlay.innerHTML = `
     <div class="vs-fighter vs-fighter-left">
       ${spriteBox(leeSpritePath(leeStage), '🐱')}
-      <div class="vs-name">ลี</div>
+      <div class="vs-name">สำลี</div>
     </div>
     <div class="vs-fighter vs-fighter-right">
       ${spriteBox(monsterSpritePath(monster), monster.emoji)}
@@ -1303,7 +1303,7 @@ function renderBattle(app){
         <div class="combatant player">
           ${spriteBox(leeSpritePath(leeStageForLevel(state.save.level)), '🐱')}
           <div class="hud" id="playerHud">
-            <div class="who">ลี Lv.${state.save.level}${b.mode==='training' ? ' (ฝึกซ้อม)' : b.mode==='ghosthunt' ? ' (ล่าผี)' : ''}</div>
+            <div class="who">สำลี Lv.${state.save.level}${b.mode==='training' ? ' (ฝึกซ้อม)' : b.mode==='ghosthunt' ? ' (ล่าผี)' : ''}</div>
             <div class="hp-track"><div class="hp-fill" id="playerHudFill" style="width:100%"></div></div>
             <div class="hp-num" id="playerHudNum">${b.playerHp} / ${b.playerMaxHp}</div>
           </div>
@@ -1366,7 +1366,7 @@ function renderBattleResult(leveledUp, newStage, ghostUnlocked){
       <p>ได้รับ EXP +${b.expEarned}</p>
       ${isHunt && ghostUnlocked ? `<p class="evo-banner">👻 ปลดล็อก "${b.monster.name}" ใน Monster Gallery แล้ว!</p>` : ''}
       ${leveledUp ? `<p class="evo-banner">⭐ เลเวลอัพ! ตอนนี้ Lv.${state.save.level}</p>` : ''}
-      ${newStage ? `<p class="evo-banner">🐱 ลีวิวัฒนาการ: ${newStage.title}!<br>${newStage.desc}</p>` : ''}
+      ${newStage ? `<p class="evo-banner">🐱 สำลีวิวัฒนาการ: ${newStage.title}!<br>${newStage.desc}</p>` : ''}
       <div class="result-actions">
         ${primaryWinBtn}
         <button class="result-btn secondary" onclick="backToBoard()">${backLabel}</button>
@@ -1375,7 +1375,7 @@ function renderBattleResult(leveledUp, newStage, ghostUnlocked){
   ` : `
     <div class="result-card lose">
       <h2>💀 พ่ายแพ้</h2>
-      <p>${b.monster.name} เอาชนะลีได้ในครั้งนี้</p>
+      <p>${b.monster.name} เอาชนะสำลีได้ในครั้งนี้</p>
       <p>ลองทบทวนมาตรา ${b.current.lawRef.article} แล้วมาสู้ใหม่นะ</p>
       <div class="result-actions">
         <button class="result-btn" onclick="rematch()">🔄 ลองใหม่</button>
