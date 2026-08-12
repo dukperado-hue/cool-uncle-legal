@@ -61,6 +61,18 @@ img{max-width:100%; display:block}
   30%{transform:scale(1.18); box-shadow:0 0 0 4px rgba(224,195,74,.35)}
   100%{transform:scale(1)}
 }
+.combo-hud{
+  display:none; align-items:center; gap:4px; background:linear-gradient(135deg,#ff7a3c,#e0453f); color:#fff;
+  border-radius:999px; padding:6px 11px; font-weight:800; font-size:12px;
+  font-family:'JetBrains Mono',monospace; box-shadow:0 2px 8px rgba(224,69,63,.4);
+}
+.combo-hud.show{display:flex}
+.combo-hud.combo-pulse{animation:comboPulse .35s ease}
+@keyframes comboPulse{
+  0%{transform:scale(1) rotate(0)}
+  40%{transform:scale(1.22) rotate(-3deg)}
+  100%{transform:scale(1) rotate(0)}
+}
 
 /* ============ APP SHELL ============ */
 .app{max-width:960px; margin:0 auto; padding:20px 18px 70px}
@@ -207,6 +219,36 @@ img{max-width:100%; display:block}
 }
 .dmg-pop.heal{color:var(--rpg-hp-hi)}
 @keyframes dmgPop{0%{opacity:0; transform:translate(-50%,4px)} 20%{opacity:1} 100%{opacity:0; transform:translate(-50%,-26px)}}
+
+/* ============ ARCADE SCORE BREAKDOWN (per-answer + recite-run popup) ============ */
+.score-breakdown-pop{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:60;
+  background:rgba(10,13,22,.94); border:2px solid var(--rpg-gold);
+  box-shadow:0 0 0 2px var(--rpg-border-dk), 0 8px 24px rgba(0,0,0,.5), 0 0 20px rgba(224,195,74,.25);
+  border-radius:8px; padding:12px 16px; min-width:200px; font-family:'JetBrains Mono',monospace;
+  pointer-events:none; animation:sbPopIn .22s cubic-bezier(.2,1.4,.35,1) both;
+}
+.score-breakdown-pop.sb-out{animation:sbPopOut .22s ease forwards}
+@keyframes sbPopIn{from{opacity:0; transform:translate(-50%,-50%) scale(.85)} to{opacity:1; transform:translate(-50%,-50%) scale(1)}}
+@keyframes sbPopOut{to{opacity:0; transform:translate(-50%,-58%) scale(.92)}}
+.sb-line{
+  display:flex; justify-content:space-between; gap:18px; font-size:11.5px; color:#c9cede;
+  padding:2px 0; opacity:0; animation:sbLineIn .25s ease forwards;
+}
+@keyframes sbLineIn{from{opacity:0; transform:translateX(-6px)} to{opacity:1; transform:translateX(0)}}
+.sb-val.plus{color:var(--rpg-hp-hi)}
+.sb-val.mult{color:var(--rpg-gold); font-weight:800}
+.sb-rule{height:1px; background:var(--rpg-border-lt); margin:6px 0; opacity:.5}
+.sb-total{
+  display:flex; justify-content:space-between; gap:18px; font-family:'Press Start 2P',monospace;
+  font-size:13px; color:var(--rpg-gold); opacity:0; text-shadow:0 0 10px rgba(224,195,74,.6);
+  animation:sbTotalIn .3s cubic-bezier(.2,1.4,.35,1) forwards;
+}
+@keyframes sbTotalIn{from{opacity:0; transform:scale(1.4)} to{opacity:1; transform:scale(1)}}
+@media(max-width:420px){
+  .score-breakdown-pop{min-width:170px; padding:10px 12px}
+  .sb-line{font-size:10px} .sb-total{font-size:11px}
+}
 
 .hud{width:180px; background:var(--rpg-panel); border:2px solid var(--rpg-border-dk);
   box-shadow:0 0 0 2px var(--rpg-border-lt), 0 3px 0 rgba(0,0,0,.4); border-radius:4px; padding:6px 8px;}
@@ -424,7 +466,7 @@ img{max-width:100%; display:block}
   border-radius:16px; padding:16px 14px; color:var(--rpg-text); box-shadow:0 10px 32px rgba(0,0,0,.35);
 }
 .recite-head{display:flex; justify-content:space-between; font-size:11px; color:var(--rpg-gold); margin-bottom:10px; letter-spacing:.02em}
-.recite-card{background:var(--rpg-panel); border:2px solid var(--rpg-border-dk); box-shadow:0 0 0 2px var(--rpg-border-lt) inset; border-radius:8px; padding:16px 16px 18px}
+.recite-card{position:relative; background:var(--rpg-panel); border:2px solid var(--rpg-border-dk); box-shadow:0 0 0 2px var(--rpg-border-lt) inset; border-radius:8px; padding:16px 16px 18px}
 .recite-num{font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--rpg-gold); margin-bottom:10px; display:flex; align-items:center; gap:8px}
 .recite-num .booklabel{margin-left:auto; font-size:10.5px; color:#8891ab; font-weight:400}
 .recite-target{
@@ -464,6 +506,7 @@ img{max-width:100%; display:block}
   <a class="back" href="games.html">← เกม</a>
   <span class="brand">🐱 สำลีแมวน้อยล่าผี</span>
   <div class="right">
+    <div class="combo-hud" id="comboHud">🔥 <span id="comboVal"></span></div>
     <div class="score-hud" id="scoreHud">🪙 <span id="scoreVal">0</span></div>
     <button class="mute-btn" id="muteBtn" onclick="toggleMute()">🔊 เสียง</button>
   </div>
@@ -511,10 +554,11 @@ function loadSave(){
       if (!parsed.unlockedGhosts) parsed.unlockedGhosts = {};
       if (!parsed.reciteDone) parsed.reciteDone = {};
       if (typeof parsed.score !== 'number') parsed.score = 0;
+      if (typeof parsed.combo !== 'number') parsed.combo = 0;
       return parsed;
     }
   }catch(e){}
-  return { exp: 0, level: 1, score: 0, unlockedLawRefs: {}, questClears: {}, unlockedGhosts: {}, reciteDone: {} };
+  return { exp: 0, level: 1, score: 0, combo: 0, unlockedLawRefs: {}, questClears: {}, unlockedGhosts: {}, reciteDone: {} };
 }
 function saveSave(){ try{ localStorage.setItem(SAVE_KEY, JSON.stringify(state.save)); }catch(e){} }
 
@@ -545,30 +589,132 @@ function evolutionCrossed(oldLevel, newLevel){
   return DATA.leeEvolution.find(s => s.level > oldLevel && s.level <= newLevel) || null;
 }
 
-/* ============ score (habit-loop reward, à la "Power of Habit"'s Pepsodent
-   tingle — an immediate, sensory cue that fires right when you get a มาตรา
-   right, separate from the slower EXP/level track) ============ */
-const SCORE_PER_CORRECT = 10;
+/* ============ ARCADE SCORE SYSTEM (unified) ============
+   Habit-loop reward, à la "Power of Habit"'s Pepsodent tingle — an immediate,
+   sensory cue that fires right when you get a มาตรา right, separate from the
+   slower EXP/level track. Upgraded to a dynamic arcade formula:
+     TOTAL = round( (Base + RankBonus + TimeBonus) * ComboMultiplier )
+   Rank/time bonuses only apply to battle mode (quest + ล่าผี); recite mode
+   keeps its own length*accuracy*speed formula (see computeReciteScoreBreakdown)
+   but now feeds the same breakdown UI + the same main score HUD. */
+// Scaled ×100 from the original arcade pass so scores climb into the
+// hundred-thousands per big hit and cross into the millions over a normal
+// play session (persists forever in state.save.score, never resets).
+const SCORE_BASE = 100000;
+const SCORE_RANK_BONUS = { D: 0, C: 15000, B: 30000, A: 50000, S: 75000, SS: 100000 };
+const SCORE_TIME_BONUS_MAX = 50000;
+// Combo persists across battles (state.save.combo) — an arcade "don't break
+// the chain" streak, not scoped to a single fight. Resets on any wrong/timeout.
+const SCORE_COMBO_TIERS = [
+  { min: 0, mult: 1   },
+  { min: 3, mult: 1.5 },
+  { min: 5, mult: 2   },
+  { min: 8, mult: 3   },
+];
+const RECITE_BASE_PER_CHAR = 100; // same ×100 scale-up, keeps the original length*accuracy*mult formula's shape
+
+function fmtScore(n){ return Math.round(n).toLocaleString('en-US'); }
+function comboMultiplierFor(combo){
+  let mult = 1;
+  for (const tier of SCORE_COMBO_TIERS) { if (combo >= tier.min) mult = tier.mult; }
+  return mult;
+}
+function computeBattleScoreBreakdown({ rank, timeLeft, timeLimitSec, combo }){
+  const base = SCORE_BASE;
+  const rankBonus = SCORE_RANK_BONUS[rank] || 0;
+  const timeFrac = Math.max(0, Math.min(1, timeLeft / timeLimitSec));
+  const timeBonus = Math.round(SCORE_TIME_BONUS_MAX * timeFrac);
+  const mult = comboMultiplierFor(combo);
+  const total = Math.round((base + rankBonus + timeBonus) * mult);
+  return {
+    total,
+    lines: [
+      { label: 'Base Score', text: fmtScore(base), type: 'plus' },
+      { label: 'Rank Bonus', text: '+ ' + fmtScore(rankBonus), type: 'plus' },
+      { label: 'Time Bonus', text: '+ ' + fmtScore(timeBonus), type: 'plus' },
+      { label: `Combo (x${mult})`, text: 'x ' + mult, type: 'mult' },
+    ],
+  };
+}
+function computeReciteScoreBreakdown({ length, accuracy, mult, speedTier }){
+  const base = length * RECITE_BASE_PER_CHAR;
+  const accFrac = accuracy / 100;
+  const total = Math.round(base * accFrac * mult);
+  return {
+    total,
+    lines: [
+      { label: 'Base Score', text: fmtScore(base), type: 'plus' },
+      { label: `Accuracy ${accuracy}%`, text: 'x ' + accFrac.toFixed(2), type: 'mult' },
+      { label: `Speed (${speedTier})`, text: 'x ' + mult.toFixed(1), type: 'mult' },
+    ],
+  };
+}
+/* Non-blocking "arcade combo popup": floats over hostEl (defaults to the
+   battle stage), lines count in one-by-one, holds, fades — then fires
+   onDone (which is where the caller should push the total into the HUD via
+   addScore, so the number is never added silently). */
+function showScoreBreakdown(lines, total, onDone, hostEl){
+  const host = hostEl || document.getElementById('battleStage');
+  if (!host) { if (onDone) onDone(); return; }
+  const pop = document.createElement('div');
+  pop.className = 'score-breakdown-pop';
+  pop.innerHTML = `
+    <div class="sb-lines">
+      ${lines.map((l, i) => `<div class="sb-line" style="animation-delay:${180 + i * 110}ms"><span>${l.label}</span><span class="sb-val ${l.type}">${l.text}</span></div>`).join('')}
+      <div class="sb-rule"></div>
+      <div class="sb-total" style="animation-delay:${180 + lines.length * 110 + 80}ms"><span>TOTAL</span><span>${fmtScore(total)}</span></div>
+    </div>
+  `;
+  host.appendChild(pop);
+  const holdMs = 260 + lines.length * 110 + 700;
+  setTimeout(() => {
+    pop.classList.add('sb-out');
+    setTimeout(() => { pop.remove(); if (onDone) onDone(); }, 220);
+  }, holdMs);
+}
 function addScore(amount){
   const before = state.save.score;
   state.save.score += amount;
   saveSave();
   tickScoreHud(before, state.save.score);
-  playDingSound();
 }
+/* Arcade "rolling/ticking numbers" HUD animation: counts up with rapid tick
+   blips (not just an instant snap) and lands with the existing ding flourish. */
 function tickScoreHud(from, to){
   const el = document.getElementById('scoreVal');
   const wrap = document.getElementById('scoreHud');
   if (!el) return;
   wrap.classList.remove('score-pulse'); void wrap.offsetWidth; wrap.classList.add('score-pulse');
-  const dur = 450, start = performance.now();
+  const delta = to - from;
+  const dur = Math.min(1300, Math.max(450, Math.abs(delta) * 0.5));
+  const start = performance.now();
+  let lastTick = 0;
   function step(now){
     const t = Math.min(1, (now - start) / dur);
     const eased = 1 - Math.pow(1 - t, 3);
-    el.textContent = Math.round(from + (to - from) * eased);
-    if (t < 1) requestAnimationFrame(step);
+    el.textContent = fmtScore(from + delta * eased);
+    if (t < 1) {
+      if (now - lastTick > 55) { playScoreTick(); lastTick = now; }
+      requestAnimationFrame(step);
+    } else {
+      el.textContent = fmtScore(to);
+      playDingSound();
+    }
   }
   requestAnimationFrame(step);
+}
+function syncComboHud(){
+  const wrap = document.getElementById('comboHud');
+  const val = document.getElementById('comboVal');
+  if (!wrap || !val) return;
+  const combo = state.save.combo || 0;
+  const mult = comboMultiplierFor(combo);
+  if (mult > 1) {
+    val.textContent = `x${mult} (${combo})`;
+    wrap.classList.add('show');
+  } else {
+    wrap.classList.remove('show');
+  }
 }
 let __dingAudioCtx;
 function playDingSound(){
@@ -587,6 +733,22 @@ function playDingSound(){
       osc.connect(gain); gain.connect(c.destination);
       osc.start(t0 + i * 0.05); osc.stop(t0 + i * 0.05 + 0.52);
     });
+  }catch(e){}
+}
+function playScoreTick(){
+  if (isMuted()) return;
+  try{
+    __dingAudioCtx = __dingAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __dingAudioCtx;
+    if (c.state === 'suspended') c.resume();
+    const t0 = c.currentTime;
+    const osc = c.createOscillator(), gain = c.createGain();
+    osc.type = 'square'; osc.frequency.setValueAtTime(1600, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(0.08, t0 + 0.006);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.05);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0 + 0.06);
   }catch(e){}
 }
 
@@ -769,7 +931,8 @@ window.addEventListener('popstate', () => {
 function render(){
   syncMuteBtn();
   const scoreEl = document.getElementById('scoreVal');
-  if (scoreEl) scoreEl.textContent = state.save.score;
+  if (scoreEl) scoreEl.textContent = fmtScore(state.save.score);
+  syncComboHud();
   const app = document.getElementById('app');
   if (state.screen === 'loading') { app.innerHTML = '<div class="loading-note">กำลังโหลด...</div>'; return; }
   if (state.screen === 'home') return renderHome(app);
@@ -1168,7 +1331,8 @@ function finishRecite(){
   if (cpm >= 350) { mult = 2.0; speedTier = 'เร็วมาก!'; }
   else if (cpm >= 220) { mult = 1.5; speedTier = 'เร็ว'; }
   else if (cpm >= 120) { mult = 1.0; speedTier = 'ปกติ'; }
-  const score = Math.round(run.target.length * (accuracy / 100) * mult);
+  const breakdown = computeReciteScoreBreakdown({ length: run.target.length, accuracy, mult, speedTier });
+  const score = breakdown.total; // same length*accuracy*speed formula as before, just via the shared breakdown helper
   const expAwarded = Math.max(3, Math.round(score / 8));
 
   const item = state.reciteList[state.reciteIdx];
@@ -1189,6 +1353,9 @@ function finishRecite(){
   run.result = { accuracy, cpm, score, expAwarded, speedTier, dika, leveledUp };
   playSfx(accuracy >= 90 ? 'correct' : 'hit');
   render();
+
+  const card = document.querySelector('.recite-card');
+  showScoreBreakdown(breakdown.lines, breakdown.total, () => addScore(breakdown.total), card);
 }
 
 function renderReciteResultBlock(run){
@@ -1230,6 +1397,7 @@ function startBattleState({ questId, mode, monster, subjectId, topicKey, questio
     locked: false,
     result: null, // null | 'win' | 'lose'
     expEarned: 0,
+    scoreEarned: 0,
   };
   state.screen = 'battle';
   render();
@@ -1345,7 +1513,13 @@ function handleAnswer(index){
 
   if (correct) {
     playSfx('correct');
-    addScore(SCORE_PER_CORRECT);
+    state.save.combo = (state.save.combo || 0) + 1;
+    saveSave();
+    syncComboHud();
+    const rank = b.monster.rank || 'D'; // quest-mode monsters have no rank tier — treat as base D
+    const breakdown = computeBattleScoreBreakdown({ rank, timeLeft: b.timeLeft, timeLimitSec: b.current.timeLimitSec, combo: state.save.combo });
+    b.scoreEarned += breakdown.total;
+    showScoreBreakdown(breakdown.lines, breakdown.total, () => addScore(breakdown.total));
     const dmg = Math.round(atkForLevel(state.save.level) * (0.85 + Math.random()*0.3));
     b.monsterHp = Math.max(0, b.monsterHp - dmg);
     b.expEarned += b.current.expReward;
@@ -1353,6 +1527,9 @@ function handleAnswer(index){
     setTimeout(() => playSfx('attack'), 120);
   } else {
     playSfx('wrong');
+    state.save.combo = 0;
+    saveSave();
+    syncComboHud();
     if (!isFreePractice(b.mode)) {
       const dmg = Math.round(b.monster.atk * (0.85 + Math.random()*0.3));
       b.playerHp = Math.max(0, b.playerHp - dmg);
@@ -1508,7 +1685,7 @@ function renderBattleResult(leveledUp, newStage, ghostUnlocked){
     <div class="result-card win">
       <h2>🎉 ชนะแล้ว!</h2>
       <p>ปราบ ${b.monster.name} สำเร็จ</p>
-      <p>ได้รับ EXP +${b.expEarned}</p>
+      <p>ได้รับ EXP +${b.expEarned} · 🪙 +${fmtScore(b.scoreEarned)}</p>
       ${isHunt && ghostUnlocked ? `<p class="evo-banner">👻 ปลดล็อก "${b.monster.name}" ใน Monster Gallery แล้ว!</p>` : ''}
       ${leveledUp ? `<p class="evo-banner">⭐ เลเวลอัพ! ตอนนี้ Lv.${state.save.level}</p>` : ''}
       ${newStage ? `<p class="evo-banner">🐱 สำลีวิวัฒนาการ: ${newStage.title}!<br>${newStage.desc}</p>` : ''}
