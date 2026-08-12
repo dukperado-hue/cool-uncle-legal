@@ -447,38 +447,42 @@ img{max-width:100%; display:block}
 .recite-topic-card .count{font-size:11.5px; color:var(--ink-soft); margin-top:4px}
 .recite-topic-card.empty{opacity:.4; cursor:default; pointer-events:none}
 
-.recite-row{
-  background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
-  padding:12px 14px; display:flex; align-items:center; gap:10px; margin-bottom:8px;
-}
-.recite-row .num{font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--accent); flex:1; display:flex; align-items:center; gap:6px}
-.recite-row .badge{font-size:11px; color:var(--ok); font-weight:700; white-space:nowrap}
-.recite-row .badge.new{color:var(--ink-faint)}
-.recite-row button{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:7px 14px; font-weight:700; font-size:12px; flex-shrink:0}
-
 .recite-wrap{
   background:radial-gradient(120% 70% at 50% 0%, #1c2338 0%, var(--rpg-bg0) 70%);
   border-radius:16px; padding:16px 14px; color:var(--rpg-text); box-shadow:0 10px 32px rgba(0,0,0,.35);
 }
 .recite-head{display:flex; justify-content:space-between; font-size:11px; color:var(--rpg-gold); margin-bottom:10px; letter-spacing:.02em}
 .recite-card{position:relative; background:var(--rpg-panel); border:2px solid var(--rpg-border-dk); box-shadow:0 0 0 2px var(--rpg-border-lt) inset; border-radius:8px; padding:16px 16px 18px}
-.recite-num{font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--rpg-gold); margin-bottom:10px; display:flex; align-items:center; gap:8px}
-.recite-num .booklabel{margin-left:auto; font-size:10.5px; color:#8891ab; font-weight:400}
-.recite-target{
-  font-size:17px; line-height:2.1; letter-spacing:.01em; padding:14px; background:#0d1120;
-  border-radius:8px; margin-bottom:12px; font-family:'Sarabun',sans-serif; word-break:break-word;
+
+/* ============ ทดสอบเลขมาตรา — no-typing "guess the article number" quiz ============ */
+.quiz-stat-bar{display:flex; gap:10px; margin-bottom:12px}
+.quiz-stat{
+  flex:1; background:var(--rpg-panel); border:2px solid var(--rpg-border-dk); box-shadow:0 0 0 2px var(--rpg-border-lt) inset;
+  border-radius:8px; padding:8px 6px; text-align:center; color:var(--rpg-text);
 }
-.rc-pending{color:#5b6a8c}
-.rc-correct{color:#bdf5d2}
-.rc-incorrect{color:#f5c7c3; background:rgba(224,69,63,.28); border-radius:2px}
-.rc-current{color:#fff; border-bottom:2px solid var(--rpg-gold); animation:rcBlink 1s step-end infinite}
-@keyframes rcBlink{50%{border-color:transparent}}
-.recite-input{
-  width:100%; background:#0f1424; border:2px solid var(--rpg-border-lt); border-radius:8px; color:#fff;
-  padding:12px 14px; font-size:15px; font-family:'Sarabun',sans-serif; margin-bottom:10px;
+.quiz-stat b{display:block; font-family:'JetBrains Mono',monospace; font-size:17px; color:var(--rpg-gold)}
+.quiz-stat span{font-size:10px; color:#8891ab}
+.quiz-prompt{font-size:13px; color:var(--rpg-gold); font-weight:700; margin-bottom:8px}
+.quiz-text{
+  font-size:16px; line-height:1.9; padding:14px; background:#0d1120;
+  border-radius:8px; margin-bottom:14px; font-family:'Sarabun',sans-serif; word-break:break-word;
 }
-.recite-input:focus{outline:none; border-color:var(--rpg-gold)}
-.recite-stats{display:flex; gap:16px; font-size:12px; color:#c9cede; font-family:'JetBrains Mono',monospace; flex-wrap:wrap}
+.quiz-para{margin-bottom:10px}
+.quiz-para:last-child{margin-bottom:0}
+.quiz-para-label{display:block; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--rpg-gold); margin-bottom:3px}
+.quiz-answer-form{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.quiz-answer-label{display:flex; align-items:center; gap:10px; font-size:14px; color:var(--rpg-text); flex:1}
+.quiz-answer-input{
+  width:100%; max-width:140px; background:#0f1424; border:2px solid var(--rpg-border-lt); border-radius:8px; color:#fff;
+  padding:12px 14px; font-size:20px; font-family:'JetBrains Mono',monospace; text-align:center; letter-spacing:.05em;
+}
+.quiz-answer-input:focus{outline:none; border-color:var(--rpg-gold)}
+.quiz-feedback{border-radius:8px; padding:12px 14px; margin-bottom:4px}
+.quiz-feedback.ok{background:var(--ok-bg); color:var(--ok)}
+.quiz-feedback.bad{background:var(--bad-bg); color:var(--bad)}
+.quiz-feedback-head{font-weight:800; font-size:14.5px; margin-bottom:4px}
+.quiz-feedback-answer{font-size:13px}
+.quiz-feedback-score{font-family:'JetBrains Mono',monospace; font-weight:700; margin-top:4px; font-size:13px}
 .recite-actions{margin-top:12px; text-align:right}
 .recite-actions a{color:#8891ab; font-size:12px; text-decoration:none}
 .recite-actions a:hover{color:var(--rpg-text)}
@@ -530,15 +534,13 @@ let DATA = null;
 let codexCache = null; // lazy-loaded full law database, only fetched when Lawbook opens
 
 const state = {
-  screen: 'loading', // loading|home|quest|training|lawbook|battle|reciteTopicPick|reciteSubgroupPick|reciteList|recite
+  screen: 'loading', // loading|home|quest|training|lawbook|battle|reciteTopicPick|reciteSubgroupPick|reciteQuiz
   questSubject: 'civil',
   save: loadSave(),
   battle: null,
   reciteTopicId: null,
   reciteSubgroupId: null,
-  reciteList: null, // ordered [{book,article}] for the current topic/subgroup
-  reciteIdx: 0,
-  reciteRun: null, // {book,article,target,typed,startedAt,finished,result}
+  reciteQuiz: null, // { pool:[{book,article}], qIndex, current, locked, startedAt, feedback, session:{correct,attempts,scoreEarned,baseTotal,bonusTotal,timeTotal,comboMult} }
 };
 
 function loadSave(){
@@ -589,9 +591,9 @@ function evolutionCrossed(oldLevel, newLevel){
    sensory cue that fires right when you get a มาตรา right, separate from the
    slower EXP/level track. Upgraded to a dynamic arcade formula:
      TOTAL = round( (Base + RankBonus + TimeBonus) * ComboMultiplier )
-   Rank/time bonuses only apply to battle mode (quest + ล่าผี); recite mode
-   keeps its own length*accuracy*speed formula (see computeReciteScoreBreakdown)
-   but now feeds the same breakdown UI + the same main score HUD. */
+   Shared by battle mode (rank = monster rank) and the ทดสอบเลขมาตรา quiz
+   (rank slot repurposed as an examFreq-star difficulty bonus, see
+   QUIZ_STAR_BONUS below) — same breakdown UI + same main score HUD either way. */
 const SCORE_BASE = 2000;
 const SCORE_RANK_BONUS = { D: 0, C: 300, B: 600, A: 1000, S: 1500, SS: 2000 };
 const SCORE_TIME_BONUS_MAX = 500; // kept in the hundreds, not thousands
@@ -603,8 +605,6 @@ const SCORE_COMBO_TIERS = [
   { min: 5, mult: 2   },
   { min: 8, mult: 3   },
 ];
-const RECITE_BASE_PER_CHAR = 2; // scaled to match SCORE_BASE, keeps the original length*accuracy*mult formula's shape
-
 function fmtScore(n){ return Math.round(n).toLocaleString('en-US'); }
 function comboMultiplierFor(combo){
   let mult = 1;
@@ -628,22 +628,9 @@ function computeBattleScoreBreakdown({ rank, timeLeft, timeLimitSec, combo }){
     ],
   };
 }
-function computeReciteScoreBreakdown({ length, accuracy, mult, speedTier }){
-  const base = length * RECITE_BASE_PER_CHAR;
-  const accFrac = accuracy / 100;
-  const total = Math.round(base * accFrac * mult);
-  return {
-    total,
-    lines: [
-      { label: 'Base Score', text: fmtScore(base), type: 'plus' },
-      { label: `Accuracy ${accuracy}%`, text: 'x ' + accFrac.toFixed(2), type: 'mult' },
-      { label: `Speed (${speedTier})`, text: 'x ' + mult.toFixed(1), type: 'mult' },
-    ],
-  };
-}
 /* Builds the breakdown block's HTML — lives inline inside whichever card is
-   already on screen (result card, recite result block), lines counting in
-   with a staggered delay. No separate floating popup / no extra screen. */
+   already on screen (battle result card, ทดสอบเลขมาตรา session summary),
+   lines counting in with a staggered delay. No separate floating popup. */
 function renderScoreBreakdownHtml(lines, total){
   return `
     <div class="result-score-breakdown">
@@ -927,8 +914,7 @@ function render(){
   if (state.screen === 'battle') return renderBattle(app);
   if (state.screen === 'reciteTopicPick') return renderReciteTopicPick(app);
   if (state.screen === 'reciteSubgroupPick') return renderReciteSubgroupPick(app);
-  if (state.screen === 'reciteList') return renderReciteList(app);
-  if (state.screen === 'recite') return renderRecite(app);
+  if (state.screen === 'reciteQuiz') return renderReciteQuiz(app);
 }
 
 /* ============ HOME ============ */
@@ -1068,12 +1054,11 @@ function renderQuestBoard(app, isTraining){
 function selectSubject(id){ state.questSubject = id; render(); }
 function selectTopic(topic){ state.questTopic = topic; render(); }
 
-/* ============ QUEST BOARD (ท่องมาตรา — typing-recite mode) ============
+/* ============ QUEST BOARD (ทดสอบเลขมาตรา — no-typing quiz) ============
    Reads real มาตรา text straight from codex-data.json (lazy-loaded, same as
    Lawbook) instead of duplicating law text into rpg-data.json. DATA.reciteTopics
    only stores which article numbers belong to which topic/subgroup. */
 const BOOK_LABEL = { civil: 'ป.พ.พ.', criminal: 'ป.อาญา' };
-let reciteTickHandle = null;
 
 function reciteDoneKey(book, article){ return book + ':' + article; }
 function reciteTopicArticleCount(topic){
@@ -1096,14 +1081,14 @@ function renderReciteTopicPick(app){
       <a href="#" class="recite-topic-card ${empty ? 'empty' : ''}" onclick="event.preventDefault(); ${empty ? '' : `openReciteTopic('${t.id}')`}">
         <div class="icon">${t.icon}</div>
         <div class="label">${t.name}</div>
-        <div class="count">${empty ? 'กำลังจัดทำเนื้อหา' : `${done}/${total} ท่องแล้ว`}</div>
+        <div class="count">${empty ? 'กำลังจัดทำเนื้อหา' : `${done}/${total} ตอบถูกแล้ว`}</div>
       </a>
     `;
   }).join('');
   app.innerHTML = `
     <div class="back-row"><a href="#" onclick="goScreen(event,'home')">← กลับหน้าหลัก</a></div>
-    <div class="section-title">🗺️ Quest Board · ท่องมาตรา</div>
-    <div class="training-flag">พิมพ์ตัวบทจริงให้ตรงและเร็วที่สุด ยิ่งเร็ว+แม่นยำ ยิ่งได้ EXP เยอะ</div>
+    <div class="section-title">🗺️ Quest Board · ทดสอบเลขมาตรา</div>
+    <div class="training-flag">อ่านตัวบทแล้วทายว่าเป็นมาตราอะไร ไม่ต้องพิมพ์ยาว ๆ — ตอบถูกเร็ว ยิ่งได้คะแนนเยอะ</div>
     <div class="recite-topic-grid">${cards}</div>
   `;
 }
@@ -1111,15 +1096,14 @@ function renderReciteTopicPick(app){
 function openReciteTopic(topicId){
   const topic = DATA.reciteTopics.find(t => t.id === topicId);
   state.reciteTopicId = topicId;
+  pushBackToHome();
   if (topic.subgroups) {
     state.screen = 'reciteSubgroupPick';
+    render();
   } else {
-    state.reciteList = topic.articles.map(a => ({ book: topic.book, article: a }));
     state.reciteSubgroupId = null;
-    state.screen = 'reciteList';
+    startReciteQuiz(topic.articles.map(a => ({ book: topic.book, article: a })));
   }
-  pushBackToHome();
-  render();
 }
 
 function renderReciteSubgroupPick(app){
@@ -1132,7 +1116,7 @@ function renderReciteSubgroupPick(app){
       <a href="#" class="recite-topic-card ${empty ? 'empty' : ''}" onclick="event.preventDefault(); ${empty ? '' : `openReciteSubgroup('${sg.id}')`}">
         <div class="icon">${sg.icon}</div>
         <div class="label">${sg.name}</div>
-        <div class="count">${empty ? 'กำลังจัดทำเนื้อหา' : `${done}/${sg.articles.length} ท่องแล้ว`}</div>
+        <div class="count">${empty ? 'กำลังจัดทำเนื้อหา' : `${done}/${sg.articles.length} ตอบถูกแล้ว`}</div>
       </a>
     `;
   }).join('');
@@ -1146,45 +1130,9 @@ function openReciteSubgroup(subgroupId){
   const topic = DATA.reciteTopics.find(t => t.id === state.reciteTopicId);
   const sg = topic.subgroups.find(s => s.id === subgroupId);
   state.reciteSubgroupId = subgroupId;
-  state.reciteList = sg.articles.map(a => ({ book: topic.book, article: a }));
-  state.screen = 'reciteList';
-  render();
+  startReciteQuiz(sg.articles.map(a => ({ book: topic.book, article: a })));
 }
 
-function renderReciteList(app){
-  const topic = DATA.reciteTopics.find(t => t.id === state.reciteTopicId);
-  const sg = topic.subgroups && state.reciteSubgroupId ? topic.subgroups.find(s => s.id === state.reciteSubgroupId) : null;
-  const backScreen = sg ? 'reciteSubgroupPick' : 'reciteTopicPick';
-  const rows = state.reciteList.map((item, idx) => {
-    const done = state.save.reciteDone[reciteDoneKey(item.book, item.article)];
-    return `
-      <div class="recite-row">
-        <span class="num">มาตรา ${item.article}</span>
-        <span class="badge ${done ? '' : 'new'}">${done ? `✅ ${done.bestAccuracy}% · ${done.bestCpm} ตัว/นาที` : 'ยังไม่ท่อง'}</span>
-        <button onclick="startReciteRun(${idx})">${done ? '↻ ท่องซ้ำ' : '✍ เริ่มท่อง'}</button>
-      </div>
-    `;
-  }).join('');
-  app.innerHTML = `
-    <div class="back-row"><a href="#" onclick="goScreen(event,'${backScreen}')">← กลับ</a></div>
-    <div class="section-title">${sg ? sg.icon + ' ' + sg.name : topic.icon + ' ' + topic.name}</div>
-    ${rows}
-  `;
-}
-
-function reciteTargetText(rawText){
-  if (!rawText) return '';
-  const paras = rawText.trim().split(/\n+/).map(s => s.trim()).filter(Boolean);
-  let out = paras[0] || '';
-  let i = 1;
-  while (i < paras.length && out.length < 160) { out += ' ' + paras[i]; i++; }
-  out = out.replace(/\s+/g, ' ').trim();
-  const CAP = 280;
-  if (out.length <= CAP) return out;
-  let cut = out.lastIndexOf(' ', CAP);
-  if (cut < 100) cut = CAP;
-  return out.slice(0, cut).trim();
-}
 function extractDikaSnippet(lectureNotes){
   if (!lectureNotes) return null;
   const joined = lectureNotes.map(n => n.text || '').join('\n');
@@ -1199,161 +1147,176 @@ function extractDikaSnippet(lectureNotes){
   return snippet;
 }
 function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function renderCharSpans(typed, target){
-  let html = '';
-  for (let i = 0; i < target.length; i++) {
-    const ch = target[i];
-    const display = ch === ' ' ? '&nbsp;' : escapeHtml(ch);
-    let cls = 'rc-pending';
-    if (i < typed.length) cls = (typed[i] === ch) ? 'rc-correct' : 'rc-incorrect';
-    else if (i === typed.length) cls = 'rc-current';
-    html += `<span class="${cls}">${display}</span>`;
-  }
-  return html;
-}
-
-function startReciteRun(idx){
-  state.reciteIdx = idx;
-  const item = state.reciteList[idx];
-  app_showReciteLoading();
-  ensureCodexLoaded().then(() => {
-    const art = codexCache.books[item.book].articles[item.article];
-    const target = reciteTargetText(art.text);
-    state.reciteRun = { book: item.book, article: item.article, target, typed: '', startedAt: null, finished: false, result: null };
-    state.screen = 'recite';
-    render();
-  });
-}
 function app_showReciteLoading(){
   const app = document.getElementById('app');
   app.innerHTML = '<div class="loading-note">กำลังโหลดคลังกฎหมาย...</div>';
 }
 
-function renderRecite(app){
-  const run = state.reciteRun;
-  const item = state.reciteList[state.reciteIdx];
+/* ============ ทดสอบเลขมาตรา — no-typing quiz (replaces the old typing-recite mode) ============
+   Base/DifficultyBonus/TimeBonus × combo reuses the same arcade scoring engine
+   built for ล่าผี (SCORE_BASE, SCORE_TIME_BONUS_MAX, comboMultiplierFor,
+   addScore, renderScoreBreakdownHtml) — see that section above. Difficulty
+   bonus substitutes for "rank" here since there's no monster: it's driven by
+   codex examFreq.stars (how often a มาตรา shows up on the bar exam). */
+const THAI_ORDINAL = ['วรรคหนึ่ง','วรรคสอง','วรรคสาม','วรรคสี่','วรรคห้า','วรรคหก'];
+const QUIZ_STAR_BONUS = { 0: 0, 1: 200, 2: 500, 3: 1000 };
+function quizTimeLimitFor(text){ return Math.min(35, Math.max(15, 10 + text.length / 12)); }
+
+function startReciteQuiz(pool){
+  app_showReciteLoading();
+  ensureCodexLoaded().then(() => {
+    state.reciteQuiz = {
+      pool: shuffle(pool), qIndex: 0, current: null, locked: false, startedAt: null, feedback: null,
+      session: { correct: 0, attempts: 0, scoreEarned: 0, baseTotal: 0, bonusTotal: 0, timeTotal: 0, comboMult: 1 },
+    };
+    state.screen = 'reciteQuiz';
+    loadNextReciteQuestion();
+  });
+}
+function loadNextReciteQuestion(){
+  const q = state.reciteQuiz;
+  if (q.qIndex >= q.pool.length) { q.pool = shuffle(q.pool); q.qIndex = 0; }
+  const item = q.pool[q.qIndex++];
+  const art = codexCache.books[item.book].articles[item.article];
+  const paragraphs = (art.text || '').trim().split(/\n+/).map(s => s.trim()).filter(Boolean);
+  q.current = { book: item.book, article: item.article, art, paragraphs };
+  q.locked = false;
+  q.startedAt = Date.now();
+  q.feedback = null;
+  render();
+}
+function renderReciteQuiz(app){
+  const q = state.reciteQuiz;
+  const s = q.session;
+  const acc = s.attempts ? Math.round((s.correct / s.attempts) * 100) : 100;
   const topic = DATA.reciteTopics.find(t => t.id === state.reciteTopicId);
-  const label = topic.subgroups ? topic.subgroups.find(s => s.id === state.reciteSubgroupId).name : topic.name;
-  const codexArt = codexCache.books[item.book].articles[item.article];
-  const examFreq = codexArt.examFreq;
+  const sg = topic.subgroups && state.reciteSubgroupId ? topic.subgroups.find(x => x.id === state.reciteSubgroupId) : null;
+  const label = sg ? sg.name : topic.name;
+  const paras = q.current.paragraphs;
+  const bodyHtml = paras.length > 1
+    ? paras.map((p, i) => `<div class="quiz-para"><span class="quiz-para-label">${THAI_ORDINAL[i] || 'วรรคที่ ' + (i + 1)}</span>${escapeHtml(p)}</div>`).join('')
+    : `<div class="quiz-para">${escapeHtml(paras[0] || '')}</div>`;
   app.innerHTML = `
-    <div class="back-row"><a href="#" onclick="exitRecite(event)">← กลับรายการ</a></div>
+    <div class="back-row"><a href="#" onclick="exitReciteQuiz(event)">← กลับ</a></div>
     <div class="recite-wrap">
-      <div class="recite-head"><span>${label}</span><span>${state.reciteIdx + 1}/${state.reciteList.length}</span></div>
+      <div class="recite-head"><span>${label}</span><span>${BOOK_LABEL[q.current.book]}</span></div>
+      <div class="quiz-stat-bar">
+        <div class="quiz-stat"><b>${s.correct}</b><span>ถูก</span></div>
+        <div class="quiz-stat"><b>${s.attempts}</b><span>ทำไปแล้ว</span></div>
+        <div class="quiz-stat"><b>${acc}%</b><span>ความแม่นยำ</span></div>
+      </div>
       <div class="recite-card">
-        <div class="recite-num">มาตรา ${item.article} ${examFreq && examFreq.stars >= 2 ? '⭐' : ''}<span class="booklabel">${BOOK_LABEL[item.book]}</span></div>
-        <div class="recite-target" id="reciteTarget">${renderCharSpans(run.typed, run.target)}</div>
-        ${run.finished ? '' : `
-          <input type="text" id="reciteInput" class="recite-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
-            oninput="onReciteInput(event)" placeholder="เริ่มพิมพ์ตรงนี้ให้ตรงกับตัวบทด้านบน...">
-          <div class="recite-stats">
-            <span>⏱ <span id="reciteTime">0.0</span>s</span>
-            <span>⌨ <span id="reciteCpm">0</span> ตัว/นาที</span>
-            <span>🎯 <span id="reciteAcc">100</span>%</span>
-          </div>
-          <div class="recite-actions"><a href="#" onclick="skipRecite(event)">ข้ามมาตรานี้ →</a></div>
-        `}
-        ${run.finished ? renderReciteResultBlock(run) : ''}
+        <div class="quiz-prompt">มาตรานี้คือมาตราอะไร?</div>
+        <div class="quiz-text">${bodyHtml}</div>
+        ${q.feedback ? renderReciteFeedback(q.feedback) : renderReciteAnswerForm()}
       </div>
     </div>
   `;
-  if (!run.finished) {
-    const inputEl = document.getElementById('reciteInput');
-    inputEl.focus();
-    startReciteTicker();
+  if (!q.feedback) {
+    const input = document.getElementById('quizAnswerInput');
+    if (input) input.focus();
   }
 }
-
-function startReciteTicker(){
-  stopReciteTicker();
-  reciteTickHandle = setInterval(() => {
-    const run = state.reciteRun;
-    if (!run || run.finished || !run.startedAt) return;
-    updateReciteStatsDom();
-  }, 200);
-}
-function stopReciteTicker(){
-  if (reciteTickHandle) { clearInterval(reciteTickHandle); reciteTickHandle = null; }
-}
-function updateReciteStatsDom(){
-  const run = state.reciteRun;
-  const timeEl = document.getElementById('reciteTime');
-  const cpmEl = document.getElementById('reciteCpm');
-  const accEl = document.getElementById('reciteAcc');
-  if (!timeEl || !run.startedAt) return;
-  const elapsedSec = (Date.now() - run.startedAt) / 1000;
-  const len = run.typed.length;
-  let correct = 0;
-  for (let i = 0; i < len; i++) { if (run.typed[i] === run.target[i]) correct++; }
-  timeEl.textContent = elapsedSec.toFixed(1);
-  cpmEl.textContent = elapsedSec > 0.3 ? Math.round((len / elapsedSec) * 60) : 0;
-  accEl.textContent = len > 0 ? Math.round((correct / len) * 100) : 100;
-}
-
-function onReciteInput(e){
-  const run = state.reciteRun;
-  if (!run || run.finished) return;
-  if (!run.startedAt) run.startedAt = Date.now();
-  run.typed = e.target.value.slice(0, run.target.length);
-  document.getElementById('reciteTarget').innerHTML = renderCharSpans(run.typed, run.target);
-  updateReciteStatsDom();
-  if (run.typed.length >= run.target.length) finishRecite();
-}
-
-function finishRecite(){
-  const run = state.reciteRun;
-  stopReciteTicker();
-  const elapsedSec = Math.max(0.4, (Date.now() - run.startedAt) / 1000);
-  let correct = 0;
-  for (let i = 0; i < run.target.length; i++) { if (run.typed[i] === run.target[i]) correct++; }
-  const accuracy = Math.round((correct / run.target.length) * 100);
-  const cpm = Math.round((run.target.length / elapsedSec) * 60);
-  let mult = 0.7, speedTier = 'ช้าและมั่นคง';
-  if (cpm >= 350) { mult = 2.0; speedTier = 'เร็วมาก!'; }
-  else if (cpm >= 220) { mult = 1.5; speedTier = 'เร็ว'; }
-  else if (cpm >= 120) { mult = 1.0; speedTier = 'ปกติ'; }
-  const breakdown = computeReciteScoreBreakdown({ length: run.target.length, accuracy, mult, speedTier });
-  const score = breakdown.total; // same length*accuracy*speed formula as before, just via the shared breakdown helper
-  const expAwarded = Math.max(3, Math.round(score / 8));
-
-  const item = state.reciteList[state.reciteIdx];
-  const codexArt = codexCache.books[item.book].articles[item.article];
-  const dika = extractDikaSnippet(codexArt.lectureNotes);
-
-  const key = reciteDoneKey(item.book, item.article);
-  const prev = state.save.reciteDone[key];
-  state.save.reciteDone[key] = {
-    bestAccuracy: Math.max(accuracy, prev ? prev.bestAccuracy : 0),
-    bestCpm: Math.max(cpm, prev ? prev.bestCpm : 0),
-    bestScore: Math.max(score, prev ? prev.bestScore : 0),
-    times: (prev ? prev.times : 0) + 1,
-  };
-  const leveledUp = gainExp(expAwarded);
-
-  run.finished = true;
-  run.result = { accuracy, cpm, score, expAwarded, speedTier, dika, leveledUp, breakdown };
-  playSfx(accuracy >= 90 ? 'correct' : 'hit');
-  render();
-  if (score) addScore(score); // ticks the 🪙 HUD up right as this same result block appears
-}
-
-function renderReciteResultBlock(run){
-  const r = run.result;
-  const hasNext = state.reciteIdx + 1 < state.reciteList.length;
+function renderReciteAnswerForm(){
   return `
-    <div class="training-flag">✅ ${r.speedTier} · ${r.cpm} ตัว/นาที · แม่นยำ ${r.accuracy}%${r.leveledUp ? ' · 🎉 เลเวลอัป!' : ''}</div>
-    ${renderScoreBreakdownHtml(r.breakdown.lines, r.breakdown.total)}
-    <p style="font-size:13px; color:#c9cede; margin:4px 0 8px">+${r.expAwarded} EXP</p>
-    ${r.dika ? `<div class="recite-dika">📜 <strong>ฎีกาที่เกี่ยวข้อง:</strong> ${escapeHtml(r.dika)}</div>` : ''}
+    <form onsubmit="submitReciteAnswer(event)" class="quiz-answer-form">
+      <label class="quiz-answer-label">มาตรา
+        <input type="tel" inputmode="numeric" pattern="[0-9]*" id="quizAnswerInput" class="quiz-answer-input"
+          autocomplete="off" enterkeyhint="done" placeholder="เลข">
+      </label>
+      <button type="submit" class="result-btn">ตอบ</button>
+    </form>
+  `;
+}
+function renderReciteFeedback(fb){
+  const dika = extractDikaSnippet(fb.art.lectureNotes);
+  return `
+    <div class="quiz-feedback ${fb.correct ? 'ok' : 'bad'}">
+      <div class="quiz-feedback-head">${fb.correct ? '✅ ถูกต้อง!' : '❌ ยังไม่ถูก'}</div>
+      <div class="quiz-feedback-answer">คำตอบคือ <strong>มาตรา ${fb.correctArticle}</strong></div>
+      ${fb.scoreGain ? `<div class="quiz-feedback-score">+${fmtScore(fb.scoreGain)} 🪙</div>` : ''}
+    </div>
+    ${dika ? `<div class="recite-dika">📜 <strong>ฎีกาที่เกี่ยวข้อง:</strong> ${escapeHtml(dika)}</div>` : ''}
     <div class="recite-actions" style="margin-top:14px; text-align:center">
-      ${hasNext ? `<button class="result-btn" onclick="nextRecite()">▶ มาตราถัดไป</button>` : `<button class="result-btn" onclick="goScreen(event,'reciteList')">🏁 ครบทุกมาตราในหมวดนี้แล้ว</button>`}
-      <button class="result-btn secondary" onclick="goScreen(event,'reciteList')" style="margin-left:8px">📋 กลับรายการ</button>
+      <button class="result-btn" onclick="loadNextReciteQuestion()">ข้อถัดไป →</button>
     </div>
   `;
 }
-function nextRecite(){ startReciteRun(state.reciteIdx + 1); }
-function skipRecite(ev){ ev.preventDefault(); stopReciteTicker(); startReciteRun(Math.min(state.reciteIdx + 1, state.reciteList.length - 1)); }
-function exitRecite(ev){ ev.preventDefault(); stopReciteTicker(); state.screen = 'reciteList'; render(); }
+function submitReciteAnswer(ev){
+  ev.preventDefault();
+  const q = state.reciteQuiz;
+  if (q.locked) return;
+  const input = document.getElementById('quizAnswerInput');
+  const guess = (input.value || '').trim();
+  if (!guess) { input.focus(); return; }
+  q.locked = true;
+  const correct = guess === String(q.current.article);
+  const elapsedSec = (Date.now() - q.startedAt) / 1000;
+  const s = q.session;
+  s.attempts++;
+  state.save.combo = correct ? (state.save.combo || 0) + 1 : 0;
+  saveSave();
+  syncComboHud();
+  playSfx(correct ? 'correct' : 'wrong');
+
+  let scoreGain = 0;
+  if (correct) {
+    s.correct++;
+    const key = reciteDoneKey(q.current.book, q.current.article);
+    if (!state.save.reciteDone[key]) state.save.reciteDone[key] = true;
+    const stars = (q.current.art.examFreq && q.current.art.examFreq.stars) || 0;
+    const bonus = QUIZ_STAR_BONUS[stars] || 0;
+    const timeLimitSec = quizTimeLimitFor(q.current.paragraphs.join(''));
+    const timeFrac = Math.max(0, Math.min(1, 1 - elapsedSec / timeLimitSec));
+    const timeBonus = Math.round(SCORE_TIME_BONUS_MAX * timeFrac);
+    const mult = comboMultiplierFor(state.save.combo);
+    scoreGain = Math.round((SCORE_BASE + bonus + timeBonus) * mult);
+    s.scoreEarned += scoreGain; s.baseTotal += SCORE_BASE; s.bonusTotal += bonus; s.timeTotal += timeBonus; s.comboMult = mult;
+    addScore(scoreGain);
+  }
+  q.feedback = { correct, correctArticle: q.current.article, art: q.current.art, scoreGain };
+  render();
+}
+function exitReciteQuiz(ev){
+  ev.preventDefault();
+  const q = state.reciteQuiz;
+  if (!q || q.session.attempts === 0) { state.reciteQuiz = null; state.screen = 'reciteTopicPick'; render(); return; }
+  showReciteQuizSummary();
+}
+function showReciteQuizSummary(){
+  const s = state.reciteQuiz.session;
+  const acc = s.attempts ? Math.round((s.correct / s.attempts) * 100) : 0;
+  const expAwarded = Math.max(3, Math.round(s.scoreEarned / 300));
+  const leveledUp = gainExp(expAwarded);
+  const breakdownHtml = s.scoreEarned ? renderScoreBreakdownHtml([
+    { label: 'Base Score', text: '+ ' + fmtScore(s.baseTotal), type: 'plus' },
+    { label: 'ระดับออกสอบ', text: '+ ' + fmtScore(s.bonusTotal), type: 'plus' },
+    { label: 'Time Bonus', text: '+ ' + fmtScore(s.timeTotal), type: 'plus' },
+    { label: `Combo Bonus (x${s.comboMult})`, text: '+ ' + fmtScore(Math.max(0, s.scoreEarned - (s.baseTotal + s.bonusTotal + s.timeTotal))), type: 'plus' },
+  ], s.scoreEarned) : '';
+  const app = document.getElementById('app');
+  const overlay = document.createElement('div');
+  overlay.className = 'result-overlay';
+  overlay.innerHTML = `
+    <div class="result-card win">
+      <h2>📖 สรุปผลการทดสอบ</h2>
+      <p>ตอบถูก ${s.correct}/${s.attempts} ข้อ · แม่นยำ ${acc}%</p>
+      <p>ได้รับ EXP +${expAwarded}</p>
+      ${breakdownHtml}
+      ${leveledUp ? `<p class="evo-banner">⭐ เลเวลอัพ! ตอนนี้ Lv.${state.save.level}</p>` : ''}
+      <div class="result-actions">
+        <button class="result-btn" onclick="closeReciteQuizSummary()">กลับ</button>
+      </div>
+    </div>
+  `;
+  app.appendChild(overlay);
+}
+function closeReciteQuizSummary(){
+  document.querySelector('.result-overlay').remove();
+  state.reciteQuiz = null;
+  state.screen = 'reciteTopicPick';
+  render();
+}
 
 /* ============ BATTLE ENGINE ============ */
 function shuffle(arr){
