@@ -75,7 +75,7 @@ img{max-width:100%; display:block}
 }
 
 /* ============ APP SHELL ============ */
-.app{max-width:960px; margin:0 auto; padding:20px 18px 70px}
+.app{position:relative; max-width:960px; margin:0 auto; padding:20px 18px 70px}
 
 /* ============ HOME / STATUS CARD ============ */
 .lee-status{
@@ -627,7 +627,7 @@ function computeBattleScoreBreakdown({ rank, timeLeft, timeLimitSec, combo }){
   const mult = comboMultiplierFor(combo);
   const total = Math.round((base + rankBonus + timeBonus) * mult);
   return {
-    total,
+    total, base, rankBonus, timeBonus, mult,
     lines: [
       { label: 'Base Score', text: fmtScore(base), type: 'plus' },
       { label: 'Rank Bonus', text: '+ ' + fmtScore(rankBonus), type: 'plus' },
@@ -1398,6 +1398,7 @@ function startBattleState({ questId, mode, monster, subjectId, topicKey, questio
     result: null, // null | 'win' | 'lose'
     expEarned: 0,
     scoreEarned: 0,
+    scoreBaseTotal: 0, scoreRankTotal: 0, scoreTimeTotal: 0, scoreComboMult: 1,
   };
   state.screen = 'battle';
   render();
@@ -1517,9 +1518,15 @@ function handleAnswer(index){
     saveSave();
     syncComboHud();
     const rank = b.monster.rank || 'D'; // quest-mode monsters have no rank tier — treat as base D
+    // Score accrues silently per answer — the breakdown popup only shows once,
+    // as a single battle-summary at the end (see showBattleScoreSummary), not
+    // on every correct answer.
     const breakdown = computeBattleScoreBreakdown({ rank, timeLeft: b.timeLeft, timeLimitSec: b.current.timeLimitSec, combo: state.save.combo });
     b.scoreEarned += breakdown.total;
-    showScoreBreakdown(breakdown.lines, breakdown.total, () => addScore(breakdown.total));
+    b.scoreBaseTotal += breakdown.base;
+    b.scoreRankTotal += breakdown.rankBonus;
+    b.scoreTimeTotal += breakdown.timeBonus;
+    b.scoreComboMult = breakdown.mult;
     const dmg = Math.round(atkForLevel(state.save.level) * (0.85 + Math.random()*0.3));
     b.monsterHp = Math.max(0, b.monsterHp - dmg);
     b.expEarned += b.current.expReward;
@@ -1598,14 +1605,31 @@ function finishBattle(result){
     saveSave();
     document.getElementById('rpg-bgm').pause();
     if (b.mode === 'ghosthunt') {
-      showDefeatFlash(b.monster, () => renderBattleResult(leveledUp, newStage, ghostUnlocked));
+      showDefeatFlash(b.monster, () => showBattleScoreSummary(() => renderBattleResult(leveledUp, newStage, ghostUnlocked)));
       return;
     }
+    showBattleScoreSummary(() => renderBattleResult(leveledUp, newStage, ghostUnlocked));
+    return;
   } else {
     playSfx('defeat');
     document.getElementById('rpg-bgm').pause();
+    showBattleScoreSummary(() => renderBattleResult(leveledUp, newStage, ghostUnlocked));
+    return;
   }
-  renderBattleResult(leveledUp, newStage, ghostUnlocked);
+}
+/* Single end-of-battle score reveal — replaces the old per-answer popup so
+   the breakdown only interrupts play once, right before the result card. */
+function showBattleScoreSummary(callback){
+  const b = state.battle;
+  if (!b.scoreEarned) { callback(); return; }
+  const comboBonus = Math.max(0, b.scoreEarned - (b.scoreBaseTotal + b.scoreRankTotal + b.scoreTimeTotal));
+  const lines = [
+    { label: 'Base Score', text: '+ ' + fmtScore(b.scoreBaseTotal), type: 'plus' },
+    { label: 'Rank Bonus', text: '+ ' + fmtScore(b.scoreRankTotal), type: 'plus' },
+    { label: 'Time Bonus', text: '+ ' + fmtScore(b.scoreTimeTotal), type: 'plus' },
+    { label: `Combo Bonus (x${b.scoreComboMult})`, text: '+ ' + fmtScore(comboBonus), type: 'plus' },
+  ];
+  showScoreBreakdown(lines, b.scoreEarned, () => { addScore(b.scoreEarned); callback(); }, document.getElementById('app'));
 }
 
 function renderBattle(app){
