@@ -425,6 +425,14 @@ img{max-width:100%; display:block}
 .lawbook-entry .mnemonic{
   margin-top:10px; background:var(--gold-soft); border-radius:8px; padding:10px 12px; font-size:12.5px; color:#6b5320;
 }
+.caselaw-block{margin-top:10px; font-size:12.5px}
+.caselaw-block > strong{color:var(--ink-soft); font-size:11.5px}
+.caselaw-item{
+  margin-top:6px; background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:8px 10px;
+}
+.caselaw-cite{font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--accent); font-size:12px}
+.caselaw-year{font-weight:400; color:var(--ink-faint); font-size:11px}
+.caselaw-summary{margin-top:3px; color:var(--ink-soft); line-height:1.55}
 .play-audio-btn{
   margin-top:8px; background:var(--accent); color:#fff; border:none; border-radius:999px;
   padding:7px 14px; font-size:12px; font-weight:700; display:inline-flex; gap:6px; align-items:center;
@@ -934,13 +942,17 @@ function renderHome(app){
       </div>
     </div>
     <div class="menu-grid">
-      <a href="#" class="menu-card" onclick="goScreen(event,'reciteTopicPick')">
-        <div class="icon">🗺️</div><div class="label">Quest Board</div>
-        <div class="sub">ท่องมาตราจริง พิมพ์แข่งเวลา ครบทุกวิชา</div>
+      <a href="#" class="menu-card hero-card" style="background-image:url('pics/game/hero/questboard.jpg')" onclick="goScreen(event,'reciteTopicPick')">
+        <div class="hero-overlay">
+          <div class="icon">🗺️</div><div class="label">Quest Board</div>
+          <div class="sub">ท่องมาตราจริง พิมพ์แข่งเวลา ครบทุกวิชา</div>
+        </div>
       </a>
-      <a href="#" class="menu-card" onclick="goScreen(event,'questModePick')">
-        <div class="icon">👹</div><div class="label">ล่าปีศาจ</div>
-        <div class="sub">ลุยด่าน ตอบคำถามปะทะปีศาจประจำมาตรา</div>
+      <a href="#" class="menu-card hero-card" style="background-image:url('pics/game/hero/demonhunt.jpg')" onclick="goScreen(event,'questModePick')">
+        <div class="hero-overlay">
+          <div class="icon">👹</div><div class="label">ล่าปีศาจ</div>
+          <div class="sub">ลุยด่าน ตอบคำถามปะทะปีศาจประจำมาตรา</div>
+        </div>
       </a>
       <a href="#" class="menu-card hero-card" style="background-image:url('pics/game/hero/ghosthunt.jpg')" onclick="goScreen(event,'ghosthunt')">
         <div class="hero-overlay">
@@ -948,13 +960,17 @@ function renderHome(app){
           <div class="sub">สุ่มพบผีไทย ตอบถูกปลดล็อกลง Gallery</div>
         </div>
       </a>
-      <a href="#" class="menu-card" onclick="goScreen(event,'gallery')">
-        <div class="icon">📔</div><div class="label">Monster Gallery</div>
-        <div class="sub">ผีไทยที่ปลดล็อกแล้ว ${Object.keys(state.save.unlockedGhosts).length}/${DATA.folkGhosts.length}</div>
+      <a href="#" class="menu-card hero-card" style="background-image:url('pics/game/hero/gallery.jpg')" onclick="goScreen(event,'gallery')">
+        <div class="hero-overlay">
+          <div class="icon">📔</div><div class="label">Monster Gallery</div>
+          <div class="sub">ผีไทยที่ปลดล็อกแล้ว ${Object.keys(state.save.unlockedGhosts).length}/${DATA.folkGhosts.length}</div>
+        </div>
       </a>
-      <a href="games.html" class="menu-card">
-        <div class="icon">🏠</div><div class="label">ศูนย์รวมเกม</div>
-        <div class="sub">กลับไปเกมอื่น ๆ</div>
+      <a href="games.html" class="menu-card hero-card" style="background-image:url('pics/game/hero/gameshub.jpg')">
+        <div class="hero-overlay">
+          <div class="icon">🏠</div><div class="label">ศูนย์รวมเกม</div>
+          <div class="sub">กลับไปเกมอื่น ๆ</div>
+        </div>
       </a>
     </div>
   `;
@@ -1799,6 +1815,17 @@ function renderLawbookEntries(entries){
     const art = codexCache.books[book] && codexCache.books[book].articles[article];
     if (!art) return '';
     const note = art.lectureNotes && art.lectureNotes[0];
+    const caseLawHtml = (art.caseLaw && art.caseLaw.length) ? `
+      <div class="caselaw-block">
+        <strong>ฎีกาที่เกี่ยวข้อง:</strong>
+        ${art.caseLaw.map(c => `
+          <div class="caselaw-item">
+            <div class="caselaw-cite">${c.citation}<span class="caselaw-year">${c.year ? ' (พ.ศ. ' + c.year + ')' : ''}</span></div>
+            <div class="caselaw-summary">${c.summary}</div>
+          </div>
+        `).join('')}
+      </div>
+    ` : '';
     return `
       <div class="lawbook-entry">
         <div class="head">
@@ -1807,6 +1834,7 @@ function renderLawbookEntries(entries){
         </div>
         <div class="text">${art.text}</div>
         ${note ? `<div class="mnemonic"><strong>เกร็ดช่วยจำ:</strong> ${note.text.slice(0,220)}${note.text.length>220?'…':''}</div>` : ''}
+        ${caseLawHtml}
         <button class="play-audio-btn" onclick="playMnemonic('${book}','${article}')">▶ ฟังเพลงช่วยจำ</button>
       </div>
     `;
