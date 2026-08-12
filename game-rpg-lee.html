@@ -220,17 +220,13 @@ img{max-width:100%; display:block}
 .dmg-pop.heal{color:var(--rpg-hp-hi)}
 @keyframes dmgPop{0%{opacity:0; transform:translate(-50%,4px)} 20%{opacity:1} 100%{opacity:0; transform:translate(-50%,-26px)}}
 
-/* ============ ARCADE SCORE BREAKDOWN (per-answer + recite-run popup) ============ */
-.score-breakdown-pop{
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:60;
-  background:rgba(10,13,22,.94); border:2px solid var(--rpg-gold);
-  box-shadow:0 0 0 2px var(--rpg-border-dk), 0 8px 24px rgba(0,0,0,.5), 0 0 20px rgba(224,195,74,.25);
-  border-radius:8px; padding:12px 16px; min-width:200px; font-family:'JetBrains Mono',monospace;
-  pointer-events:none; animation:sbPopIn .22s cubic-bezier(.2,1.4,.35,1) both;
+/* ============ ARCADE SCORE BREAKDOWN (inline, lives inside the result/recite
+   card itself — not a separate floating popup — so it appears on the same
+   screen as the win/lose menu instead of over the battle scene behind it) ============ */
+.result-score-breakdown{
+  margin:12px 0; padding:10px 14px; background:rgba(0,0,0,.28); border:1px solid var(--rpg-border-lt);
+  border-radius:8px; font-family:'JetBrains Mono',monospace; text-align:left;
 }
-.score-breakdown-pop.sb-out{animation:sbPopOut .22s ease forwards}
-@keyframes sbPopIn{from{opacity:0; transform:translate(-50%,-50%) scale(.85)} to{opacity:1; transform:translate(-50%,-50%) scale(1)}}
-@keyframes sbPopOut{to{opacity:0; transform:translate(-50%,-58%) scale(.92)}}
 .sb-line{
   display:flex; justify-content:space-between; gap:18px; font-size:11.5px; color:#c9cede;
   padding:2px 0; opacity:0; animation:sbLineIn .25s ease forwards;
@@ -241,13 +237,12 @@ img{max-width:100%; display:block}
 .sb-rule{height:1px; background:var(--rpg-border-lt); margin:6px 0; opacity:.5}
 .sb-total{
   display:flex; justify-content:space-between; gap:18px; font-family:'Press Start 2P',monospace;
-  font-size:13px; color:var(--rpg-gold); opacity:0; text-shadow:0 0 10px rgba(224,195,74,.6);
+  font-size:12px; color:var(--rpg-gold); opacity:0; text-shadow:0 0 10px rgba(224,195,74,.6);
   animation:sbTotalIn .3s cubic-bezier(.2,1.4,.35,1) forwards;
 }
 @keyframes sbTotalIn{from{opacity:0; transform:scale(1.4)} to{opacity:1; transform:scale(1)}}
 @media(max-width:420px){
-  .score-breakdown-pop{min-width:170px; padding:10px 12px}
-  .sb-line{font-size:10px} .sb-total{font-size:11px}
+  .sb-line{font-size:10px} .sb-total{font-size:10.5px}
 }
 
 .hud{width:180px; background:var(--rpg-panel); border:2px solid var(--rpg-border-dk);
@@ -649,28 +644,17 @@ function computeReciteScoreBreakdown({ length, accuracy, mult, speedTier }){
     ],
   };
 }
-/* Non-blocking "arcade combo popup": floats over hostEl (defaults to the
-   battle stage), lines count in one-by-one, holds, fades — then fires
-   onDone (which is where the caller should push the total into the HUD via
-   addScore, so the number is never added silently). */
-function showScoreBreakdown(lines, total, onDone, hostEl){
-  const host = hostEl || document.getElementById('battleStage');
-  if (!host) { if (onDone) onDone(); return; }
-  const pop = document.createElement('div');
-  pop.className = 'score-breakdown-pop';
-  pop.innerHTML = `
-    <div class="sb-lines">
-      ${lines.map((l, i) => `<div class="sb-line" style="animation-delay:${180 + i * 110}ms"><span>${l.label}</span><span class="sb-val ${l.type}">${l.text}</span></div>`).join('')}
+/* Builds the breakdown block's HTML — lives inline inside whichever card is
+   already on screen (result card, recite result block), lines counting in
+   with a staggered delay. No separate floating popup / no extra screen. */
+function renderScoreBreakdownHtml(lines, total){
+  return `
+    <div class="result-score-breakdown">
+      ${lines.map((l, i) => `<div class="sb-line" style="animation-delay:${i * 90}ms"><span>${l.label}</span><span class="sb-val ${l.type}">${l.text}</span></div>`).join('')}
       <div class="sb-rule"></div>
-      <div class="sb-total" style="animation-delay:${180 + lines.length * 110 + 80}ms"><span>TOTAL</span><span>${fmtScore(total)}</span></div>
+      <div class="sb-total" style="animation-delay:${lines.length * 90 + 60}ms"><span>TOTAL 🪙</span><span>${fmtScore(total)}</span></div>
     </div>
   `;
-  host.appendChild(pop);
-  const holdMs = 260 + lines.length * 110 + 700;
-  setTimeout(() => {
-    pop.classList.add('sb-out');
-    setTimeout(() => { pop.remove(); if (onDone) onDone(); }, 220);
-  }, holdMs);
 }
 function addScore(amount){
   const before = state.save.score;
@@ -1350,19 +1334,19 @@ function finishRecite(){
   const leveledUp = gainExp(expAwarded);
 
   run.finished = true;
-  run.result = { accuracy, cpm, score, expAwarded, speedTier, dika, leveledUp };
+  run.result = { accuracy, cpm, score, expAwarded, speedTier, dika, leveledUp, breakdown };
   playSfx(accuracy >= 90 ? 'correct' : 'hit');
   render();
-
-  const card = document.querySelector('.recite-card');
-  showScoreBreakdown(breakdown.lines, breakdown.total, () => addScore(breakdown.total), card);
+  if (score) addScore(score); // ticks the 🪙 HUD up right as this same result block appears
 }
 
 function renderReciteResultBlock(run){
   const r = run.result;
   const hasNext = state.reciteIdx + 1 < state.reciteList.length;
   return `
-    <div class="training-flag">✅ ${r.speedTier} · ${r.cpm} ตัว/นาที · แม่นยำ ${r.accuracy}% · คะแนน ${r.score} · +${r.expAwarded} EXP${r.leveledUp ? ' · 🎉 เลเวลอัป!' : ''}</div>
+    <div class="training-flag">✅ ${r.speedTier} · ${r.cpm} ตัว/นาที · แม่นยำ ${r.accuracy}%${r.leveledUp ? ' · 🎉 เลเวลอัป!' : ''}</div>
+    ${renderScoreBreakdownHtml(r.breakdown.lines, r.breakdown.total)}
+    <p style="font-size:13px; color:#c9cede; margin:4px 0 8px">+${r.expAwarded} EXP</p>
     ${r.dika ? `<div class="recite-dika">📜 <strong>ฎีกาที่เกี่ยวข้อง:</strong> ${escapeHtml(r.dika)}</div>` : ''}
     <div class="recite-actions" style="margin-top:14px; text-align:center">
       ${hasNext ? `<button class="result-btn" onclick="nextRecite()">▶ มาตราถัดไป</button>` : `<button class="result-btn" onclick="goScreen(event,'reciteList')">🏁 ครบทุกมาตราในหมวดนี้แล้ว</button>`}
@@ -1518,8 +1502,8 @@ function handleAnswer(index){
     saveSave();
     syncComboHud();
     const rank = b.monster.rank || 'D'; // quest-mode monsters have no rank tier — treat as base D
-    // Score accrues silently per answer — the breakdown popup only shows once,
-    // as a single battle-summary at the end (see showBattleScoreSummary), not
+    // Score accrues silently per answer — the breakdown only renders once,
+    // inline inside the result card at battle end (renderBattleResult), not
     // on every correct answer.
     const breakdown = computeBattleScoreBreakdown({ rank, timeLeft: b.timeLeft, timeLimitSec: b.current.timeLimitSec, combo: state.save.combo });
     b.scoreEarned += breakdown.total;
@@ -1605,31 +1589,14 @@ function finishBattle(result){
     saveSave();
     document.getElementById('rpg-bgm').pause();
     if (b.mode === 'ghosthunt') {
-      showDefeatFlash(b.monster, () => showBattleScoreSummary(() => renderBattleResult(leveledUp, newStage, ghostUnlocked)));
+      showDefeatFlash(b.monster, () => renderBattleResult(leveledUp, newStage, ghostUnlocked));
       return;
     }
-    showBattleScoreSummary(() => renderBattleResult(leveledUp, newStage, ghostUnlocked));
-    return;
   } else {
     playSfx('defeat');
     document.getElementById('rpg-bgm').pause();
-    showBattleScoreSummary(() => renderBattleResult(leveledUp, newStage, ghostUnlocked));
-    return;
   }
-}
-/* Single end-of-battle score reveal — replaces the old per-answer popup so
-   the breakdown only interrupts play once, right before the result card. */
-function showBattleScoreSummary(callback){
-  const b = state.battle;
-  if (!b.scoreEarned) { callback(); return; }
-  const comboBonus = Math.max(0, b.scoreEarned - (b.scoreBaseTotal + b.scoreRankTotal + b.scoreTimeTotal));
-  const lines = [
-    { label: 'Base Score', text: '+ ' + fmtScore(b.scoreBaseTotal), type: 'plus' },
-    { label: 'Rank Bonus', text: '+ ' + fmtScore(b.scoreRankTotal), type: 'plus' },
-    { label: 'Time Bonus', text: '+ ' + fmtScore(b.scoreTimeTotal), type: 'plus' },
-    { label: `Combo Bonus (x${b.scoreComboMult})`, text: '+ ' + fmtScore(comboBonus), type: 'plus' },
-  ];
-  showScoreBreakdown(lines, b.scoreEarned, () => { addScore(b.scoreEarned); callback(); }, document.getElementById('app'));
+  renderBattleResult(leveledUp, newStage, ghostUnlocked);
 }
 
 function renderBattle(app){
@@ -1705,11 +1672,19 @@ function renderBattleResult(leveledUp, newStage, ghostUnlocked){
     : (nextQuest
         ? `<button class="result-btn" onclick="goNextQuest('${nextQuest.id}')">▶ ด่านต่อไป: ${nextQuest.name}</button>`
         : `<button class="result-btn" onclick="rematch()">⚔️ สู้อีกครั้ง</button>`);
+  const comboBonus = Math.max(0, b.scoreEarned - (b.scoreBaseTotal + b.scoreRankTotal + b.scoreTimeTotal));
+  const scoreBreakdownHtml = (b.result === 'win' && b.scoreEarned) ? renderScoreBreakdownHtml([
+    { label: 'Base Score', text: '+ ' + fmtScore(b.scoreBaseTotal), type: 'plus' },
+    { label: 'Rank Bonus', text: '+ ' + fmtScore(b.scoreRankTotal), type: 'plus' },
+    { label: 'Time Bonus', text: '+ ' + fmtScore(b.scoreTimeTotal), type: 'plus' },
+    { label: `Combo Bonus (x${b.scoreComboMult})`, text: '+ ' + fmtScore(comboBonus), type: 'plus' },
+  ], b.scoreEarned) : '';
   overlay.innerHTML = b.result === 'win' ? `
     <div class="result-card win">
       <h2>🎉 ชนะแล้ว!</h2>
       <p>ปราบ ${b.monster.name} สำเร็จ</p>
-      <p>ได้รับ EXP +${b.expEarned} · 🪙 +${fmtScore(b.scoreEarned)}</p>
+      <p>ได้รับ EXP +${b.expEarned}</p>
+      ${scoreBreakdownHtml}
       ${isHunt && ghostUnlocked ? `<p class="evo-banner">👻 ปลดล็อก "${b.monster.name}" ใน Monster Gallery แล้ว!</p>` : ''}
       ${leveledUp ? `<p class="evo-banner">⭐ เลเวลอัพ! ตอนนี้ Lv.${state.save.level}</p>` : ''}
       ${newStage ? `<p class="evo-banner">🐱 สำลีวิวัฒนาการ: ${newStage.title}!<br>${newStage.desc}</p>` : ''}
@@ -1730,6 +1705,7 @@ function renderBattleResult(leveledUp, newStage, ghostUnlocked){
     </div>
   `;
   app.appendChild(overlay);
+  if (b.scoreEarned) addScore(b.scoreEarned); // ticks the 🪙 HUD up right as this same screen appears
 }
 function rematch(){
   document.querySelector('.result-overlay').remove();
