@@ -592,12 +592,9 @@ function evolutionCrossed(oldLevel, newLevel){
    Rank/time bonuses only apply to battle mode (quest + ล่าผี); recite mode
    keeps its own length*accuracy*speed formula (see computeReciteScoreBreakdown)
    but now feeds the same breakdown UI + the same main score HUD. */
-// Scaled ×100 from the original arcade pass so scores climb into the
-// hundred-thousands per big hit and cross into the millions over a normal
-// play session (persists forever in state.save.score, never resets).
-const SCORE_BASE = 100000;
-const SCORE_RANK_BONUS = { D: 0, C: 15000, B: 30000, A: 50000, S: 75000, SS: 100000 };
-const SCORE_TIME_BONUS_MAX = 50000;
+const SCORE_BASE = 2000;
+const SCORE_RANK_BONUS = { D: 0, C: 300, B: 600, A: 1000, S: 1500, SS: 2000 };
+const SCORE_TIME_BONUS_MAX = 500; // kept in the hundreds, not thousands
 // Combo persists across battles (state.save.combo) — an arcade "don't break
 // the chain" streak, not scoped to a single fight. Resets on any wrong/timeout.
 const SCORE_COMBO_TIERS = [
@@ -606,7 +603,7 @@ const SCORE_COMBO_TIERS = [
   { min: 5, mult: 2   },
   { min: 8, mult: 3   },
 ];
-const RECITE_BASE_PER_CHAR = 100; // same ×100 scale-up, keeps the original length*accuracy*mult formula's shape
+const RECITE_BASE_PER_CHAR = 2; // scaled to match SCORE_BASE, keeps the original length*accuracy*mult formula's shape
 
 function fmtScore(n){ return Math.round(n).toLocaleString('en-US'); }
 function comboMultiplierFor(combo){
