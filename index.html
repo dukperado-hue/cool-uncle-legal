@@ -764,7 +764,7 @@ footer{
           <div class="name">ประมวลวิอาญา</div>
           <div class="status">325 มาตรา</div>
         </a>
-        <a href="game-rpg-lee.html" class="codex-card featured" onmouseenter="playHoverSound()">
+        <a href="game-rpg-lee.html?v=20260812b" class="codex-card featured" onmouseenter="playHoverSound()">
           <div class="icon">🐱</div>
           <div class="name">RPG จำมาตรา</div>
           <div class="status">ผจญภัยกับลี</div>
@@ -945,7 +945,7 @@ function buildSearchIndex(){
     items.push({ name: s.name, desc: s.desc, icon: s.icon, href: s.href, tag: 'วิชา' });
   });
   CODEX_BOOKS.forEach(b => items.push({ ...b, tag: 'ประมวล' }));
-  items.push({ name: 'RPG จำมาตรา', desc: 'เกม RPG ผจญภัยกับลี ตอบมาตราปราบปีศาจ', icon: '🐱', href: 'game-rpg-lee.html', tag: 'เกม' });
+  items.push({ name: 'RPG จำมาตรา', desc: 'เกม RPG ผจญภัยกับลี ตอบมาตราปราบปีศาจ', icon: '🐱', href: 'game-rpg-lee.html?v=20260812b', tag: 'เกม' });
   items.push({ name: 'เกม', desc: 'เกมสถานการณ์และเกมทั้งหมด', icon: '🎮', href: 'games.html', tag: 'เกม' });
   return items;
 }
