@@ -18,6 +18,17 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "กฎหมายจากข่าวและคดีดัง — สรุปข้อกฎหมายคดีป้าดา ยุบพรรค พินัยกรรม ลักวัว โดยโยงมาตราจริงจากประมวลกฎหมายไทย", "description": "รวมบทความกฎหมายจากข่าวและคดีดัง: คดีป้าดากับกฎหมายมรดก ยุบพรรคมาตรา 92 พินัยกรรมโมฆะ และลักวัว — ยิงวัว โดยอธิบายข้อกฎหมายพร้อมโยงไปอ่านมาตรารายตัวในประมวลกฎหมายไทยกว่า 4,100 มาตรา", "inLanguage": "th", "url": "https://coolunclelab.com/news-index.html", "publisher": {"@type": "Organization", "name": "Cool Uncle Legal Lab", "url": "https://coolunclelab.com"}, "dateModified": "2026-08-14", "mainEntityOfPage": "https://coolunclelab.com/news-index.html"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Legislation", "name": "กฎหมายไทย — อรรถาธิบายข่าวและคดีดัง", "inLanguage": "th", "url": "https://coolunclelab.com/news-index.html", "jurisdiction": "ประเทศไทย"}</script>
 <style>
+
+.dice-box{background:linear-gradient(135deg,#FFF7E6,#FDF3D0);border:2px solid var(--gold,#B08A3C);border-radius:14px;padding:18px 20px;margin:18px 0 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.dice-btn{background:var(--gold,#B08A3C);color:#fff;border:none;border-radius:999px;padding:12px 26px;font-size:1.05rem;font-weight:800;cursor:pointer;font-family:'Sarabun',sans-serif}
+.dice-btn:hover{background:#9A7730}
+.dice-note{color:#7A6420;font-size:.92rem;flex:1;min-width:180px}
+.news-auto-item{background:var(--card,#FDFCF8);border:1px dashed var(--line,#C9C4B4);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+.news-auto-item a{color:var(--accent,#2E4A7A);font-weight:800;text-decoration:none;font-size:1.05rem}
+.news-auto-item a:hover{text-decoration:underline}
+.news-auto-item p{color:var(--ink-soft,#5A6072);font-size:.92rem;line-height:1.6;margin-top:4px}
+.news-auto-item .auto-tag{display:inline-block;background:#1E7A4F;color:#fff;border-radius:999px;padding:2px 10px;font-size:.72rem;font-weight:700;margin-bottom:6px}
+
 .static-wrap{max-width:900px;margin:0 auto;padding:18px 14px 60px;font-family:'Sarabun',sans-serif;color:var(--ink,var(--ink,#22283A));}
 .static-h1{font-family:'Noto Serif Thai',serif;font-size:1.7rem;font-weight:900;margin:18px 0 4px;line-height:1.4}
 .static-crumb{color:var(--ink-faint,#9AA0B0);font-size:.85rem;margin-bottom:14px}
@@ -55,7 +66,11 @@
   </div>
 
   <div style="margin-top:18px">
-    <div class="news-item">
+      <div class="dice-box">
+    <button class="dice-btn" id="diceBtn" onclick="rollDice()">🎲 สุ่มคดีวันนี้</button>
+    <span class="dice-note" id="diceNote">กดเพื่อสุ่มเรื่องกฎหมายจากข่าวและคดีดัง (4 เรื่อง)</span>
+  </div>
+<div class="news-item">
       <a href="news-pada-moradok.html">🔥 คดีป้าดา ทวงคืนที่ดินวัดป่าอดุลยาราม 30 ปี — มรดก ทายาทโดยธรรม และอายุความคดีมรดก</a>
       <p>ใครคือทายาทโดยธรรม มรดกตกทอดแก่ใคร ผู้ยักยอกทรัพย์มรดกถูกกำจัดมิให้รับมรดกอย่างไร และทำไมคดีมรดกจึงฟ้องได้เพียง 1 ปี — รวม ป.พ.พ. มาตรา 1599-1754</p>
     </div>
@@ -83,5 +98,27 @@
     <a href="index.html">← หน้าแรก</a>
   </div>
 </div>
+
+<script>
+var NEWS_DATA=[{"slug": "news-pada-moradok", "title": "🔥 คดีป้าดา ทวงคืนที่ดินวัดป่าอดุลยาราม 30 ปี — มรดก ทายาทโดยธรรม และอายุความคดีมรดก", "desc": "ใครคือทายาทโดยธรรม มรดกตกทอดแก่ใคร ผู้ยักยอกทรัพย์มรดกถูกกำจัดมิให้รับมรดกอย่างไร และทำไมคดีมรดกจึงฟ้องได้เพียง 1 ปี — รวม ป.พ.พ. มาตรา 1599-1754"}, {"slug": "news-yub-pak-maatra-92", "title": "🔥 ยุบพรรค ตามมาตรา 92 คืออะไร — ข้อกฎหมายคดียุบพรรคและการเลือกตั้ง 2569", "desc": "เงื่อนไขยุบพรรค โทษกรรมการบริหารพรรค ศาลรัฐธรรมนูญทำงานอย่างไร และกติกาเลือกตั้ง ส.ส. 500 คน — รวมรัฐธรรมนูญ พ.ศ. 2560 และ พ.ร.ป.พรรคการเมือง"}, {"slug": "news-phinyagam-mokha", "title": "📜 พินัยกรรมแบบไหน \"โมฆะ\" — แบบพินัยกรรม 5 แบบ และข้อห้ามที่คนมักพลาด", "desc": "พินัยกรรมอายุต่ำกว่า 15 ปี / คนไร้ความสามารถ แบบเอกสารธรรมดา-เขียนเอง-ฝ่ายเมือง-ลับ ทำไมผิดแบบแล้วเป็นโมฆะ และอายุความฟ้องเพิกถอน 3 เดือน"}, {"slug": "news-ka-wo-lak", "title": "🐄 ฆ่าวัว ยิงวัว ลักวัว — ผิดกฎหมายข้อไหน โทษเท่าไร", "desc": "ลักทรัพย์ฉกรรจ์เมื่อเป็นโคกระบือของเกษตรกร (โทษ 3-10 ปี) กรรโชก ทำลายทรัพย์ รับของโจร และกรณียิงวัวประชดเรื่องมรดก — รวม ป.อ. ฐานความผิดเกี่ยวกับทรัพย์"}];
+function rollDice() {
+  var it = NEWS_DATA[Math.floor(Math.random() * NEWS_DATA.length)];
+  var note = document.getElementById("diceNote");
+  note.innerHTML = '<a href="' + it.slug + '.html" style="color:#7A6420;font-weight:700">' + it.title + '</a>';
+}
+function renderAutoItems() {
+  NEWS_DATA.forEach(function(it) {
+    if (it.slug && it.slug.indexOf("news-auto") === 0) {
+      var wrap = document.getElementById("autoItemsArea");
+      if (!wrap) { wrap = document.createElement("div"); wrap.id = "autoItemsArea"; document.body.appendChild(wrap); }
+      var d = document.createElement("div");
+      d.className = "news-auto-item";
+      d.innerHTML = '<span class="auto-tag">ข่าวอัปเดตอัตโนมัติ</span><a href="' + it.slug + '.html">' + it.title + '</a><p>' + it.desc + '</p>';
+      wrap.appendChild(d);
+    }
+  });
+}
+document.addEventListener("DOMContentLoaded", renderAutoItems);
+</script>
 </body>
 </html>
