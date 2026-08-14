@@ -12,7 +12,20 @@
   gtag('config', 'G-FC9EVYB1YG');
 </script>
 
-<title>มาตรา - ประมวลกฎหมาย</title>
+<title>มาตรา - ประมวลกฎหมาย | Cool Uncle Legal Lab</title>
+<meta name="description" content="">
+<link rel="canonical" href="">
+<script type="application/ld+json" id="article-schema"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Cool Uncle Legal Lab",
+  "url": "https://coolunclelab.com/",
+  "inLanguage": "th"
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;900&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -1943,6 +1956,57 @@ async function loadAndRender() {
 }
 
 document.addEventListener('DOMContentLoaded', loadAndRender);
+</script>
+<script>
+// --- SEO: dynamic title, description, canonical, JSON-LD per article ---
+(function(){
+  function updSeo(article){
+    if(!article) return;
+    var num = article.number || '';
+    // BOOK_TITLES / currentBookType อาจเป็น top-level const/let ของ main script — เข้าผ่าน window ก่อน แล้วใช้ try/catch
+    var bookName = '';
+    try{ bookName = (typeof BOOK_TITLES !== 'undefined' ? BOOK_TITLES : (window.BOOK_TITLES||{}))[typeof currentBookType !== 'undefined' ? currentBookType : window.currentBookType] || ''; }catch(e){}
+    var ph = (article.meta && article.meta.phaak) || '';
+    var title = bookName + ' มาตรา ' + num + (ph ? ' — ' + ph : '') + ' | Cool Uncle Legal Lab';
+    document.title = title;
+    var descEl = document.querySelector('meta[name="description"]');
+    if(descEl){
+      var text = (article.text || '').replace(/\n/g,' ').substring(0, 220);
+      descEl.setAttribute('content', 'มาตรา ' + num + ' ' + bookName + ': ' + text + '... พร้อมจุดดักข้อสอบจากคำบรรยาย');
+    }
+    var id = article.id;
+    var canonical = 'https://coolunclelab.com/codex-article-viewer.html?id=' + encodeURIComponent(id);
+    var link = document.querySelector('link[rel="canonical"]');
+    if(link){ link.setAttribute('href', canonical); }
+    var schema = document.getElementById('article-schema');
+    if(schema){
+      schema.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": title,
+        "inLanguage": "th",
+        "about": { "@type": "Thing", "name": bookName + ' มาตรา ' + num },
+        "articleBody": article.text || ''
+      });
+    }
+  }
+  window.__CU_SET_SEO__ = updSeo;
+  // hook: call after article renders (renderArticleBody is defined in the main script)
+  try{
+    var rb = window.renderArticleBody;
+    window.renderArticleBody = function(a){
+      rb(a);
+      updSeo(a);
+    };
+  }catch(e){}
+  // fallback: poll until currentArticleObj is set
+  document.addEventListener('DOMContentLoaded', function(){
+    var trySet = setInterval(function(){
+      if(window.currentArticleObj){ updSeo(window.currentArticleObj); clearInterval(trySet); }
+    }, 300);
+    setTimeout(function(){ clearInterval(trySet); }, 15000);
+  });
+})();
 </script>
 </body>
 </html>
