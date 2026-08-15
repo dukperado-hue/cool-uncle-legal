@@ -127,6 +127,33 @@ footer{
 .mt-32{margin-top:32px}
 .mb-16{margin-bottom:16px}
 
+/* ============ MAGAZINE / NEWS STYLES ============ */
+.mag-wrap{max-width:920px;margin:0 auto;padding:0 18px 60px}
+.mag-head{font-family:'Noto Serif Thai',serif;font-size:1.35rem;font-weight:900;margin:10px 0 16px;padding:0;color:#1B2437;display:flex;align-items:center;gap:10px}
+.mag-head::after{content:"";flex:1;height:3px;border-radius:3px;background:linear-gradient(90deg,#B08A3C 0%,transparent 100%)}
+.mag-head-ico{font-size:1.5rem}
+.mag-card{display:block;background:#FDFCF8;border:1px solid #E5E1D6;border-top:4px solid var(--accent,#2E4A7A);border-radius:14px;padding:18px 22px;margin-bottom:14px;box-shadow:0 2px 8px rgba(34,40,58,.07);transition:transform .18s ease,box-shadow .18s ease;text-decoration:none;color:inherit}
+.mag-card:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(34,40,58,.16)}
+.mag-card::after{content:"";display:table;clear:both}
+.mag-card h3{font-family:'Noto Serif Thai',serif;font-size:1.22rem;font-weight:900;color:#1B2437;margin:8px 0 6px;line-height:1.45}
+.mag-card p{color:#5A6072;font-size:.96rem;line-height:1.65;margin:0}
+.mag-tag{display:inline-block;border-radius:999px;padding:3px 13px;font-size:.76rem;font-weight:800;background:#2E4A7A;color:#fff;border:1px solid #2E4A7A}
+.mag-tag.auto-tag{background:#1E7A4F;color:#fff;border-color:#1E7A4F}
+.mag-tag.exam{background:#B08A3C;color:#fff;border-color:#B08A3C}
+.mag-breaking{border-top:4px solid #1E7A4F;position:relative;overflow:hidden}
+.mag-breaking::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#1E7A4F,#B08A3C)}
+.mag-card-media{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.mag-mascot{border-radius:10px;transform:rotate(-3deg);box-shadow:0 3px 10px rgba(34,40,58,.15)}
+.mag-ticker{overflow:hidden;background:#1B2437;border-radius:12px;padding:9px 16px;display:flex;align-items:center;gap:14px;margin:6px 0 18px;box-shadow:0 3px 12px rgba(27,36,55,.25)}
+.mag-ticker-label{flex-shrink:0;font-size:.78rem;font-weight:800;color:#FFD5D5;background:rgba(214,57,57,.2);border:1px solid #D63939;border-radius:999px;padding:2px 11px}
+.mag-ticker-track{flex:1;overflow:hidden;white-space:nowrap}
+.mag-ticker-item{display:inline-block;color:#F5F2E8;font-size:.88rem;padding-right:46px;opacity:.92}
+@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.mag-ticker-track{animation:tickerScroll 38s linear infinite}
+.mag-ticker-track:hover{animation-play-state:paused}
+.mag-ticker-item:nth-child(n){white-space:nowrap}
+@media(prefers-reduced-motion:reduce){.mag-ticker-track{animation:none}}
+
 /* ============ MOBILE ============ */
 @media(max-width:520px){
   .audio-control{padding:10px 12px;font-size:12px}
@@ -136,3 +163,20 @@ footer{
   .youtube-item .title{font-size:13px}
   .youtube-item .channel{font-size:11px}
 }
+
+
+/* ===== คดีดัง dropdown (v7) ===== */
+.case-drop-section{margin:26px 0 8px}
+.case-drop-section .mag-head{font-size:1.18rem;margin:0 0 12px}
+.case-filter{width:100%;max-width:460px;display:block;font-size:1rem;padding:11px 14px;border:1px solid #d1d5db;border-radius:12px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23374151' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat right 14px center;box-shadow:0 2px 6px rgba(27,36,55,.08);cursor:pointer;margin-bottom:14px;appearance:auto}
+.case-group{margin-bottom:18px}
+.case-group-head{font-family:'Noto Serif Thai',serif;font-size:1.05rem;font-weight:800;border-bottom:3px solid;padding:4px 0 7px;margin:0 0 8px}
+.case-list{list-style:none;padding:0;margin:0}
+.case-list li{padding:7px 10px;border-radius:9px;margin:3px 0;background:#fff;border:1px solid #eef0f3;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.case-list li:hover{background:#f7f9fc;border-color:#d1d9e6}
+.case-list li a{text-decoration:none;font-weight:600;font-size:.95rem}
+.case-tag{font-size:.72rem;font-weight:700;border:1px solid;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.case-exam{font-size:.8rem}
+@media(max-width:640px){.case-list li a{font-size:.9rem}}
+/* สิงโต wrap ซ้ายของข้อความ (แทน card media) */
+.mag-mascot-wrap{float:left;width:84px;height:105px;object-fit:contain;margin:2px 14px 8px 0;border-radius:10px;transform:rotate(-3deg);box-shadow:0 3px 10px rgba(34,40,58,.15);flex-shrink:0}
