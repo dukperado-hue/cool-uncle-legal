@@ -180,3 +180,24 @@ footer{
 @media(max-width:640px){.case-list li a{font-size:.9rem}}
 /* สิงโต wrap ซ้ายของข้อความ (แทน card media) */
 .mag-mascot-wrap{float:left;width:84px;height:105px;object-fit:contain;margin:2px 14px 8px 0;border-radius:10px;transform:rotate(-3deg);box-shadow:0 3px 10px rgba(34,40,58,.15);flex-shrink:0}
+
+/* ===== คดีดัง v9 UI 3 โหมด (คดีใหม่วันละ 1 คดี / ลูกเต๋า / คลังคดีเก่าตามปี) ===== */
+.mode-panel{margin:20px 0 28px}
+.mode-today-card{display:block;background:#fff;border-radius:18px;padding:22px 26px;box-shadow:0 6px 20px rgba(0,0,0,.08);text-decoration:none;color:inherit;border-top:5px solid var(--accent,#2E4A7A);transition:transform .18s,box-shadow .18s}
+.mode-today-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.12)}
+.mode-today-card .mag-tag{display:inline-block;margin-bottom:10px}
+.mode-today-card h2{font-family:'Noto Serif Thai',serif;font-size:1.55rem;font-weight:900;margin:8px 0 8px;color:#1B2437;line-height:1.35}
+.mode-today-card p{color:#5A6072;font-size:1rem;line-height:1.75}
+.mode-today-card .mag-cta{display:block;margin-top:14px;font-weight:700;font-size:.95rem}
+.mode-today-video{margin:14px 0;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(27,36,55,.14)}
+.mode-today-video iframe{width:100%;aspect-ratio:16/9;display:block}
+.case-date{font-size:.82rem;font-weight:500;color:#94a3b8;margin-left:8px;white-space:nowrap}
+.case-drop-note{color:#6b7280;font-size:.98rem;line-height:1.7;background:#fff;border:1px dashed #d1d9e6;border-radius:14px;padding:14px 18px}
+.yr-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.yr-btn{background:#f3f4f6;border:1px solid #d1d5db;border-radius:999px;padding:7px 16px;font-size:.92rem;font-weight:600;cursor:pointer;transition:all .15s;font-family:'Sarabun',sans-serif}
+.yr-btn:hover{background:#e5e7eb}
+.yr-btn.active{background:#1B2437;color:#fff;border-color:#1B2437;box-shadow:0 3px 8px rgba(27,36,55,.25)}
+.yr-loadmore{display:inline-block;margin:10px 0 6px;padding:10px 20px;background:#1B2437;color:#fff;border:none;border-radius:12px;cursor:pointer;font-size:.95rem;font-weight:700;font-family:'Sarabun',sans-serif;transition:background .15s}
+.yr-loadmore:hover{background:#2E3A55}
+.yr-note{font-size:.85rem;color:#94a3b8;margin:14px 0 0}
+@media(max-width:640px){.mode-today-card h2{font-size:1.25rem}.mode-today-card{padding:16px 18px}}
