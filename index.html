@@ -639,6 +639,7 @@ footer{
     <button class="tab-btn" onclick="switchTab('postgrad')" onmouseenter="playHoverSound()">📚 เนติฯ</button>
     <button class="tab-btn" onclick="switchTab('lawyer')" onmouseenter="playHoverSound()">⚖️ ตั๋วทนาย</button>
     <button class="tab-btn" onclick="switchTab('codex')" onmouseenter="playHoverSound()">📖 ประมวล</button>
+    <a href="news-index.html" class="tab-btn" onmouseenter="playHoverSound()">🔥 ข่าวและคดีดัง</a>
     <a href="games.html" class="tab-btn" onmouseenter="playHoverSound()">🎮 เกม</a>
   </div>
 
@@ -817,6 +818,13 @@ footer{
           <div class="icon">💡</div>
           <div class="name">ทรัพย์สินทางปัญญา</div>
           <div class="status">5 ฉบับ</div>
+        </a>
+      </div>
+      <div class="codex-grid-compact" style="margin-top:14px">
+        <a href="news-index.html" class="codex-card compact" onmouseenter="playHoverSound()" style="flex:1 1 100%;max-width:100%">
+          <div class="icon">🔥</div>
+          <div class="name">กฎหมายจากข่าวและคดีดัง</div>
+          <div class="status">คดีป้าดา · ยุบพรรค · พินัยกรรม · ลักวัว — สรุปข้อกฎหมายจากเรื่องจริง</div>
         </a>
       </div>
     </div>
@@ -1183,6 +1191,9 @@ if (requestedTab && document.getElementById('tab-' + requestedTab)) {
   switchTab(requestedTab);
   document.querySelector(`.tab-btn[onclick="switchTab('${requestedTab}')"]`)?.classList.add('active');
 }
+// Deep-link to external pages: index.html?go=news-index
+const requestedGo = new URLSearchParams(location.search).get('go');
+if (['news-index'].includes(requestedGo)) { location.replace(requestedGo + '.html'); }
 
 // Embed mode (?embed=1) — used by ประมวล.com's iframe wrapper so it reads as
 // its own focused page (see .embed-header / body.embed-mode CSS) instead of
