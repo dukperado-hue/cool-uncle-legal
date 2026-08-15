@@ -566,7 +566,7 @@ function renderLectures(){
         <div class="lecture-title">${l.title}</div>
         <div class="lecture-toggle">▾</div>
       </div>
-      <div class="lecture-body">${l.video ? `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${l.video}" title="วิดีโอประกอบบรรยายครั้งที่ ${l.n}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div></div>` : ''}${linkArticles(boldQuotes(highlightText(l.text.replace(/</g,'&lt;'))))}</div>
+      <div class="lecture-body">${l.video ? `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${l.video}" title="วิดีโอประกอบบรรยายครั้งที่ ${l.n}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="video-credit">📺 วิดีโอแนะนำเกี่ยวกับคดีนี้ — จากช่อง <a href="https://www.youtube.com/@CoolUncleLaw/videos" target="_blank" rel="noopener">Cool Uncle Law</a></div></div>` : ''}${linkArticles(boldQuotes(highlightText(l.text.replace(/</g,'&lt;'))))}</div>
     </div>
   ` : `
     <div class="lecture-row pending">
@@ -858,5 +858,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+<link rel="stylesheet" href="legal-disclaimer.css">
+<script src="legal-footer.js"></script>
 </body>
 </html>

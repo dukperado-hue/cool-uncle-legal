@@ -519,7 +519,7 @@ const TTS = (function(){
 function escapeHtml(s){ return (s||'').replace(/</g,'&lt;'); }
 function renderVideoHtml(id, caption){
   if (!id) return '';
-  return `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${id}" title="${escapeHtml(caption||'วิดีโอประกอบบรรยาย')}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>${caption ? `<div class="video-caption">${escapeHtml(caption)}</div>` : ''}</div>`;
+  return `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${id}" title="${escapeHtml(caption||'วิดีโอประกอบบรรยาย')}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe><div class="video-credit">📺 วิดีโอแนะนำเกี่ยวกับคดีนี้ — จากช่อง <a href="https://www.youtube.com/@CoolUncleLaw/videos" target="_blank" rel="noopener">Cool Uncle Law</a></div></div>${caption ? `<div class="video-caption">${escapeHtml(caption)}</div>` : ''}</div>`;
 }
 function renderImagesHtml(images, layout){
   if (!images || !images.length) return '';
@@ -918,5 +918,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+<link rel="stylesheet" href="legal-disclaimer.css">
+<script src="legal-footer.js"></script>
 </body>
 </html>

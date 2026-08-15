@@ -1,0 +1,23 @@
+/* Legal disclaimer footer — shared across coolunclelab.com */
+.legal-disclaimer-bar{
+  display:block;
+  width:100%;
+  box-sizing:border-box;
+  padding:14px 18px;
+  margin-top:24px;
+  background:#fdf6ec;
+  border-top:3px solid #d97706;
+  color:#78350f;
+  font-family:'Sarabun','Noto Serif Thai',sans-serif;
+  font-size:13px;
+  line-height:1.7;
+  text-align:center;
+}
+.legal-disclaimer-bar .ld-label{
+  font-weight:700;
+  color:#b45309;
+  white-space:nowrap;
+}
+@media (max-width:640px){
+  .legal-disclaimer-bar{font-size:12px;padding:12px 12px;}
+}

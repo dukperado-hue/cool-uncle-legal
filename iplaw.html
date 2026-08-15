@@ -583,13 +583,14 @@ const TTS = (function(){
 })();
 
 function renderLectureBody(l){
-  let escaped = l.text.replace(/</g,'&lt;');
+let escaped = l.text.replace(/</g,'&lt;');
   escaped = escaped.replace(/\*\*([\s\S]+?)\*\*/g, '<strong>$1</strong>');
-  const video = l.video ? `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${l.video}" title="วิดีโอประกอบบรรยายครั้งที่ ${l.n}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div></div>` : '';
+  const video = l.video ? `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${l.video}" title="วิดีโอประกอบบรรยายครั้งที่ ${l.n}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="video-credit">📺 วิดีโอแนะนำเกี่ยวกับคดีนี้ — จากช่อง <a href="https://www.youtube.com/@CoolUncleLaw/videos" target="_blank" rel="noopener">Cool Uncle Law</a></div></div>` : '';
   if (l.images && l.images.length) {
     const pair = `<div class="lecture-img-pair">${l.images.map(src => `<img src="${src}" alt="" loading="lazy" onerror="this.remove()">`).join('')}</div>`;
     return video + (escaped.includes('[[IMGPAIR]]') ? escaped.replace('[[IMGPAIR]]', pair) : pair + escaped);
   }
+>>>>>>> 29656e6 (feat: legal disclaimer footer on all pages + video owner credits (Cool Uncle Law channel) + bunkfai district office contacts (930 amphoe, 611 phones))
   if (!l.image) return video + escaped;
   const img = `<img src="${l.image}" alt="" loading="lazy" class="lecture-img" onerror="this.remove()">`;
   return video + (escaped.includes('[[IMG]]') ? escaped.replace('[[IMG]]', img) : img + escaped);
@@ -884,5 +885,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+<link rel="stylesheet" href="legal-disclaimer.css">
+<script src="legal-footer.js"></script>
 </body>
 </html>
