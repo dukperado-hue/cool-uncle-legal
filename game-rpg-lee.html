@@ -534,7 +534,7 @@ img{max-width:100%; display:block}
 
 const MUTE_KEY = 'codex-drone-muted'; // shared site-wide mute toggle
 const SAVE_KEY = 'leeRpgSave_v1';
-const DATA_URL = 'games/rpg-data.json?v=20260812a';
+const DATA_URL = 'games/rpg-data.json?v=20260815a';
 const CODEX_URL = 'codex-data.json';
 const UNLOCK_THRESHOLD = 3; // correct answers on a มาตรา before its Lawbook entry unlocks
 
@@ -824,13 +824,13 @@ function bookLabel(book){ return BOOK_LABELS[book] || book; }
 function articleLabel(article){ return /^[0-9]+(\/[0-9]+)?$/.test(String(article)) ? ('มาตรา ' + article) : article; }
 const GHOSTHUNT_MAP_IMG = 'pics/game/rpg/map/law_player_select.jpg';
 const GHOSTHUNT_TOPICS = [
-  { topic: 'บุคคล', icon: '🧍', dataTopics: [], pos: { x: 13.1, y: 13.0 } },
+  { topic: 'บุคคล', icon: '🧍', dataTopics: ['บุคคล'], pos: { x: 13.1, y: 13.0 } },
   { topic: 'หนี้', icon: '⛓️', dataTopics: ['หนี้'], bg: 'sea', pos: { x: 25.6, y: 13.0 } },
   { topic: 'ทรัพย์', icon: '💎', dataTopics: ['ทรัพย์'], bg: 'alps', pos: { x: 51.6, y: 13.0 } },
   { topic: 'สัญญาทางพาณิชย์', icon: '🤝', dataTopics: ['สัญญาทางพาณิชย์'], pos: { x: 65.4, y: 13.0 } },
   { topic: 'นิติกรรม', icon: '📝', dataTopics: ['นิติกรรม'], bg: 'shinjuku', pos: { x: 89.1, y: 13.0 } },
-  { topic: 'อาญา', icon: '⚔️', dataTopics: ['เจตนาและประมาท'], bg: 'tokyo', pos: { x: 13.1, y: 34.5 } },
-  { topic: 'อาญาภาคความผิด', icon: '🚨', dataTopics: ['ความผิดต่อชีวิต'], bg: 'cemetery', pos: { x: 28.1, y: 39.5 } },
+  { topic: 'อาญา', icon: '⚔️', dataTopics: ['เจตนาและประมาท', 'หลักทั่วไปทางอาญา'], bg: 'tokyo', pos: { x: 13.1, y: 34.5 } },
+  { topic: 'อาญาภาคความผิด', icon: '🚨', dataTopics: ['ความผิดต่อชีวิต', 'ทำร้ายร่างกาย', 'หมิ่นประมาท', 'ฉ้อโกง', 'ยักยอกทรัพย์', 'รับของโจร', 'บุกรุก'], bg: 'cemetery', pos: { x: 28.1, y: 39.5 } },
   { topic: 'ครอบครัว', icon: '👨‍👩‍👧', dataTopics: ['ครอบครัว'], pos: { x: 70.1, y: 34.5 } },
   { topic: 'มรดก', icon: '🪦', dataTopics: ['มรดก'], bg: 'flowerfield', pos: { x: 77.5, y: 20.5 } },
   { topic: 'ละเมิด', icon: '🩹', dataTopics: ['ละเมิด'], bg: 'hospital', pos: { x: 89.1, y: 42.0 } },
