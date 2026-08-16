@@ -129,57 +129,64 @@
     </div>
   </div>
 
+  <style>
+    .yr-select-label{font-weight:700;color:#1B2437;margin-right:10px;font-size:1.02rem}
+    .yr-select{font:inherit;border:2px solid #B08A3C;border-radius:10px;padding:9px 36px 9px 14px;background:#fff url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%278%27%3E%3Cpath d=%27M1 1l5 6 5-6%27 fill=%27%237A6420%27/%3E%3C/svg%3E") no-repeat right 12px center;background-size:12px;min-width:240px;max-width:100%;color:#1B2437;box-shadow:0 2px 8px rgba(27,36,55,.12);cursor:pointer}
+  </style>
   <div class="mode-panel" id="mode-archive">
     <h3 class="mag-head">&#128339; คดีเก่าตามปี — คลังคดีดัง</h3>
     <div class="yr-tabs">
-  <button class="yr-btn active" data-year="2567">2567 (2 คดี)</button>
-  <button class="yr-btn " data-year="2566">2566 (2 คดี)</button>
-  <button class="yr-btn " data-year="2565">2565 (3 คดี)</button>
-  <button class="yr-btn " data-year="2564">2564 (1 คดี)</button>
-  <button class="yr-btn " data-year="2563">2563 (1 คดี)</button>
-  <button class="yr-btn " data-year="2562">2562 (1 คดี)</button>
-  <button class="yr-btn " data-year="2560">2560 (1 คดี)</button>
-  <button class="yr-btn " data-year="2559">2559 (1 คดี)</button>
-  <button class="yr-btn " data-year="2557">2557 (3 คดี)</button>
-  <button class="yr-btn " data-year="2556">2556 (2 คดี)</button>
-  <button class="yr-btn " data-year="2555">2555 (4 คดี)</button>
-  <button class="yr-btn " data-year="2553">2553 (2 คดี)</button>
-  <button class="yr-btn " data-year="2551">2551 (1 คดี)</button>
-  <button class="yr-btn " data-year="2550">2550 (1 คดี)</button>
-  <button class="yr-btn " data-year="2549">2549 (2 คดี)</button>
-  <button class="yr-btn " data-year="2548">2548 (2 คดี)</button>
-  <button class="yr-btn " data-year="2547">2547 (2 คดี)</button>
-  <button class="yr-btn " data-year="2546">2546 (1 คดี)</button>
-  <button class="yr-btn " data-year="2545">2545 (1 คดี)</button>
-  <button class="yr-btn " data-year="2544">2544 (1 คดี)</button>
-  <button class="yr-btn " data-year="2543">2543 (2 คดี)</button>
-  <button class="yr-btn " data-year="2542">2542 (1 คดี)</button>
-  <button class="yr-btn " data-year="2541">2541 (1 คดี)</button>
-  <button class="yr-btn " data-year="2540">2540 (2 คดี)</button>
-  <button class="yr-btn " data-year="2539">2539 (2 คดี)</button>
-  <button class="yr-btn " data-year="2538">2538 (1 คดี)</button>
-  <button class="yr-btn " data-year="2535">2535 (2 คดี)</button>
-  <button class="yr-btn " data-year="2529">2529 (2 คดี)</button>
-  <button class="yr-btn " data-year="2527">2527 (2 คดี)</button>
-  <button class="yr-btn " data-year="2523">2523 (1 คดี)</button>
-  <button class="yr-btn " data-year="2518">2518 (1 คดี)</button>
-  <button class="yr-btn " data-year="2517">2517 (2 คดี)</button>
-  <button class="yr-btn " data-year="2513">2513 (1 คดี)</button>
-  <button class="yr-btn " data-year="2512">2512 (1 คดี)</button>
-  <button class="yr-btn " data-year="2509">2509 (1 คดี)</button>
-  <button class="yr-btn " data-year="2505">2505 (2 คดี)</button>
-  <button class="yr-btn " data-year="2503">2503 (1 คดี)</button>
-  <button class="yr-btn " data-year="2502">2502 (1 คดี)</button>
-  <button class="yr-btn " data-year="2498">2498 (1 คดี)</button>
-  <button class="yr-btn " data-year="2497">2497 (1 คดี)</button>
-  <button class="yr-btn " data-year="2496">2496 (2 คดี)</button>
-  <button class="yr-btn " data-year="2494">2494 (2 คดี)</button>
-  <button class="yr-btn " data-year="2493">2493 (1 คดี)</button>
-  <button class="yr-btn " data-year="2492">2492 (3 คดี)</button>
-  <button class="yr-btn " data-year="2476">2476 (1 คดี)</button>
-  <button class="yr-btn " data-year="2471">2471 (2 คดี)</button>
-  <button class="yr-btn " data-year="2470">2470 (1 คดี)</button>
-  <button class="yr-btn " data-year="ไม่ทราบปี">ไม่ทราบปี (17 คดี)</button>
+      <label class="yr-select-label" for="yearSelect">เลือกปีคดี</label>
+      <select class="yr-select" id="yearSelect" aria-label="เลือกปีคดี">
+        <option value="2567" selected>2567 (2 คดี)</option>
+        <option value="2566">2566 (2 คดี)</option>
+        <option value="2565">2565 (3 คดี)</option>
+        <option value="2564">2564 (1 คดี)</option>
+        <option value="2563">2563 (1 คดี)</option>
+        <option value="2562">2562 (1 คดี)</option>
+        <option value="2560">2560 (1 คดี)</option>
+        <option value="2559">2559 (1 คดี)</option>
+        <option value="2557">2557 (3 คดี)</option>
+        <option value="2556">2556 (2 คดี)</option>
+        <option value="2555">2555 (4 คดี)</option>
+        <option value="2553">2553 (2 คดี)</option>
+        <option value="2551">2551 (1 คดี)</option>
+        <option value="2550">2550 (1 คดี)</option>
+        <option value="2549">2549 (2 คดี)</option>
+        <option value="2548">2548 (2 คดี)</option>
+        <option value="2547">2547 (2 คดี)</option>
+        <option value="2546">2546 (1 คดี)</option>
+        <option value="2545">2545 (1 คดี)</option>
+        <option value="2544">2544 (1 คดี)</option>
+        <option value="2543">2543 (2 คดี)</option>
+        <option value="2542">2542 (1 คดี)</option>
+        <option value="2541">2541 (1 คดี)</option>
+        <option value="2540">2540 (2 คดี)</option>
+        <option value="2539">2539 (2 คดี)</option>
+        <option value="2538">2538 (1 คดี)</option>
+        <option value="2535">2535 (2 คดี)</option>
+        <option value="2529">2529 (2 คดี)</option>
+        <option value="2527">2527 (2 คดี)</option>
+        <option value="2523">2523 (1 คดี)</option>
+        <option value="2518">2518 (1 คดี)</option>
+        <option value="2517">2517 (2 คดี)</option>
+        <option value="2513">2513 (1 คดี)</option>
+        <option value="2512">2512 (1 คดี)</option>
+        <option value="2509">2509 (1 คดี)</option>
+        <option value="2505">2505 (2 คดี)</option>
+        <option value="2503">2503 (1 คดี)</option>
+        <option value="2502">2502 (1 คดี)</option>
+        <option value="2498">2498 (1 คดี)</option>
+        <option value="2497">2497 (1 คดี)</option>
+        <option value="2496">2496 (2 คดี)</option>
+        <option value="2494">2494 (2 คดี)</option>
+        <option value="2493">2493 (1 คดี)</option>
+        <option value="2492">2492 (3 คดี)</option>
+        <option value="2476">2476 (1 คดี)</option>
+        <option value="2471">2471 (2 คดี)</option>
+        <option value="2470">2470 (1 คดี)</option>
+        <option value="ไม่ทราบปี">ไม่ทราบปี (17 คดี)</option>
+      </select>
     </div>
     <div class="yr-panels">
 <div class="yr-page yr-page-2567" data-year="2567" data-page="0">
@@ -567,23 +574,20 @@
   <button class="yr-loadmore" data-year="ไม่ทราบปี" data-page="2" style="display:none">&#128230; โหลดคดีเพิ่มอีก 10 เรื่อง (เหลือ 0 คดี)</button>
 </div>
     </div>
-    <p class="yr-note">&#128274; แสดงเฉพาะคดีที่ผ่านการตรวจคุณภาพแล้ว — ทั้งหมด 691 คดี ทยอยเปิดทีละเรื่อง</p>
+    <p class="yr-note">&#128274; แสดงเฉพาะคดีที่ผ่านการตรวจคุณภาพแล้ว — ทั้งหมด 756 คดี ทยอยเปิดทีละเรื่อง</p>
   </div>
   <script>
 (function(){
-  document.querySelectorAll('.yr-btn').forEach(function(b){
-    b.addEventListener("click",function(){
-      document.querySelectorAll(".yr-btn").forEach(function(x){x.classList.remove("active")});
-      b.classList.add('active');
-      var y=b.getAttribute("data-year");
-      document.querySelectorAll(".yr-page").forEach(function(p){p.style.display="none"});
-      var first=document.querySelector(".yr-page[data-year='"+y+"'][data-page='0']");
-      if(first)first.style.display='block';
-      document.querySelectorAll(".yr-loadmore").forEach(function(l){
-        l.style.display=(l.getAttribute("data-year")===y&&parseInt(l.getAttribute("data-page"))===1)?"inline-block":"none";
-      });
+  function showYear(y){
+    document.querySelectorAll(".yr-page").forEach(function(p){p.style.display="none"});
+    var first=document.querySelector(".yr-page[data-year='"+CSS.escape(y)+"'][data-page='0']");
+    if(first)first.style.display='block';
+    document.querySelectorAll(".yr-loadmore").forEach(function(l){
+      l.style.display=(l.getAttribute("data-year")===y&&parseInt(l.getAttribute("data-page"))===1)?"inline-block":"none";
     });
-  });
+  }
+  var ys=document.getElementById("yearSelect");
+  if(ys){ys.addEventListener("change",function(){showYear(this.value);});}
   document.querySelectorAll('.yr-loadmore').forEach(function(b){
     b.addEventListener("click",function(){
       var y=b.getAttribute("data-year");
