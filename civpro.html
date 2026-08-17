@@ -299,6 +299,43 @@ select:focus{border-color:var(--cat);}
 .rika-block-title{font-family:'Noto Serif Thai',serif;font-weight:700;font-size:13px;color:var(--cat);margin-bottom:8px;}
 .rika-item{font-size:12.5px;line-height:1.7;color:var(--text-body);background:rgba(251,191,36,.08);border-left:3px solid #fbbf24;border-radius:0 4px 4px 0;padding:8px 12px;margin-bottom:6px;}
 
+/* ---------- topic-html: เนื้อหาความเรียงยาว (แทน topic-blocks) ---------- */
+.topic-html{background:#f8fafc;border-radius:var(--radius-sm);padding:12px 16px;border:1px solid var(--border);font-size:13.5px;color:var(--text-body);line-height:1.9;}
+:root[data-theme="dark"] .topic-html,:root[data-theme="horror"] .topic-html{background:var(--bg-panel2)}
+.topic-html p{margin:0 0 12px;}
+.topic-html p:last-child{margin-bottom:0;}
+.topic-html ul{margin:0 0 12px;padding-left:20px;}
+.topic-html li{margin-bottom:6px;}
+.topic-html b{color:var(--text-h);}
+.topic-html figure{margin:0 0 14px;text-align:center;}
+.topic-html figure img{max-width:220px;width:100%;border-radius:var(--radius-sm);}
+.topic-html figcaption{font-size:11.5px;color:var(--text-muted);margin-top:4px;}
+.tts-reading{background:var(--gold-l);border-radius:4px;box-shadow:0 0 0 2px var(--gold-l);}
+
+/* ---------- ศัพท์คลิกดูคำอธิบาย (glossary) ---------- */
+.term-ref{font-weight:700;text-decoration:underline;text-underline-offset:2px;color:var(--gold);cursor:pointer;}
+.term-ref:hover,.term-ref.active{opacity:.75;}
+.term-full{display:none;margin:8px 0;padding:9px 13px;background:var(--gold-l);border-left:3px solid var(--gold);border-radius:6px;font-size:12.5px;line-height:1.75;color:var(--text-body);}
+.term-full.open{display:block;}
+
+/* ---------- กล่องข้อสอบจริง + เฉลย ---------- */
+.examBox{background:var(--gold-l);border:1px solid var(--gold);border-radius:var(--radius-sm);padding:12px 15px;margin:14px 0;font-size:13px;line-height:1.8;}
+.examBox .exlabel{font-weight:800;color:var(--gold);font-size:11.5px;letter-spacing:.04em;margin-bottom:6px;}
+.examBox .exq{color:var(--text-h);}
+.examBox .exsrc{color:var(--text-muted);font-size:11px;margin-top:5px;}
+.examToggle{margin-top:9px;background:var(--bg-panel);border:1px solid var(--gold);border-radius:999px;padding:5px 13px;font-size:11.5px;font-weight:700;color:var(--gold);cursor:pointer;font-family:inherit;}
+.examToggle:hover{background:var(--gold-l);}
+.examAns{display:none;margin-top:9px;padding-top:9px;border-top:1px dashed var(--gold);font-size:13px;line-height:1.85;color:var(--text-body);}
+.examAns.open{display:block;}
+.examAns .exanslabel{font-weight:800;color:var(--good);font-size:11.5px;letter-spacing:.04em;margin-bottom:5px;display:block;}
+
+/* ---------- ปุ่มอ่านออกเสียง (TTS) ---------- */
+.tts-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;padding:8px 12px;background:var(--bg-panel2);border:1px solid var(--border);border-radius:var(--radius-sm);}
+.tts-btn{display:inline-flex;align-items:center;gap:5px;font-family:'Sarabun',sans-serif;font-weight:700;font-size:12px;color:var(--text-body);background:var(--bg-panel);border:1px solid var(--border-med);border-radius:6px;padding:6px 12px;cursor:pointer;}
+.tts-btn:hover{border-color:var(--gold);color:var(--gold);}
+.tts-rate{font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px;}
+.tts-rate select{padding:4px 6px;font-size:12px;}
+
 @media(max-width:640px){.mode-tabs{grid-template-columns:repeat(3,1fr);}.panel{padding:16px;}.subtoggle{grid-template-columns:1fr;}.list-item{grid-template-columns:56px 1fr;}.subject-bar{padding:0 10px;}}
 .coffee-widget{
   display:flex;flex-direction:column;align-items:center;gap:10px;
@@ -1344,11 +1381,151 @@ function updateScoreUI(){
   if(el) el.textContent = GS.total.toLocaleString();
 }
 
+/* ---------- ศัพท์คลิกดูคำอธิบาย (glossary) ---------- */
+const TERM_GLOSSARY = {
+  "ฟ้องเคลือบคลุม":"คำฟ้องที่บรรยายข้อเท็จจริงไม่ชัดแจ้งพอให้จำเลยเข้าใจและต่อสู้คดีได้ ตามมาตรา 172 วรรค 2 หากศาลเห็นว่าเคลือบคลุมอาจสั่งยกฟ้องได้ แต่ไม่ใช่ปัญหาความสงบเรียบร้อยฯ",
+  "อำนาจฟ้อง":"สิทธิของบุคคลในการเสนอคดีต่อศาลตามมาตรา 55 แบ่งเป็นคดีมีข้อพิพาท (ต้องมีข้อโต้แย้งสิทธิเกิดขึ้นแล้ว) กับคดีไม่มีข้อพิพาท (ต้องมีกฎหมายรับรองให้ใช้สิทธิทางศาลได้)",
+  "ข้อโต้แย้งสิทธิ":"เงื่อนไขของคดีมีข้อพิพาทตามมาตรา 55 ผู้ถูกโต้แย้งสิทธิต้องเป็นผู้เสนอคดีเอง หากผู้ที่ทำให้เสียหายไม่ใช่จำเลยที่ถูกฟ้อง ย่อมไม่มีอำนาจฟ้อง",
+  "ร้องสอด":"การที่บุคคลภายนอกเข้ามาเป็นคู่ความในคดีที่มีอยู่แล้วตามมาตรา 57 มี 3 ช่องทาง คือ (1) ร้องสอดเข้ามาเองเพื่อรับรองสิทธิของตน (2) ถูกหมายเรียกเข้ามาเป็นจำเลยร่วม (3) ร้องสอดเพื่อยันสิทธิไล่เบี้ย",
+  "ชี้สองสถาน":"ขั้นตอนที่ศาลกำหนดประเด็นข้อพิพาทและหน้าที่นำสืบจากคำฟ้อง-คำให้การที่โต้แย้งกัน ตามมาตรา 182-183",
+  "มโนสาเร่":"คดีที่มีทุนทรัพย์ไม่เกินจำนวนที่กฎหมายกำหนด (หรือคดีขับไล่ที่ค่าเช่าไม่เกินเกณฑ์) ตามมาตรา 189 มีวิธีพิจารณาแบบง่ายและรวดเร็วกว่าคดีสามัญ",
+  "ขาดนัดยื่นคำให้การ":"กรณีจำเลยไม่ยื่นคำให้การภายในกำหนดตามมาตรา 197-199ตรี ทำให้เสียสิทธิต่อสู้คดี",
+  "ขาดนัดพิจารณา":"กรณีคู่ความไม่มาศาลในวันสืบพยานตามมาตรา 200-207 แม้จะเคยยื่นคำให้การไว้แล้วก็ตาม",
+  "ทุนทรัพย์":"จำนวนเงินที่เป็นข้อพิพาทในคดี ใช้กำหนดเขตอำนาจศาล (ศาลแขวง/ศาลจังหวัด) และสิทธิอุทธรณ์ฎีกาในปัญหาข้อเท็จจริง",
+  "ฟ้องซ้ำ":"การนำคดีที่ศาลมีคำพิพากษาถึงที่สุดแล้วมาฟ้องใหม่โดยคู่ความเดิมและประเด็นเดิม ต้องห้ามตามมาตรา 148",
+  "ฟ้องซ้อน":"การฟ้องคดีเรื่องเดียวกันซ้ำในขณะที่คดีก่อนยังค้างอยู่ระหว่างพิจารณา ต้องห้ามตามมาตรา 173",
+  "ดำเนินกระบวนพิจารณาซ้ำ":"การหยิบยกประเด็นที่ศาลวินิจฉัยถึงที่สุดแล้วในคดีเดียวกันขึ้นมาพิจารณาอีก ต้องห้ามตามมาตรา 144",
+  "คำพิพากษาตามยอม":"คำพิพากษาที่ศาลมีตามสัญญาประนีประนอมยอมความของคู่ความตามมาตรา 138 ห้ามอุทธรณ์เว้นแต่ขัดความสงบเรียบร้อยของประชาชน",
+  "ผู้ประนีประนอม":"บุคคลหรือคณะบุคคลที่ศาลแต่งตั้งเพื่อช่วยไกล่เกลี่ยข้อพิพาทตามมาตรา 20 ทวิ อาจเป็นผู้เชี่ยวชาญเฉพาะด้านก็ได้"
+};
+const TERM_LIST = Object.keys(TERM_GLOSSARY)
+  .sort((a,b)=>b.length-a.length)
+  .map(t=>t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));
+const TERM_RE = TERM_LIST.length ? new RegExp('(' + TERM_LIST.join('|') + ')', 'g') : null;
+function linkGlossary(html){
+  if(!TERM_RE) return html;
+  const seen = new Set();
+  return html.replace(TERM_RE, (m)=>{
+    if(seen.has(m)) return m;
+    if(!TERM_GLOSSARY[m]) return m;
+    seen.add(m);
+    return '<span class="term-ref" onclick="toggleTermFull(this)" tabindex="0" role="button">'+m+'</span><span class="term-full">'+TERM_GLOSSARY[m]+'</span>';
+  });
+}
+function toggleTermFull(el){
+  const full = el.nextElementSibling;
+  full.classList.toggle('open');
+  el.classList.toggle('active');
+}
+
+/* ---------- เฉลยข้อสอบ ---------- */
+function toggleExamAns(id){
+  const box = document.getElementById(id);
+  box.classList.toggle('open');
+  const btn = box.previousElementSibling;
+  if(btn && btn.classList.contains('examToggle')){
+    btn.textContent = box.classList.contains('open') ? '🔼 ซ่อนเฉลย' : '🔎 ดูเฉลย';
+  }
+}
+
+/* ---------- ปุ่มอ่านออกเสียง (TTS) ---------- */
+const TTS = (function(){
+  const supported = typeof window !== 'undefined' && 'speechSynthesis' in window;
+  let queue = [], qIdx = 0, currentEl = null, rate = 1;
+  function pickThaiVoice(){
+    const vs = window.speechSynthesis.getVoices();
+    return vs.find(v => v.lang && v.lang.toLowerCase().startsWith('th')) || vs[0];
+  }
+  function clearHighlight(){ if(currentEl){ currentEl.classList.remove('tts-reading'); currentEl = null; } }
+  function speakNext(){
+    if(qIdx >= queue.length){ clearHighlight(); setBtns('idle'); return; }
+    const item = queue[qIdx];
+    clearHighlight();
+    currentEl = item.el;
+    if(currentEl){ currentEl.classList.add('tts-reading'); currentEl.scrollIntoView({behavior:'smooth', block:'center'}); }
+    const u = new SpeechSynthesisUtterance(item.text);
+    const v = pickThaiVoice();
+    if(v) u.voice = v;
+    u.lang = (v && v.lang) || 'th-TH';
+    u.rate = rate;
+    u.onend = ()=>{ qIdx++; speakNext(); };
+    u.onerror = ()=>{ qIdx++; speakNext(); };
+    window.speechSynthesis.speak(u);
+  }
+  function setBtns(state){
+    const p = document.getElementById('tts-play');
+    const pa = document.getElementById('tts-pause');
+    const s = document.getElementById('tts-stop');
+    if(!p) return;
+    if(state === 'playing'){
+      p.style.display = 'none'; pa.style.display = 'inline-flex'; s.style.display = 'inline-flex';
+      pa.innerHTML = '⏸ หยุดชั่วคราว';
+    } else if(state === 'paused'){
+      pa.innerHTML = '▶ เล่นต่อ';
+    } else {
+      p.style.display = 'inline-flex'; pa.style.display = 'none'; s.style.display = 'none';
+    }
+  }
+  function play(){
+    if(!supported) return;
+    const body = document.getElementById('panel');
+    if(!body) return;
+    if(window.speechSynthesis.paused){ window.speechSynthesis.resume(); setBtns('playing'); return; }
+    stop();
+    queue = [];
+    body.querySelectorAll('.topic-html p, .topic-html li').forEach(el=>{
+      if(el.offsetParent === null) return;
+      const txt = el.textContent.trim();
+      if(txt.length > 0) queue.push({el, text: txt});
+    });
+    if(queue.length === 0) return;
+    qIdx = 0;
+    setBtns('playing');
+    speakNext();
+  }
+  function pauseToggle(){
+    if(!supported) return;
+    if(window.speechSynthesis.paused){ window.speechSynthesis.resume(); setBtns('playing'); }
+    else if(window.speechSynthesis.speaking){ window.speechSynthesis.pause(); setBtns('paused'); }
+  }
+  function stop(){
+    if(!supported) return;
+    window.speechSynthesis.cancel();
+    clearHighlight();
+    queue = []; qIdx = 0;
+    setBtns('idle');
+  }
+  function setRate(r){ rate = r; }
+  return {supported, play, pauseToggle, stop, setRate};
+})();
+function ttsInit(){
+  const play = document.getElementById('tts-play');
+  const pause = document.getElementById('tts-pause');
+  const stop = document.getElementById('tts-stop');
+  const rate = document.getElementById('tts-rate');
+  if(play) play.onclick = ()=> TTS.play();
+  if(pause) pause.onclick = ()=> TTS.pauseToggle();
+  if(stop) stop.onclick = ()=> TTS.stop();
+  if(rate) rate.onchange = ()=> TTS.setRate(parseFloat(rate.value));
+  if('speechSynthesis' in window){
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = ()=>{ window.speechSynthesis.getVoices(); };
+  }
+}
+
 /* ================= CONTENT SUMMARY RENDERER (ยุบรวมกับฎีกาคลัง) ================= */
 function renderContent(){
+  TTS.stop();
   return `
     <h2>สรุปเนื้อหา + ฎีกา ตามหัวข้อออกสอบ</h2>
-    <div class="desc">จัดกลุ่มตามหัวข้อที่ออกสอบ (ไม่ใช่ตามครั้งบรรยาย) — กดหัวข้อเพื่อขยาย · อ่านจบกด ✓ รับคะแนน · ฎีกาแต่ละหัวข้อเก็บเป็นคลังกลาง ใช้ต่อได้ทั้งโหมดเกม/RPG อื่น</div>
+    <div class="desc">จัดกลุ่มตามหัวข้อที่ออกสอบ (ไม่ใช่ตามครั้งบรรยาย) — กดหัวข้อเพื่อขยาย · อ่านจบกด ✓ รับคะแนน · คลิกคำศัพท์ขีดเส้นใต้เพื่อดูคำอธิบาย · ฎีกาแต่ละหัวข้อเก็บเป็นคลังกลาง ใช้ต่อได้ทั้งโหมดเกม/RPG อื่น</div>
+    ${TTS.supported ? `
+    <div class="tts-bar" id="tts-bar">
+      <button type="button" class="tts-btn" id="tts-play">🔊 อ่านออกเสียงหน้านี้</button>
+      <button type="button" class="tts-btn" id="tts-pause" style="display:none">⏸ หยุดชั่วคราว</button>
+      <button type="button" class="tts-btn" id="tts-stop" style="display:none">⏹ หยุด</button>
+      <span class="tts-rate">ความเร็ว <select id="tts-rate"><option value="1" selected>1.0×</option><option value="1.2">1.2×</option><option value="1.5">1.5×</option></select></span>
+    </div>` : ''}
     ${CAT_ORDER.map(cat=>{
       const reads = TOPIC_READS[cat] || [];
       const cases = rikaOf(cat);
@@ -1366,7 +1543,7 @@ function renderContent(){
             return `
             <div class="content-topic">
               <div class="topic-heading">📌 ${t.heading}</div>
-              ${t.blocks ? `<div class="topic-blocks">${t.blocks.map((b,bi)=>`<div class="topic-sub${bi===0?' first':''}">${b.sub}</div><div class="topic-sub-text">${b.text}</div>`).join('')}</div>` : `<div class="topic-body">${t.body.replace(/•/g,'<br>• ')}</div>`}
+              ${t.html ? `<div class="topic-html">${linkGlossary(t.html)}</div>` : t.blocks ? `<div class="topic-blocks">${t.blocks.map((b,bi)=>`<div class="topic-sub${bi===0?' first':''}">${b.sub}</div><div class="topic-sub-text">${b.text}</div>`).join('')}</div>` : `<div class="topic-body">${t.body.replace(/•/g,'<br>• ')}</div>`}
               <div class="read-btn ${isRead?'read':''}" id="rbtn_${tKey}" onclick="markRead('${tKey}')">
                 ${isRead ? '✓ อ่านแล้ว' : '✓ กดเมื่ออ่านจบ (+20 คะแนน)'}
               </div>
@@ -1471,7 +1648,7 @@ function render(){
   if(state.tab===1){ setTheme(state.listCat); p.innerHTML = renderListMode(); }
   if(state.tab===2){ setTheme(currentQuizCat()); p.innerHTML = renderMode3(); }
   if(state.tab===3){ setTheme(currentWalkCat()); p.innerHTML = renderWalkMode(); }
-  if(state.tab===4){ document.documentElement.style.setProperty("--cat","#1e40af"); document.body.style.background="#f0f4f8"; p.innerHTML = renderContent(); }
+  if(state.tab===4){ document.documentElement.style.setProperty("--cat","#1e40af"); document.body.style.background="#f0f4f8"; p.innerHTML = renderContent(); ttsInit(); }
 }
 
 /* ================= MODE 1: FLASHCARD ================= */
