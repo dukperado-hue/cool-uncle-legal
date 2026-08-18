@@ -182,6 +182,9 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 .lecture-video{margin:12px 0 16px}
 .lecture-video .video-frame-wrap{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:10px;overflow:hidden}
 .lecture-video .video-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.lecture-diagram{margin:0 0 16px;text-align:center}
+.lecture-diagram img{max-width:100%;width:auto;max-height:520px;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow);background:#fff}
+.lecture-diagram figcaption{font-size:12px;color:var(--ink-faint);margin-top:6px;line-height:1.4}
 .lecture-pending{
   font-size:12px;font-weight:700;color:var(--ink-faint);background:#F1EDE2;
   padding:5px 12px;border-radius:999px;white-space:nowrap;flex-shrink:0;
@@ -371,7 +374,10 @@ const LECTURES = [
 ประการที่สอง เกิดช่องโหว่ในการสั่งคำบังคับ (The Injunction Gap) เพราะศาลไทยไม่มีอำนาจสั่งให้ฝ่ายปกครองออกใบอนุญาตหรือใช้อำนาจเฉพาะเจาะจงตามคำขอของเอกชนได้โดยตรงแบบเยอรมนี (Verpflichtungsklage) ทำได้เพียง "กำหนดเวลาให้ฝ่ายปกครองกลับไปพิจารณาเรื่องใหม่" ในคดีมาตรา 9(2) ซึ่งหากฝ่ายปกครองพิจารณาแล้วปฏิเสธกลับมาอีก ประชาชนก็ต้องยื่นฟ้องคดีเพิกถอนใหม่อยู่ดี ระบบจึงไม่สามารถคุ้มครองสิทธิของประชาชนได้อย่างกระชับและเบ็ดเสร็จ
 
 ประการที่สาม การตีความมาตรา 42 (ผู้เดือดร้อนเสียหาย) เกิดความ "แกว่ง" ไม่คงเส้นคงวา เพราะตัวบทเขียนไว้ไม่ชัดเจนและไม่ได้เลือกปรัชญาเบื้องหลังให้เป็นเอกภาพ ส่งผลให้บางคดีศาลไทยตีความกว้างตามแนวฝรั่งเศส (ภาววิสัย) ยอมรับฟ้องแม้เป็นเพียงผู้มีประโยชน์ได้เสีย แต่บางคดีกลับตีความแคบตามแนวเยอรมัน (อัตวิสัย) บังคับว่าต้องถูกกระทบสิทธิโดยตรงเท่านั้นจึงจะฟ้องได้ ความไม่มีมาตรฐานที่สม่ำเสมอนี้เป็นข้อบกพร่องเชิงโครงสร้างที่ยังคงสร้างปัญหาให้ประชาชนและระบบวิธีพิจารณาคดีปกครองไทยมาจนถึงปัจจุบัน` },
-  { n: 3, title: "กฎหมายวิธีพิจารณาคดีปกครอง", text: null },
+  { n: 3, title: "กฎหมายวิธีพิจารณาคดีปกครอง", image: 'pics/legal history/la351/diagram-ม9-ม72-ประเภทคดีปกครอง.jpg', imageCaption: 'หลักกฎหมายที่ใช้ในการกำหนดประเภทคดีปกครองในระบบกฎหมายไทย: มาตรา 9 และมาตรา 72 พ.ร.บ.จัดตั้งศาลปกครองและวิธีพิจารณาคดีปกครอง พ.ศ. 2542', text:
+`ทบทวนด้วยแผนผัง: การกำหนดประเภทคดีปกครองในระบบกฎหมายไทยพิจารณาจาก "อำนาจ" สองส่วนของศาลปกครองที่แยกจากกันตามแผนผังด้านบน คือ (1) อำนาจในการรับคำฟ้องคดีปกครองไว้พิจารณา ตามมาตรา 9 พ.ร.บ.จัดตั้งศาลปกครองและวิธีพิจารณาคดีปกครอง พ.ศ. 2542 ซึ่งกำหนดว่าข้อพิพาทลักษณะใดเข้าเขตอำนาจศาลปกครอง (ตามที่บรรยายครั้งที่แล้วแบ่งไว้ 4 ประเภทหลัก คือ คดีเพิกถอนการกระทำที่ไม่ชอบ คดีละเลย/ล่าช้าต่อหน้าที่ คดีละเมิดหรือความรับผิดทางปกครองอย่างอื่น และคดีสัญญาทางปกครอง) และ (2) อำนาจในการกำหนดคำบังคับ ตามมาตรา 72 ซึ่งเป็นคนละขั้นตอนกัน — ศาลต้องรับคดีไว้พิจารณาได้ก่อนตามมาตรา 9 แล้วจึงจะไปถึงขั้นตอนออกคำบังคับตามมาตรา 72 การแยกสองอำนาจนี้ออกจากกันให้ชัดเจนคือกรอบความคิดตั้งต้นที่ใช้ตอบโจทย์ข้อสอบทั้งสามข้อของฝั่งคดีปกครองตามที่วางไว้ตั้งแต่บรรยายครั้งที่ 2
+
+(หมายเหตุ: บรรยายครั้งนี้กำลังดำเนินอยู่ เนื้อหาส่วนวิธีพิจารณาคดีปกครองในรายละเอียด — เงื่อนไขผู้มีสิทธิฟ้องคดีตามมาตรา 42 และขั้นตอนการดำเนินกระบวนพิจารณา — จะทยอยเพิ่มเข้ามาเมื่อสรุปจากคำจดบันทึกครบถ้วน)` },
   { n: 4, title: "กฎหมายวิธีพิจารณาคดีปกครอง", text: null },
   { n: 5, title: "วิธีพิจารณาคดีปกครอง (1)", text: null },
   { n: 6, title: "วิธีพิจารณาคดีปกครอง (2)", text: null },
@@ -566,7 +572,7 @@ function renderLectures(){
         <div class="lecture-title">${l.title}</div>
         <div class="lecture-toggle">▾</div>
       </div>
-      <div class="lecture-body">${l.video ? `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${l.video}" title="วิดีโอประกอบบรรยายครั้งที่ ${l.n}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="video-credit">📺 วิดีโอแนะนำเกี่ยวกับคดีนี้ — จากช่อง <a href="https://www.youtube.com/@CoolUncleLaw/videos" target="_blank" rel="noopener">Cool Uncle Law</a></div></div>` : ''}${linkArticles(boldQuotes(highlightText(l.text.replace(/</g,'&lt;'))))}</div>
+      <div class="lecture-body">${l.image ? `<figure class="lecture-diagram"><img src="${l.image}" alt="${(l.imageCaption||'').replace(/</g,'&lt;')}" loading="lazy">${l.imageCaption ? `<figcaption>${l.imageCaption.replace(/</g,'&lt;')}</figcaption>` : ''}</figure>` : ''}${l.video ? `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${l.video}" title="วิดีโอประกอบบรรยายครั้งที่ ${l.n}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="video-credit">📺 วิดีโอแนะนำเกี่ยวกับคดีนี้ — จากช่อง <a href="https://www.youtube.com/@CoolUncleLaw/videos" target="_blank" rel="noopener">Cool Uncle Law</a></div></div>` : ''}${linkArticles(boldQuotes(highlightText(l.text.replace(/</g,'&lt;'))))}</div>
     </div>
   ` : `
     <div class="lecture-row pending">
