@@ -215,6 +215,15 @@ mark.hl{background:var(--gold-soft);color:var(--ink);padding:0 3px;border-radius
 .lec-img-float{float:right;margin:0 0 10px 14px;max-width:130px;text-align:center}
 .lec-img-float img{width:100%;border-radius:8px;border:1px solid var(--line);box-shadow:var(--shadow)}
 .lec-img-float figcaption{font-size:11px;color:var(--ink-faint);margin-top:4px;line-height:1.4}
+.lec-img-float--lg{max-width:240px}
+.lec-img-float--left{float:left;margin:0 14px 10px 0}
+/* "mixed" layout: a block can combine a full-width landscape banner photo
+   with one or more portrait photos that float beside the paragraph text
+   (the "through" style), instead of forcing every image into the same
+   small gallery-row thumbnail. */
+.lec-img-full{width:100%;margin:0 0 14px;clear:both}
+.lec-img-full img{width:100%;height:auto;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)}
+.lec-img-full figcaption{font-size:11.5px;color:var(--ink-faint);margin-top:5px;line-height:1.4;text-align:center}
 .lec-block::after{content:"";display:table;clear:both}
 .lec-table{width:100%;border-collapse:collapse;margin:10px 0 16px;font-size:13px}
 .lec-table th,.lec-table td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
@@ -443,10 +452,11 @@ Chief Justice John Marshall วินิจฉัยเป็น 4 ขั้น�
 เคลเซนแก้ปัญหานี้ด้วยสมมติฐานที่เรียกว่า Grundnorm หรือบรรทัดฐานขั้นมูลฐาน (Basic Norm) ซึ่งไม่ใช่กฎหมายลายลักษณ์อักษรหรือรัฐธรรมนูญกระดาษ แต่เป็น "สิ่งสมมุติเชิงตรรกะ" (Hypothesis / Transcendental-logical presupposition) ได้อิทธิพลจากปรัชญาของอิมมานูเอล คานท์ (Neo-Kantian) ที่ว่าการรับรู้ปรากฏการณ์ของมนุษย์ต้องอาศัยกรอบพื้นที่-เวลาเป็นฐานล่วงหน้า เช่นเดียวกับที่นักกฎหมายต้อง "ทึกทัก" ว่ามี Grundnorm รองรับอยู่เหนือปฐมรัฐธรรมนูญ เพื่อให้ระบบกฎหมายเป็นระบบปิดที่อ้างอิงความชอบธรรมในตัวเอง (Closed and Self-referential System) โดยไม่ต้องพึ่งอำนาจการเมืองดิบหรือศรัทธาทางศีลธรรมภายนอก — และนี่คือฐานทฤษฎีที่ทำให้เคลเซนเสนอการจัดตั้งศาลรัฐธรรมนูญเฉพาะขึ้นพิทักษ์กติกาประนีประนอมในระบอบประชาธิปไตยเสรีนิยม ไม่ให้เสียงข้างมากในสภาใช้อำนาจล้นกรอบไปขจัดสิทธิเสรีภาพของฝ่ายเสียงข้างน้อย` },
       { heading: "ชีวิตของเคลเซนภายใต้เงาของนาซีเยอรมนี",
         images: [
-          { src: 'pics/legal history/la259/General Paul von Hindenburg.jpg', caption: 'ประธานาธิบดีเพาล์ ฟอน ฮินเดนบวร์ก ผู้แต่งตั้งฮิตเลอร์เป็นนายกรัฐมนตรีในปี 1933' },
-          { src: 'pics/legal history/la259/Felix Nussbaum self-portrait 1943.jpg', caption: 'ภาพเหมือนตนเองถือบัตรประจำตัวชาวยิว โดย Felix Nussbaum (1943) สะท้อนชะตากรรมของชาวยิวภายใต้นาซี' },
-          { src: 'pics/legal history/la259/1930s German performers.jpg', caption: 'บรรยากาศเยอรมนีในทศวรรษ 1930 — ยุคที่นาซีแทรกแซงควบคุมแทบทุกภาคส่วนของสังคม รวมถึงมหาวิทยาลัยและวงวิชาการ' },
+          { src: 'pics/legal history/la259/1930s German performers.jpg', caption: 'บรรยากาศเยอรมนีในทศวรรษ 1930 — ยุคที่นาซีแทรกแซงควบคุมแทบทุกภาคส่วนของสังคม รวมถึงมหาวิทยาลัยและวงวิชาการ', layout: 'full' },
+          { src: 'pics/legal history/la259/General Paul von Hindenburg.jpg', caption: 'ประธานาธิบดีเพาล์ ฟอน ฮินเดนบวร์ก ผู้แต่งตั้งฮิตเลอร์เป็นนายกรัฐมนตรีในปี 1933', float: 'right' },
+          { src: 'pics/legal history/la259/Felix Nussbaum self-portrait 1943.jpg', caption: 'ภาพเหมือนตนเองถือบัตรประจำตัวชาวยิว โดย Felix Nussbaum (1943) สะท้อนชะตากรรมของชาวยิวภายใต้นาซี', float: 'left' },
         ],
+        imageLayout: 'mixed',
         text:
 `เคลเซนเป็นนักกฎหมายเชื้อสายยิวเกิดที่กรุงปราก หลังมีบทบาทร่างรัฐธรรมนูญออสเตรียปี 1920 และนั่งเป็นตุลาการศาลรัฐธรรมนูญออสเตรียเกือบสิบปี ปลายทศวรรษ 1920 เผชิญแรงกดดันทางการเมืองในออสเตรียจนต้องลาออก ย้ายไปเป็นศาสตราจารย์และคณบดีที่มหาวิทยาลัยโคโลญ เยอรมนี ในปี 1930 — ปี 1933 ประธานาธิบดีฮินเดนบวร์กซึ่งชราภาพมากแล้วแต่งตั้งอดอล์ฟ ฮิตเลอร์เป็นนายกรัฐมนตรี เมื่อพรรคนาซีขึ้นสู่อำนาจได้ออกกฤษฎีกาขับไล่บุคคลเชื้อสายยิวออกจากตำแหน่งในรัฐและมหาวิทยาลัยทันที เคลเซนถูกสั่งปลดจากตำแหน่งคณบดีและห้ามสอน
 
@@ -586,7 +596,20 @@ function renderImagesHtml(images, layout){
     // single-portrait "through" layout: image floats beside the text, which
     // wraps around it, instead of sitting in its own row above the text.
     const im = images[0];
-    return `<figure class="lec-img-float"><img src="${im.src}" alt="${escapeHtml(im.caption||'')}" loading="lazy"><figcaption>${escapeHtml(im.caption||'')}</figcaption></figure>`;
+    return `<figure class="lec-img-float${im.size==='lg'?' lec-img-float--lg':''}"><img src="${im.src}" alt="${escapeHtml(im.caption||'')}" loading="lazy"><figcaption>${escapeHtml(im.caption||'')}</figcaption></figure>`;
+  }
+  if (layout === 'mixed') {
+    // per-image layout: landscape photos render full-width (im.layout==='full'),
+    // portrait photos float beside the text at a larger "through" size —
+    // lets one block combine a wide banner photo with floated portraits
+    // instead of forcing every image into the same small gallery thumbnail.
+    return images.map(im => {
+      if (im.layout === 'full') {
+        return `<figure class="lec-img-full"><img src="${im.src}" alt="${escapeHtml(im.caption||'')}" loading="lazy"><figcaption>${escapeHtml(im.caption||'')}</figcaption></figure>`;
+      }
+      const side = im.float === 'left' ? ' lec-img-float--left' : '';
+      return `<figure class="lec-img-float lec-img-float--lg${side}"><img src="${im.src}" alt="${escapeHtml(im.caption||'')}" loading="lazy"><figcaption>${escapeHtml(im.caption||'')}</figcaption></figure>`;
+    }).join('');
   }
   return `<div class="lec-img-row">${images.map(im => `<figure class="lec-img-card${im.size==='lg'?' lec-img-card--lg':''}"><img src="${im.src}" alt="${escapeHtml(im.caption||'')}" loading="lazy"><figcaption>${escapeHtml(im.caption||'')}</figcaption></figure>`).join('')}</div>`;
 }
