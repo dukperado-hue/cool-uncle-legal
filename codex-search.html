@@ -397,6 +397,19 @@ mark.codex-hl-yellow{background:#FFE066;color:#3a3212}
   .article-breadcrumb, .print-omit { display:none !important; }
 }
 
+/* "แบบใช้จด" / "Easy Mode" print layout — 1 มาตราต่อหน้า, สองคอลัมน์,
+   คอลัมน์เนื้อหา/คอลัมน์ว่าง(หรือคำบรรยาย) สลับข้างกันตามเลขหน้าคี่/คู่
+   เพื่อให้ช่องว่างสำหรับจดอยู่ขอบนอกของเล่มเสมอเวลาเข้าเล่ม */
+.write-cover-page{page-break-after:always;break-after:page}
+.write-mode-page{display:flex;min-height:250mm;page-break-after:always;break-after:page}
+.write-mode-page:last-child{page-break-after:auto;break-after:auto}
+.write-col{flex:1;padding:16px 20px}
+.write-col:first-child{border-right:1px dashed #999}
+.write-num{font-family:'Noto Serif Thai',serif;font-weight:700;font-size:16px;margin-bottom:10px}
+.write-col-blank{background-image:repeating-linear-gradient(to bottom,transparent,transparent 8mm,#e5e5e5 8mm,#e5e5e5 calc(8mm + 1px))}
+.write-blank-hint{color:#999;font-size:12px;font-style:italic}
+.write-col-notes{font-size:12.5px}
+
 .warak-row{display:grid;grid-template-columns:78px 1fr;gap:12px;align-items:baseline}
 .warak-row + .warak-row{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
 .warak-label{color:var(--gold);font-weight:700;font-size:12px;white-space:nowrap}
@@ -527,7 +540,11 @@ mark.codex-hl-yellow{background:#FFE066;color:#3a3212}
     <main class="results-main" style="grid-column:1/-1">
       <div class="result-count" id="result-count" style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
         <span id="result-count-text">ค้นหามาตรา 0 รายการ</span>
-        <button type="button" class="icon-btn" title="พิมพ์มาตราทั้งหมดในผลลัพธ์นี้" onclick="printAllResults()" onmouseenter="playHoverSound()">🖨️ พิมพ์ทั้งหมวด</button>
+        <div class="print-mode-group" style="display:flex;gap:6px;flex-wrap:wrap">
+          <button type="button" class="icon-btn" title="พิมพ์มาตราพร้อมคำบรรยาย ต่อเนื่องกันแบบเดิม" onclick="printAllResults('classic')" onmouseenter="playHoverSound()">🖨️ Classic</button>
+          <button type="button" class="icon-btn" title="พิมพ์มาตราแบบจดกฎหมาย (สไตล์อัยการโบ) — 1 มาตราต่อหน้า เว้นหน้าตรงข้ามว่างไว้เขียนโน้ต/ฎีกาเอง หมายเหตุ: มาตราที่เนื้อหายาวเกิน 1 หน้าอาจทำให้การเว้นหน้าคี่/คู่คลาดเคลื่อนเล็กน้อย" onclick="printAllResults('write')" onmouseenter="playHoverSound()">🖨️ แบบใช้จด</button>
+          <button type="button" class="icon-btn" title="เหมือนแบบใช้จด แต่ใส่คำบรรยายที่มีอยู่แล้วลงในหน้าตรงข้ามให้แทนที่จะเว้นว่าง" onclick="printAllResults('easy')" onmouseenter="playHoverSound()">🖨️ Easy Mode</button>
+        </div>
       </div>
 
       <div id="results-list">
@@ -1868,29 +1885,66 @@ function printArticle(btn) {
   window.print();
 }
 
-function printAllResults() {
+// Three print layouts for a whole group/book:
+//  - 'classic'  : มาตรา + คำบรรยาย เรียงต่อกัน (พฤติกรรมเดิม)
+//  - 'write'    : สไตล์ "จดแบบอัยการโบ" — 1 มาตราต่อหน้า, หน้าตรงข้ามเว้นว่างไว้เขียนเอง,
+//                 คอลัมน์มาตราสลับข้างตามเลขหน้าคี่/คู่ (หน้าคี่=ขวา เนื้อหาอยู่ซ้าย ว่างอยู่ขวา,
+//                 หน้าคู่=ซ้าย เนื้อหาอยู่ขวา ว่างอยู่ซ้าย) เพื่อให้ช่องว่างสำหรับจดอยู่ขอบนอก
+//                 ของเล่มเสมอเวลาเข้าเล่ม
+//  - 'easy'     : เหมือน 'write' แต่ช่องที่เว้นว่างใส่คำบรรยายที่มีอยู่แล้วแทน
+function printAllResults(mode) {
+  mode = mode || 'classic';
   const printArea = document.getElementById('print-area');
   if (!printArea || !currentResults || currentResults.length === 0) return;
   const groupTitle = document.getElementById('result-count-text')?.textContent.split('(')[0].trim() || 'ผลการค้นหา';
-  printArea.innerHTML = `
-    ${printDateStamp()}
-    <h1 style="font-family:'Noto Serif Thai',serif;margin-bottom:20px;">${groupTitle}</h1>
-    ${currentResults.map(article => {
-      const lectureHtml = lectureNotesHtml(article, false);
-      let noteText = '';
-      try { noteText = (localStorage.getItem('codex-note-' + article.id) || '').trim(); } catch (e) {}
-      const noteHtml = noteText
-        ? `<div style="margin-top:14px;padding-top:10px;border-top:1px dashed #999;font-size:13px;white-space:pre-line;"><strong>note:</strong> ${escapeHtml(noteText)}</div>`
-        : '';
-      return `
-      <div style="margin-bottom:26px;padding-bottom:20px;border-bottom:1px solid #ccc;break-inside:avoid;">
-        <h2 style="font-family:'Noto Serif Thai',serif;margin-bottom:10px;">มาตรา ${article.number}</h2>
-        <div class="article-text" data-chunk-index="0">${renderArticleTextHtml(article)}</div>
-        ${lectureHtml ? `<div style="margin-top:14px;padding-top:10px;border-top:2px solid #ccc;">${lectureHtml}</div>` : ''}
-        ${noteHtml}
+
+  if (mode === 'write' || mode === 'easy') {
+    const includeLecture = mode === 'easy';
+    const coverPage = `
+      <div class="write-cover-page">
+        ${printDateStamp()}
+        <h1 style="font-family:'Noto Serif Thai',serif;margin-bottom:8px;">${groupTitle}</h1>
+        <p style="color:#666;font-size:13px;">${includeLecture ? 'Easy Mode — มาตราพร้อมคำบรรยายในหน้าตรงข้าม' : 'แบบใช้จด — มาตรา 1 หน้าต่อหน้า เว้นหน้าตรงข้ามไว้เขียนโน้ต/ฎีกาเอง'}</p>
       </div>`;
-    }).join('')}
-  `;
+    // The cover page occupies physical page 1, so the first มาตรา lands on
+    // page 2 (an even/left-hand page) — offset the parity check by 2.
+    const pagesHtml = currentResults.map((article, i) => {
+      const pageNumber = i + 2;
+      const isOddPage = pageNumber % 2 === 1; // odd/right-hand page -> content on the left (blank/notes toward outer right edge)
+      const contentColHtml = `
+        <div class="write-col write-col-content">
+          <div class="write-num">มาตรา ${escapeHtml(article.number)}</div>
+          <div class="write-text" data-chunk-index="0">${renderArticleTextHtml(article)}</div>
+        </div>`;
+      const lectureHtml = includeLecture ? lectureNotesHtml(article, false) : '';
+      const otherColHtml = includeLecture
+        ? `<div class="write-col write-col-notes">${lectureHtml || '<div class="write-blank-hint">— ไม่มีคำบรรยายที่จดไว้สำหรับมาตรานี้ —</div>'}</div>`
+        : `<div class="write-col write-col-blank"></div>`;
+      const cols = isOddPage ? (contentColHtml + otherColHtml) : (otherColHtml + contentColHtml);
+      return `<div class="write-mode-page">${cols}</div>`;
+    }).join('');
+    printArea.innerHTML = coverPage + pagesHtml;
+  } else {
+    printArea.innerHTML = `
+      ${printDateStamp()}
+      <h1 style="font-family:'Noto Serif Thai',serif;margin-bottom:20px;">${groupTitle}</h1>
+      ${currentResults.map(article => {
+        const lectureHtml = lectureNotesHtml(article, false);
+        let noteText = '';
+        try { noteText = (localStorage.getItem('codex-note-' + article.id) || '').trim(); } catch (e) {}
+        const noteHtml = noteText
+          ? `<div style="margin-top:14px;padding-top:10px;border-top:1px dashed #999;font-size:13px;white-space:pre-line;"><strong>note:</strong> ${escapeHtml(noteText)}</div>`
+          : '';
+        return `
+        <div style="margin-bottom:26px;padding-bottom:20px;border-bottom:1px solid #ccc;break-inside:avoid;">
+          <h2 style="font-family:'Noto Serif Thai',serif;margin-bottom:10px;">มาตรา ${article.number}</h2>
+          <div class="article-text" data-chunk-index="0">${renderArticleTextHtml(article)}</div>
+          ${lectureHtml ? `<div style="margin-top:14px;padding-top:10px;border-top:2px solid #ccc;">${lectureHtml}</div>` : ''}
+          ${noteHtml}
+        </div>`;
+      }).join('')}
+    `;
+  }
   document.body.classList.add('printing-one');
   window.print();
 }
