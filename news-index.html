@@ -888,11 +888,11 @@
 var NEWS_DATA = [];
 var __ND_READY = [];
 function onNewsDataReady(fn){ __ND_READY.push(fn); }
-fetch("/assets/cases-criminal.json").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
-fetch("/assets/cases-civil.json").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
-fetch("/assets/cases-admin.json").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
-fetch("/assets/cases-const.json").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
-fetch("/assets/cases-corporate.json").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
+fetch("/assets/cases-criminal-a.json?v=1").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
+fetch("/assets/cases-civil-a.json?v=1").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
+fetch("/assets/cases-admin-a.json?v=1").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
+fetch("/assets/cases-const-a.json?v=1").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
+fetch("/assets/cases-corporate-a.json?v=1").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
 (function(){var iv=setInterval(function(){if(NEWS_DATA.length>=5 || __ND_READY.length===0){clearInterval(iv);__ND_READY.forEach(function(fn){fn();});}},300);setTimeout(function(){clearInterval(iv);__ND_READY.forEach(function(fn){fn();});},6000);})();
 
 function rollDice() {
@@ -908,6 +908,102 @@ function rollDice() {
   var note = document.getElementById('diceNote');
   note.innerHTML = '<a href="' + href + '" style="color:#7A6420;font-weight:700">' + it.title + '</a>';
 }
+</script>
+
+<script>
+/* Grade Hider v1: show only release-ready A-grade cases in legacy lists (toggle available). */
+(function(){
+  var ALLOW = ["news-case-dewiid-baernaat-moraat-kha-hanshp-chaophraya-2559", "news-case-f-ngaebngsinsmrsaelasiththieliiyngduubutr-aimkh-chaaraa-2563", "news-case-f-ngephikth-nkaaraihsaychaatiaithyaekbukhkhlt-nghaam-2559", "news-case-f-ngeriiykkhlaewthnulkul-2534", "news-case-f-ngeriiykkhnulchwi-phayabalsaw-thukhkh-a", "news-case-f-ngeriiykkhuuenkh-nghman-2560", "news-case-joerkam-maek-phetcha-royal-saudi-2532", "news-case-khdii-um-kha-nakstuksa-jin-san-2566", "news-case-khdii-umtadniwkhncchiin-phathyaa-2565", "news-case-khdiiaechraemchm-y-2527", "news-case-khdiiaechrluukoch-kh-nechpt-w-et-r-concept-water-2565", "news-case-khdiiaechrluukoch-nice-review-2562", "news-case-khdiiaifaihm-emaathethn-bii-mountain-b-phab-2565", "news-case-khdiich-okngprachaachn-hl-kkhaaybatrkh-nesirt-taylor-swift-2567", "news-case-khdiiesrim-saakhrraasdr-2541", "news-case-khdiikhaatkrrm-2-nakth-ngethiiywekaaaetaa-2557", "news-case-khdiikhaatkrrm-5-sph-khr-bkhrawchlburii-2557", "news-case-khdiikhaatkrrm-6-sph-orngaermaekrndaihae-th-e-raawan-2567", "news-case-khdiimhaakaaphy-stark-staarkh-kh-rep-erchan-2566", "news-case-khdiiphuubriophkhf-ngbrisathprakan-ptiesthkaarcchaayokhwid-ecch-cchaay", "news-case-khdiiplnpuuenkhaaypiehlng-nraathiwaas-2547", "news-case-khdiiraebidhaangliikaaredns-haadaihy-2555", "news-case-khdiismkhid-phumphwng-2548-2562", "news-case-khdiitingtaang-khaatkrt-enuue-ng-2556", "news-case-khdiiwisaamay-occh-daanchaang-2539", "news-case-thlaithaan-gaeng-khol-centre-filipin-2566", "news-case-um-kha-nak-kan-thut-phaekh-phet-saudi-2533", "news-case-um-kha-nang-daarawdii-d-ch-seri-sritananchai-2537", "news-case-yingsa-klangsar-canthaburi-dab-3-shp-pm-mrdkthind-4000-rai-2562"];
+  var hidden = 0, total = 0;
+  function apply(){
+    var lis = document.querySelectorAll('.case-list li, .yr-list li');
+    total = lis.length; hidden = 0;
+    lis.forEach(function(li){
+      var a = li.querySelector('a[href*="news-case"]');
+      if(!a){ return; }
+      var href = a.getAttribute('href');
+      var slug = href.replace(/^\//,'').replace(/\.html$/,'').replace(/news-case-/,'');
+      var show = ALLOW.indexOf(slug) >= 0 || document.body.classList.contains('cu-showall');
+      li.style.display = show ? '' : 'none';
+      if(!show) hidden++;
+    });
+    // yr-loadmore buttons: keep only if group still has hidden items
+    document.querySelectorAll('.yr-loadmore').forEach(function(btn){
+      var yr = btn.getAttribute('data-year');
+      var page = parseInt(btn.getAttribute('data-page'),10);
+      var group = document.querySelectorAll('.yr-page[data-year="'+yr+'"] ul li');
+      var vis = 0; group.forEach(function(li){ if(li.style.display !== 'none') vis++; });
+      btn.style.display = (vis > 0 && page === 0) ? '' : 'none';
+      if(page === 0) btn.innerHTML = '&#128230; โหลดคดีเพิ่มอีก 10 เรื่อง (เหลือ ' + Math.max(0, vis-10) + ' คดี)';
+    });
+    updateNotice();
+  }
+  var bar = document.createElement('div');
+  bar.id = 'cuGradeBar';
+  bar.innerHTML = '<span id="cuGradeNotice" style="font-size:.92rem;color:#5C4A14">&#128274; โหมดตรวจ: แสดงเฉพาะคดีเกรด A ที่ผ่านด่าน (กำลังโหลด...)</span> <button id="cuToggleAll" style="margin-left:12px;border:1px solid #B08A3C;border-radius:999px;padding:4px 14px;background:#FDF7E9;color:#5C4A14;font-size:.85rem;cursor:pointer;font-family:Sarabun,sans-serif">แสดงทั้งหมด (ตรวจงาน)</button>';
+  bar.style.cssText = 'background:linear-gradient(135deg,#FFFBF0,#F6E6B8);border:2px solid #B08A3C;border-radius:14px;padding:10px 18px;margin:14px 0;font-family:Sarabun,sans-serif;display:flex;align-items:center;flex-wrap:wrap;gap:8px';
+  var wrap = document.querySelector('.yr-tabs') || document.body;
+  wrap.parentNode.insertBefore(bar, wrap);
+  document.getElementById('cuToggleAll').addEventListener('click', function(){
+    var on = document.body.classList.toggle('cu-showall');
+    apply();
+    this.textContent = on ? 'สั่งแบบเกรด A' : 'แสดงทั้งหมด (ตรวจงาน)';
+  });
+  function updateNotice(){
+    var n = document.getElementById('cuGradeNotice');
+    if(n) n.innerHTML = '&#128274; โหมดตรวจ: แสดงเฉพาะคดีเกรด A ที่ผ่านด่าน — ' + (total-hidden) + ' / ' + total + ' คดี';
+  }
+  if(ALLOW.length === 0){ bar.style.display='none'; return; }
+  apply();
+})();
+</script>
+
+<script>
+/* Grade Hider v1: show only release-ready A-grade cases in legacy lists (toggle available). */
+(function(){
+  var ALLOW = ["news-case-dewiid-baernaat-moraat-kha-hanshp-chaophraya-2559", "news-case-f-ngaebngsinsmrsaelasiththieliiyngduubutr-aimkh-chaaraa-2563", "news-case-f-ngephikth-nkaaraihsaychaatiaithyaekbukhkhlt-nghaam-2559", "news-case-f-ngeriiykkhlaewthnulkul-2534", "news-case-f-ngeriiykkhnulchwi-phayabalsaw-thukhkh-a", "news-case-f-ngeriiykkhuuenkh-nghman-2560", "news-case-joerkam-maek-phetcha-royal-saudi-2532", "news-case-khdii-um-kha-nakstuksa-jin-san-2566", "news-case-khdii-umtadniwkhncchiin-phathyaa-2565", "news-case-khdiiaechraemchm-y-2527", "news-case-khdiiaechrluukoch-kh-nechpt-w-et-r-concept-water-2565", "news-case-khdiiaechrluukoch-nice-review-2562", "news-case-khdiiaifaihm-emaathethn-bii-mountain-b-phab-2565", "news-case-khdiich-okngprachaachn-hl-kkhaaybatrkh-nesirt-taylor-swift-2567", "news-case-khdiiesrim-saakhrraasdr-2541", "news-case-khdiikhaatkrrm-2-nakth-ngethiiywekaaaetaa-2557", "news-case-khdiikhaatkrrm-5-sph-khr-bkhrawchlburii-2557", "news-case-khdiikhaatkrrm-6-sph-orngaermaekrndaihae-th-e-raawan-2567", "news-case-khdiimhaakaaphy-stark-staarkh-kh-rep-erchan-2566", "news-case-khdiiphuubriophkhf-ngbrisathprakan-ptiesthkaarcchaayokhwid-ecch-cchaay", "news-case-khdiiplnpuuenkhaaypiehlng-nraathiwaas-2547", "news-case-khdiiraebidhaangliikaaredns-haadaihy-2555", "news-case-khdiismkhid-phumphwng-2548-2562", "news-case-khdiitingtaang-khaatkrt-enuue-ng-2556", "news-case-khdiiwisaamay-occh-daanchaang-2539", "news-case-thlaithaan-gaeng-khol-centre-filipin-2566", "news-case-um-kha-nak-kan-thut-phaekh-phet-saudi-2533", "news-case-um-kha-nang-daarawdii-d-ch-seri-sritananchai-2537", "news-case-yingsa-klangsar-canthaburi-dab-3-shp-pm-mrdkthind-4000-rai-2562"];
+  var hidden = 0, total = 0;
+  function apply(){
+    var lis = document.querySelectorAll('.case-list li, .yr-list li');
+    total = lis.length; hidden = 0;
+    lis.forEach(function(li){
+      var a = li.querySelector('a[href*="news-case"]');
+      if(!a){ return; }
+      var href = a.getAttribute('href');
+      var slug = href.replace(/^\//,'').replace(/\.html$/,'');
+      var show = ALLOW.indexOf(slug) >= 0 || document.body.classList.contains('cu-showall');
+      li.style.display = show ? '' : 'none';
+      if(!show) hidden++;
+    });
+    // yr-loadmore buttons: keep only if group still has hidden items
+    document.querySelectorAll('.yr-loadmore').forEach(function(btn){
+      var yr = btn.getAttribute('data-year');
+      var page = parseInt(btn.getAttribute('data-page'),10);
+      var group = document.querySelectorAll('.yr-page[data-year="'+yr+'"] ul li');
+      var vis = 0; group.forEach(function(li){ if(li.style.display !== 'none') vis++; });
+      btn.style.display = (vis > 0 && page === 0) ? '' : 'none';
+      if(page === 0) btn.innerHTML = '&#128230; โหลดคดีเพิ่มอีก 10 เรื่อง (เหลือ ' + Math.max(0, vis-10) + ' คดี)';
+    });
+    updateNotice();
+  }
+  var bar = document.createElement('div');
+  bar.id = 'cuGradeBar';
+  bar.innerHTML = '<span id="cuGradeNotice" style="font-size:.92rem;color:#5C4A14">&#128274; โหมดตรวจ: แสดงเฉพาะคดีเกรด A ที่ผ่านด่าน (กำลังโหลด...)</span> <button id="cuToggleAll" style="margin-left:12px;border:1px solid #B08A3C;border-radius:999px;padding:4px 14px;background:#FDF7E9;color:#5C4A14;font-size:.85rem;cursor:pointer;font-family:Sarabun,sans-serif">แสดงทั้งหมด (ตรวจงาน)</button>';
+  bar.style.cssText = 'background:linear-gradient(135deg,#FFFBF0,#F6E6B8);border:2px solid #B08A3C;border-radius:14px;padding:10px 18px;margin:14px 0;font-family:Sarabun,sans-serif;display:flex;align-items:center;flex-wrap:wrap;gap:8px';
+  var wrap = document.querySelector('.yr-tabs') || document.body;
+  wrap.parentNode.insertBefore(bar, wrap);
+  document.getElementById('cuToggleAll').addEventListener('click', function(){
+    var on = document.body.classList.toggle('cu-showall');
+    apply();
+    this.textContent = on ? 'สั่งแบบเกรด A' : 'แสดงทั้งหมด (ตรวจงาน)';
+  });
+  function updateNotice(){
+    var n = document.getElementById('cuGradeNotice');
+    if(n) n.innerHTML = '&#128274; โหมดตรวจ: แสดงเฉพาะคดีเกรด A ที่ผ่านด่าน — ' + (total-hidden) + ' / ' + total + ' คดี';
+  }
+  if(ALLOW.length === 0){ bar.style.display='none'; return; }
+  apply();
+})();
 </script>
 </body>
 </html>
