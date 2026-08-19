@@ -201,3 +201,13 @@ footer{
 .yr-loadmore:hover{background:#2E3A55}
 .yr-note{font-size:.85rem;color:#94a3b8;margin:14px 0 0}
 @media(max-width:640px){.mode-today-card h2{font-size:1.25rem}.mode-today-card{padding:16px 18px}}
+
+/* ===== Series navigation ===== */
+nav.series-nav{
+  display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;justify-content:center;
+  background:var(--gold-soft);border:1px solid var(--gold);border-radius:var(--radius);
+  padding:.75rem 1rem;margin:1.25rem 0 1.5rem;font-size:.95rem;
+}
+nav.series-nav a{color:var(--accent);text-decoration:none;font-weight:600;white-space:nowrap}
+nav.series-nav a:hover{text-decoration:underline}
+nav.series-nav span.sep{color:var(--ink-faint)}
