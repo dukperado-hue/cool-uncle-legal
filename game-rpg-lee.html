@@ -413,6 +413,29 @@ img{max-width:100%; display:block}
 .ghost-detail-card h2{font-size:20px; margin-bottom:12px}
 .ghost-detail-story{color:var(--ink-soft); font-size:13.5px; line-height:1.8; text-align:left}
 
+/* ============ STATS ============ */
+.stats-top-row{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:18px}
+.stats-tile{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:16px 12px; text-align:center;
+}
+.stats-tile-num{font-size:24px; font-weight:800}
+.stats-tile-label{font-size:11.5px; color:var(--ink-soft); margin-top:4px}
+.stats-section-label{font-weight:800; font-size:14px; margin:18px 0 10px}
+.stats-bar-list{display:flex; flex-direction:column; gap:12px}
+.stat-bar-row{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:10px 12px; box-shadow:var(--shadow)}
+.stat-bar-head{display:flex; justify-content:space-between; font-size:12.5px; font-weight:700; margin-bottom:6px}
+.stat-bar-track{height:8px; background:var(--line); border-radius:999px; overflow:hidden}
+.stat-bar-fill{height:100%; background:linear-gradient(90deg,var(--accent),#5f86d1); border-radius:999px; transition:width .4s ease}
+.weak-list{display:flex; flex-direction:column; gap:8px}
+.weak-card{
+  background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px 12px; box-shadow:var(--shadow);
+}
+.weak-card-main{display:flex; justify-content:space-between; align-items:center}
+.weak-card-ref{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13px; color:var(--accent)}
+.weak-card-acc{font-weight:800; font-size:13px; color:#c0392b}
+.weak-card-sub{font-size:11.5px; color:var(--ink-soft); margin-top:2px}
+
 /* ============ LAWBOOK ============ */
 .lawbook-entry{
   background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
@@ -542,7 +565,7 @@ let DATA = null;
 let codexCache = null; // lazy-loaded full law database, only fetched when Lawbook opens
 
 const state = {
-  screen: 'loading', // loading|home|quest|training|lawbook|battle|reciteTopicPick|reciteSubgroupPick|reciteQuiz
+  screen: 'loading', // loading|home|quest|training|lawbook|battle|reciteTopicPick|reciteSubgroupPick|reciteQuiz|stats
   questSubject: 'civil',
   save: loadSave(),
   battle: null,
@@ -560,10 +583,12 @@ function loadSave(){
       if (!parsed.reciteDone) parsed.reciteDone = {};
       if (typeof parsed.score !== 'number') parsed.score = 0;
       if (typeof parsed.combo !== 'number') parsed.combo = 0;
+      if (!parsed.subjectStats) parsed.subjectStats = {};
+      if (!parsed.streak) parsed.streak = { current: 0, best: 0, lastActive: null };
       return parsed;
     }
   }catch(e){}
-  return { exp: 0, level: 1, score: 0, combo: 0, unlockedLawRefs: {}, questClears: {}, unlockedGhosts: {}, reciteDone: {} };
+  return { exp: 0, level: 1, score: 0, combo: 0, unlockedLawRefs: {}, questClears: {}, unlockedGhosts: {}, reciteDone: {}, subjectStats: {}, streak: { current: 0, best: 0, lastActive: null } };
 }
 function saveSave(){ try{ localStorage.setItem(SAVE_KEY, JSON.stringify(state.save)); }catch(e){} }
 
@@ -817,7 +842,7 @@ function subjectBgPath(subjectId){ return 'pics/game/rpg/backgrounds/' + subject
    with content get a `bg` (used as that battle's fixed background); locked
    nodes need no art since they're not playable. */
 const BOOK_LABELS = {
-  civil: 'ประมวลแพ่งฯ', criminal: 'ประมวลอาญา', civpro: 'ประมวลวิ.แพ่งฯ',
+  civil: 'ประมวลแพ่งฯ', criminal: 'ประมวลอาญา', civpro: 'ประมวลวิ.แพ่งฯ', vipeng: 'ประมวลวิ.แพ่งฯ',
   adminproc: 'กฎหมายปกครอง', constitution: 'พระธรรมนูญศาลฯ', const2560: 'รัฐธรรมนูญ 2560',
 };
 function bookLabel(book){ return BOOK_LABELS[book] || book; }
@@ -860,7 +885,7 @@ const RANK_META = {
   SS: { weight: 1,  expMul: 4.5 },
 };
 const RANK_ORDER = ['D','C','B','A','S','SS'];
-function isFreePractice(mode){ return mode === 'training' || mode === 'ghosthunt'; }
+function isFreePractice(mode){ return mode === 'training' || mode === 'ghosthunt' || mode === 'review'; }
 function pickRandomGhost(){
   const pool = DATA.folkGhosts;
   const total = pool.reduce((sum, g) => sum + RANK_META[g.rank].weight, 0);
@@ -919,6 +944,7 @@ function render(){
   if (state.screen === 'gallery') return renderGallery(app);
   if (state.screen === 'galleryDetail') return renderGalleryDetail(app);
   if (state.screen === 'lawbook') return renderLawbook(app);
+  if (state.screen === 'stats') return renderStats(app);
   if (state.screen === 'battle') return renderBattle(app);
   if (state.screen === 'reciteTopicPick') return renderReciteTopicPick(app);
   if (state.screen === 'reciteSubgroupPick') return renderReciteSubgroupPick(app);
@@ -964,6 +990,12 @@ function renderHome(app){
         <div class="hero-overlay">
           <div class="icon">📔</div><div class="label">Monster Gallery</div>
           <div class="sub">ผีไทยที่ปลดล็อกแล้ว ${Object.keys(state.save.unlockedGhosts).length}/${DATA.folkGhosts.length}</div>
+        </div>
+      </a>
+      <a href="#" class="menu-card hero-card" style="background:linear-gradient(135deg,var(--accent),#5f86d1)" onclick="goScreen(event,'stats')">
+        <div class="hero-overlay">
+          <div class="icon">📊</div><div class="label">สถิติของสำลี</div>
+          <div class="sub">ความแม่นยำแยกวิชา · จุดอ่อนที่ควรทบทวน · สถิติวันติดต่อกัน ${state.save.streak.current > 0 ? '🔥' + state.save.streak.current : ''}</div>
         </div>
       </a>
       <a href="games.html" class="menu-card hero-card" style="background-image:url('pics/game/hero/gameshub.jpg')">
@@ -1273,6 +1305,7 @@ function submitReciteAnswer(ev){
   state.save.combo = correct ? (state.save.combo || 0) + 1 : 0;
   saveSave();
   syncComboHud();
+  touchStreak();
   playSfx(correct ? 'correct' : 'wrong');
 
   let scoreGain = 0;
@@ -1471,6 +1504,8 @@ function handleAnswer(index){
   });
 
   recordLawRefProgress(b.current.lawRef, correct);
+  recordSubjectStat(b.current.subjectId, correct);
+  touchStreak();
 
   if (correct) {
     playSfx('correct');
@@ -1537,12 +1572,37 @@ function setHpBar(prefix, hp, maxHp){
   if (num) num.textContent = Math.max(0, hp) + ' / ' + maxHp;
 }
 function recordLawRefProgress(lawRef, correct){
-  if (!correct) return;
   const key = lawRef.book + ':' + lawRef.article;
-  const entry = state.save.unlockedLawRefs[key] || { correct: 0, unlocked: false };
-  entry.correct++;
-  if (entry.correct >= UNLOCK_THRESHOLD) entry.unlocked = true;
+  const entry = state.save.unlockedLawRefs[key] || { correct: 0, wrong: 0, unlocked: false };
+  if (correct) {
+    entry.correct++;
+    if (entry.correct >= UNLOCK_THRESHOLD) entry.unlocked = true;
+  } else {
+    entry.wrong = (entry.wrong || 0) + 1;
+  }
   state.save.unlockedLawRefs[key] = entry;
+  saveSave();
+}
+function recordSubjectStat(subjectId, correct){
+  if (!subjectId) return;
+  const e = state.save.subjectStats[subjectId] || { correct: 0, wrong: 0 };
+  if (correct) e.correct++; else e.wrong++;
+  state.save.subjectStats[subjectId] = e;
+  saveSave();
+}
+/* ============ streak (consecutive days active) ============ */
+function todayStr(d){
+  d = d || new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+function touchStreak(){
+  const st = state.save.streak;
+  const today = todayStr();
+  if (st.lastActive === today) return; // already counted today
+  const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
+  st.current = (st.lastActive === todayStr(yesterday)) ? st.current + 1 : 1;
+  st.best = Math.max(st.best || 0, st.current);
+  st.lastActive = today;
   saveSave();
 }
 function finishBattle(result){
@@ -1555,7 +1615,7 @@ function finishBattle(result){
       ghostUnlocked = !state.save.unlockedGhosts[b.monster.id];
       state.save.unlockedGhosts[b.monster.id] = true;
       b.expEarned = Math.round(b.expEarned * RANK_META[b.monster.rank].expMul);
-    } else {
+    } else if (b.mode !== 'review') {
       const clears = state.save.questClears[b.questId] || 0;
       state.save.questClears[b.questId] = clears + 1;
     }
@@ -1841,6 +1901,115 @@ function renderLawbookEntries(entries){
   }).join('');
   body.className = '';
   body.innerHTML = html;
+}
+
+/* ============ STATS (สถิติ/ความคืบหน้า) ============
+   Reuses unlockedLawRefs (now tracks wrong too, see recordLawRefProgress)
+   and subjectStats (see recordSubjectStat) — no new data source, just a
+   read-only view over counters the battle engine already keeps. */
+const STATS_SUBJECT_LABELS = {
+  civil: { name: 'ขาแพ่ง', icon: '🔑' },
+  criminal: { name: 'ขาอาญา', icon: '⚖️' },
+  vipeng: { name: 'วิ.แพ่ง', icon: '📜' },
+};
+function subjectStatLabel(id){
+  const known = STATS_SUBJECT_LABELS[id];
+  if (known) return known;
+  const s = DATA.subjects.find(s => s.id === id);
+  return s ? { name: s.name, icon: s.icon } : { name: id, icon: '📘' };
+}
+function statAccuracyPct(e){ const total = e.correct + (e.wrong || 0); return total ? Math.round(e.correct / total * 100) : 0; }
+/* Weak articles = >=2 attempts recorded and not answering perfectly, weakest first. */
+function computeWeakArticles(limit){
+  const rows = Object.keys(state.save.unlockedLawRefs).map(key => {
+    const e = state.save.unlockedLawRefs[key];
+    const wrong = e.wrong || 0;
+    const attempts = e.correct + wrong;
+    return { key, correct: e.correct, wrong, attempts, acc: attempts ? e.correct / attempts : 1 };
+  }).filter(r => r.attempts >= 2 && r.acc < 1);
+  rows.sort((a, b) => a.acc - b.acc || b.attempts - a.attempts);
+  return rows.slice(0, limit || 6);
+}
+function renderStats(app){
+  const st = state.save.streak;
+  const allEntries = Object.values(state.save.unlockedLawRefs);
+  const totalCorrect = allEntries.reduce((n, e) => n + e.correct, 0);
+  const totalWrong = allEntries.reduce((n, e) => n + (e.wrong || 0), 0);
+  const totalAttempts = totalCorrect + totalWrong;
+  const overallAcc = totalAttempts ? Math.round(totalCorrect / totalAttempts * 100) : 0;
+
+  const subjectIds = Object.keys(state.save.subjectStats);
+  const subjectRows = subjectIds.map(id => {
+    const e = state.save.subjectStats[id];
+    const label = subjectStatLabel(id);
+    return { id, label, acc: statAccuracyPct(e), attempts: e.correct + e.wrong };
+  }).sort((a, b) => b.attempts - a.attempts);
+
+  const weak = computeWeakArticles(6);
+
+  app.innerHTML = `
+    <div class="back-row"><a href="#" onclick="goScreen(event,'home')">← กลับหน้าหลัก</a></div>
+    <div class="section-title">📊 สถิติของสำลี</div>
+
+    <div class="stats-top-row">
+      <div class="stats-tile">
+        <div class="stats-tile-num">🔥 ${st.current}</div>
+        <div class="stats-tile-label">วันติดต่อกัน ${st.best > st.current ? '(สูงสุด ' + st.best + ')' : ''}</div>
+      </div>
+      <div class="stats-tile">
+        <div class="stats-tile-num">${overallAcc}%</div>
+        <div class="stats-tile-label">ความแม่นยำรวม (${totalAttempts} ครั้ง)</div>
+      </div>
+    </div>
+
+    ${subjectRows.length ? `
+      <div class="stats-section-label">ความแม่นยำแยกวิชา</div>
+      <div class="stats-bar-list">
+        ${subjectRows.map(r => `
+          <div class="stat-bar-row">
+            <div class="stat-bar-head"><span>${r.label.icon} ${r.label.name}</span><span>${r.acc}% · ${r.attempts} ครั้ง</span></div>
+            <div class="stat-bar-track"><div class="stat-bar-fill" style="width:${r.acc}%"></div></div>
+          </div>
+        `).join('')}
+      </div>
+    ` : '<div class="locked-note">ยังไม่มีข้อมูล — ไปลุยด่านหรือล่าผีก่อนเพื่อดูสถิติ</div>'}
+
+    <div class="stats-section-label">🎯 จุดอ่อนที่ควรทบทวน</div>
+    ${weak.length ? `
+      <div class="weak-list">
+        ${weak.map(w => {
+          const [book, article] = w.key.split(':');
+          return `
+            <div class="weak-card">
+              <div class="weak-card-main">
+                <span class="weak-card-ref">${bookLabel(book)} ${articleLabel(article)}</span>
+                <span class="weak-card-acc">${Math.round(w.acc*100)}%</span>
+              </div>
+              <div class="weak-card-sub">ถูก ${w.correct} · ผิด ${w.wrong}</div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+      <button class="result-btn" style="width:100%; margin-top:14px" onclick="startWeakReview()">⚔️ ทบทวนจุดอ่อน</button>
+    ` : '<div class="locked-note">ยังไม่พบจุดอ่อนชัดเจน — ตอบคำถามให้มากขึ้นอีกหน่อยเพื่อให้ระบบวิเคราะห์ได้แม่นขึ้น (ต้องตอบซ้ำมาตราเดิมอย่างน้อย 2 ครั้ง)</div>'}
+  `;
+}
+function startWeakReview(){
+  const weak = computeWeakArticles(5);
+  const pool = [];
+  const used = new Set();
+  weak.forEach(w => {
+    const [book, article] = w.key.split(':');
+    const matches = DATA.questions.filter(q => q.lawRef && q.lawRef.book === book && String(q.lawRef.article) === article && !used.has(q.id));
+    shuffle(matches).slice(0, 2).forEach(q => { pool.push(q); used.add(q.id); });
+  });
+  if (!pool.length) return;
+  const ghost = pickRandomGhost();
+  startBattleState({
+    questId: null, mode: 'review', monster: ghost, subjectId: null,
+    bgPath: subjectBgPath('civil'),
+    questionPool: pool,
+  });
 }
 </script>
 <link rel="stylesheet" href="legal-disclaimer.css">
