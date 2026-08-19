@@ -1277,3 +1277,23 @@ updateOccurrenceStats();
 updateHeatmap();
 buildGeeNote();
 if (AIRPORTS.length) selectAirport(AIRPORTS[0]);
+
+
+// ===== Role switcher (citizen / official) =====
+function applyRoleFilter(role) {
+  document.querySelectorAll('#sidebar [data-role]').forEach(function (el) {
+    var r = el.getAttribute('data-role') || 'both';
+    el.classList.toggle('role-hidden', r !== 'both' && r !== role);
+  });
+}
+(function () {
+  var rs = document.getElementById('role-select');
+  if (rs) {
+    rs.value = localStorage.getItem('bunkfai-role') || 'both';
+    applyRoleFilter(rs.value);
+    rs.addEventListener('change', function () {
+      localStorage.setItem('bunkfai-role', rs.value);
+      applyRoleFilter(rs.value);
+    });
+  }
+})();

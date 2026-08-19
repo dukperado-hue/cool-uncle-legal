@@ -8,7 +8,7 @@
   html, body { margin: 0; height: 100%; font-family: 'Tahoma', 'Segoe UI', sans-serif; }
   #app { display: flex; height: 100%; }
   #sidebar { width: 360px; flex-shrink: 0; background: #14181f; color: #e8ebf0; overflow-y: auto; padding: 14px; box-sizing: border-box; }
-  #sidebar h1 { font-size: 16px; margin: 0 0 2px 0; }  .logo-row { display: flex; align-items: center; gap: 10px; }  .logo-img { width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0; }  .title-block h1 { font-size: 20px; margin: 0 0 2px 0; line-height: 1.25; }  .title-block { min-width: 0; }
+  #sidebar h1 { font-size: 16px; margin: 0 0 2px 0; }  .role-bar { display:flex; align-items:center; gap:8px; margin:8px 0 10px 0; }.role-label { font-size:12px; color:#9aa5b1; white-space:nowrap; }#role-select { flex:1; background:#232a38; color:#e8ebf0; border:1px solid #333d4d; border-radius:4px; padding:6px 8px; font-size:13px; cursor:pointer; }.role-hidden { display:none !important; }  .logo-row { display: flex; align-items: center; gap: 10px; }  .logo-img { width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0; }  .title-block h1 { font-size: 20px; margin: 0 0 2px 0; line-height: 1.25; }  .title-block { min-width: 0; }
   #sidebar .subtitle { font-size: 11px; color: #8a93a3; margin-bottom: 10px; }
   #map { flex: 1; }
   .section-title { font-size: 12px; font-weight: bold; color: #cfd6e0; margin: 14px 0 6px; border-bottom: 1px solid #333d4d; padding-bottom: 4px; }
@@ -82,38 +82,39 @@
 <div id="app">
   <div id="sidebar">
     <div class="logo-row"><img src="logo-capybara.png" alt="คาปิบารา" class="logo-img"><div class="title-block"><h1>แจ้งก่อนจุด</h1><div class="subtitle">ระบบแจ้งเจ้าหน้าที่รัฐก่อนปล่อยบั๊งบึงไฟและโคมลอย</div></div></div>
+    <div class="role-bar"><span class="role-label">ผู้ใช้งาน:</span><select id="role-select"><option value="both">ทั้งหมด (ดูทุกเมนู)</option><option value="citizen">👤 พลเรือน (ผู้ขอ)</option><option value="official">🏛️ เจ้าหน้าที่ (ผู้อนุมัติ)</option></select></div>
     
 
     <div class="section-title">เลือกภาค</div>
-    <select id="region-select"></select>
+    <select data-role="both"></select>
 
     <div class="section-title">เลือกจังหวัด <span id="province-count"></span></div>
-    <input id="province-search" type="text" placeholder="ค้นหาชื่อจังหวัด...">
+    <input data-role="both" type="text" placeholder="ค้นหาชื่อจังหวัด...">
     <div id="province-list"></div>
 
     <div class="section-title">ประกาศจังหวัด (Regulation)</div>
-    <div id="regulation-card" class="stat-card"><div class="stat-empty">คลิกที่ผังหรือเลือกจังหวัด</div></div>
+    <div data-role="both" class="stat-card"><div class="stat-empty">คลิกที่ผังหรือเลือกจังหวัด</div></div>
 
     <div class="section-title">📍 เครื่องมือ: ตรวจสอบพิกัด (Clearance Check)</div>
-    <button class="tool-btn" id="pin-drop-btn">📍 ปักหมุดตรวจสอบ (Clearance Check)</button>
+    <button class="tool-btn" data-role="citizen">📍 ปักหมุดตรวจสอบ (Clearance Check)</button>
 
     <div class="section-title">✈️ จำลองวิถีบั้งไฟ (Glide Path Check)</div>
     <div class="tool-box">
-      <select id="sim-type"></select>
-      <button class="tool-btn" id="sim-run">▶ คำนวณ</button>
+      <select data-role="both"></select>
+      <button class="tool-btn" data-role="both">▶ คำนวณ</button>
       <div id="sim-result"></div>
     </div>
 
     <div class="section-title">📮 คำร้องขออนุญาต / แจ้งหน่วยงาน (Petition)</div>
-    <button class="tool-btn" id="petition-open">📮 เขียนคำร้อง แจ้งอำเภอ-สนามบิน-ตำรวจ (ปุ่มเดียว)</button>
+    <button class="tool-btn" data-role="citizen">📮 เขียนคำร้อง แจ้งอำเภอ-สนามบิน-ตำรวจ (ปุ่มเดียว)</button>
 
     <div class="section-title">🏛️ อำเภอ / เขต (District)</div>
-    <select id="amphoe-select" style="display:none"></select>
+    <select data-role="citizen" style="display:none"></select>
     <div id="amphoe-card" class="stat-card" style="display:none"></div>
 
     <div class="section-title">📝 บันทึกเหตุการณ์ / คำขอ (Occurrence Log)</div>
-    <div class="stat-card" id="occurrence-stats"></div>
-    <div id="occurrence-panel">
+    <div class="stat-card" data-role="citizen"></div>
+    <div data-role="citizen">
       <div id="occurrence-form">
         <div style="font-size:12px;margin-bottom:4px">พิกัด (จากหมุดที่ปัก)</div>
         <input id="occ-lat" type="text" placeholder="ละติจูด">
@@ -126,32 +127,32 @@
           <input id="occ-start" type="text" placeholder="เวลาเริ่มจุด (YYYY-MM-DDTHH:MM)" style="flex:1">
           <input id="occ-end" type="text" placeholder="เวลาสิ้นสุด" style="flex:1">
         </div>
-        <button class="tool-btn" id="occ-start-now">⏱ เริ่มจุด (เวลาเดี๋ยวนี้)</button>
-        <button class="tool-btn" id="occ-end-now">⏹ สิ้นสุด (เวลาเดี๋ยวนี้)</button>
-        <button class="tool-btn" id="occ-save">💾 บันทึก</button>
+        <button class="tool-btn" data-role="both">⏱ เริ่มจุด (เวลาเดี๋ยวนี้)</button>
+        <button class="tool-btn" data-role="both">⏹ สิ้นสุด (เวลาเดี๋ยวนี้)</button>
+        <button class="tool-btn" data-role="both">💾 บันทึก</button>
         <button class="tool-btn" id="occ-cancel">ยกเลิก</button>
       </div>
     </div>
 
     <div class="section-title">เขตปลอดัยทางการเดินอากาศ — สนามบิน (43 แห่ง)</div>
-    <input id="airport-search" type="text" placeholder="ค้นหา ICAO หรือชื่อสนามบิน..." style="display:none">
+    <input data-role="both" type="text" placeholder="ค้นหา ICAO หรือชื่อสนามบิน..." style="display:none">
     <div id="airport-list"></div>
-    <label class="toggle-row"><input type="checkbox" id="toggle-lhz" checked>
+    <label class="toggle-row"><input type="checkbox" data-role="both" checked>
       <span class="swatch" style="background:#c1121f;opacity:.4;border:1px solid #c1121f"></span> <span id="label-lhz">เขตห้าม 10 กม. รอบสนามบิน (LHZ)</span></label>
-    <label class="toggle-row"><input type="checkbox" id="toggle-phz" checked>
+    <label class="toggle-row"><input type="checkbox" data-role="both" checked>
       <span class="swatch" style="background:#e31a1c;opacity:.7"></span> <span id="label-phz">แนวขึ้น-ลงเครื่องบิน (PHZ แบบ Band)</span></label>
-    <label class="toggle-row"><input type="checkbox" id="toggle-heat">
+    <label class="toggle-row"><input type="checkbox" data-role="both">
       <span class="swatch" style="background:#ffbe0b"></span> <span>Heatmap จุดเสี่ยง (จาก Log)</span></label>
     <div id="current-airport-label">—</div>
 
     <div class="section-title">📄 ร่างหนังสือราชการ (Letter Generator)</div>
-          <button class="tool-btn" id="letter-open">เปิดเครื่องมือร่างหนังสือตอบกลับ</button>
+          <button class="tool-btn" data-role="official">เปิดเครื่องมือร่างหนังสือตอบกลับ</button>
 
     <div class="section-title">📋 คำขอที่ส่งแล้ว (Permits)</div>
-    <button class="tool-btn" id="permits-open">📋 ดูคำขอที่ส่งแล้ว / สถานะ</button>
+    <button class="tool-btn" data-role="both">📋 ดูคำขอที่ส่งแล้ว / สถานะ</button>
 
     <div class="section-title">📊 แดชบอร์ด (Dashboard)</div>
-    <button class="tool-btn" id="dashboard-open">📊 แดชบอร์ดคำขอ + เหตุการณ์</button>
+    <button class="tool-btn" data-role="official">📊 แดชบอร์ดคำขอ + เหตุการณ์</button>
 
     <div id="letter-modal">
       <div class="modal-content">
@@ -159,7 +160,7 @@
           <input id="letter-applicant" type="text" placeholder="ชื่อผู้ยื่นคำขอ / ผู้รับแจ้ง">
           <input id="letter-event" type="text" placeholder="ชื่อกิจกรรม / งานบุญ">
           <input id="letter-date" type="date" placeholder="วันที่งาน">
-          <select id="letter-decision"></select>
+          <select data-role="both"></select>
           <button class="tool-btn" id="letter-regenerate">🔄 สร้างใหม่</button>
           <button class="tool-btn" id="letter-print">🖨 พิมพ์</button>
           <button class="tool-btn" id="letter-close">✖ ปิด</button>
@@ -182,7 +183,7 @@
       <div class="modal-content">
         <h3 style="margin:0 0 10px 0;font-size:15px;color:#222">📋 คำขอที่ส่งแล้ว (Permit Requests)</h3>
         <div id="permits-list"></div>
-        <button class="permit-tool-btn" id="permits-close" style="margin-top:8px">✖ ปิด</button>
+        <button class="permit-tool-btn" data-role="both" style="margin-top:8px">✖ ปิด</button>
       </div>
     </div>
 
@@ -190,7 +191,7 @@
       <div class="modal-content">
         <h3 style="margin:0 0 10px 0;font-size:15px;color:#222">📊 แดชบอร์ดความปลอดภัย (Safety Dashboard)</h3>
         <div id="dashboard-body"></div>
-        <button class="permit-tool-btn" id="dashboard-close" style="margin-top:8px">✖ ปิด</button>
+        <button class="permit-tool-btn" data-role="both" style="margin-top:8px">✖ ปิด</button>
       </div>
     </div>
 
@@ -208,10 +209,10 @@
           <label class="toggle-row" style="font-size:12.5px"><input type="checkbox" id="pet-ag-police" checked> 👮 ตำรวจ (รับทราบ/รักษาความสงบ)</label>
       <select id="pet-amphoe" style="display:none"></select>
           <div id="pet-status" style="font-size:12px;color:#ffbe0b;margin:4px 0"></div>
-          <button class="tool-btn" id="pet-generate">📝 สร้างคำร้อง</button>
-          <button class="tool-btn" id="pet-print">🖨 พิมพ์/บันทึก PDF</button>
-          <button class="tool-btn" id="pet-copy">📋 คัดลอกข้อความ</button>
-          <button class="tool-btn" id="pet-close">✖ ปิด</button>
+          <button class="tool-btn" data-role="both">📝 สร้างคำร้อง</button>
+          <button class="tool-btn" data-role="both">🖨 พิมพ์/บันทึก PDF</button>
+          <button class="tool-btn" data-role="both">📋 คัดลอกข้อความ</button>
+          <button class="tool-btn" data-role="both">✖ ปิด</button>
         </div>
         <div id="petition-body"></div>
       </div>
@@ -233,6 +234,6 @@
 <script src="amphoes.js"></script>
 <script src="amphoe_contacts.js?v=20260815c"></script>
 <script src="contacts.js?v=20260815a"></script>
-<script src="app.js?v=20260815f"></script>
+<script src="app.js?v=20260819a"></script>
 </body>
 </html>
