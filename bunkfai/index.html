@@ -8,7 +8,7 @@
   html, body { margin: 0; height: 100%; font-family: 'Tahoma', 'Segoe UI', sans-serif; }
   #app { display: flex; height: 100%; }
   #sidebar { width: 360px; flex-shrink: 0; background: #14181f; color: #e8ebf0; overflow-y: auto; padding: 14px; box-sizing: border-box; }
-  #sidebar h1 { font-size: 16px; margin: 0 0 2px 0; }  .role-bar { display:flex; align-items:center; gap:8px; margin:8px 0 10px 0; }.role-label { font-size:12px; color:#9aa5b1; white-space:nowrap; }#role-select { flex:1; background:#232a38; color:#e8ebf0; border:1px solid #333d4d; border-radius:4px; padding:6px 8px; font-size:13px; cursor:pointer; }.role-hidden { display:none !important; }  .logo-row { display: flex; align-items: center; gap: 10px; }  .logo-img { width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0; }  .title-block h1 { font-size: 20px; margin: 0 0 2px 0; line-height: 1.25; }  .title-block { min-width: 0; }
+  #sidebar h1 { font-size: 16px; margin: 0 0 2px 0; }  .role-bar { display:flex; align-items:center; gap:8px; margin:8px 0 10px 0; }.role-label { font-size:12px; color:#9aa5b1; white-space:nowrap; }#role-select { flex:1; background:#232a38; color:#e8ebf0; border:1px solid #333d4d; border-radius:4px; padding:6px 8px; font-size:13px; cursor:pointer; }.role-hidden { display:none !important; } .role-pill-both{background:#2d4a3e;color:#8fe6b4} .role-pill-citizen{background:#3b2f14;color:#f2c94c} .role-pill-official{background:#312246;color:#c9a8ff}  .logo-row { display: flex; align-items: center; gap: 10px; }  .logo-img { width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0; }  .title-block h1 { font-size: 20px; margin: 0 0 2px 0; line-height: 1.25; }  .title-block { min-width: 0; }
   #sidebar .subtitle { font-size: 11px; color: #8a93a3; margin-bottom: 10px; }
   #map { flex: 1; }
   .section-title { font-size: 12px; font-weight: bold; color: #cfd6e0; margin: 14px 0 6px; border-bottom: 1px solid #333d4d; padding-bottom: 4px; }
@@ -82,7 +82,8 @@
 <div id="app">
   <div id="sidebar">
     <div class="logo-row"><img src="logo-capybara.png" alt="คาปิบารา" class="logo-img"><div class="title-block"><h1>แจ้งก่อนจุด</h1><div class="subtitle">ระบบแจ้งเจ้าหน้าที่รัฐก่อนปล่อยบั๊งบึงไฟและโคมลอย</div></div></div>
-    <div class="role-bar"><span class="role-label">ผู้ใช้งาน:</span><select id="role-select"><option value="both">ทั้งหมด (ดูทุกเมนู)</option><option value="citizen">👤 พลเรือน (ผู้ขอ)</option><option value="official">🏛️ เจ้าหน้าที่ (ผู้อนุมัติ)</option></select></div>
+    <div class="role-bar"><span class="role-label">ผู้ใช้งาน:</span><select id="role-select"><option value="both">ทั้งหมด (ดูทุกเมนู)</option><option value="citizen">👤 พลเรือน (ผู้ขอ)</option><option value="official">🏛️ เจ้าหน้าที่ (ผู้อนุมัติ)</option></select><span id="role-pill" style="font-size:11px;padding:3px 8px;border-radius:10px;background:#2d4a3e;color:#8fe6b4;margin-left:6px;white-space:nowrap">🌐 ทุกเมนู</span></div>
+    <div style="font-size:10.5px;color:#7a8393;margin:-4px 0 8px 0">พลเรือน = ทำคำร้อง/เช็คพิกัด · เจ้าหน้าที่ = ออกใบอนุญาต/แดชบอร์ด · แผนที่+ตรวจสอบ+บันทึกเหตุการณ์ทุกคนใช้ได้</div>
     
 
     <div class="section-title">เลือกภาค</div>
@@ -230,10 +231,10 @@
 
 <script src="vendor/leaflet.js"></script>
 <script src="vendor/leaflet.heat.js"></script>
-<script src="data.js?v=20260815b"></script>
-<script src="amphoes.js?v=20260819b"></script>
-<script src="amphoe_contacts.js?v=20260819b"></script>
-<script src="contacts.js?v=20260819b"></script>
-<script src="app.js?v=20260819b"></script>
+<script src="data.js?v=20260819dc"></script>
+<script src="amphoes.js?v=20260819dc"></script>
+<script src="amphoe_contacts.js?v=20260819dc"></script>
+<script src="contacts.js?v=20260819dc"></script>
+<script src="app.js?v=20260819dc"></script>
 </body>
 </html>
