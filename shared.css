@@ -211,3 +211,118 @@ nav.series-nav{
 nav.series-nav a{color:var(--accent);text-decoration:none;font-weight:600;white-space:nowrap}
 nav.series-nav a:hover{text-decoration:underline}
 nav.series-nav span.sep{color:var(--ink-faint)}
+
+/* ================================================================
+   LAYOUT V2 — บทความคดี v2 (29 หน้า)
+   อ่านสบาย: margin ซ้าย-ขวา, เว้นวรรคย่อหนา, VDO เด่น responsive
+   ================================================================ */
+
+/* บทความวีต — การ์ดกลางหน้า เวนขอบซ้าย-ขวาตามจอ */
+article.mag-article{
+  background:var(--card);border-radius:18px;padding:32px 36px 28px;
+  box-shadow:var(--shadow);margin-bottom:48px;line-height:1.85;font-size:1.05rem;
+}
+@media(max-width:720px){
+  article.mag-article{padding:20px 18px 18px;margin:12px 0 32px;border-radius:14px;font-size:1rem}
+}
+@media(min-width:1200px){ article.mag-article{padding:40px 56px 32px;font-size:1.08rem} }
+
+/* หัวเรื่องบนสุด */
+section.case-hero{margin:4px 0 26px}
+section.case-hero h1{
+  font-family:'Noto Serif Thai',serif;font-size:1.85rem;font-weight:900;
+  line-height:1.45;color:#1B2437;margin:0 0 14px;
+}
+@media(max-width:720px){ section.case-hero h1{font-size:1.45rem} }
+@media(min-width:1200px){ section.case-hero h1{font-size:2.05rem} }
+p.tagline{
+  color:var(--ink-soft);font-size:1rem;line-height:1.8;margin:0 0 12px;
+  border-left:4px solid var(--gold);padding-left:14px;background:#FBF9F4;padding:10px 14px;border-radius:0 10px 10px 0;
+}
+p.case-meta{font-size:.88rem;color:var(--ink-faint);margin:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+span.badge{display:inline-block;border-radius:999px;padding:3px 12px;font-size:.76rem;font-weight:800;color:#fff}
+span.badge.criminal{background:#B23A3A}span.badge.civil{background:#2E4A7A}
+span.badge.corporate{background:#6B4A9A}span.badge.const{background:#B08A3C}
+span.badge.admin{background:#1E7A4F}span.badge.international{background:#5A6072}
+p.case-meta > span{font-size:.88rem}
+
+/* หัวข้อแต่ละ section — เส้นทอง */
+section > h3{
+  font-family:'Noto Serif Thai',serif;font-size:1.28rem;font-weight:900;color:#1B2437;
+  margin:34px 0 14px;padding:0 0 8px;
+  display:flex;align-items:center;gap:10px;
+}
+section > h3::after{content:"";flex:1;height:3px;border-radius:3px;background:linear-gradient(90deg,#B08A3C 0%,transparent 100%)}
+@media(max-width:720px){ section > h3{font-size:1.1rem;margin:26px 0 10px} }
+
+/* ย่อหน้า — เว้นวรรคระหว่างย่อหนา */
+p.para-split{margin:0 0 14px;line-height:1.9}
+@media(max-width:720px){ p.para-split{margin:0 0 12px} }
+
+/* หลังหัวเรื่อง → คำโปรย → VDO → เนื้อหา */
+section.case-media{margin:30px 0 6px}
+div.video-embed{
+  overflow:hidden;border-radius:14px;box-shadow:0 8px 24px rgba(34,40,58,.18);
+  margin:10px auto;max-width:840px;background:#000;
+}
+div.video-embed iframe{width:100%;aspect-ratio:16/9;display:block;border:0}
+@media(max-width:720px){
+  div.video-embed{max-width:100%;margin:8px -18px;border-radius:0}
+  div.video-embed iframe{aspect-ratio:16/9}
+}
+@media(min-width:1200px){ div.video-embed{max-width:900px} }
+p.mag-video-credit{font-size:.82rem;color:var(--ink-faint);margin:8px 0 0;padding-left:2px}
+p.video-pending{background:var(--gold-soft);border:1px dashed var(--gold);border-radius:12px;padding:14px 18px;margin:10px 0;font-size:.92rem;color:#7A6220}
+
+/* เบื้องหลัง */
+section.case-background{margin-bottom:10px}
+
+/* Summary box (คำโปรย 30 วินาที) */
+section.case-summary{margin:22px 0 6px}
+div.summary-box{background:var(--gold-soft);border:1px solid var(--gold);border-radius:14px;padding:18px 22px;margin:8px 0 0}
+div.summary-box p{margin:0;color:#5C4716;font-size:.98rem;line-height:1.85}
+@media(max-width:720px){ div.summary-box{padding:14px 16px} }
+
+/* ลำดับเหตุการณ์ */
+div.event{margin:0 0 18px}
+p.event-label{margin:0 0 6px;color:var(--accent);font-size:.98rem}
+span.year{display:inline-block;margin-left:6px;background:#F1EDE2;color:#7A6220;font-weight:800;font-size:.8rem;padding:2px 10px;border-radius:999px;vertical-align:middle}
+div.event > p.para-split:last-child{margin-bottom:0}
+
+/* ประเด็นกฎหมาย */
+section.case-legal-issues{margin-bottom:8px}
+p.li-q{margin:10px 0;background:#F8FAFC;border-left:4px solid var(--accent);border-radius:0 10px 10px 0;padding:12px 16px;line-height:1.8;font-size:.98rem}
+@media(max-width:720px){ p.li-q{padding:10px 12px} }
+
+/* บทบัญญัติ (accordion) */
+details.law-acc{margin:10px 0;border:1px solid #E5E1D6;border-radius:12px;background:#fff}
+details.law-acc summary{cursor:pointer;font-weight:700;color:var(--accent);padding:12px 16px;font-size:.98rem;list-style:none}
+details.law-acc summary::-webkit-details-marker{display:none}
+details.law-acc[open] summary{border-bottom:1px solid #F1EDE2}
+details.law-acc p.loc{font-size:.82rem;color:var(--ink-faint);margin:6px 16px 0}
+details.law-acc p.law-text{margin:8px 16px 14px;color:#3A4152;font-size:.96rem;line-height:1.85}
+
+/* บทเรียน */
+section.case-lessons ol{margin:0;padding-left:22px}
+section.case-lessons li{margin:0 0 12px;line-height:1.85}
+section.case-lessons li p{margin:0}
+div.verdict-box{margin:22px 0 6px;background:var(--ok-bg);border:1px solid var(--ok);border-radius:14px;padding:16px 20px}
+div.verdict-box p{margin:0 0 10px;color:#14532D;font-size:.96rem;line-height:1.8}
+div.verdict-box p:last-child{margin-bottom:0}
+p.verdict-link{margin:0}
+p.verdict-link a{color:var(--ok);font-weight:700;font-size:.9rem}
+
+/* คำชี้แจงท้ายหน้า */
+p.disclaimer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-size:.82rem;color:var(--ink-faint);line-height:1.7}
+
+/* Series card (hub) */
+.series-card{background:#FDFCF8;border:1px solid #E5E1D6;border-top:4px solid var(--gold);border-radius:14px;padding:20px 24px;margin-bottom:16px}
+.series-order{font-size:.82rem;font-weight:800;color:var(--gold);text-transform:uppercase;margin:0 0 4px}
+.series-year{font-size:.84rem;color:var(--ink-faint);margin:0 0 6px}
+.series-card h3{font-family:'Noto Serif Thai',serif;font-size:1.2rem;font-weight:900;color:#1B2437;margin:4px 0 8px}
+.series-card h3 a{color:inherit;text-decoration:none}
+.series-card h3 a:hover{color:var(--accent)}
+.series-tagline{color:#5A6072;font-size:.92rem;line-height:1.7;margin:0}
+.series-card nav.series-nav{margin:12px 0 0;font-size:.88rem}
+section.series-body > p{color:var(--ink-soft);line-height:1.9;margin:4px 0 0;font-size:1rem}
+a.hub-back{font-weight:700;color:var(--accent);text-decoration:none}
