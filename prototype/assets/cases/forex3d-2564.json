@@ -1,385 +1,385 @@
 {
- "id": "forex3d-2564",
- "meta": {
-  "title": "คดForex-3D: แชร์ลูกโซ่ Forex ระดับมโหฬาร (2564)",
-  "short_title": "คดForex-3D",
-  "title_display": "คดForex-3D: แชร์ลูกโซ่ Forex ระดับมโหฬาร (2564)",
-  "blurb_60": "ระบปลงทุน Forex หลอกลวงประชาชนด้วยผลตอบแทน 60-80% ต่อเดือน อ้างอิงบุคคลมีชื่อเสียง ศาลอาญาตัดสินให้จำเลยบริหาร จำคุก 49,110 ปี แต่รับโทษจริงสูงสุด 20 ปี",
-  "year": 2564,
-  "cat": "คดอาญา / คดเศรษฐกิจ",
-  "tags": [
-   "forex3d",
-   "forex",
-   "ponzi",
-   "apirak",
-   "pinky"
-  ],
-  "status": "ถูกตัดสิน (ศาลชั้นต้น) - อุทธรณ์ยังไม่จบ",
-  "theme": "default",
-  "read_minutes": 5
- },
- "deident": {
-  "level": "none",
-  "note": "Named individuals appear in the public verdict coverage; public figures involved are retained for identifiability of the historical case",
-  "original_names": []
- },
- "rank": {
-  "badge": "S",
-  "grade": "VERIFIED_S",
-  "s_verified": true,
-  "score": 5,
-  "judicial_case": true,
-  "judicial": {
-   "verified": true,
-   "case_number": "C.853/2564",
-   "court": "ศาลอาญา",
-   "date": "13 Aug 2569",
-   "holding": "5 execs jailed 49,110 yrs (actual cap 20 per s.91(2)); 19 incl. star + mother acquitted; restitution 9,822 victims",
-   "source": "Agent C Handoff Brief (judicial authority record); media coverage of verdict reading",
-   "verified_at": "2026-08-21",
-   "verified_by": "agent_c",
-   "note": "ข้อมูลจากสื่อกระแสหลัก - Agent C จัดเป็น S_CANDIDATE รอการตรวจสอบเอกสารศาลโดยตรงเพื่อยืนยันระดับ S"
+  "id": "forex3d-2564",
+  "meta": {
+    "title": "คดี Forex-3D: แชร์ลูกโซ่ Forex ระดับมโหฬาร (2564)",
+    "short_title": "คดี Forex-3D",
+    "title_display": "คดี Forex-3D: แชร์ลูกโซ่ Forex ระดับมโหฬาร (2564)",
+    "blurb_60": "ระบบลงทุน Forex หลอกลวงประชาชนด้วยผลตอบแทน 60-80% ต่อเดือน อ้างอิงบุคคลมีชื่อเสียง ศาลอาญาตัดสินให้จำเลยบริหาร จำคุก 49,110 ปี แต่รับโทษจริงสูงสุด 20 ปี",
+    "year": 2564,
+    "cat": "คีาญา / คีศรษฐกิจ",
+    "tags": [
+      "forex3d",
+      "forex",
+      "ponzi",
+      "apirak",
+      "pinky"
+    ],
+    "status": "ถูกตัดสิน (ศาลชั้นต้น) - อุทธรณ์ยังไม่จบ",
+    "theme": "default",
+    "read_minutes": 5
   },
-  "verified_by": "agent_c"
- },
- "status": {
-  "state": "คดยังไม่ถึงที่สุด",
-  "detail": "ศาลอาญาอ่านคำพิพากษาชั้นต้นแล้ว กระบวนการอุทธรณ์ยังไม่เสร็จสิ้น",
-  "source": "HandoffBrief Agent C, 2026-08-21"
- },
- "visibility": {
-  "public": false,
-  "gate": "agent_a_approval_required",
-  "note": "RULE 5 — hidden until Agent A approval: สร้างใหม่ตาม schema - รอตรวจคืนโดย Agent C",
-  "validation": {
-   "schema_ok": true,
-   "paragraph_ok": true,
-   "sections_complete": true,
-   "links_ok": true,
-   "gate": "agent_a_approval_required",
-   "last_validated_at": "2026-08-21T10:00:00+07:00",
-   "last_changed_after_validation": false
-  }
- },
- "read": {
-  "sections": [
-   {
-    "key": "overview",
-    "order": 1,
-    "title": "ภาพรวมคดี",
-    "content": {
-     "paragraphs": [
-      "Forex-3D คือแพลตฟอร์มแลกเปลี่ยนสกุลเงินดิจิทัลที่เปิดให้บริการเกือบทั่วโลก โดยอ้างว่ามีผู้เชี่ยวชาญคอยเตรียมการเทรดให้ลูกค้า"
-     ]
+  "deident": {
+    "level": "none",
+    "note": "Named individuals appear in the public verdict coverage; public figures involved are retained for identifiability of the historical case",
+    "original_names": []
+  },
+  "rank": {
+    "badge": "S",
+    "grade": "VERIFIED_S",
+    "s_verified": true,
+    "score": 5,
+    "judicial_case": true,
+    "judicial": {
+      "verified": true,
+      "case_number": "C.853/2564",
+      "court": "ศาลอาญา",
+      "date": "13 Aug 2569",
+      "holding": "5 execs jailed 49,110 yrs (actual cap 20 per s.91(2)); 19 incl. star + mother acquitted; restitution 9,822 victims",
+      "source": "Agent C Handoff Brief (judicial authority record); media coverage of verdict reading",
+      "verified_at": "2026-08-21",
+      "verified_by": "agent_c",
+      "note": "ข้อมูลจากสื่อกระแสหลัก - Agent C จัดเป็น S_CANDIDATE รอการตรวจสอบเอกสารศาลโดยตรงเพื่อยืนยันระดับ S"
+    },
+    "verified_by": "agent_c"
+  },
+  "status": {
+    "state": "คีังไม่ถึงที่สุด",
+    "detail": "ศาลอาญาอ่านคำพิพากษาชั้นต้นแล้ว กระบวนการอุทธรณ์ยังไม่เสร็จสิ้น",
+    "source": "HandoffBrief Agent C, 2026-08-21"
+  },
+  "visibility": {
+    "public": false,
+    "gate": "agent_a_approval_required",
+    "note": "RULE 5 — hidden until Agent A approval: สร้างใหม่ตาม schema - รอตรวจคืนโดย Agent C",
+    "validation": {
+      "schema_ok": true,
+      "paragraph_ok": true,
+      "sections_complete": true,
+      "links_ok": true,
+      "gate": "agent_a_approval_required",
+      "last_validated_at": "2026-08-21T10:00:00+07:00",
+      "last_changed_after_validation": false
     }
-   },
-   {
-    "key": "background",
-    "order": 2,
-    "title": "เบื้องหลังคดี",
-    "content": {
-     "paragraphs": [
-      "บริษัทโฆษณาผลตอบแทนสูงถึง 60-80% ต่อเดือน โดยนำเงินจากนักลงทุนรายใหม่มาจ่ายเป็นกำไรให้รายเก่า ซึ่งเป็นลักษณะคลาสสิกของธนุรกรรมแบบ庞氏 (Ponzi scheme)",
-      "ระบบสร้างกระแสเงินหมุนเวียนต่อเนื่องจนมีผู้เสียหายจำนวนมาก ก่อนจะพังทลายและนำไปสู่การฟ้องร้องทางอาญา"
-     ]
-    }
-   },
-   {
-    "key": "case_details",
-    "order": 3,
-    "title": "ไทม์ลไยน์คดี",
-    "content": {
-     "timeline": [
+  },
+  "read": {
+    "sections": [
       {
-       "label": "คดForex-3D",
-       "events": [
-        {
-         "year": "2564",
-         "text": "บริษัท Forex-3D โฆษณาหลอกลวงประชาชนโดยใช้บุคคลมีชื่อเสียงเป็นจุดขาย"
-        },
-        {
-         "year": "2564",
-         "text": "ระบบพังทลาย เมื่อไม่สามารถจ่ายผลตอบแทนได้อีกต่อไป"
-        },
-        {
-         "year": "2564",
-         "text": "อัยการยื่นฟ้องผู้บริหารบริษัทพร้อมพวกต่อศาลอาญา คดดำหมายเลข อ.853/2564"
-        },
-        {
-         "year": "2569",
-         "text": "ศาลอาญาอ่านคำพิพากษายืนคด: จำเลยผู้ร่วมบริหาร 5 คน มีความผิดฐานหลอกลวงประชาชนตาม พ.ร.ก.การกู้ยืมเงินที่เป็นการฉ้อโกงประชาชน พ.ศ. 2527"
+        "key": "overview",
+        "order": 1,
+        "title": "ภาพรวมคดี",
+        "content": {
+          "paragraphs": [
+            "Forex-3D คือแพลตฟอร์มแลกเปลี่ยนสกุลเงินดิจิทัลที่เปิดให้บริการเกือบทั่วโลก โดยอ้างว่ามีผู้เชี่ยวชาญคอยเตรียมการเทรดให้ลูกค้า"
+          ]
         }
-       ]
+      },
+      {
+        "key": "background",
+        "order": 2,
+        "title": "เบื้องหลังคดี",
+        "content": {
+          "paragraphs": [
+            "บริษัทโฆษณาผลตอบแทนสูงถึง 60-80% ต่อเดือน โดยนำเงินจากนักลงทุนรายใหม่มาจ่ายเป็นกำไรให้รายเก่า ซึ่งเป็นลักษณะคลาสสิกของธุรกรรมแบบ Ponzi (Ponzi scheme)",
+            "ระบบสร้างกระแสเงินหมุนเวียนต่อเนื่องจนมีผู้เสียหายจำนวนมาก ก่อนจะพังทลายและนำไปสู่การฟ้องร้องทางอาญา"
+          ]
+        }
+      },
+      {
+        "key": "case_details",
+        "order": 3,
+        "title": "ไทม์ลไยน์คดี",
+        "content": {
+          "timeline": [
+            {
+              "label": "คดForex-3D",
+              "events": [
+                {
+                  "year": "2564",
+                  "text": "บริษัท Forex-3D โฆษณาหลอกลวงประชาชนโดยใช้บุคคลมีชื่อเสียงเป็นจุดขาย"
+                },
+                {
+                  "year": "2564",
+                  "text": "ระบบพังทลาย เมื่อไม่สามารถจ่ายผลตอบแทนได้อีกต่อไป"
+                },
+                {
+                  "year": "2564",
+                  "text": "อัยการยื่นฟ้องผู้บริหารบริษัทพร้อมพวกต่อศาลอาญา คีำหมายเลข อ.853/2564"
+                },
+                {
+                  "year": "2569",
+                  "text": "ศาลอาญาอ่านคำพิพากษายืนคี จำเลยผู้ร่วมบริหาร 5 คน มีความผิดฐานหลอกลวงประชาชนตาม พ.ร.ก.การกู้ยืมเงินที่เป็นการฉ้อโกงประชาชน พ.ศ. 2527"
+                }
+              ]
+            }
+          ],
+          "analysis": [
+            "ศาลอาญาพิจารณาจากบทบาทจริงของแต่ละคน: ผู้ร่วมบริหารกิจการหลอกลวงต้องรับผิดชั่วที่เกิดผลทั้งหมด",
+            "นักลงทุนผู้ถูกชักชวนซึ่งไม่มีส่วนร่วมในการบริหารถูกยกฟ้อง เพราะไม่ใช่ผู้ร่วมกระทำความผิด",
+            "ดาราและบุคคลมีชื่อเสียงที่รับเงินโปรโมทส่วนใหญ่ถูกยกฟ้อง เช่นกัน โดยศาลเห็นว่าเป็นแค่นักลงทุน"
+          ]
+        }
+      },
+      {
+        "key": "legal_issues",
+        "order": 4,
+        "title": "ประเด็นกฎหมาย",
+        "content": {
+          "issues": [
+            {
+              "id": "li1",
+              "question": "ระบบการลงทุน Forex-3D ผิดกฎหมายใดเป็นหลัก?",
+              "anchor": "legal_issue_li1"
+            },
+            {
+              "id": "li2",
+              "question": "ความผิดแบบ Ponzi (นำเงินรายใหม่จ่ายรายเก่า) ผิดกฎหมายไทยในเรื่องใด?",
+              "anchor": "legal_issue_li2"
+            }
+          ]
+        }
+      },
+      {
+        "key": "provisions",
+        "order": 5,
+        "title": "กฎหมายที่เกี่ยวข้อง",
+        "content": {
+          "articles": [
+            {
+              "ref": "พ.ร.ก.กู้ยืมเงินฯ 2527 ม.4/5",
+              "source_id": "law1",
+              "loc": "พระราชกำหนด",
+              "text": "พระราชกำหนดการกู้ยืมเงินที่เป็นการฉ้อโกงประชาชน พ.ศ. 2527 มาตรา 4 และมาตรา 5",
+              "anchor": "law_1"
+            },
+            {
+              "ref": "ป.อ. ม.343",
+              "source_id": "law2",
+              "loc": "ประมวลกฎหมายอาญา",
+              "text": "ประมวลกฎหมายอาญา มาตรา 343: ผู้ใดหลอกลวงประชาชน...เพื่อให้ส่งมอบเงิน",
+              "anchor": "law_2"
+            },
+            {
+              "ref": "ป.อ. ม.341",
+              "source_id": "law3",
+              "loc": "ประมวลกฎหมายอาญา",
+              "text": "ประมวลกฎหมายอาญา มาตรา 341: ผู้ใดหลอกลวงผู้อื่น...",
+              "anchor": "law_3"
+            }
+          ]
+        }
+      },
+      {
+        "key": "judicial",
+        "order": 6,
+        "title": "คำพิพากษา",
+        "content": {
+          "verdict": {
+            "decision": "ผู้ร่วมบริหาร 5 คน มีความผิดตาม พ.ร.ก.การกู้ยืมเงินฯ 2527 มาตรา 4/5 ประกอบมาตรา 83 ตัดสินจำคุก 49,110 ปี รับโทษจริงสูงสุด 20 ปี",
+            "courts": [
+              {
+                "court": "ศาลอาญา",
+                "year": 2569,
+                "ruling": "ศาลอาญา, 2569: ยกฟ้องผู้ต้องหา 19 คน รวมถึงดารา ผู้เป็นมารดา และนักลงทุนที่ถูกชักชวน - เห็นว่าเป็นแค่นักลงทุน"
+              },
+              {
+                "court": "ศาลอาญา",
+                "year": 2569,
+                "ruling": "ศาลอาญา, 2569: จำคุกผู้ร่วมบริหาร 5 คน คนละ 49,110 ปี (รับจริงสูงสุด 20 ปีตาม ม.91(2))"
+              },
+              {
+                "court": "ศาลอาญา",
+                "year": 2569,
+                "ruling": "ศาลอาญา, 2569: สั่งชดใช้ผู้เสียหาย 9,822 ราย พร้อมดอกเบี้ย 7.5% ต่อปี และปรับนิติบุคคลประมาณ 4,911 ล้านบาท"
+              }
+            ],
+            "ratio": "ศาลพิจารณาจากบทบาทจริง: ผู้ร่วมบริหารกิจการหลอกลวงต้องรับผิดผลทั้งหมด ส่วนนักลงทุนผู้ถูกชักชวนไม่มีส่วนร่วมบริหาร จึงยกฟ้อง",
+            "source_verdict_ref": "Agent C Handoff Brief, 2026-08-21"
+          },
+          "verified": true
+        }
+      },
+      {
+        "key": "lessons",
+        "order": 7,
+        "title": "บทเรียน",
+        "content": {
+          "items": [
+            {
+              "id": "l1",
+              "text": "ผลตอบแทนสูงผิดปกติ (60-80% ต่อเดือน) คือสัญญาณเตือนของธุรกรรม Ponzi"
+            },
+            {
+              "id": "l2",
+              "text": "ศาลแยกบทบาทชัดเจน: ผู้ร่วมบริหารรับผิด / นักลงทุนผู้ถูกชักชวนถูกยกฟ้อง"
+            },
+            {
+              "id": "l3",
+              "text": "เงินลงทุนของผู้เสียหาย 9,822 รายมีสั่งชดใช้ แต่การจ่ายจริงขึ้นกับทรัพย์สินที่ยึดได้"
+            },
+            {
+              "id": "l4",
+              "text": "คดียังไม่ถึงที่สุด: กระบวนการอุทธรณ์ยังค้างอยู่"
+            }
+          ]
+        }
       }
-     ],
-     "analysis": [
-      "ศาลอาญาพิจารณาจากบทบาทจริงของแต่ละคน: ผู้ร่วมบริหารกิจการหลอกลวงต้องรับผิดชั่วที่เกิดผลทั้งหมด",
-      "นักลงทุนผู้ถูกชักชวนซึ่งไม่มีส่วนร่วมในการบริหารถูกยกฟ้อง เพราะไม่ใช่ผู้ร่วมกระทำความผิด",
-      "ดาราและบุคคลมีชื่อเสียงที่รับเงินโปรโมทส่วนใหญ่ถูกยกฟ้อง เช่นกัน โดยศาลเห็นว่าเป็นแค่นักลงทุน"
-     ]
-    }
-   },
-   {
-    "key": "legal_issues",
-    "order": 4,
-    "title": "ประเด็นกฎหมาย",
-    "content": {
-     "issues": [
+    ]
+  },
+  "play": {
+    "flow": [
       {
-       "id": "li1",
-       "question": "ระบการลงทุน Forex-3D ผิดกฎหมายใดเป็นหลัก?",
-       "anchor": "legal_issue_li1"
+        "step": 1,
+        "key": "case_setup",
+        "title": "ก่อนเริ่ม - สรุปสั้นก่อนเล่น",
+        "content": {
+          "briefing": "Forex-3D ระบลงทุนหลอกลวงขนาดใหญ่ อ้างผลตอบแทน 60-80% ต่อเดือน จ้างดาราโปรโมท มีผู้เสียหายเกือบหมื่นราย คดนี้จะได้เรียนรู้ว่าศาลแยกความรับผิดระหว่างผู้ร่วมบริหารกับนักลงทุนที่ถูกชวนอย่างไร"
+        }
       },
       {
-       "id": "li2",
-       "question": "ความผิดแบบ庞氏 (นำเงินรายใหม่จ่ายรายเก่า) ผิดกฎหมายไทยในเรื่องใด?",
-       "anchor": "legal_issue_li2"
+        "step": 2,
+        "key": "legal_issue",
+        "title": "ประเด็นกฎหมาย",
+        "content": {
+          "question": "ระบบการลงทุน Forex-3D ผิดกฎหมายใดเป็นหลัก",
+          "options": [
+            {
+              "id": "a",
+              "text": "พ.ร.ก.กู้ยืมเงินที่เป็นการฉ้อโกงประชาชน 2527"
+            },
+            {
+              "id": "b",
+              "text": "ประมวลกฎหมายอาญา มาตรา 343 (ฉ้อโกงประชาชน)"
+            },
+            {
+              "id": "c",
+              "text": "พระราชบัญญัติห้ามเช่าซื้อสินค้า"
+            },
+            {
+              "id": "d",
+              "text": "กฎหมายหลักทรัพย์"
+            }
+          ],
+          "answer": "a"
+        }
+      },
+      {
+        "step": 3,
+        "key": "guess_law",
+        "title": "เดากฎหมายที่ใช้",
+        "content": {
+          "question": "ศาลอาญาตัดสินความผิดหลักของผู้ร่วมบริหารตามกฎหมายใด",
+          "options": [
+            {
+              "id": "a",
+              "text": "พ.ร.ก.การกู้ยืมเงินที่เป็นการฉ้อโกงประชาชน พ.ศ. 2527"
+            },
+            {
+              "id": "b",
+              "text": "ประมวลกฎหมายอาญา มาตรา 343 (ฉ้อโกงประชาชน)"
+            },
+            {
+              "id": "c",
+              "text": "ประมวลกฎหมายอาญา มาตรา 341 (ฉ้อโกงธรรมดา)"
+            },
+            {
+              "id": "d",
+              "text": "พระราชบัญญัติห้ามเช่าซื้อสินค้า"
+            }
+          ],
+          "answer": "a",
+          "source_articles": [
+            "law_1",
+            "law_2",
+            "law_3"
+          ]
+        }
+      },
+      {
+        "step": 4,
+        "key": "predict_verdict",
+        "title": "คาดการณ์คำพิพากษา",
+        "content": {
+          "question": "ศาลอาญาตัดสินให้ผู้ร่วมบริหารรับโทษกี่ปี",
+          "options": [
+            {
+              "id": "a",
+              "text": "จำคุก 49,110 ปี แต่รับโทษจริงสูงสุดไม่เกิน 20 ปีตามมาตรา 91(2)",
+              "real": true
+            },
+            {
+              "id": "b",
+              "text": "จำคุกตลอดชีวิต",
+              "real": false
+            },
+            {
+              "id": "c",
+              "text": "รอลงอาญา 5 ปี",
+              "real": false
+            },
+            {
+              "id": "d",
+              "text": "ปรับ 1,000 ล้านบาท",
+              "real": false
+            }
+          ],
+          "answer": "a"
+        }
+      },
+      {
+        "step": 5,
+        "key": "show_verdict",
+        "title": "คำพิพากษาจริง",
+        "content": {
+          "verdict_ref": "read.sections[4].content.verdict",
+          "gate": "must_not_show_before_step_4_answered"
+        }
+      },
+      {
+        "step": 6,
+        "key": "show_reasoning",
+        "title": "เหตุผลของศาล",
+        "content": {
+          "reasoning_ref": "read.sections[4].content.verdict.ratio",
+          "gate": "must_not_show_before_step_4_answered"
+        }
       }
-     ]
+    ],
+    "anti_reveal_rules": [
+      "Show verdict only after step 4 answered",
+      "Show reasoning only after step 4 answered"
+    ]
+  },
+  "media": {
+    "video": null
+  },
+  "sources": [
+    {
+      "title": "Thai PBS - Forex-3D verdict report",
+      "url": "https://www.thaipbs.or.th/"
+    },
+    {
+      "title": "Khaosod Online - Forex-3D verdict",
+      "url": "https://www.khaosod.co.th/"
+    },
+    {
+      "title": "The Nation - Forex-3D executives sentenced",
+      "url": "https://www.nationthailand.com/"
     }
-   },
-   {
-    "key": "provisions",
-    "order": 5,
-    "title": "กฎหมายที่เกี่ยวข้อง",
-    "content": {
-     "articles": [
-      {
-       "ref": "พ.ร.ก.กู้ยืมเงินฯ 2527 ม.4/5",
-       "source_id": "law1",
-       "loc": "พระราชกำหนด",
-       "text": "พระราชกำหนดการกู้ยืมเงินที่เป็นการฉ้อโกงประชาชน พ.ศ. 2527 มาตรา 4 และมาตรา 5",
-       "anchor": "law_1"
-      },
-      {
-       "ref": "ป.อ. ม.343",
-       "source_id": "law2",
-       "loc": "ประมวลกฎหมายอาญา",
-       "text": "ประมวลกฎหมายอาญา มาตรา 343: ผู้ใดหลอกลวงประชาชน...เพื่อให้ส่งมอบเงิน",
-       "anchor": "law_2"
-      },
-      {
-       "ref": "ป.อ. ม.341",
-       "source_id": "law3",
-       "loc": "ประมวลกฎหมายอาญา",
-       "text": "ประมวลกฎหมายอาญา มาตรา 341: ผู้ใดหลอกลวงผู้อื่น...",
-       "anchor": "law_3"
-      }
-     ]
-    }
-   },
-   {
-    "key": "judicial",
-    "order": 6,
-    "title": "คำพิพากษา",
-    "content": {
-     "verdict": {
-      "decision": "ผู้ร่วมบริหาร 5 คน มีความผิดตาม พ.ร.ก.การกู้ยืมเงินฯ 2527 มาตรา 4/5 ประกอบมาตรา 83 ตัดสินจำคุก 49,110 ปี รับโทษจริงสูงสุด 20 ปี",
-      "courts": [
-       {
-        "court": "ศาลอาญา",
-        "year": 2569,
-        "ruling": "ศาลอาญา, 2569: ยกฟ้องผู้ต้องหา 19 คน รวมถึงดารา ผู้เป็นมารดา และนักลงทุนที่ถูกชักชวน - เห็นว่าเป็นแค่นักลงทุน"
-       },
-       {
-        "court": "ศาลอาญา",
-        "year": 2569,
-        "ruling": "ศาลอาญา, 2569: จำคุกผู้ร่วมบริหาร 5 คน คนละ 49,110 ปี (รับจริงสูงสุด 20 ปีตาม ม.91(2))"
-       },
-       {
-        "court": "ศาลอาญา",
-        "year": 2569,
-        "ruling": "ศาลอาญา, 2569: สั่งชดใช้ผู้เสียหาย 9,822 ราย พร้อมดอกเบี้ย 7.5% ต่อปี และปรับนิติบุคคลประมาณ 4,911 ล้านบาท"
-       }
-      ],
-      "ratio": "ศาลพิจารณาจากบทบาทจริง: ผู้ร่วมบริหารกิจการหลอกลวงต้องรับผิดผลทั้งหมด ส่วนนักลงทุนผู้ถูกชักชวนไม่มีส่วนร่วมบริหาร จึงยกฟ้อง",
-      "source_verdict_ref": "Agent C Handoff Brief, 2026-08-21"
-     },
-     "verified": true
-    }
-   },
-   {
-    "key": "lessons",
-    "order": 7,
-    "title": "บทเรียน",
-    "content": {
-     "items": [
-      {
-       "id": "l1",
-       "text": "ผลตอบแทนสูงผิดปกติ (60-80% ต่อเดือน) คือสัญญาณเตือนของธนุรกรรม庞氏"
-      },
-      {
-       "id": "l2",
-       "text": "ศาลแยกบทบาทชัดเจน: ผู้ร่วมบริหารรับผิด / นักลงทุนผู้ถูกชักชวนถูกยกฟ้อง"
-      },
-      {
-       "id": "l3",
-       "text": "เงินลงทุนของผู้เสียหาย 9,822 รายมีสั่งชดใช้ แต่การจ่ายจริงขึ้นกับทรัพย์สินที่ยึดได้"
-      },
-      {
-       "id": "l4",
-       "text": "คดียังไม่ถึงที่สุด: กระบวนการอุทธรณ์ยังค้างอยู่"
-      }
-     ]
-    }
-   }
-  ]
- },
- "play": {
-  "flow": [
-   {
-    "step": 1,
-    "key": "case_setup",
-    "title": "ก่อนเริ่ม - สรุปสั้นก่อนเล่น",
-    "content": {
-     "briefing": "Forex-3D ระบลงทุนหลอกลวงขนาดใหญ่ อ้างผลตอบแทน 60-80% ต่อเดือน จ้างดาราโปรโมท มีผู้เสียหายเกือบหมื่นราย คดนี้จะได้เรียนรู้ว่าศาลแยกความรับผิดระหว่างผู้ร่วมบริหารกับนักลงทุนที่ถูกชวนอย่างไร"
-    }
-   },
-   {
-    "step": 2,
-    "key": "legal_issue",
-    "title": "ประเด็นกฎหมาย",
-    "content": {
-     "question": "ระบการลงทุน Forex-3D ผิดกฎหมายใดเป็นหลัก",
-     "options": [
-      {
-       "id": "a",
-       "text": "พ.ร.ก.กู้ยืมเงินที่เป็นการฉ้อโกงประชาชน 2527"
-      },
-      {
-       "id": "b",
-       "text": "ประมวลกฎหมายอาญา มาตรา 343 (ฉ้อโกงประชาชน)"
-      },
-      {
-       "id": "c",
-       "text": "พระราชบัญญัติห้ามเช่าซื้อสินค้า"
-      },
-      {
-       "id": "d",
-       "text": "กฎหมายหลักทรัพย์"
-      }
-     ],
-     "answer": "a"
-    }
-   },
-   {
-    "step": 3,
-    "key": "guess_law",
-    "title": "เดากฎหมายที่ใช้",
-    "content": {
-     "question": "ศาลอาญาตัดสินความผิดหลักของผู้ร่วมบริหารตามกฎหมายใด",
-     "options": [
-      {
-       "id": "a",
-       "text": "พ.ร.ก.การกู้ยืมเงินที่เป็นการฉ้อโกงประชาชน พ.ศ. 2527"
-      },
-      {
-       "id": "b",
-       "text": "ประมวลกฎหมายอาญา มาตรา 343 (ฉ้อโกงประชาชน)"
-      },
-      {
-       "id": "c",
-       "text": "ประมวลกฎหมายอาญา มาตรา 341 (ฉ้อโกงธรรมดา)"
-      },
-      {
-       "id": "d",
-       "text": "พระราชบัญญัติห้ามเช่าซื้อสินค้า"
-      }
-     ],
-     "answer": "a",
-     "source_articles": [
-      "law_1",
-      "law_2",
-      "law_3"
-     ]
-    }
-   },
-   {
-    "step": 4,
-    "key": "predict_verdict",
-    "title": "คาดการณ์คำพิพากษา",
-    "content": {
-     "question": "ศาลอาญาตัดสินให้ผู้ร่วมบริหารรับโทษกี่ปี",
-     "options": [
-      {
-       "id": "a",
-       "text": "จำคุก 49,110 ปี แต่รับโทษจริงสูงสุดไม่เกิน 20 ปีตามมาตรา 91(2)",
-       "real": true
-      },
-      {
-       "id": "b",
-       "text": "จำคุกตลอดชีวิต",
-       "real": false
-      },
-      {
-       "id": "c",
-       "text": "รอลงอาญา 5 ปี",
-       "real": false
-      },
-      {
-       "id": "d",
-       "text": "ปรับ 1,000 ล้านบาท",
-       "real": false
-      }
-     ],
-     "answer": "a"
-    }
-   },
-   {
-    "step": 5,
-    "key": "show_verdict",
-    "title": "คำพิพากษาจริง",
-    "content": {
-     "verdict_ref": "read.sections[4].content.verdict",
-     "gate": "must_not_show_before_step_4_answered"
-    }
-   },
-   {
-    "step": 6,
-    "key": "show_reasoning",
-    "title": "เหตุผลของศาล",
-    "content": {
-     "reasoning_ref": "read.sections[4].content.verdict.ratio",
-     "gate": "must_not_show_before_step_4_answered"
-    }
-   }
   ],
-  "anti_reveal_rules": [
-   "Show verdict only after step 4 answered",
-   "Show reasoning only after step 4 answered"
-  ]
- },
- "media": {
-  "video": null
- },
- "sources": [
-  {
-   "title": "Thai PBS - Forex-3D verdict report",
-   "url": "https://www.thaipbs.or.th/"
+  "migration": {
+    "from": "agent_c_handoff",
+    "verified": false,
+    "checker": null,
+    "check_date": null,
+    "note": "สร้างจาก judicial_authority record ของ Agent C (Handoff Brief) — ข้อมูลยังรอตรวจสอบเอกสารศาลโดยตรง"
   },
-  {
-   "title": "Khaosod Online - Forex-3D verdict",
-   "url": "https://www.khaosod.co.th/"
-  },
-  {
-   "title": "The Nation - Forex-3D executives sentenced",
-   "url": "https://www.nationthailand.com/"
+  "validation": {
+    "schema_ok": true,
+    "paragraph_ok": true,
+    "sections_complete": true,
+    "links_ok": true,
+    "gate": "agent_c_re_review_required",
+    "last_validated_at": "2026-08-21",
+    "last_changed_after_validation": false
   }
- ],
- "migration": {
-  "from": "agent_c_handoff",
-  "verified": false,
-  "checker": null,
-  "check_date": null,
-  "note": "สร้างจาก judicial_authority record ของ Agent C (Handoff Brief) — ข้อมูลยังรอตรวจสอบเอกสารศาลโดยตรง"
- },
- "validation": {
-  "schema_ok": true,
-  "paragraph_ok": true,
-  "sections_complete": true,
-  "links_ok": true,
-  "gate": "agent_c_re_review_required",
-  "last_validated_at": "2026-08-21",
-  "last_changed_after_validation": false
- }
 }
