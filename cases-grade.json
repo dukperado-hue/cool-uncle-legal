@@ -1438,5 +1438,29 @@
   "score": 90,
   "release": "WARN|",
   "has_video": false
+ },
+ "news-case-khdii-jottektej-khtit-2324.html": {
+  "grade": "A",
+  "score": 90,
+  "release": "WARN",
+  "has_video": false
+ },
+ "news-case-khdii-samphrachakhana-khtit-2324.html": {
+  "grade": "A",
+  "score": 90,
+  "release": "WARN",
+  "has_video": false
+ },
+ "news-case-khdii-pongkhaoluang-nginthplom-2310-2325.html": {
+  "grade": "A",
+  "score": 89,
+  "release": "WARN",
+  "has_video": false
+ },
+ "news-case-khdii-kamnan-talad-ayutthaya.html": {
+  "grade": "A",
+  "score": 89,
+  "release": "WARN",
+  "has_video": false
  }
 }

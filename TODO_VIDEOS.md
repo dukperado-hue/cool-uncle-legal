@@ -43,3 +43,7 @@ news-case-khdii-amdaengpom-hlongya-pi-2347.html | คดีอำแดงป้
 news-case-khdii-prachaakhana-3-rup-parachik-pi-2359.html | คดีพระราชาคณะ 3 รูป ปาราชิก (พ.ศ. 2359) | คดียุคโบราณ — คลิปวิดีโอเฉพาะหน้าตรงยังไม่พบ
 news-case-khdii-aima-khamkhuen-nai-praborommaharachawang.html | คดีอ้ายมา ลอบข่มขืนเจ้าจอมในพระบรมมหาราชวัง (จ.ศ. 1159) | คดียุคโบราณ — คลิปวิดีโอเฉพาะหน้าตรงยังไม่พบ
 news-case-khdii-gabort-chaofa-men-pi-2352.html | คดีกบฏเจ้าฟ้าเหม็น — บัตรสนเทห์และกาคาบฟ้อง (พ.ศ. 2352) | คดียุคโบราณ — คลิปวิดีโอเฉพาะหน้าตรงยังไม่พบ
+news-case-khdii-jottektej-khtit-2324.html | คดีโจทก์ (2324) ยุคธนบุรี | ไม่มีคลิปที่เกี่ยวข้องโดยตรง — คดีคดีโจทก์โบราณ
+news-case-khdii-samphrachakhana-khtit-2324.html | คดี 3 พระราชาคณะทูลค้าน (2324) | ไม่มีคลิปที่เกี่ยวข้องโดยตรง — พระสงฆ์ทูลค้านร.ตาก
+news-case-khdii-pongkhaoluang-nginthplom-2310-2325.html | คดีโกงข้าวหลวง/เงินปลอม ธนบุรี | ไม่มีคลิปที่เกี่ยวข้องโดยตรง — โครงสร้างศาลธนบุรี
+news-case-khdii-kamnan-talad-ayutthaya.html | คดีกำนันตลาดรีดเงินเกินพิกัด (อโยธยา 1895-2310) | ไม่มีคลิปที่เกี่ยวข้องโดยตรง — พระอัยการลักษณะอาญาหลวง

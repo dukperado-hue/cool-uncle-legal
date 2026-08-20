@@ -57,3 +57,22 @@
 **Judicial potential ในคดียุคโบราณ:** คดีกบฏเจ้าฟ้าเหม็น (judicial_potential=true) — สำนวนคดี "จารีตนครบาล" กับคำรับสารภาพ เป็นหัวข้อทางวิชาการประวัติศาสตร์กฎหมาย — รอส่ง Agent C ตรวจหลักฐานศาล (จดหมายเหตุ ร.2 / ศุภอักษร)
 
 **สถานะ: READY_FOR_REVIEW** — รอ publication decision; historical cases ใช้ storytelling + evidence-based ตามข้อตกลงกับผู้ใช้
+
+## BATCH 3 — คดียุคโบราณ ย้อนไกล: ธนบุรี + อโยธยา (pre-code era ก่อนชำระกฎหมายตราสามดวง) — 4 คดี (20 Aug 2026)
+
+| คดี | Slug | Grade | Score | สมัย |
+|---|---|---|---|---|
+| คดีโจทก์ (2324) — การลวงหลอก/ฟ้องผิดฐานและการไถ่โทษ ยุคธนบุรี | news-case-khdii-jottektej-khtit-2324 | A | 90 | ธนบุรี |
+| คดี 3 พระราชาคณะทูลค้านพระเจ้ากรุงธนบุรี (2324) | news-case-khdii-samphrachakhana-khtit-2324 | A | 90 | ธนบุรี |
+| คดีโกงข้าวหลวง/เงินปลอม — โครงสร้างศาลธนบุรี (2310–2325) | news-case-khdii-pongkhaoluang-nginthplom-2310-2325 | A | 89 | ธนบุรี |
+| คดีกำนันตลาดรีดเงินเกินพิกัด — พระอัยการลักษณะอาญาหลวง บทที่ 3 (พ.ศ. 1895–2310) | news-case-khdii-kamnan-talad-ayutthaya | A | 89 | อโยธยา |
+
+**แนวทางการประมวล:** cat="criminal", a_cat_label="คดยุคโบราณ", release=WARN| (external_law + video pending), ไม่มีการ apply กฎหมายปัจจุบัน — lessons เชื่อม (connect) กับหลักสมัยใหม่เท่านั้น (graduated sanctions, การแยกอำนาจภายในศาล, continuity of law), provisions ทั้งหมด status="external_law"
+
+**ความไม่ตรงกันของแหล่งข้อมูลที่บันทึกไว้:** คดีโจทก์ (สำนวนความผิดฐาน/การลวงหลอก — รายละเอียดบทลงโทษเฉพาะใน 2 แหล่งไม่ลงรอย → ใช้คำบรรยายระดับบทที่ 3), คดีโกงข้าวหลวง/เงินปลอม (โครงสร้างศาล: ลูกขุน ณ ศาลหลวง vs ศาลกรม — 2 แหล่งอธิบายส่วนต่างของกระบวนการ)
+
+**ยอดรวมหลัง batch 3:** Grade A = 180 (จาก 176 + 4), A_REVIEW = 4, B = 5, C = 55; news-index bumped ?v=70; TODO_VIDEOS.md เพิ่ม 4 รายการ
+
+**แหล่งอ้างอิงหลัก:** จรรยา ประชิตโรมรัน "การลงโทษและการตัดสินคดีในสมัยธนบุรี" (2543, KMUTT lib), NACC museum (พระอัยการลักษณะอาญาหลวง พ.ศ. 1895), มูลนิธิอนุรักษ์โบราณสถานในพระราชวังเดิม
+
+**สถานะ: READY_FOR_REVIEW** — รอ publication decision; historical cases ใช้ storytelling + evidence-based ตามข้อตกลงกับผู้ใช้
