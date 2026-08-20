@@ -78,9 +78,9 @@
   "has_video": true
  },
  "news-case-bosnian-genocide-case-bosnia-v-serbia.html": {
-  "grade": "B",
-  "score": 74,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 86,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-certain-expenses-of-the-united-nations-advisory-opinion.html": {
@@ -336,9 +336,9 @@
   "has_video": false
  },
  "news-case-joyce-v-director-of-public-prosecutions-uk-house-of-lords.html": {
-  "grade": "B",
-  "score": 77,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-jurisdictional-immunities-of-the-state-germany-v-italy.html": {
@@ -366,9 +366,9 @@
   "has_video": true
  },
  "news-case-khdii-khrmnaik-anukhrnng-changpa-2564.html": {
-  "grade": "B",
-  "score": 68,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-khdii-khuenkhadosdoyrsan-faisw-heeyw-2564.html": {
@@ -402,9 +402,9 @@
   "has_video": false
  },
  "news-case-khdii-phak-lisik-sathani-thrthath-wistivi-2563.html": {
-  "grade": "B",
-  "score": 68,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 86,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-khdii-phrraab-khuciwit-2565.html": {
@@ -630,9 +630,9 @@
   "has_video": false
  },
  "news-case-khdiichaals-osphraacch-charles-sobhraj-2518.html": {
-  "grade": "B",
-  "score": 77,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 86,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-khdiichaayswisbiibkh-phrryaaaithy-nkhrraachsiimaa-2567.html": {
@@ -678,9 +678,9 @@
   "has_video": false
  },
  "news-case-khdiiekhruue-ngbintkkaarbinaithy-tg261-suraasdrthaanii-2541.html": {
-  "grade": "B",
-  "score": 77,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-khdiiekhruue-nghmaaykaarkhaa-pangchaa-pang-cha-2566.html": {
