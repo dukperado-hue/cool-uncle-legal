@@ -21,6 +21,39 @@
   --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
 }
 
+/* ============ THEME: BURGUNDY (ทดลอง UI — แดงเบอกันดี้–ครีมขาว) ============ */
+:root[data-theme='burgundy']{
+  --paper:#FAF4EC;
+  --card:#FDFBF7;
+  --ink:#3B1418;
+  --ink-soft:#6B3A40;
+  --ink-faint:#A8767C;
+  --line:#EAD9CC;
+  --gold:#A0443C;
+  --gold-soft:#F6E2DA;
+  --ok:#1E7A4F;
+  --ok-bg:#E6F4EC;
+  --bad:#B23A3A;
+  --bad-bg:#FBEAEA;
+  --accent:#722F37;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(59,20,24,.06),0 6px 20px rgba(59,20,24,.09);
+}
+
+/* เบอร์กันดี้ — ทับเฉพาะส่วนที่ใช้ accent บนหน้าคดี */
+:root[data-theme='burgundy'] body{
+  background:
+    radial-gradient(1200px 500px at 50% -200px, #F0E4D6 0%, transparent 60%),
+    var(--paper);
+}
+:root[data-theme='burgundy'] .topbar{
+  background:#F3E6DC;border-bottom-color:var(--line);
+}
+:root[data-theme='burgundy'] .youtube-item:hover{background:#F4E5DC;border-left-color:var(--accent)}
+:root[data-theme='burgundy'] h1{color:#722F37}
+:root[data-theme='burgundy'] .back-button{color:var(--accent)}
+:root[data-theme='burgundy'] .back-button:hover{color:var(--ink)}
+
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
 

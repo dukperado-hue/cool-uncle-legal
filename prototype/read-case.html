@@ -100,6 +100,10 @@ async function render(){
   document.title = `${c.meta.title} — อ่านคดี | Cool Uncle ⚖ Legal Lab`;
   const m = c.meta, rank = c.rank || {}, vis = c.visibility || {};
 
+  // Theme override — คัดีไหนมี theme ให้ปิด data-theme ที่ root (css variable override)
+  const theme = (c.theme || '').trim();
+  if(theme){ document.documentElement.setAttribute('data-theme', theme); }
+
   let html = `<a class="back-button" href="news-index-v2.html">← กลับหน้าแรก</a>`;
   html += `<article class="mag-article">`;
 

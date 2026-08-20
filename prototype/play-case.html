@@ -150,7 +150,7 @@ function renderStep(){
     return;
   }
 
-  if(ct.answer){
+  if(ct.answer && (ct.options||[]).length > 0){
     // multiple choice step
     const chosen = answers[step.key];
     let optsHtml = (ct.options||[]).map(o=>{
@@ -182,6 +182,20 @@ function renderStep(){
         <p class="play-q">${esc(ct.question)}</p>
         ${optsHtml}
         ${fb}
+      </div>`;
+    return;
+  }
+
+  // open-ended / NEEDS_REVIEW step (no quiz data yet)
+  if((ct.answer === false || (ct.options||[]).length === 0) && ct.question){
+    app.innerHTML = `
+      <a class="back-button" href="news-index-v2.html">← กลับหน้าแรก</a>
+      ${renderProgress()}
+      <div class="play-card">
+        <div class="play-step-head"><div class="play-step-num">${step.step}</div><div class="play-step-title">${esc(step.title)}</div></div>
+        <p class="play-q">${esc(ct.question)}</p>
+        <p style="font-size:.9rem;color:var(--ink-soft);line-height:1.7">💬 คูลอังกิลยังไม่มีคำตอบสำเร็จรูปในด่านนี้ — ลองเขียนเหตุผลของตนเองก่อน แล้วไปด่านถัดไปได้เลย</p>
+        <button class="play-next" onclick="markAnswered('${esc(step.key)}'); stepIdx++; renderStep()">${stepIdx+1 < flow.length ? 'ด่านถัดไป ▶' : 'ดูบทสรุป ▶'}</button>
       </div>`;
     return;
   }
@@ -227,6 +241,12 @@ function choose(stepKey, id){
   renderStep();
 }
 
+// Need-based step completed (open-ended / NEEDS_REVIEW card) — counts as having
+// answered so the anti-reveal gate on verdict steps can unlock.
+function markAnswered(stepKey){
+  if(answers[stepKey] === undefined){ answers[stepKey] = '__open__'; }
+}
+
 function renderFinal(){
   const score = flow.filter(s=>s.content && s.content.answer && answers[s.key] === s.content.answer).length;
   const total = flow.filter(s=>s.content && s.content.answer).length;
@@ -251,6 +271,8 @@ async function init(){
   }
   flow = C.play.flow.map(s=>({...s}));
   document.title = `🎮 ลุยคดี: ${C.meta.title} — Cool Uncle ⚖ Legal Lab`;
+  const theme = (C.theme || '').trim();
+  if(theme){ document.documentElement.setAttribute('data-theme', theme); }
   renderStep();
 }
 init();
