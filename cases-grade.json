@@ -60,9 +60,9 @@
   "has_video": false
  },
  "news-case-barcelona-traction-light-and-power-co-case-belgium-v-spain.html": {
-  "grade": "B",
-  "score": 77,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-bay-of-bengal-maritime-boundary-arbitration-bangladesh-v-india.html": {
@@ -72,9 +72,9 @@
   "has_video": true
  },
  "news-case-beagle-channel-arbitration-argentina-chile.html": {
-  "grade": "B",
-  "score": 77,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 87,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-bosnian-genocide-case-bosnia-v-serbia.html": {
@@ -96,9 +96,9 @@
   "has_video": true
  },
  "news-case-chorzow-factory-case-germany-v-poland.html": {
-  "grade": "B",
-  "score": 77,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-clipperton-island-arbitration-france-v-mexico.html": {
@@ -108,15 +108,15 @@
   "has_video": false
  },
  "news-case-corfu-channel-case-merits-uk-v-albania.html": {
-  "grade": "B",
-  "score": 77,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-corfu-channel-case-uk-v-albania.html": {
-  "grade": "B",
-  "score": 77,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-dewiid-baernaat-moraat-kha-hanshp-chaophraya-2559.html": {
@@ -1326,9 +1326,9 @@
   "has_video": true
  },
  "news-case-the-lotus-case-france-v-turkey.html": {
-  "grade": "B",
-  "score": 77,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-the-naulilaa-incident-portugal-v-germany.html": {
