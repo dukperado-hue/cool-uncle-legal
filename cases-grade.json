@@ -384,9 +384,9 @@
   "has_video": true
  },
  "news-case-khdii-orobkh-p-thamraaykhnaithyainniwy-rk-2565.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 87,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdii-perik-khayomul-sanycha-catchue-wakkhisen-2565.html": {
@@ -444,9 +444,9 @@
   "has_video": true
  },
  "news-case-khdii-um-esiiysmys-suthaangkhkuur-2558.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 87,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdii-um-kha-nakstuksa-jin-san-2566.html": {
@@ -540,15 +540,15 @@
   "has_video": false
  },
  "news-case-khdiiaekngkh-lechnet-rhl-ko-nengin-2566.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 86,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdiiaekngspaatan-hl-klngthunhuntaangpraeths-2564.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 86,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdiiaerngngaanaithyain-israae-l-2566.html": {
@@ -558,9 +558,9 @@
   "has_video": false
  },
  "news-case-khdiiaetngtangoykyaaykhaaraachkaartamrwcchodymich-b-phl-t-wirachay-thr.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 86,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdiiaifaihm-emaathethn-bii-mountain-b-phab-2565.html": {
