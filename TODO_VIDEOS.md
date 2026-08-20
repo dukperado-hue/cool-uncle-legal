@@ -58,3 +58,62 @@ news-case-khdii-kamnan-talad-ayutthaya.html | คดีกำนันตลา�
 | news-case-khdii-aiauaom-okroy-2414 | คดีอ้ายอ่วม อกโรย | หาคลิปภาษาไทยไม่มี
 | news-case-khdii-nginthplom-2446 | คดีธนบัตรปลอม 2446 | หาคลิปภาษาไทยไม่มี
 | news-case-khdii-ramrit-mueang-trat-2445 | คดีหลวงรามฤทธิ์รงค์ | หาคลิปภาษาไทยไม่มี
+
+## Batch 7 (B/C -> A migration, พ.ย. 2026)
+news-case-alabama-claims-arbitration-usa-great-britain | Alabama Claims Arbitration (USA/Great Britain) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-ambatielos-case-greece-v-uk | Ambatielos Case (Greece v. UK) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-anglo-norwegian-fisheries-case-uk-v-norway | Anglo-Norwegian Fisheries Case (UK v. Norway) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-arrest-warrant-of-11-april-2000-drc-v-belgium | Arrest Warrant of 11 April 2000 (DRC v. Belgium) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-attorney-general-of-the-government-of-israel-v-eichmann-israel | Attorney-General of the Government of Israel v. Eichmann (Israel) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-avena-and-other-mexican-nationals-mexico-v-usa | Avena and Other Mexican Nationals (Mexico v. USA) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-certain-expenses-of-the-united-nations-advisory-opinion | Certain Expenses of the United Nations (Advisory Opinion) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-clipperton-island-arbitration-france-v-mexico | Clipperton Island Arbitration (France v. Mexico) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-eastern-greenland-case-denmark-v-norway | Eastern Greenland Case (Denmark v. Norway) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-fisheries-jurisdiction-cases-uk-v-iceland | Fisheries Jurisdiction Cases (UK v. Iceland) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-gabcikovo-nagymaros-project-hungary-slovakia | Gabčíkovo-Nagymaros Project (Hungary/Slovakia) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-gulf-of-maine-area-case-canada-usa | Gulf of Maine Area Case (Canada/USA) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-interhandel-case-switzerland-v-usa | Interhandel Case (Switzerland v. USA) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-island-of-palmas-case-netherlands-v-usa | Island of Palmas Case (Netherlands v. USA) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-jones-v-ministry-of-interior-of-saudi-arabia-uk-house-of-lords | Jones v. Ministry of Interior of Saudi Arabia (UK House of Lords) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdii-ph-r-k-eluue-nbangkhabaich-ph-r-b-p-ngkankaarthrmaanaela-umhaay- | พ.ร.ก.เลื่อนบังคับใช้ พ.ร.บ.ป้องกันการทรมานและอุ้มหาย | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdii-umeriiykkhaaaithnaksueksaacchiin-cchin-khaan-2566 | อุ้มเรียกค่าไถ่นักศึกษาจีน จิน คาน | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdii-umkhaa-hans-piiet-r-maakh-2566 | อุ้มฆ่า ฮันส์ ปีเตอร์ มาค | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdii-umkhaa-ns-cchiin-aeykraang-2566 | อุ้มฆ่า นศ.จีน แยกร่าง | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiiaerngngaanaithyain-israae-l-2566 | แรงงานไทยในอิสราเอล | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiicchabkum-aepng-naaohnd-thii-inodniiechiiy-2567 | จับกุม แป้ง นาโหนด ที่อินโดนีเซีย | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiichaayswisbiibkh-phrryaaaithy-nkhrraachsiimaa-2567 | ชายสวิสบีบคอภรรยาไทย นครราชสีมา | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiichukhun-sakdisyaam-chidch-b-2567 | ซุกหุ้น ศักดิ์สยาม ชิดชอบ | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiidiai-kh-nkrup-the-icon-group-2567 | ดิไอคอนกรุ๊ป (The iCon Group) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiiekhruue-nghmaaykaarkhaa-red-bull-vs-krating-daeng-2555 | เครื่องหมายการค้า &quot;Red Bull vs Krating Daeng&quot; | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiiephikth-naib-nuyaatkh-nodmieniiym-ae-chtan-osk-2566 | เพิกถอนใบอนุญาตคอนโดมิเนียม แอชตัน อโศก | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiiephikth-nkhamsangaih-kcchaakraachkaar-phl-t-surechsth-hakphaal-25 | เพิกถอนคำสั่งให้ออกจากราชการ พล.ต.อ.สุรเชษฐ์ หักพาล | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiiewbphnan-minnii-2567 | เว็บพนัน มินนี่ | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiif-ngr-ngmrdk-phumphwng-dwngcchanthr-2535 | ฟ้องร้องมรดก &quot;พุ่มพวง ดวงจันทร์&quot; | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiikaarlaelyhnaathiiainkaarp-ngkanaifpaaaelahm-kkhwan-echiiyngraay-2 | การละเลยหน้าที่ในการป้องกันไฟป่าและหมอกควัน เชียงราย | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiikhaaaekngyaakuuchaahansph-nnthburii-2567 | ฆ่าแก๊งยากูซ่าหั่นศพ นนทบุรี | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiikhaaykkhraw-5-sph-khr-bkhrawsriiswasdi-2557 | ฆ่ายกครัว 5 ศพ ครอบครัวศรีสวัสดิ์ | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiikhnaithylakl-bekbkh-ngpaathiiekaahliiait-2566 | คนไทยลักลอบเก็บของป่าที่เกาหลีใต้ | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiikhnaithythuukaethngesiiychiiwitthiil-nd-n-2567 | คนไทยถูกแทงเสียชีวิตที่ลอนดอน | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiikrathaokheriiykhing-korea-king-2560 | กระทะโคเรียคิง (Korea King) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiilikhsiththikrathngkaartuun-n-ng-am-okhraach-2562 | ลิขสิทธิ์กระทงการ์ตูน น้องอั้ม โคราช | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiilngmtiesn-chuue-phithaa-limecchriyratn-chamr-b-2-2566 | ลงมติเสนอชื่อ พิธา ลิ้มเจริญรัตน์ ซ้ำรอบ 2 | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiin-ngd-m-hmuupaa-esiiychiiwitthii-angkrs-2566 | น้องดอม หมูป่า เสียชีวิตที่อังกฤษ | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiitrwcchs-b-ph-r-b-prak-braththrrmnuuywaadwykaaraidmaachueng-s-w-25 | ตรวจสอบ พ.ร.บ.ประกอบรัฐธรรมนูญว่าด้วยการได้มาซึ่ง ส.ว. | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiiwinaaskrrmethiiywbin-cx700z-2515 | วินาศกรรมเที่ยวบิน CX700Z | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdiiwinicchchay-raang-ph-r-b-kaychaa-kaychng-2566 | วินิจฉัย ร่าง พ.ร.บ. กัญชา กัญชง | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-korea-beef-wto-appellate-body | Korea – Beef (WTO Appellate Body) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-land-island-and-maritime-frontier-dispute-el-salvador-honduras | Land, Island and Maritime Frontier Dispute (El Salvador/Honduras) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-lockerbie-case-libya-v-uk-usa | Lockerbie Case (Libya v. UK/USA) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-monetary-gold-removed-from-rome-in-1943-italy-v-france-uk-usa | Monetary Gold Removed from Rome in 1943 (Italy v. France, UK, USA) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-nicaragua-case-nicaragua-v-usa | Nicaragua Case (Nicaragua v. USA) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-north-sea-continental-shelf-cases-frg-v-denmark-netherlands | North Sea Continental Shelf Cases (FRG v. Denmark/Netherlands) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-nottebohm-case-liechtenstein-v-guatemala | Nottebohm Case (Liechtenstein v. Guatemala) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-nuclear-tests-cases-australia-v-france-new-zealand-v-france | Nuclear Tests Cases (Australia v. France; New Zealand v. France) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-rainbow-warrior-arbitration-new-zealand-v-france | Rainbow Warrior Arbitration (New Zealand v. France) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-south-west-africa-cases-ethiopia-v-south-africa | South West Africa Cases (Ethiopia v. South Africa) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-tadic-case-icty | Tadić Case (ICTY) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-tinoco-arbitration-great-britain-v-costa-rica | Tinoco Arbitration (Great Britain v. Costa Rica) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-trail-smelter-arbitration-usa-v-canada | Trail Smelter Arbitration (USA v. Canada) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-trendtex-trading-corp-v-central-bank-of-nigeria-uk-court-of-appeal | Trendtex Trading Corp. v. Central Bank of Nigeria (UK Court of Appeal) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-united-states-diplomatic-and-consular-staff-in-tehran-usa-v-iran | United States Diplomatic and Consular Staff in Tehran (USA v. Iran) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-western-sahara-advisory-opinion | Western Sahara (Advisory Opinion) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ

@@ -167,3 +167,58 @@ Agent C (Rank S / คำพิพากษาระดับฎีกา) ตร
 - เหลือ 3 PROBLEMS: 1 คดี legacy ยุค ร.6 (sections missing 07 — เป็นข้อจำกัด legacy ไม่ใช่ผลจากการแก้คราวนี้) + 2 external_law warnings (maaekaa) ที่คาดไว้
 - 0 fabricated facts เพิ่ม — ทุกการแก้ derive จากข้อมูลที่มีหลักฐาน
 
+## BATCH 7 — B/C -> A MIGRATION (คดียุคใหม่และคดีระหว่างประเทศ)
+
+Processed: 57
+Upgraded to A: 57 (score 85, release=WARN)
+Thai criminal cases: 30
+ICJ/international cases: 27
+Skipped: 1 (news-case-blue-diamond-museum — ไฟล์ไม่มีใน repo, ไม่ลบจาก index)
+Already v2 (skip): 2 (ข่าวย้ายมา v2 แล้วก่อนหน้านี้)
+Blocks: 0 | Paras >350 fixed: 14 pages auto-split
+External law warnings (expected): provisions ใช้ external_law ส่วนคดีระหว่างประเทศ
+Note: คดีเหล่านี้ยังคง release=WARN/BLOCKED เดิม (publication ตัดสินใจแยก)
+
+### รายชื่อคดียุคใหม่ (ตัวอย่าง)
+- Attorney-General of the Government of Israel v. Eichmann (Israel)
+- Jones v. Ministry of Interior of Saudi Arabia (UK House of Lords)
+- พ.ร.ก.เลื่อนบังคับใช้ พ.ร.บ.ป้องกันการทรมานและอุ้มหาย
+- อุ้มเรียกค่าไถ่นักศึกษาจีน จิน คาน
+- อุ้มฆ่า ฮันส์ ปีเตอร์ มาค
+- อุ้มฆ่า นศ.จีน แยกร่าง
+- แรงงานไทยในอิสราเอล
+- จับกุม แป้ง นาโหนด ที่อินโดนีเซีย
+- ชายสวิสบีบคอภรรยาไทย นครราชสีมา
+- ซุกหุ้น ศักดิ์สยาม ชิดชอบ
+- ดิไอคอนกรุ๊ป (The iCon Group)
+- เครื่องหมายการค้า &quot;Red Bull vs Krating Daeng&quot;
+
+### รายชื่อคดีระหว่างประเทศ (ICJ/ศาลระหว่างประเทศ)
+- Alabama Claims Arbitration (USA/Great Britain)
+- Ambatielos Case (Greece v. UK)
+- Anglo-Norwegian Fisheries Case (UK v. Norway)
+- Arrest Warrant of 11 April 2000 (DRC v. Belgium)
+- Avena and Other Mexican Nationals (Mexico v. USA)
+- Certain Expenses of the United Nations (Advisory Opinion)
+- Clipperton Island Arbitration (France v. Mexico)
+- Eastern Greenland Case (Denmark v. Norway)
+- Fisheries Jurisdiction Cases (UK v. Iceland)
+- Gabčíkovo-Nagymaros Project (Hungary/Slovakia)
+- Gulf of Maine Area Case (Canada/USA)
+- Interhandel Case (Switzerland v. USA)
+- Island of Palmas Case (Netherlands v. USA)
+- Korea – Beef (WTO Appellate Body)
+- Lockerbie Case (Libya v. UK/USA)
+- Monetary Gold Removed from Rome in 1943 (Italy v. France, UK, USA)
+- Nicaragua Case (Nicaragua v. USA)
+- North Sea Continental Shelf Cases (FRG v. Denmark/Netherlands)
+- Nottebohm Case (Liechtenstein v. Guatemala)
+- Nuclear Tests Cases (Australia v. France; New Zealand v. France)
+- Rainbow Warrior Arbitration (New Zealand v. France)
+- South West Africa Cases (Ethiopia v. South Africa)
+- Tadić Case (ICTY)
+- Tinoco Arbitration (Great Britain v. Costa Rica)
+- Trail Smelter Arbitration (USA v. Canada)
+- Trendtex Trading Corp. v. Central Bank of Nigeria (UK Court of Appeal)
+- Western Sahara (Advisory Opinion)
+

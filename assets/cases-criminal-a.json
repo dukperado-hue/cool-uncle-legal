@@ -844,5 +844,347 @@
   "year": "2504",
   "title": "คดีปลงพระชนม์พระนางเธอลักษมีลาวัณ (2504)",
   "cat": "คดยุคโบราณ"
+ },
+ {
+  "slug": "news-case-alabama-claims-arbitration-usa-great-britain",
+  "year": "1872",
+  "title": "Alabama Claims Arbitration (USA/Great Britain)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-ambatielos-case-greece-v-uk",
+  "year": "1953",
+  "title": "Ambatielos Case (Greece v. UK)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-anglo-norwegian-fisheries-case-uk-v-norway",
+  "year": "",
+  "title": "Anglo-Norwegian Fisheries Case (UK v. Norway)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-arrest-warrant-of-11-april-2000-drc-v-belgium",
+  "year": "2545",
+  "title": "Arrest Warrant of 11 April 2000 (DRC v. Belgium)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-attorney-general-of-the-government-of-israel-v-eichmann-israel",
+  "year": "1961",
+  "title": "Attorney-General of the Government of Israel v. Eichmann (Israel)",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-avena-and-other-mexican-nationals-mexico-v-usa",
+  "year": "2547",
+  "title": "Avena and Other Mexican Nationals (Mexico v. USA)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-certain-expenses-of-the-united-nations-advisory-opinion",
+  "year": "1962",
+  "title": "Certain Expenses of the United Nations (Advisory Opinion)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-clipperton-island-arbitration-france-v-mexico",
+  "year": "",
+  "title": "Clipperton Island Arbitration (France v. Mexico)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-eastern-greenland-case-denmark-v-norway",
+  "year": "",
+  "title": "Eastern Greenland Case (Denmark v. Norway)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-fisheries-jurisdiction-cases-uk-v-iceland",
+  "year": "2517",
+  "title": "Fisheries Jurisdiction Cases (UK v. Iceland)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-gabcikovo-nagymaros-project-hungary-slovakia",
+  "year": "2540",
+  "title": "Gabčíkovo-Nagymaros Project (Hungary/Slovakia)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-gulf-of-maine-area-case-canada-usa",
+  "year": "2527",
+  "title": "Gulf of Maine Area Case (Canada/USA)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-interhandel-case-switzerland-v-usa",
+  "year": "1959",
+  "title": "Interhandel Case (Switzerland v. USA)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-island-of-palmas-case-netherlands-v-usa",
+  "year": "",
+  "title": "Island of Palmas Case (Netherlands v. USA)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-jones-v-ministry-of-interior-of-saudi-arabia-uk-house-of-lords",
+  "year": "",
+  "title": "Jones v. Ministry of Interior of Saudi Arabia (UK House of Lords)",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdii-ph-r-k-eluue-nbangkhabaich-ph-r-b-p-ngkankaarthrmaanaela-umhaay-",
+  "year": "2566",
+  "title": "พ.ร.ก.เลื่อนบังคับใช้ พ.ร.บ.ป้องกันการทรมานและอุ้มหาย",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdii-umeriiykkhaaaithnaksueksaacchiin-cchin-khaan-2566",
+  "year": "2566",
+  "title": "อุ้มเรียกค่าไถ่นักศึกษาจีน จิน คาน",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdii-umkhaa-hans-piiet-r-maakh-2566",
+  "year": "2566",
+  "title": "อุ้มฆ่า ฮันส์ ปีเตอร์ มาค",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdii-umkhaa-ns-cchiin-aeykraang-2566",
+  "year": "2566",
+  "title": "อุ้มฆ่า นศ.จีน แยกร่าง",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiiaerngngaanaithyain-israae-l-2566",
+  "year": "2566",
+  "title": "แรงงานไทยในอิสราเอล",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiicchabkum-aepng-naaohnd-thii-inodniiechiiy-2567",
+  "year": "2567",
+  "title": "จับกุม แป้ง นาโหนด ที่อินโดนีเซีย",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiichaayswisbiibkh-phrryaaaithy-nkhrraachsiimaa-2567",
+  "year": "2567",
+  "title": "ชายสวิสบีบคอภรรยาไทย นครราชสีมา",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiichukhun-sakdisyaam-chidch-b-2567",
+  "year": "2567",
+  "title": "ซุกหุ้น ศักดิ์สยาม ชิดชอบ",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiidiai-kh-nkrup-the-icon-group-2567",
+  "year": "2567",
+  "title": "ดิไอคอนกรุ๊ป (The iCon Group)",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiiekhruue-nghmaaykaarkhaa-red-bull-vs-krating-daeng-2555",
+  "year": "2555",
+  "title": "เครื่องหมายการค้า &quot;Red Bull vs Krating Daeng&quot;",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiiephikth-naib-nuyaatkh-nodmieniiym-ae-chtan-osk-2566",
+  "year": "2566",
+  "title": "เพิกถอนใบอนุญาตคอนโดมิเนียม แอชตัน อโศก",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiiephikth-nkhamsangaih-kcchaakraachkaar-phl-t-surechsth-hakphaal-25",
+  "year": "2567",
+  "title": "เพิกถอนคำสั่งให้ออกจากราชการ พล.ต.อ.สุรเชษฐ์ หักพาล",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiiewbphnan-minnii-2567",
+  "year": "2567",
+  "title": "เว็บพนัน มินนี่",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiif-ngr-ngmrdk-phumphwng-dwngcchanthr-2535",
+  "year": "2535",
+  "title": "ฟ้องร้องมรดก &quot;พุ่มพวง ดวงจันทร์&quot;",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiikaarlaelyhnaathiiainkaarp-ngkanaifpaaaelahm-kkhwan-echiiyngraay-2",
+  "year": "2567",
+  "title": "การละเลยหน้าที่ในการป้องกันไฟป่าและหมอกควัน เชียงราย",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiikhaaaekngyaakuuchaahansph-nnthburii-2567",
+  "year": "2567",
+  "title": "ฆ่าแก๊งยากูซ่าหั่นศพ นนทบุรี",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiikhaaykkhraw-5-sph-khr-bkhrawsriiswasdi-2557",
+  "year": "2557",
+  "title": "ฆ่ายกครัว 5 ศพ ครอบครัวศรีสวัสดิ์",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiikhnaithylakl-bekbkh-ngpaathiiekaahliiait-2566",
+  "year": "2566",
+  "title": "คนไทยลักลอบเก็บของป่าที่เกาหลีใต้",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiikhnaithythuukaethngesiiychiiwitthiil-nd-n-2567",
+  "year": "2567",
+  "title": "คนไทยถูกแทงเสียชีวิตที่ลอนดอน",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiikrathaokheriiykhing-korea-king-2560",
+  "year": "2560",
+  "title": "กระทะโคเรียคิง (Korea King)",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiilikhsiththikrathngkaartuun-n-ng-am-okhraach-2562",
+  "year": "2562",
+  "title": "ลิขสิทธิ์กระทงการ์ตูน น้องอั้ม โคราช",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiilngmtiesn-chuue-phithaa-limecchriyratn-chamr-b-2-2566",
+  "year": "2566",
+  "title": "ลงมติเสนอชื่อ พิธา ลิ้มเจริญรัตน์ ซ้ำรอบ 2",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiin-ngd-m-hmuupaa-esiiychiiwitthii-angkrs-2566",
+  "year": "2566",
+  "title": "น้องดอม หมูป่า เสียชีวิตที่อังกฤษ",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiitrwcchs-b-ph-r-b-prak-braththrrmnuuywaadwykaaraidmaachueng-s-w-25",
+  "year": "2567",
+  "title": "ตรวจสอบ พ.ร.บ.ประกอบรัฐธรรมนูญว่าด้วยการได้มาซึ่ง ส.ว.",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiiwinaaskrrmethiiywbin-cx700z-2515",
+  "year": "2515",
+  "title": "วินาศกรรมเที่ยวบิน CX700Z",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-khdiiwinicchchay-raang-ph-r-b-kaychaa-kaychng-2566",
+  "year": "2566",
+  "title": "วินิจฉัย ร่าง พ.ร.บ. กัญชา กัญชง",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-korea-beef-wto-appellate-body",
+  "year": "2000",
+  "title": "Korea – Beef (WTO Appellate Body)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-land-island-and-maritime-frontier-dispute-el-salvador-honduras",
+  "year": "",
+  "title": "Land, Island and Maritime Frontier Dispute (El Salvador/Honduras)",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-lockerbie-case-libya-v-uk-usa",
+  "year": "2531",
+  "title": "Lockerbie Case (Libya v. UK/USA)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-monetary-gold-removed-from-rome-in-1943-italy-v-france-uk-usa",
+  "year": "1943",
+  "title": "Monetary Gold Removed from Rome in 1943 (Italy v. France, UK, USA)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-nicaragua-case-nicaragua-v-usa",
+  "year": "2529",
+  "title": "Nicaragua Case (Nicaragua v. USA)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-north-sea-continental-shelf-cases-frg-v-denmark-netherlands",
+  "year": "2512",
+  "title": "North Sea Continental Shelf Cases (FRG v. Denmark/Netherlands)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-nottebohm-case-liechtenstein-v-guatemala",
+  "year": "1955",
+  "title": "Nottebohm Case (Liechtenstein v. Guatemala)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-nuclear-tests-cases-australia-v-france-new-zealand-v-france",
+  "year": "2517",
+  "title": "Nuclear Tests Cases (Australia v. France; New Zealand v. France)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-rainbow-warrior-arbitration-new-zealand-v-france",
+  "year": "2533",
+  "title": "Rainbow Warrior Arbitration (New Zealand v. France)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-south-west-africa-cases-ethiopia-v-south-africa",
+  "year": "1966",
+  "title": "South West Africa Cases (Ethiopia v. South Africa)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-tadic-case-icty",
+  "year": "2542",
+  "title": "Tadić Case (ICTY)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-tinoco-arbitration-great-britain-v-costa-rica",
+  "year": "1923",
+  "title": "Tinoco Arbitration (Great Britain v. Costa Rica)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-trail-smelter-arbitration-usa-v-canada",
+  "year": "",
+  "title": "Trail Smelter Arbitration (USA v. Canada)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-trendtex-trading-corp-v-central-bank-of-nigeria-uk-court-of-appeal",
+  "year": "1977",
+  "title": "Trendtex Trading Corp. v. Central Bank of Nigeria (UK Court of Appeal)",
+  "cat": "กฎหมายระหว่างประเทศ"
+ },
+ {
+  "slug": "news-case-united-states-diplomatic-and-consular-staff-in-tehran-usa-v-iran",
+  "year": "2523",
+  "title": "United States Diplomatic and Consular Staff in Tehran (USA v. Iran)",
+  "cat": "คดีอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-western-sahara-advisory-opinion",
+  "year": "2518",
+  "title": "Western Sahara (Advisory Opinion)",
+  "cat": "กฎหมายระหว่างประเทศ"
  }
 ]
