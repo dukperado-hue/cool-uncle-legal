@@ -486,18 +486,9 @@
       "verified_working": true,
       "verified_at": "2026-08-20",
       "verify_method": "YouTube oEmbed endpoint returns valid metadata",
-      "note": "embed ID จาก legacy HTML — legacy title เป็นค่าว่าง จึงตั้งชื่อเชิงอ้างอิงตามเนื้อหาคดี"
+      "note": "embed ID จาก legacy HTML — legacy title เป็นค่าว่าง จึงตั้งชื่อเชิงอ้างอิงตามเนื้อหาคดี (รายการ items ถูกลบเพราะซ้ำกับ media.video)"
     },
-    "status": "ok",
-    "items": [
-      {
-        "type": "video",
-        "provider": "youtube",
-        "embed_id": "XsxDnmyMQ-Q",
-        "title": "'แหวนพระจันทร์เสี้ยว' หลักฐานเท็จ — เหตุศาลยกฟ้อง 'สมคิด บุญถนอม'",
-        "credit": "สื่อสาธารณะ YouTube (embed ID ตรวจสอบแล้ว)"
-      }
-    ]
+    "status": "ok"
   },
   "sources": {
     "seed_facts": [

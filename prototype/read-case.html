@@ -127,7 +127,7 @@ async function render(){
     html += `<section class="case-media case-media-top" data-section="00" id="sec-video">
       <h3 style="margin-top:0">🎬 ${esc(v.title || 'วิดีโอคดี')}</h3>
       <div class="video-embed"><iframe src="https://www.youtube.com/embed/${esc(v.youtube_id)}" title="${esc(v.title || 'วิดีโอคดี')}" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
-      <p class="mag-video-credit">${esc(v.channel || '')}${v.verified_at ? ` · ตรวจสอบแล้วเมื่อ ${esc(v.verified_at)}` : ''}</p>
+      <p class="mag-video-credit">${esc(v.channel || ((c.media.items||[]).find(i=>i.embed_id===v.youtube_id)||{}).credit || '')}${v.verified_at ? ` · ตรวจสอบแล้วเมื่อ ${esc(v.verified_at)}` : ''}</p>
     </section>`;
   }
 
@@ -220,8 +220,8 @@ async function render(){
     html += `</section>`;
   }
 
-  // Media section (08/09)
-  if(c.media){
+  // Media section (08/09) — แสดงเฉพาะเมื่อมีรายการวิดีโอเพิ่มเติม (วิดีโอหลักอยู่ด้านบนแล้ว)
+  if(c.media && (c.media.items||[]).length){
     html += `<section class="case-media">
       <h3>ดูวิดีโอที่เกี่ยวข้อง</h3>
       ${(c.media.items||[]).map(it=> it.type==='video' && it.embed_id
