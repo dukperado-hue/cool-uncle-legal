@@ -40,11 +40,11 @@
 .brief-toggle:hover{text-decoration:underline}
 .brief-hide{display:none}
 .brief-hide.open{display:block}
-.verdict-box{background:linear-gradient(135deg,#10182A,#233050);border-radius:14px;padding:22px 26px;color:#F8F5EA;margin:14px 0;display:none;border:1px solid #3B4868}
+.verdict-box{background:#F9F7F2;border:1.5px solid var(--line);border-radius:14px;padding:22px 26px;color:var(--ink);margin:14px 0;display:none}
 .verdict-box.show{display:block}
-.verdict-box .lbl{font-size:.82rem;font-weight:800;letter-spacing:.06em;color:#FFD5D5;margin-bottom:8px}
-.verdict-box h4{font-family:'Noto Serif Thai',serif;color:#fff;font-size:1.15rem;margin:0 0 10px}
-.verdict-box .ratio{border-left:3px solid #C9A24B;padding-left:14px;color:#FFF9EC;margin-top:10px;font-size:.98rem;line-height:1.85;font-weight:500}
+.verdict-box .lbl{font-size:.82rem;font-weight:800;letter-spacing:.06em;color:var(--gold);margin-bottom:8px}
+.verdict-box h4{font-family:'Noto Serif Thai',serif;color:#1B2437;font-size:1.15rem;margin:0 0 10px}
+.verdict-box .ratio{background:#F3F0E7;border-left:3px solid #C9A24B;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 14px;color:#1E2436;margin-top:10px;font-size:.98rem;line-height:1.85;font-weight:500}
 .play-cta-read{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--accent);font-weight:700;font-size:.95rem;padding:11px 20px;border-radius:12px;text-decoration:none;border:1.5px solid var(--accent);transition:all .2s}
 .play-cta-read:hover{background:#EEF1F7}
 @media(max-width:640px){.play-card{padding:20px 18px}.play-step-title{font-size:1.1rem}}
@@ -197,9 +197,9 @@ function renderStep(){
         <div class="play-step-head"><div class="play-step-num">⚖</div><div class="play-step-title">${esc(step.title)}</div></div>
         <div class="verdict-box show">
           <div class="lbl">${unlocked ? '⚖ คำพิพากษาตามลำดับศาล — verified by Agent C' : '⚖ คำพิพากษาตามลำดับศาล — ยังรอการ verify โดย Agent C'}</div>
-          ${(v.courts||[]).map(c => `<h4 style="margin-top:8px;font-size:1.02rem">${esc(c.court)}</h4><p style="color:#FAF7ED;line-height:1.85">${esc(c.ruling_quote || c.ruling)}</p>`).join('')}
+          ${(v.courts||[]).map(c => `<h4 style="margin-top:8px;font-size:1.02rem">${esc(c.court)}</h4><p style="color:#1E2436;line-height:1.85">${esc(c.ruling_quote || c.ruling)}</p>`).join('')}
           ${v.ratio ? `<p class="ratio">"${esc(v.ratio)}"</p>` : ''}
-          ${!unlocked ? `<p style="font-size:.85rem;margin-top:10px;color:#C9D0DC">ตามมาตรฐาน UI: ข้อมูลนี้แสดงจาก JSON ตรง ๆ แต่ badge "verified" จะเปิดเมื่อ Agent C ตรวจสอบเลขที่คำพิพากษาแล้ว</p>` : ''}
+          ${!unlocked ? `<p style="font-size:.85rem;margin-top:10px;color:var(--ink-soft)">ตามมาตรฐาน UI: ข้อมูลนี้แสดงจาก JSON ตรง ๆ — badge "verified" จะเปิดเมื่อ Agent C ตรวจสอบเลขที่คำพิพากษาแล้ว</p>` : ''}
         </div>
         <button class="play-next" onclick="stepIdx++; renderStep()">ดูเหตุผลทางกฎหมาย ▶</button>
       </div>`;
