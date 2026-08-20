@@ -70,6 +70,126 @@
   "cat": ""
  },
  {
+  "slug": "news-case-khdiiaechrluukoch-kh-nechpt-w-et-r-concept-water-2565",
+  "grade": "A",
+  "score": 94,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีแชร์ลูกโซ่ คอนเซปต์ วอเตอร์ (Concept Water) (2565)",
+  "year": "2565",
+  "cat": "คดีองค์กรธุรกิจ"
+ },
+ {
+  "slug": "news-case-khdiiaechrluukoch-nice-review-2562",
+  "grade": "A",
+  "score": 94,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีแชร์ลูกโซ่ Nice Review (2562)",
+  "year": "2562",
+  "cat": "คดีองค์กรธุรกิจ"
+ },
+ {
+  "slug": "news-case-khdiiaifaihm-emaathethn-bii-mountain-b-phab-2565",
+  "grade": "A",
+  "score": 94,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีไฟไหม้ เมาท์เทน บี (Mountain B) ผับ (2565)",
+  "year": "2565",
+  "cat": "คดีอาญา"
+ },
+ {
+  "slug": "news-case-khdiiphuubriophkhf-ngbrisathprakan-ptiesthkaarcchaayokhwid-ecch-cchaay",
+  "grade": "A",
+  "score": 94,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีผู้บริโภคฟ้องบริษัทประกัน ปฏิเสธการจ่ายโควิด \"เจอ จ่าย จบ\" (2564-2565)",
+  "year": "2564",
+  "cat": "คดีแพ่ง"
+ },
+ {
+  "slug": "news-case-khdiiplnpuuenkhaaypiehlng-nraathiwaas-2547",
+  "grade": "A",
+  "score": 94,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีปล้นปืนค่ายปิเหล็ง นราธิวาส (2547)",
+  "year": "2547",
+  "cat": "คดีอาญา"
+ },
+ {
+  "slug": "news-case-khdiismkhid-phumphwng-2548-2562",
+  "grade": "A",
+  "score": 94,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีสมคิด พุ่มพวง (2548, 2562)",
+  "year": "2548",
+  "cat": "คดีอาญา"
+ },
+ {
+  "slug": "news-case-khdiiwisaamay-occh-daanchaang-2539",
+  "grade": "A",
+  "score": 94,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีวิสามัญฯ โจ ด่านช้าง (2539) <span class=\"case-exam\">📝</span>",
+  "year": "2539",
+  "cat": "คดีอาญา"
+ },
+ {
+  "slug": "news-case-khdii-umtadniwkhncchiin-phathyaa-2565",
+  "grade": "A",
+  "score": 93,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีอุ้มตัดนิ้วคนจีน พัทยา (2565)",
+  "year": "2565",
+  "cat": "คดีอาญา"
+ },
+ {
+  "slug": "news-case-khdiikhaatkrrm-2-nakth-ngethiiywekaaaetaa-2557",
+  "grade": "A",
+  "score": 93,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีฆาตกรรม 2 นักท่องเที่ยวเกาะเต่า (2557)",
+  "year": "2557",
+  "cat": "คดีอาญา"
+ },
+ {
+  "slug": "news-case-khdiikhaatkrrm-5-sph-khr-bkhrawchlburii-2557",
+  "grade": "A",
+  "score": 93,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีฆาตกรรม 5 ศพ ครอบครัวชลบุรี (2557)",
+  "year": "2557",
+  "cat": "คดีอาญา"
+ },
+ {
+  "slug": "news-case-khdiiraebidhaangliikaaredns-haadaihy-2555",
+  "grade": "A",
+  "score": 93,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีระเบิดห้างลีการ์เดนส์ หาดใหญ่ (2555)",
+  "year": "2555",
+  "cat": "คดีอาญา"
+ },
+ {
+  "slug": "news-case-khdiitingtaang-khaatkrt-enuue-ng-2556",
+  "grade": "A",
+  "score": 93,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีติ๊งต่าง ฆาตกรต่อเนื่อง (2556)",
+  "year": "2556",
+  "cat": "คดีอาญา"
+ },
+ {
   "slug": "news-case-aerial-incident-of-10-august-1999-pakistan-v-india",
   "grade": "A",
   "score": 92,
@@ -110,6 +230,16 @@
   "cat": ""
  },
  {
+  "slug": "news-case-khdiich-okngprachaachn-hl-kkhaaybatrkh-nesirt-taylor-swift-2567",
+  "grade": "A",
+  "score": 92,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีฉ้อโกงประชาชน หลอกขายบัตรคอนเสิร์ต Taylor Swift (2567)",
+  "year": "2567",
+  "cat": "คดีองค์กรธุรกิจ"
+ },
+ {
   "slug": "news-case-khdiiesiiyebnthliiykhabrthchnbnthaangdwn-2566",
   "grade": "A",
   "score": 92,
@@ -120,6 +250,16 @@
   "cat": "เบนท์ลีชนคน 2566"
  },
  {
+  "slug": "news-case-khdiiesrim-saakhrraasdr-2541",
+  "grade": "A",
+  "score": 92,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีเสริม สาครราษฎร์ (2541)",
+  "year": "2541",
+  "cat": "คดีอาญา"
+ },
+ {
   "slug": "news-case-khdiikaareluue-ktang-2-emsaayn-2549-epnomkha-2549",
   "grade": "A",
   "score": 92,
@@ -128,6 +268,26 @@
   "title": "news-case-khdiikaareluue-ktang-2-emsaayn-2549-epnomkha-2549",
   "year": "",
   "cat": ""
+ },
+ {
+  "slug": "news-case-khdiikhaatkrrm-6-sph-orngaermaekrndaihae-th-e-raawan-2567",
+  "grade": "A",
+  "score": 92,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีฆาตกรรม 6 ศพ โรงแรมแกรนด์ไฮแอท เอราวัณ (2567)",
+  "year": "2567",
+  "cat": "คดีอาญา"
+ },
+ {
+  "slug": "news-case-khdiimhaakaaphy-stark-staarkh-kh-rep-erchan-2566",
+  "grade": "A",
+  "score": 92,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีมหากาพย์ STARK (สตาร์ค คอร์เปอเรชั่น) (2566)",
+  "year": "2566",
+  "cat": "คดีองค์กรธุรกิจ"
  },
  {
   "slug": "news-case-khdiinakth-ngethiiywekaahliithuukkhaatadniwthingphathyaa-2567",
@@ -168,6 +328,96 @@
   "title": "news-case-oil-platforms-case-iran-v-usa",
   "year": "",
   "cat": ""
+ },
+ {
+  "slug": "news-case-dewiid-baernaat-moraat-kha-hanshp-chaophraya-2559",
+  "grade": "A",
+  "score": 91,
+  "release": "WARN",
+  "has_video": true,
+  "title": "news-case-dewiid-baernaat-moraat-kha-hanshp-chaophraya-2559",
+  "year": "",
+  "cat": ""
+ },
+ {
+  "slug": "news-case-f-ngaebngsinsmrsaelasiththieliiyngduubutr-aimkh-chaaraa-2563",
+  "grade": "A",
+  "score": 91,
+  "release": "WARN",
+  "has_video": true,
+  "title": "กรณีสตรีสัญชาติไทยสมรส ISIS-เพิกถอนสัญชาติ (2563)",
+  "year": "2564",
+  "cat": "คดีรัฐธรรมนูญ"
+ },
+ {
+  "slug": "news-case-f-ngephikth-nkaaraihsaychaatiaithyaekbukhkhlt-nghaam-2559",
+  "grade": "A",
+  "score": 91,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คำวินิจฉัยชี้ขาดพิกัดศุลกากรล่วงหน้า (2559)",
+  "year": "2560",
+  "cat": "คดีปกครอง"
+ },
+ {
+  "slug": "news-case-f-ngeriiykkhlaewthnulkul-2534",
+  "grade": "A",
+  "score": 91,
+  "release": "WARN",
+  "has_video": true,
+  "title": "news-case-f-ngeriiykkhlaewthnulkul-2534",
+  "year": "",
+  "cat": ""
+ },
+ {
+  "slug": "news-case-f-ngeriiykkhnulchwi-phayabalsaw-thukhkh-a",
+  "grade": "A",
+  "score": 91,
+  "release": "WARN",
+  "has_video": true,
+  "title": "news-case-f-ngeriiykkhnulchwi-phayabalsaw-thukhkh-a",
+  "year": "",
+  "cat": ""
+ },
+ {
+  "slug": "news-case-f-ngeriiykkhuuenkh-nghman-2560",
+  "grade": "A",
+  "score": 91,
+  "release": "WARN",
+  "has_video": true,
+  "title": "การใช้สิทธิตาม ม.1336 ฟ้องเอาทรัพย์คืน (2560)",
+  "year": "2562",
+  "cat": "คดีแพ่ง"
+ },
+ {
+  "slug": "news-case-joerkam-maek-phetcha-royal-saudi-2532",
+  "grade": "A",
+  "score": 91,
+  "release": "WARN",
+  "has_video": true,
+  "title": "news-case-joerkam-maek-phetcha-royal-saudi-2532",
+  "year": "",
+  "cat": ""
+ },
+ {
+  "slug": "news-case-khdii-um-kha-nakstuksa-jin-san-2566",
+  "grade": "A",
+  "score": 91,
+  "release": "WARN",
+  "has_video": true,
+  "title": "news-case-khdii-um-kha-nakstuksa-jin-san-2566",
+  "year": "",
+  "cat": ""
+ },
+ {
+  "slug": "news-case-khdiiaechraemchm-y-2527",
+  "grade": "A",
+  "score": 91,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีแชร์แม่ชม้อย (2527)",
+  "year": "2527",
+  "cat": "คดีอาญา"
  },
  {
   "slug": "news-case-khdiif-ngaebngphlkamairslaakkinaebngrathbaal-hwyklum-2566",
@@ -228,6 +478,46 @@
   "title": "คดีอวี้ฉิงรีดไถ",
   "year": "2566",
   "cat": "อวี้ฉิงรีดไถ 2566"
+ },
+ {
+  "slug": "news-case-thlaithaan-gaeng-khol-centre-filipin-2566",
+  "grade": "A",
+  "score": 91,
+  "release": "WARN",
+  "has_video": true,
+  "title": "news-case-thlaithaan-gaeng-khol-centre-filipin-2566",
+  "year": "",
+  "cat": ""
+ },
+ {
+  "slug": "news-case-um-kha-nak-kan-thut-phaekh-phet-saudi-2533",
+  "grade": "A",
+  "score": 91,
+  "release": "WARN",
+  "has_video": true,
+  "title": "news-case-um-kha-nak-kan-thut-phaekh-phet-saudi-2533",
+  "year": "",
+  "cat": ""
+ },
+ {
+  "slug": "news-case-um-kha-nang-daarawdii-d-ch-seri-sritananchai-2537",
+  "grade": "A",
+  "score": 91,
+  "release": "WARN",
+  "has_video": true,
+  "title": "news-case-um-kha-nang-daarawdii-d-ch-seri-sritananchai-2537",
+  "year": "",
+  "cat": ""
+ },
+ {
+  "slug": "news-case-yingsa-klangsar-canthaburi-dab-3-shp-pm-mrdkthind-4000-rai-2562",
+  "grade": "A",
+  "score": 91,
+  "release": "WARN",
+  "has_video": true,
+  "title": "news-case-yingsa-klangsar-canthaburi-dab-3-shp-pm-mrdkthind-4000-rai-2562",
+  "year": "",
+  "cat": ""
  },
  {
   "slug": "news-case-khdii-amdaengpom-hlongya-pi-2347",
