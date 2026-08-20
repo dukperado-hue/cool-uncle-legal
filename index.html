@@ -206,8 +206,12 @@ h1,h2,h3{font-family:'Noto Serif Thai',serif}
 .sr-name{font-size:13.5px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sr-desc{font-size:11.5px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sr-tag{
-  flex:0 0 auto;font-size:10px;font-weight:700;color:var(--gold);
-  background:var(--gold-soft);padding:2px 8px;border-radius:999px;
+  /* --tag-hue lets a per-book color override this via color-mix() (set
+     inline per result in renderSearchResults) while page/subject/game
+     results, which never set --tag-hue, keep the original gold styling. */
+  flex:0 0 auto;font-size:10px;font-weight:700;color:var(--tag-hue, var(--gold));
+  background:color-mix(in srgb, var(--tag-hue, var(--gold)) 18%, var(--card));
+  padding:2px 8px;border-radius:999px;
 }
 .search-empty{padding:14px 10px;text-align:center;font-size:12.5px;color:var(--ink-faint)}
 
@@ -1025,29 +1029,135 @@ function escapeHtml(s){
   return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
 }
 
+/* Cross-book มาตรา search: codex-data.json (~9MB) is fetched lazily on the
+   first search keystroke, not on page load, so it never slows the homepage.
+   Once loaded, a query like "ประนีประนอมยอมความ" can surface มาตรา from
+   every book at once (e.g. civil ลักษณะ 17 AND civpro ม.138), which the
+   plain page/subject index above can't do since it only matches page
+   names/descriptions, not article content. */
+const CODEX_BOOK_LABELS = {
+  civil: 'ประมวลแพ่ง', criminal: 'ประมวลอาญา', civpro: 'ประมวลวิแพ่ง',
+  crimpro: 'ประมวลวิอาญา', constitution: 'พระธรรมนูญ', const2560: 'รัฐธรรมนูญ 2560',
+  adminproc: 'วิ.ปกครอง', admincourt: 'จัดตั้งศาลปกครอง',
+  tortofficials: 'ละเมิดของเจ้าหน้าที่', copyright: 'ลิขสิทธิ์', patent: 'สิทธิบัตร',
+  trademark: 'เครื่องหมายการค้า', carriage: 'รับขนของทางทะเล', ipcourt: 'ศาลทรัพย์สินทางปัญญา',
+};
+const CODEX_BOOK_KEYS = Object.keys(CODEX_BOOK_LABELS);
+function bookTagColor(bookKey){
+  const idx = CODEX_BOOK_KEYS.indexOf(bookKey);
+  const hue = Math.round((idx * 360) / CODEX_BOOK_KEYS.length);
+  return `hsl(${hue} 62% 42%)`;
+}
+let codexIndexPromise = null;
+let codexFlatIndex = null;
+
+function buildCodexFlatIndex(data){
+  const flat = [];
+  Object.entries(data.books || {}).forEach(([bookKey, book]) => {
+    Object.values(book.articles || {}).forEach(a => {
+      const topics = [a.meta?.laksanaTitle, a.meta?.muadTitle, a.meta?.suanTitle, a.meta?.phaakTitle]
+        .filter(Boolean);
+      (a.lectureNotes || []).forEach(l => { if (l.topic) topics.push(l.topic); });
+      flat.push({ book: bookKey, bookLabel: CODEX_BOOK_LABELS[bookKey] || bookKey, number: a.number, topics, text: a.text || '' });
+    });
+  });
+  return flat;
+}
+
+function ensureCodexIndex(){
+  if (!codexIndexPromise) {
+    codexIndexPromise = fetch('codex-data.json').then(r => r.json()).then(data => {
+      codexFlatIndex = buildCodexFlatIndex(data);
+      return codexFlatIndex;
+    });
+  }
+  return codexIndexPromise;
+}
+
+function searchCodexArticles(q, limit, perBookLimit = 3){
+  if (!codexFlatIndex) return [];
+  const hits = [];
+  for (const item of codexFlatIndex) {
+    const topicHit = item.topics.find(t => t.toLowerCase().includes(q));
+    if (topicHit) { hits.push({ item, snippet: topicHit, rank: 0 }); continue; }
+    const idx = item.text.toLowerCase().indexOf(q);
+    if (idx !== -1) {
+      const snippet = '…' + item.text.slice(Math.max(0, idx - 15), idx + q.length + 15) + '…';
+      hits.push({ item, snippet, rank: 1 });
+    }
+  }
+  hits.sort((a, b) => a.rank - b.rank);
+
+  // Cap per book *before* the overall cap — otherwise a book with many hits
+  // (e.g. civil's whole ลักษณะ 17) fills the entire result list before the
+  // loop ever reaches a different book's matches (e.g. civpro ม.138), even
+  // though showing results from multiple books is the whole point.
+  const perBookCount = {};
+  const diversified = [];
+  for (const hit of hits) {
+    const count = perBookCount[hit.item.book] || 0;
+    if (count >= perBookLimit) continue;
+    perBookCount[hit.item.book] = count + 1;
+    diversified.push(hit);
+    if (diversified.length >= limit) break;
+  }
+  return diversified;
+}
+
+function renderSearchResults(query, pageMatches, articleMatches, codexLoading){
+  const resultsEl = document.getElementById('global-search-results');
+  const pageHtml = pageMatches.map(m => `
+    <a href="${m.href}" class="search-result-item" onmouseenter="playHoverSound()">
+      <span class="sr-icon">${m.icon}</span>
+      <span class="sr-text">
+        <span class="sr-name">${escapeHtml(m.name)}</span>
+        <span class="sr-desc">${escapeHtml(m.desc || '')}</span>
+      </span>
+      <span class="sr-tag">${m.tag}</span>
+    </a>
+  `).join('');
+
+  const articleHtml = articleMatches.map(({ item, snippet }) => `
+    <a href="codex-search.html?book=${item.book}&article=${encodeURIComponent(item.number)}" class="search-result-item" onmouseenter="playHoverSound()">
+      <span class="sr-icon">📖</span>
+      <span class="sr-text">
+        <span class="sr-name">ม.${escapeHtml(item.number)}</span>
+        <span class="sr-desc">${escapeHtml(snippet)}</span>
+      </span>
+      <span class="sr-tag" style="--tag-hue:${bookTagColor(item.book)}">${escapeHtml(item.bookLabel)}</span>
+    </a>
+  `).join('');
+
+  const loadingHtml = codexLoading ? `<div class="search-empty">🔎 กำลังค้นหาในมาตรากฎหมาย...</div>` : '';
+
+  const body = pageHtml + articleHtml + loadingHtml;
+  resultsEl.innerHTML = body || `<div class="search-empty">ไม่พบผลลัพธ์สำหรับ "${escapeHtml(query)}"</div>`;
+  resultsEl.classList.add('active');
+}
+
 function runGlobalSearch(query){
   const resultsEl = document.getElementById('global-search-results');
   const q = query.trim().toLowerCase();
   if (!q) { resultsEl.classList.remove('active'); resultsEl.innerHTML = ''; return; }
 
-  const matches = SEARCH_INDEX.filter(it =>
+  const pageMatches = SEARCH_INDEX.filter(it =>
     it.name.toLowerCase().includes(q) || (it.desc && it.desc.toLowerCase().includes(q))
   ).slice(0, 8);
 
-  resultsEl.innerHTML = matches.length
-    ? matches.map(m => `
-      <a href="${m.href}" class="search-result-item" onmouseenter="playHoverSound()">
-        <span class="sr-icon">${m.icon}</span>
-        <span class="sr-text">
-          <span class="sr-name">${escapeHtml(m.name)}</span>
-          <span class="sr-desc">${escapeHtml(m.desc || '')}</span>
-        </span>
-        <span class="sr-tag">${m.tag}</span>
-      </a>
-    `).join('')
-    : `<div class="search-empty">ไม่พบผลลัพธ์สำหรับ "${escapeHtml(query)}"</div>`;
+  if (q.length < 2) {
+    renderSearchResults(query, pageMatches, [], false);
+    return;
+  }
 
-  resultsEl.classList.add('active');
+  const articleMatchesSoFar = codexFlatIndex ? searchCodexArticles(q, 8) : [];
+  renderSearchResults(query, pageMatches, articleMatchesSoFar, !codexFlatIndex);
+
+  if (!codexFlatIndex) {
+    ensureCodexIndex().then(() => {
+      if (document.getElementById('global-search-input').value.trim().toLowerCase() !== q) return;
+      renderSearchResults(query, pageMatches, searchCodexArticles(q, 8), false);
+    });
+  }
 }
 
 (function initGlobalSearch(){

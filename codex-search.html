@@ -2007,6 +2007,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   } else if (book && BOOK_INFO[book]) {
     applyBookLock(book);
   }
+
+  const article = params.get('article');
+  if (article && book && BOOK_INFO[book]) {
+    document.getElementById('search-article').value = article;
+    search();
+  }
 });
 </script>
 
