@@ -642,9 +642,9 @@
   "has_video": false
  },
  "news-case-khdiichii-uy-aech-ueng-2501.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdiichukhun-sakdisyaam-chidch-b-2567.html": {
@@ -660,9 +660,9 @@
   "has_video": false
  },
  "news-case-khdiiditphrakato-2566.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdiiedk-14-khomyrth-2566.html": {
@@ -1044,9 +1044,9 @@
   "has_video": false
  },
  "news-case-khdiirthkrabachingchn-rolls-royce-2566.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdiisaaykaarbinf-ngphuuodysaarepidpratuuchukechin-2567.html": {
@@ -1218,9 +1218,9 @@
   "has_video": true
  },
  "news-case-pae-araksa-2523.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-pinochet-case-uk-house-of-lords.html": {
