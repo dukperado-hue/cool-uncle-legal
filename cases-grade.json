@@ -144,9 +144,9 @@
   "has_video": true
  },
  "news-case-east-timor-case-portugal-v-australia.html": {
-  "grade": "B",
-  "score": 77,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-eastern-greenland-case-denmark-v-norway.html": {
@@ -1164,9 +1164,9 @@
   "has_video": false
  },
  "news-case-m-v-saiga-no-2-case-st-vincent-v-guinea.html": {
-  "grade": "B",
-  "score": 77,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 86,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-military-and-paramilitary-activities-in-and-against-nicaragua-nicaragu.html": {
@@ -1254,9 +1254,9 @@
   "has_video": false
  },
  "news-case-reparation-for-injuries-suffered-in-the-service-of-the-un-advisory-opi.html": {
-  "grade": "B",
-  "score": 77,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-reservations-to-the-convention-on-genocide-advisory-opinion.html": {
@@ -1314,9 +1314,9 @@
   "has_video": true
  },
  "news-case-the-caroline-case-uk-v-usa.html": {
-  "grade": "B",
-  "score": 77,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-the-enrica-lexie-incident-italy-v-india.html": {
