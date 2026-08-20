@@ -588,9 +588,9 @@
   "has_video": true
  },
  "news-case-khdiicchaangwaankhaa-faaorh-2546.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 63,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdiicchabkum-aepng-naaohnd-thii-inodniiechiiy-2567.html": {
@@ -618,15 +618,15 @@
   "has_video": true
  },
  "news-case-khdiich-okngraanth-ng-suphrrnburii-2565.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 63,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdiich-okngshkrn-mthraphykhruukh-naekn-2562.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 63,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdiichaals-osphraacch-charles-sobhraj-2518.html": {
@@ -684,9 +684,9 @@
   "has_video": true
  },
  "news-case-khdiiekhruue-nghmaaykaarkhaa-pangchaa-pang-cha-2566.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 84,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdiiekhruue-nghmaaykaarkhaa-red-bull-vs-krating-daeng-2555.html": {
@@ -768,9 +768,9 @@
   "has_video": true
  },
  "news-case-khdiif-ngr-ng-ksthch-krniikhwbrwmkicchkaarothrkhmnaakhm-ais-3bb-2566.html": {
-  "grade": "C",
+  "grade": "A",
   "score": 63,
-  "release": "BLOCKED",
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdiif-ngr-nglaemidsiththikhwaamepnswntaw-pdpa-kh-muulluukkhaahlud-256.html": {
@@ -960,9 +960,9 @@
   "has_video": false
  },
  "news-case-khdiimaaekaa-888-aela-ebnch-edm-n-2566.html": {
-  "grade": "C",
+  "grade": "A",
   "score": 63,
-  "release": "BLOCKED",
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdiimhaakaaphy-stark-staarkh-kh-rep-erchan-2566.html": {
