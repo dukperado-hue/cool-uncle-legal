@@ -39,9 +39,6 @@
 | news-case-ephikth-nsampthaanrangnknaangae-n-2561 | คดีปกครอง: เพิกถอนสัมปทานรังนกนางแอ่น (2561) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
 | news-case-ephikth-nkaar-kochndthiidinthabch-nekaaalibng-2562 | คดีปกครอง: เพิกถอนการออกโฉนดที่ดินทับซ้อนเกาะลิบง (2562) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
 | news-case-khdiif-ngetnthrthmuue-s-ng-krniikhaayrthy-maemw-2566 | คดีฟ้องเต็นท์รถมือสอง — รถย้อมแมว (2566) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
-news-case-khdii-prachaakhana-3-rup-parachik-pi-2359.html | คดีพระราชาคณะ 3 รูป ปาราชิก (พ.ศ. 2359) | คดียุคโบราณ — คลิปวิดีโอเฉพาะหน้าตรงยังไม่พบ
-news-case-khdii-aima-khamkhuen-nai-praborommaharachawang.html | คดีอ้ายมา ลอบข่มขืนเจ้าจอมในพระบรมมหาราชวัง (จ.ศ. 1159) | คดียุคโบราณ — คลิปวิดีโอเฉพาะหน้าตรงยังไม่พบ
-news-case-khdii-gabort-chaofa-men-pi-2352.html | คดีกบฏเจ้าฟ้าเหม็น — บัตรสนเทห์และกาคาบฟ้อง (พ.ศ. 2352) | คดียุคโบราณ — คลิปวิดีโอเฉพาะหน้าตรงยังไม่พบ
 news-case-khdii-jottektej-khtit-2324.html | คดีโจทก์ (2324) ยุคธนบุรี | ไม่มีคลิปที่เกี่ยวข้องโดยตรง — คดีคดีโจทก์โบราณ
 news-case-khdii-samphrachakhana-khtit-2324.html | คดี 3 พระราชาคณะทูลค้าน (2324) | ไม่มีคลิปที่เกี่ยวข้องโดยตรง — พระสงฆ์ทูลค้านร.ตาก
 news-case-khdii-pongkhaoluang-nginthplom-2310-2325.html | คดีโกงข้าวหลวง/เงินปลอม ธนบุรี | ไม่มีคลิปที่เกี่ยวข้องโดยตรง — โครงสร้างศาลธนบุรี
