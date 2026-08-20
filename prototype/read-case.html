@@ -121,6 +121,16 @@ async function render(){
     </div>
   </section>`;
 
+  // TOP VIDEO (จาก case.media.video — verified working เท่านั้น)
+  if(c.media && c.media.video && c.media.video.youtube_id && c.media.video.verified_working){
+    const v = c.media.video;
+    html += `<section class="case-media case-media-top" data-section="00" id="sec-video">
+      <h3 style="margin-top:0">🎬 ${esc(v.title || 'วิดีโอคดี')}</h3>
+      <div class="video-embed"><iframe src="https://www.youtube.com/embed/${esc(v.youtube_id)}" title="${esc(v.title || 'วิดีโอคดี')}" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+      <p class="mag-video-credit">${esc(v.channel || '')}${v.verified_at ? ` · ตรวจสอบแล้วเมื่อ ${esc(v.verified_at)}` : ''}</p>
+    </section>`;
+  }
+
   for(const s of c.read.sections){
     const ct = s.content || {};
     html += `<section data-section="${esc(String(s.order).padStart(2,'0'))}" id="sec-${esc(s.key)}">`;
@@ -182,15 +192,18 @@ async function render(){
       const v = ct.verdict || {};
       if(ct.verified && v.decision){
         html += `<div class="judicial-box">
-          <div class="lbl">⚖ คำวินิจฉัยศาลฎีกา — verified by Agent C</div>
-          <h4>${esc(v.decision)}</h4>
+          <div class="lbl">⚖ คำพิพากษาตามลำดับศาล — verified by Agent C</div>
+          ${(v.courts||[]).map(court => `<h4 style="margin-top:8px;font-size:1rem">${esc(court.court)}</h4><p>${esc(court.ruling_quote || court.ruling)}</p>`).join('')}
           ${v.ratio ? `<p class="ratio">"${esc(v.ratio)}"</p>` : ''}
           ${v.source_verdict_ref ? `<p style="font-size:.85rem;margin-top:10px;color:#C9D0DC">อ้างอิง: ${esc(v.source_verdict_ref)}</p>` : ''}
         </div>`;
       } else {
+        // Courts ladder from seed facts — still locked behind NEEDS_REVIEW gate
+        const courts = v.courts || [];
         html += `<div style="background:#F9F7F2;border:1px dashed var(--line);border-radius:14px;padding:18px 20px;color:var(--ink-soft);font-size:.95rem">
-          🕒 <strong>กล่องคำวินิจฉัยศาลยังไม่แสดงผล</strong> — เนื้อหาจริงและเลขที่คำพิพากษากล่าวต้องได้รับการ verify จาก Agent C (Judicial QA) ก่อน ตามมาตรฐาน A ≠ S:
-          <ul style="margin:10px 0 0 18px">${needsReviewBox(ct.note_to_agent_a) ? '' : `<li>คำวินิจฉัย/บทเหตุผล (ratio decidendi) ยังไม่ถูกยืนยันต้นฉบับ</li>`}<li>เมื่อ verify แล้ว: ตั้งค่า <code>read.sections[judicial].content.verified = true</code></li></ul>
+          🕒 <strong>กล่องคำพิพากษา (3 ศาล) ยังไม่ปลดล็อก</strong> — ข้อมูลจาก seed facts วางไว้แล้ว แต่ยังต้องได้รับการ verify จาก Agent C (Judicial QA) ก่อน ตามมาตรฐาน A ≠ S:
+          ${courts.length ? `<div style="margin-top:12px;background:#F3F0E7;border-radius:10px;padding:12px 14px">${courts.map(c => `<p style="margin:6px 0"><strong>${esc(c.court)}:</strong> ${esc(c.ruling_quote || c.ruling)}</p>`).join('')}</div>` : ''}
+          <ul style="margin:10px 0 0 18px">${needsReviewBox(ct.note_to_agent_a) ? '' : `<li>คำวินิจฉัย/บทเหตุผล (ratio decidendi) ยังไม่ถูกยืนยันต้นฉบับ</li>`}<li>เมื่อ verify แล้ว: ตั้งค่า <code>read.sections[judicial].content.verified = true</code> + ใส่เลขที่คำพิพากษาแต่ละศาล</li></ul>
         </div>`;
       }
       html += needsReviewBox(ct.note_to_agent_a);

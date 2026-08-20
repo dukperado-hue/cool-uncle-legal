@@ -196,8 +196,8 @@ function renderStep(){
       <div class="play-card">
         <div class="play-step-head"><div class="play-step-num">⚖</div><div class="play-step-title">${esc(step.title)}</div></div>
         <div class="verdict-box show">
-          <div class="lbl">${unlocked ? '⚖ คำวินิจฉัยศาลฎีกาจริง — verified by Agent C' : '⚖ คำวินิจฉัยศาลฎีกาจริง — ยังรอการ verify โดย Agent C'}</div>
-          <h4>${esc(v.decision || '(รอข้อมูลคำวินิจฉัยจริง)')}</h4>
+          <div class="lbl">${unlocked ? '⚖ คำพิพากษาตามลำดับศาล — verified by Agent C' : '⚖ คำพิพากษาตามลำดับศาล — ยังรอการ verify โดย Agent C'}</div>
+          ${(v.courts||[]).map(c => `<h4 style="margin-top:8px;font-size:1.02rem">${esc(c.court)}</h4><p style="color:#E8ECEF;line-height:1.8">${esc(c.ruling_quote || c.ruling)}</p>`).join('')}
           ${v.ratio ? `<p class="ratio">"${esc(v.ratio)}"</p>` : ''}
           ${!unlocked ? `<p style="font-size:.85rem;margin-top:10px;color:#C9D0DC">ตามมาตรฐาน UI: ข้อมูลนี้แสดงจาก JSON ตรง ๆ แต่ badge "verified" จะเปิดเมื่อ Agent C ตรวจสอบเลขที่คำพิพากษาแล้ว</p>` : ''}
         </div>
@@ -212,6 +212,7 @@ function renderStep(){
       <div class="play-card">
         <div class="play-step-head"><div class="play-step-num">💡</div><div class="play-step-title">${esc(step.title)}</div></div>
         <p style="line-height:1.85">${esc(v.ratio || '')}</p>
+        <p style="line-height:1.85;margin-top:8px">${esc(v.courts?.[2]?.ruling_quote || '')}</p>
         ${renderFinal() }
       </div>`;
     return;

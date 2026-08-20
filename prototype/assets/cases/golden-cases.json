@@ -3,56 +3,98 @@
     "version": "1.0",
     "last_curated": "2026-08-20",
     "curated_by": "B",
-    "note": "Curated public surface — Database ≠ Publication: โหลดโดย news-index-v2.html เฉพาะคดีที่ visibility.public = true"
+    "note": "Curated public surface — Database ≠ Publication: โหลดโดย news-index-v2.html เฉพาะคดีที่ visibility.public = true",
+    "_featured_deident": "🛡 De-identification ระดับ C — แสดงเฉพาะบทบาท (จำเลย = นักศึกษาแพทย์ชาย / ผู้ตาย = นักศึกษาแพทย์หญิง) — ชื่อจริงเก็บไว้ใน case JSON เท่านั้น"
   },
-  "_featured_title": "คดีเสริม สาครราษฎร์ — รักที่กลายเป็นฆาตกรรมอำพรางศพ (2541)",
+  "_featured_title": "คดีจำเลย (นักศึกษาแพทย์ชาย) — รักที่กลายเป็นฆาตกรรมอำพรางศพ (2541)",
   "_featured_blurb": "ศาลฎีกาวางหลักแยก 'ความรัก' กับ 'ความใคร่ในการยึดครอง' — หลักนี้ยังคงถูกอ้างอิงในการพิจารณาเหตุลดโทษคดีฆาตกรรมเรื่องรักถึงปัจจุบัน",
   "_featured_deident": "🛡 ชื่อผู้ตาย/จำเลยจริงในเนื้อหาคือข้อมูลดิบจาก legacy — รอดำเนินการ de-identification โดย Agent A ก่อนเปิดเป็น featured เต็มรูปแบบ",
   "_db_total": "235",
-  "featured_cases": ["janeera-2541"],
+  "featured_cases": [
+    "janeera-2541"
+  ],
   "golden_cases": [
     {
       "id": "janeera-2541",
-      "title": "เสริม สาครราษฎร์ — ฆาตกรรมอำพรางศพนักศึกษาแพทย์ (2541)",
+      "title": "จำเลย (นักศึกษาแพทย์ชาย) — ฆาตกรรมอำพรางศพนักศึกษาแพทย์ (2541)",
       "cat": "คดีอาญา",
       "has_video": true,
-      "rank": { "grade": "A", "score": 92, "s_verified": false },
-      "visibility": { "public": false, "public_reason": "deident_required" },
-      "modes": ["read", "play"]
+      "rank": {
+        "grade": "A",
+        "score": 92,
+        "s_verified": false
+      },
+      "visibility": {
+        "public": false,
+        "public_reason": "deident_required"
+      },
+      "modes": [
+        "read",
+        "play"
+      ]
     },
     {
       "id": "somkid-phumphuang-2548-2562",
       "title": "สมคิด พุ่มพวง (2548, 2562)",
       "cat": "คดีอาญา",
       "has_video": true,
-      "rank": { "grade": "A", "score": 94, "s_verified": false },
-      "visibility": { "public": true, "public_reason": "golden" },
-      "modes": ["read"]
+      "rank": {
+        "grade": "A",
+        "score": 94,
+        "s_verified": false
+      },
+      "visibility": {
+        "public": true,
+        "public_reason": "golden"
+      },
+      "modes": [
+        "read"
+      ]
     },
     {
       "id": "wisayaman-jordan-2539",
       "title": "วิสามัญฯ โจ ด่านช้าง (2539)",
       "cat": "คดีอาญา",
       "has_video": true,
-      "rank": { "grade": "A", "score": 94, "s_verified": false },
-      "visibility": { "public": true, "public_reason": "golden" },
-      "modes": ["read"]
+      "rank": {
+        "grade": "A",
+        "score": 94,
+        "s_verified": false
+      },
+      "visibility": {
+        "public": true,
+        "public_reason": "golden"
+      },
+      "modes": [
+        "read"
+      ]
     },
     {
       "id": "stark-auditor-2566",
       "title": "ความรับผิดของผู้สอบบัญชีในการรับรองงบการเงิน STARK (2566)",
       "cat": "คดีองค์กรธุรกิจ",
       "has_video": true,
-      "rank": { "grade": "A", "score": 95, "s_verified": false },
-      "visibility": { "public": true, "public_reason": "golden" },
-      "modes": ["read"]
+      "rank": {
+        "grade": "A",
+        "score": 95,
+        "s_verified": false
+      },
+      "visibility": {
+        "public": true,
+        "public_reason": "golden"
+      },
+      "modes": [
+        "read"
+      ]
     }
   ],
   "series_hubs": [
     {
       "series_id": "blue-diamond",
       "series_title": "มหากาพร์เพชรซาอู — มรกตและโลหิต",
-      "order": ["um-kha-nak-kan-thut-phaekh-phet-saudi-2533"]
+      "order": [
+        "um-kha-nak-kan-thut-phaekh-phet-saudi-2533"
+      ]
     }
   ]
 }
