@@ -128,39 +128,8 @@ async function init(){
     </a>
   </div>
 
-  <h2 class="mag-head mt-32"><span class="mag-head-ico">🏆</span>Golden Cases — คัดมาแล้วว่าคุณภาพผ่าน</h2>
-  <div class="golden-row">
-    ${golden.length
-      ? golden.map(x=>`
-        <a class="golden-card" href="read-case.html?id=${esc(x.id)}">
-          <span class="g-rank">${x.rank && x.rank.s_verified ? '<span style="color:var(--gold)">✦ S</span>' : esc(x.rank && x.rank.grade || '')}</span>
-          <h3>${esc(x.title)}</h3>
-          <p>${esc(x.cat)} · score ${esc(x.rank && x.rank.score || '')}${x.has_video ? ' · 📺 มีวิดีโอ' : ''}</p>
-        </a>`).join('')
-      : '<div class="s-empty">ยังไม่มีคดีที่เปิด public — กำลังรอการตรวจสอบ (RULE 4 + 10)</div>'}
-  </div>
-
-  <h2 class="mag-head mt-32"><span class="mag-head-ico">✦</span>คดีระดับ S — verified judicial authority</h2>
-  ${sVerified.length
-    ? `<div class="golden-row">${sVerified.map(x=>`
-        <a class="golden-card" href="read-case.html?id=${esc(x.id)}" style="border-color:var(--gold)">
-          <span class="g-rank"><span style="color:var(--gold)">✦ S — C verified</span></span>
-          <h3>${esc(x.title)}</h3>
-          <p>${esc(x.cat)} · ฎีกา verified โดย Agent C</p>
-        </a>`).join('')}</div>`
-    : `<div class="s-empty">✦ <strong>ยังไม่มีคดีระดับ S</strong> — เพราะ S = quality content + <strong>verified judicial authority</strong> (RULE 6)<br>ขณะนี้คดีกำลังรอ Agent C ตรวจสอบเลขที่คำพิพากษาฎีกา เมื่อผ่านแล้วจะแสดง badge ✦ S ที่นี่ (A ≠ S)</div>`}
-
-  <h2 class="mag-head mt-32"><span class="mag-head-ico">📦</span>ซีรีส์คดี</h2>
-  ${(g.series_hubs||[]).map(s=>`
-    <a class="cat-card" href="series/${esc(s.series_id)}.html" style="display:block;margin-bottom:14px">
-      <h3>${esc(s.series_title)}</h3>
-      <p>${esc((s.order||[]).length)} ตอนในซีรีส์ →</p>
-    </a>`).join('') || '<div class="db-note">ซีรีส์อยู่ระหว่างจัดทำโดย Agent A</div>'}
-
-  <h2 class="mag-head mt-32"><span class="mag-head-ico">🔍</span>Explore — ขยายฐานคดี</h2>
-  <a class="btn" href="explore.html" style="margin:8px 0">📋 ดู readiness inventory ของคดี A-grade ทั้งหมด (49 คดี) →</a>
   <div class="db-note">
-    🔒 หน้าเว็บนี้แสดงเฉพาะ <strong>curated content</strong> (Featured / Golden / S) — ไม่ใช่จำนวนคดีทั้งหมดในฐานข้อมูล<br>
+    🔒 หน้านี้แสดงเฉพาะ <strong>curated content</strong> (ส่วน Golden / S / ซีรีส์ / Explore — อยู่ระหว่างออกแบบใหม่) — ไม่ใช่จำนวนคดีทั้งหมดในฐานข้อมูล<br>
     คดีที่เหลือ (${esc(g._db_total || '…')} คดี) ยังอยู่หลัง validation gate: รอ de-identification โดย Agent A, เนื้อหา NEEDS_REVIEW, และ judicial verification โดย Agent C — เมื่อผ่านแล้วจะค่อย ๆ เปิดตามลำดับ (RULE 4: คุณภาพก่อนปริมาณ)<br>
     💡 Hidden is not deleted — คดีที่ยังไม่พร้อม public ถูกตั้งค่า visibility.public = false <strong>ไม่ได้ถูกลบ</strong> (RULE 5)
   </div>`;
