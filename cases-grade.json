@@ -138,9 +138,9 @@
   "has_video": true
  },
  "news-case-dogger-bank-incident-great-britain-russia.html": {
-  "grade": "B",
-  "score": 77,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-east-timor-case-portugal-v-australia.html": {
@@ -1170,9 +1170,9 @@
   "has_video": true
  },
  "news-case-military-and-paramilitary-activities-in-and-against-nicaragua-nicaragu.html": {
-  "grade": "B",
-  "score": 77,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 86,
+  "release": "WARN",
   "has_video": true
  },
  "news-case-minquiers-and-ecrehos-case-france-v-uk.html": {
