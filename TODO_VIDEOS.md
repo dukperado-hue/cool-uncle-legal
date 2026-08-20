@@ -14,3 +14,28 @@
 | news-case-khdiituhawkhadilak-2568 |  | ไม่มีวิดีโอฝังในหน้า legacy และยังไม่ได้ค้นหาแหล่งจริง |
 | news-case-pae-araksa-2523 |  | ไม่มีวิดีโอฝังในหน้า legacy และยังไม่ได้ค้นหาแหล่งจริง |
 | news-case-the-volga-case-russian-federation-v-australia |  | ไม่มีวิดีโอฝังในหน้า legacy และยังไม่ได้ค้นหาแหล่งจริง |
+| news-case-khdiiesiiyebnthliiykhabrthchnbnthaangdwn-2566 | คดีอาญา: เสี่ยเบนท์ลีย์ขับรถชนบนทางด่วน (2566) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiif-ngaebngphlkamairslaakkinaebngrathbaal-hwyklum-2566 | คดีสลากกินแบ่งรัฐบาลเป็นกลุ่ม ('หวยกลุ่ม') — ข้อพิพาทการแบ่งเงินรางวัล (2566) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiipraeminphaasiithiidinaelasingpluuksraangaimepnthrrm-2566 | ประเมินภาษีที่ดินและสิ่งปลูกสร้างไม่เป็นธรรม (คดี 534/2566) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiitadsiththiphuusmakhr-s-w-krniimiilaksnat-nghaameruue-ngekhruue-ya | ผู้สมัคร ส.ว. ถูกคัดค้าน — ลักษณะต้องห้ามเรื่องเครือญาติ (เลือก สว. 2567) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiimlphisfunkhwan-pm-2-5-phaakhehnuue-2566 | มลพิษฝุ่น PM2.5 ภาคเหนือ (2566) — สู่คำสั่งประกาศเขตควบคุมมลพิษ (ศาลปกครองสูงสุด 2568) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiisappaaya-sraang-aakhaarrathsphaaaihm-sappaayasiristhaan-2566 | ผิดสัญญาก่อสร้างอาคารรัฐสภาใหม่ “สัปปายะสภาสถาน” (2566) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiikhaaepluue-y-n-ngkhriim-2567 | ฆ่าเปลือย — คดีน้องครีม จ.เพชรบุรี (2567) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiinakth-ngethiiywekaahliithuukkhaatadniwthingphathyaa-2567 | นักท่องเที่ยวเกาหลีถูกฆ่าตัดนิ้วถ่วงน้ำพัทยารับเงินค่าไถ่ (2567) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiirthbasthasnsueksaaaifaihm-2567 | โศกนาฏกรรมรถบัสทัศนศึกษาไฟไหม้ — ครู-นักเรียนเสียชีวิต 23 ราย (2567) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiisaaykaarbinf-ngphuuodysaarepidpratuuchukechin-2567 | ผู้โดยสารเปิดประตูฉุกเฉินเครื่องบิน TG121 — สายการบินฟ้องเรียกค่าเสียหาย (2567) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiitamrwcchaithykrrochkthraphydaaraasaawaithwan-anhyuuching-2566 | ตำรวจไทยกรรโชกทรัพย์ดาราสาวไต้หวัน อวี้ฉิง (2566) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiikhumkhr-ngchawkhraawchaawelekaaahliiepa-krniithuuke-kchnpidthaang | คุ้มครองชั่วคราวชาวเลเกาะหลีเป๊ะ กรณีถูกเอกชนปิดทางเดินสาธารณะ (2566) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiif-nghyaaaelaaebngsinsmrs-hning-pnitaa-cchin-2566 | ฟ้องหย่า-แย่งชิงสินสมรส หนิง-ปนิตา-จิน จรินทร์ (2566) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiiephikth-nraayngaan-eia-kh-nodmieniiymyaansukhumwith-2566 | คดีปกครอง คดีหมายเลข 522/2566 — เพิกถอนการอนุมัติรายงาน EIA คอนโดมิเนียมสุขุมวิท | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiiedk-14-kraadyingphaaraak-n-2566 | คดีเด็ก 14 ปี ยิงสยามพารากอน (3 ต.ค. 2566) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiiedk-14-khomyrth-2566 | เด็ก 14 ปี ลักเงินสด 700,000 บาท จากบ้านครู (2566) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdii-striiaehngkhunekhaa-lamdwn-siikanyaa-2547 | คดี 'สตรีแห่งขุนเขา' — นางลำดวน สีกันยา (2547-2568) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdii-umkhaanakkaarthuutaelanakthurkicchchaa-udii-aaraebiiy-2533 | คดีอุ้มฆ่านายโมฮัมเหม็ด อัลรูไวลี่ — วิกฤตเพชรซาอุ (2533) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiiaailthiichaawm-raekn-hmuuekaaasurinthr-2562 | คดีไล่ที่ชาวมอแกน หมู่เกาะสุรินทร์ (2562) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiiaechrluukoch-e-nen-rcchii-diidakchan-2564 | คดีแชร์ลูกโซ่แพลตฟอร์ม "เอนเนอร์จี ดีดักชัน" (2564) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiicchabkum-esiiyaepng-naaohnd-2566 | คดีเสี่ยแป้ง นาโหนด — หลบหนีระหว่างควบคุม (2566–2567) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-ephikth-nkhamsangyubsphaa-ngkhkaarbrihaarswntambl-2558 | คดีปกครอง: เพิกถอนคำสั่งยุบสภาองค์การบริหารส่วนตำบล (2558) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-ephikth-nsampthaanrangnknaangae-n-2561 | คดีปกครอง: เพิกถอนสัมปทานรังนกนางแอ่น (2561) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-ephikth-nkaar-kochndthiidinthabch-nekaaalibng-2562 | คดีปกครอง: เพิกถอนการออกโฉนดที่ดินทับซ้อนเกาะลิบง (2562) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
+| news-case-khdiif-ngetnthrthmuue-s-ng-krniikhaayrthy-maemw-2566 | คดีฟ้องเต็นท์รถมือสอง — รถย้อมแมว (2566) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
