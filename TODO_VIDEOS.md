@@ -39,7 +39,6 @@
 | news-case-ephikth-nsampthaanrangnknaangae-n-2561 | คดีปกครอง: เพิกถอนสัมปทานรังนกนางแอ่น (2561) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
 | news-case-ephikth-nkaar-kochndthiidinthabch-nekaaalibng-2562 | คดีปกครอง: เพิกถอนการออกโฉนดที่ดินทับซ้อนเกาะลิบง (2562) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
 | news-case-khdiif-ngetnthrthmuue-s-ng-krniikhaayrthy-maemw-2566 | คดีฟ้องเต็นท์รถมือสอง — รถย้อมแมว (2566) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
-news-case-khdii-amdaengpom-hlongya-pi-2347.html | คดีอำแดงป้อม ฟ้องหย่า (พ.ศ. 2347) | คดียุคโบราณ — คลิปสารคดี/วิดีโอเฉพาะหน้าตรงยังไม่พบ
 news-case-khdii-prachaakhana-3-rup-parachik-pi-2359.html | คดีพระราชาคณะ 3 รูป ปาราชิก (พ.ศ. 2359) | คดียุคโบราณ — คลิปวิดีโอเฉพาะหน้าตรงยังไม่พบ
 news-case-khdii-aima-khamkhuen-nai-praborommaharachawang.html | คดีอ้ายมา ลอบข่มขืนเจ้าจอมในพระบรมมหาราชวัง (จ.ศ. 1159) | คดียุคโบราณ — คลิปวิดีโอเฉพาะหน้าตรงยังไม่พบ
 news-case-khdii-gabort-chaofa-men-pi-2352.html | คดีกบฏเจ้าฟ้าเหม็น — บัตรสนเทห์และกาคาบฟ้อง (พ.ศ. 2352) | คดียุคโบราณ — คลิปวิดีโอเฉพาะหน้าตรงยังไม่พบ
