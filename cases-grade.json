@@ -1414,5 +1414,29 @@
   "score": 91,
   "release": "WARN",
   "has_video": false
+ },
+ "news-case-khdii-amdaengpom-hlongya-pi-2347.html": {
+  "grade": "A",
+  "score": 90,
+  "release": "WARN|",
+  "has_video": false
+ },
+ "news-case-khdii-prachaakhana-3-rup-parachik-pi-2359.html": {
+  "grade": "A",
+  "score": 89,
+  "release": "WARN|",
+  "has_video": false
+ },
+ "news-case-khdii-aima-khamkhuen-nai-praborommaharachawang.html": {
+  "grade": "A",
+  "score": 89,
+  "release": "WARN|",
+  "has_video": false
+ },
+ "news-case-khdii-gabort-chaofa-men-pi-2352.html": {
+  "grade": "A",
+  "score": 90,
+  "release": "WARN|",
+  "has_video": false
  }
 }

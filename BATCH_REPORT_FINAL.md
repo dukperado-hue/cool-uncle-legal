@@ -38,3 +38,22 @@
 - Deploy: **ยังไม่ deploy production** (ตาม §23 — publication เป็นขั้นตอนแยก ต้องผ่าน publication decision)
 
 **สถานะ: READY_FOR_REVIEW** — รอการทบทวน publication, handoff Agent C (judicial candidates) และ Agent B (presentation)
+
+## PHASE 2 — คดียุคโบราณ (รัตนโกสินทร์ยุคต้น/ธนบุรี) — 4 คดี (20 Aug 2026)
+
+| คดี | Slug | Grade | Score |
+|---|---|---|---|
+| คดีอำแดงป้อม ฟ้องหย่า — จุดกำเนิดกฎหมายตราสามดวง (พ.ศ. 2347) | news-case-khdii-amdaengpom-hlongya-pi-2347 | A | 90 |
+| คดีกบฏเจ้าฟ้าเหม็น — บัตรสนเทห์และกาคาบฟ้อง (พ.ศ. 2352) | news-case-khdii-gabort-chaofa-men-pi-2352 | A | 90 |
+| คดีอ้ายมา ลอบข่มขืนเจ้าจอมในพระบรมมหาราชวัง (จ.ศ. 1159) | news-case-khdii-aima-khamkhuen-nai-praborommaharachawang | A | 89 |
+| คดีพระราชาคณะ 3 รูป ปาราชิก (พ.ศ. 2359) | news-case-khdii-prachaakhana-3-rup-parachik-pi-2359 | A | 89 |
+
+**แนวทางการประมวล:** cat="criminal", a_cat_label="คดยุคโบราณ", release=WARN| (external_law + video pending), ไม่มีการ apply กฎหมายปัจจุบัน — lessons เชื่อม (connect) ไม่บังคับใช้, provisions ทั้งหมด status="external_law" (กฎหมายตราสามดวง/พระอัยการ/จารีตนครบาล — ไม่อยู่ใน codex 14 เล่ม)
+
+**ความไม่ตรงกันของแหล่งข้อมูลที่บันทึกไว้:** คดีอ้ายมา (ชื่อ "อ้ายมา" vs "นายมา" ระหว่างสองแหล่ง), คดีกบฏเจ้าฟ้าเหม็น (วันที่: จดหมายเหตุ ร.2 เดือน 9 แรม 11 ค่ำ vs พงศาวดารฯ ทิพากรวงศ์ เดือน 10 ขึ้น 2 ค่ำ) — ทั้งสองกรณีบันทึกทั้งสองวันที่/สองชื่อในเนื้อหา
+
+**ยอดรวมหลัง phase 2:** Grade A = 176 (จาก 172 + 4), A_REVIEW = 4, B = 5, C = 55; news-index bumped ?v=69; TODO_VIDEOS.md เพิ่ม 4 รายการ
+
+**Judicial potential ในคดียุคโบราณ:** คดีกบฏเจ้าฟ้าเหม็น (judicial_potential=true) — สำนวนคดี "จารีตนครบาล" กับคำรับสารภาพ เป็นหัวข้อทางวิชาการประวัติศาสตร์กฎหมาย — รอส่ง Agent C ตรวจหลักฐานศาล (จดหมายเหตุ ร.2 / ศุภอักษร)
+
+**สถานะ: READY_FOR_REVIEW** — รอ publication decision; historical cases ใช้ storytelling + evidence-based ตามข้อตกลงกับผู้ใช้
