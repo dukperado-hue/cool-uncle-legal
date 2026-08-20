@@ -189,6 +189,27 @@
         "read",
         "play"
       ]
+    },
+    {
+      "id": "forex3d-2564",
+      "title": "คดี Forex-3D: แชร์ลูกโซ่ Forex ระดับมโหฬาร (2564-2569)",
+      "cat": "คดีดายาณาาย · เศรษฐกิจ",
+      "has_video": false,
+      "rank": {
+        "grade": "S",
+        "score": 95,
+        "s_verified": true,
+        "judicial_case": "คดดำ อ.853/2564",
+        "verified_by": "Agent C — Handoff Brief (Tier 1 VERIFIED_S)"
+      },
+      "visibility": {
+        "public": false,
+        "public_reason": "agent_a_approval_required"
+      },
+      "modes": [
+        "read",
+        "play"
+      ]
     }
   ],
   "series_hubs": [
