@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คดีเกรด A ที่ยังไม่เปิดเผย — Cool Uncle Legal Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Sarabun',sans-serif; background:#F8F6F1; color:#1B2437; }
+.topbar { background:#1B2437; color:#E8ECEF; padding:10px 22px; display:flex; align-items:center; gap:12px; font-weight:600; border-bottom:3px solid #B08A3C; }
+.topbar .tb-brand { display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.05rem; color:#fff; text-decoration:none; }
+.topbar .tb-brand img { border-radius:8px; }
+.topbar .tb-sep { color:#B08A3C; }
+.container { max-width:960px; margin:0 auto; padding:20px; }
+h1 { font-size:1.6rem; margin-bottom:8px; }
+p.lead { color:#5C4A14; margin-bottom:16px; font-size:0.95rem; }
+.stats { display:flex; gap:16px; margin-bottom:20px; flex-wrap:wrap; }
+.stat-box { background:#fff; border:2px solid #B08A3C; border-radius:12px; padding:12px 18px; font-size:0.9rem; }
+.stat-box strong { font-size:1.3rem; color:#B08A3C; }
+table { width:100%; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+th { background:#1B2437; color:#fff; padding:10px 12px; text-align:left; font-size:0.85rem; }
+td { padding:8px 12px; border-bottom:1px solid #eee; font-size:0.88rem; }
+tr:hover td { background:#FFF9F0; }
+a.case-link { color:#1B2437; text-decoration:none; font-weight:600; }
+a.case-link:hover { color:#B08A3C; }
+.badge { display:inline-block; padding:2px 8px; border-radius:6px; font-size:0.78rem; font-weight:600; }
+.badge-warn { background:#FFF3E0; color:#E65100; border:1px solid #FFB74D; }
+.badge-blocked { background:#FCE4EC; color:#C62828; border:1px solid #EF9A9A; }
+.badge-a { background:#E8F5E9; color:#2E7D32; border:1px solid #81C784; }
+.cat-tag { font-size:0.78rem; color:#5C4A14; background:#F6E6B8; padding:1px 6px; border-radius:4px; }
+.filter-bar { margin-bottom:12px; display:flex; gap:8px; flex-wrap:wrap; }
+.filter-btn { padding:6px 14px; border-radius:20px; border:1px solid #B08A3C; background:#fff; color:#5C4A14; font-size:0.85rem; cursor:pointer; font-family:'Sarabun',sans-serif; }
+.filter-btn.active { background:#B08A3C; color:#fff; }
+.search-box { width:100%; padding:10px 16px; border:2px solid #B08A3C; border-radius:10px; font-size:0.95rem; font-family:'Sarabun',sans-serif; margin-bottom:12px; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a class="tb-brand" href="index.html"><img src="assets/capybara-64.webp" alt="" width="36" height="36">Cool Uncle ⚖ Legal Lab</a>
+  <span class="tb-sep">|</span>
+  <span>คดีเกรด A ที่ยังไม่เปิดเผย</span>
+  <span class="tb-sep">|</span>
+  <a href="news-index.html" style="color:#B08A3C;text-decoration:none">← กลับหน้าหลัก</a>
+</div>
+<div class="container">
+  <h1>📋 คดีเกรด A ที่ยังไม่เปิดเผย (Unreleased Grade-A)</h1>
+  <p class="lead">คดีที่ผ่าน Content/Legal Quality Gate (เกรด A) แต่ยังไม่ได้เปิดให้สาธาณชนเห็น — รอการตัดสินใจ publication</p>
+  <div class="stats" id="stats"></div>
+  <input class="search-box" type="text" id="searchInput" placeholder="ค้นหาคดี...">
+  <div class="filter-bar" id="filterBar"></div>
+  <table>
+    <thead><tr><th>#</th><th>คดี</th><th>หมวด</th><th>ปี</th><th>คะแนน</th><th>สถานะ</th><th>วิดีโอ</th></tr></thead>
+    <tbody id="caseTable"></tbody>
+  </table>
+</div>
+<script>
+fetch("/assets/cases-unreleased-a.json?v=2").then(r=>r.json()).then(items=>{
+  // Stats
+  document.getElementById('stats').innerHTML = 
+    '<div class="stat-box">ทั้งหมด <strong>'+items.length+'</strong> คดี</div>' +
+    '<div class="stat-box">Warn <strong>'+items.filter(i=>i.release==="WARN").length+'</strong></div>' +
+    '<div class="stat-box">Blocked <strong>'+items.filter(i=>i.release==="BLOCKED").length+'</strong></div>' +
+    '<div class="stat-box">มีวิดีโอ <strong>'+items.filter(i=>i.has_video).length+'</strong></div>';
+  
+  // Filter bar
+  var cats = [...new Set(items.map(i=>i.cat).filter(Boolean))];
+  var filterBar = document.getElementById('filterBar');
+  filterBar.innerHTML = '<button class="filter-btn active" data-cat="">ทั้งหมด</button>' + 
+    cats.map(c=>'<button class="filter-btn" data-cat="'+c+'">'+c+'</button>').join('');
+  
+  // Table
+  function render(list) {
+    document.getElementById('caseTable').innerHTML = list.map((it,i)=>{
+      var badge = it.release==='BLOCKED' ? '<span class="badge badge-blocked">Blocked</span>' : '<span class="badge badge-warn">Warn</span>';
+      var href = it.slug.startsWith('auto-') ? '/news-'+it.slug+'.html' : '/'+it.slug+'.html';
+      return '<tr><td>'+(i+1)+'</td><td><a class="case-link" href="'+href+'">'+it.title+'</a></td><td><span class="cat-tag">'+it.cat+'</span></td><td>'+it.year+'</td><td>'+it.score+'</td><td>'+badge+'</td><td>'+(it.has_video?'✅':'⏳')+'</td></tr>';
+    }).join('');
+  }
+  render(items);
+  
+  // Filter
+  filterBar.addEventListener('click', function(e){
+    if(e.target.classList.contains('filter-btn')){
+      filterBar.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      e.target.classList.add('active');
+      var cat = e.target.dataset.cat;
+      var filtered = cat ? items.filter(i=>i.cat===cat) : items;
+      render(filtered);
+    }
+  });
+  
+  // Search
+  document.getElementById('searchInput').addEventListener('input', function(){
+    var q = this.value.toLowerCase();
+    var filtered = items.filter(i=>i.title.toLowerCase().includes(q) || i.slug.toLowerCase().includes(q));
+    render(filtered);
+  });
+}).catch(e=>{
+  document.getElementById('caseTable').innerHTML = '<tr><td colspan="7">ไม่สามารถโหลดข้อมูลได้</td></tr>';
+});
+</script>
+</body>
+</html>
