@@ -1,0 +1,328 @@
+/* ================================================================
+   SHARED STYLES - ใช้ร่วมสำหรับทุกหน้า
+   โครงสร้าง: Design system ฐานสำหรับ Cool Uncle Legal Lab
+   ================================================================ */
+
+:root{
+  --paper:#FBF9F4;
+  --card:#FFFFFF;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --gold-soft:#F3E8CF;
+  --ok:#1E7A4F;
+  --ok-bg:#E6F4EC;
+  --bad:#B23A3A;
+  --bad-bg:#FBEAEA;
+  --accent:#2E4A7A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),
+    var(--paper);
+  color:var(--ink);
+  min-height:100vh;
+  font-size:16px;
+  line-height:1.75;
+}
+
+h1,h2,h3{font-family:'Noto Serif Thai',serif}
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;900&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap');
+
+/* ============ TOP BAR ============ */
+.topbar{
+  display:flex;align-items:center;gap:10px;
+  background:#EFEAE0;border-bottom:1px solid var(--line);
+  padding:10px 18px;font-size:13px;color:var(--ink-soft);
+}
+.topbar-brand{font-weight:800;color:var(--ink);display:flex;align-items:center;gap:6px}
+.topbar-sep{color:var(--ink-faint)}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+.topbar-pill{
+  background:var(--gold-soft);color:#8F6511;font-weight:700;font-size:12.5px;
+  padding:4px 11px;border-radius:999px;
+}
+
+/* ============ BACK BUTTON ============ */
+.back-button{
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--accent);font-weight:600;font-size:14px;
+  text-decoration:none;margin-bottom:16px;transition:all .2s;
+}
+.back-button:hover{transform:translateX(-4px);color:var(--ink)}
+.back-button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* ============ AUDIO PLAYER (READ ALOUD) ============ */
+.audio-control{
+  display:flex;align-items:center;gap:8px;
+  margin:14px 0 20px;padding:12px 14px;
+  background:var(--ok-bg);border:1px solid var(--ok);
+  border-radius:var(--radius);
+}
+.audio-control button{
+  display:flex;align-items:center;gap:6px;
+  background:var(--ok);color:white;border:none;
+  padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;
+  cursor:pointer;transition:all .2s;
+  font-family:inherit;
+}
+.audio-control button:hover{background:#177047;transform:translateY(-1px)}
+.audio-control button:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.audio-control .speed-control{
+  display:flex;align-items:center;gap:4px;font-size:12px;
+}
+.audio-control input[type="range"]{width:80px}
+
+/* ============ YOUTUBE WIDGET ============ */
+.youtube-section{
+  margin:24px 0;padding:16px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--radius);
+}
+.youtube-section h3{
+  font-size:16px;font-weight:700;margin-bottom:12px;color:var(--ink);
+}
+.youtube-list{
+  display:flex;flex-direction:column;gap:10px;
+}
+.youtube-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px;background:#F9F7F2;border-radius:8px;
+  text-decoration:none;color:inherit;transition:all .2s;
+  cursor:pointer;
+}
+.youtube-item:hover{background:#F1EDE2;border-left:3px solid var(--accent)}
+.youtube-item .thumb{
+  width:60px;height:45px;background:#E0DDD5;border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+}
+.youtube-item .meta{flex:1;display:flex;flex-direction:column;gap:4px}
+.youtube-item .title{font-size:14px;font-weight:600;color:var(--ink)}
+.youtube-item .channel{font-size:12px;color:var(--ink-soft)}
+.youtube-item-open{color:var(--accent);font-weight:600;font-size:12px}
+
+/* ============ WRAPPER ============ */
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px 60px}
+.wrap-compact{max-width:860px;margin:0 auto;padding:0 18px 60px}
+
+/* ============ FOOTER ============ */
+footer{
+  margin-top:52px;text-align:center;font-size:12.5px;color:var(--ink-faint);
+  border-top:1px solid var(--line);padding-top:18px;
+}
+
+/* ============ UTILITY CLASSES ============ */
+.text-center{text-align:center}
+.mt-32{margin-top:32px}
+.mb-16{margin-bottom:16px}
+
+/* ============ MAGAZINE / NEWS STYLES ============ */
+.mag-wrap{max-width:920px;margin:0 auto;padding:0 18px 60px}
+.mag-head{font-family:'Noto Serif Thai',serif;font-size:1.35rem;font-weight:900;margin:10px 0 16px;padding:0;color:#1B2437;display:flex;align-items:center;gap:10px}
+.mag-head::after{content:"";flex:1;height:3px;border-radius:3px;background:linear-gradient(90deg,#B08A3C 0%,transparent 100%)}
+.mag-head-ico{font-size:1.5rem}
+.mag-card{display:block;background:#FDFCF8;border:1px solid #E5E1D6;border-top:4px solid var(--accent,#2E4A7A);border-radius:14px;padding:18px 22px;margin-bottom:14px;box-shadow:0 2px 8px rgba(34,40,58,.07);transition:transform .18s ease,box-shadow .18s ease;text-decoration:none;color:inherit}
+.mag-card:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(34,40,58,.16)}
+.mag-card::after{content:"";display:table;clear:both}
+.mag-card h3{font-family:'Noto Serif Thai',serif;font-size:1.22rem;font-weight:900;color:#1B2437;margin:8px 0 6px;line-height:1.45}
+.mag-card p{color:#5A6072;font-size:.96rem;line-height:1.65;margin:0}
+.mag-tag{display:inline-block;border-radius:999px;padding:3px 13px;font-size:.76rem;font-weight:800;background:#2E4A7A;color:#fff;border:1px solid #2E4A7A}
+.mag-tag.auto-tag{background:#1E7A4F;color:#fff;border-color:#1E7A4F}
+.mag-tag.exam{background:#B08A3C;color:#fff;border-color:#B08A3C}
+.mag-breaking{border-top:4px solid #1E7A4F;position:relative;overflow:hidden}
+.mag-breaking::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#1E7A4F,#B08A3C)}
+.mag-card-media{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.mag-mascot{border-radius:10px;transform:rotate(-3deg);box-shadow:0 3px 10px rgba(34,40,58,.15)}
+.mag-ticker{overflow:hidden;background:#1B2437;border-radius:12px;padding:9px 16px;display:flex;align-items:center;gap:14px;margin:6px 0 18px;box-shadow:0 3px 12px rgba(27,36,55,.25)}
+.mag-ticker-label{flex-shrink:0;font-size:.78rem;font-weight:800;color:#FFD5D5;background:rgba(214,57,57,.2);border:1px solid #D63939;border-radius:999px;padding:2px 11px}
+.mag-ticker-track{flex:1;overflow:hidden;white-space:nowrap}
+.mag-ticker-item{display:inline-block;color:#F5F2E8;font-size:.88rem;padding-right:46px;opacity:.92}
+@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.mag-ticker-track{animation:tickerScroll 38s linear infinite}
+.mag-ticker-track:hover{animation-play-state:paused}
+.mag-ticker-item:nth-child(n){white-space:nowrap}
+@media(prefers-reduced-motion:reduce){.mag-ticker-track{animation:none}}
+
+/* ============ MOBILE ============ */
+@media(max-width:520px){
+  .audio-control{padding:10px 12px;font-size:12px}
+  .audio-control button{padding:6px 10px;font-size:12px}
+  .youtube-item{padding:8px}
+  .youtube-item .thumb{width:50px;height:37px}
+  .youtube-item .title{font-size:13px}
+  .youtube-item .channel{font-size:11px}
+}
+
+
+/* ===== คดีดัง dropdown (v7) ===== */
+.case-drop-section{margin:26px 0 8px}
+.case-drop-section .mag-head{font-size:1.18rem;margin:0 0 12px}
+.case-filter{width:100%;max-width:460px;display:block;font-size:1rem;padding:11px 14px;border:1px solid #d1d5db;border-radius:12px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23374151' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat right 14px center;box-shadow:0 2px 6px rgba(27,36,55,.08);cursor:pointer;margin-bottom:14px;appearance:auto}
+.case-group{margin-bottom:18px}
+.case-group-head{font-family:'Noto Serif Thai',serif;font-size:1.05rem;font-weight:800;border-bottom:3px solid;padding:4px 0 7px;margin:0 0 8px}
+.case-list{list-style:none;padding:0;margin:0}
+.case-list li{padding:7px 10px;border-radius:9px;margin:3px 0;background:#fff;border:1px solid #eef0f3;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.case-list li:hover{background:#f7f9fc;border-color:#d1d9e6}
+.case-list li a{text-decoration:none;font-weight:600;font-size:.95rem}
+.case-tag{font-size:.72rem;font-weight:700;border:1px solid;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.case-exam{font-size:.8rem}
+@media(max-width:640px){.case-list li a{font-size:.9rem}}
+/* สิงโต wrap ซ้ายของข้อความ (แทน card media) */
+.mag-mascot-wrap{float:left;width:84px;height:105px;object-fit:contain;margin:2px 14px 8px 0;border-radius:10px;transform:rotate(-3deg);box-shadow:0 3px 10px rgba(34,40,58,.15);flex-shrink:0}
+
+/* ===== คดีดัง v9 UI 3 โหมด (คดีใหม่วันละ 1 คดี / ลูกเต๋า / คลังคดีเก่าตามปี) ===== */
+.mode-panel{margin:20px 0 28px}
+.mode-today-card{display:block;background:#fff;border-radius:18px;padding:22px 26px;box-shadow:0 6px 20px rgba(0,0,0,.08);text-decoration:none;color:inherit;border-top:5px solid var(--accent,#2E4A7A);transition:transform .18s,box-shadow .18s}
+.mode-today-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.12)}
+.mode-today-card .mag-tag{display:inline-block;margin-bottom:10px}
+.mode-today-card h2{font-family:'Noto Serif Thai',serif;font-size:1.55rem;font-weight:900;margin:8px 0 8px;color:#1B2437;line-height:1.35}
+.mode-today-card p{color:#5A6072;font-size:1rem;line-height:1.75}
+.mode-today-card .mag-cta{display:block;margin-top:14px;font-weight:700;font-size:.95rem}
+.mode-today-video{margin:14px 0;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(27,36,55,.14)}
+.mode-today-video iframe{width:100%;aspect-ratio:16/9;display:block}
+.case-date{font-size:.82rem;font-weight:500;color:#94a3b8;margin-left:8px;white-space:nowrap}
+.case-drop-note{color:#6b7280;font-size:.98rem;line-height:1.7;background:#fff;border:1px dashed #d1d9e6;border-radius:14px;padding:14px 18px}
+.yr-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.yr-btn{background:#f3f4f6;border:1px solid #d1d5db;border-radius:999px;padding:7px 16px;font-size:.92rem;font-weight:600;cursor:pointer;transition:all .15s;font-family:'Sarabun',sans-serif}
+.yr-btn:hover{background:#e5e7eb}
+.yr-btn.active{background:#1B2437;color:#fff;border-color:#1B2437;box-shadow:0 3px 8px rgba(27,36,55,.25)}
+.yr-loadmore{display:inline-block;margin:10px 0 6px;padding:10px 20px;background:#1B2437;color:#fff;border:none;border-radius:12px;cursor:pointer;font-size:.95rem;font-weight:700;font-family:'Sarabun',sans-serif;transition:background .15s}
+.yr-loadmore:hover{background:#2E3A55}
+.yr-note{font-size:.85rem;color:#94a3b8;margin:14px 0 0}
+@media(max-width:640px){.mode-today-card h2{font-size:1.25rem}.mode-today-card{padding:16px 18px}}
+
+/* ===== Series navigation ===== */
+nav.series-nav{
+  display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;justify-content:center;
+  background:var(--gold-soft);border:1px solid var(--gold);border-radius:var(--radius);
+  padding:.75rem 1rem;margin:1.25rem 0 1.5rem;font-size:.95rem;
+}
+nav.series-nav a{color:var(--accent);text-decoration:none;font-weight:600;white-space:nowrap}
+nav.series-nav a:hover{text-decoration:underline}
+nav.series-nav span.sep{color:var(--ink-faint)}
+
+/* ================================================================
+   LAYOUT V2 — บทความคดี v2 (29 หน้า)
+   อ่านสบาย: margin ซ้าย-ขวา, เว้นวรรคย่อหนา, VDO เด่น responsive
+   ================================================================ */
+
+/* บทความวีต — การ์ดกลางหน้า เวนขอบซ้าย-ขวาตามจอ */
+article.mag-article{
+  background:var(--card);border-radius:18px;padding:32px 36px 28px;
+  box-shadow:var(--shadow);margin-bottom:48px;line-height:1.85;font-size:1.05rem;
+}
+@media(max-width:720px){
+  article.mag-article{padding:20px 18px 18px;margin:12px 0 32px;border-radius:14px;font-size:1rem}
+}
+@media(min-width:1200px){ article.mag-article{padding:40px 56px 32px;font-size:1.08rem} }
+
+/* หัวเรื่องบนสุด */
+section.case-hero{margin:4px 0 26px}
+section.case-hero h1{
+  font-family:'Noto Serif Thai',serif;font-size:1.85rem;font-weight:900;
+  line-height:1.45;color:#1B2437;margin:0 0 14px;
+}
+@media(max-width:720px){ section.case-hero h1{font-size:1.45rem} }
+@media(min-width:1200px){ section.case-hero h1{font-size:2.05rem} }
+p.tagline{
+  color:var(--ink-soft);font-size:1rem;line-height:1.8;margin:0 0 12px;
+  border-left:4px solid var(--gold);padding-left:14px;background:#FBF9F4;padding:10px 14px;border-radius:0 10px 10px 0;
+}
+p.case-meta{font-size:.88rem;color:var(--ink-faint);margin:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+span.badge{display:inline-block;border-radius:999px;padding:3px 12px;font-size:.76rem;font-weight:800;color:#fff}
+span.badge.criminal{background:#B23A3A}span.badge.civil{background:#2E4A7A}
+span.badge.corporate{background:#6B4A9A}span.badge.const{background:#B08A3C}
+span.badge.admin{background:#1E7A4F}span.badge.international{background:#5A6072}
+p.case-meta > span{font-size:.88rem}
+
+/* หัวข้อแต่ละ section — เส้นทอง */
+section > h3{
+  font-family:'Noto Serif Thai',serif;font-size:1.28rem;font-weight:900;color:#1B2437;
+  margin:34px 0 14px;padding:0 0 8px;
+  display:flex;align-items:center;gap:10px;
+}
+section > h3::after{content:"";flex:1;height:3px;border-radius:3px;background:linear-gradient(90deg,#B08A3C 0%,transparent 100%)}
+@media(max-width:720px){ section > h3{font-size:1.1rem;margin:26px 0 10px} }
+
+/* ย่อหน้า — เว้นวรรคระหว่างย่อหนา */
+p.para-split{margin:0 0 14px;line-height:1.9}
+@media(max-width:720px){ p.para-split{margin:0 0 12px} }
+
+/* หลังหัวเรื่อง → คำโปรย → VDO → เนื้อหา */
+section.case-media{margin:30px 0 6px}
+div.video-embed{
+  overflow:hidden;border-radius:14px;box-shadow:0 8px 24px rgba(34,40,58,.18);
+  margin:10px auto;max-width:840px;background:#000;
+}
+div.video-embed iframe{width:100%;aspect-ratio:16/9;display:block;border:0}
+@media(max-width:720px){
+  div.video-embed{max-width:100%;margin:8px -18px;border-radius:0}
+  div.video-embed iframe{aspect-ratio:16/9}
+}
+@media(min-width:1200px){ div.video-embed{max-width:900px} }
+p.mag-video-credit{font-size:.82rem;color:var(--ink-faint);margin:8px 0 0;padding-left:2px}
+p.video-pending{background:var(--gold-soft);border:1px dashed var(--gold);border-radius:12px;padding:14px 18px;margin:10px 0;font-size:.92rem;color:#7A6220}
+
+/* เบื้องหลัง */
+section.case-background{margin-bottom:10px}
+
+/* Summary box (คำโปรย 30 วินาที) */
+section.case-summary{margin:22px 0 6px}
+div.summary-box{background:var(--gold-soft);border:1px solid var(--gold);border-radius:14px;padding:18px 22px;margin:8px 0 0}
+div.summary-box p{margin:0;color:#5C4716;font-size:.98rem;line-height:1.85}
+@media(max-width:720px){ div.summary-box{padding:14px 16px} }
+
+/* ลำดับเหตุการณ์ */
+div.event{margin:0 0 18px}
+p.event-label{margin:0 0 6px;color:var(--accent);font-size:.98rem}
+span.year{display:inline-block;margin-left:6px;background:#F1EDE2;color:#7A6220;font-weight:800;font-size:.8rem;padding:2px 10px;border-radius:999px;vertical-align:middle}
+div.event > p.para-split:last-child{margin-bottom:0}
+
+/* ประเด็นกฎหมาย */
+section.case-legal-issues{margin-bottom:8px}
+p.li-q{margin:10px 0;background:#F8FAFC;border-left:4px solid var(--accent);border-radius:0 10px 10px 0;padding:12px 16px;line-height:1.8;font-size:.98rem}
+@media(max-width:720px){ p.li-q{padding:10px 12px} }
+
+/* บทบัญญัติ (accordion) */
+details.law-acc{margin:10px 0;border:1px solid #E5E1D6;border-radius:12px;background:#fff}
+details.law-acc summary{cursor:pointer;font-weight:700;color:var(--accent);padding:12px 16px;font-size:.98rem;list-style:none}
+details.law-acc summary::-webkit-details-marker{display:none}
+details.law-acc[open] summary{border-bottom:1px solid #F1EDE2}
+details.law-acc p.loc{font-size:.82rem;color:var(--ink-faint);margin:6px 16px 0}
+details.law-acc p.law-text{margin:8px 16px 14px;color:#3A4152;font-size:.96rem;line-height:1.85}
+
+/* บทเรียน */
+section.case-lessons ol{margin:0;padding-left:22px}
+section.case-lessons li{margin:0 0 12px;line-height:1.85}
+section.case-lessons li p{margin:0}
+div.verdict-box{margin:22px 0 6px;background:var(--ok-bg);border:1px solid var(--ok);border-radius:14px;padding:16px 20px}
+div.verdict-box p{margin:0 0 10px;color:#14532D;font-size:.96rem;line-height:1.8}
+div.verdict-box p:last-child{margin-bottom:0}
+p.verdict-link{margin:0}
+p.verdict-link a{color:var(--ok);font-weight:700;font-size:.9rem}
+
+/* คำชี้แจงท้ายหน้า */
+p.disclaimer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-size:.82rem;color:var(--ink-faint);line-height:1.7}
+
+/* Series card (hub) */
+.series-card{background:#FDFCF8;border:1px solid #E5E1D6;border-top:4px solid var(--gold);border-radius:14px;padding:20px 24px;margin-bottom:16px}
+.series-order{font-size:.82rem;font-weight:800;color:var(--gold);text-transform:uppercase;margin:0 0 4px}
+.series-year{font-size:.84rem;color:var(--ink-faint);margin:0 0 6px}
+.series-card h3{font-family:'Noto Serif Thai',serif;font-size:1.2rem;font-weight:900;color:#1B2437;margin:4px 0 8px}
+.series-card h3 a{color:inherit;text-decoration:none}
+.series-card h3 a:hover{color:var(--accent)}
+.series-tagline{color:#5A6072;font-size:.92rem;line-height:1.7;margin:0}
+.series-card nav.series-nav{margin:12px 0 0;font-size:.88rem}
+section.series-body > p{color:var(--ink-soft);line-height:1.9;margin:4px 0 0;font-size:1rem}
+a.hub-back{font-weight:700;color:var(--accent);text-decoration:none}

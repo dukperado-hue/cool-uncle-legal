@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>กําลังโหลดคดี... — Cool Uncle ⚖ Legal Lab</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Read Mode — layout v2 compatible styles */
+.case-flag{display:inline-block;border-radius:999px;padding:3px 13px;font-size:.78rem;font-weight:800}
+.flag-deident{background:#FBEAEA;color:#B23A3A;border:1px solid #B23A3A}
+.flag-review{background:#F3E8CF;color:#8F6511;border:1px solid #B08A3C}
+.flag-public{background:#E6F4EC;color:#1E7A4F;border:1px solid #1E7A4F}
+.need-review-box{background:#FDF6EC;border:1.5px dashed #B08A3C;border-radius:12px;padding:12px 16px;margin:10px 0 14px;font-size:.92rem;color:#7A6220;display:flex;gap:10px;align-items:flex-start}
+.need-review-box .ico{font-size:1.1rem;flex-shrink:0}
+/* 04 timeline */
+ul.case-timeline{list-style:none;padding:0;margin:10px 0 14px}
+ul.case-timeline li{position:relative;padding:0 0 16px 26px;border-left:3px solid #E5E1D6;margin-left:10px}
+ul.case-timeline li::before{content:"";position:absolute;left:-8px;top:4px;width:13px;height:13px;border-radius:999px;background:var(--gold-soft);border:2.5px solid var(--gold)}
+ul.case-timeline li .yr{font-size:.82rem;font-weight:700;color:var(--ink-faint);display:block;margin-bottom:2px}
+/* 06 accordion */
+details.law-acc{background:#F9F7F2;border:1px solid var(--line);border-radius:12px;margin:10px 0}
+details.law-acc summary{padding:14px 16px;font-weight:700;font-size:1rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+details.law-acc summary::-webkit-details-marker{display:none}
+details.law-acc summary .arrow{transition:transform .25s;color:var(--ink-faint)}
+details.law-acc[open] summary .arrow{transform:rotate(90deg)}
+details.law-acc .body{padding:4px 16px 16px;border-top:1px solid var(--line)}
+p.law-ref{font-weight:700;color:var(--accent);margin:0 0 6px;font-size:.95rem}
+p.law-loc{font-size:.82rem;color:var(--ink-faint);margin:0 0 10px}
+p.law-text{font-family:'Noto Serif Thai',serif;font-size:.98rem;line-height:1.9;color:#3A4050;margin:0}
+/* 08 judicial box */
+.judicial-box{background:#F9F7F2;border:1.5px solid var(--line);border-radius:14px;padding:20px 24px;color:var(--ink);margin:12px 0}
+.judicial-box .lbl{font-size:.82rem;font-weight:800;letter-spacing:.06em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.judicial-box h4{font-family:'Noto Serif Thai',serif;font-size:1.08rem;font-weight:800;margin:0 0 10px;color:#1B2437}
+.judicial-box p{font-size:.98rem;line-height:1.85;color:#1E2436;margin:0}
+.judicial-box .ratio{background:#F3F0E7;border-left:3px solid #B08A3C;border-right:1px solid var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 14px;margin-top:10px;color:#1E2436}
+/* Play mode button */
+.play-cta{display:inline-flex;align-items:center;gap:8px;background:#1B2437;color:#fff;font-weight:700;font-size:.95rem;padding:11px 20px;border-radius:12px;text-decoration:none;transition:all .2s}
+.play-cta:hover{background:#2E3A55;transform:translateY(-2px)}
+.section-nav{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 26px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.section-nav a{font-size:.85rem;font-weight:600;color:var(--accent);text-decoration:none;background:#F3F0E7;padding:5px 12px;border-radius:999px}
+.section-nav a:hover{background:#EAE5D8}
+</style>
+</head>
+<body>
+<div class="topbar mag">
+  <a class="tb-brand" href="news-index-v2.html"><img src="assets/capybara-64.webp" alt="" width="36" height="36">Cool Uncle <span style="color:#B08A3C">⚖</span> Legal Lab</a>
+  <span class="tb-sep">|</span>
+  <span>กำลังโหลดคดีจาก JSON...</span>
+</div>
+<div class="wrap-compact" id="app">
+  <p style="padding:60px 0;text-align:center;color:var(--ink-faint)">กำลังโหลดข้อมูลคดีจาก case JSON...</p>
+</div>
+<footer>
+  Cool Uncle ⚖ Legal Lab — สืบกฎหมายจากคดีจริง | ข้อมูลจาก case JSON v1.0 (Agent B UI standard) — คดีนี้กำลังรอการตรวจสอบโดย Agent A (deident / NEEDS_REVIEW)
+</footer>
+
+<script>
+/* ================================================================
+   READ MODE — คูลอังกิลโหมดอ่าน
+   ปรัชญา: calm & readable — เรียง 8 sections ตามมาตรฐาน JSON
+   - Section 08 (judicial) แสดงเฉพาะเมื่อ data verified = true
+   - เนื้อหา NEEDS_REVIEW จะถูกแสดงเป็น "กล่องคำเตือน Agent A"
+   - ห้ามแก้ไข facts/legal ในที่นี้ — เกิดจาก JSON เท่านั้น
+   ================================================================ */
+
+const appId = new URLSearchParams(location.search).get('id') || 'janeera-2541';
+const CASE_URL = `assets/cases/${appId}.json`;
+
+const CAT_BADGE = { 'คดีอาญา':'criminal', 'คดีแพ่ง':'civil', 'คดีปกครอง':'admin', 'คดีรัฐธรรมนูญ':'const', 'คดีองค์กรธุรกิจ':'corporate', 'กฎหมายระหว่างประเทศ':'international' };
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+function needsReviewBox(note){
+  if(!note) return '';
+  return `<div class="need-review-box"><span class="ico">⚠</span><span><strong>สถานะ: NEEDS_REVIEW</strong><br>${esc(note)}</span></div>`;
+}
+
+function flagFor(c){
+  if(c.visibility && !c.visibility.public){
+    const r = c.visibility.public_reason || '';
+    if(r === 'deident_required') return `<span class="case-flag flag-deident">🔒 รอดำเนินการ de-identification โดย Agent A</span>`;
+    return `<span class="case-flag flag-review">🔒 ยังไม่พร้อม public: ${esc(r)}</span>`;
+  }
+  return `<span class="case-flag flag-public">✅ public</span>`;
+}
+
+async function render(){
+  const app = document.getElementById('app');
+  let c;
+  try{
+    const res = await fetch(CASE_URL, {cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    c = await res.json();
+  }catch(e){
+    app.innerHTML = `<article class="mag-article"><h2 style="color:var(--bad)">โหลดคดีไม่ได้: ${esc(e.message)}</h2>
+      <p>ไฟล์ JSON ไม่มีอยู่ที่ ${esc(CASE_URL)} — กรุณาตรวจสอบ path หรือ deploy</p></article>`;
+    return;
+  }
+  document.title = `${c.meta.title} — อ่านคดี | Cool Uncle ⚖ Legal Lab`;
+  const m = c.meta, rank = c.rank || {}, vis = c.visibility || {};
+
+  let html = `<a class="back-button" href="news-index-v2.html">← กลับหน้าแรก</a>`;
+  html += `<article class="mag-article">`;
+
+  // HERO (01)
+  html += `<section class="case-hero" data-section="01">
+    <h1>${esc(m.title_display || m.title)}</h1>
+    <p class="tagline">${esc(m.blurb_60 || '')}</p>
+    <p class="case-meta">
+      <span class="badge ${CAT_BADGE[m.cat]||'criminal'}">${esc(m.cat)}</span>
+      <span>ปี ${esc(m.year)}</span>
+      <span>⏱ ~${esc(m.read_minutes)} นาที</span>
+      <span>${esc(rank.grade || '')} grade · ${esc(rank.score ?? '')}คะแนน</span>
+      ${rank.s_verified ? '<span style="color:var(--gold);font-weight:800">✦ S — verified</span>' : ''}
+      ${flagFor(c)}
+    </p>
+    <div class="section-nav">
+      ${c.read.sections.map(s=>`<a href="#sec-${esc(s.key)}">${esc(s.title)}</a>`).join('')}
+      ${c.play ? '<a href="#play-link" style="background:#1B2437;color:#fff">🎮 ลุยโหมดเล่น</a>' : ''}
+    </div>
+  </section>`;
+
+  // TOP VIDEO (จาก case.media.video — verified working เท่านั้น)
+  if(c.media && c.media.video && c.media.video.youtube_id && c.media.video.verified_working){
+    const v = c.media.video;
+    html += `<section class="case-media case-media-top" data-section="00" id="sec-video">
+      <h3 style="margin-top:0">🎬 ${esc(v.title || 'วิดีโอคดี')}</h3>
+      <div class="video-embed"><iframe src="https://www.youtube.com/embed/${esc(v.youtube_id)}" title="${esc(v.title || 'วิดีโอคดี')}" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+      <p class="mag-video-credit">${esc(v.channel || '')}${v.verified_at ? ` · ตรวจสอบแล้วเมื่อ ${esc(v.verified_at)}` : ''}</p>
+    </section>`;
+  }
+
+  for(const s of c.read.sections){
+    const ct = s.content || {};
+    html += `<section data-section="${esc(String(s.order).padStart(2,'0'))}" id="sec-${esc(s.key)}">`;
+    html += `<h3>${esc(s.title)}${ct.status==='NEEDS_REVIEW' ? ' <span style="font-size:.8rem;color:#B08A3C;font-family:Sarabun,sans-serif">(NEEDS_REVIEW)</span>' : ''}</h3>`;
+
+    if(s.key === 'overview'){
+      if(ct.paragraphs && ct.paragraphs.length){
+        ct.paragraphs.forEach(p=> html += `<p class="para-split">${esc(p)}</p>`);
+      } else {
+        html += needsReviewBox(ct.note_to_agent_a || 'Agent A กรุณาเขียนภาพรวมคดี (ศาล / โจทก์-จำเลย / ผลสำเร็จ) จาก seed facts');
+      }
+    }
+    else if(s.key === 'background'){
+      (ct.paragraphs||[]).forEach(p=> html += `<p class="para-split">${esc(p)}</p>`);
+    }
+    else if(s.key === 'summary'){
+      (ct.paragraphs||[]).forEach(p=> html += `<p class="para-split">${esc(p)}</p>`);
+      html += needsReviewBox(ct.note_to_agent_a);
+    }
+    else if(s.key === 'case_details'){
+      (ct.timeline||[]).forEach(g=>{
+        html += `<ul class="case-timeline">`;
+        (g.events||[]).forEach(ev=>{
+          html += `<li><span class="yr">${esc(ev.year)}</span>${esc(ev.text)}</li>`;
+        });
+        html += `</ul>`;
+      });
+      (ct.analysis||[]).forEach(a=> html += `<p class="para-split">${esc(a)}</p>`);
+      if(ct.links && ct.links.length){
+        ct.links.forEach(l=>{
+          if(l.url) html += `<p><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.text)}</a></p>`;
+          else html += needsReviewBox(`ลิงก์: ${l.text} — ${l.note_to_agent_a||'ไม่มี URL'}`);
+        });
+      }
+    }
+    else if(s.key === 'legal_issues'){
+      if(ct.issues && ct.issues.length){
+        ct.issues.forEach(i=>{
+          const q = i.title || i.q || i.question || '';
+          const a = i.text || i.a || i.anchor || '';
+          html += `<p class="para-split"><strong>${esc(q)}</strong></p>`;
+          if(a) html += `<p class="para-split" style="color:var(--ink-soft);margin-top:-8px">⚓ ${esc(a)}</p>`;
+        });
+      } else {
+        html += needsReviewBox(ct.note_to_agent_a || 'Agent A กรุณาเติมประเด็นกฎหมายจริงของคดี (เช่น ม.288, ม.199, การลดโทษ)');
+      }
+    }
+    else if(s.key === 'provisions'){
+      (ct.articles||[]).forEach(a=>{
+        html += `<details class="law-acc" data-source="${esc(a.source_id||'')}">
+          <summary>${esc(a.ref)} <span class="arrow">▶</span></summary>
+          <div class="body">
+            <p class="law-loc">${esc(a.loc||'')}</p>
+            <p class="law-text">${esc(a.text)}</p>
+            ${a.note_to_agent_a ? needsReviewBox(a.note_to_agent_a) : ''}
+          </div>
+        </details>`;
+      });
+    }
+    else if(s.key === 'lessons'){
+      (ct.items||[]).forEach(it=>{ html += `<p class="para-split">💡 ${esc(it.text)}</p>`; });
+    }
+    else if(s.key === 'judicial'){
+      const v = ct.verdict || {};
+      if(ct.verified && v.decision){
+        html += `<div class="judicial-box">
+          <div class="lbl">⚖ คำพิพากษาตามลำดับศาล — verified by Agent C</div>
+          ${(v.courts||[]).map(court => `<h4 style="margin-top:8px;font-size:1rem">${esc(court.court)}</h4><p>${esc(court.ruling_quote || court.ruling)}</p>`).join('')}
+          ${v.ratio ? `<p class="ratio">"${esc(v.ratio)}"</p>` : ''}
+          ${v.source_verdict_ref ? `<p style="font-size:.85rem;margin-top:10px;color:var(--ink-soft)">อ้างอิง: ${esc(v.source_verdict_ref)}</p>` : ''}
+        </div>`;
+      } else {
+        // Courts ladder from seed facts — still locked behind NEEDS_REVIEW gate
+        const courts = v.courts || [];
+        html += `<div style="background:#F9F7F2;border:1px dashed var(--line);border-radius:14px;padding:18px 20px;color:var(--ink-soft);font-size:.95rem">
+          🕒 <strong>กล่องคำพิพากษา (3 ศาล) ยังไม่ปลดล็อก</strong> — ข้อมูลจาก seed facts วางไว้แล้ว แต่ยังต้องได้รับการ verify จาก Agent C (Judicial QA) ก่อน ตามมาตรฐาน A ≠ S:
+          ${courts.length ? `<div style="margin-top:12px;background:#F3F0E7;border-radius:10px;padding:12px 14px">${courts.map(c => `<p style="margin:6px 0"><strong>${esc(c.court)}:</strong> ${esc(c.ruling_quote || c.ruling)}</p>`).join('')}</div>` : ''}
+          <ul style="margin:10px 0 0 18px">${needsReviewBox(ct.note_to_agent_a) ? '' : `<li>คำวินิจฉัย/บทเหตุผล (ratio decidendi) ยังไม่ถูกยืนยันต้นฉบับ</li>`}<li>เมื่อ verify แล้ว: ตั้งค่า <code>read.sections[judicial].content.verified = true</code> + ใส่เลขที่คำพิพากษาแต่ละศาล</li></ul>
+        </div>`;
+      }
+      html += needsReviewBox(ct.note_to_agent_a);
+    }
+    else {
+      // fallback: paragraphs
+      (ct.paragraphs||[]).forEach(p=> html += `<p class="para-split">${esc(p)}</p>`);
+    }
+    html += `</section>`;
+  }
+
+  // Media section (08/09)
+  if(c.media){
+    html += `<section class="case-media">
+      <h3>ดูวิดีโอที่เกี่ยวข้อง</h3>
+      ${(c.media.items||[]).map(it=> it.type==='video' && it.embed_id
+        ? `<div class="video-embed"><iframe src="https://www.youtube.com/embed/${esc(it.embed_id)}" title="วิดีโอคดี" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+           ${it.credit ? `<p class="mag-video-credit">${esc(it.credit)}</p>` : ''}`
+        : `<p class="video-pending">⏳ วิดีอยังไม่มีใน JSON</p>`
+      ).join('')}
+    </section>`;
+  }
+
+  // Deident banner
+  if(c.deident && c.deident.required){
+    html += `<section style="margin-top:28px">
+      <h3 style="font-size:1.1rem">🛡สถานะการปกป้องบุคคล</h3>
+      <div class="need-review-box" style="background:#FBEAEA;border-color:#B23A3A;color:#7A2222">
+        <span class="ico">🛡</span>
+        <span><strong>คดีนี้กำลังรอดำเนินการ de-identification</strong><br>Agent B ยังไม่แก้ไขข้อเท็จจริงใด ๆ (RULE 2 + RULE 3) — คำตัดสินใจและรูปแบบการปกป้องชื่อบุคคลเป็นหน้าที่ของ <strong>Agent A</strong><br><em>เหตุผล: ${esc(c.deident.reason)}</em></span>
+      </div>
+    </section>`;
+  }
+
+  // Play CTA
+  if(c.play){
+    html += `<section style="margin-top:28px;text-align:center;padding-top:20px;border-top:1px solid var(--line)">
+      <p style="margin-bottom:12px;color:var(--ink-soft)">อ่านจบแล้ว? ลองทายใจศาลกัน — ใช้ JSON เดียวกับที่คุณเพิ่งอ่าน</p>
+      <a class="play-cta" href="play-case.html?id=${appId}">🎮 ลุยโหมดเล่น →</a>
+    </section>`;
+  }
+
+  html += `</article>`;
+  app.innerHTML = html;
+  window.__case = c; // for analytics/dev
+}
+render();
+</script>
+</body>
+</html>
