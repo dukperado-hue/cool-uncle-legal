@@ -222,3 +222,6 @@ Note: คดีเหล่านี้ยังคง release=WARN/BLOCKED เ�
 - Trendtex Trading Corp. v. Central Bank of Nigeria (UK Court of Appeal)
 - Western Sahara (Advisory Opinion)
 
+
+หมายเหตุการตรวจรอบสุดท้าย: 22 คด ICJ/ระหว่างประเทศมี legal issues 1-2 ข้อตามเนื้อหา legacy ที่มีอยู่ (ไม่ fabricate เพิ่ม) — จัดเป็น WARN ไม่ใช่ BLOCK
+codex warnings 2 รายการเป็นของเดิม (maaekaa overrides, external_law) — ไม่กระทบการปล่อย
