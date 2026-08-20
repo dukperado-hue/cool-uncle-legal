@@ -510,9 +510,9 @@
   "has_video": true
  },
  "news-case-khdiiaechraemmnii-2562.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 88,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdiiaechrluukoch-e-nen-rcchii-diidakchan-2564.html": {
@@ -534,9 +534,9 @@
   "has_video": true
  },
  "news-case-khdiiaefrnaichs-chuuchi-daaruma-2565.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 86,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdiiaekngkh-lechnet-rhl-ko-nengin-2566.html": {
@@ -570,15 +570,15 @@
   "has_video": true
  },
  "news-case-khdiibrisaththawrebiiywluukthawryuorp-2562.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 86,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdiibukcchabaekngkh-lechnet-rainfilippins-2566.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 86,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-khdiicchaangwaankhaa-esiiyaehy-2545.html": {
