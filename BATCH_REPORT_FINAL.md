@@ -114,3 +114,23 @@
 **ยอดรวมหลัง batch 5:** Grade A = 194 (จาก 184 + 10), A_REVIEW = 4, B = 5, C = 55; news-index bumped ?v=72; TODO_VIDEOS.md เพิ่ม 10 รายการ
 **แหล่งอ้างอิงหลัก:** โดม ไกรปกรณ์ "การสืบสวนอาชญากรรมแบบตะวันตกในสยามสมัยรัชกาลที่ 5-6" วารสารศิลปศาสตร์ SWU ปีที่ 19 (2559) น. 72-88; silpa-mag article_50601, article_50868, article_62764; thepeople.co/read/43864; เอกสาร หจช. ร.5 ย.13.3/17; จิรวัฒน์ แสงทอง (2546) วิทยานิพนธ์ จุฬาฯ
 **สถานะ: READY_FOR_REVIEW** — รอ publication decision; historical cases ใช้ storytelling + evidence-based ตามข้อตกลงกับผู้ใช้
+
+
+## BATCH 6 — คดยุคร.6–ร.9 (พ.ศ. 2453–2504) — 5 คดี (20 Aug 2026)
+| คดี | Slug | Grade | Score | ปี |
+|---|---|---|---|---|
+| คดีกบฏ ร.ศ.130 (2455) — ขุนทวยหาญพิทักษ์ + ยังมีเติร์ก วางแผนเปลี่ยนการปกครอง | news-case-khdii-kabot-r130-2455 | A | 90 | 2455 |
+| กรณีสวรรคต ร.8 (2489) — คดีประทุษฐร้ายต่อองค์พระมหากษัตริย์ | news-case-khdii-sawan-khot-r8-2489 | A | 92 | 2489 |
+| คดีกบฏบวรเดช (2476) — ศาลพิเศษ พ.ร.บ.2476 | news-case-khdii-kabot-boworadet-2476 | A | 90 | 2476 |
+| คดีบุญเพ็งหีบเหล็ก (2460-2462) — ฆาตกรต่อเนื่อง ร.6 | news-case-khdii-bunpeng-hiblek-2469 | A | 88 | 2460-2462 |
+| คดีปลงพระชนม์พระนางเธอลักษมีลาวัณ (2504) — ฆาตกรรมพระมเหสี ร.6 | news-case-khdii-laksami-lawan-2504 | A | 88 | 2504 |
+
+**แนวทางการประมวล:** cat="criminal", a_cat_label="คดยุคโบราณ", release=WARN (sensitive cases = NEEDS_REVIEW legal issues), provisions ทั้งหมด status="external_law" (กฎหมายอาญา ร.ศ.127 / พระอัยการ / ป.อ.2499 — ไม่อยู่ใน codex), ไม่มีการ apply กฎหมายปัจจุบัน — lessons เชื่อม (connect) กับหลักสมัยใหม่เท่านั้น
+
+**ความไม่ตรงกันของแหล่งข้อมูลที่บันทึกไว้:** กรณีสวรรคต ร.8 (ยังไม่มีข้อสรุปแน่ชัด — ใช้ NEEDS_REVIEW สำหรับ legal issues), คดีบุญเพ็งหีบเหล็ก (บางแหล่งบอก 2469 — ใช้ 2460-2462 ตาม th.wikipedia.org)
+
+**ยอดรวมหลัง batch 6:** Grade A = 199 (จาก 194 + 5); news-index bumped; TODO_VIDEOS.md — videos already embedded (no new pending)
+
+**แหล่งอ้างอิงหลัก:** th.wikipedia.org, bbc.com/thai, pridibanomyonginstitute, pridi.or.th, silpa-mag.com/article_2332, lovesiamoldbook.com
+
+**สถานะ: READY_FOR_REVIEW** — รอ publication decision; historical cases ใช้ storytelling + evidence-based ตามข้อตกลงกับผู้ใช้

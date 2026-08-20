@@ -1540,5 +1540,35 @@
   "score": 88,
   "release": "WARN",
   "has_video": false
+ },
+ "news-case-khdii-kabot-r130-2455.html": {
+  "grade": "A",
+  "score": 90,
+  "release": "WARN",
+  "has_video": true
+ },
+ "news-case-khdii-sawan-khot-r8-2489.html": {
+  "grade": "A",
+  "score": 92,
+  "release": "WARN",
+  "has_video": true
+ },
+ "news-case-khdii-kabot-boworadet-2476.html": {
+  "grade": "A",
+  "score": 90,
+  "release": "WARN",
+  "has_video": true
+ },
+ "news-case-khdii-bunpeng-hiblek-2469.html": {
+  "grade": "A",
+  "score": 88,
+  "release": "WARN",
+  "has_video": true
+ },
+ "news-case-khdii-laksami-lawan-2504.html": {
+  "grade": "A",
+  "score": 88,
+  "release": "WARN",
+  "has_video": true
  }
 }
