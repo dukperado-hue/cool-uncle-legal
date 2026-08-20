@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cool Uncle ⚖ Legal Lab | กฎหมายจากข่าวและคดีดัง</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Home v2 — curated public surface (RULE 4/10)
+   Database ≠ Publication: public surface = featured/golden/S-series เท่านั้น */
+.hero-band{display:flex;gap:24px;align-items:center;background:linear-gradient(135deg,#1B2437 0%,#2E3A55 55%,#3A4A70 100%);border-radius:18px;padding:22px 26px;margin:14px 0 22px;position:relative;overflow:hidden}
+.hero-band::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 80% 120%,rgba(176,138,60,.35),transparent 60%);pointer-events:none}
+.hero-mascot{position:relative;z-index:2;max-height:220px;width:auto;filter:drop-shadow(0 8px 18px rgba(0,0,0,.45));transform:rotate(-2deg)}
+.hero-text{position:relative;z-index:2;flex:1;color:#F5F2E8}
+.hero-text h1{font-family:'Noto Serif Thai',serif;font-size:1.7rem;font-weight:900;color:#fff;margin:0 0 8px;line-height:1.45}
+.hero-text p{font-size:1rem;line-height:1.75;color:#D8DCE8;margin:0 0 14px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:7px;background:var(--gold);color:#fff;font-weight:700;font-size:.95rem;padding:10px 18px;border-radius:12px;text-decoration:none;transition:all .2s;border:none;cursor:pointer;font-family:'Sarabun',sans-serif}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.25)}
+.btn.alt{background:transparent;border:1.5px solid rgba(255,255,255,.6);color:#fff}
+.btn.alt:hover{background:rgba(255,255,255,.12)}
+.cat-card{display:block;background:#fff;border:1px solid #E5E1D6;border-radius:16px;padding:20px 22px;text-decoration:none;color:inherit;transition:all .2s;position:relative;overflow:hidden}
+.cat-card:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(34,40,58,.14);border-color:var(--gold)}
+.cat-card .cc-ico{font-size:1.9rem;margin-bottom:8px}
+.cat-card h3{font-family:'Noto Serif Thai',serif;font-size:1.15rem;font-weight:900;color:#1B2437;margin:0 0 4px}
+.cat-card p{color:#5A6072;font-size:.92rem;margin:0;line-height:1.6}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(max-width:640px){.grid-2{grid-template-columns:1fr}.hero-band{flex-direction:column;text-align:center}.hero-mascot{max-height:150px}}
+.featured-big{display:block;background:#fff;border-radius:18px;border-top:5px solid var(--gold);box-shadow:var(--shadow);text-decoration:none;color:inherit;transition:all .2s}
+.featured-big:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(34,40,58,.16)}
+.featured-big .fb-body{padding:24px 26px}
+.featured-big h2{font-family:'Noto Serif Thai',serif;font-size:1.5rem;font-weight:900;color:#1B2437;margin:8px 0 8px;line-height:1.45}
+.featured-big p{color:#5A6072;font-size:1rem;line-height:1.75}
+.fb-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.fb-note{font-size:.85rem;color:#7A6220;background:#FDF6EC;border:1px dashed #B08A3C;border-radius:10px;padding:10px 14px;margin-top:14px}
+.golden-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.golden-card{display:block;background:#fff;border:1px solid #E5E1D6;border-radius:14px;padding:18px 20px;text-decoration:none;color:inherit;transition:all .2s;position:relative}
+.golden-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(34,40,58,.13)}
+.golden-card .g-rank{position:absolute;top:14px;right:16px;font-family:'Noto Serif Thai',serif;font-weight:900;font-size:1rem;color:var(--ink-faint)}
+.golden-card h3{font-family:'Noto Serif Thai',serif;font-size:1.05rem;font-weight:800;color:#1B2437;margin:0 0 6px;line-height:1.45;padding-right:40px}
+.golden-card p{font-size:.88rem;color:#5A6072;line-height:1.6;margin:0}
+.s-empty{background:#F9F7F2;border:1.5px dashed var(--line);border-radius:14px;padding:18px 20px;color:var(--ink-soft);font-size:.95rem;line-height:1.7}
+.db-note{background:#F3F0E7;border:1px solid #E5E1D6;border-radius:14px;padding:16px 20px;font-size:.92rem;color:#5A6072;line-height:1.7;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="topbar mag">
+  <a class="tb-brand" href="news-index-v2.html"><img src="assets/capybara-64.webp" alt="" width="36" height="36">Cool Uncle <span style="color:#B08A3C">⚖</span> Legal Lab</a>
+  <span class="tb-sep">|</span>
+  <span>กฎหมายจากข่าวและคดีดัง</span>
+  <div class="topbar-right"><span class="topbar-pill" id="db-count">⏳ กำลังโหลด...</span></div>
+</div>
+<div class="wrap" id="app">
+  <p style="padding:60px 0;text-align:center;color:var(--ink-faint)">กำลังโหลด curated content...</p>
+</div>
+<footer>
+  Cool Uncle ⚖ Legal Lab — curated public surface (Golden Cases) · ฐานข้อมูลเต็มอยู่หลัง validation gate (RULE 4, 5, 10) · Better 10 excellent cases than 300 inconsistent cases
+</footer>
+
+<script>
+/* ================================================================
+   HOME V2 — curated public surface
+   - โหลด golden-cases.json (database ≠ publication)
+   - คดีที่ visibility.public = false จะไม่แสดงให้ public
+   - S tier แสดงเฉพาะเมื่อ rank.s_verified = true (RULE 6)
+   ================================================================ */
+
+const GOLDEN_URL = 'assets/cases/golden-cases.json';
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+async function init(){
+  const app = document.getElementById('app');
+  let g;
+  try{
+    const res = await fetch(GOLDEN_URL, {cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    g = await res.json();
+  }catch(e){
+    app.innerHTML = `<div class="db-note">โหลด curated content ไม่ได้: ${esc(e.message)}<br>ไฟล์: ${esc(GOLDEN_URL)}</div>`;
+    return;
+  }
+  document.getElementById('db-count').textContent = '⚖ Golden Cases';
+
+  const featured = g.featured_cases || [];
+  const golden = (g.golden_cases||[]).filter(x=> x.visibility && x.visibility.public);
+  const locked = (g.golden_cases||[]).filter(x=> !(x.visibility && x.visibility.public));
+  const sVerified = golden.filter(x=> x.rank && x.rank.s_verified);
+
+  let html = `
+  <div class="hero-band">
+    <img class="hero-mascot" src="assets/capybara-full.webp" alt="คาปิบาร่านักสืบ" width="180">
+    <div class="hero-text">
+      <h1>ห้องสืบกฎหมายคูลอังกิล</h1>
+      <p>ทุกข่าวและคดีดังมี <strong>"ข้อกฎหมาย"</strong> ซ่อนอยู่เสมอ — คูลอังกิลจะแปลดราม่าให้เป็นความรู้ เชือดเฉือนทีละประเด็น พร้อมโยงไปอ่าน <strong>มาตรากฎหมายจริง</strong> — เราคัดเฉพาะคดีที่ผ่านการตรวจคุณภาพเท่านั้น</p>
+      <div class="hero-actions">
+        <a class="btn" href="read-case.html?id=${esc(featured[0]||'')}">📖 เรียนจากคดีแนะนำ</a>
+        <a class="btn alt" href="play-case.html?id=${esc(featured[0]||'')}">🎮 เล่นทายใจศาล</a>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="mag-head"><span class="mag-head-ico">🔥</span>คดีแนะนำประจำสัปดาห์</h2>
+  <a class="featured-big" href="read-case.html?id=${esc(featured[0]||'')}">
+    <div class="fb-body">
+      <span class="mag-tag exam" style="display:inline-block;margin-bottom:8px">📌 Featured · Golden Case</span>
+      <h2>${esc(g._featured_title || 'กำลังโหลดจาก featured_cases.json...')}</h2>
+      <p>คดีนี้ถูกคัดเป็นคดีแนะนำ — ${esc(g._featured_blurb || '')}</p>
+      <div class="fb-tags">
+        <span class="mag-tag">📖 อ่านโหมดอ่าน</span>
+        <span class="mag-tag auto-tag">🎮 มีโหมดเล่น</span>
+      </div>
+      ${g._featured_deident ? `<div class="fb-note">🛡 ${esc(g._featured_deident)}</div>` : ''}
+    </div>
+  </a>
+
+  <h2 class="mag-head mt-32"><span class="mag-head-ico">📚</span>เรียน / เล่น — ทางเลือกของคุณ</h2>
+  <div class="grid-2">
+    <a class="cat-card" href="read-case.html">
+      <div class="cc-ico">📖</div>
+      <h3>โหมดอ่าน (Read Mode)</h3>
+      <p>อ่านคดีแบบ calm & readable — เรียง 8 sections ตั้งแต่ภาพรวม บทบัญญัติ (กดดูเต็ม) ไปจนถึงบทเรียน — สบาย ๆ เหมือนนั่งคุยกับอังกิล</p>
+    </a>
+    <a class="cat-card" href="play-case.html">
+      <div class="cc-ico">🎮</div>
+      <h3>โหมดเล่น (Play Mode)</h3>
+      <p>ทายใจศาลจากคดีเดียวกัน — Case Setup → ประเด็นกฎหมาย → ทายบทบัญญัติ → ทายคำพิพากษา → เฉลยจริง คูลอังกิลไม่บอกคำตอบก่อนเวลา</p>
+    </a>
+  </div>
+
+  <h2 class="mag-head mt-32"><span class="mag-head-ico">🏆</span>Golden Cases — คัดมาแล้วว่าคุณภาพผ่าน</h2>
+  <div class="golden-row">
+    ${golden.length
+      ? golden.map(x=>`
+        <a class="golden-card" href="read-case.html?id=${esc(x.id)}">
+          <span class="g-rank">${x.rank && x.rank.s_verified ? '<span style="color:var(--gold)">✦ S</span>' : esc(x.rank && x.rank.grade || '')}</span>
+          <h3>${esc(x.title)}</h3>
+          <p>${esc(x.cat)} · score ${esc(x.rank && x.rank.score || '')}${x.has_video ? ' · 📺 มีวิดีโอ' : ''}</p>
+        </a>`).join('')
+      : '<div class="s-empty">ยังไม่มีคดีที่เปิด public — กำลังรอการตรวจสอบ (RULE 4 + 10)</div>'}
+  </div>
+
+  <h2 class="mag-head mt-32"><span class="mag-head-ico">✦</span>คดีระดับ S — verified judicial authority</h2>
+  ${sVerified.length
+    ? `<div class="golden-row">${sVerified.map(x=>`
+        <a class="golden-card" href="read-case.html?id=${esc(x.id)}" style="border-color:var(--gold)">
+          <span class="g-rank"><span style="color:var(--gold)">✦ S — C verified</span></span>
+          <h3>${esc(x.title)}</h3>
+          <p>${esc(x.cat)} · ฎีกา verified โดย Agent C</p>
+        </a>`).join('')}</div>`
+    : `<div class="s-empty">✦ <strong>ยังไม่มีคดีระดับ S</strong> — เพราะ S = quality content + <strong>verified judicial authority</strong> (RULE 6)<br>ขณะนี้คดีกำลังรอ Agent C ตรวจสอบเลขที่คำพิพากษาฎีกา เมื่อผ่านแล้วจะแสดง badge ✦ S ที่นี่ (A ≠ S)</div>`}
+
+  <h2 class="mag-head mt-32"><span class="mag-head-ico">📦</span>ซีรีส์คดี</h2>
+  ${(g.series_hubs||[]).map(s=>`
+    <a class="cat-card" href="series/${esc(s.series_id)}.html" style="display:block;margin-bottom:14px">
+      <h3>${esc(s.series_title)}</h3>
+      <p>${esc((s.order||[]).length)} ตอนในซีรีส์ →</p>
+    </a>`).join('') || '<div class="db-note">ซีรีส์อยู่ระหว่างจัดทำโดย Agent A</div>'}
+
+  <h2 class="mag-head mt-32"><span class="mag-head-ico">🔍</span>Explore — ขยายฐานคดี</h2>
+  <div class="db-note">
+    🔒 หน้าเว็บนี้แสดงเฉพาะ <strong>curated content</strong> (Featured / Golden / S) — ไม่ใช่จำนวนคดีทั้งหมดในฐานข้อมูล<br>
+    คดีที่เหลือ (${esc(g._db_total || '…')} คดี) ยังอยู่หลัง validation gate: รอ de-identification โดย Agent A, เนื้อหา NEEDS_REVIEW, และ judicial verification โดย Agent C — เมื่อผ่านแล้วจะค่อย ๆ เปิดตามลำดับ (RULE 4: คุณภาพก่อนปริมาณ)<br>
+    💡 Hidden is not deleted — คดีที่ยังไม่พร้อม public ถูกตั้งค่า visibility.public = false <strong>ไม่ได้ถูกลบ</strong> (RULE 5)
+  </div>`;
+
+  app.innerHTML = html;
+  window.__golden = g;
+}
+init();
+</script>
+</body>
+</html>

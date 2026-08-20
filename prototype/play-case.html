@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎮 ลุยคดี — Cool Uncle ⚖ Legal Lab</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+.play-wrap{max-width:860px;margin:0 auto;padding:0 18px 60px}
+.play-card{background:var(--card);border-radius:18px;padding:28px 30px;box-shadow:var(--shadow);border-top:5px solid #1B2437;margin-bottom:24px}
+.play-step-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.play-step-num{width:44px;height:44px;border-radius:999px;background:#1B2437;color:#fff;font-family:'Noto Serif Thai',serif;font-weight:800;font-size:1.15rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.play-step-title{font-family:'Noto Serif Thai',serif;font-weight:900;font-size:1.25rem;color:#1B2437}
+.play-progress{display:flex;gap:6px;margin-bottom:24px}
+.play-progress span{flex:1;height:6px;border-radius:999px;background:#EDE9DC}
+.play-progress span.done{background:var(--gold)}
+.play-progress span.now{background:#B08A3C}
+.play-q{font-size:1.05rem;font-weight:700;color:#1B2437;margin:14px 0 16px;line-height:1.7}
+.play-opt{display:block;width:100%;text-align:left;background:#F9F7F2;border:1.5px solid var(--line);border-radius:12px;padding:13px 16px;margin:9px 0;font-size:1rem;font-family:'Sarabun',sans-serif;color:var(--ink);cursor:pointer;transition:all .18s;line-height:1.65}
+.play-opt:hover{border-color:var(--accent);background:#F1EDE2}
+.play-opt:disabled{cursor:default}
+.play-opt.correct{background:var(--ok-bg);border-color:var(--ok);font-weight:700}
+.play-opt.wrong{background:var(--bad-bg);border-color:var(--bad)}
+.play-opt.dim{opacity:.55}
+.play-feedback{margin:14px 0;border-radius:12px;padding:14px 18px;font-size:.98rem;line-height:1.75;display:none}
+.play-feedback.show{display:block}
+.play-feedback.ok{background:var(--ok-bg);border:1px solid var(--ok);color:#145B3A}
+.play-feedback.no{background:var(--bad-bg);border:1px solid var(--bad);color:#8A2B2B}
+.play-next{display:inline-block;margin-top:6px;background:#1B2437;color:#fff;font-weight:700;font-size:.95rem;padding:10px 20px;border-radius:12px;border:none;cursor:pointer;font-family:'Sarabun',sans-serif;transition:all .2s}
+.play-next:hover{background:#2E3A55}
+.play-next:disabled{opacity:.4;cursor:not-allowed}
+.verdict-lock{background:#F3F0E7;border:1.5px dashed var(--gold);border-radius:14px;padding:18px 20px;margin:10px 0;color:#7A6220;font-size:.96rem;line-height:1.75}
+.verdict-box{background:linear-gradient(135deg,#1B2437,#2E3A55);border-radius:14px;padding:22px 26px;color:#F5F2E8;margin:14px 0;display:none}
+.verdict-box.show{display:block}
+.verdict-box .lbl{font-size:.82rem;font-weight:800;letter-spacing:.06em;color:#FFD5D5;margin-bottom:8px}
+.verdict-box h4{font-family:'Noto Serif Thai',serif;color:#fff;font-size:1.15rem;margin:0 0 10px}
+.verdict-box .ratio{border-left:3px solid #B08A3C;padding-left:14px;color:#F3E8CF;margin-top:10px;font-size:.98rem;line-height:1.85}
+.play-cta-read{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--accent);font-weight:700;font-size:.95rem;padding:11px 20px;border-radius:12px;text-decoration:none;border:1.5px solid var(--accent);transition:all .2s}
+.play-cta-read:hover{background:#EEF1F7}
+@media(max-width:640px){.play-card{padding:20px 18px}.play-step-title{font-size:1.1rem}}
+</style>
+</head>
+<body>
+<div class="topbar mag">
+  <a class="tb-brand" href="news-index-v2.html"><img src="assets/capybara-64.webp" alt="" width="36" height="36">Cool Uncle <span style="color:#B08A3C">⚖</span> Legal Lab</a>
+  <span class="tb-sep">|</span>
+  <span>🎮 โหมดเล่น — ทายใจศาล</span>
+</div>
+<div class="play-wrap" id="app">
+  <p style="padding:60px 0;text-align:center;color:var(--ink-faint)">กำลังโหลดคดีจาก JSON...</p>
+</div>
+<footer>
+  Cool Uncle ⚖ Legal Lab — ข้อมูลทุกข้อในโหมดเล่นมาจาก case JSON เดียวกับโหมดอ่าน (Database ≠ Publication) — ห้าม reveal คำพิพากษาก่อนตอบ
+</footer>
+
+<script>
+/* ================================================================
+   PLAY MODE — คูลอังกิลโหมดเล่น (interactive)
+   ปรัชญา:
+   - ใช้ JSON เดียวกับ Read Mode (read.play.flow) — ห้าม duplicate DB
+   - Flow: Setup → Legal Issue → Guess the Law → Predict the Verdict
+     → Real Verdict → Legal Reasoning
+   - ANTI-REVEAL: verdict (step 5) และ reasoning (step 6) จะไม่แสดง
+     จนกว่าผู้ใช้จะตอบ "Predict the Verdict" (step 4) แล้วเท่านั้น
+   ================================================================ */
+
+const appId = new URLSearchParams(location.search).get('id') || 'janeera-2541';
+const CASE_URL = `assets/cases/${appId}.json`;
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+let C = null, flow = [], stepIdx = 0, answers = {};
+
+function verdictUnlocked(){ return answers['predict_verdict'] !== undefined; }
+
+function renderProgress(){
+  return `<div class="play-progress">${flow.map((_,i)=>{
+    let cls = '';
+    if(i < stepIdx) cls = 'done';
+    else if(i === stepIdx) cls = 'now';
+    return `<span class="${cls}"></span>`;
+  }).join('')}</div>`;
+}
+
+function renderStep(){
+  const app = document.getElementById('app');
+  if(stepIdx >= flow.length){ renderFinal(); return; }
+  const step = flow[stepIdx];
+  const ct = step.content || {};
+
+  // ===== ANTI-REVEAL GATE =====
+  if((step.key === 'show_verdict' || step.key === 'show_reasoning') && !verdictUnlocked()){
+    app.innerHTML = `
+      <a class="back-button" href="news-index-v2.html">← กลับหน้าแรก</a>
+      ${renderProgress()}
+      <div class="play-card">
+        <div class="play-step-head"><div class="play-step-num">🔒</div><div class="play-step-title">คำตอบยังถูกล็อกอยู่</div></div>
+        <div class="verdict-lock">
+          <strong>คูลอังกิลไม่บอกคำตอบก่อนเวลา</strong> — คุณยังไม่ได้ทายคำพิพากษาในด่านก่อนหน้า<br>
+          กลับไปตอบ "ทายคำพิพากษา" ก่อน แล้วคำวินิจฉัยศาลฎีกาจริงจะปรากฏ 👇
+        </div>
+        <button class="play-next" onclick="stepIdx = stepIndexBy('predict_verdict'); renderStep()">← กลับไปทายคำพิพากษา</button>
+      </div>`;
+    return;
+  }
+
+  if(step.key === 'case_setup'){
+    app.innerHTML = `
+      <a class="back-button" href="read-case.html?id=${appId}">← กลับโหมดอ่าน</a>
+      ${renderProgress()}
+      <div class="play-card">
+        <div class="play-step-head"><div class="play-step-num">📋</div><div class="play-step-title">${esc(step.title)} — ${esc(C.meta.title)}</div></div>
+        <p style="font-size:1.02rem;line-height:1.85;color:var(--ink-soft)">${esc(ct.brief || '')}</p>
+        <p style="font-size:.9rem;color:var(--ink-faint);margin-top:12px">⏱ ใช้เวลาเพียงไม่กี่นาที — ใช้ข้อมูลชุดเดียวกับที่คุณเพิ่งอ่าน</p>
+        <button class="play-next" onclick="stepIdx++; renderStep()">เริ่ม ▶</button>
+      </div>`;
+    return;
+  }
+
+  if(ct.answer){
+    // multiple choice step
+    const chosen = answers[step.key];
+    let optsHtml = (ct.options||[]).map(o=>{
+      let cls = 'play-opt';
+      if(chosen !== undefined){
+        if(o.id === ct.answer) cls += ' correct';
+        else if(o.id === chosen && chosen !== ct.answer) cls += ' wrong';
+        else cls += ' dim';
+      }
+      return `<button class="${cls}" data-id="${o.id}" ${chosen!==undefined?'disabled':''} onclick="choose('${step.key}','${o.id}')">${String.fromCharCode(65 + (ct.options||[]).findIndex(x=>x.id===o.id))}. ${esc(o.text)}</button>`;
+    }).join('');
+
+    let fb = '';
+    if(chosen !== undefined){
+      const ok = chosen === ct.answer;
+      fb = `<div class="play-feedback show ${ok?'ok':'no'}">
+        ${ok ? '✅ ถูกต้อง! ' : '❌ ยังไม่ใช่ — '}${esc(ct.explanation || (ok ? '' : `คำตอบที่ถูกคือตัวเลือก "${esc((ct.options||[]).find(x=>x.id===ct.answer).text)}"`))}
+        <br><button class="play-next" onclick="stepIdx++; renderStep()">${stepIdx+1 < flow.length ? 'ด่านถัดไป ▶' : 'ดูบทสรุป ▶'}</button>
+      </div>`;
+    } else {
+      fb = `<div class="play-feedback show" style="background:#F9F7F2;border:1px solid var(--line);color:var(--ink-soft)">เลือกคำตอบแล้วคูลอังกิลจะเฉลยให้</div>`;
+    }
+
+    app.innerHTML = `
+      <a class="back-button" href="news-index-v2.html">← กลับหน้าแรก</a>
+      ${renderProgress()}
+      <div class="play-card">
+        <div class="play-step-head"><div class="play-step-num">${step.step}</div><div class="play-step-title">${esc(step.title)}</div></div>
+        <p class="play-q">${esc(ct.question)}</p>
+        ${optsHtml}
+        ${fb}
+      </div>`;
+    return;
+  }
+
+  // show_verdict / show_reasoning (unlocked path)
+  const v = C.read.sections.find(s=>s.key==='judicial')?.content?.verdict || {};
+  const unlocked = C.read.sections.find(s=>s.key==='judicial')?.content?.verified;
+  if(step.key === 'show_verdict'){
+    app.innerHTML = `
+      <a class="back-button" href="news-index-v2.html">← กลับหน้าแรก</a>
+      ${renderProgress()}
+      <div class="play-card">
+        <div class="play-step-head"><div class="play-step-num">⚖</div><div class="play-step-title">${esc(step.title)}</div></div>
+        <div class="verdict-box show">
+          <div class="lbl">${unlocked ? '⚖ คำวินิจฉัยศาลฎีกาจริง — verified by Agent C' : '⚖ คำวินิจฉัยศาลฎีกาจริง — ยังรอการ verify โดย Agent C'}</div>
+          <h4>${esc(v.decision || '(รอข้อมูลคำวินิจฉัยจริง)')}</h4>
+          ${v.ratio ? `<p class="ratio">"${esc(v.ratio)}"</p>` : ''}
+          ${!unlocked ? `<p style="font-size:.85rem;margin-top:10px;color:#C9D0DC">ตามมาตรฐาน UI: ข้อมูลนี้แสดงจาก JSON ตรง ๆ แต่ badge "verified" จะเปิดเมื่อ Agent C ตรวจสอบเลขที่คำพิพากษาแล้ว</p>` : ''}
+        </div>
+        <button class="play-next" onclick="stepIdx++; renderStep()">ดูเหตุผลทางกฎหมาย ▶</button>
+      </div>`;
+    return;
+  }
+  if(step.key === 'show_reasoning'){
+    app.innerHTML = `
+      <a class="back-button" href="news-index-v2.html">← กลับหน้าแรก</a>
+      ${renderProgress()}
+      <div class="play-card">
+        <div class="play-step-head"><div class="play-step-num">💡</div><div class="play-step-title">${esc(step.title)}</div></div>
+        <p style="line-height:1.85">${esc(v.ratio || '')}</p>
+        ${renderFinal() }
+      </div>`;
+    return;
+  }
+}
+
+function stepIndexBy(key){ return flow.findIndex(s=>s.key===key); }
+
+function choose(stepKey, id){
+  if(answers[stepKey] !== undefined) return;
+  answers[stepKey] = id;
+  renderStep();
+}
+
+function renderFinal(){
+  const score = flow.filter(s=>s.content && s.content.answer && answers[s.key] === s.content.answer).length;
+  const total = flow.filter(s=>s.content && s.content.answer).length;
+  return `
+    <div style="text-align:center;padding:18px 0">
+      <h3 style="font-family:'Noto Serif Thai',serif;font-size:1.3rem;margin-bottom:6px">🏁 จบรอบ — คะแนน ${score}/${total}</h3>
+      <p style="color:var(--ink-soft);margin-bottom:16px">ไม่ว่าจะทายถูกไหม สิ่งสำคัญคือเหตุผลทางกฎหมาย — อ่านคดีฉบับเต็มแล้วจะเข้าใจลึกขึ้น</p>
+      <a class="play-cta-read" href="read-case.html?id=${appId}">📖 อ่านคดีฉบับเต็ม →</a>
+      <p style="font-size:.85rem;color:var(--ink-faint);margin-top:14px">🎲 <a href="news-index-v2.html" style="color:var(--accent);font-weight:600">สุ่มคดีอื่นเล่นต่อ</a></p>
+    </div>`;
+}
+
+async function init(){
+  const app = document.getElementById('app');
+  try{
+    const res = await fetch(CASE_URL, {cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    C = await res.json();
+  }catch(e){
+    app.innerHTML = `<div class="play-card"><h2 style="color:var(--bad)">โหลดคดีไม่ได้: ${esc(e.message)}</h2></div>`;
+    return;
+  }
+  flow = C.play.flow.map(s=>({...s}));
+  document.title = `🎮 ลุยคดี: ${C.meta.title} — Cool Uncle ⚖ Legal Lab`;
+  renderStep();
+}
+init();
+</script>
+</body>
+</html>
