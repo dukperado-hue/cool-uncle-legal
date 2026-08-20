@@ -90,7 +90,7 @@ function renderBriefing(b){
   ).join('');
   return `
     <div class="brief-card">
-      <h4>📌 ${bEsc(b.title || 'เบิร์ฟก่อนเริ่ม')}</h4>
+      <h4>📌 ${bEsc(b.title || 'สรุปสั้นก่อนคุย')}</h4>
       <p class="brief-lead">${bEsc(b.lead || '')}</p>
       <button class="brief-toggle" onclick="toggleBriefing(this)">ⓘ ${bEsc(b.hint_label || 'กฎหมายที่เกี่ยวข้อง — กดดูก่อนเริ่ม')}</button>
       <div class="brief-hide">
