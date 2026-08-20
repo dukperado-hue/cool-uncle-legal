@@ -30,6 +30,16 @@
 .play-next:hover{background:#2E3A55}
 .play-next:disabled{opacity:.4;cursor:not-allowed}
 .verdict-lock{background:#F3F0E7;border:1.5px dashed var(--gold);border-radius:14px;padding:18px 20px;margin:10px 0;color:#7A6220;font-size:.96rem;line-height:1.75}
+.brief-card{background:linear-gradient(135deg,#F7F4EB,#F0EBDD);border:1.5px solid var(--line);border-radius:14px;padding:18px 20px;margin:14px 0}
+.brief-card h4{font-family:'Noto Serif Thai',serif;color:#1B2437;font-size:1.02rem;margin:0 0 8px}
+.brief-lead{font-weight:700;color:#1B2437;line-height:1.8;margin:0 0 10px;font-size:.98rem}
+.brief-point{display:flex;gap:10px;margin:8px 0;font-size:.92rem;line-height:1.7;color:var(--ink-soft)}
+.brief-point b{color:#1B2437;flex-shrink:0;min-width:130px}
+.brief-hint{background:var(--ok-bg);border:1px solid var(--ok);border-radius:10px;padding:10px 14px;font-size:.88rem;color:#145B3A;line-height:1.7;margin:12px 0 4px}
+.brief-toggle{background:none;border:none;color:var(--accent);font-weight:700;font-size:.88rem;cursor:pointer;font-family:'Sarabun',sans-serif;padding:0}
+.brief-toggle:hover{text-decoration:underline}
+.brief-hide{display:none}
+.brief-hide.open{display:block}
 .verdict-box{background:linear-gradient(135deg,#1B2437,#2E3A55);border-radius:14px;padding:22px 26px;color:#F5F2E8;margin:14px 0;display:none}
 .verdict-box.show{display:block}
 .verdict-box .lbl{font-size:.82rem;font-weight:800;letter-spacing:.06em;color:#FFD5D5;margin-bottom:8px}
@@ -73,6 +83,28 @@ let C = null, flow = [], stepIdx = 0, answers = {};
 
 function verdictUnlocked(){ return answers['predict_verdict'] !== undefined; }
 
+function renderBriefing(b){
+  const bEsc = esc; // alias; esc() is global
+  let pts = (b.points||[]).map(p=>
+    `<div class="brief-point"><b>${bEsc(p.label)}</b><span>${bEsc(p.text)}</span></div>`
+  ).join('');
+  return `
+    <div class="brief-card">
+      <h4>📌 ${bEsc(b.title || 'เบิร์ฟก่อนเริ่ม')}</h4>
+      <p class="brief-lead">${bEsc(b.lead || '')}</p>
+      <button class="brief-toggle" onclick="toggleBriefing(this)">ⓘ ${bEsc(b.hint_label || 'กฎหมายที่เกี่ยวข้อง — กดดูก่อนเริ่ม')}</button>
+      <div class="brief-hide">
+        ${pts}
+        ${b.hint ? `<div class="brief-hint">${bEsc(b.hint)}</div>` : ''}
+      </div>
+    </div>`;
+}
+window.toggleBriefing = function(btn){
+  const panel = btn.nextElementSibling;
+  panel.classList.toggle('open');
+  btn.innerHTML = panel.classList.contains('open') ? 'ⓘ ซ่อนกฎหมาย' : 'ⓘ แสดงกฎหมายที่เกี่ยวข้อง';
+};
+
 function renderProgress(){
   return `<div class="play-progress">${flow.map((_,i)=>{
     let cls = '';
@@ -111,6 +143,7 @@ function renderStep(){
       <div class="play-card">
         <div class="play-step-head"><div class="play-step-num">📋</div><div class="play-step-title">${esc(step.title)} — ${esc(C.meta.title)}</div></div>
         <p style="font-size:1.02rem;line-height:1.85;color:var(--ink-soft)">${esc(ct.brief || '')}</p>
+        ${(ct.briefing ? renderBriefing(ct.briefing) : '')}
         <p style="font-size:.9rem;color:var(--ink-faint);margin-top:12px">⏱ ใช้เวลาเพียงไม่กี่นาที — ใช้ข้อมูลชุดเดียวกับที่คุณเพิ่งอ่าน</p>
         <button class="play-next" onclick="stepIdx++; renderStep()">เริ่ม ▶</button>
       </div>`;
