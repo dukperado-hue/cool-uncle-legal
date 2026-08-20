@@ -1486,5 +1486,65 @@
   "score": 89,
   "release": "WARN",
   "has_video": false
+ },
+ "news-case-khdii-payarakha-2453.html": {
+  "grade": "A",
+  "score": 90,
+  "release": "WARN",
+  "has_video": false
+ },
+ "news-case-khdii-nokkaei-2419.html": {
+  "grade": "A",
+  "score": 89,
+  "release": "WARN",
+  "has_video": false
+ },
+ "news-case-khdii-amdaeng-yu.html": {
+  "grade": "A",
+  "score": 88,
+  "release": "WARN",
+  "has_video": false
+ },
+ "news-case-khdii-phrapreecha-prachin-2421.html": {
+  "grade": "A",
+  "score": 89,
+  "release": "WARN",
+  "has_video": false
+ },
+ "news-case-khdii-phrayodmueangkwang-2436.html": {
+  "grade": "A",
+  "score": 90,
+  "release": "WARN",
+  "has_video": false
+ },
+ "news-case-khdii-kusar-kulab-2436.html": {
+  "grade": "A",
+  "score": 89,
+  "release": "WARN",
+  "has_video": false
+ },
+ "news-case-khdii-phra-nang-reualom-2423.html": {
+  "grade": "A",
+  "score": 90,
+  "release": "WARN",
+  "has_video": false
+ },
+ "news-case-khdii-aiauaom-okroy-2414.html": {
+  "grade": "A",
+  "score": 88,
+  "release": "WARN",
+  "has_video": false
+ },
+ "news-case-khdii-nginthplom-2446.html": {
+  "grade": "A",
+  "score": 90,
+  "release": "WARN",
+  "has_video": false
+ },
+ "news-case-khdii-ramrit-mueang-trat-2445.html": {
+  "grade": "A",
+  "score": 88,
+  "release": "WARN",
+  "has_video": false
  }
 }

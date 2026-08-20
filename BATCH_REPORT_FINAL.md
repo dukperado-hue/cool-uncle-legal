@@ -95,3 +95,22 @@
 **แหล่งอ้างอิงหลัก:** วิกิพีเดียไทย (พระยาวิไชเยนทร์/ขุนวรวงศาธิราช/สมเด็จพระบรมไตรโลกนาถ), กรมศิลปากร (finearts.go.th), มูลนิธิพระราชวังเดิม
 
 **สถานะ: READY_FOR_REVIEW** — รอ publication decision; historical cases ใช้ storytelling + evidence-based ตามข้อตกลงกับผู้ใช้
+
+## BATCH 5 — คดยุคร.5 (พ.ศ. 2411–2453) — 10 คดี (20 Aug 2026)
+| คดี | Slug | Grade | Score | ปี |
+|---|---|---|---|---|
+| คดีพญาระกา (2453) — ละครหมิ่นประมาทที่สั่นสะเทือนกระทรวงยุติธรรม | news-case-khdii-payarakha-2453 | A | 90 | 2453 |
+| คดีหนูไก๋ (2419) — ฆ่าภรรยาตัดศพอำพราง | news-case-khdii-nokkaei-2419 | A | 89 | 2419 |
+| คดีอำแดงอยู่ — คดีทาสร.5 | news-case-khdii-amdaeng-yu | A | 88 | ร.5 |
+| คดีพระปรีชากลการ (2421) — ยักยอกพระราชทรัพย์ ตายเพราะได้เมียฝรั่ง | news-case-khdii-phrapreecha-prachin-2421 | A | 89 | 2421 |
+| คดีพระยอดเมืองขวาง (2436) — คดีเสียดินแดนฝั่งซ้ายโขง ร.ศ.112 | news-case-khdii-phrayodmueangkwang-2436 | A | 90 | 2436 |
+| คดีก.ศ.ร. กุหลาบ (2436) — ดูหมิ่นร.5 | news-case-khdii-kusar-kulab-2436 | A | 89 | 2436 |
+| คดีพระนางเรือล่ม (2423) — เรือพระประทียบจม 31 พ.ค. 2423 | news-case-khdii-phra-nang-reualom-2423 | A | 90 | 2423 |
+| คดีอ้ายอ่วม อกโรย (2414) — ฆ่าร.5 | news-case-khdii-aiauaom-okroy-2414 | A | 88 | 2414 |
+| คดีธนบัตรปลอม (2446) — กรมหมื่นพงษาดิศรมหิป + นายเพ่ง | news-case-khdii-nginthplom-2446 | A | 90 | 2446 |
+| คดีหลวงรามฤทธิ์รงค์ (ร.ศ.121/2445) — ข่มขืนอำแดงเจียม เมืองตราด | news-case-khdii-ramrit-mueang-trat-2445 | A | 88 | ร.ศ.121 |
+**แนวทางการประมวล:** cat="criminal", a_cat_label="คดยุคโบราณ", release=WARN| (external_law + video pending), ไม่มีการ apply กฎหมายปัจจุบัน — lessons เชื่อม (connect) กับหลักสมัยใหม่เท่านั้น (extraterritoriality, due process, rule of law), provisions ทั้งหมด status="external_law"
+**ความไม่ตรงกันของแหล่งข้อมูลที่บันทึกไว้:** คดีธนบัตรปลอม (พระองค์เจ้าไชยานุชิต vs พระองค์เจ้าไชยันต์มงคล — ใช้พระนามที่ถูก), คดีหลวงรามฤทธิ์รงค์ (ร.ศ.121 vs 2436 — ใช้ ร.ศ.121 ตามเอกสาร หจช. ร.5 ย.13.3/17)
+**ยอดรวมหลัง batch 5:** Grade A = 194 (จาก 184 + 10), A_REVIEW = 4, B = 5, C = 55; news-index bumped ?v=72; TODO_VIDEOS.md เพิ่ม 10 รายการ
+**แหล่งอ้างอิงหลัก:** โดม ไกรปกรณ์ "การสืบสวนอาชญากรรมแบบตะวันตกในสยามสมัยรัชกาลที่ 5-6" วารสารศิลปศาสตร์ SWU ปีที่ 19 (2559) น. 72-88; silpa-mag article_50601, article_50868, article_62764; thepeople.co/read/43864; เอกสาร หจช. ร.5 ย.13.3/17; จิรวัฒน์ แสงทอง (2546) วิทยานิพนธ์ จุฬาฯ
+**สถานะ: READY_FOR_REVIEW** — รอ publication decision; historical cases ใช้ storytelling + evidence-based ตามข้อตกลงกับผู้ใช้

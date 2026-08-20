@@ -51,3 +51,14 @@ news-case-khdii-kamnan-talad-ayutthaya.html | คดีกำนันตลา�
 | news-case-khdii-warawongsa-2091.html | คดีขุนวรวงศาธิราช (2091) — ผู้เฝ้าหอพระที่ก้าวขึ้นนั่งบัลลังก์ | ไม่มีคลิปวิดีโอภาษาไทยที่เกี่ยวข้องโดยตรง ค้นไม่เจอ |
 | news-case-khdii-mondeeban-2001.html | กฎมณเฑียรบาล พ.ศ. 2001 — กฎหมายที่เขียนเพื่อรักษาพระราชา | เป็นกรณีกฎหมาย/โบราณคดี ไม่มีคลิปวิดีโอ |
 | news-case-khdii-cheliang-2003.html | คดีเจ้าเมืองเชลียง 'ทรยศต่อราชอาณาจักร' พ.ศ. 2003 | เป็นกรณีโบราณคดี ไม่มีคลิปวิดีโอ |
+
+| news-case-khdii-payarakha-2453 | คดีพญาระกา | หาคลิปภาษาไทยไม่มี
+| news-case-khdii-nokkaei-2419 | คดีหนูไก๋ | หาคลิปภาษาไทยไม่มี
+| news-case-khdii-amdaeng-yu | คดีอำแดงอยู่ | หาคลิปภาษาไทยไม่มี
+| news-case-khdii-phrapreecha-prachin-2421 | คดีพระปรีชากลการ | หาคลิปภาษาไทยไม่มี
+| news-case-khdii-phrayodmueangkwang-2436 | คดีพระยอดเมืองขวาง | หาคลิปภาษาไทยไม่มี
+| news-case-khdii-kusar-kulab-2436 | คดีก.ศ.ร. กุหลาบ | หาคลิปภาษาไทยไม่มี
+| news-case-khdii-phra-nang-reualom-2423 | คดีพระนางเรือล่ม | หาคลิปภาษาไทยไม่มี
+| news-case-khdii-aiauaom-okroy-2414 | คดีอ้ายอ่วม อกโรย | หาคลิปภาษาไทยไม่มี
+| news-case-khdii-nginthplom-2446 | คดีธนบัตรปลอม 2446 | หาคลิปภาษาไทยไม่มี
+| news-case-khdii-ramrit-mueang-trat-2445 | คดีหลวงรามฤทธิ์รงค์ | หาคลิปภาษาไทยไม่มี
