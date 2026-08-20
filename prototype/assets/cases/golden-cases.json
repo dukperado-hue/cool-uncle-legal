@@ -70,6 +70,25 @@
       ]
     },
     {
+      "id": "wisut-2544",
+      "title": "จำเลย (สูตินารีแพทย์) — คดีฆาตกรรมภรรยาหั่นศพอำพราง (2544)",
+      "cat": "คดีอาญา",
+      "has_video": true,
+      "rank": {
+        "grade": null,
+        "score": null,
+        "s_verified": false
+      },
+      "visibility": {
+        "public": false,
+        "public_reason": "deident_required_and_needs_review"
+      },
+      "modes": [
+        "read",
+        "play"
+      ]
+    },
+    {
       "id": "stark-auditor-2566",
       "title": "ความรับผิดของผู้สอบบัญชีในการรับรองงบการเงิน STARK (2566)",
       "cat": "คดีองค์กรธุรกิจ",
@@ -86,6 +105,69 @@
       "modes": [
         "read"
       ]
+    },
+    {
+      "id": "blue-diamond-1-phetcha-2532",
+      "title": "เพชรซาอู ภาค 1 — โจรกรรมเครื่องเพชรจากพระราชวงศ์ (2532)",
+      "cat": "คดีอาญา · การทูต",
+      "has_video": true,
+      "rank": {
+        "grade": "A",
+        "score": 91,
+        "s_verified": false
+      },
+      "visibility": {
+        "public": false,
+        "public_reason": "deident_required_and_legacy_migration_review"
+      },
+      "modes": [
+        "read",
+        "play"
+      ],
+      "series_id": "blue-diamond",
+      "series_order": 1
+    },
+    {
+      "id": "blue-diamond-3-diplomats-2533",
+      "title": "เพชรซาอู ภาค 2 — อุมฆ่านักการทูตและนักธุรกิจซาอูดิอาระเบีย (2533)",
+      "cat": "คดีอาญา · การทูต",
+      "has_video": true,
+      "rank": {
+        "grade": "A",
+        "score": 91,
+        "s_verified": false
+      },
+      "visibility": {
+        "public": false,
+        "public_reason": "deident_required_and_legacy_migration_review"
+      },
+      "modes": [
+        "read",
+        "play"
+      ],
+      "series_id": "blue-diamond",
+      "series_order": 2
+    },
+    {
+      "id": "blue-diamond-2-sritananchai-2537",
+      "title": "เพชรซาอู ภาค 3 — อุมฆ่านางดาราวดีและด.ช.เสรี ศรีธนัญชัย (2537)",
+      "cat": "คดีอาญา · การทูต",
+      "has_video": true,
+      "rank": {
+        "grade": "A",
+        "score": 91,
+        "s_verified": false
+      },
+      "visibility": {
+        "public": false,
+        "public_reason": "deident_required_and_legacy_migration_review"
+      },
+      "modes": [
+        "read",
+        "play"
+      ],
+      "series_id": "blue-diamond",
+      "series_order": 3
     }
   ],
   "series_hubs": [
@@ -93,7 +175,9 @@
       "series_id": "blue-diamond",
       "series_title": "มหากาพย์เพชรซาอู — มรกตและโลหิต",
       "order": [
-        "um-kha-nak-kan-thut-phaekh-phet-saudi-2533"
+        "blue-diamond-1-phetcha-2532",
+        "blue-diamond-3-diplomats-2533",
+        "blue-diamond-2-sritananchai-2537"
       ]
     }
   ]

@@ -168,7 +168,12 @@ async function render(){
     }
     else if(s.key === 'legal_issues'){
       if(ct.issues && ct.issues.length){
-        ct.issues.forEach(i=> html += `<p class="para-split"><strong>${esc(i.title||i.q)}</strong><br>${esc(i.text||i.a||'')}</p>`);
+        ct.issues.forEach(i=>{
+          const q = i.title || i.q || i.question || '';
+          const a = i.text || i.a || i.anchor || '';
+          html += `<p class="para-split"><strong>${esc(q)}</strong></p>`;
+          if(a) html += `<p class="para-split" style="color:var(--ink-soft);margin-top:-8px">⚓ ${esc(a)}</p>`;
+        });
       } else {
         html += needsReviewBox(ct.note_to_agent_a || 'Agent A กรุณาเติมประเด็นกฎหมายจริงของคดี (เช่น ม.288, ม.199, การลดโทษ)');
       }
