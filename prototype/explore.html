@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explore — คลังคดีทั้งหมด | Cool Uncle ⚖ Legal Lab</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Explore — gated A-grade inventory (RULE 4, 5, 6)
+   DATABASE ≠ PUBLICATION: คดีทั้งหมดที่ public=false แสดงได้เฉพาะ metadata readiness —
+   ห้ามแสดงเนื้อหาคดีจนกว่าจะผ่าน gate */
+.page-head{padding:26px 0 8px}
+.page-head h1{font-family:'Noto Serif Thai',serif;font-size:1.75rem;font-weight:900;color:#1B2437;margin-bottom:6px}
+.page-head p{color:var(--ink-soft);font-size:1rem;line-height:1.75;max-width:860px}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:18px 0 8px}
+.stat-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--shadow)}
+.stat-box .sv{font-family:'Noto Serif Thai',serif;font-size:1.5rem;font-weight:900;color:var(--accent)}
+.stat-box .sl{font-size:.82rem;color:var(--ink-soft);line-height:1.5}
+.stat-box.gold .sv{color:var(--gold)}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 10px}
+.chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:.88rem;font-weight:600;color:var(--ink-soft);cursor:pointer;font-family:'Sarabun',sans-serif;transition:all .15s}
+.chip:hover{border-color:var(--gold)}
+.chip.on{background:#1B2437;color:#fff;border-color:#1B2437}
+.chip .n{font-weight:800;margin-left:4px}
+#inv-body{display:grid;grid-template-columns:1fr;gap:10px;margin:6px 0 30px}
+.inv-row{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid #E5E1D6;border-radius:12px;padding:14px 18px;text-decoration:none;color:inherit;transition:all .15s}
+.inv-row:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(34,40,58,.11);border-color:var(--gold)}
+.inv-rank{font-family:'Noto Serif Thai',serif;font-weight:900;color:var(--gold);min-width:42px;font-size:1.05rem}
+.inv-title{flex:1;min-width:0}
+.inv-title h3{font-family:'Noto Serif Thai',serif;font-size:1rem;font-weight:800;color:#1B2437;margin:0 0 3px;line-height:1.5}
+.inv-title .meta{font-size:.82rem;color:var(--ink-faint)}
+.meter{display:flex;align-items:center;gap:7px;min-width:210px}
+.meter-bar{flex:1;height:8px;background:#EFEAE0;border-radius:999px;overflow:hidden;min-width:60px}
+.meter-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#B08A3C,#2E4A7A)}
+.meter-lbl{font-size:.8rem;font-weight:700;color:var(--ink-soft);white-space:nowrap}
+.tag{font-size:.75rem;font-weight:700;border-radius:8px;padding:3px 9px;white-space:nowrap}
+.tag-blocked{background:#FBEAEA;color:#B23A3A}
+.tag-warn{background:#FDF6EC;color:#7A6220}
+.tag-video{background:#E6F4EC;color:#1E7A4F}
+.legend{background:#F3F0E7;border:1px solid #E5E1D6;border-radius:14px;padding:14px 18px;font-size:.88rem;color:#5A6072;line-height:1.7;margin:14px 0}
+.legend b{color:var(--ink)}
+@media(max-width:640px){.meter{min-width:auto;flex-basis:100%;order:3}.inv-row{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<div class="topbar mag">
+  <a class="tb-brand" href="news-index-v2.html"><img src="assets/capybara-64.webp" alt="" width="36" height="36">Cool Uncle <span style="color:#B08A3C">⚖</span> Legal Lab</a>
+  <span class="tb-sep">|</span>
+  <span>กฎหมายจากข่าวและคดีดัง</span>
+  <div class="topbar-right"><a class="topbar-pill" href="news-index-v2.html">← กลับหน้าแรก</a></div>
+</div>
+<div class="wrap">
+  <div class="page-head">
+    <h1>🔍 Explore — คลังคดีทั้งหมด (49 คดี A-grade)</h1>
+    <p>นี่คือ <b>readiness inventory</b> ของคดีเกรด A ที่คุณภาพผ่านเกณฑ์แล้ว แต่ยังอยู่หลัง <b>validation gate</b> (RULE 4) — แสดงเฉพาะ metadata ความพร้อม ยังไม่เปิดเนื้อหาคดีจนกว่าจะผ่าน de-identification (Agent A) และ judicial verification (Agent C)</p>
+  </div>
+
+  <div class="stat-row" id="stats"></div>
+
+  <div class="filter-row" id="filters">
+    <button class="chip on" data-f="all">ทั้งหมด</button>
+    <button class="chip" data-f="ready">🟢 ใกล้พร้อมเผยแพร่</button>
+    <button class="chip" data-f="judicial">🟡 มีข้อมูลศาลแล้ว</button>
+    <button class="chip" data-f="nojud">⚪ ยังไม่มีข้อมูลศาล</button>
+    <button class="chip" data-f="warn">⚠️ release = WARN</button>
+  </div>
+
+  <div class="legend">
+    📏 <b>บาร์ความพร้อม</b> คำนวณจาก heuristic: อ้างอิงคำวินิจฉัย/คำพิพากษา (judicial) · บันได 3 ศาล (verdict) · บทบัญญัติ (provisions) · คะแนนคุณภาพ (score) — <b>สูงสุดไม่ได้แปลว่าพร้อมเผยแพร่</b> ต้องผ่าน gate ของ Agent A และ C ก่อน (RULE 6: A ≠ S)<br>
+    🔒 Hidden is not deleted (RULE 5) — คดีที่ไม่พร้อม public ถูกตั้งค่า visibility.public = false <b>ไม่ได้ถูกลบ</b>
+  </div>
+
+  <div id="inv-body"></div>
+</div>
+<footer>
+  Cool Uncle ⚖ Legal Lab — Readiness inventory (metadata only) · เนื้อหาคดียังอยู่หลัง validation gate (RULE 4, 5, 6) · Better 10 excellent cases than 300 inconsistent cases
+</footer>
+<script>
+const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+let INV = null;
+let FILTER = 'all';
+
+function readiness(r) {
+  // heuristic 0-100: judicial citations 40, verdict ladder 25, provisions 20, score 15
+  return Math.round(
+    Math.min(r.judicial, 6) / 6 * 40 +
+    Math.min(r.verdict, 8) / 8 * 25 +
+    Math.min(r.provisions, 12) / 12 * 20 +
+    r.score / 100 * 15
+  );
+}
+
+function statsHTML() {
+  const s = INV._meta.stats;
+  return `
+  <div class="stat-box gold"><div class="sv">${INV._meta.total}</div><div class="sl">คดี A-grade ในคลัง</div></div>
+  <div class="stat-box"><div class="sv">${s.near}</div><div class="sl">ใกล้พร้อม (มีข้อมูลศาลแล้ว)</div></div>
+  <div class="stat-box"><div class="sv">${s.blocked_no_judicial}</div><div class="sl">รอข้อมูลศาล (judicial)</div></div>
+  <div class="stat-box"><div class="sv">${s.with_video}</div><div class="sl">มีวิดีโอนิทานคดี</div></div>
+  <div class="stat-box"><div class="sv">⚠ ${s.released_warn}</div><div class="sl">release = WARN</div></div>
+  <div class="stat-box"><div class="sv">🔒 ${s.released_blocked}</div><div class="sl">release = BLOCKED</div></div>`;
+}
+
+function rowHTML(r, i) {
+  const rd = readiness(r);
+  const tagStatus = r.release === 'WARN'
+    ? '<span class="tag tag-warn">⚠ WARN</span>'
+    : '<span class="tag tag-blocked">🔒 BLOCKED</span>';
+  const tagVideo = r.has_video ? ' <span class="tag tag-video">🎬 วิดีโอ</span>' : '';
+  return `<a class="inv-row" href="read-case.html?id=${esc(r.id)}">
+    <span class="inv-rank">${String(i + 1).padStart(2, '0')}</span>
+    <span class="inv-title">
+      <h3>${esc(r.title)}</h3>
+      <span class="meta">score ${r.score} · judicial ${r.judicial} · verdict ${r.verdict} · พรอวิชัน ${r.provisions}${tagVideo}</span>
+    </span>
+    <span class="meter">
+      <span class="meter-bar"><span class="meter-fill" style="width:${rd}%"></span></span>
+      <span class="meter-lbl">${rd}%</span>
+    </span>
+    ${tagStatus}
+  </a>`;
+}
+
+function render() {
+  document.getElementById('stats').innerHTML = statsHTML();
+  let rows = INV._rows;
+  if (FILTER === 'ready') rows = rows.filter(r => r.judicial > 0);
+  else if (FILTER === 'judicial') rows = rows.filter(r => r.judicial >= 3);
+  else if (FILTER === 'nojud') rows = rows.filter(r => r.judicial === 0);
+  else if (FILTER === 'warn') rows = rows.filter(r => r.release === 'WARN');
+  document.getElementById('inv-body').innerHTML = rows.length
+    ? rows.map((r, i) => rowHTML(r, i)).join('')
+    : '<div class="db-note">ไม่มีคดีในกลุ่มนี้</div>';
+}
+
+document.querySelectorAll('#filters .chip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#filters .chip').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    FILTER = btn.dataset.f;
+    render();
+  });
+});
+
+fetch('assets/cases/explore-inventory.json')
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(d => { INV = d; render(); })
+  .catch(e => {
+    document.getElementById('inv-body').innerHTML =
+      `<div class="db-note">⚠ โหลด inventory ล้มเหลว: ${esc(String(e))}<br>ตรวจสอบ path assets/cases/explore-inventory.json</div>`;
+  });
+</script>
+</body>
+</html>
