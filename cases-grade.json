@@ -186,27 +186,27 @@
   "has_video": false
  },
  "news-case-ephikth-nkaar-kochndthiidinthabch-nekaaalibng-2562.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A_REVIEW",
+  "score": 82,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-ephikth-nkh-bayyatith-ngthinthiikhadt-kdhmaayphangemuue-ng-2560.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 86,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-ephikth-nkhamsangyubsphaa-ngkhkaarbrihaarswntambl-2558.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A_REVIEW",
+  "score": 81,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-ephikth-nsampthaanrangnknaangae-n-2561.html": {
-  "grade": "B",
-  "score": 69,
-  "release": "BLOCKED",
+  "grade": "A_REVIEW",
+  "score": 80,
+  "release": "WARN",
   "has_video": false
  },
  "news-case-ephlingaihmorngngaantuktaaekhed-r-nkhrpthm-2536.html": {
@@ -415,7 +415,7 @@
  },
  "news-case-khdii-s-t-th-hying-thamraaythhaarrabaich-2565.html": {
   "grade": "A",
-  "score": 87,
+  "score": 86,
   "release": "WARN",
   "has_video": false
  },
@@ -475,7 +475,7 @@
  },
  "news-case-khdii-umkhaaesrsthiichaawaithwan-2549.html": {
   "grade": "A",
-  "score": 87,
+  "score": 85,
   "release": "WARN",
   "has_video": false
  },
@@ -667,7 +667,7 @@
  },
  "news-case-khdiiedk-14-khomyrth-2566.html": {
   "grade": "A",
-  "score": 86,
+  "score": 87,
   "release": "WARN",
   "has_video": false
  },
@@ -750,8 +750,8 @@
   "has_video": false
  },
  "news-case-khdiif-ngetnthrthmuue-s-ng-krniikhaayrthy-maemw-2566.html": {
-  "grade": "A",
-  "score": 85,
+  "grade": "A_REVIEW",
+  "score": 83,
   "release": "WARN",
   "has_video": false
  },

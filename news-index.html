@@ -888,11 +888,11 @@
 var NEWS_DATA = [];
 var __ND_READY = [];
 function onNewsDataReady(fn){ __ND_READY.push(fn); }
-fetch("/assets/cases-criminal-a.json?v=66").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
-fetch("/assets/cases-civil-a.json?v=66").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
-fetch("/assets/cases-admin-a.json?v=66").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
-fetch("/assets/cases-const-a.json?v=66").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
-fetch("/assets/cases-corporate-a.json?v=66").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
+fetch("/assets/cases-criminal-a.json?v=67").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
+fetch("/assets/cases-civil-a.json?v=67").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
+fetch("/assets/cases-admin-a.json?v=67").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
+fetch("/assets/cases-const-a.json?v=67").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
+fetch("/assets/cases-corporate-a.json?v=67").then(function(r){return r.json();}).then(function(items){items.forEach(function(it){NEWS_DATA.push(it);});}).catch(function(){});
 (function(){var iv=setInterval(function(){if(NEWS_DATA.length>=5 || __ND_READY.length===0){clearInterval(iv);__ND_READY.forEach(function(fn){fn();});}},300);setTimeout(function(){clearInterval(iv);__ND_READY.forEach(function(fn){fn();});},6000);})();
 
 function rollDice() {
