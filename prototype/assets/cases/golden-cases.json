@@ -168,6 +168,27 @@
       ],
       "series_id": "blue-diamond",
       "series_order": 3
+    },
+    {
+      "id": "shayamala-2536",
+      "title": "คดีฆ่าตกรรม น.ส.ศยามล ลาภก่อเกียรติ — คดีจ้างวานฆ่าภรรยา (2536)",
+      "cat": "คดีอาญา",
+      "has_video": true,
+      "rank": {
+        "grade": "S",
+        "score": 96,
+        "s_verified": true,
+        "judicial_case": "ฎีกา 5244/2539",
+        "verified_by": "Agent C — Batch 3a (primary source: Wikisource)"
+      },
+      "visibility": {
+        "public": false,
+        "public_reason": "agent_a_approval_required"
+      },
+      "modes": [
+        "read",
+        "play"
+      ]
     }
   ],
   "series_hubs": [
