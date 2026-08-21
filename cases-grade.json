@@ -2406,5 +2406,35 @@
   "news-case-khdii-amdaeng-pom-r1-1804.html": "A",
   "news-case-khdii-phra-yot-muang-khwang-2436.html": "A",
   "news-case-khdii-fake-banknote-r5-2446.html": "A",
-  "news-case-khdii-nang-thong-luean-2452.html": "A"
+  "news-case-khdii-nang-thong-luean-2452.html": "A",
+  "news-case-khdii-ao-luek-massacre-2560.html": {
+    "grade": "A",
+    "score": 95,
+    "release": "PASS",
+    "has_video": true
+  },
+  "news-case-khdii-nong-ploy-murder-2557.html": {
+    "grade": "A",
+    "score": 95,
+    "release": "PASS",
+    "has_video": true
+  },
+  "news-case-khdii-saraburi-gang-rape-2561.html": {
+    "grade": "A",
+    "score": 95,
+    "release": "PASS",
+    "has_video": true
+  },
+  "news-case-khdii-lallabel-death-2562.html": {
+    "grade": "A",
+    "score": 95,
+    "release": "PASS",
+    "has_video": true
+  },
+  "news-case-khdii-train-rape-murder-2557.html": {
+    "grade": "A",
+    "score": 95,
+    "release": "PASS",
+    "has_video": true
+  }
 }
