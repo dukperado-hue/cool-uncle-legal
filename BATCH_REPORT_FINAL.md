@@ -56,3 +56,11 @@
 
 ---
 (ประวัติ Batch 1-16 ถูกย่อไว้ใน commit history เพื่อความกระชับ)
+
+### Batch 20 — Political & Structural Reform (DEPLOYED ✅)
+- **RS 103 Petition (2427)**: A/92, 0 BLOCK, First constitutional monarchy request.
+- **RS 130 Rebellion (2455)**: A/90, 0 BLOCK, First revolutionary group attempt.
+- **Abolition of Slavery (2448)**: A/93, 0 BLOCK, Transformation of social structure.
+- **Penal Code RS 127 (2451)**: A/91, 0 BLOCK, First modern codification.
+- **A total**: 289 (A=285+4)
+- **Commit**: a29b9ae
