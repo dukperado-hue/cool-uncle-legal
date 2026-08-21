@@ -244,3 +244,17 @@
   3. charoen-wat-akson-2547 (เจริญ วัดอักษร)
   4. saengchai-sunthornwat-2539 (แสงชัย สุนทรวัฒน์)
   5. praman-chansue-assassination-plot-2536 (ประมาณ ชันซื่อ)
+
+### Batch 46 — DEPLOYED ✅ (Date: 2026-08-21)
+- **shipping-moo-witness-2546**: คดีชิปปิ้งหมู: จุดเปลี่ยนกฎหมายคุ้มครองพยาน
+- **chuwong-forensic-2558**: คดีเสี่ยชูวงษ์: นิติวิทยาศาสตร์พิสูจน์ฆาตกรรมอำพราง
+- **ekayuth-abduction-2556**: คดีเอกยุทธ อัญชันบุตร: ปมสังหารและทฤษฎีสมคบคิด
+- **judge-brother-abduction-2563**: คดีอุ้มฆ่าพี่ชายผู้พิพากษา: การแทรกแซงกระบวนการยุติธรรม
+- **x-jakkrit-hired-murder-2556**: คดีเอ็กซ์ จักรกฤษณ์: ปมจ้างวานฆ่าในครอบครัว
+
+**Status:**
+- Built with rewrite_v21.py
+- Passed checkcase2.py (paras <= 350)
+- Full validation: 0 BLOCK
+- Deployed to main and verified live (HTTP 200)
+- Synchronized to news-unreleased-a.html index
