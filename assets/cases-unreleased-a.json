@@ -1,5 +1,15 @@
 [
     {
+        "slug": "news-case-beagle-channel-arbitration-argentina-chile.html",
+        "title": "Beagle Channel Arbitration (Argentina/Chile) — ค.ศ. 1977 และสนธิสัญญา 1984",
+        "cat_tag": "คดทั่วไป",
+        "year": "",
+        "norm_year": 0,
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-ekhruue-ngbinelaadaaae-r-ethiiywbinthii-004-tkthiisuphrrnburii-25.html",
         "title": "เครื่องบินเลาด้าแอร์ เที่ยวบินที่ 004 ตกที่สุพรรณบุรี (2534)",
         "cat_tag": "คดทั่วไป",
@@ -122,6 +132,16 @@
     {
         "slug": "news-case-khdiitrwcchs-b-ph-r-b-prak-braththrrmnuuywaadwykaaraidmaachueng-s-w-25.html",
         "title": "ตรวจสอบ พ.ร.บ.ประกอบรัฐธรรมนูญว่าด้วยการได้มาซึ่ง ส.ว.",
+        "cat_tag": "คดทั่วไป",
+        "year": "",
+        "norm_year": 0,
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-the-lotus-case-france-v-turkey.html",
+        "title": "คดี The Lotus — ฝรั่งเศส vs. ตุรกี (PCIJ, 1927)",
         "cat_tag": "คดทั่วไป",
         "year": "",
         "norm_year": 0,
@@ -3162,6 +3182,16 @@
     {
         "slug": "news-case-khdii-marriage-equality-landmark-2567.html",
         "title": "คดีสมรสเท่าเทียม: บรรทัดฐานประวัติศาสตร์เพื่อความเท่าเทียมทางเพศ",
+        "cat_tag": "คดทั่วไป",
+        "year": "พ.ศ. 2567",
+        "norm_year": 2567,
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-itv-share-landmark-2567.html",
+        "title": "คดีหุ้นไอทีวี: นิยามหุ้นสื่อและคุณสมบัติทางการเมือง",
         "cat_tag": "คดทั่วไป",
         "year": "พ.ศ. 2567",
         "norm_year": 2567,
