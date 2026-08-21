@@ -64,3 +64,13 @@
 - **Penal Code RS 127 (2451)**: A/91, 0 BLOCK, First modern codification.
 - **A total**: 289 (A=285+4)
 - **Commit**: a29b9ae
+
+### Batch 21a: Modern Religious & Temple Cases (Sub-batch 1)
+- **Yantra (2537)**: Modern monk discipline scandal, legal analysis on Sangha Act vs Criminal Code. (Grade A/90)
+- **Phawana Phuttho (2538)**: Criminal exploitation in religious context, 50-year maximum sentence analysis. (Grade A/92)
+- **Wat Sam Phraya (2561)**: Money laundering in religious education funds, appellate court acquittal analysis. (Grade A/88)
+- **Wat Saket (2561)**: Temple fund embezzlement and anti-money laundering enforcement. (Grade A/88)
+- **Dhammakaya (2559)**: Complex financial crime, Section 44 enforcement, and receiving stolen property. (Grade A/91)
+
+**Status:** Deployed 5/20 religious cases.
+**A total:** 294 (New: 5)
