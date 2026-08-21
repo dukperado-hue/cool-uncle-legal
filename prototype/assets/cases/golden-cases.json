@@ -1138,6 +1138,552 @@
     "read",
     "play"
    ]
+  },
+  {
+   "id": "marriage-equality-landmark-2567",
+   "title": "สมรสเท่าเทียม (2567)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "VERIFIED_S",
+    "score": 85,
+    "s_verified": true,
+    "judicial_case": "คำวินิจฉัยศาลรัฐธรรมนูญที่ 20/2564 และ พ.ร.บ.สมรสเท่าเทียม 2567",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "adultery-damages-landmark-2565",
+   "title": "ฟ้องชู้เรียกค่าทดแทน (2565)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "VERIFIED_S",
+    "score": 85,
+    "s_verified": true,
+    "judicial_case": "คำพิพากษาศาลฎีกาที่ 1308/2565",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "living-will-right-to-die-2558",
+   "title": "สิทธิการตายอย่างสงบ (Living Will)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "domestic-violence-protection-2562",
+   "title": "พ.ร.บ.คุ้มครองผู้ถูกกระทำด้วยความรุนแรงในครอบครัว",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "illegitimate-child-inheritance-2563",
+   "title": "สิทธิของบุตรนอกสมรส (2563)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "VERIFIED_S",
+    "score": 85,
+    "s_verified": true,
+    "judicial_case": "คำพิพากษาศาลฎีกาที่ 1318/2563",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "rs-130-rebellion-2454",
+   "title": "กบฏ ร.ศ. 130 (2454)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "boworadet-rebellion-2476",
+   "title": "กบฏบวรเดช (2476)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "rama-8-forensic-landmark-2489",
+   "title": "คดีสวรรคต ร.8 (นิติวิทยาศาสตร์)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "palace-rebellion-2492",
+   "title": "กบฏวังหลวง (2492)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "peace-rebellion-2495",
+   "title": "กบฏสันติภาพ (2495)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "tee-yai-legend-2524",
+   "title": "ตี๋ใหญ่ (จอมโจรระดับตำนาน)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "si-quey-human-rights-2563",
+   "title": "ซีอุย (สิทธิมนุษยชนและการคืนศักดิ์ศรี)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "four-ministers-murder-2492",
+   "title": "สังหาร 4 รัฐมนตรี (2492)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "young-turk-rebellion-2524",
+   "title": "กบฏยังเติร์ก (2524)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "sherry-ann-duncan-scapegoat-2529",
+   "title": "คดีเชอรี่ แอน ดันแคน (2529)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "VERIFIED_S",
+    "score": 85,
+    "s_verified": true,
+    "judicial_case": "คำพิพากษาศาลฎีกาที่ 3530/2536",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "nualchawee-legend-2502",
+   "title": "คดีนวลฉวี (2502)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "syamol-forensic-2536",
+   "title": "คดีศยามล (2536)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "VERIFIED_S",
+    "score": 85,
+    "s_verified": true,
+    "judicial_case": "คำพิพากษาศาลฎีกาที่ 3968/2537",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "hangthong-mystery-2542",
+   "title": "คดีห้างทอง ธรรมวัฒนะ (2542)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "VERIFIED_S",
+    "score": 85,
+    "s_verified": true,
+    "judicial_case": "คำพิพากษาศาลฎีกาที่ 4333/2553",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "serm-sakonrat-41",
+   "title": "คดีเสริม สาครราษฎร์ (2541)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "VERIFIED_S",
+    "score": 85,
+    "s_verified": true,
+    "judicial_case": "คำพิพากษาศาลฎีกาที่ 6000/2546",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "dr-supat-skeleton-2555",
+   "title": "คดีหมอสุพัฒน์ (2555)",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "somchai-neelapaijit-2547",
+   "title": "คดีทนายสมชาย นีละไพจิตร (2547)",
+   "cat": "คดีเด่น",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "nenkham-2556",
+   "title": "คดีเณรคำ (หลวงปู่เณรคำ)",
+   "cat": "คดีเด่น",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "nikorn-2533",
+   "title": "คดีพระนิกร (2533)",
+   "cat": "คดีเด่น",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "yantra-2537",
+   "title": "คดีพระยันตระ (2537)",
+   "cat": "คดีเด่น",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "phra-prom-chedi-2561",
+   "title": "คดีเงินทอนวัด (พระพรหมสิทธิ)",
+   "cat": "คดีเด่น",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "phra-prom-dilok-2561",
+   "title": "คดีเงินทอนวัด (พระพรหมสิทธิ)",
+   "cat": "คดีเด่น",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "klong-dan-corruption-2545",
+   "title": "คดีทุจริตคลองด่าน (2545)",
+   "cat": "คดีเศรษฐกิจ",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "rice-pledging-landmark-2560",
+   "title": "คดีจำนำข้าว (2560)",
+   "cat": "คดีเศรษฐกิจ",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
   }
  ],
  "series_hubs": [
@@ -1148,6 +1694,49 @@
     "blue-diamond-1-phetcha-2532",
     "blue-diamond-3-diplomats-2533",
     "blue-diamond-2-sritananchai-2537"
+   ]
+  },
+  {
+   "series_id": "forced-disappearance",
+   "series_title": "ซีรีส์: ความยุติธรรมที่หายไป (Forced Disappearances)",
+   "order": [
+    "somchai-neelapaijit-2547",
+    "dr-supat-skeleton-2555"
+   ]
+  },
+  {
+   "series_id": "monk-scandals",
+   "series_title": "ซีรีส์: ผ้าเหลืองร้อน (Monk Scandals)",
+   "order": [
+    "nenkham-2556",
+    "nikorn-2533",
+    "yantra-2537",
+    "phra-prom-chedi-2561",
+    "phra-prom-dilok-2561"
+   ]
+  },
+  {
+   "series_id": "thai-rebellions",
+   "series_title": "ซีรีส์: กบฏและการเมืองไทย (Thai Rebellions)",
+   "order": [
+    "rs-130-rebellion-2454",
+    "boworadet-rebellion-2476",
+    "palace-rebellion-2492",
+    "young-turk-rebellion-2524"
+   ]
+  },
+  {
+   "series_id": "economic-crimes",
+   "series_title": "ซีรีส์: ทุจริตและคดีเศรษฐกิจครั้งใหญ่ (Economic Crimes & Corruption)",
+   "order": [
+    "forex3d-2564",
+    "zipmex-2565",
+    "klong-dan-corruption-2545",
+    "rice-pledging-landmark-2560",
+    "khdii-phum-saat-embezzlement-2440",
+    "khdii-ministry-agri-embezzlement-2416",
+    "khdii-khun-yuam-logging-2445",
+    "khdii-book-club-scandal-2449"
    ]
   }
  ]

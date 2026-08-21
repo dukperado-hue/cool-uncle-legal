@@ -111,3 +111,167 @@
 - All verified live (HTTP 200) at coolunclelab.com.
 - `cases-grade.json` updated.
 - Total Grade A cases: ~391.
+
+### Batch 37 — DEPLOYED ✅ (2026-08-21 11:09)
+**Theme:** Crime & Forensic Science Landmarks
+**Cases (5 Grade A):**
+- news-case-khdii-nualchawee-legend-2502.html (คดีนวลฉวี)
+- news-case-khdii-syamol-forensic-2536.html (คดีศยามล)
+- news-case-khdii-hangthong-mystery-2542.html (คดีห้างทอง ธรรมวัฒนะ)
+- news-case-khdii-serm-sakonrat-41.html (คดีเสริม สาครราษฎร์)
+- news-case-khdii-dr-supat-skeleton-2555.html (คดีหมอสุพัฒน์)
+
+**Status:**
+- All 5 pages built to Grade A standard.
+- **Special Focus:** Forensic science evolution (DNA, Re-autopsy, Forensic Anthropology, and legal interpretation of 'Love').
+- All verified live (HTTP 200) at coolunclelab.com.
+- `cases-grade.json` updated.
+- Total Grade A cases: ~396.
+
+### Batch 38 — DEPLOYED ✅ (2026-08-21)
+- **Focus:** Historical Cases (R1-R8) & Legal History
+- **Cases:**
+  - amdaeng-pom-r1-1804 (คดีอำแดงป้อม - กำเนิดกฎหมายตราสามดวง)
+  - phra-yot-muang-khwang-2436 (คดีพระยอดเมืองขวาง - วิกฤตการณ์ ร.ศ. 112)
+  - ai-uam-ok-roi-2414 (คดีอ้ายอ่วม อกโรย - การลงทัณฑ์บั่นสองท่อน)
+  - fake-banknote-r5-2446 (คดีธนบัตรปลอมสมัย ร.5)
+  - nang-thong-luean-2452 (คดีนางทองเลื่อน - ประหารหญิงรายสุดท้ายด้วยดาบ)
+- **Status:** 5 cases built, validated, and verified live (HTTP 200).
+- **Quality:** Grade A standard met (8 sections, paras <= 350).
+
+## Batch 39: Modern Crime & Social Safety Landmarks
+**Date:** 2026-08-21
+**Status:** DEPLOYED ✅
+**Cases Processed:** 5
+**Grade A Upgrades:** 5
+**Key Highlights:**
+- **ao-luek-massacre-2560:** คดี 8 ทมิฬ อ่าวลึก - มหากาพย์ฆาตกรรมยกครัวและโฉนดเลือด
+- **nong-ploy-murder-2557:** คดีน้องพลอย พลอยนรินทร์ - 3 ปีที่หายตัวสู่อุ้มฆ่าเผานั่งยางโดยฝีมือทหาร
+- **saraburi-gang-rape-2561:** คดี 7 โจ๋สระบุรี - การรุมโทรมเด็กหญิง 11 ปี และบททดสอบความยุติธรรมท้องถิ่น
+- **lallabel-death-2562:** คดีลัลลาเบล - โศกนาฏกรรมพริตตี้สาวและบรรทัดฐานความปลอดภัยงานเอนเตอร์เทน
+- **train-rape-murder-2557:** คดีไอ้เกม ฆ่าข่มขืนบนรถไฟ - จุดเปลี่ยนความปลอดภัยสาธารณะและเสียงเรียกประหาร
+
+**Quality Metrics:**
+- All 5 cases achieved Grade A standard (score 95).
+- 8 sections implemented, paragraphs <= 350 chars.
+- Video URLs and legal provisions confirmed.
+
+## Batch 40: Justice & Human Rights Landmarks
+**Date:** 2026-08-21
+**Status:** DEPLOYED ✅
+**Cases Processed:** 5
+**Grade A Upgrades:** 5
+**Key Highlights:**
+- **khanakorn-pianchana-justice-2562:** คดีคณากร เพียรชนะ - โศกนาฏกรรมผู้พิพากษาเพื่ออิสรภาพตุลาการ
+- **phrom-phiram-tragedy-2520:** คดีคืนบาปพรหมพิราม - โศกนาฏกรรมรุมโทรมประวัติศาสตร์และตราบาปสังคม
+- **chaiyaphum-pasae-rights-2560:** คดีชัยภูมิ ป่าแส - การต่อสู้เพื่อพิสูจน์ความจริงในเหตุวิสามัญฆาตกรรมเยาวชนลาหู่
+- **paween-pongsirin-exile-2558:** คดี พล.ต.ต. ปวีณ - ราคาของความซื่อตรงในการปราบค้ามนุษย์โรฮิงญา
+- **somchai-neelapaijit-disappearance-2547:** คดีทนายสมชาย - การอุ้มหายที่เป็นจุดเริ่มต้นของกฎหมายป้องกันการอุ้มหายในไทย
+
+**Quality Metrics:**
+- All 5 cases achieved Grade A standard (score 95).
+- 8 sections implemented, paragraphs <= 350 chars.
+- Video URLs and legal provisions confirmed.
+
+### Batch 41 (Political & Economic Landmarks) - 2026-08-21
+- **Status:** DEPLOYED ✅
+- **Cases Processed:** 5
+- **Upgraded to A:** 5
+- **Cases:**
+  1. `hopewell-landmark-2562`: คดีโฮปเวลล์ (มหากาพย์ค่าโง่และอายุความ)
+  2. `rice-pledging-landmark-2560`: คดีจำนำข้าว (บรรทัดฐานความรับผิดทางละเมิดนักการเมือง)
+  3. `itv-share-landmark-2567`: คดีหุ้นไอทีวี (นิยามหุ้นสื่อและคุณสมบัติทางการเมือง)
+  4. `ua-athon-corruption-2565`: คดีบ้านเอื้ออาทร (ทุจริตเชิงนโยบายและค่าหัวคิว)
+  5. `police-station-corruption-2566`: คดีโรงพัก 396 แห่ง (การรวมสัญญาและคำยกฟ้อง)
+- **Quality Gate:** score >= 85, 0 BLOCK, 8 sections present.
+- **Judicial Potential:** High (All are landmark court rulings).
+- **Handoff:** Ready for Agent B (UI) and Agent C (Rank S verification).
+
+### Batch 42 (Historical R4-R5 & Blue Diamond Upgrade) - 2026-08-21
+- **Status:** DEPLOYED ✅
+- **Cases Processed:** 5
+- **Upgraded to A:** 5
+- **Cases:**
+  1. `amdaeng-muean-rights-2408`: คดีอำแดงเหมือนกับนายริด (Landmark สิทธิสตรี)
+  2. `phraya-preecha-konlakarn-2422`: คดีพระยาปรีชากลการ (ทุจริตเหมืองทองและโศกนาฏกรรมรัก)
+  3. `ksr-kulap-history-2443`: คดี ก.ส.ร. กุหลาบ (การตรวจสอบประวัติศาสตร์และเสรีภาพทางความคิด)
+  4. `queen-sunandha-tragedy-2423`: คดีสมเด็จพระนางเรือล่ม (โศกนาฏกรรมจากกฎมณเฑียรบาล)
+  5. `blue-diamond-affair-2532`: คดีเพชรซาอุ (มหากาพย์โจรกรรมและอุ้มฆ่า - UPGRADED)
+- **Quality Gate:** score >= 85, 0 BLOCK, 8 sections present.
+- **Judicial Potential:** High (Historical landmarks and international impact).
+- **Handoff:** Ready for Agent B (UI) and Agent C (Rank S verification).
+
+### Batch 43: Historical R3-R5 Legal Landmarks (2026-08-21)
+**Status: DEPLOYED ✅**
+**Cases Processed:** 5
+**Grade A Upgraded:** 5
+**Judicial Potential:** 2 (Amdaeng Yu, Tax Farmer)
+
+**Case List:**
+1. [amdaeng-yu-rights-2387](https://coolunclelab.com/news-case-khdii-amdaeng-yu-rights-2387.html) - คดีอำแดงอยู่ (ร.3): สิทธิสตรีและเสรีภาพเหนือร่างกาย
+2. [nu-kai-palace-scandal-2422](https://coolunclelab.com/news-case-khdii-nu-kai-palace-scandal-2422.html) - คดีหนูไก่ (ร.5): ความขัดแย้งในราชสำนักและจารีตประเพณี
+3. [opium-tax-corruption-2430](https://coolunclelab.com/news-case-khdii-opium-tax-corruption-2430.html) - คดีทุจริตภาษีฝิ่น (ร.5): การปฏิรูประบบภาษีและจุดเริ่มต้นกรมสรรพากร
+4. [railway-budget-corruption-2434](https://coolunclelab.com/news-case-khdii-railway-budget-corruption-2434.html) - คดีทุจริตงบรถไฟ (ร.5): การตรวจสอบงบประมาณแผ่นดินโดยกรมตรวจ
+5. [tax-farmer-embezzlement-2420](https://coolunclelab.com/news-case-khdii-tax-farmer-embezzlement-2420.html) - คดีพุ่ม สะอาด (ร.5): การบังคับคดีแพ่งต่อเจ้าภาษีนายอากร
+
+**Technical Notes:**
+- All cases pass Quality Gate (8 sections, paras <= 350).
+- Historical context derived from primary sources and Silpa-Mag.
+- Handoff ready for Agent C to verify historical judicial reasoning.
+
+## Batch 44: Gangster & Influence Series (5 cases)
+- **Date:** 2026-08-21
+- **Status:** DEPLOYED ✅
+- **Cases:**
+  1. news-case-khdii-jod-howdy-gangster-2499.html (จ๊อด เฮาดี้)
+  2. news-case-khdii-klaew-thanikul-influence-2534.html (เหลา สวนมะลิ)
+  3. news-case-khdii-boonliang-cafe-king-2541.html (บุญเลี้ยง อดุลยฤทธิกุล)
+  4. news-case-khdii-owtee-killer-legend-2520.html (โอวตี่ แซ่โค้ว)
+  5. news-case-khdii-somyot-cafe-assassination-2558.html (สมยศ สุธางค์กูร)
+- **Quality:** Grade A (score >= 85, paras <= 350, 0 BLOCK)
+- **Notes:** มหากาพย์นักเลงและผู้มีอิทธิพลในประวัติศาสตร์ไทย
+
+### Batch 45: Political & Rights Assassinations
+- **Date:** 2026-08-21 12:08:53
+- **Status:** DEPLOYED ✅
+- **Cases Processed:** 5
+- **Cases Upgraded to A:** 5
+- **Judicial Potential:** 5 (Assassination/Hiring cases)
+- **Video Status:** All included
+- **Cases:**
+  1. kobkul-assassination-2549 (ส.ส.กอบกุล นพอมรบดี)
+  2. peera-assassination-2555 (นายกพีระ ตันติเศรณี)
+  3. charoen-wat-akson-2547 (เจริญ วัดอักษร)
+  4. saengchai-sunthornwat-2539 (แสงชัย สุนทรวัฒน์)
+  5. praman-chansue-assassination-plot-2536 (ประมาณ ชันซื่อ)
+
+### Batch 46 — DEPLOYED ✅ (Date: 2026-08-21)
+- **shipping-moo-witness-2546**: คดีชิปปิ้งหมู: จุดเปลี่ยนกฎหมายคุ้มครองพยาน
+- **chuwong-forensic-2558**: คดีเสี่ยชูวงษ์: นิติวิทยาศาสตร์พิสูจน์ฆาตกรรมอำพราง
+- **ekayuth-abduction-2556**: คดีเอกยุทธ อัญชันบุตร: ปมสังหารและทฤษฎีสมคบคิด
+- **judge-brother-abduction-2563**: คดีอุ้มฆ่าพี่ชายผู้พิพากษา: การแทรกแซงกระบวนการยุติธรรม
+- **x-jakkrit-hired-murder-2556**: คดีเอ็กซ์ จักรกฤษณ์: ปมจ้างวานฆ่าในครอบครัว
+
+**Status:**
+- Built with rewrite_v21.py
+- Passed checkcase2.py (paras <= 350)
+- Full validation: 0 BLOCK
+- Deployed to main and verified live (HTTP 200)
+- Synchronized to news-unreleased-a.html index
+
+### Batch 47 — DEPLOYED ✅ (Date: 2026-08-21)
+**Theme:** Historical & Legendary Cases (คดีดังในตำนานและประวัติศาสตร์)
+
+**Cases Added (Grade A):**
+- **amdaeng-yu**: คดีอำแดงอยู่ (ร.5): คุณนายผู้มั่งคั่งสู่ลานประหาร (การทารุณกรรมทาส)
+- **phraya-raka**: คดีพญาระกา (ร.5): บทละครหมิ่นพระบรมเดชานุภาพ?
+- **nu-kai**: คดีหนูไก๋ (ร.5): ฆาตกรรมชิงทรัพย์เด็กที่น่าหดหู่
+- **nang-thong-luean**: คดีนางทองเลื่อน (ร.5): หญิงใจยักษ์และโทษประหารรายสุดท้าย?
+- **preecha-kolakan**: คดีพระยาปรีชากลการ (ร.5): โศกนาฏกรรมความรักและอำนาจ
+- **yot-mueang-khwang**: คดีพระยอดเมืองขวาง (ร.5): วีรบุรุษผู้รักษาแผ่นดินหรืออาชญากรสงคราม?
+
+**Status:**
+- All 6 cases built to Grade A standard (8 sections, 3+ legal issues, paras <= 350).
+- Fixed `news-unreleased-a.html` display issues by pulling proper Thai titles from override files.
+- Total Grade A cases in system: **449**.
+- Deployed to main and verified live.
