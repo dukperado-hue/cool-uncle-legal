@@ -138,3 +138,20 @@
   - nang-thong-luean-2452 (คดีนางทองเลื่อน - ประหารหญิงรายสุดท้ายด้วยดาบ)
 - **Status:** 5 cases built, validated, and verified live (HTTP 200).
 - **Quality:** Grade A standard met (8 sections, paras <= 350).
+
+## Batch 39: Modern Crime & Social Safety Landmarks
+**Date:** 2026-08-21
+**Status:** DEPLOYED ✅
+**Cases Processed:** 5
+**Grade A Upgrades:** 5
+**Key Highlights:**
+- **ao-luek-massacre-2560:** คดี 8 ทมิฬ อ่าวลึก - มหากาพย์ฆาตกรรมยกครัวและโฉนดเลือด
+- **nong-ploy-murder-2557:** คดีน้องพลอย พลอยนรินทร์ - 3 ปีที่หายตัวสู่อุ้มฆ่าเผานั่งยางโดยฝีมือทหาร
+- **saraburi-gang-rape-2561:** คดี 7 โจ๋สระบุรี - การรุมโทรมเด็กหญิง 11 ปี และบททดสอบความยุติธรรมท้องถิ่น
+- **lallabel-death-2562:** คดีลัลลาเบล - โศกนาฏกรรมพริตตี้สาวและบรรทัดฐานความปลอดภัยงานเอนเตอร์เทน
+- **train-rape-murder-2557:** คดีไอ้เกม ฆ่าข่มขืนบนรถไฟ - จุดเปลี่ยนความปลอดภัยสาธารณะและเสียงเรียกประหาร
+
+**Quality Metrics:**
+- All 5 cases achieved Grade A standard (score 95).
+- 8 sections implemented, paragraphs <= 350 chars.
+- Video URLs and legal provisions confirmed.
