@@ -2024,5 +2024,35 @@
     "score": 85,
     "has_video": false,
     "judicial_potential": true
+  },
+  "news-case-khdii-ramritthirong-2445.html": {
+    "grade": "A",
+    "score": 89,
+    "has_video": false,
+    "judicial_potential": true
+  },
+  "news-case-khdii-fake-banknote-2446.html": {
+    "grade": "A",
+    "score": 93,
+    "has_video": false,
+    "judicial_potential": true
+  },
+  "news-case-khdii-muean-rid-2407.html": {
+    "grade": "A",
+    "score": 96,
+    "has_video": true,
+    "judicial_potential": true
+  },
+  "news-case-khdii-phraya-raka-2453.html": {
+    "grade": "A",
+    "score": 86,
+    "has_video": true,
+    "judicial_potential": true
+  },
+  "news-case-khdii-ghost-merit-2445.html": {
+    "grade": "A",
+    "score": 88,
+    "has_video": false,
+    "judicial_potential": true
   }
 }
