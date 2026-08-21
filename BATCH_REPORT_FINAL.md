@@ -79,3 +79,19 @@
 - All verified live (HTTP 200) at coolunclelab.com.
 - `cases-grade.json` updated.
 - Total Grade A cases: ~381.
+
+### Batch 35 — DEPLOYED ✅ (2026-08-21 10:43)
+**Theme:** Political & Forensic History Landmarks
+**Cases (5 Grade A):**
+- news-case-khdii-rs-130-rebellion-2454.html (กบฏ ร.ศ. 130)
+- news-case-khdii-boworadet-rebellion-2476.html (กบฏบวรเดช 2476)
+- news-case-khdii-rama-8-forensic-landmark-2489.html (คดีสวรรคต ร.8 - กำเนิดนิติวิทยาศาสตร์)
+- news-case-khdii-palace-rebellion-2492.html (กบฏวังหลวง 2492)
+- news-case-khdii-peace-rebellion-2495.html (กบฏสันติภาพ 2495)
+
+**Status:**
+- All 5 pages built to Grade A standard.
+- **Special Focus:** The Rama 8 case includes the requested focus on the birth of Thai forensic medicine (Cadaveric Spasm, ballistic tests).
+- All verified live (HTTP 200) at coolunclelab.com.
+- `cases-grade.json` updated.
+- Total Grade A cases: ~386.
