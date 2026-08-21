@@ -343,3 +343,32 @@ full_validate: 56 WARN — 0 BLOCK; ปัญหา +11 เทียบกับ
 ### ส่งต่อ Agent C
 
 คดีที่ unlock รอบนี้: ยาเสพติด 2563, สัปปายะสภาสถาน 2566, ramrit-2442-2443 — หากมี judicial potential ให้ตรวจขึ้น S ได้เลย
+
+## BATCH 11 — Agent C Batch 10 Follow-up (21 ส.ค. 2569) — DEPLOYED ✅ (commit 9ef3dd5)
+
+ตรวจตามผล Confirm-Verification ของ Agent C ครบ 2 รายการ
+
+### Item 1 (MEDIUM): paras >350 WARN บนหน้า ICJ 4 หน้าที่ rebuild
+
+ผลการตรวจ: ย่อหน้าเป็นภาษาไทยขนาด 389–530 อักขระ — เกินเกณฑ์ 350 อักขระจริง (ไม่ใช่ bug ของ metric เพราะมี 15–17 แท็ก `<p>` ผิดพลาด) ตัดแยกด้วยวิธีที่ปลอดภัยที่สุด: แยกระหว่างช่วง " — " และจุดจบบริบทคำถาม-คำตอบ โดยไม่แก้ถ้อยคำใด ๆ
+
+| หน้า | ก่อน | ภายหลัง |
+|---|---|---|
+| Tadic (ICTY) | 6 paras >350 | 0 |
+| Tinoco (Taft) | 4 paras >350 | 0 |
+| Trail Smelter | 2 paras >350 | 0 |
+| Trendtex (UK CoA) | 5 paras >350 | 0 |
+
+รวม 13 การแบ่งย่อหน้า — เนื้อหาเดิมครบถ้วน ไม่มีการเพิ่ม/ลดข้อเท็จจริง
+
+### Item 2 (LOW): สงครามยาเสพติด 2563 — policy case
+
+เพิ่ม label "กรณีนโยบาย (policy case): คดีภาพรวมของหลายสำนวน — ไม่มีจำเลยรายเดียวและไม่มีคำพิพากษาเดียว" ทั้งที่ subtitle ใต้หัวเรื่องและในบทสรุป (ไม่สร้าง legal issue ใหม่) — สอดคล้องกับ mode Guess Legal Issue + Explain Reasoning ที่ Agent C กำหนด
+
+### ผล validation
+
+full_validate: 48 WARN — 0 BLOCK (8 รายการที่เพิ่มขึ้นเทียบ baseline อยู่บนหน้า ICJ ที่ Agent C rebuild: Nottebohm/Nuclear Tests/Rainbow Warrior/South West Africa — ไม่ใช่งานที่ Batch 11 เกี่ยวข้อง)
+
+### SENDOFF — 12 คดี S_CANDIDATE พร้อมส่ง Agent B
+
+สัปปายะสภาสถาน 2566, สงครามยาเสพติด 2563 (policy case mode), พระยอดเมืองขวาง, ซีอุย, Corfu, Preah Vihear, LaGrand, ก.ศ.ร. กุหลาบ, ป๋อง 5 ศพ, สุขุม เชิดชื่น, มรดกนัยนา, วิสามัญ 6 ศพโจด่านช้าง — รายละเอียดอยู่ในผลตรวจของ Agent C (Batch 10 Confirm 8445eef)
