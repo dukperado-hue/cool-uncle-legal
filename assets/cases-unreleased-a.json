@@ -1,9 +1,144 @@
 [
     {
-        "slug": "news-case-monetary-gold-removed-from-rome-in-1943-italy-v-france-uk-usa.html",
-        "title": "Monetary Gold Removed from Rome in 1943 (Italy v. France, UK, USA) — คดีดัง | Cool Uncle Lab",
+        "slug": "news-case-khdii-aima-khamkhuen-nai-praborommaharachawang.html",
+        "title": "คดีอ้ายมา ลอบข่มขืนเจ้าจอมในพระบรมมหาราชวัง (จ.ศ. 1159) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 1159",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-the-caroline-case-uk-v-usa.html",
+        "title": "The Caroline Case (UK v. USA) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 1837",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-kamnan-talad-ayutthaya.html",
+        "title": "คดีกำนันตลาดรีดเงินเกินพิกัด — พระอัยการลักษณะอาญาหลวง บทที่ 3 สมัยอยุธยา (พ.ศ. 1895–2310) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 1895",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-dogger-bank-incident-great-britain-russia.html",
+        "title": "Dogger Bank Incident (Great Britain/Russia) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 1904",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-the-naulilaa-incident-portugal-v-germany.html",
+        "title": "The Naulilaa Incident (Portugal v. Germany) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 1914",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-the-lotus-case-france-v-turkey.html",
+        "title": "คดี The Lotus — ฝรั่งเศส vs. ตุรกี (PCIJ, 1927) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 1926",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-chorzow-factory-case-germany-v-poland.html",
+        "title": "Chorzów Factory Case (Germany v. Poland) — PCIJ, 1928 — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 1927",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-jurisdictional-immunities-of-the-state-germany-v-italy.html",
+        "title": "Jurisdictional Immunities of the State (Germany v. Italy) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 1943",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-corfu-channel-case-uk-v-albania.html",
+        "title": "Corfu Channel Case (UK v. Albania) — ICJ, 1949 — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 1946",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-barcelona-traction-light-and-power-co-case-belgium-v-spain.html",
+        "title": "Barcelona Traction, Light and Power Co. Case (Belgium v. Spain) — ICJ, 1970 — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 1948",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-reservations-to-the-convention-on-genocide-advisory-opinion.html",
+        "title": "Reservations to the Convention on Genocide (Advisory Opinion) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 1951",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-attorney-general-of-the-government-of-israel-v-eichmann-israel.html",
+        "title": "Attorney-General of the Government of Israel v. Eichmann (Israel) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 1961",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-pulp-mills-on-the-river-uruguay-argentina-v-uruguay.html",
+        "title": "Pulp Mills on the River Uruguay (Argentina v. Uruguay) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 1975",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-beagle-channel-arbitration-argentina-chile.html",
+        "title": "Beagle Channel Arbitration (Argentina/Chile) — ค.ศ. 1977 และสนธิสัญญา 1984 — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 1977",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-mondeeban-2001.html",
+        "title": "กฎมณเฑียรบาล พ.ศ. 2001 — กฎหมายที่เขียนเพื่อรักษาพระราชา สมัยสมเด็จพระบรมไตรโลกนาถ — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 1991",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-pinochet-case-uk-house-of-lords.html",
+        "title": "Pinochet Case (UK House of Lords) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 1998",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -13,24 +148,6 @@
         "title": "Aerial Incident of 10 August 1999 (Pakistan v. India) — สืบกฎหมายจากคดี | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 1999",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-arrest-warrant-of-11-april-2000-drc-v-belgium.html",
-        "title": "Arrest Warrant of 11 April 2000 (DRC v. Belgium) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2000",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-mondeeban-2001.html",
-        "title": "กฎมณเฑียรบาล พ.ศ. 2001 — กฎหมายที่เขียนเพื่อรักษาพระราชา สมัยสมเด็จพระบรมไตรโลกนาถ — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2001",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -54,10 +171,64 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-diallo-case-guinea-v-drc.html",
+        "title": "Diallo Case (Guinea v. DRC) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2010",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-ara-libertad-case-argentina-v-ghana.html",
+        "title": "ARA Libertad Case (Argentina v. Ghana) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2012",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-south-china-sea-arbitration-philippines-v-china.html",
+        "title": "South China Sea Arbitration (Philippines v. China) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2013",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-dispute-concerning-delimitation-of-the-maritime-boundary-ghana-cote-d-.html",
+        "title": "Dispute concerning Delimitation of the Maritime Boundary (Ghana/Côte d'Ivoire) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2017",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-the-enrica-lexie-incident-italy-v-india.html",
+        "title": "The Enrica Lexie Incident (Italy v. India) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2020",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-warawongsa-2091.html",
         "title": "คดีขุนวรวงศาธิราช (พ.ศ. 2091) — ผู้เฝ้าหอพระที่ก้าวขึ้นนั่งบัลลังก์ และถูกปลงพระชนม์ที่คลองสระบัว — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2091",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-falkhon-2231.html",
+        "title": "คดีประหารเจ้าพระยาวิชเยนทร์ (คอนสแตนติน ฟอลคอน) พ.ศ. 2231 — การปฏิวัติและผู้ที่เข้ามาไกลที่สุดในบ้านเมือง — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2190",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -70,15 +241,6 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
-    },
-    {
-        "slug": "news-case-khdii-falkhon-2231.html",
-        "title": "คดีประหารเจ้าพระยาวิชเยนทร์ (คอนสแตนติน ฟอลคอน) พ.ศ. 2231 — การปฏิวัติและผู้ที่เข้ามาไกลที่สุดในบ้านเมือง — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2231",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
     },
     {
         "slug": "news-case-khdii-pongkhaoluang-nginthplom-2310-2325.html",
@@ -162,6 +324,24 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-khdii-thujrit-huay-kor-khor-history.html",
+        "title": "คดีทุจริตหวย ก.ข. — ตำนานขุนบานเถื่อนและการมอมเมาประชาชน (พ.ศ. 2459) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2375",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-ksr-kulap-2443.html",
+        "title": "คดี ก.ส.ร. กุหลาบ — ข้อหา 'กุ' ประวัติศาสตร์และหมิ่นพระบรมเดชานุภาพ (พ.ศ. 2443) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2377",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-amdaeng-yu-rights-2387.html",
         "title": "Amdaeng Yu Rights 2387",
         "cat_tag": "คดีอาญา",
@@ -169,6 +349,24 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
+    },
+    {
+        "slug": "news-case-clipperton-island-arbitration-france-v-mexico.html",
+        "title": "Clipperton Island Arbitration (France v. Mexico) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2401",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-alabama-claims-arbitration-usa-great-britain.html",
+        "title": "Alabama Claims Arbitration (USA/Great Britain) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2405",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
     },
     {
         "slug": "news-case-khdii-muean-rid-2407.html",
@@ -187,6 +385,15 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
+    },
+    {
+        "slug": "news-case-khdii-tax-farmer-embezzlement-history.html",
+        "title": "คดีเจ้าภาษีนายอากรยักยอกเงินส่งคลัง — วิกฤตเงินฝืดและกำเนิดกระทรวงการคลัง (พ.ศ. 2416) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2411",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
     },
     {
         "slug": "news-case-khdii-aiauaom-okroy-2414.html",
@@ -219,7 +426,25 @@
         "slug": "news-case-khdii-ministry-agri-embezzlement-2416.html",
         "title": "คดีทุจริตกรมนา — พระยาอาหารบริรักษ์กับการตรวจสอบโดยออดิตออฟฟิส (พ.ศ. 2416) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2415",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-thujrit-phasi-fin-history.html",
+        "title": "คดีทุจริตภาษีฝิ่น — วิกฤตเจ้าภาษีนายอากรและต้นกำเนิดการปฏิรูปคลัง (พ.ศ. 2445) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2416",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-thujrit-pamai-muang-nuea-history.html",
+        "title": "คดีทุจริตสัมปทานป่าไม้ — ข้อพิพาทป่าสักและอธิปไตยเหนือทรัพยากร (พ.ศ. 2426) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2417",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -229,6 +454,15 @@
         "title": "การเลิกทาสและไพร่ — การปฏิรูปโครงสร้างสังคมและแรงงานครั้งใหญ่ของสยาม",
         "cat_tag": "คดียุคโบราณ",
         "year": "พ.ศ. 2417",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-kusar-kulab-2436.html",
+        "title": "คดี ก.ศ.ร. กุหลาบ — นักปราชญ์ราชบัณฑิต ผู้ถูกฟ้องฐานหมื่นประมาท (พ.ศ. 2436) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2418",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -333,6 +567,24 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-khdii-phrayodmueangkwang-2436.html",
+        "title": "คดีพระยอดเมืองขวาง — ศาลรับสั่งพิเศษ ร.ศ.112 (พ.ศ. 2436–2437) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2428",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-phum-saat-embezzlement-2440.html",
+        "title": "คดีพุ่มสะอาด — วิกฤตเจ้าภาษีล้มละลายและการปฏิรูปกฎหมายลูกหนี้แผ่นดิน (พ.ศ. 2440) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2430",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-opium-tax-corruption-2430.html",
         "title": "Opium Tax Corruption 2430",
         "cat_tag": "คดีอาญา",
@@ -342,6 +594,15 @@
         "video_status": "confirmed"
     },
     {
+        "slug": "news-case-khdii-thujrit-ngob-rotfai-history.html",
+        "title": "คดีทุจริตงบประมาณรถไฟ — การตรวจสอบเมกะโปรเจกต์สายแรกของสยาม (พ.ศ. 2434) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2434",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-railway-budget-corruption-2434.html",
         "title": "Railway Budget Corruption 2434",
         "cat_tag": "คดีอาญา",
@@ -349,24 +610,6 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
-    },
-    {
-        "slug": "news-case-khdii-phrayodmueangkwang-2436.html",
-        "title": "คดีพระยอดเมืองขวาง — ศาลรับสั่งพิเศษ ร.ศ.112 (พ.ศ. 2436–2437) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2436",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-kusar-kulab-2436.html",
-        "title": "คดี ก.ศ.ร. กุหลาบ — นักปราชญ์ราชบัณฑิต ผู้ถูกฟ้องฐานหมื่นประมาท (พ.ศ. 2436) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2436",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
     },
     {
         "slug": "news-case-khdii-phra-yot-muang-khwang-2436.html",
@@ -396,8 +639,8 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdii-phum-saat-embezzlement-2440.html",
-        "title": "คดีพุ่มสะอาด — วิกฤตเจ้าภาษีล้มละลายและการปฏิรูปกฎหมายลูกหนี้แผ่นดิน (พ.ศ. 2440) — คดีดัง | Cool Uncle Lab",
+        "slug": "news-case-khdii-penalcode-rs127-2451.html",
+        "title": "กฎหมายลักษณะอาญา ร.ศ. 127 — ประมวลกฎหมายสมัยใหม่ฉบับแรกของไทย — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2440",
         "score": 95,
@@ -423,6 +666,15 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-khdii-payarakha-2453.html",
+        "title": "คดีพญาระกา — ละครหมิ่นประมาทที่สั่นสะเทือนกระทรวงยุติธรรม พ.ศ. 2453 — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2443",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-amdaeng-yu.html",
         "title": "คดีอำแดงอยู่: คุณนายผู้มั่งคั่งสู่ลานประหาร",
         "cat_tag": "คดอาญาในอดีต",
@@ -432,8 +684,8 @@
         "video_status": "confirmed"
     },
     {
-        "slug": "news-case-khdii-ksr-kulap-2443.html",
-        "title": "คดี ก.ส.ร. กุหลาบ — ข้อหา 'กุ' ประวัติศาสตร์และหมิ่นพระบรมเดชานุภาพ (พ.ศ. 2443) — คดีดัง | Cool Uncle Lab",
+        "slug": "news-case-khdii-khun-yuam-logging-2445.html",
+        "title": "คดีทุจริตป่าไม้ขุนยูวม — การปลอมตราประทับไม้และการปราบปรามมาเฟียป่าสัก (พ.ศ. 2445) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2443",
         "score": 95,
@@ -459,8 +711,8 @@
         "video_status": "confirmed"
     },
     {
-        "slug": "news-case-khdii-khun-yuam-logging-2445.html",
-        "title": "คดีทุจริตป่าไม้ขุนยูวม — การปลอมตราประทับไม้และการปราบปรามมาเฟียป่าสัก (พ.ศ. 2445) — คดีดัง | Cool Uncle Lab",
+        "slug": "news-case-khdii-thanabat-plom-r5-2446.html",
+        "title": "คดีธนบัตรปลอมสมัย ร.5 — พระองค์เจ้าปรีดา และนายเพ่ง (พ.ศ. 2446) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2445",
         "score": 95,
@@ -504,15 +756,6 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdii-thanabat-plom-r5-2446.html",
-        "title": "คดีธนบัตรปลอมสมัย ร.5 — พระองค์เจ้าปรีดา และนายเพ่ง (พ.ศ. 2446) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2446",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-khdii-fake-banknote-r5-2446.html",
         "title": "คดีธนบัตรปลอมสมัย ร.5: อาชญากรรมเศรษฐกิจและพระราชโอรส",
         "cat_tag": "คดยุคโบราณ",
@@ -520,6 +763,24 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
+    },
+    {
+        "slug": "news-case-temple-of-preah-vihear-cambodia-v-thailand.html",
+        "title": "Temple of Preah Vihear (Cambodia v. Thailand) — ICJ 1962 — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2447",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-book-club-scandal-2449.html",
+        "title": "คดีบุคคลัภย์ — วิกฤตศรัทธาธนาคารแห่งแรกและความเสี่ยงทุจริตเชิงนโยบาย (พ.ศ. 2449) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2447",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
     },
     {
         "slug": "news-case-khdii-nu-kai.html",
@@ -531,19 +792,10 @@
         "video_status": "confirmed"
     },
     {
-        "slug": "news-case-khdii-book-club-scandal-2449.html",
-        "title": "คดีบุคคลัภย์ — วิกฤตศรัทธาธนาคารแห่งแรกและความเสี่ยงทุจริตเชิงนโยบาย (พ.ศ. 2449) — คดีดัง | Cool Uncle Lab",
+        "slug": "news-case-island-of-palmas-case-netherlands-v-usa.html",
+        "title": "Island of Palmas Case (Netherlands v. USA) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2449",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-penalcode-rs127-2451.html",
-        "title": "กฎหมายลักษณะอาญา ร.ศ. 127 — ประมวลกฎหมายสมัยใหม่ฉบับแรกของไทย — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2451",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -574,15 +826,6 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
-    },
-    {
-        "slug": "news-case-khdii-payarakha-2453.html",
-        "title": "คดีพญาระกา — ละครหมิ่นประมาทที่สั่นสะเทือนกระทรวงยุติธรรม พ.ศ. 2453 — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2453",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
     },
     {
         "slug": "news-case-khdii-phraya-raka.html",
@@ -621,6 +864,24 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-tinoco-arbitration-great-britain-v-costa-rica.html",
+        "title": "Tinoco Arbitration (Great Britain v. Costa Rica) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2460",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-bunpeng-hiblek-2469.html",
+        "title": "คดีบุญเพ็งหีบเหล็ก (2460-2462) — ฆาตกรต่อเนื่อง ร.6 — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2460",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-payabat-2460.html",
         "title": "คดีพยาบาท: ฆาตกรรมสะเทือนขวัญสู่ต้นกำเนิดนิยายสืบสวนไทย",
         "cat_tag": "คดยุคโบราณ",
@@ -639,19 +900,19 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdii-nangthongloen-2468.html",
-        "title": "คดีนางทองเลื่อน \"อีทองเลื่อนหักคอน้องผัว\" — นักโทษหญิ งรายน้อง ๆ ที่ถูกประหารด้วยการตัดคอ และพยานการชันระบบศพแบบแพทย์ในศาลสยามยุคร.6 (ประหาร 14 ต.ค. 2468) — คดีดัง | Cool Uncle Lab",
+        "slug": "news-case-eastern-greenland-case-denmark-v-norway.html",
+        "title": "Eastern Greenland Case (Denmark v. Norway) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2468",
+        "year": "พ.ศ. 2462",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdii-bunpeng-hiblek-2469.html",
-        "title": "คดีบุญเพ็งหีบเหล็ก (2460-2462) — ฆาตกรต่อเนื่อง ร.6 — คดีดัง | Cool Uncle Lab",
+        "slug": "news-case-khdii-nangthongloen-2468.html",
+        "title": "คดีนางทองเลื่อน \"อีทองเลื่อนหักคอน้องผัว\" — นักโทษหญิ งรายน้อง ๆ ที่ถูกประหารด้วยการตัดคอ และพยานการชันระบบศพแบบแพทย์ในศาลสยามยุคร.6 (ประหาร 14 ต.ค. 2468) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2469",
+        "year": "พ.ศ. 2468",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -664,6 +925,15 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
+    },
+    {
+        "slug": "news-case-s-s-i-m-alone-canada-v-usa.html",
+        "title": "S.S. I'm Alone (Canada v. USA) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2473",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
     },
     {
         "slug": "news-case-khdii-thong-luean-2475.html",
@@ -711,6 +981,24 @@
         "video_status": "confirmed"
     },
     {
+        "slug": "news-case-anglo-norwegian-fisheries-case-uk-v-norway.html",
+        "title": "Anglo-Norwegian Fisheries Case (UK v. Norway) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2478",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-trail-smelter-arbitration-usa-v-canada.html",
+        "title": "Trail Smelter Arbitration (USA v. Canada) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2478",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-sergeant-rebellion-2478.html",
         "title": "กบฏนายสิบ 2478: แผนลับชิงอำนาจที่ล้มเหลว",
         "cat_tag": "คดยุคโบราณ",
@@ -718,6 +1006,42 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
+    },
+    {
+        "slug": "news-case-joyce-v-director-of-public-prosecutions-uk-house-of-lords.html",
+        "title": "Joyce v. Director of Public Prosecutions (UK House of Lords, 1946) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2482",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-nottebohm-case-liechtenstein-v-guatemala.html",
+        "title": "Nottebohm Case (Liechtenstein v. Guatemala) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2482",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-interhandel-case-switzerland-v-usa.html",
+        "title": "Interhandel Case (Switzerland v. USA) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2485",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-monetary-gold-removed-from-rome-in-1943-italy-v-france-uk-usa.html",
+        "title": "Monetary Gold Removed from Rome in 1943 (Italy v. France, UK, USA) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2486",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
     },
     {
         "slug": "news-case-khdii-war-criminal-por-2489.html",
@@ -774,6 +1098,24 @@
         "video_status": "confirmed"
     },
     {
+        "slug": "news-case-reparation-for-injuries-suffered-in-the-service-of-the-un-advisory-opi.html",
+        "title": "Reparation for Injuries Suffered in the Service of the United Nations (Advisory Opinion) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2491",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-4-ratthamontri-2492.html",
+        "title": "คดีสังหาร 4 อดีตรัฐมนตรี — ทุ่งบางเขน 2492 — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2491",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-ku-chat-rebellion-2491.html",
         "title": "คดีกบฏกู้ชาติ (ความขัดแย้งระหว่างเหล่าทัพและอำนาจการเมือง)",
         "cat_tag": "คดีประวัติศาสตร์",
@@ -783,8 +1125,8 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdii-4-ratthamontri-2492.html",
-        "title": "คดีสังหาร 4 อดีตรัฐมนตรี — ทุ่งบางเขน 2492 — คดีดัง | Cool Uncle Lab",
+        "slug": "news-case-the-asylum-case-colombia-v-peru.html",
+        "title": "The Asylum Case (Colombia v. Peru) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2492",
         "score": 95,
@@ -820,7 +1162,7 @@
     },
     {
         "slug": "news-case-khdii-palace-rebellion-2492.html",
-        "title": "กบฏวังหลวง: แผนช้างดำ-ช้างน้ำ และความพยายามครั้งสุดท้ายของปรีดี",
+        "title": "กบฏวังหลวง: แผนช้างดำ-ช้างน้ำ และความพยายามครั้งสุดท้ายของปรีดี — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีเด่นด้านสังคม",
         "year": "พ.ศ. 2492",
         "score": 95,
@@ -835,6 +1177,15 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
+    },
+    {
+        "slug": "news-case-ambatielos-case-greece-v-uk.html",
+        "title": "Ambatielos Case (Greece v. UK) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2494",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
     },
     {
         "slug": "news-case-khdii-manhattan-rebellion-2494.html",
@@ -855,6 +1206,24 @@
         "video_status": "confirmed"
     },
     {
+        "slug": "news-case-minquiers-and-ecrehos-case-france-v-uk.html",
+        "title": "Minquiers and Ecrehos Case (France v. UK) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2496",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-certain-expenses-of-the-united-nations-advisory-opinion.html",
+        "title": "Certain Expenses of the United Nations (Advisory Opinion) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2499",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-jod-howdy-gangster-2499.html",
         "title": "Jod Howdy Gangster 2499",
         "cat_tag": "คดีอาญา",
@@ -873,6 +1242,15 @@
         "video_status": "confirmed"
     },
     {
+        "slug": "news-case-right-of-passage-over-indian-territory-portugal-v-india.html",
+        "title": "Right of Passage over Indian Territory (Portugal v. India) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2500",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-owtee-killer-legend-2520.html",
         "title": "Owtee Killer Legend 2520",
         "cat_tag": "คดีอาญา",
@@ -886,6 +1264,15 @@
         "title": "ซีอุย แซ่อื้ง (2501) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2501",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-f-ngeriiykkhnulchwi-phayabalsaw-thukhkh-a.html",
+        "title": "นวลฉวี: พยาบาลสาวถูกลอบยิงตามคำสั่งสวามี (2502)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2502",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -918,6 +1305,15 @@
         "video_status": "confirmed"
     },
     {
+        "slug": "news-case-south-west-africa-cases-ethiopia-v-south-africa.html",
+        "title": "South West Africa Cases (Ethiopia v. South Africa) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2503",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-laksami-lawan-2504.html",
         "title": "คดีปลงพระชนม์พระนางเธอลักษมีลาวัณ (2504) — ฆาตกรรมพระมเหสี ร.6 — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
@@ -936,10 +1332,46 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-north-sea-continental-shelf-cases-frg-v-denmark-netherlands.html",
+        "title": "North Sea Continental Shelf Cases (FRG v. Denmark/Netherlands) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2512",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-radwan-v-radwan-uk-family-division.html",
+        "title": "Radwan v. Radwan (UK Family Division) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2514",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-fisheries-jurisdiction-cases-uk-v-iceland.html",
+        "title": "Fisheries Jurisdiction Cases (UK v. Iceland) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2515",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdiiwinaaskrrmethiiywbin-cx700z-2515.html",
         "title": "วินาศกรรมเที่ยวบิน CX700Z — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2515",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-nuclear-tests-cases-australia-v-france-new-zealand-v-france.html",
+        "title": "Nuclear Tests Cases (Australia v. France; New Zealand v. France) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2516",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -972,6 +1404,15 @@
         "video_status": "confirmed"
     },
     {
+        "slug": "news-case-western-sahara-advisory-opinion.html",
+        "title": "Western Sahara (Advisory Opinion) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2517",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdiichaals-osphraacch-charles-sobhraj-2518.html",
         "title": "ชาลส โสภราจ (Charles Sobhraj) ฆาตกรบิกินี (2518) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
@@ -988,6 +1429,15 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
+    },
+    {
+        "slug": "news-case-trendtex-trading-corp-v-central-bank-of-nigeria-uk-court-of-appeal.html",
+        "title": "Trendtex Trading Corp. v. Central Bank of Nigeria (UK Court of Appeal) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2520",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
     },
     {
         "slug": "news-case-khdii-mae-chamoy-2528.html",
@@ -1044,6 +1494,33 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-united-states-diplomatic-and-consular-staff-in-tehran-usa-v-iran.html",
+        "title": "United States Diplomatic and Consular Staff in Tehran (USA v. Iran) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2523",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-gulf-of-maine-area-case-canada-usa.html",
+        "title": "Gulf of Maine Area Case (Canada/USA) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2524",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdiiaailthiichaawm-raekn-hmuuekaaasurinthr-2562.html",
+        "title": "คดีไล่ที่ชาวมอแกน หมู่เกาะสุรินทร์ (2562) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2524",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-young-turk-rebellion-2524.html",
         "title": "กบฏยังเติร์ก: เมษาฮาวายและการทดสอบบารมีของ 'ป๋าเปรม'",
         "cat_tag": "คดีเด่นด้านสังคม",
@@ -1066,6 +1543,33 @@
         "title": "แชร์แม่ชม้อย (2527)",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2527",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-nicaragua-case-nicaragua-v-usa.html",
+        "title": "Nicaragua Case (Nicaragua v. USA) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2527",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-rainbow-warrior-arbitration-new-zealand-v-france.html",
+        "title": "Rainbow Warrior Arbitration (New Zealand v. France) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2528",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-military-and-paramilitary-activities-in-and-against-nicaragua-nicaragu.html",
+        "title": "Military and Paramilitary Activities in and against Nicaragua (Nicaragua v. USA) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2529",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -1107,8 +1611,53 @@
         "video_status": "confirmed"
     },
     {
+        "slug": "news-case-lockerbie-case-libya-v-uk-usa.html",
+        "title": "Lockerbie Case (Libya v. UK/USA) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2531",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-mrdk-naayna-thmmawathanai-2533.html",
+        "title": "คดีมรดกนัยนา ธรรมวัฒนะ “ตายปริศนาทายาทตลาดยิ่งเจริญ” (2533) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2531",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-gabcikovo-nagymaros-project-hungary-slovakia.html",
+        "title": "Gabčíkovo-Nagymaros Project (Hungary/Slovakia) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2532",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-joerkam-maek-phetcha-royal-saudi-2532.html",
         "title": "เพชรซาอูดิอาระเบีย ภาค 1 — โจรกรรมเครื่องเพชรจากพระราชวงศ์ (2532)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2532",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-umkhaanakkaarthuutaelanakthurkicchchaa-udii-aaraebiiy-2533.html",
+        "title": "คดีอุ้มฆ่านายโมฮัมเหม็ด อัลรูไวลี่ — วิกฤตเพชรซาอุ (2533) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2532",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdiicchaangwaankhaa-esiiyaehy-2545.html",
+        "title": "จ้างวานฆ่า เสี่ยแหย (2545)",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2532",
         "score": 95,
@@ -1134,8 +1683,8 @@
         "video_status": "confirmed"
     },
     {
-        "slug": "news-case-khdii-umkhaanakkaarthuutaelanakthurkicchchaa-udii-aaraebiiy-2533.html",
-        "title": "คดีอุ้มฆ่านายโมฮัมเหม็ด อัลรูไวลี่ — วิกฤตเพชรซาอุ (2533) — คดีดัง | Cool Uncle Lab",
+        "slug": "news-case-korea-beef-wto-appellate-body.html",
+        "title": "Korea – Beef (WTO Appellate Body) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2533",
         "score": 95,
@@ -1145,15 +1694,6 @@
     {
         "slug": "news-case-um-kha-nak-kan-thut-phaekh-phet-saudi-2533.html",
         "title": "เพชรซาอูดิอาระเบีย ภาค 3 — อุมฆ่านักการทูตและนักธุรกิจซาอูดิอาระเบีย (2533)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2533",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-mrdk-naayna-thmmawathanai-2533.html",
-        "title": "คดีมรดกนัยนา ธรรมวัฒนะ “ตายปริศนาทายาทตลาดยิ่งเจริญ” (2533) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2533",
         "score": 95,
@@ -1179,6 +1719,15 @@
         "video_status": "confirmed"
     },
     {
+        "slug": "news-case-ekhruue-ngbinelaadaaae-r-ethiiywbinthii-004-tkthiisuphrrnburii-25.html",
+        "title": "เครื่องบินเลาด้าแอร์ เที่ยวบินที่ 004 ตกที่สุพรรณบุรี (2534) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2534",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-f-ngeriiykkhlaewthnulkul-2534.html",
         "title": "ลอบสังหารแคล้ว ธนกุล (2534)",
         "cat_tag": "คดีอาญา",
@@ -1190,6 +1739,15 @@
     {
         "slug": "news-case-khdiif-ngr-ngmrdk-phumphwng-dwngcchanthr-2535.html",
         "title": "ฟ้องร้องมรดก &quot;พุ่มพวง ดวงจันทร์&quot; — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2535",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-us-gasoline-wto-appellate-body.html",
+        "title": "US – Gasoline (WTO Appellate Body) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2535",
         "score": 95,
@@ -1251,6 +1809,15 @@
         "video_status": "confirmed"
     },
     {
+        "slug": "news-case-legality-of-the-threat-or-use-of-nuclear-weapons-advisory-opinion.html",
+        "title": "Legality of the Threat or Use of Nuclear Weapons (Advisory Opinion) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2537",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-um-kha-nang-daarawdii-d-ch-seri-sritananchai-2537.html",
         "title": "เพชรซาอูดิอาระเบีย ภาค 2 — อุมฆ่านางดาราวดีและด.ช.เสรี ศรีธนัญชัย (2537)",
         "cat_tag": "คดีอาญา",
@@ -1294,6 +1861,33 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
+    },
+    {
+        "slug": "news-case-bosnian-genocide-case-bosnia-v-serbia.html",
+        "title": "Bosnian Genocide Case (Bosnia v. Serbia) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2538",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-east-timor-case-portugal-v-australia.html",
+        "title": "East Timor Case (Portugal v. Australia) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2538",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-tadic-case-icty.html",
+        "title": "Tadić Case (ICTY) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2538",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
     },
     {
         "slug": "news-case-khdii-jaa-sathit-3-sop-2538.html",
@@ -1379,6 +1973,15 @@
     {
         "slug": "news-case-khdiimaaefiiyrasechiiy-phathyaa-2540-2550.html",
         "title": "มาเฟียรัสเซีย พัทยา (2540-2550) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2540",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-m-v-saiga-no-2-case-st-vincent-v-guinea.html",
+        "title": "M/V \"Saiga\" (No. 2) Case (St. Vincent v. Guinea) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2540",
         "score": 95,
@@ -1476,6 +2079,24 @@
         "video_status": "confirmed"
     },
     {
+        "slug": "news-case-arrest-warrant-of-11-april-2000-drc-v-belgium.html",
+        "title": "Arrest Warrant of 11 April 2000 (DRC v. Belgium) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2543",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-guyana-v-suriname-pca.html",
+        "title": "Guyana v. Suriname (PCA) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2543",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-issanamuni-2544.html",
         "title": "คดีพระอิสระมุนี เกจิดังป่าละอูกับสีกาคนสนิท",
         "cat_tag": "คดยุคโบราณ",
@@ -1494,8 +2115,17 @@
         "video_status": "confirmed"
     },
     {
-        "slug": "news-case-khdiicchaangwaankhaa-esiiyaehy-2545.html",
-        "title": "จ้างวานฆ่า เสี่ยแหย (2545)",
+        "slug": "news-case-legal-consequences-of-the-construction-of-a-wall-advisory-opinion.html",
+        "title": "Legal Consequences of the Construction of a Wall in the Occupied Palestinian Territory (Advisory Opinion) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2545",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-the-volga-case-russian-federation-v-australia.html",
+        "title": "The Volga Case (Russian Federation v. Australia) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2545",
         "score": 95,
@@ -1510,6 +2140,15 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
+    },
+    {
+        "slug": "news-case-avena-and-other-mexican-nationals-mexico-v-usa.html",
+        "title": "Avena and Other Mexican Nationals (Mexico v. USA) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2546",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
     },
     {
         "slug": "news-case-khdiicchaangwaankhaa-faaorh-2546.html",
@@ -1593,6 +2232,15 @@
         "video_status": "confirmed"
     },
     {
+        "slug": "news-case-certain-questions-of-mutual-assistance-in-criminal-matters-djibouti-v-.html",
+        "title": "Certain Questions of Mutual Assistance in Criminal Matters (Djibouti v. France) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2548",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdiismkhid-phumphwng-2548-2562.html",
         "title": "สมคิด พุ่มพวง (2548, 2562)",
         "cat_tag": "คดีอาญา",
@@ -1640,6 +2288,15 @@
     {
         "slug": "news-case-ecchaahniif-ngyuedthraphycchamn-ng-khamprakankhaampraeths-2550.html",
         "title": "คดีเจ้าหนี้ฟ้องยึดทรัพย์จำนอง ค้ำประกัน (2550) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2550",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdiicchabkum-esiiyaepng-naaohnd-2566.html",
+        "title": "คดีเสี่ยแป้ง นาโหนด — หลบหนีระหว่างควบคุม (2566–2567) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2550",
         "score": 95,
@@ -1737,6 +2394,15 @@
         "video_status": "confirmed"
     },
     {
+        "slug": "news-case-khdiich-okngshkrn-mthraphykhruukh-naekn-2562.html",
+        "title": "คดีทุจริตและฉ้อโกงสหกรณ์ออมทรัพย์ครูขอนแก่น — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2554",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-rice-pledging-landmark-2560.html",
         "title": "คดีจำนำข้าว: บรรทัดฐานความรับผิดทางละเมิดนักการเมือง",
         "cat_tag": "คดีอาญา",
@@ -1811,6 +2477,15 @@
     {
         "slug": "news-case-khdiicchadchuue-aethbeltnakeriiyn-one-tablet-per-child-2556.html",
         "title": "จัดซื้อแท็บเล็ตนักเรียน (One Tablet Per Child) (2556) — คดีที่ยุติโดยกลไกระงับข้อพิพาท ไม่มีคำพิพากษาศาลปกครอง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2556",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdiiphidsayyaak-sraang-aakhaarrathsphaaaihm-sappaayasiristhaan-2566.html",
+        "title": "ผิดสัญญาก่อสร้างอาคารรัฐสภาใหม่ “สัปปายะสภาสถาน” (2566) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2556",
         "score": 95,
@@ -2025,6 +2700,15 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-khdiiaefrnaichs-chuuchi-daaruma-2565.html",
+        "title": "แฟรนไชส์ ซูชิ ดารุมะ (2565) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2559",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-somdej-chuang-2559.html",
         "title": "คดีรถเบนซ์โบราณสมเด็จช่วง วัดปากน้ำ",
         "cat_tag": "คดยุคโบราณ",
@@ -2115,6 +2799,15 @@
         "video_status": "confirmed"
     },
     {
+        "slug": "news-case-ephikth-naib-nuyaatehmuue-ngaeropaetch-udrthaanii-2565.html",
+        "title": "คดีเพิกถอนประทานบัตรเหมืองแร่โปแตช อุดรธานี — สิทธิชุมชนฟ้องหน่วยงานรัฐ 8 แห่ง (2565-2566) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2561",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-ephikth-nsampthaanrangnknaangae-n-2561.html",
         "title": "คดีปกครอง: เพิกถอนสัมปทานรังนกนางแอ่น (2561) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
@@ -2126,6 +2819,15 @@
     {
         "slug": "news-case-eruue-lmphuuekt-fiinikch-2561.html",
         "title": "เรือฟีนิกซ์อับปางพูกต (2561) — สืบกฎหมายจากคดี | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2561",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-trwchsob-phrraab-khrong-raththanamanuue-ng-sw-2567.html",
+        "title": "การตรวจสอบความชอบด้วยรัฐธรรมนูญ พ.ร.ป.การได้มาซึ่ง ส.ว. (2561) — คำวินิจฉัยศาลรัฐธรรมนูญ 2567 — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2561",
         "score": 95,
@@ -2241,8 +2943,8 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdii-saan-raththanamanuue-ng-khaekhhaekpkr-2562.html",
-        "title": "ศาลรัฐธรรมนูญ: ตำแหน่งหัวหน้า คสช. ไม่ใช่ \"เจ้าหน้าที่อื่นของรัฐ\" (2562) — คดีดัง | Cool Uncle Lab",
+        "slug": "news-case-khdii-khrmnaik-anukhrnng-changpa-2564.html",
+        "title": "กรมอุทยานฯ ชดใช้ค่าเสียหายช้างป่า (2564) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2562",
         "score": 95,
@@ -2250,8 +2952,17 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdiiaailthiichaawm-raekn-hmuuekaaasurinthr-2562.html",
-        "title": "คดีไล่ที่ชาวมอแกน หมู่เกาะสุรินทร์ (2562) — คดีดัง | Cool Uncle Lab",
+        "slug": "news-case-khdii-phrraab-khuciwit-2565.html",
+        "title": "พ.ร.บ.คู่ชีวิตกับการแก้ไขป.พ.พ. เพื่อสมรสเท่าเทียม — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2562",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-saan-raththanamanuue-ng-khaekhhaekpkr-2562.html",
+        "title": "ศาลรัฐธรรมนูญ: ตำแหน่งหัวหน้า คสช. ไม่ใช่ \"เจ้าหน้าที่อื่นของรัฐ\" (2562) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2562",
         "score": 95,
@@ -2286,8 +2997,8 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdiich-okngshkrn-mthraphykhruukh-naekn-2562.html",
-        "title": "คดีทุจริตและฉ้อโกงสหกรณ์ออมทรัพย์ครูขอนแก่น — คดีดัง | Cool Uncle Lab",
+        "slug": "news-case-khdiilikhsiththikrathngkaartuun-n-ng-am-okhraach-2562.html",
+        "title": "ลิขสิทธิ์กระทงการ์ตูน น้องอั้ม โคราช — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2562",
         "score": 95,
@@ -2295,8 +3006,8 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdiilikhsiththikrathngkaartuun-n-ng-am-okhraach-2562.html",
-        "title": "ลิขสิทธิ์กระทงการ์ตูน น้องอั้ม โคราช — คดีดัง | Cool Uncle Lab",
+        "slug": "news-case-yingsa-klangsar-canthaburi-dab-3-shp-pm-mrdkthind-4000-rai-2562.html",
+        "title": "ยิงกลางศาลจันทบุรี ดับ 3 ศพ ปมมรดกที่ดิน 4,000 ไร่ (2562)",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2562",
         "score": 95,
@@ -2403,8 +3114,8 @@
         "video_status": "confirmed"
     },
     {
-        "slug": "news-case-khdii-khrmnaik-anukhrnng-changpa-2564.html",
-        "title": "กรมอุทยานฯ ชดใช้ค่าเสียหายช้างป่า (2564) — คดีดัง | Cool Uncle Lab",
+        "slug": "news-case-khdii-forex-3d-cchabkumdaaraaephimetim-2565-2566.html",
+        "title": "คดี Forex-3D แชร์ลูกโซ่ Forex หลอกลวงผู้ลงทุนทั่วประเทศ (2565–2569) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2564",
         "score": 95,
@@ -2448,6 +3159,15 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-khdiiaetngtangoykyaaykhaaraachkaartamrwcchodymich-b-phl-t-wirachay-thr.html",
+        "title": "คำสั่งแต่งตั้งโยกย้ายข้าราชการตำรวจระดับสูง — คดี พล.ต.อ.วิระชัย ทรงเมตตา — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2564",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-marriage-equality-landmark-2567.html",
         "title": "คดีสมรสเท่าเทียม: บรรทัดฐานประวัติศาสตร์เพื่อความเท่าเทียมทางเพศ",
         "cat_tag": "คดีเด่นด้านสังคม",
@@ -2457,26 +3177,8 @@
         "video_status": "confirmed"
     },
     {
-        "slug": "news-case-ephikth-naib-nuyaatehmuue-ngaeropaetch-udrthaanii-2565.html",
-        "title": "คดีเพิกถอนประทานบัตรเหมืองแร่โปแตช อุดรธานี — สิทธิชุมชนฟ้องหน่วยงานรัฐ 8 แห่ง (2565-2566) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2565",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-eruue-hlwngsuokhthay-abpaang-2565.html",
         "title": "เรือหลวงสุโขทัยอับปาง (2565) — สืบกฎหมายจากคดี | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2565",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-forex-3d-cchabkumdaaraaephimetim-2565-2566.html",
-        "title": "คดี Forex-3D แชร์ลูกโซ่ Forex หลอกลวงผู้ลงทุนทั่วประเทศ (2565–2569) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2565",
         "score": 95,
@@ -2495,15 +3197,6 @@
     {
         "slug": "news-case-khdii-perik-khayomul-sanycha-catchue-wakkhisen-2565.html",
         "title": "เปิดเผยข้อมูลสัญญาจัดซื้เวชั่นโควิด (2565) — สืบกฎหมายจากคดี | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2565",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-phrraab-khuciwit-2565.html",
-        "title": "พ.ร.บ.คู่ชีวิตกับการแก้ไขป.พ.พ. เพื่อสมรสเท่าเทียม — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2565",
         "score": 95,
@@ -2538,15 +3231,6 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdiiaefrnaichs-chuuchi-daaruma-2565.html",
-        "title": "แฟรนไชส์ ซูชิ ดารุมะ (2565) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2565",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-khdiiaifaihm-emaathethn-bii-mountain-b-phab-2565.html",
         "title": "ไฟไหม้ เมาท์เทน บี (Mountain B) ผับ (2565)",
         "cat_tag": "คดีอาญา",
@@ -2565,8 +3249,53 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-khdiif-ngr-nglaemidsiththikhwaamepnswntaw-pdpa-kh-muulluukkhaahlud-256.html",
+        "title": "คดีข้อมูลลูกค้ารั่วไหล — PDPC สั่งปรับเอกชน 7 ล้านบาท (2567) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2565",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdiifokngontuhawayattrisap-2567.html",
+        "title": "เครือข่ายบ่อนการพนันนายจิว ซือหาน (ตู้ห่าว) และมาตรการริบทรัพย์สินฟอกเงิน (2567) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2565",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdiikhumkhr-ngchawkhraawchaawelekaaahliiepa-krniithuuke-kchnpidthaang.html",
+        "title": "คุ้มครองชั่วคราวชาวเลเกาะหลีเป๊ะ กรณีถูกเอกชนปิดทางเดินสาธารณะ (2566) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2565",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdiikratyingnongbualamphu-2565.html",
         "title": "โศกนาฏกรรมกราดยิงศูนย์พัฒนาเด็กเล็ก หนองบัวลำภู (2565) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2565",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdiil-bnamekhaahmuuethuue-n-2566.html",
+        "title": "คดีหมูเถื่อน ลอบนำเข้าหมูแช่แข็งผิดกฎหมาย (2566) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2565",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdiituhawkhadilak-2568.html",
+        "title": "คดีตู้ห่าว (2565–2568) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2565",
         "score": 95,
@@ -2621,6 +3350,15 @@
     {
         "slug": "news-case-khdii-9near-aehkek-rkhomykh-muul-2566.html",
         "title": "9near — การขู่เปิดเผยข้อมูลส่วนบุคคล 55 ล้านรายการ (2566) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2566",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-ph-r-k-eluue-nbangkhabaich-ph-r-b-p-ngkankaarthrmaanaela-umhaay-.html",
+        "title": "พ.ร.ก.เลื่อนบังคับใช้ พ.ร.บ.ป้องกันการทรมานและอุ้มหาย — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2566",
         "score": 95,
@@ -2693,15 +3431,6 @@
     {
         "slug": "news-case-khdiibukcchabaekngkh-lechnet-rainfilippins-2566.html",
         "title": "บุกจับแก๊งคอลเซ็นเตอร์ในฟิลิปปินส์ (2566) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2566",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdiicchabkum-esiiyaepng-naaohnd-2566.html",
-        "title": "คดีเสี่ยแป้ง นาโหนด — หลบหนีระหว่างควบคุม (2566–2567) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2566",
         "score": 95,
@@ -2853,15 +3582,6 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdiil-bnamekhaahmuuethuue-n-2566.html",
-        "title": "คดีหมูเถื่อน ลอบนำเข้าหมูแช่แข็งผิดกฎหมาย (2566) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2566",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-khdiilamoetliksitlaiphathai-2566.html",
         "title": "คดีละเมิดลิขสิทธิ์ลายผ้าไทยของชุมชนผู้ทอผ้าพื้นเมือง (2566) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
@@ -2927,15 +3647,6 @@
     {
         "slug": "news-case-khdiiokdangmuuona-phluraebid-2566.html",
         "title": "โศกนาฏกรรมโกดังดอกไม้เพลิงระเบิดมูโนะ (2566) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2566",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdiiphidsayyaak-sraang-aakhaarrathsphaaaihm-sappaayasiristhaan-2566.html",
-        "title": "ผิดสัญญาก่อสร้างอาคารรัฐสภาใหม่ “สัปปายะสภาสถาน” (2566) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2566",
         "score": 95,
@@ -3015,15 +3726,6 @@
         "video_status": "confirmed"
     },
     {
-        "slug": "news-case-khdii-trwchsob-phrraab-khrong-raththanamanuue-ng-sw-2567.html",
-        "title": "การตรวจสอบความชอบด้วยรัฐธรรมนูญ พ.ร.ป.การได้มาซึ่ง ส.ว. (2561) — คำวินิจฉัยศาลรัฐธรรมนูญ 2567 — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2567",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-khdiicchabkum-aepng-naaohnd-thii-inodniiechiiy-2567.html",
         "title": "จับกุม แป้ง นาโหนด ที่อินโดนีเซีย — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
@@ -3069,6 +3771,15 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-khdiiephikth-nkhamsangaih-kcchaakraachkaar-phl-t-surechsth-hakphaal-25.html",
+        "title": "เพิกถอนคำสั่งให้ออกจากราชการ พล.ต.อ.สุรเชษฐ์ หักพาล — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2567",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdiiewbphnan-minnii-2567.html",
         "title": "เว็บพนัน มินนี่ — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
@@ -3087,8 +3798,8 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdiifokngontuhawayattrisap-2567.html",
-        "title": "เครือข่ายบ่อนการพนันนายจิว ซือหาน (ตู้ห่าว) และมาตรการริบทรัพย์สินฟอกเงิน (2567) — คดีดัง | Cool Uncle Lab",
+        "slug": "news-case-khdiifrangetahm-phuuekt-edwid-2567.html",
+        "title": "ฝรั่งเตะหมอ ภูเก็ต (เดวิด) (2567) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2567",
         "score": 95,
@@ -3096,8 +3807,8 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdiifrangetahm-phuuekt-edwid-2567.html",
-        "title": "ฝรั่งเตะหมอ ภูเก็ต (เดวิด) (2567) — คดีดัง | Cool Uncle Lab",
+        "slug": "news-case-khdiikaarlaelyhnaathiiainkaarp-ngkanaifpaaaelahm-kkhwan-echiiyngraay-2.html",
+        "title": "การละเลยหน้าที่ในการป้องกันไฟป่าและหมอกควัน เชียงราย — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2567",
         "score": 95,
@@ -3186,6 +3897,15 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-khdiitadsiththiphuusmakhr-s-w-krniimiilaksnat-nghaameruue-ngekhruue-ya.html",
+        "title": "ผู้สมัคร ส.ว. ถูกคัดค้าน — ลักษณะต้องห้ามเรื่องเครือญาติ (เลือก สว. 2567) — คดีดัง | Cool Uncle Lab",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2567",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdiithnaaytam-71-laan-2567.html",
         "title": "ทนายตั้มคดีฉ้อโกง 71 ล้านบาท แพลตฟอร์มหวยออนไลน์ (2567) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
@@ -3195,10 +3915,10 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdiituhawkhadilak-2568.html",
-        "title": "คดีตู้ห่าว (2565–2568) — คดีดัง | Cool Uncle Lab",
+        "slug": "news-case-khdiitrwcchs-b-ph-r-b-prak-braththrrmnuuywaadwykaaraidmaachueng-s-w-25.html",
+        "title": "ตรวจสอบ พ.ร.บ.ประกอบรัฐธรรมนูญว่าด้วยการได้มาซึ่ง ส.ว. — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2568",
+        "year": "พ.ศ. 2567",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -3222,80 +3942,8 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-yingsa-klangsar-canthaburi-dab-3-shp-pm-mrdkthind-4000-rai-2562.html",
-        "title": "ยิงกลางศาลจันทบุรี ดับ 3 ศพ ปมมรดกที่ดิน 4,000 ไร่ (2562)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 4000",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-alabama-claims-arbitration-usa-great-britain.html",
-        "title": "Alabama Claims Arbitration (USA/Great Britain) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-ambatielos-case-greece-v-uk.html",
-        "title": "Ambatielos Case (Greece v. UK) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-anglo-norwegian-fisheries-case-uk-v-norway.html",
-        "title": "Anglo-Norwegian Fisheries Case (UK v. Norway) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-ara-libertad-case-argentina-v-ghana.html",
-        "title": "ARA Libertad Case (Argentina v. Ghana) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-armed-activities-on-the-territory-of-the-congo-drc-v-uganda.html",
         "title": "Armed Activities on the Territory of the Congo (DRC v. Uganda) — สืบกฎหมายจากคดี | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-attorney-general-of-the-government-of-israel-v-eichmann-israel.html",
-        "title": "Attorney-General of the Government of Israel v. Eichmann (Israel) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-avena-and-other-mexican-nationals-mexico-v-usa.html",
-        "title": "Avena and Other Mexican Nationals (Mexico v. USA) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-barcelona-traction-light-and-power-co-case-belgium-v-spain.html",
-        "title": "Barcelona Traction, Light and Power Co. Case (Belgium v. Spain) — ICJ, 1970 — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "",
         "score": 95,
@@ -3312,123 +3960,6 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-beagle-channel-arbitration-argentina-chile.html",
-        "title": "Beagle Channel Arbitration (Argentina/Chile) — ค.ศ. 1977 และสนธิสัญญา 1984 — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-bosnian-genocide-case-bosnia-v-serbia.html",
-        "title": "Bosnian Genocide Case (Bosnia v. Serbia) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-certain-expenses-of-the-united-nations-advisory-opinion.html",
-        "title": "Certain Expenses of the United Nations (Advisory Opinion) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-certain-questions-of-mutual-assistance-in-criminal-matters-djibouti-v-.html",
-        "title": "Certain Questions of Mutual Assistance in Criminal Matters (Djibouti v. France) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-chorzow-factory-case-germany-v-poland.html",
-        "title": "Chorzów Factory Case (Germany v. Poland) — PCIJ, 1928 — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-clipperton-island-arbitration-france-v-mexico.html",
-        "title": "Clipperton Island Arbitration (France v. Mexico) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-corfu-channel-case-uk-v-albania.html",
-        "title": "Corfu Channel Case (UK v. Albania) — ICJ, 1949 — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-diallo-case-guinea-v-drc.html",
-        "title": "Diallo Case (Guinea v. DRC) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-dispute-concerning-delimitation-of-the-maritime-boundary-ghana-cote-d-.html",
-        "title": "Dispute concerning Delimitation of the Maritime Boundary (Ghana/Côte d'Ivoire) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-dogger-bank-incident-great-britain-russia.html",
-        "title": "Dogger Bank Incident (Great Britain/Russia) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-east-timor-case-portugal-v-australia.html",
-        "title": "East Timor Case (Portugal v. Australia) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-eastern-greenland-case-denmark-v-norway.html",
-        "title": "Eastern Greenland Case (Denmark v. Norway) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-ekhruue-ngbinelaadaaae-r-ethiiywbinthii-004-tkthiisuphrrnburii-25.html",
-        "title": "เครื่องบินเลาด้าแอร์ เที่ยวบินที่ 004 ตกที่สุพรรณบุรี (2534) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-f-ngeriiykkhaaesiiyhaay-hm-thamkaarraksaaphidphlaadthamaihtaab-d-.html",
         "title": "คดีรักษาพยาบาลผิดพลาดทำผู้ป่วยตาบอด (2563) — สืบกฎหมายจากคดี | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
@@ -3438,143 +3969,8 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-f-ngeriiykkhnulchwi-phayabalsaw-thukhkh-a.html",
-        "title": "นวลฉวี: พยาบาลสาวถูกลอบยิงตามคำสั่งสวามี (2502)",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-fisheries-jurisdiction-cases-uk-v-iceland.html",
-        "title": "Fisheries Jurisdiction Cases (UK v. Iceland) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-gabcikovo-nagymaros-project-hungary-slovakia.html",
-        "title": "Gabčíkovo-Nagymaros Project (Hungary/Slovakia) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-gulf-of-maine-area-case-canada-usa.html",
-        "title": "Gulf of Maine Area Case (Canada/USA) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-guyana-v-suriname-pca.html",
-        "title": "Guyana v. Suriname (PCA) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-interhandel-case-switzerland-v-usa.html",
-        "title": "Interhandel Case (Switzerland v. USA) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-island-of-palmas-case-netherlands-v-usa.html",
-        "title": "Island of Palmas Case (Netherlands v. USA) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-jones-v-ministry-of-interior-of-saudi-arabia-uk-house-of-lords.html",
         "title": "Jones v. Ministry of Interior of Saudi Arabia (UK House of Lords) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-joyce-v-director-of-public-prosecutions-uk-house-of-lords.html",
-        "title": "Joyce v. Director of Public Prosecutions (UK House of Lords, 1946) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-jurisdictional-immunities-of-the-state-germany-v-italy.html",
-        "title": "Jurisdictional Immunities of the State (Germany v. Italy) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-ph-r-k-eluue-nbangkhabaich-ph-r-b-p-ngkankaarthrmaanaela-umhaay-.html",
-        "title": "พ.ร.ก.เลื่อนบังคับใช้ พ.ร.บ.ป้องกันการทรมานและอุ้มหาย — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdiiaetngtangoykyaaykhaaraachkaartamrwcchodymich-b-phl-t-wirachay-thr.html",
-        "title": "คำสั่งแต่งตั้งโยกย้ายข้าราชการตำรวจระดับสูง — คดี พล.ต.อ.วิระชัย ทรงเมตตา — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdiiephikth-nkhamsangaih-kcchaakraachkaar-phl-t-surechsth-hakphaal-25.html",
-        "title": "เพิกถอนคำสั่งให้ออกจากราชการ พล.ต.อ.สุรเชษฐ์ หักพาล — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdiif-ngr-nglaemidsiththikhwaamepnswntaw-pdpa-kh-muulluukkhaahlud-256.html",
-        "title": "คดีข้อมูลลูกค้ารั่วไหล — PDPC สั่งปรับเอกชน 7 ล้านบาท (2567) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdiikaarlaelyhnaathiiainkaarp-ngkanaifpaaaelahm-kkhwan-echiiyngraay-2.html",
-        "title": "การละเลยหน้าที่ในการป้องกันไฟป่าและหมอกควัน เชียงราย — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdiikhumkhr-ngchawkhraawchaawelekaaahliiepa-krniithuuke-kchnpidthaang.html",
-        "title": "คุ้มครองชั่วคราวชาวเลเกาะหลีเป๊ะ กรณีถูกเอกชนปิดทางเดินสาธารณะ (2566) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "",
         "score": 95,
@@ -3600,33 +3996,6 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdiitadsiththiphuusmakhr-s-w-krniimiilaksnat-nghaameruue-ngekhruue-ya.html",
-        "title": "ผู้สมัคร ส.ว. ถูกคัดค้าน — ลักษณะต้องห้ามเรื่องเครือญาติ (เลือก สว. 2567) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdiitrwcchs-b-ph-r-b-prak-braththrrmnuuywaadwykaaraidmaachueng-s-w-25.html",
-        "title": "ตรวจสอบ พ.ร.บ.ประกอบรัฐธรรมนูญว่าด้วยการได้มาซึ่ง ส.ว. — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-korea-beef-wto-appellate-body.html",
-        "title": "Korea – Beef (WTO Appellate Body) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-lagrand-case-germany-v-usa.html",
         "title": "LaGrand Case (Germany v. USA) — สืบกฎหมายจากคดี | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
@@ -3645,116 +4014,8 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-legal-consequences-of-the-construction-of-a-wall-advisory-opinion.html",
-        "title": "Legal Consequences of the Construction of a Wall in the Occupied Palestinian Territory (Advisory Opinion) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-legality-of-the-threat-or-use-of-nuclear-weapons-advisory-opinion.html",
-        "title": "Legality of the Threat or Use of Nuclear Weapons (Advisory Opinion) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-lockerbie-case-libya-v-uk-usa.html",
-        "title": "Lockerbie Case (Libya v. UK/USA) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-m-v-saiga-no-2-case-st-vincent-v-guinea.html",
-        "title": "M/V \"Saiga\" (No. 2) Case (St. Vincent v. Guinea) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-military-and-paramilitary-activities-in-and-against-nicaragua-nicaragu.html",
-        "title": "Military and Paramilitary Activities in and against Nicaragua (Nicaragua v. USA) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-minquiers-and-ecrehos-case-france-v-uk.html",
-        "title": "Minquiers and Ecrehos Case (France v. UK) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-nicaragua-case-nicaragua-v-usa.html",
-        "title": "Nicaragua Case (Nicaragua v. USA) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-north-sea-continental-shelf-cases-frg-v-denmark-netherlands.html",
-        "title": "North Sea Continental Shelf Cases (FRG v. Denmark/Netherlands) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-nottebohm-case-liechtenstein-v-guatemala.html",
-        "title": "Nottebohm Case (Liechtenstein v. Guatemala) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-nuclear-tests-cases-australia-v-france-new-zealand-v-france.html",
-        "title": "Nuclear Tests Cases (Australia v. France; New Zealand v. France) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-oil-platforms-case-iran-v-usa.html",
         "title": "Oil Platforms Case (Iran v. USA) — สืบกฎหมายจากคดี | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-pinochet-case-uk-house-of-lords.html",
-        "title": "Pinochet Case (UK House of Lords) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-pulp-mills-on-the-river-uruguay-argentina-v-uruguay.html",
-        "title": "Pulp Mills on the River Uruguay (Argentina v. Uruguay) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "",
         "score": 95,
@@ -3771,269 +4032,8 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-radwan-v-radwan-uk-family-division.html",
-        "title": "Radwan v. Radwan (UK Family Division) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-rainbow-warrior-arbitration-new-zealand-v-france.html",
-        "title": "Rainbow Warrior Arbitration (New Zealand v. France) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-reparation-for-injuries-suffered-in-the-service-of-the-un-advisory-opi.html",
-        "title": "Reparation for Injuries Suffered in the Service of the United Nations (Advisory Opinion) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-reservations-to-the-convention-on-genocide-advisory-opinion.html",
-        "title": "Reservations to the Convention on Genocide (Advisory Opinion) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-right-of-passage-over-indian-territory-portugal-v-india.html",
-        "title": "Right of Passage over Indian Territory (Portugal v. India) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-s-s-i-m-alone-canada-v-usa.html",
-        "title": "S.S. I'm Alone (Canada v. USA) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-south-china-sea-arbitration-philippines-v-china.html",
-        "title": "South China Sea Arbitration (Philippines v. China) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-south-west-africa-cases-ethiopia-v-south-africa.html",
-        "title": "South West Africa Cases (Ethiopia v. South Africa) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-southern-bluefin-tuna-cases-new-zealand-australia-v-japan.html",
         "title": "Southern Bluefin Tuna Cases (New Zealand/Australia v. Japan) — สืบกฎหมายจากคดี | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-tadic-case-icty.html",
-        "title": "Tadić Case (ICTY) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-temple-of-preah-vihear-cambodia-v-thailand.html",
-        "title": "Temple of Preah Vihear (Cambodia v. Thailand) — ICJ 1962 — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-the-asylum-case-colombia-v-peru.html",
-        "title": "The Asylum Case (Colombia v. Peru) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-the-caroline-case-uk-v-usa.html",
-        "title": "The Caroline Case (UK v. USA) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-the-enrica-lexie-incident-italy-v-india.html",
-        "title": "The Enrica Lexie Incident (Italy v. India) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-the-lotus-case-france-v-turkey.html",
-        "title": "คดี The Lotus — ฝรั่งเศส vs. ตุรกี (PCIJ, 1927) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-the-naulilaa-incident-portugal-v-germany.html",
-        "title": "The Naulilaa Incident (Portugal v. Germany) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-the-volga-case-russian-federation-v-australia.html",
-        "title": "The Volga Case (Russian Federation v. Australia) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-tinoco-arbitration-great-britain-v-costa-rica.html",
-        "title": "Tinoco Arbitration (Great Britain v. Costa Rica) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-trail-smelter-arbitration-usa-v-canada.html",
-        "title": "Trail Smelter Arbitration (USA v. Canada) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-trendtex-trading-corp-v-central-bank-of-nigeria-uk-court-of-appeal.html",
-        "title": "Trendtex Trading Corp. v. Central Bank of Nigeria (UK Court of Appeal) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-united-states-diplomatic-and-consular-staff-in-tehran-usa-v-iran.html",
-        "title": "United States Diplomatic and Consular Staff in Tehran (USA v. Iran) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-us-gasoline-wto-appellate-body.html",
-        "title": "US – Gasoline (WTO Appellate Body) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-western-sahara-advisory-opinion.html",
-        "title": "Western Sahara (Advisory Opinion) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-aima-khamkhuen-nai-praborommaharachawang.html",
-        "title": "คดีอ้ายมา ลอบข่มขืนเจ้าจอมในพระบรมมหาราชวัง (จ.ศ. 1159) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-kamnan-talad-ayutthaya.html",
-        "title": "คดีกำนันตลาดรีดเงินเกินพิกัด — พระอัยการลักษณะอาญาหลวง บทที่ 3 สมัยอยุธยา (พ.ศ. 1895–2310) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-thujrit-phasi-fin-history.html",
-        "title": "คดีทุจริตภาษีฝิ่น — วิกฤตเจ้าภาษีนายอากรและต้นกำเนิดการปฏิรูปคลัง (พ.ศ. 2445) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-thujrit-huay-kor-khor-history.html",
-        "title": "คดีทุจริตหวย ก.ข. — ตำนานขุนบานเถื่อนและการมอมเมาประชาชน (พ.ศ. 2459) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-thujrit-ngob-rotfai-history.html",
-        "title": "คดีทุจริตงบประมาณรถไฟ — การตรวจสอบเมกะโปรเจกต์สายแรกของสยาม (พ.ศ. 2434) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-tax-farmer-embezzlement-history.html",
-        "title": "คดีเจ้าภาษีนายอากรยักยอกเงินส่งคลัง — วิกฤตเงินฝืดและกำเนิดกระทรวงการคลัง (พ.ศ. 2416) — คดีดัง | Cool Uncle Lab",
-        "cat_tag": "คดีอาญา",
-        "year": "",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-thujrit-pamai-muang-nuea-history.html",
-        "title": "คดีทุจริตสัมปทานป่าไม้ — ข้อพิพาทป่าสักและอธิปไตยเหนือทรัพยากร (พ.ศ. 2426) — คดีดัง | Cool Uncle Lab",
         "cat_tag": "คดีอาญา",
         "year": "",
         "score": 95,
