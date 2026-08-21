@@ -2254,5 +2254,35 @@
     "score": 93,
     "has_video": false,
     "judicial_potential": true
+  },
+  "news-case-khdii-panthip-piracy-2545.html": {
+    "grade": "A",
+    "score": 90,
+    "has_video": true,
+    "judicial_potential": true
+  },
+  "news-case-khdii-computer-defamation-2550.html": {
+    "grade": "A",
+    "score": 91,
+    "has_video": false,
+    "judicial_potential": true
+  },
+  "news-case-khdii-domain-squatting-2545.html": {
+    "grade": "A",
+    "score": 89,
+    "has_video": false,
+    "judicial_potential": true
+  },
+  "news-case-khdii-corporate-software-piracy-2555.html": {
+    "grade": "A",
+    "score": 90,
+    "has_video": false,
+    "judicial_potential": true
+  },
+  "news-case-khdii-pdpa-landmark-2565.html": {
+    "grade": "A",
+    "score": 93,
+    "has_video": false,
+    "judicial_potential": true
   }
 }
