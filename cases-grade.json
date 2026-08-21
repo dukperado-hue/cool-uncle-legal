@@ -2149,5 +2149,35 @@
     "has_video": true,
     "judicial_potential": true,
     "title": "คดีทุ่งใหญ่นเรศวร (ชนวนเหตุ 14 ตุลา)"
+  },
+  "billy-polajee-2557.html": {
+    "grade": "A",
+    "score": 95,
+    "has_video": true,
+    "judicial_potential": true
+  },
+  "akara-gold-mine-2560.html": {
+    "grade": "A",
+    "score": 93,
+    "has_video": true,
+    "judicial_potential": true
+  },
+  "mae-moh-power-plant-2546.html": {
+    "grade": "A",
+    "score": 94,
+    "has_video": true,
+    "judicial_potential": true
+  },
+  "klong-dan-corruption-2545.html": {
+    "grade": "A",
+    "score": 92,
+    "has_video": true,
+    "judicial_potential": true
+  },
+  "bar-beer-demolition-2546.html": {
+    "grade": "A",
+    "score": 91,
+    "has_video": true,
+    "judicial_potential": true
   }
 }
