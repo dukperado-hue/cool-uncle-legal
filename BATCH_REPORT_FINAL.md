@@ -186,3 +186,17 @@
 - **Quality Gate:** score >= 85, 0 BLOCK, 8 sections present.
 - **Judicial Potential:** High (All are landmark court rulings).
 - **Handoff:** Ready for Agent B (UI) and Agent C (Rank S verification).
+
+### Batch 42 (Historical R4-R5 & Blue Diamond Upgrade) - 2026-08-21
+- **Status:** DEPLOYED ✅
+- **Cases Processed:** 5
+- **Upgraded to A:** 5
+- **Cases:**
+  1. `amdaeng-muean-rights-2408`: คดีอำแดงเหมือนกับนายริด (Landmark สิทธิสตรี)
+  2. `phraya-preecha-konlakarn-2422`: คดีพระยาปรีชากลการ (ทุจริตเหมืองทองและโศกนาฏกรรมรัก)
+  3. `ksr-kulap-history-2443`: คดี ก.ส.ร. กุหลาบ (การตรวจสอบประวัติศาสตร์และเสรีภาพทางความคิด)
+  4. `queen-sunandha-tragedy-2423`: คดีสมเด็จพระนางเรือล่ม (โศกนาฏกรรมจากกฎมณเฑียรบาล)
+  5. `blue-diamond-affair-2532`: คดีเพชรซาอุ (มหากาพย์โจรกรรมและอุ้มฆ่า - UPGRADED)
+- **Quality Gate:** score >= 85, 0 BLOCK, 8 sections present.
+- **Judicial Potential:** High (Historical landmarks and international impact).
+- **Handoff:** Ready for Agent B (UI) and Agent C (Rank S verification).
