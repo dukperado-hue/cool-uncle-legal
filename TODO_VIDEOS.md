@@ -117,3 +117,4 @@ news-case-trail-smelter-arbitration-usa-v-canada | Trail Smelter Arbitration (US
 news-case-trendtex-trading-corp-v-central-bank-of-nigeria-uk-court-of-appeal | Trendtex Trading Corp. v. Central Bank of Nigeria (UK Court of Appeal) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
 news-case-united-states-diplomatic-and-consular-staff-in-tehran-usa-v-iran | United States Diplomatic and Consular Staff in Tehran (USA v. Iran) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
 news-case-western-sahara-advisory-opinion | Western Sahara (Advisory Opinion) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdii-nangthongloen-2468.html | คดีนางทองเลื่ อน 2468 | หักคอน้องผัวตุ่มน้ำ — มีเฉพาะบทความ MGR (โรม บุนนาค) ยังไม่มีคลิปวิดีโอที่เหมาะสม

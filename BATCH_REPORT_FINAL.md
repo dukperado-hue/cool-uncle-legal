@@ -372,3 +372,35 @@ full_validate: 48 WARN — 0 BLOCK (8 รายการที่เพิ่ม
 ### SENDOFF — 12 คดี S_CANDIDATE พร้อมส่ง Agent B
 
 สัปปายะสภาสถาน 2566, สงครามยาเสพติด 2563 (policy case mode), พระยอดเมืองขวาง, ซีอุย, Corfu, Preah Vihear, LaGrand, ก.ศ.ร. กุหลาบ, ป๋อง 5 ศพ, สุขุม เชิดชื่น, มรดกนัยนา, วิสามัญ 6 ศพโจด่านช้าง — รายละเอียดอยู่ในผลตรวจของ Agent C (Batch 10 Confirm 8445eef)
+
+---
+
+# BATCH 12 REPORT — คดียุคร.5–ร.6 (ประวัติศาสตร์กฎหมาย) + Agent C follow-up
+Commit: 4ba8d37 (BATCH 12) + 84503ca (follow-up fix) — deploy main
+Baseline ก่อนทำ: full_validate 48 WARN / 0 BLOCK
+
+## New build (1)
+- **ทองเลื่ อน 2468 (A/90)** — "อีทองเลื่ อนหักคอน้องผัว" ตุ่มน้ำ พระประแดง; พยานการชันระบบศพแบบแพทย์ครั้งแรก ๆ ของสยาม (ร.6); ประหาร 14 ต.ค. 2468; video_status = pending (มีแค่บทความ MGR — บันทึก TODO_VIDEOS.md)
+  - Seed: MGR Online (โรม บุนนาค 19 ส.ค. 2562) + วารสาร SWU 19 (2559) โดม ไกรปรกสร — 2 secondary sources ตรงกัน
+  - judicial_potential = true (forensic autopsy precedent), status = needs_verification
+
+## Fixes (4) — แก้ตาม seed facts ที่ verified
+- **amdaeng-yu (อีอยู่ 2424)**: title ผิด "ภรรยา ร.5" → ภรรยาพระบรรฤาสิงหนาท; เสริมพระราชหัตถเลขา ร.5 "ลูกขุนตื่นขึ้นจากหลับ"; เพิ่มวิดีโอ 2 คลิป; แตก paragraph ยาว 2 ย่อหน้า
+- **bunpeng (บุญเพ็งหีบเหล็ก)**: ปีถูกต้อง = จับ ม.ค. 2461 / ประหาร 9 ส.ค. 2462 (เดิมผิด); แยกตำนาน 7 ศพ vs ยืนยันได้ 2 ศพ (นางปริก + หนึ่งรายที่ถ่วงในหีบ)
+- **kabot-r130 (กบฏ ร.ศ.130 2455)**: แก้ข้อความ "11 คนประหาร" ที่ขัดแย้งกับ Wikipedia — ประหาร 3 คน; ร.6 อภัยโทษ/ลดโทษทุกคน
+- **payarakha (พญาระกา 2453)**: เสริมศาลรับสั่ ง 3 กรม + คำพิพากษา primary (wikisource); แก้ summary/events ให้ match seed
+
+## Agent C follow-up (commit 84503ca) — Action item 8 WARN เหลือ
+- แตก 21 paragraph >350 บน 6 หน้า ICJ (Rainbow Warrior 5, Western Sahara 5, Nottebohm 4, South West Africa 4, Nuclear Tests 3) ตัดที่ " — " / รอยต่อ Q&A — ถ้อยคำไม่เปลี่ยน
+- ผล: full_validate **48 → 39 WARN / 0 BLOCK** (เหลือ 39 = ICJ ล็อตก่อนหน้าที่ยังไม่ถูกสั่งแก้ + Alabama/Ambatielos/Norwegian Fisheries ฯลฯ)
+
+## Index
+- A total = 267 (263 A + 4 A_REVIEW), C = 1 (blue-diamond — Agent B territory)
+- live verify: ทุกหน้า HTTP 200
+- หน่วยงานอื่น: Agent B เพิ่ม 12 S_CANDIDATE case JSONs + golden-cases manifest (72c3a7a) — ไม่ใช่งาน Agent A
+
+## ส่งต่อ
+- ทองเลื่ อน → S_CANDIDATE candidate (judicial_potential + forensic precedent) — รอ Agent C ตรวจ
+- ส่ง Agent C: confirm batch 12 fixes (โดยเฉพาะ r130 3 executions + bunpeng dates) + 8 WARN ที่ยังเหลือ
+
+BATCH REPORT (summary): Processed 10 (1 new + 4 fixes + 5 ICJ splits) / New A: 1 / Fixed: 4 / BLOCK: 0 / WARN: 39 (ลดลง 9) / Video pending: 1 / Judicial potential: 1 (ทองเลื่ อน)
