@@ -404,3 +404,16 @@ Baseline ก่อนทำ: full_validate 48 WARN / 0 BLOCK
 - ส่ง Agent C: confirm batch 12 fixes (โดยเฉพาะ r130 3 executions + bunpeng dates) + 8 WARN ที่ยังเหลือ
 
 BATCH REPORT (summary): Processed 10 (1 new + 4 fixes + 5 ICJ splits) / New A: 1 / Fixed: 4 / BLOCK: 0 / WARN: 39 (ลดลง 9) / Video pending: 1 / Judicial potential: 1 (ทองเลื่ อน)
+
+
+## BATCH 13 (commit e150b94) — คดีใหม่ 2 คดี: ธนบัตรปลอม ร.5 + ไอซ์ หีบเหล็ก
+
+- Processed: 2 (new builds) + ตรวจยืนยัน 2 หน้าเดิม (สวรรคต ร.8, ลักษมีลาวัณ — ถูกต้องตาม seed ไม่ต้องแก้)
+- New A: 2 — ธนบัตรปลอม ร.5 2446 (A/88), ไอซ์ หีบเหล็ก 2563 (A/87)
+- A total: 269 (A=265 + A_REVIEW=4)
+- BLOCK: 0 | full_validate: 39 PROBLEMS (pre-existing ICJ, ไม่มีใหม่)
+- judicial_potential: 2 (ธนบัตรปลอม — extraterritoriality, อำดงไทยในศาลสยาม; ไอซ์ — เชื่อมโจทก์หีบเหล็กข้ามยุค) → READY_FOR_AGENT_C
+- video pending: 2 (ใส่ TODO_VIDEOS.md แล้ว)
+- external_law: ม.391 ซ่อนเร้นอำพรางศพ (codex ถ้อยคำไม่ตรง → external_law), กฎหมายธนบัตร 2445 (external_law)
+- ปรับแก้ชื่อ: กรมหมื่นพงษาดิศรมหิป + จ่ามื่นเพ่ง (จมื่นศรีสรรักษ์) — แก้ title asset/overlay ที่มีชื่อผิด
+- deploy: live HTTP 200 ทั้ง 2 หน้า
