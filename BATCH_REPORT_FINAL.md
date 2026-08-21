@@ -64,3 +64,18 @@
 ---
 
 (Batch 15-30 content remains in file history)
+
+### Batch 34 — DEPLOYED ✅ (2026-08-21 09:36)
+**Theme:** Family Law, Gender Equality & Social Justice Landmarks
+**Cases (5 Grade A):**
+- news-case-khdii-marriage-equality-landmark-2567.html (สมรสเท่าเทียม 2567)
+- news-case-khdii-adultery-damages-landmark-2565.html (ฟ้องชู้เรียกค่าทดแทน 2565)
+- news-case-khdii-living-will-right-to-die-2558.html (สิทธิในการตาย/Living Will)
+- news-case-khdii-domestic-violence-protection-2562.html (ความรุนแรงในครอบครัว 2562)
+- news-case-khdii-illegitimate-child-inheritance-2563.html (สิทธิของบุตรนอกสมรส 2563)
+
+**Status:**
+- All 5 pages built to Grade A standard (8 sections, paras <= 350, confirmed legal issues).
+- All verified live (HTTP 200) at coolunclelab.com.
+- `cases-grade.json` updated.
+- Total Grade A cases: ~381.
