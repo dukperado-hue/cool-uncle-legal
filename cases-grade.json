@@ -1482,12 +1482,7 @@
     "release": "WARN",
     "has_video": false
   },
-  "news-case-khdii-amdaeng-yu.html": {
-    "grade": "A",
-    "score": 88,
-    "release": "WARN",
-    "has_video": false
-  },
+  "news-case-khdii-amdaeng-yu.html": "A",
   "news-case-khdii-phrapreecha-prachin-2421.html": {
     "grade": "A",
     "score": 89,
@@ -2032,12 +2027,7 @@
     "has_video": true,
     "judicial_potential": true
   },
-  "news-case-khdii-phraya-raka-2453.html": {
-    "grade": "A",
-    "score": 86,
-    "has_video": true,
-    "judicial_potential": true
-  },
+  "news-case-khdii-phraya-raka-2453.html": "A",
   "news-case-khdii-ghost-merit-2445.html": {
     "grade": "A",
     "score": 88,
@@ -2556,5 +2546,10 @@
   "news-case-khdii-x-jakkrit-hired-murder-2556.html": {
     "grade": "A",
     "title": "คดีเอ็กซ์ จักรกฤษณ์: ปมจ้างวานฆ่าในครอบครัว"
-  }
+  },
+  "news-case-khdii-phraya-raka.html": "A",
+  "news-case-khdii-nu-kai.html": "A",
+  "news-case-khdii-nang-thong-luean.html": "A",
+  "news-case-khdii-preecha-kolakan.html": "A",
+  "news-case-khdii-yot-mueang-khwang.html": "A"
 }

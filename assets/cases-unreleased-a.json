@@ -160,6 +160,16 @@
   "cat": "คดยุคโบราณ"
  },
  {
+  "slug": "news-case-khdii-amdaeng-yu",
+  "grade": "A",
+  "score": 95,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีอำแดงอยู่: คุณนายผู้มั่งคั่งสู่ลานประหาร",
+  "year": "2443",
+  "cat": "คดอาญาในอดีต"
+ },
+ {
   "slug": "news-case-khdii-ao-luek-massacre-2560",
   "grade": "A",
   "score": 95,
@@ -680,6 +690,16 @@
   "cat": "คดยุคโบราณ"
  },
  {
+  "slug": "news-case-khdii-nang-thong-luean",
+  "grade": "A",
+  "score": 95,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีนางทองเลื่อน: หญิงใจยักษ์และโทษประหารรายสุดท้าย?",
+  "year": "2452",
+  "cat": "คดอาญาในอดีต"
+ },
+ {
   "slug": "news-case-khdii-nang-thong-luean-2452",
   "grade": "A",
   "score": 95,
@@ -738,6 +758,16 @@
   "title": "คดีน้องพลอย: 3 ปีที่หายตัวสู่อุ้มฆ่าเผานั่งยางโดยฝีมือทหาร",
   "year": "2557",
   "cat": "คดอาญา"
+ },
+ {
+  "slug": "news-case-khdii-nu-kai",
+  "grade": "A",
+  "score": 95,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีหนูไก๋: ฆาตกรรมชิงทรัพย์เด็กที่น่าหดหู่",
+  "year": "2448",
+  "cat": "คดอาญาในอดีต"
  },
  {
   "slug": "news-case-khdii-nualchawee-2502",
@@ -920,9 +950,19 @@
   "cat": "คดีศาสนา"
  },
  {
+  "slug": "news-case-khdii-phraya-raka",
+  "grade": "A",
+  "score": 95,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีพญาระกา: บทละครหมิ่นพระบรมเดชานุภาพ?",
+  "year": "2453",
+  "cat": "คดประวัติศาสตร์"
+ },
+ {
   "slug": "news-case-khdii-phraya-raka-2453",
   "grade": "A",
-  "score": 86,
+  "score": 95,
   "release": "WARN",
   "has_video": true,
   "title": "คดีพญาระกา (รอยร้าวในราชสำนัก)",
@@ -968,6 +1008,16 @@
   "title": "คดีแพรวา (อุบัติเหตุ 9 ศพและความรับผิดทางละเมิด)",
   "year": "2553",
   "cat": "คดีอาญา"
+ },
+ {
+  "slug": "news-case-khdii-preecha-kolakan",
+  "grade": "A",
+  "score": 95,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีพระยาปรีชากลการ: โศกนาฏกรรมความรักและอำนาจ",
+  "year": "2421",
+  "cat": "คดประวัติศาสตร์"
  },
  {
   "slug": "news-case-khdii-preecha-konlakarn-2422",
@@ -1458,6 +1508,16 @@
   "title": "คดีอดีตพระยันตระ อมโร — ข้อพิพาทปาราชิกและการห่มเขียว",
   "year": "2537",
   "cat": "คดีศาสนา"
+ },
+ {
+  "slug": "news-case-khdii-yot-mueang-khwang",
+  "grade": "A",
+  "score": 95,
+  "release": "WARN",
+  "has_video": true,
+  "title": "คดีพระยอดเมืองขวาง: วีรบุรุษผู้รักษาแผ่นดินหรืออาชญากรสงคราม?",
+  "year": "2436",
+  "cat": "คดประวัติศาสตร์"
  },
  {
   "slug": "news-case-khdii-young-turk-rebellion-2524",
@@ -2127,16 +2187,6 @@
   "has_video": true,
   "title": "news-case-khdii-amdaeng-muean-rights-2408",
   "year": "2408",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-amdaeng-yu",
-  "grade": "A",
-  "score": 88,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-amdaeng-yu",
-  "year": "",
   "cat": ""
  },
  {
