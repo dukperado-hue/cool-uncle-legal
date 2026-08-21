@@ -484,3 +484,44 @@ BATCH REPORT (summary): Processed 10 (1 new + 4 fixes + 5 ICJ splits) / New A: 1
 **Patch เล็ก: rewrite_v21.py** — video embed normalize URL/ID → `youtube.com/embed/<id>` (content-safe)
 
 **สถานะ: DEPLOYED → READY_FOR_AGENT_C handoff**
+
+
+---
+
+# BATCH 15 — พระยอดเมืองขวาง upgrade (21 Aug 2026)
+
+**Commit:** `abad6ce` | **Status:** DEPLOYED & LIVE (200)
+
+เพจ legacy (A/90) ยกระดับจาก placeholder บาง เป็นคดีเต็มตามรายงานศาลรับสั่งพิเศษ ร.ศ.112 (primary source: รายงานศาลรับสั่งพิเศษ — vajirayana.org):
+
+- ศาลรับสั่งพิเศษ (24 ก.พ.–17 มี.ค. ร.ศ.112) ยกฟ้อง (ศาลไทย)
+- ศาลผสม (4–13 มิ.ย. ร.ศ.113) ตัดสินจำคุก 20 ปี → ร.5 พระราชทานอัยโทษ
+- เพิ่ม 5 events, 2 legal issues (ศาล 2 คู่ 2 ครั้ง + อาญาหลวง ม.10/ม.108), 4 provisions (อาญาหลวง ม.10/ม.108, พ.ร.บ.ทิ้งไฟ, พ.ร.บ.ศาลรับสั่งพิเศษ — external_law)
+- วิดีโอ 2 คลิป (9k9zDqHY8i4, DENRIuhza8U) — embed ID=9k9zDqHY8i4
+- แก้ ขันนาง→ขุนนาง (2 ตำแหน่ง), judicial_potential=true (S_CANDIDATE candidate) → ส่งต่อ Agent C
+
+# BATCH 16 — A_REVIEW RESCUE: คดีปกครอง/แพ่ง 4 คดี (21 Aug 2026)
+
+**Commit:** `e21cde8` | **Status:** DEPLOYED & LIVE (200 x4)
+
+A_REVIEW 4 คดี (สโก 80–83 ต่ำกว่าเกณฑ์ A=85): ขาดวิดีโอ ขาด timeline และหน้าเดีย summary เสื่อม
+
+| คดี | เดิม | เปลี่ยนแปลง | ผล |
+|---|---|---|---|
+| เพิกถอนสั่งยุบสภา อบต. 2558 | A_REVIEW/81 | + วิดีโอ 19UzWLrSrIY, +5 events, A/86 | **A** |
+| เพิกถอนโฉนดเกาะลิบง 2562 | A_REVIEW/82 | + วิดีโอ xKt7gqy1MiY, +5 events, A/87 | **A** |
+| สัมปทานรังนกนางแอ่น 2561 | A_REVIEW/80 (summary เสื่อม — เนื้อหาไม่ตรงคดี) | rewrite summary จาก li-q เดิม (342 chars), +5 events, A/85 | **A** |
+| ฟ้องเต็นทรถมือสอง "รถย้อมแมว" 2566 | A_REVIEW/83 | + วิดีโอ ka6ptQLOXJc, +5 events, A/87 | **A** |
+
+Events derive จากเนื้อหาของหน้าเดิมเท่านั้น (ไม่เพิ่มข้อเท็จจริงใหม่) วิดีโอเป็นคลิปไทยตรงประเด็นกฎหมายในหน้า
+
+- full_validate: 39 WARN / 0 BLOCK (baseline เดิม — WARN 39 รายการเป็นของคดี ICJ/maaekaa legacy)
+- TODO_VIDEOS: ลบ 3 รายการที่มีวิดีโอแล้ว; รังนก 2561 ยัง pending
+- Grade B: 0 | Grade C: 1 (blue-diamond.html = SERIES HUB เพชรซาอู — Agent B territory, คดีจริง 3 ภาค A หมดแล้ว → ข้ามโดยบันทึกเหตุผล)
+
+## ยอดรวมหลัง Batch 15–16
+
+**Grade A total: 274 (A=270 + Batch16 4 = 274), A_REVIEW=0, C=1 (series hub)**
+(หมายเหตุ: A_REVIEW เดิม 4 ใช่จาก Batch 15 report — รวม 2 batches: เพชรซาอู series A/91–92 x3 + พระยอด A + 4 คดี Batch16 = 274)
+
+**สถานะ: READY_FOR_AGENT_C** — พระยอดเมืองขวาง (primary source court records) + คดียุคโบราณที่ระบุ judicial_potential=gabDLa4YCL; **Agent B** — presentation Read/Play mode; **publication decision** — คดีใหม่ทั้งหมด release=WARN
