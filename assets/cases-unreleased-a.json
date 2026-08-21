@@ -360,16 +360,6 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdii-kusar-kulab-2436.html",
-        "title": "คดี ก.ศ.ร. กุหลาบ — นักปราชญ์ราชบัณฑิต ผู้ถูกฟ้องฐานหมื่นประมาท (พ.ศ. 2436)",
-        "cat_tag": "คดทั่วไป",
-        "year": "พ.ศ. 2436",
-        "norm_year": 2436,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "plon-prasang-wat-chomsuda-2440.html",
         "title": "คดีปล้นพระสงฆ์วัดจอมสุดา พ.ศ. 2440 — ยิงศิษย์วัดตายกลางกุฏิ การสืบสวนแบบตะวันตกช่วงร.5",
         "cat_tag": "คดทั่วไป",
@@ -395,16 +385,6 @@
         "cat_tag": "คดทั่วไป",
         "year": "พ.ศ. 2442",
         "norm_year": 2442,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-ksr-kulap-2443.html",
-        "title": "คดี ก.ส.ร. กุหลาบ — ข้อหา &#x27;กุ&#x27; ประวัติศาสตร์และหมิ่นพระบรมเดชานุภาพ (พ.ศ. 2443)",
-        "cat_tag": "คดทั่วไป",
-        "year": "พ.ศ. 2443",
-        "norm_year": 2443,
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
