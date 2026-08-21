@@ -1,104 +1,134 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>คดีเกรด A ที่ยังไม่เปิดเผย — Cool Uncle Legal Lab</title>
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Sarabun',sans-serif; background:#F8F6F1; color:#1B2437; }
-.topbar { background:#1B2437; color:#E8ECEF; padding:10px 22px; display:flex; align-items:center; gap:12px; font-weight:600; border-bottom:3px solid #B08A3C; }
-.topbar .tb-brand { display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.05rem; color:#fff; text-decoration:none; }
-.topbar .tb-brand img { border-radius:8px; }
-.topbar .tb-sep { color:#B08A3C; }
-.container { max-width:960px; margin:0 auto; padding:20px; }
-h1 { font-size:1.6rem; margin-bottom:8px; }
-p.lead { color:#5C4A14; margin-bottom:16px; font-size:0.95rem; }
-.stats { display:flex; gap:16px; margin-bottom:20px; flex-wrap:wrap; }
-.stat-box { background:#fff; border:2px solid #B08A3C; border-radius:12px; padding:12px 18px; font-size:0.9rem; }
-.stat-box strong { font-size:1.3rem; color:#B08A3C; }
-table { width:100%; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
-th { background:#1B2437; color:#fff; padding:10px 12px; text-align:left; font-size:0.85rem; }
-td { padding:8px 12px; border-bottom:1px solid #eee; font-size:0.88rem; }
-tr:hover td { background:#FFF9F0; }
-a.case-link { color:#1B2437; text-decoration:none; font-weight:600; }
-a.case-link:hover { color:#B08A3C; }
-.badge { display:inline-block; padding:2px 8px; border-radius:6px; font-size:0.78rem; font-weight:600; }
-.badge-warn { background:#FFF3E0; color:#E65100; border:1px solid #FFB74D; }
-.badge-blocked { background:#FCE4EC; color:#C62828; border:1px solid #EF9A9A; }
-.badge-a { background:#E8F5E9; color:#2E7D32; border:1px solid #81C784; }
-.cat-tag { font-size:0.78rem; color:#5C4A14; background:#F6E6B8; padding:1px 6px; border-radius:4px; }
-.filter-bar { margin-bottom:12px; display:flex; gap:8px; flex-wrap:wrap; }
-.filter-btn { padding:6px 14px; border-radius:20px; border:1px solid #B08A3C; background:#fff; color:#5C4A14; font-size:0.85rem; cursor:pointer; font-family:'Sarabun',sans-serif; }
-.filter-btn.active { background:#B08A3C; color:#fff; }
-.search-box { width:100%; padding:10px 16px; border:2px solid #B08A3C; border-radius:10px; font-size:0.95rem; font-family:'Sarabun',sans-serif; margin-bottom:12px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>คดีเกรด A ที่ยังไม่เปิดเผย — Cool Uncle Legal Lab</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    body { font-family: 'Sarabun', sans-serif; background: #f4f7f6; color: #333; margin: 0; padding: 20px; }
+    .container { max-width: 1200px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .stats { display: flex; gap: 20px; margin-bottom: 25px; flex-wrap: wrap; }
+    .stat-box { background: #f8f9fa; padding: 15px 25px; border-radius: 8px; border-left: 5px solid #3498db; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    .stat-box strong { font-size: 1.2em; color: #2980b9; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.95em; }
+    th { background: #2c3e50; color: #fff; text-align: left; padding: 12px; position: sticky; top: 0; }
+    td { padding: 12px; border-bottom: 1px solid #eee; }
+    tr:hover { background: #f1f4f6; }
+    .grade-a { color: #27ae60; font-weight: bold; }
+    .status-warn { color: #e67e22; font-weight: bold; }
+    .status-block { color: #e74c3c; font-weight: bold; }
+    .video-icon { font-size: 1.2em; }
+    a { color: #3498db; text-decoration: none; font-weight: 500; }
+    a:hover { text-decoration: underline; }
+    #searchInput { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 6px; font-size: 1em; }
+    #filterBar { margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .filter-btn { padding: 8px 16px; border: 1px solid #3498db; background: #fff; color: #3498db; border-radius: 20px; cursor: pointer; transition: 0.3s; }
+    .filter-btn.active { background: #3498db; color: #fff; }
+  </style>
 </head>
 <body>
-<div class="topbar">
-  <a class="tb-brand" href="index.html"><img src="assets/capybara-64.webp" alt="" width="36" height="36">Cool Uncle ⚖ Legal Lab</a>
-  <span class="tb-sep">|</span>
-  <span>คดีเกรด A ที่ยังไม่เปิดเผย</span>
-  <span class="tb-sep">|</span>
-  <a href="news-index.html" style="color:#B08A3C;text-decoration:none">← กลับหน้าหลัก</a> <span class="tb-sep">|</span> <a href="prototype/explore.html" style="color:#B08A3C;text-decoration:none">🔍 Explore คลัง A</a>
-</div>
 <div class="container">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+    <a href="index.html" style="display: flex; align-items: center; gap: 10px; color: #333; font-weight: bold;">
+      <img src="assets/capybara-64.webp" alt="logo" style="width: 32px;">
+      Cool Uncle ⚖ Legal Lab
+    </a>
+    <div style="display: flex; gap: 15px;">
+      <a href="news-index.html">← กลับหน้าหลัก</a>
+      <a href="prototype/explore.html">🔍 Explore คลัง A</a>
+    </div>
+  </div>
+
   <h1>📋 คดีเกรด A ที่ยังไม่เปิดเผย (Unreleased Grade-A)</h1>
-  <p class="lead">คดีที่ผ่าน Content/Legal Quality Gate (เกรด A) แต่ยังไม่ได้เปิดให้สาธาณชนเห็น — รอการตัดสินใจ publication</p>
+  <p>คดีที่ผ่าน Content/Legal Quality Gate (เกรด A) แต่ยังไม่ได้เปิดให้สาธาณชนเห็น — รอการตัดสินใจ publication</p>
+
   <div class="stats" id="stats"></div>
-  <input class="search-box" type="text" id="searchInput" placeholder="ค้นหาคดี...">
-  <div class="filter-bar" id="filterBar"></div>
+  
+  <input type="text" id="searchInput" placeholder="ค้นหาคดี...">
+  
+  <div id="filterBar">
+    <button class="filter-btn active" onclick="filterData('ทั้งหมด')">ทั้งหมด</button>
+  </div>
+
   <table>
-    <thead><tr><th>#</th><th>คดี</th><th>หมวด</th><th>ปี</th><th>คะแนน</th><th>สถานะ</th><th>วิดีโอ</th></tr></thead>
+    <thead>
+      <tr>
+        <th style="width: 40px;">#</th>
+        <th>คดี</th>
+        <th style="width: 150px;">หมวด</th>
+        <th style="width: 100px;">ปี</th>
+        <th style="width: 80px;">คะแนน</th>
+        <th style="width: 80px;">สถานะ</th>
+        <th style="width: 60px;">วิดีโอ</th>
+      </tr>
+    </thead>
     <tbody id="caseTable"></tbody>
   </table>
 </div>
 <script>
-fetch("assets/cases-unreleased-a.json?v=37").then(r=>r.json()).then(items=>{
+let allData = [];
+
+// Force fresh data
+fetch("assets/cases-unreleased-a.json?t=" + new Date().getTime()).then(r=>r.json()).then(items=>{
+  allData = items;
+  
   // Stats
   document.getElementById('stats').innerHTML = 
     '<div class="stat-box">ทั้งหมด <strong>'+items.length+'</strong> คดี</div>' +
     '<div class="stat-box">Warn <strong>'+items.filter(i=>i.status==="Warn").length+'</strong></div>' +
-    '<div class="stat-box">Blocked <strong>'+items.filter(i=>i.status==="Blocked").length+'</strong></div>' +
+    '<div class="stat-box">Blocked <strong>'+items.filter(i=>i.status==="BLOCK").length+'</strong></div>' +
     '<div class="stat-box">มีวิดีโอ <strong>'+items.filter(i=>i.video_status==="confirmed").length+'</strong></div>';
-  
-  // Filter bar
-  var cats = [...new Set(items.map(i=>i.cat_tag).filter(Boolean))];
-  var filterBar = document.getElementById('filterBar');
-  filterBar.innerHTML = '<button class="filter-btn active" data-cat="">ทั้งหมด</button>' + 
-    cats.map(c=>'<button class="filter-btn" data-cat="'+c+'">'+c+'</button>').join('');
-  
-  // Table
-  function render(list) {
-    document.getElementById('caseTable').innerHTML = list.map((it,i)=>{
-      var badge = it.status==='Blocked' ? '<span class="badge badge-blocked">Blocked</span>' : '<span class="badge badge-warn">Warn</span>';
-      var href = '/' + it.slug;
-      return '<tr><td>'+(i+1)+'</td><td><a class="case-link" href="'+href+'">'+it.title+'</a></td><td><span class="cat-tag">'+it.cat_tag+'</span></td><td>'+it.year+'</td><td>'+it.score+'</td><td>'+badge+'</td><td>'+(it.video_status==="confirmed"?'✅':'⏳')+'</td></tr>';
-    }).join('');
-  }
-  render(items);
-  
-  // Filter
-  filterBar.addEventListener('click', function(e){
-    if(e.target.classList.contains('filter-btn')){
-      filterBar.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-      e.target.classList.add('active');
-      var cat = e.target.dataset.cat;
-      var filtered = cat ? items.filter(i=>i.cat_tag===cat) : items;
-      render(filtered);
-    }
+
+  // Filters
+  const cats = [...new Set(items.map(i=>i.cat_tag))];
+  cats.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.innerText = c;
+    btn.onclick = () => filterData(c);
+    document.getElementById('filterBar').appendChild(btn);
   });
-  
-  // Search
-  document.getElementById('searchInput').addEventListener('input', function(){
-    var q = this.value.toLowerCase();
-    var filtered = items.filter(i=>i.title.toLowerCase().includes(q) || i.slug.toLowerCase().includes(q));
-    render(filtered);
-  });
-}).catch(e=>{
-  document.getElementById('caseTable').innerHTML = '<tr><td colspan="7">ไม่สามารถโหลดข้อมูลได้</td></tr>';
+
+  renderTable(items);
 });
+
+function renderTable(data) {
+  const tbody = document.getElementById('caseTable');
+  tbody.innerHTML = '';
+  data.forEach((item, idx) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${idx + 1}</td>
+      <td><a href="${item.slug}">${item.title}</a></td>
+      <td>${item.cat_tag}</td>
+      <td>${item.year || '-'}</td>
+      <td>${item.score}</td>
+      <td class="${item.status === 'BLOCK' ? 'status-block' : 'status-warn'}">${item.status}</td>
+      <td class="video-icon">${item.video_status === 'confirmed' ? '✅' : '⏳'}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function filterData(cat) {
+  const btns = document.querySelectorAll('.filter-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  const filtered = cat === 'ทั้งหมด' ? allData : allData.filter(i => i.cat_tag === cat);
+  renderTable(filtered);
+}
+
+document.getElementById('searchInput').oninput = (e) => {
+  const q = e.target.value.toLowerCase();
+  const filtered = allData.filter(i => 
+    i.title.toLowerCase().includes(q) || 
+    i.slug.toLowerCase().includes(q)
+  );
+  renderTable(filtered);
+};
 </script>
 </body>
 </html>
