@@ -168,12 +168,6 @@
   "cat": "คดกฎหมายระหว่างประเทศ"
  },
  {
-  "slug": "news-case-corfu-channel-case-merits-uk-v-albania",
-  "year": "1949",
-  "title": "Corfu Channel Case (Merits) — สหรัชอาณาจักร vs. แอลเบเนีย (ICJ, 1949)",
-  "cat": "คดกฎหมายระหว่างประเทศ"
- },
- {
   "slug": "news-case-barcelona-traction-light-and-power-co-case-belgium-v-spain",
   "year": "1970",
   "title": "Barcelona Traction, Light and Power Co. Case (Belgium v. Spain) — ICJ, 1970",
@@ -810,7 +804,7 @@
   "cat": "คดยุคโบราณ"
  },
  {
-  "slug": "news-case-khdii-ramrit-mueang-trat-2445",
+  "slug": "news-case-khdii-ramrit-mueang-trat-2442-2443",
   "year": "2442",
   "title": "คดีหลวงรามฤทธิ์รงค์ — ข่มขืนอำแดงเจียม เมืองตราด ร.ศ.121",
   "cat": "คดยุคโบราณ"
@@ -1222,5 +1216,41 @@
   "year": "2533",
   "title": "คดีมรดกนัยนา ธรรมวัฒนะ “ตลาดยิ่งเจริญ” (2533)",
   "cat": "กฎหมายอาญา/เรื่องเล่ากฎหมาย"
+ },
+ {
+  "slug": "news-case-f-ngephikth-nkhamsangyaay-ph-orngeriiynodyaimepnthrrm-2563",
+  "year": "2563",
+  "title": "สงครามยาเสพติดและการกวาดล้างรายใหญ่ (2563)",
+  "cat": "คดีอาญา"
+ },
+ {
+  "slug": "news-case-khdiiphidsayyaak-sraang-aakhaarrathsphaaaihm-sappaayasiristhaan-2566",
+  "year": "2566",
+  "title": "ผิดสัญญาก่อสร้างอาคารรัฐสภาใหม่ “สัปปายะสภาสถาน” (2566)",
+  "cat": "คดีอาญา"
+ },
+ {
+  "slug": "news-case-khdii-nangthongloen-2468",
+  "year": "ร.6",
+  "title": "คดีนางทองเลื่ อน — นักโทษหญิ งรายน้อง ๆ ที่ถูกประหารด้วยการตัดคอ และพยานการชันระบบศพแบบแพทย์ในศาลสยามยุคร.6 (ประหาร 14 ต.ค. 2468)",
+  "cat": "คดยุคร.6"
+ },
+ {
+  "slug": "news-case-khdii-thanabat-r5-2446",
+  "year": "2446",
+  "title": "คดีธนบัตรปลอม ร.5 2446 — กรมหมื่นพงษาดิศรมหิป + จ่ามื่นเพ่ง + ชาวญี่ปุ่น",
+  "cat": "คดีรัชกาลที่ 5"
+ },
+ {
+  "slug": "news-case-khdii-ice-hiblek-2563",
+  "year": "2563",
+  "title": "คดีไอซ์ หีบเหล็ก 2563 — สยบศพในหีบเหล็กกลางคริ่หาสน์เศรษฐีบางแค",
+  "cat": "คดียุคดิจิทัล"
+ },
+ {
+  "slug": "plon-prasang-wat-chomsuda-2440",
+  "year": "2440",
+  "title": "คดีปล้นพระสงฆ์วัดจอมสุดา พ.ศ. 2440 — ยิงศิษย์วัดตายกลางกุฏิ การสืบสวนแบบตะวันตกช่วงร.5",
+  "cat": "คดียุร.4–ร.5"
  }
 ]

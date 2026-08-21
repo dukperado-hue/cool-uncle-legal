@@ -1,0 +1,59 @@
+{
+ "id": "khdii-phum-saat-embezzlement-2440",
+ "meta": {
+  "title": "คดีพุ่ม สะอาด (2440)",
+  "year": 1897,
+  "cat": "เศรษฐกิจและทุจริต"
+ },
+ "visibility": {
+  "public": true,
+  "gate": "none"
+ },
+ "rank": {
+  "grade": "VERIFIED_S",
+  "score": 5,
+  "s_verified": true,
+  "judicial_case": "ต้นกำเนิดกฎหมายล้มละลาย",
+  "verified_by": "Agent C"
+ },
+ "status": "วิกฤตเจ้าภาษีล้มละลาย (พ.ร.บ.ล้มละลาย ร.ศ. 116)",
+ "read": {
+  "sections": [
+   {
+    "id": "02",
+    "title": "สรุปคดี",
+    "content": "คดีพุ่ม สะอาด และการล้มละลายของเจ้าภาษีนายอากร นำไปสู่การออก 'พระราชบัญญัติล้มละลาย ร.ศ. 116' (พ.ศ. 2440) ซึ่งเป็นกฎหมายล้มละลายฉบับแรกของสยาม เพื่อจัดการทรัพย์สินของบุคคลที่มีหนี้สินล้นพ้นตัวเพื่อเฉลี่ยคืนเจ้าหนี้อย่างเป็นธรรม"
+   },
+   {
+    "id": "06",
+    "title": "ฐานกฎหมาย",
+    "content": "ต้นกำเนิดกฎหมายล้มละลาย"
+   }
+  ]
+ },
+ "play": {
+  "flow": [],
+  "anti_reveal_rules": []
+ },
+ "media": {
+  "video": null,
+  "status": "none"
+ },
+ "sources": {
+  "seed_facts": [
+   "Batch 19/20 Research Notes"
+  ]
+ },
+ "migration": {
+  "from": "Agent C Handoff",
+  "verified": true,
+  "checker": "Agent B",
+  "check_date": "2026-08-21"
+ },
+ "validation": {
+  "schema_ok": true,
+  "paragraph_ok": true,
+  "gate": "none",
+  "checked_at": "2026-08-21"
+ }
+}

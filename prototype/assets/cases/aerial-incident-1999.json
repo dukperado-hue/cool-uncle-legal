@@ -1,0 +1,84 @@
+{
+ "id": "aerial-incident-1999",
+ "meta": {
+  "year": "2543",
+  "category": "คดีระหว่างประเทศ (ICJ)"
+ },
+ "visibility": {
+  "public": true,
+  "public_reason": "agent_a_approval_required",
+  "gate": "none",
+  "internal_notes": "คดี ICJ / ข้อสงวน Commonwealth — aerial-incident-1999 — S_CANDIDATE; locked to source content"
+ },
+ "rank": {
+  "grade": "S_CANDIDATE",
+  "s_verified": false,
+  "score": 4,
+  "judicial_case": "ICJ Case 107 (Pakistan v. India)"
+ },
+ "deident": {
+  "required": false,
+  "level": null,
+  "labels": {},
+  "original_names": [],
+  "reason": null
+ },
+ "status": "ยกคำร้อง (21 มิ.ย. 2543) — ไม่มีเขตอำนาจศาล",
+ "read": {
+  "sections": [
+   {
+    "order": 2,
+    "key": "02",
+    "title": "สรุปคดี",
+    "content": "คดีอุบัติการณ์ทางอากาศ 10 สิงหาคม 1999 เป็นคดีที่ปากีสถานเป็นโจทก์ยื่นฟ้องอินเดียต่อศาลยุติธรรมระหว่างประเทศ (ICJ) ในปี ค.ศ. 2000 เรียกร้องค่าเสียหายจากการที่กองทัพอินเดียโจมตีอากาศยานของตน\nปรากฏข้อเท็จจริงว่าเครื่องบินรบของอินเดียได้ยิงเครื่องบินลาดตระเวนของกองทัพเรือปากีสถานตก ทำให้ปากีสถานอ้างว่าอินเดียละเมิดน่านฟ้าและฝ่าฝืนกฎหมายระหว่างประเทศ\nอินเดียได้ต่อสู้คดีในชั้นเขตอำนาจศาล โดยอ้างข้อสงวน (Reservation) ที่ตนเคยประกาศไว้ในการยอมรับอำนาจศาล ICJ ว่า อินเดียจะไม่ยอมรับอำนาจศาลในคดีที่มีข้อพิพาทกับประเทศสมาชิกเครือจักรภพ (Commonwealth) ด้วยกัน"
+   },
+   {
+    "order": 6,
+    "key": "06",
+    "title": "ประเด็นกฎหมาย",
+    "content": "เขตอำนาจศาล ICJ ในคดีนี้อ้างอิงตาม ICJ Statute Article 36(2) (Optional Clause Declaration)\nสถานะบทบัญญัติ: flagged_uncertain — legacy HTML เดิมมีถ้อยคำ \"มาตรา ๓๑ ป.พ.พ.\" หลุดมา (คนละระบบกฎหมาย) — ไม่ใช่ฐานกฎหมายของคดีนี้ — ถูกลบแล้วตามการระบุของ Agent C\nผลคดี: ศาลยกคำร้อง 21 มิ.ย. 2543 — ไม่มีเขตอำนาจศาล — เนื่องจากข้อสงวน Commonwealth ของอินเดีย"
+   },
+   {
+    "order": 8,
+    "key": "08",
+    "title": "บทเรียนรู้",
+    "content": "เขตอำนาจของศาลยุติธรรมระหว่างประเทศตั้งอยู่บนรากฐานของความยินยอมของรัฐ และข้อสงวนที่รัฐประกาศไว้ย่อมมีผลผูกพันจำกัดอำนาจศาลอย่างเด็ดขาด"
+   }
+  ]
+ },
+ "play": {
+  "flow": [],
+  "anti_reveal_rules": [
+   "ห้ามเผยคำตอบก่อนผู้เล่นตอบ",
+   "ไม่ระบุศาลตั้งแต่ต้น — ผู้เล่นเดาคดีก่อน"
+  ]
+ },
+ "media": {
+  "video": "ICJ Case: Aerial Incident of 10 August 1999 (Pakistan v. India)",
+  "status": "available"
+ },
+ "sources": {
+  "seed_facts": [
+   "Agent C — Handoff Brief Batch 3c"
+  ],
+  "legacy_ref": "legacy_html_aerial (migrated 2026-08-21)",
+  "note": "เนื้อหาล็อกตามไฟล์ migration ต้นทาง — ห้ามเติมข้อเท็จจริงใหม่",
+  "primary": "icj-cij.org/case/107 — primary"
+ },
+ "migration": {
+  "from": "legacy_html_aerial",
+  "verified": true,
+  "checker": "Agent B",
+  "check_date": "2026-08-21",
+  "note": "migration per RULE 8; body text verbatim from migration source"
+ },
+ "validation": {
+  "schema_ok": true,
+  "paragraph_ok": true,
+  "sections_complete": true,
+  "links_ok": true,
+  "gate": "none",
+  "checked_at": "2026-08-21",
+  "checked_by": "agent_b"
+ }
+}

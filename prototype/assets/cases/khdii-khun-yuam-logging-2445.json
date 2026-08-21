@@ -1,0 +1,59 @@
+{
+ "id": "khdii-khun-yuam-logging-2445",
+ "meta": {
+  "title": "ทุจริตป่าไม้ขุนยูวม (2445)",
+  "year": 1902,
+  "cat": "เศรษฐกิจและทุจริต"
+ },
+ "visibility": {
+  "public": true,
+  "gate": "none"
+ },
+ "rank": {
+  "grade": "S_CANDIDATE",
+  "score": 4,
+  "s_verified": false,
+  "judicial_case": "มาเฟียป่าไม้และการปลอมตราประทับ",
+  "verified_by": "Agent C"
+ },
+ "status": "การปราบปรามการลักลอบตัดไม้นอกเขตสัมปทาน",
+ "read": {
+  "sections": [
+   {
+    "id": "02",
+    "title": "สรุปคดี",
+    "content": "คดีทุจริตสัมปทานป่าไม้ในพื้นที่ขุนยูวม (ขุนยวม) จังหวัดแม่ฮ่องสอน มีการปลอมตราประทับไม้สัก (Hammer Mark) และการลักลอบตัดไม้นอกเขตสัมปทาน นำไปสู่การปราบปรามโดยเจ้าหน้าที่รัฐและการวางระเบียบการตีตราประทับไม้ให้เข้มงวดขึ้น"
+   },
+   {
+    "id": "06",
+    "title": "ฐานกฎหมาย",
+    "content": "มาเฟียป่าไม้และการปลอมตราประทับ"
+   }
+  ]
+ },
+ "play": {
+  "flow": [],
+  "anti_reveal_rules": []
+ },
+ "media": {
+  "video": null,
+  "status": "none"
+ },
+ "sources": {
+  "seed_facts": [
+   "Batch 19/20 Research Notes"
+  ]
+ },
+ "migration": {
+  "from": "Agent C Handoff",
+  "verified": true,
+  "checker": "Agent B",
+  "check_date": "2026-08-21"
+ },
+ "validation": {
+  "schema_ok": true,
+  "paragraph_ok": true,
+  "gate": "none",
+  "checked_at": "2026-08-21"
+ }
+}

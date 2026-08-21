@@ -26,7 +26,11 @@
   "s_verified": false,
   "s_verified_by": "Agent C - Handoff Brief",
   "s_verified_at": null,
-  "judicial_case": "ศาลอาญา, DSI คดีพิเศ 43/2568 (28 มเษายน 2568)"
+  "judicial_case": "ศาลอาญา, DSI คดีพิเศ 43/2568 (28 มเษายน 2568)",
+  "judicial": {
+   "holding": "CEO เอกฉัย ยิ้มวไลย์ จำคุก 5 ปี ไม่รอลงอาญา; นิติบุคคลปรับ 100,000 บาท; class action ถูกปฏิเสธ; DSI คดีเฉิเพาะ 43/2568 (28 เม.ย. 2568) ยังค้าง",
+   "note": "S_CANDIDATE — คำพิพากษาอาญาแล้ว แต่ DSI ค้าง"
+  }
  },
  "deident": {
   "required": true,

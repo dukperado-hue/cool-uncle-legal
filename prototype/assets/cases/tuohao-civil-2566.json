@@ -27,7 +27,11 @@
   "score": 4,
   "s_verified": false,
   "s_verified_by": null,
-  "s_verified_at": null
+  "s_verified_at": null,
+  "judicial": {
+   "holding": "ยึด/อายัดชั่วคราว ~117.9 ล้านบาท (ชั่วคราว — ห้ามเขียน \"ศาลริบแล้ว\"); คดีแพ่งริบทรัพย์ค้างศาลแพ่ง",
+   "note": "S_CANDIDATE — คำสั่งยับยั้งแปง (ปปง.) + คด+ีแพ่งริบทรัพย์"
+  }
  },
  "deident": {
   "required": true,

@@ -1,0 +1,127 @@
+{
+ "id": "preah-vihear-2505",
+ "meta": {
+  "year": null,
+  "category": null
+ },
+ "visibility": {
+  "public": false,
+  "public_reason": "agent_a_approval_required",
+  "gate": "agent_a_approval_required",
+  "internal_notes": "คดี ICJ verified_candidate (HandoffBrief Batch 3c) — แนวน Annex I map กับสันปันน้ำ + acquiescence"
+ },
+ "rank": {
+  "grade": "S_CANDIDATE",
+  "s_verified": false,
+  "score": 4,
+  "judicial_case": "คดี ICJ Case 45 (Temple of Preah Vihear, Cambodia v. Thailand) — ชี้ขาด 15 มิ.ย. 2505 (I.C.J. Reports 1962 p.6); ตีความเพิ่ม 11 พ.ย. 2556"
+ },
+ "deident": {
+  "required": false,
+  "level": null,
+  "labels": {},
+  "original_names": [],
+  "reason": null
+ },
+ "status": "ICJ Case 45 — Cambodia v. Thailand — ปราสาทเป็นของกัมพูชา (15 มิ.ย. 2505)",
+ "read": {
+  "sections": [
+   {
+    "order": 1,
+    "key": "summary",
+    "title": "สรุปด่วน",
+    "content": "ICJ Case 45 : กัมพูชา v ไทย (Temple of Preah Vihear)\nปัญหา : แผนที่ Annex I (2450) ไม่ตรงแนวสันปันน้ำของสนธิสัญญา 2447\nศาลชี้ขาด : ปราสาทเป็นของกัมพูชา — ไทยรับแผนที่โดยพฤติการ (acquiescence)\nคำพิพากษา 15 มิ.ย. 2505 (I.C.J. Reports 1962 p.6)\nปี 2556 : ศาลตีความเพิ่ม — ไทยต้องถอนทหารบริเวณวัด + หน้าที่ร่วมมือ (มาตรการชั่วคราว 2556 ถูกยก)"
+   },
+   {
+    "order": 2,
+    "key": "timeline",
+    "title": "ลำดับเหตุการณ์",
+    "content": "2447 : สนธิสัญญาไทย-ฝรั่งเศส กำหนดแนวเขตตามสันปันน้ำ\n2450 : คณะกรรมการปักปันทำแผนที่ Annex I 1:200,000 — เส้นแผนที่ไม่ตรงสันปันน้ำ แต่รวมปราสาทในฝั่งกัมพูชา\n2502 : กัมพูชาฟ้อง ICJ เรียกสิทธิครอบคลุมปราสาท\n26 พ.ค. 2504 : ศาลปฏิเสธข้อคัดค้านอำนาจศาลของไทย\n15 มิ.ย. 2505 : ศาลชี้ขาด — ไทยรับแผนที่ Annex I โดยพฤติการ (acquiescence) + estoppel → ปราสาทเป็นของกัมพูชา\n11 พ.ย. 2556 : ตีความคำพิพากษา — ไทยถอนทหารบริเวณวัด + หน้าที่ร่วมมือ (มาตรการชั่วคราว 2556 ถูกยก)"
+   },
+   {
+    "order": 3,
+    "key": "legal_qa",
+    "title": "คำถามกฎหมาย",
+    "content": "Q : เมื่อแผนที่ไม่ตรงสนธิสัญญา — ใช้แบบไหน — A : ศาลให้น้ำหนักแผนที่ Annex I เพราะไทยรับทราบและไม่คัดค้านมานาน (acquiescence)\nQ : acquiescence มีผลทางกฎหมายอย่างไร — A : การรับรู้+ไม่คัดค้านอย่างนาน → estoppel ห้ามย้อนกลับมาคัดค้านในภายหลัง\nQ : ทำไมศาลไม่ชี้ตามสันปันน้ำ — A : เพราะพฤติการของไทยต่อแผนที่ Annex I นานหลายทศวรรษ เป็นหลักฐานการยอมรับแนวเขต\nQ : คำวินิจฉัย 2556 เพิ่มอะไร — A : ไทยต้องถอนกำลังทหารจากบริเวณวัด + มีหน้าที่ร่วมมือกับกัมพูชา (มาตรการชั่วคราวเดิมถูกยก)"
+   },
+   {
+    "order": 4,
+    "key": "laws",
+    "title": "บทบัญญัติที่เกี่ยวข้อง",
+    "content": "สนธิสัญญาปักปันเขตแดน 2447 — แนวสันปันน้ำ (watershed) — external_law (สนธิสัญญาไทย-ฝรั่งเศส)\nแผนที่ Annex I 1:200,000 (พ.ศ. 2450) — หลักฐานการยอมรับโดยพฤติการ — confirmed (ICJ records)\nหลัก acquiescence + estoppel — รับรู้+ไม่คัดค้าน = ผูกพัน — confirmed (ICJ doctrine)\nICJ Statute Art.60 : คำพิพากษาขัดท้าย — การตีความคำพิพากษาเดิม (2556) — confirmed"
+   },
+   {
+    "order": 5,
+    "key": "legacy",
+    "title": "เาพรษนคากดีคดีนิสี",
+    "content": "Temple of Preah Vihear (Cambodia v. Thailand) — ICJ 1962 — คดีเขตแดนระหว่างประเทศ\nความขัดแย้งระหว่างสันปันน้ำ (สนธิสัญญา 2447) กับแผนที่ Annex I (2450) — ศาลเลือกแผนที่ตามพฤติการของไทย\nเนื้อหานี้ย้ายจาก legacy HTML ตาม RULE 8 — ICJ case ไม่มีจำเลยรายบุคคล ไม่ต้อง deident"
+   }
+  ]
+ },
+ "play": {
+  "flow": [
+   {
+    "step": 1,
+    "type": "brief",
+    "text": "คดีเขตแดนระหว่างประเทศ : กัมพูชา v ไทย (ICJ Case 45)\nแผนที่ 1:200,000 ไม่ตรงแนวสันปันน้ำในสนธิสัญญา 2447\nทั้งสองประเทศแย่งกรรมสิทธิ์ปราสาทโบราณ — คำตอบจะกลายเป็นบรรทัดฐานเขตแดน"
+   },
+   {
+    "step": 2,
+    "type": "question",
+    "text": "เมื่อ \"แผนที่\" ไม่ตรง \"สนธิสัญญา\" — ศาลให้น้ำหนักอะไร",
+    "options": [
+     "แผนที่ที่รัฐรับโดยพฤติการ (acquiescence)",
+     "สนธิสัญญาเสมอ",
+     "สันปันน้ำจริงเท่านั้น",
+     "ยกฟ้อง"
+    ]
+   },
+   {
+    "step": 3,
+    "type": "answer",
+    "text": "คำตอบ : ศาลชี้ขาดให้ใช้แผนที่ Annex I — เพราะไทยรับทราบและไม่คัดค้านมานาน (estoppel)\nปราสาทเป็นของกัมพูชา (15 มิ.ย. 2505) — I.C.J. Reports 1962 p.6\n2556 : ตีความเพิ่ม — ไทยถอนทหารบริเวณวัด + หน้าที่ร่วมมือ"
+   },
+   {
+    "step": 4,
+    "type": "lesson",
+    "text": "บทเรียน : การเงียบนาน ๆ ในเรื่องเขตแดน = การยอมรับโดยพฤติการ\nestoppel ในกฎหมายระหว่างประเทศ — ห้ามย้อนกลับคัดค้านสิ่งที่เคยรับรู้\nการปักปันเขตแดนต้องชัดเจน — แผนที่กับสนธิสัญญาขัดกันคือต้นเหตุพิพาทคลาสสิก"
+   }
+  ],
+  "anti_reveal_rules": [
+   "ไม่ใช้คำว่า \"เสียดินแดน\" — ใช้คำพิพากษาตรง ๆ",
+   "แยกคำพิพากษา 2505 กับการตีความ 2556 ชัดเจน",
+   "ย้ำว่ามาตรการชั่วคราว 2556 ถูกยก — ห้ามสับสนกับผูกพัน"
+  ]
+ },
+ "media": {
+  "video": null,
+  "status": "none"
+ },
+ "sources": {
+  "seed_facts": [
+   "HandoffBrief_AgentB Batch 3c : Temple of Preah Vihear (Cambodia v. Thailand) ICJ Case 45",
+   "Legacy HTML : Annex I map 1:200,000 (2450) ไม่ตรงสันปันน้ำ (สนธิสัญญา 2447) — ไทยรับโดยพฤติการ (acquiescence)",
+   "Legacy : ชี้ขาด 15 มิ.ย. 2505; ตีความ 11 พ.ย. 2556 — ถอนทหารบริเวณวัด + หน้าที่ร่วมมือ",
+   "Legacy HTML : Preah Vihear page 20 Aug 2026"
+  ],
+  "legacy_ref": "news-case-temple-of-preah-vihear-cambodia-v-thailand.html",
+  "verdict_doc": "ICJ Judgment, Temple of Preah Vihear (Cambodia v. Thailand), 15 June 1962 (I.C.J. Reports 1962 p.6)",
+  "external_report": null
+ },
+ "migration": {
+  "from": "legacy_html_preah_vihear",
+  "verified": true,
+  "checker": "Agent B",
+  "check_date": "2026-08-21",
+  "note": "LEGACY RULE 8: ย้ายสรุป/ไทม์ไลน์/ประเด็น/บทเรียน — ICJ case ไม่มี deident"
+ },
+ "validation": {
+  "schema_ok": true,
+  "paragraph_ok": true,
+  "sections_complete": true,
+  "links_ok": true,
+  "gate": "agent_a_approval_required",
+  "checked_at": "2026-08-21",
+  "checked_by": "agent_b"
+ }
+}

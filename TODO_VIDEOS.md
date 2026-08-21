@@ -35,10 +35,7 @@
 | news-case-khdiiaailthiichaawm-raekn-hmuuekaaasurinthr-2562 | คดีไล่ที่ชาวมอแกน หมู่เกาะสุรินทร์ (2562) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
 | news-case-khdiiaechrluukoch-e-nen-rcchii-diidakchan-2564 | คดีแชร์ลูกโซ่แพลตฟอร์ม "เอนเนอร์จี ดีดักชัน" (2564) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
 | news-case-khdiicchabkum-esiiyaepng-naaohnd-2566 | คดีเสี่ยแป้ง นาโหนด — หลบหนีระหว่างควบคุม (2566–2567) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
-| news-case-ephikth-nkhamsangyubsphaa-ngkhkaarbrihaarswntambl-2558 | คดีปกครอง: เพิกถอนคำสั่งยุบสภาองค์การบริหารส่วนตำบล (2558) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
 | news-case-ephikth-nsampthaanrangnknaangae-n-2561 | คดีปกครอง: เพิกถอนสัมปทานรังนกนางแอ่น (2561) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
-| news-case-ephikth-nkaar-kochndthiidinthabch-nekaaalibng-2562 | คดีปกครอง: เพิกถอนการออกโฉนดที่ดินทับซ้อนเกาะลิบง (2562) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
-| news-case-khdiif-ngetnthrthmuue-s-ng-krniikhaayrthy-maemw-2566 | คดีฟ้องเต็นท์รถมือสอง — รถย้อมแมว (2566) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
 news-case-khdii-jottektej-khtit-2324.html | คดีโจทก์ (2324) ยุคธนบุรี | ไม่มีคลิปที่เกี่ยวข้องโดยตรง — คดีคดีโจทก์โบราณ
 news-case-khdii-samphrachakhana-khtit-2324.html | คดี 3 พระราชาคณะทูลค้าน (2324) | ไม่มีคลิปที่เกี่ยวข้องโดยตรง — พระสงฆ์ทูลค้านร.ตาก
 news-case-khdii-pongkhaoluang-nginthplom-2310-2325.html | คดีโกงข้าวหลวง/เงินปลอม ธนบุรี | ไม่มีคลิปที่เกี่ยวข้องโดยตรง — โครงสร้างศาลธนบุรี
@@ -52,7 +49,6 @@ news-case-khdii-kamnan-talad-ayutthaya.html | คดีกำนันตลา�
 | news-case-khdii-nokkaei-2419 | คดีหนูไก๋ | หาคลิปภาษาไทยไม่มี
 | news-case-khdii-amdaeng-yu | คดีอำแดงอยู่ | หาคลิปภาษาไทยไม่มี
 | news-case-khdii-phrapreecha-prachin-2421 | คดีพระปรีชากลการ | หาคลิปภาษาไทยไม่มี
-| news-case-khdii-phrayodmueangkwang-2436 | คดีพระยอดเมืองขวาง | หาคลิปภาษาไทยไม่มี
 | news-case-khdii-kusar-kulab-2436 | คดีก.ศ.ร. กุหลาบ | หาคลิปภาษาไทยไม่มี
 | news-case-khdii-phra-nang-reualom-2423 | คดีพระนางเรือล่ม | หาคลิปภาษาไทยไม่มี
 | news-case-khdii-aiauaom-okroy-2414 | คดีอ้ายอ่วม อกโรย | หาคลิปภาษาไทยไม่มี
@@ -117,3 +113,10 @@ news-case-trail-smelter-arbitration-usa-v-canada | Trail Smelter Arbitration (US
 news-case-trendtex-trading-corp-v-central-bank-of-nigeria-uk-court-of-appeal | Trendtex Trading Corp. v. Central Bank of Nigeria (UK Court of Appeal) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
 news-case-united-states-diplomatic-and-consular-staff-in-tehran-usa-v-iran | United States Diplomatic and Consular Staff in Tehran (USA v. Iran) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
 news-case-western-sahara-advisory-opinion | Western Sahara (Advisory Opinion) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
+news-case-khdii-nangthongloen-2468.html | คดีนางทองเลื่ อน 2468 | หักคอน้องผัวตุ่มน้ำ — มีเฉพาะบทความ MGR (โรม บุนนาค) ยังไม่มีคลิปวิดีโอที่เหมาะสม
+
+## Batch 13
+
+news-case-khdii-thanabat-r5-2446 | คดีธนบัตรปลอม ร.5 2446 | หาคลิปไทยเชื่ อถือได้ที่เกี่ยวข้องตรงยังไม่พบ
+news-case-khdii-ice-hiblek-2563 | คดีไอซ์ หีบเหล็ก 2563 | หาคลิปไทยเชื่ อถือได้ที่เกี่ยวข้องตรงยังไม่พบ
+plon-prasang-wat-chomsuda-2440 | ปล้นพระสงฆ์วัดจอมสุดา 2440 | คดีพ.ศ. 2440 ยังไม่มีคลิปวิดีโอที่เหมาะสม

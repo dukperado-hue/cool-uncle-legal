@@ -1,0 +1,127 @@
+{
+ "id": "lagrand-2544",
+ "meta": {
+  "year": null,
+  "category": null
+ },
+ "visibility": {
+  "public": false,
+  "public_reason": "agent_a_approval_required",
+  "gate": "agent_a_approval_required",
+  "internal_notes": "คดี ICJ verified_candidate (HandoffBrief Batch 3c) — สหรัฐประหาร 2 พี่น้องชาวเยอรมนีละเมิด VCCR Art.36"
+ },
+ "rank": {
+  "grade": "S_CANDIDATE",
+  "s_verified": false,
+  "score": 4,
+  "judicial_case": "คดี ICJ Case 104 (Germany v. United States) — คำพิพากษา 27 มิ.ย. 2544 (I.C.J. Reports 2001 p.466)"
+ },
+ "deident": {
+  "required": false,
+  "level": null,
+  "labels": {},
+  "original_names": [],
+  "reason": null
+ },
+ "status": "ICJ Case 104 — ศาลยุติธรรมระหว่างประเทศ (ICJ) ผูกพันรัฐสหรัฐ (27 มิ.ย. 2544)",
+ "read": {
+  "sections": [
+   {
+    "order": 1,
+    "key": "summary",
+    "title": "สรุปด่วน",
+    "content": "คดี คปวสวิงประะด้สราฐวสหางประเชริกานี (Germany v. USA)\nสองพี่น้องชาวเยอรมนีถูกศาลรัฐแอริโซนาสหรัฐตัดสินประหารชีวิต\nสหรัฐไม่แจ้งสิทธิติดต่อสถานกงสุลตาม VCCR Art.36(1)(b)\nเยอรมนีฟ้อง ICJ ขอมาตรการคุ้มครองชั่วคราว — ศาลสั่งระงับ แต่สหรัฐเพิกเฉย\nคาร์ลแกรนด์ถูกประหาร 24 ก.พ. 1999 / วอลเตอร์ 3 มี.ค. 1999\nICJ ชี้ขาด (2544) : สหรัฐผิด — คำสั่งชั่วคราว Art.41 ผูกพันทางกฎหมาย (ครั้งแรก)\nICJ Case 104 — คำพิพากษา 27 มิ.ย. 2544 (I.C.J. Reports 2001 p.466)"
+   },
+   {
+    "order": 2,
+    "key": "timeline",
+    "title": "ลำดับเหตุการณ์",
+    "content": "สองพี่น้อง LaGrand ถูกประหารในรัฐแอริโซนาโดยไม่ได้แจ้งสิทธิกงสุล\nเยอรมนีฟ้อง ICJ พร้อมขอ provisional measures (Art.41)\nศาลโลกสั่งระงับการประหารชั่วคราว 3 มี.ค. 1999 — สหรัฐเพิกเฉย\nคาร์ลถูกประหาร 24 ก.พ. 1999 / วอลเตอร์ 3 มี.ค. 1999\nICJ มีคำพิพากษา 27 มิ.ย. 2544 : สหรัฐผิดตาม VCCR Art.36\nบรรทัดฐานใหม่ : คำสั่ง provisional measures ผูกพันตามกฎหมายระหว่างประเทศ"
+   },
+   {
+    "order": 3,
+    "key": "legal_qa",
+    "title": "คำถามกฎหมาย",
+    "content": "Q : Art.36(1)(b) VCCR ให้สิทธิอะไรแก่ผู้ถูกจับกุม\nA : สิทธิของบุคคล (Individual Rights) ที่รัฐผู้จับกุมต้องแจ้งสถานกงสุลโดยไม่ชักช้า\nQ : คำสั่ง provisional measures ของ ICJ มีผลอย่างไร\nA : มีผลผูกพันทางกฎหมายเด็ดขาด — คดีนี้วางบรรทัดฐานครั้งแรก (Art.41)\nQ : สหรัฐเพิกเฉยแล้วทำไม\nA : สหรัฐไม่ระงับการประหารตามคำสั่ง — ICJ ชี้ขาดว่าผิดหน้าที่ตามกฎหมายระหว่างประเทศ\nQ : ไทยเกี่ยวข้องอย่างไร\nA : ไทยเป็นภาคี VCCR — มีหน้าที่แจ้งสิทธิแก่คนต่างด้าวที่ถูกจับกุมในดินแดนไทย"
+   },
+   {
+    "order": 4,
+    "key": "laws",
+    "title": "บทบัญญัติที่เกี่ยวข้อง",
+    "content": "VCCR 1963 Art.36(1)(b) : แจ้งสถานกงสุลเมื่อ nationals ถูก arrest/detain — confirmed (primary source)\nICJ Statute Art.41 : Provisional Measures — ศาลชี้ขาดในคดีนี้ว่าผูกพันตามกฎหมาย — confirmed\nปักสันต์ servanda (pacta sunt servanda) : หน้าที่รักษาสัญญาของทุกรัฐ — confirmed (legal doctrine)"
+   },
+   {
+    "order": 5,
+    "key": "legacy",
+    "title": "เาพรษนคากดีคดีนิสี",
+    "content": "Legrand Case (Germany v. United States) Case Brief Summary — legacy HTML\nศาล ICJ วางบรรทัดฐานว่า สิทธิติดต่อกงสุลเป็นสิทธิของผู้ถูกจับกุม (Individual Rights) โดยตรง\nไทยเป็นภาคี VCCR จึงมีหน้าที่แจ้งสิทธิแก่คนต่างด้าวที่ถูกจับกุมในดินแดนตน\nเนื้อหานี้ย้ายจาก legacy HTML ตาม RULE 8 — ICJ case ไม่มีจำเลยรายบุคคล ไม่ต้อง deident"
+   }
+  ]
+ },
+ "play": {
+  "flow": [
+   {
+    "step": 1,
+    "type": "brief",
+    "text": "คดี ระหว่างประเทศ : เยอรมนี v สหรัฐ (ICJ Case 104)\nสองพี่น้องชาวเยอรมนีถูกตัดสินประหารในสหรัฐ — ไม่ได้แจ้งสิทธิกงสุล\nศาลโลกสั่งระงับชั่วคราวแต่สหรัฐเพิกเฉย — ถูกประหารจริงทั้งคู่"
+   },
+   {
+    "step": 2,
+    "type": "question",
+    "text": "คำสั่ง provisional measures ของ ICJ มีผลทางกฎหมายอย่างไร",
+    "options": [
+     "ผูกพันทางกฎหมายเด็ดขาด (Art.41)",
+     "เป็นเพียงคำแนะนำ",
+     "ใช้ได้เฉพาะรัฐยุโรป",
+     "ต้องรอรัฐสภาสหรัฐอนุมัติ"
+    ]
+   },
+   {
+    "step": 3,
+    "type": "answer",
+    "text": "คำตอบ : ICJ ชี้ขาดในคดีนี้ว่า Art.41 provisional measures ผูกพันตามกฎหมายระหว่างประเทศ\nสหรัฐผิดตาม VCCR Art.36(1)(b) — ไม่แจ้งสิทธิติดต่อกงสุล\nบรรทัดฐาน : สิทธิกงสุลเป็นสิทธิของบุคคลโดยตรง ไม่ใช่เพียงสิทธิของรัฐ"
+   },
+   {
+    "step": 4,
+    "type": "lesson",
+    "text": "บทเรียน : คำสั่งชั่วคราวของศาลโลกมีน้ำหนักจริง — ทุกประเทศผูกพัน\nสิทธิติดต่อกงสุลเป็นสิทธิของผู้ถูกจับกุมโดยตรง (VCCR 1963 Art.36)\npacta sunt servanda — รักษาสัญญาเป็นหน้าที่เบื้องต้นของทุกรัฐ"
+   }
+  ],
+  "anti_reveal_rules": [
+   "เปิด ICJ Case 104 ก่อนเผยคำพิพากษา",
+   "แยกเหตุการณ์ 1999 (การประหาร) กับคำพิพากษา 2544",
+   "ย้ำ : สหรัฐไม่ได้ถูกลงโทษรับเงิน — คำสั่งชั่วคราวผูกพันคือข้อชี้ขาดหลัก"
+  ]
+ },
+ "media": {
+  "video": null,
+  "status": "none"
+ },
+ "sources": {
+  "seed_facts": [
+   "HandoffBrief_AgentB Batch 3c : LaGrand (Germany v. USA) ICJ Case 104",
+   "Legacy HTML lagrand page : ICJ Case 104, judgment 27 Jun 2544 (I.C.J. Reports 2001 p.466), VCCR Art.36(1)(b), Art.41 binding provisional measures",
+   "Legacy : Karl แกรนด์ ถูกประหาร 24 ก.พ. 1999 / วอลเตอร์ 3 มี.ค. 1999 — สหรัฐเพิกเฉยคำสั่งชั่วคราว",
+   "Legacy HTML : LaGrand page 20 Aug 2026 (VCCR Art.36(1)(b), ICJ Statute Art.41 quoted)"
+  ],
+  "legacy_ref": "news-case-lagrand-case-germany-v-usa.html",
+  "verdict_doc": "ICJ Judgment, LaGrand Case (Germany v. United States), 27 June 2001 (I.C.J. Reports 2001 p.466)",
+  "external_report": null
+ },
+ "migration": {
+  "from": "legacy_html_lagrand",
+  "verified": true,
+  "checker": "Agent B",
+  "check_date": "2026-08-21",
+  "note": "LEGACY RULE 8: ย้ายสรุป/ปัญหา/บทเรียนจาก legacy HTML — ICJ case ไม่มี deident"
+ },
+ "validation": {
+  "schema_ok": true,
+  "paragraph_ok": true,
+  "sections_complete": true,
+  "links_ok": true,
+  "gate": "agent_a_approval_required",
+  "checked_at": "2026-08-21",
+  "checked_by": "agent_b"
+ }
+}
