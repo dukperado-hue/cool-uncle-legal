@@ -243,15 +243,6 @@
         "video_status": "confirmed"
     },
     {
-        "slug": "news-case-khdii-nu-kai-palace-scandal-2422.html",
-        "title": "Nu Kai Palace Scandal 2422",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2422",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
-    },
-    {
         "slug": "news-case-khdii-queen-sunandha-tragedy-2423.html",
         "title": "Queen Sunandha Tragedy 2423",
         "cat_tag": "คดีอาญา",
@@ -355,15 +346,6 @@
         "title": "<title>คดีหลวงรามฤทธิรงค์ — ข่มขืนอำแดงเจียม เมืองตราด ร.ศ.121",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2442",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-payarakha-2453.html",
-        "title": "คดีพญาระกา — ละครหมิ่นประมาทที่สั่นสะเทือนกระทรวงยุติธรรม พ.ศ. 2453",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2443",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -502,24 +484,6 @@
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-phraya-raka-2453.html",
-        "title": "คดีพญาระกา (รอยร้าวในราชสำนัก)",
-        "cat_tag": "คดยุคโบราณ",
-        "year": "พ.ศ. 2452",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
-    },
-    {
-        "slug": "news-case-khdii-nang-thong-luean-2452.html",
-        "title": "คดีนางทองเลื่อน: นักโทษประหารหญิงรายสุดท้ายที่ถูกฟันคอ",
-        "cat_tag": "คดยุคโบราณ",
-        "year": "พ.ศ. 2452",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
     },
     {
         "slug": "news-case-khdii-nang-thong-luean.html",

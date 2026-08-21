@@ -1458,12 +1458,6 @@
         "release": "WARN",
         "has_video": false
     },
-    "news-case-khdii-payarakha-2453.html": {
-        "grade": "A",
-        "score": 90,
-        "release": "WARN",
-        "has_video": false
-    },
     "news-case-khdii-amdaeng-yu.html": "A",
     "news-case-khdii-kusar-kulab-2436.html": {
         "grade": "A",
@@ -1953,7 +1947,6 @@
         "has_video": true,
         "judicial_potential": true
     },
-    "news-case-khdii-phraya-raka-2453.html": "A",
     "news-case-khdii-ghost-merit-2445.html": {
         "grade": "A",
         "score": 88,
@@ -2315,7 +2308,6 @@
         "cat_tag": "คดีเด่นด้านสังคม"
     },
     "news-case-khdii-fake-banknote-r5-2446.html": "A",
-    "news-case-khdii-nang-thong-luean-2452.html": "A",
     "news-case-khdii-ao-luek-massacre-2560.html": {
         "grade": "A",
         "score": 95,
@@ -2386,7 +2378,6 @@
     "news-case-khdii-queen-sunandha-tragedy-2423.html": "A",
     "news-case-khdii-blue-diamond-affair-2532.html": "A",
     "news-case-khdii-amdaeng-yu-rights-2387.html": "A",
-    "news-case-khdii-nu-kai-palace-scandal-2422.html": "A",
     "news-case-khdii-opium-tax-corruption-2430.html": "A",
     "news-case-khdii-railway-budget-corruption-2434.html": "A",
     "news-case-khdii-tax-farmer-embezzlement-2420.html": "A",
