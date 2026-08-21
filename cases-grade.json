@@ -2114,5 +2114,40 @@
     "score": 89,
     "has_video": false,
     "judicial_potential": true
+  },
+  "news-case-khdii-mae-chamoy-2528.html": {
+    "grade": "A",
+    "score": 90,
+    "has_video": true,
+    "judicial_potential": true,
+    "title": "คดีแชร์แม่ชม้อย (ตำนานแชร์ลูกโซ่น้ำมันหมื่นล้าน)"
+  },
+  "news-case-khdii-raja-finance-2522.html": {
+    "grade": "A",
+    "score": 90,
+    "has_video": true,
+    "judicial_potential": true,
+    "title": "คดีราชาเงินทุน (วิกฤตการณ์ตลาดหุ้นครั้งแรกของไทย)"
+  },
+  "news-case-khdii-14-october-2516.html": {
+    "grade": "A",
+    "score": 90,
+    "has_video": true,
+    "judicial_potential": true,
+    "title": "คดี 14 ตุลา (การเรียกร้องรัฐธรรมนูญและจุดจบ 3 ทรราช)"
+  },
+  "news-case-khdii-6-october-2519.html": {
+    "grade": "A",
+    "score": 90,
+    "has_video": true,
+    "judicial_potential": true,
+    "title": "คดี 6 ตุลา (โศกนาฏกรรมธรรมศาสตร์และการนิรโทษกรรม)"
+  },
+  "news-case-khdii-thung-yai-hunting-2516.html": {
+    "grade": "A",
+    "score": 90,
+    "has_video": true,
+    "judicial_potential": true,
+    "title": "คดีทุ่งใหญ่นเรศวร (ชนวนเหตุ 14 ตุลา)"
   }
 }
