@@ -1145,9 +1145,11 @@
    "cat": "คดีเด่นด้านสังคม",
    "has_video": false,
    "rank": {
-    "grade": "A",
+    "grade": "VERIFIED_S",
     "score": 85,
-    "s_verified": false
+    "s_verified": true,
+    "judicial_case": "คำวินิจฉัยศาลรัฐธรรมนูญที่ 20/2564 และ พ.ร.บ.สมรสเท่าเทียม 2567",
+    "verified_by": "Agent C"
    },
    "visibility": {
     "public": true,
@@ -1164,9 +1166,11 @@
    "cat": "คดีเด่นด้านสังคม",
    "has_video": false,
    "rank": {
-    "grade": "A",
+    "grade": "VERIFIED_S",
     "score": 85,
-    "s_verified": false
+    "s_verified": true,
+    "judicial_case": "คำพิพากษาศาลฎีกาที่ 1308/2565",
+    "verified_by": "Agent C"
    },
    "visibility": {
     "public": true,
@@ -1221,9 +1225,11 @@
    "cat": "คดีเด่นด้านสังคม",
    "has_video": false,
    "rank": {
-    "grade": "A",
+    "grade": "VERIFIED_S",
     "score": 85,
-    "s_verified": false
+    "s_verified": true,
+    "judicial_case": "คำพิพากษาศาลฎีกาที่ 1318/2563",
+    "verified_by": "Agent C"
    },
    "visibility": {
     "public": true,
@@ -1411,9 +1417,11 @@
    "cat": "คดีเด่นด้านสังคม",
    "has_video": false,
    "rank": {
-    "grade": "A",
+    "grade": "VERIFIED_S",
     "score": 85,
-    "s_verified": false
+    "s_verified": true,
+    "judicial_case": "คำพิพากษาศาลฎีกาที่ 3530/2536",
+    "verified_by": "Agent C"
    },
    "visibility": {
     "public": true,
@@ -1449,9 +1457,11 @@
    "cat": "คดีเด่นด้านสังคม",
    "has_video": false,
    "rank": {
-    "grade": "A",
+    "grade": "VERIFIED_S",
     "score": 85,
-    "s_verified": false
+    "s_verified": true,
+    "judicial_case": "คำพิพากษาศาลฎีกาที่ 3968/2537",
+    "verified_by": "Agent C"
    },
    "visibility": {
     "public": true,
@@ -1468,9 +1478,11 @@
    "cat": "คดีเด่นด้านสังคม",
    "has_video": false,
    "rank": {
-    "grade": "A",
+    "grade": "VERIFIED_S",
     "score": 85,
-    "s_verified": false
+    "s_verified": true,
+    "judicial_case": "คำพิพากษาศาลฎีกาที่ 4333/2553",
+    "verified_by": "Agent C"
    },
    "visibility": {
     "public": true,
@@ -1487,9 +1499,11 @@
    "cat": "คดีเด่นด้านสังคม",
    "has_video": false,
    "rank": {
-    "grade": "A",
+    "grade": "VERIFIED_S",
     "score": 85,
-    "s_verified": false
+    "s_verified": true,
+    "judicial_case": "คำพิพากษาศาลฎีกาที่ 6000/2546",
+    "verified_by": "Agent C"
    },
    "visibility": {
     "public": true,

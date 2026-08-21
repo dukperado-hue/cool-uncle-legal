@@ -10,11 +10,11 @@
   "gate": "none"
  },
  "rank": {
-  "grade": "A",
+  "grade": "VERIFIED_S",
   "score": 90,
-  "s_verified": false,
-  "judicial_case": "ประมวลกฎหมายแพ่งและพาณิชย์",
-  "verified_by": "Agent A"
+  "s_verified": true,
+  "judicial_case": "คำวินิจฉัยศาลรัฐธรรมนูญที่ 20/2564 และ พ.ร.บ.สมรสเท่าเทียม 2567",
+  "verified_by": "Agent C"
  },
  "status": "พร้อมใช้งาน",
  "read": {

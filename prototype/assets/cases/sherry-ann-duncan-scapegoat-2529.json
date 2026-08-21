@@ -10,11 +10,11 @@
   "gate": "none"
  },
  "rank": {
-  "grade": "A",
+  "grade": "VERIFIED_S",
   "score": 90,
-  "s_verified": false,
-  "judicial_case": "ประมวลกฎหมายวิธีพิจารณาความอาญา",
-  "verified_by": "Agent A"
+  "s_verified": true,
+  "judicial_case": "คำพิพากษาศาลฎีกาที่ 3530/2536",
+  "verified_by": "Agent C"
  },
  "status": "พร้อมใช้งาน",
  "read": {
