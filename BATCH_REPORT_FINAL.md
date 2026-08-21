@@ -444,3 +444,43 @@ BATCH REPORT (summary): Processed 10 (1 new + 4 fixes + 5 ICJ splits) / New A: 1
 - Skip: พระยาพิชัยดาบหัก/กฎหมายสักเลก 2317 — seed batch2 KMUTT ยังเป็น A_REVIEW reserve (ต้องทวนสอบทีม)
 
 **สถานะ: DEPLOYED → READY_FOR_AGENT_C handoff** — ไม่มี judicial candidate ใหม่ใน batch นี้ (วัดจอมสุดาเป็นเรื่องเล่าการสืบสวน ไม่มีคำพิพากษาฎีกาใน seed)
+
+## BATCH 15 — พระยอดเมืองขวาง (ศาลรับสั่งพิเศษ ร.ศ.112) + Agent C Batch 3c Follow-up (21 Aug 2026)
+
+**Commits:** 0467421 (Aerial fix), ab28a7b, 628f8ae
+**Live:** https://coolunclelab.com/news-case-khdii-phrayodmueangkwang-2436.html — HTTP 200 ✅
+
+### 1. พระยอดเมืองขวาง 2436 — UPGRADED (A/90, release=WARN, has_video=true, judicial_potential=true)
+
+เคยเป็น A/90 แต่เนื้อหาเป็น placeholder บาง: ตัดสินด้วยศาลเดียว 5 events, 2 legal issues, 2 provisions, ไม่มีวิดีโอ
+อัปเกรดด้วย seed facts ที่ทวนสอบแล้วจาก primary source (รายงานศาลรับสั่งพิเศษ ร.ศ.112 @ vajirayana.org) + วิกิพีเดียไทย:
+
+| ส่วน | ก่อน | หลัง |
+|---|---|---|
+| Events | 5 | 8 (ศาลรับสั่งพิเศษ 24 ก.พ.–17 มี.ค. ร.ศ.112 ยกฟ้อง / ศาลผสม 4–13 มิ.ย. ร.ศ.113 จำคุก 20 ปี / อัยโทษ / ถึงแก่กรรม 2443) |
+| Legal issues | 2 | 6 (อยู่เหนืออธิปไตย/คำฟ้อง 5 ข้ออาญาหลวง/ศาล 2 ศาล 2 ครั้ง/ศาลผสม/สำนึกกฎหมายสยาม/ผลร.ศ.112) |
+| Provisions | 2 | 6 (อาญาหลวง ม.10 โทษ 8 สถาน, ม.108 โจรปล้น, พ.ร.บ.ทิ้งไฟ 2427, พ.ร.บ.ศาลรับสั่งพิเศษ ร.ศ.112, จารีตอธิปไตย, สนธิสัญญา 3 ต.ค. 2436) — external_law ทั้งหมด |
+| Video | ไม่มี | 9k9zDqHY8i4 — นำออกจาก TODO_VIDEOS.md |
+
+### 2. Agent C Batch 3c Follow-up (commit 0467421)
+- **Aerial Incident 1999 HTML:** มาตราผิด (ม.31 ป.พ.พ. — กฎหมายใหม่บนหน้า ICJ) แก้เป็นข้อบท ICJ Statute Art.36(2) จริง; ลบ stray `<p>`; แบ่ง paragraph 362 ตัวอักษร → 0 BLOCK
+- Boworadet/Bunpeng JSON: Agent B territory (prototype/assets/cases/) — Agent A ไม่แตะตาม §7
+
+### สรุปตัวเลข
+| Metric | Value |
+|---|---|
+| Processed | 2 (upgraded 1 + Agent C follow-up 1) |
+| A total | **270** (A=266 + A_REVIEW=4, C=1) — ไม่เปลี่ยน |
+| BLOCK | 0 | WARN | 39 (pre-existing, ไม่เปลี่ยน) |
+| Judicial potential | 1 — **Handoff to Agent C: พระยอดเมืองขวาง** |
+
+**Agent C handoff — พระยอดเมืองขวาง (research_handoff: ready, judicial_potential=true)**
+1. รายงานศาลรับสั่งพิเศษ ร.ศ.112 ต้นฉบับ @ vajirayana.org — ตรวจเลขเรื่อง/วันที่/รายนามทุกาลการ
+2. มีคำพิพากษาศาลผสม ร.ศ.113 ให้ตรวจได้หรือไม่?
+3. ศาลวินิจฉัยทุกข้อในคำฟ้อง 5 ข้อ (อาญาหลวง ม.10 โทษ 8 สถาน, ม.108, พ.ร.บ.ทิ้งไฟ) อย่างไร?
+4. ทำไมศาลชุดแรกยกฟ้องแต่ศาลชุดสอง (ผสม) ตัดสินจำคุก 20 ปี?
+5. ผลคดีสุดท้าย: อัยโทษ ร.5 + ถึงแก่กรรม 2443
+
+**Patch เล็ก: rewrite_v21.py** — video embed normalize URL/ID → `youtube.com/embed/<id>` (content-safe)
+
+**สถานะ: DEPLOYED → READY_FOR_AGENT_C handoff**
