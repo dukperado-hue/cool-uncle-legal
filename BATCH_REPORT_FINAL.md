@@ -95,3 +95,19 @@
 - All verified live (HTTP 200) at coolunclelab.com.
 - `cases-grade.json` updated.
 - Total Grade A cases: ~386.
+
+### Batch 36 — DEPLOYED ✅ (2026-08-21 11:01)
+**Theme:** Legendary Crime & Justice Landmarks
+**Cases (5 Grade A):**
+- news-case-khdii-tee-yai-legend-2524.html (คดีตี๋ใหญ่)
+- news-case-khdii-si-quey-human-rights-2563.html (คดีซีอุย - การคืนความเป็นธรรม)
+- news-case-khdii-four-ministers-murder-2492.html (คดีสังหาร 4 อดีตรัฐมนตรี)
+- news-case-khdii-young-turk-rebellion-2524.html (กบฏยังเติร์ก 2524)
+- news-case-khdii-sherry-ann-duncan-scapegoat-2529.html (คดีเชอรี่ แอน - แพะรับบาป)
+
+**Status:**
+- All 5 pages built to Grade A standard.
+- **Special Focus:** Si Quey case includes the 2563 human rights movement and cremation. Sherry Ann case includes the reform of evidence law (Section 226/1).
+- All verified live (HTTP 200) at coolunclelab.com.
+- `cases-grade.json` updated.
+- Total Grade A cases: ~391.
