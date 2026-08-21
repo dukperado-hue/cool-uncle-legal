@@ -55,16 +55,16 @@ a.case-link:hover { color:#B08A3C; }
   </table>
 </div>
 <script>
-fetch("/assets/cases-unreleased-a.json?v=16").then(r=>r.json()).then(items=>{
+fetch("/assets/cases-unreleased-a.json?v=17").then(r=>r.json()).then(items=>{
   // Stats
   document.getElementById('stats').innerHTML = 
     '<div class="stat-box">ทั้งหมด <strong>'+items.length+'</strong> คดี</div>' +
-    '<div class="stat-box">Warn <strong>'+items.filter(i=>i.release==="WARN").length+'</strong></div>' +
-    '<div class="stat-box">Blocked <strong>'+items.filter(i=>i.release==="BLOCKED").length+'</strong></div>' +
-    '<div class="stat-box">มีวิดีโอ <strong>'+items.filter(i=>i.has_video).length+'</strong></div>';
+    '<div class="stat-box">Warn <strong>'+items.filter(i=>i.status==="Warn").length+'</strong></div>' +
+    '<div class="stat-box">Blocked <strong>'+items.filter(i=>i.status==="Blocked").length+'</strong></div>' +
+    '<div class="stat-box">มีวิดีโอ <strong>'+items.filter(i=>i.video_status==="confirmed").length+'</strong></div>';
   
   // Filter bar
-  var cats = [...new Set(items.map(i=>i.cat).filter(Boolean))];
+  var cats = [...new Set(items.map(i=>i.cat_tag).filter(Boolean))];
   var filterBar = document.getElementById('filterBar');
   filterBar.innerHTML = '<button class="filter-btn active" data-cat="">ทั้งหมด</button>' + 
     cats.map(c=>'<button class="filter-btn" data-cat="'+c+'">'+c+'</button>').join('');
@@ -72,9 +72,9 @@ fetch("/assets/cases-unreleased-a.json?v=16").then(r=>r.json()).then(items=>{
   // Table
   function render(list) {
     document.getElementById('caseTable').innerHTML = list.map((it,i)=>{
-      var badge = it.release==='BLOCKED' ? '<span class="badge badge-blocked">Blocked</span>' : '<span class="badge badge-warn">Warn</span>';
-      var href = it.slug.startsWith('auto-') ? '/news-'+it.slug+'.html' : '/'+it.slug+'.html';
-      return '<tr><td>'+(i+1)+'</td><td><a class="case-link" href="'+href+'">'+it.title+'</a></td><td><span class="cat-tag">'+it.cat+'</span></td><td>'+it.year+'</td><td>'+it.score+'</td><td>'+badge+'</td><td>'+(it.has_video?'✅':'⏳')+'</td></tr>';
+      var badge = it.status==='Blocked' ? '<span class="badge badge-blocked">Blocked</span>' : '<span class="badge badge-warn">Warn</span>';
+      var href = '/' + it.slug;
+      return '<tr><td>'+(i+1)+'</td><td><a class="case-link" href="'+href+'">'+it.title+'</a></td><td><span class="cat-tag">'+it.cat_tag+'</span></td><td>'+it.year+'</td><td>'+it.score+'</td><td>'+badge+'</td><td>'+(it.video_status==="confirmed"?'✅':'⏳')+'</td></tr>';
     }).join('');
   }
   render(items);
@@ -85,7 +85,7 @@ fetch("/assets/cases-unreleased-a.json?v=16").then(r=>r.json()).then(items=>{
       filterBar.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
       e.target.classList.add('active');
       var cat = e.target.dataset.cat;
-      var filtered = cat ? items.filter(i=>i.cat===cat) : items;
+      var filtered = cat ? items.filter(i=>i.cat_tag===cat) : items;
       render(filtered);
     }
   });
