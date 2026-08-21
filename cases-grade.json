@@ -71,12 +71,6 @@
     "release": "WARN",
     "has_video": false
   },
-  "news-case-ephlingaihmorngngaantuktaaekhed-r-nkhrpthm-2536.html": {
-    "grade": "A",
-    "score": 89,
-    "release": "BLOCKED",
-    "has_video": true
-  },
   "news-case-eruue-hlwngsuokhthay-abpaang-2565.html": {
     "grade": "A",
     "score": 89,
@@ -160,12 +154,6 @@
     "score": 85,
     "release": "WARN",
     "has_video": false
-  },
-  "news-case-joerkam-maek-phetcha-royal-saudi-2532.html": {
-    "grade": "A",
-    "score": 91,
-    "release": "WARN",
-    "has_video": true
   },
   "news-case-khdii-9near-aehkek-rkhomykh-muul-2566.html": {
     "grade": "A",
@@ -321,12 +309,6 @@
     "grade": "A",
     "score": 89,
     "release": "BLOCKED",
-    "has_video": true
-  },
-  "news-case-khdiiaechraemchm-y-2527.html": {
-    "grade": "A",
-    "score": 91,
-    "release": "WARN",
     "has_video": true
   },
   "news-case-khdiiaechraemmnii-2562.html": {
@@ -995,12 +977,6 @@
     "release": "WARN",
     "has_video": true
   },
-  "news-case-um-kha-nak-kan-thut-phaekh-phet-saudi-2533.html": {
-    "grade": "A",
-    "score": 91,
-    "release": "WARN",
-    "has_video": true
-  },
   "news-case-um-kha-nang-daarawdii-d-ch-seri-sritananchai-2537.html": {
     "grade": "A",
     "score": 91,
@@ -1250,14 +1226,6 @@
     "release": "WARN",
     "notes": "Political & Structural Reform Series; judicial_potential=true"
   },
-  "news-case-khdii-rs130-rebellion-2455.html": {
-    "title": "กบฏ ร.ศ. 130 — คณะปฏิวัติกลุ่มแรกของสยาม",
-    "score": 90,
-    "grade": "A",
-    "has_video": false,
-    "release": "WARN",
-    "notes": "Political & Structural Reform Series; judicial_potential=true"
-  },
   "news-case-khdii-abolition-slavery-2448.html": {
     "title": "การเลิกทาสและไพร่ — การปฏิรูปโครงสร้างสังคมสยาม",
     "score": 93,
@@ -1457,18 +1425,6 @@
   "news-case-khdii-nualchawee-2502.html": {
     "grade": "A",
     "score": 92,
-    "release": "RELEASE",
-    "has_video": true
-  },
-  "news-case-khdii-sherry-ann-2529.html": {
-    "grade": "A",
-    "score": 90,
-    "release": "RELEASE",
-    "has_video": true
-  },
-  "news-case-khdii-syamol-2536.html": {
-    "grade": "A",
-    "score": 89,
     "release": "RELEASE",
     "has_video": true
   },

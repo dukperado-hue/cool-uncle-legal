@@ -410,16 +410,6 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdii-rs130-rebellion-2455.html",
-        "title": "กบฏ ร.ศ. 130 — คณะปฏิวัติกลุ่มแรกที่ใฝ่ฝันถึงประชาธิปไตย",
-        "cat_tag": "คดทั่วไป",
-        "year": "พ.ศ. 2455",
-        "norm_year": 2455,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-khdii-payabat-2460.html",
         "title": "คดีพยาบาท: ฆาตกรรมสะเทือนขวัญสู่ต้นกำเนิดนิยายสืบสวนไทย",
         "cat_tag": "คดทั่วไป",
@@ -850,16 +840,6 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdiiaechraemchm-y-2527.html",
-        "title": "แชร์แม่ชม้อย (2527)",
-        "cat_tag": "คดทั่วไป",
-        "year": "พ.ศ. 2527",
-        "norm_year": 2527,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-khdii-mae-chamoy-2528.html",
         "title": "คดีแชร์แม่ชม้อย (ตำนานแชร์ลูกโซ่น้ำมันหมื่นล้าน)",
         "cat_tag": "คดทั่วไป",
@@ -870,38 +850,8 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdii-sherry-ann-2529.html",
-        "title": "คดีเชอรี่ แอน ดันแคน: ตราบาปแห่งการจับแพะและการปฏิรูปกระบวนการยุติธรรมไทย",
-        "cat_tag": "คดทั่วไป",
-        "year": "พ.ศ. 2529",
-        "norm_year": 2529,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-joerkam-maek-phetcha-royal-saudi-2532.html",
-        "title": "เพชรซาอูดิอาระเบีย ภาค 1 — โจรกรรมเครื่องเพชรจากพระราชวงศ์ (2532)",
-        "cat_tag": "คดทั่วไป",
-        "year": "พ.ศ. 2532",
-        "norm_year": 2532,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-khdii-umkhaanakkaarthuutaelanakthurkicchchaa-udii-aaraebiiy-2533.html",
         "title": "คดีอุ้มฆ่านายโมฮัมเหม็ด อัลรูไวลี่ — วิกฤตเพชรซาอุ (2533)",
-        "cat_tag": "คดทั่วไป",
-        "year": "พ.ศ. 2533",
-        "norm_year": 2533,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-um-kha-nak-kan-thut-phaekh-phet-saudi-2533.html",
-        "title": "เพชรซาอูดิอาระเบีย ภาค 3 — อุมฆ่านักการทูตและนักธุรกิจซาอูดิอาระเบีย (2533)",
         "cat_tag": "คดทั่วไป",
         "year": "พ.ศ. 2533",
         "norm_year": 2533,
@@ -958,26 +908,6 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
-    },
-    {
-        "slug": "news-case-ephlingaihmorngngaantuktaaekhed-r-nkhrpthm-2536.html",
-        "title": "ศยามล (หมอจ้างวานฆ่าอำพรางศพ) (2536)",
-        "cat_tag": "คดทั่วไป",
-        "year": "พ.ศ. 2536",
-        "norm_year": 2536,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-syamol-2536.html",
-        "title": "คดีศยามล: อาชญากรรมอำพรางและแรงจูงใจจากความขัดแย้งในครอบครัว",
-        "cat_tag": "คดทั่วไป",
-        "year": "พ.ศ. 2536",
-        "norm_year": 2536,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
     },
     {
         "slug": "news-case-khdii-kader-fire-2536.html",
