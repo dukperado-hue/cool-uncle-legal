@@ -2516,5 +2516,25 @@
   "news-case-khdii-sgt-bueng-cpl-note-hitman-2520.html": {
     "grade": "A",
     "cat_tag": "คดยุคโบราณ"
+  },
+  "kobkul-assassination-2549.html": {
+    "title": "คดีสังหาร ส.ส.กอบกุล นพอมรบดี (2549)",
+    "grade": "A"
+  },
+  "peera-assassination-2555.html": {
+    "title": "คดีสังหารนายกพีระ ตันติเศรณี (2555)",
+    "grade": "A"
+  },
+  "charoen-wat-akson-2547.html": {
+    "title": "คดีสังหารเจริญ วัดอักษร (2547)",
+    "grade": "A"
+  },
+  "saengchai-sunthornwat-2539.html": {
+    "title": "คดีสังหารแสงชัย สุนทรวัฒน์ (2539)",
+    "grade": "A"
+  },
+  "praman-chansue-assassination-plot-2536.html": {
+    "title": "คดีวางแผนสังหารประมาณ ชันซื่อ (2536)",
+    "grade": "A"
   }
 }
