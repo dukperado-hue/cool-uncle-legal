@@ -1625,5 +1625,40 @@
     "score": 85,
     "release": "WARN",
     "has_video": false
+  },
+  "news-case-khdii-thanabat-plom-r5-2446.html": {
+    "grade": "A",
+    "score": 92,
+    "release": "WARN",
+    "has_video": true,
+    "judicial_potential": true
+  },
+  "news-case-khdii-ksr-kulap-2443.html": {
+    "grade": "A",
+    "score": 90,
+    "release": "WARN",
+    "has_video": true,
+    "judicial_potential": true
+  },
+  "news-case-khdii-sanghan-4-ratthamontri-2492.html": {
+    "grade": "A",
+    "score": 93,
+    "release": "WARN",
+    "has_video": true,
+    "judicial_potential": true
+  },
+  "news-case-khdii-ai-uam-ok-roi-2414.html": {
+    "grade": "A",
+    "score": 88,
+    "release": "WARN",
+    "has_video": false,
+    "judicial_potential": true
+  },
+  "news-case-khdii-somdet-phra-nang-ruea-lom-2423.html": {
+    "grade": "A",
+    "score": 91,
+    "release": "WARN",
+    "has_video": true,
+    "judicial_potential": true
   }
 }
