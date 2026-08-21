@@ -172,3 +172,17 @@
 - All 5 cases achieved Grade A standard (score 95).
 - 8 sections implemented, paragraphs <= 350 chars.
 - Video URLs and legal provisions confirmed.
+
+### Batch 41 (Political & Economic Landmarks) - 2026-08-21
+- **Status:** DEPLOYED ✅
+- **Cases Processed:** 5
+- **Upgraded to A:** 5
+- **Cases:**
+  1. `hopewell-landmark-2562`: คดีโฮปเวลล์ (มหากาพย์ค่าโง่และอายุความ)
+  2. `rice-pledging-landmark-2560`: คดีจำนำข้าว (บรรทัดฐานความรับผิดทางละเมิดนักการเมือง)
+  3. `itv-share-landmark-2567`: คดีหุ้นไอทีวี (นิยามหุ้นสื่อและคุณสมบัติทางการเมือง)
+  4. `ua-athon-corruption-2565`: คดีบ้านเอื้ออาทร (ทุจริตเชิงนโยบายและค่าหัวคิว)
+  5. `police-station-corruption-2566`: คดีโรงพัก 396 แห่ง (การรวมสัญญาและคำยกฟ้อง)
+- **Quality Gate:** score >= 85, 0 BLOCK, 8 sections present.
+- **Judicial Potential:** High (All are landmark court rulings).
+- **Handoff:** Ready for Agent B (UI) and Agent C (Rank S verification).
