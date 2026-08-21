@@ -165,6 +165,10 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 .lecture-video{margin:12px 0 16px}
 .lecture-video .video-frame-wrap{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:10px;overflow:hidden}
 .lecture-video .video-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.lecture-img-inline{float:right;width:128px;margin:2px 0 12px 16px;text-align:center}
+.lecture-img-inline img{width:100%;border-radius:10px;display:block;box-shadow:var(--shadow)}
+.lecture-img-inline .cap{font-size:.72rem;color:var(--ink-faint);margin-top:5px;line-height:1.3}
+@media(max-width:600px){.lecture-img-inline{float:none;width:150px;margin:12px auto}}
 /* TTS bar */
 .tts-bar{
   display:flex;gap:8px;align-items:center;flex-wrap:wrap;
@@ -478,7 +482,54 @@ Blood and the Holy Grail" ฟ้อง Dan Brown ผู้แต่งนิย�
 หลักการนี้มีไว้เพื่อจำกัดอำนาจผูกขาดของเจ้าของสิทธิ์ ไม่ให้ผูกขาดแนวคิด ทฤษฎี หรือข้อเท็จจริง และปล่อยให้
 สิ่งเหล่านี้อยู่ในโดเมนสาธารณะเพื่อการพัฒนาสร้างสรรค์ต่อไป`,
     images: ["pics/codex/davinci_leigh_baigent.jpg", "pics/codex/davinci_dan_brown.jpg"] },
-  { n: 3, title: "บรรยายครั้งที่ 3 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
+  { n: 3, title: "การได้มาซึ่งลิขสิทธิ์ — ผู้สร้างสรรค์ เจ้าของสิทธิ์คนแรก และการโอนสิทธิ์", text:
+`🚧 ครั้งนี้เป็นโครงร่างหัวข้อเตรียมไว้ก่อน คำบรรยายฉบับเต็มจะทยอยเพิ่มภายหลัง
+
+หัวข้อครั้งนี้ว่าด้วย "การได้มาซึ่งลิขสิทธิ์" ตาม พ.ร.บ. ลิขสิทธิ์ พ.ศ. 2537 หมวด 1 ส่วนที่ 2 แบ่งเป็น 3 หัวข้อย่อย
+(1) ผู้สร้างสรรค์ (Author) (2) ผู้เป็นเจ้าของลิขสิทธิ์คนแรก (First Owner) (3) ผู้เป็นเจ้าของลิขสิทธิ์ผ่านการรับโอน (Copyright Assignment)
+
+**(1) ผู้สร้างสรรค์ (Author)**
+*   No Author, No Copyright — ความสัมพันธ์ระหว่างผู้สร้างสรรค์กับงานสร้างสรรค์ในกฎหมายลิขสิทธิ์ (กรณีลิงเซลฟี่)
+*   ทฤษฎีเบื้องหลังกฎหมายลิขสิทธิ์ สาย Incentive Theory (สร้างแรงจูงใจให้ผู้สร้างสรรค์ลงทุนลงแรง)
+[[IMG:macaulay]]อ้างอิงคำกล่าวของโทมัส แบ็บิงตัน แมคคอเลย์ ในสภาสามัญอังกฤษ ปี ค.ศ. 1841
+*   ทฤษฎีสาย Personality/Labor Theory (ลิขสิทธิ์เป็นส่วนหนึ่งของบุคลิกภาพ/แรงงานของผู้สร้างสรรค์)
+[[IMG:lechapelier]]อ้างอิงคำกล่าวของฌอง เลอ ชาเปอลิเย่ร์ และ [[IMG:locke]]ทฤษฎีแรงงาน (Labor Theory) ของจอห์น ล็อค
+ใน Second Treatise of Government (1690)
+*   ผู้สร้างสรรค์ในกฎหมายลิขสิทธิ์ไทย: การได้มาซึ่งลิขสิทธิ์ (มาตรา 8-14) ธรรมสิทธิ์ (มาตรา 18)
+ระยะเวลาคุ้มครองลิขสิทธิ์ (มาตรา 19-26)
+*   ผู้สร้างสรรค์ในฐานะเจ้าของลิขสิทธิ์คนแรก เทียบกับผู้สร้างสรรค์ที่ไม่ใช่เจ้าของลิขสิทธิ์
+(ข้อยกเว้นกรณีงานจ้างตามมาตรา 10 และ 14 และกรณีลิขสิทธิ์โอนเปลี่ยนมือได้ตามมาตรา 17)
+*   กรณีศึกษาข้อพิพาทศิลปินกับค่ายเพลง: Prince v. Warner Bros, Metallica v. Napster, Courtney Love v. Vivendi,
+Paul McCartney v. Sony/ATV, Taylor Swift v. Ithaca Holdings และกรณีค่ายเพลงไทย vs ศิลปินไทย
+
+**(2) ผู้เป็นเจ้าของลิขสิทธิ์คนแรก (First Owner)**
+*   หลัก "โอนสิทธิไม่ขาดสาย" — เหตุใดต้องรู้ว่าใครคือ "เจ้าของคนแรก" (สุภาษิตกฎหมาย Nemo dat quod non habet)
+*   วิธีเป็นเจ้าของลิขสิทธิ์คนแรก 2 ทาง: (ก) ได้มาจากการสร้างสรรค์เอง (มาตรา 8, 9, 11, 12)
+(ข) ได้มาจากการว่าจ้างผู้สร้างสรรค์ (มาตรา 10, 14)
+*   ใครคือ "ผู้สร้างสรรค์" งานแต่ละประเภท — งานสร้างสรรค์โดยแท้ (วรรณกรรม/นาฏกรรม/ดนตรีกรรม/ศิลปกรรม)
+เทียบกับงานวิสาหกิจ (โสตทัศนวัสดุ/ภาพยนตร์/สิ่งบันทึกเสียง/งานแพร่เสียงแพร่ภาพ) — ชั่งระหว่างความคิดสร้างสรรค์
+(Creativity) กับการลงทุน (Investment) พร้อมตัวอย่างสถานการณ์บริษัทเพลง "เพลินเพลง" ว่าจ้างนักแต่งเพลงฟรีแลนซ์
+*   ผู้สร้างสรรค์โดยการดัดแปลงผลงานผู้อื่น (มาตรา 11) — ต้องได้รับอนุญาตจากเจ้าของลิขสิทธิ์งานต้นฉบับก่อน
+มิฉะนั้นงานดัดแปลงนั้นไม่มีลิขสิทธิ์และตกเป็นสาธารณสมบัติ
+*   ผู้สร้างสรรค์รับจ้าง 3 ประเภทตามกฎหมายไทย: รับจ้างแรงงาน (มาตรา 9) / รับจ้างทำของ (มาตรา 10) /
+ทำงานให้ราชการ (มาตรา 14 — ดูคำพิพากษาศาลฎีกาที่ 1908/2546)
+*   เงื่อนไขสัญชาติของผู้สร้างสรรค์ตามมาตรา 8 — คนไทย ผู้มีถิ่นในราชอาณาจักร หรือชาติภาคีอนุสัญญาเบิร์น (ปัจจุบัน 181 ประเทศ)
+*   แบบฝึกหัดท้ายหัวข้อ: กรณีนิยาย "Sad Disco" แปลเป็นไทยแล้วดัดแปลงต่อเป็นบทภาพยนตร์ — ใครเป็นเจ้าของลิขสิทธิ์ชั้นใดบ้าง
+
+**(3) ผู้เป็นเจ้าของลิขสิทธิ์ผ่านการรับโอน (Copyright Assignment)**
+*   การโอนสิทธิทางเศรษฐกิจ (Economic Rights) — โอนได้ทั้งหมดหรือบางส่วน ชั่วคราวหรือตลอดอายุการคุ้มครองลิขสิทธิ์ก็ได้
+*   ข้อสันนิษฐานในการโอนลิขสิทธิ์ (มาตรา 17 วรรคสอง) — หากไม่ได้ตกลงระยะเวลาไว้ชัดแจ้งหรือโดยปริยาย
+กฎหมายสันนิษฐานว่าโอนกันเป็นเวลา 10 ปี และการโอนต้องทำเป็นหนังสือลงลายมือชื่อทั้งผู้โอนและผู้รับโอน
+(บทบัญญัตินี้ไม่ใช้บังคับกรณีลิขสิทธิ์ตกทอดสู่ทายาทผ่านการรับมรดก)
+*   กรณีของธรรมสิทธิ์ (มาตรา 18) — เป็นสิทธิเฉพาะตัวของผู้สร้างสรรค์ โอนเปลี่ยนมือไม่ได้ แต่ทายาทมีสิทธิฟ้องร้อง
+บังคับตามสิทธิดังกล่าวแทนผู้สร้างสรรค์ที่ถึงแก่กรรมได้ และมีอายุการคุ้มครองเท่ากับลิขสิทธิ์
+*   แบบฝึกหัดท้ายหัวข้อ: กรณีนักแต่งเพลงขายลิขสิทธิ์ให้บริษัท บี แล้วเสียชีวิต ครอบครัวคัดค้านเมื่อบริษัท บี
+จะขายต่อให้บริษัท ซี — วิเคราะห์ประเด็นสิทธิทางเศรษฐกิจที่โอนได้ กับธรรมสิทธิ์ที่โอนไม่ได้`,
+    inlineImages: [
+      { key: "macaulay", src: "pics/codex/theory_macaulay.jpg", caption: "โทมัส แบ็บิงตัน แมคคอเลย์" },
+      { key: "lechapelier", src: "pics/codex/theory_le_chapelier.png", caption: "ฌอง เลอ ชาเปอลิเย่ร์" },
+      { key: "locke", src: "pics/codex/theory_john_locke.jpg", caption: "จอห์น ล็อค" }
+    ] },
   { n: 4, title: "บรรยายครั้งที่ 4 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
   { n: 5, title: "บรรยายครั้งที่ 5 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
   { n: 6, title: "บรรยายครั้งที่ 6 — รอเพิ่มเนื้อหา", text: "ยังไม่มีสรุปเนื้อหาสำหรับครั้งนี้ กำลังทยอยเพิ่มเติม" },
@@ -586,11 +637,18 @@ function renderLectureBody(l){
 let escaped = l.text.replace(/</g,'&lt;');
   escaped = escaped.replace(/\*\*([\s\S]+?)\*\*/g, '<strong>$1</strong>');
   const video = l.video ? `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${l.video}" title="วิดีโอประกอบบรรยายครั้งที่ ${l.n}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="video-credit">📺 วิดีโอแนะนำเกี่ยวกับคดีนี้ — จากช่อง <a href="https://www.youtube.com/@CoolUncleLaw/videos" target="_blank" rel="noopener">Cool Uncle Law</a></div></div>` : '';
+  if (l.inlineImages && l.inlineImages.length) {
+    l.inlineImages.forEach(im => {
+      const tag = `<div class="lecture-img-inline"><img src="${im.src}" alt="${im.caption||''}" loading="lazy" onerror="this.parentElement.remove()"><div class="cap">${im.caption||''}</div></div>`;
+      const marker = `[[IMG:${im.key}]]`;
+      escaped = escaped.includes(marker) ? escaped.replace(marker, tag) : tag + escaped;
+    });
+    return video + escaped;
+  }
   if (l.images && l.images.length) {
     const pair = `<div class="lecture-img-pair">${l.images.map(src => `<img src="${src}" alt="" loading="lazy" onerror="this.remove()">`).join('')}</div>`;
     return video + (escaped.includes('[[IMGPAIR]]') ? escaped.replace('[[IMGPAIR]]', pair) : pair + escaped);
   }
->>>>>>> 29656e6 (feat: legal disclaimer footer on all pages + video owner credits (Cool Uncle Law channel) + bunkfai district office contacts (930 amphoe, 611 phones))
   if (!l.image) return video + escaped;
   const img = `<img src="${l.image}" alt="" loading="lazy" class="lecture-img" onerror="this.remove()">`;
   return video + (escaped.includes('[[IMG]]') ? escaped.replace('[[IMG]]', img) : img + escaped);
