@@ -432,15 +432,6 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdii-rs-130-rebellion-2454.html",
-        "title": "กบฏ ร.ศ. 130: ประทีปดวงแรกแห่งการอภิวัฒน์ไทย",
-        "cat_tag": "คดยุคโบราณ",
-        "year": "พ.ศ. 2454",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
-    },
-    {
         "slug": "news-case-khdii-kabot-r130-2455.html",
         "title": "คดีกบฏ ร.ศ.130 (2455) — ขุนทวยหาญพิทักษ์ + ยังมีเติร์ก",
         "cat_tag": "คดีอาญา",
@@ -1069,15 +1060,6 @@
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-6-october-2519.html",
-        "title": "คดี 6 ตุลา (โศกนาฏกรรมธรรมศาสตร์และการนิรโทษกรรม)",
-        "cat_tag": "คดีการเมือง",
-        "year": "พ.ศ. 2519",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
     },
     {
         "slug": "news-case-beagle-channel-arbitration-argentina-chile.html",
@@ -1717,15 +1699,6 @@
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-serm-sakonrat-41.html",
-        "title": "คดีเสริม สาครราษฎร์: ฆาตกรรมอำพรางศพและการตีความ 'ความรัก' ในทางกฎหมาย",
-        "cat_tag": "คดีเด่นด้านสังคม",
-        "year": "พ.ศ. 2541",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
     },
     {
         "slug": "news-case-aerial-incident-of-10-august-1999-pakistan-v-india.html",
