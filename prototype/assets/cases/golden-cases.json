@@ -1532,6 +1532,120 @@
     "read",
     "play"
    ]
+  },
+  {
+   "id": "somchai-neelapaijit-2547",
+   "title": "คดีทนายสมชาย นีละไพจิตร (2547)",
+   "cat": "คดีเด่น",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "nenkham-2556",
+   "title": "คดีเณรคำ (หลวงปู่เณรคำ)",
+   "cat": "คดีเด่น",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "nikorn-2533",
+   "title": "คดีพระนิกร (2533)",
+   "cat": "คดีเด่น",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "yantra-2537",
+   "title": "คดีพระยันตระ (2537)",
+   "cat": "คดีเด่น",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "phra-prom-chedi-2561",
+   "title": "คดีเงินทอนวัด (พระพรหมสิทธิ)",
+   "cat": "คดีเด่น",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "phra-prom-dilok-2561",
+   "title": "คดีเงินทอนวัด (พระพรหมสิทธิ)",
+   "cat": "คดีเด่น",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
   }
  ],
  "series_hubs": [
@@ -1542,6 +1656,35 @@
     "blue-diamond-1-phetcha-2532",
     "blue-diamond-3-diplomats-2533",
     "blue-diamond-2-sritananchai-2537"
+   ]
+  },
+  {
+   "series_id": "forced-disappearance",
+   "series_title": "ซีรีส์: ความยุติธรรมที่หายไป (Forced Disappearances)",
+   "order": [
+    "somchai-neelapaijit-2547",
+    "dr-supat-skeleton-2555"
+   ]
+  },
+  {
+   "series_id": "monk-scandals",
+   "series_title": "ซีรีส์: ผ้าเหลืองร้อน (Monk Scandals)",
+   "order": [
+    "nenkham-2556",
+    "nikorn-2533",
+    "yantra-2537",
+    "phra-prom-chedi-2561",
+    "phra-prom-dilok-2561"
+   ]
+  },
+  {
+   "series_id": "thai-rebellions",
+   "series_title": "ซีรีส์: กบฏและการเมืองไทย (Thai Rebellions)",
+   "order": [
+    "rs-130-rebellion-2454",
+    "boworadet-rebellion-2476",
+    "palace-rebellion-2492",
+    "young-turk-rebellion-2524"
    ]
   }
  ]
