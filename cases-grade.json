@@ -1728,5 +1728,37 @@
         "release": "WARN",
         "has_video": false,
         "judicial_potential": true
+    },
+    "news-case-khdii-rs103-petition-2427.html": {
+        "title": "คำกราบบังคมทูล ร.ศ. 103 — การเรียกร้องรัฐธรรมนูญครั้งแรก",
+        "score": 92,
+        "grade": "A",
+        "has_video": false,
+        "release": "WARN",
+        "notes": "Political & Structural Reform Series; judicial_potential=true"
+    },
+    "news-case-khdii-rs130-rebellion-2455.html": {
+        "title": "กบฏ ร.ศ. 130 — คณะปฏิวัติกลุ่มแรกของสยาม",
+        "score": 90,
+        "grade": "A",
+        "has_video": false,
+        "release": "WARN",
+        "notes": "Political & Structural Reform Series; judicial_potential=true"
+    },
+    "news-case-khdii-abolition-slavery-2448.html": {
+        "title": "การเลิกทาสและไพร่ — การปฏิรูปโครงสร้างสังคมสยาม",
+        "score": 93,
+        "grade": "A",
+        "has_video": false,
+        "release": "WARN",
+        "notes": "Political & Structural Reform Series; judicial_potential=true"
+    },
+    "news-case-khdii-penalcode-rs127-2451.html": {
+        "title": "กฎหมายลักษณะอาญา ร.ศ. 127 — ประมวลกฎหมายฉบับแรก",
+        "score": 91,
+        "grade": "A",
+        "has_video": false,
+        "release": "WARN",
+        "notes": "Political & Structural Reform Series; judicial_potential=true"
     }
 }
