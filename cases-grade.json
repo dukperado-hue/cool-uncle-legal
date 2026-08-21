@@ -1576,5 +1576,35 @@
   "score": 85,
   "release": "WARN",
   "has_video": false
+ },
+ "news-case-khdii-sukhum-cheedcheun-ngaanwanchaan-2539.html": {
+  "grade": "A",
+  "score": 90,
+  "release": "WARN",
+  "has_video": true
+ },
+ "news-case-khdii-wisanyan-6-sop-joe-danchang-2539.html": {
+  "grade": "A",
+  "score": 89,
+  "release": "WARN",
+  "has_video": true
+ },
+ "news-case-khdii-jaa-sathit-3-sop-2538.html": {
+  "grade": "A",
+  "score": 89,
+  "release": "WARN",
+  "has_video": true
+ },
+ "news-case-khdii-khaay-gkrab-buntawee-5-sop-2540.html": {
+  "grade": "A",
+  "score": 90,
+  "release": "WARN",
+  "has_video": true
+ },
+ "news-case-khdii-mrdk-naayna-thmmawathanai-2533.html": {
+  "grade": "A",
+  "score": 89,
+  "release": "WARN",
+  "has_video": true
  }
 }
