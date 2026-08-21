@@ -155,3 +155,20 @@
 - All 5 cases achieved Grade A standard (score 95).
 - 8 sections implemented, paragraphs <= 350 chars.
 - Video URLs and legal provisions confirmed.
+
+## Batch 40: Justice & Human Rights Landmarks
+**Date:** 2026-08-21
+**Status:** DEPLOYED ✅
+**Cases Processed:** 5
+**Grade A Upgrades:** 5
+**Key Highlights:**
+- **khanakorn-pianchana-justice-2562:** คดีคณากร เพียรชนะ - โศกนาฏกรรมผู้พิพากษาเพื่ออิสรภาพตุลาการ
+- **phrom-phiram-tragedy-2520:** คดีคืนบาปพรหมพิราม - โศกนาฏกรรมรุมโทรมประวัติศาสตร์และตราบาปสังคม
+- **chaiyaphum-pasae-rights-2560:** คดีชัยภูมิ ป่าแส - การต่อสู้เพื่อพิสูจน์ความจริงในเหตุวิสามัญฆาตกรรมเยาวชนลาหู่
+- **paween-pongsirin-exile-2558:** คดี พล.ต.ต. ปวีณ - ราคาของความซื่อตรงในการปราบค้ามนุษย์โรฮิงญา
+- **somchai-neelapaijit-disappearance-2547:** คดีทนายสมชาย - การอุ้มหายที่เป็นจุดเริ่มต้นของกฎหมายป้องกันการอุ้มหายในไทย
+
+**Quality Metrics:**
+- All 5 cases achieved Grade A standard (score 95).
+- 8 sections implemented, paragraphs <= 350 chars.
+- Video URLs and legal provisions confirmed.
