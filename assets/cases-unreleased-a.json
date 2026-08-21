@@ -2330,16 +2330,6 @@
   "cat": ""
  },
  {
-  "slug": "blue-diamond",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "blue-diamond.html",
-  "year": "",
-  "cat": ""
- },
- {
   "slug": "news-case-khdii-amdaengpom-hlongya-pi-2347",
   "grade": "A",
   "score": 95,
@@ -2736,16 +2726,6 @@
   "release": "WARN",
   "has_video": false,
   "title": "news-case-khdii-sanghan-4-ratthamontri-2492.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-ai-uam-ok-roi-2414",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-ai-uam-ok-roi-2414.html",
   "year": "",
   "cat": ""
  },
@@ -3515,9 +3495,9 @@
   "score": 95,
   "release": "WARN",
   "has_video": false,
-  "title": "",
+  "title": "billy-polajee-2557.html",
   "year": "",
-  "cat": "คดีสิทธิมนุษยชน"
+  "cat": ""
  },
  {
   "slug": "akara-gold-mine-2560",
@@ -3525,9 +3505,9 @@
   "score": 95,
   "release": "WARN",
   "has_video": false,
-  "title": "",
+  "title": "akara-gold-mine-2560.html",
   "year": "",
-  "cat": "คดีสิ่งแวดล้อม"
+  "cat": ""
  },
  {
   "slug": "mae-moh-power-plant-2546",
@@ -3535,9 +3515,9 @@
   "score": 95,
   "release": "WARN",
   "has_video": false,
-  "title": "",
+  "title": "mae-moh-power-plant-2546.html",
   "year": "",
-  "cat": "คดีสิ่งแวดล้อม"
+  "cat": ""
  },
  {
   "slug": "klong-dan-corruption-2545",
@@ -3545,9 +3525,9 @@
   "score": 95,
   "release": "WARN",
   "has_video": false,
-  "title": "",
+  "title": "klong-dan-corruption-2545.html",
   "year": "",
-  "cat": "คดีคอรัปชัน"
+  "cat": ""
  },
  {
   "slug": "bar-beer-demolition-2546",
@@ -3555,9 +3535,9 @@
   "score": 95,
   "release": "WARN",
   "has_video": false,
-  "title": "",
+  "title": "bar-beer-demolition-2546.html",
   "year": "",
-  "cat": "คดีอาญา"
+  "cat": ""
  },
  {
   "slug": "news-case-khdii-praewa-2553",
@@ -3950,46 +3930,6 @@
   "cat": ""
  },
  {
-  "slug": "news-case-khdii-amdaeng-pom-r1-1804",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-amdaeng-pom-r1-1804.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-phra-yot-muang-khwang-2436",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-phra-yot-muang-khwang-2436.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-fake-banknote-r5-2446",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-fake-banknote-r5-2446.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-nang-thong-luean-2452",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-nang-thong-luean-2452.html",
-  "year": "",
-  "cat": ""
- },
- {
   "slug": "news-case-khdii-ao-luek-massacre-2560",
   "grade": "A",
   "score": 95,
@@ -4086,156 +4026,6 @@
   "release": "WARN",
   "has_video": false,
   "title": "news-case-khdii-somchai-neelapaijit-disappearance-2547.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-hopewell-landmark-2562",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-hopewell-landmark-2562.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-rice-pledging-landmark-2560",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-rice-pledging-landmark-2560.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-itv-share-landmark-2567",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-itv-share-landmark-2567.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-ua-athon-corruption-2565",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-ua-athon-corruption-2565.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-police-station-corruption-2566",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-police-station-corruption-2566.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-amdaeng-muean-rights-2408",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-amdaeng-muean-rights-2408.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-phraya-preecha-konlakarn-2422",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-phraya-preecha-konlakarn-2422.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-ksr-kulap-history-2443",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-ksr-kulap-history-2443.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-queen-sunandha-tragedy-2423",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-queen-sunandha-tragedy-2423.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-blue-diamond-affair-2532",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-blue-diamond-affair-2532.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-amdaeng-yu-rights-2387",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-amdaeng-yu-rights-2387.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-nu-kai-palace-scandal-2422",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-nu-kai-palace-scandal-2422.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-opium-tax-corruption-2430",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-opium-tax-corruption-2430.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-railway-budget-corruption-2434",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-railway-budget-corruption-2434.html",
-  "year": "",
-  "cat": ""
- },
- {
-  "slug": "news-case-khdii-tax-farmer-embezzlement-2420",
-  "grade": "A",
-  "score": 95,
-  "release": "WARN",
-  "has_video": false,
-  "title": "news-case-khdii-tax-farmer-embezzlement-2420.html",
   "year": "",
   "cat": ""
  },
@@ -4346,7 +4136,7 @@
   "release": "WARN",
   "has_video": false,
   "title": "คดีสังหาร ส.ส.กอบกุล นพอมรบดี (2549)",
-  "year": "2549",
+  "year": "",
   "cat": ""
  },
  {
@@ -4356,7 +4146,7 @@
   "release": "WARN",
   "has_video": false,
   "title": "คดีสังหารนายกพีระ ตันติเศรณี (2555)",
-  "year": "2555",
+  "year": "",
   "cat": ""
  },
  {
@@ -4366,7 +4156,7 @@
   "release": "WARN",
   "has_video": false,
   "title": "คดีสังหารเจริญ วัดอักษร (2547)",
-  "year": "2547",
+  "year": "",
   "cat": ""
  },
  {
@@ -4376,7 +4166,7 @@
   "release": "WARN",
   "has_video": false,
   "title": "คดีสังหารแสงชัย สุนทรวัฒน์ (2539)",
-  "year": "2539",
+  "year": "",
   "cat": ""
  },
  {
@@ -4386,7 +4176,57 @@
   "release": "WARN",
   "has_video": false,
   "title": "คดีวางแผนสังหารประมาณ ชันซื่อ (2536)",
-  "year": "2536",
+  "year": "",
+  "cat": ""
+ },
+ {
+  "slug": "news-case-khdii-shipping-moo-witness-2546",
+  "grade": "A",
+  "score": 95,
+  "release": "WARN",
+  "has_video": false,
+  "title": "คดีชิปปิ้งหมู: จุดเปลี่ยนกฎหมายคุ้มครองพยาน",
+  "year": "",
+  "cat": ""
+ },
+ {
+  "slug": "news-case-khdii-chuwong-forensic-2558",
+  "grade": "A",
+  "score": 95,
+  "release": "WARN",
+  "has_video": false,
+  "title": "คดีเสี่ยชูวงษ์: นิติวิทยาศาสตร์พิสูจน์ฆาตกรรมอำพราง",
+  "year": "",
+  "cat": ""
+ },
+ {
+  "slug": "news-case-khdii-ekayuth-abduction-2556",
+  "grade": "A",
+  "score": 95,
+  "release": "WARN",
+  "has_video": false,
+  "title": "คดีเอกยุทธ อัญชันบุตร: ปมสังหารและทฤษฎีสมคบคิด",
+  "year": "",
+  "cat": ""
+ },
+ {
+  "slug": "news-case-khdii-judge-brother-abduction-2563",
+  "grade": "A",
+  "score": 95,
+  "release": "WARN",
+  "has_video": false,
+  "title": "คดีอุ้มฆ่าพี่ชายผู้พิพากษา: การแทรกแซงกระบวนการยุติธรรม",
+  "year": "",
+  "cat": ""
+ },
+ {
+  "slug": "news-case-khdii-x-jakkrit-hired-murder-2556",
+  "grade": "A",
+  "score": 95,
+  "release": "WARN",
+  "has_video": false,
+  "title": "คดีเอ็กซ์ จักรกฤษณ์: ปมจ้างวานฆ่าในครอบครัว",
+  "year": "",
   "cat": ""
  }
 ]
