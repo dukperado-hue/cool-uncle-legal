@@ -1,247 +1,268 @@
 {
-  "meta": {
-    "version": "1.0",
-    "last_curated": "2026-08-20",
-    "curated_by": "B",
-    "note": "Curated public surface — Database ≠ Publication: โหลดโดย news-index-v2.html เฉพาะคดีที่ visibility.public = true",
-    "_featured_deident": "🛡 De-identification ระดับ C — แสดงเฉพาะบทบาท (จำเลย = นักศึกษาแพทย์ชาย / ผู้ตาย = นักศึกษาแพทย์หญิง) — ชื่อจริงเก็บไว้ใน case JSON เท่านั้น"
+ "meta": {
+  "version": "1.0",
+  "last_curated": "2026-08-20",
+  "curated_by": "B",
+  "note": "Curated public surface — Database ≠ Publication: โหลดโดย news-index-v2.html เฉพาะคดีที่ visibility.public = true",
+  "_featured_deident": "🛡 De-identification ระดับ C — แสดงเฉพาะบทบาท (จำเลย = นักศึกษาแพทย์ชาย / ผู้ตาย = นักศึกษาแพทย์หญิง) — ชื่อจริงเก็บไว้ใน case JSON เท่านั้น"
+ },
+ "_featured_title": "คดีจำเลย (นักศึกษาแพทย์ชาย) — รักที่กลายเป็นฆาตกรรมอำพรางศพ (2541)",
+ "_featured_blurb": "ศาลฎีกาวางหลักแยก 'ความรัก' กับ 'ความใคร่ในการยึดครอง' — หลักนี้ยังคงถูกอ้างอิงในการพิจารณาเหตุลดโทษคดีฆาตกรรมเรื่องรักถึงปัจจุบัน",
+ "_featured_deident": "🛡 ชื่อผู้ตาย/จำเลยจริงในเนื้อหาคือข้อมูลดิบจาก legacy — รอดำเนินการ de-identification โดย Agent A ก่อนเปิดเป็น featured เต็มรูปแบบ",
+ "_db_total": "235",
+ "featured_cases": [
+  "janeera-2541"
+ ],
+ "golden_cases": [
+  {
+   "id": "janeera-2541",
+   "title": "จำเลย (นักศึกษาแพทย์ชาย) — ฆาตกรรมอำพรางศพนักศึกษาแพทย์ (2541)",
+   "cat": "คดีอาญา",
+   "has_video": true,
+   "rank": {
+    "grade": "A",
+    "score": 92,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "deident_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
   },
-  "_featured_title": "คดีจำเลย (นักศึกษาแพทย์ชาย) — รักที่กลายเป็นฆาตกรรมอำพรางศพ (2541)",
-  "_featured_blurb": "ศาลฎีกาวางหลักแยก 'ความรัก' กับ 'ความใคร่ในการยึดครอง' — หลักนี้ยังคงถูกอ้างอิงในการพิจารณาเหตุลดโทษคดีฆาตกรรมเรื่องรักถึงปัจจุบัน",
-  "_featured_deident": "🛡 ชื่อผู้ตาย/จำเลยจริงในเนื้อหาคือข้อมูลดิบจาก legacy — รอดำเนินการ de-identification โดย Agent A ก่อนเปิดเป็น featured เต็มรูปแบบ",
-  "_db_total": "235",
-  "featured_cases": [
-    "janeera-2541"
-  ],
-  "golden_cases": [
-    {
-      "id": "janeera-2541",
-      "title": "จำเลย (นักศึกษาแพทย์ชาย) — ฆาตกรรมอำพรางศพนักศึกษาแพทย์ (2541)",
-      "cat": "คดีอาญา",
-      "has_video": true,
-      "rank": {
-        "grade": "A",
-        "score": 92,
-        "s_verified": false
-      },
-      "visibility": {
-        "public": false,
-        "public_reason": "deident_required"
-      },
-      "modes": [
-        "read",
-        "play"
-      ]
-    },
-    {
-      "id": "somkid-phumphuang-2548-2562",
-      "title": "สมคิด พุ่มพวง (2548, 2562)",
-      "cat": "คดีอาญา",
-      "has_video": true,
-      "rank": {
-        "grade": "A",
-        "score": 94,
-        "s_verified": false
-      },
-      "visibility": {
-        "public": true,
-        "public_reason": "golden"
-      },
-      "modes": [
-        "read"
-      ]
-    },
-    {
-      "id": "wisayaman-jordan-2539",
-      "title": "วิสามัญฯ โจ ด่านช้าง (2539)",
-      "cat": "คดีอาญา",
-      "has_video": true,
-      "rank": {
-        "grade": "A",
-        "score": 94,
-        "s_verified": false
-      },
-      "visibility": {
-        "public": true,
-        "public_reason": "golden"
-      },
-      "modes": [
-        "read"
-      ]
-    },
-    {
-      "id": "wisut-2544",
-      "title": "จำเลย (สูตินารีแพทย์) — คดีฆาตกรรมภรรยาหั่นศพอำพราง (2544)",
-      "cat": "คดีอาญา",
-      "has_video": true,
-      "rank": {
-        "grade": null,
-        "score": null,
-        "s_verified": false
-      },
-      "visibility": {
-        "public": false,
-        "public_reason": "deident_required_and_needs_review"
-      },
-      "modes": [
-        "read",
-        "play"
-      ]
-    },
-    {
-      "id": "stark-auditor-2566",
-      "title": "ความรับผิดของผู้สอบบัญชีในการรับรองงบการเงิน STARK (2566)",
-      "cat": "คดีองค์กรธุรกิจ",
-      "has_video": true,
-      "rank": {
-        "grade": "A",
-        "score": 95,
-        "s_verified": false
-      },
-      "visibility": {
-        "public": true,
-        "public_reason": "golden"
-      },
-      "modes": [
-        "read"
-      ]
-    },
-    {
-      "id": "blue-diamond-1-phetcha-2532",
-      "title": "เพชรซาอู ภาค 1 — โจรกรรมเครื่องเพชรจากพระราชวงศ์ (2532)",
-      "cat": "คดีอาญา · การทูต",
-      "has_video": true,
-      "rank": {
-        "grade": "A",
-        "score": 91,
-        "s_verified": false
-      },
-      "visibility": {
-        "public": false,
-        "public_reason": "deident_required_and_legacy_migration_review"
-      },
-      "modes": [
-        "read",
-        "play"
-      ],
-      "series_id": "blue-diamond",
-      "series_order": 1
-    },
-    {
-      "id": "blue-diamond-3-diplomats-2533",
-      "title": "เพชรซาอู ภาค 2 — อุมฆ่านักการทูตและนักธุรกิจซาอูดิอาระเบีย (2533)",
-      "cat": "คดีอาญา · การทูต",
-      "has_video": true,
-      "rank": {
-        "grade": "A",
-        "score": 91,
-        "s_verified": false
-      },
-      "visibility": {
-        "public": false,
-        "public_reason": "deident_required_and_legacy_migration_review"
-      },
-      "modes": [
-        "read",
-        "play"
-      ],
-      "series_id": "blue-diamond",
-      "series_order": 2
-    },
-    {
-      "id": "blue-diamond-2-sritananchai-2537",
-      "title": "เพชรซาอู ภาค 3 — อุมฆ่านางดาราวดีและด.ช.เสรี ศรีธนัญชัย (2537)",
-      "cat": "คดีอาญา · การทูต",
-      "has_video": true,
-      "rank": {
-        "grade": "A",
-        "score": 91,
-        "s_verified": false
-      },
-      "visibility": {
-        "public": false,
-        "public_reason": "deident_required_and_legacy_migration_review"
-      },
-      "modes": [
-        "read",
-        "play"
-      ],
-      "series_id": "blue-diamond",
-      "series_order": 3
-    },
-    {
-      "id": "shayamala-2536",
-      "title": "คดีฆ่าตกรรม น.ส.ศยามล ลาภก่อเกียรติ — คดีจ้างวานฆ่าภรรยา (2536)",
-      "cat": "คดีอาญา",
-      "has_video": true,
-      "rank": {
-        "grade": "S",
-        "score": 96,
-        "s_verified": true,
-        "judicial_case": "ฎีกา 5244/2539",
-        "verified_by": "Agent C — Batch 3a (primary source: Wikisource)"
-      },
-      "visibility": {
-        "public": false,
-        "public_reason": "agent_a_approval_required"
-      },
-      "modes": [
-        "read",
-        "play"
-      ]
-    },
-    {
-      "id": "forex3d-2564",
-      "title": "คดี Forex-3D: แชร์ลูกโซ่ Forex ระดับมโหฬาร (2564-2569)",
-      "cat": "คดีดายาณาาย · เศรษฐกิจ",
-      "has_video": false,
-      "rank": {
-        "grade": "S",
-        "score": 95,
-        "s_verified": true,
-        "judicial_case": "คดดำ อ.853/2564",
-        "verified_by": "Agent C — Handoff Brief (Tier 1 VERIFIED_S)"
-      },
-      "visibility": {
-        "public": false,
-        "public_reason": "agent_a_approval_required"
-      },
-      "modes": [
-        "read",
-        "play"
-      ]
-    },
-    {
-      "id": "tuohao-criminal-2566",
-      "title": "ทู้ห่ว 2566 : คดีบริหารระดับสูง - เหยื้อชีวิต ระดับสูง",
-      "cat": "คดีอาญา",
-      "has_video": false,
-      "rank": {
-        "grade": "S_CANDIDATE",
-        "score": 4,
-        "s_verified": false,
-        "judicial_case": "คดีดำ ย.87/2566 ศาลอาญากรุงเทพมหานคร",
-        "verified_by": "Agent C - Handoff Brief (Tier 1 S_CANDIDATE, awaiting judicial authority)"
-      },
-      "visibility": {
-        "public": false,
-        "public_reason": "agent_a_approval_required"
-      },
-      "modes": [
-        "read",
-        "play"
-      ]
-    }
-  ],
-  "series_hubs": [
-    {
-      "series_id": "blue-diamond",
-      "series_title": "มหากาพย์เพชรซาอู — มรกตและโลหิต",
-      "order": [
-        "blue-diamond-1-phetcha-2532",
-        "blue-diamond-3-diplomats-2533",
-        "blue-diamond-2-sritananchai-2537"
-      ]
-    }
-  ]
+  {
+   "id": "somkid-phumphuang-2548-2562",
+   "title": "สมคิด พุ่มพวง (2548, 2562)",
+   "cat": "คดีอาญา",
+   "has_video": true,
+   "rank": {
+    "grade": "A",
+    "score": 94,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "public_reason": "golden"
+   },
+   "modes": [
+    "read"
+   ]
+  },
+  {
+   "id": "wisayaman-jordan-2539",
+   "title": "วิสามัญฯ โจ ด่านช้าง (2539)",
+   "cat": "คดีอาญา",
+   "has_video": true,
+   "rank": {
+    "grade": "A",
+    "score": 94,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "public_reason": "golden"
+   },
+   "modes": [
+    "read"
+   ]
+  },
+  {
+   "id": "wisut-2544",
+   "title": "จำเลย (สูตินารีแพทย์) — คดีฆาตกรรมภรรยาหั่นศพอำพราง (2544)",
+   "cat": "คดีอาญา",
+   "has_video": true,
+   "rank": {
+    "grade": null,
+    "score": null,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "deident_required_and_needs_review"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "stark-auditor-2566",
+   "title": "ความรับผิดของผู้สอบบัญชีในการรับรองงบการเงิน STARK (2566)",
+   "cat": "คดีองค์กรธุรกิจ",
+   "has_video": true,
+   "rank": {
+    "grade": "A",
+    "score": 95,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "public_reason": "golden"
+   },
+   "modes": [
+    "read"
+   ]
+  },
+  {
+   "id": "blue-diamond-1-phetcha-2532",
+   "title": "เพชรซาอู ภาค 1 — โจรกรรมเครื่องเพชรจากพระราชวงศ์ (2532)",
+   "cat": "คดีอาญา · การทูต",
+   "has_video": true,
+   "rank": {
+    "grade": "A",
+    "score": 91,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "deident_required_and_legacy_migration_review"
+   },
+   "modes": [
+    "read",
+    "play"
+   ],
+   "series_id": "blue-diamond",
+   "series_order": 1
+  },
+  {
+   "id": "blue-diamond-3-diplomats-2533",
+   "title": "เพชรซาอู ภาค 2 — อุมฆ่านักการทูตและนักธุรกิจซาอูดิอาระเบีย (2533)",
+   "cat": "คดีอาญา · การทูต",
+   "has_video": true,
+   "rank": {
+    "grade": "A",
+    "score": 91,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "deident_required_and_legacy_migration_review"
+   },
+   "modes": [
+    "read",
+    "play"
+   ],
+   "series_id": "blue-diamond",
+   "series_order": 2
+  },
+  {
+   "id": "blue-diamond-2-sritananchai-2537",
+   "title": "เพชรซาอู ภาค 3 — อุมฆ่านางดาราวดีและด.ช.เสรี ศรีธนัญชัย (2537)",
+   "cat": "คดีอาญา · การทูต",
+   "has_video": true,
+   "rank": {
+    "grade": "A",
+    "score": 91,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "deident_required_and_legacy_migration_review"
+   },
+   "modes": [
+    "read",
+    "play"
+   ],
+   "series_id": "blue-diamond",
+   "series_order": 3
+  },
+  {
+   "id": "shayamala-2536",
+   "title": "คดีฆ่าตกรรม น.ส.ศยามล ลาภก่อเกียรติ — คดีจ้างวานฆ่าภรรยา (2536)",
+   "cat": "คดีอาญา",
+   "has_video": true,
+   "rank": {
+    "grade": "S",
+    "score": 96,
+    "s_verified": true,
+    "judicial_case": "ฎีกา 5244/2539",
+    "verified_by": "Agent C — Batch 3a (primary source: Wikisource)"
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "agent_a_approval_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "forex3d-2564",
+   "title": "คดี Forex-3D: แชร์ลูกโซ่ Forex ระดับมโหฬาร (2564-2569)",
+   "cat": "คดีดายาณาาย · เศรษฐกิจ",
+   "has_video": false,
+   "rank": {
+    "grade": "S",
+    "score": 95,
+    "s_verified": true,
+    "judicial_case": "คดดำ อ.853/2564",
+    "verified_by": "Agent C — Handoff Brief (Tier 1 VERIFIED_S)"
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "agent_a_approval_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "tuohao-criminal-2566",
+   "title": "ทู้ห่ว 2566 : คดีบริหารระดับสูง - เหยื้อชีวิต ระดับสูง",
+   "cat": "คดีอาญา",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "คดีดำ ย.87/2566 ศาลอาญากรุงเทพมหานคร",
+    "verified_by": "Agent C - Handoff Brief (Tier 1 S_CANDIDATE, awaiting judicial authority)"
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "agent_a_approval_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "tuohao-civil-2566",
+   "title": "ทู้ห่ว 2566 : คดียึดอายัด ชั่วคราว ~117.9 ล้านบาท (S_CANDIDATE)",
+   "cat": "คดีแพ้ง · เศรฑกิจ",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "คสธ. ย์น่งสิง.93/2566, ย์น่ง.141/2566, ย์น่ง.176/2567 (ปปง.)",
+    "verified_by": "Agent C - Handoff Brief (Tier 1 S_CANDIDATE, awaiting judicial authority)"
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "agent_a_approval_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  }
+ ],
+ "series_hubs": [
+  {
+   "series_id": "blue-diamond",
+   "series_title": "มหากาพย์เพชรซาอู — มรกตและโลหิต",
+   "order": [
+    "blue-diamond-1-phetcha-2532",
+    "blue-diamond-3-diplomats-2533",
+    "blue-diamond-2-sritananchai-2537"
+   ]
+  }
+ ]
 }
