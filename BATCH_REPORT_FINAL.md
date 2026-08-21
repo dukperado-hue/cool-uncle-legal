@@ -111,3 +111,19 @@
 - All verified live (HTTP 200) at coolunclelab.com.
 - `cases-grade.json` updated.
 - Total Grade A cases: ~391.
+
+### Batch 37 — DEPLOYED ✅ (2026-08-21 11:09)
+**Theme:** Crime & Forensic Science Landmarks
+**Cases (5 Grade A):**
+- news-case-khdii-nualchawee-legend-2502.html (คดีนวลฉวี)
+- news-case-khdii-syamol-forensic-2536.html (คดีศยามล)
+- news-case-khdii-hangthong-mystery-2542.html (คดีห้างทอง ธรรมวัฒนะ)
+- news-case-khdii-serm-sakonrat-41.html (คดีเสริม สาครราษฎร์)
+- news-case-khdii-dr-supat-skeleton-2555.html (คดีหมอสุพัฒน์)
+
+**Status:**
+- All 5 pages built to Grade A standard.
+- **Special Focus:** Forensic science evolution (DNA, Re-autopsy, Forensic Anthropology, and legal interpretation of 'Love').
+- All verified live (HTTP 200) at coolunclelab.com.
+- `cases-grade.json` updated.
+- Total Grade A cases: ~396.
