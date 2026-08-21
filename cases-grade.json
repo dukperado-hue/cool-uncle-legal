@@ -1465,12 +1465,6 @@
         "release": "WARN",
         "has_video": false
     },
-    "news-case-khdii-kabot-r130-2455.html": {
-        "grade": "A",
-        "score": 90,
-        "release": "WARN",
-        "has_video": true
-    },
     "news-case-khdii-sawan-khot-r8-2489.html": {
         "grade": "A",
         "score": 92,
@@ -2318,13 +2312,10 @@
     "news-case-khdii-itv-share-landmark-2567.html": "A",
     "news-case-khdii-ua-athon-corruption-2565.html": "A",
     "news-case-khdii-police-station-corruption-2566.html": "A",
-    "news-case-khdii-ksr-kulap-history-2443.html": "A",
     "news-case-khdii-queen-sunandha-tragedy-2423.html": "A",
     "news-case-khdii-blue-diamond-affair-2532.html": "A",
-    "news-case-khdii-amdaeng-yu-rights-2387.html": "A",
     "news-case-khdii-opium-tax-corruption-2430.html": "A",
     "news-case-khdii-railway-budget-corruption-2434.html": "A",
-    "news-case-khdii-tax-farmer-embezzlement-2420.html": "A",
     "news-case-khdii-jod-howdy-gangster-2499.html": {
         "grade": "A",
         "cat_tag": "คดอาญา"

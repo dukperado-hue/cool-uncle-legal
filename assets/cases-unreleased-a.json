@@ -117,15 +117,6 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdii-amdaeng-yu-rights-2387.html",
-        "title": "Amdaeng Yu Rights 2387",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2387",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
-    },
-    {
         "slug": "news-case-clipperton-island-arbitration-france-v-mexico.html",
         "title": "Clipperton Island Arbitration (France v. Mexico)",
         "cat_tag": "คดีอาญา",
@@ -214,15 +205,6 @@
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-tax-farmer-embezzlement-2420.html",
-        "title": "Tax Farmer Embezzlement 2420",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2420",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
     },
     {
         "slug": "news-case-khdii-preecha-kolakan.html",
@@ -324,15 +306,6 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdii-ksr-kulap-history-2443.html",
-        "title": "Ksr Kulap History 2443",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2440",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
-    },
-    {
         "slug": "news-case-khdii-ramrit-mueang-trat-2442-2443.html",
         "title": "<title>คดีหลวงรามฤทธิรงค์ — ข่มขืนอำแดงเจียม เมืองตราด ร.ศ.121",
         "cat_tag": "คดีอาญา",
@@ -418,15 +391,6 @@
         "title": "กบฏ ร.ศ. 130 — คณะปฏิวัติกลุ่มแรกที่ใฝ่ฝันถึงประชาธิปไตย",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2454",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-kabot-r130-2455.html",
-        "title": "คดีกบฏ ร.ศ.130 (2455) — ขุนทวยหาญพิทักษ์ + ยังมีเติร์ก",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2455",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
