@@ -1,0 +1,82 @@
+{
+ "id": "chainmanee-2567",
+ "meta": {
+  "year": "2567",
+  "category": "คดีอาญา · ฟอกเงิน (nominee Forex-3D)"
+ },
+ "visibility": {
+  "public": false,
+  "public_reason": "agent_a_approval_required",
+  "gate": "agent_a_approval_required",
+  "internal_notes": "nominee Forex-3D theme — chainmanee-2567 — S_CANDIDATE; ไม่มีหน้า news ใน repo — seed facts จาก brief เท่านั้น"
+ },
+ "rank": {
+  "grade": "S_CANDIDATE",
+  "s_verified": false,
+  "score": 4,
+  "judicial_case": "คดีแดง อ.2812/2567 — nominee กรณี Forex-3D"
+ },
+ "deident": {
+  "required": false,
+  "level": null,
+  "labels": {},
+  "original_names": [],
+  "reason": null
+ },
+ "status": "ยังไม่มีคำพิพากษา — คดีแดง อ.2812/2567 (nominee) — ผูกกับ Forex-3D theme; อยู่ระหว่างตรวจสอบ",
+ "read": {
+  "sections": [
+   {
+    "order": 2,
+    "key": "02",
+    "title": "สรุปคดี",
+    "content": "คดีแดง อ.2812/2567 — สำนวน nominee ที่ Agent C ระบุว่าผูกกับ theme กรณี Forex-3D\nยังไม่มีคำพิพากษา — อยู่ระหว่างตรวจสอบต่อ"
+   },
+   {
+    "order": 6,
+    "key": "06",
+    "title": "ประเด็นกฎหมาย",
+    "content": "ประเด็น: การใช้บุคคล nominee รับผิดแทนผู้จัดการเงิน/ระบบฟอกเงิน (หัวข้อเดียวกับ Forex-3D)\nสถานะคดี: รอยืนยันเลขคดีแดง อ.2812/2567 จาก Agent C — ห้ามอ้างว่าถึงที่สุด"
+   },
+   {
+    "order": 8,
+    "key": "08",
+    "title": "บทเรียนรู้",
+    "content": "คดี nominee ชี้ให้เห็นว่าโครงสร้างการรับผิดแทนไม่ได้ทำให้ผู้กระทำจริงพ้นผิด"
+   }
+  ]
+ },
+ "play": {
+  "flow": [],
+  "anti_reveal_rules": [
+   "ห้ามเผยคำตอบก่อนผู้เล่นตอบ",
+   "ไม่ระบุศาลตั้งแต่ต้น — ผู้เล่นเดาคดีก่อน"
+  ]
+ },
+ "media": {
+  "video": null,
+  "status": "none"
+ },
+ "sources": {
+  "seed_facts": [
+   "Agent C — Handoff Brief Batch 3c"
+  ],
+  "note": "เนื้ อหาจาก seed facts ของ Agent C เท่านั้น — ห้ามเติมข้อเท็จจริงใหม่"
+ },
+ "migration": {
+  "from": "agent_c_brief_batch3c",
+  "verified": true,
+  "checker": "Agent B",
+  "check_date": "2026-08-21",
+  "note": "no legacy page — built from Agent C brief seed facts"
+ },
+ "validation": {
+  "schema_ok": true,
+  "paragraph_ok": true,
+  "sections_complete": true,
+  "links_ok": true,
+  "gate": "agent_a_approval_required",
+  "checked_at": "2026-08-21",
+  "checked_by": "agent_b"
+ }
+}

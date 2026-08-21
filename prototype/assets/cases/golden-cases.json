@@ -220,7 +220,7 @@
     "grade": "S_CANDIDATE",
     "score": 4,
     "s_verified": false,
-    "judicial_case": "คดีดำ.87/2566 — ยกฟ้องจำเลยที่ 2 (ทู้ห้าว) — ประโยชน์แห่งความสงสัยตามประมวลกฎหมายวิธีอาญา ม.227; จำเลย 1+4 = 27.5 ปี; จำเลย 5 = 28 ปี; จำเลย 7, 11, 12 = 21 ปี (รายงาน",
+    "judicial_case": "คดีดำ ย.87/2566 — ยกฟ้องจำเลยที่ 2 (ทู้ห้าว) — ประโยชน์แห่งความสงสัยตามประมวลกฎหมายวิธีอาญา ม.227; จำเลย 1+4 = 27.5 ปี; จำเลย 5 = 28 ปี; จำเลย 7, 11, 12 = 21 ปี (รายงาน",
     "verified_by": "Agent C - Handoff Brief (Tier 1 S_CANDIDATE, awaiting judicial authority)"
    },
    "visibility": {
@@ -283,7 +283,7 @@
     "grade": "S_CANDIDATE",
     "score": 4,
     "s_verified": false,
-    "judicial_case": "คำสั่งศาลอาญาปิดกั่น ~เม.ย. 2566 — พรเองบกอมพิวเตอร์ ม.14(1)(2)+ม.20; คดีอาญญาฎ่ทุ่งคหงม่นฎดำราส้นชงคำงมางสายันง",
+    "judicial_case": "คำสั่งศาลอาญาปิดกั่น ~เม.ย. 2566 — พรเองบกอมพิวเตอร์ ม.14(1)(2)+ม.20; ผู้ต้องหา ส.อ. (ทหารบก) มอบตเว 12 เม.ย. 2566",
     "verified_by": "Agent C - Handoff Brief (Tier 1 S_CANDIDATE, awaiting judicial authority)"
    },
    "visibility": {
@@ -558,6 +558,258 @@
     "s_verified": false,
     "judicial_case": "คดีวิสามัญฆาตกรรม 6 ศพ “โจ ด่านช้าง” (2539) — คดีดัง — S_CANDIDATE (locked to source page)",
     "verified_by": "SENOFF handoff (source page, pending Agent C)"
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "agent_a_approval_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "aerial-incident-1999",
+   "title": "Aerial Incident 10 Aug 1999 — Pakistan v. India (ICJ Case 107)",
+   "cat": "คด+ีดรระหว่างประเทศ (ICJ)",
+   "has_video": true,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "ICJ Case 107 (Pakistan v. India)",
+    "verified_by": "Agent C (Batch 3c)"
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "agent_a_approval_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "kamnan-nok-pai-rot-2566",
+   "title": "กำนันนก ปารุส — คด+ีดรหลัก 2566 (ฐานผู้ใช้)",
+   "cat": "คด+ีดรอาญา · อิทธิพล",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "ศาลอาญา 30 ม.ค. 2568 — จำคุกตลอดชีวิตฐานผู้ใช้ (ป.อ. ม.288 ประกอบ ม.60) + บวกโทษเดิม 12 ปี",
+    "verified_by": "Agent C (Batch 3c)"
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "agent_a_approval_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "kamnan-nok-bok-pit-2567",
+   "title": "กำนันนก ปารุส — คด+ีดรรอง 2567 (งานเลี้ยง)",
+   "cat": "คด+ีดรอาญา · อิทธิพล",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "ศาลอาญาคดีทุจริตและประพฤติมิชอบกลาง 9 เม.ย. 2567 — จำคุก 2 ปี (คดีจัดงานเลี้ยง)",
+    "verified_by": "Agent C (Batch 3c)"
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "agent_a_approval_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "nice-review-2562",
+   "title": "Nice Review 2562 — แชร์ลูกโซ่ดาราดัง",
+   "cat": "แชร์ลูกโซ่ · เศรษฐกิจ",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "DSI คดีพิเศษ แชร์ลูกโซ่ NICE Review — 7 ผู้ต้องหา อายัดทรัพย์ ~300 ล.",
+    "verified_by": "Agent C (Batch 3c)"
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "agent_a_approval_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "concept-water-2565",
+   "title": "Concept Water 2565 — แชร์ลูกโซ่เครื่องกรอง",
+   "cat": "แชร์ลูกโซ่ · เศรษฐกิจ",
+   "has_video": true,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "DSI คดีพิเศษ แชร์ลูกโซ่ Concept Water",
+    "verified_by": "Agent C (Batch 3c)"
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "agent_a_approval_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "one-tablet-2556",
+   "title": "One Tablet Per Child 2556 — แท็บเล็ตนักเรียน",
+   "cat": "คด+ีดรปกครอง · จัดซื้อ",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "One Tablet Per Child — โต้แย้งสัญญาจัดซื้อแท็บเล็ต (ศาลปกครอง/แพ่ง)",
+    "verified_by": "Agent C (Batch 3c)"
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "agent_a_approval_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "rolls-royce-2566",
+   "title": "กระบะชนท้าย Rolls-Royce 2566",
+   "cat": "คด+ีดรแพ่ง · ละเมิด",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "คดีกระบะชนท้าย Rolls-Royce Ghost — ค่าเสียหายหลายล้านบาท (ม.420/ม.438)",
+    "verified_by": "Agent C (Batch 3c)"
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "agent_a_approval_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "sawan-khot-r8-2489",
+   "title": "กรณีสวรรคต ร.8 (2489) — เปรียบเทียบ 3 เวอร์ดิกต์",
+   "cat": "คด+ีดรประวัติศาสตร์ (ระวังสูง)",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "ศาลฎีกา (ศาลชั้นเดียว) 12 ต.ค. 2497 — ตัดสินประหารชีวิตจำเลยทั้ง 3",
+    "verified_by": "Agent C (Batch 3c)"
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "agent_a_approval_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "bawornadej-2476",
+   "title": "กบฏบวรเดช 2476 — ศาลพิเศษ พ.ร.บ.2476",
+   "cat": "คด+ีดรประวัติศาสตร์ · การเมือง",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "ศาลพิเศษ (พ.ร.บ.ศาลพิเศษ 2476 ม.4) — คดีกบฏบวรเดช",
+    "verified_by": "Agent C (Batch 3c)"
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "agent_a_approval_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "chainmanee-2567",
+   "title": "เชนแมนี่ 2567 — Nominee Forex-3D",
+   "cat": "คด+ีดรอาญา · ฟอกเงิน",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "คดีแดง อ.2812/2567 — nominee กรณี Forex-3D",
+    "verified_by": "Agent C (Batch 3c)"
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "agent_a_approval_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "bunpeng-hiblek-2462",
+   "title": "บุญเพ็งหีบเหล็ก 2462 — คด+ีดรประวัติศาสตร์",
+   "cat": "คด+ีดรประวัติศาสตร์",
+   "has_video": true,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "ศาลกรุงเทพมหานคร 2462 — ตัดคอ 19 ส.ค. 2462 (ร.ศ.127/กฎหมายยุค)",
+    "verified_by": "Agent C (Batch 3c)"
+   },
+   "visibility": {
+    "public": false,
+    "public_reason": "agent_a_approval_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "ratthamontri-2492",
+   "title": "การสังหาร 4 รัฐมนตรี 2492",
+   "cat": "คด+ีดรประวัติศาสตร์ · การเมือง",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "การสังหาร 4 รัฐมนตรี (11 พ.ย. 2492) — ไม่มีคำพิพากษา",
+    "verified_by": "Agent C (Batch 3c)"
    },
    "visibility": {
     "public": false,
