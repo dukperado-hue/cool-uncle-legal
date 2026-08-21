@@ -230,3 +230,17 @@
   5. news-case-khdii-somyot-cafe-assassination-2558.html (สมยศ สุธางค์กูร)
 - **Quality:** Grade A (score >= 85, paras <= 350, 0 BLOCK)
 - **Notes:** มหากาพย์นักเลงและผู้มีอิทธิพลในประวัติศาสตร์ไทย
+
+### Batch 45: Political & Rights Assassinations
+- **Date:** 2026-08-21 12:08:53
+- **Status:** DEPLOYED ✅
+- **Cases Processed:** 5
+- **Cases Upgraded to A:** 5
+- **Judicial Potential:** 5 (Assassination/Hiring cases)
+- **Video Status:** All included
+- **Cases:**
+  1. kobkul-assassination-2549 (ส.ส.กอบกุล นพอมรบดี)
+  2. peera-assassination-2555 (นายกพีระ ตันติเศรณี)
+  3. charoen-wat-akson-2547 (เจริญ วัดอักษร)
+  4. saengchai-sunthornwat-2539 (แสงชัย สุนทรวัฒน์)
+  5. praman-chansue-assassination-plot-2536 (ประมาณ ชันซื่อ)
