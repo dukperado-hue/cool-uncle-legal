@@ -216,15 +216,6 @@
         "video_status": "confirmed"
     },
     {
-        "slug": "news-case-khdii-queen-sunandha-tragedy-2423.html",
-        "title": "Queen Sunandha Tragedy 2423",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2423",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
-    },
-    {
         "slug": "news-case-khdii-rs103-petition-2427.html",
         "title": "คำกราบบังคมทูล ร.ศ. 103 — จุดเริ่มต้นของการเรียกร้องรัฐธรรมนูญในสยาม",
         "cat_tag": "คดีอาญา",
@@ -259,15 +250,6 @@
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-railway-budget-corruption-2434.html",
-        "title": "Railway Budget Corruption 2434",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2434",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
     },
     {
         "slug": "news-case-khdii-yot-mueang-khwang.html",
