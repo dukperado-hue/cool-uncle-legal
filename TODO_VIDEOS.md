@@ -35,10 +35,7 @@
 | news-case-khdiiaailthiichaawm-raekn-hmuuekaaasurinthr-2562 | คดีไล่ที่ชาวมอแกน หมู่เกาะสุรินทร์ (2562) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
 | news-case-khdiiaechrluukoch-e-nen-rcchii-diidakchan-2564 | คดีแชร์ลูกโซ่แพลตฟอร์ม "เอนเนอร์จี ดีดักชัน" (2564) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
 | news-case-khdiicchabkum-esiiyaepng-naaohnd-2566 | คดีเสี่ยแป้ง นาโหนด — หลบหนีระหว่างควบคุม (2566–2567) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
-| news-case-ephikth-nkhamsangyubsphaa-ngkhkaarbrihaarswntambl-2558 | คดีปกครอง: เพิกถอนคำสั่งยุบสภาองค์การบริหารส่วนตำบล (2558) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
 | news-case-ephikth-nsampthaanrangnknaangae-n-2561 | คดีปกครอง: เพิกถอนสัมปทานรังนกนางแอ่น (2561) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
-| news-case-ephikth-nkaar-kochndthiidinthabch-nekaaalibng-2562 | คดีปกครอง: เพิกถอนการออกโฉนดที่ดินทับซ้อนเกาะลิบง (2562) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
-| news-case-khdiif-ngetnthrthmuue-s-ng-krniikhaayrthy-maemw-2566 | คดีฟ้องเต็นท์รถมือสอง — รถย้อมแมว (2566) | ไม่มีวิดีโอฝังในหน้า legacy — แหล่งข่าวไทยเฉพาะคดีตรวจไม่พบใน legacy data |
 news-case-khdii-jottektej-khtit-2324.html | คดีโจทก์ (2324) ยุคธนบุรี | ไม่มีคลิปที่เกี่ยวข้องโดยตรง — คดีคดีโจทก์โบราณ
 news-case-khdii-samphrachakhana-khtit-2324.html | คดี 3 พระราชาคณะทูลค้าน (2324) | ไม่มีคลิปที่เกี่ยวข้องโดยตรง — พระสงฆ์ทูลค้านร.ตาก
 news-case-khdii-pongkhaoluang-nginthplom-2310-2325.html | คดีโกงข้าวหลวง/เงินปลอม ธนบุรี | ไม่มีคลิปที่เกี่ยวข้องโดยตรง — โครงสร้างศาลธนบุรี
