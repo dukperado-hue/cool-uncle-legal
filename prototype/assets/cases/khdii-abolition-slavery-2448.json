@@ -1,0 +1,59 @@
+{
+ "id": "khdii-abolition-slavery-2448",
+ "meta": {
+  "title": "การเลิกทาสและไพร่ (2448)",
+  "year": 1905,
+  "cat": "การเมืองและโครงสร้าง"
+ },
+ "visibility": {
+  "public": true,
+  "gate": "none"
+ },
+ "rank": {
+  "grade": "S_CANDIDATE",
+  "score": 4,
+  "s_verified": false,
+  "judicial_case": "พ.ร.บ.เลิกทาส ร.ศ. 124",
+  "verified_by": "Agent C"
+ },
+ "status": "ประกาศใช้ พ.ร.บ.เลิกทาส ร.ศ. 124",
+ "read": {
+  "sections": [
+   {
+    "id": "02",
+    "title": "สรุปคดี",
+    "content": "การปฏิรูปโครงสร้างสังคมผ่านการประกาศใช้ พระราชบัญญัติเลิกทาส ร.ศ. 124 เมื่อวันที่ 1 เมษายน 2448 ถือเป็นจุดเปลี่ยนสำคัญที่เปลี่ยนสถานะของราษฎรจากทาสและไพร่ให้กลายเป็น 'พลเมือง' ที่มีสิทธิและเสรีภาพภายใต้กฎหมายของรัฐโดยตรง การเลิกทาสในสยามดำเนินการอย่างเป็นขั้นตอนเพื่อลดผลกระทบทางเศรษฐกิจและสังคม โดยกำหนดให้ลูกทาสทุกคนที่เกิดในปี 2411 เป็นต้นไปได้รับความเป็นไท และห้ามมีการซื้อขายทาสเพิ่ม"
+   },
+   {
+    "id": "06",
+    "title": "ฐานกฎหมาย",
+    "content": "พ.ร.บ.เลิกทาส ร.ศ. 124"
+   }
+  ]
+ },
+ "play": {
+  "flow": [],
+  "anti_reveal_rules": []
+ },
+ "media": {
+  "video": null,
+  "status": "none"
+ },
+ "sources": {
+  "seed_facts": [
+   "Batch 19/20 Research Notes"
+  ]
+ },
+ "migration": {
+  "from": "Agent C Handoff",
+  "verified": true,
+  "checker": "Agent B",
+  "check_date": "2026-08-21"
+ },
+ "validation": {
+  "schema_ok": true,
+  "paragraph_ok": true,
+  "gate": "none",
+  "checked_at": "2026-08-21"
+ }
+}

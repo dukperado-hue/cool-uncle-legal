@@ -1,0 +1,59 @@
+{
+ "id": "khdii-ministry-agri-embezzlement-2416",
+ "meta": {
+  "title": "คดีทุจริตกรมนา (2416)",
+  "year": 1873,
+  "cat": "เศรษฐกิจและทุจริต"
+ },
+ "visibility": {
+  "public": true,
+  "gate": "none"
+ },
+ "rank": {
+  "grade": "VERIFIED_S",
+  "score": 5,
+  "s_verified": true,
+  "judicial_case": "ออดิตออฟฟิส",
+  "verified_by": "Agent C"
+ },
+ "status": "การตรวจสอบโดยหอรัษฎากรพิพัฒน์",
+ "read": {
+  "sections": [
+   {
+    "id": "02",
+    "title": "สรุปคดี",
+    "content": "การตรวจสอบทุจริตในกรมนาโดยหน่วยงาน 'หอรัษฎากรพิพัฒน์' (Audit Office) เพื่อตรวจสอบการเบียดบังเงินหลวงของข้าราชการระดับสูง นำไปสู่การลงโทษข้าราชการที่กระทำผิดและการวางรากฐานระบบการเงินการคลังของประเทศ"
+   },
+   {
+    "id": "06",
+    "title": "ฐานกฎหมาย",
+    "content": "ออดิตออฟฟิส"
+   }
+  ]
+ },
+ "play": {
+  "flow": [],
+  "anti_reveal_rules": []
+ },
+ "media": {
+  "video": null,
+  "status": "none"
+ },
+ "sources": {
+  "seed_facts": [
+   "Batch 19/20 Research Notes"
+  ]
+ },
+ "migration": {
+  "from": "Agent C Handoff",
+  "verified": true,
+  "checker": "Agent B",
+  "check_date": "2026-08-21"
+ },
+ "validation": {
+  "schema_ok": true,
+  "paragraph_ok": true,
+  "gate": "none",
+  "checked_at": "2026-08-21"
+ }
+}

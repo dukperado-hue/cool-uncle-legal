@@ -1,0 +1,59 @@
+{
+ "id": "khdii-penalcode-rs127-2451",
+ "meta": {
+  "title": "กฎหมายลักษณะอาญา ร.ศ. 127 (2451)",
+  "year": 1908,
+  "cat": "การเมืองและโครงสร้าง"
+ },
+ "visibility": {
+  "public": true,
+  "gate": "none"
+ },
+ "rank": {
+  "grade": "VERIFIED_S",
+  "score": 5,
+  "s_verified": true,
+  "judicial_case": "ประมวลกฎหมายฉบับแรก",
+  "verified_by": "Agent C"
+ },
+ "status": "ประกาศใช้ประมวลกฎหมายอาญาฉบับแรกของสยาม",
+ "read": {
+  "sections": [
+   {
+    "id": "02",
+    "title": "สรุปคดี",
+    "content": "การประกาศใช้ กฎหมายลักษณะอาญา ร.ศ. 127 ในปี 2451 ถือเป็นความสำเร็จครั้งยิ่งใหญ่ของกระบวนการยุติธรรมไทย เนื่องจากเป็นประมวลกฎหมายฉบับแรกที่จัดทำขึ้นตามระบบประมวลกฎหมาย (Code Law) ของตะวันตก กฎหมายฉบับนี้ไม่เพียงแต่ช่วยปรับปรุงบทลงโทษให้มีความเป็นสากลและอารยะมากขึ้น แต่ยังเป็นเครื่องมือสำคัญที่สยามใช้ในการเจรจาเพื่อยกเลิกสิทธิสภาพนอกอาณาเขตกับนานาชาติ"
+   },
+   {
+    "id": "06",
+    "title": "ฐานกฎหมาย",
+    "content": "ประมวลกฎหมายฉบับแรก"
+   }
+  ]
+ },
+ "play": {
+  "flow": [],
+  "anti_reveal_rules": []
+ },
+ "media": {
+  "video": null,
+  "status": "none"
+ },
+ "sources": {
+  "seed_facts": [
+   "Batch 19/20 Research Notes"
+  ]
+ },
+ "migration": {
+  "from": "Agent C Handoff",
+  "verified": true,
+  "checker": "Agent B",
+  "check_date": "2026-08-21"
+ },
+ "validation": {
+  "schema_ok": true,
+  "paragraph_ok": true,
+  "gate": "none",
+  "checked_at": "2026-08-21"
+ }
+}

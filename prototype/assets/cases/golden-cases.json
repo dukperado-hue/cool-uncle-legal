@@ -970,6 +970,174 @@
     "read",
     "play"
    ]
+  },
+  {
+   "id": "khdii-rs130-rebellion-2455",
+   "title": "กบฏ ร.ศ. 130 (2455)",
+   "cat": "การเมืองและโครงสร้าง",
+   "has_video": false,
+   "rank": {
+    "grade": "VERIFIED_S",
+    "score": 5,
+    "s_verified": true,
+    "judicial_case": "ศาลทหารและการอภัยโทษ",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "khdii-penalcode-rs127-2451",
+   "title": "กฎหมายลักษณะอาญา ร.ศ. 127 (2451)",
+   "cat": "การเมืองและโครงสร้าง",
+   "has_video": false,
+   "rank": {
+    "grade": "VERIFIED_S",
+    "score": 5,
+    "s_verified": true,
+    "judicial_case": "ประมวลกฎหมายฉบับแรก",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "khdii-abolition-slavery-2448",
+   "title": "การเลิกทาสและไพร่ (2448)",
+   "cat": "การเมืองและโครงสร้าง",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "พ.ร.บ.เลิกทาส ร.ศ. 124",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "khdii-rs103-petition-2427",
+   "title": "คำกราบบังคมทูล ร.ศ. 103 (2427)",
+   "cat": "การเมืองและโครงสร้าง",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "การเรียกร้องรัฐธรรมนูญครั้งแรก",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "khdii-phum-saat-embezzlement-2440",
+   "title": "คดีพุ่ม สะอาด (2440)",
+   "cat": "เศรษฐกิจและทุจริต",
+   "has_video": false,
+   "rank": {
+    "grade": "VERIFIED_S",
+    "score": 5,
+    "s_verified": true,
+    "judicial_case": "ต้นกำเนิดกฎหมายล้มละลาย",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "khdii-ministry-agri-embezzlement-2416",
+   "title": "คดีทุจริตกรมนา (2416)",
+   "cat": "เศรษฐกิจและทุจริต",
+   "has_video": false,
+   "rank": {
+    "grade": "VERIFIED_S",
+    "score": 5,
+    "s_verified": true,
+    "judicial_case": "ออดิตออฟฟิส",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "khdii-khun-yuam-logging-2445",
+   "title": "ทุจริตป่าไม้ขุนยูวม (2445)",
+   "cat": "เศรษฐกิจและทุจริต",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "มาเฟียป่าไม้และการปลอมตราประทับ",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "khdii-book-club-scandal-2449",
+   "title": "คดีบุคคลัภย์ (2449)",
+   "cat": "เศรษฐกิจและทุจริต",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "ธรรมาภิบาลธนาคารยุคบุกเบิก",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
   }
  ],
  "series_hubs": [

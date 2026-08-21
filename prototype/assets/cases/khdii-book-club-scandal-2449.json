@@ -1,0 +1,59 @@
+{
+ "id": "khdii-book-club-scandal-2449",
+ "meta": {
+  "title": "คดีบุคคลัภย์ (2449)",
+  "year": 1906,
+  "cat": "เศรษฐกิจและทุจริต"
+ },
+ "visibility": {
+  "public": true,
+  "gate": "none"
+ },
+ "rank": {
+  "grade": "S_CANDIDATE",
+  "score": 4,
+  "s_verified": false,
+  "judicial_case": "ธรรมาภิบาลธนาคารยุคบุกเบิก",
+  "verified_by": "Agent C"
+ },
+ "status": "การวางรากฐานธนาคารสยามกัมมาจล",
+ "read": {
+  "sections": [
+   {
+    "id": "02",
+    "title": "สรุปคดี",
+    "content": "กิจการ 'บุคคลัภย์' (Book Club) ซึ่งเป็นต้นกำเนิดของธนาคารสยามกัมมาจล (ไทยพาณิชย์) เป็นการทดลองให้บริการรับฝากและให้กู้ยืมเงินโดยใช้หลักธรรมาภิบาลเพื่อสร้างความเชื่อมั่นในระบบธนาคาร นำไปสู่การออกประกาศพระราชทานอำนาจพิเศษให้บริษัท แบงก์ สยามกัมมาจลทุนจำกัด เมื่อ 30 ม.ค. 2449"
+   },
+   {
+    "id": "06",
+    "title": "ฐานกฎหมาย",
+    "content": "ธรรมาภิบาลธนาคารยุคบุกเบิก"
+   }
+  ]
+ },
+ "play": {
+  "flow": [],
+  "anti_reveal_rules": []
+ },
+ "media": {
+  "video": null,
+  "status": "none"
+ },
+ "sources": {
+  "seed_facts": [
+   "Batch 19/20 Research Notes"
+  ]
+ },
+ "migration": {
+  "from": "Agent C Handoff",
+  "verified": true,
+  "checker": "Agent B",
+  "check_date": "2026-08-21"
+ },
+ "validation": {
+  "schema_ok": true,
+  "paragraph_ok": true,
+  "gate": "none",
+  "checked_at": "2026-08-21"
+ }
+}
