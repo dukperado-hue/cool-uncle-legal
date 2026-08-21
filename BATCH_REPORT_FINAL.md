@@ -127,3 +127,14 @@
 - All verified live (HTTP 200) at coolunclelab.com.
 - `cases-grade.json` updated.
 - Total Grade A cases: ~396.
+
+### Batch 38 — DEPLOYED ✅ (2026-08-21)
+- **Focus:** Historical Cases (R1-R8) & Legal History
+- **Cases:**
+  - amdaeng-pom-r1-1804 (คดีอำแดงป้อม - กำเนิดกฎหมายตราสามดวง)
+  - phra-yot-muang-khwang-2436 (คดีพระยอดเมืองขวาง - วิกฤตการณ์ ร.ศ. 112)
+  - ai-uam-ok-roi-2414 (คดีอ้ายอ่วม อกโรย - การลงทัณฑ์บั่นสองท่อน)
+  - fake-banknote-r5-2446 (คดีธนบัตรปลอมสมัย ร.5)
+  - nang-thong-luean-2452 (คดีนางทองเลื่อน - ประหารหญิงรายสุดท้ายด้วยดาบ)
+- **Status:** 5 cases built, validated, and verified live (HTTP 200).
+- **Quality:** Grade A standard met (8 sections, paras <= 350).
