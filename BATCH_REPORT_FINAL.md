@@ -218,3 +218,15 @@
 - All cases pass Quality Gate (8 sections, paras <= 350).
 - Historical context derived from primary sources and Silpa-Mag.
 - Handoff ready for Agent C to verify historical judicial reasoning.
+
+## Batch 44: Gangster & Influence Series (5 cases)
+- **Date:** 2026-08-21
+- **Status:** DEPLOYED ✅
+- **Cases:**
+  1. news-case-khdii-jod-howdy-gangster-2499.html (จ๊อด เฮาดี้)
+  2. news-case-khdii-klaew-thanikul-influence-2534.html (เหลา สวนมะลิ)
+  3. news-case-khdii-boonliang-cafe-king-2541.html (บุญเลี้ยง อดุลยฤทธิกุล)
+  4. news-case-khdii-owtee-killer-legend-2520.html (โอวตี่ แซ่โค้ว)
+  5. news-case-khdii-somyot-cafe-assassination-2558.html (สมยศ สุธางค์กูร)
+- **Quality:** Grade A (score >= 85, paras <= 350, 0 BLOCK)
+- **Notes:** มหากาพย์นักเลงและผู้มีอิทธิพลในประวัติศาสตร์ไทย
