@@ -1410,12 +1410,6 @@
         "release": "WARN|",
         "has_video": true
     },
-    "news-case-khdii-gabort-chaofa-men-pi-2352.html": {
-        "grade": "A",
-        "score": 90,
-        "release": "WARN|",
-        "has_video": false
-    },
     "news-case-khdii-jottektej-khtit-2324.html": {
         "grade": "A",
         "score": 90,
@@ -2313,7 +2307,6 @@
     "news-case-khdii-ua-athon-corruption-2565.html": "A",
     "news-case-khdii-police-station-corruption-2566.html": "A",
     "news-case-khdii-blue-diamond-affair-2532.html": "A",
-    "news-case-khdii-opium-tax-corruption-2430.html": "A",
     "news-case-khdii-jod-howdy-gangster-2499.html": {
         "grade": "A",
         "cat_tag": "คดอาญา"
