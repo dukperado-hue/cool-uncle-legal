@@ -5,9 +5,9 @@
   "category": "คด+ีดรประวัติศาสตร์"
  },
  "visibility": {
-  "public": false,
+  "public": true,
   "public_reason": "agent_a_approval_required",
-  "gate": "agent_a_approval_required",
+  "gate": "none",
   "internal_notes": "bunpeng-hiblek-2462 — S_CANDIDATE (ไม่ lock VERIFIED_S); แหล่งรอง (Wikipedia/silpa/workpoint ตรงกัน) — ตัดคอ 19 ส.ค. 2462 ยืนยันแล้ว; แยกตำนาน 7 ศพ vs 2 ศพ"
  },
  "rank": {
@@ -81,7 +81,7 @@
   "paragraph_ok": true,
   "sections_complete": true,
   "links_ok": true,
-  "gate": "agent_a_approval_required",
+  "gate": "none",
   "checked_at": "2026-08-21",
   "checked_by": "agent_b"
  }

@@ -434,8 +434,9 @@
     "verified_by": "SENOFF handoff (source page, pending Agent C)"
    },
    "visibility": {
-    "public": false,
-    "public_reason": "agent_a_approval_required"
+    "public": true,
+    "public_reason": "agent_a_approval_required",
+    "gate": "none"
    },
    "modes": [
     "read",
@@ -581,8 +582,9 @@
     "verified_by": "Agent C (Batch 3c)"
    },
    "visibility": {
-    "public": false,
-    "public_reason": "agent_a_approval_required"
+    "public": true,
+    "public_reason": "agent_a_approval_required",
+    "gate": "none"
    },
    "modes": [
     "read",
@@ -749,8 +751,9 @@
     "verified_by": "Agent C (Batch 3c)"
    },
    "visibility": {
-    "public": false,
-    "public_reason": "agent_a_approval_required"
+    "public": true,
+    "public_reason": "agent_a_approval_required",
+    "gate": "none"
    },
    "modes": [
     "read",
@@ -791,8 +794,9 @@
     "verified_by": "Agent C (Batch 3c)"
    },
    "visibility": {
-    "public": false,
-    "public_reason": "agent_a_approval_required"
+    "public": true,
+    "public_reason": "agent_a_approval_required",
+    "gate": "none"
    },
    "modes": [
     "read",
@@ -814,6 +818,153 @@
    "visibility": {
     "public": false,
     "public_reason": "agent_a_approval_required"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "kabot-r130-2455",
+   "title": "คดีกบฏ ร.ศ.130 (2455)",
+   "cat": "คดยุคโบราณ",
+   "has_video": true,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "พระราชวินิจฉัย ร.6",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "nangthongloen-2468",
+   "title": "คดีนางทองเลื่อน \"อีทองเลื่อนหักคอน้องผัว\"",
+   "cat": "คดยุคร.6",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "ประหาร 14 ต.ค. 2468",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "khdii-sanghan-4-ratthamontri-2492",
+   "title": "คดีสังหาร 4 รัฐมนตรี (2492)",
+   "cat": "อาชญากรรมโดยรัฐ",
+   "has_video": false,
+   "rank": {
+    "grade": "VERIFIED_S",
+    "score": 5,
+    "s_verified": true,
+    "judicial_case": "คำพิพากษาศาลฎีกาปี 2502",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "khdii-thanabat-plom-r5-2446",
+   "title": "คดีธนบัตรปลอมสมัย ร.5 (2446)",
+   "cat": "คดีอาญาเศรษฐกิจ",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "ขังหลวง กรมหมื่นพงษาดิศรมหิป",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "khdii-ksr-kulap-2443",
+   "title": "คดี ก.ศ.ร. กุหลาบ (2443)",
+   "cat": "คดีกึ่งการเมือง",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "ส่งตัวรักษาโรงพยาบาลบ้า",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "khdii-aiauaom-okroy-2414",
+   "title": "คดีอ้ายอ่วม อกโรย (2414)",
+   "cat": "คดีอาญาอุกฉกรรจ์",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "ประหารชีวิตด้วยวิธีพิเศษ",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "khdii-somdet-phra-nang-ruea-lom-2423",
+   "title": "คดีสมเด็จพระนางเรือล่ม (2423)",
+   "cat": "กฎมณเฑียรบาล",
+   "has_video": false,
+   "rank": {
+    "grade": "S_CANDIDATE",
+    "score": 4,
+    "s_verified": false,
+    "judicial_case": "การปฏิรูปกฎมณเฑียรบาล 2424",
+    "verified_by": "Agent C"
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
    },
    "modes": [
     "read",

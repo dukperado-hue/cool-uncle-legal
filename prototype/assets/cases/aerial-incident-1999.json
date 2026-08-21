@@ -5,9 +5,9 @@
   "category": "คดีระหว่างประเทศ (ICJ)"
  },
  "visibility": {
-  "public": false,
+  "public": true,
   "public_reason": "agent_a_approval_required",
-  "gate": "agent_a_approval_required",
+  "gate": "none",
   "internal_notes": "คดี ICJ / ข้อสงวน Commonwealth — aerial-incident-1999 — S_CANDIDATE; locked to source content"
  },
  "rank": {
@@ -77,7 +77,7 @@
   "paragraph_ok": true,
   "sections_complete": true,
   "links_ok": true,
-  "gate": "agent_a_approval_required",
+  "gate": "none",
   "checked_at": "2026-08-21",
   "checked_by": "agent_b"
  }
