@@ -1,23 +1,5 @@
 [
     {
-        "slug": "news-case-khdii-falkhon-2231.html",
-        "title": "คดีประหารเจ้าพระยาวิชเยนทร์ (คอนสแตนติน ฟอลคอน) พ.ศ. 2231 — การปฏิวัติและผู้ที่เข้ามาไกลที่สุดในบ้านเมือง",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2190",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-wichayen-2231.html",
-        "title": "คดีประหารเจ้าพระยาวิชเยนทร์ (คอนสแตนติน ฟอลคอน)",
-        "cat_tag": "คดยุคโบราณ",
-        "year": "พ.ศ. 2225",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
-    },
-    {
         "slug": "news-case-khdii-pongkhaoluang-nginthplom-2310-2325.html",
         "title": "คดีโกงข้าวหลวง/เงินปลอม ยุคธนบุรี — ศาลทหารเป็นหลักและโทษไถ่ตัวได้ (พ.ศ. 2310–2325)",
         "cat_tag": "คดีอาญา",
@@ -79,24 +61,6 @@
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-amdaengpom-hlongya-pi-2347.html",
-        "title": "คดีอำแดงป้อม ฟ้องหย่า — จุดกำเนิดกฎหมายตราสามดวง (พ.ศ. 2347)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2347",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-amdaeng-pom-2347.html",
-        "title": "คดีอำแดงป้อม (จุดกำเนิดกฎหมายตราสามดวง)",
-        "cat_tag": "คดยุคโบราณ",
-        "year": "พ.ศ. 2347",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
     },
     {
         "slug": "news-case-khdii-amdaeng-pom-r1-1804.html",
@@ -216,15 +180,6 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdii-aiauaom-okroy-2414.html",
-        "title": "คดีอ้ายอ่วม อกโรย — หัวหน้าพวกโจรแถบมณฑลอยุธยา พ.ศ. 2414 โทษประหารพิเศษขวานตัดตัว",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2414",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-khdii-ai-uam-ok-roi-2414.html",
         "title": "คดีอ้ายอ่วม อกโรย: โทษประหารตัดตัวขาดสองท่อนในยุคเปลี่ยนผ่านกฎหมาย",
         "cat_tag": "คดยุคโบราณ",
@@ -232,15 +187,6 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
-    },
-    {
-        "slug": "news-case-khdii-ai-uam-2414.html",
-        "title": "Ai Uam 2414",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2414",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
     },
     {
         "slug": "news-case-khdii-ministry-agri-embezzlement-2416.html",
@@ -288,24 +234,6 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdii-nokkaei-2419.html",
-        "title": "คดีหนูไก๋ — ฆาตกรรมชิงทรัพย์เด็ก แรม 4 ค่ำ เดือน 5 ปีชวด (พ.ศ. 2419)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2419",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-phraya-preecha-konlakarn-2422.html",
-        "title": "Phraya Preecha Konlakarn 2422",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2419",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
-    },
-    {
         "slug": "news-case-khdii-tax-farmer-embezzlement-2420.html",
         "title": "Tax Farmer Embezzlement 2420",
         "cat_tag": "คดีอาญา",
@@ -313,24 +241,6 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
-    },
-    {
-        "slug": "news-case-khdii-phrapreecha-prachin-2421.html",
-        "title": "คดีพระปรีชากลการ — เจ้าเมืองปราจีนยักยอกทองคำ และตายเพราะเมียฝรั่ง (พ.ศ. 2421–2422)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2421",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-preecha-konlakarn-2422.html",
-        "title": "คดีพระปรีชากลการ (สำอาง อมาตยกุล)",
-        "cat_tag": "คดยุคโบราณ",
-        "year": "พ.ศ. 2421",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
     },
     {
         "slug": "news-case-khdii-preecha-kolakan.html",
@@ -351,24 +261,6 @@
         "video_status": "confirmed"
     },
     {
-        "slug": "news-case-khdii-phra-nang-reualom-2423.html",
-        "title": "คดีสมเด็จพระนางเจ้าสว่างวฒนา — การสวรรคตของสมเด็จพระนางเจ้าสว่างวฒนา พระบรมราชินี (พ.ศ. 2423)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2423",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-somdet-phra-nang-ruea-lom-2423.html",
-        "title": "คดีสมเด็จพระนางเรือล่ม — โศกนาฏกรรมจากกฎมณเฑียรบาล (พ.ศ. 2423)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2423",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-khdii-queen-sunandha-tragedy-2423.html",
         "title": "Queen Sunandha Tragedy 2423",
         "cat_tag": "คดีอาญา",
@@ -382,15 +274,6 @@
         "title": "คำกราบบังคมทูล ร.ศ. 103 — จุดเริ่มต้นของการเรียกร้องรัฐธรรมนูญในสยาม",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2427",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-phrayodmueangkwang-2436.html",
-        "title": "คดีพระยอดเมืองขวาง — ศาลรับสั่งพิเศษ ร.ศ.112 (พ.ศ. 2436–2437)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2428",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -427,15 +310,6 @@
         "title": "Railway Budget Corruption 2434",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2434",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
-    },
-    {
-        "slug": "news-case-khdii-phra-yot-muang-khwang-2436.html",
-        "title": "คดีพระยอดเมืองขวาง: วีรบุรุษ ร.ศ. 112 กับศาลผสมฝรั่งเศส",
-        "cat_tag": "คดยุคโบราณ",
-        "year": "พ.ศ. 2436",
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
@@ -622,7 +496,7 @@
     },
     {
         "slug": "news-case-khdii-nu-kai.html",
-        "title": "คดีหนูไก๋: ฆาตกรรมชิงทรัพย์เด็กที่น่าหดหู่",
+        "title": "คดีหนูไก่: ฆาตกรรมชิงทรัพย์เด็กที่น่าหดหู่",
         "cat_tag": "คดอาญาในอดีต",
         "year": "พ.ศ. 2448",
         "score": 95,
