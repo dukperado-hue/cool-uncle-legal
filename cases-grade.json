@@ -1397,12 +1397,7 @@
     "release": "WARN",
     "has_video": true
   },
-  "blue-diamond.html": {
-    "grade": "C",
-    "score": 60,
-    "release": "BLOCKED",
-    "has_video": false
-  },
+  "blue-diamond.html": "A",
   "news-case-khdii-amdaengpom-hlongya-pi-2347.html": {
     "grade": "A",
     "score": 90,
@@ -2471,5 +2466,10 @@
   "news-case-khdii-rice-pledging-landmark-2560.html": "A",
   "news-case-khdii-itv-share-landmark-2567.html": "A",
   "news-case-khdii-ua-athon-corruption-2565.html": "A",
-  "news-case-khdii-police-station-corruption-2566.html": "A"
+  "news-case-khdii-police-station-corruption-2566.html": "A",
+  "news-case-khdii-amdaeng-muean-rights-2408.html": "A",
+  "news-case-khdii-phraya-preecha-konlakarn-2422.html": "A",
+  "news-case-khdii-ksr-kulap-history-2443.html": "A",
+  "news-case-khdii-queen-sunandha-tragedy-2423.html": "A",
+  "news-case-khdii-blue-diamond-affair-2532.html": "A"
 }
