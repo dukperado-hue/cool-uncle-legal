@@ -2214,5 +2214,45 @@
     "has_video": true,
     "judicial_potential": true,
     "title": "คดีกราดยิงโคราช (ความรับผิดของรัฐและความหละหลวมในหน่วยงานทหาร)"
+  },
+  "news-case-khdii-kader-fire-2536.html": {
+    "slug": "kader-fire-2536",
+    "title": "คดีโศกนาฏกรรมไฟไหม้โรงงานเคเดอร์ (2536)",
+    "grade": "A",
+    "score": 90,
+    "has_video": false,
+    "judicial_potential": true
+  },
+  "news-case-khdii-ford-mazda-classaction-2561.html": {
+    "slug": "ford-mazda-classaction-2561",
+    "title": "คดีฟ้องกลุ่มฟอร์ดและมาสด้า (2561)",
+    "grade": "A",
+    "score": 92,
+    "has_video": false,
+    "judicial_potential": true
+  },
+  "news-case-khdii-film-dna-2553.html": {
+    "slug": "film-dna-2553",
+    "title": "คดีฟิล์ม รัฐภูมิ และการพิสูจน์ DNA (2553)",
+    "grade": "A",
+    "score": 89,
+    "has_video": false,
+    "judicial_potential": true
+  },
+  "news-case-khdii-fishing-labor-2560.html": {
+    "slug": "fishing-labor-2560",
+    "title": "คดีค้ามนุษย์แรงงานประมง (2560)",
+    "grade": "A",
+    "score": 91,
+    "has_video": false,
+    "judicial_potential": true
+  },
+  "news-case-khdii-klity-creek-2541.html": {
+    "slug": "klity-creek-2541",
+    "title": "คดีสารพิษห้วยคลิตี้ (2541)",
+    "grade": "A",
+    "score": 93,
+    "has_video": false,
+    "judicial_potential": true
   }
 }
