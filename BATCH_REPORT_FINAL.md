@@ -236,3 +236,34 @@ After Agent C handoff brief re-verification, 5 remaining gaps were filled:
 
 ผล: full_validate เหลือ 25 ปัญหา = 22 WARN (ICJ legal issues ต่ำตาม legacy — รอ Agent C enrich) + 1 pre-existing sections missing + 2 external_law ที่คาดไว้ ไม่มี BLOCK ใหม่
 ไฟล์ที่แก้: class-action-phuuthuue-hunkuu-stark-2567, concept-water-2565, khdiituhawkhadilak-2568, EIA สุขุมวิท (ทำก่อนหน้านี้)
+
+---
+
+## BATCH 8 — คดีดังระดับตำนานที่ยังขาด (21 ส.ค. 2569)
+
+### Overview
+- Processed: 5 (คดีใหม่ทั้งหมด จาก seed facts + แหล่งข่าวไทย primary/secondary)
+- A: 5 | A_REVIEW: 0 | Needs Review: 0 | BLOCK: 0 | Skipped: 0
+- Video Pending: 0 | Judicial Potential: 4
+- A total after batch: 265 (A=261 + A_REVIEW=4)
+
+### คดีที่ทำ
+| คดี | ปี | ผลคดี | Video | Provisions |
+|---|---|---|---|---|
+| คดีสุขุม เชิดชื่น จ้างวานสังหาร พ.ญ.นิชรี มะกรสาร | 2539 | ประหารชีวิต (สู้คดียาว 16 ปี) | ไทยรัฐ | ป.อ. 289/290/95 (codex) |
+| คดีวิสามัญฆาตกรรม 6 ศพ "โจ ด่านช้าง" | 2539 | ไม่มีการฟ้องพนักงาน | Nation Crime | ป.อ. 288/289, ป.ว.อ. 150/152, กฎหมายว่าด้วยความรับผิดทางอาญาของเจ้าพนักงาน (external_law) |
+| คดีจ่าสาธิต ยิง 3 ศพหน้าศาล | 2538 | หมดอายุความ 2558 จำเลยหายสาบสูญ | ตำนานคดีดัง | ป.อ. 289/95/276/59 (codex) |
+| คดีฆ่ายกครัวบ้านบุญทวี 5 ศพ | 2540 | ฎีการะดับโทษประหาร→ตลอดชีวิต→พ้นโทษ 2553 → ถูกลอบยิง 2558 | ตำนานคดีดัง | ป.อ. 289/339/288/56/78, ป.ว.อ. 232 (codex); ราชทัณฑ์ พ.ร.บ.ลดหย่อนโทษ (external_law) |
+| คดีมรดกนัยนา ธรรมวัฒนะ | 2533 | ยิงศพ คดีหยุด ไม่มีผู้ถูกดำเนินคดี | ตำนานคดีดัง | ป.อ. 289/288/95, ป.ว.อ. 145, ป.พ.พ. บรรพ 6 (external_law) |
+
+### Provenance
+- สุขุม เชิดชื่น: MGR Online (9520000072482), ไทยรัฐ
+- โจ ด่านช้าง: JS100 (52324), ไทยรัฐ, The101World
+- จ่าสาธิต: Khaosod Special Case, baw.pradab.sri (นักเก็บสะสมข้อมูลคดีดัง), Bright TV
+- บ้านบุญทวี: ตำนานคดีดัง (YouTube), ข่าวสมัยเหตุการณ์
+- นัยนา ธรรมวัฒนะ: ไทยรัฐ (1377937), Naewna
+
+### Notes / HANDOFF
+- judicial_potential = true: สุขุม เชิดชื่น (ฎีกายืนประหาร), จ่าสาธิต (อายุความ 20 ปี ม.95 — หมดแล้ว), นัยนา (ฆาตกรรมไม่มีอายุความ — รื้อฟื้นได้หากพบหลักฐานใหม่) → ส่ง Agent C
+- โจ ด่านช้าง: legal issues status = needs_review บางส่วน (ข้อมูลสำนวนตรวจสอบหลังไม่มีการดำเนินคดี อ้างจาก secondary sources)
+- ไม่มี BLOCK; full_validate เหลือ 25 WARN (22 ICJ legacy LI ต่ำ + 1 pre-existing + 2 maaekaa external_law)
