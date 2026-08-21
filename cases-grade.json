@@ -2476,5 +2476,25 @@
   "news-case-khdii-nu-kai-palace-scandal-2422.html": "A",
   "news-case-khdii-opium-tax-corruption-2430.html": "A",
   "news-case-khdii-railway-budget-corruption-2434.html": "A",
-  "news-case-khdii-tax-farmer-embezzlement-2420.html": "A"
+  "news-case-khdii-tax-farmer-embezzlement-2420.html": "A",
+  "news-case-khdii-jod-howdy-gangster-2499.html": {
+    "grade": "A",
+    "cat_tag": "คดอาญา"
+  },
+  "news-case-khdii-klaew-thanikul-influence-2534.html": {
+    "grade": "A",
+    "cat_tag": "คดอาญา"
+  },
+  "news-case-khdii-boonliang-cafe-king-2541.html": {
+    "grade": "A",
+    "cat_tag": "คดอาญา"
+  },
+  "news-case-khdii-owtee-killer-legend-2520.html": {
+    "grade": "A",
+    "cat_tag": "คดอาญา"
+  },
+  "news-case-khdii-somyot-cafe-assassination-2558.html": {
+    "grade": "A",
+    "cat_tag": "คดอาญา"
+  }
 }
