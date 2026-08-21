@@ -1,230 +1,5 @@
 [
     {
-        "slug": "news-case-khdii-aima-khamkhuen-nai-praborommaharachawang.html",
-        "title": "คดีอ้ายมา ลอบข่มขืนเจ้าจอมในพระบรมมหาราชวัง (จ.ศ. 1159)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 1159",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-the-caroline-case-uk-v-usa.html",
-        "title": "The Caroline Case (UK v. USA)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 1837",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-kamnan-talad-ayutthaya.html",
-        "title": "คดีกำนันตลาดรีดเงินเกินพิกัด — พระอัยการลักษณะอาญาหลวง บทที่ 3 สมัยอยุธยา (พ.ศ. 1895–2310)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 1895",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-dogger-bank-incident-great-britain-russia.html",
-        "title": "Dogger Bank Incident (Great Britain/Russia)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 1904",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-the-naulilaa-incident-portugal-v-germany.html",
-        "title": "The Naulilaa Incident (Portugal v. Germany)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 1914",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-the-lotus-case-france-v-turkey.html",
-        "title": "คดี The Lotus — ฝรั่งเศส vs. ตุรกี (PCIJ, 1927)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 1926",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-chorzow-factory-case-germany-v-poland.html",
-        "title": "Chorzów Factory Case (Germany v. Poland) — PCIJ, 1928",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 1927",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-jurisdictional-immunities-of-the-state-germany-v-italy.html",
-        "title": "Jurisdictional Immunities of the State (Germany v. Italy)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 1943",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-corfu-channel-case-uk-v-albania.html",
-        "title": "Corfu Channel Case (UK v. Albania) — ICJ, 1949",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 1946",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-barcelona-traction-light-and-power-co-case-belgium-v-spain.html",
-        "title": "Barcelona Traction, Light and Power Co. Case (Belgium v. Spain) — ICJ, 1970",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 1948",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-reservations-to-the-convention-on-genocide-advisory-opinion.html",
-        "title": "Reservations to the Convention on Genocide (Advisory Opinion)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 1951",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-attorney-general-of-the-government-of-israel-v-eichmann-israel.html",
-        "title": "Attorney-General of the Government of Israel v. Eichmann (Israel)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 1961",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-pulp-mills-on-the-river-uruguay-argentina-v-uruguay.html",
-        "title": "Pulp Mills on the River Uruguay (Argentina v. Uruguay)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 1975",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-beagle-channel-arbitration-argentina-chile.html",
-        "title": "Beagle Channel Arbitration (Argentina/Chile) — ค.ศ. 1977 และสนธิสัญญา 1984",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 1977",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-mondeeban-2001.html",
-        "title": "กฎมณเฑียรบาล พ.ศ. 2001 — กฎหมายที่เขียนเพื่อรักษาพระราชา สมัยสมเด็จพระบรมไตรโลกนาถ",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 1991",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-pinochet-case-uk-house-of-lords.html",
-        "title": "Pinochet Case (UK House of Lords)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 1998",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-aerial-incident-of-10-august-1999-pakistan-v-india.html",
-        "title": "Aerial Incident of 10 August 1999 (Pakistan v. India) — สืบกฎหมายจากคดี",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 1999",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-armed-activities-on-the-territory-of-the-congo-new-application-2002-dr.html",
-        "title": "Armed Activities on the Territory of the Congo (New Application: 2002) (DRC v. Rwanda)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2002",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-cheliang-2003.html",
-        "title": "คดีเจ้าเมืองเชลียง 'ทรยศต่อราชอาณาจักร' พ.ศ. 2003 — การสวามิภักดิ์ลานนาและสงครามล้านนา-อโยธยา",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2003",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-diallo-case-guinea-v-drc.html",
-        "title": "Diallo Case (Guinea v. DRC)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2010",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-ara-libertad-case-argentina-v-ghana.html",
-        "title": "ARA Libertad Case (Argentina v. Ghana)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2012",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-south-china-sea-arbitration-philippines-v-china.html",
-        "title": "South China Sea Arbitration (Philippines v. China)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2013",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-dispute-concerning-delimitation-of-the-maritime-boundary-ghana-cote-d-.html",
-        "title": "Dispute concerning Delimitation of the Maritime Boundary (Ghana/Côte d'Ivoire)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2017",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-the-enrica-lexie-incident-italy-v-india.html",
-        "title": "The Enrica Lexie Incident (Italy v. India)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2020",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-warawongsa-2091.html",
-        "title": "คดีขุนวรวงศาธิราช (พ.ศ. 2091) — ผู้เฝ้าหอพระที่ก้าวขึ้นนั่งบัลลังก์ และถูกปลงพระชนม์ที่คลองสระบัว",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2091",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-khdii-falkhon-2231.html",
         "title": "คดีประหารเจ้าพระยาวิชเยนทร์ (คอนสแตนติน ฟอลคอน) พ.ศ. 2231 — การปฏิวัติและผู้ที่เข้ามาไกลที่สุดในบ้านเมือง",
         "cat_tag": "คดีอาญา",
@@ -265,6 +40,15 @@
         "title": "คดี 3 พระราชาคณะทูลค้านพระเจ้ากรุงธนบุรี (พ.ศ. 2324)",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2324",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-aima-khamkhuen-nai-praborommaharachawang.html",
+        "title": "คดีอ้ายมา ลอบข่มขืนเจ้าจอมในพระบรมมหาราชวัง (จ.ศ. 1159)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2340",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -337,6 +121,15 @@
         "title": "คดี ก.ส.ร. กุหลาบ — ข้อหา 'กุ' ประวัติศาสตร์และหมิ่นพระบรมเดชานุภาพ (พ.ศ. 2443)",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2377",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-the-caroline-case-uk-v-usa.html",
+        "title": "The Caroline Case (UK v. USA)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2380",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -452,7 +245,7 @@
     {
         "slug": "news-case-khdii-abolition-slavery-2448.html",
         "title": "การเลิกทาสและไพร่ — การปฏิรูปโครงสร้างสังคมและแรงงานครั้งใหญ่ของสยาม",
-        "cat_tag": "คดียุคโบราณ",
+        "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2417",
         "score": 95,
         "status": "Warn",
@@ -560,7 +353,7 @@
     {
         "slug": "news-case-khdii-rs103-petition-2427.html",
         "title": "คำกราบบังคมทูล ร.ศ. 103 — จุดเริ่มต้นของการเรียกร้องรัฐธรรมนูญในสยาม",
-        "cat_tag": "คดียุคโบราณ",
+        "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2427",
         "score": 95,
         "status": "Warn",
@@ -628,6 +421,15 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
+    },
+    {
+        "slug": "news-case-khdii-kamnan-talad-ayutthaya.html",
+        "title": "คดีกำนันตลาดรีดเงินเกินพิกัด — พระอัยการลักษณะอาญาหลวง บทที่ 3 สมัยอยุธยา (พ.ศ. 1895–2310)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2438",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
     },
     {
         "slug": "plon-prasang-wat-chomsuda-2440.html",
@@ -765,6 +567,15 @@
         "video_status": "confirmed"
     },
     {
+        "slug": "news-case-dogger-bank-incident-great-britain-russia.html",
+        "title": "Dogger Bank Incident (Great Britain/Russia)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2447",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-temple-of-preah-vihear-cambodia-v-thailand.html",
         "title": "Temple of Preah Vihear (Cambodia v. Thailand) — ICJ 1962",
         "cat_tag": "คดีอาญา",
@@ -839,7 +650,7 @@
     {
         "slug": "news-case-khdii-rs130-rebellion-2455.html",
         "title": "กบฏ ร.ศ. 130 — คณะปฏิวัติกลุ่มแรกที่ใฝ่ฝันถึงประชาธิปไตย",
-        "cat_tag": "คดียุคโบราณ",
+        "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2454",
         "score": 95,
         "status": "Warn",
@@ -859,6 +670,15 @@
         "title": "คดีกบฏ ร.ศ.130 (2455) — ขุนทวยหาญพิทักษ์ + ยังมีเติร์ก",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2455",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-the-naulilaa-incident-portugal-v-germany.html",
+        "title": "The Naulilaa Incident (Portugal v. Germany)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2457",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -913,6 +733,24 @@
         "title": "คดีนางทองเลื่อน \"อีทองเลื่อนหักคอน้องผัว\" — นักโทษหญิ งรายน้อง ๆ ที่ถูกประหารด้วยการตัดคอ และพยานการชันระบบศพแบบแพทย์ในศาลสยามยุคร.6 (ประหาร 14 ต.ค. 2468)",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2468",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-the-lotus-case-france-v-turkey.html",
+        "title": "คดี The Lotus — ฝรั่งเศส vs. ตุรกี (PCIJ, 1927)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2469",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-chorzow-factory-case-germany-v-poland.html",
+        "title": "Chorzów Factory Case (Germany v. Poland) — PCIJ, 1928",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2470",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -1035,6 +873,15 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-jurisdictional-immunities-of-the-state-germany-v-italy.html",
+        "title": "Jurisdictional Immunities of the State (Germany v. Italy)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2486",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-monetary-gold-removed-from-rome-in-1943-italy-v-france-uk-usa.html",
         "title": "Monetary Gold Removed from Rome in 1943 (Italy v. France, UK, USA)",
         "cat_tag": "คดีอาญา",
@@ -1057,6 +904,15 @@
         "title": "คดีทุจริตข้าวสาร (คอรัปชันยุคหลังสงครามโลกครั้งที่ 2)",
         "cat_tag": "คดีประวัติศาสตร์",
         "year": "พ.ศ. 2488",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-corfu-channel-case-uk-v-albania.html",
+        "title": "Corfu Channel Case (UK v. Albania) — ICJ, 1949",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2489",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -1096,6 +952,15 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
+    },
+    {
+        "slug": "news-case-barcelona-traction-light-and-power-co-case-belgium-v-spain.html",
+        "title": "Barcelona Traction, Light and Power Co. Case (Belgium v. Spain) — ICJ, 1970",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2491",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
     },
     {
         "slug": "news-case-reparation-for-injuries-suffered-in-the-service-of-the-un-advisory-opi.html",
@@ -1181,6 +1046,15 @@
     {
         "slug": "news-case-ambatielos-case-greece-v-uk.html",
         "title": "Ambatielos Case (Greece v. UK)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2494",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-reservations-to-the-convention-on-genocide-advisory-opinion.html",
+        "title": "Reservations to the Convention on Genocide (Advisory Opinion)",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2494",
         "score": 95,
@@ -1314,6 +1188,15 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-attorney-general-of-the-government-of-israel-v-eichmann-israel.html",
+        "title": "Attorney-General of the Government of Israel v. Eichmann (Israel)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2504",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-laksami-lawan-2504.html",
         "title": "คดีปลงพระชนม์พระนางเธอลักษมีลาวัณ (2504) — ฆาตกรรมพระมเหสี ร.6",
         "cat_tag": "คดีอาญา",
@@ -1422,6 +1305,15 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-pulp-mills-on-the-river-uruguay-argentina-v-uruguay.html",
+        "title": "Pulp Mills on the River Uruguay (Argentina v. Uruguay)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2518",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-6-october-2519.html",
         "title": "คดี 6 ตุลา (โศกนาฏกรรมธรรมศาสตร์และการนิรโทษกรรม)",
         "cat_tag": "คดีการเมือง",
@@ -1429,6 +1321,15 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
+    },
+    {
+        "slug": "news-case-beagle-channel-arbitration-argentina-chile.html",
+        "title": "Beagle Channel Arbitration (Argentina/Chile) — ค.ศ. 1977 และสนธิสัญญา 1984",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2520",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
     },
     {
         "slug": "news-case-trendtex-trading-corp-v-central-bank-of-nigeria-uk-court-of-appeal.html",
@@ -1665,15 +1566,6 @@
         "video_status": "pending"
     },
     {
-        "slug": "blue-diamond.html",
-        "title": "Blue Diamond",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2532",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
-    },
-    {
         "slug": "news-case-khdii-blue-diamond-affair-2532.html",
         "title": "Blue Diamond Affair 2532",
         "cat_tag": "คดีอาญา",
@@ -1730,6 +1622,15 @@
     {
         "slug": "news-case-f-ngeriiykkhlaewthnulkul-2534.html",
         "title": "ลอบสังหารแคล้ว ธนกุล (2534)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2534",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-mondeeban-2001.html",
+        "title": "กฎมณเฑียรบาล พ.ศ. 2001 — กฎหมายที่เขียนเพื่อรักษาพระราชา สมัยสมเด็จพระบรมไตรโลกนาถ",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2534",
         "score": 95,
@@ -2034,6 +1935,15 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-pinochet-case-uk-house-of-lords.html",
+        "title": "Pinochet Case (UK House of Lords)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2541",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-serm-sakonrat-2541.html",
         "title": "คดีเสริม สาครราษฎร์: ฆาตกรรมอำพรางและบทเรียนเรื่องความหึงหวง",
         "cat_tag": "คดีอาชญากรรม",
@@ -2059,6 +1969,15 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
+    },
+    {
+        "slug": "news-case-aerial-incident-of-10-august-1999-pakistan-v-india.html",
+        "title": "Aerial Incident of 10 August 1999 (Pakistan v. India) — สืบกฎหมายจากคดี",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2542",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
     },
     {
         "slug": "news-case-khdii-hangthong-2542.html",
@@ -2115,6 +2034,15 @@
         "video_status": "confirmed"
     },
     {
+        "slug": "news-case-armed-activities-on-the-territory-of-the-congo-new-application-2002-dr.html",
+        "title": "Armed Activities on the Territory of the Congo (New Application: 2002) (DRC v. Rwanda)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2545",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-legal-consequences-of-the-construction-of-a-wall-advisory-opinion.html",
         "title": "Legal Consequences of the Construction of a Wall in the Occupied Palestinian Territory (Advisory Opinion)",
         "cat_tag": "คดีอาญา",
@@ -2153,6 +2081,15 @@
     {
         "slug": "news-case-khdiicchaangwaankhaa-faaorh-2546.html",
         "title": "คดีจ้างวานฆ่า ฟาโรห์ (2546)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2546",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-khdii-cheliang-2003.html",
+        "title": "คดีเจ้าเมืองเชลียง 'ทรยศต่อราชอาณาจักร' พ.ศ. 2003 — การสวามิภักดิ์ลานนาและสงครามล้านนา-อโยธยา",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2546",
         "score": 95,
@@ -2367,6 +2304,15 @@
         "video_status": "confirmed"
     },
     {
+        "slug": "news-case-diallo-case-guinea-v-drc.html",
+        "title": "Diallo Case (Guinea v. DRC)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2553",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-praewa-2553.html",
         "title": "คดีแพรวา (อุบัติเหตุ 9 ศพและความรับผิดทางละเมิด)",
         "cat_tag": "คดีอาญา",
@@ -2410,6 +2356,15 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
+    },
+    {
+        "slug": "news-case-ara-libertad-case-argentina-v-ghana.html",
+        "title": "ARA Libertad Case (Argentina v. Ghana)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2555",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
     },
     {
         "slug": "news-case-khdii-ngern-yeeyawa-phuuditokrap-tongkrum-2555.html",
@@ -2495,6 +2450,15 @@
     {
         "slug": "news-case-khdiitingtaang-khaatkrt-enuue-ng-2556.html",
         "title": "ติ๊งต่าง ฆาตกรต่อเนื่อง (2556)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2556",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-south-china-sea-arbitration-philippines-v-china.html",
+        "title": "South China Sea Arbitration (Philippines v. China)",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2556",
         "score": 95,
@@ -2731,6 +2695,15 @@
         "title": "คดีสั่งปิดเหมืองทองอัครา: อำนาจมาตรา 44 กับข้อพิพาทการค้าสากล",
         "cat_tag": "คดีปกครองและเศรษฐกิจ",
         "year": "พ.ศ. 2559",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-dispute-concerning-delimitation-of-the-maritime-boundary-ghana-cote-d-.html",
+        "title": "Dispute concerning Delimitation of the Maritime Boundary (Ghana/Côte d'Ivoire)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2560",
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
@@ -3080,6 +3053,15 @@
     {
         "slug": "news-case-khdii-phak-lisik-sathani-thrthath-wistivi-2563.html",
         "title": "คำสั่งพักไลเซนส์สถานีโทรทัศน์วอยซ์ ทีวี (2563)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2563",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-the-enrica-lexie-incident-italy-v-india.html",
+        "title": "The Enrica Lexie Incident (Italy v. India)",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2563",
         "score": 95,
@@ -3942,6 +3924,15 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-khdii-warawongsa-2091.html",
+        "title": "คดีขุนวรวงศาธิราช (พ.ศ. 2091) — ผู้เฝ้าหอพระที่ก้าวขึ้นนั่งบัลลังก์ และถูกปลงพระชนม์ที่คลองสระบัว",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2634",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-armed-activities-on-the-territory-of-the-congo-drc-v-uganda.html",
         "title": "Armed Activities on the Territory of the Congo (DRC v. Uganda) — สืบกฎหมายจากคดี",
         "cat_tag": "คดีอาญา",
@@ -4034,6 +4025,15 @@
     {
         "slug": "news-case-southern-bluefin-tuna-cases-new-zealand-australia-v-japan.html",
         "title": "Southern Bluefin Tuna Cases (New Zealand/Australia v. Japan) — สืบกฎหมายจากคดี",
+        "cat_tag": "คดีอาญา",
+        "year": "",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "blue-diamond.html",
+        "title": "Blue Diamond",
         "cat_tag": "คดีอาญา",
         "year": "",
         "score": 95,
