@@ -107,12 +107,6 @@
   "release": "WARN",
   "has_video": false
  },
- "news-case-corfu-channel-case-merits-uk-v-albania.html": {
-  "grade": "A",
-  "score": 85,
-  "release": "WARN",
-  "has_video": true
- },
  "news-case-corfu-channel-case-uk-v-albania.html": {
   "grade": "A",
   "score": 85,
@@ -252,9 +246,9 @@
   "has_video": true
  },
  "news-case-f-ngephikth-nkhamsangyaay-ph-orngeriiynodyaimepnthrrm-2563.html": {
-  "grade": "B",
-  "score": 68,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 88,
+  "release": "RELEASE",
   "has_video": true
  },
  "news-case-f-ngeriiykkhaaesiiyhaay-hm-thamkaarraksaaphidphlaadthamaihtaab-d-.html": {
@@ -1008,9 +1002,9 @@
   "has_video": false
  },
  "news-case-khdiiphidsayyaak-sraang-aakhaarrathsphaaaihm-sappaayasiristhaan-2566.html": {
-  "grade": "C",
-  "score": 63,
-  "release": "BLOCKED",
+  "grade": "A",
+  "score": 87,
+  "release": "RELEASE",
   "has_video": false
  },
  "news-case-khdiiphuubriophkhf-ngbrisathprakan-ptiesthkaarcchaayokhwid-ecch-cchaay.html": {
@@ -1535,12 +1529,6 @@
   "release": "WARN",
   "has_video": false
  },
- "news-case-khdii-ramrit-mueang-trat-2445.html": {
-  "grade": "A",
-  "score": 88,
-  "release": "WARN",
-  "has_video": false
- },
  "news-case-khdii-kabot-r130-2455.html": {
   "grade": "A",
   "score": 90,
@@ -1606,5 +1594,11 @@
   "score": 89,
   "release": "WARN",
   "has_video": true
+ },
+ "news-case-khdii-ramrit-mueang-trat-2442-2443.html": {
+  "grade": "A",
+  "score": 88,
+  "release": "WARN",
+  "has_video": false
  }
 }
