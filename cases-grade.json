@@ -1844,5 +1844,53 @@
         "release": "WARN",
         "has_video": true,
         "notes": "คดีพระพรหมเมธี - เงินทอนวัด/ลี้ภัย"
+    },
+    "news-case-khdii-kato-2565.html": {
+        "grade": "A",
+        "score": 90,
+        "has_video": true,
+        "judicial_potential": true
+    },
+    "news-case-khdii-raj-upasenaporn-2561.html": {
+        "grade": "A",
+        "score": 90,
+        "has_video": true,
+        "judicial_potential": true
+    },
+    "news-case-khdii-issanamuni-2544.html": {
+        "grade": "A",
+        "score": 90,
+        "has_video": true,
+        "judicial_potential": true
+    },
+    "news-case-khdii-raikhing-2568.html": {
+        "grade": "A",
+        "score": 90,
+        "has_video": true,
+        "judicial_potential": true
+    },
+    "news-case-khdii-somdej-chuang-2559.html": {
+        "grade": "A",
+        "score": 90,
+        "has_video": true,
+        "judicial_potential": true
+    },
+    "news-case-khdii-phra-prom-chedi-2561.html": {
+        "grade": "A",
+        "score": 90,
+        "has_video": true,
+        "judicial_potential": true
+    },
+    "news-case-khdii-phra-prom-dilok-2561.html": {
+        "grade": "A",
+        "score": 90,
+        "has_video": true,
+        "judicial_potential": true
+    },
+    "news-case-khdii-methee-sutthikorn-2561.html": {
+        "grade": "A",
+        "score": 90,
+        "has_video": true,
+        "judicial_potential": true
     }
 }
