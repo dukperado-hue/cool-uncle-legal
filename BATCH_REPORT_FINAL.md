@@ -258,3 +258,20 @@
 - Full validation: 0 BLOCK
 - Deployed to main and verified live (HTTP 200)
 - Synchronized to news-unreleased-a.html index
+
+### Batch 47 — DEPLOYED ✅ (Date: 2026-08-21)
+**Theme:** Historical & Legendary Cases (คดีดังในตำนานและประวัติศาสตร์)
+
+**Cases Added (Grade A):**
+- **amdaeng-yu**: คดีอำแดงอยู่ (ร.5): คุณนายผู้มั่งคั่งสู่ลานประหาร (การทารุณกรรมทาส)
+- **phraya-raka**: คดีพญาระกา (ร.5): บทละครหมิ่นพระบรมเดชานุภาพ?
+- **nu-kai**: คดีหนูไก๋ (ร.5): ฆาตกรรมชิงทรัพย์เด็กที่น่าหดหู่
+- **nang-thong-luean**: คดีนางทองเลื่อน (ร.5): หญิงใจยักษ์และโทษประหารรายสุดท้าย?
+- **preecha-kolakan**: คดีพระยาปรีชากลการ (ร.5): โศกนาฏกรรมความรักและอำนาจ
+- **yot-mueang-khwang**: คดีพระยอดเมืองขวาง (ร.5): วีรบุรุษผู้รักษาแผ่นดินหรืออาชญากรสงคราม?
+
+**Status:**
+- All 6 cases built to Grade A standard (8 sections, 3+ legal issues, paras <= 350).
+- Fixed `news-unreleased-a.html` display issues by pulling proper Thai titles from override files.
+- Total Grade A cases in system: **449**.
+- Deployed to main and verified live.
