@@ -1138,6 +1138,386 @@
     "read",
     "play"
    ]
+  },
+  {
+   "id": "marriage-equality-landmark-2567",
+   "title": "marriage-equality-landmark-2567",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "adultery-damages-landmark-2565",
+   "title": "adultery-damages-landmark-2565",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "living-will-right-to-die-2558",
+   "title": "living-will-right-to-die-2558",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "domestic-violence-protection-2562",
+   "title": "domestic-violence-protection-2562",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "illegitimate-child-inheritance-2563",
+   "title": "illegitimate-child-inheritance-2563",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "rs-130-rebellion-2454",
+   "title": "rs-130-rebellion-2454",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "boworadet-rebellion-2476",
+   "title": "boworadet-rebellion-2476",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "rama-8-forensic-landmark-2489",
+   "title": "rama-8-forensic-landmark-2489",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "palace-rebellion-2492",
+   "title": "palace-rebellion-2492",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "peace-rebellion-2495",
+   "title": "peace-rebellion-2495",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "tee-yai-legend-2524",
+   "title": "tee-yai-legend-2524",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "si-quey-human-rights-2563",
+   "title": "si-quey-human-rights-2563",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "four-ministers-murder-2492",
+   "title": "four-ministers-murder-2492",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "young-turk-rebellion-2524",
+   "title": "young-turk-rebellion-2524",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "sherry-ann-duncan-scapegoat-2529",
+   "title": "sherry-ann-duncan-scapegoat-2529",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "nualchawee-legend-2502",
+   "title": "nualchawee-legend-2502",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "syamol-forensic-2536",
+   "title": "syamol-forensic-2536",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "hangthong-mystery-2542",
+   "title": "hangthong-mystery-2542",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "serm-sakonrat-41",
+   "title": "serm-sakonrat-41",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "dr-supat-skeleton-2555",
+   "title": "dr-supat-skeleton-2555",
+   "cat": "คดีเด่นด้านสังคม",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
   }
  ],
  "series_hubs": [
