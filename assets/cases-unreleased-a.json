@@ -210,26 +210,6 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdii-thujrit-ngob-rotfai-history.html",
-        "title": "คดีทุจริตงบประมาณรถไฟ — การตรวจสอบเมกะโปรเจกต์สายแรกของสยาม (พ.ศ. 2434)",
-        "cat_tag": "คดทั่วไป",
-        "year": "",
-        "norm_year": 0,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-tax-farmer-embezzlement-history.html",
-        "title": "คดีเจ้าภาษีนายอากรยักยอกเงินส่งคลัง — วิกฤตเงินฝืดและกำเนิดกระทรวงการคลัง (พ.ศ. 2416)",
-        "cat_tag": "คดทั่วไป",
-        "year": "",
-        "norm_year": 0,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-khdii-thujrit-pamai-muang-nuea-history.html",
         "title": "คดีทุจริตสัมปทานป่าไม้ — ข้อพิพาทป่าสักและอธิปไตยเหนือทรัพยากร (พ.ศ. 2426)",
         "cat_tag": "คดทั่วไป",
@@ -325,16 +305,6 @@
         "cat_tag": "คดทั่วไป",
         "year": "พ.ศ. 2324",
         "norm_year": 2324,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-chao-fa-men-2352.html",
-        "title": "คดีกบฏเจ้าฟ้าเหม็น (กรมขุนกษัตรานุชิต)",
-        "cat_tag": "คดทั่วไป",
-        "year": "พ.ศ. 2352",
-        "norm_year": 2352,
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
