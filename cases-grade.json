@@ -1606,5 +1606,17 @@
   "score": 90,
   "release": "WARN",
   "has_video": false
+ },
+ "news-case-khdii-thanabat-r5-2446.html": {
+  "grade": "A",
+  "score": 88,
+  "release": "pass",
+  "has_video": false
+ },
+ "news-case-khdii-ice-hiblek-2563.html": {
+  "grade": "A",
+  "score": 87,
+  "release": "pass",
+  "has_video": false
  }
 }

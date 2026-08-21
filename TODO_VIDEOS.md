@@ -118,3 +118,8 @@ news-case-trendtex-trading-corp-v-central-bank-of-nigeria-uk-court-of-appeal | T
 news-case-united-states-diplomatic-and-consular-staff-in-tehran-usa-v-iran | United States Diplomatic and Consular Staff in Tehran (USA v. Iran) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
 news-case-western-sahara-advisory-opinion | Western Sahara (Advisory Opinion) | B/C เดิม — ย้ายมา v2 แล้ว ยังไม่มีวิดีโอ
 news-case-khdii-nangthongloen-2468.html | คดีนางทองเลื่ อน 2468 | หักคอน้องผัวตุ่มน้ำ — มีเฉพาะบทความ MGR (โรม บุนนาค) ยังไม่มีคลิปวิดีโอที่เหมาะสม
+
+## Batch 13
+
+news-case-khdii-thanabat-r5-2446 | คดีธนบัตรปลอม ร.5 2446 | หาคลิปไทยเชื่ อถือได้ที่เกี่ยวข้องตรงยังไม่พบ
+news-case-khdii-ice-hiblek-2563 | คดีไอซ์ หีบเหล็ก 2563 | หาคลิปไทยเชื่ อถือได้ที่เกี่ยวข้องตรงยังไม่พบ
