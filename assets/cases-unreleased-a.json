@@ -110,22 +110,12 @@
   "cat": ""
  },
  {
-  "slug": "news-case-khdii-ai-uam-2414",
-  "grade": "A",
-  "score": 85,
-  "release": "WARN",
-  "has_video": false,
-  "title": "คดีอ้ายอ่วม อกโรย (การประหารชีวิตตัดตัวขาด)",
-  "year": "พ.ศ. 2410",
-  "cat": "คดยุคโบราณ"
- },
- {
   "slug": "news-case-khdii-ai-uam-ok-roi-2414",
   "grade": "A",
   "score": 95,
   "release": "WARN",
-  "has_video": true,
-  "title": "คดีอ้ายอ่วม อกโรย: โจรใจเหี้ยมกับการลงทัณฑ์บั่นสองท่อน",
+  "has_video": false,
+  "title": "คดีอ้ายอ่วม อกโรย: โทษประหารตัดตัวขาดสองท่อนในยุคเปลี่ยนผ่านกฎหมาย",
   "year": "2414",
   "cat": "คดยุคโบราณ"
  },
@@ -1235,7 +1225,7 @@
   "score": 90,
   "release": "RELEASE",
   "has_video": false,
-  "title": "คดีเชอรี่ แอน ดันแคน: บทเรียนราคาแพงของกระบวนการยุติธรรมและ 'การจับแพะ'",
+  "title": "คดีเชอรี่ แอน ดันแคน: ตราบาปแห่งการจับแพะและการปฏิรูปกระบวนการยุติธรรมไทย",
   "year": "2529",
   "cat": "คดีอาชญากรรม"
  },
@@ -1244,9 +1234,9 @@
   "grade": "A",
   "score": 95,
   "release": "WARN",
-  "has_video": true,
+  "has_video": false,
   "title": "คดีเชอรี่ แอน: บรรทัดฐานแพะรับบาปและการปฏิรูปกฎหมายพยานไทย",
-  "year": "2529",
+  "year": "",
   "cat": ""
  },
  {
@@ -2156,6 +2146,16 @@
   "release": "WARN",
   "has_video": false,
   "title": "news-case-khdii-9near-aehkek-rkhomykh-muul-2566",
+  "year": "",
+  "cat": ""
+ },
+ {
+  "slug": "news-case-khdii-ai-uam-2414",
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
+  "has_video": false,
+  "title": "news-case-khdii-ai-uam-2414",
   "year": "",
   "cat": ""
  },
