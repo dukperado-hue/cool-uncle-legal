@@ -1892,5 +1892,53 @@
         "score": 90,
         "has_video": true,
         "judicial_potential": true
+    },
+    "news-case-khdii-narin-phasit-2470.html": {
+        "grade": "A",
+        "score": 90,
+        "release": "RELEASE",
+        "has_video": true
+    },
+    "news-case-khdii-payabat-2460.html": {
+        "grade": "A",
+        "score": 88,
+        "release": "RELEASE",
+        "has_video": false
+    },
+    "news-case-khdii-sergeant-rebellion-2478.html": {
+        "grade": "A",
+        "score": 89,
+        "release": "RELEASE",
+        "has_video": true
+    },
+    "news-case-khdii-war-criminal-por-2489.html": {
+        "grade": "A",
+        "score": 92,
+        "release": "RELEASE",
+        "has_video": true
+    },
+    "news-case-khdii-four-ministers-2492.html": {
+        "grade": "A",
+        "score": 91,
+        "release": "RELEASE",
+        "has_video": true
+    },
+    "news-case-khdii-john-samson-2460.html": {
+        "grade": "A",
+        "score": 87,
+        "release": "RELEASE",
+        "has_video": false
+    },
+    "news-case-khdii-king-rama-8-2489.html": {
+        "grade": "A",
+        "score": 93,
+        "release": "RELEASE",
+        "has_video": true
+    },
+    "news-case-khdii-medical-malpractice-blind-2566.html": {
+        "grade": "A",
+        "score": 90,
+        "release": "RELEASE",
+        "has_video": true
     }
 }
