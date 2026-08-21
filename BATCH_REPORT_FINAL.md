@@ -313,3 +313,33 @@ After Agent C handoff brief re-verification, 5 remaining gaps were filled:
 ### ส่งต่อ Agent C
 - พระยอดเมืองขวาง, เรือพญารัณฑัย, กบฏบวรเดช, ซีอุย, หลวงรามฤทธิ์รงค์ — แก้ false claims แล้ว รอตรวจยืนยันก่อนติด S_CANDIDATE
 - กบฏเจ้าฟ้าเหม็น, บุญเพ็ง, สามพระราชาคณะ — คดีประวัติศาสตร์/พงศาวดาร ให้ลองดู primary source ชั้นสูง (พระราชหัตถเลขา/ราชกิจจานุเบกษา) ถ้า Agent C ต้องการ Rank S
+
+## BATCH 10 — B/C อัปเกรด + Agent C Follow-up (21 ส.ค. 2569) — DEPLOYED ✅ (commit c90bb16)
+
+A total: **262 A + 4 A_REVIEW** — เหลือ C 1 คดี (blue-diamond.html — งาน Agent B / series Block C)
+
+### B/C → A (2 คดี — คดีสุดท้ายในกลุ่ม B/C ที่ทำงานได้)
+
+| คดี | สลัก | ก่อน | หลัง | สิ่งที่แก้ |
+|---|---|---|---|---|
+| สงครามยาเสพติด 2563 | news-case-f-ngephikth-nkhamsangyaay-ph-orngeriiynodyaimepnthrrm-2563 | B/68 | A/88 | typos (รายใหญ่/ภาคเหน่อ), section 07 เสริมบทบัญญัติจริงจาก codex: ป.อ. ม.32 (ริบทรัพย์), ม.49 (เงื่อนไขไม่เสพยา), ป.อ.พ. ม.120 (ห้ามฟ้องก่อนสอบสวน), รัฐธรรมนูญ 2560 ม.29 + พ.ร.บ.ยาเสพติด 2522/AMLO 2542 (external_law) |
+| สัปปายะสภาสถาน 2566 | news-case-khdiiphidsayyaak-sraang-aakhaarrathsphaaaihm-sappaayasiristhaan-2566 | C/63 | A/87 | **แก้กฎหมายผิด BLOCK: ม.572–586 (เช่าซื้อ/จ้างแรงงาน) → ม.587–597 (จ้างทำของ)** + เติม law-text จริงจาก codex; แก้ label ปี event 2; video_status = unavailable (ไม่มีคลิปคุณภาพ) |
+
+### Agent C Follow-up (4 รายการ — ทำครบทุกข้อ)
+
+1. **LaGrand** — แก้ประโยคติดกัน (garbled tail) ในบทสรุปกฎหมายให้แยกเป็นสองประโยค; ตรวจสอบ "Article" ไม่มีเลข — พบว่าเป็น schema.org @type ใน metadata ไม่ใช่เนื้อหา (body มี VCCR Art.36(1)(b) + ICJ Statute Art.41 ครบ)
+2. **หลวงรามฤทธิ์รงค์** — rename slug `...trat-2445` → `...trat-2442-2443` (เหตุการณ์ 2442–2443) + grade index + canonical; ไม่มีลิงก์ภายในอ้างอิงสลักเดิม
+3. **Corfu orphan** — ลบหน้า `news-case-corfu-channel-case-merits-uk-v-albania.html` (orphan ไม่มีใครลิงก์, เนื้อหาซ้ำ) + ลบจาก grade/criminal-a index
+4. **ก.ศ.ร. กุหลาบ** — ตัด "จำคุก 1 เดือน" (ขัดกับ silpa: 4 เดือน + เฆี่ยน) → ถ้อยคำปลอดภัย "ศาลตัดสินจำคุก มีกำหนดเวลาจำคุกจนกว่าจะลงโทษ" + note ความขัดแย้งของแหล่งข้อมูล
+
+### ผล validation
+
+full_validate: 56 WARN — 0 BLOCK; ปัญหา +11 เทียบกับก่อนหน้ามาจาก commit 3854b95 ของ Agent C เอง (paras >350 บนหน้า ICJ 4 หน้าที่ Agent C rebuild: Tadic/Tinoco/Trail Smelter/Trendtex — บันทึกไว้ให้ Agent C แก้ต่อเอง ไม่ใช่พื้นที่ Agent A)
+
+### ยืนยัน live
+
+ทุกหน้าที่แก้ HTTP 200; สลักเดิม ramrit-2445 และ corfu-merits = 404 (ถูกต้องตามแผน rename/delete)
+
+### ส่งต่อ Agent C
+
+คดีที่ unlock รอบนี้: ยาเสพติด 2563, สัปปายะสภาสถาน 2566, ramrit-2442-2443 — หากมี judicial potential ให้ตรวจขึ้น S ได้เลย
