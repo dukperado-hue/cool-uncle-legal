@@ -1465,12 +1465,6 @@
         "release": "WARN",
         "has_video": false
     },
-    "news-case-khdii-nginthplom-2446.html": {
-        "grade": "A",
-        "score": 90,
-        "release": "WARN",
-        "has_video": false
-    },
     "news-case-khdii-kabot-r130-2455.html": {
         "grade": "A",
         "score": 90,
@@ -1549,12 +1543,6 @@
         "release": "WARN",
         "has_video": false
     },
-    "news-case-khdii-thanabat-r5-2446.html": {
-        "grade": "A",
-        "score": 88,
-        "release": "pass",
-        "has_video": false
-    },
     "news-case-khdii-ice-hiblek-2563.html": {
         "grade": "A",
         "score": 87,
@@ -1566,13 +1554,6 @@
         "score": 85,
         "release": "WARN",
         "has_video": false
-    },
-    "news-case-khdii-thanabat-plom-r5-2446.html": {
-        "grade": "A",
-        "score": 92,
-        "release": "WARN",
-        "has_video": true,
-        "judicial_potential": true
     },
     "news-case-khdii-ksr-kulap-2443.html": {
         "grade": "A",
@@ -1926,18 +1907,6 @@
     "news-case-khdii-thong-luean-2475.html": {
         "grade": "A",
         "score": 87,
-        "has_video": false,
-        "judicial_potential": true
-    },
-    "news-case-khdii-ramritthirong-2445.html": {
-        "grade": "A",
-        "score": 89,
-        "has_video": false,
-        "judicial_potential": true
-    },
-    "news-case-khdii-fake-banknote-2446.html": {
-        "grade": "A",
-        "score": 93,
         "has_video": false,
         "judicial_potential": true
     },

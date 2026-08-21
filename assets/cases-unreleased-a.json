@@ -387,51 +387,6 @@
         "video_status": "confirmed"
     },
     {
-        "slug": "news-case-khdii-thanabat-plom-r5-2446.html",
-        "title": "คดีธนบัตรปลอมสมัย ร.5 — พระองค์เจ้าปรีดา และนายเพ่ง (พ.ศ. 2446)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2445",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-ramritthirong-2445.html",
-        "title": "คดีหลวงรามฤทธิรงค์ (ขุนนางฉุดหญิง)",
-        "cat_tag": "คดยุคโบราณ",
-        "year": "พ.ศ. 2445",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-fake-banknote-2446.html",
-        "title": "คดีธนบัตรปลอมสมัย ร.5 (กรมหมื่นพงษาดิศรมหิป)",
-        "cat_tag": "คดยุคโบราณ",
-        "year": "พ.ศ. 2445",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-nginthplom-2446.html",
-        "title": "คดีธนบัตรปลอม 2446 — กรมหมื่นพงษาดิศรมหิป + นายเพ่ง",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2446",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-thanabat-r5-2446.html",
-        "title": "คดีธนบัตรปลอม ร.5 2446 — กรมหมื่นพงษาดิศรมหิป + จ่ามื่นเพ่ง + ชาวญี่ปุ่น",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2446",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-khdii-fake-banknote-r5-2446.html",
         "title": "คดีธนบัตรปลอมสมัย ร.5: อาชญากรรมเศรษฐกิจและพระราชโอรส",
         "cat_tag": "คดยุคโบราณ",
