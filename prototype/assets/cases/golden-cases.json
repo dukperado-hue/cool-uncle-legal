@@ -210,6 +210,27 @@
         "read",
         "play"
       ]
+    },
+    {
+      "id": "tuohao-criminal-2566",
+      "title": "ทู้ห่ว 2566 : คดีบริหารระดับสูง - เหยื้อชีวิต ระดับสูง",
+      "cat": "คดีอาญา",
+      "has_video": false,
+      "rank": {
+        "grade": "S_CANDIDATE",
+        "score": 4,
+        "s_verified": false,
+        "judicial_case": "คดีดำ ย.87/2566 ศาลอาญากรุงเทพมหานคร",
+        "verified_by": "Agent C - Handoff Brief (Tier 1 S_CANDIDATE, awaiting judicial authority)"
+      },
+      "visibility": {
+        "public": false,
+        "public_reason": "agent_a_approval_required"
+      },
+      "modes": [
+        "read",
+        "play"
+      ]
     }
   ],
   "series_hubs": [
