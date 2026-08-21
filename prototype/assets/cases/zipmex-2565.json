@@ -1,0 +1,157 @@
+{
+ "id": "zipmex-2565",
+ "meta": {
+  "title": "Zipmex 2565 : คดีฉอ้กงประชาชน - วิกรทสพาพคล่อง",
+  "title_display": "Zipmex 2565 : คดีฉอ้กงประชาชน - วิกรทสพาพคล่อง",
+  "year": 2565,
+  "cat": "คดีอาญา · เศรฐกิจ",
+  "subject_tags": [
+   "ฉอ้กงประชาชน",
+   "คำสั่งเศรฐกิจ",
+   "คดีพิเศ",
+   "วิกรทสพาพคล่อง"
+  ],
+  "difficulty": 3,
+  "read_minutes": 7,
+  "blurb_60": "ชิพม์เท็ก วิกรทสพาพคล่อง: เอกชัย จำคุก 5 ปี ไม่รอลงอาญา"
+ },
+ "visibility": {
+  "public": false,
+  "public_reason": "agent_a_approval_required",
+  "internal_notes": "Zipmex: คดียังไม่ถึง ที่สุด"
+ },
+ "rank": {
+  "grade": "S_CANDIDATE",
+  "score": 4,
+  "s_verified": false,
+  "s_verified_by": "Agent C - Handoff Brief",
+  "s_verified_at": null,
+  "judicial_case": "ศาลอาญา, DSI คดีพิเศ 43/2568 (28 มเษายน 2568)"
+ },
+ "deident": {
+  "required": true,
+  "level": "C",
+  "labels": {
+   "defendant": "เอกชัย ยิ้มวลัย (CEO)",
+   "victim": "ฟั่นักลงทุน"
+  },
+  "original_names": [
+   "Ekkachai Yimmalai",
+   "Zipmex (Thailand) Co., Ltd."
+  ],
+  "reason": "ชือบุคคล - คดีเศรฐกิจ ยังค้าง DSI"
+ },
+ "read": {
+  "sections": [
+   {
+    "order": 1,
+    "key": "crisis",
+    "title": "วิกรท สพาพคล่อง",
+    "content": "28 มิถุนายน 2565 Zipmex ระงับถอนเงิน แล้วทันที\nชิพม์เท็ก บริษัท ทรุด จม เงิน\nนักลงทุน ถูกจัดการ แล้ว สรุบเสิยหาย"
+   },
+   {
+    "order": 2,
+    "key": "verdict",
+    "title": "คำสั่ง ศาลอาญา ที่ 17 ก.พ. 2568",
+    "content": "เอกชัย ยิ้มวลัย จำคุก 5 ปี ไม่รอลงอาญา\nฉอ้กงประชาชน ทางอาญา (ม.343, ม.1167-1168 พ.ร.บ หลักทรัพย์และหุ้น)\nบริษัทZipmex ปรับ 100,000 บาท"
+   },
+   {
+    "order": 3,
+    "key": "class_action",
+    "title": "ศาลแพ้ง รอปตเสท คดีแเกกลุ่ม",
+    "content": "ศาลแพ้ง รอปตเสท คดีแเกกลุ่ม แล้ว\nฟั่นักลงทุน ฟ้อง ~800 ของ มูลค่า 1,800 ล้านบาท\nDSI คดีพิเศ 43/2568 (28 มเษายน 2568) - 920 ร้องเรียน 1,019 ล้านบาท"
+   },
+   {
+    "order": 4,
+    "key": "status",
+    "title": "สถานะ ปัจจุบัน",
+    "content": "คดีอาญา: จำคุก 5 ปี ไม่รอลงอาญา แล้ว\nคดีแเกกลุ่ม ถูกศาลแพ้งพิจารณา\nDSI ยังดำเนินสอบสวน คดียังไม่ถึงที่สุด"
+   },
+   {
+    "order": 5,
+    "key": "learning",
+    "title": "เรียนรู้ - คดีฉอ้กงประชาชน",
+    "content": "ชิพม์เท็ก วิกรทสพาพคล่อง เป็น คดีฉอ้กงประชาชน\nจำคุก ฉอ้กงประชาชน เป็น จำคุก ไม่รอลงอาญา\nคดีแเกกลุ่ม เป็น ความเสิ่งที่สำคัญ"
+   },
+   {
+    "order": 6,
+    "key": "sources",
+    "title": "แหล่ง",
+    "content": "Spring News (17 ก.พ. 2568) - อ่าน คำพิพากษา\nWeerawong & Co / DSI - คดีพิเศ 43/2568\nSEC Thailand - ประกสาส ระงับถอน Zipmex"
+   }
+  ]
+ },
+ "play": {
+  "flow": [
+   {
+    "type": "question",
+    "text": "เอกชัย รอลงอาญา หรือ ไม่?",
+    "options": [
+     "จำคุก 5 ปี ไม่รอลงอาญา",
+     "ปรับ เบาทั้งบริษัท",
+     "ปรับ 100,000 บาท",
+     "เพิก ถอน อนุยาท Zipmex"
+    ],
+    "anti_reveal": true
+   },
+   {
+    "type": "question",
+    "text": "ศาลแพ้งรอคดีแเกกลุ่ม หรือ ไม่?",
+    "options": [
+     "รับ ฟ้อง ที่ศาล",
+     "ไม่รับ",
+     "รับ คดีแเกกลุ่ม"
+    ],
+    "anti_reveal": true
+   },
+   {
+    "type": "question",
+    "text": "DSI คดีพิเศ 43/2568 จาพิจารณา หรือ ไม่?",
+    "options": [
+     "DSI ปิดสำนวน แล้ว",
+     "DSI ยังดำเนิน สอบสวน",
+     "คดียังไม่ถึงที่สุด"
+    ],
+    "anti_reveal": true
+   }
+  ],
+  "anti_reveal_rules": [
+   "ยังย่อเปิดเพย พลพิจารณา กราศาลแพ้งก์อน",
+   "แเก พลคดีอาญา กับ ข้อพิพาท แเกกลุ่ม"
+  ],
+  "reveal_actual": [
+   "เอกชัย รอลงอาญา: จำคุก 5 ปี ไม่รอลงอาญา, Zipmex ปรับ 100,000 บาท",
+   "จริง: ศาลแพ้งรอปตเสท คดีแเกกลุ่ม - คดีพิเศ 43/2568 ยังค้าง",
+   "จริง: DSI ยังดำเนิน สอบสวน คดียังไม่ถึงที่สุด"
+  ]
+ },
+ "media": {
+  "video": null
+ },
+ "sources": [
+  {
+   "name": "สปรงนิวส์ นิวส์",
+   "date": "17 ก.พ. 2568",
+   "url": "https://www.springnews.co.th/news/856082",
+   "note": "อ่าน คำพิพากษา เอกชัย"
+  },
+  {
+   "name": "Weerawong & Co (Law Firm)",
+   "date": "2568",
+   "url": null,
+   "note": "DSI คดีพิเศ 43/2568"
+  },
+  {
+   "name": "SEC (Thailand)",
+   "date": "2565-2568",
+   "url": "https://www.sec.or.th",
+   "note": "ประกสาส ระงับถอน Zipmex"
+  }
+ ],
+ "migration": {},
+ "validation": {
+  "gate": "agent_c_tier1",
+  "validated_at": "2026-08-21",
+  "note": "S_CANDIDATE - awaiting judicial authority (Agent A approval)"
+ }
+}
