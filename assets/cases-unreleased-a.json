@@ -54,6 +54,33 @@
         "video_status": "pending"
     },
     {
+        "slug": "news-case-right-of-passage-over-indian-territory-portugal-v-india.html",
+        "title": "Right of Passage over Indian Territory (Portugal v. India)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2342",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-minquiers-and-ecrehos-case-france-v-uk.html",
+        "title": "Minquiers and Ecrehos Case (France v. UK)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2343",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "news-case-south-china-sea-arbitration-philippines-v-china.html",
+        "title": "South China Sea Arbitration (Philippines v. China)",
+        "cat_tag": "คดีอาญา",
+        "year": "พ.ศ. 2346",
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-amdaengpom-hlongya-pi-2347.html",
         "title": "คดีอำแดงป้อม ฟ้องหย่า — จุดกำเนิดกฎหมายตราสามดวง (พ.ศ. 2347)",
         "cat_tag": "คดีอาญา",
@@ -1080,15 +1107,6 @@
         "video_status": "confirmed"
     },
     {
-        "slug": "news-case-minquiers-and-ecrehos-case-france-v-uk.html",
-        "title": "Minquiers and Ecrehos Case (France v. UK)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2496",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
         "slug": "news-case-certain-expenses-of-the-united-nations-advisory-opinion.html",
         "title": "Certain Expenses of the United Nations (Advisory Opinion)",
         "cat_tag": "คดีอาญา",
@@ -1114,15 +1132,6 @@
         "score": 95,
         "status": "Warn",
         "video_status": "confirmed"
-    },
-    {
-        "slug": "news-case-right-of-passage-over-indian-territory-portugal-v-india.html",
-        "title": "Right of Passage over Indian Territory (Portugal v. India)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2500",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
     },
     {
         "slug": "news-case-khdii-owtee-killer-legend-2520.html",
@@ -2450,15 +2459,6 @@
     {
         "slug": "news-case-khdiitingtaang-khaatkrt-enuue-ng-2556.html",
         "title": "ติ๊งต่าง ฆาตกรต่อเนื่อง (2556)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2556",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "news-case-south-china-sea-arbitration-philippines-v-china.html",
-        "title": "South China Sea Arbitration (Philippines v. China)",
         "cat_tag": "คดีอาญา",
         "year": "พ.ศ. 2556",
         "score": 95,
