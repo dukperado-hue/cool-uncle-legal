@@ -1,113 +1,5 @@
 {
-    "news-case-aerial-incident-of-10-august-1999-pakistan-v-india.html": {
-        "grade": "A",
-        "score": 92,
-        "release": "BLOCKED",
-        "has_video": true
-    },
-    "news-case-alabama-claims-arbitration-usa-great-britain.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-ambatielos-case-greece-v-uk.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-anglo-norwegian-fisheries-case-uk-v-norway.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-ara-libertad-case-argentina-v-ghana.html": {
-        "grade": "A",
-        "score": 89,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-armed-activities-on-the-territory-of-the-congo-drc-v-uganda.html": {
-        "grade": "A",
-        "score": 89,
-        "release": "BLOCKED",
-        "has_video": true
-    },
     "news-case-armed-activities-on-the-territory-of-the-congo-new-application-2002-dr.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-arrest-warrant-of-11-april-2000-drc-v-belgium.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-attorney-general-of-the-government-of-israel-v-eichmann-israel.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-avena-and-other-mexican-nationals-mexico-v-usa.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-barcelona-traction-light-and-power-co-case-belgium-v-spain.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-bay-of-bengal-maritime-boundary-arbitration-bangladesh-v-india.html": {
-        "grade": "A",
-        "score": 86,
-        "release": "BLOCKED",
-        "has_video": true
-    },
-    "news-case-beagle-channel-arbitration-argentina-chile.html": {
-        "grade": "A",
-        "score": 87,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-bosnian-genocide-case-bosnia-v-serbia.html": {
-        "grade": "A",
-        "score": 86,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-certain-expenses-of-the-united-nations-advisory-opinion.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-certain-questions-of-mutual-assistance-in-criminal-matters-djibouti-v-.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-chorzow-factory-case-germany-v-poland.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-clipperton-island-arbitration-france-v-mexico.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-corfu-channel-case-uk-v-albania.html": {
         "grade": "A",
         "score": 85,
         "release": "WARN",
@@ -119,35 +11,11 @@
         "release": "WARN",
         "has_video": true
     },
-    "news-case-diallo-case-guinea-v-drc.html": {
-        "grade": "A",
-        "score": 89,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-dispute-concerning-delimitation-of-the-maritime-boundary-ghana-cote-d-.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
     "news-case-dogger-bank-incident-great-britain-russia.html": {
         "grade": "A",
         "score": 85,
         "release": "WARN",
         "has_video": true
-    },
-    "news-case-east-timor-case-portugal-v-australia.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-eastern-greenland-case-denmark-v-norway.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
     },
     "news-case-ecchaahniif-ngyuedthraphycchamn-ng-khamprakankhaampraeths-2550.html": {
         "grade": "A",
@@ -281,12 +149,6 @@
         "release": "BLOCKED",
         "has_video": true
     },
-    "news-case-fisheries-jurisdiction-cases-uk-v-iceland.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
     "news-case-gabcikovo-nagymaros-project-hungary-slovakia.html": {
         "grade": "A",
         "score": 85,
@@ -299,45 +161,9 @@
         "release": "WARN",
         "has_video": false
     },
-    "news-case-guyana-v-suriname-pca.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-interhandel-case-switzerland-v-usa.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-island-of-palmas-case-netherlands-v-usa.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
     "news-case-joerkam-maek-phetcha-royal-saudi-2532.html": {
         "grade": "A",
         "score": 91,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-jones-v-ministry-of-interior-of-saudi-arabia-uk-house-of-lords.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-joyce-v-director-of-public-prosecutions-uk-house-of-lords.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-jurisdictional-immunities-of-the-state-germany-v-italy.html": {
-        "grade": "A",
-        "score": 85,
         "release": "WARN",
         "has_video": true
     },
@@ -1121,94 +947,16 @@
         "release": "WARN",
         "has_video": false
     },
-    "news-case-korea-beef-wto-appellate-body.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-lagrand-case-germany-v-usa.html": {
-        "grade": "A",
-        "score": 95,
-        "release": "BLOCKED",
-        "has_video": true
-    },
     "news-case-land-island-and-maritime-frontier-dispute-el-salvador-honduras.html": {
         "grade": "A",
         "score": 85,
         "release": "WARN",
         "has_video": false
     },
-    "news-case-legal-consequences-of-the-construction-of-a-wall-advisory-opinion.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-legality-of-the-threat-or-use-of-nuclear-weapons-advisory-opinion.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-lockerbie-case-libya-v-uk-usa.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-m-v-saiga-no-2-case-st-vincent-v-guinea.html": {
-        "grade": "A",
-        "score": 86,
-        "release": "WARN",
-        "has_video": true
-    },
     "news-case-military-and-paramilitary-activities-in-and-against-nicaragua-nicaragu.html": {
         "grade": "A",
         "score": 86,
         "release": "WARN",
-        "has_video": true
-    },
-    "news-case-minquiers-and-ecrehos-case-france-v-uk.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-monetary-gold-removed-from-rome-in-1943-italy-v-france-uk-usa.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-nicaragua-case-nicaragua-v-usa.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-north-sea-continental-shelf-cases-frg-v-denmark-netherlands.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-nottebohm-case-liechtenstein-v-guatemala.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-nuclear-tests-cases-australia-v-france-new-zealand-v-france.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-oil-platforms-case-iran-v-usa.html": {
-        "grade": "A",
-        "score": 92,
-        "release": "BLOCKED",
         "has_video": true
     },
     "news-case-pae-araksa-2523.html": {
@@ -1223,29 +971,11 @@
         "release": "WARN",
         "has_video": true
     },
-    "news-case-pulp-mills-on-the-river-uruguay-argentina-v-uruguay.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
     "news-case-questions-relating-to-the-obligation-to-prosecute-or-extradite-belgium.html": {
         "grade": "A",
         "score": 86,
         "release": "BLOCKED",
         "has_video": true
-    },
-    "news-case-radwan-v-radwan-uk-family-division.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-rainbow-warrior-arbitration-new-zealand-v-france.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
     },
     "news-case-reparation-for-injuries-suffered-in-the-service-of-the-un-advisory-opi.html": {
         "grade": "A",
@@ -1253,113 +983,17 @@
         "release": "WARN",
         "has_video": true
     },
-    "news-case-reservations-to-the-convention-on-genocide-advisory-opinion.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-right-of-passage-over-indian-territory-portugal-v-india.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-s-s-i-m-alone-canada-v-usa.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-south-china-sea-arbitration-philippines-v-china.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-south-west-africa-cases-ethiopia-v-south-africa.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-southern-bluefin-tuna-cases-new-zealand-australia-v-japan.html": {
-        "grade": "A",
-        "score": 95,
-        "release": "BLOCKED",
-        "has_video": true
-    },
-    "news-case-tadic-case-icty.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
     "news-case-temple-of-preah-vihear-cambodia-v-thailand.html": {
         "grade": "A",
         "score": 87,
         "release": "WARN",
         "has_video": true
     },
-    "news-case-the-asylum-case-colombia-v-peru.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-the-caroline-case-uk-v-usa.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-the-enrica-lexie-incident-italy-v-india.html": {
-        "grade": "A",
-        "score": 86,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-the-lotus-case-france-v-turkey.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-the-naulilaa-incident-portugal-v-germany.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-the-volga-case-russian-federation-v-australia.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
     "news-case-thlaithaan-gaeng-khol-centre-filipin-2566.html": {
         "grade": "A",
         "score": 91,
         "release": "WARN",
         "has_video": true
-    },
-    "news-case-tinoco-arbitration-great-britain-v-costa-rica.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-trail-smelter-arbitration-usa-v-canada.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-trendtex-trading-corp-v-central-bank-of-nigeria-uk-court-of-appeal.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
     },
     "news-case-um-kha-nak-kan-thut-phaekh-phet-saudi-2533.html": {
         "grade": "A",
@@ -1372,24 +1006,6 @@
         "score": 91,
         "release": "WARN",
         "has_video": true
-    },
-    "news-case-united-states-diplomatic-and-consular-staff-in-tehran-usa-v-iran.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
-    },
-    "news-case-us-gasoline-wto-appellate-body.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": true
-    },
-    "news-case-western-sahara-advisory-opinion.html": {
-        "grade": "A",
-        "score": 85,
-        "release": "WARN",
-        "has_video": false
     },
     "news-case-yingsa-klangsar-canthaburi-dab-3-shp-pm-mrdkthind-4000-rai-2562.html": {
         "grade": "A",
@@ -2303,7 +1919,6 @@
     },
     "news-case-khdii-hopewell-landmark-2562.html": "A",
     "news-case-khdii-rice-pledging-landmark-2560.html": "A",
-    "news-case-khdii-itv-share-landmark-2567.html": "A",
     "news-case-khdii-ua-athon-corruption-2565.html": "A",
     "news-case-khdii-police-station-corruption-2566.html": "A",
     "news-case-khdii-blue-diamond-affair-2532.html": "A",
