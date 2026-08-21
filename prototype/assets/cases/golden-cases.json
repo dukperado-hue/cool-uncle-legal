@@ -175,7 +175,7 @@
    "cat": "คดีอาญา",
    "has_video": true,
    "rank": {
-    "grade": "S",
+    "grade": "VERIFIED_S",
     "score": 96,
     "s_verified": true,
     "judicial_case": "ฎีกา 5244/2539",
@@ -193,13 +193,13 @@
   {
    "id": "forex3d-2564",
    "title": "คดี Forex-3D: แชร์ลูกโซ่ Forex ระดับมโหฬาร (2564-2569)",
-   "cat": "คดีดายาณาาย · เศรษฐกิจ",
+   "cat": "คดีอาญา / เศรษฐกิจ",
    "has_video": false,
    "rank": {
     "grade": "S",
     "score": 95,
     "s_verified": true,
-    "judicial_case": "คดดำ อ.853/2564",
+    "judicial_case": "คดีดำ อ.853/2564",
     "verified_by": "Agent C — Handoff Brief (Tier 1 VERIFIED_S)"
    },
    "visibility": {
@@ -213,14 +213,14 @@
   },
   {
    "id": "tuohao-criminal-2566",
-   "title": "ทู้ห่ว 2566 : คดีบริหารระดับสูง - เหยื้อชีวิต ระดับสูง",
+   "title": "ทู้หาว 2566 : คดีดบริหารระดับสูง — เหยือชีวิตระดับสูง (S_CANDIDATE)",
    "cat": "คดีอาญา",
    "has_video": false,
    "rank": {
     "grade": "S_CANDIDATE",
     "score": 4,
     "s_verified": false,
-    "judicial_case": "คดีดำ ย.87/2566 ศาลอาญากรุงเทพมหานคร",
+    "judicial_case": "คดีดำ.87/2566 — ยกฟ้องจำเลยที่ 2 (ทู้ห้าว) — ประโยชน์แห่งความสงสัยตามประมวลกฎหมายวิธีอาญา ม.227; จำเลย 1+4 = 27.5 ปี; จำเลย 5 = 28 ปี; จำเลย 7, 11, 12 = 21 ปี (รายงาน",
     "verified_by": "Agent C - Handoff Brief (Tier 1 S_CANDIDATE, awaiting judicial authority)"
    },
    "visibility": {
@@ -235,13 +235,13 @@
   {
    "id": "tuohao-civil-2566",
    "title": "ทู้ห่ว 2566 : คดียึดอายัด ชั่วคราว ~117.9 ล้านบาท (S_CANDIDATE)",
-   "cat": "คดีแพ้ง · เศรฑกิจ",
+   "cat": "คดีแบ่ง · เสรฎกิจ",
    "has_video": false,
    "rank": {
     "grade": "S_CANDIDATE",
     "score": 4,
     "s_verified": false,
-    "judicial_case": "คสธ. ย์น่งสิง.93/2566, ย์น่ง.141/2566, ย์น่ง.176/2567 (ปปง.)",
+    "judicial_case": "คำสั่ง ปปง. ย.93/2566, ย.141/2566, ย.176/2567 — ยึด/อายัดชั่วคราว ~117.9 ล้านบาท (ชั่วคราว — ห้ามเขียน \"ศาลริบแล้ว\"); คดีแพ่งริบทรัพย์ค้างศาลแพ่ง",
     "verified_by": "Agent C - Handoff Brief (Tier 1 S_CANDIDATE, awaiting judicial authority)"
    },
    "visibility": {
@@ -262,8 +262,8 @@
     "grade": "S_CANDIDATE",
     "score": 4,
     "s_verified": false,
-    "judicial_case": "ศาลอาญา คดีพิพากษา 17 ก.พ. 2568; DSI คดีพิเษษ 43/2568 (ค้าง)",
-    "verified_by": null
+    "judicial_case": "คำพิพากษาอาญา 17 ก.พ. 2568 — CEO เอกฉัย ยิ้มวไลย์ จำคุก 5 ปี ไม่รอลงอาญา; นิติบุคคลปรับ 100,000 บาท; class action ถูกปฏิเสธ; DSI คดีเฉิเพาะ 43/2568 (28 เม.ย. 2",
+    "verified_by": "Agent C - Handoff Brief (Tier 1 S_CANDIDATE, awaiting judicial authority)"
    },
    "visibility": {
     "public": false,
@@ -283,8 +283,8 @@
     "grade": "S_CANDIDATE",
     "score": 4,
     "s_verified": false,
-    "judicial_case": "ศาลอาญาสั่งปิดกั่น ~เม.ย. 2566",
-    "verified_by": null
+    "judicial_case": "คำสั่งศาลอาญาปิดกั่น ~เม.ย. 2566 — พรเองบกอมพิวเตอร์ ม.14(1)(2)+ม.20; คดีอาญญาฎ่ทุ่งคหงม่นฎดำราส้นชงคำงมางสายันง",
+    "verified_by": "Agent C - Handoff Brief (Tier 1 S_CANDIDATE, awaiting judicial authority)"
    },
    "visibility": {
     "public": false,
