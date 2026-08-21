@@ -1660,5 +1660,45 @@
     "release": "WARN",
     "has_video": true,
     "judicial_potential": true
+  },
+  "news-case-khdii-thujrit-phasi-fin-history.html": {
+    "title": "คดีทุจริตภาษีฝิ่น — วิกฤตเจ้าภาษีนายอากรและต้นกำเนิดการปฏิรูปคลัง (พ.ศ. 2445)",
+    "score": 92,
+    "grade": "A",
+    "release": "WARN",
+    "has_video": false,
+    "notes": "Economic & Corruption History Batch 18"
+  },
+  "news-case-khdii-thujrit-huay-kor-khor-history.html": {
+    "title": "คดีทุจริตหวย ก.ข. — ตำนานขุนบานเถื่อนและการมอมเมาประชาชน (พ.ศ. 2459)",
+    "score": 90,
+    "grade": "A",
+    "release": "WARN",
+    "has_video": false,
+    "notes": "Economic & Corruption History Batch 18"
+  },
+  "news-case-khdii-thujrit-ngob-rotfai-history.html": {
+    "title": "คดีทุจริตงบประมาณรถไฟ — การตรวจสอบเมกะโปรเจกต์สายแรกของสยาม (พ.ศ. 2434)",
+    "score": 91,
+    "grade": "A",
+    "release": "WARN",
+    "has_video": false,
+    "notes": "Economic & Corruption History Batch 18"
+  },
+  "news-case-khdii-tax-farmer-embezzlement-history.html": {
+    "title": "คดีเจ้าภาษีนายอากรยักยอกเงินส่งคลัง — วิกฤตเงินฝืดและกำเนิดกระทรวงการคลัง (พ.ศ. 2416)",
+    "score": 92,
+    "grade": "A",
+    "release": "WARN",
+    "has_video": false,
+    "notes": "Economic & Corruption History Batch 18"
+  },
+  "news-case-khdii-thujrit-pamai-muang-nuea-history.html": {
+    "title": "คดีทุจริตสัมปทานป่าไม้ — ข้อพิพาทป่าสักและอธิปไตยเหนือทรัพยากร (พ.ศ. 2426)",
+    "score": 90,
+    "grade": "A",
+    "release": "WARN",
+    "has_video": false,
+    "notes": "Economic & Corruption History Batch 18"
   }
 }
