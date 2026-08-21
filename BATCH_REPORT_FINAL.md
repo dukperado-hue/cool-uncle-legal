@@ -200,3 +200,21 @@
 - **Quality Gate:** score >= 85, 0 BLOCK, 8 sections present.
 - **Judicial Potential:** High (Historical landmarks and international impact).
 - **Handoff:** Ready for Agent B (UI) and Agent C (Rank S verification).
+
+### Batch 43: Historical R3-R5 Legal Landmarks (2026-08-21)
+**Status: DEPLOYED ✅**
+**Cases Processed:** 5
+**Grade A Upgraded:** 5
+**Judicial Potential:** 2 (Amdaeng Yu, Tax Farmer)
+
+**Case List:**
+1. [amdaeng-yu-rights-2387](https://coolunclelab.com/news-case-khdii-amdaeng-yu-rights-2387.html) - คดีอำแดงอยู่ (ร.3): สิทธิสตรีและเสรีภาพเหนือร่างกาย
+2. [nu-kai-palace-scandal-2422](https://coolunclelab.com/news-case-khdii-nu-kai-palace-scandal-2422.html) - คดีหนูไก่ (ร.5): ความขัดแย้งในราชสำนักและจารีตประเพณี
+3. [opium-tax-corruption-2430](https://coolunclelab.com/news-case-khdii-opium-tax-corruption-2430.html) - คดีทุจริตภาษีฝิ่น (ร.5): การปฏิรูประบบภาษีและจุดเริ่มต้นกรมสรรพากร
+4. [railway-budget-corruption-2434](https://coolunclelab.com/news-case-khdii-railway-budget-corruption-2434.html) - คดีทุจริตงบรถไฟ (ร.5): การตรวจสอบงบประมาณแผ่นดินโดยกรมตรวจ
+5. [tax-farmer-embezzlement-2420](https://coolunclelab.com/news-case-khdii-tax-farmer-embezzlement-2420.html) - คดีพุ่ม สะอาด (ร.5): การบังคับคดีแพ่งต่อเจ้าภาษีนายอากร
+
+**Technical Notes:**
+- All cases pass Quality Gate (8 sections, paras <= 350).
+- Historical context derived from primary sources and Silpa-Mag.
+- Handoff ready for Agent C to verify historical judicial reasoning.
