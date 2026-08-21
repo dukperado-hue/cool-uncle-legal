@@ -2179,5 +2179,40 @@
     "score": 91,
     "has_video": true,
     "judicial_potential": true
+  },
+  "news-case-khdii-praewa-2553.html": {
+    "grade": "A",
+    "score": 90,
+    "has_video": true,
+    "judicial_potential": true,
+    "title": "คดีแพรวา (อุบัติเหตุ 9 ศพและความรับผิดทางละเมิด)"
+  },
+  "news-case-khdii-sawatdiwat-inheritance-2560.html": {
+    "grade": "A",
+    "score": 92,
+    "has_video": true,
+    "judicial_potential": true,
+    "title": "คดีมรดกสวัสดิวัตน์ (การแบ่งมรดกโดยการครอบครองเป็นส่วนสัด)"
+  },
+  "news-case-khdii-islamic-divorce-2545.html": {
+    "grade": "A",
+    "score": 88,
+    "has_video": true,
+    "judicial_potential": true,
+    "title": "คดีฟ้องหย่าสามีเปลี่ยนศาสนา (กฎหมายครอบครัวมุสลิมในพื้นที่เฉพาะ)"
+  },
+  "news-case-khdii-auntie-smash-car-2561.html": {
+    "grade": "A",
+    "score": 90,
+    "has_video": true,
+    "judicial_potential": true,
+    "title": "คดีป้าทุบรถ (สิทธิในความสงบสุขและเหตุเดือดร้อนรำคาญ)"
+  },
+  "news-case-khdii-korat-shooting-2563.html": {
+    "grade": "A",
+    "score": 91,
+    "has_video": true,
+    "judicial_potential": true,
+    "title": "คดีกราดยิงโคราช (ความรับผิดของรัฐและความหละหลวมในหน่วยงานทหาร)"
   }
 }
