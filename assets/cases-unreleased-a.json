@@ -3290,6 +3290,56 @@
         "video_status": "pending"
     },
     {
+        "slug": "billy-polajee-2557.html",
+        "title": "billy-polajee-2557.html",
+        "cat_tag": "คดทั่วไป",
+        "year": "",
+        "norm_year": 0,
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "akara-gold-mine-2560.html",
+        "title": "akara-gold-mine-2560.html",
+        "cat_tag": "คดทั่วไป",
+        "year": "",
+        "norm_year": 0,
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "mae-moh-power-plant-2546.html",
+        "title": "mae-moh-power-plant-2546.html",
+        "cat_tag": "คดทั่วไป",
+        "year": "",
+        "norm_year": 0,
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "klong-dan-corruption-2545.html",
+        "title": "klong-dan-corruption-2545.html",
+        "cat_tag": "คดทั่วไป",
+        "year": "",
+        "norm_year": 0,
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "bar-beer-demolition-2546.html",
+        "title": "bar-beer-demolition-2546.html",
+        "cat_tag": "คดทั่วไป",
+        "year": "",
+        "norm_year": 0,
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-praewa-2553.html",
         "title": "news-case-khdii-praewa-2553.html",
         "cat_tag": "คดทั่วไป",
@@ -3930,6 +3980,56 @@
         "video_status": "pending"
     },
     {
+        "slug": "kobkul-assassination-2549.html",
+        "title": "kobkul-assassination-2549.html",
+        "cat_tag": "คดทั่วไป",
+        "year": "",
+        "norm_year": 0,
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "peera-assassination-2555.html",
+        "title": "peera-assassination-2555.html",
+        "cat_tag": "คดทั่วไป",
+        "year": "",
+        "norm_year": 0,
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "charoen-wat-akson-2547.html",
+        "title": "charoen-wat-akson-2547.html",
+        "cat_tag": "คดทั่วไป",
+        "year": "",
+        "norm_year": 0,
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "saengchai-sunthornwat-2539.html",
+        "title": "saengchai-sunthornwat-2539.html",
+        "cat_tag": "คดทั่วไป",
+        "year": "",
+        "norm_year": 0,
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
+        "slug": "praman-chansue-assassination-plot-2536.html",
+        "title": "praman-chansue-assassination-plot-2536.html",
+        "cat_tag": "คดทั่วไป",
+        "year": "",
+        "norm_year": 0,
+        "score": 95,
+        "status": "Warn",
+        "video_status": "pending"
+    },
+    {
         "slug": "news-case-khdii-shipping-moo-witness-2546.html",
         "title": "news-case-khdii-shipping-moo-witness-2546.html",
         "cat_tag": "คดทั่วไป",
@@ -4008,105 +4108,5 @@
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
-    },
-    {
-        "slug": "mae-moh-power-plant-2546.html",
-        "title": "คดีโรงไฟฟ้าแม่เมาะ (Landmark สิทธิในสุขภาพและมลพิษทางอากาศ)",
-        "cat_tag": "คดีสิ่งแวดล้อม",
-        "year": "พ.ศ. 2535",
-        "norm_year": 2535,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
-    },
-    {
-        "slug": "praman-chansue-assassination-plot-2536.html",
-        "title": "คดีวางแผนสังหารประมาณ ชันซื่อ (2536)",
-        "cat_tag": "คดทั่วไป",
-        "year": "พ.ศ. 2536",
-        "norm_year": 2536,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "klong-dan-corruption-2545.html",
-        "title": "คดีคลองด่าน (มหากาพย์ทุจริตโครงการบำบัดน้ำเสีย)",
-        "cat_tag": "คดีคอรัปชัน",
-        "year": "พ.ศ. 2538",
-        "norm_year": 2538,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
-    },
-    {
-        "slug": "saengchai-sunthornwat-2539.html",
-        "title": "คดีสังหารแสงชัย สุนทรวัฒน์ (2539)",
-        "cat_tag": "คดทั่วไป",
-        "year": "พ.ศ. 2539",
-        "norm_year": 2539,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "bar-beer-demolition-2546.html",
-        "title": "คดีรื้อบาร์เบียร์ (สิทธิในทรัพย์สินและการจัดการโดยพลการ)",
-        "cat_tag": "คดีอาญา",
-        "year": "พ.ศ. 2546",
-        "norm_year": 2546,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
-    },
-    {
-        "slug": "charoen-wat-akson-2547.html",
-        "title": "คดีสังหารเจริญ วัดอักษร (2547)",
-        "cat_tag": "คดทั่วไป",
-        "year": "พ.ศ. 2547",
-        "norm_year": 2547,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "kobkul-assassination-2549.html",
-        "title": "คดีสังหาร ส.ส.กอบกุล นพอมรบดี (2549)",
-        "cat_tag": "คดทั่วไป",
-        "year": "พ.ศ. 2549",
-        "norm_year": 2549,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "peera-assassination-2555.html",
-        "title": "คดีสังหารนายกพีระ ตันติเศรณี (2555)",
-        "cat_tag": "คดทั่วไป",
-        "year": "พ.ศ. 2555",
-        "norm_year": 2555,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "pending"
-    },
-    {
-        "slug": "billy-polajee-2557.html",
-        "title": "คดีบิลลี่ พอละจี (Landmark การบังคับสูญหายและสิทธิกลุ่มชาติพันธุ์)",
-        "cat_tag": "คดีสิทธิมนุษยชน",
-        "year": "พ.ศ. 2557",
-        "norm_year": 2557,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
-    },
-    {
-        "slug": "akara-gold-mine-2560.html",
-        "title": "คดีเหมืองทองอัครา (ข้อพิพาท ISDS และผลกระทบสิ่งแวดล้อม)",
-        "cat_tag": "คดีสิ่งแวดล้อม",
-        "year": "พ.ศ. 2559",
-        "norm_year": 2559,
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
     }
 ]
