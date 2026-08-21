@@ -2054,5 +2054,35 @@
     "score": 88,
     "has_video": false,
     "judicial_potential": true
+  },
+  "news-case-khdii-royal-palace-rebellion-2492.html": {
+    "grade": "A",
+    "score": 91,
+    "has_video": true,
+    "judicial_potential": true
+  },
+  "news-case-khdii-manhattan-rebellion-2494.html": {
+    "grade": "A",
+    "score": 94,
+    "has_video": true,
+    "judicial_potential": true
+  },
+  "news-case-khdii-nurse-wilai-2511.html": {
+    "grade": "A",
+    "score": 89,
+    "has_video": false,
+    "judicial_potential": true
+  },
+  "news-case-khdii-five-murders-2477.html": {
+    "grade": "A",
+    "score": 87,
+    "has_video": false,
+    "judicial_potential": true
+  },
+  "news-case-khdii-peace-rebellion-2495.html": {
+    "grade": "A",
+    "score": 90,
+    "has_video": false,
+    "judicial_potential": true
   }
 }
