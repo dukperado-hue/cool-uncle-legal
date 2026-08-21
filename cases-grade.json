@@ -2080,10 +2080,9 @@
         "judicial_potential": true
     },
     "news-case-khdii-peace-rebellion-2495.html": {
+        "title": "กบฏสันติภาพ: การกวาดล้างปัญญาชนและเสรีภาพที่ถูกจองจำ",
         "grade": "A",
-        "score": 90,
-        "has_video": false,
-        "judicial_potential": true
+        "cat_tag": "คดีเด่นด้านสังคม"
     },
     "news-case-khdii-southern-governors-2445.html": {
         "grade": "A",
@@ -2337,6 +2336,26 @@
     },
     "news-case-khdii-illegitimate-child-inheritance-2563.html": {
         "title": "คดีสิทธิของบุตรนอกสมรส: การรับรองโดยพฤตินัยและสิทธิในมรดก",
+        "grade": "A",
+        "cat_tag": "คดีเด่นด้านสังคม"
+    },
+    "news-case-khdii-rs-130-rebellion-2454.html": {
+        "title": "กบฏ ร.ศ. 130: ประทีปดวงแรกแห่งการอภิวัฒน์ไทย",
+        "grade": "A",
+        "cat_tag": "คดยุคโบราณ"
+    },
+    "news-case-khdii-boworadet-rebellion-2476.html": {
+        "title": "กบฏบวรเดช: สงครามกลางเมืองครั้งแรกหลังการปฏิวัติ 2475",
+        "grade": "A",
+        "cat_tag": "คดีเด่นด้านสังคม"
+    },
+    "news-case-khdii-rama-8-forensic-landmark-2489.html": {
+        "title": "คดีสวรรคต ร.8: จุดกำเนิดและบรรทัดฐานนิติวิทยาศาสตร์ไทย",
+        "grade": "A",
+        "cat_tag": "คดีเด่นด้านสังคม"
+    },
+    "news-case-khdii-palace-rebellion-2492.html": {
+        "title": "กบฏวังหลวง: แผนช้างดำ-ช้างน้ำ และความพยายามครั้งสุดท้ายของปรีดี",
         "grade": "A",
         "cat_tag": "คดีเด่นด้านสังคม"
     }
