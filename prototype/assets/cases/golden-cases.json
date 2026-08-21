@@ -1646,6 +1646,44 @@
     "read",
     "play"
    ]
+  },
+  {
+   "id": "klong-dan-corruption-2545",
+   "title": "คดีทุจริตคลองด่าน (2545)",
+   "cat": "คดีเศรษฐกิจ",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
+  },
+  {
+   "id": "rice-pledging-landmark-2560",
+   "title": "คดีจำนำข้าว (2560)",
+   "cat": "คดีเศรษฐกิจ",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 85,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read",
+    "play"
+   ]
   }
  ],
  "series_hubs": [
@@ -1685,6 +1723,20 @@
     "boworadet-rebellion-2476",
     "palace-rebellion-2492",
     "young-turk-rebellion-2524"
+   ]
+  },
+  {
+   "series_id": "economic-crimes",
+   "series_title": "ซีรีส์: ทุจริตและคดีเศรษฐกิจครั้งใหญ่ (Economic Crimes & Corruption)",
+   "order": [
+    "forex3d-2564",
+    "zipmex-2565",
+    "klong-dan-corruption-2545",
+    "rice-pledging-landmark-2560",
+    "khdii-phum-saat-embezzlement-2440",
+    "khdii-ministry-agri-embezzlement-2416",
+    "khdii-khun-yuam-logging-2445",
+    "khdii-book-club-scandal-2449"
    ]
   }
  ]
