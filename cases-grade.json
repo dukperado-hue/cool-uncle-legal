@@ -1570,5 +1570,11 @@
   "score": 88,
   "release": "WARN",
   "has_video": true
+ },
+ "news-case-khdii-4-ratthamontri-2492.html": {
+  "grade": "A",
+  "score": 85,
+  "release": "WARN",
+  "has_video": false
  }
 }

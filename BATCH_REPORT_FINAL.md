@@ -225,3 +225,14 @@ Note: คดีเหล่านี้ยังคง release=WARN/BLOCKED เ�
 
 หมายเหตุการตรวจรอบสุดท้าย: 22 คด ICJ/ระหว่างประเทศมี legal issues 1-2 ข้อตามเนื้อหา legacy ที่มีอยู่ (ไม่ fabricate เพิ่ม) — จัดเป็น WARN ไม่ใช่ BLOCK
 codex warnings 2 รายการเป็นของเดิม (maaekaa overrides, external_law) — ไม่กระทบการปล่อย
+
+## HANDOFF BRIEF BATCH 3a — GAP-FILL PASS (21 Aug)
+After Agent C handoff brief re-verification, 5 remaining gaps were filled:
+- STARK class-action: มาตรา 241 พ.ร.บ.หลักทรัพย์ฯ confirmed + เลขสำนวน พ.1061/2567 ใน summary
+- EIA สุขุมวิท: ลบเลขคดี 522/2566 จากทุกตำแหน่ง (ไม่พบหลักฐานคำพิพากษา)
+- Concept Water: แทนที่บทเบ็ดเตล็ดแพ่ง (ม.4/5/14) ด้วย พ.ร.ก.การกู้ยืมเงินที่ผิดกฎหมาย พ.ศ. 2527 ม.4/5 (external_law)
+- ทู้ห่าว main: เพิ่มแหล่งข่าว Khaosod (ศาลอาญาตั้งข้อสงสัยยกฟ้อง 11 ก.พ. 2568)
+- Nice Review: DSI สำนวน 7 ผู้ต้องหา 7 ก.ย. 2567 ✓ (ตรวจสอบซ้ำแล้ว)
+
+ผล: full_validate เหลือ 25 ปัญหา = 22 WARN (ICJ legal issues ต่ำตาม legacy — รอ Agent C enrich) + 1 pre-existing sections missing + 2 external_law ที่คาดไว้ ไม่มี BLOCK ใหม่
+ไฟล์ที่แก้: class-action-phuuthuue-hunkuu-stark-2567, concept-water-2565, khdiituhawkhadilak-2568, EIA สุขุมวิท (ทำก่อนหน้านี้)
