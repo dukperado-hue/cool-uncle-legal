@@ -2084,5 +2084,35 @@
     "score": 90,
     "has_video": false,
     "judicial_potential": true
+  },
+  "news-case-khdii-southern-governors-2445.html": {
+    "grade": "A",
+    "score": 92,
+    "has_video": true,
+    "judicial_potential": true
+  },
+  "news-case-khdii-nang-somboon-2475.html": {
+    "grade": "A",
+    "score": 88,
+    "has_video": false,
+    "judicial_potential": true
+  },
+  "news-case-khdii-haji-sulong-2497.html": {
+    "grade": "A",
+    "score": 95,
+    "has_video": true,
+    "judicial_potential": true
+  },
+  "news-case-khdii-ku-chat-rebellion-2491.html": {
+    "grade": "A",
+    "score": 90,
+    "has_video": false,
+    "judicial_potential": true
+  },
+  "news-case-khdii-rice-corruption-2489.html": {
+    "grade": "A",
+    "score": 89,
+    "has_video": false,
+    "judicial_potential": true
   }
 }
