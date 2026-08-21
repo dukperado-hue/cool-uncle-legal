@@ -52,7 +52,6 @@ news-case-khdii-kamnan-talad-ayutthaya.html | คดีกำนันตลา�
 | news-case-khdii-nokkaei-2419 | คดีหนูไก๋ | หาคลิปภาษาไทยไม่มี
 | news-case-khdii-amdaeng-yu | คดีอำแดงอยู่ | หาคลิปภาษาไทยไม่มี
 | news-case-khdii-phrapreecha-prachin-2421 | คดีพระปรีชากลการ | หาคลิปภาษาไทยไม่มี
-| news-case-khdii-phrayodmueangkwang-2436 | คดีพระยอดเมืองขวาง | หาคลิปภาษาไทยไม่มี
 | news-case-khdii-kusar-kulab-2436 | คดีก.ศ.ร. กุหลาบ | หาคลิปภาษาไทยไม่มี
 | news-case-khdii-phra-nang-reualom-2423 | คดีพระนางเรือล่ม | หาคลิปภาษาไทยไม่มี
 | news-case-khdii-aiauaom-okroy-2414 | คดีอ้ายอ่วม อกโรย | หาคลิปภาษาไทยไม่มี
