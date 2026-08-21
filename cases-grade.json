@@ -1951,12 +1951,6 @@
         "grade": "A",
         "cat_tag": "คดีเด่นด้านสังคม"
     },
-    "news-case-khdii-southern-governors-2445.html": {
-        "grade": "A",
-        "score": 92,
-        "has_video": true,
-        "judicial_potential": true
-    },
     "news-case-khdii-nang-somboon-2475.html": {
         "grade": "A",
         "score": 88,
@@ -2276,7 +2270,6 @@
         "grade": "A",
         "cat_tag": "คดีเด่นด้านสังคม"
     },
-    "news-case-khdii-fake-banknote-r5-2446.html": "A",
     "news-case-khdii-ao-luek-massacre-2560.html": {
         "grade": "A",
         "score": 95,
@@ -2430,9 +2423,7 @@
         "grade": "A",
         "title": "คดีเอ็กซ์ จักรกฤษณ์: ปมจ้างวานฆ่าในครอบครัว"
     },
-    "news-case-khdii-phraya-raka.html": "A",
     "news-case-khdii-nu-kai.html": "A",
-    "news-case-khdii-nang-thong-luean.html": "A",
     "news-case-khdii-preecha-kolakan.html": "A",
     "news-case-khdii-yot-mueang-khwang.html": "A"
 }

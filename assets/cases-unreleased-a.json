@@ -378,24 +378,6 @@
         "video_status": "pending"
     },
     {
-        "slug": "news-case-khdii-southern-governors-2445.html",
-        "title": "คดีกบฏ 7 เจ้าเมืองภาคใต้ (การปฏิรูปการปกครองมณฑลเทศาภิบาล)",
-        "cat_tag": "คดยุคโบราณ",
-        "year": "พ.ศ. 2444",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
-    },
-    {
-        "slug": "news-case-khdii-fake-banknote-r5-2446.html",
-        "title": "คดีธนบัตรปลอมสมัย ร.5: อาชญากรรมเศรษฐกิจและพระราชโอรส",
-        "cat_tag": "คดยุคโบราณ",
-        "year": "พ.ศ. 2446",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
-    },
-    {
         "slug": "news-case-dogger-bank-incident-great-britain-russia.html",
         "title": "Dogger Bank Incident (Great Britain/Russia)",
         "cat_tag": "คดีอาญา",
@@ -439,24 +421,6 @@
         "score": 95,
         "status": "Warn",
         "video_status": "pending"
-    },
-    {
-        "slug": "news-case-khdii-nang-thong-luean.html",
-        "title": "คดีนางทองเลื่อน: หญิงใจยักษ์และโทษประหารรายสุดท้าย?",
-        "cat_tag": "คดอาญาในอดีต",
-        "year": "พ.ศ. 2452",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
-    },
-    {
-        "slug": "news-case-khdii-phraya-raka.html",
-        "title": "คดีพญาระกา: บทละครหมิ่นพระบรมเดชานุภาพ?",
-        "cat_tag": "คดประวัติศาสตร์",
-        "year": "พ.ศ. 2453",
-        "score": 95,
-        "status": "Warn",
-        "video_status": "confirmed"
     },
     {
         "slug": "news-case-khdii-rs130-rebellion-2455.html",
