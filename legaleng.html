@@ -14,7 +14,7 @@
 
 <title>ภาษาอังกฤษของนักกฎหมาย · Cool Uncle Legal Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;800&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;800&family=Sarabun:wght@400;500;600;700&family=IBM+Plex+Sans+Thai+Looped:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --paper:#FBF9F4;
@@ -121,6 +121,9 @@ body{
   color:var(--ink);min-height:100vh;font-size:16px;line-height:1.75;
 }
 h1,h2{font-family:'Noto Serif Thai',serif}
+.home-bar,.page-head .subtitle,.notice,.mode-tab,.tts-bar,.tts-hint,footer,.coffee-widget{
+  font-family:'IBM Plex Sans Thai Looped',system-ui,sans-serif;
+}
 
 .wrap{max-width:860px;margin:0 auto;padding:28px 16px 60px}
 
@@ -170,12 +173,20 @@ h1,h2{font-family:'Noto Serif Thai',serif}
   width:34px;height:34px;flex-shrink:0;border-radius:50%;background:var(--gold-soft);
   color:#8F6511;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13.5px;
 }
-.lecture-title{flex:1;font-weight:700;color:var(--ink);font-size:14.5px}
+.lecture-title{flex:1;font-weight:700;color:var(--ink);font-size:14.5px;font-family:'Noto Serif Thai',serif}
 .lecture-toggle{color:var(--ink-faint);font-size:13px;flex-shrink:0;transition:transform .2s}
 .lecture-row.open .lecture-toggle{transform:rotate(180deg)}
-.lecture-body{display:none;padding:0 16px 16px 64px;font-size:14px;color:var(--ink-soft);white-space:pre-line;line-height:1.75}
+.lecture-body{display:none;padding:0 16px 16px 64px;font-size:14px;color:var(--ink-soft);line-height:1.75}
 .lecture-row.open .lecture-body{display:block}
-.lecture-video{margin:12px 0 16px}
+.lecture-body p{margin:0 0 15px}
+.lecture-body p:last-child{margin-bottom:0}
+.lec-subhead{
+  font-family:'Noto Serif Thai',serif;font-weight:700;color:var(--ink);
+  font-size:15.5px;line-height:1.45;margin:24px 0 10px;padding-bottom:6px;
+  border-bottom:1.5px solid var(--gold-soft);
+}
+.lec-subhead:first-child{margin-top:0}
+.lecture-video{margin:6px 0 20px}
 .lecture-video .video-frame-wrap{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:10px;overflow:hidden}
 .lecture-video .video-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 /* TTS bar */
@@ -970,10 +981,12 @@ Review และปิดท้ายด้วย If-Clause กับ Wish
 **Present Perfect Continuous** (S + has/have + been + V.ing): คล้าย Present Perfect แต่เน้นย้ำ
 ความต่อเนื่องและมีแนวโน้มจะทำต่อไปเรื่อยๆ
 
-หมวด Past Tenses (สอนอย่างละเอียด) — อาจารย์เน้นย้ำว่า "ความละเอียดทางไวยากรณ์ในกลุ่ม Past มี
-ความสำคัญอย่างยิ่งในการทำคดีความทางกฎหมายหรือการสืบพยาน" เพราะต้องใช้ระบุลำดับเหตุการณ์ว่า
-อะไรเกิดก่อน-หลัง หรือมีเหตุการณ์ใดเข้ามาแทรก (ทบทวน Past Simple พร้อมกริยา 3 ช่องแล้วต่อด้วย
-3 tense ใหม่)
+หมวด Past Tenses (สอนอย่างละเอียด)
+
+อาจารย์เน้นย้ำว่า "ความละเอียดทางไวยากรณ์ในกลุ่ม Past มีความสำคัญอย่างยิ่งในการทำคดีความทางกฎหมาย
+หรือการสืบพยาน" เพราะต้องใช้ระบุลำดับเหตุการณ์ว่าอะไรเกิดก่อน-หลัง หรือมีเหตุการณ์ใดเข้ามาแทรก
+(ทบทวน Past Simple พร้อมกริยา 3 ช่องแล้วต่อด้วย 3 tense ใหม่)
+
 **Past Continuous** (S + was/were + V.ing): เหตุการณ์ที่กำลังเกิดขึ้นในอดีต ณ ช่วงเวลาที่กำลัง
 พูดถึง, เหตุการณ์ที่กำลังดำเนินต่อเนื่องอยู่ในอดีตแล้วมีอีกเหตุการณ์หนึ่งเข้ามาแทรก หรือเล่าถึง
 สองเหตุการณ์ที่กำลังเกิดขึ้นพร้อมกันในอดีต มักมีคำว่า at that moment, at this time yesterday
@@ -990,6 +1003,8 @@ as soon as, when, by the time
 by the time
 * ตัวอย่างประโยค: "Sam had been singing before he had a child." (แซมร้องเพลงต่อเนื่องมาตลอด
 ตั้งแต่อดีตและยังคงร้องต่อแม้หลังมีลูกแล้ว)
+
+[[VIDEO]]
 
 หมวดกิจกรรมคั่นบท — Listening: "How do the courts decide whether or not to grant bail?"
 หลังสอนกลุ่ม Present และ Past จบ อาจารย์เปิดคลิปเสียงจาก **Study Legal English Podcast
@@ -1399,8 +1414,22 @@ function renderLectureBody(l){
   escaped = escaped.replace(/\[\[V\]\]([\s\S]+?)\[\[\/V\]\]/g, '<span class="sv-verb">$1</span>');
   escaped = escaped.replace(/\[\[O\]\]([\s\S]+?)\[\[\/O\]\]/g, '<span class="sv-obj">$1</span>');
   escaped = escaped.replace(/\[\[G\]\]([\s\S]+?)\[\[\/G\]\]/g, '<span class="sv-note">$1</span>');
+  escaped = escaped.replace(/\n*(หมวด[^\n]*)\n/g, '\n\n\x01$1\x02\n\n');
+
   const video = l.video ? `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${l.video}" title="วิดีโอประกอบบรรยายครั้งที่ ${l.n}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div></div>` : '';
-  return video + escaped;
+  const inlineVideo = !!video && /\[\[VIDEO\]\]/.test(escaped);
+  if(inlineVideo) escaped = escaped.replace(/\[\[VIDEO\]\]/g, '\x03');
+
+  const blocks = escaped.split(/\n{2,}/).map(b => b.trim()).filter(Boolean);
+  const bodyHtml = blocks.map(b => {
+    if(b === '\x03') return video;
+    if(b.charCodeAt(0) === 1 && b.charCodeAt(b.length-1) === 2){
+      return `<div class="lec-subhead">${b.slice(1,-1)}</div>`;
+    }
+    return `<p>${b.replace(/\n/g,'<br>')}</p>`;
+  }).join('');
+
+  return (inlineVideo ? '' : video) + bodyHtml;
 }
 function renderLectures(list, containerId, prefix){
   const el = document.getElementById(containerId);
