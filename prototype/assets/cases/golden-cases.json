@@ -428,10 +428,10 @@
    "has_video": false,
    "rank": {
     "grade": "A",
-    "score": 90,
+    "score": 92,
     "s_verified": true,
-    "judicial_case": "ศาลไทยยกฟ้อง 16 มี.ค. 2437 → ศาลผสมไทย-ฝรั่งเศส (ฝรั่งเศส 3 ไทย 2) จำคุก 20 ปี 3 ต.ค. 2437 → ปล่อยตัว 6 พ.ย. 2441",
-    "verified_by": "claude_content_upgrade 2026-08-23 (wikipedia + mgronline, cross-verified)"
+    "judicial_case": "ศาลรับสั่งพิเศษ (ไทย) ยกฟ้อง 16 มี.ค. 2437 → ศาลผสมไทย-ฝรั่งเศส (ฝรั่งเศส 3 ไทย 2) จำคุก 20 ปี 3 ต.ค. 2437 → ปล่อยตัว 6 พ.ย. 2441",
+    "verified_by": "claude_content_upgrade 2026-08-23 (4 independent sources: wikipedia TH/EN, mgronline, silpa-mag, matichon)"
    },
    "visibility": {
     "public": true,
