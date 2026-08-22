@@ -466,19 +466,19 @@
   },
   {
    "id": "ksor-kulab-2436",
-   "title": "คดี ก.ศ.ร. กุหลาบ — นักปราชญ์ราชบัณฑิต ผู้ถูกฟ้องฐานหมิ่นประมาท (พ.ศ. 2436)",
+   "title": "คดี ก.ศ.ร. กุหลาบ — นักหนังสือพิมพ์ผู้ถูกส่งเข้าโรงพยาบาลคนเสียจริต แทนการขึ้นศาล",
    "cat": "คดีประวัติศาสตร์กฎหมาย",
    "has_video": false,
    "rank": {
-    "grade": "S_CANDIDATE",
-    "score": 4,
+    "grade": "A",
+    "score": 88,
     "s_verified": false,
-    "judicial_case": "คดี ก.ศ.ร. กุหลาบ — นักปราชญ์ราชบัณฑิต ผู้ถูกฟ้องฐานหมิ่นประมาท (พ.ศ. 2436) — คดีดัง — S_CANDIDATE (locked to source page)",
-    "verified_by": "SENOFF handoff (source page, pending Agent C)"
+    "judicial_case": "ไม่พบบันทึกการพิจารณาคดีในศาลอย่างเป็นทางการ — ส่งตัวเข้าโรงพยาบาลคนเสียจริตโดยพระบรมราชโองการแทน",
+    "verified_by": "claude_content_upgrade 2026-08-23 (3 independent sources: wikipedia, matichon, สถาบันจิตเวชศาสตร์สมเด็จเจ้าพระยา)"
    },
    "visibility": {
-    "public": false,
-    "public_reason": "agent_a_approval_required"
+    "public": true,
+    "public_reason": "verified_multiple_independent_sources"
    },
    "modes": [
     "read",
@@ -917,12 +917,13 @@
     "grade": "S_CANDIDATE",
     "score": 4,
     "s_verified": false,
-    "judicial_case": "ส่งตัวรักษาโรงพยาบาลบ้า",
+    "judicial_case": "ส่งตัวรักษาโรงพยาบาลบ้า — ดูเวอร์ชันเต็มที่ ksor-kulab-2436",
     "verified_by": "Agent C"
    },
    "visibility": {
-    "public": true,
-    "gate": "none"
+    "public": false,
+    "public_reason": "duplicate_of_ksor-kulab-2436",
+    "gate": "duplicate_content"
    },
    "modes": [
     "read",

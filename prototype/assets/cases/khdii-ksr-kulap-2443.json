@@ -6,8 +6,10 @@
   "cat": "คดีกึ่งการเมือง"
  },
  "visibility": {
-  "public": true,
-  "gate": "none"
+  "public": false,
+  "gate": "duplicate_content",
+  "public_reason": "duplicate_of_ksor-kulab-2436",
+  "internal_notes": "2026-08-23: same real event as ksor-kulab-2436 (ก.ศ.ร. กุหลาบ ถูกส่งเข้าโรงพยาบาลคนเสียจริตแทนการขึ้นศาล) — that slug now has the fully-researched, source-verified version (4x more content, matches renderer schema). This stub kept per RULE 5 (never delete) but unpublished to avoid showing two conflicting versions of the same story. Unverified claim in this stub ('รัชกาลที่ 5 ทรงแต่งตั้งคณะกรรมการสอบสวน') was NOT carried over to ksor-kulab-2436 -- not found in any independently checked source."
  },
  "rank": {
   "grade": "S_CANDIDATE",
