@@ -1,19 +1,7 @@
 {
-  "news-case-armed-activities-on-the-territory-of-the-congo-new-application-2002-dr.html": {
-    "grade": "A",
-    "score": 85,
-    "release": "WARN",
-    "has_video": true
-  },
   "news-case-dewiid-baernaat-moraat-kha-hanshp-chaophraya-2559.html": {
     "grade": "A",
     "score": 91,
-    "release": "WARN",
-    "has_video": true
-  },
-  "news-case-dogger-bank-incident-great-britain-russia.html": {
-    "grade": "A",
-    "score": 85,
     "release": "WARN",
     "has_video": true
   },
@@ -83,12 +71,6 @@
     "release": "BLOCKED",
     "has_video": true
   },
-  "news-case-f-kenginekhruue-khaaysaarwatrchaw-2566.html": {
-    "grade": "A",
-    "score": 89,
-    "release": "BLOCKED",
-    "has_video": true
-  },
   "news-case-f-kengintuuhaaw-aayadthraphysin-2566.html": {
     "grade": "A",
     "score": 86,
@@ -125,35 +107,11 @@
     "release": "WARN",
     "has_video": true
   },
-  "news-case-f-ngeriiykkhnulchwi-phayabalsaw-thukhkh-a.html": {
-    "grade": "A",
-    "score": 91,
-    "release": "WARN",
-    "has_video": true
-  },
   "news-case-f-ngeriiykkhuuenkh-nghman-2560.html": {
     "grade": "A",
     "score": 91,
     "release": "WARN",
     "has_video": true
-  },
-  "news-case-f-ngeriiyksaengchaaisuntornwattan-2539.html": {
-    "grade": "A",
-    "score": 92,
-    "release": "BLOCKED",
-    "has_video": true
-  },
-  "news-case-gabcikovo-nagymaros-project-hungary-slovakia.html": {
-    "grade": "A",
-    "score": 85,
-    "release": "WARN",
-    "has_video": false
-  },
-  "news-case-gulf-of-maine-area-case-canada-usa.html": {
-    "grade": "A",
-    "score": 85,
-    "release": "WARN",
-    "has_video": false
   },
   "news-case-khdii-9near-aehkek-rkhomykh-muul-2566.html": {
     "grade": "A",
@@ -401,12 +359,6 @@
     "release": "WARN",
     "has_video": false
   },
-  "news-case-khdiicchabkum-esiiyaepng-naaohnd-2566.html": {
-    "grade": "A",
-    "score": 90,
-    "release": "WARN",
-    "has_video": false
-  },
   "news-case-khdiicchadchuue-aethbeltnakeriiyn-one-tablet-per-child-2556.html": {
     "grade": "A",
     "score": 92,
@@ -438,12 +390,6 @@
     "has_video": true
   },
   "news-case-khdiichaayswisbiibkh-phrryaaaithy-nkhrraachsiimaa-2567.html": {
-    "grade": "A",
-    "score": 85,
-    "release": "WARN",
-    "has_video": false
-  },
-  "news-case-khdiichii-uy-aech-ueng-2501.html": {
     "grade": "A",
     "score": 85,
     "release": "WARN",
@@ -532,12 +478,6 @@
     "score": 92,
     "release": "WARN",
     "has_video": false
-  },
-  "news-case-khdiiesrim-saakhrraasdr-2541.html": {
-    "grade": "A",
-    "score": 92,
-    "release": "WARN",
-    "has_video": true
   },
   "news-case-khdiiewbphnan-minnii-2567.html": {
     "grade": "A",
@@ -660,12 +600,6 @@
     "has_video": true
   },
   "news-case-khdiikhaatkrrm-2-nakth-ngethiiywekaaaetaa-2557.html": {
-    "grade": "A",
-    "score": 93,
-    "release": "WARN",
-    "has_video": true
-  },
-  "news-case-khdiikhaatkrrm-5-sph-khr-bkhrawchlburii-2557.html": {
     "grade": "A",
     "score": 93,
     "release": "WARN",
@@ -917,57 +851,15 @@
     "release": "WARN",
     "has_video": false
   },
-  "news-case-khdiiwisaamay-occh-daanchaang-2539.html": {
-    "grade": "A",
-    "score": 94,
-    "release": "WARN",
-    "has_video": true
-  },
   "news-case-khdiizipmex-2565.html": {
     "grade": "A",
     "score": 86,
     "release": "WARN",
     "has_video": false
   },
-  "news-case-land-island-and-maritime-frontier-dispute-el-salvador-honduras.html": {
-    "grade": "A",
-    "score": 85,
-    "release": "WARN",
-    "has_video": false
-  },
-  "news-case-military-and-paramilitary-activities-in-and-against-nicaragua-nicaragu.html": {
-    "grade": "A",
-    "score": 86,
-    "release": "WARN",
-    "has_video": true
-  },
-  "news-case-pae-araksa-2523.html": {
-    "grade": "A",
-    "score": 85,
-    "release": "WARN",
-    "has_video": false
-  },
-  "news-case-pinochet-case-uk-house-of-lords.html": {
-    "grade": "A",
-    "score": 85,
-    "release": "WARN",
-    "has_video": true
-  },
-  "news-case-questions-relating-to-the-obligation-to-prosecute-or-extradite-belgium.html": {
-    "grade": "A",
-    "score": 86,
-    "release": "BLOCKED",
-    "has_video": true
-  },
   "news-case-reparation-for-injuries-suffered-in-the-service-of-the-un-advisory-opi.html": {
     "grade": "A",
     "score": 85,
-    "release": "WARN",
-    "has_video": true
-  },
-  "news-case-temple-of-preah-vihear-cambodia-v-thailand.html": {
-    "grade": "A",
-    "score": 87,
     "release": "WARN",
     "has_video": true
   },
@@ -1440,12 +1332,6 @@
     "release": "RELEASE",
     "has_video": true
   },
-  "news-case-khdii-hangthong-2542.html": {
-    "grade": "A",
-    "score": 88,
-    "release": "RELEASE",
-    "has_video": true
-  },
   "news-case-khdii-somchai-neelapaijit-2547.html": {
     "grade": "A",
     "score": 92,
@@ -1599,13 +1485,6 @@
     "has_video": true,
     "judicial_potential": true,
     "title": "คดีแพรวา (อุบัติเหตุ 9 ศพและความรับผิดทางละเมิด)"
-  },
-  "news-case-khdii-sawatdiwat-inheritance-2560.html": {
-    "grade": "A",
-    "score": 92,
-    "has_video": true,
-    "judicial_potential": true,
-    "title": "คดีมรดกสวัสดิวัตน์ (การแบ่งมรดกโดยการครอบครองเป็นส่วนสัด)"
   },
   "news-case-khdii-islamic-divorce-2545.html": {
     "grade": "A",

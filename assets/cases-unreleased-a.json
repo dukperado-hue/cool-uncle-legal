@@ -1,9 +1,19 @@
 [
   {
-    "title": "คดีเจ้าเมืองเชลียง &#x27;ทรยศต่อราชอาณาจักร&#x27; พ.ศ. 2003 — การสวามิภักดิ์ลานนาและสงครามล้านนา-อโยธยา",
-    "year": "พ.ศ. 2001",
-    "norm_year": 2001,
-    "slug": "news-case-khdii-cheliang-2003.html",
+    "title": "ประเมินภาษีที่ดินและสิ่งปลูกสร้างไม่เป็นธรรม (คดี 534/2566)",
+    "year": "พ.ศ. 1077",
+    "norm_year": 1077,
+    "slug": "news-case-khdiipraeminphaasiithiidinaelasingpluuksraangaimepnthrrm-2566.html",
+    "cat_tag": "คดีประวัติศาสตร์",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
+    "title": "คดีกำนันตลาดรีดเงินเกินพิกัด — พระอัยการลักษณะอาญาหลวง บทที่ 3 สมัยอยุธยา (พ.ศ. 1895–2310)",
+    "year": "พ.ศ. 1895",
+    "norm_year": 1895,
+    "slug": "news-case-khdii-kamnan-talad-ayutthaya.html",
     "cat_tag": "คดีประวัติศาสตร์",
     "score": 95,
     "status": "Warn",
@@ -11,8 +21,8 @@
   },
   {
     "title": "กฎมณเฑียรบาล พ.ศ. 2001 — กฎหมายที่เขียนเพื่อรักษาพระราชา สมัยสมเด็จพระบรมไตรโลกนาถ",
-    "year": "พ.ศ. 2005",
-    "norm_year": 2005,
+    "year": "พ.ศ. 1991",
+    "norm_year": 1991,
     "slug": "news-case-khdii-mondeeban-2001.html",
     "cat_tag": "คดีประวัติศาสตร์",
     "score": 95,
@@ -20,20 +30,30 @@
     "video_status": "pending"
   },
   {
-    "title": "Questions relating to the Obligation to Prosecute or Extradite (Belgium v. Senegal) — สืบกฎหมายจากคดี",
-    "year": "พ.ศ. 2012",
-    "norm_year": 2012,
-    "slug": "news-case-questions-relating-to-the-obligation-to-prosecute-or-extradite-belgium.html",
+    "title": "คดีเจ้าเมืองเชลียง &#x27;ทรยศต่อราชอาณาจักร&#x27; พ.ศ. 2003 — การสวามิภักดิ์ลานนาและสงครามล้านนา-อโยธยา",
+    "year": "พ.ศ. 2003",
+    "norm_year": 2003,
+    "slug": "news-case-khdii-cheliang-2003.html",
     "cat_tag": "คดีประวัติศาสตร์",
     "score": 95,
     "status": "Warn",
-    "video_status": "confirmed"
+    "video_status": "pending"
   },
   {
     "title": "คดีขุนวรวงศาธิราช  — ผู้เฝ้าหอพระที่ก้าวขึ้นนั่งบัลลังก์ และถูกปลงพระชนม์ที่คลองสระบัว",
     "year": "พ.ศ. 2091",
     "norm_year": 2091,
     "slug": "news-case-khdii-warawongsa-2091.html",
+    "cat_tag": "คดีประวัติศาสตร์",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
+    "title": "คดีโกงข้าวหลวง/เงินปลอม ยุคธนบุรี — ศาลทหารเป็นหลักและโทษไถ่ตัวได้ (พ.ศ. 2310–2325)",
+    "year": "พ.ศ. 2310",
+    "norm_year": 2310,
+    "slug": "news-case-khdii-pongkhaoluang-nginthplom-2310-2325.html",
     "cat_tag": "คดีประวัติศาสตร์",
     "score": 95,
     "status": "Warn",
@@ -60,139 +80,29 @@
     "video_status": "pending"
   },
   {
-    "title": "บรรทัดฐานหมิ่นประมาทออนไลน์: การแยกแยะระหว่างข้อมูลเท็จกับความผิดฐานหมิ่นประมาท",
-    "year": "พ.ศ. 2325",
-    "norm_year": 2325,
-    "slug": "news-case-khdii-computer-defamation-2550.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "อุ้มเรียกค่าไถ่นักศึกษาจีน จิน คาน",
-    "year": "พ.ศ. 2325",
-    "norm_year": 2325,
-    "slug": "news-case-khdii-umeriiykkhaaaithnaksueksaacchiin-cchin-khaan-2566.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "อุ้มฆ่า ฮันส์ ปีเตอร์ มาค",
-    "year": "พ.ศ. 2325",
-    "norm_year": 2325,
-    "slug": "news-case-khdii-umkhaa-hans-piiet-r-maakh-2566.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "เพิกถอนคำสั่งให้ออกจากราชการ พล.ต.อ.สุรเชษฐ์ หักพาล",
-    "year": "พ.ศ. 2325",
-    "norm_year": 2325,
-    "slug": "news-case-khdiiephikth-nkhamsangaih-kcchaakraachkaar-phl-t-surechsth-hakphaal-25.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "คำร้องขอฟ้องเพิกถอนการอนุมัติรายงาน EIA คอนโดมิเนียมสุขุมวิท (ศาลปกครองกลาง)",
-    "year": "พ.ศ. 2325",
-    "norm_year": 2325,
-    "slug": "news-case-khdiiephikth-nraayngaan-eia-kh-nodmieniiymyaansukhumwith-2566.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "ผู้บริโภคฟ้องบริษัทประกัน ปฏิเสธการจ่ายโควิด &quot;เจอ จ่าย จบ&quot; (2564-2565)",
-    "year": "พ.ศ. 2325",
-    "norm_year": 2325,
-    "slug": "news-case-khdiiphuubriophkhf-ngbrisathprakan-ptiesthkaarcchaayokhwid-ecch-cchaay.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "สมคิด พุ่มพวง (2548, 2562)",
-    "year": "พ.ศ. 2325",
-    "norm_year": 2325,
-    "slug": "news-case-khdiismkhid-phumphwng-2548-2562.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "คดี Forex-3D แชร์ลูกโซ่ Forex หลอกลวงผู้ลงทุนทั่วประเทศ (2565–2569)",
+    "title": "คดีทุจริตข้าวสาร (คอรัปชันยุคหลังสงครามโลกครั้งที่ 2)",
     "year": "พ.ศ. 2326",
     "norm_year": 2326,
-    "slug": "news-case-khdii-forex-3d-cchabkumdaaraaephimetim-2565-2566.html",
+    "slug": "news-case-khdii-rice-corruption-2489.html",
     "cat_tag": "คดีประวัติศาสตร์",
     "score": 95,
     "status": "Warn",
     "video_status": "pending"
   },
   {
-    "title": "คดีแชร์แม่ชม้อย (ตำนานแชร์ลูกโซ่น้ำมันหมื่นล้าน)",
-    "year": "พ.ศ. 2326",
-    "norm_year": 2326,
-    "slug": "news-case-khdii-mae-chamoy-2528.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "คดีถอนพาสปอร์ต: บรรทัดฐานเสรีภาพการเดินทางและการตรวจสอบดุลพินิจรัฐ",
-    "year": "พ.ศ. 2326",
-    "norm_year": 2326,
-    "slug": "news-case-khdii-passport-revocation-2560.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "คดีอดีตพระภาวนาพุทธโท — คดีล่วงละเมิดเด็กหญิงชาวเขา",
+    "title": "คดี 14 ตุลา (การเรียกร้องรัฐธรรมนูญและจุดจบ 3 ทรราช)",
     "year": "พ.ศ. 2327",
     "norm_year": 2327,
-    "slug": "news-case-khdii-phawana-2538.html",
+    "slug": "news-case-khdii-14-october-2516.html",
     "cat_tag": "คดีประวัติศาสตร์",
     "score": 95,
     "status": "Warn",
     "video_status": "confirmed"
-  },
-  {
-    "title": "แก๊งคอลเซ็นเตอร์หลอกโอนเงินข้ามชาติ (2565–2566)",
-    "year": "พ.ศ. 2327",
-    "norm_year": 2327,
-    "slug": "news-case-khdiikaengkholsentoeloakonngoendamkhamchat-2566.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "คดีนวลฉวี: โศกนาฏกรรมความรักและบทเรียนนิติเวชศาสตร์ไทย",
-    "year": "พ.ศ. 2328",
-    "norm_year": 2328,
-    "slug": "news-case-khdii-nualchawee-2502.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
   },
   {
     "title": "คดีเด็ก 14 ปี ยิงสยามพารากอน (3 ต.ค. 2566)",
-    "year": "พ.ศ. 2328",
-    "norm_year": 2328,
+    "year": "พ.ศ. 2327",
+    "norm_year": 2327,
     "slug": "news-case-khdiiedk-14-kraadyingphaaraak-n-2566.html",
     "cat_tag": "คดีประวัติศาสตร์",
     "score": 95,
@@ -200,54 +110,64 @@
     "video_status": "pending"
   },
   {
-    "title": "Military and Paramilitary Activities in and against Nicaragua (Nicaragua v. USA)",
-    "year": "พ.ศ. 2328",
-    "norm_year": 2328,
-    "slug": "news-case-military-and-paramilitary-activities-in-and-against-nicaragua-nicaragu.html",
+    "title": "ฟ้องร้อง กสทช. กรณีควบรวมกิจการโทรคมนาคม (AIS - 3BB)",
+    "year": "พ.ศ. 2327",
+    "norm_year": 2327,
+    "slug": "news-case-khdiif-ngr-ng-ksthch-krniikhwbrwmkicchkaarothrkhmnaakhm-ais-3bb-2566.html",
     "cat_tag": "คดีประวัติศาสตร์",
     "score": 95,
     "status": "Warn",
-    "video_status": "confirmed"
+    "video_status": "pending"
   },
   {
-    "title": "คดี &#x27;สตรีแห่งขุนเขา&#x27; — นางลำดวน สีกันยา (2547-2568)",
+    "title": "คดีหะยีสุหลง (การบังคับสูญหายและข้อเสนอ 7 ประการแห่งปัตตานี)",
     "year": "พ.ศ. 2331",
     "norm_year": 2331,
-    "slug": "news-case-khdii-striiaehngkhunekhaa-lamdwn-siikanyaa-2547.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "ผู้สมัคร ส.ว. ถูกคัดค้าน — ลักษณะต้องห้ามเรื่องเครือญาติ (เลือก สว. 2567)",
-    "year": "พ.ศ. 2332",
-    "norm_year": 2332,
-    "slug": "news-case-khdiitadsiththiphuusmakhr-s-w-krniimiilaksnat-nghaameruue-ngekhruue-ya.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "คดีกำนันตลาดรีดเงินเกินพิกัด — พระอัยการลักษณะอาญาหลวง บทที่ 3 สมัยอยุธยา (พ.ศ. 1895–2310)",
-    "year": "พ.ศ. 2347",
-    "norm_year": 2347,
-    "slug": "news-case-khdii-kamnan-talad-ayutthaya.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "คดีกบฏเจ้าฟ้าเหม็น (กรมขุนกษัตรานุชิต)",
-    "year": "พ.ศ. 2352",
-    "norm_year": 2352,
-    "slug": "news-case-khdii-chao-fa-men-2352.html",
+    "slug": "news-case-khdii-haji-sulong-2497.html",
     "cat_tag": "คดีประวัติศาสตร์",
     "score": 95,
     "status": "Warn",
     "video_status": "confirmed"
+  },
+  {
+    "title": "คดีแพรวา (อุบัติเหตุ 9 ศพและความรับผิดทางละเมิด)",
+    "year": "พ.ศ. 2333",
+    "norm_year": 2333,
+    "slug": "news-case-khdii-praewa-2553.html",
+    "cat_tag": "คดีประวัติศาสตร์",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีนางทองเลื่อน &quot;อีทองเลื่อนหักคอน้องผัว&quot; — นักโทษหญิ งรายน้อง ๆ ที่ถูกประหารด้วยการตัดคอ และพยานการชันระบบศพแบบแพทย์ในศาลสยามยุคร.6 (ประหาร 14 ต.ค. 2468)",
+    "year": "พ.ศ. 2338",
+    "norm_year": 2338,
+    "slug": "news-case-khdii-nangthongloen-2468.html",
+    "cat_tag": "คดีประวัติศาสตร์",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
+    "title": "คดีทุ่งใหญ่นเรศวร (ชนวนเหตุ 14 ตุลา)",
+    "year": "พ.ศ. 2338",
+    "norm_year": 2338,
+    "slug": "news-case-khdii-thung-yai-hunting-2516.html",
+    "cat_tag": "คดีประวัติศาสตร์",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีอ้ายมา ลอบข่มขืนเจ้าจอมในพระบรมมหาราชวัง (จ.ศ. 1159)",
+    "year": "พ.ศ. 2340",
+    "norm_year": 2340,
+    "slug": "news-case-khdii-aima-khamkhuen-nai-praborommaharachawang.html",
+    "cat_tag": "คดีประวัติศาสตร์",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
   },
   {
     "title": "คดีพระราชาคณะ 3 รูป ปาราชิก",
@@ -258,16 +178,6 @@
     "score": 95,
     "status": "Warn",
     "video_status": "pending"
-  },
-  {
-    "title": "คดีอำแดงเหมือนกับนายริด (สิทธิในการเลือกคู่ครอง)",
-    "year": "พ.ศ. 2407",
-    "norm_year": 2407,
-    "slug": "news-case-khdii-muean-rid-2407.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
   },
   {
     "title": "คดีอ้ายอ่วม อกโรย: โทษประหารตัดตัวขาดสองท่อนในยุคเปลี่ยนผ่านกฎหมาย",
@@ -370,16 +280,6 @@
     "video_status": "confirmed"
   },
   {
-    "title": "คดีโกงข้าวหลวง/เงินปลอม ยุคธนบุรี — ศาลทหารเป็นหลักและโทษไถ่ตัวได้ (พ.ศ. 2310–2325)",
-    "year": "พ.ศ. 2438",
-    "norm_year": 2438,
-    "slug": "news-case-khdii-pongkhaoluang-nginthplom-2310-2325.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
     "title": "กฎหมายลักษณะอาญา ร.ศ. 127 — ประมวลกฎหมายสมัยใหม่ฉบับแรกของไทย",
     "year": "พ.ศ. 2440",
     "norm_year": 2440,
@@ -430,16 +330,6 @@
     "video_status": "pending"
   },
   {
-    "title": "คดีกบฏผีบุญ (การต่อต้านอำนาจรัฐส่วนกลาง)",
-    "year": "พ.ศ. 2444",
-    "norm_year": 2444,
-    "slug": "news-case-khdii-ghost-merit-2445.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
     "title": "คดีทุจริตป่าไม้ขุนยูวม — การปลอมตราประทับไม้และการปราบปรามมาเฟียป่าสัก",
     "year": "พ.ศ. 2445",
     "norm_year": 2445,
@@ -450,30 +340,20 @@
     "video_status": "pending"
   },
   {
-    "title": "คดีทุจริตภาษีฝิ่น — วิกฤตเจ้าภาษีนายอากรและต้นกำเนิดการปฏิรูปคลัง",
+    "title": "คดีหลวงรามฤทธิรงค์ — ข่มขืนอำแดงเจียม เมืองตราด ร.ศ.121",
     "year": "พ.ศ. 2445",
     "norm_year": 2445,
-    "slug": "news-case-khdii-thujrit-phasi-fin-history.html",
+    "slug": "news-case-khdii-ramrit-mueang-trat-2442-2443.html",
     "cat_tag": "คดีประวัติศาสตร์",
     "score": 95,
     "status": "Warn",
     "video_status": "pending"
   },
   {
-    "title": "Dogger Bank Incident (Great Britain/Russia)",
-    "year": "พ.ศ. 2447",
-    "norm_year": 2447,
-    "slug": "news-case-dogger-bank-incident-great-britain-russia.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "คดีนางทองเลื่อน &quot;อีทองเลื่อนหักคอน้องผัว&quot; — นักโทษหญิ งรายน้อง ๆ ที่ถูกประหารด้วยการตัดคอ และพยานการชันระบบศพแบบแพทย์ในศาลสยามยุคร.6 (ประหาร 14 ต.ค. 2468)",
-    "year": "พ.ศ. 2447",
-    "norm_year": 2447,
-    "slug": "news-case-khdii-nangthongloen-2468.html",
+    "title": "คดีทุจริตภาษีฝิ่น — วิกฤตเจ้าภาษีนายอากรและต้นกำเนิดการปฏิรูปคลัง",
+    "year": "พ.ศ. 2445",
+    "norm_year": 2445,
+    "slug": "news-case-khdii-thujrit-phasi-fin-history.html",
     "cat_tag": "คดีประวัติศาสตร์",
     "score": 95,
     "status": "Warn",
@@ -500,30 +380,20 @@
     "video_status": "pending"
   },
   {
-    "title": "Temple of Preah Vihear (Cambodia v. Thailand) — ICJ 1962",
-    "year": "พ.ศ. 2450",
-    "norm_year": 2450,
-    "slug": "news-case-temple-of-preah-vihear-cambodia-v-thailand.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "คดีบุญเพ็งหีบเหล็ก (2460-2462) — ฆาตกรต่อเนื่อง ร.6",
-    "year": "พ.ศ. 2451",
-    "norm_year": 2451,
-    "slug": "news-case-khdii-bunpeng-hiblek-2469.html",
+    "title": "คดีทุจริตหวย ก.ข. — ตำนานขุนบานเถื่อนและการมอมเมาประชาชน",
+    "year": "พ.ศ. 2459",
+    "norm_year": 2459,
+    "slug": "news-case-khdii-thujrit-huay-kor-khor-history.html",
     "cat_tag": "คดีประวัติศาสตร์",
     "score": 95,
     "status": "Warn",
     "video_status": "pending"
   },
   {
-    "title": "คดีทุจริตหวย ก.ข. — ตำนานขุนบานเถื่อนและการมอมเมาประชาชน",
-    "year": "พ.ศ. 2459",
-    "norm_year": 2459,
-    "slug": "news-case-khdii-thujrit-huay-kor-khor-history.html",
+    "title": "คดีบุญเพ็งหีบเหล็ก (2460-2462) — ฆาตกรต่อเนื่อง ร.6",
+    "year": "พ.ศ. 2460",
+    "norm_year": 2460,
+    "slug": "news-case-khdii-bunpeng-hiblek-2469.html",
     "cat_tag": "คดีประวัติศาสตร์",
     "score": 95,
     "status": "Warn",
@@ -560,20 +430,10 @@
     "video_status": "pending"
   },
   {
-    "title": "คดีนางทองเลื่อน (นักโทษประหารหญิง)",
-    "year": "พ.ศ. 2474",
-    "norm_year": 2474,
-    "slug": "news-case-khdii-thong-luean-2475.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "คดีนางสมบุญ (นักโทษประหารหญิงด้วยดาบคนสุดท้ายของสยาม)",
+    "title": "คดีสังหารห้าศพบางขวาง (การประหารชีวิตครั้งใหญ่หลัง 2475)",
     "year": "พ.ศ. 2475",
     "norm_year": 2475,
-    "slug": "news-case-khdii-nang-somboon-2475.html",
+    "slug": "news-case-khdii-five-murders-2477.html",
     "cat_tag": "คดีประวัติศาสตร์",
     "score": 95,
     "status": "Warn",
@@ -600,16 +460,6 @@
     "video_status": "pending"
   },
   {
-    "title": "คดีสังหารห้าศพบางขวาง (การประหารชีวิตครั้งใหญ่หลัง 2475)",
-    "year": "พ.ศ. 2477",
-    "norm_year": 2477,
-    "slug": "news-case-khdii-five-murders-2477.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
     "title": "กบฏนายสิบ 2478: แผนลับชิงอำนาจที่ล้มเหลว",
     "year": "พ.ศ. 2478",
     "norm_year": 2478,
@@ -620,10 +470,10 @@
     "video_status": "pending"
   },
   {
-    "title": "คดีทุจริตข้าวสาร (คอรัปชันยุคหลังสงครามโลกครั้งที่ 2)",
+    "title": "คดีอาชญากรสงคราม 2489: จอมพล ป. และหลักกฎหมายไม่ย้อนหลัง",
     "year": "พ.ศ. 2488",
     "norm_year": 2488,
-    "slug": "news-case-khdii-rice-corruption-2489.html",
+    "slug": "news-case-khdii-war-criminal-por-2489.html",
     "cat_tag": "คดีประวัติศาสตร์",
     "score": 95,
     "status": "Warn",
@@ -660,49 +510,9 @@
     "video_status": "pending"
   },
   {
-    "title": "คดีอาชญากรสงคราม 2489: จอมพล ป. และหลักกฎหมายไม่ย้อนหลัง",
-    "year": "พ.ศ. 2489",
-    "norm_year": 2489,
-    "slug": "news-case-khdii-war-criminal-por-2489.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "คดีหะยีสุหลง (การบังคับสูญหายและข้อเสนอ 7 ประการแห่งปัตตานี)",
-    "year": "พ.ศ. 2490",
-    "norm_year": 2490,
-    "slug": "news-case-khdii-haji-sulong-2497.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "คดีกบฏกู้ชาติ (ความขัดแย้งระหว่างเหล่าทัพและอำนาจการเมือง)",
-    "year": "พ.ศ. 2490",
-    "norm_year": 2490,
-    "slug": "news-case-khdii-ku-chat-rebellion-2491.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "Reparation for Injuries Suffered in the Service of the United Nations (Advisory Opinion)",
+    "title": "คดีสังหาร 4 อดีตรัฐมนตรี — ทุ่งบางเขน 2492",
     "year": "พ.ศ. 2491",
     "norm_year": 2491,
-    "slug": "news-case-reparation-for-injuries-suffered-in-the-service-of-the-un-advisory-opi.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "คดีสังหาร 4 อดีตรัฐมนตรี — ทุ่งบางเขน 2492",
-    "year": "พ.ศ. 2492",
-    "norm_year": 2492,
     "slug": "news-case-khdii-4-ratthamontri-2492.html",
     "cat_tag": "คดีประวัติศาสตร์",
     "score": 95,
@@ -740,16 +550,6 @@
     "video_status": "confirmed"
   },
   {
-    "title": "คดีกบฏวังหลวง (ความพยายามคืนอำนาจของปรีดี)",
-    "year": "พ.ศ. 2492",
-    "norm_year": 2492,
-    "slug": "news-case-khdii-royal-palace-rebellion-2492.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
     "title": "คดีสังหาร 4 อดีตรัฐมนตรี — อาชญากรรมรัฐ ณ กิโลเมตรที่ 11",
     "year": "พ.ศ. 2492",
     "norm_year": 2492,
@@ -758,16 +558,6 @@
     "score": 95,
     "status": "Warn",
     "video_status": "pending"
-  },
-  {
-    "title": "คดีกบฏแมนฮัตตัน (การจี้ตัวจอมพล ป. พิบูลสงคราม)",
-    "year": "พ.ศ. 2494",
-    "norm_year": 2494,
-    "slug": "news-case-khdii-manhattan-rebellion-2494.html",
-    "cat_tag": "คดีประวัติศาสตร์",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
   },
   {
     "title": "กบฏสันติภาพ: การกวาดล้างปัญญาชนและเสรีภาพที่ถูกจองจำ",
@@ -810,24 +600,14 @@
     "video_status": "confirmed"
   },
   {
-    "title": "ซีอุย แซ่อื้ง",
-    "year": "พ.ศ. 2501",
-    "norm_year": 2501,
-    "slug": "news-case-khdiichii-uy-aech-ueng-2501.html",
+    "title": "คดีนวลฉวี: โศกนาฏกรรมความรักและบทเรียนนิติเวชศาสตร์ไทย",
+    "year": "พ.ศ. 2502",
+    "norm_year": 2502,
+    "slug": "news-case-khdii-nualchawee-2502.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
     "video_status": "pending"
-  },
-  {
-    "title": "นวลฉวี: พยาบาลสาวถูกลอบยิงตามคำสั่งสวามี",
-    "year": "พ.ศ. 2502",
-    "norm_year": 2502,
-    "slug": "news-case-f-ngeriiykkhnulchwi-phayabalsaw-thukhkh-a.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
   },
   {
     "title": "คดีนวลฉวี: โศกนาฏกรรมพยาบาลสาวและตำนานรักสามเส้าแห่งแม่น้ำเจ้าพระยา",
@@ -860,16 +640,6 @@
     "video_status": "pending"
   },
   {
-    "title": "คดีพยาบาลวิไล (อาชญากรรมอำพรางโดยแพทย์)",
-    "year": "พ.ศ. 2511",
-    "norm_year": 2511,
-    "slug": "news-case-khdii-nurse-wilai-2511.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
     "title": "วินาศกรรมเที่ยวบิน CX700Z",
     "year": "พ.ศ. 2515",
     "norm_year": 2515,
@@ -880,40 +650,10 @@
     "video_status": "pending"
   },
   {
-    "title": "คดี 14 ตุลา (การเรียกร้องรัฐธรรมนูญและจุดจบ 3 ทรราช)",
-    "year": "พ.ศ. 2516",
-    "norm_year": 2516,
-    "slug": "news-case-khdii-14-october-2516.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
     "title": "คดีตี๋ใหญ่: จอมโจรขมังเวทย์และบรรทัดฐานวิสามัญฆาตกรรม",
     "year": "พ.ศ. 2516",
     "norm_year": 2516,
     "slug": "news-case-khdii-tee-yai-legend-2524.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "คดีทุ่งใหญ่นเรศวร (ชนวนเหตุ 14 ตุลา)",
-    "year": "พ.ศ. 2516",
-    "norm_year": 2516,
-    "slug": "news-case-khdii-thung-yai-hunting-2516.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "ชาลส โสภราจ (Charles Sobhraj) ฆาตกรบิกินี",
-    "year": "พ.ศ. 2518",
-    "norm_year": 2518,
-    "slug": "news-case-khdiichaals-osphraacch-charles-sobhraj-2518.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
@@ -950,36 +690,6 @@
     "video_status": "confirmed"
   },
   {
-    "title": "คดีราชาเงินทุน (วิกฤตการณ์ตลาดหุ้นครั้งแรกของไทย)",
-    "year": "พ.ศ. 2521",
-    "norm_year": 2521,
-    "slug": "news-case-khdii-raja-finance-2522.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "เพิกถอนใบอนุญาตคอนโดมิเนียม แอชตัน อโศก",
-    "year": "พ.ศ. 2522",
-    "norm_year": 2522,
-    "slug": "news-case-khdiiephikth-naib-nuyaatkh-nodmieniiym-ae-chtan-osk-2566.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "เป๋ อารักษ",
-    "year": "พ.ศ. 2523",
-    "norm_year": 2523,
-    "slug": "news-case-pae-araksa-2523.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
     "title": "เสี่ยจิว: การล้างแค้นด้วยอาวุธสงครามและจุดจบเจ้าพ่อรุ่นบุกเบิก",
     "year": "พ.ศ. 2524",
     "norm_year": 2524,
@@ -1000,40 +710,10 @@
     "video_status": "confirmed"
   },
   {
-    "title": "คดีไอซ์ หีบเหล็ก 2563 — สยบศพในหีบเหล็กกลางคฤหาสน์เศรษฐีบางแค และเงาคดี &#x27;หีบเหล็ก&#x27; ที่ตามหลอกตระกูล",
-    "year": "พ.ศ. 2526",
-    "norm_year": 2526,
-    "slug": "news-case-khdii-ice-hiblek-2563.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "Gulf of Maine Area Case (Canada/USA)",
-    "year": "พ.ศ. 2527",
-    "norm_year": 2527,
-    "slug": "news-case-gulf-of-maine-area-case-canada-usa.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
     "title": "news-case-khdii-boonliang-cafe-king-2541.html",
     "year": "พ.ศ. 2530",
     "norm_year": 2530,
     "slug": "news-case-khdii-boonliang-cafe-king-2541.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "คดีฟ้องหย่าสามีเปลี่ยนศาสนา (กฎหมายครอบครัวมุสลิมในพื้นที่เฉพาะ)",
-    "year": "พ.ศ. 2530",
-    "norm_year": 2530,
-    "slug": "news-case-khdii-islamic-divorce-2545.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
@@ -1110,30 +790,10 @@
     "video_status": "confirmed"
   },
   {
-    "title": "คดีโรงไฟฟ้าแม่เมาะ (Landmark สิทธิในสุขภาพและมลพิษทางอากาศ)",
-    "year": "พ.ศ. 2535",
-    "norm_year": 2535,
-    "slug": "mae-moh-power-plant-2546.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
     "title": "ฟ้องร้องมรดก &amp;quot;พุ่มพวง ดวงจันทร์&amp;quot;",
     "year": "พ.ศ. 2535",
     "norm_year": 2535,
     "slug": "news-case-khdiif-ngr-ngmrdk-phumphwng-dwngcchanthr-2535.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "การละเลยหน้าที่ในการป้องกันไฟป่าและหมอกควัน เชียงราย",
-    "year": "พ.ศ. 2535",
-    "norm_year": 2535,
-    "slug": "news-case-khdiikaarlaelyhnaathiiainkaarp-ngkanaifpaaaelahm-kkhwan-echiiyngraay-2.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
@@ -1220,16 +880,6 @@
     "video_status": "confirmed"
   },
   {
-    "title": "คดีคลองด่าน (มหากาพย์ทุจริตโครงการบำบัดน้ำเสีย)",
-    "year": "พ.ศ. 2538",
-    "norm_year": 2538,
-    "slug": "klong-dan-corruption-2545.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
     "title": "คดีจ่าสาธิต ยิง 3 ศพหน้าศาล",
     "year": "พ.ศ. 2538",
     "norm_year": 2538,
@@ -1240,14 +890,14 @@
     "video_status": "confirmed"
   },
   {
-    "title": "ลอบสังหารแสงชัย สุนทรวัฒน์  — สืบกฎหมายจากคดี",
-    "year": "พ.ศ. 2539",
-    "norm_year": 2539,
-    "slug": "news-case-f-ngeriiyksaengchaaisuntornwattan-2539.html",
+    "title": "คดีอดีตพระภาวนาพุทธโท — คดีล่วงละเมิดเด็กหญิงชาวเขา",
+    "year": "พ.ศ. 2538",
+    "norm_year": 2538,
+    "slug": "news-case-khdii-phawana-2538.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
-    "video_status": "pending"
+    "video_status": "confirmed"
   },
   {
     "title": "คดีสุขุม เชิดชื่น จ้างวานสังหาร พ.ญ.นิชรี มะกรสาร",
@@ -1270,16 +920,6 @@
     "video_status": "confirmed"
   },
   {
-    "title": "วิสามัญฯ โจ ด่านช้าง",
-    "year": "พ.ศ. 2539",
-    "norm_year": 2539,
-    "slug": "news-case-khdiiwisaamay-occh-daanchaang-2539.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
     "title": "คดีสังหารแสงชัย สุนทรวัฒน์",
     "year": "พ.ศ. 2539",
     "norm_year": 2539,
@@ -1288,16 +928,6 @@
     "score": 95,
     "status": "Warn",
     "video_status": "confirmed"
-  },
-  {
-    "title": "Gabčíkovo-Nagymaros Project (Hungary/Slovakia)",
-    "year": "พ.ศ. 2540",
-    "norm_year": 2540,
-    "slug": "news-case-gabcikovo-nagymaros-project-hungary-slovakia.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
   },
   {
     "title": "ศึกชิงโดเมนเนม: บรรทัดฐานการใช้สิทธิโดยไม่สุจริตและการละเมิดเครื่องหมายการค้าออนไลน์",
@@ -1314,16 +944,6 @@
     "year": "พ.ศ. 2540",
     "norm_year": 2540,
     "slug": "news-case-khdii-khaay-gkrab-buntawee-5-sop-2540.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "คดีมรดกสวัสดิวัตน์ (การแบ่งมรดกโดยการครอบครองเป็นส่วนสัด)",
-    "year": "พ.ศ. 2540",
-    "norm_year": 2540,
-    "slug": "news-case-khdii-sawatdiwat-inheritance-2560.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
@@ -1380,36 +1000,6 @@
     "video_status": "confirmed"
   },
   {
-    "title": "เสริม สาครราษฎร์",
-    "year": "พ.ศ. 2541",
-    "norm_year": 2541,
-    "slug": "news-case-khdiiesrim-saakhrraasdr-2541.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "Pinochet Case (UK House of Lords)",
-    "year": "พ.ศ. 2541",
-    "norm_year": 2541,
-    "slug": "news-case-pinochet-case-uk-house-of-lords.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "คดีห้างทอง ธรรมวัฒนะ: ปริศนามรดกเลือดและการต่อสู้ทางนิติวิทยาศาสตร์",
-    "year": "พ.ศ. 2542",
-    "norm_year": 2542,
-    "slug": "news-case-khdii-hangthong-2542.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
     "title": "คดีห้างทอง ธรรมวัฒนะ: มหากาพย์การพิสูจน์ศพและศึกสายเลือดตระกูลดัง",
     "year": "พ.ศ. 2542",
     "norm_year": 2542,
@@ -1440,6 +1030,16 @@
     "video_status": "pending"
   },
   {
+    "title": "คดีชิปปิ้งหมู: จุดเปลี่ยนกฎหมายคุ้มครองพยาน",
+    "year": "พ.ศ. 2545",
+    "norm_year": 2545,
+    "slug": "news-case-khdii-shipping-moo-witness-2546.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
     "title": "จ้างวานฆ่า เสี่ยแหย",
     "year": "พ.ศ. 2545",
     "norm_year": 2545,
@@ -1450,30 +1050,10 @@
     "video_status": "confirmed"
   },
   {
-    "title": "คดีรื้อบาร์เบียร์ (สิทธิในทรัพย์สินและการจัดการโดยพลการ)",
-    "year": "พ.ศ. 2546",
-    "norm_year": 2546,
-    "slug": "bar-beer-demolition-2546.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
     "title": "กำนันเป๊าะ: ตำนานเจ้าพ่อภาคตะวันออกและคดีสังหารกำนันยูร",
     "year": "พ.ศ. 2546",
     "norm_year": 2546,
     "slug": "news-case-khdii-kamnan-poh-east-godfather-2546.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "คดีชิปปิ้งหมู: จุดเปลี่ยนกฎหมายคุ้มครองพยาน",
-    "year": "พ.ศ. 2546",
-    "norm_year": 2546,
-    "slug": "news-case-khdii-shipping-moo-witness-2546.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
@@ -1530,6 +1110,16 @@
     "video_status": "pending"
   },
   {
+    "title": "คดี &#x27;สตรีแห่งขุนเขา&#x27; — นางลำดวน สีกันยา (2547-2568)",
+    "year": "พ.ศ. 2547",
+    "norm_year": 2547,
+    "slug": "news-case-khdii-striiaehngkhunekhaa-lamdwn-siikanyaa-2547.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
     "title": "ปล้นปืนค่ายปิเหล็ง นราธิวาส",
     "year": "พ.ศ. 2547",
     "norm_year": 2547,
@@ -1550,20 +1140,20 @@
     "video_status": "confirmed"
   },
   {
-    "title": "คดีสังหาร ส.ส.กอบกุล นพอมรบดี",
-    "year": "พ.ศ. 2549",
-    "norm_year": 2549,
-    "slug": "kobkul-assassination-2549.html",
+    "title": "สมคิด พุ่มพวง (2548, 2562)",
+    "year": "พ.ศ. 2548",
+    "norm_year": 2548,
+    "slug": "news-case-khdiismkhid-phumphwng-2548-2562.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
     "video_status": "confirmed"
   },
   {
-    "title": "Armed Activities on the Territory of the Congo (New Application: 2002) (DRC v. Rwanda)",
+    "title": "คดีสังหาร ส.ส.กอบกุล นพอมรบดี",
     "year": "พ.ศ. 2549",
     "norm_year": 2549,
-    "slug": "news-case-armed-activities-on-the-territory-of-the-congo-new-application-2002-dr.html",
+    "slug": "kobkul-assassination-2549.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
@@ -1580,7 +1170,7 @@
     "video_status": "pending"
   },
   {
-    "title": "การเลือกตั้ง 2 เมษายน 2549 เป็นโมฆะ  — สืบกฎหมายจากคดี",
+    "title": "การเลือกตั้ง 2 เมษายน 2549 เป็นโมฆะ",
     "year": "พ.ศ. 2549",
     "norm_year": 2549,
     "slug": "news-case-khdiikaareluue-ktang-2-emsaayn-2549-epnomkha-2549.html",
@@ -1600,20 +1190,20 @@
     "video_status": "pending"
   },
   {
+    "title": "บรรทัดฐานหมิ่นประมาทออนไลน์: การแยกแยะระหว่างข้อมูลเท็จกับความผิดฐานหมิ่นประมาท",
+    "year": "พ.ศ. 2550",
+    "norm_year": 2550,
+    "slug": "news-case-khdii-computer-defamation-2550.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
     "title": "คดีความรุนแรงในครอบครัว: เมื่อบ้านไม่ใช่พื้นที่ส่วนตัวเหนือกฎหมาย",
     "year": "พ.ศ. 2550",
     "norm_year": 2550,
     "slug": "news-case-khdii-domestic-violence-protection-2562.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "คดีสิทธิในการตาย (Living Will): การเลือกวาระสุดท้ายด้วยศักดิ์ศรี",
-    "year": "พ.ศ. 2550",
-    "norm_year": 2550,
-    "slug": "news-case-khdii-living-will-right-to-die-2558.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
@@ -1628,16 +1218,6 @@
     "score": 95,
     "status": "Warn",
     "video_status": "confirmed"
-  },
-  {
-    "title": "คดีเสี่ยแป้ง นาโหนด — หลบหนีระหว่างควบคุม (2566–2567)",
-    "year": "พ.ศ. 2550",
-    "norm_year": 2550,
-    "slug": "news-case-khdiicchabkum-esiiyaepng-naaohnd-2566.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
   },
   {
     "title": "เจ้าหนี้ฟ้องยึดทรัพย์จำนองและเรียกร้องจากผู้ค้ำประกัน",
@@ -1680,16 +1260,6 @@
     "video_status": "confirmed"
   },
   {
-    "title": "คดีแพรวา (อุบัติเหตุ 9 ศพและความรับผิดทางละเมิด)",
-    "year": "พ.ศ. 2553",
-    "norm_year": 2553,
-    "slug": "news-case-khdii-praewa-2553.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
     "title": "คดีอดีตพระเกษม — ดูหมิ่นวัตถุศาสนาและอาบัติปาราชิก (พ.ศ. 2554/2558)",
     "year": "พ.ศ. 2554",
     "norm_year": 2554,
@@ -1708,6 +1278,16 @@
     "score": 95,
     "status": "Warn",
     "video_status": "confirmed"
+  },
+  {
+    "title": "คดีทุจริตและฉ้อโกงสหกรณ์ออมทรัพย์ครูขอนแก่น",
+    "year": "พ.ศ. 2554",
+    "norm_year": 2554,
+    "slug": "news-case-khdiich-okngshkrn-mthraphykhruukh-naekn-2562.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
   },
   {
     "title": "ลิขสิทธิ์ซอฟต์แวร์ในองค์กร: ความรับผิดของนิติบุคคลและบรรทัดฐานการคำนวณค่าเสียหาย",
@@ -1810,30 +1390,10 @@
     "video_status": "confirmed"
   },
   {
-    "title": "จัดซื้อแท็บเล็ตนักเรียน (One Tablet Per Child)  — คดีที่ยุติโดยกลไกระงับข้อพิพาท ไม่มีคำพิพากษาศาลปกครอง",
-    "year": "พ.ศ. 2556",
-    "norm_year": 2556,
-    "slug": "news-case-khdiicchadchuue-aethbeltnakeriiyn-one-tablet-per-child-2556.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
     "title": "ติ๊งต่าง ฆาตกรต่อเนื่อง",
     "year": "พ.ศ. 2556",
     "norm_year": 2556,
     "slug": "news-case-khdiitingtaang-khaatkrt-enuue-ng-2556.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "คดีบิลลี่ พอละจี (Landmark การบังคับสูญหายและสิทธิกลุ่มชาติพันธุ์)",
-    "year": "พ.ศ. 2557",
-    "norm_year": 2557,
-    "slug": "billy-polajee-2557.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
@@ -1860,30 +1420,10 @@
     "video_status": "confirmed"
   },
   {
-    "title": "เสียชีวิตปริศนาบนเกาะเต่า (Death Island) (2557-2560) — สืบกฎหมายจากคดี",
-    "year": "พ.ศ. 2557",
-    "norm_year": 2557,
-    "slug": "news-case-khdiiesiiychiiwitprisnaabnekaaaetaa-death-island-2557-2560.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
     "title": "ฆาตกรรม 2 นักท่องเที่ยวเกาะเต่า",
     "year": "พ.ศ. 2557",
     "norm_year": 2557,
     "slug": "news-case-khdiikhaatkrrm-2-nakth-ngethiiywekaaaetaa-2557.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "ฆาตกรรม 5 ศพ ครอบครัวชลบุรี",
-    "year": "พ.ศ. 2557",
-    "norm_year": 2557,
-    "slug": "news-case-khdiikhaatkrrm-5-sph-khr-bkhrawchlburii-2557.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
@@ -1930,6 +1470,16 @@
     "video_status": "confirmed"
   },
   {
+    "title": "คดีถอนพาสปอร์ต: บรรทัดฐานเสรีภาพการเดินทางและการตรวจสอบดุลพินิจรัฐ",
+    "year": "พ.ศ. 2558",
+    "norm_year": 2558,
+    "slug": "news-case-khdii-passport-revocation-2560.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
     "title": "คดี พล.ต.ต. ปวีณ: ราคาที่ต้องจ่ายของมือปราบค้ามนุษย์",
     "year": "พ.ศ. 2558",
     "norm_year": 2558,
@@ -1950,7 +1500,7 @@
     "video_status": "pending"
   },
   {
-    "title": "ค้ามนุษยโรฮิงญา แคมป์กักขังและหลุมศพเทือกเขาแก้ว  — สืบกฎหมายจากคดี",
+    "title": "ค้ามนุษยโรฮิงญา แคมป์กักขังและหลุมศพเทือกเขาแก้ว",
     "year": "พ.ศ. 2558",
     "norm_year": 2558,
     "slug": "news-case-khdiikhaamanuthyirhhhingyhaa-lhumsop-thewkhkhagew-2558.html",
@@ -1968,16 +1518,6 @@
     "score": 95,
     "status": "Warn",
     "video_status": "pending"
-  },
-  {
-    "title": "คดีเหมืองทองอัครา (ข้อพิพาท ISDS และผลกระทบสิ่งแวดล้อม)",
-    "year": "พ.ศ. 2559",
-    "norm_year": 2559,
-    "slug": "akara-gold-mine-2560.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
   },
   {
     "title": "เดวิด เบอเนต โมราด ถูกรีดทรัพย์และฆ่าหั่นศพ ทิ้งแม่น้ำเจ้าพระยา",
@@ -2080,30 +1620,10 @@
     "video_status": "confirmed"
   },
   {
-    "title": "คดีจริยธรรมนักการเมือง: บรรทัดฐานใหม่ของการตรวจสอบศีลธรรมทางการเมือง",
-    "year": "พ.ศ. 2560",
-    "norm_year": 2560,
-    "slug": "news-case-khdii-political-ethics-landmark-2565.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
     "title": "คดีคำสั่งทางปกครองไม่ชอบ: มาตรฐานธรรมาภิบาลในระบบราชการ",
     "year": "พ.ศ. 2560",
     "norm_year": 2560,
     "slug": "news-case-khdii-unlawful-admin-order-2562.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "กระทะโคเรียคิง (Korea King)",
-    "year": "พ.ศ. 2560",
-    "norm_year": 2560,
-    "slug": "news-case-khdiikrathaokheriiykhing-korea-king-2560.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
@@ -2120,20 +1640,10 @@
     "video_status": "pending"
   },
   {
-    "title": "เรือฟีนิกซ์อับปางพูกต  — สืบกฎหมายจากคดี",
+    "title": "เรือฟีนิกซ์อับปางพูกต",
     "year": "พ.ศ. 2561",
     "norm_year": 2561,
     "slug": "news-case-eruue-lmphuuekt-fiinikch-2561.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "คดีป้าทุบรถ (สิทธิในความสงบสุขและเหตุเดือดร้อนรำคาญ)",
-    "year": "พ.ศ. 2561",
-    "norm_year": 2561,
-    "slug": "news-case-khdii-auntie-smash-car-2561.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
@@ -2178,6 +1688,16 @@
     "score": 95,
     "status": "Warn",
     "video_status": "confirmed"
+  },
+  {
+    "title": "คดีจริยธรรมนักการเมือง: บรรทัดฐานใหม่ของการตรวจสอบศีลธรรมทางการเมือง",
+    "year": "พ.ศ. 2561",
+    "norm_year": 2561,
+    "slug": "news-case-khdii-political-ethics-landmark-2565.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
   },
   {
     "title": "คดีอดีตพระพรหมเมธี — เงินทอนวัดและการลี้ภัย",
@@ -2360,16 +1880,6 @@
     "video_status": "pending"
   },
   {
-    "title": "คดีทุจริตและฉ้อโกงสหกรณ์ออมทรัพย์ครูขอนแก่น",
-    "year": "พ.ศ. 2562",
-    "norm_year": 2562,
-    "slug": "news-case-khdiich-okngshkrn-mthraphykhruukh-naekn-2562.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
     "title": "ลิขสิทธิ์กระทงการ์ตูน น้องอั้ม โคราช",
     "year": "พ.ศ. 2562",
     "norm_year": 2562,
@@ -2420,7 +1930,7 @@
     "video_status": "confirmed"
   },
   {
-    "title": "คดีรักษาพยาบาลผิดพลาดทำผู้ป่วยตาบอด  — สืบกฎหมายจากคดี",
+    "title": "คดีรักษาพยาบาลผิดพลาดทำผู้ป่วยตาบอด",
     "year": "พ.ศ. 2563",
     "norm_year": 2563,
     "slug": "news-case-f-ngeriiykkhaaesiiyhaay-hm-thamkaarraksaaphidphlaadthamaihtaab-d-.html",
@@ -2430,20 +1940,20 @@
     "video_status": "confirmed"
   },
   {
+    "title": "คดีไอซ์ หีบเหล็ก 2563 — สยบศพในหีบเหล็กกลางคฤหาสน์เศรษฐีบางแค และเงาคดี &#x27;หีบเหล็ก&#x27; ที่ตามหลอกตระกูล",
+    "year": "พ.ศ. 2563",
+    "norm_year": 2563,
+    "slug": "news-case-khdii-ice-hiblek-2563.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
     "title": "คดีอุ้มฆ่าพี่ชายผู้พิพากษา: การท้าทายอำนาจตุลาการอุกอาจที่สุด",
     "year": "พ.ศ. 2563",
     "norm_year": 2563,
     "slug": "news-case-khdii-judge-brother-abduction-2563.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "คดีกราดยิงโคราช (ความรับผิดของรัฐและความหละหลวมในหน่วยงานทหาร)",
-    "year": "พ.ศ. 2563",
-    "norm_year": 2563,
-    "slug": "news-case-khdii-korat-shooting-2563.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
@@ -2458,16 +1968,6 @@
     "score": 95,
     "status": "Warn",
     "video_status": "confirmed"
-  },
-  {
-    "title": "คดีหลวงรามฤทธิรงค์ — ข่มขืนอำแดงเจียม เมืองตราด ร.ศ.121",
-    "year": "พ.ศ. 2563",
-    "norm_year": 2563,
-    "slug": "news-case-khdii-ramrit-mueang-trat-2442-2443.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
   },
   {
     "title": "กรมอุทยานฯ ชดใช้ค่าเสียหายช้างป่า",
@@ -2530,6 +2030,26 @@
     "video_status": "pending"
   },
   {
+    "title": "คำสั่งแต่งตั้งโยกย้ายข้าราชการตำรวจระดับสูง — คดี พล.ต.อ.วิระชัย ทรงเมตตา",
+    "year": "พ.ศ. 2564",
+    "norm_year": 2564,
+    "slug": "news-case-khdiiaetngtangoykyaaykhaaraachkaartamrwcchodymich-b-phl-t-wirachay-thr.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
+    "title": "ผู้บริโภคฟ้องบริษัทประกัน ปฏิเสธการจ่ายโควิด &quot;เจอ จ่าย จบ&quot; (2564-2565)",
+    "year": "พ.ศ. 2564",
+    "norm_year": 2564,
+    "slug": "news-case-khdiiphuubriophkhf-ngbrisathprakan-ptiesthkaarcchaayokhwid-ecch-cchaay.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
     "title": "คดีเพิกถอนประทานบัตรเหมืองแร่โปแตช อุดรธานี — สิทธิชุมชนฟ้องหน่วยงานรัฐ 8 แห่ง (2565-2566)",
     "year": "พ.ศ. 2565",
     "norm_year": 2565,
@@ -2540,7 +2060,7 @@
     "video_status": "pending"
   },
   {
-    "title": "เรือหลวงสุโขทัยอับปาง  — สืบกฎหมายจากคดี",
+    "title": "เรือหลวงสุโขทัยอับปาง",
     "year": "พ.ศ. 2565",
     "norm_year": 2565,
     "slug": "news-case-eruue-hlwngsuokhthay-abpaang-2565.html",
@@ -2558,6 +2078,16 @@
     "score": 95,
     "status": "Warn",
     "video_status": "confirmed"
+  },
+  {
+    "title": "คดี Forex-3D แชร์ลูกโซ่ Forex หลอกลวงผู้ลงทุนทั่วประเทศ (2565–2569)",
+    "year": "พ.ศ. 2565",
+    "norm_year": 2565,
+    "slug": "news-case-khdii-forex-3d-cchabkumdaaraaephimetim-2565-2566.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
   },
   {
     "title": "คดีอดีตพระกาโตะ ยักยอกเงินวัดปิดข่าวสีกา",
@@ -2580,7 +2110,7 @@
     "video_status": "pending"
   },
   {
-    "title": "เปิดเผยข้อมูลสัญญาจัดซื้เวชั่นโควิด  — สืบกฎหมายจากคดี",
+    "title": "เปิดเผยข้อมูลสัญญาจัดซื้เวชั่นโควิด",
     "year": "พ.ศ. 2565",
     "norm_year": 2565,
     "slug": "news-case-khdii-perik-khayomul-sanycha-catchue-wakkhisen-2565.html",
@@ -2610,16 +2140,6 @@
     "video_status": "confirmed"
   },
   {
-    "title": "แชร์ลูกโซ่ คอนเซปต์ วอเตอร์ (Concept Water)",
-    "year": "พ.ศ. 2565",
-    "norm_year": 2565,
-    "slug": "news-case-khdiiaechrluukoch-kh-nechpt-w-et-r-concept-water-2565.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
     "title": "แฟรนไชส์ ซูชิ ดารุมะ",
     "year": "พ.ศ. 2565",
     "norm_year": 2565,
@@ -2630,30 +2150,20 @@
     "video_status": "pending"
   },
   {
-    "title": "คำสั่งแต่งตั้งโยกย้ายข้าราชการตำรวจระดับสูง — คดี พล.ต.อ.วิระชัย ทรงเมตตา",
+    "title": "คดีฉ้อโกงร้านทอง สุพรรณบุรี",
     "year": "พ.ศ. 2565",
     "norm_year": 2565,
-    "slug": "news-case-khdiiaetngtangoykyaaykhaaraachkaartamrwcchodymich-b-phl-t-wirachay-thr.html",
+    "slug": "news-case-khdiich-okngraanth-ng-suphrrnburii-2565.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
     "video_status": "pending"
   },
   {
-    "title": "ไฟไหม้ เมาท์เทน บี (Mountain B) ผับ",
+    "title": "แก๊งคอลเซ็นเตอร์หลอกโอนเงินข้ามชาติ (2565–2566)",
     "year": "พ.ศ. 2565",
     "norm_year": 2565,
-    "slug": "news-case-khdiiaifaihm-emaathethn-bii-mountain-b-phab-2565.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
-    "title": "คดีฉ้อโกงร้านทอง สุพรรณบุรี",
-    "year": "พ.ศ. 2565",
-    "norm_year": 2565,
-    "slug": "news-case-khdiich-okngraanth-ng-suphrrnburii-2565.html",
+    "slug": "news-case-khdiikaengkholsentoeloakonngoendamkhamchat-2566.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
@@ -2688,16 +2198,6 @@
     "score": 95,
     "status": "Warn",
     "video_status": "pending"
-  },
-  {
-    "title": "คด 9Near เจาะระบบฐานข้อมูล 55 ล้านรายชื่อ  — สืบกฎหมายจากคดี",
-    "year": "พ.ศ. 2566",
-    "norm_year": 2566,
-    "slug": "news-case-f-kenginekhruue-khaaysaarwatrchaw-2566.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
   },
   {
     "title": "การอายัดทรัพย์สิน ปปง. คด STARK",
@@ -2760,6 +2260,26 @@
     "video_status": "confirmed"
   },
   {
+    "title": "อุ้มเรียกค่าไถ่นักศึกษาจีน จิน คาน",
+    "year": "พ.ศ. 2566",
+    "norm_year": 2566,
+    "slug": "news-case-khdii-umeriiykkhaaaithnaksueksaacchiin-cchin-khaan-2566.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
+    "title": "อุ้มฆ่า ฮันส์ ปีเตอร์ มาค",
+    "year": "พ.ศ. 2566",
+    "norm_year": 2566,
+    "slug": "news-case-khdii-umkhaa-hans-piiet-r-maakh-2566.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
     "title": "อุ้มฆ่า นศ.จีน แยกร่าง",
     "year": "พ.ศ. 2566",
     "norm_year": 2566,
@@ -2770,7 +2290,7 @@
     "video_status": "pending"
   },
   {
-    "title": "แอม ไซยาไนด์  — สืบกฎหมายจากคดี",
+    "title": "แอม ไซยาไนด์",
     "year": "พ.ศ. 2566",
     "norm_year": 2566,
     "slug": "news-case-khdiiae-m-aichyaaaind-2566.html",
@@ -2840,20 +2360,20 @@
     "video_status": "pending"
   },
   {
-    "title": "คดีอาญา: เสี่ยเบนท์ลีย์ขับรถชนบนทางด่วน",
+    "title": "เพิกถอนใบอนุญาตคอนโดมิเนียม แอชตัน อโศก",
     "year": "พ.ศ. 2566",
     "norm_year": 2566,
-    "slug": "news-case-khdiiesiiyebnthliiykhabrthchnbnthaangdwn-2566.html",
+    "slug": "news-case-khdiiephikth-naib-nuyaatkh-nodmieniiym-ae-chtan-osk-2566.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
     "video_status": "pending"
   },
   {
-    "title": "คดีสลากกินแบ่งรัฐบาลเป็นกลุ่ม ('หวยกลุ่ม') — ข้อพิพาทการแบ่งเงินรางวัล",
+    "title": "คดีอาญา: เสี่ยเบนท์ลีย์ขับรถชนบนทางด่วน",
     "year": "พ.ศ. 2566",
     "norm_year": 2566,
-    "slug": "news-case-khdiif-ngaebngphlkamairslaakkinaebngrathbaal-hwyklum-2566.html",
+    "slug": "news-case-khdiiesiiyebnthliiykhabrthchnbnthaangdwn-2566.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
@@ -2874,16 +2394,6 @@
     "year": "พ.ศ. 2566",
     "norm_year": 2566,
     "slug": "news-case-khdiif-nghyaaaelaaebngsinsmrs-hning-pnitaa-cchin-2566.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "ฟ้องร้อง กสทช. กรณีควบรวมกิจการโทรคมนาคม (AIS - 3BB)",
-    "year": "พ.ศ. 2566",
-    "norm_year": 2566,
-    "slug": "news-case-khdiif-ngr-ng-ksthch-krniikhwbrwmkicchkaarothrkhmnaakhm-ais-3bb-2566.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
@@ -2940,7 +2450,7 @@
     "video_status": "pending"
   },
   {
-    "title": "ความรับผิดของผู้สอบบัญชีในการรับรองงบการเงิน STARK  — สืบกฎหมายจากคดี",
+    "title": "ความรับผิดของผู้สอบบัญชีในการรับรองงบการเงิน STARK",
     "year": "พ.ศ. 2566",
     "norm_year": 2566,
     "slug": "news-case-khdiikhwaamrabphidkh-ngphuus-bbaychiiainkaarrabr-ngngbkaarengin-stark-.html",
@@ -3000,16 +2510,6 @@
     "video_status": "pending"
   },
   {
-    "title": "มหากาพย์ STARK (สตาร์ค คอร์เปอเรชั่น)",
-    "year": "พ.ศ. 2566",
-    "norm_year": 2566,
-    "slug": "news-case-khdiimhaakaaphy-stark-staarkh-kh-rep-erchan-2566.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
     "title": "มลพิษฝุ่น PM2.5 ภาคเหนือ  — สู่คำสั่งประกาศเขตควบคุมมลพิษ (ศาลปกครองสูงสุด 2568)",
     "year": "พ.ศ. 2566",
     "norm_year": 2566,
@@ -3050,17 +2550,7 @@
     "video_status": "pending"
   },
   {
-    "title": "ประเมินภาษีที่ดินและสิ่งปลูกสร้างไม่เป็นธรรม (คดี 534/2566)",
-    "year": "พ.ศ. 2566",
-    "norm_year": 2566,
-    "slug": "news-case-khdiipraeminphaasiithiidinaelasingpluuksraangaimepnthrrm-2566.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "กระบะชนท้าย Rolls-Royce Ghost  — ยุติโดยประนีประนอม/ประกันภัย ไม่มีคำพิพากษาศาล",
+    "title": "กระบะชนท้าย Rolls-Royce Ghost บนมอเตอร์เวย์สาย 7",
     "year": "พ.ศ. 2566",
     "norm_year": 2566,
     "slug": "news-case-khdiirthkrabachingchn-rolls-royce-2566.html",
@@ -3140,10 +2630,10 @@
     "video_status": "pending"
   },
   {
-    "title": "ดิไอคอนกรุ๊ป (The iCon Group)",
+    "title": "เพิกถอนคำสั่งให้ออกจากราชการ พล.ต.อ.สุรเชษฐ์ หักพาล",
     "year": "พ.ศ. 2567",
     "norm_year": 2567,
-    "slug": "news-case-khdiidiai-kh-nkrup-the-icon-group-2567.html",
+    "slug": "news-case-khdiiephikth-nkhamsangaih-kcchaakraachkaar-phl-t-surechsth-hakphaal-25.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
@@ -3160,16 +2650,6 @@
     "video_status": "pending"
   },
   {
-    "title": "ฟ้องคดีแบบกลุ่ม (Class Action) ผู้ถือหุ้นกู้ STARK",
-    "year": "พ.ศ. 2567",
-    "norm_year": 2567,
-    "slug": "news-case-khdiif-ngkhdiiaebbklum-class-action-phuuthuue-hunkuu-stark-2567.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "confirmed"
-  },
-  {
     "title": "คดีข้อมูลลูกค้ารั่วไหล — PDPC สั่งปรับเอกชน 7 ล้านบาท",
     "year": "พ.ศ. 2567",
     "norm_year": 2567,
@@ -3180,20 +2660,10 @@
     "video_status": "pending"
   },
   {
-    "title": "เครือข่ายบ่อนการพนันนายจิว ซือหาน (ตู้ห่าว) และมาตรการริบทรัพย์สินฟอกเงิน",
+    "title": "การละเลยหน้าที่ในการป้องกันไฟป่าและหมอกควัน เชียงราย",
     "year": "พ.ศ. 2567",
     "norm_year": 2567,
-    "slug": "news-case-khdiifokngontuhawayattrisap-2567.html",
-    "cat_tag": "คดีสมัยใหม่",
-    "score": 95,
-    "status": "Warn",
-    "video_status": "pending"
-  },
-  {
-    "title": "ฝรั่งเตะหมอ ภูเก็ต (เดวิด)",
-    "year": "พ.ศ. 2567",
-    "norm_year": 2567,
-    "slug": "news-case-khdiifrangetahm-phuuekt-edwid-2567.html",
+    "slug": "news-case-khdiikaarlaelyhnaathiiainkaarp-ngkanaifpaaaelahm-kkhwan-echiiyngraay-2.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
@@ -3290,6 +2760,16 @@
     "video_status": "pending"
   },
   {
+    "title": "ผู้สมัคร ส.ว. ถูกคัดค้าน — ลักษณะต้องห้ามเรื่องเครือญาติ (เลือก สว. 2567)",
+    "year": "พ.ศ. 2567",
+    "norm_year": 2567,
+    "slug": "news-case-khdiitadsiththiphuusmakhr-s-w-krniimiilaksnat-nghaameruue-ngekhruue-ya.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
     "title": "ทนายตั้มคดีฉ้อโกง 71 ล้านบาท แพลตฟอร์มหวยออนไลน์",
     "year": "พ.ศ. 2567",
     "norm_year": 2567,
@@ -3330,23 +2810,333 @@
     "video_status": "confirmed"
   },
   {
-    "title": "คดีอ้ายมา ลอบข่มขืนเจ้าจอมในพระบรมมหาราชวัง (จ.ศ. 1159)",
+    "title": "คดีเหมืองทองอัครา (ข้อพิพาท ISDS และผลกระทบสิ่งแวดล้อม)",
     "year": "-",
     "norm_year": 0,
-    "slug": "news-case-khdii-aima-khamkhuen-nai-praborommaharachawang.html",
+    "slug": "akara-gold-mine-2560.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีรื้อบาร์เบียร์ (สิทธิในทรัพย์สินและการจัดการโดยพลการ)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "bar-beer-demolition-2546.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีบิลลี่ พอละจี (Landmark การบังคับสูญหายและสิทธิกลุ่มชาติพันธุ์)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "billy-polajee-2557.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีคลองด่าน (มหากาพย์ทุจริตโครงการบำบัดน้ำเสีย)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "klong-dan-corruption-2545.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีโรงไฟฟ้าแม่เมาะ (Landmark สิทธิในสุขภาพและมลพิษทางอากาศ)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "mae-moh-power-plant-2546.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีป้าทุบรถ (สิทธิในความสงบสุขและเหตุเดือดร้อนรำคาญ)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdii-auntie-smash-car-2561.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีกบฏเจ้าฟ้าเหม็น (กรมขุนกษัตรานุชิต)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdii-chao-fa-men-2352.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีกบฏผีบุญ (การต่อต้านอำนาจรัฐส่วนกลาง)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdii-ghost-merit-2445.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
     "video_status": "pending"
   },
   {
-    "title": "Land, Island and Maritime Frontier Dispute (El Salvador/Honduras)",
+    "title": "คดีฟ้องหย่าสามีเปลี่ยนศาสนา (กฎหมายครอบครัวมุสลิมในพื้นที่เฉพาะ)",
     "year": "-",
     "norm_year": 0,
-    "slug": "news-case-land-island-and-maritime-frontier-dispute-el-salvador-honduras.html",
+    "slug": "news-case-khdii-islamic-divorce-2545.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีกราดยิงโคราช (ความรับผิดของรัฐและความหละหลวมในหน่วยงานทหาร)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdii-korat-shooting-2563.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีกบฏกู้ชาติ (ความขัดแย้งระหว่างเหล่าทัพและอำนาจการเมือง)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdii-ku-chat-rebellion-2491.html",
     "cat_tag": "คดีสมัยใหม่",
     "score": 95,
     "status": "Warn",
     "video_status": "pending"
+  },
+  {
+    "title": "คดีสิทธิในการตาย (Living Will): การเลือกวาระสุดท้ายด้วยศักดิ์ศรี",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdii-living-will-right-to-die-2558.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีแชร์แม่ชม้อย (ตำนานแชร์ลูกโซ่น้ำมันหมื่นล้าน)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdii-mae-chamoy-2528.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีกบฏแมนฮัตตัน (การจี้ตัวจอมพล ป. พิบูลสงคราม)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdii-manhattan-rebellion-2494.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีอำแดงเหมือนกับนายริด (สิทธิในการเลือกคู่ครอง)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdii-muean-rid-2407.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีนางสมบุญ (นักโทษประหารหญิงด้วยดาบคนสุดท้ายของสยาม)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdii-nang-somboon-2475.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
+    "title": "คดีพยาบาลวิไล (อาชญากรรมอำพรางโดยแพทย์)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdii-nurse-wilai-2511.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
+    "title": "คดีราชาเงินทุน (วิกฤตการณ์ตลาดหุ้นครั้งแรกของไทย)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdii-raja-finance-2522.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีกบฏวังหลวง (ความพยายามคืนอำนาจของปรีดี)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdii-royal-palace-rebellion-2492.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีนางทองเลื่อน (นักโทษประหารหญิง)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdii-thong-luean-2475.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
+    "title": "แชร์ลูกโซ่ คอนเซปต์ วอเตอร์ (Concept Water)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdiiaechrluukoch-kh-nechpt-w-et-r-concept-water-2565.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "ไฟไหม้ เมาท์เทน บี (Mountain B) ผับ",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdiiaifaihm-emaathethn-bii-mountain-b-phab-2565.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "จัดซื้อแท็บเล็ตนักเรียน (One Tablet Per Child)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdiicchadchuue-aethbeltnakeriiyn-one-tablet-per-child-2556.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "ชาลส โสภราจ (Charles Sobhraj) ฆาตกรบิกินี",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdiichaals-osphraacch-charles-sobhraj-2518.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "ดิไอคอนกรุ๊ป (The iCon Group)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdiidiai-kh-nkrup-the-icon-group-2567.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
+    "title": "คำร้องขอฟ้องเพิกถอนการอนุมัติรายงาน EIA คอนโดมิเนียมสุขุมวิท — ไม่มีคำพิพากษา (ศาลปกครองกลาง)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdiiephikth-nraayngaan-eia-kh-nodmieniiymyaansukhumwith-2566.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
+    "title": "เสียชีวิตปริศนาบนเกาะเต่า (Death Island) (2557-2560)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdiiesiiychiiwitprisnaabnekaaaetaa-death-island-2557-2560.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "คดีสลากกินแบ่งรัฐบาลเป็นกลุ่ม ('หวยกลุ่ม') — ข้อพิพาทการแบ่งเงินรางวัล",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdiif-ngaebngphlkamairslaakkinaebngrathbaal-hwyklum-2566.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
+    "title": "ฟ้องคดีแบบกลุ่ม (Class Action) ผู้ถือหุ้นกู้ STARK",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdiif-ngkhdiiaebbklum-class-action-phuuthuue-hunkuu-stark-2567.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
+  },
+  {
+    "title": "เครือข่ายบ่อนการพนันนายจิว ซือหาน (ตู้ห่าว) และมาตรการริบทรัพย์สินฟอกเงิน",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdiifokngontuhawayattrisap-2567.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
+    "title": "ฝรั่งเตะหมอ ภูเก็ต (เดวิด)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdiifrangetahm-phuuekt-edwid-2567.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
+    "title": "กระทะโคเรียคิง (Korea King)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdiikrathaokheriiykhing-korea-king-2560.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "pending"
+  },
+  {
+    "title": "มหากาพย์ STARK (สตาร์ค คอร์เปอเรชั่น)",
+    "year": "-",
+    "norm_year": 0,
+    "slug": "news-case-khdiimhaakaaphy-stark-staarkh-kh-rep-erchan-2566.html",
+    "cat_tag": "คดีสมัยใหม่",
+    "score": 95,
+    "status": "Warn",
+    "video_status": "confirmed"
   }
 ]
