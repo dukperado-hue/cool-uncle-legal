@@ -216,6 +216,13 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 .case-answer{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:13.5px;color:var(--ink-soft);white-space:pre-line;line-height:1.75}
 .case-card.open .case-answer{display:block}
 
+/* sentence-analysis highlight (ประธาน/กริยา/กรรม) */
+.sv-subj{background:#fff59d;color:#3a2f00;padding:1px 5px;border-radius:4px;font-weight:700;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.sv-verb{background:#ff9e9e;color:#5a0000;padding:1px 5px;border-radius:4px;font-weight:700;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.sv-obj{background:#9ecdff;color:#00305a;padding:1px 5px;border-radius:4px;font-weight:700;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.sv-note{display:block;color:#8a8a8a;font-size:12.5px;font-style:italic;margin:4px 0 14px;line-height:1.6}
+.sv-legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--ink-soft);margin:6px 0 12px;align-items:center}
+
 footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)}
 .coffee-widget{
   display:flex;flex-direction:column;align-items:center;gap:10px;
@@ -1029,9 +1036,51 @@ college, I would have passed all the tests." (do, study)
 **Reading — แกะโครงสร้างประโยคและระบุ Tense:** อ่านบทความ Judicial Review จากเว็บไซต์ศาล
 สหราชอาณาจักร (judiciary.uk) ต่อจากครั้งที่แล้ว แล้วนอกจากหาประธาน/กริยา/กรรม/ส่วนขยายในแต่ละ
 ประโยคแล้ว ให้สังเกตด้วยว่าแต่ละประโยคใช้ Tense แบบใดบ้าง (ฝึกจับ Tense จากเอกสารกฎหมายจริง
-ตอนนี้ที่เรียนครบทั้ง 12 Tenses แล้ว) บทความเปิดด้วยประโยคว่า "Judicial review is a type of
-court proceeding in which a judge reviews the lawfulness of a decision or action made by a
-public body." — เป็น Present Simple เพราะเป็นการอธิบายหลักการที่เป็นจริงเสมอ (คำนิยาม)
+ตอนนี้ที่เรียนครบทั้ง 12 Tenses แล้ว) ด้านล่างนี้คือบทความฉบับเต็มพร้อมไฮไลท์สี — [[S]]เหลือง =
+ประธาน[[/S]] [[V]]แดง = กริยา[[/V]] [[O]]ฟ้า = กรรม/ส่วนสมบูรณ์[[/O]] และคำอธิบาย (สีเทา ตัวเอียง)
+กำกับ Tense ไว้ท้ายแต่ละประโยค:
+
+[[S]]Judicial review[[/S]] [[V]]is[[/V]] [[O]]a type of court proceeding[[/O]] in which
+[[S]]a judge[[/S]] [[V]]reviews[[/V]] [[O]]the lawfulness of a decision or action made by a
+public body[[/O]].
+[[G]](Tense: Present Simple ทั้งประโยค — "is"/"reviews" เพราะเป็นการอธิบายนิยาม/หลักการที่เป็น
+จริงเสมอ หมายเหตุ: "is" เป็น linking verb ส่วนสีฟ้าหลัง is จึงเป็น subject complement ไม่ใช่กรรม
+โดยตรง ต่างจาก "reviews" ที่เป็นกริยาแท้มีกรรมจริงตามหลัง)[[/G]]
+
+In other words, [[S]]judicial reviews[[/S]] [[V]]are[[/V]] [[O]]a challenge to the way[[/O]] in
+which [[S]]a decision[[/S]] [[V]]has been made[[/V]], rather than the rights and wrongs of the
+conclusion reached.
+[[G]](Tense: Present Simple หลัก "are" + Present Perfect แบบ Passive ในอนุประโยค "has been
+made" — ใช้บอกว่ากระบวนการตัดสินใจนั้นเกิดขึ้นเสร็จเรียบร้อยแล้วนับถึงตอนนี้)[[/G]]
+
+[[S]]It[[/S]] [[V]]is not really concerned[[/V]] [[O]]with the conclusions of that process[[/O]]
+and whether [[S]]those[[/S]] [[V]]were[[/V]] 'right', as long as [[S]]the right procedures[[/S]]
+[[V]]have been followed[[/V]].
+[[G]](Tense: Present Simple แบบ Passive "is...concerned" + Past Simple "were" + Present Perfect
+แบบ Passive "have been followed" — ประโยคเดียวมีถึง 3 tense ปนกัน เพราะเล่าทั้งหลักการทั่วไป
+เหตุการณ์ที่ผ่านไปแล้ว และผลที่ต่อเนื่องมาถึงปัจจุบัน)[[/G]]
+
+[[S]]The court[[/S]] [[V]]will not substitute[[/V]] [[O]]what it thinks is the 'correct'
+decision[[/O]].
+[[G]](Tense: Future Simple แบบปฏิเสธ "will not substitute" — กรรมของประโยคคือ noun clause
+ทั้งก้อน "what it thinks is the 'correct' decision" ไม่ใช่แค่คำเดียว)[[/G]]
+
+[[S]]This[[/S]] [[V]]may mean[[/V]] [[O]]that the public body will be able to make the same
+decision again, so long as it does so in a lawful way[[/O]].
+[[G]](Tense: Modal "may" + V1 — กรรมเป็น noun clause ที่ซ้อน Future Simple "will be able to
+make" ไว้ข้างในอีกชั้นหนึ่ง)[[/G]]
+
+If [[S]]you[[/S]] [[V]]want[[/V]] [[O]]to argue that a decision was incorrect[[/O]],
+[[S]]judicial review[[/S]] [[V]]may not be[[/V]] best for you.
+[[G]](นี่คือ If-Clause แบบที่ 1 ที่เพิ่งเรียนไป: Present "want" + Modal คล้าย will "may" —
+ส่วนอนุประโยคย่อยข้างใน "a decision was incorrect" ใช้ Past Simple)[[/G]]
+
+[[S]]There[[/S]] [[V]]are[[/V]] alternative remedies, such as appealing against the decision to
+a higher court.
+[[G]]("There are..." เป็นโครงสร้าง existential there — There ทำหน้าที่ประธานทางไวยากรณ์ ส่วน
+"alternative remedies" คือประธานที่แท้จริงในเชิงความหมาย ประโยคนี้จึงไม่มีกรรมตรงๆ Tense:
+Present Simple)[[/G]]
+
 ใจความสำคัญของบทความคือ judicial review ตรวจสอบ "กระบวนการ" ที่นำไปสู่การตัดสินใจของหน่วยงาน
 รัฐ ไม่ใช่การตรวจสอบว่าคำตัดสินนั้น "ถูกหรือผิด" — หากหน่วยงานรัฐทำตามกระบวนการที่ชอบด้วย
 กฎหมายแล้ว ศาลจะไม่เข้าไปเปลี่ยนผลลัพธ์ให้ แม้จะยื่นคำร้องอีกครั้งหน่วยงานนั้นก็อาจตัดสินใจ
@@ -1305,6 +1354,10 @@ const TTS = (function(){
 function renderLectureBody(l){
   let escaped = l.text.replace(/</g,'&lt;');
   escaped = escaped.replace(/\*\*([\s\S]+?)\*\*/g, '<strong>$1</strong>');
+  escaped = escaped.replace(/\[\[S\]\]([\s\S]+?)\[\[\/S\]\]/g, '<span class="sv-subj">$1</span>');
+  escaped = escaped.replace(/\[\[V\]\]([\s\S]+?)\[\[\/V\]\]/g, '<span class="sv-verb">$1</span>');
+  escaped = escaped.replace(/\[\[O\]\]([\s\S]+?)\[\[\/O\]\]/g, '<span class="sv-obj">$1</span>');
+  escaped = escaped.replace(/\[\[G\]\]([\s\S]+?)\[\[\/G\]\]/g, '<span class="sv-note">$1</span>');
   const video = l.video ? `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${l.video}" title="วิดีโอประกอบบรรยายครั้งที่ ${l.n}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div></div>` : '';
   return video + escaped;
 }
