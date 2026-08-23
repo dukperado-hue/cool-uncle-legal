@@ -309,7 +309,7 @@ function libraryCardHtml(c){
     </a>`;
 }
 
-function librarySection(cardsHtml, dbTotal){
+function librarySection(cardsHtml){
   return `
   <section class="v2-section">
     <div class="v2-section-head">
@@ -317,11 +317,6 @@ function librarySection(cardsHtml, dbTotal){
       <h2>คดีที่ผ่านการคัดเลือกเพื่อใช้เป็นสื่อการเรียนรู้กฎหมาย</h2>
     </div>
     <div class="lib-grid">${cardsHtml || ''}</div>
-    <div class="lib-note">
-      🔒 หน้านี้แสดงเฉพาะ <strong>curated content</strong> ที่ผ่าน validation gate แล้วเท่านั้น — ไม่ใช่จำนวนคดีทั้งหมดในฐานข้อมูล<br>
-      คดีที่เหลือ (${esc(dbTotal ?? '…')} คดี) ยังรอ de-identification โดย Agent A และ judicial verification โดย Agent C — เปิดตามลำดับเมื่อผ่านคุณภาพ (RULE 4: คุณภาพก่อนปริมาณ)<br>
-      💡 Hidden is not deleted — คดีที่ยังไม่พร้อม public ถูกตั้งค่า <code>visibility.public = false</code> <strong>ไม่ได้ถูกลบ</strong> (RULE 5)
-    </div>
   </section>`;
 }
 
@@ -362,7 +357,7 @@ async function init(){
     entryPointsSection(featuredId) +
     caseOfWeekSection(featuredCase, featuredId) +
     playShowcaseSection((featuredCase.play && featuredCase.play.flow) || [], featuredId) +
-    librarySection(libraryCards, g._db_total);
+    librarySection(libraryCards);
 
   window.__golden = g;
 }
