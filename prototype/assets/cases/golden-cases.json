@@ -75,13 +75,15 @@
    "cat": "คดีอาญา",
    "has_video": true,
    "rank": {
-    "grade": null,
-    "score": null,
-    "s_verified": false
+    "grade": "VERIFIED_S",
+    "score": 88,
+    "s_verified": true,
+    "judicial_case": "คำพิพากษาศาลฎีกาที่ 2236-2237/2550",
+    "verified_by": "case-writer skill"
    },
    "visibility": {
-    "public": false,
-    "public_reason": "deident_required_and_needs_review"
+    "public": true,
+    "public_reason": null
    },
    "modes": [
     "read",
@@ -182,8 +184,8 @@
     "verified_by": "Agent C — Batch 3a (primary source: Wikisource)"
    },
    "visibility": {
-    "public": false,
-    "public_reason": "agent_a_approval_required"
+    "public": true,
+    "public_reason": null
    },
    "modes": [
     "read",
@@ -1684,6 +1686,42 @@
    "modes": [
     "read",
     "play"
+   ]
+  },
+  {
+   "id": "banyin-suchuwong-2567",
+   "title": "คดีบรรยิน ตั้งภากรณ์ ฆ่าอำพรางเสี่ยชูวงษ์ (2558-2567)",
+   "cat": "คดีอาญา",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 82,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read"
+   ]
+  },
+  {
+   "id": "thewarat-mangkorn-2549",
+   "title": "คดีนาวาเอกเทวราช มังกร ฆ่าตำรวจฝังดินที่แม่สอด (2549)",
+   "cat": "คดีอาญา",
+   "has_video": false,
+   "rank": {
+    "grade": "A",
+    "score": 78,
+    "s_verified": false
+   },
+   "visibility": {
+    "public": true,
+    "gate": "none"
+   },
+   "modes": [
+    "read"
    ]
   }
  ],

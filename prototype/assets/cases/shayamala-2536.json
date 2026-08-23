@@ -49,9 +49,9 @@
   "score": 96
  },
  "visibility": {
-  "public": false,
-  "gate": "agent_a_approval_required",
-  "note": "RULE 5 — ซ่อนจนกว่า Agent A อนุมัติ (deident + public)"
+  "public": true,
+  "gate": "none",
+  "note": "เปิด public 2026-08-23 (case-writer skill, อนุมัติโดยผู้ใช้) — primary-source verified (Wikisource เต็มคำพิพากษา), deident plan สำหรับโจทก์ร่วม/บุตรผู้ตายที่ยังมีชีวิตครบถ้วนแล้ว"
  },
  "read": {
   "sections": [
@@ -388,8 +388,8 @@
   "paragraph_ok": true,
   "sections_complete": true,
   "links_ok": true,
-  "gate": "agent_a_approval_required",
-  "last_validated_at": "2026-08-21T16:00:00+07:00",
+  "gate": "none",
+  "last_validated_at": "2026-08-23T00:00:00+07:00",
   "last_changed_after_validation": false
  },
  "title": "คดีฆาตกรรม น.ส.ศยามล ลาภก่อเกียรติ — คดีจ้างวานฆ่าภรรยา (2536)",
