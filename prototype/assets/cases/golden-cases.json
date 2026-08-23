@@ -298,27 +298,6 @@
    ]
   },
   {
-   "id": "nualchawee-2502",
-   "title": "คดีพิพากษา นวลฉวี 2502 (VERIFIED_S)",
-   "cat": "Criminal-Historical",
-   "has_video": true,
-   "rank": {
-    "grade": "VERIFIED_S",
-    "score": 5,
-    "s_verified": true,
-    "judicial_case": "ศาลอาญา 2502-2503 — ฎีกายืนโทษประหาร (ตาม Agent C Batch 3a)",
-    "verified_by": "Agent C — Batch 3a (judicial authority)"
-   },
-   "visibility": {
-    "public": false,
-    "public_reason": "agent_a_approval_required"
-   },
-   "modes": [
-    "read",
-    "play"
-   ]
-  },
-  {
    "id": "sappaya-siristhaan-2566",
    "title": "ผิดสัญญาก่อสร้างอาคารรัฐสภาใหม่ “สัปปายะสภาสถาน” (2566)",
    "cat": "คดีแพ่ง/จัดซื้อจัดจ้าง",
@@ -741,28 +720,6 @@
    ]
   },
   {
-   "id": "bawornadej-2476",
-   "title": "กบฏบวรเดช 2476 — ศาลพิเศษ พ.ร.บ.2476",
-   "cat": "คด+ีดรประวัติศาสตร์ · การเมือง",
-   "has_video": false,
-   "rank": {
-    "grade": "S_CANDIDATE",
-    "score": 4,
-    "s_verified": false,
-    "judicial_case": "ศาลพิเศษ (พ.ร.บ.ศาลพิเศษ 2476 ม.4) — คดีกบฏบวรเดช",
-    "verified_by": "Agent C (Batch 3c)"
-   },
-   "visibility": {
-    "public": true,
-    "public_reason": "agent_a_approval_required",
-    "gate": "none"
-   },
-   "modes": [
-    "read",
-    "play"
-   ]
-  },
-  {
    "id": "chainmanee-2567",
    "title": "เชนแมนี่ 2567 — Nominee Forex-3D",
    "cat": "คด+ีดรอาญา · ฟอกเงิน",
@@ -806,48 +763,6 @@
    ]
   },
   {
-   "id": "ratthamontri-2492",
-   "title": "การสังหาร 4 รัฐมนตรี 2492",
-   "cat": "คด+ีดรประวัติศาสตร์ · การเมือง",
-   "has_video": false,
-   "rank": {
-    "grade": "S_CANDIDATE",
-    "score": 4,
-    "s_verified": false,
-    "judicial_case": "การสังหาร 4 รัฐมนตรี (11 พ.ย. 2492) — ไม่มีคำพิพากษา",
-    "verified_by": "Agent C (Batch 3c)"
-   },
-   "visibility": {
-    "public": false,
-    "public_reason": "agent_a_approval_required"
-   },
-   "modes": [
-    "read",
-    "play"
-   ]
-  },
-  {
-   "id": "kabot-r130-2455",
-   "title": "คดีกบฏ ร.ศ.130 (2455)",
-   "cat": "คดยุคโบราณ",
-   "has_video": true,
-   "rank": {
-    "grade": "S_CANDIDATE",
-    "score": 4,
-    "s_verified": false,
-    "judicial_case": "พระราชวินิจฉัย ร.6",
-    "verified_by": "Agent C"
-   },
-   "visibility": {
-    "public": true,
-    "gate": "none"
-   },
-   "modes": [
-    "read",
-    "play"
-   ]
-  },
-  {
    "id": "nangthongloen-2468",
    "title": "คดีนางทองเลื่อน \"อีทองเลื่อนหักคอน้องผัว\"",
    "cat": "คดยุคร.6",
@@ -857,27 +772,6 @@
     "score": 4,
     "s_verified": false,
     "judicial_case": "ประหาร 14 ต.ค. 2468",
-    "verified_by": "Agent C"
-   },
-   "visibility": {
-    "public": true,
-    "gate": "none"
-   },
-   "modes": [
-    "read",
-    "play"
-   ]
-  },
-  {
-   "id": "khdii-sanghan-4-ratthamontri-2492",
-   "title": "คดีสังหาร 4 รัฐมนตรี (2492)",
-   "cat": "อาชญากรรมโดยรัฐ",
-   "has_video": false,
-   "rank": {
-    "grade": "VERIFIED_S",
-    "score": 5,
-    "s_verified": true,
-    "judicial_case": "คำพิพากษาศาลฎีกาปี 2502",
     "verified_by": "Agent C"
    },
    "visibility": {
@@ -904,28 +798,6 @@
    "visibility": {
     "public": true,
     "gate": "none"
-   },
-   "modes": [
-    "read",
-    "play"
-   ]
-  },
-  {
-   "id": "khdii-ksr-kulap-2443",
-   "title": "คดี ก.ศ.ร. กุหลาบ (2443)",
-   "cat": "คดีกึ่งการเมือง",
-   "has_video": false,
-   "rank": {
-    "grade": "S_CANDIDATE",
-    "score": 4,
-    "s_verified": false,
-    "judicial_case": "ส่งตัวรักษาโรงพยาบาลบ้า — ดูเวอร์ชันเต็มที่ ksor-kulab-2436",
-    "verified_by": "Agent C"
-   },
-   "visibility": {
-    "public": false,
-    "public_reason": "duplicate_of_ksor-kulab-2436",
-    "gate": "duplicate_content"
    },
    "modes": [
     "read",
@@ -963,27 +835,6 @@
     "score": 4,
     "s_verified": false,
     "judicial_case": "การปฏิรูปกฎมณเฑียรบาล 2424",
-    "verified_by": "Agent C"
-   },
-   "visibility": {
-    "public": true,
-    "gate": "none"
-   },
-   "modes": [
-    "read",
-    "play"
-   ]
-  },
-  {
-   "id": "khdii-rs130-rebellion-2455",
-   "title": "กบฏ ร.ศ. 130 (2455)",
-   "cat": "การเมืองและโครงสร้าง",
-   "has_video": false,
-   "rank": {
-    "grade": "VERIFIED_S",
-    "score": 5,
-    "s_verified": true,
-    "judicial_case": "ศาลทหารและการอภัยโทษ",
     "verified_by": "Agent C"
    },
    "visibility": {
@@ -1444,27 +1295,6 @@
     "grade": "A",
     "score": 85,
     "s_verified": false
-   },
-   "visibility": {
-    "public": true,
-    "gate": "none"
-   },
-   "modes": [
-    "read",
-    "play"
-   ]
-  },
-  {
-   "id": "syamol-forensic-2536",
-   "title": "คดีศยามล (2536)",
-   "cat": "คดีเด่นด้านสังคม",
-   "has_video": false,
-   "rank": {
-    "grade": "VERIFIED_S",
-    "score": 85,
-    "s_verified": true,
-    "judicial_case": "คำพิพากษาศาลฎีกาที่ 3968/2537",
-    "verified_by": "Agent C"
    },
    "visibility": {
     "public": true,
