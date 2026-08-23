@@ -52,7 +52,7 @@
 </head>
 <body>
 <div class="topbar mag">
-  <a class="tb-brand" href="news-index-v2.html"><img src="assets/capybara-64.webp" alt="" width="36" height="36">Cool Uncle <span style="color:#B08A3C">⚖</span> Legal Lab</a>
+  <a class="tb-brand" href="../news-index.html"><img src="assets/capybara-64.webp" alt="" width="36" height="36">Cool Uncle <span style="color:#B08A3C">⚖</span> Legal Lab</a>
   <span class="tb-sep">|</span>
   <span>🎮 โหมดเล่น — ทายใจศาล</span>
 </div>
@@ -74,7 +74,7 @@
      จนกว่าผู้ใช้จะตอบ "Predict the Verdict" (step 4) แล้วเท่านั้น
    ================================================================ */
 
-const appId = new URLSearchParams(location.search).get('id') || 'janeera-2541';
+const appId = new URLSearchParams(location.search).get('id') || 'shayamala-2536';
 const CASE_URL = `assets/cases/${appId}.json`;
 
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
@@ -123,7 +123,7 @@ function renderStep(){
   // ===== ANTI-REVEAL GATE =====
   if((step.key === 'show_verdict' || step.key === 'show_reasoning') && !verdictUnlocked()){
     app.innerHTML = `
-      <a class="back-button" href="news-index-v2.html">← กลับหน้าแรก</a>
+      <a class="back-button" href="../news-index.html">← กลับหน้าแรก</a>
       ${renderProgress()}
       <div class="play-card">
         <div class="play-step-head"><div class="play-step-num">🔒</div><div class="play-step-title">คำตอบยังถูกล็อกอยู่</div></div>
@@ -175,7 +175,7 @@ function renderStep(){
     }
 
     app.innerHTML = `
-      <a class="back-button" href="news-index-v2.html">← กลับหน้าแรก</a>
+      <a class="back-button" href="../news-index.html">← กลับหน้าแรก</a>
       ${renderProgress()}
       <div class="play-card">
         <div class="play-step-head"><div class="play-step-num">${step.step}</div><div class="play-step-title">${esc(step.title)}</div></div>
@@ -189,7 +189,7 @@ function renderStep(){
   // open-ended / NEEDS_REVIEW step (no quiz data yet)
   if((ct.answer === false || (ct.options||[]).length === 0) && ct.question){
     app.innerHTML = `
-      <a class="back-button" href="news-index-v2.html">← กลับหน้าแรก</a>
+      <a class="back-button" href="../news-index.html">← กลับหน้าแรก</a>
       ${renderProgress()}
       <div class="play-card">
         <div class="play-step-head"><div class="play-step-num">${step.step}</div><div class="play-step-title">${esc(step.title)}</div></div>
@@ -205,7 +205,7 @@ function renderStep(){
   const unlocked = C.read.sections.find(s=>s.key==='judicial')?.content?.verified;
   if(step.key === 'show_verdict'){
     app.innerHTML = `
-      <a class="back-button" href="news-index-v2.html">← กลับหน้าแรก</a>
+      <a class="back-button" href="../news-index.html">← กลับหน้าแรก</a>
       ${renderProgress()}
       <div class="play-card">
         <div class="play-step-head"><div class="play-step-num">⚖</div><div class="play-step-title">${esc(step.title)}</div></div>
@@ -221,7 +221,7 @@ function renderStep(){
   }
   if(step.key === 'show_reasoning'){
     app.innerHTML = `
-      <a class="back-button" href="news-index-v2.html">← กลับหน้าแรก</a>
+      <a class="back-button" href="../news-index.html">← กลับหน้าแรก</a>
       ${renderProgress()}
       <div class="play-card">
         <div class="play-step-head"><div class="play-step-num">💡</div><div class="play-step-title">${esc(step.title)}</div></div>
@@ -255,7 +255,7 @@ function renderFinal(){
       <h3 style="font-family:'Noto Serif Thai',serif;font-size:1.3rem;margin-bottom:6px">🏁 จบรอบ — คะแนน ${score}/${total}</h3>
       <p style="color:var(--ink-soft);margin-bottom:16px">ไม่ว่าจะทายถูกไหม สิ่งสำคัญคือเหตุผลทางกฎหมาย — อ่านคดีฉบับเต็มแล้วจะเข้าใจลึกขึ้น</p>
       <a class="play-cta-read" href="read-case.html?id=${appId}">📖 อ่านคดีฉบับเต็ม →</a>
-      <p style="font-size:.85rem;color:var(--ink-faint);margin-top:14px">🎲 <a href="news-index-v2.html" style="color:var(--accent);font-weight:600">สุ่มคดีอื่นเล่นต่อ</a></p>
+      <p style="font-size:.85rem;color:var(--ink-faint);margin-top:14px">🎲 <a href="../news-index.html" style="color:var(--accent);font-weight:600">สุ่มคดีอื่นเล่นต่อ</a></p>
     </div>`;
 }
 

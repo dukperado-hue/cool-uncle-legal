@@ -3,15 +3,13 @@
   "version": "1.0",
   "last_curated": "2026-08-20",
   "curated_by": "B",
-  "note": "Curated public surface — Database ≠ Publication: โหลดโดย news-index-v2.html เฉพาะคดีที่ visibility.public = true",
-  "_featured_deident": "🛡 De-identification ระดับ C — แสดงเฉพาะบทบาท (จำเลย = นักศึกษาแพทย์ชาย / ผู้ตาย = นักศึกษาแพทย์หญิง) — ชื่อจริงเก็บไว้ใน case JSON เท่านั้น"
+  "note": "Curated public surface — Database ≠ Publication: โหลดโดย news-index.html เฉพาะคดีที่ visibility.public = true"
  },
- "_featured_title": "คดีจำเลย (นักศึกษาแพทย์ชาย) — รักที่กลายเป็นฆาตกรรมอำพรางศพ (2541)",
- "_featured_blurb": "ศาลฎีกาวางหลักแยก 'ความรัก' กับ 'ความใคร่ในการยึดครอง' — หลักนี้ยังคงถูกอ้างอิงในการพิจารณาเหตุลดโทษคดีฆาตกรรมเรื่องรักถึงปัจจุบัน",
- "_featured_deident": "🛡 ชื่อผู้ตาย/จำเลยจริงในเนื้อหาคือข้อมูลดิบจาก legacy — รอดำเนินการ de-identification โดย Agent A ก่อนเปิดเป็น featured เต็มรูปแบบ",
+ "_featured_title": "คดีฆาตกรรม น.ส.ศยามล ลาภก่อเกียรติ (2536)",
+ "_featured_blurb": "หมอบัณฑิตจ้างวานฆ่าภรรยาตนเองด้วยมือปืน 4 คน — พยานแพจเจอร์มัดตัวบงการที่มือไม่เปื้อนเลือด — ฎีกา 5244/2539 ยืนยันแล้วจากต้นฉบับ",
  "_db_total": "235",
  "featured_cases": [
-  "janeera-2541"
+  "shayamala-2536"
  ],
  "golden_cases": [
   {
