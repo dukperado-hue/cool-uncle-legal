@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html lang="th">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>แผนที่โครงข่ายโปรเจกต์ — Cool Uncle Lab</title>
+    <meta name="description" content="แผนที่โครงข่ายแบบโต้ตอบ แสดงว่า Cool Uncle เขียนโค้ดอะไรไปบ้าง เชื่อมโยงกับ repo ต่าง ๆ ของ dukperado-hue">
+    <meta name="theme-color" content="#0d1117">
+
+    <link rel="icon" href="../icons/favicon-32.png" sizes="32x32">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;900&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+    <script src="lib/d3.v7.js"></script>
+    <script src="lib/d3-delaunay.js"></script>
+    <script src="lib/d3-bboxCollide.min.js"></script>
+
+    <script src="createORCAVisual.js"></script>
+
+    <style>
+        #labbar { display: flex; }
+        #chart-wrapper { min-width: 0; }
+        @media (max-width: 960px) {
+            #chart-introduction { grid-template-columns: 1fr; }
+            .double-column { grid-template-columns: 1fr; padding: 2em 1.2em; }
+            #tldr-explanation { grid-column-start: 1; grid-column-end: 2; }
+            #legend-note { grid-column-start: 1; grid-column-end: 2; }
+        }
+    </style>
+</head>
+<body>
+    <div id="labbar">
+        <a href="../lab.html">← Cool Uncle Lab</a>
+        <span class="sep">|</span>
+        <span>🕸️ แผนที่โครงข่ายโปรเจกต์</span>
+    </div>
+
+    <div id="chart-wrapper">
+        <div id="chart-introduction">
+            <div id="chart-title">
+                <h1>แผนที่โครงข่ายโปรเจกต์ของ</h1>
+                <h1><span id="title-repo-name" class="central-repo">dukperado-hue/cool-uncle-legal</span></h1>
+                <p id="last-commit-date"></p>
+            </div>
+            <div id="chart-intro-text">
+                <p>เว็บ <span class="repo-name central-repo">dukperado-hue/cool-uncle-legal</span> คือแอปหลักของ Cool Uncle Lab ที่เขียนโค้ดต่อเนื่องมาตั้งแต่สร้าง<span id="first-commit-date"></span> โดยมี <span class="contributor">ผู้เขียนโค้ด</span> เพียงคนเดียวคือ <strong>dukperado-hue</strong> (ตัวผู้ใช้เองนั่นแหละ)</p>
+
+                <p>กราฟด้านล่างแสดงให้เห็นว่านอกจากเว็บหลักแล้ว dukperado-hue ยังเขียนโค้ดกระจายไปยัง <span class="top-repo-num"></span><span class="repository">repository</span> อื่น ๆ อีกกี่แห่ง แต่ละอันคือหนึ่งโปรเจกต์ในเครือ Cool Uncle Lab</p>
+
+                <p>วงกลมสีส้มตรงกลางคือบัญชี GitHub <span class="owner">dukperado-hue</span> ที่เป็นเจ้าของทุก repo เหล่านี้ ส่วนวงกลมสีแดงคือตัวคนเขียนโค้ด (คนเดียวกัน) เชื่อมด้วยเส้นไปยังแต่ละ<span class="repository">repository</span> — เส้นยิ่งหนา ยิ่ง commit เยอะ</p>
+
+                <p><a id="explanation-link" href="#chart-explanation"><strong>วิธีอ่านแผนที่นี้ อยู่ด้านล่างของกราฟ</strong></a></p>
+            </div>
+        </div>
+
+        <div id="chart-container"></div>
+
+        <div id="chart-explanation" class="double-column">
+            <p class="header"><strong>วิธีอ่านแผนภาพนี้</strong></p>
+
+            <p id="tldr-explanation"><strong>สรุปสั้น ๆ</strong> | แผนภาพนี้แสดงว่า <span class="central-repo repo-name">dukperado-hue/cool-uncle-legal</span> เชื่อมโยงกับ <span class="repository">repository</span> อื่น ๆ ที่ dukperado-hue เขียนโค้ดไว้อย่างไรบ้าง</p>
+
+            <div id="legend-note">
+                <p><strong>สี</strong> | <span class="central-repo">repo หลัก</span> (cool-uncle-legal) เป็นสีทองตรงกลาง ตัว <span class="contributor">ผู้เขียนโค้ด</span> เป็นวงกลมสีแดง ส่วน <span class="owner">เจ้าของบัญชี GitHub</span> เป็นวงกลมสีส้ม (ในที่นี้คือคนเดียวกัน เพราะเป็นโปรเจกต์เดี่ยว) และ<span class="repository">repository</span> อื่น ๆ ทั้งหมดเป็นสีน้ำเงิน</p>
+
+                <p><strong>ขนาดวงกลม</strong> | ขนาดของวงกลม <span class="repository">repository</span> อ้างอิงจากจำนวนดาว (stars) ที่ได้รับบน GitHub ส่วน <span class="central-repo">repo หลัก</span> จะถูกขยายให้เห็นชัดเสมอโดยไม่ขึ้นกับจำนวนดาว</p>
+            </div>
+            <div>
+                <p><strong>เส้นเชื่อม</strong> | เส้นเชื่อมโยง <span class="contributor">ผู้เขียนโค้ด</span> ไปยัง <span class="repository">repository</span> ที่เขียนโค้ดลงไป ความหนาของเส้นแปรผันตามจำนวน commit ที่ทำในแต่ละ repo</p>
+
+                <p><strong>การโต้ตอบ</strong> | <strong>เอาเมาส์ไปวางบนวงกลม</strong> เพื่อดูการเชื่อมโยงทั้งหมดของวงกลมนั้น และ <strong>คลิก</strong> เพื่อตรึงแผนภาพไว้พร้อมไฮไลต์เส้นเชื่อมทั้งหมด สำรวจดูได้ว่าแต่ละโปรเจกต์เชื่อมกันอย่างไร</p>
+            </div>
+        </div>
+
+        <div id="chart-notes" class="double-column">
+            <p class="header"><strong>หมายเหตุเกี่ยวกับข้อมูล</strong></p>
+            <p>ข้อมูลดึงมาจาก GitHub API สาธารณะของบัญชี <span class="code">dukperado-hue</span> เมื่อวันที่ 23 สิงหาคม 2569 นับเฉพาะ commit ที่ทำจริงบน GitHub เท่านั้น (commit บนเครื่องที่ยังไม่ push จะไม่ถูกนับ)</p>
+            <p>ดัดแปลงมาจากเครื่องมือโอเพนซอร์ส <a href="https://github.com/nbremer/ORCA/tree/main/top-contributor-network" target="_blank">ORCA Top Contributor Network</a> ของ Nadieh Bremer (Visual Cinnamon) — เปลี่ยนจากการแสดง "ผู้ร่วมพัฒนา repo คนอื่น" มาเป็นการแสดง "โปรเจกต์ทั้งหมดของคนคนเดียว" แทน</p>
+        </div>
+
+        <div id="chart-extra">
+            <button id="dataviz-download-data">ดาวน์โหลดข้อมูลดิบ (CSV)</button>
+            <p id="dataviz-credit">แสดงผลด้วย <a href="https://github.com/nbremer/ORCA" target="_blank">ORCA</a> ของ Nadieh Bremer · ดัดแปลงและข้อมูลโดย Cool Uncle Lab</p>
+        </div>
+    </div>
+
+    <script>
+        const REPOSITORY_FULL = "dukperado-hue/cool-uncle-legal"
+        const REPOSITORY_NAME = "cool-uncle-legal"
+
+        document.querySelectorAll(".repo-name-only").forEach(d => d.innerHTML = REPOSITORY_NAME)
+
+        ////////////////// Datasets to Read in //////////////////
+        let promises = []
+        promises.push(d3.csv(`data/dukperado/top_contributors.csv`))
+        promises.push(d3.csv(`data/dukperado/repositories.csv`))
+        promises.push(d3.csv(`data/dukperado/links.csv`))
+
+        /////////////////// Fonts to activate ///////////////////
+        const FONT_FAMILY = "Sarabun"
+        document.fonts.load(`normal 400 10px "${FONT_FAMILY}"`)
+        document.fonts.load(`normal 700 10px "${FONT_FAMILY}"`)
+
+        /////////////////// Figure out sizing ///////////////////
+        let container = document.getElementById("chart-container")
+        let width = container.offsetWidth
+        let height = width
+
+        ///////////////////// Start Drawing /////////////////////
+        let ORCAVisual = createORCAVisual(container)
+            .width(width)
+            .height(height)
+            .repository(REPOSITORY_FULL)
+
+        document.fonts.ready.then(() => {
+            Promise.all(promises).then(values => {
+                let data_raw = []
+                data_raw.push(JSON.parse(JSON.stringify(values[0])))
+                data_raw.push(JSON.parse(JSON.stringify(values[1])))
+                data_raw.push(JSON.parse(JSON.stringify(values[2])))
+
+                // Hide the ORCA-only explanation notes (not used in this dataset)
+                document.querySelectorAll(".orca-note").forEach(d => d.style.display = `none`)
+
+                document.querySelectorAll(".top-repo-num").forEach(d => d.innerHTML = `${values[1].length - 1} `)
+
+                ORCAVisual(values)
+
+                let central_repo = values[1].find(d => d.repo === REPOSITORY_FULL)
+                let formatDate = d3.timeFormat("%B %Y")
+                let formatDateLong = d3.utcFormat("%-d %B %Y")
+                document.getElementById("first-commit-date").innerHTML = ` เมื่อ ${formatDate(central_repo.createdAt)}`
+
+                let links_to_central = values[2].filter(d => d.target.data && d.target.data.repo === REPOSITORY_FULL)
+                let most_recent_commit = d3.max(links_to_central, d => d.commit_sec_max)
+                document.getElementById("last-commit-date").innerHTML = `นับ commit ถึงวันที่ ${formatDateLong(most_recent_commit)}`
+
+                const download_button = document.getElementById("dataviz-download-data")
+                download_button.addEventListener("click", () => {
+                    downloadData(data_raw[0], `dukperado-top_contributors`)
+                    downloadData(data_raw[1], `dukperado-repositories`)
+                    downloadData(data_raw[2], `dukperado-links`)
+
+                    function downloadData(data, filename) {
+                        let blob = new Blob([d3.csvFormat(data)], {type: "text/csv;charset=utf-8"})
+                        let link = document.createElement("a")
+                        link.href = window.URL.createObjectURL(blob)
+                        link.download = `${filename}.csv`
+                        link.click()
+                    }
+                })
+            })
+        })
+
+        /////////////////////////////////////////////////////////
+        ////////////////// Handle page resizing /////////////////
+        /////////////////////////////////////////////////////////
+
+        let current_width = window.innerWidth
+        let resizeTimer = null
+        window.addEventListener("resize", function () {
+            clearTimeout(resizeTimer)
+            resizeTimer = setTimeout(() => {
+                if (window.innerWidth !== current_width) {
+                    current_width = window.innerWidth
+                    let width = container.offsetWidth
+                    let height = width
+                    ORCAVisual.width(width).height(height).resize()
+                }
+            }, 300)
+        })
+    </script>
+</body>
+</html>
