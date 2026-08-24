@@ -1351,9 +1351,9 @@
   },
   {
    "id": "dr-supat-skeleton-2555",
-   "title": "คดีหมอสุพัฒน์ (2555)",
+   "title": "คดีหมอสุพัฒน์: ฆ่าอำพรางศพแรงงานเมียนมาในไร่สับปะรดเพชรบุรี (2555)",
    "cat": "คดีเด่นด้านสังคม",
-   "has_video": false,
+   "has_video": true,
    "rank": {
     "grade": "A",
     "score": 85,
@@ -1361,6 +1361,7 @@
    },
    "visibility": {
     "public": true,
+    "public_reason": "golden (manifest) — research ยืนยันข้อเท็จจริงหลักจากข่าว 8+ แหล่งอิสระแล้ว 2026-08-24 (case-writer skill); ไม่พบเลขคำพิพากษาศาลฎีกาที่ยืนยันได้ จึง s_verified คงเป็น false",
     "gate": "none"
    },
    "modes": [
