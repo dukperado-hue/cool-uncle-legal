@@ -3,7 +3,10 @@
  "meta": {
   "title": "คดีอ้ายอ่วม อกโรย (2414)",
   "year": 1871,
-  "cat": "คดีอาญาอุกฉกรรจ์"
+  "cat": "คดีอาญาอุกฉกรรจ์",
+  "categories": [
+   "criminal"
+  ]
  },
  "visibility": {
   "public": true,

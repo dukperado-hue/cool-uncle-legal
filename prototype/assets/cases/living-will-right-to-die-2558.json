@@ -3,7 +3,11 @@
  "meta": {
   "title": "คดีสิทธิในการตาย (Living Will): การเลือกวาระสุดท้ายด้วยศักดิ์ศรี",
   "year": 2558,
-  "cat": "คดีเด่นด้านสังคม"
+  "cat": "คดีเด่นด้านสังคม",
+  "categories": [
+   "family",
+   "other"
+  ]
  },
  "visibility": {
   "public": true,

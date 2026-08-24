@@ -153,6 +153,11 @@
 .lib-cta{font-weight:700;font-size:.86rem;color:var(--accent)}
 .lib-note{background:#F3F0E7;border:1px dashed var(--line);border-radius:14px;padding:18px 22px;font-size:.9rem;color:var(--ink-soft);line-height:1.75}
 .lib-note strong{color:var(--ink)}
+.lib-filter-row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}
+.lib-chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:.88rem;font-weight:600;color:var(--ink-soft);cursor:pointer;font-family:'Sarabun',sans-serif;transition:all .15s}
+.lib-chip:hover{border-color:var(--gold)}
+.lib-chip.on{background:#1B2437;color:#fff;border-color:#1B2437}
+.lib-chip .n{font-weight:800;margin-left:2px;opacity:.75}
 </style>
 </head>
 <body>
@@ -296,12 +301,23 @@ function playShowcaseSection(flow, featuredId){
   </section>`;
 }
 
+const CATEGORY_LABELS = {
+  criminal: 'อาญา',
+  economic: 'เศรษฐกิจ',
+  family: 'ครอบครัว-มรดก',
+  political: 'รธน.-การเมือง-ปกครอง',
+  international: 'ระหว่างประเทศ',
+  other: 'อื่นๆ',
+};
+const CATEGORY_ORDER = ['criminal','economic','family','political','international','other'];
+
 function libraryCardHtml(c){
   const m = c.meta || {};
   const grade = (c.rank && c.rank.grade) || 'A';
   const sBadge = (c.rank && c.rank.s_verified) ? '<span class="lib-grade" style="color:#1E7A4F;border-color:#1E7A4F">S — Court Verified</span>' : `<span class="lib-grade">${esc(grade)} — Curated</span>`;
+  const cats = (m.categories && m.categories.length) ? m.categories : ['other'];
   return `
-    <a class="lib-card" href="prototype/read-case.html?id=${esc(c.id)}">
+    <a class="lib-card" data-cats="${esc(cats.join(' '))}" href="prototype/read-case.html?id=${esc(c.id)}">
       <div class="lib-card-top">${badgeHtml(m.cat)}${sBadge}</div>
       <h3>${esc(m.title_display || m.title || c.id)}</h3>
       <p>${esc(truncate(m.blurb_60 || '', 130))}</p>
@@ -309,15 +325,46 @@ function libraryCardHtml(c){
     </a>`;
 }
 
-function librarySection(cardsHtml){
+function libraryFilterRow(libraryResults){
+  const counts = {};
+  libraryResults.forEach(c => {
+    const cats = (c.meta && c.meta.categories && c.meta.categories.length) ? c.meta.categories : ['other'];
+    cats.forEach(k => { counts[k] = (counts[k]||0) + 1; });
+  });
+  const allChip = `<button class="lib-chip on" data-filter="all">ทั้งหมด <span class="n">${libraryResults.length}</span></button>`;
+  const chips = CATEGORY_ORDER.filter(k => counts[k]).map(k =>
+    `<button class="lib-chip" data-filter="${k}">${esc(CATEGORY_LABELS[k])} <span class="n">${counts[k]}</span></button>`
+  ).join('');
+  return `<div class="lib-filter-row">${allChip}${chips}</div>`;
+}
+
+function librarySection(libraryResults){
+  const cardsHtml = libraryResults.map(libraryCardHtml).join('');
   return `
   <section class="v2-section">
     <div class="v2-section-head">
       <div class="v2-kicker">The Case Library</div>
       <h2>คดีที่ผ่านการคัดเลือกเพื่อใช้เป็นสื่อการเรียนรู้กฎหมาย</h2>
     </div>
-    <div class="lib-grid">${cardsHtml || ''}</div>
+    ${libraryFilterRow(libraryResults)}
+    <div class="lib-grid" id="lib-grid">${cardsHtml || ''}</div>
   </section>`;
+}
+
+function initLibraryFilter(){
+  const row = document.querySelector('.lib-filter-row');
+  if(!row) return;
+  row.addEventListener('click', e => {
+    const btn = e.target.closest('.lib-chip');
+    if(!btn) return;
+    row.querySelectorAll('.lib-chip').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('#lib-grid .lib-card').forEach(card => {
+      const cats = (card.dataset.cats || '').split(' ');
+      card.style.display = (filter === 'all' || cats.includes(filter)) ? '' : 'none';
+    });
+  });
 }
 
 async function init(){
@@ -346,19 +393,19 @@ async function init(){
   // if the file actually exists, so a data-index entry with no matching
   // file never becomes a dead link. This never edits golden-cases.json,
   // only skips rendering.
-  const libraryResults = await Promise.all(goldenPublic.map(async c => {
+  const libraryResults = (await Promise.all(goldenPublic.map(async c => {
     try{ const detail = await fetchJson(CASE_URL(c.id)); return {...c, meta: detail.meta}; }
     catch{ return null; }
-  }));
-  const libraryCards = libraryResults.filter(Boolean).map(libraryCardHtml).join('');
+  }))).filter(Boolean);
 
   app.innerHTML =
     heroSection(featuredCase, featuredId) +
     entryPointsSection(featuredId) +
     caseOfWeekSection(featuredCase, featuredId) +
     playShowcaseSection((featuredCase.play && featuredCase.play.flow) || [], featuredId) +
-    librarySection(libraryCards);
+    librarySection(libraryResults);
 
+  initLibraryFilter();
   window.__golden = g;
 }
 init();

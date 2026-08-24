@@ -3,7 +3,11 @@
  "meta": {
   "title": "คดีอดีตพระนิกร — สัมพันธ์ลับและคดีแจ้งความเท็จ (พ.ศ. 2533)",
   "year": 2533,
-  "cat": "คดีเด่น"
+  "cat": "คดีเด่น",
+  "categories": [
+   "other",
+   "criminal"
+  ]
  },
  "visibility": {
   "public": true,

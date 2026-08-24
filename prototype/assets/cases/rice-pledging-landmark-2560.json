@@ -3,7 +3,11 @@
  "meta": {
   "title": "คดีจำนำข้าว: บรรทัดฐานความรับผิดทางละเมิดนักการเมือง",
   "year": 2560,
-  "cat": "คดีเศรษฐกิจ"
+  "cat": "คดีเศรษฐกิจ",
+  "categories": [
+   "economic",
+   "political"
+  ]
  },
  "visibility": {
   "public": true,

@@ -3,7 +3,10 @@
  "meta": {
   "title": "คดีบุคคลัภย์ (2449)",
   "year": 1906,
-  "cat": "เศรษฐกิจและทุจริต"
+  "cat": "เศรษฐกิจและทุจริต",
+  "categories": [
+   "economic"
+  ]
  },
  "visibility": {
   "public": true,

@@ -3,7 +3,10 @@
  "meta": {
   "title": "คดีทุจริตกรมนา (2416)",
   "year": 1873,
-  "cat": "เศรษฐกิจและทุจริต"
+  "cat": "เศรษฐกิจและทุจริต",
+  "categories": [
+   "economic"
+  ]
  },
  "visibility": {
   "public": true,

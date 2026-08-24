@@ -3,7 +3,11 @@
  "meta": {
   "title": "คดีอดีตพระเณรคำ — ฉ้อโกงประชาชนและฟอกเงิน (พ.ศ. 2556)",
   "year": 2556,
-  "cat": "คดีเด่น"
+  "cat": "คดีเด่น",
+  "categories": [
+   "economic",
+   "other"
+  ]
  },
  "visibility": {
   "public": true,

@@ -3,7 +3,11 @@
  "meta": {
   "title": "คดีสวรรคต ร.8: จุดกำเนิดและบรรทัดฐานนิติวิทยาศาสตร์ไทย",
   "year": 2489,
-  "cat": "คดีเด่นด้านสังคม"
+  "cat": "คดีเด่นด้านสังคม",
+  "categories": [
+   "criminal",
+   "political"
+  ]
  },
  "visibility": {
   "public": true,

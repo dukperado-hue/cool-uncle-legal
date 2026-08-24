@@ -3,7 +3,10 @@
  "meta": {
   "title": "คำกราบบังคมทูล ร.ศ. 103 (2427)",
   "year": 1884,
-  "cat": "การเมืองและโครงสร้าง"
+  "cat": "การเมืองและโครงสร้าง",
+  "categories": [
+   "political"
+  ]
  },
  "visibility": {
   "public": true,

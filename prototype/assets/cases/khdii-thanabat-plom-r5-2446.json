@@ -3,7 +3,10 @@
  "meta": {
   "title": "คดีธนบัตรปลอมสมัย ร.5 (2446)",
   "year": 1903,
-  "cat": "คดีอาญาเศรษฐกิจ"
+  "cat": "คดีอาญาเศรษฐกิจ",
+  "categories": [
+   "economic"
+  ]
  },
  "visibility": {
   "public": true,

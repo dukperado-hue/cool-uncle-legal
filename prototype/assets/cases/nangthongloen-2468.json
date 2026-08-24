@@ -3,7 +3,11 @@
  "meta": {
   "title": "คดีนางทองเลื่อน 'อีทองเลื่อนหักคอน้องผัว'",
   "year": 1925,
-  "cat": "คดยุคร.6"
+  "cat": "คดยุคร.6",
+  "categories": [
+   "criminal",
+   "other"
+  ]
  },
  "visibility": {
   "public": true,

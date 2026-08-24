@@ -3,7 +3,10 @@
  "meta": {
   "title": "กฎหมายลักษณะอาญา ร.ศ. 127 (2451)",
   "year": 1908,
-  "cat": "การเมืองและโครงสร้าง"
+  "cat": "การเมืองและโครงสร้าง",
+  "categories": [
+   "political"
+  ]
  },
  "visibility": {
   "public": true,

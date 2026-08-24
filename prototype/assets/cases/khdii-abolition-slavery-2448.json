@@ -3,7 +3,10 @@
  "meta": {
   "title": "การเลิกทาสและไพร่ (2448)",
   "year": 1905,
-  "cat": "การเมืองและโครงสร้าง"
+  "cat": "การเมืองและโครงสร้าง",
+  "categories": [
+   "political"
+  ]
  },
  "visibility": {
   "public": true,

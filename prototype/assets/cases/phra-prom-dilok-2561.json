@@ -3,7 +3,11 @@
  "meta": {
   "title": "คดีเงินทอนวัดสามพระยา พระพรหมดิลก พ้นมลทิน",
   "year": 2561,
-  "cat": "คดีเด่น"
+  "cat": "คดีเด่น",
+  "categories": [
+   "economic",
+   "other"
+  ]
  },
  "visibility": {
   "public": true,

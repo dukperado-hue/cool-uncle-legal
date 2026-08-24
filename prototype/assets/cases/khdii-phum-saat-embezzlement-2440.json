@@ -3,7 +3,10 @@
  "meta": {
   "title": "คดีพุ่ม สะอาด (2440)",
   "year": 1897,
-  "cat": "เศรษฐกิจและทุจริต"
+  "cat": "เศรษฐกิจและทุจริต",
+  "categories": [
+   "economic"
+  ]
  },
  "visibility": {
   "public": true,

@@ -3,7 +3,10 @@
  "meta": {
   "title": "คดีสมเด็จพระนางเรือล่ม (2423)",
   "year": 1880,
-  "cat": "กฎมณเฑียรบาล"
+  "cat": "กฎมณเฑียรบาล",
+  "categories": [
+   "political"
+  ]
  },
  "visibility": {
   "public": true,

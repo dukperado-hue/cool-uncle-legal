@@ -3,7 +3,11 @@
  "meta": {
   "title": "คดีตี๋ใหญ่: จอมโจรขมังเวทย์และบรรทัดฐานวิสามัญฆาตกรรม",
   "year": 2524,
-  "cat": "คดีเด่นด้านสังคม"
+  "cat": "คดีเด่นด้านสังคม",
+  "categories": [
+   "criminal",
+   "political"
+  ]
  },
  "visibility": {
   "public": true,

@@ -3,7 +3,11 @@
  "meta": {
   "title": "คดีทนายสมชาย นีละไพจิตร: การบังคับสูญหายและสิทธิมนุษยชนในไทย",
   "year": 2547,
-  "cat": "คดีเด่น"
+  "cat": "คดีเด่น",
+  "categories": [
+   "political",
+   "other"
+  ]
  },
  "visibility": {
   "public": true,

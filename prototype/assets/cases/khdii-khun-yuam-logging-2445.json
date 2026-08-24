@@ -3,7 +3,10 @@
  "meta": {
   "title": "ทุจริตป่าไม้ขุนยูวม (2445)",
   "year": 1902,
-  "cat": "เศรษฐกิจและทุจริต"
+  "cat": "เศรษฐกิจและทุจริต",
+  "categories": [
+   "economic"
+  ]
  },
  "visibility": {
   "public": true,
