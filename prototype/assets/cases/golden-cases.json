@@ -1392,13 +1392,15 @@
   },
   {
    "id": "nenkham-2556",
-   "title": "คดีเณรคำ (หลวงปู่เณรคำ)",
+   "title": "คดีอดีตพระเณรคำ — ฉ้อโกงประชาชนและฟอกเงิน (พ.ศ. 2556)",
    "cat": "คดีเด่น",
-   "has_video": false,
+   "has_video": true,
    "rank": {
-    "grade": "A",
-    "score": 85,
-    "s_verified": false
+    "grade": "VERIFIED_S",
+    "score": 92,
+    "s_verified": true,
+    "judicial_case": "คำพิพากษาศาลอาญา คดีหมายเลขดำที่ อ.2341/2560 อ่านคำพิพากษา 9 ส.ค. 2561 — จำคุกรวม 114 ปี คงจำคุกไว้ 20 ปีตาม ป.อ. ม.91(2) — ศาลอุทธรณ์อนุญาตถอนอุทธรณ์ คดีถึงที่สุด 4 ก.ค. 2562",
+    "verified_by": "case-writer skill"
    },
    "visibility": {
     "public": true,
