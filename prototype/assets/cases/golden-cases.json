@@ -1014,15 +1014,15 @@
   },
   {
    "id": "adultery-damages-landmark-2565",
-   "title": "ฟ้องชู้เรียกค่าทดแทน (2565)",
+   "title": "คำวินิจฉัยศาลรัฐธรรมนูญที่ 4/2567 — กฎหมายฟ้องชู้ที่เลือกปฏิบัติทางเพศ",
    "cat": "คดีเด่นด้านสังคม",
    "has_video": false,
    "rank": {
-    "grade": "VERIFIED_S",
-    "score": 85,
-    "s_verified": true,
-    "judicial_case": "คำพิพากษาศาลฎีกาที่ 1308/2565",
-    "verified_by": "Agent C"
+    "grade": "A",
+    "score": 90,
+    "s_verified": false,
+    "judicial_case": "คำวินิจฉัยศาลรัฐธรรมนูญที่ 4/2567",
+    "verified_by": "case-writer skill"
    },
    "visibility": {
     "public": true,
@@ -1265,15 +1265,15 @@
   },
   {
    "id": "sherry-ann-duncan-scapegoat-2529",
-   "title": "คดีเชอรี่ แอน ดันแคน (2529)",
+   "title": "คดีเชอรี่ แอน ดันแคน — แพะรับบาปในตำนาน (2529)",
    "cat": "คดีเด่นด้านสังคม",
    "has_video": false,
    "rank": {
-    "grade": "VERIFIED_S",
-    "score": 85,
-    "s_verified": true,
-    "judicial_case": "คำพิพากษาศาลฎีกาที่ 3530/2536",
-    "verified_by": "Agent C"
+    "grade": "A",
+    "score": 88,
+    "s_verified": false,
+    "judicial_case": "คำพิพากษาศาลฎีกาที่ 768/2536",
+    "verified_by": "case-writer skill"
    },
    "visibility": {
     "public": true,
