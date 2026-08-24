@@ -145,8 +145,8 @@
  "migration": {
   "from": "Production Overrides",
   "verified": true,
-  "checker": "Agent B",
-  "check_date": "2026-08-21"
+  "checker": "claude (audit pass, 2026-08-24)",
+  "check_date": "2026-08-24"
  },
  "validation": {
   "schema_ok": true,

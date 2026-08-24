@@ -17,8 +17,8 @@
   "grade": "VERIFIED_S",
   "score": 90,
   "s_verified": true,
-  "judicial_case": "คำพิพากษาศาลฎีกาที่ 4333/2553",
-  "verified_by": "Agent C"
+  "judicial_case": "ศาลชั้นต้นยกฟ้อง 28 ก.ย. 2550; ศาลอุทธรณ์พิพากษายืนยกฟ้อง 1 ก.ย. 2553 (คดีถึงที่สุด ไม่มีการฎีกาต่อศาลฎีกา — ไม่ใช่ \"คำพิพากษาศาลฎีกาที่ 4333/2553\" ตามที่เคยระบุไว้ผิด)",
+  "verified_by": "claude (audit pass, 2026-08-24)"
  },
  "status": "พร้อมใช้งาน",
  "read": {
@@ -59,8 +59,12 @@
          "text": "การผ่าศพครั้งที่ 3 — มีการระดมผู้เชี่ยวชาญจากต่างประเทศมาร่วมตรวจสอบเพื่อหาข้อสรุปสุดท้าย"
         },
         {
+         "year": "2550",
+         "text": "ศาลชั้นต้นยกฟ้อง — 28 ก.ย. 2550 ศาลชั้นต้นพิพากษายกฟ้องนพดล ธรรมวัฒนะ เนื่องจากพยานหลักฐานโจทก์ไม่มีน้ำหนักเพียงพอ อัยการยื่นอุทธรณ์"
+        },
+        {
          "year": "2553",
-         "text": "ศาลยกฟ้อง — ศาลฎีกาพิพากษายกฟ้องนพดล ธรรมวัฒนะ เนื่องจากพยานหลักฐานไม่เพียงพอที่จะยืนยันว่าเป็นการฆาตกรรม"
+         "text": "ศาลอุทธรณ์พิพากษายืน — 1 ก.ย. 2553 ศาลอุทธรณ์พิพากษายืนตามศาลชั้นต้น ยกฟ้องนพดล ธรรมวัฒนะ คดีอาญาถึงที่สุด (ไม่มีคู่ความฎีกาต่อศาลฎีกา)"
         }
        ]
       }
@@ -144,19 +148,20 @@
  },
  "sources": {
   "seed_facts": [
-   "Batch 34-37 Production Sync"
+   "Batch 34-37 Production Sync",
+   "WebSearch 2026-08-24 (th.wikipedia.org, mgronline.com x4, hilight.kapook.com, workpointtoday.com) — corrected fabricated ฎีกาที่ 4333/2553 citation; real outcome is ศาลอุทธรณ์ affirming ศาลชั้นต้น's acquittal, case never reached ศาลฎีกา"
   ]
  },
  "migration": {
   "from": "Production Overrides",
   "verified": true,
-  "checker": "Agent B",
-  "check_date": "2026-08-21"
+  "checker": "claude (audit pass, 2026-08-24)",
+  "check_date": "2026-08-24"
  },
  "validation": {
   "schema_ok": true,
   "paragraph_ok": true,
   "gate": "none",
-  "checked_at": "2026-08-21"
+  "checked_at": "2026-08-24"
  }
 }

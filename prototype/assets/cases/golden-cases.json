@@ -60,8 +60,8 @@
     "s_verified": false
    },
    "visibility": {
-    "public": true,
-    "public_reason": "golden"
+    "public": false,
+    "public_reason": "missing_case_file"
    },
    "modes": [
     "read"
@@ -99,8 +99,8 @@
     "s_verified": false
    },
    "visibility": {
-    "public": true,
-    "public_reason": "golden"
+    "public": false,
+    "public_reason": "missing_case_file"
    },
    "modes": [
     "read"
@@ -550,15 +550,15 @@
   },
   {
    "id": "aerial-incident-1999",
-   "title": "Aerial Incident 10 Aug 1999 — Pakistan v. India (ICJ Case 107)",
-   "cat": "คด+ีดรระหว่างประเทศ (ICJ)",
+   "title": "Aerial Incident 10 Aug 1999 — Pakistan v. India (ICJ General List No. 119)",
+   "cat": "คดีศาลโลก ICJ",
    "has_video": true,
    "rank": {
-    "grade": "S_CANDIDATE",
-    "score": 4,
-    "s_verified": false,
-    "judicial_case": "ICJ Case 107 (Pakistan v. India)",
-    "verified_by": "Agent C (Batch 3c)"
+    "grade": "VERIFIED_S",
+    "score": 85,
+    "s_verified": true,
+    "judicial_case": "ICJ General List No. 119 — Aerial Incident of 10 August 1999 (Pakistan v. India), Judgment (Jurisdiction), 21 June 2000",
+    "verified_by": "claude (audit pass, 2026-08-24)"
    },
    "visibility": {
     "public": true,
@@ -787,11 +787,11 @@
    "cat": "คดีอาญาเศรษฐกิจ",
    "has_video": false,
    "rank": {
-    "grade": "S_CANDIDATE",
-    "score": 4,
-    "s_verified": false,
-    "judicial_case": "ขังหลวง กรมหมื่นพงษาดิศรมหิป",
-    "verified_by": "Agent C"
+    "grade": "A",
+    "score": 70,
+    "s_verified": true,
+    "judicial_case": "ขังหลวง กรมหมื่นพงษาดิศรมหิป (ร่วมกับจมื่นศรีสรรักษ์ หรือนายเพ่ง) — พ.ศ. 2446",
+    "verified_by": "claude (audit pass, 2026-08-24)"
    },
    "visibility": {
     "public": true,
@@ -811,8 +811,8 @@
     "grade": "S_CANDIDATE",
     "score": 4,
     "s_verified": false,
-    "judicial_case": "ประหารชีวิตด้วยวิธีพิเศษ",
-    "verified_by": "Agent C"
+    "judicial_case": "ประหารชีวิตด้วยขวานตัดตัวขาด 2 ท่อน",
+    "verified_by": "claude (audit pass, 2026-08-24)"
    },
    "visibility": {
     "public": true,
@@ -832,8 +832,8 @@
     "grade": "S_CANDIDATE",
     "score": 4,
     "s_verified": false,
-    "judicial_case": "การปฏิรูปกฎมณเฑียรบาล 2424",
-    "verified_by": "Agent C"
+    "judicial_case": "โศกนาฏกรรมเรือล่ม 31 พ.ค. 2423 (เรื่องเล่าตามธรรมเนียม ยังไม่ยืนยันบทกฎหมายชัดเจน)",
+    "verified_by": "claude (audit pass, 2026-08-24)"
    },
    "visibility": {
     "public": true,
@@ -851,7 +851,7 @@
    "has_video": false,
    "rank": {
     "grade": "VERIFIED_S",
-    "score": 5,
+    "score": 72,
     "s_verified": true,
     "judicial_case": "ประมวลกฎหมายฉบับแรก",
     "verified_by": "Agent C"
@@ -871,9 +871,9 @@
    "cat": "การเมืองและโครงสร้าง",
    "has_video": false,
    "rank": {
-    "grade": "S_CANDIDATE",
-    "score": 4,
-    "s_verified": false,
+    "grade": "VERIFIED_S",
+    "score": 70,
+    "s_verified": true,
     "judicial_case": "พ.ร.บ.เลิกทาส ร.ศ. 124",
     "verified_by": "Agent C"
    },
@@ -893,10 +893,10 @@
    "has_video": false,
    "rank": {
     "grade": "S_CANDIDATE",
-    "score": 4,
-    "s_verified": false,
-    "judicial_case": "การเรียกร้องรัฐธรรมนูญครั้งแรก",
-    "verified_by": "Agent C"
+    "score": 6,
+    "s_verified": true,
+    "judicial_case": "เจ้านายและข้าราชการกราบบังคมทูลความเห็นจัดการเปลี่ยนแปลงราชการแผ่นดิน ร.ศ. 103 (นำโดยพระวรวงศ์เธอ พระองค์เจ้าปฤษฎางค์)",
+    "verified_by": "claude (audit pass, 2026-08-24)"
    },
    "visibility": {
     "public": true,
@@ -909,15 +909,15 @@
   },
   {
    "id": "khdii-phum-saat-embezzlement-2440",
-   "title": "คดีพุ่ม สะอาด (2440)",
+   "title": "จุดกำเนิดกฎหมายล้มละลายของสยาม",
    "cat": "เศรษฐกิจและทุจริต",
    "has_video": false,
    "rank": {
-    "grade": "VERIFIED_S",
-    "score": 5,
-    "s_verified": true,
-    "judicial_case": "ต้นกำเนิดกฎหมายล้มละลาย",
-    "verified_by": "Agent C"
+    "grade": "S_CANDIDATE",
+    "score": 3,
+    "s_verified": false,
+    "judicial_case": "พระราชบัญญัติล้มละลาย ร.ศ. 130 (2454) — ไม่พบแหล่งข้อมูลยืนยัน \"คดีพุ่ม สะอาด\" หรือ พ.ร.บ.ร.ศ.116",
+    "verified_by": "claude (audit pass, 2026-08-24)"
    },
    "visibility": {
     "public": true,
@@ -935,7 +935,7 @@
    "has_video": false,
    "rank": {
     "grade": "VERIFIED_S",
-    "score": 5,
+    "score": 68,
     "s_verified": true,
     "judicial_case": "ออดิตออฟฟิส",
     "verified_by": "Agent C"
@@ -956,7 +956,7 @@
    "has_video": false,
    "rank": {
     "grade": "S_CANDIDATE",
-    "score": 4,
+    "score": 3,
     "s_verified": false,
     "judicial_case": "มาเฟียป่าไม้และการปลอมตราประทับ",
     "verified_by": "Agent C"
@@ -976,9 +976,9 @@
    "cat": "เศรษฐกิจและทุจริต",
    "has_video": false,
    "rank": {
-    "grade": "S_CANDIDATE",
-    "score": 4,
-    "s_verified": false,
+    "grade": "VERIFIED_S",
+    "score": 65,
+    "s_verified": true,
     "judicial_case": "ธรรมาภิบาลธนาคารยุคบุกเบิก",
     "verified_by": "Agent C"
    },
@@ -1039,9 +1039,11 @@
    "cat": "คดีเด่นด้านสังคม",
    "has_video": false,
    "rank": {
-    "grade": "A",
-    "score": 85,
-    "s_verified": false
+    "grade": "VERIFIED_S",
+    "score": 92,
+    "s_verified": true,
+    "judicial_case": "คำพิพากษาศาลปกครองสูงสุด คดีหมายเลขแดงที่ ฟ.11/2558",
+    "verified_by": "claude (audit pass, 2026-08-24)"
    },
    "visibility": {
     "public": true,
@@ -1058,9 +1060,11 @@
    "cat": "คดีเด่นด้านสังคม",
    "has_video": false,
    "rank": {
-    "grade": "A",
-    "score": 85,
-    "s_verified": false
+    "grade": "VERIFIED_S",
+    "score": 88,
+    "s_verified": true,
+    "judicial_case": "คำพิพากษาศาลฎีกาที่ 2154/2561",
+    "verified_by": "claude (audit pass, 2026-08-24)"
    },
    "visibility": {
     "public": true,
@@ -1077,11 +1081,11 @@
    "cat": "คดีเด่นด้านสังคม",
    "has_video": false,
    "rank": {
-    "grade": "VERIFIED_S",
-    "score": 85,
-    "s_verified": true,
-    "judicial_case": "คำพิพากษาศาลฎีกาที่ 1318/2563",
-    "verified_by": "Agent C"
+    "grade": "A",
+    "score": 75,
+    "s_verified": false,
+    "judicial_case": "หลักการรับรองบุตรโดยพฤตินัย ม.1627 (คดีอ้างอิงเฉพาะ ฎ.1318/2563 ไม่สามารถยืนยันได้)",
+    "verified_by": "claude (audit pass, 2026-08-24) — citation unconfirmed"
    },
    "visibility": {
     "public": true,
@@ -1312,8 +1316,8 @@
     "grade": "VERIFIED_S",
     "score": 85,
     "s_verified": true,
-    "judicial_case": "คำพิพากษาศาลฎีกาที่ 4333/2553",
-    "verified_by": "Agent C"
+    "judicial_case": "ศาลอุทธรณ์พิพากษายืนยกฟ้อง 1 ก.ย. 2553 (คดีถึงที่สุด ไม่ถึงศาลฎีกา)",
+    "verified_by": "claude (audit pass, 2026-08-24)"
    },
    "visibility": {
     "public": true,
@@ -1370,9 +1374,11 @@
    "cat": "คดีเด่น",
    "has_video": false,
    "rank": {
-    "grade": "A",
-    "score": 85,
-    "s_verified": false
+    "grade": "VERIFIED_S",
+    "score": 88,
+    "s_verified": true,
+    "judicial_case": "ศาลฎีกาพิพากษายืนยกฟ้อง (29 ธ.ค. 2558) ยุติคดีอาญาโดยไม่มีผู้ต้องรับผิด",
+    "verified_by": "claude (audit pass, 2026-08-24)"
    },
    "visibility": {
     "public": true,
@@ -1442,7 +1448,7 @@
   },
   {
    "id": "phra-prom-chedi-2561",
-   "title": "คดีเงินทอนวัด (พระพรหมสิทธิ)",
+   "title": "คดีเงินทอนวัด อดีตพระพรหมเมธี วัดสัมพันธวงศ์",
    "cat": "คดีเด่น",
    "has_video": false,
    "rank": {
@@ -1461,12 +1467,12 @@
   },
   {
    "id": "phra-prom-dilok-2561",
-   "title": "คดีเงินทอนวัด (พระพรหมสิทธิ)",
+   "title": "คดีเงินทอนวัดสามพระยา อดีตพระพรหมดิลก",
    "cat": "คดีเด่น",
    "has_video": false,
    "rank": {
     "grade": "A",
-    "score": 85,
+    "score": 82,
     "s_verified": false
    },
    "visibility": {
@@ -1484,9 +1490,10 @@
    "cat": "คดีเศรษฐกิจ",
    "has_video": false,
    "rank": {
-    "grade": "A",
-    "score": 85,
-    "s_verified": false
+    "grade": "VERIFIED_S",
+    "score": 88,
+    "s_verified": true,
+    "verified_by": "claude (audit pass, 2026-08-24)"
    },
    "visibility": {
     "public": true,
@@ -1503,9 +1510,11 @@
    "cat": "คดีเศรษฐกิจ",
    "has_video": false,
    "rank": {
-    "grade": "A",
-    "score": 85,
-    "s_verified": false
+    "grade": "VERIFIED_S",
+    "score": 90,
+    "s_verified": true,
+    "judicial_case": "คดีหมายเลขแดงที่ อม.211/2560 (ศาลฎีกาฯ); ศาลปกครองสูงสุดพิพากษา 22 พ.ค. 2568 ให้ชดใช้ 10,028 ล้านบาท",
+    "verified_by": "claude (audit pass, 2026-08-24)"
    },
    "visibility": {
     "public": true,

@@ -3,7 +3,7 @@
  "meta": {
   "title": "คดีอุบัติการณ์ทางอากาศ 10 สิงหาคม 1999 (ปากีสถาน v. อินเดีย) — ศาลโลก ICJ",
   "year": "2543",
-  "cat": "กฎหมายระหว่างประเทศ",
+  "cat": "คดีศาลโลก ICJ",
   "categories": [
    "international"
   ]
@@ -15,10 +15,11 @@
   "internal_notes": "คดี ICJ / ข้อสงวน Commonwealth — aerial-incident-1999 — S_CANDIDATE; locked to source content"
  },
  "rank": {
-  "grade": "S_CANDIDATE",
-  "s_verified": false,
-  "score": 4,
-  "judicial_case": "ICJ Case 107 (Pakistan v. India)"
+  "grade": "VERIFIED_S",
+  "s_verified": true,
+  "score": 85,
+  "judicial_case": "ICJ General List No. 119 — Aerial Incident of 10 August 1999 (Pakistan v. India), Judgment (Jurisdiction), 21 June 2000",
+  "verified_by": "claude (audit pass, 2026-08-24)"
  },
  "deident": {
   "required": false,
@@ -93,14 +94,14 @@
   ],
   "legacy_ref": "legacy_html_aerial (migrated 2026-08-21)",
   "note": "เนื้อหาล็อกตามไฟล์ migration ต้นทาง — ห้ามเติมข้อเท็จจริงใหม่",
-  "primary": "icj-cij.org/case/107 — primary"
+  "primary": "https://www.icj-cij.org/case/119 — primary (ICJ General List No. 119, was mislabeled 107 before 2026-08-24 audit)"
  },
  "migration": {
   "from": "legacy_html_aerial",
   "verified": true,
-  "checker": "Agent B",
-  "check_date": "2026-08-21",
-  "note": "migration per RULE 8; body text verbatim from migration source"
+  "checker": "claude (audit pass, 2026-08-24)",
+  "check_date": "2026-08-24",
+  "note": "Independently re-verified against ICJ's own case page (icj-cij.org/case/119) and press.un.org summary: 16 killed, Pakistan's 21 Sep 1999 application, ICJ Statute Art. 36(1) + Art. 17 General Act 1928 as jurisdiction bases, Court declined jurisdiction 21 Jun 2000 on India's Commonwealth reservation. Content confirmed accurate, no changes needed."
  },
  "validation": {
   "schema_ok": true,
@@ -108,7 +109,7 @@
   "sections_complete": true,
   "links_ok": true,
   "gate": "none",
-  "checked_at": "2026-08-21",
-  "checked_by": "agent_b"
+  "checked_at": "2026-08-24",
+  "checked_by": "claude"
  }
 }

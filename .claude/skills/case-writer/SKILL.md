@@ -174,7 +174,7 @@ A real person sometimes has more than one prosecutable incident (e.g. a serial o
 - Write the incident actually being requested as its own case (own `id`, own real citation for *that* incident).
 - In its `เบื้องหลัง`/`ลำดับเหตุการณ์` text, mention the other known incidents by name only as context (one sentence, no invented details) so a reader isn't confused why the same name shows up elsewhere.
 - Note the other incidents in that case's `sources` or a short `internal_notes` field as candidate future entries — don't build them now unless asked.
-This keeps the door open for neuralnetworklegalcode to later graph a person across multiple case-nodes ("nexus node" concept) without this skill having to model that graph itself — out of scope per the "light touch" nn-linking decision above.
+This keeps the door open for neuralnetworklegalcode to later graph a person across multiple case-nodes ("nexus node" concept) without this skill having to model that graph itself — out of scope per the "light touch" nn-linking decision above. See `<neuralnetworklegalcode-nexus-integration>` below — the nn cross-link is no longer purely hypothetical, it shipped 2026-08-24.
 </serial-offenders-multi-incident>
 
 <reuse-across-case-types>
@@ -182,3 +182,15 @@ This skill is deliberately generic across `คดีอาญา` / `คดี�
 - **Deident rules** (hard-rule #4) — living-private-person cases need it, historical/state/corporate-party cases don't.
 - **What counts as the citation** — ฎีกาศาลฎีกา for ordinary court cases, คำวินิจฉัยศาลรัฐธรรมนูญที่ for con-court cases, I.C.J. Reports citation for ICJ cases, or the historical court's own record for pre-modern cases (see `phrayod-muangkwang-2436.json`'s `judicial_case` field for a worked historical example — no ฎีกา existed yet in ร.ศ.112, so it names the actual tribunal and sentence instead).
 </reuse-across-case-types>
+
+<neuralnetworklegalcode-nexus-integration>
+**2026-08-24: the "future ประมวล nn cross-link" from hard-rule #3 shipped, in the sibling repo `neuralnetworklegalcode`.** Its case-nexus feature (`client/src/data/caseGraphs.ts`, `CaseIssuePanel.tsx`) now shows, per case and per legal issue, *why that nexus node exists* - a case-level `basedOn` note ("จากคดีจริง...") and a per-issue `reasoning` field (the real court's own reasoning on that specific issue, shown when the issue node is clicked). Two lessons from building it, worth carrying forward whenever either repo touches a case both projects share:
+
+1. **Source nexus "why" content from this skill's own already-researched case files - never re-research fresh via NotebookLM/WebSearch for a case this skill has already covered.** Two independently-researched explanations of the same real ฎีกา is worse than reusing one verified source; it also risks the two projects drifting apart on facts. Before writing a `basedOn`/`reasoning` value in `caseGraphs.ts`, check `ls prototype/assets/cases/*.json` here first for a matching slug.
+2. **Field mapping** (case-writer's rich schema -> neuralnetworklegalcode's `CaseGraphData`):
+   - `CaseGraphData.basedOn` (one case-level line) <- `read.sections[key=overview].content.paragraphs[0]` or `meta.blurb_60`, plus `rank.judicial_case` for the citation/year.
+   - `CaseIssue.reasoning` (per issue node) <- the matching entry in `read.sections[key=legal_issues].content.issues[]` (`.anchor` in the current template, `.text` in older files that predate the `question`/`anchor` split - `shayamala-2536.json` is one such older file) or `read.sections[key=provisions].content.articles[].anchor` when the reasoning is really about one specific มาตรา rather than the issue as a whole.
+   - A case/issue with no real ruling behind it (built from an exam-sourced or otherwise hypothetical fact pattern) should leave `basedOn`/`reasoning` unset entirely - neuralnetworklegalcode's UI falls back to an explicit "สถานการณ์สมมติ...ไม่มีคำวินิจฉัยจริง" note rather than fabricating one. Never invent a `reasoning` value to fill the gap, same no-fabrication rule as hard-rule #1 here.
+
+**Known discrepancy, not yet reconciled (flag if you touch either of these two cases again):** neuralnetworklegalcode's currently-live two cases (`serm-jenjira`, `syamol-forensic` in its `caseGraphs.ts`) source their `newsUrl` from this repo's **old, superseded** `news-case-khdii-serm-sakonrat-2541.html` / `news-case-khdii-syamol-forensic-2536.html` pages (the pre-`golden-cases.json` pipeline this skill's `<objective>` says to ignore) - written before this skill's rich-schema system existed. Both cases *do* now also exist in the current system, under different slugs: `serm-sakonrat-41` and `shayamala-2536`. Neither project has re-pointed `newsUrl` at `read-case.html?id=...` yet. Worth doing next time either case gets touched, but not urgent enough to fix as a drive-by - the old pages still render fine, they're just off the canonical path.
+</neuralnetworklegalcode-nexus-integration>
