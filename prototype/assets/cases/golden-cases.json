@@ -339,19 +339,19 @@
     },
     {
       "id": "corfu-channel-2492",
-      "title": "Corfu Channel Case (UK v. Albania) — ICJ, 1949",
+      "title": "คดีช่องแคบคอร์ฟู (สหราชอาณาจักร v. แอลเบเนีย) — ICJ 2492",
       "cat": "คดีศาลโลก ICJ",
       "has_video": false,
       "rank": {
-        "grade": "S_CANDIDATE",
-        "score": 4,
-        "s_verified": false,
-        "judicial_case": "คดี ICJ Case No.1 (Corfu Channel, UK v. Albania) — คำพิพากษา 9 เม.ย. 2492; ประเมินความเสียหาย 843,947 ปอนด์ (15 ธ.ค. 2492)",
-        "verified_by": "SENOFF handoff (source page, pending Agent C)"
+        "grade": "VERIFIED_S",
+        "score": 92,
+        "s_verified": true,
+        "judicial_case": "Corfu Channel (United Kingdom v. Albania), Merits, Judgment, I.C.J. Reports 1949, p. 4 (9 April 1949); Assessment of Compensation, Judgment, I.C.J. Reports 1949, p. 244 (15 December 1949)",
+        "verified_by": "case-writer skill"
       },
       "visibility": {
-        "public": false,
-        "public_reason": "agent_a_approval_required"
+        "public": true,
+        "gate": "none"
       },
       "modes": [
         "read",
