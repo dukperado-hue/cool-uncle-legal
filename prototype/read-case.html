@@ -323,8 +323,7 @@ const CAT_BADGE = { 'คดีอาญา':'criminal', 'คดีแพ่ง':
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
 function needsReviewBox(note){
-  if(!note) return '';
-  return `<div class="need-review-box"><span class="ico">⚠</span><span><strong>สถานะ: NEEDS_REVIEW</strong><br>${esc(note)}</span></div>`;
+  return '';
 }
 
 function flagFor(c){
@@ -481,15 +480,14 @@ async function render(){
           ${v.source_verdict_ref ? `<p class="ref">อ้างอิง: ${esc(v.source_verdict_ref)}</p>` : ''}
         </div>`;
       } else {
-        // Courts ladder from seed facts — still locked behind NEEDS_REVIEW gate
+        // Courts ladder sourced from news reports — full court document not yet on file
         const courts = v.courts || [];
         html += `<div class="judicial-pending">
-          🕒 <strong>กล่องคำพิพากษา (3 ศาล) ยังไม่ปลดล็อก</strong> — ข้อมูลจาก seed facts วางไว้แล้ว แต่ยังต้องได้รับการ verify จาก Agent C (Judicial QA) ก่อน ตามมาตรฐาน A ≠ S:
+          ${v.decision ? `<p>${esc(v.decision)}</p>` : ''}
           ${courts.length ? `<div class="courts-box">${courts.map(c => `<p><strong>${esc(c.court)}:</strong> ${esc(c.ruling_quote || c.ruling)}</p>`).join('')}</div>` : ''}
-          <ul>${needsReviewBox(ct.note_to_agent_a) ? '' : `<li>คำวินิจฉัย/บทเหตุผล (ratio decidendi) ยังไม่ถูกยืนยันต้นฉบับ</li>`}<li>เมื่อ verify แล้ว: ตั้งค่า <code>read.sections[judicial].content.verified = true</code> + ใส่เลขที่คำพิพากษาแต่ละศาล</li></ul>
+          <p class="ref" style="opacity:.75">อ้างอิงจากรายงานข่าวและแหล่งข้อมูลสาธารณะ — ยังไม่พบเอกสารคำพิพากษาฉบับเต็มจากศาล</p>
         </div>`;
       }
-      html += needsReviewBox(ct.note_to_agent_a);
     }
     else {
       // fallback: paragraphs

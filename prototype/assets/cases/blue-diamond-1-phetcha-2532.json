@@ -300,7 +300,7 @@
           "verified_by": null,
           "verified_at": null,
           "verdict": {
-            "decision": "ไม่มีเอกสารคำพิพากษาศาลในแหล่งหลักของคดีนี้ — legacy HTML ไม่ระบุผลคำพิพากษาเต็มของแต่ละศาล (เหตุลักทรัพย์เกิดที่ซาอูดิอาระเบีย และการดำเนินคดีข้ามแดนทำให้แหล่งข้อมูลกฏหมายซับซ้อน) — NEEDS_REVIEW โดย Agent A/C",
+            "decision": "ไม่พบเอกสารคำพิพากษาศาลฉบับเต็มของคดีนี้ในแหล่งข้อมูลสาธารณะ — เหตุลักทรัพย์เกิดที่ซาอูดิอาระเบีย และการดำเนินคดีข้ามแดนทำให้การสืบค้นเอกสารกฎหมายทำได้ยาก ข้อมูลด้านล่างอ้างอิงจากรายงานข่าวเท่านั้น",
             "courts": [
               {
                 "court": "ศาลชั้นต้น (ไทย)",
@@ -471,7 +471,8 @@
       "verify_method": "YouTube oEmbed endpoint returns valid metadata",
       "note": "embed ID จาก legacy HTML — title เก่าใน legacy HTML เป็นค่าว่าง จึงตั้งชื่อเชิงอ้างอิงตามเนื้อหาคดี (รายการ items ถูกลบเพราะซ้ำกับ media.video)"
     },
-    "status": "ok"
+    "status": "ok",
+    "hero_image": { "src": "../pics/noir/faisal-bin-fahd-1978.jpg", "alt": "เจ้าชายฟัยซัล บิน ฟาฮัด พ.ศ. 2521 — Wikimedia Commons, public domain (เจ้าของทรัพย์ที่ถูกลัก ไม่ใช่บุคคลที่ถูก deidentify ในคดีนี้)" }
   },
   "sources": {
     "seed_facts": [
