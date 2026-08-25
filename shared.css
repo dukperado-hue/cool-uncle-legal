@@ -293,6 +293,8 @@ div.event > p.para-split:last-child{margin-bottom:0}
 section.case-legal-issues{margin-bottom:8px}
 p.li-q{margin:10px 0;background:#F8FAFC;border-left:4px solid var(--accent);border-radius:0 10px 10px 0;padding:12px 16px;line-height:1.8;font-size:.98rem}
 @media(max-width:720px){ p.li-q{padding:10px 12px} }
+p.li-q strong:first-of-type{color:var(--accent)}
+p.li-q strong:nth-of-type(2){display:block;margin-top:8px;color:#1E7A4F}
 
 /* บทบัญญัติ (accordion) */
 details.law-acc{margin:10px 0;border:1px solid #E5E1D6;border-radius:12px;background:#fff}
