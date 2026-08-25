@@ -467,7 +467,7 @@
       "id": "chao-fa-men-2352",
       "title": "คดีกบฏเจ้าฟ้าเหม็น (กรมขุนกษัตรานุชิต) พ.ศ. 2352",
       "cat": "คดีประวัติศาสตร์กฎหมาย",
-      "has_video": false,
+      "has_video": true,
       "rank": {
         "grade": "A",
         "score": 84,
@@ -547,7 +547,7 @@
       "id": "ksor-kulab-2436",
       "title": "คดี ก.ศ.ร. กุหลาบ — นักหนังสือพิมพ์ผู้ถูกส่งเข้าโรงพยาบาลคนเสียจริต แทนการขึ้นศาล",
       "cat": "คดีประวัติศาสตร์กฎหมาย",
-      "has_video": false,
+      "has_video": true,
       "rank": {
         "grade": "A",
         "score": 88,
@@ -912,27 +912,6 @@
         "score": 4,
         "s_verified": false,
         "judicial_case": "ประหารชีวิตด้วยขวานตัดตัวขาด 2 ท่อน",
-        "verified_by": "claude (audit pass, 2026-08-24)"
-      },
-      "visibility": {
-        "public": true,
-        "gate": "none"
-      },
-      "modes": [
-        "read",
-        "play"
-      ]
-    },
-    {
-      "id": "khdii-somdet-phra-nang-ruea-lom-2423",
-      "title": "คดีสมเด็จพระนางเรือล่ม (2423)",
-      "cat": "กฎมณเฑียรบาล",
-      "has_video": false,
-      "rank": {
-        "grade": "S_CANDIDATE",
-        "score": 4,
-        "s_verified": false,
-        "judicial_case": "โศกนาฏกรรมเรือล่ม 31 พ.ค. 2423 (เรื่องเล่าตามธรรมเนียม ยังไม่ยืนยันบทกฎหมายชัดเจน)",
         "verified_by": "claude (audit pass, 2026-08-24)"
       },
       "visibility": {
