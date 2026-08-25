@@ -510,21 +510,9 @@ async function render(){
     </section>`;
   }
 
-  // Deident banner
-  if(c.deident && c.deident.required){
-    html += `<section style="margin-top:24px">
-      <h3 style="font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nr-gold);border-bottom:2px solid var(--nr-outline-variant);padding-bottom:8px;margin:0 0 14px">🛡 สถานะการปกป้องบุคคล</h3>
-      <div class="deident-box">
-        <span class="ico">🛡</span>
-        <span><strong>คดีนี้กำลังรอดำเนินการ de-identification</strong><br>Agent B ยังไม่แก้ไขข้อเท็จจริงใด ๆ (RULE 2 + RULE 3) — คำตัดสินใจและรูปแบบการปกป้องชื่อบุคคลเป็นหน้าที่ของ <strong>Agent A</strong><br><em>เหตุผล: ${esc(c.deident.reason)}</em></span>
-      </div>
-    </section>`;
-  }
-
   // Play CTA
   if(c.play){
     html += `<div class="play-cta-wrap">
-      <p>อ่านจบแล้ว? ลองทายใจศาลกัน — ใช้ JSON เดียวกับที่คุณเพิ่งอ่าน</p>
       <a class="play-cta" id="play-link" href="play-case.html?id=${esc(appId)}">🎮 ลุยโหมดเล่น →</a>
     </div>`;
   }
