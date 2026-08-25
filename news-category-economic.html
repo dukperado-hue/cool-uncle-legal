@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="th"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Case Dossier: Economic Crimes | Cool Uncle Legal Lab</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&amp;family=JetBrains+Mono:wght@700&amp;family=Syne:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#161f32",
+                        "on-secondary": "#3f2e00",
+                        "surface-container-high": "#212a3d",
+                        "primary-fixed-dim": "#e9c400",
+                        "surface-dim": "#0a1325",
+                        "inverse-on-surface": "#273044",
+                        "inverse-primary": "#705d00",
+                        "secondary-container": "#584410",
+                        "evidence-red": "#B22222",
+                        "outline": "#999077",
+                        "surface-bright": "#30394d",
+                        "on-tertiary-container": "#006a70",
+                        "on-error": "#690005",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#00f1ff",
+                        "inverse-surface": "#d9e2fc",
+                        "primary-container": "#ffd700",
+                        "on-secondary-container": "#cfb274",
+                        "redaction-black": "#000000",
+                        "background": "#0a1325",
+                        "on-tertiary-fixed": "#002022",
+                        "on-tertiary": "#00363a",
+                        "secondary": "#e1c383",
+                        "on-surface": "#d9e2fc",
+                        "surface-variant": "#2c3548",
+                        "on-primary-container": "#705e00",
+                        "tertiary-fixed-dim": "#00dbe8",
+                        "error": "#ffb4ab",
+                        "tertiary": "#defcff",
+                        "surface-container-low": "#121b2e",
+                        "surface-tint": "#e9c400",
+                        "on-primary-fixed-variant": "#544600",
+                        "primary-fixed": "#ffe16d",
+                        "on-background": "#d9e2fc",
+                        "surface-container-highest": "#2c3548",
+                        "paper-aged": "#F5F2E8",
+                        "tertiary-fixed": "#79f5ff",
+                        "on-secondary-fixed-variant": "#584410",
+                        "secondary-fixed": "#ffdf9d",
+                        "secondary-fixed-dim": "#e1c383",
+                        "surface-container-lowest": "#050e20",
+                        "charcoal-ink": "#0D1117",
+                        "on-primary": "#3a3000",
+                        "on-tertiary-fixed-variant": "#004f54",
+                        "on-primary-fixed": "#221b00",
+                        "on-secondary-fixed": "#251a00",
+                        "surface": "#0a1325",
+                        "on-surface-variant": "#d0c6ab",
+                        "error-container": "#93000a",
+                        "primary": "#fff6df",
+                        "outline-variant": "#4d4732"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "container-max": "1200px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Courier Prime"],
+                        "headline-lg": ["Syne"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-display": ["Syne"],
+                        "headline-lg-mobile": ["Syne"],
+                        "redacted": ["Courier Prime"],
+                        "body-md": ["Courier Prime"],
+                        "headline-md": ["Syne"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-display": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "redacted": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .noise-bg {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        .redacted-text {
+            background-color: var(--color-redaction-black, #000000);
+            color: transparent;
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .redacted-text:hover {
+            color: var(--color-on-surface, #d9e2fc);
+            background-color: transparent;
+            text-shadow: 2px 0 0 red, -2px 0 0 blue;
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 1px) }
+            40% { transform: translate(-1px, -1px) }
+            60% { transform: translate(2px, 1px) }
+            80% { transform: translate(1px, -1px) }
+            100% { transform: translate(0) }
+        }
+        .evidence-image {
+            filter: grayscale(100%) contrast(150%);
+            mix-blend-mode: multiply;
+        }
+        .case-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col relative overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<div class="fixed inset-0 z-50 noise-bg mix-blend-overlay"></div>
+<!-- TopAppBar -->
+<header class="bg-surface-dim text-primary-fixed-dim font-headline-md text-headline-md z-40 fixed top-0 left-0 w-full border-b-2 border-outline-variant flex justify-between items-center px-margin-desktop py-4 hidden md:flex">
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-3 font-headline-md text-headline-md font-bold text-primary-fixed-dim tracking-tighter hover:text-primary-fixed transition-colors duration-100 ease-in-out" href="news-index.html">
+<img alt="Cool Uncle Legal Lab" height="36" src="prototype/assets/capybara-64.webp" width="36"/>
+                Cool Uncle ⚖ Legal Lab
+            </a>
+<nav class="flex gap-6">
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="news-category-criminal.html">อาญา</a>
+<a class="text-primary-fixed-dim border-b-2 border-primary-fixed-dim pb-1 font-label-caps text-label-caps transition-colors duration-100 ease-in-out" href="news-category-economic.html">เศรษฐกิจ</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="news-category-family.html">ครอบครัว-มรดก</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="news-category-political.html">รธน.-การเมือง-ปกครอง</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="news-category-international.html">ระหว่างประเทศ</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="news-category-other.html">อื่นๆ</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative border-b border-outline-variant focus-within:border-primary-fixed-dim">
+<span class="material-symbols-outlined absolute left-0 bottom-1 text-on-surface-variant text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-label-caps font-label-caps pl-6 py-1 text-on-surface placeholder:text-on-surface-variant w-48" placeholder="QUERY_DB..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors duration-100 ease-in-out">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors duration-100 ease-in-out">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+</button>
+</div>
+</header>
+<!-- Mobile Top Header Fallback -->
+<header class="md:hidden bg-surface-dim border-b-2 border-outline-variant p-4 flex justify-between items-center sticky top-0 z-40">
+<a class="flex items-center gap-2 font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary-fixed-dim tracking-tighter" href="news-index.html">
+<img alt="Cool Uncle Legal Lab" height="28" src="prototype/assets/capybara-64.webp" width="28"/>
+        Cool Uncle ⚖ Legal Lab
+    </a>
+<button class="text-on-surface"><span class="material-symbols-outlined">menu</span></button>
+</header>
+<div class="flex flex-1 pt-0 md:pt-[72px]">
+<!-- SideNavBar -->
+<aside class="bg-surface-container-low text-primary-fixed-dim border-r-2 border-outline-variant w-64 h-[calc(100vh-72px)] flex flex-col py-gutter hidden md:flex fixed left-0 top-[72px] z-30">
+<div class="px-6 mb-8">
+<div class="font-headline-md text-headline-md text-primary-fixed-dim">INVESTIGATOR_082</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mt-1">SECTOR_7_DIVISION</div>
+</div>
+<nav class="flex-1 space-y-2 px-2">
+<a class="bg-primary-container text-on-primary-container font-bold border-l-4 border-primary-fixed-dim px-4 py-3 flex items-center gap-3 active:invert duration-75" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">folder_open</span>
+<span class="font-label-caps text-label-caps">ACTIVE CASES</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-bright hover:text-primary px-4 py-3 flex items-center gap-3 border-l-4 border-transparent active:invert duration-75 transition-colors" href="#">
+<span class="material-symbols-outlined">ac_unit</span>
+<span class="font-label-caps text-label-caps">COLD FILES</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-bright hover:text-primary px-4 py-3 flex items-center gap-3 border-l-4 border-transparent active:invert duration-75 transition-colors" href="#">
+<span class="material-symbols-outlined">visibility_off</span>
+<span class="font-label-caps text-label-caps">REDACTED</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-bright hover:text-primary px-4 py-3 flex items-center gap-3 border-l-4 border-transparent active:invert duration-75 transition-colors" href="#">
+<span class="material-symbols-outlined">record_voice_over</span>
+<span class="font-label-caps text-label-caps">WITNESSES</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-bright hover:text-primary px-4 py-3 flex items-center gap-3 border-l-4 border-transparent active:invert duration-75 transition-colors" href="#">
+<span class="material-symbols-outlined">science</span>
+<span class="font-label-caps text-label-caps">LAB NOTES</span>
+</a>
+</nav>
+<div class="px-6 mt-auto">
+<a class="w-full block text-center border-2 border-primary-fixed-dim text-primary-fixed-dim font-label-caps text-label-caps py-2 hover:bg-primary-fixed-dim hover:text-on-primary-fixed transition-colors duration-150 uppercase tracking-widest" href="news-index.html">
+                    ALL DOSSIERS
+                </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 p-margin-mobile md:p-margin-desktop bg-surface relative">
+<div class="max-w-container-max mx-auto">
+<!-- Hero Section -->
+<section class="mb-12 relative border-b-2 border-outline-variant pb-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+<div class="lg:col-span-7">
+<h1 class="font-headline-display text-headline-display md:text-[80px] leading-none mb-4 text-on-surface uppercase tracking-tighter">
+                                Economic<br/><span class="text-primary-fixed-dim">Crimes</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                                คดีทุจริต ฉ้อโกง ยักยอก และอาชญากรรมทางเศรษฐกิจ ตั้งแต่สมัยรัชกาลที่ 5 จนถึงคดีร่วมสมัย
+                                สถานะ: <span class="text-error font-bold">ARCHIVE VERIFIED</span>.
+                                รายละเอียดคดีบางส่วนถูก <span class="redacted-text">คัดกรองเพื่อการศึกษา</span> เท่านั้น
+                            </p>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="absolute -top-4 -left-4 w-12 h-12 border-t-2 border-l-2 border-primary-fixed-dim z-10"></div>
+<div class="absolute -bottom-4 -right-4 w-12 h-12 border-b-2 border-r-2 border-primary-fixed-dim z-10"></div>
+<div class="bg-charcoal-ink border border-outline-variant p-2 relative shadow-xl">
+<img alt="Forensic photography style, black and white, high contrast, economic crime evidence." class="w-full h-auto object-cover grayscale contrast-125 mix-blend-screen opacity-80 filter brightness-75 hover:brightness-100 transition-all duration-500" src="pics/noir/economic-hero.jpg"/>
+<div class="absolute bottom-4 right-4 bg-primary-fixed-dim text-on-primary-fixed font-label-caps text-label-caps px-2 py-1">EXHIBIT_A</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Evidence Board Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[minmax(250px,auto)]">
+<!-- Card 1: khdii-thanabat-plom-r5-2446 (High Priority / Verified) -->
+<a class="case-card-link bg-surface-container border-2 border-primary-fixed-dim flex-col relative group" href="prototype/read-case.html?id=khdii-thanabat-plom-r5-2446">
+<div class="w-full flex flex-col">
+<div class="bg-primary-fixed-dim text-on-primary-fixed px-4 py-2 flex justify-between items-center border-b-2 border-primary-fixed-dim">
+<span class="font-label-caps text-label-caps font-bold">CASE_#001-EC</span>
+<span class="material-symbols-outlined text-sm">verified</span>
+</div>
+<div class="p-6 flex-1 flex flex-col">
+<h3 class="font-headline-md text-headline-md mb-2">คดีธนบัตรปลอมสมัย ร.5 (2446)</h3>
+<div class="text-sm text-on-surface-variant font-label-caps mb-4 border-b border-outline-variant pb-2">STATUS: ARCHIVED</div>
+<div class="mt-auto pt-4 flex flex-wrap gap-2">
+<span class="bg-surface-bright text-primary px-2 py-1 font-label-caps text-label-caps text-[10px]">COUNTERFEIT</span>
+<span class="bg-primary-fixed-dim text-on-primary-fixed px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
+</div>
+</div>
+</div>
+</a>
+<!-- Card 2: khdii-phum-saat-embezzlement-2440 (Icon Focus) -->
+<a class="case-card-link bg-surface-container border border-outline-variant flex-col relative group" href="prototype/read-case.html?id=khdii-phum-saat-embezzlement-2440">
+<div class="w-full flex flex-col">
+<div class="px-4 py-2 border-b border-outline-variant flex justify-between items-center text-on-surface-variant">
+<span class="font-label-caps text-label-caps">CASE_#002-EC</span>
+</div>
+<div class="p-4 relative h-48 overflow-hidden bg-black">
+<div class="absolute inset-0 flex items-center justify-center opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-500">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-size: 120px;">account_balance</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+<h3 class="absolute bottom-4 left-4 right-4 font-headline-md text-headline-md z-10">จุดกำเนิดกฎหมายล้มละลายของสยาม</h3>
+</div>
+<div class="p-6">
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-bright text-primary px-2 py-1 font-label-caps text-label-caps text-[10px]">BANKRUPTCY</span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 font-label-caps text-label-caps text-[10px]">CURATED · GRADE S_CANDIDATE</span>
+</div>
+</div>
+</div>
+</a>
+<!-- Card 3: khdii-ministry-agri-embezzlement-2416 (Evidence Log, tall) -->
+<a class="case-card-link bg-surface-container border border-outline-variant flex-col lg:row-span-2" href="prototype/read-case.html?id=khdii-ministry-agri-embezzlement-2416">
+<div class="w-full flex flex-col flex-1">
+<div class="px-4 py-2 border-b border-outline-variant text-on-surface-variant flex justify-between items-center">
+<span class="font-label-caps text-label-caps">EVIDENCE_LOG · CASE_#003-EC</span>
+</div>
+<div class="p-6 flex-1 flex flex-col gap-4 font-body-md text-sm">
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface">คดีทุจริตกรมนา (2416)</h3>
+<div class="border-l-2 border-outline-variant pl-4">
+<div class="text-primary-fixed-dim font-bold mb-1">พ.ศ. 2416</div>
+<div>คดีทุจริตในกรมนา หนึ่งในคดีทุจริตราชการยุคต้นรัตนโกสินทร์ที่ได้รับการยืนยันแหล่งที่มา</div>
+</div>
+<div class="mt-auto pt-4 flex flex-wrap gap-2">
+<span class="bg-surface-bright text-primary px-2 py-1 font-label-caps text-label-caps text-[10px]">CORRUPTION</span>
+<span class="bg-primary-fixed-dim text-on-primary-fixed px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
+</div>
+<div class="border-t border-outline-variant pt-4 text-center">
+<span class="text-primary-fixed-dim font-label-caps uppercase text-xs">VIEW FULL LOG →</span>
+</div>
+</div>
+</div>
+</a>
+<!-- Card 4: khdii-khun-yuam-logging-2445 (High Priority) -->
+<a class="case-card-link bg-surface-container border-2 border-primary-fixed-dim flex-col relative group" href="prototype/read-case.html?id=khdii-khun-yuam-logging-2445">
+<div class="w-full flex flex-col">
+<div class="bg-primary-fixed-dim text-on-primary-fixed px-4 py-2 flex justify-between items-center border-b-2 border-primary-fixed-dim">
+<span class="font-label-caps text-label-caps font-bold">CASE_#004-EC</span>
+<span class="material-symbols-outlined text-sm">forest</span>
+</div>
+<div class="p-6 flex-1 flex flex-col">
+<h3 class="font-headline-md text-headline-md mb-2">ทุจริตป่าไม้ขุนยูวม (2445)</h3>
+<div class="text-sm text-on-surface-variant font-label-caps mb-4 border-b border-outline-variant pb-2">STATUS: ARCHIVED</div>
+<div class="mt-auto pt-4 flex flex-wrap gap-2">
+<span class="bg-surface-bright text-primary px-2 py-1 font-label-caps text-label-caps text-[10px]">CORRUPTION</span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 font-label-caps text-label-caps text-[10px]">CURATED · GRADE S_CANDIDATE</span>
+</div>
+</div>
+</div>
+</a>
+<!-- Card 5: khdii-book-club-scandal-2449 (Icon Focus) -->
+<a class="case-card-link bg-surface-container border border-outline-variant flex-col relative group" href="prototype/read-case.html?id=khdii-book-club-scandal-2449">
+<div class="w-full flex flex-col">
+<div class="px-4 py-2 border-b border-outline-variant flex justify-between items-center text-on-surface-variant">
+<span class="font-label-caps text-label-caps">CASE_#005-EC</span>
+</div>
+<div class="p-4 relative h-48 overflow-hidden bg-black">
+<div class="absolute inset-0 flex items-center justify-center opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-500">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-size: 120px;">menu_book</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+<h3 class="absolute bottom-4 left-4 right-4 font-headline-md text-headline-md z-10">คดีบุคคลัภย์ (2449)</h3>
+</div>
+<div class="p-6">
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-bright text-primary px-2 py-1 font-label-caps text-label-caps text-[10px]">FRAUD</span>
+<span class="bg-primary-fixed-dim text-on-primary-fixed px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
+</div>
+</div>
+</div>
+</a>
+<!-- Card 6: nenkham-2556 (Evidence Log) -->
+<a class="case-card-link bg-surface-container border border-outline-variant flex-col" href="prototype/read-case.html?id=nenkham-2556">
+<div class="w-full flex flex-col flex-1">
+<div class="px-4 py-2 border-b border-outline-variant text-on-surface-variant flex justify-between items-center">
+<span class="font-label-caps text-label-caps">EVIDENCE_LOG · CASE_#006-EC</span>
+</div>
+<div class="p-6 flex-1 flex flex-col gap-4 font-body-md text-sm">
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface">หลวงปู่เณรคำ (2556)</h3>
+<div class="border-l-2 border-outline-variant pl-4">
+<div>อดีตพระดังใช้ศรัทธาหลอกเงินบริจาคซื้อเครื่องบินเจ็ต หนีสหรัฐฯ ก่อนถูกส่งตัวกลับมารับโทษ</div>
+</div>
+<div class="mt-auto pt-4 flex flex-wrap gap-2">
+<span class="bg-surface-bright text-primary px-2 py-1 font-label-caps text-label-caps text-[10px]">FRAUD</span>
+<span class="bg-primary-fixed-dim text-on-primary-fixed px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
+</div>
+</div>
+</div>
+</a>
+<!-- Card 7: phra-prom-chedi-2561 (High Priority) -->
+<a class="case-card-link bg-surface-container border-2 border-primary-fixed-dim flex-col relative group" href="prototype/read-case.html?id=phra-prom-chedi-2561">
+<div class="w-full flex flex-col">
+<div class="bg-primary-fixed-dim text-on-primary-fixed px-4 py-2 flex justify-between items-center border-b-2 border-primary-fixed-dim">
+<span class="font-label-caps text-label-caps font-bold">CASE_#007-EC</span>
+<span class="material-symbols-outlined text-sm">warning</span>
+</div>
+<div class="p-6 flex-1 flex flex-col">
+<h3 class="font-headline-md text-headline-md mb-2">คดีเงินทอนวัด อดีตพระพรหมเมธี วัดสัมพันธวงศ์</h3>
+<div class="text-sm text-on-surface-variant font-label-caps mb-4 border-b border-outline-variant pb-2">STATUS: ARCHIVED</div>
+<div class="mt-auto pt-4 flex flex-wrap gap-2">
+<span class="bg-surface-bright text-primary px-2 py-1 font-label-caps text-label-caps text-[10px]">EMBEZZLEMENT</span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 font-label-caps text-label-caps text-[10px]">CURATED · GRADE A</span>
+</div>
+</div>
+</div>
+</a>
+<!-- Card 8: phra-prom-dilok-2561 (Icon Focus) -->
+<a class="case-card-link bg-surface-container border border-outline-variant flex-col relative group" href="prototype/read-case.html?id=phra-prom-dilok-2561">
+<div class="w-full flex flex-col">
+<div class="px-4 py-2 border-b border-outline-variant flex justify-between items-center text-on-surface-variant">
+<span class="font-label-caps text-label-caps">CASE_#008-EC</span>
+</div>
+<div class="p-4 relative h-48 overflow-hidden bg-black">
+<div class="absolute inset-0 flex items-center justify-center opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-500">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-size: 120px;">temple_buddhist</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+<h3 class="absolute bottom-4 left-4 right-4 font-headline-md text-headline-md z-10">คดีเงินทอนวัดสามพระยา อดีตพระพรหมดิลก</h3>
+</div>
+<div class="p-6">
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-bright text-primary px-2 py-1 font-label-caps text-label-caps text-[10px]">EMBEZZLEMENT</span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 font-label-caps text-label-caps text-[10px]">CURATED · GRADE A</span>
+</div>
+</div>
+</div>
+</a>
+<!-- Card 9: klong-dan-corruption-2545 (Evidence Log) -->
+<a class="case-card-link bg-surface-container border border-outline-variant flex-col" href="prototype/read-case.html?id=klong-dan-corruption-2545">
+<div class="w-full flex flex-col flex-1">
+<div class="px-4 py-2 border-b border-outline-variant text-on-surface-variant flex justify-between items-center">
+<span class="font-label-caps text-label-caps">EVIDENCE_LOG · CASE_#009-EC</span>
+</div>
+<div class="p-6 flex-1 flex flex-col gap-4 font-body-md text-sm">
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface">คดีคลองด่าน (มหากาพย์ทุจริตโครงการบำบัดน้ำเสีย)</h3>
+<div class="mt-auto pt-4 flex flex-wrap gap-2">
+<span class="bg-surface-bright text-primary px-2 py-1 font-label-caps text-label-caps text-[10px]">CORRUPTION</span>
+<span class="bg-primary-fixed-dim text-on-primary-fixed px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
+</div>
+</div>
+</div>
+</a>
+<!-- Card 10: rice-pledging-landmark-2560 (High Priority) -->
+<a class="case-card-link bg-surface-container border-2 border-primary-fixed-dim flex-col relative group" href="prototype/read-case.html?id=rice-pledging-landmark-2560">
+<div class="w-full flex flex-col">
+<div class="bg-primary-fixed-dim text-on-primary-fixed px-4 py-2 flex justify-between items-center border-b-2 border-primary-fixed-dim">
+<span class="font-label-caps text-label-caps font-bold">CASE_#010-EC</span>
+<span class="material-symbols-outlined text-sm">gavel</span>
+</div>
+<div class="p-6 flex-1 flex flex-col">
+<h3 class="font-headline-md text-headline-md mb-2">คดีจำนำข้าว: บรรทัดฐานความรับผิดทางละเมิดนักการเมือง</h3>
+<div class="text-sm text-on-surface-variant font-label-caps mb-4 border-b border-outline-variant pb-2">STATUS: LANDMARK RULING</div>
+<div class="mt-auto pt-4 flex flex-wrap gap-2">
+<span class="bg-surface-bright text-primary px-2 py-1 font-label-caps text-label-caps text-[10px]">LANDMARK</span>
+<span class="bg-primary-fixed-dim text-on-primary-fixed px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
+</div>
+</div>
+</div>
+</a>
+</section>
+</div>
+</main>
+</div>
+</body></html>

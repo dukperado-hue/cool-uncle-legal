@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="th"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Case Dossier: Miscellaneous - Cool Uncle Legal Lab</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;700;800&family=Syne:wght@400;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Syne:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#161f32",
+                        "on-secondary": "#3f2e00",
+                        "surface-container-high": "#212a3d",
+                        "primary-fixed-dim": "#e9c400",
+                        "surface-dim": "#0a1325",
+                        "inverse-on-surface": "#273044",
+                        "inverse-primary": "#705d00",
+                        "secondary-container": "#584410",
+                        "evidence-red": "#B22222",
+                        "outline": "#999077",
+                        "surface-bright": "#30394d",
+                        "on-tertiary-container": "#006a70",
+                        "on-error": "#690005",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#00f1ff",
+                        "inverse-surface": "#d9e2fc",
+                        "primary-container": "#ffd700",
+                        "on-secondary-container": "#cfb274",
+                        "redaction-black": "#000000",
+                        "background": "#0a1325",
+                        "on-tertiary-fixed": "#002022",
+                        "on-tertiary": "#00363a",
+                        "secondary": "#e1c383",
+                        "on-surface": "#d9e2fc",
+                        "surface-variant": "#2c3548",
+                        "on-primary-container": "#705e00",
+                        "tertiary-fixed-dim": "#00dbe8",
+                        "error": "#ffb4ab",
+                        "tertiary": "#defcff",
+                        "surface-container-low": "#121b2e",
+                        "surface-tint": "#e9c400",
+                        "on-primary-fixed-variant": "#544600",
+                        "primary-fixed": "#ffe16d",
+                        "on-background": "#d9e2fc",
+                        "surface-container-highest": "#2c3548",
+                        "paper-aged": "#F5F2E8",
+                        "tertiary-fixed": "#79f5ff",
+                        "on-secondary-fixed-variant": "#584410",
+                        "secondary-fixed": "#ffdf9d",
+                        "secondary-fixed-dim": "#e1c383",
+                        "surface-container-lowest": "#050e20",
+                        "charcoal-ink": "#0D1117",
+                        "on-primary": "#3a3000",
+                        "on-tertiary-fixed-variant": "#004f54",
+                        "on-primary-fixed": "#221b00",
+                        "on-secondary-fixed": "#251a00",
+                        "surface": "#0a1325",
+                        "on-surface-variant": "#d0c6ab",
+                        "error-container": "#93000a",
+                        "primary": "#fff6df",
+                        "outline-variant": "#4d4732"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "container-max": "1200px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Courier Prime"],
+                        "headline-lg": ["Syne"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-display": ["Syne"],
+                        "headline-lg-mobile": ["Syne"],
+                        "redacted": ["Courier Prime"],
+                        "body-md": ["Courier Prime"],
+                        "headline-md": ["Syne"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-display": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "redacted": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .noise-bg {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+        .redacted-text {
+            background-color: var(--color-redaction-black, #000);
+            color: transparent;
+            transition: all 0.1s ease;
+            cursor: pointer;
+        }
+        .redacted-text:hover {
+            background-color: transparent;
+            color: var(--color-on-surface, #d9e2fc);
+            text-shadow: 2px 0 0 red, -2px 0 0 blue;
+        }
+        .evidence-border {
+            border: 2px solid theme('colors.primary-fixed-dim');
+        }
+        .secondary-border {
+            border: 1px solid theme('colors.outline-variant');
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex noise-bg">
+<!-- SideNavBar (decorative) -->
+<nav class="hidden md:flex flex-col h-full py-gutter bg-surface-container-low dark:bg-surface-container-low text-primary-fixed-dim dark:text-primary-fixed-dim border-r-2 border-outline-variant fixed left-0 h-screen w-64 z-50">
+<div class="px-4 mb-8">
+<h2 class="font-headline-md text-headline-md text-primary-fixed-dim tracking-tighter">INVESTIGATOR_082</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-2">SECTOR_7_DIVISION</p>
+</div>
+<div class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:bg-surface-bright hover:text-primary active:invert duration-75 group" href="#">
+<span aria-hidden="true" class="material-symbols-outlined text-xl" data-icon="folder_open">folder_open</span>
+<span class="font-label-caps text-label-caps">ACTIVE CASES</span>
+</a>
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container font-bold border-l-4 border-primary-fixed-dim px-4 py-3 group" href="#">
+<span aria-hidden="true" class="material-symbols-outlined text-xl" data-icon="ac_unit">ac_unit</span>
+<span class="font-label-caps text-label-caps">COLD FILES</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:bg-surface-bright hover:text-primary active:invert duration-75 group" href="#">
+<span aria-hidden="true" class="material-symbols-outlined text-xl" data-icon="visibility_off">visibility_off</span>
+<span class="font-label-caps text-label-caps">REDACTED</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:bg-surface-bright hover:text-primary active:invert duration-75 group" href="#">
+<span aria-hidden="true" class="material-symbols-outlined text-xl" data-icon="record_voice_over">record_voice_over</span>
+<span class="font-label-caps text-label-caps">WITNESSES</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:bg-surface-bright hover:text-primary active:invert duration-75 group" href="#">
+<span aria-hidden="true" class="material-symbols-outlined text-xl" data-icon="science">science</span>
+<span class="font-label-caps text-label-caps">LAB NOTES</span>
+</a>
+</div>
+<div class="px-4 mt-auto">
+<a class="block w-full text-center evidence-border bg-primary-fixed-dim text-charcoal-ink font-label-caps text-label-caps py-3 hover:invert transition-none" href="news-index.html">
+                BACK TO INDEX
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-64 w-full min-h-screen">
+<!-- TopAppBar (desktop) -->
+<header class="flex justify-between items-center w-full px-margin-desktop py-4 bg-surface-dim dark:bg-surface-dim text-primary-fixed-dim dark:text-primary-fixed-dim border-b-2 border-outline-variant sticky top-0 z-40">
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-3" href="news-index.html">
+<img alt="Cool Uncle Legal Lab" class="block" height="36" src="prototype/assets/capybara-64.webp" width="36"/>
+<h1 class="font-headline-md text-headline-md font-bold text-primary-fixed-dim tracking-tighter">Cool Uncle ⚖ Legal Lab</h1>
+</a>
+<nav class="hidden lg:flex gap-6">
+<a class="text-on-surface-variant font-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="news-category-criminal.html">อาญา</a>
+<a class="text-on-surface-variant font-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="news-category-economic.html">เศรษฐกิจ</a>
+<a class="text-on-surface-variant font-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="news-category-family.html">ครอบครัว-มรดก</a>
+<a class="text-on-surface-variant font-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="news-category-political.html">รธน.-การเมือง-ปกครอง</a>
+<a class="text-on-surface-variant font-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="news-category-international.html">ระหว่างประเทศ</a>
+<a class="text-primary-fixed-dim border-b-2 border-primary-fixed-dim pb-1 font-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="news-category-other.html">อื่นๆ</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary-fixed p-2">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary-fixed p-2">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<!-- TopAppBar (mobile fallback — collapsed nav becomes a horizontal scroll strip) -->
+<header class="flex lg:hidden justify-between items-center w-full px-margin-mobile py-3 bg-surface-dim dark:bg-surface-dim text-primary-fixed-dim dark:text-primary-fixed-dim border-b-2 border-outline-variant sticky top-0 z-40">
+<a class="flex items-center gap-2" href="news-index.html">
+<img alt="Cool Uncle Legal Lab" class="block" height="28" src="prototype/assets/capybara-64.webp" width="28"/>
+<span class="font-headline-md text-base font-bold text-primary-fixed-dim tracking-tighter">Cool Uncle ⚖ Legal Lab</span>
+</a>
+</header>
+<nav class="flex lg:hidden gap-4 overflow-x-auto px-margin-mobile py-2 bg-surface-dim border-b-2 border-outline-variant sticky top-[53px] z-30 whitespace-nowrap">
+<a class="text-on-surface-variant font-label-caps text-xs px-2 py-1" href="news-category-criminal.html">อาญา</a>
+<a class="text-on-surface-variant font-label-caps text-xs px-2 py-1" href="news-category-economic.html">เศรษฐกิจ</a>
+<a class="text-on-surface-variant font-label-caps text-xs px-2 py-1" href="news-category-family.html">ครอบครัว-มรดก</a>
+<a class="text-on-surface-variant font-label-caps text-xs px-2 py-1" href="news-category-political.html">รธน.-การเมือง-ปกครอง</a>
+<a class="text-on-surface-variant font-label-caps text-xs px-2 py-1" href="news-category-international.html">ระหว่างประเทศ</a>
+<a class="text-primary-fixed-dim border-b-2 border-primary-fixed-dim font-label-caps text-xs px-2 py-1" href="news-category-other.html">อื่นๆ</a>
+</nav>
+<!-- Page Canvas -->
+<div class="p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Dossier Header -->
+<div class="mb-12 border-l-4 border-primary-fixed-dim pl-6">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface uppercase tracking-tight mb-2">Case Dossier: Miscellaneous</h2>
+<div class="flex gap-4 items-center flex-wrap">
+<span class="bg-primary-container text-on-primary-container font-label-caps text-label-caps px-2 py-1">CLASS: OTHER (คดีอื่นๆ)</span>
+<span class="font-body-md text-body-md text-on-surface-variant opacity-70">REF_ID: 994-MISC-Ω</span>
+</div>
+</div>
+<!-- Hero Evidence Box -->
+<div class="mb-16 evidence-border bg-surface-container-high relative overflow-hidden group">
+<div class="absolute top-4 right-4 z-10 bg-black/80 text-primary-fixed-dim font-label-caps text-label-caps px-3 py-1 border border-primary-fixed-dim">EXHIBIT A - GENERAL ITEMS</div>
+<img alt="Hero evidence photo: magnifying glass, an old key and a tied evidence envelope on a desk" class="w-full h-[400px] object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 transition-opacity duration-500 filter contrast-125" src="pics/noir/other-hero.jpg"/>
+<div class="p-6 border-t-2 border-primary-fixed-dim bg-charcoal-ink">
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                        COLLECTION SUMMARY: Files that do not map to any single major division — <span class="redacted-text">right-to-die, forced disappearance, temple finance, forensic identity</span> — held together in one cross-referenced archive. No shared theme; persistent surveillance required across all threads.
+                    </p>
+</div>
+</div>
+<!-- Grid Layout for Sub-cases -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Case 1: living-will-right-to-die-2558 (VERIFIED_S) -->
+<article class="bg-charcoal-ink evidence-border relative flex flex-col h-full overflow-hidden group">
+<div class="absolute top-2 left-2 z-10 bg-primary-fixed-dim text-charcoal-ink font-label-caps text-xs px-2 py-1 flex items-center gap-1">
+<span aria-hidden="true" class="material-symbols-outlined" style="font-size:14px">verified</span>VERIFIED
+                </div>
+<div class="h-32 w-full bg-surface-bright border-b-2 border-primary-fixed-dim relative flex items-center justify-center">
+<span aria-hidden="true" class="material-symbols-outlined text-primary-fixed-dim" style="font-size:48px; opacity:0.5">gavel</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<span class="font-label-caps text-label-caps text-primary-fixed-dim mb-2">FILE 701-S</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">คดีสิทธิในการตาย (Living Will): การเลือกวาระสุดท้ายด้วยศักดิ์ศรี</h3>
+<div class="mt-auto pt-4 border-t border-outline-variant flex justify-between items-center">
+<span class="bg-primary-fixed-dim text-charcoal-ink px-2 py-0.5 font-label-caps text-xs font-bold">VERIFIED</span>
+<a class="text-primary-fixed hover:text-primary-fixed-dim underline font-label-caps text-xs" href="prototype/read-case.html?id=living-will-right-to-die-2558">OPEN FILE →</a>
+</div>
+</div>
+</article>
+<!-- Case 2: si-quey-human-rights-2563 (A) -->
+<article class="bg-surface-container secondary-border p-6 relative flex flex-col h-full hover:border-primary-fixed-dim transition-colors duration-200">
+<div class="flex justify-between items-start mb-4 border-b border-outline-variant pb-2">
+<span class="font-label-caps text-label-caps text-primary-fixed-dim">FILE 702-A</span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-0.5 font-label-caps text-xs">ON FILE</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3 flex-grow">คดีซีอุย: การคืนความเป็นธรรมและศักดิ์ศรีความเป็นมนุษย์หลังความตาย</h3>
+<div class="mt-auto pt-4 border-t border-outline-variant flex justify-between items-center">
+<span class="text-sm font-label-caps text-outline">CURATED · GRADE A</span>
+<a class="text-primary-fixed hover:text-primary-fixed-dim underline font-label-caps text-xs" href="prototype/read-case.html?id=si-quey-human-rights-2563">OPEN FILE →</a>
+</div>
+</article>
+<!-- Case 3: hangthong-mystery-2542 (VERIFIED_S) -->
+<article class="bg-charcoal-ink evidence-border relative flex flex-col h-full overflow-hidden group">
+<div class="absolute top-2 left-2 z-10 bg-primary-fixed-dim text-charcoal-ink font-label-caps text-xs px-2 py-1 flex items-center gap-1">
+<span aria-hidden="true" class="material-symbols-outlined" style="font-size:14px">verified</span>VERIFIED
+                </div>
+<div class="h-32 w-full bg-surface-bright border-b-2 border-primary-fixed-dim relative flex items-center justify-center">
+<span aria-hidden="true" class="material-symbols-outlined text-primary-fixed-dim" style="font-size:48px; opacity:0.5">fingerprint</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<span class="font-label-caps text-label-caps text-primary-fixed-dim mb-2">FILE 703-S</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">คดีห้างทอง ธรรมวัฒนะ: มหากาพย์การพิสูจน์ศพและศึกสายเลือดตระกูลดัง</h3>
+<div class="mt-auto pt-4 border-t border-outline-variant flex justify-between items-center">
+<span class="bg-primary-fixed-dim text-charcoal-ink px-2 py-0.5 font-label-caps text-xs font-bold">VERIFIED</span>
+<a class="text-primary-fixed hover:text-primary-fixed-dim underline font-label-caps text-xs" href="prototype/read-case.html?id=hangthong-mystery-2542">OPEN FILE →</a>
+</div>
+</div>
+</article>
+<!-- Case 4: somchai-neelapaijit-2547 (VERIFIED_S) -->
+<article class="bg-charcoal-ink evidence-border relative flex flex-col h-full overflow-hidden group">
+<div class="absolute top-2 left-2 z-10 bg-primary-fixed-dim text-charcoal-ink font-label-caps text-xs px-2 py-1 flex items-center gap-1">
+<span aria-hidden="true" class="material-symbols-outlined" style="font-size:14px">verified</span>VERIFIED
+                </div>
+<div class="h-32 w-full bg-surface-bright border-b-2 border-primary-fixed-dim relative flex items-center justify-center">
+<span aria-hidden="true" class="material-symbols-outlined text-primary-fixed-dim" style="font-size:48px; opacity:0.5">visibility_off</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<span class="font-label-caps text-label-caps text-primary-fixed-dim mb-2">FILE 704-S</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">คดีทนายสมชาย นีละไพจิตร: การบังคับสูญหายและสิทธิมนุษยชนในไทย</h3>
+<div class="mt-auto pt-4 border-t border-outline-variant flex justify-between items-center">
+<span class="bg-primary-fixed-dim text-charcoal-ink px-2 py-0.5 font-label-caps text-xs font-bold">VERIFIED</span>
+<a class="text-primary-fixed hover:text-primary-fixed-dim underline font-label-caps text-xs" href="prototype/read-case.html?id=somchai-neelapaijit-2547">OPEN FILE →</a>
+</div>
+</div>
+</article>
+<!-- Case 5: phra-prom-chedi-2561 (A) -->
+<article class="bg-surface-container secondary-border p-6 relative flex flex-col h-full hover:border-primary-fixed-dim transition-colors duration-200">
+<div class="flex justify-between items-start mb-4 border-b border-outline-variant pb-2">
+<span class="font-label-caps text-label-caps text-primary-fixed-dim">FILE 705-A</span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-0.5 font-label-caps text-xs">ON FILE</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3 flex-grow">คดีเงินทอนวัด อดีตพระพรหมเมธี วัดสัมพันธวงศ์</h3>
+<div class="mt-auto pt-4 border-t border-outline-variant flex justify-between items-center">
+<span class="text-sm font-label-caps text-outline">CURATED · GRADE A</span>
+<a class="text-primary-fixed hover:text-primary-fixed-dim underline font-label-caps text-xs" href="prototype/read-case.html?id=phra-prom-chedi-2561">OPEN FILE →</a>
+</div>
+</article>
+<!-- Case 6: phra-prom-dilok-2561 (A) -->
+<article class="bg-surface-container secondary-border p-6 relative flex flex-col h-full hover:border-primary-fixed-dim transition-colors duration-200">
+<div class="flex justify-between items-start mb-4 border-b border-outline-variant pb-2">
+<span class="font-label-caps text-label-caps text-primary-fixed-dim">FILE 706-A</span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-0.5 font-label-caps text-xs">ON FILE</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3 flex-grow">คดีเงินทอนวัดสามพระยา อดีตพระพรหมดิลก</h3>
+<div class="mt-auto pt-4 border-t border-outline-variant flex justify-between items-center">
+<span class="text-sm font-label-caps text-outline">CURATED · GRADE A</span>
+<a class="text-primary-fixed hover:text-primary-fixed-dim underline font-label-caps text-xs" href="prototype/read-case.html?id=phra-prom-dilok-2561">OPEN FILE →</a>
+</div>
+</article>
+<!-- Case 7: nangthongloen-2468 (S_CANDIDATE) -->
+<article class="bg-surface-container secondary-border p-6 relative flex flex-col h-full hover:border-primary-fixed-dim transition-colors duration-200">
+<div class="flex justify-between items-start mb-4 border-b border-outline-variant pb-2">
+<span class="font-label-caps text-label-caps text-primary-fixed-dim">FILE 707-Ω</span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-0.5 font-label-caps text-xs">COLD FILE</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3 flex-grow">คดีนางทองเลื่อน "อีทองเลื่อนหักคอน้องผัว"</h3>
+<div class="mt-auto pt-4 border-t border-outline-variant flex justify-between items-center">
+<span class="text-sm font-label-caps text-outline">CURATED · GRADE S_CANDIDATE</span>
+<a class="text-primary-fixed hover:text-primary-fixed-dim underline font-label-caps text-xs" href="prototype/read-case.html?id=nangthongloen-2468">OPEN FILE →</a>
+</div>
+</article>
+</div>
+</div>
+</main>
+</body></html>

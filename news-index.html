@@ -158,6 +158,10 @@
 .lib-chip:hover{border-color:var(--gold)}
 .lib-chip.on{background:#1B2437;color:#fff;border-color:#1B2437}
 .lib-chip .n{font-weight:800;margin-left:2px;opacity:.75}
+.noir-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 22px;padding:14px 18px;background:#0a1325;border-radius:12px}
+.noir-row .noir-label{font-family:'JetBrains Mono',monospace;font-size:.76rem;font-weight:700;letter-spacing:.08em;color:#e9c400;white-space:nowrap}
+.noir-row a{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:700;color:#d9e2fc;background:#161f32;border:1px solid #4d4732;border-radius:999px;padding:6px 13px;text-decoration:none;transition:all .15s}
+.noir-row a:hover{border-color:#e9c400;color:#e9c400}
 </style>
 </head>
 <body>
@@ -338,6 +342,13 @@ function libraryFilterRow(libraryResults){
   return `<div class="lib-filter-row">${allChip}${chips}</div>`;
 }
 
+function noirLinksRow(){
+  const links = CATEGORY_ORDER.map(k =>
+    `<a href="news-category-${esc(k)}.html">${esc(CATEGORY_LABELS[k])} →</a>`
+  ).join('');
+  return `<div class="noir-row"><span class="noir-label">🕵️ NOIR EDITION · ดูแฟ้มคดีแบบพรีเมียมแยกหมวด:</span>${links}</div>`;
+}
+
 function librarySection(libraryResults){
   const cardsHtml = libraryResults.map(libraryCardHtml).join('');
   return `
@@ -346,6 +357,7 @@ function librarySection(libraryResults){
       <div class="v2-kicker">The Case Library</div>
       <h2>คดีที่ผ่านการคัดเลือกเพื่อใช้เป็นสื่อการเรียนรู้กฎหมาย</h2>
     </div>
+    ${noirLinksRow()}
     ${libraryFilterRow(libraryResults)}
     <div class="lib-grid" id="lib-grid">${cardsHtml || ''}</div>
   </section>`;
