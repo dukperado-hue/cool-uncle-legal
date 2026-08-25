@@ -79,8 +79,15 @@
     ]
   },
   "media": {
-    "video": null,
-    "status": "none",
+    "video": {
+      "youtube_id": "i-b1hlP0tYQ",
+      "title": "คนติดเล่า Podcast ตอน พระนางเรือล่ม",
+      "channel": "คนติดเล่า Podcast",
+      "verified_working": true,
+      "verified_at": "2026-08-25",
+      "verify_method": "YouTube oEmbed API (title/channel confirmed, not watched in full)"
+    },
+    "status": "has_video",
     "hero_image": { "src": "../pics/noir/queen-sunandha-portrait.jpg", "alt": "สมเด็จพระนางเจ้าสุนันทากุมารีรัตน์ พระบรมราชเทวี พ.ศ. 2419 — Wikimedia Commons, public domain" }
   },
   "sources": {
