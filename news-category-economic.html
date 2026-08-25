@@ -13,6 +13,8 @@
             theme: {
                 extend: {
                     "colors": {
+                        "financial-green": "#2e7d32",
+                        "alert-red": "#c62828",
                         "surface-container": "#161f32",
                         "on-secondary": "#3f2e00",
                         "surface-container-high": "#212a3d",
@@ -137,9 +139,22 @@
             color: inherit;
             display: flex;
         }
+        .grid-bg {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+            animation: marquee 30s linear infinite;
+        }
     </style>
 </head>
-<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col relative overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<body class="bg-background grid-bg text-on-surface font-body-md min-h-screen flex flex-col relative overflow-x-hidden selection:bg-financial-green selection:text-white">
 <div class="fixed inset-0 z-50 noise-bg mix-blend-overlay"></div>
 <!-- TopAppBar -->
 <header class="bg-surface-dim text-primary-fixed-dim font-headline-md text-headline-md z-40 fixed top-0 left-0 w-full border-b-2 border-outline-variant flex justify-between items-center px-margin-desktop py-4 hidden md:flex">
@@ -215,27 +230,40 @@
 </div>
 </aside>
 <!-- Main Content -->
-<main class="flex-1 md:ml-64 p-margin-mobile md:p-margin-desktop bg-surface relative">
-<div class="max-w-container-max mx-auto">
+<main class="flex-1 md:ml-64 bg-surface relative">
+<!-- Ticker -->
+<div class="w-full overflow-hidden bg-charcoal-ink border-b border-outline-variant py-2 flex whitespace-nowrap font-label-caps text-xs">
+<div class="animate-marquee flex gap-12">
+<span class="text-financial-green">▲ SILICON +2.4%</span>
+<span class="text-alert-red">▼ APEX -14.2%</span>
+<span class="text-financial-green">▲ CRYPTO +0.8%</span>
+<span class="text-financial-green">▲ OFFSHORE +3.1%</span>
+<span class="text-alert-red">▼ GLOBAL_MARKETS -5.7%</span>
+<span class="text-financial-green">▲ SILICON +2.4%</span>
+<span class="text-alert-red">▼ APEX -14.2%</span>
+<span class="text-financial-green">▲ CRYPTO +0.8%</span>
+</div>
+</div>
+<div class="p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto">
 <!-- Hero Section -->
 <section class="mb-12 relative border-b-2 border-outline-variant pb-8">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
 <div class="lg:col-span-7">
 <h1 class="font-headline-display text-headline-display md:text-[80px] leading-none mb-4 text-on-surface uppercase tracking-tighter">
-                                Economic<br/><span class="text-primary-fixed-dim">Crimes</span>
+                                Economic<br/><span class="text-financial-green">Crimes</span>
 </h1>
 <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
                                 คดีทุจริต ฉ้อโกง ยักยอก และอาชญากรรมทางเศรษฐกิจ ตั้งแต่สมัยรัชกาลที่ 5 จนถึงคดีร่วมสมัย
-                                สถานะ: <span class="text-error font-bold">ARCHIVE VERIFIED</span>.
+                                สถานะ: <span class="text-financial-green font-bold">ARCHIVE VERIFIED</span>.
                                 รายละเอียดคดีบางส่วนถูก <span class="redacted-text">คัดกรองเพื่อการศึกษา</span> เท่านั้น
                             </p>
 </div>
 <div class="lg:col-span-5 relative">
-<div class="absolute -top-4 -left-4 w-12 h-12 border-t-2 border-l-2 border-primary-fixed-dim z-10"></div>
-<div class="absolute -bottom-4 -right-4 w-12 h-12 border-b-2 border-r-2 border-primary-fixed-dim z-10"></div>
+<div class="absolute -top-4 -left-4 w-12 h-12 border-t-2 border-l-2 border-financial-green z-10"></div>
+<div class="absolute -bottom-4 -right-4 w-12 h-12 border-b-2 border-r-2 border-financial-green z-10"></div>
 <div class="bg-charcoal-ink border border-outline-variant p-2 relative shadow-xl">
 <img alt="Forensic photography style, black and white, high contrast, economic crime evidence." class="w-full h-auto object-cover grayscale contrast-125 mix-blend-screen opacity-80 filter brightness-75 hover:brightness-100 transition-all duration-500" src="pics/noir/economic-hero.jpg"/>
-<div class="absolute bottom-4 right-4 bg-primary-fixed-dim text-on-primary-fixed font-label-caps text-label-caps px-2 py-1">EXHIBIT_A</div>
+<div class="absolute bottom-4 right-4 bg-financial-green text-white font-label-caps text-label-caps px-2 py-1">EXHIBIT_A</div>
 </div>
 </div>
 </div>
@@ -243,9 +271,9 @@
 <!-- Evidence Board Grid -->
 <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[minmax(250px,auto)]">
 <!-- Card 1: khdii-thanabat-plom-r5-2446 (High Priority / Verified) -->
-<a class="case-card-link bg-surface-container border-2 border-primary-fixed-dim flex-col relative group" href="prototype/read-case.html?id=khdii-thanabat-plom-r5-2446">
+<a class="case-card-link bg-surface-container border-2 border-financial-green flex-col relative group" href="prototype/read-case.html?id=khdii-thanabat-plom-r5-2446">
 <div class="w-full flex flex-col">
-<div class="bg-primary-fixed-dim text-on-primary-fixed px-4 py-2 flex justify-between items-center border-b-2 border-primary-fixed-dim">
+<div class="bg-financial-green text-white px-4 py-2 flex justify-between items-center border-b-2 border-financial-green">
 <span class="font-label-caps text-label-caps font-bold">CASE_#001-EC</span>
 <span class="material-symbols-outlined text-sm">verified</span>
 </div>
@@ -254,7 +282,7 @@
 <div class="text-sm text-on-surface-variant font-label-caps mb-4 border-b border-outline-variant pb-2">STATUS: ARCHIVED</div>
 <div class="mt-auto pt-4 flex flex-wrap gap-2">
 <span class="bg-surface-bright text-primary px-2 py-1 font-label-caps text-label-caps text-[10px]">COUNTERFEIT</span>
-<span class="bg-primary-fixed-dim text-on-primary-fixed px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
+<span class="bg-financial-green text-white px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
 </div>
 </div>
 </div>
@@ -267,7 +295,7 @@
 </div>
 <div class="p-4 relative h-48 overflow-hidden bg-black">
 <div class="absolute inset-0 flex items-center justify-center opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-500">
-<span class="material-symbols-outlined text-primary-fixed-dim" style="font-size: 120px;">account_balance</span>
+<span class="material-symbols-outlined text-financial-green" style="font-size: 120px;">account_balance</span>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
 <h3 class="absolute bottom-4 left-4 right-4 font-headline-md text-headline-md z-10">จุดกำเนิดกฎหมายล้มละลายของสยาม</h3>
@@ -289,23 +317,23 @@
 <div class="p-6 flex-1 flex flex-col gap-4 font-body-md text-sm">
 <h3 class="font-headline-md text-headline-md mb-2 text-on-surface">คดีทุจริตกรมนา (2416)</h3>
 <div class="border-l-2 border-outline-variant pl-4">
-<div class="text-primary-fixed-dim font-bold mb-1">พ.ศ. 2416</div>
+<div class="text-financial-green font-bold mb-1">พ.ศ. 2416</div>
 <div>คดีทุจริตในกรมนา หนึ่งในคดีทุจริตราชการยุคต้นรัตนโกสินทร์ที่ได้รับการยืนยันแหล่งที่มา</div>
 </div>
 <div class="mt-auto pt-4 flex flex-wrap gap-2">
 <span class="bg-surface-bright text-primary px-2 py-1 font-label-caps text-label-caps text-[10px]">CORRUPTION</span>
-<span class="bg-primary-fixed-dim text-on-primary-fixed px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
+<span class="bg-financial-green text-white px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
 </div>
 <div class="border-t border-outline-variant pt-4 text-center">
-<span class="text-primary-fixed-dim font-label-caps uppercase text-xs">VIEW FULL LOG →</span>
+<span class="text-financial-green font-label-caps uppercase text-xs">VIEW FULL LOG →</span>
 </div>
 </div>
 </div>
 </a>
 <!-- Card 4: khdii-khun-yuam-logging-2445 (High Priority) -->
-<a class="case-card-link bg-surface-container border-2 border-primary-fixed-dim flex-col relative group" href="prototype/read-case.html?id=khdii-khun-yuam-logging-2445">
+<a class="case-card-link bg-surface-container border-2 border-financial-green flex-col relative group" href="prototype/read-case.html?id=khdii-khun-yuam-logging-2445">
 <div class="w-full flex flex-col">
-<div class="bg-primary-fixed-dim text-on-primary-fixed px-4 py-2 flex justify-between items-center border-b-2 border-primary-fixed-dim">
+<div class="bg-financial-green text-white px-4 py-2 flex justify-between items-center border-b-2 border-financial-green">
 <span class="font-label-caps text-label-caps font-bold">CASE_#004-EC</span>
 <span class="material-symbols-outlined text-sm">forest</span>
 </div>
@@ -327,7 +355,7 @@
 </div>
 <div class="p-4 relative h-48 overflow-hidden bg-black">
 <div class="absolute inset-0 flex items-center justify-center opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-500">
-<span class="material-symbols-outlined text-primary-fixed-dim" style="font-size: 120px;">menu_book</span>
+<span class="material-symbols-outlined text-financial-green" style="font-size: 120px;">menu_book</span>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
 <h3 class="absolute bottom-4 left-4 right-4 font-headline-md text-headline-md z-10">คดีบุคคลัภย์ (2449)</h3>
@@ -335,7 +363,7 @@
 <div class="p-6">
 <div class="flex flex-wrap gap-2">
 <span class="bg-surface-bright text-primary px-2 py-1 font-label-caps text-label-caps text-[10px]">FRAUD</span>
-<span class="bg-primary-fixed-dim text-on-primary-fixed px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
+<span class="bg-financial-green text-white px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
 </div>
 </div>
 </div>
@@ -353,15 +381,15 @@
 </div>
 <div class="mt-auto pt-4 flex flex-wrap gap-2">
 <span class="bg-surface-bright text-primary px-2 py-1 font-label-caps text-label-caps text-[10px]">FRAUD</span>
-<span class="bg-primary-fixed-dim text-on-primary-fixed px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
+<span class="bg-financial-green text-white px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
 </div>
 </div>
 </div>
 </a>
 <!-- Card 7: phra-prom-chedi-2561 (High Priority) -->
-<a class="case-card-link bg-surface-container border-2 border-primary-fixed-dim flex-col relative group" href="prototype/read-case.html?id=phra-prom-chedi-2561">
+<a class="case-card-link bg-surface-container border-2 border-financial-green flex-col relative group" href="prototype/read-case.html?id=phra-prom-chedi-2561">
 <div class="w-full flex flex-col">
-<div class="bg-primary-fixed-dim text-on-primary-fixed px-4 py-2 flex justify-between items-center border-b-2 border-primary-fixed-dim">
+<div class="bg-financial-green text-white px-4 py-2 flex justify-between items-center border-b-2 border-financial-green">
 <span class="font-label-caps text-label-caps font-bold">CASE_#007-EC</span>
 <span class="material-symbols-outlined text-sm">warning</span>
 </div>
@@ -383,7 +411,7 @@
 </div>
 <div class="p-4 relative h-48 overflow-hidden bg-black">
 <div class="absolute inset-0 flex items-center justify-center opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-500">
-<span class="material-symbols-outlined text-primary-fixed-dim" style="font-size: 120px;">temple_buddhist</span>
+<span class="material-symbols-outlined text-financial-green" style="font-size: 120px;">temple_buddhist</span>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
 <h3 class="absolute bottom-4 left-4 right-4 font-headline-md text-headline-md z-10">คดีเงินทอนวัดสามพระยา อดีตพระพรหมดิลก</h3>
@@ -406,15 +434,15 @@
 <h3 class="font-headline-md text-headline-md mb-2 text-on-surface">คดีคลองด่าน (มหากาพย์ทุจริตโครงการบำบัดน้ำเสีย)</h3>
 <div class="mt-auto pt-4 flex flex-wrap gap-2">
 <span class="bg-surface-bright text-primary px-2 py-1 font-label-caps text-label-caps text-[10px]">CORRUPTION</span>
-<span class="bg-primary-fixed-dim text-on-primary-fixed px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
+<span class="bg-financial-green text-white px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
 </div>
 </div>
 </div>
 </a>
 <!-- Card 10: rice-pledging-landmark-2560 (High Priority) -->
-<a class="case-card-link bg-surface-container border-2 border-primary-fixed-dim flex-col relative group" href="prototype/read-case.html?id=rice-pledging-landmark-2560">
+<a class="case-card-link bg-surface-container border-2 border-financial-green flex-col relative group" href="prototype/read-case.html?id=rice-pledging-landmark-2560">
 <div class="w-full flex flex-col">
-<div class="bg-primary-fixed-dim text-on-primary-fixed px-4 py-2 flex justify-between items-center border-b-2 border-primary-fixed-dim">
+<div class="bg-financial-green text-white px-4 py-2 flex justify-between items-center border-b-2 border-financial-green">
 <span class="font-label-caps text-label-caps font-bold">CASE_#010-EC</span>
 <span class="material-symbols-outlined text-sm">gavel</span>
 </div>
@@ -423,7 +451,7 @@
 <div class="text-sm text-on-surface-variant font-label-caps mb-4 border-b border-outline-variant pb-2">STATUS: LANDMARK RULING</div>
 <div class="mt-auto pt-4 flex flex-wrap gap-2">
 <span class="bg-surface-bright text-primary px-2 py-1 font-label-caps text-label-caps text-[10px]">LANDMARK</span>
-<span class="bg-primary-fixed-dim text-on-primary-fixed px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
+<span class="bg-financial-green text-white px-2 py-1 font-label-caps text-label-caps text-[10px] font-bold">VERIFIED</span>
 </div>
 </div>
 </div>
