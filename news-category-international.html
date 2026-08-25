@@ -104,7 +104,8 @@
         @keyframes glitch-skew { 0%{transform:skew(0deg)} 20%{transform:skew(-10deg)} 40%{transform:skew(10deg)} 60%{transform:skew(-5deg)} 80%{transform:skew(5deg)} 100%{transform:skew(0deg)} }
         .evidence-photo { filter: grayscale(80%) contrast(130%) brightness(0.9) sepia(20%) hue-rotate(180deg); border: 2px solid #5B92E5; padding: 4px; background-color: #0D1117; }
         .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2)); background-size: 100% 4px; pointer-events: none; }
-        .un-watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-family: 'Syne', sans-serif; font-size: 8rem; font-weight: 800; color: rgba(91, 146, 229, 0.05); white-space: nowrap; pointer-events: none; z-index: 0; letter-spacing: 0.1em; }
+        html { overflow-x: hidden; }
+        .un-watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-family: 'Syne', sans-serif; font-size: 8rem; font-weight: 800; color: rgba(91, 146, 229, 0.05); white-space: nowrap; pointer-events: none; z-index: 0; letter-spacing: 0.1em; max-width: 100vw; }
         .case-file-card { background-color: #161f32; border: 1px solid #2a446b; padding: 24px; display: flex; flex-direction: column; transition: border-color .15s; }
         .case-file-card:hover { border-color: #5B92E5; }
         .verified-badge { background-color: rgba(91,146,229,0.15); color: #7AA9EB; border: 1px solid #5B92E5; }

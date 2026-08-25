@@ -4,64 +4,315 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>กําลังโหลดคดี... — Cool Uncle ⚖ Legal Lab</title>
-<link rel="stylesheet" href="shared.css">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Syne:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "surface-container": "#161f32",
+        "on-secondary": "#3f2e00",
+        "surface-container-high": "#212a3d",
+        "primary-fixed-dim": "#e9c400",
+        "surface-dim": "#0a1325",
+        "inverse-on-surface": "#273044",
+        "inverse-primary": "#705d00",
+        "secondary-container": "#584410",
+        "evidence-red": "#B22222",
+        "outline": "#999077",
+        "surface-bright": "#30394d",
+        "on-tertiary-container": "#006a70",
+        "on-error": "#690005",
+        "on-error-container": "#ffdad6",
+        "tertiary-container": "#00f1ff",
+        "inverse-surface": "#d9e2fc",
+        "primary-container": "#ffd700",
+        "on-secondary-container": "#cfb274",
+        "redaction-black": "#000000",
+        "background": "#0a1325",
+        "on-tertiary-fixed": "#002022",
+        "on-tertiary": "#00363a",
+        "secondary": "#e1c383",
+        "on-surface": "#d9e2fc",
+        "surface-variant": "#2c3548",
+        "on-primary-container": "#705e00",
+        "tertiary-fixed-dim": "#00dbe8",
+        "error": "#ffb4ab",
+        "tertiary": "#defcff",
+        "surface-container-low": "#121b2e",
+        "surface-tint": "#e9c400",
+        "on-primary-fixed-variant": "#544600",
+        "primary-fixed": "#ffe16d",
+        "on-background": "#d9e2fc",
+        "surface-container-highest": "#2c3548",
+        "paper-aged": "#F5F2E8",
+        "tertiary-fixed": "#79f5ff",
+        "on-secondary-fixed-variant": "#584410",
+        "secondary-fixed": "#ffdf9d",
+        "secondary-fixed-dim": "#e1c383",
+        "surface-container-lowest": "#050e20",
+        "charcoal-ink": "#0D1117",
+        "on-primary": "#3a3000",
+        "on-tertiary-fixed-variant": "#004f54",
+        "on-primary-fixed": "#221b00",
+        "on-secondary-fixed": "#251a00",
+        "surface": "#0a1325",
+        "on-surface-variant": "#d0c6ab",
+        "error-container": "#93000a",
+        "primary": "#fff6df",
+        "outline-variant": "#4d4732"
+      },
+      "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+      "spacing": { "margin-desktop": "64px", "container-max": "1200px", "gutter": "24px", "unit": "4px", "margin-mobile": "16px" },
+      "fontFamily": {
+        "body-lg": ["Courier Prime"], "headline-lg": ["Syne"], "label-caps": ["JetBrains Mono"],
+        "headline-display": ["Syne"], "headline-lg-mobile": ["Syne"], "redacted": ["Courier Prime"],
+        "body-md": ["Courier Prime"], "headline-md": ["Syne"]
+      },
+      "fontSize": {
+        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+        "headline-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "700" }],
+        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }],
+        "headline-display": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+        "redacted": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+      }
+    }
+  }
+}
+</script>
 <style>
-/* Read Mode — layout v2 compatible styles */
-.case-flag{display:inline-block;border-radius:999px;padding:3px 13px;font-size:.78rem;font-weight:800}
-.flag-deident{background:#FBEAEA;color:#B23A3A;border:1px solid #B23A3A}
-.flag-review{background:#F3E8CF;color:#8F6511;border:1px solid #B08A3C}
-.flag-public{background:#E6F4EC;color:#1E7A4F;border:1px solid #1E7A4F}
-.need-review-box{background:#FDF6EC;border:1.5px dashed #B08A3C;border-radius:12px;padding:12px 16px;margin:10px 0 14px;font-size:.92rem;color:#7A6220;display:flex;gap:10px;align-items:flex-start}
-.need-review-box .ico{font-size:1.1rem;flex-shrink:0}
-/* 04 timeline */
-ul.case-timeline{list-style:none;padding:0;margin:10px 0 14px}
-ul.case-timeline li{position:relative;padding:0 0 16px 26px;border-left:3px solid #E5E1D6;margin-left:10px}
-ul.case-timeline li::before{content:"";position:absolute;left:-8px;top:4px;width:13px;height:13px;border-radius:999px;background:var(--gold-soft);border:2.5px solid var(--gold)}
-ul.case-timeline li .yr{font-size:.82rem;font-weight:700;color:var(--ink-faint);display:block;margin-bottom:2px}
-/* 06 accordion */
-details.law-acc{background:#F9F7F2;border:1px solid var(--line);border-radius:12px;margin:10px 0}
-details.law-acc summary{padding:14px 16px;font-weight:700;font-size:1rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
-details.law-acc summary::-webkit-details-marker{display:none}
-details.law-acc summary .arrow{transition:transform .25s;color:var(--ink-faint)}
-details.law-acc[open] summary .arrow{transform:rotate(90deg)}
-details.law-acc .body{padding:4px 16px 16px;border-top:1px solid var(--line)}
-p.law-ref{font-weight:700;color:var(--accent);margin:0 0 6px;font-size:.95rem}
-p.law-loc{font-size:.82rem;color:var(--ink-faint);margin:0 0 10px}
-p.law-text{font-family:'Noto Serif Thai',serif;font-size:.98rem;line-height:1.9;color:#3A4050;margin:0}
-/* 08 judicial box */
-.judicial-box{background:#F9F7F2;border:1.5px solid var(--line);border-radius:14px;padding:20px 24px;color:var(--ink);margin:12px 0}
-.judicial-box .lbl{font-size:.82rem;font-weight:800;letter-spacing:.06em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.judicial-box h4{font-family:'Noto Serif Thai',serif;font-size:1.08rem;font-weight:800;margin:0 0 10px;color:#1B2437}
-.judicial-box p{font-size:.98rem;line-height:1.85;color:#1E2436;margin:0}
-.judicial-box .ratio{background:#F3F0E7;border-left:3px solid #B08A3C;border-right:1px solid var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 14px;margin-top:10px;color:#1E2436}
-/* Play mode button */
-.play-cta{display:inline-flex;align-items:center;gap:8px;background:#1B2437;color:#fff;font-weight:700;font-size:.95rem;padding:11px 20px;border-radius:12px;text-decoration:none;transition:all .2s}
-.play-cta:hover{background:#2E3A55;transform:translateY(-2px)}
-.section-nav{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 26px;padding-bottom:6px;border-bottom:1px solid var(--line)}
-.section-nav a{font-size:.85rem;font-weight:600;color:var(--accent);text-decoration:none;background:#F3F0E7;padding:5px 12px;border-radius:999px}
-.section-nav a:hover{background:#EAE5D8}
+/* ================================================================
+   NOIR CASE-BRIEF THEME — read-case.html only (own stylesheet,
+   does NOT touch prototype/shared.css — play-case.html / explore.html
+   are unaffected). Tokens copied from Theme/.../case_file_noir/DESIGN.md
+   ================================================================ */
+:root{
+  --nr-surface:#0a1325;
+  --nr-surface-dim:#0a1325;
+  --nr-surface-container-lowest:#050e20;
+  --nr-surface-container-low:#121b2e;
+  --nr-surface-container:#161f32;
+  --nr-surface-container-high:#212a3d;
+  --nr-surface-container-highest:#2c3548;
+  --nr-surface-bright:#30394d;
+  --nr-on-surface:#d9e2fc;
+  --nr-on-surface-variant:#d0c6ab;
+  --nr-outline:#999077;
+  --nr-outline-variant:#4d4732;
+  --nr-gold:#e9c400;
+  --nr-gold-bright:#ffd700;
+  --nr-on-gold:#221b00;
+  --nr-evidence-red:#B22222;
+  --nr-charcoal:#0D1117;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--nr-surface);color:var(--nr-on-surface);min-height:100vh;font-family:'Courier Prime',monospace;overflow-x:hidden}
+.noise-bg{
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+
+/* ---- loading / error state (before render() replaces #app) ---- */
+.load-msg{padding:80px 0;text-align:center;color:var(--nr-on-surface-variant);font-family:'JetBrains Mono',monospace;font-size:.85rem;letter-spacing:.05em;text-transform:uppercase}
+.load-error{color:#ffb4ab;padding:60px 20px;text-align:center;font-family:'JetBrains Mono',monospace}
+.load-error h2{font-family:'Syne',sans-serif;margin-bottom:10px}
+
+/* ---- back link ---- */
+.back-link{
+  display:inline-flex;align-items:center;gap:6px;margin-bottom:20px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--nr-gold);text-decoration:none;
+}
+.back-link:hover{color:var(--nr-gold-bright);transform:translateX(-3px)}
+.back-link .material-symbols-outlined{font-size:18px}
+
+/* ---- case folder shell ---- */
+.case-folder{background:var(--nr-surface-container-low);border:2px solid var(--nr-outline-variant);position:relative;padding:44px 20px 28px;margin-top:30px}
+@media(min-width:768px){.case-folder{padding:52px 44px 40px}}
+.folder-tab{
+  position:absolute;top:0;left:20px;transform:translateY(-100%);
+  background:var(--nr-surface-container-low);border:2px solid var(--nr-outline-variant);border-bottom:none;
+  padding:6px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--nr-on-surface-variant);letter-spacing:.06em;
+}
+@media(min-width:768px){.folder-tab{left:44px}}
+
+.case-grid{display:grid;grid-template-columns:1fr;gap:36px}
+@media(min-width:1024px){.case-grid{grid-template-columns:2fr 1fr}}
+
+/* ---- header block ---- */
+.case-header{border-bottom:4px solid var(--nr-gold);padding-bottom:20px;margin-bottom:28px}
+.case-header h1{font-family:'Syne',sans-serif;font-weight:800;font-size:1.7rem;line-height:1.25;color:var(--nr-on-surface);margin:0 0 12px;text-wrap:balance}
+@media(min-width:768px){.case-header h1{font-size:2.2rem}}
+.case-tagline{color:var(--nr-on-surface-variant);font-size:.98rem;line-height:1.75;margin:0 0 16px;border-left:3px solid var(--nr-gold);padding-left:14px}
+.case-tags{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+
+.badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:4px 10px}
+.badge-criminal{background:var(--nr-evidence-red);color:#fff}
+.badge-civil{background:#2E4A7A;color:#fff}
+.badge-corporate{background:#6B4A9A;color:#fff}
+.badge-const{background:var(--nr-gold);color:var(--nr-on-gold)}
+.badge-admin{background:#1E7A4F;color:#fff}
+.badge-international{background:#3a4a63;color:#d9e2fc}
+
+.tag-chip{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--nr-on-surface-variant);border:1px solid var(--nr-outline-variant);padding:3px 10px}
+.tag-chip.tag-gold{color:var(--nr-gold);border-color:var(--nr-gold)}
+.tag-chip.tag-red{background:var(--nr-evidence-red);border-color:var(--nr-evidence-red);color:#fff}
+.tag-chip.tag-green{color:#8CF5B4;border-color:#2E7D4F}
+
+/* ---- section quick-nav ---- */
+.section-nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.section-nav a{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--nr-gold);border:1px solid var(--nr-outline-variant);padding:5px 10px;text-decoration:none}
+.section-nav a:hover{background:var(--nr-gold);color:var(--nr-on-gold);border-color:var(--nr-gold)}
+.section-nav a.play-link{background:var(--nr-evidence-red);color:#fff;border-color:var(--nr-evidence-red)}
+
+/* ---- dossier sections ---- */
+.case-section{margin:0 0 32px}
+.case-section h3{
+  font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nr-gold);
+  border-bottom:2px solid var(--nr-outline-variant);padding-bottom:8px;margin:0 0 14px;
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;
+}
+.case-section h3 .review-flag{color:#e1a34a;font-size:10.5px;text-transform:none;letter-spacing:0}
+.para-split{font-family:'Courier Prime',monospace;font-size:1rem;line-height:1.9;color:var(--nr-on-surface-variant);margin:0 0 14px}
+
+/* timeline (case_details) */
+.timeline{list-style:none;margin:0 0 18px;padding:0;border-left:2px solid var(--nr-outline-variant)}
+.timeline li{position:relative;padding:0 0 18px 22px;font-family:'Courier Prime',monospace;color:var(--nr-on-surface-variant);line-height:1.8}
+.timeline li::before{content:'';position:absolute;left:-7px;top:5px;width:12px;height:12px;background:var(--nr-gold);border:2px solid var(--nr-surface-container-low)}
+.timeline .yr{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--nr-gold);background:var(--nr-surface-container);padding:2px 8px;margin-right:8px;margin-bottom:4px}
+
+/* legal issues */
+.issue-block{margin:0 0 16px;padding-left:24px;position:relative}
+.issue-block::before{content:'X';position:absolute;left:0;top:1px;color:var(--nr-evidence-red);font-weight:800;font-family:'JetBrains Mono',monospace;font-size:.9rem}
+.issue-q{font-weight:700;color:var(--nr-on-surface);font-family:'Courier Prime',monospace}
+.issue-a{color:var(--nr-on-surface-variant);font-size:.9rem;margin-top:4px}
+
+/* provisions accordion */
+.law-acc{border:1px solid var(--nr-outline-variant);background:var(--nr-surface-container);margin:10px 0}
+.law-acc summary{padding:12px 16px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12.5px;color:var(--nr-gold);display:flex;justify-content:space-between;align-items:center;list-style:none;letter-spacing:.03em}
+.law-acc summary::-webkit-details-marker{display:none}
+.law-acc[open] summary{border-bottom:1px solid var(--nr-outline-variant)}
+.law-acc .arrow{color:var(--nr-on-surface-variant);transition:transform .2s}
+.law-acc[open] .arrow{transform:rotate(90deg)}
+.law-acc .body{padding:14px 16px}
+.law-loc{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--nr-on-surface-variant);margin:0 0 8px;letter-spacing:.03em}
+.law-text{font-family:'Courier Prime',monospace;font-size:.95rem;line-height:1.85;color:var(--nr-on-surface)}
+
+/* lessons */
+.lesson-item{margin:0 0 12px;padding:12px 14px;background:var(--nr-surface-container);border-left:3px solid var(--nr-gold);font-family:'Courier Prime',monospace;font-size:.95rem;line-height:1.8;color:var(--nr-on-surface-variant)}
+
+/* judicial */
+.judicial-box{background:var(--nr-surface-container);border:2px solid var(--nr-gold);padding:20px 22px;margin:10px 0}
+.judicial-box .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--nr-gold);margin-bottom:12px;display:flex;gap:8px;align-items:center}
+.judicial-box h4{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin:12px 0 6px;color:var(--nr-on-surface)}
+.judicial-box p{font-family:'Courier Prime',monospace;font-size:.95rem;line-height:1.85;color:var(--nr-on-surface-variant);margin:0}
+.judicial-box .ratio{background:var(--nr-surface-container-high);border-left:3px solid var(--nr-gold);padding:12px 14px;margin-top:12px;font-style:italic;color:var(--nr-on-surface)}
+.judicial-box .ref{font-size:.8rem;margin-top:10px;color:var(--nr-on-surface-variant)}
+.judicial-pending{border:1px dashed var(--nr-outline);background:var(--nr-surface-container-lowest);padding:18px 20px;color:var(--nr-on-surface-variant);font-size:.92rem;font-family:'Courier Prime',monospace;line-height:1.8}
+.judicial-pending strong{color:var(--nr-on-surface)}
+.judicial-pending .courts-box{margin-top:14px;background:var(--nr-surface-container);padding:12px 14px}
+.judicial-pending .courts-box p{margin:6px 0}
+.judicial-pending ul{margin:12px 0 0 18px;font-size:.85rem}
+.judicial-pending code{background:var(--nr-surface-container-high);padding:1px 6px;font-family:'JetBrains Mono',monospace;font-size:.8rem}
+
+/* need-review / deident banners */
+.need-review-box{border-left:3px solid #e1a34a;background:rgba(225,163,74,.1);padding:12px 16px;margin:12px 0;display:flex;gap:10px;align-items:flex-start;font-family:'Courier Prime',monospace;font-size:.88rem;color:var(--nr-on-surface-variant);line-height:1.7}
+.need-review-box .ico{color:#e1a34a;flex-shrink:0}
+.need-review-box strong{color:var(--nr-on-surface)}
+.deident-box{border-left:3px solid var(--nr-evidence-red);background:rgba(178,34,34,.12);padding:14px 18px;margin:14px 0;display:flex;gap:12px;align-items:flex-start;font-family:'Courier Prime',monospace;font-size:.9rem;color:var(--nr-on-surface-variant);line-height:1.75}
+.deident-box .ico{color:var(--nr-evidence-red);flex-shrink:0;font-size:1.2rem}
+.deident-box strong{color:var(--nr-on-surface)}
+
+/* video */
+.video-embed{overflow:hidden;border:2px solid var(--nr-outline-variant);margin:14px 0;background:#000}
+.video-embed iframe{width:100%;aspect-ratio:16/9;display:block;border:0}
+.video-credit{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--nr-on-surface-variant);margin:6px 0 0;letter-spacing:.02em}
+.video-pending{border:1px dashed var(--nr-outline);padding:12px 16px;color:var(--nr-on-surface-variant);font-size:.85rem;font-family:'Courier Prime',monospace}
+
+/* play CTA (main column, end of case) */
+.play-cta-wrap{margin-top:32px;padding-top:24px;border-top:2px solid var(--nr-outline-variant);text-align:center}
+.play-cta-wrap p{color:var(--nr-on-surface-variant);font-family:'Courier Prime',monospace;font-size:.92rem;margin-bottom:14px}
+.play-cta{display:inline-flex;align-items:center;gap:8px;background:var(--nr-gold);color:var(--nr-on-gold);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;padding:13px 24px;text-decoration:none;border:2px solid var(--nr-gold)}
+.play-cta:hover{background:transparent;color:var(--nr-gold)}
+
+/* ---- sidebar ---- */
+.case-sidebar{display:flex;flex-direction:column;gap:20px}
+.evidence-photo{background:#e9e5d8;padding:8px 8px 30px;transform:rotate(-2deg);box-shadow:0 6px 16px rgba(0,0,0,.5);max-width:280px;margin:0 auto}
+.evidence-photo img{width:100%;height:auto;display:block;filter:grayscale(100%) contrast(125%)}
+.evidence-photo .cap{font-family:'JetBrains Mono',monospace;font-size:10px;text-align:center;color:#1a1a1a;margin-top:10px;letter-spacing:.05em;text-transform:uppercase}
+.sidebar-card{background:var(--nr-surface-container);border:1px solid var(--nr-outline-variant);padding:20px}
+.sidebar-card h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--nr-gold);text-transform:uppercase;border-bottom:1px solid var(--nr-outline-variant);padding-bottom:8px;margin:0 0 12px}
+.sidebar-card dl{margin:0;font-family:'Courier Prime',monospace;font-size:.85rem;color:var(--nr-on-surface-variant)}
+.sidebar-card dt{font-weight:700;color:var(--nr-on-surface);margin-top:10px;font-size:.75rem;text-transform:uppercase;letter-spacing:.03em;font-family:'JetBrains Mono',monospace}
+.sidebar-card dt:first-child{margin-top:0}
+.sidebar-card dd{margin:2px 0 0}
+.sidebar-play{display:block;text-align:center;background:transparent;color:var(--nr-gold);border:2px solid var(--nr-gold);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;padding:12px;text-decoration:none}
+.sidebar-play:hover{background:var(--nr-gold);color:var(--nr-on-gold)}
+
+/* extra media section */
+.extra-media h3{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nr-gold);border-bottom:2px solid var(--nr-outline-variant);padding-bottom:8px;margin:0 0 14px}
+
+footer.site-footer{margin-top:40px;text-align:center;font-size:11px;color:var(--nr-on-surface-variant);font-family:'JetBrains Mono',monospace;border-top:1px solid var(--nr-outline-variant);padding:20px 16px 40px;letter-spacing:.02em}
 </style>
 </head>
-<body>
-<div class="topbar mag">
-  <a class="tb-brand" href="../news-index.html"><img src="assets/capybara-64.webp" alt="" width="36" height="36">Cool Uncle <span style="color:#B08A3C">⚖</span> Legal Lab</a>
-  <span class="tb-sep">|</span>
-  <span>กำลังโหลดคดีจาก JSON...</span>
+<body class="bg-background text-on-surface min-h-screen relative selection:bg-primary-container selection:text-on-primary-container">
+<div class="fixed inset-0 z-50 noise-bg mix-blend-overlay"></div>
+
+<!-- TopAppBar (matches news-category-*.html chrome) -->
+<header class="bg-surface-dim text-primary-fixed-dim font-headline-md text-headline-md z-40 fixed top-0 left-0 w-full border-b-2 border-outline-variant flex justify-between items-center px-margin-desktop py-4 hidden md:flex">
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-3 font-headline-md text-headline-md font-bold text-primary-fixed-dim tracking-tighter hover:text-primary-fixed transition-colors duration-100 ease-in-out" href="../news-index.html">
+<img alt="Cool Uncle Legal Lab" height="36" src="assets/capybara-64.webp" width="36">
+Cool Uncle ⚖ Legal Lab
+</a>
+<nav class="flex gap-6">
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="../news-category-criminal.html">อาญา</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="../news-category-economic.html">เศรษฐกิจ</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="../news-category-family.html">ครอบครัว-มรดก</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="../news-category-political.html">รธน.-การเมือง-ปกครอง</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="../news-category-international.html">ระหว่างประเทศ</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="../news-category-other.html">อื่นๆ</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary-fixed hover:bg-surface-variant transition-colors duration-100 ease-in-out px-2 py-1" href="../news-category-precode.html">ก่อนยุคประมวล</a>
+</nav>
 </div>
-<div class="wrap-compact" id="app">
-  <p style="padding:60px 0;text-align:center;color:var(--ink-faint)">กำลังโหลดข้อมูลคดีจาก case JSON...</p>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-sm">folder_open</span>
+<span id="topbar-status">CASE FILE</span>
 </div>
-<footer>
-  Cool Uncle ⚖ Legal Lab — สืบกฎหมายจากคดีจริง | ข้อมูลจาก case JSON v1.0 (Agent B UI standard) — คดีนี้กำลังรอการตรวจสอบโดย Agent A (deident / NEEDS_REVIEW)
-</footer>
+</header>
+<!-- Mobile Top Header Fallback -->
+<header class="md:hidden bg-surface-dim border-b-2 border-outline-variant p-4 flex justify-between items-center sticky top-0 z-40">
+<a class="flex items-center gap-2 font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary-fixed-dim tracking-tighter" href="../news-index.html">
+<img alt="Cool Uncle Legal Lab" height="28" src="assets/capybara-64.webp" width="28">
+Cool Uncle ⚖ Legal Lab
+</a>
+</header>
+
+<main class="pt-0 md:pt-[88px] px-margin-mobile md:px-margin-desktop pb-16">
+<div class="max-w-container-max mx-auto pt-6 md:pt-10">
+<a class="back-link" href="../news-index.html"><span class="material-symbols-outlined">arrow_back</span>BACK TO INDEX</a>
+<div id="app"><p class="load-msg">กำลังโหลดข้อมูลคดีจาก case JSON...</p></div>
+</div>
+</main>
+
+<footer class="site-footer">Cool Uncle ⚖ Legal Lab — สืบกฎหมายจากคดีจริง | ข้อมูลจาก case JSON v1.0 (Agent B UI standard)</footer>
 
 <script>
 /* ================================================================
-   READ MODE — คูลอังกิลโหมดอ่าน
-   ปรัชญา: calm & readable — เรียง 8 sections ตามมาตรฐาน JSON
+   READ MODE — คูลอังกิลโหมดอ่าน (noir case-brief visual layer)
+   ปรัชญา: calm & readable — เรียง sections ตามมาตรฐาน JSON
    - Section 08 (judicial) แสดงเฉพาะเมื่อ data verified = true
    - เนื้อหา NEEDS_REVIEW จะถูกแสดงเป็น "กล่องคำเตือน Agent A"
    - ห้ามแก้ไข facts/legal ในที่นี้ — เกิดจาก JSON เท่านั้น
+   - การเปลี่ยนแปลงในไฟล์นี้ (2026-08 reskin): เฉพาะ CSS/markup ชั้นแสดงผล
+     ไม่แตะ logic การแตกแขนงตาม s.key ด้านล่าง
    ================================================================ */
 
 const appId = new URLSearchParams(location.search).get('id') || 'shayamala-2536';
@@ -79,10 +330,25 @@ function needsReviewBox(note){
 function flagFor(c){
   if(c.visibility && !c.visibility.public){
     const r = c.visibility.public_reason || '';
-    if(r === 'deident_required') return `<span class="case-flag flag-deident">🔒 รอดำเนินการ de-identification โดย Agent A</span>`;
-    return `<span class="case-flag flag-review">🔒 ยังไม่พร้อม public: ${esc(r)}</span>`;
+    if(r === 'deident_required') return `<span class="tag-chip tag-red">🔒 รอ de-identification</span>`;
+    return `<span class="tag-chip tag-red">🔒 ยังไม่พร้อม public: ${esc(r)}</span>`;
   }
-  return `<span class="case-flag flag-public">✅ public</span>`;
+  return `<span class="tag-chip tag-green">✅ PUBLIC</span>`;
+}
+
+/* เลือกภาพหลักฐานตามหมวดคดี — ไฟล์ noir-hero ใช้ร่วมกับ news-category-*.html
+   ส่วนคดีอาญาใช้ภาพเดียวกับ hero ของ news-category-criminal.html
+   ไม่มี case JSON ไหนมีฟิลด์รูปภาพของตัวเอง จึงใช้ mood photo ตามหมวดเสมอ */
+function pickEvidenceImage(cat){
+  const c = String(cat||'');
+  if(/ระหว่างประเทศ|ICJ|ศาลโลก|ทูต/.test(c)) return { src:'../pics/noir/international-hero.jpg', alt:'ภาพประกอบคดีระหว่างประเทศ' };
+  if(/เศรษฐกิจ|ทุจริต|คอมพิวเตอร์/.test(c))    return { src:'../pics/noir/economic-hero.jpg', alt:'ภาพประกอบคดีเศรษฐกิจ' };
+  if(/ครอบครัว|มรดก/.test(c))                  return { src:'../pics/noir/family-hero.jpg', alt:'ภาพประกอบคดีครอบครัว-มรดก' };
+  if(/การเมือง|รัฐธรรมนูญ|ปกครอง|มณเฑียรบาล/.test(c)) return { src:'../pics/noir/political-hero.jpg', alt:'ภาพประกอบคดีการเมือง-ปกครอง' };
+  if(/ประวัติศาสตร์|ยุค|โบราณ/.test(c))         return { src:'../pics/noir/precode-hero.jpg', alt:'ภาพประกอบคดีประวัติศาสตร์' };
+  if(/แพทย์|สุขภาพ/.test(c))                    return { src:'../pics/Picabay/darkostojanovic-medic-563425.jpg', alt:'ภาพประกอบคดีทางการแพทย์' };
+  if(/อาญา/.test(c))                            return { src:'../pics/Picabay/alexas_fotos-police-3284258_1920.jpg', alt:'ภาพประกอบคดีอาญา' };
+  return { src:'../pics/Picabay/stevepb-detective-1039883_1920.jpg', alt:'ภาพประกอบคดี' };
 }
 
 async function render(){
@@ -93,52 +359,59 @@ async function render(){
     if(!res.ok) throw new Error('HTTP '+res.status);
     c = await res.json();
   }catch(e){
-    app.innerHTML = `<article class="mag-article"><h2 style="color:var(--bad)">โหลดคดีไม่ได้: ${esc(e.message)}</h2>
-      <p>ไฟล์ JSON ไม่มีอยู่ที่ ${esc(CASE_URL)} — กรุณาตรวจสอบ path หรือ deploy</p></article>`;
+    app.innerHTML = `<div class="load-error"><h2>โหลดคดีไม่ได้: ${esc(e.message)}</h2>
+      <p>ไฟล์ JSON ไม่มีอยู่ที่ ${esc(CASE_URL)} — กรุณาตรวจสอบ path หรือ deploy</p></div>`;
     return;
   }
   document.title = `${c.meta.title} — อ่านคดี | Cool Uncle ⚖ Legal Lab`;
   const m = c.meta, rank = c.rank || {}, vis = c.visibility || {};
 
-  // Theme override — คัดีไหนมี theme ให้ปิด data-theme ที่ root (css variable override)
+  // Theme override (legacy hook — kept for JSON compatibility, no-op under noir theme)
   const theme = (c.theme || '').trim();
   if(theme){ document.documentElement.setAttribute('data-theme', theme); }
 
-  let html = `<a class="back-button" href="../news-index.html">← กลับหน้าแรก</a>`;
-  html += `<article class="mag-article">`;
+  const badgeClass = CAT_BADGE[m.cat] || 'criminal';
+  const img = pickEvidenceImage(m.cat);
+  const topbarStatus = document.getElementById('topbar-status');
+  if(topbarStatus) topbarStatus.textContent = `CASE_${esc(appId).toUpperCase()}`;
+
+  let html = `<div class="case-folder">
+    <div class="folder-tab">FILE: #${esc(appId)}</div>
+    <div class="case-grid">
+      <div class="case-main">`;
 
   // HERO (01)
-  html += `<section class="case-hero" data-section="01">
+  html += `<header class="case-header" data-section="01">
     <h1>${esc(m.title_display || m.title)}</h1>
-    <p class="tagline">${esc(m.blurb_60 || '')}</p>
-    <p class="case-meta">
-      <span class="badge ${CAT_BADGE[m.cat]||'criminal'}">${esc(m.cat)}</span>
-      <span>ปี ${esc(m.year)}</span>
-      <span>⏱ ~${esc(m.read_minutes)} นาที</span>
-      <span>${esc(rank.grade || '')} grade · ${esc(rank.score ?? '')}คะแนน</span>
-      ${rank.s_verified ? '<span style="color:var(--gold);font-weight:800">✦ S — verified</span>' : ''}
+    <p class="case-tagline">${esc(m.blurb_60 || '')}</p>
+    <div class="case-tags">
+      <span class="badge badge-${badgeClass}">${esc(m.cat)}</span>
+      <span class="tag-chip">ปี ${esc(m.year)}</span>
+      <span class="tag-chip">⏱ ~${esc(m.read_minutes)} นาที</span>
+      <span class="tag-chip">${esc(rank.grade || '')} · ${esc(rank.score ?? '')} คะแนน</span>
+      ${rank.s_verified ? '<span class="tag-chip tag-gold">✦ VERIFIED-S</span>' : ''}
       ${flagFor(c)}
-    </p>
+    </div>
     <div class="section-nav">
       ${c.read.sections.map(s=>`<a href="#sec-${esc(s.key)}">${esc(s.title)}</a>`).join('')}
-      ${c.play ? '<a href="#play-link" style="background:#1B2437;color:#fff">🎮 ลุยโหมดเล่น</a>' : ''}
+      ${c.play ? '<a href="#play-link" class="play-link">🎮 ลุยโหมดเล่น</a>' : ''}
     </div>
-  </section>`;
+  </header>`;
 
   // TOP VIDEO (จาก case.media.video — verified working เท่านั้น)
   if(c.media && c.media.video && c.media.video.youtube_id && c.media.video.verified_working){
     const v = c.media.video;
-    html += `<section class="case-media case-media-top" data-section="00" id="sec-video">
-      <h3 style="margin-top:0">🎬 ${esc(v.title || 'วิดีโอคดี')}</h3>
+    html += `<section class="case-section" data-section="00" id="sec-video">
+      <h3>🎬 ${esc(v.title || 'วิดีโอคดี')}</h3>
       <div class="video-embed"><iframe src="https://www.youtube.com/embed/${esc(v.youtube_id)}" title="${esc(v.title || 'วิดีโอคดี')}" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
-      <p class="mag-video-credit">${esc(v.channel || ((c.media.items||[]).find(i=>i.embed_id===v.youtube_id)||{}).credit || '')}${v.verified_at ? ` · ตรวจสอบแล้วเมื่อ ${esc(v.verified_at)}` : ''}</p>
+      <p class="video-credit">${esc(v.channel || ((c.media.items||[]).find(i=>i.embed_id===v.youtube_id)||{}).credit || '')}${v.verified_at ? ` · ตรวจสอบแล้วเมื่อ ${esc(v.verified_at)}` : ''}</p>
     </section>`;
   }
 
   for(const s of c.read.sections){
     const ct = s.content || {};
-    html += `<section data-section="${esc(String(s.order).padStart(2,'0'))}" id="sec-${esc(s.key)}">`;
-    html += `<h3>${esc(s.title)}${ct.status==='NEEDS_REVIEW' ? ' <span style="font-size:.8rem;color:#B08A3C;font-family:Sarabun,sans-serif">(NEEDS_REVIEW)</span>' : ''}</h3>`;
+    html += `<section class="case-section" data-section="${esc(String(s.order).padStart(2,'0'))}" id="sec-${esc(s.key)}">`;
+    html += `<h3><span>${esc(s.title)}</span>${ct.status==='NEEDS_REVIEW' ? ' <span class="review-flag">(NEEDS_REVIEW)</span>' : ''}</h3>`;
 
     if(s.key === 'overview'){
       if(ct.paragraphs && ct.paragraphs.length){
@@ -156,7 +429,7 @@ async function render(){
     }
     else if(s.key === 'case_details'){
       (ct.timeline||[]).forEach(g=>{
-        html += `<ul class="case-timeline">`;
+        html += `<ul class="timeline">`;
         (g.events||[]).forEach(ev=>{
           html += `<li><span class="yr">${esc(ev.year)}</span>${esc(ev.text)}</li>`;
         });
@@ -165,7 +438,7 @@ async function render(){
       (ct.analysis||[]).forEach(a=> html += `<p class="para-split">${esc(a)}</p>`);
       if(ct.links && ct.links.length){
         ct.links.forEach(l=>{
-          if(l.url) html += `<p><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.text)}</a></p>`;
+          if(l.url) html += `<p><a href="${esc(l.url)}" target="_blank" rel="noopener" style="color:var(--nr-gold)">${esc(l.text)}</a></p>`;
           else html += needsReviewBox(`ลิงก์: ${l.text} — ${l.note_to_agent_a||'ไม่มี URL'}`);
         });
       }
@@ -175,8 +448,9 @@ async function render(){
         ct.issues.forEach(i=>{
           const q = i.title || i.q || i.question || '';
           const a = i.text || i.a || i.anchor || '';
-          html += `<p class="para-split"><strong>${esc(q)}</strong></p>`;
-          if(a) html += `<p class="para-split" style="color:var(--ink-soft);margin-top:-8px">⚓ ${esc(a)}</p>`;
+          html += `<div class="issue-block"><p class="issue-q">${esc(q)}</p>`;
+          if(a) html += `<p class="issue-a">⚓ ${esc(a)}</p>`;
+          html += `</div>`;
         });
       } else {
         html += needsReviewBox(ct.note_to_agent_a || 'Agent A กรุณาเติมประเด็นกฎหมายจริงของคดี (เช่น ม.288, ม.199, การลดโทษ)');
@@ -195,24 +469,24 @@ async function render(){
       });
     }
     else if(s.key === 'lessons'){
-      (ct.items||[]).forEach(it=>{ html += `<p class="para-split">💡 ${esc(it.text)}</p>`; });
+      (ct.items||[]).forEach(it=>{ html += `<p class="lesson-item">💡 ${esc(it.text)}</p>`; });
     }
     else if(s.key === 'judicial'){
       const v = ct.verdict || {};
       if(ct.verified && v.decision){
         html += `<div class="judicial-box">
           <div class="lbl">⚖ คำพิพากษาตามลำดับศาล — verified by Agent C</div>
-          ${(v.courts||[]).map(court => `<h4 style="margin-top:8px;font-size:1rem">${esc(court.court)}</h4><p>${esc(court.ruling_quote || court.ruling)}</p>`).join('')}
+          ${(v.courts||[]).map(court => `<h4>${esc(court.court)}</h4><p>${esc(court.ruling_quote || court.ruling)}</p>`).join('')}
           ${v.ratio ? `<p class="ratio">"${esc(v.ratio)}"</p>` : ''}
-          ${v.source_verdict_ref ? `<p style="font-size:.85rem;margin-top:10px;color:var(--ink-soft)">อ้างอิง: ${esc(v.source_verdict_ref)}</p>` : ''}
+          ${v.source_verdict_ref ? `<p class="ref">อ้างอิง: ${esc(v.source_verdict_ref)}</p>` : ''}
         </div>`;
       } else {
         // Courts ladder from seed facts — still locked behind NEEDS_REVIEW gate
         const courts = v.courts || [];
-        html += `<div style="background:#F9F7F2;border:1px dashed var(--line);border-radius:14px;padding:18px 20px;color:var(--ink-soft);font-size:.95rem">
+        html += `<div class="judicial-pending">
           🕒 <strong>กล่องคำพิพากษา (3 ศาล) ยังไม่ปลดล็อก</strong> — ข้อมูลจาก seed facts วางไว้แล้ว แต่ยังต้องได้รับการ verify จาก Agent C (Judicial QA) ก่อน ตามมาตรฐาน A ≠ S:
-          ${courts.length ? `<div style="margin-top:12px;background:#F3F0E7;border-radius:10px;padding:12px 14px">${courts.map(c => `<p style="margin:6px 0"><strong>${esc(c.court)}:</strong> ${esc(c.ruling_quote || c.ruling)}</p>`).join('')}</div>` : ''}
-          <ul style="margin:10px 0 0 18px">${needsReviewBox(ct.note_to_agent_a) ? '' : `<li>คำวินิจฉัย/บทเหตุผล (ratio decidendi) ยังไม่ถูกยืนยันต้นฉบับ</li>`}<li>เมื่อ verify แล้ว: ตั้งค่า <code>read.sections[judicial].content.verified = true</code> + ใส่เลขที่คำพิพากษาแต่ละศาล</li></ul>
+          ${courts.length ? `<div class="courts-box">${courts.map(c => `<p><strong>${esc(c.court)}:</strong> ${esc(c.ruling_quote || c.ruling)}</p>`).join('')}</div>` : ''}
+          <ul>${needsReviewBox(ct.note_to_agent_a) ? '' : `<li>คำวินิจฉัย/บทเหตุผล (ratio decidendi) ยังไม่ถูกยืนยันต้นฉบับ</li>`}<li>เมื่อ verify แล้ว: ตั้งค่า <code>read.sections[judicial].content.verified = true</code> + ใส่เลขที่คำพิพากษาแต่ละศาล</li></ul>
         </div>`;
       }
       html += needsReviewBox(ct.note_to_agent_a);
@@ -224,13 +498,13 @@ async function render(){
     html += `</section>`;
   }
 
-  // Media section (08/09) — แสดงเฉพาะเมื่อมีรายการวิดีโอเพิ่มเติม (วิดีโอหลักอยู่ด้านบนแล้ว)
+  // Media section (extra) — แสดงเฉพาะเมื่อมีรายการวิดีโอเพิ่มเติม (วิดีโอหลักอยู่ด้านบนแล้ว)
   if(c.media && (c.media.items||[]).length){
-    html += `<section class="case-media">
+    html += `<section class="case-section extra-media">
       <h3>ดูวิดีโอที่เกี่ยวข้อง</h3>
       ${(c.media.items||[]).map(it=> it.type==='video' && it.embed_id
         ? `<div class="video-embed"><iframe src="https://www.youtube.com/embed/${esc(it.embed_id)}" title="วิดีโอคดี" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
-           ${it.credit ? `<p class="mag-video-credit">${esc(it.credit)}</p>` : ''}`
+           ${it.credit ? `<p class="video-credit">${esc(it.credit)}</p>` : ''}`
         : `<p class="video-pending">⏳ วิดีอยังไม่มีใน JSON</p>`
       ).join('')}
     </section>`;
@@ -238,9 +512,9 @@ async function render(){
 
   // Deident banner
   if(c.deident && c.deident.required){
-    html += `<section style="margin-top:28px">
-      <h3 style="font-size:1.1rem">🛡สถานะการปกป้องบุคคล</h3>
-      <div class="need-review-box" style="background:#FBEAEA;border-color:#B23A3A;color:#7A2222">
+    html += `<section style="margin-top:24px">
+      <h3 style="font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nr-gold);border-bottom:2px solid var(--nr-outline-variant);padding-bottom:8px;margin:0 0 14px">🛡 สถานะการปกป้องบุคคล</h3>
+      <div class="deident-box">
         <span class="ico">🛡</span>
         <span><strong>คดีนี้กำลังรอดำเนินการ de-identification</strong><br>Agent B ยังไม่แก้ไขข้อเท็จจริงใด ๆ (RULE 2 + RULE 3) — คำตัดสินใจและรูปแบบการปกป้องชื่อบุคคลเป็นหน้าที่ของ <strong>Agent A</strong><br><em>เหตุผล: ${esc(c.deident.reason)}</em></span>
       </div>
@@ -249,13 +523,34 @@ async function render(){
 
   // Play CTA
   if(c.play){
-    html += `<section style="margin-top:28px;text-align:center;padding-top:20px;border-top:1px solid var(--line)">
-      <p style="margin-bottom:12px;color:var(--ink-soft)">อ่านจบแล้ว? ลองทายใจศาลกัน — ใช้ JSON เดียวกับที่คุณเพิ่งอ่าน</p>
-      <a class="play-cta" href="play-case.html?id=${appId}">🎮 ลุยโหมดเล่น →</a>
-    </section>`;
+    html += `<div class="play-cta-wrap">
+      <p>อ่านจบแล้ว? ลองทายใจศาลกัน — ใช้ JSON เดียวกับที่คุณเพิ่งอ่าน</p>
+      <a class="play-cta" id="play-link" href="play-case.html?id=${esc(appId)}">🎮 ลุยโหมดเล่น →</a>
+    </div>`;
   }
 
-  html += `</article>`;
+  html += `</div>`; // .case-main
+
+  // ---- sidebar ----
+  html += `<aside class="case-sidebar">
+    <div class="evidence-photo">
+      <img src="${esc(img.src)}" alt="${esc(img.alt)}">
+      <p class="cap">EXHIBIT — ${esc(m.cat)}</p>
+    </div>
+    <div class="sidebar-card">
+      <h4>Case File</h4>
+      <dl>
+        <dt>ID</dt><dd>${esc(appId)}</dd>
+        <dt>หมวด</dt><dd>${esc(m.cat)}</dd>
+        <dt>ปี</dt><dd>${esc(m.year)}</dd>
+        <dt>เกรด</dt><dd>${esc(rank.grade || '—')}${rank.s_verified ? ' (verified S)' : ''}</dd>
+        <dt>สถานะ</dt><dd>${vis.public ? 'PUBLIC' : ('CLASSIFIED' + (vis.public_reason ? ' — ' + esc(vis.public_reason) : ''))}</dd>
+      </dl>
+    </div>
+    ${c.play ? `<a class="sidebar-play" href="play-case.html?id=${esc(appId)}">▶ ลองตัดสินคดี</a>` : ''}
+  </aside>`;
+
+  html += `</div></div>`; // .case-grid .case-folder
   app.innerHTML = html;
   window.__case = c; // for analytics/dev
 }
