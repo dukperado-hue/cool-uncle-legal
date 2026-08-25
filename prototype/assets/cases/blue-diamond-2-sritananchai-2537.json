@@ -518,7 +518,8 @@
       "verify_method": "YouTube oEmbed endpoint returns valid metadata",
       "note": "embed ID จาก legacy HTML — legacy title เป็นค่าว่าง จึงตั้งชื่อเชิงอ้างอิงตามเนื้อหาคดี (รายการ items ถูกลบเพราะซ้ำกับ media.video)"
     },
-    "status": "ok"
+    "status": "ok",
+    "hero_image": { "src": "../pics/Picabay/gentle07-crime-3956945_1920.jpg", "alt": "ภาพเชิงสัญลักษณ์ — ไม่ใช่ภาพบุคคลจริงในคดี (deident ระดับ C)" }
   },
   "sources": {
     "seed_facts": [
