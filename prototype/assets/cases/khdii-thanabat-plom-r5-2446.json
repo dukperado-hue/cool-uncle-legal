@@ -67,8 +67,15 @@
   ]
  },
  "media": {
-  "video": null,
-  "status": "none"
+  "video": {
+   "youtube_id": "EgSDIFN0sws",
+   "title": "เมื่อพระราชโอรส ร.4 กับลูกชายแม่ครัวหัวป่าก์ ร่วมมือชาวญี่ปุ่น ทำธนบัตรปลอมสมัย ร.5",
+   "channel": "ผู้พัน:สัปเหร่อ",
+   "verified_working": true,
+   "verified_at": "2026-08-25",
+   "verify_method": "YouTube oEmbed endpoint returns valid metadata"
+  },
+  "status": "available"
  },
  "sources": {
   "seed_facts": [
