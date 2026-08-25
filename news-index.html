@@ -345,7 +345,7 @@ function libraryFilterRow(libraryResults){
 function noirLinksRow(){
   const links = CATEGORY_ORDER.map(k =>
     `<a href="news-category-${esc(k)}.html">${esc(CATEGORY_LABELS[k])} →</a>`
-  ).join('');
+  ).join('') + `<a href="news-category-precode.html">ก่อนยุคประมวล →</a>`;
   return `<div class="noir-row"><span class="noir-label">🕵️ NOIR EDITION · ดูแฟ้มคดีแบบพรีเมียมแยกหมวด:</span>${links}</div>`;
 }
 
