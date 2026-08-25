@@ -371,7 +371,7 @@ async function render(){
   if(theme){ document.documentElement.setAttribute('data-theme', theme); }
 
   const badgeClass = CAT_BADGE[m.cat] || 'criminal';
-  const img = pickEvidenceImage(m.cat);
+  const img = (c.media && c.media.hero_image && c.media.hero_image.src) ? c.media.hero_image : pickEvidenceImage(m.cat);
   const topbarStatus = document.getElementById('topbar-status');
   if(topbarStatus) topbarStatus.textContent = `CASE_${esc(appId).toUpperCase()}`;
 

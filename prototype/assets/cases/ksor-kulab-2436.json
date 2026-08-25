@@ -385,7 +385,8 @@
  "media": {
   "video": null,
   "status": "pending",
-  "note": "ยังไม่พบวิดีโอสารคดีที่เกี่ยวข้องโดยตรงและน่าเชื่อถือ — TODO_VIDEOS"
+  "note": "ยังไม่พบวิดีโอสารคดีที่เกี่ยวข้องโดยตรงและน่าเชื่อถือ — TODO_VIDEOS",
+  "hero_image": { "src": "../pics/noir/ksr-kulap-portrait.jpg", "alt": "ภาพถ่าย ก.ศ.ร. กุหลาบ (กุหลาบ ตฤษณานนท์) — Wikimedia Commons, public domain" }
  },
  "sources": {
   "seed_facts": [

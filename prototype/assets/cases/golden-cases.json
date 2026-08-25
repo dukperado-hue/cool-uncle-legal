@@ -444,6 +444,106 @@
       ]
     },
     {
+      "id": "warawongsa-2091",
+      "title": "คดีขุนวรวงศาธิราช (พ.ศ. 2091)",
+      "cat": "คดีประวัติศาสตร์กฎหมาย",
+      "has_video": false,
+      "rank": {
+        "grade": "A",
+        "score": 85,
+        "s_verified": true,
+        "judicial_case": "ไม่มีการพิจารณาคดี — ลอบปลงพระชนม์โดยขุนพิเรนทรเทพและพรรคพวกที่คลองสระบัว พ.ศ. 2091",
+        "verified_by": "case-writer skill, 2026-08-25 (Thai Wikipedia cross-check)"
+      },
+      "visibility": {
+        "public": true,
+        "public_reason": "verified_multiple_independent_sources"
+      },
+      "modes": [
+        "read"
+      ]
+    },
+    {
+      "id": "chao-fa-men-2352",
+      "title": "คดีกบฏเจ้าฟ้าเหม็น (กรมขุนกษัตรานุชิต) พ.ศ. 2352",
+      "cat": "คดีประวัติศาสตร์กฎหมาย",
+      "has_video": false,
+      "rank": {
+        "grade": "A",
+        "score": 84,
+        "s_verified": true,
+        "judicial_case": "ไม่มีศาลในความหมายสมัยใหม่ — พระเจ้าลูกยาเธอ กรมหมื่นเจษฎาบดินทร์ (รัชกาลที่ 3 ในอนาคต) ทรงไต่สวนและถวายคำวินิจฉัยให้ประหารชีวิต พ.ศ. 2352",
+        "verified_by": "case-writer skill, 2026-08-25 (mgronline.com, cross-checked)"
+      },
+      "visibility": {
+        "public": true,
+        "public_reason": "verified_multiple_independent_sources"
+      },
+      "modes": [
+        "read"
+      ]
+    },
+    {
+      "id": "somdet-phra-nang-ruea-lom-2423",
+      "title": "คดีสมเด็จพระนางเรือล่ม — โศกนาฏกรรมจากกฎมณเฑียรบาล (พ.ศ. 2423)",
+      "cat": "คดีประวัติศาสตร์กฎหมาย",
+      "has_video": false,
+      "rank": {
+        "grade": "A",
+        "score": 85,
+        "s_verified": true,
+        "judicial_case": "ไม่มีคดีในความหมายสมัยใหม่ — เหตุอุบัติเหตุที่นำไปสู่การปฏิรูปกฎมณเฑียรบาล",
+        "verified_by": "case-writer skill, 2026-08-25 (Thai Wikipedia + silpa-mag cross-check)"
+      },
+      "visibility": {
+        "public": true,
+        "public_reason": "verified_multiple_independent_sources"
+      },
+      "modes": [
+        "read"
+      ]
+    },
+    {
+      "id": "falkhon-2231",
+      "title": "คดีประหารเจ้าพระยาวิชเยนทร์ (คอนสแตนติน ฟอลคอน) พ.ศ. 2231",
+      "cat": "คดีประวัติศาสตร์กฎหมาย",
+      "has_video": false,
+      "rank": {
+        "grade": "A",
+        "score": 87,
+        "s_verified": true,
+        "judicial_case": "ไม่มีการพิจารณาคดีในศาล — ประหารชีวิตด้วยคำสั่งของพระเพทราชาหลังยึดอำนาจ 5 มิถุนายน พ.ศ. 2231",
+        "verified_by": "case-writer skill, 2026-08-25 (English Wikipedia cross-check)"
+      },
+      "visibility": {
+        "public": true,
+        "public_reason": "verified_multiple_independent_sources"
+      },
+      "modes": [
+        "read"
+      ]
+    },
+    {
+      "id": "amdaeng-pom-2347",
+      "title": "คดีอำแดงป้อม: จุดกำเนิดกฎหมายตราสามดวง",
+      "cat": "คดีประวัติศาสตร์กฎหมาย",
+      "has_video": true,
+      "rank": {
+        "grade": "A",
+        "score": 92,
+        "s_verified": false,
+        "judicial_case": "ไม่มีเลขคดี/ฎีกาในความหมายสมัยใหม่ (ก่อนมีศาลฎีกา) — บันทึกเป็นพระราชดำรัสและพระบรมราชโองการของรัชกาลที่ 1 เรื่องการชำระกฎหมาย จ.ศ. 1166 (พ.ศ. 2347)",
+        "verified_by": "case-writer skill, 2026-08-25 (4 independent sources: พิพิธภัณฑ์ศาลไทยและหอจดหมายเหตุ, วิกิพีเดีย, ราชบัณฑิตยสภา, สารานุกรมไทยสำหรับเยาวชน)"
+      },
+      "visibility": {
+        "public": true,
+        "public_reason": "verified_multiple_independent_sources"
+      },
+      "modes": [
+        "read"
+      ]
+    },
+    {
       "id": "ksor-kulab-2436",
       "title": "คดี ก.ศ.ร. กุหลาบ — นักหนังสือพิมพ์ผู้ถูกส่งเข้าโรงพยาบาลคนเสียจริต แทนการขึ้นศาล",
       "cat": "คดีประวัติศาสตร์กฎหมาย",
