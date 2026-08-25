@@ -100,7 +100,8 @@
  },
  "media": {
   "video": "จากคลิปงานของ Silpa / Workpoint (อ้างอิงแหล่งรอง)",
-  "status": "available"
+  "status": "available",
+  "hero_image": { "src": "../pics/บุญเพ็งหีบเหล็ก.jpg", "alt": "ภาพข่าวหนังสือพิมพ์ร่วมสมัย — บุญเพ็ง หีบเหล็ก ถูกคุมตัวโดยเจ้าหน้าที่ (พ.ศ. 2462)" }
  },
  "sources": {
   "seed_facts": [
