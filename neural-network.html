@@ -166,12 +166,14 @@
   <div id="ui-panel">
     <a class="back-link" href="index.html">← กลับหน้าหลัก</a>
     <h2>ประมวล NN — รัศมีนิติธรรม</h2>
-    <p>คลิกโหนดเพื่อขยายชั้นถัดไป (ประมวล → บรรพ/ลักษณะ → หมวด/ส่วน → มาตรา) คลิกซ้ำเพื่อยุบ คลิกมาตรา (สีเขียว) เพื่อดูเนื้อหาและคดีตัวอย่างที่เชื่อมโยงทางด้านขวา</p>
+    <p>คลิกโหนดเพื่อขยายชั้นถัดไป (หมวดหมู่ → ประมวล → บรรพ/ลักษณะ → หมวด/ส่วน → มาตรา) คลิกซ้ำเพื่อยุบ คลิกมาตรา (สีเขียว) เพื่อดูเนื้อหาและคดีตัวอย่างที่เชื่อมโยงทางด้านขวา</p>
     <div id="legend">
-      <div class="row"><span class="dot" style="background:#00e6ff"></span> แพ่ง / วิ.แพ่ง</div>
-      <div class="row"><span class="dot" style="background:#ff0055"></span> อาญา / วิ.อาญา</div>
-      <div class="row"><span class="dot" style="background:#aa00ff"></span> มหาชน / รัฐธรรมนูญ / ปกครอง</div>
-      <div class="row"><span class="dot" style="background:#ff9900"></span> ทรัพย์สินทางปัญญา / พาณิชย์</div>
+      <div class="row"><span class="dot" style="background:#00e6ff"></span> แพ่งและพาณิชย์</div>
+      <div class="row"><span class="dot" style="background:#ff0055"></span> อาญา</div>
+      <div class="row"><span class="dot" style="background:#00b8d9"></span> วิแพ่ง</div>
+      <div class="row"><span class="dot" style="background:#ff4d8d"></span> วิอาญา</div>
+      <div class="row"><span class="dot" style="background:#aa00ff"></span> มหาชน</div>
+      <div class="row"><span class="dot" style="background:#ff9900"></span> อื่นๆ</div>
       <div class="row"><span class="dot" style="background:#00ffcc"></span> มาตรา (โหนดใบไม้)</div>
       <div class="row"><span class="dot" style="background:#ffcc44"></span> คดีตัวอย่าง (เชื่อมอัตโนมัติ)</div>
       <button id="reset-btn">รีเซ็ตกราฟ</button>
@@ -188,23 +190,32 @@
   <script>
   (async function () {
     const BOOK_INFO = {
-      civil:         { title: 'ประมวลกฎหมายแพ่งและพาณิชย์',            group: 'civil' },
-      civpro:        { title: 'ประมวลกฎหมายวิธีพิจารณาความแพ่ง',       group: 'civil' },
-      criminal:      { title: 'ประมวลกฎหมายอาญา',                     group: 'criminal' },
-      crimpro:       { title: 'ประมวลกฎหมายวิธีพิจารณาความอาญา',      group: 'criminal' },
-      constitution:  { title: 'พระธรรมนูญศาลยุติธรรม',                group: 'public' },
-      const2560:     { title: 'รัฐธรรมนูญแห่งราชอาณาจักรไทย พ.ศ. 2560', group: 'public' },
-      adminproc:     { title: 'พ.ร.บ.วิธีปฏิบัติราชการทางปกครอง',      group: 'public' },
-      admincourt:    { title: 'พ.ร.บ.จัดตั้งศาลปกครองฯ',               group: 'public' },
-      tortofficials: { title: 'พ.ร.บ.ความรับผิดทางละเมิดของเจ้าหน้าที่', group: 'public' },
-      politicalparty:{ title: 'พ.ร.ป.พรรคการเมือง พ.ศ. 2560',          group: 'public' },
-      copyright:     { title: 'พ.ร.บ.ลิขสิทธิ์ พ.ศ. 2537',             group: 'ip' },
-      patent:        { title: 'พ.ร.บ.สิทธิบัตร พ.ศ. 2522',             group: 'ip' },
-      trademark:     { title: 'พ.ร.บ.เครื่องหมายการค้า พ.ศ. 2534',     group: 'ip' },
-      carriage:      { title: 'พ.ร.บ.การรับขนของทางทะเล พ.ศ. 2534',    group: 'ip' },
-      ipcourt:       { title: 'พ.ร.บ.จัดตั้งศาลทรัพย์สินทางปัญญาฯ',    group: 'ip' },
+      civil:         { title: 'ประมวลกฎหมายแพ่งและพาณิชย์' },
+      civpro:        { title: 'ประมวลกฎหมายวิธีพิจารณาความแพ่ง' },
+      criminal:      { title: 'ประมวลกฎหมายอาญา' },
+      crimpro:       { title: 'ประมวลกฎหมายวิธีพิจารณาความอาญา' },
+      constitution:  { title: 'พระธรรมนูญศาลยุติธรรม' },
+      const2560:     { title: 'รัฐธรรมนูญแห่งราชอาณาจักรไทย พ.ศ. 2560' },
+      adminproc:     { title: 'พ.ร.บ.วิธีปฏิบัติราชการทางปกครอง' },
+      admincourt:    { title: 'พ.ร.บ.จัดตั้งศาลปกครองฯ' },
+      tortofficials: { title: 'พ.ร.บ.ความรับผิดทางละเมิดของเจ้าหน้าที่' },
+      politicalparty:{ title: 'พ.ร.ป.พรรคการเมือง พ.ศ. 2560' },
+      copyright:     { title: 'พ.ร.บ.ลิขสิทธิ์ พ.ศ. 2537' },
+      patent:        { title: 'พ.ร.บ.สิทธิบัตร พ.ศ. 2522' },
+      trademark:     { title: 'พ.ร.บ.เครื่องหมายการค้า พ.ศ. 2534' },
+      carriage:      { title: 'พ.ร.บ.การรับขนของทางทะเล พ.ศ. 2534' },
+      ipcourt:       { title: 'พ.ร.บ.จัดตั้งศาลทรัพย์สินทางปัญญาฯ' },
     };
-    const GROUP_COLOR = { civil: '#00e6ff', criminal: '#ff0055', public: '#aa00ff', ip: '#ff9900' };
+    // Top-level: exactly 6 category nodes under root, per user's explicit
+    // grouping — expand each to reveal its member ประมวล/พระราชบัญญัติ.
+    const GROUP_INFO = {
+      civil:    { label: 'แพ่งและพาณิชย์', color: '#00e6ff', books: ['civil'] },
+      criminal: { label: 'อาญา',            color: '#ff0055', books: ['criminal'] },
+      civpro:   { label: 'วิแพ่ง',           color: '#00b8d9', books: ['civpro'] },
+      crimpro:  { label: 'วิอาญา',           color: '#ff4d8d', books: ['crimpro'] },
+      public:   { label: 'มหาชน',            color: '#aa00ff', books: ['constitution', 'const2560', 'adminproc', 'admincourt', 'tortofficials', 'politicalparty'] },
+      other:    { label: 'อื่นๆ',            color: '#ff9900', books: ['copyright', 'patent', 'trademark', 'carriage', 'ipcourt'] },
+    };
     const LEAF_COLOR = '#00ffcc';
     const CASE_COLOR = '#ffcc44';
     const LEVELS = ['phaak', 'laksana', 'muad', 'suan'];
@@ -301,15 +312,26 @@
       Graph.graphData({ nodes: [...nodesById.values()], links: links.map(l => ({ source: l.source, target: l.target })) });
     }
 
-    // ---- root + book nodes (level 0, always visible) ----
+    // ---- root + 6 category nodes (level 0, always visible) ----
     addNode({ id: 'root', name: 'ระบบกฎหมายไทย', type: 'root', size: 13, color: '#ffffff' });
-    for (const bookKey in BOOK_INFO) {
-      const info = BOOK_INFO[bookKey];
-      const id = 'book:' + bookKey;
-      addNode({ id, name: info.title, type: 'book', bookKey, size: 8, color: GROUP_COLOR[info.group] });
+    for (const groupKey in GROUP_INFO) {
+      const g = GROUP_INFO[groupKey];
+      const id = 'group:' + groupKey;
+      addNode({ id, name: g.label, type: 'group', groupKey, books: g.books, size: 9, color: g.color });
       addLink('root', id);
     }
-    childrenOf.set('root', new Set(Object.keys(BOOK_INFO).map(k => 'book:' + k)));
+    childrenOf.set('root', new Set(Object.keys(GROUP_INFO).map(k => 'group:' + k)));
+
+    function expandGroup(node) {
+      const kids = new Set();
+      for (const bookKey of node.books) {
+        const id = 'book:' + bookKey;
+        addNode({ id, name: BOOK_INFO[bookKey].title, type: 'book', bookKey, size: 8, color: node.color, parentId: node.id });
+        addLink(node.id, id);
+        kids.add(id);
+      }
+      childrenOf.set(node.id, kids);
+    }
 
     function expandBook(node) {
       const arts = articlesOf(node.bookKey);
@@ -327,7 +349,7 @@
         for (const [value, g] of found.groups) {
           const id = 'lvl:' + node.bookKey + ':' + found.level + ':' + value;
           const label = g.title ? (value + ' ' + g.title) : value;
-          addNode({ id, name: label, type: found.level, bookKey: node.bookKey, filters: { [found.level]: value }, levelIndex: found.levelIndex, size: 6, color: GROUP_COLOR[BOOK_INFO[node.bookKey].group], parentId: node.id });
+          addNode({ id, name: label, type: found.level, bookKey: node.bookKey, filters: { [found.level]: value }, levelIndex: found.levelIndex, size: 6, color: node.color, parentId: node.id });
           addLink(node.id, id);
           kids.add(id);
         }
@@ -351,7 +373,7 @@
           const filters = Object.assign({}, node.filters, { [found.level]: value });
           const id = 'lvl:' + node.bookKey + ':' + found.level + ':' + Object.values(filters).join('|');
           const label = g.title ? (value + ' ' + g.title) : value;
-          addNode({ id, name: label, type: found.level, bookKey: node.bookKey, filters, levelIndex: found.levelIndex, size: 5.5, color: GROUP_COLOR[BOOK_INFO[node.bookKey].group], parentId: node.id });
+          addNode({ id, name: label, type: found.level, bookKey: node.bookKey, filters, levelIndex: found.levelIndex, size: 5.5, color: node.color, parentId: node.id });
           addLink(node.id, id);
           kids.add(id);
         }
@@ -379,7 +401,8 @@
         removeSubtree_childrenOnly(node.id);
         return;
       }
-      if (node.type === 'book') expandBook(node);
+      if (node.type === 'group') expandGroup(node);
+      else if (node.type === 'book') expandBook(node);
       else if (LEVELS.includes(node.type)) expandLevelNode(node);
       else if (node.type === 'article') expandArticle(node);
     }
@@ -469,7 +492,8 @@
     }
 
     function renderGenericPanel(node) {
-      let html = `<div class="kicker">${node.type === 'book' ? 'ประมวล/พระราชบัญญัติ' : 'หมวดหมู่'}</div>`;
+      const kickerText = node.type === 'group' ? 'หมวดหมู่กฎหมาย' : node.type === 'book' ? 'ประมวล/พระราชบัญญัติ' : 'หมวดหมู่ย่อย';
+      let html = `<div class="kicker">${kickerText}</div>`;
       html += `<h3>${escapeHtml(node.name)}</h3>`;
       const kids = childrenOf.get(node.id);
       html += `<p class="hint-note">${kids && kids.size ? 'คลิกโหนดนี้อีกครั้งเพื่อยุบชั้นย่อย' : 'คลิกโหนดนี้เพื่อขยายชั้นถัดไป'}</p>`;
