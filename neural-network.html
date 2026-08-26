@@ -24,40 +24,30 @@
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
       z-index: 5;
     }
-    #ui-panel h2 { margin: 0 0 4px; font-size: 20px; }
-    #ui-panel p { margin: 0 0 10px; font-size: 12px; opacity: .85; line-height: 1.5; }
-    #ui-panel a.back-link {
-      pointer-events: auto;
+    #ui-panel h2 { margin: 0 0 10px; font-size: 20px; }
+    .brand-row { pointer-events: auto; margin-bottom: 6px; }
+    .brand-row a.back-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       color: #7fd8ff;
       text-decoration: none;
-      font-size: 12px;
-      display: inline-block;
-      margin-bottom: 8px;
+      font-size: 12.5px;
     }
-    #ui-panel a.back-link:hover { text-decoration: underline; }
+    .brand-row a.back-link:hover { text-decoration: underline; }
+    .brand-logo { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex: 0 0 auto; }
 
-    #legend {
-      pointer-events: auto;
-      background: rgba(10, 10, 25, 0.55);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 10px;
-      padding: 10px 12px;
-      font-size: 11px;
-      backdrop-filter: blur(4px);
-    }
-    #legend .row { display: flex; align-items: center; gap: 6px; margin: 3px 0; }
-    #legend .dot { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 auto; }
-    #legend button {
-      margin-top: 8px;
+    .graph-tools { display: flex; gap: 8px; pointer-events: auto; flex-wrap: wrap; }
+    .tool-btn {
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.25);
       color: #fff;
       font-size: 11px;
       padding: 5px 10px;
-      border-radius: 6px;
+      border-radius: 14px;
       cursor: pointer;
     }
-    #legend button:hover { background: rgba(255,255,255,0.18); }
+    .tool-btn:hover { background: rgba(255,255,255,0.18); }
 
     #settings-toggle {
       position: absolute; bottom: 16px; left: 16px; z-index: 6;
@@ -190,19 +180,16 @@
   <div id="loading"><div class="spinner"></div><div>กำลังโหลดฐานข้อมูลกฎหมาย (codex-data.json)...</div></div>
 
   <div id="ui-panel">
-    <a class="back-link" href="index.html">← กลับหน้าหลัก</a>
-    <h2>ประมวล NN — รัศมีนิติธรรม</h2>
-    <p>คลิกโหนดเพื่อขยายชั้นถัดไป (หมวดหมู่ → ประมวล → บรรพ/ลักษณะ → หมวด/ส่วน → มาตรา) คลิกซ้ำเพื่อยุบ คลิกมาตรา (สีเขียว) เพื่อดูเนื้อหาและคดีตัวอย่างที่เชื่อมโยงทางด้านขวา</p>
-    <div id="legend">
-      <div class="row"><span class="dot" style="background:#00e6ff"></span> แพ่งและพาณิชย์</div>
-      <div class="row"><span class="dot" style="background:#ff0055"></span> อาญา</div>
-      <div class="row"><span class="dot" style="background:#00b8d9"></span> วิแพ่ง</div>
-      <div class="row"><span class="dot" style="background:#ff4d8d"></span> วิอาญา</div>
-      <div class="row"><span class="dot" style="background:#aa00ff"></span> มหาชน</div>
-      <div class="row"><span class="dot" style="background:#ff9900"></span> อื่นๆ</div>
-      <div class="row"><span class="dot" style="background:#00ffcc"></span> มาตรา (โหนดใบไม้)</div>
-      <div class="row"><span class="dot" style="background:#ffcc44"></span> คดีตัวอย่าง (เชื่อมอัตโนมัติ)</div>
-      <button id="reset-btn">รีเซ็ตกราฟ</button>
+    <div class="brand-row">
+      <a class="back-link" href="index.html">
+        <img class="brand-logo" src="pics/capybara-detective.png" alt="">
+        <span>back to coolunclelab</span>
+      </a>
+    </div>
+    <h2>รัศมีนิติธรรม</h2>
+    <div class="graph-tools">
+      <button id="reset-btn" class="tool-btn">🔄 รีเซ็ต</button>
+      <button id="expand-all-btn" class="tool-btn">🌐 ขยายทุก node</button>
     </div>
   </div>
 
@@ -211,10 +198,11 @@
   <button id="settings-toggle" title="ตั้งค่า">⚙️</button>
   <div id="settings-panel">
     <div class="setting-row"><span>🎵 เพลงพื้นหลัง</span><button id="music-toggle" class="switch-btn">ปิด</button></div>
-    <div class="setting-row"><span>🔒 ล็อกขนาดตัวหนังสือ</span><button id="fontlock-toggle" class="switch-btn on">เปิด</button></div>
+    <div class="setting-row"><span>🌀 Motion (ดาวเคลื่อนไหว)</span><button id="motion-toggle" class="switch-btn on">เปิด</button></div>
+    <div class="setting-row"><span>🔄 รีเซ็ตกราฟ</span><button id="reset-btn-menu" class="switch-btn">รีเซ็ต</button></div>
   </div>
   <audio id="bgm" loop preload="none">
-    <source src="music/alex-morgan-jazz-lounge-study-music-563575.mp3" type="audio/mpeg">
+    <source src="music/u_jltxwion0i-little-star-lullaby-417636.mp3" type="audio/mpeg">
   </audio>
 
   <div id="side-panel">
@@ -293,6 +281,21 @@
       return (pa[1] || 0) - (pb[1] || 0);
     }
 
+    // Extract the leading number (+ optional /n suffix) out of a level label
+    // like "ภาค 2", "ลักษณะ 1/1", "หมวด 10" so level-3+ nodes list in
+    // numeric order instead of raw document/insertion order.
+    function levelSortKey(value) {
+      const m = String(value).match(/([0-9]+)(?:\/([0-9]+))?/);
+      if (!m) return [Number.MAX_SAFE_INTEGER, 0];
+      return [parseInt(m[1], 10), m[2] ? parseInt(m[2], 10) : 0];
+    }
+    function sortedGroupEntries(groupsMap) {
+      return [...groupsMap.entries()].sort((a, b) => {
+        const ka = levelSortKey(a[0]), kb = levelSortKey(b[0]);
+        return ka[0] - kb[0] || ka[1] - kb[1];
+      });
+    }
+
     function articlesOf(bookKey) {
       return Object.values(codex.books[bookKey].articles);
     }
@@ -323,6 +326,22 @@
     function addNode(node) {
       nodesById.set(node.id, node);
       return node;
+    }
+
+    // Force-directed physics doesn't respect insertion order for siblings'
+    // vertical position, so a numeric sort alone (sortedGroupEntries) isn't
+    // visible on screen — pin each sibling's y to a fixed, evenly-spaced
+    // slot in that same sorted order so the numbering is actually readable
+    // top-to-bottom, not just internally consistent.
+    function pinSiblingsVertically(parentNode, childIds, spacing) {
+      const n = childIds.length;
+      const baseY = parentNode.y || 0;
+      childIds.forEach((id, i) => {
+        const node = nodesById.get(id);
+        const fy = baseY + (i - (n - 1) / 2) * spacing;
+        node.fy = fy;
+        node.y = fy;
+      });
     }
 
     function addLink(a, b) {
@@ -357,11 +376,11 @@
     }
 
     // ---- root + 6 category nodes (level 0, always visible) ----
-    addNode({ id: 'root', name: 'ระบบกฎหมายไทย', type: 'root', size: 13, color: '#ffffff' });
+    addNode({ id: 'root', name: 'ระบบกฎหมายไทย', type: 'root', size: 8, color: '#ffffff' });
     for (const groupKey in GROUP_INFO) {
       const g = GROUP_INFO[groupKey];
       const id = 'group:' + groupKey;
-      const node = { id, name: g.label, type: 'group', groupKey, size: 9, color: g.color };
+      const node = { id, name: g.label, type: 'group', groupKey, size: 6, color: g.color };
       if (g.subgroups) node.subgroups = g.subgroups;
       else if (g.books.length === 1) node.bookKey = g.books[0]; // merge group+book, one fewer click
       else node.books = g.books;
@@ -376,10 +395,11 @@
       const kids = new Set();
       for (const bookKey of node.books) {
         const id = 'book:' + bookKey;
-        addNode({ id, name: BOOK_INFO[bookKey].title, type: 'book', bookKey, size: 8, color: node.color, parentId: node.id });
+        addNode({ id, name: BOOK_INFO[bookKey].title, type: 'book', bookKey, size: 5.5, color: node.color, parentId: node.id });
         addLink(node.id, id);
         kids.add(id);
       }
+      pinSiblingsVertically(node, [...kids], 16);
       childrenOf.set(node.id, kids);
     }
 
@@ -388,10 +408,11 @@
       for (const subKey in node.subgroups) {
         const sg = node.subgroups[subKey];
         const id = 'subgroup:' + node.groupKey + ':' + subKey;
-        addNode({ id, name: sg.label, type: 'subgroup', groupKey: node.groupKey, books: sg.books, size: 8, color: node.color, parentId: node.id });
+        addNode({ id, name: sg.label, type: 'subgroup', groupKey: node.groupKey, books: sg.books, size: 5.5, color: node.color, parentId: node.id });
         addLink(node.id, id);
         kids.add(id);
       }
+      pinSiblingsVertically(node, [...kids], 16);
       childrenOf.set(node.id, kids);
     }
 
@@ -403,19 +424,20 @@
         // no hierarchy at all (e.g. tortofficials) -> go straight to มาตรา leaves
         for (const a of arts.sort((x, y) => naturalArticleSort(x.number, y.number))) {
           const id = 'article:' + node.bookKey + ':' + a.number;
-          addNode({ id, name: 'มาตรา ' + a.number, type: 'article', bookKey: node.bookKey, number: a.number, size: 5, color: LEAF_COLOR, parentId: node.id });
+          addNode({ id, name: 'มาตรา ' + a.number, type: 'article', bookKey: node.bookKey, number: a.number, size: 3.2, color: LEAF_COLOR, parentId: node.id });
           addLink(node.id, id);
           kids.add(id);
         }
       } else {
-        for (const [value, g] of found.groups) {
+        for (const [value, g] of sortedGroupEntries(found.groups)) {
           const id = 'lvl:' + node.bookKey + ':' + found.level + ':' + value;
           const label = g.title ? (value + ' ' + g.title) : value;
-          addNode({ id, name: label, type: found.level, bookKey: node.bookKey, filters: { [found.level]: value }, levelIndex: found.levelIndex, size: 6, color: node.color, parentId: node.id });
+          addNode({ id, name: label, type: found.level, bookKey: node.bookKey, filters: { [found.level]: value }, levelIndex: found.levelIndex, size: 4, color: node.color, parentId: node.id });
           addLink(node.id, id);
           kids.add(id);
         }
       }
+      pinSiblingsVertically(node, [...kids], 10);
       childrenOf.set(node.id, kids);
     }
 
@@ -426,20 +448,21 @@
       if (!found) {
         for (const a of arts.sort((x, y) => naturalArticleSort(x.number, y.number))) {
           const id = 'article:' + node.bookKey + ':' + a.number;
-          addNode({ id, name: 'มาตรา ' + a.number, type: 'article', bookKey: node.bookKey, number: a.number, size: 5, color: LEAF_COLOR, parentId: node.id });
+          addNode({ id, name: 'มาตรา ' + a.number, type: 'article', bookKey: node.bookKey, number: a.number, size: 3.2, color: LEAF_COLOR, parentId: node.id });
           addLink(node.id, id);
           kids.add(id);
         }
       } else {
-        for (const [value, g] of found.groups) {
+        for (const [value, g] of sortedGroupEntries(found.groups)) {
           const filters = Object.assign({}, node.filters, { [found.level]: value });
           const id = 'lvl:' + node.bookKey + ':' + found.level + ':' + Object.values(filters).join('|');
           const label = g.title ? (value + ' ' + g.title) : value;
-          addNode({ id, name: label, type: found.level, bookKey: node.bookKey, filters, levelIndex: found.levelIndex, size: 5.5, color: node.color, parentId: node.id });
+          addNode({ id, name: label, type: found.level, bookKey: node.bookKey, filters, levelIndex: found.levelIndex, size: 4, color: node.color, parentId: node.id });
           addLink(node.id, id);
           kids.add(id);
         }
       }
+      pinSiblingsVertically(node, [...kids], 10);
       childrenOf.set(node.id, kids);
     }
 
@@ -450,7 +473,7 @@
       for (const c of cases) {
         const id = 'case:' + c.id;
         if (!nodesById.has(id)) {
-          addNode({ id, name: c.title, type: 'case', caseId: c.id, cat: c.cat, size: 6.5, color: CASE_COLOR });
+          addNode({ id, name: c.title, type: 'case', caseId: c.id, cat: c.cat, size: 4.2, color: CASE_COLOR });
         }
         addLink(node.id, id);
         kids.add(id);
@@ -564,7 +587,7 @@
       showPanel(html);
     }
 
-    let fontSizeFixed = true; // toggled via the ⚙️ settings panel
+    let motionEnabled = true; // toggled via the ⚙️ settings panel
 
     // Shake a node hard for `duration`ms before its children actually
     // appear — a little suspense/impact beat before the graph "splits".
@@ -583,9 +606,9 @@
 
     const Graph = ForceGraph()(elem)
       .graphData({ nodes: [...nodesById.values()], links })
-      .autoPauseRedraw(false) // keep repainting every frame so the shake effect can animate even after the sim cools down
+      .autoPauseRedraw(false) // keep repainting every frame — needed for both the shake effect and the perpetual star-motion bob
       .dagMode('lr')
-      .dagLevelDistance(140)
+      .dagLevelDistance(80)
       .linkColor(() => 'rgba(255, 255, 255, 0.12)')
       .linkDirectionalParticles(3)
       .linkDirectionalParticleWidth(2.2)
@@ -593,11 +616,16 @@
       .linkDirectionalParticleColor(link => (link.target && link.target.color) || '#ffffff')
       .nodeCanvasObject((node, ctx, globalScale) => {
         const label = node.name;
-        const fontSize = fontSizeFixed ? (12 / globalScale) : 12;
+        const fontSize = 12 / globalScale;
         let radius = node.size;
         let dx = node.x, dy = node.y;
+        // Gentle up/down "twinkling star" drift on every node except root.
+        if (motionEnabled && node.type !== 'root') {
+          if (node.__phase === undefined) node.__phase = Math.random() * Math.PI * 2;
+          dy += Math.sin(performance.now() / 1000 * 1.3 + node.__phase) * 2.5;
+        }
         if (node.__shaking) {
-          const amp = 6;
+          const amp = 4;
           dx += (Math.random() - 0.5) * amp * 2;
           dy += (Math.random() - 0.5) * amp * 2;
           radius = node.size * (1 + Math.random() * 0.3);
@@ -637,16 +665,33 @@
     // Tune the default charge force in place — avoids needing a separate
     // global `d3` import; force-graph already bundles d3-force internally
     // and registers a default 'charge' force we can just re-strength.
+    // Weaker than before since nodes/spacing shrank too.
     const chargeForce = Graph.d3Force('charge');
-    if (chargeForce) chargeForce.strength(-220);
+    if (chargeForce) chargeForce.strength(-130);
 
-    document.getElementById('reset-btn').onclick = () => {
+    function doReset() {
       for (const id of [...childrenOf.get('root')]) removeSubtree_childrenOnly(id);
       panel.classList.remove('open');
       refresh();
+    }
+    document.getElementById('reset-btn').onclick = doReset;
+    document.getElementById('reset-btn-menu').onclick = doReset;
+
+    // Expand one level deeper for every node currently on screen that isn't
+    // expanded yet — a bounded "expand the visible frontier" action, not a
+    // full recursive expand-to-every-มาตรา (codex-data.json has 4,275
+    // articles; doing that in one click would just produce an unusable
+    // hairball). Click repeatedly to keep drilling the whole visible graph.
+    document.getElementById('expand-all-btn').onclick = () => {
+      const toExpand = [...nodesById.values()].filter(n =>
+        n.type !== 'root' && n.type !== 'case' &&
+        (!childrenOf.has(n.id) || childrenOf.get(n.id).size === 0)
+      );
+      for (const n of toExpand) toggleExpand(n);
+      refresh();
     };
 
-    // ---- ⚙️ settings menu: hide/show, music, font-size lock ----
+    // ---- ⚙️ settings menu: hide/show, music, motion, reset ----
     const settingsToggle = document.getElementById('settings-toggle');
     const settingsPanel = document.getElementById('settings-panel');
     settingsToggle.onclick = () => settingsPanel.classList.toggle('open');
@@ -660,11 +705,11 @@
       musicBtn.classList.toggle('on', turningOn);
     };
 
-    const fontlockBtn = document.getElementById('fontlock-toggle');
-    fontlockBtn.onclick = () => {
-      fontSizeFixed = !fontSizeFixed;
-      fontlockBtn.textContent = fontSizeFixed ? 'เปิด' : 'ปิด';
-      fontlockBtn.classList.toggle('on', fontSizeFixed);
+    const motionBtn = document.getElementById('motion-toggle');
+    motionBtn.onclick = () => {
+      motionEnabled = !motionEnabled;
+      motionBtn.textContent = motionEnabled ? 'เปิด' : 'ปิด';
+      motionBtn.classList.toggle('on', motionEnabled);
     };
   })();
   </script>
