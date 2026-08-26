@@ -238,8 +238,8 @@
     // since it genuinely groups two distinct legal subfields.
     const GROUP_INFO = {
       civil:    { label: 'แพ่งและพาณิชย์', color: '#00e6ff', books: ['civil'] },
-      criminal: { label: 'อาญา',            color: '#ff0055', books: ['criminal'] },
       civpro:   { label: 'วิแพ่ง',           color: '#00b8d9', books: ['civpro'] },
+      criminal: { label: 'อาญา',            color: '#ff0055', books: ['criminal'] },
       crimpro:  { label: 'วิอาญา',           color: '#ff4d8d', books: ['crimpro'] },
       public:   { label: 'มหาชน', color: '#aa00ff', subgroups: {
                     adminlaw: { label: 'กฎหมายปกครอง', books: ['adminproc', 'admincourt', 'tortofficials'] },
@@ -247,7 +247,6 @@
                   } },
       other:    { label: 'อื่นๆ', color: '#ff9900', books: ['copyright', 'patent', 'trademark', 'carriage', 'ipcourt'] },
     };
-    const KICKER_LABELS = { group: 'หมวดหมู่กฎหมาย', subgroup: 'หมวดหมู่ย่อย', book: 'ประมวล/พระราชบัญญัติ' };
     const LEAF_COLOR = '#00ffcc';
     const CASE_COLOR = '#ffcc44';
     const LEVELS = ['phaak', 'laksana', 'muad', 'suan'];
@@ -268,6 +267,38 @@
       return;
     }
     loadingEl.style.display = 'none';
+
+    // codex-data.json leaves some articles' meta untagged at the source -
+    // nextLevelGroups (below) silently drops any article whose level field
+    // is falsy instead of grouping it, so an untagged run of articles just
+    // vanishes from the graph rather than forming its own group. Worst case:
+    // อาญา ภาค 1 (มาตรา 1-106, 111 articles incl. sub-numbers) has NO phaak
+    // tag at all in the source (only ภาค 2/3 are explicitly tagged, ภาค 1
+    // being the implicit "everything before ภาค 2" default) - the entire
+    // ภาค disappears from the "อาญา" node's children without this patch.
+    // Same corrections as neuralnetworklegalcode's gen-legal-hierarchy.js
+    // script (verified there against the real article text).
+    function patchArticleMeta(bookKey, number, meta) {
+      const m = meta || {};
+      const n = parseInt(String(number), 10);
+      if (bookKey === 'criminal') {
+        if (n === 1 && !m.muad) { m.muad = 'หมวด 1'; m.muadTitle = 'บทนิยาม'; }
+        if (n <= 101 && !m.laksana) { m.laksana = 'ลักษณะ 1'; m.laksanaTitle = 'บทบัญญัติที่ใช้แก่ความผิดทั่วไป'; }
+        if (n <= 106 && !m.phaak) { m.phaak = 'ภาค 1'; m.phaakTitle = 'บทบัญญัติทั่วไป'; }
+      }
+      if (bookKey === 'civil') {
+        // upstream mislabels 754-769 (จำนำ content) as ลักษณะ 22 (โอนหุ้น/หุ้นกู้)
+        if (n >= 754 && n <= 769 && m.laksana === 'ลักษณะ 22') { m.laksana = 'ลักษณะ 13'; m.laksanaTitle = 'จำนำ'; }
+        if (n >= 754 && n <= 757 && !m.muad) { m.muad = 'หมวด 1'; m.muadTitle = 'บทเบ็ดเสร็จทั่วไป'; }
+      }
+      return m;
+    }
+    for (const bookKey in codex.books) {
+      for (const number in codex.books[bookKey].articles) {
+        const art = codex.books[bookKey].articles[number];
+        art.meta = patchArticleMeta(bookKey, number, art.meta);
+      }
+    }
 
     // ---- graph state ----
     const nodesById = new Map();   // id -> node object (currently in graph)
@@ -333,9 +364,17 @@
     // visible on screen — pin each sibling's y to a fixed, evenly-spaced
     // slot in that same sorted order so the numbering is actually readable
     // top-to-bottom, not just internally consistent.
-    function pinSiblingsVertically(parentNode, childIds, spacing) {
+    function pinSiblingsVertically(parentNode, childIds, baseSpacing) {
       const n = childIds.length;
       const baseY = parentNode.y || 0;
+      // A flat spacing constant is fine for a handful of siblings, but a
+      // dense ring (e.g. อาญา ภาค 2's 14 ลักษณะ, or a หมวด with dozens of
+      // มาตรา leaves) needs proportionally more room per node once there
+      // are enough of them that circles start touching each other - scale
+      // the effective spacing up past 6 siblings (similar in spirit to
+      // neuralnetworklegalcode's ringRadiusFor, which hits the identical
+      // problem for its own radial layout).
+      const spacing = n > 6 ? baseSpacing * (1 + (n - 6) * 0.12) : baseSpacing;
       childIds.forEach((id, i) => {
         const node = nodesById.get(id);
         const fy = baseY + (i - (n - 1) / 2) * spacing;
@@ -387,6 +426,15 @@
       addNode(node);
       addLink('root', id);
     }
+    // Force-directed physics doesn't respect insertion order any more for
+    // these 6 top-level categories than it does for any other sibling set -
+    // without pinning, they settle in whatever order the simulation happens
+    // to converge to (observed: วิแพ่ง/มหาชน/แพ่งและพาณิชย์/วิอาญา/อาญา/อื่นๆ,
+    // unrelated to GROUP_INFO's own order). Pin them the same way
+    // pinSiblingsVertically already pins every deeper sibling set, so the
+    // list actually reads top-to-bottom in GROUP_INFO's declared order
+    // (แพ่ง วิแพ่ง อาญา วิอาญา มหาชน อื่นๆ).
+    pinSiblingsVertically(nodesById.get('root'), Object.keys(GROUP_INFO).map(k => 'group:' + k), 30);
     childrenOf.set('root', new Set(Object.keys(GROUP_INFO).map(k => 'group:' + k)));
 
     // Used by both plain multi-book groups (e.g. อื่นๆ) and มหาชน's subgroups
@@ -399,7 +447,7 @@
         addLink(node.id, id);
         kids.add(id);
       }
-      pinSiblingsVertically(node, [...kids], 16);
+      pinSiblingsVertically(node, [...kids], 22);
       childrenOf.set(node.id, kids);
     }
 
@@ -412,7 +460,7 @@
         addLink(node.id, id);
         kids.add(id);
       }
-      pinSiblingsVertically(node, [...kids], 16);
+      pinSiblingsVertically(node, [...kids], 22);
       childrenOf.set(node.id, kids);
     }
 
@@ -437,7 +485,7 @@
           kids.add(id);
         }
       }
-      pinSiblingsVertically(node, [...kids], 10);
+      pinSiblingsVertically(node, [...kids], 22);
       childrenOf.set(node.id, kids);
     }
 
@@ -462,7 +510,7 @@
           kids.add(id);
         }
       }
-      pinSiblingsVertically(node, [...kids], 10);
+      pinSiblingsVertically(node, [...kids], 22);
       childrenOf.set(node.id, kids);
     }
 
@@ -518,10 +566,12 @@
       panel.classList.add('open');
       if (!wasOpen) setTimeout(resizeGraph, 260); // wait for the slide-in transition
     }
-    document.getElementById('panel-close').onclick = () => {
+    function closePanel() {
+      if (!panel.classList.contains('open')) return;
       panel.classList.remove('open');
       setTimeout(resizeGraph, 260);
-    };
+    }
+    document.getElementById('panel-close').onclick = closePanel;
     window.addEventListener('resize', resizeGraph);
 
     function escapeHtml(s) {
@@ -575,15 +625,6 @@
           html += `<span class="art-link">${escapeHtml(BOOK_INFO[a.bookKey] ? BOOK_INFO[a.bookKey].title : a.bookKey)} — มาตรา ${escapeHtml(a.number)}</span>`;
         }
       }
-      showPanel(html);
-    }
-
-    function renderGenericPanel(node) {
-      const kickerText = KICKER_LABELS[node.type] || 'หมวดหมู่ย่อย';
-      let html = `<div class="kicker">${kickerText}</div>`;
-      html += `<h3>${escapeHtml(node.name)}</h3>`;
-      const kids = childrenOf.get(node.id);
-      html += `<p class="hint-note">${kids && kids.size ? 'คลิกโหนดนี้อีกครั้งเพื่อยุบชั้นย่อย' : 'คลิกโหนดนี้เพื่อขยายชั้นถัดไป'}</p>`;
       showPanel(html);
     }
 
@@ -646,15 +687,22 @@
         }
       })
       .onNodeClick(node => {
-        if (node.type === 'root') { renderGenericPanel(node); refresh(); return; }
         if (node.type === 'case') { renderCasePanel(node); return; }
+        if (node.type === 'root') { return; } // root's 6 children are always visible - nothing to expand, no content to show
         if (node.__shaking) return; // already mid-shake, ignore rapid re-clicks
 
         const isCollapsing = childrenOf.has(node.id) && childrenOf.get(node.id).size > 0;
         const finish = () => {
           toggleExpand(node);
+          // The side panel ("หมวดหมู่กฎหมาย" etc.) is real content only for
+          // มาตรา (and คดี, handled above) - a navigational click through
+          // group/subgroup/book/level nodes just expands/collapses that
+          // node in place. Opening a generic panel for every click used to
+          // leave it obstructing the graph (worst on mobile, where it eats
+          // up to 88vw) for the entire time someone was just drilling
+          // through categories, not reading a specific มาตรา.
           if (node.type === 'article') renderArticlePanel(node);
-          else renderGenericPanel(node);
+          else closePanel();
           refresh();
         };
         if (isCollapsing) finish();
