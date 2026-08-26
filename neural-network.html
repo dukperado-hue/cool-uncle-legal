@@ -59,6 +59,32 @@
     }
     #legend button:hover { background: rgba(255,255,255,0.18); }
 
+    #settings-toggle {
+      position: absolute; bottom: 16px; left: 16px; z-index: 6;
+      width: 42px; height: 42px; border-radius: 50%;
+      background: rgba(10,10,25,0.7); border: 1px solid rgba(255,255,255,0.25);
+      color: #fff; font-size: 19px; cursor: pointer; pointer-events: auto;
+    }
+    #settings-toggle:hover { background: rgba(255,255,255,0.18); }
+    #settings-panel {
+      position: absolute; bottom: 66px; left: 16px; z-index: 6;
+      background: rgba(10, 10, 25, 0.8); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px; padding: 12px 14px; font-size: 12.5px;
+      backdrop-filter: blur(4px); display: none; min-width: 220px;
+      pointer-events: auto;
+    }
+    #settings-panel.open { display: block; }
+    #settings-panel .setting-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; margin: 8px 0;
+    }
+    #settings-panel .switch-btn {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
+      color: #fff; font-size: 11px; padding: 4px 12px; border-radius: 14px;
+      cursor: pointer; min-width: 44px;
+    }
+    #settings-panel .switch-btn.on { background: #2ecc71; border-color: #2ecc71; color: #06210f; font-weight: 700; }
+
     #loading {
       position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
@@ -182,6 +208,15 @@
 
   <div id="graph-container"></div>
 
+  <button id="settings-toggle" title="ตั้งค่า">⚙️</button>
+  <div id="settings-panel">
+    <div class="setting-row"><span>🎵 เพลงพื้นหลัง</span><button id="music-toggle" class="switch-btn">ปิด</button></div>
+    <div class="setting-row"><span>🔒 ล็อกขนาดตัวหนังสือ</span><button id="fontlock-toggle" class="switch-btn on">เปิด</button></div>
+  </div>
+  <audio id="bgm" loop preload="none">
+    <source src="music/alex-morgan-jazz-lounge-study-music-563575.mp3" type="audio/mpeg">
+  </audio>
+
   <div id="side-panel">
     <button class="close-btn" id="panel-close">✕</button>
     <div id="panel-body"></div>
@@ -208,14 +243,23 @@
     };
     // Top-level: exactly 6 category nodes under root, per user's explicit
     // grouping — expand each to reveal its member ประมวล/พระราชบัญญัติ.
+    // Categories with exactly one book (civil/criminal/civpro/crimpro) skip
+    // straight to that book's own บรรพ/ลักษณะ hierarchy on click — no
+    // redundant middle node that's really just the same law under another
+    // label. มหาชน has a real intermediate split (กฎหมายปกครอง / รัฐธรรมนูญ)
+    // since it genuinely groups two distinct legal subfields.
     const GROUP_INFO = {
       civil:    { label: 'แพ่งและพาณิชย์', color: '#00e6ff', books: ['civil'] },
       criminal: { label: 'อาญา',            color: '#ff0055', books: ['criminal'] },
       civpro:   { label: 'วิแพ่ง',           color: '#00b8d9', books: ['civpro'] },
       crimpro:  { label: 'วิอาญา',           color: '#ff4d8d', books: ['crimpro'] },
-      public:   { label: 'มหาชน',            color: '#aa00ff', books: ['constitution', 'const2560', 'adminproc', 'admincourt', 'tortofficials', 'politicalparty'] },
-      other:    { label: 'อื่นๆ',            color: '#ff9900', books: ['copyright', 'patent', 'trademark', 'carriage', 'ipcourt'] },
+      public:   { label: 'มหาชน', color: '#aa00ff', subgroups: {
+                    adminlaw: { label: 'กฎหมายปกครอง', books: ['adminproc', 'admincourt', 'tortofficials'] },
+                    constlaw: { label: 'รัฐธรรมนูญ',   books: ['constitution', 'const2560', 'politicalparty'] },
+                  } },
+      other:    { label: 'อื่นๆ', color: '#ff9900', books: ['copyright', 'patent', 'trademark', 'carriage', 'ipcourt'] },
     };
+    const KICKER_LABELS = { group: 'หมวดหมู่กฎหมาย', subgroup: 'หมวดหมู่ย่อย', book: 'ประมวล/พระราชบัญญัติ' };
     const LEAF_COLOR = '#00ffcc';
     const CASE_COLOR = '#ffcc44';
     const LEVELS = ['phaak', 'laksana', 'muad', 'suan'];
@@ -317,16 +361,34 @@
     for (const groupKey in GROUP_INFO) {
       const g = GROUP_INFO[groupKey];
       const id = 'group:' + groupKey;
-      addNode({ id, name: g.label, type: 'group', groupKey, books: g.books, size: 9, color: g.color });
+      const node = { id, name: g.label, type: 'group', groupKey, size: 9, color: g.color };
+      if (g.subgroups) node.subgroups = g.subgroups;
+      else if (g.books.length === 1) node.bookKey = g.books[0]; // merge group+book, one fewer click
+      else node.books = g.books;
+      addNode(node);
       addLink('root', id);
     }
     childrenOf.set('root', new Set(Object.keys(GROUP_INFO).map(k => 'group:' + k)));
 
+    // Used by both plain multi-book groups (e.g. อื่นๆ) and มหาชน's subgroups
+    // (กฎหมายปกครอง / รัฐธรรมนูญ) — both just carry a `books` array.
     function expandGroup(node) {
       const kids = new Set();
       for (const bookKey of node.books) {
         const id = 'book:' + bookKey;
         addNode({ id, name: BOOK_INFO[bookKey].title, type: 'book', bookKey, size: 8, color: node.color, parentId: node.id });
+        addLink(node.id, id);
+        kids.add(id);
+      }
+      childrenOf.set(node.id, kids);
+    }
+
+    function expandSubgroups(node) {
+      const kids = new Set();
+      for (const subKey in node.subgroups) {
+        const sg = node.subgroups[subKey];
+        const id = 'subgroup:' + node.groupKey + ':' + subKey;
+        addNode({ id, name: sg.label, type: 'subgroup', groupKey: node.groupKey, books: sg.books, size: 8, color: node.color, parentId: node.id });
         addLink(node.id, id);
         kids.add(id);
       }
@@ -401,7 +463,9 @@
         removeSubtree_childrenOnly(node.id);
         return;
       }
-      if (node.type === 'group') expandGroup(node);
+      if (node.type === 'group' && node.bookKey) expandBook(node);
+      else if (node.type === 'group' && node.subgroups) expandSubgroups(node);
+      else if (node.type === 'group' || node.type === 'subgroup') expandGroup(node);
       else if (node.type === 'book') expandBook(node);
       else if (LEVELS.includes(node.type)) expandLevelNode(node);
       else if (node.type === 'article') expandArticle(node);
@@ -492,7 +556,7 @@
     }
 
     function renderGenericPanel(node) {
-      const kickerText = node.type === 'group' ? 'หมวดหมู่กฎหมาย' : node.type === 'book' ? 'ประมวล/พระราชบัญญัติ' : 'หมวดหมู่ย่อย';
+      const kickerText = KICKER_LABELS[node.type] || 'หมวดหมู่ย่อย';
       let html = `<div class="kicker">${kickerText}</div>`;
       html += `<h3>${escapeHtml(node.name)}</h3>`;
       const kids = childrenOf.get(node.id);
@@ -500,8 +564,26 @@
       showPanel(html);
     }
 
+    let fontSizeFixed = true; // toggled via the ⚙️ settings panel
+
+    // Shake a node hard for `duration`ms before its children actually
+    // appear — a little suspense/impact beat before the graph "splits".
+    // The jitter itself is drawn in nodeCanvasObject while __shaking is
+    // true; .autoPauseRedraw(false) below keeps the canvas repainting every
+    // frame so it's actually visible. Uses setTimeout (not rAF) to drive
+    // the timing so the expand still fires reliably even if the tab is
+    // backgrounded/throttled and frames aren't running.
+    function shakeNode(node, duration, callback) {
+      node.__shaking = true;
+      setTimeout(() => {
+        node.__shaking = false;
+        callback();
+      }, duration);
+    }
+
     const Graph = ForceGraph()(elem)
       .graphData({ nodes: [...nodesById.values()], links })
+      .autoPauseRedraw(false) // keep repainting every frame so the shake effect can animate even after the sim cools down
       .dagMode('lr')
       .dagLevelDistance(140)
       .linkColor(() => 'rgba(255, 255, 255, 0.12)')
@@ -511,13 +593,20 @@
       .linkDirectionalParticleColor(link => (link.target && link.target.color) || '#ffffff')
       .nodeCanvasObject((node, ctx, globalScale) => {
         const label = node.name;
-        const fontSize = 12 / globalScale;
-        const radius = node.size;
+        const fontSize = fontSizeFixed ? (12 / globalScale) : 12;
+        let radius = node.size;
+        let dx = node.x, dy = node.y;
+        if (node.__shaking) {
+          const amp = 6;
+          dx += (Math.random() - 0.5) * amp * 2;
+          dy += (Math.random() - 0.5) * amp * 2;
+          radius = node.size * (1 + Math.random() * 0.3);
+        }
         ctx.beginPath();
-        ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI, false);
+        ctx.arc(dx, dy, radius, 0, 2 * Math.PI, false);
         ctx.fillStyle = node.color;
         ctx.shadowColor = node.color;
-        ctx.shadowBlur = 15;
+        ctx.shadowBlur = node.__shaking ? 28 : 15;
         ctx.fill();
         ctx.shadowBlur = 0;
         if (globalScale > 0.9) {
@@ -525,15 +614,23 @@
           ctx.textAlign = 'left';
           ctx.textBaseline = 'middle';
           ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-          ctx.fillText(label, node.x + radius + 4, node.y);
+          ctx.fillText(label, dx + radius + 4, dy);
         }
       })
       .onNodeClick(node => {
         if (node.type === 'root') { renderGenericPanel(node); refresh(); return; }
-        if (node.type === 'article') { toggleExpand(node); renderArticlePanel(node); }
-        else if (node.type === 'case') { renderCasePanel(node); }
-        else { toggleExpand(node); renderGenericPanel(node); }
-        refresh();
+        if (node.type === 'case') { renderCasePanel(node); return; }
+        if (node.__shaking) return; // already mid-shake, ignore rapid re-clicks
+
+        const isCollapsing = childrenOf.has(node.id) && childrenOf.get(node.id).size > 0;
+        const finish = () => {
+          toggleExpand(node);
+          if (node.type === 'article') renderArticlePanel(node);
+          else renderGenericPanel(node);
+          refresh();
+        };
+        if (isCollapsing) finish();
+        else shakeNode(node, 450, finish);
       })
       .onEngineStop(() => Graph.zoomToFit(400, 70));
 
@@ -547,6 +644,27 @@
       for (const id of [...childrenOf.get('root')]) removeSubtree_childrenOnly(id);
       panel.classList.remove('open');
       refresh();
+    };
+
+    // ---- ⚙️ settings menu: hide/show, music, font-size lock ----
+    const settingsToggle = document.getElementById('settings-toggle');
+    const settingsPanel = document.getElementById('settings-panel');
+    settingsToggle.onclick = () => settingsPanel.classList.toggle('open');
+
+    const bgm = document.getElementById('bgm');
+    const musicBtn = document.getElementById('music-toggle');
+    musicBtn.onclick = () => {
+      const turningOn = !musicBtn.classList.contains('on');
+      if (turningOn) { bgm.play().catch(() => {}); musicBtn.textContent = 'เปิด'; }
+      else { bgm.pause(); musicBtn.textContent = 'ปิด'; }
+      musicBtn.classList.toggle('on', turningOn);
+    };
+
+    const fontlockBtn = document.getElementById('fontlock-toggle');
+    fontlockBtn.onclick = () => {
+      fontSizeFixed = !fontSizeFixed;
+      fontlockBtn.textContent = fontSizeFixed ? 'เปิด' : 'ปิด';
+      fontlockBtn.classList.toggle('on', fontSizeFixed);
     };
   })();
   </script>
