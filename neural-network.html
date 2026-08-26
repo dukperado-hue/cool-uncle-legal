@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>โครงข่ายประสาทกฎหมายไทย (Neural Network) — Cool Uncle Legal Lab</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #050510;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+    }
+    #graph-container { width: 100vw; height: 100vh; }
+
+    #ui-panel {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      max-width: 300px;
+      pointer-events: none;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
+      z-index: 5;
+    }
+    #ui-panel h2 { margin: 0 0 4px; font-size: 20px; }
+    #ui-panel p { margin: 0 0 10px; font-size: 12px; opacity: .85; line-height: 1.5; }
+    #ui-panel a.back-link {
+      pointer-events: auto;
+      color: #7fd8ff;
+      text-decoration: none;
+      font-size: 12px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    #ui-panel a.back-link:hover { text-decoration: underline; }
+
+    #legend {
+      pointer-events: auto;
+      background: rgba(10, 10, 25, 0.55);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 11px;
+      backdrop-filter: blur(4px);
+    }
+    #legend .row { display: flex; align-items: center; gap: 6px; margin: 3px 0; }
+    #legend .dot { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 auto; }
+    #legend button {
+      margin-top: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #legend button:hover { background: rgba(255,255,255,0.18); }
+
+    #loading {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 10px;
+      background: #050510; z-index: 20;
+      font-size: 14px; color: #9fd8ff;
+    }
+    #loading .spinner {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 3px solid rgba(159,216,255,0.25);
+      border-top-color: #9fd8ff;
+      animation: spin 0.9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #side-panel {
+      position: absolute;
+      top: 0; right: 0;
+      width: 360px;
+      max-width: 88vw;
+      height: 100vh;
+      background: rgba(8, 8, 20, 0.92);
+      border-left: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(6px);
+      transform: translateX(100%);
+      transition: transform 0.25s ease;
+      z-index: 10;
+      padding: 20px 18px;
+      overflow-y: auto;
+    }
+    #side-panel.open { transform: translateX(0); }
+    #side-panel .close-btn {
+      position: absolute; top: 12px; right: 14px;
+      background: none; border: none; color: #aaa;
+      font-size: 20px; cursor: pointer; line-height: 1;
+    }
+    #side-panel .close-btn:hover { color: #fff; }
+    #side-panel .kicker {
+      font-size: 11px; text-transform: uppercase; letter-spacing: .08em;
+      opacity: .6; margin-bottom: 6px;
+    }
+    #side-panel h3 { margin: 0 0 10px; font-size: 18px; line-height: 1.4; }
+    #side-panel .meta-line { font-size: 12px; opacity: .75; margin-bottom: 14px; }
+    #side-panel .article-text {
+      white-space: pre-wrap;
+      font-size: 13.5px;
+      line-height: 1.7;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    #side-panel .article-text.cancelled { opacity: .5; text-decoration: line-through; }
+    #side-panel .section-title {
+      font-size: 12px; font-weight: 700; letter-spacing: .03em;
+      opacity: .8; margin: 18px 0 8px; display: flex; align-items: center; gap: 6px;
+    }
+    .case-card {
+      display: block;
+      background: rgba(255, 200, 60, 0.08);
+      border: 1px solid rgba(255, 200, 60, 0.35);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 13px;
+      transition: background 0.15s;
+    }
+    .case-card:hover { background: rgba(255, 200, 60, 0.18); }
+    .case-card .cat { font-size: 10.5px; opacity: .7; margin-top: 3px; }
+    .case-card .gated {
+      font-size: 10px; color: #ff9d9d; margin-top: 3px;
+    }
+    .empty-note { font-size: 12.5px; opacity: .6; font-style: italic; }
+    .hint-note { font-size: 11.5px; opacity: .55; margin-top: 4px; }
+    #side-panel .open-case-btn {
+      display: inline-block;
+      margin-top: 4px;
+      background: #ffcc44;
+      color: #1a1a1a;
+      font-weight: 700;
+      font-size: 12.5px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+    #side-panel .open-case-btn:hover { background: #ffd970; }
+    #side-panel .art-link {
+      display: block;
+      font-size: 12.5px;
+      color: #9fd8ff;
+      text-decoration: none;
+      padding: 4px 0;
+    }
+    #side-panel .art-link:hover { text-decoration: underline; }
+  </style>
+  <script src="https://unpkg.com/force-graph"></script>
+</head>
+<body>
+
+  <div id="loading"><div class="spinner"></div><div>กำลังโหลดฐานข้อมูลกฎหมาย (codex-data.json)...</div></div>
+
+  <div id="ui-panel">
+    <a class="back-link" href="index.html">← กลับหน้าหลัก</a>
+    <h2>ประมวล NN — รัศมีนิติธรรม</h2>
+    <p>คลิกโหนดเพื่อขยายชั้นถัดไป (ประมวล → บรรพ/ลักษณะ → หมวด/ส่วน → มาตรา) คลิกซ้ำเพื่อยุบ คลิกมาตรา (สีเขียว) เพื่อดูเนื้อหาและคดีตัวอย่างที่เชื่อมโยงทางด้านขวา</p>
+    <div id="legend">
+      <div class="row"><span class="dot" style="background:#00e6ff"></span> แพ่ง / วิ.แพ่ง</div>
+      <div class="row"><span class="dot" style="background:#ff0055"></span> อาญา / วิ.อาญา</div>
+      <div class="row"><span class="dot" style="background:#aa00ff"></span> มหาชน / รัฐธรรมนูญ / ปกครอง</div>
+      <div class="row"><span class="dot" style="background:#ff9900"></span> ทรัพย์สินทางปัญญา / พาณิชย์</div>
+      <div class="row"><span class="dot" style="background:#00ffcc"></span> มาตรา (โหนดใบไม้)</div>
+      <div class="row"><span class="dot" style="background:#ffcc44"></span> คดีตัวอย่าง (เชื่อมอัตโนมัติ)</div>
+      <button id="reset-btn">รีเซ็ตกราฟ</button>
+    </div>
+  </div>
+
+  <div id="graph-container"></div>
+
+  <div id="side-panel">
+    <button class="close-btn" id="panel-close">✕</button>
+    <div id="panel-body"></div>
+  </div>
+
+  <script>
+  (async function () {
+    const BOOK_INFO = {
+      civil:         { title: 'ประมวลกฎหมายแพ่งและพาณิชย์',            group: 'civil' },
+      civpro:        { title: 'ประมวลกฎหมายวิธีพิจารณาความแพ่ง',       group: 'civil' },
+      criminal:      { title: 'ประมวลกฎหมายอาญา',                     group: 'criminal' },
+      crimpro:       { title: 'ประมวลกฎหมายวิธีพิจารณาความอาญา',      group: 'criminal' },
+      constitution:  { title: 'พระธรรมนูญศาลยุติธรรม',                group: 'public' },
+      const2560:     { title: 'รัฐธรรมนูญแห่งราชอาณาจักรไทย พ.ศ. 2560', group: 'public' },
+      adminproc:     { title: 'พ.ร.บ.วิธีปฏิบัติราชการทางปกครอง',      group: 'public' },
+      admincourt:    { title: 'พ.ร.บ.จัดตั้งศาลปกครองฯ',               group: 'public' },
+      tortofficials: { title: 'พ.ร.บ.ความรับผิดทางละเมิดของเจ้าหน้าที่', group: 'public' },
+      politicalparty:{ title: 'พ.ร.ป.พรรคการเมือง พ.ศ. 2560',          group: 'public' },
+      copyright:     { title: 'พ.ร.บ.ลิขสิทธิ์ พ.ศ. 2537',             group: 'ip' },
+      patent:        { title: 'พ.ร.บ.สิทธิบัตร พ.ศ. 2522',             group: 'ip' },
+      trademark:     { title: 'พ.ร.บ.เครื่องหมายการค้า พ.ศ. 2534',     group: 'ip' },
+      carriage:      { title: 'พ.ร.บ.การรับขนของทางทะเล พ.ศ. 2534',    group: 'ip' },
+      ipcourt:       { title: 'พ.ร.บ.จัดตั้งศาลทรัพย์สินทางปัญญาฯ',    group: 'ip' },
+    };
+    const GROUP_COLOR = { civil: '#00e6ff', criminal: '#ff0055', public: '#aa00ff', ip: '#ff9900' };
+    const LEAF_COLOR = '#00ffcc';
+    const CASE_COLOR = '#ffcc44';
+    const LEVELS = ['phaak', 'laksana', 'muad', 'suan'];
+
+    const elem = document.getElementById('graph-container');
+    const loadingEl = document.getElementById('loading');
+    const panel = document.getElementById('side-panel');
+    const panelBody = document.getElementById('panel-body');
+
+    let codex, articleIndex;
+    try {
+      [codex, articleIndex] = await Promise.all([
+        fetch('codex-data.json', { cache: 'no-store' }).then(r => r.json()),
+        fetch('prototype/assets/cases/article-case-index.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : {}),
+      ]);
+    } catch (e) {
+      loadingEl.innerHTML = '<div style="color:#ff8080">โหลดข้อมูลไม่สำเร็จ: ' + (e.message || e) + '</div>';
+      return;
+    }
+    loadingEl.style.display = 'none';
+
+    // ---- graph state ----
+    const nodesById = new Map();   // id -> node object (currently in graph)
+    const childrenOf = new Map();  // parentId -> Set(childId)
+    const links = [];              // {source, target} (ids, resolved by force-graph)
+
+    function naturalArticleSort(a, b) {
+      const pa = String(a).split('/').map(Number);
+      const pb = String(b).split('/').map(Number);
+      if (pa[0] !== pb[0]) return pa[0] - pb[0];
+      return (pa[1] || 0) - (pb[1] || 0);
+    }
+
+    function articlesOf(bookKey) {
+      return Object.values(codex.books[bookKey].articles);
+    }
+
+    function matchesFilters(article, filters) {
+      const meta = article.meta || {};
+      for (const k in filters) { if (meta[k] !== filters[k]) return false; }
+      return true;
+    }
+
+    // Find the next hierarchy level (after startIdx) that has real groups among `arts`.
+    function nextLevelGroups(arts, startIdx) {
+      for (let i = startIdx; i < LEVELS.length; i++) {
+        const lvl = LEVELS[i];
+        const groups = new Map();
+        for (const a of arts) {
+          const v = (a.meta || {})[lvl];
+          if (v) {
+            if (!groups.has(v)) groups.set(v, { title: (a.meta || {})[lvl + 'Title'] || '', articles: [] });
+            groups.get(v).articles.push(a);
+          }
+        }
+        if (groups.size > 0) return { levelIndex: i, level: lvl, groups };
+      }
+      return null;
+    }
+
+    function addNode(node) {
+      nodesById.set(node.id, node);
+      return node;
+    }
+
+    function addLink(a, b) {
+      if (!links.some(l => (l.source === a && l.target === b) || (l.source === b && l.target === a))) {
+        links.push({ source: a, target: b });
+      }
+    }
+
+    function removeSubtree(id) {
+      const kids = childrenOf.get(id);
+      if (kids) {
+        for (const kid of [...kids]) removeSubtree(kid);
+        childrenOf.delete(id);
+      }
+      nodesById.delete(id);
+      for (let i = links.length - 1; i >= 0; i--) {
+        if (links[i].source === id || links[i].source?.id === id || links[i].target === id || links[i].target?.id === id) {
+          links.splice(i, 1);
+        }
+      }
+      // drop any case node left with zero remaining links
+      for (const n of [...nodesById.values()]) {
+        if (n.type === 'case') {
+          const stillLinked = links.some(l => l.source === n.id || l.source?.id === n.id || l.target === n.id || l.target?.id === n.id);
+          if (!stillLinked) { nodesById.delete(n.id); }
+        }
+      }
+    }
+
+    function refresh() {
+      Graph.graphData({ nodes: [...nodesById.values()], links: links.map(l => ({ source: l.source, target: l.target })) });
+    }
+
+    // ---- root + book nodes (level 0, always visible) ----
+    addNode({ id: 'root', name: 'ระบบกฎหมายไทย', type: 'root', size: 13, color: '#ffffff' });
+    for (const bookKey in BOOK_INFO) {
+      const info = BOOK_INFO[bookKey];
+      const id = 'book:' + bookKey;
+      addNode({ id, name: info.title, type: 'book', bookKey, size: 8, color: GROUP_COLOR[info.group] });
+      addLink('root', id);
+    }
+    childrenOf.set('root', new Set(Object.keys(BOOK_INFO).map(k => 'book:' + k)));
+
+    function expandBook(node) {
+      const arts = articlesOf(node.bookKey);
+      const found = nextLevelGroups(arts, 0);
+      const kids = new Set();
+      if (!found) {
+        // no hierarchy at all (e.g. tortofficials) -> go straight to มาตรา leaves
+        for (const a of arts.sort((x, y) => naturalArticleSort(x.number, y.number))) {
+          const id = 'article:' + node.bookKey + ':' + a.number;
+          addNode({ id, name: 'มาตรา ' + a.number, type: 'article', bookKey: node.bookKey, number: a.number, size: 5, color: LEAF_COLOR, parentId: node.id });
+          addLink(node.id, id);
+          kids.add(id);
+        }
+      } else {
+        for (const [value, g] of found.groups) {
+          const id = 'lvl:' + node.bookKey + ':' + found.level + ':' + value;
+          const label = g.title ? (value + ' ' + g.title) : value;
+          addNode({ id, name: label, type: found.level, bookKey: node.bookKey, filters: { [found.level]: value }, levelIndex: found.levelIndex, size: 6, color: GROUP_COLOR[BOOK_INFO[node.bookKey].group], parentId: node.id });
+          addLink(node.id, id);
+          kids.add(id);
+        }
+      }
+      childrenOf.set(node.id, kids);
+    }
+
+    function expandLevelNode(node) {
+      const arts = articlesOf(node.bookKey).filter(a => matchesFilters(a, node.filters));
+      const found = nextLevelGroups(arts, node.levelIndex + 1);
+      const kids = new Set();
+      if (!found) {
+        for (const a of arts.sort((x, y) => naturalArticleSort(x.number, y.number))) {
+          const id = 'article:' + node.bookKey + ':' + a.number;
+          addNode({ id, name: 'มาตรา ' + a.number, type: 'article', bookKey: node.bookKey, number: a.number, size: 5, color: LEAF_COLOR, parentId: node.id });
+          addLink(node.id, id);
+          kids.add(id);
+        }
+      } else {
+        for (const [value, g] of found.groups) {
+          const filters = Object.assign({}, node.filters, { [found.level]: value });
+          const id = 'lvl:' + node.bookKey + ':' + found.level + ':' + Object.values(filters).join('|');
+          const label = g.title ? (value + ' ' + g.title) : value;
+          addNode({ id, name: label, type: found.level, bookKey: node.bookKey, filters, levelIndex: found.levelIndex, size: 5.5, color: GROUP_COLOR[BOOK_INFO[node.bookKey].group], parentId: node.id });
+          addLink(node.id, id);
+          kids.add(id);
+        }
+      }
+      childrenOf.set(node.id, kids);
+    }
+
+    function expandArticle(node) {
+      const key = node.bookKey + ':' + node.number;
+      const cases = (articleIndex[key] || []).filter(c => c.public);
+      const kids = new Set();
+      for (const c of cases) {
+        const id = 'case:' + c.id;
+        if (!nodesById.has(id)) {
+          addNode({ id, name: c.title, type: 'case', caseId: c.id, cat: c.cat, size: 6.5, color: CASE_COLOR });
+        }
+        addLink(node.id, id);
+        kids.add(id);
+      }
+      childrenOf.set(node.id, kids);
+    }
+
+    function toggleExpand(node) {
+      if (childrenOf.has(node.id) && childrenOf.get(node.id).size > 0) {
+        removeSubtree_childrenOnly(node.id);
+        return;
+      }
+      if (node.type === 'book') expandBook(node);
+      else if (LEVELS.includes(node.type)) expandLevelNode(node);
+      else if (node.type === 'article') expandArticle(node);
+    }
+
+    // collapse: remove this node's descendants but keep the node itself
+    function removeSubtree_childrenOnly(id) {
+      const kids = childrenOf.get(id);
+      if (!kids) return;
+      for (const kid of [...kids]) removeSubtree(kid);
+      childrenOf.set(id, new Set());
+    }
+
+    function articleText(bookKey, number) {
+      return (codex.books[bookKey].articles[number]) || null;
+    }
+
+    function resizeGraph() {
+      const panelWidth = panel.classList.contains('open') ? Math.min(360, window.innerWidth * 0.88) : 0;
+      Graph.width(window.innerWidth - panelWidth).height(window.innerHeight);
+      Graph.zoomToFit(400, 70);
+    }
+
+    function showPanel(html) {
+      panelBody.innerHTML = html;
+      const wasOpen = panel.classList.contains('open');
+      panel.classList.add('open');
+      if (!wasOpen) setTimeout(resizeGraph, 260); // wait for the slide-in transition
+    }
+    document.getElementById('panel-close').onclick = () => {
+      panel.classList.remove('open');
+      setTimeout(resizeGraph, 260);
+    };
+    window.addEventListener('resize', resizeGraph);
+
+    function escapeHtml(s) {
+      return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    }
+
+    function renderArticlePanel(node) {
+      const art = articleText(node.bookKey, node.number);
+      const bookTitle = BOOK_INFO[node.bookKey].title;
+      const key = node.bookKey + ':' + node.number;
+      const cases = (articleIndex[key] || []);
+      let html = `<div class="kicker">${escapeHtml(bookTitle)}</div>`;
+      html += `<h3>มาตรา ${escapeHtml(node.number)}${art && art.cancelled ? ' (ยกเลิกแล้ว)' : ''}</h3>`;
+      if (art) {
+        html += `<div class="article-text${art.cancelled ? ' cancelled' : ''}">${escapeHtml(art.text)}</div>`;
+      } else {
+        html += `<p class="empty-note">ไม่พบข้อความมาตรานี้ในฐานข้อมูล</p>`;
+      }
+      html += `<div class="section-title">📁 คดีตัวอย่างที่เชื่อมโยงกับมาตรานี้</div>`;
+      const publicCases = cases.filter(c => c.public);
+      if (publicCases.length === 0) {
+        html += `<p class="empty-note">ยังไม่มีคดีตัวอย่างในระบบที่อ้างอิงมาตรานี้โดยตรง (เชื่อมอัตโนมัติจากคำอ้างอิงกฎหมายในไฟล์คดีจริงเท่านั้น ไม่มีการเชื่อมด้วยมือ)</p>`;
+      } else {
+        for (const c of publicCases) {
+          html += `<a class="case-card" href="prototype/read-case.html?id=${encodeURIComponent(c.id)}" target="_blank" rel="noopener">
+            ${escapeHtml(c.title)}
+            <div class="cat">${escapeHtml(c.cat || '')}</div>
+          </a>`;
+        }
+      }
+      const gatedCount = cases.length - publicCases.length;
+      if (gatedCount > 0) {
+        html += `<p class="hint-note">มีอีก ${gatedCount} คดีที่อ้างอิงมาตรานี้แต่ยังไม่เผยแพร่ public จึงไม่แสดงที่นี่</p>`;
+      }
+      showPanel(html);
+    }
+
+    function renderCasePanel(node) {
+      let html = `<div class="kicker">คดีตัวอย่าง</div>`;
+      html += `<h3>${escapeHtml(node.name)}</h3>`;
+      html += `<div class="meta-line">${escapeHtml(node.cat || '')}</div>`;
+      html += `<a class="open-case-btn" href="prototype/read-case.html?id=${encodeURIComponent(node.caseId)}" target="_blank" rel="noopener">🔗 เปิดคดีเต็ม</a>`;
+      html += `<div class="section-title">⚖ เชื่อมโยงกับมาตรา</div>`;
+      const linkedArticles = links.filter(l => l.target === node.id || l.target?.id === node.id || l.source === node.id || l.source?.id === node.id)
+        .map(l => { const other = (l.source === node.id || l.source?.id === node.id) ? l.target : l.source; return typeof other === 'string' ? nodesById.get(other) : other; })
+        .filter(n => n && n.type === 'article');
+      if (linkedArticles.length === 0) {
+        html += `<p class="empty-note">—</p>`;
+      } else {
+        for (const a of linkedArticles) {
+          html += `<span class="art-link">${escapeHtml(BOOK_INFO[a.bookKey] ? BOOK_INFO[a.bookKey].title : a.bookKey)} — มาตรา ${escapeHtml(a.number)}</span>`;
+        }
+      }
+      showPanel(html);
+    }
+
+    function renderGenericPanel(node) {
+      let html = `<div class="kicker">${node.type === 'book' ? 'ประมวล/พระราชบัญญัติ' : 'หมวดหมู่'}</div>`;
+      html += `<h3>${escapeHtml(node.name)}</h3>`;
+      const kids = childrenOf.get(node.id);
+      html += `<p class="hint-note">${kids && kids.size ? 'คลิกโหนดนี้อีกครั้งเพื่อยุบชั้นย่อย' : 'คลิกโหนดนี้เพื่อขยายชั้นถัดไป'}</p>`;
+      showPanel(html);
+    }
+
+    const Graph = ForceGraph()(elem)
+      .graphData({ nodes: [...nodesById.values()], links })
+      .dagMode('lr')
+      .dagLevelDistance(140)
+      .linkColor(() => 'rgba(255, 255, 255, 0.12)')
+      .linkDirectionalParticles(3)
+      .linkDirectionalParticleWidth(2.2)
+      .linkDirectionalParticleSpeed(0.005)
+      .linkDirectionalParticleColor(link => (link.target && link.target.color) || '#ffffff')
+      .nodeCanvasObject((node, ctx, globalScale) => {
+        const label = node.name;
+        const fontSize = 12 / globalScale;
+        const radius = node.size;
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI, false);
+        ctx.fillStyle = node.color;
+        ctx.shadowColor = node.color;
+        ctx.shadowBlur = 15;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        if (globalScale > 0.9) {
+          ctx.font = `${fontSize}px Sans-Serif`;
+          ctx.textAlign = 'left';
+          ctx.textBaseline = 'middle';
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+          ctx.fillText(label, node.x + radius + 4, node.y);
+        }
+      })
+      .onNodeClick(node => {
+        if (node.type === 'root') { renderGenericPanel(node); refresh(); return; }
+        if (node.type === 'article') { toggleExpand(node); renderArticlePanel(node); }
+        else if (node.type === 'case') { renderCasePanel(node); }
+        else { toggleExpand(node); renderGenericPanel(node); }
+        refresh();
+      })
+      .onEngineStop(() => Graph.zoomToFit(400, 70));
+
+    // Tune the default charge force in place — avoids needing a separate
+    // global `d3` import; force-graph already bundles d3-force internally
+    // and registers a default 'charge' force we can just re-strength.
+    const chargeForce = Graph.d3Force('charge');
+    if (chargeForce) chargeForce.strength(-220);
+
+    document.getElementById('reset-btn').onclick = () => {
+      for (const id of [...childrenOf.get('root')]) removeSubtree_childrenOnly(id);
+      panel.classList.remove('open');
+      refresh();
+    };
+  })();
+  </script>
+</body>
+</html>
