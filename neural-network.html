@@ -827,10 +827,25 @@
       });
 
       function synapseStroke(x1, y1, x2, y2, hovered, phase) {
+        // "เส้นขยับตามจุด" (make the LINE itself move, not just a dot sitting
+        // on an otherwise static line) — a scrolling dash pattern on the
+        // stroke: classic "marching ants," the line's own texture visibly
+        // travels. drawFlowDot below adds one brighter pulse riding the
+        // same direction on top. Tied to nexusFlowEnabled specifically
+        // (not the glow toggle) since it's the exact effect that was
+        // missing when only the dot moved and the line stayed put.
+        if (nexusFlowEnabled) {
+          const dash = 8 / globalScale;
+          ctx.setLineDash([dash, dash]);
+          ctx.lineDashOffset = -((t * 26 / globalScale + phase * 20) % (dash * 2));
+        } else {
+          ctx.setLineDash([]);
+        }
         if (!synapseEffectEnabled) {
           ctx.strokeStyle = 'rgba(255, 204, 68, 0.35)';
           ctx.lineWidth = 1.4 / globalScale;
           ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+          ctx.setLineDash([]);
           return;
         }
         // Neon-on-black needs more than a flat stroke color: shadowBlur
@@ -848,6 +863,7 @@
         ctx.lineWidth = (hovered ? 2.6 : 1.6) / globalScale;
         ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
         ctx.restore();
+        ctx.setLineDash([]);
       }
       // A small dot riding along the line itself ("ให้เส้นขยับตามจุด") — the
       // line stays put, this is what actually reads as motion/current.
