@@ -50,6 +50,21 @@
     .tool-btn:hover { background: rgba(255,255,255,0.18); }
     .tool-btn.active { background: rgba(255,204,68,0.28); border-color: #ffcc44; }
 
+    .graph-search { display: flex; gap: 6px; margin-top: 8px; pointer-events: auto; flex-wrap: wrap; }
+    .search-field {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      font-size: 11px;
+      padding: 5px 8px;
+      border-radius: 12px;
+      outline: none;
+    }
+    .search-field option { background: #0a0a1e; color: #fff; }
+    #search-num { width: 84px; }
+    #search-num::placeholder { color: rgba(255,255,255,0.4); }
+    #search-num.search-miss { border-color: #ff6b6b; color: #ff9d9d; }
+
     #settings-toggle {
       position: absolute; bottom: 16px; left: 16px; z-index: 6;
       width: 42px; height: 42px; border-radius: 50%;
@@ -194,6 +209,11 @@
       <button id="reset-btn" class="tool-btn">🔄 รีเซ็ต</button>
       <button id="expand-all-btn" class="tool-btn">🌐 ขยายทุก node</button>
       <button id="nexus-nualchawee-btn" class="tool-btn">🕸️ Nexus: คดีนวลฉวี</button>
+    </div>
+    <div class="graph-search">
+      <select id="search-book" class="search-field" title="เลือกเล่ม"></select>
+      <input id="search-num" class="search-field" type="text" inputmode="numeric" autocomplete="off" placeholder="เลขมาตรา" />
+      <button id="search-go" class="tool-btn" title="ค้นหามาตรา">🔍</button>
     </div>
   </div>
 
@@ -1202,6 +1222,46 @@
       if (nexusOverlay) closeNexus();
       else openNexus('nualchawee-legend-2502');
     };
+
+    // ---- 🔍 minimal article search: jump straight to one มาตรา ----
+    // Reuses revealArticlePath (the same walker the nexus uses) to open only
+    // the path down to the chosen มาตรา, then strips every sibling article so
+    // just that one leaf is left showing under its หมวด/section — the
+    // structural nodes above it stay for context.
+    const searchBook = document.getElementById('search-book');
+    const searchNum = document.getElementById('search-num');
+    for (const bookKey in BOOK_INFO) {
+      const opt = document.createElement('option');
+      opt.value = bookKey;
+      opt.textContent = BOOK_INFO[bookKey].title;
+      searchBook.appendChild(opt);
+    }
+    searchBook.value = 'criminal'; // most-searched book; any is fine
+
+    function flashSearchMiss() {
+      searchNum.classList.add('search-miss');
+      setTimeout(() => searchNum.classList.remove('search-miss'), 1200);
+    }
+    function runSearch() {
+      const bookKey = searchBook.value;
+      const number = searchNum.value.trim().replace(/[๐-๙]/g, d => '๐๑๒๓๔๕๖๗๘๙'.indexOf(d));
+      if (!number) return;
+      if (!(codex.books[bookKey] && codex.books[bookKey].articles[number])) { flashSearchMiss(); return; }
+      doReset();
+      const target = revealArticlePath(bookKey, number);
+      if (!target) { flashSearchMiss(); return; }
+      const sibs = childrenOf.get(target.parentId);
+      if (sibs) {
+        for (const sib of [...sibs]) {
+          if (sib !== target.id) { removeSubtree(sib); sibs.delete(sib); }
+        }
+      }
+      pendingFit = true;
+      refresh();
+      renderArticlePanel(target);
+    }
+    document.getElementById('search-go').onclick = runSearch;
+    searchNum.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); runSearch(); } });
 
     // ---- ⚙️ settings menu: hide/show, music, motion, reset ----
     const settingsToggle = document.getElementById('settings-toggle');
