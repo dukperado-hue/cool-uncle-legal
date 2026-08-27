@@ -253,7 +253,6 @@
                   } },
       other:    { label: 'อื่นๆ', color: '#ff9900', books: ['copyright', 'patent', 'trademark', 'carriage', 'ipcourt'] },
     };
-    const LEAF_COLOR = '#00ffcc';
     const CASE_COLOR = '#ffcc44';
     const LEVELS = ['phaak', 'laksana', 'muad', 'suan'];
 
@@ -482,7 +481,7 @@
         // no hierarchy at all (e.g. tortofficials) -> go straight to มาตรา leaves
         for (const a of arts.sort((x, y) => naturalArticleSort(x.number, y.number))) {
           const id = 'article:' + node.bookKey + ':' + a.number;
-          addNode({ id, name: 'มาตรา ' + a.number, type: 'article', bookKey: node.bookKey, number: a.number, size: 3.2, color: LEAF_COLOR, parentId: node.id });
+          addNode({ id, name: 'มาตรา ' + a.number, type: 'article', bookKey: node.bookKey, number: a.number, size: 3.2, color: node.color, parentId: node.id });
           addLink(node.id, id);
           kids.add(id);
         }
@@ -506,7 +505,7 @@
       if (!found) {
         for (const a of arts.sort((x, y) => naturalArticleSort(x.number, y.number))) {
           const id = 'article:' + node.bookKey + ':' + a.number;
-          addNode({ id, name: 'มาตรา ' + a.number, type: 'article', bookKey: node.bookKey, number: a.number, size: 3.2, color: LEAF_COLOR, parentId: node.id });
+          addNode({ id, name: 'มาตรา ' + a.number, type: 'article', bookKey: node.bookKey, number: a.number, size: 3.2, color: node.color, parentId: node.id });
           addLink(node.id, id);
           kids.add(id);
         }
