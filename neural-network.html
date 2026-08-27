@@ -205,6 +205,7 @@
     <div class="setting-row"><span>🌀 Motion (ดาวเคลื่อนไหว)</span><button id="motion-toggle" class="switch-btn on">เปิด</button></div>
     <div class="setting-row"><span>🔄 รีเซ็ตกราฟ</span><button id="reset-btn-menu" class="switch-btn">รีเซ็ต</button></div>
     <div class="setting-row"><span>🧠 เส้นแสงประสาท (Synapse)</span><button id="synapse-toggle" class="switch-btn on">เปิด</button></div>
+    <div class="setting-row"><span>💫 เส้นขยับตาม (Flow)</span><button id="flow-toggle" class="switch-btn on">เปิด</button></div>
   </div>
   <audio id="bgm" loop preload="none">
     <source src="music/u_jltxwion0i-little-star-lullaby-417636.mp3" type="audio/mpeg">
@@ -717,7 +718,14 @@
       return { x: hub.x - 130, y: hub.y + (i - (n - 1) / 2) * 62 };
     }
 
+    // Bumped by closeNexus (and thus by doReset, which calls it) so an
+    // openNexus() call already in flight when the user resets mid-fetch
+    // notices it's been superseded and discards its result instead of
+    // re-opening the nexus a moment after the user just closed it.
+    let nexusRequestId = 0;
+
     function closeNexus() {
+      nexusRequestId++;
       if (!nexusOverlay) return;
       nexusOverlay = null;
       document.getElementById('nexus-nualchawee-btn').classList.remove('active');
@@ -725,6 +733,7 @@
 
     async function openNexus(caseId) {
       if (!NEXUS_CASE_IDS.includes(caseId)) return;
+      const myRequestId = ++nexusRequestId;
       let caseData;
       try {
         caseData = await fetch('prototype/assets/cases/' + caseId + '.json', { cache: 'no-store' }).then(r => r.json());
@@ -732,6 +741,7 @@
         console.error('nexus: failed to load case data for ' + caseId, e);
         return;
       }
+      if (myRequestId !== nexusRequestId) return; // superseded by a close/reopen while this was loading
       const provisions = (caseData.read && caseData.read.sections || []).find(s => s.key === 'provisions');
       const rawArticles = (provisions && provisions.content && provisions.content.articles) || [];
       const issues = rawArticles.map(a => {
@@ -839,6 +849,26 @@
         ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
         ctx.restore();
       }
+      // A small dot riding along the line itself ("ให้เส้นขยับตามจุด") — the
+      // line stays put, this is what actually reads as motion/current.
+      // Independent of the synapseEffectEnabled glow toggle since it's a
+      // separately requested option.
+      function drawFlowDot(x1, y1, x2, y2, phase) {
+        if (!nexusFlowEnabled) return;
+        const speed = 0.28; // cycles per second
+        const tt = ((t * speed + phase) % 1 + 1) % 1;
+        const fx = x1 + (x2 - x1) * tt;
+        const fy = y1 + (y2 - y1) * tt;
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.shadowColor = '#fff3c4';
+        ctx.shadowBlur = 10 / globalScale;
+        ctx.fillStyle = 'rgba(255, 245, 200, 0.95)';
+        ctx.beginPath();
+        ctx.arc(fx, fy, 2.6 / globalScale, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
       function drawDot(x, y, r, label, hovered, labelBelow) {
         const rr = (hovered ? r * 1.15 : r) / globalScale;
         ctx.beginPath();
@@ -866,11 +896,15 @@
         }
       }
 
-      // lines under the circles
+      // lines first, then flow dots on top of them, then circles/labels on
+      // top of everything — each pass fully separate so nothing paints over
+      // a later pass by accident.
+      const segments = []; // {x1,y1,x2,y2,phase} in hub -> issue -> target order
       nexusOverlay.issues.forEach((issue, i) => {
         const p = issuePos[i];
         const hoveredThis = nexusHoverIndex === -1 || nexusHoverIndex === i;
         synapseStroke(hub.x, hub.y, p.x, p.y, hoveredThis, i * 1.7);
+        segments.push({ x1: hub.x, y1: hub.y, x2: p.x, y2: p.y, phase: i * 0.31 });
         // An issue citing a companion article ("288 ประกอบ 289") fans out to
         // EVERY real มาตรา node it names, not just one — each target's own
         // x/y (already graph-space, no duplicate law node) is read live
@@ -878,8 +912,15 @@
         // zoom/collapse.
         issue.targets.forEach((art, j) => {
           synapseStroke(p.x, p.y, art.x, art.y, hoveredThis, i * 1.7 + 3.1 + j * 0.6);
+          // Continues at the SAME phase+distance the hub->issue leg left
+          // off (offset by that leg's own on-screen length) so the dot
+          // reads as one continuous trip from hub to law, not two dots
+          // restarting independently mid-fan.
+          const leg1Len = Math.hypot(p.x - hub.x, p.y - hub.y);
+          segments.push({ x1: p.x, y1: p.y, x2: art.x, y2: art.y, phase: i * 0.31 + leg1Len * 0.002 });
         });
       });
+      segments.forEach(s => drawFlowDot(s.x1, s.y1, s.x2, s.y2, s.phase));
       nexusOverlay.issues.forEach((issue, i) => {
         const p = issuePos[i];
         drawDot(p.x, p.y, 8, issue.label, nexusHoverIndex === i);
@@ -983,6 +1024,7 @@
     }
 
     let synapseEffectEnabled = true; // toggled via the ⚙️ settings panel
+    let nexusFlowEnabled = true; // toggled via the ⚙️ settings panel — a dot traveling along each nexus line
 
     const Graph = ForceGraph()(elem)
       .graphData({ nodes: [...nodesById.values()], links })
@@ -1152,6 +1194,13 @@
       synapseEffectEnabled = !synapseEffectEnabled;
       synapseBtn.textContent = synapseEffectEnabled ? 'เปิด' : 'ปิด';
       synapseBtn.classList.toggle('on', synapseEffectEnabled);
+    };
+
+    const flowBtn = document.getElementById('flow-toggle');
+    flowBtn.onclick = () => {
+      nexusFlowEnabled = !nexusFlowEnabled;
+      flowBtn.textContent = nexusFlowEnabled ? 'เปิด' : 'ปิด';
+      flowBtn.classList.toggle('on', nexusFlowEnabled);
     };
   })();
   </script>
