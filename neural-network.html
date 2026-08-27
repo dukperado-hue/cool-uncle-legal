@@ -364,28 +364,61 @@
       return node;
     }
 
-    // Force-directed physics doesn't respect insertion order for siblings'
-    // vertical position, so a numeric sort alone (sortedGroupEntries) isn't
-    // visible on screen — pin each sibling's y to a fixed, evenly-spaced
-    // slot in that same sorted order so the numbering is actually readable
-    // top-to-bottom, not just internally consistent.
-    function pinSiblingsVertically(parentNode, childIds, baseSpacing) {
-      const n = childIds.length;
-      const baseY = parentNode.y || 0;
-      // A flat spacing constant is fine for a handful of siblings, but a
-      // dense ring (e.g. อาญา ภาค 2's 14 ลักษณะ, or a หมวด with dozens of
-      // มาตรา leaves) needs proportionally more room per node once there
-      // are enough of them that circles start touching each other - scale
-      // the effective spacing up past 6 siblings (similar in spirit to
-      // neuralnetworklegalcode's ringRadiusFor, which hits the identical
-      // problem for its own radial layout).
-      const spacing = n > 6 ? baseSpacing * (1 + (n - 6) * 0.12) : baseSpacing;
-      childIds.forEach((id, i) => {
+    // ---- vertical layout: tidy-tree pass over the visible nodes ----
+    // Every main-tree node's x is hard-pinned by dagMode('lr'); this pins the
+    // y. The previous approach (pinSiblingsVertically) placed each sibling set
+    // at a fixed spacing centered on the parent's *current* y, with no idea
+    // what an adjacent parent's children were doing — so the moment one parent
+    // had enough descendants to need more vertical room than the gap to its
+    // own sibling, the two families' nodes overlapped at depth ("node ชนกัน
+    // ชั้นลึก / เละเทะ"), and scaling per-ring spacing up only delayed it.
+    // This instead walks the whole visible tree in draw order, hands every
+    // subtree a contiguous vertical band sized to its own contents, and
+    // centers each parent on its own children — so sibling families cannot
+    // collide no matter how deep or dense the expansion. Re-run by refresh()
+    // after every expand / collapse / reset / nexus.
+    const LAYOUT_SLOT = { group: 34, book: 30, level: 22, leaf: 15 };
+    const LAYOUT_SIBLING_GAP = 10; // extra room between consecutive child subtrees
+
+    function layoutSlotFor(node) {
+      if (node.type === 'group') return LAYOUT_SLOT.group;
+      if (node.type === 'subgroup' || node.type === 'book') return LAYOUT_SLOT.book;
+      if (LEVELS.includes(node.type)) return LAYOUT_SLOT.level;
+      return LAYOUT_SLOT.leaf; // article / case
+    }
+
+    function layoutTree() {
+      if (!nodesById.has('root')) return;
+      let cursor = 0;
+      const placed = []; // every node touched this pass, for the recentre below
+      function place(id) {
         const node = nodesById.get(id);
-        const fy = baseY + (i - (n - 1) / 2) * spacing;
-        node.fy = fy;
-        node.y = fy;
-      });
+        if (!node) return cursor;
+        const kids = [...(childrenOf.get(id) || [])];
+        let y;
+        if (kids.length === 0) {
+          const half = layoutSlotFor(node) / 2;
+          cursor += half;
+          y = cursor;
+          cursor += half;
+        } else {
+          const ys = [];
+          kids.forEach((kid, i) => {
+            if (i > 0) cursor += LAYOUT_SIBLING_GAP;
+            ys.push(place(kid));
+          });
+          y = (ys[0] + ys[ys.length - 1]) / 2;
+        }
+        node.fy = y; node.y = y;
+        placed.push(node);
+        return y;
+      }
+      place('root');
+      // Keep the whole visible tree centred on y=0 (the graph's original
+      // convention) — a bare top-down cursor would push everything into
+      // positive y, which throws off the initial zoomToFit and centerAt math.
+      const shift = cursor / 2;
+      for (const node of placed) { node.y -= shift; node.fy -= shift; }
     }
 
     function addLink(a, b, nexus) {
@@ -416,14 +449,13 @@
     }
 
     function refresh() {
+      layoutTree();
       Graph.graphData({ nodes: [...nodesById.values()], links: links.map(l => ({ source: l.source, target: l.target, __nexus: l.__nexus })) });
     }
 
     // ---- root + 6 category nodes (level 0, always visible) ----
-    // fy pinned explicitly (dagMode already hard-pins fx by level) — root was
-    // previously the one main-tree node with a fully free coordinate, only
-    // settling near y=0 by the coincidence of its 6 children's symmetric
-    // spacing rather than by any real guarantee.
+    // x is hard-pinned by dagMode; y (root's included) is owned by layoutTree,
+    // which centres root on its children — fy:0 here is just a pre-layout seed.
     addNode({ id: 'root', name: 'ระบบกฎหมายไทย', type: 'root', size: 8, color: '#ffffff', fy: 0 });
     for (const groupKey in GROUP_INFO) {
       const g = GROUP_INFO[groupKey];
@@ -435,16 +467,14 @@
       addNode(node);
       addLink('root', id);
     }
-    // Force-directed physics doesn't respect insertion order any more for
-    // these 6 top-level categories than it does for any other sibling set -
-    // without pinning, they settle in whatever order the simulation happens
-    // to converge to (observed: วิแพ่ง/มหาชน/แพ่งและพาณิชย์/วิอาญา/อาญา/อื่นๆ,
-    // unrelated to GROUP_INFO's own order). Pin them the same way
-    // pinSiblingsVertically already pins every deeper sibling set, so the
-    // list actually reads top-to-bottom in GROUP_INFO's declared order
-    // (แพ่ง วิแพ่ง อาญา วิอาญา มหาชน อื่นๆ).
-    pinSiblingsVertically(nodesById.get('root'), Object.keys(GROUP_INFO).map(k => 'group:' + k), 30);
+    // Physics respects insertion order for these 6 categories no more than for
+    // any deeper sibling set — without an explicit y they settle in whatever
+    // order the simulation converges to (observed: วิแพ่ง/มหาชน/แพ่งและพาณิชย์/
+    // วิอาญา/อาญา/อื่นๆ, unrelated to GROUP_INFO's order). layoutTree() below
+    // stacks them in GROUP_INFO's declared order (แพ่ง วิแพ่ง อาญา วิอาญา
+    // มหาชน อื่นๆ), same as it lays out every other tier.
     childrenOf.set('root', new Set(Object.keys(GROUP_INFO).map(k => 'group:' + k)));
+    layoutTree();
 
     // Used by both plain multi-book groups (e.g. อื่นๆ) and มหาชน's subgroups
     // (กฎหมายปกครอง / รัฐธรรมนูญ) — both just carry a `books` array.
@@ -456,7 +486,6 @@
         addLink(node.id, id);
         kids.add(id);
       }
-      pinSiblingsVertically(node, [...kids], 22);
       childrenOf.set(node.id, kids);
     }
 
@@ -469,7 +498,6 @@
         addLink(node.id, id);
         kids.add(id);
       }
-      pinSiblingsVertically(node, [...kids], 22);
       childrenOf.set(node.id, kids);
     }
 
@@ -494,7 +522,6 @@
           kids.add(id);
         }
       }
-      pinSiblingsVertically(node, [...kids], 22);
       childrenOf.set(node.id, kids);
     }
 
@@ -519,7 +546,6 @@
           kids.add(id);
         }
       }
-      pinSiblingsVertically(node, [...kids], 22);
       childrenOf.set(node.id, kids);
     }
 
@@ -1132,22 +1158,17 @@
       .onEngineStop(() => { if (pendingFit) { Graph.zoomToFit(400, 70); pendingFit = false; } })
       .onRenderFramePost((ctx, globalScale) => drawNexusOverlay(ctx, globalScale));
 
-    // Charge (Coulomb-style, unbounded inverse-square repulsion) is the
-    // wrong tool for "keep nodes from overlapping" here: every node's x is
-    // hard-pinned by dagMode, and every sibling's y is hard-pinned by
-    // pinSiblingsVertically the instant it's created — charge can't actually
-    // move ANY of them apart once pinned, it just pushes on the handful of
-    // still-free coordinates (root's y; a nexus/case node shared by several
-    // distant parents) and, at high strength, destabilizes those without
-    // fixing any real overlap. A collision force is the correct primitive
-    // for "don't overlap": short-range, only pushes while circles actually
-    // intersect, and always converges (unlike charge's endless-range tug).
-    // Kept small/residual charge purely for a little organic settle on
-    // whatever's still unpinned.
+    // Overlap is now handled entirely by layoutTree (x pinned by dagMode, y
+    // pinned by the tidy-tree pass) — the physics forces can't move a pinned
+    // node anyway. Charge is dialled right down and collide kept only as a
+    // cheap safety net for the few coordinates layoutTree doesn't own (a case
+    // node shared by two distant expanded articles gets its fy from whichever
+    // parent the walk reached last, so its other link can still tug it a
+    // little); neither force does anything to the main ประมวล tree.
     const chargeForce = Graph.d3Force('charge');
-    if (chargeForce) chargeForce.strength(-20);
+    if (chargeForce) chargeForce.strength(-8);
     if (window.d3 && typeof window.d3.forceCollide === 'function') {
-      Graph.d3Force('collide', window.d3.forceCollide(n => n.size + 3).strength(0.9));
+      Graph.d3Force('collide', window.d3.forceCollide(n => n.size + 3).strength(0.6));
     }
 
     let pendingFit = true; // fit-to-view on initial load; bulk actions below re-arm this
