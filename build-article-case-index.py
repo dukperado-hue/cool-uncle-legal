@@ -19,6 +19,14 @@ Re-run this whenever a case file's provisions section changes:
 import json
 import glob
 import re
+import sys
+
+# Windows consoles default to a legacy codepage (e.g. cp874) that can't
+# encode most Thai/Unicode punctuation in the unmatched-sample debug
+# output below — reconfigure to UTF-8 so a run with unmatched refs prints
+# its diagnostics instead of crashing after already writing the index.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 CODEX_PATH = "codex-data.json"
 CASES_GLOB = "prototype/assets/cases/*.json"
@@ -56,20 +64,30 @@ def guess_book(ref, loc):
     return None
 
 
-def extract_number(ref):
+def extract_numbers(ref):
+    """Return EVERY มาตรา number mentioned in a ref string, not just the
+    first. A ref frequently cites a companion article via "...ประกอบมาตรา
+    NNN" (e.g. "มาตรา 1452 ประกอบมาตรา 1495", "มาตรา 288 ประกอบมาตรา 289
+    (4)") — the base article a companion article depends on to mean
+    anything on its own. Using re.search (first match only) silently
+    dropped every companion citation from the index; re.findall here fixes
+    that for every case at once instead of hand-patching each one."""
     ref = ref.translate(THAI_DIGITS)
-    m = re.search(r"มาตรา\s*([0-9]+(?:/[0-9]+)?)", ref)
-    if m:
-        return m.group(1)
-    m = re.search(r"ม\.\s*([0-9]+(?:/[0-9]+)?)", ref)
-    if m:
-        return m.group(1)
-    # "มาตรา 289 (4) — อาญา" already handled above (มาตรา keyword present);
-    # this fallback covers stray "289 — อาญา" style refs with no keyword.
-    m = re.match(r"\s*([0-9]+(?:/[0-9]+)?)\s", ref)
-    if m:
-        return m.group(1)
-    return None
+    nums = re.findall(r"มาตรา\s*([0-9]+(?:/[0-9]+)?)", ref)
+    if not nums:
+        nums = re.findall(r"ม\.\s*([0-9]+(?:/[0-9]+)?)", ref)
+    if not nums:
+        # "289 — อาญา" style refs with no มาตรา/ม. keyword at all.
+        m = re.match(r"\s*([0-9]+(?:/[0-9]+)?)\s", ref)
+        if m:
+            nums = [m.group(1)]
+    seen = set()
+    out = []
+    for n in nums:
+        if n not in seen:
+            seen.add(n)
+            out.append(n)
+    return out
 
 
 def main():
@@ -105,25 +123,26 @@ def main():
                 ref = art.get("ref", "") or ""
                 loc = art.get("loc", "") or ""
                 book = guess_book(ref, loc)
-                number = extract_number(ref) or extract_number(loc)
-                if not book or not number:
+                numbers = extract_numbers(ref) or extract_numbers(loc)
+                if not book or not numbers:
                     unmatched += 1
                     if len(unmatched_samples) < 40:
                         unmatched_samples.append(f"{case_id}: ref={ref!r} loc={loc!r}")
                     continue
                 book_articles = books.get(book, {}).get("articles", {})
-                if number not in book_articles:
-                    unmatched += 1
-                    if len(unmatched_samples) < 40:
-                        unmatched_samples.append(
-                            f"{case_id}: guessed {book}:{number} but not in codex (ref={ref!r})"
-                        )
-                    continue
-                matched += 1
-                key = f"{book}:{number}"
-                bucket = index.setdefault(key, [])
-                if not any(c["id"] == case_id for c in bucket):
-                    bucket.append({"id": case_id, "title": title, "cat": cat, "public": is_public})
+                for number in numbers:
+                    if number not in book_articles:
+                        unmatched += 1
+                        if len(unmatched_samples) < 40:
+                            unmatched_samples.append(
+                                f"{case_id}: guessed {book}:{number} but not in codex (ref={ref!r})"
+                            )
+                        continue
+                    matched += 1
+                    key = f"{book}:{number}"
+                    bucket = index.setdefault(key, [])
+                    if not any(c["id"] == case_id for c in bucket):
+                        bucket.append({"id": case_id, "title": title, "cat": cat, "public": is_public})
 
     json.dump(index, open(OUT_PATH, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 

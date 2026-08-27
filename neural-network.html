@@ -632,16 +632,68 @@
       return nodesById.get('article:' + bookKey + ':' + number) || null;
     }
 
-    const NEXUS_CASES = {
-      'nualchawee-legend-2502': {
-        title: 'คดีนวลฉวี (2502)',
-        issues: [
-          { bookKey: 'criminal', number: '289', label: 'ม.289 ฆ่าผู้อื่นโดยไตร่ตรองไว้ก่อน/เหตุฉกรรจ์' },
-          { bookKey: 'criminal', number: '84', label: 'ม.84 ผู้ใช้ให้กระทำความผิด' },
-          { bookKey: 'civil', number: '1452', label: 'ม.1452 ห้ามสมรสซ้อน' },
-        ],
-      },
-    };
+    // Just case ids — everything else (title, which มาตรา each issue cites,
+    // INCLUDING companion articles like "288 ประกอบ 289") is read live from
+    // the case's own prototype/assets/cases/<id>.json "provisions" section
+    // at nexus-open time, via the same ref-parsing rules as
+    // build-article-case-index.py. This used to be a hand-copied
+    // {bookKey,number} per issue here — which is exactly how it went stale:
+    // a case's provisions ref said "มาตรา 1452 ประกอบมาตรา 1495" but only
+    // 1452 got hand-copied in, and a separate "มาตรา 289 (4)" ref was
+    // missing its required "มาตรา 288 ประกอบ" companion in the SOURCE data
+    // too. Deriving from the live provisions data means a future case only
+    // needs its id added here — its citations (and any companions) are
+    // exactly what's already written for the case's own reading page, with
+    // nothing to keep in sync by hand.
+    const NEXUS_CASE_IDS = ['nualchawee-legend-2502'];
+
+    // Mirrors build-article-case-index.py's BOOK_MATCHERS / extract_numbers
+    // — keep the two in sync if either changes (the Python script is the
+    // index's source of truth; this is the same logic ported to JS since
+    // the site has no build step to share code between them).
+    const NEXUS_BOOK_MATCHERS = [
+      ['civpro', ['ประมวลกฎหมายวิธีพิจารณาความแพ่ง', 'วิ.แพ่ง', 'วิธีพิจารณาความแพ่ง']],
+      ['crimpro', ['ประมวลกฎหมายวิธีพิจารณาความอาญา', 'วิ.อาญา', 'วิธีพิจารณาความอาญา']],
+      ['const2560', ['รัฐธรรมนูญแห่งราชอาณาจักรไทย พ.ศ. 2560', 'รัฐธรรมนูญ 2560', 'รัฐธรรมนูญแห่งราชอาณาจักรไทย']],
+      ['constitution', ['พระธรรมนูญศาลยุติธรรม']],
+      ['adminproc', ['วิธีปฏิบัติราชการทางปกครอง']],
+      ['admincourt', ['จัดตั้งศาลปกครอง', 'ศาลปกครอง']],
+      ['tortofficials', ['ความรับผิดทางละเมิดของเจ้าหน้าที่']],
+      ['copyright', ['ลิขสิทธิ์']],
+      ['patent', ['สิทธิบัตร']],
+      ['trademark', ['เครื่องหมายการค้า']],
+      ['carriage', ['รับขนของทางทะเล']],
+      ['ipcourt', ['ศาลทรัพย์สินทางปัญญา']],
+      ['politicalparty', ['พรรคการเมือง']],
+      ['criminal', ['ประมวลกฎหมายอาญา', 'ป.อ.', '— อาญา', '-อาญา']],
+      ['civil', ['ประมวลกฎหมายแพ่งและพาณิชย์', 'ป.พ.พ.', '— แพ่ง', '-แพ่ง']],
+    ];
+    function nexusGuessBook(ref, loc) {
+      const hay = ref + ' ' + loc;
+      for (const [book, needles] of NEXUS_BOOK_MATCHERS) {
+        for (const needle of needles) if (hay.includes(needle)) return book;
+      }
+      return null;
+    }
+    function nexusExtractNumbers(ref) {
+      const thaiDigits = '๐๑๒๓๔๕๖๗๘๙';
+      const s = ref.replace(/[๐-๙]/g, d => String(thaiDigits.indexOf(d)));
+      let nums = [...s.matchAll(/มาตรา\s*([0-9]+(?:\/[0-9]+)?)/g)].map(m => m[1]);
+      if (nums.length === 0) nums = [...s.matchAll(/ม\.\s*([0-9]+(?:\/[0-9]+)?)/g)].map(m => m[1]);
+      if (nums.length === 0) {
+        const m = s.match(/^\s*([0-9]+(?:\/[0-9]+)?)\s/);
+        if (m) nums = [m[1]];
+      }
+      return [...new Set(nums)];
+    }
+    // Label built from the ref itself (book-name prefix stripped), never
+    // hand-typed — "มาตรา 288 ประกอบมาตรา 289 (4)" reads the companion
+    // relationship straight off the same text the case page shows, so it
+    // can't drift out of sync the way a hand-written summary could.
+    function nexusRefLabel(ref) {
+      const i = ref.indexOf('มาตรา');
+      return i >= 0 ? ref.slice(i) : ref;
+    }
     // The nexus hub/issues are deliberately NOT force-graph nodes. dagMode
     // re-pins every node's fx from graph topology on every single tick
     // (proven live: a hard fx set on a parentless "hub" node visibly reverted
@@ -654,7 +706,7 @@
     // the *live* endpoint (the real มาตรา node), read fresh every frame via
     // graph2ScreenCoords so the connecting line still tracks it through pan/
     // zoom/collapse exactly as it visually moves.
-    let nexusOverlay = null; // { caseId, title, issues: [{label, artNode}] }
+    let nexusOverlay = null; // { caseId, title, issues: [{label, targets: [artNode, ...]}], targetIds }
     let nexusHoverIndex = null; // -1 = hub, 0..n-1 = that issue, null = none
 
     function nexusHubScreenPos() {
@@ -671,17 +723,37 @@
       document.getElementById('nexus-nualchawee-btn').classList.remove('active');
     }
 
-    function openNexus(caseId) {
-      const caseDef = NEXUS_CASES[caseId];
-      if (!caseDef) return;
-      const issues = caseDef.issues.map(issue => ({
-        label: issue.label,
-        bookKey: issue.bookKey,
-        number: issue.number,
-        artNode: revealArticlePath(issue.bookKey, issue.number), // also expands the real tree path down to it
-      }));
-      const targetIds = new Set(issues.filter(i => i.artNode).map(i => i.artNode.id));
-      nexusOverlay = { caseId, title: caseDef.title, issues, targetIds };
+    async function openNexus(caseId) {
+      if (!NEXUS_CASE_IDS.includes(caseId)) return;
+      let caseData;
+      try {
+        caseData = await fetch('prototype/assets/cases/' + caseId + '.json', { cache: 'no-store' }).then(r => r.json());
+      } catch (e) {
+        console.error('nexus: failed to load case data for ' + caseId, e);
+        return;
+      }
+      const provisions = (caseData.read && caseData.read.sections || []).find(s => s.key === 'provisions');
+      const rawArticles = (provisions && provisions.content && provisions.content.articles) || [];
+      const issues = rawArticles.map(a => {
+        const ref = a.ref || '', loc = a.loc || '';
+        const book = nexusGuessBook(ref, loc);
+        const numbers = (book && (nexusExtractNumbers(ref).length ? nexusExtractNumbers(ref) : nexusExtractNumbers(loc))) || [];
+        const targets = numbers
+          .map(n => revealArticlePath(book, n)) // also expands the real tree path down to each one
+          .filter(Boolean);
+        return { label: nexusRefLabel(ref || loc), targets };
+      }).filter(issue => issue.targets.length > 0);
+      if (issues.length === 0) {
+        console.warn('nexus: no matchable provisions articles for ' + caseId);
+        return;
+      }
+      const targetIds = new Set(issues.flatMap(i => i.targets.map(t => t.id)));
+      nexusOverlay = {
+        caseId,
+        title: (caseData.meta && (caseData.meta.title_display || caseData.meta.title)) || caseId,
+        issues,
+        targetIds,
+      };
       document.getElementById('nexus-nualchawee-btn').classList.add('active');
       pendingFit = true;
       refresh();
@@ -717,7 +789,10 @@
         window.open('prototype/read-case.html?id=' + encodeURIComponent(nexusOverlay.caseId), '_blank', 'noopener');
       } else {
         const issue = nexusOverlay.issues[hit];
-        if (issue.artNode) renderArticlePanel(issue.artNode);
+        // A "288 ประกอบ 289" issue has 2 targets - open the base article
+        // (targets are in the same order as the ref text, so [0] is
+        // whichever the ref names first, normally the base provision).
+        if (issue.targets[0]) renderArticlePanel(issue.targets[0]);
       }
     }, true);
 
@@ -764,7 +839,7 @@
         ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
         ctx.restore();
       }
-      function drawDot(x, y, r, label, hovered) {
+      function drawDot(x, y, r, label, hovered, labelBelow) {
         const rr = (hovered ? r * 1.15 : r) / globalScale;
         ctx.beginPath();
         ctx.arc(x, y, rr, 0, Math.PI * 2);
@@ -774,10 +849,21 @@
         ctx.fill();
         ctx.shadowBlur = 0;
         ctx.font = `${12 / globalScale}px Sans-Serif`;
-        ctx.textAlign = 'right';
-        ctx.textBaseline = 'middle';
         ctx.fillStyle = 'rgba(255,255,255,0.9)';
-        ctx.fillText(label, x - rr - 6 / globalScale, y);
+        // The hub's own title runs long and sits at the SAME height as
+        // whichever issue lands in the middle of the fan — placing it below
+        // the circle instead of to the left (where every issue label
+        // already lives) keeps the two from overlapping into an unreadable
+        // smear regardless of how many issues a case has.
+        if (labelBelow) {
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'top';
+          ctx.fillText(label, x, y + rr + 6 / globalScale);
+        } else {
+          ctx.textAlign = 'right';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(label, x - rr - 6 / globalScale, y);
+        }
       }
 
       // lines under the circles
@@ -785,18 +871,20 @@
         const p = issuePos[i];
         const hoveredThis = nexusHoverIndex === -1 || nexusHoverIndex === i;
         synapseStroke(hub.x, hub.y, p.x, p.y, hoveredThis, i * 1.7);
-        if (issue.artNode) {
-          // The real มาตรา node's own x/y (already graph-space — it's the
-          // one true endpoint, no duplicate law node) tracked live every
-          // frame, so the line keeps landing on it through pan/zoom/collapse.
-          synapseStroke(p.x, p.y, issue.artNode.x, issue.artNode.y, hoveredThis, i * 1.7 + 3.1);
-        }
+        // An issue citing a companion article ("288 ประกอบ 289") fans out to
+        // EVERY real มาตรา node it names, not just one — each target's own
+        // x/y (already graph-space, no duplicate law node) is read live
+        // every frame, so every line keeps landing correctly through pan/
+        // zoom/collapse.
+        issue.targets.forEach((art, j) => {
+          synapseStroke(p.x, p.y, art.x, art.y, hoveredThis, i * 1.7 + 3.1 + j * 0.6);
+        });
       });
       nexusOverlay.issues.forEach((issue, i) => {
         const p = issuePos[i];
         drawDot(p.x, p.y, 8, issue.label, nexusHoverIndex === i);
       });
-      drawDot(hub.x, hub.y, 11, nexusOverlay.title, nexusHoverIndex === -1);
+      drawDot(hub.x, hub.y, 11, nexusOverlay.title, nexusHoverIndex === -1, true);
     }
 
     function articleText(bookKey, number) {
@@ -933,10 +1021,21 @@
         // are what this case is about" — everything else's label is just
         // noise competing with the glowing lines pointing at them. Keep the
         // circles (so the tree's shape still reads) but only the nexus's
-        // own real target nodes keep their text.
-        const nexusLabelsOnly = nexusOverlay && !nexusOverlay.targetIds.has(node.id);
-        if (globalScale > 0.9 && !nexusLabelsOnly) {
-          ctx.font = `${fontSize}px Sans-Serif`;
+        // own real target nodes keep their text — and those need to stay
+        // legible AT ANY ZOOM LEVEL (opening a nexus routinely zooms out
+        // to fit both revealed trees, well past the normal globalScale>0.9
+        // label cutoff), since they're the one thing the whole feature is
+        // meant to point at.
+        const isNexusTarget = nexusOverlay && nexusOverlay.targetIds.has(node.id);
+        const showLabel = nexusOverlay ? isNexusTarget : globalScale > 0.9;
+        if (showLabel) {
+          // A forced nexus-target label can be showing at a globalScale far
+          // below the normal >0.9 floor (nexus routinely zooms out to fit
+          // two revealed trees) — clamp so it reads as a normal-sized label
+          // instead of ballooning with 12/globalScale like an unclamped
+          // zoomed-out node would.
+          const clampedFontSize = isNexusTarget ? Math.min(fontSize, 14) : fontSize;
+          ctx.font = `${clampedFontSize}px Sans-Serif`;
           ctx.textAlign = 'left';
           ctx.textBaseline = 'middle';
           ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
