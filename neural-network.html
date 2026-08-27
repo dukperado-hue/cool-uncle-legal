@@ -658,11 +658,11 @@
     let nexusHoverIndex = null; // -1 = hub, 0..n-1 = that issue, null = none
 
     function nexusHubScreenPos() {
-      return { x: Graph.width() * 0.82, y: Graph.height() * 0.5 };
+      return { x: Graph.width() * 0.94, y: Graph.height() * 0.5 };
     }
     function nexusIssueScreenPos(i, n) {
       const hub = nexusHubScreenPos();
-      return { x: hub.x + 130, y: hub.y + (i - (n - 1) / 2) * 62 };
+      return { x: hub.x - 130, y: hub.y + (i - (n - 1) / 2) * 62 };
     }
 
     function closeNexus() {
@@ -680,7 +680,8 @@
         number: issue.number,
         artNode: revealArticlePath(issue.bookKey, issue.number), // also expands the real tree path down to it
       }));
-      nexusOverlay = { caseId, title: caseDef.title, issues };
+      const targetIds = new Set(issues.filter(i => i.artNode).map(i => i.artNode.id));
+      nexusOverlay = { caseId, title: caseDef.title, issues, targetIds };
       document.getElementById('nexus-nualchawee-btn').classList.add('active');
       pendingFit = true;
       refresh();
@@ -928,7 +929,13 @@
         ctx.shadowBlur = node.__shaking ? 28 : 15;
         ctx.fill();
         ctx.shadowBlur = 0;
-        if (globalScale > 0.9) {
+        // While a nexus is open, its whole point is "these specific มาตรา
+        // are what this case is about" — everything else's label is just
+        // noise competing with the glowing lines pointing at them. Keep the
+        // circles (so the tree's shape still reads) but only the nexus's
+        // own real target nodes keep their text.
+        const nexusLabelsOnly = nexusOverlay && !nexusOverlay.targetIds.has(node.id);
+        if (globalScale > 0.9 && !nexusLabelsOnly) {
           ctx.font = `${fontSize}px Sans-Serif`;
           ctx.textAlign = 'left';
           ctx.textBaseline = 'middle';
