@@ -186,14 +186,22 @@
   "anti_reveal_rules": []
  },
  "media": {
-  "video": "https://www.youtube.com/watch?v=sb4AeGHU75M",
-  "status": "available"
+  "video": {
+   "youtube_id": "sb4AeGHU75M",
+   "title": "จุดจบตี๋ใหญ่ จอมโจรขมังเวทย์ | ความจริงไม่ตาย",
+   "channel": "Thai PBS",
+   "verified_working": true,
+   "verified_at": "2026-08-28",
+   "verify_method": "YouTube oEmbed API (title/channel confirmed)"
+  },
+  "status": "has_video"
  },
  "sources": {
   "seed_facts": [
    "Batch 34-37 Production Sync",
    "2026-08-28: tee-yai: overview 1→3, +3 analysis อธิบายกลไกวิสามัญฯ (ม.150 ว.3 ไต่สวนการตายโดยศาล / ม.68 ป้องกัน / ม.69 เกินสมควร), แก้ anchor ประเด็นที่ 1 ที่เดิมสับสน, blurb, read_minutes",
-   "2026-08-28: ขยายเรื่องเล่าตามคำผู้ใช้ — overview 4 ย่อหน้า + เพิ่ม section background + timeline 8 จุด + analysis 4 ย่อหน้า; แหล่ง th.wikipedia.org/wiki/ตี๋ใหญ่ + dailynews.co.th/articles/817524 + pptvhd36.com/news/สังคม/261499; เพิ่ม ป.อาญา ม.84 (กรณีข่าวตำรวจจ้างคนใกล้ตัวลงมือ) + 1 ประเด็นกฎหมาย; read 8m"
+   "2026-08-28: ขยายเรื่องเล่าตามคำผู้ใช้ — overview 4 ย่อหน้า + เพิ่ม section background + timeline 8 จุด + analysis 4 ย่อหน้า; แหล่ง th.wikipedia.org/wiki/ตี๋ใหญ่ + dailynews.co.th/articles/817524 + pptvhd36.com/news/สังคม/261499; เพิ่ม ป.อาญา ม.84 (กรณีข่าวตำรวจจ้างคนใกล้ตัวลงมือ) + 1 ประเด็นกฎหมาย; read 8m",
+   "2026-08-28: แปลง media.video จาก string URL เป็น object {youtube_id,verified_working} เพื่อให้คลิปแสดงบนหน้า read-case (Thai PBS: จุดจบตี๋ใหญ่ จอมโจรขมังเวทย์)"
   ]
  },
  "migration": {
