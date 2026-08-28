@@ -108,15 +108,23 @@
   "anti_reveal_rules": []
  },
  "media": {
-  "video": "https://www.youtube.com/watch?v=-MCFBhiGk2Y",
-  "status": "available"
+  "video": {
+   "youtube_id": "-MCFBhiGk2Y",
+   "title": "ปิดตำนานคดีมหากาพย์ 'เงินทอนวัด' | Explainer EP.10 : Matichon TV",
+   "channel": "matichon tv",
+   "verified_working": true,
+   "verified_at": "2026-08-28",
+   "verify_method": "YouTube oEmbed API (title/channel confirmed on-topic)"
+  },
+  "status": "has_video"
  },
  "sources": {
   "seed_facts": [
    "https://www.amarintv.com/news/crime/542480",
    "https://www.nationtv.tv/news/current-issue/378975645",
    "https://www.naewna.com/local/956541",
-   "https://mgronline.com/specialscoop/detail/9690000032370"
+   "https://mgronline.com/specialscoop/detail/9690000032370",
+   "2026-08-28: แปลง media.video (string URL) เป็น object {youtube_id,verified_working} เพื่อให้คลิปแสดงบน read-case (matichon tv)"
   ]
  },
  "migration": {
@@ -129,6 +137,7 @@
   "schema_ok": true,
   "paragraph_ok": true,
   "gate": "none",
-  "checked_at": "2026-08-24"
+  "checked_at": "2026-08-24",
+  "last_changed_after_validation": true
  }
 }

@@ -140,14 +140,22 @@
   "anti_reveal_rules": []
  },
  "media": {
-  "video": "https://www.youtube.com/watch?v=Qzbt-Sp7fM4",
-  "status": "available"
+  "video": {
+   "youtube_id": "Qzbt-Sp7fM4",
+   "title": "กบฏ ร.ศ. 130 กับเหตุการณ์ลอบปลงพระชนม์ รัชกาลที่ 6 | เรื่องเล่าหลังเที่ยงคืน EP.41",
+   "channel": "Thairath Studio",
+   "verified_working": true,
+   "verified_at": "2026-08-28",
+   "verify_method": "YouTube oEmbed API (title/channel confirmed on-topic)"
+  },
+  "status": "has_video"
  },
  "sources": {
   "seed_facts": [
    "https://wiki.kpi.ac.th/index.php?title=เหตุการณ์_ร.ศ._130",
    "https://pridi.or.th/th/content/2024/03/1868",
-   "https://pridi.or.th/th/content/2023/03/1461"
+   "https://pridi.or.th/th/content/2023/03/1461",
+   "2026-08-28: แปลง media.video (string URL) เป็น object {youtube_id,verified_working} เพื่อให้คลิปแสดงบน read-case (Thairath Studio)"
   ],
   "legacy_ref": null
  },
@@ -164,6 +172,6 @@
   "links_ok": true,
   "gate": "none",
   "last_validated_at": "2026-08-24T00:00:00+07:00",
-  "last_changed_after_validation": false
+  "last_changed_after_validation": true
  }
 }

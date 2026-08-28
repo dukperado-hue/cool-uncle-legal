@@ -188,8 +188,15 @@
   "anti_reveal_rules": []
  },
  "media": {
-  "video": "https://www.youtube.com/watch?v=UxkhU7lwARM",
-  "status": "available"
+  "video": {
+   "youtube_id": "UxkhU7lwARM",
+   "title": "ย้อนคดีดัง ฆ่าหั่นศพ เจนจิรา เพราะรักจึงดับลมหายใจ | Crime Machine EP.6",
+   "channel": "Thairath Variety",
+   "verified_working": true,
+   "verified_at": "2026-08-28",
+   "verify_method": "YouTube oEmbed API (title/channel confirmed on-topic)"
+  },
+  "status": "has_video"
  },
  "sources": {
   "seed_facts": [
@@ -200,7 +207,8 @@
    "https://mgronline.com/crime/detail/9540000155653",
    "https://www.sanook.com/news/1078442/",
    "https://www.posttoday.com/politics/125845",
-   "https://mgronline.com/crime/detail/9560000130844"
+   "https://mgronline.com/crime/detail/9560000130844",
+   "2026-08-28: แปลง media.video (string URL) เป็น object {youtube_id,verified_working} เพื่อให้คลิปแสดงบน read-case (Thairath Variety)"
   ]
  },
  "migration": {
@@ -216,6 +224,7 @@
   "sections_complete": true,
   "links_ok": true,
   "gate": "none",
-  "last_validated_at": "2026-08-26T00:00:00+07:00"
+  "last_validated_at": "2026-08-26T00:00:00+07:00",
+  "last_changed_after_validation": true
  }
 }

@@ -134,12 +134,20 @@
   "anti_reveal_rules": []
  },
  "media": {
-  "video": "https://www.youtube.com/watch?v=jNsmFv1LSUo",
-  "status": "available"
+  "video": {
+   "youtube_id": "jNsmFv1LSUo",
+   "title": "กบฏสันติภาพ",
+   "channel": "iss sabaithip",
+   "verified_working": true,
+   "verified_at": "2026-08-28",
+   "verify_method": "YouTube oEmbed API (title/channel confirmed on-topic)"
+  },
+  "status": "has_video"
  },
  "sources": {
   "seed_facts": [
-   "Batch 34-37 Production Sync"
+   "Batch 34-37 Production Sync",
+   "2026-08-28: แปลง media.video (string URL) เป็น object {youtube_id,verified_working} เพื่อให้คลิปแสดงบน read-case (iss sabaithip)"
   ]
  },
  "migration": {
@@ -152,6 +160,7 @@
   "schema_ok": true,
   "paragraph_ok": true,
   "gate": "none",
-  "checked_at": "2026-08-21"
+  "checked_at": "2026-08-21",
+  "last_changed_after_validation": true
  }
 }

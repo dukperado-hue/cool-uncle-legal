@@ -162,13 +162,14 @@
   "anti_reveal_rules": []
  },
  "media": {
-  "video": "https://www.youtube.com/watch?v=ZbNlNE1eR88",
-  "status": "available"
+  "video": null,
+  "status": "no_video"
  },
  "sources": {
   "seed_facts": [
    "Batch 34-37 Production Sync",
-   "2026-08-28: illegitimate-child: ขยาย overview อธิบายกลไก ม.1546/1547/1627 + เพิ่ม ม.1555(7) เทียบพฤติการณ์รับรองโดยพฤตินัย, 2 ประเด็นกฎหมายใหม่, blurb, read_minutes"
+   "2026-08-28: illegitimate-child: ขยาย overview อธิบายกลไก ม.1546/1547/1627 + เพิ่ม ม.1555(7) เทียบพฤติการณ์รับรองโดยพฤตินัย, 2 ประเด็นกฎหมายใหม่, blurb, read_minutes",
+   "2026-08-28: ลบ media.video — ลิงก์เดิมชี้คลิป Living Will (คนละคดี) (ต้องหาคลิปที่ตรงคดีใหม่)"
   ]
  },
  "migration": {

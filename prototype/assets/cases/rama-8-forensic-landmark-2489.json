@@ -210,8 +210,15 @@
   "anti_reveal_rules": []
  },
  "media": {
-  "video": "https://www.youtube.com/watch?v=iuIXd5Tx-88",
-  "status": "available"
+  "video": {
+   "youtube_id": "iuIXd5Tx-88",
+   "title": "ใครฆ่า ร.๘ ปริศนาประวัติศาสตร์ ที่นำมาสู่การฟื้นคดีสวรรคต 1/2 | ประวัติศาสตร์นอกตำรา EP.305",
+   "channel": "ประวัติศาสตร์ นอกตำรา",
+   "verified_working": true,
+   "verified_at": "2026-08-28",
+   "verify_method": "YouTube oEmbed API (title/channel confirmed on-topic)"
+  },
+  "status": "has_video"
  },
  "sources": {
   "seed_facts": [
@@ -223,7 +230,8 @@
    "https://www.theisaander.com/post/220217loveanddeathofchit",
    "https://themomentum.co/report-the-court-of-appeal-chit-singhaseni/",
    "https://prachatai.com/journal/2023/10/106433",
-   "2026-08-28: เพิ่ม ป.อาญา ม.107 (ปลงพระชนม์ฯ — ตระเตรียม/พยายามก็ผิดสำเร็จ) และ ม.59 เทียบหลักตระเตรียม ตามคำแนะนำผู้ใช้ ว่าแก่นคดีคือความผิดต่อองค์พระมหากษัตริย์"
+   "2026-08-28: เพิ่ม ป.อาญา ม.107 (ปลงพระชนม์ฯ — ตระเตรียม/พยายามก็ผิดสำเร็จ) และ ม.59 เทียบหลักตระเตรียม ตามคำแนะนำผู้ใช้ ว่าแก่นคดีคือความผิดต่อองค์พระมหากษัตริย์",
+   "2026-08-28: แปลง media.video (string URL) เป็น object {youtube_id,verified_working} เพื่อให้คลิปแสดงบน read-case (ประวัติศาสตร์ นอกตำรา)"
   ]
  },
  "migration": {

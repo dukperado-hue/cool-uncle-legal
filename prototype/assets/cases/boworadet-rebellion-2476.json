@@ -150,14 +150,22 @@
   "anti_reveal_rules": []
  },
  "media": {
-  "video": "https://www.youtube.com/watch?v=cqgEUPtrkJc",
-  "status": "available"
+  "video": {
+   "youtube_id": "cqgEUPtrkJc",
+   "title": "\"กบฏบวรเดช\" จากมิตรกลายเป็นศัตรู แค้นที่ต้องชำระ",
+   "channel": "CHERRYMAN",
+   "verified_working": true,
+   "verified_at": "2026-08-28",
+   "verify_method": "YouTube oEmbed API (title/channel confirmed on-topic)"
+  },
+  "status": "has_video"
  },
  "sources": {
   "seed_facts": [
    "https://th.wikipedia.org/wiki/กบฏบวรเดช",
    "https://pridi.or.th/th/content/2021/10/857",
-   "https://pridi.or.th/th/content/2022/10/1293"
+   "https://pridi.or.th/th/content/2022/10/1293",
+   "2026-08-28: แปลง media.video (string URL) เป็น object {youtube_id,verified_working} เพื่อให้คลิปแสดงบน read-case (CHERRYMAN)"
   ],
   "legacy_ref": null
  },
@@ -174,6 +182,6 @@
   "links_ok": true,
   "gate": "none",
   "last_validated_at": "2026-08-24T00:00:00+07:00",
-  "last_changed_after_validation": false
+  "last_changed_after_validation": true
  }
 }

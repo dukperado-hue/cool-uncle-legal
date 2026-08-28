@@ -151,13 +151,21 @@
   "anti_reveal_rules": []
  },
  "media": {
-  "video": "https://www.youtube.com/watch?v=PDK5zW4J4vE",
-  "status": "available"
+  "video": {
+   "youtube_id": "PDK5zW4J4vE",
+   "title": "ราชกิจจา Digest ตอน กฎหมายสมรสเท่าเทียม สรุป พ.ร.บ. ใหม่",
+   "channel": "TV5HD ONLINE",
+   "verified_working": true,
+   "verified_at": "2026-08-28",
+   "verify_method": "YouTube oEmbed API (title/channel confirmed on-topic)"
+  },
+  "status": "has_video"
  },
  "sources": {
   "seed_facts": [
    "Batch 34-37 Production Sync",
-   "2026-08-28: marriage-equality: overview 1→4 ย่อหน้า (คำวินิจฉัย 20/2564, ร่างภาคประชาชน, ทำไมเลือกแก้ ป.พ.พ. แทน พ.ร.บ.คู่ชีวิต, พ.ร.บ.ฉ.24), +3 analysis, +1 ประเด็น, blurb, read_minutes"
+   "2026-08-28: marriage-equality: overview 1→4 ย่อหน้า (คำวินิจฉัย 20/2564, ร่างภาคประชาชน, ทำไมเลือกแก้ ป.พ.พ. แทน พ.ร.บ.คู่ชีวิต, พ.ร.บ.ฉ.24), +3 analysis, +1 ประเด็น, blurb, read_minutes",
+   "2026-08-28: แปลง media.video (string URL) เป็น object {youtube_id,verified_working} เพื่อให้คลิปแสดงบน read-case (TV5HD ONLINE)"
   ]
  },
  "migration": {

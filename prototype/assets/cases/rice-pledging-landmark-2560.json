@@ -116,12 +116,13 @@
   "anti_reveal_rules": []
  },
  "media": {
-  "video": "https://www.youtube.com/watch?v=F9LzqC4tFoY",
-  "status": "available"
+  "video": null,
+  "status": "no_video"
  },
  "sources": {
   "seed_facts": [
-   "Economic Series Sync"
+   "Economic Series Sync",
+   "2026-08-28: ลบ media.video — ลิงก์เดิมชี้คลิปคดีโฮปเวลล์ (คนละคดี) (ต้องหาคลิปที่ตรงคดีใหม่)"
   ]
  },
  "migration": {
@@ -134,6 +135,7 @@
   "schema_ok": true,
   "paragraph_ok": true,
   "gate": "none",
-  "checked_at": "2026-08-21"
+  "checked_at": "2026-08-21",
+  "last_changed_after_validation": true
  }
 }
