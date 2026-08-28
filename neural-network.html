@@ -24,18 +24,16 @@
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
       z-index: 5;
     }
-    #ui-panel h2 { margin: 0 0 10px; font-size: 20px; }
-    .brand-row { pointer-events: auto; margin-bottom: 6px; }
-    .brand-row a.back-link {
+    .brand-row {
+      pointer-events: auto;
       display: flex;
       align-items: center;
-      gap: 8px;
-      color: #7fd8ff;
-      text-decoration: none;
-      font-size: 12.5px;
+      gap: 10px;
+      margin-bottom: 10px;
     }
-    .brand-row a.back-link:hover { text-decoration: underline; }
-    .brand-logo { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex: 0 0 auto; }
+    .brand-home { display: flex; flex: 0 0 auto; }
+    .brand-logo { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
+    .brand-title { font-size: 20px; font-weight: 600; }
 
     .graph-tools { display: flex; gap: 8px; pointer-events: auto; flex-wrap: wrap; }
     .tool-btn {
@@ -49,6 +47,33 @@
     }
     .tool-btn:hover { background: rgba(255,255,255,0.18); }
     .tool-btn.active { background: rgba(255,204,68,0.28); border-color: #ffcc44; }
+
+    #nexus-menu {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 8px;
+      padding: 8px;
+      max-width: 270px;
+      background: rgba(10,10,25,0.85);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      backdrop-filter: blur(4px);
+      pointer-events: auto;
+    }
+    #nexus-menu.open { display: flex; }
+    .nexus-item {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #fff;
+      font-size: 11.5px;
+      text-align: left;
+      padding: 6px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .nexus-item:hover { background: rgba(255,204,68,0.18); }
+    .nexus-item.active { background: rgba(255,204,68,0.28); border-color: #ffcc44; }
 
     .graph-search { display: flex; gap: 6px; margin-top: 8px; pointer-events: auto; flex-wrap: wrap; }
     .search-field {
@@ -66,14 +91,14 @@
     #search-num.search-miss { border-color: #ff6b6b; color: #ff9d9d; }
 
     #settings-toggle {
-      position: absolute; bottom: 16px; left: 16px; z-index: 6;
+      position: absolute; bottom: 16px; right: 16px; z-index: 11;
       width: 42px; height: 42px; border-radius: 50%;
       background: rgba(10,10,25,0.7); border: 1px solid rgba(255,255,255,0.25);
       color: #fff; font-size: 19px; cursor: pointer; pointer-events: auto;
     }
     #settings-toggle:hover { background: rgba(255,255,255,0.18); }
     #settings-panel {
-      position: absolute; bottom: 66px; left: 16px; z-index: 6;
+      position: absolute; bottom: 66px; right: 16px; z-index: 11;
       background: rgba(10, 10, 25, 0.8); border: 1px solid rgba(255,255,255,0.15);
       border-radius: 10px; padding: 12px 14px; font-size: 12.5px;
       backdrop-filter: blur(4px); display: none; min-width: 220px;
@@ -199,17 +224,15 @@
 
   <div id="ui-panel">
     <div class="brand-row">
-      <a class="back-link" href="index.html">
+      <a class="brand-home" href="index.html" title="กลับ coolunclelab">
         <img class="brand-logo" src="pics/capybara-detective.png" alt="">
-        <span>back to coolunclelab</span>
       </a>
+      <span class="brand-title">รัศมีนิติธรรม</span>
     </div>
-    <h2>รัศมีนิติธรรม</h2>
     <div class="graph-tools">
-      <button id="reset-btn" class="tool-btn">🔄 รีเซ็ต</button>
-      <button id="expand-all-btn" class="tool-btn">🌐 ขยายทุก node</button>
-      <button id="nexus-nualchawee-btn" class="tool-btn">🕸️ Nexus: คดีนวลฉวี</button>
+      <button id="nexus-toggle" class="tool-btn">🕸️ Nexus คดี ▾</button>
     </div>
+    <div id="nexus-menu"></div>
     <div class="graph-search">
       <select id="search-book" class="search-field" title="เลือกเล่ม"></select>
       <input id="search-num" class="search-field" type="text" inputmode="numeric" autocomplete="off" placeholder="เลขมาตรา" />
@@ -221,9 +244,10 @@
 
   <button id="settings-toggle" title="ตั้งค่า">⚙️</button>
   <div id="settings-panel">
+    <div class="setting-row"><span>🔄 รีเซ็ตกราฟ</span><button id="reset-btn-menu" class="switch-btn">รีเซ็ต</button></div>
+    <div class="setting-row"><span>🌐 ขยายทุก node</span><button id="expand-all-btn-menu" class="switch-btn">ขยาย</button></div>
     <div class="setting-row"><span>🎵 เพลงพื้นหลัง</span><button id="music-toggle" class="switch-btn">ปิด</button></div>
     <div class="setting-row"><span>🌀 Motion (ดาวเคลื่อนไหว)</span><button id="motion-toggle" class="switch-btn on">เปิด</button></div>
-    <div class="setting-row"><span>🔄 รีเซ็ตกราฟ</span><button id="reset-btn-menu" class="switch-btn">รีเซ็ต</button></div>
     <div class="setting-row"><span>🧠 เส้นแสงประสาท (Synapse)</span><button id="synapse-toggle" class="switch-btn on">เปิด</button></div>
     <div class="setting-row"><span>💫 เส้นขยับตาม (Flow)</span><button id="flow-toggle" class="switch-btn on">เปิด</button></div>
   </div>
@@ -691,7 +715,27 @@
     // needs its id added here — its citations (and any companions) are
     // exactly what's already written for the case's own reading page, with
     // nothing to keep in sync by hand.
-    const NEXUS_CASE_IDS = ['nualchawee-legend-2502'];
+    // All nexus cases live under the single 🕸️ "Nexus คดี" menu top-left —
+    // pick one and its citation fan-out replaces whatever was showing (only
+    // one nexus overlay open at a time). Each id just needs to be listed
+    // here; every issue line (and its companion articles) is still read live
+    // from the case's own prototype/assets/cases/<id>.json "provisions"
+    // section at open time, so nothing about the citations is kept in sync
+    // by hand. The label is only the menu caption — the overlay's own title
+    // comes from the case's meta.title_display.
+    const NEXUS_CASES = [
+      { id: 'nualchawee-legend-2502',          label: 'คดีนวลฉวี (2502)' },
+      { id: 'four-ministers-murder-2492',      label: 'สังหาร 4 อดีตรัฐมนตรี (2492)' },
+      { id: 'sherry-ann-duncan-scapegoat-2529', label: 'เชอรี่ แอน ดันแคน (2529)' },
+      { id: 'shayamala-2536',                  label: 'คดีศยามล ลาภก่อเกียรติ (2536)' },
+      { id: 'janeera-2541',                    label: 'ฆาตกรรมนักศึกษาแพทย์ (2541)' },
+      { id: 'serm-sakonrat-41',                label: 'คดีเสริม สาครราษฎร์ (2541)' },
+      { id: 'wisut-2544',                      label: 'หมอฆ่าภรรยาหั่นศพ (2544)' },
+      { id: 'si-quey-human-rights-2563',       label: 'คดีซีอุย (2563)' },
+      { id: 'banyin-suchuwong-2567',           label: 'บรรยิน–เสี่ยชูวงษ์ (2567)' },
+      { id: 'marriage-equality-landmark-2567', label: 'สมรสเท่าเทียม (2567)' },
+    ];
+    const NEXUS_CASE_IDS = NEXUS_CASES.map(c => c.id);
 
     // Mirrors build-article-case-index.py's BOOK_MATCHERS / extract_numbers
     // — keep the two in sync if either changes (the Python script is the
@@ -771,9 +815,10 @@
 
     function closeNexus() {
       nexusRequestId++;
+      document.getElementById('nexus-toggle').classList.remove('active');
+      document.querySelectorAll('#nexus-menu .nexus-item.active').forEach(el => el.classList.remove('active'));
       if (!nexusOverlay) return;
       nexusOverlay = null;
-      document.getElementById('nexus-nualchawee-btn').classList.remove('active');
     }
 
     async function openNexus(caseId) {
@@ -809,7 +854,10 @@
         issues,
         targetIds,
       };
-      document.getElementById('nexus-nualchawee-btn').classList.add('active');
+      document.getElementById('nexus-toggle').classList.add('active');
+      document.querySelectorAll('#nexus-menu .nexus-item').forEach(el => {
+        el.classList.toggle('active', el.dataset.caseId === caseId);
+      });
       pendingFit = true;
       refresh();
     }
@@ -996,6 +1044,12 @@
       const panelWidth = panel.classList.contains('open') ? Math.min(360, window.innerWidth * 0.88) : 0;
       Graph.width(window.innerWidth - panelWidth).height(window.innerHeight);
       Graph.zoomToFit(400, 70);
+      // The ⚙️ gear + its menu sit bottom-right; when the side panel slides in
+      // from that same edge, nudge them left of it so reset / ขยายทุก node stay
+      // reachable while a มาตรา or คดี panel is open.
+      const off = (panelWidth ? panelWidth + 16 : 16) + 'px';
+      document.getElementById('settings-toggle').style.right = off;
+      document.getElementById('settings-panel').style.right = off;
     }
 
     function showPanel(html) {
@@ -1200,7 +1254,6 @@
       pendingFit = true;
       refresh();
     }
-    document.getElementById('reset-btn').onclick = doReset;
     document.getElementById('reset-btn-menu').onclick = doReset;
 
     // Expand one level deeper for every node currently on screen that isn't
@@ -1208,7 +1261,7 @@
     // full recursive expand-to-every-มาตรา (codex-data.json has 4,275
     // articles; doing that in one click would just produce an unusable
     // hairball). Click repeatedly to keep drilling the whole visible graph.
-    document.getElementById('expand-all-btn').onclick = () => {
+    document.getElementById('expand-all-btn-menu').onclick = () => {
       const toExpand = [...nodesById.values()].filter(n =>
         n.type !== 'root' && n.type !== 'case' &&
         (!childrenOf.has(n.id) || childrenOf.get(n.id).size === 0)
@@ -1218,10 +1271,23 @@
       refresh();
     };
 
-    document.getElementById('nexus-nualchawee-btn').onclick = () => {
-      if (nexusOverlay) closeNexus();
-      else openNexus('nualchawee-legend-2502');
-    };
+    // ---- 🕸️ Nexus menu: one dropdown, ten cases, one overlay at a time ----
+    const nexusToggle = document.getElementById('nexus-toggle');
+    const nexusMenu = document.getElementById('nexus-menu');
+    NEXUS_CASES.forEach(c => {
+      const b = document.createElement('button');
+      b.className = 'nexus-item';
+      b.textContent = c.label;
+      b.dataset.caseId = c.id;
+      b.onclick = () => {
+        nexusMenu.classList.remove('open');
+        const alreadyThis = nexusOverlay && nexusOverlay.caseId === c.id;
+        closeNexus();
+        if (!alreadyThis) openNexus(c.id); // click the open case again = just close it
+      };
+      nexusMenu.appendChild(b);
+    });
+    nexusToggle.onclick = () => nexusMenu.classList.toggle('open');
 
     // ---- 🔍 minimal article search: jump straight to one มาตรา ----
     // Reuses revealArticlePath (the same walker the nexus uses) to open only
