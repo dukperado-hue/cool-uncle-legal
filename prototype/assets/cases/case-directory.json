@@ -1,15 +1,15 @@
 {
  "_meta": {
   "generated_by": "build-case-directory.py",
-  "total": 56,
-  "public": 56,
+  "total": 58,
+  "public": 58,
   "rulings": 3,
   "landmark": 7,
   "buckets": [
    {
     "key": "criminal",
     "label": "อาญา",
-    "count": 24
+    "count": 26
    },
    {
     "key": "economic",
@@ -1009,6 +1009,33 @@
    "read_minutes": 7
   },
   {
+   "id": "dhammachayo-klongchan-2560",
+   "title": "คดีอดีตพระธัมมชโย — รับของโจร/ฟอกเงิน เงินสหกรณ์เครดิตยูเนี่ยนคลองจั่น (พ.ศ. 2560)",
+   "year": 2560,
+   "year_raw": "2560",
+   "bucket": "criminal",
+   "bucket_label": "อาญา",
+   "buckets": [
+    "criminal"
+   ],
+   "bucket_labels": [
+    "อาญา"
+   ],
+   "cat_raw": "คดีอาญา",
+   "blurb": "เงินสหกรณ์คลองจั่นกว่า 1,200 ล้านไหลเข้าวัดธรรมกาย สู่ ม.44 ปิดล้อมวัด และคดีที่จบเพราะขาดอายุความ",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 78,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": null
+  },
+  {
    "id": "amdaeng-pom-2347",
    "title": "คดีอำแดงป้อม: จุดกำเนิดกฎหมายตราสามดวง",
    "year": 2347,
@@ -1115,6 +1142,33 @@
    "grade": "A",
    "grade_raw": "A",
    "score": 80,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": null
+  },
+  {
+   "id": "phra-phrom-sit-wat-saket-2561",
+   "title": "คดีเงินทอนวัดสระเกศ — อดีตพระพรหมสิทธิ (ธงชัย สุขญาณกิจ) (พ.ศ. 2561)",
+   "year": 2561,
+   "year_raw": "2561",
+   "bucket": "criminal",
+   "bucket_label": "อาญา",
+   "buckets": [
+    "criminal"
+   ],
+   "bucket_labels": [
+    "อาญา"
+   ],
+   "cat_raw": "คดีอาญา",
+   "blurb": "อดีตกรรมการมหาเถรสมาคมถูกกวาดล้างเงินทอนวัด ถอดสมณศักดิ์ ต้องโทษบางข้อหา แล้วได้สมณศักดิ์คืน",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 78,
    "s_verified": false,
    "public": true,
    "has_play": true,
