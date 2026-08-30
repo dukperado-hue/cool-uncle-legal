@@ -9,8 +9,9 @@
   ]
  },
  "visibility": {
-  "public": true,
-  "gate": "none"
+  "public": false,
+  "gate": "none",
+  "public_reason": "unpublished 2026-08-30: ต่ำกว่าเกณฑ์ความยาว/ยืนยันแหล่งอ้างอิงไม่ได้ (backend cleanup)"
  },
  "rank": {
   "grade": "S_CANDIDATE",
