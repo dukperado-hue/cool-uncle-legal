@@ -1,25 +1,25 @@
 {
  "_meta": {
   "generated_by": "build-case-directory.py",
-  "total": 49,
-  "public": 49,
+  "total": 56,
+  "public": 56,
   "rulings": 3,
   "landmark": 7,
   "buckets": [
    {
     "key": "criminal",
     "label": "อาญา",
-    "count": 19
+    "count": 24
    },
    {
     "key": "economic",
     "label": "เศรษฐกิจ-ทุจริต",
-    "count": 7
+    "count": 4
    },
    {
     "key": "family",
     "label": "ครอบครัว-มรดก",
-    "count": 6
+    "count": 10
    },
    {
     "key": "political",
@@ -1100,14 +1100,14 @@
    "title": "คดีเงินทอนวัด อดีตพระพรหมเมธี วัดสัมพันธวงศ์",
    "year": 2561,
    "year_raw": "2561",
-   "bucket": "economic",
-   "bucket_label": "เศรษฐกิจ-ทุจริต",
+   "bucket": "criminal",
+   "bucket_label": "อาญา",
    "buckets": [
-    "economic",
+    "criminal",
     "other"
    ],
    "bucket_labels": [
-    "เศรษฐกิจ-ทุจริต",
+    "อาญา",
     "อื่นๆ"
    ],
    "cat_raw": "คดีเด่น",
@@ -1129,14 +1129,14 @@
    "title": "คดีเงินทอนวัดสามพระยา อดีตพระพรหมดิลก",
    "year": 2561,
    "year_raw": "2561",
-   "bucket": "economic",
-   "bucket_label": "เศรษฐกิจ-ทุจริต",
+   "bucket": "criminal",
+   "bucket_label": "อาญา",
    "buckets": [
-    "economic",
+    "criminal",
     "other"
    ],
    "bucket_labels": [
-    "เศรษฐกิจ-ทุจริต",
+    "อาญา",
     "อื่นๆ"
    ],
    "cat_raw": "คดีเด่น",
@@ -1266,6 +1266,33 @@
    "read_minutes": 6
   },
   {
+   "id": "heir-unworthy-forgery-2516",
+   "title": "ทายาทปลอมพินัยกรรม ถูกกำจัดทั้งกองมรดก — ฎีกา 299/2516 (ม.1606(5))",
+   "year": 2516,
+   "year_raw": "2516",
+   "bucket": "family",
+   "bucket_label": "ครอบครัว-มรดก",
+   "buckets": [
+    "family"
+   ],
+   "bucket_labels": [
+    "ครอบครัว-มรดก"
+   ],
+   "cat_raw": "คดีแพ่ง",
+   "blurb": "โจทก์ฟ้องคนอื่นว่าปลอมพินัยกรรม แต่ตัวเองต้องคำพิพากษาถึงที่สุดว่าปลอมเสียเอง ศาลฎีกาชี้ถูกกำจัดตาม ม.1606(5) หมดสิทธิฟ้อง",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 80,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": 6
+  },
+  {
    "id": "bunpeng-hiblek-2462",
    "title": "บุญเพ็ง หีบเหล็ก — คนสุดท้ายของสยามที่ถูกประหารด้วยการตัดคอ (2462)",
    "year": 2462,
@@ -1293,6 +1320,60 @@
    "court_count": 0,
    "is_landmark": false,
    "read_minutes": null
+  },
+  {
+   "id": "adopted-child-representation-2540",
+   "title": "บุตรบุญธรรมรับมรดกแทนที่ไม่ได้ — ฎีกา 2495/2540 (ม.1643)",
+   "year": 2540,
+   "year_raw": "2540",
+   "bucket": "family",
+   "bucket_label": "ครอบครัว-มรดก",
+   "buckets": [
+    "family"
+   ],
+   "bucket_labels": [
+    "ครอบครัว-มรดก"
+   ],
+   "cat_raw": "คดีแพ่ง",
+   "blurb": "บุตรบุญธรรมของพี่น้องเจ้ามรดกที่ตายก่อน ขอรับมรดกแทนที่ ศาลฎีกาชี้ ม.1643 ให้สิทธิเฉพาะผู้สืบสันดานสายโลหิตแท้จริง",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 80,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": 7
+  },
+  {
+   "id": "will-witness-beneficiary-2553",
+   "title": "พยานในพินัยกรรมรับทรัพย์เองไม่ได้ — ฎีกา 4397/2553 (ม.1653)",
+   "year": 2553,
+   "year_raw": "2553",
+   "bucket": "family",
+   "bucket_label": "ครอบครัว-มรดก",
+   "buckets": [
+    "family"
+   ],
+   "bucket_labels": [
+    "ครอบครัว-มรดก"
+   ],
+   "cat_raw": "คดีแพ่ง",
+   "blurb": "ผู้รับทรัพย์ 2 ใน 3 คนเซ็นเป็นพยานในพินัยกรรมเอง ศาลฎีกาชี้ข้อกำหนดส่วนนั้นโมฆะตาม ม.1653/1705 ทรัพย์ตกทายาทโดยธรรม",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 80,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": 6
   },
   {
    "id": "nikorn-2533",
@@ -1336,6 +1417,33 @@
    ],
    "cat_raw": "คดีเด่น",
    "blurb": "พระดังปาราชิก ปฏิเสธมติสงฆ์ ห่มเขียวหนีสหรัฐฯ คดีหมดอายุความ",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 80,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": 6
+  },
+  {
+   "id": "will-form-void-1656-2553",
+   "title": "พินัยกรรมผิดแบบ พยานเซ็นย้อนหลัง โมฆะทั้งฉบับ — ฎีกา 11034/2553 (ม.1656)",
+   "year": 2553,
+   "year_raw": "2553",
+   "bucket": "family",
+   "bucket_label": "ครอบครัว-มรดก",
+   "buckets": [
+    "family"
+   ],
+   "bucket_labels": [
+    "ครอบครัว-มรดก"
+   ],
+   "cat_raw": "คดีแพ่ง",
+   "blurb": "พยานลงชื่อในพินัยกรรมโดยไม่ได้รู้เห็นตอนทำ ศาลฎีกาชี้ผิดแบบ ม.1656 พินัยกรรมโมฆะทั้งฉบับ มรดกตกทายาทโดยธรรม",
    "grade": "A",
    "grade_raw": "A",
    "score": 80,
@@ -1407,14 +1515,12 @@
    "title": "หลวงปู่เณรคำ (2556)",
    "year": 2556,
    "year_raw": "2556",
-   "bucket": "economic",
-   "bucket_label": "เศรษฐกิจ-ทุจริต",
+   "bucket": "criminal",
+   "bucket_label": "อาญา",
    "buckets": [
-    "economic",
     "criminal"
    ],
    "bucket_labels": [
-    "เศรษฐกิจ-ทุจริต",
     "อาญา"
    ],
    "cat_raw": "คดีเด่น",
@@ -1430,6 +1536,87 @@
    "court_count": 0,
    "is_landmark": false,
    "read_minutes": 6
+  },
+  {
+   "id": "korat-mass-shooting-2563",
+   "title": "เหตุกราดยิงที่จังหวัดนครราชสีมา (เทอร์มินอล 21 โคราช) พ.ศ. 2563",
+   "year": 2563,
+   "year_raw": "2563",
+   "bucket": "criminal",
+   "bucket_label": "อาญา",
+   "buckets": [
+    "criminal"
+   ],
+   "bucket_labels": [
+    "อาญา"
+   ],
+   "cat_raw": "คดีอาญา",
+   "blurb": "จ่าคลั่งขโมยอาวุธสงครามจากค่ายทหาร กราดยิงกลางเมืองโคราช",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 80,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": 9
+  },
+  {
+   "id": "siam-paragon-shooting-2566",
+   "title": "เหตุกราดยิงที่ศูนย์การค้าสยามพารากอน พ.ศ. 2566",
+   "year": 2566,
+   "year_raw": "2566",
+   "bucket": "criminal",
+   "bucket_label": "อาญา",
+   "buckets": [
+    "criminal"
+   ],
+   "bucket_labels": [
+    "อาญา"
+   ],
+   "cat_raw": "คดีอาญา",
+   "blurb": "เยาวชน 14 ปียิงกลางห้าง — ความรับผิดทางอาญาของเด็กและเยาวชน",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 80,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": 9
+  },
+  {
+   "id": "nong-bua-lamphu-daycare-2565",
+   "title": "เหตุกราดยิงศูนย์พัฒนาเด็กเล็ก จังหวัดหนองบัวลำภู พ.ศ. 2565",
+   "year": 2565,
+   "year_raw": "2565",
+   "bucket": "criminal",
+   "bucket_label": "อาญา",
+   "buckets": [
+    "criminal"
+   ],
+   "bucket_labels": [
+    "อาญา"
+   ],
+   "cat_raw": "คดีอาญา",
+   "blurb": "อดีตตำรวจคดียาบุกสังหารเด็กเล็กและครูในศูนย์พัฒนาเด็กเล็ก",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 80,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": 9
   }
  ]
 }
