@@ -166,43 +166,48 @@
             color: #e1c383;
             border: 1px solid #999077;
         }
-    </style>
+            /* --- SideNavBar: real navigation + hover microinteraction (propagated from news-index) --- */
+        .side-link{position:relative;display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem;border-left:4px solid transparent;color:#d0c6ab;text-decoration:none;transition:color .15s ease,background-color .15s ease,transform .15s ease}
+        .side-link::before{content:"";position:absolute;left:0;top:50%;width:3px;height:0;background:#e9c400;transform:translateY(-50%);transition:height .18s ease}
+        .side-link:hover{color:#ffe16d;background:rgba(233,196,0,.07);transform:translateX(2px)}
+        .side-link:hover::before{height:68%}
+        .side-link:focus-visible{outline:2px solid #e9c400;outline-offset:-2px}
+        .side-link.is-active{background:#ffd700;color:#705e00;font-weight:700;border-left-color:#e9c400}
+        .side-link.is-active .material-symbols-outlined{font-variation-settings:'FILL' 1}
+</style>
 </head>
 <body class="bg-background text-on-surface font-body-md antialiased overflow-x-hidden flex">
 <!-- Texture Overlay -->
 <div class="texture-overlay"></div>
 <!-- SideNavBar (Hidden on Mobile) -->
 <nav class="hidden md:flex flex-col h-screen w-64 bg-surface-container-low dark:bg-surface-container-low text-primary-fixed-dim dark:text-primary-fixed-dim border-r-2 border-outline-variant py-gutter fixed left-0 top-0 z-40">
-<div class="px-4 mb-8">
-<h1 class="font-headline-md text-headline-md text-primary-fixed-dim font-bold tracking-tighter">INVESTIGATOR_082</h1>
-<p class="font-label-caps text-label-caps text-on-surface-variant mt-1">SECTOR_7_DIVISION</p>
+<div class="px-6 mb-6 pt-2">
+<div class="font-headline-md text-headline-md text-primary-fixed-dim">CASE DATABASE</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mt-1">INVESTIGATOR_082 · SECTOR_7</div>
 </div>
-<div class="flex-1 space-y-2">
-<a class="flex items-center gap-3 bg-primary-container text-on-primary-container font-bold border-l-4 border-primary-fixed-dim px-4 py-3 active:invert duration-75" href="#">
-<span class="material-symbols-outlined" data-icon="folder_open" style="font-variation-settings: 'FILL' 1;">folder_open</span>
-<span class="font-label-caps text-label-caps">ACTIVE CASES</span>
+<nav class="flex-1 space-y-1 px-2">
+<div class="px-4 pb-2 font-label-caps text-label-caps text-outline-variant">แฟ้มคดี · CASE FILES</div>
+<a class="side-link" href="news-index.html">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="font-label-caps text-label-caps">คดีเด่น · FEATURED</span>
 </a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant hover:bg-surface-bright hover:text-primary px-4 py-3 transition-colors active:invert duration-75" href="#">
-<span class="material-symbols-outlined" data-icon="ac_unit">ac_unit</span>
-<span class="font-label-caps text-label-caps">COLD FILES</span>
+<a class="side-link" href="case-directory.html">
+<span class="material-symbols-outlined">format_list_bulleted</span>
+<span class="font-label-caps text-label-caps">สารบบคดี · CASE INDEX</span>
 </a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant hover:bg-surface-bright hover:text-primary px-4 py-3 transition-colors active:invert duration-75" href="#">
-<span class="material-symbols-outlined" data-icon="visibility_off">visibility_off</span>
-<span class="font-label-caps text-label-caps">REDACTED</span>
+<a class="side-link" href="case-directory.html?view=rulings">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-label-caps text-label-caps">คำพิพากษาฎีกา · RULINGS</span>
 </a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant hover:bg-surface-bright hover:text-primary px-4 py-3 transition-colors active:invert duration-75" href="#">
-<span class="material-symbols-outlined" data-icon="record_voice_over">record_voice_over</span>
-<span class="font-label-caps text-label-caps">WITNESSES</span>
+<a class="side-link" href="case-directory.html?view=landmark">
+<span class="material-symbols-outlined">push_pin</span>
+<span class="font-label-caps text-label-caps">คดีบรรทัดฐาน · LANDMARK</span>
 </a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant hover:bg-surface-bright hover:text-primary px-4 py-3 transition-colors active:invert duration-75" href="#">
-<span class="material-symbols-outlined" data-icon="science">science</span>
-<span class="font-label-caps text-label-caps">LAB NOTES</span>
-</a>
-</div>
-<div class="px-4 mt-auto">
-<a class="w-full py-3 px-4 bg-primary-container text-on-primary-container font-label-caps text-label-caps border-2 border-primary-container hover:invert transition-all flex items-center justify-center gap-2" href="news-index.html">
-<span class="material-symbols-outlined text-sm">arrow_back</span> BACK TO INDEX
-            </a>
+</nav>
+<div class="px-6 mt-auto">
+<a class="w-full block text-center border-2 border-primary-fixed-dim text-primary-fixed-dim font-label-caps text-label-caps py-2 hover:bg-primary-fixed-dim hover:text-on-primary-fixed transition-colors duration-150 uppercase tracking-widest" href="case-directory.html">
+                    OPEN FULL INDEX
+                </a>
 </div>
 </nav>
 <!-- Main Content Area -->
