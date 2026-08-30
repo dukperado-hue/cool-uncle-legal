@@ -280,19 +280,19 @@
 <div class="flex flex-1 pt-0 md:pt-[72px]">
 <!-- SideNavBar -->
 <aside class="bg-surface-container-low text-primary-fixed-dim border-r-2 border-outline-variant w-64 h-[calc(100vh-72px)] flex flex-col py-gutter hidden md:flex fixed left-0 top-[72px] z-30">
-<div class="px-6 mb-6">
+<div class="px-6 mb-4">
 <div class="font-headline-md text-headline-md text-primary-fixed-dim">CASE DATABASE</div>
 <div class="font-label-caps text-label-caps text-on-surface-variant mt-1">INVESTIGATOR_082 · SECTOR_7</div>
 </div>
-<nav class="flex-1 space-y-1 px-2">
-<div class="px-4 pb-2 font-label-caps text-label-caps text-outline-variant">แฟ้มคดี · CASE FILES</div>
+<nav class="flex-1 overflow-y-auto space-y-0.5 px-2">
+<div class="px-4 pt-1 pb-1 font-label-caps text-label-caps text-outline-variant">มุมมอง · VIEW</div>
 <a class="side-link" href="news-index.html">
 <span class="material-symbols-outlined">folder_open</span>
 <span class="font-label-caps text-label-caps">คดีเด่น · FEATURED</span>
 </a>
 <a class="side-link" data-view="all" href="case-directory.html">
 <span class="material-symbols-outlined">format_list_bulleted</span>
-<span class="font-label-caps text-label-caps">สารบบคดี · CASE INDEX</span>
+<span class="font-label-caps text-label-caps">สารบบทั้งหมด · ALL</span>
 </a>
 <a class="side-link" data-view="rulings" href="case-directory.html?view=rulings">
 <span class="material-symbols-outlined">gavel</span>
@@ -302,8 +302,37 @@
 <span class="material-symbols-outlined">push_pin</span>
 <span class="font-label-caps text-label-caps">คดีบรรทัดฐาน · LANDMARK</span>
 </a>
+<div class="px-4 pt-3 pb-1 font-label-caps text-label-caps text-outline-variant">หมวดคดี · BY CATEGORY</div>
+<a class="side-link" data-cat="criminal" href="case-directory.html?cat=criminal">
+<span class="material-symbols-outlined">fingerprint</span>
+<span class="font-label-caps text-label-caps">อาญา</span>
+</a>
+<a class="side-link" data-cat="economic" href="case-directory.html?cat=economic">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-caps text-label-caps">เศรษฐกิจ-ทุจริต</span>
+</a>
+<a class="side-link" data-cat="family" href="case-directory.html?cat=family">
+<span class="material-symbols-outlined">diversity_3</span>
+<span class="font-label-caps text-label-caps">ครอบครัว-มรดก</span>
+</a>
+<a class="side-link" data-cat="political" href="case-directory.html?cat=political">
+<span class="material-symbols-outlined">how_to_vote</span>
+<span class="font-label-caps text-label-caps">รธน.-การเมือง-ปกครอง</span>
+</a>
+<a class="side-link" data-cat="international" href="case-directory.html?cat=international">
+<span class="material-symbols-outlined">public</span>
+<span class="font-label-caps text-label-caps">ระหว่างประเทศ</span>
+</a>
+<a class="side-link" data-cat="other" href="case-directory.html?cat=other">
+<span class="material-symbols-outlined">category</span>
+<span class="font-label-caps text-label-caps">อื่นๆ</span>
+</a>
+<a class="side-link" data-cat="precode" href="case-directory.html?cat=precode">
+<span class="material-symbols-outlined">history_edu</span>
+<span class="font-label-caps text-label-caps">ก่อนยุคประมวล</span>
+</a>
 </nav>
-<div class="px-6 mt-auto">
+<div class="px-6 pt-3 mt-auto">
 <a class="w-full block text-center border-2 border-primary-fixed-dim text-primary-fixed-dim font-label-caps text-label-caps py-2 hover:bg-primary-fixed-dim hover:text-on-primary-fixed transition-colors duration-150 uppercase tracking-widest" href="news-index.html">
                     ← กลับหน้าแรก
                 </a>
@@ -378,10 +407,17 @@ const VIEW_COPY = {
   landmark: { kick: 'LANDMARK CASES', title: 'คดีบรรทัดฐาน', sub: 'คดีที่วางบรรทัดฐาน ใช้เป็นแนวในการตัดสินคดีอื่นต่อมา — คำวินิจฉัยศาลรัฐธรรมนูญ คำพิพากษาฎีกาชี้ขาด และคดีที่เปลี่ยนแนวปฏิบัติ' },
 };
 
+const CAT_KEYS = ['criminal', 'economic', 'family', 'political', 'international', 'other', 'precode'];
+const CAT_LABEL = {
+  criminal: 'อาญา', economic: 'เศรษฐกิจ-ทุจริต', family: 'ครอบครัว-มรดก',
+  political: 'รธน.-การเมือง-ปกครอง', international: 'ระหว่างประเทศ',
+  other: 'อื่นๆ', precode: 'ก่อนยุคประมวล',
+};
+
 function readQuery() {
   const p = new URLSearchParams(location.search);
   if (['all', 'rulings', 'landmark'].includes(p.get('view'))) state.view = p.get('view');
-  if (p.get('cat')) state.bucket = p.get('cat');
+  if (CAT_KEYS.includes(p.get('cat')) || p.get('cat') === 'all') state.bucket = p.get('cat');
   if (p.get('sort')) state.sort = p.get('sort');
   if (p.get('q')) state.q = p.get('q');
 }
@@ -404,10 +440,12 @@ function eraLabel(y) {
   return '';
 }
 
+function bucketsOf(c) { return c.buckets && c.buckets.length ? c.buckets : [c.bucket]; }
+
 function matches(c) {
   if (state.view === 'rulings' && !c.has_ruling) return false;
   if (state.view === 'landmark' && !c.is_landmark) return false;
-  if (state.bucket !== 'all' && c.bucket !== state.bucket) return false;
+  if (state.bucket !== 'all' && !bucketsOf(c).includes(state.bucket)) return false;
   if (state.q) {
     const q = state.q.toLowerCase();
     if (!(String(c.title).toLowerCase().includes(q) || String(c.blurb).toLowerCase().includes(q) || String(c.id).toLowerCase().includes(q))) return false;
@@ -433,7 +471,10 @@ function sortRows(rows) {
 function rowHTML(c) {
   const era = eraLabel(c.year);
   const badges = [];
-  badges.push(`<span class="chip chip-bucket">${esc(c.bucket_label)}</span>`);
+  const labels = (c.bucket_labels && c.bucket_labels.length ? c.bucket_labels : [c.bucket_label])
+    .filter(l => l && l !== 'ก่อนยุคประมวล');
+  labels.slice(0, 3).forEach(l => badges.push(`<span class="chip chip-bucket">${esc(l)}</span>`));
+  if ((c.buckets || []).includes('precode')) badges.push('<span class="chip">ก่อนยุคประมวล</span>');
   if (c.has_ruling) badges.push('<span class="chip chip-ruling">⚖️ คำพิพากษา</span>');
   if (c.is_landmark) badges.push('<span class="chip chip-landmark">📌 บรรทัดฐาน</span>');
   if (c.has_play) badges.push('<span class="chip chip-play">🎮 เล่น</span>');
@@ -453,18 +494,29 @@ function rowHTML(c) {
 }
 
 function render() {
-  // hero copy
+  // hero copy — a category filter (in the default view) names the page after the category
   const copy = VIEW_COPY[state.view];
-  document.getElementById('kicker').textContent = copy.kick;
-  document.getElementById('pageTitle').textContent = copy.title;
-  document.getElementById('pageSub').textContent = copy.sub;
-  document.title = `${copy.title} · Case Directory | Cool Uncle Legal Lab`;
+  if (state.view === 'all' && state.bucket !== 'all') {
+    document.getElementById('kicker').textContent = 'CASE DIRECTORY · ' + state.bucket.toUpperCase();
+    document.getElementById('pageTitle').textContent = 'หมวด' + (CAT_LABEL[state.bucket] || '');
+    document.getElementById('pageSub').textContent =
+      `คดีทั้งหมดในหมวด "${CAT_LABEL[state.bucket] || ''}" แบบ list view — เรียงตามชื่อคดีหรือปี พ.ศ. กดเปิดสำนวนเต็มได้ทันที`;
+    document.title = `หมวด${CAT_LABEL[state.bucket] || ''} · Case Directory | Cool Uncle Legal Lab`;
+  } else {
+    document.getElementById('kicker').textContent = copy.kick;
+    document.getElementById('pageTitle').textContent = copy.title;
+    document.getElementById('pageSub').textContent = copy.sub;
+    document.title = `${copy.title} · Case Directory | Cool Uncle Legal Lab`;
+  }
 
   // active states
   document.querySelectorAll('#viewTabs .seg').forEach(b => b.classList.toggle('on', b.dataset.view === state.view));
   document.querySelectorAll('[data-sort]').forEach(b => b.classList.toggle('on', b.dataset.sort === state.sort));
   document.querySelectorAll('#bucketChips .seg').forEach(b => b.classList.toggle('on', b.dataset.bucket === state.bucket));
-  document.querySelectorAll('.side-link[data-view]').forEach(a => a.classList.toggle('is-active', a.dataset.view === state.view));
+  document.querySelectorAll('.side-link[data-view]').forEach(a =>
+    a.classList.toggle('is-active', state.bucket === 'all' && a.dataset.view === state.view));
+  document.querySelectorAll('.side-link[data-cat]').forEach(a =>
+    a.classList.toggle('is-active', a.dataset.cat === state.bucket));
 
   const rows = sortRows(DATA.cases.filter(matches));
   const listEl = document.getElementById('list');

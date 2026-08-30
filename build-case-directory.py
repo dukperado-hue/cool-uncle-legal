@@ -18,46 +18,108 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 CASE_DIR = os.path.join(HERE, "prototype", "assets", "cases")
 OUT = os.path.join(CASE_DIR, "case-directory.json")
 
+# The hand-curated category dossier pages ARE the authoritative membership:
+# whatever read-case ids a page links to, those cases belong to that bucket.
+# A case can appear on several pages (e.g. four-ministers-murder = criminal +
+# political) — the directory keeps every membership so ?cat= behaves like the
+# top-nav tabs.
+CATEGORY_PAGES = {
+    "criminal": ["news-index.html", "news-category-criminal.html"],
+    "economic": ["news-category-economic.html"],
+    "family": ["news-category-family.html"],
+    "political": ["news-category-political.html"],
+    "international": ["news-category-international.html"],
+    "other": ["news-category-other.html"],
+    "precode": ["news-category-precode.html"],
+}
+_ID_RE = re.compile(r"read-case\.html\?id=([A-Za-z0-9_-]+)")
+
+
+def load_page_memberships():
+    """id -> set(bucket keys) taken from the category pages' own link lists."""
+    m = {}
+    for bucket, pages in CATEGORY_PAGES.items():
+        for page in pages:
+            p = os.path.join(HERE, page)
+            if not os.path.exists(p):
+                continue
+            for cid in _ID_RE.findall(open(p, encoding="utf-8", errors="replace").read()):
+                m.setdefault(cid, set()).add(bucket)
+    return m
+
 # non-case bookkeeping files that live in the same folder
 SKIP = {"explore-inventory", "article-case-index", "golden-cases", "case-directory"}
 
-# 6-bucket taxonomy used by the site top-bar / category dossier pages
+# Taxonomy mirrors the site top-bar / category dossier tabs (news-category-*.html)
 BUCKETS = [
     ("criminal",      "อาญา"),
     ("economic",      "เศรษฐกิจ-ทุจริต"),
     ("family",        "ครอบครัว-มรดก"),
     ("political",     "รธน.-การเมือง-ปกครอง"),
     ("international",  "ระหว่างประเทศ"),
+    ("other",         "อื่นๆ"),
     ("precode",       "ก่อนยุคประมวล"),
 ]
 BUCKET_LABEL = dict(BUCKETS)
 
+_CRIM_KW = ("ฆาต", "ฆ่า", "ฆา่", "หั่นศพ", "อำพราง", "อุ้ม", "มือปืน", "ปล้น", "ชิงทรัพย์",
+            "ข่มขืน", "วิสามัญ", "ยิง", "ต่อเนื่อง", "แพะ", "murder", "serial", "robbery", "rape")
+_POL_KW = ("กบฏ", "ปฏิวัติ", "รัฐประหาร", "รัฐมนตรี", "รัฐธรรมนูญ", "เลือกตั้ง", "การเมือง",
+           "สูญหาย", "อุ้มหาย", "สวรรคต", "สมรสเท่าเทียม", "ปกครอง", "rebellion", "coup", "election")
 
-def bucket_for(meta, case_id):
-    """Best-effort map of a case onto one primary bucket."""
-    tags = [str(t).lower() for t in (meta.get("categories") or [])]
+
+_BUCKET_PRIORITY = ["international", "family", "economic", "criminal", "political", "other", "precode"]
+
+
+def buckets_for(meta, case_id, page_buckets):
+    """Return (sorted bucket list, primary bucket) for a case.
+
+    page_buckets = memberships harvested from the category pages (authoritative).
+    Cases that appear on no page fall back to meta.categories tags + keywords.
+    A pre-code-era case always also carries the 'precode' bucket.
+    """
+    tags = {str(t).lower() for t in (meta.get("categories") or [])}
     cat = str(meta.get("cat") or "")
-    idl = case_id.lower()
-    year = norm_year(meta.get("year"))
+    year = norm_year(meta.get("year"), case_id)
+    text = " ".join([
+        str(meta.get("title") or ""),
+        str(meta.get("title_display") or ""),
+        str(meta.get("blurb_60") or ""),
+        cat, case_id.lower(),
+    ])
 
-    def has(*subs):
-        hay = " ".join(tags) + " " + cat + " " + idl
-        return any(s in hay for s in subs)
+    found = set(page_buckets)
 
-    # pre-code era wins if clearly historical / before 2478 (พ.ร.บ. ลักษณะอาญา ร.ศ.127 = 2451; ป.อาญา = 2500)
-    if has("precode", "ประวัติศาสตร์", "โบราณ", "ยุค") or (year and year <= 2475):
-        return "precode"
-    if has("international", " icj", "ศาลโลก", "ทูต", "ระหว่างประเทศ", "corfu", "lagrand", "nicaragua"):
-        return "international"
-    if has("political", "constitution", "รัฐธรรมนูญ", "การเมือง", "ปกครอง", "มณเฑียรบาล", "กบฏ", "rebellion", "election"):
-        return "political"
-    if has("family", "มรดก", "ครอบครัว", "inheritance", "marriage", "divorce", "สมรส", "พินัยกรรม"):
-        return "family"
-    if has("economic", "เศรษฐกิจ", "ทุจริต", "corruption", "embezzle", "fraud", "หุ้น", "การเงิน", "ภาษี", "piracy", "ลิขสิทธิ์", "forex"):
-        return "economic"
-    if has("criminal", "อาญา", "murder", "ฆาต", "ฆ่า", "ปล้น", "ข่มขืน", "shooting"):
-        return "criminal"
-    return "criminal"  # default bucket (largest)
+    # pre-code era: year gate + explicit historical signal (NOT bare "ประวัติศาสตร์"
+    # — many modern landmark cases describe themselves as historic).
+    if (year and year <= 2475) or "ประวัติศาสตร์กฎหมาย" in cat or "ยุคโบราณ" in cat \
+            or any(k in text for k in ("ตราสามดวง", "กฎมณเฑียรบาล", "กรุงศรีอยุธยา")):
+        found.add("precode")
+
+    if not found or found == {"precode"}:
+        # no page lists this case — derive from tags / keywords
+        for t in ("international", "family", "economic", "political", "criminal", "other"):
+            if t in tags:
+                found.add(t)
+        if "international" in tags or any(k in text for k in (" icj", "ศาลโลก", "ระหว่างประเทศ", "corfu", "lagrand")):
+            found.add("international")
+        if any(k in text for k in ("มรดก", "พินัยกรรม", "สมรส", "บุตรนอกสมรส", "living will", "สิทธิในการตาย")):
+            found.add("family")
+        if any(k in text for k in ("ทุจริต", "corruption", "embezzle", "fraud", "เงินทอน", "แชร์ลูกโซ่", "ฟอกเงิน")):
+            found.add("economic")
+        if any(k in text for k in _POL_KW):
+            found.add("political")
+        if any(k in text for k in _CRIM_KW):
+            found.add("criminal")
+
+    found.discard("")
+    if not found:
+        found = {"other"}
+
+    ordered = [b for b in _BUCKET_PRIORITY if b in found]
+    # primary = first non-precode bucket if any (precode is a time period, not a topic)
+    primary = next((b for b in ordered if b != "precode"), ordered[0])
+    return ordered, primary
 
 
 def normalize_grade(g):
@@ -125,6 +187,8 @@ def main():
     if not os.path.isdir(CASE_DIR):
         sys.exit("case dir not found: " + CASE_DIR)
 
+    page_memberships = load_page_memberships()
+
     rows = []
     for path in sorted(glob.glob(os.path.join(CASE_DIR, "*.json"))):
         cid = os.path.splitext(os.path.basename(path))[0]
@@ -145,7 +209,7 @@ def main():
         if not vis.get("public"):
             continue
         j = judicial_info(case)
-        bucket = bucket_for(meta, cid)
+        buckets, primary = buckets_for(meta, cid, page_memberships.get(cid, set()))
         title = meta.get("title_display") or meta.get("title") or cid
         grade = normalize_grade(rank.get("grade"))
         rows.append({
@@ -153,8 +217,10 @@ def main():
             "title": title.strip(),
             "year": norm_year(meta.get("year"), cid),
             "year_raw": str(meta.get("year") or ""),
-            "bucket": bucket,
-            "bucket_label": BUCKET_LABEL[bucket],
+            "bucket": primary,
+            "bucket_label": BUCKET_LABEL[primary],
+            "buckets": buckets,
+            "bucket_labels": [BUCKET_LABEL[b] for b in buckets],
             "cat_raw": str(meta.get("cat") or ""),
             "blurb": str(meta.get("blurb_60") or "").strip(),
             "grade": grade,
@@ -174,7 +240,8 @@ def main():
 
     counts = {b: 0 for b, _ in BUCKETS}
     for r in rows:
-        counts[r["bucket"]] += 1
+        for b in r["buckets"]:
+            counts[b] += 1
 
     out = {
         "_meta": {
