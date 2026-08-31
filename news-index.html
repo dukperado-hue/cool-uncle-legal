@@ -177,6 +177,160 @@
             border-left-color: #e9c400;
         }
         .side-link.is-active .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
+
+        /* ===== Evidence Board matching mini-game — "Case File Noir" (scoped .eb-*) ===== */
+        #eb-board {
+            position: relative; overflow: hidden;
+            height: 580px; border: 2px solid #e9c400;
+            background: #050e20;
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+        }
+        @media (max-width: 768px) { #eb-board { height: 592px; } }
+        .eb-bg {
+            position: absolute; inset: 0;
+            background: url("pics/evidence-board/board-bg.webp") center/cover no-repeat;
+            opacity: .6; filter: grayscale(.3) contrast(1.1);
+        }
+        .eb-bg::after {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 40%, rgba(10,19,37,.25), rgba(5,14,32,.92) 120%);
+        }
+        .eb-noise {
+            position: absolute; inset: 0; pointer-events: none; opacity: .06; mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+        /* faux DO-NOT-CROSS tape across a corner */
+        .eb-tape {
+            position: absolute; left: -60px; top: 34px; width: 300px; height: 26px; z-index: 4;
+            transform: rotate(-24deg); opacity: .5; pointer-events: none;
+            background: repeating-linear-gradient(45deg, #e9c400 0 16px, #0d1117 16px 32px);
+            border-top: 1px solid rgba(0,0,0,.4); border-bottom: 1px solid rgba(0,0,0,.4);
+        }
+
+        .eb-topbar {
+            position: absolute; top: 0; left: 0; width: 100%; z-index: 20;
+            display: flex; justify-content: space-between; align-items: center; gap: .5rem;
+            padding: .55rem .85rem; background: rgba(13,17,23,.92);
+            border-bottom: 2px solid rgba(233,196,0,.5); backdrop-filter: blur(2px);
+        }
+        .eb-brief { font-family: 'Syne', sans-serif; font-weight: 800; letter-spacing: -.01em;
+            font-size: 14px; color: #ffe16d; text-transform: uppercase; }
+        @media (max-width: 768px) { .eb-brief { font-size: 11px; } }
+        .eb-hud { display: flex; align-items: center; gap: .5rem; flex-shrink: 0; }
+        .eb-chip {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: .08em;
+            padding: .2rem .4rem; border: 1px solid rgba(233,196,0,.5); color: #e9c400; background: rgba(233,196,0,.08);
+        }
+        .eb-btn {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: .08em;
+            padding: .3rem .7rem; border: 2px solid #e9c400; cursor: pointer; text-transform: uppercase;
+        }
+        .eb-btn.solid { background: #ffd700; color: #705e00; }
+        .eb-btn.solid:hover:not(:disabled) { background: transparent; color: #e9c400; }
+        .eb-btn.ghost { background: transparent; color: #e9c400; }
+        .eb-btn.ghost:hover { background: #e9c400; color: #221b00; }
+        .eb-btn:disabled { opacity: .35; cursor: not-allowed; }
+        .eb-btn.ready { animation: ebPulse 1.2s ease-in-out infinite; }
+        @keyframes ebPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(233,196,0,.7); } 50% { box-shadow: 0 0 0 7px rgba(233,196,0,0); } }
+
+        .eb-strings { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 8; }
+        .eb-string { stroke: #B22222; stroke-width: 3; fill: none; filter: drop-shadow(0 0 4px rgba(178,34,34,.75)); }
+        .eb-string.eb-draw { stroke-dasharray: 1600; stroke-dashoffset: 1600; animation: ebDraw .9s forwards ease-in-out; }
+        .eb-string.eb-pending { stroke: #e9c400; stroke-width: 2.5; stroke-dasharray: 7 6; filter: drop-shadow(0 0 4px rgba(233,196,0,.7)); }
+        @keyframes ebDraw { to { stroke-dashoffset: 0; } }
+
+        .eb-wrap {
+            position: absolute; left: 0; right: 0; top: 46px; bottom: 0; z-index: 10;
+            display: flex; justify-content: space-between; gap: .5rem; padding: 1.4rem .8rem 4rem;
+        }
+        .eb-col { display: flex; flex-direction: column; gap: .7rem; width: 47%; height: 100%; }
+        .eb-col-head {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: .1em;
+            text-transform: uppercase; color: #e9c400; flex: 0 0 auto;
+            background: rgba(13,17,23,.6); border-left: 3px solid #e9c400; padding: .2rem .4rem;
+        }
+        .eb-card {
+            position: relative; flex: 1 1 0; min-height: 0;
+            background: #F5F2E8; color: #0D1117; border: 2px solid #0D1117;
+            box-shadow: 0 8px 16px rgba(0,0,0,.55);
+            padding: .55rem .65rem; cursor: pointer;
+            display: flex; flex-direction: column; justify-content: center; overflow: hidden;
+            transform: rotate(var(--rot, 0deg));
+            transition: transform .12s ease, box-shadow .12s, border-color .12s, filter .15s;
+        }
+        .eb-col.right .eb-card { clip-path: polygon(0 0, 100% 0, 98.5% 100%, 1.5% 97%); }
+        .eb-card:hover { transform: rotate(0deg) scale(1.02); box-shadow: 0 8px 22px rgba(233,196,0,.4); z-index: 15; }
+        .eb-card:focus-visible { outline: 3px solid #e9c400; outline-offset: 2px; }
+        .eb-pin {
+            position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
+            width: 18px; height: 18px; border-radius: 9999px;
+            background: #B22222; border: 1px solid #000; box-shadow: 0 3px 4px rgba(0,0,0,.55); z-index: 3;
+        }
+        .eb-pin::after { content: ""; position: absolute; top: 3px; right: 3px; width: 6px; height: 6px; border-radius: 9999px; background: rgba(255,255,255,.4); }
+        .eb-card-k {
+            font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .01em;
+            margin-bottom: .15rem; color: #7a1010;
+        }
+        .eb-card-t {
+            font-family: 'Courier Prime', monospace; font-size: 11px; line-height: 1.35;
+            display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .eb-card.is-active { transform: rotate(0deg) scale(1.02); border-color: #e9c400; box-shadow: 0 0 0 3px #e9c400, 0 8px 22px rgba(233,196,0,.5); z-index: 16; }
+        .eb-card.is-wrong { animation: ebShake .4s; border-color: #B22222; }
+        @keyframes ebShake { 0%,100% { transform: rotate(0) translateX(0); } 20% { transform: rotate(0) translateX(-6px); } 60% { transform: rotate(0) translateX(6px); } }
+        .eb-card.is-solved { transform: rotate(0deg); cursor: default; filter: saturate(.55) brightness(.97); border-color: #e9c400; }
+        .eb-card.is-solved .eb-pin { background: #e9c400; }
+        .eb-card.is-solved::after {
+            content: "LINKED"; position: absolute; top: 4px; right: 6px;
+            font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 700; letter-spacing: .1em;
+            color: #705e00; background: #e9c400; padding: 1px 4px;
+        }
+        .eb-col.right .eb-card.is-solved::after { right: auto; left: 6px; }
+
+        .eb-open {
+            display: inline-block; margin-top: .6rem;
+            font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+            letter-spacing: .06em; color: #ffd700; text-decoration: none; border-bottom: 1px solid #ffd700;
+        }
+        .eb-open:hover { color: #fff; border-color: #fff; }
+
+        .eb-toast {
+            position: absolute; left: 50%; bottom: .7rem; transform: translateX(-50%);
+            max-width: 84%; z-index: 38;
+            background: #0D1117; border: 2px solid #e9c400; color: #F5F2E8;
+            padding: .5rem .85rem; font-family: 'Courier Prime', monospace; font-size: 11.5px; line-height: 1.5;
+            display: none;
+        }
+        .eb-toast.eb-show { display: block; }
+        .eb-toast.eb-err { border-color: #B22222; }
+
+        .eb-win {
+            position: absolute; inset: 0; z-index: 45; background: rgba(5,14,32,.94); display: none;
+            flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 1.5rem; gap: .55rem;
+        }
+        .eb-win.eb-show { display: flex; }
+        .eb-win img { width: min(12rem, 44%); transform: rotate(-6deg); mix-blend-mode: screen; filter: drop-shadow(0 0 16px rgba(178,34,34,.45)) contrast(1.15); }
+        .eb-win.eb-show img { animation: ebStamp .5s cubic-bezier(.2, 1.4, .3, 1) both; }
+        @keyframes ebStamp { 0% { opacity: 0; transform: rotate(-6deg) scale(1.9); } 55% { opacity: 1; } 100% { opacity: .9; transform: rotate(-6deg) scale(1); } }
+        .eb-win h3 { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #e9c400; letter-spacing: .02em; text-transform: uppercase; }
+        .eb-win p { font-size: 11.5px; color: #F5F2E8; font-family: 'Courier Prime', monospace; max-width: 32rem; line-height: 1.65; white-space: pre-line; }
+
+        .eb-hint {
+            position: absolute; right: .7rem; bottom: .55rem; z-index: 39;
+            display: flex; align-items: center; gap: .5rem;
+            background: #212a3d; border: 2px solid #e9c400; padding: .28rem; cursor: pointer;
+        }
+        .eb-hint:hover { background: #2c3548; }
+        .eb-hint img { width: 2.3rem; height: 2.3rem; object-fit: cover; border: 1px solid #4d4732; }
+        .eb-hint span {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: .08em; color: #e9c400; padding-right: .35rem;
+        }
+        .eb-hint-bubble {
+            position: absolute; right: .7rem; bottom: 3.9rem; z-index: 40; max-width: 19rem;
+            background: #F5F2E8; color: #0D1117; border: 2px solid #B22222;
+            padding: .65rem .85rem; font-family: 'Courier Prime', monospace; font-size: 12px; line-height: 1.55; display: none;
+        }
+        .eb-hint-bubble.eb-show { display: block; }
     </style>
 </head>
 <body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col relative overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
@@ -305,6 +459,46 @@
 <img alt="Forensic photography style, black and white, high contrast, police evidence scene." class="w-full h-auto object-cover grayscale contrast-125 mix-blend-screen opacity-80 filter brightness-75 hover:brightness-100 transition-all duration-500" src="pics/Picabay/alexas_fotos-police-3284258_1920.jpg"/>
 <div class="absolute bottom-4 right-4 bg-primary-fixed-dim text-on-primary-fixed font-label-caps text-label-caps px-2 py-1">EXHIBIT_A</div>
 </div>
+</div>
+</div>
+</section>
+
+<!-- ===== Evidence Board matching mini-game — Case File Noir ===== -->
+<section class="mb-12" id="eb-section">
+<div class="flex items-center gap-3 mb-3 flex-wrap">
+<span class="font-label-caps text-label-caps text-primary-fixed-dim bg-surface-container px-2 py-1">CASE BOARD</span>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">กระดานสืบสวน — โยงหลักฐานเข้ากับมาตรา</h2>
+</div>
+<p class="font-body-md text-[13px] text-on-surface-variant mb-5 max-w-2xl">มินิเกมช่วยจำจากคดีที่คุณอ่านมาแล้ว: แตะการ์ด <span class="text-primary-fixed-dim">หลักฐาน</span> แล้วแตะ <span class="text-primary-fixed-dim">มาตรา</span> ที่ใช้กับข้อเท็จจริงนั้น — บางหลักฐานต้องใช้หลายมาตราประกอบกัน (เช่น ม.288 + ม.289) เชื่อมครบทุกจุดเพื่อปิดคดี</p>
+<div id="eb-board" data-case="somkid-phumphuang-2548-2562">
+<div class="eb-bg"></div>
+<div class="eb-noise"></div>
+<div class="eb-tape"></div>
+<div class="eb-topbar">
+<span class="eb-brief">CASE BRIEF — สมคิด พุ่มพวง</span>
+<div class="eb-hud">
+<span class="eb-chip" id="eb-progress" title="หลักฐานที่โยงครบ">0/4</span>
+<span class="eb-chip" id="eb-score" title="คะแนนสำนวน">100</span>
+<button class="eb-btn solid" id="eb-close" disabled>ปิดคดี</button>
+<button class="eb-btn ghost" id="eb-reset">รีเซ็ต</button>
+</div>
+</div>
+<svg class="eb-strings" id="eb-strings" preserveAspectRatio="none"></svg>
+<div class="eb-wrap">
+<div class="eb-col left" id="eb-col-ev"><div class="eb-col-head">หลักฐาน · EXHIBITS</div></div>
+<div class="eb-col right" id="eb-col-law"><div class="eb-col-head">มาตรา · ป.อาญา</div></div>
+</div>
+<div class="eb-toast" id="eb-toast"></div>
+<div class="eb-hint" id="eb-hint" role="button" tabindex="0" aria-label="ขอคำใบ้จากน้องลี">
+<img alt="น้องลี นักสืบแมวสยาม" src="pics/evidence-board/nong-lee.webp"/>
+<span>GET HINT</span>
+</div>
+<div class="eb-hint-bubble" id="eb-hint-bubble"></div>
+<div class="eb-win" id="eb-win">
+<img alt="ตราประทับ CASE CLOSED" src="pics/evidence-board/case-closed-stamp.webp"/>
+<h3>CASE CLOSED — ปิดคดี</h3>
+<p id="eb-win-text"></p>
+<a class="eb-open" href="prototype/read-case.html?id=somkid-phumphuang-2548-2562">อ่านสำนวนเต็มของคดีนี้ →</a>
 </div>
 </div>
 </section>
@@ -549,4 +743,252 @@
 </div>
 </main>
 </div>
+<!-- ===== Evidence Board matching mini-game (scoped to #eb-board) ===== -->
+<script>
+(function () {
+  const board = document.getElementById('eb-board');
+  if (!board) return;
+  const svg = document.getElementById('eb-strings');
+  const colEv = document.getElementById('eb-col-ev');
+  const colLaw = document.getElementById('eb-col-law');
+  const toast = document.getElementById('eb-toast');
+  const hint = document.getElementById('eb-hint');
+  const bubble = document.getElementById('eb-hint-bubble');
+  const win = document.getElementById('eb-win');
+  const winText = document.getElementById('eb-win-text');
+  const elProgress = document.getElementById('eb-progress');
+  const elScore = document.getElementById('eb-score');
+  const btnClose = document.getElementById('eb-close');
+  const btnReset = document.getElementById('eb-reset');
+
+  // Every fact + article below is lifted from the real dossier
+  // prototype/assets/cases/somkid-phumphuang-2548-2562.json (read.sections).
+  // Some exhibits need MORE THAN ONE article together (e.g. ม.288 base + ม.289 aggravating).
+  const PAIRS = [
+    { ev: 'e1', laws: ['l288', 'l289'],
+      evk: 'หลักฐาน A · แผนฆ่า', evt: 'เหยื่อ 6 รายถูกฆ่าด้วยแผนเดียวกัน — ตีสนิท บีบคอ/กดน้ำ แล้วเอาทรัพย์',
+      note: 'ฐานความผิดหลักคือ "ฆ่าผู้อื่น" (ม.288) ประกอบเหตุฉกรรจ์ตาม ม.289 — ไตร่ตรองไว้ก่อน (อนุ 4) และเพื่อประโยชน์จากทรัพย์ (อนุ 7) — ทำให้โทษเป็นประหารชีวิตสถานเดียว ต้องอ้างคู่กัน',
+      hint: 'การฆ่าต้องเริ่มจากฐาน "ฆ่าผู้อื่น" ก่อน (ม.288) แล้วบวกเหตุฉกรรจ์ "ไตร่ตรองไว้ก่อน/เพื่อทรัพย์" (ม.289) — เลือกทั้งสองมาตรา' },
+    { ev: 'e2', laws: ['l92'],
+      evk: 'หลักฐาน B · ทำผิดซ้ำ', evt: 'ก่อเหตุรายที่ 6 เพียง ~7 เดือนหลังพ้นโทษคดีฆ่า 5 ศพ',
+      note: 'เข้าเงื่อนไขเวลาของ ม.92 แต่กลไก "เพิ่มโทษ ⅓" ใช้ไม่ได้จริง เพราะ ม.289 มีโทษสูงสุดคือประหารชีวิตอยู่แล้ว ศาลจึงไปถึงโทษสูงสุดด้วยดุลพินิจ "ไม่มีเหตุบรรเทาโทษ" แทน',
+      hint: 'เขาเพิ่งพ้นคุกคดีฆ่า 5 ศพได้ไม่ถึงปี — มีมาตราเรื่อง "ทำผิดซ้ำภายใน 5 ปี" อยู่ในภาคบทบัญญัติทั่วไป' },
+    { ev: 'e3', laws: ['l199'],
+      evk: 'หลักฐาน C · ซ่อนศพ', evt: 'ซ่อนศพเหยื่อรายที่ 6 ไว้ใต้เตียงเพื่อปิดบังการตาย',
+      note: 'ศาลจังหวัดขอนแก่นตั้งข้อหานี้เพิ่มในคดีที่ 6 เพราะจำเลยซ่อนศพเหยื่อไว้ใต้เตียงเพื่อปิดบังเหตุแห่งการตาย',
+      hint: 'ศพถูกยัดไว้ใต้เตียงเพื่อไม่ให้ใครรู้ว่าตายยังไง — มีมาตราว่าด้วยความผิดเกี่ยวกับศพ' },
+    { ev: 'e4', laws: ['l334'],
+      evk: 'หลักฐาน D · เอาทรัพย์', evt: 'เอาทรัพย์ติดตัวผู้ตายไป ตอนเหยื่อเสียชีวิตแล้ว',
+      note: 'ศาลลงโทษฐานลักทรัพย์ (ม.334) จำคุก 2 ปี ไม่ใช่ชิงทรัพย์ (ม.339) เพราะการใช้กำลังเกิดตอนฆ่า ส่วนการเอาทรัพย์เกิดหลังเหยื่อตายแล้ว จึงไม่มี "การใช้กำลังเพื่อเอาทรัพย์" ในความหมายของชิงทรัพย์',
+      hint: 'ของติดตัวเหยื่อหายไป — แต่เอาไปตอนเหยื่อตายแล้ว ไม่ได้ใช้กำลังเพื่อเอาทรัพย์ ดูให้ดีระหว่าง "ลัก" กับ "ชิง"' }
+  ];
+  // one distractor article — belongs to no exhibit; teaches the ลัก vs ชิง line
+  const LAW_META = {
+    l288: { k: 'ม.288', t: 'ฆ่าผู้อื่น — โทษ 15-20 ปี ถึงประหาร (ฐานตั้งต้น)' },
+    l289: { k: 'ม.289 (4)(7)', t: 'ฆ่าโดยไตร่ตรองไว้ก่อน / เพื่อทรัพย์ — ประหารสถานเดียว' },
+    l92:  { k: 'ม.92', t: 'ทำผิดอีกภายใน 5 ปีนับแต่พ้นโทษ — เพิ่มโทษ ⅓' },
+    l199: { k: 'ม.199', t: 'ซ่อนเร้น/ย้าย/ทำลายศพ เพื่อปิดบังเหตุแห่งการตาย' },
+    l334: { k: 'ม.334', t: 'ลักทรัพย์ — เอาทรัพย์ผู้อื่นไปโดยทุจริต' },
+    l339: { k: 'ม.339', t: 'ชิงทรัพย์ — ลักทรัพย์โดยใช้กำลังเพื่อเอาทรัพย์',
+            whyNot: 'ผู้ตายเสียชีวิตก่อนถูกเอาทรัพย์ ไม่มีการใช้กำลัง "เพื่อเอาทรัพย์" จึงเป็นลักทรัพย์ (ม.334) ไม่ใช่ชิงทรัพย์' }
+  };
+  const DECOYS = ['l339'];
+  const ALL_LAW_IDS = [...new Set(PAIRS.flatMap(p => p.laws).concat(DECOYS))];
+
+  const pairByEv = id => PAIRS.find(p => p.ev === id);
+  const evForLaw = id => PAIRS.find(p => p.laws.includes(id));
+
+  let linked, activeEv, score, wrongTotal, hintedEv, pointer;
+
+  const rots = ['-3deg', '2deg', '-2deg', '3deg', '-1.5deg', '2.5deg'];
+  function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; }
+  const evComplete = p => p.laws.every(l => linked.get(l) === p.ev);
+  const solvedCount = () => PAIRS.filter(evComplete).length;
+
+  function buildCards() {
+    colEv.querySelectorAll('.eb-card').forEach(n => n.remove());
+    colLaw.querySelectorAll('.eb-card').forEach(n => n.remove());
+    shuffle(PAIRS.slice()).forEach((p, i) => colEv.appendChild(card('ev', p.ev, p.evk, p.evt, i)));
+    shuffle(ALL_LAW_IDS.slice()).forEach((id, i) => colLaw.appendChild(card('law', id, LAW_META[id].k, LAW_META[id].t, i)));
+  }
+
+  function card(role, id, k, t, i) {
+    const el = document.createElement('div');
+    el.className = 'eb-card';
+    el.tabIndex = 0;
+    el.dataset.role = role;
+    el.dataset.id = id;
+    el.style.setProperty('--rot', rots[i % rots.length]);
+    el.innerHTML = '<span class="eb-pin"></span><span class="eb-card-k"></span><span class="eb-card-t"></span>';
+    el.querySelector('.eb-card-k').textContent = k;
+    el.querySelector('.eb-card-t').textContent = t;
+    el.addEventListener('click', () => onCard(el));
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onCard(el); } });
+    return el;
+  }
+
+  function pinPt(el) {
+    const r = el.getBoundingClientRect(), b = board.getBoundingClientRect();
+    return { x: r.left - b.left + r.width / 2, y: r.top - b.top };
+  }
+
+  function arc(s, e, cls) {
+    const my = Math.min(s.y, e.y) - 46;
+    return `<path class="eb-string ${cls}" d="M ${s.x} ${s.y} Q ${(s.x + e.x) / 2} ${my} ${e.x} ${e.y}"></path>`;
+  }
+
+  function draw() {
+    svg.setAttribute('viewBox', `0 0 ${board.clientWidth} ${board.clientHeight}`);
+    let paths = '';
+    linked.forEach((evId, lawId) => {
+      const a = colEv.querySelector(`[data-id="${evId}"]`);
+      const c = colLaw.querySelector(`[data-id="${lawId}"]`);
+      if (a && c) paths += arc(pinPt(a), pinPt(c), 'eb-drawn');
+    });
+    if (activeEv && pointer) {
+      const a = colEv.querySelector(`[data-id="${activeEv}"]`);
+      if (a) {
+        const s = pinPt(a);
+        paths += `<path class="eb-string eb-pending" d="M ${s.x} ${s.y} L ${pointer.x} ${pointer.y}"></path>`;
+      }
+    }
+    svg.innerHTML = paths;
+  }
+
+  function say(msg, err) {
+    toast.textContent = msg;
+    toast.classList.toggle('eb-err', !!err);
+    toast.classList.add('eb-show');
+    clearTimeout(say._t);
+    say._t = setTimeout(() => toast.classList.remove('eb-show'), 6000);
+  }
+
+  function refreshHud() {
+    const n = solvedCount();
+    elProgress.textContent = n + '/4';
+    elScore.textContent = score;
+    btnClose.disabled = n < 4;
+    btnClose.classList.toggle('ready', n === 4);
+  }
+
+  function clearActive() {
+    activeEv = null;
+    colEv.querySelectorAll('.is-active').forEach(n => n.classList.remove('is-active'));
+    draw();
+  }
+
+  function strobe(el) {
+    el.classList.add('is-wrong');
+    setTimeout(() => el.classList.remove('is-wrong'), 440);
+  }
+
+  function onCard(el) {
+    if (win.classList.contains('eb-show')) return;
+    const role = el.dataset.role, id = el.dataset.id;
+
+    if (role === 'ev') {
+      if (pairByEv(id) && evComplete(pairByEv(id))) return;
+      if (activeEv === id) { clearActive(); return; }
+      colEv.querySelectorAll('.is-active').forEach(n => n.classList.remove('is-active'));
+      el.classList.add('is-active');
+      activeEv = id;
+      draw();
+      return;
+    }
+
+    // law card tapped
+    if (linked.has(id)) return;
+    if (!activeEv) { say('แตะการ์ด "หลักฐาน" ก่อน แล้วจึงเลือกมาตราที่ใช้กับข้อเท็จจริงนั้น'); return; }
+    const p = pairByEv(activeEv);
+
+    if (p.laws.includes(id)) {
+      linked.set(id, p.ev);
+      el.classList.add('is-solved');
+      draw();
+      if (evComplete(p)) {
+        colEv.querySelector(`[data-id="${p.ev}"]`).classList.add('is-solved');
+        say('✓ ' + p.note);
+        clearActive();
+        refreshHud();
+        if (solvedCount() === 4) setTimeout(() => say('โยงครบทุกจุดแล้ว — กด "ปิดคดี" เพื่อสรุปสำนวน'), 500);
+      } else {
+        const need = p.laws.filter(l => !linked.has(l)).length;
+        say(`✓ ถูก · หลักฐานนี้ยังต้องอีก ${need} มาตราที่ใช้ประกอบกัน`);
+      }
+      return;
+    }
+
+    // wrong
+    wrongTotal++;
+    score = Math.max(0, score - 10);
+    strobe(el);
+    strobe(colEv.querySelector(`[data-id="${p.ev}"]`));
+    const meta = LAW_META[id];
+    const owner = evForLaw(id);
+    let msg = `✗ ${meta.k} ไม่ใช่มาตราของ "${p.evk}" (−10)`;
+    if (meta.whyNot) msg = `✗ ${meta.k} — ${meta.whyNot} (−10)`;
+    else if (owner) msg = `✗ ${meta.k} ใช้กับหลักฐานอื่น ไม่ใช่ "${p.evk}" (−10)`;
+    say(msg, true);
+    clearActive();
+    refreshHud();
+  }
+
+  function giveHint() {
+    if (win.classList.contains('eb-show')) return;
+    const target = activeEv ? pairByEv(activeEv) : PAIRS.find(p => !evComplete(p));
+    if (!target) { bubble.textContent = 'น้องลี: ปิดคดีได้แล้วเมี้ยว~'; bubble.classList.add('eb-show'); return; }
+    if (!hintedEv.has(target.ev)) { hintedEv.add(target.ev); score = Math.max(0, score - 5); refreshHud(); }
+    bubble.textContent = 'น้องลี: ' + target.hint + '  (−5)';
+    bubble.classList.add('eb-show');
+    clearTimeout(giveHint._t);
+    giveHint._t = setTimeout(() => bubble.classList.remove('eb-show'), 9000);
+    if (!activeEv) {
+      const evEl = colEv.querySelector(`[data-id="${target.ev}"]`);
+      if (evEl && !evEl.classList.contains('is-solved')) { evEl.classList.add('is-active'); activeEv = target.ev; draw(); }
+    }
+  }
+
+  function showWin() {
+    if (solvedCount() < 4) { say(`ยังโยงหลักฐานไม่ครบ (${solvedCount()}/4)`); return; }
+    const rating = score >= 90 ? 'สำนวนแน่นหนา' : score >= 70 ? 'ใช้ได้' : score >= 50 ? 'พอไปวัดไปวาน' : 'ควรกลับไปอ่านคดีอีกรอบ';
+    winText.textContent = `โยงหลักฐานเข้ากับมาตราครบทุกจุด · คะแนนสำนวน ${score}/100 — ${rating}\n\n`
+      + 'เกร็ดจากคำพิพากษาจริง: ศาลจังหวัดขอนแก่นพิพากษาประหารชีวิตสถานเดียว (17 มี.ค. 2564) โดยอาศัยดุลพินิจ "ไม่มีเหตุบรรเทาโทษ" — ม.92 เรื่องทำผิดซ้ำไม่ได้ถูกใช้เพิ่มโทษ เพราะโทษเต็มของ ม.288 ประกอบ ม.289 คือประหารชีวิตอยู่แล้ว';
+    win.classList.remove('eb-show'); void win.offsetWidth; win.classList.add('eb-show');
+  }
+
+  function reset() {
+    linked = new Map(); activeEv = null; score = 100; wrongTotal = 0; hintedEv = new Set(); pointer = null;
+    win.classList.remove('eb-show');
+    bubble.classList.remove('eb-show');
+    toast.classList.remove('eb-show');
+    buildCards();
+    refreshHud();
+    requestAnimationFrame(draw);
+  }
+
+  // pointer tracking for the pending string
+  function trackPointer(e) {
+    if (!activeEv) return;
+    const pt = e.touches ? e.touches[0] : e;
+    const b = board.getBoundingClientRect();
+    pointer = { x: pt.clientX - b.left, y: pt.clientY - b.top };
+    draw();
+  }
+  board.addEventListener('mousemove', trackPointer);
+  board.addEventListener('touchmove', trackPointer, { passive: true });
+
+  hint.addEventListener('click', giveHint);
+  hint.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); giveHint(); } });
+  btnClose.addEventListener('click', showWin);
+  btnReset.addEventListener('click', reset);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { clearActive(); bubble.classList.remove('eb-show'); } });
+
+  let rt;
+  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(draw, 150); });
+
+  function init() { reset(); }
+  if (document.readyState === 'complete') init();
+  else window.addEventListener('load', init);
+})();
+</script>
 </body></html>

@@ -1,8 +1,8 @@
 {
  "_meta": {
   "generated_by": "build-case-directory.py",
-  "total": 58,
-  "public": 58,
+  "total": 61,
+  "public": 61,
   "rulings": 3,
   "landmark": 7,
   "buckets": [
@@ -24,7 +24,7 @@
    {
     "key": "political",
     "label": "รธน.-การเมือง-ปกครอง",
-    "count": 22
+    "count": 25
    },
    {
     "key": "international",
@@ -34,7 +34,7 @@
    {
     "key": "other",
     "label": "อื่นๆ",
-    "count": 7
+    "count": 10
    },
    {
     "key": "precode",
@@ -694,6 +694,35 @@
    "read_minutes": 8
   },
   {
+   "id": "billy-porlajee-2557",
+   "title": "คดีบิลลี่ — พอละจี รักจงเจริญ: นักปกป้องสิทธิกะเหรี่ยงบางกลอยถูกบังคับสูญหาย พ.ศ. 2557",
+   "year": 2557,
+   "year_raw": "2557",
+   "bucket": "political",
+   "bucket_label": "รธน.-การเมือง-ปกครอง",
+   "buckets": [
+    "political",
+    "other"
+   ],
+   "bucket_labels": [
+    "รธน.-การเมือง-ปกครอง",
+    "อื่นๆ"
+   ],
+   "cat_raw": "คดีอาญา",
+   "blurb": "หัวหน้าอุทยานควบคุมตัวบิลลี่เรื่องน้ำผึ้งป่า แล้วบิลลี่หายไป",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 80,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": 10
+  },
+  {
    "id": "falkhon-2231",
    "title": "คดีประหารเจ้าพระยาวิชเยนทร์ (คอนสแตนติน ฟอลคอน) พ.ศ. 2231 — การปฏิวัติและผู้ที่เข้ามาไกลที่สุดในบ้านเมือง",
    "year": 2231,
@@ -779,6 +808,35 @@
    "court_count": 2,
    "is_landmark": false,
    "read_minutes": 9
+  },
+  {
+   "id": "wanchalearm-2563",
+   "title": "คดีวันเฉลิม สัตย์ศักดิ์สิทธิ์: ผู้ลี้ภัยการเมืองไทยถูกอุ้มหายกลางกรุงพนมเปญ พ.ศ. 2563",
+   "year": 2563,
+   "year_raw": "2563",
+   "bucket": "political",
+   "bucket_label": "รธน.-การเมือง-ปกครอง",
+   "buckets": [
+    "political",
+    "other"
+   ],
+   "bucket_labels": [
+    "รธน.-การเมือง-ปกครอง",
+    "อื่นๆ"
+   ],
+   "cat_raw": "คดีอาญา",
+   "blurb": "ผู้ลี้ภัยการเมืองไทยถูกกลุ่มชายติดอาวุธอุ้มหน้าคอนโดในพนมเปญ",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 80,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": 10
   },
   {
    "id": "marriage-equality-landmark-2567",
@@ -951,6 +1009,35 @@
    "court_count": 0,
    "is_landmark": false,
    "read_minutes": null
+  },
+  {
+   "id": "surachai-2561",
+   "title": "คดีสุรชัย ด่านวัฒนานุสรณ์: ผู้ลี้ภัยการเมืองและผู้ติดตามสองคนถูกอุ้มหายจากลาว พ.ศ. 2561",
+   "year": 2561,
+   "year_raw": "2561",
+   "bucket": "political",
+   "bucket_label": "รธน.-การเมือง-ปกครอง",
+   "buckets": [
+    "political",
+    "other"
+   ],
+   "bucket_labels": [
+    "รธน.-การเมือง-ปกครอง",
+    "อื่นๆ"
+   ],
+   "cat_raw": "คดีอาญา",
+   "blurb": "สุรชัยหายจากลาว พบศพผู้ติดตาม 2 คนในโขง ผ่าท้องยัดปูน",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 78,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": 10
   },
   {
    "id": "wisut-2544",
