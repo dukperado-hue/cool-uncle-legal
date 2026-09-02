@@ -113,6 +113,28 @@ body{background:radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transpar
   .hero h1{font-size:30px}
   .topbar-brand-sub{display:none}
 }
+
+/* ============ BACKGROUND MUSIC TOGGLE ============ */
+.music-toggle{
+  position:fixed;right:16px;bottom:16px;z-index:120;
+  width:46px;height:46px;border-radius:50%;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:19px;
+  background:var(--card);color:var(--ink);
+  border:1px solid var(--line);box-shadow:var(--shadow);
+  transition:transform .15s ease,background .15s ease;
+}
+.music-toggle:hover{transform:scale(1.06)}
+.music-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.music-toggle.playing{background:var(--accent);color:#fff;border-color:var(--accent)}
+.music-toggle .mt-eq{display:none;gap:2px;align-items:flex-end;height:16px}
+.music-toggle.playing .mt-note{display:none}
+.music-toggle.playing .mt-eq{display:flex}
+.music-toggle .mt-eq i{width:3px;background:#fff;border-radius:1px;animation:mt-bounce .9s ease-in-out infinite}
+.music-toggle .mt-eq i:nth-child(1){height:6px;animation-delay:-.2s}
+.music-toggle .mt-eq i:nth-child(2){height:14px;animation-delay:-.5s}
+.music-toggle .mt-eq i:nth-child(3){height:9px;animation-delay:0s}
+@keyframes mt-bounce{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+@media(prefers-reduced-motion:reduce){.music-toggle .mt-eq i{animation:none}}
 </style>
 </head>
 <body>
@@ -290,6 +312,15 @@ body{background:radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transpar
   </footer>
 </div>
 
+<!-- ============ BACKGROUND MUSIC ============ -->
+<audio id="lab-bgm" loop preload="none" playsinline webkit-playsinline>
+  <source src="music/melodyayresgriffiths-it-sax-to-have-the-blues-sad-mournful-smooth-jazz-instrumental-sax-531289.mp3" type="audio/mpeg">
+</audio>
+<button type="button" id="music-toggle" class="music-toggle" aria-label="เปิด/ปิดเพลงประกอบ" title="เพลงประกอบ">
+  <span class="mt-note" aria-hidden="true">🎵</span>
+  <span class="mt-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+</button>
+
 <script>
 function setTheme(theme){
   if (theme === 'light') { document.documentElement.removeAttribute('data-theme'); }
@@ -316,6 +347,49 @@ document.getElementById('chip-row').addEventListener('click', function(e){
     card.style.display = (filter === 'all' || cat === 'all' || cat === filter) ? '' : 'none';
   });
 });
+
+/* ============ background music ============ */
+(function(){
+  var audio = document.getElementById('lab-bgm');
+  var toggle = document.getElementById('music-toggle');
+  if (!audio || !toggle) return;
+  var KEY = 'lab-music';                 // 'on' | 'off'
+  audio.volume = 0.35;
+  var pref;
+  try { pref = localStorage.getItem(KEY); } catch(e){}
+  var wantOn = (pref !== 'off');         // default: play unless the user turned it off
+
+  function sync(){ toggle.classList.toggle('playing', !audio.paused); }
+  function save(v){ try { localStorage.setItem(KEY, v); } catch(e){} }
+
+  function play(){
+    var p = audio.play();
+    if (p && p.catch) p.catch(function(){ /* autoplay blocked — armed listener will retry */ });
+  }
+  function stop(){ audio.pause(); }
+
+  toggle.addEventListener('click', function(){
+    if (audio.paused) { wantOn = true; save('on'); play(); }
+    else { wantOn = false; save('off'); stop(); }
+    sync();
+  });
+  audio.addEventListener('play', sync);
+  audio.addEventListener('pause', sync);
+
+  if (wantOn) {
+    play();
+    // browsers block autoplay with sound until a gesture — start on the first one
+    var armed = ['pointerdown','keydown','touchstart'];
+    function kick(e){
+      // let the toggle button manage itself, don't double-handle its own click
+      if (e && e.target && e.target.closest && e.target.closest('#music-toggle')) return;
+      if (wantOn && audio.paused) play();
+      armed.forEach(function(ev){ window.removeEventListener(ev, kick); });
+    }
+    armed.forEach(function(ev){ window.addEventListener(ev, kick, { passive:true }); });
+  }
+  sync();
+})();
 </script>
 <script src="legal-footer.js"></script>
 </body>
