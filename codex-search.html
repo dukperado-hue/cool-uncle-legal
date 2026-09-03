@@ -1120,6 +1120,15 @@ function navigateArticle(bookType, currentNum, direction, btn, role) {
   document.getElementById('results-list').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+// Hand this มาตรา over to the รัศมีนิติธรรม graph (neural-network.html),
+// which reads ?book=&article= on load, reveals just that one node's path
+// and closes the rest — the mirror of neural-network's "📖 ประมวลธรรมดา"
+// button that hands an article back here.
+function openInRadiance(bookType, number) {
+  window.location.href = 'neural-network.html?book=' + encodeURIComponent(bookType) +
+    '&article=' + encodeURIComponent(number);
+}
+
 // --- มาตรา cross-reference auto-linking -------------------------------
 // Matches "มาตรา <number>[/sub][ suffix]" e.g. "มาตรา ๒๘", "มาตรา 193/1",
 // "มาตรา ๔ ทวิ". Runs on already-escaped text; the matched substring only
@@ -1780,6 +1789,7 @@ function displayResults(results) {
           <button type="button" class="icon-btn" data-navrole="hdr-next" title="มาตราถัดไป" onclick="navigateArticle('${article.bookType}','${article.number}','next',this,'hdr-next')" onmouseenter="playHoverSound()" ${adj.next ? '' : 'disabled'}>ถัดไป ›</button>
           <button type="button" class="icon-btn btn-read" title="อ่านออกเสียงมาตรานี้" onclick="speakArticle(this)" onmouseenter="playHoverSound()">🔊 อ่าน</button>
           <button type="button" class="icon-btn" title="พิมพ์เฉพาะมาตรานี้" onclick="printArticle(this)" onmouseenter="playHoverSound()">🖨️ พิมพ์</button>
+          <button type="button" class="icon-btn" title="เปิดมาตรานี้ในแผนภาพรัศมีนิติธรรม (โยง node ของมาตรานี้ ปิด node อื่น)" onclick="openInRadiance('${article.bookType}','${article.number}')" onmouseenter="playHoverSound()">🔀 สลับประมวล</button>
         </div>
       </div>`;
     return `

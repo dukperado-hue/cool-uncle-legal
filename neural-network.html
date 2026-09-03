@@ -286,6 +286,7 @@
     <div class="graph-tools">
       <button id="nexus-toggle" class="tool-btn">🕸️ Nexus คดี ▾</button>
       <button id="hotarts-btn" class="tool-btn">🔥 มาตราเด่น</button>
+      <button id="back-to-codex-btn" class="tool-btn" title="เปิดมาตราที่กำลังดูในประมวลแบบอ่านปกติ">📖 ประมวลธรรมดา</button>
     </div>
     <div id="nexus-menu">
       <input id="nexus-filter" type="text" autocomplete="off" placeholder="กรองชื่อคดี…" />
@@ -1196,6 +1197,7 @@
     }
 
     function renderArticlePanel(node) {
+      lastFocusedArticle = { book: node.bookKey, number: node.number };
       const art = articleText(node.bookKey, node.number);
       const bookTitle = BOOK_INFO[node.bookKey].title;
       const key = node.bookKey + ':' + node.number;
@@ -1266,6 +1268,7 @@
     let nexusFlowEnabled = true; // toggled via the ⚙️ settings panel — a dot traveling along each nexus line
     let hotArtsMode = false;      // toggled via the 🔥 มาตราเด่น button
     const hotIds = new Set();     // node ids of the frequently-cited article leaves while hotArtsMode is on
+    let lastFocusedArticle = null; // {book, number} of the last มาตรา whose panel opened — for the "📖 ประมวลธรรมดา" hand-off back to codex-search.html
 
     const Graph = ForceGraph()(elem)
       .graphData({ nodes: [...nodesById.values()], links })
@@ -1536,6 +1539,28 @@
     }
     document.getElementById('search-go').onclick = runSearch;
     searchNum.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); runSearch(); } });
+
+    // ---- 📖 ประมวลธรรมดา: hand the focused มาตรา back to codex-search.html ----
+    // Mirror of that page's "🔀 สลับประมวล" button. Uses the last มาตรา whose
+    // panel opened here (deep-link, search, or a node click); with none yet,
+    // just opens the plain reader on its landing page.
+    document.getElementById('back-to-codex-btn').onclick = () => {
+      const a = lastFocusedArticle;
+      window.location.href = a
+        ? 'codex-search.html?book=' + encodeURIComponent(a.book) + '&article=' + encodeURIComponent(a.number)
+        : 'codex-search.html';
+    };
+
+    // ---- deep link in: codex-search.html?…&article= → focus just that node ----
+    // ?book=<codex key>&article=<เลขมาตรา> runs the exact same path as the
+    // 🔍 search box (reveal the one มาตรา, strip its siblings, open its panel).
+    const _dl = new URLSearchParams(location.search);
+    const _dlBook = _dl.get('book'), _dlArt = _dl.get('article');
+    if (_dlBook && _dlArt && BOOK_INFO[_dlBook]) {
+      searchBook.value = _dlBook;
+      searchNum.value = _dlArt;
+      runSearch();
+    }
 
     // ---- ⚙️ settings menu: hide/show, music, motion, reset ----
     const settingsToggle = document.getElementById('settings-toggle');
