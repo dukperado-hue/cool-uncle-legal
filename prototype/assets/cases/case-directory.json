@@ -1,15 +1,15 @@
 {
  "_meta": {
   "generated_by": "build-case-directory.py",
-  "total": 61,
-  "public": 61,
+  "total": 68,
+  "public": 68,
   "rulings": 3,
   "landmark": 7,
   "buckets": [
    {
     "key": "criminal",
     "label": "อาญา",
-    "count": 26
+    "count": 33
    },
    {
     "key": "economic",
@@ -24,7 +24,7 @@
    {
     "key": "political",
     "label": "รธน.-การเมือง-ปกครอง",
-    "count": 25
+    "count": 27
    },
    {
     "key": "international",
@@ -240,6 +240,89 @@
    "read_minutes": null
   },
   {
+   "id": "boss-yoovidhya-2555",
+   "title": "คดี \"บอส\" วรยุทธ อยู่วิทยา ขับรถชน ด.ต.วิเชียร กลั่นประเสริฐ (2555)",
+   "year": 2555,
+   "year_raw": "2555",
+   "bucket": "criminal",
+   "bucket_label": "อาญา",
+   "buckets": [
+    "criminal"
+   ],
+   "bucket_labels": [
+    "อาญา"
+   ],
+   "cat_raw": "คดีอาญา",
+   "blurb": "ทายาทกระทิงแดงขับรถชนตำรวจเสียชีวิต — เลื่อนคดีจนข้อหาเบาขาดอายุความทีละข้อ อัยการสั่งไม่ฟ้อง แล้วสังคมรื้อคดีกลับ",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 80,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": 9
+  },
+  {
+   "id": "phukamkap-jo-2564",
+   "title": "คดี \"ผู้กำกับโจ้\" ตำรวจคลุมถุงพลาสติกผู้ต้องหาจนเสียชีวิต (2564-2568)",
+   "year": 2565,
+   "year_raw": "2565",
+   "bucket": "criminal",
+   "bucket_label": "อาญา",
+   "buckets": [
+    "criminal"
+   ],
+   "bucket_labels": [
+    "อาญา"
+   ],
+   "cat_raw": "คดีอาญา",
+   "blurb": "ผกก.กับพวก 7 นาย คลุมถุงพลาสติกผู้ต้องหายาเสพติดเพื่อรีดเงินจนขาดอากาศตาย — ศาลลงโทษฐานฆ่าโดยทรมาน",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 80,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": 8
+  },
+  {
+   "id": "akong-sms-2554",
+   "title": "คดี \"อากง SMS\" อำพล ตั้งนพกุล (2553-2555)",
+   "year": 2554,
+   "year_raw": "2554",
+   "bucket": "criminal",
+   "bucket_label": "อาญา",
+   "buckets": [
+    "criminal",
+    "political"
+   ],
+   "bucket_labels": [
+    "อาญา",
+    "รธน.-การเมือง-ปกครอง"
+   ],
+   "cat_raw": "คดีอาญา",
+   "blurb": "ส่ง SMS 4 ข้อความ ศาลลงโทษกระทงละ 5 ปี รวม 20 ปี — จำเลยเสียชีวิตในเรือนจำระหว่างอุทธรณ์ คดีระงับ",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 80,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": 8
+  },
+  {
    "id": "ksor-kulab-2436",
    "title": "คดี ก.ศ.ร. กุหลาบ — นักหนังสือพิมพ์ผู้ถูกส่งเข้าโรงพยาบาลคนเสียจริต แทนการขึ้นศาล",
    "year": 2440,
@@ -296,6 +379,60 @@
    "court_count": 0,
    "is_landmark": false,
    "read_minutes": 6
+  },
+  {
+   "id": "nong-mey-2560",
+   "title": "คดีการเสียชีวิตของ \"น้องเมย\" ภคพงศ์ ตัญกาญจน์ นักเรียนเตรียมทหาร (2560)",
+   "year": 2560,
+   "year_raw": "2560",
+   "bucket": "criminal",
+   "bucket_label": "อาญา",
+   "buckets": [
+    "criminal"
+   ],
+   "bucket_labels": [
+    "อาญา"
+   ],
+   "cat_raw": "คดีอาญา",
+   "blurb": "นักเรียนเตรียมทหารปี 1 เสียชีวิตหลังถูก \"ธำรงวินัย\" — ผ่าพิสูจน์ครั้งที่ 2 พบอวัยวะภายในถูกนำออก",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 78,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": 9
+  },
+  {
+   "id": "tangmo-nida-2565",
+   "title": "คดีการเสียชีวิตของ \"แตงโม\" ภัทรธิดา (นิดา) พัชรวีระพงษ์ — ตกเรือกลางแม่น้ำเจ้าพระยา (2565)",
+   "year": 2565,
+   "year_raw": "2565",
+   "bucket": "criminal",
+   "bucket_label": "อาญา",
+   "buckets": [
+    "criminal"
+   ],
+   "bucket_labels": [
+    "อาญา"
+   ],
+   "cat_raw": "คดีอาญา",
+   "blurb": "นักแสดงตกจากสปีดโบ๊ตกลางแม่น้ำเสียชีวิต — คน 5 คนบนเรือถูกฟ้องฐานประมาท ไม่ช่วยเหลือ และทำลายพยานหลักฐาน",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 76,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": 8
   },
   {
    "id": "warawongsa-2091",
@@ -408,6 +545,35 @@
    "court_count": 0,
    "is_landmark": true,
    "read_minutes": null
+  },
+  {
+   "id": "chaiyaphum-pasae-2560",
+   "title": "คดีชัยภูมิ ป่าแส เยาวชนลาหู่ถูกทหารยิงที่ด่านตรวจ (2560-2566)",
+   "year": 2566,
+   "year_raw": "2566",
+   "bucket": "criminal",
+   "bucket_label": "อาญา",
+   "buckets": [
+    "criminal",
+    "political"
+   ],
+   "bucket_labels": [
+    "อาญา",
+    "รธน.-การเมือง-ปกครอง"
+   ],
+   "cat_raw": "คดีอาญา",
+   "blurb": "ทหารยิงนักกิจกรรมเยาวชนลาหู่ที่ด่านตรวจ อ้างป้องกันตัว — ศาลฎีกาชี้พิรุธหลักฐาน สั่งกองทัพบกชดใช้",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 80,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": 8
   },
   {
    "id": "corfu-channel-2492",
@@ -1065,6 +1231,33 @@
    "court_count": 3,
    "is_landmark": false,
    "read_minutes": 10
+  },
+  {
+   "id": "huay-30-lan-kru-preecha-2560",
+   "title": "คดีหวย 30 ล้าน — ครูปรีชา ใคร่ครวญ กับ ร.ต.ท.จรูญ วิมูล (2560–2567)",
+   "year": 2567,
+   "year_raw": "2567",
+   "bucket": "criminal",
+   "bucket_label": "อาญา",
+   "buckets": [
+    "criminal"
+   ],
+   "bucket_labels": [
+    "อาญา"
+   ],
+   "cat_raw": "คดีอาญา",
+   "blurb": "ใครเป็นเจ้าของสลากรางวัลที่ 1? ศาลชี้ครูปรีชาไม่ใช่ผู้เสียหาย สุดท้ายครูถูกจำคุกฐานฟ้องเท็จและเบิกความเท็จ",
+   "grade": "A",
+   "grade_raw": "A",
+   "score": 80,
+   "s_verified": false,
+   "public": true,
+   "has_play": true,
+   "has_ruling": false,
+   "ruling_verified": false,
+   "court_count": 0,
+   "is_landmark": false,
+   "read_minutes": 9
   },
   {
    "id": "hangthong-mystery-2542",
