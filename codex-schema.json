@@ -1,0 +1,45 @@
+{
+  "DEPRECATED": true,
+  "deprecatedSince": "2026-09-07 (Thai Legal Atlas — Phase 2)",
+  "status": "NOT AUTHORITATIVE — do not code against this file",
+
+  "whatThisWas": "An early (2024) design sketch for a nested-tree JSON model of the Thai codes. It was never implemented that way and it does NOT describe the live data. It also mislabels 'constitution' (that key is พระธรรมนูญศาลยุติธรรม, not a constitution).",
+
+  "whatToUseInstead": {
+    "corpus": {
+      "file": "codex-data.json",
+      "shape": "books.<collectionKey>.articles.<number> -> { id, number, text, cancelled, meta, keywords, caseLaw, examples, lectureNotes?, examFreq? }. meta is a FLAT structural descriptor { phaak/phaakTitle, laksana/laksanaTitle, muad/muadTitle, suan/suanTitle } — NOT a nested tree. Multi-instrument collections key articles as '<instrumentId>::<number>'.",
+      "note": "This remains the source corpus and is not migrated."
+    },
+    "ontology": {
+      "file": "collections-registry.json",
+      "role": "Authoritative per-collection configuration: native structural levels + their Thai labels, provision unit, instrument model, subject area, source attribution, patch flags. Add or reshape a collection HERE."
+    },
+    "api": {
+      "file": "atlas-core.js",
+      "global": "window.AtlasCore",
+      "role": "The shared navigation/information layer. listSubjectAreas · listCollections · getCollection · getInstrument · getStructureTree · resolveProvision · getBreadcrumb · describePath · getAdjacent · resolveAtlasId · makeAtlasId · compareNumbers. Do not reimplement these per page."
+    },
+    "ui": {
+      "file": "atlas-ui.js",
+      "global": "window.AtlasUI",
+      "role": "Registry-driven navigation UI structure (Subject Area -> Collection -> Instrument -> native hierarchy -> Provision). Host page: atlas.html."
+    },
+    "patches": {
+      "file": "atlas-patches.js",
+      "global": "window.AtlasPatches",
+      "role": "Source-gap corrections (criminal ภาค 1; civil 754-769)."
+    },
+    "validator": {
+      "file": "atlas-validate.js",
+      "run": "node atlas-validate.js"
+    }
+  },
+
+  "identityScheme": {
+    "legacyId": "<collection>_<number>  (frozen — every existing link, GA4, SEO uses this). Multi-instrument: <collection>_<instrument>::<number>",
+    "atlasId": "atlas:<collection>/<number>  ·  atlas:<collection>/<instrument>/<number>",
+    "viewerUrl": "codex-article-viewer.html?id=<legacyId>  — never migrated",
+    "principle": "ONE ATLAS, MULTIPLE LEGAL ONTOLOGIES — collection-native hierarchy is preserved, not flattened into a universal Code->Book->Title->Chapter->Section model."
+  }
+}

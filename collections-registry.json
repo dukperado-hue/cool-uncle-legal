@@ -1,0 +1,397 @@
+{
+  "version": "1.0",
+  "generated": "2026-09-07",
+  "principle": "ONE ATLAS, MULTIPLE LEGAL ONTOLOGIES. Each collection declares its own native structural model here. atlas-core.js reads this registry to navigate every collection without hardcoding hierarchy levels. NOTE: the meta.<field> VALUE already contains the correct Thai structural word (e.g. 'บรรพ 3', 'ภาค 2', 'หมวด 1'); the 'label' in each level below is for UI chrome (pickers, filter headers, breadcrumb chips, aria) and for legal-correctness of level naming — it is NOT used to rewrite the stored value.",
+
+  "levelKinds": {
+    "part": "ภาค หรือ บรรพ — การแบ่งระดับบนสุดของประมวลกฎหมาย",
+    "title": "ลักษณะ",
+    "chapter": "หมวด",
+    "division": "ส่วน",
+    "subdivision": "ส่วนย่อย / ตอน",
+    "clause": "ข้อ (ใช้กับกฎกระทรวง ประกาศ ข้อกำหนด)"
+  },
+
+  "instrumentTypes": {
+    "code": "ประมวลกฎหมาย",
+    "court-charter": "พระธรรมนูญศาลยุติธรรม",
+    "constitution": "รัฐธรรมนูญ",
+    "act": "พระราชบัญญัติ",
+    "organic-act": "พระราชบัญญัติประกอบรัฐธรรมนูญ",
+    "emergency-decree": "พระราชกำหนด",
+    "royal-decree": "พระราชกฤษฎีกา",
+    "ministerial-regulation": "กฎกระทรวง",
+    "regulator-requirement": "ข้อกำหนด / ข้อบังคับของหน่วยงานกำกับ",
+    "notification": "ประกาศ",
+    "standard": "มาตรฐาน"
+  },
+
+  "defaults": {
+    "provisionUnit": "มาตรา",
+    "provisionUnitAbbr": "ม.",
+    "source": {
+      "name": "PyThaiNLP thai-law dataset — ต้นฉบับสำนักงานคณะกรรมการกฤษฎีกา (krisdika.go.th)",
+      "url": "https://github.com/PyThaiNLP/thai-law",
+      "official": false,
+      "publicDomain": true,
+      "asAmendedThrough": "2026-09 (beta)"
+    }
+  },
+
+  "subjectAreas": [
+    { "key": "civil-commercial", "title": "แพ่งและพาณิชย์", "order": 1 },
+    { "key": "civil-procedure", "title": "วิธีพิจารณาความแพ่ง", "order": 2 },
+    { "key": "criminal", "title": "อาญา", "order": 3 },
+    { "key": "criminal-procedure", "title": "วิธีพิจารณาความอาญา", "order": 4 },
+    { "key": "court-organization", "title": "พระธรรมนูญศาลยุติธรรม", "order": 5 },
+    { "key": "public-constitutional", "title": "รัฐธรรมนูญและองค์กรตามรัฐธรรมนูญ", "order": 6 },
+    { "key": "public-administrative", "title": "กฎหมายปกครอง", "order": 7 },
+    { "key": "commercial-ip", "title": "ทรัพย์สินทางปัญญาและการค้า", "order": 8 },
+    { "key": "aviation", "title": "กฎหมายการบินพลเรือน", "order": 9, "planned": true }
+  ],
+
+  "collections": {
+    "civil": {
+      "key": "civil",
+      "title": "ประมวลกฎหมายแพ่งและพาณิชย์",
+      "short": "ประมวลแพ่ง",
+      "icon": "📖",
+      "subjectArea": "civil-commercial",
+      "instrumentModel": "single",
+      "instrumentType": "code",
+      "provisionUnit": "มาตรา",
+      "articleCount": 1843,
+      "levels": [
+        { "kind": "part",     "field": "phaak",   "label": "บรรพ" },
+        { "kind": "title",    "field": "laksana", "label": "ลักษณะ" },
+        { "kind": "chapter",  "field": "muad",    "label": "หมวด" },
+        { "kind": "division", "field": "suan",    "label": "ส่วน" }
+      ],
+      "patched": true,
+      "unsortedLabel": "บทเบ็ดเสร็จ (พระราชบัญญัติให้ใช้ประมวลฯ)",
+      "notes": "phaak slot carries บรรพ (not ภาค). Deepest native model — 4 structural levels. มาตรา 1–3 are the enacting provisions of the พ.ร.บ.ให้ใช้ประมวลฯ and legitimately sit before บรรพ 1 (grouped under unsortedLabel, not dropped). Patch: มาตรา 754–769 mislabelled ลักษณะ 22 → ลักษณะ 13 (จำนำ)."
+    },
+
+    "civpro": {
+      "key": "civpro",
+      "title": "ประมวลกฎหมายวิธีพิจารณาความแพ่ง",
+      "short": "ประมวลวิแพ่ง",
+      "icon": "⚖️",
+      "subjectArea": "civil-procedure",
+      "instrumentModel": "single",
+      "instrumentType": "code",
+      "provisionUnit": "มาตรา",
+      "articleCount": 474,
+      "levels": [
+        { "kind": "part",     "field": "phaak",   "label": "ภาค" },
+        { "kind": "title",    "field": "laksana", "label": "ลักษณะ" },
+        { "kind": "chapter",  "field": "muad",    "label": "หมวด" },
+        { "kind": "division", "field": "suan",    "label": "ส่วน" }
+      ],
+      "notes": "phaak slot carries ภาค."
+    },
+
+    "criminal": {
+      "key": "criminal",
+      "title": "ประมวลกฎหมายอาญา",
+      "short": "ประมวลอาญา",
+      "icon": "📕",
+      "subjectArea": "criminal",
+      "instrumentModel": "single",
+      "instrumentType": "code",
+      "provisionUnit": "มาตรา",
+      "articleCount": 447,
+      "levels": [
+        { "kind": "part",     "field": "phaak",   "label": "ภาค" },
+        { "kind": "title",    "field": "laksana", "label": "ลักษณะ" },
+        { "kind": "chapter",  "field": "muad",    "label": "หมวด" },
+        { "kind": "division", "field": "suan",    "label": "ส่วน" }
+      ],
+      "patched": true,
+      "notes": "Patch: ภาค 1 (มาตรา 1–106) is entirely untagged at source; atlas-patches.js synthesizes ภาค 1 / ลักษณะ 1 / หมวด 1 so the whole ภาค does not vanish from the tree."
+    },
+
+    "crimpro": {
+      "key": "crimpro",
+      "title": "ประมวลกฎหมายวิธีพิจารณาความอาญา",
+      "short": "ประมวลวิอาญา",
+      "icon": "🔍",
+      "subjectArea": "criminal-procedure",
+      "instrumentModel": "single",
+      "instrumentType": "code",
+      "provisionUnit": "มาตรา",
+      "articleCount": 325,
+      "levels": [
+        { "kind": "part",     "field": "phaak",   "label": "ภาค" },
+        { "kind": "title",    "field": "laksana", "label": "ลักษณะ" },
+        { "kind": "chapter",  "field": "muad",    "label": "หมวด" },
+        { "kind": "division", "field": "suan",    "label": "ส่วน" }
+      ],
+      "notes": "phaak slot carries ภาค."
+    },
+
+    "constitution": {
+      "key": "constitution",
+      "title": "พระธรรมนูญศาลยุติธรรม",
+      "short": "พระธรรมนูญศาลยุติธรรม",
+      "icon": "🏛️",
+      "subjectArea": "court-organization",
+      "instrumentModel": "single",
+      "instrumentType": "court-charter",
+      "provisionUnit": "มาตรา",
+      "articleCount": 34,
+      "levels": [
+        { "kind": "chapter", "field": "muad", "label": "หมวด" }
+      ],
+      "notes": "LEGACY KEY WARNING: registry/URL key is 'constitution' but this is พระธรรมนูญศาลยุติธรรม, NOT a constitution. The 2017 Constitution is key 'const2560'. Keys are frozen (URLs depend on them); only labels are corrected here. 2-level native model."
+    },
+
+    "const2560": {
+      "key": "const2560",
+      "title": "รัฐธรรมนูญแห่งราชอาณาจักรไทย พุทธศักราช 2560",
+      "short": "รัฐธรรมนูญ 2560",
+      "icon": "📜",
+      "subjectArea": "public-constitutional",
+      "instrumentModel": "single",
+      "instrumentType": "constitution",
+      "provisionUnit": "มาตรา",
+      "articleCount": 279,
+      "levels": [
+        { "kind": "chapter",  "field": "muad", "label": "หมวด" },
+        { "kind": "division", "field": "suan", "label": "ส่วน" }
+      ],
+      "notes": "หมวด → ส่วน → มาตรา. Includes a บทเฉพาะกาล chapter."
+    },
+
+    "politicalparty": {
+      "key": "politicalparty",
+      "title": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560",
+      "short": "พ.ร.ป.พรรคการเมือง",
+      "icon": "🗳️",
+      "subjectArea": "public-constitutional",
+      "instrumentModel": "single",
+      "instrumentType": "organic-act",
+      "provisionUnit": "มาตรา",
+      "articleCount": 153,
+      "enacted": 2560,
+      "levels": [
+        { "kind": "chapter", "field": "muad", "label": "หมวด" }
+      ]
+    },
+
+    "adminproc": {
+      "key": "adminproc",
+      "title": "พระราชบัญญัติวิธีปฏิบัติราชการทางปกครอง พ.ศ. 2539",
+      "short": "วิ.ปฏิบัติราชการทางปกครอง",
+      "icon": "📝",
+      "subjectArea": "public-administrative",
+      "instrumentModel": "single",
+      "instrumentType": "act",
+      "provisionUnit": "มาตรา",
+      "articleCount": 88,
+      "enacted": 2539,
+      "levels": [
+        { "kind": "chapter",  "field": "muad", "label": "หมวด" },
+        { "kind": "division", "field": "suan", "label": "ส่วน" }
+      ],
+      "notes": "มาตรา 1–2 are enacting / short-title clauses with null meta — atlas-core groups them under a 'ไม่ได้จัดเข้าหมวด' node rather than fabricating a หมวด."
+    },
+
+    "admincourt": {
+      "key": "admincourt",
+      "title": "พระราชบัญญัติจัดตั้งศาลปกครองและวิธีพิจารณาคดีปกครอง พ.ศ. 2542",
+      "short": "จัดตั้งศาลปกครองฯ",
+      "icon": "🏢",
+      "subjectArea": "public-administrative",
+      "instrumentModel": "single",
+      "instrumentType": "act",
+      "provisionUnit": "มาตรา",
+      "articleCount": 158,
+      "enacted": 2542,
+      "levels": [
+        { "kind": "chapter",  "field": "muad", "label": "หมวด" },
+        { "kind": "division", "field": "suan", "label": "ส่วน" }
+      ]
+    },
+
+    "tortofficials": {
+      "key": "tortofficials",
+      "title": "พระราชบัญญัติความรับผิดทางละเมิดของเจ้าหน้าที่ พ.ศ. 2539",
+      "short": "ละเมิดของเจ้าหน้าที่",
+      "icon": "⚠️",
+      "subjectArea": "public-administrative",
+      "instrumentModel": "single",
+      "instrumentType": "act",
+      "provisionUnit": "มาตรา",
+      "articleCount": 5,
+      "enacted": 2539,
+      "levels": [],
+      "notes": "Flat Act — no internal structure. getStructureTree returns provisions directly with no structural nodes."
+    },
+
+    "copyright": {
+      "key": "copyright",
+      "title": "พระราชบัญญัติลิขสิทธิ์ พ.ศ. 2537",
+      "short": "ลิขสิทธิ์",
+      "icon": "©️",
+      "subjectArea": "commercial-ip",
+      "instrumentModel": "single",
+      "instrumentType": "act",
+      "provisionUnit": "มาตรา",
+      "articleCount": 92,
+      "enacted": 2537,
+      "levels": [
+        { "kind": "chapter",  "field": "muad", "label": "หมวด" },
+        { "kind": "division", "field": "suan", "label": "ส่วน" }
+      ]
+    },
+
+    "patent": {
+      "key": "patent",
+      "title": "พระราชบัญญัติสิทธิบัตร พ.ศ. 2522",
+      "short": "สิทธิบัตร",
+      "icon": "🔬",
+      "subjectArea": "commercial-ip",
+      "instrumentModel": "single",
+      "instrumentType": "act",
+      "provisionUnit": "มาตรา",
+      "articleCount": 121,
+      "enacted": 2522,
+      "levels": [
+        { "kind": "chapter",  "field": "muad", "label": "หมวด" },
+        { "kind": "division", "field": "suan", "label": "ส่วน" }
+      ]
+    },
+
+    "trademark": {
+      "key": "trademark",
+      "title": "พระราชบัญญัติเครื่องหมายการค้า พ.ศ. 2534",
+      "short": "เครื่องหมายการค้า",
+      "icon": "™️",
+      "subjectArea": "commercial-ip",
+      "instrumentModel": "single",
+      "instrumentType": "act",
+      "provisionUnit": "มาตรา",
+      "articleCount": 148,
+      "enacted": 2534,
+      "levels": [
+        { "kind": "chapter",  "field": "muad", "label": "หมวด" },
+        { "kind": "division", "field": "suan", "label": "ส่วน" }
+      ]
+    },
+
+    "carriage": {
+      "key": "carriage",
+      "title": "พระราชบัญญัติการรับขนของทางทะเล พ.ศ. 2534",
+      "short": "รับขนของทางทะเล",
+      "icon": "🚢",
+      "subjectArea": "commercial-ip",
+      "instrumentModel": "single",
+      "instrumentType": "act",
+      "provisionUnit": "มาตรา",
+      "articleCount": 61,
+      "enacted": 2534,
+      "levels": [
+        { "kind": "chapter", "field": "muad", "label": "หมวด" }
+      ]
+    },
+
+    "ipcourt": {
+      "key": "ipcourt",
+      "title": "พระราชบัญญัติจัดตั้งศาลทรัพย์สินทางปัญญาและการค้าระหว่างประเทศและวิธีพิจารณาคดีทรัพย์สินทางปัญญาและการค้าระหว่างประเทศ พ.ศ. 2539",
+      "short": "จัดตั้งศาลทรัพย์สินทางปัญญาฯ",
+      "icon": "⚖️",
+      "subjectArea": "commercial-ip",
+      "instrumentModel": "single",
+      "instrumentType": "act",
+      "provisionUnit": "มาตรา",
+      "articleCount": 47,
+      "enacted": 2539,
+      "levels": [
+        { "kind": "chapter", "field": "muad", "label": "หมวด" }
+      ]
+    },
+
+    "aviation": {
+      "key": "aviation",
+      "title": "กฎหมายการบินพลเรือน",
+      "short": "กฎหมายการบิน",
+      "icon": "✈️",
+      "subjectArea": "aviation",
+      "enabled": false,
+      "planned": true,
+      "instrumentModel": "multi",
+      "instrumentField": "instrument",
+      "instrumentTypeField": "instrumentType",
+      "provisionUnit": "มาตรา",
+      "instrumentIdNote": "Instrument ids are short stable slugs — they appear in the Atlas ID (atlas:aviation/<id>/<number>) and, prefixed, in the storage key (<id>::<number>). Keep them URL-safe and frozen once data exists.",
+      "instruments": [
+        {
+          "id": "act",
+          "type": "act",
+          "title": "พระราชบัญญัติการเดินอากาศ พ.ศ. 2497",
+          "short": "พ.ร.บ.การเดินอากาศ",
+          "authorityRank": 1,
+          "provisionUnit": "มาตรา",
+          "levels": [
+            { "kind": "chapter",  "field": "muad", "label": "หมวด" },
+            { "kind": "division", "field": "suan", "label": "ส่วน" }
+          ]
+        },
+        {
+          "id": "decree",
+          "type": "emergency-decree",
+          "title": "พระราชกำหนดการบินพลเรือนแห่งประเทศไทย พ.ศ. 2558",
+          "short": "พ.ร.ก.CAAT",
+          "authorityRank": 1,
+          "provisionUnit": "มาตรา",
+          "levels": [
+            { "kind": "chapter", "field": "muad", "label": "หมวด" }
+          ]
+        },
+        {
+          "id": "mr",
+          "type": "ministerial-regulation",
+          "title": "กฎกระทรวง (ออกตามความในพระราชบัญญัติการเดินอากาศ)",
+          "short": "กฎกระทรวง",
+          "authorityRank": 3,
+          "provisionUnit": "ข้อ",
+          "levels": [
+            { "kind": "chapter", "field": "muad", "label": "หมวด" }
+          ]
+        },
+        {
+          "id": "caat-req",
+          "type": "regulator-requirement",
+          "title": "ข้อกำหนดของสำนักงานการบินพลเรือนแห่งประเทศไทย (CAAT)",
+          "short": "ข้อกำหนด CAAT",
+          "authorityRank": 5,
+          "provisionUnit": "ข้อ",
+          "levels": [
+            { "kind": "chapter", "field": "muad", "label": "หมวด" }
+          ]
+        },
+        {
+          "id": "caat-notif",
+          "type": "notification",
+          "title": "ประกาศสำนักงานการบินพลเรือนแห่งประเทศไทย",
+          "short": "ประกาศ CAAT",
+          "authorityRank": 6,
+          "provisionUnit": "ข้อ",
+          "levels": []
+        },
+        {
+          "id": "standard",
+          "type": "standard",
+          "title": "มาตรฐานและข้อกำหนดทางเทคนิคที่บังคับใช้ (รวม ICAO Annex ที่รับมาใช้)",
+          "short": "มาตรฐาน",
+          "authorityRank": 7,
+          "provisionUnit": "ข้อ",
+          "levels": []
+        }
+      ],
+      "storageKeyModel": "Multi-instrument collections key codex-data.json articles as \"<instrumentId>::<number>\" (e.g. books.aviation.articles[\"act::12\"], [\"mr::12\"]). Single-instrument collections are unchanged (key == number). Legacy viewer id for a multi provision is \"<collection>_<instrumentId>::<number>\" (e.g. aviation_act::12) — still one \"_\" split, so codex-article-viewer.html keeps working unchanged.",
+      "notes": "ARCHITECTURE DEMONSTRATION ONLY — enabled:false. No articles exist in codex-data.json books.aviation yet. This entry proves that a future multi-instrument collection (Act + Emergency Decree + Ministerial Regulation + Announcement + CAAT Requirement + Standard), each with its own provision unit (มาตรา vs ข้อ) and its own internal levels, is expressible purely through registry configuration. atlas-core.js excludes planned/disabled collections from listCollections() and every corpus operation until real data is added."
+    }
+  }
+}

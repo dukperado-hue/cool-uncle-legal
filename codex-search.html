@@ -16,6 +16,9 @@
 <meta name="description" content="อ่านและค้นหาประมวลกฎหมายทุกประเภทออนไลน์ฟรี — ประมวลกฎหมายแพ่งและพาณิชย์ ประมวลกฎหมายอาญา วิแพ่ง วิอาญา พระธรรมนูญศาลยุติธรรม กฎหมายปกครอง วิปกครอง พรบ.ลิขสิทธิ์ พรบ.สิทธิบัตร ครบกว่า 4,000 มาตรา พร้อมจุดดักข้อสอบและคำบรรยายจริง">
 <meta name="keywords" content="ประมวลกฎหมาย, ประมวลกฎหมายแพ่งและพาณิชย์, ประมวลกฎหมายอาญา, ประมวลกฎหมายวิธีพิจารณาความแพ่ง, วิแพ่ง, วิฯแพ่ง, ประมวลกฎหมายวิธีพิจารณาความอาญา, วิอาญา, วิฯอาญา, พระธรรมนูญศาลยุติธรรม, กฎหมายปกครอง, พรบ.จัดตั้งศาลปกครอง, วิปกครอง, วิมหาชน, กฎหมายทรัพย์สินทางปัญญา, พรบ.ลิขสิทธิ์, พรบ.สิทธิบัตร, พรบ.จัดตั้งศาล, บรรพ, หนี้, ทรัพย์สิน, ยืม, ซื้อ-ขาย, ขายฝาก, ตัวแทน, จ้างทำของ, จ้างแรงงาน, มรดก, กฎหมายครอบครัว, สมรสเพศเดียวกัน, กฎหมายลิขสิทธิ์, มาตรา, ค้นหามาตรา">
 <link rel="canonical" href="https://coolunclelab.com/codex-search.html">
+<!-- Thai Legal Atlas shared structural layer (additive; page still works if these 404) -->
+<script src="atlas-patches.js?v=20260907b"></script>
+<script src="atlas-core.js?v=20260907b"></script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="ประมวลกฎหมายแพ่งและพาณิชย์ — อ่านออนไลน์ 1,843 มาตรา | Cool Uncle">
 <meta property="og:description" content="อ่านตัวบทประมวลกฎหมายแพ่งและพาณิชย์ครบ 6 บรรพ พร้อมไฮไลต์คำสำคัญและจุดดักข้อสอบ เตรียมสอบเนติ ตั๋วทนาย">
@@ -995,9 +998,13 @@ let currentPage = 0;
 // Load data on page load
 async function loadCodexData() {
   try {
-    const response = await fetch('codex-data.json?v=20260903b');
+    const [response] = await Promise.all([
+      fetch('codex-data.json?v=20260903b'),
+      (window.AtlasCore ? AtlasCore.loadRegistry('collections-registry.json?v=20260907b').catch(() => {}) : Promise.resolve())
+    ]);
     if (!response.ok) throw new Error('Failed to load codex data');
     codexData = await response.json();
+    if (window.AtlasCore) { try { AtlasCore.attachCorpus(codexData); } catch (e) {} }
     console.log('✅ Codex loaded:', Object.fromEntries(
       Object.entries(codexData.books).map(([k, v]) => [k, Object.keys(v.articles).length])
     ));
@@ -1065,12 +1072,19 @@ function sortKey(numStr) {
 }
 
 function compareNumbers(a, b) {
+  // Shared implementation lives in atlas-core.js; identical fallback below.
+  if (window.AtlasCore && AtlasCore.compareNumbers) return AtlasCore.compareNumbers(a, b);
   const ka = sortKey(a), kb = sortKey(b);
   for (let i = 0; i < 4; i++) if (ka[i] !== kb[i]) return ka[i] - kb[i];
   return 0;
 }
 
 function getAdjacentArticleNumbers(bookType, number) {
+  // Centralized in atlas-core.js (handles multi-instrument adjacency too);
+  // identical local fallback retained.
+  if (window.AtlasCore && AtlasCore.isReady() && AtlasCore.collectionInCorpus(bookType)) {
+    return AtlasCore.getAdjacent(bookType, number);
+  }
   const book = codexData && codexData.books[bookType];
   if (!book) return { prev: null, next: null };
   const numbers = Object.keys(book.articles).sort(compareNumbers);
@@ -1807,9 +1821,12 @@ function displayResults(results) {
       </div>
 
       <div class="article-breadcrumb">
-        📍 ${BOOK_INFO[article.bookType].short}
-        ${[article.meta?.phaak, article.meta?.laksana, article.meta?.muad, article.meta?.suan]
-          .filter(Boolean).map(v => ' › ' + v).join('')}
+        📍 ${(window.AtlasCore && AtlasCore.isReady() && AtlasCore.collectionInCorpus(article.bookType))
+          ? AtlasCore.getBreadcrumb(article.bookType, article.number)
+              .filter(c => c.kind !== 'provision').map(c => c.text).join(' › ')
+          : BOOK_INFO[article.bookType].short +
+            [article.meta?.phaak, article.meta?.laksana, article.meta?.muad, article.meta?.suan]
+              .filter(Boolean).map(v => ' › ' + v).join('')}
       </div>
     </article>
   `;

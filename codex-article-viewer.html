@@ -31,6 +31,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;900&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
 <script src="tts-helper.js"></script>
+<!-- Thai Legal Atlas shared structural layer (additive; page still works if these 404) -->
+<script src="atlas-patches.js?v=20260907b"></script>
+<script src="atlas-core.js?v=20260907b"></script>
 <style>
 :root {
   --paper: #FBF9F4;
@@ -1699,6 +1702,9 @@ function sortKey(numStr) {
 }
 
 function compareNumbers(a, b) {
+  // Shared implementation lives in atlas-core.js; keep this identical fallback
+  // so prev/next ordering is unchanged if atlas-core fails to load.
+  if (window.AtlasCore && AtlasCore.compareNumbers) return AtlasCore.compareNumbers(a, b);
   const ka = sortKey(a), kb = sortKey(b);
   for (let i = 0; i < 4; i++) if (ka[i] !== kb[i]) return ka[i] - kb[i];
   return 0;
@@ -1706,10 +1712,18 @@ function compareNumbers(a, b) {
 
 
 function renderNav(articles) {
-  const numbers = Object.keys(articles).sort(compareNumbers);
-  const idx = numbers.indexOf(currentNumber);
-  const prev = idx > 0 ? numbers[idx - 1] : null;
-  const next = idx >= 0 && idx < numbers.length - 1 ? numbers[idx + 1] : null;
+  // Adjacency is centralized in atlas-core.js (stays within-instrument for
+  // multi-instrument collections); identical local fallback retained.
+  let prev, next;
+  if (window.AtlasCore && AtlasCore.isReady() && AtlasCore.collectionInCorpus(currentBookType)) {
+    const adj = AtlasCore.getAdjacent(currentBookType, currentNumber);
+    prev = adj.prev; next = adj.next;
+  } else {
+    const numbers = Object.keys(articles).sort(compareNumbers);
+    const idx = numbers.indexOf(currentNumber);
+    prev = idx > 0 ? numbers[idx - 1] : null;
+    next = idx >= 0 && idx < numbers.length - 1 ? numbers[idx + 1] : null;
+  }
 
   const el = document.getElementById('article-nav');
   el.innerHTML = `
@@ -1910,10 +1924,31 @@ async function loadAndRender() {
     }, { once: true });
   });
 
+  // Resolve the tiny registry first (best-effort, ~14 KB) so we can decode
+  // an ?atlas= id before parsing. Negligible next to the 9.5 MB corpus.
+  if (window.AtlasCore) {
+    try { await AtlasCore.loadRegistry('collections-registry.json?v=20260907b'); } catch (e) {}
+  }
+
+  // Accept BOTH:  ?id=<collection>_<number>   (legacy — unchanged, canonical)
+  //               ?atlas=atlas:<collection>[/<instrument>]/<number>   (new, optional)
   const params = new URLSearchParams(window.location.search);
-  const id = params.get('id');
+  let id = params.get('id');
+  const atlasParam = params.get('atlas');
+  if (!id && atlasParam && window.AtlasCore && AtlasCore.resolveAtlasId) {
+    const r = AtlasCore.resolveAtlasId(atlasParam);
+    if (r) id = r.legacyId;
+  }
+  if (!id && atlasParam && atlasParam.indexOf('atlas:') === 0) {
+    // no AtlasCore — naive single-collection fallback
+    const rest = atlasParam.slice(6);
+    const slash = rest.indexOf('/');
+    if (slash !== -1) id = rest.slice(0, slash) + '_' + rest.slice(slash + 1);
+  }
   if (!id || !id.includes('_')) { showNotFound('ไม่ได้ระบุมาตราที่ต้องการดู'); return; }
 
+  // Split on the FIRST "_" only. For multi-instrument collections the tail is
+  // "<instrument>::<number>" and is used verbatim as the codex-data key.
   currentBookType = id.slice(0, id.indexOf('_'));
   currentNumber = id.slice(id.indexOf('_') + 1);
 
@@ -1925,6 +1960,7 @@ async function loadAndRender() {
     showNotFound('โหลดฐานข้อมูลไม่สำเร็จ ลองรีเฟรชหน้าอีกครั้ง');
     return;
   }
+  if (window.AtlasCore) { try { AtlasCore.attachCorpus(codexData); } catch (e) {} }
 
   const book = codexData.books[currentBookType];
   const article = book && book.articles[currentNumber];
@@ -1932,9 +1968,18 @@ async function loadAndRender() {
   currentArticleObj = article;
   initHighlightFeature();
 
-  const crumbParts = [BOOK_TITLES[currentBookType] || currentBookType];
-  const m = article.meta || {};
-  [m.phaak, m.laksana, m.muad, m.suan].forEach(part => { if (part) crumbParts.push(part); });
+  // Breadcrumb: prefer the Atlas layer (registry-driven, handles collections
+  // that skip levels) and fall back to the legacy 4-slot read if it isn't up.
+  let crumbParts;
+  if (window.AtlasCore && AtlasCore.isReady() && AtlasCore.collectionInCorpus(currentBookType)) {
+    crumbParts = AtlasCore.getBreadcrumb(currentBookType, currentNumber)
+      .filter(c => c.kind !== 'provision')
+      .map(c => c.text);
+  } else {
+    const m = article.meta || {};
+    crumbParts = [BOOK_TITLES[currentBookType] || currentBookType];
+    [m.phaak, m.laksana, m.muad, m.suan].forEach(part => { if (part) crumbParts.push(part); });
+  }
   document.getElementById('breadcrumb').textContent = `📍 ${crumbParts.join(' › ')}`;
   document.getElementById('article-number').textContent = article.number;
   document.getElementById('article-examfreq-badge').innerHTML = article.examFreq
