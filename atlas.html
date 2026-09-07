@@ -161,6 +161,32 @@
   .atlas-provision:hover{border-color:var(--accent);background:var(--accent-soft);text-decoration:none}
   .atlas-provision:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
   .atlas-provision-cancelled{opacity:.5;text-decoration:line-through}
+  /* Phase 4C: provision → associated PUBLIC cases. Additive; applied by
+     atlas-cases.js, which wraps a pill in .atlas-pcases only when the
+     provision has at least one public case. The wrapper becomes the grid
+     cell; the provision link itself is unchanged. */
+  .atlas-pcases{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .atlas-pcases > .atlas-provision{width:100%}
+  .atlas-pcases-d{font-size:10.5px;line-height:1.4}
+  .atlas-pcases-sum{list-style:none;cursor:pointer;color:var(--muted);
+    text-align:center;padding:1px 4px;border-radius:4px;
+    font-variant-numeric:tabular-nums;-webkit-user-select:none;user-select:none}
+  .atlas-pcases-sum::-webkit-details-marker{display:none}
+  .atlas-pcases-sum::marker{content:""}
+  .atlas-pcases-sum:hover{color:var(--accent);background:var(--chip)}
+  .atlas-pcases-d[open] > .atlas-pcases-sum{color:var(--accent);font-weight:600}
+  /* the open list may exceed the narrow provision-grid column — let it size
+     to its content (capped) and sit above neighbouring pills */
+  .atlas-pcases-list{position:relative;z-index:2;display:flex;flex-direction:column;
+    gap:4px;padding:5px 6px;margin-top:2px;border:1px solid var(--line);
+    border-radius:5px;background:var(--panel);width:max-content;
+    min-width:100%;max-width:230px;box-shadow:0 2px 8px rgba(0,0,0,.10)}
+  .atlas-pcases-link{font-size:10.5px;color:var(--accent);line-height:1.35;
+    text-align:left;padding:1px 2px;white-space:normal}
+  .atlas-pcases-link:hover{text-decoration:underline}
+  @media (prefers-reduced-motion:no-preference){
+    .atlas-pcases-sum{transition:color .12s,background .12s}
+  }
 
   .atlas-foot{margin-top:64px;padding-top:var(--s4);border-top:1px solid var(--line);
     font-size:11.5px;color:var(--muted);line-height:1.7}
@@ -194,6 +220,7 @@
 <script src="atlas-patches.js?v=20260907d"></script>
 <script src="atlas-core.js?v=20260907d"></script>
 <script src="atlas-ui.js?v=20260907f"></script>
+<script src="atlas-cases.js?v=20260907a"></script>
 <script>
 (function () {
   'use strict';
