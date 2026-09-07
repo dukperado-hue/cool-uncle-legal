@@ -783,6 +783,34 @@ mark.codex-hl-yellow { background: #FFE066; color: #3a3212; }
   color: var(--ink);
 }
 
+/* ATLAS CONTEXT (only when arrived from Thai Legal Atlas) */
+.breadcrumb a { color: var(--accent); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.article-nav.has-current { grid-template-columns: 1fr auto 1fr; }
+.nav-current {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 18px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  text-align: center;
+  align-self: stretch;
+  justify-content: center;
+}
+.nav-current .nav-label { color: var(--gold); }
+.secondary-back {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-faint);
+  margin-left: 14px;
+  text-decoration: none;
+}
+.secondary-back:hover { text-decoration: underline; }
+@media (max-width: 560px) {
+  .article-nav.has-current { grid-template-columns: 1fr; }
+}
+
 /* RELATED ARTICLES */
 .related-articles {
   background: var(--card);
@@ -1326,6 +1354,9 @@ const BOOK_TITLES = {
 let codexData = null;
 let currentBookType = null;
 let currentNumber = null;
+// Phase 4A: true only when this visit came from Thai Legal Atlas (?x=atlas).
+// A direct legacy URL leaves this false and the viewer behaves exactly as before.
+let FROM_ATLAS = false;
 
 const THAI_DIGIT_WORDS = ['', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า'];
 
@@ -1711,6 +1742,75 @@ function compareNumbers(a, b) {
 }
 
 
+// prev/next are STORAGE KEYS from atlas-core (== number for single-instrument
+// collections; "<instrument>::<number>" for multi). Never derive them by
+// currentNumber ± 1 — numbers have gaps, "/n" sub-numbers, ทวิ/ตรี suffixes,
+// repeals, and different instruments.
+function navKeyHref(storageKey) {
+  const base = `codex-article-viewer.html?id=${currentBookType}_${encodeURIComponent(storageKey)}`;
+  return FROM_ATLAS ? base + '&x=atlas' : base;   // canonical id unchanged; x= is metadata
+}
+function navKeyLabel(storageKey) {
+  if (window.AtlasCore && AtlasCore.getProvisionBrief) {
+    const b = AtlasCore.getProvisionBrief(currentBookType, storageKey);
+    if (b) return { unit: b.unit || 'มาตรา', num: String(b.number) };
+  }
+  const s = String(storageKey);
+  const sep = s.indexOf('::');
+  return { unit: 'มาตรา', num: sep === -1 ? s : s.slice(sep + 2) };
+}
+
+// ---- Atlas contextual navigation (Phase 4A) -------------------------
+// Only runs when FROM_ATLAS. A direct legacy URL never calls into here, so
+// the viewer keeps its existing "← ค้นหาต่อ" behaviour and plain breadcrumb.
+function atlasCollectionTitle() {
+  if (window.AtlasCore && AtlasCore.getCollection) {
+    const c = AtlasCore.getCollection(currentBookType);
+    if (c && c.title) return c.title;
+  }
+  return BOOK_TITLES[currentBookType] || currentBookType;
+}
+function atlasReturnHref() {
+  // Prefer the exact Atlas route (with its expanded tree) saved for this tab;
+  // otherwise reconstruct the collection / instrument route from the id.
+  try {
+    const saved = JSON.parse(sessionStorage.getItem('atlas:return') || 'null');
+    if (saved && typeof saved.hash === 'string' &&
+        saved.hash.indexOf('#/c/' + currentBookType) === 0) {
+      return 'atlas.html' + saved.hash;
+    }
+  } catch (e) { /* no sessionStorage — fall through to reconstruction */ }
+  let route = '#/c/' + currentBookType;
+  const sep = String(currentNumber).indexOf('::');
+  if (sep !== -1) route += '/i/' + String(currentNumber).slice(0, sep);
+  return 'atlas.html' + route;
+}
+function applyAtlasContext(crumbParts) {
+  if (!FROM_ATLAS) return;
+  const back = document.querySelector('.back-button');
+  if (back) {
+    back.textContent = '← กลับไป ' + atlasCollectionTitle();
+    back.setAttribute('href', atlasReturnHref());
+    if (!document.getElementById('secondary-search-link')) {
+      const s = document.createElement('a');
+      s.id = 'secondary-search-link';
+      s.className = 'secondary-back';
+      s.setAttribute('href', 'codex-search.html');
+      s.textContent = 'ค้นหาต่อ →';
+      back.insertAdjacentElement('afterend', s);
+    }
+  }
+  // Make the collection crumb (first part) a link back into the Atlas — the
+  // rest of the structural path stays plain text (it is real ontology data,
+  // never fabricated). Only the levels that actually exist are shown.
+  const bc = document.getElementById('breadcrumb');
+  if (bc && Array.isArray(crumbParts) && crumbParts.length) {
+    const rest = crumbParts.slice(1).map(escapeHtml).join(' › ');
+    bc.innerHTML = '📍 <a href="' + escapeHtml(atlasReturnHref()) + '">' +
+      escapeHtml(crumbParts[0]) + '</a>' + (rest ? ' › ' + rest : '');
+  }
+}
+
 function renderNav(articles) {
   // Adjacency is centralized in atlas-core.js (stays within-instrument for
   // multi-instrument collections); identical local fallback retained.
@@ -1726,12 +1826,19 @@ function renderNav(articles) {
   }
 
   const el = document.getElementById('article-nav');
+  el.className = 'article-nav' + (FROM_ATLAS ? ' has-current' : '');
+  const p = prev ? navKeyLabel(prev) : null;
+  const n = next ? navKeyLabel(next) : null;
+  const cur = navKeyLabel(currentNumber);
   el.innerHTML = `
-    ${prev ? `<a href="codex-article-viewer.html?id=${currentBookType}_${encodeURIComponent(prev)}" class="nav-btn">
-      <span class="nav-label">← มาตราก่อนหน้า</span><span class="nav-title">มาตรา ${prev}</span>
+    ${prev ? `<a href="${navKeyHref(prev)}" class="nav-btn">
+      <span class="nav-label">← ${escapeHtml(p.unit)}ก่อนหน้า</span><span class="nav-title">${escapeHtml(p.unit)} ${escapeHtml(p.num)}</span>
     </a>` : '<div></div>'}
-    ${next ? `<a href="codex-article-viewer.html?id=${currentBookType}_${encodeURIComponent(next)}" class="nav-btn">
-      <span class="nav-label">มาตราถัดไป →</span><span class="nav-title">มาตรา ${next}</span>
+    ${FROM_ATLAS ? `<div class="nav-current">
+      <span class="nav-label">กำลังอ่าน</span><span class="nav-title">${escapeHtml(cur.unit)} ${escapeHtml(cur.num)}</span>
+    </div>` : ''}
+    ${next ? `<a href="${navKeyHref(next)}" class="nav-btn">
+      <span class="nav-label">${escapeHtml(n.unit)}ถัดไป →</span><span class="nav-title">${escapeHtml(n.unit)} ${escapeHtml(n.num)}</span>
     </a>` : '<div></div>'}
   `;
 
@@ -1739,11 +1846,11 @@ function renderNav(articles) {
   const prevBtn = document.getElementById('nav-prev-btn');
   const nextBtn = document.getElementById('nav-next-btn');
   if (prevBtn) {
-    if (prev) { prevBtn.href = `codex-article-viewer.html?id=${currentBookType}_${encodeURIComponent(prev)}`; prevBtn.removeAttribute('disabled'); }
+    if (prev) { prevBtn.href = navKeyHref(prev); prevBtn.removeAttribute('disabled'); }
     else { prevBtn.href = '#'; prevBtn.setAttribute('disabled', ''); }
   }
   if (nextBtn) {
-    if (next) { nextBtn.href = `codex-article-viewer.html?id=${currentBookType}_${encodeURIComponent(next)}`; nextBtn.removeAttribute('disabled'); }
+    if (next) { nextBtn.href = navKeyHref(next); nextBtn.removeAttribute('disabled'); }
     else { nextBtn.href = '#'; nextBtn.setAttribute('disabled', ''); }
   }
 }
@@ -1935,6 +2042,10 @@ async function loadAndRender() {
   const params = new URLSearchParams(window.location.search);
   let id = params.get('id');
   const atlasParam = params.get('atlas');
+  // Phase 4A: ?x=atlas is navigation metadata only — the canonical article
+  // identity is still ?id=<collection>_<number>. Absent it, nothing below the
+  // resolver changes and the viewer is byte-for-byte its old self.
+  FROM_ATLAS = params.get('x') === 'atlas';
   if (!id && atlasParam && window.AtlasCore && AtlasCore.resolveAtlasId) {
     const r = AtlasCore.resolveAtlasId(atlasParam);
     if (r) id = r.legacyId;
@@ -1981,6 +2092,7 @@ async function loadAndRender() {
     [m.phaak, m.laksana, m.muad, m.suan].forEach(part => { if (part) crumbParts.push(part); });
   }
   document.getElementById('breadcrumb').textContent = `📍 ${crumbParts.join(' › ')}`;
+  applyAtlasContext(crumbParts);   // Phase 4A — no-op unless FROM_ATLAS
   document.getElementById('article-number').textContent = article.number;
   document.getElementById('article-examfreq-badge').innerHTML = article.examFreq
     ? `<span class="exam-freq-badge" title="ออกสอบเนติ ${article.examFreq.count} ครั้ง">${'★'.repeat(article.examFreq.stars)}</span>`

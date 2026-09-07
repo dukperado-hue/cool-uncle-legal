@@ -379,6 +379,42 @@ function countLeaves(nodes) {
   return n;
 }
 
+head('Phase 4A — contextual provision reading');
+(function () {
+  // --- previous/next must come from the ORDERED provision set, never ±1 ---
+  const adj = AtlasCore.getAdjacent('civil', '1447/2');
+  ok('4A prev/next of civil "1447/2" are real neighbours from the ordered list',
+     adj && adj.prev === '1447/1' && adj.next === '1448',
+     JSON.stringify(adj));
+  // a repealed article still participates in ordering (not skipped by arithmetic)
+  const b276 = AtlasCore.getProvisionBrief('civil', '276');
+  ok('4A getProvisionBrief returns {number,unit,viewerUrl} for a lookup',
+     b276 && b276.number === '276' && b276.unit === 'มาตรา' &&
+     b276.viewerUrl === 'codex-article-viewer.html?id=civil_276',
+     b276 && b276.viewerUrl);
+  // multi-instrument: adjacency stays inside the instrument, no bare-number pick
+  ok('4A bare "12" for aviation still resolves to null (STEP 6 — no silent pick)',
+     AtlasCore.resolveProvision('aviation', '12') === null);
+
+  // --- source guards: the viewer only "goes contextual" behind ?x=atlas ---
+  const viewer = fs.readFileSync(path.join(ROOT, 'codex-article-viewer.html'), 'utf8');
+  ok('4A viewer treats ?x=atlas as the ONLY Atlas-context trigger',
+     /FROM_ATLAS\s*=\s*params\.get\(['"]x['"]\)\s*===\s*['"]atlas['"]/.test(viewer));
+  ok('4A viewer still resolves the canonical ?id= exactly as before',
+     /let id = params\.get\('id'\);/.test(viewer));
+  ok('4A Atlas back-link / breadcrumb link built only inside a FROM_ATLAS guard',
+     /function applyAtlasContext[\s\S]{0,80}if \(!FROM_ATLAS\) return;/.test(viewer));
+  ok('4A prev/next href keeps canonical id, appends x=atlas only when FROM_ATLAS',
+     /FROM_ATLAS \? base \+ '&x=atlas' : base/.test(viewer));
+
+  // --- atlas-ui appends context without mutating the canonical id ---
+  const ui = fs.readFileSync(path.join(ROOT, 'atlas-ui.js'), 'utf8');
+  ok('4A atlas-ui appends x=atlas to the provision link (metadata, not identity)',
+     /url \+ \(url\.indexOf\('\?'\) === -1 \? '\?' : '&'\) \+ 'x=atlas'/.test(ui));
+  ok('4A return-state persistence is best-effort (sessionStorage guarded)',
+     /catch \(e\) \{ \/\* no sessionStorage/.test(ui));
+})();
+
 console.log('\n----------------------------------------');
 console.log('  RESULT:  ' + pass + ' passed, ' + fail + ' failed');
 console.log('----------------------------------------');

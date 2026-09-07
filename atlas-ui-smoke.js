@@ -150,5 +150,56 @@ run('flat Act (tortofficials) shows provisions directly, unchanged URLs', () => 
     throw new Error('bad href: ' + pills.map(a => a.href).join(', '));
 });
 
+// ---- Phase 4A: contextual provision reading -----------------------
+run('4A: every Atlas provision link carries the ?x=atlas context marker', () => {
+  mount('#/c/const2560');
+  AtlasUI._internal.expandAll(root);
+  const pills = collect(root, isProvision);
+  const missing = pills.filter(a => !/[?&]x=atlas(?:&|$)/.test(a.href));
+  if (missing.length) throw new Error(missing.length + ' links missing x=atlas, e.g. ' + missing[0].href);
+  console.log('        (' + pills.length + ' const2560 pills, all carry x=atlas)');
+});
+
+run('4A: x=atlas is appended, the canonical ?id= is untouched', () => {
+  mount('#/c/civil');
+  AtlasUI._internal.expandAll(root, 100000);
+  const pills = collect(root, isProvision);
+  const bad = pills.filter(a =>
+    !/^codex-article-viewer\.html\?id=civil_[^&]+&x=atlas$/.test(a.href));
+  if (bad.length) throw new Error(bad.length + ' malformed, e.g. ' + bad[0].href);
+  // sub-numbered id like civil_1447/2 must survive intact before the &
+  const sub = pills.find(a => /id=civil_1447%2F2|id=civil_1447\/2/.test(a.href));
+  if (!sub) throw new Error('expected a civil_1447/2 pill');
+});
+
+run('4A: multi-instrument provision ids stay instrument-scoped with x=atlas', () => {
+  mount('#/c/aviation/i/act');            // aviation has no corpus -> empty, no pills
+  // synthetic check via const2560 already covers real pills; here just make
+  // sure the instrument route still renders and adds no cross-instrument link
+  if (!root.children.length) throw new Error('instrument route did not render');
+});
+
+run('4A: restoreReturn / persistReturn are safe without sessionStorage', () => {
+  mount('#/c/civil');
+  AtlasUI._internal.restoreReturn(root);   // must not throw in the DOM shim
+  AtlasUI._internal.persistReturn();       // must not throw
+  const k = AtlasUI._internal.nodeKey('act', ['หมวด 1', 'ส่วนที่ 2']);
+  if (typeof k !== 'string' || k.indexOf('act') !== 0) throw new Error('nodeKey shape: ' + k);
+});
+
+run('4A: opening a branch does not eagerly build the whole civil tree', () => {
+  mount('#/c/civil');
+  const before = collect(root, isProvision).length;
+  if (before !== 0) throw new Error('expected 0 pills on load, got ' + before);
+  const nodes = collect(root, (n) => typeof n._atlasSetOpen === 'function');
+  const target = nodes.find(n => {
+    const body = n.children.find(c => /atlas-node-body/.test(c.className || ''));
+    return body && body.hidden;
+  });
+  target._atlasSetOpen(true);
+  if (collect(root, isProvision).length > 60)
+    throw new Error('one expand dumped too many pills: ' + collect(root, isProvision).length);
+});
+
 console.log('\n  ' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);

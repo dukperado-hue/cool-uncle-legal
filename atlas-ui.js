@@ -33,6 +33,69 @@
   }
   function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); }
 
+  // ---- return context (Phase 4A) -------------------------------------
+  // Remember which structural branches are open so that returning from the
+  // article viewer lands on the same spot instead of a collapsed tree.
+  // Best-effort: sessionStorage may be absent (test shim) or blocked.
+  var RETURN_KEY = 'atlas:return';
+  var SEP = '¦';           // node-key path separator (not a legal char)
+  var openKeys = {};            // nodeKey -> 1 for every currently-open branch
+  var suspendPersist = false;   // true while (re)building or restoring a view
+
+  function nodeKey(instrumentId, path) {
+    return (instrumentId || '') + SEP + (path || []).join(SEP);
+  }
+  function persistReturn() {
+    if (suspendPersist) return;
+    try {
+      sessionStorage.setItem(RETURN_KEY, JSON.stringify({
+        hash: location.hash || '#/',
+        keys: Object.keys(openKeys)
+      }));
+    } catch (e) { /* no sessionStorage / blocked / quota — navigation still works */ }
+  }
+  function readReturn() {
+    try { return JSON.parse(sessionStorage.getItem(RETURN_KEY) || 'null'); }
+    catch (e) { return null; }
+  }
+  function collectOpenables(elm, out) {
+    out = out || [];
+    if (elm && typeof elm._atlasSetOpen === 'function') out.push(elm);
+    var kids = elm && elm.children;
+    if (kids) for (var i = 0; i < kids.length; i++) collectOpenables(kids[i], out);
+    return out;
+  }
+  // Re-open the branches recorded before the user left for the viewer.
+  // Opening a node builds its children lazily, so sweep until a pass opens
+  // nothing (bounded — the deepest native model is 5 levels).
+  function restoreReturn(root) {
+    var saved = readReturn();
+    if (!saved || !saved.keys || !saved.keys.length) return;
+    if ((saved.hash || '#/') !== (location.hash || '#/')) return;
+    var want = {};
+    saved.keys.forEach(function (k) { want[k] = 1; });
+    suspendPersist = true;
+    for (var pass = 0; pass < 8; pass++) {
+      var opened = 0;
+      collectOpenables(root).forEach(function (li) {
+        if (want[li._atlasKey] &&
+            String(li.className || '').indexOf('atlas-node-open') === -1) {
+          li._atlasSetOpen(true); opened++;
+        }
+      });
+      if (!opened) break;
+    }
+    suspendPersist = false;
+    persistReturn();
+    try {
+      var openNow = collectOpenables(root).filter(function (li) {
+        return String(li.className || '').indexOf('atlas-node-open') !== -1;
+      });
+      var last = openNow[openNow.length - 1];
+      if (last && last.scrollIntoView) last.scrollIntoView({ block: 'center' });
+    } catch (e) { /* jsdom/shim — no scrollIntoView */ }
+  }
+
   // ---- route parsing ---------------------------------------------------
   function parseRoute() {
     var h = (location.hash || '').replace(/^#/, '');
@@ -295,6 +358,8 @@
   // ONE more level of rows, never the whole subtree.
   function treeNode(key, node, depth, instrumentId) {
     var li = el('li', 'atlas-node atlas-node-' + (node.kind || 'level'));
+    li._atlasKey = nodeKey(instrumentId, node.path);
+    try { li.dataset.atlasKey = li._atlasKey; } catch (e) { /* shim */ }
     var hasKids = !!(node.children && node.children.length);
     var hasProvs = !!(node.articles && node.articles.length);
     var expandable = hasKids || hasProvs;
@@ -344,6 +409,8 @@
         (open ? ' atlas-node-open' : '');
       toggle.textContent = open ? '▾' : '▸';
       toggle.setAttribute('aria-expanded', String(open));
+      if (open) openKeys[li._atlasKey] = 1; else delete openKeys[li._atlasKey];
+      persistReturn();
     }
     function flip() { setOpen(body.hidden); }
     toggle.addEventListener('click', flip);
@@ -363,8 +430,12 @@
     storageKeys.forEach(function (sk) {
       var b = AtlasCore.getProvisionBrief(key, sk, instrumentId);
       var a = el('a', 'atlas-provision' + (b && b.cancelled ? ' atlas-provision-cancelled' : ''));
-      a.href = b ? b.viewerUrl
+      // Canonical viewer id is UNCHANGED; `x=atlas` is navigation metadata only
+      // — it tells the viewer this visit came from the Atlas so it can offer a
+      // "back to <collection>" link and keep prev/next inside the Atlas.
+      var url = b ? b.viewerUrl
         : ('codex-article-viewer.html?id=' + encodeURIComponent(key + '_' + sk));
+      a.href = url + (url.indexOf('?') === -1 ? '?' : '&') + 'x=atlas';
       a.textContent = (b ? b.unit : 'มาตรา') + ' ' + (b ? b.number : sk);
       if (b && b.cancelled) a.title = 'ยกเลิกแล้ว';
       wrap.appendChild(a);
@@ -381,9 +452,14 @@
 
   function render(root) {
     var r = parseRoute();
+    openKeys = {};
+    suspendPersist = true;         // don't thrash sessionStorage while building
     if (r.view === 'instrument') renderInstrument(root, r.collection, r.instrument);
     else if (r.view === 'collection') renderCollection(root, r.collection);
     else renderHome(root);
+    suspendPersist = false;
+    restoreReturn(root);           // re-open whatever branches we left open
+    persistReturn();               // record the resulting state for this route
   }
 
   function mount(root, opts) {
@@ -416,7 +492,7 @@
   }
 
   global.AtlasUI = {
-    version: '2.2',
+    version: '2.3',
     mount: mount,
     parseRoute: parseRoute,
     // exposed for Phase 3 / other pages / tests that want just a piece
@@ -424,7 +500,10 @@
       collectionCard: collectionCard,
       structureTreeView: structureTreeView,
       breadcrumbBar: breadcrumbBar,
-      expandAll: expandAll
+      expandAll: expandAll,
+      restoreReturn: restoreReturn,
+      persistReturn: persistReturn,
+      nodeKey: nodeKey
     }
   };
 })(typeof window !== 'undefined' ? window : this);
