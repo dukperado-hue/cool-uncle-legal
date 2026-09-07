@@ -1770,6 +1770,19 @@ function atlasCollectionTitle() {
   }
   return BOOK_TITLES[currentBookType] || currentBookType;
 }
+// The Atlas structural route for the current provision, in the EXISTING route
+// grammar — no new format. Single-instrument: "#/c/<collection>".
+// Multi-instrument: "#/c/<collection>/i/<instrument>".
+function atlasStructuralRoute() {
+  let route = '#/c/' + currentBookType;
+  const sep = String(currentNumber).indexOf('::');
+  if (sep !== -1) route += '/i/' + String(currentNumber).slice(0, sep);
+  return route;
+}
+function atlasCurrentInstrument() {
+  const sep = String(currentNumber).indexOf('::');
+  return sep !== -1 ? String(currentNumber).slice(0, sep) : null;
+}
 function atlasReturnHref() {
   // Prefer the exact Atlas route (with its expanded tree) saved for this tab;
   // otherwise reconstruct the collection / instrument route from the id.
@@ -1780,12 +1793,18 @@ function atlasReturnHref() {
       return 'atlas.html' + saved.hash;
     }
   } catch (e) { /* no sessionStorage — fall through to reconstruction */ }
-  let route = '#/c/' + currentBookType;
-  const sep = String(currentNumber).indexOf('::');
-  if (sep !== -1) route += '/i/' + String(currentNumber).slice(0, sep);
-  return 'atlas.html' + route;
+  return 'atlas.html' + atlasStructuralRoute();
 }
-function applyAtlasContext(crumbParts) {
+// Write the Phase 4B return context, then let the anchor's real href navigate.
+// Best-effort: if sessionStorage is unavailable the href still lands the user
+// on a valid Atlas route (just without the focused node).
+function atlasWriteReturn(hash, instrument, path) {
+  try {
+    sessionStorage.setItem('atlas:return',
+      JSON.stringify({ hash: hash, instrument: instrument, path: path }));
+  } catch (e) { /* ignore */ }
+}
+function applyAtlasContext(crumbObjs) {
   if (!FROM_ATLAS) return;
   const back = document.querySelector('.back-button');
   if (back) {
@@ -1800,15 +1819,57 @@ function applyAtlasContext(crumbParts) {
       back.insertAdjacentElement('afterend', s);
     }
   }
-  // Make the collection crumb (first part) a link back into the Atlas — the
-  // rest of the structural path stays plain text (it is real ontology data,
-  // never fabricated). Only the levels that actually exist are shown.
+
   const bc = document.getElementById('breadcrumb');
-  if (bc && Array.isArray(crumbParts) && crumbParts.length) {
-    const rest = crumbParts.slice(1).map(escapeHtml).join(' › ');
-    bc.innerHTML = '📍 <a href="' + escapeHtml(atlasReturnHref()) + '">' +
-      escapeHtml(crumbParts[0]) + '</a>' + (rest ? ' › ' + rest : '');
-  }
+  if (!bc || !Array.isArray(crumbObjs) || !crumbObjs.length) return;
+
+  const route = atlasStructuralRoute();
+  const routeHref = 'atlas.html' + route;
+  const instrument = atlasCurrentInstrument();
+  // Ordered structural values (only levels that genuinely exist). If empty —
+  // flat Act, or an untagged provision — no structural crumb becomes a link.
+  const structuralValues = crumbObjs.filter(c => c.field).map(c => c.value);
+
+  // Rebuild the breadcrumb with DOM APIs — Thai path values never touch an
+  // HTML/attribute string.
+  bc.textContent = '';
+  bc.appendChild(document.createTextNode('📍 '));
+  let structSeen = 0;
+
+  crumbObjs.forEach((c, i) => {
+    if (i) bc.appendChild(document.createTextNode(' › '));
+    const label = c.text || c.value || '';
+
+    if (c.kind === 'collection') {
+      const a = document.createElement('a');
+      a.setAttribute('href', atlasReturnHref());   // keep Phase 4A behaviour
+      a.textContent = label;
+      bc.appendChild(a);
+      return;
+    }
+
+    if (c.kind === 'instrument') {
+      const a = document.createElement('a');
+      a.setAttribute('href', routeHref);
+      a.textContent = label;
+      a.addEventListener('click', () => atlasWriteReturn(route, instrument, []));
+      bc.appendChild(a);
+      return;
+    }
+
+    if (c.field) {
+      structSeen += 1;
+      const path = structuralValues.slice(0, structSeen);   // prefix up to here
+      const a = document.createElement('a');
+      a.setAttribute('href', routeHref);
+      a.textContent = label;
+      a.addEventListener('click', () => atlasWriteReturn(route, instrument, path));
+      bc.appendChild(a);
+      return;
+    }
+
+    bc.appendChild(document.createTextNode(label));   // unknown kind — plain text
+  });
 }
 
 function renderNav(articles) {
@@ -2082,17 +2143,22 @@ async function loadAndRender() {
   // Breadcrumb: prefer the Atlas layer (registry-driven, handles collections
   // that skip levels) and fall back to the legacy 4-slot read if it isn't up.
   let crumbParts;
+  // Phase 4B: keep the FULL breadcrumb objects. Structural identity comes from
+  // c.field / c.value (the canonical meta values), never from c.text.
+  let crumbObjs;
   if (window.AtlasCore && AtlasCore.isReady() && AtlasCore.collectionInCorpus(currentBookType)) {
-    crumbParts = AtlasCore.getBreadcrumb(currentBookType, currentNumber)
-      .filter(c => c.kind !== 'provision')
-      .map(c => c.text);
+    crumbObjs = AtlasCore.getBreadcrumb(currentBookType, currentNumber)
+      .filter(c => c.kind !== 'provision');       // provision crumb never navigates
   } else {
     const m = article.meta || {};
-    crumbParts = [BOOK_TITLES[currentBookType] || currentBookType];
-    [m.phaak, m.laksana, m.muad, m.suan].forEach(part => { if (part) crumbParts.push(part); });
+    crumbObjs = [{ kind: 'collection', value: currentBookType,
+                   text: BOOK_TITLES[currentBookType] || currentBookType }];
+    [['phaak', m.phaak], ['laksana', m.laksana], ['muad', m.muad], ['suan', m.suan]]
+      .forEach(([f, v]) => { if (v) crumbObjs.push({ kind: 'level', field: f, value: v, text: v }); });
   }
+  crumbParts = crumbObjs.map(c => c.text || c.value);
   document.getElementById('breadcrumb').textContent = `📍 ${crumbParts.join(' › ')}`;
-  applyAtlasContext(crumbParts);   // Phase 4A — no-op unless FROM_ATLAS
+  applyAtlasContext(crumbObjs);   // Phase 4A/4B — no-op unless FROM_ATLAS
   document.getElementById('article-number').textContent = article.number;
   document.getElementById('article-examfreq-badge').innerHTML = article.examFreq
     ? `<span class="exam-freq-badge" title="ออกสอบเนติ ${article.examFreq.count} ครั้ง">${'★'.repeat(article.examFreq.stars)}</span>`

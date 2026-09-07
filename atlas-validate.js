@@ -415,6 +415,72 @@ head('Phase 4A — contextual provision reading');
      /catch \(e\) \{ \/\* no sessionStorage/.test(ui));
 })();
 
+head('Phase 4B — structural breadcrumb navigation contract');
+(function () {
+  function pathIndex(nodes) {
+    const m = {};
+    (function w(ns) {
+      (ns || []).forEach(n => { m[JSON.stringify(n.path)] = n; if (n.children) w(n.children); });
+    })(nodes);
+    return m;
+  }
+  function structPath(key, num) {
+    return AtlasCore.getBreadcrumb(key, num)
+      .filter(c => c.field).map(c => c.value);
+  }
+  function leafPath(key, num) {
+    let found = null;
+    (function w(ns) {
+      (ns || []).forEach(n => {
+        if (n.articles && n.articles.indexOf(String(num)) !== -1) found = n.path;
+        if (n.children) w(n.children);
+      });
+    })(AtlasCore.getStructureTree(key).nodes);
+    return found;
+  }
+
+  // 1 — breadcrumb structural values ARE the owning leaf's node.path (both meta-sourced)
+  ok('4B civil 1448 breadcrumb structural path === owning leaf node.path (= บรรพ 5›ลักษณะ 1›หมวด 2)',
+     JSON.stringify(structPath('civil', '1448')) === JSON.stringify(leafPath('civil', '1448')) &&
+     JSON.stringify(structPath('civil', '1448')) === JSON.stringify(['บรรพ 5', 'ลักษณะ 1', 'หมวด 2']),
+     JSON.stringify(structPath('civil', '1448')));
+
+  // 2 — every structural prefix resolves to a real tree node (nothing fabricated)
+  const civ = pathIndex(AtlasCore.getStructureTree('civil').nodes);
+  const cp = structPath('civil', '1448');
+  const cn = pathIndex(AtlasCore.getStructureTree('const2560').nodes);
+  ok('4B every prefix of a deep path resolves to a real node (civil + const2560)',
+     cp.length === 3 && cp.every((_, i) => !!civ[JSON.stringify(cp.slice(0, i + 1))]) &&
+     !!cn[JSON.stringify(['หมวด 7', 'ส่วนที่ 2'])] && !!cn[JSON.stringify(['บทเฉพาะกาล'])]);
+
+  // 3 — a display value that repeats is disambiguated by the FULL path, not the label
+  const crim = pathIndex(AtlasCore.getStructureTree('criminal').nodes);
+  const a = structPath('criminal', '288');   // ...→ ลักษณะ 10 → หมวด 1
+  const b = structPath('criminal', '112');   // ...→ ลักษณะ 1  → หมวด 1
+  ok('4B two criminal provisions ending "หมวด 1" resolve to distinct full-path nodes',
+     a[a.length - 1] === 'หมวด 1' && b[b.length - 1] === 'หมวด 1' &&
+     JSON.stringify(a) !== JSON.stringify(b) &&
+     !!crim[JSON.stringify(a)] && !!crim[JSON.stringify(b)]);
+
+  // 4 — flat Act AND untagged provision produce NO structural breadcrumb (no fabrication)
+  ok('4B flat Act + untagged provision yield zero structural breadcrumb crumbs',
+     structPath('tortofficials', '5').length === 0 &&
+     AtlasCore.getStructureTree('tortofficials').nodes === null &&
+     structPath('civil', '1').length === 0);
+
+  // 5 — multi-instrument identity stays separate (bare number never silently resolves)
+  ok('4B aviation bare "12" still resolves to null — instrument identity stays scoped',
+     AtlasCore.resolveProvision('aviation', '12') === null);
+
+  // 6 — atlas-ui: guard widened to path OR keys, and the Phase 4A keys branch is intact
+  const ui = fs.readFileSync(path.join(ROOT, 'atlas-ui.js'), 'utf8');
+  ok('4B restoreReturn accepts path OR keys; keys branch + private nodeKey() conversion intact',
+     /!\(saved\.keys && saved\.keys\.length\) &&\s*!\(saved\.path && saved\.path\.length\)/.test(ui) &&
+     /saved\.keys\.forEach\(function \(k\) \{ want\[k\] = 1; \}\)/.test(ui) &&
+     /want\[nodeKey\(inst, saved\.path\.slice\(0, i\)\)\] = 1/.test(ui) &&
+     /focusKey = nodeKey\(inst, saved\.path\)/.test(ui));
+})();
+
 console.log('\n----------------------------------------');
 console.log('  RESULT:  ' + pass + ' passed, ' + fail + ' failed');
 console.log('----------------------------------------');

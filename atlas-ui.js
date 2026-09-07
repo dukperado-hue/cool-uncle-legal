@@ -68,12 +68,34 @@
   // Re-open the branches recorded before the user left for the viewer.
   // Opening a node builds its children lazily, so sweep until a pass opens
   // nothing (bounded — the deepest native model is 5 levels).
-  function restoreReturn(root) {
-    var saved = readReturn();
-    if (!saved || !saved.keys || !saved.keys.length) return;
+  //
+  // Two context shapes are accepted:
+  //   { hash, keys:[<nodeKey>, ...] }              Phase 4A — restore an open set
+  //   { hash, instrument, path:[<value>, ...] }    Phase 4B — open one ancestor
+  //                                                chain and focus its last node
+  // `injected` (tests only) supplies the context directly; production omits it
+  // and reads sessionStorage.
+  function restoreReturn(root, injected) {
+    var saved = injected || readReturn();
+    if (!saved ||
+        (!(saved.keys && saved.keys.length) &&
+         !(saved.path && saved.path.length))) return;
     if ((saved.hash || '#/') !== (location.hash || '#/')) return;
+
     var want = {};
-    saved.keys.forEach(function (k) { want[k] = 1; });
+    var focusKey = null;
+    if (saved.path && saved.path.length) {
+      // Phase 4B — semantic structural path. atlas-ui owns the value -> nodeKey
+      // conversion; the transported data is just the ordered value array.
+      var inst = saved.instrument || null;
+      for (var i = 1; i <= saved.path.length; i++) {
+        want[nodeKey(inst, saved.path.slice(0, i))] = 1;
+      }
+      focusKey = nodeKey(inst, saved.path);
+    } else {
+      saved.keys.forEach(function (k) { want[k] = 1; });
+    }
+
     suspendPersist = true;
     for (var pass = 0; pass < 8; pass++) {
       var opened = 0;
@@ -86,14 +108,31 @@
       if (!opened) break;
     }
     suspendPersist = false;
-    persistReturn();
+    persistReturn();   // a consumed path becomes an ordinary {hash, keys} snapshot
+
     try {
-      var openNow = collectOpenables(root).filter(function (li) {
-        return String(li.className || '').indexOf('atlas-node-open') !== -1;
-      });
-      var last = openNow[openNow.length - 1];
-      if (last && last.scrollIntoView) last.scrollIntoView({ block: 'center' });
-    } catch (e) { /* jsdom/shim — no scrollIntoView */ }
+      var target = null;
+      if (focusKey) {
+        // exact node for a path restore — a stale/invalid path simply finds
+        // nothing here; we never force focus onto an unrelated node.
+        collectOpenables(root).forEach(function (li) {
+          if (!target && li._atlasKey === focusKey) target = li;
+        });
+      } else {
+        // Phase 4A fallback — scroll the deepest branch the user had open.
+        var openNow = collectOpenables(root).filter(function (li) {
+          return String(li.className || '').indexOf('atlas-node-open') !== -1;
+        });
+        target = openNow[openNow.length - 1] || null;
+      }
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: 'center' });
+      if (target && target.classList && focusKey) {
+        target.classList.add('atlas-node-focus');
+        setTimeout(function () {
+          try { target.classList.remove('atlas-node-focus'); } catch (e) {}
+        }, 1500);
+      }
+    } catch (e) { /* shim — no scrollIntoView / classList / setTimeout */ }
   }
 
   // ---- route parsing ---------------------------------------------------
@@ -492,7 +531,7 @@
   }
 
   global.AtlasUI = {
-    version: '2.3',
+    version: '2.4',
     mount: mount,
     parseRoute: parseRoute,
     // exposed for Phase 3 / other pages / tests that want just a piece

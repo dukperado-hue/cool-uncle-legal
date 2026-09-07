@@ -201,5 +201,66 @@ run('4A: opening a branch does not eagerly build the whole civil tree', () => {
     throw new Error('one expand dumped too many pills: ' + collect(root, isProvision).length);
 });
 
+// ---- Phase 4B: structural breadcrumb navigation ------------------
+const K = (inst, p) => AtlasUI._internal.nodeKey(inst, p);
+const nodeByKey = (r, k) => collect(r, n => n._atlasKey === k)[0] || null;
+const isOpen = (li) => !!li && /(^| )atlas-node-open( |$)/.test(li.className || '');
+
+run('4B: path restore opens the ancestor chain down to an intermediate node', () => {
+  mount('#/c/civil');
+  const path = ['บรรพ 5', 'ลักษณะ 1'];
+  AtlasUI._internal.restoreReturn(root, { hash: '#/c/civil', instrument: null, path });
+  const ban = nodeByKey(root, K(null, ['บรรพ 5']));
+  const lak = nodeByKey(root, K(null, path));
+  if (!isOpen(ban)) throw new Error('บรรพ 5 not open');
+  if (!isOpen(lak)) throw new Error('ลักษณะ 1 (depth-1, not auto-opened) not opened by restore');
+});
+
+run('4B: leaf path restore opens the chain and materialises the leaf provisions', () => {
+  mount('#/c/civil');
+  const path = ['บรรพ 5', 'ลักษณะ 1', 'หมวด 2'];
+  AtlasUI._internal.restoreReturn(root, { hash: '#/c/civil', instrument: null, path });
+  const leaf = nodeByKey(root, K(null, path));
+  if (!isOpen(leaf)) throw new Error('หมวด 2 not opened');
+  if (!collect(leaf, isProvision).length) throw new Error('leaf did not build its provision pills');
+});
+
+run('4B: repeated display value — only the exact full-path branch opens', () => {
+  mount('#/c/criminal');
+  const hit = ['ภาค 2', 'ลักษณะ 10', 'หมวด 1'];
+  const other = ['ภาค 2', 'ลักษณะ 1', 'หมวด 1'];   // same label "หมวด 1", different parent
+  AtlasUI._internal.restoreReturn(root, { hash: '#/c/criminal', instrument: null, path: hit });
+  if (!isOpen(nodeByKey(root, K(null, hit)))) throw new Error('target หมวด 1 not open');
+  if (isOpen(nodeByKey(root, K(null, other)))) throw new Error('a different same-label หมวด 1 was opened');
+});
+
+run('4B: constitution structural path (หมวด › ส่วน) restores', () => {
+  mount('#/c/const2560');
+  const path = ['หมวด 7', 'ส่วนที่ 2'];
+  AtlasUI._internal.restoreReturn(root, { hash: '#/c/const2560', instrument: null, path });
+  if (!isOpen(nodeByKey(root, K(null, path)))) throw new Error('ส่วนที่ 2 under หมวด 7 not opened');
+});
+
+run('4B: flat / empty path and invalid path — no throw, tree undisturbed', () => {
+  mount('#/c/tortofficials');
+  AtlasUI._internal.restoreReturn(root, { hash: '#/c/tortofficials', instrument: null, path: [] });
+  if (collect(root, isProvision).length !== 5) throw new Error('flat provisions disturbed by empty path');
+  mount('#/c/civil');
+  const nodesBefore = collect(root, isNode).length;
+  AtlasUI._internal.restoreReturn(root, { hash: '#/c/civil', instrument: null, path: ['บรรพ 99', 'ลักษณะ 4'] });
+  if (nodeByKey(root, K(null, ['บรรพ 99', 'ลักษณะ 4']))) throw new Error('fabricated a node for a bad path');
+  if (collect(root, isNode).length < nodesBefore) throw new Error('tree shrank on invalid path');
+});
+
+run('4B: multi-instrument path stays instrument-scoped; Phase 4A keys context still restores', () => {
+  if (K('act', ['หมวด 1']) === K('mr', ['หมวด 1']))
+    throw new Error('instrument is not part of the node key');
+  mount('#/c/civil');
+  const kBan = K(null, ['บรรพ 5']);
+  const kLak = K(null, ['บรรพ 5', 'ลักษณะ 1']);
+  AtlasUI._internal.restoreReturn(root, { hash: '#/c/civil', keys: [kBan, kLak] });   // 4A shape
+  if (!isOpen(nodeByKey(root, kLak))) throw new Error('Phase 4A keys-only restore regressed');
+});
+
 console.log('\n  ' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);
