@@ -69,6 +69,7 @@
       ],
       "patched": true,
       "unsortedLabel": "บทเบ็ดเสร็จ (พระราชบัญญัติให้ใช้ประมวลฯ)",
+      "blurb": "จัดโครงสร้างเป็น บรรพ › ลักษณะ › หมวด › ส่วน › มาตรา (ลึกที่สุดในบรรดาประมวล) — มาตรา 1–3 เป็นบทเบ็ดเสร็จของ พ.ร.บ. ให้ใช้ประมวลฯ อยู่ก่อนบรรพ 1",
       "notes": "phaak slot carries บรรพ (not ภาค). Deepest native model — 4 structural levels. มาตรา 1–3 are the enacting provisions of the พ.ร.บ.ให้ใช้ประมวลฯ and legitimately sit before บรรพ 1 (grouped under unsortedLabel, not dropped). Patch: มาตรา 754–769 mislabelled ลักษณะ 22 → ลักษณะ 13 (จำนำ)."
     },
 
@@ -143,6 +144,7 @@
       "levels": [
         { "kind": "chapter", "field": "muad", "label": "หมวด" }
       ],
+      "blurb": "พระธรรมนูญศาลยุติธรรม (กฎหมายว่าด้วยการจัดองค์กรศาลยุติธรรม ไม่ใช่รัฐธรรมนูญ) — จัดโครงสร้างเป็น หมวด › มาตรา",
       "notes": "LEGACY KEY WARNING: registry/URL key is 'constitution' but this is พระธรรมนูญศาลยุติธรรม, NOT a constitution. The 2017 Constitution is key 'const2560'. Keys are frozen (URLs depend on them); only labels are corrected here. 2-level native model."
     },
 
@@ -160,6 +162,7 @@
         { "kind": "chapter",  "field": "muad", "label": "หมวด" },
         { "kind": "division", "field": "suan", "label": "ส่วน" }
       ],
+      "blurb": "จัดโครงสร้างเป็น หมวด › ส่วน › มาตรา — บางหมวดไม่มีส่วนย่อย จะไล่ถึงมาตราโดยตรง; หมวดสุดท้ายคือบทเฉพาะกาล",
       "notes": "หมวด → ส่วน → มาตรา. Includes a บทเฉพาะกาล chapter."
     },
 
@@ -324,6 +327,7 @@
       "instrumentField": "instrument",
       "instrumentTypeField": "instrumentType",
       "provisionUnit": "มาตรา",
+      "blurb": "กฎหมายการบินพลเรือนประกอบด้วยกฎหมายหลายระดับ (พระราชบัญญัติ · พระราชกำหนด · กฎกระทรวง · ข้อกำหนด/ประกาศ CAAT · มาตรฐาน) แต่ละฉบับมีลำดับชั้นและหน่วยบทบัญญัติของตนเอง — ยังไม่เปิดใช้ (แสดงเฉพาะโครงสร้างจาก registry)",
       "instrumentIdNote": "Instrument ids are short stable slugs — they appear in the Atlas ID (atlas:aviation/<id>/<number>) and, prefixed, in the storage key (<id>::<number>). Keep them URL-safe and frozen once data exists.",
       "instruments": [
         {

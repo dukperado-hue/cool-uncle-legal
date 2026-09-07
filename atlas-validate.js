@@ -237,6 +237,17 @@ ok('resolveProvision exposes atlasId + legacyId + storageKey + viewerUrl',
    rp.atlasId === 'atlas:civil/1448' && rp.legacyId === 'civil_1448' &&
    rp.storageKey === '1448' && rp.viewerUrl === 'codex-article-viewer.html?id=civil_1448');
 
+// Phase 3A — getProvisionBrief: lean per-pill lookup for the lazy renderer
+const gb = AtlasCore.getProvisionBrief('civil', '1448');
+ok('getProvisionBrief(civil,1448): number/unit/viewerUrl, NO breadcrumb/article',
+   gb && gb.number === '1448' && gb.unit === 'มาตรา' && gb.cancelled === false &&
+   gb.viewerUrl === 'codex-article-viewer.html?id=civil_1448' &&
+   gb.article === undefined && gb.breadcrumb === undefined, JSON.stringify(gb));
+const gbSub = AtlasCore.getProvisionBrief('civil', '1447/2');
+ok('getProvisionBrief handles "/" sub-numbers -> ?id=civil_1447%2F2',
+   gbSub && gbSub.viewerUrl === 'codex-article-viewer.html?id=' + encodeURIComponent('civil_1447/2'));
+ok('getProvisionBrief(unknown) -> null', AtlasCore.getProvisionBrief('civil', '999999') === null);
+
 head('Phase 2 · Test 7 — multi-instrument same-number collision (synthetic corpus)');
 (function () {
   // Inject a throwaway aviation book — NOT written to disk, NOT real content.

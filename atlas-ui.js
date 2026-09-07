@@ -137,8 +137,8 @@
         list.appendChild(instrumentCard(key, inst, present[inst.id] || 0, tree.planned));
       });
       if (tree.planned) {
-        list.appendChild(el('p', 'atlas-empty',
-          'ยังไม่มีเนื้อหา — โครงสร้างฉบับกฎหมายด้านบนมาจาก registry ล้วน ๆ (Phase 2 อ่านได้ Phase หน้าค่อยเติมตัวบท)'));
+        list.appendChild(el('p', 'atlas-empty atlas-empty-planned',
+          'ยังไม่เปิดใช้ — แสดงเฉพาะโครงสร้างของแต่ละฉบับ ยังไม่มีตัวบท'));
       }
       wrap.appendChild(list);
     } else {
@@ -177,14 +177,31 @@
     if (c.enacted) facts.appendChild(fact('ปี', String(c.enacted)));
     h.appendChild(facts);
 
+    // User-facing structural description. Prefer a hand-written `blurb` from
+    // the registry; otherwise synthesise one from the declared levels.
+    // Developer `notes` are NOT shown here — they stay in the registry and in
+    // AtlasCore.getCollection() for tooling.
+    var blurb = c.blurb || structuralBlurb(c);
+    if (blurb) h.appendChild(el('p', 'atlas-structure-note', blurb));
+
     if (c.source) {
       var src = el('p', 'atlas-source');
       src.textContent = 'ที่มา: ' + c.source.name +
         (c.source.official ? ' · ฉบับทางการ' : ' · ฉบับอ้างอิง (ไม่ใช่ราชกิจจาฯ)');
       h.appendChild(src);
     }
-    if (c.notes) h.appendChild(el('p', 'atlas-structure-note', 'หมายเหตุโครงสร้าง: ' + c.notes));
     return h;
+  }
+
+  function structuralBlurb(c) {
+    if (c.instrumentModel === 'multi') {
+      return 'ประกอบด้วยกฎหมายหลายฉบับ แต่ละฉบับมีลำดับชั้นและหน่วยบทบัญญัติของตนเอง';
+    }
+    var labels = (c.levels || []).map(function (lv) { return lv.label; });
+    if (!labels.length) {
+      return 'จัดเรียงเป็น' + c.provisionUnit + 'โดยตรง ไม่มีการแบ่งโครงสร้างภายใน';
+    }
+    return 'จัดโครงสร้างเป็น ' + labels.join(' › ') + ' › ' + c.provisionUnit;
   }
   function fact(k, v) {
     var f = el('span', 'atlas-fact');
@@ -239,7 +256,8 @@
     var full = AtlasCore.getStructureTree(key);
     var instNode = (full.nodes || []).filter(function (n) { return n.value === instrumentId; })[0];
     if (!instNode || !instNode.count) {
-      wrap.appendChild(el('p', 'atlas-empty', 'ยังไม่มีตัวบทของฉบับนี้ในคลังข้อมูล'));
+      var cls = (c.planned || full.planned) ? 'atlas-empty atlas-empty-planned' : 'atlas-empty';
+      wrap.appendChild(el('p', cls, 'ยังไม่มีตัวบทของฉบับนี้ในคลังข้อมูล'));
     } else {
       wrap.appendChild(structureTreeView(key,
         { collection: key, instrumentModel: 'multi',
@@ -254,34 +272,42 @@
     var box = el('div', 'atlas-structure');
     if (tree.nodes === null || (Array.isArray(tree.nodes) && !tree.nodes.length && tree.articles)) {
       // flat — provisions directly
-      box.appendChild(provisionList(key, tree.articles || []));
+      box.appendChild(provisionList(key, tree.articles || [], instrumentId));
       return box;
     }
     if (!tree.nodes || !tree.nodes.length) {
       box.appendChild(el('p', 'atlas-empty', 'ยังไม่มีเนื้อหาสำหรับส่วนนี้'));
       return box;
     }
-    box.appendChild(treeList(key, tree.nodes, 0));
+    box.appendChild(treeList(key, tree.nodes, 0, instrumentId));
     return box;
   }
 
-  function treeList(key, nodes, depth) {
+  function treeList(key, nodes, depth, instrumentId) {
     var ul = el('ul', 'atlas-tree atlas-tree-depth-' + depth);
-    nodes.forEach(function (n) { ul.appendChild(treeNode(key, n, depth)); });
+    nodes.forEach(function (n) { ul.appendChild(treeNode(key, n, depth, instrumentId)); });
     return ul;
   }
 
-  function treeNode(key, node, depth) {
+  // LAZY: a node renders only its own row up front. Its body (child rows or
+  // provision pills) is built on first expand — collapsed branches cost one
+  // <li>. Top-level nodes are opened by default, which materialises exactly
+  // ONE more level of rows, never the whole subtree.
+  function treeNode(key, node, depth, instrumentId) {
     var li = el('li', 'atlas-node atlas-node-' + (node.kind || 'level'));
     var hasKids = !!(node.children && node.children.length);
     var hasProvs = !!(node.articles && node.articles.length);
-    var openByDefault = depth === 0 && (!hasKids || node.children.length <= 14);
+    var expandable = hasKids || hasProvs;
+    // Auto-open only top-level nodes that have STRUCTURAL sub-levels — this
+    // shows one level of the ladder (cheap: rows only). Leaf top-nodes stay
+    // collapsed so provision pills are never dumped without a click.
+    var openByDefault = depth === 0 && hasKids;
 
     var row = el('div', 'atlas-node-row');
     var toggle = el('button', 'atlas-node-toggle');
     toggle.type = 'button';
-    toggle.setAttribute('aria-expanded', String(openByDefault));
-    toggle.textContent = (hasKids || hasProvs) ? (openByDefault ? '▾' : '▸') : '·';
+    toggle.setAttribute('aria-expanded', String(openByDefault && expandable));
+    toggle.textContent = expandable ? (openByDefault ? '▾' : '▸') : '·';
 
     var label = el('span', 'atlas-node-label');
     if (node.levelLabel) label.appendChild(el('span', 'atlas-node-levelword', node.levelLabel));
@@ -294,32 +320,45 @@
     li.appendChild(row);
 
     var body = el('div', 'atlas-node-body');
-    if (!openByDefault) body.hidden = true;
-    if (hasKids) body.appendChild(treeList(key, node.children, depth + 1));
-    else if (hasProvs) body.appendChild(provisionList(key, node.articles));
+    body.hidden = true;
     li.appendChild(body);
 
-    function flip() {
-      if (!hasKids && !hasProvs) return;
-      body.hidden = !body.hidden;
-      toggle.textContent = body.hidden ? '▸' : '▾';
-      toggle.setAttribute('aria-expanded', String(!body.hidden));
+    var built = false;
+    function buildBody() {
+      if (built) return;
+      built = true;
+      if (hasKids) body.appendChild(treeList(key, node.children, depth + 1, instrumentId));
+      else if (hasProvs) body.appendChild(provisionList(key, node.articles, instrumentId));
     }
+    function setOpen(open) {
+      if (!expandable) return;
+      if (open) buildBody();
+      body.hidden = !open;
+      toggle.textContent = open ? '▾' : '▸';
+      toggle.setAttribute('aria-expanded', String(open));
+    }
+    function flip() { setOpen(body.hidden); }
     toggle.addEventListener('click', flip);
     label.addEventListener('click', flip);
+
+    // test/programmatic hook (see atlas-ui-smoke.js) + future "expand all"
+    li._atlasSetOpen = setOpen;
+
+    if (openByDefault && expandable) setOpen(true);
     return li;
   }
 
-  function provisionList(key, storageKeys) {
+  // Provision pills. Uses AtlasCore.getProvisionBrief (lean: no breadcrumb,
+  // no article object) — only ever runs for a leaf branch the user opened.
+  function provisionList(key, storageKeys, instrumentId) {
     var wrap = el('div', 'atlas-provision-list');
     storageKeys.forEach(function (sk) {
-      var p = AtlasCore.resolveProvision(key, sk);
-      var a = el('a', 'atlas-provision' + (p && p.cancelled ? ' atlas-provision-cancelled' : ''));
-      a.href = p ? p.viewerUrl
+      var b = AtlasCore.getProvisionBrief(key, sk, instrumentId);
+      var a = el('a', 'atlas-provision' + (b && b.cancelled ? ' atlas-provision-cancelled' : ''));
+      a.href = b ? b.viewerUrl
         : ('codex-article-viewer.html?id=' + encodeURIComponent(key + '_' + sk));
-      a.textContent = (p ? p.unit : 'มาตรา') + ' ' + (p ? p.number : sk);
-      if (p) a.dataset.atlasId = p.atlasId;
-      if (p && p.cancelled) a.title = 'ยกเลิกแล้ว';
+      a.textContent = (b ? b.unit : 'มาตรา') + ' ' + (b ? b.number : sk);
+      if (b && b.cancelled) a.title = 'ยกเลิกแล้ว';
       wrap.appendChild(a);
     });
     return wrap;
@@ -349,15 +388,35 @@
     };
   }
 
+  // Walk a rendered subtree and open every expandable node (materialising
+  // lazily-built bodies). Used by atlas-ui-smoke.js; handy for a future
+  // "expand all" affordance. `maxNodes` guards against opening a huge tree.
+  function expandAll(rootEl, maxNodes) {
+    maxNodes = maxNodes || 5000;
+    var opened = 0;
+    function walk(node) {
+      if (opened >= maxNodes) return;
+      var kids = node.children || [];
+      for (var i = 0; i < kids.length; i++) {
+        var c = kids[i];
+        if (c && typeof c._atlasSetOpen === 'function') { c._atlasSetOpen(true); opened++; }
+        walk(c);
+      }
+    }
+    walk(rootEl);
+    return opened;
+  }
+
   global.AtlasUI = {
-    version: '2.0',
+    version: '2.1',
     mount: mount,
     parseRoute: parseRoute,
-    // exposed for Phase 3 / other pages that want just a piece
+    // exposed for Phase 3 / other pages / tests that want just a piece
     _internal: {
       collectionCard: collectionCard,
       structureTreeView: structureTreeView,
-      breadcrumbBar: breadcrumbBar
+      breadcrumbBar: breadcrumbBar,
+      expandAll: expandAll
     }
   };
 })(typeof window !== 'undefined' ? window : this);

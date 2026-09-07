@@ -17,8 +17,8 @@
 <meta name="keywords" content="ประมวลกฎหมาย, ประมวลกฎหมายแพ่งและพาณิชย์, ประมวลกฎหมายอาญา, ประมวลกฎหมายวิธีพิจารณาความแพ่ง, วิแพ่ง, วิฯแพ่ง, ประมวลกฎหมายวิธีพิจารณาความอาญา, วิอาญา, วิฯอาญา, พระธรรมนูญศาลยุติธรรม, กฎหมายปกครอง, พรบ.จัดตั้งศาลปกครอง, วิปกครอง, วิมหาชน, กฎหมายทรัพย์สินทางปัญญา, พรบ.ลิขสิทธิ์, พรบ.สิทธิบัตร, พรบ.จัดตั้งศาล, บรรพ, หนี้, ทรัพย์สิน, ยืม, ซื้อ-ขาย, ขายฝาก, ตัวแทน, จ้างทำของ, จ้างแรงงาน, มรดก, กฎหมายครอบครัว, สมรสเพศเดียวกัน, กฎหมายลิขสิทธิ์, มาตรา, ค้นหามาตรา">
 <link rel="canonical" href="https://coolunclelab.com/codex-search.html">
 <!-- Thai Legal Atlas shared structural layer (additive; page still works if these 404) -->
-<script src="atlas-patches.js?v=20260907b"></script>
-<script src="atlas-core.js?v=20260907b"></script>
+<script src="atlas-patches.js?v=20260907c"></script>
+<script src="atlas-core.js?v=20260907c"></script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="ประมวลกฎหมายแพ่งและพาณิชย์ — อ่านออนไลน์ 1,843 มาตรา | Cool Uncle">
 <meta property="og:description" content="อ่านตัวบทประมวลกฎหมายแพ่งและพาณิชย์ครบ 6 บรรพ พร้อมไฮไลต์คำสำคัญและจุดดักข้อสอบ เตรียมสอบเนติ ตั๋วทนาย">
@@ -1000,7 +1000,7 @@ async function loadCodexData() {
   try {
     const [response] = await Promise.all([
       fetch('codex-data.json?v=20260903b'),
-      (window.AtlasCore ? AtlasCore.loadRegistry('collections-registry.json?v=20260907b').catch(() => {}) : Promise.resolve())
+      (window.AtlasCore ? AtlasCore.loadRegistry('collections-registry.json?v=20260907c').catch(() => {}) : Promise.resolve())
     ]);
     if (!response.ok) throw new Error('Failed to load codex data');
     codexData = await response.json();

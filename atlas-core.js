@@ -268,7 +268,8 @@
       planned: !!c.planned || c.enabled === false,
       enacted: c.enacted || null,
       source: c.source || _defaultSource(),
-      notes: c.notes || '',
+      blurb: c.blurb || '',          // user-facing structural description
+      notes: c.notes || '',          // developer metadata — not for UI display
       instrumentCount: (c.instruments || []).length
     };
   }
@@ -562,6 +563,39 @@
     return found;
   }
 
+  // Lean per-provision lookup for RENDERING leaf links — no breadcrumb, no
+  // article object. Safe to call once per pill when a branch is expanded.
+  // (resolveProvision stays the full semantic lookup; do NOT use it just to
+  // build a hyperlink.)  ref = bare number (single) or storage key (multi).
+  function getProvisionBrief(collectionKey, ref, instrumentId) {
+    var c = _raw(collectionKey);
+    if (!c || !collectionInCorpus(collectionKey)) return null;
+    ensurePatched(collectionKey);
+    var sk;
+    if (_isMulti(c)) {
+      var parsed = _splitKey(c, ref);
+      var inst = instrumentId || parsed.instrument ||
+        _uniqueInstrumentFor(collectionKey, parsed.number);
+      sk = _storageKey(c, inst, parsed.number);
+    } else {
+      sk = String(ref);
+    }
+    var art = CORPUS.books[collectionKey].articles[sk];
+    if (!art) return null;
+    var split = _splitKey(c, sk);
+    var instFinal = _isMulti(c)
+      ? (split.instrument || (art.meta || {})[_instrumentField(c)] || null)
+      : null;
+    return {
+      number: art.number,
+      unit: _unitFor(c, instFinal),
+      cancelled: !!art.cancelled,
+      storageKey: sk,
+      legacyId: _legacyId(collectionKey, sk),
+      viewerUrl: _viewerUrl(collectionKey, sk)
+    };
+  }
+
   // Returns an array of crumb objects, first = collection, last = provision.
   // Each crumb: { kind, field?, label, value, title, text }
   //   text  -> ready-to-print label (structural crumbs use the stored value
@@ -784,7 +818,7 @@
 
   // --------------------------------------------------------------- expose
   global.AtlasCore = {
-    version: '2.0',
+    version: '2.1',
 
     // lifecycle
     loadRegistry: loadRegistry,
@@ -804,6 +838,7 @@
     // structure
     getStructureTree: getStructureTree,
     resolveProvision: resolveProvision,
+    getProvisionBrief: getProvisionBrief,
     getBreadcrumb: getBreadcrumb,
     describePath: describePath,
     getAdjacent: getAdjacent,
