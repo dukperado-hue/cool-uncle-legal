@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coolunclelab.com/internal/candidate.schema.json",
+  "title": "Case Knowledge — Candidate Case (Phase 4D-1)",
+  "description": "Machine-readable contract for an INTERNAL candidate case. A candidate is NOT a public case. It lives only under internal/candidates/ until a human promotes a fully-reviewed candidate into prototype/assets/cases/. This schema is the single source of truth for the controlled enums; internal/candidate-validate.py reads $defs from this file. Semantic rules (status state-machine, agent_inferred gating, promotion block) are enforced by the validator, not expressible here.",
+
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schema_version", "candidate_id", "title", "source", "status"],
+
+  "properties": {
+    "schema_version": {
+      "description": "Contract version. Must equal one of $defs.schema_versions.",
+      "type": "string"
+    },
+    "candidate_id": {
+      "description": "Stable internal id. Format: cand-<ascii-kebab-slug>-<4-digit-B.E.-year>. Unique within a validation scope. Not a public case id and never derived from an array index or nodeKey.",
+      "type": "string",
+      "pattern": "^cand-[a-z0-9]+(?:-[a-z0-9]+)*-[0-9]{4}$"
+    },
+    "title": {
+      "description": "Working title. For fixtures, must clearly state it is synthetic / not a real case.",
+      "type": "string",
+      "minLength": 1
+    },
+
+    "source": {
+      "description": "Provenance. A candidate with no real source is invalid.",
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["type", "ref"],
+      "properties": {
+        "type": { "type": "string", "$comment": "one of $defs.source_types" },
+        "ref": {
+          "description": "Human-checkable pointer into the source: lecture code + ครั้งที่, textbook + page, ฎีกา number, or URL. Must not be empty.",
+          "type": "string",
+          "minLength": 1
+        },
+        "notebook": {
+          "description": "Optional NotebookLM notebook id, for a researcher to re-open the source. The repository never calls NotebookLM.",
+          "type": ["string", "null"]
+        },
+        "quote": {
+          "description": "Optional verbatim sentence from the source that triggered this candidate.",
+          "type": ["string", "null"]
+        }
+      }
+    },
+
+    "claimed_citation": {
+      "description": "What the SOURCE says the citation is. May be null / partial for an early candidate. Never invented.",
+      "type": ["object", "null"],
+      "additionalProperties": true,
+      "properties": {
+        "case_number": { "type": ["string", "null"] },
+        "court": { "type": ["string", "null"] },
+        "year": { "type": ["string", "integer", "null"] }
+      }
+    },
+
+    "factual_summary": { "type": ["string", "null"] },
+    "legal_issue": { "type": ["string", "null"] },
+
+    "cited_provisions": {
+      "description": "Provisions the candidate is associated with, each tagged with how strongly the source supports it.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["ref", "evidence"],
+        "properties": {
+          "ref": {
+            "description": "\"<collection>:<article-number>\" — the SAME association key Phase 4C uses. Not modified here.",
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": { "type": "string", "$comment": "one of $defs.evidence_types" }
+        }
+      }
+    },
+
+    "candidate_structural_path": {
+      "description": "DERIVED from a verified provision via AtlasCore public structural lookup (getBreadcrumb / describePath). Never hand-authored as authority; never an array index.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["collection", "path", "evidence"],
+        "properties": {
+          "collection": {
+            "description": "Must be a key in collections-registry.json (validator checks).",
+            "type": "string"
+          },
+          "instrument": { "type": ["string", "null"] },
+          "path": {
+            "description": "Ordered structural VALUE strings (e.g. [\"บรรพ 5\",\"ลักษณะ 1\",\"หมวด 2\"]). Every element MUST be a string — an integer element means an array index was used as identity and is rejected.",
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "evidence": {
+            "description": "Always \"derived_from_provision\" in Phase 4D-1.",
+            "type": "string",
+            "const": "derived_from_provision"
+          }
+        }
+      }
+    },
+
+    "extraction_confidence": { "type": "string", "$comment": "one of $defs.confidence_levels" },
+
+    "possible_duplicate_of": {
+      "description": "Existing public case ids or other candidate_ids this may duplicate. Advisory; a human decides merge-vs-new at promotion.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+
+    "status": { "type": "string", "$comment": "one of $defs.statuses; ordered lifecycle" },
+
+    "reviewers": {
+      "description": "Append-only human-review log. One entry per status transition.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["by", "at", "from_status", "to_status"],
+        "properties": {
+          "by": { "type": "string", "minLength": 1 },
+          "at": { "type": "string", "minLength": 1 },
+          "from_status": { "type": "string" },
+          "to_status": { "type": "string" },
+          "action": {
+            "description": "Optional. \"cleared_agent_inferred\" is required (on the entry that reaches mapping_verified or later) when any cited_provision has evidence == agent_inferred.",
+            "type": ["string", "null"]
+          },
+          "notes": { "type": ["string", "null"] }
+        }
+      }
+    },
+
+    "promoted_case_id": {
+      "description": "Public case id this candidate became. MUST be null unless status == \"promoted\". Setting this is a MANUAL human act in a later phase; no tooling in Phase 4D-1 writes it.",
+      "type": ["string", "null"]
+    }
+  },
+
+  "$defs": {
+    "schema_versions": ["1.0"],
+    "source_types": ["lecture", "textbook", "judgment", "article"],
+    "evidence_types": ["source_explicit", "source_cites", "agent_inferred"],
+    "confidence_levels": ["high", "medium", "low"],
+    "statuses": [
+      "candidate",
+      "source_verified",
+      "citation_verified",
+      "mapping_verified",
+      "content_reviewed",
+      "promoted"
+    ],
+    "status_requirements": {
+      "candidate": "identity + title + source(type,ref)",
+      "source_verified": "+ factual_summary, legal_issue, >=1 reviewer entry ending at source_verified",
+      "citation_verified": "+ claimed_citation.case_number non-null, >=1 reviewer entry ending at citation_verified",
+      "mapping_verified": "+ >=1 cited_provision; every provision has a valid evidence; candidate_structural_path present with evidence=derived_from_provision and registry-valid collection; any agent_inferred provision cleared by a reviewer entry with action=cleared_agent_inferred",
+      "content_reviewed": "+ a reviewer entry ending at content_reviewed (deident + paragraph + render review done out-of-band)",
+      "promoted": "+ promoted_case_id non-null; reviewer entry ending at promoted. NOTE: Phase 4D-1 tooling never produces this state."
+    }
+  }
+}

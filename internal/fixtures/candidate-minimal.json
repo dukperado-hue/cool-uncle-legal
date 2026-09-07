@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "candidate_id": "cand-fixture-synthetic-a-0001",
+  "title": "FIXTURE ONLY — synthetic candidate for validator tests. Not a real case. No judgment. Not eligible for promotion.",
+  "source": {
+    "type": "lecture",
+    "ref": "FIXTURE — synthetic lecture reference, no real course",
+    "notebook": null,
+    "quote": null
+  },
+  "claimed_citation": null,
+  "factual_summary": null,
+  "legal_issue": null,
+  "cited_provisions": [],
+  "candidate_structural_path": [],
+  "extraction_confidence": "low",
+  "possible_duplicate_of": [],
+  "status": "candidate",
+  "reviewers": [],
+  "promoted_case_id": null
+}

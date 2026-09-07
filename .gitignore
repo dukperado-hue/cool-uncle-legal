@@ -18,3 +18,19 @@
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Case Knowledge pipeline (Phase 4D-1) — the pipeline TOOLING is tracked
+# (internal/*.py, internal/*.md, internal/*.schema.json, internal/fixtures/),
+# but candidate / source / review PAYLOAD is unverified working material and
+# must never be served as a public asset, so it stays untracked. See
+# internal/README.md ("Git policy — Option A").
+/internal/candidates/*
+!/internal/candidates/.gitkeep
+/internal/sources/*
+!/internal/sources/.gitkeep
+/internal/review/*
+!/internal/review/.gitkeep

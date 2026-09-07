@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "candidate_id": "cand-fixture-synthetic-b-0002",
+  "title": "FIXTURE ONLY — synthetic candidate, status mapping_verified. สถานการณ์สมมติสำหรับทดสอบ validator เท่านั้น ไม่ใช่คดีจริง ไม่มีคำพิพากษา",
+  "source": {
+    "type": "textbook",
+    "ref": "FIXTURE — synthetic textbook reference, page 000",
+    "notebook": null,
+    "quote": "FIXTURE — this quote is synthetic and does not come from any real source."
+  },
+  "claimed_citation": {
+    "case_number": "FIXTURE-SYNTHETIC-000/0000",
+    "court": "FIXTURE — synthetic court",
+    "year": "0000"
+  },
+  "factual_summary": "FIXTURE — synthetic fact pattern used only to exercise the validator's status state-machine. No real events are described.",
+  "legal_issue": "FIXTURE — synthetic legal issue placeholder.",
+  "cited_provisions": [
+    { "ref": "civil:1", "evidence": "source_explicit" },
+    { "ref": "civil:2", "evidence": "source_cites" }
+  ],
+  "candidate_structural_path": [
+    { "collection": "civil", "instrument": null, "path": ["บรรพ 1", "ลักษณะ 1"], "evidence": "derived_from_provision" }
+  ],
+  "extraction_confidence": "medium",
+  "possible_duplicate_of": [],
+  "status": "mapping_verified",
+  "reviewers": [
+    { "by": "fixture-reviewer", "at": "2026-09-07", "from_status": "candidate", "to_status": "source_verified", "notes": "FIXTURE" },
+    { "by": "fixture-reviewer", "at": "2026-09-07", "from_status": "source_verified", "to_status": "citation_verified", "notes": "FIXTURE" },
+    { "by": "fixture-reviewer", "at": "2026-09-07", "from_status": "citation_verified", "to_status": "mapping_verified", "notes": "FIXTURE" }
+  ],
+  "promoted_case_id": null
+}
