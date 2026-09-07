@@ -1,0 +1,683 @@
+/* ============================================================================
+ * atlas-provision-view.js  —  Thai Legal Atlas · inline provision viewer
+ * ----------------------------------------------------------------------------
+ * Phase 4E-1. A STANDALONE presentation layer — same shape as atlas-cases.js.
+ * It never lives inside atlas-ui.js and never mutates AtlasCore / AtlasUI.
+ *
+ * What it does
+ *   A plain left-click on an Atlas provision pill
+ *     <a class="atlas-provision" href="codex-article-viewer.html?id=..&x=atlas">
+ *   opens an in-page reading panel (role="dialog") with the full ตัวบท,
+ *   the structural breadcrumb, previous/next navigation and the associated
+ *   PUBLIC cases — WITHOUT tearing down or re-rendering the structure tree
+ *   behind it.
+ *
+ * Progressive enhancement — the pill's href is untouched, so:
+ *   - if this script fails to load            → click follows the legacy viewer
+ *   - Ctrl / Cmd / Shift / Alt / middle click → legacy viewer, new tab, etc.
+ *   - AtlasCore not ready / unknown article   → click follows the legacy viewer
+ *
+ * History model (see Phase 4E-1 §5)
+ *   The Atlas route grammar is hash-based and AtlasUI.parseRoute() only
+ *   accepts an EXACT `#/c/<collection>` — appending `?a=` to the hash makes
+ *   AtlasUI fall through to the home view, and Back across a hash change
+ *   fires `hashchange`, which rebuilds the tree and drops every open branch.
+ *   So this module NEVER touches location.hash. It records the open provision
+ *   in a `?a=<number>` search-string param via history.pushState /
+ *   replaceState (which fire no events at all), keeping the hash — and
+ *   therefore AtlasUI — completely untouched. Back simply pops that entry;
+ *   the popstate handler closes the panel and the tree is exactly as it was.
+ *
+ * Classic script (no ES modules). Exposes window.AtlasProvisionView.
+ * ==========================================================================*/
+(function (global) {
+  'use strict';
+
+  var ROOT_ID = 'atlas-root';
+  var PARAM = 'a';                 // ?a=<number>  (collection comes from the hash)
+  var CASE_INDEX_URL = 'prototype/assets/cases/article-case-index.json';
+  var STYLE_ID = 'atlas-provision-view-style';
+  var PILL_SELECTOR = 'a.atlas-provision';
+
+  var doc = global.document;
+
+  // ---- module state -------------------------------------------------
+  var _root = null;
+  var _wrapEl = null;             // .atlas-provision-view (dialog container)
+  var _panelEl = null;            // .atlas-provision-view-panel
+  var _lastFocused = null;        // element to restore focus to on close
+  var _current = null;            // { collection, instrument, number }
+  var _hasOwnEntry = false;       // did WE pushState an entry for this open?
+  var _bound = false;
+  var _prevBodyOverflow = null;
+  var _caseIndexPromise = null;
+
+  // ================================================================
+  // utilities
+  // ================================================================
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+  function hasClass(n, c) {
+    return !!n && typeof n.className === 'string' &&
+      (' ' + n.className + ' ').indexOf(' ' + c + ' ') !== -1;
+  }
+  function make(tag, cls, text) {
+    var n = doc.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  // closest('a.atlas-provision') without relying on Element.closest (test shim)
+  function closestProvisionAnchor(node) {
+    var cur = node;
+    while (cur && cur.nodeType === 1) {
+      if (String(cur.tagName).toUpperCase() === 'A' && hasClass(cur, 'atlas-provision')) return cur;
+      cur = cur.parentNode;
+    }
+    return null;
+  }
+
+  // ---- provision href → { collection, number } --------------------
+  // href is  codex-article-viewer.html?id=<collection>_<number>[&x=atlas]
+  // Collection keys never contain "_" and มาตรา numbers never contain "_"
+  // (sub-numbers use "/"), so the FIRST "_" is the split point. A multi-
+  // instrument id carries "<instrument>::<number>" after the collection.
+  function parseProvisionHref(href) {
+    try {
+      var m = /[?&]id=([^&#]+)/.exec(String(href || ''));
+      if (!m) return null;
+      var id;
+      try { id = decodeURIComponent(m[1]); } catch (e) { id = m[1]; }
+      var us = id.indexOf('_');
+      if (us < 1 || us === id.length - 1) return null;
+      var collection = id.slice(0, us);
+      var rest = id.slice(us + 1);
+      var sep = rest.indexOf('::');
+      if (sep !== -1) {
+        return { collection: collection, instrument: rest.slice(0, sep), number: rest.slice(sep + 2) };
+      }
+      return { collection: collection, instrument: null, number: rest };
+    } catch (e) { return null; }
+  }
+
+  // ---- current Atlas route, READ (never routed) from the hash -----
+  function currentRoute() {
+    var h = (global.location && global.location.hash) || '';
+    var m = /^#\/c\/([^/?&]+)(?:\/i\/([^/?&]+))?/.exec(h);
+    if (!m) return { collection: null, instrument: null };
+    function dec(s) { try { return decodeURIComponent(s); } catch (e) { return s; } }
+    return { collection: dec(m[1]), instrument: m[2] ? dec(m[2]) : null };
+  }
+
+  function readParam() {
+    var s = (global.location && global.location.search) || '';
+    var m = new RegExp('[?&]' + PARAM + '=([^&#]*)').exec(s);
+    if (!m) return null;
+    try { return decodeURIComponent(m[1]); } catch (e) { return m[1]; }
+  }
+
+  function urlWithParam(number) {
+    var loc = global.location;
+    return (loc.pathname || '') + '?' + PARAM + '=' + encodeURIComponent(number) + (loc.hash || '');
+  }
+  function urlWithoutParam() {
+    var loc = global.location;
+    return (loc.pathname || '') + (loc.hash || '');
+  }
+
+  // ================================================================
+  // resolution
+  // ================================================================
+  function resolve(collection, number, instrument) {
+    var AC = global.AtlasCore;
+    if (!AC || typeof AC.resolveProvision !== 'function') return null;
+    try {
+      var r = AC.resolveProvision(collection, number, instrument || undefined);
+      if (r && r.article) return r;
+    } catch (e) { /* fail soft */ }
+    return null;
+  }
+  function adjacent(collection, ref) {
+    var AC = global.AtlasCore;
+    if (!AC || typeof AC.getAdjacent !== 'function') return { prev: null, next: null };
+    try { return AC.getAdjacent(collection, ref) || { prev: null, next: null }; }
+    catch (e) { return { prev: null, next: null }; }
+  }
+
+  // ================================================================
+  // case association — read the SAME prebuilt public index that
+  // atlas-cases.js and neural-network.html consume. One memoised fetch;
+  // fails soft to "no cases".
+  // ================================================================
+  function loadCaseIndex() {
+    if (_caseIndexPromise) return _caseIndexPromise;
+    if (typeof global.fetch !== 'function') {
+      _caseIndexPromise = Promise.resolve({});
+      return _caseIndexPromise;
+    }
+    _caseIndexPromise = global.fetch(CASE_INDEX_URL)
+      .then(function (r) { return (r && r.ok) ? r.json() : {}; })
+      .then(function (j) { return (j && typeof j === 'object') ? j : {}; })
+      .catch(function () { return {}; });
+    return _caseIndexPromise;
+  }
+  function publicCasesFrom(index, collection, number) {
+    var key = collection + ':' + number;
+    var arr = (index && Object.prototype.hasOwnProperty.call(index, key)) ? index[key] : null;
+    if (!Array.isArray(arr)) return [];
+    var out = [];
+    for (var i = 0; i < arr.length; i++) {
+      var c = arr[i];
+      if (c && c.public === true && typeof c.id === 'string' && c.id) out.push(c);
+    }
+    return out;
+  }
+
+  // ================================================================
+  // stylesheet (scoped .atlas-provision-view-*; no generic selectors)
+  // ================================================================
+  function injectStyle() {
+    if (!doc || !doc.head || doc.getElementById(STYLE_ID)) return;
+    var css = [
+      '.atlas-provision-view{position:fixed;inset:0;z-index:1000;display:flex;',
+      '  justify-content:flex-end;}',
+      '.atlas-provision-view[hidden]{display:none!important;}',
+      '.atlas-provision-view-backdrop{position:absolute;inset:0;background:rgba(15,18,26,.10);',
+      '  opacity:0;transition:opacity .18s ease;}',
+      '.atlas-provision-view-panel{position:relative;width:min(460px,94vw);max-width:94vw;',
+      '  height:100%;background:var(--panel,#fff);color:var(--ink,#1f2430);',
+      '  border-left:1px solid var(--line,#e6e1d6);box-shadow:-8px 0 30px rgba(0,0,0,.14);',
+      '  display:flex;flex-direction:column;transform:translateX(14px);opacity:0;',
+      '  transition:transform .18s ease,opacity .18s ease;outline:none;}',
+      '.atlas-provision-view-open .atlas-provision-view-backdrop{opacity:1;}',
+      '.atlas-provision-view-open .atlas-provision-view-panel{transform:none;opacity:1;}',
+      '.atlas-provision-view-header{display:flex;align-items:flex-start;gap:12px;',
+      '  padding:16px 18px 12px;border-bottom:1px solid var(--line,#e6e1d6);}',
+      '.atlas-provision-view-breadcrumb{flex:1;min-width:0;font-size:11.5px;line-height:1.6;',
+      '  color:var(--muted,#5b6472);display:flex;flex-wrap:wrap;gap:2px 6px;}',
+      '.atlas-provision-view-crumb-sep{opacity:.45;}',
+      '.atlas-provision-view-crumb-current{color:var(--ink,#1f2430);font-weight:600;}',
+      '.atlas-provision-view-close{flex:none;border:1px solid var(--line,#e6e1d6);',
+      '  background:var(--panel,#fff);color:var(--muted,#5b6472);border-radius:6px;',
+      '  width:28px;height:28px;font-size:14px;line-height:1;cursor:pointer;',
+      '  font-family:inherit;}',
+      '.atlas-provision-view-close:hover{border-color:var(--accent,#2E4A7A);color:var(--accent,#2E4A7A);}',
+      '.atlas-provision-view-close:focus-visible{outline:2px solid var(--accent,#2E4A7A);outline-offset:2px;}',
+      '.atlas-provision-view-body{flex:1;overflow-y:auto;padding:18px;}',
+      '.atlas-provision-view-heading{margin:0 0 4px;font-size:19px;font-weight:700;line-height:1.35;',
+      '  color:var(--ink,#1f2430);}',
+      '.atlas-provision-view-badge{display:inline-block;margin-left:8px;font-size:11px;font-weight:600;',
+      '  padding:1px 8px;border-radius:999px;background:var(--chip,#f2ede1);color:var(--muted,#5b6472);',
+      '  vertical-align:middle;}',
+      '.atlas-provision-view-collection{margin:0 0 14px;font-size:12px;color:var(--muted,#5b6472);}',
+      '.atlas-provision-view-text{font-size:15px;line-height:1.95;color:var(--ink,#1f2430);}',
+      '.atlas-provision-view-text p{margin:0 0 .85em;}',
+      '.atlas-provision-view-text p:last-child{margin-bottom:0;}',
+      '.atlas-provision-view-cancelled .atlas-provision-view-text{opacity:.7;}',
+      '.atlas-provision-view-cases{margin:18px 0 0;font-size:12px;}',
+      '.atlas-provision-view-cases-d{border:1px dashed var(--line,#e6e1d6);border-radius:8px;',
+      '  padding:6px 12px;}',
+      '.atlas-provision-view-cases-sum{list-style:none;cursor:pointer;color:var(--muted,#5b6472);',
+      '  font-variant-numeric:tabular-nums;-webkit-user-select:none;user-select:none;}',
+      '.atlas-provision-view-cases-sum::-webkit-details-marker{display:none;}',
+      '.atlas-provision-view-cases-sum::marker{content:"";}',
+      '.atlas-provision-view-cases-d[open]>.atlas-provision-view-cases-sum{color:var(--accent,#2E4A7A);',
+      '  font-weight:600;}',
+      '.atlas-provision-view-cases-list{display:flex;flex-direction:column;gap:6px;margin-top:8px;}',
+      '.atlas-provision-view-case-link{font-size:12px;color:var(--accent,#2E4A7A);line-height:1.45;}',
+      '.atlas-provision-view-case-link:hover{text-decoration:underline;}',
+      '.atlas-provision-view-adjacent{display:flex;justify-content:space-between;gap:8px;',
+      '  margin:20px 0 0;}',
+      '.atlas-provision-view-adj{flex:1;border:1px solid var(--line,#e6e1d6);background:var(--panel,#fff);',
+      '  color:var(--ink,#1f2430);border-radius:8px;padding:8px 10px;font-size:12px;cursor:pointer;',
+      '  font-family:inherit;font-variant-numeric:tabular-nums;text-align:center;}',
+      '.atlas-provision-view-adj:hover{border-color:var(--accent,#2E4A7A);background:var(--accent-soft,#eaf0f8);}',
+      '.atlas-provision-view-adj:focus-visible{outline:2px solid var(--accent,#2E4A7A);outline-offset:1px;}',
+      '.atlas-provision-view-adj-next{text-align:right;}',
+      '.atlas-provision-view-adj-prev{text-align:left;}',
+      '.atlas-provision-view-full{display:inline-block;margin:20px 0 0;font-size:12.5px;',
+      '  color:var(--accent,#2E4A7A);}',
+      '.atlas-provision-view-full:hover{text-decoration:underline;}',
+      '@media (prefers-reduced-motion:reduce){',
+      '  .atlas-provision-view-backdrop,.atlas-provision-view-panel{transition:none;}}',
+      '@media (max-width:760px){',
+      '  .atlas-provision-view{justify-content:stretch;align-items:flex-end;}',
+      '  .atlas-provision-view-backdrop{background:rgba(15,18,26,.34);}',
+      '  .atlas-provision-view-panel{width:100%;max-width:100%;height:88vh;',
+      '    border-left:0;border-top-left-radius:14px;border-top-right-radius:14px;',
+      '    transform:translateY(18px);box-shadow:0 -8px 30px rgba(0,0,0,.22);}',
+      '  .atlas-provision-view-open .atlas-provision-view-panel{transform:none;}}'
+    ].join('\n');
+    var style = doc.createElement('style');
+    style.id = STYLE_ID;
+    style.textContent = css;
+    doc.head.appendChild(style);
+  }
+
+  // ================================================================
+  // panel construction
+  // ================================================================
+  function buildShell() {
+    var wrap = make('div', 'atlas-provision-view');
+    wrap.setAttribute('role', 'dialog');
+    wrap.setAttribute('aria-modal', 'true');
+    wrap.setAttribute('aria-label', 'ตัวบทมาตรา');
+
+    var backdrop = make('div', 'atlas-provision-view-backdrop');
+    backdrop.addEventListener('click', function () { requestClose(); });
+
+    var panel = make('div', 'atlas-provision-view-panel');
+    panel.setAttribute('tabindex', '-1');
+
+    wrap.appendChild(backdrop);
+    wrap.appendChild(panel);
+    return { wrap: wrap, panel: panel };
+  }
+
+  function breadcrumbEl(crumbs) {
+    var nav = make('nav', 'atlas-provision-view-breadcrumb');
+    (crumbs || []).forEach(function (c, i) {
+      if (i) nav.appendChild(make('span', 'atlas-provision-view-crumb-sep', '›'));
+      var last = i === crumbs.length - 1;
+      nav.appendChild(make('span',
+        'atlas-provision-view-crumb' + (last ? ' atlas-provision-view-crumb-current' : ''),
+        c.text));
+    });
+    return nav;
+  }
+
+  function textEl(raw) {
+    var box = make('div', 'atlas-provision-view-text');
+    var parts = String(raw == null ? '' : raw).split(/\n+/);
+    var any = false;
+    parts.forEach(function (p) {
+      var t = p.trim();
+      if (!t) return;
+      any = true;
+      box.appendChild(make('p', null, t));   // textContent — never innerHTML
+    });
+    if (!any) box.appendChild(make('p', null, '(ไม่มีตัวบทในคลังข้อมูล)'));
+    return box;
+  }
+
+  function adjacentEl(resolved) {
+    var nav = make('nav', 'atlas-provision-view-adjacent');
+    var adj = adjacent(resolved.collection, resolved.storageKey);
+    var AC = global.AtlasCore;
+    function label(sk) {
+      // sk is a storage key (bare number for single-instrument collections)
+      var num = sk;
+      try {
+        if (AC && typeof AC.getProvisionBrief === 'function') {
+          var b = AC.getProvisionBrief(resolved.collection, sk, resolved.instrument || undefined);
+          if (b && b.number) return (b.unit || resolved.unit) + ' ' + b.number;
+        }
+      } catch (e) { /* ignore */ }
+      return (resolved.unit || 'มาตรา') + ' ' + num;
+    }
+    if (adj.prev) {
+      var pv = make('button', 'atlas-provision-view-adj atlas-provision-view-adj-prev',
+        '‹ ' + label(adj.prev));
+      pv.type = 'button';
+      pv.addEventListener('click', function () { navigateTo(resolved.collection, adj.prev, resolved.instrument); });
+      nav.appendChild(pv);
+    }
+    if (adj.next) {
+      var nx = make('button', 'atlas-provision-view-adj atlas-provision-view-adj-next',
+        label(adj.next) + ' ›');
+      nx.type = 'button';
+      nx.addEventListener('click', function () { navigateTo(resolved.collection, adj.next, resolved.instrument); });
+      nav.appendChild(nx);
+    }
+    return nav.children && nav.children.length ? nav : null;
+  }
+
+  function casesEl(resolved) {
+    var box = make('div', 'atlas-provision-view-cases');
+    box.hidden = true;
+    loadCaseIndex().then(function (index) {
+      var cases;
+      try { cases = publicCasesFrom(index, resolved.collection, resolved.number); }
+      catch (e) { cases = []; }
+      if (!cases.length || !box.parentNode) return;
+      var d = make('details', 'atlas-provision-view-cases-d');
+      var sum = make('summary', 'atlas-provision-view-cases-sum',
+        '· ' + cases.length + ' คดีที่เกี่ยวข้อง');
+      d.appendChild(sum);
+      var list = make('div', 'atlas-provision-view-cases-list');
+      cases.forEach(function (c) {
+        var a = make('a', 'atlas-provision-view-case-link', c.title || c.id);
+        a.setAttribute('href', 'prototype/read-case.html?id=' + encodeURIComponent(c.id));
+        a.setAttribute('target', '_blank');
+        a.setAttribute('rel', 'noopener');
+        list.appendChild(a);
+      });
+      d.appendChild(list);
+      box.appendChild(d);
+      box.hidden = false;
+    });
+    return box;
+  }
+
+  function renderInto(panel, resolved) {
+    while (panel.firstChild) panel.removeChild(panel.firstChild);
+
+    var header = make('div', 'atlas-provision-view-header');
+    header.appendChild(breadcrumbEl(resolved.breadcrumb || []));
+    var close = make('button', 'atlas-provision-view-close', '✕');
+    close.type = 'button';
+    close.setAttribute('aria-label', 'ปิดตัวบท');
+    close.addEventListener('click', function () { requestClose(); });
+    header.appendChild(close);
+    panel.appendChild(header);
+
+    var body = make('div', 'atlas-provision-view-body');
+
+    var h = make('h2', 'atlas-provision-view-heading');
+    h.setAttribute('tabindex', '-1');
+    h.appendChild(doc.createTextNode((resolved.unit || 'มาตรา') + ' ' + resolved.number));
+    if (resolved.cancelled) {
+      h.appendChild(make('span', 'atlas-provision-view-badge', 'ยกเลิกแล้ว'));
+    }
+    body.appendChild(h);
+
+    body.appendChild(make('p', 'atlas-provision-view-collection',
+      resolved.collectionTitle || resolved.collection));
+
+    body.appendChild(textEl(resolved.article && resolved.article.text));
+    body.appendChild(casesEl(resolved));
+
+    var adj = adjacentEl(resolved);
+    if (adj) body.appendChild(adj);
+
+    var full = make('a', 'atlas-provision-view-full', 'เปิดหน้าเต็ม →');
+    // Use the viewer URL AtlasCore already computed; only append the ?x=atlas
+    // navigation marker the legacy viewer expects.
+    var vu = resolved.viewerUrl || ('codex-article-viewer.html?id=' +
+      encodeURIComponent(resolved.legacyId || (resolved.collection + '_' + resolved.number)));
+    full.setAttribute('href', vu + (vu.indexOf('?') === -1 ? '?' : '&') + 'x=atlas');
+    body.appendChild(full);
+
+    panel.appendChild(body);
+    if (_wrapEl) {
+      _wrapEl.setAttribute('aria-label',
+        (resolved.unit || 'มาตรา') + ' ' + resolved.number + ' — ' +
+        (resolved.collectionTitle || resolved.collection));
+    }
+  }
+
+  // ================================================================
+  // focus management
+  // ================================================================
+  function focusables() {
+    if (!_panelEl) return [];
+    var sel = 'a[href],button:not([disabled]),summary,[tabindex]';
+    var list = [];
+    try {
+      var found = _panelEl.querySelectorAll(sel);
+      for (var i = 0; i < found.length; i++) {
+        var n = found[i];
+        if (n.hidden) continue;
+        list.push(n);
+      }
+    } catch (e) { /* shim */ }
+    return list;
+  }
+  function onKeydown(e) {
+    if (!isOpen()) return;
+    if (e.key === 'Escape' || e.keyCode === 27) {
+      e.preventDefault();
+      requestClose();
+      return;
+    }
+    if (e.key === 'Tab' || e.keyCode === 9) {
+      var f = focusables();
+      if (!f.length) { e.preventDefault(); if (_panelEl.focus) _panelEl.focus(); return; }
+      var first = f[0], last = f[f.length - 1];
+      var active = doc.activeElement;
+      var within = false;
+      for (var i = 0; i < f.length; i++) if (f[i] === active) { within = true; break; }
+      if (!within) { e.preventDefault(); if (first.focus) first.focus(); return; }
+      if (e.shiftKey && active === first) { e.preventDefault(); if (last.focus) last.focus(); }
+      else if (!e.shiftKey && active === last) { e.preventDefault(); if (first.focus) first.focus(); }
+    }
+  }
+
+  // ================================================================
+  // open / close / navigate
+  // ================================================================
+  function isOpen() { return !!_wrapEl; }
+
+  function lockScroll() {
+    try {
+      if (doc.body && _prevBodyOverflow === null) {
+        _prevBodyOverflow = doc.body.style.overflow || '';
+        doc.body.style.overflow = 'hidden';
+      }
+    } catch (e) { /* ignore */ }
+  }
+  function unlockScroll() {
+    try {
+      if (doc.body && _prevBodyOverflow !== null) {
+        doc.body.style.overflow = _prevBodyOverflow;
+        _prevBodyOverflow = null;
+      }
+    } catch (e) { /* ignore */ }
+  }
+
+  // open a NEW panel from a closed state
+  function openFresh(resolved, opts) {
+    opts = opts || {};
+    injectStyle();
+    var shell = buildShell();
+    _wrapEl = shell.wrap;
+    _panelEl = shell.panel;
+    renderInto(_panelEl, resolved);
+    if (_root && _root.parentNode) _root.parentNode.insertBefore(_wrapEl, _root.nextSibling);
+    else if (doc.body) doc.body.appendChild(_wrapEl);
+
+    _current = { collection: resolved.collection, instrument: resolved.instrument || null, number: resolved.number };
+
+    if (opts.source) _lastFocused = opts.source;
+    else if (doc.activeElement) _lastFocused = doc.activeElement;
+
+    // history: a real open pushes ONE entry; a popstate/deep-link open does not
+    if (opts.history === 'push') {
+      try { global.history.pushState({ apv: resolved.number }, '', urlWithParam(resolved.number)); _hasOwnEntry = true; }
+      catch (e) { _hasOwnEntry = false; }
+    } else if (opts.history === 'replace') {
+      try { global.history.replaceState({ apv: resolved.number }, '', urlWithParam(resolved.number)); }
+      catch (e) { /* ignore */ }
+      _hasOwnEntry = false;
+    } else {
+      _hasOwnEntry = false;
+    }
+
+    lockScroll();
+    // transition-in on next frame
+    var raf = global.requestAnimationFrame || function (fn) { return setTimeout(fn, 16); };
+    raf(function () { if (_wrapEl) _wrapEl.className = 'atlas-provision-view atlas-provision-view-open'; });
+    if (_panelEl && _panelEl.focus) { try { _panelEl.focus(); } catch (e) {} }
+  }
+
+  // change the article shown in an ALREADY-open panel (prev/next, or a
+  // different pill clicked while the panel is up) — one history entry only.
+  function updateOpen(resolved, opts) {
+    opts = opts || {};
+    renderInto(_panelEl, resolved);
+    _current = { collection: resolved.collection, instrument: resolved.instrument || null, number: resolved.number };
+    if (opts.source) _lastFocused = opts.source;
+    if (opts.history === 'replace') {
+      try { global.history.replaceState({ apv: resolved.number }, '', urlWithParam(resolved.number)); }
+      catch (e) { /* ignore */ }
+    }
+    // keep the reader oriented: focus the new heading
+    try {
+      var hd = _panelEl.querySelector('.atlas-provision-view-heading');
+      if (hd && hd.focus) hd.focus();
+    } catch (e) { /* shim */ }
+  }
+
+  function openProvision(collection, number, opts) {
+    opts = opts || {};
+    var resolved = resolve(collection, number, opts.instrument);
+    if (!resolved) return false;          // unknown → caller lets the legacy link run
+    if (isOpen()) updateOpen(resolved, { source: opts.source, history: opts.history === 'none' ? 'none' : 'replace' });
+    else openFresh(resolved, { source: opts.source, history: opts.history || 'push' });
+    return true;
+  }
+
+  // prev/next inside the viewer — replace, never stack
+  function navigateTo(collection, storageKey, instrument) {
+    var resolved = resolve(collection, storageKey, instrument);
+    if (!resolved) return;
+    updateOpen(resolved, { history: 'replace' });
+  }
+
+  // user asked to close (button / Esc / backdrop)
+  function requestClose() {
+    if (!isOpen()) return;
+    if (_hasOwnEntry) {
+      // pop our entry; the popstate handler performs the teardown
+      try { global.history.back(); return; }
+      catch (e) { /* fall through to direct teardown */ }
+    }
+    try { global.history.replaceState({}, '', urlWithoutParam()); } catch (e) { /* ignore */ }
+    teardown();
+  }
+
+  // actually remove the panel from the DOM + restore focus
+  function teardown() {
+    if (!_wrapEl) return;
+    var wrap = _wrapEl;
+    _wrapEl = null;
+    _panelEl = null;
+    _current = null;
+    _hasOwnEntry = false;
+    try { wrap.className = 'atlas-provision-view'; } catch (e) {}
+    var done = function () {
+      try { if (wrap.parentNode) wrap.parentNode.removeChild(wrap); } catch (e) {}
+    };
+    if (global.requestAnimationFrame) setTimeout(done, 200); else done();
+    unlockScroll();
+    var back = _lastFocused;
+    _lastFocused = null;
+    try {
+      if (back && back.focus && (!doc.contains || doc.contains(back))) back.focus();
+    } catch (e) { /* ignore */ }
+  }
+
+  // ================================================================
+  // event wiring
+  // ================================================================
+  function onRootClick(e) {
+    if (e.defaultPrevented) return;
+    if (e.button != null && e.button !== 0) return;                 // middle / right
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;   // modified → passthrough
+    var a = closestProvisionAnchor(e.target);
+    if (!a) return;                                                 // not a provision pill
+    var ref = parseProvisionHref(a.getAttribute && a.getAttribute('href'));
+    if (!ref) return;                                               // malformed → let href run
+    var route = currentRoute();
+    var collection = ref.collection || route.collection;
+    var instrument = ref.instrument || route.instrument;
+    var resolved = resolve(collection, ref.number, instrument);
+    if (!resolved) return;                                          // unknown → let href run
+    e.preventDefault();
+    if (isOpen()) updateOpen(resolved, { source: a, history: 'replace' });
+    else openFresh(resolved, { source: a, history: 'push' });
+  }
+
+  function onPopState() {
+    var val = readParam();
+    if (val != null && val !== '') {
+      var route = currentRoute();
+      var resolved = resolve(route.collection, val, route.instrument);
+      if (!resolved) { if (isOpen()) teardown(); return; }
+      if (isOpen()) updateOpen(resolved, { history: 'none' });
+      else openFresh(resolved, { history: 'none' });
+    } else if (isOpen()) {
+      teardown();
+    }
+  }
+
+  function onHashChange() {
+    // the underlying Atlas route changed — a provision panel over the new
+    // view would be wrong. Drop it (and the param) without adding history.
+    if (!isOpen()) return;
+    try { global.history.replaceState({}, '', urlWithoutParam()); } catch (e) { /* ignore */ }
+    teardown();
+  }
+
+  function bind() {
+    if (_bound || !_root) return;
+    _bound = true;
+    _root.addEventListener('click', onRootClick, true);   // capture phase
+    global.addEventListener('popstate', onPopState);
+    global.addEventListener('hashchange', onHashChange);
+    doc.addEventListener('keydown', onKeydown, true);
+  }
+
+  // ================================================================
+  // init  (called from atlas.html after AtlasUI.mount)
+  // ================================================================
+  function init(opts) {
+    opts = opts || {};
+    if (!doc) return;
+    _root = opts.root || doc.getElementById(ROOT_ID);
+    if (!_root) return;
+    injectStyle();
+    bind();
+    // deep link:  atlas.html?a=<number>#/c/<collection>
+    var val = readParam();
+    if (val != null && val !== '') {
+      var route = currentRoute();
+      var resolved = resolve(route.collection, val, route.instrument);
+      if (resolved) openFresh(resolved, { history: 'replace' });
+      else {
+        // unknown article in a deep link — fail soft: strip the param, leave Atlas intact
+        try { global.history.replaceState({}, '', urlWithoutParam()); } catch (e) { /* ignore */ }
+      }
+    }
+  }
+
+  // ================================================================
+  // expose
+  // ================================================================
+  global.AtlasProvisionView = {
+    version: '1.0',
+    init: init,
+    close: requestClose,
+    isOpen: isOpen,
+    _internal: {
+      parseProvisionHref: parseProvisionHref,
+      currentRoute: currentRoute,
+      readParam: readParam,
+      urlWithParam: urlWithParam,
+      urlWithoutParam: urlWithoutParam,
+      resolve: resolve,
+      publicCasesFrom: publicCasesFrom,
+      closestProvisionAnchor: closestProvisionAnchor,
+      openProvision: openProvision,
+      navigateTo: navigateTo,
+      onRootClick: onRootClick,
+      onPopState: onPopState,
+      onHashChange: onHashChange,
+      onKeydown: onKeydown,
+      teardown: teardown,
+      panelEl: function () { return _panelEl; },
+      wrapEl: function () { return _wrapEl; },
+      current: function () { return _current; },
+      hasOwnEntry: function () { return _hasOwnEntry; },
+      setCaseIndex: function (obj) { _caseIndexPromise = Promise.resolve(obj && typeof obj === 'object' ? obj : {}); },
+      reset: function () {
+        if (_wrapEl && _wrapEl.parentNode) { try { _wrapEl.parentNode.removeChild(_wrapEl); } catch (e) {} }
+        _wrapEl = null; _panelEl = null; _current = null; _hasOwnEntry = false;
+        _lastFocused = null; _prevBodyOverflow = null;
+      }
+    }
+  };
+})(typeof window !== 'undefined' ? window : this);

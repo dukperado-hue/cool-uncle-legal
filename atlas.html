@@ -244,6 +244,7 @@
 <script src="atlas-core.js?v=20260907d"></script>
 <script src="atlas-ui.js?v=20260907f"></script>
 <script src="atlas-cases.js?v=20260907b"></script>
+<script src="atlas-provision-view.js?v=20260907a"></script>
 <script>
 (function () {
   'use strict';
@@ -259,6 +260,9 @@
   ]).then(function (res) {
     AtlasCore.attachCorpus(res[0]);
     AtlasUI.mount(root);
+    // Phase 4E-1 — inline provision viewer (standalone; progressive enhancement,
+    // the provision pills keep their legacy href either way).
+    if (window.AtlasProvisionView) AtlasProvisionView.init({ root: root });
     renderFoot();
   }).catch(function (err) {
     root.innerHTML = '<div class="atlas-error">โหลดข้อมูลไม่สำเร็จ: ' +
