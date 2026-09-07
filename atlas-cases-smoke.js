@@ -62,6 +62,14 @@ class El {
   removeAttribute(k) { delete this.attrs[k]; }
   addEventListener(ev, fn) { (this._listeners[ev] = this._listeners[ev] || []).push(fn); }
   _classes() { return String(this.className || '').trim().split(/\s+/).filter(Boolean); }
+  get classList() {
+    const self = this;
+    return {
+      contains: (c) => self._classes().indexOf(c) !== -1,
+      add: (c) => { if (self._classes().indexOf(c) === -1) self.className = (self.className + ' ' + c).trim(); },
+      remove: (c) => { self.className = self._classes().filter((x) => x !== c).join(' '); },
+    };
+  }
   matches(sel) {
     return sel.split(',').some(part => {
       part = part.trim();
@@ -94,6 +102,7 @@ atlasRoot.setAttribute('id', 'atlas-root');
 documentRoot.appendChild(atlasRoot);
 
 global.window = global;
+global.location = { hash: '' };
 global.document = {
   readyState: 'complete',
   getElementById: (id) => (id === 'atlas-root' ? atlasRoot : null),
@@ -272,6 +281,191 @@ run('eachPill + decorateAll: sweeps a subtree of rendered pills', () => {
   atlasRoot.appendChild(w1); atlasRoot.appendChild(w2); atlasRoot.appendChild(w3);
   I.decorateAll();
   eq(atlasRoot.querySelectorAll('.atlas-pcases-d').length, 2, 'two provisions decorated, one skipped');
+});
+
+// ================================================================
+// Phase 4C-2 — structural LEAF node → aggregated public cases
+// ================================================================
+
+// Build a DOM chain  .atlas-structure > ul.atlas-tree > li.atlas-node
+//   [> .atlas-node-body > ul.atlas-tree > li.atlas-node ...]
+//   > .atlas-node-body > .atlas-provision-list
+// matching a positional index chain (root .nodes[idx0].children[idx1]...).
+function buildLeafDom(idxChain) {
+  const structure = new El('div'); structure.setAttribute('class', 'atlas-structure');
+  let ul = new El('ul'); ul.setAttribute('class', 'atlas-tree atlas-tree-depth-0');
+  structure.appendChild(ul);
+  let body = null;
+  idxChain.forEach((idx, depth) => {
+    for (let s = ul.children.length; s <= idx; s++) {
+      const pad = new El('li'); pad.setAttribute('class', 'atlas-node'); ul.appendChild(pad);
+    }
+    const li = ul.children[idx];
+    body = new El('div'); body.setAttribute('class', 'atlas-node-body');
+    li.appendChild(body);
+    if (depth < idxChain.length - 1) {
+      ul = new El('ul'); ul.setAttribute('class', 'atlas-tree atlas-tree-depth-' + (depth + 1));
+      body.appendChild(ul);
+    }
+  });
+  const list = new El('div'); list.setAttribute('class', 'atlas-provision-list');
+  body.appendChild(list);
+  return { structure, list, body };
+}
+
+// --- A. leaf node article collection + key resolution ---
+run('4C2-A: collectArticleNumbers returns every provision number under a leaf', () => {
+  const nums = I.collectArticleNumbers({ articles: ['1523', '1525'], children: [] }, []);
+  eq(JSON.stringify(nums), JSON.stringify(['1523', '1525']));
+});
+run('4C2-A: aggregatePublicCases resolves collection:number for each article', () => {
+  I.setIndex({ 'civil:1523': [{ public: true, id: 'a' }], 'civil:1525': [{ public: true, id: 'b' }] });
+  const r = I.aggregatePublicCases('civil', { articles: ['1523', '1525'] });
+  eq(r.map((c) => c.id).sort().join(','), 'a,b');
+});
+
+// --- B. public filtering ---
+run('4C2-B: private cases are excluded from the aggregate', () => {
+  I.setIndex({
+    'civil:1523': [{ public: true, id: 'pub1' }, { public: false, id: 'priv1' }],
+    'civil:1525': [{ public: false, id: 'priv2' }],
+  });
+  const r = I.aggregatePublicCases('civil', { articles: ['1523', '1525'] });
+  eq(r.map((c) => c.id).join(','), 'pub1');
+});
+
+// --- C. deduplication (case citing several provisions under one node) ---
+run('4C2-C: a case under multiple provisions is counted once', () => {
+  I.setIndex({
+    'civil:1523': [{ public: true, id: 'case-A', title: 'A' }],
+    'civil:1525': [{ public: true, id: 'case-A', title: 'A' }],
+    'civil:1527': [{ public: true, id: 'case-B', title: 'B' }],
+  });
+  const r = I.aggregatePublicCases('civil', { articles: ['1523', '1525', '1527'] });
+  eq(r.map((c) => c.id).sort().join(','), 'case-A,case-B');
+});
+
+// --- D. aggregate count == unique public case ids ---
+run('4C2-D: aggregate count equals the number of unique public case ids', () => {
+  I.setIndex(INDEX);
+  // criminal ภาค 2 ลักษณะ 10 — real data, 21 provisions, 17 unique public cases
+  const nums = [];
+  for (let n = 288; n <= 308; n++) nums.push(String(n));
+  const r = I.aggregatePublicCases('criminal', { articles: nums });
+  const manual = new Set();
+  for (const n of nums) for (const c of (INDEX['criminal:' + n] || [])) if (c && c.public === true && typeof c.id === 'string') manual.add(c.id);
+  eq(r.length, manual.size);
+  if (r.length < 2) throw new Error('fixture drift: expected several public cases in criminal 288-308');
+});
+
+// --- E. zero public cases → render nothing ---
+run('4C2-E: leaf node with zero public cases renders no aggregate', () => {
+  I.reset(); I.setIndex(INDEX);
+  global.location.hash = '#/c/civil';
+  I.setTree('civil', { nodes: [{ children: [{ articles: ['999999'], children: [] }] }] });
+  const { list, body } = buildLeafDom([0, 0]);
+  I.decorateNodeBody(list);
+  eq(body.querySelector('.atlas-node-cases-d'), null, 'no disclosure');
+  eq(body.children.length, 1, 'body still holds only the provision list');
+});
+
+// --- F. no nested anchors ---
+run('4C2-F: aggregate introduces no <a> inside a provision <a>', () => {
+  I.reset(); I.setIndex({ 'civil:1523': [{ public: true, id: 'x', title: 'X' }] });
+  global.location.hash = '#/c/civil';
+  I.setTree('civil', { nodes: [{ children: [{ articles: ['1523'], children: [] }] }] });
+  const { list, body } = buildLeafDom([0, 0]);
+  const pill = new El('a'); pill.setAttribute('class', 'atlas-provision');
+  pill.setAttribute('href', 'codex-article-viewer.html?id=civil_1523&x=atlas');
+  list.appendChild(pill);
+  I.decorateNodeBody(list);
+  eq(pill.querySelectorAll('a').length, 0, 'provision anchor has no descendant anchor');
+  const caseLinks = body.querySelectorAll('.atlas-node-case-link');
+  eq(caseLinks.length, 1);
+  eq(caseLinks[0].getAttribute('href'), 'prototype/read-case.html?id=x');
+  eq(caseLinks[0].getAttribute('target'), '_blank');
+  eq(caseLinks[0].getAttribute('rel'), 'noopener');
+  // the aggregate sits ABOVE the provision list
+  eq(body.children[0].matches('.atlas-node-cases'), true);
+  eq(body.children[1], list);
+});
+
+// --- G. idempotence ---
+run('4C2-G: decorating a node body twice does not duplicate the disclosure', () => {
+  I.reset(); I.setIndex({ 'civil:1523': [{ public: true, id: 'x', title: 'X' }] });
+  global.location.hash = '#/c/civil';
+  I.setTree('civil', { nodes: [{ children: [{ articles: ['1523'], children: [] }] }] });
+  const { list, body } = buildLeafDom([0, 0]);
+  I.decorateNodeBody(list);
+  I.decorateNodeBody(list);
+  I.scanNodeBodies(body);
+  eq(body.querySelectorAll('.atlas-node-cases-d').length, 1);
+});
+
+// --- H. flat collection safety ---
+run('4C2-H: a provision list not inside .atlas-node-body is ignored, no throw', () => {
+  I.reset(); I.setIndex(INDEX);
+  global.location.hash = '#/c/tortofficials';
+  const structure = new El('div'); structure.setAttribute('class', 'atlas-structure');
+  const list = new El('div'); list.setAttribute('class', 'atlas-provision-list');
+  structure.appendChild(list);
+  I.decorateNodeBody(list);        // must not throw
+  I.scanNodeBodies(structure);     // must not throw
+  eq(structure.querySelector('.atlas-node-cases-d'), null);
+});
+
+// --- I. multi-instrument safety ---
+run('4C2-I: article keys containing "::" are skipped in the aggregate', () => {
+  I.setIndex({ 'x:12': [{ public: true, id: 'only-plain' }] });
+  const r = I.aggregatePublicCases('x', { articles: ['act::12', '12', 'mr::12'] });
+  eq(r.map((c) => c.id).join(','), 'only-plain');
+  const none = I.aggregatePublicCases('x', { articles: ['act::12', 'mr::12'] });
+  eq(none.length, 0);
+});
+run('4C2-I: instrument route → no structural aggregate', () => {
+  I.reset(); I.setIndex({ 'aviation:12': [{ public: true, id: 'q' }] });
+  global.location.hash = '#/c/aviation/i/act';
+  I.setTree('aviation', { nodes: [{ children: [{ articles: ['12'], children: [] }] }] });
+  const { list, body } = buildLeafDom([0, 0]);
+  I.decorateNodeBody(list);
+  eq(body.querySelector('.atlas-node-cases-d'), null);
+});
+
+// --- leaf-only scope: intermediate nodes get no aggregate ---
+run('4C2: intermediate node (has children) gets no aggregate', () => {
+  I.reset(); I.setIndex({ 'civil:1523': [{ public: true, id: 'x' }] });
+  global.location.hash = '#/c/civil';
+  // node at [0] has children -> intermediate
+  I.setTree('civil', { nodes: [{ children: [{ articles: ['1523'], children: [] }] }] });
+  const { list, body } = buildLeafDom([0]);   // .nodes[0] is intermediate
+  I.decorateNodeBody(list);
+  eq(body.querySelector('.atlas-node-cases-d'), null);
+});
+
+// --- positional DOM<->data walk resolves the right leaf ---
+run('4C2: positional walk maps li.atlas-node -> the correct data node', () => {
+  I.reset(); I.setIndex({ 'civil:1523': [{ public: true, id: 'left' }], 'civil:1600': [{ public: true, id: 'right' }] });
+  global.location.hash = '#/c/civil';
+  I.setTree('civil', { nodes: [
+    { children: [ { articles: ['1523'], children: [] }, { articles: ['1600'], children: [] } ] },
+  ] });
+  const a = buildLeafDom([0, 0]);   // -> articles ['1523'] -> 'left'
+  const b = buildLeafDom([0, 1]);   // -> articles ['1600'] -> 'right'
+  I.decorateNodeBody(a.list);
+  I.decorateNodeBody(b.list);
+  eq(a.body.querySelector('.atlas-node-cases-sum').textContent, '· 1 คดีที่เกี่ยวข้อง');
+  eq(a.body.querySelector('.atlas-node-case-link').textContent, 'left');
+  eq(b.body.querySelector('.atlas-node-case-link').textContent, 'right');
+});
+
+run('4C2: fail-soft when not ready (index not yet loaded)', () => {
+  I.reset();
+  global.location.hash = '#/c/civil';
+  I.setTree('civil', { nodes: [{ children: [{ articles: ['1523'], children: [] }] }] });
+  const { list, body } = buildLeafDom([0, 0]);
+  I.decorateNodeBody(list);           // must not throw, must not mark
+  eq(body.querySelector('.atlas-node-cases-d'), null);
+  if (body.dataset.nodeCasesDone) throw new Error('marked before ready — decorateAll would skip it later');
 });
 
 // ================================================================

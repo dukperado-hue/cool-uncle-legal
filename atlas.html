@@ -187,6 +187,29 @@
   @media (prefers-reduced-motion:no-preference){
     .atlas-pcases-sum{transition:color .12s,background .12s}
   }
+  /* Phase 4C-2: structural leaf node → aggregated PUBLIC cases. Additive;
+     atlas-cases.js inserts .atlas-node-cases at the top of an expanded leaf
+     node body (above the provision grid) only when ≥1 unique public case
+     exists. Subordinate to the heading + provisions: a small dashed pill. */
+  .atlas-node-cases{display:block;margin:2px 0 var(--s3) 24px;font-size:11px}
+  .atlas-node-cases-d{display:inline-block;max-width:100%}
+  .atlas-node-cases-sum{list-style:none;cursor:pointer;color:var(--muted);
+    display:inline-block;padding:2px 10px;border:1px dashed var(--line);
+    border-radius:999px;font-variant-numeric:tabular-nums;
+    -webkit-user-select:none;user-select:none}
+  .atlas-node-cases-sum::-webkit-details-marker{display:none}
+  .atlas-node-cases-sum::marker{content:""}
+  .atlas-node-cases-sum:hover{color:var(--accent);border-color:var(--accent)}
+  .atlas-node-cases-d[open] > .atlas-node-cases-sum{color:var(--accent);
+    border-style:solid;border-color:var(--accent);font-weight:600}
+  .atlas-node-case-list{display:flex;flex-direction:column;gap:5px;
+    margin-top:6px;padding:8px 10px;border:1px solid var(--line);
+    border-radius:6px;background:var(--panel);max-width:420px}
+  .atlas-node-case-link{font-size:11px;color:var(--accent);line-height:1.4;text-align:left}
+  .atlas-node-case-link:hover{text-decoration:underline}
+  @media (prefers-reduced-motion:no-preference){
+    .atlas-node-cases-sum{transition:color .12s,border-color .12s}
+  }
 
   .atlas-foot{margin-top:64px;padding-top:var(--s4);border-top:1px solid var(--line);
     font-size:11.5px;color:var(--muted);line-height:1.7}
@@ -220,7 +243,7 @@
 <script src="atlas-patches.js?v=20260907d"></script>
 <script src="atlas-core.js?v=20260907d"></script>
 <script src="atlas-ui.js?v=20260907f"></script>
-<script src="atlas-cases.js?v=20260907a"></script>
+<script src="atlas-cases.js?v=20260907b"></script>
 <script>
 (function () {
   'use strict';
