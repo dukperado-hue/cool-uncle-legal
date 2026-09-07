@@ -327,7 +327,7 @@
       "instrumentField": "instrument",
       "instrumentTypeField": "instrumentType",
       "provisionUnit": "มาตรา",
-      "blurb": "กฎหมายการบินพลเรือนประกอบด้วยกฎหมายหลายระดับ (พระราชบัญญัติ · พระราชกำหนด · กฎกระทรวง · ข้อกำหนด/ประกาศ CAAT · มาตรฐาน) แต่ละฉบับมีลำดับชั้นและหน่วยบทบัญญัติของตนเอง — ยังไม่เปิดใช้ (แสดงเฉพาะโครงสร้างจาก registry)",
+      "blurb": "กฎหมายการบินพลเรือนประกอบด้วยกฎหมายหลายระดับ (พระราชบัญญัติ · พระราชกำหนด · กฎกระทรวง · ข้อกำหนด/ประกาศ CAAT · มาตรฐาน) แต่ละฉบับมีลำดับชั้นและหน่วยบทบัญญัติของตนเอง — ยังไม่เปิดใช้งาน แสดงเฉพาะโครงสร้างของแต่ละฉบับ",
       "instrumentIdNote": "Instrument ids are short stable slugs — they appear in the Atlas ID (atlas:aviation/<id>/<number>) and, prefixed, in the storage key (<id>::<number>). Keep them URL-safe and frozen once data exists.",
       "instruments": [
         {

@@ -71,7 +71,7 @@
       var sec = el('section', 'atlas-area' + (area.planned ? ' atlas-area-planned' : ''));
       sec.dataset.area = area.key;
       var h = el('h2', 'atlas-area-title', area.title);
-      if (area.planned) h.appendChild(el('span', 'atlas-tag', 'planned'));
+      if (area.planned) h.appendChild(el('span', 'atlas-tag', 'เร็ว ๆ นี้'));
       sec.appendChild(h);
 
       var grid = el('div', 'atlas-collection-grid');
@@ -102,7 +102,7 @@
     var meta = el('span', 'atlas-collection-meta');
     var instN = c.instrumentCount || (c.instruments ? c.instruments.length : 0);
     if (planned) {
-      meta.textContent = 'multi-instrument · ' + instN + ' ฉบับ (สถาปัตยกรรม)';
+      meta.textContent = instN + ' ฉบับกฎหมาย';
     } else if (c.instrumentModel === 'multi') {
       meta.textContent = instN + ' ฉบับกฎหมาย · ' +
         c.articleCount.toLocaleString('th-TH') + ' บทบัญญัติ';
@@ -310,7 +310,13 @@
     toggle.textContent = expandable ? (openByDefault ? '▾' : '▸') : '·';
 
     var label = el('span', 'atlas-node-label');
-    if (node.levelLabel) label.appendChild(el('span', 'atlas-node-levelword', node.levelLabel));
+    // node.value already carries the Thai structural word ("บรรพ 1",
+    // "ส่วนที่ 2"). Only emit the registry level word as a separate lead-in
+    // when the value does NOT already begin with it (defensive — in the
+    // current data it always does), so we never render "บรรพ บรรพ 1".
+    if (node.levelLabel && node.value && node.value.indexOf(node.levelLabel) !== 0) {
+      label.appendChild(el('span', 'atlas-node-levelword', node.levelLabel));
+    }
     label.appendChild(el('span', 'atlas-node-value', node.value || node.label));
     if (node.title) label.appendChild(el('span', 'atlas-node-title', '— ' + node.title));
     label.appendChild(el('span', 'atlas-node-count', '(' + node.count + ')'));
@@ -334,6 +340,8 @@
       if (!expandable) return;
       if (open) buildBody();
       body.hidden = !open;
+      li.className = 'atlas-node atlas-node-' + (node.kind || 'level') +
+        (open ? ' atlas-node-open' : '');
       toggle.textContent = open ? '▾' : '▸';
       toggle.setAttribute('aria-expanded', String(open));
     }
@@ -408,7 +416,7 @@
   }
 
   global.AtlasUI = {
-    version: '2.1',
+    version: '2.2',
     mount: mount,
     parseRoute: parseRoute,
     // exposed for Phase 3 / other pages / tests that want just a piece
