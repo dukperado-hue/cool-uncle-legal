@@ -674,6 +674,79 @@ head('Phase 1 — Legal Concept layer contract (golden sample: ละเมิ�
     AConcepts._internal.reset();
   }
 
+  // ---- GENERIC per-concept contract (applies to EVERY concept, not only the
+  //      golden sample). Added when the registry gained a second concept. ----
+  const SLUG_RE = /^[a-z][a-z0-9-]*$/;
+  const SUPPORTED_ROLES = new Set(['core', 'related']);
+  function gatherRefs(c, kind) {
+    const s = new Set();
+    const add = r => { if (r) s.add(r); };
+    const field = kind === 'prov' ? 'provisions' : 'lectureRefs';
+    (c[field] || []).forEach(kind === 'prov' ? (p => add(p.ref || p)) : add);
+    (c.definition && c.definition[field] || []).forEach(add);
+    (c.principle && c.principle[field] || []).forEach(add);
+    (c.sections || []).forEach(x => {
+      (x[field] || []).forEach(add);
+      (x.items || []).forEach(it => (it[field] || []).forEach(add));
+    });
+    if (kind === 'prov') (c.featuredCases || []).forEach(fc => (fc.provisions || []).forEach(add));
+    return s;
+  }
+  const caseIndexIds = new Set();
+  for (const k of Object.keys(idx)) for (const x of (idx[k] || []))
+    if (x && x.id && x.public === true) caseIndexIds.add(x.id);
+
+  for (const [slug, c] of Object.entries(cdoc.concepts || {})) {
+    const T = 'P1 concept[' + slug + ']';
+    ok(T + ' id grammar atlas:concept/<slug> and slug match',
+       c.id === 'atlas:concept/' + slug && c.slug === slug, c.id);
+    ok(T + ' slug is lowercase kebab-case', SLUG_RE.test(slug), slug);
+    ok(T + ' has the universal fields (titleTH,status,subjectAreas,definition,summary,sources,authoring)',
+       !!(c.titleTH && c.status && Array.isArray(c.subjectAreas) && c.subjectAreas.length &&
+          c.definition && typeof c.definition.text === 'string' && typeof c.summary === 'string' &&
+          Array.isArray(c.sources) && c.authoring));
+    ok(T + ' subjectAreas resolve to the registry taxonomy',
+       c.subjectAreas.every(k => (registry.subjectAreas || []).some(a => a.key === k)),
+       c.subjectAreas.join(','));
+    ok(T + ' every structuralAnchor path is a real structure-tree node',
+       (c.structuralAnchor || []).every(a => pathExists(a.collection, a.path)),
+       (c.structuralAnchor || []).map(a => a.collection + ':' + JSON.stringify(a.path)).join(' ') || 'none');
+    const P = gatherRefs(c, 'prov');
+    const badP = [...P].filter(ref => { const r = AtlasCore.resolveAtlasId(ref); return !r || !r.exists; });
+    ok(T + ' every provision ref resolves via AtlasCore', badP.length === 0,
+       badP.length ? 'unresolved: ' + badP.join(', ') : P.size + ' refs');
+    const L = gatherRefs(c, 'lec');
+    const badL = [...L].filter(id => !lectureIds.has(id));
+    ok(T + ' every lectureRef exists in codex-data.json', badL.length === 0,
+       badL.length ? 'missing: ' + badL.join(', ') : L.size + ' refs');
+    const badCase = (c.featuredCases || []).filter(fc => !caseIndexIds.has(fc.id));
+    ok(T + ' every featuredCases id is a real public case in the index',
+       badCase.length === 0, badCase.map(f => f.id).join(', ') || (c.featuredCases || []).length + ' ok');
+    const roleRefs = (c.provisions || []).map(p => p.ref);
+    ok(T + ' no duplicate refs in curated provisions[]', new Set(roleRefs).size === roleRefs.length,
+       roleRefs.filter((r, i) => roleRefs.indexOf(r) !== i).join(', ') || 'ok');
+    ok(T + ' no provision role the renderer would silently discard (core/related)',
+       (c.provisions || []).every(p => SUPPORTED_ROLES.has(p.role || 'related')),
+       (c.provisions || []).map(p => p.role).filter(r => r && !SUPPORTED_ROLES.has(r)).join(', ') || 'ok');
+    ok(T + ' relatedConcepts: atlas:concept/* + known rel + resolvable-or-planned',
+       (c.relatedConcepts || []).every(rc => {
+         if (!rc || typeof rc.ref !== 'string' || rc.ref.indexOf('atlas:concept/') !== 0) return false;
+         if (rc.rel && !(cdoc.relationKinds || {})[rc.rel]) return false;
+         const s = rc.ref.replace('atlas:concept/', '');
+         return !!(cdoc.concepts || {})[s] || rc.status === 'planned';
+       }),
+       (c.relatedConcepts || []).map(r => r && r.ref).join(', ') || 'none');
+    const flagged = new Set((c.sections || []).filter(s => s.needsSourceVerification).map(s => s.key));
+    const declared = c.authoring && Array.isArray(c.authoring.needsSourceVerification)
+      ? c.authoring.needsSourceVerification : [];
+    ok(T + ' authoring.needsSourceVerification == sections actually flagged',
+       declared.every(k => flagged.has(k)) && [...flagged].every(k => declared.includes(k)),
+       'flagged[' + [...flagged].join(',') + '] declared[' + declared.join(',') + ']');
+    ok(T + ' every flagged section carries a verificationNote',
+       (c.sections || []).filter(s => s.needsSourceVerification)
+         .every(s => typeof s.verificationNote === 'string' && s.verificationNote));
+  }
+
   // concept.html wiring: reuses atlas-core + the inline drawer, never atlas-ui routing
   const chtml = fs.readFileSync(htmlPath, 'utf8');
   ok('P1 concept.html loads atlas-core.js + atlas-provision-view.js + atlas-concepts.js',

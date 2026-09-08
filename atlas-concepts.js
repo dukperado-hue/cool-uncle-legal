@@ -470,7 +470,10 @@
 
     if (concept.principle) {
       var pr = el('section', 'atlas-concept-section atlas-concept-principle');
-      append(pr, el('h2', 'atlas-concept-section-title', 'หลักการปรับบท'));
+      // heading is per-concept: liability concepts read "หลักการปรับบท", but a
+      // validity/effect concept (นิติกรรม) or a procedural one needs its own.
+      append(pr, el('h2', 'atlas-concept-section-title',
+        concept.principle.label || 'หลักการปรับบท'));
       append(pr, el('p', 'atlas-concept-body', concept.principle.text || ''));
       var prp = provisionPillRow(concept.principle.provisions);
       if (prp) append(pr, prp);
