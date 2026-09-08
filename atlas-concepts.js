@@ -542,32 +542,40 @@
     return (keys || []).map(function (k) { return map[k] || k; });
   }
 
-  function directoryCard(concept, slug) {
-    var a = el('a', 'atlas-concept-dir-card');
+  // A section heading with an optional English secondary label, matching the
+  // bilingual pattern used elsewhere in the Concept layer (Thai primary,
+  // English muted). Defaults live here the same way the previous Thai-only
+  // labels did; a data-driven override may be supplied via _doc.directory.
+  function directoryHeading(textTH, textEN) {
+    var h = el('h2', 'atlas-concept-section-title', textTH);
+    if (textEN) append(h, el('span', 'atlas-concept-section-en', textEN));
+    return h;
+  }
+
+  // One published concept as a compact textual index entry (NOT a card):
+  //   <li> <a>ชื่อไทย</a>  ชื่ออังกฤษ  สรุปหนึ่งบรรทัด  พื้นที่กฎหมาย
+  // The concept name is the link; everything else is plain supporting text.
+  function directoryListItem(concept, slug) {
+    var li = el('li', 'atlas-concept-index-item');
+
+    var a = el('a', 'atlas-concept-index-link', concept.titleTH || slug);
     a.href = 'concept.html?k=' + encodeURIComponent(concept.slug || slug);
+    append(li, a);
 
-    var t = el('div', 'atlas-concept-dir-card-title', concept.titleTH || slug);
-    if (concept.titleEN) append(t, el('span', 'atlas-concept-dir-card-en', ' ' + concept.titleEN));
-    append(a, t);
+    if (concept.titleEN) append(li, el('span', 'atlas-concept-index-en', concept.titleEN));
 
-    var labels = areaLabels(concept.subjectAreas);
-    if (labels.length) {
-      var areas = el('div', 'atlas-concept-areas');
-      labels.forEach(function (l) { append(areas, el('span', 'atlas-concept-area-chip', l)); });
-      append(a, areas);
-    }
-
-    var desc = concept.summary ||
-      (concept.definition && concept.definition.text) || '';
+    var desc = concept.summary || (concept.definition && concept.definition.text) || '';
     if (desc) {
       if (!concept.summary && desc.length > 160) {
         desc = desc.slice(0, 158).replace(/\s+\S*$/, '') + '…';
       }
-      append(a, el('p', 'atlas-concept-dir-card-desc', desc));
+      append(li, el('p', 'atlas-concept-index-desc', desc));
     }
 
-    append(a, el('span', 'atlas-concept-dir-card-status', 'พร้อมใช้งาน'));
-    return a;
+    var labels = areaLabels(concept.subjectAreas);
+    if (labels.length) append(li, el('p', 'atlas-concept-index-areas', labels.join(' · ')));
+
+    return li;
   }
 
   function renderDirectoryInto(rootEl) {
@@ -594,13 +602,15 @@
     });
     var availSec = el('section', 'atlas-concept-section');
     try { availSec.dataset.key = 'directory-available'; } catch (e) { /* shim */ }
-    append(availSec, el('h2', 'atlas-concept-section-title', 'แนวคิดที่พร้อมใช้งาน'));
+    append(availSec, directoryHeading(
+      d.publishedHeadingTH || 'แนวคิดที่เผยแพร่',
+      d.publishedHeadingEN || 'Published Concepts'));
     if (!published.length) {
       append(availSec, el('p', 'atlas-concept-body', 'ยังไม่มีแนวคิดที่เผยแพร่ในระยะนี้'));
     } else {
-      var grid = el('div', 'atlas-concept-dir-grid');
-      published.forEach(function (k) { append(grid, directoryCard(concepts[k], k)); });
-      append(availSec, grid);
+      var list = el('ul', 'atlas-concept-index');
+      published.forEach(function (k) { append(list, directoryListItem(concepts[k], k)); });
+      append(availSec, list);
     }
     append(art, availSec);
 
@@ -608,14 +618,17 @@
     if (planned.length) {
       var soonSec = el('section', 'atlas-concept-section');
       try { soonSec.dataset.key = 'directory-soon'; } catch (e) { /* shim */ }
-      append(soonSec, el('h2', 'atlas-concept-section-title', 'แนวคิดที่กำลังจะมา · ' + soonLabel));
-      var wrap = el('div', 'atlas-concept-related-wrap');
+      append(soonSec, directoryHeading(
+        d.comingSoonHeadingTH || 'แนวคิดที่กำลังจัดทำ',
+        d.comingSoonHeadingEN || 'Coming Soon'));
+      var soonList = el('ul', 'atlas-concept-soon');
       planned.forEach(function (p) {
-        var chip = el('span', 'atlas-concept-related-chip is-planned');
-        chip.textContent = p.labelTH + ' · ' + soonLabel;
-        append(wrap, chip);
+        append(soonList, el('li', 'atlas-concept-soon-item', p.labelTH));
       });
-      append(soonSec, wrap);
+      append(soonSec, soonList);
+      var soonNote = el('p', 'atlas-concept-soon-note',
+        'รายการนี้สร้างจากแนวคิดที่อ้างถึงแต่ยังไม่ได้เขียน (' + soonLabel + ')');
+      append(soonSec, soonNote);
       append(art, soonSec);
     }
 

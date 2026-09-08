@@ -146,20 +146,30 @@
   blockquote.atlas-concept-scholar-text{border:0;padding:0;font-style:italic}
   .atlas-concept-scholar-prov{margin:0;font-size:11.5px;color:var(--muted)}
 
-  /* ---- Concept Directory ---- */
-  .atlas-concept-dir-grid{display:grid;gap:var(--s4);margin:var(--s3) 0 0;
-    grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
-  .atlas-concept-dir-card{display:flex;flex-direction:column;gap:var(--s2);
-    padding:var(--s4);border:1px solid var(--line);border-radius:var(--radius);
-    background:var(--panel);color:var(--ink)}
-  .atlas-concept-dir-card:hover{border-color:var(--accent);background:var(--accent-soft);text-decoration:none}
-  .atlas-concept-dir-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-  .atlas-concept-dir-card-title{font-size:17px;font-weight:700;line-height:1.4}
-  .atlas-concept-dir-card-en{font-size:12px;font-weight:400;color:var(--muted)}
-  .atlas-concept-dir-card-desc{margin:0;font-size:13px;line-height:1.7;color:var(--muted)}
-  .atlas-concept-dir-card-status{align-self:flex-start;font-size:10px;font-weight:700;
-    letter-spacing:.05em;text-transform:uppercase;color:var(--accent);
-    border:1px solid var(--accent);border-radius:999px;padding:2px 9px}
+  /* ---- Concept Directory (concept.html with no ?k=) ----
+     A plain textual index: heading -> list -> concept. Deliberately not a
+     grid of cards. Narrower reading column than a concept page; reuses the
+     shared type tokens so it stays consistent with the rest of the layer. */
+  .atlas-concept-directory{max-width:620px}
+  .atlas-concept-directory .atlas-concept-title{font-size:21px;font-weight:700;letter-spacing:0}
+  .atlas-concept-directory .atlas-concept-def{font-size:14.5px;line-height:1.8;color:var(--muted)}
+  .atlas-concept-directory .atlas-concept-section{margin-bottom:var(--s5)}
+  .atlas-concept-section-en{margin-left:var(--s2);font-size:12px;font-weight:400;
+    color:var(--muted);letter-spacing:.02em}
+
+  .atlas-concept-index{list-style:none;margin:var(--s3) 0 0;padding:0}
+  .atlas-concept-index-item{padding:var(--s4) 0;border-top:1px solid var(--line)}
+  .atlas-concept-index-item:first-child{border-top:0;padding-top:var(--s2)}
+  .atlas-concept-index-link{font-size:17px;font-weight:700;line-height:1.4;
+    display:inline-block}
+  .atlas-concept-index-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .atlas-concept-index-en{display:block;margin-top:2px;font-size:12.5px;color:var(--muted)}
+  .atlas-concept-index-desc{margin:var(--s2) 0 0;font-size:13.5px;line-height:1.75;color:var(--ink)}
+  .atlas-concept-index-areas{margin:var(--s1) 0 0;font-size:11.5px;color:var(--muted);letter-spacing:.02em}
+
+  .atlas-concept-soon{list-style:none;margin:var(--s3) 0 0;padding:0}
+  .atlas-concept-soon-item{padding:3px 0;font-size:13.5px;color:var(--muted);line-height:1.6}
+  .atlas-concept-soon-note{margin:var(--s3) 0 0;font-size:11.5px;color:var(--muted)}
 
   /* ---- project identity ---- */
   .concept-ident{margin-top:16px;font-weight:600;color:var(--ink)}
@@ -168,6 +178,7 @@
   @media (max-width:760px){
     .concept-wrap{padding:var(--s4) var(--s4) 72px}
     .atlas-concept-title{font-size:23px}
+    .atlas-concept-directory{max-width:none}
   }
 
   @media print{
@@ -212,7 +223,7 @@
 <script src="atlas-patches.js?v=20260908a"></script>
 <script src="atlas-core.js?v=20260908a"></script>
 <script src="atlas-provision-view.js?v=20260908a"></script>
-<script src="atlas-concepts.js?v=20260908b"></script>
+<script src="atlas-concepts.js?v=20260908d"></script>
 <script>
 (function () {
   'use strict';
