@@ -481,6 +481,215 @@ head('Phase 4B — structural breadcrumb navigation contract');
      /focusKey = nodeKey\(inst, saved\.path\)/.test(ui));
 })();
 
+// ============================================================ PHASE 1
+// Legal Concept layer — atlas-concepts.json / atlas-concepts.js / concept.html
+// Additive, standalone. These checks must not affect any assertion above.
+head('Phase 1 — Legal Concept layer contract (golden sample: ละเมิด)');
+(function () {
+  const { execFileSync } = require('child_process');
+
+  // --- files present + parse -----------------------------------------
+  const jsPath = path.join(ROOT, 'atlas-concepts.js');
+  const jsonPath = path.join(ROOT, 'atlas-concepts.json');
+  const htmlPath = path.join(ROOT, 'concept.html');
+  ok('P1 atlas-concepts.js present', fs.existsSync(jsPath));
+  ok('P1 atlas-concepts.json present', fs.existsSync(jsonPath));
+  ok('P1 concept.html present', fs.existsSync(htmlPath));
+  if (!fs.existsSync(jsPath) || !fs.existsSync(jsonPath) || !fs.existsSync(htmlPath)) return;
+
+  try { execFileSync(process.execPath, ['--check', jsPath], { stdio: 'pipe' });
+    ok('P1 atlas-concepts.js parses', true); }
+  catch (e) { ok('P1 atlas-concepts.js parses', false, String(e.stderr || e).slice(0, 200)); }
+
+  {
+    const html = fs.readFileSync(htmlPath, 'utf8');
+    const blocks = [...html.matchAll(/<script(?![^>]*\bsrc=)([^>]*)>([\s\S]*?)<\/script>/g)]
+      .filter(m => !/type=["']application\/(ld\+json|json)["']/.test(m[1])).map(m => m[2]);
+    const tmp = path.join(require('os').tmpdir(), 'atlascheck_concept_html.js');
+    fs.writeFileSync(tmp, blocks.join('\n;\n'));
+    try { execFileSync(process.execPath, ['--check', tmp], { stdio: 'pipe' });
+      ok('P1 concept.html inline JS parses', true); }
+    catch (e) { ok('P1 concept.html inline JS parses', false, String(e.stderr || e).slice(0, 200)); }
+    fs.unlinkSync(tmp);
+  }
+
+  // --- additive / fail-soft source guards --------------------------
+  // strip block comments so the file's own prose ("never touches location.hash")
+  // is not mistaken for code
+  const src = fs.readFileSync(jsPath, 'utf8');
+  const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+  ok('P1 atlas-concepts.js never assigns to AtlasCore / AtlasUI (no mutation)',
+     !/\b(AtlasCore|AtlasUI)\s*(\.\w+)?\s*=[^=]/.test(code));
+  ok('P1 atlas-concepts.js only calls PUBLIC AtlasCore resolvers',
+     /\bresolveAtlasId\s*\(/.test(code) &&
+     !/(AtlasCore|AtlasUI)\._internal/.test(code) &&
+     !/\bAtlasUI\b/.test(code) &&
+     !/\bnodeKey\s*\(/.test(code));
+  ok('P1 atlas-concepts.js never touches location.hash / the route grammar',
+     !/\blocation\s*\.\s*hash\b/.test(code) &&
+     !/\bhistory\s*\.\s*(pushState|replaceState)\s*\(/.test(code));
+  ok('P1 atlas-concepts.js reuses the frozen viewer URL + x=atlas marker',
+     /codex-article-viewer\.html\?id=/.test(src) && /x=atlas/.test(src));
+  ok('P1 atlas-concepts.js derives cases from the EXISTING public index',
+     /prototype\/assets\/cases\/article-case-index\.json/.test(src));
+
+  // --- concept doc integrity --------------------------------------
+  let cdoc;
+  try { cdoc = JSON.parse(fs.readFileSync(jsonPath, 'utf8')); }
+  catch (e) { ok('P1 atlas-concepts.json is valid JSON', false, String(e).slice(0, 160)); return; }
+  ok('P1 atlas-concepts.json is valid JSON', true);
+
+  const lamoed = cdoc.concepts && cdoc.concepts.lamoed;
+  ok('P1 concept "lamoed" exists', !!lamoed);
+  if (!lamoed) return;
+  ok('P1 frozen identity atlas:concept/lamoed', lamoed.id === 'atlas:concept/lamoed', lamoed.id);
+  ok('P1 subjectAreas reuse the registry taxonomy keys',
+     Array.isArray(lamoed.subjectAreas) && lamoed.subjectAreas.every(k =>
+       (registry.subjectAreas || []).some(a => a.key === k)),
+     (lamoed.subjectAreas || []).join(','));
+
+  // gather every provision ref the concept mentions
+  const provRefs = new Set();
+  const addP = r => { if (r) provRefs.add(r); };
+  (lamoed.provisions || []).forEach(p => addP(p.ref));
+  (lamoed.definition && lamoed.definition.provisions || []).forEach(addP);
+  (lamoed.principle && lamoed.principle.provisions || []).forEach(addP);
+  (lamoed.sections || []).forEach(s => {
+    (s.provisions || []).forEach(addP);
+    (s.items || []).forEach(it => (it.provisions || []).forEach(addP));
+  });
+  (lamoed.featuredCases || []).forEach(fc => (fc.provisions || []).forEach(addP));
+
+  const badRefs = [...provRefs].filter(ref => {
+    const r = AtlasCore.resolveAtlasId(ref);
+    return !r || !r.exists;
+  });
+  ok('P1 every provision ref resolves to a real article via AtlasCore',
+     badRefs.length === 0, badRefs.length ? 'unresolved: ' + badRefs.join(', ') : provRefs.size + ' refs OK');
+
+  // every lectureRef exists somewhere in codex-data.json
+  const lectureIds = new Set();
+  for (const bk of Object.keys(corpus.books || {})) {
+    const arts = corpus.books[bk].articles || {};
+    for (const n of Object.keys(arts)) {
+      for (const ln of (arts[n].lectureNotes || [])) if (ln && ln.id) lectureIds.add(ln.id);
+    }
+  }
+  const lectureRefs = new Set();
+  const addL = r => { if (r) lectureRefs.add(r); };
+  (lamoed.lectureRefs || []).forEach(addL);
+  (lamoed.definition && lamoed.definition.lectureRefs || []).forEach(addL);
+  (lamoed.principle && lamoed.principle.lectureRefs || []).forEach(addL);
+  (lamoed.sections || []).forEach(s => {
+    (s.lectureRefs || []).forEach(addL);
+    (s.items || []).forEach(it => (it.lectureRefs || []).forEach(addL));
+  });
+  const badLectures = [...lectureRefs].filter(id => !lectureIds.has(id));
+  ok('P1 every lectureRef exists in codex-data.json (referenced, not copied)',
+     badLectures.length === 0, badLectures.length ? 'missing: ' + badLectures.join(', ') : lectureRefs.size + ' refs OK');
+
+  // structural anchors resolve to a real node.path in getStructureTree
+  function pathExists(collection, wanted) {
+    const tree = AtlasCore.getStructureTree(collection);
+    let hit = false;
+    (function w(ns) {
+      (ns || []).forEach(n => {
+        if (JSON.stringify(n.path) === JSON.stringify(wanted)) hit = true;
+        if (n.children) w(n.children);
+      });
+    })(tree && tree.nodes);
+    return hit;
+  }
+  const badAnchors = (lamoed.structuralAnchor || []).filter(a => !pathExists(a.collection, a.path));
+  ok('P1 every structuralAnchor path is a real node in the structure tree',
+     badAnchors.length === 0,
+     badAnchors.length ? badAnchors.map(a => a.collection + ':' + JSON.stringify(a.path)).join(' ') : 'anchor OK');
+
+  // related-case DERIVATION works off the existing index (no persisted edges)
+  let idx = {};
+  try { idx = JSON.parse(fs.readFileSync(
+    path.join(ROOT, 'prototype/assets/cases/article-case-index.json'), 'utf8')); } catch (e) {}
+  function keyFor(ref) {
+    const r = AtlasCore.resolveAtlasId(ref);
+    return (r && r.collection && r.number != null) ? r.collection + ':' + r.number : null;
+  }
+  const derivedIds = new Set();
+  for (const ref of provRefs) {
+    const arr = idx[keyFor(ref)] || [];
+    for (const c of arr) if (c && c.public === true && c.id) derivedIds.add(c.id);
+  }
+  ok('P1 related-case derivation finds ≥1 public case from the existing index',
+     derivedIds.size >= 1, [...derivedIds].join(', ') || 'none');
+  ok('P1 derivation picks up civil_420 → nong-mey-2560 and tortofficials_5 cases',
+     derivedIds.has('nong-mey-2560') && derivedIds.has('chaiyaphum-pasae-2560'),
+     [...derivedIds].join(', '));
+
+  // relatedConcepts: valid namespace + either resolvable here or marked planned
+  const badRel = (lamoed.relatedConcepts || []).filter(rc => {
+    if (!rc || typeof rc.ref !== 'string' || rc.ref.indexOf('atlas:concept/') !== 0) return true;
+    const slug = rc.ref.replace('atlas:concept/', '');
+    const known = cdoc.concepts && cdoc.concepts[slug];
+    return !known && rc.status !== 'planned';
+  });
+  ok('P1 every relatedConcepts ref uses atlas:concept/* and is resolvable OR marked planned',
+     badRel.length === 0, badRel.map(r => r && r.ref).join(', ') || 'all OK');
+
+  // atlas-concepts.js internals load in node and resolve refs through AtlasCore
+  let AConcepts = null;
+  try {
+    delete require.cache[require.resolve(jsPath)];
+    require(jsPath);
+    AConcepts = global.AtlasConcepts;
+  } catch (e) { /* ignore — parse test already covers syntax */ }
+  ok('P1 atlas-concepts.js exposes AtlasConcepts with a public render()',
+     !!(AConcepts && typeof AConcepts.render === 'function' && AConcepts._internal));
+  if (AConcepts && AConcepts._internal) {
+    const rp = AConcepts._internal.resolveProvisionRef('civil_420');
+    ok('P1 AtlasConcepts.resolveProvisionRef("civil_420") → real, frozen viewer URL',
+       rp && rp.exists === true && rp.collection === 'civil' && rp.number === '420' &&
+       rp.viewerUrl === 'codex-article-viewer.html?id=civil_420',
+       rp && rp.viewerUrl);
+    AConcepts._internal.setDoc(cdoc);
+    const dc = AConcepts._internal.deriveCases(lamoed, idx);
+    ok('P1 deriveCases() returns curated featured + derived (featured excluded from derived)',
+       dc && Array.isArray(dc.featured) && Array.isArray(dc.derived) &&
+       dc.featured.length >= 1 &&
+       !dc.derived.some(c => dc.featured.some(f => f.id === c.id)),
+       'featured=' + (dc && dc.featured.length) + ' derived=' + (dc && dc.derived.length));
+
+    // Phase 1.6 — Concept Directory (concept.html with no ?k=)
+    ok('P1 AtlasConcepts.renderDirectory() exists (directory entry point)',
+       typeof AConcepts.renderDirectory === 'function' &&
+       typeof AConcepts._internal.renderDirectoryInto === 'function');
+    const planned = AConcepts._internal.collectPlanned(cdoc.concepts);
+    ok('P1 directory "coming soon" is derived from planned relatedConcepts (deduped, not authored)',
+       Array.isArray(planned) && planned.length >= 1 &&
+       planned.every(p => p.slug && p.labelTH && !cdoc.concepts[p.slug]) &&
+       new Set(planned.map(p => p.slug)).size === planned.length,
+       planned.map(p => p.slug).join(', '));
+    ok('P1 directory intro copy lives in atlas-concepts.json (not hardcoded in JS)',
+       !!(cdoc.directory && cdoc.directory.titleTH === 'แนวคิดทางกฎหมาย' && cdoc.directory.intro));
+    ok('P1 golden-sample concept carries a short directory summary',
+       typeof lamoed.summary === 'string' && lamoed.summary.length > 10 && lamoed.summary.length < 320);
+    AConcepts._internal.reset();
+  }
+
+  // concept.html wiring: reuses atlas-core + the inline drawer, never atlas-ui routing
+  const chtml = fs.readFileSync(htmlPath, 'utf8');
+  ok('P1 concept.html loads atlas-core.js + atlas-provision-view.js + atlas-concepts.js',
+     /src="atlas-core\.js/.test(chtml) && /src="atlas-provision-view\.js/.test(chtml) &&
+     /src="atlas-concepts\.js/.test(chtml));
+  ok('P1 concept.html does NOT load atlas-ui.js (no route grammar dependency)',
+     !/src="atlas-ui\.js/.test(chtml));
+
+  // the one additive entry point from the existing Atlas
+  const ahtml = fs.readFileSync(path.join(ROOT, 'atlas.html'), 'utf8');
+  ok('P1 atlas.html has exactly one additive link to the Concept Directory (footer, not a route)',
+     (ahtml.match(/href="concept\.html"/g) || []).length === 1 &&
+     !/concept\.html\?k=/.test(ahtml) &&
+     !/parseRoute[\s\S]{0,400}concept/.test(ahtml));
+})();
+
 console.log('\n----------------------------------------');
 console.log('  RESULT:  ' + pass + ' passed, ' + fail + ' failed');
 console.log('----------------------------------------');
