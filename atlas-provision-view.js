@@ -23,10 +23,16 @@
  *   AtlasUI fall through to the home view, and Back across a hash change
  *   fires `hashchange`, which rebuilds the tree and drops every open branch.
  *   So this module NEVER touches location.hash. It records the open provision
- *   in a `?a=<number>` search-string param via history.pushState /
+ *   in an `?a=<collection>_<number>` search-string param via history.pushState /
  *   replaceState (which fire no events at all), keeping the hash — and
  *   therefore AtlasUI — completely untouched. Back simply pops that entry;
  *   the popstate handler closes the panel and the tree is exactly as it was.
+ *
+ *   The `?a=` value is written fully-qualified so a refresh / deep link works
+ *   even where there is no `#/c/<collection>` route hash (concept.html), and
+ *   every OTHER query param is preserved — concept.html keeps its own
+ *   `?k=<slug>` when a provision is opened or closed. A bare legacy value
+ *   (`?a=420`) is still read, with the collection taken from the route hash.
  *
  * Classic script (no ES modules). Exposes window.AtlasProvisionView.
  * ==========================================================================*/
@@ -34,7 +40,7 @@
   'use strict';
 
   var ROOT_ID = 'atlas-root';
-  var PARAM = 'a';                 // ?a=<number>  (collection comes from the hash)
+  var PARAM = 'a';                 // ?a=<collection>_<number>  (self-sufficient; bare number also read)
   var CASE_INDEX_URL = 'prototype/assets/cases/article-case-index.json';
   var STYLE_ID = 'atlas-provision-view-style';
   var PILL_SELECTOR = 'a.atlas-provision';
@@ -80,27 +86,55 @@
     return null;
   }
 
+  // ---- legacy id → { collection, instrument, number } ------------
+  // id is  <collection>_<number>  or  <collection>_<instrument>::<number>
+  // Collection keys never contain "_" and มาตรา numbers never contain "_"
+  // (sub-numbers use "/"), so the FIRST "_" is the split point.
+  function splitId(id) {
+    var s = String(id == null ? '' : id);
+    var us = s.indexOf('_');
+    if (us < 1 || us === s.length - 1) return null;
+    var collection = s.slice(0, us);
+    var rest = s.slice(us + 1);
+    var sep = rest.indexOf('::');
+    if (sep !== -1) {
+      return { collection: collection, instrument: rest.slice(0, sep), number: rest.slice(sep + 2) };
+    }
+    return { collection: collection, instrument: null, number: rest };
+  }
+
   // ---- provision href → { collection, number } --------------------
   // href is  codex-article-viewer.html?id=<collection>_<number>[&x=atlas]
-  // Collection keys never contain "_" and มาตรา numbers never contain "_"
-  // (sub-numbers use "/"), so the FIRST "_" is the split point. A multi-
-  // instrument id carries "<instrument>::<number>" after the collection.
   function parseProvisionHref(href) {
     try {
       var m = /[?&]id=([^&#]+)/.exec(String(href || ''));
       if (!m) return null;
       var id;
       try { id = decodeURIComponent(m[1]); } catch (e) { id = m[1]; }
-      var us = id.indexOf('_');
-      if (us < 1 || us === id.length - 1) return null;
-      var collection = id.slice(0, us);
-      var rest = id.slice(us + 1);
-      var sep = rest.indexOf('::');
-      if (sep !== -1) {
-        return { collection: collection, instrument: rest.slice(0, sep), number: rest.slice(sep + 2) };
-      }
-      return { collection: collection, instrument: null, number: rest };
+      return splitId(id);
     } catch (e) { return null; }
+  }
+
+  // ---- ?a= value → { collection, instrument, number } ------------
+  // Written qualified ("civil_420") so it is self-sufficient when there is no
+  // Atlas route hash (concept.html). A bare legacy value ("420") is still
+  // accepted — the collection then comes from currentRoute().
+  function parseParam(val) {
+    if (val == null || val === '') return null;
+    var s = String(val);
+    if (s.indexOf('_') !== -1) {
+      var r = splitId(s);
+      if (r) return r;
+    }
+    return { collection: null, instrument: null, number: s };
+  }
+
+  // qualified ref for a resolved provision — the value we record in ?a=
+  function refOf(resolved) {
+    if (!resolved) return '';
+    if (resolved.legacyId) return resolved.legacyId;
+    var key = resolved.storageKey != null ? resolved.storageKey : resolved.number;
+    return resolved.collection + '_' + key;
   }
 
   // ---- current Atlas route, READ (never routed) from the hash -----
@@ -119,13 +153,27 @@
     try { return decodeURIComponent(m[1]); } catch (e) { return m[1]; }
   }
 
-  function urlWithParam(number) {
+  // rebuild the query string, keeping every param EXCEPT `a`; optionally
+  // append `a=<ref>`. This is what keeps concept.html's own `?k=<slug>`
+  // (and any other sibling param) intact when a provision is opened/closed.
+  function buildSearch(ref) {
+    var raw = ((global.location && global.location.search) || '').replace(/^\?/, '');
+    var pairs = [];
+    raw.split('&').forEach(function (kv) {
+      if (!kv) return;
+      if (kv.split('=')[0] === PARAM) return;   // drop any existing a=
+      pairs.push(kv);
+    });
+    if (ref != null && ref !== '') pairs.push(PARAM + '=' + encodeURIComponent(ref));
+    return pairs.length ? '?' + pairs.join('&') : '';
+  }
+  function urlWithParam(ref) {
     var loc = global.location;
-    return (loc.pathname || '') + '?' + PARAM + '=' + encodeURIComponent(number) + (loc.hash || '');
+    return (loc.pathname || '') + buildSearch(ref) + (loc.hash || '');
   }
   function urlWithoutParam() {
     var loc = global.location;
-    return (loc.pathname || '') + (loc.hash || '');
+    return (loc.pathname || '') + buildSearch(null) + (loc.hash || '');
   }
 
   // ================================================================
@@ -485,11 +533,12 @@
     else if (doc.activeElement) _lastFocused = doc.activeElement;
 
     // history: a real open pushes ONE entry; a popstate/deep-link open does not
+    var ref = refOf(resolved);
     if (opts.history === 'push') {
-      try { global.history.pushState({ apv: resolved.number }, '', urlWithParam(resolved.number)); _hasOwnEntry = true; }
+      try { global.history.pushState({ apv: ref }, '', urlWithParam(ref)); _hasOwnEntry = true; }
       catch (e) { _hasOwnEntry = false; }
     } else if (opts.history === 'replace') {
-      try { global.history.replaceState({ apv: resolved.number }, '', urlWithParam(resolved.number)); }
+      try { global.history.replaceState({ apv: ref }, '', urlWithParam(ref)); }
       catch (e) { /* ignore */ }
       _hasOwnEntry = false;
     } else {
@@ -511,7 +560,8 @@
     _current = { collection: resolved.collection, instrument: resolved.instrument || null, number: resolved.number };
     if (opts.source) _lastFocused = opts.source;
     if (opts.history === 'replace') {
-      try { global.history.replaceState({ apv: resolved.number }, '', urlWithParam(resolved.number)); }
+      var ref = refOf(resolved);
+      try { global.history.replaceState({ apv: ref }, '', urlWithParam(ref)); }
       catch (e) { /* ignore */ }
     }
     // keep the reader oriented: focus the new heading
@@ -592,10 +642,10 @@
   }
 
   function onPopState() {
-    var val = readParam();
-    if (val != null && val !== '') {
+    var p = parseParam(readParam());
+    if (p) {
       var route = currentRoute();
-      var resolved = resolve(route.collection, val, route.instrument);
+      var resolved = resolve(p.collection || route.collection, p.number, p.instrument || route.instrument);
       if (!resolved) { if (isOpen()) teardown(); return; }
       if (isOpen()) updateOpen(resolved, { history: 'none' });
       else openFresh(resolved, { history: 'none' });
@@ -631,14 +681,17 @@
     if (!_root) return;
     injectStyle();
     bind();
-    // deep link:  atlas.html?a=<number>#/c/<collection>
-    var val = readParam();
-    if (val != null && val !== '') {
+    // deep link / refresh:
+    //   atlas.html?a=<collection>_<number>#/c/<collection>   (hash optional)
+    //   concept.html?k=<slug>&a=<collection>_<number>
+    var p = parseParam(readParam());
+    if (p) {
       var route = currentRoute();
-      var resolved = resolve(route.collection, val, route.instrument);
+      var resolved = resolve(p.collection || route.collection, p.number, p.instrument || route.instrument);
       if (resolved) openFresh(resolved, { history: 'replace' });
       else {
-        // unknown article in a deep link — fail soft: strip the param, leave Atlas intact
+        // unknown article in a deep link — fail soft: strip only the param,
+        // keep every sibling param (e.g. concept.html's ?k=<slug>)
         try { global.history.replaceState({}, '', urlWithoutParam()); } catch (e) { /* ignore */ }
       }
     }
@@ -654,8 +707,12 @@
     isOpen: isOpen,
     _internal: {
       parseProvisionHref: parseProvisionHref,
+      splitId: splitId,
+      parseParam: parseParam,
+      refOf: refOf,
       currentRoute: currentRoute,
       readParam: readParam,
+      buildSearch: buildSearch,
       urlWithParam: urlWithParam,
       urlWithoutParam: urlWithoutParam,
       resolve: resolve,

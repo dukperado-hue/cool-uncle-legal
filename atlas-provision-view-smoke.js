@@ -388,15 +388,24 @@ run('15. Escape key closes the panel', () => {
 // ================================================================
 // 16. deep-link state
 // ================================================================
-run('16. deep link  ?a=288#/c/criminal  opens มาตรา 288 on init', () => {
+run('16. deep link  ?a=criminal_288#/c/criminal  opens มาตรา 288 on init', () => {
+  resetAll();
+  I.reset();
+  applyUrl('/atlas.html?a=criminal_288#/c/criminal');
+  historyStack[historyStack.length - 1] = { url: '/atlas.html?a=criminal_288#/c/criminal', state: null };
+  APV.init({ root: atlasRoot });
+  ok(APV.isOpen(), 'panel opened from the deep link');
+  ok(/มาตรา 288/.test(I.panelEl().textContent), 'shows มาตรา 288');
+  eq(I.hasOwnEntry(), false, 'deep-link open does not claim its own history entry');
+});
+run('16b. legacy bare deep link  ?a=288#/c/criminal  still opens (collection from hash)', () => {
   resetAll();
   I.reset();
   applyUrl('/atlas.html?a=288#/c/criminal');
   historyStack[historyStack.length - 1] = { url: '/atlas.html?a=288#/c/criminal', state: null };
   APV.init({ root: atlasRoot });
-  ok(APV.isOpen(), 'panel opened from the deep link');
+  ok(APV.isOpen(), 'panel opened from the legacy bare deep link');
   ok(/มาตรา 288/.test(I.panelEl().textContent), 'shows มาตรา 288');
-  eq(I.hasOwnEntry(), false, 'deep-link open does not claim its own history entry');
 });
 
 // ================================================================
@@ -435,7 +444,52 @@ run('19. in-panel prev/next replaces state (Back closes, does not step through a
   const next = I.panelEl().querySelector('.atlas-provision-view-adj-next');
   next._fire('click', { type: 'click' });
   eq(historyStack.length, depthAfterOpen, 'prev/next did not push a new history entry');
-  eq(I.readParam(), '289', 'param reflects the current article');
+  eq(I.readParam(), 'criminal_289', 'param reflects the current article, qualified');
+});
+
+// ================================================================
+// 21. concept.html model: no route hash, sibling ?k=<slug> preserved
+// ================================================================
+run('21. concept.html: opening a provision keeps ?k=<slug> and qualifies ?a=', () => {
+  resetAll();
+  I.reset();
+  applyUrl('/concept.html?k=lamoed');
+  historyStack[historyStack.length - 1] = { url: '/concept.html?k=lamoed', state: null };
+  APV.init({ root: atlasRoot });
+  const a = makePill('civil_420');
+  fireRootClick(a);
+  ok(APV.isOpen(), 'panel open on concept.html');
+  ok(/\?k=lamoed(&|$)/.test(location.search), 'sibling ?k=lamoed preserved — got ' + location.search);
+  ok(/(\?|&)a=civil_420(&|$)/.test(location.search), 'a= is qualified — got ' + location.search);
+});
+run('21b. concept.html: closing strips only a=, keeps ?k=<slug>', () => {
+  resetAll();
+  I.reset();
+  applyUrl('/concept.html?k=lamoed');
+  historyStack[historyStack.length - 1] = { url: '/concept.html?k=lamoed', state: null };
+  APV.init({ root: atlasRoot });
+  fireRootClick(makePill('civil_420'));
+  I.panelEl().querySelector('.atlas-provision-view-close')._fire('click', { type: 'click' });
+  ok(!APV.isOpen(), 'closed');
+  eq(location.search, '?k=lamoed', 'only a= removed, ?k= intact');
+});
+run('21c. concept.html refresh/deep-link: ?k=lamoed&a=civil_420 reopens on init (no hash)', () => {
+  resetAll();
+  I.reset();
+  applyUrl('/concept.html?k=lamoed&a=civil_420');
+  historyStack[historyStack.length - 1] = { url: '/concept.html?k=lamoed&a=civil_420', state: null };
+  APV.init({ root: atlasRoot });
+  ok(APV.isOpen(), 'panel reopened from a hash-less qualified deep link');
+  ok(/มาตรา 420/.test(I.panelEl().textContent), 'shows มาตรา 420');
+});
+run('21d. concept.html unknown deep-link article fails soft, keeps ?k=', () => {
+  resetAll();
+  I.reset();
+  applyUrl('/concept.html?k=lamoed&a=civil_999999');
+  historyStack[historyStack.length - 1] = { url: '/concept.html?k=lamoed&a=civil_999999', state: null };
+  APV.init({ root: atlasRoot });
+  ok(!APV.isOpen(), 'panel not opened for an unknown article');
+  eq(location.search, '?k=lamoed', 'param stripped, ?k= preserved');
 });
 
 // ================================================================
