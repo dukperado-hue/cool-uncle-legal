@@ -820,6 +820,122 @@ head('Phase 1 — Legal Concept layer contract (golden sample: ละเมิ�
      !/parseRoute[\s\S]{0,400}concept/.test(ahtml));
 })();
 
+// ============================================================ FINALIZATION 2
+// Related Provision Legal Clusters — atlas-clusters.json / atlas-clusters.js
+// Additive, standalone. Must not affect any assertion above.
+head('Finalization 2 — Related Provision Legal Clusters');
+(function () {
+  const { execFileSync } = require('child_process');
+  const jsPath = path.join(ROOT, 'atlas-clusters.js');
+  const jsonPath = path.join(ROOT, 'atlas-clusters.json');
+  ok('F2 atlas-clusters.js present', fs.existsSync(jsPath));
+  ok('F2 atlas-clusters.json present', fs.existsSync(jsonPath));
+  if (!fs.existsSync(jsPath) || !fs.existsSync(jsonPath)) return;
+
+  try { execFileSync(process.execPath, ['--check', jsPath], { stdio: 'pipe' }); ok('F2 atlas-clusters.js parses', true); }
+  catch (e) { ok('F2 atlas-clusters.js parses', false, String(e.stderr || e).slice(0, 160)); }
+
+  let cdoc;
+  try { cdoc = JSON.parse(fs.readFileSync(jsonPath, 'utf8')); ok('F2 atlas-clusters.json is valid JSON', true); }
+  catch (e) { ok('F2 atlas-clusters.json is valid JSON', false, String(e).slice(0, 140)); return; }
+
+  const src = fs.readFileSync(jsPath, 'utf8');
+  const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+  ok('F2 atlas-clusters.js never assigns to AtlasCore / AtlasUI (additive)',
+     !/\b(AtlasCore|AtlasUI)\s*(\.\w+)?\s*=[^=]/.test(code) && !/(AtlasCore|AtlasUI)\._internal/.test(code));
+  ok('F2 atlas-clusters.js never touches location.hash / the route grammar',
+     !/\blocation\s*\.\s*hash\b/.test(code) && !/\bhistory\s*\.\s*(pushState|replaceState)\s*\(/.test(code));
+  ok('F2 atlas-clusters.js reuses the frozen viewer URL + x=atlas (reader reuse, not a new viewer)',
+     /codex-article-viewer\.html\?id=/.test(src) && /x=atlas/.test(src));
+  ok('F2 atlas-clusters.js adds NO permanent provision role/kind/pattern field',
+     !/\.\s*(role|kind|pattern)\s*=/.test(code));
+
+  // frozen six-pattern taxonomy
+  const FROZEN = ['general-special', 'base-aggravated', 'rule-exception', 'contrast-set', 'trigger-consequence', 'precondition'];
+  const kinds = Object.keys(cdoc.patternKinds || {});
+  ok('F2 exactly the six frozen relationship patterns are defined',
+     kinds.length === 6 && kinds.every(k => FROZEN.indexOf(k) !== -1) && FROZEN.every(k => kinds.indexOf(k) !== -1),
+     kinds.join(', '));
+  ok('F2 every patternKind carries a Thai label + description',
+     kinds.every(k => cdoc.patternKinds[k] && cdoc.patternKinds[k].labelTH && cdoc.patternKinds[k].descTH));
+
+  // clusters: shape + provision refs resolve + patternIds valid + no statutory text
+  const clusters = Array.isArray(cdoc.clusters) ? cdoc.clusters : [];
+  ok('F2 clusters[] is a non-empty array', clusters.length >= 2);
+
+  const seenIds = {};
+  let allMembersResolve = true, allPatternsValid = true, allHaveExplain = true, noText = true, refIdentityOK = true;
+  const usedPatterns = new Set();
+  for (const c of clusters) {
+    if (!c || !c.id) { allHaveExplain = false; continue; }
+    if (seenIds[c.id]) allHaveExplain = false;
+    seenIds[c.id] = 1;
+    if (!c.titleTH || typeof c.explanationTH !== 'string' || c.explanationTH.length < 15) allHaveExplain = false;
+    if ('text' in c) noText = false;
+    if (c.patternId) { usedPatterns.add(c.patternId); if (FROZEN.indexOf(c.patternId) === -1) allPatternsValid = false; }
+    if (c.anchor && !AtlasCore.resolveAtlasId(c.anchor)) allMembersResolve = false;
+    for (const m of (c.members || [])) {
+      if (!m || typeof m.ref !== 'string' || m.ref.indexOf('_') < 1) { refIdentityOK = false; continue; }
+      if ('text' in m) noText = false;
+      const r = AtlasCore.resolveAtlasId(m.ref);
+      if (!r || !r.exists) allMembersResolve = false;
+      if (m.patternId) { usedPatterns.add(m.patternId); if (FROZEN.indexOf(m.patternId) === -1) allPatternsValid = false; }
+    }
+  }
+  ok('F2 every cluster has id (unique), titleTH and a Thai explanationTH', allHaveExplain);
+  ok('F2 every cluster/member patternId is one of the six frozen ids', allPatternsValid);
+  ok('F2 every anchor + member ref resolves to a real provision via AtlasCore', allMembersResolve);
+  ok('F2 member identity is a stable AtlasCore ref (<collection>_<number>)', refIdentityOK);
+  ok('F2 no "text" field anywhere in cluster data (statutory text stays in Codex)', noText);
+  ok('F2 all six frozen patterns are exercised by curated clusters',
+     FROZEN.every(p => usedPatterns.has(p)), [...usedPatterns].join(', '));
+
+  // golden clusters
+  const A = clusters.find(c => c.id === 'crim-homicide-fault-to-aggravation');
+  ok('F2 Golden Cluster A present (§59 → §288 → §289)', !!A);
+  if (A) {
+    const m = r => A.members.find(x => x.ref === r);
+    ok('F2 Cluster A: §59→offences = general-special (G1)', m('criminal_59') && m('criminal_59').patternId === 'general-special');
+    ok('F2 Cluster A: §288→§289 = base-aggravated (G2)', m('criminal_289') && m('criminal_289').patternId === 'base-aggravated');
+    ok('F2 Cluster A: §288 before §289', m('criminal_288') && m('criminal_289') && m('criminal_288').order < m('criminal_289').order);
+    ok('F2 Cluster A: one cluster carries MORE THAN ONE relationship type',
+       new Set(A.members.filter(x => x.patternId).map(x => x.patternId)).size >= 2);
+  }
+  const B = clusters.find(c => c.id === 'crim-theft-family-progression');
+  ok('F2 Golden Cluster B present (§59 → §334→§336→§339→§340)', !!B);
+  if (B) {
+    const seq = B.members.filter(x => typeof x.order === 'number').sort((a, b) => a.order - b.order).map(x => x.ref);
+    ok('F2 Cluster B preserves the ordered progression 334→336→339→340',
+       JSON.stringify(seq) === JSON.stringify(['criminal_334', 'criminal_336', 'criminal_339', 'criminal_340']), seq.join(' → '));
+    ok('F2 Cluster B: §59 overlay is general-special (G1), not forced onto the progression',
+       B.members.find(x => x.ref === 'criminal_59').patternId === 'general-special');
+  }
+  // a provision participates in multiple clusters
+  ok('F2 a provision may join multiple clusters (criminal_59 ∈ A and B)',
+     clusters.filter(c => (c.anchor === 'criminal_59') || (c.members || []).some(m => m.ref === 'criminal_59')).length >= 2);
+
+  // a contrast-set cluster exists and is anchorless (G4 shape)
+  ok('F2 at least one contrast-set (G4) cluster is anchorless / orderless',
+     clusters.some(c => c.patternId === 'contrast-set' && !c.anchor && (c.members || []).every(m => m.order == null)));
+
+  // script wiring — atlas-clusters.js must be a <script src> loaded before
+  // the <script src> for atlas-provision-view.js (so window.AtlasClusters
+  // exists when a panel first renders)
+  function scriptBefore(html, a, b) {
+    const ra = new RegExp('<script[^>]+src="' + a.replace('.', '\\.') + '[^"]*"').exec(html);
+    const rb = new RegExp('<script[^>]+src="' + b.replace('.', '\\.') + '[^"]*"').exec(html);
+    return ra && rb && ra.index < rb.index;
+  }
+  const ahtml2 = fs.readFileSync(path.join(ROOT, 'atlas.html'), 'utf8');
+  const chtml2 = fs.readFileSync(path.join(ROOT, 'concept.html'), 'utf8');
+  ok('F2 atlas.html loads atlas-clusters.js before atlas-provision-view.js',
+     scriptBefore(ahtml2, 'atlas-clusters.js', 'atlas-provision-view.js'));
+  ok('F2 concept.html loads atlas-clusters.js before atlas-provision-view.js',
+     scriptBefore(chtml2, 'atlas-clusters.js', 'atlas-provision-view.js'));
+  ok('F2 atlas-provision-view.js renders the cluster section via AtlasClusters (no direct coupling to cluster data)',
+     /AtlasClusters\s*&&[\s\S]{0,80}renderSection/.test(fs.readFileSync(path.join(ROOT, 'atlas-provision-view.js'), 'utf8')));
+})();
+
 console.log('\n----------------------------------------');
 console.log('  RESULT:  ' + pass + ' passed, ' + fail + ' failed');
 console.log('----------------------------------------');

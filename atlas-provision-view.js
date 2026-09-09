@@ -438,6 +438,18 @@
     body.appendChild(textEl(resolved.article && resolved.article.text));
     body.appendChild(casesEl(resolved));
 
+    // Related Provision Legal Clusters (FINALIZATION 2) — a curated editorial
+    // layer. atlas-clusters.js fills this container async and renders nothing
+    // when there is no curated cluster for this provision. Progressive
+    // enhancement: absent / failed → the panel is unchanged.
+    var clusters = make('div', 'atlas-provision-view-clusters');
+    body.appendChild(clusters);
+    try {
+      if (global.AtlasClusters && typeof global.AtlasClusters.renderSection === 'function') {
+        global.AtlasClusters.renderSection(clusters, resolved);
+      }
+    } catch (e) { /* fail soft */ }
+
     var adj = adjacentEl(resolved);
     if (adj) body.appendChild(adj);
 
@@ -524,6 +536,12 @@
     _wrapEl = shell.wrap;
     _panelEl = shell.panel;
     renderInto(_panelEl, resolved);
+    // The panel is a SIBLING of #atlas-root, so clicks inside it never reach
+    // the root's provision-pill handler. Bind the SAME handler here so a
+    // cluster member pill (a.atlas-provision) opens in this reader, exactly
+    // like a structure-tree pill. Lives and dies with this panel; updateOpen
+    // reuses the same _panelEl so it persists across prev/next.
+    try { _panelEl.addEventListener('click', onRootClick, true); } catch (e) { /* ignore */ }
     if (_root && _root.parentNode) _root.parentNode.insertBefore(_wrapEl, _root.nextSibling);
     else if (doc.body) doc.body.appendChild(_wrapEl);
 
