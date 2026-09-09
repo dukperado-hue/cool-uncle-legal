@@ -244,10 +244,22 @@
       '.atlas-provision-view-open .atlas-provision-view-panel{transform:none;opacity:1;}',
       '.atlas-provision-view-header{display:flex;align-items:flex-start;gap:12px;',
       '  padding:16px 18px 12px;border-bottom:1px solid var(--line,#e6e1d6);}',
-      '.atlas-provision-view-breadcrumb{flex:1;min-width:0;font-size:11.5px;line-height:1.6;',
-      '  color:var(--muted,#5b6472);display:flex;flex-wrap:wrap;gap:2px 6px;}',
+      '.atlas-provision-view-breadcrumb{flex:1;min-width:0;font-size:11.5px;line-height:1.7;',
+      '  color:var(--muted,#5b6472);display:flex;flex-wrap:wrap;align-items:baseline;gap:1px 5px;}',
       '.atlas-provision-view-crumb-sep{opacity:.45;}',
+      '.atlas-provision-view-crumb{color:var(--muted,#5b6472);}',
       '.atlas-provision-view-crumb-current{color:var(--ink,#1f2430);font-weight:600;}',
+      '.atlas-provision-view-crumb-title{color:var(--muted,#5b6472);opacity:.85;}',
+      // F6 — interactive collection / structural crumb: reveals the node in the tree
+      'button.atlas-provision-view-crumb-nav,a.atlas-provision-view-crumb-nav{',
+      '  font:inherit;font-size:inherit;line-height:inherit;margin:0;padding:0;border:0;',
+      '  background:none;color:var(--accent,#2E4A7A);cursor:pointer;text-align:left;',
+      '  text-decoration:none;}',
+      'button.atlas-provision-view-crumb-nav:hover,a.atlas-provision-view-crumb-nav:hover{',
+      '  text-decoration:underline;}',
+      'button.atlas-provision-view-crumb-nav:focus-visible,a.atlas-provision-view-crumb-nav:focus-visible{',
+      '  outline:2px solid var(--accent,#2E4A7A);outline-offset:2px;border-radius:3px;}',
+      '.atlas-provision-view-crumb-nav .atlas-provision-view-crumb-title{color:inherit;opacity:.8;}',
       '.atlas-provision-view-close{flex:none;border:1px solid var(--line,#e6e1d6);',
       '  background:var(--panel,#fff);color:var(--muted,#5b6472);border-radius:6px;',
       '  width:28px;height:28px;font-size:14px;line-height:1;cursor:pointer;',
@@ -325,16 +337,140 @@
     return { wrap: wrap, panel: panel };
   }
 
-  function breadcrumbEl(crumbs) {
+  // F6 — the structural breadcrumb. Each crumb keeps its existing token
+  // (c.text, e.g. "ลักษณะ 5") and gains the human title AtlasCore already
+  // computed (c.title, e.g. "ละเมิด") as secondary text. The collection and
+  // structural crumbs become interactive: activating one closes the drawer and
+  // reveals that node in the Atlas tree via the established Phase 4B / F5
+  // restore contract. The current provision crumb stays a plain current item.
+  function breadcrumbEl(resolved) {
+    var crumbs = (resolved && resolved.breadcrumb) || [];
     var nav = make('nav', 'atlas-provision-view-breadcrumb');
-    (crumbs || []).forEach(function (c, i) {
+    var collection = resolved && resolved.collection;
+    var instrument = (resolved && resolved.instrument) || null;
+    var structPath = [];   // accumulates structural c.value in order
+
+    crumbs.forEach(function (c, i) {
       if (i) nav.appendChild(make('span', 'atlas-provision-view-crumb-sep', '›'));
       var last = i === crumbs.length - 1;
-      nav.appendChild(make('span',
-        'atlas-provision-view-crumb' + (last ? ' atlas-provision-view-crumb-current' : ''),
-        c.text));
+      var title = (c && typeof c.title === 'string') ? c.title.trim() : '';
+
+      // provision (current) — non-interactive, unchanged
+      if (last || c.kind === 'provision' || (!c.field && c.kind !== 'collection')) {
+        nav.appendChild(make('span',
+          'atlas-provision-view-crumb atlas-provision-view-crumb-current', c.text));
+        return;
+      }
+
+      // collection crumb — a real link to #/c/<collection>
+      if (c.kind === 'collection' && collection) {
+        var a = make('a', 'atlas-provision-view-crumb atlas-provision-view-crumb-nav');
+        a.setAttribute('href', '#/c/' + encodeURIComponent(collection));
+        a.textContent = c.text;
+        a.addEventListener('click', function (e) {
+          if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey ||
+                    (e.button != null && e.button !== 0))) return;   // let modified clicks run
+          if (e && e.preventDefault) e.preventDefault();
+          activateCrumb('collection', collection, instrument, []);
+        });
+        nav.appendChild(a);
+        return;
+      }
+
+      // structural crumb — reveals ["บรรพ 2", …, this value] in the tree
+      if (c.field && c.value != null) {
+        structPath.push(c.value);
+        var path = structPath.slice();
+        var btn = make('button', 'atlas-provision-view-crumb atlas-provision-view-crumb-nav');
+        btn.setAttribute('type', 'button');
+        btn.appendChild(make('span', 'atlas-provision-view-crumb-token', c.text));
+        if (title) btn.appendChild(make('span', 'atlas-provision-view-crumb-title', ' · ' + title));
+        btn.setAttribute('aria-label',
+          c.text + (title ? ' ' + title : '') + ' — เปิดในสารบบกฎหมาย');
+        btn.setAttribute('data-atlas-collection', collection || '');
+        btn.setAttribute('data-atlas-path', JSON.stringify(path));
+        btn.addEventListener('click', function () {
+          activateCrumb('structural', collection, instrument, path);
+        });
+        nav.appendChild(btn);
+        return;
+      }
+
+      // anything else — plain text, keep the existing token
+      nav.appendChild(make('span', 'atlas-provision-view-crumb', c.text));
     });
     return nav;
+  }
+
+  // Close the drawer, then return to the Atlas tree and reveal the crumb's
+  // node. Reuses the EXISTING contract only:
+  //   in-page (atlas.html, AtlasUI loaded) → AtlasUI._internal.restoreReturn(
+  //       root, { hash, instrument, path })   (Phase 4B / F5, injected form)
+  //   cross-page (concept.html, no tree here) → write the Phase 4B
+  //       sessionStorage['atlas:return'] context, then load atlas.html#/c/<col>
+  // Close the drawer for a crumb navigation: strip our ?a= param from the
+  // CURRENT history entry (never history.back — see activateCrumb) and remove
+  // the panel. Same effect as requestClose()'s non-own-entry branch.
+  function closeDrawerForNav() {
+    if (!isOpen()) return;
+    try { global.history.replaceState({}, '', urlWithoutParam()); } catch (e) { /* ignore */ }
+    try { teardown(); } catch (e) { /* ignore */ }
+  }
+
+  function activateCrumb(kind, collection, instrument, path) {
+    if (!collection) return;
+    var wantHash = '#/c/' + collection + (instrument ? '/i/' + instrument : '');
+    var UI = global.AtlasUI;
+    var canRevealInPage = !!(UI && UI._internal &&
+      typeof UI._internal.restoreReturn === 'function' && _root);
+
+    if (!canRevealInPage) {
+      // cross-page: hand the reveal to atlas.html via the established key
+      if (kind === 'structural') {
+        try {
+          global.sessionStorage.setItem('atlas:return', JSON.stringify({
+            hash: wantHash, instrument: instrument || null, path: path
+          }));
+        } catch (e) { /* best effort */ }
+      }
+      closeDrawerForNav();
+      try { global.location.assign('atlas.html' + wantHash); }
+      catch (e) { try { global.location.href = 'atlas.html' + wantHash; } catch (e2) {} }
+      return;
+    }
+
+    // in-page: close the drawer, then navigate + reveal.
+    // NOTE: we do NOT use requestClose() here — its `_hasOwnEntry` branch calls
+    // history.back(), which races the location.hash write below on a cross-
+    // collection reveal. Strip our ?a= entry and tear down directly instead.
+    closeDrawerForNav();
+
+    var doReveal = function () {
+      if (kind === 'collection') return;   // hash write already did it
+      try { UI._internal.restoreReturn(_root, { hash: wantHash, instrument: instrument || null, path: path }); }
+      catch (e) { /* fail soft */ }
+    };
+
+    setTimeout(function () {
+      var sameCollection = (global.location.hash || '#/') === wantHash;
+      if (kind === 'collection') {
+        if (!sameCollection) { try { global.location.hash = wantHash; } catch (e) {} }
+        return;
+      }
+      if (sameCollection) { doReveal(); return; }
+      // switch collection, reveal after AtlasUI re-renders on hashchange (F5 pattern)
+      var offOnce = function () {
+        if (typeof global.removeEventListener === 'function') global.removeEventListener('hashchange', once);
+      };
+      var once = function () {
+        offOnce();
+        var raf = global.requestAnimationFrame || function (fn) { return setTimeout(fn, 0); };
+        raf(doReveal);
+      };
+      global.addEventListener('hashchange', once);
+      try { global.location.hash = wantHash; }
+      catch (e) { offOnce(); }
+    }, 0);
   }
 
   function textEl(raw) {
@@ -414,7 +550,7 @@
     while (panel.firstChild) panel.removeChild(panel.firstChild);
 
     var header = make('div', 'atlas-provision-view-header');
-    header.appendChild(breadcrumbEl(resolved.breadcrumb || []));
+    header.appendChild(breadcrumbEl(resolved));
     var close = make('button', 'atlas-provision-view-close', '✕');
     close.type = 'button';
     close.setAttribute('aria-label', 'ปิดตัวบท');
@@ -739,6 +875,8 @@
     close: requestClose,
     isOpen: isOpen,
     _internal: {
+      breadcrumbEl: breadcrumbEl,
+      activateCrumb: activateCrumb,
       parseProvisionHref: parseProvisionHref,
       splitId: splitId,
       parseParam: parseParam,

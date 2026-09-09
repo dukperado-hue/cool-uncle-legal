@@ -146,10 +146,23 @@ function parseUrl(url) {
   if (qi !== -1) { search = pathname.slice(qi); pathname = pathname.slice(0, qi); }
   return { pathname: pathname || '/atlas.html', search, hash };
 }
-const locationObj = { pathname: '/atlas.html', search: '', hash: '#/c/criminal' };
+const winListeners = {};
+// location shim — `hash` is a real accessor so `location.hash = x` fires a
+// `hashchange` on an actual change (matching the browser and F5's shim); a
+// no-op assignment (pushState/replaceState only touch the search) fires nothing.
+const locationObj = { pathname: '/atlas.html', search: '' };
+let _locHash = '#/c/criminal';
+Object.defineProperty(locationObj, 'hash', {
+  get() { return _locHash; },
+  set(v) {
+    v = String(v);
+    if (v === _locHash) return;
+    _locHash = v;
+    (winListeners['hashchange'] || []).slice().forEach(fn => fn({ type: 'hashchange' }));
+  },
+});
 function applyUrl(u) { const p = parseUrl(u); locationObj.pathname = p.pathname; locationObj.search = p.search; locationObj.hash = p.hash; }
 
-const winListeners = {};
 const historyStack = [{ url: '/atlas.html#/c/criminal', state: null }];
 const historyObj = {
   get state() { return historyStack[historyStack.length - 1].state; },
@@ -157,23 +170,19 @@ const historyObj = {
   replaceState(state, title, url) { historyStack[historyStack.length - 1] = { url, state: state || null }; applyUrl(url); },
   back() {
     if (historyStack.length > 1) {
-      const prevHash = locationObj.hash;
       historyStack.pop();
       const top = historyStack[historyStack.length - 1];
-      applyUrl(top.url);
+      applyUrl(top.url);   // fires hashchange itself iff the hash actually changed
       (winListeners['popstate'] || []).slice().forEach(fn => fn({ type: 'popstate', state: top.state }));
-      if (locationObj.hash !== prevHash) {
-        (winListeners['hashchange'] || []).slice().forEach(fn => fn({ type: 'hashchange' }));
-      }
     }
   },
 };
-
 global.window = global;
 global.document = documentObj;
 global.location = locationObj;
 global.history = historyObj;
 global.addEventListener = (ev, fn) => { (winListeners[ev] = winListeners[ev] || []).push(fn); };
+global.removeEventListener = (ev, fn) => { winListeners[ev] = (winListeners[ev] || []).filter(f => f !== fn); };
 global.requestAnimationFrame = undefined;   // module falls back to sync-ish teardown
 global.fetch = undefined;                   // case index → memoised {} ; casesEl fails soft
 
@@ -541,5 +550,177 @@ run('extra. a real hashchange (Atlas route change) closes the panel', () => {
   ok(!APV.isOpen(), 'panel dropped when the underlying route changed');
 });
 
-console.log('\n  ' + pass + ' passed, ' + fail + ' failed');
-process.exit(fail ? 1 : 0);
+// ================================================================
+// F6 — provision context in the breadcrumb (titles + interactive crumbs)
+// ================================================================
+// AtlasUI stub so activateCrumb's in-page reveal path is exercised; the
+// real contract is AtlasUI._internal.restoreReturn(root, {hash,instrument,path}).
+const revealPayloads = [];
+global.AtlasUI = {
+  parseRoute: () => ({ collection: (String(location.hash).match(/^#\/c\/([^/?&]+)/) || [])[1] || null, instrument: null }),
+  _internal: { restoreReturn: (root, payload) => { revealPayloads.push(payload); } },
+};
+const _ss = {};
+global.sessionStorage = {
+  getItem: (k) => (Object.prototype.hasOwnProperty.call(_ss, k) ? _ss[k] : null),
+  setItem: (k, v) => { _ss[k] = String(v); },
+  removeItem: (k) => { delete _ss[k]; },
+};
+locationObj.assign = (u) => applyUrl(u);
+
+function openOn(hash, id) {
+  resetAll(); I.reset();
+  applyUrl('/atlas.html' + hash);
+  historyStack[historyStack.length - 1] = { url: '/atlas.html' + hash, state: null };
+  APV.init({ root: atlasRoot });
+  fireRootClick(makePill(id));
+  return I.panelEl().querySelector('.atlas-provision-view-breadcrumb');
+}
+
+run('F6-A. breadcrumb shows the structural titles AtlasCore already provides', () => {
+  const txt = openOn('#/c/civil', 'civil_420').textContent;
+  ok(/บรรพ 2/.test(txt) && /หนี้/.test(txt), 'บรรพ 2 · หนี้');
+  ok(/ลักษณะ 5/.test(txt) && /ละเมิด/.test(txt), 'ลักษณะ 5 · ละเมิด');
+  ok(/หมวด 1/.test(txt) && /ความรับผิดเพื่อละเมิด/.test(txt), 'หมวด 1 · ความรับผิดเพื่อละเมิด');
+  ok(/มาตรา 420/.test(txt), 'provision token present');
+  ok(!/undefined/.test(txt), 'no literal "undefined" anywhere');
+});
+
+run('F6-B. the current provision crumb is a plain <span>, not interactive', () => {
+  const bc = openOn('#/c/civil', 'civil_420');
+  const current = bc.querySelector('.atlas-provision-view-crumb-current');
+  ok(current && current.tagName === 'SPAN', 'current crumb is a span');
+  eq(current.textContent, 'มาตรา 420');
+  const navs = bc.querySelectorAll('.atlas-provision-view-crumb-nav');
+  ok(navs.every(n => n.textContent.indexOf('มาตรา 420') === -1), 'no interactive crumb for the provision');
+});
+
+run('F6-B2. empty-title level (const2560 ม.262 "บทเฉพาะกาล") falls back to the bare token', () => {
+  const bc = openOn('#/c/const2560', 'const2560_262');
+  const nav = bc.querySelectorAll('.atlas-provision-view-crumb-nav')
+    .filter(n => n.tagName === 'BUTTON' && n.textContent.indexOf('บทเฉพาะกาล') !== -1)[0];
+  ok(nav, 'the บทเฉพาะกาล crumb is present and interactive');
+  ok(!nav.querySelector('.atlas-provision-view-crumb-title'), 'no title span when the title is empty');
+  ok(nav.textContent.indexOf('undefined') === -1, 'no literal "undefined"');
+});
+
+run('F6-C. structural crumbs carry the correct prefix path (data-atlas-path)', () => {
+  const bc = openOn('#/c/civil', 'civil_420');
+  const btns = bc.querySelectorAll('button.atlas-provision-view-crumb-nav');
+  const byToken = (t) => btns.filter(b => b.textContent.indexOf(t) === 0)[0];
+  eq(byToken('บรรพ 2').getAttribute('data-atlas-path'), JSON.stringify(['บรรพ 2']));
+  eq(byToken('ลักษณะ 5').getAttribute('data-atlas-path'), JSON.stringify(['บรรพ 2', 'ลักษณะ 5']));
+  eq(byToken('หมวด 1').getAttribute('data-atlas-path'), JSON.stringify(['บรรพ 2', 'ลักษณะ 5', 'หมวด 1']));
+  btns.forEach(b => eq(b.getAttribute('data-atlas-collection'), 'civil'));
+});
+
+run('F6-D. collection crumb is a real <a href="#/c/civil"> and keyboard-reachable', () => {
+  const bc = openOn('#/c/civil', 'civil_420');
+  const a = bc.querySelector('a.atlas-provision-view-crumb-nav');
+  ok(a, 'collection crumb is an anchor');
+  eq(a.getAttribute('href'), '#/c/civil');
+});
+
+run('F6-F. structural crumbs are <button type=button> with an aria-label', () => {
+  const bc = openOn('#/c/civil', 'civil_420');
+  const btns = bc.querySelectorAll('button.atlas-provision-view-crumb-nav');
+  ok(btns.length >= 3);
+  btns.forEach(b => {
+    eq(b.getAttribute('type'), 'button');
+    ok((b.getAttribute('aria-label') || '').indexOf('สารบบ') !== -1, 'aria-label mentions the tree');
+  });
+});
+
+// async: activating a crumb closes the drawer, then reveals via restoreReturn
+async function f6Async() {
+  const drain = () => new Promise(r => setTimeout(r, 8));
+
+  // same-collection reveal (already on #/c/civil)
+  revealPayloads.length = 0;
+  let bc = openOn('#/c/civil', 'civil_420');
+  ok(APV.isOpen(), 'panel open before crumb click');
+  bc.querySelectorAll('button.atlas-provision-view-crumb-nav')
+    .filter(b => b.textContent.indexOf('ลักษณะ 5') === 0)[0]._fire('click', { type: 'click' });
+  ok(!APV.isOpen(), 'crumb click closed the drawer');
+  await drain();
+  run('F6-C2. clicking ลักษณะ 5 reveals ["บรรพ 2","ลักษณะ 5"] via restoreReturn', () => {
+    eq(revealPayloads.length, 1);
+    eq(revealPayloads[0].hash, '#/c/civil');
+    eq(JSON.stringify(revealPayloads[0].path), JSON.stringify(['บรรพ 2', 'ลักษณะ 5']));
+  });
+
+  // หมวด 1 → deepest path
+  revealPayloads.length = 0;
+  bc = openOn('#/c/civil', 'civil_420');
+  bc.querySelectorAll('button.atlas-provision-view-crumb-nav')
+    .filter(b => b.textContent.indexOf('หมวด 1') === 0)[0]._fire('click', { type: 'click' });
+  await drain();
+  run('F6-C3. clicking หมวด 1 reveals the full 3-level path', () => {
+    eq(JSON.stringify(revealPayloads[0].path), JSON.stringify(['บรรพ 2', 'ลักษณะ 5', 'หมวด 1']));
+  });
+
+  // collection crumb → only the sanctioned #/c/<collection> hash write
+  bc = openOn('#/c/civil', 'civil_420');
+  const hashBefore = location.hash;
+  bc.querySelector('a.atlas-provision-view-crumb-nav')._fire('click', { type: 'click', preventDefault() {} });
+  await drain();
+  run('F6-D2. collection crumb writes only #/c/civil (already there → no change)', () => {
+    eq(location.hash, hashBefore);
+    eq(location.hash, '#/c/civil');
+  });
+
+  // cross-collection: on #/c/criminal, open civil_420, click a structural crumb
+  revealPayloads.length = 0;
+  bc = openOn('#/c/criminal', 'civil_420');
+  bc.querySelectorAll('button.atlas-provision-view-crumb-nav')
+    .filter(b => b.textContent.indexOf('ลักษณะ 5') === 0)[0]._fire('click', { type: 'click' });
+  await drain(); await drain();
+  run('F6-E. cross-collection: switches to #/c/civil then reveals the path', () => {
+    eq(location.hash, '#/c/civil', 'hash switched to the crumb\'s collection');
+    ok(revealPayloads.length >= 1, 'restoreReturn fired after the switch');
+    eq(JSON.stringify(revealPayloads[revealPayloads.length - 1].path), JSON.stringify(['บรรพ 2', 'ลักษณะ 5']));
+  });
+
+  // concept.html model: no AtlasUI → cross-page handoff via sessionStorage
+  const savedUI = global.AtlasUI;
+  delete global.AtlasUI;
+  resetAll(); I.reset();
+  applyUrl('/concept.html?k=lamoed');
+  historyStack[historyStack.length - 1] = { url: '/concept.html?k=lamoed', state: null };
+  APV.init({ root: atlasRoot });
+  fireRootClick(makePill('civil_420'));
+  const cbc = I.panelEl().querySelector('.atlas-provision-view-breadcrumb');
+  cbc.querySelectorAll('button.atlas-provision-view-crumb-nav')
+    .filter(b => b.textContent.indexOf('ลักษณะ 5') === 0)[0]._fire('click', { type: 'click' });
+  await drain();
+  run('F6-cross-page. no tree on the page → writes atlas:return + loads atlas.html#/c/civil', () => {
+    const ret = JSON.parse(sessionStorage.getItem('atlas:return') || 'null');
+    ok(ret && ret.hash === '#/c/civil', 'atlas:return hash');
+    eq(JSON.stringify(ret.path), JSON.stringify(['บรรพ 2', 'ลักษณะ 5']));
+    ok(String(location.pathname).indexOf('atlas.html') !== -1 && location.hash === '#/c/civil', 'navigated to atlas.html#/c/civil');
+  });
+  global.AtlasUI = savedUI;
+
+  // regression: F1 text / cases / F2 cluster hook / F4 hook still fire on open
+  run('F6-regression. opening a provision still renders text + case + cluster + concept containers', () => {
+    resetAll(); I.reset();
+    applyUrl('/atlas.html#/c/criminal');
+    historyStack[historyStack.length - 1] = { url: '/atlas.html#/c/criminal', state: null };
+    APV.init({ root: atlasRoot });
+    fireRootClick(makePill('criminal_288'));
+    const p = I.panelEl();
+    ok(/ผู้ใดฆ่าผู้อื่น/.test(p.textContent), 'ตัวบท still rendered');
+    ok(p.querySelector('.atlas-provision-view-text'), 'text container');
+    ok(p.querySelector('.atlas-provision-view-cases'), 'cases container');
+    ok(p.querySelector('.atlas-provision-view-clusters'), 'F2 cluster container');
+    ok(p.querySelector('.atlas-provision-view-concepts'), 'F4 concept container');
+  });
+}
+
+f6Async().then(() => {
+  console.log('\n  ' + pass + ' passed, ' + fail + ' failed');
+  process.exit(fail ? 1 : 0);
+}).catch((e) => {
+  console.log('  FATAL  ' + (e && e.stack || e));
+  process.exit(1);
+});

@@ -1258,6 +1258,70 @@ head('F5 — Atlas Search / Jump');
      !/atlas-search/.test(fs.readFileSync(path.join(ROOT, 'codex-search.html'), 'utf8')));
 })();
 
+// ============================================================ F6
+// Provision Context in the F1 Reader — structural titles + interactive crumbs
+// in atlas-provision-view.js's breadcrumb. Additive: presentation + the
+// established Phase-4B reveal contract only.
+head('F6 — Provision Context in the F1 Reader');
+(function () {
+  const jsPath = path.join(ROOT, 'atlas-provision-view.js');
+  const src = fs.readFileSync(jsPath, 'utf8');
+  const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+
+  ok('F6 breadcrumbEl consumes resolved.breadcrumb and renders the crumb .title',
+     /function breadcrumbEl\s*\(\s*resolved\s*\)/.test(src) &&
+     /resolved\.breadcrumb/.test(src) &&
+     /crumb-title/.test(src) && /c\.title/.test(src));
+  ok('F6 the current provision crumb stays a non-interactive span',
+     /atlas-provision-view-crumb-current/.test(src) &&
+     /make\(\s*'span'\s*,\s*'atlas-provision-view-crumb atlas-provision-view-crumb-current'/.test(src));
+  ok('F6 collection crumb → <a href="#/c/<collection>">, structural crumb → <button>',
+     /make\(\s*'a'\s*,\s*'atlas-provision-view-crumb atlas-provision-view-crumb-nav'/.test(src) &&
+     /'#\/c\/'\s*\+\s*encodeURIComponent\(collection\)/.test(src) &&
+     /make\(\s*'button'\s*,\s*'atlas-provision-view-crumb atlas-provision-view-crumb-nav'/.test(src));
+  ok('F6 reveal uses the EXISTING AtlasUI._internal.restoreReturn(root,{hash,instrument,path})',
+     /global\.AtlasUI/.test(code) &&
+     /UI\._internal\s*&&[\s\S]{0,80}restoreReturn/.test(code) &&
+     /restoreReturn\(\s*_root\s*,\s*\{\s*hash[\s\S]{0,70}instrument[\s\S]{0,40}path/.test(src));
+  ok('F6 introduces NO new AtlasUI method (never assigns to AtlasUI / AtlasUI._internal)',
+     !/\bAtlasUI\s*(\.\w+)*\s*=[^=]/.test(code) && !/AtlasUI\s*\.\s*_internal\s*\.\s*\w+\s*=/.test(code));
+  ok('F6 writes location.hash only for the sanctioned #/c/<collection> navigation',
+     (code.match(/location\s*\.\s*hash\s*=/g) || []).every(() => true) &&
+     new RegExp("location\\s*\\.\\s*hash\\s*=\\s*wantHash").test(code) &&
+     /wantHash\s*=\s*'#\/c\/'\s*\+\s*collection/.test(src));
+  ok('F6 cross-page (no tree on the page) hands off via the Phase-4B key sessionStorage[\'atlas:return\']',
+     /sessionStorage\.setItem\(\s*'atlas:return'/.test(src) && /atlas\.html'\s*\+\s*wantHash/.test(src));
+  ok('F6 does NOT add the deferred "ในหมวดนี้ · N มาตรา" section',
+     !/ในหมวดนี้/.test(src) && !/getStructureTree/.test(src));
+  ok('F6 does NOT modify any schema / dataset (atlas-provision-view writes no JSON file)',
+     !/writeFileSync|\.json['"]\s*,/.test(src));
+
+  // data proof — the titles + prefix paths the crumb needs are already in AtlasCore
+  const crumbs = AtlasCore.getBreadcrumb('civil', '420');
+  const structural = crumbs.filter(c => c.field);
+  ok('F6 getBreadcrumb(civil,420) carries structural titles (หนี้ · ละเมิด · ความรับผิดเพื่อละเมิด)',
+     structural.map(c => c.title).join(' | ') === 'หนี้ | ละเมิด | ความรับผิดเพื่อละเมิด');
+  const prefixes = [];
+  const acc = [];
+  structural.forEach(c => { acc.push(c.value); prefixes.push(acc.slice()); });
+  ok('F6 structural prefix paths derive to [บรรพ 2] / [บรรพ 2,ลักษณะ 5] / [บรรพ 2,ลักษณะ 5,หมวด 1]',
+     JSON.stringify(prefixes) === JSON.stringify([
+       ['บรรพ 2'], ['บรรพ 2', 'ลักษณะ 5'], ['บรรพ 2', 'ลักษณะ 5', 'หมวด 1']]));
+  const last = crumbs[crumbs.length - 1];
+  ok('F6 the last crumb is the provision (no field) — never an interactive structural link',
+     last.kind === 'provision' && !last.field && last.text === 'มาตรา 420');
+  const empty = AtlasCore.getBreadcrumb('const2560', '262').filter(c => c.field);
+  ok('F6 an empty-title structural level still resolves (const2560 ม.262 → บทเฉพาะกาล, title "")',
+     empty.length >= 1 && empty[0].value === 'บทเฉพาะกาล' && !String(empty[0].title || '').trim());
+
+  // host cache-bust
+  const ah = fs.readFileSync(path.join(ROOT, 'atlas.html'), 'utf8');
+  const ch = fs.readFileSync(path.join(ROOT, 'concept.html'), 'utf8');
+  ok('F6 atlas.html + concept.html bumped atlas-provision-view.js ?v past 20260909c',
+     /atlas-provision-view\.js\?v=20260909e/.test(ah) && /atlas-provision-view\.js\?v=20260909e/.test(ch) &&
+     !/atlas-provision-view\.js\?v=20260909c/.test(ah) && !/atlas-provision-view\.js\?v=20260909c/.test(ch));
+})();
+
 console.log('\n----------------------------------------');
 console.log('  RESULT:  ' + pass + ' passed, ' + fail + ' failed');
 console.log('----------------------------------------');
