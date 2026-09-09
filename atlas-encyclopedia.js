@@ -187,7 +187,8 @@
       '.atlas-enc-head{margin:0 0 20px}' +
       '.atlas-enc-title{margin:0 0 6px;font-size:24px;font-weight:700;letter-spacing:-.01em}' +
       '.atlas-enc-intro{margin:0;font-size:14px;line-height:1.8;color:var(--muted)}' +
-      '.atlas-enc-search{position:sticky;top:0;background:var(--bg);padding:12px 0;margin:0 0 8px;z-index:2}' +
+      '.atlas-enc-search{position:sticky;top:0;background:var(--bg);padding:12px 0 10px;margin:0 0 8px;z-index:2;' +
+        'border-bottom:1px solid var(--line)}' +
       '.atlas-enc-input{width:100%;font:inherit;font-size:15px;padding:10px 14px;border:1px solid var(--line);' +
         'border-radius:10px;background:var(--panel);color:var(--ink)}' +
       '.atlas-enc-input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}' +
@@ -200,7 +201,7 @@
       '.atlas-enc-letter{margin:0 0 6px;font-size:15px;font-weight:700;color:var(--accent);' +
         'border-bottom:1px solid var(--line);padding-bottom:3px}' +
       '.atlas-enc-list{list-style:none;margin:0;padding:0}' +
-      '.atlas-enc-entry{padding:6px 0;border-bottom:1px solid var(--line);line-height:1.55}' +
+      '.atlas-enc-entry{padding:6px 0;border-bottom:1px solid var(--line);line-height:1.55;overflow-wrap:break-word}' +
       '.atlas-enc-entry:last-child{border-bottom:0}' +
       '.atlas-enc-term{font-size:15px;font-weight:700}' +
       '.atlas-enc-entry.is-secondary .atlas-enc-term{font-weight:400}' +
@@ -213,7 +214,7 @@
       '.atlas-enc-planned{margin:28px 0 0;padding:16px 0 0;border-top:1px solid var(--line)}' +
       '.atlas-enc-planned h2{margin:0 0 6px;font-size:14px;font-weight:700}' +
       '.atlas-enc-planned ul{list-style:none;margin:0;padding:0}' +
-      '.atlas-enc-planned li{padding:3px 0;font-size:13px;color:var(--muted)}' +
+      '.atlas-enc-planned li{padding:3px 0;font-size:13px;color:var(--muted);overflow-wrap:break-word}' +
       '.atlas-enc-planned .atlas-enc-note{margin:8px 0 0;font-size:11.5px;color:var(--muted)}' +
       '.atlas-enc-foot{margin-top:32px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.7}' +
       '@media (max-width:760px){.atlas-enc-title{font-size:21px}}';
