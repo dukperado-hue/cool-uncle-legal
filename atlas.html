@@ -235,6 +235,8 @@
     <div class="atlas-principle">สารบบเดียว หลายระบบกฎหมาย — ไล่จากสาขากฎหมาย → ฉบับกฎหมาย → ลำดับชั้นดั้งเดิมของฉบับนั้น → มาตราหรือข้อ → ตัวบท</div>
   </header>
 
+  <div id="atlas-search"></div>
+
   <div id="atlas-root"><div class="atlas-loading">กำลังโหลดสารบบกฎหมาย…</div></div>
 
   <footer class="atlas-foot" id="atlas-foot"></footer>
@@ -248,6 +250,7 @@
 <script src="atlas-concepts.js?v=20260909e"></script>
 <script src="atlas-provision-concepts.js?v=20260909a"></script>
 <script src="atlas-provision-view.js?v=20260909c"></script>
+<script src="atlas-search.js?v=20260909a"></script>
 <script>
 (function () {
   'use strict';
@@ -266,6 +269,8 @@
     // Phase 4E-1 — inline provision viewer (standalone; progressive enhancement,
     // the provision pills keep their legacy href either way).
     if (window.AtlasProvisionView) AtlasProvisionView.init({ root: root });
+    // F5 — search / jump box (standalone; additive consumer, fails soft)
+    if (window.AtlasSearch) AtlasSearch.mount(document.getElementById('atlas-search'), { root: root });
     renderFoot();
   }).catch(function (err) {
     root.innerHTML = '<div class="atlas-error">โหลดข้อมูลไม่สำเร็จ: ' +

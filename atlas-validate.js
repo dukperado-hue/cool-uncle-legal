@@ -1155,6 +1155,109 @@ head('F4 — Provision-to-Concept Backlinks');
      scriptBefore(ch, 'atlas-clusters.js', 'atlas-provision-view.js'));
 })();
 
+// ============================================================ F5
+// Atlas Search / Jump — atlas-search.js
+// A resolve-typed-intent-to-an-existing-destination navigator on atlas.html.
+// Additive consumer. NOT a full-text engine. Must not affect any assertion above.
+head('F5 — Atlas Search / Jump');
+(function () {
+  const { execFileSync } = require('child_process');
+  const jsPath = path.join(ROOT, 'atlas-search.js');
+  ok('F5 atlas-search.js present', fs.existsSync(jsPath));
+  if (!fs.existsSync(jsPath)) return;
+
+  try { execFileSync(process.execPath, ['--check', jsPath], { stdio: 'pipe' }); ok('F5 atlas-search.js parses', true); }
+  catch (e) { ok('F5 atlas-search.js parses', false, String(e.stderr || e).slice(0, 160)); }
+
+  const src = fs.readFileSync(jsPath, 'utf8');
+  const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+
+  ok('F5 standalone/additive — never assigns to a core Atlas layer',
+     !/\b(AtlasCore|AtlasUI|AtlasConcepts|AtlasProvisionView|AtlasClusters|AtlasProvisionConcepts|AtlasEncyclopedia)\s*(\.\w+)?\s*=[^=]/.test(code));
+  ok('F5 never writes into another module\'s _internal',
+     !/(AtlasCore|AtlasUI|AtlasConcepts|AtlasProvisionView)\s*\.\s*_internal\s*\.\s*\w+\s*=/.test(code));
+  ok('F5 no full-text / corpus load, no fuzzy engine, no new index dataset',
+     !/codex-data\.json/.test(src) &&
+     !/levenshtein|fuzzy|editDistance/i.test(src) &&
+     !/atlas-search\.json|search-index\.json|provisionText/.test(src));
+  ok('F5 location.hash is written ONLY for collection/structural navigation (≤2 sites)',
+     (src.match(/location\s*\.\s*hash\s*=/g) || []).length <= 2);
+  ok('F5 uses history.replaceState for the ?q= param (no new route grammar)',
+     /history\s*\.\s*replaceState/.test(src) && /[?&]q=/.test(src));
+  ok('F5 reuses the Phase 4B reveal contract AtlasUI._internal.restoreReturn(root,{path})',
+     /AtlasUI\s*\.\s*_internal\s*\.\s*restoreReturn/.test(src) && /path\s*:/.test(src));
+  ok('F5 reuses the F1 provision open path (openProvision / ?a=)',
+     /openProvision/.test(src) && /['"]a['"]|[?&]a=|\ba=\b/.test(src));
+  ok('F5 concept navigation → the canonical Concept Entry concept.html?k=<slug>',
+     /concept\.html\?k=/.test(src) && !/#\/k\//.test(src));
+  ok('F5 no-match fallback points once at codex-search.html (not a second results page)',
+     /codex-search\.html/.test(src) && (src.match(/codex-search\.html/g) || []).length <= 2);
+
+  // functional — resolve typed intent against the real corpus + concept doc
+  let AS;
+  const savedUI = global.AtlasUI, savedPV = global.AtlasProvisionView;
+  global.AtlasUI = { parseRoute: () => ({ view: 'collection', collection: 'civil', instrument: null }),
+                     _internal: { restoreReturn: function () {} } };
+  global.AtlasProvisionView = { init: function () {}, _internal: { openProvision: function () { return true; } } };
+  try {
+    require(path.join(ROOT, 'atlas-search.js'));
+    AS = global.AtlasSearch;
+    ok('F5 window.AtlasSearch exposed with mount + _internal', !!(AS && typeof AS.mount === 'function' && AS._internal));
+  } catch (e) { ok('F5 window.AtlasSearch exposed with mount + _internal', false, String(e).slice(0, 140)); }
+
+  if (AS && AS._internal) {
+    const S = AS._internal;
+    S.buildConceptTerms(JSON.parse(fs.readFileSync(path.join(ROOT, 'atlas-concepts.json'), 'utf8')));
+
+    // deterministic precedence: 1 provision · 2 collection · 3 structural · 4 concept
+    const forms = ['420', 'ม.420', 'มาตรา 420', 'civil 420', 'civil_420'];
+    ok('F5 every provision form → go civil_420 (F1)',
+       forms.every(f => {
+         const r = S.resolve(f);
+         return r.kind === 'go' && r.dest.type === 'provision' && r.dest.collection === 'civil' && r.dest.number === '420';
+       }));
+
+    const col = S.resolve('ประมวลกฎหมายอาญา');
+    ok('F5 exact collection title → go collection route (criminal)',
+       col.kind === 'go' && col.dest.type === 'collection' && col.dest.key === 'criminal');
+    ok('F5 exact collection short alias also resolves',
+       S.resolve('ประมวลอาญา').dest.key === 'criminal');
+
+    const stru = S.resolve('บรรพ 2');
+    ok('F5 unique structural label (on a collection route) → go structural, whole node.path carried',
+       stru.kind === 'go' && stru.dest.type === 'structural' &&
+       JSON.stringify(stru.dest.path) === JSON.stringify(['บรรพ 2']) && stru.dest.collection === 'civil');
+
+    ok('F5 structural resolution matches node.value only, never the descriptive title',
+       S.resolve('ละเมิด').dest.type === 'concept');
+
+    ['ละเมิด', 'tort', 'Delictum'].forEach(t => {
+      const r = S.resolve(t);
+      ok(r.kind === 'go' && r.dest.type === 'concept' && r.dest.slug === 'lamoed', 'F5 concept "' + t + '" → lamoed');
+    });
+
+    const amb = S.resolve('ลักษณะ 5');
+    ok('F5 ambiguous input → suggestions, never a silent choice',
+       amb.kind === 'ambiguous' && amb.dests.length >= 2 && amb.dests.every(d => d.type === 'structural'));
+
+    ok('F5 unknown input → nomatch (no navigation)', S.resolve('xyzzy-nope').kind === 'nomatch');
+    ok('F5 empty input → empty', S.resolve('   ').kind === 'empty');
+  }
+  global.AtlasUI = savedUI; global.AtlasProvisionView = savedPV;
+
+  // host wiring
+  const ah = fs.readFileSync(path.join(ROOT, 'atlas.html'), 'utf8');
+  ok('F5 atlas.html has the #atlas-search mount point', /id="atlas-search"/.test(ah));
+  ok('F5 atlas.html loads atlas-search.js after atlas-provision-view.js',
+     /<script[^>]+src="atlas-search\.js/.test(ah) &&
+     ah.indexOf('src="atlas-provision-view.js') < ah.indexOf('src="atlas-search.js'));
+  ok('F5 atlas.html calls AtlasSearch.mount', /AtlasSearch\.mount\s*\(/.test(ah));
+  ok('F5 concept.html is NOT given the search box (atlas.html only, per scope)',
+     !/atlas-search\.js/.test(fs.readFileSync(path.join(ROOT, 'concept.html'), 'utf8')));
+  ok('F5 codex-search.html untouched by F5 (no atlas-search reference added)',
+     !/atlas-search/.test(fs.readFileSync(path.join(ROOT, 'codex-search.html'), 'utf8')));
+})();
+
 console.log('\n----------------------------------------');
 console.log('  RESULT:  ' + pass + ' passed, ' + fail + ' failed');
 console.log('----------------------------------------');
