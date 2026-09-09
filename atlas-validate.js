@@ -696,6 +696,17 @@ head('Phase 1 — Legal Concept layer contract (golden sample: ละเมิ�
   for (const k of Object.keys(idx)) for (const x of (idx[k] || []))
     if (x && x.id && x.public === true) caseIndexIds.add(x.id);
 
+  // relatedConcepts structural contract: a valid namespaced ref, a known
+  // relationKind (if any), and a target that is EITHER authored here OR
+  // explicitly marked planned. Denormalised rc.labelTH / rc.status are cache
+  // only — never promoted to a hard identity requirement.
+  const relContractOK = rc => {
+    if (!rc || typeof rc.ref !== 'string' || rc.ref.indexOf('atlas:concept/') !== 0) return false;
+    if (rc.rel && !(cdoc.relationKinds || {})[rc.rel]) return false;
+    const s = rc.ref.replace('atlas:concept/', '');
+    return !!(cdoc.concepts || {})[s] || rc.status === 'planned';
+  };
+
   for (const [slug, c] of Object.entries(cdoc.concepts || {})) {
     const T = 'P1 concept[' + slug + ']';
     ok(T + ' id grammar atlas:concept/<slug> and slug match',
@@ -729,12 +740,7 @@ head('Phase 1 — Legal Concept layer contract (golden sample: ละเมิ�
        (c.provisions || []).every(p => SUPPORTED_ROLES.has(p.role || 'related')),
        (c.provisions || []).map(p => p.role).filter(r => r && !SUPPORTED_ROLES.has(r)).join(', ') || 'ok');
     ok(T + ' relatedConcepts: atlas:concept/* + known rel + resolvable-or-planned',
-       (c.relatedConcepts || []).every(rc => {
-         if (!rc || typeof rc.ref !== 'string' || rc.ref.indexOf('atlas:concept/') !== 0) return false;
-         if (rc.rel && !(cdoc.relationKinds || {})[rc.rel]) return false;
-         const s = rc.ref.replace('atlas:concept/', '');
-         return !!(cdoc.concepts || {})[s] || rc.status === 'planned';
-       }),
+       (c.relatedConcepts || []).every(relContractOK),
        (c.relatedConcepts || []).map(r => r && r.ref).join(', ') || 'none');
     const flagged = new Set((c.sections || []).filter(s => s.needsSourceVerification).map(s => s.key));
     const declared = c.authoring && Array.isArray(c.authoring.needsSourceVerification)
@@ -745,6 +751,57 @@ head('Phase 1 — Legal Concept layer contract (golden sample: ละเมิ�
     ok(T + ' every flagged section carries a verificationNote',
        (c.sections || []).filter(s => s.needsSourceVerification)
          .every(s => typeof s.verificationNote === 'string' && s.verificationNote));
+  }
+
+  // ---- P3 — related-concept resolution is LIVE, not cached ----------------
+  // The renderer (relatedConceptChip) resolves each relatedConcepts entry
+  // against the current concept document via AtlasConcepts._internal.resolveRelated.
+  // When the target slug is authored, its live titleTH / status win; the
+  // denormalised rc.labelTH / rc.status are fallback only (used when the
+  // target is not authored yet). Regression guard for lamoed → nitikam, whose
+  // stored relation still carries status:"planned" while nitikam is published.
+  if (AConcepts && AConcepts._internal && typeof AConcepts._internal.resolveRelated === 'function') {
+    AConcepts._internal.setDoc(cdoc);
+    const R = AConcepts._internal.resolveRelated;
+    const nitikam = (cdoc.concepts || {}).nitikam;
+
+    const lam2nit = ((cdoc.concepts.lamoed || {}).relatedConcepts || [])
+      .find(rc => rc && rc.ref === 'atlas:concept/nitikam');
+    ok('P1 P3 fixture: lamoed → atlas:concept/nitikam relation exists with cached status "planned"',
+       !!lam2nit && lam2nit.status === 'planned', lam2nit && lam2nit.status);
+    ok('P1 P3 fixture: target concept nitikam is authored and published',
+       !!nitikam && nitikam.status === 'published', nitikam && nitikam.status);
+    if (lam2nit && nitikam) {
+      const r = R(lam2nit);
+      ok('P1 P3 resolveRelated: target resolves by stable slug identity',
+         r.slug === 'nitikam' && r.known === true, r.slug + '/' + r.known);
+      ok('P1 P3 resolveRelated: LIVE status wins over cached rc.status "planned"',
+         r.status === 'published', 'cached=' + lam2nit.status + ' resolved=' + r.status);
+      ok('P1 P3 resolveRelated: LIVE titleTH wins over cached rc.labelTH',
+         r.label === nitikam.titleTH, r.label + ' vs ' + nitikam.titleTH);
+    }
+
+    // synthetic: an intentionally stale cache must not corrupt a live target
+    const stale = R({ ref: 'atlas:concept/nitikam', rel: 'seealso', labelTH: 'ค่าที่ล้าสมัย', status: 'planned' });
+    ok('P1 P3 stale cached labelTH + status are ignored when the target is authored',
+       stale.known === true && stale.status === 'published' &&
+       stale.label === (nitikam && nitikam.titleTH),
+       'label=' + stale.label + ' status=' + stale.status);
+
+    // unresolved target: graceful fallback to the cached metadata, no throw
+    const ghost = R({ ref: 'atlas:concept/no-such-concept', rel: 'seealso', labelTH: 'ยังไม่เขียน', status: 'planned' });
+    ok('P1 P3 unresolved target falls back to cached label/status without crashing',
+       ghost.known === false && ghost.label === 'ยังไม่เขียน' && ghost.status === 'planned');
+
+    // structural contract still catches a bad target and a bad relation kind
+    ok('P1 P3 relatedConcepts contract still rejects an unknown target that is not marked planned',
+       relContractOK({ ref: 'atlas:concept/no-such-concept', status: 'planned' }) === true &&
+       relContractOK({ ref: 'atlas:concept/no-such-concept' }) === false);
+    ok('P1 P3 relatedConcepts contract still rejects an unknown relation kind',
+       relContractOK({ ref: 'atlas:concept/nitikam', rel: 'not-a-real-kind' }) === false &&
+       relContractOK({ ref: 'atlas:concept/nitikam', rel: 'contrast' }) === true);
+
+    AConcepts._internal.reset();
   }
 
   // concept.html wiring: reuses atlas-core + the inline drawer, never atlas-ui routing

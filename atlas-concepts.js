@@ -279,20 +279,34 @@
     return card;
   }
 
-  function relatedConceptChip(rc, inline) {
+  // Resolve a relatedConcepts entry against the LIVE concept document.
+  // When the target slug is an authored concept, its CURRENT titleTH / status
+  // are authoritative. rc.labelTH / rc.status are denormalised cache: they are
+  // fallback only, used when the target concept is not (yet) authored here.
+  // Identity is always the stable slug from rc.ref, never a display label.
+  function resolveRelated(rc) {
     var ref = (typeof rc === 'string') ? rc : (rc && rc.ref);
     var slug = String(ref || '').replace(/^atlas:concept\//, '');
     var known = getConcept(slug);
-    var label = (rc && rc.labelTH) || slug;
+    return {
+      slug: slug,
+      known: !!known,
+      label: (known && known.titleTH) || (rc && rc.labelTH) || slug,
+      status: known ? known.status : ((rc && rc.status) || null)
+    };
+  }
+
+  function relatedConceptChip(rc, inline) {
+    var r = resolveRelated(rc);
     var relTxt = (rc && rc.rel) ? ('[' + rc.rel + '] ') : '';
-    if (known && known.status === 'published') {
+    if (r.known && r.status === 'published') {
       var a = el('a', 'atlas-concept-related-chip' + (inline ? ' is-inline' : ''));
-      a.href = 'concept.html?k=' + encodeURIComponent(slug);
-      a.textContent = relTxt + label;
+      a.href = 'concept.html?k=' + encodeURIComponent(r.slug);
+      a.textContent = relTxt + r.label;
       return a;
     }
     var span = el('span', 'atlas-concept-related-chip is-planned' + (inline ? ' is-inline' : ''));
-    span.textContent = relTxt + label + ' · เร็ว ๆ นี้';
+    span.textContent = relTxt + r.label + ' · เร็ว ๆ นี้';
     if (rc && rc.note) span.title = rc.note;
     return span;
   }
@@ -425,8 +439,13 @@
     var concept = getConcept(slug);
     clear(rootEl);
     if (!concept) {
+      var avail = Object.keys((_doc && _doc.concepts) || {}).filter(function (k) {
+        return _doc.concepts[k] && _doc.concepts[k].status === 'published';
+      });
       append(rootEl, el('p', 'atlas-concept-error',
-        'ไม่พบแนวคิด "' + slug + '" (ระยะนี้มีเฉพาะ "ละเมิด" ที่ concept.html?k=lamoed)'));
+        'ไม่พบแนวคิด "' + slug + '"' +
+        (avail.length ? ' — แนวคิดที่เผยแพร่ขณะนี้: ' + avail.join(', ') : '') +
+        ' (ดูทั้งหมดที่ concept.html)'));
       return false;
     }
 
@@ -675,6 +694,7 @@
     load: load,
     _internal: {
       getConcept: getConcept,
+      resolveRelated: resolveRelated,
       resolveProvisionRef: resolveProvisionRef,
       parseLectureRef: parseLectureRef,
       caseKey: caseKey,

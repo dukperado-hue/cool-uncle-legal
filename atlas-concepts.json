@@ -1,7 +1,7 @@
 {
   "version": "0.1",
-  "generated": "2026-09-08",
-  "status": "PHASE 1: golden sample only. Just 'ละเมิด'. Not production. Do not link from atlas.html routing yet.",
+  "generated": "2026-09-09",
+  "status": "ชั้นเสริม (additive) ของ Thai Legal Atlas: ดัชนีเชิงแนวคิด/การนำทาง และเอกสารประกอบการสอน ไม่ใช่ลำดับชั้นกฎหมายชุดที่สอง ไม่ใช่ node.kind ใหม่ และไม่ใช่ฐานข้อมูลกราฟ. ปัจจุบันมีแนวคิดที่เขียนแล้ว 2 เรื่อง (ละเมิด, นิติกรรม) และหน้าดัชนีที่ concept.html. ทุกแนวคิดอ้างอิงบทบัญญัติผ่าน identity เดิมของ AtlasCore (legacy id <collection>_<number>, atlas:concept/<slug>) ไม่คัดลอกโครงสร้างจาก codex-data.json. เชื่อมจาก atlas.html ผ่านลิงก์เดียวที่ footer เท่านั้น ยังไม่เข้าไปใน route grammar ของ Atlas.",
   "principle": "แนวคิดทางกฎหมาย (Legal Concept) เป็นชั้นความหมายที่ 'เสริม' เข้าไปใน Thai Legal Atlas เดิม ไม่ใช่ระบบใหม่ และไม่ใช่ node.kind ใหม่ในโครงสร้าง. แนวคิดหนึ่งคือมุมมองหนึ่งที่พาดผ่านบทบัญญัติเดิมหลายมาตรา (บางทีข้ามหลายประมวล/พ.ร.บ.) โดยอ้างอิงกลับไปยัง identity เดิมของ AtlasCore เท่านั้น (legacy id <collection>_<number>, atlas:concept/<slug>). ทุก edge เป็น string ref ในไฟล์นี้ ไม่มีโครงสร้างกราฟ/ลิงก์ใหม่. related cases ได้มาจาก prototype/assets/cases/article-case-index.json เดิม (derived). เนื้อหาเชิงลึกและฎีกา อยู่ใน lectureNotes เดิมของแต่ละมาตรา ไฟล์นี้จึง 'อ้างถึง' ผ่าน lectureRefs ไม่คัดลอกซ้ำ.",
 
   "identityGrammar": {
