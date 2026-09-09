@@ -436,6 +436,21 @@
       resolved.collectionTitle || resolved.collection));
 
     body.appendChild(textEl(resolved.article && resolved.article.text));
+
+    // Provision → Concept backlink (F4) — a curated Concept that covers this
+    // provision, derived in memory from the Concept layer. atlas-provision-
+    // concepts.js fills this container async and renders nothing when the
+    // provision has no concept. Progressive enhancement: absent / failed /
+    // no Concept layer on this page → the panel is unchanged.
+    var pconcepts = make('div', 'atlas-provision-view-concepts');
+    body.appendChild(pconcepts);
+    try {
+      if (global.AtlasProvisionConcepts &&
+          typeof global.AtlasProvisionConcepts.renderSection === 'function') {
+        global.AtlasProvisionConcepts.renderSection(pconcepts, resolved);
+      }
+    } catch (e) { /* fail soft */ }
+
     body.appendChild(casesEl(resolved));
 
     // Related Provision Legal Clusters (FINALIZATION 2) — a curated editorial

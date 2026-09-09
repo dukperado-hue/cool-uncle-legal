@@ -1041,6 +1041,120 @@ head('Finalization 3 — Encyclopedia (discovery layer over the Concept layer)')
      (fs.readFileSync(path.join(ROOT, 'concept.html'), 'utf8').match(/encyclopedia\.html/g) || []).length >= 2);
 })();
 
+// ============================================================ F4
+// Provision → Concept Backlinks — atlas-provision-concepts.js
+// The reverse of the F1–F3 network: while reading a provision, see the curated
+// Concept that covers it. Additive, standalone, derived in memory. Must not
+// affect any assertion above.
+head('F4 — Provision-to-Concept Backlinks');
+(function () {
+  const { execFileSync } = require('child_process');
+  const jsPath = path.join(ROOT, 'atlas-provision-concepts.js');
+  const conceptsJsonPath = path.join(ROOT, 'atlas-concepts.json');
+
+  ok('F4 atlas-provision-concepts.js present', fs.existsSync(jsPath));
+  if (!fs.existsSync(jsPath)) return;
+
+  try { execFileSync(process.execPath, ['--check', jsPath], { stdio: 'pipe' }); ok('F4 atlas-provision-concepts.js parses', true); }
+  catch (e) { ok('F4 atlas-provision-concepts.js parses', false, String(e.stderr || e).slice(0, 160)); }
+
+  const src = fs.readFileSync(jsPath, 'utf8');
+  const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+
+  ok('F4 standalone/additive — never assigns to AtlasCore / AtlasUI / AtlasConcepts',
+     !/\b(AtlasCore|AtlasUI|AtlasConcepts)\s*(\.\w+)?\s*=[^=]/.test(code) &&
+     !/(AtlasCore|AtlasUI)\._internal/.test(code));
+  ok('F4 never touches location.hash / the route grammar / history',
+     !/\blocation\s*\.\s*hash\b/.test(code) && !/history\s*\.\s*(pushState|replaceState)/.test(code));
+  ok('F4 concept link is the frozen concept-entry URL concept.html?k=<slug>',
+     /concept\.html\?k=/.test(src) && !/#\/c\//.test(src));
+  ok('F4 no second relationship dataset (derives from the Concept layer only)',
+     !/provisionConcepts\.json|provision-concepts\.json/.test(src) &&
+     !/codex-data\.json/.test(src) &&
+     /AtlasConcepts\.load\s*\(/.test(src));
+  ok('F4 reuses AtlasConcepts._internal.allProvisionRefs for the derivation',
+     /allProvisionRefs/.test(src));
+
+  // no schema mutation
+  const rawJson = fs.readFileSync(conceptsJsonPath, 'utf8');
+  ok('F4 atlas-concepts.json schema untouched (no F4 field, no graph object)',
+     !/\bprovisionConcepts\b|\bconceptsByProvision\b|\bbacklinks\b|\bchildren\s*:/.test(rawJson));
+
+  // functional — derive the reverse index from the real document
+  let cdoc;
+  try { cdoc = JSON.parse(rawJson); } catch (e) { ok('F4 atlas-concepts.json valid JSON', false, String(e).slice(0, 120)); return; }
+
+  let PC;
+  try {
+    require(path.join(ROOT, 'atlas-concepts.js'));   // (also required by the F3 block)
+    require(path.join(ROOT, 'atlas-provision-concepts.js'));
+    PC = global.AtlasProvisionConcepts;
+    ok('F4 window.AtlasProvisionConcepts exposed with renderSection + _internal',
+       !!(PC && typeof PC.renderSection === 'function' && PC._internal));
+  } catch (e) { ok('F4 window.AtlasProvisionConcepts exposed with renderSection + _internal', false, String(e).slice(0, 140)); }
+
+  if (PC && PC._internal) {
+    global.AtlasConcepts._internal.setDoc(cdoc);      // so getConcept()/allProvisionRefs() resolve
+    const idx = PC._internal.buildIndex(cdoc);
+    ok('F4 reverse index derivable, covers many provisions',
+       idx && Object.keys(idx).length >= 20, 'refs: ' + (idx ? Object.keys(idx).length : 0));
+
+    const c420 = PC._internal.conceptsForProvision('civil_420');
+    ok('F4 known relationship civil_420 → ละเมิด resolves',
+       c420.length === 1 && c420[0].slug === 'lamoed' && c420[0].titleTH === 'ละเมิด' && c420[0].core === true);
+    ok('F4 civil_149 → นิติกรรม resolves',
+       PC._internal.conceptsForProvision('civil_149').some(c => c.slug === 'nitikam'));
+
+    const c5 = PC._internal.conceptsForProvision('civil_5').map(c => c.slug).sort();
+    ok('F4 a provision may map to MANY concepts (civil_5 ∈ lamoed & nitikam)',
+       JSON.stringify(c5) === JSON.stringify(['lamoed', 'nitikam']));
+
+    ok('F4 no duplicate concept entry for any provision',
+       Object.keys(idx).every(ref => {
+         const s = idx[ref].map(x => x.slug);
+         return s.length === new Set(s).size;
+       }));
+    ok('F4 every mapped slug is a published concept with a valid slug',
+       Object.keys(idx).every(ref => idx[ref].every(x => {
+         const c = cdoc.concepts[x.slug];
+         return c && c.status === 'published' && c.slug === x.slug;
+       })));
+    ok('F4 unknown provision → no concepts (renders nothing)',
+       PC._internal.conceptsForProvision('criminal_99999').length === 0);
+    ok('F4 currentRefOf maps a resolved provision to its stable <collection>_<number> ref',
+       PC._internal.currentRefOf({ legacyId: 'civil_420' }) === 'civil_420' &&
+       PC._internal.currentRefOf({ collection: 'civil', number: '420' }) === 'civil_420');
+  }
+
+  // wiring — F4 rendered from inside the F1 reader; scripts present + ordered
+  const avf = fs.readFileSync(path.join(ROOT, 'atlas-provision-view.js'), 'utf8');
+  ok('F4 atlas-provision-view.js renders the backlink via AtlasProvisionConcepts (no direct coupling)',
+     /AtlasProvisionConcepts\s*&&[\s\S]{0,120}renderSection/.test(avf));
+  ok('F4 F2 cluster rendering in the F1 reader is untouched',
+     /AtlasClusters\s*&&[\s\S]{0,80}renderSection/.test(avf));
+
+  // compare <script src> positions only — never a mention in an HTML comment
+  function scriptBefore(html, a, b) {
+    const ra = new RegExp('<script[^>]+src="' + a.replace(/\./g, '\\.') + '[^"]*"').exec(html);
+    const rb = new RegExp('<script[^>]+src="' + b.replace(/\./g, '\\.') + '[^"]*"').exec(html);
+    return ra && rb && ra.index < rb.index;
+  }
+  function scriptPresent(html, a) {
+    return new RegExp('<script[^>]+src="' + a.replace(/\./g, '\\.') + '[^"]*"').test(html);
+  }
+  const ah = fs.readFileSync(path.join(ROOT, 'atlas.html'), 'utf8');
+  const ch = fs.readFileSync(path.join(ROOT, 'concept.html'), 'utf8');
+  ok('F4 atlas.html loads atlas-concepts.js + atlas-provision-concepts.js before atlas-provision-view.js',
+     scriptPresent(ah, 'atlas-concepts.js') &&
+     scriptBefore(ah, 'atlas-concepts.js', 'atlas-provision-concepts.js') &&
+     scriptBefore(ah, 'atlas-provision-concepts.js', 'atlas-provision-view.js'));
+  ok('F4 concept.html loads atlas-provision-concepts.js before atlas-provision-view.js',
+     scriptBefore(ch, 'atlas-provision-concepts.js', 'atlas-provision-view.js'));
+  ok('F4 both pages still load atlas-clusters.js before atlas-provision-view.js (F2 intact)',
+     scriptBefore(ah, 'atlas-clusters.js', 'atlas-provision-view.js') &&
+     scriptBefore(ch, 'atlas-clusters.js', 'atlas-provision-view.js'));
+})();
+
 console.log('\n----------------------------------------');
 console.log('  RESULT:  ' + pass + ' passed, ' + fail + ' failed');
 console.log('----------------------------------------');
