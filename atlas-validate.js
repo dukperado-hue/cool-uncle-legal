@@ -936,6 +936,111 @@ head('Finalization 2 — Related Provision Legal Clusters');
      /AtlasClusters\s*&&[\s\S]{0,80}renderSection/.test(fs.readFileSync(path.join(ROOT, 'atlas-provision-view.js'), 'utf8')));
 })();
 
+// ============================================================ FINALIZATION 3
+// Encyclopedia — atlas-encyclopedia.js / encyclopedia.html
+// The discovery / index layer over the existing Concept layer. Additive,
+// standalone. Must not affect any assertion above.
+head('Finalization 3 — Encyclopedia (discovery layer over the Concept layer)');
+(function () {
+  const { execFileSync } = require('child_process');
+  const jsPath = path.join(ROOT, 'atlas-encyclopedia.js');
+  const htmlPath = path.join(ROOT, 'encyclopedia.html');
+  const conceptsJsonPath = path.join(ROOT, 'atlas-concepts.json');
+  const conceptsJsPath = path.join(ROOT, 'atlas-concepts.js');
+
+  ok('F3 atlas-encyclopedia.js present', fs.existsSync(jsPath));
+  ok('F3 encyclopedia.html present', fs.existsSync(htmlPath));
+  if (!fs.existsSync(jsPath) || !fs.existsSync(htmlPath)) return;
+
+  try { execFileSync(process.execPath, ['--check', jsPath], { stdio: 'pipe' }); ok('F3 atlas-encyclopedia.js parses', true); }
+  catch (e) { ok('F3 atlas-encyclopedia.js parses', false, String(e.stderr || e).slice(0, 160)); }
+
+  const src = fs.readFileSync(jsPath, 'utf8');
+  const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+
+  ok('F3 atlas-encyclopedia.js never assigns to AtlasCore / AtlasUI / AtlasConcepts (additive)',
+     !/\b(AtlasCore|AtlasUI|AtlasConcepts)\s*(\.\w+)?\s*=[^=]/.test(code) &&
+     !/(AtlasCore|AtlasUI)\._internal/.test(code));
+  ok('F3 atlas-encyclopedia.js never touches location.hash / the route grammar',
+     !/\blocation\s*\.\s*hash\b/.test(code) && !/history\s*\.\s*pushState\s*\(/.test(code));
+  ok('F3 atlas-encyclopedia.js records the search term with replaceState only (shareable ?q=)',
+     /history\s*\.\s*replaceState/.test(src) && /[?&]q=/.test(src));
+  ok('F3 every concept link is the frozen concept-entry URL concept.html?k=<slug>',
+     /concept\.html\?k=/.test(src));
+  ok('F3 atlas-encyclopedia.js does NOT duplicate the corpus or the provision DB',
+     !/codex-data\.json/.test(src) && !/resolveProvision|getProvisionBrief/.test(code));
+  ok('F3 atlas-encyclopedia.js reads the concept document only via AtlasConcepts.load()',
+     /AtlasConcepts\.load\s*\(/.test(src) && /collectPlanned/.test(src));
+
+  // concept schema: optional curated latin[] — additive, NOT a second model
+  let cdoc;
+  try { cdoc = JSON.parse(fs.readFileSync(conceptsJsonPath, 'utf8')); ok('F3 atlas-concepts.json still valid JSON after latin[] addition', true); }
+  catch (e) { ok('F3 atlas-concepts.json still valid JSON after latin[] addition', false, String(e).slice(0, 140)); return; }
+
+  const published = Object.keys(cdoc.concepts || {}).filter(k => cdoc.concepts[k] && cdoc.concepts[k].status === 'published');
+  ok('F3 exactly the two known concepts are published (no concept invented to fill the UI)',
+     published.length === 2 && published.indexOf('lamoed') !== -1 && published.indexOf('nitikam') !== -1,
+     published.join(', '));
+  ok('F3 latin[] where present is an array of non-empty strings (curated, not auto-translated)',
+     published.every(k => {
+       const l = cdoc.concepts[k].latin;
+       return l == null || (Array.isArray(l) && l.every(t => typeof t === 'string' && t.trim()));
+     }));
+  ok('F3 curated cross-language terms are documented (terminologyNote present)',
+     typeof cdoc.terminologyNote === 'string' && cdoc.terminologyNote.length > 20);
+  ok('F3 no new relation/graph object introduced in the concept schema (still typed string refs)',
+     !/\bchildren\s*:/.test(fs.readFileSync(conceptsJsonPath, 'utf8')) &&
+     !/\bparentId\s*:/.test(fs.readFileSync(conceptsJsonPath, 'utf8')));
+
+  // atlas-concepts.js renders latin[] on the concept entry (only when present)
+  ok('F3 atlas-concepts.js renders latin[] on the concept entry, guarded by presence',
+     /concept\.latin\s*&&\s*concept\.latin\.length/.test(fs.readFileSync(conceptsJsPath, 'utf8')));
+
+  // functional: build the derived index from the real document
+  let ENC;
+  try {
+    require(path.join(ROOT, 'atlas-concepts.js'));
+    require(path.join(ROOT, 'atlas-encyclopedia.js'));
+    ENC = global.AtlasEncyclopedia;
+    ok('F3 window.AtlasEncyclopedia exposed with render + _internal', !!(ENC && ENC.render && ENC._internal));
+  } catch (e) { ok('F3 window.AtlasEncyclopedia exposed with render + _internal', false, String(e).slice(0, 140)); }
+
+  if (ENC && ENC._internal) {
+    const EI = ENC._internal;
+    const idx = EI.buildIndex(cdoc);
+    ok('F3 buildIndex derives terms only from published concepts',
+       idx.length >= 8 && idx.every(e => e.slug === 'lamoed' || e.slug === 'nitikam'), 'entries: ' + idx.length);
+    ok('F3 index covers Thai names + aliases + English + curated Latin',
+       ['primary', 'alias', 'en', 'latin'].every(kind => idx.some(e => e.kind === kind)));
+    ok('F3 Thai-aware grouping: consonant vs A–Z bucket',
+       EI.thaiInitial('ละเมิด') === 'ล' && EI.thaiInitial('Delictum') === null &&
+       EI.groupKey('Delictum') === 'A–Z');
+    const groups = EI.groupEntries(idx);
+    ok('F3 groups are ordered, A–Z bucket last',
+       groups.length >= 2 && groups[groups.length - 1].key === 'A–Z');
+    ok('F3 search matches Thai names, aliases AND English/Latin equivalents',
+       EI.search(idx, 'ละเมิด').length >= 4 &&
+       EI.search(idx, 'tort').some(e => e.slug === 'lamoed') &&
+       EI.search(idx, 'delictum').some(e => e.slug === 'lamoed') &&
+       EI.search(idx, 'zzz-none').length === 0);
+    ok('F3 empty query returns the whole index (full alphabetical view)',
+       EI.search(idx, '').length === idx.length);
+  }
+
+  // nav wiring — Encyclopedia is reachable from the rest of the Atlas
+  const encHtml = fs.readFileSync(htmlPath, 'utf8');
+  const iC = encHtml.indexOf('atlas-concepts.js');
+  const iE = encHtml.indexOf('atlas-encyclopedia.js');
+  ok('F3 encyclopedia.html loads atlas-concepts.js before atlas-encyclopedia.js',
+     iC !== -1 && iE !== -1 && iC < iE);
+  ok('F3 encyclopedia.html mounts on #atlas-root and does not fetch the corpus',
+     /id="atlas-root"/.test(encHtml) && !/codex-data\.json/.test(encHtml));
+  ok('F3 atlas.html links to the Encyclopedia',
+     /href="encyclopedia\.html"/.test(fs.readFileSync(path.join(ROOT, 'atlas.html'), 'utf8')));
+  ok('F3 concept.html links to the Encyclopedia (both directory and entry footers)',
+     (fs.readFileSync(path.join(ROOT, 'concept.html'), 'utf8').match(/encyclopedia\.html/g) || []).length >= 2);
+})();
+
 console.log('\n----------------------------------------');
 console.log('  RESULT:  ' + pass + ' passed, ' + fail + ' failed');
 console.log('----------------------------------------');

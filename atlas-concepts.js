@@ -464,6 +464,13 @@
       append(head, el('p', 'atlas-concept-aliases', 'เรียกอีกอย่างว่า: ' + concept.aliases.join(' · ')));
     }
 
+    // curated cross-language legal terminology (Encyclopedia F3): render only
+    // when present. titleEN is already shown beside the title; latin[] is an
+    // additive, deliberately-curated field (never an auto-translation).
+    if (concept.latin && concept.latin.length) {
+      append(head, el('p', 'atlas-concept-aliases', 'ละติน: ' + concept.latin.join(' · ')));
+    }
+
     // subject-area chips: reuse the registry taxonomy labels
     if (concept.subjectAreas && concept.subjectAreas.length) {
       var areas = el('div', 'atlas-concept-areas');

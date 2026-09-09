@@ -224,7 +224,7 @@
 <script src="atlas-core.js?v=20260908a"></script>
 <script src="atlas-clusters.js?v=20260909a"></script>
 <script src="atlas-provision-view.js?v=20260909b"></script>
-<script src="atlas-concepts.js?v=20260908d"></script>
+<script src="atlas-concepts.js?v=20260909e"></script>
 <script>
 (function () {
   'use strict';
@@ -252,7 +252,7 @@
     AtlasCore.loadRegistry('collections-registry.json?v=20260907d')
   ]).then(function (res) {
     AtlasCore.attachCorpus(res[0]);
-    return AtlasConcepts.render(root, slug, { url: 'atlas-concepts.json?v=20260908c' });
+    return AtlasConcepts.render(root, slug, { url: 'atlas-concepts.json?v=20260909e' });
   }).then(function () {
     renderFoot();
     if (window.CUReadingTools && typeof window.CUReadingTools.onRendered === 'function') {
@@ -265,10 +265,12 @@
 
   function renderFoot() {
     var nav = slug
-      ? '<a href="concept.html">↑ ดัชนีแนวคิดทั้งหมด</a> · ' +
+      ? '<a href="encyclopedia.html">ค้นในสารานุกรมคำกฎหมาย</a> · ' +
+        '<a href="concept.html">↑ ดัชนีแนวคิดทั้งหมด</a> · ' +
         '<a href="atlas.html">กลับสารบบโครงสร้าง (Atlas)</a> · ' +
         '<a href="codex-search.html">ค้นมาตรา</a>'
-      : '<a href="atlas.html">กลับสารบบโครงสร้าง (Atlas)</a> · ' +
+      : '<a href="encyclopedia.html">สารานุกรมคำกฎหมาย (ค้นหา · เรียงตามตัวอักษร)</a> · ' +
+        '<a href="atlas.html">กลับสารบบโครงสร้าง (Atlas)</a> · ' +
         '<a href="codex-search.html">ค้นมาตรา</a>';
     foot.innerHTML =
       '<div>' + nav + '</div>' +
