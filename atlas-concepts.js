@@ -330,6 +330,52 @@
     return nav;
   }
 
+  // ================================================================
+  // F7-C1 — make a concept's structural anchor path[] actionable
+  // ----------------------------------------------------------------
+  // Consumer of the shipped Phase-4B / F6 reveal contract. concept.html is
+  // always a CROSS-PAGE context (it never hosts the Atlas structure tree):
+  // hand the ordered structural node.value chain to atlas.html through the
+  // established sessionStorage['atlas:return'] key, then navigate to the
+  // collection route. The Atlas page already opens the ancestor chain and
+  // focuses the exact node on load. No new mechanism, no new dataset, no
+  // schema change; never writes location.hash or history.
+  // ================================================================
+  var ATLAS_RETURN_KEY = 'atlas:return';   // Phase-4B / F6 hand-off key
+
+  function anchorHash(an) {
+    if (!an || !an.collection) return null;
+    var inst = an.instrument || null;   // structuralAnchor carries no instrument today -> null
+    return '#/c/' + an.collection + (inst ? '/i/' + inst : '');
+  }
+
+  // the exact { hash, instrument, path } shape the Atlas restore contract consumes
+  function anchorReturnPayload(an) {
+    var hash = anchorHash(an);
+    if (!hash) return null;
+    return {
+      hash: hash,
+      instrument: (an && an.instrument) || null,
+      path: (an && Array.isArray(an.path)) ? an.path.slice() : []
+    };
+  }
+
+  // write the hand-off (best effort) then navigate to atlas.html#/c/<collection>
+  function activateAnchor(an) {
+    var payload = anchorReturnPayload(an);
+    if (!payload) return false;
+    try {
+      if (global.sessionStorage && payload.path.length) {
+        global.sessionStorage.setItem(ATLAS_RETURN_KEY, JSON.stringify(payload));
+      }
+    } catch (e) { /* no sessionStorage / blocked -> navigation still works, no reveal */ }
+    var dest = 'atlas.html' + payload.hash;
+    try { global.location.assign(dest); return true; }
+    catch (e) {
+      try { global.location.href = dest; return true; } catch (e2) { return false; }
+    }
+  }
+
   function renderAnchor(concept) {
     if (!concept.structuralAnchor || !concept.structuralAnchor.length) return null;
     var sec = el('section', 'atlas-concept-section atlas-concept-anchor');
@@ -343,6 +389,18 @@
       var a = el('a', 'atlas-concept-anchor-link');
       a.href = 'atlas.html#/c/' + encodeURIComponent(an.collection);
       a.textContent = colTitle + (an.path && an.path.length ? ' › ' + an.path.join(' › ') : '');
+      // F7-C1: an authored path[] becomes actionable — an unmodified activation
+      // hands the exact node to atlas.html and navigates; a modified click
+      // (new tab / window) keeps the plain href = collection route.
+      if (an.path && an.path.length) {
+        try { a.setAttribute('title', 'เปิดในสารบบกฎหมาย: ' + an.path.join(' › ')); } catch (e) { /* shim */ }
+        a.addEventListener('click', function (ev) {
+          if (ev && (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey ||
+                     (ev.button != null && ev.button !== 0))) return;
+          if (ev && ev.preventDefault) ev.preventDefault();
+          activateAnchor(an);
+        });
+      }
       append(line, a);
       append(sec, line);
       if (an.note) append(sec, el('p', 'atlas-concept-body', an.note));
@@ -704,6 +762,9 @@
       resolveRelated: resolveRelated,
       resolveProvisionRef: resolveProvisionRef,
       parseLectureRef: parseLectureRef,
+      anchorHash: anchorHash,
+      anchorReturnPayload: anchorReturnPayload,
+      activateAnchor: activateAnchor,
       caseKey: caseKey,
       allProvisionRefs: allProvisionRefs,
       deriveCases: deriveCases,

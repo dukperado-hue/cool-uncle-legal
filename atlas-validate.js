@@ -1322,6 +1322,100 @@ head('F6 — Provision Context in the F1 Reader');
      !/atlas-provision-view\.js\?v=20260909c/.test(ah) && !/atlas-provision-view\.js\?v=20260909c/.test(ch));
 })();
 
+// ============================================================ F7-C1
+head('F7-C1 — Concept structural anchors are actionable (path -> exact node)');
+(function () {
+  const jsPath = path.join(ROOT, 'atlas-concepts.js');
+  const jsonPath = path.join(ROOT, 'atlas-concepts.json');
+  const rawJson = fs.readFileSync(jsonPath, 'utf8');
+  let cdoc;
+  try { cdoc = JSON.parse(rawJson); }
+  catch (e) { ok('F7-C1 atlas-concepts.json parses', false, String(e).slice(0, 140)); return; }
+
+  // --- the focused rule: every authored structuralAnchor.path is a real,
+  //     fully-prefixed ancestor chain in the LIVE structure tree for its
+  //     collection. Catches all four failure modes:
+  //       unknown collection · empty path · invalid node value · broken prefix
+  function nodePathSet(collection) {
+    let tree;
+    try { tree = AtlasCore.getStructureTree(collection); } catch (e) { return null; }
+    if (!tree || !Array.isArray(tree.nodes)) return null;   // unknown / structureless
+    const set = new Set();
+    (function w(ns) {
+      (ns || []).forEach(n => {
+        if (Array.isArray(n.path)) set.add(JSON.stringify(n.path));
+        if (n.children) w(n.children);
+      });
+    })(tree.nodes);
+    return set;
+  }
+  function anchorProblem(a) {
+    if (!a || !a.collection) return 'missing collection';
+    const set = nodePathSet(a.collection);
+    if (!set || set.size === 0) return 'unknown/structureless collection "' + a.collection + '"';
+    if (!Array.isArray(a.path) || a.path.length === 0) return 'empty path';
+    for (let i = 1; i <= a.path.length; i++) {
+      if (!set.has(JSON.stringify(a.path.slice(0, i)))) {
+        return 'path prefix not a real node: ' + JSON.stringify(a.path.slice(0, i));
+      }
+    }
+    return null;
+  }
+
+  const anchors = [];
+  for (const [slug, c] of Object.entries(cdoc.concepts || {})) {
+    (c.structuralAnchor || []).forEach(a => anchors.push({ slug, problem: anchorProblem(a) }));
+  }
+  const bad = anchors.filter(x => x.problem);
+  ok('F7-C1 every authored structuralAnchor.path is a real, fully-prefixed structure-tree chain',
+     bad.length === 0,
+     bad.length ? bad.map(x => x.slug + ': ' + x.problem).join(' | ')
+                : anchors.length + ' anchors across ' +
+                  Object.keys(cdoc.concepts || {}).length + ' concepts OK');
+
+  // negative controls — the rule actually rejects the four failure modes
+  ok('F7-C1 rule rejects unknown collection / empty path / bad node value / broken prefix',
+     !!anchorProblem({ collection: 'no-such-collection', path: ['x'] }) &&
+     !!anchorProblem({ collection: 'civil', path: [] }) &&
+     !!anchorProblem({ collection: 'civil', path: ['บรรพ 999'] }) &&
+     !!anchorProblem({ collection: 'civil', path: ['ลักษณะ 5', 'บรรพ 2'] }));
+
+  // the golden anchor resolves through the real tree
+  const lamoedAnchor = ((cdoc.concepts || {}).lamoed || {}).structuralAnchor || [];
+  ok('F7-C1 lamoed -> civil -> ["บรรพ 2","ลักษณะ 5"] resolves through the live structure tree',
+     lamoedAnchor.some(a => a.collection === 'civil' &&
+       JSON.stringify(a.path) === JSON.stringify(['บรรพ 2', 'ลักษณะ 5'])) &&
+     anchorProblem({ collection: 'civil', path: ['บรรพ 2', 'ลักษณะ 5'] }) === null);
+
+  // --- source contract: the consumer reuses the shipped hand-off only
+  const src = fs.readFileSync(jsPath, 'utf8');
+  const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+  ok('F7-C1 atlas-concepts.js hands off via sessionStorage[\'atlas:return\'] then location.assign(atlas.html#/c/<collection>)',
+     /sessionStorage/.test(code) && /['"]atlas:return['"]/.test(code) &&
+     /location\s*\.\s*assign\s*\(/.test(code) &&
+     /['"]atlas\.html['"]\s*\+\s*payload\.hash/.test(code));
+  ok('F7-C1 activation payload is the { hash, instrument, path } restore shape (no invented instrument)',
+     /hash\s*:/.test(code) && /instrument\s*:/.test(code) && /path\s*:/.test(code) &&
+     /an\.instrument\s*\|\|\s*null/.test(code));
+  ok('F7-C1 adds NO new route grammar / no location.hash / no history write / no AtlasUI reach',
+     !/\blocation\s*\.\s*hash\b/.test(code) &&
+     !/\bhistory\s*\.\s*(pushState|replaceState)\s*\(/.test(code) &&
+     !/\bAtlasUI\b/.test(code));
+  ok('F7-C1 adds NO schema field to atlas-concepts.json',
+     !/"instrument"\s*:/.test(rawJson) &&
+     !/"structuralNode"|"anchorPayload"|"revealPath"/.test(rawJson));
+
+  // host cache-bust for the changed module
+  const ah2 = fs.readFileSync(path.join(ROOT, 'atlas.html'), 'utf8');
+  const ch2 = fs.readFileSync(path.join(ROOT, 'concept.html'), 'utf8');
+  const eh2 = fs.readFileSync(path.join(ROOT, 'encyclopedia.html'), 'utf8');
+  ok('F7-C1 atlas.html + concept.html + encyclopedia.html bumped atlas-concepts.js ?v to 20260910a',
+     /atlas-concepts\.js\?v=20260910a/.test(ah2) &&
+     /atlas-concepts\.js\?v=20260910a/.test(ch2) &&
+     /atlas-concepts\.js\?v=20260910a/.test(eh2) &&
+     !/atlas-concepts\.js\?v=20260909e/.test(ah2 + ch2 + eh2));
+})();
+
 console.log('\n----------------------------------------');
 console.log('  RESULT:  ' + pass + ' passed, ' + fail + ' failed');
 console.log('----------------------------------------');
