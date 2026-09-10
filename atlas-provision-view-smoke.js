@@ -531,13 +531,17 @@ run('extra. cancelled provision shows the "ยกเลิกแล้ว" badge
   ok(/ยกเลิกแล้ว/.test(I.panelEl().textContent), 'badge shown');
 });
 
-// ---- extra: "เปิดหน้าเต็ม" points at the unchanged legacy viewer + x=atlas ----
-run('extra. "เปิดหน้าเต็ม" link = codex-article-viewer.html?id=criminal_288&x=atlas', () => {
+// ---- extra: the legacy reading-tools fallback link (F11.2 relabel) ----
+// href + x=atlas marker are the unchanged compatibility URL; only the visible
+// label changed, to read as an explicit legacy fallback rather than the
+// primary provision action.
+run('extra. legacy fallback link = codex-article-viewer.html?id=criminal_288&x=atlas + honest label', () => {
   resetAll();
   const a = makePill('criminal_288');
   fireRootClick(a);
   const full = I.panelEl().querySelector('.atlas-provision-view-full');
   eq(full.getAttribute('href'), 'codex-article-viewer.html?id=criminal_288&x=atlas');
+  eq(full.textContent, 'อ่านแบบเต็ม (เสียง · พิมพ์ · ไฮไลต์) →');
 });
 
 // ---- extra: hashchange while open closes the panel (route changed underneath) ----
@@ -567,6 +571,91 @@ global.sessionStorage = {
   removeItem: (k) => { delete _ss[k]; },
 };
 locationObj.assign = (u) => applyUrl(u);
+
+// ================================================================
+// F11.2 / F11.2-FIX — lossless Atlas → legacy → Atlas provision round-trip.
+// The recovery ref lives under its OWN sessionStorage key `atlas:return:a`
+// (NOT a field inside `atlas:return`, which atlas-ui.js owns and fully
+// replaces on every render). These tests exercise that isolated contract.
+// ================================================================
+const RPKEY = 'atlas:return:a';
+function ssClear() {
+  try { global.sessionStorage.removeItem('atlas:return'); } catch (e) {}
+  try { global.sessionStorage.removeItem(RPKEY); } catch (e) {}
+}
+
+// Test 1 — the legacy fallback click writes the isolated key, not atlas:return
+run('F11.2-1. fallback click writes atlas:return:a and does NOT touch atlas:return', () => {
+  resetAll(); I.reset(); ssClear();
+  const preObj = { hash: '#/c/civil', keys: ['บรรพ 2¦ลักษณะ 5'], instrument: null };
+  global.sessionStorage.setItem('atlas:return', JSON.stringify(preObj));
+  applyUrl('/atlas.html#/c/civil');
+  const a = makePill('civil_420');
+  fireRootClick(a);
+  I.panelEl().querySelector('.atlas-provision-view-full')._fire('click', { type: 'click' });
+  eq(global.sessionStorage.getItem(RPKEY), 'civil_420', 'ref written to the isolated key');
+  eq(global.sessionStorage.getItem('atlas:return'), JSON.stringify(preObj),
+     'atlas:return object is byte-for-byte untouched (AtlasUI still owns it)');
+});
+
+// Test 2 — Atlas init() recovers from atlas:return:a when the URL has no ?a=
+run('F11.2-2. init() recovers civil_420 on #/c/civil from atlas:return:a', () => {
+  resetAll(); I.reset(); ssClear();
+  global.sessionStorage.setItem(RPKEY, 'civil_420');
+  global.sessionStorage.setItem('atlas:return',
+    JSON.stringify({ hash: '#/c/civil', keys: ['บรรพ 2¦ลักษณะ 5'] }));
+  applyUrl('/atlas.html#/c/civil');
+  historyStack[historyStack.length - 1] = { url: '/atlas.html#/c/civil', state: null };
+  APV.init({ root: atlasRoot });
+  ok(APV.isOpen(), 'drawer opened by recovery');
+  eq(I.current().number, '420', 'recovered the right provision');
+  eq(location.search, '?a=civil_420', 'URL now carries ?a=<ref>');
+  eq(location.hash, '#/c/civil', 'structural hash unchanged');
+  eq(global.sessionStorage.getItem(RPKEY), null, 'recovery key consumed one-shot');
+  eq(global.sessionStorage.getItem('atlas:return'),
+     JSON.stringify({ hash: '#/c/civil', keys: ['บรรพ 2¦ลักษณะ 5'] }),
+     'atlas:return object not rewritten or deleted by recovery');
+});
+
+// Test 3 — one-shot: after recovery, re-init with no ?a= does not reopen
+run('F11.2-3. recovery is one-shot — a second init with no ?a= does not reopen', () => {
+  resetAll(); I.reset(); ssClear();
+  global.sessionStorage.setItem(RPKEY, 'civil_420');
+  applyUrl('/atlas.html#/c/civil');
+  historyStack[historyStack.length - 1] = { url: '/atlas.html#/c/civil', state: null };
+  APV.init({ root: atlasRoot });
+  ok(APV.isOpen() && I.current().number === '420', 'first init recovered civil_420');
+  eq(global.sessionStorage.getItem(RPKEY), null, 'key consumed');
+  // simulate a plain reload of the bare collection route
+  I.reset();
+  applyUrl('/atlas.html#/c/civil');
+  historyStack[historyStack.length - 1] = { url: '/atlas.html#/c/civil', state: null };
+  APV.init({ root: atlasRoot });
+  ok(!APV.isOpen(), 'second init does NOT reopen — nothing left to recover');
+});
+
+// Test 4 — collection guard: a saved civil ref must NOT open on a criminal route
+run('F11.2-4. collection guard — atlas:return:a for another collection neither opens nor is consumed', () => {
+  resetAll(); I.reset(); ssClear();
+  global.sessionStorage.setItem(RPKEY, 'civil_420');
+  applyUrl('/atlas.html#/c/criminal');
+  historyStack[historyStack.length - 1] = { url: '/atlas.html#/c/criminal', state: null };
+  APV.init({ root: atlasRoot });
+  ok(!APV.isOpen(), 'drawer did NOT open on the mismatched collection');
+  ok(location.search.indexOf('a=civil_420') === -1, 'URL did not gain ?a=civil_420');
+  eq(global.sessionStorage.getItem(RPKEY), 'civil_420', 'ref left intact for a later matching visit');
+});
+
+// Test 5 — regression: an unrelated atlas:return write (as atlas-ui.js does on
+// every render / persistReturn) must NOT destroy atlas:return:a
+run('F11.2-5. AtlasUI-style {hash,keys} write to atlas:return does not touch atlas:return:a', () => {
+  resetAll(); I.reset(); ssClear();
+  global.sessionStorage.setItem(RPKEY, 'civil_420');
+  // exactly what atlas-ui.js persistReturn() does:
+  global.sessionStorage.setItem('atlas:return',
+    JSON.stringify({ hash: '#/c/civil', keys: ['¦บรรพ 1', '¦บรรพ 2'] }));
+  eq(global.sessionStorage.getItem(RPKEY), 'civil_420', 'isolated recovery ref survives');
+});
 
 function openOn(hash, id) {
   resetAll(); I.reset();

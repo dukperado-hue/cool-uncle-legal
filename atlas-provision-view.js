@@ -41,6 +41,7 @@
 
   var ROOT_ID = 'atlas-root';
   var PARAM = 'a';                 // ?a=<collection>_<number>  (self-sufficient; bare number also read)
+  var RETURN_PROVISION_KEY = 'atlas:return:a'; // F11.2 — ISOLATED recovery ref; NOT inside atlas:return (AtlasUI owns that)
   var CASE_INDEX_URL = 'prototype/assets/cases/article-case-index.json';
   var STYLE_ID = 'atlas-provision-view-style';
   var PILL_SELECTOR = 'a.atlas-provision';
@@ -174,6 +175,60 @@
   function urlWithoutParam() {
     var loc = global.location;
     return (loc.pathname || '') + buildSearch(null) + (loc.hash || '');
+  }
+
+  // ================================================================
+  // F11.2 — lossless legacy-fallback round-trip.
+  //
+  // The PRIMARY path is the URL: the legacy viewer's "← กลับไป" carries
+  // ?a=<collection>_<number>, which init()'s existing ?a= branch reopens.
+  //
+  // The RECOVERY path here is a safety net for a legacy return that arrives
+  // WITHOUT ?a= (an older cached viewer, a stripped URL). It stores the open
+  // provision under its OWN sessionStorage key `atlas:return:a` — deliberately
+  // NOT a field inside `atlas:return`, because atlas-ui.js owns that object and
+  // fully replaces it ({hash,keys}) on every render / persistReturn(), which
+  // would destroy an `a` field before AtlasProvisionView.init() could read it.
+  // The isolated key survives AtlasUI mount / render / tree-toggle / nav.
+  // ================================================================
+  function readRecoveryRef() {
+    try { return global.sessionStorage.getItem(RETURN_PROVISION_KEY) || null; }
+    catch (e) { return null; }
+  }
+
+  // remove the one-shot recovery ref (whole key). Called only after the round
+  // trip is genuinely satisfied — a real recovery open, or the URL ?a= path.
+  function consumeRecoveryRef() {
+    try { global.sessionStorage.removeItem(RETURN_PROVISION_KEY); }
+    catch (e) { /* ignore */ }
+  }
+
+  // Record the open provision just before the browser leaves for the legacy
+  // reading tools. Touches ONLY the isolated key — never `atlas:return`.
+  function writeFallbackReturn(resolved) {
+    var ref = refOf(resolved);
+    if (!ref) return;
+    try { global.sessionStorage.setItem(RETURN_PROVISION_KEY, ref); }
+    catch (e) { /* storage unavailable — the legacy viewer falls back to its ?id= */ }
+  }
+
+  // one-shot recovery: ONLY when there is no ?a= param, the saved ref is valid,
+  // and it belongs to the collection the current Atlas view is showing. A stale
+  // ref from another visit must never open a provision on an unrelated route,
+  // and must NOT be consumed — it may become valid once the user returns to the
+  // matching collection.
+  function recoverFromReturn() {
+    var ref = readRecoveryRef();
+    if (!ref) return;
+    var parsed = parseParam(ref);
+    if (!parsed || parsed.number == null || parsed.number === '') return;
+    var route = currentRoute();
+    var collection = parsed.collection || route.collection;
+    if (!route.collection || !collection || collection !== route.collection) return; // guard — leave intact
+    var resolved = resolve(collection, parsed.number, parsed.instrument || route.instrument);
+    if (!resolved) return;                        // unknown article — leave state intact
+    consumeRecoveryRef();                         // one-shot: consume only on a real recovery
+    openFresh(resolved, { history: 'replace' });  // ?a=<ref>, hash untouched, no AtlasUI re-render
   }
 
   // ================================================================
@@ -604,12 +659,23 @@
     var adj = adjacentEl(resolved);
     if (adj) body.appendChild(adj);
 
-    var full = make('a', 'atlas-provision-view-full', 'เปิดหน้าเต็ม →');
-    // Use the viewer URL AtlasCore already computed; only append the ?x=atlas
-    // navigation marker the legacy viewer expects.
+    // F11.2 — explicit, honestly-labelled fallback to the legacy reading tools
+    // (เสียง / พิมพ์ / ไฮไลต์ / คำสำคัญ / ความถี่ข้อสอบ / ฎีกา / ตัวอย่าง) that the
+    // Atlas drawer does not provide. NOT the primary provision action; it sits
+    // after previous/next. The provision identity + x=atlas marker stay exactly
+    // as AtlasCore computed them — this remains the compatibility URL.
+    var full = make('a', 'atlas-provision-view-full', 'อ่านแบบเต็ม (เสียง · พิมพ์ · ไฮไลต์) →');
     var vu = resolved.viewerUrl || ('codex-article-viewer.html?id=' +
       encodeURIComponent(resolved.legacyId || (resolved.collection + '_' + resolved.number)));
     full.setAttribute('href', vu + (vu.indexOf('?') === -1 ? '?' : '&') + 'x=atlas');
+    // Record the open provision under the isolated key `atlas:return:a` just
+    // before the browser leaves, so a legacy return that lands WITHOUT ?a=
+    // (older viewer / stripped URL) can still be recovered by init(). The
+    // normal legacy "← กลับไป" carries ?a= and needs no storage. Never
+    // preventDefault — the legacy navigation proceeds normally.
+    full.addEventListener('click', function () {
+      try { writeFallbackReturn(resolved); } catch (e) { /* never block navigation */ }
+    });
     body.appendChild(full);
 
     panel.appendChild(body);
@@ -857,12 +923,17 @@
     if (p) {
       var route = currentRoute();
       var resolved = resolve(p.collection || route.collection, p.number, p.instrument || route.instrument);
-      if (resolved) openFresh(resolved, { history: 'replace' });
-      else {
+      if (resolved) {
+        openFresh(resolved, { history: 'replace' });
+        consumeRecoveryRef();   // F11.2 — the URL ?a= satisfied the round-trip
+      } else {
         // unknown article in a deep link — fail soft: strip only the param,
         // keep every sibling param (e.g. concept.html's ?k=<slug>)
         try { global.history.replaceState({}, '', urlWithoutParam()); } catch (e) { /* ignore */ }
       }
+    } else {
+      // F11.2 — one-shot recovery after an explicit legacy-fallback round-trip
+      recoverFromReturn();
     }
   }
 
