@@ -258,6 +258,13 @@
   var root = document.getElementById('atlas-root');
   var foot = document.getElementById('atlas-foot');
 
+  // Prime the Concept dataset with the same cache-bust token the Concept pages
+  // (concept.html / encyclopedia.html) use, so the Atlas F4/F5 consumers — which
+  // call AtlasConcepts.load() with no URL — never fetch a stale unversioned copy.
+  if (window.AtlasConcepts && typeof AtlasConcepts.load === 'function') {
+    AtlasConcepts.load('atlas-concepts.json?v=20260910a');
+  }
+
   Promise.all([
     fetch('codex-data.json?v=' + CODEX_VERSION).then(function (r) {
       if (!r.ok) throw new Error('codex-data.json ' + r.status); return r.json();
