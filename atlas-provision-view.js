@@ -335,6 +335,12 @@
       '  padding:1px 8px;border-radius:999px;background:var(--chip,#f2ede1);color:var(--muted,#5b6472);',
       '  vertical-align:middle;}',
       '.atlas-provision-view-collection{margin:0 0 14px;font-size:12px;color:var(--muted,#5b6472);}',
+      // F11.3.2 — exam-frequency line: subordinate, sits under the heading
+      '.atlas-provision-view-examfreq{margin:0 0 12px;font-size:11.5px;line-height:1.5;',
+      '  color:var(--muted,#5b6472);display:flex;align-items:baseline;gap:6px;}',
+      '.atlas-provision-view-examfreq-stars{color:var(--accent,#2E4A7A);font-size:11px;',
+      '  letter-spacing:1px;flex:none;}',
+      '.atlas-provision-view-examfreq-text{min-width:0;}',
       '.atlas-provision-view-text{font-size:15px;line-height:1.95;color:var(--ink,#1f2430);}',
       '.atlas-provision-view-text p{margin:0 0 .85em;}',
       '.atlas-provision-view-text p:last-child{margin-bottom:0;}',
@@ -660,6 +666,43 @@
     return box;
   }
 
+  // ================================================================
+  // F11.3.2 — exam-frequency badge
+  //
+  // Faithful to the legacy article-viewer, which renders
+  //   examFreq {count, stars}  →  ★×stars  (title "ออกสอบเนติ <count> ครั้ง")
+  // `count` = how many times the provision has been examined in the
+  // เนติบัณฑิต (Thai Bar) exam; `stars` is the legacy 1–3 tier of that count
+  // (1: count 1 · 2: count 2–3 · 3: count 4+). We keep BOTH meanings:
+  //   - a readable count sentence carries the signal for assistive tech and
+  //     works without colour (STEP 5),
+  //   - the stars are a decorative tier indicator, aria-hidden.
+  // Never a percentage / ranking / probability / "importance" score. Not
+  // interactive. Renders nothing (returns null) when examFreq is absent,
+  // null, malformed, or non-positive — the drawer is otherwise untouched.
+  // ================================================================
+  function examFreqEl(resolved) {
+    var ef = resolved && resolved.article && resolved.article.examFreq;
+    if (!ef || typeof ef !== 'object' || _isArray(ef)) return null;
+    var count = Number(ef.count);
+    if (!isFinite(count) || count <= 0) return null;
+    var stars = Math.round(Number(ef.stars));
+    if (!isFinite(stars) || stars < 1) stars = 1;
+    if (stars > 5) stars = 5;
+
+    var wrap = make('p', 'atlas-provision-view-examfreq');
+    var starEl = make('span', 'atlas-provision-view-examfreq-stars',
+      new Array(stars + 1).join('★'));
+    starEl.setAttribute('aria-hidden', 'true');
+    wrap.appendChild(starEl);
+    wrap.appendChild(make('span', 'atlas-provision-view-examfreq-text',
+      'ออกสอบเนติ ' + count + ' ครั้ง'));
+    return wrap;
+  }
+  function _isArray(x) {
+    return Object.prototype.toString.call(x) === '[object Array]';
+  }
+
   function adjacentEl(resolved) {
     var nav = make('nav', 'atlas-provision-view-adjacent');
     var adj = adjacent(resolved.collection, resolved.storageKey);
@@ -740,6 +783,11 @@
       h.appendChild(make('span', 'atlas-provision-view-badge', 'ยกเลิกแล้ว'));
     }
     body.appendChild(h);
+
+    // F11.3.2 — read-only exam-frequency signal, subordinate to the heading.
+    // Renders nothing when the provision has no examFreq (fail-soft).
+    var ef = examFreqEl(resolved);
+    if (ef) body.appendChild(ef);
 
     body.appendChild(make('p', 'atlas-provision-view-collection',
       resolved.collectionTitle || resolved.collection));
@@ -1079,6 +1127,7 @@
       formattedTextEl: textEl,
       appendLinkedText: appendLinkedText,
       matraRefRe: matraRefRe,
+      examFreqEl: examFreqEl,
       publicCasesFrom: publicCasesFrom,
       closestProvisionAnchor: closestProvisionAnchor,
       openProvision: openProvision,

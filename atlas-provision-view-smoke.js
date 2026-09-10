@@ -817,6 +817,99 @@ run('F11.3.1A-9. xref href is the unchanged canonical viewer id', () => {
   eq(m35.getAttribute('href'), 'codex-article-viewer.html?id=civil_35&x=atlas');
 });
 
+// ================================================================
+// F11.3.2 — exam-frequency badge (read-only, subordinate to the heading)
+// ================================================================
+const ef = (o) => I.examFreqEl(o);
+
+run('F11.3.2-1. provision WITH examFreq → star tier + readable count sentence', () => {
+  const panel = openProv('#/c/criminal', 'criminal_288');   // {count:17, stars:3}
+  const box = panel.querySelector('.atlas-provision-view-examfreq');
+  ok(box, 'examfreq element present');
+  ok(/ออกสอบเนติ 17 ครั้ง/.test(box.textContent), 'readable count sentence — got ' + box.textContent);
+  const stars = box.querySelector('.atlas-provision-view-examfreq-stars');
+  ok(stars, 'star element present');
+  eq(stars.textContent, '★★★', '3 stars for stars:3 (legacy semantics)');
+  eq(stars.getAttribute('aria-hidden'), 'true', 'decorative stars hidden from assistive tech');
+});
+run('F11.3.2-2. provision WITHOUT examFreq → no badge, drawer otherwise normal', () => {
+  const panel = openProv('#/c/civil', 'civil_34');   // civil 34 has no examFreq
+  ok(!panel.querySelector('.atlas-provision-view-examfreq'), 'no examfreq element');
+  ok(panel.querySelector('.atlas-provision-view-text'), 'formatted text still rendered');
+  ok(/มาตรา 34/.test(panel.querySelector('.atlas-provision-view-heading').textContent), 'heading intact');
+  ok(panel.querySelectorAll('a.atlas-provision-view-xref').length >= 1, 'cross-references still work');
+});
+run('F11.3.2-3. null / malformed / non-positive examFreq → fail-soft (null), no throw', () => {
+  const mk = (v) => ef({ collection: 'civil', number: '1', article: { text: 'x', examFreq: v } });
+  eq(mk(null), null, 'null');
+  eq(mk(undefined), null, 'undefined / missing');
+  eq(mk({}), null, 'empty object (no count)');
+  eq(mk({ count: null, stars: 2 }), null, 'count null');
+  eq(mk({ count: 'abc', stars: 1 }), null, 'count non-numeric');
+  eq(mk({ count: 0, stars: 1 }), null, 'count zero');
+  eq(mk({ count: -3, stars: 1 }), null, 'count negative');
+  eq(mk([1, 2, 3]), null, 'array, not the {count,stars} shape');
+  eq(ef({ collection: 'civil', number: '1', article: null }), null, 'no article');
+  eq(ef(null), null, 'no resolved object');
+});
+run('F11.3.2-4. star tier = examFreq.stars, count text = examFreq.count (no reinterpretation)', () => {
+  const one = ef({ collection: 'civil', number: '6', article: { examFreq: { count: 1, stars: 1 } } });
+  eq(one.querySelector('.atlas-provision-view-examfreq-stars').textContent, '★');
+  ok(/ออกสอบเนติ 1 ครั้ง/.test(one.textContent));
+  const two = ef({ collection: 'civil', number: '4', article: { examFreq: { count: 3, stars: 2 } } });
+  eq(two.querySelector('.atlas-provision-view-examfreq-stars').textContent, '★★');
+  ok(/ออกสอบเนติ 3 ครั้ง/.test(two.textContent), 'count text is the raw count, not a % / rank');
+  // defensive clamp: absurd stars value never explodes the row
+  const wild = ef({ collection: 'civil', number: '4', article: { examFreq: { count: 4, stars: 99 } } });
+  eq(wild.querySelector('.atlas-provision-view-examfreq-stars').textContent.length, 5, 'stars clamped to 5');
+});
+run('F11.3.2-5. examFreq line sits between the heading and the collection line', () => {
+  const panel = openProv('#/c/criminal', 'criminal_288');
+  const kids = panel.querySelector('.atlas-provision-view-body').children.map(c => c.className);
+  const iH = kids.indexOf('atlas-provision-view-heading');
+  const iE = kids.indexOf('atlas-provision-view-examfreq');
+  const iC = kids.indexOf('atlas-provision-view-collection');
+  ok(iH !== -1 && iE !== -1 && iC !== -1 && iH < iE && iE < iC,
+     'order heading < examfreq < collection — got ' + JSON.stringify(kids));
+});
+run('F11.3.2-6. cancelled provision without examFreq: ยกเลิกแล้ว badge intact, no examfreq', () => {
+  const panel = openProv('#/c/civil', 'civil_1103');   // cancelled, no examFreq
+  ok(/ยกเลิกแล้ว/.test(panel.querySelector('.atlas-provision-view-heading').textContent), 'cancelled badge present');
+  ok(!panel.querySelector('.atlas-provision-view-examfreq'), 'no examfreq (civil 1103 has none)');
+});
+run('F11.3.2-6b. cancelled provision WITH examFreq: both signals render', () => {
+  const panel = openProv('#/c/crimpro', 'crimpro_136');   // cancelled + {count:1,stars:1}
+  ok(/ยกเลิกแล้ว/.test(panel.querySelector('.atlas-provision-view-heading').textContent), 'cancelled badge');
+  const box = panel.querySelector('.atlas-provision-view-examfreq');
+  ok(box && /ออกสอบเนติ 1 ครั้ง/.test(box.textContent), 'examfreq also shown');
+});
+run('F11.3.2-7. examFreq line is not interactive (no <a>, no <button>)', () => {
+  const box = openProv('#/c/criminal', 'criminal_288').querySelector('.atlas-provision-view-examfreq');
+  eq(box.tagName, 'P');
+  eq(box.querySelectorAll('a').length, 0);
+  eq(box.querySelectorAll('button').length, 0);
+});
+run('F11.3.2-8. badge coexists with formatted text; ?a= and location.hash unchanged', () => {
+  const panel = openProv('#/c/civil', 'civil_4');   // {count:2,stars:2}, 2 chunks
+  ok(panel.querySelector('.atlas-provision-view-examfreq'), 'badge present');
+  ok(panel.querySelectorAll('.atlas-provision-view-para-label').length >= 2, 'text still formatted');
+  eq(location.hash, '#/c/civil', 'location.hash unchanged');
+  eq(I.readParam(), 'civil_4', '?a= still qualifies the current provision');
+  ok(APV.isOpen() && !!I.wrapEl(), 'still exactly one drawer instance, still open');
+});
+run('F11.3.2-9. F11.2 recovery + concept host regression still hold with the badge in place', () => {
+  // concept.html host, deep link with sibling ?k=
+  resetAll(); I.reset();
+  try { global.sessionStorage.removeItem('atlas:return:a'); } catch (e) {}
+  applyUrl('/concept.html?k=lamoed&a=civil_420');   // {count:18, stars:3}
+  historyStack[historyStack.length - 1] = { url: '/concept.html?k=lamoed&a=civil_420', state: null };
+  APV.init({ root: atlasRoot });
+  ok(APV.isOpen(), 'drawer open on concept.html');
+  const box = I.panelEl().querySelector('.atlas-provision-view-examfreq');
+  ok(box && /ออกสอบเนติ 18 ครั้ง/.test(box.textContent), 'badge renders on the concept host too');
+  ok(/\?k=lamoed(&|$)/.test(location.search), 'sibling ?k= preserved');
+});
+
 function openOn(hash, id) {
   resetAll(); I.reset();
   applyUrl('/atlas.html' + hash);
