@@ -158,11 +158,14 @@ run('1b. groupKey / groupRank ordering', () => {
 const INDEX = EI.buildIndex(CONCEPT_DOC);
 
 run('2. buildIndex derives entries only from PUBLISHED concepts', () => {
+  const published = Object.keys(CONCEPT_DOC.concepts).filter(k => CONCEPT_DOC.concepts[k].status === 'published');
   ok(INDEX.length >= 8, 'expected a handful of terms, got ' + INDEX.length);
-  ok(INDEX.every(e => e.slug === 'lamoed' || e.slug === 'nitikam'),
-     'only the two published concepts contribute terms');
+  ok(INDEX.every(e => published.indexOf(e.slug) !== -1),
+     'only published concepts contribute terms');
   const primaries = INDEX.filter(e => e.kind === 'primary').map(e => e.term).sort();
-  eq(JSON.stringify(primaries), JSON.stringify(['นิติกรรม', 'ละเมิด']));
+  eq(JSON.stringify(primaries),
+     JSON.stringify(published.map(k => CONCEPT_DOC.concepts[k].titleTH).sort()),
+     'one primary term per published concept');
 });
 
 run('2b. Thai names, aliases, English and Latin are all indexed', () => {
@@ -249,10 +252,13 @@ function asyncTests() {
     });
 
     run('4b. every term links to the FROZEN concept-entry URL concept.html?k=<slug>', () => {
+      const published = Object.keys(CONCEPT_DOC.concepts).filter(k => CONCEPT_DOC.concepts[k].status === 'published');
       const links = atlasRoot.querySelectorAll('a.atlas-enc-term');
       ok(links.length >= 8, 'term links rendered, got ' + links.length);
-      ok(links.every(a => /^concept\.html\?k=(lamoed|nitikam)$/.test(a.href)),
-         'links: ' + links.map(a => a.href).join(', '));
+      ok(links.every(a => {
+        const m = /^concept\.html\?k=([a-z][a-z0-9-]*)$/.exec(a.href);
+        return m && published.indexOf(m[1]) !== -1;
+      }), 'links: ' + links.map(a => a.href).join(', '));
     });
 
     run('4c. secondary entries (alias/en/latin) show a "→ canonical" pointer', () => {

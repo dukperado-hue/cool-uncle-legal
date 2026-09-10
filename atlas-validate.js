@@ -978,8 +978,15 @@ head('Finalization 3 — Encyclopedia (discovery layer over the Concept layer)')
   catch (e) { ok('F3 atlas-concepts.json still valid JSON after latin[] addition', false, String(e).slice(0, 140)); return; }
 
   const published = Object.keys(cdoc.concepts || {}).filter(k => cdoc.concepts[k] && cdoc.concepts[k].status === 'published');
-  ok('F3 exactly the two known concepts are published (no concept invented to fill the UI)',
-     published.length === 2 && published.indexOf('lamoed') !== -1 && published.indexOf('nitikam') !== -1,
+  ok('F3 every published concept carries a real authored body (no stub promoted to fill the UI)',
+     published.length >= 2 &&
+     published.indexOf('lamoed') !== -1 && published.indexOf('nitikam') !== -1 &&
+     published.every(k => {
+       const c = cdoc.concepts[k];
+       return Array.isArray(c.sections) && c.sections.length >= 3 &&
+              Array.isArray(c.provisions) && c.provisions.length >= 8 &&
+              Array.isArray(c.structuralAnchor) && c.structuralAnchor.length >= 1;
+     }),
      published.join(', '));
   ok('F3 latin[] where present is an array of non-empty strings (curated, not auto-translated)',
      published.every(k => {
@@ -1009,7 +1016,7 @@ head('Finalization 3 — Encyclopedia (discovery layer over the Concept layer)')
     const EI = ENC._internal;
     const idx = EI.buildIndex(cdoc);
     ok('F3 buildIndex derives terms only from published concepts',
-       idx.length >= 8 && idx.every(e => e.slug === 'lamoed' || e.slug === 'nitikam'), 'entries: ' + idx.length);
+       idx.length >= 8 && idx.every(e => published.indexOf(e.slug) !== -1), 'entries: ' + idx.length);
     ok('F3 index covers Thai names + aliases + English + curated Latin',
        ['primary', 'alias', 'en', 'latin'].every(kind => idx.some(e => e.kind === kind)));
     ok('F3 Thai-aware grouping: consonant vs A–Z bucket',
@@ -1106,8 +1113,8 @@ head('F4 — Provision-to-Concept Backlinks');
        PC._internal.conceptsForProvision('civil_149').some(c => c.slug === 'nitikam'));
 
     const c5 = PC._internal.conceptsForProvision('civil_5').map(c => c.slug).sort();
-    ok('F4 a provision may map to MANY concepts (civil_5 ∈ lamoed & nitikam)',
-       JSON.stringify(c5) === JSON.stringify(['lamoed', 'nitikam']));
+    ok('F4 a provision may map to MANY concepts (civil_5 ∈ lamoed, nitikam & sanya)',
+       JSON.stringify(c5) === JSON.stringify(['lamoed', 'nitikam', 'sanya']));
 
     ok('F4 no duplicate concept entry for any provision',
        Object.keys(idx).every(ref => {

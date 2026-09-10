@@ -112,10 +112,10 @@ run('2b. civil_149 → นิติกรรม', () => {
 });
 
 // ================================================================ 3. multiple concepts per provision
-run('3. a provision may belong to MANY concepts (civil_5 ∈ ละเมิด & นิติกรรม)', () => {
+run('3. a provision may belong to MANY concepts (civil_5 ∈ ละเมิด, นิติกรรม & สัญญา)', () => {
   const r = PCI.conceptsForProvision('civil_5');
   const slugs = r.map(c => c.slug).sort();
-  eq(JSON.stringify(slugs), JSON.stringify(['lamoed', 'nitikam']));
+  eq(JSON.stringify(slugs), JSON.stringify(['lamoed', 'nitikam', 'sanya']));
 });
 
 run('3b. no duplicate concept entry for any provision', () => {

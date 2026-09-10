@@ -254,7 +254,7 @@
     AtlasCore.loadRegistry('collections-registry.json?v=20260907d')
   ]).then(function (res) {
     AtlasCore.attachCorpus(res[0]);
-    return AtlasConcepts.render(root, slug, { url: 'atlas-concepts.json?v=20260909e' });
+    return AtlasConcepts.render(root, slug, { url: 'atlas-concepts.json?v=20260910a' });
   }).then(function () {
     if (slug && window.AtlasConceptRelations && typeof AtlasConceptRelations.enhance === 'function') {
       try { AtlasConceptRelations.enhance(root, slug); } catch (e) { /* fail soft */ }

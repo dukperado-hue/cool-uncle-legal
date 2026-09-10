@@ -74,7 +74,7 @@
   AtlasCore.loadRegistry('collections-registry.json?v=20260907d')
     .catch(function () { /* labels degrade gracefully */ })
     .then(function () {
-      return AtlasEncyclopedia.render(root, { url: 'atlas-concepts.json?v=20260909e' });
+      return AtlasEncyclopedia.render(root, { url: 'atlas-concepts.json?v=20260910a' });
     })
     .catch(function (err) {
       root.innerHTML = '<div class="atlas-enc-empty">โหลดข้อมูลไม่สำเร็จ: ' +

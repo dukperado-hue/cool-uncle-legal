@@ -127,9 +127,10 @@ function renderEnhanced(slug, doc) {
 const D = (concepts) => ({ relationKinds: KINDS, concepts });
 
 // ================================================================ 1
-test('1. published concept lookup — the real doc has exactly lamoed + nitikam published', () => {
+test('1. published concept lookup — the real doc\'s published set is well-formed', () => {
   const pub = Object.keys(DOC.concepts).filter(k => DOC.concepts[k].status === 'published').sort();
-  eq(pub, ['lamoed', 'nitikam'], 'published set');
+  eq(pub, ['lamoed', 'nitikam', 'sanya'], 'published set');
+  pub.forEach(k => ok(DOC.concepts[k].titleTH && DOC.concepts[k].id === 'atlas:concept/' + k, k + ' well-formed'));
 });
 
 // ================================================================ 2
