@@ -1416,6 +1416,166 @@ head('F7-C1 — Concept structural anchors are actionable (path -> exact node)')
      !/atlas-concepts\.js\?v=20260909e/.test(ah2 + ch2 + eh2));
 })();
 
+// ============================================================ F8
+// Related concept integrity + inbound surfacing — atlas-concept-relations.js
+// A standalone, additive consumer of the Concept layer (same contract as F4).
+// Derives the inbound ("who points here") view IN MEMORY from the SAME authored
+// relatedConcepts[]; no second dataset, no schema change. Relationships are
+// directional — a reverse edge is only recorded, never fabricated.
+head('F8 — Related concept integrity + inbound surfacing');
+(function () {
+  const jsPath = path.join(ROOT, 'atlas-concept-relations.js');
+  const jsonPath = path.join(ROOT, 'atlas-concepts.json');
+
+  ok('F8 atlas-concept-relations.js present', fs.existsSync(jsPath));
+  if (!fs.existsSync(jsPath)) return;
+
+  const { execFileSync } = require('child_process');
+  try { execFileSync(process.execPath, ['--check', jsPath], { stdio: 'pipe' }); ok('F8 atlas-concept-relations.js parses', true); }
+  catch (e) { ok('F8 atlas-concept-relations.js parses', false, String(e.stderr || e).slice(0, 160)); return; }
+
+  const src = fs.readFileSync(jsPath, 'utf8');
+  const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+
+  // ---- architecture contract (mirrors F4) --------------------------------
+  ok('F8 standalone/additive — never assigns to AtlasCore / AtlasUI / AtlasConcepts',
+     !/\b(AtlasCore|AtlasUI|AtlasConcepts)\s*(\.\w+)?\s*=[^=]/.test(code) &&
+     !/(AtlasCore|AtlasUI|AtlasConcepts)\._internal\s*\./.test(code));
+  ok('F8 never touches location.hash / the route grammar / history',
+     !/\blocation\s*\.\s*(hash|assign|href)\b/.test(code) &&
+     !/history\s*\.\s*(pushState|replaceState)/.test(code) && !/#\/c\//.test(src));
+  ok('F8 inbound links use the frozen concept-entry URL concept.html?k=<slug>',
+     /concept\.html\?k=/.test(src));
+  ok('F8 no second relationship dataset (derives from the Concept layer only)',
+     !/inboundConcepts|relations?\.json|concept-relations\.json|graph/i.test(src) &&
+     !/codex-data\.json/.test(src) &&
+     /AtlasConcepts\.load\s*\(/.test(src));
+
+  const rawJson = fs.readFileSync(jsonPath, 'utf8');
+  ok('F8 atlas-concepts.json schema untouched (no inbound field, no graph object, no children[])',
+     !/"inbound[A-Za-z]*"\s*:/.test(rawJson) &&
+     !/"reverseRelations"|"relationGraph"/.test(rawJson) &&
+     !/"children"\s*:/.test(rawJson));
+
+  // ---- load the module + the real document ------------------------------
+  let AR, cdoc;
+  try { cdoc = JSON.parse(rawJson); }
+  catch (e) { ok('F8 atlas-concepts.json valid JSON', false, String(e).slice(0, 120)); return; }
+  try {
+    require(path.join(ROOT, 'atlas-concept-relations.js'));
+    AR = global.AtlasConceptRelations;
+    ok('F8 window.AtlasConceptRelations exposed with enhance + _internal',
+       !!(AR && typeof AR.enhance === 'function' && AR._internal &&
+          typeof AR._internal.auditRelations === 'function' &&
+          typeof AR._internal.buildInboundIndex === 'function'));
+  } catch (e) { ok('F8 window.AtlasConceptRelations exposed with enhance + _internal', false, String(e).slice(0, 140)); return; }
+  if (!AR || !AR._internal) return;
+
+  const RI = AR._internal;
+  const KINDS = cdoc.relationKinds;
+  const D = concepts => ({ relationKinds: KINDS, concepts });
+
+  // ---- STEP 2 — integrity validation on the SHIPPED data ---------------
+  const audit = RI.auditRelations(cdoc);
+  ok('F8-A/B/C/D/E shipped atlas-concepts.json passes every related-concept integrity rule',
+     audit.problems.length === 0,
+     audit.problems.map(p => p.concept + '/' + p.ref + ' ' + p.problem).join(' | ') ||
+       (audit.checked + ' edges / ' + audit.concepts + ' concepts clean'));
+  ok('F8-A every authored relatedConcepts.ref is atlas:concept/<slug> and resolves (authored OR planned)',
+     Object.entries(cdoc.concepts).every(([slug, c]) =>
+       (c.relatedConcepts || []).every(rc => {
+         const s = typeof rc.ref === 'string' && rc.ref.indexOf('atlas:concept/') === 0
+           ? rc.ref.slice('atlas:concept/'.length) : null;
+         return !!s && (!!cdoc.concepts[s] || rc.status === 'planned');
+       })));
+  ok('F8-B every authored relation kind is one of parent/specializes/contrast/prerequisite/seealso',
+     Object.values(cdoc.concepts).every(c =>
+       (c.relatedConcepts || []).every(rc => rc.rel && Object.prototype.hasOwnProperty.call(KINDS, rc.rel))));
+
+  // negative controls — each failure mode is actually caught, exactly once
+  const negRef = RI.auditRelations(D({ x: { slug: 'x', status: 'published', relatedConcepts: [
+    { ref: 'atlas:concept/ghost', rel: 'seealso' },   // dangling (not planned)
+    { ref: 'civil_420', rel: 'seealso' },             // bad namespace
+    { ref: '  ', rel: 'seealso' }                     // empty
+  ] } })).problems.map(p => p.problem).sort();
+  ok('F8-A/C negative control: dangling + bad-namespace + empty ref each caught once',
+     JSON.stringify(negRef) === JSON.stringify(['bad-namespace', 'dangling-target', 'empty-or-malformed-ref']));
+  ok('F8-C planned target is NOT a dangling error (schema semantics respected)',
+     RI.auditRelations(D({ x: { slug: 'x', status: 'published', relatedConcepts: [
+       { ref: 'atlas:concept/future', rel: 'seealso', status: 'planned' } ] } })).problems.length === 0);
+  const negRel = RI.auditRelations(D({ x: { slug: 'x', status: 'published', relatedConcepts: [
+    { ref: 'atlas:concept/y', rel: 'not-a-kind', status: 'planned' },
+    { ref: 'atlas:concept/z', status: 'planned' } ] } })).problems.map(p => p.problem).sort();
+  ok('F8-B negative control: unknown-rel + missing-rel both caught',
+     JSON.stringify(negRel) === JSON.stringify(['missing-rel', 'unknown-rel']));
+  ok('F8-D negative control: identical (ref,rel) flagged once; different rel to same target is legitimate',
+     RI.auditRelations(D({ x: { slug: 'x', status: 'published', relatedConcepts: [
+       { ref: 'atlas:concept/y', rel: 'seealso', status: 'planned' },
+       { ref: 'atlas:concept/y', rel: 'seealso', status: 'planned' } ] } }))
+       .problems.filter(p => p.problem === 'duplicate').length === 1 &&
+     RI.auditRelations(D({ x: { slug: 'x', status: 'published', relatedConcepts: [
+       { ref: 'atlas:concept/y', rel: 'contrast', status: 'planned' },
+       { ref: 'atlas:concept/y', rel: 'seealso', status: 'planned' } ] } }))
+       .problems.filter(p => p.problem === 'duplicate').length === 0);
+  ok('F8-E negative control: a concept pointing at itself is flagged',
+     RI.auditRelations(D({ lamoed: { slug: 'lamoed', status: 'published', relatedConcepts: [
+       { ref: 'atlas:concept/lamoed', rel: 'seealso' } ] } }))
+       .problems.some(p => p.problem === 'self-reference'));
+
+  // ---- STEP 3 — derived inbound index, directional --------------------
+  const idx = RI.buildInboundIndex(cdoc);
+  ok('F8 inbound index derived in memory from the authored relatedConcepts[]',
+     idx && Object.keys(idx).length >= 3,
+     'targets: ' + Object.keys(idx).join(', '));
+  ok('F8 inbound: nitikam --contrast--> lamoed surfaces on lamoed (direction preserved)',
+     (idx.lamoed || []).some(e => e.slug === 'nitikam' && e.rel === 'contrast'));
+  ok('F8 inbound: lamoed --contrast--> nitikam surfaces on nitikam (independently authored, not a fabricated reciprocal)',
+     (idx.nitikam || []).some(e => e.slug === 'lamoed' && e.rel === 'contrast'));
+  ok('F8 directional: an authored A--parent-->B never fabricates B--parent-->A',
+     (() => { const d = RI.buildInboundIndex(D({
+       a: { slug: 'a', status: 'published', relatedConcepts: [{ ref: 'atlas:concept/b', rel: 'parent' }] },
+       b: { slug: 'b', status: 'published', relatedConcepts: [] } }));
+       return JSON.stringify((d.b || []).map(e => e.slug + ':' + e.rel)) === '["a:parent"]' && !d.a; })());
+  ok('F8 every inbound source is an authored concept and never the target itself',
+     Object.entries(idx).every(([t, list]) => list.every(e => cdoc.concepts[e.slug] && e.slug !== t)));
+  ok('F8 inbound index is self-edge free even if the data authored one',
+     !RI.buildInboundIndex({ concepts: { z: { relatedConcepts: [{ ref: 'atlas:concept/z', rel: 'seealso' }] } } }).z);
+
+  // ---- fail-soft -----------------------------------------------------
+  ok('F8 fail-soft: no document → empty index / empty inbound list / no audit crash',
+     JSON.stringify(RI.buildInboundIndex(null)) === '{}' &&
+     JSON.stringify(RI.inboundFor(null, 'lamoed')) === '[]' &&
+     RI.auditRelations(null).problems.length === 0 &&
+     RI.auditRelations(undefined).problems.length === 0);
+
+  // ---- STEP 4/5 — inbound surfacing model (DOM covered by the smoke) --
+  const inbLamoed = RI.inboundFor(cdoc, 'lamoed');
+  ok('F8 inboundFor resolves each source live: title/status of the authoring concept win over cache',
+     inbLamoed.length >= 1 && inbLamoed.every(e =>
+       e.slug && e.title && e.known === true &&
+       e.title === cdoc.concepts[e.slug].titleTH &&
+       e.status === cdoc.concepts[e.slug].status));
+  ok('F8 inbound entry carries a DIRECTIONAL relation phrase distinct from the raw rel token',
+     inbLamoed.every(e => !e.rel || (typeof e.relPhraseTH === 'string' && e.relPhraseTH.length > 2)));
+  ok('F8 the module never merges the two directions (separate builder + inward caption source-side)',
+     /แนวคิดที่อ้างถึงแนวคิดนี้/.test(src) && /แนวคิดที่หน้านี้อ้างถึง/.test(src) &&
+     /atlas-concept-inbound/.test(src));
+
+  // ---- wiring -------------------------------------------------------
+  const ch = fs.readFileSync(path.join(ROOT, 'concept.html'), 'utf8');
+  const ah = fs.readFileSync(path.join(ROOT, 'atlas.html'), 'utf8');
+  const eh = fs.readFileSync(path.join(ROOT, 'encyclopedia.html'), 'utf8');
+  ok('F8 concept.html loads atlas-concept-relations.js after atlas-concepts.js',
+     /<script[^>]+src="atlas-concept-relations\.js\?v=20260910a"/.test(ch) &&
+     ch.indexOf('atlas-concepts.js?v=') < ch.indexOf('atlas-concept-relations.js?v='));
+  ok('F8 concept.html invokes AtlasConceptRelations.enhance(root, slug) after render',
+     /AtlasConceptRelations\.enhance\s*\(\s*root\s*,\s*slug\s*\)/.test(ch));
+  ok('F8 concept.html still does NOT load atlas-ui.js (no route grammar dependency)',
+     !/src="atlas-ui\.js/.test(ch));
+  ok('F8 atlas.html + encyclopedia.html are untouched by F8 (Concept Entry feature only)',
+     !/atlas-concept-relations\.js/.test(ah) && !/atlas-concept-relations\.js/.test(eh));
+})();
+
 console.log('\n----------------------------------------');
 console.log('  RESULT:  ' + pass + ' passed, ' + fail + ' failed');
 console.log('----------------------------------------');

@@ -224,6 +224,7 @@
 <script src="atlas-core.js?v=20260908a"></script>
 <script src="atlas-clusters.js?v=20260909a"></script>
 <script src="atlas-concepts.js?v=20260910a"></script>
+<script src="atlas-concept-relations.js?v=20260910a"></script>
 <script src="atlas-provision-concepts.js?v=20260909a"></script>
 <script src="atlas-provision-view.js?v=20260909e"></script>
 <script>
@@ -255,6 +256,9 @@
     AtlasCore.attachCorpus(res[0]);
     return AtlasConcepts.render(root, slug, { url: 'atlas-concepts.json?v=20260909e' });
   }).then(function () {
+    if (slug && window.AtlasConceptRelations && typeof AtlasConceptRelations.enhance === 'function') {
+      try { AtlasConceptRelations.enhance(root, slug); } catch (e) { /* fail soft */ }
+    }
     renderFoot();
     if (window.CUReadingTools && typeof window.CUReadingTools.onRendered === 'function') {
       try { window.CUReadingTools.onRendered(); } catch (e) { /* fail soft */ }
