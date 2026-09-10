@@ -77,11 +77,18 @@
     if (text != null) n.textContent = text;
     return n;
   }
-  // closest('a.atlas-provision') without relying on Element.closest (test shim)
+  // closest('a.atlas-provision') without relying on Element.closest (test shim).
+  // Also matches in-drawer มาตรา cross-reference links (F11.3.1A) so a plain
+  // click on one is handled by onRootClick exactly like a tree / cluster pill:
+  // same href shape (codex-article-viewer.html?id=<collection>_<number>), same
+  // resolve → updateOpen path, same history 'replace'. The link carries ONLY
+  // .atlas-provision-view-xref (never .atlas-provision) so it does not inherit
+  // the block-pill styling from atlas.html.
   function closestProvisionAnchor(node) {
     var cur = node;
     while (cur && cur.nodeType === 1) {
-      if (String(cur.tagName).toUpperCase() === 'A' && hasClass(cur, 'atlas-provision')) return cur;
+      if (String(cur.tagName).toUpperCase() === 'A' &&
+          (hasClass(cur, 'atlas-provision') || hasClass(cur, 'atlas-provision-view-xref'))) return cur;
       cur = cur.parentNode;
     }
     return null;
@@ -332,6 +339,17 @@
       '.atlas-provision-view-text p{margin:0 0 .85em;}',
       '.atlas-provision-view-text p:last-child{margin-bottom:0;}',
       '.atlas-provision-view-cancelled .atlas-provision-view-text{opacity:.7;}',
+      // F11.3.1A — formatted body: per-chunk วรรค/อนุ lead-in + in-drawer xref links
+      '.atlas-provision-view-para{margin:0 0 .95em;}',
+      '.atlas-provision-view-para:last-child{margin-bottom:0;}',
+      '.atlas-provision-view-para-label{display:block;font-size:11px;font-weight:600;',
+      '  letter-spacing:.02em;color:var(--muted,#5b6472);margin-bottom:1px;}',
+      '.atlas-provision-view-para-text{display:block;}',
+      'a.atlas-provision-view-xref{color:var(--accent,#2E4A7A);text-decoration:underline;',
+      '  text-decoration-style:dotted;text-underline-offset:2px;cursor:pointer;}',
+      'a.atlas-provision-view-xref:hover{text-decoration-style:solid;}',
+      'a.atlas-provision-view-xref:focus-visible{outline:2px solid var(--accent,#2E4A7A);',
+      '  outline-offset:2px;border-radius:2px;}',
       '.atlas-provision-view-cases{margin:18px 0 0;font-size:12px;}',
       '.atlas-provision-view-cases-d{border:1px dashed var(--line,#e6e1d6);border-radius:8px;',
       '  padding:6px 12px;}',
@@ -528,17 +546,117 @@
     }, 0);
   }
 
-  function textEl(raw) {
-    var box = make('div', 'atlas-provision-view-text');
-    var parts = String(raw == null ? '' : raw).split(/\n+/);
-    var any = false;
-    parts.forEach(function (p) {
-      var t = p.trim();
-      if (!t) return;
-      any = true;
-      box.appendChild(make('p', null, t));   // textContent — never innerHTML
+  // ================================================================
+  // F11.3.1A — formatted provision body + มาตรา cross-references
+  //
+  // Mirrors the legacy article-viewer's reading structure, built with DOM
+  // nodes ONLY (never innerHTML — legal text is textContent throughout):
+  //   - chunks split on "\n" (same as the legacy renderer)
+  //   - > 1 chunk → each gets a วรรค<ลำดับ> / อนุ (n) lead-in; the chunk's
+  //     own text (including any original "(n)" marker) is never altered
+  //   - a genuine "มาตรา <n>" reference that resolves to a real provision in
+  //     the SAME collection (and instrument) becomes an in-drawer link
+  //     (.atlas-provision-view-xref → closestProvisionAnchor → onRootClick →
+  //     updateOpen, history 'replace', hash untouched). Never self-links.
+  //     Unknown / cross-collection-ambiguous refs stay plain text.
+  // Fails soft to plain paragraphs whenever AtlasCore / the corpus is absent.
+  // ================================================================
+  var MATRA_SUFFIXES = 'ทวิ|ตรี|จัตวา|เบญจ|ฉ|สัตต|อัฏฐ|นว|ทศ';
+  function matraRefRe() {
+    // "มาตรา 28" · "มาตรา ๑๙๓/๑" · "มาตรา 4 ทวิ" — same shape the legacy
+    // linkifyMatraRefs() matches. Fresh instance per call (own lastIndex).
+    return new RegExp(
+      'มาตรา\\s*([0-9๐-๙]+(?:\\s*\\/\\s*[0-9๐-๙]+)?)(?:\\s+(' +
+        MATRA_SUFFIXES + ')(?![ก-ฮ]))?', 'g');
+  }
+  function toArabicDigits(s) {
+    var AC = global.AtlasCore;
+    if (AC && typeof AC.thaiToArabic === 'function') return AC.thaiToArabic(s);
+    return String(s == null ? '' : s).replace(/[๐-๙]/g, function (d) {
+      return String('๐๑๒๓๔๕๖๗๘๙'.indexOf(d));
     });
-    if (!any) box.appendChild(make('p', null, '(ไม่มีตัวบทในคลังข้อมูล)'));
+  }
+  function normalizeMatra(rawNum, rawSuffix) {
+    var n = toArabicDigits(rawNum).replace(/\s+/g, '');
+    return rawSuffix ? (n + ' ' + rawSuffix) : n;
+  }
+
+  var THAI_ORD_WORD = ['', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า'];
+  function thaiOrdinalWord(n) {
+    if (n <= 0) return String(n);
+    if (n < 10) return THAI_ORD_WORD[n];
+    if (n < 20) return n === 10 ? 'สิบ' : (n === 11 ? 'สิบเอ็ด' : 'สิบ' + THAI_ORD_WORD[n - 10]);
+    var tens = Math.floor(n / 10), ones = n % 10;
+    var tensWord = tens === 2 ? 'ยี่สิบ' : THAI_ORD_WORD[tens] + 'สิบ';
+    if (ones === 0) return tensWord;
+    return tensWord + (ones === 1 ? 'เอ็ด' : THAI_ORD_WORD[ones]);
+  }
+
+  // Append `raw` into `target`, turning genuine มาตรา references into in-drawer
+  // <a> links. `resolved` supplies the collection / instrument scope and the
+  // current number (never self-links). Pure text otherwise.
+  function appendLinkedText(target, raw, resolved) {
+    var text = String(raw == null ? '' : raw);
+    var AC = global.AtlasCore;
+    var collection = resolved && resolved.collection;
+    var canLink = !!(text && AC && collection && typeof AC.getProvisionBrief === 'function');
+    if (!canLink) { target.appendChild(doc.createTextNode(text)); return; }
+
+    var selfNum = (resolved && resolved.number != null) ? String(resolved.number) : null;
+    var instrument = (resolved && resolved.instrument) || undefined;
+    var re = matraRefRe();
+    var pos = 0, m;
+    while ((m = re.exec(text))) {
+      if (m[0].length === 0) { re.lastIndex++; continue; }
+      var candidate = normalizeMatra(m[1], m[2]);
+      var brief = null;
+      if (candidate && candidate !== selfNum) {
+        // getProvisionBrief only ever checks the collection we pass — a bare
+        // number is NEVER resolved against another collection.
+        try { brief = AC.getProvisionBrief(collection, candidate, instrument); }
+        catch (e) { brief = null; }
+      }
+      if (!brief || !brief.viewerUrl) continue;   // unknown ref → left in a later text slice
+      if (m.index > pos) target.appendChild(doc.createTextNode(text.slice(pos, m.index)));
+      var vu = brief.viewerUrl;   // codex-article-viewer.html?id=<collection>_<number>
+      var a = make('a', 'atlas-provision-view-xref', m[0]);
+      a.setAttribute('href', vu + (vu.indexOf('?') === -1 ? '?' : '&') + 'x=atlas');
+      target.appendChild(a);
+      pos = m.index + m[0].length;
+    }
+    target.appendChild(doc.createTextNode(text.slice(pos)));
+  }
+
+  function textEl(resolved) {
+    var raw = resolved && resolved.article && resolved.article.text;
+    var box = make('div', 'atlas-provision-view-text');
+    var chunks = String(raw == null ? '' : raw).split('\n').filter(function (p) {
+      return p.trim();
+    });
+
+    if (!chunks.length) {
+      box.appendChild(make('p', 'atlas-provision-view-para', '(ไม่มีตัวบทในคลังข้อมูล)'));
+      return box;
+    }
+    if (chunks.length === 1) {
+      var only = make('p', 'atlas-provision-view-para');
+      appendLinkedText(only, chunks[0].trim(), resolved);
+      box.appendChild(only);
+      return box;
+    }
+    var warakN = 0;
+    chunks.forEach(function (chunk) {
+      var t = chunk.trim();
+      var para = make('div', 'atlas-provision-view-para');
+      var anu = t.match(/^\(([0-9๐-๙]+)\)/);
+      var label = anu ? ('อนุ (' + toArabicDigits(anu[1]) + ')')
+                      : ('วรรค' + thaiOrdinalWord(warakN += 1));
+      para.appendChild(make('span', 'atlas-provision-view-para-label', label));
+      var bodySpan = make('span', 'atlas-provision-view-para-text');
+      appendLinkedText(bodySpan, t, resolved);
+      para.appendChild(bodySpan);
+      box.appendChild(para);
+    });
     return box;
   }
 
@@ -626,7 +744,7 @@
     body.appendChild(make('p', 'atlas-provision-view-collection',
       resolved.collectionTitle || resolved.collection));
 
-    body.appendChild(textEl(resolved.article && resolved.article.text));
+    body.appendChild(textEl(resolved));
 
     // Provision → Concept backlink (F4) — a curated Concept that covers this
     // provision, derived in memory from the Concept layer. atlas-provision-
@@ -958,6 +1076,9 @@
       urlWithParam: urlWithParam,
       urlWithoutParam: urlWithoutParam,
       resolve: resolve,
+      formattedTextEl: textEl,
+      appendLinkedText: appendLinkedText,
+      matraRefRe: matraRefRe,
       publicCasesFrom: publicCasesFrom,
       closestProvisionAnchor: closestProvisionAnchor,
       openProvision: openProvision,

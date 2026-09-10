@@ -657,6 +657,166 @@ run('F11.2-5. AtlasUI-style {hash,keys} write to atlas:return does not touch atl
   eq(global.sessionStorage.getItem(RPKEY), 'civil_420', 'isolated recovery ref survives');
 });
 
+// ================================================================
+// F11.3.1A — formatted provision body + in-drawer มาตรา cross-references
+// ================================================================
+function openProv(hash, id) {
+  resetAll(); I.reset();
+  try { global.sessionStorage.removeItem('atlas:return:a'); } catch (e) {}
+  try { global.sessionStorage.removeItem('atlas:return'); } catch (e) {}
+  applyUrl('/atlas.html' + hash);
+  historyStack[historyStack.length - 1] = { url: '/atlas.html' + hash, state: null };
+  APV.init({ root: atlasRoot });
+  fireRootClick(makePill(id));
+  return I.panelEl();
+}
+function provText(panel) { return panel.querySelector('.atlas-provision-view-text'); }
+
+// ---- direct-unit: appendLinkedText ----
+run('F11.3.1A-u1. appendLinkedText: self-ref plain, sibling-ref linked, unknown plain, text verbatim', () => {
+  const host = document.createElement('div');
+  const src = 'ดู มาตรา 420 กับ มาตรา 421 และ มาตรา 999999 ประกอบ';
+  I.appendLinkedText(host, src, { collection: 'civil', number: '420', instrument: null });
+  const links = host.querySelectorAll('a');
+  eq(links.length, 1, 'exactly one link (มาตรา 421 only)');
+  eq(links[0].textContent, 'มาตรา 421');
+  ok(links[0].getAttribute('href').indexOf('id=civil_421') !== -1, 'targets civil_421 — got ' + links[0].getAttribute('href'));
+  ok((links[0].getAttribute('class') || '').indexOf('atlas-provision-view-xref') !== -1, 'carries the xref class');
+  ok((links[0].getAttribute('class') || '').split(/\s+/).indexOf('atlas-provision') === -1, 'NOT the block-pill class');
+  eq(host.textContent, src, 'full text preserved byte-for-byte (marker + refs unchanged)');
+});
+run('F11.3.1A-u2. appendLinkedText normalises Thai digits (มาตรา ๓๕ → civil_35)', () => {
+  const host = document.createElement('div');
+  I.appendLinkedText(host, 'การร้องขอตามมาตรา ๓๕ หรือการร้องขอถอนผู้พิทักษ์',
+    { collection: 'civil', number: '34', instrument: null });
+  const links = host.querySelectorAll('a');
+  eq(links.length, 1, 'one link');
+  ok(links[0].getAttribute('href').indexOf('id=civil_35') !== -1, 'Thai digits → civil_35');
+});
+run('F11.3.1A-u3. appendLinkedText never resolves across collections', () => {
+  const host = document.createElement('div');
+  // "มาตรา 288" resolves in criminal but the context here is civil — must
+  // only ever produce a civil target (civil_288 exists) or none, never criminal.
+  I.appendLinkedText(host, 'เทียบ มาตรา 288', { collection: 'civil', number: '420', instrument: null });
+  host.querySelectorAll('a').forEach(l =>
+    ok(l.getAttribute('href').indexOf('id=civil_') !== -1, 'only civil targets — got ' + l.getAttribute('href')));
+});
+run('F11.3.1A-u4. appendLinkedText fail-soft when getProvisionBrief throws', () => {
+  const host = document.createElement('div');
+  const saved = AtlasCore.getProvisionBrief;
+  try {
+    AtlasCore.getProvisionBrief = () => { throw new Error('boom'); };
+    I.appendLinkedText(host, 'ดู มาตรา 421 ประกอบ', { collection: 'civil', number: '420' });
+  } finally { AtlasCore.getProvisionBrief = saved; }
+  eq(host.querySelectorAll('a').length, 0, 'no links when resolution throws');
+  eq(host.textContent, 'ดู มาตรา 421 ประกอบ', 'text verbatim, no throw');
+});
+run('F11.3.1A-u5. appendLinkedText fail-soft when AtlasCore is absent', () => {
+  const host = document.createElement('div');
+  const saved = global.AtlasCore;
+  try {
+    global.AtlasCore = undefined;
+    I.appendLinkedText(host, 'ดู มาตรา 421', { collection: 'civil', number: '420' });
+  } finally { global.AtlasCore = saved; }
+  eq(host.querySelectorAll('a').length, 0, 'no links, no throw');
+  eq(host.textContent, 'ดู มาตรา 421', 'plain text');
+});
+
+// ---- direct-unit: formattedTextEl ----
+run('F11.3.1A-u6. formattedTextEl: single line → one para, no วรรค/อนุ label', () => {
+  const box = I.formattedTextEl({ collection: 'civil', number: '420',
+    article: { text: 'อ้าง มาตรา 421 ในบรรทัดเดียว' } });
+  eq(box.querySelectorAll('.atlas-provision-view-para-label').length, 0, 'no label for a single chunk');
+  eq(box.querySelectorAll('a.atlas-provision-view-xref').length, 1, 'still linkified');
+});
+run('F11.3.1A-u7. formattedTextEl: empty / missing text → placeholder para, no throw', () => {
+  ok(/ไม่มีตัวบท/.test(I.formattedTextEl({ collection: 'civil', number: '420', article: { text: '' } }).textContent));
+  ok(/ไม่มีตัวบท/.test(I.formattedTextEl({ collection: 'civil', number: '420', article: null }).textContent));
+  ok(/ไม่มีตัวบท/.test(I.formattedTextEl(null).textContent));
+});
+run('F11.3.1A-u8. formattedTextEl: multi-line labels วรรค/อนุ, substantive text untouched', () => {
+  const box = I.formattedTextEl({ collection: 'civil', number: '9', instrument: null, article: {
+    text: 'ข้อความวรรคแรก\n(1) รายการที่หนึ่ง\n(2) รายการที่สอง\nข้อความวรรคสุดท้าย' } });
+  const labels = box.querySelectorAll('.atlas-provision-view-para-label').map(n => n.textContent);
+  eq(JSON.stringify(labels), JSON.stringify(['วรรคหนึ่ง', 'อนุ (1)', 'อนุ (2)', 'วรรคสอง']),
+     'วรรค counts only non-อนุ chunks; อนุ keeps its number — got ' + JSON.stringify(labels));
+  ok(box.textContent.indexOf('(1) รายการที่หนึ่ง') !== -1, 'original (1) marker + text preserved');
+  ok(box.textContent.indexOf('(2) รายการที่สอง') !== -1, 'original (2) marker + text preserved');
+});
+
+// ---- integration: rendered drawer ----
+run('F11.3.1A-1. single-chunk provision renders one para, no label (criminal 288)', () => {
+  const box = provText(openProv('#/c/criminal', 'criminal_288'));
+  ok(box, 'text container present');
+  ok(/ผู้ใดฆ่าผู้อื่น/.test(box.textContent), 'ตัวบท intact');
+  eq(box.querySelectorAll('.atlas-provision-view-para-label').length, 0, 'no วรรค/อนุ label');
+});
+run('F11.3.1A-2. multi-chunk provision (civil 34): วรรค + อนุ labels, substantive text preserved', () => {
+  const box = provText(openProv('#/c/civil', 'civil_34'));
+  const labels = box.querySelectorAll('.atlas-provision-view-para-label').map(n => n.textContent);
+  ok(labels.indexOf('วรรคหนึ่ง') !== -1, 'has วรรคหนึ่ง — got ' + JSON.stringify(labels));
+  ok(labels.some(l => /^อนุ \(\d+\)$/.test(l)), 'has อนุ (n) — got ' + JSON.stringify(labels));
+  ok(/คนเสมือนไร้ความสามารถ/.test(box.textContent), 'lead text preserved');
+  ['(๒)', '(๓)', '(๑๐)', '(๑๑)'].forEach(mk =>
+    ok(box.textContent.indexOf(mk) !== -1, 'original อนุ marker kept verbatim: ' + mk));
+});
+run('F11.3.1A-3. genuine body มาตรา ref → xref link to same collection (civil 34 → ม.๓๕)', () => {
+  const box = provText(openProv('#/c/civil', 'civil_34'));
+  const xrefs = box.querySelectorAll('a.atlas-provision-view-xref');
+  ok(xrefs.length >= 1, 'at least one xref link');
+  const m35 = xrefs.filter(a => /๓๕/.test(a.textContent))[0];
+  ok(m35, 'มาตรา ๓๕ is linked');
+  ok(m35.getAttribute('href').indexOf('id=civil_35') !== -1, 'targets civil_35');
+  ok(m35.getAttribute('href').indexOf('x=atlas') !== -1, 'keeps the x=atlas marker');
+});
+run('F11.3.1A-4. self-reference stays plain text (no xref points back to civil_34)', () => {
+  const box = provText(openProv('#/c/civil', 'civil_34'));
+  box.querySelectorAll('a.atlas-provision-view-xref').forEach(a =>
+    ok(!/id=civil_34&/.test(a.getAttribute('href')), 'no self link — got ' + a.getAttribute('href')));
+});
+run('F11.3.1A-5. no nested <a>: xref link is never inside another anchor', () => {
+  const box = provText(openProv('#/c/civil', 'civil_34'));
+  box.querySelectorAll('a.atlas-provision-view-xref').forEach(a => {
+    let p = a.parentNode, depth = 0;
+    while (p && depth < 20) { ok(String(p.tagName).toUpperCase() !== 'A', 'no ancestor <a>'); p = p.parentNode; depth++; }
+  });
+});
+run('F11.3.1A-6. clicking an xref swaps the SAME drawer: hash unchanged, ?a= updated, replaceState', () => {
+  const panel = openProv('#/c/civil', 'civil_34');
+  ok(APV.isOpen(), 'drawer open on civil 34');
+  const hashBefore = location.hash;
+  const depthBefore = historyStack.length;
+  const xref = panel.querySelector('a.atlas-provision-view-xref');
+  ok(xref, 'has an xref to click');
+  const e = fireRootClick(xref);
+  ok(e.defaultPrevented, 'plain click intercepted');
+  ok(APV.isOpen(), 'still exactly one drawer, still open');
+  ok(/มาตรา 35/.test(I.panelEl().textContent), 'drawer now shows มาตรา 35');
+  eq(location.hash, hashBefore, 'location.hash NOT mutated (AtlasUI never re-renders)');
+  eq(historyStack.length, depthBefore, 'xref used replaceState — no new history entry');
+  eq(I.readParam(), 'civil_35', '?a= now qualifies the target provision');
+});
+run('F11.3.1A-7. Back after an xref click closes the drawer (established in-drawer semantics)', () => {
+  const panel = openProv('#/c/civil', 'civil_34');
+  fireRootClick(panel.querySelector('a.atlas-provision-view-xref'));
+  ok(APV.isOpen() && /มาตรา 35/.test(I.panelEl().textContent), 'advanced to มาตรา 35');
+  history.back();
+  ok(!APV.isOpen(), 'Back closed the drawer');
+});
+run('F11.3.1A-8. modified click on an xref is NOT intercepted (native href → legacy viewer)', () => {
+  const panel = openProv('#/c/civil', 'civil_34');
+  const xref = panel.querySelector('a.atlas-provision-view-xref');
+  [{ metaKey: true }, { ctrlKey: true }, { button: 1 }].forEach(mod => {
+    const e = fireRootClick(xref, mod);
+    ok(!e.defaultPrevented, 'passthrough for ' + JSON.stringify(mod));
+  });
+});
+run('F11.3.1A-9. xref href is the unchanged canonical viewer id', () => {
+  const box = provText(openProv('#/c/civil', 'civil_34'));
+  const m35 = box.querySelectorAll('a.atlas-provision-view-xref').filter(a => /๓๕/.test(a.textContent))[0];
+  eq(m35.getAttribute('href'), 'codex-article-viewer.html?id=civil_35&x=atlas');
+});
+
 function openOn(hash, id) {
   resetAll(); I.reset();
   applyUrl('/atlas.html' + hash);
