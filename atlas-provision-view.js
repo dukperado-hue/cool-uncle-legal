@@ -794,6 +794,24 @@
 
     body.appendChild(textEl(resolved));
 
+    // F11.3.4 — provision-level lecture notes (editorial explanation), a
+    // STANDALONE progressive-enhancement layer sourced from the SAME
+    // codex-data.json articles.<n>.lectureNotes[] the legacy viewer and the
+    // Concept layer already read (nothing copied, nothing new). atlas-
+    // provision-lectures.js fills this container synchronously and renders
+    // nothing when the provision has no lectureNotes. Sits between the
+    // statutory text and the Concept backlink per the Atlas layering:
+    // STRUCTURE → CONCEPT → PROVISION → CASE → REASONING/EXPLANATION.
+    // Progressive enhancement: absent / failed → the panel is unchanged.
+    var plectures = make('div', 'atlas-provision-view-lectures');
+    body.appendChild(plectures);
+    try {
+      if (global.AtlasProvisionLectures &&
+          typeof global.AtlasProvisionLectures.renderSection === 'function') {
+        global.AtlasProvisionLectures.renderSection(plectures, resolved);
+      }
+    } catch (e) { /* fail soft */ }
+
     // Provision → Concept backlink (F4) — a curated Concept that covers this
     // provision, derived in memory from the Concept layer. atlas-provision-
     // concepts.js fills this container async and renders nothing when the

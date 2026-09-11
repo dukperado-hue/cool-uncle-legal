@@ -1324,9 +1324,9 @@ head('F6 — Provision Context in the F1 Reader');
   // host cache-bust
   const ah = fs.readFileSync(path.join(ROOT, 'atlas.html'), 'utf8');
   const ch = fs.readFileSync(path.join(ROOT, 'concept.html'), 'utf8');
-  ok('F6 atlas.html + concept.html bumped atlas-provision-view.js ?v past 20260909c',
-     /atlas-provision-view\.js\?v=20260909e/.test(ah) && /atlas-provision-view\.js\?v=20260909e/.test(ch) &&
-     !/atlas-provision-view\.js\?v=20260909c/.test(ah) && !/atlas-provision-view\.js\?v=20260909c/.test(ch));
+  ok('F6 atlas.html + concept.html bumped atlas-provision-view.js ?v past 20260909e (F11.3.4 lecture notes)',
+     /atlas-provision-view\.js\?v=20260911a/.test(ah) && /atlas-provision-view\.js\?v=20260911a/.test(ch) &&
+     !/atlas-provision-view\.js\?v=20260909e/.test(ah) && !/atlas-provision-view\.js\?v=20260909e/.test(ch));
 })();
 
 // ============================================================ F7-C1
