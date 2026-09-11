@@ -407,5 +407,93 @@ run('I5. AtlasProvisionLectures absent (module not loaded on a page) never break
   }
 });
 
+// ================================================================ J. cross-subject permanent regression guard (F11.3.5 finalization)
+//
+// Proves the empirical F11.3.5 claim permanently: different collections →
+// the SAME renderer → the SAME contract, with zero per-subject branching.
+//
+// Every fixture below points at REAL data already authored in
+// codex-data.json — no fabricated / placeholder lecture content is created
+// here, per F11.3.5 constraint 5. Each is simply an existing
+// lectureNotes-bearing (or, for the negative case, explicitly empty)
+// provision that happens to sit in that subject's collection.
+//
+// This suite asserts RENDERER behaviour (shape/count/label/no-throw) —
+// never subject-specific HTML content, never a collection-specific branch.
+// Coverage completeness per subject (e.g. Criminal Procedure PARTIAL /
+// INCOMPLETE) is a DATA fact reported separately — NOT asserted or
+// "fixed" here; this suite only proves the renderer handles whatever data
+// already exists, correctly, in every subject.
+const CROSS_SUBJECT_FIXTURES = [
+  { label: 'Civil and Commercial Law',  collection: 'civil',     number: '10', expectedNotes: 1 },
+  { label: 'Criminal Law',              collection: 'criminal',  number: '1',  expectedNotes: 2 },
+  // Criminal Procedure content is PARTIAL / INCOMPLETE (data fact, not a
+  // renderer defect) — this fixture only proves the renderer is correct
+  // for the notes that DO already exist; it does not assert full coverage.
+  { label: 'Criminal Procedure',        collection: 'crimpro',   number: '2',  expectedNotes: 4 },
+  { label: 'Constitutional Law',        collection: 'const2560', number: '3',  expectedNotes: 1 },
+  { label: 'Administrative Law',        collection: 'adminproc', number: '3',  expectedNotes: 1 },
+  { label: 'Intellectual Property Law', collection: 'copyright', number: '6',  expectedNotes: 1 },
+];
+
+CROSS_SUBJECT_FIXTURES.forEach((fx) => {
+  run('J. ' + fx.label + ' (' + fx.collection + '_' + fx.number + '): renderSection succeeds — ' +
+      fx.expectedNotes + ' note(s), authority label correct, no exception', () => {
+    const resolved = PVI.resolve(fx.collection, fx.number);
+    ok(resolved && resolved.article, fx.collection + '_' + fx.number + ' resolves through AtlasCore');
+    ok(Array.isArray(resolved.article.lectureNotes) && resolved.article.lectureNotes.length === fx.expectedNotes,
+       'fixture really has ' + fx.expectedNotes + ' real lectureNotes in codex-data.json — got ' +
+       JSON.stringify((resolved.article.lectureNotes || []).length));
+
+    const container = documentObj.createElement('div');
+    PL.renderSection(container, resolved);   // must not throw for any subject
+
+    const label = container.querySelector('p.atlas-plec-label');
+    const notes = container.querySelectorAll('details.atlas-plec-note');
+    ok(label, 'authority label rendered');
+    eq(label.textContent, PLI.LABEL, 'authority label text identical across every subject — no per-collection variant');
+    eq(notes.length, fx.expectedNotes, 'expected note count rendered for this subject’s real data');
+    notes.forEach(n => ok(n.querySelector('summary.atlas-plec-sum'),
+      'every note carries a summary — identical shape to every other subject'));
+  });
+});
+
+run('J. output shape is IDENTICAL across every subject fixture (same classes, same structure — never a per-collection variant)', () => {
+  const shapes = CROSS_SUBJECT_FIXTURES.map((fx) => {
+    const resolved = PVI.resolve(fx.collection, fx.number);
+    const container = documentObj.createElement('div');
+    PL.renderSection(container, resolved);
+    return {
+      hasSection: !!container.querySelector('section.atlas-plec-sec'),
+      hasLabel: !!container.querySelector('p.atlas-plec-label'),
+      noteTagName: (container.querySelectorAll('details.atlas-plec-note')[0] || {}).tagName,
+      summaryTagName: (container.querySelectorAll('summary.atlas-plec-sum')[0] || {}).tagName,
+    };
+  });
+  const first = JSON.stringify(shapes[0]);
+  shapes.forEach((s, i) => eq(JSON.stringify(s), first,
+    'fixture ' + i + ' (' + CROSS_SUBJECT_FIXTURES[i].label + ') renders the same DOM shape as fixture 0 — proves "different collections → same renderer → same contract"'));
+});
+
+// ---- negative: REAL corpus data with an explicit empty lectureNotes: [] --
+run('J. negative — civil_1435 (real data, literal lectureNotes: []) renders no section, no empty placeholder, no exception', () => {
+  const resolved = PVI.resolve('civil', '1435');
+  ok(resolved && resolved.article, 'civil_1435 resolves through AtlasCore');
+  eq(JSON.stringify(resolved.article.lectureNotes), '[]',
+     'fixture really carries a literal empty array in codex-data.json (not merely a missing field)');
+  const container = documentObj.createElement('div');
+  PL.renderSection(container, resolved);
+  eq(container.childNodes.length, 0, 'no section, no empty placeholder card, nothing rendered');
+});
+
+run('J. negative — a provision with no lectureNotes property at all (real data, civil_1) — reconfirmed for the cross-subject regression record (see also test C)', () => {
+  const resolved = PVI.resolve('civil', '1');
+  ok(resolved && resolved.article, 'civil_1 resolves through AtlasCore');
+  ok(!('lectureNotes' in resolved.article), 'fixture genuinely has no lectureNotes property at all');
+  const container = documentObj.createElement('div');
+  PL.renderSection(container, resolved);
+  eq(container.childNodes.length, 0, 'no section, no exception');
+});
+
 console.log('\n  ' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);
