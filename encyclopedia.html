@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>สารานุกรมคำกฎหมาย · Thai Legal Atlas</title>
+<meta name="description" content="สารานุกรมคำกฎหมาย (Encyclopedia) ของ Thai Legal Atlas — ค้นคำกฎหมาย จัดเรียงตามตัวอักษร แล้วกระโดดเข้าหน้าแนวคิด มาตรา คดี และความสัมพันธ์เดิมของ Atlas">
+<link rel="canonical" href="https://coolunclelab.com/encyclopedia.html">
+<!--
+  encyclopedia.html :: host for the Encyclopedia (FINALIZATION 3).
+  STANDALONE and ADDITIVE:
+    - the front DOOR for the existing Legal Concept layer: an alphabetical,
+      searchable index of concept terms (Thai · English aliases · Latin)
+    - every term links to the FROZEN concept-entry URL concept.html?k=<slug>;
+      the concept page keeps rendering provisions / cases / related concepts
+      and the structural anchor back into atlas.html
+    - reads the SAME atlas-concepts.json through AtlasConcepts.load(); builds
+      no second concept dataset
+    - needs only concept names + the registry — never loads the full legal
+      corpus; provisions/cases open on the concept page, not here
+    - never touches atlas.html routing or any provision URL
+  atlas-encyclopedia.js emits semantic .atlas-enc-* nodes and injects its own
+  scoped stylesheet; this host only provides the palette tokens + page chrome.
+-->
+<style>
+  :root{
+    --bg:#FBF9F4; --panel:#fff; --ink:#1f2430; --muted:#5b6472;
+    --line:#e6e1d6; --accent:#2E4A7A; --accent-soft:#eaf0f8; --chip:#f2ede1;
+    --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:36px; --radius:10px;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --bg:#14161b;--panel:#1c1f27;--ink:#e8eaed;--muted:#9aa3b2;
+    --line:#2c313c;--accent:#8fb4e8;--accent-soft:#20293a;--chip:#232733;}}
+  :root[data-theme="dark"]{
+    --bg:#14161b;--panel:#1c1f27;--ink:#e8eaed;--muted:#9aa3b2;
+    --line:#2c313c;--accent:#8fb4e8;--accent-soft:#20293a;--chip:#232733;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Sarabun","IBM Plex Sans Thai",system-ui,-apple-system,"Segoe UI",sans-serif;
+    line-height:1.7;font-size:15px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .enc-wrap{max-width:820px;margin:0 auto;padding:var(--s5) var(--s5) 96px}
+  .enc-masthead{padding:var(--s4) 0 var(--s3);border-bottom:2px solid var(--line);margin-bottom:var(--s4)}
+  .enc-masthead .kicker{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .enc-masthead h1{margin:var(--s1) 0 0;font-size:16px;font-weight:600;color:var(--muted)}
+  .atlas-loading,.atlas-enc-empty{padding:40px 6px;text-align:center;color:var(--muted)}
+  [hidden]{display:none!important}
+  @media (max-width:760px){ .enc-wrap{padding:var(--s4) var(--s4) 72px} }
+</style>
+</head>
+<body>
+<div class="enc-wrap">
+  <header class="enc-masthead">
+    <div class="kicker">Thai Legal Atlas</div>
+    <h1>สารานุกรมคำกฎหมาย · Encyclopedia <span style="font-weight:400">(ระยะทดลอง)</span></h1>
+  </header>
+
+  <div id="atlas-root"><div class="atlas-loading">กำลังโหลดสารานุกรม…</div></div>
+</div>
+
+<script src="atlas-patches.js?v=20260908a"></script>
+<script src="atlas-core.js?v=20260908a"></script>
+<script src="atlas-concepts.js?v=20260910a"></script>
+<script src="atlas-encyclopedia.js?v=20260909b"></script>
+<script>
+(function () {
+  'use strict';
+  var root = document.getElementById('atlas-root');
+
+  // The Encyclopedia index needs only concept names + the registry's
+  // subject-area labels — not the full legal corpus. Registry load is
+  // best-effort: without it, subject-area chips fall back to their raw keys.
+  AtlasCore.loadRegistry('collections-registry.json?v=20260907d')
+    .catch(function () { /* labels degrade gracefully */ })
+    .then(function () {
+      return AtlasEncyclopedia.render(root, { url: 'atlas-concepts.json?v=20260910a' });
+    })
+    .catch(function (err) {
+      root.innerHTML = '<div class="atlas-enc-empty">โหลดข้อมูลไม่สำเร็จ: ' +
+        String(err && err.message || err) + '</div>';
+    });
+})();
+</script>
+</body>
+</html>

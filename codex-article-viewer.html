@@ -1784,16 +1784,31 @@ function atlasCurrentInstrument() {
   return sep !== -1 ? String(currentNumber).slice(0, sep) : null;
 }
 function atlasReturnHref() {
-  // Prefer the exact Atlas route (with its expanded tree) saved for this tab;
-  // otherwise reconstruct the collection / instrument route from the id.
+  // F11.2 — return LOSSLESSLY to the exact provision drawer. A ref handed over
+  // by Atlas (atlas:return.a) wins when it belongs to this collection; else the
+  // provision shown here is always a valid ref. Falls back to the pre-F11.2
+  // behaviour (exact saved route, then reconstructed route) when neither is
+  // available. Only the FROM_ATLAS callers reach here (applyAtlasContext).
+  let ref = null, savedHash = null;
   try {
     const saved = JSON.parse(sessionStorage.getItem('atlas:return') || 'null');
-    if (saved && typeof saved.hash === 'string' &&
-        saved.hash.indexOf('#/c/' + currentBookType) === 0) {
-      return 'atlas.html' + saved.hash;
+    if (saved && typeof saved === 'object') {
+      if (typeof saved.hash === 'string') savedHash = saved.hash;
+      if (typeof saved.a === 'string' && saved.a &&
+          saved.a.indexOf(currentBookType + '_') === 0) {
+        ref = saved.a;
+      }
     }
-  } catch (e) { /* no sessionStorage — fall through to reconstruction */ }
-  return 'atlas.html' + atlasStructuralRoute();
+  } catch (e) { /* no sessionStorage — fall through */ }
+  if (!ref && currentBookType && currentNumber != null && currentNumber !== '') {
+    ref = currentBookType + '_' + currentNumber;
+  }
+  const route = atlasStructuralRoute();   // #/c/<collection>[/i/<instrument>]
+  if (ref) return 'atlas.html?a=' + encodeURIComponent(ref) + route;
+  if (savedHash && savedHash.indexOf('#/c/' + currentBookType) === 0) {
+    return 'atlas.html' + savedHash;
+  }
+  return 'atlas.html' + route;
 }
 // Write the Phase 4B return context, then let the anchor's real href navigate.
 // Best-effort: if sessionStorage is unavailable the href still lands the user

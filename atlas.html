@@ -45,6 +45,22 @@
   .atlas-principle{margin-top:var(--s3);font-size:12px;color:var(--muted);
     border-left:2px solid var(--line);padding:2px 0 2px var(--s3);max-width:78ch}
 
+  /* F11.3.6 — first-class Encyclopedia entry. Same visual language as
+     .atlas-collection-card (border, radius, panel bg, accent hover) — a
+     doorway into the existing reading environment, not a new landing page. */
+  .atlas-encyclopedia-entry{display:flex;align-items:center;gap:var(--s3);
+    padding:var(--s4);margin:0 0 var(--s5);border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);color:inherit;
+    transition:border-color .12s,background .12s}
+  .atlas-encyclopedia-entry:hover{border-color:var(--accent);background:var(--accent-soft);
+    text-decoration:none}
+  .atlas-encyclopedia-entry:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .atlas-encyclopedia-entry-icon{font-size:22px;line-height:1;flex:none}
+  .atlas-encyclopedia-entry-body{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .atlas-encyclopedia-entry-title{font-weight:700;font-size:15px;color:var(--ink)}
+  .atlas-encyclopedia-entry-sub{font-size:12px;color:var(--muted);line-height:1.5}
+  .atlas-encyclopedia-entry-arrow{margin-left:auto;flex:none;color:var(--accent);font-size:16px}
+
   .atlas-loading,.atlas-error{padding:32px 6px;text-align:center;color:var(--muted)}
   .atlas-error{color:#b4453a}
   .atlas-empty{margin:var(--s3) 0;padding:var(--s4) var(--s4);color:var(--muted);
@@ -224,6 +240,7 @@
     .atlas-area-title{margin-bottom:var(--s1)}
     .atlas-collection-header,.atlas-instrument-header{padding:var(--s4)}
     .atlas-instrument-list{grid-template-columns:1fr}
+    .atlas-encyclopedia-entry-arrow{display:none}
   }
 </style>
 </head>
@@ -235,6 +252,21 @@
     <div class="atlas-principle">สารบบเดียว หลายระบบกฎหมาย — ไล่จากสาขากฎหมาย → ฉบับกฎหมาย → ลำดับชั้นดั้งเดิมของฉบับนั้น → มาตราหรือข้อ → ตัวบท</div>
   </header>
 
+  <!-- F11.3.6 — first-class Encyclopedia entry: a real, functional doorway
+       into the existing Atlas reading environment (structure → provisions →
+       concepts → clusters → cases), not a decorative card and not a second
+       provision renderer. Destination is the existing encyclopedia.html. -->
+  <a class="atlas-encyclopedia-entry" href="encyclopedia.html">
+    <span class="atlas-encyclopedia-entry-icon" aria-hidden="true">🏛️</span>
+    <span class="atlas-encyclopedia-entry-body">
+      <span class="atlas-encyclopedia-entry-title">สารานุกรมคำกฎหมาย · Encyclopedia</span>
+      <span class="atlas-encyclopedia-entry-sub">อ่านและสำรวจกฎหมายไทยผ่านศัพท์และแนวคิดที่เชื่อมโยงกับโครงสร้าง มาตรา คดี และเครือข่ายที่เกี่ยวข้องในสารบบนี้</span>
+    </span>
+    <span class="atlas-encyclopedia-entry-arrow" aria-hidden="true">→</span>
+  </a>
+
+  <div id="atlas-search"></div>
+
   <div id="atlas-root"><div class="atlas-loading">กำลังโหลดสารบบกฎหมาย…</div></div>
 
   <footer class="atlas-foot" id="atlas-foot"></footer>
@@ -244,12 +276,25 @@
 <script src="atlas-core.js?v=20260907d"></script>
 <script src="atlas-ui.js?v=20260907f"></script>
 <script src="atlas-cases.js?v=20260907b"></script>
+<script src="atlas-clusters.js?v=20260909a"></script>
+<script src="atlas-concepts.js?v=20260910a"></script>
+<script src="atlas-provision-concepts.js?v=20260909a"></script>
+<script src="atlas-provision-lectures.js?v=20260911a"></script>
+<script src="atlas-provision-view.js?v=20260911a"></script>
+<script src="atlas-search.js?v=20260909a"></script>
 <script>
 (function () {
   'use strict';
   var CODEX_VERSION = '20260903b';
   var root = document.getElementById('atlas-root');
   var foot = document.getElementById('atlas-foot');
+
+  // Prime the Concept dataset with the same cache-bust token the Concept pages
+  // (concept.html / encyclopedia.html) use, so the Atlas F4/F5 consumers — which
+  // call AtlasConcepts.load() with no URL — never fetch a stale unversioned copy.
+  if (window.AtlasConcepts && typeof AtlasConcepts.load === 'function') {
+    AtlasConcepts.load('atlas-concepts.json?v=20260910a');
+  }
 
   Promise.all([
     fetch('codex-data.json?v=' + CODEX_VERSION).then(function (r) {
@@ -259,6 +304,11 @@
   ]).then(function (res) {
     AtlasCore.attachCorpus(res[0]);
     AtlasUI.mount(root);
+    // Phase 4E-1 — inline provision viewer (standalone; progressive enhancement,
+    // the provision pills keep their legacy href either way).
+    if (window.AtlasProvisionView) AtlasProvisionView.init({ root: root });
+    // F5 — search / jump box (standalone; additive consumer, fails soft)
+    if (window.AtlasSearch) AtlasSearch.mount(document.getElementById('atlas-search'), { root: root });
     renderFoot();
   }).catch(function (err) {
     root.innerHTML = '<div class="atlas-error">โหลดข้อมูลไม่สำเร็จ: ' +
@@ -278,6 +328,14 @@
         ? '<div style="margin-top:6px">แก้ช่องว่างจากต้นฉบับ: ' +
           patches.map(function (p) { return p.collection + ' ' + p.range; }).join(' · ') + '</div>'
         : '') +
+      // F11.3.6 — สารานุกรมคำกฎหมาย (Encyclopedia) is now a first-class Atlas
+      // entry (see the masthead link above); it no longer belongs on the
+      // "experimental / not yet integrated" line. ชั้นแนวคิดทางกฎหมาย
+      // (the concept-layer directory) is unchanged and still accurately
+      // described as an additive, not-yet-integrated layer.
+      '<div style="margin-top:6px">เพิ่มเติม: ' +
+        '<a href="concept.html">ชั้นแนวคิดทางกฎหมาย (ดัชนีแนวคิด)</a> ' +
+        '(ส่วนเสริม ยังไม่รวมเข้าเส้นทางนำทางของ Atlas)</div>' +
       '<div style="margin-top:6px"><a href="index.html">← หน้าหลัก Cool Uncle</a> · ' +
         '<a href="codex-search.html">ค้นมาตรา</a> · ' +
         '<a href="neural-network.html">รัศมีนิติธรรม (กราฟ)</a></div>';

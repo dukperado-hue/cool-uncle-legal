@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>แนวคิดทางกฎหมาย · Thai Legal Atlas</title>
+<meta name="description" content="ชั้นแนวคิดทางกฎหมาย (Legal Concept layer) ของ Thai Legal Atlas อธิบายแนวคิดหนึ่งที่พาดผ่านหลายมาตรา พร้อมลิงก์กลับไปยังตัวบทและคดีเดิม (ระยะทดลอง: 'ละเมิด')">
+<link rel="canonical" href="https://coolunclelab.com/concept.html">
+<!--
+  concept.html :: host page for the Legal Concept layer (PHASE 1, golden sample).
+  STANDALONE and ADDITIVE:
+    - loads the SAME atlas-core.js identity engine + codex-data.json + registry
+    - reuses atlas-provision-view.js for the inline ตัวบท drawer
+    - never touches atlas.html, its routing, or any provision URL
+  The concept view is emitted by atlas-concepts.js as semantic atlas-concept-*
+  classes with no inline visual CSS; this stylesheet is the baseline skin,
+  aligned with atlas.html's palette.
+-->
+<style>
+  :root{
+    --bg:#FBF9F4; --panel:#fff; --ink:#1f2430; --muted:#5b6472;
+    --line:#e6e1d6; --accent:#2E4A7A; --accent-soft:#eaf0f8; --chip:#f2ede1;
+    --warn:#8a5a1f; --warn-soft:#f7efe0;
+    --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:36px; --radius:10px;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --bg:#14161b;--panel:#1c1f27;--ink:#e8eaed;--muted:#9aa3b2;
+    --line:#2c313c;--accent:#8fb4e8;--accent-soft:#20293a;--chip:#232733;
+    --warn:#d8b477;--warn-soft:#2a2418;}}
+  :root[data-theme="dark"]{
+    --bg:#14161b;--panel:#1c1f27;--ink:#e8eaed;--muted:#9aa3b2;
+    --line:#2c313c;--accent:#8fb4e8;--accent-soft:#20293a;--chip:#232733;
+    --warn:#d8b477;--warn-soft:#2a2418;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Sarabun","IBM Plex Sans Thai",system-ui,-apple-system,"Segoe UI",sans-serif;
+    line-height:1.7;font-size:15px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .concept-wrap{max-width:820px;margin:0 auto;padding:var(--s5) var(--s5) 96px}
+
+  .concept-masthead{padding:var(--s4) 0 var(--s3);border-bottom:2px solid var(--line);margin-bottom:var(--s5)}
+  .concept-masthead .kicker{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .concept-masthead h1{margin:var(--s1) 0 0;font-size:16px;font-weight:600;color:var(--muted)}
+
+  .atlas-loading,.atlas-concept-error{padding:40px 6px;text-align:center;color:var(--muted)}
+  .atlas-concept-error{color:#b4453a}
+
+  /* ---- breadcrumb ---- */
+  .atlas-concept-crumbs{font-size:12.5px;color:var(--muted);display:flex;flex-wrap:wrap;
+    gap:var(--s2);align-items:center;margin:0 0 var(--s4)}
+  .atlas-concept-crumb-sep{opacity:.45}
+
+  /* ---- head ---- */
+  .atlas-concept-head{margin:0 0 var(--s5)}
+  .atlas-concept-title{margin:0 0 var(--s2);font-size:27px;font-weight:700;letter-spacing:-.01em}
+  .atlas-concept-en{font-size:14px;font-weight:400;color:var(--muted)}
+  .atlas-concept-aliases{margin:0 0 var(--s3);font-size:12.5px;color:var(--muted)}
+  .atlas-concept-areas{display:flex;flex-wrap:wrap;gap:var(--s2);margin:0 0 var(--s4)}
+  .atlas-concept-area-chip{font-size:11px;padding:2px 10px;border-radius:999px;
+    background:var(--chip);color:var(--muted)}
+  .atlas-concept-def{font-size:16px;line-height:1.85;margin:0 0 var(--s3)}
+
+  /* ---- sections ---- */
+  .atlas-concept-section{margin:0 0 var(--s6);padding-top:var(--s4);border-top:1px solid var(--line)}
+  .atlas-concept-section-title{margin:0 0 var(--s3);font-size:17px;font-weight:700}
+  .atlas-concept-body{margin:0 0 var(--s3);line-height:1.85}
+  .atlas-concept-item{margin:0 0 var(--s4);padding-left:var(--s4);border-left:2px solid var(--line)}
+  .atlas-concept-item-title{margin:0 0 var(--s1);font-size:14.5px;font-weight:600}
+  .atlas-concept-cases-sub{margin:var(--s4) 0 var(--s2);font-size:12.5px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+
+  /* ---- provision pills (matches atlas.html .atlas-provision) ---- */
+  .atlas-concept-pills{display:flex;flex-wrap:wrap;gap:5px 6px;margin:var(--s2) 0 var(--s3)}
+  .atlas-provision{display:inline-block;padding:3px 10px;border:1px solid var(--line);
+    border-radius:5px;font-size:12px;background:var(--panel);color:var(--ink);
+    text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .atlas-provision:hover{border-color:var(--accent);background:var(--accent-soft);text-decoration:none}
+  .atlas-provision:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .atlas-provision-cancelled{opacity:.5;text-decoration:line-through}
+  .atlas-concept-ref-missing{border-style:dashed;opacity:.6}
+
+  .atlas-concept-prov-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s2);margin:var(--s1) 0}
+  .atlas-concept-prov-note{font-size:12.5px;color:var(--muted)}
+
+  /* ---- lecture refs ---- */
+  .atlas-concept-lectures{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s1) var(--s2);
+    margin:var(--s2) 0 var(--s3);font-size:12px;color:var(--muted)}
+  .atlas-concept-lectures-label{font-weight:600}
+  .atlas-concept-lecture-link{padding:1px 7px;border:1px solid var(--line);border-radius:999px}
+
+  /* ---- verify banner ---- */
+  .atlas-concept-verify{margin:var(--s2) 0;padding:var(--s2) var(--s3);font-size:12.5px;
+    color:var(--warn);background:var(--warn-soft);border-radius:8px;line-height:1.6}
+
+  /* ---- anchor ---- */
+  .atlas-concept-anchor-line{margin:0 0 var(--s2);font-size:14px}
+  .atlas-concept-anchor-link{font-weight:600}
+
+  /* ---- cases ---- */
+  .atlas-concept-case-list{display:flex;flex-direction:column;gap:var(--s2);margin:var(--s2) 0}
+  .atlas-concept-case{padding:var(--s2) var(--s3);border:1px solid var(--line);border-radius:8px;
+    background:var(--panel)}
+  .atlas-concept-case-link{font-size:13px;line-height:1.55}
+
+  /* ---- related concepts ---- */
+  .atlas-concept-related-wrap{display:flex;flex-wrap:wrap;gap:var(--s2)}
+  .atlas-concept-related-chip{font-size:12.5px;padding:4px 12px;border-radius:999px;
+    border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+  .atlas-concept-related-chip.is-planned{color:var(--muted);border-style:dashed;background:transparent}
+  .atlas-concept-related-chip.is-inline{display:inline-block;margin:var(--s1) var(--s1) 0 0;font-size:11.5px}
+
+  /* ---- sources ---- */
+  .atlas-concept-source-list{margin:0;padding-left:var(--s5);font-size:12.5px;color:var(--muted);line-height:1.75}
+  .atlas-concept-source.is-todo{color:var(--warn)}
+
+  .atlas-concept-foot{margin-top:var(--s6);padding-top:var(--s4);border-top:1px solid var(--line);
+    font-size:11.5px;color:var(--muted);line-height:1.7}
+
+  .concept-foot{margin-top:72px;padding-top:var(--s4);border-top:1px solid var(--line);
+    font-size:11.5px;color:var(--muted);line-height:1.7}
+  .concept-foot code{background:var(--chip);border-radius:4px;padding:1px 5px;font-size:11px}
+  [hidden]{display:none!important}
+
+  /* ---- reading tools: highlight + print ---- */
+  .cu-tools{display:flex;flex-wrap:wrap;gap:var(--s2);margin:var(--s3) 0 0}
+  .cu-tool-btn{font:inherit;font-size:12.5px;padding:5px 12px;border:1px solid var(--line);
+    border-radius:999px;background:var(--panel);color:var(--ink);cursor:pointer;line-height:1.3}
+  .cu-tool-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .cu-tool-btn:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .cu-tool-btn[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .cu-tool-btn-sub{color:var(--muted);font-size:11.5px}
+  body.cu-hl-on #atlas-root{cursor:text}
+  body.cu-hl-on mark.cu-hl{cursor:pointer}
+  mark.cu-hl{background:#fdec9a;color:#1f2430;padding:0 1px;border-radius:2px}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) mark.cu-hl{background:#8a6d1e;color:#fff}}
+  :root[data-theme="dark"] mark.cu-hl{background:#8a6d1e;color:#fff}
+
+  /* ---- scholarly view callout (distinct from the Atlas's own synthesis) ---- */
+  .atlas-concept-scholar{margin:var(--s4) 0 0;padding:var(--s3) var(--s4);
+    border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0}
+  .atlas-concept-scholar-kicker{display:block;font-size:10.5px;font-weight:700;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--accent);margin:0 0 var(--s1)}
+  .atlas-concept-scholar-who{margin:0 0 var(--s1);font-weight:700;font-size:13.5px}
+  .atlas-concept-scholar-text{margin:0 0 var(--s2);font-size:14px;line-height:1.85}
+  blockquote.atlas-concept-scholar-text{border:0;padding:0;font-style:italic}
+  .atlas-concept-scholar-prov{margin:0;font-size:11.5px;color:var(--muted)}
+
+  /* ---- Concept Directory (concept.html with no ?k=) ----
+     A plain textual index: heading -> list -> concept. Deliberately not a
+     grid of cards. Narrower reading column than a concept page; reuses the
+     shared type tokens so it stays consistent with the rest of the layer. */
+  .atlas-concept-directory{max-width:620px}
+  .atlas-concept-directory .atlas-concept-title{font-size:21px;font-weight:700;letter-spacing:0}
+  .atlas-concept-directory .atlas-concept-def{font-size:14.5px;line-height:1.8;color:var(--muted)}
+  .atlas-concept-directory .atlas-concept-section{margin-bottom:var(--s5)}
+  .atlas-concept-section-en{margin-left:var(--s2);font-size:12px;font-weight:400;
+    color:var(--muted);letter-spacing:.02em}
+
+  .atlas-concept-index{list-style:none;margin:var(--s3) 0 0;padding:0}
+  .atlas-concept-index-item{padding:var(--s4) 0;border-top:1px solid var(--line)}
+  .atlas-concept-index-item:first-child{border-top:0;padding-top:var(--s2)}
+  .atlas-concept-index-link{font-size:17px;font-weight:700;line-height:1.4;
+    display:inline-block}
+  .atlas-concept-index-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .atlas-concept-index-en{display:block;margin-top:2px;font-size:12.5px;color:var(--muted)}
+  .atlas-concept-index-desc{margin:var(--s2) 0 0;font-size:13.5px;line-height:1.75;color:var(--ink)}
+  .atlas-concept-index-areas{margin:var(--s1) 0 0;font-size:11.5px;color:var(--muted);letter-spacing:.02em}
+
+  .atlas-concept-soon{list-style:none;margin:var(--s3) 0 0;padding:0}
+  .atlas-concept-soon-item{padding:3px 0;font-size:13.5px;color:var(--muted);line-height:1.6}
+  .atlas-concept-soon-note{margin:var(--s3) 0 0;font-size:11.5px;color:var(--muted)}
+
+  /* ---- project identity ---- */
+  .concept-ident{margin-top:16px;font-weight:600;color:var(--ink)}
+  .concept-copyright{margin-top:2px}
+
+  @media (max-width:760px){
+    .concept-wrap{padding:var(--s4) var(--s4) 72px}
+    .atlas-concept-title{font-size:23px}
+    .atlas-concept-directory{max-width:none}
+  }
+
+  @media print{
+    :root{--bg:#fff;--panel:#fff;--ink:#111;--muted:#333;--line:#bbb;--accent:#000;
+      --accent-soft:#fff;--chip:#f1f1f1;--warn:#7a4f1c;--warn-soft:#fff}
+    body{font-size:11.5pt;line-height:1.6;color:#111;background:#fff}
+    .cu-tools,.atlas-concept-crumbs,.concept-foot,.concept-masthead .kicker,
+    .atlas-concept-cases-status{display:none!important}
+    .atlas-provision-view,.atlas-provision-view-backdrop,.atlas-provision-view-panel{display:none!important}
+    .concept-wrap{max-width:none;padding:0}
+    .concept-masthead{border-bottom:1px solid #999;margin-bottom:16px}
+    a{color:#111!important;text-decoration:none!important}
+    .atlas-concept-section{break-inside:avoid;border-top:1px solid #bbb}
+    .atlas-concept-section-title,.atlas-concept-item-title{break-after:avoid}
+    .atlas-provision{border:1px solid #999!important;background:#fff!important;color:#111!important}
+    .atlas-concept-verify{border:1.5px solid #7a4f1c!important;background:#fff!important;color:#7a4f1c!important;
+      -webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .atlas-concept-scholar{border-left:3px solid #000!important;background:#fff!important}
+    .atlas-concept-related-chip{border:1px solid #999!important;background:#fff!important;color:#111!important}
+    mark.cu-hl{background:#ffe9a8!important;color:#111!important;border-bottom:1.5px solid #c9a227;
+      -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+<div class="concept-wrap">
+  <header class="concept-masthead">
+    <div class="kicker">Thai Legal Atlas</div>
+    <h1>ชั้นแนวคิดทางกฎหมาย · Legal Concept layer <span style="font-weight:400">(ระยะทดลอง)</span></h1>
+    <div class="cu-tools" role="toolbar" aria-label="เครื่องมืออ่าน">
+      <button type="button" id="cu-hl-toggle" class="cu-tool-btn" aria-pressed="false">✏️ ไฮไลต์: ปิด</button>
+      <button type="button" id="cu-hl-clear" class="cu-tool-btn cu-tool-btn-sub" hidden>ล้างไฮไลต์ทั้งหมด</button>
+      <button type="button" id="cu-print" class="cu-tool-btn">🖨️ พิมพ์</button>
+    </div>
+  </header>
+
+  <div id="atlas-root"><div class="atlas-loading">กำลังโหลดแนวคิด…</div></div>
+
+  <footer class="concept-foot" id="concept-foot"></footer>
+</div>
+
+<script src="atlas-patches.js?v=20260908a"></script>
+<script src="atlas-core.js?v=20260908a"></script>
+<script src="atlas-clusters.js?v=20260909a"></script>
+<script src="atlas-concepts.js?v=20260910a"></script>
+<script src="atlas-concept-relations.js?v=20260910a"></script>
+<script src="atlas-provision-concepts.js?v=20260909a"></script>
+<script src="atlas-provision-view.js?v=20260911a"></script>
+<script>
+(function () {
+  'use strict';
+  var CODEX_VERSION = '20260903b';
+  var root = document.getElementById('atlas-root');
+  var foot = document.getElementById('concept-foot');
+
+  function param(name) {
+    var m = new RegExp('[?&]' + name + '=([^&#]*)').exec(location.search || '');
+    if (!m) return null;
+    try { return decodeURIComponent(m[1]); } catch (e) { return m[1]; }
+  }
+  var slug = param('k');   // no ?k= => Concept Directory; ?k=lamoed => Golden Sample
+
+  // the reading toolbar (highlight / print) only makes sense on a concept page
+  if (!slug) {
+    var tb = document.querySelector('.cu-tools');
+    if (tb) tb.hidden = true;
+  }
+
+  Promise.all([
+    fetch('codex-data.json?v=' + CODEX_VERSION).then(function (r) {
+      if (!r.ok) throw new Error('codex-data.json ' + r.status); return r.json();
+    }),
+    AtlasCore.loadRegistry('collections-registry.json?v=20260907d')
+  ]).then(function (res) {
+    AtlasCore.attachCorpus(res[0]);
+    return AtlasConcepts.render(root, slug, { url: 'atlas-concepts.json?v=20260910a' });
+  }).then(function () {
+    if (slug && window.AtlasConceptRelations && typeof AtlasConceptRelations.enhance === 'function') {
+      try { AtlasConceptRelations.enhance(root, slug); } catch (e) { /* fail soft */ }
+    }
+    renderFoot();
+    if (window.CUReadingTools && typeof window.CUReadingTools.onRendered === 'function') {
+      try { window.CUReadingTools.onRendered(); } catch (e) { /* fail soft */ }
+    }
+  }).catch(function (err) {
+    root.innerHTML = '<div class="atlas-concept-error">โหลดข้อมูลไม่สำเร็จ: ' +
+      String(err && err.message || err) + '</div>';
+  });
+
+  function renderFoot() {
+    var nav = slug
+      ? '<a href="encyclopedia.html">ค้นในสารานุกรมคำกฎหมาย</a> · ' +
+        '<a href="concept.html">↑ ดัชนีแนวคิดทั้งหมด</a> · ' +
+        '<a href="atlas.html">กลับสารบบโครงสร้าง (Atlas)</a> · ' +
+        '<a href="codex-search.html">ค้นมาตรา</a>'
+      : '<a href="encyclopedia.html">สารานุกรมคำกฎหมาย (ค้นหา · เรียงตามตัวอักษร)</a> · ' +
+        '<a href="atlas.html">กลับสารบบโครงสร้าง (Atlas)</a> · ' +
+        '<a href="codex-search.html">ค้นมาตรา</a>';
+    foot.innerHTML =
+      '<div>' + nav + '</div>' +
+      '<div style="margin-top:10px">ชั้นแนวคิดเป็นส่วนเสริมของ Thai Legal Atlas ทุกลิงก์มาตราชี้ไปยังหน้าตัวบทเดิม ' +
+        'และคดีมาจากดัชนีคดีสาธารณะเดิม (<code>article-case-index.json</code>) ไม่มีการสร้างกราฟหรือ schema ใหม่</div>' +
+      '<div style="margin-top:8px">ตัวบทกฎหมาย คำพิพากษา และเนื้อหาคำบรรยาย เป็นของเจ้าของสิทธิเดิม ' +
+        'ลิขสิทธิ์ด้านล่างครอบคลุมเฉพาะการเรียบเรียง โครงสร้างบรรณาธิการ ซอฟต์แวร์ และเนื้อหาต้นฉบับของ Cool Uncle Lab เท่านั้น</div>' +
+      '<div class="concept-ident">Cool Uncle Lab by Anusorn Sintusaichol</div>' +
+      '<div class="concept-copyright">&copy; 2026 Anusorn Sintusaichol. All rights reserved.</div>';
+  }
+})();
+</script>
+
+<script>
+/* Reading tools for the Concept page (PHASE 1, standalone, additive).
+   - Highlight: activate a mode, select text to mark it, click a mark to remove
+     it, or clear all. Highlights persist per concept via localStorage when
+     available; otherwise they are session-only. No backend, no accounts.
+   - Print: the browser's own print flow. Print CSS (in <style> above) hides
+     the toolbar, breadcrumb, footer and the provision drawer, keeps headings,
+     provision refs, warnings, scholarly views and highlights.
+   Never touches AtlasCore / AtlasUI / the provision drawer internals. */
+(function () {
+  'use strict';
+  // no ?k= means the Concept Directory is showing (nothing to highlight or print)
+  if (!/[?&]k=/.test(location.search || '')) return;
+
+  var root = document.getElementById('atlas-root');
+  var toggleBtn = document.getElementById('cu-hl-toggle');
+  var clearBtn = document.getElementById('cu-hl-clear');
+  var printBtn = document.getElementById('cu-print');
+  if (!root || !toggleBtn || !printBtn) return;
+
+  function param(name) {
+    var m = new RegExp('[?&]' + name + '=([^&#]*)').exec(location.search || '');
+    if (!m) return null;
+    try { return decodeURIComponent(m[1]); } catch (e) { return m[1]; }
+  }
+  var STORE_KEY = 'cu:concept-hl:' + (param('k') || 'lamoed');
+  var on = false;
+
+  // ---- print --------------------------------------------------------
+  printBtn.addEventListener('click', function () {
+    try { window.print(); } catch (e) { /* ignore */ }
+  });
+
+  // ---- highlight mode toggle --------------------------------------
+  toggleBtn.addEventListener('click', function () {
+    on = !on;
+    document.body.classList.toggle('cu-hl-on', on);
+    toggleBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    toggleBtn.textContent = on ? '✏️ ไฮไลต์: เปิด' : '✏️ ไฮไลต์: ปิด';
+    if (clearBtn) clearBtn.hidden = !on;
+  });
+
+  if (clearBtn) clearBtn.addEventListener('click', function () {
+    var marks = root.querySelectorAll('mark.cu-hl');
+    for (var i = 0; i < marks.length; i++) unwrap(marks[i]);
+    save();
+  });
+
+  // create a highlight from the current selection
+  root.addEventListener('mouseup', function () {
+    if (!on) return;
+    var sel = window.getSelection && window.getSelection();
+    if (!sel || sel.isCollapsed || !sel.rangeCount) return;
+    var range = sel.getRangeAt(0);
+    if (!root.contains(range.commonAncestorContainer)) return;
+    if (String(range).replace(/\s+/g, '').length < 2) return;
+    try { wrapRange(range); } catch (e) { /* ignore un-wrappable selections */ }
+    try { sel.removeAllRanges(); } catch (e) {}
+    save();
+  });
+
+  // click an existing highlight (in highlight mode) to remove it
+  root.addEventListener('click', function (e) {
+    if (!on) return;
+    var m = e.target && e.target.closest ? e.target.closest('mark.cu-hl') : null;
+    if (!m) return;
+    e.preventDefault();
+    e.stopPropagation();
+    unwrap(m);
+    save();
+  }, true);
+
+  // ---- range wrapping -------------------------------------------
+  function wrapNode(tn) {
+    if (!tn || !tn.nodeValue) return;
+    var p = tn.parentNode;
+    if (!p) return;
+    if (p.nodeName === 'MARK' && p.className === 'cu-hl') return;
+    var m = document.createElement('mark');
+    m.className = 'cu-hl';
+    p.insertBefore(m, tn);
+    m.appendChild(tn);
+  }
+
+  function wrapRange(range) {
+    var container = range.commonAncestorContainer;
+    if (container.nodeType === 3) { // single text node
+      var only = container;
+      var s = range.startOffset, e = range.endOffset;
+      if (e <= s) return;
+      var seg = only;
+      if (s > 0) seg = seg.splitText(s);
+      if (e - s < seg.nodeValue.length) seg.splitText(e - s);
+      wrapNode(seg);
+      return;
+    }
+    var walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null);
+    var targets = [], n;
+    while ((n = walker.nextNode())) {
+      if (!range.intersectsNode(n)) continue;
+      if (!n.nodeValue || !n.nodeValue.replace(/\s+/g, '')) continue;
+      var start = (n === range.startContainer) ? range.startOffset : 0;
+      var end = (n === range.endContainer) ? range.endOffset : n.nodeValue.length;
+      if (end <= start) continue;
+      targets.push({ node: n, start: start, end: end });
+    }
+    targets.forEach(function (t) {
+      var seg = t.node;
+      if (t.start > 0) seg = seg.splitText(t.start);
+      if (t.end - t.start < seg.nodeValue.length) seg.splitText(t.end - t.start);
+      wrapNode(seg);
+    });
+  }
+
+  function unwrap(m) {
+    var p = m.parentNode;
+    if (!p) return;
+    while (m.firstChild) p.insertBefore(m.firstChild, m);
+    p.removeChild(m);
+    try { p.normalize(); } catch (e) {}
+  }
+
+  // ---- persistence: character offsets into root.textContent ------
+  function save() {
+    var payload;
+    try {
+      var out = [];
+      var marks = root.querySelectorAll('mark.cu-hl');
+      for (var i = 0; i < marks.length; i++) {
+        var off = offsetOf(marks[i]);
+        if (off) out.push(off);
+      }
+      payload = JSON.stringify(out);
+    } catch (e) { return; }
+    try { window.localStorage.setItem(STORE_KEY, payload); } catch (e) { /* session-only */ }
+  }
+
+  function offsetOf(node) {
+    try {
+      var r = document.createRange();
+      r.setStart(root, 0);
+      r.setEndBefore(node);
+      var start = r.toString().length;
+      return [start, start + node.textContent.length];
+    } catch (e) { return null; }
+  }
+
+  function restore() {
+    var raw;
+    try { raw = window.localStorage.getItem(STORE_KEY); } catch (e) { return; }
+    if (!raw) return;
+    var ranges;
+    try { ranges = JSON.parse(raw); } catch (e) { return; }
+    if (!Array.isArray(ranges)) return;
+    ranges.forEach(function (pair) {
+      if (!pair || pair.length !== 2) return;
+      try { highlightByOffset(pair[0], pair[1]); } catch (e) { /* content changed */ }
+    });
+  }
+
+  function highlightByOffset(start, end) {
+    if (!(end > start)) return;
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    var pos = 0, n, sN, sO, eN, eO;
+    while ((n = walker.nextNode())) {
+      var len = n.nodeValue.length;
+      if (sN == null && pos + len > start) { sN = n; sO = start - pos; }
+      if (sN != null && pos + len >= end) { eN = n; eO = end - pos; break; }
+      pos += len;
+    }
+    if (sN != null && eN != null) {
+      var r = document.createRange();
+      r.setStart(sN, sO);
+      r.setEnd(eN, eO);
+      wrapRange(r);
+    }
+  }
+
+  window.CUReadingTools = { onRendered: function () { restore(); } };
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+{
+  "version": "1",
+  "generated": "2026-09-09",
+  "note": "Related Provision Legal Clusters — a CURATED, additive editorial layer over Thai Legal Atlas (FINALIZATION 2). Every cluster is hand-written from lecture evidence; nothing is auto-generated and nothing is inferred from article-number proximity. This file holds ONLY editorial relationship metadata: which provisions belong together, how they relate, and one short Thai sentence saying why. It contains NO statutory text and NO structural metadata — the มาตรา number, title, ตัวบท, breadcrumb and cancellation status are always read live from AtlasCore. A provision reference here is a stable AtlasCore id (<collection>_<number>). A provision may appear in many clusters and carry a different relationship in each; it never gets a permanent role/kind/pattern field.",
+
+  "patternKinds": {
+    "general-special": {
+      "labelTH": "บททั่วไป–บทเฉพาะ",
+      "descTH": "บทบัญญัติที่กว้างกว่าต้องอ่านประกอบกับ หรือถูกแทนที่ด้วย บทที่เฉพาะเจาะจงกว่าซึ่งใช้กับข้อเท็จจริงเดียวกัน"
+    },
+    "base-aggravated": {
+      "labelTH": "บทพื้นฐาน–บทฉกรรจ์",
+      "descTH": "การกระทำเดียวกันถูกยกระดับไปสู่บทที่มีโทษหนักขึ้นเพราะมีองค์ประกอบพิเศษเพิ่มเข้ามา"
+    },
+    "rule-exception": {
+      "labelTH": "หลัก–ข้อยกเว้น",
+      "descTH": "บทบัญญัติหนึ่งยกเว้น จำกัด ระงับ หรือลดทอนการใช้บังคับของอีกบทบัญญัติหนึ่ง"
+    },
+    "contrast-set": {
+      "labelTH": "บทเทียบเคียง",
+      "descTH": "บทบัญญัติที่มีเนื้อหาใกล้เคียงกันตั้งแต่สองบทขึ้นไป ต้องอ่านเทียบกันเพื่อวินิจฉัยว่าบทใดใช้บังคับ ไม่มีบทตั้งต้นและไม่มีทิศทาง"
+    },
+    "trigger-consequence": {
+      "labelTH": "เหตุ–ผลตามมา",
+      "descTH": "เมื่อปรับบทตามบทบัญญัติ ก. แล้ว ย่อมเกิดผลทางกฎหมายที่บทบัญญัติ ข. เป็นผู้กำหนด เช่น การเยียวยา โทษ ความเสียเปล่า การโอนความเสี่ยง หรือสิทธิไล่เบี้ย"
+    },
+    "precondition": {
+      "labelTH": "เงื่อนไข/ลำดับก่อน",
+      "descTH": "บทบัญญัติ ก. ต้องได้รับการวินิจฉัยหรือปฏิบัติให้ครบก่อน บทบัญญัติ ข. จึงจะใช้บังคับหรือหยิบยกขึ้นได้"
+    }
+  },
+
+  "clusters": [
+    {
+      "id": "crim-homicide-fault-to-aggravation",
+      "titleTH": "ความผิดต่อชีวิต: องค์ประกอบเจตนา → บทพื้นฐาน → บทฉกรรจ์",
+      "subjectArea": "criminal",
+      "anchor": "criminal_288",
+      "patternId": "base-aggravated",
+      "explanationTH": "การวินิจฉัยความรับผิดต่อชีวิตเริ่มจากองค์ประกอบภายในเรื่องเจตนาหรือประมาทตามมาตรา 59 ซึ่งเป็นบททั่วไปที่ต้องอ่านประกอบกับฐานความผิดเสมอ จากนั้นตั้งหลักที่มาตรา 288 เป็นบทพื้นฐานของการฆ่าผู้อื่น และยกระดับเป็นมาตรา 289 เมื่อปรากฏเหตุฉกรรจ์ตามที่กฎหมายกำหนด",
+      "members": [
+        { "ref": "criminal_59", "patternId": "general-special", "noteTH": "องค์ประกอบภายใน — เจตนา/ประมาท ที่อ่านประกอบทุกฐานความผิด" },
+        { "ref": "criminal_288", "order": 1, "noteTH": "ฆ่าผู้อื่น — บทพื้นฐาน" },
+        { "ref": "criminal_289", "order": 2, "patternId": "base-aggravated", "noteTH": "ฆ่าโดยมีเหตุฉกรรจ์ (เช่น ไตร่ตรองไว้ก่อน ฆ่าบุพการี ฆ่าเจ้าพนักงาน) — บทที่หนักขึ้นจากมาตรา 288" }
+      ]
+    },
+    {
+      "id": "crim-theft-family-progression",
+      "titleTH": "ความผิดเกี่ยวกับทรัพย์: จากลักทรัพย์ไล่ระดับสู่ปล้นทรัพย์",
+      "subjectArea": "criminal",
+      "anchor": "criminal_334",
+      "patternId": "base-aggravated",
+      "explanationTH": "มาตรา 59 เป็นบททั่วไปเรื่องเจตนาที่ต้องอ่านประกอบทุกฐาน ส่วนมาตรา 334 เป็นฐานพื้นฐานของการลักทรัพย์ แล้วยกระดับขึ้นตามองค์ประกอบที่เพิ่มเข้ามาโดยไล่เรียงจากฐานพื้นฐานขึ้นไปเสมอ คือ ฉกฉวยเอาซึ่งหน้า (มาตรา 336) ใช้กำลังประทุษร้ายหรือขู่เข็ญ (มาตรา 339) และร่วมกันกระทำตั้งแต่สามคนขึ้นไป (มาตรา 340)",
+      "members": [
+        { "ref": "criminal_59", "patternId": "general-special", "noteTH": "องค์ประกอบภายใน — เจตนา ที่อ่านประกอบทุกฐาน" },
+        { "ref": "criminal_334", "order": 1, "noteTH": "ลักทรัพย์ — ฐานพื้นฐาน" },
+        { "ref": "criminal_336", "order": 2, "patternId": "base-aggravated", "noteTH": "วิ่งราวทรัพย์ — ลักทรัพย์โดยฉกฉวยเอาซึ่งหน้า" },
+        { "ref": "criminal_339", "order": 3, "patternId": "base-aggravated", "noteTH": "ชิงทรัพย์ — ลักทรัพย์โดยใช้กำลังประทุษร้ายหรือขู่เข็ญ" },
+        { "ref": "criminal_340", "order": 4, "patternId": "base-aggravated", "noteTH": "ปล้นทรัพย์ — ชิงทรัพย์โดยร่วมกันตั้งแต่สามคนขึ้นไป" }
+      ]
+    },
+    {
+      "id": "crim-mistake-in-person-vs-aberratio",
+      "titleTH": "สำคัญผิดในตัวบุคคล เทียบกับ กระทำโดยพลาด",
+      "subjectArea": "criminal",
+      "patternId": "contrast-set",
+      "explanationTH": "อาจารย์ให้เปิดอ่านมาตรา 60 และมาตรา 61 เทียบกัน เพราะทั้งสองกรณีผู้กระทำเล็งเป้าผิดคนเหมือนกัน แต่หลักเกณฑ์และผลทางกฎหมายไม่เหมือนกัน จึงต้องแยกให้ชัดว่าข้อเท็จจริงเข้ากรณีพลาด (มาตรา 60) หรือสำคัญผิดในตัวบุคคล (มาตรา 61)",
+      "members": [
+        { "ref": "criminal_60", "noteTH": "กระทำโดยพลาด — เจตนาต่อคนหนึ่ง แต่ผลไปเกิดแก่อีกคนหนึ่ง" },
+        { "ref": "criminal_61", "noteTH": "สำคัญผิดในตัวบุคคล — เข้าใจผิดว่าคนที่ทำต่อคือเป้าหมาย" }
+      ]
+    },
+    {
+      "id": "tort-liability-to-compensation",
+      "titleTH": "ละเมิด: จากฝั่งความรับผิด สู่ฝั่งค่าสินไหมทดแทน",
+      "subjectArea": "civil-commercial",
+      "anchor": "civil_420",
+      "patternId": "trigger-consequence",
+      "explanationTH": "มาตรา 420 เป็นแม่บทฝั่งความรับผิดว่ามีการทำละเมิดครบองค์ประกอบหรือไม่ เมื่อวินิจฉัยว่าเป็นละเมิดแล้ว จึงส่งผลต่อไปยังมาตรา 438 ซึ่งเป็นแม่บทฝั่งการกำหนดค่าสินไหมทดแทนตามควรแก่พฤติการณ์และความร้ายแรงแห่งละเมิด",
+      "members": [
+        { "ref": "civil_420", "order": 1, "noteTH": "แม่บทความรับผิดเพื่อละเมิด" },
+        { "ref": "civil_438", "order": 2, "patternId": "trigger-consequence", "noteTH": "แม่บทการกำหนดค่าสินไหมทดแทน — ผลตามมาเมื่อเป็นละเมิด" }
+      ]
+    },
+    {
+      "id": "tort-rule-and-legitimate-defence",
+      "titleTH": "ละเมิด: หลักความรับผิด กับ นิรโทษกรรม",
+      "subjectArea": "civil-commercial",
+      "anchor": "civil_420",
+      "patternId": "rule-exception",
+      "explanationTH": "มาตรา 420 วางหลักความรับผิดเพื่อละเมิดไว้ ส่วนมาตรา 449 เป็นข้อยกเว้นในองค์ประกอบเรื่องการกระทำที่ผิดกฎหมาย คือ การกระทำเพื่อป้องกันโดยชอบด้วยกฎหมายหรือตามคำสั่งอันชอบด้วยกฎหมาย ทำให้ผู้กระทำไม่ต้องใช้ค่าสินไหมทดแทน",
+      "members": [
+        { "ref": "civil_420", "order": 1, "noteTH": "หลักความรับผิดเพื่อละเมิด" },
+        { "ref": "civil_449", "order": 2, "patternId": "rule-exception", "noteTH": "นิรโทษกรรม — เหตุยกเว้นความรับผิด" }
+      ]
+    },
+    {
+      "id": "oblig-subrogated-claim-joinder",
+      "titleTH": "การใช้สิทธิเรียกร้องของลูกหนี้: เงื่อนไขการหมายเรียกลูกหนี้",
+      "subjectArea": "civil-commercial",
+      "anchor": "civil_233",
+      "patternId": "precondition",
+      "explanationTH": "เมื่อเจ้าหนี้ใช้สิทธิเรียกร้องของลูกหนี้ในนามของตนเองตามมาตรา 233 กฎหมายบังคับเงื่อนไขขั้นตอนว่าจะต้องขอให้ศาลหมายเรียกลูกหนี้เข้ามาในคดีตามมาตรา 234 เสมอ จึงจะดำเนินคดีต่อไปได้",
+      "members": [
+        { "ref": "civil_233", "order": 1, "noteTH": "สิทธิของเจ้าหนี้ที่จะใช้สิทธิเรียกร้องของลูกหนี้" },
+        { "ref": "civil_234", "order": 2, "patternId": "precondition", "statuteCrossRefers": true, "noteTH": "ต้องหมายเรียกลูกหนี้เข้ามาในคดี — เงื่อนไขบังคับก่อนตามที่มาตรา 233 โยงมา" }
+      ]
+    }
+  ]
+}
