@@ -17,16 +17,20 @@
   :root{
     --bg:#FBF9F4; --panel:#fff; --ink:#1f2430; --muted:#5b6472;
     --line:#e6e1d6; --accent:#2E4A7A; --accent-soft:#eaf0f8; --chip:#f2ede1;
-    /* Atlas identity/navigation accent — restrained, used only in the
-       masthead brand + home control, never as a page-wide theme color. */
-    --atlas-brand:#A0293D; --atlas-brand-soft:#f7e9eb;
+    /* Atlas identity/navigation accent — restrained, used only for the
+       nav-bar current-item underline + small identity accents elsewhere
+       (concept.html/encyclopedia.html kickers), never as a page-wide theme
+       color. --atlas-header-bg is the solid masthead band colour — a
+       separate token because a "chrome" band doesn't need to soften for
+       dark mode the way an accent/link colour does. */
+    --atlas-brand:#DC143C; --atlas-brand-soft:#fbe2e6; --atlas-header-bg:#DC143C;
     /* spacing scale — whitespace communicates structure, not decoration */
     --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:36px;
     --radius:10px;
   }
   @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-    --atlas-brand:#e08a97;--atlas-brand-soft:#3a2126;}}
-  :root[data-theme="dark"]{--atlas-brand:#e08a97;--atlas-brand-soft:#3a2126;}
+    --atlas-brand:#e08a97;--atlas-brand-soft:#3a2126;--atlas-header-bg:#7a1a2c;}}
+  :root[data-theme="dark"]{--atlas-brand:#e08a97;--atlas-brand-soft:#3a2126;--atlas-header-bg:#7a1a2c;}
   @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
     --bg:#14161b;--panel:#1c1f27;--ink:#e8eaed;--muted:#9aa3b2;
     --line:#2c313c;--accent:#8fb4e8;--accent-soft:#20293a;--chip:#232733;}}
@@ -36,7 +40,7 @@
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);
     font-family:"Sarabun","IBM Plex Sans Thai",system-ui,-apple-system,"Segoe UI",sans-serif;
-    line-height:1.6;font-size:15px}
+    line-height:1.65;font-size:15px}
   a{color:var(--accent);text-decoration:none}
   a:hover{text-decoration:underline}
   .atlas-wrap{max-width:1120px;margin:0 auto;padding:var(--s5) var(--s5) 80px}
@@ -45,16 +49,35 @@
   .atlas-home{max-width:840px}
   .atlas-collection,.atlas-instrument{max-width:940px}
 
-  .atlas-masthead{padding:var(--s4) 0 var(--s4);border-bottom:2px solid var(--line);margin-bottom:var(--s5)}
-  .atlas-masthead-row{display:flex;align-items:baseline;justify-content:space-between;
-    gap:var(--s3);flex-wrap:wrap}
-  .atlas-brand{font-size:22px;letter-spacing:-.01em;font-weight:700;color:var(--atlas-brand)}
-  .atlas-brand:hover{text-decoration:none;opacity:.85}
-  .atlas-home-link{font-size:13px;font-weight:600;color:var(--atlas-brand);white-space:nowrap;
-    padding:4px 10px;border-radius:999px;border:1px solid var(--atlas-brand-soft)}
-  .atlas-home-link:hover{background:var(--atlas-brand-soft);text-decoration:none}
-  .atlas-principle{margin-top:var(--s3);font-size:12px;color:var(--muted);
-    border-left:2px solid var(--line);padding:2px 0 2px var(--s3);max-width:78ch}
+  /* ---- global Atlas header — a Cornell-LII-style identity band + nav row,
+     full-bleed (outside .atlas-wrap) so the colour band spans the viewport
+     while its content still lines up with the 1120px reading column. ---- */
+  .atlas-header-top{background:var(--atlas-header-bg)}
+  .atlas-header-top-inner{max-width:1120px;margin:0 auto;padding:14px var(--s5);
+    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .atlas-brand{font-size:19px;font-weight:700;letter-spacing:-.01em;color:#fff;
+    display:inline-flex;align-items:center;gap:8px}
+  .atlas-brand:hover{text-decoration:none;opacity:.9}
+  .atlas-brand-mark{font-size:18px;line-height:1}
+  .atlas-header-top-sub{font-size:12.5px;color:rgba(255,255,255,.82);
+    padding-left:10px;border-left:1px solid rgba(255,255,255,.35)}
+  .atlas-navbar{background:var(--panel);border-bottom:1px solid var(--line)}
+  .atlas-navbar-inner{max-width:1120px;margin:0 auto;padding:0 var(--s5);
+    display:flex;flex-wrap:wrap;align-items:center;gap:2px}
+  .atlas-navbar-link{display:inline-block;padding:12px 12px;font-size:13px;
+    font-weight:600;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
+  .atlas-navbar-link:hover{color:var(--ink);text-decoration:none}
+  .atlas-navbar-link.is-current{color:var(--atlas-brand);border-bottom-color:var(--atlas-brand)}
+  .atlas-subbar{background:var(--chip);border-bottom:1px solid var(--line)}
+  .atlas-subbar-inner{max-width:1120px;margin:0 auto;padding:7px var(--s5);
+    font-size:12px;color:var(--muted)}
+  @media (max-width:760px){
+    .atlas-header-top-inner{padding:12px var(--s4)}
+    .atlas-header-top-sub{display:none}
+    .atlas-navbar-inner{padding:0 var(--s4)}
+    .atlas-navbar-link{padding:10px 9px;font-size:12.5px}
+    .atlas-subbar-inner{padding:6px var(--s4);font-size:11.5px}
+  }
 
   /* F11.3.6 — first-class Encyclopedia entry. Same visual language as
      .atlas-collection-card (border, radius, panel bg, accent hover) — a
@@ -110,8 +133,8 @@
   .atlas-collection-icon{font-size:17px;line-height:1.3}
   .atlas-collection-body{display:flex;flex-direction:column;gap:2px;min-width:0}
   .atlas-collection-name{font-weight:600;font-size:14px;color:var(--ink)}
-  .atlas-collection-full{font-size:11.5px;color:var(--muted);line-height:1.45}
-  .atlas-collection-meta{font-size:11px;color:var(--muted);margin-top:var(--s1)}
+  .atlas-collection-full{font-size:12.5px;color:var(--muted);line-height:1.5}
+  .atlas-collection-meta{font-size:11.5px;color:var(--muted);margin-top:var(--s1)}
 
   /* ---- collection / instrument header -------------------------------- */
   .atlas-collection-header,.atlas-instrument-header{background:var(--panel);
@@ -256,15 +279,28 @@
 </style>
 </head>
 <body>
-<div class="atlas-wrap">
-  <header class="atlas-masthead">
-    <div class="atlas-masthead-row">
-      <h1 style="margin:0"><a class="atlas-brand" href="atlas.html">Thai&nbsp;Legal&nbsp;Atlas</a></h1>
-      <a class="atlas-home-link" href="atlas.html">หน้าหลัก</a>
+<header class="atlas-header">
+  <div class="atlas-header-top">
+    <div class="atlas-header-top-inner">
+      <h1 style="margin:0"><a class="atlas-brand" href="atlas.html">
+        <span class="atlas-brand-mark" aria-hidden="true">⚖</span>Thai&nbsp;Legal&nbsp;Atlas</a></h1>
+      <span class="atlas-header-top-sub">สารบบกฎหมายไทย</span>
     </div>
-    <div class="atlas-principle">สารบบเดียว หลายระบบกฎหมาย — ไล่จากสาขากฎหมาย → ฉบับกฎหมาย → ลำดับชั้นดั้งเดิมของฉบับนั้น → มาตราหรือข้อ → ตัวบท</div>
-  </header>
+  </div>
+  <nav class="atlas-navbar" aria-label="เมนูหลักของ Atlas">
+    <div class="atlas-navbar-inner">
+      <a class="atlas-navbar-link is-current" href="atlas.html">สารบบ</a>
+      <a class="atlas-navbar-link" href="encyclopedia.html">สารานุกรม</a>
+      <a class="atlas-navbar-link" href="codex-search.html">ค้นมาตรา</a>
+      <a class="atlas-navbar-link" href="neural-network.html">รัศมีนิติธรรม</a>
+    </div>
+  </nav>
+  <div class="atlas-subbar">
+    <div class="atlas-subbar-inner">สารบบเดียว หลายระบบกฎหมาย — ไล่จากสาขากฎหมาย → ฉบับกฎหมาย → ลำดับชั้นดั้งเดิมของฉบับนั้น → มาตราหรือข้อ → ตัวบท</div>
+  </div>
+</header>
 
+<div class="atlas-wrap">
   <!-- F11.3.6 — first-class Encyclopedia entry: a real, functional doorway
        into the existing Atlas reading environment (structure → provisions →
        concepts → clusters → cases), not a decorative card and not a second

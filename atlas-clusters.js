@@ -133,9 +133,9 @@
   function injectStyle() {
     if (!doc || !doc.head || doc.getElementById(STYLE_ID)) return;
     var css = [
-      '.atlas-cluster-sec{margin:20px 0 0;}',
-      '.atlas-cluster-sec-title{margin:0 0 10px;font-size:13px;font-weight:700;',
-      '  color:var(--ink,#1f2430);}',
+      '.atlas-cluster-sec{margin:0;}',
+      '.atlas-cluster-sec-title{margin:0 0 12px;font-size:11px;font-weight:700;',
+      '  letter-spacing:.03em;color:var(--muted,#5b6472);}',
       '.atlas-cluster{margin:0 0 14px;padding:12px 13px;border:1px solid var(--line,#e6e1d6);',
       '  border-radius:9px;background:var(--panel,#fff);}',
       '.atlas-cluster:last-child{margin-bottom:0;}',

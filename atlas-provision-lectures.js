@@ -87,8 +87,8 @@
   function injectStyle() {
     if (!doc || !doc.head || doc.getElementById(STYLE_ID)) return;
     var css = [
-      '.atlas-plec-sec{margin:16px 0 0;}',
-      '.atlas-plec-label{margin:0 0 8px;font-size:10.5px;font-weight:700;',
+      '.atlas-plec-sec{margin:0;}',
+      '.atlas-plec-label{margin:0 0 10px;font-size:11px;font-weight:700;',
       '  letter-spacing:.03em;text-transform:uppercase;color:var(--muted,#5b6472);}',
       '.atlas-plec-note{margin:0 0 8px;border:1px solid var(--line,#e6e1d6);',
       '  border-left:3px solid var(--muted,#5b6472);border-radius:8px;',

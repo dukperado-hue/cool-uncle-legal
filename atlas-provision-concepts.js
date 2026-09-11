@@ -145,7 +145,7 @@
   function injectStyle() {
     if (!doc || !doc.head || doc.getElementById(STYLE_ID)) return;
     var css = [
-      '.atlas-pcpt-sec{margin:16px 0 0;font-size:12.5px;line-height:1.75;color:var(--muted,#5b6472);}',
+      '.atlas-pcpt-sec{margin:0;font-size:13px;line-height:1.75;color:var(--muted,#5b6472);}',
       '.atlas-pcpt-label{font-weight:600;}',
       '.atlas-pcpt-link{color:var(--accent,#2E4A7A);text-decoration:none;}',
       '.atlas-pcpt-link:hover{text-decoration:underline;}',
