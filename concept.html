@@ -21,16 +21,17 @@
     --bg:#FBF9F4; --panel:#fff; --ink:#1f2430; --muted:#5b6472;
     --line:#e6e1d6; --accent:#2E4A7A; --accent-soft:#eaf0f8; --chip:#f2ede1;
     --warn:#8a5a1f; --warn-soft:#f7efe0;
+    --atlas-brand:#A0293D; --atlas-brand-soft:#f7e9eb;
     --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:36px; --radius:10px;
   }
   @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
     --bg:#14161b;--panel:#1c1f27;--ink:#e8eaed;--muted:#9aa3b2;
     --line:#2c313c;--accent:#8fb4e8;--accent-soft:#20293a;--chip:#232733;
-    --warn:#d8b477;--warn-soft:#2a2418;}}
+    --warn:#d8b477;--warn-soft:#2a2418;--atlas-brand:#e08a97;--atlas-brand-soft:#3a2126;}}
   :root[data-theme="dark"]{
     --bg:#14161b;--panel:#1c1f27;--ink:#e8eaed;--muted:#9aa3b2;
     --line:#2c313c;--accent:#8fb4e8;--accent-soft:#20293a;--chip:#232733;
-    --warn:#d8b477;--warn-soft:#2a2418;}
+    --warn:#d8b477;--warn-soft:#2a2418;--atlas-brand:#e08a97;--atlas-brand-soft:#3a2126;}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);
     font-family:"Sarabun","IBM Plex Sans Thai",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -40,8 +41,12 @@
   .concept-wrap{max-width:820px;margin:0 auto;padding:var(--s5) var(--s5) 96px}
 
   .concept-masthead{padding:var(--s4) 0 var(--s3);border-bottom:2px solid var(--line);margin-bottom:var(--s5)}
-  .concept-masthead .kicker{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .concept-masthead-row{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);flex-wrap:wrap}
+  .concept-masthead .kicker{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--atlas-brand)}
   .concept-masthead h1{margin:var(--s1) 0 0;font-size:16px;font-weight:600;color:var(--muted)}
+  .atlas-home-link{font-size:12px;font-weight:600;color:var(--atlas-brand);white-space:nowrap;
+    padding:3px 9px;border-radius:999px;border:1px solid var(--atlas-brand-soft)}
+  .atlas-home-link:hover{background:var(--atlas-brand-soft);text-decoration:none}
 
   .atlas-loading,.atlas-concept-error{padding:40px 6px;text-align:center;color:var(--muted)}
   .atlas-concept-error{color:#b4453a}
@@ -206,7 +211,10 @@
 <body>
 <div class="concept-wrap">
   <header class="concept-masthead">
-    <div class="kicker">Thai Legal Atlas</div>
+    <div class="concept-masthead-row">
+      <a class="kicker" href="atlas.html" style="text-decoration:none">Thai Legal Atlas</a>
+      <a class="atlas-home-link" href="atlas.html">หน้าหลัก</a>
+    </div>
     <h1>ชั้นแนวคิดทางกฎหมาย · Legal Concept layer <span style="font-weight:400">(ระยะทดลอง)</span></h1>
     <div class="cu-tools" role="toolbar" aria-label="เครื่องมืออ่าน">
       <button type="button" id="cu-hl-toggle" class="cu-tool-btn" aria-pressed="false">✏️ ไฮไลต์: ปิด</button>
@@ -254,7 +262,7 @@
     AtlasCore.loadRegistry('collections-registry.json?v=20260907d')
   ]).then(function (res) {
     AtlasCore.attachCorpus(res[0]);
-    return AtlasConcepts.render(root, slug, { url: 'atlas-concepts.json?v=20260910a' });
+    return AtlasConcepts.render(root, slug, { url: 'atlas-concepts.json?v=20260911c' });
   }).then(function () {
     if (slug && window.AtlasConceptRelations && typeof AtlasConceptRelations.enhance === 'function') {
       try { AtlasConceptRelations.enhance(root, slug); } catch (e) { /* fail soft */ }

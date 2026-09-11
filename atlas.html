@@ -17,10 +17,16 @@
   :root{
     --bg:#FBF9F4; --panel:#fff; --ink:#1f2430; --muted:#5b6472;
     --line:#e6e1d6; --accent:#2E4A7A; --accent-soft:#eaf0f8; --chip:#f2ede1;
+    /* Atlas identity/navigation accent — restrained, used only in the
+       masthead brand + home control, never as a page-wide theme color. */
+    --atlas-brand:#A0293D; --atlas-brand-soft:#f7e9eb;
     /* spacing scale — whitespace communicates structure, not decoration */
     --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:36px;
     --radius:10px;
   }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --atlas-brand:#e08a97;--atlas-brand-soft:#3a2126;}}
+  :root[data-theme="dark"]{--atlas-brand:#e08a97;--atlas-brand-soft:#3a2126;}
   @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
     --bg:#14161b;--panel:#1c1f27;--ink:#e8eaed;--muted:#9aa3b2;
     --line:#2c313c;--accent:#8fb4e8;--accent-soft:#20293a;--chip:#232733;}}
@@ -39,9 +45,14 @@
   .atlas-home{max-width:840px}
   .atlas-collection,.atlas-instrument{max-width:940px}
 
-  .atlas-masthead{padding:var(--s5) 0 var(--s4);border-bottom:2px solid var(--line);margin-bottom:var(--s5)}
-  .atlas-masthead h1{margin:0 0 var(--s2);font-size:25px;letter-spacing:-.01em;font-weight:700}
-  .atlas-masthead .sub{color:var(--muted);font-size:13.5px;max-width:64ch;line-height:1.6}
+  .atlas-masthead{padding:var(--s4) 0 var(--s4);border-bottom:2px solid var(--line);margin-bottom:var(--s5)}
+  .atlas-masthead-row{display:flex;align-items:baseline;justify-content:space-between;
+    gap:var(--s3);flex-wrap:wrap}
+  .atlas-brand{font-size:22px;letter-spacing:-.01em;font-weight:700;color:var(--atlas-brand)}
+  .atlas-brand:hover{text-decoration:none;opacity:.85}
+  .atlas-home-link{font-size:13px;font-weight:600;color:var(--atlas-brand);white-space:nowrap;
+    padding:4px 10px;border-radius:999px;border:1px solid var(--atlas-brand-soft)}
+  .atlas-home-link:hover{background:var(--atlas-brand-soft);text-decoration:none}
   .atlas-principle{margin-top:var(--s3);font-size:12px;color:var(--muted);
     border-left:2px solid var(--line);padding:2px 0 2px var(--s3);max-width:78ch}
 
@@ -247,8 +258,10 @@
 <body>
 <div class="atlas-wrap">
   <header class="atlas-masthead">
-    <h1>Thai&nbsp;Legal&nbsp;Atlas</h1>
-    <div class="sub">ชั้นนำทางและค้นพบเดียว เหนือโครงสร้างกฎหมายไทยหลายระบบ — โดยคงลำดับชั้นดั้งเดิมของกฎหมายแต่ละฉบับไว้ ไม่บีบให้เป็นทรงเดียวกัน</div>
+    <div class="atlas-masthead-row">
+      <h1 style="margin:0"><a class="atlas-brand" href="atlas.html">Thai&nbsp;Legal&nbsp;Atlas</a></h1>
+      <a class="atlas-home-link" href="atlas.html">หน้าหลัก</a>
+    </div>
     <div class="atlas-principle">สารบบเดียว หลายระบบกฎหมาย — ไล่จากสาขากฎหมาย → ฉบับกฎหมาย → ลำดับชั้นดั้งเดิมของฉบับนั้น → มาตราหรือข้อ → ตัวบท</div>
   </header>
 
@@ -293,7 +306,7 @@
   // (concept.html / encyclopedia.html) use, so the Atlas F4/F5 consumers — which
   // call AtlasConcepts.load() with no URL — never fetch a stale unversioned copy.
   if (window.AtlasConcepts && typeof AtlasConcepts.load === 'function') {
-    AtlasConcepts.load('atlas-concepts.json?v=20260910a');
+    AtlasConcepts.load('atlas-concepts.json?v=20260911c');
   }
 
   Promise.all([

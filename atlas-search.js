@@ -153,7 +153,19 @@
       };
     }
     if (info.collection) { var d = mk(info.collection); return d ? [d] : []; }
-    // bare number: civil first (product decision), then every other collection
+
+    // F5 context fix: a bare number defaults to the CURRENT PAGE'S collection
+    // (route context), not a hard-coded "civil". Global search stays an
+    // explicit action (type "civil 420" / "criminal 420" etc.) — we never
+    // silently widen the scope when the current collection can resolve.
+    var route = routeNow();
+    if (route.collection) {
+      var ctx = mk(route.collection);
+      return ctx ? [ctx] : [];
+    }
+
+    // no page context (e.g. the Atlas home view has no collection route):
+    // civil first (product decision), then every other collection
     var civ = mk('civil');
     if (civ) return [civ];
     var out = [];
