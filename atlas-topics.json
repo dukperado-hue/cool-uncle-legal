@@ -28,11 +28,13 @@
       "subjectAreas": ["civil-commercial"],
       "description": "ป.พ.พ. บรรพ 2 (หนี้) ทั้งหมด — นิยามหนี้และองค์ประกอบพื้นฐาน บ่อเกิดแห่งหนี้ทั้ง 4 ประเภท และรายละเอียดของแต่ละบ่อเกิดที่เขียนไว้เป็นแนวคิดของตนเอง",
       "path": [
-        { "kind": "concept", "ref": "atlas:concept/nee", "note": "นิยามหนี้ เจ้าหนี้ ลูกหนี้ วัตถุแห่งหนี้ และความระงับแห่งหนี้" },
+        { "kind": "concept", "ref": "atlas:concept/nee", "note": "นิยามหนี้ เจ้าหนี้ ลูกหนี้ วัตถุแห่งหนี้ การรับช่วงสิทธิ และความระงับแห่งหนี้" },
+        { "kind": "concept", "ref": "atlas:concept/sitthi-yeud-nuang-burimsit", "note": "ประกันหนี้ตามกฎหมาย: สิทธิยึดหน่วงและบุริมสิทธิ" },
         { "kind": "concept", "ref": "atlas:concept/bo-koet-haeng-nee", "note": "ภาพรวมบ่อเกิดแห่งหนี้ 4 ประเภท" },
         { "kind": "concept", "ref": "atlas:concept/nitikam", "note": "บ่อเกิดที่ 1: พื้นฐานของสัญญา — การแสดงเจตนา" },
         { "kind": "concept", "ref": "atlas:concept/sanya", "note": "บ่อเกิดที่ 1: สัญญา — หนี้จากความตกลงของคู่กรณี" },
-        { "kind": "concept", "ref": "atlas:concept/lamoed", "note": "บ่อเกิดที่ 4: ละเมิด — หนี้ที่เกิดขึ้นโดยผลของกฎหมาย" }
+        { "kind": "concept", "ref": "atlas:concept/lamoed", "note": "บ่อเกิดที่ 4: ละเมิด — หนี้ที่เกิดขึ้นโดยผลของกฎหมาย" },
+        { "kind": "concept", "ref": "atlas:concept/laap-mikhuan-dai", "note": "บ่อเกิดที่ 3: ลาภมิควรได้ — การได้ทรัพย์มาโดยปราศจากมูลอันจะอ้างกฎหมายได้" }
       ]
     }
   }

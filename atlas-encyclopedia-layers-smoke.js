@@ -216,12 +216,12 @@ run('D1. rendering topic "sap" shows one cluster step sized "4 แนวคิ�
   const meta = steps[0].querySelector('.atlas-topic-step-meta');
   ok(meta && meta.textContent === '4 แนวคิด', 'cluster size hint reads "4 แนวคิด", got: ' + (meta && meta.textContent));
 });
-run('D2. rendering topic "nee" lists 5 ordered concept steps, each a direct concept link', () => {
+run('D2. rendering topic "nee" lists 7 ordered concept steps, each a direct concept link', () => {
   const { root, okR } = renderTopic('nee');
   ok(okR === true, 'renderInto succeeded');
   const steps = root.querySelectorAll('.atlas-topic-step');
-  eq(steps.length, 5, 'five path steps');
-  const wantOrder = ['nee', 'bo-koet-haeng-nee', 'nitikam', 'sanya', 'lamoed'];
+  eq(steps.length, 7, 'seven path steps');
+  const wantOrder = ['nee', 'sitthi-yeud-nuang-burimsit', 'bo-koet-haeng-nee', 'nitikam', 'sanya', 'lamoed', 'laap-mikhuan-dai'];
   steps.forEach((li, i) => {
     const a = li.querySelector('a.atlas-topic-step-title');
     ok(a, 'step ' + i + ' is a link');

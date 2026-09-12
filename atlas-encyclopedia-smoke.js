@@ -277,7 +277,7 @@ function asyncTests() {
       const planned = atlasRoot.querySelector('.atlas-enc-planned');
       ok(planned, 'planned section present');
       ok(planned.querySelectorAll('a').length === 0, 'planned entries are not links (no entry exists yet)');
-      ok(planned.querySelectorAll('li').length >= 3, 'planned list populated');
+      ok(planned.querySelectorAll('li').length >= 2, 'planned list populated');
     });
   }).then(() => {
     locationObj.search = '?q=' + encodeURIComponent('ละเมิด');
