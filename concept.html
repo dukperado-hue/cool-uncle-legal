@@ -303,6 +303,7 @@
 <script src="atlas-patches.js?v=20260908a"></script>
 <script src="atlas-core.js?v=20260908a"></script>
 <script src="atlas-clusters.js?v=20260909a"></script>
+<script src="atlas-subject-tags.js?v=20260912a"></script>
 <script src="atlas-concepts.js?v=20260910a"></script>
 <script src="atlas-concept-relations.js?v=20260910a"></script>
 <script src="atlas-concept-clusters.js?v=20260912a"></script>
@@ -343,7 +344,8 @@
     AtlasCore.loadRegistry('collections-registry.json?v=20260907d'),
     AtlasConcepts.load('atlas-concepts.json?v=20260912a'),
     AtlasConceptClusters.load('atlas-concept-clusters.json?v=20260912a'),
-    AtlasTopics.load('atlas-topics.json?v=20260912a')
+    AtlasTopics.load('atlas-topics.json?v=20260912a'),
+    AtlasSubjectTags.load('atlas-subject-tags.json?v=20260912a')
   ]).then(function (res) {
     AtlasCore.attachCorpus(res[0]);
     if (view === 'cluster') return AtlasConceptClusters.render(root, clusterSlug);

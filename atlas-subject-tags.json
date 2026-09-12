@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "generated": "2026-09-12",
+  "principle": "Subject tags are a fine-grained TERM-level classification for the Encyclopedia (glossary coverage + search disambiguation) — distinct from collections-registry.json's subjectAreas[], which classifies whole codex COLLECTIONS at a coarser grain (e.g. 'civil-commercial' covers หนี้/ทรัพย์/ละเมิด/นิติกรรม/มรดก/ครอบครัว/องค์กรธุรกิจ all at once and cannot answer 'which of these is this term in'). This registry does not replace subjectAreas[] and is not itself a Concept identity — it is classification metadata a concept may carry (subjectTags[]) so the Encyclopedia can show 'this term belongs to หนี้ / ละเมิด / ...' at a glance. A concept may legitimately carry more than one tag; a tag must only be assigned where the concept's own authored content or relatedConcepts[] actually supports it, never merely because a term appeared in a pasted glossary list.",
+  "tags": [
+    { "key": "obligations",           "titleTH": "หนี้",                        "order": 1,  "hue": 222 },
+    { "key": "property",              "titleTH": "ทรัพย์",                      "order": 2,  "hue": 162 },
+    { "key": "civil-procedure",       "titleTH": "วิแพ่ง",                      "order": 3,  "hue": 198 },
+    { "key": "public-international",  "titleTH": "คดีเมือง",                    "order": 4,  "hue": 262 },
+    { "key": "business-orgs",         "titleTH": "องค์กรธุรกิจ",                "order": 5,  "hue": 42  },
+    { "key": "administrative",        "titleTH": "ปกครอง",                      "order": 6,  "hue": 18  },
+    { "key": "succession",            "titleTH": "มรดก",                        "order": 7,  "hue": 282 },
+    { "key": "criminal",              "titleTH": "อาญา",                        "order": 8,  "hue": 352 },
+    { "key": "family",                "titleTH": "ครอบครัว",                    "order": 9,  "hue": 332 },
+    { "key": "legal-history",         "titleTH": "ประวัติศาสตร์กฎหมายไทย",      "order": 10, "hue": 36  },
+    { "key": "tort",                  "titleTH": "ละเมิด",                      "order": 11, "hue": 6   },
+    { "key": "juristic-acts",         "titleTH": "นิติกรรม",                    "order": 12, "hue": 192 }
+  ]
+}

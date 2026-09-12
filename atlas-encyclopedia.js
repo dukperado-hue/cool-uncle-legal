@@ -125,7 +125,8 @@
         slug: slug,
         titleTH: c.titleTH || slug,
         summary: c.summary || c.description || (c.definition && c.definition.text) || '',
-        subjectAreas: c.subjectAreas || []
+        subjectAreas: c.subjectAreas || [],
+        subjectTags: c.subjectTags || []
       });
     }
 
@@ -289,8 +290,14 @@
       var d = e.summary;
       if (d.length > 150) d = d.slice(0, 148).replace(/\s+\S*$/, '') + '…';
       append(li, el('p', 'atlas-enc-desc', d));
-      var labels = areaLabels(e.subjectAreas);
-      if (labels.length) append(li, el('p', 'atlas-enc-areas', labels.join(' · ')));
+      if (e.subjectTags && e.subjectTags.length && global.AtlasSubjectTags) {
+        var tagsRow = el('div', 'atlas-enc-areas');
+        var rendered = global.AtlasSubjectTags.renderInto(tagsRow, e.subjectTags);
+        if (rendered) append(li, tagsRow);
+      } else {
+        var labels = areaLabels(e.subjectAreas);
+        if (labels.length) append(li, el('p', 'atlas-enc-areas', labels.join(' · ')));
+      }
     }
     return li;
   }

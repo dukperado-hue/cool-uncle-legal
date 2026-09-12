@@ -1583,6 +1583,101 @@ head('F8 — Related concept integrity + inbound surfacing');
      !/atlas-concept-relations\.js/.test(ah) && !/atlas-concept-relations\.js/.test(eh));
 })();
 
+// ============================================================================
+// PART 3 — Encyclopedia glossary coverage pass: alias hygiene + subject tags
+// ============================================================================
+(function () {
+  head('Encyclopedia glossary coverage pass — aliases + subject tags');
+
+  const conceptsDoc = JSON.parse(fs.readFileSync(path.join(ROOT, 'atlas-concepts.json'), 'utf8'));
+  const concepts = conceptsDoc.concepts;
+  const tagsDoc = JSON.parse(fs.readFileSync(path.join(ROOT, 'atlas-subject-tags.json'), 'utf8'));
+  const tagKeys = new Set((tagsDoc.tags || []).map(t => t.key));
+  const slugs = Object.keys(concepts);
+
+  ok('atlas-subject-tags.json defines the 12 target subject labels',
+     (tagsDoc.tags || []).length === 12,
+     (tagsDoc.tags || []).length);
+
+  ok('every tag key is unique',
+     tagKeys.size === (tagsDoc.tags || []).length);
+
+  // ---- alias hygiene: no duplicate alias string across two DIFFERENT concepts,
+  // and no alias equal to its own concept's titleTH (that would be a no-op /
+  // self-reference rather than a real alternate name) --------------------
+  const aliasOwner = {};
+  let dupAlias = null, selfAlias = null;
+  slugs.forEach(s => {
+    const c = concepts[s];
+    (c.aliases || []).forEach(a => {
+      if (a === c.titleTH) selfAlias = selfAlias || (s + ':' + a);
+      if (aliasOwner[a] && aliasOwner[a] !== s) dupAlias = dupAlias || (a + ' in ' + aliasOwner[a] + ' and ' + s);
+      aliasOwner[a] = s;
+    });
+  });
+  ok('no alias string is registered on two different concepts', dupAlias === null, dupAlias || '');
+  ok('no concept aliases its own titleTH to itself', selfAlias === null, selfAlias || '');
+
+  // ---- an alias must also never collide with ANY concept's own titleTH
+  // (a canonical name always wins a direct hit over an alias elsewhere) --
+  const titleSet = new Set(slugs.map(s => concepts[s].titleTH));
+  let aliasTitleCollision = null;
+  slugs.forEach(s => (concepts[s].aliases || []).forEach(a => {
+    if (titleSet.has(a) && a !== concepts[s].titleTH) aliasTitleCollision = aliasTitleCollision || (a + ' aliased under ' + s);
+  }));
+  ok('no alias string collides with a DIFFERENT concept\'s canonical titleTH',
+     aliasTitleCollision === null, aliasTitleCollision || '');
+
+  // ---- subject tags: every value used must exist in the registry -------
+  let unknownTag = null;
+  let taggedCount = 0, multiTagCount = 0;
+  slugs.forEach(s => {
+    const st = concepts[s].subjectTags;
+    if (!st || !st.length) return;
+    taggedCount++;
+    if (st.length > 1) multiTagCount++;
+    st.forEach(k => { if (!tagKeys.has(k)) unknownTag = unknownTag || (k + ' on ' + s); });
+  });
+  ok('every concept.subjectTags[] value resolves to a registered tag key',
+     unknownTag === null, unknownTag || '');
+  ok('all 11 published concepts from this pass carry at least one subject tag',
+     taggedCount === 11, taggedCount);
+  ok('exactly 2 concepts (lamoed, sanya) carry more than one subject tag — the multi-subject case',
+     multiTagCount === 2, multiTagCount);
+  ok('lamoed carries both tort + administrative (its own subjectAreas already names public-administrative)',
+     JSON.stringify((concepts.lamoed || {}).subjectTags) === JSON.stringify(['tort', 'administrative']));
+  ok('sanya carries both juristic-acts + obligations (its own relatedConcepts + crosswalk text name both)',
+     JSON.stringify((concepts.sanya || {}).subjectTags) === JSON.stringify(['juristic-acts', 'obligations']));
+
+  // ---- module surface + wiring ------------------------------------------
+  const stSrc = fs.readFileSync(path.join(ROOT, 'atlas-subject-tags.js'), 'utf8');
+  ok('atlas-subject-tags.js exposes window.AtlasSubjectTags with load/list/get/renderInto',
+     /global\.AtlasSubjectTags\s*=/.test(stSrc) &&
+     /load:\s*load/.test(stSrc) && /list:\s*list/.test(stSrc) &&
+     /get:\s*get/.test(stSrc) && /renderInto:\s*renderInto/.test(stSrc));
+  ok('atlas-subject-tags.js never uses innerHTML with data (textContent-only contract)',
+     !/\.innerHTML\s*=/.test(stSrc.replace(/\/\*[\s\S]*?\*\//g, '')));
+  ok('renderInto skips unknown keys instead of printing a raw internal key',
+     /ordered\s*=\s*list\(\)\.filter/.test(stSrc));
+
+  const ah2 = fs.readFileSync(path.join(ROOT, 'atlas.html'), 'utf8');
+  const ch2 = fs.readFileSync(path.join(ROOT, 'concept.html'), 'utf8');
+  const eh2 = fs.readFileSync(path.join(ROOT, 'encyclopedia.html'), 'utf8');
+  [['atlas.html', ah2], ['concept.html', ch2], ['encyclopedia.html', eh2]].forEach(([name, html]) => {
+    ok(name + ' loads atlas-subject-tags.js before atlas-concepts.js',
+       /<script[^>]+src="atlas-subject-tags\.js\?v=/.test(html) &&
+       html.indexOf('atlas-subject-tags.js?v=') < html.indexOf('atlas-concepts.js?v='));
+  });
+
+  const encSrc = fs.readFileSync(path.join(ROOT, 'atlas-encyclopedia.js'), 'utf8');
+  const cptSrc = fs.readFileSync(path.join(ROOT, 'atlas-concepts.js'), 'utf8');
+  ok('atlas-encyclopedia.js renders subjectTags via the shared module, with a subjectAreas fallback',
+     /AtlasSubjectTags\.renderInto/.test(encSrc) && /areaLabels\(e\.subjectAreas\)/.test(encSrc));
+  ok('atlas-concepts.js renders subjectTags via the shared module on both the entry head and directory listing, with a subjectAreas fallback',
+     (cptSrc.match(/AtlasSubjectTags\.renderInto/g) || []).length === 2 &&
+     /atlas-concept-area-chip/.test(cptSrc));
+})();
+
 console.log('\n----------------------------------------');
 console.log('  RESULT:  ' + pass + ' passed, ' + fail + ' failed');
 console.log('----------------------------------------');

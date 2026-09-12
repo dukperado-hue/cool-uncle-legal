@@ -106,6 +106,7 @@
 
 <script src="atlas-patches.js?v=20260908a"></script>
 <script src="atlas-core.js?v=20260908a"></script>
+<script src="atlas-subject-tags.js?v=20260912a"></script>
 <script src="atlas-concepts.js?v=20260910a"></script>
 <script src="atlas-concept-clusters.js?v=20260912a"></script>
 <script src="atlas-topics.js?v=20260912a"></script>
@@ -118,8 +119,10 @@
   // The Encyclopedia index needs only concept names + the registry's
   // subject-area labels — not the full legal corpus. Registry load is
   // best-effort: without it, subject-area chips fall back to their raw keys.
-  AtlasCore.loadRegistry('collections-registry.json?v=20260907d')
-    .catch(function () { /* labels degrade gracefully */ })
+  Promise.all([
+    AtlasCore.loadRegistry('collections-registry.json?v=20260907d').catch(function () { /* labels degrade gracefully */ }),
+    AtlasSubjectTags.load('atlas-subject-tags.json?v=20260912a')
+  ])
     .then(function () {
       return AtlasEncyclopedia.render(root, {
         url: 'atlas-concepts.json?v=20260912a',

@@ -529,8 +529,14 @@
       append(head, el('p', 'atlas-concept-aliases', 'ละติน: ' + concept.latin.join(' · ')));
     }
 
-    // subject-area chips: reuse the registry taxonomy labels
-    if (concept.subjectAreas && concept.subjectAreas.length) {
+    // fine-grained subject tags (Encyclopedia coverage pass): colored pills,
+    // one shared registry/renderer in atlas-subject-tags.js. Falls back to the
+    // coarse registry subjectAreas[] chips for a concept that has none yet.
+    if (concept.subjectTags && concept.subjectTags.length && global.AtlasSubjectTags) {
+      var tagsRow = el('div', 'atlas-concept-areas');
+      var rendered = global.AtlasSubjectTags.renderInto(tagsRow, concept.subjectTags);
+      if (rendered) append(head, tagsRow);
+    } else if (concept.subjectAreas && concept.subjectAreas.length) {
       var areas = el('div', 'atlas-concept-areas');
       var areaMap = {};
       try {
@@ -659,8 +665,14 @@
       append(li, el('p', 'atlas-concept-index-desc', desc));
     }
 
-    var labels = areaLabels(concept.subjectAreas);
-    if (labels.length) append(li, el('p', 'atlas-concept-index-areas', labels.join(' · ')));
+    if (concept.subjectTags && concept.subjectTags.length && global.AtlasSubjectTags) {
+      var tagsRow2 = el('div', 'atlas-concept-index-areas');
+      var rendered2 = global.AtlasSubjectTags.renderInto(tagsRow2, concept.subjectTags);
+      if (rendered2) append(li, tagsRow2);
+    } else {
+      var labels = areaLabels(concept.subjectAreas);
+      if (labels.length) append(li, el('p', 'atlas-concept-index-areas', labels.join(' · ')));
+    }
 
     return li;
   }

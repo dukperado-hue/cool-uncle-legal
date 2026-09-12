@@ -326,6 +326,7 @@
 <script src="atlas-ui.js?v=20260907f"></script>
 <script src="atlas-cases.js?v=20260907b"></script>
 <script src="atlas-clusters.js?v=20260909a"></script>
+<script src="atlas-subject-tags.js?v=20260912a"></script>
 <script src="atlas-concepts.js?v=20260910a"></script>
 <script src="atlas-provision-concepts.js?v=20260909a"></script>
 <script src="atlas-provision-lectures.js?v=20260911a"></script>
@@ -343,6 +344,9 @@
   // call AtlasConcepts.load() with no URL — never fetch a stale unversioned copy.
   if (window.AtlasConcepts && typeof AtlasConcepts.load === 'function') {
     AtlasConcepts.load('atlas-concepts.json?v=20260912a');
+  }
+  if (window.AtlasSubjectTags && typeof AtlasSubjectTags.load === 'function') {
+    AtlasSubjectTags.load('atlas-subject-tags.json?v=20260912a');
   }
 
   Promise.all([
