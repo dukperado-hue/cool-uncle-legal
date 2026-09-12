@@ -107,7 +107,9 @@
 <script src="atlas-patches.js?v=20260908a"></script>
 <script src="atlas-core.js?v=20260908a"></script>
 <script src="atlas-concepts.js?v=20260910a"></script>
-<script src="atlas-encyclopedia.js?v=20260909b"></script>
+<script src="atlas-concept-clusters.js?v=20260912a"></script>
+<script src="atlas-topics.js?v=20260912a"></script>
+<script src="atlas-encyclopedia.js?v=20260912a"></script>
 <script>
 (function () {
   'use strict';
@@ -119,7 +121,11 @@
   AtlasCore.loadRegistry('collections-registry.json?v=20260907d')
     .catch(function () { /* labels degrade gracefully */ })
     .then(function () {
-      return AtlasEncyclopedia.render(root, { url: 'atlas-concepts.json?v=20260911c' });
+      return AtlasEncyclopedia.render(root, {
+        url: 'atlas-concepts.json?v=20260912a',
+        clustersUrl: 'atlas-concept-clusters.json?v=20260912a',
+        topicsUrl: 'atlas-topics.json?v=20260912a'
+      });
     })
     .catch(function (err) {
       root.innerHTML = '<div class="atlas-enc-empty">โหลดข้อมูลไม่สำเร็จ: ' +

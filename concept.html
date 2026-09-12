@@ -198,6 +198,42 @@
   .atlas-concept-soon-item{padding:3px 0;font-size:13.5px;color:var(--muted);line-height:1.6}
   .atlas-concept-soon-note{margin:var(--s3) 0 0;font-size:11.5px;color:var(--muted)}
 
+  /* ---- Encyclopedia LEVEL 2 — Concept Cluster (concept.html?g=) ----
+     An ordered list of concepts, one entry per row. Visually distinct from
+     the flat Concept Directory list via a numbered marker and an optional
+     "featured" badge on the recommended entry point. */
+  .atlas-cluster-list{list-style:none;margin:var(--s3) 0 0;padding:0;counter-reset:cluster-item}
+  .atlas-cluster-item{padding:var(--s4) 0 var(--s4) var(--s6);border-top:1px solid var(--line);
+    position:relative;counter-increment:cluster-item}
+  .atlas-cluster-item:first-child{border-top:0;padding-top:var(--s2)}
+  .atlas-cluster-item::before{content:counter(cluster-item);position:absolute;left:0;top:var(--s4);
+    width:22px;height:22px;border-radius:50%;background:var(--chip);color:var(--muted);
+    font-size:11.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .atlas-cluster-item:first-child::before{top:var(--s2)}
+  .atlas-cluster-item-title{font-size:16.5px;font-weight:700;display:inline-block}
+  .atlas-cluster-item-title.is-planned{color:var(--muted);font-weight:400}
+  .atlas-cluster-item-badge{margin-left:var(--s2);font-size:10.5px;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--accent);vertical-align:middle}
+  .atlas-cluster-item-note{margin:var(--s1) 0 0;font-size:13px;line-height:1.7;color:var(--muted)}
+
+  /* ---- Encyclopedia LEVEL 3 — Collection / Topic (concept.html?t=) ----
+     A learning-pathway list: each step is either a Cluster (bundles several
+     concepts) or a single Concept, visually differentiated by the kind label
+     and, for clusters, a "N แนวคิด" size hint. */
+  .atlas-topic-path{list-style:none;margin:var(--s3) 0 0;padding:0}
+  .atlas-topic-step{display:flex;gap:var(--s3);padding:var(--s4) 0;border-top:1px solid var(--line)}
+  .atlas-topic-step:first-child{border-top:0;padding-top:var(--s2)}
+  .atlas-topic-step-num{flex:0 0 auto;width:24px;height:24px;border-radius:6px;background:var(--accent-soft);
+    color:var(--accent);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .atlas-topic-step-body{flex:1 1 auto;min-width:0}
+  .atlas-topic-step-kind{display:block;font-size:10.5px;font-weight:700;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--muted);margin:0 0 2px}
+  .atlas-topic-step-cluster .atlas-topic-step-kind{color:var(--accent)}
+  .atlas-topic-step-title{font-size:16px;font-weight:700}
+  .atlas-topic-step-title.is-planned{color:var(--muted);font-weight:400}
+  .atlas-topic-step-meta{margin-left:var(--s2);font-size:11.5px;color:var(--muted)}
+  .atlas-topic-step-note{margin:var(--s1) 0 0;font-size:13px;line-height:1.7;color:var(--muted)}
+
   /* ---- project identity ---- */
   .concept-ident{margin-top:16px;font-weight:600;color:var(--ink)}
   .concept-copyright{margin-top:2px}
@@ -269,6 +305,8 @@
 <script src="atlas-clusters.js?v=20260909a"></script>
 <script src="atlas-concepts.js?v=20260910a"></script>
 <script src="atlas-concept-relations.js?v=20260910a"></script>
+<script src="atlas-concept-clusters.js?v=20260912a"></script>
+<script src="atlas-topics.js?v=20260912a"></script>
 <script src="atlas-provision-concepts.js?v=20260909a"></script>
 <script src="atlas-provision-view.js?v=20260911a"></script>
 <script>
@@ -283,10 +321,17 @@
     if (!m) return null;
     try { return decodeURIComponent(m[1]); } catch (e) { return m[1]; }
   }
-  var slug = param('k');   // no ?k= => Concept Directory; ?k=lamoed => Golden Sample
+  // Three disjoint query params route this ONE host page to three distinct
+  // views — never ambiguous, never falls through to the wrong renderer:
+  //   ?k=<slug>  Concept   (existing, unchanged)   ?g=<slug>  Concept Cluster
+  //   ?t=<slug>  Collection/Topic                  (none)     Concept Directory
+  var slug = param('k');
+  var clusterSlug = param('g');
+  var topicSlug = param('t');
+  var view = slug ? 'concept' : (clusterSlug ? 'cluster' : (topicSlug ? 'topic' : 'directory'));
 
   // the reading toolbar (highlight / print) only makes sense on a concept page
-  if (!slug) {
+  if (view !== 'concept') {
     var tb = document.querySelector('.cu-tools');
     if (tb) tb.hidden = true;
   }
@@ -295,13 +340,26 @@
     fetch('codex-data.json?v=' + CODEX_VERSION).then(function (r) {
       if (!r.ok) throw new Error('codex-data.json ' + r.status); return r.json();
     }),
-    AtlasCore.loadRegistry('collections-registry.json?v=20260907d')
+    AtlasCore.loadRegistry('collections-registry.json?v=20260907d'),
+    AtlasConcepts.load('atlas-concepts.json?v=20260912a'),
+    AtlasConceptClusters.load('atlas-concept-clusters.json?v=20260912a'),
+    AtlasTopics.load('atlas-topics.json?v=20260912a')
   ]).then(function (res) {
     AtlasCore.attachCorpus(res[0]);
-    return AtlasConcepts.render(root, slug, { url: 'atlas-concepts.json?v=20260911c' });
+    if (view === 'cluster') return AtlasConceptClusters.render(root, clusterSlug);
+    if (view === 'topic') return AtlasTopics.render(root, topicSlug);
+    return AtlasConcepts.render(root, slug, { url: 'atlas-concepts.json?v=20260912a' });
   }).then(function () {
-    if (slug && window.AtlasConceptRelations && typeof AtlasConceptRelations.enhance === 'function') {
-      try { AtlasConceptRelations.enhance(root, slug); } catch (e) { /* fail soft */ }
+    if (view === 'concept') {
+      if (window.AtlasConceptRelations && typeof AtlasConceptRelations.enhance === 'function') {
+        try { AtlasConceptRelations.enhance(root, slug); } catch (e) { /* fail soft */ }
+      }
+      if (window.AtlasConceptClusters && typeof AtlasConceptClusters.enhanceConceptPage === 'function') {
+        try { AtlasConceptClusters.enhanceConceptPage(root, slug); } catch (e) { /* fail soft */ }
+      }
+      if (window.AtlasTopics && typeof AtlasTopics.enhanceConceptPage === 'function') {
+        try { AtlasTopics.enhanceConceptPage(root, slug); } catch (e) { /* fail soft */ }
+      }
     }
     renderFoot();
     if (window.CUReadingTools && typeof window.CUReadingTools.onRendered === 'function') {
@@ -313,7 +371,7 @@
   });
 
   function renderFoot() {
-    var nav = slug
+    var nav = view !== 'directory'
       ? '<a href="encyclopedia.html">ค้นในสารานุกรมคำกฎหมาย</a> · ' +
         '<a href="concept.html">↑ ดัชนีแนวคิดทั้งหมด</a> · ' +
         '<a href="atlas.html">กลับสารบบโครงสร้าง (Atlas)</a> · ' +

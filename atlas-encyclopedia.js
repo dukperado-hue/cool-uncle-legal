@@ -34,6 +34,8 @@
 
   var STYLE_ID = 'atlas-encyclopedia-style';
   var CONCEPT_URL = 'concept.html?k=';
+  var CLUSTER_URL = 'concept.html?g=';
+  var TOPIC_URL = 'concept.html?t=';
   var DEFAULT_DATA = 'atlas-concepts.json';
 
   var doc = global.document;
@@ -105,23 +107,24 @@
   //   'alias'    an alternate Thai name         (→ points at the primary)
   //   'en'       an English legal equivalent    (→ points at the primary)
   //   'latin'    a curated Latin legal term     (→ points at the primary)
-  function buildIndex(conceptDoc) {
+  function buildIndex(conceptDoc, clusterDoc, topicDoc) {
     var concepts = (conceptDoc && conceptDoc.concepts) || {};
     var entries = [];
-    var seen = {}; // dedupe identical (kind|term|slug)
+    var seen = {}; // dedupe identical (entityKind|kind|term|slug)
 
-    function push(term, kind, c, slug) {
+    function push(term, kind, entityKind, c, slug) {
       term = String(term == null ? '' : term).trim();
       if (!term) return;
-      var key = kind + '|' + norm(term) + '|' + slug;
+      var key = entityKind + '|' + kind + '|' + norm(term) + '|' + slug;
       if (seen[key]) return;
       seen[key] = 1;
       entries.push({
         term: term,
-        kind: kind,
+        kind: kind,               // primary | alias | en | latin  (within an entity's own names)
+        entityKind: entityKind,   // concept | cluster | topic     (LEVEL 1/2/3 — never collapsed)
         slug: slug,
         titleTH: c.titleTH || slug,
-        summary: c.summary || (c.definition && c.definition.text) || '',
+        summary: c.summary || c.description || (c.definition && c.definition.text) || '',
         subjectAreas: c.subjectAreas || []
       });
     }
@@ -129,11 +132,27 @@
     Object.keys(concepts).forEach(function (slug) {
       var c = concepts[slug];
       if (!c || c.status !== 'published') return;
-      push(c.titleTH, 'primary', c, slug);
-      (c.aliases || []).forEach(function (a) { push(a, 'alias', c, slug); });
+      push(c.titleTH, 'primary', 'concept', c, slug);
+      (c.aliases || []).forEach(function (a) { push(a, 'alias', 'concept', c, slug); });
       // titleEN may bundle several equivalents joined by " · "
-      String(c.titleEN || '').split('·').forEach(function (t) { push(t, 'en', c, slug); });
-      (c.latin || []).forEach(function (t) { push(t, 'latin', c, slug); });
+      String(c.titleEN || '').split('·').forEach(function (t) { push(t, 'en', 'concept', c, slug); });
+      (c.latin || []).forEach(function (t) { push(t, 'latin', 'concept', c, slug); });
+    });
+
+    // LEVEL 2 — Concept Clusters. One primary term each; no alias layer today.
+    var clusters = (clusterDoc && clusterDoc.clusters) || {};
+    Object.keys(clusters).forEach(function (slug) {
+      var g = clusters[slug];
+      if (!g || g.status !== 'published') return;
+      push(g.titleTH, 'primary', 'cluster', g, slug);
+    });
+
+    // LEVEL 3 — Collections / Topics. One primary term each; no alias layer today.
+    var topics = (topicDoc && topicDoc.topics) || {};
+    Object.keys(topics).forEach(function (slug) {
+      var t = topics[slug];
+      if (!t || t.status !== 'published') return;
+      push(t.titleTH, 'primary', 'topic', t, slug);
     });
 
     entries.sort(function (a, b) {
@@ -206,6 +225,10 @@
       '.atlas-enc-term{font-size:15px;font-weight:700}' +
       '.atlas-enc-entry.is-secondary .atlas-enc-term{font-weight:400}' +
       '.atlas-enc-kind{font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-left:8px}' +
+      '.atlas-enc-entity-badge{padding:1px 7px;border-radius:999px;background:var(--chip);color:var(--ink);' +
+        'font-weight:700}' +
+      '.atlas-enc-entry.is-cluster .atlas-enc-term,.atlas-enc-entry.is-topic .atlas-enc-term{color:var(--accent)}' +
+      '.atlas-enc-entry.is-topic .atlas-enc-entity-badge{background:var(--accent);color:#fff}' +
       '.atlas-enc-see{font-size:12.5px;color:var(--muted);margin-left:8px}' +
       '.atlas-enc-see a{color:var(--muted)}' +
       '.atlas-enc-desc{margin:2px 0 0;font-size:12.5px;color:var(--muted);line-height:1.6}' +
@@ -234,21 +257,32 @@
   }
 
   var KIND_LABEL = { alias: 'ชื่อเรียกอื่น', en: 'อังกฤษ', latin: 'ละติน' };
+  var ENTITY_LABEL = { concept: null, cluster: 'กลุ่มแนวคิด', topic: 'หัวข้อวิชา' };
+  var ENTITY_URL = { concept: CONCEPT_URL, cluster: CLUSTER_URL, topic: TOPIC_URL };
+
+  function entryUrl(e) {
+    return (ENTITY_URL[e.entityKind] || CONCEPT_URL) + encodeURIComponent(e.slug);
+  }
 
   function entryNode(e, opts) {
-    var li = el('li', 'atlas-enc-entry' + (e.kind === 'primary' ? '' : ' is-secondary'));
-    try { li.dataset.kind = e.kind; li.dataset.slug = e.slug; } catch (x) { /* shim */ }
+    var isPrimaryEntity = e.kind === 'primary'; // own name, not an alias of something else
+    var li = el('li', 'atlas-enc-entry' + (isPrimaryEntity ? '' : ' is-secondary') +
+      (e.entityKind !== 'concept' ? ' is-' + e.entityKind : ''));
+    try { li.dataset.kind = e.kind; li.dataset.entityKind = e.entityKind; li.dataset.slug = e.slug; } catch (x) { /* shim */ }
 
     var a = el('a', 'atlas-enc-term', e.term);
-    a.href = CONCEPT_URL + encodeURIComponent(e.slug);
+    a.href = entryUrl(e);
     append(li, a);
 
-    if (e.kind !== 'primary') {
+    var entityBadge = ENTITY_LABEL[e.entityKind];
+    if (entityBadge) append(li, el('span', 'atlas-enc-kind atlas-enc-entity-badge', entityBadge));
+
+    if (!isPrimaryEntity) {
       append(li, el('span', 'atlas-enc-kind', KIND_LABEL[e.kind] || e.kind));
       var see = el('span', 'atlas-enc-see');
       see.appendChild(doc.createTextNode('→ '));
       var sa = el('a', null, e.titleTH);
-      sa.href = CONCEPT_URL + encodeURIComponent(e.slug);
+      sa.href = entryUrl(e);
       see.appendChild(sa);
       append(li, see);
     } else if (opts && opts.showDesc && e.summary) {
@@ -357,6 +391,15 @@
   // ================================================================
   // public entry
   // ================================================================
+  // Cluster/Topic docs are OPTIONAL, best-effort additions — if
+  // atlas-concept-clusters.js / atlas-topics.js are not loaded on the host
+  // page, or their fetch fails, the Encyclopedia degrades to exactly its
+  // previous concept-only behaviour (never throws, never blocks on them).
+  function loadOptionalDoc(mod, url) {
+    if (!mod || typeof mod.load !== 'function') return Promise.resolve(null);
+    return mod.load(url).catch(function () { return null; });
+  }
+
   function render(rootEl, opts) {
     opts = opts || {};
     if (!rootEl) return Promise.resolve(false);
@@ -367,7 +410,12 @@
       return Promise.resolve(false);
     }
 
-    return AC.load(opts.url || DEFAULT_DATA).then(function (conceptDoc) {
+    return Promise.all([
+      AC.load(opts.url || DEFAULT_DATA),
+      loadOptionalDoc(global.AtlasConceptClusters, opts.clustersUrl),
+      loadOptionalDoc(global.AtlasTopics, opts.topicsUrl)
+    ]).then(function (docs) {
+      var conceptDoc = docs[0], clusterDoc = docs[1], topicDoc = docs[2];
       injectStyle();
       clear(rootEl);
 
@@ -376,7 +424,7 @@
         return false;
       }
 
-      var entries = buildIndex(conceptDoc);
+      var entries = buildIndex(conceptDoc, clusterDoc, topicDoc);
       var art = el('article', 'atlas-enc');
       try { art.dataset.view = 'encyclopedia'; } catch (e) { /* shim */ }
 
@@ -436,9 +484,15 @@
             : '';
         } else {
           renderFullIndex(results, entries);
-          var primaries = entries.filter(function (e) { return e.kind === 'primary'; }).length;
-          count.textContent = primaries.toLocaleString('th-TH') + ' แนวคิด · ' +
-            entries.length.toLocaleString('th-TH') + ' คำค้น';
+          var isPrimary = function (e) { return e.kind === 'primary'; };
+          var concepts = entries.filter(function (e) { return e.entityKind === 'concept' && isPrimary(e); }).length;
+          var clustersN = entries.filter(function (e) { return e.entityKind === 'cluster'; }).length;
+          var topicsN = entries.filter(function (e) { return e.entityKind === 'topic'; }).length;
+          var parts = [concepts.toLocaleString('th-TH') + ' แนวคิด'];
+          if (clustersN) parts.push(clustersN.toLocaleString('th-TH') + ' กลุ่มแนวคิด');
+          if (topicsN) parts.push(topicsN.toLocaleString('th-TH') + ' หัวข้อวิชา');
+          parts.push(entries.length.toLocaleString('th-TH') + ' คำค้น');
+          count.textContent = parts.join(' · ');
         }
         if (!opts2 || opts2.pushUrl !== false) writeQ(q);
       }
@@ -480,7 +534,8 @@
       groupEntries: groupEntries,
       search: search,
       readQ: readQ,
-      writeQ: writeQ
+      writeQ: writeQ,
+      entryUrl: entryUrl
     }
   };
 })(typeof window !== 'undefined' ? window : this);

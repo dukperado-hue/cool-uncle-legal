@@ -1,0 +1,27 @@
+{
+  "version": "0.1",
+  "generated": "2026-09-12",
+  "note": "Encyclopedia LEVEL 2 — Concept Cluster. NOT the same thing as atlas-clusters.json (which groups มาตรา/PROVISIONS into relationship patterns for the F1 provision reader — a completely different, pre-existing feature). A Concept Cluster groups published atlas-concepts.json CONCEPTS into one coherent, ORDERED legal-knowledge group. It holds no legal explanation of its own — titles/summaries are always read live from atlas-concepts.json via AtlasConcepts._internal.getConcept(); this file only holds editorial grouping metadata (which concepts belong together, in what order, why, and which is the entry point).",
+  "identityGrammar": {
+    "cluster": "atlas:cluster/<slug>  (this file's namespace — distinct from atlas:concept/<slug> and atlas:topic/<slug>)",
+    "conceptRef": "atlas:concept/<slug>  (resolved against atlas-concepts.json; never duplicated here)"
+  },
+  "clusters": {
+    "sap-sitthi": {
+      "id": "atlas:cluster/sap-sitthi",
+      "slug": "sap-sitthi",
+      "titleTH": "ทรัพย์และทรัพยสิทธิ",
+      "titleEN": "Property and Real Rights",
+      "status": "published",
+      "subjectAreas": ["civil-commercial"],
+      "description": "กลุ่มแนวคิดที่ปรับบทต่อเนื่องกันตลอดทั้งวิชาทรัพย์: เริ่มจากนิยามและการจำแนกประเภทของ \"ทรัพย์\" เอง ก่อนจะไปสู่ทรัพยสิทธิที่สมบูรณ์ที่สุดคือ \"กรรมสิทธิ์\" ทรัพยสิทธิที่คุ้มครองข้อเท็จจริงการยึดถือคือ \"ครอบครอง\" และปิดท้ายด้วยทรัพยสิทธิจำกัดอื่น ๆ ที่ก่อขึ้นเหนือทรัพย์ของผู้อื่น",
+      "concepts": [
+        { "ref": "atlas:concept/sap", "note": "จุดตั้งต้น: ทรัพย์คืออะไร แบ่งประเภทอย่างไร" },
+        { "ref": "atlas:concept/kammasit", "note": "ทรัพยสิทธิที่สมบูรณ์ที่สุด — สิทธิความเป็นเจ้าของ", "featured": true },
+        { "ref": "atlas:concept/krobkrong", "note": "คุ้มครองข้อเท็จจริงการยึดถือ แยกจากกรรมสิทธิ์" },
+        { "ref": "atlas:concept/sitthi-thang-sap-uen", "note": "ทรัพยสิทธิจำกัดอื่นเหนือทรัพย์ของผู้อื่น" }
+      ],
+      "topics": ["atlas:topic/sap"]
+    }
+  }
+}

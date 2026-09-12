@@ -1,0 +1,39 @@
+{
+  "version": "0.1",
+  "generated": "2026-09-12",
+  "note": "Encyclopedia LEVEL 3 — Collection / Topic. NOT the same thing as a codex `collection` (ป.พ.พ./ป.อ./ฯลฯ, resolved via AtlasCore.getCollection / collections-registry.json) — that naming is already taken by the structural Atlas layer, so this file and its module use the word TOPIC exclusively in code (UI copy may still say \"หมวดวิชา\"/\"Collection\"). A Topic is a broad legal SUBJECT a learner can study end-to-end: an ORDERED pathway through Concept Clusters and/or individual Concepts. It holds no legal explanation of its own — every path[] entry is a typed ref (concept | cluster) resolved live against atlas-concepts.json / atlas-concept-clusters.json.",
+  "identityGrammar": {
+    "topic": "atlas:topic/<slug>",
+    "pathEntry": "{ kind:'concept'|'cluster', ref:'atlas:concept/<slug>'|'atlas:cluster/<slug>', note? }"
+  },
+  "topics": {
+    "sap": {
+      "id": "atlas:topic/sap",
+      "slug": "sap",
+      "titleTH": "ทรัพย์",
+      "titleEN": "Property Law",
+      "status": "published",
+      "subjectAreas": ["civil-commercial"],
+      "description": "ป.พ.พ. บรรพ 1 ลักษณะ 3 (นิยามทรัพย์) และบรรพ 4 (ทรัพยสิทธิ) ทั้งหมด — จากคำถาม \"อะไรคือทรัพย์\" ไปจนถึงทรัพยสิทธิทุกประเภทที่กฎหมายรับรอง",
+      "path": [
+        { "kind": "cluster", "ref": "atlas:cluster/sap-sitthi" }
+      ]
+    },
+    "nee": {
+      "id": "atlas:topic/nee",
+      "slug": "nee",
+      "titleTH": "หนี้",
+      "titleEN": "Law of Obligations",
+      "status": "published",
+      "subjectAreas": ["civil-commercial"],
+      "description": "ป.พ.พ. บรรพ 2 (หนี้) ทั้งหมด — นิยามหนี้และองค์ประกอบพื้นฐาน บ่อเกิดแห่งหนี้ทั้ง 4 ประเภท และรายละเอียดของแต่ละบ่อเกิดที่เขียนไว้เป็นแนวคิดของตนเอง",
+      "path": [
+        { "kind": "concept", "ref": "atlas:concept/nee", "note": "นิยามหนี้ เจ้าหนี้ ลูกหนี้ วัตถุแห่งหนี้ และความระงับแห่งหนี้" },
+        { "kind": "concept", "ref": "atlas:concept/bo-koet-haeng-nee", "note": "ภาพรวมบ่อเกิดแห่งหนี้ 4 ประเภท" },
+        { "kind": "concept", "ref": "atlas:concept/nitikam", "note": "บ่อเกิดที่ 1: พื้นฐานของสัญญา — การแสดงเจตนา" },
+        { "kind": "concept", "ref": "atlas:concept/sanya", "note": "บ่อเกิดที่ 1: สัญญา — หนี้จากความตกลงของคู่กรณี" },
+        { "kind": "concept", "ref": "atlas:concept/lamoed", "note": "บ่อเกิดที่ 4: ละเมิด — หนี้ที่เกิดขึ้นโดยผลของกฎหมาย" }
+      ]
+    }
+  }
+}
