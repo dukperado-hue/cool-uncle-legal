@@ -13,31 +13,96 @@
       "titleTH": "ทรัพย์และทรัพยสิทธิ",
       "titleEN": "Property and Real Rights",
       "status": "published",
-      "subjectAreas": ["civil-commercial"],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
       "description": "กลุ่มแนวคิดที่ปรับบทต่อเนื่องกันตลอดทั้งวิชาทรัพย์: เริ่มจากนิยามและการจำแนกประเภทของ \"ทรัพย์\" เอง ก่อนจะไปสู่ทรัพยสิทธิที่สมบูรณ์ที่สุดคือ \"กรรมสิทธิ์\" ทรัพยสิทธิที่คุ้มครองข้อเท็จจริงการยึดถือคือ \"ครอบครอง\" และปิดท้ายด้วยทรัพยสิทธิจำกัดอื่น ๆ ที่ก่อขึ้นเหนือทรัพย์ของผู้อื่น",
       "concepts": [
-        { "ref": "atlas:concept/sap", "note": "จุดตั้งต้น: ทรัพย์คืออะไร แบ่งประเภทอย่างไร" },
-        { "ref": "atlas:concept/suan-kuab", "note": "ส่วนที่เป็นสาระสำคัญ แยกจากทรัพย์ประธานไม่ได้" },
-        { "ref": "atlas:concept/upakon", "note": "ของใช้ประจำทรัพย์ประธาน แยกออกได้โดยไม่ทำลาย" },
-        { "ref": "atlas:concept/dokphon", "note": "ประโยชน์ที่งอกจากทรัพย์: ดอกผลธรรมดา / ดอกผลนิตินัย" },
-        { "ref": "atlas:concept/kammasit", "note": "ทรัพยสิทธิที่สมบูรณ์ที่สุด — สิทธิความเป็นเจ้าของ", "featured": true },
-        { "ref": "atlas:concept/kammasit-ruam", "note": "เมื่อทรัพย์สินเป็นของหลายคนรวมกัน" },
-        { "ref": "atlas:concept/sathalanasombat", "note": "ทรัพย์ของแผ่นดินเพื่อสาธารณประโยชน์ โอน/ยึด/อ้างอายุความไม่ได้" },
-        { "ref": "atlas:concept/sap-sin-hai", "note": "หน้าที่ผู้เก็บได้ซึ่งทรัพย์สินหาย" },
-        { "ref": "atlas:concept/rongruen-rukland", "note": "สร้างโรงเรือนในที่ดินผู้อื่น: ผลต่างกันตามความสุจริต" },
-        { "ref": "atlas:concept/thang-jampen", "note": "ที่ดินตาบอด — ข้อจำกัดสิทธิโดยผลของกฎหมาย ไม่ใช่ทรัพยสิทธิ" },
-        { "ref": "atlas:concept/krobkrong", "note": "คุ้มครองข้อเท็จจริงการยึดถือ แยกจากกรรมสิทธิ์" },
-        { "ref": "atlas:concept/krobkrong-parapak", "note": "ครอบครองครบเงื่อนไข+ระยะเวลา กลายเป็นกรรมสิทธิ์" },
-        { "ref": "atlas:concept/rob-kuan-krobkrong", "note": "ทรัพย์ยังอยู่ในมือ แต่ถูกผู้อื่นสอดเข้าเกี่ยวข้อง" },
-        { "ref": "atlas:concept/yang-krobkrong", "note": "สูญเสียการครอบครองไปทั้งหมดโดยไม่สมัครใจ" },
-        { "ref": "atlas:concept/sitthi-thang-sap-uen", "note": "ทรัพยสิทธิจำกัดอื่นเหนือทรัพย์ของผู้อื่น (ภาพรวมเปรียบเทียบ 5 ประเภท)" },
-        { "ref": "atlas:concept/phara-jamyom", "note": "ที่ดินต่อที่ดิน: ภารยทรัพย์ยอมรับกรรมเพื่อสามยทรัพย์" },
-        { "ref": "atlas:concept/sitthi-asai", "note": "อยู่อาศัยในโรงเรือนผู้อื่นโดยไม่ต้องเสียค่าเช่า" },
-        { "ref": "atlas:concept/sitthi-nue-puendin", "note": "แยกความเป็นเจ้าของสิ่งปลูกสร้างออกจากที่ดิน — ข้อยกเว้นหลักส่วนควบ" },
-        { "ref": "atlas:concept/sitthi-keb-kin", "note": "ใช้และถือเอาประโยชน์จากทรัพย์ผู้อื่นได้เต็มที่ กว้างกว่าสิทธิอาศัย" },
-        { "ref": "atlas:concept/phara-tidpan", "note": "รับชำระหนี้เป็นคราว ๆ จากตัวทรัพย์โดยตรง" }
+        {
+          "ref": "atlas:concept/sap",
+          "note": "จุดตั้งต้น: ทรัพย์คืออะไร แบ่งประเภทอย่างไร"
+        },
+        {
+          "ref": "atlas:concept/suan-kuab",
+          "note": "ส่วนที่เป็นสาระสำคัญ แยกจากทรัพย์ประธานไม่ได้"
+        },
+        {
+          "ref": "atlas:concept/upakon",
+          "note": "ของใช้ประจำทรัพย์ประธาน แยกออกได้โดยไม่ทำลาย"
+        },
+        {
+          "ref": "atlas:concept/dokphon",
+          "note": "ประโยชน์ที่งอกจากทรัพย์: ดอกผลธรรมดา / ดอกผลนิตินัย"
+        },
+        {
+          "ref": "atlas:concept/kammasit",
+          "note": "ทรัพยสิทธิที่สมบูรณ์ที่สุด — สิทธิความเป็นเจ้าของ",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/kammasit-ruam",
+          "note": "เมื่อทรัพย์สินเป็นของหลายคนรวมกัน"
+        },
+        {
+          "ref": "atlas:concept/sathalanasombat",
+          "note": "ทรัพย์ของแผ่นดินเพื่อสาธารณประโยชน์ โอน/ยึด/อ้างอายุความไม่ได้"
+        },
+        {
+          "ref": "atlas:concept/sap-sin-hai",
+          "note": "หน้าที่ผู้เก็บได้ซึ่งทรัพย์สินหาย"
+        },
+        {
+          "ref": "atlas:concept/rongruen-rukland",
+          "note": "สร้างโรงเรือนในที่ดินผู้อื่น: ผลต่างกันตามความสุจริต"
+        },
+        {
+          "ref": "atlas:concept/thang-jampen",
+          "note": "ที่ดินตาบอด — ข้อจำกัดสิทธิโดยผลของกฎหมาย ไม่ใช่ทรัพยสิทธิ"
+        },
+        {
+          "ref": "atlas:concept/krobkrong",
+          "note": "คุ้มครองข้อเท็จจริงการยึดถือ แยกจากกรรมสิทธิ์"
+        },
+        {
+          "ref": "atlas:concept/krobkrong-parapak",
+          "note": "ครอบครองครบเงื่อนไข+ระยะเวลา กลายเป็นกรรมสิทธิ์"
+        },
+        {
+          "ref": "atlas:concept/rob-kuan-krobkrong",
+          "note": "ทรัพย์ยังอยู่ในมือ แต่ถูกผู้อื่นสอดเข้าเกี่ยวข้อง"
+        },
+        {
+          "ref": "atlas:concept/yang-krobkrong",
+          "note": "สูญเสียการครอบครองไปทั้งหมดโดยไม่สมัครใจ"
+        },
+        {
+          "ref": "atlas:concept/sitthi-thang-sap-uen",
+          "note": "ทรัพยสิทธิจำกัดอื่นเหนือทรัพย์ของผู้อื่น (ภาพรวมเปรียบเทียบ 5 ประเภท)"
+        },
+        {
+          "ref": "atlas:concept/phara-jamyom",
+          "note": "ที่ดินต่อที่ดิน: ภารยทรัพย์ยอมรับกรรมเพื่อสามยทรัพย์"
+        },
+        {
+          "ref": "atlas:concept/sitthi-asai",
+          "note": "อยู่อาศัยในโรงเรือนผู้อื่นโดยไม่ต้องเสียค่าเช่า"
+        },
+        {
+          "ref": "atlas:concept/sitthi-nue-puendin",
+          "note": "แยกความเป็นเจ้าของสิ่งปลูกสร้างออกจากที่ดิน — ข้อยกเว้นหลักส่วนควบ"
+        },
+        {
+          "ref": "atlas:concept/sitthi-keb-kin",
+          "note": "ใช้และถือเอาประโยชน์จากทรัพย์ผู้อื่นได้เต็มที่ กว้างกว่าสิทธิอาศัย"
+        },
+        {
+          "ref": "atlas:concept/phara-tidpan",
+          "note": "รับชำระหนี้เป็นคราว ๆ จากตัวทรัพย์โดยตรง"
+        }
       ],
-      "topics": ["atlas:topic/sap"]
+      "topics": [
+        "atlas:topic/sap"
+      ]
     },
     "lamoed-liability": {
       "id": "atlas:cluster/lamoed-liability",
@@ -45,14 +110,179 @@
       "titleTH": "ละเมิด: ความรับผิด ค่าสินไหมทดแทน และนิรโทษกรรม",
       "titleEN": "Tort: Liability, Damages, and Defences",
       "status": "published",
-      "subjectAreas": ["civil-commercial"],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
       "description": "กลุ่มแนวคิดที่ตรงกับสามหมวดของ ป.พ.พ. ลักษณะ 5 ละเมิด: หมวด 1 ความรับผิดเพื่อละเมิด (ใครบ้างต้องรับผิด นอกจากผู้กระทำเอง) หมวด 2 ค่าสินไหมทดแทนเพื่อละเมิด (เยียวยาอย่างไร) และหมวด 3 นิรโทษกรรม (เมื่อใดไม่ต้องรับผิด)",
       "concepts": [
-        { "ref": "atlas:concept/lamoed", "note": "แม่บท: องค์ประกอบ 4 ประการของละเมิดตามมาตรา 420", "featured": true },
-        { "ref": "atlas:concept/khwamrapphid-lamoed", "note": "หมวด 1: หมิ่นประมาท + ความรับผิดแทน/ร่วมของนายจ้าง ตัวการ บิดามารดา ฯลฯ" },
-        { "ref": "atlas:concept/khasainaithothaen-lamoed", "note": "หมวด 2: ขอบเขตและวิธีคำนวณค่าสินไหมทดแทน" },
-        { "ref": "atlas:concept/nirotokam", "note": "หมวด 3: เหตุยกเว้นความรับผิด + อายุความ" }
+        {
+          "ref": "atlas:concept/lamoed",
+          "note": "แม่บท: องค์ประกอบ 4 ประการของละเมิดตามมาตรา 420",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/khwamrapphid-lamoed",
+          "note": "หมวด 1: หมิ่นประมาท + ความรับผิดแทน/ร่วมของนายจ้าง ตัวการ บิดามารดา ฯลฯ"
+        },
+        {
+          "ref": "atlas:concept/khasainaithothaen-lamoed",
+          "note": "หมวด 2: ขอบเขตและวิธีคำนวณค่าสินไหมทดแทน"
+        },
+        {
+          "ref": "atlas:concept/nirotokam",
+          "note": "หมวด 3: เหตุยกเว้นความรับผิด + อายุความ"
+        }
       ]
+    },
+    "nee-bokoet": {
+      "id": "atlas:cluster/nee-bokoet",
+      "slug": "nee-bokoet",
+      "titleTH": "หนี้: บ่อเกิด ผลแห่งหนี้ ประกัน และความระงับ",
+      "titleEN": "Obligations: Sources, Effects, Security, and Extinction",
+      "status": "published",
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "description": "กลุ่มแนวคิดที่ปรับบทต่อเนื่องกันตลอดบรรพ 2 ลักษณะ 1 (บทเบ็ดเสร็จทั่วไปว่าด้วยหนี้): เริ่มจากนิยามหนี้และบ่อเกิดแห่งหนี้ ผ่านผลแห่งหนี้เมื่อผิดนัด ประกันหนี้ตามกฎหมาย (รับช่วงสิทธิ คุ้มครองกองทรัพย์สินลูกหนี้ สิทธิยึดหน่วง บุริมสิทธิ) ไปจนถึงเหตุความระงับแห่งหนี้นอกจากชำระหนี้ครบถ้วน",
+      "concepts": [
+        {
+          "ref": "atlas:concept/nee",
+          "note": "จุดตั้งต้น: หนี้คืออะไร เจ้าหนี้ ลูกหนี้ วัตถุแห่งหนี้",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/bo-koet-haeng-nee",
+          "note": "บ่อเกิดแห่งหนี้ 4 ประเภท"
+        },
+        {
+          "ref": "atlas:concept/phid-nat-cham-ra-nee",
+          "note": "เวลาชำระหนี้ ผิดนัด และการบังคับชำระหนี้"
+        },
+        {
+          "ref": "atlas:concept/rap-chuang-sitthi",
+          "note": "เปลี่ยนตัวเจ้าหนี้โดยผลของกฎหมาย มูลหนี้เดิมยังอยู่"
+        },
+        {
+          "ref": "atlas:concept/chai-sitthi-riakrong-khong-luknee",
+          "note": "เจ้าหนี้ใช้สิทธิเรียกร้องของลูกหนี้แทนเมื่อลูกหนี้เพิกเฉย"
+        },
+        {
+          "ref": "atlas:concept/phikthon-kan-chochan",
+          "note": "เจ้าหนี้ขอเพิกถอนนิติกรรมฉ้อฉลของลูกหนี้"
+        },
+        {
+          "ref": "atlas:concept/sitthi-yeud-nuang-burimsit",
+          "note": "ประกันหนี้ตามกฎหมายสองประเภท: สิทธิยึดหน่วงและบุริมสิทธิ"
+        },
+        {
+          "ref": "atlas:concept/sitthi-yeud-nuang",
+          "note": "ยึดทรัพย์ของผู้อื่นที่ครอบครองอยู่ไว้จนกว่าจะได้ชำระหนี้"
+        },
+        {
+          "ref": "atlas:concept/burimsit",
+          "note": "ได้รับชำระหนี้จากทรัพย์สินลูกหนี้ก่อนเจ้าหนี้อื่นโดยผลของกฎหมาย"
+        },
+        {
+          "ref": "atlas:concept/plod-nee",
+          "note": "เจ้าหนี้แสดงเจตนาปลดหนี้ให้"
+        },
+        {
+          "ref": "atlas:concept/hak-klob-lop-nee",
+          "note": "หนี้สองรายวัตถุอย่างเดียวกันหักกลบกัน"
+        },
+        {
+          "ref": "atlas:concept/plaeng-nee-mai",
+          "note": "เปลี่ยนสาระสำคัญแห่งหนี้ หนี้เดิมระงับเกิดหนี้ใหม่"
+        },
+        {
+          "ref": "atlas:concept/nee-klueankluen-kan",
+          "note": "สิทธิและความรับผิดตกแก่บุคคลเดียวกัน"
+        },
+        {
+          "ref": "atlas:concept/laap-mikhuan-dai",
+          "note": "บ่อเกิดแห่งหนี้อีกประเภท: ได้ลาภไปโดยปราศจากมูลอันจะอ้างกฎหมายได้"
+        }
+      ],
+      "topics": []
+    },
+    "nitikam-sanya": {
+      "id": "atlas:cluster/nitikam-sanya",
+      "slug": "nitikam-sanya",
+      "titleTH": "นิติกรรมและสัญญา",
+      "titleEN": "Juristic Acts and Contracts",
+      "status": "published",
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "description": "กลุ่มแนวคิดที่ปรับบทต่อเนื่องกันตั้งแต่องค์ประกอบทั่วไปของนิติกรรม ผ่านความบกพร่องของการแสดงเจตนาแต่ละแบบ ผลเป็นโมฆะ/โมฆียะ ไปจนถึงสัญญาซึ่งเป็นนิติกรรมสองฝ่ายที่พบบ่อยที่สุด: การเกิดสัญญา ผลของสัญญาต่างตอบแทน สัญญาเพื่อบุคคลภายนอก และการเลิกสัญญา",
+      "concepts": [
+        {
+          "ref": "atlas:concept/nitikam",
+          "note": "จุดตั้งต้น: องค์ประกอบและความสมบูรณ์ของนิติกรรม",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/chetana-son-ren",
+          "note": "ปิดบังเจตนาฝ่ายเดียว ยังคงผูกพัน"
+        },
+        {
+          "ref": "atlas:concept/chetana-luang-nitikam-amprang",
+          "note": "สมรู้กันลวง เป็นโมฆะ บังคับตามนิติกรรมที่ถูกอำพราง"
+        },
+        {
+          "ref": "atlas:concept/samkanphid",
+          "note": "สำคัญผิดในสาระสำคัญ (โมฆะ) กับในคุณสมบัติ (โมฆียะ)"
+        },
+        {
+          "ref": "atlas:concept/konchachon",
+          "note": "ถูกหลอกลวงให้แสดงเจตนา"
+        },
+        {
+          "ref": "atlas:concept/khomkhu",
+          "note": "ถูกข่มขู่ด้วยภัยร้ายแรง"
+        },
+        {
+          "ref": "atlas:concept/mokha",
+          "note": "ผลเมื่อนิติกรรมเสียเปล่ามาแต่ต้น"
+        },
+        {
+          "ref": "atlas:concept/mokhiya",
+          "note": "ผลเมื่อนิติกรรมสมบูรณ์จนกว่าจะถูกบอกล้าง"
+        },
+        {
+          "ref": "atlas:concept/nguenkhai-nguenwela",
+          "note": "เงื่อนไขบังคับก่อน/หลัง และเงื่อนเวลา"
+        },
+        {
+          "ref": "atlas:concept/sanya",
+          "note": "สัญญา: นิติกรรมสองฝ่ายที่พบบ่อยที่สุด"
+        },
+        {
+          "ref": "atlas:concept/kham-sanoe-kham-sanong",
+          "note": "การเกิดสัญญาจากคำเสนอและคำสนอง"
+        },
+        {
+          "ref": "atlas:concept/sanya-tang-tob-taen",
+          "note": "สิทธิหน่วงเหนี่ยวและความเสี่ยงภัยในสัญญาต่างตอบแทน"
+        },
+        {
+          "ref": "atlas:concept/sanya-phue-prayot-bukkhon-phainok",
+          "note": "สัญญาก่อสิทธิเรียกร้องแก่บุคคลภายนอก"
+        },
+        {
+          "ref": "atlas:concept/matja",
+          "note": "ประกันการปฏิบัติตามสัญญาที่ต้องส่งมอบจริง"
+        },
+        {
+          "ref": "atlas:concept/biaprab",
+          "note": "ข้อตกลงกำหนดค่าเสียหายล่วงหน้า"
+        },
+        {
+          "ref": "atlas:concept/kan-loek-sanya",
+          "note": "สิทธิเลิกสัญญาและการกลับคืนสู่ฐานะเดิม"
+        }
+      ],
+      "topics": []
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "version": "0.1",
-  "generated": "2026-09-09",
+  "generated": "2026-09-13",
   "terminologyNote": "titleEN และ latin[] ของแต่ละแนวคิดเป็นคำเทียบเคียงทางกฎหมายที่คัดสรรไว้โดยเจตนา (deliberately curated) ไม่ใช่การแปลอัตโนมัติ และไม่ใช่ถ้อยคำในตัวบท ใช้เพื่อการค้นหาข้ามภาษาในสารานุกรม (encyclopedia.html) เท่านั้น จะเพิ่ม latin[] เฉพาะเมื่อเป็นศัพท์กฎหมายละตินที่ยอมรับกันแล้วในตำรากฎหมายเปรียบเทียบ",
   "status": "ชั้นเสริม (additive) ของ Thai Legal Atlas: ดัชนีเชิงแนวคิด/การนำทาง และเอกสารประกอบการสอน ไม่ใช่ลำดับชั้นกฎหมายชุดที่สอง ไม่ใช่ node.kind ใหม่ และไม่ใช่ฐานข้อมูลกราฟ. ปัจจุบันมีแนวคิดที่เขียนแล้ว 2 เรื่อง (ละเมิด, นิติกรรม) และหน้าดัชนีที่ concept.html. ทุกแนวคิดอ้างอิงบทบัญญัติผ่าน identity เดิมของ AtlasCore (legacy id <collection>_<number>, atlas:concept/<slug>) ไม่คัดลอกโครงสร้างจาก codex-data.json. เชื่อมจาก atlas.html ผ่านลิงก์เดียวที่ footer เท่านั้น ยังไม่เข้าไปใน route grammar ของ Atlas.",
   "principle": "แนวคิดทางกฎหมาย (Legal Concept) เป็นชั้นความหมายที่ 'เสริม' เข้าไปใน Thai Legal Atlas เดิม ไม่ใช่ระบบใหม่ และไม่ใช่ node.kind ใหม่ในโครงสร้าง. แนวคิดหนึ่งคือมุมมองหนึ่งที่พาดผ่านบทบัญญัติเดิมหลายมาตรา (บางทีข้ามหลายประมวล/พ.ร.บ.) โดยอ้างอิงกลับไปยัง identity เดิมของ AtlasCore เท่านั้น (legacy id <collection>_<number>, atlas:concept/<slug>). ทุก edge เป็น string ref ในไฟล์นี้ ไม่มีโครงสร้างกราฟ/ลิงก์ใหม่. related cases ได้มาจาก prototype/assets/cases/article-case-index.json เดิม (derived). เนื้อหาเชิงลึกและฎีกา อยู่ใน lectureNotes เดิมของแต่ละมาตรา ไฟล์นี้จึง 'อ้างถึง' ผ่าน lectureRefs ไม่คัดลอกซ้ำ.",
@@ -620,32 +620,8 @@
       "aliases": [
         "ทำนิติกรรม",
         "เจตนา",
-        "ผู้เยาว์",
-        "ผู้แทนโดยชอบธรรม",
-        "คนไร้ความสามารถ",
-        "ผู้อนุบาล",
-        "คนเสมือนไร้ความสามารถ",
-        "ผู้พิทักษ์",
-        "คนวิกลจริต",
         "วัตถุประสงค์",
-        "แบบ",
-        "เจตนาซ่อนเร้น",
-        "เจตนาลวง",
-        "นิติกรรมอำพราง",
-        "สำคัญผิด",
-        "สำคัญผิดในสาระสำคัญ",
-        "สำคัญผิดในคุณสมบัติ",
-        "กลฉ้อฉล",
-        "กลฉ้อฉลถึงขนาด",
-        "กลฉ้อฉลเพื่อเหตุ",
-        "การข่มขู่",
-        "เงื่อนไข",
-        "เงื่อนไขบังคับก่อน",
-        "เงื่อนเวลา",
-        "เงื่อนเวลาเริ่มต้น",
-        "เงื่อนเวลาสิ้นสุด",
-        "อายุความ",
-        "การกลับคืนสู่ฐานะเดิม"
+        "แบบ"
       ],
       "latin": [
         "Negotium juridicum"
@@ -1234,6 +1210,42 @@
           "rel": "specializes",
           "labelTH": "โมฆียะ",
           "status": "published"
+        },
+        {
+          "ref": "atlas:concept/chetana-son-ren",
+          "rel": "specializes",
+          "labelTH": "เจตนาซ่อนเร้น",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/chetana-luang-nitikam-amprang",
+          "rel": "specializes",
+          "labelTH": "เจตนาลวงและนิติกรรมอำพราง",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/samkanphid",
+          "rel": "specializes",
+          "labelTH": "สำคัญผิด",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/konchachon",
+          "rel": "specializes",
+          "labelTH": "กลฉ้อฉล",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/khomkhu",
+          "rel": "specializes",
+          "labelTH": "การข่มขู่",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/nguenkhai-nguenwela",
+          "rel": "specializes",
+          "labelTH": "เงื่อนไขและเงื่อนเวลา",
+          "status": "published"
         }
       ],
       "sources": [
@@ -1290,20 +1302,7 @@
       "titleTH": "สัญญา",
       "titleEN": "Contract",
       "aliases": [
-        "ทำสัญญา",
-        "ทรัพย์เฉพาะสิ่ง",
-        "การชำระหนี้กลายเป็นพ้นวิสัย",
-        "การชำระหนี้ตกเป็นพ้นวิสัย",
-        "สัญญาต่างตอบแทน",
-        "ความเสี่ยงภัย",
-        "การบอกเลิกสัญญา",
-        "คำเสนอ",
-        "คำสนอง",
-        "การเลิกสัญญา",
-        "สัญญาเพื่อประโยชน์บุคคลภายนอก",
-        "การผิดนัด",
-        "สิทธิหน่วงเหนี่ยว",
-        "การรับภัยพิบัติ"
+        "ทำสัญญา"
       ],
       "latin": [
         "Contractus"
@@ -1877,6 +1876,37 @@
           "rel": "specializes",
           "labelTH": "เบี้ยปรับ",
           "status": "published"
+        },
+        {
+          "ref": "atlas:concept/kham-sanoe-kham-sanong",
+          "rel": "specializes",
+          "labelTH": "คำเสนอและคำสนอง",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/sanya-tang-tob-taen",
+          "rel": "specializes",
+          "labelTH": "สัญญาต่างตอบแทน",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/sanya-phue-prayot-bukkhon-phainok",
+          "rel": "specializes",
+          "labelTH": "สัญญาเพื่อประโยชน์บุคคลภายนอก",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/kan-loek-sanya",
+          "rel": "specializes",
+          "labelTH": "การเลิกสัญญา",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/phid-nat-cham-ra-nee",
+          "rel": "seealso",
+          "labelTH": "ผิดนัดชำระหนี้",
+          "status": "published",
+          "note": "บทว่าด้วยผิดนัด (ม.203–225) เป็นบทของ \"หนี้\" ไม่ใช่บทเฉพาะของสัญญา แต่ใช้บังคับกับการผิดสัญญาด้วย"
         }
       ],
       "sources": [
@@ -1971,21 +2001,9 @@
         "หนี้สิน",
         "สิทธิเรียกร้อง",
         "เจ้าหนี้ลูกหนี้",
-        "การรับช่วงสิทธิ",
-        "การเพิกถอนการฉ้อฉล",
         "เจ้าหนี้",
         "ลูกหนี้",
-        "วัตถุแห่งหนี้",
-        "การชำระหนี้",
-        "การไม่ชำระหนี้",
-        "ลูกหนี้ผิดนัด",
-        "เจ้าหนี้ผิดนัด",
-        "การปลดหนี้",
-        "การหักกลบลบหนี้",
-        "การแปลงหนี้ใหม่",
-        "หนี้เกลื่อนกลืนกัน",
-        "การใช้สิทธิเรียกร้องของลูกหนี้",
-        "สิทธิไล่เบี้ย"
+        "วัตถุแห่งหนี้"
       ],
       "latin": [
         "Obligatio"
@@ -2351,6 +2369,54 @@
           "labelTH": "ทรัพย์",
           "status": "published",
           "note": "ทรัพย์เป็นวัตถุแห่งทรัพยสิทธิซึ่งใช้ยันได้ต่อบุคคลทั่วไป ต่างจากหนี้ซึ่งเป็นบุคคลสิทธิใช้ยันได้เฉพาะตัวลูกหนี้"
+        },
+        {
+          "ref": "atlas:concept/rap-chuang-sitthi",
+          "rel": "specializes",
+          "labelTH": "การรับช่วงสิทธิ",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/chai-sitthi-riakrong-khong-luknee",
+          "rel": "specializes",
+          "labelTH": "การใช้สิทธิเรียกร้องของลูกหนี้",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/phikthon-kan-chochan",
+          "rel": "specializes",
+          "labelTH": "การเพิกถอนการฉ้อฉล",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/plod-nee",
+          "rel": "specializes",
+          "labelTH": "การปลดหนี้",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/hak-klob-lop-nee",
+          "rel": "specializes",
+          "labelTH": "การหักกลบลบหนี้",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/plaeng-nee-mai",
+          "rel": "specializes",
+          "labelTH": "การแปลงหนี้ใหม่",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/nee-klueankluen-kan",
+          "rel": "specializes",
+          "labelTH": "หนี้เกลื่อนกลืนกัน",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/phid-nat-cham-ra-nee",
+          "rel": "specializes",
+          "labelTH": "ผิดนัดชำระหนี้",
+          "status": "published"
         }
       ],
       "authoring": {
@@ -4280,9 +4346,7 @@
       "titleTH": "ลาภมิควรได้",
       "titleEN": "Unjust Enrichment",
       "aliases": [
-        "ลาภมิควรได้โดยปราศจากมูลอันจะอ้างกฎหมายได้",
-        "นิติเหตุ",
-        "เหตุสุดวิสัย"
+        "ลาภมิควรได้โดยปราศจากมูลอันจะอ้างกฎหมายได้"
       ],
       "latin": [
         "Condictio"
@@ -4633,12 +4697,7 @@
       "slug": "sitthi-yeud-nuang-burimsit",
       "titleTH": "สิทธิยึดหน่วงและบุริมสิทธิ",
       "titleEN": "Right of Retention and Preferential Rights (statutory liens)",
-      "aliases": [
-        "สิทธิยึดหน่วง",
-        "บุริมสิทธิ",
-        "บุริมสิทธิสามัญ",
-        "บุริมสิทธิพิเศษ"
-      ],
+      "aliases": [],
       "latin": [],
       "subjectAreas": [
         "civil-commercial"
@@ -4880,6 +4939,18 @@
           "labelTH": "กรรมสิทธิ์",
           "status": "published",
           "note": "สิทธิยึดหน่วง/บุริมสิทธิเป็นประกันหนี้เหนือทรัพย์ของผู้อื่น ไม่ใช่ความเป็นเจ้าของทรัพย์"
+        },
+        {
+          "ref": "atlas:concept/sitthi-yeud-nuang",
+          "rel": "specializes",
+          "labelTH": "สิทธิยึดหน่วง",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/burimsit",
+          "rel": "specializes",
+          "labelTH": "บุริมสิทธิ",
+          "status": "published"
         }
       ],
       "authoring": {
@@ -7423,7 +7494,8 @@
       "aliases": [
         "โมฆียะกรรม",
         "การบอกล้าง",
-        "การให้สัตยาบัน"
+        "การให้สัตยาบัน",
+        "การกลับคืนสู่ฐานะเดิม"
       ],
       "subjectAreas": [
         "civil-commercial"
@@ -7798,6 +7870,2680 @@
           "rel": "contrast",
           "labelTH": "มัดจำ",
           "status": "planned"
+        }
+      ]
+    },
+    "rap-chuang-sitthi": {
+      "id": "atlas:concept/rap-chuang-sitthi",
+      "slug": "rap-chuang-sitthi",
+      "titleTH": "การรับช่วงสิทธิ",
+      "titleEN": "Subrogation",
+      "aliases": [
+        "ช่วงทรัพย์"
+      ],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "obligations"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 2",
+            "ลักษณะ 1"
+          ],
+          "note": "ป.พ.พ. บรรพ 2 ลักษณะ 1 บทเบ็ดเสร็จทั่วไป มาตรา 226–231"
+        }
+      ],
+      "summary": "การเปลี่ยนตัวเจ้าหนี้โดยผลของกฎหมายเมื่อมีเหตุรองรับ โดยมูลหนี้เดิมยังคงอยู่ ผู้รับช่วงสิทธิใช้สิทธิทั้งหลายที่เจ้าหนี้เดิมมีอยู่ รวมทั้งประกันแห่งหนี้นั้น ได้ในนามของตนเอง (ป.พ.พ. มาตรา 226–231)",
+      "definition": {
+        "text": "การรับช่วงสิทธิ (Subrogation) คือการเปลี่ยนตัวเจ้าหนี้โดยผลของกฎหมายเมื่อมีเหตุรองรับ ไม่ต้องอาศัยแบบนิติกรรมหรือความยินยอม ผู้รับช่วงสิทธิใช้สิทธิทั้งหลายที่เจ้าหนี้เดิมมีอยู่โดยมูลหนี้ รวมทั้งประกันแห่งหนี้นั้น ได้ในนามของตนเอง (ม.226) และช่วงทรัพย์คือการเอาทรัพย์สินอันหนึ่งเข้าแทนที่ทรัพย์สินอีกอันหนึ่งในฐานะนิตินัยอย่างเดียวกัน",
+        "provisions": [
+          "civil_226"
+        ],
+        "lectureRefs": [
+          "lec-civil_226-1"
+        ],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "subrogation",
+          "kind": "elements",
+          "label": "การรับช่วงสิทธิ (มาตรา 226–231)",
+          "body": "การเปลี่ยนตัวเจ้าหนี้โดยที่มูลหนี้เดิมยังคงอยู่ ทำได้สองวิธี คือ การรับช่วงสิทธิ (Subrogation) ซึ่งเปลี่ยนตัวเจ้าหนี้โดยผลของกฎหมายเมื่อมีเหตุรองรับ ไม่ต้องอาศัยแบบนิติกรรมหรือความยินยอม กับการโอนสิทธิเรียกร้องซึ่งเกิดจากนิติกรรมสัญญา ผู้รับช่วงสิทธิใช้สิทธิทั้งหลายที่เจ้าหนี้เดิมมีอยู่โดยมูลหนี้ รวมทั้งประกันแห่งหนี้นั้น ได้ในนามของตนเอง (ม.226) และช่วงทรัพย์คือการเอาทรัพย์สินอันหนึ่งเข้าแทนที่ทรัพย์สินอีกอันหนึ่งในฐานะนิตินัยอย่างเดียวกัน",
+          "items": [
+            {
+              "label": "ชดใช้ค่าสินไหมทดแทนเต็มราคา (ม.227)",
+              "text": "เมื่อเจ้าหนี้ได้รับค่าสินไหมทดแทนความเสียหายเต็มราคาทรัพย์หรือสิทธิที่เป็นวัตถุแห่งหนี้แล้ว ลูกหนี้ผู้จ่ายค่าสินไหมทดแทนนั้นเข้าสู่ฐานะผู้รับช่วงสิทธิของเจ้าหนี้โดยอำนาจกฎหมาย ตัวอย่างคลาสสิก: บริษัทประกันภัยจ่ายค่าซ่อมรถให้เจ้าของรถจากอุบัติเหตุที่บุคคลภายนอกก่อ แล้วเข้ารับช่วงสิทธิไล่เบี้ยเอาจากผู้ก่อเหตุ",
+              "provisions": [
+                "civil_227"
+              ],
+              "lectureRefs": [
+                "lec-civil_227-1"
+              ]
+            },
+            {
+              "label": "สามกรณีรับช่วงสิทธิโดยอำนาจกฎหมาย (ม.229)",
+              "text": "(1) เจ้าหนี้คนหนึ่งเข้าใช้หนี้แทนเจ้าหนี้อีกคนที่มีสิทธิได้รับใช้หนี้ก่อนตนเพราะมีบุริมสิทธิหรือจำนำจำนอง (2) ผู้ซื้ออสังหาริมทรัพย์เอาเงินราคาซื้อไปใช้หนี้จำนองทรัพย์นั้นให้เสร็จสิ้น และ (3) บุคคลผู้มีความผูกพันร่วมกับผู้อื่นหรือเพื่อผู้อื่นในการใช้หนี้ มีส่วนได้เสียในการใช้หนี้นั้นและได้เข้าใช้หนี้ไป",
+              "provisions": [
+                "civil_229"
+              ],
+              "lectureRefs": [
+                "lec-civil_229-1"
+              ]
+            },
+            {
+              "label": "บุคคลภายนอกใช้หนี้แทนเพื่อกันการบังคับยึดทรัพย์ (ม.230)",
+              "text": "ผู้ที่ต้องเสี่ยงภัยเสียสิทธิในทรัพย์หรือสิทธิครอบครองเพราะเจ้าหนี้นำบังคับยึดทรัพย์ของลูกหนี้ มีสิทธิเข้าใช้หนี้แทนเพื่อระงับการบังคับยึดทรัพย์ได้ และเมื่อใช้หนี้จนเป็นที่พอใจของเจ้าหนี้แล้ว ย่อมเข้ารับช่วงสิทธิเรียกร้องของเจ้าหนี้เดิมโดยอัตโนมัติ แต่ใช้บังคับให้เสื่อมเสียแก่เจ้าหนี้เดิมไม่ได้",
+              "provisions": [
+                "civil_230"
+              ],
+              "lectureRefs": [
+                "lec-civil_230-1"
+              ]
+            }
+          ],
+          "lectureRefs": [
+            "lec-civil_226-1"
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_226",
+          "role": "core",
+          "note": "นิยามการรับช่วงสิทธิและช่วงทรัพย์"
+        },
+        {
+          "ref": "civil_227",
+          "role": "core",
+          "note": "รับช่วงสิทธิเมื่อชดใช้ค่าสินไหมทดแทนเต็มราคา"
+        },
+        {
+          "ref": "civil_229",
+          "role": "core",
+          "note": "สามกรณีรับช่วงสิทธิโดยอำนาจกฎหมาย"
+        },
+        {
+          "ref": "civil_230",
+          "role": "related",
+          "note": "บุคคลภายนอกใช้หนี้แทนเพื่อกันการบังคับยึดทรัพย์"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 2 ลักษณะ 1 มาตรา 226–231",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [
+        "lec-civil_226-1",
+        "lec-civil_227-1",
+        "lec-civil_229-1",
+        "lec-civil_230-1"
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/nee",
+          "rel": "parent",
+          "labelTH": "หนี้",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/plaeng-nee-mai",
+          "rel": "contrast",
+          "labelTH": "การแปลงหนี้ใหม่",
+          "status": "published",
+          "note": "ทั้งสองเปลี่ยนตัวเจ้าหนี้โดยมูลหนี้เดิมยังอยู่ (รับช่วงสิทธิ) ต่างจากแปลงหนี้ใหม่ซึ่งทำให้หนี้เดิมระงับไปเกิดหนี้ใหม่แทน"
+        }
+      ]
+    },
+    "chai-sitthi-riakrong-khong-luknee": {
+      "id": "atlas:concept/chai-sitthi-riakrong-khong-luknee",
+      "slug": "chai-sitthi-riakrong-khong-luknee",
+      "titleTH": "การใช้สิทธิเรียกร้องของลูกหนี้",
+      "titleEN": "Creditor's Oblique (Subrogatory) Action",
+      "aliases": [],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "obligations"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 2",
+            "ลักษณะ 1"
+          ],
+          "note": "ป.พ.พ. บรรพ 2 ลักษณะ 1 บทเบ็ดเสร็จทั่วไป มาตรา 233–235"
+        }
+      ],
+      "summary": "เมื่อลูกหนี้ขัดขืนหรือเพิกเฉยไม่ใช้สิทธิเรียกร้องของตน เป็นเหตุให้เจ้าหนี้เสียประโยชน์ เจ้าหนี้ใช้สิทธิเรียกร้องนั้นในนามของตนเองแทนลูกหนี้ได้ (ป.พ.พ. มาตรา 233–235)",
+      "definition": {
+        "text": "เมื่อลูกหนี้ขัดขืนหรือเพิกเฉยไม่ใช้สิทธิเรียกร้องของตน เป็นเหตุให้เจ้าหนี้เสียประโยชน์ เจ้าหนี้ใช้สิทธิเรียกร้องนั้นในนามของตนเองแทนลูกหนี้ได้ เว้นแต่เป็นการของลูกหนี้ส่วนตัวโดยแท้ (ม.233) โดยต้องขอหมายเรียกลูกหนี้เข้ามาในคดีด้วยเสมอ (ม.234) และเจ้าหนี้เรียกเงินเต็มจำนวนที่ค้างชำระแก่ลูกหนี้ได้โดยไม่ต้องคำนึงถึงจำนวนที่ตนมีสิทธิ แต่ต้องไม่ได้รับมากไปกว่าจำนวนที่ตนมีสิทธิเรียกร้อง (ม.235)",
+        "provisions": [
+          "civil_233",
+          "civil_234",
+          "civil_235"
+        ],
+        "lectureRefs": [
+          "lec-civil_233-1",
+          "lec-civil_234-1",
+          "lec-civil_235-1"
+        ],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "oblique-action",
+          "kind": "elements",
+          "label": "การใช้สิทธิเรียกร้องของลูกหนี้ (มาตรา 233–235)",
+          "body": "สองมาตรการคุ้มครองกองทรัพย์สินของลูกหนี้เพื่อประโยชน์ของเจ้าหนี้ เมื่อลูกหนี้ไม่ยอมรักษาสิทธิของตนเอง — มาตรการนี้ใช้เมื่อลูกหนี้ขัดขืนหรือเพิกเฉย ต่างจากการเพิกถอนการฉ้อฉลซึ่งใช้เมื่อลูกหนี้กลับกระทำการให้กองทรัพย์สินพร่องลงโดยไม่สุจริต",
+          "items": [
+            {
+              "label": "การใช้สิทธิเรียกร้องของลูกหนี้ (ม.233–235)",
+              "text": "เมื่อลูกหนี้ขัดขืนหรือเพิกเฉยไม่ใช้สิทธิเรียกร้องของตน เป็นเหตุให้เจ้าหนี้เสียประโยชน์ เจ้าหนี้ใช้สิทธิเรียกร้องนั้นในนามของตนเองแทนลูกหนี้ได้ เว้นแต่เป็นการของลูกหนี้ส่วนตัวโดยแท้ (ม.233) โดยต้องขอหมายเรียกลูกหนี้เข้ามาในคดีด้วยเสมอ (ม.234) และเจ้าหนี้เรียกเงินเต็มจำนวนที่ค้างชำระแก่ลูกหนี้ได้โดยไม่ต้องคำนึงถึงจำนวนที่ตนมีสิทธิ แต่ต้องไม่ได้รับมากไปกว่าจำนวนที่ตนมีสิทธิเรียกร้อง (ม.235)",
+              "provisions": [
+                "civil_233",
+                "civil_234",
+                "civil_235"
+              ],
+              "lectureRefs": [
+                "lec-civil_233-1",
+                "lec-civil_234-1",
+                "lec-civil_235-1"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_233",
+          "role": "core",
+          "note": "เจ้าหนี้ใช้สิทธิเรียกร้องของลูกหนี้"
+        },
+        {
+          "ref": "civil_234",
+          "role": "related",
+          "note": "ต้องขอหมายเรียกลูกหนี้เข้ามาในคดี"
+        },
+        {
+          "ref": "civil_235",
+          "role": "related",
+          "note": "เรียกเต็มจำนวนที่ค้างชำระแต่ไม่เกินสิทธิของตน"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 2 ลักษณะ 1 มาตรา 233–235",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [
+        "lec-civil_233-1",
+        "lec-civil_234-1",
+        "lec-civil_235-1"
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/nee",
+          "rel": "parent",
+          "labelTH": "หนี้",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/phikthon-kan-chochan",
+          "rel": "seealso",
+          "labelTH": "การเพิกถอนการฉ้อฉล",
+          "status": "published",
+          "note": "สองมาตรการคุ้มครองกองทรัพย์สินของลูกหนี้เพื่อประโยชน์ของเจ้าหนี้ — ใช้สิทธิแทนเมื่อลูกหนี้เพิกเฉย เพิกถอนเมื่อลูกหนี้ฉ้อฉล"
+        }
+      ]
+    },
+    "phikthon-kan-chochan": {
+      "id": "atlas:concept/phikthon-kan-chochan",
+      "slug": "phikthon-kan-chochan",
+      "titleTH": "การเพิกถอนการฉ้อฉล",
+      "titleEN": "Avoidance of Fraudulent Act (Actio Pauliana)",
+      "aliases": [],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "obligations"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 2",
+            "ลักษณะ 1"
+          ],
+          "note": "ป.พ.พ. บรรพ 2 ลักษณะ 1 บทเบ็ดเสร็จทั่วไป มาตรา 237–240"
+        }
+      ],
+      "summary": "เจ้าหนี้ขอให้ศาลเพิกถอนนิติกรรมที่ลูกหนี้กระทำลงทั้งที่รู้อยู่ว่าจะทำให้เจ้าหนี้เสียเปรียบได้ เว้นแต่ผู้ได้ลาภงอกไม่รู้ถึงความเสียเปรียบนั้น (ป.พ.พ. มาตรา 237–240)",
+      "definition": {
+        "text": "เจ้าหนี้ขอให้ศาลเพิกถอนนิติกรรมที่ลูกหนี้กระทำลงทั้งที่รู้อยู่ว่าจะทำให้เจ้าหนี้เสียเปรียบได้ เว้นแต่ผู้ได้ลาภงอกไม่รู้ถึงความเสียเปรียบนั้น (หากเป็นการให้โดยเสน่หา เพียงลูกหนี้รู้ฝ่ายเดียวก็พอ) (ม.237) การเพิกถอนไม่กระทบสิทธิบุคคลภายนอกผู้ได้มาโดยสุจริตและเสียค่าตอบแทนก่อนเริ่มฟ้องคดี (ม.238) ผลการเพิกถอนเป็นประโยชน์แก่เจ้าหนี้ทุกคนของลูกหนี้ ไม่ใช่เฉพาะผู้ฟ้อง (ม.239) และต้องฟ้องภายใน 1 ปีนับแต่รู้ต้นเหตุ หรือ 10 ปีนับแต่ทำนิติกรรม (ม.240)",
+        "provisions": [
+          "civil_237",
+          "civil_240"
+        ],
+        "lectureRefs": [
+          "lec-civil_237-1",
+          "lec-civil_240-1"
+        ],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "actio-pauliana",
+          "kind": "elements",
+          "label": "การเพิกถอนการฉ้อฉล (มาตรา 237–240)",
+          "body": "สองมาตรการคุ้มครองกองทรัพย์สินของลูกหนี้เพื่อประโยชน์ของเจ้าหนี้ ใช้เมื่อลูกหนี้กลับกระทำการให้กองทรัพย์สินพร่องลงโดยไม่สุจริต ต่างจากการใช้สิทธิเรียกร้องของลูกหนี้ซึ่งใช้เมื่อลูกหนี้เพียงเพิกเฉย",
+          "items": [
+            {
+              "label": "องค์ประกอบและข้อยกเว้น (ม.237)",
+              "text": "เจ้าหนี้ขอให้ศาลเพิกถอนนิติกรรมที่ลูกหนี้กระทำลงทั้งที่รู้อยู่ว่าจะทำให้เจ้าหนี้เสียเปรียบได้ เว้นแต่ผู้ได้ลาภงอกไม่รู้ถึงความเสียเปรียบนั้น (หากเป็นการให้โดยเสน่หา เพียงลูกหนี้รู้ฝ่ายเดียวก็พอ)",
+              "provisions": [
+                "civil_237"
+              ],
+              "lectureRefs": [
+                "lec-civil_237-1"
+              ]
+            },
+            {
+              "label": "ไม่กระทบบุคคลภายนอกสุจริต (ม.238)",
+              "text": "การเพิกถอนไม่กระทบสิทธิบุคคลภายนอกผู้ได้มาโดยสุจริตและเสียค่าตอบแทนก่อนเริ่มฟ้องคดี",
+              "provisions": [
+                "civil_238"
+              ],
+              "lectureRefs": [
+                "lec-civil_238-1"
+              ]
+            },
+            {
+              "label": "ผลเป็นประโยชน์แก่เจ้าหนี้ทุกคน และอายุความฟ้อง (ม.239–240)",
+              "text": "ผลการเพิกถอนเป็นประโยชน์แก่เจ้าหนี้ทุกคนของลูกหนี้ ไม่ใช่เฉพาะผู้ฟ้อง (ม.239) และต้องฟ้องภายใน 1 ปีนับแต่รู้ต้นเหตุ หรือ 10 ปีนับแต่ทำนิติกรรม (ม.240)",
+              "provisions": [
+                "civil_239",
+                "civil_240"
+              ],
+              "lectureRefs": [
+                "lec-civil_240-1"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_237",
+          "role": "core",
+          "note": "เพิกถอนนิติกรรมที่ลูกหนี้ฉ้อฉล"
+        },
+        {
+          "ref": "civil_238",
+          "role": "related",
+          "note": "ไม่กระทบบุคคลภายนอกผู้สุจริตเสียค่าตอบแทน"
+        },
+        {
+          "ref": "civil_239",
+          "role": "related",
+          "note": "ผลเพิกถอนเป็นประโยชน์แก่เจ้าหนี้ทุกคน"
+        },
+        {
+          "ref": "civil_240",
+          "role": "related",
+          "note": "อายุความฟ้องเพิกถอนการฉ้อฉล 1 ปี/10 ปี"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 2 ลักษณะ 1 มาตรา 237–240",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [
+        "lec-civil_237-1",
+        "lec-civil_238-1",
+        "lec-civil_240-1"
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/nee",
+          "rel": "parent",
+          "labelTH": "หนี้",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/chai-sitthi-riakrong-khong-luknee",
+          "rel": "seealso",
+          "labelTH": "การใช้สิทธิเรียกร้องของลูกหนี้",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/nitikam",
+          "rel": "seealso",
+          "labelTH": "นิติกรรม",
+          "status": "published",
+          "note": "สิ่งที่เพิกถอนคือนิติกรรมที่ลูกหนี้ทำลง ไม่ใช่การทำให้นิติกรรมนั้นเป็นโมฆะหรือโมฆียะ"
+        }
+      ]
+    },
+    "plod-nee": {
+      "id": "atlas:concept/plod-nee",
+      "slug": "plod-nee",
+      "titleTH": "การปลดหนี้",
+      "titleEN": "Release of Debt",
+      "aliases": [],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "obligations"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 2",
+            "ลักษณะ 1"
+          ],
+          "note": "ป.พ.พ. บรรพ 2 ลักษณะ 1 บทเบ็ดเสร็จทั่วไป มาตรา 340"
+        }
+      ],
+      "summary": "เมื่อเจ้าหนี้แสดงเจตนาต่อลูกหนี้ว่าจะปลดหนี้ให้ หนี้นั้นเป็นอันระงับสิ้นไป (ป.พ.พ. มาตรา 340)",
+      "definition": {
+        "text": "เมื่อเจ้าหนี้แสดงเจตนาต่อลูกหนี้ว่าจะปลดหนี้ให้ หนี้นั้นเป็นอันระงับสิ้นไป หากหนี้มีหนังสือเป็นหลักฐาน การปลดหนี้ต้องทำเป็นหนังสือ หรือเวนคืน/ขีดฆ่าเอกสารหลักฐานแห่งหนี้ (มาตรา 340)",
+        "provisions": [
+          "civil_340"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "release",
+          "kind": "elements",
+          "label": "การปลดหนี้ (มาตรา 340)",
+          "body": "หนึ่งในเหตุความระงับแห่งหนี้นอกจากการชำระหนี้ครบถ้วน เกิดจากการแสดงเจตนาฝ่ายเดียวของเจ้าหนี้",
+          "items": [
+            {
+              "label": "องค์ประกอบและแบบ (ม.340)",
+              "text": "เมื่อเจ้าหนี้แสดงเจตนาต่อลูกหนี้ว่าจะปลดหนี้ให้ หนี้นั้นเป็นอันระงับสิ้นไป หากหนี้มีหนังสือเป็นหลักฐาน การปลดหนี้ต้องทำเป็นหนังสือ หรือเวนคืน/ขีดฆ่าเอกสารหลักฐานแห่งหนี้",
+              "provisions": [
+                "civil_340"
+              ]
+            }
+          ],
+          "needsSourceVerification": true,
+          "verificationNote": "มาตรา 340 ไม่มี lectureNotes ในคลังข้อมูล เนื้อหาส่วนนี้จึงสรุปจากตัวบทเท่านั้น ยังไม่ได้ทาบกับตำรา"
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_340",
+          "role": "core",
+          "note": "ปลดหนี้"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 2 ลักษณะ 1 มาตรา 340",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [
+          "release"
+        ],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/nee",
+          "rel": "parent",
+          "labelTH": "หนี้",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/hak-klob-lop-nee",
+          "rel": "seealso",
+          "labelTH": "การหักกลบลบหนี้",
+          "status": "published",
+          "note": "ทั้งสองเป็นเหตุความระงับแห่งหนี้นอกจากการชำระหนี้ครบถ้วน"
+        }
+      ]
+    },
+    "hak-klob-lop-nee": {
+      "id": "atlas:concept/hak-klob-lop-nee",
+      "slug": "hak-klob-lop-nee",
+      "titleTH": "การหักกลบลบหนี้",
+      "titleEN": "Set-off",
+      "aliases": [],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "obligations"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 2",
+            "ลักษณะ 1"
+          ],
+          "note": "ป.พ.พ. บรรพ 2 ลักษณะ 1 บทเบ็ดเสร็จทั่วไป มาตรา 341"
+        }
+      ],
+      "summary": "เมื่อบุคคลสองคนต่างเป็นหนี้กันด้วยมูลหนี้ที่มีวัตถุอย่างเดียวกันและถึงกำหนดชำระแล้ว ฝ่ายใดฝ่ายหนึ่งหลุดพ้นจากหนี้ของตนด้วยหักกลบลบกันได้เท่าจำนวนที่ตรงกัน (ป.พ.พ. มาตรา 341)",
+      "definition": {
+        "text": "เมื่อบุคคลสองคนต่างเป็นหนี้กันด้วยมูลหนี้ที่มีวัตถุอย่างเดียวกันและถึงกำหนดชำระแล้ว ฝ่ายใดฝ่ายหนึ่งหลุดพ้นจากหนี้ของตนด้วยหักกลบลบกันได้เท่าจำนวนที่ตรงกัน เว้นแต่สภาพแห่งหนี้ฝ่ายหนึ่งไม่เปิดช่องให้ทำเช่นนั้น (มาตรา 341)",
+        "provisions": [
+          "civil_341"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "setoff",
+          "kind": "elements",
+          "label": "การหักกลบลบหนี้ (มาตรา 341)",
+          "body": "หนึ่งในเหตุความระงับแห่งหนี้นอกจากการชำระหนี้ครบถ้วน เกิดขึ้นเมื่อคู่กรณีต่างเป็นเจ้าหนี้ลูกหนี้ซึ่งกันและกัน",
+          "items": [
+            {
+              "label": "องค์ประกอบและข้อยกเว้น (ม.341)",
+              "text": "เมื่อบุคคลสองคนต่างเป็นหนี้กันด้วยมูลหนี้ที่มีวัตถุอย่างเดียวกันและถึงกำหนดชำระแล้ว ฝ่ายใดฝ่ายหนึ่งหลุดพ้นจากหนี้ของตนด้วยหักกลบลบกันได้เท่าจำนวนที่ตรงกัน เว้นแต่สภาพแห่งหนี้ฝ่ายหนึ่งไม่เปิดช่องให้ทำเช่นนั้น",
+              "provisions": [
+                "civil_341"
+              ]
+            }
+          ],
+          "needsSourceVerification": true,
+          "verificationNote": "มาตรา 341 ไม่มี lectureNotes ในคลังข้อมูล เนื้อหาส่วนนี้จึงสรุปจากตัวบทเท่านั้น ยังไม่ได้ทาบกับตำรา"
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_341",
+          "role": "core",
+          "note": "หักกลบลบหนี้"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 2 ลักษณะ 1 มาตรา 341",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [
+          "setoff"
+        ],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/nee",
+          "rel": "parent",
+          "labelTH": "หนี้",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/plod-nee",
+          "rel": "seealso",
+          "labelTH": "การปลดหนี้",
+          "status": "published"
+        }
+      ]
+    },
+    "plaeng-nee-mai": {
+      "id": "atlas:concept/plaeng-nee-mai",
+      "slug": "plaeng-nee-mai",
+      "titleTH": "การแปลงหนี้ใหม่",
+      "titleEN": "Novation",
+      "aliases": [],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "obligations"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 2",
+            "ลักษณะ 1"
+          ],
+          "note": "ป.พ.พ. บรรพ 2 ลักษณะ 1 บทเบ็ดเสร็จทั่วไป มาตรา 349"
+        }
+      ],
+      "summary": "เมื่อคู่กรณีทำสัญญาเปลี่ยนสิ่งซึ่งเป็นสาระสำคัญแห่งหนี้ หนี้เดิมระงับสิ้นไปด้วยแปลงหนี้ใหม่ (ป.พ.พ. มาตรา 349)",
+      "definition": {
+        "text": "เมื่อคู่กรณีทำสัญญาเปลี่ยนสิ่งซึ่งเป็นสาระสำคัญแห่งหนี้ หนี้เดิมระงับสิ้นไปด้วยแปลงหนี้ใหม่ หากแปลงหนี้ใหม่โดยเปลี่ยนตัวเจ้าหนี้ ให้บังคับตามบทว่าด้วยโอนสิทธิเรียกร้อง (มาตรา 349)",
+        "provisions": [
+          "civil_349"
+        ],
+        "lectureRefs": [
+          "lec-civil_349-1"
+        ],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "novation",
+          "kind": "elements",
+          "label": "การแปลงหนี้ใหม่ (มาตรา 349)",
+          "body": "ต่างจากการรับช่วงสิทธิซึ่งมูลหนี้เดิมยังคงอยู่ การแปลงหนี้ใหม่ทำให้หนี้เดิมระงับไปโดยสิ้นเชิงและเกิดหนี้ใหม่ขึ้นแทนที่",
+          "items": [
+            {
+              "label": "องค์ประกอบและกรณีเปลี่ยนตัวเจ้าหนี้ (ม.349)",
+              "text": "เมื่อคู่กรณีทำสัญญาเปลี่ยนสิ่งซึ่งเป็นสาระสำคัญแห่งหนี้ หนี้เดิมระงับสิ้นไปด้วยแปลงหนี้ใหม่ หากแปลงหนี้ใหม่โดยเปลี่ยนตัวเจ้าหนี้ ให้บังคับตามบทว่าด้วยโอนสิทธิเรียกร้อง",
+              "provisions": [
+                "civil_349"
+              ],
+              "lectureRefs": [
+                "lec-civil_349-1"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_349",
+          "role": "core",
+          "note": "แปลงหนี้ใหม่"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 2 ลักษณะ 1 มาตรา 349",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [
+        "lec-civil_349-1"
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/nee",
+          "rel": "parent",
+          "labelTH": "หนี้",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/rap-chuang-sitthi",
+          "rel": "contrast",
+          "labelTH": "การรับช่วงสิทธิ",
+          "status": "published",
+          "note": "แปลงหนี้ใหม่ทำให้หนี้เดิมระงับไปเกิดหนี้ใหม่แทน ต่างจากรับช่วงสิทธิซึ่งมูลหนี้เดิมยังคงอยู่"
+        }
+      ]
+    },
+    "nee-klueankluen-kan": {
+      "id": "atlas:concept/nee-klueankluen-kan",
+      "slug": "nee-klueankluen-kan",
+      "titleTH": "หนี้เกลื่อนกลืนกัน",
+      "titleEN": "Merger (Confusion) of Obligation",
+      "aliases": [],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "obligations"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 2",
+            "ลักษณะ 1"
+          ],
+          "note": "ป.พ.พ. บรรพ 2 ลักษณะ 1 บทเบ็ดเสร็จทั่วไป มาตรา 353"
+        }
+      ],
+      "summary": "เมื่อสิทธิและความรับผิดในหนี้รายเดียวกันตกอยู่แก่บุคคลคนเดียวกัน หนี้รายนั้นระงับสิ้นไป (ป.พ.พ. มาตรา 353)",
+      "definition": {
+        "text": "เมื่อสิทธิและความรับผิดในหนี้รายเดียวกันตกอยู่แก่บุคคลคนเดียวกัน หนี้รายนั้นระงับสิ้นไป เว้นแต่หนี้นั้นตกอยู่ในบังคับแห่งสิทธิของบุคคลภายนอก (มาตรา 353)",
+        "provisions": [
+          "civil_353"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "merger",
+          "kind": "elements",
+          "label": "หนี้เกลื่อนกลืนกัน (มาตรา 353)",
+          "body": "หนึ่งในเหตุความระงับแห่งหนี้นอกจากการชำระหนี้ครบถ้วน มักเกิดขึ้นเมื่อเจ้าหนี้และลูกหนี้กลายเป็นบุคคลเดียวกัน เช่น ทายาทของเจ้าหนี้เป็นลูกหนี้เอง",
+          "items": [
+            {
+              "label": "องค์ประกอบและข้อยกเว้น (ม.353)",
+              "text": "เมื่อสิทธิและความรับผิดในหนี้รายเดียวกันตกอยู่แก่บุคคลคนเดียวกัน หนี้รายนั้นระงับสิ้นไป เว้นแต่หนี้นั้นตกอยู่ในบังคับแห่งสิทธิของบุคคลภายนอก",
+              "provisions": [
+                "civil_353"
+              ]
+            }
+          ],
+          "needsSourceVerification": true,
+          "verificationNote": "มาตรา 353 ไม่มี lectureNotes ในคลังข้อมูล เนื้อหาส่วนนี้จึงสรุปจากตัวบทเท่านั้น ยังไม่ได้ทาบกับตำรา"
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_353",
+          "role": "core",
+          "note": "หนี้เกลื่อนกลืนกัน"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 2 ลักษณะ 1 มาตรา 353",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [
+          "merger"
+        ],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/nee",
+          "rel": "parent",
+          "labelTH": "หนี้",
+          "status": "published"
+        }
+      ]
+    },
+    "phid-nat-cham-ra-nee": {
+      "id": "atlas:concept/phid-nat-cham-ra-nee",
+      "slug": "phid-nat-cham-ra-nee",
+      "titleTH": "ผิดนัดชำระหนี้",
+      "titleEN": "Debtor's Default",
+      "aliases": [
+        "การชำระหนี้",
+        "การไม่ชำระหนี้"
+      ],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "obligations"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 2",
+            "ลักษณะ 1"
+          ],
+          "note": "ป.พ.พ. บรรพ 2 ลักษณะ 1 บทเบ็ดเสร็จทั่วไป มาตรา 203, 204, 213"
+        }
+      ],
+      "summary": "เมื่อหนี้ถึงกำหนดแล้วเจ้าหนี้เตือนแล้วลูกหนี้ยังไม่ชำระ หรือมีกำหนดเวลาตามปฏิทินไว้ชัดแจ้ง ลูกหนี้ตกเป็นผู้ผิดนัดโดยไม่ต้องเตือน เจ้าหนี้มีสิทธิร้องขอต่อศาลให้บังคับชำระหนี้ได้ (ป.พ.พ. มาตรา 203, 204, 213)",
+      "definition": {
+        "text": "เวลาชำระหนี้เป็นไปตามที่ตกลงกันไว้ หากไม่ได้กำหนดไว้หรืออนุมานจากพฤติการณ์ไม่ได้ เจ้าหนี้เรียกให้ชำระหนี้ได้โดยพลัน และลูกหนี้ก็ชำระได้โดยพลันเช่นกัน (มาตรา 203) เมื่อหนี้ถึงกำหนดแล้วเจ้าหนี้เตือนแล้วลูกหนี้ยังไม่ชำระ หรือมีกำหนดเวลาตามปฏิทินไว้ชัดแจ้ง ลูกหนี้ตกเป็นผู้ผิดนัดโดยไม่ต้องเตือน (มาตรา 204) เมื่อลูกหนี้ไม่ชำระหนี้ เจ้าหนี้มีสิทธิร้องขอต่อศาลให้บังคับชำระหนี้ได้ เว้นแต่สภาพแห่งหนี้ไม่เปิดช่องให้ทำเช่นนั้น ซึ่งในกรณีนี้เจ้าหนี้อาจให้บุคคลภายนอกทำการแทนโดยลูกหนี้ออกค่าใช้จ่าย หรือให้ถือเอาคำพิพากษาแทนการแสดงเจตนาของลูกหนี้ก็ได้ โดยไม่กระทบสิทธิเรียกค่าเสียหาย (มาตรา 213)",
+        "provisions": [
+          "civil_203",
+          "civil_204",
+          "civil_213"
+        ],
+        "lectureRefs": [
+          "lec-civil_203-1",
+          "lec-civil_204-1",
+          "lec-civil_213-1"
+        ],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "default",
+          "kind": "elements",
+          "label": "เวลาชำระหนี้ การผิดนัด และการบังคับชำระหนี้ (มาตรา 203, 204, 213)",
+          "body": "เวลาชำระหนี้เป็นไปตามที่ตกลงกันไว้ หากไม่ได้กำหนดไว้หรืออนุมานจากพฤติการณ์ไม่ได้ เจ้าหนี้เรียกให้ชำระหนี้ได้โดยพลัน และลูกหนี้ก็ชำระได้โดยพลันเช่นกัน (มาตรา 203) เมื่อหนี้ถึงกำหนดแล้วเจ้าหนี้เตือนแล้วลูกหนี้ยังไม่ชำระ หรือมีกำหนดเวลาตามปฏิทินไว้ชัดแจ้ง ลูกหนี้ตกเป็นผู้ผิดนัดโดยไม่ต้องเตือน (มาตรา 204) เมื่อลูกหนี้ไม่ชำระหนี้ เจ้าหนี้มีสิทธิร้องขอต่อศาลให้บังคับชำระหนี้ได้ เว้นแต่สภาพแห่งหนี้ไม่เปิดช่องให้ทำเช่นนั้น ซึ่งในกรณีนี้เจ้าหนี้อาจให้บุคคลภายนอกทำการแทนโดยลูกหนี้ออกค่าใช้จ่าย หรือให้ถือเอาคำพิพากษาแทนการแสดงเจตนาของลูกหนี้ก็ได้ โดยไม่กระทบสิทธิเรียกค่าเสียหาย (มาตรา 213)",
+          "provisions": [
+            "civil_203",
+            "civil_204",
+            "civil_213"
+          ],
+          "lectureRefs": [
+            "lec-civil_203-1",
+            "lec-civil_204-1",
+            "lec-civil_213-1"
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_203",
+          "role": "core",
+          "note": "เวลาชำระหนี้เมื่อไม่ได้กำหนดไว้"
+        },
+        {
+          "ref": "civil_204",
+          "role": "core",
+          "note": "ผิดนัดชำระหนี้"
+        },
+        {
+          "ref": "civil_213",
+          "role": "core",
+          "note": "ร้องขอศาลบังคับชำระหนี้"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 2 ลักษณะ 1 มาตรา 203, 204, 213",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [
+        "lec-civil_203-1",
+        "lec-civil_204-1",
+        "lec-civil_213-1"
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/nee",
+          "rel": "parent",
+          "labelTH": "หนี้",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/sanya",
+          "rel": "seealso",
+          "labelTH": "สัญญา",
+          "status": "published",
+          "note": "การเลิกสัญญาเพราะไม่ชำระหนี้ (ม.387–389) อาศัยหลักผิดนัดนี้เป็นฐาน"
+        }
+      ]
+    },
+    "chetana-son-ren": {
+      "id": "atlas:concept/chetana-son-ren",
+      "slug": "chetana-son-ren",
+      "titleTH": "เจตนาซ่อนเร้น",
+      "titleEN": "Mental Reservation",
+      "aliases": [],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "juristic-acts"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 1",
+            "ลักษณะ 4",
+            "หมวด 2"
+          ],
+          "note": "ป.พ.พ. บรรพ 1 ลักษณะ 4 หมวด 2 การแสดงเจตนา มาตรา 154"
+        }
+      ],
+      "summary": "แม้ในใจจริงผู้แสดงจะมิได้เจตนาให้ตนต้องผูกพัน การแสดงเจตนานั้นก็ไม่เสียไป เว้นแต่คู่กรณีอีกฝ่ายได้รู้ถึงเจตนาซ่อนเร้นนั้น (ป.พ.พ. มาตรา 154)",
+      "definition": {
+        "text": "แม้ในใจจริงผู้แสดงจะมิได้เจตนาให้ตนต้องผูกพัน การแสดงเจตนานั้นก็ไม่เสียไป เว้นแต่คู่กรณีอีกฝ่ายได้รู้ถึงเจตนาซ่อนเร้นนั้น (ม.154)",
+        "provisions": [
+          "civil_154"
+        ],
+        "lectureRefs": [
+          "lec-civil_154-1"
+        ],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "mental-reservation",
+          "kind": "elements",
+          "label": "เจตนาซ่อนเร้น (มาตรา 154)",
+          "body": "ความบกพร่องของการแสดงเจตนาแบบแรกในหมวด 2 — ผู้แสดงเจตนาเองมิได้ตั้งใจให้ตนผูกพัน แต่ยังคงต้องผูกพันตามที่แสดงออก เว้นแต่อีกฝ่ายรู้ถึงความไม่จริงใจนั้น",
+          "items": [
+            {
+              "label": "ผลของเจตนาซ่อนเร้น (ม.154)",
+              "text": "แม้ในใจจริงผู้แสดงจะมิได้เจตนาให้ตนต้องผูกพัน การแสดงเจตนานั้นก็ไม่เสียไป เว้นแต่คู่กรณีอีกฝ่ายได้รู้ถึงเจตนาซ่อนเร้นนั้น",
+              "provisions": [
+                "civil_154"
+              ],
+              "lectureRefs": [
+                "lec-civil_154-1"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_154",
+          "role": "core",
+          "note": "เจตนาซ่อนเร้นไม่ทำให้การแสดงเจตนาเสียไป เว้นแต่อีกฝ่ายรู้"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 1 ลักษณะ 4 มาตรา 154",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [
+        "lec-civil_154-1"
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/nitikam",
+          "rel": "parent",
+          "labelTH": "นิติกรรม",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/chetana-luang-nitikam-amprang",
+          "rel": "contrast",
+          "labelTH": "เจตนาลวงและนิติกรรมอำพราง",
+          "status": "published",
+          "note": "เจตนาซ่อนเร้นเป็นการปิดบังฝ่ายเดียวและยังคงผูกพัน ต่างจากเจตนาลวงซึ่งเป็นการสมรู้กันทั้งสองฝ่ายและเป็นโมฆะ"
+        }
+      ]
+    },
+    "chetana-luang-nitikam-amprang": {
+      "id": "atlas:concept/chetana-luang-nitikam-amprang",
+      "slug": "chetana-luang-nitikam-amprang",
+      "titleTH": "เจตนาลวงและนิติกรรมอำพราง",
+      "titleEN": "Sham Transaction and Dissimulated Act",
+      "aliases": [],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "juristic-acts"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 1",
+            "ลักษณะ 4",
+            "หมวด 2"
+          ],
+          "note": "ป.พ.พ. บรรพ 1 ลักษณะ 4 หมวด 2 การแสดงเจตนา มาตรา 155"
+        }
+      ],
+      "summary": "การแสดงเจตนาลวงโดยสมรู้กับคู่กรณีอีกฝ่ายเป็นโมฆะ ถ้าเจตนาลวงนั้นทำขึ้นเพื่ออำพรางนิติกรรมอีกอันหนึ่ง ให้บังคับตามนิติกรรมที่ถูกอำพราง (ป.พ.พ. มาตรา 155)",
+      "definition": {
+        "text": "การแสดงเจตนาลวงโดยสมรู้กับคู่กรณีอีกฝ่ายเป็นโมฆะ ถ้าเจตนาลวงนั้นทำขึ้นเพื่ออำพรางนิติกรรมอีกอันหนึ่ง ให้บังคับตามนิติกรรมที่ถูกอำพราง (ม.155)",
+        "provisions": [
+          "civil_155"
+        ],
+        "lectureRefs": [
+          "lec-civil_155-1"
+        ],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "sham",
+          "kind": "elements",
+          "label": "เจตนาลวงและนิติกรรมอำพราง (มาตรา 155)",
+          "body": "ต่างจากเจตนาซ่อนเร้นซึ่งเป็นการปิดบังฝ่ายเดียว เจตนาลวงต้องเป็นการสมรู้กันทั้งสองฝ่ายว่าจะไม่ผูกพันตามที่แสดงออก นิติกรรมลวงจึงเป็นโมฆะเสมอ แต่หากมีนิติกรรมแท้จริงถูกอำพรางไว้ กฎหมายให้บังคับตามนิติกรรมที่ถูกอำพรางนั้นแทน",
+          "items": [
+            {
+              "label": "ผลของเจตนาลวงและนิติกรรมอำพราง (ม.155)",
+              "text": "การแสดงเจตนาลวงโดยสมรู้กับคู่กรณีอีกฝ่ายเป็นโมฆะ ถ้าเจตนาลวงนั้นทำขึ้นเพื่ออำพรางนิติกรรมอีกอันหนึ่ง ให้บังคับตามนิติกรรมที่ถูกอำพราง",
+              "provisions": [
+                "civil_155"
+              ],
+              "lectureRefs": [
+                "lec-civil_155-1"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_155",
+          "role": "core",
+          "note": "เจตนาลวงโดยสมรู้กัน เป็นโมฆะ (รวมนิติกรรมอำพราง)"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 1 ลักษณะ 4 มาตรา 155",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [
+        "lec-civil_155-1"
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/nitikam",
+          "rel": "parent",
+          "labelTH": "นิติกรรม",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/mokha",
+          "rel": "specializes",
+          "labelTH": "โมฆะ",
+          "status": "published",
+          "note": "นิติกรรมลวงเป็นโมฆะเสมอ"
+        },
+        {
+          "ref": "atlas:concept/chetana-son-ren",
+          "rel": "contrast",
+          "labelTH": "เจตนาซ่อนเร้น",
+          "status": "published"
+        }
+      ]
+    },
+    "samkanphid": {
+      "id": "atlas:concept/samkanphid",
+      "slug": "samkanphid",
+      "titleTH": "สำคัญผิด",
+      "titleEN": "Mistake",
+      "aliases": [
+        "สำคัญผิดในสาระสำคัญ",
+        "สำคัญผิดในคุณสมบัติ"
+      ],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "juristic-acts"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 1",
+            "ลักษณะ 4",
+            "หมวด 2"
+          ],
+          "note": "ป.พ.พ. บรรพ 1 ลักษณะ 4 หมวด 2 การแสดงเจตนา มาตรา 156–158"
+        }
+      ],
+      "summary": "สำคัญผิดในสิ่งซึ่งเป็นสาระสำคัญแห่งนิติกรรม เป็นโมฆะ ส่วนสำคัญผิดในคุณสมบัติของบุคคลหรือทรัพย์ซึ่งตามปกติถือว่าเป็นสาระสำคัญ เป็นโมฆียะ (ป.พ.พ. มาตรา 156–158)",
+      "definition": {
+        "text": "สำคัญผิดในสิ่งซึ่งเป็นสาระสำคัญแห่งนิติกรรม เป็นโมฆะ (ม.156) ส่วนสำคัญผิดในคุณสมบัติของบุคคลหรือทรัพย์ซึ่งตามปกติถือว่าเป็นสาระสำคัญ เป็นโมฆียะ (ม.157) แต่ถ้าความสำคัญผิดเกิดจากความประมาทเลินเล่ออย่างร้ายแรงของผู้แสดงเจตนาเอง จะถือเอาประโยชน์จากความสำคัญผิดนั้นไม่ได้ (ม.158)",
+        "provisions": [
+          "civil_156",
+          "civil_157",
+          "civil_158"
+        ],
+        "lectureRefs": [
+          "lec-civil_156-1",
+          "lec-civil_157-1",
+          "lec-civil_158-1"
+        ],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "mistake",
+          "kind": "elements",
+          "label": "สำคัญผิด (มาตรา 156–158)",
+          "body": "สองระดับของความสำคัญผิดให้ผลต่างกัน: สำคัญผิดในสาระสำคัญ (เช่น ตัวบุคคล ตัวทรัพย์ ประเภทนิติกรรม) เป็นโมฆะ ส่วนสำคัญผิดในคุณสมบัติ (เช่น คุณภาพ ที่มา) เป็นเพียงโมฆียะ และผู้ประมาทเลินเล่ออย่างร้ายแรงของตนเองถือเอาประโยชน์จากความสำคัญผิดไม่ได้",
+          "items": [
+            {
+              "label": "สำคัญผิดในสาระสำคัญ — โมฆะ (ม.156)",
+              "text": "สำคัญผิดในสิ่งซึ่งเป็นสาระสำคัญแห่งนิติกรรม เป็นโมฆะ",
+              "provisions": [
+                "civil_156"
+              ],
+              "lectureRefs": [
+                "lec-civil_156-1"
+              ]
+            },
+            {
+              "label": "สำคัญผิดในคุณสมบัติ — โมฆียะ (ม.157)",
+              "text": "สำคัญผิดในคุณสมบัติของบุคคลหรือทรัพย์ซึ่งตามปกติถือว่าเป็นสาระสำคัญ เป็นโมฆียะ",
+              "provisions": [
+                "civil_157"
+              ],
+              "lectureRefs": [
+                "lec-civil_157-1"
+              ]
+            },
+            {
+              "label": "ข้อจำกัด: ประมาทเลินเล่ออย่างร้ายแรงของตนเอง (ม.158)",
+              "text": "ถ้าความสำคัญผิดเกิดจากความประมาทเลินเล่ออย่างร้ายแรงของผู้แสดงเจตนาเอง จะถือเอาประโยชน์จากความสำคัญผิดนั้นไม่ได้",
+              "provisions": [
+                "civil_158"
+              ],
+              "lectureRefs": [
+                "lec-civil_158-1"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_156",
+          "role": "core",
+          "note": "สำคัญผิดในสาระสำคัญแห่งนิติกรรม เป็นโมฆะ"
+        },
+        {
+          "ref": "civil_157",
+          "role": "core",
+          "note": "สำคัญผิดในคุณสมบัติของบุคคลหรือทรัพย์ เป็นโมฆียะ"
+        },
+        {
+          "ref": "civil_158",
+          "role": "related",
+          "note": "สำคัญผิดจากความประมาทเลินเล่ออย่างร้ายแรงของตนเอง ถือเอาประโยชน์ไม่ได้"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 1 ลักษณะ 4 มาตรา 156–158",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [
+        "lec-civil_156-1",
+        "lec-civil_157-1",
+        "lec-civil_158-1"
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/nitikam",
+          "rel": "parent",
+          "labelTH": "นิติกรรม",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/mokha",
+          "rel": "specializes",
+          "labelTH": "โมฆะ",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/mokhiya",
+          "rel": "specializes",
+          "labelTH": "โมฆียะ",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/konchachon",
+          "rel": "contrast",
+          "labelTH": "กลฉ้อฉล",
+          "status": "published",
+          "note": "สำคัญผิดเกิดขึ้นเองภายในของผู้แสดงเจตนา ต่างจากกลฉ้อฉลซึ่งถูกอีกฝ่ายหลอกลวงให้สำคัญผิด"
+        }
+      ]
+    },
+    "konchachon": {
+      "id": "atlas:concept/konchachon",
+      "slug": "konchachon",
+      "titleTH": "กลฉ้อฉล",
+      "titleEN": "Fraud (in Juristic Acts)",
+      "aliases": [
+        "กลฉ้อฉลถึงขนาด",
+        "กลฉ้อฉลเพื่อเหตุ"
+      ],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "juristic-acts"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 1",
+            "ลักษณะ 4",
+            "หมวด 2"
+          ],
+          "note": "ป.พ.พ. บรรพ 1 ลักษณะ 4 หมวด 2 การแสดงเจตนา มาตรา 159–162"
+        }
+      ],
+      "summary": "การแสดงเจตนาเพราะถูกกลฉ้อฉลถึงขนาดเป็นโมฆียะ ถ้ากลฉ้อฉลเป็นแต่เพียงเหตุจูงใจ ผู้ถูกกลฉ้อฉลเรียกค่าสินไหมทดแทนได้แต่นิติกรรมไม่ถึงกับเป็นโมฆียะ (ป.พ.พ. มาตรา 159–162)",
+      "definition": {
+        "text": "การแสดงเจตนาเพราะถูกกลฉ้อฉลถึงขนาดเป็นโมฆียะ (ม.159) ถ้ากลฉ้อฉลเป็นแต่เพียงเหตุจูงใจ ผู้ถูกกลฉ้อฉลเรียกค่าสินไหมทดแทนได้แต่นิติกรรมไม่ถึงกับเป็นโมฆียะ (ม.161) การนิ่งเสียโดยจงใจในนิติกรรมสองฝ่ายอาจเป็นกลฉ้อฉลได้ (ม.162)",
+        "provisions": [
+          "civil_159",
+          "civil_161",
+          "civil_162"
+        ],
+        "lectureRefs": [
+          "lec-civil_159-1",
+          "lec-civil_161-1",
+          "lec-civil_162-1"
+        ],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "fraud",
+          "kind": "elements",
+          "label": "กลฉ้อฉล (มาตรา 159–162)",
+          "body": "กลฉ้อฉลให้ผลต่างกันตามความร้ายแรง: ถึงขนาดที่หากไม่มีกลฉ้อฉลจะไม่ทำนิติกรรมเลย เป็นโมฆียะ ส่วนที่เป็นเพียงเหตุจูงใจให้เงื่อนไขดีขึ้น เพียงแต่เรียกค่าสินไหมทดแทนได้ และการนิ่งเฉยโดยจงใจก็อาจเข้าลักษณะกลฉ้อฉลได้เช่นกัน",
+          "items": [
+            {
+              "label": "กลฉ้อฉลถึงขนาด — โมฆียะ (ม.159)",
+              "text": "การแสดงเจตนาเพราะถูกกลฉ้อฉลถึงขนาดเป็นโมฆียะ",
+              "provisions": [
+                "civil_159"
+              ],
+              "lectureRefs": [
+                "lec-civil_159-1"
+              ]
+            },
+            {
+              "label": "กลฉ้อฉลเพื่อเหตุ — เรียกค่าสินไหมทดแทนได้ (ม.161)",
+              "text": "ถ้ากลฉ้อฉลเป็นแต่เพียงเหตุจูงใจ ผู้ถูกกลฉ้อฉลเรียกค่าสินไหมทดแทนได้แต่นิติกรรมไม่ถึงกับเป็นโมฆียะ",
+              "provisions": [
+                "civil_161"
+              ],
+              "lectureRefs": [
+                "lec-civil_161-1"
+              ]
+            },
+            {
+              "label": "การนิ่งเสียโดยจงใจ (ม.162)",
+              "text": "การนิ่งเสียโดยจงใจในนิติกรรมสองฝ่ายอาจเป็นกลฉ้อฉลได้",
+              "provisions": [
+                "civil_162"
+              ],
+              "lectureRefs": [
+                "lec-civil_162-1"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_159",
+          "role": "core",
+          "note": "ถูกกลฉ้อฉลถึงขนาด เป็นโมฆียะ"
+        },
+        {
+          "ref": "civil_161",
+          "role": "related",
+          "note": "กลฉ้อฉลเพียงเหตุจูงใจ เรียกค่าสินไหมทดแทนได้แต่ไม่ถึงโมฆียะ"
+        },
+        {
+          "ref": "civil_162",
+          "role": "related",
+          "note": "การนิ่งเสียโดยจงใจในนิติกรรมสองฝ่าย"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 1 ลักษณะ 4 มาตรา 159–162",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [
+        "lec-civil_159-1",
+        "lec-civil_161-1",
+        "lec-civil_162-1"
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/nitikam",
+          "rel": "parent",
+          "labelTH": "นิติกรรม",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/mokhiya",
+          "rel": "specializes",
+          "labelTH": "โมฆียะ",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/khomkhu",
+          "rel": "seealso",
+          "labelTH": "การข่มขู่",
+          "status": "published",
+          "note": "ทั้งสองเป็นความบกพร่องของการแสดงเจตนาที่เกิดจากอิทธิพลของอีกฝ่ายหรือบุคคลภายนอก"
+        }
+      ]
+    },
+    "khomkhu": {
+      "id": "atlas:concept/khomkhu",
+      "slug": "khomkhu",
+      "titleTH": "การข่มขู่",
+      "titleEN": "Duress",
+      "aliases": [],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "juristic-acts"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 1",
+            "ลักษณะ 4",
+            "หมวด 2"
+          ],
+          "note": "ป.พ.พ. บรรพ 1 ลักษณะ 4 หมวด 2 การแสดงเจตนา มาตรา 164–166"
+        }
+      ],
+      "summary": "การแสดงเจตนาเพราะถูกข่มขู่ด้วยภัยที่ใกล้จะถึงและร้ายแรงถึงขนาด เป็นโมฆียะ (ป.พ.พ. มาตรา 164–166)",
+      "definition": {
+        "text": "การแสดงเจตนาเพราะถูกข่มขู่ด้วยภัยที่ใกล้จะถึงและร้ายแรงถึงขนาด เป็นโมฆียะ (ม.164) การขู่ว่าจะใช้สิทธิตามปกตินิยม หรือความกลัวเพราะนับถือยำเกรง ไม่ถือเป็นการข่มขู่ (ม.165) การข่มขู่โดยบุคคลภายนอกก็ทำให้เป็นโมฆียะได้ (ม.166)",
+        "provisions": [
+          "civil_164",
+          "civil_165",
+          "civil_166"
+        ],
+        "lectureRefs": [
+          "lec-civil_164-1",
+          "lec-civil_165-1",
+          "lec-civil_166-1"
+        ],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "duress",
+          "kind": "elements",
+          "label": "การข่มขู่ (มาตรา 164–166)",
+          "body": "องค์ประกอบของการข่มขู่ที่ทำให้นิติกรรมเป็นโมฆียะ พร้อมข้อยกเว้นและกรณีข่มขู่โดยบุคคลภายนอก",
+          "items": [
+            {
+              "label": "องค์ประกอบ (ม.164)",
+              "text": "การแสดงเจตนาเพราะถูกข่มขู่ด้วยภัยที่ใกล้จะถึงและร้ายแรงถึงขนาด เป็นโมฆียะ",
+              "provisions": [
+                "civil_164"
+              ],
+              "lectureRefs": [
+                "lec-civil_164-1"
+              ]
+            },
+            {
+              "label": "ข้อยกเว้น (ม.165)",
+              "text": "การขู่ว่าจะใช้สิทธิตามปกตินิยม หรือความกลัวเพราะนับถือยำเกรง ไม่ถือเป็นการข่มขู่",
+              "provisions": [
+                "civil_165"
+              ],
+              "lectureRefs": [
+                "lec-civil_165-1"
+              ]
+            },
+            {
+              "label": "ข่มขู่โดยบุคคลภายนอก (ม.166)",
+              "text": "การข่มขู่โดยบุคคลภายนอกก็ทำให้เป็นโมฆียะได้",
+              "provisions": [
+                "civil_166"
+              ],
+              "lectureRefs": [
+                "lec-civil_166-1"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_164",
+          "role": "core",
+          "note": "ถูกข่มขู่ เป็นโมฆียะ"
+        },
+        {
+          "ref": "civil_165",
+          "role": "related",
+          "note": "ขู่จะใช้สิทธิตามปกตินิยม หรือความยำเกรง ไม่ถือเป็นข่มขู่"
+        },
+        {
+          "ref": "civil_166",
+          "role": "related",
+          "note": "ข่มขู่โดยบุคคลภายนอก"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 1 ลักษณะ 4 มาตรา 164–166",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [
+        "lec-civil_164-1",
+        "lec-civil_165-1",
+        "lec-civil_166-1"
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/nitikam",
+          "rel": "parent",
+          "labelTH": "นิติกรรม",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/mokhiya",
+          "rel": "specializes",
+          "labelTH": "โมฆียะ",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/konchachon",
+          "rel": "seealso",
+          "labelTH": "กลฉ้อฉล",
+          "status": "published"
+        }
+      ]
+    },
+    "nguenkhai-nguenwela": {
+      "id": "atlas:concept/nguenkhai-nguenwela",
+      "slug": "nguenkhai-nguenwela",
+      "titleTH": "เงื่อนไขและเงื่อนเวลา",
+      "titleEN": "Conditions and Time Clauses",
+      "aliases": [
+        "เงื่อนไขบังคับก่อน",
+        "เงื่อนเวลาเริ่มต้น",
+        "เงื่อนเวลาสิ้นสุด"
+      ],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "juristic-acts"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 1",
+            "ลักษณะ 4",
+            "หมวด 4"
+          ],
+          "note": "ป.พ.พ. บรรพ 1 ลักษณะ 4 หมวด 4 เงื่อนไขและเงื่อนเวลา มาตรา 182, 183, 191, 193"
+        }
+      ],
+      "summary": "นิติกรรมอาจมีเงื่อนไขบังคับก่อนหรือบังคับหลัง ทำให้ผลของนิติกรรมเกิดขึ้นหรือสิ้นสุดเมื่อเงื่อนไขสำเร็จ และอาจมีเงื่อนเวลาเริ่มต้นซึ่งห้ามทวงถามก่อนถึงกำหนด (ป.พ.พ. มาตรา 182, 183, 191, 193)",
+      "definition": {
+        "text": "หมวด 4 (มาตรา 182 ถึง 193) กำหนดว่านิติกรรมอาจมีเงื่อนไขบังคับก่อนหรือบังคับหลัง ทำให้ผลของนิติกรรมเกิดขึ้นหรือสิ้นสุดเมื่อเงื่อนไขสำเร็จ (ม.182 ม.183) และอาจมีเงื่อนเวลาเริ่มต้นซึ่งห้ามทวงถามก่อนถึงกำหนด (ม.191) เว้นแต่ลูกหนี้เสียประโยชน์แห่งเงื่อนเวลาตาม ม.193",
+        "provisions": [
+          "civil_182",
+          "civil_183",
+          "civil_191",
+          "civil_193"
+        ],
+        "lectureRefs": [
+          "lec-civil_182-1",
+          "lec-civil_183-1",
+          "lec-civil_191-1",
+          "lec-civil_193-1"
+        ],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "conditions-and-time",
+          "kind": "elements",
+          "label": "เงื่อนไขและเงื่อนเวลา (มาตรา 182, 183, 191, 193)",
+          "body": "เงื่อนไขบังคับก่อนทำให้นิติกรรมมีผลเมื่อเงื่อนไขสำเร็จ เงื่อนไขบังคับหลังทำให้นิติกรรมสิ้นผลเมื่อเงื่อนไขสำเร็จ ส่วนเงื่อนเวลากำหนดจุดเริ่มต้นหรือสิ้นสุดผลของนิติกรรมด้วยระยะเวลาที่แน่นอน",
+          "items": [
+            {
+              "label": "เงื่อนไขบังคับก่อนและบังคับหลัง (ม.182–183)",
+              "text": "นิติกรรมอาจมีเงื่อนไขบังคับก่อนหรือบังคับหลัง ทำให้ผลของนิติกรรมเกิดขึ้นหรือสิ้นสุดเมื่อเงื่อนไขสำเร็จ",
+              "provisions": [
+                "civil_182",
+                "civil_183"
+              ],
+              "lectureRefs": [
+                "lec-civil_182-1",
+                "lec-civil_183-1"
+              ]
+            },
+            {
+              "label": "เงื่อนเวลาเริ่มต้นและการเสียประโยชน์แห่งเงื่อนเวลา (ม.191, 193)",
+              "text": "นิติกรรมอาจมีเงื่อนเวลาเริ่มต้นซึ่งห้ามทวงถามก่อนถึงกำหนด (ม.191) เว้นแต่ลูกหนี้เสียประโยชน์แห่งเงื่อนเวลาตาม ม.193",
+              "provisions": [
+                "civil_191",
+                "civil_193"
+              ],
+              "lectureRefs": [
+                "lec-civil_191-1",
+                "lec-civil_193-1"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_182",
+          "role": "core",
+          "note": "เงื่อนไขบังคับก่อน"
+        },
+        {
+          "ref": "civil_183",
+          "role": "core",
+          "note": "เงื่อนไขบังคับหลัง"
+        },
+        {
+          "ref": "civil_191",
+          "role": "core",
+          "note": "เงื่อนเวลาเริ่มต้น ห้ามทวงถามก่อนถึงกำหนด"
+        },
+        {
+          "ref": "civil_193",
+          "role": "related",
+          "note": "การเสียประโยชน์แห่งเงื่อนเวลา"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 1 ลักษณะ 4 มาตรา 182, 183, 191, 193",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [
+        "lec-civil_182-1",
+        "lec-civil_183-1",
+        "lec-civil_191-1",
+        "lec-civil_193-1"
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/nitikam",
+          "rel": "parent",
+          "labelTH": "นิติกรรม",
+          "status": "published"
+        }
+      ]
+    },
+    "kham-sanoe-kham-sanong": {
+      "id": "atlas:concept/kham-sanoe-kham-sanong",
+      "slug": "kham-sanoe-kham-sanong",
+      "titleTH": "คำเสนอและคำสนอง",
+      "titleEN": "Offer and Acceptance (Contract Formation)",
+      "aliases": [],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "juristic-acts"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 2",
+            "ลักษณะ 2",
+            "หมวด 1"
+          ],
+          "note": "ป.พ.พ. บรรพ 2 ลักษณะ 2 หมวด 1 ก่อให้เกิดสัญญา มาตรา 354–368"
+        }
+      ],
+      "summary": "สัญญาเกิดขึ้นเมื่อคำเสนอของฝ่ายหนึ่งได้รับคำสนองที่ถูกต้องตรงกันจากอีกฝ่าย ก่อนถึงจุดนั้นยังเป็นเพียงการเจรจา (ป.พ.พ. มาตรา 354–368)",
+      "definition": {
+        "text": "สัญญาเกิดขึ้นเมื่อคำเสนอของฝ่ายหนึ่งได้รับคำสนองที่ถูกต้องตรงกันจากอีกฝ่าย (ม.354) สัญญาระหว่างบุคคลซึ่งอยู่ห่างกันโดยระยะทางย่อมเกิดขึ้นเมื่อคำบอกกล่าวสนองไปถึงผู้เสนอ (ม.361)",
+        "provisions": [
+          "civil_354",
+          "civil_361"
+        ],
+        "lectureRefs": [
+          "lec-civil_354-1",
+          "lec-civil_361-1"
+        ],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "formation",
+          "kind": "elements",
+          "label": "การเกิดสัญญา: คำเสนอและคำสนอง (ม.354–368)",
+          "body": "สัญญาเกิดขึ้นเมื่อคำเสนอของฝ่ายหนึ่งได้รับคำสนองที่ถูกต้องตรงกันจากอีกฝ่าย ก่อนถึงจุดนั้นยังเป็นเพียงการเจรจา หมวด 1 วางกติกาว่าคำเสนอผูกพันเพียงใด ต้องสนองอย่างไรจึงเกิดสัญญา เกิดที่ใดและเมื่อใด และจะตีความหรืออุดช่องว่างของสัญญาที่เกิดแล้วอย่างไร",
+          "lectureRefs": [
+            "lec-civil_354-1",
+            "lec-civil_361-1"
+          ],
+          "items": [
+            {
+              "label": "คำเสนอ: ความผูกพันและการสิ้นผล (ม.354–357)",
+              "text": "คำเสนอที่บ่งระยะเวลาให้ทำคำสนอง ถอนไม่ได้ภายในกำหนดนั้น (ม.354); คำเสนอแก่ผู้อยู่เฉพาะหน้าที่ไม่บ่งเวลา เสียไปถ้าไม่สนองรับทันที (ม.356); คำเสนอสิ้นความผูกพันเมื่อถูกบอกปัด หรือมิได้สนองรับภายในกำหนด (ม.357). กรณีคำเสนอไม่บ่งเวลาแก่ผู้ไม่อยู่เฉพาะหน้า ผูกพันตามระยะเวลาอันควรคาดหมายว่าจะได้รับคำสนอง (ม.355)",
+              "provisions": [
+                "civil_354",
+                "civil_355",
+                "civil_356",
+                "civil_357"
+              ],
+              "lectureRefs": [
+                "lec-civil_354-1",
+                "lec-civil_355-1",
+                "lec-civil_356-1",
+                "lec-civil_357-1"
+              ]
+            },
+            {
+              "label": "คำสนอง: ต้องตรงและมาถึงในเวลา (ม.358–359)",
+              "text": "คำสนองที่มีข้อความเพิ่มเติม จำกัด หรือแก้ไขคำเสนอ ให้ถือว่าเป็นคำบอกปัดคำเสนอเดิมและเป็นคำเสนอขึ้นใหม่ (ม.359). ถ้าคำบอกกล่าวสนองมาถึงล่วงเวลา แต่เห็นได้ว่าตามทางการส่งตามปกติควรจะมาถึงในเวลา ผู้เสนอต้องบอกกล่าวแก่คู่กรณีว่าคำสนองมาถึงล่วงเวลาโดยพลัน มิฉะนั้นถือว่าคำสนองมิได้มาถึงล่วงเวลา (ม.358)",
+              "provisions": [
+                "civil_358",
+                "civil_359"
+              ],
+              "lectureRefs": [
+                "lec-civil_358-1",
+                "lec-civil_359-1"
+              ]
+            },
+            {
+              "label": "จุดเกิดสัญญา (ม.361)",
+              "text": "สัญญาระหว่างบุคคลซึ่งอยู่ห่างกันโดยระยะทาง ย่อมเกิดเป็นสัญญาขึ้นเมื่อคำบอกกล่าวสนองไปถึงผู้เสนอ เว้นแต่ตามเจตนาของคู่กรณีหรือปกติประเพณีไม่จำต้องมีคำบอกกล่าวสนอง สัญญาก็เกิดเมื่อมีการอันใดอันหนึ่งซึ่งถือได้ว่าเป็นการสนองรับ (ม.361). กรณีผู้เสนอตายหรือกลายเป็นผู้ไร้ความสามารถก่อนคำสนองไปถึง ให้พิจารณา ม.360 ประกอบ",
+              "provisions": [
+                "civil_360",
+                "civil_361"
+              ],
+              "lectureRefs": [
+                "lec-civil_360-1",
+                "lec-civil_361-1"
+              ]
+            },
+            {
+              "label": "สาระสำคัญของสัญญาต้องตกลงครบ (ม.366–367)",
+              "text": "ถ้าคู่สัญญาแม้เพียงฝ่ายเดียวได้แสดงไว้ว่าจะต้องตกลงกันในข้อใดเป็นสาระสำคัญ เมื่อยังไม่ตกลงกันในข้อนั้นได้หมดทุกข้อ สัญญายังไม่เกิด (ม.366) เว้นแต่กรณีที่คู่สัญญาถือกันว่าได้ทำสัญญากันแล้วและได้ปฏิบัติตามสัญญานั้น ข้อที่ยังมิได้ตกลงให้อนุมานตามพฤติการณ์ (ม.367)",
+              "provisions": [
+                "civil_366",
+                "civil_367"
+              ],
+              "lectureRefs": [
+                "lec-civil_366-1",
+                "lec-civil_367-1"
+              ]
+            },
+            {
+              "label": "การตีความและการอุดช่องว่างของสัญญา (ม.368)",
+              "text": "สัญญาที่เกิดแล้วให้ตีความไปตามความประสงค์ในทางสุจริต โดยพิเคราะห์ถึงปกติประเพณี (ม.368) ประกอบกับหลักการค้นหาเจตนาอันแท้จริงซึ่งต้องเป็นเจตนาร่วมกันของคู่กรณี (ม.171)",
+              "provisions": [
+                "civil_368"
+              ],
+              "lectureRefs": [
+                "lec-civil_368-1"
+              ]
+            }
+          ],
+          "provisions": [
+            "civil_354",
+            "civil_356",
+            "civil_357",
+            "civil_359",
+            "civil_361",
+            "civil_366",
+            "civil_368"
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_354",
+          "role": "core",
+          "note": "คำเสนอบ่งระยะเวลา ถอนไม่ได้ภายในกำหนด"
+        },
+        {
+          "ref": "civil_356",
+          "role": "core",
+          "note": "คำเสนอแก่ผู้อยู่เฉพาะหน้าไม่บ่งเวลา ต้องสนองรับทันที"
+        },
+        {
+          "ref": "civil_357",
+          "role": "core",
+          "note": "คำเสนอสิ้นความผูกพันเมื่อถูกบอกปัดหรือสนองช้ากว่ากำหนด"
+        },
+        {
+          "ref": "civil_359",
+          "role": "core",
+          "note": "คำสนองล่วงเวลาหรือมีข้อแก้ไข กลายเป็นคำเสนอขึ้นใหม่"
+        },
+        {
+          "ref": "civil_361",
+          "role": "core",
+          "note": "จุดเกิดสัญญาระหว่างผู้อยู่ห่างกัน: เมื่อคำสนองไปถึงผู้เสนอ"
+        },
+        {
+          "ref": "civil_366",
+          "role": "core",
+          "note": "ตกลงสาระสำคัญไม่ครบ สัญญายังไม่เกิด"
+        },
+        {
+          "ref": "civil_368",
+          "role": "core",
+          "note": "ตีความและอุดช่องว่างของสัญญาโดยสุจริตตามปกติประเพณี"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 2 ลักษณะ 2 มาตรา 354–368",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [
+        "lec-civil_354-1",
+        "lec-civil_355-1",
+        "lec-civil_356-1",
+        "lec-civil_357-1",
+        "lec-civil_358-1",
+        "lec-civil_359-1",
+        "lec-civil_360-1",
+        "lec-civil_361-1",
+        "lec-civil_366-1",
+        "lec-civil_367-1",
+        "lec-civil_368-1"
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/sanya",
+          "rel": "parent",
+          "labelTH": "สัญญา",
+          "status": "published"
+        }
+      ]
+    },
+    "sanya-tang-tob-taen": {
+      "id": "atlas:concept/sanya-tang-tob-taen",
+      "slug": "sanya-tang-tob-taen",
+      "titleTH": "สัญญาต่างตอบแทน",
+      "titleEN": "Reciprocal (Bilateral) Contract",
+      "aliases": [
+        "ความเสี่ยงภัย",
+        "สิทธิหน่วงเหนี่ยว",
+        "การรับภัยพิบัติ",
+        "การชำระหนี้กลายเป็นพ้นวิสัย",
+        "การชำระหนี้ตกเป็นพ้นวิสัย"
+      ],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "juristic-acts",
+        "obligations"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 2",
+            "ลักษณะ 2",
+            "หมวด 2"
+          ],
+          "note": "ป.พ.พ. บรรพ 2 ลักษณะ 2 หมวด 2 ผลแห่งสัญญา มาตรา 369–373"
+        }
+      ],
+      "summary": "ในสัญญาต่างตอบแทน คู่สัญญาฝ่ายหนึ่งจะไม่ยอมชำระหนี้จนกว่าอีกฝ่ายจะชำระหนี้ตอบแทนก็ได้ และเมื่อการชำระหนี้กลายเป็นพ้นวิสัยโดยไม่มีฝ่ายใดต้องรับผิด กฎหมายวางหลักการจัดสรรความเสี่ยงภัยไว้ (ป.พ.พ. มาตรา 369–372)",
+      "definition": {
+        "text": "ในสัญญาต่างตอบแทน คู่สัญญาฝ่ายหนึ่งจะไม่ยอมชำระหนี้จนกว่าอีกฝ่ายจะชำระหนี้หรือขอปฏิบัติการชำระหนี้ก็ได้ (ม.369) การใช้สิทธินี้เป็นเพียงการหน่วงเหนี่ยว ไม่ใช่การผิดสัญญา ถ้าสัญญาต่างตอบแทนมีวัตถุประสงค์เป็นการก่อหรือโอนทรัพยสิทธิในทรัพย์เฉพาะสิ่ง และทรัพย์นั้นสูญหรือเสียหายเพราะเหตุที่ไม่มีฝ่ายใดต้องรับผิด ความสูญหรือเสียหายนั้นตกเป็นพับแก่เจ้าหนี้ (ม.370)",
+        "provisions": [
+          "civil_369",
+          "civil_370"
+        ],
+        "lectureRefs": [
+          "lec-civil_369-1",
+          "lec-civil_370-1"
+        ],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "mutual-effects",
+          "kind": "elements",
+          "label": "ผลแห่งสัญญาต่างตอบแทน: สิทธิหน่วงเหนี่ยวและความเสี่ยงภัย (ม.369–373)",
+          "body": "สัญญาต่างตอบแทน คือสัญญาที่ทั้งสองฝ่ายต่างมีหนี้ต้องชำระให้แก่กัน หมวด 2 กำหนดผลเฉพาะของสัญญาชนิดนี้ ทั้งในภาวะปกติและเมื่อการชำระหนี้กลายเป็นพ้นวิสัยโดยไม่มีฝ่ายใดต้องรับผิด",
+          "items": [
+            {
+              "label": "สิทธิที่จะไม่ชำระหนี้จนกว่าอีกฝ่ายจะชำระตอบแทน (ม.369)",
+              "text": "ในสัญญาต่างตอบแทน คู่สัญญาฝ่ายหนึ่งจะไม่ยอมชำระหนี้จนกว่าอีกฝ่ายจะชำระหนี้หรือขอปฏิบัติการชำระหนี้ก็ได้ (ม.369) การใช้สิทธินี้เป็นเพียงการหน่วงเหนี่ยว ไม่ใช่การผิดสัญญา",
+              "provisions": [
+                "civil_369"
+              ],
+              "lectureRefs": [
+                "lec-civil_369-1"
+              ]
+            },
+            {
+              "label": "ภัยพิบัติและการชำระหนี้พ้นวิสัยโดยไม่มีฝ่ายใดผิด (ม.370–372)",
+              "text": "ถ้าสัญญาต่างตอบแทนมีวัตถุประสงค์เป็นการก่อหรือโอนทรัพยสิทธิในทรัพย์เฉพาะสิ่ง และทรัพย์นั้นสูญหรือเสียหายเพราะเหตุที่ไม่มีฝ่ายใดต้องรับผิด ความสูญหรือเสียหายนั้นตกเป็นพับแก่เจ้าหนี้ (ม.370) กรณีสัญญามีเงื่อนไขบังคับก่อนให้เป็นไปตาม ม.371. นอกเหนือจากสองมาตราก่อน ถ้าการชำระหนี้ของฝ่ายหนึ่งกลายเป็นพ้นวิสัยเพราะเหตุที่ไม่มีฝ่ายใดต้องรับผิด ฝ่ายนั้นย่อมไม่มีสิทธิได้รับชำระหนี้ตอบแทน (ม.372 วรรคหนึ่ง) แต่ถ้าพ้นวิสัยเพราะพฤติการณ์อันฝ่ายเจ้าหนี้ต้องรับผิดชอบ ลูกหนี้ยังมีสิทธิได้รับชำระหนี้ตอบแทน (ม.372 วรรคสอง)",
+              "provisions": [
+                "civil_370",
+                "civil_371",
+                "civil_372"
+              ],
+              "lectureRefs": [
+                "lec-civil_370-1",
+                "lec-civil_371-1",
+                "lec-civil_372-1",
+                "lec-civil_372-2"
+              ]
+            },
+            {
+              "label": "ข้อสัญญายกเว้นความรับผิดล่วงหน้า (ม.373)",
+              "text": "ความตกลงล่วงหน้าที่ยกเว้นมิให้ลูกหนี้ต้องรับผิดเพื่อกลฉ้อฉลหรือความประมาทเลินเล่ออย่างร้ายแรงของตน เป็นโมฆะ (ม.373)",
+              "provisions": [
+                "civil_373"
+              ],
+              "lectureRefs": [
+                "lec-civil_373-1"
+              ]
+            }
+          ],
+          "provisions": [
+            "civil_369",
+            "civil_370",
+            "civil_372"
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_369",
+          "role": "core",
+          "note": "สัญญาต่างตอบแทน: สิทธิที่จะไม่ชำระหนี้จนกว่าอีกฝ่ายจะชำระตอบแทน"
+        },
+        {
+          "ref": "civil_370",
+          "role": "core",
+          "note": "ภัยพิบัติในทรัพย์เฉพาะสิ่ง ตกเป็นพับแก่เจ้าหนี้"
+        },
+        {
+          "ref": "civil_372",
+          "role": "core",
+          "note": "ความเสี่ยงภัยในสัญญาต่างตอบแทนเมื่อการชำระหนี้พ้นวิสัยโดยไม่มีใครผิด"
+        },
+        {
+          "ref": "civil_373",
+          "role": "related",
+          "note": "ข้อสัญญายกเว้นความรับผิดล่วงหน้าเพื่อกลฉ้อฉล/ประมาทเลินเล่อร้ายแรง เป็นโมฆะ"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 2 ลักษณะ 2 มาตรา 369–373",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [
+        "lec-civil_369-1",
+        "lec-civil_370-1",
+        "lec-civil_371-1",
+        "lec-civil_372-1",
+        "lec-civil_372-2",
+        "lec-civil_373-1"
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/sanya",
+          "rel": "parent",
+          "labelTH": "สัญญา",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/sitthi-yeud-nuang",
+          "rel": "contrast",
+          "labelTH": "สิทธิยึดหน่วง",
+          "status": "published",
+          "note": "สิทธิไม่ชำระหนี้จนกว่าอีกฝ่ายจะชำระตอบแทน (ม.369) เป็นข้อต่อสู้ตามสัญญาต่างตอบแทน ต่างจากสิทธิยึดหน่วง (ม.241) ซึ่งเป็นทรัพยสิทธิเหนือทรัพย์ของผู้อื่นที่ตนครอบครองอยู่"
+        }
+      ]
+    },
+    "sanya-phue-prayot-bukkhon-phainok": {
+      "id": "atlas:concept/sanya-phue-prayot-bukkhon-phainok",
+      "slug": "sanya-phue-prayot-bukkhon-phainok",
+      "titleTH": "สัญญาเพื่อประโยชน์บุคคลภายนอก",
+      "titleEN": "Contract for the Benefit of a Third Party",
+      "aliases": [],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "juristic-acts",
+        "obligations"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 2",
+            "ลักษณะ 2",
+            "หมวด 2"
+          ],
+          "note": "ป.พ.พ. บรรพ 2 ลักษณะ 2 หมวด 2 ผลแห่งสัญญา มาตรา 374–376"
+        }
+      ],
+      "summary": "ถ้าคู่สัญญาตกลงว่าจะชำระหนี้แก่บุคคลภายนอก บุคคลภายนอกมีสิทธิเรียกให้ลูกหนี้ชำระหนี้แก่ตนได้ โดยสิทธินั้นเกิดเมื่อบุคคลภายนอกแสดงเจตนาแก่ลูกหนี้ว่าจะถือเอาประโยชน์จากสัญญา (ป.พ.พ. มาตรา 374–376)",
+      "definition": {
+        "text": "ถ้าคู่สัญญาตกลงว่าจะชำระหนี้แก่บุคคลภายนอก บุคคลภายนอกมีสิทธิเรียกให้ลูกหนี้ชำระหนี้แก่ตนได้ โดยสิทธินั้นเกิดเมื่อบุคคลภายนอกแสดงเจตนาแก่ลูกหนี้ว่าจะถือเอาประโยชน์จากสัญญา (ม.374) เมื่อสิทธินั้นเกิดแล้ว คู่สัญญาจะเปลี่ยนแปลงหรือระงับสิทธินั้นไม่ได้ (ม.375) และลูกหนี้ยกข้อต่อสู้อันเกิดแต่มูลสัญญานั้นขึ้นต่อสู้บุคคลภายนอกได้ (ม.376)",
+        "provisions": [
+          "civil_374",
+          "civil_375",
+          "civil_376"
+        ],
+        "lectureRefs": [
+          "lec-civil_374-1",
+          "lec-civil_375-1",
+          "lec-civil_376-1"
+        ],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "third-party-beneficiary",
+          "kind": "elements",
+          "label": "สัญญาเพื่อประโยชน์บุคคลภายนอก (มาตรา 374–376)",
+          "body": "สัญญาที่ก่อสิทธิเรียกร้องโดยตรงแก่บุคคลที่มิได้เป็นคู่สัญญา สิทธินั้นเกิดขึ้นเมื่อบุคคลภายนอกแสดงเจตนาถือเอาประโยชน์ ไม่ใช่เกิดขึ้นทันทีที่ทำสัญญา และเมื่อเกิดแล้วคู่สัญญาแก้ไขเปลี่ยนแปลงไม่ได้อีก",
+          "items": [
+            {
+              "label": "การเกิดสิทธิของบุคคลภายนอก (ม.374)",
+              "text": "ถ้าคู่สัญญาตกลงว่าจะชำระหนี้แก่บุคคลภายนอก บุคคลภายนอกมีสิทธิเรียกให้ลูกหนี้ชำระหนี้แก่ตนได้ โดยสิทธินั้นเกิดเมื่อบุคคลภายนอกแสดงเจตนาแก่ลูกหนี้ว่าจะถือเอาประโยชน์จากสัญญา",
+              "provisions": [
+                "civil_374"
+              ],
+              "lectureRefs": [
+                "lec-civil_374-1"
+              ]
+            },
+            {
+              "label": "ความมั่นคงของสิทธิเมื่อเกิดแล้ว (ม.375)",
+              "text": "เมื่อสิทธินั้นเกิดแล้ว คู่สัญญาจะเปลี่ยนแปลงหรือระงับสิทธินั้นไม่ได้",
+              "provisions": [
+                "civil_375"
+              ],
+              "lectureRefs": [
+                "lec-civil_375-1"
+              ]
+            },
+            {
+              "label": "ข้อต่อสู้ของลูกหนี้ (ม.376)",
+              "text": "ลูกหนี้ยกข้อต่อสู้อันเกิดแต่มูลสัญญานั้นขึ้นต่อสู้บุคคลภายนอกได้",
+              "provisions": [
+                "civil_376"
+              ],
+              "lectureRefs": [
+                "lec-civil_376-1"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_374",
+          "role": "core",
+          "note": "สัญญาเพื่อประโยชน์บุคคลภายนอก: สิทธิเกิดเมื่อแสดงเจตนาถือเอาประโยชน์"
+        },
+        {
+          "ref": "civil_375",
+          "role": "core",
+          "note": "สิทธิที่เกิดแล้วเปลี่ยนแปลง/ระงับไม่ได้"
+        },
+        {
+          "ref": "civil_376",
+          "role": "related",
+          "note": "ลูกหนี้ยกข้อต่อสู้จากมูลสัญญาต่อบุคคลภายนอกได้"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 2 ลักษณะ 2 มาตรา 374–376",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [
+        "lec-civil_374-1",
+        "lec-civil_375-1",
+        "lec-civil_376-1"
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/sanya",
+          "rel": "parent",
+          "labelTH": "สัญญา",
+          "status": "published"
+        }
+      ]
+    },
+    "kan-loek-sanya": {
+      "id": "atlas:concept/kan-loek-sanya",
+      "slug": "kan-loek-sanya",
+      "titleTH": "การเลิกสัญญา",
+      "titleEN": "Termination of Contract",
+      "aliases": [
+        "การบอกเลิกสัญญา"
+      ],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "juristic-acts",
+        "obligations"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 2",
+            "ลักษณะ 2",
+            "หมวด 4"
+          ],
+          "note": "ป.พ.พ. บรรพ 2 ลักษณะ 2 หมวด 4 เลิกสัญญา มาตรา 386–394"
+        }
+      ],
+      "summary": "สิทธิเลิกสัญญาเกิดได้สองทาง คือ โดยข้อสัญญา หรือโดยบทบัญญัติแห่งกฎหมาย เมื่อใช้สิทธิเลิกสัญญาแล้ว คู่สัญญาแต่ละฝ่ายต้องให้อีกฝ่ายได้กลับคืนสู่ฐานะเดิม (ป.พ.พ. มาตรา 386–394)",
+      "definition": {
+        "text": "ถ้าคู่สัญญาฝ่ายหนึ่งมีสิทธิเลิกสัญญาโดยข้อสัญญาหรือโดยบทบัญญัติแห่งกฎหมาย การเลิกสัญญานั้นทำด้วยการแสดงเจตนาแก่อีกฝ่าย และเมื่อแสดงเจตนาแล้วจะถอนเสียมิได้ (ม.386) เมื่อเลิกสัญญาแล้ว คู่สัญญาแต่ละฝ่ายจำต้องให้อีกฝ่ายได้กลับคืนสู่ฐานะดังที่เป็นอยู่เดิม (ม.391)",
+        "provisions": [
+          "civil_386",
+          "civil_391"
+        ],
+        "lectureRefs": [
+          "lec-civil_386-1",
+          "lec-civil_391-1"
+        ],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "termination",
+          "kind": "consequences",
+          "label": "การเลิกสัญญาและการกลับคืนสู่ฐานะเดิม (ม.386–394)",
+          "body": "สิทธิเลิกสัญญาเกิดได้สองทาง คือ โดยข้อสัญญา หรือโดยบทบัญญัติแห่งกฎหมาย เมื่อใช้สิทธิเลิกสัญญาแล้ว คู่สัญญาแต่ละฝ่ายต้องให้อีกฝ่ายได้กลับคืนสู่ฐานะเดิม",
+          "items": [
+            {
+              "label": "การบอกเลิกสัญญา (ม.386)",
+              "text": "ถ้าคู่สัญญาฝ่ายหนึ่งมีสิทธิเลิกสัญญาโดยข้อสัญญาหรือโดยบทบัญญัติแห่งกฎหมาย การเลิกสัญญานั้นทำด้วยการแสดงเจตนาแก่อีกฝ่าย และเมื่อแสดงเจตนาแล้วจะถอนเสียมิได้ (ม.386)",
+              "provisions": [
+                "civil_386"
+              ],
+              "lectureRefs": [
+                "lec-civil_386-1"
+              ]
+            },
+            {
+              "label": "การเลิกสัญญาเพราะไม่ชำระหนี้ (ม.387–389)",
+              "text": "ถ้าคู่สัญญาฝ่ายหนึ่งไม่ชำระหนี้ อีกฝ่ายต้องกำหนดระยะเวลาพอสมควรแล้วบอกกล่าวให้ชำระหนี้ภายในกำหนด ถ้ายังไม่ชำระจึงเลิกสัญญาได้ (ม.387) เว้นแต่วัตถุประสงค์แห่งสัญญาโดยสภาพหรือโดยเจตนาที่คู่สัญญาแสดงไว้ จะสำเร็จได้ก็แต่ด้วยการชำระหนี้ ณ เวลาที่กำหนด (เวลาเป็นสาระสำคัญ) จึงเลิกสัญญาได้ทันทีโดยไม่ต้องบอกกล่าวก่อน (ม.388). ถ้าการชำระหนี้กลายเป็นพ้นวิสัยเพราะเหตุที่ลูกหนี้ต้องรับผิด เจ้าหนี้เลิกสัญญาได้ (ม.389)",
+              "provisions": [
+                "civil_387",
+                "civil_388",
+                "civil_389"
+              ],
+              "lectureRefs": [
+                "lec-civil_387-1",
+                "lec-civil_388-1",
+                "lec-civil_389-1"
+              ]
+            },
+            {
+              "label": "ผลของการเลิกสัญญา: กลับคืนสู่ฐานะเดิม (ม.391–392)",
+              "text": "เมื่อเลิกสัญญาแล้ว คู่สัญญาแต่ละฝ่ายจำต้องให้อีกฝ่ายได้กลับคืนสู่ฐานะดังที่เป็นอยู่เดิม โดยเงินที่จะต้องใช้คืนให้บวกดอกเบี้ยนับแต่เวลาที่ได้รับไว้ ส่วนการงานที่ได้ทำให้และการยอมให้ใช้ทรัพย์ให้ใช้เงินตามควรค่า (ม.391) และการชำระหนี้ของคู่สัญญาอันเกิดแต่การเลิกสัญญาให้เป็นไปตาม ม.369 (ม.392). ผลข้อนี้เป็นการ \"กลับคืนสู่ฐานะเดิม\" ตามสัญญา ไม่ใช่การเรียกคืนตามหลักลาภมิควรได้",
+              "provisions": [
+                "civil_391",
+                "civil_392"
+              ],
+              "lectureRefs": [
+                "lec-civil_391-1"
+              ]
+            },
+            {
+              "label": "การระงับสิทธิเลิกสัญญา (ม.393–394)",
+              "text": "ถ้ามิได้กำหนดระยะเวลาไว้ให้ใช้สิทธิเลิกสัญญา อีกฝ่ายจะกำหนดระยะเวลาพอสมควรแล้วบอกกล่าวให้ฝ่ายที่มีสิทธิแถลงว่าจะเลิกสัญญาหรือไม่ ถ้าไม่แถลงภายในกำหนด สิทธิเลิกสัญญาเป็นอันระงับ (ม.393) และสิทธิเลิกสัญญาเป็นอันระงับถ้าทรัพย์อันเป็นวัตถุแห่งสัญญาบุบสลายไปในส่วนสำคัญเพราะการกระทำหรือความผิดของผู้มีสิทธิเลิกสัญญา (ม.394)",
+              "provisions": [
+                "civil_393",
+                "civil_394"
+              ],
+              "lectureRefs": [
+                "lec-civil_393-1",
+                "lec-civil_394-1"
+              ]
+            }
+          ],
+          "provisions": [
+            "civil_386",
+            "civil_387",
+            "civil_388",
+            "civil_391"
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_386",
+          "role": "core",
+          "note": "การบอกเลิกสัญญาทำโดยแสดงเจตนา และถอนไม่ได้"
+        },
+        {
+          "ref": "civil_387",
+          "role": "core",
+          "note": "เลิกสัญญาเพราะไม่ชำระหนี้: ต้องบอกกล่าวกำหนดเวลาก่อน"
+        },
+        {
+          "ref": "civil_388",
+          "role": "core",
+          "note": "เวลาเป็นสาระสำคัญ: เลิกสัญญาได้ทันทีไม่ต้องบอกกล่าวก่อน"
+        },
+        {
+          "ref": "civil_391",
+          "role": "core",
+          "note": "ผลของการเลิกสัญญา: คู่สัญญากลับคืนสู่ฐานะเดิม (ไม่ใช่ลาภมิควรได้)"
+        },
+        {
+          "ref": "civil_393",
+          "role": "related",
+          "note": "การระงับสิทธิเลิกสัญญาเมื่อไม่แถลงภายในกำหนด"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 2 ลักษณะ 2 มาตรา 386–394",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [
+        "lec-civil_386-1",
+        "lec-civil_387-1",
+        "lec-civil_388-1",
+        "lec-civil_389-1",
+        "lec-civil_391-1",
+        "lec-civil_393-1",
+        "lec-civil_394-1"
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/sanya",
+          "rel": "parent",
+          "labelTH": "สัญญา",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/laap-mikhuan-dai",
+          "rel": "contrast",
+          "labelTH": "ลาภมิควรได้",
+          "status": "published",
+          "note": "การกลับคืนสู่ฐานะเดิมเมื่อเลิกสัญญา (ม.391) เป็นผลตามสัญญา ไม่ใช่การเรียกคืนตามหลักลาภมิควรได้"
+        }
+      ]
+    },
+    "sitthi-yeud-nuang": {
+      "id": "atlas:concept/sitthi-yeud-nuang",
+      "slug": "sitthi-yeud-nuang",
+      "titleTH": "สิทธิยึดหน่วง",
+      "titleEN": "Right of Retention",
+      "aliases": [],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "obligations"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 2",
+            "ลักษณะ 1",
+            "หมวด 2"
+          ],
+          "note": "ป.พ.พ. บรรพ 2 ลักษณะ 1 หมวด 2 มาตรา 241–250"
+        }
+      ],
+      "summary": "ผู้ใดเป็นผู้ครองทรัพย์สินของผู้อื่น และมีหนี้อันเป็นคุณประโยชน์แก่ตนเกี่ยวด้วยทรัพย์สินซึ่งครองนั้น ผู้นั้นจะยึดหน่วงทรัพย์สินไว้จนกว่าจะได้ชำระหนี้ก็ได้ (ป.พ.พ. มาตรา 241–250)",
+      "definition": {
+        "text": "ผู้ใดเป็นผู้ครองทรัพย์สินของผู้อื่น และมีหนี้อันเป็นคุณประโยชน์แก่ตนเกี่ยวด้วยทรัพย์สินซึ่งครองนั้น ผู้นั้นจะยึดหน่วงทรัพย์สินไว้จนกว่าจะได้ชำระหนี้ก็ได้ เว้นแต่หนี้ยังไม่ถึงกำหนด หรือการเข้าครอบครองเริ่มมาแต่การอันไม่ชอบด้วยกฎหมาย (ป.พ.พ. มาตรา 241)",
+        "provisions": [
+          "civil_241"
+        ],
+        "lectureRefs": [
+          "lec-civil_241-1"
+        ],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "retention-right",
+          "kind": "elements",
+          "label": "สิทธิยึดหน่วง (มาตรา 241–250)",
+          "body": "เป็นมาตรการบังคับและกดดันให้ลูกหนี้มาชำระหนี้ โดยกฎหมายอนุญาตให้ผู้ครองทรัพย์ของผู้อื่นยึดทรัพย์ไว้ได้จนกว่าจะได้รับชำระหนี้สิ้นเชิง องค์ประกอบต้องครบ 4 ข้อ: (1) ครอบครองทรัพย์สินของผู้อื่น (2) การครอบครองเริ่มต้นโดยชอบด้วยกฎหมาย (3) มีหนี้อันเป็นคุณประโยชน์เกี่ยวด้วยทรัพย์สินซึ่งครองนั้น เช่น ค่าซ่อมรถ ค่าจ้างเลี้ยงสัตว์ และ (4) หนี้ถึงกำหนดชำระแล้ว (ม.241) ผู้ทรงสิทธิใช้สิทธิได้กับทรัพย์สินทั้งหมดที่ยึดไว้จนกว่าจะชำระหนี้สิ้นเชิง (ม.244) และเก็บดอกผลจัดสรรชำระหนี้แก่ตนก่อนเจ้าหนี้อื่นได้ โดยจัดสรรใช้ดอกเบี้ยก่อนแล้วจึงใช้ต้นเงิน (ม.245)",
+          "items": [
+            {
+              "label": "หน้าที่ดูแลรักษาทรัพย์ (ม.246)",
+              "text": "ผู้ทรงสิทธิยึดหน่วงต้องดูแลรักษาทรัพย์ตามสมควร ห้ามใช้สอย ให้เช่า หรือนำไปเป็นหลักประกันโดยไม่ได้รับความยินยอมจากลูกหนี้ เว้นแต่การใช้สอยเท่าที่จำเป็นเพื่อรักษาทรัพย์ หากฝ่าฝืน ลูกหนี้เรียกร้องให้ระงับสิทธินั้นได้",
+              "provisions": [
+                "civil_246"
+              ],
+              "lectureRefs": [
+                "lec-civil_246-1"
+              ]
+            },
+            {
+              "label": "ไม่สะดุดอายุความ และระงับเมื่อสูญสิ้นการครอบครอง (ม.248, 250)",
+              "text": "การใช้สิทธิยึดหน่วงไม่ทำให้อายุความแห่งหนี้สะดุดหยุดลง เจ้าหนี้จึงยังต้องฟ้องคดีภายในอายุความปกติ (ม.248) และเมื่อสูญสิ้นการครอบครองทรัพย์ สิทธิยึดหน่วงระงับไปด้วย เว้นแต่ให้เช่าหรือจำนำต่อไปด้วยความยินยอมของลูกหนี้ (ม.250)",
+              "provisions": [
+                "civil_248",
+                "civil_250"
+              ],
+              "lectureRefs": [
+                "lec-civil_248-1",
+                "lec-civil_250-1"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_241",
+          "role": "core",
+          "note": "นิยามสิทธิยึดหน่วง"
+        },
+        {
+          "ref": "civil_244",
+          "role": "related",
+          "note": "ใช้สิทธิกับทรัพย์ทั้งหมดจนชำระหนี้สิ้นเชิง"
+        },
+        {
+          "ref": "civil_245",
+          "role": "related",
+          "note": "เก็บดอกผลจัดสรรชำระหนี้ก่อนเจ้าหนี้อื่น"
+        },
+        {
+          "ref": "civil_246",
+          "role": "related",
+          "note": "หน้าที่ดูแลรักษาทรัพย์ที่ยึดหน่วง"
+        },
+        {
+          "ref": "civil_248",
+          "role": "related",
+          "note": "ไม่ทำให้อายุความสะดุดหยุด"
+        },
+        {
+          "ref": "civil_250",
+          "role": "related",
+          "note": "สิทธิยึดหน่วงระงับเมื่อสูญสิ้นการครอบครอง"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 2 ลักษณะ 1 มาตรา 241–250",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [
+        "lec-civil_241-1",
+        "lec-civil_246-1",
+        "lec-civil_248-1",
+        "lec-civil_250-1"
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/sitthi-yeud-nuang-burimsit",
+          "rel": "parent",
+          "labelTH": "สิทธิยึดหน่วงและบุริมสิทธิ",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/burimsit",
+          "rel": "contrast",
+          "labelTH": "บุริมสิทธิ",
+          "status": "published",
+          "note": "สิทธิยึดหน่วงคุ้มครองผู้ครอบครองทรัพย์ของผู้อื่นที่มีหนี้เกี่ยวกับทรัพย์นั้นโดยตรง ต่างจากบุริมสิทธิซึ่งให้เจ้าหนี้บางประเภทได้รับชำระหนี้ก่อนโดยไม่ต้องครอบครองทรัพย์เลย"
+        },
+        {
+          "ref": "atlas:concept/kammasit",
+          "rel": "contrast",
+          "labelTH": "กรรมสิทธิ์",
+          "status": "published"
+        }
+      ]
+    },
+    "burimsit": {
+      "id": "atlas:concept/burimsit",
+      "slug": "burimsit",
+      "titleTH": "บุริมสิทธิ",
+      "titleEN": "Preferential Right (Statutory Lien)",
+      "aliases": [
+        "บุริมสิทธิสามัญ",
+        "บุริมสิทธิพิเศษ"
+      ],
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "subjectTags": [
+        "obligations"
+      ],
+      "status": "published",
+      "structuralAnchor": [
+        {
+          "collection": "civil",
+          "path": [
+            "บรรพ 2",
+            "ลักษณะ 1",
+            "หมวด 2"
+          ],
+          "note": "ป.พ.พ. บรรพ 2 ลักษณะ 1 หมวด 2 มาตรา 251–289"
+        }
+      ],
+      "summary": "ผู้ทรงบุริมสิทธิย่อมทรงไว้ซึ่งสิทธิเหนือทรัพย์สินของลูกหนี้ในการได้รับชำระหนี้ที่ค้างชำระแก่ตนจากทรัพย์สินนั้นก่อนเจ้าหนี้อื่น โดยไม่ต้องมีการทำสัญญาหรือจดทะเบียน (ป.พ.พ. มาตรา 251–289)",
+      "definition": {
+        "text": "ผู้ทรงบุริมสิทธิย่อมทรงไว้ซึ่งสิทธิเหนือทรัพย์สินของลูกหนี้ในการได้รับชำระหนี้ที่ค้างชำระแก่ตนจากทรัพย์สินนั้นก่อนเจ้าหนี้อื่น โดยไม่ต้องมีการทำสัญญาหรือจดทะเบียน เกิดขึ้นโดยอำนาจของกฎหมายเองตามที่บัญญัติไว้ (มาตรา 251) แบ่งเป็นบุริมสิทธิสามัญ (เหนือทรัพย์สินทั้งหมดของลูกหนี้ ม.253) กับบุริมสิทธิพิเศษ (เหนือสังหาริมทรัพย์หรืออสังหาริมทรัพย์เฉพาะอย่าง ม.259, 273)",
+        "provisions": [
+          "civil_251",
+          "civil_253"
+        ],
+        "lectureRefs": [
+          "lec-civil_251-1",
+          "lec-civil_253-1"
+        ],
+        "needsSourceVerification": false
+      },
+      "sections": [
+        {
+          "key": "burimsit-general",
+          "kind": "elements",
+          "label": "บุริมสิทธิสามัญ — เหนือทรัพย์สินทั้งหมดของลูกหนี้ (มาตรา 253)",
+          "body": "ผู้มีสิทธิเรียกร้องใน 4 มูลเหตุต่อไปนี้ มีบุริมสิทธิเหนือทรัพย์สินทั้งหมดของลูกหนี้: (1) ค่าใช้จ่ายเพื่อประโยชน์อันร่วมกันของเจ้าหนี้ (2) ค่าปลงศพ (3) ค่าภาษีอากรและเงินที่ลูกจ้างมีสิทธิได้รับจากนายจ้าง และ (4) ค่าเครื่องอุปโภคบริโภคอันจำเป็นประจำวัน ลำดับก่อนหลังระหว่างบุริมสิทธิสามัญทั้งสี่นี้เรียงตามที่บัญญัติไว้ (ม.277)",
+          "provisions": [
+            "civil_253",
+            "civil_277"
+          ],
+          "lectureRefs": [
+            "lec-civil_253-1",
+            "lec-civil_277-1"
+          ]
+        },
+        {
+          "key": "burimsit-special",
+          "kind": "elements",
+          "label": "บุริมสิทธิพิเศษ — เหนือทรัพย์เฉพาะอย่าง (มาตรา 259, 273)",
+          "body": "บุริมสิทธิพิเศษเหนือสังหาริมทรัพย์เฉพาะอย่าง (ม.259) มี 7 มูลเหตุ: เช่าอสังหาริมทรัพย์ พักอาศัยในโรงแรม รับขนคนโดยสารหรือของ รักษาสังหาริมทรัพย์ ซื้อขายสังหาริมทรัพย์ ค่าเมล็ดพันธุ์/ไม้พันธุ์/ปุ๋ย และค่าแรงงานกสิกรรม/อุตสาหกรรม ส่วนบุริมสิทธิพิเศษเหนืออสังหาริมทรัพย์เฉพาะอย่าง (ม.273) มี 3 มูลเหตุ: รักษาอสังหาริมทรัพย์ จ้างทำของบนอสังหาริมทรัพย์ และซื้อขายอสังหาริมทรัพย์",
+          "provisions": [
+            "civil_259",
+            "civil_273"
+          ],
+          "lectureRefs": [
+            "lec-civil_259-1",
+            "lec-civil_273-1"
+          ]
+        },
+        {
+          "key": "priority-ranking",
+          "kind": "situations",
+          "label": "ลำดับก่อนหลังเมื่อบุริมสิทธิแย้งกัน (มาตรา 277–280, 283)",
+          "body": "เมื่อบุริมสิทธิสามัญแย้งกับบุริมสิทธิพิเศษ โดยหลักบุริมสิทธิพิเศษอยู่ก่อน เว้นแต่บุริมสิทธิค่าใช้จ่ายเพื่อประโยชน์ร่วมกันซึ่งอยู่ก่อนเสมอเพราะเป็นประโยชน์ต่อเจ้าหนี้ทุกคน (ม.277) เมื่อบุริมสิทธิพิเศษหลายรายแย้งกันเหนือสังหาริมทรัพย์เดียวกัน เรียงลำดับ: เช่า/พักโรงแรม/รับขน → รักษาทรัพย์ (ผู้รักษาภายหลังอยู่ก่อนผู้รักษาก่อนหน้า) → ซื้อขาย/เมล็ดพันธุ์/ค่าแรงงาน (ม.278) เมื่อมีบุริมสิทธิลำดับเสมอกันหลายราย ต่างได้รับชำระหนี้เฉลี่ยตามสัดส่วน (ม.280) และบุริมสิทธิสามัญต้องรับชำระจากสังหาริมทรัพย์ก่อน ต่อเมื่อไม่พอจึงเอาจากอสังหาริมทรัพย์ที่ยังไม่ตกเป็นหลักประกันพิเศษ (ม.283)",
+          "provisions": [
+            "civil_277",
+            "civil_278",
+            "civil_280",
+            "civil_283"
+          ],
+          "lectureRefs": [
+            "lec-civil_277-1",
+            "lec-civil_278-1",
+            "lec-civil_280-1",
+            "lec-civil_283-1"
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "civil_251",
+          "role": "core",
+          "note": "นิยามบุริมสิทธิ"
+        },
+        {
+          "ref": "civil_253",
+          "role": "core",
+          "note": "บุริมสิทธิสามัญ 4 มูลเหตุ"
+        },
+        {
+          "ref": "civil_259",
+          "role": "core",
+          "note": "บุริมสิทธิพิเศษเหนือสังหาริมทรัพย์ 7 มูลเหตุ"
+        },
+        {
+          "ref": "civil_273",
+          "role": "core",
+          "note": "บุริมสิทธิพิเศษเหนืออสังหาริมทรัพย์ 3 มูลเหตุ"
+        },
+        {
+          "ref": "civil_277",
+          "role": "core",
+          "note": "ลำดับก่อนหลังเมื่อบุริมสิทธิสามัญแย้งกับพิเศษ"
+        },
+        {
+          "ref": "civil_278",
+          "role": "related",
+          "note": "ลำดับก่อนหลังบุริมสิทธิพิเศษเหนือสังหาริมทรัพย์"
+        },
+        {
+          "ref": "civil_280",
+          "role": "related",
+          "note": "ลำดับเสมอกัน — เฉลี่ยตามสัดส่วน"
+        },
+        {
+          "ref": "civil_283",
+          "role": "core",
+          "note": "บุริมสิทธิสามัญรับชำระจากสังหาริมทรัพย์ก่อน"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 2 ลักษณะ 1 หมวด 2 มาตรา 251–289",
+          "via": "codex-data.json books.civil"
+        },
+        {
+          "kind": "secondary",
+          "text": "คำบรรยายสรุปไว้แล้วใน lectureNotes ของแต่ละมาตรา (อ้างผ่าน lectureRefs)",
+          "note": "แต่ละ lectureNote ระบุว่า \"สรุปจากคำบรรยาย โปรดตรวจสอบก่อนใช้อ้างอิง\""
+        },
+        {
+          "kind": "todo",
+          "text": "บุริมสิทธิพิเศษมีมาตราย่อยรายมูลเหตุจำนวนมาก (ม.254–258, 260–272, 274–276) แนวคิดนี้คัดเฉพาะมาตราหลักที่วางหลักทั่วไป ยังไม่ครอบคลุมรายละเอียดของแต่ละมูลเหตุทั้งหมด และยังไม่มีคำพิพากษาฎีกาเด่นประกอบ",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "แยกออกมาเป็นแนวคิดเฉพาะจาก concept เดิมที่เคยรวมไว้เป็น alias — เนื้อความทั้งหมดเรียบเรียง/คัดจาก (ก) ตัวบทมาตราที่อ้างถึง และ (ข) lectureNotes/เนื้อหาที่มีอยู่แล้วใน concept เดิม (codex-data.json / atlas-concepts.json) ไม่มีการเพิ่มข้อเท็จจริงหรือข้ออ้างทางกฎหมายใหม่จากภายนอก",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [
+        "lec-civil_251-1",
+        "lec-civil_253-1",
+        "lec-civil_259-1",
+        "lec-civil_273-1",
+        "lec-civil_277-1",
+        "lec-civil_278-1",
+        "lec-civil_280-1",
+        "lec-civil_283-1"
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/sitthi-yeud-nuang-burimsit",
+          "rel": "parent",
+          "labelTH": "สิทธิยึดหน่วงและบุริมสิทธิ",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/sitthi-yeud-nuang",
+          "rel": "contrast",
+          "labelTH": "สิทธิยึดหน่วง",
+          "status": "published"
+        },
+        {
+          "ref": "atlas:concept/kammasit",
+          "rel": "contrast",
+          "labelTH": "กรรมสิทธิ์",
+          "status": "published",
+          "note": "บุริมสิทธิเป็นประกันหนี้เหนือทรัพย์ของผู้อื่น ไม่ใช่ความเป็นเจ้าของทรัพย์"
         }
       ]
     }
