@@ -33,8 +33,8 @@ function crumbText(key, num) {
 
 // ---------------------------------------------------------------- generic
 head('Registry / no-hardcode / URL-safety');
-ok('registry loaded, 15 real + 1 planned collection',
-   Object.keys(registry.collections).length === 16);
+ok('registry loaded, 18 real + 1 planned collection',
+   Object.keys(registry.collections).length === 19);
 const coreSrc = fs.readFileSync(path.join(ROOT, 'atlas-core.js'), 'utf8');
 ok("atlas-core: structural field order is derived from the registry, not a literal array",
    /getStructuralFieldOrder/.test(coreSrc) &&
@@ -46,11 +46,11 @@ ok('listCollections() excludes planned aviation',
    !AtlasCore.listCollections().some(c => c.key === 'aviation'));
 ok('listCollections({includePlanned:true}) includes aviation',
    AtlasCore.listCollections({ includePlanned: true }).some(c => c.key === 'aviation'));
-ok('all 15 enabled collections are present in corpus',
+ok('all 18 enabled collections are present in corpus',
    AtlasCore.listCollections().every(c => c.inCorpus),
    AtlasCore.listCollections().map(c => c.key).join(','));
 const subj = AtlasCore.listSubjectAreas();
-ok('subject areas populated', subj.length === 8 && subj.every(a => a.collections.length > 0),
+ok('subject areas populated', subj.length === 9 && subj.every(a => a.collections.length > 0),
    subj.map(a => a.key + ':' + a.collections.length).join(' '));
 
 // legacy-URL invariance
@@ -198,9 +198,14 @@ ok('sweep: all 15 collections OK (tree covers every article, URLs unchanged, no 
    sweepBad.length === 0, sweepBad.join(' | '));
 
 const areasFull = AtlasCore.listSubjectAreas({ includePlanned: true });
-ok('sweep: listSubjectAreas({includePlanned:true}) surfaces the planned aviation area',
-   areasFull.some(a => a.key === 'aviation' && a.planned &&
-     a.collections.some(c => c.key === 'aviation')));
+const areasDefault = AtlasCore.listSubjectAreas();
+ok('sweep: aviation subject area is no longer planned (has 3 real enabled collections) ' +
+   'but its architecture-demo "aviation" multi-instrument collection stays planned',
+   areasDefault.some(a => a.key === 'aviation' && !a.planned &&
+     ['airnav', 'caat2558', 'airoffences'].every(k => a.collections.some(c => c.key === k)) &&
+     !a.collections.some(c => c.key === 'aviation')) &&
+   areasFull.some(a => a.key === 'aviation' &&
+     a.collections.some(c => c.key === 'aviation' && c.planned)));
 
 // ============================================ Phase 2 — identity & resolution
 head('Phase 2 · Test 5 — legacy URL resolution (unchanged for all current collections)');

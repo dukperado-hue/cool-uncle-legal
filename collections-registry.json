@@ -47,7 +47,7 @@
     { "key": "public-constitutional", "title": "รัฐธรรมนูญและองค์กรตามรัฐธรรมนูญ", "order": 6 },
     { "key": "public-administrative", "title": "กฎหมายปกครอง", "order": 7 },
     { "key": "commercial-ip", "title": "ทรัพย์สินทางปัญญาและการค้า", "order": 8 },
-    { "key": "aviation", "title": "กฎหมายการบินพลเรือน", "order": 9, "planned": true }
+    { "key": "aviation", "title": "กฎหมายการบินพลเรือน", "order": 9 }
   ],
 
   "collections": {
@@ -315,10 +315,85 @@
       ]
     },
 
+    "airnav": {
+      "key": "airnav",
+      "title": "พระราชบัญญัติการเดินอากาศ พ.ศ. 2497",
+      "short": "การเดินอากาศ",
+      "icon": "✈️",
+      "subjectArea": "aviation",
+      "instrumentModel": "single",
+      "instrumentType": "act",
+      "provisionUnit": "มาตรา",
+      "articleCount": 486,
+      "enacted": 2497,
+      "levels": [
+        { "kind": "chapter",  "field": "muad", "label": "หมวด" },
+        { "kind": "division", "field": "suan", "label": "ส่วน" }
+      ],
+      "blurb": "ฉบับรวมแก้ไขเพิ่มเติมถึงฉบับที่ 14 พ.ศ. 2562 — จัดโครงสร้างเป็น หมวด › ส่วน › มาตรา",
+      "source": {
+        "name": "เอกสารรวมกฎหมายฉบับทำงานของฝ่ายกฎหมาย สำนักงานการบินพลเรือนแห่งประเทศไทย (กพท.)",
+        "url": null,
+        "official": false,
+        "publicDomain": true,
+        "asAmendedThrough": "ฉบับที่ 14 พ.ศ. 2562"
+      },
+      "notes": "Consolidated text through ฉบับที่ 14 พ.ศ. 2562, extracted from the user's own ฝ่ายกฎหมาย กพท. working-copy PDF (not a Krisdika/Ratchakitcha original) — see reference_codex_data_pipeline memory for the extraction technique. Many มาตรา carry \"N/M\" slash-inserted numbers (e.g. 41/61) or old-style ordinal suffixes (e.g. \"29 ทวิ\") reflecting decades of amendment — both are legitimate original numbering, not a data error."
+    },
+
+    "caat2558": {
+      "key": "caat2558",
+      "title": "พระราชกำหนดการบินพลเรือนแห่งประเทศไทย พ.ศ. 2558",
+      "short": "การบินพลเรือนแห่งประเทศไทย",
+      "icon": "🛫",
+      "subjectArea": "aviation",
+      "instrumentModel": "single",
+      "instrumentType": "emergency-decree",
+      "provisionUnit": "มาตรา",
+      "articleCount": 52,
+      "enacted": 2558,
+      "levels": [
+        { "kind": "chapter",  "field": "muad", "label": "หมวด" },
+        { "kind": "division", "field": "suan", "label": "ส่วน" }
+      ],
+      "source": {
+        "name": "ราชกิจจานุเบกษา เล่ม 132 ตอนที่ 95 ก (1 ตุลาคม 2558)",
+        "url": null,
+        "official": true,
+        "publicDomain": true,
+        "asAmendedThrough": "ฉบับประกาศเดิม พ.ศ. 2558"
+      },
+      "notes": "The act that created CAAT (สำนักงานการบินพลเรือนแห่งประเทศไทย) itself. Clean official ราชกิจจานุเบกษา PDF source."
+    },
+
+    "airoffences": {
+      "key": "airoffences",
+      "title": "พระราชบัญญัติว่าด้วยความผิดบางประการต่อการเดินอากาศ พ.ศ. 2558",
+      "short": "ความผิดต่อการเดินอากาศ",
+      "icon": "🚨",
+      "subjectArea": "aviation",
+      "instrumentModel": "single",
+      "instrumentType": "act",
+      "provisionUnit": "มาตรา",
+      "articleCount": 49,
+      "enacted": 2558,
+      "levels": [
+        { "kind": "chapter", "field": "muad", "label": "หมวด" }
+      ],
+      "source": {
+        "name": "ราชกิจจานุเบกษา เล่ม 132 ตอนที่ 10 ก (13 กุมภาพันธ์ 2558)",
+        "url": null,
+        "official": true,
+        "publicDomain": true,
+        "asAmendedThrough": "ฉบับประกาศเดิม พ.ศ. 2558"
+      },
+      "notes": "Clean official ราชกิจจานุเบกษา PDF source. No ส่วน sub-division in this act — หมวด only."
+    },
+
     "aviation": {
       "key": "aviation",
-      "title": "กฎหมายการบินพลเรือน",
-      "short": "กฎหมายการบิน",
+      "title": "กฎหมายการบินพลเรือน (สาธิตโครงสร้างหลายฉบับ)",
+      "short": "กฎหมายการบิน (สาธิต)",
       "icon": "✈️",
       "subjectArea": "aviation",
       "enabled": false,

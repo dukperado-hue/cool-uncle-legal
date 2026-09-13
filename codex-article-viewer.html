@@ -2113,7 +2113,7 @@ async function loadAndRender() {
   // Resolve the tiny registry first (best-effort, ~14 KB) so we can decode
   // an ?atlas= id before parsing. Negligible next to the 9.5 MB corpus.
   if (window.AtlasCore) {
-    try { await AtlasCore.loadRegistry('collections-registry.json?v=20260907c'); } catch (e) {}
+    try { await AtlasCore.loadRegistry('collections-registry.json?v=20260913c'); } catch (e) {}
   }
 
   // Accept BOTH:  ?id=<collection>_<number>   (legacy — unchanged, canonical)

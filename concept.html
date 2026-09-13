@@ -313,7 +313,7 @@
 <script>
 (function () {
   'use strict';
-  var CODEX_VERSION = '20260903b';
+  var CODEX_VERSION = '20260913b';
   var root = document.getElementById('atlas-root');
   var foot = document.getElementById('concept-foot');
 
@@ -341,7 +341,7 @@
     fetch('codex-data.json?v=' + CODEX_VERSION).then(function (r) {
       if (!r.ok) throw new Error('codex-data.json ' + r.status); return r.json();
     }),
-    AtlasCore.loadRegistry('collections-registry.json?v=20260907d'),
+    AtlasCore.loadRegistry('collections-registry.json?v=20260913c'),
     AtlasConcepts.load('atlas-concepts.json?v=20260912a'),
     AtlasConceptClusters.load('atlas-concept-clusters.json?v=20260912a'),
     AtlasTopics.load('atlas-topics.json?v=20260912a'),

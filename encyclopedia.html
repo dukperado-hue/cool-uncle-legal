@@ -120,7 +120,7 @@
   // subject-area labels — not the full legal corpus. Registry load is
   // best-effort: without it, subject-area chips fall back to their raw keys.
   Promise.all([
-    AtlasCore.loadRegistry('collections-registry.json?v=20260907d').catch(function () { /* labels degrade gracefully */ }),
+    AtlasCore.loadRegistry('collections-registry.json?v=20260913c').catch(function () { /* labels degrade gracefully */ }),
     AtlasSubjectTags.load('atlas-subject-tags.json?v=20260912a')
   ])
     .then(function () {
