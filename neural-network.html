@@ -341,6 +341,9 @@
       trademark:     { title: 'พ.ร.บ.เครื่องหมายการค้า พ.ศ. 2534' },
       carriage:      { title: 'พ.ร.บ.การรับขนของทางทะเล พ.ศ. 2534' },
       ipcourt:       { title: 'พ.ร.บ.จัดตั้งศาลทรัพย์สินทางปัญญาฯ' },
+      airnav:        { title: 'พ.ร.บ.การเดินอากาศ พ.ศ. 2497' },
+      caat2558:      { title: 'พ.ร.ก.การบินพลเรือนแห่งประเทศไทย พ.ศ. 2558' },
+      airoffences:   { title: 'พ.ร.บ.ว่าด้วยความผิดบางประการต่อการเดินอากาศ พ.ศ. 2558' },
     };
     // Top-level: exactly 6 category nodes under root, per user's explicit
     // grouping — expand each to reveal its member ประมวล/พระราชบัญญัติ.
@@ -359,6 +362,7 @@
                     constlaw: { label: 'รัฐธรรมนูญ',   books: ['constitution', 'const2560', 'politicalparty'] },
                   } },
       other:    { label: 'อื่นๆ', color: '#ff9900', books: ['copyright', 'patent', 'trademark', 'carriage', 'ipcourt'] },
+      aviation: { label: 'การบิน', color: '#2299ff', books: ['airnav', 'caat2558', 'airoffences'] },
     };
     const CASE_COLOR = '#ffcc44';
     // Structural level order — sourced from the Atlas registry when available
@@ -863,6 +867,9 @@
       ['carriage', ['รับขนของทางทะเล']],
       ['ipcourt', ['ศาลทรัพย์สินทางปัญญา']],
       ['politicalparty', ['พรรคการเมือง']],
+      ['caat2558', ['การบินพลเรือนแห่งประเทศไทย']],
+      ['airoffences', ['ความผิดบางประการต่อการเดินอากาศ']],
+      ['airnav', ['การเดินอากาศ']],
       ['criminal', ['ประมวลกฎหมายอาญา', 'ป.อ.', '— อาญา', '-อาญา']],
       ['civil', ['ประมวลกฎหมายแพ่งและพาณิชย์', 'ป.พ.พ.', '— แพ่ง', '-แพ่ง']],
     ];

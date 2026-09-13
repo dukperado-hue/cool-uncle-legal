@@ -1349,6 +1349,9 @@ const BOOK_TITLES = {
   carriage: 'พระราชบัญญัติการรับขนของทางทะเล พ.ศ. 2534',
   ipcourt: 'พระราชบัญญัติจัดตั้งศาลทรัพย์สินทางปัญญาและการค้าระหว่างประเทศฯ พ.ศ. 2539',
   politicalparty: 'พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560',
+  airnav: 'พระราชบัญญัติการเดินอากาศ พ.ศ. 2497',
+  caat2558: 'พระราชกำหนดการบินพลเรือนแห่งประเทศไทย พ.ศ. 2558',
+  airoffences: 'พระราชบัญญัติว่าด้วยความผิดบางประการต่อการเดินอากาศ พ.ศ. 2558',
 };
 
 let codexData = null;
@@ -2140,7 +2143,7 @@ async function loadAndRender() {
   currentNumber = id.slice(id.indexOf('_') + 1);
 
   try {
-    const res = await fetch('codex-data.json?v=20260911c');
+    const res = await fetch('codex-data.json?v=20260913a');
     if (!res.ok) throw new Error('fetch failed');
     codexData = await res.json();
   } catch (e) {
