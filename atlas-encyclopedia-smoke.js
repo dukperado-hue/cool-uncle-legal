@@ -195,7 +195,12 @@ run('3. Thai search finds the concept and its aliases', () => {
   const r = EI.search(INDEX, 'ละเมิด');
   ok(r.length >= 4, 'ละเมิด + 3 aliases, got ' + r.length);
   eq(r[0].term, 'ละเมิด', 'exact prefix match ranked first');
-  ok(r.every(e => e.slug === 'lamoed'));
+  eq(r[0].slug, 'lamoed', 'exact match is the canonical ละเมิด concept');
+  // ความรับผิดเพื่อละเมิด / ค่าสินไหมทดแทนเพื่อละเมิด were deliberately split into
+  // their own sibling concepts (Encyclopedia concept-expansion pass) — their own
+  // titleTH also contains "ละเมิด", so their aliases legitimately surface here too.
+  const allowed = new Set(['lamoed', 'khwamrapphid-lamoed', 'khasainaithothaen-lamoed']);
+  ok(r.every(e => allowed.has(e.slug)), 'unexpected slug: ' + r.filter(e => !allowed.has(e.slug)).map(e => e.slug).join(','));
 });
 
 run('3b. English / Latin search works (no auto-translation, data-driven only)', () => {

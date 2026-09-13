@@ -17,11 +17,42 @@
       "description": "กลุ่มแนวคิดที่ปรับบทต่อเนื่องกันตลอดทั้งวิชาทรัพย์: เริ่มจากนิยามและการจำแนกประเภทของ \"ทรัพย์\" เอง ก่อนจะไปสู่ทรัพยสิทธิที่สมบูรณ์ที่สุดคือ \"กรรมสิทธิ์\" ทรัพยสิทธิที่คุ้มครองข้อเท็จจริงการยึดถือคือ \"ครอบครอง\" และปิดท้ายด้วยทรัพยสิทธิจำกัดอื่น ๆ ที่ก่อขึ้นเหนือทรัพย์ของผู้อื่น",
       "concepts": [
         { "ref": "atlas:concept/sap", "note": "จุดตั้งต้น: ทรัพย์คืออะไร แบ่งประเภทอย่างไร" },
+        { "ref": "atlas:concept/suan-kuab", "note": "ส่วนที่เป็นสาระสำคัญ แยกจากทรัพย์ประธานไม่ได้" },
+        { "ref": "atlas:concept/upakon", "note": "ของใช้ประจำทรัพย์ประธาน แยกออกได้โดยไม่ทำลาย" },
+        { "ref": "atlas:concept/dokphon", "note": "ประโยชน์ที่งอกจากทรัพย์: ดอกผลธรรมดา / ดอกผลนิตินัย" },
         { "ref": "atlas:concept/kammasit", "note": "ทรัพยสิทธิที่สมบูรณ์ที่สุด — สิทธิความเป็นเจ้าของ", "featured": true },
+        { "ref": "atlas:concept/kammasit-ruam", "note": "เมื่อทรัพย์สินเป็นของหลายคนรวมกัน" },
+        { "ref": "atlas:concept/sathalanasombat", "note": "ทรัพย์ของแผ่นดินเพื่อสาธารณประโยชน์ โอน/ยึด/อ้างอายุความไม่ได้" },
+        { "ref": "atlas:concept/sap-sin-hai", "note": "หน้าที่ผู้เก็บได้ซึ่งทรัพย์สินหาย" },
+        { "ref": "atlas:concept/rongruen-rukland", "note": "สร้างโรงเรือนในที่ดินผู้อื่น: ผลต่างกันตามความสุจริต" },
+        { "ref": "atlas:concept/thang-jampen", "note": "ที่ดินตาบอด — ข้อจำกัดสิทธิโดยผลของกฎหมาย ไม่ใช่ทรัพยสิทธิ" },
         { "ref": "atlas:concept/krobkrong", "note": "คุ้มครองข้อเท็จจริงการยึดถือ แยกจากกรรมสิทธิ์" },
-        { "ref": "atlas:concept/sitthi-thang-sap-uen", "note": "ทรัพยสิทธิจำกัดอื่นเหนือทรัพย์ของผู้อื่น" }
+        { "ref": "atlas:concept/krobkrong-parapak", "note": "ครอบครองครบเงื่อนไข+ระยะเวลา กลายเป็นกรรมสิทธิ์" },
+        { "ref": "atlas:concept/rob-kuan-krobkrong", "note": "ทรัพย์ยังอยู่ในมือ แต่ถูกผู้อื่นสอดเข้าเกี่ยวข้อง" },
+        { "ref": "atlas:concept/yang-krobkrong", "note": "สูญเสียการครอบครองไปทั้งหมดโดยไม่สมัครใจ" },
+        { "ref": "atlas:concept/sitthi-thang-sap-uen", "note": "ทรัพยสิทธิจำกัดอื่นเหนือทรัพย์ของผู้อื่น (ภาพรวมเปรียบเทียบ 5 ประเภท)" },
+        { "ref": "atlas:concept/phara-jamyom", "note": "ที่ดินต่อที่ดิน: ภารยทรัพย์ยอมรับกรรมเพื่อสามยทรัพย์" },
+        { "ref": "atlas:concept/sitthi-asai", "note": "อยู่อาศัยในโรงเรือนผู้อื่นโดยไม่ต้องเสียค่าเช่า" },
+        { "ref": "atlas:concept/sitthi-nue-puendin", "note": "แยกความเป็นเจ้าของสิ่งปลูกสร้างออกจากที่ดิน — ข้อยกเว้นหลักส่วนควบ" },
+        { "ref": "atlas:concept/sitthi-keb-kin", "note": "ใช้และถือเอาประโยชน์จากทรัพย์ผู้อื่นได้เต็มที่ กว้างกว่าสิทธิอาศัย" },
+        { "ref": "atlas:concept/phara-tidpan", "note": "รับชำระหนี้เป็นคราว ๆ จากตัวทรัพย์โดยตรง" }
       ],
       "topics": ["atlas:topic/sap"]
+    },
+    "lamoed-liability": {
+      "id": "atlas:cluster/lamoed-liability",
+      "slug": "lamoed-liability",
+      "titleTH": "ละเมิด: ความรับผิด ค่าสินไหมทดแทน และนิรโทษกรรม",
+      "titleEN": "Tort: Liability, Damages, and Defences",
+      "status": "published",
+      "subjectAreas": ["civil-commercial"],
+      "description": "กลุ่มแนวคิดที่ตรงกับสามหมวดของ ป.พ.พ. ลักษณะ 5 ละเมิด: หมวด 1 ความรับผิดเพื่อละเมิด (ใครบ้างต้องรับผิด นอกจากผู้กระทำเอง) หมวด 2 ค่าสินไหมทดแทนเพื่อละเมิด (เยียวยาอย่างไร) และหมวด 3 นิรโทษกรรม (เมื่อใดไม่ต้องรับผิด)",
+      "concepts": [
+        { "ref": "atlas:concept/lamoed", "note": "แม่บท: องค์ประกอบ 4 ประการของละเมิดตามมาตรา 420", "featured": true },
+        { "ref": "atlas:concept/khwamrapphid-lamoed", "note": "หมวด 1: หมิ่นประมาท + ความรับผิดแทน/ร่วมของนายจ้าง ตัวการ บิดามารดา ฯลฯ" },
+        { "ref": "atlas:concept/khasainaithothaen-lamoed", "note": "หมวด 2: ขอบเขตและวิธีคำนวณค่าสินไหมทดแทน" },
+        { "ref": "atlas:concept/nirotokam", "note": "หมวด 3: เหตุยกเว้นความรับผิด + อายุความ" }
+      ]
     }
   }
 }
