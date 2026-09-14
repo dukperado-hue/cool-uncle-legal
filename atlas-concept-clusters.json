@@ -283,6 +283,49 @@
         }
       ],
       "topics": []
+    },
+    "criminal-general": {
+      "id": "atlas:cluster/criminal-general",
+      "slug": "criminal-general",
+      "titleTH": "อาญา ภาคทั่วไป",
+      "titleEN": "Criminal Law — General Principles",
+      "status": "published",
+      "subjectAreas": [
+        "criminal"
+      ],
+      "description": "กลุ่มแนวคิดที่ปรับบทต่อเนื่องกันตลอด ป.อ. ภาค 1 ลักษณะ 1 (บทบัญญัติที่ใช้แก่ความผิดทั่วไป): เริ่มจากหลักประกันสิทธิเสรีภาพและเขตอำนาจการใช้กฎหมายอาญา ผ่านโครงสร้างความรับผิดทางอาญาสามชั้น (การกระทำ/เจตนา/ประมาท → เหตุยกเว้นความผิด/โทษ → เหตุลดหย่อน) ไปจนถึงการขยายความรับผิดไปสู่ขั้นพยายามและผู้ร่วมกระทำผิดหลายคน",
+      "concepts": [
+        {
+          "ref": "atlas:concept/mai-mee-khwamphid-mai-mee-thot",
+          "note": "จุดตั้งต้น: หลักประกันว่าจะไม่มีความผิดหรือโทษหากไม่มีกฎหมายบัญญัติไว้ก่อน",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/khet-amnat-kan-chai-kotmai-aya",
+          "note": "ที่ใด/ใครที่ศาลไทยมีอำนาจลงโทษได้"
+        },
+        {
+          "ref": "atlas:concept/kan-kratham-chetana-pramat",
+          "note": "โครงสร้างความรับผิดขั้นที่ 1: การกระทำครบองค์ประกอบ+เจตนาหรือประมาท"
+        },
+        {
+          "ref": "atlas:concept/het-yokwen-khwamphid-lae-thot",
+          "note": "โครงสร้างความรับผิดขั้นที่ 2-3: ไม่มีความผิดเลย หรือมีความผิดแต่ได้รับการให้อภัย"
+        },
+        {
+          "ref": "atlas:concept/het-lot-yon-khwamrapphid-thang-aya",
+          "note": "แม้ไม่มีเหตุยกเว้น ศาลยังลดโทษได้จากบันดาลโทสะ เกณฑ์อายุ หรือเหตุบรรเทาโทษ"
+        },
+        {
+          "ref": "atlas:concept/phayayam-kratham-khwamphid",
+          "note": "ขยายความรับผิดไปถึงขั้นก่อนความผิดสำเร็จ"
+        },
+        {
+          "ref": "atlas:concept/tuakan-phuchai-phusanapsanun",
+          "note": "ขยายความรับผิดไปถึงผู้ร่วมกระทำผิดที่ไม่ได้ลงมือเอง"
+        }
+      ],
+      "topics": []
     }
   }
 }
