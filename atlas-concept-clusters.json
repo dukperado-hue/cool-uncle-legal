@@ -404,6 +404,64 @@
         }
       ],
       "topics": []
+    },
+    "criminal-liberty-reputation": {
+      "id": "atlas:cluster/criminal-liberty-reputation",
+      "slug": "criminal-liberty-reputation",
+      "titleTH": "ความผิดเกี่ยวกับเสรีภาพและชื่อเสียง",
+      "titleEN": "Offenses Against Liberty and Reputation",
+      "status": "published",
+      "subjectAreas": [
+        "criminal"
+      ],
+      "description": "กลุ่มแนวคิดที่ครอบคลุม ป.อ. ภาค 2 ลักษณะ 11 (ความผิดเกี่ยวกับเสรีภาพและชื่อเสียง): เริ่มจากความผิดต่อเสรีภาพส่วนบุคคลทั่วไป (ข่มขืนใจและหน่วงเหนี่ยวกักขัง) ไล่ระดับไปสู่ฐานความผิดร้ายแรงเฉพาะที่มีเจตนาพิเศษของตนเอง (เรียกค่าไถ่) แล้วจึงเข้าสู่ความผิดที่คุ้มครองอำนาจปกครองดูแลผู้เยาว์ (พรากผู้เยาว์) และปิดท้ายด้วยความผิดที่คุ้มครองชื่อเสียง (หมิ่นประมาท)",
+      "concepts": [
+        {
+          "ref": "atlas:concept/khomkhuenjai-kakkhang",
+          "note": "จุดตั้งต้น: ข่มขืนใจและหน่วงเหนี่ยวกักขังเสรีภาพส่วนบุคคล",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/riak-kha-thai",
+          "note": "ฐานความผิดร้ายแรงเฉพาะที่มีเจตนาพิเศษเพื่อค่าไถ่"
+        },
+        {
+          "ref": "atlas:concept/phrak-phu-yao",
+          "note": "คุ้มครองอำนาจปกครองดูแลของบิดามารดา/ผู้ปกครองต่อผู้เยาว์"
+        },
+        {
+          "ref": "atlas:concept/min-pramat",
+          "note": "คุ้มครองชื่อเสียงจากการใส่ความ"
+        }
+      ],
+      "topics": []
+    },
+    "criminal-sexual-offenses": {
+      "id": "atlas:cluster/criminal-sexual-offenses",
+      "slug": "criminal-sexual-offenses",
+      "titleTH": "ความผิดเกี่ยวกับเพศ",
+      "titleEN": "Sexual Offenses",
+      "status": "published",
+      "subjectAreas": [
+        "criminal"
+      ],
+      "description": "กลุ่มแนวคิดที่ครอบคลุม ป.อ. ภาค 2 ลักษณะ 9 (ความผิดเกี่ยวกับเพศ): แยกตาม actus reus เป็นการล่วงล้ำด้วยอวัยวะเพศ (\"กระทำชำเรา\") กับการกระทำทางเพศที่ไม่ถึงขั้นล่วงล้ำ (\"อนาจาร\") และแยกตามผู้เสียหายเป็นบุคคลทั่วไปกับเด็กอายุไม่เกิน 15 ปีซึ่งกฎหมายตัดประเด็นความยินยอมทิ้งไปโดยสิ้นเชิง",
+      "concepts": [
+        {
+          "ref": "atlas:concept/khomkhuen-kratham-chamra",
+          "note": "ล่วงล้ำด้วยอวัยวะเพศต่อบุคคลทั่วไปโดยขาดความยินยอม",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/kratham-chamra-dek",
+          "note": "ล่วงล้ำด้วยอวัยวะเพศต่อเด็กอายุไม่เกิน 15 ปี ผิดเสมอไม่ว่ายินยอม"
+        },
+        {
+          "ref": "atlas:concept/kratham-anajan",
+          "note": "การกระทำทางเพศที่ไม่ถึงขั้นล่วงล้ำด้วยอวัยวะเพศ"
+        }
+      ],
+      "topics": []
     }
   }
 }
