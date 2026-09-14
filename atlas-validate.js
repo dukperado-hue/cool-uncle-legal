@@ -667,11 +667,29 @@ head('Phase 1 — Legal Concept layer contract (golden sample: ละเมิ�
        typeof AConcepts.renderDirectory === 'function' &&
        typeof AConcepts._internal.renderDirectoryInto === 'function');
     const planned = AConcepts._internal.collectPlanned(cdoc.concepts);
+    // The live corpus's planned count is NOT asserted >=1 here on purpose: as of the
+    // 2026-09-14 encyclopedia-expansion pass every previously-dangling placeholder
+    // (jadkan-ngan-nok-sang, lamoed-jao-na-thi) was authored, so the real "coming soon"
+    // list can legitimately be empty — that is progress, not a broken mechanism. The
+    // mechanism itself (dedup + exclude-authored) is proven below against a synthetic
+    // fixture that always has an unresolved ref, independent of live corpus state.
     ok('P1 directory "coming soon" is derived from planned relatedConcepts (deduped, not authored)',
-       Array.isArray(planned) && planned.length >= 1 &&
+       Array.isArray(planned) &&
        planned.every(p => p.slug && p.labelTH && !cdoc.concepts[p.slug]) &&
        new Set(planned.map(p => p.slug)).size === planned.length,
-       planned.map(p => p.slug).join(', '));
+       planned.map(p => p.slug).join(', ') || '(none planned in live corpus — every placeholder authored)');
+    const plannedFixture = AConcepts._internal.collectPlanned({
+      a: { relatedConcepts: [
+        { ref: 'atlas:concept/ghost-1', labelTH: 'Ghost One' },
+        { ref: 'atlas:concept/ghost-1', labelTH: 'Ghost One dup' },
+        { ref: 'atlas:concept/a', labelTH: 'Self, authored, excluded' }
+      ] },
+      b: { relatedConcepts: [{ ref: 'atlas:concept/ghost-2', labelTH: 'Ghost Two' }] }
+    });
+    ok('P1 collectPlanned() mechanism: dedups repeated refs and excludes authored targets (synthetic fixture)',
+       Array.isArray(plannedFixture) && plannedFixture.length === 2 &&
+       plannedFixture.some(p => p.slug === 'ghost-1') && plannedFixture.some(p => p.slug === 'ghost-2'),
+       plannedFixture.map(p => p.slug).join(', '));
     ok('P1 directory intro copy lives in atlas-concepts.json (not hardcoded in JS)',
        !!(cdoc.directory && cdoc.directory.titleTH === 'แนวคิดทางกฎหมาย' && cdoc.directory.intro));
     ok('P1 golden-sample concept carries a short directory summary',

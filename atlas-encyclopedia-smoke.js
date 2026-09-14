@@ -199,7 +199,9 @@ run('3. Thai search finds the concept and its aliases', () => {
   // ความรับผิดเพื่อละเมิด / ค่าสินไหมทดแทนเพื่อละเมิด were deliberately split into
   // their own sibling concepts (Encyclopedia concept-expansion pass) — their own
   // titleTH also contains "ละเมิด", so their aliases legitimately surface here too.
-  const allowed = new Set(['lamoed', 'khwamrapphid-lamoed', 'khasainaithothaen-lamoed']);
+  // lamoed-jao-na-thi (ความรับผิดทางละเมิดของเจ้าหน้าที่) was authored in the
+  // 2026-09-14 pass and, for the same reason, legitimately surfaces here too.
+  const allowed = new Set(['lamoed', 'khwamrapphid-lamoed', 'khasainaithothaen-lamoed', 'lamoed-jao-na-thi']);
   ok(r.every(e => allowed.has(e.slug)), 'unexpected slug: ' + r.filter(e => !allowed.has(e.slug)).map(e => e.slug).join(','));
 });
 
@@ -278,11 +280,29 @@ function asyncTests() {
       ok(latin.some(li => li.textContent.indexOf('Delictum') !== -1));
     });
 
-    run('4e. planned concepts appear in a restrained, UNLINKED "กำลังจัดทำ" section', () => {
+    run('4e. planned concepts appear in a restrained, UNLINKED "กำลังจัดทำ" section (or the section is correctly absent once every placeholder is authored)', () => {
+      // Not hardcoded to "must be present": as of the 2026-09-14 encyclopedia-expansion
+      // pass every previously-dangling placeholder was authored, so the live corpus can
+      // legitimately have zero planned concepts. `if (!planned.length) return;` in
+      // atlas-encyclopedia.js is itself the correct behaviour (mirrors the project's
+      // `:not(:empty)` convention elsewhere) — assert whichever state is actually true.
+      const live = CONCEPT_DOC.concepts || {};
+      const stillPlanned = new Set();
+      Object.keys(live).forEach(k => (live[k].relatedConcepts || []).forEach(rc => {
+        const ref = rc && rc.ref;
+        if (ref && String(ref).indexOf('atlas:concept/') === 0) {
+          const s = ref.replace('atlas:concept/', '');
+          if (!live[s]) stillPlanned.add(s);
+        }
+      }));
       const planned = atlasRoot.querySelector('.atlas-enc-planned');
-      ok(planned, 'planned section present');
-      ok(planned.querySelectorAll('a').length === 0, 'planned entries are not links (no entry exists yet)');
-      ok(planned.querySelectorAll('li').length >= 2, 'planned list populated');
+      if (stillPlanned.size === 0) {
+        ok(!planned, 'no planned concepts remain in the live corpus, so the section correctly does not render');
+      } else {
+        ok(planned, 'planned section present');
+        ok(planned.querySelectorAll('a').length === 0, 'planned entries are not links (no entry exists yet)');
+        ok(planned.querySelectorAll('li').length >= 1, 'planned list populated');
+      }
     });
   }).then(() => {
     locationObj.search = '?q=' + encodeURIComponent('ละเมิด');
