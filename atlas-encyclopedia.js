@@ -213,6 +213,10 @@
         'border-radius:10px;background:var(--panel);color:var(--ink)}' +
       '.atlas-enc-input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}' +
       '.atlas-enc-count{font-size:12px;color:var(--muted);margin:2px 2px 12px}' +
+      '.atlas-enc-subjectbar{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}' +
+      '.atlas-enc-subject-chip{cursor:pointer;font:inherit;-webkit-appearance:none;appearance:none;' +
+        'border:1px solid var(--line);background:var(--panel);color:var(--ink)}' +
+      '.atlas-enc-subject-chip.is-active{outline:2px solid var(--accent);outline-offset:1px}' +
       '.atlas-enc-jump{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 16px}' +
       '.atlas-enc-jump a{font-size:12px;padding:2px 8px;border:1px solid var(--line);border-radius:6px;color:var(--accent);' +
         'font-variant-numeric:tabular-nums}' +
@@ -223,6 +227,7 @@
       '.atlas-enc-list{list-style:none;margin:0;padding:0}' +
       '.atlas-enc-entry{padding:6px 0;border-bottom:1px solid var(--line);line-height:1.55;overflow-wrap:break-word}' +
       '.atlas-enc-entry:last-child{border-bottom:0}' +
+      '.atlas-enc-title-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 2px}' +
       '.atlas-enc-term{font-size:15px;font-weight:700}' +
       '.atlas-enc-entry.is-secondary .atlas-enc-term{font-weight:400}' +
       '.atlas-enc-kind{font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-left:8px}' +
@@ -230,10 +235,10 @@
         'font-weight:700}' +
       '.atlas-enc-entry.is-cluster .atlas-enc-term,.atlas-enc-entry.is-topic .atlas-enc-term{color:var(--accent)}' +
       '.atlas-enc-entry.is-topic .atlas-enc-entity-badge{background:var(--accent);color:#fff}' +
+      '.atlas-enc-area-inline{font-size:11px;color:var(--muted);margin-left:6px;white-space:nowrap}' +
       '.atlas-enc-see{font-size:12.5px;color:var(--muted);margin-left:8px}' +
       '.atlas-enc-see a{color:var(--muted)}' +
       '.atlas-enc-desc{margin:2px 0 0;font-size:12.5px;color:var(--muted);line-height:1.6}' +
-      '.atlas-enc-areas{margin:2px 0 0;font-size:11px;color:var(--muted)}' +
       '.atlas-enc-empty{padding:32px 6px;text-align:center;color:var(--muted)}' +
       '.atlas-enc-planned{margin:28px 0 0;padding:16px 0 0;border-top:1px solid var(--line)}' +
       '.atlas-enc-planned h2{margin:0 0 6px;font-size:14px;font-weight:700}' +
@@ -271,12 +276,26 @@
       (e.entityKind !== 'concept' ? ' is-' + e.entityKind : ''));
     try { li.dataset.kind = e.kind; li.dataset.entityKind = e.entityKind; li.dataset.slug = e.slug; } catch (x) { /* shim */ }
 
+    // Term + its subject identity on ONE line, dictionary-entry style
+    // (e.g. "ลักทรัพย์ [อาญา]") — a reader should see what field of law a
+    // term belongs to without opening the entry.
+    var titleRow = el('div', 'atlas-enc-title-row');
     var a = el('a', 'atlas-enc-term', e.term);
     a.href = entryUrl(e);
-    append(li, a);
+    append(titleRow, a);
 
     var entityBadge = ENTITY_LABEL[e.entityKind];
-    if (entityBadge) append(li, el('span', 'atlas-enc-kind atlas-enc-entity-badge', entityBadge));
+    if (entityBadge) append(titleRow, el('span', 'atlas-enc-kind atlas-enc-entity-badge', entityBadge));
+
+    if (isPrimaryEntity) {
+      if (e.subjectTags && e.subjectTags.length && global.AtlasSubjectTags) {
+        global.AtlasSubjectTags.renderInto(titleRow, e.subjectTags);
+      } else {
+        var labels = areaLabels(e.subjectAreas);
+        if (labels.length) append(titleRow, el('span', 'atlas-enc-area-inline', '[' + labels.join(' · ') + ']'));
+      }
+    }
+    append(li, titleRow);
 
     if (!isPrimaryEntity) {
       append(li, el('span', 'atlas-enc-kind', KIND_LABEL[e.kind] || e.kind));
@@ -290,14 +309,6 @@
       var d = e.summary;
       if (d.length > 150) d = d.slice(0, 148).replace(/\s+\S*$/, '') + '…';
       append(li, el('p', 'atlas-enc-desc', d));
-      if (e.subjectTags && e.subjectTags.length && global.AtlasSubjectTags) {
-        var tagsRow = el('div', 'atlas-enc-areas');
-        var rendered = global.AtlasSubjectTags.renderInto(tagsRow, e.subjectTags);
-        if (rendered) append(li, tagsRow);
-      } else {
-        var labels = areaLabels(e.subjectAreas);
-        if (labels.length) append(li, el('p', 'atlas-enc-areas', labels.join(' · ')));
-      }
     }
     return li;
   }
@@ -455,6 +466,10 @@
       append(form, input);
       append(art, form);
 
+      var subjectBar = el('div', 'atlas-enc-subjectbar');
+      try { subjectBar.setAttribute('aria-label', 'กรองตามหมวดวิชา'); } catch (e) {}
+      append(art, subjectBar);
+
       var count = el('p', 'atlas-enc-count');
       append(art, count);
 
@@ -480,30 +495,68 @@
 
       append(rootEl, art);
 
+      // --- subject filter bar (client-side only; combines with text search) ---
+      var subjectCounts = {};
+      entries.forEach(function (e) {
+        if (e.kind !== 'primary') return;
+        (e.subjectTags || []).forEach(function (k) { subjectCounts[k] = (subjectCounts[k] || 0) + 1; });
+      });
+      var activeSubject = null;
+
+      function renderSubjectBar() {
+        clear(subjectBar);
+        if (!global.AtlasSubjectTags) return;
+        var tags = global.AtlasSubjectTags.list().filter(function (t) { return subjectCounts[t.key]; });
+        if (!tags.length) return;
+        var allBtn = el('button', 'atlas-enc-subject-chip' + (activeSubject ? '' : ' is-active'), 'ทั้งหมด');
+        allBtn.type = 'button';
+        allBtn.addEventListener('click', function () { setSubject(null); });
+        append(subjectBar, allBtn);
+        tags.forEach(function (t) {
+          var btn = el('button', 'atlas-subject-tag atlas-enc-subject-chip' + (activeSubject === t.key ? ' is-active' : ''),
+            t.titleTH + ' (' + subjectCounts[t.key].toLocaleString('th-TH') + ')');
+          btn.type = 'button';
+          btn.setAttribute('data-tag', t.key);
+          try { btn.setAttribute('aria-pressed', activeSubject === t.key ? 'true' : 'false'); } catch (e) {}
+          btn.addEventListener('click', function () { setSubject(activeSubject === t.key ? null : t.key); });
+          append(subjectBar, btn);
+        });
+      }
+
+      function setSubject(key) {
+        activeSubject = key;
+        renderSubjectBar();
+        update(input.value.trim());
+      }
+
       function update(q, opts2) {
         clear(results);
         clear(count);
+        var base = activeSubject
+          ? entries.filter(function (e) { return e.subjectTags && e.subjectTags.indexOf(activeSubject) !== -1; })
+          : entries;
         if (q) {
-          var r = search(entries, q);
+          var r = search(base, q);
           renderSearchResults(results, r, q);
           count.textContent = r.length
             ? (r.length.toLocaleString('th-TH') + ' ผลลัพธ์สำหรับ “' + q + '”')
             : '';
         } else {
-          renderFullIndex(results, entries);
+          renderFullIndex(results, base);
           var isPrimary = function (e) { return e.kind === 'primary'; };
-          var concepts = entries.filter(function (e) { return e.entityKind === 'concept' && isPrimary(e); }).length;
-          var clustersN = entries.filter(function (e) { return e.entityKind === 'cluster'; }).length;
-          var topicsN = entries.filter(function (e) { return e.entityKind === 'topic'; }).length;
+          var concepts = base.filter(function (e) { return e.entityKind === 'concept' && isPrimary(e); }).length;
+          var clustersN = base.filter(function (e) { return e.entityKind === 'cluster'; }).length;
+          var topicsN = base.filter(function (e) { return e.entityKind === 'topic'; }).length;
           var parts = [concepts.toLocaleString('th-TH') + ' แนวคิด'];
           if (clustersN) parts.push(clustersN.toLocaleString('th-TH') + ' กลุ่มแนวคิด');
           if (topicsN) parts.push(topicsN.toLocaleString('th-TH') + ' หัวข้อวิชา');
-          parts.push(entries.length.toLocaleString('th-TH') + ' คำค้น');
+          parts.push(base.length.toLocaleString('th-TH') + ' คำค้น');
           count.textContent = parts.join(' · ');
         }
         if (!opts2 || opts2.pushUrl !== false) writeQ(q);
       }
 
+      renderSubjectBar();
       var initial = readQ();
       if (initial) input.value = initial;
       update(initial, { pushUrl: false });
