@@ -735,8 +735,16 @@ head('Phase 1 — Legal Concept layer contract (golden sample: ละเมิ�
     ok(T + ' id grammar atlas:concept/<slug> and slug match',
        c.id === 'atlas:concept/' + slug && c.slug === slug, c.id);
     ok(T + ' slug is lowercase kebab-case', SLUG_RE.test(slug), slug);
+    // subjectAreas (the coarse collections-registry taxonomy, anchored to a real
+    // codex collection) is required non-empty for a PUBLISHED concept only. A
+    // 'seed' vocabulary-import concept (Encyclopedia vocabulary base) may carry
+    // subjectAreas: [] — it has no structuralAnchor into a real collection yet;
+    // its subject identity lives entirely in the fine-grained subjectTags[]
+    // (atlas-subject-tags.json), which every concept regardless of status must
+    // still resolve correctly (checked separately, near the end of this file).
     ok(T + ' has the universal fields (titleTH,status,subjectAreas,definition,summary,sources,authoring)',
-       !!(c.titleTH && c.status && Array.isArray(c.subjectAreas) && c.subjectAreas.length &&
+       !!(c.titleTH && c.status && Array.isArray(c.subjectAreas) &&
+          (c.status !== 'published' || c.subjectAreas.length) &&
           c.definition && typeof c.definition.text === 'string' && typeof c.summary === 'string' &&
           Array.isArray(c.sources) && c.authoring));
     ok(T + ' subjectAreas resolve to the registry taxonomy',
@@ -1048,8 +1056,15 @@ head('Finalization 3 — Encyclopedia (discovery layer over the Concept layer)')
   if (ENC && ENC._internal) {
     const EI = ENC._internal;
     const idx = EI.buildIndex(cdoc);
-    ok('F3 buildIndex derives terms only from published concepts',
-       idx.length >= 8 && idx.every(e => published.indexOf(e.slug) !== -1), 'entries: ' + idx.length);
+    // Encyclopedia vocabulary-base import: buildIndex() now also carries
+    // 'seed' concepts (imported terms with no authored content yet) alongside
+    // 'published' ones — both are real, browsable terms; only a concept with
+    // neither status (i.e. absent from the map entirely) would be excluded,
+    // which can't happen here since idx is built FROM cdoc.concepts itself.
+    const publishedOrSeed = Object.keys(cdoc.concepts || {}).filter(k =>
+      cdoc.concepts[k] && (cdoc.concepts[k].status === 'published' || cdoc.concepts[k].status === 'seed'));
+    ok('F3 buildIndex derives terms only from published or seed concepts',
+       idx.length >= 8 && idx.every(e => publishedOrSeed.indexOf(e.slug) !== -1), 'entries: ' + idx.length);
     ok('F3 index covers Thai names + aliases + English + curated Latin',
        ['primary', 'alias', 'en', 'latin'].every(kind => idx.some(e => e.kind === kind)));
     ok('F3 Thai-aware grouping: consonant vs A–Z bucket',
@@ -1449,11 +1464,16 @@ head('F7-C1 — Concept structural anchors are actionable (path -> exact node)')
   const ah2 = fs.readFileSync(path.join(ROOT, 'atlas.html'), 'utf8');
   const ch2 = fs.readFileSync(path.join(ROOT, 'concept.html'), 'utf8');
   const eh2 = fs.readFileSync(path.join(ROOT, 'encyclopedia.html'), 'utf8');
-  ok('F7-C1 atlas.html + concept.html + encyclopedia.html bumped atlas-concepts.js ?v to 20260910a',
-     /atlas-concepts\.js\?v=20260910a/.test(ah2) &&
-     /atlas-concepts\.js\?v=20260910a/.test(ch2) &&
-     /atlas-concepts\.js\?v=20260910a/.test(eh2) &&
-     !/atlas-concepts\.js\?v=20260909e/.test(ah2 + ch2 + eh2));
+  // A durable regression guard, not a pin to one historical version: every
+  // future content change to atlas-concepts.js legitimately bumps this ?v
+  // again (as this same session's own vocabulary-base import just did, past
+  // F7-C1's own 20260910a) — what must hold forever is that all three host
+  // pages stay in lockstep on ONE version, and none of them ever regress back
+  // to the pre-F7-C1 baseline (20260909e).
+  const vRe = /atlas-concepts\.js\?v=([0-9a-z]+)/;
+  const vA = (ah2.match(vRe) || [])[1], vC = (ch2.match(vRe) || [])[1], vE = (eh2.match(vRe) || [])[1];
+  ok('F7-C1 atlas.html + concept.html + encyclopedia.html reference the SAME atlas-concepts.js ?v, bumped past the pre-F7-C1 baseline (20260909e)',
+     !!vA && vA === vC && vC === vE && vA !== '20260909e', 'atlas=' + vA + ' concept=' + vC + ' encyclopedia=' + vE);
 })();
 
 // ============================================================ F8
@@ -1628,8 +1648,8 @@ head('F8 — Related concept integrity + inbound surfacing');
   const tagKeys = new Set((tagsDoc.tags || []).map(t => t.key));
   const slugs = Object.keys(concepts);
 
-  ok('atlas-subject-tags.json defines the 12 target subject labels',
-     (tagsDoc.tags || []).length === 12,
+  ok('atlas-subject-tags.json defines the 14 target subject labels',
+     (tagsDoc.tags || []).length === 14,
      (tagsDoc.tags || []).length);
 
   ok('every tag key is unique',
@@ -1673,8 +1693,13 @@ head('F8 — Related concept integrity + inbound surfacing');
   });
   ok('every concept.subjectTags[] value resolves to a registered tag key',
      unknownTag === null, unknownTag || '');
+  // Direct per-concept check, not a count comparison: a 'seed' vocabulary-import
+  // concept legitimately carries subjectTags too (that's its whole point), so
+  // taggedCount can now exceed the published count without that being a defect.
+  const untaggedPublished = slugs.filter(s => concepts[s].status === 'published' &&
+    !(concepts[s].subjectTags && concepts[s].subjectTags.length));
   ok('every published concept carries at least one subject tag',
-     taggedCount === slugs.filter(s => concepts[s].status === 'published').length, taggedCount);
+     untaggedPublished.length === 0, untaggedPublished.join(',') || taggedCount);
   ok('at least 2 concepts carry more than one subject tag — the multi-subject case (lamoed, sanya, ...)',
      multiTagCount >= 2, multiTagCount);
   ok('lamoed carries both tort + administrative (its own subjectAreas already names public-administrative)',

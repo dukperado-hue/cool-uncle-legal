@@ -549,12 +549,21 @@
       append(head, areas);
     }
 
-    if (concept.definition) {
-      append(head, el('p', 'atlas-concept-def', concept.definition.text || ''));
+    if (concept.definition && concept.definition.text) {
+      append(head, el('p', 'atlas-concept-def', concept.definition.text));
       var dp = provisionPillRow(concept.definition.provisions);
       if (dp) append(head, dp);
       var dl = lectureRefRow(concept.definition.lectureRefs);
       if (dl) append(head, dl);
+    }
+
+    // Encyclopedia vocabulary-base import: an honest, clearly-labelled state for
+    // a term that has been catalogued (title + subject) but not yet authored —
+    // never fabricated content standing in for a real explanation.
+    if (concept.status && concept.status !== 'published') {
+      append(head, el('p', 'atlas-concept-seed-notice',
+        'คำศัพท์นี้ยังไม่ได้เขียนคำอธิบาย (สถานะ: คำศัพท์ตั้งต้นจากรายการคำศัพท์รายวิชา) ' +
+        'จะเพิ่มเนื้อหาในระยะถัดไปเมื่อมีการอ้างอิงจากคำบรรยาย/ตัวบทจริง'));
     }
     append(art, head);
 

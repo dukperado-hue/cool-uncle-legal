@@ -107,10 +107,10 @@
 <script src="atlas-patches.js?v=20260908a"></script>
 <script src="atlas-core.js?v=20260908a"></script>
 <script src="atlas-subject-tags.js?v=20260912a"></script>
-<script src="atlas-concepts.js?v=20260910a"></script>
+<script src="atlas-concepts.js?v=20260914f"></script>
 <script src="atlas-concept-clusters.js?v=20260912a"></script>
 <script src="atlas-topics.js?v=20260912a"></script>
-<script src="atlas-encyclopedia.js?v=20260914e"></script>
+<script src="atlas-encyclopedia.js?v=20260914g"></script>
 <script>
 (function () {
   'use strict';
@@ -121,11 +121,11 @@
   // best-effort: without it, subject-area chips fall back to their raw keys.
   Promise.all([
     AtlasCore.loadRegistry('collections-registry.json?v=20260913c').catch(function () { /* labels degrade gracefully */ }),
-    AtlasSubjectTags.load('atlas-subject-tags.json?v=20260912a')
+    AtlasSubjectTags.load('atlas-subject-tags.json?v=20260914f')
   ])
     .then(function () {
       return AtlasEncyclopedia.render(root, {
-        url: 'atlas-concepts.json?v=20260914d',
+        url: 'atlas-concepts.json?v=20260914f',
         clustersUrl: 'atlas-concept-clusters.json?v=20260914d',
         topicsUrl: 'atlas-topics.json?v=20260912a'
       });

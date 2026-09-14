@@ -157,15 +157,21 @@ run('1b. groupKey / groupRank ordering', () => {
 // ================================================================ 2. derived term index
 const INDEX = EI.buildIndex(CONCEPT_DOC);
 
-run('2. buildIndex derives entries only from PUBLISHED concepts', () => {
-  const published = Object.keys(CONCEPT_DOC.concepts).filter(k => CONCEPT_DOC.concepts[k].status === 'published');
+run('2. buildIndex derives entries only from PUBLISHED or SEED concepts', () => {
+  // Encyclopedia vocabulary-base import (2026-09-14): a 'seed' concept is a
+  // real, browsable term with no authored content yet — it legitimately
+  // contributes to the index alongside 'published' ones. Anything with
+  // neither status would be excluded, but that can't arise here since the
+  // index is built directly from CONCEPT_DOC.concepts.
+  const publishedOrSeed = Object.keys(CONCEPT_DOC.concepts).filter(k =>
+    ['published', 'seed'].indexOf(CONCEPT_DOC.concepts[k].status) !== -1);
   ok(INDEX.length >= 8, 'expected a handful of terms, got ' + INDEX.length);
-  ok(INDEX.every(e => published.indexOf(e.slug) !== -1),
-     'only published concepts contribute terms');
+  ok(INDEX.every(e => publishedOrSeed.indexOf(e.slug) !== -1),
+     'only published or seed concepts contribute terms');
   const primaries = INDEX.filter(e => e.kind === 'primary').map(e => e.term).sort();
   eq(JSON.stringify(primaries),
-     JSON.stringify(published.map(k => CONCEPT_DOC.concepts[k].titleTH).sort()),
-     'one primary term per published concept');
+     JSON.stringify(publishedOrSeed.map(k => CONCEPT_DOC.concepts[k].titleTH).sort()),
+     'one primary term per published-or-seed concept');
 });
 
 run('2b. Thai names, aliases, English and Latin are all indexed', () => {
@@ -186,8 +192,11 @@ run('2c. groupEntries produces alphabetical groups incl. an A–Z bucket for Lat
   for (let i = 1; i < groups.length; i++) ok(groups[i].rank >= groups[i - 1].rank, 'groups sorted by rank');
   eq(groups[groups.length - 1].key, 'A–Z', 'A–Z bucket is last');
   const az = groups.find(g => g.key === 'A–Z');
-  ok(az.entries.every(e => e.kind === 'en' || e.kind === 'latin'),
-     'A–Z bucket holds only English/Latin-first terms');
+  // A 'primary' entry can ALSO be Latin-script now: the vocabulary-base import
+  // (2026-09-14) added English/Latin seed terms in their own right (e.g. คดีเมือง's
+  // "Jus Cogens"), not only as an 'en'/'latin' alias of a Thai-titled concept.
+  ok(az.entries.every(e => e.kind === 'en' || e.kind === 'latin' || e.kind === 'primary'),
+     'A–Z bucket holds only English/Latin-first terms (primary, en, or latin)');
 });
 
 // ================================================================ 3. search
@@ -196,13 +205,15 @@ run('3. Thai search finds the concept and its aliases', () => {
   ok(r.length >= 4, 'ละเมิด + 3 aliases, got ' + r.length);
   eq(r[0].term, 'ละเมิด', 'exact prefix match ranked first');
   eq(r[0].slug, 'lamoed', 'exact match is the canonical ละเมิด concept');
-  // ความรับผิดเพื่อละเมิด / ค่าสินไหมทดแทนเพื่อละเมิด were deliberately split into
-  // their own sibling concepts (Encyclopedia concept-expansion pass) — their own
-  // titleTH also contains "ละเมิด", so their aliases legitimately surface here too.
-  // lamoed-jao-na-thi (ความรับผิดทางละเมิดของเจ้าหน้าที่) was authored in the
-  // 2026-09-14 pass and, for the same reason, legitimately surfaces here too.
-  const allowed = new Set(['lamoed', 'khwamrapphid-lamoed', 'khasainaithothaen-lamoed', 'lamoed-jao-na-thi']);
-  ok(r.every(e => allowed.has(e.slug)), 'unexpected slug: ' + r.filter(e => !allowed.has(e.slug)).map(e => e.slug).join(','));
+  // Rather than a hand-maintained slug allowlist (brittle — it goes stale every
+  // time a new concept/seed term legitimately contains "ละเมิด"), assert the
+  // REAL invariant search() promises: every hit's own term OR the concept it
+  // points to actually contains the query substring. That covers sibling
+  // concepts (ความรับผิดเพื่อละเมิด, lamoed-jao-na-thi, ...) and the many
+  // vocabulary-base seed terms (2026-09-14 import) containing "ละเมิด" alike.
+  const n = 'ละเมิด';
+  ok(r.every(e => e.term.indexOf(n) !== -1 || e.titleTH.indexOf(n) !== -1),
+     'unexpected non-matching hit: ' + r.filter(e => e.term.indexOf(n) === -1 && e.titleTH.indexOf(n) === -1).map(e => e.slug).join(','));
 });
 
 run('3b. English / Latin search works (no auto-translation, data-driven only)', () => {
@@ -259,13 +270,15 @@ function asyncTests() {
     });
 
     run('4b. every term links to the FROZEN concept-entry URL concept.html?k=<slug>', () => {
-      const published = Object.keys(CONCEPT_DOC.concepts).filter(k => CONCEPT_DOC.concepts[k].status === 'published');
+      const publishedOrSeed = Object.keys(CONCEPT_DOC.concepts).filter(k =>
+        ['published', 'seed'].indexOf(CONCEPT_DOC.concepts[k].status) !== -1);
       const links = atlasRoot.querySelectorAll('a.atlas-enc-term');
       ok(links.length >= 8, 'term links rendered, got ' + links.length);
-      ok(links.every(a => {
+      const bad = links.filter(a => {
         const m = /^concept\.html\?k=([a-z][a-z0-9-]*)$/.exec(a.href);
-        return m && published.indexOf(m[1]) !== -1;
-      }), 'links: ' + links.map(a => a.href).join(', '));
+        return !(m && publishedOrSeed.indexOf(m[1]) !== -1);
+      });
+      ok(bad.length === 0, 'bad links: ' + bad.map(a => a.href).join(', '));
     });
 
     run('4c. secondary entries (alias/en/latin) show a "→ canonical" pointer', () => {

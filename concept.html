@@ -87,6 +87,8 @@
   .atlas-concept-area-chip{font-size:11px;padding:2px 10px;border-radius:999px;
     background:var(--chip);color:var(--muted)}
   .atlas-concept-def{font-size:16px;line-height:1.85;margin:0 0 var(--s3)}
+  .atlas-concept-seed-notice{font-size:13px;line-height:1.7;color:var(--muted);margin:0 0 var(--s3);
+    padding:10px 14px;border:1px dashed var(--line);border-radius:8px;background:var(--panel)}
 
   /* ---- sections ---- */
   .atlas-concept-section{margin:0 0 var(--s6);padding-top:var(--s4);border-top:1px solid var(--line)}
@@ -304,7 +306,7 @@
 <script src="atlas-core.js?v=20260908a"></script>
 <script src="atlas-clusters.js?v=20260909a"></script>
 <script src="atlas-subject-tags.js?v=20260912a"></script>
-<script src="atlas-concepts.js?v=20260910a"></script>
+<script src="atlas-concepts.js?v=20260914f"></script>
 <script src="atlas-concept-relations.js?v=20260910a"></script>
 <script src="atlas-concept-clusters.js?v=20260912a"></script>
 <script src="atlas-topics.js?v=20260912a"></script>
@@ -342,15 +344,15 @@
       if (!r.ok) throw new Error('codex-data.json ' + r.status); return r.json();
     }),
     AtlasCore.loadRegistry('collections-registry.json?v=20260913c'),
-    AtlasConcepts.load('atlas-concepts.json?v=20260914d'),
+    AtlasConcepts.load('atlas-concepts.json?v=20260914f'),
     AtlasConceptClusters.load('atlas-concept-clusters.json?v=20260914d'),
     AtlasTopics.load('atlas-topics.json?v=20260912a'),
-    AtlasSubjectTags.load('atlas-subject-tags.json?v=20260912a')
+    AtlasSubjectTags.load('atlas-subject-tags.json?v=20260914f')
   ]).then(function (res) {
     AtlasCore.attachCorpus(res[0]);
     if (view === 'cluster') return AtlasConceptClusters.render(root, clusterSlug);
     if (view === 'topic') return AtlasTopics.render(root, topicSlug);
-    return AtlasConcepts.render(root, slug, { url: 'atlas-concepts.json?v=20260914d' });
+    return AtlasConcepts.render(root, slug, { url: 'atlas-concepts.json?v=20260914f' });
   }).then(function () {
     if (view === 'concept') {
       if (window.AtlasConceptRelations && typeof AtlasConceptRelations.enhance === 'function') {

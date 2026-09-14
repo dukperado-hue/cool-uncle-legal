@@ -123,6 +123,7 @@
         kind: kind,               // primary | alias | en | latin  (within an entity's own names)
         entityKind: entityKind,   // concept | cluster | topic     (LEVEL 1/2/3 — never collapsed)
         slug: slug,
+        status: c.status || null, // 'published' | 'seed' — lets the browse list show a seed badge
         titleTH: c.titleTH || slug,
         summary: c.summary || c.description || (c.definition && c.definition.text) || '',
         subjectAreas: c.subjectAreas || [],
@@ -130,9 +131,12 @@
       });
     }
 
+    // 'seed' = an imported vocabulary term with no authored content yet (see
+    // concept.status). It IS a real term a reader can browse to and see the
+    // honest "not yet written" state on — just not counted/labelled as published.
     Object.keys(concepts).forEach(function (slug) {
       var c = concepts[slug];
-      if (!c || c.status !== 'published') return;
+      if (!c || (c.status !== 'published' && c.status !== 'seed')) return;
       push(c.titleTH, 'primary', 'concept', c, slug);
       (c.aliases || []).forEach(function (a) { push(a, 'alias', 'concept', c, slug); });
       // titleEN may bundle several equivalents joined by " · "
@@ -233,6 +237,8 @@
       '.atlas-enc-kind{font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-left:8px}' +
       '.atlas-enc-entity-badge{padding:1px 7px;border-radius:999px;background:var(--chip);color:var(--ink);' +
         'font-weight:700}' +
+      '.atlas-enc-seed-badge{padding:1px 7px;border-radius:999px;border:1px dashed var(--muted);' +
+        'color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0}' +
       '.atlas-enc-entry.is-cluster .atlas-enc-term,.atlas-enc-entry.is-topic .atlas-enc-term{color:var(--accent)}' +
       '.atlas-enc-entry.is-topic .atlas-enc-entity-badge{background:var(--accent);color:#fff}' +
       '.atlas-enc-area-inline{font-size:11px;color:var(--muted);margin-left:6px;white-space:nowrap}' +
@@ -286,6 +292,10 @@
 
     var entityBadge = ENTITY_LABEL[e.entityKind];
     if (entityBadge) append(titleRow, el('span', 'atlas-enc-kind atlas-enc-entity-badge', entityBadge));
+
+    if (isPrimaryEntity && e.entityKind === 'concept' && e.status === 'seed') {
+      append(titleRow, el('span', 'atlas-enc-kind atlas-enc-seed-badge', 'ยังไม่ได้เขียน'));
+    }
 
     if (isPrimaryEntity) {
       if (e.subjectTags && e.subjectTags.length && global.AtlasSubjectTags) {
@@ -544,10 +554,13 @@
         } else {
           renderFullIndex(results, base);
           var isPrimary = function (e) { return e.kind === 'primary'; };
-          var concepts = base.filter(function (e) { return e.entityKind === 'concept' && isPrimary(e); }).length;
+          var isConcept = function (e) { return e.entityKind === 'concept' && isPrimary(e); };
+          var authoredN = base.filter(function (e) { return isConcept(e) && e.status === 'published'; }).length;
+          var seedN = base.filter(function (e) { return isConcept(e) && e.status === 'seed'; }).length;
           var clustersN = base.filter(function (e) { return e.entityKind === 'cluster'; }).length;
           var topicsN = base.filter(function (e) { return e.entityKind === 'topic'; }).length;
-          var parts = [concepts.toLocaleString('th-TH') + ' แนวคิด'];
+          var parts = [authoredN.toLocaleString('th-TH') + ' แนวคิด'];
+          if (seedN) parts.push(seedN.toLocaleString('th-TH') + ' คำศัพท์ตั้งต้น');
           if (clustersN) parts.push(clustersN.toLocaleString('th-TH') + ' กลุ่มแนวคิด');
           if (topicsN) parts.push(topicsN.toLocaleString('th-TH') + ' หัวข้อวิชา');
           parts.push(base.length.toLocaleString('th-TH') + ' คำค้น');

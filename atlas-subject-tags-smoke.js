@@ -62,8 +62,8 @@ const TAGS_JSON = JSON.parse(fs.readFileSync(path.join(ROOT, 'atlas-subject-tags
 (async () => {
 
 // ================================================================ 1. registry shape
-await run('1. atlas-subject-tags.json defines 12 tags, each with key/titleTH/order/hue', () => {
-  eq(TAGS_JSON.tags.length, 12, 'twelve tags');
+await run('1. atlas-subject-tags.json defines 14 tags, each with key/titleTH/order/hue', () => {
+  eq(TAGS_JSON.tags.length, 14, 'fourteen tags');
   TAGS_JSON.tags.forEach(t => {
     ok(typeof t.key === 'string' && t.key.length > 0, 'key present: ' + JSON.stringify(t));
     ok(typeof t.titleTH === 'string' && t.titleTH.length > 0, 'titleTH present for ' + t.key);
@@ -102,7 +102,7 @@ await run('3. load() populates list()/get() from a real fetch, and is a lazy sin
   ok(p1 === p2, 'second load() call returns the SAME promise (lazy singleton, no re-fetch)');
   await p1;
   eq(fetchCalls, 1, 'fetch invoked exactly once');
-  eq(AST.list().length, 12, 'list length');
+  eq(AST.list().length, 14, 'list length');
   ok(AST.list().every((t, i, arr) => i === 0 || arr[i - 1].order <= t.order), 'list() is order-sorted');
   const g = AST.get('tort');
   ok(g && g.titleTH === 'ละเมิด', 'get(tort) resolves titleTH');
