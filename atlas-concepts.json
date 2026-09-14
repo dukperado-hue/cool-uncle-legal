@@ -2984,7 +2984,7 @@
         },
         {
           "ref": "atlas:concept/kammasit",
-          "rel": "parent",
+          "rel": "specializes",
           "labelTH": "กรรมสิทธิ์",
           "status": "published",
           "note": "กรรมสิทธิ์และทรัพยสิทธิอื่น (บรรพ 4) ล้วนมีทรัพย์ตามลักษณะ 3 นี้เป็นวัตถุแห่งสิทธิ"
