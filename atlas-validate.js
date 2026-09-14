@@ -1154,9 +1154,16 @@ head('F4 — Provision-to-Concept Backlinks');
     ok('F4 reverse index derivable, covers many provisions',
        idx && Object.keys(idx).length >= 20, 'refs: ' + (idx ? Object.keys(idx).length : 0));
 
+    // Muscle-building pass (2026-09-14): จงใจ/ประมาทเลินเล่อ/ความเสียหาย were
+    // enriched as their own concepts, each legitimately citing civil_420 as a
+    // RELATED provision (it's the article their own element comes from) — the
+    // real invariant is "lamoed is the sole CORE owner of civil_420", not
+    // "lamoed is the only concept that may ever reference it at all".
     const c420 = PC._internal.conceptsForProvision('civil_420');
-    ok('F4 known relationship civil_420 → ละเมิด resolves',
-       c420.length === 1 && c420[0].slug === 'lamoed' && c420[0].titleTH === 'ละเมิด' && c420[0].core === true);
+    const c420lamoed = c420.find(function (c) { return c.slug === 'lamoed'; });
+    ok('F4 known relationship civil_420 → ละเมิด resolves (lamoed is the sole CORE owner; other concepts may cite it as related)',
+       !!c420lamoed && c420lamoed.titleTH === 'ละเมิด' && c420lamoed.core === true &&
+       c420.filter(function (c) { return c.core; }).length === 1);
     ok('F4 civil_149 → นิติกรรม resolves',
        PC._internal.conceptsForProvision('civil_149').some(c => c.slug === 'nitikam'));
 

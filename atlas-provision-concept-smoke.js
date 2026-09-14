@@ -99,11 +99,17 @@ run('1. reverse index is derived from the Concept layer (no hand-authored mappin
 
 // ================================================================ 2. known relationship  ม.420 → ละเมิด
 run('2. known relationship: civil_420 → ละเมิด (core)', () => {
+  // Muscle-building pass (2026-09-14): จงใจ/ประมาทเลินเล่อ/ความเสียหาย/วิญญูชน were
+  // enriched as their own concepts, each legitimately citing civil_420 as a
+  // RELATED provision (it's the article their own element comes from). The real
+  // invariant is "lamoed is the sole CORE owner of civil_420", not "no other
+  // concept may ever reference it".
   const r = PCI.conceptsForProvision('civil_420');
-  ok(r.length === 1, 'exactly one concept, got ' + JSON.stringify(r));
-  eq(r[0].slug, 'lamoed');
-  eq(r[0].titleTH, 'ละเมิด');
-  eq(r[0].core, true, 'civil_420 is a core provision of ละเมิด');
+  const lamoed = r.find(x => x.slug === 'lamoed');
+  ok(!!lamoed, 'lamoed present, got ' + JSON.stringify(r));
+  eq(lamoed.titleTH, 'ละเมิด');
+  eq(lamoed.core, true, 'civil_420 is a core provision of ละเมิด');
+  eq(r.filter(x => x.core).length, 1, 'lamoed is the only CORE owner of civil_420');
 });
 
 run('2b. civil_149 → นิติกรรม', () => {
