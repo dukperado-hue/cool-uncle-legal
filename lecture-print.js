@@ -17,7 +17,7 @@
       '.lecture-print-btn:hover{border-color:var(--gold,#B08A3C)}',
       '@media print{',
       '  body *{visibility:hidden}',
-      '  #printArea{display:block !important;visibility:visible;position:absolute;left:0;top:0;width:100%;padding:24px}',
+      '  #printArea{display:block !important;visibility:visible;position:absolute;left:0;top:0;width:100%;padding:24px 24px 24px 38px}',
       '  #printArea, #printArea *{visibility:visible}',
       '  #printArea, #printArea *{color:#111 !important;background:transparent !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}',
       '  #printArea h1{font-size:20px;margin-bottom:4px}',
