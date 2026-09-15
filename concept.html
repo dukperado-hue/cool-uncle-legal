@@ -344,7 +344,7 @@
       if (!r.ok) throw new Error('codex-data.json ' + r.status); return r.json();
     }),
     AtlasCore.loadRegistry('collections-registry.json?v=20260913c'),
-    AtlasConcepts.load('atlas-concepts.json?v=20260915a'),
+    AtlasConcepts.load('atlas-concepts.json?v=20260915c'),
     AtlasConceptClusters.load('atlas-concept-clusters.json?v=20260914d'),
     AtlasTopics.load('atlas-topics.json?v=20260912a'),
     AtlasSubjectTags.load('atlas-subject-tags.json?v=20260914f')
@@ -352,7 +352,7 @@
     AtlasCore.attachCorpus(res[0]);
     if (view === 'cluster') return AtlasConceptClusters.render(root, clusterSlug);
     if (view === 'topic') return AtlasTopics.render(root, topicSlug);
-    return AtlasConcepts.render(root, slug, { url: 'atlas-concepts.json?v=20260915a' });
+    return AtlasConcepts.render(root, slug, { url: 'atlas-concepts.json?v=20260915c' });
   }).then(function () {
     if (view === 'concept') {
       if (window.AtlasConceptRelations && typeof AtlasConceptRelations.enhance === 'function') {
