@@ -3100,5 +3100,12 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 <link rel="stylesheet" href="legal-disclaimer.css">
 <script src="legal-footer.js"></script>
+<script>
+window.buildStudyPrintAll = function(){
+  return SUMMARY_TOPICS.map(function(t){
+    return '<div class="study-title">' + esc(t.label) + '</div><div class="study-content">' + t.html + '</div>';
+  });
+};
+</script>
 <script src="study-print.js"></script>
 </html>

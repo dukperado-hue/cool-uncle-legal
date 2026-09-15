@@ -31,9 +31,9 @@ constcourt.html, constproc.html, contract-law.html, crimliab.html, crimpro.html,
 
 To add a **new** Pattern-A page: build its reading section with that exact class structure, then add `<script src="lecture-print.js"></script>` right before `</body>` (after `legal-footer.js`, matching every existing page). No JS changes needed — the script finds `.lecture-list` generically off the DOM.
 
-## Pattern B — `.study-panel` (per-page render, shared script + per-page quirks)
+## Pattern B — `.study-panel` (per-page render, shared script + per-page adapter)
 
-Pages that render only the **currently selected** topic/lecture into `#study-panel`/`.study-panel`, swapping its content (sometimes destroying/recreating the whole subtree — e.g. civpro.html's SPA-style single-root re-render on tab switch) on user interaction. Because content isn't all in the DOM simultaneously, there is **no generic "print all"** for this pattern — only "print what's on screen right now". Three known sub-variants exist (same script handles all three, verified 2026-09-15):
+Pages that render only the **currently selected** topic/lecture into `#study-panel`/`.study-panel`, swapping its content (sometimes destroying/recreating the whole subtree — e.g. civpro.html's SPA-style single-root re-render on tab switch) on user interaction. Because content isn't all in the DOM simultaneously, `study-print.js` can't discover "all sections" generically off the DOM the way `lecture-print.js` does for Pattern A. Three known sub-variants exist (same script handles all three, verified 2026-09-15):
 
 - **SPA tab** (civpro.html): whole app root re-rendered per `state.tab`; `.study-panel` doesn't exist in the DOM at all until the reading tab is active.
 - **Topic-picker** (tort.html and siblings): a card grid (`#study-topiclist`) picks a topic, then `#study-panel` (containing `.study-toc` + `#study-body`) becomes visible and gets filled.
@@ -41,13 +41,32 @@ Pages that render only the **currently selected** topic/lecture into `#study-pan
 
 Shared script: **`study-print.js`**, already wired into: civpro.html, legalhist.html, tort.html, property.html, inheritance.html, familylaw.html, debt.html, constlaw.html, commcontract.html, biz-org.html, adminlaw.html.
 
-It works by:
-1. Locating `#study-panel, .study-panel` generically (works across all three sub-variants).
-2. Stripping known chrome before printing: `.study-toc`, `.study-nav`, `.tts-bar`, `.study-progress`, any `<button>`, `[id$="-sentinel"]`.
-3. Inserting the print button as a **sibling immediately before** the panel (not inside it) — this is the key trick that survives the SPA-style innerHTML-replace pattern without needing per-page hooks into each page's own render functions.
-4. Re-syncing (re-inserting the button, re-checking whether there's content to print) on every DOM mutation via a `MutationObserver` on `document.body` — this is what makes it resilient to civpro.html's whole-subtree replacement.
+It provides two buttons:
+1. **"พิมพ์บทอ่านนี้" (print this reading)** — always available, fully generic, no per-page code needed:
+   - Locates `#study-panel, .study-panel` generically (works across all three sub-variants).
+   - Strips known chrome before printing: `.study-toc`, `.study-nav`, `.tts-bar`, `.study-progress`, `.read-btn`, any `<button>`, `[id$="-sentinel"]`.
+   - Inserted as a **sibling immediately before** the panel (not inside it) — the key trick that survives the SPA-style innerHTML-replace pattern without hooking into each page's own render functions.
+   - Re-synced (re-inserted, re-checked for content) on every DOM mutation via a `MutationObserver` on `document.body` — this is what makes it resilient to civpro.html's whole-subtree replacement.
+2. **"พิมพ์ทั้งหมด" (print all)** — only appears if the page defines `window.buildStudyPrintAll()`, a global function returning an array of already-rendered HTML strings, one per topic/lecture. `study-print.js` concatenates them (each wrapped in `<section class="print-study-section">`, which gets a page-break-before in print), strips the same chrome selectors, and prints.
 
-To add a **new** Pattern-B page: give the reading section a `#study-panel`/`.study-panel` container (any of the three sub-variant shapes works), then add `<script src="study-print.js"></script>` right before `</body>`. If the page introduces genuinely new chrome classes that shouldn't appear in print (a new kind of toolbar, say), add that selector to `STRIP_SELECTORS` in `study-print.js` — don't fork the file.
+   **Every one of the 11 Pattern-B pages already has this adapter** (verified 2026-09-15 — each returns the section count shown):
+   - civpro.html (20 — reuses `LECTURE_ORDER.map(k => renderLecPanel(k))` directly, since `renderLecPanel` is a pure function already returning full HTML per lecture)
+   - legalhist.html (8 — `STUDY_TOPICS.map(...)`, builds the HTML itself since `renderStudy()` is side-effecting (mutates the DOM directly, calls `addScore`) and must NOT be called in a loop)
+   - tort.html (18), property.html (10), inheritance.html (9), familylaw.html (6), debt.html (9), constlaw.html (9), commcontract.html (9), biz-org.html (23), adminlaw.html (13) — all nine share the exact same `SUMMARY_TOPICS` + `esc()` template (same codebase lineage), so the adapter is byte-identical across them:
+     ```html
+     <script>
+     window.buildStudyPrintAll = function(){
+       return SUMMARY_TOPICS.map(function(t){
+         return '<div class="study-title">' + esc(t.label) + '</div><div class="study-content">' + t.html + '</div>';
+       });
+     };
+     </script>
+     ```
+   Place the adapter `<script>` block **before** `<script src="study-print.js"></script>` (order matters — `study-print.js`'s `init()` runs synchronously on load and checks `typeof window.buildStudyPrintAll` right away to decide whether to show the "print all" button).
+
+   **Write the adapter from that page's own existing data array and render function — never by simulating clicks** (driving the UI via synthetic clicks to enumerate topics is fragile: timing-dependent, and several pages' real render functions have side effects — scoring, `TTS.stop()`, marking progress — that must not fire repeatedly in a loop). If a topic's render function is side-effecting like `renderStudy()`/`renderStudyBody(t)`, don't call it; instead build the equivalent HTML string directly from the topic's own data fields (usually `.label` + `.html`), matching what the real render function would have produced.
+
+To add a **new** Pattern-B page: give the reading section a `#study-panel`/`.study-panel` container (any of the three sub-variant shapes works), add `<script src="study-print.js"></script>` right before `</body>`, and — if the page has a topic/lecture array — add a `buildStudyPrintAll` adapter following the pattern above (check first whether it already uses the shared `SUMMARY_TOPICS`/`esc()` template; if so, the adapter above is a straight copy-paste). If the page introduces genuinely new chrome classes that shouldn't appear in print, add that selector to `STRIP_SELECTORS` in `study-print.js` — don't fork the file.
 
 ## Shared print CSS spec (duplicated intentionally, keep both in sync)
 
@@ -70,11 +89,13 @@ When invoked for a specific page:
    - Serve the repo locally (`python -m http.server` from the repo root) and open the page in a browser — `file://` URLs are blocked by the browser-automation sandbox.
    - Navigate to the reading section (may require clicking a tab/topic first for Pattern B).
    - Confirm the print button/bar appears in the right place.
-   - **Don't actually click print and let `window.print()` fire** — it opens a native OS dialog that blocks further browser automation and can't be dismissed programmatically. Instead override it first: run `window.print = function(){}` via the JS-execution tool, then call `window.printLectureRow(row)` / `window.printAllLectures(list)` (Pattern A) or `window.printStudyPanel()` (Pattern B) directly, then inspect `document.getElementById('printArea').innerHTML` for correctness (title present, no leftover `.study-toc`/`.study-nav`/`<button>`, reasonable content length).
+   - **Don't actually click print and let `window.print()` fire** — it opens a native OS dialog that blocks further browser automation and can't be dismissed programmatically. Instead override it first: run `window.print = function(){}` via the JS-execution tool, then call `window.printLectureRow(row)` / `window.printAllLectures(list)` (Pattern A) or `window.printStudyPanel()` / `window.printStudyAll()` (Pattern B) directly, then inspect `document.getElementById('printArea').innerHTML` for correctness (title present, no leftover `.study-toc`/`.study-nav`/`<button>`, reasonable content length/section count). For a Pattern-B adapter specifically, also sanity-check `window.buildStudyPrintAll()` on its own — `{sectionCount: ..., err: ...}` via try/catch — before wiring it into the button.
+   - **Watch for browser cache masking a stale script**, not a real bug: if a freshly-edited `.js` file seems to not be loaded (`typeof window.someNewFn` comes back `undefined` right after an edit), don't conclude the code is wrong — first retest in a brand-new tab (`tabs_create_mcp`, not a reused one) against a single, freshly-started local server. A `TypeError: ... is not a function` that disappears on a fresh tab was cache, not code.
+   - **A `const`/`let` array or function at a `<script>` tag's top level is NOT a `window.` property**, even though it's visible by bare name to every later `<script>` tag on the page (they share one global lexical scope). So `typeof window.SUMMARY_TOPICS` can correctly report `undefined` on a page where `SUMMARY_TOPICS.map(...)` inside an adapter works fine — check with the bare name, not `window.<name>`, or you'll chase a false alarm.
 4. **Report the rollout status** — update the file lists in `<architecture>` above when a page is added, so this skill stays accurate.
 </workflow>
 
 <known-gaps>
 - No page currently has an *automated* test for this — verification is manual per the workflow above. If the site ever gains a test runner, this would be a good candidate to automate (assert `#printArea` populates with non-empty text and no stray interactive chrome).
-- Pattern B has no "print all" by design (see architecture). If a future request wants the whole course's reading material as one printout for a Pattern-B subject, that needs bespoke work reading that page's own render function/data array — don't try to fake it generically.
+- `.examAns` (collapsed exam answer-key boxes, seen on civpro.html and legalhist.html) is force-shown in print (`#printArea .examAns{display:block !important}`) regardless of its on-screen collapsed/open state — a deliberate choice (print output works better as a complete study booklet with answers included) but worth knowing if a future page's "answer key" happens to reuse the same class name for something that *shouldn't* auto-reveal in print.
 </known-gaps>

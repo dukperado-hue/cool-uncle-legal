@@ -1368,6 +1368,15 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 <link rel="stylesheet" href="legal-disclaimer.css">
 <script src="legal-footer.js"></script>
+<script>
+window.buildStudyPrintAll = function(){
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  return STUDY_TOPICS.map(function(t){
+    var label = t.label.replace(/^\d+\.\s*/, "");
+    return '<div class="study-head"><h2>' + esc(label) + '</h2></div><div class="study-body">' + linkGlossary(t.html) + '</div>';
+  });
+};
+</script>
 <script src="study-print.js"></script>
 </body>
 </html>

@@ -3191,6 +3191,11 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 <link rel="stylesheet" href="legal-disclaimer.css">
 <script src="legal-footer.js"></script>
+<script>
+window.buildStudyPrintAll = function(){
+  return LECTURE_ORDER.map(function(k){ return renderLecPanel(k); });
+};
+</script>
 <script src="study-print.js"></script>
 </body>
 </html>
