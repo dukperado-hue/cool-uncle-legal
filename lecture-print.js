@@ -4,37 +4,49 @@
    rendered DOM, so it needs no knowledge of each page's own LECTURES array or
    render function names. Include with:
      <script src="lecture-print.js"></script>
-   placed after the page's own renderLectures() call so the rows already exist. */
+   placed after the page's own renderLectures() call so the rows already exist.
+   Sibling module for the .study-panel reading pages: study-print.js — same
+   print-page margins, different DOM-scraping logic (see that file's header). */
 (function(){
+  /* ---- screen-only CSS (button chrome, only visible while browsing) ---- */
+  var SCREEN_CSS = [
+    '#printArea{display:none}',
+    '.print-bar{display:flex;justify-content:flex-end;margin:6px 0 14px}',
+    '.print-all-btn{background:var(--card,#FDFCF8);color:var(--ink,#22283A);border:1px solid var(--line,#E5E1D6);border-radius:8px;padding:7px 13px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-family:inherit}',
+    '.print-all-btn:hover{border-color:var(--gold,#B08A3C);color:var(--gold,#B08A3C)}',
+    '.lecture-print-btn{background:transparent;border:1px solid var(--line,#E5E1D6);border-radius:6px;width:26px;height:26px;flex-shrink:0;cursor:pointer;font-size:12px;display:inline-flex;align-items:center;justify-content:center;margin-right:4px;color:var(--ink-soft,#5A6072)}',
+    '.lecture-print-btn:hover{border-color:var(--gold,#B08A3C)}'
+  ].join('\n');
+
+  /* ---- print-only CSS: page margins sized for spiral/comb ("กระดูกงู")
+     binding punched along the left edge — left 30mm, right/top/bottom 20mm.
+     #printArea has zero padding of its own; @page margin does all the work,
+     so this is the one place to change if the binding spec ever changes. ---- */
+  var PRINT_CSS = [
+    '@media print{',
+    '  @page{margin:20mm 20mm 20mm 30mm}',
+    '  body *{visibility:hidden}',
+    '  #printArea{display:block !important;visibility:visible;position:absolute;left:0;top:0;width:100%;padding:0}',
+    '  #printArea, #printArea *{visibility:visible}',
+    '  #printArea, #printArea *{color:#111 !important;background:transparent !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}',
+    '  #printArea h1{font-size:20px;margin-bottom:4px}',
+    '  #printArea h2{font-size:15.5px;margin:22px 0 8px;padding-bottom:5px;border-bottom:1px solid #999}',
+    '  #printArea .print-lecture-body{font-size:13px;line-height:1.7;white-space:pre-line}',
+    '  #printArea mark{background:#fdeeb0 !important}',
+    '  #printArea .exercise-box{border:1px solid #999 !important;background:#f5f0df !important;padding:10px 12px;border-radius:6px;margin:10px 0}',
+    '  #printArea .print-video-link{font-size:12px;margin:6px 0}',
+    '  #printArea img{max-width:100%;page-break-inside:avoid}',
+    '  #printArea .lecture-img-pair{display:flex;gap:8px}',
+    '  #printArea .lecture-img-pair img{height:160px;width:auto}',
+    '  #printArea .lecture-img-inline{float:none;width:auto;margin:8px 0}',
+    '}'
+  ].join('\n');
+
   function injectStyle(){
     if (document.getElementById('lecture-print-style')) return;
-    var css = [
-      '#printArea{display:none}',
-      '.print-bar{display:flex;justify-content:flex-end;margin:6px 0 14px}',
-      '.print-all-btn{background:var(--card,#FDFCF8);color:var(--ink,#22283A);border:1px solid var(--line,#E5E1D6);border-radius:8px;padding:7px 13px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-family:inherit}',
-      '.print-all-btn:hover{border-color:var(--gold,#B08A3C);color:var(--gold,#B08A3C)}',
-      '.lecture-print-btn{background:transparent;border:1px solid var(--line,#E5E1D6);border-radius:6px;width:26px;height:26px;flex-shrink:0;cursor:pointer;font-size:12px;display:inline-flex;align-items:center;justify-content:center;margin-right:4px;color:var(--ink-soft,#5A6072)}',
-      '.lecture-print-btn:hover{border-color:var(--gold,#B08A3C)}',
-      '@media print{',
-      '  body *{visibility:hidden}',
-      '  #printArea{display:block !important;visibility:visible;position:absolute;left:0;top:0;width:100%;padding:24px 24px 24px 38px}',
-      '  #printArea, #printArea *{visibility:visible}',
-      '  #printArea, #printArea *{color:#111 !important;background:transparent !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}',
-      '  #printArea h1{font-size:20px;margin-bottom:4px}',
-      '  #printArea h2{font-size:15.5px;margin:22px 0 8px;padding-bottom:5px;border-bottom:1px solid #999}',
-      '  #printArea .print-lecture-body{font-size:13px;line-height:1.7;white-space:pre-line}',
-      '  #printArea mark{background:#fdeeb0 !important}',
-      '  #printArea .exercise-box{border:1px solid #999 !important;background:#f5f0df !important;padding:10px 12px;border-radius:6px;margin:10px 0}',
-      '  #printArea .print-video-link{font-size:12px;margin:6px 0}',
-      '  #printArea img{max-width:100%;page-break-inside:avoid}',
-      '  #printArea .lecture-img-pair{display:flex;gap:8px}',
-      '  #printArea .lecture-img-pair img{height:160px;width:auto}',
-      '  #printArea .lecture-img-inline{float:none;width:auto;margin:8px 0}',
-      '}'
-    ].join('\n');
     var style = document.createElement('style');
     style.id = 'lecture-print-style';
-    style.textContent = css;
+    style.textContent = SCREEN_CSS + '\n' + PRINT_CSS;
     document.head.appendChild(style);
   }
 
