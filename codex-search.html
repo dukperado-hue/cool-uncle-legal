@@ -999,7 +999,7 @@ let currentPage = 0;
 async function loadCodexData() {
   try {
     const [response] = await Promise.all([
-      fetch('codex-data.json?v=20260913a'),
+      fetch('codex-data.json?v=20260915a'),
       (window.AtlasCore ? AtlasCore.loadRegistry('collections-registry.json?v=20260913c').catch(() => {}) : Promise.resolve())
     ]);
     if (!response.ok) throw new Error('Failed to load codex data');
