@@ -462,6 +462,131 @@
         }
       ],
       "topics": []
+    },
+    "civpro-trial-progress": {
+      "id": "atlas:cluster/civpro-trial-progress",
+      "slug": "civpro-trial-progress",
+      "titleTH": "การดำเนินกระบวนพิจารณาคดีแพ่ง",
+      "titleEN": "Progress of a Civil Trial",
+      "status": "published",
+      "subjectAreas": [
+        "civil-procedure"
+      ],
+      "description": "กลุ่มแนวคิดที่ปรับบทต่อเนื่องกันตลอดการดำเนินคดีแพ่งสามัญ: เริ่มจากช่วงที่คดีอาจจบลงโดยไม่มีการสืบพยาน (ทิ้งฟ้อง/ถอนฟ้อง/ประนีประนอมยอมความ) ผ่านช่วงที่คู่ความฝ่ายใดไม่มาสู้คดี (ขาดนัดยื่นคำให้การ/ขาดนัดพิจารณา) ไปจนถึงขั้นตอนเตรียมสืบพยาน (ชี้สองสถาน/ภาระการพิสูจน์/บัญชีระบุพยาน) และการร้องสอดของบุคคลภายนอก โดยมีคดีมโนสาเร่เป็นวิธีพิจารณารวบรัดคู่ขนาน",
+      "concepts": [
+        {
+          "ref": "atlas:concept/seed-0072",
+          "note": "จุดตั้งต้น: คดีจบลงเพราะโจทก์เพิกเฉย",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/seed-0073",
+          "note": "คดีจบลงเพราะโจทก์แสดงเจตนาถอนฟ้อง"
+        },
+        {
+          "ref": "atlas:concept/seed-0090",
+          "note": "คดีจบลงเพราะคู่ความตกลงกันเอง — ได้คำพิพากษาตามยอม"
+        },
+        {
+          "ref": "atlas:concept/seed-0074",
+          "note": "จำเลยไม่ยื่นคำให้การภายในกำหนด"
+        },
+        {
+          "ref": "atlas:concept/seed-0075",
+          "note": "คู่ความฝ่ายใดไม่มาศาลในวันสืบพยาน"
+        },
+        {
+          "ref": "atlas:concept/seed-0082",
+          "note": "ศาลกำหนดประเด็นข้อพิพาทก่อนสืบพยาน"
+        },
+        {
+          "ref": "atlas:concept/seed-0084",
+          "note": "หลักว่าฝ่ายใดต้องพิสูจน์ประเด็นใด"
+        },
+        {
+          "ref": "atlas:concept/seed-0085",
+          "note": "เครื่องมือนำพยานหลักฐานเข้าสืบ"
+        },
+        {
+          "ref": "atlas:concept/seed-0097",
+          "note": "บุคคลภายนอกเข้ามาในคดีที่มีอยู่แล้ว"
+        },
+        {
+          "ref": "atlas:concept/seed-0080",
+          "note": "วิธีพิจารณารวบรัดคู่ขนานสำหรับคดีทุนทรัพย์น้อย"
+        }
+      ],
+      "topics": []
+    },
+    "crimpro-pretrial": {
+      "id": "atlas:cluster/crimpro-pretrial",
+      "slug": "crimpro-pretrial",
+      "titleTH": "กระบวนการก่อนฟ้องคดีอาญา",
+      "titleEN": "Pre-Trial Process in Criminal Cases",
+      "status": "published",
+      "subjectAreas": [
+        "criminal-procedure"
+      ],
+      "description": "กลุ่มแนวคิดที่ปรับบทต่อเนื่องกันตั้งแต่การสอบสวนจนถึงการเริ่มคดีในศาล: การสอบสวนเป็นเงื่อนไขก่อนฟ้อง นำไปสู่การสั่งคดีของพนักงานสอบสวนและพนักงานอัยการ ซึ่งหากสั่งไม่ฟ้องต้องผ่านการตรวจสอบจนเด็ดขาด คู่ขนานกับเหตุที่ทำให้สิทธินำคดีอาญามาฟ้องระงับไปทั้งหมด และเมื่อคดีเข้าสู่ศาลแล้วยังมีกลไกไต่สวนมูลฟ้องและการขอเข้าเป็นโจทก์ร่วมของผู้เสียหาย",
+      "concepts": [
+        {
+          "ref": "atlas:concept/kan-sopsuan",
+          "note": "จุดตั้งต้น: เงื่อนไขก่อนฟ้องคดีอาญา",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/kan-sang-khadi-ayakan",
+          "note": "พนักงานสอบสวนและอัยการวินิจฉัยสั่งฟ้อง/ไม่ฟ้อง"
+        },
+        {
+          "ref": "atlas:concept/kham-sang-dedkhad-mai-fong-khadi-aya",
+          "note": "คำสั่งไม่ฟ้องต้องผ่านการตรวจสอบก่อนจึงเด็ดขาด"
+        },
+        {
+          "ref": "atlas:concept/sitthi-nam-khadi-aya-ma-fong-rangab",
+          "note": "เหตุอื่นที่ทำให้สิทธินำคดีอาญามาฟ้องระงับไปทั้งหมด"
+        },
+        {
+          "ref": "atlas:concept/kan-taisuan-mun-fong",
+          "note": "ศาลกลั่นกรองมูลความผิดก่อนประทับรับฟ้อง (คดีราษฎรเป็นโจทก์)"
+        },
+        {
+          "ref": "atlas:concept/chotok-ruam",
+          "note": "ผู้เสียหายขอเข้าร่วมเป็นโจทก์กับพนักงานอัยการ"
+        }
+      ],
+      "topics": []
+    },
+    "admincourt-procedure": {
+      "id": "atlas:cluster/admincourt-procedure",
+      "slug": "admincourt-procedure",
+      "titleTH": "วิธีพิจารณาคดีปกครอง",
+      "titleEN": "Administrative Court Procedure",
+      "status": "published",
+      "subjectAreas": [
+        "public-administrative"
+      ],
+      "description": "กลุ่มแนวคิดที่ปรับบทต่อเนื่องกันตลอดการฟ้องคดีต่อศาลปกครอง: เริ่มจากเขตอำนาจศาลปกครอง (คดีประเภทใดฟ้องได้) ผ่านเงื่อนไขสิทธิฟ้องคดีและกำหนดเวลาฟ้องคดี ไปจนถึงคำบังคับที่ศาลจะออกให้เมื่อชนะคดี — ทั้งสี่แนวคิดจับคู่กันโดยตรงตามโครงสร้างของกฎหมายจัดตั้งศาลปกครอง",
+      "concepts": [
+        {
+          "ref": "atlas:concept/khet-amnat-san-pokkhrong",
+          "note": "จุดตั้งต้น: คดีประเภทใดอยู่ในอำนาจศาลปกครอง",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/sitthi-fong-khadi-pokkhrong",
+          "note": "ใครมีสิทธิฟ้อง และต้องอุทธรณ์ภายในฝ่ายปกครองก่อนหรือไม่"
+        },
+        {
+          "ref": "atlas:concept/ayukhwam-kan-fong-khadi-pokkhrong",
+          "note": "ต้องฟ้องภายในกำหนดเวลาใด"
+        },
+        {
+          "ref": "atlas:concept/kham-bangkhab-khong-san-pokkhrong",
+          "note": "เมื่อชนะคดี ศาลจะออกคำบังคับรูปแบบใด"
+        }
+      ],
+      "topics": []
     }
   }
 }
