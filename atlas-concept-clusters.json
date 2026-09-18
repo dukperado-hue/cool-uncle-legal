@@ -678,8 +678,20 @@
           "note": "เหตุอื่นที่ทำให้สิทธินำคดีอาญามาฟ้องระงับไปทั้งหมด"
         },
         {
+          "ref": "atlas:concept/sarasamkhan-lae-kankaekhai-khamfong-khadi-aya",
+          "note": "ฟ้องต้องมีสาระสำคัญครบตามมาตรา 158 ก่อนศาลจะไต่สวนมูลฟ้องได้"
+        },
+        {
           "ref": "atlas:concept/kan-taisuan-mun-fong",
           "note": "ศาลกลั่นกรองมูลความผิดก่อนประทับรับฟ้อง (คดีราษฎรเป็นโจทก์)"
+        },
+        {
+          "ref": "atlas:concept/khantoan-lae-phon-taisuanmoonfong",
+          "note": "ขั้นตอนวันไต่สวน ผลเมื่อโจทก์ขาดนัด และผลของการไต่สวน (มีมูล/ไม่มีมูล)"
+        },
+        {
+          "ref": "atlas:concept/kan-fong-khadi-aya-doi-mai-sujarit",
+          "note": "มาตรการยกฟ้องคดีที่ราษฎรฟ้องโดยไม่สุจริต (คล้าย Anti-SLAPP)"
         },
         {
           "ref": "atlas:concept/chotok-ruam",
@@ -1216,6 +1228,45 @@
         {
           "ref": "atlas:concept/seed-0247",
           "note": "ปิดท้าย: การอุทธรณ์คำสั่งภายในฝ่ายปกครอง"
+        }
+      ],
+      "topics": []
+    },
+    "crimpro-investigation": {
+      "id": "atlas:cluster/crimpro-investigation",
+      "slug": "crimpro-investigation",
+      "titleTH": "การสอบสวนคดีอาญา: อำนาจ สิทธิ และหน้าที่",
+      "titleEN": "Criminal Investigation: Powers, Rights, and Duties",
+      "status": "published",
+      "subjectAreas": [
+        "criminal-procedure"
+      ],
+      "description": "กลุ่มแนวคิดที่ปรับบทต่อเนื่องกันในชั้นสอบสวนคดีอาญา ก่อนจะไปถึงขั้นตอนการสั่งคดีในกลุ่ม \"กระบวนการก่อนฟ้องคดีอาญา\": เริ่มจากเขตอำนาจสอบสวนว่าพนักงานสอบสวนคนใดมีอำนาจ ไปสู่อำนาจรวบรวมพยานหลักฐานของพนักงานสอบสวน ซึ่งมีมาตรการพิเศษคุ้มครองเด็กเมื่อเป็นผู้เสียหาย พยาน หรือผู้ต้องหา คู่ขนานกับสิทธิของผู้ต้องหาเองในชั้นสอบสวน ทั้งสิทธิได้รับการสอบสวนโดยเป็นธรรมและสิทธิมีทนายความที่รัฐจัดหาให้ และปิดท้ายด้วยเงื่อนไขพิเศษเมื่อความตายเป็นผลแห่งการกระทำผิด ซึ่งต้องผ่านการชันสูตรพลิกศพก่อนจึงจะฟ้องคดีได้",
+      "concepts": [
+        {
+          "ref": "atlas:concept/khet-amnat-sopsuan-khadi-aya",
+          "note": "จุดตั้งต้น: พนักงานสอบสวนคนใดมีอำนาจสอบสวน",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/amnat-ruapruam-phayanlakthan-sopsuan",
+          "note": "อำนาจรวบรวมพยานหลักฐานทุกชนิดของพนักงานสอบสวน"
+        },
+        {
+          "ref": "atlas:concept/matrakan-khumkhrong-dek-nai-kan-sobpakkham",
+          "note": "มาตรการพิเศษเมื่อผู้เสียหาย พยาน หรือผู้ต้องหาเป็นเด็ก"
+        },
+        {
+          "ref": "atlas:concept/sitthi-phutonghha-nai-chan-sopsuan",
+          "note": "สิทธิผู้ต้องหาเองในชั้นสอบสวน"
+        },
+        {
+          "ref": "atlas:concept/sitthi-mee-thanaikhwam-thi-rat-jadha-hai",
+          "note": "สิทธิมีทนายความที่รัฐจัดหาให้ ทั้งชั้นสอบสวนและชั้นพิจารณา"
+        },
+        {
+          "ref": "atlas:concept/kan-chansut-phlikasop",
+          "note": "เงื่อนไขพิเศษเมื่อความตายเป็นผลแห่งการกระทำผิด: ห้ามฟ้องก่อนชันสูตรเสร็จ"
         }
       ],
       "topics": []
