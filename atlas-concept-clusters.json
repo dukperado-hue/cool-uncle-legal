@@ -1693,6 +1693,103 @@
         }
       ],
       "topics": []
+    },
+    "criminal-public-peace": {
+      "id": "atlas:cluster/criminal-public-peace",
+      "slug": "criminal-public-peace",
+      "titleTH": "ความผิดเกี่ยวกับความสงบสุขของประชาชน",
+      "titleEN": "Offences Against Public Peace",
+      "status": "published",
+      "subjectAreas": [
+        "criminal"
+      ],
+      "description": "กลุ่มแนวคิดใน ป.อ. ภาค 2 ลักษณะ 5 (ม.209-216): เริ่มจากความผิดฐานรวมกลุ่มสองรูปแบบ คืออั้งยี่และซ่องโจร ต่อด้วยความรับผิดของสมาชิกและผู้สนับสนุนที่ ม.211-213 วางไว้ร่วมกัน และปิดท้ายด้วยการมั่วสุมก่อความวุ่นวาย (ม.215-216)",
+      "concepts": [
+        {
+          "ref": "atlas:concept/ang-yi",
+          "note": "จุดเริ่มต้น: เป็นสมาชิกคณะบุคคลที่ปกปิดวิธีดำเนินการเพื่อการมิชอบ",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/song-chon",
+          "note": "สมคบตั้งแต่ 5 คนเพื่อทำความผิดตาม ป.อ. ภาค 2 ที่มีโทษจำคุกอย่างสูงตั้งแต่ 1 ปี"
+        },
+        {
+          "ref": "atlas:concept/khwamrapphid-somachik-lae-phusanapsanun-ang-yi-song-chon",
+          "note": "ข้อสันนิษฐาน ผู้สนับสนุน และความรับผิดร่วมที่ใช้กับทั้งอั้งยี่และซ่องโจร"
+        },
+        {
+          "ref": "atlas:concept/muasum-kokhwamwunwai",
+          "note": "มั่วสุม 10 คนขึ้นไปก่อความวุ่นวาย และการไม่เลิกเมื่อเจ้าพนักงานสั่ง"
+        }
+      ],
+      "topics": []
+    },
+    "criminal-public-danger": {
+      "id": "atlas:cluster/criminal-public-danger",
+      "slug": "criminal-public-danger",
+      "titleTH": "ความผิดเกี่ยวกับการก่อให้เกิดภยันตรายต่อประชาชน",
+      "titleEN": "Offences Creating Danger to the Public",
+      "status": "published",
+      "subjectAreas": [
+        "criminal"
+      ],
+      "description": "กลุ่มแนวคิดใน ป.อ. ภาค 2 ลักษณะ 6 (ม.217-239): เริ่มจากวางเพลิงและเพลิงไหม้ ต่อด้วยระเบิด แล้วขยายไปยังความผิดที่ทำให้การจราจร สาธารณูปโภค และอาหารหรือน้ำของประชาชนไม่ปลอดภัย โดย ม.223-224 ใช้ร่วมกับกลุ่มเพลิงและระเบิด และ ม.238-239 ใช้ร่วมกับ ม.226-237",
+      "concepts": [
+        {
+          "ref": "atlas:concept/wang-phloeng-phao-sap",
+          "note": "จุดเริ่มต้น: วางเพลิงเผาทรัพย์ ตระเตรียม เหตุลดโทษและเหตุฉกรรจ์จากผล",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/koet-phloeng-mai-chon-nachapen-antarai",
+          "note": "เพลิงไหม้แม้เป็นของตนเอง และเพลิงไหม้โดยประมาท"
+        },
+        {
+          "ref": "atlas:concept/tham-hai-koet-rabeut-chon-nachapen-antarai",
+          "note": "ระเบิดจนน่าจะเป็นอันตราย และระเบิดที่ทำลายทรัพย์ตาม ม.217/218"
+        },
+        {
+          "ref": "atlas:concept/khwamphid-tor-kan-chorachon-lae-khonsong-satharana",
+          "note": "ทางสาธารณะ ทางรถไฟ สัญญาณ และยานพาหนะขนส่งสาธารณะ"
+        },
+        {
+          "ref": "atlas:concept/khwamphid-tor-satharanupphokhok-lae-kan-suesan-satharana",
+          "note": "อุทกภัย น้ำ ไฟฟ้า และการสื่อสารสาธารณะ"
+        },
+        {
+          "ref": "atlas:concept/plompon-ahan-lae-sai-phit-nai-ahan-nam-khong-prachachon",
+          "note": "ปลอมปนอาหารและวางยาพิษในอาหารหรือน้ำของประชาชน"
+        }
+      ],
+      "topics": []
+    },
+    "criminal-religion-offences": {
+      "id": "atlas:cluster/criminal-religion-offences",
+      "slug": "criminal-religion-offences",
+      "titleTH": "ความผิดเกี่ยวกับศาสนา",
+      "titleEN": "Offences Relating to Religion",
+      "status": "published",
+      "subjectAreas": [
+        "criminal"
+      ],
+      "description": "กลุ่มแนวคิดใน ป.อ. ภาค 2 ลักษณะ 4 (ม.206-208) ซึ่งคุ้มครองศาสนาสามด้าน คือ วัตถุหรือสถานอันเป็นที่เคารพ การประกอบพิธีกรรม และสถานะของนักบวช",
+      "concepts": [
+        {
+          "ref": "atlas:concept/hiayham-satsana",
+          "note": "วัตถุหรือสถานอันเป็นที่เคารพ ไม่รวมการกระทำต่อตัวบุคคล",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/kokhwamwunwai-nai-phithi-thang-satsana",
+          "note": "ที่ประชุมศาสนิกชนและพิธีกรรมทางศาสนา"
+        },
+        {
+          "ref": "atlas:concept/taengkai-pen-nakbuat-doi-michop",
+          "note": "สถานะนักบวชและเจตนาพิเศษให้ผู้อื่นเชื่อ"
+        }
+      ],
+      "topics": []
     }
   }
 }
