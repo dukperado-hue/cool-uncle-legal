@@ -1529,6 +1529,170 @@
         }
       ],
       "topics": []
+    },
+    "succession-estate-administration": {
+      "id": "atlas:cluster/succession-estate-administration",
+      "slug": "succession-estate-administration",
+      "titleTH": "การจัดการและแบ่งปันมรดก",
+      "titleEN": "Estate Administration and Partition",
+      "status": "published",
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "description": "กลุ่มแนวคิดว่าด้วยขั้นตอนหลังเจ้ามรดกตายตาม ป.พ.พ. บรรพ 6 ลักษณะ 4: เริ่มจากการตั้งผู้จัดการมรดก (ม.1711-1713) ต่อด้วยอำนาจ หน้าที่ และความรับผิดของผู้จัดการมรดก (ม.1715-1727, 1733) หน้าที่ทำบัญชีทรัพย์มรดก (ม.1728-1732) การชำระหนี้กองมรดกก่อนแบ่งปัน (ม.1601, 1734-1744) และปิดท้ายด้วยการแบ่งปันมรดกให้ทายาท (ม.1745-1752)",
+      "concepts": [
+        {
+          "ref": "atlas:concept/seed-0272",
+          "note": "จุดเริ่มต้น: ผู้จัดการมรดกตั้งได้ 2 ทาง คือโดยพินัยกรรมหรือโดยคำสั่งศาล",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/nathi-amnat-lae-khwamrapphid-phu-chatkan-moradok",
+          "note": "หลังตั้งแล้ว: อำนาจ ข้อห้าม การถอน และอายุความ 5 ปี"
+        },
+        {
+          "ref": "atlas:concept/seed-0293",
+          "note": "หน้าที่ทำบัญชีทรัพย์มรดกภายใน 15 วัน/1 เดือน และผลเมื่อไม่ทำ"
+        },
+        {
+          "ref": "atlas:concept/kan-chamra-nee-kong-moradok-lae-khwamrapphid-thayat",
+          "note": "ชำระหนี้กองมรดกตามลำดับก่อนแบ่งปัน และทายาทรับผิดไม่เกินทรัพย์มรดก"
+        },
+        {
+          "ref": "atlas:concept/seed-0294",
+          "note": "แบ่งปันมรดกให้ทายาทและผลหลังแบ่ง (รอนสิทธิ)"
+        }
+      ],
+      "topics": []
+    },
+    "family-parentage-and-guardianship": {
+      "id": "atlas:cluster/family-parentage-and-guardianship",
+      "slug": "family-parentage-and-guardianship",
+      "titleTH": "ความเป็นบุตร อำนาจปกครอง และความปกครอง",
+      "titleEN": "Parentage, Parental Power and Guardianship",
+      "status": "published",
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "description": "กลุ่มแนวคิดว่าด้วยสถานะของบุตรและผู้ดูแลตาม ป.พ.พ. บรรพ 5 ลักษณะ 2: เริ่มจากบุตรชอบด้วยกฎหมายและข้อสันนิษฐาน (ม.1536-1538) การปฏิเสธเด็กเป็นบุตร (ม.1539-1545) บุตรนอกสมรสและการรับรองบุตร (ม.1546-1559) ต่อด้วยอำนาจปกครองและการจัดการทรัพย์สินของบุตร (ม.1566-1581) ห้ามฟ้องบุพการี (ม.1562, 1565) ความปกครองโดยผู้ปกครอง (ม.1585-1598/14) และบุตรบุญธรรมรวมถึงการเลิกรับบุตรบุญธรรม (ม.1598/19-37)",
+      "concepts": [
+        {
+          "ref": "atlas:concept/seed-0368",
+          "note": "จุดเริ่มต้น: บุตรชอบด้วยกฎหมายและข้อสันนิษฐานความเป็นบุตรในสมรส (ม.1536-1537)",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/seed-0373",
+          "note": "ชายผู้ถูกสันนิษฐานว่าเป็นบิดาฟ้องปฏิเสธเด็กเป็นบุตรได้เพียงใด"
+        },
+        {
+          "ref": "atlas:concept/seed-0369",
+          "note": "บุตรนอกสมรสเป็นบุตรชอบด้วยกฎหมายของบิดาได้ 3 ทาง"
+        },
+        {
+          "ref": "atlas:concept/seed-0383",
+          "note": "ข้อห้ามฟ้องบุพการีและทางออกที่กฎหมายเปิดไว้"
+        },
+        {
+          "ref": "atlas:concept/seed-0375",
+          "note": "อำนาจปกครองบุตรและผู้ใช้อำนาจปกครอง"
+        },
+        {
+          "ref": "atlas:concept/kanchatkan-sapsin-khong-but-doi-phu-chai-amnatpokkhrong",
+          "note": "จัดการทรัพย์สินของบุตร: 13 นิติกรรมต้องขออนุญาตศาลและประโยชน์ขัดกัน"
+        },
+        {
+          "ref": "atlas:concept/seed-0378",
+          "note": "ผู้ปกครอง: การตั้งโดยศาลหรือพินัยกรรม"
+        },
+        {
+          "ref": "atlas:concept/khwampokkhrong-phuyao-nathi-lae-kanthon-phupokkhrong",
+          "note": "ผู้ปกครองต้องทำบัญชี ห้ามทำกิจการก่อนศาลยอมรับ และเหตุถอนผู้ปกครอง"
+        },
+        {
+          "ref": "atlas:concept/seed-0384",
+          "note": "บุตรบุญธรรม: สถานะและเงื่อนไขการรับ"
+        },
+        {
+          "ref": "atlas:concept/seed-0386",
+          "note": "เลิกรับบุตรบุญธรรม: ตกลงเลิก เลิกอัตโนมัติ และเลิกโดยคำพิพากษา"
+        }
+      ],
+      "topics": []
+    },
+    "family-marriage-formation-and-annulment": {
+      "id": "atlas:cluster/family-marriage-formation-and-annulment",
+      "slug": "family-marriage-formation-and-annulment",
+      "titleTH": "การหมั้น เงื่อนไขการสมรส และการเพิกถอนการสมรส",
+      "titleEN": "Engagement, Marriage Conditions and Annulment",
+      "status": "published",
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "description": "กลุ่มแนวคิดว่าด้วยการเริ่มและสิ้นผลของการสมรสที่บกพร่องตาม ป.พ.พ. บรรพ 5 ลักษณะ 1: เริ่มจากการหมั้น (ม.1435-1437) และค่าทดแทนเมื่อผิดสัญญาหมั้น (ม.1439-1447/1) ต่อด้วยการสมรสและเงื่อนไขที่ต้องครบ (ม.1448-1458) ผลเมื่อฝ่าฝืนซึ่งเป็นโมฆะ (ม.1495-1496) หรือโมฆียะ (ม.1502) และการฟ้องเพิกถอนการสมรสโมฆียะ (ม.1503-1513)",
+      "concepts": [
+        {
+          "ref": "atlas:concept/seed-0352",
+          "note": "จุดเริ่มต้น: การหมั้น",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/khathotthaen-chak-phid-sanya-hman",
+          "note": "ผิดสัญญาหมั้น: ค่าทดแทน 3 ประเภท จากใครได้ และอายุความ 6 เดือน"
+        },
+        {
+          "ref": "atlas:concept/seed-0355",
+          "note": "การสมรสต้องจดทะเบียนและสมัครใจ"
+        },
+        {
+          "ref": "atlas:concept/nguenkhai-lae-khohaam-nai-kan-somros",
+          "note": "เงื่อนไขและข้อห้ามในการสมรส และผลของการฝ่าฝืนแต่ละข้อ"
+        },
+        {
+          "ref": "atlas:concept/seed-0362",
+          "note": "สมรสเป็นโมฆะ"
+        },
+        {
+          "ref": "atlas:concept/seed-0363",
+          "note": "สมรสเป็นโมฆียะ"
+        },
+        {
+          "ref": "atlas:concept/seed-0361",
+          "note": "ฟ้องเพิกถอนสมรสโมฆียะ: เหตุ 5 ข้อ อายุความ และผลของคำพิพากษา"
+        }
+      ],
+      "topics": []
+    },
+    "sale-contract-core": {
+      "id": "atlas:cluster/sale-contract-core",
+      "slug": "sale-contract-core",
+      "titleTH": "สัญญาซื้อขาย: แบบ การโอนกรรมสิทธิ์ และการส่งมอบ",
+      "titleEN": "Contract of Sale: Form, Transfer of Ownership and Delivery",
+      "status": "published",
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "description": "กลุ่มแนวคิดแกนกลางของสัญญาซื้อขายตาม ป.พ.พ. บรรพ 3 ลักษณะ 1: เริ่มจากนิยามคำมั่นและแบบของสัญญา (ม.453-457) ต่อด้วยเวลาที่กรรมสิทธิ์โอนและข้อยกเว้น (ม.458-460) หน้าที่ส่งมอบของผู้ขาย (ม.461-467) และความรับผิดของผู้ขายเมื่อทรัพย์ถูกรอนสิทธิหรือชำรุดบกพร่อง",
+      "concepts": [
+        {
+          "ref": "atlas:concept/sanya-suekhai",
+          "note": "จุดเริ่มต้น: นิยาม คำมั่น แบบ และหลักฐานของสัญญาซื้อขาย",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/kan-on-kammasit-nai-sanya-suekhai",
+          "note": "กรรมสิทธิ์โอนทันทีเมื่อทำสัญญา เว้นแต่มีเงื่อนไข เงื่อนเวลา หรือทรัพย์ยังไม่บ่งตัว"
+        },
+        {
+          "ref": "atlas:concept/nathi-songmop-khong-phukhai",
+          "note": "ส่งมอบให้อยู่ในเงื้อมมือผู้ซื้อ ส่งผ่านผู้ขนส่ง และทรัพย์ขาดหรือเกิน"
+        },
+        {
+          "ref": "atlas:concept/ronsitthi-lae-chamrudbokphrong",
+          "note": "ผู้ขายรับผิดเมื่อทรัพย์ถูกรอนสิทธิหรือชำรุดบกพร่อง"
+        }
+      ],
+      "topics": []
     }
   }
 }
