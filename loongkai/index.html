@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lung Kai Tools — มีดพับสวิสของลุงไก่</title>
+<link rel="stylesheet" href="static/fonts/fonts.css">
+<style>
+:root{
+  --primary:#C14953;--primary-d:#a1313c;--secondary:#2D4746;--tertiary:#E5A937;
+  --canvas:#F5EEDC;--kraft:#EADFC8;--paper:#FAF3E0;--ink:#111111;
+  --display:'Anton','Impact','Arial Narrow',sans-serif;
+  --body:'Work Sans','Leelawadee UI','Tahoma',sans-serif;
+}
+*{box-sizing:border-box;border-radius:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--ink);font:15px/22px var(--body);
+  background-image:radial-gradient(rgba(17,17,17,.07) 1px,transparent 1.2px);background-size:6px 6px}
+h1,h2,h3,.disp{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.02em;margin:0}
+button{font-family:inherit;cursor:pointer}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+
+/* top bar */
+.top{background:var(--paper);border-bottom:4px solid var(--ink);position:sticky;top:0;z-index:20}
+.top .wrap{display:flex;align-items:center;gap:12px;height:64px}
+.logo{width:44px;height:44px;border:2px solid var(--ink);object-fit:cover;background:var(--kraft)}
+.brand{font:28px/1 var(--display);letter-spacing:.02em}
+.brand small{display:block;font:700 10px/12px var(--body);letter-spacing:.08em;color:var(--primary);margin-top:2px}
+.sp{flex:1}
+.stamp{background:var(--primary);color:var(--canvas);border:2px solid var(--ink);padding:3px 10px;font:700 12px/16px var(--body);
+  letter-spacing:.06em;text-transform:uppercase;transform:rotate(-2deg);box-shadow:3px 3px 0 var(--ink)}
+
+/* hero */
+.hero{margin:22px 0 20px;border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink);background:var(--primary);overflow:hidden}
+.hero-img{border-bottom:4px solid var(--ink);background:var(--ink);line-height:0}
+.hero-img img{display:block;width:100%;height:auto}
+.hero-txt{padding:22px 28px 26px;color:var(--canvas);display:flex;flex-direction:column;gap:12px}
+.hero h1{font-size:48px;line-height:52px;text-shadow:3px 3px 0 var(--ink)}
+.hero p{margin:0;font-size:16px;line-height:24px;max-width:760px}
+.hero .tag{align-self:flex-start;background:var(--tertiary);color:var(--ink);border:2px solid var(--ink);
+  padding:5px 12px;font:700 13px/16px var(--body);letter-spacing:.05em;text-transform:uppercase;transform:rotate(-1.5deg);box-shadow:3px 3px 0 var(--ink)}
+@media(max-width:820px){.hero h1{font-size:36px;line-height:40px}}
+
+/* filter tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 22px}
+.tab{background:var(--canvas);border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:9px 16px;
+  font:700 13px/16px var(--body);letter-spacing:.05em;text-transform:uppercase;color:var(--ink)}
+.tab.on{background:#FFDDA8}
+.tab:active,.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:22px}
+.card{background:var(--paper);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);display:flex;flex-direction:column}
+.card header{background:var(--secondary);color:var(--canvas);border-bottom:2px solid var(--ink);padding:9px 14px;
+  display:flex;justify-content:space-between;align-items:center;font:20px/24px var(--display);letter-spacing:.02em;text-transform:uppercase}
+.card header.c-red{background:var(--primary-d)}.card header.c-ink{background:#2c2a1e}.card header.c-gold{background:#976900}
+.card .body{padding:14px;display:flex;gap:12px;flex:1}
+.ico{flex:none;width:54px;height:54px;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);background:#CBE8E6;
+  display:grid;place-items:center;font-size:26px}
+.card p{margin:0 0 6px;font-size:14px;line-height:20px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.badge{border:2px solid var(--ink);padding:1px 7px;font:700 10px/14px var(--body);letter-spacing:.08em;text-transform:uppercase;background:var(--tertiary)}
+.badge.r{background:var(--primary);color:var(--canvas)}.badge.t{background:var(--secondary);color:var(--canvas)}
+.card footer{padding:0 14px 14px}
+.btn{display:flex;justify-content:space-between;align-items:center;width:100%;background:#FFDDA8;color:var(--ink);
+  border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:10px 14px;font:20px/24px var(--display);letter-spacing:.02em;text-transform:uppercase}
+.btn.red{background:var(--primary);color:var(--canvas)}.btn.teal{background:var(--secondary);color:var(--canvas)}
+.btn:hover{filter:brightness(1.06)}
+.btn[disabled]{opacity:1;background:var(--kraft);color:#8a7a5a;box-shadow:none;cursor:wait}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:50;display:none;align-items:flex-start;justify-content:center;overflow:auto;padding:24px 12px;
+  background:var(--canvas) radial-gradient(var(--ink) 1px,transparent 1.4px) 0 0/5px 5px;background-blend-mode:multiply}
+.modal.open{display:flex}
+.win{width:min(760px,100%);background:var(--paper);border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink)}
+.win .bar{height:12px;background:var(--tertiary);border-bottom:3px solid var(--ink)}
+.win .head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 20px;border-bottom:2px solid var(--ink)}
+.win h2{font-size:28px;line-height:32px}
+.x{background:var(--primary);color:var(--canvas);border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);font:700 16px/1 var(--body);padding:8px 12px}
+.win .inner{padding:18px 20px 22px;display:flex;flex-direction:column;gap:16px}
+.drop{border:3px dashed var(--ink);background:#F6E7C6;padding:26px 16px;text-align:center;cursor:pointer}
+.drop.over{background:var(--tertiary)}
+.drop .big{font:26px/30px var(--display);text-transform:uppercase;margin:6px 0}
+.drop small{color:#574142}
+.pick{display:inline-block;margin-top:10px;background:var(--canvas);border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:6px 14px;font:700 12px/16px var(--body);letter-spacing:.06em;text-transform:uppercase}
+.files{display:flex;flex-direction:column;gap:8px}
+.file{display:flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:7px 10px}
+.file .n{flex:1;min-width:0}
+.file b{display:block;font:700 13px/17px var(--body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file span{font:700 10px/14px var(--body);letter-spacing:.06em;text-transform:uppercase;color:#574142}
+.mini{background:#FFDADA;border:2px solid var(--ink);font:700 11px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;padding:6px 8px;color:var(--primary-d)}
+.mini.g{background:var(--canvas);color:var(--ink);padding:6px 9px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fields .full{grid-column:1/-1}
+@media(max-width:600px){.fields{grid-template-columns:1fr}}
+label.f{display:block;font:700 12px/16px var(--body);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
+label.f em{display:block;font:400 12px/16px var(--body);text-transform:none;letter-spacing:0;color:#574142;margin-top:2px}
+input[type=text],input[type=number],input[type=password],select,textarea{width:100%;background:var(--kraft);border:2px solid var(--ink);
+  padding:9px 11px;font:15px/20px var(--body);color:var(--ink);outline:none}
+textarea{resize:vertical;min-height:70px}
+input:focus,select:focus,textarea:focus{border-width:3px;padding:8px 10px;border-left:8px solid var(--tertiary);padding-left:5px}
+input::placeholder,textarea::placeholder{color:rgba(45,71,70,.6)}
+.chk{display:flex;align-items:center;gap:9px;padding:5px 0;font-size:14px;cursor:pointer}
+.chk input{appearance:none;width:20px;height:20px;flex:none;border:2px solid var(--ink);background:var(--canvas);margin:0;cursor:pointer;position:relative}
+.chk input:checked{background:var(--primary)}
+.chk input:checked::after{content:"";position:absolute;left:3px;top:3px;width:10px;height:10px;background:linear-gradient(135deg,transparent 42%,var(--canvas) 42% 58%,transparent 58%)}
+.status{border:2px solid var(--ink);padding:10px 12px;font:700 13px/18px var(--body);display:none;white-space:pre-wrap}
+.status.err{display:block;background:#FFDAD6;color:#93000a}
+.status.ok{display:block;background:#CBE8E6;color:var(--secondary)}
+.status.busy{display:block;background:var(--tertiary)}
+.run{font-size:26px;line-height:30px;justify-content:center;gap:10px;padding:14px}
+
+/* footer */
+.hw{background:#2c2a1e;color:var(--canvas);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);margin:30px 0 16px;padding:12px 14px}
+.hw .row{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font:700 11px/16px var(--body);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.hw .cells{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.hw .cell{border:1px solid #6b6650;padding:8px;text-align:center;font:700 10px/14px var(--body);letter-spacing:.08em;text-transform:uppercase}
+.hw .cell b{display:block;font:22px/26px var(--display);color:#CBE8E6;letter-spacing:.02em;font-weight:400}
+.foot{text-align:center;font:700 11px/16px var(--body);letter-spacing:.06em;text-transform:uppercase;padding:6px 0 30px;color:#574142}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+  <img class="logo" src="static/mascot.png" alt="ลุงไก่">
+  <div class="brand">Lung Kai Tools<small>มีดพับสวิสของลุงไก่ · ประมวลผลในเบราว์เซอร์ของคุณ</small></div>
+  <div class="sp"></div>
+  <div class="stamp">Runs in browser</div>
+</div></div>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="hero-img"><img src="static/hero.jpg" alt="ลุงไก่กับมีดพับสวิส"></div>
+    <div class="hero-txt">
+      <h1>เครื่องมือครบ<br>ลุงไก่จัดให้</h1>
+      <p>จัดการ PDF · เซ็นเซอร์ข้อมูลอ่อนไหว · แปลงไฟล์เสียง/ภาพ ใช้งานผ่านเว็บได้เลย ไม่ต้องติดตั้ง ไฟล์ทั้งหมดถูกประมวลผลในเบราว์เซอร์ของคุณ ไม่อัปโหลดขึ้นเซิร์ฟเวอร์ ไม่ใช้ AI หรือ Cloud ใดๆ</p>
+      <div class="tag">No cloud · No API · Data stays here</div>
+    </div>
+  </section>
+
+  <nav class="tabs" id="tabs"></nav>
+  <section class="grid" id="grid"></section>
+
+  <section class="hw">
+    <div class="row"><span>■ Client-side engine ready</span><span>No upload lock: engaged</span></div>
+    <div class="cells">
+      <div class="cell">Tools loaded<b id="cnt">0</b></div>
+      <div class="cell">Engine<b>BROWSER</b></div>
+      <div class="cell">Outbound<b>0 PKTS</b></div>
+    </div>
+  </section>
+  <div class="foot">🔒 Confidential // Files never leave your device // No telemetry</div>
+</main>
+
+<div class="modal" id="modal"><div class="win">
+  <div class="bar"></div>
+  <div class="head"><h2 id="mt"></h2><button class="x" id="mx">✕ ปิด</button></div>
+  <div class="inner" id="mi"></div>
+</div></div>
+
+<script src="vendor/pdf-lib.min.js"></script>
+<script src="vendor/pdf.min.js"></script>
+<script src="vendor/jszip.min.js"></script>
+<script src="vendor/xlsx.full.min.js"></script>
+<script src="vendor/lame.min.js"></script>
+<script src="js/tools.js"></script>
+<script>
+const CATS={pdf:'📄 PDF Tools',data:'🗂 Data & Office',media:'🎞 Media'};
+const PDFA='.pdf';
+const T=[
+ {id:'merge',cat:'pdf',op:'01',title:'PDF Merge',ico:'🖇',cls:'',btn:'',
+  desc:'รวมไฟล์ PDF (และรูปภาพ) หลายไฟล์เป็นฉบับเดียว เรียงตามลำดับที่เลือก',badges:['Zero transmission'],
+  accept:'.pdf,.png,.jpg,.jpeg',multi:true,run:'รวมไฟล์',fields:[]},
+ {id:'split',cat:'pdf',op:'02',title:'PDF Split',ico:'✂',cls:'c-red',btn:'red',
+  desc:'หั่นเฉพาะหน้าที่ต้องการ (เช่น 1-3,5,8-) หรือแยกทุกหน้าเป็นไฟล์ๆ ใน ZIP',badges:['Page ranges'],
+  accept:PDFA,run:'หั่นเอกสาร',fields:[
+   {n:'mode',t:'select',l:'โหมด',o:[['extract','ดึงหน้าที่ระบุเป็นไฟล์เดียว'],['each','แยกทุกหน้า (ZIP)']]},
+   {n:'ranges',t:'text',l:'ช่วงหน้า',ph:'เช่น 1-3,5,8-',v:'1',em:'ใช้เฉพาะโหมดดึงหน้า'}]},
+ {id:'compress',cat:'pdf',op:'03',title:'PDF Press',ico:'🗜',cls:'c-gold',btn:'',
+  desc:'บีบ PDF ให้เล็กพอแนบเข้าระบบรายงาน (แปลงหน้าเป็นภาพ ข้อความจะเลือกไม่ได้) ถ้าไม่เล็กลงจะคืนไฟล์เดิม',badges:['Up to -85%'],bcls:'r',
+  accept:PDFA,run:'บีบอัด',fields:[
+   {n:'level',t:'select',l:'ระดับ',o:[['light','เบา (คมชัดสุด)'],['medium','กลาง'],['strong','แรง (เล็กสุด)']],v:'medium'}]},
+ {id:'pdf2img',cat:'pdf',op:'04',title:'PDF → Images',ico:'🖼',cls:'c-ink',btn:'teal',
+  desc:'แปลงทุกหน้า PDF เป็นรูปภาพ PNG/JPG (ZIP)',badges:['PNG / JPG'],bcls:'t',
+  accept:PDFA,run:'แปลงเป็นรูป',fields:[
+   {n:'fmt',t:'select',l:'ฟอร์แมต',o:[['png','PNG'],['jpg','JPG']]},
+   {n:'dpi',t:'select',l:'ความละเอียด',o:[['100','100 dpi'],['150','150 dpi'],['200','200 dpi'],['300','300 dpi']],v:'150'}]},
+ {id:'img2pdf',cat:'pdf',op:'05',title:'Images → PDF',ico:'📑',cls:'',btn:'',
+  desc:'รวมรูปภาพหลายรูปเป็น PDF เล่มเดียว เรียงตามลำดับที่เลือก',badges:['JPG / PNG'],
+  accept:'.png,.jpg,.jpeg,.webp,.bmp',multi:true,run:'สร้าง PDF',fields:[]},
+ {id:'tables',cat:'pdf',op:'06',title:'Table Ripper',ico:'▦',cls:'',btn:'teal',
+  desc:'ดึงตารางจาก PDF (ที่เป็นข้อความจริง) ออกมาเป็น Excel แยกชีตตามหน้า — เบต้า ตรวจผลก่อนใช้',badges:['PDF → XLSX'],bcls:'t',
+  accept:PDFA,run:'ดึงตาราง',fields:[]},
+ {id:'watermark',cat:'pdf',op:'07',title:'Watermark "ลับ"',ico:'🈲',cls:'c-red',btn:'red',
+  desc:'ประทับคำว่า "ลับ" กลางหัวกระดาษทุกหน้า (เลือกเฉียงกลางหน้า/ซ้ำเต็มหน้าได้) รองรับภาษาไทย',badges:['Thai ready'],bcls:'r',
+  accept:PDFA,run:'ประทับลายน้ำ',fields:[
+   {n:'text',t:'text',l:'ข้อความ',v:'ลับ'},
+   {n:'color',t:'select',l:'สี',o:[['red','แดง'],['black','ดำ'],['teal','เขียวเข้ม']]},
+   {n:'layout',t:'select',l:'รูปแบบ',o:[['header','กลางหัวกระดาษ (ด้านบน)'],['center','เฉียงกลางหน้า'],['tile','ซ้ำเต็มหน้า']]},
+   {n:'opacity',t:'number',l:'ความเข้ม (%)',v:25,min:5,max:100}]},
+ {id:'redact',cat:'data',op:'08',title:'De-identification',ico:'█',cls:'c-red',btn:'red',
+  desc:'เซ็นเซอร์ข้อมูลอ่อนไหวอัตโนมัติด้วย Regex — ชื่อผู้รายงาน เลขบัตร ทะเบียนอากาศยาน ฯลฯ ก่อนเข้าที่ประชุม VOR',badges:['PDF · DOCX · XLSX · TXT'],bcls:'r',
+  accept:'.pdf,.docx,.xlsx,.txt,.csv',multi:true,run:'เซ็นเซอร์ข้อมูล',fields:[
+   {n:'kinds',t:'checks',l:'ชนิดข้อมูลที่จะเซ็นเซอร์',full:1,o:[
+     ['thai_id','เลขบัตรประชาชน 13 หลัก',1],['phone','เบอร์โทรศัพท์',1],['email','อีเมล',1],
+     ['aircraft','ทะเบียนอากาศยาน (HS-ABC, N123AB ...)',1],['titled_name','ชื่อบุคคลที่มีคำนำหน้า (นาย/นาง/Capt. ...)',0]]},
+   {n:'words',t:'textarea',l:'คำ/ชื่อเฉพาะที่ต้องการปิด (บรรทัดละคำ)',full:1,ph:'สมชาย ใจดี\nบริษัท ABC จำกัด'},
+   {n:'regex',t:'text',l:'Regex เพิ่มเติม (ถ้ามี)',ph:'เช่น VOR-\\d{4}-\\d+'},
+   {n:'mask',t:'select',l:'รูปแบบการปิด',o:[['█','████ (บล็อกดำ)'],['tag','[REDACTED]']]}],
+   note:'PDF จะถูกแปลงเป็นภาพแล้วปิดทึบ (ลบข้อความจริง) · ชื่อบุคคลที่ไม่มีคำนำหน้าให้ใส่ในช่อง "คำเฉพาะ" · ตรวจผลก่อนเผยแพร่ทุกครั้ง'},
+
+ {id:'audio_trim',cat:'media',op:'09',title:'Audio Trim',ico:'✂',cls:'',btn:'',
+  desc:'ตัดแต่งช่วงเสียง (เริ่ม–จบ) จากไฟล์เสียงหรือวิดีโอ',badges:['Web Audio'],
+  accept:'audio/*,video/*',run:'ตัดเสียง',fields:[
+   {n:'start',t:'text',l:'เริ่มที่',ph:'00:01:30 หรือ 90'},{n:'end',t:'text',l:'จบที่',ph:'00:05:00 (เว้นว่าง = ถึงท้าย)'},
+   {n:'fmt',t:'select',l:'ฟอร์แมตผลลัพธ์',o:[['mp3','MP3'],['wav','WAV']],full:1}]},
+ {id:'audio_convert',cat:'media',op:'10',title:'Audio Convert',ico:'🔁',cls:'c-ink',btn:'teal',
+  desc:'แปลงไฟล์เสียงระหว่าง MP3 / WAV',badges:['Web Audio'],bcls:'t',
+  accept:'audio/*,video/*',run:'แปลงไฟล์',fields:[
+   {n:'fmt',t:'select',l:'ฟอร์แมตปลายทาง',o:[['mp3','MP3'],['wav','WAV']],full:1}]},
+ {id:'audio_compress',cat:'media',op:'11',title:'MP3 Squeezer',ico:'🗜',cls:'c-red',btn:'red',
+  desc:'ย่อขนาดไฟล์เสียง/MP3 โดยลดบิตเรตให้เล็กลง เหมาะกับไฟล์บรรยายหรือสัมภาษณ์ที่ยาว',badges:['-70% ได้'],bcls:'r',
+  accept:'audio/*,video/*',run:'ย่อ MP3',fields:[
+   {n:'bitrate',t:'select',l:'คุณภาพ (บิตเรต)',o:[['32','32 kbps — เสียงพูดเล็กสุด'],['64','64 kbps — เสียงพูดชัด'],['96','96 kbps — สมดุล'],['128','128 kbps — มาตรฐาน'],['192','192 kbps — สูง']],v:'96'},
+   {n:'mono',t:'checks',l:'ตัวเลือก',o:[['1','แปลงเป็นโมโน (เล็กลงอีกครึ่ง เหมาะกับเสียงพูด)',0]]}]},
+ {id:'video_mp3',cat:'media',op:'12',title:'Video → MP3',ico:'🎧',cls:'c-gold',btn:'',
+  desc:'ดึงเฉพาะเสียงออกจากวิดีโอสัมภาษณ์/การบรรยายเป็น MP3 โดยไม่ต้องใช้โปรแกรมหนัก',badges:['MP4 · MP3 · WAV'],
+  accept:'video/*,audio/*',run:'ดึงเสียง',fields:[]},
+ {id:'img_resize',cat:'media',op:'13',title:'Bulk Image Resizer',ico:'📐',cls:'c-red',btn:'red',
+  desc:'ย่อรูปหลักฐาน (เช่น ภาพสัตว์ชนอากาศยาน) ทีละมากๆ ให้ได้มาตรฐานเดียวกันก่อนอัปโหลด → ZIP',badges:['Bulk'],bcls:'r',
+  accept:'image/*',multi:true,run:'ย่อรูปทั้งหมด',fields:[
+   {n:'maxside',t:'select',l:'ด้านยาวสุด (px)',o:[['800','800'],['1200','1200'],['1600','1600'],['2048','2048'],['3000','3000']],v:'1600'},
+   {n:'fmt',t:'select',l:'ฟอร์แมต',o:[['jpg','JPG'],['png','PNG']]},
+   {n:'quality',t:'number',l:'คุณภาพ JPG (40–95)',v:85,min:40,max:95,full:1}]},
+];
+
+const $=s=>document.querySelector(s);
+let cat='all',cur=null,picked=[];
+
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function renderTabs(){
+  const items=[['all','▦ All Arsenal'],...Object.entries(CATS)];
+  $('#tabs').innerHTML=items.map(([k,l])=>`<button class="tab ${k===cat?'on':''}" data-k="${k}">${l}</button>`).join('');
+  $('#tabs').onclick=e=>{const b=e.target.closest('.tab');if(b){cat=b.dataset.k;renderTabs();renderGrid()}};
+}
+function renderGrid(){
+  $('#grid').innerHTML=T.filter(t=>cat==='all'||t.cat===cat).map(t=>`
+   <article class="card"><header class="${t.cls}"><span>OP-${t.op} // ${esc(t.title)}</span></header>
+    <div class="body"><div class="ico">${t.ico}</div><div>
+      <div class="badges">${t.badges.map(b=>`<span class="badge ${t.bcls||''}">${esc(b)}</span>`).join('')}</div>
+      <p>${esc(t.desc)}</p></div></div>
+    <footer><button class="btn ${t.btn}" data-id="${t.id}"><span>${esc(t.run)}</span><span>→</span></button></footer></article>`).join('');
+  $('#cnt').textContent=T.length;
+}
+$('#grid').onclick=e=>{const b=e.target.closest('.btn');if(b)openTool(b.dataset.id)};
+
+function fieldHTML(f){
+  const cls=f.full?'full':'';
+  if(f.t==='checks')return `<div class="${cls}"><label class="f">${f.l}</label>${f.o.map(([v,l,c])=>`<label class="chk"><input type="checkbox" name="${f.n}" value="${v}" ${c?'checked':''}>${esc(l)}</label>`).join('')}</div>`;
+  const lab=`<label class="f">${f.l}${f.em?`<em>${f.em}</em>`:''}</label>`;
+  let c='';
+  if(f.t==='select')c=`<select name="${f.n}">${f.o.map(([v,l])=>`<option value="${v}" ${f.v==v?'selected':''}>${esc(l)}</option>`).join('')}</select>`;
+  else if(f.t==='textarea')c=`<textarea name="${f.n}" placeholder="${esc(f.ph||'')}"></textarea>`;
+  else c=`<input type="${f.t}" name="${f.n}" value="${esc(f.v??'')}" placeholder="${esc(f.ph||'')}" ${f.min?`min="${f.min}" max="${f.max}"`:''} autocomplete="off">`;
+  return `<div class="${cls}">${lab}${c}</div>`;
+}
+function fmtSize(b){return b>1048576?(b/1048576).toFixed(1)+' MB':Math.max(1,Math.round(b/1024))+' KB'}
+
+function openTool(id){
+  cur=T.find(t=>t.id===id);picked=[];
+  $('#mt').textContent=`OP-${cur.op} // ${cur.title}`;
+  $('#mi').innerHTML=`
+   <div class="drop" id="drop"><div style="font-size:34px">📥</div><div class="big">วางไฟล์ตรงนี้</div>
+     <small>${cur.multi?'เลือกได้หลายไฟล์ · ':''}ประมวลผลในเครื่อง ไม่มีการอัปโหลดออกภายนอก</small><br>
+     <span class="pick">📂 เลือกไฟล์จากเครื่อง</span>
+     <input type="file" id="fi" hidden accept="${cur.accept}" ${cur.multi?'multiple':''}></div>
+   <div class="files" id="fl"></div>
+   ${cur.fields.length?`<form class="fields" id="ff" onsubmit="return false">${cur.fields.map(fieldHTML).join('')}</form>`:''}
+   ${cur.note?`<div style="font-size:13px;color:#574142">ℹ ${esc(cur.note)}</div>`:''}
+   <div class="status" id="st"></div>
+   <button class="btn red run" id="go"><span>⚡ ${esc(cur.run)}</span></button>`;
+  $('#modal').classList.add('open');document.body.style.overflow='hidden';
+  const d=$('#drop'),fi=$('#fi');
+  d.onclick=()=>fi.click();
+  fi.onchange=()=>{addFiles(fi.files);fi.value=''};
+  d.ondragover=e=>{e.preventDefault();d.classList.add('over')};
+  d.ondragleave=()=>d.classList.remove('over');
+  d.ondrop=e=>{e.preventDefault();d.classList.remove('over');addFiles(e.dataTransfer.files)};
+  $('#go').onclick=run;
+}
+function closeTool(){$('#modal').classList.remove('open');document.body.style.overflow=''}
+$('#mx').onclick=closeTool;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeTool()});
+
+function addFiles(fl){
+  for(const f of fl){picked=cur.multi?[...picked,f]:[f]}
+  renderFiles();
+}
+function renderFiles(){
+  $('#fl').innerHTML=picked.map((f,i)=>`<div class="file"><div style="font-size:22px">📄</div><div class="n"><b>${esc(f.name)}</b><span>${fmtSize(f.size)}</span></div>
+    ${cur.multi&&picked.length>1?`<button class="mini g" data-up="${i}">↑</button><button class="mini g" data-dn="${i}">↓</button>`:''}
+    <button class="mini" data-rm="${i}">Dismiss</button></div>`).join('');
+}
+$('#mi').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-rm],button[data-up],button[data-dn]');if(!b)return;
+  const d=b.dataset;
+  if(d.rm!==undefined)picked.splice(+d.rm,1);
+  if(d.up!==undefined&&+d.up>0){const i=+d.up;[picked[i-1],picked[i]]=[picked[i],picked[i-1]]}
+  if(d.dn!==undefined&&+d.dn<picked.length-1){const i=+d.dn;[picked[i+1],picked[i]]=[picked[i],picked[i+1]]}
+  renderFiles();
+});
+
+async function run(){
+  const st=$('#st'),go=$('#go');
+  if(!picked.length){st.className='status err';st.textContent='กรุณาเลือกไฟล์ก่อน';return}
+  const ff=$('#ff'),form=ff?new FormData(ff):new FormData();
+  go.disabled=true;st.className='status busy';st.textContent='⏳ ลุงไก่กำลังทำงาน... ไฟล์ใหญ่อาจใช้เวลาสักครู่';
+  const prog=m=>{st.className='status busy';st.textContent='⏳ '+m};
+  try{
+    const r=await TOOLS[cur.id](picked,form,prog);
+    const a=document.createElement('a');a.href=URL.createObjectURL(r.blob);a.download=r.name;document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(a.href),8000);
+    st.className='status ok';st.textContent=`✔ เสร็จแล้ว: ${r.name} (${fmtSize(r.blob.size)}) — ดาวน์โหลดอัตโนมัติ`+(r.note?`
+ℹ ${r.note}`:'');
+  }catch(e){console.error(e);st.className='status err';st.textContent='✖ '+(e instanceof UserError?e.message:'เกิดข้อผิดพลาด: '+e.message)}
+  go.disabled=false;
+}
+renderTabs();renderGrid();
+</script>
+</body>
+</html>
