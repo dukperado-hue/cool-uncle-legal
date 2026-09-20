@@ -1,0 +1,485 @@
+{
+  "version": "1.0",
+  "generated": "2026-09-20",
+  "principle": "ทะเบียนแหล่งหลักฐานสำหรับ concept กลุ่ม legal-history (evidence policy เฉพาะวิชา) — ทำให้ทุกข้ออ้างทางประวัติศาสตร์กฎหมายตรวจย้อนกลับได้ถึงหน้าสรุปวิชา (legalhist.html) และแหล่งต้นทางใน NotebookLM (เสียงบรรยาย สไลด์ ตัวบทและตำรา) ห้ามอ้างแหล่งที่ไม่มีในทะเบียนนี้ concept วิชาอื่นไม่ใช้ไฟล์นี้ และยังต้องมีมาตรา+structuralAnchor ตามกฎเดิม",
+  "sourceKinds": {
+    "study-page": "หน้าสรุปวิชาบน coolunclelab.com (legalhist.html) อ้างด้วย locator study:<topicId> ซึ่งต้องมีอยู่จริงใน STUDY_TOPICS ของหน้านั้น",
+    "audio": "เสียงบรรยายในห้องเรียน (NotebookLM media) — ใช้ยืนยันข้ออ้างด้วยการ query แคบ ๆ ทีละเรื่อง",
+    "document": "ตัวบท ตำรา บทความ สไลด์ ที่อัปโหลดใน NotebookLM",
+    "exam-material": "ข้อสอบเก่า/แนวตอบ/เอกสารติว — ใช้ประกอบได้ แต่ไม่นับเป็นหลักฐานยืนยันเพียงลำพัง",
+    "video": "วิดีโอ YouTube ที่ใส่ใน NotebookLM",
+    "web": "หน้าเว็บที่ใส่ใน NotebookLM"
+  },
+  "studyPage": {
+    "id": "legalhist-page",
+    "kind": "study-page",
+    "title": "ห้องซ้อมสอบ ประวัติศาสตร์กฎหมายไทย",
+    "url": "https://coolunclelab.com/legalhist.html",
+    "file": "legalhist.html",
+    "locatorGrammar": "study:<topicId> (topicId = id ใน STUDY_TOPICS)"
+  },
+  "notebook": {
+    "service": "NotebookLM",
+    "id": "c3b7a13c-250b-4156-8daf-ebf0a9017daa",
+    "title": "ประวัติศาสตร์กฎหมายไทย",
+    "sourceCount": 76
+  },
+  "sources": {
+    "nlm-09d4ceb3": {
+      "kind": "document",
+      "title": "\"ระบบกฎหมายซีวิลลอว์\" โดย มุนินทร์ พงศาปาน",
+      "nlmSourceId": "09d4ceb3-80ae-4b15-873b-9829109903f2",
+      "addedToNotebook": "2025-09-04"
+    },
+    "nlm-f8c43d65": {
+      "kind": "audio",
+      "title": "13SEP25",
+      "nlmSourceId": "f8c43d65-723a-445a-817d-40290fc5f880",
+      "addedToNotebook": "2025-09-13"
+    },
+    "nlm-feae3552": {
+      "kind": "document",
+      "title": "14Mousourakis Roman Law, Medieval Jurisprudence and the Rise of the European Ius Commune_Perspectives on the Origins of the Civil Law Tradition.pdf",
+      "nlmSourceId": "feae3552-bbb4-4163-8dd1-5b3f96493760",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-4320d0ba": {
+      "kind": "document",
+      "title": "15Mousourakis_Ch8_Codification.pdf",
+      "nlmSourceId": "4320d0ba-16a0-4538-a223-e9184f2da9f2",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-98257098": {
+      "kind": "audio",
+      "title": "18OCT25 ประวัติศาสตร์ part 1.m4a",
+      "nlmSourceId": "98257098-eaab-40cd-ac1f-297f406ef44c",
+      "addedToNotebook": "2025-10-18"
+    },
+    "nlm-5bf155a2": {
+      "kind": "audio",
+      "title": "18OCT25 ประวัติศาสตร์ part 2.m4a",
+      "nlmSourceId": "5bf155a2-92c6-4887-bb5a-fb32715d8e7f",
+      "addedToNotebook": "2025-10-18"
+    },
+    "nlm-1861fa97": {
+      "kind": "audio",
+      "title": "18OCT25 ประวัติศาสตร์ part 3.m4a",
+      "nlmSourceId": "1861fa97-f8cb-4a02-ac68-e3cb0c6281bd",
+      "addedToNotebook": "2025-10-18"
+    },
+    "nlm-3a56b7ed": {
+      "kind": "exam-material",
+      "title": "20251116_ติววิชา น.362 ประวัติศาสตร์กฏหมายไทย_by พี่เก๋.pdf",
+      "nlmSourceId": "3a56b7ed-e6b4-4998-94c9-59a003b3af62",
+      "addedToNotebook": "2025-11-16"
+    },
+    "nlm-0e904652": {
+      "kind": "audio",
+      "title": "20SEP25 ประวัติศาสตร์กฎหมายไทย 1.m4a",
+      "nlmSourceId": "0e904652-76ac-48ee-8741-80ea54591dbe",
+      "addedToNotebook": "2025-09-20"
+    },
+    "nlm-2d1053aa": {
+      "kind": "audio",
+      "title": "20SEP25 ประวัติศาสตร์กฎหมายไทย 2.m4a",
+      "nlmSourceId": "2d1053aa-a548-4c62-8911-9d32903e2b47",
+      "addedToNotebook": "2025-09-20"
+    },
+    "nlm-6c08c531": {
+      "kind": "audio",
+      "title": "20SEP25 ประวัติศาสตร์กฎหมายไทย 3.m4a",
+      "nlmSourceId": "6c08c531-b55f-412b-b0e9-f924f5b1c477",
+      "addedToNotebook": "2025-09-20"
+    },
+    "nlm-c82a2a06": {
+      "kind": "audio",
+      "title": "22NOV25 ประวัติศาสตร์ ครึ่งหลัง.m4a",
+      "nlmSourceId": "c82a2a06-9740-41d2-bf75-4709847b9e34",
+      "addedToNotebook": "2025-11-22"
+    },
+    "nlm-81429fdb": {
+      "kind": "audio",
+      "title": "22NOV25 ประวัติศาสตร์ ครึ่งแรก.m4a",
+      "nlmSourceId": "81429fdb-17ca-4247-9857-de5c87eabbcd",
+      "addedToNotebook": "2025-11-22"
+    },
+    "nlm-63b524fc": {
+      "kind": "document",
+      "title": "2475 10.PDF",
+      "nlmSourceId": "63b524fc-d24f-46de-ab5a-c8f7787d790a",
+      "addedToNotebook": "2025-10-18"
+    },
+    "nlm-d5ea61b0": {
+      "kind": "document",
+      "title": "2489.PDF",
+      "nlmSourceId": "d5ea61b0-f2e4-4936-afee-425bc4daa1b2",
+      "addedToNotebook": "2025-10-18"
+    },
+    "nlm-fa7f9e23": {
+      "kind": "document",
+      "title": "2490.PDF",
+      "nlmSourceId": "fa7f9e23-a0c8-4479-8037-2f34db82b5e5",
+      "addedToNotebook": "2025-10-18"
+    },
+    "nlm-39ae12ff": {
+      "kind": "document",
+      "title": "2492.PDF",
+      "nlmSourceId": "39ae12ff-82eb-4495-8df1-08b25663a2be",
+      "addedToNotebook": "2025-10-18"
+    },
+    "nlm-f34ba2ae": {
+      "kind": "document",
+      "title": "2508ModernEra to Codification.pdf",
+      "nlmSourceId": "f34ba2ae-d9cb-41c3-905f-a5b8297465ef",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-152eb065": {
+      "kind": "document",
+      "title": "2508RomanLaw to Middle Ages.pdf",
+      "nlmSourceId": "152eb065-8f8f-47a7-993e-8312219566db",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-6cd64e97": {
+      "kind": "audio",
+      "title": "25OCT25 ประวัติศาสตร์ ก่อนพัก.m4a",
+      "nlmSourceId": "6cd64e97-ed0e-4c91-a6fc-93ceb625279e",
+      "addedToNotebook": "2025-10-25"
+    },
+    "nlm-c02fceb2": {
+      "kind": "audio",
+      "title": "25OCT25 ประวัติศาสตร์ หลังพัก.m4a",
+      "nlmSourceId": "c02fceb2-894e-48bd-85a4-c8e80cdcf054",
+      "addedToNotebook": "2025-10-25"
+    },
+    "nlm-de237917": {
+      "kind": "document",
+      "title": "5+บทความ_ปูนเทพ+ศิรินุพงศ์.pdf",
+      "nlmSourceId": "de237917-3454-4493-911b-7062afd5cdf0",
+      "addedToNotebook": "2025-10-26"
+    },
+    "nlm-523cff11": {
+      "kind": "document",
+      "title": "Annotated Civil Code of japan.pdf",
+      "nlmSourceId": "523cff11-9365-4ec3-96a6-50371861b104",
+      "addedToNotebook": "2025-11-22"
+    },
+    "nlm-46123feb": {
+      "kind": "video",
+      "title": "Introduction to Ancient Roman Law - Nova Roma Presentation Series",
+      "nlmSourceId": "46123feb-5e90-4c6b-bfd3-08ef23f3b8f9",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-ff22ec72": {
+      "kind": "document",
+      "title": "LA362 เค้าโครง มคอ.3_2568-ภาคบัณฑิต แก้ไข.pdf",
+      "nlmSourceId": "ff22ec72-f7eb-4388-ba5b-a52a565fb033",
+      "addedToNotebook": "2025-09-09"
+    },
+    "nlm-7f69f3d0": {
+      "kind": "document",
+      "title": "LA362-No4-modernisation of Thai law.pdf",
+      "nlmSourceId": "7f69f3d0-0343-4b49-b14f-6fd3161d7754",
+      "addedToNotebook": "2025-11-22"
+    },
+    "nlm-78a007b2": {
+      "kind": "video",
+      "title": "The Spirit of Roman Law",
+      "nlmSourceId": "78a007b2-d836-4c7e-836f-d67768ea3fb3",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-fbcf840c": {
+      "kind": "video",
+      "title": "[PSU LAW] ปาฐกถาพิเศษ “100 ปี ประมวลกฎหมายแพ่งและพาณิชย์: อดีต ปัจจุบัน อนาคต\"",
+      "nlmSourceId": "fbcf840c-a590-46f4-8b42-804d11b57e12",
+      "addedToNotebook": "2026-08-03"
+    },
+    "nlm-03d3cb42": {
+      "kind": "document",
+      "title": "กฎมณเฑียรบาล.PDF",
+      "nlmSourceId": "03d3cb42-246f-4967-9ac0-4c1c0f430e62",
+      "addedToNotebook": "2025-10-25"
+    },
+    "nlm-608ae7a6": {
+      "kind": "document",
+      "title": "กฎหมายตราสามดวง เล่ม 1",
+      "nlmSourceId": "608ae7a6-83c7-4f71-9a82-dc3847ed333c",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-d6c923b2": {
+      "kind": "document",
+      "title": "กฎหมายตราสามดวง เล่ม 2",
+      "nlmSourceId": "d6c923b2-d546-495b-9223-6aa887671598",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-c49b6dd3": {
+      "kind": "document",
+      "title": "กฎหมายตราสามดวง เล่ม 3",
+      "nlmSourceId": "c49b6dd3-7f11-4856-9f1f-7e852415dd93",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-2393074a": {
+      "kind": "document",
+      "title": "กระบวนพิจารณาคดีในกฎหมายตราสามดวง 4.9.68.pdf",
+      "nlmSourceId": "2393074a-9422-41b3-bb66-b85bc542c090",
+      "addedToNotebook": "2025-09-06"
+    },
+    "nlm-d41e9478": {
+      "kind": "exam-material",
+      "title": "ข้อสอบน.362 ประวัติศาสตร์กฎหมายไทย กิตติคุณ กฤษฎา",
+      "nlmSourceId": "d41e9478-97bb-4382-b52a-fb7c8c818937",
+      "addedToNotebook": "2025-09-03"
+    },
+    "nlm-8da7ff6b": {
+      "kind": "exam-material",
+      "title": "ข้อสอบน.362 ประวัติศาสตร์กฎหมายไทย ปลายภาค กฤษฎา",
+      "nlmSourceId": "8da7ff6b-5763-4fd5-b7f8-c02cc6419faf",
+      "addedToNotebook": "2025-09-03"
+    },
+    "nlm-83aed198": {
+      "kind": "exam-material",
+      "title": "ข้อสอบน.362 ประวัติศาสตร์กฎหมายไทย ปลายภาค มุนินท์ ปูนเทพ",
+      "nlmSourceId": "83aed198-85d3-4c3a-9b97-3ef30a0a584e",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-80295773": {
+      "kind": "exam-material",
+      "title": "ข้อสอบน.362 ประวัติศาสตร์กฎหมายไทย มุนินท์ กฤษฎา",
+      "nlmSourceId": "80295773-2f6b-4128-bf64-702e239ee63d",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-a10f8dc1": {
+      "kind": "exam-material",
+      "title": "ข้อสอบเก่าน.362 ประวัติศาสตร์กฎหมายไทย 1 ปลายภาค",
+      "nlmSourceId": "a10f8dc1-df75-4325-ba20-842afa662700",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-82752fe1": {
+      "kind": "exam-material",
+      "title": "ข้อสอบเก่าน.362 ประวัติศาสตร์กฎหมายไทย 10",
+      "nlmSourceId": "82752fe1-0721-4061-8af3-6798f466d1c3",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-d0e9641a": {
+      "kind": "exam-material",
+      "title": "ข้อสอบเก่าน.362 ประวัติศาสตร์กฎหมายไทย 11",
+      "nlmSourceId": "d0e9641a-3770-469e-9803-58c22feff9f8",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-cfc310fd": {
+      "kind": "exam-material",
+      "title": "ข้อสอบเก่าน.362 ประวัติศาสตร์กฎหมายไทย 12",
+      "nlmSourceId": "cfc310fd-78a1-4d2f-97ae-1d2d563a2730",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-9a47a35a": {
+      "kind": "exam-material",
+      "title": "ข้อสอบเก่าน.362 ประวัติศาสตร์กฎหมายไทย 13",
+      "nlmSourceId": "9a47a35a-f916-45a3-aa32-fc33ea56795f",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-483dc987": {
+      "kind": "exam-material",
+      "title": "ข้อสอบเก่าน.362 ประวัติศาสตร์กฎหมายไทย 14",
+      "nlmSourceId": "483dc987-3356-4dba-a57d-27e3918fc49a",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-7593e5df": {
+      "kind": "exam-material",
+      "title": "ข้อสอบเก่าน.362 ประวัติศาสตร์กฎหมายไทย 2",
+      "nlmSourceId": "7593e5df-6de1-450f-87bb-2902cd743dae",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-b4a0dc42": {
+      "kind": "exam-material",
+      "title": "ข้อสอบเก่าน.362 ประวัติศาสตร์กฎหมายไทย 3 ปลายภาค",
+      "nlmSourceId": "b4a0dc42-32ea-4737-9bda-53b67d40dcf6",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-70c26b35": {
+      "kind": "exam-material",
+      "title": "ข้อสอบเก่าน.362 ประวัติศาสตร์กฎหมายไทย 4 ปลายภาค",
+      "nlmSourceId": "70c26b35-8d4f-41ff-8efb-bf700bc26976",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-671afe07": {
+      "kind": "exam-material",
+      "title": "ข้อสอบเก่าน.362 ประวัติศาสตร์กฎหมายไทย 5",
+      "nlmSourceId": "671afe07-0f3b-4cea-aa5a-4c68648e62c3",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-f76e7e10": {
+      "kind": "exam-material",
+      "title": "ข้อสอบเก่าน.362 ประวัติศาสตร์กฎหมายไทย 6 ปลายภาค",
+      "nlmSourceId": "f76e7e10-ee92-4d51-844d-0da97a075593",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-41e09388": {
+      "kind": "exam-material",
+      "title": "ข้อสอบเก่าน.362 ประวัติศาสตร์กฎหมายไทย 7 ปลายภาค",
+      "nlmSourceId": "41e09388-defc-47b1-8ca8-330880b82796",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-112606b1": {
+      "kind": "exam-material",
+      "title": "ข้อสอบเก่าน.362 ประวัติศาสตร์กฎหมายไทย 8 ปลายภาค",
+      "nlmSourceId": "112606b1-cabd-4da6-bd19-3ccb24143e4a",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-64f98586": {
+      "kind": "exam-material",
+      "title": "ข้อสอบเก่าน.362 ประวัติศาสตร์กฎหมายไทย 9 แก้ตัว 65",
+      "nlmSourceId": "64f98586-28c5-4ed3-80d5-0466efc00e8f",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-1ee817b6": {
+      "kind": "document",
+      "title": "คาบ ๑-อ กฤษฎา-ปวศ กม ไทย น. ๓๖๒ กม สุโขทัย-อยุธ.pdf",
+      "nlmSourceId": "1ee817b6-dc41-4797-ba48-194f9fc3a31b",
+      "addedToNotebook": "2025-09-13"
+    },
+    "nlm-fc3a1635": {
+      "kind": "document",
+      "title": "คาบ ๒-อ กฤษฎา-ปวศ กม ไทย น. ๓๖๒ สัญญาบาวริง กม .pdf",
+      "nlmSourceId": "fc3a1635-fd97-4830-a8be-d2eb3d5c9433",
+      "addedToNotebook": "2025-09-20"
+    },
+    "nlm-da6a77a7": {
+      "kind": "exam-material",
+      "title": "ช้อสอบ น.362 ประวัติศาสตร์กฎหมายไทย ฐาปนันท์ มุนนินท์ ลำปาง รวม",
+      "nlmSourceId": "da6a77a7-eb4c-4f5f-97dd-30499d326e1d",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-449b6fe6": {
+      "kind": "document",
+      "title": "ตั้งผู้สำเร็จราชการ.PDF",
+      "nlmSourceId": "449b6fe6-e657-480b-820d-5f505d5ad9ba",
+      "addedToNotebook": "2025-10-18"
+    },
+    "nlm-44d33d6e": {
+      "kind": "document",
+      "title": "ตั้งรัชทายาท.PDF",
+      "nlmSourceId": "44d33d6e-1fb7-4d59-83b1-3282398d973d",
+      "addedToNotebook": "2025-10-18"
+    },
+    "nlm-eb700f09": {
+      "kind": "video",
+      "title": "บรรยายประวัติศาสตร์ไทย - ดร.วิษณุ เครืองาม",
+      "nlmSourceId": "eb700f09-dc1c-483f-9565-d22f063dc9fb",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-920dbd74": {
+      "kind": "document",
+      "title": "ประวัติศาสตร์กฎหมายมหาชนไทย 2 - 68.pdf",
+      "nlmSourceId": "920dbd74-171c-4cf2-8d2e-339a7c4dc343",
+      "addedToNotebook": "2025-10-18"
+    },
+    "nlm-594f675d": {
+      "kind": "document",
+      "title": "ประวัติศาสตร์กฎหมายมหาชนไทย ๑.pdf",
+      "nlmSourceId": "594f675d-3b48-475d-8a91-51ee71c798bc",
+      "addedToNotebook": "2025-10-25"
+    },
+    "nlm-df842893": {
+      "kind": "document",
+      "title": "ประวัติศาสตร์กฎหมายไทย",
+      "nlmSourceId": "df842893-ee5a-46d3-98e5-3d7f7f9d097b",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-6a8452ba": {
+      "kind": "document",
+      "title": "พรบ ธรรมนูญแผ่นดิน 2475.PDF",
+      "nlmSourceId": "6a8452ba-a9ef-4db9-a3f0-7114989e466f",
+      "addedToNotebook": "2025-10-18"
+    },
+    "nlm-6f43f506": {
+      "kind": "document",
+      "title": "พรบ ธรรมนูญแผ่นดิน 2475.PDF",
+      "nlmSourceId": "6f43f506-c010-4991-93af-0d48404004d4",
+      "addedToNotebook": "2025-10-25"
+    },
+    "nlm-8a16c441": {
+      "kind": "document",
+      "title": "พระราชบัญญัติรัฐมนตรี.PDF",
+      "nlmSourceId": "8a16c441-b85a-4692-9ed8-e52896280dcf",
+      "addedToNotebook": "2025-10-18"
+    },
+    "nlm-dfd16ea3": {
+      "kind": "document",
+      "title": "พระราชบัญญัติรัฐมนตรี.PDF",
+      "nlmSourceId": "dfd16ea3-1cfc-4e8a-bc7f-630d8b98747a",
+      "addedToNotebook": "2025-10-25"
+    },
+    "nlm-06adab8a": {
+      "kind": "document",
+      "title": "พระราชบัญญัติองคมนตรี.PDF",
+      "nlmSourceId": "06adab8a-841a-47a1-bb36-c289a710c16b",
+      "addedToNotebook": "2025-10-18"
+    },
+    "nlm-90167f8e": {
+      "kind": "document",
+      "title": "พระราชบัญญัติองคมนตรี.PDF",
+      "nlmSourceId": "90167f8e-5118-48ca-8149-c598a94551c6",
+      "addedToNotebook": "2025-10-25"
+    },
+    "nlm-da52c150": {
+      "kind": "web",
+      "title": "สรุปสาระสำคัญจากเสวนาวิชาการเนื่องในโอกาสครบรอบ 130 ปี พระยามานวราชเสวี (ปลอด วิเชียร ณ สงขลา) หัวข้อ “มรดกของพระยามานวราชเสวีในระบบกฎหมายไทย” - Faculty of Law | Thammasat University",
+      "nlmSourceId": "da52c150-a744-42b4-be7c-091968fec77c",
+      "addedToNotebook": "2025-11-22"
+    },
+    "nlm-20293e57": {
+      "kind": "document",
+      "title": "สุทธิวาสนฤพุฒิ.pdf",
+      "nlmSourceId": "20293e57-d321-4cc7-91bc-080b228b91ef",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-99867438": {
+      "kind": "document",
+      "title": "หนังสือจดหมายเหตุ_เล่มที่_1_(หลัง)_ใบที่_16_ส่วนที่_1.pdf",
+      "nlmSourceId": "99867438-5e53-4f73-bb54-581ebaea19f6",
+      "addedToNotebook": "2025-10-25"
+    },
+    "nlm-ab3ff06f": {
+      "kind": "document",
+      "title": "หนังสือจดหมายเหตุ_เล่มที่_1_(หลัง)_ใบที่_16_ส่วนที่_1.pdf",
+      "nlmSourceId": "ab3ff06f-3e12-4a1a-9ef9-01727bf1d345",
+      "addedToNotebook": "2025-10-18"
+    },
+    "nlm-50914b9d": {
+      "kind": "document",
+      "title": "เล้กเชอร์ รพี.pdf",
+      "nlmSourceId": "50914b9d-507e-49df-ad04-70c32622bd3d",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-4a2d3d22": {
+      "kind": "document",
+      "title": "เอกสาร LAW1106.pdf",
+      "nlmSourceId": "4a2d3d22-a5d0-474d-a0c3-5327b4ff9882",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-84608ac7": {
+      "kind": "exam-material",
+      "title": "แนวการตอบ ปวศ กฎหมาย.pdf",
+      "nlmSourceId": "84608ac7-04be-4cfe-8d8f-c0a32135fd27",
+      "addedToNotebook": "2025-09-03"
+    },
+    "nlm-9717e3be": {
+      "kind": "document",
+      "title": "แลงการ์ เล่ม 1.pdf",
+      "nlmSourceId": "9717e3be-95c5-45e9-a56e-996d3abbf8d2",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-3a357aa9": {
+      "kind": "document",
+      "title": "แลงการ์ เล่ม 2.pdf",
+      "nlmSourceId": "3a357aa9-4436-4b2c-a129-22e2ee777fea",
+      "addedToNotebook": "2025-09-01"
+    },
+    "nlm-ea4ffe10": {
+      "kind": "document",
+      "title": "ไล่ ปวศ ตาม คศ.pdf",
+      "nlmSourceId": "ea4ffe10-997e-4baf-9a88-ee3b1decd105",
+      "addedToNotebook": "2025-09-03"
+    }
+  }
+}

@@ -17,6 +17,15 @@ const corpus = JSON.parse(fs.readFileSync(path.join(ROOT, 'codex-data.json'), 'u
 AtlasCore.setRegistry(registry);
 AtlasCore.attachCorpus(corpus);
 
+// Legal-history evidence policy (atlas-legal-history-policy.js). policyOK(c) is the
+// ONLY route to the "no provisions / no structuralAnchor / empty subjectAreas"
+// exemption below; it is true only for a concept that carries the opt-in marker AND
+// passes every policy check. Everything else is judged by the original rules.
+const LHP = require(path.join(ROOT, 'atlas-legal-history-policy.js'));
+const HIST_REG = JSON.parse(fs.readFileSync(path.join(ROOT, 'atlas-historical-sources.json'), 'utf8'));
+const LH_CTX = LHP.makeContext(HIST_REG, fs.readFileSync(path.join(ROOT, 'legalhist.html'), 'utf8'));
+const policyOK = c => LHP.qualifies(c, LH_CTX);
+
 let pass = 0, fail = 0;
 function ok(name, cond, detail) {
   if (cond) { pass++; console.log('  PASS  ' + name + (detail ? '  — ' + detail : '')); }
@@ -744,7 +753,7 @@ head('Phase 1 — Legal Concept layer contract (golden sample: ละเมิ�
     // still resolve correctly (checked separately, near the end of this file).
     ok(T + ' has the universal fields (titleTH,status,subjectAreas,definition,summary,sources,authoring)',
        !!(c.titleTH && c.status && Array.isArray(c.subjectAreas) &&
-          (c.status !== 'published' || c.subjectAreas.length) &&
+          (c.status !== 'published' || c.subjectAreas.length || policyOK(c)) &&
           c.definition && typeof c.definition.text === 'string' && typeof c.summary === 'string' &&
           Array.isArray(c.sources) && c.authoring));
     ok(T + ' subjectAreas resolve to the registry taxonomy',
@@ -1025,8 +1034,9 @@ head('Finalization 3 — Encyclopedia (discovery layer over the Concept layer)')
        const c = cdoc.concepts[k];
        return typeof c.definition.text === 'string' && c.definition.text.length >= 40 &&
               Array.isArray(c.sections) && c.sections.length >= 1 &&
-              Array.isArray(c.provisions) && c.provisions.length >= 1 &&
-              Array.isArray(c.structuralAnchor) && c.structuralAnchor.length >= 1;
+              // legal-history exemption: only via policyOK (marker + full evidence check)
+              Array.isArray(c.provisions) && (c.provisions.length >= 1 || policyOK(c)) &&
+              Array.isArray(c.structuralAnchor) && (c.structuralAnchor.length >= 1 || policyOK(c));
      }),
      published.join(', '));
   ok('F3 latin[] where present is an array of non-empty strings (curated, not auto-translated)',
@@ -1741,6 +1751,78 @@ head('F8 — Related concept integrity + inbound surfacing');
   ok('atlas-concepts.js renders subjectTags via the shared module on both the entry head and directory listing, with a subjectAreas fallback',
      (cptSrc.match(/AtlasSubjectTags\.renderInto/g) || []).length === 2 &&
      /atlas-concept-area-chip/.test(cptSrc));
+})();
+
+// ============================================================================
+// PART 4 — Legal-history evidence policy (atlas-legal-history-policy.js)
+// The exemption from "cite a มาตรา + structuralAnchor" is opt-in, subject-specific
+// and evidence-checked. These checks prove it cannot leak to any other concept.
+// ============================================================================
+(function legalHistoryPolicy() {
+  head('Legal-history evidence policy — subject-specific, opt-in, evidence-checked');
+  const cdoc = JSON.parse(fs.readFileSync(path.join(ROOT, 'atlas-concepts.json'), 'utf8'));
+  const all = Object.entries(cdoc.concepts || {});
+
+  // registry integrity
+  const srcs = HIST_REG.sources || {};
+  const ids = Object.keys(srcs);
+  ok('H0 historical source registry: every source has a known kind + a NotebookLM source id',
+     ids.length > 0 && ids.every(k => (HIST_REG.sourceKinds || {})[srcs[k].kind] && /^[0-9a-f-]{36}$/.test(srcs[k].nlmSourceId || '')),
+     ids.length + ' sources');
+  ok('H0 registry ids are unique and match nlm-<first 8 of the NotebookLM id>',
+     ids.every(k => k === 'nlm-' + srcs[k].nlmSourceId.slice(0, 8)) && new Set(ids.map(k => srcs[k].nlmSourceId)).size === ids.length);
+  ok('H0 registry names the notebook and the study page; the page file exists and exposes its STUDY_TOPICS ids',
+     !!(HIST_REG.notebook && HIST_REG.notebook.id) && HIST_REG.studyPage && HIST_REG.studyPage.file === 'legalhist.html' &&
+     LH_CTX.topicIds.length >= 8 && LH_CTX.topicIds.indexOf('roman') !== -1,
+     LH_CTX.topicIds.join(','));
+
+  // the exemption never leaks: every published concept lacking provisions/anchor/areas must be policy-qualified
+  const leaks = all.filter(([, c]) => c.status === 'published' && (
+    !(c.provisions || []).length || !(c.structuralAnchor || []).length || !(c.subjectAreas || []).length) && !policyOK(c)).map(([s]) => s);
+  ok('H1 no published concept is missing provisions / structuralAnchor / subjectAreas unless it qualifies under the policy',
+     leaks.length === 0, leaks.join(', ') || 'none');
+
+  // marked concepts must each pass the whole policy
+  const marked = all.filter(([, c]) => LHP.isMarked(c));
+  marked.forEach(([slug, c]) => {
+    const probs = LHP.check(c, LH_CTX);
+    ok('H2 legal-history concept[' + slug + '] passes the evidence policy', probs.length === 0,
+       probs.map(p => p.code + ': ' + p.message).join(' | ') || 'ok');
+  });
+  ok('H2 historicalEvidence never appears without the evidencePolicy marker',
+     all.filter(([, c]) => LHP.stray(c)).length === 0, all.filter(([, c]) => LHP.stray(c)).map(([s]) => s).join(', ') || 'none');
+  ok('H2 the marker is only on published concepts tagged legal-history (seeds and other subjects cannot opt in)',
+     marked.every(([, c]) => c.status === 'published' && (c.subjectTags || []).indexOf('legal-history') !== -1));
+
+  // the schema lint itself: it must reject the shortcuts it exists to prevent
+  const good = {
+    status: 'published', evidencePolicy: 'legal-history', subjectTags: ['legal-history'],
+    authoring: { provenance: 'x' },
+    historicalEvidence: {
+      type: 'doctrine',
+      basis: [{ source: 'legalhist-page', locator: 'study:roman', label: 'p' }, { source: ids.find(k => srcs[k].kind === 'audio'), locator: '00:00', label: 'a' }],
+      verification: { method: 'notebooklm-audio', notebook: HIST_REG.notebook.id, date: '2026-09-20', query: 'narrow verification query' },
+    },
+  };
+  const mut = f => { const c = JSON.parse(JSON.stringify(good)); f(c); return LHP.check(c, LH_CTX).length; };
+  ok('H3 policy: a complete fixture passes', LHP.check(good, LH_CTX).length === 0, JSON.stringify(LHP.check(good, LH_CTX)));
+  ok('H3 policy: rejects a missing marker', LHP.qualifies(Object.assign({}, good, { evidencePolicy: undefined }), LH_CTX) === false);
+  ok('H3 policy: rejects other-subject concept (no legal-history tag)', mut(c => { c.subjectTags = ['criminal']; }) > 0);
+  ok('H3 policy: rejects a seed', mut(c => { c.status = 'seed'; }) > 0);
+  ok('H3 policy: rejects an unresolved study topic', mut(c => { c.historicalEvidence.basis[0].locator = 'study:nope'; }) > 0);
+  ok('H3 policy: rejects an unregistered source', mut(c => { c.historicalEvidence.basis[1].source = 'nlm-deadbeef'; }) > 0);
+  ok('H3 policy: rejects exam-material as the only NotebookLM evidence', (() => {
+    const ex = ids.find(k => srcs[k].kind === 'exam-material');
+    return !ex || mut(c => { c.historicalEvidence.basis[1].source = ex; c.historicalEvidence.verification.method = 'notebooklm-document'; }) > 0;
+  })());
+  ok('H3 policy: rejects audio verification with no audio basis', (() => {
+    const doc = ids.find(k => srcs[k].kind === 'document');
+    return mut(c => { c.historicalEvidence.basis[1].source = doc; }) > 0;
+  })());
+  ok('H3 policy: rejects missing verification / wrong notebook / unknown type', mut(c => { delete c.historicalEvidence.verification; }) > 0 &&
+     mut(c => { c.historicalEvidence.verification.notebook = 'other'; }) > 0 && mut(c => { c.historicalEvidence.type = 'statute'; }) > 0);
+  ok('H3 policy: a concept with a bad policy body gets NO exemption (falls back to the original rules)',
+     LHP.qualifies(Object.assign({}, good, { historicalEvidence: { type: 'doctrine', basis: [] } }), LH_CTX) === false);
 })();
 
 console.log('\n----------------------------------------');

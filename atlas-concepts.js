@@ -492,6 +492,34 @@
     return sec;
   }
 
+  // Legal-history concepts (evidencePolicy "legal-history", see
+  // atlas-legal-history-policy.js) have no มาตรา, so the "cases that cite these
+  // provisions" block is replaced by the traceable historical evidence instead.
+  // Guarded by the marker: every other concept renders exactly as before.
+  var HIST_TYPE_TH = {
+    'person': 'บุคคลสำคัญ', 'doctrine': 'หลักกฎหมาย / doctrine', 'source-of-law': 'แหล่งที่มาของกฎหมาย',
+    'institution': 'สถาบันหรือระบบกฎหมาย', 'document': 'เอกสาร/กฎหมายประวัติศาสตร์',
+    'development': 'เหตุการณ์หรือพัฒนาการทางกฎหมาย'
+  };
+  function renderHistoricalEvidence(concept) {
+    var h = concept.historicalEvidence;
+    if (concept.evidencePolicy !== 'legal-history' || !h) return null;
+    var sec = el('section', 'atlas-concept-section atlas-concept-histevidence');
+    append(sec, el('h2', 'atlas-concept-section-title', 'หลักฐานทางประวัติศาสตร์กฎหมาย'));
+    append(sec, el('p', 'atlas-concept-body', 'ประเภท: ' + (HIST_TYPE_TH[h.type] || h.type || '')));
+    var ul = el('ul', 'atlas-concept-source-list');
+    (h.basis || []).forEach(function (b) {
+      var li = el('li', 'atlas-concept-source');
+      li.textContent = (b.label || b.source || '') + (b.locator ? ' (' + b.locator + ')' : '');
+      append(ul, li);
+    });
+    append(sec, ul);
+    var v = h.verification;
+    if (v) append(sec, el('p', 'atlas-concept-body',
+      'ตรวจยืนยันกับ NotebookLM (' + (v.method || '') + ') เมื่อ ' + (v.date || '') + ': ' + (v.query || '')));
+    return sec;
+  }
+
   function renderInto(rootEl, slug) {
     if (!rootEl) return false;
     var concept = getConcept(slug);
@@ -589,7 +617,12 @@
     var provList = renderProvisionsList(concept);
     if (provList) append(art, provList);
 
-    append(art, renderCases(concept));
+    if (concept.evidencePolicy === 'legal-history') {
+      var histEv = renderHistoricalEvidence(concept);
+      if (histEv) append(art, histEv);
+    } else {
+      append(art, renderCases(concept));
+    }
 
     var related = renderRelated(concept);
     if (related) append(art, related);
