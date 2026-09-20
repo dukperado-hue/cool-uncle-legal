@@ -44091,61 +44091,326 @@
       "id": "atlas:concept/seed-0436",
       "slug": "seed-0436",
       "titleTH": "กฎหมายสิบสองโต๊ะ (Twelve Tables)",
-      "titleEN": "",
+      "titleEN": "The Twelve Tables (c. 450 BC)",
       "aliases": [],
-      "latin": [],
+      "latin": [
+        "Twelve Tables",
+        "Lex Duodecim Tabularum",
+        "usucapio"
+      ],
       "subjectAreas": [],
       "subjectTags": [
         "legal-history"
       ],
-      "status": "seed",
-      "summary": "",
+      "status": "published",
+      "summary": "กฎหมายสิบสองโต๊ะตราขึ้นราว 450–451 ปีก่อนคริสตกาล เป็นกฎหมายลายลักษณ์อักษรฉบับแรกของโรม เกิดจากการเรียกร้องของชนชั้นสามัญ (เพลเบียน) ให้บันทึกจารีตที่ชนชั้นสูง (แพทริเชียน) ผูกขาดการตีความ เนื้อหายังสะท้อนความเหลื่อมล้ำทางชนชั้น และมีหลัก usucapio อยู่ในโต๊ะที่ 6",
       "definition": {
-        "text": ""
+        "text": "กฎหมายสิบสองโต๊ะเป็นกฎหมายลายลักษณ์อักษรฉบับแรกของโรม ตราขึ้นราว 450–451 ปีก่อนคริสตกาล จากการเรียกร้องของชนชั้นสามัญ (เพลเบียน) ให้นำกฎหมายจารีตที่ชนชั้นสูง (แพทริเชียน) ผูกขาดทั้งการบริหาร การออกกฎหมาย และการชี้ขาดคดี มาบันทึกเป็นลายลักษณ์อักษรอย่างเปิดเผย และจัดเป็น Lex ซึ่งเป็นหนึ่งในแหล่งที่มาของกฎหมายโรมัน",
+        "needsSourceVerification": false
       },
       "structuralAnchor": [],
-      "sections": [],
+      "sections": [
+        {
+          "key": "origin",
+          "kind": "generic",
+          "label": "ที่มา",
+          "items": [
+            {
+              "label": "เวลาและสาเหตุ",
+              "text": "ตราขึ้นราว 450–451 ปีก่อนคริสตกาล จากความเหลื่อมล้ำทางสังคมที่พวกแพทริเชียนผูกขาดการบริหาร การออกกฎหมาย และการชี้ขาดคดี ทำให้พวกเพลเบียนเรียกร้องให้บันทึกกฎหมายจารีตเป็นลายลักษณ์อักษรที่เปิดเผย"
+            },
+            {
+              "label": "กฎหมายลายลักษณ์อักษรฉบับแรกของโรม",
+              "text": "ตำราที่ตรวจระบุตรงกันว่าเป็นกฎหมายลายลักษณ์อักษรฉบับแรกของชาวโรม"
+            }
+          ]
+        },
+        {
+          "key": "form",
+          "kind": "generic",
+          "label": "รูปแบบการจารึกและเผยแพร่",
+          "items": [
+            {
+              "label": "12 แผ่น ตั้งในที่สาธารณะ",
+              "text": "ตำราและวิดีโอที่ตรวจระบุว่าเป็นแผ่นทองแดงหรือบรอนซ์ (ทองสัมฤทธิ์) 12 แผ่น ตั้งไว้ในที่สาธารณะกลางเมือง/ตลาด"
+            },
+            {
+              "label": "หมายเหตุด้านหลักฐาน: เสียงบรรยายพูดต่างจากเอกสาร",
+              "text": "เสียงบรรยายในห้องเรียน (18OCT25 ประวัติศาสตร์ part 2) อธิบายว่าเป็นแผ่นหิน 12 แผ่นโดยโยงกับคำว่า table/tablet/tabula นำไปติดประกาศกลางตลาด ขณะที่เอกสารและวิดีโอหลายแหล่งระบุทองแดง/บรอนซ์ ข้อความนี้ใช้ตามเอกสารและบันทึกความต่างไว้"
+            }
+          ]
+        },
+        {
+          "key": "content",
+          "kind": "generic",
+          "label": "เนื้อหาที่สะท้อนความเหลื่อมล้ำ และหลัก usucapio",
+          "items": [
+            {
+              "label": "สิทธิเจ้าหนี้เหนือตัวลูกหนี้ (โต๊ะที่ 2-3)",
+              "text": "ตำราระบุว่ารับรองสิทธิของเจ้าหนี้เหนือเนื้อตัวร่างกายของลูกหนี้ ซึ่งอาจถูกนำไปขายเป็นทาสหรือถูกฆ่าได้"
+            },
+            {
+              "label": "ห้ามแต่งงานข้ามชนชั้น (โต๊ะที่ 11-12)",
+              "text": "ตำราระบุว่ามีบทบัญญัติห้ามบุคคลต่างชนชั้นแต่งงานกัน"
+            },
+            {
+              "label": "Usucapio (โต๊ะที่ 6)",
+              "text": "ครอบครองต่อเนื่อง 2 ปีสำหรับที่ดิน และ 1 ปีสำหรับทรัพย์อื่น เป็นหลักการครอบครองปรปักษ์ของโรมันตามที่ 2508RomanLaw ระบุ"
+            }
+          ]
+        }
+      ],
       "provisions": [],
       "featuredCases": [],
-      "sources": [],
+      "sources": [
+        {
+          "kind": "historical",
+          "text": "กฎหมายสิบสองโต๊ะ — ตรวจยืนยัน 6/6 ข้อในเอกสาร; เสียงบรรยายยืนยันเฉพาะการติดประกาศ 12 แผ่นกลางตลาด และพูดต่างในเรื่องวัสดุ (หิน)",
+          "via": "NotebookLM notebook ประวัติศาสตร์กฎหมายไทย (c3b7a13c)"
+        },
+        {
+          "kind": "historical",
+          "text": "หน้าสรุปวิชา ประวัติศาสตร์กฎหมายไทย หัวข้อ 1. กฎหมายโรมัน (ระบุแผ่นทองแดง สอดคล้องกับเอกสาร)",
+          "via": "https://coolunclelab.com/legalhist.html"
+        }
+      ],
       "authoring": {
-        "provenance": "นำเข้าเป็นคำศัพท์ตั้งต้น (seed) จากรายการคำศัพท์ประจำรายวิชาที่ผู้ใช้จัดทำไว้ เพื่อขยายฐานคำศัพท์ของสารานุกรม — ยังไม่ได้เขียนคำอธิบาย ยังไม่มีมาตรา คดี หรือความสัมพันธ์ใด ๆ ที่ยืนยันแล้ว",
+        "provenance": "เรียบเรียงจากเอกสารและตำราใน NotebookLM (ตรวจทีละข้ออ้าง ยืนยัน/ขัดแย้ง/ไม่พบ เมื่อ 2026-09-20) เทียบกับหน้าสรุปวิชา legalhist.html — ไม่เพิ่มข้อเท็จจริงจากภายนอก — Batch 19 (กลุ่มกฎหมายโรมัน) ใช้เอกสารเป็นหลักฐานหลัก ส่วนเสียงบรรยายอ้างเฉพาะข้อที่เสียงยืนยันจริง — ข้อขัดแย้งที่พบ: วัสดุที่จารึกกฎหมายสิบสองโต๊ะ เสียงบรรยาย (18OCT25 ประวัติศาสตร์ part 2) ว่าแผ่นหิน แต่ 2508RomanLaw ว่าแผ่นทองแดง, LAW1106 ว่าบรอนซ์ และวิดีโอ Nova Roma ว่า bronze จึงเขียนตามเอกสารหลายแหล่งและบันทึกความต่างไว้ (หน้า legalhist.html ตรงกับเอกสาร ไม่ได้แก้ไข); ปีที่ตราใช้ 'ราว 450–451 ปีก่อนคริสตกาล' ตามที่แหล่งต่างกันเล็กน้อย; เสียงบรรยายไม่ได้ยืนยันปี สาเหตุ หรือเนื้อหา",
         "verifiedSections": [],
         "needsSourceVerification": [],
-        "policy": "ห้ามเพิ่มเนื้อหา คำอธิบาย มาตรา คดี หรือความสัมพันธ์ให้คำศัพท์ตั้งต้นนี้โดยไม่มีหลักฐานจริงจากตัวบทหรือคำบรรยาย"
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในหลักฐานที่ตรวจสอบได้ ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
       },
       "lectureRefs": [],
-      "relatedConcepts": []
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/kotmai-roman-thima-rabop-phatthanakan",
+          "rel": "parent",
+          "labelTH": "กฎหมายโรมัน: แหล่งที่มา ระบบ และพัฒนาการ",
+          "status": "published",
+          "note": "กฎหมายสิบสองโต๊ะเป็นตัวอย่างสำคัญของกฎหมายบัญญัติ (Lex) หนึ่งในสามแหล่งที่มาของกฎหมายโรมัน"
+        }
+      ],
+      "evidencePolicy": "legal-history",
+      "historicalEvidence": {
+        "type": "document",
+        "basis": [
+          {
+            "source": "legalhist-page",
+            "locator": "study:roman",
+            "label": "หน้าสรุปวิชา (legalhist.html) › 1. กฎหมายโรมัน"
+          },
+          {
+            "source": "nlm-152eb065",
+            "locator": "ปี ~450 ก่อน ค.ศ. / ที่มา / แผ่นทองแดง / โต๊ะ 2-3, 6, 11-12",
+            "label": "2508RomanLaw to Middle Ages.pdf"
+          },
+          {
+            "source": "nlm-4a2d3d22",
+            "locator": "ที่มาเพลเบียน-แพทริเชียน / โต๊ะบรอนซ์ / โต๊ะ 2-3, 11-12",
+            "label": "เอกสาร LAW1106.pdf"
+          },
+          {
+            "source": "nlm-09d4ceb3",
+            "locator": "ที่มา / กฎหมายลายลักษณ์อักษรฉบับแรก",
+            "label": "ระบบกฎหมายซีวิลลอว์ (มุนินทร์ พงศาปาน)"
+          },
+          {
+            "source": "nlm-46123feb",
+            "locator": "ราว 451 BC / 12 bronze tablets ในตลาด",
+            "label": "วิดีโอ Introduction to Ancient Roman Law (Nova Roma)"
+          },
+          {
+            "source": "nlm-5bf155a2",
+            "locator": "ยืนยันเฉพาะ: 12 แผ่นติดประกาศกลางตลาด (ระบุวัสดุเป็นหิน — ขัดกับเอกสาร) ไม่ยืนยันปี/สาเหตุ/เนื้อหา",
+            "label": "เสียงบรรยาย 18OCT25 ประวัติศาสตร์ part 2"
+          }
+        ],
+        "verification": {
+          "method": "notebooklm-document",
+          "notebook": "c3b7a13c-250b-4156-8daf-ebf0a9017daa",
+          "date": "2026-09-20",
+          "query": "ตรวจทีละข้ออ้าง 6 ข้อ (ปี 450 BC, ที่มาเพลเบียน-แพทริเชียน, วัสดุจารึกและการตั้งในที่สาธารณะ, กฎหมายลายลักษณ์อักษรฉบับแรก, เนื้อหาเหลื่อมล้ำ, usucapio โต๊ะที่ 6) แยกผลตามชนิดแหล่ง เสียง/เอกสาร/วิดีโอ"
+        }
+      }
     },
     "seed-0437": {
       "id": "atlas:concept/seed-0437",
       "slug": "seed-0437",
       "titleTH": "ประมวลกฎหมายจัสติเนียน (Corpus Juris Civilis)",
-      "titleEN": "",
+      "titleEN": "Corpus Juris Civilis (Justinian's codification, 6th century)",
       "aliases": [],
-      "latin": [],
+      "latin": [
+        "Corpus Juris Civilis",
+        "Digest",
+        "Pandects",
+        "Institutes",
+        "Codex",
+        "Novellae"
+      ],
       "subjectAreas": [],
       "subjectTags": [
         "legal-history"
       ],
-      "status": "seed",
-      "summary": "",
+      "status": "published",
+      "summary": "Corpus Juris Civilis เป็นงานรวบรวมและชำระกฎหมายโรมันในรัชสมัยจักรพรรดิจัสติเนียนที่ 1 (ค.ศ.527–565) โดยคณะกรรมการที่มี Tribonian เป็นประธาน ประกอบด้วย Digest/Pandects, Institutes, Codex และ Novels ใช้ได้ผลน้อยในยุคของจัสติเนียนเอง แต่ต้นฉบับ Digest ที่ค้นพบใหม่ในศตวรรษที่ 11 ทำให้กลายเป็นรากฐานของระบบซีวิลลอว์",
       "definition": {
-        "text": ""
+        "text": "Corpus Juris Civilis คือประมวลกฎหมายโรมันที่จักรพรรดิจัสติเนียนที่ 1 แห่งจักรวรรดิไบแซนไทน์ (ครองราชย์ ค.ศ.527–565) โปรดให้คณะกรรมการ 16 คนซึ่งมี Tribonian เป็นประธานรวบรวมและชำระขึ้น ประกอบด้วย 4 ส่วน คือ Digest/Pandects Institutes Codex และ Novels",
+        "needsSourceVerification": false
       },
       "structuralAnchor": [],
-      "sections": [],
+      "sections": [
+        {
+          "key": "origin",
+          "kind": "generic",
+          "label": "ผู้จัดทำและพระราชปณิธาน",
+          "items": [
+            {
+              "label": "จักรพรรดิจัสติเนียนที่ 1",
+              "text": "ครองราชย์ ค.ศ.527–565 แห่งจักรวรรดิไบแซนไทน์ ทรงมีพระราชปณิธานฟื้นฟูความรุ่งเรืองของโรม"
+            },
+            {
+              "label": "คณะกรรมการและ Tribonian",
+              "text": "ทรงแต่งตั้งเสนาบดี Tribonian เป็นประธานคณะกรรมการ 16 คน (ตามวิดีโอ Nova Roma ประกอบด้วย Tribonian นักกฎหมาย 11 คน และอาจารย์กฎหมาย 4 คน) ชำระกฎหมายโรมัน"
+            }
+          ]
+        },
+        {
+          "key": "parts",
+          "kind": "elements",
+          "label": "องค์ประกอบ 4 ส่วน",
+          "items": [
+            {
+              "label": "Digest / Pandects",
+              "text": "คัดย่อจากงานของนักนิติศาสตร์คลาสสิก"
+            },
+            {
+              "label": "Institutes",
+              "text": "ตำราหลักกฎหมายพื้นฐานสำหรับการศึกษา"
+            },
+            {
+              "label": "Codex",
+              "text": "รวบรวมพระราชโองการ"
+            },
+            {
+              "label": "Novels (Novellae)",
+              "text": "กฎหมายใหม่ที่ตราขึ้นภายหลัง"
+            }
+          ]
+        },
+        {
+          "key": "digest",
+          "kind": "generic",
+          "label": "การจัดทำ Digest และข้อห้ามการอธิบายเพิ่ม",
+          "items": [
+            {
+              "label": "ขนาดและระยะเวลา",
+              "text": "คัดย่อจากตำรากฎหมายประมาณ 1,500–2,000 เล่ม ดำเนินการในช่วง ค.ศ.530–533 รวบรวมเป็น 50 เล่ม (วิดีโอ Nova Roma ระบุว่าประกาศใช้เมื่อ 16 ธันวาคม ค.ศ.533)"
+            },
+            {
+              "label": "ห้ามทำคำอธิบายเพิ่ม",
+              "text": "จัสติเนียนทรงห้ามจัดทำคำอธิบายหลักกฎหมาย (commentaries) ของ Digest เพื่อป้องกันความสับสนและการตีความที่แตกต่างหลากหลาย"
+            }
+          ]
+        },
+        {
+          "key": "afterlife",
+          "kind": "generic",
+          "label": "ผลในทางปฏิบัติและมรดกทางวิชาการ",
+          "items": [
+            {
+              "label": "ใช้ได้ผลน้อยในยุคจัสติเนียน",
+              "text": "ตำราระบุว่าไม่ได้รับความนิยมในยุคนั้น เพราะเขียนเป็นภาษาละตินขณะที่ชาวไบแซนไทน์ใช้ภาษากรีกเป็นหลัก และ Digest มีความซับซ้อนมหาศาลและมีความขัดแย้งหรือการแก้ไขข้อความ (interpolation)"
+            },
+            {
+              "label": "การค้นพบต้นฉบับ Digest ในศตวรรษที่ 11",
+              "text": "ตำราระบุว่าค้นพบต้นฉบับ Digest ในอิตาลีช่วงคริสต์ศตวรรษที่ 11 ที่เมืองปิซา (ต่อมาเรียก Littera Florentina หรือ Codex Florentinus) นำไปสู่การฟื้นฟูการศึกษากฎหมายโรมันที่มหาวิทยาลัยโบโลญญา"
+            },
+            {
+              "label": "รากฐานของระบบซีวิลลอว์",
+              "text": "ตำราและวิดีโอระบุว่าเป็นรากฐานและจุดเริ่มต้นสำคัญของระบบกฎหมายซีวิลลอว์ในยุโรป"
+            }
+          ]
+        }
+      ],
       "provisions": [],
       "featuredCases": [],
-      "sources": [],
+      "sources": [
+        {
+          "kind": "historical",
+          "text": "Corpus Juris Civilis — ตรวจยืนยัน 8/8 ข้อในเอกสารและวิดีโอ (เสียงบรรยายไม่ได้กล่าวถึง)",
+          "via": "NotebookLM notebook ประวัติศาสตร์กฎหมายไทย (c3b7a13c)"
+        },
+        {
+          "kind": "historical",
+          "text": "หน้าสรุปวิชา ประวัติศาสตร์กฎหมายไทย หัวข้อ 1. กฎหมายโรมัน",
+          "via": "https://coolunclelab.com/legalhist.html"
+        }
+      ],
       "authoring": {
-        "provenance": "นำเข้าเป็นคำศัพท์ตั้งต้น (seed) จากรายการคำศัพท์ประจำรายวิชาที่ผู้ใช้จัดทำไว้ เพื่อขยายฐานคำศัพท์ของสารานุกรม — ยังไม่ได้เขียนคำอธิบาย ยังไม่มีมาตรา คดี หรือความสัมพันธ์ใด ๆ ที่ยืนยันแล้ว",
+        "provenance": "เรียบเรียงจากเอกสารและตำราใน NotebookLM (ตรวจทีละข้ออ้าง ยืนยัน/ขัดแย้ง/ไม่พบ เมื่อ 2026-09-20) เทียบกับหน้าสรุปวิชา legalhist.html — ไม่เพิ่มข้อเท็จจริงจากภายนอก — Batch 19 (กลุ่มกฎหมายโรมัน) ใช้เอกสารเป็นหลักฐานหลัก ส่วนเสียงบรรยายอ้างเฉพาะข้อที่เสียงยืนยันจริง — จำนวนตำราที่ใช้คัดย่อ Digest ตำราให้ตัวเลขต่างกัน (ราว 1,500 ถึง 2,000 เล่ม) จึงเขียนเป็นช่วง; หน้า legalhist.html ระบุ 'กว่า 2,000 เล่ม' และ 'นักนิติศาสตร์กว่า 40 ท่าน' (ข้อหลังไม่ได้ตรวจ จึงไม่นำมาเขียน)",
         "verifiedSections": [],
         "needsSourceVerification": [],
-        "policy": "ห้ามเพิ่มเนื้อหา คำอธิบาย มาตรา คดี หรือความสัมพันธ์ให้คำศัพท์ตั้งต้นนี้โดยไม่มีหลักฐานจริงจากตัวบทหรือคำบรรยาย"
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในหลักฐานที่ตรวจสอบได้ ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
       },
       "lectureRefs": [],
-      "relatedConcepts": []
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/kotmai-roman-thima-rabop-phatthanakan",
+          "rel": "parent",
+          "labelTH": "กฎหมายโรมัน: แหล่งที่มา ระบบ และพัฒนาการ",
+          "status": "published",
+          "note": "Digest และ Institutes เป็นผลงานรวบรวมจากความเห็นและตำราของนักนิติศาสตร์โรมัน ซึ่งเป็นหนึ่งในแหล่งที่มาของกฎหมายโรมัน"
+        },
+        {
+          "ref": "atlas:concept/seed-0412",
+          "rel": "seealso",
+          "labelTH": "ระบบกฎหมายซีวิลลอว์ (Civil Law)",
+          "status": "seed",
+          "note": "ตำราและวิดีโอที่ตรวจระบุว่าเป็นรากฐานและจุดเริ่มต้นสำคัญของระบบกฎหมายซีวิลลอว์ในยุโรป"
+        }
+      ],
+      "evidencePolicy": "legal-history",
+      "historicalEvidence": {
+        "type": "document",
+        "basis": [
+          {
+            "source": "legalhist-page",
+            "locator": "study:roman",
+            "label": "หน้าสรุปวิชา (legalhist.html) › 1. กฎหมายโรมัน"
+          },
+          {
+            "source": "nlm-09d4ceb3",
+            "locator": "จัสติเนียน / Tribonian / 4 ส่วน / Digest / ข้อห้ามอธิบาย / ภาษาละติน / ปิซา",
+            "label": "ระบบกฎหมายซีวิลลอว์ (มุนินทร์ พงศาปาน)"
+          },
+          {
+            "source": "nlm-152eb065",
+            "locator": "ครองราชย์ / Tribonian / 4 ส่วน / Digest 530-533, 50 เล่ม",
+            "label": "2508RomanLaw to Middle Ages.pdf"
+          },
+          {
+            "source": "nlm-feae3552",
+            "locator": "4 ส่วน / ห้ามอธิบาย / ค้นพบ Digest ที่ปิซา",
+            "label": "Mousourakis: Roman Law, Medieval Jurisprudence and the Rise of the European Ius Commune"
+          },
+          {
+            "source": "nlm-4a2d3d22",
+            "locator": "Tribonian / Digest / ห้ามอธิบาย",
+            "label": "เอกสาร LAW1106.pdf"
+          },
+          {
+            "source": "nlm-46123feb",
+            "locator": "คณะกรรมการ 16 คน / 50 books / 16 ธ.ค. 533 / ฟื้นฟูที่โบโลญญา",
+            "label": "วิดีโอ Introduction to Ancient Roman Law (Nova Roma)"
+          }
+        ],
+        "verification": {
+          "method": "notebooklm-document",
+          "notebook": "c3b7a13c-250b-4156-8daf-ebf0a9017daa",
+          "date": "2026-09-20",
+          "query": "ตรวจทีละข้ออ้าง 8 ข้อ (รัชกาลและปณิธานจัสติเนียน, Tribonian และคณะ 16 คน, 4 ส่วน, Digest หลักพันเล่ม 530-533 และ 50 เล่ม, ข้อห้ามอธิบายเพิ่ม, ใช้ไม่ได้ผลเพราะละติน/ซับซ้อน, ค้นพบที่ปิซาศตวรรษที่ 11, รากฐานซีวิลลอว์) แยกผลตามชนิดแหล่ง"
+        }
+      }
     },
     "seed-0438": {
       "id": "atlas:concept/seed-0438",
@@ -81129,6 +81394,782 @@
         "lec-civil_1563-1",
         "lec-civil_1564-1"
       ]
+    },
+    "kotmai-roman-thima-rabop-phatthanakan": {
+      "id": "atlas:concept/kotmai-roman-thima-rabop-phatthanakan",
+      "slug": "kotmai-roman-thima-rabop-phatthanakan",
+      "status": "published",
+      "titleTH": "กฎหมายโรมัน: แหล่งที่มา ระบบ และพัฒนาการ",
+      "titleEN": "Roman law: sources, systems and periods",
+      "aliases": [],
+      "latin": [
+        "Jus Civile",
+        "Jus Gentium",
+        "Jus Honorarium",
+        "Jus Naturale",
+        "ius respondendi",
+        "ratio scripta"
+      ],
+      "subjectAreas": [],
+      "subjectTags": [
+        "legal-history"
+      ],
+      "summary": "กฎหมายโรมันมีแหล่งที่มาหลัก 3 ทาง (Lex, ประกาศของ Praetor, ความเห็นของนักนิติศาสตร์) แบ่งเป็น 4 ระบบ (Jus Civile, Jus Gentium, Jus Honorarium, Jus Naturale) และ 4 ยุคพัฒนาการ โดยยุคจักรวรรดิตอนต้นเป็นยุครุ่งเรืองที่สุดของนิติศาสตร์ และถูกเรียกว่า ratio scripta เพราะตั้งอยู่บนการให้เหตุผลทางกฎหมาย",
+      "definition": {
+        "text": "กฎหมายโรมันมีแหล่งที่มาหลัก 3 ทาง ได้แก่ กฎหมายบัญญัติ (Lex) เช่น กฎหมายสิบสองโต๊ะ ประกาศของเจ้าพนักงาน (Edicts of the Praetor) และความเห็นของนักนิติศาสตร์ (Interpretatio หรือ ius respondendi) ในทางระบบแบ่งเป็น Jus Civile Jus Gentium Jus Honorarium และ Jus Naturale และในทางพัฒนาการแบ่งเป็น 4 ยุคตั้งแต่ยุคโบราณจนถึงยุคจักรวรรดิตอนปลาย ความโดดเด่นของกฎหมายโรมันอยู่ที่การเป็นวัฒนธรรมทางเหตุผล (ratio scripta)",
+        "needsSourceVerification": false
+      },
+      "structuralAnchor": [],
+      "sections": [
+        {
+          "key": "sources",
+          "kind": "elements",
+          "label": "แหล่งที่มา 3 ทาง",
+          "items": [
+            {
+              "label": "กฎหมายบัญญัติ (Lex)",
+              "text": "กฎหมายที่ตราขึ้นเป็นลายลักษณ์อักษร ตัวอย่างสำคัญคือกฎหมายสิบสองโต๊ะ"
+            },
+            {
+              "label": "ประกาศของเจ้าพนักงาน (Edicts of the Praetor)",
+              "text": "Praetor ออกประกาศ (edict) เมื่อเข้ารับตำแหน่งในแต่ละปี เพื่อกำหนดแนวปฏิบัติ บรรเทาความเคร่งครัด และอุดช่องว่างของ Jus Civile เดิม จนเกิดเป็น Jus Honorarium"
+            },
+            {
+              "label": "ความเห็นของนักนิติศาสตร์ (Interpretatio / ius respondendi)",
+              "text": "ในยุคจักรวรรดิ จักรพรรดิทรงแต่งตั้งนักนิติศาสตร์ให้มีสิทธิแสดงความเห็นทางกฎหมาย (ius respondendi) ในพระนามของพระองค์ ความเห็นเหล่านี้กลายเป็นบ่อเกิดของกฎหมาย"
+            }
+          ]
+        },
+        {
+          "key": "systems",
+          "kind": "elements",
+          "label": "ระบบของกฎหมายโรมัน 4 ระบบ",
+          "items": [
+            {
+              "label": "Jus Civile",
+              "text": "กฎหมายสำหรับพลเมืองโรมัน มีรากจากจารีต"
+            },
+            {
+              "label": "Jus Gentium",
+              "text": "กฎหมายที่ใช้กับคนต่างชาติ (คดีระหว่างชาวโรมันกับคนต่างชาติ) ยึดเหตุผลสากล"
+            },
+            {
+              "label": "Jus Honorarium",
+              "text": "กฎหมายที่เกิดจากประกาศของ Praetor"
+            },
+            {
+              "label": "Jus Naturale",
+              "text": "กฎหมายธรรมชาติ อิงเหตุผลตามธรรมชาติและความเสมอภาคของมนุษย์"
+            }
+          ]
+        },
+        {
+          "key": "periods",
+          "kind": "generic",
+          "label": "พัฒนาการ 4 ยุค",
+          "items": [
+            {
+              "label": "ยุคโบราณ",
+              "text": "ก่อนราว 450 ปีก่อน ค.ศ. จนถึงช่วงจัดทำกฎหมายสิบสองโต๊ะ"
+            },
+            {
+              "label": "ยุคสาธารณรัฐ",
+              "text": "ตั้งแต่ราว 450 ปีก่อน ค.ศ. ถึงศตวรรษที่ 1"
+            },
+            {
+              "label": "ยุคจักรวรรดิตอนต้น",
+              "text": "ศตวรรษที่ 1 ถึงราว ค.ศ. 250 เป็นยุคทองคลาสสิกและยุครุ่งเรืองที่สุดของนิติศาสตร์"
+            },
+            {
+              "label": "ยุคจักรวรรดิตอนปลาย",
+              "text": "ราว ค.ศ. 250 ถึง 534 เป็นยุคหลังคลาสสิก"
+            }
+          ]
+        },
+        {
+          "key": "reasoning",
+          "kind": "generic",
+          "label": "วัฒนธรรมทางเหตุผลและตำราหลัก",
+          "items": [
+            {
+              "label": "ratio scripta และ responsa",
+              "text": "กฎหมายโรมันได้รับการขนานนามว่า ratio scripta (คัมภีร์แห่งเหตุผล) และการให้ความเห็น (responsa / interpretatio) ของ iuris prudentes เป็นรากฐานของการพัฒนาการให้เหตุผลทางกฎหมาย"
+            },
+            {
+              "label": "เอกสารหลักในการศึกษา",
+              "text": "Institutiones ของ Gaius (เขียนราว ค.ศ. 161) และ Digest ของจัสติเนียน (ค.ศ. 533) เป็นเอกสารหลักในการศึกษากฎหมายโรมัน"
+            }
+          ]
+        }
+      ],
+      "provisions": [],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "historical",
+          "text": "กฎหมายโรมัน: แหล่งที่มา ระบบ และพัฒนาการ — ตรวจยืนยัน 7/7 ข้อในเอกสารและวิดีโอของ notebook (เสียงบรรยายไม่ได้กล่าวถึง)",
+          "via": "NotebookLM notebook ประวัติศาสตร์กฎหมายไทย (c3b7a13c)"
+        },
+        {
+          "kind": "historical",
+          "text": "หน้าสรุปวิชา ประวัติศาสตร์กฎหมายไทย หัวข้อ 1. กฎหมายโรมัน",
+          "via": "https://coolunclelab.com/legalhist.html"
+        }
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/seed-0436",
+          "rel": "specializes",
+          "labelTH": "กฎหมายสิบสองโต๊ะ (Twelve Tables)",
+          "status": "published",
+          "note": "กฎหมายสิบสองโต๊ะเป็นตัวอย่างสำคัญของ Lex ในแหล่งที่มาของกฎหมายโรมัน"
+        },
+        {
+          "ref": "atlas:concept/seed-0437",
+          "rel": "specializes",
+          "labelTH": "ประมวลกฎหมายจัสติเนียน (Corpus Juris Civilis)",
+          "status": "published",
+          "note": "Corpus Juris Civilis รวบรวมความเห็นและตำราของนักนิติศาสตร์โรมัน (Digest, Institutes) และพระราชโองการ (Codex)"
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากเอกสารและตำราใน NotebookLM (ตรวจทีละข้ออ้าง ยืนยัน/ขัดแย้ง/ไม่พบ เมื่อ 2026-09-20) เทียบกับหน้าสรุปวิชา legalhist.html — ไม่เพิ่มข้อเท็จจริงจากภายนอก — Batch 19 (กลุ่มกฎหมายโรมัน) ใช้เอกสารเป็นหลักฐานหลัก ส่วนเสียงบรรยายอ้างเฉพาะข้อที่เสียงยืนยันจริง — ช่วงเวลาที่ปรากฏ (450, 250, 534 ฯลฯ) ใช้ตามตำราที่ตรวจ",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในหลักฐานที่ตรวจสอบได้ ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "evidencePolicy": "legal-history",
+      "historicalEvidence": {
+        "type": "source-of-law",
+        "basis": [
+          {
+            "source": "legalhist-page",
+            "locator": "study:roman",
+            "label": "หน้าสรุปวิชา (legalhist.html) › 1. กฎหมายโรมัน"
+          },
+          {
+            "source": "nlm-152eb065",
+            "locator": "แหล่งที่มา/4 ระบบ/4 ยุค/ตำราหลัก",
+            "label": "2508RomanLaw to Middle Ages.pdf"
+          },
+          {
+            "source": "nlm-09d4ceb3",
+            "locator": "แหล่งที่มา/4 ระบบ/4 ยุค",
+            "label": "ระบบกฎหมายซีวิลลอว์ (มุนินทร์ พงศาปาน)"
+          },
+          {
+            "source": "nlm-feae3552",
+            "locator": "แหล่งที่มา/4 ระบบ/ius respondendi/ratio scripta",
+            "label": "Mousourakis: Roman Law, Medieval Jurisprudence and the Rise of the European Ius Commune"
+          },
+          {
+            "source": "nlm-4a2d3d22",
+            "locator": "Praetor edict / 4 ยุค",
+            "label": "เอกสาร LAW1106.pdf"
+          },
+          {
+            "source": "nlm-46123feb",
+            "locator": "แหล่งที่มา 3 ทาง / Praetor edict / Gaius และ Digest",
+            "label": "วิดีโอ Introduction to Ancient Roman Law (Nova Roma)"
+          }
+        ],
+        "verification": {
+          "method": "notebooklm-document",
+          "notebook": "c3b7a13c-250b-4156-8daf-ebf0a9017daa",
+          "date": "2026-09-20",
+          "query": "ตรวจทีละข้ออ้าง 7 ข้อ (แหล่งที่มา 3 ทาง, edict ของ Praetor และ Jus Honorarium, ius respondendi, 4 ระบบ, Gaius/Digest, 4 ยุค, ratio scripta) ยืนยัน/ขัดแย้ง/ไม่พบ พร้อมชื่อแหล่ง"
+        }
+      }
+    },
+    "samnak-akkharajan-glossator": {
+      "id": "atlas:concept/samnak-akkharajan-glossator",
+      "slug": "samnak-akkharajan-glossator",
+      "status": "published",
+      "titleTH": "สำนักอักขราจารย์ (Glossators)",
+      "titleEN": "The Glossators (Bologna school of glossators)",
+      "aliases": [],
+      "latin": [
+        "Glossators",
+        "Glossatores",
+        "lucerna juris",
+        "gloss"
+      ],
+      "subjectAreas": [],
+      "subjectTags": [
+        "legal-history"
+      ],
+      "summary": "Glossators หรืออักขราจารย์คือสำนักที่โบโลญญาซึ่งเริ่มราวปลายศตวรรษที่ 11 ถึงศตวรรษที่ 13 ศึกษา Digest ของจัสติเนียนโดยเขียน gloss อธิบายถ้อยคำ มี Irnerius เป็นผู้นำและได้สมญา lucerna juris โดยมองประมวลจัสติเนียนเป็นของศักดิ์สิทธิ์ปราศจากข้อบกพร่องและขาดมิติทางประวัติศาสตร์",
+      "definition": {
+        "text": "Glossators หรืออักขราจารย์คือสำนักนักวิชาการกฎหมายที่มหาวิทยาลัยโบโลญญา อิตาลี ในช่วงราวปลายศตวรรษที่ 11 ถึงศตวรรษที่ 13 ศึกษาและตีความตามตัวอักษรของประมวลกฎหมายโรมัน โดยเขียนข้อความอธิบายถ้อยคำ (gloss) แทรกระหว่างบรรทัดหรือที่ขอบหน้าของ Digest",
+        "needsSourceVerification": false
+      },
+      "structuralAnchor": [],
+      "sections": [
+        {
+          "key": "method",
+          "kind": "generic",
+          "label": "วิธีศึกษาและผู้นำสำนัก",
+          "items": [
+            {
+              "label": "ที่โบโลญญา ราวศตวรรษที่ 11–13",
+              "text": "แหล่งที่ตรวจให้กรอบเวลาต่างกันเล็กน้อย (11–13 หรือปลายศตวรรษที่ 11 ถึง 13) จึงใช้คำว่า 'ราว' และเป็นช่วงกว้าง"
+            },
+            {
+              "label": "Irnerius และ lucerna juris",
+              "text": "Irnerius เป็นผู้เริ่มต้นและเจ้าสำนัก Glossators ได้สมญาว่า lucerna juris หรือ 'ดวงประทีปแห่งกฎหมาย' (ตามที่ 2508RomanLaw ระบุ)"
+            },
+            {
+              "label": "การเขียน gloss",
+              "text": "อธิบายความหมายถ้อยคำในตัวบทโดยเขียนแทรกไว้ระหว่างบรรทัดหรือขอบหน้า"
+            }
+          ]
+        },
+        {
+          "key": "attitude",
+          "kind": "generic",
+          "label": "ทัศนคติต่อประมวลจัสติเนียน",
+          "items": [
+            {
+              "label": "ของศักดิ์สิทธิ์ไร้ข้อบกพร่อง",
+              "text": "ถือว่า Digest เป็นเอกสารศักดิ์สิทธิ์เสมือนคัมภีร์ ไม่มีข้อบกพร่องหรือข้อความขัดแย้ง"
+            },
+            {
+              "label": "ขาดมิติทางประวัติศาสตร์",
+              "text": "ตำราวิจารณ์ว่าขาดมุมมองเชิงประวัติศาสตร์ในการศึกษาตัวบท (ซึ่งเป็นข้อวิจารณ์ที่สำนัก Legal Humanism ยกขึ้นภายหลัง)"
+            }
+          ]
+        }
+      ],
+      "provisions": [],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "historical",
+          "text": "Glossators — ตรวจยืนยันในเอกสาร 3 ข้อ (เสียงบรรยายและวิดีโอไม่ได้กล่าวถึง)",
+          "via": "NotebookLM notebook ประวัติศาสตร์กฎหมายไทย (c3b7a13c)"
+        },
+        {
+          "kind": "historical",
+          "text": "หน้าสรุปวิชา ประวัติศาสตร์กฎหมายไทย หัวข้อ 1 และ 2",
+          "via": "https://coolunclelab.com/legalhist.html"
+        }
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/seed-0437",
+          "rel": "prerequisite",
+          "labelTH": "ประมวลกฎหมายจัสติเนียน (Corpus Juris Civilis)",
+          "status": "published",
+          "note": "Glossators ศึกษาประมวลจัสติเนียน (Digest) โดยตรง จึงควรเข้าใจ Corpus Juris Civilis ก่อน"
+        },
+        {
+          "ref": "atlas:concept/ius-commune",
+          "rel": "seealso",
+          "labelTH": "Ius Commune (กฎหมายสามัญแห่งยุโรป)",
+          "status": "published",
+          "note": "ผลงานของ Glossators ร่วมกับ Commentators เป็นรากฐานของ ius commune ตามตำราที่ตรวจ"
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากเอกสารและตำราใน NotebookLM (ตรวจทีละข้ออ้าง ยืนยัน/ขัดแย้ง/ไม่พบ เมื่อ 2026-09-20) เทียบกับหน้าสรุปวิชา legalhist.html — ไม่เพิ่มข้อเท็จจริงจากภายนอก — Batch 19 (กลุ่มกฎหมายโรมัน) ใช้เอกสารเป็นหลักฐานหลัก ส่วนเสียงบรรยายอ้างเฉพาะข้อที่เสียงยืนยันจริง — ข้อจำกัด: เสียงบรรยายไม่ได้กล่าวถึงสำนักนี้ จึงไม่ใช้เสียงเป็นหลักฐาน; ข้ออ้างในหน้า legalhist.html เรื่อง 'คุณูปการวางรากฐานวิทยาศาสตร์กฎหมาย' ไม่ได้ตรวจกับแหล่งใน notebook จึงไม่นำมาเขียน; ช่วงเวลาแหล่งต่างกัน (11–13 / 12–14) จึงใช้ 'ราว'",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในหลักฐานที่ตรวจสอบได้ ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "evidencePolicy": "legal-history",
+      "historicalEvidence": {
+        "type": "doctrine",
+        "basis": [
+          {
+            "source": "legalhist-page",
+            "locator": "study:roman",
+            "label": "หน้าสรุปวิชา (legalhist.html) › 1. กฎหมายโรมัน"
+          },
+          {
+            "source": "legalhist-page",
+            "locator": "study:medieval",
+            "label": "หน้าสรุปวิชา (legalhist.html) › 2. ยุคกลาง–Common Law/Equity"
+          },
+          {
+            "source": "nlm-09d4ceb3",
+            "locator": "โบโลญญา 11–13 / gloss / คัมภีร์ศักดิ์สิทธิ์",
+            "label": "ระบบกฎหมายซีวิลลอว์ (มุนินทร์ พงศาปาน)"
+          },
+          {
+            "source": "nlm-152eb065",
+            "locator": "Irnerius lucerna juris / ศตวรรษที่ 11–13 / ขาดมิติประวัติศาสตร์",
+            "label": "2508RomanLaw to Middle Ages.pdf"
+          },
+          {
+            "source": "nlm-feae3552",
+            "locator": "ปลายศตวรรษที่ 11–13 ที่ Bologna / ขาดมุมมองประวัติศาสตร์",
+            "label": "Mousourakis: Roman Law, Medieval Jurisprudence and the Rise of the European Ius Commune"
+          }
+        ],
+        "verification": {
+          "method": "notebooklm-document",
+          "notebook": "c3b7a13c-250b-4156-8daf-ebf0a9017daa",
+          "date": "2026-09-20",
+          "query": "ตรวจทีละข้ออ้าง (Glossators ที่โบโลญญาและ gloss, Irnerius lucerna juris, มองประมวลจัสติเนียนเป็นของศักดิ์สิทธิ์ไม่คำนึงบริบทประวัติศาสตร์) ยืนยัน/ขัดแย้ง/ไม่พบ พร้อมชนิดแหล่ง"
+        }
+      }
+    },
+    "samnak-commentator": {
+      "id": "atlas:concept/samnak-commentator",
+      "slug": "samnak-commentator",
+      "status": "published",
+      "titleTH": "สำนัก Commentators (Post-glossators)",
+      "titleEN": "The Commentators (Post-glossators)",
+      "aliases": [],
+      "latin": [
+        "Commentators",
+        "Post-glossators",
+        "Bartolus of Saxoferrato"
+      ],
+      "subjectAreas": [],
+      "subjectTags": [
+        "legal-history"
+      ],
+      "summary": "Commentators หรือ Post-glossators รุ่งเรืองราวศตวรรษที่ 13/14–16 โดยมี Bartolus of Saxoferrato เป็นนักนิติศาสตร์ที่มีอิทธิพลที่สุด มุ่งปรับกฎหมายโรมันให้ใช้ได้กับสังคมร่วมสมัยโดยผสานกับจารีตเยอรมัน กฎหมายศาสนจักร และกฎหมายท้องถิ่น มีคุณูปการต่อกฎหมายอาญา พาณิชย์ และวิธีพิจารณาความ และเป็นกำลังสำคัญของ ius commune",
+      "definition": {
+        "text": "Commentators หรือ Post-glossators คือสำนักนักนิติศาสตร์ยุคกลางที่สืบต่อจาก Glossators ราวศตวรรษที่ 13/14 ถึง 16 มีเป้าหมายนำกฎหมายโรมันของจัสติเนียนมาปรับใช้ให้เข้ากับสภาพสังคมร่วมสมัย โดยผสมผสานกับกฎหมายจารีตของชนเผ่าเยอรมัน กฎหมายศาสนจักร (canon law) และกฎหมายท้องถิ่น",
+        "needsSourceVerification": false
+      },
+      "structuralAnchor": [],
+      "sections": [
+        {
+          "key": "aims",
+          "kind": "generic",
+          "label": "เป้าหมายและวิธีการ",
+          "items": [
+            {
+              "label": "ปรับกฎหมายโรมันให้ใช้ได้จริง",
+              "text": "แทนที่จะเน้นตัวอักษรอย่าง Glossators สำนักนี้มุ่งนำกฎหมายโรมันมาแก้ปัญหาในทางปฏิบัติ ร่วมกับกฎหมายจารีตและกฎหมายพระ"
+            },
+            {
+              "label": "Bartolus of Saxoferrato",
+              "text": "ตำรา Mousourakis ระบุว่าเป็นนักนิติศาสตร์ที่มีอิทธิพลที่สุดของสำนัก"
+            },
+            {
+              "label": "ช่วงเวลา",
+              "text": "ตำรา Mousourakis ระบุศตวรรษที่ 14–16 ส่วนสรุปวิชา legalhist.html ระบุศตวรรษที่ 13–16 จึงเขียนเป็น 'ราวศตวรรษที่ 13/14 ถึง 16'"
+            }
+          ]
+        },
+        {
+          "key": "contribution",
+          "kind": "consequences",
+          "label": "คุณูปการ",
+          "items": [
+            {
+              "label": "พัฒนากฎหมายเฉพาะด้าน",
+              "text": "มีคุณูปการในการพัฒนากฎหมายอาญา กฎหมายพาณิชย์ หลักวิธีพิจารณาความ และกฎหมายระหว่างประเทศแผนกบุคคล"
+            },
+            {
+              "label": "สร้าง ius commune",
+              "text": "งานของ Commentators เป็นฟันเฟืองสำคัญที่ทำให้เกิดกฎหมายสามัญแห่งยุโรป (ius commune)"
+            }
+          ]
+        }
+      ],
+      "provisions": [],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "historical",
+          "text": "Commentators — ตรวจยืนยัน 2 ข้อในเอกสาร (เสียงบรรยายและวิดีโอไม่ได้กล่าวถึง)",
+          "via": "NotebookLM notebook ประวัติศาสตร์กฎหมายไทย (c3b7a13c)"
+        },
+        {
+          "kind": "historical",
+          "text": "หน้าสรุปวิชา ประวัติศาสตร์กฎหมายไทย หัวข้อ 2. ยุคกลาง",
+          "via": "https://coolunclelab.com/legalhist.html"
+        }
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/samnak-akkharajan-glossator",
+          "rel": "prerequisite",
+          "labelTH": "สำนักอักขราจารย์ (Glossators)",
+          "status": "published",
+          "note": "Commentators สืบต่อจาก Glossators (Post-glossators) และเปลี่ยนจากการอธิบายตัวอักษรสู่การปรับใช้จริง"
+        },
+        {
+          "ref": "atlas:concept/ius-commune",
+          "rel": "seealso",
+          "labelTH": "Ius Commune (กฎหมายสามัญแห่งยุโรป)",
+          "status": "published",
+          "note": "ตำราที่ตรวจระบุว่า Commentators เป็นฟันเฟืองสำคัญในการสร้าง ius commune"
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากเอกสารและตำราใน NotebookLM (ตรวจทีละข้ออ้าง ยืนยัน/ขัดแย้ง/ไม่พบ เมื่อ 2026-09-20) เทียบกับหน้าสรุปวิชา legalhist.html — ไม่เพิ่มข้อเท็จจริงจากภายนอก — Batch 19 (กลุ่มกฎหมายโรมัน) ใช้เอกสารเป็นหลักฐานหลัก ส่วนเสียงบรรยายอ้างเฉพาะข้อที่เสียงยืนยันจริง — ช่วงเวลา: แหล่งต่างกัน (13–16 ตามหน้าสรุปวิชา, 14–16 ตาม Mousourakis) จึงใช้ 'ราวศตวรรษที่ 13/14 ถึง 16'; เสียงบรรยายไม่ได้กล่าวถึงสำนักนี้",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในหลักฐานที่ตรวจสอบได้ ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "evidencePolicy": "legal-history",
+      "historicalEvidence": {
+        "type": "doctrine",
+        "basis": [
+          {
+            "source": "legalhist-page",
+            "locator": "study:roman",
+            "label": "หน้าสรุปวิชา (legalhist.html) › 1. กฎหมายโรมัน"
+          },
+          {
+            "source": "legalhist-page",
+            "locator": "study:medieval",
+            "label": "หน้าสรุปวิชา (legalhist.html) › 2. ยุคกลาง–Common Law/Equity"
+          },
+          {
+            "source": "nlm-feae3552",
+            "locator": "Post-glossators 14–16 / Bartolus / ผสานจารีตเยอรมัน canon local / อาญา พาณิชย์ วิธีพิจารณา / ius commune",
+            "label": "Mousourakis: Roman Law, Medieval Jurisprudence and the Rise of the European Ius Commune"
+          },
+          {
+            "source": "nlm-09d4ceb3",
+            "locator": "ปรับใช้จริงร่วมกับจารีตและกฎหมายพระ / ius commune",
+            "label": "ระบบกฎหมายซีวิลลอว์ (มุนินทร์ พงศาปาน)"
+          },
+          {
+            "source": "nlm-152eb065",
+            "locator": "มุ่งนำไปใช้จริงกับกฎหมายท้องถิ่นและกฎหมายพระ",
+            "label": "2508RomanLaw to Middle Ages.pdf"
+          }
+        ],
+        "verification": {
+          "method": "notebooklm-document",
+          "notebook": "c3b7a13c-250b-4156-8daf-ebf0a9017daa",
+          "date": "2026-09-20",
+          "query": "ตรวจทีละข้ออ้าง (Commentators ราวศตวรรษที่ 13-16 นำโดย Bartolus ปรับกฎหมายโรมันกับจารีตท้องถิ่น/เยอรมัน/ศาสนจักร; คุณูปการอาญา พาณิชย์ วิธีพิจารณา และการเกิด ius commune) ยืนยัน/ขัดแย้ง/ไม่พบ"
+        }
+      }
+    },
+    "samnak-legal-humanism": {
+      "id": "atlas:concept/samnak-legal-humanism",
+      "slug": "samnak-legal-humanism",
+      "status": "published",
+      "titleTH": "สำนัก Legal Humanism (มนุษยนิยมทางกฎหมาย)",
+      "titleEN": "Legal Humanism (the humanist school of jurisprudence)",
+      "aliases": [],
+      "latin": [
+        "Legal Humanism",
+        "Cujas",
+        "Donellus"
+      ],
+      "subjectAreas": [],
+      "subjectTags": [
+        "legal-history"
+      ],
+      "summary": "Legal Humanism เกิดราวศตวรรษที่ 15–16 (บางแหล่งถึงศตวรรษที่ 18) โดยมี Cujas และ Donellus เป็นตัวแทนสำคัญ ศึกษากฎหมายโรมันเชิงประวัติศาสตร์และภาษาศาสตร์เพื่อหาความหมายตามบริบทเดิม วิจารณ์ Glossators และ Commentators และเป็นเหตุให้ ius commune เสื่อมลงและนำไปสู่ระบบกฎหมายแห่งชาติ",
+      "definition": {
+        "text": "Legal Humanism หรือมนุษยนิยมทางกฎหมายคือสำนักที่เกิดราวศตวรรษที่ 15–16 ศึกษากฎหมายโรมันในฐานะปรากฏการณ์ทางประวัติศาสตร์ ด้วยวิธีทางประวัติศาสตร์และภาษาศาสตร์แทนวิธีแบบยุคกลาง เพื่อหาความหมายที่แท้จริงตามบริบทเดิมของสังคมโรมัน",
+        "needsSourceVerification": false
+      },
+      "structuralAnchor": [],
+      "sections": [
+        {
+          "key": "method",
+          "kind": "generic",
+          "label": "วิธีศึกษาและตัวแทนสำนัก",
+          "items": [
+            {
+              "label": "ศึกษาเชิงประวัติศาสตร์และภาษาศาสตร์",
+              "text": "มุ่งหาความหมายตามบริบทเดิมของตัวบทโรมัน โดยมี Cujas และ Donellus เป็นตัวแทนสำคัญตามที่ตำราของมุนินทร์ระบุ"
+            },
+            {
+              "label": "ช่วงเวลา",
+              "text": "ตำราให้กรอบเวลาศตวรรษที่ 15–16 (บางแห่งขยายถึง 18) จึงใช้ 'ราวศตวรรษที่ 15–16 เรื่อยมา'"
+            }
+          ]
+        },
+        {
+          "key": "critique",
+          "kind": "generic",
+          "label": "ข้อวิจารณ์ต่อสองสำนักก่อนหน้า",
+          "items": [
+            {
+              "label": "วิจารณ์ Glossators และ Commentators",
+              "text": "วิจารณ์ว่าสองสำนักก่อนหน้ายอมรับความศักดิ์สิทธิ์ของตัวบทโดยไม่พิจารณาบริบททางประวัติศาสตร์ และบิดเบือนตัวบทเดิม"
+            }
+          ]
+        },
+        {
+          "key": "effect",
+          "kind": "consequences",
+          "label": "ผลต่อ ius commune",
+          "items": [
+            {
+              "label": "ปูทางสู่ระบบกฎหมายแห่งชาติ",
+              "text": "การชี้ให้เห็นบริบททางประวัติศาสตร์และวัฒนธรรมของกฎหมายปูทางไปสู่ความเสื่อมถอยของ ius commune และการเกิดระบบกฎหมายแห่งชาติ (national legal systems) ซึ่งนำไปสู่การจัดทำประมวลกฎหมายแห่งชาติต่อมา"
+            }
+          ]
+        }
+      ],
+      "provisions": [],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "historical",
+          "text": "Legal Humanism — ตรวจยืนยัน 2 ข้อในเอกสาร (เสียงบรรยายและวิดีโอไม่ได้กล่าวถึง)",
+          "via": "NotebookLM notebook ประวัติศาสตร์กฎหมายไทย (c3b7a13c)"
+        },
+        {
+          "kind": "historical",
+          "text": "หน้าสรุปวิชา ประวัติศาสตร์กฎหมายไทย หัวข้อ 1 และ 2",
+          "via": "https://coolunclelab.com/legalhist.html"
+        }
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/samnak-akkharajan-glossator",
+          "rel": "contrast",
+          "labelTH": "สำนักอักขราจารย์ (Glossators)",
+          "status": "published",
+          "note": "Legal Humanism วิจารณ์ Glossators ว่ายอมรับความศักดิ์สิทธิ์ของตัวบทโดยไม่คำนึงบริบทประวัติศาสตร์"
+        },
+        {
+          "ref": "atlas:concept/samnak-commentator",
+          "rel": "contrast",
+          "labelTH": "สำนัก Commentators (Post-glossators)",
+          "status": "published",
+          "note": "Legal Humanism วิจารณ์ Commentators ว่าบิดเบือนตัวบทเดิม ต่างจากการปรับใช้ให้ทันสังคมของ Commentators"
+        },
+        {
+          "ref": "atlas:concept/ius-commune",
+          "rel": "seealso",
+          "labelTH": "Ius Commune (กฎหมายสามัญแห่งยุโรป)",
+          "status": "published",
+          "note": "ตำราที่ตรวจระบุว่าแนวคิดของ Humanists ปูทางไปสู่ความเสื่อมถอยของ ius commune และการเกิดระบบกฎหมายแห่งชาติ"
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากเอกสารและตำราใน NotebookLM (ตรวจทีละข้ออ้าง ยืนยัน/ขัดแย้ง/ไม่พบ เมื่อ 2026-09-20) เทียบกับหน้าสรุปวิชา legalhist.html — ไม่เพิ่มข้อเท็จจริงจากภายนอก — Batch 19 (กลุ่มกฎหมายโรมัน) ใช้เอกสารเป็นหลักฐานหลัก ส่วนเสียงบรรยายอ้างเฉพาะข้อที่เสียงยืนยันจริง — ช่วงเวลา: หน้าสรุปวิชาว่า 15–18, ตำราของมุนินทร์ว่า 15–16 (และ 15–18 ในอีกตอน) จึงใช้ 'ราวศตวรรษที่ 15–16 เรื่อยมา'; ชื่อ Jacques Cujas และ Hugo Donellus เต็มปรากฏเฉพาะหน้าสรุปวิชา แหล่งที่ตรวจระบุเพียง Cujas และ Donellus จึงเขียนตามแหล่งที่ตรวจ; เสียงบรรยายไม่ได้กล่าวถึงสำนักนี้",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในหลักฐานที่ตรวจสอบได้ ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "evidencePolicy": "legal-history",
+      "historicalEvidence": {
+        "type": "doctrine",
+        "basis": [
+          {
+            "source": "legalhist-page",
+            "locator": "study:roman",
+            "label": "หน้าสรุปวิชา (legalhist.html) › 1. กฎหมายโรมัน"
+          },
+          {
+            "source": "legalhist-page",
+            "locator": "study:medieval",
+            "label": "หน้าสรุปวิชา (legalhist.html) › 2. ยุคกลาง–Common Law/Equity"
+          },
+          {
+            "source": "nlm-09d4ceb3",
+            "locator": "ศตวรรษที่ 15–16(/18) / ประวัติศาสตร์-ภาษาศาสตร์ / Cujas Donellus / วิจารณ์สองสำนัก / ระบบกฎหมายแห่งชาติ",
+            "label": "ระบบกฎหมายซีวิลลอว์ (มุนินทร์ พงศาปาน)"
+          },
+          {
+            "source": "nlm-feae3552",
+            "locator": "Humanists ศึกษากฎหมายโรมันเชิงประวัติศาสตร์ / เสื่อมของ ius commune และระบบกฎหมายแห่งชาติ",
+            "label": "Mousourakis: Roman Law, Medieval Jurisprudence and the Rise of the European Ius Commune"
+          },
+          {
+            "source": "nlm-f34ba2ae",
+            "locator": "Humanists วิธีทางประวัติศาสตร์และนิรุกติศาสตร์ วิจารณ์สองสำนักก่อนหน้า",
+            "label": "2508ModernEra to Codification.pdf"
+          }
+        ],
+        "verification": {
+          "method": "notebooklm-document",
+          "notebook": "c3b7a13c-250b-4156-8daf-ebf0a9017daa",
+          "date": "2026-09-20",
+          "query": "ตรวจทีละข้ออ้าง (Legal Humanism ศตวรรษที่ 15-18 เช่น Cujas Donellus ศึกษากฎหมายโรมันเชิงประวัติศาสตร์และวิจารณ์สองสำนักก่อนหน้า; ผลปูทางสู่ระบบกฎหมายแห่งชาติ/ประมวลกฎหมาย) ยืนยัน/ขัดแย้ง/ไม่พบ"
+        }
+      }
+    },
+    "ius-commune": {
+      "id": "atlas:concept/ius-commune",
+      "slug": "ius-commune",
+      "status": "published",
+      "titleTH": "Ius Commune (กฎหมายสามัญแห่งยุโรป)",
+      "titleEN": "Ius Commune (the common law of continental Europe)",
+      "aliases": [
+        "กฎหมายร่วมของยุโรป"
+      ],
+      "latin": [
+        "Ius Commune",
+        "ius proprium",
+        "statuta"
+      ],
+      "subjectAreas": [],
+      "subjectTags": [
+        "legal-history"
+      ],
+      "summary": "Ius commune คือกฎหมายสามัญของยุโรปภาคพื้นทวีปที่หลอมรวมกฎหมายโรมันของจัสติเนียนกับกฎหมายศาสนจักรและจารีตเยอรมัน เกิดจากการฟื้นฟูการศึกษากฎหมายโรมันที่โบโลญญาตั้งแต่ศตวรรษที่ 12 ทำหน้าที่สร้างเอกภาพให้ยุโรปที่แตกเป็นแคว้นศักดินา ใช้เป็นกฎหมายสำรองควบคู่ ius proprium และสิ้นสุดเมื่อเกิดรัฐชาติและประมวลกฎหมายแห่งชาติ",
+      "definition": {
+        "text": "Ius commune หรือกฎหมายสามัญแห่งยุโรปคือกฎหมายร่วมของยุโรปภาคพื้นทวีปในยุคกลาง เกิดจากการหลอมรวมกฎหมายโรมันของจัสติเนียน กฎหมายศาสนจักร (canon law) และกฎหมายจารีตประเพณีของชนเผ่าเยอรมัน จากการศึกษากฎหมายโรมันที่มหาวิทยาลัยโบโลญญาตั้งแต่ราวศตวรรษที่ 12 โดย Glossators และ Commentators",
+        "needsSourceVerification": false
+      },
+      "structuralAnchor": [],
+      "sections": [
+        {
+          "key": "formation",
+          "kind": "generic",
+          "label": "การก่อตัว",
+          "items": [
+            {
+              "label": "ส่วนประกอบ",
+              "text": "หลอมรวมกฎหมายโรมัน (Corpus Juris Civilis) กฎหมายศาสนจักร และจารีตประเพณีของชนเผ่าเยอรมัน"
+            },
+            {
+              "label": "ที่มา",
+              "text": "เกิดจากการฟื้นฟูศึกษากฎหมายโรมันที่มหาวิทยาลัยโบโลญญาตั้งแต่ปลายศตวรรษที่ 11 หรือศตวรรษที่ 12 โดยสำนัก Glossators และ Commentators (ช่วงเวลาตามแหล่งต่างกัน จึงใช้คำว่า 'ราว')"
+            }
+          ]
+        },
+        {
+          "key": "function",
+          "kind": "generic",
+          "label": "หน้าที่และสถานะ",
+          "items": [
+            {
+              "label": "ตัวกลางสร้างเอกภาพ",
+              "text": "ยุโรปยุคกลางแตกเป็นแคว้นศักดินา ขาดอำนาจกลางและระบบกฎหมายเดียว ius commune ทำหน้าที่เป็นปัจจัยสร้างเอกภาพ (กฎหมายร่วม ภาษากฎหมายร่วม และวิชานิติศาสตร์ร่วม) ทั่วยุโรป"
+            },
+            {
+              "label": "กฎหมายสำรองควบคู่ ius proprium",
+              "text": "ใช้ควบคู่กับ ius proprium (กฎหมายท้องถิ่น/statuta) โดยมีสถานะเป็นกฎหมายเสริมหรือสำรองเพื่ออุดช่องว่างเมื่อกฎหมายท้องถิ่นไม่มีบทบัญญัติ"
+            }
+          ]
+        },
+        {
+          "key": "contrast-england",
+          "kind": "crosswalk",
+          "label": "เทียบกับอังกฤษ",
+          "items": [
+            {
+              "label": "อังกฤษไม่รับ Corpus Juris Civilis ทั้งระบบ",
+              "text": "ตำราระบุว่าอังกฤษรวมศูนย์อำนาจการเมืองและการศาลอย่างรวดเร็วหลังการพิชิตของนอร์แมน ค.ศ.1066 ศาลหลวงสร้าง Common Law ขึ้นเอง จึงไม่รับ Corpus Juris Civilis หรือ ius commune เข้าไปทั้งระบบเหมือนภาคพื้นทวีป"
+            }
+          ]
+        },
+        {
+          "key": "decline",
+          "kind": "consequences",
+          "label": "ความเสื่อมและมุมมอง 3 ยุคของ Ihering",
+          "items": [
+            {
+              "label": "สิ้นสุดด้วยรัฐชาติและการจัดทำประมวลกฎหมาย",
+              "text": "ตำราระบุว่า ius commune ปิดฉากลงเมื่อเกิดรัฐชาติและขบวนการจัดทำประมวลกฎหมายแห่งชาติ เช่น Code Civil ฝรั่งเศส ค.ศ.1804 และ BGB เยอรมัน ค.ศ.1900 (เสียงบรรยาย 18OCT25 part 2 พูดถึงประมวลกฎหมายแพ่งฝรั่งเศส 1804 และเยอรมัน 1900 ในฐานะหมุดหมายของการจัดทำประมวลสมัยใหม่)"
+            },
+            {
+              "label": "กฎหมายโรมันครอบครองยุโรป 3 ยุค (ตามคำกล่าวของ Ihering)",
+              "text": "2508RomanLaw อ้าง Rudolf von Ihering ว่ากฎหมายโรมันครองยุโรป 3 ยุค คือยุคจักรวรรดิโรมัน ยุคที่ศาสนจักรโรมันคาทอลิกเป็นศูนย์กลางรวบรวมยุโรปให้เป็นปึกแผ่นหลังจักรวรรดิล่มสลาย และยุคการรับกฎหมายโรมันสมัยใหม่ (ข้อสอบในหน้าสรุปวิชาโยงยุคที่สองกับ ius commune ซึ่งเป็นการตีความต่อยอดจากคำกล่าวนี้)"
+            }
+          ]
+        }
+      ],
+      "provisions": [],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "historical",
+          "text": "Ius commune — ตรวจยืนยัน 7/7 ข้อในเอกสาร; เสียงบรรยายยืนยันเฉพาะประเด็นประมวลกฎหมาย 1804/1900 และประเด็นทั่วไปว่ากฎหมายเอกชนยุโรปพัฒนาจากการศึกษากฎหมายโรมัน",
+          "via": "NotebookLM notebook ประวัติศาสตร์กฎหมายไทย (c3b7a13c)"
+        },
+        {
+          "kind": "historical",
+          "text": "หน้าสรุปวิชา ประวัติศาสตร์กฎหมายไทย หัวข้อ 1 และ 2",
+          "via": "https://coolunclelab.com/legalhist.html"
+        }
+      ],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/seed-0413",
+          "rel": "contrast",
+          "labelTH": "ระบบกฎหมายคอมมอนลอว์ (Common Law)",
+          "status": "seed",
+          "note": "อังกฤษรวมศูนย์อำนาจเร็วและสร้าง Common Law จากศาลหลวง จึงไม่รับ Corpus Juris Civilis/ius commune ทั้งระบบเหมือนภาคพื้นทวีป (ตามมุนินทร์และ LAW1106)"
+        },
+        {
+          "ref": "atlas:concept/seed-0414",
+          "rel": "seealso",
+          "labelTH": "การจัดทำประมวลกฎหมาย (Codification)",
+          "status": "seed",
+          "note": "ตำราที่ตรวจระบุว่า ius commune ปิดฉากลงเมื่อเกิดขบวนการจัดทำประมวลกฎหมายแห่งชาติ (Code Civil 1804, BGB 1900)"
+        },
+        {
+          "ref": "atlas:concept/seed-0437",
+          "rel": "prerequisite",
+          "labelTH": "ประมวลกฎหมายจัสติเนียน (Corpus Juris Civilis)",
+          "status": "published",
+          "note": "ius commune มีรากฐานจากกฎหมายโรมันในประมวลจัสติเนียน"
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากเอกสารและตำราใน NotebookLM (ตรวจทีละข้ออ้าง ยืนยัน/ขัดแย้ง/ไม่พบ เมื่อ 2026-09-20) เทียบกับหน้าสรุปวิชา legalhist.html — ไม่เพิ่มข้อเท็จจริงจากภายนอก — Batch 19 (กลุ่มกฎหมายโรมัน) ใช้เอกสารเป็นหลักฐานหลัก ส่วนเสียงบรรยายอ้างเฉพาะข้อที่เสียงยืนยันจริง — ข้อควรระวัง: (1) ช่วงเวลาการก่อตัว แหล่งต่างกัน (ปลายศตวรรษที่ 11 / ศตวรรษที่ 12 / 12–14 / 14–16) จึงใช้ 'ราว'; (2) คำกล่าว 'ครอบครองยุโรป 3 ยุค' เป็นของ Ihering ตามที่ 2508RomanLaw อ้าง ซึ่งยุคที่สองคือศาสนจักรโรมันคาทอลิก ไม่ใช่ ius commune โดยตรง จึงเขียนอ้างที่มาและระบุว่าการโยงกับ ius commune ในข้อสอบเป็นการตีความต่อยอด; (3) เสียงบรรยายไม่ได้กล่าวถึงคำว่า ius commune/ius proprium",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในหลักฐานที่ตรวจสอบได้ ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "evidencePolicy": "legal-history",
+      "historicalEvidence": {
+        "type": "institution",
+        "basis": [
+          {
+            "source": "legalhist-page",
+            "locator": "study:medieval",
+            "label": "หน้าสรุปวิชา (legalhist.html) › 2. ยุคกลาง–Common Law/Equity"
+          },
+          {
+            "source": "legalhist-page",
+            "locator": "study:roman",
+            "label": "หน้าสรุปวิชา (legalhist.html) › 1. กฎหมายโรมัน"
+          },
+          {
+            "source": "nlm-09d4ceb3",
+            "locator": "กฎหมายสามัญแห่งยุโรป / ส่วนประกอบ / โบโลญญา / ศักดินา / อังกฤษ 1066 / สิ้นสุดด้วย codification",
+            "label": "ระบบกฎหมายซีวิลลอว์ (มุนินทร์ พงศาปาน)"
+          },
+          {
+            "source": "nlm-feae3552",
+            "locator": "ส่วนประกอบ / ius proprium และ subsidiary / universalising factor / decline",
+            "label": "Mousourakis: Roman Law, Medieval Jurisprudence and the Rise of the European Ius Commune"
+          },
+          {
+            "source": "nlm-152eb065",
+            "locator": "ส่วนประกอบ / ius proprium / Ihering 3 ยุค (หน้า 11)",
+            "label": "2508RomanLaw to Middle Ages.pdf"
+          },
+          {
+            "source": "nlm-4a2d3d22",
+            "locator": "อังกฤษรวมศูนย์และไม่รับ Corpus Juris Civilis ทั้งระบบ",
+            "label": "เอกสาร LAW1106.pdf"
+          },
+          {
+            "source": "nlm-f34ba2ae",
+            "locator": "ius commune สิ้นสุดด้วย national codification",
+            "label": "2508ModernEra to Codification.pdf"
+          },
+          {
+            "source": "nlm-5bf155a2",
+            "locator": "ยืนยันเฉพาะ: ประมวลแพ่งฝรั่งเศส 1804 และเยอรมัน 1900 เป็นหมุดหมาย (ไม่ได้พูดถึง ius commune โดยตรง)",
+            "label": "เสียงบรรยาย 18OCT25 ประวัติศาสตร์ part 2"
+          }
+        ],
+        "verification": {
+          "method": "notebooklm-document",
+          "notebook": "c3b7a13c-250b-4156-8daf-ebf0a9017daa",
+          "date": "2026-09-20",
+          "query": "ตรวจทีละข้ออ้าง 7 ข้อ (นิยามและส่วนประกอบ, เกิดจากโบโลญญา ศตวรรษที่ 12-15, ตัวกลางสร้างเอกภาพ, ius proprium และกฎหมายสำรอง, เทียบอังกฤษ, เสื่อมด้วยรัฐชาติและ codification, 'ครอบครองยุโรป 3 ยุค') แยกผลตามชนิดแหล่ง เสียง/เอกสาร/วิดีโอ"
+        }
+      }
     }
   }
 }
