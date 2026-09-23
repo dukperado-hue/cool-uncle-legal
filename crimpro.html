@@ -2000,7 +2000,7 @@ const REAL_LECTURES = [
   { n: 7, title: "การชันสูตรพลิกศพและการไต่สวนการตาย (ม.148–156)", text:
 `ครั้งที่ 6 จบที่อำนาจสั่งคดีของพนักงานอัยการตามมาตรา 140–147 ครั้งนี้ (ครั้งที่ 7, 17 กันยายน 2569) ต่อเนื่องไปยังภาคการชันสูตรพลิกศพและการไต่สวนการตาย (มาตรา 148–156) เนื้อหาด้านล่างเรียบเรียงจากไฟล์เสียงบรรยายจริง (เชื่อมผ่าน NotebookLM) การชันสูตรพลิกศพเป็นทั้งอำนาจหน้าที่ของพนักงานสอบสวน แพทย์ และในบางกรณีของพนักงานอัยการด้วย ที่นำมาต่อท้ายภาคการสอบสวนเพราะมาตรา 155 กำหนดให้นำบทบัญญัติว่าด้วยการสอบสวนมาใช้บังคับกับการชันสูตรพลิกศพโดยอนุโลม
 
-[[YT:JCTNCvIcktY|บันทึกวิดีโอการบรรยายครั้งที่ 7 (17 ก.ย. 2569)]]
+[[YT:4GHnw9L9cTM@94]]
 
 **การชันสูตรพลิกศพคืออะไร**
 การชันสูตรพลิกศพ (Inquest) คือกระบวนการตรวจพิสูจน์สภาพศพเพื่อตอบคำถามห้าข้อ คือ
@@ -2132,9 +2132,9 @@ function renderLectureText2(l){
   escaped = escaped.replace(/\[\[XREF:([a-z0-9]+_[^\|\]]+)\|([^\]]+)\]\]/g, (m, id, label) => {
     return `<a class="art-ref" href="codex-article-viewer.html?id=${id}" target="_blank" rel="noopener">${label.replace(/</g,'&lt;')}</a>`;
   });
-  escaped = escaped.replace(/\[\[YT:([A-Za-z0-9_-]+)(?:\|([^\]]+))?\]\]/g, (m, vid, cap) => {
+  escaped = escaped.replace(/\[\[YT:([A-Za-z0-9_-]+)(?:@(\d+))?(?:\|([^\]]+))?\]\]/g, (m, vid, start, cap) => {
     const caption = cap ? cap.replace(/</g,'&lt;') : 'คลิปที่อาจารย์เปิดให้ดูประกอบการบรรยาย';
-    return `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${vid}" title="คลิปประกอบการบรรยายครั้งที่ ${l.n}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="video-credit">🎬 ${caption}</div></div>`;
+    return `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${vid}${start ? '?start=' + start : ''}" title="คลิปประกอบการบรรยายครั้งที่ ${l.n}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="video-credit">🎬 ${caption}</div></div>`;
   });
   const video = l.video ? `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${l.video}" title="วิดีโอประกอบบรรยายครั้งที่ ${l.n}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="video-credit">📺 วิดีโอแนะนำเกี่ยวกับคดีนี้ — จากช่อง <a href="https://www.youtube.com/@CoolUncleLaw/videos" target="_blank" rel="noopener">Cool Uncle Law</a></div></div>` : '';
   if (!l.image) return video + escaped;
