@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FC9EVYB1YG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FC9EVYB1YG');
+</script>
+
+<title>กฎหมายสิ่งแวดล้อม — LA383 | Cool Uncle Legal Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700;800&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF9F4;
+  --card:#FDFCF8;
+  --ink:#22283A;
+  --ink-soft:#5A6072;
+  --ink-faint:#9AA0B0;
+  --line:#E5E1D6;
+  --gold:#B08A3C;
+  --gold-soft:#F3E8CF;
+  --ok:#1E7A4F;
+  --ok-bg:#E6F4EC;
+  --bad:#B23A3A;
+  --bad-bg:#FBEAEA;
+  --accent:#2E4A7A;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(34,40,58,.05),0 6px 20px rgba(34,40,58,.07);
+}
+
+/* ============ THEME: DARK ============ */
+:root[data-theme="dark"]{
+  --paper:#14161f;--card:#1c2030;--ink:#E9E7E1;--ink-soft:#A9AEC2;--ink-faint:#6C7188;
+  --line:#2E3348;--gold:#E0BD73;--gold-soft:#3A3320;--ok:#4FCB8D;--ok-bg:#173425;
+  --bad:#E2685F;--bad-bg:#3A1E1C;--accent:#84A6E8;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.45);
+}
+/* ============ THEME: HORROR (กระสือ mode) ============ */
+:root[data-theme="horror"]{
+  --paper:#0A070C;--card:#151019;--ink:#D9D2C9;--ink-soft:#9C8F93;--ink-faint:#5C5460;
+  --line:#2B1F26;--gold:#8F1F2B;--gold-soft:#301418;--ok:#3F7A4F;--ok-bg:#16241a;
+  --bad:#FF3355;--bad-bg:#301018;--accent:#4A8F5C;
+  --shadow:0 1px 2px rgba(0,0,0,.6),0 10px 28px rgba(0,0,0,.6);
+}
+:root[data-theme="dark"] body,:root[data-theme="horror"] body{background:var(--paper)}
+:root[data-theme="dark"] .home-bar,:root[data-theme="horror"] .home-bar{background:var(--card);border-bottom-color:var(--line)}
+:root[data-theme="dark"] .notice,:root[data-theme="horror"] .notice{background:rgba(255,255,255,.04)}
+:root[data-theme="dark"] .lecture-pending,:root[data-theme="horror"] .lecture-pending{background:rgba(255,255,255,.06);color:var(--ink-faint)}
+:root[data-theme="dark"] .lecture-row:hover,:root[data-theme="horror"] .lecture-row:hover{border-color:var(--gold)}
+
+/* THEME TOGGLE */
+.theme-toggle{display:flex;gap:3px;margin-left:auto;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+.theme-toggle button{border:none;background:transparent;border-radius:999px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .2s;font-family:inherit}
+.theme-toggle button.active{background:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.theme-toggle button:hover{background:var(--line)}
+
+/* GHOST COMPANION (horror mode — rotating cast of 4) */
+.drone-mute-btn{
+  display:none;
+  margin-left:6px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:999px;
+  width:28px;height:28px;
+  align-items:center;justify-content:center;
+  cursor:pointer;font-size:13px;
+}
+:root[data-theme="horror"] .drone-mute-btn{ display:flex; }
+:root[data-theme="horror"] .drone-mute-btn:hover{ background:var(--line); }
+
+/* GHOST COMPANION (horror mode — rotating cast of 4) */
+.ghost-companion{position:fixed;right:16px;bottom:16px;width:200px;height:auto;pointer-events:auto;cursor:pointer;opacity:0;transform:translateY(8px);transition:opacity .6s ease;z-index:999;filter:drop-shadow(0 0 16px rgba(180,20,40,.45));animation:ghost-float 3.4s ease-in-out infinite}
+.ghost-companion.visible{opacity:1}
+.ghost-companion.pulse{filter:drop-shadow(0 0 26px rgba(180,20,40,.8)) drop-shadow(0 0 10px rgba(255,255,255,.3))}
+@keyframes ghost-float{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
+.ghost-speech{
+  position:fixed;max-width:200px;background:#fff;color:#1a1a1a;
+  border-radius:14px;padding:8px 13px;font-size:13px;font-weight:700;
+  font-family:'Sarabun',system-ui,sans-serif;line-height:1.4;
+  box-shadow:0 8px 20px rgba(0,0,0,.4);z-index:1000;
+  opacity:0;pointer-events:none;transform:translateY(6px) scale(.96);
+  transition:opacity .2s ease,transform .2s ease;text-align:center;
+}
+.ghost-speech.visible{opacity:1;transform:translateY(0) scale(1)}
+.ghost-speech::after{
+  content:"";position:absolute;right:28px;bottom:-8px;width:0;height:0;
+  border:8px solid transparent;border-top-color:#fff;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+/* ---------- top home bar ---------- */
+.home-bar{
+  display:flex;align-items:center;gap:10px;
+  background:#EFEAE0;border-bottom:1px solid var(--line);
+  padding:10px 16px;font-size:13px;color:var(--ink-soft);
+}
+.home-bar-logo{
+  font-size:22px;line-height:1;display:inline-flex;align-items:center;
+  text-decoration:none;margin-right:2px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.12));
+  transition:transform .15s;
+}
+.home-bar-logo:hover{transform:scale(1.1)}
+.home-bar-link{
+  color:var(--accent);text-decoration:none;font-weight:700;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.home-bar-link:hover{text-decoration:underline}
+.home-bar-sep{color:var(--ink-faint)}
+.home-bar-current{font-weight:600;color:var(--ink-soft)}
+
+body{
+  font-family:'Sarabun',system-ui,sans-serif;
+  background:radial-gradient(1200px 500px at 50% -200px, #F2EDDF 0%, transparent 60%),var(--paper);
+  color:var(--ink);min-height:100vh;font-size:16px;line-height:1.75;
+}
+h1,h2{font-family:'Noto Serif Thai',serif}
+
+.wrap{max-width:820px;margin:0 auto;padding:28px 16px 60px}
+
+.page-head{text-align:center;margin-bottom:28px}
+.page-head .crest{
+  width:64px;height:64px;border-radius:50%;margin:0 auto 14px;
+  background:radial-gradient(circle at 32% 28%, #E7C983, var(--gold) 55%, #8F6511 100%);
+  display:flex;align-items:center;justify-content:center;font-size:28px;
+  box-shadow:0 6px 18px rgba(176,138,60,.35), inset 0 2px 3px rgba(255,255,255,.5);
+}
+.page-head h1{font-size:26px;font-weight:800;color:var(--ink)}
+.page-head .subtitle{color:var(--ink-soft);margin-top:8px;font-size:14.5px}
+
+.notice{
+  background:#FBF6E8;border:1.5px dashed var(--gold);border-radius:var(--radius);
+  padding:14px 16px;margin:24px 0;font-size:14px;color:var(--ink-soft);
+  display:flex;align-items:center;gap:10px;
+}
+
+.lecture-list{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.lecture-row{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;transition:border-color .15s;
+}
+.lecture-row:hover{border-color:var(--gold)}
+.lecture-head{display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer}
+.lecture-row.pending .lecture-head{cursor:default}
+.lecture-num{
+  width:36px;height:36px;flex-shrink:0;border-radius:50%;background:var(--gold-soft);
+  color:#8F6511;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;
+}
+.lecture-title{flex:1;min-width:0;font-weight:700;color:var(--ink);font-size:15px}
+.lecture-toggle{color:var(--ink-faint);font-size:13px;flex-shrink:0;transition:transform .2s}
+.lecture-row.open .lecture-toggle{transform:rotate(180deg)}
+.lecture-body{display:none;padding:0 16px 16px 66px;font-size:14px;color:var(--ink-soft);white-space:pre-line;line-height:1.8}
+.lecture-row.open .lecture-body{display:block}
+/* TTS bar */
+.tts-bar{
+  display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+  background:#F1EDE2;border:1px solid var(--line);border-radius:12px;
+  padding:8px 12px;margin:16px 0;
+}
+.tts-btn{
+  background:var(--accent);color:#fff;border:none;border-radius:8px;
+  padding:8px 14px;font-size:13.5px;font-weight:600;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;font-family:inherit;
+}
+.tts-btn:hover{opacity:.9}
+.tts-btn-ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.tts-btn-ghost:hover{border-color:var(--bad);color:var(--bad)}
+.tts-ico{font-size:11px}
+.tts-rate{font-size:12.5px;color:var(--ink-soft);margin-left:auto;display:inline-flex;align-items:center;gap:6px}
+.tts-rate select{
+  background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:5px 8px;font-family:inherit;font-size:12.5px;cursor:pointer;
+}
+.tts-hint{font-size:12px;color:var(--ink-faint)}
+.lecture-video{margin:12px 0 16px}
+.lecture-video .video-frame-wrap{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:10px;overflow:hidden}
+.lecture-video .video-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.lecture-diagram{margin:0 0 16px;text-align:center}
+.lecture-diagram img{max-width:100%;width:auto;max-height:520px;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow);background:#fff}
+.lecture-diagram figcaption{font-size:12px;color:var(--ink-faint);margin-top:6px;line-height:1.4}
+.const-quote{background:#fff;color:#1a1a1a;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:0 0 16px;box-shadow:var(--shadow);font-size:13.5px;line-height:1.9;white-space:pre-line}
+.const-quote .clause-a{background:#cfe3ff;color:#0b3d7a;padding:1px 3px;border-radius:3px}
+.const-quote .clause-b{background:#ffd9d0;color:#8a2c14;padding:1px 3px;border-radius:3px;font-weight:700}
+.const-quote-legend{display:flex;gap:16px;font-size:11px;color:var(--ink-faint);margin-top:10px;flex-wrap:wrap}
+.const-quote-legend span{display:inline-flex;align-items:center;gap:5px}
+.const-quote-legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.board-note{background:#fff;color:#1a1a1a;border:1px solid var(--line);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow);text-align:left;font-size:13.5px;line-height:1.8}
+.board-note .board-note-title{font-weight:700;color:var(--ink-faint);font-size:11.5px;margin-bottom:10px;text-align:left}
+.board-note .grp{font-weight:700;color:#0b3d7a;margin:10px 0 4px}
+.board-note .grp:first-of-type{margin-top:0}
+.board-note ol{margin:0 0 4px 20px;padding:0}
+.board-note ol ol{margin-top:2px}
+.board-note li{margin:2px 0}
+.exam-answer{background:var(--ok-bg);border:1px solid var(--ok);border-radius:8px;padding:12px 14px;margin:6px 0 16px;font-size:13px;line-height:1.85;color:var(--ink)}
+.exam-answer .ans-title{font-weight:700;color:var(--ok);font-size:11.5px;margin-bottom:6px;letter-spacing:.2px}
+.exam-answer .ans-issue{font-weight:700;margin-top:8px}
+.exam-answer .ans-issue:first-of-type{margin-top:0}
+.exam-answer .verdict{font-weight:700}
+.lecture-pending{
+  font-size:12px;font-weight:700;color:var(--ink-faint);background:#F1EDE2;
+  padding:5px 12px;border-radius:999px;white-space:nowrap;flex-shrink:0;
+}
+mark.hl{background:var(--gold-soft);color:var(--ink);padding:0 3px;border-radius:3px;font-weight:700;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+mark.hl-fr{background:#ffc2e0;color:#7a1350;padding:0 3px;border-radius:3px;font-weight:700;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+mark.hl-de{background:#fff09e;color:#5c4b00;padding:0 3px;border-radius:3px;font-weight:700;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+/* ---------- มาตราซ่อนแอบ: คลิกมาตราในเนื้อหาบรรยายเพื่อดูตัวบทเต็ม ---------- */
+.art-ref{
+  font-weight:700;text-decoration:underline;text-underline-offset:2px;
+  color:var(--accent);cursor:pointer;
+}
+.art-ref:hover{opacity:.78}
+.art-ref.active{opacity:.78}
+.art-full{
+  display:none;margin:8px 0;padding:12px 14px;background:var(--gold-soft);
+  border-left:3px solid var(--gold);border-radius:8px;font-size:13px;
+  line-height:1.8;color:var(--ink);white-space:pre-line;
+}
+.art-full.open{display:block}
+.art-full .art-full-num{color:var(--accent);display:block;margin-bottom:4px;font-size:12.5px;font-weight:700}
+.art-full .art-full-item{margin-top:10px}
+.art-full .art-full-item:first-child{margin-top:0}
+
+/* ---------- mode tabs (โหมดอ่าน / War Mode วิ.ปกครอง / War Mode วิ.รัฐธรรมนูญ) ---------- */
+.mode-tabs{display:flex;gap:8px;margin:22px 0 18px;flex-wrap:wrap}
+.mode-tab{
+  flex:1;min-width:150px;background:#fff;border:1px solid var(--line);border-radius:12px;
+  padding:12px 14px;font-family:'IBM Plex Sans Thai Looped',system-ui,sans-serif;font-size:14px;font-weight:700;color:var(--ink-soft);
+  cursor:pointer;transition:all .15s;text-align:center;
+}
+.mode-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.mode-tab:hover:not(.active){border-color:var(--gold)}
+.mode-panel{display:none}
+.mode-panel.active{display:block}
+:root[data-theme="dark"] .mode-tab,:root[data-theme="horror"] .mode-tab{background:var(--card)}
+:root[data-theme="dark"] .mode-tab.active,:root[data-theme="horror"] .mode-tab.active{background:var(--accent)}
+
+/* ---------- War Mode ---------- */
+.war-intro p{margin:0 0 8px}
+.war-intro p:last-child{margin-bottom:0}
+.war-map{margin:14px 0 6px}
+.war-map-title{font-size:12px;font-weight:700;color:var(--ink-faint);margin-bottom:8px}
+.war-chip{display:inline-flex;align-items:center;gap:6px;margin:0 6px 8px 0;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);font-size:13px;text-decoration:none;font-weight:600}
+.war-chip:hover{border-color:var(--gold)}
+.war-chip b{color:var(--accent)}
+.war-chip-n{font-size:11px;color:var(--ink-faint);font-weight:700;background:#F1EDE2;padding:1px 7px;border-radius:999px}
+:root[data-theme="dark"] .war-chip-n,:root[data-theme="horror"] .war-chip-n{background:rgba(255,255,255,.08)}
+.war-issue{border:1px solid var(--line);border-radius:14px;background:var(--card);margin:14px 0;box-shadow:var(--shadow)}
+.war-issue>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:14px 16px;font-weight:700;font-size:15px;color:var(--ink)}
+.war-issue>summary::-webkit-details-marker{display:none}
+.war-issue>summary::after{content:'▾';margin-left:auto;color:var(--ink-faint);font-size:13px;transition:transform .2s}
+.war-issue[open]>summary::after{transform:rotate(180deg)}
+.war-issue-n{width:30px;height:30px;flex-shrink:0;border-radius:50%;background:var(--gold-soft);color:#8F6511;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+.war-issue-name{flex:1;min-width:0}
+.war-issue-freq{font-size:11.5px;font-weight:700;color:var(--ink-faint);background:#F1EDE2;padding:4px 10px;border-radius:999px;white-space:nowrap}
+:root[data-theme="dark"] .war-issue-freq,:root[data-theme="horror"] .war-issue-freq{background:rgba(255,255,255,.08)}
+.war-issue-body{padding:0 16px 16px}
+.war-keys{background:var(--gold-soft);border-left:3px solid var(--gold);border-radius:8px;padding:10px 14px;margin:0 0 14px;font-size:13.5px;line-height:1.8;color:var(--ink)}
+.war-keys-title{font-weight:700;font-size:12px;color:var(--ink-faint);margin-bottom:4px}
+.war-q{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;background:var(--paper)}
+.war-q-head{display:flex;gap:8px;align-items:center;margin-bottom:6px}
+.war-q-id{font-size:11px;font-weight:800;color:#fff;background:var(--accent);padding:2px 8px;border-radius:6px;letter-spacing:.4px}
+.war-q-kind{font-size:11.5px;color:var(--ink-faint);font-weight:700}
+.war-q-title{font-weight:700;font-size:14.5px;color:var(--ink);line-height:1.6}
+.war-q-src{font-size:12px;color:var(--ink-faint);margin:2px 0 10px}
+.war-q-body{font-size:14px;line-height:1.85;color:var(--ink-soft)}
+.war-q-body p{margin:0 0 8px}
+.war-q-body p.war-ask{color:var(--ink);font-weight:600;margin-left:4px}
+.war-ans{margin-top:10px}
+.war-ans>summary{cursor:pointer;font-weight:700;font-size:13.5px;color:var(--accent);padding:6px 0;list-style:none}
+.war-ans>summary::-webkit-details-marker{display:none}
+.war-ans .exam-answer{margin-bottom:4px}
+.war-ul{margin:4px 0 6px 20px;padding:0}
+.war-ul li{margin:2px 0}
+.war-off{margin-top:10px;padding:10px 12px;border-left:3px dashed var(--gold);background:rgba(176,138,60,.08);border-radius:6px;font-size:13px;line-height:1.85}
+.war-off-tag{display:block;font-weight:700;font-size:11.5px;color:var(--ink-faint);margin-bottom:2px}
+.exam-answer p{margin:0 0 8px}
+.war-note{font-size:12.5px;color:var(--ink-faint);margin-top:6px;line-height:1.7}
+.war-lec{border:1px solid var(--line);border-radius:12px;margin:10px 0;background:var(--paper)}
+.war-lec>summary{cursor:pointer;padding:12px 14px;font-weight:700;font-size:14px;color:var(--ink)}
+.war-lec-body{padding:0 14px 14px}
+@media(max-width:640px){.war-issue>summary{flex-wrap:wrap}.war-issue-freq{order:3}.war-q{padding:12px 12px}.war-issue-body{padding:0 10px 12px}}
+
+footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)}
+.coffee-widget{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  margin:28px auto 0;padding:18px;max-width:280px;
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+}
+.coffee-widget img{width:130px;height:130px;border-radius:8px;background:#fff;padding:6px}
+.coffee-widget a.coffee-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#FFDD00;color:#1a1a1a;font-weight:700;font-size:13px;
+  padding:8px 16px;border-radius:8px;text-decoration:none;transition:transform .15s;
+}
+.coffee-widget a.coffee-btn:hover{transform:scale(1.04)}
+.coffee-widget p{margin:0;font-size:12px;color:var(--ink-faint);text-align:center}
+.coffee-widget .data-source-note a{color:inherit}
+
+@media(max-width:640px){
+  .wrap{padding:20px 12px 50px}
+  .lecture-head{gap:10px;padding:12px 12px}
+  .lecture-num{width:28px;height:28px;font-size:12px}
+  .lecture-body{padding:0 14px 14px 14px}
+}
+</style>
+<meta name="description" content="สรุปบรรยายวิชากฎหมายสิ่งแวดล้อมรายครั้ง 15 ครั้ง — หลักกฎหมายสิ่งแวดล้อม เครื่องมือกำกับดูแล กฎหมายภูมิอากาศ ธุรกิจกับสิทธิมนุษยชน EIA/EHIA สารอันตราย ทะเลและประมง ป่าไม้ และอากาศสะอาด พร้อมคลิปประกอบทุกครั้ง">
+<meta name="keywords" content="กฎหมายสิ่งแวดล้อม, EIA, EHIA, พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อม, กฎหมายภูมิอากาศ, ความตกลงปารีส, วัตถุอันตราย, พ.ร.ก.การประมง, ป่าไม้, อากาศสะอาด, PM2.5">
+</head>
+<body>
+<script>
+// Apply the persisted theme as early as possible to avoid a flash of the
+// wrong theme (light/dark/horror shared site-wide via localStorage).
+(function(){
+  try {
+    var t = localStorage.getItem('codex-theme');
+    if (t === 'dark' || t === 'horror') document.documentElement.setAttribute('data-theme', t);
+  } catch(e){}
+})();
+</script>
+<div class="home-bar">
+  <a href="index.html" class="home-bar-logo" title="กลับหน้าหลัก" onmouseenter="playHoverSound()">👴🏻</a>
+  <a href="index.html" class="home-bar-link" onmouseenter="playHoverSound()">← กลับหน้าหลัก</a>
+  <span class="home-bar-sep">·</span>
+  <span class="home-bar-current">กฎหมายสิ่งแวดล้อม</span>
+  <div class="theme-toggle" role="group" aria-label="เลือกธีม">
+    <button type="button" data-theme-btn="light" onclick="setTheme('light')" onmouseenter="playHoverSound()" title="โหมดสว่าง">☀️</button>
+    <button type="button" data-theme-btn="dark" onclick="setTheme('dark')" onmouseenter="playHoverSound()" title="โหมดมืด">🌙</button>
+    <button type="button" data-theme-btn="horror" onclick="setTheme('horror')" onmouseenter="playHoverSound()" title="โหมดสยองขวัญ">👻</button>
+  </div>
+  <button type="button" id="drone-mute-btn" class="drone-mute-btn" onclick="toggleDroneMute(this)" title="ปิด/เปิดเสียงเพลง">🔊</button>
+</div>
+<audio id="horror-bgm" loop preload="auto" playsinline webkit-playsinline style="display:none">
+  <source src="music/The_Cold_Stream_Lament.mp3" type="audio/mpeg">
+</audio>
+<audio id="dog-howl" preload="auto" playsinline webkit-playsinline style="display:none">
+  <source src="music/หมาหอน.mp3" type="audio/mpeg">
+</audio>
+
+<div class="wrap">
+  <header class="page-head">
+    <div class="crest">🌿</div>
+    <h1>กฎหมายสิ่งแวดล้อม</h1>
+    <p class="subtitle">Environmental Law · สรุปเนื้อหาบรรยายรายครั้ง · ปี 3</p>
+  </header>
+
+
+  <div class="mode-panel active" id="panel-read">
+  <div class="tts-bar" id="tts-bar" style="display:none">
+    <button id="tts-play" class="tts-btn" title="อ่านออกเสียงบรรยายที่เปิดอยู่"><span class="tts-ico">▶</span> อ่านออกเสียง</button>
+    <button id="tts-pause" class="tts-btn" title="หยุดชั่วคราว/เล่นต่อ" style="display:none"><span class="tts-ico">⏸</span> หยุดชั่วคราว</button>
+    <button id="tts-stop" class="tts-btn tts-btn-ghost" title="หยุด" style="display:none"><span class="tts-ico">■</span> หยุด</button>
+    <label class="tts-rate">ความเร็ว <select id="tts-rate">
+      <option value="0.8">0.8×</option>
+      <option value="1" selected>1.0×</option>
+      <option value="1.2">1.2×</option>
+      <option value="1.5">1.5×</option>
+    </select></label>
+    <span class="tts-hint">เปิดบรรยายครั้งที่ต้องการก่อน แล้วกด "อ่านออกเสียง"</span>
+  </div>
+  <div class="lecture-list" id="lectureList"></div>
+  </div>
+
+  <div class="coffee-widget">
+  <p>ถ้าเว็บนี้มีประโยชน์ เลี้ยงกาแฟ Cool Uncle สักแก้วได้นะ ☕</p>
+  <img src="pics/coffee/bmc_qr.png" alt="QR code เลี้ยงกาแฟผ่าน Buy Me a Coffee" loading="lazy">
+  <a href="https://buymeacoffee.com/dukperadom" target="_blank" rel="noopener" class="coffee-btn" onmouseenter="playHoverSound()">☕ Buy Me a Coffee</a>
+  <p class="data-source-note">ข้อมูลกฎหมายอ้างอิงจากฐานข้อมูลกฤษฎีกา <a href="https://www.ocs.go.th/searchlaw-law" target="_blank" rel="noopener">https://www.ocs.go.th/searchlaw-law</a> · สืบค้นล่าสุด 31 กรกฎาคม 2569</p>
+</div>
+<footer>สร้างด้วย Claude · ⚠️ ใช้อ่านเสริมหลักสูตรเท่านั้น โปรดตรวจสอบความถูกต้องของข้อมูล · Cool Uncle Legal Lab 2024</footer>
+</div>
+
+<script>
+let __hbAudioCtx;
+function playHoverSound(){
+  try{
+    __hbAudioCtx = __hbAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __hbAudioCtx;
+    if(c.state === 'suspended') c.resume();
+    const t0 = c.currentTime;
+    const osc = c.createOscillator(), gain = c.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(0.05, t0+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0+0.09);
+    osc.connect(gain); gain.connect(c.destination);
+    osc.start(t0); osc.stop(t0+0.1);
+  }catch(e){}
+}
+
+/* Each entry: { n, title, text }. title/text present = ready to read; absent = still pending. */
+const LECTURES = [
+ {
+  "n": 1,
+  "title": "พัฒนาการของกฎหมายสิ่งแวดล้อมและภูมิทัศน์ของระบบกฎหมายสิ่งแวดล้อมไทย",
+  "video": "TOPg1dpHo_w",
+  "text": "**ภาพรวม:** คาบแรกวางแผนที่ทั้งวิชา คือ ปัญหาสิ่งแวดล้อมเกิดจากอะไร มีกี่ประเภท กฎหมายมีเครื่องมืออะไรรับมือ และกฎหมายสิ่งแวดล้อมไทยมีโครงสร้างอย่างไร\n**1. สาเหตุของปัญหาสิ่งแวดล้อม**\nปัญหาสิ่งแวดล้อมไม่ได้เกิดจากเหตุเดียว แต่เกิดจากหลายปัจจัยที่ซ้อนกัน\n(1) จำนวนประชากรที่เพิ่มขึ้น ทำให้แย่งกันใช้ทรัพยากรและเกิดขยะมากขึ้น\n(2) ความเชื่อ ประเพณี ค่านิยมและวัฒนธรรมเฉพาะถิ่น เช่น ความเชื่อเรื่องการอาบน้ำหรือลอยกระทงในแม่น้ำ\n(3) การแสวงหาประโยชน์ทางการเมืองและการทุจริต เช่น นโยบายนำอุตสาหกรรมหรือทุนต่างชาติเข้ามาตั้งฐานการผลิต แล้วตามมาด้วยมลพิษและการรั่วไหลของสารเคมี\n(4) การพัฒนาทางเศรษฐกิจ ซึ่งเป็นปัจจัยหลัก เพราะการมุ่งเติบโตทางอุตสาหกรรมในอดีตทำให้ถลุงแร่และใช้ทรัพยากรอย่างหนัก โดยละเลยอากาศและแหล่งน้ำ\n(5) ความก้าวหน้าทางเทคโนโลยี เช่น การสร้าง Data Center ที่ใช้พลังงานมหาศาลและแย่งชิงแร่หายาก (Rare Earth) จากประเทศกำลังพัฒนา\n(6) ความยากจน ผู้มีรายได้น้อยมักเลือกทางที่ถูกกว่าแม้ทำลายสิ่งแวดล้อม เช่น เกษตรกรเผาป่าเตรียมพื้นที่เพราะไม่มีเงินซื้อเครื่องจักรไถกลบ\n(7) จิตสำนึกและการศึกษา ในเกาหลีใต้และเยอรมนี ประชาชนแยกขยะได้ดี ส่วนหนึ่งเพราะมีกฎหมายและบทลงโทษที่เข้มงวดช่วยปรับพฤติกรรม\n**2. ประเภทของปัญหาสิ่งแวดล้อม**\n(1) ความเสื่อมสลายของทรัพยากรธรรมชาติ คือการทำลายทรัพยากรพื้นฐาน เช่น ดิน น้ำ ป่าไม้ แร่ธาตุ และปิโตรเลียม\n(2) ภาวะมลพิษ ได้แก่ มลพิษทางน้ำ อากาศ และเสียง\n(3) ปัญหาสิ่งแวดล้อมของชุมชนเมือง เช่น ขยะมูลฝอยและน้ำเสีย ซึ่งอยู่ในความดูแลขององค์กรปกครองส่วนท้องถิ่น (กทม. เทศบาล อบต.)\n(4) ความเสื่อมสลายของสิ่งแวดล้อมศิลปกรรม เช่น ฝนกรดที่กัดกร่อนโบราณสถานและโบราณวัตถุ\nกรณีตัวอย่างที่ยกในคาบ คือ การลักลอบปล่อยน้ำเสียสีดำลงทะเลพัทยา ซึ่งมีปัญหาความทับซ้อนของหน่วยงาน เพราะกรมควบคุมมลพิษชี้แจงว่าเป็นพื้นที่ของเมืองพัทยา และผู้รับเหมาก็เป็นคู่สัญญากับเมืองพัทยาเอง อีกกรณีคือเหมืองตะกั่วคลิตี้ที่ปล่อยสารพิษลงลำน้ำในจังหวัดกาญจนบุรี ชาวบ้านเจ็บป่วยและพิการ และต้องใช้เวลาฟ้องร้องยาวนานทั้งศาลปกครองและศาลยุติธรรม\n**3. ขอบเขตของปัญหา**\nปัญหาระดับท้องถิ่น (Local) เช่น ลำน้ำเหมืองคลิตี้ หรือน้ำมันดิบรั่วที่เกาะเสม็ด ปัญหาระดับภูมิภาค (Regional) ที่ข้ามพรมแดน เช่น เขื่อนบนแม่น้ำโขงที่กระทบประเทศปลายน้ำอย่างไทย หรือฝนกรดในยุโรป และปัญหาระดับโลก (Global) เช่น ภาวะโลกร้อนและการเปลี่ยนแปลงสภาพภูมิอากาศ ซึ่งต้องแก้ผ่านเวทีระดับโลกอย่างสหประชาชาติ\n**4. ผลกระทบของปัญหา แบ่งตามลักษณะการเกิด**\n(1) ผลกระทบเฉียบพลัน (Acute) เกิดขึ้นและเสียหายรุนแรงทันที เช่น สึนามิ ท่อน้ำมันดิบรั่วลงทะเล ไฟป่าครั้งใหญ่\n(2) ผลกระทบต่อเนื่อง (Creeping) ค่อย ๆ สะสมโดยไม่เห็นผลทันที แต่นำไปสู่การเปลี่ยนแปลงถาวร เช่น การกลายเป็นทะเลทราย ภาวะขาดแคลนน้ำ อุณหภูมิโลกที่สูงขึ้นทีละน้อย\n(3) ผลกระทบจากการสะสมความเสี่ยง (Risk) จากเทคโนโลยีเสี่ยงสูงที่หากผิดพลาดจะเกิดหายนะครั้งเดียว เช่น เชื้อไวรัสหลุดจากห้องแล็บ อุบัติเหตุโรงไฟฟ้านิวเคลียร์ สารเคมีอันตราย ซึ่งกฎหมายต้องเข้ามาด้วย **หลักการระวังไว้ก่อน (Precautionary Principle)**\n**5. เครื่องมือทางกฎหมายจัดการปัญหาสิ่งแวดล้อม**\n(1) **Private Action (การใช้สิทธิทางเอกชน)** เป็นแนวทางดั้งเดิม ใช้กฎหมายแพ่ง เช่น ฟ้องละเมิดตามมาตรา 420 ป.พ.พ. เมื่อได้รับความเดือดร้อนจากผู้อื่น เช่น เพื่อนบ้านเลี้ยงไก่เสียงดังและส่งกลิ่น หรือคนต้นน้ำใช้น้ำจนคนปลายน้ำเดือดร้อน ข้อจำกัดคือรอให้เกิดความเสียหายก่อนจึงฟ้องได้ จัดการมลพิษที่สะสมหรือกระจายตัวได้ไม่ดี และการพิสูจน์ความสัมพันธ์ระหว่างเหตุกับผลทำได้ยากและใช้เวลานาน\n(2) **Public Action (การจัดการโดยรัฐ)** เป็นแนวทางสมัยใหม่ ใช้กฎหมายมหาชนและกฎหมายปกครอง รัฐกำหนดกฎระเบียบ มาตรฐาน (Standard) และบังคับใช้ (Enforcement) เช่น ประกาศเขตห้ามตัดไม้ หรือกำหนดค่ามาตรฐานน้ำเสียและอากาศ เพื่อป้องกันล่วงหน้าโดยไม่ต้องรอให้เอกชนเสียหาย\n(3) **Citizen Suit (การฟ้องคดีโดยประชาชน)** เป็นแนวทางผสมที่ใช้ในสหรัฐอเมริกา ให้ประชาชนฟ้องผู้ก่อมลพิษโดยตรงเมื่อรัฐละเลยการบังคับใช้กฎหมาย ส่วนในไทยประชาชนต้องแยกฟ้องสองทาง คือ ฟ้องผู้ก่อมลพิษเรียกค่าเสียหายที่ศาลยุติธรรม และฟ้องหน่วยงานรัฐฐานละเลยหน้าที่ที่ศาลปกครอง\n**6. ความท้าทายในการจัดการปัญหา**\n(1) ข้อจำกัดทางวิทยาศาสตร์และเทคโนโลยี ทำให้ตัดสินใจเชิงนโยบายยาก เพราะผลกระทบหลายอย่างยังหาข้อสรุปไม่ได้ เช่น หากสิ่งมีชีวิตชนิดหนึ่งสูญพันธุ์จะกระทบห่วงโซ่อาหารอย่างไร\n(2) โครงการขนาดใหญ่ เช่น Land Bridge หรือการสร้างเขื่อน ต้องชั่งน้ำหนักความคุ้มค่าทางเศรษฐกิจกับการสูญเสียพื้นที่ป่าและผลกระทบต่อชาวบ้าน ซึ่งเป็นเหตุให้ต้องมีการประเมินผลกระทบ EIA และ EHIA ก่อนเริ่มโครงการ\n(3) ปัญหาสิ่งแวดล้อมมักไม่ได้เกิดจากสาเหตุเดียว เช่น ฝุ่น PM 2.5 หรือน้ำเสียในคลองที่มีหลายแหล่งกำเนิด จึงระบุตัวผู้กระทำผิดได้ยาก\n(4) ในชั้นดำเนินคดี ข้อมูลวิชาการมักอยู่ในมือผู้ก่อมลพิษ ผู้เสียหายจึงพิสูจน์ได้ยาก และการเรียกค่าเสียหายทางแพ่งตามมาตรา 420 และ 438 มีข้อจำกัดในการเยียวยา เพราะผู้เสียหายหลายรายไม่ได้ต้องการเงิน แต่ต้องการให้สภาพแวดล้อมกลับมาสมบูรณ์เหมือนเดิม\n**7. โครงสร้างกฎหมายสิ่งแวดล้อมไทย**\nกฎหมายสิ่งแวดล้อมไทยส่วนใหญ่เป็นกฎหมายมหาชน แบ่งเป็นกฎหมายทรัพยากรธรรมชาติ (เน้นการใช้และอนุรักษ์ ดิน น้ำ แร่ธาตุ ป่าไม้ สัตว์ป่า) และกฎหมายสิ่งแวดล้อม (เน้นควบคุมมลพิษ น้ำเสีย อากาศ เสียง แสง ขยะ) กฎหมายทั่วไปอย่าง ป.อาญา และ ป.พ.พ. ก็ถูกนำมาใช้ร่วมด้วย ส่วนกฎหมายเอกชนช่วยเยียวยาเมื่อเกิดความเสียหายแล้ว ได้แก่ ป.พ.พ. มาตรา 420 และ พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535 มาตรา 96 และ 97 (ค่าสินไหมทดแทน)\nโครงสร้างแบ่งเป็น 3 ระดับ\n**ระดับที่ 1 รัฐธรรมนูญ (แนวนโยบายแห่งรัฐ)** เป็นร่มใหญ่สุดที่กำหนดเป้าหมายกว้าง ๆ\n(1) หมวดหน้าที่ของรัฐ มาตรา 57 (2) รัฐต้องอนุรักษ์ คุ้มครอง บำรุงรักษา ฟื้นฟู และบริหารจัดการทรัพยากรธรรมชาติ สิ่งแวดล้อม และความหลากหลายทางชีวภาพ (Biodiversity) ให้เกิดประโยชน์อย่าง **สมดุลและยั่งยืน** และให้ประชาชนและชุมชนมีส่วนร่วม\n(2) มาตรา 58 เป็นรากฐานของการทำ EHIA คือ หากรัฐจะทำโครงการหรืออนุญาตให้เอกชนทำโครงการที่อาจก่อ **ผลกระทบอย่างรุนแรง** ต่อทรัพยากรธรรมชาติ คุณภาพสิ่งแวดล้อม สุขภาพอนามัย หรือคุณภาพชีวิตของประชาชน ต้องจัดให้มีการประเมินผลกระทบสิ่งแวดล้อมและสุขภาพ (EHIA) และเปิดให้ผู้มีส่วนได้เสียมีส่วนร่วมก่อน\n(3) หมวดแนวนโยบายแห่งรัฐ มาตรา 72 ว่าด้วยที่ดิน ทรัพยากรน้ำ และพลังงาน เช่น วางแผนการใช้ที่ดินตามหลักการพัฒนาอย่างยั่งยืน วางและบังคับใช้ผังเมือง จัดให้มีน้ำที่มีคุณภาพและเพียงพอ และส่งเสริมพลังงานทางเลือก\n**ระดับที่ 2 กฎหมายว่าด้วยการกำหนดนโยบายสิ่งแวดล้อมของชาติ** คือ **พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535** ซึ่งเปรียบเป็นกระดูกสันหลังของกฎหมายสิ่งแวดล้อมไทย ใช้แทนฉบับปี 2518 และมีการแก้ไขครั้งสำคัญช่วงปี 2561 ถึง 2562 เพื่อปรับปรุงเรื่อง EIA\n(1) วัตถุประสงค์ คือ ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมของประเทศ ป้องกัน แก้ไข และควบคุมมลพิษ และสนับสนุนการพัฒนาอย่างยั่งยืน\n(2) กำหนดนโยบายและแผนสิ่งแวดล้อมแห่งชาติ แผนจัดการคุณภาพสิ่งแวดล้อม (มาตรา 35) และ **มาตรฐานคุณภาพสิ่งแวดล้อม (Ambient Standard)** เช่น มาตรฐานคุณภาพอากาศที่ควบคุมโอโซน ซัลเฟอร์ไดออกไซด์ ไนโตรเจนไดออกไซด์ PM 2.5 PM 10 และคาร์บอนมอนอกไซด์ ข้อสังเกตคือ ไม่มีค่ามาตรฐานของคาร์บอนไดออกไซด์ (CO2) ทั้งที่เป็นตัวการหลักของภาวะโลกร้อน\n(3) เป็นฐานอำนาจจัดตั้งองค์กร ได้แก่ คณะกรรมการสิ่งแวดล้อมแห่งชาติ (กก.วล.) ที่มีนายกรัฐมนตรีเป็นประธาน สำนักงานนโยบายและแผนทรัพยากรธรรมชาติและสิ่งแวดล้อม (สผ.) ซึ่งทำงานใกล้ชิดกับการพิจารณารายงาน EIA และ EHIA และกองทุนสิ่งแวดล้อม\n(4) ปัญหาในทางปฏิบัติ คือ การเบิกจ่ายจากกองทุนสิ่งแวดล้อมยุ่งยากและล่าช้าเพราะถูกควบคุมเงื่อนไขโดยกระทรวงการคลัง กฎหมายเฉพาะทางใหม่ ๆ เช่น กฎหมายอากาศสะอาดและกฎหมายน้ำ จึงมักตั้งกองทุนแยกของตนเอง\n(5) หน่วยงานที่เกี่ยวข้อง ได้แก่ กรมควบคุมมลพิษ (กำหนดมาตรฐานมลพิษด้านต่าง ๆ) และกรมการเปลี่ยนแปลงสภาพภูมิอากาศและสิ่งแวดล้อม ซึ่งเปลี่ยนชื่อมาจากกรมส่งเสริมคุณภาพสิ่งแวดล้อมเมื่อปี 2566 เพื่อสะท้อนความสำคัญของ Climate Change และการเป็นภาคีความตกลงปารีส\n**ระดับที่ 3 กฎหมายเฉพาะและกฎหมายอื่น** ปัญหาของไทยคือกฎหมายกระจัดกระจายอยู่ในหลายฉบับ เช่น พ.ร.บ.โรงงาน พ.ศ. 2535 พ.ร.บ.น้ำบาดาล พ.ศ. 2520 (เช่น ห้ามขุดเจาะน้ำบาดาลใน กทม. เพราะปัญหาแผ่นดินทรุด) พ.ร.บ.ผังเมือง พ.ร.บ.ป่าไม้ พ.ศ. 2484 พ.ร.บ.อุทยานแห่งชาติ พ.ศ. 2562 พ.ร.ก.การประมง พ.ศ. 2558 (เช่น ห้ามใช้อวนตาถี่จับลูกปลา) รวมถึงกฎกระทรวง ประกาศกระทรวง และเทศบัญญัติของท้องถิ่นที่จัดการขยะชุมชน ซึ่งมักมีปัญหาเรื่องการบังคับใช้\n**ทบทวนกฎหมายที่เรียนในคาบนี้**\n- รัฐธรรมนูญ 2560 **มาตรา 57 (2)** (อนุรักษ์และจัดการทรัพยากรอย่างสมดุลและยั่งยืน) **มาตรา 58** (EHIA และการมีส่วนร่วม) **มาตรา 72** (ที่ดิน น้ำ พลังงาน)\n- พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535 **มาตรา 35** (แผนจัดการคุณภาพสิ่งแวดล้อม) และ **มาตรา 96–97** (ค่าสินไหมทดแทน)\n- ป.พ.พ. **มาตรา 420** และ **438** (ละเมิดและการเยียวยา)\n**จุดที่ควรจำ:** กฎหมายสิ่งแวดล้อมไทยเป็นกฎหมายมหาชนเป็นหลัก มี 3 ระดับ (รัฐธรรมนูญ, พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อม 2535, กฎหมายเฉพาะเรื่อง) และเครื่องมือมี 3 แบบ (Private Action, Public Action, Citizen Suit) โดยไทยยังต้องแยกฟ้องสองศาล"
+ },
+ {
+  "n": 2,
+  "title": "แนวคิดและหลักกฎหมายสิ่งแวดล้อม (1): โครงสร้างกฎหมายไทย ระบบศาล และที่มาของหลักสากล",
+  "video": "t3CS4EHsYNM",
+  "text": "**ภาพรวม:** คาบนี้ต่อจากคาบแรก เริ่มจากที่มาของแนวคิดสิ่งแวดล้อมระดับโลก แล้วสรุปหลักกฎหมายสิ่งแวดล้อมสำคัญ ก่อนลงรายละเอียดโครงสร้างกฎหมายไทยระดับที่ 2 และ 3 บ่อเกิดของกฎหมายระหว่างประเทศ และระบบศาลที่รับคดีสิ่งแวดล้อม\n**1. ที่มาของแนวคิดสิ่งแวดล้อมสมัยใหม่ (Soft Law สู่หลักกฎหมาย)**\nแนวคิดสมัยใหม่ไม่ได้เกิดขึ้นทันทีในรูปสนธิสัญญาที่มีผลผูกพัน แต่เกิดจากการประชุมของประชาคมโลกที่ออกเป็นปฏิญญาและประกาศซึ่งเป็น **Soft Law** (ไม่มีผลผูกพันทางกฎหมายโดยตรง) แล้วค่อย ๆ พัฒนาเป็นหลักกฎหมายทั่วไปและจารีตประเพณีระหว่างประเทศ\n(1) **ปฏิญญาสตอกโฮล์ม ค.ศ. 1972** จากการประชุมสหประชาชาติว่าด้วยสิ่งแวดล้อมของมนุษย์ (UNCHE) เป็นจุดเริ่มต้นของการตื่นตัว เน้นคำว่า \"สิ่งแวดล้อมของมนุษย์\" (Human Environment) คือมนุษย์เริ่มตระหนักว่าหากสิ่งแวดล้อมพัง มนุษย์เองก็อยู่ไม่ได้\n(2) **กฎบัตรโลกเพื่อธรรมชาติ ค.ศ. 1982** ขยายความสนใจจากมนุษย์เป็นศูนย์กลาง ไปสู่ตัวธรรมชาติ\n(3) **รายงานบรันด์แลนด์ ค.ศ. 1987 (Our Common Future)** ของคณะกรรมาธิการโลกว่าด้วยสิ่งแวดล้อมและการพัฒนา (WCED) เป็นจุดกำเนิดของแนวคิด **การพัฒนาที่ยั่งยืน** และทำให้เกิดแนวคิดความเป็นธรรมระหว่างคนรุ่นเดียวกัน (Intra-generation) และระหว่างคนรุ่นปัจจุบันกับรุ่นอนาคต (Inter-generation)\n(4) **ปฏิญญาริโอ ค.ศ. 1992 (Earth Summit)** จากการประชุม UNCED ที่เมืองริโอเดจาเนโร ประเทศบราซิล ยกระดับจากสิ่งแวดล้อมของมนุษย์ไปเชื่อมโยงกับ \"การพัฒนา\" ผลผลิตคือ เอกสาร 3 ฉบับที่เป็น Soft Law ได้แก่ ปฏิญญาริโอ (หลักการ 27 ข้อ) แผนปฏิบัติการ 21 (Agenda 21) ซึ่งเป็นแผนแม่บทที่ครอบคลุมสังคม เศรษฐกิจ สิ่งแวดล้อม และแถลงการณ์หลักการด้านป่าไม้ (Statement of Forest Principle) และอนุสัญญา 2 ฉบับที่พัฒนาเป็น Hard Law มีผลผูกพัน คือ กรอบอนุสัญญาสหประชาชาติว่าด้วยการเปลี่ยนแปลงสภาพภูมิอากาศ (UNFCCC) และอนุสัญญาว่าด้วยความหลากหลายทางชีวภาพ (CBD)\nหลักการ 27 ข้อของปฏิญญาริโอเป็นผลของการต่อรองระหว่างประเทศพัฒนาแล้วที่ต้องการให้คุ้มครองสิ่งแวดล้อม กับประเทศกำลังพัฒนาที่ต้องการพัฒนาเศรษฐกิจ จึงนำไปสู่การสกัดหลักการที่หาจุดสมดุลร่วมกัน\n**2. หลักกฎหมายสิ่งแวดล้อมสำคัญ แบ่งเป็น 2 ฝั่ง**\n**ฝั่งที่ 1 หลักที่เกี่ยวกับการป้องกันในความหมายกว้าง (Prevention)** ป้องกันไม่ให้ปัญหาเกิดตั้งแต่แรก\n(1) **หลักการไม่ก่อภัยอันตราย (No-harm Principle)** รัฐมีอธิปไตยเหนือทรัพยากรของตน แต่ต้องไม่ก่อความเสียหายต่อสิ่งแวดล้อมของรัฐอื่นหรือพื้นที่นอกเขตอำนาจรัฐ คดีสำคัญคือ Trail Smelter Case และ Corfu Channel Case\n(2) **หลักการป้องกัน (Prevention Principle)** ต้องใช้ความพยายามตามสมควร (Due Diligence) ในทุกขั้นตอนเพื่อป้องกันความเสียหาย โดยระดับการป้องกันแปรผันตามความเสี่ยงและเทคโนโลยีที่มี\n(3) **หลักการระวังไว้ก่อน (Precautionary Principle)** เมื่อมีภัยคุกคามร้ายแรงที่แก้คืนไม่ได้ ความไม่แน่นอนทางวิทยาศาสตร์ต้องไม่ถูกใช้เป็นเหตุเลื่อนมาตรการป้องกัน และภาระพิสูจน์เปลี่ยนไปที่ผู้เสนอโครงการว่ากิจกรรมนั้นไม่ก่ออันตราย\n(4) หลักความร่วมมือ การแจ้งเตือนและขอความยินยอมล่วงหน้า (Notification & Prior Informed Consent) เมื่อกิจกรรมอาจกระทบข้ามพรมแดน และการประเมินผลกระทบสิ่งแวดล้อม (EIA) ก่อนเริ่มโครงการ\n**ฝั่งที่ 2 หลักที่เกี่ยวกับการชั่งน้ำหนักหาสมดุล (Balance)** ใช้เมื่อจำเป็นต้องใช้ทรัพยากรหรือเมื่อปัญหาเกิดแล้ว\n(1) **หลักผู้ก่อมลพิษเป็นผู้จ่าย (Polluter-Pays Principle: PPP)** ผู้ก่อมลพิษรับผิดชอบค่าใช้จ่ายในการป้องกัน ควบคุม และฟื้นฟู เพราะหากไม่จ่ายเอง ภาระจะตกเป็นภาษีของประชาชน\n(2) **หลักความรับผิดชอบร่วมกันในระดับที่ต่างกัน (CBDR)** ทุกรัฐมีหน้าที่คุ้มครองสิ่งแวดล้อมโลกร่วมกัน แต่รับภาระต่างกันตามสัดส่วนการก่อความเสียหายในอดีตและขีดความสามารถทางเศรษฐกิจและเทคโนโลยี ประเทศพัฒนาแล้วรับมากกว่าและต้องช่วยประเทศกำลังพัฒนา\n(3) **หลักการพัฒนาที่ยั่งยืน (SD)** ตอบสนองความต้องการของคนรุ่นปัจจุบันโดยไม่ริดรอนความสามารถของคนรุ่นอนาคต รักษาดุลยภาพของ 3 เสาหลัก คือ เศรษฐกิจ สังคม และสิ่งแวดล้อม (เปรียบเทียบกับแม่สีแสง RGB ที่ฉายซ้อนกันแล้วจุดกึ่งกลางเป็นสีขาว ซึ่งแทนความยั่งยืน)\n(4) ความเป็นธรรมระหว่างรุ่น (Intergenerational Equity) การมีส่วนร่วมของประชาชน (Public Participation) และการจัดการพื้นที่ส่วนรวม เช่น ทะเลหลวงและแอนตาร์กติกา (Common Heritage of Mankind)\n**3. โครงสร้างกฎหมายไทย ระดับที่ 2: พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535**\nกฎหมายนี้เป็นกระดูกสันหลัง เน้นดูแล **คุณภาพสิ่งแวดล้อม (Environmental Quality)** หรือการจัดการมลพิษ ไม่ได้เน้นการจัดสรรการใช้ทรัพยากร (ซึ่งกระจายอยู่ตามกฎหมายอื่น) สาระสำคัญมีดังนี้\n(1) กำหนดนโยบายและแผน ให้หน่วยงานรัฐทำแผนจัดการคุณภาพสิ่งแวดล้อมแห่งชาติเป็นเป้าหมายของประเทศ (ยุทธศาสตร์แผนจัดการคุณภาพสิ่งแวดล้อม พ.ศ. 2566 ถึง 2570 ออกโดยอาศัยมาตรา 35 เปรียบได้กับ NEPA ของสหรัฐอเมริกา)\n(2) ตั้งองค์กร ได้แก่ คณะกรรมการสิ่งแวดล้อมแห่งชาติ (กก.วล.) สำนักงานนโยบายและแผนทรัพยากรธรรมชาติและสิ่งแวดล้อม (สผ.) และกองทุนสิ่งแวดล้อม\n(3) กำหนดมาตรฐานคุณภาพสิ่งแวดล้อม 2 ชั้น คือ **Ambient Standard** (ค่ามาตรฐานภาพรวมที่รัฐ \"อยากให้เป็น\" เช่น คุณภาพอากาศทั่วไป) และ **Point Source Standard** (มาตรฐานควบคุมมลพิษจากแหล่งกำเนิด เช่น ท่อไอเสียรถยนต์หรือน้ำเสียโรงงาน) ซึ่งรัฐต้องออกควบคู่กันเพื่อให้ Ambient Standard เป็นจริง โดยคณะกรรมการควบคุมมลพิษสนับสนุนการทำ Point Source Standard และต้องได้รับความเห็นชอบจาก กก.วล. ก่อนออกเป็นประกาศกระทรวง\n(4) การประเมินผลกระทบสิ่งแวดล้อม (EIA และ EHIA) สำหรับโครงการขนาดใหญ่ โดยมี คณะกรรมการผู้ชำนาญการ (คชก.) พิจารณารายงาน ตัวอย่างคือโครงการแลนด์บริดจ์ที่ คชก. สั่งให้เจ้าของโครงการไปทำรายงานใหม่ เพราะประชาชนคัดค้านและขาดความเชื่อมั่น\n(5) พื้นที่คุ้มครอง ให้อำนาจประกาศเขตควบคุมมลพิษและเขตคุ้มครองสิ่งแวดล้อม\n(6) สิทธิและบทลงโทษ รับรองสิทธิการมีส่วนร่วม กำหนดโทษทางแพ่ง อาญา และปกครอง โดยเฉพาะ **มาตรา 96 และ 97** ที่อิงหลักผู้ก่อมลพิษเป็นผู้จ่าย\nตัวอย่างมาตรฐานคุณภาพอากาศในบรรยากาศโดยทั่วไป (Ambient Air Standard) ควบคุมสารหลัก 6 ชนิดตามแนวทาง Clean Air Act ของสหรัฐฯ เช่น PM 2.5 และโอโซน ซึ่งแม้เครื่องกรองอากาศบางรุ่นสร้างโอโซนฆ่าเชื้อได้ ก็เป็นอันตรายหากสูดดมโดยตรง จึงต้องกำหนดค่าเฉลี่ยรายชั่วโมงไม่ให้เกินเกณฑ์ ค่ามาตรฐานเหล่านี้ต้องทบทวนให้เข้มงวดขึ้นเรื่อย ๆ ตามเทคโนโลยีและความรู้ทางการแพทย์\nกรมการเปลี่ยนแปลงสภาพภูมิอากาศและสิ่งแวดล้อม (เดิมคือกรมส่งเสริมคุณภาพสิ่งแวดล้อม) เปลี่ยนชื่อปี 2566 และกองทุนสิ่งแวดล้อมเบิกจ่ายยากเพราะอยู่ใต้ระเบียบของกระทรวงการคลัง กฎหมายใหม่จึงมักตั้งกองทุนแยก เพื่อเยียวยากลุ่มเปราะบาง เช่น ชาวเลและผู้มีรายได้น้อย\n**หลักการในแผนจัดการคุณภาพสิ่งแวดล้อม 12 ข้อ** (หลักที่เน้นในคาบ) ได้แก่ การพัฒนาที่ยั่งยืน การบริหารจัดการเชิงระบบนิเวศ (Ecosystem Approach) การระวังไว้ก่อน ผู้ก่อมลพิษเป็นผู้จ่าย **ผู้ได้รับประโยชน์เป็นผู้จ่าย (BPP)** เช่น คนกรุงเทพฯ ที่ใช้น้ำจากต้นน้ำควรร่วมรับภาระฟื้นฟูพื้นที่ต้นน้ำ ความเป็นหุ้นส่วนรัฐและเอกชน (PPP) เพื่อแก้ \"โศกนาฏกรรมของทรัพยากรส่วนรวม\" ธรรมาภิบาล **การขยายความรับผิดชอบแก่ผู้ผลิต (EPR)** เช่น ผู้ผลิตน้ำดื่มขวดพลาสติกต้องรับผิดชอบการนำขวดกลับมารีไซเคิล การใช้ทรัพยากรอย่างมีประสิทธิภาพ สิทธิมนุษยชน การบูรณาการ และ **ความยุติธรรมทางสิ่งแวดล้อม (Environmental Justice)** ที่เน้นกลุ่มเปราะบางซึ่งได้รับผลกระทบก่อนคนกลุ่มอื่น\n**4. เครื่องมือของรัฐ: Command and Control กับเครื่องมือทางเศรษฐศาสตร์**\nPrivate Action พึ่งเพียงลำพังไม่ได้ เพราะกฎหมายเอกชนคุ้มครองสิทธิและทรัพย์สินของเอกชน จึงเกิด **โศกนาฏกรรมของทรัพยากรส่วนรวม (Tragedy of the Commons)** เช่น ทุกคนรุมใช้ทุ่งหญ้าสาธารณะเลี้ยงวัวจนหญ้าตายหมด ต้องให้รัฐเข้าจัดสรรและควบคุม เครื่องมือของรัฐมี 2 ประเภท\n(1) **Command and Control (ควบคุมและสั่งการ)** ออกกฎระเบียบบังคับโดยตรง เช่น ใบอนุญาต การจำกัดช่วงเวลาใช้ทรัพยากร มาตรฐาน และบทลงโทษแพ่งและอาญา ข้อเสียคือต้องใช้เจ้าหน้าที่และงบประมาณมาก\n(2) **Economic Mechanism (เครื่องมือทางเศรษฐศาสตร์)** จูงใจหรือกดดันด้วยเงิน เช่น ภาษี เงินอุดหนุนรถ EV และหลักผู้ก่อมลพิษเป็นผู้จ่าย ซึ่งก็ต้องอาศัยรัฐออกกฎหมายหรือมติคณะรัฐมนตรีเพื่อให้มีผล\nกฎหมายสิ่งแวดล้อมเริ่มต้นแบบ **Reactive** (รอให้ปัญหาเกิดแล้วค่อยแก้) แต่ทรัพยากรหลายอย่าง **กู้คืนไม่ได้ (Irretrievable)** เช่น สัตว์สูญพันธุ์ เงินชดเชยเสกให้กลับมาไม่ได้ จึงต้องผสมเครื่องมือ **Proactive** ผ่านอำนาจรัฐ เช่น บังคับทำ EIA ก่อนเริ่มโครงการ ประกาศเขตคุ้มครอง และกำหนดมาตรฐานมลพิษ\n**5. โครงสร้างกฎหมายไทย ระดับที่ 3 (กฎหมายเฉพาะด้าน 7 กลุ่ม)**\nกฎหมายกระจัดกระจาย ทำให้ขาดมุมมองภาพรวมเชิงระบบนิเวศ เช่น เขื่อนดูแลโดยกรมชลประทานแต่ผลกระทบตกอยู่กับกระทรวงทรัพยากรธรรมชาติและสิ่งแวดล้อม\n(1) การจัดการและอนุรักษ์ทรัพยากรธรรมชาติ เช่น พ.ร.บ.ป่าไม้ พ.ศ. 2484 พ.ร.บ.สงวนและคุ้มครองสัตว์ป่า พ.ศ. 2562 พ.ร.บ.อุทยานแห่งชาติ พ.ศ. 2562 พ.ร.บ.ป่าชุมชน พ.ศ. 2562 ประมวลกฎหมายที่ดิน พ.ร.บ.แร่ พ.ร.บ.ปิโตรเลียม พ.ร.ก.การประมง พ.ศ. 2558 พ.ร.บ.กักพืช (ป้องกันสิ่งมีชีวิตต่างถิ่น เช่น ปลาหมอคางดำและผักตบชวา) และพ.ร.บ.คุ้มครองซากดึกดำบรรพ์\n(2) สิ่งแวดล้อมชุมชนเมือง เช่น พ.ร.บ.ผังเมือง พ.ร.บ.ควบคุมอาคาร พ.ร.บ.การสาธารณสุข พ.ร.บ.รักษาความสะอาดและความเป็นระเบียบเรียบร้อยของบ้านเมือง และกฎหมายท้องถิ่นที่ให้อำนาจจัดการขยะและน้ำเสีย\n(3) ทรัพยากรน้ำและมลพิษทางน้ำ เช่น พ.ร.บ.รักษาคลอง (ควบคุมสิ่งล่วงล้ำลำน้ำ) พ.ร.บ.น้ำบาดาล พ.ศ. 2520 (กรุงเทพฯ และปริมณฑลเข้มงวดมากเพราะการสูบน้ำบาดาลทำให้แผ่นดินทรุด) กฎหมายประปา และพระราชกฤษฎีกาจัดตั้งองค์การจัดการน้ำเสีย\n(4) มลพิษทางอากาศ เสียง และความสั่นสะเทือน เช่น พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมฯ พ.ร.บ.จราจรทางบก พ.ร.บ.ควบคุมการโฆษณาโดยใช้เครื่องขยายเสียง และพ.ร.บ.ความปลอดภัย อาชีวอนามัยฯ\n(5) ของเสียอันตรายและวัตถุอันตราย เช่น พ.ร.บ.โรงงาน พ.ศ. 2535 และ พ.ร.บ.วัตถุอันตราย พ.ศ. 2535\n(6) สิ่งแวดล้อมทางวัฒนธรรม เช่น พ.ร.บ.โบราณสถาน โบราณวัตถุ ศิลปวัตถุและพิพิธภัณฑสถานแห่งชาติ พ.ศ. 2504 พ.ร.บ.ส่งเสริมและรักษามรดกภูมิปัญญาทางวัฒนธรรม พ.ศ. 2559 และพ.ร.บ.ผังเมืองที่ใช้โซนนิ่งกันโรงงานออกจากเขตวัฒนธรรม\n(7) กฎหมายอื่นที่เกี่ยวข้อง คือ กฎหมายปกครอง (พ.ร.บ.วิธีปฏิบัติราชการทางปกครอง พ.ร.บ.จัดตั้งศาลปกครองฯ พ.ร.บ.ความรับผิดทางละเมิดของเจ้าหน้าที่) กฎหมายข้อมูลข่าวสาร (ซึ่งซ้อนกับ PDPA จนหน่วยงานมักปกปิดรายงาน EIA จนประชาชนเข้าถึงยาก) และ ป.พ.พ. มาตรา 420 และ 438 กับ ป.อาญา\n**6. กฎหมายระหว่างประเทศและการอนุวัติการ**\nบ่อเกิดตามธรรมนูญศาลยุติธรรมระหว่างประเทศ (ICJ) มาตรา 38(1) มี 3 แหล่ง คือ สนธิสัญญาและอนุสัญญา จารีตประเพณีระหว่างประเทศ (เกิดจากการปฏิบัติของรัฐอย่างสม่ำเสมอ (State Practice) และความเชื่อว่าเป็นหน้าที่ตามกฎหมาย (Opinio Juris)) และหลักกฎหมายทั่วไปที่รัฐต่าง ๆ ยอมรับ ส่วนคำพิพากษาและคำสอนของนักกฎหมายไม่ใช่บ่อเกิดโดยตรง เป็นเพียงเครื่องมือช่วยตีความ (Subsidiary Means)\nประเทศไทยใช้ระบบ **ทวิยม (Dualism)** ดังนั้นสนธิสัญญาที่ไทยลงนามจะไม่มีผลใช้บังคับในประเทศทันที ต้อง **อนุวัติการ (Implementation)** ด้วยการออกกฎหมายภายในรองรับก่อน เช่น ออกกฎหมายว่าด้วยการเปลี่ยนแปลงสภาพภูมิอากาศเพื่อสอดคล้องกับข้อตกลงปารีส ตัวอย่างสนธิสัญญาที่ยกในคาบ ได้แก่ อนุสัญญาแรมซาร์ว่าด้วยพื้นที่ชุ่มน้ำ ค.ศ. 1971 อนุสัญญาบาเซล ค.ศ. 1989 และพิธีสาร ค.ศ. 1999 (การเคลื่อนย้ายของเสียอันตรายข้ามแดนและความรับผิด) ข้อตกลงปารีส ค.ศ. 2015 อนุสัญญาสหประชาชาติว่าด้วยกฎหมายทะเล ค.ศ. 1982 (UNCLOS) และอนุสัญญามรดกโลก ค.ศ. 1972\n**7. การดำเนินคดีสิ่งแวดล้อมในไทย (ระบบศาลคู่)**\n(1) **ศาลยุติธรรม** ตามรัฐธรรมนูญมาตรา 194 มีอำนาจพิจารณาคดีทั้งปวง เว้นแต่คดีที่รัฐธรรมนูญหรือกฎหมายให้อยู่ในอำนาจศาลอื่น ครอบคลุมคดีแพ่ง (เรียกค่าเสียหายฐานละเมิดจากโรงงานที่ปล่อยมลพิษ) และคดีอาญา (ฝ่าฝืนกฎหมายสิ่งแวดล้อม ทิ้งกากอุตสาหกรรม บุกรุกป่า)\n(2) **ศาลปกครอง** ตามมาตรา 9 พ.ร.บ.จัดตั้งศาลปกครองฯ พิจารณาข้อพิพาทกับหน่วยงานรัฐหรือเจ้าหน้าที่ เช่น ฟ้องว่ากรมควบคุมมลพิษละเลยไม่บังคับใช้กฎหมายกับโรงงาน หรือฟ้องเพิกถอนคำสั่งทางปกครองที่ไม่ชอบ ตัวอย่างคือคดีเหมืองคลิตี้และคดีโรงไฟฟ้าแม่เมาะ\n(3) **ศาลรัฐธรรมนูญ** เกี่ยวข้องกับสิทธิชุมชนที่รัฐธรรมนูญรับรอง เช่น เมื่อรัฐอนุญาตโครงการที่กระทบสิทธิของชุมชนในการดำรงชีวิตในสิ่งแวดล้อมที่ดี\n**ทบทวนกฎหมายที่เรียนในคาบนี้**\n- พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535 **มาตรา 35** (แผนจัดการคุณภาพสิ่งแวดล้อม) **มาตรา 96–97** (ผู้ก่อมลพิษเป็นผู้จ่าย) และเรื่อง Ambient Standard กับ Point Source Standard\n- รัฐธรรมนูญ 2560 **มาตรา 194** (ศาลยุติธรรม) และ พ.ร.บ.จัดตั้งศาลปกครองฯ **มาตรา 9** (คดีละเลยหน้าที่และเพิกถอนคำสั่ง) ธรรมนูญ ICJ **ข้อ 38(1)** (บ่อเกิดกฎหมายระหว่างประเทศ)\n- ป.พ.พ. **มาตรา 420 และ 438**\n**จุดที่ควรจำ:** หลักกฎหมายสิ่งแวดล้อมแบ่งเป็นฝั่งป้องกัน (No-harm, Prevention, Precaution, EIA) กับฝั่งสมดุล (PPP, CBDR, SD, Intergenerational Equity, Public Participation) และไทยเป็นระบบทวิยม ต้องอนุวัติการสนธิสัญญาก่อนจึงบังคับใช้ในประเทศได้"
+ },
+ {
+  "n": 3,
+  "title": "แนวคิดและหลักกฎหมายสิ่งแวดล้อม (2): หลักกฎหมายสิ่งแวดล้อมระหว่างประเทศ 7 ประการ",
+  "video": "7e7xUfV3rZs",
+  "text": "**ภาพรวม:** คาบนี้เจาะลึกหลักกฎหมายสิ่งแวดล้อมระหว่างประเทศ 7 ประการ ที่ถูกนำมาใช้ทั้งในระดับโลกและในกฎหมายภายในประเทศ พร้อมคดีสำคัญที่วางหลักไว้\n**1. บ่อเกิดของกฎหมายระหว่างประเทศ (ทบทวน)**\nตามธรรมนูญศาลยุติธรรมระหว่างประเทศ (ICJ) มาตรา 38(1) มี 3 แหล่ง คือ (1) สนธิสัญญาและอนุสัญญา (2) จารีตประเพณีระหว่างประเทศ (CIL) ซึ่งมี 2 องค์ประกอบ คือ การปฏิบัติของรัฐ (State Practice) เป็นองค์ประกอบภายนอก และความรู้สึกผูกพันตามกฎหมาย (Opinio Juris) เป็นองค์ประกอบภายใน (3) หลักกฎหมายทั่วไปที่รัฐต่าง ๆ ยอมรับ ซึ่งเป็นจุดเชื่อมที่หลักกฎหมายสิ่งแวดล้อมหลายเรื่องถูกนำมาใช้ ส่วนปฏิญญาสตอกโฮล์ม ค.ศ. 1972 และปฏิญญาริโอ ค.ศ. 1992 เป็น **Soft Law** ไม่มีผลผูกพันโดยตรง แต่พัฒนาไปเป็น CIL หรือหลักกฎหมายทั่วไปในเวลาต่อมา ส่วนคำพิพากษาของศาลและคำสอนของนักกฎหมายผู้มีชื่อเสียงไม่ใช่บ่อเกิดโดยตรง\nแนวคิด **ESG** (Environment, Social, Governance) ในภาคธุรกิจ แม้ไม่มีกฎหมายบังคับโดยตรง แต่ช่วยให้ธุรกิจยั่งยืนและดึงดูดนักลงทุนได้ในระยะยาว\n**2. หลักกฎหมายสิ่งแวดล้อมสำคัญ 7 ประการ**\n**(1) หลักความร่วมมือ (Cooperation / Good Neighborliness)** เป็น **รากฐาน** ของหลักกฎหมายสิ่งแวดล้อมทุกเรื่อง เพราะทุกรัฐมีอธิปไตยเหนือดินแดนตนเอง จึงต้องเคารพกันและร่วมมือกัน ปรากฏตั้งแต่กฎบัตรสหประชาชาติ ข้อ 74 (หลักเพื่อนบ้านที่ดี) ปฏิญญาสตอกโฮล์ม หลักการที่ 24 (จิตวิญญาณแห่งความร่วมมือ ทุกรัฐเท่าเทียมกัน ทั้งทวิภาคีและพหุภาคี) ปฏิญญาริโอ หลักการที่ 27 (ร่วมมือด้วยความสุจริตใจและความเป็นหุ้นส่วน) และปฏิญญาโจฮันเนสเบิร์ก ค.ศ. 2002 ที่ขยายหน้าที่ไปถึงภาคเอกชน หลักนี้แตกแขนงเป็นเครื่องมืออื่น เช่น การแจ้งเตือนเพื่อนบ้านล่วงหน้า และการทำ EIA\n**(2) หลักการไม่ก่อภยันตราย (No-harm Principle)** ต่อยอดจากหลักความร่วมมือ ถ่วงดุลระหว่างอธิปไตยเหนือทรัพยากรของรัฐ กับความรับผิดชอบที่จะไม่ก่อความเสียหายต่อสิ่งแวดล้อมของ **รัฐอื่น** หรือพื้นที่นอกเขตอำนาจรัฐ (เช่น ทะเลหลวง) ปรากฏในปฏิญญาสตอกโฮล์ม หลักการที่ 21 และปฏิญญาริโอ หลักการที่ 2 (เติมคำว่า \"นโยบายด้านการพัฒนา\" ลงไป) ข้อสำคัญคือหลักนี้จะถือว่ามีการละเมิดเมื่อ **เกิดความเสียหายขึ้นจริงแล้ว** เท่านั้น และคุ้มครองรัฐอื่น ไม่รวมความเสียหายในดินแดนของรัฐตนเอง\n- **คดี Trail Smelter (สหรัฐฯ กับแคนาดา ค.ศ. 1941)** โรงถลุงแร่ตะกั่วและสังกะสีในเมือง Trail ประเทศแคนาดา ปล่อยควันซัลเฟอร์ไดออกไซด์ข้ามพรมแดนทำลายพืชผลในสหรัฐฯ อนุญาโตตุลาการชี้ขาดว่าไม่มีรัฐใดมีสิทธิใช้หรือยินยอมให้ใช้ดินแดนของตนในลักษณะที่ก่อความเสียหายจากควันพิษแก่ดินแดนหรือทรัพย์สินของรัฐอื่น โดยต้องเป็นความเสียหายร้ายแรง (Serious Consequence) และพิสูจน์ได้ชัดเจน (Clear and Convincing Evidence)\n- **คดี Corfu Channel** เรือรบอังกฤษชนทุ่นระเบิดในน่านน้ำของแอลเบเนีย ICJ ตัดสินว่ารัฐใช้ดินแดนของตนได้ แต่ต้องไม่ก่อความเสียหายแก่ผู้อื่น\n**(3) หลักการป้องกัน (Prevention Principle)** ต่อยอดจาก No-harm แต่เน้นป้องกันล่วงหน้า ครอบคลุมทั้งความเสียหายต่อรัฐอื่นและในอาณาเขตของตนเอง โดยมุ่งป้องกันความเสียหายที่ทราบแน่ชัดว่าจะเกิดและมีนัยสำคัญ (Significant Damage) เครื่องมือได้แก่ มาตรฐานมลพิษ EIA เทคโนโลยีที่ดีที่สุด (BAT) และแนวปฏิบัติที่ดีที่สุด (BEP)\n- **คดี Pulp Mills (อาร์เจนตินากับอุรุกวัย)** เรื่องโรงงานเยื่อกระดาษริมแม่น้ำอุรุกวัย ICJ ยกระดับหลักการป้องกัน และหน้าที่ทำ EIA ให้เป็นกฎหมายจารีตประเพณีระหว่างประเทศ\n**(4) หลักการระวังไว้ก่อน (Precautionary Principle)** ใช้เมื่อมีความเสี่ยงต่อความเสียหายที่ร้ายแรงหรือแก้คืนไม่ได้ (Serious or Irreversible Damage) ความไม่แน่นอนทางวิทยาศาสตร์จะไม่ถูกใช้เป็นข้ออ้างเลื่อนมาตรการป้องกัน เช่น ภาวะโลกร้อน ความหลากหลายทางชีวภาพ และสารเคมีตกค้างยาวนาน (POPs) จุดเด่นคือ **เปลี่ยนภาระการพิสูจน์** ให้ผู้ทำกิจกรรมต้องแสดงว่าได้ระมัดระวังและหาทางเลือกอื่นแล้ว แทนที่จะให้ผู้เสียหายพิสูจน์\n**ความพยายามที่สมควร (Due Diligence)** ใช้วัดความรับผิดของรัฐตามหลักป้องกันและหลักระวังไว้ก่อน โดยเป็น **หน้าที่กระทำการ (Obligation of Conduct)** ไม่ใช่หน้าที่ประสงค์ต่อผล (Obligation of Result) ดังนั้นหากความเสียหายเกิดแล้วแต่รัฐพิสูจน์ได้ว่าได้พยายามอย่างสมควร เช่น ออกกฎหมายควบคุม สั่งให้ทำ EIA ส่งเจ้าหน้าที่ตรวจสอบเต็มที่ ก็อาจไม่ถือว่าละเมิด ส่วนกรณีที่ข้อมูลวิทยาศาสตร์ยังไม่ชัด รัฐต้องสืบเสาะข้อมูล สำรวจทางเลือกอื่น และเปิดให้ประชาชนมีส่วนร่วม\n**(5) หลักผู้ก่อมลพิษเป็นผู้จ่าย (Polluter-Pays Principle)** เดิมเป็นหลักเศรษฐศาสตร์ที่ OECD เสนอในปี ค.ศ. 1972 เพื่อผลักต้นทุนสิ่งแวดล้อมที่อยู่ภายนอก (Externality) กลับเข้าไปในราคาสินค้าและบริการ ป้องกันไม่ให้ภาระตกแก่ภาษีของประชาชนและไม่ให้ประเทศที่ละเลยสิ่งแวดล้อมได้เปรียบทางการค้า ในกฎหมายไทยปรากฏชัดใน พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมฯ **มาตรา 96 และ 97** รวมถึงแนวคิดภาษีคาร์บอน\n**(6) การพัฒนาที่ยั่งยืน (Sustainable Development)** ตอบสนองความต้องการคนรุ่นปัจจุบันโดยไม่ทำลายความสามารถของคนรุ่นอนาคต (มาจากรายงานบรันด์แลนด์และปฏิญญาริโอ) บูรณาการ 3 เสาหลัก คือ เศรษฐกิจ สังคม สิ่งแวดล้อม ครอบคลุมความเป็นธรรมทั้งระหว่างคนรุ่นเดียวกัน (Intra-generation) และระหว่างรุ่น (Inter-generation) ขับเคลื่อนผ่านเป้าหมายการพัฒนาที่ยั่งยืน (SDGs) 17 ข้อ ภายในปี ค.ศ. 2030 และปรากฏในรัฐธรรมนูญไทยมาตรา 43 และ 56\n**(7) ความรับผิดชอบร่วมกันในระดับที่ต่างกัน (CBDR)** ปรากฏในปฏิญญาริโอ หลักการที่ 7 ทุกรัฐมีหน้าที่ร่วมกัน (Common) แต่รับภาระต่างกัน (Differentiated) ตามประวัติการก่อมลพิษและขีดความสามารถทางเศรษฐกิจและเทคโนโลยี ความแตกต่างมี 3 ลักษณะ คือ เนื้อหาของพันธกรณี (ประเทศพัฒนาแล้วรับเป้าหมายลดก๊าซเรือนกระจกที่ชัดเจน ส่วนประเทศกำลังพัฒนาเพียงทำรายงาน) วิธีและเวลาปฏิบัติ (ยืดหยุ่นกรอบเวลา) และการให้ความช่วยเหลือ (เงินทุนและเทคโนโลยี) ปัจจุบันความตกลงปารีสใช้แนวคิดใหม่ คือ **Self-differentiation** ที่ให้แต่ละประเทศกำหนดเป้าหมาย NDCs ตามความสามารถของตนเอง\n**ทบทวนกฎหมายที่เรียนในคาบนี้**\n- ธรรมนูญ ICJ **ข้อ 38(1)** กฎบัตรสหประชาชาติ **ข้อ 74** ปฏิญญาสตอกโฮล์ม **หลักการที่ 21 และ 24** ปฏิญญาริโอ **หลักการที่ 2, 7 และ 27**\n- พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535 **มาตรา 96–97** (ผู้ก่อมลพิษเป็นผู้จ่าย) รัฐธรรมนูญ 2560 **มาตรา 43 และ 56** (การพัฒนาที่ยั่งยืน)\n- คดีสำคัญ **Trail Smelter** (No-harm) **Corfu Channel** และ **Pulp Mills** (Prevention และ EIA เป็น CIL)\n**จุดที่ควรจำ:** ความร่วมมือคือรากฐานของทุกหลัก No-harm ต้องมีความเสียหายเกิดจริงและกระทบรัฐอื่น ส่วน Prevention ป้องกันล่วงหน้าทั้งภายในและภายนอก และวัดด้วย Due Diligence ซึ่งเป็นหน้าที่กระทำการ ไม่ใช่ประสงค์ต่อผล"
+ },
+ {
+  "n": 4,
+  "title": "เครื่องมือในการกำกับดูแลด้านสิ่งแวดล้อม",
+  "video": "-GBxe9yl41M",
+  "text": "**ภาพรวม:** คาบนี้ว่าด้วยเครื่องมือที่รัฐใช้กำกับดูแลด้านสิ่งแวดล้อม ตั้งแต่การสั่งการและควบคุม (Command-and-Control) มาตรฐาน 3 ประเภท เครื่องมือทางเศรษฐศาสตร์ ไปจนถึงระบบซื้อขายสิทธิการปล่อยก๊าซเรือนกระจก\n**1. วัตถุประสงค์: การป้องกัน (Prevention)**\nหัวใจของการกำกับดูแลคือการป้องกันล่วงหน้า เพราะความเสียหายทางสิ่งแวดล้อมมีลักษณะพิเศษ 4 ประการ\n(1) เป็นปัญหาระยะยาว กระทบถึงคนรุ่นอนาคต (Future Generation)\n(2) เยียวยาได้ยากและต้นทุนสูงมาก เช่น น้ำมันรั่วในทะเล หรือสัตว์ที่สูญพันธุ์แล้วกู้คืนไม่ได้\n(3) กระทบวงกว้าง ไม่ใช่การละเมิดระหว่างบุคคลสองคน เช่น ฝุ่น PM 2.5 และ Climate Change\n(4) เป็นปัญหาสะสม แม้หยุดปล่อยมลพิษวันนี้ ความเสียหายก็ไม่หยุดทันที\nการกำกับดูแล (Regulation) ไม่ได้มีแค่กฎหมายห้ามและโทษ แต่มีเป้าหมายแท้จริงคือ **ปรับเปลี่ยนพฤติกรรม (Change Behavior)** ของผู้ก่อมลพิษ ปัญหาสิ่งแวดล้อมยังซับซ้อน ระยะยาว และมีผู้มีส่วนได้เสียมาก โดยแหล่งกำเนิดมลพิษแบ่งเป็น **Point Source** (ระบุที่มาได้ เช่น โรงงานหรือฟาร์มสุกร) และ **Non-point Source** (ระบุไม่ได้ชัดเจน เช่น PM 2.5 ที่มาจากการเผา ควันรถ และโรงงานปะปนกัน หรือขยะในทะเล) ซึ่งทำให้เอาผิดยากมาก\nเครื่องมืออื่นนอกจากกฎหมายบังคับ ได้แก่ **การดำเนินการโดยสมัครใจ (Voluntary Actions)** เพื่อสร้างชื่อเสียงตามแนวคิด ESG และ CSR แรงกดดันทางการค้าจากประชาคมโลก และมาตรฐาน\n**2. Command-and-Control**\nรัฐ \"สั่งการ\" ผ่านกฎเกณฑ์ มาตรฐาน และบทลงโทษ แล้วมีเจ้าหน้าที่ \"ควบคุม\" ให้ปฏิบัติตาม จุดดึงดูดคือตรงไปตรงมา เข้าใจง่าย รู้ชัดว่าใครบังคับใช้ และมีผลรุนแรงต่อผู้ฝ่าฝืน (ปรับทางปกครอง โทษอาญา ยึดใบอนุญาต สั่งปิดกิจการ) แบ่งเป็น 2 ระยะ\n**(1) การควบคุมล่วงหน้า (Anticipatory Controls)** ป้องกันไม่ให้เกิดปัญหาตั้งแต่แรก โดยตั้งเงื่อนไขว่า \"ห้ามทำจนกว่าจะได้รับอนุญาต\" ระดับความเข้มงวดไล่จากมากไปน้อย คือ\n- **การห้าม (Prohibition)** เข้มงวดที่สุด ห้ามทำกิจกรรมนั้นโดยเด็ดขาด เช่น ห้ามนำเข้าหรือทิ้งของเสียอันตรายจากต่างประเทศ หรือห้ามใช้สารเคมีบางชนิด\n- **การแจ้ง (Notification)** ไม่ห้ามแต่ต้องแจ้งเจ้าหน้าที่ล่วงหน้า เช่น การขนส่งขยะอันตรายต้องแจ้งเส้นทาง\n- **การขึ้นทะเบียน (Registration)** เช่น กฎหมายวัตถุอันตราย และแนวคิด **PRTR** (Pollutant Release and Transfer Registers) ที่บังคับให้โรงงานเปิดเผยว่าครอบครองสารเคมีหรือของเสียอันตรายใดอยู่ เพื่อให้รัฐและชุมชนทราบก่อนเกิดเหตุฉุกเฉิน\n- **ใบอนุญาต (Permitting/Licensing)** รัฐตรวจสอบความเสี่ยงและแผนจัดการก่อนออกใบอนุญาตพร้อมเงื่อนไข หากฝ่าฝืนจะถูกระงับกิจการ เพิกถอนใบอนุญาต หรือลงโทษทางอาญาและทางปกครอง ตัวอย่างความเสียหายที่ยากต่อการฟื้นฟู คือ คดี Win Process มูลค่ากว่า 1,700 ล้านบาท\n**(2) การควบคุมอย่างต่อเนื่อง (Continuing Controls)** กำกับตลอดอายุการดำเนินกิจการ ได้แก่ การติดตามตรวจวัด (Monitor) การตรวจสอบหรือสุ่มตรวจโรงงาน (Inspections) การให้รายงานเป็นประจำ (Reporting) และมาตรการบังคับใช้ (Enforcement) รวมกันเป็นระบบกำกับดูแลหลายชั้น\n**3. มาตรฐานในกฎหมายสิ่งแวดล้อม (ต้องอาศัยหลักฐานวิทยาศาสตร์และเศรษฐศาสตร์ เพราะมาตรฐานสูงขึ้นหมายถึงต้นทุนธุรกิจสูงขึ้น)**\n(1) **มาตรฐานการปล่อยมลพิษ (Emission Standards)** ควบคุมสิ่งที่ถูกปล่อยจากแหล่งกำเนิด เช่น ควันจากปล่องโรงงานหรือน้ำจากท่อระบาย กำหนดได้หลายแบบ ได้แก่ ความเข้มข้น (Concentration เช่น ค่า pH หรือสารแขวนลอยในน้ำทิ้งต่อลิตร) ปริมาณรวมที่ปล่อย (Total Volume ภายในหนึ่งปี) และการลดลงเป็นร้อยละ (Percentage Reduction) จุดแข็งคือใช้ได้ดีกับ Point Source จุดอ่อนคือใช้กับ Non-point Source อย่าง PM 2.5 ไม่ได้\n(2) **มาตรฐานกระบวนการ (Process Standards)** เน้นวิธีและเทคโนโลยีการผลิตตั้งแต่ต้นทาง (Input) แทนผลลัพธ์ปลายท่อ เช่น บังคับใช้ **เทคโนโลยีที่ดีที่สุดที่มีอยู่ (BAT)** ซึ่งเปิดโอกาสให้เกิดนวัตกรรม แต่ถ้ากิจกรรมเสี่ยงสูง เช่น ขยะอิเล็กทรอนิกส์หรือกากอุตสาหกรรม เจ้าหน้าที่กำหนดขั้นตอนตายตัวเข้มงวดได้\n(3) **มาตรฐานผลิตภัณฑ์ (Product Standards)** ควบคุมที่ตัวสินค้าก่อนวางตลาด เช่น เครื่องใช้ไฟฟ้าต้องประหยัดพลังงาน ของเล่นเด็กต้องปราศจากสารพิษ อาจกำหนดแบบอิงผลลัพธ์ (Performance-based) ให้ผู้ผลิตเลือกวิธีเองได้ และควรคำนึงถึงวงจรชีวิตสินค้าตั้งแต่การผลิต การใช้งาน จนถึงการกำจัด รวมถึง **ฉลากสิ่งแวดล้อม (Eco-labeling)** ซึ่งต้องระวังการอวดอ้างเกินจริงหรือ **การฟอกเขียว (Greenwashing)**\nข้อวิจารณ์ต่อ Command-and-Control คือทำให้ธุรกิจทำแค่ \"ให้ผ่านเกณฑ์ขั้นต่ำ\" ไม่มีแรงจูงใจสร้างนวัตกรรม และเปิดช่องให้เกิดการทุจริตจากความใกล้ชิดระหว่างเจ้าหน้าที่กับผู้ประกอบการ\n**4. เครื่องมือทางเศรษฐศาสตร์และกลไกตลาด (Economic Instruments)**\nแนวคิดคือทำให้สิ่งแวดล้อมกลายเป็น **ต้นทุนภายใน (Internalize Cost)** ตามหลักผู้ก่อมลพิษเป็นผู้จ่าย ได้แก่ ภาษีและค่าธรรมเนียม (เช่น เก็บตามปริมาณก๊าซเรือนกระจก) และมาตรการจูงใจแบบ Carrot and Stick เช่น ลดค่าธรรมเนียมหรือให้เงินอุดหนุน (Subsidies) แต่ต้องระวังไม่ให้บิดเบือนการแข่งขันทางการค้าระหว่างประเทศ\n**5. ระบบซื้อขายสิทธิการปล่อยก๊าซเรือนกระจก (Cap and Trade)**\nเป็นระบบที่นิยมในสหภาพยุโรป (EU ETS) รัฐกำหนด **เพดาน (Cap)** หรือโควตาแก่แต่ละอุตสาหกรรม (เช่น เหล็ก อลูมิเนียม การบิน) และให้ผู้ประกอบการประมูลซื้อ โควตาจะลดลงทุกปีเพื่อไปสู่ Net Zero ในปี ค.ศ. 2050 เมื่อสิทธิน้อยลง ราคาประมูลสูงขึ้น ผู้ประกอบการจึงลงทุนพัฒนานวัตกรรมและใช้พลังงานสะอาดแทนการทนจ่ายแพงขึ้น\nข้อสังเกตท้ายคาบ คือ **การรั่วไหลของคาร์บอน (Carbon Leakage)** ที่ผู้ประกอบการย้ายฐานการผลิตไปยังประเทศที่ไม่มีกฎหมายเข้มงวด มลพิษจึงย้ายที่ไม่ได้หายไป และ **คาร์บอนเครดิต (Carbon Credit)** ต่างจาก Cap and Trade เพราะเป็นการนำผลงานจากโครงการอื่น เช่น การปลูกป่า มาหักลบมลพิษ ถือเป็นวิธีเสริมเท่านั้น กฎหมายยังต้องการให้ลดที่แหล่งกำเนิดเป็นหลัก\n**ทบทวนหลักที่เรียนในคาบนี้**\n- Command-and-Control: การห้าม การแจ้ง การขึ้นทะเบียน (PRTR) ใบอนุญาต และการควบคุมต่อเนื่อง (Monitor, Inspection, Reporting)\n- มาตรฐาน 3 ประเภท: Emission Standard, Process Standard (BAT), Product Standard (Eco-labeling และ Greenwashing)\n- เครื่องมือเศรษฐศาสตร์: ภาษี ค่าธรรมเนียม เงินอุดหนุน Cap and Trade (EU ETS) Carbon Leakage และ Carbon Credit\n**จุดที่ควรจำ:** การกำกับดูแลสิ่งแวดล้อมมุ่งป้องกันล่วงหน้า Command-and-Control ใช้ได้ดีกับ Point Source แต่แก้ Non-point Source ยาก จึงต้องผสมเครื่องมือเศรษฐศาสตร์ และคาร์บอนเครดิตเป็นเพียงวิธีเสริมของ Cap and Trade"
+ },
+ {
+  "n": 5,
+  "title": "ภาพรวมของกฎหมายสิ่งแวดล้อมระหว่างประเทศ",
+  "video": "VdpLPhkWEsk",
+  "text": "**ภาพรวม:** คาบนี้แบ่งเป็นสองส่วน ส่วนแรกปิดเรื่องเครื่องมือเชิงกระบวนการและการมีส่วนร่วม (EIA, SEA, ข้อมูลข่าวสาร, การเข้าถึงความยุติธรรม, SLAPP) ส่วนที่สองปูพื้นกฎหมายสิ่งแวดล้อมระหว่างประเทศ ทั้งลักษณะของสังคมระหว่างประเทศ บ่อเกิด ศาลระหว่างประเทศ และเจาะลึกหลักการป้องกันกับหลักการระวังไว้ก่อน\n**ส่วนที่ 1 เครื่องมือเชิงป้องกัน อิงความเสี่ยง และเชิงกระบวนการ**\n**1. EIA และ SEA (เครื่องมือหาข้อมูล)**\n**EIA (การประเมินผลกระทบสิ่งแวดล้อม)** ทำในระดับโครงการ เช่น คอนโดมิเนียม โครงการแลนด์บริดจ์ หรือโรงงาน เป้าหมายคือ **ข้อมูล** ว่าโครงการมีโอกาสสร้างความเสียหายต่อสิ่งแวดล้อมอย่างไร เพื่อส่งให้ผู้มีอำนาจตัดสินใจ (Decision Maker) ข้อสำคัญคือรายงาน EIA เป็นเพียง **หนึ่งในปัจจัย** ไม่ใช่ปัจจัยชี้ขาด ผู้มีอำนาจต้องชั่งน้ำหนักร่วมกับปัจจัยเศรษฐกิจ การจ้างงาน และสังคมตามนโยบายรัฐบาลขณะนั้น ส่วน **SEA (การประเมินสิ่งแวดล้อมระดับยุทธศาสตร์)** ใช้ประเมินภาพรวมระดับแผนหรือนโยบายที่ใหญ่กว่าโครงการเดี่ยว ทั้งสองต้องพ่วงกระบวนการรับฟังเสียงประชาชน\n**2. เทคนิคเชิงกระบวนการและการมีส่วนร่วม** เพราะปัญหาสิ่งแวดล้อมเป็นเรื่องสาธารณะ กฎหมายสิ่งแวดล้อมจึงเปิดให้สาธารณชนและชุมชนมีส่วนร่วมให้มากที่สุด แบ่งเป็น 3 ส่วน\n(1) **การมีส่วนร่วมในกระบวนการตัดสินใจ (Public Participation)** เช่น ประชาพิจารณ์ (Public Hearing) และการเปิดให้แสดงความเห็นต่อร่างกฎหมายหรือประกาศกระทรวงผ่านเว็บไซต์ก่อนประกาศใช้ ต้องเป็น **การมีส่วนร่วมอย่างมีความหมาย (Meaningful Participation)** ไม่ทำแค่พอเป็นพิธี ผู้มีอำนาจต้องตอบสนองต่อความเห็นและนำเข้าสู่การตัดสินใจจริง และต้องเปิดโอกาสให้ผู้ได้รับผลกระทบเข้ามาตั้งแต่ระยะแรกเริ่มโครงการ\n(2) **การเข้าถึงข้อมูลข่าวสารด้านสิ่งแวดล้อม (Access to Information)** หลักคือ **เปิดเผยเป็นหลัก ปกปิดเป็นข้อยกเว้น** เพราะหากประชาชนรู้ข้อมูลล่วงหน้าก็ป้องกันอันตรายได้ และตรวจสอบรัฐได้ ข้อยกเว้นปฏิเสธการเปิดเผย เช่น กระทบผลประโยชน์สำคัญของรัฐ การบริหารกระบวนการยุติธรรม ทรัพย์สินทางปัญญา ความลับทางการค้า หรือข้อมูลที่เปิดแล้วก่อให้เกิดอันตรายต่อสิ่งแวดล้อมเอง ปัญหาในไทยคือขั้นตอนราชการซับซ้อน (Red Tape) ข้อมูลสิ่งแวดล้อมสำหรับผู้บริโภค เช่น การใช้พลังงาน รอยเท้าคาร์บอน ความสามารถในการรีไซเคิล มักสื่อสารผ่านฉลาก ซึ่งมีปัญหา **Greenwashing** จึงต้องมีระบบรับรองมาตรฐาน\n(3) **การเข้าถึงกระบวนการยุติธรรม (Access to Justice)** ผู้เสียหายร้องเรียนต่อคณะกรรมการสิทธิมนุษยชนแห่งชาติหรือฟ้องศาลได้ ฟ้องศาลแพ่งเรียกค่าเสียหายจากละเมิด ฟ้องศาลอาญาเมื่อมีความผิดอาญา เช่น ลักลอบครอบครองวัตถุอันตราย ฟ้องศาลปกครองเมื่อรัฐละเลยหรือล่าช้า เช่น คดีฟ้องนายกรัฐมนตรีและคณะกรรมการสิ่งแวดล้อมแห่งชาติกรณีฝุ่น PM 2.5 ที่เชียงใหม่ ธรรมชาติของคดีสิ่งแวดล้อมคือ **อำนาจต่อรองไม่เท่ากัน** ชาวบ้านสู้กับบริษัทใหญ่ ต้องพิสูจน์ด้วยข้อมูลวิทยาศาสตร์และเศรษฐศาสตร์ชั้นสูง จึงมักต้องพึ่งทนายอาสาหรือ NGO บางกรณีกฎหมายให้หน่วยงานรัฐ เช่น กรมควบคุมมลพิษ เป็นโจทก์เรียกค่าฟื้นฟูแทนสาธารณะ (เช่น คดีมูลค่า 1,700 ล้านบาท)\n**คดี SLAPP (Strategic Lawsuit Against Public Participation หรือคดีฟ้องปิดปาก)** เป็นกลยุทธ์ที่ทุนใหญ่ใช้กฎหมายฟ้องกลั่นแกล้งประชาชนหรือนักกิจกรรมที่เปิดโปงการทำลายสิ่งแวดล้อม โดยไม่หวังผลแพ้ชนะ แต่ต้องการสร้างภาระและความหวาดกลัว ให้หยุดพูดและไม่มีใครกล้าเปิดโปงอีก ปัจจุบันประธานศาลฎีกามีคำแนะนำแนวทางพิจารณาคดีเพื่อป้องกันการฟ้องปิดปากแล้ว\n**ส่วนที่ 2 พื้นฐานกฎหมายสิ่งแวดล้อมระหว่างประเทศ**\n**1. ลักษณะของกฎหมายระหว่างประเทศ** แบ่งกฎหมายเป็นกฎหมายภายใน กฎหมายต่างประเทศ และกฎหมายระหว่างประเทศ (กำหนดความสัมพันธ์ระหว่างรัฐกับรัฐ) สังคมระหว่างประเทศ **ไม่มีรัฐบาลโลก (No World Government)** ทุกรัฐมีอธิปไตยเท่าเทียมกัน ความสัมพันธ์เป็นแนวระนาบ (Horizontal) อาศัย **ความยินยอม (Consent)** เป็นหลัก ปัญหาสิ่งแวดล้อมไม่รู้จักพรมแดน มีทั้งมลพิษข้ามพรมแดน (เช่น ฝุ่นควัน) ระดับภูมิภาค (เช่น ของเสียลงทะเลอาเซียน) และระดับโลก (Climate Change) จึงต้องมีกฎเกณฑ์ระหว่างประเทศจัดการร่วมกัน\n**2. บ่อเกิด**\n(1) **สนธิสัญญา (Treaties)** ข้อตกลงเป็นลายลักษณ์อักษร เรียกชื่ออะไรก็ได้ เช่น อนุสัญญา พิธีสาร ความตกลง มีผลผูกพันเฉพาะรัฐภาคีที่ยินยอม ไม่ผูกพันรัฐที่สาม (เช่น เมื่อสหรัฐอเมริกาถอนตัว) ตัวอย่างคือ UNCLOS และความตกลงปารีส\n(2) **จารีตประเพณีระหว่างประเทศ (CIL)** ไม่เป็นลายลักษณ์อักษร เกิดจากการปฏิบัติอย่างสม่ำเสมอ ต่อเนื่อง กว้างขวาง และความเชื่อว่าเป็นกฎหมาย ผูกพัน **ทุกรัฐ** แม้ไม่เคยเซ็น เว้นแต่รัฐที่ **โต้แย้งคัดค้านมาตั้งแต่ต้นอย่างสม่ำเสมอ (Persistent Objector)** ปัจจุบัน ICJ ยืนยันว่า **การทำ EIA เป็น CIL แล้ว**\n(3) **หลักกฎหมายทั่วไป (General Principles of Law)** หลักพื้นฐานที่ระบบกฎหมายภายในของรัฐส่วนใหญ่ยอมรับร่วมกัน\n(4) **Soft Law** ไม่มีผลผูกพันทางกฎหมาย แต่อาศัยแรงกดดันทางการเมือง นิยมใช้ในยุคแรกเพราะรัฐยังไม่อยากผูกพันแน่นหนา เช่น ปฏิญญาสตอกโฮล์ม ค.ศ. 1972 และปฏิญญาริโอ ค.ศ. 1992 (ผนวก \"นโยบายการพัฒนา\" เข้ากับสิ่งแวดล้อม) หลายหลักการตกผลึกเป็น CIL ภายหลัง\n**3. ศาลระหว่างประเทศ** ข้อพิพาทสิ่งแวดล้อมนำขึ้นสู่ศาลยุติธรรมระหว่างประเทศ (ICJ หรือศาลโลก) ที่กรุงเฮก เนเธอร์แลนด์ เขตอำนาจต้องอาศัย **ความยินยอม** ของรัฐคู่พิพาททั้งสองฝ่าย หากฝ่ายใดไม่ยินยอมศาลก็พิจารณาไม่ได้ หากตัดสินว่าผิด ศาลอาจสั่งชดใช้เงิน สั่งให้หยุดการกระทำ หรือให้เยียวยาในรูป **ความพึงพอใจ (Satisfaction)** เช่น ให้รัฐที่ทำผิดกล่าวขอโทษอย่างเป็นทางการ\n**4. เกร็ดประวัติศาสตร์: ซีกโลกเหนือกับซีกโลกใต้ในปี ค.ศ. 1972** การประชุมสตอกโฮล์มสะท้อนความต่างมุมมอง ประเทศพัฒนาแล้วต้องการคุ้มครองสิ่งแวดล้อม ส่วนประเทศกำลังพัฒนาระแวงเพราะยังต้องแก้ปัญหาปากท้อง นายกรัฐมนตรีอินเดียในขณะนั้นเป็นกระบอกเสียงให้ประเทศกำลังพัฒนา และกล่าววาทะที่ถูกจดจำว่า **\"ความยากจนคือมลพิษที่ใหญ่ที่สุด (Poverty is the greatest polluter)\"** สะท้อนว่าการพัฒนาเศรษฐกิจกับการคุ้มครองสิ่งแวดล้อมมักปะทะกัน\n**ส่วนที่ 3 เจาะลึกหลักการป้องกันและหลักการระวังไว้ก่อน**\n**หลักกฎหมายสิ่งแวดล้อมระหว่างประเทศ 6 ประการ** คือ หลักการป้องกัน หลักการระวังไว้ก่อน หลักความร่วมมือ การพัฒนาที่ยั่งยืน CBDR และความเป็นธรรมระหว่างคนต่างรุ่น (Intergenerational Equity)\n**1. หลักการป้องกัน (Prevention Principle)**\n(1) รากฐาน มาจากกฎหมายแพ่งว่าด้วย **การเป็นเพื่อนบ้านที่ดี (Good Neighbourliness)** และการใช้สิทธิโดยมิชอบ ตามภาษิตละติน *sic utere tuo, ut alienum non laedas* คือใช้ทรัพย์สินของตนโดยไม่ก่อความเสียหายแก่ผู้อื่น (แม้ในทางแพ่งจะมุ่งคุ้มครองบุคคลที่ถูกรบกวน มากกว่าคุ้มครองสิ่งแวดล้อมเอง) เปรียบเหมือนย่างหมูกระทะ ถ้าควันลอยไปบ้านข้างเคียงจนทารกสำลักถือว่าผิด แต่ควันจาง ๆ ต้องอดทนอดกลั้น\n(2) ถ้อยคำในสนธิสัญญามักบังคับให้รัฐ **\"ป้องกัน ลด และควบคุม\" (Prevent, Reduce and Control)** มลพิษ เช่น UNCLOS **ข้อ 194 วรรคแรก** และอนุสัญญา Espoo\n(3) คดีสำคัญ\n- **Trail Smelter (ค.ศ. 1941)** วางกฎ **No Harm Rule** ว่าไม่มีรัฐใดมีสิทธิใช้หรืออนุญาตให้ใช้ดินแดนของตนให้เกิดความเสียหายจากควันต่อดินแดนหรือทรัพย์สินหรือบุคคลของรัฐอื่น เมื่อผลที่ตามมาร้ายแรง (Serious Consequence) และพิสูจน์ด้วยหลักฐานที่ประจักษ์ชัดและน่าเชื่อถือ (Clear and Convincing Evidence)\n- **Corfu Channel (ค.ศ. 1949)** แอลเบเนียรู้ว่ามีทุ่นระเบิดแต่ไม่แจ้งเตือนเรือรบอังกฤษ ศาลวางหลักว่ารัฐมีหน้าที่แจ้งเตือน (Duty to Notify) และต้องไม่ยอมให้ดินแดนของตนถูกใช้ขัดต่อสิทธิของรัฐอื่นโดยรู้อยู่ เปรียบเหมือนเจ้าของบ้านที่รู้ว่ามีสายไฟเปลือยในสวนแต่ปล่อยให้เพื่อนบ้านเดินเหยียบ\n- **Nuclear Weapons Advisory Opinion (ค.ศ. 1996)** ICJ ยืนยันว่าพันธกรณีที่ต้องเคารพสิ่งแวดล้อมของรัฐอื่นหรือพื้นที่นอกเขตอำนาจรัฐ เป็นส่วนสำคัญ (Corpus) ของกฎหมายสิ่งแวดล้อมระหว่างประเทศแล้ว\n(4) สารัตถะมี 2 ประการ คือ ความเสียหาย **อย่างมีนัยสำคัญ (Significant Harm)** ตามคณะกรรมาธิการกฎหมายระหว่างประเทศ (ILC) คือมากกว่าสังเกตเห็นได้ (More than Detectable) แม้ไม่ต้องถึงขั้นร้ายแรงที่สุด และ **ความพยายามตามสมควร (Due Diligence)** ซึ่งเป็น **พันธกรณีกระทำการ (Obligation of Conduct)** ไม่ใช่พันธกรณีประสงค์ต่อผล รัฐไม่ต้องรับประกันว่าไม่มีความเสียหายเลย แต่ต้อง \"ใช้ความพยายามอย่างดีที่สุด\"\n(5) **คดี Pulp Mills (ค.ศ. 2010)** ICJ วางบรรทัดฐานว่ารัฐใช้ Due Diligence ครบถ้วนเมื่อออกกฎและมาตรการควบคุมที่เหมาะสม บังคับใช้และควบคุมทางปกครองอย่างเข้มงวด (Vigilance in Enforcement) และ **ทำ EIA** ก่อนเริ่มกิจกรรมอุตสาหกรรมที่เสี่ยงผลกระทบข้ามพรมแดน ซึ่งเป็น CIL แล้ว\n**2. หลักการระวังไว้ก่อน (Precautionary Principle)**\nใช้เมื่อหลักฐานวิทยาศาสตร์ยังถกเถียงหรือไม่ชัด เช่น การนำเข้าพืช GMOs หรือสารเคมีชนิดใหม่ ผู้มีอำนาจ **ไม่ต้องรอหลักฐาน 100%** ก็ออกมาตรการแบนหรือชะลอกิจกรรมได้ เท่ากับ **ยกประโยชน์แห่งความสงสัยให้สิ่งแวดล้อม** แม้ไม่มีหลักฐานยืนยันความสัมพันธ์ระหว่างกิจกรรมกับความเสียหาย รัฐก็ไม่อาจรอจนกว่าจะมีหลักฐานแน่นอนก่อนค่อยป้องกัน วิธีปรับใช้ ได้แก่ การห้ามดำเนินการ การทยอยเลิก (Phase Out) วิธีการผลิตที่สะอาด (Clean Production) แนวปฏิบัติด้านสิ่งแวดล้อมที่ดีที่สุด (BEP) เทคนิคที่ดีที่สุด (BAT) และการกำหนดรายการสารเคมี\nความเชื่อมโยงกับ Climate Change ในอดีตเคยถกเถียงว่าโลกร้อนมาจากธรรมชาติหรือมนุษย์ แต่ข้อมูลจาก IPCC ชี้ชัดว่ามนุษย์เป็นต้นเหตุหลัก นำไปสู่ **ความตกลงปารีส** ที่ตั้งเป้าควบคุมอุณหภูมิเฉลี่ยโลกไม่ให้เกิน 2.0 องศาเซลเซียส และพยายามจำกัดไว้ที่ 1.5 องศาเซลเซียส\n**ทบทวนหลักที่เรียนในคาบนี้**\n- เครื่องมือเชิงป้องกันและกระบวนการ: **EIA** (ระดับโครงการ) **SEA** (ระดับยุทธศาสตร์) การมีส่วนร่วมอย่างมีความหมาย การเข้าถึงข้อมูล (เปิดเผยเป็นหลัก) การเข้าถึงความยุติธรรม และ **SLAPP**\n- บ่อเกิด: สนธิสัญญา CIL (Persistent Objector) หลักกฎหมายทั่วไป และ Soft Law UNCLOS **ข้อ 194 วรรคแรก**\n- คดี: **Trail Smelter, Corfu Channel, Nuclear Weapons Advisory Opinion, Pulp Mills** และความตกลงปารีส (2.0 และ 1.5 องศา)\n**จุดที่ควรจำ:** EIA เป็นข้อมูลประกอบการตัดสินใจ ไม่ใช่ปัจจัยชี้ขาด Due Diligence เป็นพันธกรณีกระทำการ ไม่ใช่ประสงค์ต่อผล และหลักระวังไว้ก่อนยกประโยชน์แห่งความสงสัยให้สิ่งแวดล้อม"
+ },
+ {
+  "n": 6,
+  "title": "หลักความรับผิดชอบร่วมกันในระดับที่ต่างกัน (CBDR) และการพัฒนาที่ยั่งยืน",
+  "video": "10SMLpHqcdE",
+  "text": "**ภาพรวม:** คาบนี้เจาะลึกหลักความรับผิดชอบร่วมกันในระดับที่ต่างกัน (CBDR) ว่าทำไมกฎหมายสิ่งแวดล้อมระหว่างประเทศต้องปฏิบัติกับประเทศพัฒนาแล้วและประเทศกำลังพัฒนาไม่เหมือนกัน แล้วดูว่าหลักนี้ถูกนำมาใช้ในกรอบอนุสัญญาภูมิอากาศ พิธีสารเกียวโต และความตกลงปารีสอย่างไร\n**1. ทำไมต้องมี CBDR**\nClimate Change เป็นปัญหาระดับโลกที่ทุกรัฐมีส่วนก่อ และประเทศพัฒนาแล้วแก้เพียงลำพังไม่ได้ จึงต้องดึงทุกรัฐเข้ามา หลัก CBDR อธิบายว่า ทุกรัฐมีความรับผิดชอบ **ร่วมกัน (Common)** ในการดูแลสิ่งแวดล้อม แต่เมื่อถึงเวลารับภาระ ต้องแบ่งให้แต่ละกลุ่มประเทศรับในระดับ **ต่างกัน (Differentiated)**\n**2. ความตึงเครียดระหว่าง Sovereign Equality กับความเป็นจริง**\nในทางกฎหมาย รัฐทุกรัฐมีอธิปไตยและความเสมอภาคเท่ากัน (**Sovereign Equality**) คือ 1 สิทธิ 1 เสียง แต่การเป็นภาคีสนธิสัญญาก่อให้เกิดหน้าที่ ถ้ายึดความเสมอภาคเคร่งครัด ทุกรัฐต้องทำเหมือนกันหมด เช่น ผู้ประกอบการในประเทศกำลังพัฒนาต้องลงทุนติดตั้งเครื่องกำจัดมลพิษราคาแพงเท่าประเทศพัฒนาแล้ว ซึ่งในความเป็นจริงแต่ละรัฐมีระดับเศรษฐกิจ สังคม และคุณภาพสิ่งแวดล้อมต่างกัน การบังคับเท่ากันทำให้ต้นทุนหนักเกินไปและประเทศกำลังพัฒนาจะไม่ยอมเข้าร่วมสนธิสัญญา กฎหมายสิ่งแวดล้อมระหว่างประเทศจึงลดทอนความเข้มงวดของ Sovereign Equality และให้ **สิทธิพิเศษ (Preference)** แก่ประเทศกำลังพัฒนา\n**3. มูลฐานของการปฏิบัติต่างกัน**\n**ฝั่งประเทศพัฒนาแล้ว**\n(1) **การก่อความเสียหายในอดีต (Historical Contribution)** ปล่อยมลพิษและได้ประโยชน์มาตั้งแต่ยุคปฏิวัติอุตสาหกรรมเมื่อราว 200 ปีก่อน ในขณะที่ประเทศกำลังพัฒนายังไม่ได้ปล่อยก๊าซเรือนกระจก\n(2) **ขีดความสามารถ (Respective Capabilities)** มีเงินทุนและเทคโนโลยีสูงกว่ามาก\n**ฝั่งประเทศกำลังพัฒนา**\n(3) **ความจำเป็นด้านการพัฒนา (Developmental Needs)** ต้องพัฒนาเศรษฐกิจและยกระดับคุณภาพชีวิตให้ทัดเทียมประเทศอื่นก่อน\n(4) **การจูงใจให้เข้าร่วม (Incentivize Participation)** การผ่อนปรนหน้าที่ทำให้ประเทศกำลังพัฒนาเข้าร่วมสนธิสัญญาโดยไม่หวาดกลัวภาระผูกพัน\n**4. กรอบอนุสัญญาสหประชาชาติว่าด้วยการเปลี่ยนแปลงสภาพภูมิอากาศ (UNFCCC ค.ศ. 1992)**\nเป็น **กรอบอนุสัญญา (Framework Convention)** หรือกฎหมายแม่ ที่วางโครงสร้างและหลักการกว้าง ๆ หัวใจอยู่ที่ **ข้อ 3 (หลักการ)** ซึ่งกำหนดว่ารัฐภาคีควรคุ้มครองระบบภูมิอากาศเพื่อคนรุ่นปัจจุบันและอนาคต บนพื้นฐานของความเที่ยงธรรม (Equity) และตามหลัก CBDR โดยคำนึงถึงขีดความสามารถของแต่ละรัฐ ดังนั้น **ประเทศพัฒนาแล้วควรเป็นผู้นำ (Take the Lead)** ในการต่อสู้กับ Climate Change\nข้อสังเกต (1) อนุสัญญามี **ภาคผนวก I และ II** ระบุรายชื่อประเทศพัฒนาแล้วที่ต้องเป็นผู้นำ เช่น กลุ่มยุโรปและญี่ปุ่น ไม่มีประเทศไทย (2) UNFCCC ไม่ได้กำหนดตัวเลขว่าต้องลดก๊าซเรือนกระจกเท่าไร เพราะในปี ค.ศ. 1992 หลักฐานและการคำนวณทางวิทยาศาสตร์ยังไม่พร้อม จึงต้องมีข้อตกลงลูกมากำหนดรายละเอียดภายหลัง\n**5. พิธีสารเกียวโต และช่องโหว่**\nหากเปรียบ UNFCCC เป็นกฎหมายแม่ พิธีสารเกียวโตคือกฎหมายลูกที่กำหนดรายละเอียด โดยใช้ระบบ **สั่งการจากบนลงล่าง (Top-down)** ระบุ **ตัวเลขเปอร์เซ็นต์** ที่ประเทศพัฒนาแล้วในภาคผนวกต้องลด เช่น ออสเตรเลียหรืออิตาลี แต่มีช่องโหว่ คือ นักลงทุนเห็นว่าโรงงานในยุโรปที่อยู่ในภาคผนวกมีต้นทุนปฏิบัติตามกฎหมายสูง จึง **ย้ายฐานการผลิต** ไปยังประเทศนอกภาคผนวก เช่น จีน อินเดีย เวียดนาม หรือบราซิล ผลคือแม้ประเทศพัฒนาแล้วทำได้ตามตัวเลข แต่อุณหภูมิเฉลี่ยโลกไม่ลดจริง เพราะมลพิษแค่ถูกย้ายที่\n**6. ความตกลงปารีส (ค.ศ. 2015) กับ Self-Differentiation และ NDCs**\nความตกลงปารีสยังยึดหลัก CBDR แต่ใช้ชื่อเต็มว่า \"ความรับผิดชอบร่วมกันในระดับที่ต่างกัน โดยคำนึงถึงขีดความสามารถของแต่ละรัฐตามสถานการณ์ที่ต่างกัน\" และ **ลดความเข้มข้นลง** โดยเลิกระบบแบ่งประเทศตามภาคผนวก เพราะช่องว่างเดิมทำให้เลี่ยงความรับผิดชอบ แล้วให้ทุกรัฐมีส่วนร่วมผ่านกลไก **NDCs (Nationally Determined Contributions)** ตาม **ข้อ 4 วรรค 2** ที่รัฐภาคีต้องจัดทำ แจ้ง และคงไว้ซึ่งเป้าหมายของตน เปลี่ยนจาก Top-down เป็น **Bottom-up** คือแต่ละประเทศประเมินขีดความสามารถของตนแล้วตั้งเป้าหมายด้วยตนเอง เรียกว่า **Self-Differentiation**\nตัวอย่างประเทศไทย กรมการเปลี่ยนแปลงสภาพภูมิอากาศและสิ่งแวดล้อมส่งรายงาน NDC ฉบับอัปเดตเข้าระบบทะเบียนระดับโลก ตั้งเป้า **ลดการปล่อยก๊าซเรือนกระจกสุทธิ 47% ภายในปี ค.ศ. 2035 เทียบกับฐานปี ค.ศ. 2019** ให้สอดคล้องกับเส้นทางจำกัดอุณหภูมิโลกไม่เกิน 1.5 องศาเซลเซียส และมุ่งสู่ **Net Zero ในปี ค.ศ. 2050** โดยภาคที่ไทยต้องเร่งปรับปรุง ได้แก่ ภาคพลังงาน (เช่น รถ EV และพลังงานหมุนเวียน) ภาคเกษตรและการใช้ที่ดิน และกระบวนการทางอุตสาหกรรม\n**ทบทวนกฎหมายที่เรียนในคาบนี้**\n- **UNFCCC ข้อ 3** (หลักการ CBDR และประเทศพัฒนาแล้วเป็นผู้นำ) พร้อมภาคผนวก I และ II\n- พิธีสารเกียวโต (Top-down และช่องโหว่การย้ายฐานการผลิต)\n- ความตกลงปารีส **ข้อ 4 วรรค 2** (NDCs) และเป้าหมาย 1.5 องศาเซลเซียส\n**จุดที่ควรจำ:** CBDR ลดทอน Sovereign Equality ด้วยเหตุผลเรื่องความรับผิดในอดีตและขีดความสามารถ Kyoto ใช้ Top-down แล้วเกิดการย้ายฐานการผลิต ส่วนปารีสเปลี่ยนเป็น Bottom-up ผ่าน NDCs ที่ทุกรัฐกำหนดเป้าหมายเอง"
+ },
+ {
+  "n": 7,
+  "title": "กฎหมายว่าด้วยการเปลี่ยนแปลงสภาพภูมิอากาศ (1)",
+  "video": "E6tN6Rxq44g",
+  "text": "**ภาพรวม:** คาบนี้เริ่มกฎหมายว่าด้วยการเปลี่ยนแปลงสภาพภูมิอากาศ ไล่พัฒนาการของสนธิสัญญา 3 ฉบับ (UNFCCC, พิธีสารเกียวโต, ความตกลงปารีส) กลไกรับมือ (Mitigation, Adaptation, Loss and Damage) การเปลี่ยนผ่านที่เป็นธรรม และการอนุวัติการมาเป็นร่าง พ.ร.บ.การเปลี่ยนแปลงสภาพภูมิอากาศของไทย\n**1. UNFCCC ค.ศ. 1992 (กฎหมายแม่)**\nเป็นกรอบกว้าง ๆ ที่ยังไม่ลงรายละเอียดเชิงปฏิบัติ\n(1) **วัตถุประสงค์ (ข้อ 2)** คือ **การรักษาระดับ (Stabilization)** ความเข้มข้นของก๊าซเรือนกระจกในชั้นบรรยากาศให้อยู่ในระดับที่ป้องกัน **การแทรกแซงจากมนุษย์ (Anthropogenic Interference)** ต่อระบบภูมิอากาศจนเป็นอันตราย ภายในกรอบเวลาที่ให้ระบบนิเวศปรับตัวตามธรรมชาติ ไม่กระทบการผลิตอาหาร และ **เอื้อให้การพัฒนาเศรษฐกิจดำเนินต่อไปอย่างยั่งยืน** ซึ่งถูกใจประเทศกำลังพัฒนาเป็นพิเศษ เพราะเป็นหลักประกันว่ามาตรการโลกร้อนจะไม่ขัดขวางการเติบโต ข้อวิจารณ์คือถ้อยคำ \"รักษาระดับ\" กว้างและไม่ได้แปลว่าห้ามปล่อยก๊าซ ทั้งไม่ระบุวิธีการชัดเจน\n(2) **หลักการ (ข้อ 3)** ใช้หลักความเป็นธรรมระหว่างคนต่างรุ่น (Intergenerational Equity) เพราะ Climate Change เป็นปัญหาระยะยาว และหลัก CBDR โดยกำหนดว่า **ประเทศพัฒนาแล้วต้องเป็นผู้นำ (Take the Lead)** เพราะมีส่วนก่อความเสียหายในอดีต (Historical Contribution) ตั้งแต่ยุคปฏิวัติอุตสาหกรรม และมีเงินทุนกับเทคโนโลยีมากกว่า (Respective Capabilities) ใช้การแบ่งกลุ่มตามภาคผนวก I (Annex I คือประเทศพัฒนาแล้ว) และนอกภาคผนวก I (Non-Annex I คือประเทศกำลังพัฒนา รวมถึงไทย)\n**2. พิธีสารเกียวโต ค.ศ. 1997 (กฎหมายลูก)**\n(1) **เป้าหมายเชิงปริมาณ (Quantified Emission Limitation)** ตามข้อ 2 และข้อ 3 กำหนดให้ประเทศ Annex I ลดก๊าซเรือนกระจกรวมกัน **อย่างน้อยร้อยละ 5 จากระดับปี ค.ศ. 1990** ในช่วงพันธกรณี ค.ศ. 2008 ถึง 2012 ด้วยระบบ **สั่งการจากบนลงล่าง (Top-down)** ครอบคลุมก๊าซ เช่น คาร์บอนไดออกไซด์และมีเทน (มีเทนมักมาจากภาคเกษตร เช่น ทำนา ปศุสัตว์ และการเผาเศษวัสดุเหลือใช้) พร้อมภาคพลังงาน กระบวนการอุตสาหกรรม และการจัดการของเสีย\n(2) **กลไกการพัฒนาที่สะอาด (Clean Development Mechanism หรือ CDM)** เปิดให้ประเทศพัฒนาแล้วลงทุนโครงการลดก๊าซในประเทศกำลังพัฒนาเพื่อแลกเป็นคาร์บอนเครดิต ตัวอย่างในคาบ คือ ฟินแลนด์นำเทคโนโลยีกังหันลมมาลงทุนในไทย (เช่น จังหวัดประจวบคีรีขันธ์) แล้วคำนวณว่าช่วยลดก๊าซจากการผลิตไฟฟ้าด้วยถ่านหินได้เท่าใด แล้วนำเครดิตกลับไปหักลบ (Offset) เป้าหมายของตน ที่นิยมเพราะต้นทุนถูกกว่า (Cost-effective) และโลกได้ประโยชน์เท่ากันไม่ว่าจะลดที่ไหน ข้อควรระวังคือการปลูกป่าเชิงเดี่ยว เช่น ต้นสักหมื่นไร่เพื่อเครดิต ทำให้สูญเสียความหลากหลายทางชีวภาพและเสี่ยงโรคระบาดต่อป่า\n(3) **ช่องโหว่** เกิด Carbon Leakage เพราะนักลงทุนย้ายฐานการผลิตไปประเทศนอก Annex I เช่น จีน อินเดีย บราซิล และระบบนี้ไม่มีช่องให้ประเทศกำลังพัฒนาที่ร่ำรวยขึ้น (เช่น จีน) ยกระดับตนเองเข้ากลุ่ม Annex I\n**3. ความตกลงปารีส ค.ศ. 2015**\nอุดช่องโหว่เกียวโตด้วยการดึงทุกรัฐเข้ามา ไม่แบ่งภาคผนวกตายตัว\n(1) **เป้าหมาย (ข้อ 2)** เปลี่ยนจากการรักษาระดับเป็นเป้าหมายอุณหภูมิ คือ จำกัดการเพิ่มของอุณหภูมิเฉลี่ยโลก **ต่ำกว่า 2 องศาเซลเซียสอย่างมาก (Well below 2°C)** และพยายามไม่เกิน **1.5 องศาเซลเซียส** เทียบกับยุคก่อนอุตสาหกรรม\n(2) **กลไก Bottom-up ผ่าน NDCs (ข้อ 4)** ทุกรัฐกำหนดเป้าหมายเอง (ดูเป้าหมายแต่ละประเทศได้ที่ NDC Registry เช่น ภูฏานตั้งเป้า Carbon Neutral) และ NDCs รอบถัดไปต้องมี **ความก้าวหน้า (Progression)** ไม่ถอยหลัง และสะท้อน **ความทะเยอทะยานสูงสุดเท่าที่ทำได้ (Highest Possible Ambition)** ตามขีดความสามารถของรัฐนั้น\n**4. กลไกรับมือปัญหา**\n(1) **การลดก๊าซ (Mitigation)** ไม่ได้มีแค่ลดที่แหล่งกำเนิด (โรงงาน การขนส่ง) แต่รวมถึงการรักษาและอนุรักษ์ **แหล่งกักเก็บและดูดซับ (Carbon Sinks)** ได้แก่ ป่าไม้ (ระวังปลูกป่าเชิงเดี่ยว) และ **มหาสมุทร** ซึ่งเป็นแหล่งดูดซับที่ใหญ่ที่สุดของโลกเพราะครอบคลุมกว่า 70% ของพื้นผิวโลก เมื่อทะเลดูดซับมากเกินไปจะเกิดผลกระทบสามประการ คือ **ความเป็นกรดของมหาสมุทร (Ocean Acidification)** ที่กัดกร่อนแคลเซียมของปะการังจนฟอกขาว **น้ำทะเลอุ่นขึ้น (Ocean Warming)** ทำให้ปลาย้ายถิ่นกระทบชาวประมงและความมั่นคงทางอาหาร และ **ระดับน้ำทะเลสูงขึ้น (Sea Level Rise)** ท่วมพื้นที่ชายฝั่ง (เช่น สมุทรสงคราม) และอาจทำให้ประเทศหมู่เกาะอย่างตูวาลูหรือมัลดีฟส์จมน้ำ นำไปสู่ปัญหาทางกฎหมายระหว่างประเทศเรื่อง **การสูญเสียดินแดน** ซึ่งเป็นองค์ประกอบของความเป็นรัฐ\n(2) **การปรับตัว (Adaptation)** คือการเรียนรู้ที่จะอยู่รอดร่วมกับสภาพภูมิอากาศที่เปลี่ยนไป เช่น เกษตรกรปรับปรุงสายพันธุ์พืชให้ทนแล้ง ทนน้ำท่วม ทนโรค โครงสร้างพื้นฐานและที่อยู่อาศัย เช่น บ้านลอยน้ำ กำแพงกันคลื่น อาคารทนความร้อนและประหยัดพลังงาน และธุรกิจใหม่ เช่น รถ EV และห้องเย็นขนส่งอาหาร\n(3) **การสูญเสียและความเสียหาย (Loss and Damage)** ครอบคลุมทั้งภัยพิบัติรุนแรงฉับพลันและผลกระทบที่ค่อย ๆ เกิด ปัญหาทางกฎหมายคือการพิสูจน์ความสัมพันธ์ระหว่างเหตุและผล (Causation) เพื่อหาผู้รับผิดชดใช้ ทำได้ยากมาก\nกฎหมายภายในของแต่ละประเทศต้องแปลงพันธกรณีเป็นมาตรการทั้งด้าน Mitigation (เช่น งบประมาณคาร์บอน (Carbon Budget) จำกัดเพดานการปล่อย) และ Adaptation\n**5. การเปลี่ยนผ่านที่เป็นธรรม (Just Transition)**\nการเปลี่ยนไปสู่เศรษฐกิจคาร์บอนต่ำ เช่น เลิกพึ่งฟอสซิลและถ่านหิน มีทั้งโอกาสและ **ผู้สูญเสีย** คำถามสำคัญคือ \"ใครต้องสูญเสียอะไรบ้างเมื่อเปลี่ยนจากเทคโนโลยีสกปรกเป็นสะอาด\" ตัวอย่างผู้ได้รับผลกระทบ ได้แก่ แรงงาน (เช่น ช่างซ่อมเครื่องยนต์ดีเซลที่ตกงานเพราะ EV) ผู้ประกอบการที่แบกต้นทุนเทคโนโลยีใหม่ไม่ไหวหากรัฐบังคับเร็วเกินไป และผู้บริโภค (เช่น ค่าโดยสารเครื่องบินแพงขึ้น) ต่างประเทศ เช่น เกาหลีใต้ ให้ความสำคัญมาก ส่วนร่าง พ.ร.บ.ของไทยบัญญัติเป็นเป้าหมายหลัก และกำหนดตั้ง **กองทุนภูมิอากาศ** เป็นเครื่องมือทางการเงินสนับสนุนการเปลี่ยนผ่าน\n**6. การอนุวัติการ: ร่าง พ.ร.บ.การเปลี่ยนแปลงสภาพภูมิอากาศ**\nสนธิสัญญาไม่มีผลใช้บังคับในไทยโดยอัตโนมัติ ต้องอนุวัติการเป็นกฎหมายภายใน กรมการเปลี่ยนแปลงสภาพภูมิอากาศและสิ่งแวดล้อมนำโมเดลต่างประเทศ เช่น สหราชอาณาจักรและเยอรมนีมาปรับใช้\n(1) **บทนิยาม** Climate Change ต้อง \"อันเป็นผลจากกิจกรรมของมนุษย์ (Anthropogenic)\" Mitigation ครอบคลุมทั้งลดการปล่อยและเพิ่มแหล่งกักเก็บ ส่วน Adaptation ไม่ได้มีแค่ลดความเสี่ยงหรือป้องกันความสูญเสีย แต่รวมถึงการทำให้เศรษฐกิจ **ได้ประโยชน์หรือเป็นโอกาส** จากการเปลี่ยนแปลง (เช่น ธุรกิจทำความเย็น เกษตรแบบใหม่)\n(2) **เป้าหมาย (มาตรา 8)** ให้กรมตั้งเป้าหมายระยะสั้น กลาง ยาว สอดคล้องพันธกรณีระหว่างประเทศ โดยระบุตัวเลข **Carbon Neutrality ภายในปี พ.ศ. 2593 (ค.ศ. 2050)** และ **Net Zero ภายในปี พ.ศ. 2608 (ค.ศ. 2065)** ข้อดีของการล็อกตัวเลขในกฎหมายคือผูกพันชัดเจน ไม่ใช่แค่คำมั่นทางการเมือง ข้อเสียคือ NDCs ต้องก้าวหน้าขึ้นเรื่อย ๆ (Progression) การล็อกไว้ในระดับ พ.ร.บ. ทำให้แก้ไขยาก เพราะต้องเข้าสภา\n(3) **ภาระหน่วยงานรัฐ (มาตรา 9)** ทุกภาคส่วนของรัฐต้องกำหนดเป้าหมายและแผนของตนให้สอดคล้องระดับชาติ และ **ต้องตั้งงบประมาณรายจ่ายประจำปีให้เพียงพอ**\n(4) **คณะกรรมการนโยบายการเปลี่ยนแปลงสภาพภูมิอากาศแห่งชาติ (หมวด 3)** มีนายกรัฐมนตรีเป็นประธานและมีปลัดกระทรวงจากแทบทุกกระทรวง (รวมกลาโหม ซึ่งสะท้อนว่ารัฐมองเป็นเรื่องความมั่นคงด้วย) แต่มีผู้ทรงคุณวุฒิภาคเอกชนและภาคประชาสังคมเพียงอย่างละ 1 คน ถูกวิจารณ์ว่าสัดส่วนการมีส่วนร่วมน้อยเกินไป และนัดประชุมให้ครบองค์ประชุมยาก มักลงเอยที่ให้รองปลัดหรืออธิบดีประชุมแทน\n**ทบทวนกฎหมายที่เรียนในคาบนี้**\n- **UNFCCC ข้อ 2** (Stabilization) และ **ข้อ 3** (CBDR และประเทศพัฒนาแล้วเป็นผู้นำ)\n- **พิธีสารเกียวโต ข้อ 2 และ 3** (ลดอย่างน้อยร้อยละ 5 จากปี 1990 ช่วง 2008–2012) และ CDM\n- **ความตกลงปารีส ข้อ 2** (2°C และ 1.5°C) และ **ข้อ 4** (NDCs, Progression, Highest Possible Ambition)\n- ร่าง พ.ร.บ.การเปลี่ยนแปลงสภาพภูมิอากาศ **มาตรา 8** (เป้าหมาย 2050 และ 2065) **มาตรา 9** (แผนและงบประมาณ) และ **หมวด 3** (คณะกรรมการนโยบาย)\n**จุดที่ควรจำ:** ไทยต้องอนุวัติการก่อนสนธิสัญญาใช้บังคับ การล็อกตัวเลขเป้าหมายไว้ใน พ.ร.บ. มีทั้งข้อดีและข้อเสียเมื่อเทียบกับหลัก Progression ของ NDCs และ Mitigation รวมถึงการอนุรักษ์แหล่งดูดซับก๊าซ ไม่ใช่แค่ลดที่ต้นทาง"
+ },
+ {
+  "n": 8,
+  "title": "กฎหมายว่าด้วยการเปลี่ยนแปลงสภาพภูมิอากาศ (2)",
+  "video": "JhVl4lzY1Nc",
+  "text": "**ภาพรวม:** คาบนี้วิเคราะห์ร่าง พ.ร.บ.การเปลี่ยนแปลงสภาพภูมิอากาศของไทยต่อ ได้แก่ เป้าหมายและฐานข้อมูลก๊าซเรือนกระจก งบประมาณคาร์บอน การกำหนดราคาคาร์บอน (ภาษีคาร์บอนและระบบซื้อขายสิทธิ) กลไก CBAM ของสหภาพยุโรป ผลต่อกฎหมายทะเล และมิติสิทธิมนุษยชน\n**1. เป้าหมายระดับชาติและฐานข้อมูล (National Registry)**\nร่าง พ.ร.บ.กำหนดให้ไทยบรรลุ **Carbon Neutrality ภายในปี ค.ศ. 2050 (พ.ศ. 2593)** และ **Net Zero ภายในปี ค.ศ. 2065 (พ.ศ. 2608)** ตามมาตรา 8 ให้หน่วยงานรัฐทุกส่วนนำเป้าหมายไปทำแผนปฏิบัติการและต้องตั้งงบประมาณรายจ่ายประจำปีให้เพียงพอ มาตรการลดก๊าซทำได้ทั้งแบบทั้งระบบเศรษฐกิจ (Economy-wide) และแบ่งเป็นรายภาคส่วน (Sectoral) เช่น ภาคพลังงานและอุตสาหกรรม (เปลี่ยนเชื้อเพลิง กระบวนการผลิตเหล็กและปูนซีเมนต์) ภาคคมนาคมขนส่ง (EV ขนส่งสาธารณะ) ภาคเกษตร (มูลสัตว์ ปุ๋ย ลดการเผาวัสดุเกษตร) และภาคการจัดการของเสีย (ขยะมูลฝอย น้ำเสีย)\nกฎหมายบังคับให้หน่วยงานรัฐและเอกชนในภาคต่าง ๆ เก็บและรายงาน **ข้อมูลกิจกรรม** ที่ก่อก๊าซเรือนกระจก เพื่อสร้างฐานข้อมูลของประเทศที่แม่นยำ (**National Registry**) โดยข้อมูลเฉพาะรายของเอกชนเก็บเป็นความลับทางการค้า\n**2. งบประมาณคาร์บอน (Carbon Budget)**\nCarbon Budget คือ **เพดานการปล่อยก๊าซเรือนกระจกสูงสุด (Cap)** ในช่วงเวลาหนึ่งที่ผูกพันตามกฎหมาย ร่างของไทยกำหนดเป้าหมายรวบยอดระยะยาว (2050 และ 2065) ไม่มีตัวเลขรายปีในตัวกฎหมาย ต่างจากต่างประเทศ เช่น\n(1) **เยอรมนี (Federal Climate Action Act หรือ KSG)** บัญญัติงบประมาณการปล่อยรายปี (Annual Emission Budgets) ไว้ในกฎหมาย ลดลงเรื่อย ๆ จากประมาณ 813 ล้านตันคาร์บอนไดออกไซด์เทียบเท่าในปี ค.ศ. 2020 เหลือประมาณ 438 ล้านตันในปี ค.ศ. 2030 และแยกเป็นรายภาคส่วนด้วย ทำให้ตรวจสอบรัฐบาลผ่านรัฐสภาได้ง่ายหากภาคส่วนใดเกินเพดาน\n(2) **ฟิจิ** ให้รัฐมนตรีจัดทำและประกาศงบประมาณคาร์บอนราย 5 ปี\nของไทย ตัวเลขรายภาคถูกผลักไปอยู่ในแผนแม่บทและแผนปฏิบัติการที่กรมร่างและคณะกรรมการนโยบายพิจารณา ซึ่งถูกวิจารณ์ว่าติดตามและตรวจสอบความรับผิดชอบยากขึ้น เพราะแผนปรับได้ง่ายกว่าตัวบทกฎหมาย ปัจจัยที่ต้องชั่งน้ำหนักในการกำหนดงบประมาณ ได้แก่ เป้าหมายระยะยาวและเส้นทางการลด แผนพัฒนาเศรษฐกิจและสังคมแห่งชาติ และ **ความสามารถในการแข่งขัน (Competitiveness)** ของอุตสาหกรรมในประเทศ ซึ่งเป็นหัวใจสำคัญเพราะเพดานที่เข้มขึ้นหมายถึงต้นทุนธุรกิจที่สูงขึ้น\nCarbon Budget ยังเป็นรากฐานของระบบซื้อขายสิทธิ เพราะหากไม่มีเพดานรวมที่ชัดเจนก็ไม่มีสิทธิให้จัดสรรหรือประมูลได้\n**3. การกำหนดราคาคาร์บอน (Carbon Pricing) 2 ระบบ**\n(1) **ภาษีคาร์บอน (Carbon Tax)** เก็บตามปริมาณก๊าซที่ปล่อย หรือจากเชื้อเพลิงฟอสซิลที่นำมาใช้ ร่างของไทยกำหนดอัตราไว้ท้าย พ.ร.บ.สำหรับกลุ่มน้ำมันและก๊าซ\n(2) **ระบบซื้อขายสิทธิการปล่อยก๊าซเรือนกระจก (ETS หรือ Cap and Trade)** รัฐนำเพดานรวมมาจัดสรรเป็นสิทธิ (Allowances) ให้ผู้ที่ถูกควบคุม เช่น โรงงานขนาดใหญ่ ผู้ที่ปล่อยต่ำกว่าสิทธิที่ได้รับนำสิทธิที่เหลือไปขายให้ผู้ปล่อยเกินเพดานได้ สิทธิที่จัดสรรจะลดลงทุกปีทำให้ราคาสูงขึ้น กดดันให้ผู้ประกอบการลงทุนพลังงานสะอาด\n**Grandfathering** คือการ **จัดสรรสิทธิให้เปล่า** ในระยะเริ่มต้นของ ETS แทนการประมูล เพราะหากบังคับประมูลตั้งแต่ปีแรก ต้นทุนของอุตสาหกรรมดั้งเดิม (เช่น รถยนต์สันดาปและเหล็ก) จะสูงขึ้นทันที และสู้สินค้านำเข้าจากประเทศที่ไม่มีกฎหมายคาร์บอนไม่ได้ รัฐจึงใช้เพื่อให้เวลาปรับตัว สหภาพยุโรปเคยใช้แล้วปัจจุบันทยอยยกเลิกเพื่อให้ทุกภาคส่วนลดจริง ข้อสังเกตเชิงโครงสร้างคือ คณะกรรมการจัดสรรสิทธิในร่างมีตัวแทนภาคธุรกิจชัดเจน (เช่น สภาอุตสาหกรรม หอการค้า) แต่มีตัวแทนภาคประชาสังคมคนเดียว อาจทำให้อำนาจต่อรองไม่สมดุล\n**4. CBAM ของสหภาพยุโรป**\nเมื่อ EU ETS เข้มงวดขึ้น เกิด Carbon Leakage คือทุนยุโรปย้ายฐานไปประเทศที่ไม่มีราคาคาร์บอน EU จึงออก **CBAM (Carbon Border Adjustment Mechanism)** บังคับว่าผู้นำเข้าสินค้า 6 ประเภท คือ เหล็ก เหล็กกล้า ปุ๋ย ไฟฟ้า ไฮโดรเจน และอลูมิเนียม ต้องพิสูจน์ว่าสินค้าจ่ายราคาคาร์บอนที่ประเทศต้นทางแล้ว หากพิสูจน์ไม่ได้ ต้องซื้อ **ใบรับรอง CBAM (CBAM Certificate)** จ่ายส่วนต่างคาร์บอนก่อนนำเข้ายุโรป นี่เป็นตัวกระตุ้นสำคัญให้ไทยเร่งร่าง พ.ร.บ.และบัญญัติหมวด CBAM ของตนเอง เพื่อเก็บรายได้เข้าประเทศแทนที่ผู้ส่งออกไทยจะไปจ่ายให้ยุโรป\n**5. ผลกระทบต่อกฎหมายทะเล**\nทะเลเป็นแหล่งดูดซับคาร์บอนที่ใหญ่ที่สุด แต่ดูดซับมากเกินไปทำให้เกิดความเป็นกรดของมหาสมุทรและปะการังฟอกขาว ส่วนระดับน้ำทะเลที่สูงขึ้นกระทบ **เส้นฐาน (Baseline)** ซึ่งคือเส้นน้ำลดต่ำสุด (Low-water Line) ที่ใช้เป็นจุดเริ่มวัดอาณาเขตทางทะเล เช่น ทะเลอาณาเขต 12 ไมล์ทะเล และเขตเศรษฐกิจจำเพาะ 200 ไมล์ทะเล เมื่อเส้นฐานร่นเข้าฝั่ง พื้นที่ทางทะเลของรัฐก็หดตัว นำไปสู่ข้อพิพาทพื้นที่ทับซ้อนและการแย่งชิงทรัพยากร เช่น แหล่งน้ำมัน\n**6. สิทธิมนุษยชนกับ Climate Change**\nปัญหาสิ่งแวดล้อมรุนแรงจนกระทบสิทธิในการมีชีวิตและสิทธิในสุขภาพ เช่น คลื่นความร้อนรุนแรง เมื่อเดือนกรกฎาคม ค.ศ. 2022 สมัชชาใหญ่แห่งสหประชาชาติมีข้อมติรับรอง **สิทธิในการมีสิ่งแวดล้อมที่สะอาด ดี และยั่งยืน** เป็นสิทธิมนุษยชน (ไทยลงคะแนนเห็นด้วย) ทำให้รัฐมีหน้าที่เคารพ คุ้มครอง และเยียวยาประชาชนจากผลกระทบทางสิ่งแวดล้อมและภูมิอากาศ\n**7. องค์การระหว่างประเทศที่เกี่ยวข้อง**\nองค์การเหล่านี้มีสถานะบุคคลตามกฎหมายระหว่างประเทศและบทบาทเฉพาะด้าน ได้แก่ **UN** (รักษาสันติภาพและความมั่นคง โดยรวม Climate Change เป็นภัยความมั่นคงรูปแบบใหม่) **IAEA** (กำกับเทคโนโลยีนิวเคลียร์ ทั้งอาวุธและผลิตไฟฟ้า) **ICAO** (การบินพลเรือน ซึ่งปล่อยมลพิษสูงและถูกควบคุมในระบบ ETS) และ **FAO** (อาหารและเกษตร ซึ่งเชื่อมโยงกับความมั่นคงทางอาหารที่ได้รับผลกระทบจากโลกรวน)\n**ทบทวนกฎหมายที่เรียนในคาบนี้**\n- ร่าง พ.ร.บ.การเปลี่ยนแปลงสภาพภูมิอากาศ **มาตรา 8** (Carbon Neutrality 2050 และ Net Zero 2065) และบทบัญญัติว่าด้วยแผนและงบประมาณ ฐานข้อมูลก๊าซเรือนกระจก ภาษีคาร์บอน ระบบ ETS และหมวด CBAM\n- เทียบ **Federal Climate Action Act (KSG) ของเยอรมนี** (งบประมาณคาร์บอนรายปี) และกฎหมายของฟิจิ (งบประมาณราย 5 ปี)\n- **EU ETS** และ **EU CBAM** (สินค้า 6 ประเภท) ข้อมติสมัชชาใหญ่ สหประชาชาติ ค.ศ. 2022 (สิทธิในสิ่งแวดล้อมที่สะอาด)\n**จุดที่ควรจำ:** ไทยไม่ได้ระบุงบประมาณคาร์บอนรายปีในตัวกฎหมายต่างจากเยอรมนี Grandfathering คือการจัดสรรสิทธิให้เปล่าเพื่อรักษาความสามารถในการแข่งขัน และ CBAM เป็นแรงกดดันที่ทำให้ไทยต้องมีราคาคาร์บอนของตนเอง"
+ },
+ {
+  "n": 9,
+  "title": "การฟ้องร้องคดีที่เกี่ยวกับการเปลี่ยนแปลงสภาพภูมิอากาศ (Climate Change Litigation)",
+  "video": "d9i0Qx2ttUc",
+  "text": "**ภาพรวม:** คาบนี้ว่าด้วยการฟ้องร้องคดีเกี่ยวกับการเปลี่ยนแปลงสภาพภูมิอากาศ (Climate Change Litigation) ทำไมต้องพึ่งศาลภายในประเทศ ความยุติธรรมทางสภาพภูมิอากาศ ฐานทางกฎหมายที่คนไทยใช้ได้ และคดีสำคัญของโลก\n**1. ทำไมต้องฟ้องคดี**\nการฟ้องระหว่างรัฐกับรัฐทำได้ยากมาก เช่น ประเทศที่กำลังจมน้ำอย่างฟิจิหรือคิริบาสจะไปเรียกค่าเสียหายจากประเทศที่ปล่อยมากอย่างสหรัฐอเมริกาหรือจีน ติดปัญหาการพิสูจน์ความสัมพันธ์ระหว่างการกระทำกับความเสียหาย (Causation) และการตีมูลค่าเป็นตัวเงิน กฎหมายระหว่างประเทศอย่างความตกลงปารีสเป็นเพียงกรอบกว้าง ประชาชนจึงต้องอาศัยศาลภายในประเทศบีบให้รัฐและบริษัทของตนลดก๊าซ (Mitigation) ปัจจุบันมีคดีลักษณะนี้ทั่วโลกกว่า 2,000 คดี รวบรวมไว้ในฐานข้อมูลของ **Sabin Center for Climate Change Law** มหาวิทยาลัยโคลัมเบีย เพื่อให้ประเทศอื่นศึกษาว่าโจทก์ใช้ฐานกฎหมายใดสู้ (รัฐธรรมนูญ กฎหมายปกครอง หรือกฎหมายแพ่ง) จำเลยในคดีเหล่านี้ไม่ได้มีแค่รัฐ แต่รวมถึงบรรษัทเอกชน เช่น Royal Dutch Shell คดีส่วนใหญ่เป็นคดี Mitigation มากกว่า Adaptation โดยข้อกล่าวหาหลักคือ รัฐหรือบริษัท **ไม่ได้ทำเพียงพอ** ในการลดก๊าซ ซึ่งถือเป็นการละเมิดสิทธิมนุษยชน เพราะ Climate Change นำมาซึ่งอันตรายร้ายแรงที่คาดการณ์ได้ และรัฐมีหน้าที่คุ้มครองชีวิตประชาชน\n**2. Climate Justice และ Just Transition**\n**Climate Justice** คือแนวคิดว่าผลกระทบไม่เท่ากัน ระดับบุคคล กลุ่มเปราะบาง เช่น เด็ก ผู้สูงอายุ และผู้ที่พึ่งพิงทรัพยากรธรรมชาติ ได้รับผลรุนแรงกว่า ระดับรัฐ ประชากรหนึ่งคนของประเทศมหาอำนาจอย่างสหรัฐอเมริกาปล่อยคาร์บอนมากกว่าประชากรประเทศกำลังพัฒนามาก แต่ประเทศหมู่เกาะอย่างฟิจิที่แทบไม่ได้ปล่อยกลับถึงขั้นเกาะจมน้ำ\n**Just Transition** คือการเปลี่ยนผ่านไปสู่วิถีสะอาดโดยไม่ทิ้งใครไว้ข้างหลัง ผู้ได้รับผลกระทบ เช่น คนงานโรงไฟฟ้าถ่านหินและช่างซ่อมเครื่องยนต์สันดาปที่อาจตกงานเพราะ EV ต้องได้รับการเยียวยาอย่างเป็นธรรม อุปสรรคต่อ Net Zero ที่ยกในคาบ ได้แก่ (1) **สิทธิในการซ่อม (Right to Repair)** เทคโนโลยีรถ EV ซับซ้อนและเป็นทรัพย์สินทางปัญญาของผู้ผลิต อู่ทั่วไปซ่อมไม่ได้หรือซ่อมไม่ได้มาตรฐาน ผู้บริโภครออะไหล่นาน ทำให้ลังเลที่จะเปลี่ยน (2) ห่วงโซ่อุปทาน แบตเตอรี่ต้องใช้แร่หายาก (Rare Earth) ซึ่งมักได้จากเหมืองในประเทศเพื่อนบ้านที่ใช้สารเคมีทำลายสิ่งแวดล้อมและละเมิดสิทธิมนุษยชน กลายเป็นการรักษาสิ่งแวดล้อมทางหนึ่งแต่ไปทำลายอีกทางหนึ่ง\n**3. ฐานทางกฎหมายของไทย (เมื่อยังไม่มี พ.ร.บ.การเปลี่ยนแปลงสภาพภูมิอากาศ)**\n(1) **รัฐธรรมนูญ พ.ศ. 2560** ไม่ได้เขียนคำว่า \"สิ่งแวดล้อมที่ดีและสะอาด\" ตรง ๆ เหมือนข้อมติสหประชาชาติ แต่วางรากฐาน 2 ส่วนคู่ขนาน คือ **มาตรา 57** หน้าที่ของรัฐที่ \"ต้อง\" อนุรักษ์ คุ้มครอง บำรุงรักษา ฟื้นฟู และบริหารจัดการทรัพยากรธรรมชาติและความหลากหลายทางชีวภาพอย่างสมดุลและยั่งยืน โดยเปิดให้ประชาชนและชุมชนมีส่วนร่วมและได้ประโยชน์ กับ **มาตรา 43** สิทธิของบุคคลและชุมชนในการจัดการ บำรุงรักษา และใช้ประโยชน์จากทรัพยากรธรรมชาติและสิ่งแวดล้อม\n(2) **พ.ร.บ.สุขภาพแห่งชาติ พ.ศ. 2550 มาตรา 5** รับรองสิทธิของบุคคลที่จะดำรงชีวิตในสิ่งแวดล้อมและสภาพแวดล้อมที่เอื้อต่อสุขภาพ\n(3) **ฟ้องศาลปกครอง** เมื่อหน่วยงานรัฐ **ละเลยหน้าที่หรือปฏิบัติหน้าที่ล่าช้าเกินสมควร** ศาลอาจสั่งให้ปฏิบัติหน้าที่นั้นได้\n(4) **ร้องเรียนคณะกรรมการสิทธิมนุษยชนแห่งชาติ (กสม.)** ซึ่งเป็นองค์กรอิสระตามรัฐธรรมนูญ มีอำนาจตรวจสอบ รายงานข้อเท็จจริง และเสนอแนะมาตรการป้องกันและเยียวยา รวมถึงเสนอแก้ไขกฎหมายต่อรัฐสภา คณะรัฐมนตรี หรือหน่วยงานรัฐ แต่ กสม. **ไม่มีอำนาจฟ้องหน่วยงานรัฐแทนประชาชนโดยตรง** และหาก กสม. เองละเลยไม่ตรวจสอบประเด็น Climate Change ก็อาจถูกฟ้องศาลปกครองฐานละเว้นหน้าที่ได้เช่นกัน\n(5) **ฟ้องละเมิดทางแพ่ง (ป.พ.พ. มาตรา 420)** เพื่อฟ้องเอกชนแบบคดี Shell ทำได้ยากมาก เพราะกฎหมายไทยเน้นความเสียหายที่เกิดขึ้นแล้ว และต้องพิสูจน์ความสัมพันธ์เชิงเหตุและผล (เช่น พิสูจน์ว่าผู้ป่วยลมแดดเกิดจากการขายน้ำมันของบริษัทใดโดยตรง ซึ่งแทบเป็นไปไม่ได้)\n**4. คดีสำคัญของโลก**\n**(1) Urgenda Foundation v. State of the Netherlands** ฟ้องปี ค.ศ. 2013 โดยมูลนิธิ Urgenda และประชาชน 886 คน ใช้ประมวลกฎหมายแพ่งดัตช์ (หน้าที่ระมัดระวัง หรือ Duty of Care) และอนุสัญญาว่าด้วยสิทธิมนุษยชนแห่งยุโรป (ECHR) **ข้อ 2** (สิทธิในชีวิต) และ **ข้อ 8** (สิทธิในชีวิตส่วนตัวและครอบครัว) ขอให้บังคับรัฐลดก๊าซให้ได้อย่างน้อย 25% ภายในปี ค.ศ. 2020 เทียบปี ค.ศ. 1990 เพราะเป้าหมายรัฐที่ 17% ต่ำเกินไป ศาลชั้นต้น (ค.ศ. 2015) และศาลอุทธรณ์ (ค.ศ. 2018) ให้โจทก์ชนะ ศาลสูงสุด (20 ธันวาคม ค.ศ. 2019) ยืนตามโดยวินิจฉัยว่ารัฐละเมิดข้อ 2 และ 8 ของ ECHR แม้ข้อ 2 และ 8 ไม่ได้ระบุคำว่าสิ่งแวดล้อม แต่ศาลตีความว่า Climate Change เป็นภัยร้ายแรงและเป็นจริง (Immediate and Real Risk) ต่อชีวิตมนุษย์ และศาลปฏิเสธข้อต่อสู้ว่าเนเธอร์แลนด์เล็กและปล่อยน้อย (Drop in the Ocean) เพราะ (ก) ปัญหาเป็นเรื่องระดับโลก ไม่จำกัดพรมแดน (ข) ตามกรอบ UNFCCC และหลัก CBDR ทุกประเทศต้องมีมาตรการ และ (ค) **แต่ละประเทศต้องรับผิดชอบในส่วนของตน (Own Share of Responsibility)** ไม่อาจเทียบกับประเทศอื่นเพื่อปฏิเสธ ศาลใช้มาตรฐานวิทยาศาสตร์ที่ประชาคมโลกและ IPCC ยอมรับเป็นเกณฑ์\n**(2) Neubauer v. Germany** เยาวชนเยอรมันฟ้องว่าเป้าหมายลดก๊าซ 55% ภายในปี ค.ศ. 2030 ตามกฎหมายคุ้มครองภูมิอากาศของสหพันธ์ ต่ำเกินไป ละเมิดกฎหมายพื้นฐาน (Basic Law) **มาตรา 20a** ซึ่งกำหนดหน้าที่ของรัฐต่อคนรุ่นอนาคต ศาลรัฐธรรมนูญ (เมษายน ค.ศ. 2021) ตัดสินให้เยาวชนชนะ โดยใช้เรื่อง **งบประมาณคาร์บอน (Carbon Budget)** ว่าการที่คนรุ่นปัจจุบันใช้โควตาคาร์บอนมากเป็นการผลักภาระและจำกัดเสรีภาพของคนรุ่นหลังอย่างไม่เป็นธรรม ผลคือเยอรมนีต้องแก้กฎหมายและเพิ่มเป้าหมายเป็น 65% ภายในปี ค.ศ. 2030\n**(3) Milieudefensie v. Royal Dutch Shell** ประชาชนดัตช์กว่า 17,000 คนกับ NGO (เช่น Greenpeace) ฟ้องบรรษัทน้ำมันโดยอ้างว่าการไม่ลดก๊าซละเมิด Duty of Care ตามประมวลกฎหมายแพ่งดัตช์และละเมิดสิทธิมนุษยชน ศาลชั้นต้น (ค.ศ. 2021) สั่งให้ Shell ลด 45% ภายในปี ค.ศ. 2030 ครอบคลุมทั้ง Scope 1, 2 และ 3 (ตลอดห่วงโซ่อุปทาน) ศาลอุทธรณ์ (ค.ศ. 2024) ยกตัวเลขบังคับ 45% เพราะยังไม่มีมติเอกฉันท์ทางวิทยาศาสตร์ แต่ยืนยันหลักว่าบริษัทเอกชนมีหน้าที่ตามกฎหมายต้องลดการปล่อย คดีอยู่ระหว่างชั้นศาลสูงสุด\n**(4) KlimaSeniorinnen v. Switzerland** สมาคมหญิงสูงวัยชาวสวิสฟ้องว่ารัฐล้มเหลวรับมือ Climate Change ทำให้เกิดคลื่นความร้อนกระทบสุขภาพและชีวิตกลุ่มเปราะบาง เมื่อศาลภายในไม่ให้การเยียวยา จึงยื่นต่อ **ศาลสิทธิมนุษยชนแห่งยุโรป (ECtHR)** ซึ่งตัดสินว่าสวิตเซอร์แลนด์ละเมิดสิทธิมนุษยชนจริง เพราะไม่ออกมาตรการลดผลกระทบอย่างเหมาะสม เป็นบรรทัดฐานว่ารัฐมีหน้าที่ตามกฎหมายสิทธิมนุษยชนต้องจัดการ Climate Change\n**(5) Teitiota v. New Zealand** ชาวคิริบาสขอลี้ภัยในนิวซีแลนด์ โดยอ้างว่าอยู่อาศัยบ้านเกิดไม่ได้เพราะน้ำทะเลสูงขึ้น ศาลนิวซีแลนด์ปฏิเสธ และคณะกรรมการสิทธิมนุษยชนแห่งสหประชาชาติ (UN HRC) ก็ยกคำร้องเพราะภัยถึงชีวิตยังไม่ใกล้ถึง (No Personal, Immediate Risk) แต่รับหลักเบื้องต้นว่าในอนาคต Climate Change อาจรุนแรงจนชีวิต \"ไม่สอดคล้องกับศักดิ์ศรีความเป็นมนุษย์\" และใช้เป็นเหตุด้านสิทธิมนุษยชนได้\n**ทบทวนกฎหมายและคดีที่เรียนในคาบนี้**\n- รัฐธรรมนูญ 2560 **มาตรา 43 และ 57** พ.ร.บ.สุขภาพแห่งชาติ พ.ศ. 2550 **มาตรา 5** ป.พ.พ. **มาตรา 420**\n- อนุสัญญาว่าด้วยสิทธิมนุษยชนแห่งยุโรป **ข้อ 2 และ 8** กฎหมายพื้นฐานของเยอรมนี **มาตรา 20a**\n- คดี **Urgenda**, **Neubauer**, **Milieudefensie v. Shell**, **KlimaSeniorinnen**, **Teitiota**\n**จุดที่ควรจำ:** คดี Climate มักอ้างว่ารัฐหรือบริษัทลดก๊าซไม่เพียงพอจนละเมิดสิทธิมนุษยชน และศาลวางหลักว่าแต่ละรัฐต้องรับผิดชอบในส่วนของตน ส่วนในไทยยังมีอุปสรรคเรื่องการพิสูจน์เหตุและผลในการฟ้องเอกชนตามมาตรา 420"
+ },
+ {
+  "n": 10,
+  "title": "การประกอบธุรกิจที่คำนึงถึงกฎหมายสิ่งแวดล้อมและกฎหมายสิทธิมนุษยชน",
+  "video": "IZ-rxFlLPZk",
+  "text": "**ภาพรวม:** คาบนี้ว่าด้วยการประกอบธุรกิจที่คำนึงถึงสิ่งแวดล้อมและสิทธิมนุษยชน (Business and Human Rights) ตามหลักการชี้แนะของสหประชาชาติ (UNGP) หน้าที่ของภาคธุรกิจและภาครัฐ กลไกเยียวยา และตัวอย่างร่างกฎหมายของสหราชอาณาจักร\n**1. หลักการชี้แนะของสหประชาชาติว่าด้วยธุรกิจกับสิทธิมนุษยชน (UNGP หรือ BHR)**\nจัดทำโดยสำนักงานข้าหลวงใหญ่สิทธิมนุษยชนแห่งสหประชาชาติ (OHCHR) ปี ค.ศ. 2011 ย้ำว่า **สิทธิในการดำรงชีวิตในสิ่งแวดล้อมที่ดีและสะอาด** เป็นส่วนหนึ่งของสิทธิมนุษยชนขั้นพื้นฐาน (ปรากฏตั้งแต่ปฏิญญาสตอกโฮล์ม ค.ศ. 1972 และถูกตอกย้ำโดยสหประชาชาติช่วง ค.ศ. 2021 ถึง 2022) มีเสาหลัก 3 ประการ\n**เสาที่ 1 การคุ้มครอง (Protect) เป็นหน้าที่ของรัฐ** รัฐต้องปกป้องประชาชนจากการถูกละเมิดสิทธิโดยผู้อื่นรวมถึงภาคธุรกิจ ต้องมีกฎหมายและกลไกบังคับใช้เพียงพอ และมีกระบวนการยุติธรรมรองรับ ในไทย แม้รัฐธรรมนูญไม่ได้เขียนสิทธิสิ่งแวดล้อมไว้ตรง ๆ ในหมวดสิทธิ แต่มี **มาตรา 43 และ 57** (สิทธิชุมชนและหน้าที่ของรัฐ) **มาตรา 58** (EIA และ EHIA) ซึ่งกำหนดว่าหากโครงการ \"อาจมีผลกระทบอย่างรุนแรง\" รัฐ \"ต้อง\" ประเมินผลกระทบและรับฟังความเห็นประชาชนก่อน แต่คำว่า \"อย่างรุนแรง\" เป็นช่องโหว่ที่เปิดให้ตีความ และมี พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535 ซึ่งรับรองสิทธิเข้าถึงข้อมูลข่าวสารและการเรียกค่าชดเชย (มาตรา 6) และกำหนด **ความรับผิดเด็ดขาด (Strict Liability) ตามมาตรา 96** ว่าผู้ครอบครองแหล่งกำเนิดมลพิษต้องชดใช้ค่าเสียหายไม่ว่าจะจงใจหรือประมาทหรือไม่ เว้นแต่พิสูจน์ได้ว่าเกิดจากเหตุสุดวิสัย สงคราม หรือคำสั่งรัฐ ผู้ประกอบการที่แอบสร้างโครงการก่อนรายงาน EIA ได้รับอนุมัติมีโทษทางอาญาทั้งจำคุกและปรับ\n**เสาที่ 2 การเคารพ (Respect) เป็นหน้าที่ของธุรกิจ** ธุรกิจต้องปฏิบัติตามกฎหมายขั้นต่ำและหลีกเลี่ยงการก่อผลกระทบเชิงลบ (เช่น ปล่อยน้ำเสียลงแหล่งน้ำสาธารณะ ฝังกลบขยะพิษผิดวิธี) หากเกิดผิดพลาดต้องรีบระงับหรือบรรเทา และต้องตรวจสอบตลอด **ห่วงโซ่อุปทาน (Supply Chain)** ตั้งแต่ต้นน้ำถึงปลายน้ำ เช่น ผู้ผลิตรถ EV ต้องตรวจสอบว่าแร่หายาก (Rare Earth) ที่ใช้ผลิตแบตเตอรี่มาจากเหมืองที่ละเมิดสิทธิชุมชนหรือไม่ รวมถึงการหลอมและขนส่ง หลักการคือ **รู้และแสดงให้ปรากฏ (Know and Show)** ผ่านกระบวนการตรวจสอบสิทธิมนุษยชนอย่างรอบด้าน (HRDD) บริษัทจดทะเบียนในตลาดหลักทรัพย์ถูกบังคับผ่านข้อกำหนดของ ก.ล.ต. ให้ทำรายงานเปิดเผย ซึ่งกระทบความน่าเชื่อถือในการกู้เงินและการดึงดูดนักลงทุน\n**เสาที่ 3 การเยียวยา (Remedy)** ธุรกิจไม่ควรปล่อยให้ประชาชนพึ่งศาลอย่างเดียว ควรมีกลไกระดับปฏิบัติการของตนเอง เช่น ระบบรับเรื่องร้องเรียนลูกค้า (VOC) หรือคณะกรรมการรับเรื่องร้องเรียนภายใน ตัวอย่างการเยียวยาเชิงรุก คือ ค่ายรถ EV ประกาศเรียกคืนรถ (Recall) ทันทีที่มีรายงานแบตเตอรี่ลุกไหม้ กลไกที่ไม่ใช่ศาลต้องเข้าถึงง่าย โปร่งใส ชอบธรรม (Legitimate) และคาดการณ์ผลได้ (Predictable) หากกลไกของบริษัทไม่ทำงาน รัฐต้องมีช่องทางเยียวยา เช่น ฟ้องศาลปกครองเพื่อเพิกถอนใบอนุญาตหรือรายงาน EIA ที่ไม่ชอบด้วยกฎหมาย (เช่น กรณีคัดค้านโครงการแลนด์บริดจ์) ฟ้องศาลแพ่งเรียกค่าเสียหาย (รวมถึงการฟ้องแบบกลุ่มหรือ Class Action) หรือร้องเรียนต่อ กสม. และศูนย์ดำรงธรรม หน่วยงานสำคัญ ได้แก่ สผ. (คุม EIA) กรมควบคุมมลพิษ (คุมมาตรฐานมลพิษ) กสม. และ ก.ล.ต. ซึ่งกดดันบริษัทใหญ่ได้ผลผ่านข้อบังคับการรายงาน\n**2. การตรวจสอบสิทธิมนุษยชนอย่างรอบด้าน (HRDD) ตามหลัก UNGP ข้อ 17 ถึง 22**\n(1) **ประกาศนโยบาย (Policy Commitment)** ผูกพันต่อสาธารณะว่าจะเคารพสิทธิมนุษยชน ครอบคลุมผู้มีส่วนได้เสียภายใน (สวัสดิภาพแรงงาน ค่าตอบแทนตามกฎหมาย สหภาพแรงงาน) และภายนอก (ลูกค้า ชุมชน ผู้จัดหาวัตถุดิบ)\n(2) **ระบุและประเมินผลกระทบ (Assessment)** ทั้งผลกระทบที่เกิดแล้วและที่อาจเกิด ตลอดห่วงโซ่อุปทาน เช่น เหมืองแร่ผลิตแบตเตอรี่ละเมิดสิทธิชุมชนหรือไม่ รถบรรทุกทำให้ถนนชุมชนพังหรือไม่ หรือสัญญาส่งเสริมเกษตรกรปลูกไม้ยืนต้นเป็นธรรมและไม่ทำลายระบบนิเวศหรือไม่\n(3) **บูรณาการและนำไปปฏิบัติ (Integration and Action)** จัดลำดับความเสี่ยง ใส่ในระบบงานจริง จัดสรรงบประมาณ มอบหมายผู้รับผิดชอบ และฝึกอบรมพนักงาน\n(4) **ติดตามและรายงานผล (Tracking and Reporting)** เปิดเผยต่อสาธารณะ เช่น รายงานความยั่งยืน\n(5) **กลไกรับเรื่องร้องเรียนระดับปฏิบัติการ (Operational-level Grievance Mechanism)** ให้พนักงานหรือผู้บริโภคร้องเรียนโดยตรงเพื่อแก้ปัญหาก่อนบานปลายไปสู่ศาล\n**3. การตรวจสอบอย่างรอบด้านด้านสิ่งแวดล้อม (Environmental Due Diligence)** ธุรกิจต้องใช้หลักการระวังไว้ก่อนและความเป็นธรรมระหว่างรุ่น โดยมีรายการตรวจสอบ ดังนี้\n(1) **น้ำ** ต้องบำบัดน้ำเสียให้ได้มาตรฐานก่อนปล่อยลงแหล่งน้ำสาธารณะ และคำนึงถึงที่ตั้งโรงงานที่อาจเสี่ยงน้ำท่วมจนสารเคมีหรือน้ำเสียหลุดสู่ชุมชน (เช่น กรณีน้ำเสียจากขี้เถ้าที่สระบุรี)\n(2) **มลพิษ** ควบคุมฝุ่น PM 10 และ PM 2.5 ก๊าซซัลเฟอร์ไดออกไซด์ และคาร์บอนมอนอกไซด์ และป้องกันสารเคมีชะล้างลงดินและบรรยากาศ\n(3) **ขยะ ของเสีย และวัตถุอันตราย** ระบบคัดแยกและเก็บรัดกุมไม่ให้รั่วไหล ป้องกันพนักงานด้วยอุปกรณ์ป้องกัน (PPE) และกำจัดวัตถุอันตรายหรือกากกัมมันตภาพรังสีถูกต้องตามกฎหมาย (เพื่อไม่ให้ซ้ำรอยเหตุสารโคบอลต์-60)\n(4) **พลังงาน** ออกแบบอาคารประหยัดพลังงานและส่งเสริมพลังงานสะอาด\n(5) **ความหลากหลายทางชีวภาพ** ไม่ทำลายพืชสัตว์ท้องถิ่น ควบคุมชนิดพันธุ์ต่างถิ่น (Alien Species) เช่น กรณีปลาหมอคางดำที่หลุดไปทำลายบ่อกุ้งและสัตว์น้ำท้องถิ่น และระวังพืชตัดแต่งพันธุกรรม (GMOs)\n(6) **Climate Change** ตรวจสอบ รายงาน เปิดเผยการปล่อยก๊าซเรือนกระจกของตน และตั้งเป้าลดให้ชัดเจน (เช่น สายการบินแสดงคาร์บอนฟุตพริ้นท์ต่อเที่ยวบิน)\nธุรกิจยังแสดงนโยบายผ่านการดำเนินงานจริงได้ เช่น แบรนด์ทูน่าที่ระบุว่าจับด้วยวิธีเบ็ดเพื่อไม่ให้โลมาติดอวน หรือการทำ CSR ของบริษัทใหญ่ ซึ่งสอดคล้องกับ ESG และการสร้างความน่าเชื่อถือทางธุรกิจ\n**4. กรณีศึกษาร่างกฎหมายสหราชอาณาจักร: Commercial Organisations and Public Authorities Duty (Human Rights and Environment) Bill**\nร่างกฎหมายที่เปลี่ยนจากความสมัครใจไปเป็น **หน้าที่ตามกฎหมาย (Mandatory Duty)** ก้าวหน้าใน 3 ประเด็น คือ (1) บังคับให้ธุรกิจตรวจสอบห่วงโซ่คุณค่า (Value Chain) ทั้งระบบ (2) **ทะลุม่านนิติบุคคล** ขยายความรับผิดทางอาญาและแพ่งไปถึงกรรมการบริษัทในฐานะบุคคลธรรมดา (3) **การถอนตัวอย่างมีความรับผิดชอบ (Responsible Disengagement)** ป้องกัน \"ล้มบนฟูก\" คือหากธุรกิจทำลายสิ่งแวดล้อมจนต้องเลิกกิจการ จะทิ้งปัญหาไม่ได้ ต้องเยียวยาความเสียหายให้เสร็จก่อน\n**ทบทวนกฎหมายที่เรียนในคาบนี้**\n- UNGP on BHR (Protect, Respect, Remedy) และ HRDD ตามข้อ 17 ถึง 22\n- รัฐธรรมนูญ 2560 **มาตรา 43, 57 และ 58** พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535 **มาตรา 6** และ **มาตรา 96** (Strict Liability)\n- ร่างกฎหมายสหราชอาณาจักรว่าด้วยหน้าที่ของภาคธุรกิจและหน่วยงานรัฐด้านสิทธิมนุษยชนและสิ่งแวดล้อม\n**จุดที่ควรจำ:** UNGP มี 3 เสา (รัฐคุ้มครอง ธุรกิจเคารพ ทุกฝ่ายเยียวยา) HRDD คือ Know and Show ตลอดห่วงโซ่อุปทาน และมาตรา 96 กำหนดความรับผิดเด็ดขาดของผู้ครอบครองแหล่งกำเนิดมลพิษ"
+ },
+ {
+  "n": 11,
+  "title": "กฎหมายว่าด้วยการประเมินผลกระทบสิ่งแวดล้อม (EIA/EHIA)",
+  "video": "Niqg_TMnJZc",
+  "text": "**ภาพรวม:** คาบนี้ว่าด้วยการประเมินผลกระทบสิ่งแวดล้อม (EIA) การประเมินผลกระทบสิ่งแวดล้อมและสุขภาพ (EHIA) และการประเมินระดับยุทธศาสตร์ (SEA) ตั้งแต่ที่มา ขอบเขตการประเมิน 4 ด้าน กิจการที่ต้องทำ องค์กรที่เกี่ยวข้อง ขั้นตอนพิจารณา ไปจนถึงหน้าที่หลังรายงานได้รับความเห็นชอบ\n**1. ที่มาและหลักการ**\nEIA เป็นเครื่องมือเชิงกระบวนการที่สะท้อน **หลักการป้องกัน (Preventive)** และ **หลักการระวังไว้ก่อน (Precautionary)** ไทยรับหลักการมาจากกฎหมายระหว่างประเทศ ได้แก่ ปฏิญญาริโอ ค.ศ. 1992 **หลักการที่ 17** (EIA เป็นเครื่องมือระดับชาติสำหรับกิจกรรมที่มีแนวโน้มก่อผลกระทบทางลบอย่างมีนัยสำคัญ) และอนุสัญญาว่าด้วยความหลากหลายทางชีวภาพ (CBD) ซึ่งเน้นให้ประเมินทั้งผลดีและผลเสีย ทั้งเศรษฐกิจ สังคม วัฒนธรรม และสุขภาพ ตามนิยามของ UNEP EIA คือเครื่องมือระบุผลกระทบก่อนตัดสินใจ เพื่อลดผลทางลบ ออกแบบโครงการ และสร้างทางเลือก ซึ่งช่วยลดค่าใช้จ่ายและข้อพิพาทในอนาคต\nเป้าหมายของ EIA **ไม่ใช่การห้ามโครงการเสมอไป** แต่เพื่อรู้ล่วงหน้าและเตรียมมาตรการป้องกันแก้ไข ให้สอดคล้องกับการพัฒนาที่ยั่งยืน\nระดับของการประเมิน มี 3 ระดับ คือ **SEA** (ระดับนโยบายหรือยุทธศาสตร์) **EIA** (ระดับโครงการทั่วไป) และ **EHIA** (ระดับโครงการที่เน้นสุขภาพและผลกระทบรุนแรง)\n**2. SEA (การประเมินสิ่งแวดล้อมระดับยุทธศาสตร์)**\nเป็นการประเมินระดับบนสุด (Macro หรือ Policy Level) ก่อนมีโครงการใดเกิดในพื้นที่ เพื่อกำหนดนโยบาย แผน หรือแผนงาน เช่น นโยบายพลังงานสะอาดหรือแลนด์บริดจ์ในระดับยุทธศาสตร์ ตามนิยามของ CBD ต้องเป็นกระบวนการที่เป็นทางการ เป็นระบบ และครอบคลุม (Formalized, Systematic and Comprehensive) และนำปัจจัยสิ่งแวดล้อม สังคม เศรษฐกิจมาพิจารณาร่วมกัน **ตั้งแต่ขั้นเริ่มต้นแรกสุดของการตัดสินใจ (At the Earliest Possible Stage)** พร้อมเปิดให้ผู้มีส่วนได้เสียมีส่วนร่วม **SEA ไม่อาจแทนที่ EIA** เมื่อมีโครงการย่อยจริง ทุกโครงการที่เข้าเกณฑ์ก็ยังต้องทำ EIA เปรียบเหมือน SEA ปูพรมระดับนโยบาย ส่วน EIA เป็นด่านคัดกรองระดับปฏิบัติ\n**3. ขอบเขตการประเมิน 4 ด้าน**\nกลุ่มปัจจัยทางวิทยาศาสตร์ (ด้านที่ 1 และ 2) และกลุ่มปัจจัยทางสังคมที่เน้นมนุษย์ (ด้านที่ 3 และ 4)\n(1) **ทรัพยากรกายภาพ (Physical Resources)** ดินและภูมิประเทศ น้ำผิวดินและน้ำใต้ดิน (รวมจุดปล่อยน้ำเสียและการบำบัด) อากาศ (ฝุ่นก่อสร้าง PM10 PM2.5 มลพิษจากโรงไฟฟ้า) เสียงและแรงสั่นสะเทือน และอุณหภูมิ\n(2) **ทรัพยากรชีวภาพหรือนิเวศวิทยา (Ecological Resources)** พืชและสัตว์ทั้งบนบกและในน้ำ ต้องสำรวจ **ชนิด ปริมาณ และการแพร่กระจาย** ให้ครบถ้วนตรงตามจริง จะประเมินต่ำกว่าความเป็นจริงไม่ได้ (เคยมีความขัดแย้งเมื่อรายงานนับชนิดสัตว์หน้าดินในทะเลได้น้อยกว่าที่เป็นจริง)\n(3) **คุณค่าการใช้ประโยชน์ของมนุษย์ (Human Use Values)** ว่าโครงการรบกวนการใช้ทรัพยากรเดิมของชุมชนหรือไม่ เช่น แย่งน้ำเกษตร กระทบประมงพื้นบ้าน บดบังทัศนียภาพแหล่งท่องเที่ยว หรือกระทบการคมนาคม\n(4) **คุณค่าต่อคุณภาพชีวิต (Quality of Life)** เป็นมิติสังคมที่สำคัญที่สุด ครอบคลุมความปลอดภัยและสาธารณสุข (เช่น สร้างคอนโดในซอยแคบต้องมีมาตรการจราจรสำหรับรถบรรทุกดิน) เศรษฐกิจ สังคม อาชีพ และ **วัฒนธรรม ประเพณี ความเชื่อท้องถิ่น** ซึ่งต้องเคารพแม้ไม่มีหลักฐานวิทยาศาสตร์รองรับ เช่น ในเชียงใหม่ที่มีความเชื่อเรื่อง \"ขึด\" และ \"เสื้อเมือง\" หากตึกสูงบดบังทัศนียภาพวัดและพระธาตุดอยสุเทพ ก็ต้องรับฟังเสียงชุมชนอย่างจริงจัง และระวังไม่ให้ทับแหล่งโบราณคดี\n**4. ฐานกฎหมายและกิจการที่ต้องทำ**\nรัฐธรรมนูญ 2560 **มาตรา 58** กำหนดหน้าที่รัฐให้ประเมินผลกระทบสิ่งแวดล้อมและสุขภาพก่อนดำเนินการหรืออนุญาตกิจการที่อาจมีผลกระทบอย่างรุนแรง และ พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535 (มาตรา 46 ถึง 51 เป็นรายละเอียดกระบวนการ) โดยนิยามตามมาตรา 46 ครอบคลุมโครงการที่รัฐทำเองหรืออนุญาตให้เอกชนทำ ต้องประเมินผลต่อทรัพยากรธรรมชาติ คุณภาพสิ่งแวดล้อม สุขภาพอนามัย คุณภาพชีวิต ทั้งทางตรงและทางอ้อม และต้องผ่านกระบวนการมีส่วนร่วมของประชาชนเสมอ ส่วนประกาศกระทรวงทรัพยากรธรรมชาติและสิ่งแวดล้อม (ตามมาตรา 48) แบ่งเป็น 3 ระดับ\n(1) **IEE (การประเมินเบื้องต้น)** สำหรับกิจการอ่อนไหวบางประเภท เช่น เหมืองแร่บางชนิดและสนามบิน ต้องทำก่อนแล้วจึงทำ EIA ฉบับเต็มหากพบความเสี่ยง\n(2) **EIA** ประมาณ 35 ประเภทกิจการ เช่น โรงแรม โรงพยาบาล อุตสาหกรรมปิโตรเคมี นิคมอุตสาหกรรม โดยพิจารณาจาก **ขนาดหรือกำลังการผลิต** เช่น โครงการจัดสรรที่ดินตั้งแต่ 500 แปลงขึ้นไปหรือเกิน 100 ไร่ อาคารชุดสูงตั้งแต่ 23 เมตรขึ้นไป\n(3) **EHIA** สำหรับโครงการที่อาจมีผลกระทบรุนแรง เช่น เหมืองแร่ใต้ดินและในทะเล (เสี่ยงน้ำใต้ดินปนเปื้อนและแผ่นดินทรุด) เหมืองตะกั่วและสังกะสี เขื่อนขนาดใหญ่ การถมทะเลตั้งแต่ 300 ไร่ขึ้นไป โรงไฟฟ้านิวเคลียร์ และอุตสาหกรรมที่ใช้หรือก่อสารก่อมะเร็ง EHIA อิงนิยามขององค์การอนามัยโลก (WHO) เน้นการเปลี่ยนแปลงของปัจจัยกำหนดสุขภาพและภาวะสุขภาพของประชาชนที่ได้รับผลกระทบ\n**หลักตอบว่ากิจการใดต้องทำ EIA** ต้องพิจารณา 3 องค์ประกอบ คือ (ก) ขนาดหรือกำลังการผลิต (ข) กฎหมายเฉพาะที่ซ้อนกัน เช่น พ.ร.บ.แร่ พ.ศ. 2560 พ.ร.บ.ปิโตรเลียม พ.ศ. 2560 พ.ร.บ.การนิคมอุตสาหกรรมฯ พ.ร.บ.โรงงาน และพื้นที่อ่อนไหว เช่น ลุ่มน้ำชั้น 1 ตามมติคณะรัฐมนตรี (ค) การตีความ ซึ่งเป็นกฎหมายจำกัดสิทธิการทำธุรกิจ จึงตีความอย่างเคร่งครัดตามตัวบท ตัวอย่างเช่น โรงกลั่นน้ำมันต้องทำ EIA ทุกขนาด ส่วนอุตสาหกรรมเหล็กที่ถลุงหรือหลอมโลหะเข้าข่าย แต่โรงงานที่แค่ประกอบชิ้นส่วนโลหะมักไม่เข้าข่าย ส่วนเหมืองแร่ต้องทำตั้งแต่ขั้นขอประทานบัตร\n**5. องค์กรและบุคคลที่เกี่ยวข้อง**\n(1) **เจ้าของโครงการ** ทั้งรัฐและเอกชน รวมถึงผู้จัดการนิติบุคคลอาคารชุดและผู้จัดสรรที่ดินตามมาตรา 46 ทำรายงานเองไม่ได้ ต้องจ้างบริษัทที่ปรึกษาที่ได้รับใบอนุญาตและขึ้นทะเบียนกับ สผ. เท่านั้น\n(2) **บริษัทที่ปรึกษา** หากทำรายงานผิดพลาดหรือถูกตีตกบ่อย สผ. เก็บสถิติไว้พิจารณาต่ออายุใบอนุญาตหรือเพิกถอน และหากใบอนุญาตหมดอายุระหว่างพิจารณา รายงานจะไม่ผ่าน\n(3) **คณะกรรมการสิ่งแวดล้อมแห่งชาติ (กก.วล.)** เป็นองค์กรระดับนโยบายที่ให้ความเห็นชอบประกาศประเภทและขนาดกิจการที่ต้องทำ EIA\n(4) **สผ.** ตรวจความครบถ้วนเบื้องต้น และทำรายงานสรุปย่อเสนอ คชก.\n(5) **คณะกรรมการผู้ชำนาญการ (คชก.)** ตามมาตรา 51 ประกอบด้วยผู้เชี่ยวชาญหลายสาขา (โยธา ธรณีวิทยา จราจร สาธารณสุข กฎหมาย) และต้องมีผู้แทนหน่วยงานผู้อนุญาตเป็นกรรมการ มี คชก.ส่วนกลางและ คชก.ระดับจังหวัด (สำหรับโครงการขนาดเล็ก เช่น อาคารสูงไม่เกิน 23 เมตร)\n(6) **หน่วยงานผู้อนุญาต** เช่น กรมอุตสาหกรรมพื้นฐานและการเหมืองแร่ ซึ่งออกใบอนุญาตได้ต่อเมื่อ คชก.เห็นชอบรายงานแล้ว\n**6. รายงาน EIA และขั้นตอนพิจารณา**\nรายงานต้องมีหัวข้อบังคับ **7 หัวข้อ** ได้แก่ (1) รายละเอียดโครงการ (2) สภาพสิ่งแวดล้อมปัจจุบัน (Baseline) (3) การประเมินทางเลือก (Alternatives) หลายทางพร้อมเหตุผลที่เลือก (4) การประเมินผลกระทบทางตรงและทางอ้อม (5) กระบวนการมีส่วนร่วมของประชาชน ซึ่งเป็นจุดที่ คชก.เพ่งเล็งที่สุด ต้องมีบันทึกรับฟังความเห็น ระบุรัศมีผลกระทบ และนับประชากรหรือหลังคาเรือนตามเกณฑ์ของ สผ. (6) มาตรการป้องกันและแก้ไข (ก่อนก่อสร้าง ระหว่างก่อสร้าง ระยะดำเนินการ พร้อมผู้รับผิดชอบ) (7) มาตรการติดตามตรวจสอบ (วิธี ความถี่ ผู้รับผิดชอบ งบประมาณ)\nการมีส่วนร่วม EIA ต้องรับฟังความเห็นอย่างน้อย 2 ครั้ง ส่วน EHIA เข้มข้นกว่า ตั้งแต่การกำหนดขอบเขต (Scoping) จนถึงการทบทวนร่างรายงาน โดยมีการทำตามประกาศ สผ. เรื่องแนวทางการมีส่วนร่วมของประชาชน หากไม่ครบ คชก.จะตีตก ปัญหาที่นำไปสู่การฟ้องศาลปกครอง เช่น การให้กลุ่มชาติพันธุ์ที่อ่านไทยไม่ออกเซ็นชื่อแล้วอ้างว่าชุมชนเห็นด้วย ประชาชนและ NGO ตรวจสอบรายงานที่เห็นชอบแล้วได้ที่เว็บไซต์ สผ. (Smart EIA Plus) และขอดูรายงานที่ไม่ผ่านตาม พ.ร.บ.ข้อมูลข่าวสารของราชการ\n**ขั้นตอนพิจารณา 4 ขั้น**\n(1) ตรวจความครบถ้วนเบื้องต้นโดย สผ. ภายใน **15 วัน**\n(2) สผ.ให้ความเห็นเบื้องต้นและทำรายงานสรุปย่อ ภายใน **30 วัน**\n(3) คชก.พิจารณา ภายใน **45 วัน** หากไม่เสร็จตามกำหนดให้ถือว่าเห็นชอบ (แต่ในทางปฏิบัติจะนัดประชุมให้เสร็จก่อนครบกำหนดประมาณ 1 สัปดาห์) โดยมักลงพื้นที่ตรวจสอบข้ามกับรายงาน ตรวจการคำนวณทางเทคนิค และตัดสินด้วยมติเสียงข้างมาก\n(4) หากมีมติไม่เห็นชอบ ต้องแก้ไขรายงานภายใน **180 วัน** ซึ่งบางครั้งไม่พอ เช่น ต้องรอเก็บตัวอย่างน้ำฝนในฤดูฝนถัดไป ผู้ประกอบการจึงบางรายปล่อยคำขอตกไปแล้วยื่นใหม่\n**7. หน้าที่หลังรายงานได้รับความเห็นชอบ และโทษ**\n(1) มาตรการในรายงานกลายเป็น **เงื่อนไขบังคับ** แนบท้ายใบอนุญาตก่อสร้างหรือประกอบกิจการ และต้องปฏิบัติจริงในทุกระยะ\n(2) เจ้าของโครงการต้องส่ง **รายงานผลการปฏิบัติตามมาตรการ (Monitoring Report)** อย่างน้อยปีละครั้ง **จนกว่าโครงการสิ้นสุด** เช่น นิติบุคคลอาคารชุดรับช่วงส่งรายงานตลอดที่ตึกยังอยู่ ส่วนแท่นขุดเจาะน้ำมันต้องรายงานจนหมดสัมปทานและรื้อถอน\n(3) รายงานที่ผ่านความเห็นชอบมี **อายุ 5 ปี** หากไม่นำไปขอใบอนุญาตหรือเริ่มโครงการภายใน 5 ปี ต้องทำ EIA ใหม่ เพราะข้อมูลฐาน เช่น การจราจรและชุมชน เปลี่ยนไปแล้ว\n(4) หากแอบก่อสร้างหรือดำเนินกิจการก่อนรายงานได้รับความเห็นชอบ (รวมถึงกรณีโรงแรมแอบเปิดใช้อาคารต่อเติมที่เชื่อมกับอาคารเดิมก่อน EIA ผ่าน) มีโทษปรับไม่เกิน 1 ล้านบาท และปรับรายวันอีกไม่เกินวันละ 100,000 บาท\n**ปัญหาในทางปฏิบัติ** (1) การติดตามตรวจสอบ หน่วยงานท้องถิ่น (เช่น สำนักงานทรัพยากรธรรมชาติและสิ่งแวดล้อมจังหวัด) ขาดบุคลากรลงพื้นที่ตรวจว่าผู้ประกอบการทำตามมาตรการจริงหรือไม่ (2) การตีความคำว่า **\"ผลกระทบอย่างรุนแรง\"** เป็นนามธรรมและใช้ดุลพินิจสูง จึงถกเถียงกันบ่อยระหว่างรัฐกับประชาชนว่ากิจการใดต้องทำ EHIA\n**พัฒนาการ** ในยุครัฐธรรมนูญ พ.ศ. 2550 กรณีโครงการที่กระทบชุมชนอย่างรุนแรงเคยต้องมีความเห็นประกอบจากองค์การอิสระด้านสิ่งแวดล้อมและสุขภาพตามประกาศกระทรวงปี 2553 แต่องค์กรนี้ถูกยุบเลิกตามรัฐธรรมนูญฉบับปัจจุบัน ประกาศกระทรวงฉบับปัจจุบันลงวันที่ 20 ธันวาคม 2566 มีผลใช้บังคับ 5 มกราคม 2567 จึงอาจเรียกสลับกันระหว่างประกาศปี 66 และปี 67\n**ทบทวนกฎหมายที่เรียนในคาบนี้**\n- รัฐธรรมนูญ 2560 **มาตรา 58** และ พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535 **มาตรา 46** (นิยาม EIA และผู้ดำเนินการ) **มาตรา 48** (ประเภทกิจการ) **มาตรา 51** (คชก.)\n- ปฏิญญาริโอ **หลักการที่ 17** CBD (นิยาม EIA และ SEA) ประกาศกระทรวงทรัพยากรธรรมชาติฯ ว่าด้วยกิจการที่ต้องทำ EIA และ EHIA (2566) และประกาศ สผ. ว่าด้วยการมีส่วนร่วมของประชาชน\n**จุดที่ควรจำ:** ขั้นตอนเวลา 15, 30, 45 และ 180 วัน รายงาน 7 หัวข้อ และอายุ 5 ปี รวมถึงโทษปรับไม่เกิน 1 ล้านบาท กับรายวันไม่เกิน 100,000 บาท ส่วน SEA ไม่แทนที่ EIA และคำว่า \"อย่างรุนแรง\" คือช่องโหว่ในการตีความ"
+ },
+ {
+  "n": 12,
+  "title": "กฎหมายว่าด้วยการเคลื่อนย้ายของเสียและการจัดการสารอันตราย",
+  "video": "rOfWtOX40EQ",
+  "text": "**ภาพรวม:** คาบนี้ว่าด้วยการจัดการสารอันตรายและการเคลื่อนย้ายของเสีย ตั้งแต่บทเรียนอุบัติภัยระดับโลกและในไทย อนุสัญญาระหว่างประเทศ 3 ฉบับ (บาเซล รอตเตอร์ดัม สตอกโฮล์ม) พ.ร.บ.วัตถุอันตราย พ.ศ. 2535 ไปจนถึงร่าง พ.ร.บ.การรายงานและเปิดเผยข้อมูลการปล่อยและเคลื่อนย้ายสารมลพิษ (PRTR)\n**1. ทำไมต้องควบคุมสารอันตราย**\nสารอันตรายหรือสารพิษ (Hazardous หรือ Toxic Substances) เสี่ยงต่อสุขภาพและสิ่งแวดล้อม ทำให้บาดเจ็บ เป็นโรค หรือเสียชีวิต เมื่อรั่วไหลจะซึมลงดิน ปนเปื้อนแหล่งน้ำ และลามข้ามพรมแดนได้ หากไม่มีระบบควบคุมและฐานข้อมูล เมื่อเกิดอุบัติภัย เช่น ไฟไหม้โรงงานเคมี เจ้าหน้าที่ไม่รู้ว่าเก็บสารตั้งต้นใดไว้ จึงเลือกสารดับเพลิงและวิธีระงับเหตุไม่ได้ทันเวลา\nบทเรียนระดับโลก ได้แก่ (1) **เซเวโซ (Seveso) อิตาลี ค.ศ. 1976** โรงงานปล่อยสารพิษไดออกซิน ผู้คนกว่า 600 คนต้องอพยพ (2) **โภปาล (Bhopal) อินเดีย ค.ศ. 1984** โรงงานของบริษัทสหรัฐฯ ปล่อยสารเคมีรั่ว มีผู้เสียชีวิตที่บันทึกได้ประมาณ 2,000 คน แต่ตัวเลขจริงน่าจะสูงกว่ามาก (3) **แม่น้ำไรน์ ยุโรป ค.ศ. 1986** ไฟไหม้โรงงานเคมี น้ำดับเพลิงที่ปนเปื้อนปรอทและสารเคมีถูกระบายลงแม่น้ำ สารพิษซึมลงดินและไหลผ่านหลายประเทศ เช่น เยอรมนีและฝรั่งเศส\nในไทย มีเหตุไฟไหม้โรงงานเม็ดพลาสติกและสารเคมีที่จังหวัดสมุทรปราการเมื่อวันที่ 5 กรกฎาคม พ.ศ. 2564 ผู้บาดเจ็บราว 10 ราย และแรงระเบิดสร้างความเสียหายต่ออาคารบ้านเรือนในรัศมี 2 กิโลเมตร ใช้เวลาควบคุมเพลิงเกือบ 38 ชั่วโมง เพราะเจ้าหน้าที่ไม่ทราบว่าภายในเก็บสารตั้งต้นใดบ้าง จึงต้อง \"คลำทาง\" เลือกสารดับเพลิง และในปี พ.ศ. 2565 ยังเกิดไฟไหม้ต่อเนื่องที่โรงงานเครื่องสำอาง (คลังแอลกอฮอล์) โรงงานน้ำผลไม้ (ถังไฮโดรเจน แอลกอฮอล์เหลว ทินเนอร์) และโรงงานผสมสี ซึ่งเกิดการระเบิดซ้ำจนเจ้าหน้าที่ดับเพลิงบาดเจ็บ 4 ราย เหตุซ้ำซากเหล่านี้ชี้ช่องโหว่ทางกฎหมายที่ไทยขาดฐานข้อมูลกลางว่าแต่ละโรงงานครอบครองวัตถุอันตรายอะไร\n**2. กรอบกฎหมายระหว่างประเทศ (การควบคุมการเคลื่อนย้ายข้ามพรมแดน)**\n(1) **อนุสัญญาบาเซล (Basel Convention)** ควบคุมการเคลื่อนย้าย **ขยะอันตราย (Hazardous Waste)** ข้ามพรมแดน เพื่อปกป้องสุขภาพมนุษย์และสิ่งแวดล้อม พิจารณาจากแหล่งกำเนิด องค์ประกอบ และลักษณะเฉพาะ ครอบคลุม \"ขยะอื่น ๆ\" 4 ประเภท คือ ขยะครัวเรือน เถ้าจากการเผาขยะ ขยะพลาสติกบางประเภท และขยะอิเล็กทรอนิกส์ ต้องได้รับความยินยอมล่วงหน้าจากประเทศปลายทางและประเทศทางผ่าน ที่มาของปัญหาคือการลักลอบส่งตู้คอนเทนเนอร์ที่อ้างว่าเป็นขยะรีไซเคิลเข้าประเทศในเอเชียตะวันออกเฉียงใต้ (เช่น ไทย ฟิลิปปินส์ อินโดนีเซีย) แต่เมื่อเปิดกลับเป็นพลาสติกหรือขยะอิเล็กทรอนิกส์ที่รีไซเคิลไม่ได้\n(2) **อนุสัญญารอตเตอร์ดัม (Rotterdam Convention)** เน้นควบคุมการค้าระหว่างประเทศและการเคลื่อนย้าย **สารเคมีอันตรายและยาฆ่าแมลง** รวมถึงสูตรผสมยาฆ่าแมลงที่ร้ายแรง (Pesticide Formulations) มีกลไกสำคัญคือ **ขั้นตอนขอความยินยอมล่วงหน้า (Prior Informed Consent หรือ PIC)** ประเทศต้นทางต้องแจ้งและขอความยินยอมจากประเทศปลายทางก่อนส่งออกเสมอ และการแลกเปลี่ยนข้อมูลเกี่ยวกับคุณลักษณะ วิธีจัดการ ผลกระทบ และการป้องกัน\n(3) **อนุสัญญาสตอกโฮล์ม (Stockholm Convention)** ควบคุมกลุ่มสาร **POPs (Persistent Organic Pollutants)** หรือสารมลพิษอินทรีย์ที่ตกค้างยาวนานในสิ่งแวดล้อม โดยจำกัดหรือห้ามการผลิตและการใช้\nไทยรับหลักการเหล่านี้เข้ามาใน พ.ร.บ.วัตถุอันตราย ผ่านกระบวนการขออนุญาต **นำเข้า ส่งออก และนำผ่าน (Transit)** วัตถุอันตรายข้ามพรมแดน\n**3. พ.ร.บ.วัตถุอันตราย พ.ศ. 2535**\nเป็นกฎหมายหลักจัดการสารเคมีในประเทศ ควบคู่ พ.ร.บ.โรงงาน พ.ศ. 2535 และกฎหมายลำดับรอง (ประกาศกระทรวงและประกาศกรม) นิยามตาม **มาตรา 4** ครอบคลุมวัตถุอันตราย 10 ลักษณะ เช่น วัตถุระเบิด ไวไฟ มีพิษ กัมมันตรังสี และกัดกร่อน โดยในทางปฏิบัติต้องดูบัญชีรายชื่อแนบท้ายประกาศกระทรวงซึ่งแก้ไขเพิ่มเติมเรื่อย ๆ\n**(1) การแบ่งระดับการควบคุม 4 ชนิด**\n- **ชนิดที่ 1** ผู้ผลิต นำเข้า ส่งออก หรือมีไว้ในครอบครอง ต้องปฏิบัติตามหลักเกณฑ์และวิธีการที่กำหนด\n- **ชนิดที่ 2** ต้องแจ้งพนักงานเจ้าหน้าที่ก่อนจึงดำเนินการได้\n- **ชนิดที่ 3** อันตรายสูง ต้องขอรับใบอนุญาต มิฉะนั้นผลิต นำเข้า หรือครอบครองไม่ได้\n- **ชนิดที่ 4** อันตรายสูงสุด **ห้าม** ผลิต นำเข้า ส่งออก หรือมีไว้ในครอบครองโดยเด็ดขาด\n**(2) การควบคุมตลอดวงจรชีวิต** ครอบคลุมการผลิต นำเข้า ส่งออก ครอบครอง เก็บรักษา ขาย ขนส่ง และการนำผ่าน ผู้ครอบครองต้องติดฉลากถูกต้อง เก็บตามมาตรฐาน และมีบุคลากรผู้เชี่ยวชาญรับผิดชอบเฉพาะ\n**(3) การแยกเจ้าภาพตามการใช้งาน** กรมโรงงานอุตสาหกรรม (สารเคมีภาคอุตสาหกรรม) กรมวิชาการเกษตร (สารกำจัดศัตรูพืชและยาฆ่าแมลง) สำนักงานคณะกรรมการอาหารและยา หรือ อย. (อาหาร ยา เครื่องสำอาง และของใช้ในบ้านเรือน) กรมประมงและกรมปศุสัตว์ (สายงานของตน) และกรมธุรกิจพลังงาน (ก๊าซปิโตรเลียมเหลวและเชื้อเพลิง) ผลคือข้อมูลกระจัดกระจาย ประชาชนสืบค้นและร้องเรียนยาก และหน่วยงานเชื่อมข้อมูลกันไม่ได้ เมื่อเกิดเหตุจึงระงับเหตุล่าช้า\n**(4) บทกำหนดโทษ (หมวด 4)** ผลิตหรือครอบครองวัตถุอันตรายชนิดที่ 3 โดยไม่ได้รับใบอนุญาต ระวางโทษจำคุกไม่เกิน 2 ปี หรือปรับไม่เกิน 200,000 บาท หรือทั้งจำทั้งปรับ ส่วนวัตถุอันตรายปลอม (ทำเทียม แสดงข้อมูลอายุการใช้งานเท็จ หรือติดฉลากหลอกลวง) โทษรุนแรงขึ้น และหากลักลอบนำเข้าผิดกฎหมายอาจถูกลงโทษตามกฎหมายศุลกากรพ่วงด้วย ซึ่งปรับได้สูงถึง 4 เท่าหรือจำคุกสูงสุด 10 ปี\nช่องโหว่ของกฎหมายนี้ คือ **แม้ควบคุมผู้ประกอบการเข้มงวด แต่ขาดกลไกเปิดเผยข้อมูลให้ประชาชนรับรู้**\n**4. ร่าง พ.ร.บ.การรายงานและเปิดเผยข้อมูลการปล่อยและเคลื่อนย้ายสารมลพิษ (ร่าง พ.ร.บ.PRTR)**\nเพื่ออุดช่องโหว่ข้างต้น ร่างกฎหมายนี้มีสาระสำคัญ ดังนี้\n(1) **รวมศูนย์ข้อมูล** ให้กรมควบคุมมลพิษเป็นหน่วยงานกลาง (Central Hub) จัดทำฐานข้อมูล รวบรวม วิเคราะห์ และเปิดเผยข้อมูลการปล่อยสารมลพิษ\n(2) **สิทธิในการรับรู้ (Right to Know)** ประชาชนเข้าถึงและตรวจสอบฐานข้อมูลได้โดยไม่เสียค่าใช้จ่าย เพื่อรู้ว่าพื้นที่ใกล้เคียงเก็บสารอันตรายใด และเตรียมรับมือเหตุฉุกเฉิน ทั้งเจ้าหน้าที่ดับเพลิงเช็กข้อมูลได้ทันทีเมื่อเกิดเหตุ\n(3) **สมดุลระหว่างข้อมูลกับความลับทางการค้า** ผู้ประกอบการต้องรายงานการเก็บและปล่อยสารมลพิษ แต่มีข้อยกเว้นไม่ต้องเปิดเผยส่วนที่เป็นความลับทางการค้า (Trade Secrets)\n(3) **ครอบคลุมแหล่งกำเนิดไม่แน่นอน (Non-point Source)** เช่น มลพิษอากาศจากหลายกิจกรรมรวมกัน และการใช้สารเคมีเกษตรในพื้นที่เปิด ซึ่งกฎหมายเดิมควบคุมไม่ถึง\n(4) **บทลงโทษ** ผู้ประกอบการที่ปกปิด บิดเบือน หรือไม่รายงานตามจริง ปรับสูง ตั้งแต่ 500,000 ถึง 5,000,000 บาท\n**โครงสร้างหน่วยงานตามร่าง PRTR (3 ระดับ)** เทียบกับระบบปัจจุบันที่แยกเจ้าภาพตามกรมต่าง ๆ\n(1) **ระดับนโยบายและกำกับดูแล** รัฐมนตรีว่าการกระทรวงทรัพยากรธรรมชาติและสิ่งแวดล้อม ร่วมกับ **คณะกรรมการข้อมูลการปล่อยและการเคลื่อนย้ายสารมลพิษ** (ตัวแทนรัฐ เอกชน ผู้ทรงคุณวุฒิ) ออกกฎหมายลำดับรอง กำหนดบัญชีรายชื่อสารมลพิษและประเภทแหล่งกำเนิดที่ต้องรายงาน และพิจารณาคำคัดค้านเพื่อรักษาสมดุลระหว่างสิทธิรับรู้ของประชาชนกับความลับทางการค้า\n(2) **ระดับปฏิบัติการและจัดการฐานข้อมูล** กรมควบคุมมลพิษ รับรายงาน รวบรวม วิเคราะห์ จัดทำฐานข้อมูลกลาง และเปิดเผยให้สาธารณชนเข้าถึงฟรี\n(3) **ระดับสนับสนุนและส่งข้อมูล** หน่วยงานรัฐอื่น องค์กรปกครองส่วนท้องถิ่น (อปท.) และหน่วยงานผู้อนุญาตเดิม เชื่อมข้อมูลผู้ได้รับใบอนุญาตเดิมเข้าระบบกลาง และมีหน้าที่ใหม่ในการประเมินแหล่งกำเนิดที่ไม่แน่นอน (Non-point Source) ส่งกรมควบคุมมลพิษทุกปี\n**ทบทวนกฎหมายที่เรียนในคาบนี้**\n- อนุสัญญาบาเซล (ขยะอันตรายและขยะอื่น ๆ 4 ประเภท) อนุสัญญารอตเตอร์ดัม (PIC) อนุสัญญาสตอกโฮล์ม (POPs)\n- พ.ร.บ.วัตถุอันตราย พ.ศ. 2535 **มาตรา 4** (นิยาม 10 ลักษณะ) วัตถุอันตราย 4 ชนิด **หมวด 4** (โทษ) และพ.ร.บ.โรงงาน พ.ศ. 2535\n- ร่าง พ.ร.บ.PRTR (Right to Know, กรมควบคุมมลพิษเป็นศูนย์กลาง, โทษปรับ 500,000 ถึง 5,000,000 บาท)\n**จุดที่ควรจำ:** วัตถุอันตรายแบ่ง 4 ชนิด (ปฏิบัติตามหลักเกณฑ์, แจ้ง, ขออนุญาต, ห้าม) เจ้าภาพกระจัดกระจายทำให้ข้อมูลไม่บูรณาการ ร่าง PRTR จึงตั้งศูนย์กลางข้อมูลและสร้าง Right to Know โดยยังคุ้มครองความลับทางการค้า"
+ },
+ {
+  "n": 13,
+  "title": "กฎหมายว่าด้วยการจัดการและอนุรักษ์ทรัพยากรทางทะเล (ทรัพยากรที่มีชีวิตและการประมง)",
+  "video": "n5ozIQSSvq4",
+  "text": "**ภาพรวม:** คาบนี้ว่าด้วยกฎหมายสิ่งแวดล้อมทางทะเลและการประมง เริ่มจากนิยามและขอบเขตของสิ่งแวดล้อมทางทะเล มลภาวะทางทะเลตาม UNCLOS การจัดการเชิงพื้นที่ตาม พ.ร.บ.ส่งเสริมการบริหารจัดการทรัพยากรทางทะเลและชายฝั่ง พ.ศ. 2558 (พ.ร.บ.ทช.) และการจัดการทรัพยากรที่มีชีวิตตามพระราชกำหนดการประมง พ.ศ. 2558\n**1. นิยามสิ่งแวดล้อมทางทะเลและทรัพยากรที่มีชีวิต**\nกฎหมายไทยไม่ได้นิยาม \"สิ่งแวดล้อมทางทะเล\" ไว้โดยตรง ต้องตีความจากคำว่า \"สิ่งแวดล้อม\" ใน **พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535 มาตรา 4** ซึ่งครอบคลุมสิ่งที่เกิดขึ้นเองโดยธรรมชาติ (ทรัพยากรมีชีวิตและไม่มีชีวิต เช่น หิน แร่ น้ำมัน ดิน ทราย) และสิ่งที่มนุษย์สร้างขึ้นในทะเล (เรือ ท่าเรือ ประภาคาร แท่นขุดเจาะน้ำมัน เกาะเทียม สถานีวิจัยหรือสถานีทางทหารกลางทะเล)\n**ทรัพยากรที่มีชีวิตทางทะเล** ครอบคลุมความหลากหลายทางชีวภาพทั้งหมดในทะเล ได้แก่ ปลา ฉลาม (ฉลามวาฬจัดเป็นปลาฉลาม ไม่ใช่วาฬ) กระเบน ปลาหมึก สัตว์น้ำเปลือกแข็ง (กุ้ง ปู) สัตว์ไม่มีกระดูกสันหลัง (ปะการัง หอย ซึ่งบางชนิดที่เคลื่อนที่บนหน้าดินจัดเป็นทรัพยากรติดที่หรือ Sedentary Species) นกทะเล (ที่พึ่งพาระบบนิเวศทางทะเล ในสหภาพยุโรปมี EU Birds Directive คุ้มครอง) เต่า และสัตว์เลี้ยงลูกด้วยนม (แมวน้ำ วาฬ) การสำรวจปี ค.ศ. 2010 ระบุสายพันธุ์สิ่งมีชีวิตทางทะเลได้ชัดเจนราว 250,000 สายพันธุ์ และยังมีที่ค้นพบแต่ระบุสายพันธุ์ย่อยไม่ได้อีกราว 750,000 สายพันธุ์\nนิยามที่ใกล้เคียงที่สุดของ **ทรัพยากรทางทะเลและชายฝั่ง** อยู่ใน **พ.ร.บ.ทช. มาตรา 3** ครอบคลุมสิ่งที่เกิดตามธรรมชาติในทะเลและชายฝั่ง รวมพื้นที่ที่น้ำทะเลท่วมถึง เช่น พรุชายฝั่ง พื้นที่ชุ่มน้ำ คลอง ทะเลสาบ ปากแม่น้ำ ป่าชายเลน ป่าชายหาด เกาะ หญ้าทะเล ปะการัง และสิ่งที่มนุษย์สร้างเพื่อฟื้นฟู เช่น ปะการังเทียม แนวลดแรงคลื่น และโครงสร้างป้องกันการกัดเซาะชายฝั่ง ซึ่งถูกวิจารณ์ว่าไม่ตรงกับความหมายของ \"ทรัพยากรที่มีชีวิต\" แต่ก็เป็นนิยามที่ใกล้เคียงที่สุด\n**2. ขอบเขตเชิงพื้นที่ทางทะเล (ตามกฎหมายทะเล)**\nวัดจาก **เส้นฐาน (Baseline)** ซึ่งปกติคือแนวน้ำลดต่ำสุดของชายฝั่ง\n(1) **น่านน้ำภายใน (Internal Waters)** ด้านฝั่งแผ่นดินของเส้นฐาน\n(2) **ทะเลอาณาเขต (Territorial Sea)** ไม่เกิน **12 ไมล์ทะเล**\n(3) **เขตเศรษฐกิจจำเพาะ (EEZ)** ไม่เกิน **200 ไมล์ทะเล** รัฐชายฝั่งมี **สิทธิอธิปไตย (Sovereign Rights)** เฉพาะในการแสวงหาประโยชน์และจัดการทรัพยากรธรรมชาติทั้งที่มีชีวิตและไม่มีชีวิต ต่างจาก **อำนาจอธิปไตย (Sovereignty)** ที่เป็นอำนาจเด็ดขาดในแผ่นดิน น่านน้ำภายใน และทะเลอาณาเขต\n(4) **ทะเลหลวง (High Seas)** นอกเขต 200 ไมล์ทะเล เป็นบริเวณนอกเขตอำนาจรัฐ\nทะเลในความหมายกฎหมายรวมตั้งแต่ผิวน้ำถึงพื้นดินท้องทะเลและดินใต้ผิวดิน\n**3. ภัยคุกคามต่อสิ่งมีชีวิตทางทะเล**\n(1) **Overfishing** และการสูญเสียแหล่งที่อยู่อาศัย ทำให้เกิด **Collapse of Fish Stock** ประชากรปลาลดฮวบจนจับไม่ได้ (2) อุบัติเหตุเรือน้ำมันรั่ว (Oil Spills) (3) **Climate Change** คือน้ำทะเลอุ่นขึ้นทำให้ปะการังฟอกขาว และทะเลเป็นกรดกัดกร่อนเปลือกปะการัง หอย และปู\n**4. มลภาวะทางทะเล 5 แหล่ง ตาม UNCLOS ภาค 12 (Part XII)**\nมลพิษตาม พ.ร.บ.สิ่งแวดล้อม 2535 มาตรา 4 รวมถึงรังสีและความร้อน ซึ่งสอดคล้องกับปัญหาปะการังฟอกขาว\n(1) **จากบนแผ่นดิน (Land-based ข้อ 207)** ใหญ่ที่สุด กว่า 70% และจับตัวผู้กระทำยากที่สุด เช่น ยาฆ่าแมลง DDT ตกค้าง และขยะพลาสติกที่เต่าทะเลเข้าใจผิดว่าเป็นแมงกะพรุน\n(2) **จากพื้นดินท้องทะเลในเขตอำนาจรัฐ (ข้อ 208)** เช่น ขุดเจาะน้ำมัน เหมืองแร่ใต้ทะเล\n(3) **จากพื้นดินท้องทะเลนอกเขตอำนาจรัฐ (ข้อ 209)** ในบริเวณ \"The Area\" เช่น เหมืองแร่ใต้ทะเลลึก\n(4) **จากการจงใจทิ้ง (Dumping ข้อ 210)** เช่น สหรัฐอเมริกาทิ้งกากกัมมันตรังสีที่หมู่เกาะมาร์แชลล์ (ปัจจุบันครอบด้วยคอนกรีต) และคดี Nuclear Tests ซึ่งออสเตรเลียและนิวซีแลนด์ฟ้องฝรั่งเศสต่อศาลโลก ปัจจุบันควบคุมโดย **London Dumping Convention**\n(5) **จากเรือเดินทะเล (Vessel Source ข้อ 211)** เช่น ควัน คราบน้ำมัน ขยะจากลูกเรือ ควบคุมโดยองค์การทางทะเลระหว่างประเทศ (IMO) ผ่าน **อนุสัญญา MARPOL** และมีกลไกพื้นที่คุ้มครองพิเศษ (PSSA และ Special Area) สำหรับพื้นที่เปราะบาง\n(6) **จากชั้นบรรยากาศ (Atmosphere ข้อ 212)** ทะเลดูดซับก๊าซเรือนกระจกและความร้อน ก่อให้เกิดปะการังฟอกขาวและทะเลเป็นกรด จับตัวผู้กระทำผิดยากเช่นเดียวกับแหล่งบนแผ่นดิน\n**5. กรอบกฎหมายหลัก 4 ฉบับ**\n(1) **UNCLOS ค.ศ. 1982** แม่บทแบ่งเขตทะเลและเขตอำนาจรัฐ ภาค 12 ว่าด้วยการคุ้มครองสิ่งแวดล้อมทางทะเล และภาค 15 (Part XV) ว่าด้วยการระงับข้อพิพาทเชิงบังคับ นอกเขตอำนาจรัฐมีความตกลงย่อย ได้แก่ Agreement on Part XI (ค.ศ. 1994) ว่าด้วย \"The Area\" **FSA ค.ศ. 1995** (Fish Stocks Agreement) ว่าด้วยปลาอพยพย้ายถิ่นสูง เช่น ปลาทูน่า และ **BBNJ** ว่าด้วยความหลากหลายทางชีวภาพนอกเขตอำนาจรัฐ รวมถึงความตกลงระดับภูมิภาคราว 18 ฉบับ\n(2) **พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535** เป็นกฎหมายแม่บท นิยามมลพิษและแหล่งกำเนิดมลพิษ\n(3) **พ.ร.บ.ทช. พ.ศ. 2558** เน้นการจัดการเชิงพื้นที่ที่ \"หน้าบ้าน\" ชายฝั่ง ส่งเสริมการมีส่วนร่วมผ่านคณะกรรมการระดับจังหวัดที่มีตัวแทนชุมชนชายฝั่ง\n(4) **พ.ร.ก.การประมง พ.ศ. 2558** เน้นการจัดการเชิงทรัพยากร ออกโดยฝ่ายบริหารเพราะเร่งด่วนต้องแก้ปัญหา **\"ใบเหลือง\" ของสหภาพยุโรป** ใช้แทน พ.ร.บ.ประมง พ.ศ. 2490 และรับมาตรฐานสากล เช่น แนวปฏิบัติของ FAO\n**6. มาตรการเชิงพื้นที่ตาม พ.ร.บ.ทช. พ.ศ. 2558**\n(1) **พื้นที่ป่าชายเลนอนุรักษ์ (มาตรา 18)** เพื่อสงวนและฟื้นฟู ต้องไม่อยู่ในกรรมสิทธิ์ของเอกชน และพยายามไม่ทับซ้อนอุทยานแห่งชาติ เขตรักษาพันธุ์สัตว์ป่า หรือเขตห้ามล่าสัตว์ป่า หากทับซ้อนกับ **เขตป่าสงวนแห่งชาติ** **มาตรา 19** ให้ยกอำนาจของอธิบดีกรมป่าไม้มาเป็นของอธิบดี ทช. เพื่อออกกติกาควบคุมพื้นที่ส่วนนั้นได้\n(2) **พื้นที่คุ้มครองทรัพยากรทางทะเลและชายฝั่ง (มาตรา 20)** สำหรับทรัพยากรที่ไม่ใช่ป่าชายเลนที่สมบูรณ์ ควรสงวนไว้ หรือเป็นแหล่งอาศัยของพืชและสัตว์น้ำ ประกาศเป็นกฎกระทรวง\n(3) **เขตป้องกันการกัดเซาะชายฝั่ง (มาตรา 21)** มีมาตรการบังคับในตัวมาตรา 21 วรรคสอง ห้ามกิจกรรมที่เร่งการกัดเซาะ เช่น ขุดทราย ควบคุมสิ่งก่อสร้างเดิมที่ทำให้กัดเซาะเพิ่ม (สั่งระงับหรือรื้อถอนโดยชดเชย) และกำหนดหลักเกณฑ์การใช้ที่ดิน เช่น ห้ามสร้างอาคารใกล้ชายฝั่งเกินไป เพราะมีวัตถุประสงค์เฉพาะจึงประกาศทับซ้อนกับพื้นที่คุ้มครองประเภทอื่นได้\n(4) **พื้นที่วิกฤต (มาตรา 22)** ใช้เมื่อทรัพยากรถูกทำลายเสียหายร้ายแรงเข้าขั้นวิกฤต เช่น ป่าชายเลนหรือปะการังหายไปมาก ต้องเสนอ **คณะรัฐมนตรี** อนุมัติและประกาศราชกิจจานุเบกษา จุดเด่นคือมาตรการต้องระบุประเภททรัพยากรที่มีปัญหาเจาะจง และต้อง **ชั่วคราว** โดยกำหนดระยะเวลาชัดเจน หากต้องขยายก็ต้องขอ ครม.ใหม่\n(5) **มาตรา 23 \"ตะกร้าเครื่องมือ\"** มาตรการคุ้มครองที่ใช้กับพื้นที่ตามมาตรา 18, 20 และ 22 (ไม่ใช้กับมาตรา 21) เช่น ห้ามกิจกรรมที่เป็นอันตรายต่อทรัพยากร กำหนดการใช้ประโยชน์ที่ดิน (เช่น ท่องเที่ยวเชิงนิเวศเท่านั้น ห้ามสร้างรีสอร์ต) และคุ้มครองชายหาด (ห้ามรถลงหาด ห้ามรองเท้าพลาสติก ห้ามนำขวดและถุงพลาสติกเข้า ห้ามครีมกันแดดที่ทำลายปะการัง ห้ามให้อาหารปลา) ตัวอย่างคือการห้ามนักท่องเที่ยวลงเล่นน้ำที่อ่าวมาหยาเพื่อฟื้นฟูปะการัง\n(6) **อำนาจระงับเหตุฉุกเฉิน (มาตรา 17)** เมื่อมีการกระทำที่ก่อความเสียหายร้ายแรงต่อทรัพยากรทางทะเลและชายฝั่ง เช่น ทิ้งเศษวัสดุก่อสร้างริมหาดหรือลักลอบปล่อยน้ำเสียสีดำลงทะเล **อธิบดีกรม ทช. สั่งให้ระงับกิจกรรมเป็นการชั่วคราวได้ทันที** แม้เป็นอำนาจของหน่วยงานอื่น แล้วต้องแจ้งประสานหน่วยงานเจ้าภาพมารับช่วงแก้ไขโดยไม่ชักช้า กรณีเร่งด่วนหรือหาเจ้าภาพไม่ได้ กรม ทช. เข้าแก้ไขเองได้ และอธิบดีสั่งให้ผู้กระทำแก้ไขบรรเทาความเสียหายภายในเวลากำหนด เมื่อแก้เสร็จจึงยกเลิกคำสั่งระงับ\n**7. พ.ร.ก.การประมง พ.ศ. 2558**\n**(1) วัตถุประสงค์ (มาตรา 4)** คุ้มครอง 3 ด้าน คือ (ก) **สมดุลของระบบนิเวศตามหลัก MSY (Maximum Sustainable Yield หรืออัตราการจับสูงสุดที่ยั่งยืน)** เช่น ทะเลมีปลาทู 300 ล้านตัว อาจอนุญาตให้จับเพียง 150 ล้านตัวต่อปีเพื่อเหลือพ่อแม่พันธุ์ (ข) ป้องกัน **IUU Fishing** ด้วยระบบตรวจสอบย้อนกลับ (ค) คุ้มครองสวัสดิภาพแรงงาน\n**(2) นิยาม** \"การประมง\" ความหมายกว้างครอบคลุมการเพาะเลี้ยง การดูแลรักษา การแปรรูป และกิจกรรมสนับสนุน ส่วน \"ทำการประมง\" คือ ค้นหา ล่อ จับ ได้มา หรือเก็บสัตว์น้ำ (คำว่า \"ล่อ\" เช่น ใช้ไฟส่องสว่างล่อปลาแล้วใช้อวนจับ) **ทะเลชายฝั่ง** โดยหลักคือ 3 ไมล์ทะเล แต่ปรับได้ด้วยกฎกระทรวงตามภูมิประเทศแต่ละจังหวัด (อ่าวไทยตื้นและลาดเอียงน้อย ส่วนอันดามัน เช่น กระบี่ ลึกชันทันที) โดยต้องไม่น้อยกว่า **1.5 ไมล์ทะเล** และไม่เกิน **12 ไมล์ทะเล** (ไม่เกินทะเลอาณาเขต) ปัจจุบันมีกฎกระทรวงกว่า 20 จังหวัด ส่วนทะเลนอกชายฝั่งคือถัดออกไปจนสุด EEZ 200 ไมล์ทะเล\n**(3) ประเภทการประมง**\n- **ประมงพื้นบ้าน (Artisanal)** เรือต่ำกว่า **10 ตันกรอส** ทำประมงในเขตทะเลชายฝั่ง ห้ามออกนอกชายฝั่งโดยหลัก (เว้นแต่ได้รับอนุญาตตามมาตรา 34) มีข้อพิพาทช่วงแรกเพราะเรือเล็กบางลำใส่เครื่องยนต์แรงม้าสูงจนไม่เข้าเกณฑ์\n- **ประมงพาณิชย์ (Commercial)** เรือตั้งแต่ **10 ตันกรอสขึ้นไป** หรือเรือเครื่องแรงม้าสูง ต้องขอใบอนุญาตรายปีกำหนดชนิด ปริมาณ (Quota) และฝั่งอ่าวไทยหรืออันดามัน **ห้ามเข้าจับในเขตทะเลชายฝั่งโดยเด็ดขาด** เพราะเครื่องมือขนาดใหญ่ เช่น อวนลาก กวาดทรัพยากรหน้าดินและทำลายอวนเล็กของชาวประมงพื้นบ้าน\n**(4) ระบบควบคุมและสืบค้นแหล่งที่มา (Traceability)** (ก) **VMS** ติดตามเรือพาณิชย์ผ่านดาวเทียม (ข) **Logbook** บันทึกชนิดและปริมาณสัตว์น้ำ จุดจอดเรือ และสถานที่ขนถ่าย (ค) **ศูนย์ PIPO (Port In – Port Out)** แจ้งทุกครั้งที่เรือเข้าออกท่า เพื่อตรวจเทียบกับ Logbook และโควตา (ง) **มาตรา 85 และ 90** กำหนดหน้าที่ตลอดห่วงโซ่ เจ้าของท่าเทียบเรือบันทึกเรือทุกลำที่ขนถ่าย ผู้ซื้อ ผู้นำเข้า ผู้ส่งออก และโรงงานแปรรูปต้องมีหนังสือกำกับการซื้อขายเพื่อสืบย้อนกลับได้ว่ามาจากเรือลำใด\n**(5) IUU Fishing** ตามแนวปฏิบัติของ FAO 3 รูปแบบ\n- **Illegal (ผิดกฎหมาย)** ไม่มีใบอนุญาต ฝ่าฝืนกฎหมายไทยหรือกฎหมายของรัฐชายฝั่งอื่น ใช้เครื่องมือต้องห้าม เช่น ระเบิดหรืออวนตาถี่\n- **Unreported (ไม่รายงาน)** จับเกินโควตาแล้วไม่จด รายงานไม่ครบ หรือเข้าจับในพื้นที่องค์การประมงระดับภูมิภาคโดยไม่แจ้ง\n- **Unregulated (ไร้กฎเกณฑ์)** ใช้เรือไร้สัญชาติ คือไม่จดทะเบียนกับรัฐใดเลย หรือชักธงสลับไปมา (Flag of Convenience)\n**โทษ** มาตรการทางปกครอง (พักใช้หรือเพิกถอนใบอนุญาต) โทษอาญา (ปรับหลักหมื่น หลักแสน ถึงหลักล้าน หรือปรับ 3 เท่าของมูลค่าสัตว์น้ำ) และมาตรการทางสังคม คือ **Blacklist** ของกรมประมงซึ่งทำให้เรือขอใบอนุญาตไม่ได้จนกว่าจะแก้ไข\n**(6) แรงงาน** คุ้มครองความปลอดภัยและสุขอนามัยของคนประจำเรือ (ป้องกันการทิ้งผู้ป่วยบนเกาะหรือลงทะเล) และแรงงานในโรงงานแปรรูปต้องถูกกฎหมายแรงงาน หากใช้แรงงานผิดกฎหมายมีโทษปรับรุนแรงและอาจถูกสั่งปิดโรงงาน เพื่อแก้ปัญหาการค้ามนุษย์\n**ทบทวนกฎหมายที่เรียนในคาบนี้**\n- พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ 2535 **มาตรา 4**\n- พ.ร.บ.ส่งเสริมการบริหารจัดการทรัพยากรทางทะเลและชายฝั่ง พ.ศ. 2558 **มาตรา 3, 17, 18, 19, 20, 21, 22 และ 23**\n- พ.ร.ก.การประมง พ.ศ. 2558 **มาตรา 4, 34, 85 และ 90**\n- UNCLOS **ข้อ 207–212** (แหล่งมลภาวะ) ภาค 12 และภาค 15 อนุสัญญา MARPOL London Dumping Convention FSA 1995 และ BBNJ\n**จุดที่ควรจำ:** EEZ รัฐมี \"สิทธิอธิปไตย\" ไม่ใช่ \"อำนาจอธิปไตย\" พื้นที่วิกฤตตามมาตรา 22 ต้องชั่วคราว มาตรา 21 มีมาตรการในตัวและใช้ซ้อนได้ ส่วนเรือพาณิชย์ 10 ตันกรอสขึ้นไปห้ามเข้าทะเลชายฝั่งและ IUU คือ Illegal, Unreported และ Unregulated"
+ },
+ {
+  "n": 14,
+  "title": "กฎหมายว่าด้วยการจัดการและอนุรักษ์ทรัพยากรป่าไม้",
+  "video": "R6OtDkfUt6g",
+  "text": "**ภาพรวม:** คาบนี้ว่าด้วยกฎหมายการจัดการและอนุรักษ์ทรัพยากรป่าไม้ ตั้งแต่ความหมายของ \"ป่า\" หลักการจัดการ กฎหมายเฉพาะ 5 ฉบับที่แบ่งตามระดับการอนุรักษ์ ชั้นคุณภาพลุ่มน้ำตามมติคณะรัฐมนตรี และกรณีศึกษาเหมืองแร่อมก๋อยที่สะท้อนปัญหากฎหมายทับซ้อน\n**1. ความสำคัญของป่าไม้**\nป่าไม้เป็นแหล่งอาหาร ปัจจัย 4 สมุนไพรและสารสกัดเพื่อการวิจัยและยา เป็นระบบนิเวศที่มีความหลากหลายทางชีวภาพ เป็นต้นกำเนิดแม่น้ำลำธารซึ่งเชื่อมกับการจัดการลุ่มน้ำ และเป็นแหล่งกักเก็บและดูดซับคาร์บอน (**Carbon Sink**) ที่ดูดซับและทำลายก๊าซเรือนกระจกและคายออกซิเจน ต่างจากเขื่อนหรืออ่างเก็บน้ำที่เป็นแค่แหล่งกักเก็บ (Carbon Reservoir)\n**2. ความหมายของ \"ป่า\" และ \"ของป่า\"**\n**(1) กฎหมายไทย (นิยามขั้นต่ำสุดแบบครอบจักรวาล)** พ.ร.บ.คุ้มครองและสงวนป่า พ.ศ. 2481 (ยกเลิกแล้ว) เคยนิยามป่าว่าเป็นสาธารณสมบัติของแผ่นดินประเภทที่ดินรกร้างว่างเปล่า ซึ่งเป็นนิยามแบบ \"กำปั้นทุบดิน\" ไม่ได้ระบุองค์ประกอบทางชีวภาพหรือต้นไม้เลย ต่อมา **พ.ร.บ.ป่าไม้ พ.ศ. 2484** ปรับถ้อยคำเป็น \"ที่ดินที่ยังไม่มีบุคคลได้มาตามกฎหมายที่ดิน\" ส่วน **พ.ร.บ.ป่าสงวนแห่งชาติ พ.ศ. 2507** ขยายให้เห็นภาพว่าครอบคลุมภูเขา ห้วย หนอง คลอง บึง บาง ลำน้ำ ทะเลสาบ เกาะ และที่ชายทะเล ที่ยังไม่มีบุคคลได้มา แปลว่าที่ดินใดที่ไม่มีเอกสารสิทธิเอกชนถือเป็นป่า แม้ไม่มีต้นไม้สักต้น\n**(2) ความย้อนแย้งเรื่อง \"แร่\"** พ.ร.บ.ป่าสงวนแห่งชาติกำหนดให้ \"ของป่า\" **รวมถึง ดิน หิน กรวด ทราย แร่ และน้ำมัน** แต่ พ.ร.บ.ป่าไม้ให้ของป่าไม่รวมแร่ตามกฎหมายว่าด้วยแร่ (ครอบคลุมเพียงหินที่ไม่ใช่แร่) เพื่อแยกอำนาจเจ้าภาพไม่ให้กรมป่าไม้ทับซ้อนกับกฎหมายแร่ ซึ่งสะท้อนความขัดแย้งระหว่างนโยบายอนุรักษ์กับการพัฒนาเศรษฐกิจ ผลในทางปฏิบัติคือในเขตป่าสงวนแห่งชาติสามารถขอสัมปทานเหมืองแร่ได้\n**(3) นิยามสากล (FAO) ตามนโยบายป่าไม้แห่งชาติ** ป่าไม้ต้องเป็นพื้นที่ที่มี **ไม้ยืนต้นปกคลุมเป็นผืนต่อเนื่องไม่น้อยกว่า 3.125 ไร่ (0.5 เฮกตาร์)** รวมพื้นที่ที่ตัดฟันชั่วคราวแต่คาดว่าฟื้นตัวภายใน 5 ปี (หรือมากกว่านั้นหากมีเหตุผลทางวิชาการ) พื้นที่ถนนป่าไม้และแนวกันไฟ (ไม่รวมถนนคมนาคม) ต้นไม้ปลูกเป็นแนวที่รวมไม่น้อยกว่า 3.125 ไร่และกว้างเกิน 20 เมตร และยังรวมป่าชายเลน ป่าพรุ ป่าบุ่งป่าทาม พื้นที่ไผ่ต่อเนื่อง และทุ่งหญ้าหรือลานหินตามธรรมชาติ นักกฎหมายต้องแยกให้ออกว่าคำว่า \"ป่า\" หมายถึงกรรมสิทธิ์ที่ดินของรัฐ (ตาม พ.ร.บ.ป่าไม้) หรือระบบนิเวศที่สำคัญทางชีวภาพ (ตามนโยบายและกฎหมายกลุ่มอนุรักษ์)\n**3. หลักการจัดการป่าไม้ในไทย**\n(1) **Command and Control** รัฐเป็นเจ้าของและผู้ดูแลสาธารณสมบัติของแผ่นดินแทนประชาชน การเข้าใช้ประโยชน์ต้องผ่านระบบขออนุญาตเสมอ แม้เป็นป่าสงวนแห่งชาติที่เปิดใช้ประโยชน์เชิงเศรษฐกิจ โดยมี 2 หน่วยงานหลัก คือ **กรมอุทยานแห่งชาติ สัตว์ป่า และพันธุ์พืช** (เน้นอนุรักษ์เข้มงวด: พ.ร.บ.อุทยานแห่งชาติและพ.ร.บ.สงวนและคุ้มครองสัตว์ป่า) และ **กรมป่าไม้** (เน้นอนุญาตให้ใช้ประโยชน์เชิงเศรษฐกิจและชุมชน: พ.ร.บ.ป่าไม้ พ.ร.บ.ป่าสงวนแห่งชาติ และพ.ร.บ.ป่าชุมชน)\n(2) **นโยบายปิดป่า** ยกเลิกสัมปทานทำไม้ป่าตั้งแต่ปี พ.ศ. 2532 เพราะเหตุอุทกภัยและดินถล่มครั้งใหญ่ภาคใต้ปี พ.ศ. 2531 แต่ยังมีข้อยกเว้นให้อธิบดีอนุญาตเป็นรายกรณี เช่น การตัดไม้หวงห้ามที่ปลูกในที่ดินของตน\n(3) **การแบ่งประเภทป่า** ป่าอนุรักษ์ (คุ้มครองความหลากหลายทางชีวภาพและระบบนิเวศ ใช้ได้เฉพาะศึกษา วิจัย นันทนาการ ห้ามทำไม้หรือเก็บของป่าเพื่อการค้า) ส่วนป่าเศรษฐกิจและป่าชุมชนอยู่นอกเขตป่าอนุรักษ์และให้ใช้ประโยชน์ได้ เมื่อเจอคำว่า \"ป่า\" อย่าสรุปว่าห้ามเข้าและห้ามใช้เสมอไป\n(4) **การจัดการระดับลุ่มน้ำ** ผ่านมติคณะรัฐมนตรี\n(5) **การจัดการร่วม (Co-management)** ตั้งแต่รัฐธรรมนูญปี 2540 ชุมชนมีสิทธิร่วมกับรัฐอนุรักษ์ ฟื้นฟู จัดการ และใช้ประโยชน์\nสาเหตุที่ป่าลดลงตามนโยบายป่าไม้แห่งชาติ ได้แก่ การแผ้วถางและเผาป่าเพื่อเกษตร การสร้างรีสอร์ตและสนามกอล์ฟในพื้นที่ลาดชัน (เช่น เชียงใหม่ ภูเก็ต) การซื้อที่ดินเก็งกำไร โครงสร้างพื้นฐานของรัฐ (เขื่อน ถนน สายไฟฟ้าแรงสูง) นโยบายรัฐที่ขัดแย้งกัน แนวเขตป่าที่ไม่ชัดเจนจนทับซ้อนกับที่ทำกิน การให้สัมปทานอื่น เช่น เหมืองแร่ในเขตป่า การลักลอบตัดไม้ ไฟป่า และการบังคับใช้กฎหมายที่ไม่เข้มแข็ง\n**4. กฎหมายเฉพาะ 5 ฉบับ (แบ่ง 2 กลุ่ม)**\n**กลุ่มที่ 1 เปิดช่องให้ใช้ประโยชน์เชิงเศรษฐกิจและชุมชนได้ (ภายใต้การอนุญาต)**\n(1) **พ.ร.บ.ป่าไม้ พ.ศ. 2484** เป็นกรอบกว้างที่สุดควบคุมที่ดินที่ไม่มีกรรมสิทธิ์เอกชน ในอดีตเน้นสัมปทานทำไม้ ปัจจุบันยังให้ทำไม้หรือเก็บของป่าบางกรณีผ่านกฎกระทรวงและการขออนุญาต\n(2) **พ.ร.บ.ป่าสงวนแห่งชาติ พ.ศ. 2507** ประกาศเขตโดย **กฎกระทรวง** แม้ชื่อคือป่าสงวน แต่เป็นกฎหมายที่เปิดให้ใช้ประโยชน์เชิงเศรษฐกิจมากที่สุด เช่น จัดที่ดินทำกินให้ชุมชนตามโครงการ คทช. (เป็นสิทธิทำกินแบบแปลงรวมหรือสหกรณ์ ไม่ใช่โฉนดกรรมสิทธิ์) และอนุญาตให้ทำเหมืองแร่ได้คราวละไม่เกิน 10 ปี พื้นที่ป่าสงวนในลุ่มน้ำบางชั้นจึงถูกจัดเป็นป่าเศรษฐกิจได้\n(3) **พ.ร.บ.ป่าชุมชน พ.ศ. 2562** กระจายอำนาจให้ชุมชนจัดการร่วมกับรัฐ พื้นที่ต้องอยู่ **นอกเขตป่าอนุรักษ์** ชุมชนเรียกป่าหลังบ้านว่าป่าชุมชนเองไม่ได้ ต้องรวมตัวกันไม่น้อยกว่า 50 คน มีภูมิลำเนาในพื้นที่ไม่น้อยกว่า 5 ปี และขออนุมัติจัดตั้ง เมื่อตั้งแล้วมี **คณะกรรมการป่าชุมชน** ออกข้อบังคับของชุมชน (คล้ายข้อบัญญัติท้องถิ่น) และไกล่เกลี่ยข้อพิพาทเองได้ สมาชิกเก็บหาของป่าตามแผนได้และได้รับยกเว้นค่าธรรมเนียมและค่าภาคหลวง ห้ามยึดถือครอบครองเป็นที่อยู่อาศัย แต่สร้างสิ่งจำเป็นต่อการดูแลป่าได้ เช่น หอดูไฟป่าและฝายชะลอน้ำ ส่วนบุคคลภายนอกเข้าศึกษาหรือพักผ่อนได้ตามข้อบังคับ\n**กลุ่มที่ 2 เน้นอนุรักษ์เข้มงวด (อิงมาตรฐานสากล เช่น IUCN Protected Area และ CBD)**\n(4) **พ.ร.บ.อุทยานแห่งชาติ พ.ศ. 2562** ประกาศเขตโดย **พระราชกฤษฎีกา** พร้อมแผนที่แนบท้าย ซึ่งมีศักดิ์ **สูงกว่า** กฎกระทรวงของป่าสงวนแห่งชาติ พื้นที่ต้องโดดเด่น เช่น ความหลากหลายทางชีวภาพสูง ถิ่นอาศัยของพืชสัตว์ใกล้สูญพันธุ์ ธรณีวิทยา (เช่น แพะเมืองผี) หรือมรดกทางวัฒนธรรม **มาตรา 19** ห้ามยึดถือครอบครองที่ดิน ก่อสร้าง แผ้วถาง เผาป่า หรือทำให้สภาพธรรมชาติเสื่อมโทรม **มาตรา 20** ต้องปฏิบัติตามคำสั่งของพนักงานเจ้าหน้าที่ ส่วน **มาตรา 22** เปิดข้อยกเว้นให้เจ้าหน้าที่อนุญาตเข้าไปสำรวจ ศึกษาวิจัย ทดลอง ถ่ายทำภาพยนตร์หรือสารคดี และท่องเที่ยว ตามระเบียบของคณะกรรมการอุทยานแห่งชาติ โดยต้องไม่ก่อความเสียหายต่อธรรมชาติและระบบนิเวศ หากอุทยานประกาศทับสัมปทานทำไม้หรือเหมืองแร่ในป่าสงวนเดิม **สิทธิสัมปทานสิ้นสุดทันที** เพราะพระราชกฤษฎีกามีศักดิ์สูงกว่ากฎกระทรวง\n(5) **พ.ร.บ.สงวนและคุ้มครองสัตว์ป่า พ.ศ. 2562** เป็นขั้นสุดของการอนุรักษ์ ได้รับอิทธิพลจากอนุสัญญา **CITES** เพื่อสกัดการค้าสัตว์ป่าและชิ้นส่วนข้ามชาติ ซึ่งไทยเคยเป็นทางผ่านและแหล่งค้าสำคัญ แบ่งสัตว์ป่าเป็น 4 ประเภท\n- **สัตว์ป่าสงวน** เข้มงวดสูงสุด เทียบบัญชี 1 ของ CITES ตราเป็น **พระราชกฤษฎีกา** ห้ามล่า จับ ค้า ครอบครองโดยเด็ดขาด (ยกเว้นเพื่อการวิจัย) เช่น วาฬบรูด้า วาฬโอมูระ เต่ามะเฟือง และปลาฉลามวาฬ\n- **สัตว์ป่าคุ้มครอง** ประกาศเป็น **กฎกระทรวง** เทียบบัญชี 2 หรือ 3 ของ CITES เปิดช่องให้กำหนดชนิดที่เพาะพันธุ์เพื่อประโยชน์เชิงเศรษฐกิจได้ภายใต้การควบคุม\n- **สัตว์ป่าควบคุม** ตาม CITES หรือที่รัฐเห็นว่าต้องควบคุม ค้าได้แต่ต้องอยู่ใต้การควบคุมเข้มงวด\n- **สัตว์ป่าอันตราย** รวมถึงสัตว์ที่เป็นพาหะนำโรคหรือเป็นอันตรายต่อระบบนิเวศ **มาตรา 32** ห้ามทิ้งหรือปล่อยสัตว์ป่าอันตราย รวมถึงห้ามทิ้งซาก\nผู้กระทำผิด เช่น ผู้ล่าสัตว์ป่าสงวน มีทั้งโทษอาญา และต้อง **ชดใช้ค่าเสียหายทางแพ่งต่อทรัพยากรธรรมชาติ** ตาม **มาตรา 87 และ 88**\n**พื้นที่อนุรักษ์ตามกฎหมายสัตว์ป่า**\n- **เขตรักษาพันธุ์สัตว์ป่า (Wildlife Sanctuary)** เข้มงวดที่สุด เทียบระดับ 1 ของ IUCN **มาตรา 47** เป็นแหล่งอาศัยปลอดภัยของสัตว์ป่า **มาตรา 54–55** ห้ามยึดถือครอบครองที่ดิน ก่อสร้าง แผ้วถาง เผาป่า ห้ามล่าสัตว์และเก็บของป่าทุกชนิด (เช่น รังผึ้ง) การเข้าศึกษาต้องได้รับอนุญาตเป็นกรณี และต้องมีเจ้าหน้าที่นำทางเสมอ\n- **เขตห้ามล่าสัตว์ป่า (Non-Hunting Area)** เข้มงวดรองลงมา คุ้มครองแหล่งอาศัยและหากินของสัตว์ป่าบางชนิด ห้ามล่าชนิดที่ระบุและห้ามทำลายทรัพยากรที่กระทบการดำรงชีวิตของสัตว์ป่า นิยามดั้งเดิมอยู่ในกฎหมายฉบับเก่า (พ.ศ. 2535 มาตรา 42) ส่วนฉบับปัจจุบัน **มาตรา 45** ให้คณะกรรมการสงวนและคุ้มครองสัตว์ป่าประกาศ ขยาย หรือเพิกถอนเขตได้ต่อไป\n**5. ชั้นคุณภาพลุ่มน้ำ (มติคณะรัฐมนตรี)**\nการกำหนดลุ่มน้ำ **ไม่ได้อยู่ใน พ.ร.บ.ใดเลย** แต่กำหนดโดย **มติคณะรัฐมนตรี** ซึ่งมีค่าบังคับให้หน่วยงานรัฐต้องปฏิบัติตาม (ออกหลายฉบับช่วงปี พ.ศ. 2525 ถึง 2538) ทำให้ในการใช้กฎหมายป่าไม้ต้องนำมติเหล่านี้มาพิจารณาซ้อนเสมอ แบ่งเป็น 5 ชั้น\n- **ชั้น 1A** ต้นน้ำบริสุทธิ์ **ห้ามใช้ประโยชน์ทุกกรณี** ต้องระงับใบอนุญาตทำไม้เดิม และผู้บุกรุกหลังปี พ.ศ. 2530 ต้องอพยพออก\n- **ชั้น 1B** ผ่อนปรนเล็กน้อยจาก 1A\n- **ชั้น 2** ต้นน้ำระดับรอง ใช้ประโยชน์ยากมาก แต่เข้มงวดน้อยกว่าชั้น 1\n- **ชั้น 3, 4, 5** เริ่มเปิดให้ใช้ประโยชน์ ชั้น 3 ทำเหมืองแร่ ทำไม้ หรือปลูกพืชได้แต่คุมเข้ม ชั้น 4 ป่าถูกบุกรุกไปทำไร่เป็นส่วนใหญ่ ชั้น 5 เป็นที่ราบหรือเนินลาดที่ประชาชนใช้ทำเกษตรและอยู่อาศัยแล้ว\n**6. กรณีศึกษา: เหมืองแร่อมก๋อย (ความทับซ้อนของกฎหมาย)**\nพื้นที่ถูกตีความว่าเป็น \"ป่าเสื่อมโทรม\" ตาม พ.ร.บ.ป่าสงวนแห่งชาติ ซึ่งเปิดให้เอกชนขอทำประโยชน์ได้ และของป่าตามกฎหมายนี้รวมแร่ จึงมีความพยายามขอสัมปทานเหมืองแร่ แต่พื้นที่เดียวกันทับซ้อนกับ **ลุ่มน้ำชั้น 1A** ซึ่งห้ามทำกิจกรรมทุกกรณี จึงมีการออกมติคณะรัฐมนตรีฉบับพิเศษมา \"อนุโลม\" ให้ทำเหมืองแร่ในลุ่มน้ำชั้น 1 ได้ สุดท้ายโครงการไม่เกิดขึ้นจริง เพราะรายงาน EIA ถูกศาลเพิกถอน เนื่องจากกระบวนการรับฟังความคิดเห็นไม่ชอบ (ให้ชาวบ้านกลุ่มชาติพันธุ์ที่พูดและอ่านเขียนภาษาไทยไม่ได้เป็นผู้ลงนามรับรองเอกสาร) บทเรียนคือ การใช้ประโยชน์ในพื้นที่ป่าต้องตรวจกฎหมายหลายฉบับประกอบกัน ทั้ง พ.ร.บ.ป่าไม้ พ.ร.บ.ป่าสงวนแห่งชาติ พ.ร.บ.แร่ และมติคณะรัฐมนตรีเรื่องชั้นคุณภาพลุ่มน้ำ\nกฎหมายป่าไม้ทั้ง 5 ฉบับเป็น **กฎหมายเฉพาะด้าน (Sectoral Laws)** เมื่อมีข้อขัดแย้งหรือช่องว่างต้องย้อนกลับไปที่กรอบแม่บท คือ สิทธิและหน้าที่ตามรัฐธรรมนูญ (สิทธิชุมชนในการมีส่วนร่วมจัดการ บำรุงรักษา และได้ประโยชน์จากทรัพยากร) กับ พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535\n**ทบทวนกฎหมายที่เรียนในคาบนี้**\n- พ.ร.บ.ป่าไม้ พ.ศ. 2484 พ.ร.บ.ป่าสงวนแห่งชาติ พ.ศ. 2507 พ.ร.บ.ป่าชุมชน พ.ศ. 2562\n- พ.ร.บ.อุทยานแห่งชาติ พ.ศ. 2562 **มาตรา 19, 20 และ 22**\n- พ.ร.บ.สงวนและคุ้มครองสัตว์ป่า พ.ศ. 2562 **มาตรา 32, 45, 47, 54–55, 87 และ 88**\n- มติคณะรัฐมนตรีว่าด้วยชั้นคุณภาพลุ่มน้ำ (1A ถึง 5) อนุสัญญา CITES และ IUCN Protected Area\n**จุดที่ควรจำ:** ป่าในกฎหมายไทยคือที่ดินที่ไม่มีเอกสารสิทธิเอกชน ต่างจากนิยาม FAO ป่าสงวนใช้กฎกระทรวงและเปิดให้ทำเหมืองได้ ส่วนอุทยานใช้พระราชกฤษฎีกาที่สูงกว่า จึงยกเลิกสัมปทานเดิมได้ และต้องตรวจมติคณะรัฐมนตรีเรื่องลุ่มน้ำทุกครั้ง"
+ },
+ {
+  "n": 15,
+  "title": "กฎหมายว่าด้วยอากาศสะอาด",
+  "video": "gZJMk8cMuWc",
+  "text": "**ภาพรวม:** คาบสุดท้ายว่าด้วยกฎหมายอากาศสะอาด ตั้งแต่ความจำเป็นของกฎหมาย สาเหตุของมลพิษทางอากาศ นิยามในร่าง พ.ร.บ.บริหารจัดการเพื่ออากาศสะอาด กฎหมายเฉพาะด้านที่มีมาก่อน ไปจนถึงหัวใจของร่างกฎหมายคือการรับรองสิทธิในอากาศสะอาด และกลไกสำคัญอื่น ๆ\n**1. ความจำเป็นในการมีกฎหมายอากาศสะอาด**\n(1) ปัญหาฝุ่นเป็นปัญหาระดับชาติที่เกิดซ้ำและเรื้อรังสะสมกว่า 10 ถึง 20 ปี (เห็นข้อมูลชัดตั้งแต่ราวปี พ.ศ. 2550)\n(2) **ก๊าซโอโซนพื้นผิว (O3)** ไม่ใช่ออกซิเจนที่ควรสูดดม แต่เป็นก๊าซพิษ และรายงานของกรมควบคุมมลพิษระบุว่าโอโซนกับฝุ่นละอองขนาดเล็กเป็นภัยร้ายแรงที่สุดต่อสุขภาพประชาชนในปัจจุบัน\n(3) ฝุ่นควันเป็น **มลพิษข้ามพรมแดน** ภูมิภาคอาเซียนมี **อนุสัญญาอาเซียนว่าด้วยมลพิษจากหมอกควันข้ามแดน (ASEAN Agreement on Transboundary Haze Pollution)** มาราว 20 ปีแล้ว\n(4) ภาคเหนือรุนแรงที่สุด โดยเฉพาะเชียงใหม่ เชียงราย และแม่ฮ่องสอน บางช่วงค่า PM 2.5 ทะลุ 800 ถึง 900 ไมโครกรัมต่อลูกบาศก์เมตร\n(5) กระทบสุขภาพ (โรคทางเดินหายใจ ภูมิแพ้ โรคร้ายแรง) เหตุการณ์ที่บุคคลผู้มีสุขภาพดีและออกกำลังกายกลางแจ้งเสียชีวิตเพราะฝุ่นเป็นจุดเปลี่ยนให้สังคมผลักดันกฎหมายจริงจัง และสร้างต้นทุนชีวิตเพิ่ม เพราะต้องซื้อหน้ากากหรือเครื่องฟอกอากาศซึ่งไม่ทุกครอบครัวเข้าถึงได้\n(6) **ข้อจำกัดของกฎหมายเดิม** ในอดีตแก้ด้วยนโยบายฉุกเฉิน คำสั่งทางปกครอง หรือมติคณะรัฐมนตรี ซึ่งไม่เป็นระบบและไม่ยั่งยืน ส่วนกฎหมายเฉพาะด้านมีลักษณะ **แยกส่วน (Fragmented)** ควบคุมเฉพาะแหล่งกำเนิดของตนและไม่ได้ออกแบบมาแก้ PM 2.5 โดยตรง ผู้คัดค้านช่วงแรกเห็นว่าแค่ออกกฎหมายลำดับรองกำหนดค่ามาตรฐานตาม พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อม 2535 ก็เพียงพอ แต่ร่างฉบับใหม่มีเหตุผลเพื่อ **บูรณาการ** การจัดการแหล่งกำเนิดทุกประเภทเป็นระบบเดียว และรับรอง **สิทธิในอากาศสะอาด** ให้สอดคล้องหลักสิทธิมนุษยชนสากล\n**2. สาเหตุของมลพิษทางอากาศ**\n(1) **แหล่งกำเนิดปฐมภูมิ (Primary)** ปล่อยโดยตรง เช่น ควันรถและการคมนาคม การเผาไหม้ผลิตไฟฟ้าจากเชื้อเพลิงฟอสซิล การเผาในที่โล่งภาคเกษตร อุตสาหกรรม และการก่อสร้าง\n(2) **แหล่งกำเนิดทุติยภูมิ (Secondary)** ฝุ่นที่เกิดจาก **สารตั้งต้น** (ซัลเฟอร์ ไนโตรเจน แอมโมเนีย) ที่ลอยขึ้นไปทำปฏิกิริยาเคมีในบรรยากาศจนกลายเป็น PM 2.5\nโรงไฟฟ้าเชื้อเพลิงฟอสซิลสร้างผลกระทบ **แบบทวีคูณ (Double Effect)** เพราะทั้งปล่อยฝุ่นควันปฐมภูมิ และปล่อยซัลเฟอร์กับไนโตรเจนเป็นสารตั้งต้นให้เกิดฝุ่นทุติยภูมิซ้ำ ธรรมชาติก็มีส่วนก่อ เช่น ภูเขาไฟ ฝุ่นทะเลทราย ไฟป่า แต่ปัญหาไฟป่าในไทยมีข้อถกเถียงเรื่อง \"ชิงเผา\" ตามภูมิปัญญาดั้งเดิมในการจัดการเชื้อเพลิงก่อนหน้าแล้ง ซึ่งขัดกับนโยบายห้ามเผา (Zero Burn) ของรัฐในช่วงวิกฤต\n**3. นิยามในร่าง พ.ร.บ.บริหารจัดการเพื่ออากาศสะอาด**\n(1) **\"อากาศสะอาด\"** คืออากาศที่ไม่มีสารมลพิษ หรือมีได้แต่ไม่เกิน **มาตรฐานคุณภาพอากาศสะอาด** ที่คณะกรรมการประกาศ ภาคประชาชนและนักวิชาการวิจารณ์ว่าค่ามาตรฐานไม่ควรให้คณะกรรมการรัฐกำหนดกันเอง แต่ควรอิงมาตรฐานสากลขององค์การอนามัยโลก (WHO)\n(2) **\"สารมลพิษทางอากาศ\"** เขียนกว้างมากครอบคลุมไอเสีย ไอระเหย กลิ่น ควัน ก๊าซ เขม่า ฝุ่นละออง ละอองลอย เถ้าถ่าน โดยมีคีย์เวิร์ดว่า **\"อาจส่งผลกระทบต่อคุณภาพอากาศ สุขภาพของประชาชน และสวัสดิภาพของสาธารณะ\"** คำว่า \"สวัสดิภาพของสาธารณะ\" ครอบคลุมความปลอดภัยของคนหมู่มาก เช่น ฝุ่นหนาจนบดบังทัศนวิสัยอันตรายต่อการขับรถและการบินขึ้นลงของเครื่องบินพาณิชย์\n**กฎหมายเฉพาะด้านที่มีมาก่อน (Sectoral Laws)** ได้แก่ กลุ่มอุตสาหกรรม (พ.ร.บ.โรงงาน พ.ศ. 2535 และ พ.ร.บ.มาตรฐานผลิตภัณฑ์อุตสาหกรรม พ.ศ. 2511) กลุ่มคมนาคมขนส่ง (พ.ร.บ.รถยนต์ พ.ร.บ.ขนส่งทางบก และ พ.ร.บ.จราจรทางบก ทั้งสามฉบับ พ.ศ. 2522 ควบคุมยานพาหนะ ตรวจสภาพรถ ควันดำ ท่อไอเสีย) และกลุ่มอาคารและการก่อสร้าง (พ.ร.บ.ควบคุมอาคาร พ.ศ. 2522 พร้อมกฎหมายลำดับรองควบคุมมลพิษจากอาคาร)\n**4. การรับรองสิทธิในอากาศสะอาด (หัวใจของร่างกฎหมาย)**\nร่างกฎหมายรับหลักสิทธิมนุษยชนทางสิ่งแวดล้อม (Environmental Human Rights) มาใช้ แบ่งเป็น 2 มิติ\n**(1) สิทธิเชิงเนื้อหา (Substantive Rights)** คือสิทธิที่ประชาชน \"มี\"\n- **ร่างมาตรา 6** รับรองสิทธิของบุคคล ชุมชน และประชาชนที่จะดำรงชีวิตด้วยอากาศสะอาด โดยอากาศต้องไม่ส่งผลร้ายต่อชีวิตและไม่เสียหายต่อการประกอบอาชีพ\n- **ร่างมาตรา 7 และนิยามมาตรา 4** คุ้มครองพิเศษแก่ **กลุ่มเปราะบาง** ได้แก่ เด็ก หญิงมีครรภ์ ผู้สูงอายุ ผู้ป่วยโรคทางเดินหายใจ และผู้ที่ต้องทำงานกลางแจ้ง (เช่น รปภ. พนักงานโบกรถ ตำรวจจราจร) ให้มีสิทธิได้รับการตรวจสุขภาพที่เหมาะสมกับความเสี่ยง เฝ้าระวัง และรักษาพยาบาลจากโรงพยาบาลของรัฐ **โดยไม่เสียค่าใช้จ่าย** ซึ่งไม่ใช่ความไม่เสมอภาค แต่เป็นการคุ้มครองผู้เสี่ยงสูงกว่าให้เหมาะสม\n**(2) สิทธิเชิงกระบวนการ (Procedural Rights)** เป็น **หลักประกันว่าสิทธิเชิงเนื้อหาจะเป็นจริง** ตามร่างมาตรา 8 และมาตรา 9 มี 3 ประการ\n- **สิทธิที่จะรู้และเข้าถึงข้อมูล (Right to Know)** รู้ไม่ใช่แค่ค่าฝุ่นรายวัน แต่รวมถึงสาเหตุ (มลพิษมาจากไหน) และผลกระทบทางสุขภาพ ประชาชนมีสิทธิร้องขอให้หน่วยงานรัฐจัดทำ **EHIA** ทั้งระดับนโยบาย พื้นที่ และโครงการ เพื่อเฝ้าระวังล่วงหน้า\n- **สิทธิในการมีส่วนร่วม (Right to Participate)** ตั้งแต่ระดับนโยบาย แผนงาน ไปจนถึงโครงการที่อาจก่อผลกระทบ จุดเด่นคือเปิดให้ **ผู้ที่เกี่ยวข้องหรือได้รับผลกระทบในวงกว้าง** แสดงความเห็นและลงมติได้ แม้ไม่ได้อยู่ในรัศมีโครงการ (เช่น โครงการอยู่ระยองแต่ควันกระทบคนนนทบุรี) รัฐต้องนำความเห็นไปประกอบการพิจารณาก่อนอนุมัติ\n- **สิทธิในการเข้าถึงความยุติธรรม (Access to Justice)** บุคคลทั่วไปหรือองค์กรเอกชนด้านสิ่งแวดล้อม (NGOs) เป็นตัวแทนฟ้องได้ทั้งคดีแพ่ง อาญา และปกครอง มี **การฟ้องคดีแบบกลุ่ม (Class Action)** ซึ่งช่วยลดต้นทุน และมีสิทธิขอ **คำสั่งคุ้มครองชั่วคราว** ให้ศาลสั่งระงับกิจกรรมก่อมลพิษร้ายแรงไว้ก่อน\n**(3) การคุ้มครองผู้แจ้งเหตุ (Anti-SLAPP ร่างมาตรา 37/4)** หากประชาชนหรือ NGO ร้องเรียนผู้ก่อมลพิษ **โดยสุจริต** จะได้รับการคุ้มครองไม่ต้องรับผิดทางแพ่ง อาญา และปกครอง และหากถูกนายทุนฟ้องกลับ รัฐต้องจัดหาความช่วยเหลือทางกฎหมายให้ เพื่อไม่ให้ประชาชนหวาดกลัวที่จะปกป้องสิทธิ\n**5. กลไกสำคัญอื่นของร่างกฎหมาย**\n(1) **การจำแนกพื้นที่มลพิษ** คณะกรรมการประกาศ **เขตเฝ้าระวังมลพิษ** (คุณภาพอากาศไม่เป็นไปตามมาตรฐาน) และ **เขตประสบมลพิษ** (เกินเกณฑ์จนเป็นอันตราย) เพื่อสั่งการแก้ไขได้ทันที โดยให้อำนาจเลขาธิการส่วนกลางประกาศแทนหากท้องถิ่นเพิกเฉย\n(2) **มลพิษข้ามพรมแดนและห่วงโซ่อุปทาน** ขยายความรับผิดถึงผู้ก่อมลพิษนอกประเทศที่กระทบไทย และบังคับให้ธุรกิจตรวจสอบและรายงานห่วงโซ่อุปทานของตน (คล้ายหลัก HRDD) ว่าสินค้าเกษตรหรือวัตถุดิบ (เช่น ข้าวโพดเลี้ยงสัตว์) ไม่ได้มาจากการเผาทำลายป่า หากฝ่าฝืน กระทรวงพาณิชย์สั่งห้ามนำเข้าหรือส่งออกสินค้านั้นได้\n(3) **กองทุนอากาศสะอาดและมาตรการเศรษฐศาสตร์** เงินกองทุน **ไม่ต้องนำส่งเป็นรายได้แผ่นดิน** ใช้เยียวยาผู้ได้รับผลกระทบและสนับสนุนค่าใช้จ่ายการฟ้องคดีสิ่งแวดล้อม มีมาตรการจูงใจ เช่น ภาษีหรือค่าธรรมเนียมอากาศสะอาด และระบบซื้อขายโอนสิทธิการปล่อยมลพิษ (Cap and Trade)\n(4) **การลดภาระการพิสูจน์ (Burden of Proof)** ในคดีแพ่ง ผู้เสียหายเพียงพิสูจน์ว่าความเสียหาย **\"อาจมาจาก\"** การกระทำของผู้ก่อมลพิษ ภาระการพิสูจน์จะตกแก่ฝั่งผู้ก่อมลพิษ หากหักล้างไม่ได้ จำเลยทั้งหมดต้องร่วมกันชดใช้ค่าเสียหายและฟื้นฟูทรัพยากร\n**ทบทวนกฎหมายที่เรียนในคาบนี้**\n- ร่าง พ.ร.บ.บริหารจัดการเพื่ออากาศสะอาด **ร่างมาตรา 4** (นิยามกลุ่มเปราะบาง) **มาตรา 6 และ 7** (สิทธิเชิงเนื้อหา) **มาตรา 8 และ 9** (สิทธิเชิงกระบวนการ) **มาตรา 37/4** (Anti-SLAPP)\n- พ.ร.บ.โรงงาน พ.ศ. 2535 พ.ร.บ.มาตรฐานผลิตภัณฑ์อุตสาหกรรม พ.ศ. 2511 พ.ร.บ.รถยนต์ ขนส่งทางบก จราจรทางบก พ.ศ. 2522 และพ.ร.บ.ควบคุมอาคาร พ.ศ. 2522\n- อนุสัญญาอาเซียนว่าด้วยมลพิษจากหมอกควันข้ามแดน และ พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535\n**จุดที่ควรจำ:** ฝุ่นมีแหล่งปฐมภูมิและทุติยภูมิ ร่างกฎหมายมุ่งบูรณาการกฎหมายเฉพาะด้านที่แยกส่วน รับรองสิทธิเชิงเนื้อหาและเชิงกระบวนการ (Right to Know, Participate, Access to Justice) คุ้มครองผู้แจ้งเหตุด้วย Anti-SLAPP และลดภาระการพิสูจน์ให้ผู้เสียหาย"
+ }
+];
+
+const HIGHLIGHT_TERMS = [
+  "Precautionary Principle",
+  "Prevention Principle",
+  "No-harm Principle",
+  "Polluter-Pays Principle",
+  "Sustainable Development",
+  "Due Diligence",
+  "Command-and-Control",
+  "Cap and Trade",
+  "Carbon Leakage",
+  "Carbon Budget",
+  "Grandfathering",
+  "Just Transition",
+  "Climate Justice",
+  "Access to Justice",
+  "Right to Know",
+  "Anti-SLAPP",
+  "SLAPP",
+  "Soft Law",
+  "Persistent Objector",
+  "Strict Liability",
+  "Non-point Source",
+  "Point Source",
+  "Traceability",
+  "IUU Fishing",
+  "Bottom-up",
+  "Top-down",
+  "Self-Differentiation",
+  "Ambient Standard",
+  "Point Source Standard",
+  "หลักการระวังไว้ก่อน",
+  "หลักการป้องกัน",
+  "หลักผู้ก่อมลพิษเป็นผู้จ่าย",
+  "ความรับผิดเด็ดขาด",
+  "การเปลี่ยนผ่านที่เป็นธรรม",
+  "สิทธิในอากาศสะอาด",
+  "ชั้น 1A",
+  "ลุ่มน้ำชั้น 1A"
+];
+function highlightText(escapedHtml){
+  let out = escapedHtml;
+  if (HIGHLIGHT_TERMS.length) {
+    const pattern = HIGHLIGHT_TERMS
+      .slice().sort((a, b) => b.length - a.length)
+      .map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+      .join('|');
+    out = out.replace(new RegExp('(' + pattern + ')', 'g'), '<mark class="hl">$1</mark>');
+  }
+  return out;
+}
+
+/* Bold any Thai-quoted phrase, e.g. "ผู้มีประโยชน์ได้เสีย" -> <strong>"..."</strong> */
+function boldQuotes(escapedHtml){
+  return escapedHtml.replace(/"([^"\n]+)"/g, '<strong>"$1"</strong>');
+}
+/* Markdown-style **bold** -> <strong>, for emphasizing specific มาตรา in ทบทวน summaries */
+function boldStars(escapedHtml){
+  return escapedHtml.replace(/\*\*([\s\S]+?)\*\*/g, '<strong>$1</strong>');
+}
+
+/* ---------- มาตราซ่อนแอบ: คลิกมาตราในเนื้อหาบรรยายเพื่อดูตัวบทเต็ม ---------- */
+function esc(s){
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+const ART_REF_RE = /(?:มาตรา|ม\.)\s*(\d+(?:\/\d+)?(?:\s*(?:,|-|–)\s*\d+(?:\/\d+)?)*)/g;
+function expandArtNums(raw){
+  const out = [];
+  raw.split(/\s*,\s*/).forEach(p=>{
+    const m = p.trim().match(/^(\d+)\s*(?:-|–)\s*(\d+)$/);
+    if(m){ for(let i=parseInt(m[1],10); i<=parseInt(m[2],10); i++) out.push(String(i)); }
+    else out.push(p.trim());
+  });
+  return out;
+}
+/* ตัวบทมาตราเต็มของ พ.ร.บ.จัดตั้งศาลปกครองและวิธีพิจารณาคดีปกครอง พ.ศ. 2542 ที่อ้างถึงในเนื้อหาบรรยาย */
+const ARTICLE_TEXT = {};
+function linkArticles(html){
+  return html.replace(ART_REF_RE, (whole, numsRaw)=>{
+    const known = expandArtNums(numsRaw).filter(a => ARTICLE_TEXT[a]);
+    if(!known.length) return whole;
+    return '<span class="art-ref" data-arts="'+known.join(',')+'" onclick="toggleArtFull(this)" tabindex="0" role="button">'+whole+'</span><span class="art-full"></span>';
+  });
+}
+function toggleArtFull(refEl){
+  const full = refEl.nextElementSibling;
+  if(!full.dataset.loaded){
+    full.innerHTML = refEl.dataset.arts.split(',').map(a=>
+      '<span class="art-full-item"><span class="art-full-num">ม.'+esc(a)+' (พ.ร.บ.จัดตั้งศาลปกครองฯ)</span>'+esc(ARTICLE_TEXT[a] || 'ไม่พบตัวบท')+'</span>'
+    ).join('');
+    full.dataset.loaded = '1';
+  }
+  full.classList.toggle('open');
+  refEl.classList.toggle('active');
+}
+
+/* ---- Web Speech TTS (reads whichever lecture row is currently open) ---- */
+const TTS = (function(){
+  const supported = typeof window !== 'undefined' && 'speechSynthesis' in window;
+  let queue = [], qIdx = 0, rate = 1;
+  function pickThaiVoice(){
+    const vs = window.speechSynthesis.getVoices();
+    return vs.find(v => v.lang && v.lang.toLowerCase().startsWith('th')) || vs[0];
+  }
+  function speakNext(){
+    if(qIdx >= queue.length){ setBtns('idle'); return; }
+    const u = new SpeechSynthesisUtterance(queue[qIdx]);
+    const v = pickThaiVoice();
+    if(v) u.voice = v;
+    u.lang = (v && v.lang) || 'th-TH';
+    u.rate = rate;
+    u.onend = ()=>{ qIdx++; speakNext(); };
+    u.onerror = ()=>{ qIdx++; speakNext(); };
+    window.speechSynthesis.speak(u);
+  }
+  function setBtns(state){
+    const p = document.getElementById('tts-play');
+    const pa = document.getElementById('tts-pause');
+    const s = document.getElementById('tts-stop');
+    if(!p) return;
+    if(state === 'playing'){
+      p.style.display = 'none'; pa.style.display = 'inline-flex'; s.style.display = 'inline-flex';
+      pa.innerHTML = '<span class="tts-ico">⏸</span> หยุดชั่วคราว';
+    } else if(state === 'paused'){
+      pa.innerHTML = '<span class="tts-ico">▶</span> เล่นต่อ';
+    } else {
+      p.style.display = 'inline-flex'; pa.style.display = 'none'; s.style.display = 'none';
+    }
+  }
+  function play(){
+    if(!supported) return;
+    if(window.speechSynthesis.paused){
+      window.speechSynthesis.resume();
+      setBtns('playing');
+      return;
+    }
+    stop();
+    const openRow = document.querySelector('.lecture-row.open');
+    if(!openRow) return;
+    const titleEl = openRow.querySelector('.lecture-title');
+    const bodyEl = openRow.querySelector('.lecture-body');
+    if(!bodyEl) return;
+    const paras = bodyEl.textContent.split(/\n\s*\n/).map(s=>s.trim()).filter(Boolean);
+    queue = titleEl ? [titleEl.textContent.trim(), ...paras] : paras;
+    if(queue.length === 0) return;
+    qIdx = 0;
+    setBtns('playing');
+    speakNext();
+  }
+  function pauseToggle(){
+    if(!supported) return;
+    if(window.speechSynthesis.paused){
+      window.speechSynthesis.resume();
+      setBtns('playing');
+    } else if(window.speechSynthesis.speaking){
+      window.speechSynthesis.pause();
+      setBtns('paused');
+    }
+  }
+  function stop(){
+    if(!supported) return;
+    window.speechSynthesis.cancel();
+    queue = []; qIdx = 0;
+    setBtns('idle');
+  }
+  function setRate(r){ rate = r; }
+  return {supported, play, pauseToggle, stop, setRate};
+})();
+(function initTTS(){
+  const play = document.getElementById('tts-play');
+  const pause = document.getElementById('tts-pause');
+  const stop = document.getElementById('tts-stop');
+  const rate = document.getElementById('tts-rate');
+  const bar = document.getElementById('tts-bar');
+  if(bar) bar.style.display = TTS.supported ? 'flex' : 'none';
+  if(play) play.addEventListener('click', ()=> TTS.play());
+  if(pause) pause.addEventListener('click', ()=> TTS.pauseToggle());
+  if(stop) stop.addEventListener('click', ()=> TTS.stop());
+  if(rate) rate.addEventListener('change', ()=> TTS.setRate(parseFloat(rate.value)));
+  if('speechSynthesis' in window){
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = ()=>{ window.speechSynthesis.getVoices(); };
+  }
+})();
+
+function figureHtml(src, caption){
+  return `<figure class="lecture-diagram"><img src="${src}" alt="${(caption||'').replace(/</g,'&lt;')}" loading="lazy">${caption ? `<figcaption>${caption.replace(/</g,'&lt;')}</figcaption>` : ''}</figure>`;
+}
+function videoHtml(id, n){
+  return `<div class="lecture-video"><div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${id}" title="วิดีโอประกอบบรรยายครั้งที่ ${n}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="video-credit">📺 วิดีโอบันทึกการบรรยายครั้งนี้ — จากช่อง <a href="https://www.youtube.com/@CoolUncleLaw/videos" target="_blank" rel="noopener">Cool Uncle Law</a></div></div>`;
+}
+function renderLectures(){
+  const el = document.getElementById('lectureList');
+  el.innerHTML = LECTURES.map(l => l.text ? `
+    <div class="lecture-row" id="lec-${l.n}">
+      <div class="lecture-head" onclick="toggleLecture(${l.n})">
+        <div class="lecture-num">${l.n}</div>
+        <div class="lecture-title">${l.title}</div>
+        <div class="lecture-toggle">▾</div>
+      </div>
+      <div class="lecture-body">${l.image ? figureHtml(l.image, l.imageCaption) : ''}${l.video ? videoHtml(l.video, l.n) : ''}${(() => {
+        let body = linkArticles(highlightText(boldQuotes(boldStars(l.text.replace(/</g,'&lt;')))));
+        if (l.inlineMedia) Object.keys(l.inlineMedia).forEach(marker => { body = body.split(marker).join(l.inlineMedia[marker]); });
+        return body;
+      })()}</div>
+    </div>
+  ` : `
+    <div class="lecture-row pending">
+      <div class="lecture-head">
+        <div class="lecture-num">${l.n}</div>
+        <div class="lecture-title">${l.title || ('บรรยายครั้งที่ ' + l.n)}</div>
+        <span class="lecture-pending">⏳ รอสรุปเนื้อหา</span>
+      </div>
+    </div>
+  `).join('');
+}
+function toggleLecture(n){
+  const row = document.getElementById('lec-' + n);
+  if (row) {
+    TTS.stop();
+    row.classList.toggle('open');
+    playHoverSound();
+  }
+}
+renderLectures();
+
+
+</script>
+<script>
+/* ================================================================
+   THEME SYSTEM (light / dark / horror) — persisted site-wide via
+   localStorage key "codex-theme" (shared with every other page).
+   ================================================================ */
+const THEME_KEY = 'codex-theme';
+
+function setTheme(theme){
+  if (theme === 'light') { document.documentElement.removeAttribute('data-theme'); }
+  else { document.documentElement.setAttribute('data-theme', theme); }
+  try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
+  updateThemeToggleUI(theme);
+  if (theme === 'horror') { playHorrorBgm(); startGhostRotation(); playHooSound(); scheduleDogHowl(); }
+  else { stopGhostRotation(); stopHorrorBgm(); stopDogHowl(); }
+}
+const DRONE_MUTE_KEY = 'codex-drone-muted';
+function playHorrorBgm(){
+  const bgm = document.getElementById('horror-bgm');
+  if (!bgm) return;
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  bgm.muted = false;
+  bgm.volume = muted ? 0 : 0.35;
+  const p = bgm.play();
+  if (p && p.catch) p.catch(() => { bgm.load(); bgm.play().catch(() => {}); });
+}
+function stopHorrorBgm(){
+  const bgm = document.getElementById('horror-bgm');
+  if (bgm) bgm.pause();
+}
+let dogHowlTimer = null;
+function scheduleDogHowl(){
+  clearTimeout(dogHowlTimer);
+  const delay = 18000 + Math.random() * 22000; // every ~18-40s
+  dogHowlTimer = setTimeout(() => { playDogHowl(); scheduleDogHowl(); }, delay);
+}
+function playDogHowl(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const howl = document.getElementById('dog-howl');
+  if (!howl) return;
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  if (muted) return;
+  howl.currentTime = 0;
+  howl.volume = 0.4;
+  howl.play().catch(() => {});
+  setTimeout(() => { if (!howl.paused) howl.pause(); }, 3000);
+}
+function stopDogHowl(){
+  clearTimeout(dogHowlTimer); dogHowlTimer = null;
+  const howl = document.getElementById('dog-howl');
+  if (howl) howl.pause();
+}
+function toggleDroneMute(btn){
+  let muted = false;
+  try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+  muted = !muted;
+  try { localStorage.setItem(DRONE_MUTE_KEY, muted ? '1' : '0'); } catch(e){}
+  if (btn) btn.textContent = muted ? '🔇' : '🔊';
+  const bgm = document.getElementById('horror-bgm');
+  if (bgm) bgm.volume = muted ? 0 : 0.35;
+}
+function updateThemeToggleUI(theme){
+  document.querySelectorAll('.theme-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.themeBtn === theme);
+  });
+}
+const GHOST_IMAGES = [
+  'pics/Pixel/icon/ตะเคียน 1.png','pics/Pixel/icon/ตะเคียน 2.png',
+  'pics/Pixel/icon/ตานี 2.png',
+  'pics/Pixel/icon/นางกวัก 1.png','pics/Pixel/icon/นางกวัก 2.png','pics/Pixel/icon/นางกวัก 3.png',
+  'pics/Pixel/icon/ปอป 1.png','pics/Pixel/icon/ปอป 2.png','pics/Pixel/icon/ปอป 3.png',
+  'pics/Pixel/icon/ปอปชาย 1.png','pics/Pixel/icon/ปอปชาย 2.png',
+  'pics/Pixel/icon/ผีแมว 1.png','pics/Pixel/icon/ผีแมว 2.png','pics/Pixel/icon/ผีแมว 3.png',
+  'pics/Pixel/icon/ผีโพง 1.png',
+  'pics/Pixel/icon/แม่นาค 1.png','pics/Pixel/icon/แม่นาค 2.png','pics/Pixel/icon/แม่นาค 3.png',
+  'pics/Pixel/icon/กระสือ_00.png','pics/Pixel/icon/กระสือ_01.png','pics/Pixel/icon/กระสือ_02.png',
+  'pics/Pixel/icon/กระสือ_10.png','pics/Pixel/icon/กระสือ_11.png','pics/Pixel/icon/กระสือ_12.png',
+  'pics/Pixel/icon/กระสือ_20.png','pics/Pixel/icon/กระสือ_21.png','pics/Pixel/icon/กระสือ_22.png',
+  'pics/Pixel/icon/กุมาร 1_00.png','pics/Pixel/icon/กุมาร 1_01.png','pics/Pixel/icon/กุมาร 1_02.png',
+  'pics/Pixel/icon/กุมาร 1_10.png','pics/Pixel/icon/กุมาร 1_11.png','pics/Pixel/icon/กุมาร 1_12.png',
+  'pics/Pixel/icon/กุมาร 1_21.png',
+  'pics/Pixel/icon/กุมาร 2_00.png','pics/Pixel/icon/กุมาร 2_01.png','pics/Pixel/icon/กุมาร 2_02.png',
+  'pics/Pixel/icon/กุมาร 2_10.png','pics/Pixel/icon/กุมาร 2_11.png','pics/Pixel/icon/กุมาร 2_12.png',
+  'pics/Pixel/icon/กุมาร 2_20.png','pics/Pixel/icon/กุมาร 2_21.png','pics/Pixel/icon/กุมาร 2_22.png',
+  'pics/Pixel/icon/ควายธนู_00.png','pics/Pixel/icon/ควายธนู_01.png','pics/Pixel/icon/ควายธนู_02.png',
+  'pics/Pixel/icon/ควายธนู_10.png','pics/Pixel/icon/ควายธนู_11.png','pics/Pixel/icon/ควายธนู_12.png',
+  'pics/Pixel/icon/ควายธนู_20.png','pics/Pixel/icon/ควายธนู_21.png','pics/Pixel/icon/ควายธนู_22.png',
+  'pics/Pixel/icon/ตานี_00.png','pics/Pixel/icon/ตานี_01.png','pics/Pixel/icon/ตานี_02.png',
+  'pics/Pixel/icon/ตานี_10.png','pics/Pixel/icon/ตานี_11.png','pics/Pixel/icon/ตานี_12.png',
+  'pics/Pixel/icon/ตานี_20.png','pics/Pixel/icon/ตานี_21.png','pics/Pixel/icon/ตานี_22.png',
+  'pics/Pixel/icon/ผีรวม 1_00.png','pics/Pixel/icon/ผีรวม 1_01.png','pics/Pixel/icon/ผีรวม 1_02.png',
+  'pics/Pixel/icon/ผีรวม 1_10.png','pics/Pixel/icon/ผีรวม 1_11.png','pics/Pixel/icon/ผีรวม 1_12.png',
+  'pics/Pixel/icon/ผีรวม 1_20.png','pics/Pixel/icon/ผีรวม 1_21.png','pics/Pixel/icon/ผีรวม 1_22.png',
+  'pics/Pixel/icon/ผีรวม 2_00.png','pics/Pixel/icon/ผีรวม 2_01.png','pics/Pixel/icon/ผีรวม 2_02.png',
+  'pics/Pixel/icon/ผีรวม 2_10.png','pics/Pixel/icon/ผีรวม 2_11.png','pics/Pixel/icon/ผีรวม 2_12.png',
+  'pics/Pixel/icon/ผีรวม 2_20.png','pics/Pixel/icon/ผีรวม 2_21.png','pics/Pixel/icon/ผีรวม 2_22.png',
+  'pics/Pixel/icon/ผีรวม 3_00.png','pics/Pixel/icon/ผีรวม 3_01.png','pics/Pixel/icon/ผีรวม 3_02.png',
+  'pics/Pixel/icon/ผีรวม 3_10.png','pics/Pixel/icon/ผีรวม 3_11.png','pics/Pixel/icon/ผีรวม 3_12.png',
+  'pics/Pixel/icon/ผีรวม 3_20.png','pics/Pixel/icon/ผีรวม 3_21.png','pics/Pixel/icon/ผีรวม 3_22.png',
+  'pics/Pixel/icon/ผีรวม 4_00.png','pics/Pixel/icon/ผีรวม 4_01.png','pics/Pixel/icon/ผีรวม 4_02.png',
+  'pics/Pixel/icon/ผีรวม 4_10.png','pics/Pixel/icon/ผีรวม 4_11.png','pics/Pixel/icon/ผีรวม 4_12.png',
+  'pics/Pixel/icon/ผีรวม 4_20.png','pics/Pixel/icon/ผีรวม 4_21.png','pics/Pixel/icon/ผีรวม 4_22.png',
+  'pics/Pixel/icon/ผีรวม 5_00.png','pics/Pixel/icon/ผีรวม 5_01.png','pics/Pixel/icon/ผีรวม 5_02.png',
+  'pics/Pixel/icon/ผีรวม 5_10.png','pics/Pixel/icon/ผีรวม 5_11.png','pics/Pixel/icon/ผีรวม 5_12.png',
+  'pics/Pixel/icon/ผีรวม 5_20.png','pics/Pixel/icon/ผีรวม 5_21.png','pics/Pixel/icon/ผีรวม 5_22.png',
+  'pics/Pixel/icon/ผีรวม 6_00.png','pics/Pixel/icon/ผีรวม 6_01.png','pics/Pixel/icon/ผีรวม 6_02.png',
+  'pics/Pixel/icon/ผีรวม 6_10.png','pics/Pixel/icon/ผีรวม 6_11.png','pics/Pixel/icon/ผีรวม 6_12.png',
+  'pics/Pixel/icon/ผีรวม 6_20.png','pics/Pixel/icon/ผีรวม 6_21.png','pics/Pixel/icon/ผีรวม 6_22.png',
+  'pics/Pixel/icon/ผีรวม 7_00.png','pics/Pixel/icon/ผีรวม 7_01.png','pics/Pixel/icon/ผีรวม 7_02.png',
+  'pics/Pixel/icon/ผีรวม 7_10.png','pics/Pixel/icon/ผีรวม 7_11.png','pics/Pixel/icon/ผีรวม 7_12.png',
+  'pics/Pixel/icon/ผีรวม 7_20.png','pics/Pixel/icon/ผีรวม 7_21.png','pics/Pixel/icon/ผีรวม 7_22.png',
+  'pics/Pixel/icon/ผีรวม 8_00.png','pics/Pixel/icon/ผีรวม 8_01.png','pics/Pixel/icon/ผีรวม 8_02.png',
+  'pics/Pixel/icon/ผีรวม 8_03.png','pics/Pixel/icon/ผีรวม 8_10.png','pics/Pixel/icon/ผีรวม 8_11.png',
+  'pics/Pixel/icon/ผีรวม 8_12.png','pics/Pixel/icon/ผีรวม 8_13.png','pics/Pixel/icon/ผีรวม 8_20.png',
+  'pics/Pixel/icon/ผีรวม 8_21.png','pics/Pixel/icon/ผีรวม 8_22.png','pics/Pixel/icon/ผีรวม 8_23.png',
+  'pics/Pixel/icon/ผีรวม 9_00.png','pics/Pixel/icon/ผีรวม 9_01.png','pics/Pixel/icon/ผีรวม 9_02.png',
+  'pics/Pixel/icon/ผีรวม 9_10.png','pics/Pixel/icon/ผีรวม 9_11.png','pics/Pixel/icon/ผีรวม 9_12.png',
+  'pics/Pixel/icon/ผีรวม 9_20.png','pics/Pixel/icon/ผีรวม 9_21.png','pics/Pixel/icon/ผีรวม 9_22.png',
+  'pics/Pixel/icon/ผีรวม 10_00.png','pics/Pixel/icon/ผีรวม 10_01.png','pics/Pixel/icon/ผีรวม 10_02.png',
+  'pics/Pixel/icon/ผีรวม 10_10.png','pics/Pixel/icon/ผีรวม 10_11.png','pics/Pixel/icon/ผีรวม 10_12.png',
+  'pics/Pixel/icon/ผีรวม 10_20.png','pics/Pixel/icon/ผีรวม 10_21.png','pics/Pixel/icon/ผีรวม 10_22.png',
+  'pics/Pixel/icon/ผีรวม 11_00.png','pics/Pixel/icon/ผีรวม 11_01.png','pics/Pixel/icon/ผีรวม 11_02.png',
+  'pics/Pixel/icon/ผีรวม 11_10.png','pics/Pixel/icon/ผีรวม 11_11.png','pics/Pixel/icon/ผีรวม 11_12.png',
+  'pics/Pixel/icon/ผีรวม 11_20.png','pics/Pixel/icon/ผีรวม 11_21.png','pics/Pixel/icon/ผีรวม 11_22.png',
+];
+const GHOST_PHRASES = [
+  "แบร่~","หลอกจ้า","อ่านให้ครบสิ","มาตรานี้ออกสอบนะ","เปิดฎีกาด้วย","จำผิดแล้ว","วรรคสองล่ะ?","ยังไม่จบ","อ่านใหม่","ข้ามไม่ได้",
+  "ตกแน่","สอบพรุ่งนี้แล้ว","ตีความสิ","อ้างมาตราให้ครบ","อย่ามั่ว","ฟ้องได้ไหม?","โมฆะนะ","เป็นโมฆียะ!","สิทธิของใคร?","หน้าที่ของใคร?",
+  "พิสูจน์ก่อน","ภาระการพิสูจน์อยู่ไหน?","ข้อเท็จจริงไม่พอ","กฎหมายใช้ไม่ได้","คนละฐาน","คนละกรณี","คำตอบยังไม่ครบ","ลืมข้อยกเว้น","มีบทเฉพาะกาล","ระวังมาตราแฝง",
+  "คิดใหม่","อ่านเชิงระบบ","อย่าท่องอย่างเดียว","เหตุผลล่ะ?","ฎีกาว่าไง?","อาจารย์ชอบถาม","อย่าปิดไฟ","ผีอ่านด้วย","ขอนั่งข้าง ๆ","พลิกหน้าเร็ว",
+  "หน้านี้สำคัญ","จำให้ได้","อย่าหลับ","อีกบทเดียว","อีกมาตราเดียว","อีกฎีกาเดียว","ตีสองแล้วนะ","กาแฟหมดแล้ว","น้ำแดงมีไหม?","กุมารหิว",
+  "ศาลยังไม่หลับ","ผู้พิพากษามองอยู่","เนติรออยู่","ธงคำตอบอยู่ไหน?","อย่าตอบกำปั้นทุบดิน","อย่าเดา","เขียนให้ครบองค์ประกอบ","หลักก่อน ข้อยกเว้นทีหลัง","อย่าลืมนิยาม","อ่านมาตราเต็ม",
+  "เช็กคำว่า \"ย่อม\"","เช็กคำว่า \"ต้อง\"","เช็กคำว่า \"อาจ\"","คนละเจตนา","คนละผลทางกฎหมาย","ยังไม่เข้าองค์ประกอบ","ฟังผีสิ","ผีเคยตกมาแล้ว","ผีซ่อมสามรอบ","ผีเป็นรุ่นพี่",
+  "ผีจบนิติแล้ว","ผีรอเพื่อน","อ่านดัง ๆ สิ","อย่าท่องผิด","อย่าจำเลขมั่ว","ตัวบทอยู่ไหน?","ข้อสอบยิ้มแล้ว","อาจารย์ยิ้มอยู่","คะแนนบินไปแล้ว","อย่าหาว่าผีไม่เตือน",
+  "ผีเปิดตำราให้","ผีปิดไฟนะ","หันหลังมาสิ","ข้างหลังมี...","เงียบจังเลย","ได้ยินไหม?","เปิดหน้าต่างทำไม?","ลมเย็นไหม?","ใครนั่งอีกตัว?","หนังสือขยับเอง",
+  "ดินสอหายอีกแล้ว","ปากกาหมึกหมด","ผีช่วยติว","ผีออกข้อสอบ","ผีให้คำใบ้","เจอกันในห้องสอบ","ถ้าจำได้...รอด","ถ้าจำไม่ได้...เจอกันคืนนี้","ใครอ่านหนังสือดึกคนเดียว ระวังผีหลอก","กุมารทองชอบน้ำแดง... แต่หัวใจสีแดงชอบคนเอาใจ ❤️👻",
+  "สอบเสร็จกินข้าวต้มไหม","สอบตกน่ากลัวกว่าผีหลอก","มาตรานี้ไม่ออกสอบ...","อาจารย์หลอกเก่งกว่าผี","เพื่อนยืมปากกา ยังไม่คืน","สิ่งศักดิ์สิทธิ์ สิ่งศักดิ์สิทธิ์ สิ่งศักดิ์สิทธิ์","ดาว เอาไฮไลท์พี่มาคืนด้วย","สอบเสร็จกินเบียร์","เดี๋ยวค่อยซ่อม","อกหักดีกว่าสอบตก",
+  "อย่าหันมามอง","อย่าลืมโอนค่ากาแฟ","Cool Uncle! Cool Uncle!","555 หัวเราะในชะตากรรม","จะสอบแล้วทำไมเพิ่งมาอ่าน","น้ำตาจิไหล","แบร่ แบร่~","เหงาไหม ถ้าเหงาผีจิออกมาเป็นเพื่อน","ไม่เปิดแอร์ทำไมหนาว... เพราะฉันอยู่ข้าง ๆ","นี่ไง",
+  "กลางวันทำอะไรไว้","เอาประมวลมาคืนเพื่อน","ไม่ต้องมาหานิติปรัชญาในเล่มนี้","ทำไมตอนเรียนไม่จด","อ่านซ้ำแล้ว","เมื่อกี้น้องเรียก... (แต่เราไม่มีน้อง)","แมวดำกระโดดข้ามแล้วนะ","ข้อสอบกำลังยิ้ม","เปิดผิดมาตราอีกแล้ว","ฎีกาอยู่คนละเล่ม",
+  "อาจารย์ไม่ใจดีเหมือนผี","ขอเปิดไฟหน่อย","หนังสือเปิดเองได้ด้วย","ปากกาหายอีกแล้ว","อย่าปิดหน้าต่าง","เมื่อคืนอ่านถึงไหนแล้ว","จำได้แค่นี้เหรอ","อ่านอีกหนึ่งรอบ","อีกห้าหน้าพอ","ไม่ง่วง... จริงเหรอ",
+  "อย่ามองกระจก","ใต้โต๊ะมีอะไร","ข้างหลังมีเก้าอี้ว่างไหม","เสียงใครพลิกหนังสือ","เงียบแบบนี้น่ากลัว","ไฟกะพริบแล้ว","ลมมาจากไหน","เปิดเพลงอ่านหนังสือสิ","นาฬิกาตีสามแล้ว","ขอไฮไลท์หน่อย",
+  "ไฮไลท์ผิดบรรทัด","ตัวบทไม่เคยโกหก","แต่เพื่อนโกหกว่าไม่ออกสอบ","เชื่อเพื่อนหรือเชื่อผี","ผีเคยสอบมาก่อน","ผีรู้ข้อสอบ... แต่ไม่บอก","อ่านไม่ทันก็ยิ้มไว้","จำเลขมาตราได้ไหม","จำชื่อวิชาได้ไหม","เข้าห้องผิดหรือเปล่า",
+  "นี่สอบวิชาอะไรนะ","เปิดประมวลผิดเล่ม","อย่าทำหน้าตกใจ","ผีตกใจเธอเหมือนกัน","อ่านไปก็ลืมไป","ท่องไปก็สลายไป","วันนี้มีบุญหรือยัง","ไหว้ครบหรือยัง","น้ำแดงหมดแล้ว","ขออีกขวด",
+  "ธูปหมดหรือยัง","ขอให้ผ่านด้วยเถอะ","ถ้าผ่านจะมาแก้บน","ถ้าไม่ผ่าน... เจอกันซ่อม","ซ่อมก็สนุกดี... มั้ง","รุ่นพี่รออยู่","ผีก็รออยู่","อย่าเพิ่งร้องไห้","ร้องหลังประกาศคะแนน","คะแนนยังไม่ออก อย่าเพิ่งตายใจ",
+  "GPA สั่นแล้ว","ความหวังเหลือ 1%","ความจำเหลือ 0%","สติหายไปไหน","ใครเอาสติไป","สมองกำลังรีบูต","โหลดไม่เสร็จ","อ่านแล้วไม่เข้าหัว","หัวเข้าหนังสือแทน","อย่าหลับนะ",
+  "ตื่นก่อนสอบด้วย","ตื่นผิดวันก็มี","ฝันว่าผ่าน","ตื่นมาสอบจริง","อย่าเช็กเฉลยตอนพัก","อย่าถามเพื่อนว่าตอบอะไร","ความสุขหลังสอบมีจริง","เบียร์เย็นรออยู่","แต่คะแนนก็รออยู่","ผ่านเถอะ... สาธุ",
+  "ถ้าเห็นข้อความนี้ แปลว่าผียังอ่านหนังสือเป็นเพื่อนอยู่ 👻📚","วันนี้อ่านมาตรา พรุ่งนี้อ่านใจอาจารย์","ประมวลหนากว่าความหวัง","ข้อสอบไม่ยาก... แต่คำตอบยาก","นิติปรัชญาไม่มีในเล่มนี้","ฎีกาไม่ใช่นิยาย แต่ทำให้นอนไม่หลับ","เพื่อนบอก \"ไม่อ่าน\" แล้วได้ A","ผีไม่หลอกหรอก GPA ต่างหากที่หลอก","อาจารย์บอก \"ง่าย ๆ\" นั่นแหละน่ากลัวที่สุด","อ่านมาตราครบ แต่ลืมเขียนชื่อ",
+  "ผียังสงสารคนอ่านคืนก่อนสอบ","หลับก่อนเดี๋ยวตื่นมาอ่าน","60 เป๊ะ","ทำบุญเยอะๆ",
+  "ผีมา... แต่เค้าจากไป","คนไม่มีใจ เจ็บกว่าผีหลอก","คน ผี ทะเล... อะไรน่ากลัวกว่ากัน","มาตรา 59 ผู้ใด... หรือบุคคลใดหว่า","ละเมิดคือบ่อเกิดแห่งหนี้ ละโมภจะเจอผี","ละเมอ... จะเจอเค้า","สิงโตชอบกินน้ำแดง","ผีบางทีก็อยู่รวมกับเรา","เพื่อนที่นั่งหลังห้อง... ตอนนี้ไปไหน","เคยสังเกตเพื่อนที่หายไปไหม",
+  "คนนั้นที่เราไม่เคยคุยด้วย... หายไปแล้ว","เรากับเพื่อนฝันเรื่องเดียวกัน","ทำไมรู้สึกว่าเคยอ่านมาตรานี้มาแล้ว","ระวังเด็กชายที่ชอบพกตะปูติดเสื้อ","ได้ยินเสียง... หยดน้ำไหม","ทำไมเพดานชอบบิด","พี่สาวคนนั้นถ่ายรูปทีไร... เบลอทุกครั้ง","เคยเห็นคนตัวโปร่งแสงในห้องสมุดไหม","ห้องน้ำไฟปิดเองอีกแล้ว","เคยได้กลิ่นธูป... แต่ไม่เห็นใครไหม",
+  "แมวตัวนั้นชอบมองมุมเดิมทุกคืน","ได้ยินเสียงหมาหอนไหม","ผีไม่หลอก... แต่ความทรงจำหลอก","คนที่ยิ้มให้ทุกวัน วันนี้หายไป","อย่าทัก... ถ้าไม่แน่ใจว่าเป็นเพื่อน","บางคนจำหน้าเราได้... ทั้งที่เราไม่เคยเจอ","เธอเคยเดินผ่านเรา... หรือเปล่า","ลองนับจำนวนคนในห้องใหม่","มีเก้าอี้เพิ่มมาตัวหนึ่งไหม","รูปหมู่ใบนี้... ใครคนนั้น",
+  "ยิ่งมอง ยิ่งมีคนเพิ่ม","อย่าซูมรูป","กระจกไม่ได้สะท้อนทุกอย่าง","กระจกบางบาน... ช้ากว่าเรา","อย่ากะพริบตาตอนมองกระจก","เคยรู้สึกว่ามีคนเดินตาม... ในห้องสมุด","ชั้นหนังสือแถวนี้... เหมือนยาวขึ้น","เมื่อคืนหนังสืออยู่คนละชั้น","ตัวหนังสือเรียงไม่เหมือนเดิม","หน้านี้เมื่อวานไม่มี",
+  "มาตรานี้... เพิ่มขึ้นเองหรือเปล่า","ประมวลหนักขึ้นทุกคืน","มีรอยนิ้วมือบนหน้าที่ยังไม่เคยเปิด","มีคนขีดไฮไลท์ไว้ก่อนเรา","แต่ลายมือเหมือนของเรา","อย่าตามเสียงเรียก","โดยเฉพาะถ้าเรียกชื่อเต็ม","ถ้าเรียกสามครั้ง... อย่าหัน","ถ้าหันแล้ว... ยิ้มไว้","เธอเห็นคนนั้นเหมือนเราไหม",
+  "หรือเห็นแค่เราคนเดียว","วันนี้เพื่อนดูตัวสูงขึ้นไหม","หรือพื้นต่ำลง","บันไดเมื่อกี้มีกี่ขั้น","นับใหม่อีกที","เดินวนหรือยัง","ทางเดิม... แต่ไม่ใช่ที่เดิม","ห้องนี้เคยเล็กกว่านี้ไหม","ประตูอยู่ตรงนี้มาตลอดหรือเปล่า","เสียงเปิดประมวลดังเอง",
+  "ลมเปิด... หรือใครเปิด","ข้างหลังมีที่ว่างไหม","อย่าถามว่ามีใครนั่งไหม","เพราะอาจมีคนตอบ","ผมเส้นนั้น... ไม่ใช่ของเรา","รองเท้าคู่นั้น... ไม่มีเจ้าของ","ได้ยินเสียงเดิน... แต่ไม่มีเงา","เงาบางอัน... ไม่มีคน","คนบางคน... ไม่มีเงา","เธอเคยเห็นรอยยิ้มที่กว้างเกินไปไหม",
+  "อย่ายิ้มตาม","คนที่หัวเราะคนเดียว... อาจไม่ได้อยู่คนเดียว","ความเงียบมีเสียง","ได้ยินไหม","เหมือนมีใครอ่านหนังสือพร้อมเรา","พลิกหน้าพร้อมกันเลย","แต่เรามาคนเดียว","เธอก็ได้ยินใช่ไหม","อย่าตอบ","ถ้าไม่มีใครถาม",
+  "ถ้ามีคนถามว่า \"จำเราได้ไหม\"","อย่ารีบตอบ","บางคำถามไม่มีคำตอบ","บางคำตอบ... ไม่มีคนถาม","คนที่เราคิดถึง... อาจกำลังคิดถึงเรา","หรือกำลังมองอยู่","เค้าไม่ได้หายไป","แค่เรา... มองไม่เห็น","ผีไม่น่ากลัวเท่าคนที่อ่านแล้วไม่คืนประมวล","อย่ายืมไฮไลท์แล้วหาย",
+  "คนยืมประมวลไม่คืน... หลอนกว่าผี","อ่านมาตรา... แต่อย่าอ่านชื่อข้างหลัง","อย่าจดชื่อไว้ในประมวลของคนอื่น","ถ้าประมวลเรียกชื่อเรา... อย่าเปิด","บางหน้ามีคนอ่านอยู่ก่อนแล้ว","ความรักก็เหมือนมาตรา... อ่านผิด ชีวิตเปลี่ยน","เค้าไม่ตอบแชต... แต่ผีตอบ","เธอเลือกเค้า... ผีเลือกเธอ","ลองนับเพื่อนในห้องอีกครั้ง... แล้วอย่าลืมนับตัวเองด้วย",
+];
+let ghostEl = null, ghostRotateTimer = null, ghostPulseTimer = null, ghostIndex = 0;
+let ghostSpeechEl = null, ghostSpeechTimer = null;
+function ensureGhostSpeechEl(){
+  if (ghostSpeechEl) return ghostSpeechEl;
+  const el = document.createElement('div');
+  el.className = 'ghost-speech';
+  document.body.appendChild(el);
+  ghostSpeechEl = el; return el;
+}
+function showGhostSpeech(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const ghost = ensureGhostEl();
+  const bubble = ensureGhostSpeechEl();
+  bubble.textContent = GHOST_PHRASES[Math.floor(Math.random() * GHOST_PHRASES.length)];
+  const rect = ghost.getBoundingClientRect();
+  bubble.style.right = (window.innerWidth - rect.right) + 'px';
+  bubble.style.bottom = (window.innerHeight - rect.top + 10) + 'px';
+  bubble.classList.add('visible');
+  clearTimeout(ghostSpeechTimer);
+  ghostSpeechTimer = setTimeout(() => bubble.classList.remove('visible'), 2600);
+  pulseGhost();
+  playHooSound();
+}
+function ensureGhostEl(){
+  if (ghostEl) return ghostEl;
+  const img = document.createElement('img');
+  img.src = GHOST_IMAGES[0]; img.alt = ''; img.setAttribute('aria-hidden', 'true'); img.className = 'ghost-companion';
+  img.addEventListener('mouseenter', showGhostSpeech);
+  img.addEventListener('click', showGhostSpeech);
+  document.body.appendChild(img); ghostEl = img; return img;
+}
+function startGhostRotation(){
+  const el = ensureGhostEl(); ghostIndex = 0; el.src = GHOST_IMAGES[ghostIndex]; el.classList.add('visible');
+  clearInterval(ghostRotateTimer); ghostRotateTimer = setInterval(rotateGhost, 5000);
+}
+function rotateGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl(); ghostIndex = (ghostIndex + 1) % GHOST_IMAGES.length;
+  el.style.opacity = '0.15';
+  setTimeout(() => { el.src = GHOST_IMAGES[ghostIndex]; el.style.opacity = ''; }, 220);
+  playHooSound();
+}
+function stopGhostRotation(){
+  clearInterval(ghostRotateTimer); ghostRotateTimer = null;
+  if (ghostEl) { ghostEl.classList.remove('visible'); ghostEl.style.opacity = ''; }
+}
+function pulseGhost(){
+  if (document.documentElement.getAttribute('data-theme') !== 'horror') return;
+  const el = ensureGhostEl(); el.classList.add('pulse');
+  clearTimeout(ghostPulseTimer); ghostPulseTimer = setTimeout(() => el.classList.remove('pulse'), 350);
+}
+document.addEventListener('input', (e) => {
+  const t = e.target;
+  if (!t) return;
+  if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || (t.classList && t.classList.contains('note-input'))) pulseGhost();
+});
+let __ghostAudioCtx;
+function playHooSound(){
+  try{
+    __ghostAudioCtx = __ghostAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const c = __ghostAudioCtx;
+    if (c.state === 'suspended') c.resume();
+    const t0 = c.currentTime, dur = 1.6;
+    const baseFreq = 180 + Math.random() * 50;
+    const osc = c.createOscillator(); osc.type = 'sine'; osc.frequency.setValueAtTime(baseFreq, t0);
+    const lfo = c.createOscillator(); lfo.type = 'sine'; lfo.frequency.setValueAtTime(4.2, t0);
+    const lfoGain = c.createGain(); lfoGain.gain.setValueAtTime(6, t0);
+    lfo.connect(lfoGain); lfoGain.connect(osc.frequency);
+    const mainGain = c.createGain();
+    mainGain.gain.setValueAtTime(0.0001, t0);
+    mainGain.gain.exponentialRampToValueAtTime(0.035, t0 + 0.55);
+    mainGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    const bufferSize = Math.floor(c.sampleRate * dur);
+    const noiseBuffer = c.createBuffer(1, bufferSize, c.sampleRate);
+    const data = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+    const noise = c.createBufferSource(); noise.buffer = noiseBuffer;
+    const noiseFilter = c.createBiquadFilter();
+    noiseFilter.type = 'bandpass'; noiseFilter.frequency.setValueAtTime(baseFreq * 1.6, t0); noiseFilter.Q.setValueAtTime(0.7, t0);
+    const noiseGain = c.createGain();
+    noiseGain.gain.setValueAtTime(0.0001, t0);
+    noiseGain.gain.exponentialRampToValueAtTime(0.01, t0 + 0.55);
+    noiseGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    osc.connect(mainGain); mainGain.connect(c.destination);
+    noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(c.destination);
+    osc.start(t0); osc.stop(t0 + dur);
+    lfo.start(t0); lfo.stop(t0 + dur);
+    noise.start(t0); noise.stop(t0 + dur);
+  } catch(e){}
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  updateThemeToggleUI(current);
+  if (current === 'horror') { playHorrorBgm(); startGhostRotation(); scheduleDogHowl(); }
+  const droneMuteBtn = document.getElementById('drone-mute-btn');
+  if (droneMuteBtn) {
+    let muted = false;
+    try { muted = localStorage.getItem(DRONE_MUTE_KEY) === '1'; } catch(e){}
+    droneMuteBtn.textContent = muted ? '🔇' : '🔊';
+  }
+  ['click','touchstart','keydown'].forEach(evt => {
+    document.addEventListener(evt, function resumeBgmOnce(){
+      const bgm = document.getElementById('horror-bgm');
+      if (document.documentElement.getAttribute('data-theme') === 'horror' && bgm && bgm.paused) playHorrorBgm();
+      ['click','touchstart','keydown'].forEach(e2 => document.removeEventListener(e2, resumeBgmOnce));
+    }, { once: true });
+  });
+});
+</script>
+<link rel="stylesheet" href="legal-disclaimer.css">
+<script src="legal-footer.js"></script>
+<script src="lecture-print.js"></script>
+</body>
+</html>
+
