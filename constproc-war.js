@@ -2687,7 +2687,7 @@ const WAR_DATA = {
   }
  ]
 };
-﻿/* ================================================================
+/* ================================================================
    War Mode (constproc.html) — คลังข้อสอบเก่า วิ.ปกครอง / วิ.รัฐธรรมนูญ
    ข้อมูลอยู่ใน WAR_DATA (ด้านบนของไฟล์นี้) · ตัวแสดงผลอยู่ด้านล่าง
    ไม่มีชื่ออาจารย์/มหาวิทยาลัย และชื่อตัวละครในโจทย์ถูกเปลี่ยนแล้ว
@@ -2735,7 +2735,7 @@ const WAR_DATA = {
     const D=WAR_DATA, P=D.parts[part];
     const issues=D.issues.filter(i=>i.part===part);
     const qs=D.questions.filter(q=>q.part===part);
-    let h='<div class="board-note war-intro"><div class="board-note-title">'+esc(P.title)+'</div>'+P.intro.map(x=>'<p>'+inl(x)+'</p>').join('')+'</div>';
+    let h=PRINT_BAR+'<div class="board-note war-intro"><div class="board-note-title">'+esc(P.title)+'</div>'+P.intro.map(x=>'<p>'+inl(x)+'</p>').join('')+'</div>';
     h+='<div class="war-map"><div class="war-map-title">แผนที่ประเด็น (กดเพื่อกระโดดไป)</div>'
       + issues.map(i=>'<a class="war-chip" href="#war-issue-'+i.n+'" onclick="warJump(event,'+i.n+')"><b>'+i.n+'</b> '+esc(i.short)+'<span class="war-chip-n">'+i.count+' โจทย์</span></a>').join('')+'</div>';
     issues.forEach(i=>{
@@ -2758,6 +2758,55 @@ const WAR_DATA = {
       +':root[data-theme="dark"] .war-memo-title,:root[data-theme="horror"] .war-memo-title{color:#C4B5FD}';
     document.head.appendChild(st);
   })();
+
+  // ---------- พิมพ์ / บันทึก PDF ----------
+  // เว้นขอบซ้ายกว้างเผื่อสันเย็บเล่ม (Chrome ไม่สลับขอบซ้าย-ขวาตามหน้าให้ จึงใช้ขอบซ้ายคงที่) · ขยายเฉลยทุกข้อก่อนพิมพ์อัตโนมัติ
+  // กฎพิมพ์ทั้งหมดผูกกับ body.war-printing (ใส่เฉพาะตอนแท็บ War Mode เปิดอยู่) เพื่อไม่กระทบระบบพิมพ์เดิมของหน้า
+  const PRINT_RULES=[
+    ['.wrap','max-width:none !important;width:auto !important;margin:0 !important;padding:0 !important'],
+    ['.mode-tabs,.war-print-bar,.war-map,.coffee-widget,footer,.war-lec-body>.war-note,.tts-bar,.page-head .crest','display:none !important'],
+    ['.page-head','margin:0 0 8mm !important;padding:0 !important'],
+    ['.page-head h1','font-size:18pt !important'],
+    ['.mode-panel:not(.active),#panel-read,#printArea','display:none !important'],
+    ['.war-q,.war-issue,.war-lec,.war-issue-body,.war-lec-body','border-radius:0 !important'],
+    ['.war-issue,.war-lec','border:0 !important;background:transparent !important'],
+    ['.war-issue-body,.war-lec-body','padding:0 !important'],
+    ['.war-issue>summary,.war-lec>summary','padding-left:0 !important'],
+    ['summary','list-style:none'],
+    ['summary::-webkit-details-marker','display:none'],
+    ['.war-ans>summary','display:none'],
+    ['.war-q','break-inside:auto;page-break-inside:auto;padding:3mm 4mm;margin:5mm 0'],
+    ['.war-q-head,.war-q-title,.ans-issue,.war-keys-title,.war-memo-title,.war-off-tag,.ans-title','break-after:avoid;page-break-after:avoid'],
+    ['.war-off,.war-memo,.war-keys,.war-memo li,.exam-answer .verdict','break-inside:avoid;page-break-inside:avoid'],
+    ['.war-q-body,.exam-answer,.war-memo,.war-off,.war-keys','font-size:10.5pt !important;line-height:1.7 !important'],
+    ['.war-memo.war-memo','background:#EFEAFB !important;border-color:#7C5CC4 !important;color:#111 !important'],
+    ['.war-memo-title.war-memo-title','color:#5B3FA6 !important'],
+    ['a','color:#111 !important;text-decoration:none !important']
+  ];
+  (function(){
+    const st=document.createElement('style');
+    st.textContent='.war-print-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 14px}'
+      +'.war-print-btn{cursor:pointer;font:inherit;font-weight:700;font-size:13.5px;padding:8px 16px;border-radius:999px;border:1px solid var(--accent);background:var(--card);color:var(--accent)}'
+      +'.war-print-btn:hover{background:var(--accent);color:#fff}'
+      +'.war-print-hint{font-size:12px;color:var(--ink-faint);line-height:1.6}'
+      +'@media print{html body.war-printing{--paper:#fff;--card:#fff;--ink:#111;--ink-soft:#222;--ink-faint:#555;--line:#bbb;--gold:#B08A3C;--gold-soft:#F6EFDC;--ok:#1E7A4F;--ok-bg:#EAF6EF;--accent:#2E4A7A;--shadow:none;background:#fff !important;color:#111 !important}html body.war-printing *{visibility:visible !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;box-shadow:none !important;animation:none !important}html body.war-printing>*:not(.wrap){display:none !important}'+PRINT_RULES.map(function(r){ return r[0].split(',').map(function(s){ return 'html body.war-printing '+s.trim(); }).join(',')+'{'+r[1]+'}'; }).join('')+'}';
+    document.head.appendChild(st);
+  })();
+  const __printState=[];
+  window.addEventListener('beforeprint',function(){
+    __printState.length=0;
+    if(!document.querySelector('#panel-waradmin.active,#panel-warconst.active')) return;
+    document.body.classList.add('war-printing');
+    if(!document.getElementById('war-page-style')){ const ps=document.createElement('style'); ps.id='war-page-style'; ps.textContent='@page{size:A4;margin:16mm 14mm 18mm 28mm}'; document.head.appendChild(ps); }
+    document.querySelectorAll('.mode-panel.active details').forEach(d=>{ __printState.push([d,d.open]); d.open=true; });
+  });
+  window.addEventListener('afterprint',function(){
+    document.body.classList.remove('war-printing');
+    const ps=document.getElementById('war-page-style'); if(ps) ps.remove();
+    __printState.forEach(x=>{ x[0].open=x[1]; }); __printState.length=0;
+  });
+  window.warPrint=function(){ window.print(); };
+  const PRINT_BAR='<div class="war-print-bar"><button type="button" class="war-print-btn" onclick="warPrint()">🖨️ พิมพ์ / บันทึกเป็น PDF</button><span class="war-print-hint">พิมพ์ขนาด A4 เว้นขอบซ้าย 28 มม. สำหรับเจาะ/เย็บเล่ม (ขอบอื่น 14–18 มม.) · ขยายเฉลยและกล่อง "มาตราที่ต้องท่อง" ทุกข้ออัตโนมัติ · ในหน้าต่างพิมพ์เลือก Margins: Default และเปิด Background graphics เพื่อให้กล่องสีขึ้นครบ</span></div>';
 
   function memoHtml(list){
     if(!list||!list.length) return '';
