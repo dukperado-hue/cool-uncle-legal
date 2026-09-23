@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
@@ -228,6 +228,66 @@ mark.hl-de{background:#fff09e;color:#5c4b00;padding:0 3px;border-radius:3px;font
 .art-full .art-full-item{margin-top:10px}
 .art-full .art-full-item:first-child{margin-top:0}
 
+/* ---------- mode tabs (โหมดอ่าน / War Mode วิ.ปกครอง / War Mode วิ.รัฐธรรมนูญ) ---------- */
+.mode-tabs{display:flex;gap:8px;margin:22px 0 18px;flex-wrap:wrap}
+.mode-tab{
+  flex:1;min-width:150px;background:#fff;border:1px solid var(--line);border-radius:12px;
+  padding:12px 14px;font-family:'IBM Plex Sans Thai Looped',system-ui,sans-serif;font-size:14px;font-weight:700;color:var(--ink-soft);
+  cursor:pointer;transition:all .15s;text-align:center;
+}
+.mode-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.mode-tab:hover:not(.active){border-color:var(--gold)}
+.mode-panel{display:none}
+.mode-panel.active{display:block}
+:root[data-theme="dark"] .mode-tab,:root[data-theme="horror"] .mode-tab{background:var(--card)}
+:root[data-theme="dark"] .mode-tab.active,:root[data-theme="horror"] .mode-tab.active{background:var(--accent)}
+
+/* ---------- War Mode ---------- */
+.war-intro p{margin:0 0 8px}
+.war-intro p:last-child{margin-bottom:0}
+.war-map{margin:14px 0 6px}
+.war-map-title{font-size:12px;font-weight:700;color:var(--ink-faint);margin-bottom:8px}
+.war-chip{display:inline-flex;align-items:center;gap:6px;margin:0 6px 8px 0;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);font-size:13px;text-decoration:none;font-weight:600}
+.war-chip:hover{border-color:var(--gold)}
+.war-chip b{color:var(--accent)}
+.war-chip-n{font-size:11px;color:var(--ink-faint);font-weight:700;background:#F1EDE2;padding:1px 7px;border-radius:999px}
+:root[data-theme="dark"] .war-chip-n,:root[data-theme="horror"] .war-chip-n{background:rgba(255,255,255,.08)}
+.war-issue{border:1px solid var(--line);border-radius:14px;background:var(--card);margin:14px 0;box-shadow:var(--shadow)}
+.war-issue>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:14px 16px;font-weight:700;font-size:15px;color:var(--ink)}
+.war-issue>summary::-webkit-details-marker{display:none}
+.war-issue>summary::after{content:'▾';margin-left:auto;color:var(--ink-faint);font-size:13px;transition:transform .2s}
+.war-issue[open]>summary::after{transform:rotate(180deg)}
+.war-issue-n{width:30px;height:30px;flex-shrink:0;border-radius:50%;background:var(--gold-soft);color:#8F6511;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+.war-issue-name{flex:1;min-width:0}
+.war-issue-freq{font-size:11.5px;font-weight:700;color:var(--ink-faint);background:#F1EDE2;padding:4px 10px;border-radius:999px;white-space:nowrap}
+:root[data-theme="dark"] .war-issue-freq,:root[data-theme="horror"] .war-issue-freq{background:rgba(255,255,255,.08)}
+.war-issue-body{padding:0 16px 16px}
+.war-keys{background:var(--gold-soft);border-left:3px solid var(--gold);border-radius:8px;padding:10px 14px;margin:0 0 14px;font-size:13.5px;line-height:1.8;color:var(--ink)}
+.war-keys-title{font-weight:700;font-size:12px;color:var(--ink-faint);margin-bottom:4px}
+.war-q{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;background:var(--paper)}
+.war-q-head{display:flex;gap:8px;align-items:center;margin-bottom:6px}
+.war-q-id{font-size:11px;font-weight:800;color:#fff;background:var(--accent);padding:2px 8px;border-radius:6px;letter-spacing:.4px}
+.war-q-kind{font-size:11.5px;color:var(--ink-faint);font-weight:700}
+.war-q-title{font-weight:700;font-size:14.5px;color:var(--ink);line-height:1.6}
+.war-q-src{font-size:12px;color:var(--ink-faint);margin:2px 0 10px}
+.war-q-body{font-size:14px;line-height:1.85;color:var(--ink-soft)}
+.war-q-body p{margin:0 0 8px}
+.war-q-body p.war-ask{color:var(--ink);font-weight:600;margin-left:4px}
+.war-ans{margin-top:10px}
+.war-ans>summary{cursor:pointer;font-weight:700;font-size:13.5px;color:var(--accent);padding:6px 0;list-style:none}
+.war-ans>summary::-webkit-details-marker{display:none}
+.war-ans .exam-answer{margin-bottom:4px}
+.war-ul{margin:4px 0 6px 20px;padding:0}
+.war-ul li{margin:2px 0}
+.war-off{margin-top:10px;padding:10px 12px;border-left:3px dashed var(--gold);background:rgba(176,138,60,.08);border-radius:6px;font-size:13px;line-height:1.85}
+.war-off-tag{display:block;font-weight:700;font-size:11.5px;color:var(--ink-faint);margin-bottom:2px}
+.exam-answer p{margin:0 0 8px}
+.war-note{font-size:12.5px;color:var(--ink-faint);margin-top:6px;line-height:1.7}
+.war-lec{border:1px solid var(--line);border-radius:12px;margin:10px 0;background:var(--paper)}
+.war-lec>summary{cursor:pointer;padding:12px 14px;font-weight:700;font-size:14px;color:var(--ink)}
+.war-lec-body{padding:0 14px 14px}
+@media(max-width:640px){.war-issue>summary{flex-wrap:wrap}.war-issue-freq{order:3}.war-q{padding:12px 12px}.war-issue-body{padding:0 10px 12px}}
+
 footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)}
 .coffee-widget{
   display:flex;flex-direction:column;align-items:center;gap:10px;
@@ -291,8 +351,13 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
     <p class="subtitle">Constitutional Procedural Law and Administrative Procedural Law · สรุปเนื้อหาบรรยายรายครั้ง · ปี 4</p>
   </header>
 
-  <div class="notice">⏳ หน้านี้เตรียมไว้สำหรับสรุปเนื้อหาบรรยาย 15 ครั้ง — จะทยอยอัปเดตทีละครั้ง</div>
+  <div class="mode-tabs" role="tablist" aria-label="โหมดการใช้งาน">
+    <button type="button" class="mode-tab active" data-mode="read" role="tab" onclick="switchMode('read')" onmouseenter="playHoverSound()">📖 โหมดอ่าน</button>
+    <button type="button" class="mode-tab" data-mode="waradmin" role="tab" onclick="switchMode('waradmin')" onmouseenter="playHoverSound()">⚔️ War Mode วิฯ ปกครอง</button>
+    <button type="button" class="mode-tab" data-mode="warconst" role="tab" onclick="switchMode('warconst')" onmouseenter="playHoverSound()">⚔️ War Mode วิฯ รัฐธรรมนูญ</button>
+  </div>
 
+  <div class="mode-panel active" id="panel-read">
   <div class="tts-bar" id="tts-bar" style="display:none">
     <button id="tts-play" class="tts-btn" title="อ่านออกเสียงบรรยายที่เปิดอยู่"><span class="tts-ico">▶</span> อ่านออกเสียง</button>
     <button id="tts-pause" class="tts-btn" title="หยุดชั่วคราว/เล่นต่อ" style="display:none"><span class="tts-ico">⏸</span> หยุดชั่วคราว</button>
@@ -306,6 +371,9 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
     <span class="tts-hint">เปิดบรรยายครั้งที่ต้องการก่อน แล้วกด "อ่านออกเสียง"</span>
   </div>
   <div class="lecture-list" id="lectureList"></div>
+  </div>
+  <div class="mode-panel" id="panel-waradmin"></div>
+  <div class="mode-panel" id="panel-warconst"></div>
 
   <div class="coffee-widget">
   <p>ถ้าเว็บนี้มีประโยชน์ เลี้ยงกาแฟ Cool Uncle สักแก้วได้นะ ☕</p>
@@ -316,6 +384,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
 <footer>สร้างด้วย Claude · ⚠️ ใช้อ่านเสริมหลักสูตรเท่านั้น โปรดตรวจสอบความถูกต้องของข้อมูล · Cool Uncle Legal Lab 2024</footer>
 </div>
 
+<script src="constproc-war.js?v=1"></script>
 <script>
 let __hbAudioCtx;
 function playHoverSound(){
@@ -958,6 +1027,26 @@ function toggleLecture(n){
 }
 renderLectures();
 
+/* ---- โหมด: อ่าน / War Mode วิ.ปกครอง / War Mode วิ.รัฐธรรมนูญ ---- */
+const MODE_HASH = { read:'', waradmin:'#war-admin', warconst:'#war-const' };
+function switchMode(mode){
+  document.querySelectorAll('.mode-tab').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+  ['read','waradmin','warconst'].forEach(m => {
+    const p = document.getElementById('panel-' + m);
+    if (p) p.classList.toggle('active', m === mode);
+  });
+  TTS.stop();
+  const bar = document.getElementById('tts-bar');
+  if (bar) bar.style.display = (mode === 'read' && TTS.supported) ? 'flex' : 'none';
+  try { history.replaceState(null, '', location.pathname + location.search + (MODE_HASH[mode] || '')); } catch(e){}
+}
+if (typeof renderWarPanels === 'function') renderWarPanels();
+(function(){
+  const h = location.hash;
+  if (h === '#war-admin') switchMode('waradmin');
+  else if (h === '#war-const') switchMode('warconst');
+})();
+
 </script>
 <script>
 /* ================================================================
@@ -1233,3 +1322,4 @@ document.addEventListener('DOMContentLoaded', () => {
 <script src="lecture-print.js"></script>
 </body>
 </html>
+
