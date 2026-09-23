@@ -345,6 +345,7 @@
       caat2558:      { title: 'พ.ร.ก.การบินพลเรือนแห่งประเทศไทย พ.ศ. 2558' },
       airoffences:   { title: 'พ.ร.บ.ว่าด้วยความผิดบางประการต่อการเดินอากาศ พ.ศ. 2558' },
       torture:       { title: 'พ.ร.บ.ป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565' },
+      pdpa:          { title: 'พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562' },
     };
     // Top-level: exactly 6 category nodes under root, per user's explicit
     // grouping — expand each to reveal its member ประมวล/พระราชบัญญัติ.
@@ -359,7 +360,7 @@
       criminal: { label: 'อาญา',            color: '#ff0055', books: ['criminal'] },
       crimpro:  { label: 'วิอาญา',           color: '#ff4d8d', books: ['crimpro'] },
       public:   { label: 'มหาชน', color: '#aa00ff', subgroups: {
-                    adminlaw: { label: 'กฎหมายปกครอง', books: ['adminproc', 'admincourt', 'tortofficials', 'torture'] },
+                    adminlaw: { label: 'กฎหมายปกครอง', books: ['adminproc', 'admincourt', 'tortofficials', 'torture', 'pdpa'] },
                     constlaw: { label: 'รัฐธรรมนูญ',   books: ['constitution', 'const2560', 'politicalparty'] },
                   } },
       other:    { label: 'อื่นๆ', color: '#ff9900', books: ['copyright', 'patent', 'trademark', 'carriage', 'ipcourt'] },
@@ -381,7 +382,7 @@
       [codex, articleIndex] = await Promise.all([
         fetch('codex-data.json', { cache: 'no-store' }).then(r => r.json()),
         fetch('prototype/assets/cases/article-case-index.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : {}),
-        (window.AtlasCore ? AtlasCore.loadRegistry('collections-registry.json?v=20260917b').catch(() => {}) : Promise.resolve()),
+        (window.AtlasCore ? AtlasCore.loadRegistry('collections-registry.json?v=20260923a').catch(() => {}) : Promise.resolve()),
       ]);
     } catch (e) {
       loadingEl.innerHTML = '<div style="color:#ff8080">โหลดข้อมูลไม่สำเร็จ: ' + (e.message || e) + '</div>';
@@ -872,6 +873,7 @@
       ['airoffences', ['ความผิดบางประการต่อการเดินอากาศ']],
       ['airnav', ['การเดินอากาศ']],
       ['torture', ['ป้องกันและปราบปรามการทรมาน', 'การกระทำให้บุคคลสูญหาย', 'พ.ร.บ.ทรมานและอุ้มหาย']],
+      ['pdpa', ['คุ้มครองข้อมูลส่วนบุคคล', 'PDPA']],
       ['criminal', ['ประมวลกฎหมายอาญา', 'ป.อ.', '— อาญา', '-อาญา']],
       ['civil', ['ประมวลกฎหมายแพ่งและพาณิชย์', 'ป.พ.พ.', '— แพ่ง', '-แพ่ง']],
     ];
