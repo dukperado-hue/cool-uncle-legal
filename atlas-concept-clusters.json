@@ -2152,6 +2152,32 @@
         }
       ],
       "topics": []
+    },
+    "thai-legal-modernisation-rama5": {
+      "id": "atlas:cluster/thai-legal-modernisation-rama5",
+      "slug": "thai-legal-modernisation-rama5",
+      "titleTH": "การปฏิรูประบบกฎหมายและศาลสมัยรัชกาลที่ 5: สิทธิสภาพนอกอาณาเขต กระทรวงยุติธรรม และกฎหมายอาญา ร.ศ. 127",
+      "titleEN": "Legal and Judicial Reform under King Chulalongkorn: Extraterritoriality, the Ministry of Justice and the 1908 Penal Code",
+      "status": "published",
+      "subjectAreas": [],
+      "description": "กลุ่มแนวคิดที่แหล่งในโน้ตบุ๊กเชื่อมโยงกันโดยตรง: สิทธิสภาพนอกอาณาเขตเป็นแรงผลักดัน การรวมศาลและตั้งกระทรวงยุติธรรม และการตรากฎหมายลักษณะอาญา ร.ศ. 127 เพื่อแก้ข้อบกพร่องของตราสามดวงและนำไปเจรจายกเลิกสิทธิดังกล่าว",
+      "concepts": [
+        {
+          "ref": "atlas:concept/seed-0401",
+          "note": "สิทธิสภาพนอกอาณาเขตและศาลกงสุล — จุดเริ่มต้น",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/seed-0440",
+          "note": "ตั้งกระทรวงยุติธรรมและรวมศาลเหลือ 7 ศาล"
+        },
+        {
+          "ref": "atlas:concept/seed-0415",
+          "note": "กฎหมายอาญาสมัยใหม่ ผู้ร่าง และเหตุที่ตรา",
+          "featured": true
+        }
+      ],
+      "topics": []
     }
   }
 }
