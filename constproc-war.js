@@ -2797,7 +2797,7 @@ const WAR_DATA = {
     __printState.length=0;
     if(!document.querySelector('#panel-waradmin.active,#panel-warconst.active')) return;
     document.body.classList.add('war-printing');
-    if(!document.getElementById('war-page-style')){ const ps=document.createElement('style'); ps.id='war-page-style'; ps.textContent='@page{size:A4;margin:16mm 14mm 18mm 28mm}'; document.head.appendChild(ps); }
+    if(!document.getElementById('war-page-style')){ const ps=document.createElement('style'); ps.id='war-page-style'; ps.textContent='@page{size:A4;margin:18mm 18mm 18mm 30mm}'; document.head.appendChild(ps); }
     document.querySelectorAll('.mode-panel.active details').forEach(d=>{ __printState.push([d,d.open]); d.open=true; });
   });
   window.addEventListener('afterprint',function(){
