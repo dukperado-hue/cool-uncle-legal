@@ -400,22 +400,20 @@ mark.codex-hl-yellow{background:#FFE066;color:#3a3212}
   .article-breadcrumb, .print-omit { display:none !important; }
 }
 
-/* "แบบใช้จด" / "Easy Mode" print layout — 1 มาตราต่อหน้า, สองคอลัมน์,
-   คอลัมน์เนื้อหา/คอลัมน์ว่าง(หรือคำบรรยาย) สลับข้างกันตามเลขหน้าคี่/คู่
+/* "แบบใช้จด" / "จดให้แล้ว" print layout — แต่ละมาตราเป็นแถวสองคอลัมน์ ไหลต่อเนื่อง (มาตราสั้นรวมหน้าเดียวกัน),
+   ซ้าย = ตัวบท, ขวา = ที่ว่าง(หรือคำบรรยาย) ขอบซ้าย/ขวาเท่ากัน
    เพื่อให้ช่องว่างสำหรับจดอยู่ขอบนอกของเล่มเสมอเวลาเข้าเล่ม */
-.write-cover-page{min-height:20mm}
+.write-cover-page{margin-bottom:6mm}
 /* ขึ้นแผ่นใหม่ด้วย break-before (ไม่ใช้ break-after) — กันหน้าว่างท้ายเล่ม/หน้าว่างซ้อน */
-.write-mode-page{display:flex;position:relative;min-height:0;page-break-before:always;break-before:page}
+.write-mode-page.keep{page-break-inside:avoid;break-inside:avoid}
+.write-mode-page{display:flex;position:relative;min-height:0;border-top:1px solid #d0d0d0}
 body.printing-one.printing-write #print-area{padding:0 !important}
 .write-col{flex:1;padding:16px 20px;min-width:0;overflow-wrap:anywhere}
 /* เส้นแบ่งแบบ minimal: แท่งสั้นสีเทา หนา อยู่ข้างช่องตัวบท (ไม่ยาวเต็มหน้า) */
 .write-col-content{position:relative}
-.write-col-content::after{content:'';position:absolute;top:16px;right:0;width:3px;height:26mm;background:#9a9a9a;border-radius:2px}
-/* .rev = หน้าคู่: ช่องตัวบทอยู่ขวา (ชิดสันเย็บ) เส้นแบ่งย้ายไปซ้าย — ตั้งโดย paginateWritePages() */
-.write-mode-page.rev{flex-direction:row-reverse}
-.write-mode-page.rev .write-col-content::after{right:auto;left:0}
+.write-col-content::after{content:'';position:absolute;top:12px;bottom:12px;right:0;width:3px;background:#9a9a9a;border-radius:2px}
 /* สัดส่วนช่องมาตรา : ช่องอีกฝั่ง — .split-70 = แบบใช้จด, .split-65 = จดให้แล้ว
-   (ช่องมาตราอยู่ชิดขอบสันเย็บเสมอ; เส้นแบ่งเป็นขอบของช่องตัวบท) */
+   (ช่องมาตราอยู่ซ้ายเสมอ; เส้นแบ่งเป็นขอบของช่องตัวบท) */
 .write-mode-page.split-70 .write-col-content{flex:0 0 70%}
 .write-mode-page.split-70 .write-col:not(.write-col-content){flex:0 0 30%}
 .write-mode-page.split-65 .write-col-content{flex:0 0 65%}
@@ -423,7 +421,7 @@ body.printing-one.printing-write #print-area{padding:0 !important}
 .write-mode-page.split-65 .write-col-notes{font-size:11.5px;line-height:1.55}
 .write-mode-page.split-65 .write-col-notes *{font-size:inherit !important}
 .write-num{font-family:'Noto Serif Thai',serif;font-weight:700;font-size:16px;margin-bottom:10px}
-.write-col-blank{background-image:repeating-linear-gradient(to bottom,transparent,transparent 8mm,#e5e5e5 8mm,#e5e5e5 calc(8mm + 1px))}
+.write-col-blank{}
 .write-blank-hint{color:#999;font-size:12px;font-style:italic}
 .write-col-notes{font-size:12.5px}
 
@@ -559,8 +557,8 @@ body.printing-one.printing-write #print-area{padding:0 !important}
         <span id="result-count-text">ค้นหามาตรา 0 รายการ</span>
         <div class="print-mode-group" style="display:flex;gap:6px;flex-wrap:wrap">
           <button type="button" class="icon-btn" title="พิมพ์เฉพาะตัวบทมาตรา ต่อเนื่องประหยัดกระดาษ เว้นขอบซ้ายสำหรับเจาะรู/สันห่วง" onclick="printAllResults('classic')" onmouseenter="playHoverSound()">🖨️ Classic</button>
-          <button type="button" class="icon-btn" title="จดให้แล้ว — แบ่งหน้า 65:35 ฝั่งชิดสันเย็บเป็นตัวบทมาตรา อีกฝั่งเป็นคำบรรยาย/โน้ตที่จดไว้แล้ว คั่นด้วยเส้นสีเทา" onclick="printAllResults('annotated')" onmouseenter="playHoverSound()">🖨️ จดให้แล้ว</button>
-          <button type="button" class="icon-btn" title="แบบใช้จด — 1 มาตราต่อหน้า ตัวบท 70 : ที่ว่างสำหรับจดเอง 30 (ที่ว่างอยู่ขอบนอกของเล่ม) หมายเหตุ: มาตราที่เนื้อหายาวเกิน 1 หน้าอาจทำให้การเว้นหน้าคี่/คู่คลาดเคลื่อนเล็กน้อย" onclick="printAllResults('write')" onmouseenter="playHoverSound()">🖨️ แบบใช้จด</button>
+          <button type="button" class="icon-btn" title="จดให้แล้ว — แบ่งหน้า 65:35 ฝั่งซ้ายเป็นตัวบทมาตรา อีกฝั่งเป็นคำบรรยาย/โน้ตที่จดไว้แล้ว คั่นด้วยเส้นสีเทา" onclick="printAllResults('annotated')" onmouseenter="playHoverSound()">🖨️ จดให้แล้ว</button>
+          <button type="button" class="icon-btn" title="แบบใช้จด — ตัวบท 70 : ที่ว่างสำหรับจดเอง 30 (ที่ว่างอยู่ฝั่งขวา) มาตราสั้นหลายมาตราจัดรวมในหน้าเดียวกัน" onclick="printAllResults('write')" onmouseenter="playHoverSound()">🖨️ แบบใช้จด</button>
           <button type="button" class="icon-btn" title="พิมพ์มาตราพร้อมคำบรรยายและโน้ต ต่อเนื่องกัน" onclick="printAllResults('easy')" onmouseenter="playHoverSound()">🖨️ Easy Mode</button>
         </div>
       </div>
@@ -1996,45 +1994,33 @@ function printArticle(btn) {
 
 // Four print layouts for a whole group/book:
 //  - 'classic'   : ตัวบทมาตราอย่างเดียว พิมพ์ต่อเนื่องประหยัดกระดาษ เว้นขอบซ้ายสำหรับสันห่วง
-//  - 'annotated' : "จดให้แล้ว" — 1 มาตราต่อหน้า แบ่ง 65:35 ฝั่งชิดสันเย็บ = ตัวบท,
+//  - 'annotated' : "จดให้แล้ว" — แบ่ง 65:35 ฝั่งซ้าย = ตัวบท,
 //                  อีกฝั่ง = คำบรรยาย/โน้ตที่มีอยู่แล้ว คั่นด้วยเส้นสีเทา
-//  - 'write'     : "แบบใช้จด" — 1 มาตราต่อหน้า ตัวบท 70 : ที่ว่าง 30 (ที่ว่างอยู่ขอบนอกของเล่ม)
+//  - 'write'     : "แบบใช้จด" — ตัวบท 70 : ที่ว่าง 30 (ที่ว่างอยู่ฝั่งขวา)
 //  - 'easy'      : มาตรา + คำบรรยาย + โน้ต เรียงต่อกัน (พฤติกรรม Classic เดิม)
-// หน้าคี่ = ตัวบทอยู่ซ้าย, หน้าคู่ = ตัวบทอยู่ขวา เพื่อให้ตัวบทชิดสันเย็บเสมอเวลาพิมพ์สองหน้า
-function setPrintPageMargin(size, margin, mirrored) {
+// ตัวบทอยู่ซ้ายเสมอ ขอบซ้าย/ขวาเท่ากัน ไม่สลับหน้าคี่/คู่
+function setPrintPageMargin(size, margin) {
   let st = document.getElementById('print-page-style');
   if (!st) { st = document.createElement('style'); st.id = 'print-page-style'; document.head.appendChild(st); }
   let css = size ? `@page{size:${size};margin:${margin}}` : '';
-  // ขอบสลับตามหน้า: ด้านสันเย็บ 20mm / ด้านนอก 10mm (หน้าคี่=ขวามือ สันอยู่ซ้าย, หน้าคู่=ซ้ายมือ สันอยู่ขวา)
-  if (size && mirrored) css += '@page :right{margin-left:20mm;margin-right:10mm}@page :left{margin-left:10mm;margin-right:20mm}';
   st.textContent = css;
 }
 
-// Lay the 1-มาตรา-per-page modes out for real: measure each มาตรา at print
-// width, work out how many A4 sheets it needs (n), pad it to exactly n sheets
-// (min-height) so the next มาตรา starts on a fresh sheet, and track the running
-// sheet number so the text column always sits on the spine side
-// (odd sheet = left, even sheet = right via .rev). Cover = sheet 1.
-// Assumes A4, 12mm top/bottom and 20+10mm mirrored side margins (setPrintPageMargin('A4','12mm',true)).
-function paginateWritePages(printArea) {
+// มาตราสั้น (สูงไม่เกิน ~55% ของหน้า) ห้ามขาดกลางหน้า; มาตรายาวปล่อยไหลข้ามหน้าเอง
+// ไม่งั้น break-inside:avoid จะดันมาตรายาวไปหน้าใหม่ ทิ้งที่ว่างครึ่งหน้าไว้ข้างบน
+function keepShortArticlesTogether(printArea) {
   const prevStyle = printArea.getAttribute('style');
   printArea.style.cssText = 'display:block;position:absolute;left:-10000px;top:0;width:180mm;padding:0;visibility:hidden';
   try {
     const probe = document.createElement('div');
-    probe.style.cssText = 'height:273mm;width:1px';
+    probe.style.cssText = 'height:100mm;width:1px';
     printArea.appendChild(probe);
-    const pageH = probe.offsetHeight;
+    const px100 = probe.offsetHeight;
     printArea.removeChild(probe);
-    if (!pageH) return;
-    const mm = pageH / 273;                      // px per mm of printable height
-    const pages = Array.from(printArea.querySelectorAll('.write-mode-page'));
-    const heights = pages.map(p => p.getBoundingClientRect().height);
-    let sheet = 2;                                // cover page is sheet 1
-    pages.forEach((p, i) => {
-      const n = Math.max(1, Math.ceil((heights[i] + 2 * mm) / pageH));   // 2mm safety: a nearly-full sheet counts as full
-      if (sheet % 2 === 0) p.classList.add('rev');
-      p.style.minHeight = (n * pageH - 10 * mm) + 'px';   // ~10mm spare: a slightly shorter printable area must not push a blank sheet
-      sheet += n;
+    if (!px100) return;
+    const limit = px100 * 1.5;   // 150mm
+    printArea.querySelectorAll('.write-mode-page').forEach(p => {
+      if (p.getBoundingClientRect().height <= limit) p.classList.add('keep');
     });
   } finally {
     if (prevStyle === null) printArea.removeAttribute('style'); else printArea.setAttribute('style', prevStyle);
@@ -2050,7 +2036,7 @@ function notesColumnHtml(article) {
     : '';
   return (lectureHtml || noteHtml)
     ? lectureHtml + noteHtml
-    : '<div class="write-blank-hint">— ไม่มีคำบรรยายหรือโน้ตที่จดไว้สำหรับมาตรานี้ —</div>';
+    : '';
 }
 
 function printAllResults(mode) {
@@ -2066,11 +2052,10 @@ function printAllResults(mode) {
       <div class="write-cover-page">
         ${printDateStamp()}
         <h1 style="font-family:'Noto Serif Thai',serif;margin-bottom:8px;">${groupTitle}</h1>
-        <p style="color:#666;font-size:13px;">${annotated ? 'จดให้แล้ว — ตัวบท 65 : คำบรรยาย/โน้ต 35 ตัวบทอยู่ชิดสันเย็บ' : 'แบบใช้จด — ตัวบท 70 : ที่ว่างสำหรับจดเอง 30 ที่ว่างอยู่ขอบนอกของเล่ม'}</p>
+        <p style="color:#666;font-size:13px;">${annotated ? 'จดให้แล้ว — ตัวบท 65 : คำบรรยาย/โน้ต 35 ตัวบทอยู่ซ้าย' : 'แบบใช้จด — ตัวบท 70 : ที่ว่างสำหรับจดเอง 30 ที่ว่างอยู่ฝั่งขวา'}</p>
       </div>`;
-    // Sides (odd/even) and per-article page counts are decided after layout by
-    // paginateWritePages(), so an article longer than one sheet no longer
-    // throws off the spine side of every มาตรา that follows it.
+    // มาตราสั้นหลายมาตราอยู่หน้าเดียวกันได้ (break-inside:avoid กันมาตราขาดกลางหน้า)
+    // ขอบซ้าย/ขวาเท่ากัน ไม่สลับคี่/คู่ จึงไม่มีหน้าว่างจากการเว้นหน้า
     const pagesHtml = currentResults.map(article => {
       const contentColHtml = `
         <div class="write-col write-col-content">
@@ -2083,8 +2068,8 @@ function printAllResults(mode) {
       return `<div class="write-mode-page ${splitClass}">${contentColHtml}${otherColHtml}</div>`;
     }).join('');
     printArea.innerHTML = coverPage + pagesHtml;
-    paginateWritePages(printArea);
-    setPrintPageMargin('A4', '12mm', true);
+    keepShortArticlesTogether(printArea);
+    setPrintPageMargin('A4', '12mm 15mm');
     document.body.classList.add('printing-write');
   } else if (mode === 'classic') {
     // มาตราอย่างเดียว ต่อเนื่อง ไม่ตัดหน้าระหว่างมาตรา; เว้นขอบซ้าย 30mm สำหรับสันห่วง
