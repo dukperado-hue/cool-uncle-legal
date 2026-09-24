@@ -308,6 +308,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
     <button type="button" class="mode-tab active" data-mode="content" onclick="switchMode('content')" onmouseenter="playHoverSound()">📖 เนื้อหาโดยรวม</button>
     <button type="button" class="mode-tab" data-mode="summary" onclick="switchMode('summary')" onmouseenter="playHoverSound()">🗓️ สรุปรายครั้ง</button>
     <button type="button" class="mode-tab" data-mode="exam" onclick="switchMode('exam')" onmouseenter="playHoverSound()">📝 ข้อสอบเก่า</button>
+    <button type="button" class="mode-tab" data-mode="vocab" onclick="switchMode('vocab')" onmouseenter="playHoverSound()">🧠 ข้อสอบช่วยจำ</button>
   </div>
 
   <div class="tts-bar" id="tts-bar" style="display:none">
@@ -331,6 +332,9 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
   </div>
   <div class="mode-panel" id="panel-exam">
     <div class="lecture-list" id="lectureList-exam"></div>
+  </div>
+  <div class="mode-panel" id="panel-vocab">
+    <div id="vocab-quiz-root"></div>
   </div>
 
   <div class="coffee-widget">
@@ -2396,6 +2400,7 @@ function switchMode(mode){
   document.getElementById('panel-content').classList.toggle('active', mode === 'content');
   document.getElementById('panel-summary').classList.toggle('active', mode === 'summary');
   document.getElementById('panel-exam').classList.toggle('active', mode === 'exam');
+  document.getElementById('panel-vocab').classList.toggle('active', mode === 'vocab');
   TTS.stop();
 }
 renderLectures(LECTURES_CONTENT, 'lectureList-content', 'content');
@@ -2646,6 +2651,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <link rel="stylesheet" href="legal-disclaimer.css">
+<script src="legaleng-vocab-quiz.js?v=20260925a"></script>
 <script src="legal-footer.js"></script>
 <script src="lecture-print.js"></script>
 </body>
