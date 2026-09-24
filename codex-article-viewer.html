@@ -2119,7 +2119,7 @@ async function loadAndRender() {
   // Resolve the tiny registry first (best-effort, ~14 KB) so we can decode
   // an ?atlas= id before parsing. Negligible next to the 9.5 MB corpus.
   if (window.AtlasCore) {
-    try { await AtlasCore.loadRegistry('collections-registry.json?v=20260924e'); } catch (e) {}
+    try { await AtlasCore.loadRegistry('collections-registry.json?v=20260924f'); } catch (e) {}
   }
 
   // Accept BOTH:  ?id=<collection>_<number>   (legacy — unchanged, canonical)
@@ -2149,7 +2149,7 @@ async function loadAndRender() {
   currentNumber = id.slice(id.indexOf('_') + 1);
 
   try {
-    const res = await fetch('codex-data.json?v=20260924e');
+    const res = await fetch('codex-data.json?v=20260924f');
     if (!res.ok) throw new Error('fetch failed');
     codexData = await res.json();
   } catch (e) {
