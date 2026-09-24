@@ -403,22 +403,23 @@ mark.codex-hl-yellow{background:#FFE066;color:#3a3212}
 /* "แบบใช้จด" / "Easy Mode" print layout — 1 มาตราต่อหน้า, สองคอลัมน์,
    คอลัมน์เนื้อหา/คอลัมน์ว่าง(หรือคำบรรยาย) สลับข้างกันตามเลขหน้าคี่/คู่
    เพื่อให้ช่องว่างสำหรับจดอยู่ขอบนอกของเล่มเสมอเวลาเข้าเล่ม */
-.write-cover-page{page-break-after:always;break-after:page}
-.write-mode-page{display:flex;min-height:250mm;page-break-after:always;break-after:page}
-.write-mode-page:last-child{page-break-after:auto;break-after:auto}
+.write-cover-page{min-height:20mm}
+/* ขึ้นแผ่นใหม่ด้วย break-before (ไม่ใช้ break-after) — กันหน้าว่างท้ายเล่ม/หน้าว่างซ้อน */
+.write-mode-page{display:flex;position:relative;min-height:0;page-break-before:always;break-before:page}
+body.printing-one.printing-write #print-area{padding:0 !important}
 .write-col{flex:1;padding:16px 20px;min-width:0;overflow-wrap:anywhere}
-.write-col-content{border-right:1px dashed #999}
+/* เส้นแบ่งแบบ minimal: แท่งสั้นสีเทา หนา อยู่ข้างช่องตัวบท (ไม่ยาวเต็มหน้า) */
+.write-col-content{position:relative}
+.write-col-content::after{content:'';position:absolute;top:16px;right:0;width:3px;height:26mm;background:#9a9a9a;border-radius:2px}
 /* .rev = หน้าคู่: ช่องตัวบทอยู่ขวา (ชิดสันเย็บ) เส้นแบ่งย้ายไปซ้าย — ตั้งโดย paginateWritePages() */
 .write-mode-page.rev{flex-direction:row-reverse}
-.write-mode-page.rev .write-col-content{border-right:0;border-left:1px dashed #999}
+.write-mode-page.rev .write-col-content::after{right:auto;left:0}
 /* สัดส่วนช่องมาตรา : ช่องอีกฝั่ง — .split-70 = แบบใช้จด, .split-65 = จดให้แล้ว
    (ช่องมาตราอยู่ชิดขอบสันเย็บเสมอ; เส้นแบ่งเป็นขอบของช่องตัวบท) */
 .write-mode-page.split-70 .write-col-content{flex:0 0 70%}
 .write-mode-page.split-70 .write-col:not(.write-col-content){flex:0 0 30%}
 .write-mode-page.split-65 .write-col-content{flex:0 0 65%}
 .write-mode-page.split-65 .write-col:not(.write-col-content){flex:0 0 35%}
-.write-mode-page.split-65 .write-col-content{border-right:1px solid #aaa}
-.write-mode-page.split-65.rev .write-col-content{border-right:0;border-left:1px solid #aaa}
 .write-mode-page.split-65 .write-col-notes{font-size:11.5px;line-height:1.55}
 .write-mode-page.split-65 .write-col-notes *{font-size:inherit !important}
 .write-num{font-family:'Noto Serif Thai',serif;font-weight:700;font-size:16px;margin-bottom:10px}
@@ -2000,10 +2001,13 @@ function printArticle(btn) {
 //  - 'write'     : "แบบใช้จด" — 1 มาตราต่อหน้า ตัวบท 70 : ที่ว่าง 30 (ที่ว่างอยู่ขอบนอกของเล่ม)
 //  - 'easy'      : มาตรา + คำบรรยาย + โน้ต เรียงต่อกัน (พฤติกรรม Classic เดิม)
 // หน้าคี่ = ตัวบทอยู่ซ้าย, หน้าคู่ = ตัวบทอยู่ขวา เพื่อให้ตัวบทชิดสันเย็บเสมอเวลาพิมพ์สองหน้า
-function setPrintPageMargin(size, margin) {
+function setPrintPageMargin(size, margin, mirrored) {
   let st = document.getElementById('print-page-style');
   if (!st) { st = document.createElement('style'); st.id = 'print-page-style'; document.head.appendChild(st); }
-  st.textContent = size ? `@page{size:${size};margin:${margin}}` : '';
+  let css = size ? `@page{size:${size};margin:${margin}}` : '';
+  // ขอบสลับตามหน้า: ด้านสันเย็บ 20mm / ด้านนอก 10mm (หน้าคี่=ขวามือ สันอยู่ซ้าย, หน้าคู่=ซ้ายมือ สันอยู่ขวา)
+  if (size && mirrored) css += '@page :right{margin-left:20mm;margin-right:10mm}@page :left{margin-left:10mm;margin-right:20mm}';
+  st.textContent = css;
 }
 
 // Lay the 1-มาตรา-per-page modes out for real: measure each มาตรา at print
@@ -2011,10 +2015,10 @@ function setPrintPageMargin(size, margin) {
 // (min-height) so the next มาตรา starts on a fresh sheet, and track the running
 // sheet number so the text column always sits on the spine side
 // (odd sheet = left, even sheet = right via .rev). Cover = sheet 1.
-// Assumes A4 with 12mm margins (matches setPrintPageMargin('A4','12mm')).
+// Assumes A4, 12mm top/bottom and 20+10mm mirrored side margins (setPrintPageMargin('A4','12mm',true)).
 function paginateWritePages(printArea) {
   const prevStyle = printArea.getAttribute('style');
-  printArea.style.cssText = 'display:block;position:absolute;left:-10000px;top:0;width:186mm;padding:24px;visibility:hidden';
+  printArea.style.cssText = 'display:block;position:absolute;left:-10000px;top:0;width:180mm;padding:0;visibility:hidden';
   try {
     const probe = document.createElement('div');
     probe.style.cssText = 'height:273mm;width:1px';
@@ -2022,14 +2026,14 @@ function paginateWritePages(printArea) {
     const pageH = probe.offsetHeight;
     printArea.removeChild(probe);
     if (!pageH) return;
-    const slack = pageH * 4 / 273;               // ~4mm safety so a nearly-full sheet counts as full
+    const mm = pageH / 273;                      // px per mm of printable height
     const pages = Array.from(printArea.querySelectorAll('.write-mode-page'));
     const heights = pages.map(p => p.getBoundingClientRect().height);
     let sheet = 2;                                // cover page is sheet 1
     pages.forEach((p, i) => {
-      const n = Math.max(1, Math.ceil((heights[i] + slack) / pageH));
+      const n = Math.max(1, Math.ceil((heights[i] + 2 * mm) / pageH));   // 2mm safety: a nearly-full sheet counts as full
       if (sheet % 2 === 0) p.classList.add('rev');
-      p.style.minHeight = (n * pageH - slack * 1.5) + 'px';
+      p.style.minHeight = (n * pageH - 10 * mm) + 'px';   // ~10mm spare: a slightly shorter printable area must not push a blank sheet
       sheet += n;
     });
   } finally {
@@ -2080,7 +2084,8 @@ function printAllResults(mode) {
     }).join('');
     printArea.innerHTML = coverPage + pagesHtml;
     paginateWritePages(printArea);
-    setPrintPageMargin('A4', '12mm');
+    setPrintPageMargin('A4', '12mm', true);
+    document.body.classList.add('printing-write');
   } else if (mode === 'classic') {
     // มาตราอย่างเดียว ต่อเนื่อง ไม่ตัดหน้าระหว่างมาตรา; เว้นขอบซ้าย 30mm สำหรับสันห่วง
     printArea.innerHTML = `
@@ -2120,7 +2125,7 @@ function printAllResults(mode) {
 }
 
 window.addEventListener('afterprint', () => {
-  document.body.classList.remove('printing-one');
+  document.body.classList.remove('printing-one', 'printing-write');
   const printArea = document.getElementById('print-area');
   if (printArea) printArea.innerHTML = '';
   setPrintPageMargin('', '');
