@@ -404,6 +404,10 @@ mark.codex-hl-yellow{background:#FFE066;color:#3a3212}
    ซ้าย = ตัวบท, ขวา = ที่ว่าง(หรือคำบรรยาย) ขอบซ้าย/ขวาเท่ากัน
    เพื่อให้ช่องว่างสำหรับจดอยู่ขอบนอกของเล่มเสมอเวลาเข้าเล่ม */
 .write-cover-page{margin-bottom:6mm}
+.print-frame{width:100%;border-collapse:collapse;border-spacing:0}
+.print-frame td{padding:0}
+.pf-sp{height:12mm}
+.pf-body{margin:0 15mm}
 /* ขึ้นแผ่นใหม่ด้วย break-before (ไม่ใช้ break-after) — กันหน้าว่างท้ายเล่ม/หน้าว่างซ้อน */
 .write-mode-page.keep{page-break-inside:avoid;break-inside:avoid}
 .write-mode-page{display:flex;position:relative;min-height:0;border-top:1px solid #d0d0d0}
@@ -2010,7 +2014,7 @@ function setPrintPageMargin(size, margin) {
 // ไม่งั้น break-inside:avoid จะดันมาตรายาวไปหน้าใหม่ ทิ้งที่ว่างครึ่งหน้าไว้ข้างบน
 function keepShortArticlesTogether(printArea) {
   const prevStyle = printArea.getAttribute('style');
-  printArea.style.cssText = 'display:block;position:absolute;left:-10000px;top:0;width:180mm;padding:0;visibility:hidden';
+  printArea.style.cssText = 'display:block;position:absolute;left:-10000px;top:0;width:210mm;padding:0;visibility:hidden';
   try {
     const probe = document.createElement('div');
     probe.style.cssText = 'height:100mm;width:1px';
@@ -2041,9 +2045,11 @@ function notesColumnHtml(article) {
 
 function printAllResults(mode) {
   mode = mode || 'classic';
+  setPrintTitle();
   const printArea = document.getElementById('print-area');
   if (!printArea || !currentResults || currentResults.length === 0) return;
-  const groupTitle = document.getElementById('result-count-text')?.textContent.split('(')[0].trim() || 'ผลการค้นหา';
+  const bookTitle = (BOOK_INFO[selectedBook] && BOOK_INFO[selectedBook].title) || 'ผลการค้นหา';
+  const groupTitle = `${escapeHtml(bookTitle)} (${currentResults.length} มาตรา)`;
 
   if (mode === 'write' || mode === 'annotated') {
     const annotated = mode === 'annotated';
@@ -2067,9 +2073,13 @@ function printAllResults(mode) {
         : `<div class="write-col write-col-blank"></div>`;
       return `<div class="write-mode-page ${splitClass}">${contentColHtml}${otherColHtml}</div>`;
     }).join('');
-    printArea.innerHTML = coverPage + pagesHtml;
+    // @page margin = 0 เพื่อให้เบราว์เซอร์ไม่พิมพ์หัว/ท้ายกระดาษ (วันที่ URL เลขหน้า);
+    // ขอบบน/ล่างทำด้วย thead/tfoot ที่ซ้ำทุกหน้า ขอบซ้าย/ขวาทำด้วย margin ของ wrapper
+    printArea.innerHTML = `<table class="print-frame"><thead><tr><td><div class="pf-sp"></div></td></tr></thead>
+      <tfoot><tr><td><div class="pf-sp"></div></td></tr></tfoot>
+      <tbody><tr><td><div class="pf-body">${coverPage + pagesHtml}</div></td></tr></tbody></table>`;
     keepShortArticlesTogether(printArea);
-    setPrintPageMargin('A4', '12mm 15mm');
+    setPrintPageMargin('A4', '0');
     document.body.classList.add('printing-write');
   } else if (mode === 'classic') {
     // มาตราอย่างเดียว ต่อเนื่อง ไม่ตัดหน้าระหว่างมาตรา; เว้นขอบซ้าย 30mm สำหรับสันห่วง
@@ -2109,7 +2119,15 @@ function printAllResults(mode) {
   window.print();
 }
 
+// หัวกระดาษของเบราว์เซอร์ใช้ document.title — ตอนพิมพ์ให้เหลือแค่ชื่อเว็บ
+let _origDocTitle = null;
+function setPrintTitle() {
+  if (_origDocTitle === null) _origDocTitle = document.title;
+  document.title = 'Cool Uncle Legal Lab';
+}
+
 window.addEventListener('afterprint', () => {
+  if (_origDocTitle !== null) { document.title = _origDocTitle; _origDocTitle = null; }
   document.body.classList.remove('printing-one', 'printing-write');
   const printArea = document.getElementById('print-area');
   if (printArea) printArea.innerHTML = '';
