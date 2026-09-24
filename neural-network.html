@@ -387,7 +387,7 @@
       [codex, articleIndex] = await Promise.all([
         fetch('codex-data.json', { cache: 'no-store' }).then(r => r.json()),
         fetch('prototype/assets/cases/article-case-index.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : {}),
-        (window.AtlasCore ? AtlasCore.loadRegistry('collections-registry.json?v=20260924a').catch(() => {}) : Promise.resolve()),
+        (window.AtlasCore ? AtlasCore.loadRegistry('collections-registry.json?v=20260924b').catch(() => {}) : Promise.resolve()),
       ]);
     } catch (e) {
       loadingEl.innerHTML = '<div style="color:#ff8080">โหลดข้อมูลไม่สำเร็จ: ' + (e.message || e) + '</div>';
