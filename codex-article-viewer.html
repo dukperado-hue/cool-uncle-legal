@@ -1354,6 +1354,10 @@ const BOOK_TITLES = {
   airoffences: 'พระราชบัญญัติว่าด้วยความผิดบางประการต่อการเดินอากาศ พ.ศ. 2558',
   torture: 'พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565',
   pdpa: 'พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562',
+  envprotect: 'พระราชบัญญัติส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535',
+  hazsub: 'พระราชบัญญัติวัตถุอันตราย พ.ศ. 2535',
+  marinecoast: 'พระราชบัญญัติส่งเสริมการบริหารจัดการทรัพยากรทางทะเลและชายฝั่ง พ.ศ. 2558',
+  fisheries: 'พระราชกำหนดการประมง พ.ศ. 2558',
 };
 
 let codexData = null;
@@ -2115,7 +2119,7 @@ async function loadAndRender() {
   // Resolve the tiny registry first (best-effort, ~14 KB) so we can decode
   // an ?atlas= id before parsing. Negligible next to the 9.5 MB corpus.
   if (window.AtlasCore) {
-    try { await AtlasCore.loadRegistry('collections-registry.json?v=20260923a'); } catch (e) {}
+    try { await AtlasCore.loadRegistry('collections-registry.json?v=20260924a'); } catch (e) {}
   }
 
   // Accept BOTH:  ?id=<collection>_<number>   (legacy — unchanged, canonical)
@@ -2145,7 +2149,7 @@ async function loadAndRender() {
   currentNumber = id.slice(id.indexOf('_') + 1);
 
   try {
-    const res = await fetch('codex-data.json?v=20260923a');
+    const res = await fetch('codex-data.json?v=20260924a');
     if (!res.ok) throw new Error('fetch failed');
     codexData = await res.json();
   } catch (e) {

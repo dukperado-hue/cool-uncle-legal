@@ -42,8 +42,8 @@ function crumbText(key, num) {
 
 // ---------------------------------------------------------------- generic
 head('Registry / no-hardcode / URL-safety');
-ok('registry loaded, 20 real + 1 planned collection',
-   Object.keys(registry.collections).length === 21);
+ok('registry loaded, 24 real + 1 planned collection',
+   Object.keys(registry.collections).length === 25);
 const coreSrc = fs.readFileSync(path.join(ROOT, 'atlas-core.js'), 'utf8');
 ok("atlas-core: structural field order is derived from the registry, not a literal array",
    /getStructuralFieldOrder/.test(coreSrc) &&
@@ -59,7 +59,7 @@ ok('all 18 enabled collections are present in corpus',
    AtlasCore.listCollections().every(c => c.inCorpus),
    AtlasCore.listCollections().map(c => c.key).join(','));
 const subj = AtlasCore.listSubjectAreas();
-ok('subject areas populated', subj.length === 9 && subj.every(a => a.collections.length > 0),
+ok('subject areas populated', subj.length === 10 && subj.every(a => a.collections.length > 0),
    subj.map(a => a.key + ':' + a.collections.length).join(' '));
 
 // legacy-URL invariance

@@ -71,6 +71,8 @@ class Line:
     text: str           # already fixed (PUA remap + สระอำ)
     font: str           # last span's font name on this line
     is_bold: bool       # True if any span on this line has a "Bold" font
+    trail_space: bool = False  # raw line ended in a real space BEFORE strip — in Word-made PDFs this marks a wrap that fell on a word-space (vs. mid-phrase)
+    size: float = 0.0   # font size (pt) of the line's last span — footnotes in Council-of-State consolidations are 14pt vs 16pt body
 
 
 def _fix_char(c: str, width: float) -> str:
@@ -82,11 +84,16 @@ def _fix_char(c: str, width: float) -> str:
     return c
 
 
-def extract_lines(pdf_path: str, first_page: int | None = None, last_page: int | None = None) -> list[Line]:
+def extract_lines(pdf_path: str, first_page: int | None = None, last_page: int | None = None,
+                  drop_spans_below: float = 0.0) -> list[Line]:
     """Extract every physical text line, char-level-corrected.
 
     Page numbers are 1-indexed and inclusive, matching how PDF viewers show
     them (unlike PyMuPDF's own 0-indexed page objects).
+
+    drop_spans_below: skip any span whose font size (pt) is below this value —
+    use ~11 on Council-of-State consolidations to strip the superscript
+    footnote markers (10.6pt digits glued after a มาตรา number / defined term).
     """
     doc = fitz.open(pdf_path)
     lo = (first_page - 1) if first_page else 0
@@ -102,18 +109,23 @@ def extract_lines(pdf_path: str, first_page: int | None = None, last_page: int |
                 x0 = line["bbox"][0]
                 text = ""
                 font = ""
+                size = 0.0
                 bold = False
                 for span in line["spans"]:
+                    if drop_spans_below and span.get("size", 99) < drop_spans_below:
+                        continue
                     font = span.get("font", "")
+                    size = span.get("size", 0.0)
                     if "bold" in font.lower():
                         bold = True
                     for ch in span["chars"]:
                         w = ch["bbox"][2] - ch["bbox"][0]
                         text += _fix_char(ch["c"], w)
+                trail = text.endswith(" ")
                 text = text.strip()
                 if not text:
                     continue
-                lines.append(Line(page=pno + 1, x0=x0, text=text, font=font, is_bold=bold))
+                lines.append(Line(page=pno + 1, x0=x0, text=text, font=font, is_bold=bold, size=size, trail_space=trail))
     return lines
 
 

@@ -346,6 +346,10 @@
       airoffences:   { title: 'พ.ร.บ.ว่าด้วยความผิดบางประการต่อการเดินอากาศ พ.ศ. 2558' },
       torture:       { title: 'พ.ร.บ.ป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565' },
       pdpa:          { title: 'พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562' },
+      envprotect:    { title: 'พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535' },
+      hazsub:        { title: 'พ.ร.บ.วัตถุอันตราย พ.ศ. 2535' },
+      marinecoast:   { title: 'พ.ร.บ.ส่งเสริมการบริหารจัดการทรัพยากรทางทะเลและชายฝั่ง พ.ศ. 2558' },
+      fisheries:     { title: 'พ.ร.ก.การประมง พ.ศ. 2558' },
     };
     // Top-level: exactly 6 category nodes under root, per user's explicit
     // grouping — expand each to reveal its member ประมวล/พระราชบัญญัติ.
@@ -365,6 +369,7 @@
                   } },
       other:    { label: 'อื่นๆ', color: '#ff9900', books: ['copyright', 'patent', 'trademark', 'carriage', 'ipcourt'] },
       aviation: { label: 'การบิน', color: '#2299ff', books: ['airnav', 'caat2558', 'airoffences'] },
+      environment: { label: 'สิ่งแวดล้อม', color: '#22cc77', books: ['envprotect', 'hazsub', 'marinecoast', 'fisheries'] },
     };
     const CASE_COLOR = '#ffcc44';
     // Structural level order — sourced from the Atlas registry when available
@@ -382,7 +387,7 @@
       [codex, articleIndex] = await Promise.all([
         fetch('codex-data.json', { cache: 'no-store' }).then(r => r.json()),
         fetch('prototype/assets/cases/article-case-index.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : {}),
-        (window.AtlasCore ? AtlasCore.loadRegistry('collections-registry.json?v=20260923a').catch(() => {}) : Promise.resolve()),
+        (window.AtlasCore ? AtlasCore.loadRegistry('collections-registry.json?v=20260924a').catch(() => {}) : Promise.resolve()),
       ]);
     } catch (e) {
       loadingEl.innerHTML = '<div style="color:#ff8080">โหลดข้อมูลไม่สำเร็จ: ' + (e.message || e) + '</div>';
@@ -874,6 +879,10 @@
       ['airnav', ['การเดินอากาศ']],
       ['torture', ['ป้องกันและปราบปรามการทรมาน', 'การกระทำให้บุคคลสูญหาย', 'พ.ร.บ.ทรมานและอุ้มหาย']],
       ['pdpa', ['คุ้มครองข้อมูลส่วนบุคคล', 'PDPA']],
+      ['envprotect', ['ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อม', 'พ.ร.บ.สิ่งแวดล้อม', 'EIA']],
+      ['hazsub', ['วัตถุอันตราย']],
+      ['marinecoast', ['ทรัพยากรทางทะเลและชายฝั่ง', 'ทะเลและชายฝั่ง']],
+      ['fisheries', ['พ.ร.ก.ประมง', 'การประมง', 'IUU']],
       ['criminal', ['ประมวลกฎหมายอาญา', 'ป.อ.', '— อาญา', '-อาญา']],
       ['civil', ['ประมวลกฎหมายแพ่งและพาณิชย์', 'ป.พ.พ.', '— แพ่ง', '-แพ่ง']],
     ];

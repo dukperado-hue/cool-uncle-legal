@@ -999,8 +999,8 @@ let currentPage = 0;
 async function loadCodexData() {
   try {
     const [response] = await Promise.all([
-      fetch('codex-data.json?v=20260923a'),
-      (window.AtlasCore ? AtlasCore.loadRegistry('collections-registry.json?v=20260923a').catch(() => {}) : Promise.resolve())
+      fetch('codex-data.json?v=20260924a'),
+      (window.AtlasCore ? AtlasCore.loadRegistry('collections-registry.json?v=20260924a').catch(() => {}) : Promise.resolve())
     ]);
     if (!response.ok) throw new Error('Failed to load codex data');
     codexData = await response.json();
@@ -1035,6 +1035,10 @@ const BOOK_INFO = {
   airoffences: { title: 'พระราชบัญญัติว่าด้วยความผิดบางประการต่อการเดินอากาศ พ.ศ. 2558', short: 'ความผิดต่อการเดินอากาศ', icon: '🚨' },
   torture: { title: 'พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565', short: 'ป้องกันการทรมานและอุ้มหาย', icon: '🛡️' },
   pdpa: { title: 'พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562', short: 'คุ้มครองข้อมูลส่วนบุคคล (PDPA)', icon: '🔐' },
+  envprotect: { title: 'พระราชบัญญัติส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535', short: 'ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อม', icon: '🌿' },
+  hazsub: { title: 'พระราชบัญญัติวัตถุอันตราย พ.ศ. 2535', short: 'วัตถุอันตราย', icon: '☣️' },
+  marinecoast: { title: 'พระราชบัญญัติส่งเสริมการบริหารจัดการทรัพยากรทางทะเลและชายฝั่ง พ.ศ. 2558', short: 'ทรัพยากรทางทะเลและชายฝั่ง', icon: '🌊' },
+  fisheries: { title: 'พระราชกำหนดการประมง พ.ศ. 2558', short: 'การประมง', icon: '🎣' },
 };
 const MAX_RESULTS = 50;
 
@@ -1586,6 +1590,35 @@ function pickAirBook(book) {
   applyBookLock(book);
 }
 
+// "กฎหมายสิ่งแวดล้อม" compact card on index.html links here with
+// ?book=env — a pseudo-value covering 4 real books.
+function showEnvBookPicker() {
+  document.querySelector('.search-header h1').textContent = '🌿 เลือกฉบับกฎหมายสิ่งแวดล้อม';
+  document.querySelector('.search-header p').textContent = 'เลือกฉบับที่ต้องการค้นหามาตรา';
+  document.getElementById('search-text').disabled = true;
+  document.getElementById('search-article').disabled = true;
+  const existing = document.getElementById('env-book-picker');
+  if (existing) existing.remove();
+  const picker = document.createElement('div');
+  picker.id = 'env-book-picker';
+  picker.className = 'book-selector';
+  picker.innerHTML = `
+    <button type="button" class="book-btn book-btn-sm" onclick="pickEnvBook('envprotect')" onmouseenter="playHoverSound()">🌿 พระราชบัญญัติส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. ๒๕๓๕</button>
+    <button type="button" class="book-btn book-btn-sm" onclick="pickEnvBook('hazsub')" onmouseenter="playHoverSound()">☣️ พระราชบัญญัติวัตถุอันตราย พ.ศ. ๒๕๓๕</button>
+    <button type="button" class="book-btn book-btn-sm" onclick="pickEnvBook('marinecoast')" onmouseenter="playHoverSound()">🌊 พระราชบัญญัติส่งเสริมการบริหารจัดการทรัพยากรทางทะเลและชายฝั่ง พ.ศ. ๒๕๕๘</button>
+    <button type="button" class="book-btn book-btn-sm" onclick="pickEnvBook('fisheries')" onmouseenter="playHoverSound()">🎣 พระราชกำหนดการประมง พ.ศ. ๒๕๕๘</button>
+  `;
+  document.querySelector('.search-container').appendChild(picker);
+}
+
+function pickEnvBook(book) {
+  const picker = document.getElementById('env-book-picker');
+  if (picker) picker.remove();
+  document.getElementById('search-text').disabled = false;
+  document.getElementById('search-article').disabled = false;
+  applyBookLock(book);
+}
+
 function pickAdminBook(book) {
   const picker = document.getElementById('admin-book-picker');
   if (picker) picker.remove();
@@ -2067,6 +2100,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     showIpBookPicker();
   } else if (book === 'air') {
     showAirBookPicker();
+  } else if (book === 'env') {
+    showEnvBookPicker();
   } else if (book && BOOK_INFO[book]) {
     applyBookLock(book);
   }
@@ -2082,7 +2117,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 <!-- SEO batch2: ประมวลกฎหมายทั้งหมด — static content for Googlebot (keyword: ประมวลกฎหมายอาญา วิแพ่ง วิอาญา พระธรรมนูญศาลยุติธรรม พ.ร.บ.จัดตั้งศาลปกครอง กฎหมายปกครอง วิปกครอง ลิขสิทธิ์ สิทธิบัตร) -->
 <div class="codex-seo-books" style="max-width:1000px;margin:0 auto;padding:10px 18px 30px;color:var(--ink-faint);font-size:13px;line-height:1.9;border-top:1px solid rgba(120,120,120,.15);margin-top:24px" aria-hidden="true">
 <p style="margin:0 0 8px;font-size:12px;letter-spacing:.5px">ประมวลกฎหมายทั้งหมดในระบบ (คลิกที่ชื่อประมวลเปิดหน้าอ่านแต่ละมาตรา)</p>
-<p style="margin:0"><a href="?book=civil" style="color:inherit;text-decoration:none">ประมวลกฎหมายแพ่งและพาณิชย์</a> · <a href="?book=criminal" style="color:inherit;text-decoration:none">ประมวลกฎหมายอาญา</a> · <a href="?book=civpro" style="color:inherit;text-decoration:none">ประมวลกฎหมายวิธีพิจารณาความแพ่ง (วิแพ่ง)</a> · <a href="?book=crimpro" style="color:inherit;text-decoration:none">ประมวลกฎหมายวิธีพิจารณาความอาญา (วิอาญา)</a> · <a href="?book=constitution" style="color:inherit;text-decoration:none">พระธรรมนูญศาลยุติธรรม</a> · <a href="?book=const2560" style="color:inherit;text-decoration:none">รัฐธรรมนูญแห่งราชอาณาจักรไทย พ.ศ. 2560</a> · <a href="?book=adminproc" style="color:inherit;text-decoration:none">พ.ร.บ.วิธีปฏิบัติราชการทางปกครอง</a> · <a href="?book=admincourt" style="color:inherit;text-decoration:none">พ.ร.บ.จัดตั้งศาลปกครองและวิธีพิจารณาคดีปกครอง (วิปกครอง)</a> · <a href="?book=tortofficials" style="color:inherit;text-decoration:none">พ.ร.บ.ความรับผิดทางละเมิดของเจ้าหน้าที่</a> · <a href="?book=copyright" style="color:inherit;text-decoration:none">พ.ร.บ.ลิขสิทธิ์ พ.ศ. 2537</a> · <a href="?book=patent" style="color:inherit;text-decoration:none">พ.ร.บ.สิทธิบัตร พ.ศ. 2522</a> · <a href="?book=trademark" style="color:inherit;text-decoration:none">พ.ร.บ.เครื่องหมายการค้า พ.ศ. 2534</a> · <a href="?book=carriage" style="color:inherit;text-decoration:none">พ.ร.บ.การรับขนของทางทะเล พ.ศ. 2534</a> · <a href="?book=ipcourt" style="color:inherit;text-decoration:none">พ.ร.บ.จัดตั้งศาลทรัพย์สินทางปัญญาและการค้าระหว่างประเทศ</a> · <a href="?book=airnav" style="color:inherit;text-decoration:none">พ.ร.บ.การเดินอากาศ พ.ศ. 2497</a> · <a href="?book=caat2558" style="color:inherit;text-decoration:none">พ.ร.ก.การบินพลเรือนแห่งประเทศไทย พ.ศ. 2558</a> · <a href="?book=airoffences" style="color:inherit;text-decoration:none">พ.ร.บ.ว่าด้วยความผิดบางประการต่อการเดินอากาศ พ.ศ. 2558</a> · <a href="?book=torture" style="color:inherit;text-decoration:none">พ.ร.บ.ป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565</a> · <a href="?book=pdpa" style="color:inherit;text-decoration:none">พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562</a></p>
+<p style="margin:0"><a href="?book=civil" style="color:inherit;text-decoration:none">ประมวลกฎหมายแพ่งและพาณิชย์</a> · <a href="?book=criminal" style="color:inherit;text-decoration:none">ประมวลกฎหมายอาญา</a> · <a href="?book=civpro" style="color:inherit;text-decoration:none">ประมวลกฎหมายวิธีพิจารณาความแพ่ง (วิแพ่ง)</a> · <a href="?book=crimpro" style="color:inherit;text-decoration:none">ประมวลกฎหมายวิธีพิจารณาความอาญา (วิอาญา)</a> · <a href="?book=constitution" style="color:inherit;text-decoration:none">พระธรรมนูญศาลยุติธรรม</a> · <a href="?book=const2560" style="color:inherit;text-decoration:none">รัฐธรรมนูญแห่งราชอาณาจักรไทย พ.ศ. 2560</a> · <a href="?book=adminproc" style="color:inherit;text-decoration:none">พ.ร.บ.วิธีปฏิบัติราชการทางปกครอง</a> · <a href="?book=admincourt" style="color:inherit;text-decoration:none">พ.ร.บ.จัดตั้งศาลปกครองและวิธีพิจารณาคดีปกครอง (วิปกครอง)</a> · <a href="?book=tortofficials" style="color:inherit;text-decoration:none">พ.ร.บ.ความรับผิดทางละเมิดของเจ้าหน้าที่</a> · <a href="?book=copyright" style="color:inherit;text-decoration:none">พ.ร.บ.ลิขสิทธิ์ พ.ศ. 2537</a> · <a href="?book=patent" style="color:inherit;text-decoration:none">พ.ร.บ.สิทธิบัตร พ.ศ. 2522</a> · <a href="?book=trademark" style="color:inherit;text-decoration:none">พ.ร.บ.เครื่องหมายการค้า พ.ศ. 2534</a> · <a href="?book=carriage" style="color:inherit;text-decoration:none">พ.ร.บ.การรับขนของทางทะเล พ.ศ. 2534</a> · <a href="?book=ipcourt" style="color:inherit;text-decoration:none">พ.ร.บ.จัดตั้งศาลทรัพย์สินทางปัญญาและการค้าระหว่างประเทศ</a> · <a href="?book=airnav" style="color:inherit;text-decoration:none">พ.ร.บ.การเดินอากาศ พ.ศ. 2497</a> · <a href="?book=caat2558" style="color:inherit;text-decoration:none">พ.ร.ก.การบินพลเรือนแห่งประเทศไทย พ.ศ. 2558</a> · <a href="?book=airoffences" style="color:inherit;text-decoration:none">พ.ร.บ.ว่าด้วยความผิดบางประการต่อการเดินอากาศ พ.ศ. 2558</a> · <a href="?book=torture" style="color:inherit;text-decoration:none">พ.ร.บ.ป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565</a> · <a href="?book=pdpa" style="color:inherit;text-decoration:none">พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562</a> · <a href="?book=envprotect" style="color:inherit;text-decoration:none">พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. ๒๕๓๕</a> · <a href="?book=hazsub" style="color:inherit;text-decoration:none">พ.ร.บ.วัตถุอันตราย พ.ศ. ๒๕๓๕</a> · <a href="?book=marinecoast" style="color:inherit;text-decoration:none">พ.ร.บ.ส่งเสริมการบริหารจัดการทรัพยากรทางทะเลและชายฝั่ง พ.ศ. ๒๕๕๘</a> · <a href="?book=fisheries" style="color:inherit;text-decoration:none">พ.ร.ก.การประมง พ.ศ. ๒๕๕๘</a></p>
 </div>
 <script src="legal-footer.js"></script>
 </body>
