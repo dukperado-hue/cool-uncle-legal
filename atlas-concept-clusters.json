@@ -2053,6 +2053,67 @@
         }
       ],
       "topics": []
+    },
+    "environment-law-core": {
+      "id": "atlas:cluster/environment-law-core",
+      "slug": "environment-law-core",
+      "titleTH": "กฎหมายสิ่งแวดล้อมไทย: กฎหมายแม่บท วัตถุอันตราย ทะเลและการประมง",
+      "titleEN": "Thai Environmental Law: Framework Act, Hazardous Substances, Marine and Fisheries",
+      "status": "published",
+      "subjectAreas": [
+        "environment"
+      ],
+      "description": "กลุ่มแนวคิดวิชากฎหมายสิ่งแวดล้อม (LA383) ที่ผูกกับตัวบทใน codex: เริ่มจากนิยามและมาตรฐานของ พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ 2535 แผนและเขตพื้นที่ EIA สิทธิการมีส่วนร่วม กองทุน และความรับผิดเด็ดขาด (ม.96–97) แล้วขยายไปยังกฎหมายเฉพาะเรื่อง ได้แก่ วัตถุอันตราย ทรัพยากรทางทะเลและชายฝั่ง และการประมง (IUU)",
+      "concepts": [
+        {
+          "ref": "atlas:concept/sing-waedlom-lae-molaphit",
+          "note": "นิยามสิ่งแวดล้อม มลพิษ และแหล่งกำเนิดมลพิษ — จุดเริ่มต้น",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/manthan-khunnaphap-sing-waedlom",
+          "note": "มาตรฐาน 2 ชั้น: คุณภาพสิ่งแวดล้อม และควบคุมมลพิษจากแหล่งกำเนิด"
+        },
+        {
+          "ref": "atlas:concept/phaen-chattkan-khunnaphap-sing-waedlom",
+          "note": "แผนจัดการคุณภาพสิ่งแวดล้อม"
+        },
+        {
+          "ref": "atlas:concept/khet-phuenthi-khumkhrong-sing-waedlom",
+          "note": "เขตพื้นที่คุ้มครองสิ่งแวดล้อมและเขตควบคุมมลพิษ"
+        },
+        {
+          "ref": "atlas:concept/kan-pramoen-phon-krathop-sing-waedlom",
+          "note": "EIA / EHIA / SEA — เครื่องมือป้องกันเชิงกระบวนการ",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/sitthi-khong-prachachon-sing-waedlom",
+          "note": "สิทธิและการมีส่วนร่วมของประชาชน"
+        },
+        {
+          "ref": "atlas:concept/kong-thun-sing-waedlom",
+          "note": "กองทุนสิ่งแวดล้อม"
+        },
+        {
+          "ref": "atlas:concept/khwam-rap-phid-thang-phaeng-molaphit",
+          "note": "ความรับผิดเด็ดขาดและหลักผู้ก่อมลพิษเป็นผู้จ่าย",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/wattu-antarai",
+          "note": "วัตถุอันตราย: 4 ชนิด ความรับผิด และการเปิดเผยข้อมูล"
+        },
+        {
+          "ref": "atlas:concept/sapayakon-thang-thale-lae-chaifang",
+          "note": "ทรัพยากรทางทะเลและชายฝั่ง: พื้นที่คุ้มครอง/วิกฤต"
+        },
+        {
+          "ref": "atlas:concept/kan-prapong-lae-iuu",
+          "note": "การประมงและ IUU: สืบค้นย้อนกลับ"
+        }
+      ],
+      "topics": []
     }
   }
 }

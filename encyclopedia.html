@@ -121,12 +121,12 @@
   // best-effort: without it, subject-area chips fall back to their raw keys.
   Promise.all([
     AtlasCore.loadRegistry('collections-registry.json?v=20260913c').catch(function () { /* labels degrade gracefully */ }),
-    AtlasSubjectTags.load('atlas-subject-tags.json?v=20260914f')
+    AtlasSubjectTags.load('atlas-subject-tags.json?v=20260924a')
   ])
     .then(function () {
       return AtlasEncyclopedia.render(root, {
-        url: 'atlas-concepts.json?v=20260920b',
-        clustersUrl: 'atlas-concept-clusters.json?v=20260920a',
+        url: 'atlas-concepts.json?v=20260924a',
+        clustersUrl: 'atlas-concept-clusters.json?v=20260924a',
         topicsUrl: 'atlas-topics.json?v=20260912a'
       });
     })
