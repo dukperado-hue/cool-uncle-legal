@@ -2939,6 +2939,214 @@
         }
       ],
       "topics": []
+    },
+    "carriage-parties-definitions-scope": {
+      "id": "atlas:cluster/carriage-parties-definitions-scope",
+      "slug": "carriage-parties-definitions-scope",
+      "titleTH": "รับขนของทางทะเล: คู่สัญญา คำนิยาม และขอบเขตการบังคับใช้",
+      "titleEN": "Carriage of Goods by Sea: Parties, Definitions and Scope",
+      "status": "published",
+      "subjectAreas": [
+        "commercial-ip"
+      ],
+      "description": "กลุ่มแนวคิดพื้นฐานของ พ.ร.บ.การรับขนของทางทะเล พ.ศ. 2534 ครอบคลุมคู่สัญญาและบุคคลที่เกี่ยวข้อง (ผู้ขนส่ง ผู้ขนส่งอื่น ผู้ส่งของ ผู้รับตราส่ง) คำนิยามหลัก และขอบเขตการบังคับใช้ของกฎหมาย",
+      "concepts": [
+        {
+          "ref": "atlas:concept/phu-khonsong-lae-phu-khonsong-uen",
+          "note": "จุดตั้งต้น: ผู้ขนส่งและผู้ขนส่งอื่น"
+        },
+        {
+          "ref": "atlas:concept/phu-song-khong-lae-phu-rap-trasong",
+          "note": "ผู้ส่งของและผู้รับตราส่ง"
+        },
+        {
+          "ref": "atlas:concept/niyam-khong-phachana-khonsong-lae-sanya-rap-khon-khong-thang-thale",
+          "note": "นิยามของ ภาชนะขนส่ง และสัญญา"
+        },
+        {
+          "ref": "atlas:concept/khopkhet-kan-bangkhapchai-phraratbanyat-rap-khon-khong-thang-thale",
+          "note": "ขอบเขตการบังคับใช้"
+        }
+      ],
+      "topics": []
+    },
+    "carriage-carrier-duties-rights": {
+      "id": "atlas:cluster/carriage-carrier-duties-rights",
+      "slug": "carriage-carrier-duties-rights",
+      "titleTH": "รับขนของทางทะเล: หน้าที่และสิทธิของผู้ขนส่งก่อนและระหว่างการขนส่ง",
+      "titleEN": "Carriage of Goods by Sea: Carrier's Duties and Rights",
+      "status": "published",
+      "subjectAreas": [
+        "commercial-ip"
+      ],
+      "description": "กลุ่มแนวคิดหน้าที่และสิทธิของผู้ขนส่งตามหมวด 1 ได้แก่ หน้าที่ทำให้เรือเดินทะเลได้ หน้าที่ดูแลของ การบรรทุกบนปากระวาง การออกใบตราส่ง สิทธิรับค่าระวางและยึดหน่วง หน้าที่บอกกล่าวเมื่อของถึงปลายทาง และข้อกำหนดที่เป็นโมฆะ",
+      "concepts": [
+        {
+          "ref": "atlas:concept/nathi-hai-ruea-yu-nai-sapap-doenthale-dai",
+          "note": "จุดตั้งต้น: หน้าที่ทำให้เรือเดินทะเลได้"
+        },
+        {
+          "ref": "atlas:concept/nathi-duulae-khong-thi-khonsong",
+          "note": "หน้าที่ดูแลของที่ขนส่ง"
+        },
+        {
+          "ref": "atlas:concept/kan-banthuk-khong-bon-pak-rawang",
+          "note": "การบรรทุกของบนปากระวาง"
+        },
+        {
+          "ref": "atlas:concept/kan-ok-bai-trasong-song-chanit",
+          "note": "การออกใบตราส่งสองชนิด"
+        },
+        {
+          "ref": "atlas:concept/sitthi-dai-rap-kha-rawang-lae-sitthi-yuetnuang",
+          "note": "สิทธิรับค่าระวางและยึดหน่วง"
+        },
+        {
+          "ref": "atlas:concept/nathi-bokklao-mua-khong-thueng-plaithang",
+          "note": "หน้าที่บอกกล่าวเมื่อของถึงปลายทาง"
+        },
+        {
+          "ref": "atlas:concept/khokamnot-pen-mokha-nai-sanya-rap-khon-khong-thang-thale",
+          "note": "ข้อกำหนดที่เป็นโมฆะ"
+        }
+      ],
+      "topics": []
+    },
+    "carriage-bill-of-lading": {
+      "id": "atlas:cluster/carriage-bill-of-lading",
+      "slug": "carriage-bill-of-lading",
+      "titleTH": "ใบตราส่ง: รายการ ผลผูกพัน และการโอน",
+      "titleEN": "Bill of Lading: Particulars, Evidentiary Effect and Negotiation",
+      "status": "published",
+      "subjectAreas": [
+        "commercial-ip"
+      ],
+      "description": "กลุ่มแนวคิดตามหมวด 2 ว่าด้วยใบตราส่ง ครอบคลุมรายการที่ต้องมี ผลผูกพันและข้อสันนิษฐานเป็นหลักฐาน (หลักใบตราส่งสะอาด) และการโอนใบตราส่ง/การส่งมอบของ",
+      "concepts": [
+        {
+          "ref": "atlas:concept/rai-kan-nai-bai-trasong",
+          "note": "จุดตั้งต้น: รายการที่ต้องมี"
+        },
+        {
+          "ref": "atlas:concept/phon-phukphan-lae-khosanit-than-khong-bai-trasong",
+          "note": "ผลผูกพันและข้อสันนิษฐาน"
+        },
+        {
+          "ref": "atlas:concept/kan-on-bai-trasong-lae-kan-songmob-khong",
+          "note": "การโอนและการส่งมอบของ"
+        }
+      ],
+      "topics": []
+    },
+    "carriage-shipper-duties-rights": {
+      "id": "atlas:cluster/carriage-shipper-duties-rights",
+      "slug": "carriage-shipper-duties-rights",
+      "titleTH": "รับขนของทางทะเล: หน้าที่และสิทธิของผู้ส่งของ",
+      "titleEN": "Carriage of Goods by Sea: Shipper's Duties and Rights",
+      "status": "published",
+      "subjectAreas": [
+        "commercial-ip"
+      ],
+      "description": "กลุ่มแนวคิดตามหมวด 3 ว่าด้วยความรับผิดของผู้ส่งของบนฐานความผิด การรับรองความถูกต้องของข้อมูลและข้อตกลงชดใช้ค่าเสียหาย หน้าที่แจ้งสภาพอันตรายแห่งของ และสิทธิสั่งจัดการของระหว่างการขนส่ง",
+      "concepts": [
+        {
+          "ref": "atlas:concept/khwamrapphid-khong-phu-song-khong",
+          "note": "จุดตั้งต้น: ความรับผิดบนฐานความผิด"
+        },
+        {
+          "ref": "atlas:concept/kan-rap-rong-khwam-thuktong-khong-khomun-lae-khotoklong-chotchai-khasiahai",
+          "note": "การรับรองความถูกต้องของข้อมูล"
+        },
+        {
+          "ref": "atlas:concept/nathi-chaeng-sapap-antarai-haeng-khong",
+          "note": "หน้าที่แจ้งสภาพอันตราย"
+        },
+        {
+          "ref": "atlas:concept/sitthi-phu-song-khong-nai-kan-sang-chatkan-khong-rawang-khonsong",
+          "note": "สิทธิสั่งจัดการของระหว่างขนส่ง"
+        }
+      ],
+      "topics": []
+    },
+    "carriage-carrier-liability": {
+      "id": "atlas:cluster/carriage-carrier-liability",
+      "slug": "carriage-carrier-liability",
+      "titleTH": "รับขนของทางทะเล: ความรับผิดของผู้ขนส่งและระยะเวลา",
+      "titleEN": "Carriage of Goods by Sea: Carrier's Liability and Time Limits",
+      "status": "published",
+      "subjectAreas": [
+        "commercial-ip"
+      ],
+      "description": "กลุ่มแนวคิดตามหมวด 4 ว่าด้วยหลักความรับผิดของผู้ขนส่ง การส่งมอบและการส่งมอบชักช้า ความรับผิดร่วมกับผู้ขนส่งอื่น อายุความฟ้องคดี และหน้าที่บอกกล่าวความสูญหาย/เสียหาย",
+      "concepts": [
+        {
+          "ref": "atlas:concept/lak-khwamrapphid-khong-phu-khonsong",
+          "note": "จุดตั้งต้น: หลักความรับผิด"
+        },
+        {
+          "ref": "atlas:concept/kan-songmob-khong-lae-kan-songmob-chakcha",
+          "note": "การส่งมอบและการส่งมอบชักช้า"
+        },
+        {
+          "ref": "atlas:concept/khwamrapphid-ruam-khong-phu-khonsong-lae-phu-khonsong-uen",
+          "note": "ความรับผิดร่วมกับผู้ขนส่งอื่น"
+        },
+        {
+          "ref": "atlas:concept/ayukhwam-fongkhadi-kiaokap-kan-rap-khon-khong-thang-thale",
+          "note": "อายุความฟ้องคดี"
+        },
+        {
+          "ref": "atlas:concept/nathi-bokklao-kan-suunhai-sia-hai-khong-phu-rap-trasong",
+          "note": "หน้าที่บอกกล่าวความสูญหาย/เสียหาย"
+        }
+      ],
+      "topics": []
+    },
+    "carriage-exceptions-and-limitation": {
+      "id": "atlas:cluster/carriage-exceptions-and-limitation",
+      "slug": "carriage-exceptions-and-limitation",
+      "titleTH": "รับขนของทางทะเล: ข้อยกเว้นและข้อจำกัดความรับผิดของผู้ขนส่ง",
+      "titleEN": "Carriage of Goods by Sea: Exceptions and Limitation of Carrier's Liability",
+      "status": "published",
+      "subjectAreas": [
+        "commercial-ip"
+      ],
+      "description": "กลุ่มแนวคิดตามหมวด 5-6 ว่าด้วยข้อยกเว้นความรับผิด (ความไม่พร้อมเดินทะเล ภัย 13 ประการ อัคคีภัย การช่วยชีวิต/สัตว์มีชีวิต ของมีค่า) ข้อจำกัดความรับผิดตามหน่วย/น้ำหนัก การทำลายสิทธิจำกัดความรับผิด และวิธีคำนวณราคาของ",
+      "concepts": [
+        {
+          "ref": "atlas:concept/khoyoken-khwamrapphid-rueang-mai-doenthale-dai",
+          "note": "จุดตั้งต้น: ข้อยกเว้นเรื่องความไม่พร้อมเดินทะเล"
+        },
+        {
+          "ref": "atlas:concept/raikan-phai-thi-yoken-khwamrapphid-sip-sam-prakan",
+          "note": "ภัยที่ยกเว้นความรับผิด 13 ประการ"
+        },
+        {
+          "ref": "atlas:concept/khoyoken-rueang-akkhiphai",
+          "note": "ข้อยกเว้นเรื่องอัคคีภัย"
+        },
+        {
+          "ref": "atlas:concept/khoyoken-rueang-kan-chuaichiwit-lae-kan-khonsong-sat-michiwit",
+          "note": "ข้อยกเว้นการช่วยชีวิต/สัตว์มีชีวิต"
+        },
+        {
+          "ref": "atlas:concept/khoyoken-samrap-khong-mikha-thi-mai-chaeng-raka",
+          "note": "ข้อยกเว้นของมีค่าที่ไม่แจ้งราคา"
+        },
+        {
+          "ref": "atlas:concept/kan-chamkat-khwamrapphid-tam-nuai-kan-khonsong-rue-namnak",
+          "note": "ข้อจำกัดความรับผิดตามหน่วย/น้ำหนัก"
+        },
+        {
+          "ref": "atlas:concept/kan-thamlai-sitthi-chamkat-khwamrapphid",
+          "note": "การทำลายสิทธิจำกัดความรับผิด"
+        },
+        {
+          "ref": "atlas:concept/withi-khamnuan-raka-khong-thi-suunhai-rue-siahai",
+          "note": "วิธีคำนวณราคาของ"
+        }
+      ],
+      "topics": []
     }
   }
 }

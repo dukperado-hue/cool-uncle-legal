@@ -104,6 +104,12 @@
       "titleTH": "คุ้มครองข้อมูลส่วนบุคคล",
       "order": 17,
       "hue": 60
+    },
+    {
+      "key": "maritime-carriage",
+      "titleTH": "รับขนของทางทะเล",
+      "order": 18,
+      "hue": 200
     }
   ]
 }

@@ -1665,8 +1665,8 @@ head('F8 — Related concept integrity + inbound surfacing');
   const tagKeys = new Set((tagsDoc.tags || []).map(t => t.key));
   const slugs = Object.keys(concepts);
 
-  ok('atlas-subject-tags.json defines the 17 target subject labels',
-     (tagsDoc.tags || []).length === 17,
+  ok('atlas-subject-tags.json defines the 18 target subject labels',
+     (tagsDoc.tags || []).length === 18,
      (tagsDoc.tags || []).length);
 
   ok('every tag key is unique',
