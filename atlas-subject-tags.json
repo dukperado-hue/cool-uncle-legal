@@ -76,18 +76,6 @@
       "hue": 192
     },
     {
-      "key": "property-subject",
-      "titleTH": "วิชาทรัพย์",
-      "order": 13,
-      "hue": 100
-    },
-    {
-      "key": "civil-procedure-subject",
-      "titleTH": "วิชาวิแพ่ง",
-      "order": 14,
-      "hue": 300
-    },
-    {
       "key": "environment",
       "titleTH": "สิ่งแวดล้อม",
       "order": 15,
