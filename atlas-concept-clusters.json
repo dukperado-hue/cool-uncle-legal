@@ -2227,6 +2227,230 @@
         }
       ],
       "topics": []
+    },
+    "business-partnerships": {
+      "id": "atlas:cluster/business-partnerships",
+      "slug": "business-partnerships",
+      "titleTH": "ห้างหุ้นส่วน: สามัญ จดทะเบียน จำกัด หุ้นส่วนผู้จัดการ และการลงหุ้น",
+      "titleEN": "Partnerships: Ordinary, Registered and Limited",
+      "status": "published",
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "description": "กลุ่มแนวคิดห้างหุ้นส่วนตามป.พ.พ. บรรพ 3 ลักษณะ 22 หมวด 2-3 จัดเรียงจากห้างหุ้นส่วนสามัญ ห้างที่จดทะเบียนแล้วเป็นนิติบุคคล ห้างหุ้นส่วนจำกัดกับหุ้นส่วนสองจำพวก การลงหุ้น หุ้นส่วนผู้จัดการ และข้อห้ามค้าแข่ง เรียบเรียงจากตัวบทโดยตรง",
+      "concepts": [
+        {
+          "ref": "atlas:concept/seed-0162",
+          "note": "จุดตั้งต้น: ห้างหุ้นส่วนสามัญ",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/seed-0163",
+          "note": "ห้างสามัญที่จดทะเบียนเป็นนิติบุคคล"
+        },
+        {
+          "ref": "atlas:concept/seed-0185",
+          "note": "สิ่งที่หุ้นส่วนนำมาลงหุ้น"
+        },
+        {
+          "ref": "atlas:concept/seed-0180",
+          "note": "การจัดการห้างโดยหุ้นส่วนผู้จัดการ"
+        },
+        {
+          "ref": "atlas:concept/seed-0210",
+          "note": "ห้ามหุ้นส่วนและกรรมการค้าแข่ง"
+        },
+        {
+          "ref": "atlas:concept/seed-0164",
+          "note": "ห้างหุ้นส่วนจำกัด"
+        },
+        {
+          "ref": "atlas:concept/seed-0181",
+          "note": "หุ้นส่วนจำพวกจำกัดความรับผิด"
+        },
+        {
+          "ref": "atlas:concept/seed-0182",
+          "note": "หุ้นส่วนจำพวกไม่จำกัดความรับผิด"
+        }
+      ],
+      "topics": []
+    },
+    "company-shares-formation": {
+      "id": "atlas:cluster/company-shares-formation",
+      "slug": "company-shares-formation",
+      "titleTH": "บริษัทจำกัด: การตั้ง หุ้น และผู้ถือหุ้น",
+      "titleEN": "The Limited Company: Formation, Shares and Shareholders",
+      "status": "published",
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "description": "กลุ่มแนวคิดการตั้งบริษัทจำกัดและหุ้นตามป.พ.พ. บรรพ 3 ลักษณะ 22 หมวด 4 ส่วนที่ 1-2 ตั้งแต่ผู้เริ่มก่อการ หนังสือบริคณห์สนธิ และข้อบังคับ ไปจนถึงหุ้น มูลค่าหุ้น หุ้นบุริมสิทธิ ใบหุ้น ผู้ถือหุ้น การเรียกชำระและริบหุ้น การโอนหุ้น และสมุดทะเบียนผู้ถือหุ้น",
+      "concepts": [
+        {
+          "ref": "atlas:concept/seed-0165",
+          "note": "บริษัทจำกัด: จุดตั้งต้น",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/seed-0168",
+          "note": "ผู้เริ่มก่อการ"
+        },
+        {
+          "ref": "atlas:concept/seed-0169",
+          "note": "หนังสือบริคณห์สนธิ"
+        },
+        {
+          "ref": "atlas:concept/seed-0170",
+          "note": "ข้อบังคับบริษัท"
+        },
+        {
+          "ref": "atlas:concept/seed-0171",
+          "note": "หุ้น"
+        },
+        {
+          "ref": "atlas:concept/seed-0172",
+          "note": "มูลค่าหุ้น"
+        },
+        {
+          "ref": "atlas:concept/seed-0174",
+          "note": "หุ้นบุริมสิทธิ"
+        },
+        {
+          "ref": "atlas:concept/seed-0175",
+          "note": "ใบหุ้น"
+        },
+        {
+          "ref": "atlas:concept/seed-0176",
+          "note": "ผู้ถือหุ้น"
+        },
+        {
+          "ref": "atlas:concept/seed-0186",
+          "note": "การเรียกชำระค่าหุ้น"
+        },
+        {
+          "ref": "atlas:concept/seed-0187",
+          "note": "การริบหุ้น"
+        },
+        {
+          "ref": "atlas:concept/seed-0188",
+          "note": "การโอนหุ้น"
+        },
+        {
+          "ref": "atlas:concept/seed-0189",
+          "note": "สมุดทะเบียนผู้ถือหุ้น"
+        }
+      ],
+      "topics": []
+    },
+    "company-governance": {
+      "id": "atlas:cluster/company-governance",
+      "slug": "company-governance",
+      "titleTH": "การจัดการบริษัทจำกัด: กรรมการ ที่ประชุมใหญ่ ปันผล และบัญชี",
+      "titleEN": "Governance of the Limited Company: Directors, Meetings, Dividends and Accounts",
+      "status": "published",
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "description": "กลุ่มแนวคิดการจัดการบริษัทจำกัดตามป.พ.พ. บรรพ 3 ลักษณะ 22 หมวด 4 ส่วนที่ 3-6 ได้แก่ กรรมการและคณะกรรมการ ที่ประชุมใหญ่ผู้ถือหุ้น (ประชุมสามัญ ประชุมวิสามัญ องค์ประชุม มติพิเศษ และการออกเสียง) การเพิ่มและลดทุน เงินปันผลและทุนสำรอง งบดุล และผู้สอบบัญชี",
+      "concepts": [
+        {
+          "ref": "atlas:concept/seed-0177",
+          "note": "กรรมการ: ผู้จัดการบริษัท",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/seed-0178",
+          "note": "คณะกรรมการและการประชุมกรรมการ"
+        },
+        {
+          "ref": "atlas:concept/seed-0190",
+          "note": "ที่ประชุมใหญ่ผู้ถือหุ้น"
+        },
+        {
+          "ref": "atlas:concept/seed-0191",
+          "note": "ประชุมสามัญ"
+        },
+        {
+          "ref": "atlas:concept/seed-0192",
+          "note": "ประชุมวิสามัญ"
+        },
+        {
+          "ref": "atlas:concept/seed-0193",
+          "note": "องค์ประชุม"
+        },
+        {
+          "ref": "atlas:concept/seed-0195",
+          "note": "มติพิเศษ"
+        },
+        {
+          "ref": "atlas:concept/seed-0196",
+          "note": "การออกเสียงลงคะแนน"
+        },
+        {
+          "ref": "atlas:concept/seed-0197",
+          "note": "การเพิ่มทุน"
+        },
+        {
+          "ref": "atlas:concept/seed-0198",
+          "note": "การลดทุน"
+        },
+        {
+          "ref": "atlas:concept/seed-0199",
+          "note": "เงินปันผล"
+        },
+        {
+          "ref": "atlas:concept/seed-0200",
+          "note": "ทุนสำรอง"
+        },
+        {
+          "ref": "atlas:concept/seed-0201",
+          "note": "งบดุล"
+        },
+        {
+          "ref": "atlas:concept/seed-0202",
+          "note": "ผู้สอบบัญชี"
+        }
+      ],
+      "topics": []
+    },
+    "business-dissolution-restructuring": {
+      "id": "atlas:cluster/business-dissolution-restructuring",
+      "slug": "business-dissolution-restructuring",
+      "titleTH": "การเลิก การชำระบัญชี การควบ และการแปรสภาพของห้างหุ้นส่วนและบริษัท",
+      "titleEN": "Dissolution, Liquidation, Merger and Conversion of Partnerships and Companies",
+      "status": "published",
+      "subjectAreas": [
+        "civil-commercial"
+      ],
+      "description": "กลุ่มแนวคิดการสิ้นสุดและเปลี่ยนรูปของห้างหุ้นส่วนและบริษัทตามป.พ.พ. บรรพ 3 ลักษณะ 22 ได้แก่ การเลิกห้างหุ้นส่วน การเลิกบริษัท การชำระบัญชีและผู้ชำระบัญชี การควบห้างหรือบริษัทเข้ากัน และการแปรสภาพห้างหุ้นส่วนเป็นบริษัท",
+      "concepts": [
+        {
+          "ref": "atlas:concept/seed-0203",
+          "note": "การเลิกห้างหุ้นส่วน"
+        },
+        {
+          "ref": "atlas:concept/seed-0204",
+          "note": "การเลิกบริษัท"
+        },
+        {
+          "ref": "atlas:concept/seed-0205",
+          "note": "การชำระบัญชี",
+          "featured": true
+        },
+        {
+          "ref": "atlas:concept/seed-0206",
+          "note": "ผู้ชำระบัญชี"
+        },
+        {
+          "ref": "atlas:concept/seed-0207",
+          "note": "การควบเข้ากัน"
+        },
+        {
+          "ref": "atlas:concept/seed-0208",
+          "note": "การแปรสภาพห้างเป็นบริษัท"
+        }
+      ],
+      "topics": []
     }
   }
 }
