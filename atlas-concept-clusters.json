@@ -3147,6 +3147,154 @@
         }
       ],
       "topics": []
+    },
+    "ipcourt-jurisdiction-establishment": {
+      "id": "atlas:cluster/ipcourt-jurisdiction-establishment",
+      "slug": "ipcourt-jurisdiction-establishment",
+      "titleTH": "ศาลทรัพย์สินทางปัญญาฯ: ขอบเขตอำนาจ การจัดตั้ง และบทเฉพาะกาล",
+      "titleEN": "IP&IT Court: Jurisdiction, Establishment, and Transitional Rules",
+      "status": "published",
+      "subjectAreas": [
+        "commercial-ip"
+      ],
+      "description": "กลุ่มแนวคิดพื้นฐานว่าด้วยนิยาม การจัดตั้งและเขตศาล อำนาจพิจารณาพิพากษาคดี 11 ประเภท ผลของการเป็นเขตอำนาจเฉพาะ กลไกวินิจฉัยข้อขัดแย้งเรื่องเขตอำนาจ การโอนคดี และบทเฉพาะกาลว่าด้วยคดีค้างพิจารณา",
+      "concepts": [
+        {
+          "ref": "atlas:concept/niyam-san-sap-sin-thang-panya-lae-khadi-thi-yu-nai-amnat",
+          "note": "จุดตั้งต้น: นิยามศาลและคดี"
+        },
+        {
+          "ref": "atlas:concept/kan-jattang-lae-khet-amnat-san-klang-phak",
+          "note": "การจัดตั้งและเขตศาล"
+        },
+        {
+          "ref": "atlas:concept/amnat-phijarana-phiphaksa-khadi-san-sap-sin-thang-panya",
+          "note": "อำนาจพิจารณาพิพากษาคดี 11 ประเภท"
+        },
+        {
+          "ref": "atlas:concept/phon-khong-kan-jattang-san-hamai-san-uen-rap-khadi",
+          "note": "ผลของอำนาจเฉพาะ"
+        },
+        {
+          "ref": "atlas:concept/kan-winitchai-panha-khet-amnat-san-doi-prathan-san-dika",
+          "note": "กลไกวินิจฉัยข้อขัดแย้งเขตอำนาจ"
+        },
+        {
+          "ref": "atlas:concept/kan-on-khadi-chak-san-phak-pai-san-klang",
+          "note": "การโอนคดีจากศาลภาคไปศาลกลาง"
+        },
+        {
+          "ref": "atlas:concept/bot-chaphokan-khadi-khang-phijarana-lae-khet-amnat-san-changwat-chuakhrao",
+          "note": "บทเฉพาะกาล: คดีค้างและเขตอำนาจชั่วคราว"
+        }
+      ],
+      "topics": []
+    },
+    "ipcourt-judges-composition": {
+      "id": "atlas:cluster/ipcourt-judges-composition",
+      "slug": "ipcourt-judges-composition",
+      "titleTH": "ศาลทรัพย์สินทางปัญญาฯ: ผู้พิพากษาและองค์คณะพิจารณาคดี",
+      "titleEN": "IP&IT Court: Judges and Adjudicating Panels",
+      "status": "published",
+      "subjectAreas": [
+        "commercial-ip"
+      ],
+      "description": "กลุ่มแนวคิดว่าด้วยผู้พิพากษาสมทบ (คุณสมบัติ วาระ การพ้นตำแหน่ง สถานะทางกฎหมาย) องค์คณะพิจารณาพิพากษาคดีและอำนาจผู้พิพากษาคนเดียว การสืบพยานหลักฐานแทนโดยศาลอื่น ข้อกำหนดคดีของอธิบดีผู้พิพากษา และการขอความเห็นผู้ทรงคุณวุฒิ/ผู้เชี่ยวชาญ",
+      "concepts": [
+        {
+          "ref": "atlas:concept/phuphaksa-sompoth-khunsombat-waraa-lae-sathanah-thang-kotmai",
+          "note": "จุดตั้งต้น: ผู้พิพากษาสมทบ"
+        },
+        {
+          "ref": "atlas:concept/ongkhana-phijarana-phiphaksa-khadi-lae-amnat-phupphaksa-diao",
+          "note": "องค์คณะและอำนาจผู้พิพากษาคนเดียว"
+        },
+        {
+          "ref": "atlas:concept/kan-suep-phayan-laektaen-doi-san-uen",
+          "note": "การสืบพยานแทนโดยศาลอื่น"
+        },
+        {
+          "ref": "atlas:concept/khokamnot-khong-athibodi-phupphaksa-san-sap-sin-thang-panya",
+          "note": "ข้อกำหนดคดีของอธิบดีผู้พิพากษา"
+        },
+        {
+          "ref": "atlas:concept/kan-kho-phuthongkhunwuti-rue-phuchiaochan-hai-khwamhen",
+          "note": "การขอความเห็นผู้ทรงคุณวุฒิ/ผู้เชี่ยวชาญ"
+        }
+      ],
+      "topics": []
+    },
+    "ipcourt-procedure": {
+      "id": "atlas:cluster/ipcourt-procedure",
+      "slug": "ipcourt-procedure",
+      "titleTH": "ศาลทรัพย์สินทางปัญญาฯ: วิธีพิจารณาคดี",
+      "titleEN": "IP&IT Court: Trial Procedure",
+      "status": "published",
+      "subjectAreas": [
+        "commercial-ip"
+      ],
+      "description": "กลุ่มแนวคิดวิธีพิจารณาคดีทรัพย์สินทางปัญญาและการค้าระหว่างประเทศ ครอบคลุมการนำกฎหมายวิธีพิจารณาอื่นมาใช้โดยอนุโลม หลักการพิจารณาต่อเนื่อง การสืบและรักษาพยานหลักฐานไว้ก่อนฟ้อง การแต่งตั้งตัวแทนรับเอกสาร หน้าที่ติดตามนัด การรวมพิจารณาคดีอาญาที่เกี่ยวเนื่องกัน และอำนาจย่น/ขยายเวลา",
+      "concepts": [
+        {
+          "ref": "atlas:concept/lak-nam-kotmai-withiphijarana-uen-ma-chai-bangkhap-doi-anulom",
+          "note": "จุดตั้งต้น: การนำกฎหมายอื่นมาใช้โดยอนุโลม"
+        },
+        {
+          "ref": "atlas:concept/lak-kan-phijarana-khadi-tit-tor-kan",
+          "note": "หลักการพิจารณาต่อเนื่อง"
+        },
+        {
+          "ref": "atlas:concept/kan-suep-lae-raksa-phayanlakthan-wai-kon-fong",
+          "note": "การสืบและรักษาพยานหลักฐานก่อนฟ้อง"
+        },
+        {
+          "ref": "atlas:concept/kan-taengtang-bukkhon-rap-khamkhukhwam-thaen-khukhwam",
+          "note": "การแต่งตั้งตัวแทนรับเอกสาร"
+        },
+        {
+          "ref": "atlas:concept/nathi-khukhwam-tittam-kamnodnat-eng",
+          "note": "หน้าที่ติดตามนัดพิจารณาเอง"
+        },
+        {
+          "ref": "atlas:concept/kan-ruam-phijarana-khadi-aya-thi-phid-lai-bot-rue-lai-kam",
+          "note": "การรวมพิจารณาคดีอาญาที่เกี่ยวเนื่องกัน"
+        },
+        {
+          "ref": "atlas:concept/amnat-yon-rue-khayai-rayawela",
+          "note": "อำนาจย่น/ขยายระยะเวลา"
+        }
+      ],
+      "topics": []
+    },
+    "ipcourt-appeal": {
+      "id": "atlas:cluster/ipcourt-appeal",
+      "slug": "ipcourt-appeal",
+      "titleTH": "ศาลทรัพย์สินทางปัญญาฯ: การอุทธรณ์",
+      "titleEN": "IP&IT Court: Appeal",
+      "status": "published",
+      "subjectAreas": [
+        "commercial-ip"
+      ],
+      "description": "กลุ่มแนวคิดการอุทธรณ์คำพิพากษาของศาลทรัพย์สินทางปัญญาฯ ไปยังศาลฎีกาโดยตรง ข้อจำกัดอุทธรณ์ปัญหาข้อเท็จจริงทั้งในคดีอาญาโทษเล็กน้อยและคดีแพ่งทุนทรัพย์น้อย และแผนกคดีทรัพย์สินทางปัญญาฯ ในศาลฎีกาที่รับผิดชอบพิจารณาอุทธรณ์เหล่านี้",
+      "concepts": [
+        {
+          "ref": "atlas:concept/kan-utthon-pai-san-dika-doi-trong",
+          "note": "จุดตั้งต้น: อุทธรณ์ตรงไปศาลฎีกา"
+        },
+        {
+          "ref": "atlas:concept/khokamkat-utthon-panha-khottetjing-nai-khadi-aya-lek-noi",
+          "note": "ข้อจำกัดอุทธรณ์ในคดีอาญาโทษเล็กน้อย"
+        },
+        {
+          "ref": "atlas:concept/khokamkat-utthon-panha-khottetjing-nai-khadi-phaeng-thunsap-noi",
+          "note": "ข้อจำกัดอุทธรณ์ในคดีแพ่งทุนทรัพย์น้อย"
+        },
+        {
+          "ref": "atlas:concept/phaenkhadi-sap-sin-thang-panya-nai-san-dika",
+          "note": "แผนกคดีทรัพย์สินทางปัญญาฯ ในศาลฎีกา"
+        }
+      ],
+      "topics": []
     }
   }
 }
