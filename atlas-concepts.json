@@ -110167,6 +110167,3426 @@
           "note": "อำนาจที่ทำงานร่วมกันในการบังคับใช้กฎหมาย"
         }
       ]
+    },
+    "niyam-phak-kanmueang-lae-sattha": {
+      "id": "atlas:concept/niyam-phak-kanmueang-lae-sattha",
+      "slug": "niyam-phak-kanmueang-lae-sattha",
+      "titleTH": "นิยามพรรคการเมือง สมาชิก และคำนิยามสำคัญอื่น",
+      "titleEN": "Definitions: Political Party, Member, and Related Terms",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "\"พรรคการเมือง\" หมายความว่า คณะบุคคลที่รวมตัวกันจัดตั้งเป็นพรรคการเมืองโดยได้จดทะเบียนตาม พ.ร.ป. นี้ พร้อมนิยามที่เกี่ยวข้องอย่าง \"บริจาค\" และ \"ประโยชน์อื่นใด\" ซึ่งครอบคลุมถึงการให้ประโยชน์ที่คำนวณเป็นเงินได้แม้ไม่ใช่เงินสด",
+      "definition": {
+        "text": "มาตรา 4 นิยาม \"พรรคการเมือง\" ว่าหมายความว่า คณะบุคคลที่รวมตัวกันจัดตั้งเป็นพรรคการเมืองโดยได้จดทะเบียนตามพระราชบัญญัติประกอบรัฐธรรมนูญนี้ และนิยาม \"สมาชิก\" ว่าหมายความว่า สมาชิกพรรคการเมือง",
+        "provisions": [
+          "politicalparty_4"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            null
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 4 (บทนิยาม อยู่ก่อนหมวด 1)"
+        }
+      ],
+      "sections": [
+        {
+          "key": "donation-definition",
+          "kind": "elements",
+          "label": "นิยาม \"บริจาค\" และ \"ประโยชน์อื่นใด\"",
+          "body": "",
+          "items": [
+            {
+              "label": "\"บริจาค\"",
+              "text": "หมายความว่า การให้เงินหรือทรัพย์สินแก่พรรคการเมืองนอกจากค่าธรรมเนียมและค่าบำรุงพรรคการเมือง และให้หมายความรวมถึงการให้ประโยชน์อื่นใดแก่พรรคการเมืองบรรดาที่สามารถคำนวณเป็นเงินได้ตามที่คณะกรรมการกำหนดด้วย",
+              "provisions": [
+                "politicalparty_4"
+              ]
+            },
+            {
+              "label": "\"ประโยชน์อื่นใด\"",
+              "text": "หมายความรวมถึง การให้ใช้ทรัพย์สิน การให้บริการ หรือการให้ส่วนลดโดยไม่มีค่าตอบแทนหรือมีค่าตอบแทนที่ไม่เป็นไปตามปกติทางการค้า และการทำให้หนี้ที่พรรคการเมืองเป็นลูกหนี้ลดลงหรือระงับสิ้นไปด้วย",
+              "provisions": [
+                "politicalparty_4"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_4",
+          "role": "core",
+          "note": "นิยามพรรคการเมือง สมาชิก บริจาค และประโยชน์อื่นใด"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 4",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "amnat-nathabian-phak-kanmueang": {
+      "id": "atlas:concept/amnat-nathabian-phak-kanmueang",
+      "slug": "amnat-nathabian-phak-kanmueang",
+      "titleTH": "อำนาจของนายทะเบียนพรรคการเมือง",
+      "titleEN": "Powers of the Political Party Registrar",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "เลขาธิการคณะกรรมการการเลือกตั้งเป็นนายทะเบียนพรรคการเมืองภายใต้การกำกับของคณะกรรมการการเลือกตั้ง มีอำนาจเรียกบุคคลที่เกี่ยวข้องมาชี้แจงหรือส่งเอกสารหลักฐาน และมีกลไกมาตรฐานเรื่องการแจ้ง/ยื่น/ส่งเอกสารและการประกาศเผยแพร่ต่อประชาชน",
+      "definition": {
+        "text": "มาตรา 6 กำหนดว่าให้เลขาธิการคณะกรรมการการเลือกตั้งเป็นนายทะเบียนและมีหน้าที่และอำนาจตาม พ.ร.ป. นี้ ทั้งนี้ ภายใต้การกำกับและควบคุมของคณะกรรมการ",
+        "provisions": [
+          "politicalparty_6"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            null
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 5-8 (อยู่ก่อนหมวด 1)"
+        }
+      ],
+      "sections": [
+        {
+          "key": "notice-mechanism",
+          "kind": "elements",
+          "label": "อำนาจเรียกชี้แจงและกลไกการแจ้ง/ประกาศมาตรฐาน",
+          "body": "",
+          "items": [
+            {
+              "label": "อำนาจเรียกชี้แจง",
+              "text": "ในการปฏิบัติหน้าที่ของนายทะเบียน นายทะเบียนมีอำนาจเรียกบุคคลที่เกี่ยวข้องมาให้คำชี้แจงหรือให้ส่งเอกสารหรือหลักฐานที่เกี่ยวข้องมาเพื่อประกอบการพิจารณาได้ (มาตรา 7)",
+              "provisions": [
+                "politicalparty_7"
+              ]
+            },
+            {
+              "label": "มาตรฐานการแจ้ง/ยื่น/ส่งและการประกาศ",
+              "text": "หากได้แจ้ง ยื่น หรือส่งหนังสือ ณ ภูมิลำเนาตามหลักฐานทะเบียนราษฎร ให้ถือว่าชอบด้วยกฎหมายแล้ว และการประกาศหรือเผยแพร่ผ่านระบบเทคโนโลยีสารสนเทศที่ประชาชนเข้าถึงได้สะดวก ถือว่าชอบด้วยกฎหมายแล้วเช่นกัน (มาตรา 8)",
+              "provisions": [
+                "politicalparty_8"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_6",
+          "role": "core",
+          "note": "นายทะเบียนพรรคการเมือง"
+        },
+        {
+          "ref": "politicalparty_7",
+          "role": "core",
+          "note": "อำนาจเรียกชี้แจง"
+        },
+        {
+          "ref": "politicalparty_8",
+          "role": "core",
+          "note": "มาตรฐานการแจ้ง/ยื่น/ส่งและประกาศ"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 6, 7, 8",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "kan-kotang-phak-kanmueang-khunsombat-lae-kan-prachum": {
+      "id": "atlas:concept/kan-kotang-phak-kanmueang-khunsombat-lae-kan-prachum",
+      "slug": "kan-kotang-phak-kanmueang-khunsombat-lae-kan-prachum",
+      "titleTH": "การก่อตั้งพรรคการเมือง: คุณสมบัติผู้ร่วมจัดตั้งและการประชุมจัดตั้ง",
+      "titleEN": "Formation of a Political Party: Founders' Qualifications and the Founding Meeting",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "บุคคลซึ่งมีอุดมการณ์ทางการเมืองแนวทางเดียวกันจำนวนไม่น้อยกว่า 500 คน ซึ่งมีคุณสมบัติตามที่กำหนด (สัญชาติไทยโดยกำเนิดหรือแปลงสัญชาติมาแล้วไม่น้อยกว่า 5 ปี อายุไม่ต่ำกว่า 20 ปี ไม่มีลักษณะต้องห้ามตามรัฐธรรมนูญ) อาจร่วมกันจัดตั้งพรรคการเมืองได้ โดยต้องมีทุนประเดิมไม่น้อยกว่า 1 ล้านบาท และต้องประชุมร่วมกันไม่น้อยกว่า 250 คนก่อนยื่นคำขอจดทะเบียนเพื่อกำหนดชื่อ ข้อบังคับ และเลือกผู้บริหารพรรค",
+      "definition": {
+        "text": "มาตรา 9 กำหนดว่าบุคคลซึ่งมีอุดมการณ์ทางการเมืองในแนวทางเดียวกัน และมีคุณสมบัติและไม่มีลักษณะต้องห้ามตามมาตรานี้ จำนวนไม่น้อยกว่าห้าร้อยคน อาจร่วมกันดำเนินการเพื่อจัดตั้งพรรคการเมืองได้",
+        "provisions": [
+          "politicalparty_9"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 1"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 9-10"
+        }
+      ],
+      "sections": [
+        {
+          "key": "founding-meeting",
+          "kind": "elements",
+          "label": "ทุนประเดิมและการประชุมจัดตั้ง",
+          "body": "",
+          "items": [
+            {
+              "label": "ทุนประเดิม",
+              "text": "พรรคการเมืองต้องมีทุนประเดิมไม่น้อยกว่าหนึ่งล้านบาท โดยผู้ร่วมกันจัดตั้งพรรคการเมืองทุกคนต้องร่วมกันจ่ายเงินเป็นทุนประเดิมคนละไม่น้อยกว่าหนึ่งพันบาทแต่ไม่เกินคนละห้าหมื่นบาท (มาตรา 9 วรรคท้าย)",
+              "provisions": [
+                "politicalparty_9"
+              ]
+            },
+            {
+              "label": "การประชุมร่วมกันก่อนยื่นคำขอ",
+              "text": "ก่อนยื่นคำขอจดทะเบียน ผู้ร่วมกันจัดตั้งต้องประชุมร่วมกันไม่น้อยกว่า 250 คน เพื่อกำหนดชื่อ ชื่อย่อ เครื่องหมาย คำประกาศอุดมการณ์ นโยบาย และข้อบังคับ และเลือกหัวหน้าพรรค เลขาธิการ เหรัญญิก นายทะเบียนสมาชิก และกรรมการบริหารอื่น โดยการลงคะแนนต้องทำโดยเปิดเผยและมอบหมายให้ลงคะแนนแทนกันมิได้ (มาตรา 10)",
+              "provisions": [
+                "politicalparty_10"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_9",
+          "role": "core",
+          "note": "คุณสมบัติผู้ร่วมจัดตั้งและทุนประเดิม"
+        },
+        {
+          "ref": "politicalparty_10",
+          "role": "core",
+          "note": "การประชุมจัดตั้งพรรคการเมือง"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 9, 10",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/raikan-thi-tong-mi-nai-khobangkhap",
+          "rel": "seealso",
+          "labelTH": "รายการที่ต้องมีในข้อบังคับ",
+          "status": "published",
+          "note": "ข้อบังคับที่กำหนดในการประชุมจัดตั้งต้องมีรายการตามมาตรา 15"
+        }
+      ]
+    },
+    "khoham-nai-khobangkhap-phak-kanmueang": {
+      "id": "atlas:concept/khoham-nai-khobangkhap-phak-kanmueang",
+      "slug": "khoham-nai-khobangkhap-phak-kanmueang",
+      "titleTH": "ข้อห้ามในข้อบังคับพรรคการเมือง",
+      "titleEN": "Prohibited Content in Party Regulations",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "ข้อบังคับพรรคการเมืองต้องไม่เป็นปฏิปักษ์ต่อการปกครองระบอบประชาธิปไตยอันมีพระมหากษัตริย์ทรงเป็นประมุขหรือเปลี่ยนแปลงรูปแบบรัฐ ไม่ขัดความสงบเรียบร้อยหรือศีลธรรมอันดี ไม่ก่อให้เกิดความแตกแยกในชาติ และไม่ครอบงำหรือเป็นอุปสรรคต่อการปฏิบัติหน้าที่โดยอิสระของสมาชิกสภาผู้แทนราษฎร",
+      "definition": {
+        "text": "มาตรา 14 กำหนดว่าข้อบังคับต้องไม่มีลักษณะ 4 ประการตามมาตรานี้",
+        "provisions": [
+          "politicalparty_14"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 1"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 14"
+        }
+      ],
+      "sections": [
+        {
+          "key": "four-prohibitions",
+          "kind": "elements",
+          "label": "สี่ลักษณะต้องห้าม",
+          "body": "",
+          "items": [
+            {
+              "label": "(1)-(2) ปฏิปักษ์ต่อระบอบและความสงบเรียบร้อย",
+              "text": "(1) เป็นปฏิปักษ์ต่อการปกครองระบอบประชาธิปไตยอันมีพระมหากษัตริย์ทรงเป็นประมุข และต้องไม่เปลี่ยนแปลงรูปแบบของรัฐ (2) ขัดต่อความสงบเรียบร้อยหรือศีลธรรมอันดีของประชาชน",
+              "provisions": [
+                "politicalparty_14"
+              ]
+            },
+            {
+              "label": "(3)-(4) ความแตกแยกและความเป็นอิสระของ ส.ส.",
+              "text": "(3) อาจก่อให้เกิดความแตกแยกระหว่างชนในชาติ (4) ครอบงำหรือเป็นอุปสรรคต่อการปฏิบัติหน้าที่โดยอิสระของสมาชิกสภาผู้แทนราษฎรตามรัฐธรรมนูญ",
+              "provisions": [
+                "politicalparty_14"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_14",
+          "role": "core",
+          "note": "ข้อห้ามสี่ประการในข้อบังคับพรรคการเมือง"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 14",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/het-yubphak-kanmueang-doi-san-ratthathammanun",
+          "rel": "seealso",
+          "labelTH": "เหตุยุบพรรคการเมือง",
+          "status": "published",
+          "note": "ข้อบังคับที่ต้องห้ามอาจเป็นฐานเชื่อมโยงกับการกระทำที่นำไปสู่การยุบพรรคตามมาตรา 92"
+        }
+      ]
+    },
+    "raikan-thi-tong-mi-nai-khobangkhap": {
+      "id": "atlas:concept/raikan-thi-tong-mi-nai-khobangkhap",
+      "slug": "raikan-thi-tong-mi-nai-khobangkhap",
+      "titleTH": "รายการที่ต้องมีในข้อบังคับพรรคการเมือง",
+      "titleEN": "Mandatory Content of Party Regulations",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "ข้อบังคับพรรคการเมืองอย่างน้อยต้องมี 16 รายการ ครอบคลุมโครงสร้างบริหาร คุณสมบัติสมาชิก มาตรฐานจริยธรรม หลักเกณฑ์การคัดเลือกผู้สมัครโดยให้สมาชิกมีส่วนร่วมอย่างกว้างขวาง การบริหารการเงินอย่างเปิดเผย และห้ามกำหนดข้อบังคับที่ให้บุคคลอื่นซึ่งมิใช่สมาชิกควบคุมครอบงำกิจกรรมของพรรค",
+      "definition": {
+        "text": "มาตรา 15 กำหนดว่าข้อบังคับอย่างน้อยต้องมีรายการ 16 ประการตามมาตรานี้",
+        "provisions": [
+          "politicalparty_15"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 1"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 15"
+        }
+      ],
+      "sections": [
+        {
+          "key": "key-items",
+          "kind": "elements",
+          "label": "รายการสำคัญที่เน้นการมีส่วนร่วมของสมาชิก",
+          "body": "",
+          "items": [
+            {
+              "label": "การมีส่วนร่วมของสมาชิกในการคัดเลือกผู้สมัคร/ผู้ดำรงตำแหน่ง",
+              "text": "หลักเกณฑ์คัดเลือกสมาชิกส่งสมัคร ส.ส. และการเสนอชื่อนายกรัฐมนตรีตามมาตรา 88 ของรัฐธรรมนูญ ต้องกำหนดให้สมาชิกมีส่วนร่วมอย่างกว้างขวาง เช่นเดียวกับการคัดเลือกผู้ดำรงตำแหน่งทางการเมือง (มาตรา 15(12)-(13))",
+              "provisions": [
+                "politicalparty_15"
+              ]
+            },
+            {
+              "label": "การบริหารการเงินโดยเปิดเผย",
+              "text": "วิธีบริหารการเงินและทรัพย์สินต้องกำหนดให้เป็นไปโดยเปิดเผยและให้สมาชิกตรวจสอบได้โดยสะดวก และค่าธรรมเนียม/ค่าบำรุงต้องเรียกเก็บไม่น้อยกว่าปีละหนึ่งร้อยบาท (มาตรา 15(14)-(15))",
+              "provisions": [
+                "politicalparty_15"
+              ]
+            },
+            {
+              "label": "ข้อห้ามให้บุคคลภายนอกครอบงำ",
+              "text": "การกำหนดข้อบังคับในลักษณะที่ให้บุคคลอื่นซึ่งมิใช่สมาชิกกระทำการควบคุม ครอบงำ หรือชี้นำกิจกรรมของพรรคในลักษณะที่ทำให้พรรคหรือสมาชิกขาดความอิสระจะกระทำมิได้",
+              "provisions": [
+                "politicalparty_15"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_15",
+          "role": "core",
+          "note": "รายการ 16 ประการที่ต้องมีในข้อบังคับ"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 15",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/khoham-khrobngam-phak-kanmueang",
+          "rel": "seealso",
+          "labelTH": "ข้อห้ามครอบงำพรรคการเมือง",
+          "status": "published",
+          "note": "หลักการเดียวกันปรากฏซ้ำเป็นข้อห้ามทั่วไปในมาตรา 28-29"
+        }
+      ]
+    },
+    "kan-yuen-lae-phijarana-kho-jodthabian-jattang-phak": {
+      "id": "atlas:concept/kan-yuen-lae-phijarana-kho-jodthabian-jattang-phak",
+      "slug": "kan-yuen-lae-phijarana-kho-jodthabian-jattang-phak",
+      "titleTH": "การยื่นและพิจารณาคำขอจดทะเบียนจัดตั้งพรรคการเมือง",
+      "titleEN": "Filing and Review of the Party Registration Application",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "หัวหน้าพรรคที่ได้รับเลือกเป็นผู้ยื่นคำขอจดทะเบียนต่อนายทะเบียนพร้อมเอกสารหลักฐาน หากถูกต้องครบถ้วนนายทะเบียนโดยความเห็นชอบของคณะกรรมการรับจดทะเบียนและประกาศในราชกิจจานุเบกษา หากไม่ถูกต้องให้แจ้งแก้ไขภายใน 60 วัน มิฉะนั้นไม่รับจดทะเบียน โดยผู้ยื่นคำขอมีสิทธิคัดค้านมติต่อศาลรัฐธรรมนูญได้",
+      "definition": {
+        "text": "มาตรา 17 วรรคหนึ่ง กำหนดว่าในกรณีที่คำขอจดทะเบียนจัดตั้งพรรคการเมืองและเอกสารหลักฐานที่ยื่นถูกต้องและครบถ้วนตามมาตรา 12 ถึง 16 ให้นายทะเบียนโดยความเห็นชอบของคณะกรรมการรับจดทะเบียนจัดตั้งพรรคการเมืองและประกาศการจัดตั้งพรรคการเมืองในราชกิจจานุเบกษา",
+        "provisions": [
+          "politicalparty_17"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 1"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 11-13, 16-17"
+        }
+      ],
+      "sections": [
+        {
+          "key": "application-contents-and-remedy",
+          "kind": "elements",
+          "label": "เนื้อหาคำขอและสิทธิคัดค้าน",
+          "body": "",
+          "items": [
+            {
+              "label": "รายการในคำขอและเอกสารประกอบ",
+              "text": "คำขอต้องมีชื่อ/ชื่อย่อ/เครื่องหมายพรรค ที่ตั้งสำนักงานใหญ่ และรายชื่อผู้บริหารพรรค (มาตรา 12) พร้อมเอกสารประกอบ เช่น รายชื่อผู้ร่วมจัดตั้งทุกคน หลักฐานชำระทุนประเดิม ข้อบังคับ และบันทึกการประชุม (มาตรา 13)",
+              "provisions": [
+                "politicalparty_12",
+                "politicalparty_13"
+              ]
+            },
+            {
+              "label": "ผู้บริหารพรรคต้องอายุไม่ต่ำกว่า 20 ปี",
+              "text": "หัวหน้าพรรค เลขาธิการ เหรัญญิก นายทะเบียนสมาชิก และกรรมการบริหารอื่น ต้องเป็นสมาชิกอายุไม่ต่ำกว่า 20 ปี วาระไม่เกินคราวละ 4 ปีตามข้อบังคับ (มาตรา 16)",
+              "provisions": [
+                "politicalparty_16"
+              ]
+            },
+            {
+              "label": "การแก้ไขและสิทธิคัดค้านต่อศาลรัฐธรรมนูญ",
+              "text": "หากไม่ถูกต้องหรือไม่ครบถ้วน นายทะเบียนต้องแจ้งให้แก้ไขภายใน 60 วัน มิฉะนั้นคณะกรรมการมีมติไม่รับจดทะเบียน และผู้ยื่นคำขอมีสิทธิคัดค้านมติต่อศาลรัฐธรรมนูญภายใน 30 วัน (มาตรา 17 วรรคสอง-สี่)",
+              "provisions": [
+                "politicalparty_17"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_12",
+          "role": "core",
+          "note": "รายการในคำขอจดทะเบียน"
+        },
+        {
+          "ref": "politicalparty_13",
+          "role": "core",
+          "note": "เอกสารประกอบคำขอ"
+        },
+        {
+          "ref": "politicalparty_16",
+          "role": "core",
+          "note": "อายุขั้นต่ำของผู้บริหารพรรค"
+        },
+        {
+          "ref": "politicalparty_17",
+          "role": "core",
+          "note": "การพิจารณาของนายทะเบียนและสิทธิคัดค้าน"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 11, 12, 13, 16, 17",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "kan-cheng-triam-kan-jattang-luangna": {
+      "id": "atlas:concept/kan-cheng-triam-kan-jattang-luangna",
+      "slug": "kan-cheng-triam-kan-jattang-luangna",
+      "titleTH": "การแจ้งเตรียมการจัดตั้งพรรคการเมืองล่วงหน้า",
+      "titleEN": "Advance Notice of Intent to Form a Political Party",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "บุคคลซึ่งมีคุณสมบัติตามมาตรา 9 จำนวนไม่น้อยกว่า 15 คน อาจยื่นคำขอแจ้งเตรียมการจัดตั้งพรรคการเมืองไว้ก่อนแล้วรวบรวมผู้จัดตั้งให้ครบ 500 คนภายหลัง โดยต้องยื่นคำขอจดทะเบียนจริงภายใน 180 วัน มิฉะนั้นคำขอสิ้นผล",
+      "definition": {
+        "text": "มาตรา 18 วรรคหนึ่ง กำหนดว่าบุคคลซึ่งมีคุณสมบัติและไม่มีลักษณะต้องห้ามตามมาตรา 9 จำนวนไม่น้อยกว่าสิบห้าคน จะยื่นคำขอแจ้งการเตรียมการจัดตั้งพรรคการเมืองต่อนายทะเบียนไว้ก่อน แล้วดำเนินการรวบรวมผู้จัดตั้งพรรคการเมืองให้ได้ครบจำนวนตามมาตรา 9 ก็ได้ แต่ต้องยื่นคำขอจดทะเบียนจัดตั้งพรรคการเมืองภายในหนึ่งร้อยแปดสิบวันนับแต่วันที่นายทะเบียนรับแจ้ง",
+        "provisions": [
+          "politicalparty_18"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 1"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 18-19"
+        }
+      ],
+      "sections": [
+        {
+          "key": "defect-remedy",
+          "kind": "elements",
+          "label": "ผลของการแจ้งไม่ถูกต้อง",
+          "body": "",
+          "items": [
+            {
+              "label": "สิ้นผลเมื่อไม่แก้ไขให้ถูกต้อง",
+              "text": "หากนายทะเบียนเห็นว่าการแจ้งไม่เป็นไปตามมาตรา 18 ให้มีหนังสือแจ้งเพื่อแก้ไขภายในเวลาที่กำหนด เมื่อพ้นกำหนดแล้วไม่มีการแก้ไขให้ถูกต้องครบถ้วน ให้คำขอนั้นเป็นอันสิ้นผล (มาตรา 19)",
+              "provisions": [
+                "politicalparty_19"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_18",
+          "role": "core",
+          "note": "การแจ้งเตรียมการจัดตั้งล่วงหน้าและกำหนดเวลา 180 วัน"
+        },
+        {
+          "ref": "politicalparty_19",
+          "role": "core",
+          "note": "ผลของการแจ้งไม่ถูกต้อง"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 18, 19",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "sathanaphap-niti-bukkhon-lae-khanakammakan-borihan": {
+      "id": "atlas:concept/sathanaphap-niti-bukkhon-lae-khanakammakan-borihan",
+      "slug": "sathanaphap-niti-bukkhon-lae-khanakammakan-borihan",
+      "titleTH": "สถานภาพนิติบุคคลและคณะกรรมการบริหารพรรคการเมือง",
+      "titleEN": "Corporate Status and the Party Executive Committee",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "พรรคการเมืองที่จดทะเบียนแล้วเป็นนิติบุคคล มีวัตถุประสงค์สำคัญเพื่อดำเนินกิจกรรมทางการเมืองตามระบอบประชาธิปไตยและส่งผู้สมัครรับเลือกตั้ง ห้ามแสวงหากำไรมาแบ่งปันกัน โดยมีคณะกรรมการบริหารพรรคเป็นผู้รับผิดชอบดำเนินกิจกรรม ซึ่งต้องรับผิดชอบร่วมกันในมติของคณะกรรมการเว้นแต่พิสูจน์ได้ว่าคัดค้านไว้",
+      "definition": {
+        "text": "มาตรา 20 กำหนดว่าให้พรรคการเมืองที่นายทะเบียนรับจดทะเบียนแล้วเป็นนิติบุคคลมีวัตถุประสงค์สำคัญเพื่อดำเนินกิจกรรมทางการเมืองตามหลักการปกครองในระบอบประชาธิปไตยอันมีพระมหากษัตริย์ทรงเป็นประมุข และเพื่อส่งผู้สมัครลงรับเลือกตั้ง พรรคการเมืองต้องไม่ดำเนินกิจการอันมีลักษณะเป็นการแสวงหากำไรมาแบ่งปันกัน",
+        "provisions": [
+          "politicalparty_20"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 20-21"
+        }
+      ],
+      "sections": [
+        {
+          "key": "executive-committee-liability",
+          "kind": "elements",
+          "label": "ความรับผิดร่วมกันของกรรมการบริหารและผู้แทนพรรค",
+          "body": "",
+          "items": [
+            {
+              "label": "ความรับผิดร่วมกันเว้นแต่คัดค้านไว้",
+              "text": "กรรมการบริหารพรรคการเมืองต้องรับผิดชอบร่วมกันในมติของคณะกรรมการบริหารพรรคและการดำเนินการตามหน้าที่และอำนาจ เว้นแต่พิสูจน์ได้ว่าตนได้คัดค้านในที่ประชุมโดยปรากฏหลักฐานในรายงานการประชุม หรือทำหนังสือคัดค้านยื่นต่อประธานในที่ประชุมภายใน 7 วัน (มาตรา 21 วรรคสาม)",
+              "provisions": [
+                "politicalparty_21"
+              ]
+            },
+            {
+              "label": "หัวหน้าพรรคเป็นผู้แทนนิติบุคคล",
+              "text": "หัวหน้าพรรคการเมืองเป็นผู้แทนของพรรคในกิจการอันเกี่ยวกับบุคคลภายนอก และอาจมอบหมายเป็นหนังสือให้ผู้บริหารพรรคคนอื่นทำการแทนได้ (มาตรา 21 วรรคท้าย)",
+              "provisions": [
+                "politicalparty_21"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_20",
+          "role": "core",
+          "note": "สถานภาพนิติบุคคลและวัตถุประสงค์"
+        },
+        {
+          "ref": "politicalparty_21",
+          "role": "core",
+          "note": "คณะกรรมการบริหารพรรคและความรับผิดร่วมกัน"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 20, 21",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "nathi-khuapkhum-sattha-mai-hai-fafuen-kotmai-lueaktang": {
+      "id": "atlas:concept/nathi-khuapkhum-sattha-mai-hai-fafuen-kotmai-lueaktang",
+      "slug": "nathi-khuapkhum-sattha-mai-hai-fafuen-kotmai-lueaktang",
+      "titleTH": "หน้าที่ควบคุมสมาชิกมิให้ฝ่าฝืนกฎหมายเลือกตั้ง",
+      "titleEN": "Duty to Control Members from Violating Election Law",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "คณะกรรมการบริหารพรรคและกรรมการบริหารพรรคมีหน้าที่ควบคุมกำกับดูแลมิให้สมาชิกฝ่าฝืนรัฐธรรมนูญ กฎหมาย หรือข้อบังคับ โดยเฉพาะในช่วงมีพระราชกฤษฎีกาให้เลือกตั้ง หากไม่ปฏิบัติตามเมื่อความปรากฏ นายทะเบียนอาจเสนอให้คณะกรรมการสั่งให้กรรมการบริหารพรรคพ้นจากตำแหน่งทั้งคณะ และห้ามดำรงตำแหน่งในพรรคการเมืองอีกเป็นเวลา 20 ปี",
+      "definition": {
+        "text": "มาตรา 22 วรรคหนึ่ง-สอง กำหนดว่าคณะกรรมการบริหารพรรคการเมืองและกรรมการบริหารพรรคการเมืองมีหน้าที่ควบคุมและกำกับดูแลมิให้สมาชิกกระทำการอันเป็นการฝ่าฝืนรัฐธรรมนูญ กฎหมาย ข้อบังคับ รวมตลอดทั้งระเบียบ ประกาศ และคำสั่งของคณะกรรมการ โดยเฉพาะในช่วงมีพระราชกฤษฎีกาให้มีการเลือกตั้งหรือเลือกสมาชิกวุฒิสภา",
+        "provisions": [
+          "politicalparty_22"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 22"
+        }
+      ],
+      "sections": [
+        {
+          "key": "sanction-chain",
+          "kind": "elements",
+          "label": "ลำดับมาตรการเมื่อพบการฝ่าฝืน",
+          "body": "",
+          "items": [
+            {
+              "label": "สั่งยุติการกระทำก่อน",
+              "text": "เมื่อความปรากฏหรือได้รับแจ้งจากนายทะเบียน คณะกรรมการบริหารพรรคต้องมีมติหรือสั่งการให้สมาชิกยุติการกระทำโดยพลัน และแจ้งให้นายทะเบียนทราบภายใน 7 วัน (มาตรา 22 วรรคสาม)",
+              "provisions": [
+                "politicalparty_22"
+              ]
+            },
+            {
+              "label": "คำสั่งให้พ้นจากตำแหน่งทั้งคณะและห้ามดำรงตำแหน่ง 20 ปี",
+              "text": "หากคณะกรรมการบริหารพรรคไม่ปฏิบัติตามวรรคสาม นายทะเบียนเสนอให้คณะกรรมการมีคำสั่งให้กรรมการบริหารพรรคพ้นจากตำแหน่งทั้งคณะ ประกาศในราชกิจจานุเบกษา และห้ามดำรงตำแหน่งใดในพรรคการเมืองจนกว่าจะพ้น 20 ปี โดยมีสิทธิคัดค้านต่อศาลรัฐธรรมนูญภายใน 30 วัน (มาตรา 22 วรรคสี่-ห้า)",
+              "provisions": [
+                "politicalparty_22"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_22",
+          "role": "core",
+          "note": "หน้าที่ควบคุมสมาชิกและมาตรการเมื่อฝ่าฝืน"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 22",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "kitchakam-prajam-pi-thi-tong-damnoenkan": {
+      "id": "atlas:concept/kitchakam-prajam-pi-thi-tong-damnoenkan",
+      "slug": "kitchakam-prajam-pi-thi-tong-damnoenkan",
+      "titleTH": "กิจกรรมประจำปีที่พรรคการเมืองต้องดำเนินการ",
+      "titleEN": "Annual Political Activities the Party Must Undertake",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "ในแต่ละปีพรรคการเมืองต้องมีกิจกรรมอย่างน้อยหนึ่งอย่างเพื่อส่งเสริมความรู้ประชาธิปไตย การมีส่วนร่วมของประชาชน หรือการพัฒนาพรรคเป็นสถาบันทางการเมือง โดยหัวหน้าพรรคต้องจัดทำแผนหรือโครงการส่งให้นายทะเบียนทราบภายในเดือนเมษายนของทุกปี",
+      "definition": {
+        "text": "มาตรา 23 วรรคหนึ่ง กำหนดว่าอย่างน้อยในแต่ละปีพรรคการเมืองต้องมีกิจกรรมอย่างใดอย่างหนึ่งหรือหลายอย่างตาม 5 ประการที่ระบุไว้ในมาตรานี้ เพื่อดำเนินกิจกรรมทางการเมืองตามหลักการปกครองในระบอบประชาธิปไตยอันมีพระมหากษัตริย์ทรงเป็นประมุข",
+        "provisions": [
+          "politicalparty_23"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 23"
+        }
+      ],
+      "sections": [
+        {
+          "key": "annual-plan",
+          "kind": "elements",
+          "label": "หน้าที่จัดทำแผนประจำปี",
+          "body": "",
+          "items": [
+            {
+              "label": "ส่งแผนให้นายทะเบียนภายในเมษายน",
+              "text": "หัวหน้าพรรคการเมืองโดยความเห็นชอบของคณะกรรมการบริหารพรรค จัดทำแผนหรือโครงการที่จะดำเนินกิจกรรมในแต่ละปีส่งให้นายทะเบียนทราบภายในเดือนเมษายนของทุกปี และให้นายทะเบียนเผยแพร่ให้ประชาชนทราบเป็นการทั่วไป (มาตรา 23 วรรคสอง)",
+              "provisions": [
+                "politicalparty_23"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_23",
+          "role": "core",
+          "note": "กิจกรรมทางการเมืองประจำปีและหน้าที่จัดทำแผน"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 23",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "khunsombat-sattha-lae-kan-truatsop-thabian": {
+      "id": "atlas:concept/khunsombat-sattha-lae-kan-truatsop-thabian",
+      "slug": "khunsombat-sattha-lae-kan-truatsop-thabian",
+      "titleTH": "คุณสมบัติสมาชิกและการตรวจสอบทะเบียนสมาชิก",
+      "titleEN": "Member Qualifications and Registry Verification",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "สมาชิกต้องมีอายุไม่ต่ำกว่า 18 ปีและมีคุณสมบัติตามมาตรา 9(1)(3)(5) นายทะเบียนสมาชิกมีหน้าที่ตรวจสอบคุณสมบัติและจัดทำทะเบียนสมาชิกให้ตรงตามจริง ส่วนนายทะเบียนพรรคการเมืองมีหน้าที่ตรวจสอบความซ้ำซ้อนของสมาชิกระหว่างพรรค และกรณีถูกแอบอ้างเป็นสมาชิกโดยไม่รู้เห็นสามารถขอลบชื่อได้",
+      "definition": {
+        "text": "มาตรา 24 กำหนดว่าสมาชิกต้องมีคุณสมบัติและไม่มีลักษณะต้องห้ามตามที่กำหนดในข้อบังคับ ซึ่งอย่างน้อยต้องมีอายุไม่ต่ำกว่าสิบแปดปีและมีคุณสมบัติและไม่มีลักษณะต้องห้ามตามมาตรา 9(1)(3) และ (5)",
+        "provisions": [
+          "politicalparty_24"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 24-26"
+        }
+      ],
+      "sections": [
+        {
+          "key": "registry-verification",
+          "kind": "elements",
+          "label": "หน้าที่ตรวจสอบทะเบียนและกรณีถูกแอบอ้าง",
+          "body": "",
+          "items": [
+            {
+              "label": "หน้าที่นายทะเบียนสมาชิก",
+              "text": "นายทะเบียนสมาชิกมีหน้าที่ตรวจสอบคุณสมบัติผู้สมัครเป็นสมาชิก จัดทำทะเบียนสมาชิกให้ตรงตามความเป็นจริงและให้สมาชิกตรวจดูได้สะดวก รวมทั้งประกาศชื่อสมาชิกให้ประชาชนทราบทั่วไป (มาตรา 25 วรรคหนึ่ง)",
+              "provisions": [
+                "politicalparty_25"
+              ]
+            },
+            {
+              "label": "กรณีถูกแอบอ้างเป็นสมาชิก",
+              "text": "หากพรรคการเมืองแอบอ้างว่าผู้ใดสมัครเป็นสมาชิกโดยผู้นั้นไม่รู้เห็นหรือไม่สมัครใจ ผู้ถูกแอบอ้างอาจแจ้งนายทะเบียนเพื่อตรวจสอบและลบชื่อออก โดยให้ถือว่าไม่เคยเป็นสมาชิกมาตั้งแต่ต้น (มาตรา 25 วรรคสาม)",
+              "provisions": [
+                "politicalparty_25"
+              ]
+            },
+            {
+              "label": "การตรวจสอบความซ้ำซ้อนระหว่างพรรค",
+              "text": "นายทะเบียนมีหน้าที่ตรวจสอบความซ้ำซ้อนของสมาชิกทุกพรรคการเมือง หากพบว่าบุคคลใดเป็นสมาชิกหลายพรรค ให้แจ้งหัวหน้าพรรคที่เกี่ยวข้องลบชื่อผู้นั้นออก (มาตรา 26)",
+              "provisions": [
+                "politicalparty_26"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_24",
+          "role": "core",
+          "note": "คุณสมบัติสมาชิก"
+        },
+        {
+          "ref": "politicalparty_25",
+          "role": "core",
+          "note": "หน้าที่นายทะเบียนสมาชิกและกรณีถูกแอบอ้าง"
+        },
+        {
+          "ref": "politicalparty_26",
+          "role": "core",
+          "note": "การตรวจสอบความซ้ำซ้อนของสมาชิก"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 24, 25, 26",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/sattaphap-lae-kan-sinsut-sattaphap",
+          "rel": "seealso",
+          "labelTH": "สมาชิกภาพและการสิ้นสุดสมาชิกภาพ",
+          "status": "published",
+          "note": "การขาดคุณสมบัติตามมาตรา 24 เป็นเหตุหนึ่งของการสิ้นสุดสมาชิกภาพ"
+        }
+      ]
+    },
+    "sattaphap-lae-kan-sinsut-sattaphap": {
+      "id": "atlas:concept/sattaphap-lae-kan-sinsut-sattaphap",
+      "slug": "sattaphap-lae-kan-sinsut-sattaphap",
+      "titleTH": "สมาชิกภาพและการสิ้นสุดสมาชิกภาพ",
+      "titleEN": "Party Membership and Its Termination",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "สมาชิกภาพเริ่มตั้งแต่ชำระค่าบำรุงพรรค และสิ้นสุดลงเมื่อลาออก ขาดคุณสมบัติ หรือไม่ชำระค่าบำรุง 2 ปีติดต่อกัน เป็นอย่างน้อย โดยหากข้อบังคับให้พ้นสมาชิกภาพตามมติพรรคและสมาชิกผู้นั้นเป็น ส.ส. มติต้องได้คะแนนไม่น้อยกว่า 3 ใน 4 ของที่ประชุมร่วมกรรมการบริหารพรรคและ ส.ส. สังกัดพรรค — เป็นกลไกคุ้มครองความเป็นอิสระของ ส.ส. จากการถูกขับออกโดยพลการ",
+      "definition": {
+        "text": "มาตรา 27 วรรคหนึ่ง กำหนดว่าสมาชิกภาพของสมาชิกเริ่มตั้งแต่ได้ชำระค่าบำรุงพรรคการเมืองตามจำนวนที่กำหนดในข้อบังคับแล้ว โดยจะสิ้นสุดลงตามที่กำหนดในข้อบังคับ ซึ่งอย่างน้อยต้องประกอบด้วยเหตุ 3 ประการตามมาตรานี้",
+        "provisions": [
+          "politicalparty_27"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 27"
+        }
+      ],
+      "sections": [
+        {
+          "key": "mp-protection",
+          "kind": "elements",
+          "label": "สามเหตุขั้นต่ำและการคุ้มครอง ส.ส.",
+          "body": "",
+          "items": [
+            {
+              "label": "สามเหตุ",
+              "text": "(1) ลาออก (2) ขาดคุณสมบัติหรือมีลักษณะต้องห้ามตามมาตรา 24 (3) ไม่ชำระค่าบำรุงพรรคเป็นเวลาสองปีติดต่อกัน",
+              "provisions": [
+                "politicalparty_27"
+              ]
+            },
+            {
+              "label": "เกณฑ์เสียงพิเศษเมื่อขับ ส.ส. ออกโดยมติพรรค",
+              "text": "หากข้อบังคับกำหนดให้สมาชิกพ้นจากสมาชิกภาพตามมติของพรรคการเมือง และสมาชิกผู้นั้นดำรงตำแหน่ง ส.ส. ข้อบังคับต้องกำหนดให้มติดังกล่าวมีคะแนนเสียงไม่น้อยกว่าสามในสี่ของที่ประชุมร่วมของคณะกรรมการบริหารพรรคและสมาชิกสภาผู้แทนราษฎรที่สังกัดพรรคนั้น (มาตรา 27 วรรคท้าย)",
+              "provisions": [
+                "politicalparty_27"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_27",
+          "role": "core",
+          "note": "สมาชิกภาพ เหตุสิ้นสุด และการคุ้มครอง ส.ส. จากการขับออก"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 27",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "khoham-khrobngam-phak-kanmueang": {
+      "id": "atlas:concept/khoham-khrobngam-phak-kanmueang",
+      "slug": "khoham-khrobngam-phak-kanmueang",
+      "titleTH": "ข้อห้ามครอบงำพรรคการเมืองโดยบุคคลภายนอก",
+      "titleEN": "Prohibition on Outside Domination or Control of a Party",
+      "aliases": [
+        "ข้อห้ามครอบงำพรรค"
+      ],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "ห้ามทั้งพรรคการเมืองยินยอมและห้ามบุคคลภายนอกซึ่งมิใช่สมาชิกกระทำการควบคุม ครอบงำ หรือชี้นำกิจกรรมของพรรคในลักษณะที่ทำให้พรรคหรือสมาชิกขาดความเป็นอิสระ ไม่ว่าทางตรงหรือทางอ้อม — เป็นหลักคุ้มครองความเป็นอิสระของพรรคการเมืองที่มีบทลงโทษหนักถึงขั้นยุบพรรค",
+      "definition": {
+        "text": "มาตรา 28 ห้ามมิให้พรรคการเมืองยินยอมหรือกระทำการใดอันทำให้บุคคลอื่นซึ่งมิใช่สมาชิกกระทำการอันเป็นการควบคุม ครอบงำ หรือชี้นำ กิจกรรมของพรรคการเมืองในลักษณะที่ทำให้พรรคการเมืองหรือสมาชิกขาดความอิสระ ทั้งนี้ ไม่ว่าโดยทางตรงหรือโดยทางอ้อม",
+        "provisions": [
+          "politicalparty_28"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 28-29"
+        }
+      ],
+      "sections": [
+        {
+          "key": "mirror-prohibition",
+          "kind": "elements",
+          "label": "ข้อห้ามคู่ขนานสำหรับบุคคลภายนอก",
+          "body": "",
+          "items": [
+            {
+              "label": "ข้อห้ามฝั่งบุคคลภายนอก",
+              "text": "ห้ามมิให้ผู้ใดซึ่งมิใช่สมาชิกกระทำการใดอันเป็นการควบคุม ครอบงำ หรือชี้นำกิจกรรมของพรรคการเมืองในลักษณะที่ทำให้พรรคการเมืองหรือสมาชิกขาดความอิสระ ไม่ว่าทางตรงหรือทางอ้อม (มาตรา 29)",
+              "provisions": [
+                "politicalparty_29"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_28",
+          "role": "core",
+          "note": "ข้อห้ามฝั่งพรรคการเมือง"
+        },
+        {
+          "ref": "politicalparty_29",
+          "role": "core",
+          "note": "ข้อห้ามฝั่งบุคคลภายนอก"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 28, 29",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/het-yubphak-kanmueang-doi-san-ratthathammanun",
+          "rel": "seealso",
+          "labelTH": "เหตุยุบพรรคการเมือง",
+          "status": "published",
+          "note": "การฝ่าฝืนมาตรา 28 เป็นเหตุหนึ่งที่ศาลรัฐธรรมนูญอาจสั่งยุบพรรคตามมาตรา 92(3)"
+        }
+      ]
+    },
+    "khoham-hai-prayot-phuea-jungjai-sattha-samak": {
+      "id": "atlas:concept/khoham-hai-prayot-phuea-jungjai-sattha-samak",
+      "slug": "khoham-hai-prayot-phuea-jungjai-sattha-samak",
+      "titleTH": "ข้อห้ามให้ประโยชน์เพื่อจูงใจสมัครเป็นสมาชิกและข้อห้ามใช้ชื่อพรรคโดยไม่ชอบ",
+      "titleEN": "Prohibition on Inducing Membership and on Unauthorized Use of a Party's Name",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "ห้ามพรรคการเมืองหรือผู้ใดให้ประโยชน์เพื่อจูงใจให้สมัครเป็นสมาชิก และห้ามผู้ใดเรียกรับประโยชน์เพื่อสมัครเป็นสมาชิก เว้นแต่สิทธิประโยชน์ปกติของสมาชิก นอกจากนี้ห้ามผู้ที่มิใช่พรรคการเมืองใช้ชื่อ เครื่องหมาย หรือคำว่า \"พรรคการเมือง\" ในลักษณะทำให้ประชาชนเข้าใจผิด",
+      "definition": {
+        "text": "มาตรา 30 ห้ามมิให้พรรคการเมืองหรือผู้ใดให้ เสนอให้ หรือสัญญาว่าจะให้เงิน ทรัพย์สิน หรือประโยชน์อื่นใด ไม่ว่าโดยทางตรงหรือโดยทางอ้อมเพื่อจูงใจให้บุคคลหนึ่งบุคคลใดสมัครเข้าเป็นสมาชิก เว้นแต่สิทธิหรือประโยชน์ซึ่งบุคคลจะพึงได้รับในฐานะที่เป็นสมาชิก",
+        "provisions": [
+          "politicalparty_30"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 30-32"
+        }
+      ],
+      "sections": [
+        {
+          "key": "related-prohibitions",
+          "kind": "elements",
+          "label": "ข้อห้ามที่เกี่ยวข้อง",
+          "body": "",
+          "items": [
+            {
+              "label": "ข้อห้ามฝั่งผู้รับ",
+              "text": "ห้ามมิให้ผู้ใดเรียก รับ หรือยอมจะรับเงิน ทรัพย์สิน หรือประโยชน์อื่นใดจากพรรคการเมืองหรือจากผู้ใดเพื่อสมัครเข้าเป็นสมาชิก (มาตรา 31)",
+              "provisions": [
+                "politicalparty_31"
+              ]
+            },
+            {
+              "label": "ข้อห้ามใช้ชื่อพรรคการเมืองโดยไม่ชอบ",
+              "text": "ห้ามมิให้ผู้ใดซึ่งมิใช่พรรคการเมืองใช้ชื่อ ชื่อย่อ ภาพเครื่องหมายของพรรคการเมือง หรือถ้อยคำในประการที่น่าจะทำให้ประชาชนเข้าใจว่าเป็นพรรคการเมือง หรือใช้คำว่า \"พรรคการเมือง\" หรือคำแปล/คำอ่านในภาษาต่างประเทศ (มาตรา 32)",
+              "provisions": [
+                "politicalparty_32"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_30",
+          "role": "core",
+          "note": "ข้อห้ามให้ประโยชน์จูงใจสมัครสมาชิก"
+        },
+        {
+          "ref": "politicalparty_31",
+          "role": "core",
+          "note": "ข้อห้ามฝั่งผู้รับ"
+        },
+        {
+          "ref": "politicalparty_32",
+          "role": "core",
+          "note": "ข้อห้ามใช้ชื่อพรรคการเมืองโดยไม่ชอบ"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 30, 31, 32",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "het-kanthon-jamnuan-sattha-lae-sakha": {
+      "id": "atlas:concept/het-kanthon-jamnuan-sattha-lae-sakha",
+      "slug": "het-kanthon-jamnuan-sattha-lae-sakha",
+      "titleTH": "เกณฑ์จำนวนสมาชิกและสาขาพรรคการเมืองภายในกำหนดเวลา",
+      "titleEN": "Minimum Membership and Branch-Office Requirements Within Statutory Deadlines",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "ภายใน 1 ปีนับแต่จดทะเบียน พรรคการเมืองต้องมีสมาชิกไม่น้อยกว่า 5,000 คน (เพิ่มเป็น 10,000 คนภายใน 4 ปี) และต้องจัดตั้งสาขาพรรคอย่างน้อยภาคละ 1 สาขาโดยแต่ละสาขามีสมาชิกในพื้นที่ไม่น้อยกว่า 500 คน หรือแต่งตั้งตัวแทนพรรคประจำจังหวัดเมื่อมีสมาชิกในจังหวัดนั้นเกิน 100 คน โดยสาขาและตัวแทนจะจัดตั้งนอกราชอาณาจักรมิได้",
+      "definition": {
+        "text": "มาตรา 33 กำหนดว่าภายในหนึ่งปีนับแต่วันที่นายทะเบียนรับจดทะเบียน พรรคการเมืองต้องดำเนินการ 2 ประการตามมาตรานี้ ได้แก่ จำนวนสมาชิกขั้นต่ำและการจัดตั้งสาขาพรรคการเมือง",
+        "provisions": [
+          "politicalparty_33"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 33-36"
+        }
+      ],
+      "sections": [
+        {
+          "key": "branch-and-representative",
+          "kind": "elements",
+          "label": "สาขาพรรคการเมืองและตัวแทนประจำจังหวัด",
+          "body": "",
+          "items": [
+            {
+              "label": "จำนวนสมาชิกขั้นต่ำ",
+              "text": "ต้องมีจำนวนสมาชิกไม่น้อยกว่าห้าพันคนภายในหนึ่งปี และเพิ่มเป็นไม่น้อยกว่าหนึ่งหมื่นคนภายในสี่ปีนับแต่จดทะเบียน (มาตรา 33(1))",
+              "provisions": [
+                "politicalparty_33"
+              ]
+            },
+            {
+              "label": "สาขาพรรคการเมือง",
+              "text": "ต้องจัดให้มีสาขาพรรคการเมืองอย่างน้อยภาคละหนึ่งสาขาตามบัญชีภาคที่คณะกรรมการกำหนด โดยแต่ละสาขาต้องมีสมาชิกในพื้นที่รับผิดชอบตั้งแต่ห้าร้อยคนขึ้นไป (มาตรา 33(2))",
+              "provisions": [
+                "politicalparty_33"
+              ]
+            },
+            {
+              "label": "ตัวแทนพรรคการเมืองประจำจังหวัด",
+              "text": "เขตเลือกตั้งในจังหวัดที่ไม่มีสำนักงานใหญ่หรือสาขา หากมีสมาชิกในจังหวัดนั้นเกินหนึ่งร้อยคน พรรคต้องแต่งตั้งตัวแทนพรรคการเมืองประจำจังหวัดจากการเลือกของสมาชิกนั้น (มาตรา 35)",
+              "provisions": [
+                "politicalparty_35"
+              ]
+            },
+            {
+              "label": "ห้ามจัดตั้งนอกราชอาณาจักร",
+              "text": "สาขาพรรคการเมืองและตัวแทนพรรคการเมืองประจำจังหวัดจะจัดตั้งขึ้นนอกราชอาณาจักรมิได้ (มาตรา 36)",
+              "provisions": [
+                "politicalparty_36"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_33",
+          "role": "core",
+          "note": "เกณฑ์จำนวนสมาชิกและสาขาภายในกำหนดเวลา"
+        },
+        {
+          "ref": "politicalparty_34",
+          "role": "related",
+          "note": "คุณสมบัติกรรมการสาขา"
+        },
+        {
+          "ref": "politicalparty_35",
+          "role": "core",
+          "note": "ตัวแทนพรรคการเมืองประจำจังหวัด"
+        },
+        {
+          "ref": "politicalparty_36",
+          "role": "core",
+          "note": "ห้ามจัดตั้งนอกราชอาณาจักร"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 33, 34, 35, 36",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/het-sinsaphap-khwampen-phak-kanmueang",
+          "rel": "seealso",
+          "labelTH": "เหตุสิ้นสภาพความเป็นพรรคการเมือง",
+          "status": "published",
+          "note": "การไม่บรรลุเกณฑ์นี้ภายในกำหนดเป็นเหตุสิ้นสภาพตามมาตรา 91"
+        }
+      ]
+    },
+    "kan-prachum-yai-khong-phak-kanmueang": {
+      "id": "atlas:concept/kan-prachum-yai-khong-phak-kanmueang",
+      "slug": "kan-prachum-yai-khong-phak-kanmueang",
+      "titleTH": "การประชุมใหญ่ของพรรคการเมือง",
+      "titleEN": "The Party's General Assembly",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "พรรคการเมืองต้องจัดประชุมใหญ่อย่างน้อยปีละครั้ง เพื่อทำกิจการสำคัญ เช่น แก้ไขอุดมการณ์/ข้อบังคับ เลือกตั้งผู้บริหารพรรคและกรรมการสรรหา และอนุมัติรายงานการเงิน โดยองค์ประชุมและวิธีลงมติมีเกณฑ์ขั้นต่ำตามกฎหมาย และสมาชิก/ส.ส./กรรมการบริหารมีสิทธิเข้าชื่อขอเปิดประชุมวิสามัญหรือร้องขอให้คณะกรรมการวินิจฉัยมติที่ขัดกฎหมาย",
+      "definition": {
+        "text": "มาตรา 37 กำหนดว่าพรรคการเมืองต้องจัดให้มีการประชุมใหญ่อย่างน้อยปีละหนึ่งครั้ง",
+        "provisions": [
+          "politicalparty_37"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 37-42"
+        }
+      ],
+      "sections": [
+        {
+          "key": "assembly-mechanics",
+          "kind": "elements",
+          "label": "กิจการของที่ประชุมใหญ่ องค์ประชุม และกลไกตรวจสอบมติ",
+          "body": "",
+          "items": [
+            {
+              "label": "กิจการเจ็ดประการของที่ประชุมใหญ่",
+              "text": "การแก้ไขอุดมการณ์/นโยบาย การแก้ไขข้อบังคับ การเลือกตั้งผู้บริหารพรรค การเลือกตั้งคณะกรรมการสรรหาผู้สมัคร การให้ความเห็นชอบรายงานการเงิน กิจการที่เสนอโดยผู้บริหารพรรค/สาขา และกิจการอื่นตามกฎหมายหรือข้อบังคับ (มาตรา 38)",
+              "provisions": [
+                "politicalparty_38"
+              ]
+            },
+            {
+              "label": "องค์ประชุมขั้นต่ำ",
+              "text": "องค์ประชุมต้องมีกรรมการบริหารพรรคไม่น้อยกว่ากึ่งหนึ่ง ผู้แทนสาขาไม่น้อยกว่ากึ่งหนึ่งของจำนวนสาขา (อย่างน้อย 2 สาขาต่างภาค) ตัวแทนประจำจังหวัดไม่น้อยกว่ากึ่งหนึ่ง และสมาชิก รวมกันไม่น้อยกว่า 250 คน (มาตรา 39)",
+              "provisions": [
+                "politicalparty_39"
+              ]
+            },
+            {
+              "label": "การลงมติและสิทธิขอเปิดประชุมวิสามัญ/ร้องขอวินิจฉัยมติ",
+              "text": "การลงมติทำโดยเปิดเผย เว้นแต่เลือกผู้บริหารพรรคหรือกรรมการสรรหาให้ลงคะแนนลับ (มาตรา 40) สมาชิก/ส.ส./กรรมการบริหารตามสัดส่วนที่กำหนดมีสิทธิเข้าชื่อขอเปิดประชุมวิสามัญ (มาตรา 41) และสมาชิกที่เห็นว่ามติพรรคขัดกฎหมายมีสิทธิร้องขอให้คณะกรรมการวินิจฉัยและสั่งเพิกถอนมติได้ (มาตรา 42)",
+              "provisions": [
+                "politicalparty_40",
+                "politicalparty_41",
+                "politicalparty_42"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_37",
+          "role": "core",
+          "note": "หน้าที่จัดประชุมใหญ่ปีละครั้ง"
+        },
+        {
+          "ref": "politicalparty_38",
+          "role": "core",
+          "note": "กิจการของที่ประชุมใหญ่"
+        },
+        {
+          "ref": "politicalparty_39",
+          "role": "core",
+          "note": "องค์ประชุมขั้นต่ำ"
+        },
+        {
+          "ref": "politicalparty_40",
+          "role": "related",
+          "note": "วิธีลงมติ"
+        },
+        {
+          "ref": "politicalparty_41",
+          "role": "related",
+          "note": "สิทธิขอเปิดประชุมวิสามัญ"
+        },
+        {
+          "ref": "politicalparty_42",
+          "role": "related",
+          "note": "สิทธิร้องขอวินิจฉัยมติที่ขัดกฎหมาย"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 37, 38, 39, 40, 41, 42",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "rai-ngan-kan-damnoenkitchakan-prajam-pi": {
+      "id": "atlas:concept/rai-ngan-kan-damnoenkitchakan-prajam-pi",
+      "slug": "rai-ngan-kan-damnoenkitchakan-prajam-pi",
+      "titleTH": "รายงานการดำเนินกิจการของพรรคการเมืองประจำปี",
+      "titleEN": "Annual Report on Party Operations",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "หัวหน้าพรรคต้องจัดทำรายงานการดำเนินกิจการในรอบปีปฏิทินเสนอที่ประชุมใหญ่อนุมัติภายในเดือนเมษายนของทุกปี แล้วส่งให้นายทะเบียนภายใน 15 วันนับแต่วันอนุมัติ พรรคที่จดทะเบียนยังไม่ถึง 180 วันก่อนสิ้นปีปฏิทินได้รับยกเว้นสำหรับปีนั้น",
+      "definition": {
+        "text": "มาตรา 43 วรรคหนึ่ง กำหนดว่าให้หัวหน้าพรรคการเมืองจัดทำรายงานการดำเนินกิจการของพรรคการเมืองในรอบปีปฏิทินที่ผ่านมาเสนอต่อที่ประชุมใหญ่ของพรรคการเมืองเพื่ออนุมัติภายในเดือนเมษายนของทุกปี",
+        "provisions": [
+          "politicalparty_43"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 43"
+        }
+      ],
+      "sections": [
+        {
+          "key": "exemption",
+          "kind": "elements",
+          "label": "ข้อยกเว้นสำหรับพรรคที่เพิ่งจดทะเบียน",
+          "body": "",
+          "items": [
+            {
+              "label": "ยกเว้นพรรคที่จดทะเบียนไม่ถึง 180 วัน",
+              "text": "พรรคการเมืองใดที่จดทะเบียนยังไม่ถึงหนึ่งร้อยแปดสิบวันนับถึงวันสิ้นปีปฏิทิน ให้ได้รับยกเว้นไม่ต้องดำเนินการตามวรรคหนึ่งสำหรับปีนั้น (มาตรา 43 วรรคสอง)",
+              "provisions": [
+                "politicalparty_43"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_43",
+          "role": "core",
+          "note": "หน้าที่จัดทำและส่งรายงานการดำเนินกิจการประจำปี"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 43",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "khoham-rap-borijak-phuea-bonthamlai-khwammankhong": {
+      "id": "atlas:concept/khoham-rap-borijak-phuea-bonthamlai-khwammankhong",
+      "slug": "khoham-rap-borijak-phuea-bonthamlai-khwammankhong",
+      "titleTH": "ข้อห้ามรับบริจาคเพื่อบ่อนทำลายความมั่นคงและข้อห้ามก่อกวนความสงบเรียบร้อย",
+      "titleEN": "Prohibition on Donations to Undermine National Security",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "ห้ามพรรคการเมือง ผู้ดำรงตำแหน่งในพรรค และสมาชิกรับบริจาคเพื่อกระทำการหรือสนับสนุนการบ่อนทำลายความมั่นคงของราชอาณาจักร ราชบัลลังก์ เศรษฐกิจของประเทศ หรือราชการแผ่นดิน และห้ามพรรคการเมืองกระทำหรือสนับสนุนการก่อกวนความสงบเรียบร้อยหรือทำลายทรัพยากรธรรมชาติของประเทศ",
+      "definition": {
+        "text": "มาตรา 44 ห้ามมิให้พรรคการเมือง ผู้ดำรงตำแหน่งในพรรคการเมือง และสมาชิกรับบริจาคจากผู้ใดเพื่อกระทำการหรือสนับสนุนการกระทำอันเป็นการบ่อนทำลายความมั่นคงของราชอาณาจักร ราชบัลลังก์ เศรษฐกิจของประเทศ หรือราชการแผ่นดิน",
+        "provisions": [
+          "politicalparty_44"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 44-45"
+        }
+      ],
+      "sections": [
+        {
+          "key": "related-prohibition",
+          "kind": "elements",
+          "label": "ข้อห้ามก่อกวนความสงบเรียบร้อย",
+          "body": "",
+          "items": [
+            {
+              "label": "ข้อห้ามตามมาตรา 45",
+              "text": "ห้ามมิให้พรรคการเมืองหรือผู้ดำรงตำแหน่งในพรรคการเมืองกระทำการหรือส่งเสริมสนับสนุนให้ผู้ใดกระทำการอันเป็นการก่อกวนหรือคุกคามความสงบเรียบร้อยหรือศีลธรรมอันดีของประชาชน หรือทำลายทรัพยากรธรรมชาติของประเทศ",
+              "provisions": [
+                "politicalparty_45"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_44",
+          "role": "core",
+          "note": "ข้อห้ามรับบริจาคเพื่อบ่อนทำลายความมั่นคง"
+        },
+        {
+          "ref": "politicalparty_45",
+          "role": "core",
+          "note": "ข้อห้ามก่อกวนความสงบเรียบร้อย"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 44, 45",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/het-yubphak-kanmueang-doi-san-ratthathammanun",
+          "rel": "seealso",
+          "labelTH": "เหตุยุบพรรคการเมือง",
+          "status": "published",
+          "note": "การฝ่าฝืนมาตรา 44 หรือ 45 เป็นเหตุยุบพรรคตามมาตรา 92(3)"
+        }
+      ]
+    },
+    "khoham-sue-khai-tamnaeng-thang-kanmueang": {
+      "id": "atlas:concept/khoham-sue-khai-tamnaeng-thang-kanmueang",
+      "slug": "khoham-sue-khai-tamnaeng-thang-kanmueang",
+      "titleTH": "ข้อห้ามซื้อขายตำแหน่งทางการเมือง",
+      "titleEN": "Prohibition on Trading Political Appointments",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "ห้ามพรรคการเมือง สมาชิก หรือผู้ใดเรียก รับ หรือยอมจะรับเงินหรือประโยชน์เพื่อให้บุคคลได้รับแต่งตั้งดำรงตำแหน่งทางการเมืองหรือตำแหน่งในราชการแผ่นดิน และห้ามผู้ใดให้หรือสัญญาจะให้เพื่อจูงใจให้ตนหรือผู้อื่นได้รับการแต่งตั้ง — เป็นความผิดที่มีโทษหนักที่สุดในกฎหมายนี้ (จำคุก 10-20 ปี)",
+      "definition": {
+        "text": "มาตรา 46 วรรคหนึ่ง ห้ามมิให้พรรคการเมือง สมาชิก หรือผู้ใด เรียก รับ หรือยอมจะรับเงิน ทรัพย์สิน หรือประโยชน์อื่นใดจากผู้ใด เพื่อให้ผู้นั้นหรือบุคคลอื่นได้รับแต่งตั้ง หรือสัญญาว่าจะให้ได้รับแต่งตั้ง หรือเพราะเหตุที่ได้รับการแต่งตั้งให้ดำรงตำแหน่งทางการเมือง หรือตำแหน่งใดในการบริหารราชการแผ่นดินหรือในหน่วยงานของรัฐ",
+        "provisions": [
+          "politicalparty_46"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 46"
+        }
+      ],
+      "sections": [
+        {
+          "key": "mirror-ban",
+          "kind": "elements",
+          "label": "ข้อห้ามฝั่งผู้ให้",
+          "body": "",
+          "items": [
+            {
+              "label": "ข้อห้ามฝั่งผู้เสนอให้",
+              "text": "ห้ามมิให้ผู้ใดให้ ขอให้ หรือรับว่าจะให้เงิน ทรัพย์สิน หรือประโยชน์อื่นใดแก่พรรคการเมือง สมาชิก หรือผู้ใด เพื่อจูงใจให้ตนหรือบุคคลอื่นได้รับการแต่งตั้งให้ดำรงตำแหน่งทางการเมืองหรือตำแหน่งในการบริหารราชการแผ่นดินหรือหน่วยงานของรัฐ (มาตรา 46 วรรคสอง)",
+              "provisions": [
+                "politicalparty_46"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_46",
+          "role": "core",
+          "note": "ข้อห้ามซื้อขายตำแหน่งทางการเมืองทั้งสองฝ่าย"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 46",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "lakken-song-phusamak-lae-khanakammakan-sanha": {
+      "id": "atlas:concept/lakken-song-phusamak-lae-khanakammakan-sanha",
+      "slug": "lakken-song-phusamak-lae-khanakammakan-sanha",
+      "titleTH": "หลักเกณฑ์การส่งผู้สมัครรับเลือกตั้งและคณะกรรมการสรรหา",
+      "titleEN": "Candidate-Selection Rules and the Selection Committee",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "พรรคการเมืองต้องมีสาขาหรือตัวแทนประจำจังหวัดในเขตเลือกตั้งที่จะส่งผู้สมัครแบบแบ่งเขต และต้องคำนึงถึงความหลากหลายภูมิภาคและความเท่าเทียมทางเพศในบัญชีรายชื่อ โดยการสรรหาต้องผ่านคณะกรรมการสรรหาที่มีทั้งกรรมการบริหารพรรคและตัวแทนสาขา/จังหวัด และให้สมาชิกมีส่วนร่วมลงคะแนนเลือกในแต่ละเขต",
+      "definition": {
+        "text": "มาตรา 47 วรรคหนึ่ง กำหนดว่าพรรคการเมืองซึ่งประสงค์จะส่งผู้สมัครรับเลือกตั้งสมาชิกสภาผู้แทนราษฎรแบบแบ่งเขตเลือกตั้งในเขตเลือกตั้งใด ต้องมีสาขาพรรคการเมืองหรือตัวแทนพรรคการเมืองประจำจังหวัดที่มีเขตพื้นที่รับผิดชอบในเขตเลือกตั้งนั้น",
+        "provisions": [
+          "politicalparty_47"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 3"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 47-52"
+        }
+      ],
+      "sections": [
+        {
+          "key": "list-and-committee",
+          "kind": "elements",
+          "label": "บัญชีรายชื่อและองค์ประกอบคณะกรรมการสรรหา",
+          "body": "",
+          "items": [
+            {
+              "label": "บัญชีรายชื่อคำนึงถึงภูมิภาคและเพศ",
+              "text": "การส่งผู้สมัครแบบบัญชีรายชื่อ พรรคการเมืองต้องคำนึงถึงผู้สมัครจากภูมิภาคต่าง ๆ และความเท่าเทียมกันระหว่างชายและหญิง คณะกรรมการอาจกำหนดอัตราส่วนขั้นต่ำของผู้สมัครแต่ละเพศได้ (มาตรา 48)",
+              "provisions": [
+                "politicalparty_48"
+              ]
+            },
+            {
+              "label": "องค์ประกอบคณะกรรมการสรรหา",
+              "text": "ต้องมีกรรมการบริหารพรรคไม่เกินกึ่งหนึ่งของคณะกรรมการสรรหา และหัวหน้าสาขา/ตัวแทนประจำจังหวัด โดยต้องมีหัวหน้าสาขาอย่างน้อย 4 สาขาจากภาคต่างกัน (มาตรา 49)",
+              "provisions": [
+                "politicalparty_49"
+              ]
+            },
+            {
+              "label": "ขั้นตอนสรรหาแบบแบ่งเขตและบัญชีรายชื่อ",
+              "text": "การสรรหาแบบแบ่งเขตให้สมาชิกในสาขา/ตัวแทนจังหวัดลงคะแนนเลือกจากรายชื่อที่คณะกรรมการสรรหาส่งมา แล้วส่งผู้ได้คะแนนสูงสุดให้คณะกรรมการบริหารพรรคเห็นชอบ (มาตรา 50) ส่วนแบบบัญชีรายชื่อให้สมาชิกลงคะแนนเลือกจากบัญชีไม่เกิน 150 รายชื่อ แล้วเรียงลำดับตามคะแนนรวม โดยหัวหน้าพรรคอาจอยู่ลำดับที่หนึ่งได้ (มาตรา 51) และเป็นหน้าที่ของหัวหน้าพรรคและกรรมการบริหารที่ต้องดำเนินการให้เป็นไปตามนี้ (มาตรา 52)",
+              "provisions": [
+                "politicalparty_50",
+                "politicalparty_51",
+                "politicalparty_52"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_47",
+          "role": "core",
+          "note": "เงื่อนไขพื้นที่ในการส่งผู้สมัครแบบแบ่งเขต"
+        },
+        {
+          "ref": "politicalparty_48",
+          "role": "core",
+          "note": "หลักความหลากหลายในบัญชีรายชื่อ"
+        },
+        {
+          "ref": "politicalparty_49",
+          "role": "core",
+          "note": "องค์ประกอบคณะกรรมการสรรหา"
+        },
+        {
+          "ref": "politicalparty_50",
+          "role": "related",
+          "note": "ขั้นตอนสรรหาแบบแบ่งเขต"
+        },
+        {
+          "ref": "politicalparty_51",
+          "role": "related",
+          "note": "ขั้นตอนสรรหาแบบบัญชีรายชื่อ"
+        },
+        {
+          "ref": "politicalparty_52",
+          "role": "related",
+          "note": "หน้าที่ของหัวหน้าพรรคและกรรมการบริหาร"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 47, 48, 49, 50, 51, 52",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "khoham-thutchari-nai-kan-sanha-lae-phon-nangsue-raprong": {
+      "id": "atlas:concept/khoham-thutchari-nai-kan-sanha-lae-phon-nangsue-raprong",
+      "slug": "khoham-thutchari-nai-kan-sanha-lae-phon-nangsue-raprong",
+      "titleTH": "ข้อห้ามทุจริตในกระบวนการสรรหาและผลของหนังสือรับรอง",
+      "titleEN": "Prohibition on Corrupting the Selection Process and Effect of the Certification",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "ห้ามผู้ใดจูงใจให้สมาชิกลงคะแนนโดยให้ทรัพย์สินหรือข่มขู่หลอกลวงในกระบวนการสรรหา ห้ามซื้อขายตำแหน่งผู้สมัคร และห้ามให้บุคคลที่มิใช่สมาชิกร่วมออกเสียง เมื่อหัวหน้าพรรคออกหนังสือรับรองผู้สมัครแล้ว แม้ภายหลังปรากฏว่าสรรหาไม่ครบถ้วนก็ไม่ทำให้การสมัครเสียไป แต่คณะกรรมการต้องกล่าวโทษผู้รับผิดชอบต่อพนักงานสอบสวน",
+      "definition": {
+        "text": "มาตรา 53 วรรคหนึ่ง ห้ามมิให้ผู้ใดกระทำการอย่างหนึ่งอย่างใดเพื่อจูงใจให้สมาชิกลงคะแนนให้แก่ตนเองหรือผู้อื่น หรือให้งดเว้นการลงคะแนนให้แก่ผู้ใด ด้วยวิธีการให้ทรัพย์สิน หรือหลอกลวง บังคับ ขู่เข็ญ",
+        "provisions": [
+          "politicalparty_53"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 3"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 53-56"
+        }
+      ],
+      "sections": [
+        {
+          "key": "related-rules",
+          "kind": "elements",
+          "label": "ข้อห้ามซื้อขายตำแหน่งและข้อจำกัดผู้ร่วมออกเสียง",
+          "body": "",
+          "items": [
+            {
+              "label": "ข้อห้ามซื้อขายตำแหน่งผู้สมัคร",
+              "text": "ห้ามมิให้พรรคการเมืองหรือผู้ใดเรียก รับ หรือยอมจะรับ หรือให้ หรือสัญญาว่าจะให้เงิน ทรัพย์สิน หรือประโยชน์อื่นใด เพื่อให้สมาชิกลงหรือไม่ลงสมัครหรือเสนอชื่อเข้ารับการเลือกในการสรรหา (มาตรา 54)",
+              "provisions": [
+                "politicalparty_54"
+              ]
+            },
+            {
+              "label": "ห้ามผู้มิใช่สมาชิกร่วมออกเสียง",
+              "text": "ห้ามมิให้ตัวแทนประจำจังหวัด หัวหน้าสาขา หรือกรรมการบริหารพรรคยินยอมให้บุคคลที่มิได้เป็นสมาชิกเข้าแสดงความเห็นหรือออกเสียงลงคะแนนในการสรรหา (มาตรา 55)",
+              "provisions": [
+                "politicalparty_55"
+              ]
+            },
+            {
+              "label": "ผลของหนังสือรับรองแม้สรรหาไม่ครบถ้วน",
+              "text": "เมื่อหัวหน้าพรรคออกหนังสือรับรองหรือส่งบัญชีรายชื่อแล้ว แม้ภายหลังปรากฏว่ามิได้ดำเนินการสรรหาตามมาตรา 50 หรือ 51 ครบถ้วน ไม่ทำให้การสมัครรับเลือกตั้งเสียไป แต่หากคณะกรรมการทราบ ต้องกล่าวโทษหัวหน้าพรรคและกรรมการบริหารต่อพนักงานสอบสวน (มาตรา 56)",
+              "provisions": [
+                "politicalparty_56"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_53",
+          "role": "core",
+          "note": "ข้อห้ามจูงใจ/ข่มขู่ในการลงคะแนนสรรหา"
+        },
+        {
+          "ref": "politicalparty_54",
+          "role": "core",
+          "note": "ข้อห้ามซื้อขายตำแหน่งผู้สมัคร"
+        },
+        {
+          "ref": "politicalparty_55",
+          "role": "core",
+          "note": "ห้ามผู้มิใช่สมาชิกร่วมออกเสียง"
+        },
+        {
+          "ref": "politicalparty_56",
+          "role": "core",
+          "note": "ผลของหนังสือรับรองและหน้าที่กล่าวโทษ"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 53, 54, 55, 56",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "kan-borihan-ngoen-lae-thambanchi": {
+      "id": "atlas:concept/kan-borihan-ngoen-lae-thambanchi",
+      "slug": "kan-borihan-ngoen-lae-thambanchi",
+      "titleTH": "การบริหารการเงินและการทำบัญชีของพรรคการเมือง",
+      "titleEN": "Financial Management and Accounting of Political Parties",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "คณะกรรมการบริหารพรรคมีหน้าที่บริหารการเงิน ทรัพย์สิน และจัดทำบัญชี 4 ประเภท (รายวัน รายรับจากบริจาค แยกประเภท และสินทรัพย์/หนี้สิน) โดยต้องปิดบัญชีทุกปีปฏิทินและจัดทำงบการเงินที่ผู้สอบบัญชีรับอนุญาตตรวจสอบ แล้วเสนอที่ประชุมใหญ่อนุมัติและส่งนายทะเบียนภายในกำหนด",
+      "definition": {
+        "text": "มาตรา 58 กำหนดว่าให้คณะกรรมการบริหารพรรคการเมืองมีหน้าที่บริหารการเงิน ทรัพย์สิน และประโยชน์อื่นใดของพรรคการเมืองและสาขาพรรคการเมืองตลอดจนจัดให้มีการทำบัญชีตามมาตรา 59 ให้ถูกต้องตามความเป็นจริง",
+        "provisions": [
+          "politicalparty_58"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 4"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 58-61"
+        }
+      ],
+      "sections": [
+        {
+          "key": "accounts-and-closing",
+          "kind": "elements",
+          "label": "บัญชีสี่ประเภทและการปิดบัญชี",
+          "body": "",
+          "items": [
+            {
+              "label": "บัญชีสี่ประเภท",
+              "text": "(1) บัญชีรายวันแสดงรายได้และรายจ่าย (2) บัญชีแสดงรายรับจากการบริจาค (3) บัญชีแยกประเภท (4) บัญชีแสดงสินทรัพย์และหนี้สิน (มาตรา 59)",
+              "provisions": [
+                "politicalparty_59"
+              ]
+            },
+            {
+              "label": "การปิดบัญชีและงบการเงิน",
+              "text": "ต้องปิดบัญชีครั้งแรกภายในวันสิ้นปีปฏิทินที่จดทะเบียนและทุกปีถัดไป จัดทำงบแสดงฐานะการเงินและงบรายได้/ค่าใช้จ่าย ซึ่งต้องมีผู้สอบบัญชีรับอนุญาตตรวจสอบรับรอง (มาตรา 60)",
+              "provisions": [
+                "politicalparty_60"
+              ]
+            },
+            {
+              "label": "การเสนอที่ประชุมใหญ่และส่งนายทะเบียน",
+              "text": "หัวหน้าพรรคเสนองบการเงินต่อที่ประชุมใหญ่เพื่ออนุมัติภายในเดือนเมษายน แล้วส่งให้นายทะเบียนภายใน 30 วันนับแต่วันอนุมัติพร้อมบัญชีตามมาตรา 59 (มาตรา 61)",
+              "provisions": [
+                "politicalparty_61"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_58",
+          "role": "core",
+          "note": "หน้าที่บริหารการเงินและทำบัญชี"
+        },
+        {
+          "ref": "politicalparty_59",
+          "role": "core",
+          "note": "บัญชีสี่ประเภท"
+        },
+        {
+          "ref": "politicalparty_60",
+          "role": "core",
+          "note": "การปิดบัญชีและงบการเงิน"
+        },
+        {
+          "ref": "politicalparty_61",
+          "role": "core",
+          "note": "การเสนอที่ประชุมใหญ่และส่งนายทะเบียน"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 58, 59, 60, 61",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "raidai-khong-phak-kanmueang": {
+      "id": "atlas:concept/raidai-khong-phak-kanmueang",
+      "slug": "raidai-khong-phak-kanmueang",
+      "titleTH": "รายได้ของพรรคการเมืองและข้อจำกัดการใช้",
+      "titleEN": "Sources of Party Income and Restrictions on Its Use",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "พรรคการเมืองอาจมีรายได้ 7 ประเภท เช่น ทุนประเดิม ค่าธรรมเนียม/บำรุง รายได้จากการจำหน่ายสินค้า การระดมทุน เงินบริจาค เงินอุดหนุนจากกองทุน และดอกผล โดยรายได้ที่ได้รับยกเว้นภาษี และการระดมทุนต้องกระทำโดยเปิดเผยแสดงวัตถุประสงค์ชัดเจน รายได้จะนำไปใช้เพื่อการอื่นนอกจากการดำเนินงานของพรรคมิได้",
+      "definition": {
+        "text": "มาตรา 62 วรรคหนึ่ง กำหนดว่าพรรคการเมืองอาจมีรายได้ 7 ประเภทตามมาตรานี้",
+        "provisions": [
+          "politicalparty_62"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 5"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 62-65"
+        }
+      ],
+      "sections": [
+        {
+          "key": "restrictions",
+          "kind": "elements",
+          "label": "ข้อจำกัดการใช้และหน้าที่เปิดเผย",
+          "body": "",
+          "items": [
+            {
+              "label": "ข้อจำกัดการนำไปใช้",
+              "text": "รายได้ของพรรคการเมืองจะนำไปใช้เพื่อการอื่นใด นอกจากการดำเนินงานของพรรคการเมืองมิได้ (มาตรา 62 วรรคท้าย) และได้รับยกเว้นไม่ต้องเสียภาษีอากรตามประมวลรัษฎากร (มาตรา 63)",
+              "provisions": [
+                "politicalparty_62",
+                "politicalparty_63"
+              ]
+            },
+            {
+              "label": "การระดมทุนต้องเปิดเผย",
+              "text": "การหารายได้จากการจัดกิจกรรมระดมทุนต้องกระทำโดยเปิดเผยและแสดงวัตถุประสงค์ชัดเจน โดยประกาศจำนวนและที่มาของเงินให้ประชาชนทราบและแจ้งนายทะเบียนภายใน 30 วัน (มาตรา 64)",
+              "provisions": [
+                "politicalparty_64"
+              ]
+            },
+            {
+              "label": "ประกาศรายชื่อผู้บริจาคทุกเดือน",
+              "text": "ทุกเดือนพรรคการเมืองต้องประกาศรายชื่อผู้บริจาคที่มีมูลค่าตั้งแต่ห้าพันบาทขึ้นไปให้ประชาชนทราบพร้อมวัตถุประสงค์ และแจ้งนายทะเบียนทราบ (มาตรา 65)",
+              "provisions": [
+                "politicalparty_65"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_62",
+          "role": "core",
+          "note": "เจ็ดประเภทของรายได้และข้อจำกัดการใช้"
+        },
+        {
+          "ref": "politicalparty_63",
+          "role": "related",
+          "note": "การยกเว้นภาษี"
+        },
+        {
+          "ref": "politicalparty_64",
+          "role": "core",
+          "note": "การระดมทุนต้องเปิดเผย"
+        },
+        {
+          "ref": "politicalparty_65",
+          "role": "core",
+          "note": "การประกาศรายชื่อผู้บริจาครายเดือน"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 62, 63, 64, 65",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "khokamkat-wongngoen-borijak": {
+      "id": "atlas:concept/khokamkat-wongngoen-borijak",
+      "slug": "khokamkat-wongngoen-borijak",
+      "titleTH": "ข้อจำกัดวงเงินบริจาคและการบริจาคระหว่างการเลือกตั้ง",
+      "titleEN": "Donation Ceilings and Donations During the Election Period",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "บุคคลธรรมดาบริจาคเกิน 10 ล้านบาทต่อพรรคต่อปีไม่ได้ นิติบุคคลบริจาคเกิน 5 ล้านบาทต่อปีต้องแจ้งที่ประชุมผู้ถือหุ้น ผู้รับบริจาคในนามบุคคลต้องแจ้งพรรคภายในกำหนด และในช่วงมีพระราชกฤษฎีกาเลือกตั้ง ผู้สมัครที่รับบริจาคเกิน 10,000 บาทต่อวันต้องแจ้งคณะกรรมการภายใน 7 วัน",
+      "definition": {
+        "text": "มาตรา 66 วรรคหนึ่ง กำหนดว่าบุคคลใดจะบริจาคเงิน ทรัพย์สิน หรือประโยชน์อื่นใดให้แก่พรรคการเมืองมีมูลค่าเกินสิบล้านบาทต่อพรรคการเมืองต่อปีมิได้ และในกรณีที่บุคคลนั้นเป็นนิติบุคคล การบริจาคไม่ว่าพรรคเดียวหรือหลายพรรคเกินปีละห้าล้านบาท ต้องแจ้งให้ที่ประชุมใหญ่ผู้ถือหุ้นทราบ",
+        "provisions": [
+          "politicalparty_66"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 5"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 66-68"
+        }
+      ],
+      "sections": [
+        {
+          "key": "individual-and-candidate-donations",
+          "kind": "elements",
+          "label": "การรับบริจาคของบุคคลในพรรคและผู้สมัคร",
+          "body": "",
+          "items": [
+            {
+              "label": "หน้าที่แจ้งเมื่อรับบริจาคในนามบุคคล",
+              "text": "หัวหน้าพรรค กรรมการบริหาร กรรมการสาขา ตัวแทนจังหวัด หรือสมาชิกที่ได้รับบริจาคเพื่อประโยชน์ในการดำเนินกิจกรรมของพรรค ต้องแจ้งให้พรรคทราบภายในเวลาที่ข้อบังคับกำหนดและออกใบเสร็จให้ผู้บริจาค (มาตรา 67)",
+              "provisions": [
+                "politicalparty_67"
+              ]
+            },
+            {
+              "label": "การบริจาคแก่ผู้สมัครระหว่างช่วงเลือกตั้ง",
+              "text": "นับแต่วันที่พระราชกฤษฎีกาให้เลือกตั้งประกาศใช้จนถึงวันเลือกตั้ง ผู้สมัครที่ได้รับบริจาคมูลค่ารวมเกินหนึ่งหมื่นบาทต่อวันเพื่อกิจกรรมทางการเมือง ต้องแจ้งคณะกรรมการภายใน 7 วัน (มาตรา 68 วรรคหนึ่ง)",
+              "provisions": [
+                "politicalparty_68"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_66",
+          "role": "core",
+          "note": "เพดานวงเงินบริจาคบุคคลธรรมดาและนิติบุคคล"
+        },
+        {
+          "ref": "politicalparty_67",
+          "role": "core",
+          "note": "หน้าที่แจ้งเมื่อรับบริจาคในนามบุคคล"
+        },
+        {
+          "ref": "politicalparty_68",
+          "role": "core",
+          "note": "การรับบริจาคแก่ผู้สมัครระหว่างช่วงเลือกตั้ง"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 66, 67, 68",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "kan-udnun-phan-phasi-ngoendai": {
+      "id": "atlas:concept/kan-udnun-phan-phasi-ngoendai",
+      "slug": "kan-udnun-phan-phasi-ngoendai",
+      "titleTH": "การอุดหนุนพรรคการเมืองผ่านภาษีเงินได้และการหักลดหย่อนเงินบริจาค",
+      "titleEN": "Tax-Based Party Funding and Donation Tax Deductions",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "ผู้เสียภาษีเงินได้บุคคลธรรมดาอาจแสดงเจตนาให้รัฐนำเงินภาษีที่เสียไปอุดหนุนพรรคการเมืองที่ตนระบุปีละ 500 บาท และผู้บริจาคเงินแก่พรรคมีสิทธินำไปหักลดหย่อนภาษีได้ไม่เกิน 10,000 บาทสำหรับบุคคลธรรมดาและ 50,000 บาทสำหรับนิติบุคคล โดยหัวหน้าพรรคและเหรัญญิกต้องเปิดบัญชีธนาคารในนามพรรคและแจ้งนายทะเบียน",
+      "definition": {
+        "text": "มาตรา 69 วรรคหนึ่ง กำหนดว่าผู้เสียภาษีเงินได้ซึ่งมิใช่นิติบุคคลมีสิทธิแสดงเจตนาในแบบแสดงรายการภาษีเงินได้บุคคลธรรมดาประจำปี ให้รัฐนำเงินที่ตนได้เสียภาษีไว้ไปอุดหนุนพรรคการเมืองที่ตนระบุพรรคใดพรรคหนึ่งปีละห้าร้อยบาทได้",
+        "provisions": [
+          "politicalparty_69"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 5"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 69-71"
+        }
+      ],
+      "sections": [
+        {
+          "key": "deduction-and-bank-account",
+          "kind": "elements",
+          "label": "การหักลดหย่อนและบัญชีธนาคาร",
+          "body": "",
+          "items": [
+            {
+              "label": "สิทธิหักลดหย่อนภาษีเงินบริจาค",
+              "text": "ผู้บริจาคเงินแก่พรรคการเมืองมีสิทธินำจำนวนเงินที่บริจาคไปหักเป็นค่าลดหย่อนได้ตามจำนวนที่บริจาค แต่ไม่เกินหนึ่งหมื่นบาทสำหรับบุคคลธรรมดา และไม่เกินห้าหมื่นบาทสำหรับนิติบุคคล (มาตรา 70)",
+              "provisions": [
+                "politicalparty_70"
+              ]
+            },
+            {
+              "label": "บัญชีธนาคารในนามพรรค",
+              "text": "หัวหน้าพรรคและเหรัญญิกพรรคต้องเปิดบัญชีกับธนาคารพาณิชย์ในนามของพรรคการเมือง และแจ้งหมายเลขบัญชีให้นายทะเบียนทราบภายใน 7 วันนับแต่วันเปิดบัญชี (มาตรา 71)",
+              "provisions": [
+                "politicalparty_71"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_69",
+          "role": "core",
+          "note": "การอุดหนุนผ่านภาษีเงินได้ปีละ 500 บาท"
+        },
+        {
+          "ref": "politicalparty_70",
+          "role": "core",
+          "note": "สิทธิหักลดหย่อนภาษีเงินบริจาค"
+        },
+        {
+          "ref": "politicalparty_71",
+          "role": "core",
+          "note": "บัญชีธนาคารในนามพรรคการเมือง"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 69, 70, 71",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "khoham-rap-borijak-jak-tangchat-rue-mai-chop": {
+      "id": "atlas:concept/khoham-rap-borijak-jak-tangchat-rue-mai-chop",
+      "slug": "khoham-rap-borijak-jak-tangchat-rue-mai-chop",
+      "titleTH": "ข้อห้ามรับบริจาคจากต่างชาติหรือแหล่งที่มาไม่ชอบด้วยกฎหมาย",
+      "titleEN": "Prohibition on Foreign and Unlawfully-Sourced Donations",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "ห้ามพรรคการเมืองหรือสมาชิกรับบริจาคจากบุคคลไม่มีสัญชาติไทย นิติบุคคลต่างประเทศ นิติบุคคลไทยที่มีผู้ถือหุ้นต่างชาติเกินร้อยละ 49 หรือผู้ได้รับทุนจากต่างประเทศเพื่อประโยชน์ของคนต่างชาติ และห้ามรับบริจาคที่รู้หรือควรรู้ว่าได้มาโดยไม่ชอบด้วยกฎหมาย รวมถึงห้ามข้าราชการการเมืองใช้ตำแหน่งเรี่ยไรบริจาคและห้ามหน่วยงานรัฐ/รัฐวิสาหกิจ/องค์กรศาสนาบริจาคให้พรรคการเมือง",
+      "definition": {
+        "text": "มาตรา 74 กำหนดว่าห้ามมิให้พรรคการเมืองหรือสมาชิกรับบริจาคเงิน ทรัพย์สิน หรือประโยชน์อื่นใดจากบุคคล 6 ประเภทตามมาตรานี้ ซึ่งล้วนเกี่ยวข้องกับบุคคลหรือนิติบุคคลที่ไม่มีสัญชาติไทยหรือถูกควบคุมโดยคนต่างชาติ",
+        "provisions": [
+          "politicalparty_74"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 5"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 72-76"
+        }
+      ],
+      "sections": [
+        {
+          "key": "related-prohibitions",
+          "kind": "elements",
+          "label": "ข้อห้ามที่เกี่ยวข้อง",
+          "body": "",
+          "items": [
+            {
+              "label": "ข้อห้ามรับบริจาคที่มาไม่ชอบด้วยกฎหมาย",
+              "text": "ห้ามมิให้พรรคการเมืองและผู้ดำรงตำแหน่งในพรรครับบริจาคโดยรู้หรือควรจะรู้ว่าได้มาโดยไม่ชอบด้วยกฎหมายหรือมีเหตุอันควรสงสัยว่ามีแหล่งที่มาไม่ชอบด้วยกฎหมาย (มาตรา 72)",
+              "provisions": [
+                "politicalparty_72"
+              ]
+            },
+            {
+              "label": "ห้ามผู้บริจาคต้องห้ามให้บริจาค",
+              "text": "บุคคล คณะบุคคล หรือนิติบุคคลตามมาตรา 74 จะบริจาคให้พรรคการเมืองหรือสมาชิกเพื่อดำเนินกิจการหรือกิจกรรมทางการเมืองมิได้ (มาตรา 75)",
+              "provisions": [
+                "politicalparty_75"
+              ]
+            },
+            {
+              "label": "ห้ามหน่วยงานรัฐและองค์กรศาสนาบริจาค",
+              "text": "ห้ามมิให้หน่วยงานของรัฐ รัฐวิสาหกิจ หรือกิจการที่รัฐถือหุ้นใหญ่บริจาคให้พรรคการเมือง และให้ใช้บังคับกับวัดหรือองค์กรทางศาสนาด้วย (มาตรา 76)",
+              "provisions": [
+                "politicalparty_76"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_72",
+          "role": "core",
+          "note": "ข้อห้ามรับบริจาคที่มาไม่ชอบด้วยกฎหมาย"
+        },
+        {
+          "ref": "politicalparty_74",
+          "role": "core",
+          "note": "หกประเภทผู้บริจาคต้องห้ามเกี่ยวกับต่างชาติ"
+        },
+        {
+          "ref": "politicalparty_75",
+          "role": "core",
+          "note": "ข้อห้ามฝั่งผู้บริจาคต้องห้าม"
+        },
+        {
+          "ref": "politicalparty_76",
+          "role": "core",
+          "note": "ข้อห้ามหน่วยงานรัฐและองค์กรศาสนา"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 72, 74, 75, 76",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "kongthun-phuea-kan-phatthana-phak-kanmueang": {
+      "id": "atlas:concept/kongthun-phuea-kan-phatthana-phak-kanmueang",
+      "slug": "kongthun-phuea-kan-phatthana-phak-kanmueang",
+      "titleTH": "กองทุนเพื่อการพัฒนาพรรคการเมือง",
+      "titleEN": "The Fund for Political Party Development",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "กองทุนเพื่อการพัฒนาพรรคการเมืองมีวัตถุประสงค์สนับสนุนพรรคการเมืองและให้การศึกษาประชาธิปไตยแก่ประชาชน ทรัพย์สินของกองทุนเป็นทรัพย์สินของแผ่นดินไม่อยู่ในความรับผิดแห่งการบังคับคดีและไม่อาจยกอายุความขึ้นต่อสู้ได้ บริหารโดยคณะกรรมการกองทุนภายใต้การควบคุมของคณะกรรมการการเลือกตั้ง",
+      "definition": {
+        "text": "มาตรา 78 วรรคหนึ่ง กำหนดว่าให้มีกองทุนเพื่อการพัฒนาพรรคการเมืองกองทุนหนึ่งในสำนักงาน มีวัตถุประสงค์เพื่อใช้เป็นทุนหมุนเวียนและใช้จ่ายในการสนับสนุนพรรคการเมือง การให้การศึกษาแก่ประชาชนเกี่ยวกับการปกครองระบอบประชาธิปไตยอันมีพระมหากษัตริย์ทรงเป็นประมุข",
+        "provisions": [
+          "politicalparty_78"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 6"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 78-80"
+        }
+      ],
+      "sections": [
+        {
+          "key": "protected-status-and-committee",
+          "kind": "elements",
+          "label": "สถานะทรัพย์สินของแผ่นดินและคณะกรรมการกองทุน",
+          "body": "",
+          "items": [
+            {
+              "label": "ทรัพย์สินของแผ่นดิน",
+              "text": "ทรัพย์สินของกองทุนเป็นทรัพย์สินของแผ่นดินไม่อยู่ในความรับผิดแห่งการบังคับคดี และผู้ใดจะยกอายุความขึ้นเป็นข้อต่อสู้มิได้ (มาตรา 79)",
+              "provisions": [
+                "politicalparty_79"
+              ]
+            },
+            {
+              "label": "คณะกรรมการกองทุน",
+              "text": "คณะกรรมการการเลือกตั้งแต่งตั้งคณะกรรมการกองทุนขึ้นทำหน้าที่แทน ประกอบด้วยประธานกรรมการการเลือกตั้งเป็นประธาน กรรมการการเลือกตั้งอีกหนึ่งคน ผู้แทนกระทรวงการคลัง ผู้แทนสำนักงบประมาณ และผู้ทรงคุณวุฒิสองคน โดยนายทะเบียนเป็นกรรมการและเลขานุการ (มาตรา 80)",
+              "provisions": [
+                "politicalparty_80"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_78",
+          "role": "core",
+          "note": "วัตถุประสงค์และที่มาของเงินกองทุน"
+        },
+        {
+          "ref": "politicalparty_79",
+          "role": "core",
+          "note": "สถานะทรัพย์สินของแผ่นดิน"
+        },
+        {
+          "ref": "politicalparty_80",
+          "role": "core",
+          "note": "องค์ประกอบคณะกรรมการกองทุน"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 78, 79, 80",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "lakken-chatsan-ngoen-udnun-hai-phak-kanmueang": {
+      "id": "atlas:concept/lakken-chatsan-ngoen-udnun-hai-phak-kanmueang",
+      "slug": "lakken-chatsan-ngoen-udnun-hai-phak-kanmueang",
+      "titleTH": "หลักเกณฑ์การจัดสรรเงินอุดหนุนแก่พรรคการเมือง",
+      "titleEN": "Criteria for Allocating Subsidies to Political Parties",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "คณะกรรมการกำหนดวงเงินอุดหนุนประจำปีจากหลายแหล่ง แล้วจัดสรรให้พรรคการเมืองตามสัดส่วน 4 เกณฑ์ ได้แก่ เงินที่ผู้เสียภาษีระบุให้ ค่าบำรุงพรรคที่ได้รับ คะแนนเสียงเลือกตั้ง และจำนวนสาขาพรรค โดยหากพรรคใดมีสมาชิกก่อความเสียหายจนต้องเลือกตั้งใหม่ จะถูกหักเงินจัดสรรเพื่อชดใช้คืนกองทุนก่อน",
+      "definition": {
+        "text": "มาตรา 81 กำหนดว่าภายใน 30 วันนับแต่วันสิ้นปีงบประมาณ ให้คณะกรรมการกำหนดวงเงินที่จะจัดสรรเป็นเงินอุดหนุนแก่พรรคการเมืองสำหรับปีงบประมาณถัดไปจากแหล่งเงิน 6 ประเภทตามมาตรานี้",
+        "provisions": [
+          "politicalparty_81"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 6"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 81-83"
+        }
+      ],
+      "sections": [
+        {
+          "key": "allocation-formula",
+          "kind": "elements",
+          "label": "สูตรจัดสรรตามมาตรา 83",
+          "body": "",
+          "items": [
+            {
+              "label": "สี่เกณฑ์การจัดสรร",
+              "text": "ร้อยละ 40 จัดสรรตามค่าบำรุงพรรคที่ได้รับ ร้อยละ 40 ตามคะแนนเสียงเลือกตั้งทั่วไป และร้อยละ 20 ตามจำนวนสาขาพรรค (นอกจากส่วนที่จัดสรรตามที่ผู้เสียภาษีระบุโดยตรง) (มาตรา 83(1)-(4))",
+              "provisions": [
+                "politicalparty_83"
+              ]
+            },
+            {
+              "label": "การหักเงินชดใช้ค่าเสียหายจากการเลือกตั้งใหม่",
+              "text": "หากต้องมีการเลือกตั้งใหม่จากการกระทำของสมาชิกพรรคใด ให้หักจำนวนเงินที่คณะกรรมการฟ้องให้ชดใช้คืนออกจากเงินจัดสรรของพรรคนั้นก่อนส่งคืนกองทุน โดยไม่ตัดสิทธิพรรคที่จะไล่เบี้ยจากสมาชิกที่รับผิด (มาตรา 83(5))",
+              "provisions": [
+                "politicalparty_83"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_81",
+          "role": "core",
+          "note": "แหล่งเงินและกำหนดเวลาจัดสรรประจำปี"
+        },
+        {
+          "ref": "politicalparty_82",
+          "role": "related",
+          "note": "การใช้จ่ายเพื่อบริหารกองทุนเอง"
+        },
+        {
+          "ref": "politicalparty_83",
+          "role": "core",
+          "note": "สูตรจัดสรรเงินอุดหนุนให้พรรคการเมือง"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 81, 82, 83",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "khokamkat-kan-chai-ngoen-udnun": {
+      "id": "atlas:concept/khokamkat-kan-chai-ngoen-udnun",
+      "slug": "khokamkat-kan-chai-ngoen-udnun",
+      "titleTH": "ข้อจำกัดการใช้เงินอุดหนุนที่ได้รับจัดสรร",
+      "titleEN": "Restrictions on the Use of Allocated Subsidies",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "เงินอุดหนุนที่ได้รับจัดสรรใช้ได้เฉพาะเพื่อการหาเสียง กิจกรรมทางการเมือง การพัฒนาพรรค และการให้ความรู้ประชาธิปไตย ห้ามใช้เป็นค่าบริหารพรรคหรือจ้างบุคลากรทั่วไป ต้องรายงานการใช้จ่ายทุก 3 เดือน หากใช้ผิดวัตถุประสงค์หรือรายงานเท็จ นายทะเบียนอาจสั่งเรียกเงินคืนหรือลดการจัดสรรปีถัดไป",
+      "definition": {
+        "text": "มาตรา 84 วรรคหนึ่ง กำหนดว่าเงินที่พรรคการเมืองได้รับการจัดสรรตามมาตรา 83 ให้ใช้เพื่อประโยชน์ในการหาเสียงเลือกตั้ง การจัดทำกิจกรรมทางการเมือง การพัฒนาพรรคการเมืองและสมาชิก และการส่งเสริมความรู้แก่สมาชิกและประชาชนในทางการเมืองการปกครองระบอบประชาธิปไตย",
+        "provisions": [
+          "politicalparty_84"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 6"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 84-86"
+        }
+      ],
+      "sections": [
+        {
+          "key": "reporting-and-recovery",
+          "kind": "elements",
+          "label": "หน้าที่รายงานและการเรียกเงินคืน",
+          "body": "",
+          "items": [
+            {
+              "label": "ห้ามใช้เป็นค่าบริหารทั่วไป",
+              "text": "พรรคการเมืองจะใช้จ่ายเงินที่ได้รับจัดสรรไปเพื่อเป็นค่าใช้จ่ายในการบริหารพรรคหรือจ้างบุคลากรของพรรคหรือค่าใช้จ่ายอื่นทำนองเดียวกันมิได้ เว้นแต่เงินตามมาตรา 83(4) ที่ใช้เพื่อกิจการของสาขาพรรคเท่านั้น (มาตรา 84 วรรคท้าย)",
+              "provisions": [
+                "politicalparty_84"
+              ]
+            },
+            {
+              "label": "อำนาจเรียกเงินคืนและงดจัดสรร",
+              "text": "หากนายทะเบียนเห็นว่าพรรคใช้จ่ายไม่ตรงตามมาตรา 84 หรือรายงานเท็จ นายทะเบียนโดยความเห็นชอบของคณะกรรมการอาจเรียกเงินคืน ลดการจัดสรรปีถัดไป หรืองดจัดสรรจนกว่าจะชำระคืนครบถ้วน (มาตรา 85)",
+              "provisions": [
+                "politicalparty_85"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_84",
+          "role": "core",
+          "note": "ข้อจำกัดวัตถุประสงค์การใช้เงินอุดหนุน"
+        },
+        {
+          "ref": "politicalparty_85",
+          "role": "core",
+          "note": "อำนาจเรียกเงินคืนและงดจัดสรร"
+        },
+        {
+          "ref": "politicalparty_86",
+          "role": "related",
+          "note": "การจัดสรรเวลาออกอากาศให้พรรคการเมือง"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 84, 85, 86",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "kan-chai-jai-khong-phak-kanmueang": {
+      "id": "atlas:concept/kan-chai-jai-khong-phak-kanmueang",
+      "slug": "kan-chai-jai-khong-phak-kanmueang",
+      "titleTH": "การใช้จ่ายของพรรคการเมืองและข้อห้ามให้ประโยชน์แก่สมาชิกที่เป็น ส.ส.",
+      "titleEN": "Party Expenditure and Prohibition on Benefits to Member-MPs",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "เงินและทรัพย์สินของพรรคต้องใช้เพื่อกิจกรรมทางการเมือง ค่าใช้จ่ายเลือกตั้ง และบริหารพรรค โดยต้องเปิดเผยค่าโฆษณาประชาสัมพันธ์ หากพรรคหรือผู้บริหารให้ประโยชน์แก่สมาชิกที่เป็น ส.ส. ต้องแจ้งนายทะเบียนหากไม่เข้าข่ายความผิดตามประมวลกฎหมายอาญา และห้าม ส.ส. รับประโยชน์จากผู้ใดโดยไม่มีมูลอ้างได้ตามกฎหมาย",
+      "definition": {
+        "text": "มาตรา 87 วรรคหนึ่ง กำหนดว่าเงินและทรัพย์สินของพรรคการเมืองต้องนำไปใช้จ่ายเพื่อดำเนินกิจกรรมทางการเมืองของพรรคการเมือง ค่าใช้จ่ายเกี่ยวกับการเลือกตั้งของพรรคการเมืองและสมาชิก และค่าใช้จ่ายในการบริหารพรรคการเมือง",
+        "provisions": [
+          "politicalparty_87"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 7"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 87-89"
+        }
+      ],
+      "sections": [
+        {
+          "key": "benefits-to-mps",
+          "kind": "elements",
+          "label": "การให้ประโยชน์แก่ ส.ส. และหน้าที่ควบคุมของกรรมการบริหาร",
+          "body": "",
+          "items": [
+            {
+              "label": "หน้าที่แจ้งเมื่อให้ประโยชน์แก่ ส.ส.",
+              "text": "หากพรรค ผู้บริหารพรรค หรือบุคคลใดให้เงิน ทรัพย์สิน หรือประโยชน์แก่สมาชิกซึ่งเป็น ส.ส. ที่ไม่เป็นความผิดตามมาตรา 144 หรือ 149 แห่งประมวลกฎหมายอาญา ต้องแจ้งนายทะเบียนและประกาศให้ประชาชนทราบ และห้าม ส.ส. รับประโยชน์จากผู้ใดโดยไม่มีมูลอ้างได้ตามกฎหมาย เว้นแต่เงินที่แจ้งไว้แล้ว (มาตรา 88)",
+              "provisions": [
+                "politicalparty_88"
+              ]
+            },
+            {
+              "label": "หน้าที่ตรวจสอบของกรรมการบริหารพรรค",
+              "text": "เป็นหน้าที่ของคณะกรรมการบริหารพรรคที่ต้องตรวจสอบและควบคุมมิให้มีการนำเงินหรือทรัพย์สินของพรรคไปใช้จ่ายเพื่อการอื่นนอกจากที่กำหนดไว้ในมาตรา 84, 87 และ 88 (มาตรา 89)",
+              "provisions": [
+                "politicalparty_89"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_87",
+          "role": "core",
+          "note": "วัตถุประสงค์การใช้จ่ายและหน้าที่เปิดเผยค่าโฆษณา"
+        },
+        {
+          "ref": "politicalparty_88",
+          "role": "core",
+          "note": "การให้ประโยชน์แก่สมาชิกที่เป็น ส.ส."
+        },
+        {
+          "ref": "politicalparty_89",
+          "role": "core",
+          "note": "หน้าที่ตรวจสอบของกรรมการบริหารพรรค"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 87, 88, 89",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "het-sinsaphap-khwampen-phak-kanmueang": {
+      "id": "atlas:concept/het-sinsaphap-khwampen-phak-kanmueang",
+      "slug": "het-sinsaphap-khwampen-phak-kanmueang",
+      "titleTH": "เหตุสิ้นสภาพความเป็นพรรคการเมือง",
+      "titleEN": "Grounds for a Party Automatically Ceasing to Exist",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "พรรคการเมืองสิ้นสภาพเมื่อเข้าเหตุ 7 ประการ เช่น ไม่แก้ไขข้อบังคับ สมาชิกต่ำกว่าเกณฑ์เกิน 90 วัน สาขาไม่ครบเกณฑ์ 1 ปี ไม่มีกิจกรรมทางการเมือง 1 ปี ไม่ส่งผู้สมัคร 2 ครั้งติดต่อกันหรือ 8 ปี มีหนี้สินล้นพ้นตัว หรือเลิกตามข้อบังคับ โดยคณะกรรมการประกาศในราชกิจจานุเบกษาและถือเป็นการถูกยุบพรรคเพื่อคุ้มครองสมาชิกที่เป็น ส.ส.",
+      "definition": {
+        "text": "มาตรา 91 วรรคหนึ่ง กำหนดว่าพรรคการเมืองย่อมสิ้นสภาพความเป็นพรรคการเมืองเมื่อเข้าเหตุ 7 ประการตามมาตรานี้",
+        "provisions": [
+          "politicalparty_91"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 8"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 90-91"
+        }
+      ],
+      "sections": [
+        {
+          "key": "seven-grounds",
+          "kind": "elements",
+          "label": "เจ็ดเหตุและผลทางกฎหมาย",
+          "body": "",
+          "items": [
+            {
+              "label": "เจ็ดเหตุ",
+              "text": "(1) ไม่แก้ไขข้อบังคับหรือดำเนินการตามมาตรา 33(1)(2) ในกำหนด (2) สมาชิกเหลือไม่ถึงเกณฑ์เกิน 90 วันติดต่อกัน (3) สาขาเหลือไม่ถึงภาคละ 1 สาขาเกิน 1 ปี (4) ไม่มีการประชุมใหญ่หรือกิจกรรมทางการเมือง 1 ปี (5) ไม่ส่งผู้สมัคร ส.ส. 2 ครั้งติดต่อกันหรือ 8 ปี (6) มีหนี้สินล้นพ้นตัว (7) เลิกตามข้อบังคับ",
+              "provisions": [
+                "politicalparty_91"
+              ]
+            },
+            {
+              "label": "ผลเสมือนถูกยุบพรรคเพื่อคุ้มครอง ส.ส.",
+              "text": "เมื่อคณะกรรมการประกาศการสิ้นสภาพในราชกิจจานุเบกษาแล้ว พรรคสิ้นสภาพตั้งแต่วันประกาศ และเพื่อประโยชน์คุ้มครองสมาชิกที่เป็น ส.ส. ให้ถือว่าการสิ้นสภาพนี้เป็นการถูกยุบพรรคการเมือง โดยหัวหน้าพรรคมีสิทธิยื่นคำร้องคัดค้านต่อศาลรัฐธรรมนูญภายใน 30 วัน (มาตรา 91 วรรคสอง-ท้าย)",
+              "provisions": [
+                "politicalparty_91"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_90",
+          "role": "core",
+          "note": "สามช่องทางที่พรรคการเมืองสิ้นสุดลง"
+        },
+        {
+          "ref": "politicalparty_91",
+          "role": "core",
+          "note": "เจ็ดเหตุสิ้นสภาพและผลทางกฎหมาย"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 90, 91",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/het-yubphak-kanmueang-doi-san-ratthathammanun",
+          "rel": "contrast",
+          "labelTH": "เหตุยุบพรรคการเมืองโดยศาลรัฐธรรมนูญ",
+          "status": "published",
+          "note": "ช่องทางที่สองตามมาตรา 90(2) ซึ่งต้องผ่านคำสั่งศาล ต่างจากการสิ้นสภาพอัตโนมัติ"
+        }
+      ]
+    },
+    "het-yubphak-kanmueang-doi-san-ratthathammanun": {
+      "id": "atlas:concept/het-yubphak-kanmueang-doi-san-ratthathammanun",
+      "slug": "het-yubphak-kanmueang-doi-san-ratthathammanun",
+      "titleTH": "เหตุยุบพรรคการเมืองโดยศาลรัฐธรรมนูญ",
+      "titleEN": "Grounds for Dissolution of a Party by the Constitutional Court",
+      "aliases": [
+        "การยุบพรรคการเมือง"
+      ],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "เมื่อคณะกรรมการมีหลักฐานอันควรเชื่อว่าพรรคการเมืองล้มล้างการปกครองระบอบประชาธิปไตย เป็นปฏิปักษ์ต่อระบอบดังกล่าว หรือฝ่าฝืนบทบัญญัติสำคัญหลายมาตรา (เช่น ครอบงำ ซื้อขายตำแหน่ง หรือรับบริจาคจากต่างชาติ) ให้ยื่นศาลรัฐธรรมนูญสั่งยุบพรรคและเพิกถอนสิทธิสมัครรับเลือกตั้งของกรรมการบริหารพรรคนั้น — เป็นบทบัญญัติที่สำคัญที่สุดในกฎหมายฉบับนี้",
+      "definition": {
+        "text": "มาตรา 92 วรรคหนึ่ง กำหนดว่าเมื่อคณะกรรมการมีหลักฐานอันควรเชื่อได้ว่าพรรคการเมืองใดกระทำการอย่างใดอย่างหนึ่งตาม (1) ถึง (4) ของมาตรานี้ ให้ยื่นศาลรัฐธรรมนูญเพื่อสั่งยุบพรรคการเมืองนั้น",
+        "provisions": [
+          "politicalparty_92"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 8"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 92-94"
+        }
+      ],
+      "sections": [
+        {
+          "key": "four-grounds-and-effect",
+          "kind": "elements",
+          "label": "สี่เหตุยุบพรรคและผลของคำสั่งยุบ",
+          "body": "",
+          "items": [
+            {
+              "label": "สี่เหตุ",
+              "text": "(1) ล้มล้างการปกครองระบอบประชาธิปไตยอันมีพระมหากษัตริย์ทรงเป็นประมุข หรือเพื่อให้ได้มาซึ่งอำนาจปกครองประเทศโดยวิธีการนอกวิถีทางรัฐธรรมนูญ (2) เป็นปฏิปักษ์ต่อการปกครองระบอบดังกล่าว (3) ฝ่าฝืนมาตรา 20 วรรคสอง, 28, 30, 36, 44, 45, 46, 72 หรือ 74 (4) มีเหตุอื่นตามที่กฎหมายกำหนด",
+              "provisions": [
+                "politicalparty_92"
+              ]
+            },
+            {
+              "label": "ผลของคำสั่งยุบ",
+              "text": "เมื่อไต่สวนแล้วมีหลักฐานอันควรเชื่อ ศาลรัฐธรรมนูญสั่งยุบพรรคและเพิกถอนสิทธิสมัครรับเลือกตั้งของคณะกรรมการบริหารพรรคนั้น (มาตรา 92 วรรคสอง) ห้ามใช้ชื่อ/เครื่องหมายซ้ำกับพรรคที่ถูกยุบ และห้ามกรรมการบริหารที่ถูกเพิกถอนสิทธิไปจดทะเบียนพรรคใหม่หรือร่วมจัดตั้งพรรคใหม่ภายใน 10 ปี (มาตรา 94)",
+              "provisions": [
+                "politicalparty_94"
+              ]
+            },
+            {
+              "label": "กระบวนการยื่นคำร้องและมาตรการชั่วคราว",
+              "text": "นายทะเบียนรวบรวมข้อเท็จจริงเสนอคณะกรรมการ ซึ่งอาจยื่นคำร้องเองหรือมอบหมายนายทะเบียนยื่นแทน และอาจขอความช่วยเหลืออัยการสูงสุด ศาลรัฐธรรมนูญอาจสั่งให้พรรคระงับการกระทำใดไว้ชั่วคราวก็ได้ (มาตรา 93)",
+              "provisions": [
+                "politicalparty_93"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_92",
+          "role": "core",
+          "note": "สี่เหตุยุบพรรคและผลเพิกถอนสิทธิกรรมการบริหาร"
+        },
+        {
+          "ref": "politicalparty_93",
+          "role": "core",
+          "note": "กระบวนการยื่นคำร้องและมาตรการชั่วคราว"
+        },
+        {
+          "ref": "politicalparty_94",
+          "role": "core",
+          "note": "ผลของคำสั่งยุบต่อชื่อพรรคและกรรมการบริหาร"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 92, 93, 94",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/khoham-khrobngam-phak-kanmueang",
+          "rel": "seealso",
+          "labelTH": "ข้อห้ามครอบงำพรรคการเมือง",
+          "status": "published",
+          "note": "การฝ่าฝืนมาตรา 28 เป็นหนึ่งในเหตุยุบพรรคตามมาตรา 92(3)"
+        },
+        {
+          "ref": "atlas:concept/khoham-sue-khai-tamnaeng-thang-kanmueang",
+          "rel": "seealso",
+          "labelTH": "ข้อห้ามซื้อขายตำแหน่งทางการเมือง",
+          "status": "published",
+          "note": "การฝ่าฝืนมาตรา 46 เป็นหนึ่งในเหตุยุบพรรคตามมาตรา 92(3)"
+        }
+      ]
+    },
+    "kan-chamra-banchi-mua-phak-sinsut-rue-thuk-yub": {
+      "id": "atlas:concept/kan-chamra-banchi-mua-phak-sinsut-rue-thuk-yub",
+      "slug": "kan-chamra-banchi-mua-phak-sinsut-rue-thuk-yub",
+      "titleTH": "การชำระบัญชีเมื่อพรรคการเมืองสิ้นสภาพหรือถูกยุบ",
+      "titleEN": "Liquidation of a Party's Assets upon Dissolution",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "เมื่อพรรคสิ้นสภาพหรือถูกยุบ หัวหน้าพรรคต้องส่งบัญชีและงบการเงินภายใน 30 วัน ให้สำนักงานการตรวจเงินแผ่นดินชำระบัญชีให้เสร็จภายใน 180 วัน (ขยายได้อีก 180 วัน) โดยผู้บริหารเดิมต้องปฏิบัติหน้าที่ต่อจนกว่าจะเสร็จแต่ดำเนินกิจกรรมทางการเมืองในนามพรรคเดิมไม่ได้ ทรัพย์สินที่เหลือหลังหักหนี้สินให้โอนแก่องค์การสาธารณกุศลหรือตกเป็นของกองทุน",
+      "definition": {
+        "text": "มาตรา 95 วรรคหนึ่ง กำหนดว่าในกรณีที่พรรคการเมืองสิ้นสภาพหรือยุบตามบทบัญญัติแห่ง พ.ร.ป. นี้ ให้หัวหน้าพรรคการเมืองส่งบัญชีและงบแสดงฐานะทางการเงิน รวมทั้งเอกสารเกี่ยวกับการเงินของพรรคการเมืองภายในสามสิบวันนับแต่วันที่พรรคการเมืองสิ้นสภาพหรือยุบ",
+        "provisions": [
+          "politicalparty_95"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 8"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 95"
+        }
+      ],
+      "sections": [
+        {
+          "key": "residual-assets",
+          "kind": "elements",
+          "label": "ทรัพย์สินคงเหลือหลังชำระบัญชี",
+          "body": "",
+          "items": [
+            {
+              "label": "โอนแก่องค์การสาธารณกุศลหรือกองทุน",
+              "text": "เมื่อหักหนี้สินและค่าใช้จ่ายแล้วยังมีทรัพย์สินเหลืออยู่ ให้โอนแก่องค์การสาธารณกุศลตามที่ระบุไว้ในข้อบังคับ ถ้าไม่ได้ระบุไว้ให้ทรัพย์สินที่เหลือตกเป็นของกองทุน โดยนำบทบัญญัติแห่งประมวลกฎหมายแพ่งและพาณิชย์ว่าด้วยการชำระบัญชีห้างหุ้นส่วน/บริษัทมาใช้บังคับโดยอนุโลม (มาตรา 95 วรรคท้าย)",
+              "provisions": [
+                "politicalparty_95"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_95",
+          "role": "core",
+          "note": "ขั้นตอนการชำระบัญชีและทรัพย์สินคงเหลือ"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 95",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "kan-khuapruam-phak-kanmueang": {
+      "id": "atlas:concept/kan-khuapruam-phak-kanmueang",
+      "slug": "kan-khuapruam-phak-kanmueang",
+      "titleTH": "การควบรวมพรรคการเมือง",
+      "titleEN": "Merger of Political Parties",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "ห้ามควบรวมพรรคที่มีสมาชิกเป็น ส.ส. ในระหว่างอายุสภาผู้แทนราษฎร การควบรวมทำได้เฉพาะเพื่อจัดตั้งพรรคใหม่ โดยต้องผ่านความเห็นชอบจากที่ประชุมใหญ่ของแต่ละพรรค ร่างข้อบังคับร่วมกัน และจดทะเบียนจัดตั้งใหม่ตามกระบวนการปกติ เมื่อจดทะเบียนแล้วพรรคเดิมสิ้นสุดลงโดยสมาชิก ทรัพย์สิน หนี้สิน และสิทธิโอนไปเป็นของพรรคใหม่ทั้งหมด",
+      "definition": {
+        "text": "มาตรา 96 ห้ามมิให้มีการควบรวมพรรคการเมืองที่มีสมาชิกเป็นสมาชิกสภาผู้แทนราษฎรในระหว่างอายุของสภาผู้แทนราษฎร และมาตรา 97 กำหนดว่าการควบรวมพรรคการเมืองให้กระทำได้เฉพาะเป็นการรวมกันเพื่อจัดตั้งเป็นพรรคการเมืองใหม่",
+        "provisions": [
+          "politicalparty_96"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 9"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 96-99"
+        }
+      ],
+      "sections": [
+        {
+          "key": "merger-process",
+          "kind": "elements",
+          "label": "ขั้นตอนการควบรวมและผลทางกฎหมาย",
+          "body": "",
+          "items": [
+            {
+              "label": "ขั้นตอนการควบรวม",
+              "text": "พรรคที่จะรวมกันต้องขอความเห็นชอบจากที่ประชุมใหญ่ของแต่ละพรรค แล้วให้หัวหน้าพรรคและกรรมการบริหารพรรคละ 10 คนประชุมร่วมกันร่างข้อบังคับพรรคใหม่ ก่อนจัดประชุมสมาชิกทุกพรรคเพื่อตั้งพรรคและขอจดทะเบียนตามกระบวนการปกติ (มาตรา 98)",
+              "provisions": [
+                "politicalparty_98"
+              ]
+            },
+            {
+              "label": "ผลของการจดทะเบียนพรรคใหม่",
+              "text": "เมื่อนายทะเบียนรับจดทะเบียนพรรคใหม่แล้ว คณะกรรมการมีคำสั่งให้พรรคเดิมสิ้นสุดลง สมาชิกพรรคเดิมเป็นสมาชิกพรรคใหม่ และทรัพย์สิน หนี้สิน สิทธิ และความรับผิดของพรรคเดิมโอนไปเป็นของพรรคใหม่ตั้งแต่วันจดทะเบียน (มาตรา 99)",
+              "provisions": [
+                "politicalparty_99"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_96",
+          "role": "core",
+          "note": "ข้อห้ามควบรวมระหว่างอายุสภา"
+        },
+        {
+          "ref": "politicalparty_97",
+          "role": "core",
+          "note": "รูปแบบการควบรวมต้องตั้งพรรคใหม่"
+        },
+        {
+          "ref": "politicalparty_98",
+          "role": "core",
+          "note": "ขั้นตอนการควบรวม"
+        },
+        {
+          "ref": "politicalparty_99",
+          "role": "core",
+          "note": "ผลของการจดทะเบียนพรรคใหม่"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 96, 97, 98, 99",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "lak-thuapai-nai-bot-kamnodthot": {
+      "id": "atlas:concept/lak-thuapai-nai-bot-kamnodthot",
+      "slug": "lak-thuapai-nai-bot-kamnodthot",
+      "titleTH": "หลักทั่วไปในบทกำหนดโทษ",
+      "titleEN": "General Principles of the Penalty Chapter",
+      "aliases": [],
+      "latin": [],
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "subjectTags": [
+        "political-party-law"
+      ],
+      "status": "published",
+      "summary": "บทกำหนดโทษวางหลักทั่วไปว่าการเพิกถอนสิทธิเลือกตั้ง/สมัครรับเลือกตั้งมีผลทันทีนับแต่วันที่ศาลมีคำสั่ง กำหนดความผิดฐานกล่าวหาเท็จ วางหลักความรับผิดของกรรมการ/หัวหน้าพรรคเมื่อพรรคเป็นผู้กระทำความผิด (คล้ายหลักความรับผิดของผู้บริหารนิติบุคคลในกฎหมายอื่น) และเปิดทางให้เปรียบเทียบปรับสำหรับความผิดเล็กน้อยที่ไม่มีการเพิกถอนสิทธิ",
+      "definition": {
+        "text": "มาตรา 100 กำหนดว่าในกรณีที่ พ.ร.ป. นี้กำหนดให้ศาลสั่งเพิกถอนสิทธิเลือกตั้งโดยมีกำหนดระยะเวลาหรือสั่งเพิกถอนสิทธิสมัครรับเลือกตั้ง ให้การเพิกถอนสิทธิดังกล่าวมีผลในทันทีและเริ่มนับระยะเวลานับแต่วันที่ศาลมีคำสั่งหรือคำพิพากษา",
+        "provisions": [
+          "politicalparty_100"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "politicalparty",
+          "path": [
+            "หมวด 10"
+          ],
+          "note": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 100-101, 137-139"
+        }
+      ],
+      "sections": [
+        {
+          "key": "other-general-rules",
+          "kind": "elements",
+          "label": "ความผิดฐานกล่าวหาเท็จ ความรับผิดของผู้บริหาร และการเปรียบเทียบ",
+          "body": "",
+          "items": [
+            {
+              "label": "ความผิดฐานแจ้งความเท็จ",
+              "text": "ผู้ใดแจ้งหรือกล่าวหาพรรคการเมืองหรือบุคคลใดว่ากระทำความผิดตาม พ.ร.ป. นี้โดยรู้อยู่ว่าเป็นเท็จ ต้องระวางโทษจำคุกไม่เกิน 5 ปี หรือปรับไม่เกิน 1 แสนบาท และให้ศาลสั่งเพิกถอนสิทธิสมัครรับเลือกตั้ง หากผู้กระทำเป็นพรรคการเมืองโทษเป็นสองเท่าและให้ยุบพรรค (มาตรา 101)",
+              "provisions": [
+                "politicalparty_101"
+              ]
+            },
+            {
+              "label": "ความรับผิดของผู้สั่งการเมื่อพรรคกระทำผิด",
+              "text": "เมื่อพรรคการเมืองเป็นผู้กระทำความผิด หากเกิดจากการสั่งการหรือการกระทำของหัวหน้าพรรคหรือกรรมการบริหารซึ่งรับผิดชอบดำเนินงาน หรือมีหน้าที่ต้องสั่งการแต่ละเว้น ผู้นั้นต้องรับโทษสำหรับความผิดนั้นด้วยเป็นการส่วนตัว (มาตรา 137)",
+              "provisions": [
+                "politicalparty_137"
+              ]
+            },
+            {
+              "label": "การเปรียบเทียบปรับความผิดเล็กน้อย",
+              "text": "ความผิดที่มีโทษปรับสถานเดียวหรือจำคุกไม่เกิน 1 ปีและไม่มีการเพิกถอนสิทธิ คณะกรรมการหรือผู้ที่มอบหมายมีอำนาจเปรียบเทียบปรับได้ ถ้าชำระค่าปรับตามกำหนดให้ถือว่าคดีเลิกกัน (มาตรา 138) และหากจำเลยหลบหนีหลังศาลออกหมายจับแล้ว ศาลมีอำนาจสืบพยานและอ่านคำพิพากษาลับหลังจำเลยได้ (มาตรา 139)",
+              "provisions": [
+                "politicalparty_138",
+                "politicalparty_139"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "politicalparty_100",
+          "role": "core",
+          "note": "ผลทันทีของการเพิกถอนสิทธิ"
+        },
+        {
+          "ref": "politicalparty_101",
+          "role": "core",
+          "note": "ความผิดฐานแจ้งความเท็จ"
+        },
+        {
+          "ref": "politicalparty_137",
+          "role": "core",
+          "note": "ความรับผิดของผู้สั่งการเมื่อพรรคกระทำผิด"
+        },
+        {
+          "ref": "politicalparty_138",
+          "role": "core",
+          "note": "การเปรียบเทียบปรับความผิดเล็กน้อย"
+        },
+        {
+          "ref": "politicalparty_139",
+          "role": "related",
+          "note": "การพิจารณาลับหลังจำเลยที่หลบหนี"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560 มาตรา 100, 101, 137, 138, 139",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบท พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (politicalparty): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": [
+        {
+          "ref": "atlas:concept/het-yubphak-kanmueang-doi-san-ratthathammanun",
+          "rel": "seealso",
+          "labelTH": "เหตุยุบพรรคการเมือง",
+          "status": "published",
+          "note": "ความรับผิดของผู้สั่งการตามมาตรา 137 คล้ายหลักที่ปรากฏในกฎหมายกำกับดูแลอื่นเมื่อนิติบุคคลกระทำความผิด"
+        }
+      ]
     }
   }
 }

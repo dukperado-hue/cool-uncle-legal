@@ -3445,6 +3445,216 @@
         }
       ],
       "topics": []
+    },
+    "politicalparty-general-and-formation": {
+      "id": "atlas:cluster/politicalparty-general-and-formation",
+      "slug": "politicalparty-general-and-formation",
+      "titleTH": "พรรคการเมือง: คำนิยาม อำนาจนายทะเบียน และการจัดตั้ง",
+      "titleEN": "Political Parties: Definitions, Registrar Powers, and Formation",
+      "status": "published",
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "description": "กลุ่มแนวคิดพื้นฐานของ พ.ร.ป.พรรคการเมือง พ.ศ. 2560 ครอบคลุมนิยามสำคัญ อำนาจของนายทะเบียนพรรคการเมือง และกระบวนการจัดตั้งพรรคการเมืองตามหมวด 1 ตั้งแต่คุณสมบัติผู้ร่วมจัดตั้ง ข้อห้ามและรายการในข้อบังคับ จนถึงการยื่นและพิจารณาคำขอจดทะเบียน",
+      "concepts": [
+        {
+          "ref": "atlas:concept/niyam-phak-kanmueang-lae-sattha",
+          "note": "จุดตั้งต้น: นิยามพรรคการเมือง"
+        },
+        {
+          "ref": "atlas:concept/amnat-nathabian-phak-kanmueang",
+          "note": "อำนาจนายทะเบียน"
+        },
+        {
+          "ref": "atlas:concept/kan-kotang-phak-kanmueang-khunsombat-lae-kan-prachum",
+          "note": "คุณสมบัติผู้ร่วมจัดตั้งและการประชุมจัดตั้ง"
+        },
+        {
+          "ref": "atlas:concept/khoham-nai-khobangkhap-phak-kanmueang",
+          "note": "ข้อห้ามในข้อบังคับ"
+        },
+        {
+          "ref": "atlas:concept/raikan-thi-tong-mi-nai-khobangkhap",
+          "note": "รายการที่ต้องมีในข้อบังคับ"
+        },
+        {
+          "ref": "atlas:concept/kan-yuen-lae-phijarana-kho-jodthabian-jattang-phak",
+          "note": "การยื่นและพิจารณาคำขอจดทะเบียน"
+        },
+        {
+          "ref": "atlas:concept/kan-cheng-triam-kan-jattang-luangna",
+          "note": "การแจ้งเตรียมการจัดตั้งล่วงหน้า"
+        }
+      ],
+      "topics": []
+    },
+    "politicalparty-activities-membership": {
+      "id": "atlas:cluster/politicalparty-activities-membership",
+      "slug": "politicalparty-activities-membership",
+      "titleTH": "พรรคการเมือง: การดำเนินกิจกรรม สมาชิกภาพ และการส่งผู้สมัคร",
+      "titleEN": "Political Parties: Activities, Membership, and Candidate Selection",
+      "status": "published",
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "description": "กลุ่มแนวคิดตามหมวด 2-3 ว่าด้วยสถานภาพนิติบุคคลและคณะกรรมการบริหาร หน้าที่ควบคุมสมาชิก กิจกรรมประจำปี คุณสมบัติและสมาชิกภาพ ข้อห้ามครอบงำพรรคและซื้อขายตำแหน่ง เกณฑ์จำนวนสมาชิก/สาขา การประชุมใหญ่ และหลักเกณฑ์การส่งผู้สมัครรับเลือกตั้ง",
+      "concepts": [
+        {
+          "ref": "atlas:concept/sathanaphap-niti-bukkhon-lae-khanakammakan-borihan",
+          "note": "จุดตั้งต้น: สถานภาพนิติบุคคลและกรรมการบริหาร"
+        },
+        {
+          "ref": "atlas:concept/nathi-khuapkhum-sattha-mai-hai-fafuen-kotmai-lueaktang",
+          "note": "หน้าที่ควบคุมสมาชิก"
+        },
+        {
+          "ref": "atlas:concept/kitchakam-prajam-pi-thi-tong-damnoenkan",
+          "note": "กิจกรรมประจำปี"
+        },
+        {
+          "ref": "atlas:concept/khunsombat-sattha-lae-kan-truatsop-thabian",
+          "note": "คุณสมบัติสมาชิกและทะเบียน"
+        },
+        {
+          "ref": "atlas:concept/sattaphap-lae-kan-sinsut-sattaphap",
+          "note": "สมาชิกภาพและการสิ้นสุด"
+        },
+        {
+          "ref": "atlas:concept/khoham-khrobngam-phak-kanmueang",
+          "note": "ข้อห้ามครอบงำพรรคการเมือง"
+        },
+        {
+          "ref": "atlas:concept/khoham-hai-prayot-phuea-jungjai-sattha-samak",
+          "note": "ข้อห้ามให้ประโยชน์จูงใจสมัครสมาชิก"
+        },
+        {
+          "ref": "atlas:concept/het-kanthon-jamnuan-sattha-lae-sakha",
+          "note": "เกณฑ์จำนวนสมาชิกและสาขา"
+        },
+        {
+          "ref": "atlas:concept/kan-prachum-yai-khong-phak-kanmueang",
+          "note": "การประชุมใหญ่"
+        },
+        {
+          "ref": "atlas:concept/rai-ngan-kan-damnoenkitchakan-prajam-pi",
+          "note": "รายงานประจำปี"
+        },
+        {
+          "ref": "atlas:concept/khoham-rap-borijak-phuea-bonthamlai-khwammankhong",
+          "note": "ข้อห้ามรับบริจาคบ่อนทำลายความมั่นคง"
+        },
+        {
+          "ref": "atlas:concept/khoham-sue-khai-tamnaeng-thang-kanmueang",
+          "note": "ข้อห้ามซื้อขายตำแหน่งทางการเมือง"
+        },
+        {
+          "ref": "atlas:concept/lakken-song-phusamak-lae-khanakammakan-sanha",
+          "note": "หลักเกณฑ์การส่งผู้สมัครและคณะกรรมการสรรหา"
+        },
+        {
+          "ref": "atlas:concept/khoham-thutchari-nai-kan-sanha-lae-phon-nangsue-raprong",
+          "note": "ข้อห้ามทุจริตในการสรรหา"
+        }
+      ],
+      "topics": []
+    },
+    "politicalparty-finance": {
+      "id": "atlas:cluster/politicalparty-finance",
+      "slug": "politicalparty-finance",
+      "titleTH": "พรรคการเมือง: การเงิน การบัญชี และรายได้",
+      "titleEN": "Political Parties: Finance, Accounting, and Income",
+      "status": "published",
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "description": "กลุ่มแนวคิดตามหมวด 4-5 ว่าด้วยการบริหารการเงินและบัญชี รายได้ของพรรคการเมือง ข้อจำกัดวงเงินบริจาค การอุดหนุนผ่านภาษีเงินได้ และข้อห้ามรับบริจาคจากต่างชาติหรือแหล่งที่มาไม่ชอบด้วยกฎหมาย",
+      "concepts": [
+        {
+          "ref": "atlas:concept/kan-borihan-ngoen-lae-thambanchi",
+          "note": "จุดตั้งต้น: การบริหารการเงินและบัญชี"
+        },
+        {
+          "ref": "atlas:concept/raidai-khong-phak-kanmueang",
+          "note": "รายได้และข้อจำกัดการใช้"
+        },
+        {
+          "ref": "atlas:concept/khokamkat-wongngoen-borijak",
+          "note": "ข้อจำกัดวงเงินบริจาค"
+        },
+        {
+          "ref": "atlas:concept/kan-udnun-phan-phasi-ngoendai",
+          "note": "การอุดหนุนผ่านภาษีเงินได้"
+        },
+        {
+          "ref": "atlas:concept/khoham-rap-borijak-jak-tangchat-rue-mai-chop",
+          "note": "ข้อห้ามรับบริจาคจากต่างชาติ"
+        }
+      ],
+      "topics": []
+    },
+    "politicalparty-fund-expenditure": {
+      "id": "atlas:cluster/politicalparty-fund-expenditure",
+      "slug": "politicalparty-fund-expenditure",
+      "titleTH": "พรรคการเมือง: กองทุนพัฒนาพรรคการเมืองและการใช้จ่าย",
+      "titleEN": "Political Parties: Development Fund and Expenditure",
+      "status": "published",
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "description": "กลุ่มแนวคิดตามหมวด 6-7 ว่าด้วยกองทุนเพื่อการพัฒนาพรรคการเมือง หลักเกณฑ์การจัดสรรเงินอุดหนุน ข้อจำกัดการใช้เงินที่ได้รับจัดสรร และการใช้จ่ายทั่วไปของพรรคการเมืองรวมถึงข้อห้ามให้ประโยชน์แก่สมาชิกที่เป็น ส.ส.",
+      "concepts": [
+        {
+          "ref": "atlas:concept/kongthun-phuea-kan-phatthana-phak-kanmueang",
+          "note": "จุดตั้งต้น: กองทุนเพื่อการพัฒนาพรรคการเมือง"
+        },
+        {
+          "ref": "atlas:concept/lakken-chatsan-ngoen-udnun-hai-phak-kanmueang",
+          "note": "หลักเกณฑ์การจัดสรรเงินอุดหนุน"
+        },
+        {
+          "ref": "atlas:concept/khokamkat-kan-chai-ngoen-udnun",
+          "note": "ข้อจำกัดการใช้เงินอุดหนุน"
+        },
+        {
+          "ref": "atlas:concept/kan-chai-jai-khong-phak-kanmueang",
+          "note": "การใช้จ่ายทั่วไปของพรรคการเมือง"
+        }
+      ],
+      "topics": []
+    },
+    "politicalparty-dissolution-merger": {
+      "id": "atlas:cluster/politicalparty-dissolution-merger",
+      "slug": "politicalparty-dissolution-merger",
+      "titleTH": "พรรคการเมือง: การสิ้นสุด การยุบ และการควบรวม",
+      "titleEN": "Political Parties: Termination, Dissolution, and Merger",
+      "status": "published",
+      "subjectAreas": [
+        "public-constitutional"
+      ],
+      "description": "กลุ่มแนวคิดตามหมวด 8-9 และบทกำหนดโทษทั่วไป ว่าด้วยเหตุสิ้นสภาพความเป็นพรรคการเมือง เหตุยุบพรรคโดยศาลรัฐธรรมนูญ (บทบัญญัติสำคัญที่สุดของกฎหมายฉบับนี้) การชำระบัญชี การควบรวมพรรคการเมือง และหลักทั่วไปในบทกำหนดโทษ",
+      "concepts": [
+        {
+          "ref": "atlas:concept/het-sinsaphap-khwampen-phak-kanmueang",
+          "note": "จุดตั้งต้น: เหตุสิ้นสภาพอัตโนมัติ"
+        },
+        {
+          "ref": "atlas:concept/het-yubphak-kanmueang-doi-san-ratthathammanun",
+          "note": "เหตุยุบพรรคโดยศาลรัฐธรรมนูญ"
+        },
+        {
+          "ref": "atlas:concept/kan-chamra-banchi-mua-phak-sinsut-rue-thuk-yub",
+          "note": "การชำระบัญชี"
+        },
+        {
+          "ref": "atlas:concept/kan-khuapruam-phak-kanmueang",
+          "note": "การควบรวมพรรคการเมือง"
+        },
+        {
+          "ref": "atlas:concept/lak-thuapai-nai-bot-kamnodthot",
+          "note": "หลักทั่วไปในบทกำหนดโทษ"
+        }
+      ],
+      "topics": []
     }
   }
 }

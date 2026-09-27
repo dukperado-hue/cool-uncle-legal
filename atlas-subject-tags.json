@@ -122,6 +122,12 @@
       "titleTH": "กฎหมายการเดินอากาศ",
       "order": 20,
       "hue": 210
+    },
+    {
+      "key": "political-party-law",
+      "titleTH": "กฎหมายพรรคการเมือง",
+      "order": 21,
+      "hue": 130
     }
   ]
 }
