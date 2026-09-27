@@ -3295,6 +3295,156 @@
         }
       ],
       "topics": []
+    },
+    "airnav-definitions-scope": {
+      "id": "atlas:cluster/airnav-definitions-scope",
+      "slug": "airnav-definitions-scope",
+      "titleTH": "การเดินอากาศ: คำนิยามและขอบเขตการบังคับใช้",
+      "titleEN": "Air Navigation Act: Definitions and Scope",
+      "status": "published",
+      "subjectAreas": [
+        "aviation"
+      ],
+      "description": "กลุ่มแนวคิดพื้นฐานของ พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ครอบคลุมนิยามอากาศยานและการบินพลเรือน ประเภทของอากาศยานตามวัตถุประสงค์การใช้งาน และข้อยกเว้นอากาศยานราชการทหาร ตำรวจ และศุลกากรจากขอบเขตการบังคับใช้",
+      "concepts": [
+        {
+          "ref": "atlas:concept/niyam-akatsayan-lae-kan-bin-phonlaruean",
+          "note": "จุดตั้งต้น: นิยามอากาศยานและการบินพลเรือน"
+        },
+        {
+          "ref": "atlas:concept/prapheit-akatsayan-tam-watthuprasong-chai-ngan",
+          "note": "ประเภทของอากาศยาน"
+        },
+        {
+          "ref": "atlas:concept/khopkhet-kan-bangkhapchai-yoken-akatsayan-ratchakan",
+          "note": "ขอบเขตการบังคับใช้และข้อยกเว้น"
+        }
+      ],
+      "topics": []
+    },
+    "airnav-general-aircraft-operation": {
+      "id": "atlas:cluster/airnav-general-aircraft-operation",
+      "slug": "airnav-general-aircraft-operation",
+      "titleTH": "การเดินอากาศ: ข้อกำหนดทั่วไปเกี่ยวกับอากาศยานและการบิน",
+      "titleEN": "Air Navigation Act: General Rules on Aircraft Operation",
+      "status": "published",
+      "subjectAreas": [
+        "aviation"
+      ],
+      "description": "กลุ่มแนวคิดตามหมวด 2 บททั่วไปว่าด้วยอากาศยาน ครอบคลุมเอกสารประจำอากาศยาน ข้อจำกัดสถานที่ขึ้นลง หน้าที่ปฏิบัติตามเส้นทางบินและข้อบังคับ หน้าที่เพื่อความปลอดภัย ข้อห้ามบินเข้าพื้นที่หวงห้าม ข้อห้ามใช้เครื่องถ่ายภาพ ข้อห้ามอากาศยานไร้คนขับ/ร่มอากาศ และข้อห้ามส่งยุทธภัณฑ์ พร้อมบทกำหนดโทษที่เกี่ยวข้อง",
+      "concepts": [
+        {
+          "ref": "atlas:concept/ekasan-thi-tong-mi-pracham-akatsayan-khana-bin",
+          "note": "จุดตั้งต้น: เอกสารประจำอากาศยาน"
+        },
+        {
+          "ref": "atlas:concept/khokamkat-sathanthi-khuenlong-khong-akatsayan",
+          "note": "ข้อจำกัดสถานที่ขึ้นลง"
+        },
+        {
+          "ref": "atlas:concept/nathi-patibat-tam-senthangbin-lae-khobangkhap",
+          "note": "หน้าที่ตามเส้นทางบินและข้อบังคับ"
+        },
+        {
+          "ref": "atlas:concept/nathi-patibat-phuea-khwamplotphai",
+          "note": "หน้าที่เพื่อความปลอดภัย"
+        },
+        {
+          "ref": "atlas:concept/khoham-bin-khao-phuenthi-huangham",
+          "note": "ข้อห้ามบินเข้าพื้นที่หวงห้าม"
+        },
+        {
+          "ref": "atlas:concept/khoham-chai-khrueang-thaiphap-nai-akatsayan",
+          "note": "ข้อห้ามใช้เครื่องถ่ายภาพ"
+        },
+        {
+          "ref": "atlas:concept/khoham-bangkhap-plot-akatsayan-mai-mi-nakbin-lae-thing-rom-akat",
+          "note": "ข้อห้ามอากาศยานไร้คนขับ/ร่มอากาศ"
+        },
+        {
+          "ref": "atlas:concept/khoham-song-yutthaphan-pai-kap-akatsayan",
+          "note": "ข้อห้ามส่งยุทธภัณฑ์"
+        }
+      ],
+      "topics": []
+    },
+    "airnav-international-movement": {
+      "id": "atlas:cluster/airnav-international-movement",
+      "slug": "airnav-international-movement",
+      "titleTH": "การเดินอากาศ: ข้อจำกัดการเคลื่อนย้ายอากาศยานระหว่างประเทศ",
+      "titleEN": "Air Navigation Act: Restrictions on International Aircraft Movement",
+      "status": "published",
+      "subjectAreas": [
+        "aviation"
+      ],
+      "description": "กลุ่มแนวคิดว่าด้วยข้อจำกัดการบินออกนอกราชอาณาจักรของอากาศยานไทย และข้อจำกัด/ข้อห้ามการบินผ่านหรือขึ้นลงในราชอาณาจักรของอากาศยานต่างประเทศทั้งพลเรือนและทหาร",
+      "concepts": [
+        {
+          "ref": "atlas:concept/khokamkat-akatsayan-thai-bin-ok-nok-ratchaanachak",
+          "note": "จุดตั้งต้น: อากาศยานไทยบินออก"
+        },
+        {
+          "ref": "atlas:concept/khokamkat-akatsayan-tangprathet-bin-phan-rue-khuenlong",
+          "note": "อากาศยานต่างประเทศบินผ่าน/ขึ้นลง"
+        },
+        {
+          "ref": "atlas:concept/khoham-akatsayan-thahan-tangprathet-bin-phan-rue-khuenlong",
+          "note": "อากาศยานทหารต่างประเทศ"
+        }
+      ],
+      "topics": []
+    },
+    "airnav-registration-marks": {
+      "id": "atlas:cluster/airnav-registration-marks",
+      "slug": "airnav-registration-marks",
+      "titleTH": "การเดินอากาศ: การจดทะเบียนและเครื่องหมายอากาศยาน",
+      "titleEN": "Air Navigation Act: Aircraft Registration and Marks",
+      "status": "published",
+      "subjectAreas": [
+        "aviation"
+      ],
+      "description": "กลุ่มแนวคิดตามหมวด 3 ว่าด้วยคุณสมบัติผู้ขอจดทะเบียนอากาศยานตามหลักสัญชาติไทย เหตุที่ใบสำคัญการจดทะเบียนใช้ไม่ได้ และเครื่องหมายสัญชาติและทะเบียนอากาศยาน",
+      "concepts": [
+        {
+          "ref": "atlas:concept/khunsombat-phu-kho-jodthabian-akatsayan-lak-sanchat-thai",
+          "note": "จุดตั้งต้น: หลักสัญชาติไทย"
+        },
+        {
+          "ref": "atlas:concept/het-thi-baisamkhan-jodthabian-akatsayan-chai-mai-dai",
+          "note": "เหตุที่ใบสำคัญใช้ไม่ได้"
+        },
+        {
+          "ref": "atlas:concept/khrueanghmai-sanchat-lae-thabian-akatsayan",
+          "note": "เครื่องหมายสัญชาติและทะเบียน"
+        }
+      ],
+      "topics": []
+    },
+    "airnav-inspection-enforcement": {
+      "id": "atlas:cluster/airnav-inspection-enforcement",
+      "slug": "airnav-inspection-enforcement",
+      "titleTH": "การเดินอากาศ: อำนาจตรวจสอบและบังคับการของพนักงานเจ้าหน้าที่",
+      "titleEN": "Air Navigation Act: Inspection and Enforcement Powers",
+      "status": "published",
+      "subjectAreas": [
+        "aviation"
+      ],
+      "description": "กลุ่มแนวคิดตามหมวด 8 ว่าด้วยอำนาจตรวจและยึดเอกสาร อำนาจเข้าตรวจสถานที่และอากาศยาน และอำนาจหน่วงเหนี่ยวการออกเดินทางของอากาศยานที่ฝ่าฝืนกฎหมาย",
+      "concepts": [
+        {
+          "ref": "atlas:concept/amnat-truat-ekasan-lae-yuet-ekasan-khong-phanakngan-jaonathi",
+          "note": "จุดตั้งต้น: ตรวจและยึดเอกสาร"
+        },
+        {
+          "ref": "atlas:concept/amnat-khao-truat-sathanthi-lae-akatsayan-khong-phanakngan-jaonathi",
+          "note": "เข้าตรวจสถานที่และอากาศยาน"
+        },
+        {
+          "ref": "atlas:concept/amnat-nuangniao-kan-ok-doenthang-khong-akatsayan-thi-fafuen",
+          "note": "หน่วงเหนี่ยวการออกเดินทาง"
+        }
+      ],
+      "topics": []
     }
   }
 }
