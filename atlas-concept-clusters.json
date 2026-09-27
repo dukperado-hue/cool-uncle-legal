@@ -751,6 +751,18 @@
         {
           "ref": "atlas:concept/kham-bangkhab-khong-san-pokkhrong",
           "note": "เมื่อชนะคดี ศาลจะออกคำบังคับรูปแบบใด"
+        },
+        {
+          "ref": "atlas:concept/tulakan-chaokhongsamnuan-lae-phuthalaengkhadi",
+          "note": "ตุลาการเจ้าของสำนวนขับเคลื่อนกระบวนพิจารณา ผู้แถลงคดีให้ความเห็นอิสระ — ขั้นตอนหลังศาลรับฟ้องและก่อนพิพากษา"
+        },
+        {
+          "ref": "atlas:concept/withikan-chuakhrao-kon-phiphaksa-khadi-pokkhrong",
+          "note": "วิธีการชั่วคราวบรรเทาทุกข์ก่อนพิพากษา — คำร้องที่อาจยื่นระหว่างการพิจารณา"
+        },
+        {
+          "ref": "atlas:concept/kan-phijarana-khadi-pokkhrong-mai",
+          "note": "ช่องทางพิเศษขอพิจารณาคดีใหม่หลังคำพิพากษาเสร็จเด็ดขาดแล้ว"
         }
       ],
       "topics": []
@@ -1008,6 +1020,10 @@
         {
           "ref": "atlas:concept/seed-0246",
           "note": "คู่กรณีร้องขอพิจารณาใหม่หลังคำสั่งพ้นกำหนดอุทธรณ์และเป็นที่สุดแล้ว"
+        },
+        {
+          "ref": "atlas:concept/kan-bangkhap-thang-pokkhrong",
+          "note": "หลังคำสั่งทางปกครองมีผลใช้ยันและไม่ถูกเพิกถอน/ยกเลิก เจ้าหน้าที่บังคับให้เป็นไปตามคำสั่งได้เองตามหมวดนี้"
         }
       ],
       "topics": []
