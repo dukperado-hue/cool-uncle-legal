@@ -2731,6 +2731,214 @@
         }
       ],
       "topics": []
+    },
+    "pdpa-scope-parties-definitions": {
+      "id": "atlas:cluster/pdpa-scope-parties-definitions",
+      "slug": "pdpa-scope-parties-definitions",
+      "titleTH": "PDPA: ขอบเขตการบังคับใช้ ผู้เกี่ยวข้อง และคำนิยามหลัก",
+      "titleEN": "PDPA: Scope, Parties and Core Definitions",
+      "status": "published",
+      "subjectAreas": [
+        "public-administrative"
+      ],
+      "description": "กลุ่มแนวคิดพื้นฐานของ พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 ครอบคลุมนิยามข้อมูลส่วนบุคคล ผู้ควบคุมและผู้ประมวลผลข้อมูล ขอบเขตการบังคับใช้ทางพื้นที่ กิจการที่ได้รับยกเว้น และความสัมพันธ์กับกฎหมายคุ้มครองข้อมูลเฉพาะอื่น",
+      "concepts": [
+        {
+          "ref": "atlas:concept/khomun-suan-bukkhon",
+          "note": "จุดตั้งต้น: นิยามข้อมูลส่วนบุคคล"
+        },
+        {
+          "ref": "atlas:concept/phu-khuapkhum-khomun-suan-bukkhon",
+          "note": "ผู้แบกรับหน้าที่หลัก"
+        },
+        {
+          "ref": "atlas:concept/phu-pramuanphon-khomun-suan-bukkhon",
+          "note": "ผู้ดำเนินการตามคำสั่งผู้ควบคุม"
+        },
+        {
+          "ref": "atlas:concept/kanbangkhapchai-nok-ratchaanachak-pdpa",
+          "note": "ขอบเขตทางพื้นที่"
+        },
+        {
+          "ref": "atlas:concept/kitchakan-thi-dairap-yokwen-pdpa",
+          "note": "กิจการที่ยกเว้นทั้งฉบับ"
+        },
+        {
+          "ref": "atlas:concept/pdpa-lae-kotmai-chapho-uen",
+          "note": "ความสัมพันธ์กับกฎหมายเฉพาะ"
+        }
+      ],
+      "topics": []
+    },
+    "pdpa-consent-and-lawful-bases": {
+      "id": "atlas:cluster/pdpa-consent-and-lawful-bases",
+      "slug": "pdpa-consent-and-lawful-bases",
+      "titleTH": "PDPA: หลักความยินยอมและฐานทางกฎหมายในการประมวลผลข้อมูล",
+      "titleEN": "PDPA: Consent and Lawful Bases for Processing",
+      "status": "published",
+      "subjectAreas": [
+        "public-administrative"
+      ],
+      "description": "กลุ่มแนวคิดเกี่ยวกับหลักความยินยอมในการเก็บรวบรวม ใช้ หรือเปิดเผยข้อมูลส่วนบุคคล กลไกพิเศษสำหรับผู้เยาว์และผู้ไร้ความสามารถ หลักจำกัดวัตถุประสงค์และเก็บเท่าที่จำเป็น หน้าที่แจ้งรายละเอียด ฐานทางกฎหมายทางเลือกแทนความยินยอม และการเก็บรวบรวมจากแหล่งอื่น",
+      "concepts": [
+        {
+          "ref": "atlas:concept/lak-khwamyinyom-nai-kan-kepruapruam-khomun-suan-bukkhon",
+          "note": "จุดตั้งต้น: หลักความยินยอม"
+        },
+        {
+          "ref": "atlas:concept/khwamyinyom-khong-phu-yao-lae-khon-rai-khwamsamart-pdpa",
+          "note": "กลไกพิเศษเรื่องความสามารถ"
+        },
+        {
+          "ref": "atlas:concept/lak-kamkat-watthuprasong-pdpa",
+          "note": "หลักจำกัดวัตถุประสงค์"
+        },
+        {
+          "ref": "atlas:concept/lak-kepruapruam-thaothi-chamnen-pdpa",
+          "note": "หลักเก็บเท่าที่จำเป็น"
+        },
+        {
+          "ref": "atlas:concept/nathi-chaeng-railadiat-kepruapruam-pdpa",
+          "note": "หน้าที่แจ้งรายละเอียด"
+        },
+        {
+          "ref": "atlas:concept/than-kotmai-kepruapruam-doi-mai-tong-khoyinyom",
+          "note": "ฐานทางกฎหมาย 6 ประการ"
+        },
+        {
+          "ref": "atlas:concept/kepruapruam-chak-laeng-uen-pdpa",
+          "note": "เก็บรวบรวมจากแหล่งอื่น"
+        }
+      ],
+      "topics": []
+    },
+    "pdpa-sensitive-data-use-transfer": {
+      "id": "atlas:cluster/pdpa-sensitive-data-use-transfer",
+      "slug": "pdpa-sensitive-data-use-transfer",
+      "titleTH": "PDPA: ข้อมูลอ่อนไหว การใช้/เปิดเผย และการโอนข้ามพรมแดน",
+      "titleEN": "PDPA: Sensitive Data, Use/Disclosure and Cross-Border Transfer",
+      "status": "published",
+      "subjectAreas": [
+        "public-administrative"
+      ],
+      "description": "กลุ่มแนวคิดว่าด้วยมาตรฐานคุ้มครองที่สูงกว่าสำหรับข้อมูลอ่อนไหว หลักการใช้หรือเปิดเผยข้อมูลทั่วไป และเงื่อนไขการส่งหรือโอนข้อมูลส่วนบุคคลไปยังต่างประเทศ",
+      "concepts": [
+        {
+          "ref": "atlas:concept/khomun-suan-bukkhon-onwai",
+          "note": "มาตรฐานคุ้มครองที่สูงกว่า"
+        },
+        {
+          "ref": "atlas:concept/lak-chai-lae-poetphoei-khomun-suan-bukkhon",
+          "note": "หลักการใช้/เปิดเผย"
+        },
+        {
+          "ref": "atlas:concept/kan-song-orn-khomun-pai-tangprathet",
+          "note": "การโอนข้ามพรมแดน"
+        }
+      ],
+      "topics": []
+    },
+    "pdpa-data-subject-rights": {
+      "id": "atlas:cluster/pdpa-data-subject-rights",
+      "slug": "pdpa-data-subject-rights",
+      "titleTH": "PDPA: สิทธิของเจ้าของข้อมูลส่วนบุคคล",
+      "titleEN": "PDPA: Data Subject Rights",
+      "status": "published",
+      "subjectAreas": [
+        "public-administrative"
+      ],
+      "description": "กลุ่มแนวคิดสิทธิของเจ้าของข้อมูลส่วนบุคคลตามหมวด 3 ได้แก่ สิทธิเข้าถึง สิทธิโอนย้ายข้อมูล สิทธิคัดค้าน สิทธิขอให้ลบหรือทำลาย สิทธิขอให้ระงับการใช้ และสิทธิขอให้แก้ไขข้อมูลให้ถูกต้อง",
+      "concepts": [
+        {
+          "ref": "atlas:concept/sitthi-khokhaothueng-lae-khorap-samnao-khomun",
+          "note": "สิทธิเข้าถึงและขอสำเนา"
+        },
+        {
+          "ref": "atlas:concept/sitthi-onyai-khomun-suan-bukkhon",
+          "note": "สิทธิโอนย้ายข้อมูล"
+        },
+        {
+          "ref": "atlas:concept/sitthi-khatkhan-kepruapruam-khomun",
+          "note": "สิทธิคัดค้าน"
+        },
+        {
+          "ref": "atlas:concept/sitthi-lop-thamlai-khomun-suan-bukkhon",
+          "note": "สิทธิขอให้ลบหรือทำลาย"
+        },
+        {
+          "ref": "atlas:concept/sitthi-rangap-kan-chai-khomun",
+          "note": "สิทธิขอให้ระงับการใช้"
+        },
+        {
+          "ref": "atlas:concept/sitthi-kaekhai-khomun-hai-thuktong",
+          "note": "สิทธิขอให้แก้ไขให้ถูกต้อง"
+        }
+      ],
+      "topics": []
+    },
+    "pdpa-controller-processor-duties": {
+      "id": "atlas:cluster/pdpa-controller-processor-duties",
+      "slug": "pdpa-controller-processor-duties",
+      "titleTH": "PDPA: หน้าที่ด้านความมั่นคงปลอดภัย การแจ้งเหตุละเมิด และ DPO",
+      "titleEN": "PDPA: Security, Breach Notification, Representative, Records and DPO",
+      "status": "published",
+      "subjectAreas": [
+        "public-administrative"
+      ],
+      "description": "กลุ่มแนวคิดหน้าที่ของผู้ควบคุมและผู้ประมวลผลข้อมูลส่วนบุคคลที่เกิดขึ้นคู่กับสิทธิของเจ้าของข้อมูลในหมวด 3 ได้แก่ การรักษาความมั่นคงปลอดภัย การแจ้งเหตุการละเมิด การแต่งตั้งตัวแทนในราชอาณาจักร การบันทึกรายการประมวลผล และเจ้าหน้าที่คุ้มครองข้อมูลส่วนบุคคล",
+      "concepts": [
+        {
+          "ref": "atlas:concept/nathi-raksa-khwam-mankong-plotphai-khomun",
+          "note": "จุดตั้งต้น: ความมั่นคงปลอดภัย"
+        },
+        {
+          "ref": "atlas:concept/nathi-chaeng-het-lamoet-khomun-suan-bukkhon",
+          "note": "แจ้งเหตุการละเมิด"
+        },
+        {
+          "ref": "atlas:concept/tuathaen-phu-khuapkhum-khomun-nai-ratchaanachak",
+          "note": "ตัวแทนในราชอาณาจักร"
+        },
+        {
+          "ref": "atlas:concept/bantuek-rairkan-pramuanphon-khomun-suan-bukkhon",
+          "note": "บันทึกรายการประมวลผล"
+        },
+        {
+          "ref": "atlas:concept/chaonathi-khumkhrong-khomun-suan-bukkhon-dpo",
+          "note": "เจ้าหน้าที่คุ้มครองข้อมูล (DPO)"
+        }
+      ],
+      "topics": []
+    },
+    "pdpa-enforcement-liability": {
+      "id": "atlas:cluster/pdpa-enforcement-liability",
+      "slug": "pdpa-enforcement-liability",
+      "titleTH": "PDPA: การร้องเรียน ความรับผิดทางแพ่ง โทษอาญา และโทษปกครอง",
+      "titleEN": "PDPA: Complaints, Civil, Criminal and Administrative Liability",
+      "status": "published",
+      "subjectAreas": [
+        "public-administrative"
+      ],
+      "description": "กลุ่มแนวคิดกลไกบังคับใช้กฎหมายของ PDPA ได้แก่ สิทธิร้องเรียนต่อคณะกรรมการผู้เชี่ยวชาญและอำนาจออกคำสั่ง ความรับผิดทางแพ่ง โทษอาญา และโทษปรับทางปกครอง ซึ่งเป็นสามช่องทางความรับผิดที่แยกจากกันและอาจเกิดขึ้นพร้อมกันได้",
+      "concepts": [
+        {
+          "ref": "atlas:concept/sitthi-rongrian-lae-kham-sang-khanakammakan-phuchiaochan-pdpa",
+          "note": "จุดตั้งต้น: การร้องเรียน"
+        },
+        {
+          "ref": "atlas:concept/khwamrapphid-thang-phaeng-pdpa",
+          "note": "ความรับผิดทางแพ่ง"
+        },
+        {
+          "ref": "atlas:concept/thot-aya-pdpa",
+          "note": "โทษอาญา"
+        },
+        {
+          "ref": "atlas:concept/thot-pokkhrong-pdpa",
+          "note": "โทษปกครอง"
+        }
+      ],
+      "topics": []
     }
   }
 }
