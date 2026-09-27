@@ -113587,6 +113587,2894 @@
           "note": "ความรับผิดของผู้สั่งการตามมาตรา 137 คล้ายหลักที่ปรากฏในกฎหมายกำกับดูแลอื่นเมื่อนิติบุคคลกระทำความผิด"
         }
       ]
+    },
+    "niyam-phutrongan-tam-phrb-torture": {
+      "id": "atlas:concept/niyam-phutrongan-tam-phrb-torture",
+      "slug": "niyam-phutrongan-tam-phrb-torture",
+      "titleTH": "นิยามผู้เสียหาย เจ้าหน้าที่ของรัฐ คณะกรรมการ และการควบคุมตัว",
+      "titleEN": "Definitions: Victim, State Official, Committee, and Custody",
+      "aliases": [],
+      "latin": [
+        "torture prevention act definitions"
+      ],
+      "subjectAreas": [
+        "criminal"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 3 ให้นิยาม 4 คำหลักที่ใช้ตลอดทั้งพระราชบัญญัติ ได้แก่ \"ผู้เสียหาย\" (ซึ่งขยายรวมถึงญาติของผู้ถูกกระทำ) \"เจ้าหน้าที่ของรัฐ\" \"คณะกรรมการ\" และ \"ควบคุมตัว\"",
+      "definition": {
+        "text": "มาตรา 3 นิยาม \"ผู้เสียหาย\" ว่าหมายความว่า บุคคลซึ่งได้รับความเสียหายแก่ชีวิต ร่างกาย หรือจิตใจ จากการทรมาน การกระทำที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์ หรือการกระทำให้บุคคลสูญหาย และให้หมายความรวมถึงสามี ภริยา ผู้บุพการี ผู้สืบสันดาน ผู้ซึ่งอยู่กินกันฉันสามีภริยาซึ่งมิได้จดทะเบียนสมรส ผู้อุปการะและผู้อยู่ในอุปการะของผู้ถูกกระทำให้สูญหาย",
+        "provisions": [
+          "torture_3"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            null
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 3 (บทนิยาม อยู่ก่อนหมวด 1)"
+        }
+      ],
+      "sections": [
+        {
+          "key": "core-definitions",
+          "kind": "elements",
+          "label": "นิยามหลัก",
+          "body": "",
+          "items": [
+            {
+              "label": "\"เจ้าหน้าที่ของรัฐ\"",
+              "text": "บุคคลซึ่งใช้อำนาจรัฐหรือได้รับมอบอำนาจ หรือได้รับการแต่งตั้ง อนุญาต สนับสนุน หรือยอมรับโดยตรงหรือโดยปริยาย จากผู้มีอำนาจรัฐให้ดำเนินการตามกฎหมาย",
+              "provisions": [
+                "torture_3"
+              ]
+            },
+            {
+              "label": "\"คณะกรรมการ\"",
+              "text": "คณะกรรมการป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย",
+              "provisions": [
+                "torture_3"
+              ]
+            },
+            {
+              "label": "\"ควบคุมตัว\"",
+              "text": "การจับ คุมตัว ขัง กักตัว กักขัง หรือกระทำด้วยประการอื่นใดในทำนองเดียวกันอันเป็นการจำกัดเสรีภาพในร่างกายของบุคคล",
+              "provisions": [
+                "torture_3"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_3",
+          "role": "core",
+          "note": "นิยามผู้เสียหาย เจ้าหน้าที่ของรัฐ คณะกรรมการ และการควบคุมตัว"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 3",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "khwamphid-thorman": {
+      "id": "atlas:concept/khwamphid-thorman",
+      "slug": "khwamphid-thorman",
+      "titleTH": "ความผิดฐานกระทำทรมาน",
+      "titleEN": "Offense of Torture",
+      "aliases": [],
+      "latin": [
+        "torture (offense)"
+      ],
+      "subjectAreas": [
+        "criminal"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 5 กำหนดความผิดฐานกระทำทรมาน คือ เจ้าหน้าที่ของรัฐกระทำการใดให้ผู้อื่นเจ็บปวดหรือทุกข์ทรมานอย่างร้ายแรงแก่ร่างกายหรือจิตใจ เพื่อวัตถุประสงค์อย่างหนึ่งอย่างใดใน 4 ประการที่กฎหมายระบุไว้",
+      "definition": {
+        "text": "มาตรา 5 ผู้ใดเป็นเจ้าหน้าที่ของรัฐกระทำด้วยประการใดให้ผู้อื่นเกิดความเจ็บปวดหรือความทุกข์ทรมานอย่างร้ายแรงแก่ร่างกายหรือจิตใจ เพื่อวัตถุประสงค์อย่างหนึ่งอย่างใดตามที่กฎหมายกำหนด ผู้นั้นกระทำความผิดฐานกระทำทรมาน",
+        "provisions": [
+          "torture_5"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 1"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 5"
+        }
+      ],
+      "sections": [
+        {
+          "key": "purpose-elements",
+          "kind": "elements",
+          "label": "วัตถุประสงค์ของการกระทำ (ต้องเข้าอย่างใดอย่างหนึ่ง)",
+          "body": "",
+          "items": [
+            {
+              "label": "(1) แสวงหาข้อมูล/คำรับสารภาพ",
+              "text": "ให้ได้มาซึ่งข้อมูลหรือคำรับสารภาพจากผู้ถูกกระทำหรือบุคคลที่สาม",
+              "provisions": [
+                "torture_5"
+              ]
+            },
+            {
+              "label": "(2) ลงโทษ",
+              "text": "ลงโทษผู้ถูกกระทำเพราะเหตุอันเกิดจากการกระทำหรือสงสัยว่ากระทำของผู้นั้นหรือบุคคลที่สาม",
+              "provisions": [
+                "torture_5"
+              ]
+            },
+            {
+              "label": "(3) ข่มขู่",
+              "text": "ข่มขู่หรือขู่เข็ญผู้ถูกกระทำหรือบุคคลที่สาม",
+              "provisions": [
+                "torture_5"
+              ]
+            },
+            {
+              "label": "(4) เลือกปฏิบัติ",
+              "text": "เลือกปฏิบัติไม่ว่ารูปแบบใด",
+              "provisions": [
+                "torture_5"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_5",
+          "role": "core",
+          "note": "องค์ประกอบความผิดฐานกระทำทรมาน"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 5",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "khwamphid-kratham-hodrai-rai-manutsayatham": {
+      "id": "atlas:concept/khwamphid-kratham-hodrai-rai-manutsayatham",
+      "slug": "khwamphid-kratham-hodrai-rai-manutsayatham",
+      "titleTH": "ความผิดฐานกระทำการที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์",
+      "titleEN": "Offense of Cruel, Inhuman, or Degrading Treatment",
+      "aliases": [],
+      "latin": [
+        "cruel, inhuman or degrading treatment (CIDT)"
+      ],
+      "subjectAreas": [
+        "criminal"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 6 กำหนดความผิดสำหรับเจ้าหน้าที่ของรัฐที่ลงโทษหรือกระทำการโหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์ต่อผู้อื่น โดยไม่เข้าองค์ประกอบความผิดฐานกระทำทรมานตามมาตรา 5 และไม่รวมอันตรายอันเป็นผลปกติจากการลงโทษที่ชอบด้วยกฎหมาย",
+      "definition": {
+        "text": "มาตรา 6 วรรคหนึ่ง ผู้ใดเป็นเจ้าหน้าที่ของรัฐลงโทษหรือกระทำด้วยประการใดที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์ อันเป็นเหตุให้ผู้อื่นถูกลดทอนคุณค่าหรือละเมิดสิทธิขั้นพื้นฐานความเป็นมนุษย์ หรือเกิดความเจ็บปวดหรือความทุกข์ทรมานแก่ร่างกายหรือจิตใจที่มิใช่การกระทำความผิดตามมาตรา 5 ผู้นั้นกระทำความผิดฐานนี้",
+        "provisions": [
+          "torture_6"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 1"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 6"
+        }
+      ],
+      "sections": [
+        {
+          "key": "exclusion",
+          "kind": "defences",
+          "label": "ข้อยกเว้น",
+          "body": "",
+          "items": [
+            {
+              "label": "ผลปกติจากการลงโทษที่ชอบด้วยกฎหมาย",
+              "text": "การกระทำตามวรรคหนึ่งไม่รวมถึงอันตรายอันเป็นผลปกติหรือสืบเนื่องจากการลงโทษทั้งปวงที่ชอบด้วยกฎหมาย",
+              "provisions": [
+                "torture_6"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_6",
+          "role": "core",
+          "note": "องค์ประกอบและข้อยกเว้นความผิดฐานกระทำการที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 6",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "khwamphid-kratham-hai-bukkhon-sunhai": {
+      "id": "atlas:concept/khwamphid-kratham-hai-bukkhon-sunhai",
+      "slug": "khwamphid-kratham-hai-bukkhon-sunhai",
+      "titleTH": "ความผิดฐานกระทำให้บุคคลสูญหาย",
+      "titleEN": "Offense of Enforced Disappearance",
+      "aliases": [],
+      "latin": [
+        "enforced disappearance"
+      ],
+      "subjectAreas": [
+        "criminal"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 7 กำหนดความผิดฐานกระทำให้บุคคลสูญหาย คือ เจ้าหน้าที่ของรัฐควบคุมตัวหรือลักพาบุคคลใด แล้วปฏิเสธหรือปกปิดชะตากรรมหรือสถานที่ปรากฏตัวของบุคคลนั้นจนทำให้บุคคลนั้นไม่ได้รับการคุ้มครองตามกฎหมาย โดยกฎหมายกำหนดให้ถือเป็นความผิดต่อเนื่องจนกว่าจะทราบชะตากรรมของบุคคลนั้น",
+      "definition": {
+        "text": "มาตรา 7 วรรคหนึ่ง ผู้ใดเป็นเจ้าหน้าที่ของรัฐควบคุมตัว หรือลักพาบุคคลใด โดยเจ้าหน้าที่ของรัฐปฏิเสธว่ามิได้กระทำการดังกล่าว หรือปกปิดชะตากรรมหรือสถานที่ปรากฏตัวของบุคคลนั้นซึ่งส่งผลให้บุคคลนั้นไม่ได้รับการคุ้มครองตามกฎหมาย ผู้นั้นกระทำความผิดฐานกระทำให้บุคคลสูญหาย",
+        "provisions": [
+          "torture_7"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 1"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 7"
+        }
+      ],
+      "sections": [
+        {
+          "key": "continuing-offense",
+          "kind": "consequences",
+          "label": "ลักษณะความผิดต่อเนื่อง",
+          "body": "",
+          "items": [
+            {
+              "label": "ความผิดต่อเนื่อง",
+              "text": "การกระทำความผิดตามวรรคหนึ่งให้ถือเป็นความผิดต่อเนื่องจนกว่าจะทราบชะตากรรมของบุคคลนั้น",
+              "provisions": [
+                "torture_7"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_7",
+          "role": "core",
+          "note": "องค์ประกอบและลักษณะความผิดต่อเนื่องของความผิดฐานกระทำให้บุคคลสูญหาย"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 7",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "khetamnat-nok-ratchaanachak-torture": {
+      "id": "atlas:concept/khetamnat-nok-ratchaanachak-torture",
+      "slug": "khetamnat-nok-ratchaanachak-torture",
+      "titleTH": "เขตอำนาจนอกราชอาณาจักรสำหรับความผิดตามพระราชบัญญัตินี้",
+      "titleEN": "Extraterritorial Jurisdiction over Torture and Enforced Disappearance Offenses",
+      "aliases": [],
+      "latin": [
+        "extraterritorial jurisdiction"
+      ],
+      "subjectAreas": [
+        "criminal"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 8 กำหนดให้ผู้กระทำความผิดฐานทรมาน กระทำการโหดร้ายไร้มนุษยธรรมฯ หรือกระทำให้บุคคลสูญหายนอกราชอาณาจักร ต้องรับโทษในราชอาณาจักรตามพระราชบัญญัตินี้ โดยให้นำมาตรา 10 แห่งประมวลกฎหมายอาญามาใช้บังคับโดยอนุโลม",
+      "definition": {
+        "text": "มาตรา 8 ผู้ใดกระทำความผิดฐานกระทำทรมานตามมาตรา 5 ความผิดฐานกระทำการที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์ตามมาตรา 6 หรือความผิดฐานกระทำให้บุคคลสูญหายตามมาตรา 7 นอกราชอาณาจักร ต้องรับโทษในราชอาณาจักรตามที่กำหนดไว้ในพระราชบัญญัตินี้ โดยให้นำความในมาตรา 10 แห่งประมวลกฎหมายอาญา มาใช้บังคับด้วยโดยอนุโลม",
+        "provisions": [
+          "torture_8"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 1"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 8"
+        }
+      ],
+      "sections": [
+        {
+          "key": "analogy-to-criminal-code",
+          "kind": "crosswalk",
+          "label": "การปรับใช้ประมวลกฎหมายอาญา มาตรา 10 โดยอนุโลม",
+          "body": "",
+          "items": [
+            {
+              "label": "อ้างอิง ป.อ. มาตรา 10",
+              "text": "ให้นำความในมาตรา 10 แห่งประมวลกฎหมายอาญา มาใช้บังคับด้วยโดยอนุโลม กับผู้กระทำความผิดฐานทรมาน กระทำการที่โหดร้ายไร้มนุษยธรรมฯ หรือกระทำให้บุคคลสูญหายนอกราชอาณาจักร",
+              "provisions": [
+                "torture_8"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_8",
+          "role": "core",
+          "note": "เขตอำนาจนอกราชอาณาจักร อ้างอิง ป.อ. มาตรา 10 โดยอนุโลม"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 8",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "kho-ham-ang-hetuphiset-pheua-khwamchopduaikotmai": {
+      "id": "atlas:concept/kho-ham-ang-hetuphiset-pheua-khwamchopduaikotmai",
+      "slug": "kho-ham-ang-hetuphiset-pheua-khwamchopduaikotmai",
+      "titleTH": "ข้อห้ามอ้างเหตุพิเศษเพื่อความชอบด้วยกฎหมาย",
+      "titleEN": "Prohibition on Invoking Exceptional Circumstances as Justification",
+      "aliases": [],
+      "latin": [
+        "non-derogability / absolute prohibition"
+      ],
+      "subjectAreas": [
+        "criminal"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 12 ห้ามมิให้อ้างพฤติการณ์พิเศษใด ๆ ไม่ว่าภาวะสงคราม ความไม่มั่นคงทางการเมือง หรือสถานการณ์ฉุกเฉินสาธารณะอื่นใด เพื่อทำให้การกระทำความผิดตามพระราชบัญญัตินี้กลายเป็นการกระทำที่ชอบด้วยกฎหมาย",
+      "definition": {
+        "text": "มาตรา 12 พฤติการณ์พิเศษใด ๆ ไม่ว่าจะเป็นภาวะสงครามหรือภัยคุกคามที่จะเกิดสงคราม ความไม่มั่นคงทางการเมืองภายในประเทศ หรือสถานการณ์ฉุกเฉินสาธารณะอื่นใด ไม่อาจนำมาอ้างเพื่อให้การกระทำความผิดตามพระราชบัญญัตินี้เป็นการกระทำที่ชอบด้วยกฎหมาย",
+        "provisions": [
+          "torture_12"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 1"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 12"
+        }
+      ],
+      "sections": [
+        {
+          "key": "non-derogable-circumstances",
+          "kind": "defences",
+          "label": "พฤติการณ์ที่ไม่อาจอ้างเป็นเหตุยกเว้นความผิด",
+          "body": "",
+          "items": [
+            {
+              "label": "ภาวะสงคราม",
+              "text": "ภาวะสงครามหรือภัยคุกคามที่จะเกิดสงคราม",
+              "provisions": [
+                "torture_12"
+              ]
+            },
+            {
+              "label": "ความไม่มั่นคงทางการเมือง",
+              "text": "ความไม่มั่นคงทางการเมืองภายในประเทศ",
+              "provisions": [
+                "torture_12"
+              ]
+            },
+            {
+              "label": "สถานการณ์ฉุกเฉิน",
+              "text": "สถานการณ์ฉุกเฉินสาธารณะอื่นใด",
+              "provisions": [
+                "torture_12"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_12",
+          "role": "core",
+          "note": "ห้ามอ้างพฤติการณ์พิเศษเป็นเหตุยกเว้นความผิด"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 12",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "khoyokwen-khwamphid-thangkanmueang-nai-kan-song-phurai-khamdaen": {
+      "id": "atlas:concept/khoyokwen-khwamphid-thangkanmueang-nai-kan-song-phurai-khamdaen",
+      "slug": "khoyokwen-khwamphid-thangkanmueang-nai-kan-song-phurai-khamdaen",
+      "titleTH": "ข้อยกเว้นความผิดทางการเมืองในการส่งผู้ร้ายข้ามแดนและความร่วมมือระหว่างประเทศ",
+      "titleEN": "Exclusion from the Political-Offense Exception in Extradition and International Cooperation",
+      "aliases": [],
+      "latin": [
+        "extradition; political offense exception excluded"
+      ],
+      "subjectAreas": [
+        "criminal-procedure"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 9 กำหนดมิให้ถือว่าความผิดฐานกระทำทรมานและความผิดฐานกระทำให้บุคคลสูญหายเป็นความผิดที่มีลักษณะทางการเมืองตามกฎหมายว่าด้วยการส่งผู้ร้ายข้ามแดนและกฎหมายว่าด้วยความร่วมมือระหว่างประเทศในเรื่องทางอาญา ผลคือรัฐไทยไม่อาจปฏิเสธการส่งผู้ร้ายข้ามแดนหรือความร่วมมือระหว่างประเทศโดยอ้างว่าเป็นความผิดทางการเมือง",
+      "definition": {
+        "text": "มาตรา 9 การกระทำความผิดฐานกระทำทรมานตามมาตรา 5 และการกระทำความผิดฐานกระทำให้บุคคลสูญหายตามมาตรา 7 มิให้ถือว่าเป็นความผิดที่มีลักษณะทางการเมืองตามกฎหมายว่าด้วยการส่งผู้ร้ายข้ามแดน และความผิดทางการเมืองตามกฎหมายว่าด้วยความร่วมมือระหว่างประเทศในเรื่องทางอาญา",
+        "provisions": [
+          "torture_9"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 1"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 9"
+        }
+      ],
+      "sections": [
+        {
+          "key": "affected-regimes",
+          "kind": "crosswalk",
+          "label": "กฎหมายที่ถูกตัดข้อต่อสู้เรื่องความผิดทางการเมือง",
+          "body": "",
+          "items": [
+            {
+              "label": "กฎหมายว่าด้วยการส่งผู้ร้ายข้ามแดน",
+              "text": "มิให้ถือว่าความผิดฐานกระทำทรมานและความผิดฐานกระทำให้บุคคลสูญหายเป็นความผิดที่มีลักษณะทางการเมืองตามกฎหมายว่าด้วยการส่งผู้ร้ายข้ามแดน",
+              "provisions": [
+                "torture_9"
+              ]
+            },
+            {
+              "label": "กฎหมายว่าด้วยความร่วมมือระหว่างประเทศในเรื่องทางอาญา",
+              "text": "มิให้ถือว่าเป็นความผิดทางการเมืองตามกฎหมายว่าด้วยความร่วมมือระหว่างประเทศในเรื่องทางอาญา",
+              "provisions": [
+                "torture_9"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_9",
+          "role": "core",
+          "note": "ตัดข้อต่อสู้เรื่องความผิดทางการเมืองในการส่งผู้ร้ายข้ามแดน/ความร่วมมือระหว่างประเทศ"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 9",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "lak-ham-phlakdan-klap-pai-choeuan-antarai": {
+      "id": "atlas:concept/lak-ham-phlakdan-klap-pai-choeuan-antarai",
+      "slug": "lak-ham-phlakdan-klap-pai-choeuan-antarai",
+      "titleTH": "หลักห้ามผลักดันกลับไปเผชิญอันตราย",
+      "titleEN": "Principle of Non-Refoulement",
+      "aliases": [],
+      "latin": [
+        "non-refoulement"
+      ],
+      "subjectAreas": [
+        "public-administrative"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 13 ห้ามหน่วยงานของรัฐหรือเจ้าหน้าที่ของรัฐขับไล่ ส่งกลับ หรือส่งบุคคลเป็นผู้ร้ายข้ามแดนไปยังอีกรัฐหนึ่ง หากมีเหตุอันควรเชื่อได้ว่าบุคคลนั้นจะไปตกอยู่ในอันตรายที่จะถูกกระทำทรมาน ถูกกระทำการที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์ หรือถูกกระทำให้สูญหาย",
+      "definition": {
+        "text": "มาตรา 13 ห้ามมิให้หน่วยงานของรัฐหรือเจ้าหน้าที่ของรัฐขับไล่ ส่งกลับ หรือส่งบุคคลเป็นผู้ร้ายข้ามแดนไปยังอีกรัฐหนึ่ง หากมีเหตุอันควรเชื่อได้ว่าบุคคลนั้นจะไปตกอยู่ในอันตรายที่จะถูกกระทำทรมาน ถูกกระทำการที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์ หรือถูกกระทำให้สูญหาย",
+        "provisions": [
+          "torture_13"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 1"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 13"
+        }
+      ],
+      "sections": [
+        {
+          "key": "scope",
+          "kind": "elements",
+          "label": "ขอบเขตของหลักห้ามผลักดันกลับ",
+          "body": "",
+          "items": [
+            {
+              "label": "ผู้ถูกผูกพันตามหลักนี้",
+              "text": "หน่วยงานของรัฐหรือเจ้าหน้าที่ของรัฐ",
+              "provisions": [
+                "torture_13"
+              ]
+            },
+            {
+              "label": "รูปแบบการส่งตัวที่ต้องห้าม",
+              "text": "ขับไล่ ส่งกลับ หรือส่งบุคคลเป็นผู้ร้ายข้ามแดนไปยังอีกรัฐหนึ่ง",
+              "provisions": [
+                "torture_13"
+              ]
+            },
+            {
+              "label": "อันตรายที่เข้าเงื่อนไข",
+              "text": "มีเหตุอันควรเชื่อได้ว่าบุคคลนั้นจะไปตกอยู่ในอันตรายที่จะถูกกระทำทรมาน ถูกกระทำการที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์ หรือถูกกระทำให้สูญหาย",
+              "provisions": [
+                "torture_13"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_13",
+          "role": "core",
+          "note": "หลักห้ามผลักดันกลับ (non-refoulement)"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 13",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "ongprakop-khanakammakan-pongkan-thorman": {
+      "id": "atlas:concept/ongprakop-khanakammakan-pongkan-thorman",
+      "slug": "ongprakop-khanakammakan-pongkan-thorman",
+      "titleTH": "องค์ประกอบคณะกรรมการป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย",
+      "titleEN": "Composition of the Anti-Torture and Enforced Disappearance Prevention Committee",
+      "aliases": [],
+      "latin": [
+        "committee composition"
+      ],
+      "subjectAreas": [
+        "public-administrative"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 14 กำหนดองค์ประกอบคณะกรรมการ ประกอบด้วยรัฐมนตรีว่าการกระทรวงยุติธรรมเป็นประธาน ปลัดกระทรวงยุติธรรมเป็นรองประธาน กรรมการโดยตำแหน่งจากหน่วยงานที่เกี่ยวข้อง และกรรมการผู้ทรงคุณวุฒิที่คณะรัฐมนตรีแต่งตั้งจำนวนหกคน โดยมีอธิบดีกรมคุ้มครองสิทธิและเสรีภาพเป็นกรรมการและเลขานุการ",
+      "definition": {
+        "text": "มาตรา 14 ให้มีคณะกรรมการคณะหนึ่งเรียกว่า \"คณะกรรมการป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย\" ประกอบด้วยรัฐมนตรีว่าการกระทรวงยุติธรรมเป็นประธานกรรมการ ปลัดกระทรวงยุติธรรมเป็นรองประธานกรรมการ กรรมการโดยตำแหน่ง และกรรมการซึ่งคณะรัฐมนตรีแต่งตั้งจำนวนหกคน",
+        "provisions": [
+          "torture_14"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 14"
+        }
+      ],
+      "sections": [
+        {
+          "key": "members",
+          "kind": "persons",
+          "label": "องค์ประกอบ",
+          "body": "",
+          "items": [
+            {
+              "label": "ประธาน/รองประธาน",
+              "text": "รัฐมนตรีว่าการกระทรวงยุติธรรม เป็นประธานกรรมการ ปลัดกระทรวงยุติธรรม เป็นรองประธานกรรมการ",
+              "provisions": [
+                "torture_14"
+              ]
+            },
+            {
+              "label": "กรรมการโดยตำแหน่ง",
+              "text": "ปลัดกระทรวงกลาโหม ปลัดกระทรวงการต่างประเทศ ปลัดกระทรวงมหาดไทย อัยการสูงสุด ผู้บัญชาการตำรวจแห่งชาติ อธิบดีกรมสอบสวนคดีพิเศษ นายกสภาทนายความ และประธานสภาการสื่อมวลชนแห่งชาติ",
+              "provisions": [
+                "torture_14"
+              ]
+            },
+            {
+              "label": "กรรมการผู้ทรงคุณวุฒิ (6 คน)",
+              "text": "ผู้มีความรู้ความเชี่ยวชาญด้านสิทธิมนุษยชน (2 คน) ด้านกฎหมาย (1 คน) ด้านนิติวิทยาศาสตร์ (1 คน) แพทย์ทางนิติเวชศาสตร์ (1 คน) และแพทย์ทางจิตเวชศาสตร์ (1 คน) ซึ่งคณะรัฐมนตรีแต่งตั้ง",
+              "provisions": [
+                "torture_14"
+              ]
+            },
+            {
+              "label": "กรรมการและเลขานุการ",
+              "text": "อธิบดีกรมคุ้มครองสิทธิและเสรีภาพเป็นกรรมการและเลขานุการ และแต่งตั้งผู้ช่วยเลขานุการได้ไม่เกินสองคน",
+              "provisions": [
+                "torture_14"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_14",
+          "role": "core",
+          "note": "องค์ประกอบคณะกรรมการ"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 14",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "khunsombat-lae-laksanatongham-kammakan-phutrongkhunwuti": {
+      "id": "atlas:concept/khunsombat-lae-laksanatongham-kammakan-phutrongkhunwuti",
+      "slug": "khunsombat-lae-laksanatongham-kammakan-phutrongkhunwuti",
+      "titleTH": "คุณสมบัติและลักษณะต้องห้ามของกรรมการผู้ทรงคุณวุฒิ",
+      "titleEN": "Qualifications and Disqualifications of Appointed Committee Members",
+      "aliases": [],
+      "latin": [
+        "qualifications and disqualifications"
+      ],
+      "subjectAreas": [
+        "public-administrative"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 15 กำหนดคุณสมบัติและลักษณะต้องห้ามของกรรมการผู้ทรงคุณวุฒิตามมาตรา 14(4) เช่น ต้องมีสัญชาติไทย ไม่เป็นบุคคลล้มละลาย ไม่เป็นผู้ดำรงตำแหน่งทางการเมือง และไม่เคยได้รับโทษจำคุกโดยคำพิพากษาถึงที่สุด",
+      "definition": {
+        "text": "มาตรา 15 กรรมการตามมาตรา 14(4) ต้องมีสัญชาติไทย ไม่เป็นบุคคลล้มละลายหรือเคยเป็นบุคคลล้มละลายทุจริต ไม่เป็นคนไร้ความสามารถหรือคนเสมือนไร้ความสามารถ ไม่เป็นผู้ดำรงตำแหน่งทางการเมือง สมาชิกสภาท้องถิ่น ผู้บริหารท้องถิ่น หรือกรรมการหรือผู้ดำรงตำแหน่งบริหารในพรรคการเมือง และไม่มีลักษณะต้องห้ามอื่นตามที่มาตรานี้กำหนด",
+        "provisions": [
+          "torture_15"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 15"
+        }
+      ],
+      "sections": [
+        {
+          "key": "prohibitions",
+          "kind": "elements",
+          "label": "คุณสมบัติและลักษณะต้องห้าม",
+          "body": "",
+          "items": [
+            {
+              "label": "สัญชาติ/ความสามารถ",
+              "text": "มีสัญชาติไทย ไม่เป็นบุคคลล้มละลายหรือเคยเป็นบุคคลล้มละลายทุจริต ไม่เป็นคนไร้ความสามารถหรือคนเสมือนไร้ความสามารถ",
+              "provisions": [
+                "torture_15"
+              ]
+            },
+            {
+              "label": "ความเป็นกลางทางการเมือง",
+              "text": "ไม่เป็นผู้ดำรงตำแหน่งทางการเมือง สมาชิกสภาท้องถิ่น ผู้บริหารท้องถิ่น หรือกรรมการหรือผู้ดำรงตำแหน่งบริหารในพรรคการเมือง",
+              "provisions": [
+                "torture_15"
+              ]
+            },
+            {
+              "label": "ประวัติราชการ/คดี",
+              "text": "ไม่อยู่ระหว่างถูกสั่งพักราชการหรือให้ออกจากราชการไว้ก่อน ไม่เคยถูกไล่ออก ปลดออก หรือให้ออกจากราชการเพราะกระทำผิดวินัย ไม่เคยได้รับโทษจำคุกโดยคำพิพากษาถึงที่สุด (เว้นแต่ความผิดโดยประมาท ลหุโทษ หรือหมิ่นประมาท) และไม่เคยถูกศาลสั่งให้ทรัพย์สินตกเป็นของแผ่นดินเพราะร่ำรวยผิดปกติ",
+              "provisions": [
+                "torture_15"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_15",
+          "role": "core",
+          "note": "คุณสมบัติและลักษณะต้องห้ามของกรรมการผู้ทรงคุณวุฒิ"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 15",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "wara-phonchak-lae-taengtangthaen-kammakan": {
+      "id": "atlas:concept/wara-phonchak-lae-taengtangthaen-kammakan",
+      "slug": "wara-phonchak-lae-taengtangthaen-kammakan",
+      "titleTH": "วาระการดำรงตำแหน่ง การพ้นจากตำแหน่ง และการแต่งตั้งแทนกรรมการผู้ทรงคุณวุฒิ",
+      "titleEN": "Term, Removal, and Replacement of Appointed Committee Members",
+      "aliases": [],
+      "latin": [
+        "term of office; removal; vacancy"
+      ],
+      "subjectAreas": [
+        "public-administrative"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 16-18 กำหนดวาระการดำรงตำแหน่งของกรรมการผู้ทรงคุณวุฒิคราวละสี่ปี ดำรงตำแหน่งติดต่อกันเกินสองวาระไม่ได้ เหตุพ้นจากตำแหน่งก่อนวาระ และวิธีแต่งตั้งกรรมการแทนตำแหน่งที่ว่าง",
+      "definition": {
+        "text": "มาตรา 16 วรรคหนึ่ง กรรมการตามมาตรา 14(4) มีวาระการดำรงตำแหน่งคราวละสี่ปี และดำรงตำแหน่งติดต่อกันเกินสองวาระไม่ได้",
+        "provisions": [
+          "torture_16"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 16-18"
+        }
+      ],
+      "sections": [
+        {
+          "key": "term",
+          "kind": "elements",
+          "label": "วาระการดำรงตำแหน่ง",
+          "body": "",
+          "items": [
+            {
+              "label": "วาระสี่ปี",
+              "text": "กรรมการตามมาตรา 14(4) มีวาระการดำรงตำแหน่งคราวละสี่ปี",
+              "provisions": [
+                "torture_16"
+              ]
+            },
+            {
+              "label": "การรักษาการต่อ",
+              "text": "เมื่อครบกำหนดตามวาระ หากยังมิได้มีการแต่งตั้งกรรมการขึ้นใหม่ ให้กรรมการซึ่งพ้นจากตำแหน่งตามวาระนั้นอยู่ในตำแหน่งเพื่อปฏิบัติหน้าที่ต่อไปจนกว่ากรรมการซึ่งได้รับแต่งตั้งใหม่เข้ารับหน้าที่",
+              "provisions": [
+                "torture_16"
+              ]
+            },
+            {
+              "label": "จำกัดวาระ",
+              "text": "กรรมการซึ่งพ้นจากตำแหน่งตามวาระอาจได้รับแต่งตั้งอีกได้ แต่จะดำรงตำแหน่งติดต่อกันเกินสองวาระไม่ได้",
+              "provisions": [
+                "torture_16"
+              ]
+            }
+          ]
+        },
+        {
+          "key": "removal",
+          "kind": "situations",
+          "label": "เหตุพ้นจากตำแหน่งก่อนวาระ",
+          "body": "นอกจากการพ้นจากตำแหน่งตามวาระ กรรมการตามมาตรา 14(4) พ้นจากตำแหน่งเมื่อ",
+          "items": [
+            {
+              "label": "(1)-(2)",
+              "text": "ตาย หรือลาออก",
+              "provisions": [
+                "torture_17"
+              ]
+            },
+            {
+              "label": "(3)",
+              "text": "คณะรัฐมนตรีให้ออก เพราะบกพร่องหรือไม่สุจริตต่อหน้าที่ มีความประพฤติเสื่อมเสีย หรือหย่อนความสามารถ",
+              "provisions": [
+                "torture_17"
+              ]
+            },
+            {
+              "label": "(4)",
+              "text": "ขาดคุณสมบัติหรือมีลักษณะต้องห้ามตามมาตรา 15",
+              "provisions": [
+                "torture_17"
+              ]
+            }
+          ]
+        },
+        {
+          "key": "vacancy",
+          "kind": "consequences",
+          "label": "การแต่งตั้งแทนตำแหน่งที่ว่าง",
+          "body": "",
+          "items": [
+            {
+              "label": "กำหนดเวลาแต่งตั้งแทน",
+              "text": "ให้แต่งตั้งกรรมการแทนตำแหน่งที่ว่างภายในหกสิบวัน เว้นแต่วาระของกรรมการเหลือไม่ถึงเก้าสิบวันจะไม่แต่งตั้งกรรมการแทนก็ได้ ผู้ได้รับแต่งตั้งแทนอยู่ในตำแหน่งเท่ากับวาระที่เหลืออยู่",
+              "provisions": [
+                "torture_18"
+              ]
+            },
+            {
+              "label": "องค์คณะระหว่างรอแต่งตั้ง",
+              "text": "ระหว่างที่ยังมิได้แต่งตั้งกรรมการแทน ให้คณะกรรมการประกอบด้วยกรรมการทั้งหมดที่มีอยู่",
+              "provisions": [
+                "torture_18"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_16",
+          "role": "core",
+          "note": "วาระการดำรงตำแหน่ง"
+        },
+        {
+          "ref": "torture_17",
+          "role": "core",
+          "note": "เหตุพ้นจากตำแหน่งก่อนวาระ"
+        },
+        {
+          "ref": "torture_18",
+          "role": "core",
+          "note": "การแต่งตั้งกรรมการแทนตำแหน่งที่ว่าง"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 16",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 17",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 18",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "natthi-lae-amnat-khanakammakan-pongkan-thorman": {
+      "id": "atlas:concept/natthi-lae-amnat-khanakammakan-pongkan-thorman",
+      "slug": "natthi-lae-amnat-khanakammakan-pongkan-thorman",
+      "titleTH": "หน้าที่และอำนาจของคณะกรรมการป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย",
+      "titleEN": "Duties and Powers of the Committee",
+      "aliases": [],
+      "latin": [
+        "committee mandate and functions"
+      ],
+      "subjectAreas": [
+        "public-administrative"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 19 กำหนดหน้าที่และอำนาจของคณะกรรมการ ครอบคลุมการเสนอปรับปรุงกฎหมาย การกำหนดนโยบายป้องกันปราบปราม การกำหนดมาตรการเยียวยาฟื้นฟูผู้เสียหาย การตรวจสอบข้อร้องเรียน และการรายงานสถานการณ์ประจำปี",
+      "definition": {
+        "text": "มาตรา 19 คณะกรรมการมีหน้าที่และอำนาจในการเสนอความเห็นปรับปรุงกฎหมาย กำหนดนโยบายและมาตรการป้องกันปราบปรามและเยียวยาฟื้นฟูผู้เสียหาย ตรวจสอบข้อร้องเรียน และพิจารณารายงานสถานการณ์เกี่ยวกับการทรมานและการกระทำให้บุคคลสูญหาย",
+        "provisions": [
+          "torture_19"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 19"
+        }
+      ],
+      "sections": [
+        {
+          "key": "functions",
+          "kind": "elements",
+          "label": "หน้าที่และอำนาจ",
+          "body": "",
+          "items": [
+            {
+              "label": "เสนอปรับปรุงกฎหมาย",
+              "text": "เสนอความเห็นต่อคณะรัฐมนตรีหรือหน่วยงานของรัฐให้มีการปรับปรุงกฎหมาย กฎ ระเบียบ หรือมาตรการอื่นที่จำเป็น",
+              "provisions": [
+                "torture_19"
+              ]
+            },
+            {
+              "label": "กำหนดนโยบายป้องกันปราบปราม",
+              "text": "กำหนดนโยบาย แผนงาน และมาตรการเพื่อป้องกันและปราบปรามการทรมาน การกระทำหรือการลงโทษที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์ และการกระทำให้บุคคลสูญหาย",
+              "provisions": [
+                "torture_19"
+              ]
+            },
+            {
+              "label": "เยียวยาฟื้นฟูผู้เสียหาย",
+              "text": "กำหนดนโยบายและมาตรการฟื้นฟูเยียวยาด้านร่างกายและจิตใจแก่ผู้เสียหาย และหลักเกณฑ์การช่วยเหลือเยียวยาด้านการเงินและจิตใจ โดยได้รับความเห็นชอบจากกระทรวงการคลัง",
+              "provisions": [
+                "torture_19"
+              ]
+            },
+            {
+              "label": "ป้องกันการกระทำซ้ำ/คุ้มครองผู้แจ้ง",
+              "text": "กำหนดมาตรการป้องกันการกระทำความผิดซ้ำและการปกปิดการควบคุมตัวบุคคล รวมทั้งมาตรการคุ้มครองผู้แจ้งข้อมูล",
+              "provisions": [
+                "torture_19"
+              ]
+            },
+            {
+              "label": "ตรวจสอบและรายงาน",
+              "text": "ตรวจสอบข้อมูลและข้อเท็จจริง รับและติดตามข้อร้องเรียน พิจารณารายงานสถานการณ์และรายงานผลการดำเนินงานประจำปีเสนอต่อคณะรัฐมนตรี สภาผู้แทนราษฎรและวุฒิสภา และเผยแพร่ต่อประชาชน",
+              "provisions": [
+                "torture_19"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_19",
+          "role": "core",
+          "note": "หน้าที่และอำนาจของคณะกรรมการ"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 19",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "kan-prachum-lae-ongprachum-khanakammakan": {
+      "id": "atlas:concept/kan-prachum-lae-ongprachum-khanakammakan",
+      "slug": "kan-prachum-lae-ongprachum-khanakammakan",
+      "titleTH": "การประชุมและองค์ประชุมของคณะกรรมการ",
+      "titleEN": "Committee Meetings and Quorum",
+      "aliases": [],
+      "latin": [
+        "quorum; meeting procedure"
+      ],
+      "subjectAreas": [
+        "public-administrative"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 20 กำหนดองค์ประชุมของคณะกรรมการต้องมีกรรมการมาประชุมไม่น้อยกว่ากึ่งหนึ่งของจำนวนกรรมการทั้งหมด ลำดับผู้ทำหน้าที่ประธานในที่ประชุม และหลักการวินิจฉัยชี้ขาดด้วยเสียงข้างมาก",
+      "definition": {
+        "text": "มาตรา 20 การประชุมคณะกรรมการต้องมีกรรมการมาประชุมไม่น้อยกว่ากึ่งหนึ่งของจำนวนกรรมการทั้งหมดจึงจะเป็นองค์ประชุม การวินิจฉัยชี้ขาดของที่ประชุมให้ถือเสียงข้างมาก กรรมการคนหนึ่งให้มีเสียงหนึ่งในการลงคะแนน ถ้าคะแนนเสียงเท่ากันให้ประธานในที่ประชุมออกเสียงเพิ่มขึ้นอีกเสียงหนึ่งเป็นเสียงชี้ขาด",
+        "provisions": [
+          "torture_20"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 20"
+        }
+      ],
+      "sections": [
+        {
+          "key": "chair-order",
+          "kind": "generic",
+          "label": "ลำดับผู้ทำหน้าที่ประธานในที่ประชุม",
+          "body": "ถ้าประธานกรรมการไม่มาประชุมหรือไม่อาจปฏิบัติหน้าที่ได้ ให้รองประธานกรรมการเป็นประธานในที่ประชุม ถ้ารองประธานกรรมการไม่มาประชุมหรือไม่อาจปฏิบัติหน้าที่ได้ ให้ที่ประชุมเลือกกรรมการคนหนึ่งเป็นประธานในที่ประชุม",
+          "items": []
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_20",
+          "role": "core",
+          "note": "องค์ประชุมและการวินิจฉัยชี้ขาด"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 20",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "natthi-thurakan-krom-khumkhrong-sitthi-lae-seriphap": {
+      "id": "atlas:concept/natthi-thurakan-krom-khumkhrong-sitthi-lae-seriphap",
+      "slug": "natthi-thurakan-krom-khumkhrong-sitthi-lae-seriphap",
+      "titleTH": "หน้าที่งานธุรการของกรมคุ้มครองสิทธิและเสรีภาพ",
+      "titleEN": "Secretariat Functions of the Rights and Liberties Protection Department",
+      "aliases": [],
+      "latin": [
+        "secretariat functions"
+      ],
+      "subjectAreas": [
+        "public-administrative"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 21 ให้กรมคุ้มครองสิทธิและเสรีภาพรับผิดชอบงานธุรการของคณะกรรมการ มีหน้าที่ประสานงานช่วยเหลือผู้เสียหาย ส่งเสริมการมีส่วนร่วมของภาคส่วนต่าง ๆ ศึกษาวิจัยเผยแพร่ความรู้ และรวบรวมข้อมูลสถิติคดีเพื่อจัดทำรายงาน",
+      "definition": {
+        "text": "มาตรา 21 ให้กรมคุ้มครองสิทธิและเสรีภาพรับผิดชอบงานธุรการของคณะกรรมการ และให้มีหน้าที่และอำนาจตามที่มาตรานี้กำหนด",
+        "provisions": [
+          "torture_21"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 2"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 21"
+        }
+      ],
+      "sections": [
+        {
+          "key": "secretariat-duties",
+          "kind": "elements",
+          "label": "หน้าที่และอำนาจ",
+          "body": "",
+          "items": [
+            {
+              "label": "ประสานงานช่วยเหลือผู้เสียหาย",
+              "text": "ประสานงานและร่วมมือกับส่วนราชการ หน่วยงานของรัฐ และภาคเอกชนที่เกี่ยวข้องในการสืบหา ติดตาม และช่วยเหลือผู้เสียหาย",
+              "provisions": [
+                "torture_21"
+              ]
+            },
+            {
+              "label": "ส่งเสริมการมีส่วนร่วม",
+              "text": "สนับสนุนให้ส่วนราชการ หน่วยงานของรัฐ และภาคเอกชนมีส่วนร่วมในการป้องกันและปราบปราม",
+              "provisions": [
+                "torture_21"
+              ]
+            },
+            {
+              "label": "วิจัยและเผยแพร่ความรู้",
+              "text": "ศึกษา วิจัย และเผยแพร่ความรู้ รวมทั้งให้ความรู้และฝึกอบรมแก่ประชาชนและเจ้าหน้าที่ของรัฐ",
+              "provisions": [
+                "torture_21"
+              ]
+            },
+            {
+              "label": "รวบรวมสถิติและรายงาน",
+              "text": "รวบรวมข้อมูล สถิติคดี และจัดทำรายงานสถานการณ์และรายงานผลการดำเนินงานประจำปี เสนอต่อคณะกรรมการ",
+              "provisions": [
+                "torture_21"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_21",
+          "role": "core",
+          "note": "งานธุรการของกรมคุ้มครองสิทธิและเสรีภาพ"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 21",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "natthi-banthuek-lae-chaengehet-nai-kan-khuapkhumtua": {
+      "id": "atlas:concept/natthi-banthuek-lae-chaengehet-nai-kan-khuapkhumtua",
+      "slug": "natthi-banthuek-lae-chaengehet-nai-kan-khuapkhumtua",
+      "titleTH": "หน้าที่บันทึกภาพเสียง บันทึกข้อมูล และแจ้งเหตุเกี่ยวกับผู้ถูกควบคุมตัว",
+      "titleEN": "Duty to Record and Report on Persons in Custody",
+      "aliases": [],
+      "latin": [
+        "custody recording and notification duty"
+      ],
+      "subjectAreas": [
+        "criminal-procedure"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 22 23 และ 28 กำหนดหน้าที่ของเจ้าหน้าที่ของรัฐผู้รับผิดชอบในการควบคุมตัว ให้บันทึกภาพและเสียงอย่างต่อเนื่อง แจ้งพนักงานอัยการและนายอำเภอในท้องที่โดยทันที บันทึกข้อมูลรายละเอียดเกี่ยวกับผู้ถูกควบคุมตัวตามที่กฎหมายกำหนด และแจ้งคณะกรรมการทราบทันทีหากผู้ถูกควบคุมตัวถึงแก่ความตายระหว่างควบคุมตัว",
+      "definition": {
+        "text": "มาตรา 22 วรรคหนึ่ง ในการควบคุมตัว เจ้าหน้าที่ของรัฐผู้รับผิดชอบต้องบันทึกภาพและเสียงอย่างต่อเนื่องในขณะจับและควบคุมจนกระทั่งส่งตัวให้พนักงานสอบสวนหรือปล่อยตัวบุคคลดังกล่าวไป เว้นแต่มีเหตุสุดวิสัยที่ไม่สามารถกระทำได้ ก็ให้บันทึกเหตุนั้นเป็นหลักฐานไว้ในบันทึกการควบคุมตัว",
+        "provisions": [
+          "torture_22"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 3"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 22, 23, 28"
+        }
+      ],
+      "sections": [
+        {
+          "key": "recording-notification",
+          "kind": "elements",
+          "label": "บันทึกภาพเสียงและการแจ้งพนักงานอัยการ",
+          "body": "",
+          "items": [
+            {
+              "label": "บันทึกภาพเสียงต่อเนื่อง",
+              "text": "ต้องบันทึกภาพและเสียงอย่างต่อเนื่องในขณะจับและควบคุมจนกระทั่งส่งตัวให้พนักงานสอบสวนหรือปล่อยตัว เว้นแต่มีเหตุสุดวิสัย ให้บันทึกเหตุนั้นเป็นหลักฐาน",
+              "provisions": [
+                "torture_22"
+              ]
+            },
+            {
+              "label": "แจ้งพนักงานอัยการและนายอำเภอ",
+              "text": "ต้องแจ้งพนักงานอัยการและนายอำเภอในท้องที่ (หรือผู้อำนวยการสำนักการสอบสวนและนิติการ กรมการปกครอง ในกรุงเทพมหานคร) โดยทันที หากผู้รับแจ้งสงสัยว่าจะมีการทรมานให้ดำเนินการตามมาตรา 26",
+              "provisions": [
+                "torture_22"
+              ]
+            }
+          ]
+        },
+        {
+          "key": "custody-register",
+          "kind": "elements",
+          "label": "ข้อมูลที่ต้องบันทึกเกี่ยวกับผู้ถูกควบคุมตัว",
+          "body": "ในการควบคุมตัว เจ้าหน้าที่ของรัฐผู้รับผิดชอบต้องบันทึกข้อมูลอย่างน้อยตามรายการดังนี้",
+          "items": [
+            {
+              "label": "อัตลักษณ์และเวลา/สถานที่",
+              "text": "ข้อมูลอัตลักษณ์ของผู้ถูกควบคุมตัว วัน เวลา และสถานที่ของการควบคุมตัวและการปล่อยตัว รวมถึงข้อมูลเจ้าหน้าที่ผู้ทำการควบคุมตัวและผู้รับผิดชอบการย้ายสถานที่ (ถ้ามี)",
+              "provisions": [
+                "torture_23"
+              ]
+            },
+            {
+              "label": "คำสั่งและผู้ออกคำสั่ง",
+              "text": "คำสั่งที่ให้มีการควบคุมตัวและเหตุแห่งการออกคำสั่ง และเจ้าหน้าที่ของรัฐผู้ออกคำสั่ง",
+              "provisions": [
+                "torture_23"
+              ]
+            },
+            {
+              "label": "สภาพร่างกายและจิตใจ",
+              "text": "ข้อมูลสภาพร่างกายและจิตใจของผู้ถูกควบคุมตัวก่อนถูกควบคุมตัวและก่อนปล่อยตัว กรณีถึงแก่ความตายระหว่างควบคุมตัวต้องระบุสาเหตุการตายและสถานที่เก็บศพ",
+              "provisions": [
+                "torture_23"
+              ]
+            }
+          ]
+        },
+        {
+          "key": "death-notification",
+          "kind": "consequences",
+          "label": "หน้าที่แจ้งกรณีผู้ถูกควบคุมตัวถึงแก่ความตาย",
+          "body": "",
+          "items": [
+            {
+              "label": "แจ้งคณะกรรมการโดยพลัน",
+              "text": "ในกรณีที่ผู้ถูกควบคุมตัวถึงแก่ความตาย ให้เจ้าหน้าที่ของรัฐผู้รับผิดชอบแจ้งคณะกรรมการทราบโดยพลัน เพื่อให้มีส่วนร่วมในการติดตามตรวจสอบข้อมูลและข้อเท็จจริงเกี่ยวกับการทรมานระหว่างควบคุมตัว",
+              "provisions": [
+                "torture_28"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_22",
+          "role": "core",
+          "note": "บันทึกภาพเสียงและแจ้งพนักงานอัยการ"
+        },
+        {
+          "ref": "torture_23",
+          "role": "core",
+          "note": "ข้อมูลที่ต้องบันทึกเกี่ยวกับผู้ถูกควบคุมตัว"
+        },
+        {
+          "ref": "torture_28",
+          "role": "core",
+          "note": "แจ้งคณะกรรมการกรณีผู้ถูกควบคุมตัวถึงแก่ความตาย"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 22",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 23",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 28",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "sitthi-khaothueng-khomun-phuthuk-khuapkhumtua": {
+      "id": "atlas:concept/sitthi-khaothueng-khomun-phuthuk-khuapkhumtua",
+      "slug": "sitthi-khaothueng-khomun-phuthuk-khuapkhumtua",
+      "titleTH": "สิทธิเข้าถึงข้อมูลผู้ถูกควบคุมตัวและข้อยกเว้นการเปิดเผยข้อมูล",
+      "titleEN": "Right to Access Custody Information and Exceptions to Disclosure",
+      "aliases": [],
+      "latin": [
+        "right of access to custody records"
+      ],
+      "subjectAreas": [
+        "criminal-procedure"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 24 ให้ผู้มีส่วนได้เสียโดยชอบด้วยกฎหมาย เช่น ญาติ ผู้แทน หรือทนายความ มีสิทธิร้องขอให้เปิดเผยข้อมูลผู้ถูกควบคุมตัว และร้องต่อศาลได้หากถูกปฏิเสธ ส่วนมาตรา 25 กำหนดข้อยกเว้นให้ไม่เปิดเผยข้อมูลได้ในบางกรณี",
+      "definition": {
+        "text": "มาตรา 24 วรรคหนึ่ง เพื่อประโยชน์ของผู้ถูกควบคุมตัว ผู้มีส่วนได้เสียโดยชอบด้วยกฎหมายในการเข้าถึงข้อมูลของผู้ถูกควบคุมตัว เช่น ญาติ ผู้แทนหรือทนายความ หรือคณะกรรมการ คณะอนุกรรมการ หรือเจ้าหน้าที่ซึ่งได้รับมอบหมายจากคณะกรรมการ มีสิทธิร้องขอต่อเจ้าหน้าที่ของรัฐผู้รับผิดชอบให้เปิดเผยข้อมูลเกี่ยวกับผู้ถูกควบคุมตัวตามมาตรา 23",
+        "provisions": [
+          "torture_24"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 3"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 24-25"
+        }
+      ],
+      "sections": [
+        {
+          "key": "court-petition",
+          "kind": "consequences",
+          "label": "การร้องต่อศาลเมื่อถูกปฏิเสธ",
+          "body": "",
+          "items": [
+            {
+              "label": "สิทธิยื่นคำร้องต่อศาล",
+              "text": "หากเจ้าหน้าที่ของรัฐปฏิเสธที่จะเปิดเผยข้อมูล ผู้ร้องขอมีสิทธิยื่นคำร้องต่อศาลที่ตนมีภูมิลำเนา ศาลอาญา หรือศาลจังหวัดแห่งท้องที่ที่เกี่ยวข้อง เพื่อให้ศาลสั่งเปิดเผยข้อมูลได้ คำสั่งไม่เปิดเผยอุทธรณ์ไปยังศาลอุทธรณ์ได้ และคำสั่งศาลอุทธรณ์เป็นที่สุด",
+              "provisions": [
+                "torture_24"
+              ]
+            }
+          ]
+        },
+        {
+          "key": "disclosure-exception",
+          "kind": "defences",
+          "label": "ข้อยกเว้นการเปิดเผยข้อมูล",
+          "body": "",
+          "items": [
+            {
+              "label": "เหตุยกเว้น",
+              "text": "เจ้าหน้าที่ของรัฐผู้รับผิดชอบหรือศาลอาจไม่เปิดเผยข้อมูลตามมาตรา 23 หากผู้นั้นอยู่ภายใต้การคุ้มครองของกฎหมายโดยเป็นผู้อยู่ในอำนาจศาล และการเปิดเผยอาจละเมิดความเป็นส่วนตัวหรือก่อผลร้ายต่อบุคคล หรือเป็นอุปสรรคต่อการสืบสวนสอบสวนคดีอาญา",
+              "provisions": [
+                "torture_25"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_24",
+          "role": "core",
+          "note": "สิทธิเข้าถึงข้อมูลผู้ถูกควบคุมตัวและการร้องต่อศาล"
+        },
+        {
+          "ref": "torture_25",
+          "role": "core",
+          "note": "ข้อยกเว้นการเปิดเผยข้อมูล"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 24",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 25",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "kham-rong-tor-san-pheua-yuti-kan-thorman": {
+      "id": "atlas:concept/kham-rong-tor-san-pheua-yuti-kan-thorman",
+      "slug": "kham-rong-tor-san-pheua-yuti-kan-thorman",
+      "titleTH": "คำร้องต่อศาลเพื่อยุติการทรมานและคำสั่งคุ้มครองชั่วคราว",
+      "titleEN": "Judicial Petition to Halt Torture and Protective Orders",
+      "aliases": [],
+      "latin": [
+        "habeas-corpus-type petition; protective orders"
+      ],
+      "subjectAreas": [
+        "criminal-procedure"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 26 ให้บุคคลที่กฎหมายกำหนด เช่น ผู้เสียหาย พนักงานอัยการ พนักงานสอบสวน หรือคณะกรรมการ มีสิทธิยื่นคำร้องต่อศาลเพื่อให้มีคำสั่งยุติการทรมานทันทีเมื่อมีการอ้างว่าเกิดเหตุ และมาตรา 27 ให้อำนาจศาลออกคำสั่งคุ้มครองชั่วคราวหลายประการ รวมถึงสั่งปล่อยตัวหากเห็นว่าไม่มีเหตุควบคุมตัวต่อไป",
+      "definition": {
+        "text": "มาตรา 26 วรรคหนึ่ง เมื่อมีการอ้างว่าบุคคลใดถูกกระทำทรมาน ถูกกระทำการที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์ หรือถูกกระทำให้สูญหาย บุคคลตามที่กฎหมายกำหนดมีสิทธิยื่นคำร้องต่อศาลท้องที่ที่มีอำนาจพิจารณาคดีอาญาเพื่อให้มีคำสั่งยุติการกระทำเช่นนั้นทันที",
+        "provisions": [
+          "torture_26"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 3"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 26-27"
+        }
+      ],
+      "sections": [
+        {
+          "key": "standing",
+          "kind": "persons",
+          "label": "ผู้มีสิทธิยื่นคำร้อง",
+          "body": "",
+          "items": [
+            {
+              "label": "ผู้มีสิทธิ",
+              "text": "ผู้เสียหายหรือผู้มีส่วนได้เสียตามมาตรา 24 พนักงานอัยการ ผู้อำนวยการสำนักการสอบสวนและนิติการหรือนายอำเภอตามมาตรา 22 พนักงานสอบสวนหรือพนักงานสอบสวนคดีพิเศษ คณะกรรมการหรือผู้ได้รับมอบหมาย และบุคคลอื่นใดเพื่อประโยชน์ของผู้เสียหาย",
+              "provisions": [
+                "torture_26"
+              ]
+            },
+            {
+              "label": "การไต่สวน",
+              "text": "เมื่อได้รับคำร้อง ให้ศาลไต่สวนฝ่ายเดียวโดยพลัน โดยมีอำนาจเรียกเจ้าหน้าที่ของรัฐหรือบุคคลใดมาให้ถ้อยคำ ส่งเอกสารหรือวัตถุ หรือสั่งให้นำตัวผู้ถูกควบคุมตัวมาศาล",
+              "provisions": [
+                "torture_26"
+              ]
+            }
+          ]
+        },
+        {
+          "key": "court-orders",
+          "kind": "consequences",
+          "label": "คำสั่งของศาล",
+          "body": "เพื่อยุติการกระทำและเยียวยาความเสียหายเบื้องต้น ศาลอาจมีคำสั่งดังต่อไปนี้",
+          "items": [
+            {
+              "label": "ยุติการกระทำ/เปลี่ยนสถานที่",
+              "text": "ให้ยุติการทรมานหรือการกระทำที่โหดร้ายฯ และให้เปลี่ยนสถานที่ควบคุมตัว",
+              "provisions": [
+                "torture_27"
+              ]
+            },
+            {
+              "label": "สิทธิพบญาติและการรักษาพยาบาล",
+              "text": "ให้ผู้ถูกควบคุมตัวได้พบญาติ ทนายความ หรือบุคคลที่ไว้วางใจ และให้มีการรักษาพยาบาลและประเมินโดยแพทย์นิติเวชศาสตร์/จิตเวชศาสตร์ พร้อมบันทึกทางการแพทย์และการฟื้นฟู",
+              "provisions": [
+                "torture_27"
+              ]
+            },
+            {
+              "label": "เปิดเผยเอกสาร/มาตรการอื่น",
+              "text": "ให้เปิดเผยเอกสารบันทึกหรือข้อมูลอื่นใด และกำหนดมาตรการอื่นใดที่เหมาะสม",
+              "provisions": [
+                "torture_27"
+              ]
+            },
+            {
+              "label": "สั่งปล่อยตัว",
+              "text": "หากศาลพิจารณาแล้วเห็นว่าไม่มีเหตุจำเป็นในการควบคุมตัวต่อไป ให้ศาลสั่งปล่อยตัวผู้ถูกควบคุมตัวทันที คำสั่งศาลตามมาตรานี้เป็นที่สุด",
+              "provisions": [
+                "torture_27"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_26",
+          "role": "core",
+          "note": "ผู้มีสิทธิยื่นคำร้องและการไต่สวน"
+        },
+        {
+          "ref": "torture_27",
+          "role": "core",
+          "note": "คำสั่งศาลเพื่อยุติการกระทำและเยียวยาเบื้องต้น"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 26",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 27",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "natthi-chaeng-het-bukkhonthuapai-lae-khumkhrong-phuchaeng": {
+      "id": "atlas:concept/natthi-chaeng-het-bukkhonthuapai-lae-khumkhrong-phuchaeng",
+      "slug": "natthi-chaeng-het-bukkhonthuapai-lae-khumkhrong-phuchaeng",
+      "titleTH": "หน้าที่แจ้งเหตุของบุคคลทั่วไปและความคุ้มครองผู้แจ้งโดยสุจริต",
+      "titleEN": "Duty to Report by Any Person and Protection for Good-Faith Reporters",
+      "aliases": [],
+      "latin": [
+        "whistleblower protection"
+      ],
+      "subjectAreas": [
+        "criminal-procedure"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 29 กำหนดให้ผู้พบเห็นหรือทราบการทรมาน การกระทำที่โหดร้ายฯ หรือการกระทำให้บุคคลสูญหาย ต้องแจ้งหน่วยงานที่เกี่ยวข้องโดยไม่ชักช้า และให้ความคุ้มครองผู้แจ้งโดยสุจริตไม่ต้องรับผิดทั้งทางแพ่ง ทางอาญา หรือทางวินัย แม้ภายหลังปรากฏว่าไม่มีการกระทำความผิดตามที่แจ้ง",
+      "definition": {
+        "text": "มาตรา 29 วรรคหนึ่ง ผู้ใดพบเห็นหรือทราบการทรมาน การกระทำที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์ หรือการกระทำให้บุคคลสูญหาย ให้แจ้งพนักงานฝ่ายปกครอง พนักงานอัยการ พนักงานสอบสวน คณะกรรมการ หรือคณะอนุกรรมการที่ได้รับมอบหมายโดยไม่ชักช้า",
+        "provisions": [
+          "torture_29"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 3"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 29"
+        }
+      ],
+      "sections": [
+        {
+          "key": "good-faith-protection",
+          "kind": "defences",
+          "label": "ความคุ้มครองผู้แจ้งโดยสุจริต",
+          "body": "",
+          "items": [
+            {
+              "label": "ไม่ต้องรับผิด",
+              "text": "ผู้แจ้งตามวรรคหนึ่ง ถ้าได้กระทำโดยสุจริตไม่ต้องรับผิดทั้งทางแพ่ง ทางอาญา หรือทางวินัย แม้ภายหลังปรากฏว่าไม่มีการกระทำความผิดตามที่แจ้ง",
+              "provisions": [
+                "torture_29"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_29",
+          "role": "core",
+          "note": "หน้าที่แจ้งเหตุและความคุ้มครองผู้แจ้งโดยสุจริต"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 29",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "natthi-suepsuan-tonueang-lae-ayukhwam-bangkhap-sunhai": {
+      "id": "atlas:concept/natthi-suepsuan-tonueang-lae-ayukhwam-bangkhap-sunhai",
+      "slug": "natthi-suepsuan-tonueang-lae-ayukhwam-bangkhap-sunhai",
+      "titleTH": "หน้าที่สืบสวนต่อเนื่องและอายุความคดีบังคับบุคคลสูญหาย",
+      "titleEN": "Continuing Investigation Duty and the Limitation Period for Enforced Disappearance",
+      "aliases": [],
+      "latin": [
+        "continuing crime doctrine; statute of limitations"
+      ],
+      "subjectAreas": [
+        "criminal-procedure"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 10 กำหนดให้ต้องสืบสวนคดีกระทำให้บุคคลสูญหายต่อไปจนกว่าจะพบตัวหรือทราบข้อเท็จจริงและรู้ตัวผู้กระทำ มาตรา 30 กำหนดมิให้เริ่มนับอายุความจนกว่าจะทราบชะตากรรมของผู้ถูกกระทำให้สูญหาย และมาตรา 43 กำหนดให้นำมาตรา 10 มาใช้บังคับแก่การกระทำให้บุคคลสูญหายที่เกิดขึ้นก่อนวันที่พระราชบัญญัตินี้ใช้บังคับโดยอนุโลม",
+      "definition": {
+        "text": "มาตรา 10 ในคดีความผิดฐานกระทำให้บุคคลสูญหายตามมาตรา 7 ให้ดำเนินการสืบสวนจนกว่าจะพบบุคคลซึ่งถูกกระทำให้สูญหายหรือปรากฏหลักฐานอันน่าเชื่อว่าบุคคลนั้นถึงแก่ความตายและทราบรายละเอียดของการกระทำความผิดและรู้ตัวผู้กระทำความผิด",
+        "provisions": [
+          "torture_10"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 1"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 10"
+        },
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 4"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 30"
+        },
+        {
+          "collection": "torture",
+          "path": [
+            null
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 43 (บทเฉพาะกาล)"
+        }
+      ],
+      "sections": [
+        {
+          "key": "limitation",
+          "kind": "defences",
+          "label": "อายุความ",
+          "body": "",
+          "items": [
+            {
+              "label": "ไม่เริ่มนับจนกว่าจะทราบชะตากรรม",
+              "text": "อายุความสำหรับความผิดตามมาตรา 7 มิให้เริ่มนับจนกว่าจะทราบชะตากรรมของผู้ถูกกระทำให้สูญหาย",
+              "provisions": [
+                "torture_30"
+              ]
+            }
+          ]
+        },
+        {
+          "key": "transitional",
+          "kind": "crosswalk",
+          "label": "การใช้บังคับย้อนหลังกับเหตุก่อนกฎหมายนี้ใช้บังคับ",
+          "body": "",
+          "items": [
+            {
+              "label": "บทเฉพาะกาล",
+              "text": "ให้นำความในมาตรา 10 มาใช้บังคับแก่การกระทำให้บุคคลสูญหายก่อนวันที่พระราชบัญญัตินี้ใช้บังคับโดยอนุโลม",
+              "provisions": [
+                "torture_43"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_10",
+          "role": "core",
+          "note": "หน้าที่สืบสวนต่อเนื่องจนกว่าจะทราบชะตากรรม"
+        },
+        {
+          "ref": "torture_30",
+          "role": "core",
+          "note": "อายุความไม่เริ่มนับจนกว่าจะทราบชะตากรรม"
+        },
+        {
+          "ref": "torture_43",
+          "role": "core",
+          "note": "บทเฉพาะกาลใช้มาตรา 10 ย้อนหลัง"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 10",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 30",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 43",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "khwampenphusiahai-khayai-thueng-yat-tam-wiaya": {
+      "id": "atlas:concept/khwampenphusiahai-khayai-thueng-yat-tam-wiaya",
+      "slug": "khwampenphusiahai-khayai-thueng-yat-tam-wiaya",
+      "titleTH": "ความเป็นผู้เสียหายขยายถึงญาติตามประมวลกฎหมายวิธีพิจารณาความอาญา",
+      "titleEN": "Extended Victim Standing to Relatives under the Criminal Procedure Code",
+      "aliases": [],
+      "latin": [
+        "extended victim standing"
+      ],
+      "subjectAreas": [
+        "criminal-procedure"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 11 กำหนดว่าในคดีที่ผู้เสียหายไม่อยู่ในฐานะที่จะร้องทุกข์หรือกล่าวโทษด้วยตนเองได้ หรือเป็นคดีกระทำให้บุคคลสูญหาย ให้สามี ภริยา ผู้บุพการี ผู้สืบสันดาน และบุคคลอื่นตามที่กฎหมายระบุ เป็นผู้เสียหายตามประมวลกฎหมายวิธีพิจารณาความอาญาด้วย",
+      "definition": {
+        "text": "มาตรา 11 ในคดีความผิดฐานกระทำทรมานตามมาตรา 5 หรือความผิดฐานกระทำการที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์ตามมาตรา 6 ซึ่งผู้เสียหายไม่อยู่ในฐานะที่จะร้องทุกข์หรือกล่าวโทษด้วยตนเองได้ หรือความผิดฐานกระทำให้บุคคลสูญหายตามมาตรา 7 ให้สามี ภริยา ผู้บุพการี ผู้สืบสันดาน ผู้ซึ่งอยู่กินกันฉันสามีภริยาซึ่งมิได้จดทะเบียนสมรส ผู้อุปการะและผู้อยู่ในอุปการะของผู้ถูกกระทำ เป็นผู้เสียหายตามประมวลกฎหมายวิธีพิจารณาความอาญาด้วย",
+        "provisions": [
+          "torture_11"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 1"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 11"
+        }
+      ],
+      "sections": [
+        {
+          "key": "covered-relatives",
+          "kind": "persons",
+          "label": "บุคคลที่ถือเป็นผู้เสียหายตามประมวลกฎหมายวิธีพิจารณาความอาญา",
+          "body": "",
+          "items": [
+            {
+              "label": "คู่สมรส",
+              "text": "สามี ภริยา",
+              "provisions": [
+                "torture_11"
+              ]
+            },
+            {
+              "label": "ญาติสายตรง",
+              "text": "ผู้บุพการี ผู้สืบสันดาน",
+              "provisions": [
+                "torture_11"
+              ]
+            },
+            {
+              "label": "คู่ชีวิตที่ไม่ได้จดทะเบียน",
+              "text": "ผู้ซึ่งอยู่กินกันฉันสามีภริยาซึ่งมิได้จดทะเบียนสมรส",
+              "provisions": [
+                "torture_11"
+              ]
+            },
+            {
+              "label": "ผู้อุปการะ",
+              "text": "ผู้อุปการะและผู้อยู่ในอุปการะของผู้ถูกกระทำ",
+              "provisions": [
+                "torture_11"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_11",
+          "role": "core",
+          "note": "ขยายความเป็นผู้เสียหายถึงญาติตาม ป.วิ.อาญา"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 11",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "phanakngan-sopsuan-phurapphitchop-lae-khetamnat": {
+      "id": "atlas:concept/phanakngan-sopsuan-phurapphitchop-lae-khetamnat",
+      "slug": "phanakngan-sopsuan-phurapphitchop-lae-khetamnat",
+      "titleTH": "พนักงานสอบสวนผู้รับผิดชอบและเขตอำนาจการสอบสวน",
+      "titleEN": "Responsible Investigating Officers and Investigative Jurisdiction",
+      "aliases": [],
+      "latin": [
+        "investigating officer jurisdiction"
+      ],
+      "subjectAreas": [
+        "criminal-procedure"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 31 กำหนดตัวพนักงานสอบสวนที่มีอำนาจสอบสวนคดีตามพระราชบัญญัตินี้ รวมถึงพนักงานฝ่ายปกครองระดับปลัดอำเภอขึ้นไป พนักงานสอบสวนคดีพิเศษ และพนักงานอัยการ กำหนดให้อัยการสูงสุดชี้ขาดกรณีไม่แน่ว่าหน่วยงานใดรับผิดชอบ และวางกลไกประสานงานกับคณะกรรมการป้องกันและปราบปรามการทุจริตแห่งชาติเมื่อผู้กระทำผิดเป็นเจ้าพนักงานของรัฐตามกฎหมาย ป.ป.ช.",
+      "definition": {
+        "text": "มาตรา 31 วรรคหนึ่ง ในกรุงเทพมหานครและจังหวัดอื่นนอกจากพนักงานสอบสวนตามประมวลกฎหมายวิธีพิจารณาความอาญาแล้ว ให้พนักงานฝ่ายปกครองชั้นผู้ใหญ่ พนักงานฝ่ายปกครองตำแหน่งตั้งแต่ปลัดอำเภอหรือเทียบเท่าขึ้นไปในสังกัดกรมการปกครอง กระทรวงมหาดไทย พนักงานสอบสวนคดีพิเศษ และพนักงานอัยการ เป็นพนักงานสอบสวนมีอำนาจสอบสวนและดำเนินคดีความผิดตามพระราชบัญญัตินี้",
+        "provisions": [
+          "torture_31"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 4"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 31"
+        }
+      ],
+      "sections": [
+        {
+          "key": "jurisdiction-mechanics",
+          "kind": "generic",
+          "label": "กลไกกำหนดผู้รับผิดชอบ",
+          "body": "",
+          "items": [
+            {
+              "label": "คดีพิเศษและการกำกับของอัยการ",
+              "text": "หากพนักงานสอบสวนคดีพิเศษทำการสอบสวน ให้เป็นคดีพิเศษตามกฎหมายว่าด้วยการสอบสวนคดีพิเศษ และหากสอบสวนโดยหน่วยงานอื่นที่ไม่ใช่พนักงานอัยการ ให้แจ้งเหตุแห่งคดีให้พนักงานอัยการทราบเพื่อเข้าตรวจสอบหรือกำกับการสอบสวนทันที",
+              "provisions": [
+                "torture_31"
+              ]
+            },
+            {
+              "label": "อัยการสูงสุดชี้ขาด",
+              "text": "กรณีไม่แน่ว่าพนักงานสอบสวนท้องที่ใดหรือหน่วยงานใดเป็นผู้รับผิดชอบ ให้อัยการสูงสุดหรือผู้ทำการแทนเป็นผู้ชี้ขาด",
+              "provisions": [
+                "torture_31"
+              ]
+            },
+            {
+              "label": "ผู้กระทำผิดเป็นเจ้าพนักงานตามกฎหมาย ป.ป.ช.",
+              "text": "หากผู้กระทำความผิดเป็นเจ้าพนักงานของรัฐตามกฎหมายประกอบรัฐธรรมนูญว่าด้วยการป้องกันและปราบปรามการทุจริตและอยู่ในอำนาจของคณะกรรมการ ป.ป.ช. ให้พนักงานสอบสวนผู้รับผิดชอบดำเนินคดีต่อไปตามพระราชบัญญัตินี้และแจ้งให้คณะกรรมการ ป.ป.ช. ทราบ",
+              "provisions": [
+                "torture_31"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_31",
+          "role": "core",
+          "note": "พนักงานสอบสวนผู้รับผิดชอบและเขตอำนาจ"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 31",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "kan-tidtam-khadi-lae-yiaoya-phusiahai": {
+      "id": "atlas:concept/kan-tidtam-khadi-lae-yiaoya-phusiahai",
+      "slug": "kan-tidtam-khadi-lae-yiaoya-phusiahai",
+      "titleTH": "การติดตามความคืบหน้าคดีและการช่วยเหลือเยียวยาผู้เสียหาย",
+      "titleEN": "Case Progress Monitoring and Victim Assistance",
+      "aliases": [],
+      "latin": [
+        "victim assistance and compensation claims"
+      ],
+      "subjectAreas": [
+        "criminal-procedure"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 32 กำหนดให้หน่วยงานที่มีอำนาจสืบสวนสอบสวนต้องรายงานความคืบหน้าคดีให้ผู้เสียหายทราบอย่างต่อเนื่อง และให้คณะกรรมการติดตามผลพร้อมดำเนินมาตรการคุ้มครองเยียวยา มาตรา 33 กำหนดให้พนักงานสอบสวนหรือพนักงานอัยการแจ้งสิทธิเรียกค่าสินไหมทดแทนแก่ผู้เสียหาย และให้พนักงานอัยการเรียกค่าสินไหมทดแทนแทนผู้เสียหายเมื่อผู้เสียหายประสงค์",
+      "definition": {
+        "text": "มาตรา 32 ให้หน่วยงานที่มีอำนาจสืบสวนสอบสวนในคดีความผิดตามพระราชบัญญัตินี้รายงานให้ผู้เสียหายทราบถึงผลความคืบหน้าของคดีอย่างต่อเนื่อง และให้คณะกรรมการ คณะอนุกรรมการ หรือเจ้าหน้าที่ซึ่งได้รับมอบหมายมีหน้าที่และอำนาจติดตามผลความคืบหน้าของคดีและดำเนินมาตรการต่าง ๆ เพื่อคุ้มครองสวัสดิภาพและความปลอดภัย ชดเชย เยียวยา และฟื้นฟูความเสียหายทางร่างกายและจิตใจ",
+        "provisions": [
+          "torture_32"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 4"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 32-33"
+        }
+      ],
+      "sections": [
+        {
+          "key": "compensation",
+          "kind": "consequences",
+          "label": "สิทธิเรียกค่าสินไหมทดแทน",
+          "body": "",
+          "items": [
+            {
+              "label": "แจ้งสิทธิในโอกาสแรก",
+              "text": "ให้พนักงานสอบสวนหรือพนักงานอัยการแจ้งให้ผู้เสียหายทราบในโอกาสแรกถึงสิทธิที่จะเรียกค่าสินไหมทดแทนอันเนื่องมาจากการกระทำความผิด และสิทธิที่จะได้รับความช่วยเหลือทางกฎหมาย",
+              "provisions": [
+                "torture_33"
+              ]
+            },
+            {
+              "label": "พนักงานอัยการเรียกแทน",
+              "text": "ในกรณีที่ผู้เสียหายมีสิทธิและประสงค์จะเรียกค่าสินไหมทดแทน ให้พนักงานอัยการเรียกค่าสินไหมทดแทนแทนผู้เสียหายด้วย",
+              "provisions": [
+                "torture_33"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_32",
+          "role": "core",
+          "note": "การติดตามความคืบหน้าคดีและการคุ้มครองเยียวยา"
+        },
+        {
+          "ref": "torture_33",
+          "role": "core",
+          "note": "สิทธิเรียกค่าสินไหมทดแทนและบทบาทพนักงานอัยการ"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 32",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 33",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "khetamnat-san-aya-khadi-thutcharit-tortore": {
+      "id": "atlas:concept/khetamnat-san-aya-khadi-thutcharit-tortore",
+      "slug": "khetamnat-san-aya-khadi-thutcharit-tortore",
+      "titleTH": "เขตอำนาจศาลอาญาคดีทุจริตและประพฤติมิชอบเหนือคดีตามพระราชบัญญัตินี้",
+      "titleEN": "Jurisdiction of the Corruption and Misconduct Criminal Court over Cases under this Act",
+      "aliases": [],
+      "latin": [
+        "special court jurisdiction"
+      ],
+      "subjectAreas": [
+        "criminal-procedure"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 34 กำหนดให้ศาลอาญาคดีทุจริตและประพฤติมิชอบเป็นศาลที่มีเขตอำนาจเหนือคดีความผิดตามพระราชบัญญัตินี้ รวมถึงคดีที่ผู้กระทำความผิดเป็นบุคคลซึ่งอยู่ในอำนาจศาลทหารในขณะกระทำความผิดด้วย",
+      "definition": {
+        "text": "มาตรา 34 ให้ศาลอาญาคดีทุจริตและประพฤติมิชอบเป็นศาลที่มีเขตอำนาจเหนือคดีความผิดตามพระราชบัญญัตินี้ และให้รวมถึงคดีซึ่งผู้กระทำความผิดตามพระราชบัญญัตินี้เป็นบุคคลซึ่งอยู่ในอำนาจศาลทหารในขณะกระทำความผิดด้วย",
+        "provisions": [
+          "torture_34"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 4"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 34"
+        }
+      ],
+      "sections": [
+        {
+          "key": "scope",
+          "kind": "elements",
+          "label": "ขอบเขตเขตอำนาจศาล",
+          "body": "",
+          "items": [
+            {
+              "label": "คดีตามพระราชบัญญัตินี้ทุกคดี",
+              "text": "ศาลอาญาคดีทุจริตและประพฤติมิชอบมีเขตอำนาจเหนือคดีความผิดตามพระราชบัญญัตินี้",
+              "provisions": [
+                "torture_34"
+              ]
+            },
+            {
+              "label": "รวมถึงบุคคลที่อยู่ในอำนาจศาลทหาร",
+              "text": "ให้รวมถึงคดีซึ่งผู้กระทำความผิดเป็นบุคคลซึ่งอยู่ในอำนาจศาลทหารในขณะกระทำความผิดด้วย",
+              "provisions": [
+                "torture_34"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_34",
+          "role": "core",
+          "note": "เขตอำนาจศาลอาญาคดีทุจริตและประพฤติมิชอบ"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 34",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "thot-thorman-lae-kratham-hai-bukkhon-sunhai": {
+      "id": "atlas:concept/thot-thorman-lae-kratham-hai-bukkhon-sunhai",
+      "slug": "thot-thorman-lae-kratham-hai-bukkhon-sunhai",
+      "titleTH": "โทษฐานกระทำทรมานและกระทำให้บุคคลสูญหาย",
+      "titleEN": "Penalties for Torture and Enforced Disappearance",
+      "aliases": [],
+      "latin": [
+        "penalty structure"
+      ],
+      "subjectAreas": [
+        "criminal"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 35 และมาตรา 37 กำหนดโทษของความผิดฐานกระทำทรมานและความผิดฐานกระทำให้บุคคลสูญหายไว้ในอัตราเดียวกันเป็น 3 ชั้น ตามความร้ายแรงของผลที่เกิดขึ้นแก่ผู้ถูกกระทำ ตั้งแต่จำคุก 5-15 ปี ไปจนถึงจำคุกตลอดชีวิตหากเป็นเหตุให้ถึงแก่ความตาย",
+      "definition": {
+        "text": "มาตรา 35 วรรคหนึ่ง ผู้กระทำความผิดฐานกระทำทรมานตามมาตรา 5 ต้องระวางโทษจำคุกตั้งแต่ห้าปีถึงสิบห้าปี และปรับตั้งแต่หนึ่งแสนบาทถึงสามแสนบาท",
+        "provisions": [
+          "torture_35"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 5"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 35, 37"
+        }
+      ],
+      "sections": [
+        {
+          "key": "penalty-tiers",
+          "kind": "elements",
+          "label": "อัตราโทษ 3 ชั้น",
+          "body": "มาตรา 35 (กระทำทรมาน) และมาตรา 37 (กระทำให้บุคคลสูญหาย) กำหนดอัตราโทษไว้อย่างเดียวกัน",
+          "items": [
+            {
+              "label": "ฐานความผิด",
+              "text": "จำคุกตั้งแต่ห้าปีถึงสิบห้าปี และปรับตั้งแต่หนึ่งแสนบาทถึงสามแสนบาท",
+              "provisions": [
+                "torture_35",
+                "torture_37"
+              ]
+            },
+            {
+              "label": "เป็นเหตุให้อันตรายสาหัส",
+              "text": "จำคุกตั้งแต่สิบปีถึงยี่สิบห้าปี และปรับตั้งแต่สองแสนบาทถึงห้าแสนบาท",
+              "provisions": [
+                "torture_35",
+                "torture_37"
+              ]
+            },
+            {
+              "label": "เป็นเหตุให้ถึงแก่ความตาย",
+              "text": "จำคุกตั้งแต่สิบห้าปีถึงสามสิบปี หรือจำคุกตลอดชีวิต และปรับตั้งแต่สามแสนบาทถึงหนึ่งล้านบาท",
+              "provisions": [
+                "torture_35",
+                "torture_37"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_35",
+          "role": "core",
+          "note": "โทษฐานกระทำทรมาน"
+        },
+        {
+          "ref": "torture_37",
+          "role": "core",
+          "note": "โทษฐานกระทำให้บุคคลสูญหาย (อัตราเดียวกับมาตรา 35)"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 35",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 37",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "thot-kratham-hodrai-rai-manutsayatham": {
+      "id": "atlas:concept/thot-kratham-hodrai-rai-manutsayatham",
+      "slug": "thot-kratham-hodrai-rai-manutsayatham",
+      "titleTH": "โทษฐานกระทำการที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์",
+      "titleEN": "Penalty for Cruel, Inhuman, or Degrading Treatment",
+      "aliases": [],
+      "latin": [
+        "CIDT penalty"
+      ],
+      "subjectAreas": [
+        "criminal"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 36 กำหนดโทษของความผิดฐานกระทำการที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์ตามมาตรา 6 ไว้เบากว่าความผิดฐานกระทำทรมานอย่างมาก คือจำคุกไม่เกินสามปี หรือปรับไม่เกินหกหมื่นบาท หรือทั้งจำทั้งปรับ",
+      "definition": {
+        "text": "มาตรา 36 ผู้กระทำความผิดฐานกระทำการที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์ตามมาตรา 6 ต้องระวางโทษจำคุกไม่เกินสามปี หรือปรับไม่เกินหกหมื่นบาท หรือทั้งจำทั้งปรับ",
+        "provisions": [
+          "torture_36"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 5"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 36"
+        }
+      ],
+      "sections": [
+        {
+          "key": "penalty",
+          "kind": "consequences",
+          "label": "อัตราโทษ",
+          "body": "",
+          "items": [
+            {
+              "label": "โทษ",
+              "text": "จำคุกไม่เกินสามปี หรือปรับไม่เกินหกหมื่นบาท หรือทั้งจำทั้งปรับ",
+              "provisions": [
+                "torture_36"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_36",
+          "role": "core",
+          "note": "โทษฐานกระทำการที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 36",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "hetchakan-kratham-tor-bukkhon-prapang": {
+      "id": "atlas:concept/hetchakan-kratham-tor-bukkhon-prapang",
+      "slug": "hetchakan-kratham-tor-bukkhon-prapang",
+      "titleTH": "เหตุฉกรรจ์จากการกระทำต่อบุคคลเปราะบาง",
+      "titleEN": "Aggravating Circumstance: Offenses Committed Against Vulnerable Persons",
+      "aliases": [],
+      "latin": [
+        "aggravating circumstance"
+      ],
+      "subjectAreas": [
+        "criminal"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 38 กำหนดเหตุฉกรรจ์ให้ต้องระวางโทษหนักกว่าที่บัญญัติไว้ในมาตรา 35 มาตรา 36 หรือมาตรา 37 อีกกึ่งหนึ่ง หากการกระทำนั้นเป็นการกระทำแก่บุคคลอายุไม่เกินสิบแปดปี หญิงมีครรภ์ ผู้พิการทางร่างกายหรือจิตใจ หรือผู้ซึ่งพึ่งตนเองมิได้เพราะอายุหรือความป่วยเจ็บ",
+      "definition": {
+        "text": "มาตรา 38 วรรคหนึ่ง ถ้าการกระทำความผิดตามมาตรา 35 หรือมาตรา 36 เป็นการกระทำแก่บุคคลอายุไม่เกินสิบแปดปี หญิงมีครรภ์ ผู้พิการทางร่างกายหรือจิตใจ หรือผู้ซึ่งพึ่งตนเองมิได้เพราะอายุหรือความป่วยเจ็บ ผู้กระทำต้องระวางโทษหนักกว่าที่บัญญัติไว้ในมาตรานั้นกึ่งหนึ่ง",
+        "provisions": [
+          "torture_38"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 5"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 38"
+        }
+      ],
+      "sections": [
+        {
+          "key": "vulnerable-victims",
+          "kind": "elements",
+          "label": "กลุ่มบุคคลเปราะบางที่กฎหมายคุ้มครองเป็นพิเศษ",
+          "body": "",
+          "items": [
+            {
+              "label": "บุคคลเปราะบาง",
+              "text": "บุคคลอายุไม่เกินสิบแปดปี หญิงมีครรภ์ ผู้พิการทางร่างกายหรือจิตใจ หรือผู้ซึ่งพึ่งตนเองมิได้เพราะอายุหรือความป่วยเจ็บ",
+              "provisions": [
+                "torture_38"
+              ]
+            },
+            {
+              "label": "ผลต่อโทษ",
+              "text": "ผู้กระทำต้องระวางโทษหนักกว่าที่บัญญัติไว้ในมาตรา 35 มาตรา 36 หรือมาตรา 37 แล้วแต่กรณี อีกกึ่งหนึ่ง",
+              "provisions": [
+                "torture_38"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_38",
+          "role": "core",
+          "note": "เหตุฉกรรจ์จากการกระทำต่อบุคคลเปราะบาง"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 38",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "khwamrapphid-phusomkhop-lae-phusanapsanun": {
+      "id": "atlas:concept/khwamrapphid-phusomkhop-lae-phusanapsanun",
+      "slug": "khwamrapphid-phusomkhop-lae-phusanapsanun",
+      "titleTH": "ความรับผิดของผู้สมคบและผู้สนับสนุน",
+      "titleEN": "Liability of Conspirators and Accessories",
+      "aliases": [],
+      "latin": [
+        "conspiracy; aiding and abetting"
+      ],
+      "subjectAreas": [
+        "criminal"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 39 กำหนดโทษผู้สมคบเพื่อกระทำความผิดตามมาตรา 35 36 37 หรือ 38 ไว้หนึ่งในสามของโทษที่กำหนด แต่หากมีการกระทำความผิดสำเร็จเพราะการสมคบนั้น ผู้สมคบต้องรับโทษเต็มตามอัตราของความผิดนั้น เว้นแต่ผู้สมคบที่ขัดขวางทำให้ไม่บรรลุผล ศาลจะลงโทษน้อยกว่าที่กำหนดเพียงใดก็ได้ ส่วนมาตรา 40 กำหนดให้ผู้สนับสนุนรับโทษเช่นเดียวกับตัวการ",
+      "definition": {
+        "text": "มาตรา 39 วรรคหนึ่ง ผู้ใดสมคบเพื่อกระทำความผิดตามมาตรา 35 มาตรา 36 มาตรา 37 หรือมาตรา 38 ต้องระวางโทษหนึ่งในสามของโทษที่กำหนดไว้สำหรับความผิดนั้น",
+        "provisions": [
+          "torture_39"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 5"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 39-40"
+        }
+      ],
+      "sections": [
+        {
+          "key": "conspiracy",
+          "kind": "elements",
+          "label": "ความรับผิดของผู้สมคบ",
+          "body": "",
+          "items": [
+            {
+              "label": "สมคบแต่ยังไม่ได้กระทำ",
+              "text": "ผู้สมคบต้องระวางโทษหนึ่งในสามของโทษที่กำหนดไว้สำหรับความผิดนั้น",
+              "provisions": [
+                "torture_39"
+              ]
+            },
+            {
+              "label": "มีการกระทำผิดสำเร็จเพราะการสมคบ",
+              "text": "ผู้สมคบกันต้องระวางโทษตามที่กำหนดไว้สำหรับความผิดนั้นเต็มอัตรา",
+              "provisions": [
+                "torture_39"
+              ]
+            },
+            {
+              "label": "ผู้สมคบที่ขัดขวาง",
+              "text": "หากความผิดถึงขั้นลงมือกระทำแล้ว แต่เพราะการเข้าขัดขวางของผู้สมคบทำให้การกระทำนั้นไม่ตลอดหรือไม่บรรลุผล ศาลจะลงโทษผู้สมคบที่ขัดขวางนั้นน้อยกว่าที่กฎหมายกำหนดเพียงใดก็ได้",
+              "provisions": [
+                "torture_39"
+              ]
+            }
+          ]
+        },
+        {
+          "key": "accessory",
+          "kind": "elements",
+          "label": "ความรับผิดของผู้สนับสนุน",
+          "body": "",
+          "items": [
+            {
+              "label": "รับโทษเช่นเดียวกับตัวการ",
+              "text": "ผู้สนับสนุนในการกระทำความผิดตามมาตรา 35 มาตรา 36 มาตรา 37 หรือมาตรา 38 ต้องระวางโทษเช่นเดียวกับตัวการในความผิดนั้น",
+              "provisions": [
+                "torture_40"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_39",
+          "role": "core",
+          "note": "ความรับผิดของผู้สมคบ"
+        },
+        {
+          "ref": "torture_40",
+          "role": "core",
+          "note": "ความรับผิดของผู้สนับสนุน"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 39",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 40",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "het-lotthot-chak-kan-hai-khwamruammue": {
+      "id": "atlas:concept/het-lotthot-chak-kan-hai-khwamruammue",
+      "slug": "het-lotthot-chak-kan-hai-khwamruammue",
+      "titleTH": "เหตุลดโทษจากการให้ความร่วมมือ",
+      "titleEN": "Mitigating Circumstance: Cooperation Leading to Discovery",
+      "aliases": [],
+      "latin": [
+        "mitigation for cooperation"
+      ],
+      "subjectAreas": [
+        "criminal"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 41 ให้ศาลมีอำนาจลงโทษน้อยกว่าที่กฎหมายกำหนดได้ หากผู้กระทำความผิดตามมาตรา 37 38 วรรคสอง 39 หรือ 40 ช่วยให้ค้นพบผู้ถูกกระทำให้สูญหายก่อนศาลชั้นต้นพิพากษาโดยผู้นั้นมิได้รับอันตรายสาหัส หรือให้ข้อมูลสำคัญและเป็นประโยชน์ในการดำเนินคดี",
+      "definition": {
+        "text": "มาตรา 41 ถ้าผู้กระทำความผิดตามมาตรา 37 มาตรา 38 วรรคสอง มาตรา 39 หรือมาตรา 40 ช่วยให้มีการค้นพบผู้ถูกกระทำให้สูญหายก่อนศาลชั้นต้นพิพากษา โดยผู้นั้นมิได้รับอันตรายสาหัสหรือตกอยู่ในภาวะอันใกล้จะเป็นอันตรายต่อชีวิต หรือให้ข้อมูลที่สำคัญและเป็นประโยชน์ในการดำเนินคดี ศาลจะลงโทษผู้กระทำความผิดน้อยกว่าที่กฎหมายกำหนดเพียงใดก็ได้",
+        "provisions": [
+          "torture_41"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 5"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 41"
+        }
+      ],
+      "sections": [
+        {
+          "key": "grounds",
+          "kind": "elements",
+          "label": "เงื่อนไขการลดโทษ (อย่างใดอย่างหนึ่ง)",
+          "body": "",
+          "items": [
+            {
+              "label": "ช่วยให้ค้นพบผู้สูญหายก่อนพิพากษา",
+              "text": "ช่วยให้มีการค้นพบผู้ถูกกระทำให้สูญหายก่อนศาลชั้นต้นพิพากษา โดยผู้นั้นมิได้รับอันตรายสาหัสหรือตกอยู่ในภาวะอันใกล้จะเป็นอันตรายต่อชีวิต",
+              "provisions": [
+                "torture_41"
+              ]
+            },
+            {
+              "label": "ให้ข้อมูลสำคัญเป็นประโยชน์ต่อคดี",
+              "text": "ให้ข้อมูลที่สำคัญและเป็นประโยชน์ในการดำเนินคดี",
+              "provisions": [
+                "torture_41"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_41",
+          "role": "core",
+          "note": "เหตุลดโทษจากการให้ความร่วมมือค้นหาผู้สูญหาย/ให้ข้อมูล"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 41",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
+    },
+    "khwamrapphid-phubangkhapbancha": {
+      "id": "atlas:concept/khwamrapphid-phubangkhapbancha",
+      "slug": "khwamrapphid-phubangkhapbancha",
+      "titleTH": "ความรับผิดของผู้บังคับบัญชา",
+      "titleEN": "Command Responsibility",
+      "aliases": [],
+      "latin": [
+        "command responsibility"
+      ],
+      "subjectAreas": [
+        "criminal"
+      ],
+      "subjectTags": [
+        "anti-torture-law"
+      ],
+      "status": "published",
+      "summary": "มาตรา 42 กำหนดความรับผิดของผู้บังคับบัญชาที่ทราบว่าผู้ใต้บังคับบัญชาของตนจะกระทำหรือได้กระทำความผิดฐานทรมาน กระทำการโหดร้ายฯ หรือกระทำให้บุคคลสูญหาย แต่ไม่ดำเนินการที่จำเป็นและเหมาะสมเพื่อป้องกันหรือระงับ หรือไม่ดำเนินการสอบสวนและดำเนินคดี ต้องระวางโทษกึ่งหนึ่งของโทษที่กำหนดไว้สำหรับความผิดนั้น",
+      "definition": {
+        "text": "มาตรา 42 วรรคหนึ่ง ผู้บังคับบัญชาผู้ใดทราบว่าผู้ใต้บังคับบัญชาซึ่งอยู่ภายใต้การบังคับบัญชาของตนจะกระทำหรือได้กระทำความผิดตามมาตรา 35 มาตรา 36 มาตรา 37 หรือมาตรา 38 และไม่ดำเนินการที่จำเป็นและเหมาะสมเพื่อป้องกันหรือระงับการกระทำความผิด หรือไม่ดำเนินการหรือส่งเรื่องให้ดำเนินการสอบสวนและดำเนินคดีตามกฎหมาย ต้องระวางโทษกึ่งหนึ่งของโทษที่กำหนดไว้สำหรับความผิดนั้น",
+        "provisions": [
+          "torture_42"
+        ],
+        "lectureRefs": [],
+        "needsSourceVerification": true
+      },
+      "structuralAnchor": [
+        {
+          "collection": "torture",
+          "path": [
+            "หมวด 5"
+          ],
+          "note": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 42"
+        }
+      ],
+      "sections": [
+        {
+          "key": "scope-of-commander",
+          "kind": "persons",
+          "label": "ผู้บังคับบัญชาที่ต้องรับผิดชอบ",
+          "body": "",
+          "items": [
+            {
+              "label": "ต้องมีหน้าที่และอำนาจควบคุมจริง",
+              "text": "ผู้บังคับบัญชาตามวรรคหนึ่งจะต้องเป็นผู้ซึ่งมีหน้าที่รับผิดชอบและมีอำนาจควบคุมการกระทำซึ่งเกี่ยวข้องกับความผิดฐานกระทำทรมาน ความผิดฐานกระทำการที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีความเป็นมนุษย์ หรือความผิดฐานกระทำให้บุคคลสูญหาย",
+              "provisions": [
+                "torture_42"
+              ]
+            }
+          ]
+        }
+      ],
+      "provisions": [
+        {
+          "ref": "torture_42",
+          "role": "core",
+          "note": "ความรับผิดของผู้บังคับบัญชาที่ละเว้นการป้องกัน/ระงับ/ดำเนินคดี"
+        }
+      ],
+      "featuredCases": [],
+      "sources": [
+        {
+          "kind": "primary",
+          "text": "พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 มาตรา 42",
+          "via": "codex-data.json"
+        },
+        {
+          "kind": "todo",
+          "text": "ไม่มี lectureNotes หรือคำพิพากษาศาลไทยที่เกี่ยวข้องในคลังข้อมูลสำหรับหมวดนี้ เรียบเรียงจากตัวบทมาตราโดยตรงเท่านั้น",
+          "needsSourceVerification": true
+        }
+      ],
+      "authoring": {
+        "provenance": "เรียบเรียงจากตัวบทพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ตามที่ปรากฏใน codex-data.json โดยตรง ไม่มีการเพิ่มข้อเท็จจริง หลักวิชาการ หรือคำพิพากษาที่ไม่มีในตัวบท — Encyclopedia coverage sprint (torture): คัดเฉพาะเนื้อหาที่ตัวบทระบุไว้จริง ไม่ขยายความเกินตัวบท",
+        "verifiedSections": [],
+        "needsSourceVerification": [],
+        "policy": "หากเนื้อหาส่วนใดไม่มีฐานเพียงพอในตัวบท+lectureNotes ให้ทำ needsSourceVerification:true ไว้ ห้ามเดา"
+      },
+      "lectureRefs": [],
+      "relatedConcepts": []
     }
   }
 }

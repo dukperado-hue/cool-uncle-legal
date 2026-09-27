@@ -3655,6 +3655,178 @@
         }
       ],
       "topics": []
+    },
+    "torture-core-offenses": {
+      "id": "atlas:cluster/torture-core-offenses",
+      "slug": "torture-core-offenses",
+      "titleTH": "การทรมาน การกระทำที่โหดร้ายไร้มนุษยธรรม และการบังคับบุคคลสูญหาย: ฐานความผิดหลัก",
+      "titleEN": "Torture, CIDT, and Enforced Disappearance: Core Offenses",
+      "status": "published",
+      "subjectAreas": [
+        "criminal"
+      ],
+      "description": "กลุ่มแนวคิดตามหมวด 1 บททั่วไปของพระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565 ว่าด้วยนิยามหลัก ฐานความผิด 3 ฐาน (กระทำทรมาน กระทำการที่โหดร้ายไร้มนุษยธรรม กระทำให้บุคคลสูญหาย) เขตอำนาจนอกราชอาณาจักร และข้อห้ามอ้างเหตุพิเศษเพื่อความชอบด้วยกฎหมาย",
+      "concepts": [
+        {
+          "ref": "atlas:concept/niyam-phutrongan-tam-phrb-torture",
+          "note": "จุดตั้งต้น: นิยามหลักที่ใช้ตลอดทั้งกฎหมาย"
+        },
+        {
+          "ref": "atlas:concept/khwamphid-thorman",
+          "note": "ฐานความผิดที่ 1: กระทำทรมาน"
+        },
+        {
+          "ref": "atlas:concept/khwamphid-kratham-hodrai-rai-manutsayatham",
+          "note": "ฐานความผิดที่ 2: กระทำการที่โหดร้ายไร้มนุษยธรรม"
+        },
+        {
+          "ref": "atlas:concept/khwamphid-kratham-hai-bukkhon-sunhai",
+          "note": "ฐานความผิดที่ 3: กระทำให้บุคคลสูญหาย"
+        },
+        {
+          "ref": "atlas:concept/khetamnat-nok-ratchaanachak-torture",
+          "note": "เขตอำนาจนอกราชอาณาจักรเหนือทั้ง 3 ฐานความผิด"
+        },
+        {
+          "ref": "atlas:concept/kho-ham-ang-hetuphiset-pheua-khwamchopduaikotmai",
+          "note": "หลักไม่มีข้อยกเว้นแม้ในภาวะสงครามหรือฉุกเฉิน"
+        }
+      ],
+      "topics": []
+    },
+    "torture-non-refoulement": {
+      "id": "atlas:cluster/torture-non-refoulement",
+      "slug": "torture-non-refoulement",
+      "titleTH": "หลักห้ามผลักดันกลับและข้อจำกัดการอ้างเหตุทางการเมืองในการส่งผู้ร้ายข้ามแดน",
+      "titleEN": "Non-Refoulement and Limits on the Political-Offense Defense in Extradition",
+      "status": "published",
+      "subjectAreas": [
+        "criminal-procedure"
+      ],
+      "description": "สองกลไกข้ามพรมแดนของพระราชบัญญัตินี้: มาตรา 9 ตัดข้อต่อสู้เรื่อง \"ความผิดทางการเมือง\" เพื่อไม่ให้ผู้กระทำความผิดหลบเลี่ยงการส่งผู้ร้ายข้ามแดนหรือความร่วมมือระหว่างประเทศ ในขณะที่มาตรา 13 ห้ามรัฐไทยส่งบุคคลใดกลับไปเผชิญอันตรายจากการทรมานหรือถูกบังคับให้สูญหายในอีกรัฐหนึ่ง",
+      "concepts": [
+        {
+          "ref": "atlas:concept/khoyokwen-khwamphid-thangkanmueang-nai-kan-song-phurai-khamdaen",
+          "note": "ตัดข้อต่อสู้เรื่องความผิดทางการเมืองของผู้กระทำผิด"
+        },
+        {
+          "ref": "atlas:concept/lak-ham-phlakdan-klap-pai-choeuan-antarai",
+          "note": "หลักห้ามผลักดันกลับไปเผชิญอันตราย (non-refoulement)"
+        }
+      ],
+      "topics": []
+    },
+    "torture-oversight-committee": {
+      "id": "atlas:cluster/torture-oversight-committee",
+      "slug": "torture-oversight-committee",
+      "titleTH": "คณะกรรมการป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย",
+      "titleEN": "The Anti-Torture and Enforced Disappearance Prevention Committee",
+      "status": "published",
+      "subjectAreas": [
+        "public-administrative"
+      ],
+      "description": "กลุ่มแนวคิดตามหมวด 2 ว่าด้วยกลไกกำกับดูแลระดับชาติ: องค์ประกอบคณะกรรมการ คุณสมบัติและวาระของกรรมการผู้ทรงคุณวุฒิ หน้าที่และอำนาจของคณะกรรมการ การประชุม และงานธุรการของกรมคุ้มครองสิทธิและเสรีภาพ",
+      "concepts": [
+        {
+          "ref": "atlas:concept/ongprakop-khanakammakan-pongkan-thorman",
+          "note": "จุดตั้งต้น: องค์ประกอบคณะกรรมการ"
+        },
+        {
+          "ref": "atlas:concept/khunsombat-lae-laksanatongham-kammakan-phutrongkhunwuti",
+          "note": "คุณสมบัติของกรรมการผู้ทรงคุณวุฒิ"
+        },
+        {
+          "ref": "atlas:concept/wara-phonchak-lae-taengtangthaen-kammakan",
+          "note": "วาระ การพ้นตำแหน่ง และการแต่งตั้งแทน"
+        },
+        {
+          "ref": "atlas:concept/natthi-lae-amnat-khanakammakan-pongkan-thorman",
+          "note": "หน้าที่และอำนาจของคณะกรรมการ"
+        },
+        {
+          "ref": "atlas:concept/kan-prachum-lae-ongprachum-khanakammakan",
+          "note": "องค์ประชุมและการวินิจฉัยชี้ขาด"
+        },
+        {
+          "ref": "atlas:concept/natthi-thurakan-krom-khumkhrong-sitthi-lae-seriphap",
+          "note": "งานธุรการโดยกรมคุ้มครองสิทธิและเสรีภาพ"
+        }
+      ],
+      "topics": []
+    },
+    "torture-custody-prosecution-penalties": {
+      "id": "atlas:cluster/torture-custody-prosecution-penalties",
+      "slug": "torture-custody-prosecution-penalties",
+      "titleTH": "มาตรการป้องกันระหว่างควบคุมตัว การดำเนินคดี และบทกำหนดโทษ",
+      "titleEN": "Custody Safeguards, Prosecution, and Penalties",
+      "status": "published",
+      "subjectAreas": [
+        "criminal-procedure"
+      ],
+      "description": "กลุ่มแนวคิดตามหมวด 3-5 และบทเฉพาะกาล ครอบคลุมหน้าที่บันทึกและแจ้งเหตุขณะควบคุมตัว สิทธิเข้าถึงข้อมูลและคำร้องต่อศาลเพื่อยุติการทรมาน หน้าที่แจ้งเหตุของบุคคลทั่วไป การสืบสวนต่อเนื่องและอายุความคดีบังคับบุคคลสูญหาย ตัวพนักงานสอบสวนและศาลที่มีเขตอำนาจ ไปจนถึงอัตราโทษ เหตุฉกรรจ์ ความรับผิดของผู้สมคบ/ผู้สนับสนุน เหตุลดโทษ และความรับผิดของผู้บังคับบัญชา",
+      "concepts": [
+        {
+          "ref": "atlas:concept/natthi-banthuek-lae-chaengehet-nai-kan-khuapkhumtua",
+          "note": "จุดตั้งต้น: บันทึกและแจ้งเหตุขณะควบคุมตัว"
+        },
+        {
+          "ref": "atlas:concept/sitthi-khaothueng-khomun-phuthuk-khuapkhumtua",
+          "note": "สิทธิเข้าถึงข้อมูลและข้อยกเว้น"
+        },
+        {
+          "ref": "atlas:concept/kham-rong-tor-san-pheua-yuti-kan-thorman",
+          "note": "คำร้องต่อศาลและคำสั่งคุ้มครองชั่วคราว"
+        },
+        {
+          "ref": "atlas:concept/natthi-chaeng-het-bukkhonthuapai-lae-khumkhrong-phuchaeng",
+          "note": "หน้าที่แจ้งเหตุของบุคคลทั่วไปและความคุ้มครองผู้แจ้ง"
+        },
+        {
+          "ref": "atlas:concept/natthi-suepsuan-tonueang-lae-ayukhwam-bangkhap-sunhai",
+          "note": "การสืบสวนต่อเนื่องและอายุความคดีบังคับบุคคลสูญหาย"
+        },
+        {
+          "ref": "atlas:concept/khwampenphusiahai-khayai-thueng-yat-tam-wiaya",
+          "note": "ขยายความเป็นผู้เสียหายถึงญาติ"
+        },
+        {
+          "ref": "atlas:concept/phanakngan-sopsuan-phurapphitchop-lae-khetamnat",
+          "note": "พนักงานสอบสวนผู้รับผิดชอบและเขตอำนาจ"
+        },
+        {
+          "ref": "atlas:concept/kan-tidtam-khadi-lae-yiaoya-phusiahai",
+          "note": "การติดตามคดีและการเยียวยาผู้เสียหาย"
+        },
+        {
+          "ref": "atlas:concept/khetamnat-san-aya-khadi-thutcharit-tortore",
+          "note": "เขตอำนาจศาลอาญาคดีทุจริตและประพฤติมิชอบ"
+        },
+        {
+          "ref": "atlas:concept/thot-thorman-lae-kratham-hai-bukkhon-sunhai",
+          "note": "อัตราโทษฐานทรมานและบังคับบุคคลสูญหาย"
+        },
+        {
+          "ref": "atlas:concept/thot-kratham-hodrai-rai-manutsayatham",
+          "note": "อัตราโทษฐานกระทำการที่โหดร้ายไร้มนุษยธรรม"
+        },
+        {
+          "ref": "atlas:concept/hetchakan-kratham-tor-bukkhon-prapang",
+          "note": "เหตุฉกรรจ์จากการกระทำต่อบุคคลเปราะบาง"
+        },
+        {
+          "ref": "atlas:concept/khwamrapphid-phusomkhop-lae-phusanapsanun",
+          "note": "ความรับผิดของผู้สมคบและผู้สนับสนุน"
+        },
+        {
+          "ref": "atlas:concept/het-lotthot-chak-kan-hai-khwamruammue",
+          "note": "เหตุลดโทษจากการให้ความร่วมมือ"
+        },
+        {
+          "ref": "atlas:concept/khwamrapphid-phubangkhapbancha",
+          "note": "ความรับผิดของผู้บังคับบัญชา"
+        }
+      ],
+      "topics": []
     }
   }
 }
