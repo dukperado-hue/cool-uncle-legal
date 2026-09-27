@@ -92,6 +92,12 @@
       "titleTH": "สิ่งแวดล้อม",
       "order": 15,
       "hue": 140
+    },
+    {
+      "key": "intellectual-property",
+      "titleTH": "ทรัพย์สินทางปัญญา",
+      "order": 16,
+      "hue": 256
     }
   ]
 }

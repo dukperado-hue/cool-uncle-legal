@@ -2451,6 +2451,286 @@
         }
       ],
       "topics": []
+    },
+    "patent-invention-lifecycle": {
+      "id": "atlas:cluster/patent-invention-lifecycle",
+      "slug": "patent-invention-lifecycle",
+      "titleTH": "สิทธิบัตรการประดิษฐ์: เงื่อนไข การขอ การตรวจสอบ และการออกสิทธิบัตร",
+      "titleEN": "Patents: Requirements, Application, Examination and Grant",
+      "status": "published",
+      "subjectAreas": [
+        "commercial-ip"
+      ],
+      "description": "กลุ่มแนวคิดสิทธิบัตรการประดิษฐ์ตามพ.ร.บ.สิทธิบัตร พ.ศ. 2522 จัดเรียงตามวงจรตั้งแต่ความหมายของสิทธิบัตรและการประดิษฐ์ เงื่อนไขของการประดิษฐ์ที่ขอรับได้ ผู้มีสิทธิขอรับ คำขอ การตรวจสอบ การคัดค้าน จนถึงการออกสิทธิบัตร",
+      "concepts": [
+        {
+          "ref": "atlas:concept/sitthibat-kan-pradit",
+          "note": "จุดตั้งต้น: สิทธิบัตร"
+        },
+        {
+          "ref": "atlas:concept/kan-pradit-lae-kammawithi",
+          "note": "นิยามการประดิษฐ์และกรรมวิธี"
+        },
+        {
+          "ref": "atlas:concept/laksana-kan-pradit-thi-khor-rap-sitthibat",
+          "note": "สามลักษณะของการประดิษฐ์"
+        },
+        {
+          "ref": "atlas:concept/kan-pradit-khuen-mai",
+          "note": "ขึ้นใหม่"
+        },
+        {
+          "ref": "atlas:concept/khan-kan-pradit-sung-khuen",
+          "note": "ขั้นการประดิษฐ์สูงขึ้น"
+        },
+        {
+          "ref": "atlas:concept/prayuk-nai-thang-utsahakam",
+          "note": "ประยุกต์ในทางอุตสาหกรรม"
+        },
+        {
+          "ref": "atlas:concept/kan-pradit-thi-mai-dairap-khumkhrong",
+          "note": "การประดิษฐ์ที่ไม่ได้รับความคุ้มครอง"
+        },
+        {
+          "ref": "atlas:concept/phu-mi-sitthi-khor-sitthibat",
+          "note": "ผู้มีสิทธิขอรับ"
+        },
+        {
+          "ref": "atlas:concept/kan-pradit-khong-luk-chang",
+          "note": "การประดิษฐ์ของลูกจ้าง"
+        },
+        {
+          "ref": "atlas:concept/phu-pradit-ruam-lae-kan-pradit-yang-diao-kan",
+          "note": "ผู้ประดิษฐ์ร่วมและประดิษฐ์อย่างเดียวกัน"
+        },
+        {
+          "ref": "atlas:concept/kham-khor-rap-sitthibat",
+          "note": "คำขอรับสิทธิบัตร"
+        },
+        {
+          "ref": "atlas:concept/kan-thue-wan-yuen-kham-khor",
+          "note": "การถือวันยื่นคำขอ"
+        },
+        {
+          "ref": "atlas:concept/kan-raksa-khwam-lap-khor-sitthibat",
+          "note": "การรักษาความลับ"
+        },
+        {
+          "ref": "atlas:concept/kan-truat-sop-lae-prakat-khor-sitthibat",
+          "note": "ตรวจสอบและประกาศโฆษณา"
+        },
+        {
+          "ref": "atlas:concept/kan-khadkhan-khor-sitthibat",
+          "note": "การคัดค้าน"
+        },
+        {
+          "ref": "atlas:concept/kan-ok-sitthibat",
+          "note": "การออกสิทธิบัตร"
+        }
+      ],
+      "topics": []
+    },
+    "patent-rights-licensing-enforcement": {
+      "id": "atlas:cluster/patent-rights-licensing-enforcement",
+      "slug": "patent-rights-licensing-enforcement",
+      "titleTH": "สิทธิบัตร: สิทธิ การอนุญาต การใช้สิทธิโดยไม่ต้องยินยอม การเพิกถอน และการบังคับสิทธิ",
+      "titleEN": "Patents: Rights, Licensing, Compulsory Use, Revocation and Enforcement",
+      "status": "published",
+      "subjectAreas": [
+        "commercial-ip"
+      ],
+      "description": "กลุ่มแนวคิดหลังการออกสิทธิบัตรตามพ.ร.บ.สิทธิบัตร ได้แก่ สิทธิและข้อยกเว้นของผู้ทรงสิทธิ ขอบเขตตามข้อถือสิทธิ การอนุญาตและโอน ค่าธรรมเนียมรายปี การขอใช้สิทธิและการใช้สิทธิโดยรัฐ ความไม่สมบูรณ์และการเพิกถอน การบังคับสิทธิ และความผิด",
+      "concepts": [
+        {
+          "ref": "atlas:concept/sitthi-khong-phu-thong-sitthibat",
+          "note": "สิทธิของผู้ทรงสิทธิบัตร"
+        },
+        {
+          "ref": "atlas:concept/khopkhet-kan-khumkhrong-khothue-sitthi",
+          "note": "ขอบเขตตามข้อถือสิทธิ"
+        },
+        {
+          "ref": "atlas:concept/kan-kratham-kon-wan-ok-sitthibat",
+          "note": "การกระทำก่อนวันออกสิทธิบัตร"
+        },
+        {
+          "ref": "atlas:concept/kan-anuyat-lae-kan-on-sitthibat",
+          "note": "อนุญาตและโอน"
+        },
+        {
+          "ref": "atlas:concept/kha-thamniam-rai-pi-sitthibat",
+          "note": "ค่าธรรมเนียมรายปี"
+        },
+        {
+          "ref": "atlas:concept/kan-khor-chai-sitthi-tam-sitthibat",
+          "note": "การขอใช้สิทธิ"
+        },
+        {
+          "ref": "atlas:concept/kan-chai-sitthi-doi-rat-lae-phawa-chukchoen",
+          "note": "การใช้สิทธิโดยรัฐ"
+        },
+        {
+          "ref": "atlas:concept/kan-phoek-thon-sitthibat",
+          "note": "ไม่สมบูรณ์และเพิกถอน"
+        },
+        {
+          "ref": "atlas:concept/kan-bangkhab-sitthibat-lae-kha-siahai",
+          "note": "การบังคับสิทธิ"
+        },
+        {
+          "ref": "atlas:concept/khwam-phit-tam-phor-ror-bor-sitthibat",
+          "note": "ความผิดและโทษ"
+        }
+      ],
+      "topics": []
+    },
+    "patent-design-petty-committee": {
+      "id": "atlas:cluster/patent-design-petty-committee",
+      "slug": "patent-design-petty-committee",
+      "titleTH": "สิทธิบัตรการออกแบบ อนุสิทธิบัตร และคณะกรรมการสิทธิบัตร",
+      "titleEN": "Design Patents, Petty Patents and the Patent Committee",
+      "status": "published",
+      "subjectAreas": [
+        "commercial-ip"
+      ],
+      "description": "กลุ่มแนวคิดส่วนอื่นของพ.ร.บ.สิทธิบัตรที่แยกจากสิทธิบัตรการประดิษฐ์ ได้แก่ สิทธิบัตรการออกแบบผลิตภัณฑ์ (หมวด 3) อนุสิทธิบัตร (หมวด 3 ทวิ) และคณะกรรมการสิทธิบัตร (หมวด 4)",
+      "concepts": [
+        {
+          "ref": "atlas:concept/sitthibat-kan-ok-baep-phalittaphan",
+          "note": "สิทธิบัตรการออกแบบผลิตภัณฑ์"
+        },
+        {
+          "ref": "atlas:concept/anu-sitthibat",
+          "note": "อนุสิทธิบัตร"
+        },
+        {
+          "ref": "atlas:concept/khana-kammakan-sitthibat",
+          "note": "คณะกรรมการสิทธิบัตร"
+        }
+      ],
+      "topics": []
+    },
+    "trademark-registrability-and-registration": {
+      "id": "atlas:cluster/trademark-registrability-and-registration",
+      "slug": "trademark-registrability-and-registration",
+      "titleTH": "เครื่องหมายการค้า: นิยาม เงื่อนไข การขอ การคัดค้าน และการจดทะเบียน",
+      "titleEN": "Trademarks: Definitions, Requirements, Application, Opposition and Registration",
+      "status": "published",
+      "subjectAreas": [
+        "commercial-ip"
+      ],
+      "description": "กลุ่มแนวคิดการจดทะเบียนเครื่องหมายการค้าตามพ.ร.บ.เครื่องหมายการค้า พ.ศ. 2534 ตั้งแต่นิยามและเงื่อนไขของเครื่องหมายที่รับจดทะเบียนได้ ลักษณะบ่งเฉพาะ เครื่องหมายต้องห้าม เครื่องหมายเหมือนหรือคล้าย คำขอ คำสั่งนายทะเบียน การประกาศโฆษณาและคัดค้าน จนถึงการจดทะเบียน",
+      "concepts": [
+        {
+          "ref": "atlas:concept/tm-khruangmai-kankha",
+          "note": "จุดตั้งต้น: นิยามเครื่องหมาย"
+        },
+        {
+          "ref": "atlas:concept/tm-laksana-phuek-chotabian",
+          "note": "สามเงื่อนไขการจดทะเบียน"
+        },
+        {
+          "ref": "atlas:concept/tm-laksana-bongchapho",
+          "note": "ลักษณะบ่งเฉพาะ"
+        },
+        {
+          "ref": "atlas:concept/tm-laksana-tonghaam",
+          "note": "เครื่องหมายต้องห้าม"
+        },
+        {
+          "ref": "atlas:concept/tm-muean-rue-khlai",
+          "note": "เหมือนหรือคล้าย"
+        },
+        {
+          "ref": "atlas:concept/tm-kham-khor-chotabian",
+          "note": "คำขอจดทะเบียน"
+        },
+        {
+          "ref": "atlas:concept/tm-kham-sang-nai-thabian",
+          "note": "คำสั่งนายทะเบียนและอุทธรณ์"
+        },
+        {
+          "ref": "atlas:concept/tm-khadkhan-khruangmai",
+          "note": "ประกาศโฆษณาและคัดค้าน"
+        },
+        {
+          "ref": "atlas:concept/tm-chotabian-khruangmai",
+          "note": "การจดทะเบียนและหนังสือสำคัญ"
+        }
+      ],
+      "topics": []
+    },
+    "trademark-rights-and-lifecycle": {
+      "id": "atlas:cluster/trademark-rights-and-lifecycle",
+      "slug": "trademark-rights-and-lifecycle",
+      "titleTH": "เครื่องหมายการค้า: สิทธิ การโอน การอนุญาต การต่ออายุ และการเพิกถอน",
+      "titleEN": "Trademarks: Rights, Transfer, Licensing, Renewal and Cancellation",
+      "status": "published",
+      "subjectAreas": [
+        "commercial-ip"
+      ],
+      "description": "กลุ่มแนวคิดหลังการจดทะเบียนเครื่องหมายการค้า ได้แก่ สิทธิของเจ้าของที่จดทะเบียน เครื่องหมายที่ไม่ได้จดทะเบียน การโอนและรับมรดก การอนุญาตให้ใช้ อายุและการต่ออายุ และการเพิกถอนการจดทะเบียน",
+      "concepts": [
+        {
+          "ref": "atlas:concept/tm-sitthi-chao-khong-khruangmai",
+          "note": "สิทธิของเจ้าของ"
+        },
+        {
+          "ref": "atlas:concept/tm-khruangmai-mai-chotabian",
+          "note": "เครื่องหมายที่ไม่ได้จดทะเบียน"
+        },
+        {
+          "ref": "atlas:concept/tm-kan-on-khruangmai",
+          "note": "การโอนและรับมรดก"
+        },
+        {
+          "ref": "atlas:concept/tm-sanya-anuyat-chai-khruangmai",
+          "note": "อนุญาตให้ใช้"
+        },
+        {
+          "ref": "atlas:concept/tm-ayu-lae-tor-ayu-khruangmai",
+          "note": "อายุและต่ออายุ"
+        },
+        {
+          "ref": "atlas:concept/tm-phoek-thon-chotabian",
+          "note": "เพิกถอนการจดทะเบียน"
+        }
+      ],
+      "topics": []
+    },
+    "trademark-other-marks-committee-offences": {
+      "id": "atlas:cluster/trademark-other-marks-committee-offences",
+      "slug": "trademark-other-marks-committee-offences",
+      "titleTH": "เครื่องหมายบริการ เครื่องหมายรับรอง เครื่องหมายร่วม คณะกรรมการ และความผิด",
+      "titleEN": "Service, Certification and Collective Marks; Committee; Offences",
+      "status": "published",
+      "subjectAreas": [
+        "commercial-ip"
+      ],
+      "description": "กลุ่มแนวคิดส่วนอื่นของพ.ร.บ.เครื่องหมายการค้า ได้แก่ เครื่องหมายบริการ เครื่องหมายรับรอง เครื่องหมายร่วม คณะกรรมการเครื่องหมายการค้า และความผิดกับโทษ",
+      "concepts": [
+        {
+          "ref": "atlas:concept/tm-khruangmai-borikan",
+          "note": "เครื่องหมายบริการ"
+        },
+        {
+          "ref": "atlas:concept/tm-khruangmai-rap-rong",
+          "note": "เครื่องหมายรับรอง"
+        },
+        {
+          "ref": "atlas:concept/tm-khruangmai-ruam",
+          "note": "เครื่องหมายร่วม"
+        },
+        {
+          "ref": "atlas:concept/tm-khana-kammakan-khruangmai",
+          "note": "คณะกรรมการ"
+        },
+        {
+          "ref": "atlas:concept/tm-khwam-phit-khruangmai",
+          "note": "ความผิดและโทษ"
+        }
+      ],
+      "topics": []
     }
   }
 }
