@@ -333,7 +333,16 @@
       // sized and weighted to be recognisable at a glance, without taking on
       // an accent colour that would compete with the statutory text below it.
       '.atlas-provision-view-heading{margin:0 0 10px;font-size:32px;font-weight:800;',
-      '  line-height:1.2;letter-spacing:-.01em;color:var(--ink,#1f2430);}',
+      '  line-height:1.3;letter-spacing:-.01em;color:var(--ink,#1f2430);',
+      '  overflow-wrap:break-word;}',
+      // F-articleTitle — the curated title trails the มาตรา number inside the
+      // SAME heading (never a floating paragraph). Lighter weight + smaller
+      // size than the number keeps the number the primary anchor per the
+      // comment above; still var(--ink), not the brand accent, so it does not
+      // compete with the statutory text that follows.
+      '.atlas-provision-view-heading-sep{font-weight:400;color:var(--muted,#5b6472);}',
+      '.atlas-provision-view-heading-title{font-size:22px;font-weight:600;',
+      '  color:var(--ink,#1f2430);letter-spacing:0;}',
       '.atlas-provision-view-badge{display:inline-block;margin-left:10px;font-size:11.5px;font-weight:600;',
       '  padding:2px 9px;border-radius:999px;background:var(--chip,#f2ede1);color:var(--muted,#5b6472);',
       '  vertical-align:middle;}',
@@ -800,6 +809,16 @@
     var h = make('h2', 'atlas-provision-view-heading');
     h.setAttribute('tabindex', '-1');
     h.appendChild(doc.createTextNode((resolved.unit || 'มาตรา') + ' ' + resolved.number));
+    // F-articleTitle — codex-data.json articles.<n>.articleTitle, when present,
+    // trails the มาตรา number INSIDE this same heading (never a separate
+    // floating element). No schema change: reads the existing public field
+    // as-is. Absent on a collection/article → silently falls back to the
+    // number-only heading exactly as before.
+    var articleTitle = resolved.article && resolved.article.articleTitle;
+    if (typeof articleTitle === 'string' && articleTitle.trim()) {
+      h.appendChild(make('span', 'atlas-provision-view-heading-sep', ' — '));
+      h.appendChild(make('span', 'atlas-provision-view-heading-title', articleTitle.trim()));
+    }
     if (resolved.cancelled) {
       h.appendChild(make('span', 'atlas-provision-view-badge', 'ยกเลิกแล้ว'));
     }
