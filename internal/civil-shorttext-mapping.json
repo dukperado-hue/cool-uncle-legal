@@ -1,0 +1,4146 @@
+[
+ {
+  "collection": "civil",
+  "article": "4",
+  "shortText": "ไม่มีกม.ที่จะยกมาปรับได้ให้ทำตามจารีต>ถ้าไม่มีก็ให้อาศัยกม.ใกล้เคียงอย่างยิ่ง > หลักทั่วไป",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "5",
+  "shortText": "ทุกคนต้องกระทำโดยสุจริต",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "6",
+  "shortText": "ให้สันนิษฐานไว้ก่อนว่าบุคคลทุกคนทำการโดยสุจริต",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "7",
+  "shortText": "ดอกเบี้ยไม่เกินร้อยละ...",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "8",
+  "shortText": "เหตุสุดวิสัย = เหตุให้ผลพิบัติ, เหตุที่ไม่อาจจัดการระวังตามสมควรได้จากบุคคลในฐานะนั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "9",
+  "shortText": "ลายพิมพ์นิ้วมือ,ตราประทับ+พยานลงลมช.รับรองถือเสมอลมช.",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "10",
+  "shortText": "ตีความได้หลายนัย ให้เลือกทางที่เป็นผลบังคับได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "12",
+  "shortText": "ตัวเลข-ตัวอักษรไม่ตรงกัน+ไม่อาจทราบเจตนาที่แท้จริงได้ให้ถือเอา > ตามที่เป็นตัวอักษร",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "15",
+  "shortText": "สภาพบุคคลเริ่มแต่คลอด,อยู่รอดเป็นทารกและสิ้นสุดเมื่อตาย ว.2 ทารกในครรภ์ก็มีสิทธิต่างๆ ถ้าว่าหลังคลอดแล้วรอดเป็นทารก",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "17",
+  "shortText": "ตายในเหตุภัยอันตรายร่วมกันและไม่อาจกำหนดว่าใครตายก่อนหลังให้ถือว่าตายพร้อมกัน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "19",
+  "shortText": "ผย.บรรลุนิติภาวะเมื่ออายุ 20 ปีบริบูรณ์",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "20",
+  "shortText": "ผย.อาจบรรลุด้วยการสมรส",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "21",
+  "shortText": "ผย.จะทำนิติกรรมใดๆ ต้องได้รับความยินยอมจากผท.โดยชอบธรรม มิฉะนั้นเป็น \"โมฆียะ\"",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "22",
+  "shortText": "ผย.ทำได้หากเป็นการได้สิทธิหรือหลุดพ้นจากหน้าที่บางอย่าง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "23",
+  "shortText": "ผย.ทำได้ที่เป็นการเฉพาะตัว",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "24",
+  "shortText": "สมควรแก่ฐานานุรูป",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "25",
+  "shortText": "ผย.ทำพินัยกรรมได้เมื่ออายุ 15 ปี",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "28",
+  "shortText": "คสร./ผู้บุพ/ผู้สืบสันดาน/ผปค./อัยการ ขอศาลสั่งเป็นคนไร้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "29",
+  "shortText": "คนที่ศาลสั่งให้เป็นคนไร้ฯกระทำการใด=เป็นโมฆียะ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "30",
+  "shortText": "วิกลจริตที่ศาลยังไม่ได้สั่งทำการได้ แต่จะเป็นโมฆียะต่อเมื่อทำลงในขณะจริตวิกล+อีกฝ่ายรู้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "31",
+  "shortText": "เหตุไร้คสม.หมดไป บุคคลตาม 28 ขอให้ศาลสั่งเพิกถอนคำสั่งได้ -> ประกาศในราชกิจจาฯ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "32",
+  "shortText": "เสมือนไร้ฯ> กายพิการ,จิตฟั่นเฟือน,ไม่อาจจัดการงานได้,จะเสียหายแก่ทส.คนใน28 ขอศาลสั่ง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "34",
+  "shortText": "เสมือนไร้ฯต้องได้รับความยินยอม (3)กู้ยืมหรือให้กู้ (4)คำฯ (5)เช่า/ให้เช่าอสังหาเกิน3 ปี (6)ให้โดยเสน่หาเว้นแต่สมควร/การกุศล/หน้าที่ธรรมจรรยา (10)ฟ้องคดีแพ่ง(11)ประนีประนอม",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "41",
+  "shortText": "การเปลี่ยนภูมิลำเนาโดยการย้าย+แสดงเจตนาว่าจะเปลี่ยนย้ายเข้าที่ใด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "47",
+  "shortText": "ผู้ถูกจำคุกตามคพษ.ถึงที่สุด ภูมิลำเนาคือเรือนจำ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "61",
+  "shortText": "ไปจากที่อยู่+ไม่ทราบว่ายังมีชีวิตอยู่หรือไม่ถือว่าสาบสูญ -กรณีธรรมดา 5 ปี -กรณีพิเศษ 2 ปี (รบ,อับปาง,หาย)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "62",
+  "shortText": "ให้ถือว่าตายเมื่อครบเวลา 61",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "68",
+  "shortText": "ภูมิของนิติบุคคล > สนง.ใหญ่",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "69",
+  "shortText": "ถ้ามีสาขาหลายที่ให้ถือว่าสาขาเป็นภูมิฯในส่วนที่ได้ทำการ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "76",
+  "shortText": "ผู้แทนทำหน้าที่เกิดคสห.แก่คนอื่น นิติฯต้องรับผิดชดใช้คสห.",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "77",
+  "shortText": "ให้นำบทบัญญัติว่าด้วยตัวแทนมาใช้บังคับแก่ความเกี่ยวพันระหว่างนิติฯ - ผู้แทนของนิติฯ/ระหว่างนิติฯ - บุคคลภายนอก",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "144",
+  "shortText": "ส่วนควบ = ส่วนที่ติดกับทรัพย์โดยสภาพ/จารีตไม่อาจแยกออกจากทรัพย์นั้นได้ เว้นแต่จะทำลาย ว.2 เจ้าของทรัพย์ย่อมมีกรรมสิทธิ์ในส่วนควบ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "146",
+  "shortText": "ข้อยกเว้นไม่เป็นส่วนควบ -ทรัพย์ที่อยู่ติดกับที่ดินเพียงชั่วคราว -โรงเรือนที่ผู้ปลูกมีสิทธิปลูกสร้างได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 1,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "145",
+  "shortText": "ไม้ยืนต้น = ส่วนควบกับที่ดินที่ไม้นั้นขึ้นอยู่ วรรค 2 ไม้ล้มลุก/ธัญชาติ # ไม่เป็นส่วนควบ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "148",
+  "shortText": "ดอกผลธรรมดา = เกิดโดยธรรมชาติ/ปกติ ว.2 ดอกผลนิตินัย = ดอกเบี้ย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "149",
+  "shortText": "การใดๆทำลงโดยชอบ+ใจสมัครเพื่อก่อ,เปลี่ยนแปลง โอน สงวน ระงับซึ่งสิทธิ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "150",
+  "shortText": "การใดมีวัตถุประสงค์ต้องห้ามตามกม, -พ้นวิสัย -ขัดต่อความสงบฯ การนั้นเป็นโมฆะ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "151",
+  "shortText": "แตกต่างจากกม.แต่ไม่ใช่กม.เกี่ยวด้วยความสงบไม่เป็นโมฆะ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "152",
+  "shortText": "ทำไม่ถูกต้องตามแบบที่กม.กำหนด = เป็นโมฆะ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "154",
+  "shortText": "เจตนาซ่อนเร้น จะเป็นโมฆะต่อเมื่ออีกฝ่ายได้รู้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "155",
+  "shortText": "การแสดงเจตนาลวงโดยสมรู้กันระหว่างคู่กรณีเป็นโมฆะ ว.2 นิติกรรมทำขึ้นเพื่ออำพรางนิติกรรมอื่นให้บังคับตามกม.แห่งนิติกรรมที่ถูกอำพรางไว้นั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "156",
+  "shortText": "สำคัญผิดในสาระสำคัญของนิติกรรม = โมฆะ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "157",
+  "shortText": "สำคัญผิดในคุณสมบัติของบุคคลหรือทรัพย์สิน ซึ่งหากไม่มีความสคผ.ดังกล่าวการนั้นก็คงจะมิได้กระทำขึ้น = โมฆียะ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "158",
+  "shortText": "ความสำคัญผิดเกิดขึ้นจากความประมาทจะถือเอาปย.ไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "159",
+  "shortText": "กลฉ้อฉล = โมฆียะ ว.2ต้องถึงขนาดถ้าไม่มีกลฉ้อฉลดังกล่าวก็คงจะมิได้ทำขึ้น ว.3ฉ้อฉลโดยบุคคลภายนอกเป็นโมฆียะต่อเมื่ออีกฝ่ายได้รู้/ควรรู้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "160",
+  "shortText": "ห้ามมิให้ยกเป็นข้อต่อสู้ - คุ้มครองบุคคลภายนอกผู้สุจริต",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "161",
+  "shortText": "กลฉ้อฉลเพื่อเหตุจะบอกล้างไม่ได้ แต่คู่กรณีชอบที่จะเรียกค่าสินไหมทดแทนเพื่อคสห.ที่เกิดจากการฉ้อฉลนั้นได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "162",
+  "shortText": "ฉ้อฉลโดยการนิ่ง=โมฆียะ ต้องมีหน้าที่ต้องบอกความจริงนั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "163",
+  "shortText": "ฉ้อฉลด้วยกันทั้งสองฝ่าย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "164",
+  "shortText": "ข่มขู่ = โมฆียะ > ต้องเป็นภัยที่ใกล้จะถึง+ร้ายแรงถึงขนาดให้กลัว ถ้ามิได้มี...คงจะมิได้กระทำ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "165",
+  "shortText": "ขู่ว่าจะใช้สิทธิตามปกตินิยม/นับถือยำเกรงไม่ถือเป็นการข่มขู่",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "166",
+  "shortText": "การข่มขู่โดยบุคคลภายนอกก็เป็นโมฆียะ หากการข่มขู่นั้นเป็นภัยร้ายแรงถึงขนาด (*ไม่จำเป็นต้องรู้)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "168",
+  "shortText": "แสดงเจตนาที่เฉพาะหน้ามีผลเมื่อ\"ได้ทราบ\"(see,phone,mail)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "169",
+  "shortText": "แสดงเจตนาต่อบุคคลผู้อยู่ห่างโดยระยะทางมีผลเมื่อ \"ไปถึง\" ว.2 การแสดงฯไม่เสื่อมไปหากภายหลังผู้แสดงเจตนาตาย/ไร้/เสมือนไร้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "172",
+  "shortText": "โมฆะกรรมไม่อาจให้สัตยาบันได้ ผู้มีส่วนได้เสียคนใดจะยกขึ้นก็ได้ (ไม่มีอายุ)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "173",
+  "shortText": "ส่วนใดส่วนหนึ่งเป็นโมฆะให้ตกเป็นโมฆะทั้งสิ้น เว้นแต่จะแยกส่วนได้ (ต้น,ดอก)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "174",
+  "shortText": "การใดเป็นโมฆะแต่เข้าลักษณะอื่นที่ไม่เป็น ให้ถือตามนั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "175",
+  "shortText": "ผู้มีสิทธิบอกล้าง \"โมฆียะ\" (1) ผู้แทนฯ, ผู้เยาว์บรรลุ/ได้รับยธ. (2) พ้นจากคนไร้/เสมือนไร้ฯ/ผู้อนบ./ผู้พท./คนเสมือนไร้บอกล้างโดยได้รับยธ.ก็ได้ (3) ผู้สำคัญผิด/ถูกข่มขู่/ฉ้อฉล (4) ไม่ว่ากลแล้ว ว.2 ทายาทผู้นั้นๆเมื่อเขาตายแล้ว",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "176",
+  "shortText": "เมื่อบอกล้างแล้ว ให้ตกเป็นโมฆะมาแต่เริ่มแรกและให้กลับคืนสู่ฐานะเดิม...ถ้ากลับไม่ได้ให้ได้รับคสห.ชดใช้แทน ว.ท้าย เรียกให้กลับคืนฯภายใน1ปี",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "177",
+  "shortText": "ให้สัตยาบัน > ถือว่าสมบูรณ์มาแต่เริ่มแรก",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "178",
+  "shortText": "การบอกล้าง/ให้สัตยาบันทำได้โดยการแสดงเจตนาแก่คู่กรณีอีกฝ่ายหนึ่ง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "179",
+  "shortText": "หากให้สัตยาบัน/บอกล้าง ทำได้เมื่อมูลเหตุอันเป็นโมฆียะนั้นได้หมดไปแล้ว",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "180",
+  "shortText": "ถ้ามิได้สงวนสิทธิว่าจะบอกล้าง เหล่านี้ให้ถือว่าให้สัตยาบัน -ชำระหนี้ภายหลัง -แปลงหนี้ใหม่ -ให้ประกันหนี้ -โอนสิทธิ -อื่นๆ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "181",
+  "shortText": "โมฆียะ ต้องบอกล้างภายใน 1 ปีนับแต่เวลาที่อาจให้สัตยาบันได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 2,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "193/11",
+  "shortText": "อายุความจะย่นหรือขยายไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "193/12",
+  "shortText": "ให้เริ่มนับเมื่อเวลาที่อาจใช้สิทธิเรียกร้องได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "193/14",
+  "shortText": "อายุความสะดุดหยุดลง -ทำนส.รับสภาพหนี้-ชำระหนี้/ดอกบางส่วน -ให้ประกัน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "193/34",
+  "shortText": "อายุความ 2 ปี (7) บุคคลที่มิได้อยู่ใน(1) แต่เป็นผู้ประกอบการเรียกเอาเงินที่ได้ทดรองไป (16) ค่าทนายความ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "193/15",
+  "shortText": "อายุความสะดุดเมื่อใดให้เริ่มนับใหม่เมื่อนั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "193/24",
+  "shortText": "ลน.จะสละปย.แห่งอายุความก็ได้ =ไม่กระทบผู้ค้ำ/คนอื่น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "193/27",
+  "shortText": "ยังมีสิทธิบังคับจำนองแม้ว่าหนี้ประธานจะขาดอายุความแต่เอาดอกเบี้ยค้างเกิน 5 ปีไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "193/35",
+  "shortText": "ภายใต้ม.193/27 การรับสภาพความผิดเป็นหนังสือหรือให้ประกันตาม193/28 ให้มีอายุความ 2 ปีนับแต่รับสภาพความผิด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "193/30",
+  "shortText": "อายุความถ้าไม่มีกำหนดไว้เฉพาะ =10 ปี",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "193/32",
+  "shortText": "สิทธิเรียกร้องตามคพษ.มีกำหนด 10 ปี",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "193/33",
+  "shortText": "อายุความ 5 ปี (1)ดอกเบี้ยค้างชำระ (2)เงินที่ต้องผ่อนทุนคืนเป็นงวดๆ (3)ค่าเช่าที่ดิน/บ้านที่ค้าง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "203",
+  "shortText": "หนี้ถึงกำหนดชำระเมื่อใด ถ้าไม่ได้กำหนด/อนุมานจากพฤติการณ์ไม่ได้=เรียกได้โดยพลัน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "204",
+  "shortText": "หนี้ถึงกำหนดชำระและจน.ได้เตือนแล้วไม่ชำระถือว่าผิดนัด ว.2 ถ้ากำหนดวันตามปฏิทินไว้ ให้ถือว่าผิดนัดโดยมิพักต้องเตือน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "205",
+  "shortText": "ถ้ายังไม่ชำระหนี้เพราะมีพฤติฯอันใดซึ่งลน.ไม่ต้องรับผิดชอบตราบนั้นยังไม่ถือว่าลน.ผิดนัด(ไม่ผิดนัด=ไม่ผิดสัญญา)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "206",
+  "shortText": "หนี้ละเมิดถือว่าผิดนัดนับแต่เวลาที่ทำละเมิด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "207",
+  "shortText": "ถ้าลน.ขอชำระหนี้แต่จน.ไม่รับโดยปราศจากมูลอันจะอ้างตามกม.=ถือว่าจน.ผิดนัด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "208-212",
+  "shortText": "เหตุที่ถือว่าเจ้าหนี้ผิดนัด มีผลตามม.221 = หนี้เงินนั้นจน.จะคิดดอกรว.ผิดนัดไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "213",
+  "shortText": "ถ้าลน.ละเลยไม่ชำระหนี้จน.จะร้องขอต่อศาลบังคับก็ได้ ว.2 ถ้าวัตถุแห่งหนี้คือกระทำการใด จน.ร้องขอศาลให้คนนอกทำโดยลน.เสียคชจ.ก็ได้ /ถ้าเป็นให้ทำนิติกรรมศาลจะสั่งให้ถือเอาเอาคพษ.แทนการแสดงเจตนาก็ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "214",
+  "shortText": "ภายใต้ 733 จน.มีสิทธิได้รับชำระหนี้โดยสิ้นเชิง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "218",
+  "shortText": "พ้นวิสัยหลังทำสัญญา แต่ก่อนผิดนัด = ลน.ต้องรับผิดชอบในคสมทท.เพื่อการนั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "219",
+  "shortText": "การชำระหนี้กลายเป็นพ้นวิสัยเพราะพฤติการณ์อันใดอันหนึ่งที่เกิดภายหลังก่อหนี้+ลน.ไม่ต้องรับผิดชอบ = ลน.หลุดพ้นจากการชำระหนี้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "222",
+  "shortText": "คสมทท.เพื่อความเสียหายที่เกิดขึ้นได้ตามปกติจากที่ไม่ชำระ ว.2 คสมทท.ในพฤติการณ์พิเศษรับผิดเมื่อคาดเห็น/ควรจะได้เห็น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "223",
+  "shortText": "ผสห.มีส่วนผิดการกำหนดคสห.ให้อาศัยพฤติการณ์เป็นประมาณว่าคสห.เกิดขึ้นจากฝ่ายใดเป็นผู้ก่อยิ่งหย่อนกว่ากันเพียงไร",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "224",
+  "shortText": "ดอกเบี้ยผิดนัด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "226",
+  "shortText": "รับช่วงสิทธิ (เปลี่ยนตัวจน.โดยผลของกม.) >> บุคคลผู้รับช่วงสิทธิของจน.ชอบที่จะใช้สิทธิทั้งหลายที่เจ้าหนี้มีอยู่โดยมูลหนี้และใช้สิทธิในประกันแห่งหนี้นั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "227",
+  "shortText": "**การรับช่วงสิทธิจะมีได้เมื่อคนนั้นมีหนี้ต้องรับผิดแก่เจ้าหนี้**",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "233",
+  "shortText": "ลน.เพิกเฉยไม่เรียกร้องหนี้ จน.จะใช้สิทธิแทนก็ได้เว้นแต่ที่เป็นการส่วนตัวของลน.โดยแท้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "238",
+  "shortText": "คุ้มครองบุคคลภายนอกผู้สุจริต+ได้สิทธิมาก่อนเริ่มฟ้องคดีขอให้เพิกถอน (เว้นแต่ให้เสน่หา)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "240",
+  "shortText": "การฟ้องเพิกถอนการฉ้อฉลต้องฟ้องภายใน 1 ปีนับแต่เวลาที่รู้/10 ปีนับแต่ได้ทำนิติกรรม",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "241",
+  "shortText": "ผู้ใดครองทส.ของผู้อื่น+มีหนี้อันเป็นคุณแก่ตนเกี่ยวด้วยทส.ที่ครองนั้นย่อมยึดหน่วงทส.จนกว่าจะได้รับชำระหนี้ก็ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "244",
+  "shortText": "ผู้ทรงสิทธิตามม.ก่อนจะยึดหน่วงไว้จนได้รับสิ้นเชิงก็ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "246",
+  "shortText": "ผู้ทรงสิทธิยึด มีเพียงสิทธิยึดถือไว้เท่านั้น ไม่มีสิทธิใช้สอย/ให้เช่า เว้นแต่ลน.ยินยอม",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "247",
+  "shortText": "ถ้าผู้ทรงเสียคชจ.ในการจัดการดูแลทรัพย์เพียงใด ก็มีสิทธิเรียกจากเจ้าของทรัพย์คืนได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "248",
+  "shortText": "ภายใต้ม.193/27 การใช้สิทธิยึดหน่วงไม่ทำให้อายุความสะดุดหยุดลง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "249",
+  "shortText": "ขอระงับสิทธิยึดหน่วงโดยการหาประกันอย่างอื่นแทนก็ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 3,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "215",
+  "shortText": "ลน.ไม่ชำระหนี้ให้ถูกต้องตามความประสงค์ฯ จน.เรียกคสมทท.ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "216",
+  "shortText": "ถ้าเหตุผิดนัด>ชำระหนี้กลายเป็นไร้ประโยชน์ จน.จะบอกปัดไม่รับ+เรียกคสมทท.ก็ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "217",
+  "shortText": "เมื่อลน.ผิดนัดและเกิดคสห.อย่างใด = ลน.ต้องรับผิดชอบเสมอ เว้นแต่แม้ทันก็ยังคงเกิดอยู่",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "234",
+  "shortText": "เจ้าหนี้ที่ใช้สิทธิเรียกร้องแทนลน.ต้องหมายเรียกลน.เข้ามาในคดีด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "237",
+  "shortText": "นิติกรรมใดที่ลน.ทำลงเป็นทางให้จน.เสียเปรียบ>ขอเพิกถอนได้ เว้นแต่ผู้ได้ลาภงอกจะไม่ได้รู้เท่าถึงความจริงนั้น || แต่ถ้าเป็นการให้โดยเสน่หา เพียงแต่ลน.รู้ฝ่ายเดียวก็พอให้เพิกถอนแล้ว",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "250",
+  "shortText": "เมื่อทรัพย์สินที่ยึดหน่วงไว้หลุดไปจากครอบครอง สิทธิยึดหน่วงก็ระงับไปด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "291",
+  "shortText": "จน.จะเรียกชำระหนี้เอากับลน.คนใดก่อนหลัง/โดยสิ้นเชิง/บางส่วนก็ได้ แต่ลน.ก็ยังคงต้องผูกพันต่อจน.อยู่จนกว่าจะชำระเสร็จโดยสิ้นเชิง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "292-293",
+  "shortText": "ลน.ชำระหนี้ หรือได้รับการปลดหนี้ย่อมเป็นประโยชน์แก่ลน.ร่วมทุกคน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "295",
+  "shortText": "การให้คำบอกกล่าว/การผิดนัด/การชำระหนี้เป็นพ้นวิสัย/อายุความสะดุดหยุดลง = เป็นคุณเป็นโทษกับแต่ลน.คนนั้นเฉพาะตัวไม่มีผลไปถึงคนอื่น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "296",
+  "shortText": "ลน.ร่วมกันต้องรับผิดเป็นส่วนเท่าๆกัน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "298",
+  "shortText": "ถ้ามีจน.หลายคน จะชำระแก่ใครก็ได้ตามใจ แม้ว่าจน.บางคนจะได้ยื่นฟ้องแล้วก็ตาม",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "303",
+  "shortText": "สิทธิเรียกร้องโอนแก่กันได้ เว้นแต่สภาพแห่งสิทธิไม่เปิดช่องให้โอนได้ /คู่กรณีตกลงกันห้ามโอน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "304",
+  "shortText": "สิทธิเรียกร้องที่ศาลสั่งยึดไม่ได้ ก็โอนไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "305",
+  "shortText": "เมื่อโอนสิทธิฯไปแล้ว จำนอง,จำนำ,หลักประกันอื่นๆก็โอนไปด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "306",
+  "shortText": "โอนสิทธิได้โดยทำเป็นหนังสือ = สมบูรณ์ แต่จะยกขึ้นต่อสู้คนนอกได้เมื่อบอกกล่าวการโอนเป็นหนังสือไปยังลูกหนี้หรือ/ลน.ได้ให้ความยินยอม ว.2 ถ้าลน.ใช้เงินไปก่อนรับคำบอกกล่าว = หนี้ระงับ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "308",
+  "shortText": "ถ้าลน.ได้ให้ความยย.โดยไม่อิดเอื้อน จะยกข้อต่อสู้ที่มีต่อผู้โอน > ต่อสู้ผู้รับโอนไม่ได้ ว.2 เพียงได้รับบก.แต่ไม่ได้ให้ความยย. ก็ชอบที่จะยกข้อต่อสู้ได้ /หักกลบลบหนี้ได้แม้หนี้ยังไม่ถึงชำระ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "314",
+  "shortText": "ลูกหนี้/คนนอกจะเป็นคนชำระหนี้ก็ได้ เว้นแต่ไม่เปิดช่องให้คนนอกหรือขัดกับเจตนาคู่กรณี",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "315",
+  "shortText": "ต้องชำระหนี้แก่ -ตัวเจ้าหนี้ -บุคคลที่มีอำนาจ -ใครก็ได้ที่จน.ให้สัตยาบัน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "320",
+  "shortText": "จะบังคับให้จน.รับชำระหนี้บางส่วน หรือรับชำระหนี้เป็นอย่างอื่นผิดไปจากที่ต้องชำระไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "321",
+  "shortText": "แต่หากจน.ยอมรับชำระหนี้อย่างอื่นแทนที่ได้ตกลงไว้ หนี้นั้นก็เป็นอันระงับ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "327",
+  "shortText": "ถ้าเอกสารที่เป็นหลักฐานได้เวนคืนแล้วให้สันฯว่าหนี้ระงับ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "328",
+  "shortText": "ลำดับชำระหนี้ให้หนี้ที่ถึงกำหนดก่อน > มีประกันน้อยสุด > หนี้หนักสุด > รายเก่าสุด >",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "329",
+  "shortText": "การจัดสรรชำระหนี้ fees > interest > capital แต่ไม่ห้ามลน.ที่จะขอชำระต้นเงินก่อน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "331",
+  "shortText": "ถ้าจน.บอกปัด/ไม่อาจรับชำระหนี้ได้ > หากวางทรัพย์ก็ให้ถือว่าหนี้ระงับไป",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "333",
+  "shortText": "วางทรัพย์ที่สนง.ประจำตำบลนั้น และผู้วางต้องแจ้งจน.ให้ทราบ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "340",
+  "shortText": "ปลดหนี้=หนี้ระงับ..แต่ถ้าเป็นหนี้มีหลักฐาน -> การปลดหนี้ก็ต้องทำเป็นนส./เวนคืน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "341",
+  "shortText": "มีความผูกพันกัน+วัตถุแห่งหนี้เป็นอย่างเดียวกัน+หนี้ถึงกำหนด = หักกลบลบหนี้ได้โดยการแสดงเจตนาแก่อีกฝ่ายหนึ่ง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "344",
+  "shortText": "หนี้ที่ยังมีข้อต่อสู้ จะเอามาหักกลบลบหนี้ไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "349",
+  "shortText": "เปลี่ยนสิ่งซึ่งเป็นสาระสำคัญแห่งหนี้ = แปลงหนี้ใหม่ ว.3 เปลี่ยนตัวเจ้าหนี้ทำตามม.306",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "350",
+  "shortText": "เปลี่ยนตัวลูกหนี้ ให้ทำเป็นสัญญาระหว่างจน.(เดิม)กับลน.ใหม่แต่จะทำขึ้นใจลน.เดิมไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "352",
+  "shortText": "ถ้าลน.ชั้นต้นได้จำนอง/จำนำไว้จะให้โอนไปด้วยก็ได้ แต่ถ้าเป็นคนนอกต้องได้รับความยย.",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 4,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "354",
+  "shortText": "คำเสนอบ่งระยะเวลาจะถอนก่อนไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "356",
+  "shortText": "คำเสนอกับคนเฉพาะหน้าไม่ได้บ่งเวลาให้สนอง ณ ตอนนั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "357",
+  "shortText": "บอกปัด/ไม่สนองภายในกำหนด = คำเสนอสิ้นไป",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "358",
+  "shortText": "คำสนองมาช้า ต้องบอก ถ้าไม่บอกถือว่าไม่ช้า",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "359",
+  "shortText": "คำสนองมาถึงล่วงเวลา ให้ถือว่าเป็นคำเสนอขึ้นใหม่",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "360",
+  "shortText": "ไม่ให้นำม.169 มาใช้ถ้าผู้สนองรู้อยู่แล้วว่าผู้เสนอตาย/ไร้ความสามารถ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "361",
+  "shortText": "สัญญารว.บุคคลซึ่งอยู่ห่างโดยระยะทางเกิดเป็นสัญญาเมื่อคำบอกกล่าวสนองไปถึงผู้เสนอ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "366",
+  "shortText": "ถ้ายังไม่ได้ตกลงกันในข้อสำคัญทุกข้อ+สงสัย=ถือว่าสัญญายังไม่เกิด ว.2 ตกลงกันว่าจะทำเป็นหนังสือ+สงสัย ถือว่าส.ยังไม่เกิด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "369",
+  "shortText": "ส.ต่างตอบแทน อีกฝ่ายจะไม่ยอมชำระหนี้จนกว่าอีกฝ่ายจะชำระก็ได้ เว้นหนี้ยังไม่ถึงกำหนด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "370",
+  "shortText": "ทรัพย์เฉพาะสิ่ง =กส.โอน ถ้าสูญหาย/เสียหายโทษลูกหนี้ไม่ได้ > คสห.ตกเป็นพับแก่เจ้าหนี้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "371",
+  "shortText": "ทรัพย์เฉพาะสิ่ง+มีเงื่อนไขบังคับก่อน ถ้าคสห.เกิดรว.ที่เงื่อนไขไม่สำเร็จ ไม่ให้นำม.ก่อนมาใช้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "372",
+  "shortText": "ถ้าคสห.ตกเป็นพ้นวิสัยเหตุอย่างใดอย่างหนึ่งจะโทษฝ่ายใดไม่ได้ > ลูกหนี้หามีสิทธิที่จะได้รับชำระหนี้ตอบแทนไม่ ว.2 โทษเจ้าหนี้ได้ ลน.มีสิทธิได้รับชำระหนี้ตอบแทน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "373",
+  "shortText": "ข้อตกลงล่วงหน้ายกเว้นความรับผิดเพื่อกลฉ้อฉล/เลินเล่อร้ายแรง = โมฆะ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "374",
+  "shortText": "สัญญาเพื่อประโยชน์บุคคลภายนอก เรียกกับลน.โดยตรงได้ ว.2 สิทธิบุคคลภายนอกเกิดเมื่อได้แสดงเจตนาแก่ลูกหนี้ว่าจะเข้าถือเอาประโยชน์จากสัญญานั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "375",
+  "shortText": "เมื่อสิทธิเกิดขึ้นแล้วคู่สัญญาจะเปลี่ยนแปลง/ระงับสิทธิไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "376",
+  "shortText": "ข้อต่อสู้ที่เกิดจากส.ตาม 374 ลูกหนี้อาจยกขึ้นต่อสู้บุคคลภายนอกได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "377",
+  "shortText": "มัดจำ = เมื่อเข้าทำส. ถ้าได้ให้สิ่งใดไว้เป็นหลักฐานว่าส.ได้ทำแล้ว หรือเป็นประกันชำระหนี้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "378",
+  "shortText": "(1) ให้คืน/ใช้เงินบางส่วนเมื่อชำระหนี้ (2) ให้ริบ ถ้าฝ่ายวางไม่ชำระหนี้,พ้นวิสัยฝ่ายนั้นรับผิด (3) ให้คืนถ้าฝ่ายรับไม่ชำระหนี้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "379",
+  "shortText": "เบี้ยปรับ = จะใช้เงินถ้าตนไม่ชำระหนี้/ชำระไม่ถูกตามสมควร",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "380",
+  "shortText": "ถ้าเรียกเบี้ยปรับกรณี \"ไม่ชำระหนี้\" ก็หมดสิทธิเรียกให้ชำระหนี้อีก (เลือกได้อย่างเดียว) *ถ้าเรียกชำระหนี้ก็หมดสิทธิ์ปรับ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "381",
+  "shortText": "เบี้ยปรับ \"ไม่ชำระหนี้ให้ถูกต้องสมควร\" เช่นชำระช้า > เรียกชำระหนี้ได้+เรียกเบี้ยปรับได้ด้วย แต่ต้องบอกสงวนสิทธิว่าจะริบ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "382",
+  "shortText": "เบี้ยปรับอย่างอื่นที่มิใช่ตัวเงิน > ถ้าเรียกเบี้ยปรับแล้ว จะเรียกคสมทท.ไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "383",
+  "shortText": "เบี้ยปรับสูงเกินส่วน ศาลมีอำนาจลดได้ตามที่เห็นสมควร",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "386",
+  "shortText": "เลิกสัญญาโดยแสดงเจตนา - ข้อสัญญา - บทบัญญัติติดกม.",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "387",
+  "shortText": "ถ้าไม่ชำระหนี้ต้องบอกล่าวให้ชำระหนี้โดยกำหนดเวลาพอควรก่อน ถ้าไม่ชำระอีกจึงจะบอกเลิกสัญญาได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "388",
+  "shortText": "กำหนดเวลาชำระหนี้เป็นสาระสำคัญ = บอกเลิกได้ทันที",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "389",
+  "shortText": "การชำระหนี้พ้นวิสัย+โทษลูกหนี้ได้ จน.จะเลิกสัญญาก็ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "391",
+  "shortText": "เมื่อใช้สิทธิเลิกสัญญาแล้ว = ให้แต่ละฝ่ายกลับคืนสู่ฐานะดังที่เป็นอยู่เดิม แต่ไม่เป็นที่เสื่อมสิทธิคนนอก ว.2 คืนเงินบวกดอกด้วย ว.3 ค่าการงานที่ทำ/ค่าใช้ทรัพย์ต้องใช้เป็นเงินตามควร ว.4 การเลิกสัญญาไม่กระทบสิทธิเรียกค่าเสียหาย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 5,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "406",
+  "shortText": "ได้ทรัพย์มาโดยปราศจากมูลอันจะอ้างตามกม.ได้ + อีกคนเสียเปรียบ = ต้องคืน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "407",
+  "shortText": "ทำตามอำเภอใจชำระหนี้โดยรู้ว่าตนไม่มีความผูกพันต้องชำระ = ไม่มีสิทธิได้รับทรัพย์คืน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "408",
+  "shortText": "ไม่มีสิทธิได้รับทรัพย์คืน -มีเงื่อนเวลา ชำระก่อนถึงเวลา -ชำระหนี้ที่ขาดอายุความ -ชำระหนี้ตามศีลธรรม/อัธยาศัย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "410",
+  "shortText": "ชำระหนี้จากนิติกรรมพ้นวิสัย = ไม่มีสิทธิได้รับทรัพย์คืน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "411",
+  "shortText": "ชำระหนี้เป็นการฝ่าฝืนข้อห้ามตามกม.หรือศีลธรรม ท่านว่าเรียกคืนไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "412",
+  "shortText": "ถ้าต้องคืนให้คืนทั้งหมด เว้นแต่สุจริตให้คืนเท่าที่เหลือ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "415",
+  "shortText": "รับไว้โดยสุจริต มีสิทธิได้ดอกผลตราบเท่าที่ยังสุจริต",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "419",
+  "shortText": "ฟ้องคดีลาภมิควรได้ ภายใน 1 ปีนับแต่รู้ หรือ 10 ปีนับแต่ทำ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "420",
+  "shortText": "จงใจ/ประมาท ทำต่อคนอื่นโดยผิดกม. ทำให้เสียหายชีวิต,ร่างกาย,อนามัย,เสรีภาพ,ทส. หรือสิทธิ = ต้องใช้คสมทท.เพื่อการนั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "421",
+  "shortText": "การใช้สิทธิที่มีแต่จะเสียหายแก่คนอื่น เป็นการมิชอบ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "422",
+  "shortText": "คสห.เกิดจากการฝ่าฝืนกม. ให้สันฯไว้ก่อนว่าเป็นฝ่ายผิด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "423",
+  "shortText": "กล่าว/ไขข่าวแพร่หลายข้อความอันฝ่าฝืนต่อความจริงต้องใช้ค่าเสียหาย ชื่อเสียง,เกียรติคุณ,ทางทำมาหาได้,ทางเจริญ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "425",
+  "shortText": "ลูกจ้างกระทำละเมิดในทางการที่จ้าง นายจ้างรับผิดด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "426",
+  "shortText": "นายจ้างมีสิทธิไล่เบี้ยได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "427",
+  "shortText": "ตัวการ-ตัวแทน ให้นำสองมาตราก่อนมาใช้ด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "428",
+  "shortText": "จ้างทำของ ผู้ว่าจ้างไม่ต้องรับผิดในคสห, เว้นแต่ -การงานที่สั่งให้ทำ -คำสั่งที่ตนให้ไว้ -การเลือกหาผู้รับจ้าง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "429",
+  "shortText": "แม้เป็นผู้เยาว์/วิกลก็ยังคงต้องรับผิดในผลที่ตนทำละเมิด บิดามารดาต้องร่วมรับผิดด้วย เว้นระมัดระวังตามสมควรแก่หน้าที่",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "430",
+  "shortText": "ครู/นายจ้าง/บุคคลผู้รับดูแลผู้ไร้คสม. ต้องร่วมรับผิดด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "432",
+  "shortText": "หลายคนร่วมกันทำละเมิดต้องร่วมกันชดใช้คสมทท. อนึ่ง..ผู้สนับสนุนให้ทำละเมิดให้ถือว่าเป็นผู้ร่วมทำละเมิดด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "433",
+  "shortText": "คสห.เกิดขึ้นเพราะสัตว์ ผู้รับผิด -เจ้าของ, -ผู้รับเลี้ยง หากมีผู้เร้าสัตว์เจ้าของไล่เบี้ยได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "434",
+  "shortText": "โรงเรือน/สิ่งปลูกสร้าง ชำรุดหรือบำรุงไม่เพียงพอ 1)ผู้ครอง 2)เจ้าของต้องใช้คสมทท.",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "436",
+  "shortText": "ของตกหล่น/ทิ้งขว้างจากรร. = ผู้อยู่ในรร.ต้องรับผิด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "437",
+  "shortText": "คสห.จากยานพาหนะเดินด้วยกำลังจักรกล/ทรัพย์อันตรายให้ผู้ครอบครอง, ผู้ควบคุมรับผิด เว้นแต่เหตุสุดวิสัย,ความผิดผสห.",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "438",
+  "shortText": "คสมทท.จะพึงใช้สถานใดเพียงใดให้วินิจฉัยตามสมควรแก่พฤติการณ์และความร้ายแรง > คสมทท. = คืนทรัพย์/ใช้ราคาฯ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "442",
+  "shortText": "ประกอบ 223 ว่าคสห.เกิดขึ้นจากฝ่ายใดเป็นผู้ก่อยิ่งหย่อนฯ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "443",
+  "shortText": "ตายได้ค่าปลงศพ / ว.2 ถ้าไม่ตายทันทีให้ใช้ค่ารักษาพยาบาลก่อนตาย+ค่าขาดปย.ทำมาหาได้ ว.3 ค่าขาดไร้อุปการะตามกม.",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "444",
+  "shortText": "เสียหายในร่างกาย/อนามัย เรียกคชจ.ที่ต้องเสียไปได้ และเรียกค่าเสียความสามารถประกอบการงานโดยสิ้นเชิงได้ด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "445",
+  "shortText": "เสียหายในร่างกาย/อนามัย/เสรีภาพ สามีภริยาเรียกค่าขาดแรงงานในครัวเรือนได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "446",
+  "shortText": "เสียหายแก่ร่างกาย/อนามัย/เสรีภาพ เรียกคสห.อย่างอื่นที่มิใช่ตัวเงินได้ แต่สิทธิโอนไม่ได้และไม่ตกทอดแก่ทายาท",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "448",
+  "shortText": "อายุความละเมิด 1 ปีนับแต่รู้ 10 ปีนับแต่ทำ /ว.2 ถ้าผิดอาญาด้วยให้ใช้อายุความอาญาที่ยาวกว่า",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 6,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "453",
+  "shortText": "-ฝ่ายหนึ่งเรียกว่าผู้ขวยมีหน้าที่โอนกส. -ฝ่ายหนึ่งผู้ซื้อมีหน้าที่ชำระราคา",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "454",
+  "shortText": "คำมั่นจะซื้อ จะขายมีผล เป็นการซื้อขายเมื่อบอกกล่าวซื้อ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "456",
+  "shortText": "ซื้อขายอสังหาฯ ต้องทำเป็นหนังสือ+จดทะเบียนต่อพนง.จนท มิฉะนั้นเป็นโมฆะ ว.2 จะซื้อจะขาย/คำมั่นขายสังหาฯถ้ามิได้มีหลักฐานเป็นหนังสือลงลมช.ฝ่ายต้องรับผิด/วางประจำ /ชำระหนี้บางส่วน จะฟ้องคดีไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "457",
+  "shortText": "ค่าฤชาธรรมเนียม ให้ออกคนละครึ่ง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "458",
+  "shortText": "ถ้าไม่มีข้อตกลงในการโอนกส. ถือว่าโอนเมื่อทำสัญญากัน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "459",
+  "shortText": "ถ้ามีเงื่อนไขก็ให้เป็นไปตามนั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "460",
+  "shortText": "กส.จะยังไม่โอนไปจนกว่าจะได้นับ/ชั่ง/ตวง/วัด/คัดเลือกตัวทรัพย์+กำหนดราคาให้แน่นอน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "466",
+  "shortText": "ส่งมอบอสังหาฯขาดตกบกพร่อง/ล้ำจำนวนเกินกว่าร้อยละ 5 ผู้ซื้อจะบอกปัดเสียก็ได้ ว.2 ถ้าไม่เกินร้อยละ 5 ผู้ซื้อต้องรับเอาและใช้ราคาตามส่วน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "473",
+  "shortText": "ผู้ขายไม่ต้องรับผิด (1) ถ้าผู้ซื้อรู้/ควรจะได้รู้ว่าชำรุดฯแต่ก็รู้ (2) เห็นประจักษ์+มิได้อิดเอื้อน (3) เป็นทรัพย์ขายทอดตลาด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "474",
+  "shortText": "ฟ้องชำรุดฯ อายุความ 1 ปี",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "475",
+  "shortText": "รอนสิทธิผู้ซื้อ เพราะเขามีสิทธิเหนือทส./ความผิดของผู้ขาย > ผู้ขายต้องรับผิดในผลนั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "476",
+  "shortText": "ถ้าผู้ซื้อรู้อยู่แล้วถึงสิทธิของผู้รบกวน ผู้ขายไม่ต้องรับผิด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "480",
+  "shortText": "ศาลสั่งว่ามีภาระจำยอม แต่ผู้ขายรับรองว่าไม่มี = ผู้ขายรับผิด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "483",
+  "shortText": "คู่สัญญาตกลงกันยกเว้นความรับผิดชำรุด/รอนสิทธิได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "484",
+  "shortText": "แต่ข้อสัญญาไม่คุ้มครองความรับผิดในการคืนเงิน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "488",
+  "shortText": "ผู้ซื้อพบเห็นความชำรุดบกพร่อง ก็ชอบที่จะไม่ชำระราคาที่เหลือทั้งหมด/บางส่วน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "491",
+  "shortText": "ขายฝากกส.โอนไปยังผู้ซื้อโดยผู้ขายมีสิทธิไถ่ทรัพย์คืนได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "492",
+  "shortText": "ถ้าได้ไถ่ทรัพย์โดยชอบ/วางทรัพย์แล้ว >ให้กส.กลับไปยังผู้ขายฝากนับแต่เวลาที่ได้ชำระ/วาง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "493",
+  "shortText": "ตกลงกันห้ามจน.ขายทรัพย์สินนั้นได้ (ต้องจดทะเบียน)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "494",
+  "shortText": "-อสังหาฯ ห้ามไถ่เกิน 10 ปี -สังหาฯ ห้ามไถ่เกิน 3 ปี",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "495",
+  "shortText": "ถ้าในสัญญาเกินไปกว่ามาตราก่อนให้ลดลงมาตามนั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "496",
+  "shortText": "การขยายกำหนดระยะเวลาไถ่ต้องไม่เกินเวลาตาม 494 ว.2 อสังหาต้องมีหลักฐานเป็นนส.+ลงลมช.ผู้รับไถ่ + จดทะเบียน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "497",
+  "shortText": "ผู้มีสิทธิไถ่ = (1)ผู้ขายเดิม (2)ผู้รับโอนสิทธิ (3)สัญญาระบุไว้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "498",
+  "shortText": "ไถ่กับใครได้บ้าง = (1) ผู้ซื้อเดิม/ทายาทของเขา (2) ผู้รับโอนทรัพย์สินนั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "499",
+  "shortText": "ถ้าไม่ได้กำหนดราคาไว้ให้ไถ่ตามราคาที่ขาย ว.2 ถ้าสินไถ่มีราคาสูงกว่าราคาขายจริงเกิน 15% ก็ให้ไถ่ได้ตามราคาจริง+ดอกเบี้ยไม่เกิน 15%",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "518",
+  "shortText": "แลกเปลี่ยนคือต่างฝ่ายต่างโอนกส.ให้แก่กัน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "521",
+  "shortText": "ให้ คือการโอนให้โดยเสน่หาแก่ผู้รับและผู้รับยอมรับเอา",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "522",
+  "shortText": "การให้จะทำโดยการปลดหนี้ก็ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "523",
+  "shortText": "การให้สังหาฯ..สมบูรณ์เมื่อส่งมอบ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "525",
+  "shortText": "การให้อสังหาฯ ต้องทำเป็นหนังสือ+จดทะเบียน มิฉะนั้นโมฆะ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "531",
+  "shortText": "ถอนคืนการให้เหตุเนรคุณ (1)ประทุษร้ายเป็นความผิดอาญา (2)หมิ่นประมาทผู้ให้อย่างร้ายแรง (3)บอกปัดไม่ยอมให้ของเลี้ยงชีพ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "532",
+  "shortText": "ทายาทผู้ให้ถอนได้ต่อเมื่อผู้รับผู้ให้ถูกฆ่าตายโดยเจตนา",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "533",
+  "shortText": "สิทธิถอนคืนหมดไปเมื่อได้ให้อภัย /เกิน 6 เดือนนับแต่รู้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "534",
+  "shortText": "ถอนคืนการให้แล้ว ให้คืนทรัพย์ตามบทบัญญัติลาภมิควรได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "535",
+  "shortText": "กรณีถอนคืนการให้ไม่ได้ ดังนี้ (1)ให้เป็นบำเหน็จสินจ้าง (2)ให้โดยมีค่าภาระติดพัน (3) ให้โดยหน้าที่ธรรมจรรยา (4)ให้ในการสมรส",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 7,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "538",
+  "shortText": "เช่าอสังหาฯถ้าไม่มีหลักฐานเป็นนส.จะฟ้องบังคับคดีไม่ได้..ถ้าเช่าเกิน 3 ปีต้องจดทะเบียนด้วยมิฉะนั้นจะฟ้องบังคับได้เพียง 3 ปี",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "540",
+  "shortText": "อสังหาฯห้ามเช่าเกิน 30 ปี ถ้าเกินนั้นก็ให้ลดลงมา",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "541",
+  "shortText": "แต่จะเช่าไปตลอดอายุผู้เช่า/ผู้ให้เช่าก็ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "544",
+  "shortText": "เช่าช่วง/โอนสิทธิการเช่าจะทำไม่ได้ เว้นแต่ได้ตกลงกันไว้ในสัญญา ถ้าฝ่าฝืนผู้ให้เช่ามีสิทธิบอกเลิกสัญญาได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "545",
+  "shortText": "เช่าช่วงโดยชอบ = ผู้เช่าช่วงต้องรับผิดต่อผู้ให้เช่าเดิมโดยตรง (ผชช.ต้องจ่ายค่าเช่าให้เจ้าของ)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "549",
+  "shortText": "ให้นำเรื่องซื้อขายมาใช้กรณี -ส่งมอบ -ชำรุดฯ -รอนสิทธิ -ข้อส.ว่าไม่ต้องรับผิด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "552",
+  "shortText": "จะใช้ทรัพย์ที่เช่าอย่างอื่นนอกจากปกติไม่ได้ (น้อย=ซ่อมใหญ่เจ้าของรับ)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "553",
+  "shortText": "ผู้เช่าต้องสงวนทส.ที่เช่าเสมือนของตน+ซ่อมแซมเล็กน้อย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "554",
+  "shortText": "ฝ่าฝืน 552,553/ฝ่าฝืนข้อสัญญา >บอกกล่าวก่อน>ถ้าละเลยถึงจะบอกเลิกสัญญาได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "558",
+  "shortText": "ดัดแปลงต่อเติมถาวรจะทำไม่ได้เว้นแต่ได้รับอนุญาต ผู้ให้เช่าเรียกให้ทำกลับคืน+รับผิดคสห.ได้ (แต่ไม่ก่อให้เกิดสิทธิบอกเลิกส.)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "560",
+  "shortText": "ไม่ชำระค่าเช่าบอกเลิกส.ได้ ว.2 แต่ต้องบอกกล่าวล่วงหน้าให้ชำระก่อน..(ไม่ใช่กม.ความสงบ)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "563",
+  "shortText": "เจ้าของฟ้องผู้เช่าขณะสัญญาบังคับอยู่ต้องฟ้องภายใน 6 เดือน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "566",
+  "shortText": "บอกเลิกส.กรณีเช่าไม่มีกำหนดเวลาได้ทุกระยะ แต่ต้องบอกกล่าวก่อนกำหนดชำระค่าเช่า",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "567",
+  "shortText": "ทรัพย์สินสูญหายทั้งหมด = สัญญาเช่าระงับ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "569",
+  "shortText": "ส.เช่าไม่ระงับเพราะเหตุโอนกรรมสิทธิและผู้รับโอนต้องรับไปทั้งสิทธิ+หน้าที่ ที่ผู้โอนมีต่อผู้เช่าด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "570",
+  "shortText": "ถ้าสิ้นกำหนดเวลาเช่าแล้วผู้เช่ายังคงครองทส.อยู่โดยเจ้าของไม่ได้ทักท้วง ให้ถือว่าคู่สัญญาได้ทำส.เช่ากันต่อไปโดยไม่มีกำหนด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "572",
+  "shortText": "ส.เช่าซื้อต้องทำเป็นหนังสือลงลมช. 2 ฝ่าย มิฉะนั้นเป็นโมฆะ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "573",
+  "shortText": "ผู้เช่าซื้อบอกเลิกสัญญาได้โดยบอกเลิก+ส่งมอบทรัพย์คืน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "574",
+  "shortText": "ไม่จ่าย 2,3 งวดติด/ผิดสัญญาในสาระสำคัญผู้ให้เช่าซื้อบอกเลิกสัญญาได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "587",
+  "shortText": "จ้างทำของไม่ต้องมีแบบ/หลักฐานใด มีผจว.และผรจ.",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "596",
+  "shortText": "ส่งมอบงานไม่ทันสัญญา/เวลาอันควร ชอบที่จะลดสินจ้าง แต่ถ้าเวลาเป็นสาระสำคัญ>เลิกได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "597",
+  "shortText": "ยอมรับงานที่ชักช้าไว้โดยไม่อิดเอื้อน ผรจ.ก็ไม่ต้องรับผิด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "598",
+  "shortText": "ยอมรับงานที่ชำรุดบกพร่องไว้โดยมิได้อิดเอื้อนชัดแจ้ง/ปริยาย = ผรจ.ไม่ต้องรับผิด เว้นความชำรุดนั้นไม่พึงพบ/ปิดบัง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "599",
+  "shortText": "ส่งมอบเนิ่นช้า/บกพร่อง ผู้จ้างยึดหน่วงสินจ้างไม่จ่ายได้ เว้นแต่จะมีประกันตามสมควร",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "600",
+  "shortText": "รับผิดในชำรุดฯถ้าไม่ตกลงไว้ให้มีเพียง 1 ปีแต่ส่งมอบ / 5 ปีในสิ่งปลูกสร้างกับพื้นดินที่ไม่ใช่ไม้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "601",
+  "shortText": "ฟ้องผู้รับจ้างภายใน 1 ปีนับแต่วันที่ปรากฏการชำรุดบกพร่อง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "605",
+  "shortText": "ผวจ.บอกเลิกสัญญาเมื่อใดก็ได้แต่ต้องใช้ค่าสินไหมทดแทนเพื่อความเสียหายนั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "606",
+  "shortText": "ความรู้/ความสามารถของผู้รับจ้างเป็นสาระสำคัญ แล้วต่อมาตาย/ไร้ความสามารถ = สัญญาเป็นอันสิ้นสุด แต่ส่วนที่ได้ทำไปแล้วให้รับเอา+ใช้ราคาตามส่วน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "617",
+  "shortText": "ผู้ขนส่งต้องรับผิดสูญหายบุบสลาย/ช้า ที่เกิดจากผขส/ผขสอ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "618",
+  "shortText": "ผู้ขนส่งหลายคน,หลายทอด ต้องรับผิดด้วยกันทุกคน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "619",
+  "shortText": "ถ้าสภาพของสินค้าอันตรายต้องแสดงให้ทราบ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "620",
+  "shortText": "ผขส.ไม่ต้องรับผิดในเงิน,ทอง,ตั๋วเงิน,อัญมณี,ของมีค่าอื่นๆ ถ้าบอกรับผิดเท่าราคาจริง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "624",
+  "shortText": "ความรับผิดในความหาย,สลาย,ช้า =ฟ้อง 1 ปีนับแต่ส่งมอบ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "625",
+  "shortText": "ตกลงยกเว้น/จำกัด ครผ.ต้องชัดแจ้ง+ระบุไว้ในใบตราส่ง มิฉะนั้นเป็นโมฆะ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 8,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "640",
+  "shortText": "ยืมใช้คงรูป กส.ไม่โอน ผู้ให้ยืมไม่จำต้องเป็นเจ้าของ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "650",
+  "shortText": "ว.2 ยืมใช้สิ้นเปลือง สมบูรณ์เมื่อส่งมอบ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "643",
+  "shortText": "-ใช้อย่างอื่นนอกจากปกติ -ใช้อย่างอื่นนอกจากในสัญญา -เอาไปให้คนนอกใช้สอย -เอาไว้นานกว่าที่ควร = ผู้ยืมต้องรับผิดแม้เหตุสุดวิสัย เว้นแต่อย่างไรก็ต้องเสียหายอยู่ดี",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "653",
+  "shortText": "ถ้าไม่มีหลักฐานเป็นหนังสือลงลมช.ผู้กู้เป็นสำคัญ จะฟ้องร้องบังคับคดีไม่ได้ ว.2 นำสืบการใช้เงิน(ต้น)ได้เมื่อมีหลักฐานเป็นนส/เวนคืน/แทงเพิกถอน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "644",
+  "shortText": "ผู้ยืมต้องสงวนทส.เหมือนวิญญูชนสงวนของตนเอง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "654",
+  "shortText": "ดอกเบี้ยห้ามเกินร้อยละ 15 ต่อปี",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "645",
+  "shortText": "ฝ่าฝืน 643,644บอกเลิกได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "655",
+  "shortText": "คิดดอกเบี้ยทบต้นทันทีไม่ได้ เว้นแต่ค้างดอกเกิน 1 ปีแล้ว+ได้มีข้อตกลงในหนังสือสัญญาชัดแจ้ง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "649",
+  "shortText": "6 เดือนกรณีฟ้องเรียกค่าทดแทน/คสห.จากการผิดส. แต่ถ้าฟ้องเรียกทส.คืน = 10 ปี",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "656",
+  "shortText": "วรรค2 ผู้กู้ยอมรับทรัพย์สินอื่นชำระหนี้แทนเงิน = หนี้ระงับ >> ทรัพย์สินนั้นต้องตีราคาตามท้องตลาดจะต่ำกว่า/มากกว่าไม่ได้ เป็นโมฆะ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "659",
+  "shortText": "ฝากทรัพย์ไม่มีบำเหน็จให้ดูแลสงวนเหมือนของตน ว.2 มีบำเหน็จต้องใช้ฝีมือรักษาเหมือนวิญญูชนจะทำ:ดีกว่าของตน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "660",
+  "shortText": "ผู้รับฝากต้องรับผิดเมื่อ.. -ใช้เองไม่ได้รับอนุญาต -เอาไปให้คนนอกใช้สอย -ให้คนนอกเก็บ แม้เป็นเหตุสุดวิสัยก็ตาม เว้นแต่..",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "671",
+  "shortText": "ฟ้องเรียกบำเหน็จ,ค่าปรับ,ค่าซ่อม,คสมทท. ต้องฟ้องภายใน 6 เดือนนับแต่วันสิ้นสัญญา",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "674",
+  "shortText": "เจ้าสำนักต้องรับผิดในความเสียหาย/สูญหาย/บุบในทรัพย์สินของแขกผู้พักหรือคนของเขา",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "677",
+  "shortText": "ถ้ามีประกาศยกเว้น/จำกัดความรับผิดในรร. ท่านว่าเป็นโมฆะ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "675",
+  "shortText": "เงิน,ทอง,ตั๋วเงิน,อัญมณี, ของมีค่าอื่นที่ไม่ได้แจ้งรับผิดเพียง 5,000 > เว้นแต่ได้แจ้ง+บอกราคา ว.3 ไม่ต้องรับผิดในเหตุสุดวิสัย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "678",
+  "shortText": "แขกฟ้องโรงแรม มีอายุความ 6 เดือน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "676",
+  "shortText": "ถ้าเกิดสูญหายต้องแจ้งทันที มิฉะนั้นพ้นความรับผิด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "680",
+  "shortText": "ค้ำฯ คือสัญญาที่บุคคลภายนอกผูกพันต่อเจ้าหนี้ชำระหนี้แทนเมื่อลูกหนี้ไม่ชำระหนี้ ว.2 ถ้าไม่ได้มีหลักฐานเป็นนส. ลงลมช.ผู้ค้ำจะฟ้องบังคับคดีไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "689",
+  "shortText": "ฟ้องแล้วมีสิทธิเกี่ยงให้ไปบังคับกับทส.ของลน.ก่อน ถ้าพิสูจน์ได้ว่า -ลน.มีทางชำระได้ -การจะบังคับไม่เป็นการยาก = ต้องบังคับลน.ก่อน พพษตามคิว",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "698",
+  "shortText": "ผู้ค้ำหลุดพ้นเมื่อหนี้ระงับ (หนี้ประธานระงับ หนี้ค้ำประกันก็ระงับ)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "681",
+  "shortText": "ค้ำมีได้แต่หนี้ที่สมบูรณ์ ว.2 หนี้ในอนาคตต้องระบุวัตถุประสงค์, ลักษณะหนี้,จำนวนเงิน,เวลา ว.3 ต้องระบุหนี้/สัญญาที่ประกันชัดแจ้ง ว.4 หนี้ประธานไม่สมบูรณ์ค้ำอาจสมบูรณ์ได้ถ้ารู้ถึงความสำคัญผิด/ไร้ความสม.นั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "690",
+  "shortText": "ถ้าหนี้มี(จำนำ)เกี่ยงให้ไปเอากับทรัพย์ของลน.ก่อน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "691",
+  "shortText": "เจ้าหนี้ลดหนี้ให้ลูกหนี้ > มีผลถึงผู้ค้ำฯด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "700",
+  "shortText": "หนี้ที่มีกำหนดแน่นอนแล้วจน.ยอมผ่อนเวลาให้ลน. > ผู้ค้ำฯเป็นอันหลุดพ้นความรับผิด ว.2 ข้อตกลงที่ผ่อนเวลาไว้ล่วงหน้าใช้บังคับไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "681/1",
+  "shortText": "ข้อตกลงที่ให้ผู้ค้ำฯเป็นลูกหนี้ร่วมเป็นโมฆะ เว้นแต่ผู้ค้ำเป็นนิติบุคคล",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "692",
+  "shortText": "ลน.ทำให้อายุความสะดุดหยุดลง ย่อมเป็นโทษแก่ผู้ค้ำด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "701",
+  "shortText": "เมื่อถึงกำหนดชำระหนี้ ผู้ค้ำจะขอชำระหนี้ก็ได้ (ไม่ต้องรอให้ผิดนัด) > ถ้าไม่รับผู้ค้ำหลุดพ้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "682",
+  "shortText": "วรรค 2 คนหลายคนยอมตนเข้าเป็นผู้ค้ำฯในหนี้รายเดียวกันมีความรับผิดด้วยอย่างลูก",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "693",
+  "shortText": "ผู้ค้ำชำระหนี้แล้ว มีสิทธิไล่เบี้ยและรับช่วงสิทธิของจน.",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 9,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "685",
+  "shortText": "เมื่อบังคับตามสัญญาค้ำแล้วหนี้ยังเหลืออยู่เท่าใดลูกหนี้ยังคงต้องรับผิดในส่วนที่เหลือ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "685/1",
+  "shortText": "ข้อตกลงที่แตกต่างไปจาก 681,686,694,698 เป็นโมฆะ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "686",
+  "shortText": "เมื่อลน.ผิดนัดให้จน.มีหนังสือบอกกล่าวไปยังผู้ค้ำภายใน 60 วันนับแต่วันที่ลูกหนี้ผิดนัด มิฉะนั้นผู้ค้ำย่อมหลุดพ้นดอกเบี้ยและคสมทท.ที่เกิดภายหลังนั้น -ฟ้องก่อนนส.ไปถึงไม่ได้ แต่ผู้ค้ำชำระหนี้ได้เมื่อถึงกำหนด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "687",
+  "shortText": "สิทธิผู้ค้ำฯที่จะไม่ชำระหนี้ก่อนถึงกำหนดชำระ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "688",
+  "shortText": "สิทธิเกี่ยงเอากับลน.ก่อน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "694",
+  "shortText": "(1 สิทธิ) ผู้ค้ำยกข้อต่อสู้ของลูกหนี้ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "695",
+  "shortText": "ถ้าผู้ค้ำละเลยไม่ยกข้อต่อสู้ = ผู้ค้ำสิ้นสิทธิไล่เบี้ยเพียงเท่าที่ไม่ยก เว้นแต่ไม่รู้+ตนไม่ผิด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "696",
+  "shortText": "ถ้าผู้ค้ำชำระหนี้ไม่บอกแล้วลน.ชำระซ้ำ = ผู้ค้ำสิ้นสิทธิไล่เบี้ย แต่ฟ้องคืนลาภมิควรได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "697",
+  "shortText": "จน.กระทำการเป็นเหตุให้ผู้ค้ำไม่อาจเข้ารับช่วงฯในสิทธิ/จำนำ/จำนอง = ผู้ค้ำหลุดพ้นจากความรับผิดเพียงเท่าที่เสียหาย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "702",
+  "shortText": "จำนองต้องจดทะเบียนเอาทส.ตราไว้ แต่กส.ไม่โอน ว.2 ผู้รับจำนองชอบที่จะได้รับชำระหนี้ก่อนจน.สามัญ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "705",
+  "shortText": "การจำนองนั้นนอกจากผู้เป็นเจ้าของแล้วท่านว่าใครอื่นจะจำนองไม่ได้ - ไม่ผูกพัน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "706",
+  "shortText": "จดภาระจำยอมในที่ดินก่อนจำนองก็ให้ตามนั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "707",
+  "shortText": "+681 จำนองต้องระบุ 4 สิ่ง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "709",
+  "shortText": "ผู้จำนองจะเป็นลูกหนี้หรือบุคคลอื่นก็ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "711",
+  "shortText": "นอกจากการบังคับจำนองแล้ว จะตกลงกัน(ล่วงหน้า)ให้ทรัพย์หลุดเป็นสิทธิไม่ได้ > ข้อตกลงไม่สมบูรณ์",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "712",
+  "shortText": "จำนองแล้ว จำนองอีกก็ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "714",
+  "shortText": "จำนองต้องทำตามแบบ มิฉะนั้นเป็นโมฆะ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "714/1",
+  "shortText": "ข้อตกลงแตกต่างจาก 728,729,735 เป็นโมฆะ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "716",
+  "shortText": "จำนองครอบถึงทุกส่วนจนกว่าจะได้ชำระหนี้ทั้งหมด/จดทะเบียนปลดจำนอง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "717",
+  "shortText": "แม้แบ่งแยกออกหลายส่วน จำนองก็ยังคงติดอยู่ แต่จะจดปลดจำนองก็ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "718",
+  "shortText": "จำนองครอบไปถึงส่วนควบ เว้นแต่สามม.ต่อไปนี้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "719",
+  "shortText": "บ้านที่สร้างภายหลังจำนอง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "720",
+  "shortText": "บ้านของคนอื่น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "721",
+  "shortText": "ดอกผล เว้นแต่บอกกล่าวแล้วว่าจะบังคับจำนอง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "722",
+  "shortText": "ถ้าจำนองก่อน จำนองใหญ่กว่า เมื่อหนี้ถึงกำหนด+จะบังคับจำนองแล้วขอให้ลบภาระจำยอม/สิทธิอื่นๆได้ (สิทธิอาศัย,เก็บกิน)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "725",
+  "shortText": "ผู้จำนองไล่เบี้ยกันเองไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "726",
+  "shortText": "จน.ปลดหนี้ให้ผู้จน.คนหนึ่งคนอื่นก็หลุดพ้นด้วยเท่าที่เสียหาย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "727",
+  "shortText": "ให้นำ 691,697,700,701 มาใช้กับผู้จน.ในหนี้บุคคลอื่นด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "727/1",
+  "shortText": "ผู้จน.ทรัพย์ของตนไว้เพื่อประกันหนี้บุคคลอื่นต้องชำระไม่ต้องรับผิดเกินกว่าทรัพย์ที่จำนอง #ตกลงยกเว้นไม่ได้ = เป็นโมฆะ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "728",
+  "shortText": "เมื่อจะบังคับจำนองต้องบอกกล่าวลน.ให้ชำระหนี้ภายในเวลาอันควรไม่น้อยกว่า 60 วันนับแต่วันที่ได้รับคำบอกกล่าว ว.2 บุคคลอื่นจำนอง +15 วันนับแต่วันส่งหนังสือ > หลุดพ้นดอก",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "729",
+  "shortText": "ถ้าไม่มีจำนองอื่นจะเอาที่หลุดเป็นสิทธิโดยไม่ขายทอดตลาดก็ได้ แต่ต้องฟ้องคดีต่อศาล 1)ขาดส่งดอกเกิน5ปี 2)ราคาน้อย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "730",
+  "shortText": "ลำดับคน>จำนองก่อนได้ก่อน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "732",
+  "shortText": "ได้เงินขายที่ให้จ่ายแก่คนที่รับจำนองก่อน ถ้าเหลือก็ให้คืน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "733",
+  "shortText": "ตกลงกันให้ผู้จน.ต้องรับผิดในส่วนที่ขาดได้ ไม่ใช่กม.ความสงบฯ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "735",
+  "shortText": "เมื่อจะบังคับจำนองเอากับผู้รับโอนทรัพย์ ต้องมีจดหมายบอกล่วงหน้าไม่น้อยกว่า 60 วัน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 10,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "736",
+  "shortText": "ผู้รับโอนมีสิทธิไถ่ถอนจำนองได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "738",
+  "shortText": "ต้องส่งคำเสนอ+ราคาสมควรแก่ทรัพย์",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "737",
+  "shortText": "ไถ่ถอนเมื่อใดก็ได้ แต่ถ้าจน.ส่งหนังสือบอกกล่าวว่าจะบังคับแล้วให้ไถ่ภายใน 60 วัน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "739",
+  "shortText": "ถ้าจน.ไม่ยอมรับคำเสนอให้ฟ้องศาลภายใน 1 เดือนนับแต่มีคำเสนอเพื่อให้ศาลสั่งขายทอดตลาด >> ถ้าไม่ฟ้องศาลในเวลา ถือว่าสนองรับโดยปริยาย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "744",
+  "shortText": "จำนองระงับเมื่อ (1) หนี้ประธานระงับ (2) ปลดจน. (3) ผู้จน.หลุดตาม727 (4) ไถ่ถอน (5) ขายทอดฯ (6) เอาทรัพย์หลุด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "745",
+  "shortText": "แม้หนี้ประธานขาดอายุความแล้วก็มีสิทธิบังคับจำนองได้ แต่จะบังคับเอาดอกที่ค้างเกิน 5 ปีไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "746",
+  "shortText": "การชำระหนี้/ระงับหนี้/เปลี่ยนแปลงต่างๆ ต้องนำไปจดทะเบียน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "747",
+  "shortText": "จำนำต้องส่งมอบ เพื่อเป็นประกันการชำระหนี้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "763",
+  "shortText": "อายุความ 6 เดือน (1)ฟ้องเรียกคสมทท.ตาม 760 (2)เรียกค่าบำรุงตาม 762จากผู้จน.",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "767",
+  "shortText": "ถ้าบังคับจำนำแล้วมีเงินเหลือต้องส่งคืน #ถ้าได้น้อยกว่าลน.ก็ยังต้องรับผิด เว้นบุคคลนอก",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "760",
+  "shortText": "จน.เอาทรัพย์ออกใช้โดยไม่รับยินยอม/ให้คนนอกใช้จะต้องรับผิดในคสห.แม้เป็นเหตุสุดวิสัย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "764",
+  "shortText": "ต้องบอกกล่าวบังคับจำนำในเวลาอันควร#ขายทอดตลาดเท่านั้น+บอกสถานที่และเวลาด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "769",
+  "shortText": "จำนำระงับเมื่อ (1) หนี้ประธานระงับ (2) ยอมให้ทรัพย์ที่จำนำกลับคืนแก่ผู้จำนำ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "798",
+  "shortText": "การตั้งตัวแทนโดยชัดแจ้งต้องทำเป็นหนังสือ เว้นแต่ -ตัวแทนปริยาย (ไม่อยู่ในบังคับ) -ไม่เปิดเผยชื่อ -ตัวแทนเชิด ม.798",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "806",
+  "shortText": "ตัวการที่ไม่เปิดเผยชื่อต้องผูกพันตามที่ตัวแทนได้ทำไป จะทำให้เสื่อมเสียสิทธิของคนนอกที่ขวนขวายได้สิทธิมาก่อนรู้ไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "812",
+  "shortText": "กรณีตัวแทนประมาท/ทำการโดยปราศจากอำนาจ/นอกเหนืออำนาจ = ตัวแทนต้องรับผิดต่อตัวการ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "814",
+  "shortText": "ถ้ามีตัวแทนช่วงโดยชอบให้รับผิดต่อตัวการโดยตรง (เหมือนเช่าช่วง)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "820",
+  "shortText": "ตัวการต้องรับผิดต่อคนภายนอกในกิจการที่ตัวแทนได้ทำไปภายในขอบอำนาจ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "821",
+  "shortText": "ตัวแทนเชิด -เชิดเอง -รู้แล้วแต่ปล่อย =ตัวการต้องรับผิดต่อคนนอกเสมือนว่าคนนั้นเป็นตัวแทนของตน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "822",
+  "shortText": "ตัวแทนทำเกิน/ปราศจากอำนาจ (มีนิติสัมพันธ์กันอยู่แล้ว) แต่มีเหตุให้เข้าใจว่ามีอำนาจ =คนนอกได้รับคุ้มครอง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "823",
+  "shortText": "ตัวแทนทำนอกขอบอำนาจ/ปราศจาก = ไม่ผูกพันตัวการ เว้นแต่จะได้ให้สัตยาบัน (ถ้าไม่ ให้ตท.รับผิดเอง)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "850",
+  "shortText": "ประนีประนอมยอมความคือสัญญาซึ่งทั้งสองฝ่ายระงับข้อพิพาทที่มีอยู่/จะมีขึ้นให้เสร็จไปด้วยต่างฝ่ายต่างยอมผ่อนผันให้แก่กัน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "851",
+  "shortText": "ต้องมีหลักฐานเป็นหนังสืออย่างใดอย่างหนึ่งลงลายมือชื่อฝ่ายที่ต้องรับผิดเป็นสำคัญมิฉะนั้นจะฟ้องร้องบังคับคดีไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "852",
+  "shortText": "ผลของสัญญายอมคือทำให้การมีสิทธิเรียกร้องระงับสิ้นไป",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 11,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "862",
+  "shortText": "\"ผู้รับประกันภัย\" = ฝ่ายจ่ายเงิน/คสมทท. \"ผู้เอาประกันภัย\" = ฝ่ายจะส่งเบี้ย \"ผู้รับประโยชน์\" = ฝ่ายได้รับเงิน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "869",
+  "shortText": "ประกันวินาศภัย (เช่น ประกันความเสียหายของรถ,บ้าน) รับช่วงสิทธิได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "887",
+  "shortText": "ประกันภัยค้ำจุน (จ่ายค่าซ่อมรถเรา+จ่ายผสห.ถ้าเราผิด) ผู้เสียหายชอบที่จะได้รับเงินจาก บ.ประกันโดยตรงแต่ไม่เกินไปกว่าวงเงินตามสัญญา",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "863",
+  "shortText": "ถ้าผู้เอาประกันภัยไม่ได้มีส่วนได้เสียในเหตุที่ประกันภัยไว้สัญญาไม่ผูกพัน (แต่ผู้รับปย.จะเป็นใครก็ได้)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "875",
+  "shortText": "ถ้าวัตถุที่เอาประกันภัยไว้เปลี่ยนมือโดยกม.ท่านว่าสิทธิที่มีอยู่ในสัญญาก็ย่อมโอนตามไป ว.2 ถ้าโอนไป+บอกกล่าวการโอนให้ทราบ สิทธิตามสัญญาก็ย่อมโอนตามไปด้วย(ส.ไม่ได้สิ้นสุดลง)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "889",
+  "shortText": "ประกันชีวิต (รับช่วงสิทธิไม่ได้) ใช้เงินโดยอาศัยความมรณะของบุคคล",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "865",
+  "shortText": "ถ้าในเวลาทำสัญญาผู้เอาประกันรู้อยู่แล้วแต่ละเว้นไม่เปิดเผยข้อความจริงซึ่งอาจจูงใจให้ผู้รับเรียกเบี้ยฯสูงขึ้น/ไม่รับทำ = สัญญาประกันเป็นโมฆียะ ว.2 ต้องมีการบอกล้างภายใน 1 เดือนนับแต่วันรู้/5 ปีนับแต่วันทำ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "879",
+  "shortText": "บริษัทประกัน ไม่ต้องรับผิดเมื่อวินาศภัยเกิดขึ้นเพราะ -ความทุจริต -ประมาทเลินเล่ออย่างร้ายแรงของ 1) ผู้เอาประกันภัย 2) ผู้รับประโยชน์ตามสัญญา",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "892",
+  "shortText": "กรณีบอกล้างสัญญาตามม.865 หรือไม่ต้องใช้เงินเพราะเหตุ ม.895(2) ผู้รับฯต้องคืนค่าไถ่ถอนกรมธรรม์ด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "866",
+  "shortText": "ถ้าผู้รับประกันควรจะรู้ได้แค่นั้นก็ให้เป็นอันสมบูรณ์",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "867",
+  "shortText": "ถ้ามิได้มีหลักฐานเป็นหนังสือลงลายมือชื่อฝ่ายต้องรับผิด จะฟ้องร้องบังคับคดีหาได้ไม่",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "880",
+  "shortText": "ถ้าคนภายนอกก่อคสห.และผู้รับประกันได้ใช้คสมทท.แล้ว > ผู้รับประกันเข้ารับช่วงสิทธิได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "882",
+  "shortText": "การฟ้องเรียกให้ใช้ค่าสินไหมทดแทนต้องฟ้องภายใน 2 ปีนับแต่วันเกิดวินาศภัย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "896",
+  "shortText": "(ประกอบ 880) ประกันชีวิตรับช่วงสิทธิไม่ได้แม้ความตายจะเกิดจากความผิดของบุคคลภายนอก",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "899",
+  "shortText": "ข้อความใดที่มิได้มีบัญญัติไว้ในกฎหมายลักษณะนี้ แม้เขียนลงในตั๋วเงินก็หามีผลอย่างใดไม่",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "900",
+  "shortText": "บุคคลผู้ลงลายมือชื่อในตั๋วเงินย่อมต้องรับผิดตามเนื้อความในตั๋วเงินนั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "901",
+  "shortText": "ถ้าเป็นการลงลายมือชื่อแทนคนอื่น ต้องเขียนแถลงด้วย มิฉะนั้นรับผิดเป็นส่วนตัว",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "904",
+  "shortText": "ผู้ทรงตั๋วผู้ถือ มีตั๋วเงินไว้ในครอบครองโดยฐานเป็นผู้รับเงิน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "905",
+  "shortText": "ภายใต้ 1008 ผู้ทรงตั๋วชนิดระบุชื่อจะต้องมีตั๋วในคค.และแสดงให้เห็นว่าการสลักหลังไม่ขาดสาย แม้รายสุดท้ายจะเป็นการสลักหลังลอยก็ตาม ว.2 ผู้รับโอนตัวมาโดยสุจริตย่อมมีสิทธิดีกว่าผู้โอน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "911",
+  "shortText": "เขียนข้อกำหนดเรื่องดอกเบี้ยได้ ***แต่ไม่นำไปใช้กับเช็ค***",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "914",
+  "shortText": "ผู้สั่งจ่ายหรือสลักหลังต้องรับผิดต่อผู้ทรง คนที่จะเป็นผู้สลักหลังได้ต้องเคยเป็นผู้ทรงมาก่อน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "915",
+  "shortText": "ผสจ. หรือผสล.จะเขียนข้อกำหนดลบล้างหรือจำกัดความรับผิดของตนเองก็ได้ โดยเขียนลงไปในตั๋วนั้น (ex.ขอรับผิดกึ่งหนึ่ง)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "916",
+  "shortText": "บุคคลทั้งหลายผู้ถูกฟ้องในมูลตั๋วเงิน จะยกข้อต่อสู้อันอาศัยความเกี่ยวพันเฉพาะบุคคลระหว่างตนกับผู้ทรงคนก่อนไม่ได้ เว้นแต่การโอนจะมีขึ้นด้วยการคบคิดกันฉ้อฉล",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "921",
+  "shortText": "สลักหลังตั๋วผู้ถือ = อาวัลผู้สั่งจ่าย(อาวัลโดยผลของกฎหมาย)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "922",
+  "shortText": "การสลักหลังต้องไม่มีเงื่อนไขและต้องโอนไปทั้งหมด (โอนบางส่วนเป็นโมฆะ)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "939",
+  "shortText": "(อาวัลตามรูปแบบ) ว.1 ลงลายมือชื่อ+ใช้ได้เป็นอาวัล ว.2 ลงลายมือชื่อเฉยๆที่ด้านหน้า ว.3 ถ้าไม่ได้ระบุถือว่าอาวัลผสจ.",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "940",
+  "shortText": "ผู้รับอาวัลต้องรับผิดเป็นอย่างเดียวกับบุคคลที่ตนประกัน ว.2 แม้ผสจ.ไม่ต้องรับผิดเพราะเหตุใดๆผู้รับอาวัลยังคงต้องรับผิด ว.ท้าย เมื่อใช้เงินไปแล้วมีสิทธิไล่เบี้ยเอากับบุคคลที่ตนประกันได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "948",
+  "shortText": "ถ้าผู้ทรงตั๋วแลก ยอมผ่อนเวลาให้ธนาคาร=สิ้นสิทธิไล่เบี้ยเอากับคู่สัญญาคนก่อนๆที่ไม่รู้เห็น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 12,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "908",
+  "shortText": "(Draft) ตั๋วแลกเงิน ผสจ.สั่ง ผู้จ่าย > จ่ายเงินแก่ผรง.",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "909",
+  "shortText": "ต้องมี (1)บอกชื่อ (2)คำสั่งให้จ่ายเงินเป็นจำนวนแน่นอน (4)ชื่อผู้จ่าย (5)วันถึงกำหนดใช้เงิน (6) ชื่อผู้รับเงิน (7)วันที่ออกตั๋ว (8) ลายมือชื่อผู้สั่งจ่าย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "910",
+  "shortText": "รายการไม่ครบ=ไม่สมบูรณ์ เว้นแต่ (4)(5)(7) วรรคท้าย ถ้ามิได้ลงวันที่ผู้ทรงโดยชอบฯทำการโดยสุจริตเขียนวันที่ที่ถูกต้องแท้จริงลงก็ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "917",
+  "shortText": "(ระบุชื่อ) โอนกันได้ด้วยสลักหลัง+ส่งมอบ ว.2 ถ้าผสจ.เขียน\"เปลี่ยนมือไม่ได้\" ท่านว่าตั๋วเงินนั้นจะโอนกันได้ต่อเมื่อโอนกันอย่างสามัญ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "918",
+  "shortText": "(ผู้ถือ) โอนกันได้ด้วยการส่งมอบ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "919",
+  "shortText": "การสลักหลังคือลงลมช.ด้านหลังตั๋วเงิน โดยจะระบุชื่อผู้รับปย.หรือไม่ก็ได้(เฉพาะ,ลอย)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "920",
+  "shortText": "ถ้าสลักหลังลอยทำได้ดังนี้ -ผู้ทรงโอนต่อโดยกรอกชื่อคนอื่น -ลงลมช.อีกและโอนต่ออีก -ไม่กรอกอะไรเลย ส่งต่อให้คนอื่น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "950",
+  "shortText": "สอดเข้าแก้หน้า การที่บุคคลภายนอกเข้ามาเกี่ยวข้องกับตั๋วเงินโดยเป็นผู้รับรองหรือเป็นผู้ใช้เงินแทนตามตั๋วนั้นโดยลงลายมือชื่อในตัว",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "952",
+  "shortText": "ต้องระบุไว้ด้วยว่ารับรองผู้ใดถ้าไม่ระบุถือว่ารับรองผู้สั่งจ่าย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "959",
+  "shortText": "สิทธิของผู้ทรงเรียกเอากับใครก็ได้ที่ต้องรับผิดตามตั๋วเงิน (ก) ถึงกำหนด (1)ธ.ปฏิเสธ (2)ล้มละลาย (ข) ยังไม่ถึงกำหนด (2)ล้มละลาย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "967",
+  "shortText": "ผสจ,รับรอง,สลักหลัง, อาวัล> ต้องร่วมกันรับผิดต่อผู้ทรง ว.2 ผู้ทรงจะเรียกเรียงตัวหรือรวมกันก็ได้โดยไม่ต้องคำนึงลำดับ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "982",
+  "shortText": "ตั๋วสัญญาใช้เงิน คือ\"ผู้ออกตั๋ว\"ให้คำมั่นว่าจะใช้เงินแก่\"ผู้รับเงิน\"",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "985",
+  "shortText": "ตัวเชื่อม เอา ม.911,913,916,917,919,920,959,967 มาใช้ด้วย *ข้อสังเกต ไม่ได้นำมาตรา 915 มาใช้หมายความว่าตั๋วใช้เงินจะกำหนดลบล้างความรับผิดไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "983",
+  "shortText": "ต้องมีรายการดังนี้ (2)คำมั่นว่าจะใช้เงินปราศจากเงื่อนไขเป็นจำนวนแน่นอน (3)วันถึงกำหนดใช้เงิน (5)ชื่อผู้รับเงิน (6)วัน/สถานที่ออกตั๋ว (7) ลมช.ผู้ออกตั๋ว",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "984",
+  "shortText": "-ถ้าไม่ระบุเวลาใช้เงินถือว่าใช้เมื่อได้เห็น -ถ้าไม่ได้ระบุสถานที่ออกถือเอาภูมิลำเนาผู้ออก -ถ้าไม่ได้ลงวันที่ออกตัวผู้ทรงโดยชอบจะทำการโดยสุจริตจดวันที่แท้จริงลงก็ได้(เหมือน 910ว.ท้าย)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "987",
+  "shortText": "เช็คคือตราสารที่\"ผู้สั่งจ่าย\"สั่งธนาคารจ่ายเงินให้ \"ผู้รับเงิน\"",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "988",
+  "shortText": "เช็คต้องมี (2)คำสั่งให้ใช้เงินเป็นแน่นอน (3)ชื่อธนาคาร (4)ชื่อผู้รับเงิน/ผู้ถือ (6)วันและสถานที่ออกเช็ค (7)ลมช.ผสจ.",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "989",
+  "shortText": "ให้นำมาตรา 910,914,915,916,917,918,919,920,921,940,959,967",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "990",
+  "shortText": "เมืองเดียวกัน 1 เดือน ต่างเมือง 3 เดือน มิฉะนั้นสิ้นสิทธิเอาแก่ผู้สลักหลังทั้งปวง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "991",
+  "shortText": "ธ.ใช้ดุลพินิจจ่ายเงินได้ (1)ไม่มีเงินพอ (2)ยื่นพ้น 6 เดือน (3)มีคำบอกว่าเช็คหาย/ถูกลัก",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "993",
+  "shortText": "ถ้าธ.เขียนข้อความ+ลงลมช.ว่า \"ใช้เงินได้\" หรืออื่นๆธ.ต้องผูกพันในฐานลน.ชั้นต้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "994",
+  "shortText": "เช็คขีดคร่อม ต้องจ่ายเงินเข้าบัญชีธ.เท่านั้น จ่ายเงินสดไม่ได้ ว.2 ขีดคร่อมเฉพาะ จ่ายเงินเข้าบัญชีธนาคารที่ระบุไว้เท่านั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "995",
+  "shortText": "(1)ผสจ./ผู้ทรง ขีดคร่อมได้ (2)ขีดคร่อมทั่วไปผู้ทรงจะทำเฉพาะก็ได้ (3)ผท.เขียนห้ามเปลี่ยนมือได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "996",
+  "shortText": "การขีดคร่อมที่ชอบตามมาตราก่อนถือว่าเป็นส่วนสำคัญของเช็ค ใครลบไม่ได้ (ไม่ยึด1007)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "997",
+  "shortText": "กรณีไม่ปรากฏว่าเป็นเช็คขีดคร่อม หากธนาคารใช้เงินไปโดยสุจริตปราศจากประมาทเลินเล่อ ธนาคารไม่ต้องรับผิด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1001",
+  "shortText": "ผู้ทรงฟ้อง -ผู้ออกตั๋วสัญญาใช้เงิน -ผู้รับอาวัล \"อายุความ 3 ปี\" นับแต่วันถึงกำหนดใช้เงิน (ใช้เมื่อทวงถาม)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1002",
+  "shortText": "ผู้ทรงตั๋วแลก/เช็ค ฟ้อง -ผู้สั่งจ่ายเช็ค -ผู้สลักหลังเช็ค อายุความ 1 ปีนับแต่วันที่ลงในเช็ค",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1003",
+  "shortText": "กรณีผู้สลักหลังฟ้องไล่เบี้ยกันเองและไล่เบี้ยผู้สั่งจ่าย มีอายุความ 6เดือนนับแต่วันใช้เงิน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1004",
+  "shortText": "อายุความสะดุดหยุดลง เฉพาะฝ่ายใดก็มีผลเพียงแต่ฝ่ายนั้น ไม่มีผลถึงคนอื่นๆ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 13,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "992",
+  "shortText": "บทบังคับห้ามจ่ายหน้าที่ของธ.หมดไปเมื่อ (1)ผสจ.บอกห้ามใช้เงิน (2)รู้ว่าผสจ.ตาย (3)รู้ว่าถูกพิทักษ์ทรัพย์/ล้มละลาย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "999",
+  "shortText": "บุคคลที่ได้เช็คขีดคร่อมมาและมีคำว่าห้ามเปลี่ยนมือ ผู้รับโอนย่อมไม่มีสิทธิดีกว่าผู้โอน = เป็นข้อยกเว้นมาตรา 905 ว.3",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1006",
+  "shortText": "แม้มีลายมือชื่ออันหนึ่งอันใดปลอม แต่ย่อมไม่กระทบถึงความสมบูรณ์ของลายมือชื่ออื่นๆ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1007",
+  "shortText": "แก้ไขข้อความในตั๋วเงิน ว.1 เห็นประจักษ์ ท่านว่าตัวเงินนั้นเป็นอันเสียไปเว้นแต่ยังคงใช้ได้ต่อ -ผู้ทำการแก้ไขนั้น -คู่สัญญาที่ยินยอมให้แก้ -ผู้สลักหลังในภายหลัง ว.2 แก้ไขในข้อสำคัญที่ไม่เห็นประจักษ์ แต่ผู้ทรงได้มาโดยชอบก็บังคับตัวได้เสมือนว่าไม่ได้แก้ไขเลย ว.3 ข้อสำคัญได้แก่ วันที่,จำนวนเงิน,เวลา,สถานที่",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1008",
+  "shortText": "ลายมือชื่อ\"ผู้สั่งจ่าย\"ปลอม ท่านว่าลายมือชื่อปลอม/ลงโดยปราศจากอำนาจนั้น\"เป็นอันใช้ไม่ได้เลย\" ใครจะอ้างอิงแสวงสิทธิอย่างหนึ่งอย่างใดเพื่อยึดหน่วงตั๋วไว้หรือเพื่อบังคับใช้เงินนั้น ทำไม่ได้ เว้นแต่ใช้ได้กับคู่สัญญาฝ่ายที่อยู่ในฐานะเป็นผู้ต้องตัดบทมิให้ยกข้อลายมือชื่อปลอมเป็นข้อต่อสู้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1009",
+  "shortText": "ลายมือชื่อ \"ผู้สลักหลัง\"ปลอม เป็นบทบัญญัติคุ้มครองธนาคารเฉพาะกรณีที่เป็นลายมือชื่อ \"ผู้สลักหลัง\"ปลอมเท่านั้น ต่อเมื่อธนาคารได้ใช้เงินไปตามปกติโดยสุจริตและปราศจากประมาทเลินเล่อ #แต่ถ้าลายมือปลอมนั้นเป็นของผู้สั่งจ่ายธนาคารจะอ้างมาตรานี้เพื่อให้พ้นความรับผิดไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1010",
+  "shortText": "เมื่อตั๋วเงินหาย/ถูกลัก ผู้ทรงทราบต้องบอกกล่าวเป็นหนังสือไปยังผู้ออกตั๋ว ผู้จ่าย ผู้รับรองเพื่อแก้หน้า ผู้รับอาวัล,ทุกคน เพื่อบอกปัดไม่ให้ใช้เงิน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1012",
+  "shortText": "สัญญาจัดตั้งห้างหุ้นส่วน คือสัญญาซึ่งบุคคลสองคนขึ้นไปตกลงเข้ากันเพื่อทำกิจการร่วมกัน+ประสงค์จะแบ่งกำไรกัน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1015",
+  "shortText": "ห้างหุ้นส่วน/บริษัทที่ได้จดทะเบียนแล้วให้ถือว่าเป็นนิติบุคคลต่างหากจากตัวผู้ถือหุ้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1025",
+  "shortText": "หสม. คือห้างหุ้นส่วนประเภทที่ผู้เป็นหุ้นส่วนหมดทุกคนต้องรับผิดร่วมกันโดยไม่มีจำกัดจำนวน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1029",
+  "shortText": "หุ้นส่วนนำทรัพย์สินมาให้ห้างใช้ยังอยู่ที่เจ้าของไม่โอนไป",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1038",
+  "shortText": "ห้ามหุ้นส่วนประกอบกิจการอย่างเดียวกับห้างและเป็นการแข่งขัน เว้นแต่ได้รับความยินยอมจากผู้เป็นหุ้นส่วนคนอื่นๆ ว.2 ถ้าฝ่าฝืนเรียกเอากำไรได้แต่จะเรียกให้เลิกกิจการไม่ได้ (ฟ้องภายใน 1 ปี)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1049",
+  "shortText": "หุ้นส่วนคนใดที่ไม่ปรากฏชื่อในสัญญาจะถือเอาสิทธิใดๆเพื่อฟ้องบุคคลภายนอกในกิจการซึ่งไม่ปรากฏชื่อตนเองนั้นไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1030",
+  "shortText": "หุ้นส่วนนำทรัพย์สินมาลงเป็นทุนกรรมสิทธิตกเป็นของห้างทันทีและเป็นกรรมสิทธิรวมระหว่างผู้เป็นหุ้นส่วนทุกคน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1040",
+  "shortText": "ห้ามชักชวนบุคคลภายนอกเข้ามาเป็นหุ้นส่วนโดยไม่ได้รับความยินยอมจากผู้เป็นหุ้นส่วนด้วยกันหมดทุกคน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1050",
+  "shortText": "การใดอันผู้เป็นหุ้นส่วนคนหนึ่งทำไปในทางที่เป็นธรรมดาการค้าขายของห้างฯ หุ้นส่วนหมดทุกคนต้องผูกพันในการนั้นด้วยและต้องรับผิดร่วมกันโดยไม่จำกัดจำนวน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1051",
+  "shortText": "หนี้ก่อนออก ผู้เป็นหุ้นส่วนที่แม้ออกจากห้าง ก็ยังคงต้องรับผิดในหนี้ที่เกิดขึ้นก่อนออกไป (ดูวันที่ก่อหนี้เป็นสำคัญ)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1032",
+  "shortText": "ห้ามเปลี่ยนแปลงข้อสัญญาเดิม/ประเภทแห่งกิจการ เว้นแต่โดยความยินยอมของผู้เป็นหุ้นส่วนหมดทุกคน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1042",
+  "shortText": "ระหว่างหุ้นส่วนผู้จัดการ vs หุ้นส่วนคนอื่นๆ ให้บังคับตามกฎหมาย ว่าด้วยตัวแทน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1052",
+  "shortText": "หนี้ก่อนเข้า ผู้เข้าเป็นหุ้นส่วนย่อมต้องรับผิดในหนี้ใดๆที่ห้างได้ก่อให้เกิดขึ้น ก่อนที่ตนเข้ามาเป็นหุ้นส่วน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1033",
+  "shortText": "ถ้าไม่ได้ตกลงกันไว้หุ้นส่วนทุกคนย่อมจัดการห้างได้แต่จะทำสัญญาอันใดซึ่งหุ้นส่วนอีกคนหนึ่งทักท้วงไม่ได้ ว.2 ถือว่าหุ้นส่วนเป็นผู้จัดการได้ทุกคน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1043",
+  "shortText": "ถ้าหุ้นส่วนอื่นล่วงงาม จัดการงานของผจก. หรือผู้จัดการทำล่วงเกินขอบอำนาจให้บังคับตามกฎหมายว่าด้วยการจัดการงานนอกสั่ง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1044",
+  "shortText": "กำไร/ขาดทุน เป็นไปตามส่วนที่ลงหุ้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1048",
+  "shortText": "หุ้นส่วนฟ้องกันเองเรียกส่วนของตนได้แม้กิจการค้าขายใดไม่ปรากฏชื่อตัวเองก็ตาม",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1053",
+  "shortText": "แม้มีข้อจำกัดอำนาจของหุ้นส่วนคนใดไว้ก็ตาม ข้อจำกัดนั้นใช้อ้างไม่ได้กับบุคคลภายนอก",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 14,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1035",
+  "shortText": "ถ้าตกลงไว้หลายคนทุกคนจัดการได้ตามนั้น แต่จะทำสิ่งที่อีกคนทักท้วงไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1037",
+  "shortText": "แม้ตั้งผู้จัดการไว้แล้วแต่หุ้นส่วนทุกคนก็ย่อมมีสิทธิที่จะถามไถ่ถึงกิจการของห้างได้ทุกเมื่อและมีสิทธิที่จะตรวจ/คัดสำเนาบัญชี/เอกสารได้ด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1054",
+  "shortText": "บุคคลใดแสดงตนว่าเป็นหุ้นส่วนด้วยวาจา,กิริยาหรือยอมให้ใช้ชื่อตนเป็นชื่อห้าง,รู้แล้วว่าเขาแสดงให้เป็นหุ้นส่วนแต่ไม่คัดค้านก็ดี ต้องรับผิดต่อบุคคลภายนอกในหนี้เสมือนเป็นหุ้นส่วนด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1055",
+  "shortText": "ห้างเลิกเมื่อ (1)มีเหตุที่ระบุในสัญญา (2)เมื่อครบเวลาที่สัญญากำหนด (3)ทำกิจการเสร็จ (4)หุ้นส่วนบอกเลิกกัน (5)เมื่อหุ้นส่วนตาย/ล้ม/ไร้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1059",
+  "shortText": "กรณีตั้งห้างขึ้นโดยมีกำหนดเวลา แต่เมื่อครบเวลาทุกคนกลับดำเนินการค้าต่อไป โดยไม่ชำระบัญชี ให้ถือว่าตกลงกันทำต่อโดยไม่มีกำหนดเวลา",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1056",
+  "shortText": "ห้างที่ตั้งขึ้นโดยไม่มีกำหนดเวลา หุ้นส่วนคนใดจะบอกเลิกเมื่อสิ้นรอบปีก็ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1060",
+  "shortText": "ในกรณี 1055(4)(5) ถ้าหุ้นส่วนที่เหลือรับซื้อหุ้นต่อ ก็ให้ห้างคงอยู่ต่อไปเท่าที่มีเหลือ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1057",
+  "shortText": "ร้องศาลขอให้สั่งให้ห้างเลิก (1)หุ้นส่วนละเมิดบทบังคับของสัญญา (2)มีแต่ขาดทุน (3)มีเหตุอื่นใดที่ทำให้ไม่สามารถดำรงคงอยู่ต่อไปได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1061",
+  "shortText": "เมื่อห้างเลิกแล้วก็ให้ชำระบัญชี เว้นแต่ -หุ้นส่วนทุกคนตกลงแบ่งกันเองเพราะทรัพย์ไม่มากไม่ยุ่งยาก -ศาลพพษให้ห้างล้มละลาย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1064/1",
+  "shortText": "ถ้าหุ้นส่วนผจก.จะลาออก ให้ยื่นใบลาออกต่อหุ้นส่วนผจก.คนใดคนหนึ่ง และมีผลเมื่อใบลาออกไปถึงเขา ว.2 ถ้าผจก.มีคนเดียวให้ส่งใบลาออกถึงหุ้นส่วนคนอื่นๆ+ต้องนัดประชุมเพื่อตั้งใหม่ด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1067",
+  "shortText": "ผลของการฝ่าฝืน ม.1066 = ห้างเดิมเรียกเอาผลกำไรที่ไปทำที่ห้างอื่นได้ทั้งหมดหรือเรียกคสมทท. (*แต่กม.ไม่ได้ให้อำนาจที่จะไปฟ้องให้เขาเลิกประกอบกิจการได้) >> ห้ามฟ้องเกิน 1 ปีนับแต่ฝ่าฝืน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1065",
+  "shortText": "(เทียบ1049) เมื่อห้างจดทะเบียนแล้ว หุ้นส่วนคนใดอาจถือเอาประโยชน์จากสัญญาใดได้ แม้ไม่ปรากฏชื่อของตนเป็นคู่สัญญาก็ตาม",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1068",
+  "shortText": "หุ้นส่วนออกจากห้าง แต่ยังคงต้องรับผิดในหนี้ที่ห้างได้ก่อขึ้นก่อนที่ตนออก (2ปีนับแต่มีการจดทบ.เปลี่ยนแปลงหุ้นส่วน) #แต่ตกลงยกเว้นได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1066",
+  "shortText": "ห้ามให้หุ้นส่วนคนใดค้าขายแข่งห้างหรือเข้าเป็นหุ้นส่วนประเภท\"ไม่จำกัด\"ในห้างอื่นที่ประกอบกิจการเดียวกันอีก เว้นแต่จะได้รับความยินยอม ของหุ้นส่วนอื่นทุกคน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1070",
+  "shortText": "เมื่อห้างผิดนัดไม่ชำระหนี้ เจ้าหนี้ชอบที่จะเรียกจากหุ้นส่วนคนใดคนหนึ่งก็ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1077",
+  "shortText": "หจก.คือห้างที่มีหุ้นส่วน 2 ประเภทคือ (1)จำกัด (2)ไม่จำกัด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1081",
+  "shortText": "ห้ามเอาชื่อหุ้นส่วนจำกัดความรับผิด มาระคนเป็นชื่อห้าง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1082",
+  "shortText": "ผล = limited partners ต้องรับผิดต่อคนนอกโดยไม่จำกัดเสมือนว่าเป็นหุ้นส่วนไม่จำกัด ว.2 ระหว่างกันเองก็รับผิดเหมือนเดิม",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1090",
+  "shortText": "limited partners จะค้าขายแข่งห้างหรือจะโอนหุ้นให้คนนอกก็ไม่ห้าม = ทำได้หมด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1091",
+  "shortText": "limited partners จะค้าขายแข่งห้างหรือจะโอนหุ้นให้คนนอกก็ไม่ห้าม = ทำได้หมด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1078/1",
+  "shortText": "ผจก.ลาออกดู 1064/1",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1087",
+  "shortText": "หุ้นส่วนไม่จำกัดความรับผิดเท่านั้น(Unlimited partner) >> ที่จะเป็นหุ้นส่วนผู้จัดการได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1092",
+  "shortText": "limited partners ตาย/ล้ม/ไร้ ก็ไม่เป็นเหตุให้ห้างเลิก",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1079",
+  "shortText": "ตราบใดยังไม่จดทะเบียนก็ให้ถือว่าเป็นห้างสามัญตราบนั้น และหุ้นส่วนทุกคนรับผิดไม่จำกัด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1080",
+  "shortText": "ตัวเชื่อมให้เอาบทบัญญัติเรื่องห้างสามัญมาใช้ด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1088",
+  "shortText": "หุ้นส่วนจำกัดความรับผิดสอดเข้าไปจัดการงานของห้าง = ต้องรับผิดในหนี้โดยไม่จำกัดจำนวน *ไม่ใช้กับบุคคลภายนอกต่างจาก 1054",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1095",
+  "shortText": "ถ้าตราบใดที่ห้างหุ้นส่วนจำกัดนั้นยังไม่เลิกกัน เจ้าหนี้ไม่มีสิทธิที่จะฟ้องหุ้นส่วนประเภท limited partners ได้เลย //แต่ฟ้องพวกไม่จำกัดได้ โดยไม่ต้องรอให้ห้างเลิก (ดูให้ดีว่าจน.ฟ้องใคร)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 15,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1097",
+  "shortText": "ผู้เริ่มก่อการบริษัท 2 คน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1143",
+  "shortText": "ห้ามบริษัทถือหุ้นตนเองและห้ามรับจำนำตนเอง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1108",
+  "shortText": "ในการประชุมตั้งบริษัทผู้เริ่มก่อการจะต้องให้บ,ให้สัตยาบันแก่การที่ตนได้ทำไว้ก่อนตั้งบ.เพื่อให้ตนเองหลุดพ้นส่วนตัว",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1145",
+  "shortText": "การตั้งข้อบังคับขึ้นใหม่,เปลี่ยนแปลงข้อบังคับเดิม,แก้ข้อความในหนังสือบริคณห์สนธิ ต้องมีการลง \"มติพิเศษ\"",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1162",
+  "shortText": "กรรมการหนึ่งคนเรียกประชุมกรรมการกันเองได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1113",
+  "shortText": "ผู้เริ่มก่อการจะหลุดพ้นจากความรับผิดต่อเมื่อที่ประชุมให้สัตยาบัน+ได้จดทะเบียนบ.แล้ว",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1146",
+  "shortText": "ถ้ามีการแก้ไขตามม.1145 ต้องจดทะเบียนใหม่ภายใน 14 วันนับแต่ลงมติ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1168",
+  "shortText": "ห้ามกรรมการบริษัทประกอบการค้าขายแข่งกับบริษัท (แต่ทั้งนี้ไม่ห้ามผู้ถือหุ้น)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1119",
+  "shortText": "เงินค่าหุ้นนั้น ผู้ถือหุ้นจะหักหนี้กับบริษัทไม่ได้ (เด็ดขาด)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1151",
+  "shortText": "กรรมการบริษัทเฉพาะที่ประชุมใหญ่เท่านั้นที่ตั้ง/ถอนได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1169",
+  "shortText": "กรรมการทำให้เกิดความเสียหายแก่บริษัท แต่บ.ไม่ยอมฟ้องกรรมการ >> ผู้ถือหุ้นจะฟ้องกรรมการให้ชดใช้คสมทท.ก็ได้ (แต่จะให้เพิกถอนนิติกรรม/ฟ้องคนนอกไม่ได้)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1120",
+  "shortText": "เงินค่าหุ้นกก.จะเรียกเอาเมื่อใดก็ได้แต่ต้องบอกกล่าวไม่น้อยกว่า 21 วัน > ถ้าไม่จ่ายก็ให้บอกกล่าวไปอีกว่าจะริบหุ้น > ริบหุ้นออกขายทอดตลาด แต่จะเอาคืนบริษัทไม่ได้ขัดต่อม.1143",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1153/1",
+  "shortText": "ถ้ากรรมการจะลาออก ยื่นต่อบริษัทมีผลเมื่อใบลาออกไปถึงบริษัท",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1172",
+  "shortText": "คณะกรรมการ(มติ)จะเรียกประชุมวิสามัญผู้ถือหุ้นเมื่อไหร่ก็แต่ ถ้าขาดทุนเกินครึ่งต้องเรียกทันที",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1175",
+  "shortText": "บอกกล่าวเรียกปชญ. -ส่งทางปณ.ตอบรับไปยังผู้ถือหุ้นก่อนวันนัดประชุมไม่น้อยกว่า 7 -โฆษณาในหนังสือพิมพ์/สื่ออิเล็กไม่น้อยกว่า7 *ถ้าเป็นมติพิเศษต้องทำก่อนไม่น้อยกว่า 14 วัน ว.2 ให้ระบุเรื่องที่จะประชุม+วดป. *มติพิเศษต้องระบุข้อความที่จะเสนอ ให้ลงมติด้วย(ไม่ระบุไม่ชอบ)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1177",
+  "shortText": "ต่อไปนี้จะใช้ก็ต่อเมื่อไม่มีข้อบังคับของบริษัทชัดเจนเท่านั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1173",
+  "shortText": "ผู้ถือหุ้นรวมหุ้นกันไม่น้อยกว่า 1 ใน 5 เข้าชื่อกันทำนส.ขอให้กก.เรียกประชุมให้ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1178",
+  "shortText": "ประชุมใหญ่ต้องมีผู้ถือหุ้นไม่น้อยกว่า 2 คนเข้าประชุมและรวมหุ้นกันได้อย่างน้อย 1 ใน 4 ของทุนบริษัท (ฎ.575/39 แม้บอกกล่าวไม่ครบ 7 แต่ถ้าวันประชุมมาครบองค์ประชุมก็ถือว่ามติในวันนั้นชอบแล้ว)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1174",
+  "shortText": "กรรมการต้องเรียกประชุมปช.ให้ทันที(ใช้ดุลพินิจไม่เรียกไม่ได้)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1184",
+  "shortText": "ผู้ถือหุ้นที่ยังชำระเงินค่าหุ้นไม่ครบไม่มีสิทธิออกเสียงลงคะแนน (เพียงแต่เข้าร่วมประชุมได้)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1194",
+  "shortText": "มติพิเศษ >> ต้องลงมติให้ได้คะแนนเสียงข้างมากไม่ต่ำกว่า 3 ใน 4 ของเสียงที่ผู้ถือหุ้นที่มาประชุมในวันนั้น+มีสิทธิออกเสียงลงคะแนน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1185",
+  "shortText": "ผู้ถือหุ้นคนใดมีส่วนได้เสียเป็นพิเศษในมติที่จะลง > ห้ามไม่ให้ออกเสียงลงคะแนน *การเลือกตนเองเป็นกรรมการหรือการให้บ.ชำระหนี้แก่ตนเอง เป็นเพียงส่วนได้เสียธรรมดาไม่ใช่ส่วนได้เสียพิเศษ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1195",
+  "shortText": "-กรรมการ -ผู้ถือหุ้น มีสิทธิร้องศาลขอให้เพิกถอนมติที่ประชุมที่ลงฝ่าฝืนกม./ข้อบังคับบริษัท ได้ภายใน 1 เดือนนับแต่วันลงมติ (มติไม่ได้เป็นโมฆะเพียงแต่อาจเพิกถอนได้เท่านั้น)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 16,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1299",
+  "shortText": "วรรคหนึ่ง การได้มาซึ่งอสังหาริมทรัพย์หรือทรัพยสิทธิอันเกี่ยวกับอสังหาฯโดยทางนิติกรรม ถ้ายังไม่ได้ทำเป็นหนังสือ+จดทบ.ต่อพนง.จนท.ไม่บริบูรณ์เป็นทรัพยสิทธิจะยกเป็นข้อต่อสู้บุคคลภายนอกไม่ได้เลย วรรคสอง การได้มาโดยทางอื่น นอกจากทางนิติกรรม ถ้ายังไม่ได้จดทะเบียนต่อพนักงานจนท. ห้ามมิให้ยกเป็นข้อต่อสู้บุคคลภายนอก ผู้สุจริต,เสียค่าตอบแทน,จดทะเบียนสิทธิสุจริต",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1310",
+  "shortText": "สร้างโรงเรือนในที่ดินของผู้อื่นโดยสุจริต = เจ้าของที่ดินย่อมเป็นเจ้าของบ้าน แต่ต้องใช้ค่าแห่งที่ดินเท่าที่เพิ่มขึ้นเพราะการมีบ้านให้แก่ผู้สร้าง ว.2 ถ้าเจ้าของที่ดินประมาทจะบอกปัดไม่ยอมรับ/เรียกให้ผู้สร้างรื้อถอนไปไม่ได้ (ถ้าไม่ประมาทจึงจะไม่ยอมรับได้)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1335",
+  "shortText": "แดนแห่งกรรมสิทธิ์กินไปทั้งใต้ดินและเหนือพื้นดิน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1336",
+  "shortText": "ภายในบังคับแห่งกม.นี้ เจ้าของกรรมสิทธิ์ย่อมมีสิทธิใช้สอย, จำหน่าย, ได้ดอกผลติดตามเอาคืนทรัพย์, และมีสิทธิขัดขวางมิให้ผู้อื่นเกี่ยวข้องกับทรัพย์สินนั้นโดยมิชอบด้วยกม.",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1300",
+  "shortText": "เพิกถอนได้ถ้าเป็นบุคคลผู้อยู่ในฐานะอันจะให้จดทะเบียนสิทธิของตนได้อยู่ก่อน เว้นแต่ผู้รับโอนจะสุจริตเสียค่าตอบแทน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1312",
+  "shortText": "สร้างโรงเรือนรุกล้ำที่ดินผู้อื่นโดยสุจริต ผู้สร้างเป็นเจ้าของบ้าน แต่ต้องจ่ายค่าใช้ที่ดิน + เรียกให้จดทะเบียนภาระจำยอมได้ ว.2 ถ้าไม่สุจริตผู้สร้างต้องรื้อถอน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1337",
+  "shortText": "ใช้สิทธิของตนเกินสมควรทำให้เจ้าของอสังหาริมทรัพย์อื่นได้รับคสห. เจ้าของนั้นมีสิทธิทำให้คสห./เดือดร้อนนั้นสิ้นไป และเรียกเอาค่าทดแทนได้ด้วย",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1303",
+  "shortText": "\"สังหาริมทรัพย์\" ใครครอบครองก่อนมีสิทธิดีกว่า (แต่ก็อยู่ภายใต้หลักผู้รับโอนไม่มีสิทธิดีกว่าผู้โอน)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1314",
+  "shortText": "ให้นำมาตรา 1310 มาใช้ในกรณี -การก่อสร้างซึ่งติดที่ดิน -การปลูกต้นไม้/ธัญชาติ (***มีเฉพาะการสร้าง/ปลูก only) ไม่มีล้ำ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1338",
+  "shortText": "ข้อจำกัดสิทธิตามกม.มีขึ้นโดยไม่ต้องจดทะเบียน ว.2 แต่ข้อจำกัดนี้จะถอน/หย่อนลงไม่ได้ เว้นแต่..จะทำนส.และจดทะเบียน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1304",
+  "shortText": "สาธารณสมบัติของแผ่นดิน (2)ที่พลเมืองใช้ร่วมกัน เช่น ชายตลิ่ง (3)ที่ใช้เพื่อประโยชน์ของราชการแผ่นดิน (รร,โรงพยาบาล)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1329",
+  "shortText": "ข่มขู่,สำคัญผิด,ม.ที่เป็นโมฆียะ > คุ้มครองบุคคลภายนอกผู้สุจริตและเสียค่าตอบแทน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1305",
+  "shortText": "ห้ามโอนแก่กัน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1306",
+  "shortText": "ห้ามยกอายุความต่อสู้แผ่นดิน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1307",
+  "shortText": "ห้ามยึด",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1308",
+  "shortText": "ที่ดินแปลงใดเกิดที่งอกริมตลิ่ง > ที่งอกนั้นย่อมเป็นของเจ้าของที่ดินแปลงนั้น",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1330",
+  "shortText": "สิทธิของบุคคลผู้ซื้อทรัพย์สินโดยสุจริตในการขายทอดตลาดตามคำสั่งศาลไม่เสียไป",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1332",
+  "shortText": "ซื้อของในท้องตลาดนั้นๆไม่จำต้องคืน(คค.ให้ได้กส.) เว้นแต่เขาจะใช้ราคา",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1339",
+  "shortText": "น้ำไหลตามธรรมชาติจากที่สูงลงมาสู่ที่ดินต่ำต้องยอม",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1340",
+  "shortText": "น้ำที่ระบาย(น้ำเสียฯลฯ) ที่ต่ำต้องยอมรับเอาถ้าหากก่อนระบายนั้นน้ำมันไหลมาอยู่แล้ว",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1342",
+  "shortText": "บ่อ สระ หลุมโสโครกต้องขุดห่างจากแนวเขต 2 เมตร ว.2 การขุดร่องเพื่อวางท่อหรือเสารั้ว เสาเข็ม ต้องห่าง 1 เมตร",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1343",
+  "shortText": "ห้ามขุดดินเกินควรจนอาจเป็นอันตรายแก่ที่ดินข้างๆ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1349",
+  "shortText": "(ทางจำเป็น) ที่ดินแปลงใดถูกที่ดินแปลงอื่นล้อมอยู่จนไม่มีทางออกสู่ทางสาธารณะมีสิทธิผ่านที่ที่ล้อมอยู่ออกไปได้ ว.2 แม้มีทางออกแต่ต้องผ่านสระ บึง ทะเล ที่ชันกว่ากันมากให้ใช้ว.1 ว.3 ที่และวิธีการผ่านต้องทำตามความจำเป็นและให้เกิดคสห.น้อยที่สุด ว.4 ต้องใช้ค่าทดแทนเพื่อคสห.นั้นและจะกำหนดรายปีก็ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1350",
+  "shortText": "(แบ่งแยกแล้วบอด) ถ้าการแบ่งแยกที่ดิน เป็นเหตุให้ที่ดินที่ถูกแบ่งแยกออกไปนั้นไม่มีทางออกสู่ทางสาธารณะ ท่านว่าเจ้าของที่ดินแปลงนั้นมีสิทธิเรียกเอาทางออกได้แต่เฉพาะบนที่ดินที่ได้แบ่งแยกหรือแบ่งโอนกันนั้นโดยไม่ต้องเสียค่าทดแทน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1352",
+  "shortText": "(จะขอได้ต้องเสนอใช้ค่าทดแทนก่อน) ท่อน้ำ ท่อระบาย สายไฟฟ้า ซึ่งถ้าเขาไม่ยอมให้ผ่านก็ไม่มีทางวางได้/เปลืองเงินมากเกินควร ว.2 ถ้าวางเหนือพื้นดิน เจ้าของเรียกให้ซื้อได้เลย ว.3 พฤติการณ์เปลี่ยนไป เจ้าของเรียกให้ถอนย้ายได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 17,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1357",
+  "shortText": "ท่านให้สันนิษฐานไว้ก่อนว่าเจ้าของรวมมีส่วนเท่ากัน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 18,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1360",
+  "shortText": "เจ้าของรวมมีสิทธิใช้สอยทส.ได้ แต่ต้องไม่เป็นการขัดต่อสิทธิของเจ้าของรวมคนอื่นๆ",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 18,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1364",
+  "shortText": "การแบ่งทรัพย์สินระหว่างเจ้าของรวม -จะแบ่งกันเอง หรือ -ขายแล้วแบ่งเงินกันก็ได้ ว.2 ถ้าตกลงกันไม่ได้ขอศาลสั่งแบ่งได้ โดยจะประมูลกันเองหรือจะขายทอดตลาดก็ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 18,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1358",
+  "shortText": "การจัดการทส.ตามธรรมดาให้ใช้เสียงข้างมาก แต่คนหนึ่งอาจจัดการเพื่อรักษาทส.ได้เสมอ // ส่วนการจัดการเรื่องสำคัญก็เช่นกัน // การเปลี่ยนแปลงวัตถุประสงค์การใช้ทรัพย์เจ้าของรวมต้องเห็นชอบทุกคน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 18,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1361",
+  "shortText": "เจ้าของรวมจะจำหน่าย/ก่อภาระติดพันในส่วนของตนก็ได้ **แต่จะจำหน่ายตัวทรัพย์ไม่ได้เว้นแต่จะได้รับความยินยอมจากเจ้าของรวมทุกคน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 18,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1359",
+  "shortText": "คนหนึ่งอาจใช้สิทธิอันเกิดแต่กส.นั้นครอบไปถึงทั้งหมดเพื่อต่อสู้คนนอกได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 18,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1363",
+  "shortText": "เรียกให้แบ่งทรัพย์สินได้ทุกเมื่อ เว้นแต่จะมีนิติกรรมขัดอยู่ และจะเรียกให้แบ่งในเวลาที่ไม่เป็นโอกาสอันสมควรไม่ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 18,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1367,1377,1378",
+  "shortText": "เมื่อที่ดินที่มีเพียงสิทธิครอบครองเจ้าของเดิมสละเจตนาครอบครองแล้วและได้ส่งมอบการครอบครองให้ผู้ซื้อแล้ว อีกทั้งผู้ซื้อก็ได้เข้าครอบครองโดยมีเจตนายึดถือเพื่อตนแล้ว ผู้ซื้อย่อมได้ไปซึ่งสิทธิครอบครองตามกม.",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 18,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1375",
+  "shortText": "(ถูกแย่ง) ผู้ครอบครองถูกแย่งการครอบครอง ฟ้องเอาคืนได้ภายใน 1 ปีนับแต่วันถูกแย่ง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 18,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1384",
+  "shortText": "ขาดการยึดถือโดยไม่สมัครใจและได้คืนภายใน 1 ปี มิให้ถือว่าการครอบครองสะดุดหยุดลง",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 18,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1385",
+  "shortText": "ถ้าโอนการครอบครอง ผู้รับโอนจะนับเวลาก่อนที่จะโอนเข้าด้วยกันก็ได้",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 18,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1373",
+  "shortText": "บุคคลผู้มีชื่อในทะเบียนอสังหาริมทรัพย์ที่ได้จดทะเบียนไว้ ให้สันนิษฐานไว้ก่อนว่าเป็นผู้มีสิทธิครอบครอง(เจ้าของ)",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 18,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1381",
+  "shortText": "การครอบครองแทนผู้อื่นจะเปลี่ยนลักษณะแห่งการยึดถือเป็นเพื่อตนได้ ต้องบอกกล่าวเปลี่ยนลักษณะแห่งการยึดถือว่าจะไม่ถือแทนอีกต่อไปแล้ว",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 18,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1374",
+  "shortText": "(รบกวน) ฟ้องคดีเพื่อปลดเปลื้องการรบกวนนั้นต้องฟ้องภายใน 1 ปี นับแต่วันที่ถูกรบกวน",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 18,
+  "confidence": "high"
+ },
+ {
+  "collection": "civil",
+  "article": "1382",
+  "shortText": "ครอบครองปรปักษ์ คือการครอบครองที่ดินที่มีกรรมสิทธิ์ของผู้อื่น -โดยสงบ -เปิดเผย -เจตนาเป็นเจ้าของ ติดต่อกัน 10 ปี ย่อมได้กรรมสิทธิ์",
+  "sourceFile": "1.ตัวบทย่อ ปพพ.pdf",
+  "sourcePage": 18,
+  "confidence": "high"
+ }
+]
