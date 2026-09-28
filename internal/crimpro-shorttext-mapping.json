@@ -1,0 +1,1498 @@
+[
+  {
+    "collection": "crimpro",
+    "article": "2",
+    "shortText": "(1) ศาล (2) ผตห. (3) จำเลย (4) ผู้เสียหาย* (5) อัยการ (6) พงส. (7) คำร้องทุกข์* (8) คำกล่าวโทษ (9) หมายอาญา (10) การสืบสวน (11) การสอบสวน (12) ไต่สวนมูลฟ้อง (13) ที่รโหฐาน (14) โจทก์* (15) คู่ความ (22) ขัง",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 10,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "3",
+    "shortText": "บุคคลตาม 4,5,6 มีอำนาจ (1) ร้องทุกข์+ถอน (2) ฟ้องคดีหรือขอเข้าร่วมเป็นโจทก์ (3) ฟ้องคดีแพ่งเกี่ยวเนื่อง ,44/1 (4) ถอนฟ้องคดีอาญาหรือคดีแพ่งเกี่ยวเนื่อง (5) ยอมความในความผิดต่อส่วนตัว",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 10,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "5",
+    "shortText": "ผู้มีอำนาจจัดการแทนผสห. (1) ผสห.เป็นผู้เยาว์/ไร้ -ผู้แทนชอบธรรม -ผู้อนุบาล (2) ผสห.ถูกทำร้ายถึงตาย/บาดเจ็บจน -บุพการี -ผู้สืบสันดาน -สามีภรรยา (3)ผสห.เป็นนิติบุคคล -ผจก.ของนิติฯ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 10,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "6",
+    "shortText": "ผู้แทนเฉพาะคดี(ญาติ,มีปย.เกี่ยวข้อง) แต่ผู้เยาว์ต้องมีชีวิตอยู่ -ไม่มีผู้แทนโดยชอบ -มีแต่ไม่อาจจัดการได้+มีผปย.ขัดกันกับผู้เยาว์",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 10,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "7",
+    "shortText": "สอบสวนนิติบุคคลให้ออกหมายเรียกไปยังผู้จัดการนิติฯ ว.2 ถ้าไม่มาออกหมายจับได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 10,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "7/1",
+    "shortText": "แจ้งสิทธิชั้นจับ -ปรึกษาทนาย -ให้ทนายฟัง -เยี่ยมญาติ -รักษาเจ็บป่วย",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 10,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "13",
+    "shortText": "ล่ามต้องสาบานตนไม่ทำรับฟังเป็นพยานไม่ได้แต่ไม่ทำให้การสส.เสียไป (โดยใครจะเป็นล่ามก็ได้ แต่ไม่ใช่พงส.เจ้าของสำนวน)",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 10,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "14",
+    "shortText": "ในชั้นสส./ไต่/พิจที่มีตัวผตห.แล้วศาลเห็นว่าวิกลจริต สั่งแพทย์ตรวจได้ > ถ้าเป็นจริงให้งดจนกว่าจะหาย",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 10,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "15",
+    "shortText": "เอาป.วิ.พ. มาใช้โดยอนุโลม",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 10,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "18",
+    "shortText": "เกิดท้องที่เดียว ต่างจังหวัด.รตต.ขึ้นไปมีอำนาจสอบสวนไม่ว่าจะในเวร/นอกเวรก็ตาม...ปลัดอำเภอ-สูงกว่ามีอำนาจสส.ได้ > ว.2 เกิดภายในเขตกทม. ตำรวจเท่านั้นมีอำนาจสส. > ว.3 พงส.ผู้รับผิดชอบคือท้องที่ที่ความผิดเกิด เว้นแต่จำเป็น/สะดวก -มีที่อยู่ -ผตห.ถูกจับ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 10,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "19",
+    "shortText": "เกิดหลายท้องที่ (1) เป็นการไม่แน่ว่าได้กระทำลงในท้องที่ใดระหว่างหลายท้องที่ (2) ส่วนหนึ่งได้ทำท้องที่หนึ่ง แต่ส่วนหนึ่งทำลงอีกท้องที่หนึ่ง (3) ความผิดต่อเนื่องทำลงในหลายท้องที่ (4) คผ.หลายกรรมทำลงท้องที่ต่างกัน (5) ผตห.เดินทาง (6) ผสห.เดินทาง วรรค 2 พงส.รับผิดชอบ (ก) จับได้แล้ว ท้องที่ที่ถูกจับเป็นผู้รับผิดชอบ (ข) ถ้าจับยังไม่ได้ ให้ท้องที่ที่พบการกระทำผิดก่อนเป็นผู้รับผิดชอบ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 10,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "20",
+    "shortText": "ความผิดเกิด(all)นอกราชฯ ให้สส.เป็นพงส.ผู้รับผิดชอบ...มอบหมายอัยการ/พงส. แทนได้ *ชำระคดีที่ศาลอาญา",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "21/1",
+    "shortText": "ในระหว่างพงส.จังหวัด,ภาคเดียวกัน > ให้ผบ.ภาคเป็นผู้ชี้ขาด [การรอ ไม่เป็นเหตุให้งดการสอบสวน]",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "22",
+    "shortText": "ชำระคดีที่ศาลหลัก -เกิด -อ้าง -เชื่อว่าได้เกิด เว้นแต่จำเลยมีที่อยู่/ถูกจับในท้องที่ __คผ.นอกราชฯ ชำระที่ศาลอาญา",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "23",
+    "shortText": "การโอนคดี ว.1 จ/จล ขอโอนจากศาลยกเว้น->ไปศาลเกิด ว.2 จ.ขอโอนจากศาลเกิด ->ไปศาลยกเว้น",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "28",
+    "shortText": "ผู้มีอำนาจฟ้องคดีอาญา -อัยการ -ผู้เสียหาย *อำนาจฟ้องเป็นอิสระจากกัน",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "29",
+    "shortText": "ผสห. ยื่นฟ้องแล้วตายลงให้ -บุพการี -ผู้สืบสันดาน -สามีภรรยา ดำเนินคดีต่างผู้ตาย",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "30",
+    "shortText": "ผสห.ขอเข้าร่วมเป็นโจทก์กับอัยการได้ก่อนศาลชั้นต้นพพษ. *ต้องเป็นผสห.โดยนิตินัย 2(4) เท่านั้น",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "31",
+    "shortText": "อัยการขอเข้าร่วมกับผสห.ได้ก่อนคดีถึงที่สุด",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "32",
+    "shortText": "ถ้าเป็นโจทก์ร่วมกันแล้ว อัยการมีสิทธิขอให้ศาลสั่งให้ผสห.ทำ/ละเว้นการที่อาจเสียหายนั้นได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "33",
+    "shortText": "คดีอาญาที่ทั้งอัยการและผสห.ต่างฟ้อง ศาลสั่งรวมได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "34",
+    "shortText": "คำสั่งไม่ฟ้องคดีหาตัดสิทธิผู้เสียหายฟ้องคดีโดยตนเองไม่",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "35",
+    "shortText": "ถอนฟ้องได้ก่อนศชต.พพษ. ถ้าจำเลยค้าน \"ให้ยก\" ว.2 คผ.ต่อส่วนตัวถอนได้ก่อนถึงที่สุด",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "36",
+    "shortText": "ถอนฟ้องแล้วฟ้องอีกไม่ได้ เว้นแต่ 1) คดีอ.แผ่นดินฝ่ายหนึ่งถอน ไม่ตัดสิทธิอีกฝ่ายฟ้องใหม่ 2)คดีสต.อัยการถอนไม่มีนส.ผสห.ฟ้องใหม่ได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "37",
+    "shortText": "คดีเลิกกัน -onlyโทษปรับเสียค่าปรับอย่างสูง -ลหุโทษ ชำระค่าปรับตามที่พงส.เปรียบเทียบ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "38",
+    "shortText": "ให้พงส.กำหนดค่าปรับ ชำระได้ไม่เกิน 15 วัน =คดีเลิก ถ้าไม่จ่ายให้ดำเนินคดีต่อไป",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "39",
+    "shortText": "สิทธิฟ้องระงับไป (1) ผู้ทำความผิดตาย (2) ถอนคำร้องทุกข์,ถอนฟ้อง,ยอมความในคดีส่วนตัว (3) คดีเลิก 37 (4) เมื่อมีคพษ.เสร็จเด็ดขาดในความผิดซึ่งได้ฟ้อง (5) มีกม.ยกเลิกคผ. (6) ขาดอายุความ (7)ยกเว้นโทษ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "40",
+    "shortText": "ฟ้องคดีแพ่งเกี่ยวเนื่องที่ศาลซึ่งพิจารณาคดีอาญาและการพิจารณาคดีแพ่งต้องเป็นไปตามบทบัญญัติป.วิ.พ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "44/1",
+    "shortText": "ผสห.เรียกให้จล.ชดใช้คสมทท.แก่ชีวิต ร่างกาย เสรีภาพ ชื่อเสียง ทส. อันเนื่องมาจากการกระทำความผิดของจำเลยที่โจทก์ฟ้องได้ ว.2 ให้ยื่นคำร้องก่อนสืบพยาน/พพษ. และให้ถือว่าคำร้องเป็นคำฟ้องแพ่ง+ให้ถือว่าผสห.เป็นโจทก์คดีส่วนแพ่ง",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "44/2",
+    "shortText": "เมื่อได้รับคำร้องตามม.44/1 ให้ศาลแจ้งให้จำเลยทราบ ว.2 การยื่น 44/1 ถ้าผสห.ไม่มีทนาย+ยากจนศาลตั้งทนายขอแรงให้ได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "43",
+    "shortText": "ลัก วิ่ง ชิง ปล้น โจร กรรโชก ยักยอก รับ(9+1) อัยการเรียกให้คืนทส.หรือชดใช้ราคาแทนได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "45",
+    "shortText": "ถ้าไม่ได้เรียกทางแพ่งในคดีอาญาก็ไม่ตัดสิทธิไปฟ้องแพ่งเป็นคดีใหม่อีก",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "44",
+    "shortText": "อัยการขอได้ก่อนศาลพพษ. ว.2 คพษ.ส่วนนี้ให้รวมเป็นส่วนหนึ่งของคพษ.คดีอาญา ว.3 คำร้องจะขออย่างอื่นนอกจากขอให้ชดใช้คสมทท.ไม่ได้ และคำร้องต้องไม่ขัดกับฟ้องของอัยการ ... ถ้าอัยการขอ 43 ให้แล้วผสห.จะขอ 44/1 อีกไม่ได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "46",
+    "shortText": "ในการพิจารณาพิพากษาคดีส่วนแพ่ง ศาลจำต้องถือข้อเท็จจริงตามที่ปรากฏในคำพิพากษาคดีส่วนอาญา",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 11,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "47",
+    "shortText": "คพษ.ส่วนแพ่งต้องเป็นไปตามกม.ความรับผิดในทางแพ่ง โดยไม่ต้องคำนึงว่าจำเลยต้องคำพิพากษาว่าได้กระทำความผิดหรือไม่",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "50",
+    "shortText": "ศาลสั่งคืน/ใช้ราคา/ชดใช้คสมทท. = ให้ถือว่าผสห.เป็นเจ้าหนี้ตามคำพิพากษา",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "51",
+    "shortText": "ถ้าไม่มีการฟ้องอาญา สิทธิฟ้องแพ่งเท่าปอ.ม.95 ว.2 ฟ้อง+ได้ตัว= อายุความสะดุด ว.3 ฟ้อง+ลงโทษถึงที่สุด = 10 ปี ว.4 ฟ้อง+ยกฟ้องเด็ดขาด= อายุความตามปพพ.",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "52",
+    "shortText": "เรียกให้มาที่ทำการพงส.ต้องออกหมายเรียก ว.2 ออกไปนอกสส.ข้างเรียกมาได้โดยไม่ต้องออกหมายเรียก",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "66",
+    "shortText": "เหตุออกหมายจับ (1) ทำผิดโทษอย่างสูงเกิน 3 ปี (2) ทำผิดอาญา+มีเหตุจะหลบหนี/ยุ่งเหยิงพยาน/ก่อเหตุร้ายอื่นๆ ว.2 ไม่มีที่อยู่หลักแหล่ง,ไม่มาตามหมาย=สันนิษฐ.หลบหนี",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "69",
+    "shortText": "เหตุออกหมายค้น (1) พบ+ยึดสิ่งของเป็นพยาน (2) พบ+ยึดมีไว้/ได้มา/ได้ใช้/จะใช้ (3) พบ+ช่วยคนถูกกักขัง (4) พบบุคคลมีหมายจับ (5) พบ+ยึดของตามคพษ./คำสั่ง",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "55",
+    "shortText": "ส่งหมายเรียกผตห. -สามีภรรยา -ญาติ } รับแทนได้ -ผปค.",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "67",
+    "shortText": "ไม่รู้จักชื่อก็ออกหมายจับได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "71",
+    "shortText": "ขังระหว่างสส./ไต่/พิจ ได้ เว้นแต่ -ไม่ถึง18 -มีครรภ์ -เพิ่งคลอดไม่ถึง 3 ด. -ป่วยรุนแรง ศาลจะไม่ขังหรือจะปล่อยก็ได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "65",
+    "shortText": "จับตามหมายและหลบหนี ให้ติดตามจับได้โดยไม่ต้องมีหมายอีก",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "68",
+    "shortText": "หมายจับใช้ได้จนกว่าจะจับได้,ขาดอายุความ,ศาลนั้นถอนหมายคืน",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "73",
+    "shortText": "ระหว่างอุท/ฎีกา ถ้าถูกจำคุกเกินกว่าคพษ. ให้ศาลออกหมายปล่อย เว้นแต่โจทก์ขอเพิ่มโทษ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "78",
+    "shortText": "(1) กระทำความผิดซึ่งหน้า (2) น่าจะก่อเหตุร้าย+มีอาวุธอันๆ (3) 66(2) แต่มีความจำเป็นเร่งด่วน (4) จับที่หนีระหว่างปล่อยชค.",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "87",
+    "shortText": "-ลหุโทษคุมได้เพื่อถามคหก. -พงส.คุมได้ 48 และให้ฝากขังศาล -ไม่เกิน6ขังได้ครั้งละไม่เกิน7วัน -ไม่เกิน10ปี ฝากได้ 4 ผัด (48) -10ปีขึ้น ขังได้ 7 ผัด (84) ถ้าศาลไม่อนุญาตขอฝากไม่ได้...ให้นำ134/1 มาใช้ในชั้นไต่ส่วนฝากขัง",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "106",
+    "shortText": "ผตห./ผู้มีปย.เกี่ยวข้องยื่นขอปล่อยชั่วคราวได้ (1)ยังมิฟ้องให้ยื่นต่อพงส/อัยการ (2)ฝากขังศาลยื่นต่อศาล (3)ถูกฟ้องแล้วยื่นต่อศาล (4)ศาลอ่านแล้วแต่ยังไม่ส่งสำนวนไปให้ยื่นต่อศชต. (5)ถ้าส่งสำนวนแล้วยื่นที่ไหนก็ได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "79",
+    "shortText": "ราษฎรจับได้เมื่อมีความผิดซึ่งหน้า+เป็นความผิดท้ายประมวล",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "87/1",
+    "shortText": "พงส.ขอ+ศาลอนุญาตให้ conference ฝากขังได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "109",
+    "shortText": "โทษเกิน 10 ปีศาลต้องถามพงส,อก. ก่อนว่าจะคัดค้านหรือไม่",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "80",
+    "shortText": "ว.1 เห็นกำลังทำหรือลงท. ว.2 ท้ายประมวลให้ถือว่าซึ่งหน้า (1) ถูกไล่จับร้องเอะอะ (2)ทันทีที่ใกล้เคียง+มีของติดมา/ได้ใช้/ร่องรอยพิรุธที่เสื้อผ้านั้น",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "90",
+    "shortText": "ร้องขอให้ปล่อยจากการคุมขังไม่ชอบ ได้แก่เขาเอง,อัยการพงส, พัสดี,สามีภริยา,ญาติ,เพื่อนและให้ไต่ส่วนฝ่ายเดียวด่วน ~คำสั่งนี้อุทธรณ์ได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "113",
+    "shortText": "ปล่อยชั่วคราวชั้นพงส,อัยการให้ใช้ได้จนกว่าศาลขังระหว่างสส.หรือศาลประทับฟ้อง",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "81",
+    "shortText": "ห้ามจับที่รโหฐานเว้นแต่...",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "low"
+  },
+  {
+    "collection": "crimpro",
+    "article": "91",
+    "shortText": "ห้ามค้นในวังเว้นแต่...",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "low"
+  },
+  {
+    "collection": "crimpro",
+    "article": "113/1",
+    "shortText": "ขอถือเอาหลักประกันเดิม",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "81/1",
+    "shortText": "ห้ามจับในวังเว้นแต่...นายกอนุญาต+ได้แจ้งวังแล้ว",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "92",
+    "shortText": "ห้ามค้นรโหฐานเว้นแต่ (1) need help จากในบ้าน (2) คผ.ซึ่งหน้าทำลงในบ้าน (3)ทำผิดซึ่งหน้าแล้วหนีเข้าไป (4)มีไว้, ได้มา, ได้ใช้ +เหตุอันควรหาเงินชักช้าอาจถูกโยกย้ายทำลายก่อน (5) ผู้ถูกจับเป็นเจ้าบ้าน+มีหมาย,78",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "114",
+    "shortText": "หลักประกันมี 3 ชนิด (1) เงินสดมาวาง (2) หลักทรัพย์อื่น(ที่ดิน/รถ) (3) บุคคล(ตำแหน่ง)",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 12,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "82",
+    "shortText": "ถ้ามีหมายจับจพง.ขอความช่วยเหลือได้ แต่จะบังคับไม่ได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "93",
+    "shortText": "ค้นในที่สาธารณะเมื่อมีเหตุอันควรสงสัย+สมควรว่าได้ใช้จะใช้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "117",
+    "shortText": "หลบหนีไปนายประกันจับได้ ว.2 EM พึงให้สันนิษฐานว่าจะหลบหนี",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "83",
+    "shortText": "แจ้งสิทธิตอนจับ(จพง.จับ)",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "low"
+  },
+  {
+    "collection": "crimpro",
+    "article": "96",
+    "shortText": "ต้องค้นรว.สนขึ้น-สนตก (1)ลงมือแล้วไม่เสร็จ (2)ฉุกเฉินอย่างยิ่ง (3) ค้นเพื่อจับคนสำคัญ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "119",
+    "shortText": "ผิดสัญญาบังคับได้ไม่ต้องฟ้อง ศาลจะงด/ลดได้ ผู้ถูกบังคับ,จล. อุทได้แต่ศอธ.เป็นที่สุด",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "84",
+    "shortText": "ว.ท้าย ห้ามมิให้รับฟังคำรับสารภาพในชั้นจับกุม ส่วนถ้อยคำอื่นรับฟังได้ต่อเมื่อมีการแจ้งสิทธิ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "102",
+    "shortText": "แสดงความบริสุทธิ์ก่อน+ค้นต่อหน้าเจ้าของหรือพยานอย่างน้อย 2 คน",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "119 ทวิ",
+    "shortText": "ถ้าสั่งไม่อนุญาตอุทธรณ์ได้แต่คำสั่งศอธ.เป็นที่สุดแต่ไม่ตัดสิทธิที่จะยื่นคำร้องใหม่",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "85",
+    "shortText": "จับชอบ/รับตัวไว้ค้นได้เลย",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "103",
+    "shortText": "ค้นต่อหน้าอ่านให้ฟังลงชื่อ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "120",
+    "shortText": "ห้ามมิให้อัยการยื่นฟ้องคดีโดยไม่ได้มีการสอบสวนในความผิดนั้นมาก่อน",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "130",
+    "shortText": "พงส.จะสส.ที่ใดก็ได้ทุกที่ทุกเวลา ตามดุลพินิจ โดยผู้ต้องหาไม่จำต้องอยู่ด้วย",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "134/1",
+    "shortText": "ต้องจัดหาทนายให้ผตห.ในชั้นสอบสวนในคดีที่มีโทษประหารหรือผตห.ไม่เกิน 18 ปี ว.2 โทษจำคุกตั้งให้เมื่อไม่มี+ต้องการ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "121",
+    "shortText": "คดีความผิดต่อส่วนตัวห้ามมิให้ทำการสอบสวนเว้นแต่มีคำร้องทุกข์ตามระเบียบ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "131",
+    "shortText": "พงส.มีดุลพินิจในการรวมพยานฯเท่าที่เห็นสมควรเพื่อรู้ตัวและพิสูจน์ผตห.หรือบริสุทธิ์",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "134/2",
+    "shortText": "สอบสวนผู้ต้องหาเด็กอายุไม่เกิน 18 ปีให้นำ 133 วิมาใช้โดยอนุโลม(ต้องมีสหวิชาชีพ)",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "123",
+    "shortText": "ร้องทุกข์ต่อพงส. โดยจะร้องด้วยวาจาหรือหนังสือก็ได้ ถ้าร้องด้วยปากให้พงส.จดบันทึก+ลงชื่อ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "124",
+    "shortText": "จะร้องทุกข์กับฝ่ายปกครองก็ได้แต่ผปค.ต้องรีบส่งไปให้พงส.",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "131/1",
+    "shortText": "พยานทางวิทย์ฯ ตรวจได้เลยแต่ถ้าโทษเกิน 3ปี+ตรวจเลือดฯ ต้องได้รับความยินยอม",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "132",
+    "shortText": "ตรวจตัวผสห.ต้องยินยอม ถ้าตรวจจญ ต้องให้ญ เป็นผู้ตรวจ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "134/3",
+    "shortText": "สิทธิให้ทนายหรือผู้ไว้ใจเข้าฟังการสอบปากคำ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "124/1",
+    "shortText": "เด็กไม่เกิน 18 ร้องทุกข์ให้นำ 133ทวิมาใช้ถ้าไม่อาจรอให้บันทึก",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "133",
+    "shortText": "คผ.เพศการถามผสห.ที่เป็นญ. ต้องให้พงส.ญ เป็นผู้ถาม",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "134/4",
+    "shortText": "แจ้งสิทธิ right to remain silence และสิทธิมีทนาย ว.ท้าย ถ้อยคำใดๆที่ให้ไว้ชั้นสส. ซึ่งไม่ได้ปฏิบัติตามสามมาตราก่อน = จะรับฟังเป็นพยานหลักฐานในการพิสูจน์ความผิดของผู้นั้นไม่ได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "126",
+    "shortText": "ถอนคำร้องทุกข์คดีสต.ก่อนคดีถึงที่สุด ถ้าถอนในคดีอาญาแผ่นดินไม่ตัดสิทธิอัยการจะฟ้องใหม่/ดำเนินคดีต่อไปก็ได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "133 ทวิ",
+    "shortText": "เพศ,ชีวิตร่างกาย,เสรีภาพ,กรรโชก,ชิง/ปล้น,ค้าประเวณี,ค้าเด็ก,สถานบริการ การถามที่พยานหรือผสห.อายุไม่เกิน 18 ต้องจัดให้มี 1)นักจิต,นักสังคม 2)คนที่เด็กร้องขอ 3)อัยการอยู่ด้วยในการสส. ว.4 ต้องมีการบันทึกภาพเสียง ว.5 ถ้าไม่อาจมีสหวิชาต้องบันทึก",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "140",
+    "shortText": "สำนวนที่ไม่ปรากฏตัวผู้กระทำความผิด(มุมดำ) -โทษไม่เกิน 3ปี พงส.งดเองได้ -โทษเกิน 3ปี ต้องส่งสำนวนให้อัยการมีคำสั่ง(งดเองไม่ได้) ถ้าอัยการสั่งให้งดหรือสอบสวนต่อไปก็ให้ปฏิบัติตามนั้น(โต้แย้งไม่ได้)",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "128",
+    "shortText": "พงส.ส่งประเด็นไปที่อื่นได้ และสิ่งเล็กน้อยสั่งให้ลูกน้องทำแทนได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "133 ตรี",
+    "shortText": "การให้เด็กชี้ตัวบุคคลต้องจัดให้มีสหวิชาชีพด้วย และห้ามให้เห็นตัวเด็ก",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "141",
+    "shortText": "รู้ตัวแต่ยังจับไม่ได้ให้ส่งสำนวน+คห. ให้อัยการสั่ง",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "129",
+    "shortText": "ชันสูตรไม่เสร็จห้ามฟ้อง",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "134",
+    "shortText": "แจ้งfact > แจ้งข้อหาเพื่อให้ทราบว่าเป็นคผ.ผิดกฎหมายใด โดยไม่จำต้องแจ้ง",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "142",
+    "shortText": "สั่งฟ้องต้องส่งสำนวน+ตัว สั่งไม่ฟ้อง ส่งสำนวน+ความเห็น",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 13,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "143",
+    "shortText": "อัยการมีอำนาจสั่งสอบเพิ่มเติม/ส่งพยานมา หรือปล่อยชั่วคราว ว.ท้าย ถูกจนท.ซึ่งอ้างฆ่าตายหรือตายในรว.ควบคุม ให้อสส. หรือผู้รักษาการแทนสั่งฟ้อง/ไม่ฟ้อง only",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "147",
+    "shortText": "ห้ามมิให้มีการสอบสวนเกี่ยวกับเรื่องนั้นอีก เว้นแต่ -มีพยานหลักฐานใหม่ -สำคัญแก่คดี -น่าจะลงโทษได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "150 ทวิ",
+    "shortText": "ทำการใดๆแก่ศพ/สภาพแวดล้อมก่อนชันสูตรเสร็จในประการที่น่าจะทำให้ผลทางคดีเปลี่ยนแปลงไป = จำคุก 6-2 ปี ว.2 อำพรางคดีโทษ2เท่าของคผ.",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "144",
+    "shortText": "สั่งฟ้องแต่สั่งให้พงส.พยายามเปรียบเทียบปรับได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "148",
+    "shortText": "มีตัวตาย,ถูกฆ่าตาย,สัตว์ทำร้าย,อุบัติเหตุ =ต้องชันสูตร",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "145",
+    "shortText": "สำนวนของฝ่ายปค.",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "low"
+  },
+  {
+    "collection": "crimpro",
+    "article": "149",
+    "shortText": "ตายผิดธรรมชาติต้องแจ้ง",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "145/1",
+    "shortText": "สำนวนตร.ที่อัยการสั่งไม่ฟ้อง กทม.= คำสั่ง >ผบตร.> อสส. ตจว. = คำสั่งอัยการ >ผบภาค>อสส. *คำสั่งของอสส.เป็นที่สุด",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "150",
+    "shortText": "การชันสูตรทำโดย > แพทย์+พงส.ท้องที่ที่ศพอยู่ ว.3 ถูกวิสามัญ/รว.ควบคุมของจพง.ซึ่งอ้างว่าปฏิบัติหน้าที่ > แพทย์+พงส.+อัยการ+ฝ่ายปค. ว.4ให้อัยการเข้าร่วมทำสำนวน",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "155/1",
+    "shortText": "กรณีตายเพราะจพง.ฆ่า,ตายในรว.ควบคุม,ต่อสู้ขัดขวางอัยการต้องเข้าร่วมในการทำสำนวนสอบสวนกับพงส.ด้วย *ต้องเข้าร่วม ใช้ดุลพินิจไม่ได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "158",
+    "shortText": "(5)ต้องบรรยายการกระทำที่อ้างว่าจล.ได้กระทำผิด+ขทจ.เกี่ยวกับ เวลา/สถานที่อีกทั้งบุคคลหรือสิ่งของที่จะทำให้จำเลยเข้าใจข้อหาได้ดี (6) อ้างมาตรา (7) ลายมือชื่อโจทก์ ผู้เรียง ผู้พิมพ์",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "164",
+    "shortText": "ถ้าจะทำให้จำเลยเสียเปรียบห้ามมิให้อนุญาต แต่การแก้ไข,เพิ่มเติมฐานความผิดหรือรายละเอียดที่ต้องแถลงในฟ้องมิให้ถือว่าจล.เสียเปรียบ เว้นแต่จล.หลงต่อสู้ในข้อที่ไม่ได้กล่าวนั้น",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "167",
+    "shortText": "คดีมีมูล=ประทับ ไม่มีมูล=ยกฟ้อง ว.2 สั่งมูล ให้แสดงข้อเท็จจริงและข้อกฎหมายพร้อมเหตุผลประกอบตามสมควร",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "159",
+    "shortText": "เพิ่มโทษฐานไม่เข็ดหลาบให้โจทก์กล่าวมาในฟ้อง หรือขอเพิ่มเติมฟ้องได้ก่อนศชต.พิพากษา",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "165",
+    "shortText": "อัยการฟ้องต้องนำตัวจำเลยมาศาลเว้นแต่จะอยู่ในอำนาจศาลแล้ว...ห้ามถามคำให้การจล.และก่อนที่ศาลประทับฟ้องมิให้ถือว่าจำเลยอยู่ในฐานะเช่นนั้น",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "170",
+    "shortText": "คำสั่งมูลย่อมเด็ดขาด แต่คำสั่งไม่มีมูลโจทก์อุทธรณ์ฎีกาได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "161",
+    "shortText": "ศาลมีอำนาจสั่งให้โจทก์แก้ฟ้อง/ยกฟ้อง/ไม่ประทับฟ้อง ว.2 โจทก์อุทธรณ์คำสั่งของศาลได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "165/1",
+    "shortText": "โทษประหาร/ไม่เกิน 18 ศาลต้องตั้งทนายชั้นไต่สวนฯให้ ว.2คดีจำคุกตั้งให้เมื่อไม่มี.ต้องการ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "171",
+    "shortText": "ให้นำเรื่องการสอบสวนและการพิจารณาเว้นม.175มาบังคับแก่การไต่สวนมูลฟ้องโดยอนุโลม",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "162",
+    "shortText": "คดีราษฎรเป็นโจทก์ให้ศาลไต่สวนมูลฟ้องก่อนประทับฟ้อง -จำเลยรับสารภาพให้ประทับฟ้อง",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "165/2",
+    "shortText": "จำเลยอาจแถลงให้ศาลทราบถึงขทจ.สำคัญที่ควรสั่งว่าคดีไม่มีมูลโดยยื่นเอกสารต่างๆได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "163",
+    "shortText": "เมื่อมีเหตุอันควรโจทก์ขอแก้ไขเพิ่มเติมฟ้องได้ก่อนศชต.พิพากษา(จะก่อนหรือไม่ก็ได้) ว.2 เมื่อมีเหตุอันควรจำเลยขอแก้ไขคำให้การได้ก่อนศชต.พพษ ถ้าจะอนุญาตให้ส่งสำเนาแก้โจทก์",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "166",
+    "shortText": "โจทก์ไม่มาศาลตามนัดไต่ฯให้ยกฟ้อง แต่ศาลเห็นสมควรจะเลื่อนก็ได้ ว.2 ขอยกคดีขึ้นพิจารณาใหม่ได้ภายใน 15 วันนับแต่วันที่ศาลยกฟ้อง ว.3 ผลคือ ฟ้องอีกไม่ได้แต่อผก.ต่อแผ่นดินไม่ตัดอำนาจอัยการฟ้อง",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "161/1",
+    "shortText": "ราษฎรฟ้องไม่สุจริตบิดเบือนขทจ. ถ้าความปรากฏให้ศาลยกและห้ามฟ้องอีก ว.2 ฟ้องไม่สุจริตรวมถึงการที่โจทก์จงใจฝ่าฝืนคำสั่ง/คพษ ในคดีอาญาอื่นซึ่งถึงที่สุดแล้ว",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 14,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "172",
+    "shortText": "การพิจารณาและสืบพยานทำโดยเปิดเผยต่อหน้าจำเลย -ให้ศาลอ่านและอธิบายฟ้องและถามว่าได้ทำผิดหรือไม่และจะให้การอย่างไร ว.ท้าย ให้บันทึก video ด้วย",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "172 ตรี",
+    "shortText": "การสืบพยานเด็กไม่เกิน 18 ให้มีที่เหมาะสม+มีนักจิต ว.3 มาศาลแต่มีเหตุผลสมควร ให้ถือว่าที่ภาพเสียงเป็นส่วนหนึ่งของคำเบิกความชั้นพิจฯ ว.ท้าย ไม่ได้ตัวเด็กมาเบิกความในศาล+มีเหตุจำเป็นอย่างยิ่งให้ศาลฟังสื่อเสมือนหนึ่ง+ประกอบ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "175",
+    "shortText": "ศาลมีอำนาจเรียกสำนวนสส. จากอัยการมาประกอบการวินิจฉัยได้ ต่อเมื่อสืบพยานเสร็จ (เพื่อทำคพษ.)",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "172 ทวิ",
+    "shortText": "ภายหลัง172ว.2 (1)ไม่เกิน10ปี+มีทนาย+ศ.อนุญาต (2) จล.หลายคนโจทก์บอกไม่เกี่ยว (3) จล.หลายคนศาลเห็นไม่เกี่ยว (4) เจ็บป่วยหรือมีเหตุจำเป็นอื่นๆ+มีทนาย+ศ.อนุญาต(ไม่ดูโทษ) (5) ขัดขวางการพิจฯหรือออกจากห้องไม่ได้รับอนุญาต(ไม่ต้องมีท.) ว.2 ถ้าลับหลังคนใดตาม (2),(3) ห้ามฟังเป็นผลร้ายแก่จล.คนนั้น",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "173",
+    "shortText": "คดีมีโทษประหารหรือจำเลยเป็นเด็กไม่เกิน 18 ในวันถูกฟ้อง ก่อนเริ่มพิจารณาให้ศาลถามเรื่องทนาย ถ้าไม่มีศาลต้องจัดหาทนายให้(must) ว.2 คดีโทษจำคุก ให้ถามและจัดให้เมื่อไม่มี+ต้องการ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "176",
+    "shortText": "จำเลยรับสารภาพชั้นพิจ ศาลจะพพษ.ไปเลยก็ได้ เว้นแต่เป็นคดีที่มีอัตราโทษอย่างต่ำให้จำคุกตั้งแต่ 5 ปีขึ้นไป ต้องสืบพยาน ว.2 จล.หลายคนบางคนรับฯ ศาลสั่งให้โจทก์แยกฟ้องภายในเวลาที่กำหนดได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "172 ทวิ/1",
+    "shortText": "เห็นว่าหลบหนีไม่มาฟังการสืบฯไม่มีเหตุอันสมควร > ศาลออกหมายจับ/ภายใน 3 ด.+มีทนาย = สืบลับหลังได้ = อ่านคพษ.ลับหลังได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "173/1",
+    "shortText": "นัดตรวจพยานฯ ศาลต้องแจ้งล่วงหน้าไม่น้อยกว่า 14 วัน ว.2 คู่ความยื่นบช.พยานไม่น้อยกว่า 7 วัน/ยื่นเพิ่มก่อนตรวจเสร็จ ว.3 นอกนั้นต้องขออนุญาต",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "180",
+    "shortText": "จำเลยขัดขวางการพิจารณาศาลสั่งให้จล.ออกไปได้ และพิจารณาลับหลังได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "172 ทวิ/2",
+    "shortText": "จล.เป็นนิติบุคคลไม่มาให้ออกหมายจับผจก.นั้นๆ>3ด. >พิจารณาพิพากษาต่อได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "173/2",
+    "shortText": "ให้ส่งเอกสาร/วัตถุที่อยู่ในครอบครองของตนต่อศาลเพื่อให้อีกฝ่ายตรวจสอบ เว้นแต่ -ศาลสั่งอย่างอื่น -พยานนั้นเป็นบันทึกคหก.พยาน >โจทก์ไม่มาศาลวันนัดตรวจพยานให้ถือว่าขาดนัด+166 ต้องยกฟ้อง",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "181",
+    "shortText": "โจทก์ขาดนัดพิจารณา ศาลต้องยกฟ้อง ประกอบ ม.166",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "182",
+    "shortText": "ให้อ่านคพษ.โดยเปิดเผยต่อหน้าโจทก์ จำเลยนั้น -อ่านแล้วให้คู่ความลงลมช.ไว้ ถ้าโจทก์ไม่มาอ่านโดยจ.ไม่อยู่ก็ได้ กรณีจล.ไม่มาฟังคพษ.โดยมีเหตุสงสัยว่าจะหลบหนี/จงใจไม่มา > ศาลออกหมายจับ > ไม่ได้ตัวมาภายใน 1 เดือน > อ่านลับหลังได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "185",
+    "shortText": "เหตุยกฟ้อง -จำเลยไม่ได้กระทำความผิด -กกท.ของจล.ไม่เป็นคผ. -คดีขาดอายุความ -มีเหตุที่ควรต้องยกเว้นโทษให้ศาลยกฯ+ปล่อยจำเลยไป ว.2 ทำผิด-ไม่มีเหตุให้เว้นโทษให้ลงโทษ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "192",
+    "shortText": "ห้ามพพษ.เกินคำขอ/ที่มิได้กล่าว ว.2 ถ้าขทจ.แตกต่างให้ยกฟ้อง เว้นแต่มิใช่ข้อสาระสำคัญและมีได้กล่าวต่อสู้ ว.3 เวลา,สถานที่/เจตนากับประมาท(พลาด) ลัก,กรร,ริด,ฉ้อ,โกง,ยัก,รับ,358 มิให้ถือว่าแตกต่างในข้อสาระสำคัญ ทั้งมิให้ถือว่าเป็นเรื่องที่โจทก์ไม่ประสงค์ลงโทษ ศาลลงได้แต่ไม่เกินที่จล.ฟ้อง เว้นแต่จล.หลงต่อสู้ ว.4 ไม่บรรยาย/ไม่ขอถือว่าไม่ประสงค์ลงโทษ ว.5 โจทก์สืบสม แต่อ้างมาตราผิด ว.ท้าย คผ.ที่ฟ้องรวมการกระทำหลายอย่างไว้และแต่ละอย่างอาจเป็นคผ.ได้ในตัวเอง",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "183",
+    "shortText": "คพษ/คำสั่ง/เห็นแย้งต้องลงลมช.ของพ.ที่นั่งพิจารณา",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "186",
+    "shortText": "คพษ.ศาลต้องวินิจฉัยเรื่องของกลางด้วย",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "184",
+    "shortText": "มีความเห็นแย้งจนหาเสียงข้างมากไม่ได้ >ให้พ.ที่มีคหพ.เป็นผลร้ายกับจล.มากที่สุดรวมเห็นด้วยกับพ.ที่มีคหพ.เป็นผลร้ายน้อยกว่า",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "190",
+    "shortText": "ห้ามมิให้แก้ไขคพษ. ซึ่งอ่านแล้ว นอกจากแก้ไขที่พิมพ์ผิดพลาดเล็กน้อย",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 15,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "193",
+    "shortText": "อุทฯคัดค้านคำพิพากษาคชต.ไปยังศอธ.",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "193 ทวิ",
+    "shortText": "คดีมีโทษจำคุกไม่เกิน 3 ปี ปรับไม่เกิน 6 หมื่นต้องห้ามมิให้อุทฯในปัญหาข้อเท็จจริง เว้นแต่ (1)จล.ถูกจำคุก/กักขังแทนจำคุก (4) ปรับเกิน 1,000 บาท",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "193 ตรี",
+    "shortText": "คดีต้องห้ามตาม 193 ทวิ ขอให้พ.ที่นั่งพิจารณา/ลงลมช./ทำคห.แย้ง อนุญาตได้ หรือขอให้อสส.หรืออัยการที่มอบหมายรับรองได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "195",
+    "shortText": "ข้อกฎหมายที่อุทธรณ์ต้องเป็นข้อที่ได้ยกขึ้นว่ากันมาแล้วในศชต. ว.2 เว้นแต่เป็นข้อกม.เกี่ยวด้วยความสงบ/การไม่ปฏิบัติตามกม.",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "196",
+    "shortText": "คำสั่งระหว่างพิจฯ ที่ไม่ทำให้คดีเสร็จสำนวนห้ามอุทฯ จนกว่าจะมีคพษ.ในประเด็นสำคัญ+มีการอุทฯคำพิพากษาด้วย",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "198",
+    "shortText": "อุทฯภายใน 1 เดือนนับแต่อ่าน/ถือว่าได้อ่าน ศชต.มีหน้าที่ตรวจอุท ว.3 ต้องมาแสดงตนในกรณีถูกจำคุก แต่ไม่ได้ถูกคุมขัง",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "198 ทวิ",
+    "shortText": "ศชต.ไม่รับอุท ให้อุทธรณ์คำสั่งนั้นได้ภายใน 15 วัน ว.ท้าย ให้ศอธ.พิจารณาสั่งว่าจะยืนตามคำปฏิเสธหรือจะรับอุทธรณ์ คำสั่งศาลอุทธรณ์เป็นที่สุด",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "200",
+    "shortText": "ให้ศาลส่งสำเนาอุทธรณ์ให้อีกฝ่ายหนึ่งแก้ภายใน 15 วัน",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "210",
+    "shortText": "ถ้ามิได้ยื่นอุทธรณ์ภายในกำหนด ให้ศอธ.พิพากษายกฟ้องอุทธรณ์",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "212",
+    "shortText": "คดีที่จำเลยอุทธรณ์ ห้ามมิให้ศาลพิพากษาเพิ่มเติมโทษจำเลย เว้นแต่โจทก์จะได้อุทธรณ์ในทำนองนั้น",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "213",
+    "shortText": "เหตุลักษณะคดี มีจำเลยหลายคนในคผ.เดียวกันหรือต่อเนื่องกัน ถ้ากลับ,แก้ไม่ลงโทษลดโทษ ศอธ.มีอำนาจพพษ.ตลอดไปถึงจล.อื่นที่มิได้ยื่นอุทธรณ์ให้ไม่ต้องรับโทษ/ลดโทษได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "202",
+    "shortText": "ผู้อุทธรณ์เท่านั้นมีอำนาจ ถอนอุทธรณ์ ก่อนอ่านคำพิพากษา ก่อนส่งสำนวน>ยื่นต่อศชต. ส่งสำนวนไปแล้ว>ยื่นต่อศอธ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "208",
+    "shortText": "ศอธ.มีอำนาจสั่งสืบพยานเพิ่มเติม,ถ้าเห็นเป็นการจำเป็นเพราะไม่ปฏิบัติให้ถูกต้องย้อนสำนวนให้ศชต.พิจ/พิพากษาใหม่ได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "215",
+    "shortText": "เอาบทบัญญัติศชต.มาประกอบ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "low"
+  },
+  {
+    "collection": "crimpro",
+    "article": "216",
+    "shortText": "ฎีกาคือคัดค้านคพษ.ศาลอุทธรณ์ 1 เดือนนับแต่อ่าน ว.2 ยื่นต่อศชต. เอา 198,200 มาใช้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "219 ทวิ",
+    "shortText": "ห้ามคู่ความฎีกาในfact ในวิธีการเพื่อความปลอดภัยonly",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "221",
+    "shortText": "คดีต้องห้ามตาม 218,219,220 -พ.ที่นั่งพิจ -พ.ที่ลงชื่อคพษ. -พ.ทำความเห็นแย้ง อนุญาตได้ หรือให้อสส.รับรองให้ฎีกาก็ได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "218",
+    "shortText": "ในคดีที่ศอธ.ยืนหรือเพียงแต่แก้ไขเล็กน้อยและคงจำคุกจำเลยไม่เกิน5ปี ห้ามคู่ความฎีกาใน fact ว.2 ศอธ.ลงโทษจำเลยเกิน5ปี ห้ามมิให้โจทก์ฎีกาใน fact (ไม่ห้ามจำเลย)",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "219 ตรี",
+    "shortText": "ศชต.กักขังแทนจำคุก,เปลี่ยนกักขังเป็นจำคุก, กักขังแทนค่าปรับ >ถ้าศอธ.ไม่ได้พพษ.กลับห้ามคู่ความฎีกาใน fact",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "224",
+    "shortText": "ศชต.ไม่รับ > อุทธรณ์คำสั่งของศชต,ที่ไม่ยอมรับฎีกาภายใน 15 วัน >ยื่น@ศชต.>ต้องรีบส่งไปให้ศาลฎีกาเป็นผู้สั่ง",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "219",
+    "shortText": "ศชต.และศอธ. ลงโทษจำคุกไม่เกิน 2 ปีหรือปรับไม่เกิน 40,000 ห้ามคู่ความฎีกาใน fact. ...แต่ไม่ห้ามจำเลยฎีกาถ้าแก้ไขมาก+เพิ่มโทษจล.",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "220",
+    "shortText": "ห้ามมิให้คู่ความฎีกาคดีที่ศาลชั้นต้นและศาลอุทธรณ์พิพากษายกฟ้อง *ห้ามทั้งขทจ.และข้อกม.",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "225",
+    "shortText": "ตัวเชื่อมเอามาใช้ในชั้นฎีกา",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 16,
+    "confidence": "low"
+  },
+  {
+    "collection": "crimpro",
+    "article": "226",
+    "shortText": "พยานเอกสาร,วัตถุ,บุคคล ที่น่าจะพิสูจน์ผตห./บริสุทธิ์ได้ให้อ้างได้ แต่พยานหลักฐานที่เกิดขึ้นมิชอบ -จูงใจ -ขู่เข็ญ -คำมั่น -หลอกลวง -มิชอบอื่นห้ามรับฟังเป็นพยานฯ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "226/4",
+    "shortText": "คดีเกี่ยวกับเพศห้ามนำสืบ/ถามค้านเกี่ยวกับพฤติกรรมทางเพศผสห.+คนอื่น เว้นแต่ได้รับอนุญาตจากศาล",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "228",
+    "shortText": "ระหว่างพิจารณา ศาลมีอำนาจสืบพยานเพิ่มเติมโดยผลการเองหรือคู่ความร้องขอก็ได้โดยสืบเองหรือส่งประเด็นก็ได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "226/1",
+    "shortText": "พยานที่เกิดขึ้นโดยชอบแต่ได้มาโดยการกระทำมิชอบ ห้ามมิให้รับฟัง เว้นแต่การรับฟังจะเป็นประโยชน์ต่อการอำนวยยตธ.มากกว่าผลเสีย...ผลกระทบต่อระบบงาน/สิทธิเสรีภาพปชช. (1) คุณค่าเชิงพิสูจน์,ความน่าเชื่อ (2) ความร้ายแรงของคผ. (3) คสห.ที่เกิดจากกกท.ที่มิชอบ (4) ผู้ทำมิชอบรับโทษหรือไม่",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "226/5",
+    "shortText": "นำคำเบิกความในชั้นไต่สวนมูลฟ้อง/คำเบิกความพยานในคดีอื่น มารับฟังในชั้นพิจารณาประกอบพยานหลักฐานอื่นในคดีได้เมื่อมีเหตุจำเป็นหรือเหตุสมควร",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "229/1",
+    "shortText": "กรณีไม่มีวันนัดตรวจพยานฯ ในการไต่มูลฟ้องหรือการพิจฯ โจทก์ต้องยื่นบช.พยาน+สำเนาก่อนวันสืบไม่น้อยกว่า 15 วัน /จำเลยยื่นก่อนวันสืบตัวเอง ว.3 ยื่นเพิ่มเติม (1)เคยยื่นแล้วให้ยื่นก่อนฝ่ายตนสืบเสร็จ (2)ไม่เคยยื่น ให้ยื่นก่อนเสร็จการพิจฯ ว.ท้าย ผลที่มิได้ยื่นบช.พยานคือห้ามศาลให้สืบ+รับฟัง เว้น -คุ้มครองพยาน -วินิจฉัยข้อสำคัญ -ให้โอกาส",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "226/2",
+    "shortText": "ห้ามมิให้รับฟังพยานที่เกี่ยวกับการทำผิดครั้งอื่นๆของจล.เพื่อพิสูจน์คผ.ที่ถูกฟ้อง เว้นแต่ -แสดงถึงลักษณะเฉพาะของกกท. -เป็นความประพฤติในส่วนดี",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "227",
+    "shortText": "อย่าพพษ.ลงโทษจำเลยจนกว่าจะแน่ใจว่ามีการกระทำความผิดจริง และจำเลยเป็นผู้กระทำความผิดนั้น ว.2 เมื่อมีความสงสัยตามสมควรให้ยกประโยชน์แห่งความสงสัยให้แก่จำเลย",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "230",
+    "shortText": "เดินเผชิญสืบได้เมื่อคค.ร้องขอหรือศาลเห็นสมควร ส่งประเด็นให้ศาลอื่นสืบแทนได้ > ศาลที่รับประเด็นมีอำนาจดังศาลเดิมและส่งประเด็นต่ออีกทอดได้ ว.2 ถ้าจล.ถูกขังให้ส่งจล.ไปศาลที่รับประเด็นด้วย เว้นแต่ม.172 ทวิ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "226/3",
+    "shortText": "ห้ามมิให้ฟังพยานบอกเล่า เว้นแต่ (1) สภาพ ลักษณะ แหล่งที่มา ขทจ.แวดล้อมน่าเชื่อว่าจะพิสูจน์ความจริงได้ (2) มีเหตุจำเป็น+เหตุสมควรเพื่อปย.แห่งความยุติธรรม",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "227/1",
+    "shortText": "พยานบอกเล่า/ซัดทอด/พยานที่จล.ไม่มีโอกาสถามค้าน/บกพร่องอื่นๆ ศาลต้องกระทำด้วยความระมัดระวัง ไม่ควรเชื่อพยานนั้นโดยลำพังเพื่อลงโทษจำเลย เว้นแต่ -เหตุผลหนักแน่น -พฤติการณ์พิเศษ -พยานประกอบอื่น ว.2 มีแหล่งที่มาอิสระ+มีคุณค่าในเชิงพิสูจน์",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "230/2",
+    "shortText": "คู่ความจะขอเสนอบันทึกถ้อยคำพยานได้แต่เฉพาะกรณีที่พยานที่มีถิ่นที่อยู่ในตปท. เท่านั้น *ตีความเคร่งครัดและไม่เอาป.วิพ.มาใช้เพราะมีบัญญัติไว้โดยเฉพาะแล้ว",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "232",
+    "shortText": "ห้ามโจทก์อ้างจำเลยเป็นพยาน",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "233",
+    "shortText": "จำเลยอ้างตนเองได้ และถ้าเบิกความปรักปรำหรือเสียหายแก่จล.อื่นซักค้านได้ ว.2 คำเบิกความจล.ใช้ยันจล.ได้และรับฟังประกอบพยานอื่นของโจทก์ได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "237 ทวิ",
+    "shortText": "อัยการขอให้ศาลสืบก่อนฟ้องได้ถ้า -พยานจะไปตปท. -ไม่มีที่อยู่เป็นหลักแหล่ง -ยุ่งเหยิงพยาน -จำเป็นอื่นๆ ->ให้สืบทันที ว.3 คดีที่ต้องตั้งทนายถ้าไม่มี/ไม่ทัน ให้ศาลซักถามแทน ว.อื่นๆ จำเลยก็ขอสืบก่อนได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "240",
+    "shortText": "ไม่มีวันนัดตรวจพยานฯ ให้ส่งต้นฉบับเอกสารในความคค.ต่อศาลเพื่อให้อีกฝ่ายตรวจ/ขอคัดก่อนวันสืบไม่น้อยกว่า 15 วัน เว้นแต่ เป็นบันทึกคหก.พยาน,... ว.ท้าย ผลของการไม่ส่งเอกสารตาม173/2 หรือไม่ส่งตามนี้ ให้ศาลมีอำนาจไม่รับฟัง เว้นแต่ -เพื่อปย.ความยตธ. -ไม่ได้จงใจไม่ยื่น -ไม่เสียโอกาสของอีกฝ่าย",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "237",
+    "shortText": "คู่ความอาจตกลงกัน+ศาลอนุญาตให้ถือเอาบันทึกคำเบิกความในชั้นไต่สวนมูลฟ้องแทนได้ เว้นคดีที่มีโทษอย่างต่ำ 5 ปีขึ้นไป",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "237 ตรี",
+    "shortText": "ฟ้องคดีแล้วจะขอสืบล่วงหน้า ให้นำม.ก่อนมาใช้ ว.2 ขอให้ตรวจพยานทางวิทย์ฯก่อนฟ้องก็ได้ เอาม.ก่อนมาใช้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "243",
+    "shortText": "พยานผู้เชี่ยวชาญ ต้องมาเบิกความเสมอ เว้นแต่มีเหตุจำเป็น,คค.ไม่ติดใจซักถามก็ให้ศาลรับฟังความเห็นเป็นหนังสือได้",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 17,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "245",
+    "shortText": "เมื่อคดีถึงที่สุดให้บังคับคดีทันที ว.2 สำนวนที่ลงโทษประหารจำคุกตลอดชีวิต+ไม่มีการอุทธรณ์ คพษ.ให้ศชต.ส่งสำนวนให้ศธธ. คดีจะถึงที่สุดต่อเมื่อศธธ.ยืน",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 18,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "249",
+    "shortText": "คพษ.ที่ให้คืนหรือใช้ราคาทรัพย์ตาม43 หรือที่ให้ใช้คสมทท. ตาม 44/1 ให้ยึดทรัพย์ขายทอดตลาดตามป.วิ.พ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 18,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "254",
+    "shortText": "กรณีผสห.ฟ้องคดีอาญาเองและมีคำขอทางแพ่งมา ให้เรียกคธน.ดังคดีแพ่ง ว.2 ขอยกเว้นค่ธน.ได้>ยื่นต่อศชต. เหตุอนุญาต =-ฟ้องมีมูล -คสห.ไม่สูงเกินสมควร+สุจริต ว.3 ห้ามอุทธรณ์คำสั่งศาลชั้นต้น",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 18,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "246",
+    "shortText": "จล.,สามีภรรยา,ญาติขอทุเลาการบังคับจำคุกเมื่อ -วิกลฯ -จะตาย -มีครรภ์ -คลอดไม่ถึง3ปี",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 18,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "253",
+    "shortText": "ในคดีที่อัยการเป็นโจทก์มีคำขอ 43 หรือ 44/1 มิให้เรียกค่าธรรมเนียม เว้นแต่ -เรียกคสมทท สูงเกินสมควรหรือไม่สุจริต ศาลสั่งให้ชำระได้ตามที่เห็นสมควร ถ้าไม่ปฏิบัติถือว่าทิ้งฟ้องส่วนแพ่ง",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 18,
+    "confidence": "high"
+  },
+  {
+    "collection": "crimpro",
+    "article": "259-267",
+    "shortText": "เรื่องอภัยโทษ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 18,
+    "confidence": "low"
+  },
+  {
+    "collection": "crimpro",
+    "article": "247",
+    "shortText": "โทษประหาร ห้ามบังคับไว้จนกว่าจะได้มีการขออภัยโทษ",
+    "sourceFile": "ตัวบทย่อ Cr. คุณ ปป JT 80.pdf",
+    "sourcePage": 18,
+    "confidence": "high"
+  }
+]
