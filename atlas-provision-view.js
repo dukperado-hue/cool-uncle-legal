@@ -43,6 +43,7 @@
   var PARAM = 'a';                 // ?a=<collection>_<number>  (self-sufficient; bare number also read)
   var RETURN_PROVISION_KEY = 'atlas:return:a'; // F11.2 — ISOLATED recovery ref; NOT inside atlas:return (AtlasUI owns that)
   var CASE_INDEX_URL = 'prototype/assets/cases/article-case-index.json';
+  var SHORT_TEXT_URL = 'atlas-provision-shorttext.json?v=20260928a';
   var STYLE_ID = 'atlas-provision-view-style';
   var PILL_SELECTOR = 'a.atlas-provision';
 
@@ -58,6 +59,7 @@
   var _bound = false;
   var _prevBodyOverflow = null;
   var _caseIndexPromise = null;
+  var _shortTextIndexPromise = null;
 
   // ================================================================
   // utilities
@@ -287,6 +289,31 @@
   }
 
   // ================================================================
+  // มาตราย่อ (short-text summary) — reads a SEPARATE, hand-curated public
+  // index (atlas-provision-shorttext.json), keyed "<collection>:<article>",
+  // value = a paraphrased summary string. NOT codex-data.json — no schema
+  // change there, no second source of truth for the statute text itself.
+  // Same memoised-fetch / fail-soft-to-{} shape as loadCaseIndex() above.
+  // ================================================================
+  function loadShortTextIndex() {
+    if (_shortTextIndexPromise) return _shortTextIndexPromise;
+    if (typeof global.fetch !== 'function') {
+      _shortTextIndexPromise = Promise.resolve({});
+      return _shortTextIndexPromise;
+    }
+    _shortTextIndexPromise = global.fetch(SHORT_TEXT_URL)
+      .then(function (r) { return (r && r.ok) ? r.json() : {}; })
+      .then(function (j) { return (j && typeof j === 'object') ? j : {}; })
+      .catch(function () { return {}; });
+    return _shortTextIndexPromise;
+  }
+  function shortTextFor(index, collection, number) {
+    var key = collection + ':' + number;
+    var v = (index && Object.prototype.hasOwnProperty.call(index, key)) ? index[key] : null;
+    return (typeof v === 'string' && v.trim()) ? v.trim() : null;
+  }
+
+  // ================================================================
   // stylesheet (scoped .atlas-provision-view-*; no generic selectors)
   // ================================================================
   function injectStyle() {
@@ -347,6 +374,14 @@
       '  padding:2px 9px;border-radius:999px;background:var(--chip,#f2ede1);color:var(--muted,#5b6472);',
       '  vertical-align:middle;}',
       '.atlas-provision-view-collection{margin:0 0 22px;font-size:13px;color:var(--muted,#5b6472);}',
+      // มาตราย่อ (short-text summary) — same label/body typography already
+      // established by atlas-provision-lectures.js's .atlas-plec-label /
+      // .atlas-plec-body, reused verbatim rather than inventing a new style.
+      '.atlas-provision-view-shorttext{margin:0 0 20px;}',
+      '.atlas-provision-view-shorttext-label{margin:0 0 6px;font-size:11px;font-weight:700;',
+      '  letter-spacing:.03em;text-transform:uppercase;color:var(--muted,#5b6472);}',
+      '.atlas-provision-view-shorttext-text{margin:0;font-size:12.5px;line-height:1.85;',
+      '  color:var(--ink,#1f2430);}',
       // F11.3.2 — exam-frequency line: subordinate, sits under the heading
       '.atlas-provision-view-examfreq{margin:0 0 20px;font-size:12px;line-height:1.5;',
       '  color:var(--muted,#5b6472);display:flex;align-items:baseline;gap:6px;}',
@@ -792,6 +827,26 @@
     return box;
   }
 
+  // มาตราย่อ — reads atlas-provision-shorttext.json (see loadShortTextIndex
+  // above), a hand-curated public summary layer separate from codex-data.json.
+  // Fails soft: no entry → box stays hidden, no placeholder, no visible gap.
+  // Carries a persistent label (same convention as atlas-provision-lectures.js)
+  // marking this as a summary, never styled to resemble the statute itself.
+  function shortTextEl(resolved) {
+    var box = make('div', 'atlas-provision-view-shorttext');
+    box.hidden = true;
+    loadShortTextIndex().then(function (index) {
+      var text;
+      try { text = shortTextFor(index, resolved.collection, resolved.number); }
+      catch (e) { text = null; }
+      if (!text || !box.parentNode) return;
+      box.appendChild(make('p', 'atlas-provision-view-shorttext-label', 'สรุปมาตรา — ไม่ใช่ตัวบท'));
+      box.appendChild(make('p', 'atlas-provision-view-shorttext-text', text));
+      box.hidden = false;
+    });
+    return box;
+  }
+
   function renderInto(panel, resolved) {
     while (panel.firstChild) panel.removeChild(panel.firstChild);
 
@@ -833,6 +888,11 @@
       resolved.collectionTitle || resolved.collection));
 
     body.appendChild(textEl(resolved));
+
+    // มาตราย่อ — hand-curated public summary (atlas-provision-shorttext.json),
+    // separate from codex-data.json. Sits right after the statute text, before
+    // lectureNotes. Fills in async; renders nothing when no entry exists.
+    body.appendChild(shortTextEl(resolved));
 
     // F11.3.4 — provision-level lecture notes (editorial explanation), a
     // STANDALONE progressive-enhancement layer sourced from the SAME

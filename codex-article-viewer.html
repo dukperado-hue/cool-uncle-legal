@@ -366,6 +366,25 @@ h1, h2, h3 { font-family: 'Noto Serif Thai', serif; }
   margin-bottom: 20px;
 }
 
+/* มาตราย่อ (short-text summary) — deliberately NOT styled to resemble
+   .article-body above; a small label + plain paragraph only, so it never
+   reads as if it were the statute itself. */
+.article-shorttext-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 6px;
+}
+
+.article-shorttext-text {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink);
+  margin: 0 0 20px;
+}
+
 .warak-row {
   display: grid;
   grid-template-columns: 84px 1fr;
@@ -980,6 +999,12 @@ mark.codex-hl-yellow { background: #FFE066; color: #3a3212; }
       กำลังโหลดข้อมูลมาตรา...
     </div>
 
+    <!-- มาตราย่อ (short-text summary) — separate public data, never
+         codex-data.json. Hidden by default; renderShortText() only ever
+         un-hides it, never shows a placeholder, so a missing entry leaves
+         no visible gap. -->
+    <div class="article-shorttext" id="article-shorttext" hidden></div>
+
     <!-- PERSONAL NOTE -->
     <div class="article-note">
       <textarea class="note-input" id="article-note-input" placeholder="📝 บันทึกส่วนตัวของคุณเกี่ยวกับมาตรานี้..."></textarea>
@@ -1379,6 +1404,7 @@ const BOOK_TITLES = {
 let codexData = null;
 let currentBookType = null;
 let currentNumber = null;
+let shortTextIndex = {};   // มาตราย่อ public summary index — see loadAndRender
 // Phase 4A: true only when this visit came from Thai Legal Atlas (?x=atlas).
 // A direct legacy URL leaves this false and the viewer behaves exactly as before.
 let FROM_ATLAS = false;
@@ -1714,6 +1740,30 @@ function initHighlightFeature() {
 
 function emptyState(icon, text) {
   return `<div class="empty-section"><div class="icon">${icon}</div><p>${text}</p></div>`;
+}
+
+// มาตราย่อ — reads shortTextIndex (loaded once in loadAndRender from the
+// separate public atlas-provision-shorttext.json, never codex-data.json).
+// No entry → container stays hidden, no placeholder, no visible gap
+// (deliberately different from renderLectureNotes()'s empty-state card
+// below — this block must not be touched/refactored for this feature).
+function renderShortText(article) {
+  const el = document.getElementById('article-shorttext');
+  if (!el) return;
+  const key = currentBookType + ':' + currentNumber;
+  const text = (shortTextIndex && typeof shortTextIndex[key] === 'string')
+    ? shortTextIndex[key].trim() : '';
+  if (!text) { el.hidden = true; el.textContent = ''; return; }
+  el.textContent = '';
+  const label = document.createElement('p');
+  label.className = 'article-shorttext-label';
+  label.textContent = 'สรุปมาตรา — ไม่ใช่ตัวบท';
+  const body = document.createElement('p');
+  body.className = 'article-shorttext-text';
+  body.textContent = text;
+  el.appendChild(label);
+  el.appendChild(body);
+  el.hidden = false;
 }
 
 function renderLectureNotes(article) {
@@ -2174,6 +2224,16 @@ async function loadAndRender() {
   }
   if (window.AtlasCore) { try { AtlasCore.attachCorpus(codexData); } catch (e) {} }
 
+  // มาตราย่อ (short-text summary) — a SEPARATE hand-curated public file,
+  // atlas-provision-shorttext.json, never codex-data.json. Independent
+  // try/catch: any failure here must never break the article page itself —
+  // it just means no summary renders, same as an article with no entry.
+  try {
+    const stRes = await fetch('atlas-provision-shorttext.json?v=20260928a');
+    const stJson = (stRes && stRes.ok) ? await stRes.json() : {};
+    shortTextIndex = (stJson && typeof stJson === 'object') ? stJson : {};
+  } catch (e) { shortTextIndex = {}; }
+
   const book = codexData.books[currentBookType];
   const article = book && book.articles[currentNumber];
   if (!article) { showNotFound(`ไม่พบมาตรา ${currentNumber}`); return; }
@@ -2219,6 +2279,7 @@ async function loadAndRender() {
     : '';
   document.getElementById('article-subtitle').textContent = BOOK_TITLES[currentBookType] || '';
   renderArticleBody(article);
+  renderShortText(article);
 
   renderLectureNotes(article);
   renderNav(book.articles);
