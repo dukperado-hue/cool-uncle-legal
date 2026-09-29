@@ -379,7 +379,7 @@
       // .atlas-plec-body, reused verbatim rather than inventing a new style.
       '.atlas-provision-view-shorttext{margin:0 0 20px;}',
       '.atlas-provision-view-shorttext-label{margin:0 0 6px;font-size:11px;font-weight:700;',
-      '  letter-spacing:.03em;text-transform:uppercase;color:var(--muted,#5b6472);}',
+      '  letter-spacing:.03em;color:var(--muted,#5b6472);}',
       '.atlas-provision-view-shorttext-text{margin:0;font-size:12.5px;line-height:1.85;',
       '  color:var(--ink,#1f2430);}',
       // F11.3.2 — exam-frequency line: subordinate, sits under the heading
@@ -840,7 +840,7 @@
       try { text = shortTextFor(index, resolved.collection, resolved.number); }
       catch (e) { text = null; }
       if (!text || !box.parentNode) return;
-      box.appendChild(make('p', 'atlas-provision-view-shorttext-label', 'สรุปมาตรา — ไม่ใช่ตัวบท'));
+      box.appendChild(make('p', 'atlas-provision-view-shorttext-label', 'สรุปมาตรา'));
       box.appendChild(make('p', 'atlas-provision-view-shorttext-text', text));
       box.hidden = false;
     });
