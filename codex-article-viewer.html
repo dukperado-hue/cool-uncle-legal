@@ -982,13 +982,13 @@ mark.codex-hl-yellow { background: #FFE066; color: #3a3212; }
         </div>
       </div>
       <div class="hl-auto-note" id="hl-auto-note" style="display:none">
-        <span class="hl-hint">โปรดตรวจสอบเนื้อหาอีกครั้ง</span>
+        <span class="hl-hint" id="hl-auto-status">โปรดตรวจสอบเนื้อหาอีกครั้ง</span>
         <div class="hl-legend">
-          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-orange" style="cursor:default"></span><span class="hl-legend-label">ส้ม = คำสำคัญ</span></span>
-          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-blue" style="cursor:default"></span><span class="hl-legend-label">ฟ้า = ข้อยกเว้น</span></span>
+          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-orange" style="cursor:default"></span><span class="hl-legend-label">ส้ม = ศัพท์/บทบาททางกฎหมาย</span></span>
+          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-blue" style="cursor:default"></span><span class="hl-legend-label">ฟ้า = ข้อยกเว้น/ข้อจำกัด</span></span>
           <span class="hl-legend-item"><span class="hl-swatch hl-swatch-pink" style="cursor:default"></span><span class="hl-legend-label">ชมพู = อ้างอิงมาตราอื่น</span></span>
-          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-green" style="cursor:default"></span><span class="hl-legend-label">เขียว = ระยะเวลา/ขั้นตอน</span></span>
-          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-yellow" style="cursor:default"></span><span class="hl-legend-label">เหลือง = ข้อความในเครื่องหมายคำพูด</span></span>
+          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-green" style="cursor:default"></span><span class="hl-legend-label">เขียว = ผลทางกฎหมาย</span></span>
+          <span class="hl-legend-item"><span class="hl-swatch hl-swatch-yellow" style="cursor:default"></span><span class="hl-legend-label">เหลือง = คำสำคัญ/วลีสำคัญ</span></span>
         </div>
       </div>
     </div>
@@ -1468,9 +1468,18 @@ function renderArticleBody(article) {
   const chunks = article.text.split('\n').filter(p => p.trim());
   const useAuto = highlightModeOn && highlightViewMode === 'auto';
   const manualHighlights = useAuto ? null : getHighlights(article.id);
+  // AI Highlight is scoped to starred (examFreq) articles of 4 books; anywhere
+  // else auto mode renders plain text. Curated phrases are located once per
+  // render so a phrase lands in exactly one chunk.
+  const autoInScope = useAuto && isAiHighlightScope(currentBookType, article);
+  const curated = autoInScope
+    ? locateCuratedHighlights(currentBookType, article, chunks.length <= 1 ? [article.text] : chunks)
+    : [];
+  const autoRangesFor = (text, i) => autoInScope ? computeAutoHighlightsForChunk(text, curated[i] || []) : [];
+  updateAutoStatus(useAuto, autoInScope);
   if (chunks.length <= 1) {
     el.setAttribute('data-chunk-index', '0');
-    const ranges = useAuto ? computeAutoHighlightsForChunk(article.text, article, 0) : highlightsForChunk(manualHighlights, 0);
+    const ranges = useAuto ? autoRangesFor(article.text, 0) : highlightsForChunk(manualHighlights, 0);
     el.innerHTML = buildChunkHtml(article.text, ranges, currentBookType, article.number, useAuto);
     return;
   }
@@ -1485,7 +1494,7 @@ function renderArticleBody(article) {
       warakN++;
       label = `วรรค${thaiOrdinalWord(warakN)}`;
     }
-    const ranges = useAuto ? computeAutoHighlightsForChunk(p, article, i) : highlightsForChunk(manualHighlights, i);
+    const ranges = useAuto ? autoRangesFor(p, i) : highlightsForChunk(manualHighlights, i);
     return `
     <div class="warak-row">
       <div class="warak-label">${label}</div>
@@ -1539,43 +1548,90 @@ function highlightsForChunk(highlights, chunkIndex) {
   return highlights.filter(h => h.chunkIndex === chunkIndex).sort((a, b) => a.start - b.start);
 }
 
-// --- auto-mode rule engine -----------------------------------------------
-// Mechanical, text-pattern rules for ฟ้า/ชมพู/เขียว — no legal judgment
-// involved. ส้ม (the "important keyword" color) can't be found this way,
-// so it comes only from article.aiHighlights: a short list of hand-picked
-// keyword phrases, curated per article the same way lectureNotes are —
-// a human/AI actually reads the real statute text and marks it, nothing
-// invented. Only a handful of articles have this curated yet.
-const THAI_NUM_WORD_RE = '(?:ยี่สิบ|สามสิบ|สี่สิบ|ห้าสิบ|หกสิบ|เจ็ดสิบ|แปดสิบ|เก้าสิบ|สิบ)(?:เอ็ด|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?|หนึ่ง|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า|ร้อย';
+// --- auto-mode (🤖 AI Highlight) engine ------------------------------------
+// Scope: only starred articles (article.examFreq) of AI_HL_BOOKS. Colour
+// semantics (reading-the-statute structure):
+//   yellow = key phrase to remember    blue  = exception / limitation
+//   pink   = cross-reference to another มาตรา (link stays clickable)
+//   green  = legal consequence / result (โทษ, หน้าที่, ผล)
+//   orange = defined term / legal role (ผู้ซื้อ, พนักงานอัยการ ...)
+// Only pink is mechanical (มาตรา refs). Everything else is curated in
+// codex-ai-highlights.json ("book:number" -> {colour: [exact phrases]}),
+// plus legacy article.aiHighlights (treated as yellow key phrases). Nothing
+// is guessed: no quote matching, no blind เว้นแต่ matching. A curated phrase
+// that isn't found verbatim is skipped; each lands on its first occurrence.
+// Overlaps: AI_HL_PRIORITY decides (first = wins). A lower-priority range is
+// CUT around higher ones (never nested), so e.g. an orange "ผู้ขาย" splits a
+// yellow definition sentence into two yellow marks.
+const AI_HL_BOOKS = ['civil', 'criminal', 'civpro', 'crimpro'];
+const AI_HL_PRIORITY = ['pink', 'blue', 'green', 'orange', 'yellow'];
+let aiHighlightIndex = {}; // filled in loadAndRender from codex-ai-highlights.json
 
-function computeAutoHighlightsForChunk(text, article, chunkIndex) {
-  const ranges = [];
-  const pushAll = (re, color) => {
-    let m;
-    while ((m = re.exec(text))) {
-      if (m[0].length === 0) { re.lastIndex++; continue; }
-      ranges.push({ start: m.index, end: m.index + m[0].length, color });
+function isAiHighlightScope(bookType, article) {
+  return !!(article && article.examFreq && AI_HL_BOOKS.indexOf(bookType) !== -1);
+}
+
+// Returns one array of {start,end,color} per chunk. Each curated phrase is
+// placed at its first occurrence in the first chunk containing it.
+function locateCuratedHighlights(bookType, article, chunks) {
+  const perChunk = chunks.map(() => []);
+  const place = (phrase, color, onlyChunk) => {
+    if (typeof phrase !== 'string' || !phrase) return;
+    for (let i = 0; i < chunks.length; i++) {
+      if (onlyChunk !== undefined && onlyChunk !== i) continue;
+      const idx = chunks[i].indexOf(phrase);
+      if (idx !== -1) { perChunk[i].push({ start: idx, end: idx + phrase.length, color }); return; }
     }
   };
-  pushAll(/“[^“”]*”|"[^"]*"/g, 'yellow');
-  pushAll(/เว้นแต่(?:จะ)?|เว้นเสียแต่(?:จะ)?|ยกเว้น(?:กรณี)?/g, 'blue');
-  pushAll(new RegExp(MATRA_REF_RE.source, 'g'), 'pink');
-  pushAll(new RegExp('(?:ภายใน|เกิน|ไม่เกิน|มีกำหนด)\\s*(?:[0-9๐-๙]+|' + THAI_NUM_WORD_RE + ')\\s*(?:วัน|เดือน|ปี|ชั่วโมง|นาที)', 'g'), 'green');
-  pushAll(/ต้องทำเป็นหนังสือ(?:และจดทะเบียนต่อพนักงานเจ้าหน้าที่)?/g, 'green');
-  // AI-curated ส้ม keyword picks, if this article has any.
-  (article && article.aiHighlights || []).forEach(h => {
-    if (h.chunk !== chunkIndex) return;
-    const idx = text.indexOf(h.phrase);
-    if (idx === -1) return; // data/text drifted apart — skip rather than mis-highlight
-    ranges.push({ start: idx, end: idx + h.phrase.length, color: h.color || 'orange' });
+  const entry = aiHighlightIndex && aiHighlightIndex[bookType + ':' + article.number];
+  if (entry && typeof entry === 'object') {
+    AI_HL_PRIORITY.forEach(color => {
+      if (Array.isArray(entry[color])) entry[color].forEach(p => place(p, color));
+    });
+  }
+  (article.aiHighlights || []).forEach(h => place(h && h.phrase, 'yellow', h && h.chunk));
+  return perChunk;
+}
+
+function computeAutoHighlightsForChunk(text, curatedRanges) {
+  const cands = (curatedRanges || []).slice();
+  const re = new RegExp(MATRA_REF_RE.source, 'g');
+  let m;
+  while ((m = re.exec(text))) {
+    if (m[0].length === 0) { re.lastIndex++; continue; }
+    cands.push({ start: m.index, end: m.index + m[0].length, color: 'pink' });
+  }
+  const rank = c => { const i = AI_HL_PRIORITY.indexOf(c); return i === -1 ? AI_HL_PRIORITY.length : i; };
+  cands.sort((a, b) => rank(a.color) - rank(b.color) || a.start - b.start || (b.end - b.start) - (a.end - a.start));
+  const kept = [];
+  cands.forEach(r => {
+    let pieces = [{ start: r.start, end: r.end }];
+    kept.forEach(k => {
+      pieces = pieces.reduce((acc, q) => {
+        if (q.end <= k.start || q.start >= k.end) { acc.push(q); return acc; }
+        if (q.start < k.start) acc.push({ start: q.start, end: k.start });
+        if (q.end > k.end) acc.push({ start: k.end, end: q.end });
+        return acc;
+      }, []);
+    });
+    const added = [];
+    pieces.forEach(q => {
+      let a = q.start, b = q.end;
+      while (a < b && /\s/.test(text[a])) a++;
+      while (b > a && /\s/.test(text[b - 1])) b--;
+      if (b > a) added.push({ start: a, end: b, color: r.color });
+    });
+    added.forEach(x => kept.push(x));
   });
-  ranges.sort((a, b) => a.start - b.start);
-  // drop overlaps in favor of whichever rule matched first (earlier in the list above)
-  const cleaned = [];
-  ranges.forEach(r => {
-    if (!cleaned.length || r.start >= cleaned[cleaned.length - 1].end) cleaned.push(r);
-  });
-  return cleaned;
+  return kept.sort((a, b) => a.start - b.start);
+}
+
+function updateAutoStatus(useAuto, inScope) {
+  const el = document.getElementById('hl-auto-status');
+  if (!el) return;
+  el.textContent = !useAuto ? '' : (inScope
+    ? 'โปรดตรวจสอบเนื้อหาอีกครั้ง'
+    : 'AI Highlight ใช้กับมาตราติดดาว (★) ของแพ่ง อาญา วิแพ่ง วิอาญา เท่านั้น');
 }
 
 // Builds a chunk's inner HTML by escaping + linkifying each segment
@@ -2232,6 +2288,14 @@ async function loadAndRender() {
     const stJson = (stRes && stRes.ok) ? await stRes.json() : {};
     shortTextIndex = (stJson && typeof stJson === 'object') ? stJson : {};
   } catch (e) { shortTextIndex = {}; }
+
+  // Curated AI Highlight phrases — separate public file, fail-soft: on any
+  // error the index stays empty and auto mode falls back to mechanical rules.
+  try {
+    const hlRes = await fetch('codex-ai-highlights.json?v=20260929a');
+    const hlJson = (hlRes && hlRes.ok) ? await hlRes.json() : {};
+    aiHighlightIndex = (hlJson && typeof hlJson === 'object' && !Array.isArray(hlJson)) ? hlJson : {};
+  } catch (e) { aiHighlightIndex = {}; }
 
   const book = codexData.books[currentBookType];
   const article = book && book.articles[currentNumber];
