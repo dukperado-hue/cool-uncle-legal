@@ -1821,9 +1821,26 @@ function renderShortText(article) {
   el.hidden = false;
 }
 
+function renderCaseLawBlock(article) {
+  const cases = Array.isArray(article.caseLaw) ? article.caseLaw.filter(c => c && c.citation) : [];
+  if (!cases.length) return '';
+  return `
+    <div style="background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; margin-top: 16px;">
+      <h3 style="margin-bottom: 16px;">⚖️ ฎีกาย่อ</h3>
+      ${cases.map(c => `
+        <div class="case-item">
+          <div class="case-number">⚖️ ${escapeHtml(c.citation)}</div>
+          <div class="case-summary" style="white-space:pre-line">${escapeHtml(c.summary || '')}</div>
+          ${c.source && c.source.book ? `<div style="margin-top:8px;font-size:12px;color:var(--ink-faint);">ℹ️ ${escapeHtml(c.source.book)}${c.source.page ? ' หน้า ' + escapeHtml(String(c.source.page)) : ''}</div>` : ''}
+        </div>`).join('')}
+    </div>`;
+}
+
 function renderLectureNotes(article) {
   const el = document.getElementById('lecture-container');
+  const caseBlock = renderCaseLawBlock(article);
   if (!article.lectureNotes || article.lectureNotes.length === 0) {
+    if (caseBlock) { el.innerHTML = caseBlock; return; }
     el.innerHTML = `
       <div style="background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px;">
         <h3 style="margin-bottom: 16px;">🎓 อธิบายมาตรา</h3>
@@ -1843,7 +1860,7 @@ function renderLectureNotes(article) {
             ℹ️ ${escapeHtml(n.source || 'สรุปโดย AI จากคำบรรยาย — โปรดตรวจสอบความถูกต้องก่อนใช้อ้างอิง')}
           </div>
         </div>`).join('')}
-    </div>`;
+    </div>${caseBlock}`;
 }
 
 const SUFFIX_RANK = { '': 0, 'ทวิ': 1, 'ตรี': 2, 'จัตวา': 3, 'เบญจ': 4, 'ฉ': 5, 'สัตต': 6, 'อัฎฐ': 7, 'นว': 8, 'ทศ': 9 };
@@ -2240,7 +2257,7 @@ async function loadAndRender() {
   // Resolve the tiny registry first (best-effort, ~14 KB) so we can decode
   // an ?atlas= id before parsing. Negligible next to the 9.5 MB corpus.
   if (window.AtlasCore) {
-    try { await AtlasCore.loadRegistry('collections-registry.json?v=20261001a'); } catch (e) {}
+    try { await AtlasCore.loadRegistry('collections-registry.json?v=20261001b'); } catch (e) {}
   }
 
   // Accept BOTH:  ?id=<collection>_<number>   (legacy — unchanged, canonical)
@@ -2270,7 +2287,7 @@ async function loadAndRender() {
   currentNumber = id.slice(id.indexOf('_') + 1);
 
   try {
-    const res = await fetch('codex-data.json?v=20261001a');
+    const res = await fetch('codex-data.json?v=20261001b');
     if (!res.ok) throw new Error('fetch failed');
     codexData = await res.json();
   } catch (e) {
