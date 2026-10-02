@@ -316,9 +316,9 @@
          "who": "cu",
          "x": 14,
          "y": 100,
-         "h": 60,
-         "shot": "full",
-         "view": 0
+         "h": 54,
+         "view": 0,
+         "expr": "confused"
         },
         {
          "who": "cp",
@@ -430,8 +430,7 @@
          "x": 50,
          "y": 100,
          "h": 62,
-         "shot": "half",
-         "view": 1
+         "expr": "gleam"
         }
        ],
        "bubbles": [
@@ -898,8 +897,7 @@
          "x": 50,
          "y": 100,
          "h": 62,
-         "shot": "half",
-         "view": 0
+         "expr": "evil"
         }
        ],
        "bubbles": [

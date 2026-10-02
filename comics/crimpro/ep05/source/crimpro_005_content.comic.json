@@ -192,8 +192,7 @@
          "x": 50,
          "y": 100,
          "h": 62,
-         "shot": "half",
-         "view": 0
+         "expr": "grin"
         }
        ],
        "bubbles": [
@@ -490,8 +489,7 @@
          "x": 50,
          "y": 100,
          "h": 62,
-         "shot": "half",
-         "view": 0
+         "expr": "smirk"
         }
        ],
        "bubbles": [
@@ -961,8 +959,7 @@
          "x": 50,
          "y": 100,
          "h": 62,
-         "shot": "half",
-         "view": 2
+         "expr": "laugh"
         }
        ],
        "bubbles": [
@@ -1113,8 +1110,7 @@
          "x": 50,
          "y": 100,
          "h": 62,
-         "shot": "half",
-         "view": 2
+         "expr": "sneer"
         }
        ],
        "bubbles": [

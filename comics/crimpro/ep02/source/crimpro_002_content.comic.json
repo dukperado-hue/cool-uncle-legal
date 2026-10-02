@@ -224,9 +224,8 @@
          "who": "cu",
          "x": 74,
          "y": 100,
-         "h": 60,
-         "shot": "half",
-         "view": 1
+         "h": 54,
+         "expr": "grin"
         }
        ],
        "bubbles": [
@@ -349,8 +348,7 @@
          "x": 50,
          "y": 100,
          "h": 62,
-         "shot": "half",
-         "view": 1
+         "expr": "smirk"
         }
        ],
        "bubbles": [
@@ -820,9 +818,8 @@
          "who": "cu",
          "x": 70,
          "y": 100,
-         "h": 60,
-         "shot": "half",
-         "view": 0
+         "h": 54,
+         "expr": "laugh"
         }
        ],
        "bubbles": [
