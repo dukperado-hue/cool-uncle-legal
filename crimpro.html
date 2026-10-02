@@ -196,6 +196,51 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 .lecture-video{margin:12px 0 16px}
 .lecture-video .video-frame-wrap{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:10px;overflow:hidden}
 .lecture-video .video-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+/* ---------- แท็บหลักของหน้า: สรุปรายครั้ง / คลังกฎหมาย / Comics ---------- */
+.crim-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 18px;padding:6px;background:var(--card);border:1px solid var(--line);border-radius:14px}
+.crim-tab{flex:1 1 140px;appearance:none;border:1px solid transparent;background:transparent;color:var(--ink-soft);font:inherit;font-weight:800;font-size:15px;padding:11px 14px;border-radius:10px;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.crim-tab:hover{color:var(--ink);border-color:var(--line)}
+.crim-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+:root[data-theme="dark"] .crim-tab.active,:root[data-theme="horror"] .crim-tab.active{background:var(--gold-soft);color:var(--gold);border-color:var(--gold)}
+.crim-pane{display:none}
+.crim-pane.active{display:block}
+#panel-read[data-tab="comics"] #tts-bar{display:none !important}
+.cc-intro{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:14px;color:var(--ink-soft);font-size:14px;line-height:1.7}
+.cc-ep{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:16px;overflow:hidden}
+.cc-ep-head{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer}
+.cc-ep-badge{flex:none;background:var(--accent);color:#fff;font-weight:900;border-radius:10px;padding:6px 10px;font-size:13px;letter-spacing:.5px}
+:root[data-theme="dark"] .cc-ep-badge,:root[data-theme="horror"] .cc-ep-badge{background:var(--gold-soft);color:var(--gold)}
+.cc-ep-title{flex:1;font-weight:800;color:var(--ink);line-height:1.4}
+.cc-ep-title small{display:block;font-weight:600;color:var(--ink-faint);font-size:12.5px;margin-top:2px}
+.cc-pages{display:flex;flex-direction:column;gap:14px;align-items:center;margin:10px 0 16px}
+.cc-pages img{width:100%;max-width:720px;height:auto;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.25);display:block}
+.cc-textscript{margin:8px 0 14px}
+.cc-textscript>summary{cursor:pointer;font-weight:800;color:var(--ink);padding:8px 0}
+.cc-ep-body{display:none;padding:4px 16px 18px}
+.cc-ep.open .cc-ep-body{display:block}
+.cc-ep.open .lecture-toggle{transform:rotate(180deg)}
+.cc-scene{border-left:4px solid var(--gold);padding:2px 0 2px 14px;margin:20px 0 6px}
+.cc-scene h3{margin:0;font-size:16px;color:var(--ink)}
+.cc-visual{margin:8px 0;padding:9px 12px;border:1px dashed var(--line);border-radius:10px;color:var(--ink-faint);font-size:13px;line-height:1.6}
+.cc-visual::before{content:"🎬 ภาพ: ";font-weight:800}
+.cc-say{display:flex;gap:10px;align-items:flex-start;margin:9px 0}
+.cc-who{flex:none;min-width:84px;text-align:center;font-size:12px;font-weight:800;color:var(--ink-soft)}
+.cc-who span{display:block;font-size:26px;line-height:1.2}
+.cc-bubble{position:relative;background:var(--paper);border:2px solid var(--ink);border-radius:18px;padding:10px 14px;color:var(--ink);line-height:1.7;font-size:15px;box-shadow:3px 3px 0 var(--line)}
+.cc-say.unc .cc-bubble{background:var(--gold-soft)}
+.cc-narr{margin:10px 0;padding:10px 14px;background:var(--gold-soft);border:1px solid var(--line);border-radius:10px;color:var(--ink);line-height:1.75;font-size:14.5px}
+.cc-narr b.cc-narr-who{display:block;font-size:12px;color:var(--ink-faint);margin-bottom:3px}
+.cc-narr ul{margin:6px 0 2px 18px;padding:0}
+.cc-steps{display:grid;gap:8px;margin:10px 0}
+.cc-step{display:flex;gap:12px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 12px;line-height:1.65;color:var(--ink);font-size:14.5px}
+.cc-step-ico{flex:none;font-size:24px}
+.cc-arrow{text-align:center;color:var(--ink-faint);font-weight:800;line-height:1}
+.cc-sum{margin-top:22px;background:var(--paper);border:2px solid var(--gold);border-radius:14px;padding:14px 16px;color:var(--ink);line-height:1.75;font-size:14.5px}
+.cc-sum h4{margin:10px 0 4px;font-size:15px;color:var(--ink)}
+.cc-sum h4:first-child{margin-top:0}
+.cc-sum ol,.cc-sum ul{margin:4px 0 4px 20px;padding:0}
+.cc-soon{text-align:center;color:var(--ink-faint);font-size:13.5px;padding:10px}
+@media(max-width:560px){.cc-who{min-width:60px}.cc-say{gap:7px}.cc-bubble{font-size:14.5px;padding:9px 11px}}
 .section-h2{font-size:17px;font-weight:800;color:var(--ink);margin:6px 0 4px}
 .section-sub{font-size:12.5px;color:var(--ink-faint);margin-bottom:14px;line-height:1.6}
 .section-sub a{color:var(--accent)}
@@ -314,14 +359,31 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
       <span class="tts-hint">เปิดบรรยายครั้งที่ต้องการก่อน แล้วกด "อ่านออกเสียง"</span>
     </div>
 
+    <div class="crim-tabs" role="tablist" aria-label="เลือกมุมมอง">
+      <button type="button" class="crim-tab active" id="crim-tab-weekly" role="tab" data-tab="weekly" onclick="showCrimTab('weekly')" onmouseenter="playHoverSound()">📼 สรุปรายครั้ง</button>
+      <button type="button" class="crim-tab" id="crim-tab-codex" role="tab" data-tab="codex" onclick="showCrimTab('codex')" onmouseenter="playHoverSound()">📚 คลังกฎหมาย</button>
+      <button type="button" class="crim-tab" id="crim-tab-comics" role="tab" data-tab="comics" onclick="showCrimTab('comics')" onmouseenter="playHoverSound()">🎭 Comics</button>
+    </div>
+
+    <div class="crim-pane active" id="crim-pane-weekly" role="tabpanel">
     <h2 class="section-h2">📼 ครั้งที่เรียนจริงเทอมนี้ (จากคลิปบรรยาย/เอกสารจดครั้งจริง)</h2>
     <p class="section-sub">ต่างจากคลังอ้างอิง 7 หมวดด้านล่าง — ส่วนนี้อัปเดตเฉพาะครั้งที่อาจารย์บรรยายไปแล้วจริงเทอมนี้เท่านั้น พร้อมวิดีโอประกอบ</p>
     <div class="lecture-list" id="realLectureList"></div>
 
-    <h2 class="section-h2" style="margin-top:32px">📚 คลังอ้างอิงตามหมวดกฎหมาย (ไม่ใช่ลำดับครั้งบรรยาย)</h2>
+    </div>
+
+    <div class="crim-pane" id="crim-pane-codex" role="tabpanel">
+    <h2 class="section-h2">📚 คลังอ้างอิงตามหมวดกฎหมาย (ไม่ใช่ลำดับครั้งบรรยาย)</h2>
     <p class="section-sub">สรุปจากเอกสารเฉลยแบบฝึกหัด/ฎีกา จัดกลุ่มตามหัวข้อกฎหมาย ใช้เป็นคลังทบทวนได้ทุกเมื่อ
       ไม่ผูกกับว่าอาจารย์บรรยายถึงไหนแล้ว</p>
     <div class="lecture-list" id="lectureList"></div>
+    </div>
+
+    <div class="crim-pane" id="crim-pane-comics" role="tabpanel">
+      <h2 class="section-h2">🎭 Cool Uncle Comics — วิ.อาญาฉบับลุงคูล</h2>
+      <p class="section-sub">เรียนวิ.อาญาผ่านการ์ตูนสั้น ลุงคูลกับสัตว์น้อยพาไล่ตัวบทและฎีกาทีละเรื่อง (ฉบับทดลอง — สคริปต์ร่างโดย NotebookLM แล้วตรวจกับตัวบท)</p>
+      <div id="comicEpList"></div>
+    </div>
   </div>
 
   <div class="coffee-widget">
@@ -2460,6 +2522,107 @@ function toggleRealLecture(n){
   playHoverSound();
 }
 renderRealLectures();
+
+/* ---------- แท็บหลัก + Cool Uncle Comics ---------- */
+function showCrimTab(name){
+  if(!['weekly','codex','comics'].includes(name)) name = 'weekly';
+  document.querySelectorAll('.crim-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+  document.querySelectorAll('.crim-pane').forEach(p => p.classList.toggle('active', p.id === 'crim-pane-' + name));
+  const panel = document.getElementById('panel-read');
+  if(panel) panel.setAttribute('data-tab', name);
+  try{ TTS.stop(); }catch(e){}
+  try{ history.replaceState(null, '', name === 'weekly' ? location.pathname + location.search : '#' + name); }catch(e){}
+}
+const COMIC_WHO = {
+  uncle: { ico: '👴🏻', name: 'ลุงคูล', cls: 'unc' },
+  cat:   { ico: '🐱', name: 'แมว' },
+  capy:  { ico: '🦫', name: 'คาปิบารา' },
+  prof:  { ico: '👩‍🏫', name: 'อาจารย์' },
+  gov:   { ico: '🏯', name: 'เจ้าเมือง' },
+  yok:   { ico: '📜', name: 'ยกกระบัตร' }
+};
+const COMICS = [
+  { ep: 1, title: 'ใครคือพนักงานอัยการ?', pages: [1,2,3,4,5,6,7,8,9,10].map(n => 'pics/comics/crimpro_001/p' + n + '.jpg'), sub: 'ม.2(5) · ม.28(1) · ม.120 · ม.140–143 · จากยกกระบัตรสู่กรมอัยการ',
+    scenes: [
+      { h: 'ฉากเปิด — ห้องเรียนกฎหมาย',
+        items: [
+          { v: 'ห้องเรียนมหาวิทยาลัย นักศึกษานั่งฟังบรรยาย บนกระดานเขียนว่า "ประมวลกฎหมายวิธีพิจารณาความอาญา บทนิยาม (ม.2)"' },
+          { w: 'prof', t: 'วันนี้เราจะเริ่มจากคำเบสิกคำหนึ่ง... "พนักงานอัยการ"' },
+          { w: 'cat', t: 'อ๋อ... ทนายของแผ่นดินที่ยืนฟ้องคดีแทนรัฐในศาลใช่ไหมครับ?' },
+          { w: 'capy', t: 'แล้วบทบาทต่างจากตำรวจยังไง?' },
+          { w: 'uncle', t: 'นั่นแหละ... คำถามสำคัญในการเรียน วิ.อาญา' },
+          { n: 'ในกระบวนการยุติธรรมทางอาญา มีองค์กรหลักทำหน้าที่รับช่วงต่อกัน', list: [
+            'ตำรวจ (พนักงานสอบสวน): แสวงหาและรวบรวมพยานหลักฐานเพื่อพิสูจน์ความผิด',
+            'พนักงานอัยการ: ตรวจสอบกลั่นกรองสำนวน และดำเนินคดีตามอำนาจหน้าที่',
+            'ศาล: ไต่สวนมูลฟ้อง และพิจารณาพิพากษาคดี' ],
+            after: 'แต่คำว่า "อัยการ" ไม่ได้เกิดขึ้นพร้อมกับกฎหมายสมัยใหม่...' }
+        ] },
+      { h: 'ฉากที่ 2 — ย้อนอดีต "ยกกระบัตร"',
+        items: [
+          { v: 'ภาพเปลี่ยนเป็นโทนสีซีเปีย — เมืองไทยสมัยอยุธยา' },
+          { w: 'capy', t: 'เดี๋ยวนะ... สมัยก่อนก็มีอัยการแล้วเหรอ?' },
+          { n: 'หากย้อนไปในประวัติศาสตร์ ตำแหน่งที่มีบทบาทใกล้เคียงที่สุดคือ "ยกกระบัตร" ในสมัยกรุงศรีอยุธยา หน้าที่นอกจากสอดส่องความสงบเรียบร้อยแล้ว ยังทำหน้าที่ "ดูผิดแลชอบแห่งเจ้าเมือง" เพื่อตรวจสอบและถ่วงดุลการใช้อำนาจ ไม่ให้สุ่มเสี่ยงต่อความยุติธรรม' },
+          { v: 'ยกกระบัตรในชุดโบราณยืนคัดค้านเจ้าเมืองในศาลาความ' },
+          { w: 'gov', t: 'ข้าจะตัดสินคดีนี้เอง!' },
+          { w: 'yok', t: 'ช้าก่อนขอรับ... ต้องตรวจสอบพยานหลักฐานให้ถูกต้องตามกฎหมาย' }
+        ] },
+      { h: 'ฉากที่ 3 — จาก "ยกกระบัตร" สู่ "กรมอัยการ"',
+        items: [
+          { v: 'เอกสารราชการในสมัยรัชกาลที่ 5' },
+          { n: 'ใน ร.ศ. 112 (พ.ศ. 2436) รัชกาลที่ 5 ทรงโปรดเกล้าฯ ให้จัดตั้ง "กรมอัยการ" เปลี่ยนบทบาทจากผู้ตรวจการเมือง สู่ "ทนายแผ่นดิน" ผู้ดำเนินคดีอาญาแทนรัฐอย่างเป็นระบบ และต่อมาพัฒนามาเป็น "สำนักงานอัยการสูงสุด" องค์กรอิสระตามรัฐธรรมนูญในปัจจุบัน' },
+          { w: 'cat', t: 'งั้นอัยการก็คือยกกระบัตรยุคใหม่สินะ?' },
+          { w: 'uncle', t: 'ประวัติศาสตร์ทำให้เห็นพัฒนาการ... แต่เวลาตอบข้อสอบ เราต้องดู "ตัวบทกฎหมายที่บังคับใช้อยู่ปัจจุบัน"!' }
+        ] },
+      { h: 'ฉากที่ 4 — กลับเข้าห้องเรียน (เจาะตัวบท)',
+        items: [
+          { v: 'กระดานเขียนข้อความใหญ่: ประมวลกฎหมายวิธีพิจารณาความอาญา มาตรา 2 (5)' },
+          { w: 'prof', t: 'ถ้าเปิดตัวบท... พนักงานอัยการ หมายถึงใคร?' },
+          { w: 'capy', t: 'เจ้าพนักงานผู้มีหน้าที่ฟ้องผู้ต้องหาต่อศาลครับ!' },
+          { w: 'prof', t: 'ถูกต้อง! และยังรวมถึงเจ้าพนักงานอื่นที่มีอำนาจฟ้องคดีอาญาเพื่อรัฐด้วย' }
+        ] },
+      { h: 'ฉากที่ 5 — ภาพจำ 3 สเต็ปดำเนินคดี',
+        items: [
+          { steps: [
+            { i: '👮', t: 'ตำรวจ (พนักงานสอบสวน)', d: 'รวบรวมพยานหลักฐานในสำนวน' },
+            { i: '⚖️', t: 'พนักงานอัยการ', d: 'ตรวจสอบสำนวน + สั่งฟ้อง/ไม่ฟ้อง (ม.140–143) — เงื่อนไข: อัยการจะฟ้องได้ต้องผ่านการสอบสวนโดยชอบมาก่อนตาม ม.120' },
+            { i: '🏛️', t: 'ศาล', d: 'พิจารณาและพิพากษาลงโทษ' } ] },
+          { w: 'uncle', t: 'จำไว้ว่า กระบวนการยุติธรรมทางอาญามีระบบ Check & Balance... อัยการไม่ได้ทำหน้าที่สอบสวนเองตั้งแต่แรกเหมือนตำรวจ แต่ทำหน้าที่กลั่นกรองสำนวนก่อนนำคดีขึ้นสู่ศาล' }
+        ] }
+    ],
+    summary: {
+      concept: 'พนักงานอัยการ คือ เจ้าพนักงานของรัฐผู้ทำหน้าที่กลั่นกรองพยานหลักฐานจากสำนวนการสอบสวน และดำเนินคดีอาญาต่อศาลเพื่อคุ้มครองประโยชน์สาธารณะ',
+      laws: [
+        'ป.วิ.อ. ม.2(5): "พนักงานอัยการ" หมายความถึง เจ้าพนักงานผู้มีหน้าที่ฟ้องผู้ต้องหาต่อศาล ทั้งนี้ จะเป็นข้าราชการในกรมอัยการหรือเจ้าพนักงานอื่นผู้มีอำนาจเช่นนั้นก็ได้',
+        'ป.วิ.อ. ม.28(1): พนักงานอัยการเป็นบุคคลผู้มีอำนาจฟ้องคดีอาญาต่อศาล (อีกคนคือ (2) ผู้เสียหาย)',
+        'ป.วิ.อ. ม.120: ห้ามมิให้พนักงานอัยการยื่นฟ้องคดีใดต่อศาล โดยมิได้มีการสอบสวนในความผิดนั้นก่อน',
+        'พ.ร.บ.องค์กรอัยการและพนักงานอัยการ พ.ศ. 2553: อัยการมีดุลพินิจสั่งไม่ฟ้องคดีที่การฟ้องไม่เป็นประโยชน์แก่สาธารณชน (Opportunity Principle)' ],
+      mnemonic: [ '👮 ตำรวจ → สืบสวน & สอบสวน รวบรวมพยานหลักฐาน', '⚖️ อัยการ → ตรวจสำนวน & ดำเนินคดีตามอำนาจหน้าที่ (สั่งฟ้อง/สั่งไม่ฟ้อง)', '🏛️ ศาล → พิจารณาพิพากษาคดี' ]
+    } }
+];
+function escC(x){ return String(x == null ? '' : x).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+function renderComics(){
+  const el = document.getElementById('comicEpList');
+  if(!el) return;
+  const L = x => linkArticles(escC(x));
+  el.innerHTML = COMICS.map(c => {
+    const scenes = c.scenes.map(sc => '<div class="cc-scene"><h3>' + escC(sc.h) + '</h3></div>' + sc.items.map(it => {
+      if(it.v) return '<div class="cc-visual">' + escC(it.v) + '</div>';
+      if(it.w){ const w = COMIC_WHO[it.w]; return '<div class="cc-say ' + (w.cls || '') + '"><div class="cc-who"><span>' + w.ico + '</span>' + escC(w.name) + '</div><div class="cc-bubble">' + L(it.t) + '</div></div>'; }
+      if(it.steps) return '<div class="cc-steps">' + it.steps.map((st, i) => (i ? '<div class="cc-arrow">↓</div>' : '') + '<div class="cc-step"><div class="cc-step-ico">' + st.i + '</div><div><b>' + escC(st.t) + '</b><br>' + L(st.d) + '</div></div>').join('') + '</div>';
+      if(it.n) return '<div class="cc-narr"><b class="cc-narr-who">🎙️ ผู้บรรยาย</b>' + L(it.n) + (it.list ? '<ul>' + it.list.map(x => '<li>' + L(x) + '</li>').join('') + '</ul>' : '') + (it.after ? '<div style="margin-top:6px">' + L(it.after) + '</div>' : '') + '</div>';
+      return '';
+    }).join('')).join('');
+    const gallery = c.pages ? '<div class="cc-pages">' + c.pages.map((p, i) => '<a href="' + p + '?v=3" target="_blank" rel="noopener"><img src="' + p + '?v=3" alt="EP.' + c.ep + ' หน้า ' + (i + 1) + '" loading="lazy"></a>').join('') + '</div>' : '';
+    const s = c.summary;
+    const sum = '<div class="cc-sum"><h4>📌 Concept</h4><div>' + L(s.concept) + '</div><h4>⚖️ ตัวบทที่เกี่ยวข้อง</h4><ol>' + s.laws.map(x => '<li>' + L(x) + '</li>').join('') + '</ol><h4>💡 จำง่าย ๆ</h4><ul style="list-style:none;margin-left:2px">' + s.mnemonic.map(x => '<li>' + escC(x) + '</li>').join('') + '</ul></div>';
+    return '<div class="cc-ep' + (c.ep === 1 ? ' open' : '') + '" id="cc-ep-' + c.ep + '"><div class="cc-ep-head" onclick="this.parentNode.classList.toggle(\'open\');playHoverSound()"><div class="cc-ep-badge">EP.' + String(c.ep).padStart(2, '0') + '</div><div class="cc-ep-title">' + escC(c.title) + '<small>' + escC(c.sub) + '</small></div><div class="lecture-toggle">▾</div></div><div class="cc-ep-body">' + gallery + (gallery ? '<details class="cc-textscript"><summary>📜 บทแบบข้อความ (อ่านเร็ว / ค้นหาได้)</summary>' + scenes + '</details>' : scenes) + sum + '</div></div>';
+  }).join('') + '<div class="cc-soon">🎞️ ตอนต่อไปกำลังทำ — ภาพการ์ตูนเต็มหน้าจะทยอยเพิ่ม</div>';
+}
+renderComics();
+(function(){
+  const h = (location.hash || '').replace('#', '');
+  if(h === 'comics' || h === 'codex') showCrimTab(h);
+})();
 
 /* ================================================================
    โหมดวิเคราะห์โจทย์ — โจทย์สถานการณ์สมมติ + แนวคำตอบ
