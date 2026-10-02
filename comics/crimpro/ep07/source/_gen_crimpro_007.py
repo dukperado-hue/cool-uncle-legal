@@ -86,7 +86,7 @@ meta = {"id": "crimpro_007_content", "group": "content", "code": "crimpro", "sty
         "footer": "crimpro ตอนที่ 7 · ชันสูตรพลิกศพ · ไต่สวนการตาย · ม.148–156"}
 cast = {"un": "uncle_wolf", "cp": "capy_prosecutor", "ct": "cat_narrator", "pf": "owl_professor",
         "gk": "golden_kid", "gj": "georgia_kid", "cu": "culprit_black", "as": "alsatian_cop", "rt": "rottweiler_cop",
-        "gv": "tiger_governor", "yk": "meerkat_yokkrabat", "cone": "props_crime", "gun": "props_crime", "bag": "props_crime", "cuff": "props_crime"}
+        "gv": "tiger_governor", "yk": "meerkat_yokkrabat", "gh": "ghost_tv_pixel", "cone": "props_crime", "gun": "props_crime", "bag": "props_crime", "cuff": "props_crime"}
 pages = []
 
 # ---- P1 ปก
@@ -119,6 +119,16 @@ pages.append({"rows": [
           [S("วางยาพิษให้ดูเหมือนหัวใจล้มเหลว ถ้าญาติไม่ติดใจและไม่ผ่า ก็ปิดคดีเนียนๆ ฮึๆ", "cu")], w=1.5, cap="ช่องโหว่"),
         P(FOCUS(50, 50), [C("ct", None, 50, 90, shot="half")],
           [S("ตัวอย่างจริง: ตรวจภายนอกพบบาดแผลที่ขากับเศษดินในปอด จึงต้องผ่าและสรุปว่าจมน้ำ · ตรวจซ้ำที่ไทยก็ได้ผลต่างจากต่างประเทศได้", "ct")], w=1.7, cap="แมวอธิบาย")], slant=-30)]})
+
+# ---- P3b มุกตายเป็นผี (รูปที่เกิดเหตุ + ผีพิกเซล)
+pages.append({"rows": [
+    BOX("ตายผิดธรรมชาติ → ต้องชันสูตรพลิกศพ (ม.148) ไม่ว่าผู้ตายจะกลับมาเป็นผีหรือไม่ ผีไม่ใช่เหตุยกเว้น", "ฉาก 1.5 · ตายแล้วเป็นผี", 22),
+    R(3, [{"bg": FLAT("#222"), "frame": "heavy", "w": 1,
+           "photo": {"file": "pics/toon/props/crime_scene_chalk_outline.jpg", "fit": "cover", "pos": "50% 50%"},
+           "chars": [C("gh", None, 34, 46, shot="full", z=2), C("ct", None, 84, 50, shot="full", z=1)],
+           "bubbles": [S("ฉันยังไม่ตายสนิท… ขอเดินออกจากเส้นชอล์กได้ไหม?", "gh"),
+                       S("ตายแล้วเป็นผี ก็ยังต้องชันสูตรพลิกศพ ม.148 นะ ผีไม่ใช่เหตุยกเว้น!", "ct")],
+           "caption": "ที่เกิดเหตุ: เส้นชอล์ก ป้ายหลักฐาน #1–#4 แว่นตาและรองเท้าของผู้ตาย"}])]})
 
 # ---- P4 ม.148 + 149
 pages.append({"rows": [

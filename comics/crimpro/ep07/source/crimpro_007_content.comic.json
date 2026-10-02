@@ -19,6 +19,7 @@
   "rt": "rottweiler_cop",
   "gv": "tiger_governor",
   "yk": "meerkat_yokkrabat",
+  "gh": "ghost_tv_pixel",
   "cone": "props_crime",
   "gun": "props_crime",
   "bag": "props_crime",
@@ -284,6 +285,84 @@
       }
      ],
      "slant": -30
+    }
+   ]
+  },
+  {
+   "rows": [
+    {
+     "h": 0.308,
+     "panels": [
+      {
+       "bg": {
+        "style": "flat",
+        "c1": "#fff"
+       },
+       "frame": "none",
+       "bubbles": [
+        {
+         "t": "box",
+         "name": "ฉาก 1.5 · ตายแล้วเป็นผี",
+         "size": 22,
+         "text": "ตายผิดธรรมชาติ → ต้องชันสูตรพลิกศพ (ม.148) ไม่ว่าผู้ตายจะกลับมาเป็นผีหรือไม่ ผีไม่ใช่เหตุยกเว้น",
+         "x": 3,
+         "y": 10,
+         "w": 94
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "h": 3,
+     "panels": [
+      {
+       "bg": {
+        "style": "flat",
+        "c1": "#222"
+       },
+       "frame": "heavy",
+       "w": 1,
+       "photo": {
+        "file": "pics/toon/props/crime_scene_chalk_outline.jpg",
+        "fit": "cover",
+        "pos": "50% 50%"
+       },
+       "chars": [
+        {
+         "who": "gh",
+         "x": 34,
+         "y": 100,
+         "h": 46,
+         "shot": "full",
+         "z": 2
+        },
+        {
+         "who": "ct",
+         "x": 84,
+         "y": 100,
+         "h": 50,
+         "shot": "full",
+         "z": 1
+        }
+       ],
+       "bubbles": [
+        {
+         "t": "speech",
+         "text": "ฉันยังไม่ตายสนิท… ขอเดินออกจากเส้นชอล์กได้ไหม?",
+         "size": 30,
+         "who": "gh"
+        },
+        {
+         "t": "speech",
+         "text": "ตายแล้วเป็นผี ก็ยังต้องชันสูตรพลิกศพ ม.148 นะ ผีไม่ใช่เหตุยกเว้น!",
+         "size": 30,
+         "who": "ct"
+        }
+       ],
+       "caption": "ที่เกิดเหตุ: เส้นชอล์ก ป้ายหลักฐาน #1–#4 แว่นตาและรองเท้าของผู้ตาย"
+      }
+     ]
     }
    ]
   },
