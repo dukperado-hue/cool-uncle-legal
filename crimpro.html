@@ -2603,7 +2603,8 @@ const COMICS = [
   { ep: 4, title: 'ฟ้องที่ศาลไหน ย้ายได้ไหม คดีจบยังไง', pages: Array.from({length: 10}, (_, i) => 'comics/crimpro/ep04/web/p' + (i + 1) + '.jpg'), sub: 'ม.22–26 · โจทก์ร่วม ม.30–33 · ถอนฟ้อง ม.35–36 · ยอมความ · ม.39' },
   { ep: 5, title: 'ฟ้องซ้ำ หมายอาญา และการจับ', pages: Array.from({length: 12}, (_, i) => 'comics/crimpro/ep05/web/p' + (i + 1) + '.jpg'), sub: 'ม.39(4) · ฟ้องซ้อน · หมาย ม.66–75 · การจับ ม.78–84' },
   { ep: 6, title: 'อัยการสั่งคดี ฟ้องหรือไม่ฟ้อง?', pages: Array.from({length: 13}, (_, i) => 'comics/crimpro/ep06/web/p' + (i + 1) + '.jpg'), sub: 'ม.140–147 · งดสอบสวน · วิสามัญฆาตกรรม · ตรวจสอบคำสั่งไม่ฟ้อง ม.145 · ม.147' },
-  { ep: 7, title: 'ชันสูตรพลิกศพ และไต่สวนการตาย', pages: Array.from({length: 12}, (_, i) => 'comics/crimpro/ep07/web/p' + (i + 1) + '.jpg'), sub: 'ม.148–156 · ผู้ร่วมชันสูตร 2/4 ฝ่าย · ไต่สวนการตาย · ม.150 ทวิ' }
+  { ep: 7, title: 'ชันสูตรพลิกศพ และไต่สวนการตาย', pages: Array.from({length: 12}, (_, i) => 'comics/crimpro/ep07/web/p' + (i + 1) + '.jpg'), sub: 'ม.148–156 · ผู้ร่วมชันสูตร 2/4 ฝ่าย · ไต่สวนการตาย · ม.150 ทวิ' },
+  { ep: 8, title: 'เขียนคำฟ้องยังไงไม่ให้โดนยก', pages: Array.from({length: 11}, (_, i) => 'comics/crimpro/ep08/web/p' + (i + 1) + '.jpg'), sub: 'ม.157–160 · แบบคำฟ้อง ม.158 · บรรยายฟ้อง · แก้ฟ้องได้/ไม่ได้ · ลายมือชื่อ' }
 ];
 function escC(x){ return String(x == null ? '' : x).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
 function renderComics(){
@@ -2618,7 +2619,7 @@ function renderComics(){
       if(it.n) return '<div class="cc-narr"><b class="cc-narr-who">🎙️ ผู้บรรยาย</b>' + L(it.n) + (it.list ? '<ul>' + it.list.map(x => '<li>' + L(x) + '</li>').join('') + '</ul>' : '') + (it.after ? '<div style="margin-top:6px">' + L(it.after) + '</div>' : '') + '</div>';
       return '';
     }).join('')).join('');
-    const gallery = c.pages ? '<div class="cc-pages">' + c.pages.map((p, i) => '<a href="' + p + '?v=10" target="_blank" rel="noopener"><img src="' + p + '?v=10" alt="EP.' + c.ep + ' หน้า ' + (i + 1) + '" loading="lazy"></a>').join('') + '</div>' : '';
+    const gallery = c.pages ? '<div class="cc-pages">' + c.pages.map((p, i) => '<a href="' + p + '?v=11" target="_blank" rel="noopener"><img src="' + p + '?v=11" alt="EP.' + c.ep + ' หน้า ' + (i + 1) + '" loading="lazy"></a>').join('') + '</div>' : '';
     const s = c.summary;
     const sum = !s ? '' : '<div class="cc-sum"><h4>📌 Concept</h4><div>' + L(s.concept) + '</div><h4>⚖️ ตัวบทที่เกี่ยวข้อง</h4><ol>' + s.laws.map(x => '<li>' + L(x) + '</li>').join('') + '</ol><h4>💡 จำง่าย ๆ</h4><ul style="list-style:none;margin-left:2px">' + s.mnemonic.map(x => '<li>' + escC(x) + '</li>').join('') + '</ul></div>';
     return '<div class="cc-ep' + (c.ep === 1 ? ' open' : '') + '" id="cc-ep-' + c.ep + '"><div class="cc-ep-head" onclick="this.parentNode.classList.toggle(\'open\');playHoverSound()"><div class="cc-ep-badge">EP.' + String(c.ep).padStart(2, '0') + '</div><div class="cc-ep-title">' + escC(c.title) + '<small>' + escC(c.sub) + '</small></div><div class="lecture-toggle">▾</div></div><div class="cc-ep-body">' + gallery + (gallery ? '<details class="cc-textscript"><summary>📜 บทแบบข้อความ (อ่านเร็ว / ค้นหาได้)</summary>' + scenes + '</details>' : scenes) + sum + '</div></div>';
