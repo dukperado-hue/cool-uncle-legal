@@ -316,6 +316,11 @@
 
   <div id="atlas-search"></div>
 
+  <!-- D1 — Dictionary panel: collapsed, lazy-loaded, read-only terminology
+       overlay (atlas-dictionary-view.js). Fails soft; never touches the Atlas
+       navigation, provisions or concept layers. -->
+  <div id="atlas-dictionary"></div>
+
   <div id="atlas-root"><div class="atlas-loading">กำลังโหลดสารบบกฎหมาย…</div></div>
 
   <footer class="atlas-foot" id="atlas-foot"></footer>
@@ -332,6 +337,7 @@
 <script src="atlas-provision-lectures.js?v=20260911a"></script>
 <script src="atlas-provision-view.js?v=20260929a"></script>
 <script src="atlas-search.js?v=20260909a"></script>
+<script src="atlas-dictionary-view.js?v=20261004a"></script>
 <script>
 (function () {
   'use strict';
@@ -362,6 +368,8 @@
     if (window.AtlasProvisionView) AtlasProvisionView.init({ root: root });
     // F5 — search / jump box (standalone; additive consumer, fails soft)
     if (window.AtlasSearch) AtlasSearch.mount(document.getElementById('atlas-search'), { root: root });
+    // D1 — Dictionary panel (collapsed; lazy-fetches atlas-dictionary.json on first open)
+    if (window.AtlasDictionaryView) AtlasDictionaryView.mount(document.getElementById('atlas-dictionary'), { url: 'atlas-dictionary.json?v=d1-8-1' });
     renderFoot();
   }).catch(function (err) {
     root.innerHTML = '<div class="atlas-error">โหลดข้อมูลไม่สำเร็จ: ' +
