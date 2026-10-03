@@ -1,0 +1,1437 @@
+{
+ "version": "d1-8-1",
+ "generated": "2026-10-03",
+ "principle": "Overlay only: an English-Thai term layer over the Legal English sources. conceptRef points to an existing Atlas concept id and is present only when confirmed; the Dictionary never stores definitions, provisions, subject tags or relations of its own.",
+ "entries": [
+  {
+   "id": "atlas:term/adjudicate",
+   "en": "Adjudicate",
+   "th": [
+    "ตัดสิน",
+    "พิพากษา",
+    "ชี้ขาด",
+    "วินิจฉัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270-2-FINAL-2-2025-LP.pdf",
+     "kind": "oldexam"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/adopted-child",
+   "en": "Adopted child",
+   "th": [
+    "บุตรบุญธรรม"
+   ],
+   "kind": "term",
+   "conceptRef": "atlas:concept/seed-0384",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/adoption",
+   "en": "Adoption",
+   "th": [
+    "การรับบุตรบุญธรรม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/advocate",
+   "en": "Advocate",
+   "th": [
+    "(ทั่วไป) ทนาย"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "LA270 - LT4.pdf",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/appeal",
+   "en": "Appeal",
+   "th": [
+    "อุทธรณ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270-2-FINAL-2-2025-LP.pdf",
+     "kind": "oldexam"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/article",
+   "en": "Article",
+   "th": [
+    "มาตรา (กฎหมายระหว่างประเทศและสนธิสัญญา)"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "LA270 - LT4.pdf",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/attorney",
+   "en": "Attorney",
+   "th": [
+    "(US) ทนาย (ครอบคลุมทุกประเภท)"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "LA270 - LT4.pdf",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/auction",
+   "en": "Auction",
+   "th": [
+    "ขายทอดตลาด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/bail",
+   "en": "Bail",
+   "th": [
+    "ประกันตัว"
+   ],
+   "kind": "term",
+   "conceptRef": "atlas:concept/kan-ploi-chuakhrao",
+   "sources": [
+    {
+     "file": "LA270-2-FINAL-2-2025-LP.pdf",
+     "kind": "oldexam"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 03 22AUG26 part 01.m4a.m4a",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/bill",
+   "en": "Bill",
+   "th": [
+    "ร่างกฎหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 - LT4.pdf",
+     "kind": "slides"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/book",
+   "en": "Book",
+   "th": [
+    "บรรพ"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "LA270 - LT4.pdf",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/cancellation-of-fraudulent-acts",
+   "en": "Cancellation of fraudulent acts",
+   "th": [
+    "เพิกถอนการฉ้อฉล"
+   ],
+   "kind": "term",
+   "conceptRef": "atlas:concept/phikthon-kan-chochan",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/capacity",
+   "en": "Capacity",
+   "th": [
+    "ความสามารถ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/cease-to-be-binding",
+   "en": "Cease to be binding",
+   "th": [
+    "สิ้นความผูกพัน"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/chapter",
+   "en": "Chapter",
+   "th": [
+    "หมวด"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "LA270 - LT4.pdf",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/compulsory-performance",
+   "en": "Compulsory performance",
+   "th": [
+    "บังคับชำระหนี้"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/constitution",
+   "en": "Constitution",
+   "th": [
+    "รัฐธรรมนูญ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270-2-FINAL-2-2025-LP.pdf",
+     "kind": "oldexam"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/crime",
+   "en": "Crime",
+   "th": [
+    "ความผิดอาญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "2020120268cb334d41a0cbbdf558dcdb01ab4b43140558.pdf",
+     "kind": "textbook"
+    },
+    {
+     "file": "LA270 - Criminal Law (slides).pptx",
+     "kind": "slides"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/criminal-law",
+   "en": "Criminal Law",
+   "th": [
+    "กฎหมายอาญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 - LT4.pdf",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
+     "kind": "lecture-audio"
+    },
+    {
+     "file": "LA270 1-2569 course spec.pdf",
+     "kind": "course-spec"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/criminal-liability",
+   "en": "Criminal liability / criminally liable",
+   "th": [
+    "ความรับผิดอาญา",
+    "รับผิดในทางอาญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 - Criminal Law (slides).pptx",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 1.MP3",
+     "kind": "lecture-audio"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 2.mp3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/cross",
+   "en": "Cross",
+   "th": [
+    "แกงได"
+   ],
+   "kind": "usage",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/debtor",
+   "en": "Debtor",
+   "th": [
+    "ลูกหนี้"
+   ],
+   "kind": "term",
+   "conceptRef": "atlas:concept/seed-0002",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    },
+    {
+     "file": "LA270-2-FINAL-2-2025-LP.pdf",
+     "kind": "oldexam"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/defence",
+   "en": "Defence / Defense",
+   "th": [
+    "ข้อต่อสู้"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 - Criminal Law (slides).pptx",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 1.MP3",
+     "kind": "lecture-audio"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 2.mp3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/defendant",
+   "en": "Defendant",
+   "th": [
+    "จำเลย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270-2-FINAL-2-2025-LP.pdf",
+     "kind": "oldexam"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/detain",
+   "en": "Detain",
+   "th": [
+    "กัก",
+    "คุมขัง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270-2-FINAL-2-2025-LP.pdf",
+     "kind": "oldexam"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/document",
+   "en": "Document",
+   "th": [
+    "เอกสาร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/element",
+   "en": "Element",
+   "th": [
+    "องค์ประกอบ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "2020120268cb334d41a0cbbdf558dcdb01ab4b43140558.pdf",
+     "kind": "textbook"
+    },
+    {
+     "file": "LA270 - Criminal Law (slides).pptx",
+     "kind": "slides"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/estate",
+   "en": "Estate",
+   "th": [
+    "มรดก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/estate-of-a-deceased",
+   "en": "Estate of a deceased",
+   "th": [
+    "กองมรดก"
+   ],
+   "kind": "term",
+   "conceptRef": "atlas:concept/seed-0259",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/eviction",
+   "en": "Eviction",
+   "th": [
+    "รอนสิทธิ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ],
+   "conceptRef": "atlas:concept/ronsitthi-lae-chamrudbokphrong"
+  },
+  {
+   "id": "atlas:term/exercising-debtors-claims",
+   "en": "Exercising debtor's claims",
+   "th": [
+    "การใช้สิทธิเรียกร้องของลูกหนี้"
+   ],
+   "kind": "term",
+   "conceptRef": "atlas:concept/chai-sitthi-riakrong-khong-luknee",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/form",
+   "en": "Form",
+   "th": [
+    "แบบ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/general-principles-of-law",
+   "en": "General principles of law",
+   "th": [
+    "หลักกฎหมายทั่วไป"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/gift",
+   "en": "Gift",
+   "th": [
+    "ให้"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/good-faith",
+   "en": "Good faith",
+   "th": [
+    "หลักสุจริต"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/good-moral",
+   "en": "Good moral",
+   "th": [
+    "ศีลธรรมอันดีของประชาชน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/guardianship",
+   "en": "Guardianship",
+   "th": [
+    "ความปกครอง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/habitation",
+   "en": "Habitation",
+   "th": [
+    "อาศัย"
+   ],
+   "kind": "term",
+   "conceptRef": "atlas:concept/sitthi-asai",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/heir",
+   "en": "Heir",
+   "th": [
+    "ทายาท"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/holograph-document-will",
+   "en": "Holograph document will",
+   "th": [
+    "พินัยกรรมแบบเขียนเองทั้งฉบับ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/imprisonment",
+   "en": "Imprisonment",
+   "th": [
+    "การจำคุก",
+    "จำคุก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "2020120268cb334d41a0cbbdf558dcdb01ab4b43140558.pdf",
+     "kind": "textbook"
+    },
+    {
+     "file": "LA270-2-FINAL-2-2025-LP.pdf",
+     "kind": "oldexam"
+    },
+    {
+     "file": "LA270 - Criminal Law (slides).pptx",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 2.mp3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/in-absentia",
+   "en": "in absentia",
+   "th": [
+    "ลับหลัง"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "LA270 - LT4.pdf",
+     "kind": "slides"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/in-default",
+   "en": "In default",
+   "th": [
+    "ผิดนัด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/in-house-lawyer",
+   "en": "In-house lawyer",
+   "th": [
+    "นิติกร",
+    "ที่ปรึกษากฎหมายประจำบริษัท"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "LA270 - LT4.pdf",
+     "kind": "slides"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/interpretation-of-a-declaration-of-intention",
+   "en": "Interpretation of a declaration of intention",
+   "th": [
+    "การตีความการแสดงเจตนา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/interpretation-of-contract",
+   "en": "Interpretation of contract",
+   "th": [
+    "ตีความสัญญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/intervening-event",
+   "en": "Intervening event",
+   "th": [
+    "เหตุแทรกแซง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 - Criminal Law (slides).pptx",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 1.MP3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/jury",
+   "en": "Jury",
+   "th": [
+    "คณะลูกขุน"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "LA270 - LT4.pdf",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/liability",
+   "en": "Liability",
+   "th": [
+    "ความรับผิด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "2020120268cb334d41a0cbbdf558dcdb01ab4b43140558.pdf",
+     "kind": "textbook"
+    },
+    {
+     "file": "LA270 - Criminal Law (slides).pptx",
+     "kind": "slides"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/marriage",
+   "en": "Marriage",
+   "th": [
+    "สมรส"
+   ],
+   "kind": "term",
+   "conceptRef": "atlas:concept/seed-0355",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/military-court",
+   "en": "Military Court",
+   "th": [
+    "ศาลทหาร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 - LT4.pdf",
+     "kind": "slides"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/mistake",
+   "en": "Mistake",
+   "th": [
+    "สำคัญผิด"
+   ],
+   "kind": "term",
+   "conceptRef": "atlas:concept/samkanphid",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/necessity",
+   "en": "Necessity",
+   "th": [
+    "ความจำเป็น"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 - Criminal Law (slides).pptx",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 1.MP3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/paragraph",
+   "en": "Paragraph",
+   "th": [
+    "วรรค"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "LA270 - LT4.pdf",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
+     "kind": "lecture-audio"
+    },
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/part",
+   "en": "Part",
+   "th": [
+    "ส่วน"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "LA270 - LT4.pdf",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/performance-of-obligation",
+   "en": "Performance of obligation",
+   "th": [
+    "การชำระหนี้"
+   ],
+   "kind": "term",
+   "conceptRef": "atlas:concept/seed-0009",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/personality",
+   "en": "Personality",
+   "th": [
+    "สภาพบุคคล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/plaintiff",
+   "en": "Plaintiff",
+   "th": [
+    "โจทก์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "2020120268cb334d41a0cbbdf558dcdb01ab4b43140558.pdf",
+     "kind": "textbook"
+    },
+    {
+     "file": "LA270 - LT4.pdf",
+     "kind": "slides"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/plurality-of-debtors-and-creditors",
+   "en": "Plurality of debtors and creditors",
+   "th": [
+    "ลูกหนี้และเจ้าหนี้หลายคน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/preferential-rights",
+   "en": "Preferential rights",
+   "th": [
+    "บุริมสิทธิ"
+   ],
+   "kind": "term",
+   "conceptRef": "atlas:concept/burimsit",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/provision",
+   "en": "Provision",
+   "th": [
+    "บทบัญญัติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270-2-FINAL-2-2025-LP.pdf",
+     "kind": "oldexam"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/punishment",
+   "en": "Punishment",
+   "th": [
+    "โทษ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "2020120268cb334d41a0cbbdf558dcdb01ab4b43140558.pdf",
+     "kind": "textbook"
+    },
+    {
+     "file": "LA270 - Criminal Law (slides).pptx",
+     "kind": "slides"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/quality",
+   "en": "Quality",
+   "th": [
+    "คุณสมบัติ"
+   ],
+   "kind": "usage",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/real-right",
+   "en": "Real right",
+   "th": [
+    "ทรัพยสิทธิ"
+   ],
+   "kind": "term",
+   "conceptRef": "atlas:concept/seed-0005",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/remedies",
+   "en": "Remedies",
+   "th": [
+    "วิธีบังคับสิทธิเยียวยา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270-2-FINAL-2-2025-LP.pdf",
+     "kind": "oldexam"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/restore-to-former-condition",
+   "en": "Restore to former condition",
+   "th": [
+    "กลับสู่ฐานะเดิม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/sale",
+   "en": "Sale",
+   "th": [
+    "ซื้อขาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/sale-with-right-of-redemption",
+   "en": "Sale with right of redemption",
+   "th": [
+    "ขายฝาก"
+   ],
+   "kind": "term",
+   "conceptRef": "atlas:concept/khaifak",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/section",
+   "en": "Section",
+   "th": [
+    "มาตรา"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "LA270 - LT4.pdf",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/separation-of-powers",
+   "en": "Separation of powers",
+   "th": [
+    "การแบ่งแยกอำนาจ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 03 22AUG26 part 03.m4a.m4a",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/service",
+   "en": "Service",
+   "th": [
+    "การงาน"
+   ],
+   "kind": "usage",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/set-off",
+   "en": "Set-off",
+   "th": [
+    "หักกลบลบหนี้"
+   ],
+   "kind": "term",
+   "conceptRef": "atlas:concept/hak-klob-lop-nee",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/statutory-heirs",
+   "en": "Statutory heirs",
+   "th": [
+    "ทายาทโดยธรรม"
+   ],
+   "kind": "term",
+   "conceptRef": "atlas:concept/seed-0260",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/sui-juris",
+   "en": "Sui juris",
+   "th": [
+    "บรรลุนิติภาวะ"
+   ],
+   "kind": "latin",
+   "conceptRef": "atlas:concept/seed-0380",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/time-for-performance",
+   "en": "Time for performance",
+   "th": [
+    "เวลาอันจะพึงชำระหนี้"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/time-of-commencement",
+   "en": "Time of commencement",
+   "th": [
+    "เงื่อนเวลาเริ่มต้น"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/commit-an-act-consciously",
+   "en": "To commit an act consciously / unconsciously",
+   "th": [
+    "กระทำการโดยรู้สำนึก",
+    "กระทำการโดยไม่รู้สำนึก"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "LA270 - Criminal Law (slides).pptx",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 1.MP3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/commit-an-act-intentionally",
+   "en": "To commit an act intentionally / unintentionally",
+   "th": [
+    "กระทำการโดยเจตนา",
+    "กระทำการโดยไม่เจตนา"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "LA270 - Criminal Law (slides).pptx",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 1.MP3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/foresee",
+   "en": "To foresee / Foreseeability",
+   "th": [
+    "เล็งเห็นผล",
+    "การเล็งเห็นผล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 - Criminal Law (slides).pptx",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 1.MP3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/increase",
+   "en": "To increase (a punishment/sentence)",
+   "th": [
+    "เพิ่มโทษ"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "LA270 - Criminal Law (slides).pptx",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 2.mp3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/reduce",
+   "en": "To reduce (a punishment/sentence)",
+   "th": [
+    "ลดโทษ"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "LA270 - Criminal Law (slides).pptx",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 2.mp3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/refrain-from",
+   "en": "To refrain from",
+   "th": [
+    "งดเว้น"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "LA270 - Criminal Law (slides).pptx",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 1.MP3",
+     "kind": "lecture-audio"
+    }
+   ],
+   "conceptRef": "atlas:concept/kan-kratham-chetana-pramat"
+  },
+  {
+   "id": "atlas:term/release",
+   "en": "To release",
+   "th": [
+    "ปล่อยตัว"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "LA270 - Criminal Law (slides).pptx",
+     "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 2.mp3",
+     "kind": "lecture-audio"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/try",
+   "en": "Try",
+   "th": [
+    "ดำเนินคดี"
+   ],
+   "kind": "usage",
+   "sources": [
+    {
+     "file": "LA270-2-FINAL-2-2025-LP.pdf",
+     "kind": "oldexam"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/void",
+   "en": "Void",
+   "th": [
+    "โมฆะ"
+   ],
+   "kind": "term",
+   "conceptRef": "atlas:concept/mokha",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/voidable",
+   "en": "Voidable",
+   "th": [
+    "โมฆียะ"
+   ],
+   "kind": "term",
+   "conceptRef": "atlas:concept/mokhiya",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/voluntary",
+   "en": "Voluntary",
+   "th": [
+    "ใจสมัคร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/will",
+   "en": "Will",
+   "th": [
+    "พินัยกรรม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/withdraw",
+   "en": "Withdraw",
+   "th": [
+    "บอกถอน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/writing",
+   "en": "Writing",
+   "th": [
+    "หนังสือ"
+   ],
+   "kind": "usage",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ]
+  }
+ ]
+}
