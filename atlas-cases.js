@@ -244,8 +244,10 @@
 
   // Add the "· N คดีที่เกี่ยวข้อง" disclosure at the top of one expanded LEAF
   // node body, above its provision grid. Silent, idempotent, fail-soft.
+  var SHOW_CASES = false;
   function decorateNodeBody(list) {
     try {
+      if (!SHOW_CASES) return;   // hidden for now — set true when the case library is large enough
       if (!READY || !list || !list.parentNode) return;
       var body = list.parentNode;
       if (!body.classList || !body.classList.contains('atlas-node-body')) return;  // flat Act: no structural node

@@ -427,6 +427,26 @@
 
     row.appendChild(toggle);
     row.appendChild(label);
+    // Lecture overview for this ภาค / ลักษณะ / หมวด (if any): an ℹ button that
+    // opens it in the side drawer (same as a มาตรา), so the tree stays compact.
+    try {
+      if (AtlasCore.getLevelNotes && AtlasCore.getLevelNotes(key, node.path).length &&
+          global.AtlasProvisionLectures && global.AtlasProvisionView &&
+          typeof global.AtlasProvisionView.openLevel === 'function') {
+        var info = el('button', 'atlas-node-info', 'ℹ️');
+        info.type = 'button';
+        info.title = 'ภาพรวมจากคำบรรยาย';
+        info.setAttribute('aria-label', 'ดูภาพรวมของ ' + (node.value || node.label || ''));
+        info.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var lv = global.AtlasProvisionLectures.renderLevelNotes(
+            AtlasCore.getLevelNotes(key, node.path), key);
+          global.AtlasProvisionView.openLevel(
+            (node.value || node.label || '') + (node.title ? ' — ' + node.title : ''), lv, { source: info });
+        });
+        row.appendChild(info);
+      }
+    } catch (e) { /* fail soft */ }
     li.appendChild(row);
 
     var body = el('div', 'atlas-node-body');
@@ -437,16 +457,6 @@
     function buildBody() {
       if (built) return;
       built = true;
-      // Lecture overview for this ภาค / ลักษณะ / หมวด (if any) — shown ABOVE the
-      // children so an opened level is never an empty shell. Optional layer.
-      try {
-        if (AtlasCore.getLevelNotes && global.AtlasProvisionLectures &&
-            typeof global.AtlasProvisionLectures.renderLevelNotes === 'function') {
-          var lvNode = global.AtlasProvisionLectures.renderLevelNotes(
-            AtlasCore.getLevelNotes(key, node.path), key);
-          if (lvNode) body.appendChild(lvNode);
-        }
-      } catch (e) { /* fail soft */ }
       if (hasKids) body.appendChild(treeList(key, node.children, depth + 1, instrumentId));
       else if (hasProvs) body.appendChild(provisionList(key, node.articles, instrumentId));
     }

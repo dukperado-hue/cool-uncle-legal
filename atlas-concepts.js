@@ -621,7 +621,8 @@
       var histEv = renderHistoricalEvidence(concept);
       if (histEv) append(art, histEv);
     } else {
-      append(art, renderCases(concept));
+      // cases block hidden for now (library too small) — re-enable renderCases when ready
+      // append(art, renderCases(concept));
     }
 
     var related = renderRelated(concept);

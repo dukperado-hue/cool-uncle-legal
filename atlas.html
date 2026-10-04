@@ -190,6 +190,8 @@
   @media (prefers-reduced-motion:no-preference){
     .atlas-node-focus > .atlas-node-row{transition:background .25s,box-shadow .25s}
   }
+  .atlas-node-info{border:0;background:none;cursor:pointer;font-size:13px;padding:0 4px;opacity:.75}
+  .atlas-node-info:hover,.atlas-node-info:focus-visible{opacity:1}
   .atlas-node-toggle{border:0;background:none;color:var(--muted);cursor:pointer;
     font-size:10px;width:16px;flex:none;padding:0;font-family:inherit;text-align:center;
     align-self:center}
@@ -291,6 +293,7 @@
     <div class="atlas-navbar-inner">
       <a class="atlas-navbar-link is-current" href="atlas.html">สารบบ</a>
       <a class="atlas-navbar-link" href="encyclopedia.html">สารานุกรม</a>
+      <a class="atlas-navbar-link" href="dictionary.html">พจนานุกรม</a>
       <a class="atlas-navbar-link" href="codex-search.html">ค้นมาตรา</a>
       <a class="atlas-navbar-link" href="neural-network.html">รัศมีนิติธรรม</a>
     </div>
@@ -316,11 +319,6 @@
 
   <div id="atlas-search"></div>
 
-  <!-- D1 — Dictionary panel: collapsed, lazy-loaded, read-only terminology
-       overlay (atlas-dictionary-view.js). Fails soft; never touches the Atlas
-       navigation, provisions or concept layers. -->
-  <div id="atlas-dictionary"></div>
-
   <div id="atlas-root"><div class="atlas-loading">กำลังโหลดสารบบกฎหมาย…</div></div>
 
   <footer class="atlas-foot" id="atlas-foot"></footer>
@@ -328,16 +326,15 @@
 
 <script src="atlas-patches.js?v=20260907d"></script>
 <script src="atlas-core.js?v=20261004a"></script>
-<script src="atlas-ui.js?v=20261004a"></script>
-<script src="atlas-cases.js?v=20260907b"></script>
+<script src="atlas-ui.js?v=20261004b"></script>
+<script src="atlas-cases.js?v=20261004c"></script>
 <script src="atlas-clusters.js?v=20260909a"></script>
 <script src="atlas-subject-tags.js?v=20260912a"></script>
-<script src="atlas-concepts.js?v=20260920b"></script>
+<script src="atlas-concepts.js?v=20261004c"></script>
 <script src="atlas-provision-concepts.js?v=20260909a"></script>
-<script src="atlas-provision-lectures.js?v=20261004a"></script>
-<script src="atlas-provision-view.js?v=20260929a"></script>
+<script src="atlas-provision-lectures.js?v=20261004b"></script>
+<script src="atlas-provision-view.js?v=20261004c"></script>
 <script src="atlas-search.js?v=20260909a"></script>
-<script src="atlas-dictionary-view.js?v=20261004a"></script>
 <script>
 (function () {
   'use strict';
@@ -368,8 +365,6 @@
     if (window.AtlasProvisionView) AtlasProvisionView.init({ root: root });
     // F5 — search / jump box (standalone; additive consumer, fails soft)
     if (window.AtlasSearch) AtlasSearch.mount(document.getElementById('atlas-search'), { root: root });
-    // D1 — Dictionary panel (collapsed; lazy-fetches atlas-dictionary.json on first open)
-    if (window.AtlasDictionaryView) AtlasDictionaryView.mount(document.getElementById('atlas-dictionary'), { url: 'atlas-dictionary.json?v=d1-8-1' });
     renderFoot();
   }).catch(function (err) {
     root.innerHTML = '<div class="atlas-error">โหลดข้อมูลไม่สำเร็จ: ' +
@@ -399,6 +394,7 @@
         '(ส่วนเสริม ยังไม่รวมเข้าเส้นทางนำทางของ Atlas)</div>' +
       '<div style="margin-top:6px"><a href="index.html">← หน้าหลัก Cool Uncle</a> · ' +
         '<a href="codex-search.html">ค้นมาตรา</a> · ' +
+        '<a href="dictionary.html">พจนานุกรม</a> · ' +
         '<a href="neural-network.html">รัศมีนิติธรรม (กราฟ)</a></div>';
   }
 })();

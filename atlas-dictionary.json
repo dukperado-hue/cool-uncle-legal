@@ -1,6 +1,6 @@
 {
- "version": "d1-8-1",
- "generated": "2026-10-03",
+ "version": "d1-9-0",
+ "generated": "2026-10-04",
  "principle": "Overlay only: an English-Thai term layer over the Legal English sources. conceptRef points to an existing Atlas concept id and is present only when confirmed; the Dictionary never stores definitions, provisions, subject tags or relations of its own.",
  "entries": [
   {
@@ -64,6 +64,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -85,7 +89,8 @@
    "id": "atlas:term/article",
    "en": "Article",
    "th": [
-    "มาตรา (กฎหมายระหว่างประเทศและสนธิสัญญา)"
+    "มาตรา (กฎหมายระหว่างประเทศและสนธิสัญญา)",
+    "ข้อ"
    ],
    "kind": "structure",
    "sources": [
@@ -96,6 +101,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -114,6 +123,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -161,6 +174,10 @@
     {
      "file": "LA270 - LT4.pdf",
      "kind": "slides"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -179,6 +196,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -240,6 +261,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -308,6 +333,10 @@
     {
      "file": "LA270 1-2569 course spec.pdf",
      "kind": "course-spec"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -331,6 +360,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 2.mp3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -386,6 +419,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 2.mp3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -660,6 +697,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 2.mp3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -674,6 +715,10 @@
     {
      "file": "LA270 - LT4.pdf",
      "kind": "slides"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -703,6 +748,10 @@
     {
      "file": "LA270 - LT4.pdf",
      "kind": "slides"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -749,6 +798,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 1.MP3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -767,6 +820,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -814,6 +871,10 @@
     {
      "file": "LA270 - LT4.pdf",
      "kind": "slides"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -847,6 +908,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 1.MP3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -869,6 +934,10 @@
     {
      "file": "LA270 Dr Korrasut's Handout.pdf",
      "kind": "handout"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -887,6 +956,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -1099,6 +1172,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 04 29AUG26.mp3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -1219,6 +1296,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 1.MP3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -1238,6 +1319,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 1.MP3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -1257,6 +1342,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 1.MP3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -1275,6 +1364,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 2.mp3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -1293,6 +1386,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 2.mp3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -1311,6 +1408,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 1.MP3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
     }
    ],
    "conceptRef": "atlas:concept/kan-kratham-chetana-pramat"
@@ -1330,6 +1431,10 @@
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 08  03OCT26 part 2.mp3",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -1388,6 +1493,10 @@
     {
      "file": "LA270 Dr Korrasut's Handout.pdf",
      "kind": "handout"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -1430,6 +1539,3325 @@
     {
      "file": "LA270 Dr Korrasut's Handout.pdf",
      "kind": "handout"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/contract-law",
+   "en": "Contract law",
+   "th": [
+    "กฎหมายสัญญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/commercial-law",
+   "en": "Commercial Law",
+   "th": [
+    "กฎหมายพาณิชย์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/tax-law",
+   "en": "Tax Law",
+   "th": [
+    "กฎหมายภาษี"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/maritime-law",
+   "en": "Maritime Law",
+   "th": [
+    "กฎหมายพาณิชยนาวี"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/bankruptcy-law",
+   "en": "Bankruptcy Law",
+   "th": [
+    "กฎหมายล้มละลาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/business-corporate-law",
+   "en": "Business / Corporate Law",
+   "th": [
+    "กฎหมายธุรกิจ/บริษัท"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/civil-rights",
+   "en": "Civil Rights",
+   "th": [
+    "สิทธิพลเมือง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/environmental-law",
+   "en": "Environmental Law",
+   "th": [
+    "กฎหมายสิ่งแวดล้อม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/family-law",
+   "en": "Family Law",
+   "th": [
+    "กฎหมายครอบครัว"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/public-law",
+   "en": "Public law",
+   "th": [
+    "กฎหมายมหาชน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/tort-law",
+   "en": "Tort law",
+   "th": [
+    "กฎหมายละเมิด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/administrative-law",
+   "en": "Administrative law",
+   "th": [
+    "กฎหมายปกครอง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/constitutional-law",
+   "en": "Constitutional law",
+   "th": [
+    "กฎหมายรัฐธรรมนูญ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/land-law",
+   "en": "Land law",
+   "th": [
+    "กฎหมายที่ดิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/eu-law",
+   "en": "EU law",
+   "th": [
+    "กฎหมายสหภาพยุโรป"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/jurisprudence-legal-philosophy-philosophy-of-law",
+   "en": "Jurisprudence / Legal philosophy / Philosophy of law",
+   "th": [
+    "นิติศาสตร์/นิติปรัชญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/medical-law",
+   "en": "Medical law",
+   "th": [
+    "กฎหมายการแพทย์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/public-procurement-law",
+   "en": "Public procurement law",
+   "th": [
+    "กฎหมายการจัดซื้อจัดจ้างภาครัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/roman-law",
+   "en": "Roman law",
+   "th": [
+    "กฎหมายโรมัน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/evidence",
+   "en": "Evidence",
+   "th": [
+    "พยานหลักฐาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/international-law",
+   "en": "International law",
+   "th": [
+    "กฎหมายระหว่างประเทศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/intellectual-property-law",
+   "en": "Intellectual property law",
+   "th": [
+    "กฎหมายทรัพย์สินทางปัญญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/trust-law",
+   "en": "Trust law",
+   "th": [
+    "กฎหมายทรัสต์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/clinical-legal-studies",
+   "en": "Clinical legal studies",
+   "th": [
+    "การฝึกปฏิบัติกฎหมายภาคสนาม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/criminology",
+   "en": "Criminology",
+   "th": [
+    "อาชญาวิทยา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/employment-law",
+   "en": "Employment law",
+   "th": [
+    "กฎหมายแรงงาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/treaty",
+   "en": "Treaty",
+   "th": [
+    "สนธิสัญญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/convention",
+   "en": "Convention",
+   "th": [
+    "อนุสัญญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/international-customary-law",
+   "en": "International Customary Law",
+   "th": [
+    "กฎหมายจารีตประเพณีระหว่างประเทศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/case-law",
+   "en": "Case law",
+   "th": [
+    "คำตัดสินของศาล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/ordinance",
+   "en": "Ordinance",
+   "th": [
+    "เทศบัญญัติ/ข้อบัญญัติท้องถิ่น"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/regulation",
+   "en": "Regulation",
+   "th": [
+    "กฎข้อบังคับ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/title",
+   "en": "Title",
+   "th": [
+    "ลักษณะ"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/subsection",
+   "en": "Subsection",
+   "th": [
+    "อนุมาตรา"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/clause",
+   "en": "Clause",
+   "th": [
+    "ข้อสัญญา/ข้อกำหนด"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/constitutional-court",
+   "en": "Constitutional Court",
+   "th": [
+    "ศาลรัฐธรรมนูญ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/court-of-justice",
+   "en": "Court of Justice",
+   "th": [
+    "ศาลยุติธรรม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/lawyer",
+   "en": "Lawyer",
+   "th": [
+    "นักกฎหมาย"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/barrister",
+   "en": "Barrister",
+   "th": [
+    "(UK) ทนายที่ว่าความในศาล / เนติบัณฑิต"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/litigator-trial-attorney",
+   "en": "Litigator / Trial Attorney",
+   "th": [
+    "(US) ทนายว่าความในศาล"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/attorney-general",
+   "en": "Attorney General (AG)",
+   "th": [
+    "อัยการสูงสุด"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/director-of-public-prosecutions",
+   "en": "Director of Public Prosecutions (DPP)",
+   "th": [
+    "(UK) หัวหน้าพนักงานอัยการของแผ่นดิน"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/paralegal",
+   "en": "Paralegal",
+   "th": [
+    "ผู้ช่วยทนาย"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/judge",
+   "en": "Judge",
+   "th": [
+    "ผู้พิพากษา"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/public-prosecutor",
+   "en": "Public Prosecutor",
+   "th": [
+    "อัยการ"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/law-professor",
+   "en": "Law professor",
+   "th": [
+    "อาจารย์ด้านกฎหมาย"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/police",
+   "en": "Police",
+   "th": [
+    "ตำรวจ"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/forensic-scientist",
+   "en": "Forensic scientist",
+   "th": [
+    "นักนิติวิทยาศาสตร์"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/tax-consultant-tax-advisor",
+   "en": "Tax Consultant / Tax Advisor",
+   "th": [
+    "ที่ปรึกษาด้านภาษีอากร"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/civil-servant",
+   "en": "Civil servant",
+   "th": [
+    "ข้าราชการ"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/associate-judge",
+   "en": "Associate Judge",
+   "th": [
+    "ผู้พิพากษาสมทบ"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/mediator",
+   "en": "Mediator",
+   "th": [
+    "ผู้ไกล่เกลี่ยประนอมข้อพิพาท"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/administrative-official",
+   "en": "Administrative Official",
+   "th": [
+    "พนักงานปกครอง"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/detective-investigator",
+   "en": "Detective / Investigator",
+   "th": [
+    "พนักงานสืบสวน"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/court-reporter-court-clerk-justice-s-clerk",
+   "en": "Court reporter / court clerk / justice's clerk",
+   "th": [
+    "หน้าบัลลังก์/เสมียนศาล/เสมียนหน้าบัลลังก์"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/bailiff",
+   "en": "Bailiff",
+   "th": [
+    "ตำรวจศาล"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/prima-facie",
+   "en": "prima facie",
+   "th": [
+    "ซึ่งมีมูลจะฟ้องได้ / เบื้องต้น"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/de-facto",
+   "en": "de facto",
+   "th": [
+    "โดยพฤตินัย / ตามความเป็นจริง"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/de-jure",
+   "en": "de jure",
+   "th": [
+    "ตามกฎหมาย"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/habeas-corpus",
+   "en": "habeas corpus",
+   "th": [
+    "หมายศาลเรียกตัวบุคคล"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/ad-hoc",
+   "en": "ad hoc",
+   "th": [
+    "เฉพาะกิจ"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/bona-fide",
+   "en": "bona fide",
+   "th": [
+    "โดยสุจริต"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/actus-reus",
+   "en": "actus reus",
+   "th": [
+    "การกระทำอันเป็นองค์ประกอบภายนอก"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/mens-rea",
+   "en": "mens rea",
+   "th": [
+    "สภาพจิตใจ/เจตนาร้าย"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/per-se",
+   "en": "per se",
+   "th": [
+    "โดยตัวของมันเอง"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/jus-cogens",
+   "en": "jus cogens",
+   "th": [
+    "กฎเกณฑ์เด็ดขาดแห่งกฎหมายระหว่างประเทศ"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/pro-bono",
+   "en": "pro bono",
+   "th": [
+    "เพื่อสาธารณประโยชน์"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/ratio-decidendi",
+   "en": "ratio decidendi",
+   "th": [
+    "เหตุผลในการวินิจฉัย"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/status-quo",
+   "en": "status quo",
+   "th": [
+    "สภาพที่เป็นอยู่เดิม"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/de-novo",
+   "en": "de novo",
+   "th": [
+    "ใหม่ / อีกครั้ง"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/ultra-vires",
+   "en": "ultra vires",
+   "th": [
+    "เกินขอบอำนาจ"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/in-rem",
+   "en": "in rem",
+   "th": [
+    "มุ่งต่อทรัพย์"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/versus",
+   "en": "versus (v. / vs.)",
+   "th": [
+    "ตรงข้าม/ต่อสู้กับ"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/caveat-emptor",
+   "en": "caveat emptor",
+   "th": [
+    "ผู้ซื้อต้องระวัง"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/offence-offense",
+   "en": "Offence / Offense",
+   "th": [
+    "ความผิดอาญา/ฐานความผิด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/by-mistake",
+   "en": "(To do something) by mistake",
+   "th": [
+    "กระทำโดยสำคัญผิด"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-act",
+   "en": "To act",
+   "th": [
+    "กระทำ"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-attempt-to-commit-an-attempt",
+   "en": "To attempt to commit (an offence) / An attempt",
+   "th": [
+    "พยายามกระทำความผิด / การพยายามกระทำความผิด"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-commit-an-act-negligently",
+   "en": "To commit an act negligently",
+   "th": [
+    "กระทำโดยประมาท"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/conduct",
+   "en": "Conduct (v.)",
+   "th": [
+    "จัดการ/ดำเนินกิจกรรมหนึ่ง",
+    "พฤติกรรม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/conduct-yourself",
+   "en": "conduct yourself",
+   "th": [
+    "ประพฤติตนในลักษณะหนึ่ง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/death-penalty-capital-punishment",
+   "en": "Death penalty / Capital punishment",
+   "th": [
+    "ประหารชีวิต"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/confinement",
+   "en": "Confinement",
+   "th": [
+    "กักขัง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/fine",
+   "en": "Fine",
+   "th": [
+    "ปรับ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/forfeiture-of-property",
+   "en": "Forfeiture of property",
+   "th": [
+    "ริบทรัพย์สิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-admonish",
+   "en": "To admonish",
+   "th": [
+    "ตักเตือน"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-be-punishable-by",
+   "en": "To be punishable by",
+   "th": [
+    "ต้องระวางโทษ"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-determine-designate",
+   "en": "To determine / designate",
+   "th": [
+    "กำหนดโทษ"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-inflict-impose",
+   "en": "To inflict / impose",
+   "th": [
+    "ลงโทษ"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-pass-hand-down",
+   "en": "To pass / hand down (a judgment/sentence)",
+   "th": [
+    "ตัดสินโทษ"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-repeal",
+   "en": "To repeal",
+   "th": [
+    "ยกโทษ"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-serve",
+   "en": "To serve (a sentence)",
+   "th": [
+    "รับโทษ"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-suspend",
+   "en": "To suspend",
+   "th": [
+    "รอการลงโทษ"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-take-into-account-consideration",
+   "en": "To take into account / consideration",
+   "th": [
+    "พิจารณา คำนึงถึง"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-transfer-commute",
+   "en": "To transfer / commute",
+   "th": [
+    "เปลี่ยนโทษ"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/extenuating-circumstances",
+   "en": "Extenuating circumstances",
+   "th": [
+    "เหตุอันควรปรานี"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/petty-offence",
+   "en": "Petty offence",
+   "th": [
+    "ลหุโทษ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/scale-of-punishment",
+   "en": "Scale of punishment",
+   "th": [
+    "มาตราส่วนของโทษ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/sentence",
+   "en": "Sentence",
+   "th": [
+    "คำพิพากษา/โทษที่กำหนด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/parole",
+   "en": "parole",
+   "th": [
+    "การปล่อยตัวนักโทษก่อนครบกำหนด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-assassinate",
+   "en": "To assassinate",
+   "th": [
+    "ลอบสังหาร"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-coerce-compel",
+   "en": "To coerce / compel",
+   "th": [
+    "ข่มขู่ บังคับ"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-deride",
+   "en": "To deride",
+   "th": [
+    "เหยียดหยาม"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-fabricate",
+   "en": "To fabricate",
+   "th": [
+    "ปลอมแปลง"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-instigate",
+   "en": "To instigate",
+   "th": [
+    "ยุยง"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-nullify",
+   "en": "To nullify",
+   "th": [
+    "ทำให้ใช้ไม่ได้"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-overthrow",
+   "en": "To overthrow",
+   "th": [
+    "ล้มล้าง"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-procure",
+   "en": "To procure",
+   "th": [
+    "ทำให้ได้มา/ทำให้เกิดขึ้น"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-threaten",
+   "en": "To threaten",
+   "th": [
+    "ขู่"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/to-transgress",
+   "en": "To transgress",
+   "th": [
+    "ล่วงละเมิดกฎหมาย"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/concerted-cessation",
+   "en": "Concerted cessation",
+   "th": [
+    "การร่วมกันปิดงานงดจ้าง (โดยนายจ้าง)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/desertion-of-duties",
+   "en": "Desertion of duties",
+   "th": [
+    "หนีราชการ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/insurrection",
+   "en": "Insurrection",
+   "th": [
+    "กบฏ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/legislation",
+   "en": "Legislation",
+   "th": [
+    "ตัวบทกฎหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/administrative-court",
+   "en": "Administrative Court",
+   "th": [
+    "ศาลปกครอง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/affidavit",
+   "en": "Affidavit",
+   "th": [
+    "พยานเอกสาร (US)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/witness-statement",
+   "en": "Witness statement",
+   "th": [
+    "พยานเอกสาร (UK)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/pleadings",
+   "en": "Pleadings",
+   "th": [
+    "คำคู่ความ (US)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/statement-of-case",
+   "en": "Statement of case",
+   "th": [
+    "คำคู่ความ (UK)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/objection",
+   "en": "Objection",
+   "th": [
+    "การคัดค้าน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/sustained",
+   "en": "Sustained",
+   "th": [
+    "รับคำคัดค้าน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/overruled",
+   "en": "Overruled",
+   "th": [
+    "ยกคำคัดค้าน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/hearsay",
+   "en": "Hearsay",
+   "th": [
+    "พยานบอกเล่า"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/claimant",
+   "en": "Claimant",
+   "th": [
+    "โจทก์/ผู้ฟ้อง/ผู้ยื่นคำร้อง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/respondent",
+   "en": "Respondent",
+   "th": [
+    "ผู้แก้ต่าง/จำเลย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/accused",
+   "en": "Accused",
+   "th": [
+    "ผู้ต้องหา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/suspect",
+   "en": "Suspect",
+   "th": [
+    "ผู้ต้องสงสัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/petitioner",
+   "en": "Petitioner",
+   "th": [
+    "ผู้ร้อง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/appellant",
+   "en": "Appellant",
+   "th": [
+    "ผู้อุทธรณ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/appellee",
+   "en": "Appellee",
+   "th": [
+    "จำเลยชั้นอุทธรณ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/concurring-opinion",
+   "en": "Concurring opinion",
+   "th": [
+    "ความเห็นพ้อง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/dissenting-opinion",
+   "en": "Dissenting opinion",
+   "th": [
+    "ความเห็นแย้ง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/majority-opinion",
+   "en": "Majority opinion",
+   "th": [
+    "ความเห็นเสียงข้างมาก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/interim-order",
+   "en": "Interim order",
+   "th": [
+    "คำสั่งชั่วคราว (UK)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/interlocutory-order",
+   "en": "Interlocutory order",
+   "th": [
+    "คำสั่งระหว่างพิจารณา (US)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/injunction",
+   "en": "Injunction",
+   "th": [
+    "คำสั่งห้ามกระทำการ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/precedent",
+   "en": "Precedent",
+   "th": [
+    "บรรทัดฐานทางคำพิพากษา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/complaint",
+   "en": "Complaint",
+   "th": [
+    "คำฟ้อง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/solicitor",
+   "en": "Solicitor",
+   "th": [
+    "ทนายความ (UK)"
+   ],
+   "kind": "profession",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/an-act",
+   "en": "An act",
+   "th": [
+    "การกระทำ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/an-omission",
+   "en": "An omission",
+   "th": [
+    "การงดเว้นการกระทำ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/legal-research",
+   "en": "Legal Research",
+   "th": [
+    "การสืบค้นข้อมูลทางกฎหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/primary-sources",
+   "en": "Primary Sources",
+   "th": [
+    "แหล่งข้อมูลปฐมภูมิ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/secondary-sources",
+   "en": "Secondary Sources",
+   "th": [
+    "แหล่งข้อมูลทุติยภูมิ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/directive",
+   "en": "Directive",
+   "th": [
+    "ข้อกำหนดของ EU"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/consolidated-versions",
+   "en": "Consolidated versions",
+   "th": [
+    "ฉบับรวมการแก้ไขเพิ่มเติม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/current-awareness",
+   "en": "Current Awareness",
+   "th": [
+    "ระบบสรุปข่าวกฎหมายล่าสุด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/hallucinate",
+   "en": "Hallucinate",
+   "th": [
+    "หลอน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/good-law",
+   "en": "Good law",
+   "th": [
+    "ยังบังคับใช้ได้"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/confirmation-bias",
+   "en": "Confirmation Bias",
+   "th": [
+    "อคติเข้าข้างความเชื่อเดิม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/disprove",
+   "en": "Disprove",
+   "th": [
+    "หาหลักฐานหักล้าง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/citation-generator",
+   "en": "Citation Generator",
+   "th": [
+    "เครื่องมือสร้างคำอ้างอิงอัตโนมัติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/plagiarism",
+   "en": "Plagiarism",
+   "th": [
+    "การคัดลอกผลงาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/indented-block",
+   "en": "Indented block",
+   "th": [
+    "ย่อหน้าเขยิบเข้าด้านใน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/paraphrase",
+   "en": "Paraphrase",
+   "th": [
+    "การเรียบเรียงข้อความใหม่"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/ibid",
+   "en": "Ibid",
+   "th": [
+    "เรื่องเดียวกัน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/ukhl",
+   "en": "UKHL",
+   "th": [
+    "ศาลสภาขุนนางสหราชอาณาจักร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/uksc",
+   "en": "UKSC",
+   "th": [
+    "ศาลสูงสุดสหราชอาณาจักร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/past-tense",
+   "en": "Past Tense",
+   "th": [
+    "กาลอดีต"
+   ],
+   "kind": "usage",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/present-tense",
+   "en": "Present Tense",
+   "th": [
+    "กาลปัจจุบัน"
+   ],
+   "kind": "usage",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 5",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/lease",
+   "en": "Lease",
+   "th": [
+    "สัญญาเช่า"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/rental-agreement",
+   "en": "Rental Agreement",
+   "th": [
+    "สัญญาเช่า (ภาคปฏิบัติ)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/hire-of-property",
+   "en": "Hire of Property",
+   "th": [
+    "สัญญาเช่าทรัพย์ (ทางวิชาการ)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/landlord",
+   "en": "Landlord",
+   "th": [
+    "ผู้ให้เช่า (ภาคปฏิบัติ)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/tenant",
+   "en": "Tenant",
+   "th": [
+    "ผู้เช่า (ภาคปฏิบัติ)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/lessor",
+   "en": "Lessor",
+   "th": [
+    "ผู้ให้เช่า (ทางวิชาการ)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/lessee",
+   "en": "Lessee",
+   "th": [
+    "ผู้เช่า (ทางวิชาการ)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/stipulated-penalty",
+   "en": "Stipulated penalty",
+   "th": [
+    "เบี้ยปรับ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/law-of-obligations",
+   "en": "Law of Obligations",
+   "th": [
+    "กฎหมายหนี้"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/debt",
+   "en": "Debt",
+   "th": [
+    "หนี้เงิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/obligation",
+   "en": "Obligation",
+   "th": [
+    "หนี้"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/promise",
+   "en": "Promise",
+   "th": [
+    "คำมั่น"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/agreement",
+   "en": "Agreement",
+   "th": [
+    "ข้อตกลง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/reception-of-law",
+   "en": "Reception of Law",
+   "th": [
+    "การรับกฎหมายต่างประเทศมาใช้"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/consideration",
+   "en": "Consideration",
+   "th": [
+    "สิ่งตอบแทน/ค่าตอบแทน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/parental-power",
+   "en": "Parental power",
+   "th": [
+    "อำนาจปกครองบุตร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/juristic-act",
+   "en": "Juristic Act",
+   "th": [
+    "นิติกรรม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/legal-transaction",
+   "en": "Legal transaction",
+   "th": [
+    "นิติกรรม (BGB)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/juridical-act",
+   "en": "Juridical act",
+   "th": [
+    "นิติกรรม (ฝรั่งเศส)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/declaration-of-intent",
+   "en": "Declaration of intent",
+   "th": [
+    "การแสดงเจตนา (BGB)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/manifestation-of-will",
+   "en": "Manifestation of will",
+   "th": [
+    "การแสดงเจตนา (ฝรั่งเศส)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/obligee",
+   "en": "Obligee",
+   "th": [
+    "เจ้าหนี้ (BGB)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/obligor",
+   "en": "Obligor",
+   "th": [
+    "ลูกหนี้ (BGB)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/creditor",
+   "en": "Creditor",
+   "th": [
+    "เจ้าหนี้"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/promise-of-marriage",
+   "en": "Promise of marriage",
+   "th": [
+    "สัญญาหมั้น"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/faculty-of-law",
+   "en": "Faculty of Law",
+   "th": [
+    "คณะนิติศาสตร์ (ฝั่งอังกฤษ)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/law-school",
+   "en": "Law School",
+   "th": [
+    "คณะนิติศาสตร์ (ฝั่งสหรัฐฯ)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/rescission",
+   "en": "Rescission",
+   "th": [
+    "การเลิกสัญญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/contract-is-executed",
+   "en": "Contract is executed",
+   "th": [
+    "ปฏิบัติตามสัญญาแล้ว"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/betrothal-gift",
+   "en": "Betrothal gift",
+   "th": [
+    "ของหมั้น"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/marriage-gift",
+   "en": "Marriage gift",
+   "th": [
+    "สินสอด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/common-law",
+   "en": "Common law",
+   "th": [
+    "ระบบคอมมอนลอว์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/civil-law",
+   "en": "Civil law",
+   "th": [
+    "ระบบซีวิลลอว์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/law-report",
+   "en": "Law report",
+   "th": [
+    "รายงานคำพิพากษา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/case-report",
+   "en": "Case report",
+   "th": [
+    "รายงานคำพิพากษา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/statute",
+   "en": "Statute",
+   "th": [
+    "ตัวพระราชบัญญัติ / กฎหมายลายลักษณ์อักษร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/act-of-parliament",
+   "en": "Act of Parliament",
+   "th": [
+    "พระราชบัญญัติของรัฐสภา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/catchwords",
+   "en": "Catchwords",
+   "th": [
+    "คำสำคัญสรุปประเด็น"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/headnote",
+   "en": "Headnote",
+   "th": [
+    "บทสรุปส่วนต้น"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/summary-of-facts",
+   "en": "Summary of facts",
+   "th": [
+    "สรุปข้อเท็จจริง"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/summary-of-decision",
+   "en": "Summary of decision",
+   "th": [
+    "สรุปผลคำตัดสิน"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/orders-of-the-court",
+   "en": "Orders of the Court",
+   "th": [
+    "คำสั่งศาล"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/name-of-court",
+   "en": "Name of Court",
+   "th": [
+    "ชื่อศาล"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/names-of-parties",
+   "en": "Names of Parties",
+   "th": [
+    "ชื่อคู่ความ"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/names-of-judges",
+   "en": "Names of Judges",
+   "th": [
+    "ชื่อผู้พิพากษา"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/summary-of-counsel-arguments",
+   "en": "Summary of counsel arguments",
+   "th": [
+    "สรุปข้อโต้แย้งของทนายความ"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/lj-ljj",
+   "en": "LJ / LJJ",
+   "th": [
+    "Lord Justice / Lord Justices (ผู้พิพากษาศาลอุทธรณ์)"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/secondary-victim",
+   "en": "Secondary victim",
+   "th": [
+    "ผู้เสียหายทางอ้อม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/primary-victim",
+   "en": "Primary victim",
+   "th": [
+    "ผู้เสียหายโดยตรง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/psychiatric-harm",
+   "en": "Psychiatric harm",
+   "th": [
+    "ความเสียหายทางจิตใจ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/breach-of-confidence",
+   "en": "Breach of confidence",
+   "th": [
+    "การละเมิดความลับ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/short-title",
+   "en": "Short title",
+   "th": [
+    "ชื่อสั้นของ พ.ร.บ."
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/long-title",
+   "en": "Long title",
+   "th": [
+    "ชื่อยาวของ พ.ร.บ."
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/royal-assent",
+   "en": "Royal Assent",
+   "th": [
+    "การลงพระปรมาภิไธย"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/body-of-the-act",
+   "en": "Body of the Act",
+   "th": [
+    "ตัวบทหลักของ พ.ร.บ."
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/interpretation-sections",
+   "en": "Interpretation sections",
+   "th": [
+    "บทนิยามศัพท์"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/commencement-sections",
+   "en": "Commencement sections",
+   "th": [
+    "ข้อกำหนดวันเริ่มมีผลบังคับ"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/come-into-force",
+   "en": "Come into force",
+   "th": [
+    "เริ่มมีผลบังคับใช้"
+   ],
+   "kind": "collocation",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/schedules",
+   "en": "Schedules",
+   "th": [
+    "บัญชีท้าย พ.ร.บ."
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/consolidate",
+   "en": "Consolidate",
+   "th": [
+    "รวมกฎหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/plain-english-movement",
+   "en": "Plain English Movement",
+   "th": [
+    "ขบวนการภาษาอังกฤษธรรมดา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/rule-of-law",
+   "en": "Rule of Law",
+   "th": [
+    "หลักนิติธรรม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/thin-formal-rule-of-law",
+   "en": "Thin / Formal Rule of Law",
+   "th": [
+    "หลักนิติธรรมแบบบาง/เชิงรูปแบบ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/thick-substantive-rule-of-law",
+   "en": "Thick / Substantive Rule of Law",
+   "th": [
+    "หลักนิติธรรมแบบหนา/เชิงเนื้อหา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/juridification",
+   "en": "Juridification",
+   "th": [
+    "การขยายกฎหมายเข้าแทรกชีวิตสังคม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/judicialization",
+   "en": "Judicialization",
+   "th": [
+    "การให้ผู้พิพากษาเป็นใหญ่ทางการเมือง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/intentionally",
+   "en": "Intentionally",
+   "th": [
+    "โดยเจตนา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/negligently",
+   "en": "Negligently",
+   "th": [
+    "โดยประมาท"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/consciously",
+   "en": "Consciously",
+   "th": [
+    "โดยรู้สำนึก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/external-element",
+   "en": "External element",
+   "th": [
+    "องค์ประกอบภายนอก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/internal-element",
+   "en": "Internal element",
+   "th": [
+    "องค์ประกอบภายใน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/ignorance-of-the-facts",
+   "en": "Ignorance of the facts",
+   "th": [
+    "การไม่รู้ข้อเท็จจริง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/ignorance-of-the-law",
+   "en": "Ignorance of the law",
+   "th": [
+    "การไม่รู้กฎหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/murder",
+   "en": "Murder",
+   "th": [
+    "ฆ่าโดยเจตนา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/negligent-act-causing-death",
+   "en": "Negligent act causing death",
+   "th": [
+    "ประมาททำให้ผู้อื่นถึงแก่ความตาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/consent",
+   "en": "Consent",
+   "th": [
+    "ความยินยอม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/intent-intention",
+   "en": "Intent / Intention",
+   "th": [
+    "เจตนา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
     }
    ]
   }

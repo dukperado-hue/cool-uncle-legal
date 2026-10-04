@@ -236,11 +236,14 @@
       for (var i = 0; i < notes.length; i++) {
         var n = notes[i];
         if (!n || typeof n !== 'object' || (!n.text && !n.topic)) continue;
-        sec.appendChild(noteEl({
+        // no source line here: the section label already marks this as editorial
+        var nd = noteEl({
           topic: typeof n.topic === 'string' ? n.topic : '',
           text: typeof n.text === 'string' ? n.text : '',
-          source: typeof n.source === 'string' ? n.source : ''
-        }, collectionKey ? { collection: collectionKey } : null));
+          source: ''
+        }, collectionKey ? { collection: collectionKey } : null);
+        nd.open = true;
+        sec.appendChild(nd);
         shown++;
       }
       return shown ? sec : null;

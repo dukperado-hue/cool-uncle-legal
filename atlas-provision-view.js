@@ -800,9 +800,11 @@
     return nav.children && nav.children.length ? nav : null;
   }
 
+  var SHOW_CASES = false;   // hidden for now — set true when the case library is large enough
   function casesEl(resolved) {
     var box = make('div', 'atlas-provision-view-cases');
     box.hidden = true;
+    if (!SHOW_CASES) return box;
     loadCaseIndex().then(function (index) {
       var cases;
       try { cases = publicCasesFrom(index, resolved.collection, resolved.number); }
@@ -1071,6 +1073,50 @@
     if (_panelEl && _panelEl.focus) { try { _panelEl.focus(); } catch (e) {} }
   }
 
+  // Side panel for a ภาค / ลักษณะ / หมวด overview (same drawer as a มาตรา).
+  // `heading` = level label, `node` = AtlasProvisionLectures.renderLevelNotes().
+  function openLevel(heading, node, opts) {
+    opts = opts || {};
+    if (!node) return false;
+    injectStyle();
+    var fresh = !isOpen();
+    if (fresh) {
+      var shell = buildShell();
+      _wrapEl = shell.wrap;
+      _panelEl = shell.panel;
+      try { _panelEl.addEventListener('click', onRootClick, true); } catch (e) { /* ignore */ }
+      if (_root && _root.parentNode) _root.parentNode.insertBefore(_wrapEl, _root.nextSibling);
+      else if (doc.body) doc.body.appendChild(_wrapEl);
+      _hasOwnEntry = false;
+    }
+    _current = null;
+    if (opts.source) _lastFocused = opts.source;
+    else if (fresh && doc.activeElement) _lastFocused = doc.activeElement;
+    var panel = _panelEl;
+    while (panel.firstChild) panel.removeChild(panel.firstChild);
+    var header = make('div', 'atlas-provision-view-header');
+    header.appendChild(make('span', 'atlas-provision-view-crumb atlas-provision-view-crumb-current', 'ภาพรวม'));
+    var close = make('button', 'atlas-provision-view-close', '✕');
+    close.type = 'button';
+    close.setAttribute('aria-label', 'ปิดภาพรวม');
+    close.addEventListener('click', function () { requestClose(); });
+    header.appendChild(close);
+    panel.appendChild(header);
+    var body = make('div', 'atlas-provision-view-body');
+    var h = make('h2', 'atlas-provision-view-heading', heading || 'ภาพรวม');
+    h.setAttribute('tabindex', '-1');
+    body.appendChild(h);
+    body.appendChild(node);
+    panel.appendChild(body);
+    if (fresh) {
+      lockScroll();
+      var raf = global.requestAnimationFrame || function (fn) { return setTimeout(fn, 16); };
+      raf(function () { if (_wrapEl) _wrapEl.className = 'atlas-provision-view atlas-provision-view-open'; });
+    }
+    try { h.focus(); } catch (e) { /* ignore */ }
+    return true;
+  }
+
   // change the article shown in an ALREADY-open panel (prev/next, or a
   // different pill clicked while the panel is up) — one history entry only.
   function updateOpen(resolved, opts) {
@@ -1229,6 +1275,7 @@
     init: init,
     close: requestClose,
     isOpen: isOpen,
+    openLevel: openLevel,
     _internal: {
       breadcrumbEl: breadcrumbEl,
       activateCrumb: activateCrumb,
