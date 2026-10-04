@@ -437,6 +437,16 @@
     function buildBody() {
       if (built) return;
       built = true;
+      // Lecture overview for this ภาค / ลักษณะ / หมวด (if any) — shown ABOVE the
+      // children so an opened level is never an empty shell. Optional layer.
+      try {
+        if (AtlasCore.getLevelNotes && global.AtlasProvisionLectures &&
+            typeof global.AtlasProvisionLectures.renderLevelNotes === 'function') {
+          var lvNode = global.AtlasProvisionLectures.renderLevelNotes(
+            AtlasCore.getLevelNotes(key, node.path), key);
+          if (lvNode) body.appendChild(lvNode);
+        }
+      } catch (e) { /* fail soft */ }
       if (hasKids) body.appendChild(treeList(key, node.children, depth + 1, instrumentId));
       else if (hasProvs) body.appendChild(provisionList(key, node.articles, instrumentId));
     }

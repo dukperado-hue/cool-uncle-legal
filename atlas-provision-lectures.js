@@ -40,6 +40,11 @@
   // Mandatory, persistent authority label (F11.3.3 gate, constraint 4/6).
   // Never remove; never let it live only inside a collapsed <details>.
   var LABEL = 'คำอธิบายประกอบ — ไม่ใช่ตัวบทหรือคำพิพากษา';
+  // Worked examples (codex-data.json articles.<n>.examples[]) come from study
+  // sheets, not from the statute and not from a lecture — labelled as such.
+  var EX_LABEL = 'ตัวอย่างประกอบ — ไม่ใช่ตัวบท และไม่ใช่คำบรรยายของอาจารย์';
+  // Overview of a ภาค/ลักษณะ/หมวด (codex-data.json books.<k>.levelNotes[path]).
+  var LEVEL_LABEL = 'ภาพรวมจากคำบรรยาย — ไม่ใช่ตัวบทหรือคำพิพากษา';
 
   var doc = global.document;
 
@@ -80,6 +85,26 @@
     return out;
   }
 
+  function examplesFrom(resolved) {
+    var art = resolved && resolved.article;
+    var raw = art && art.examples;
+    if (!isArray(raw)) return [];
+    var out = [];
+    for (var i = 0; i < raw.length; i++) {
+      var e = raw[i];
+      if (!e || typeof e !== 'object') continue;
+      var text = (typeof e.text === 'string') ? e.text : '';
+      if (!text) continue;
+      out.push({
+        title: (typeof e.title === 'string') ? e.title : '',
+        text: text,
+        ref: (typeof e.ref === 'string') ? e.ref : '',
+        source: (typeof e.source === 'string') ? e.source : ''
+      });
+    }
+    return out;
+  }
+
   // ================================================================
   // stylesheet — scoped .atlas-plec-* ; a visually distinct editorial band
   // (never the statutory-text classes, never a "ruling" treatment)
@@ -90,20 +115,24 @@
       '.atlas-plec-sec{margin:0;}',
       '.atlas-plec-label{margin:0 0 10px;font-size:11px;font-weight:700;',
       '  letter-spacing:.03em;text-transform:uppercase;color:var(--muted,#5b6472);}',
-      '.atlas-plec-note{margin:0 0 8px;border:1px solid var(--line,#e6e1d6);',
+      '.atlas-plec-note,.atlas-plec-exnote{margin:0 0 8px;border:1px solid var(--line,#e6e1d6);',
       '  border-left:3px solid var(--muted,#5b6472);border-radius:8px;',
       '  background:var(--chip,#f2ede1);padding:0 12px;}',
-      '.atlas-plec-note:last-child{margin-bottom:0;}',
+      '.atlas-plec-note:last-child,.atlas-plec-exnote:last-child{margin-bottom:0;}',
       '.atlas-plec-sum{list-style:none;cursor:pointer;padding:9px 0;',
       '  font-size:12.5px;font-weight:600;line-height:1.4;color:var(--ink,#1f2430);',
       '  -webkit-user-select:none;user-select:none;}',
       '.atlas-plec-sum::-webkit-details-marker{display:none;}',
       '.atlas-plec-sum::marker{content:"";}',
-      '.atlas-plec-note[open]>.atlas-plec-sum{color:var(--accent,#2E4A7A);}',
+      '.atlas-plec-note[open]>.atlas-plec-sum,.atlas-plec-exnote[open]>.atlas-plec-sum{color:var(--accent,#2E4A7A);}',
       '.atlas-plec-body{padding:0 0 10px;font-size:12.5px;line-height:1.85;',
       '  color:var(--ink,#1f2430);}',
       '.atlas-plec-para{margin:0 0 .8em;}',
       '.atlas-plec-para:last-child{margin-bottom:0;}',
+      '.atlas-plec-ex-sec{margin:12px 0 0;}',
+      '.atlas-plec-exnote{border-left-color:var(--accent,#2E4A7A);}',
+      '.atlas-plec-ex-ref{margin:0 0 .8em;font-size:11.5px;color:var(--muted,#5b6472);}',
+      '.atlas-plec-level{margin:0 0 12px;}',
       '.atlas-plec-source{margin:8px 0 10px;padding-top:8px;',
       '  border-top:1px dashed var(--line,#e6e1d6);font-size:11px;',
       '  color:var(--muted,#5b6472);}'
@@ -160,6 +189,15 @@
   // right after the statutory text). Synchronous — lectureNotes are already
   // in memory on resolved.article, no fetch involved. Renders nothing when
   // the provision has no lectureNotes.
+  function exampleEl(ex, resolved) {
+    var d = el('details', 'atlas-plec-exnote');
+    d.appendChild(el('summary', 'atlas-plec-sum', ex.title || 'ตัวอย่าง'));
+    d.appendChild(bodyEl(ex.text, resolved));
+    if (ex.ref) d.appendChild(el('p', 'atlas-plec-ex-ref', 'อ้างอิงในชีท: ' + ex.ref));
+    if (ex.source) d.appendChild(el('p', 'atlas-plec-source', 'ℹ️ ' + ex.source));
+    return d;
+  }
+
   function renderSection(container, resolved) {
     if (!container || !resolved) return;
     try {
@@ -167,13 +205,46 @@
       while (container.firstChild) container.removeChild(container.firstChild);
 
       var notes = notesFrom(resolved);
-      if (!notes.length) return;                      // no lectureNotes → no UI at all
+      var exs = examplesFrom(resolved);
+      if (!notes.length && !exs.length) return;       // nothing → no UI at all
 
-      var sec = el('section', 'atlas-plec-sec');
-      sec.appendChild(el('p', 'atlas-plec-label', LABEL));
-      for (var i = 0; i < notes.length; i++) sec.appendChild(noteEl(notes[i], resolved));
-      container.appendChild(sec);
+      if (notes.length) {
+        var sec = el('section', 'atlas-plec-sec');
+        sec.appendChild(el('p', 'atlas-plec-label', LABEL));
+        for (var i = 0; i < notes.length; i++) sec.appendChild(noteEl(notes[i], resolved));
+        container.appendChild(sec);
+      }
+      if (exs.length) {
+        var xs = el('section', 'atlas-plec-sec atlas-plec-ex-sec');
+        xs.appendChild(el('p', 'atlas-plec-label', EX_LABEL));
+        for (var j = 0; j < exs.length; j++) xs.appendChild(exampleEl(exs[j], resolved));
+        container.appendChild(xs);
+      }
     } catch (e) { /* fail soft — never break the F1 reader */ }
+  }
+
+  // Overview notes for a ภาค / ลักษณะ / หมวด node of the Atlas structure tree.
+  // `notes` = AtlasCore.getLevelNotes(collection, path) → [{id,topic,text,source}].
+  // Returns a DOM node (or null when there is nothing to show).
+  function renderLevelNotes(notes, collectionKey) {
+    try {
+      if (!isArray(notes) || !notes.length) return null;
+      injectStyle();
+      var sec = el('section', 'atlas-plec-sec atlas-plec-level');
+      sec.appendChild(el('p', 'atlas-plec-label', LEVEL_LABEL));
+      var shown = 0;
+      for (var i = 0; i < notes.length; i++) {
+        var n = notes[i];
+        if (!n || typeof n !== 'object' || (!n.text && !n.topic)) continue;
+        sec.appendChild(noteEl({
+          topic: typeof n.topic === 'string' ? n.topic : '',
+          text: typeof n.text === 'string' ? n.text : '',
+          source: typeof n.source === 'string' ? n.source : ''
+        }, collectionKey ? { collection: collectionKey } : null));
+        shown++;
+      }
+      return shown ? sec : null;
+    } catch (e) { return null; }
   }
 
   // ================================================================
@@ -182,7 +253,12 @@
   global.AtlasProvisionLectures = {
     version: '1.0',
     renderSection: renderSection,
+    renderLevelNotes: renderLevelNotes,
     _internal: {
+      EX_LABEL: EX_LABEL,
+      LEVEL_LABEL: LEVEL_LABEL,
+      examplesFrom: examplesFrom,
+      exampleEl: exampleEl,
       LABEL: LABEL,
       notesFrom: notesFrom,
       noteEl: noteEl,

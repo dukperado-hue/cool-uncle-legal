@@ -1836,9 +1836,29 @@ function renderCaseLawBlock(article) {
     </div>`;
 }
 
+// Worked examples (articles.<n>.examples[]) — taken from study sheets, so they
+// are labelled as examples: not statute text and not the lecturer's own words.
+function renderExamplesBlock(article) {
+  const exs = Array.isArray(article.examples)
+    ? article.examples.filter(e => e && typeof e.text === 'string' && e.text.trim()) : [];
+  if (!exs.length) return '';
+  return `
+    <div style="background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; margin-top: 16px;">
+      <h3 style="margin-bottom: 4px;">📌 ตัวอย่างประกอบ</h3>
+      <div style="margin-bottom: 14px;font-size:12px;color:var(--ink-faint);">ตัวอย่างประกอบการทำความเข้าใจมาตรา — ไม่ใช่ตัวบท และไม่ใช่คำบรรยายของอาจารย์</div>
+      ${exs.map(e => `
+        <div class="case-item">
+          <div class="case-number">📌 ${escapeHtml(e.title || 'ตัวอย่าง')}</div>
+          <div class="case-summary" style="white-space:pre-line">${linkifyMatraRefs(escapeHtml(e.text || ''), currentBookType, article.number)}</div>
+          ${e.ref ? `<div style="margin-top:8px;font-size:12px;color:var(--ink-faint);">อ้างอิงในชีท: ${escapeHtml(e.ref)}</div>` : ''}
+          ${e.source ? `<div style="margin-top:8px;font-size:12px;color:var(--ink-faint);border-top:1px dashed var(--line);padding-top:8px;">ℹ️ ${escapeHtml(e.source)}</div>` : ''}
+        </div>`).join('')}
+    </div>`;
+}
+
 function renderLectureNotes(article) {
   const el = document.getElementById('lecture-container');
-  const caseBlock = renderCaseLawBlock(article);
+  const caseBlock = renderCaseLawBlock(article) + renderExamplesBlock(article);
   if (!article.lectureNotes || article.lectureNotes.length === 0) {
     if (caseBlock) { el.innerHTML = caseBlock; return; }
     el.innerHTML = `
@@ -2287,7 +2307,7 @@ async function loadAndRender() {
   currentNumber = id.slice(id.indexOf('_') + 1);
 
   try {
-    const res = await fetch('codex-data.json?v=20261001b');
+    const res = await fetch('codex-data.json?v=20261004a');
     if (!res.ok) throw new Error('fetch failed');
     codexData = await res.json();
   } catch (e) {

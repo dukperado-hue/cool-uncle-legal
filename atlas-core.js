@@ -438,6 +438,22 @@
     return i === -1 ? s : s.slice(i + KEY_SEP.length);
   }
 
+  // Lecture overview notes attached to a structural level (ภาค / ลักษณะ / หมวด),
+  // stored beside the articles in codex-data.json: books.<k>.levelNotes[<key>]
+  // where <key> = the node's path values joined by ' > ' (e.g.
+  // 'ภาค 2 > ลักษณะ 2 > หมวด 1'). Same {id,topic,text,source} shape as
+  // articles.<n>.lectureNotes. Returns [] when none — never throws.
+  function getLevelNotes(collectionKey, path) {
+    try {
+      var b = CORPUS && CORPUS.books && CORPUS.books[collectionKey];
+      var ln = b && b.levelNotes;
+      if (!ln || !path || !path.length) return [];
+      var key = path.filter(function (p) { return p != null && p !== ''; }).join(' > ');
+      var hit = has(ln, key) ? ln[key] : null;
+      return Object.prototype.toString.call(hit) === '[object Array]' ? hit : [];
+    } catch (e) { return []; }
+  }
+
   function getStructureTree(collectionKey) {
     var c = _raw(collectionKey);
     if (!c) return null;
@@ -837,6 +853,7 @@
 
     // structure
     getStructureTree: getStructureTree,
+    getLevelNotes: getLevelNotes,
     resolveProvision: resolveProvision,
     getProvisionBrief: getProvisionBrief,
     getBreadcrumb: getBreadcrumb,
