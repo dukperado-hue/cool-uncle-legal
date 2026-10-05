@@ -1,0 +1,21 @@
+{
+  "_comment": "Thai authoritative corpus state, versioned INDEPENDENTLY of the search-venue freeze (protocol_state.json). frozen=true requires corpus_version and a register row with status 'frozen'. grid_status RECONCILED for a code requires its corpus frozen and a complete section_grid_reconciliation.",
+  "corpora": {
+    "CCC": {
+      "corpus_version": null,
+      "frozen": false
+    },
+    "PENAL": {
+      "corpus_version": null,
+      "frozen": false
+    },
+    "CIVPRO": {
+      "corpus_version": null,
+      "frozen": false
+    },
+    "CRIMPRO": {
+      "corpus_version": null,
+      "frozen": false
+    }
+  }
+}

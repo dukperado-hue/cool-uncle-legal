@@ -1,0 +1,12 @@
+{
+  "protocol_version": "0.2-draft",
+  "venues_frozen": false,
+  "venues_frozen_date": null,
+  "search_completed": {
+    "CCC": false,
+    "PENAL": false,
+    "CIVPRO": false,
+    "CRIMPRO": false
+  },
+  "_comment": "Gate file. venues_frozen must be true before ANY search_log row exists. search_completed[code]=true (set only on Conductor sign-off after the full protocol ran for that code) is required before any article row may be NONE_IDENTIFIED."
+}

@@ -1,0 +1,707 @@
+{
+  "schema_version": "0.3-draft",
+  "$comment": "Lightweight table schema read by analysis/validate_dataset.py (stdlib only). 'enum' lists are controlled vocabularies; 'required' = non-empty; 'fk' = foreign key ('fk_multi' = ';'-separated list). Section identifiers are ALWAYS strings (pattern 'section_label'). Cross-field rules live in the validator and are described in methodology/*.md.",
+  "vocab": {
+    "code": [
+      "CCC",
+      "PENAL",
+      "CIVPRO",
+      "CRIMPRO"
+    ],
+    "code_or_multi": [
+      "CCC",
+      "PENAL",
+      "CIVPRO",
+      "CRIMPRO",
+      "MULTI"
+    ],
+    "authority_status": [
+      "official",
+      "government_published",
+      "academic",
+      "commercial",
+      "unofficial",
+      "unknown"
+    ],
+    "coverage_status": [
+      "full_code",
+      "partial",
+      "amendment_only",
+      "section_specific",
+      "unknown"
+    ],
+    "provenance_status": [
+      "verified",
+      "partially_verified",
+      "unverified"
+    ],
+    "source_type": [
+      "book",
+      "journal_article",
+      "government_publication",
+      "gazette_supplement",
+      "thesis",
+      "web_page",
+      "database_entry",
+      "pdf_document",
+      "catalog_record",
+      "other",
+      "unknown"
+    ],
+    "machine_readable": [
+      "yes",
+      "no",
+      "partial",
+      "unknown"
+    ],
+    "unit_type": [
+      "whole_code",
+      "book",
+      "title",
+      "chapter",
+      "section_range",
+      "single_section"
+    ],
+    "search_category": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10"
+    ],
+    "search_outcome": [
+      "hit",
+      "negative",
+      "inconclusive",
+      "not_accessible"
+    ],
+    "exclusion_reason": [
+      "X1",
+      "X2",
+      "X3",
+      "X4",
+      "X5"
+    ],
+    "yes_no_unknown": [
+      "yes",
+      "no",
+      "unknown"
+    ],
+    "translation_status": [
+      "translated",
+      "not_translated_in_source",
+      "unknown"
+    ],
+    "currency_status": [
+      "current_to_thai_version",
+      "pre_amendment",
+      "superseded",
+      "unknown"
+    ],
+    "traceability_status": [
+      "traceable_to_page",
+      "traceable_to_source",
+      "not_traceable",
+      "unknown"
+    ],
+    "verification_outcome": [
+      "pending",
+      "agreed",
+      "disputed",
+      "adjudicated"
+    ],
+    "search_status": [
+      "NOT_ASSESSED",
+      "NONE_IDENTIFIED",
+      "IDENTIFIED"
+    ],
+    "provision_status": [
+      "in_force",
+      "repealed",
+      "unknown"
+    ],
+    "venue_status": [
+      "proposed",
+      "frozen",
+      "withdrawn"
+    ],
+    "access_method": [
+      "open_web",
+      "subscription",
+      "institutional_login",
+      "catalog_query",
+      "api",
+      "physical_visit"
+    ],
+    "deviation_type": [
+      "venue_added",
+      "venue_withdrawn",
+      "query_template_changed",
+      "scope_changed",
+      "other"
+    ],
+    "venue_class": [
+      "authoritative_government",
+      "academic_library",
+      "international_database",
+      "commercial_legal",
+      "general_discovery"
+    ],
+    "venue_verification_status": [
+      "verified",
+      "verified_redirected",
+      "identity_unconfirmed",
+      "tls_error",
+      "unreachable",
+      "not_verified"
+    ],
+    "proposed_disposition": [
+      "include",
+      "include_conditional",
+      "drop",
+      "merge"
+    ],
+    "grid_status": [
+      "PROXY",
+      "RECONCILED"
+    ],
+    "reconciliation_status": [
+      "MATCH",
+      "MISSING_FROM_ATLAS",
+      "EXTRA_IN_ATLAS",
+      "RENAMED",
+      "REPEALED",
+      "INSERTED",
+      "UNCERTAIN"
+    ],
+    "verification_independence": [
+      "A",
+      "B",
+      "C"
+    ],
+    "corpus_status": [
+      "planned",
+      "acquired",
+      "frozen",
+      "superseded"
+    ],
+    "yes_no": [
+      "yes",
+      "no"
+    ]
+  },
+  "tables": {
+    "protocol_deviations": {
+      "file": "sources/protocol_deviations.csv",
+      "key": "deviation_id",
+      "fields": {
+        "deviation_id": {
+          "required": true,
+          "pattern": "^DEV-\\d{3}$"
+        },
+        "date": {
+          "required": true,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "deviation_type": {
+          "required": true,
+          "enum": "deviation_type"
+        },
+        "venue_id": {
+          "fk": "search_venues.venue_id"
+        },
+        "description": {
+          "required": true
+        },
+        "reason": {
+          "required": true
+        },
+        "approved_by": {
+          "required": true
+        }
+      }
+    },
+    "search_venues": {
+      "file": "sources/search_venues.csv",
+      "key": "venue_id",
+      "fields": {
+        "venue_id": {
+          "required": true,
+          "pattern": "^VEN-\\d{3}$"
+        },
+        "category": {
+          "required": true,
+          "enum": "search_category"
+        },
+        "venue_class": {
+          "required": true,
+          "enum": "venue_class"
+        },
+        "institution": {
+          "required": true
+        },
+        "platform": {
+          "required": true
+        },
+        "url": {
+          "required": true
+        },
+        "access_method": {
+          "required": true,
+          "enum": "access_method"
+        },
+        "scope": {
+          "required": true
+        },
+        "date_checked": {
+          "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$"
+        },
+        "verification_status": {
+          "required": true,
+          "enum": "venue_verification_status"
+        },
+        "verification_evidence": {},
+        "verified_date": {
+          "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$"
+        },
+        "proposed_disposition": {
+          "enum": "proposed_disposition"
+        },
+        "venue_status": {
+          "required": true,
+          "enum": "venue_status"
+        },
+        "frozen_in_protocol_version": {},
+        "deviation_id": {
+          "fk": "protocol_deviations.deviation_id"
+        },
+        "notes": {}
+      }
+    },
+    "source_register": {
+      "file": "sources/source_register.csv",
+      "key": "source_id",
+      "fields": {
+        "source_id": {
+          "required": true,
+          "pattern": "^SRC-\\d{4}$"
+        },
+        "source_family_id": {
+          "pattern": "^(FAM-\\d{4})?$"
+        },
+        "source_version": {
+          "required": true,
+          "pattern": "^v\\d+$"
+        },
+        "code": {
+          "required": true,
+          "enum": "code_or_multi"
+        },
+        "title": {
+          "required": true
+        },
+        "translator": {
+          "required": true
+        },
+        "publisher": {
+          "required": true
+        },
+        "publication_year": {
+          "required": true,
+          "pattern": "^(unknown|\\d{4})$"
+        },
+        "publication_date": {
+          "pattern": "^(\\d{4}(-\\d{2}(-\\d{2})?)?)?$"
+        },
+        "edition_statement": {},
+        "source_type": {
+          "required": true,
+          "enum": "source_type"
+        },
+        "source_url_or_bibliographic_reference": {
+          "required": true
+        },
+        "authority_status": {
+          "required": true,
+          "enum": "authority_status"
+        },
+        "authority_evidence": {},
+        "provenance_status": {
+          "required": true,
+          "enum": "provenance_status"
+        },
+        "machine_readable": {
+          "required": true,
+          "enum": "machine_readable"
+        },
+        "coverage": {
+          "required": true,
+          "enum": "coverage_status"
+        },
+        "thai_version_reference": {
+          "required": true
+        },
+        "last_amending_act": {
+          "required": true
+        },
+        "effective_date": {
+          "required": true,
+          "pattern": "^(unknown|\\d{4}(-\\d{2}(-\\d{2})?)?)$"
+        },
+        "amendment_reference": {
+          "required": true
+        },
+        "notes": {},
+        "evidence_location": {
+          "required": true
+        },
+        "date_accessed": {
+          "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$"
+        },
+        "raw_file_sha256": {
+          "pattern": "^([0-9a-f]{64})?$"
+        },
+        "registered_by": {},
+        "pass1_extractor": {},
+        "pass2_verifier": {},
+        "verification_independence": {
+          "enum": "verification_independence"
+        },
+        "verification_outcome": {
+          "required": true,
+          "enum": "verification_outcome"
+        },
+        "conductor_review": {}
+      }
+    },
+    "source_coverage": {
+      "file": "sources/source_coverage.csv",
+      "key": "coverage_id",
+      "fields": {
+        "coverage_id": {
+          "required": true,
+          "pattern": "^COV-\\d{4}$"
+        },
+        "source_id": {
+          "required": true,
+          "fk": "source_register.source_id"
+        },
+        "code": {
+          "required": true,
+          "enum": "code"
+        },
+        "unit_type": {
+          "required": true,
+          "enum": "unit_type"
+        },
+        "unit_from": {},
+        "unit_to": {},
+        "coverage_status": {
+          "required": true,
+          "enum": "coverage_status"
+        },
+        "thai_version_reference": {},
+        "verification": {
+          "required": true,
+          "enum": "provenance_status"
+        },
+        "evidence_location": {},
+        "pass1_extractor": {},
+        "pass2_verifier": {},
+        "verification_independence": {
+          "enum": "verification_independence"
+        },
+        "verification_outcome": {
+          "required": true,
+          "enum": "verification_outcome"
+        },
+        "conductor_review": {},
+        "notes": {}
+      }
+    },
+    "search_log": {
+      "file": "sources/search_log.csv",
+      "key": "search_id",
+      "fields": {
+        "search_id": {
+          "required": true,
+          "pattern": "^SRCH-\\d{5}$"
+        },
+        "date": {
+          "required": true,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "code": {
+          "required": true,
+          "enum": "code"
+        },
+        "category": {
+          "required": true,
+          "enum": "search_category"
+        },
+        "venue_id": {
+          "required": true,
+          "fk": "search_venues.venue_id"
+        },
+        "query": {
+          "required": true
+        },
+        "language": {
+          "required": true
+        },
+        "result_count": {
+          "pattern": "^\\d*$"
+        },
+        "outcome": {
+          "required": true,
+          "enum": "search_outcome"
+        },
+        "source_ids": {
+          "fk_multi": "source_register.source_id"
+        },
+        "performer": {
+          "required": true
+        },
+        "deviation_id": {
+          "fk": "protocol_deviations.deviation_id"
+        },
+        "notes": {}
+      }
+    },
+    "exclusions": {
+      "file": "sources/exclusions.csv",
+      "key": "exclusion_id",
+      "fields": {
+        "exclusion_id": {
+          "required": true,
+          "pattern": "^EXC-\\d{4}$"
+        },
+        "date": {
+          "required": true,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "citation": {
+          "required": true
+        },
+        "exclusion_reason": {
+          "required": true,
+          "enum": "exclusion_reason"
+        },
+        "duplicate_of": {},
+        "notes": {}
+      }
+    },
+    "raw_manifest": {
+      "file": "sources/raw_manifest.csv",
+      "key": "filename",
+      "fields": {
+        "filename": {
+          "required": true
+        },
+        "source_id": {
+          "required": true,
+          "fk": "source_register.source_id"
+        },
+        "sha256": {
+          "required": true,
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "bytes": {
+          "required": true,
+          "pattern": "^\\d+$"
+        },
+        "added_on": {
+          "required": true,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        }
+      }
+    },
+    "thai_corpus_register": {
+      "file": "sources/thai_corpus_register.csv",
+      "key": "thai_corpus_id",
+      "fields": {
+        "thai_corpus_id": {
+          "required": true,
+          "pattern": "^THC-\\d{3}$"
+        },
+        "code": {
+          "required": true,
+          "enum": "code"
+        },
+        "corpus_version": {
+          "required": true,
+          "pattern": "^TCV-(CCC|PENAL|CIVPRO|CRIMPRO)-\\d{3}$"
+        },
+        "authority_source": {
+          "required": true
+        },
+        "source_url_or_reference": {
+          "required": true
+        },
+        "retrieval_date": {
+          "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$"
+        },
+        "last_amending_act_incorporated": {},
+        "as_of_date": {
+          "pattern": "^(\\d{4}(-\\d{2}(-\\d{2})?)?)?$"
+        },
+        "raw_file": {},
+        "sha256": {
+          "pattern": "^([0-9a-f]{64})?$"
+        },
+        "status": {
+          "required": true,
+          "enum": "corpus_status"
+        },
+        "frozen_date": {
+          "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$"
+        },
+        "superseded_by": {},
+        "notes": {}
+      }
+    },
+    "section_grid": {
+      "file": "corpus/section_grid.csv",
+      "key": [
+        "code",
+        "section"
+      ],
+      "fields": {
+        "code": {
+          "required": true,
+          "enum": "code"
+        },
+        "section": {
+          "required": true,
+          "pattern_ref": "section_label"
+        },
+        "statutory_order": {
+          "required": true,
+          "pattern": "^\\d+$"
+        },
+        "atlas_order": {
+          "required": true,
+          "pattern": "^\\d+$"
+        },
+        "provision_status": {
+          "required": true,
+          "enum": "provision_status"
+        },
+        "grid_status": {
+          "required": true,
+          "enum": "grid_status"
+        },
+        "grid_source": {
+          "required": true
+        },
+        "grid_source_key": {
+          "required": true
+        },
+        "grid_source_sha256": {
+          "required": true,
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "section_grid_reconciliation": {
+      "file": "sources/section_grid_reconciliation.csv",
+      "key": [
+        "code",
+        "section",
+        "thai_corpus_version"
+      ],
+      "fields": {
+        "code": {
+          "required": true,
+          "enum": "code"
+        },
+        "section": {
+          "required": true,
+          "pattern_ref": "section_label"
+        },
+        "thai_corpus_version": {
+          "required": true,
+          "pattern": "^TCV-(CCC|PENAL|CIVPRO|CRIMPRO)-\\d{3}$"
+        },
+        "atlas_present": {
+          "required": true,
+          "enum": "yes_no"
+        },
+        "authoritative_present": {
+          "required": true,
+          "enum": "yes_no_unknown"
+        },
+        "status": {
+          "required": true,
+          "enum": "reconciliation_status"
+        },
+        "authoritative_source": {},
+        "notes": {}
+      }
+    },
+    "article_level": {
+      "file": "corpus/article_level.csv",
+      "key": [
+        "code",
+        "section",
+        "thai_version",
+        "english_source_id",
+        "source_version"
+      ],
+      "fields": {
+        "code": {
+          "required": true,
+          "enum": "code"
+        },
+        "section": {
+          "required": true,
+          "pattern_ref": "section_label"
+        },
+        "thai_version": {
+          "required": true
+        },
+        "thai_effective_date": {
+          "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$"
+        },
+        "search_status": {
+          "required": true,
+          "enum": "search_status"
+        },
+        "english_source_id": {
+          "fk": "source_register.source_id"
+        },
+        "source_version": {
+          "pattern": "^(v\\d+)?$"
+        },
+        "english_text_available": {
+          "enum": "yes_no_unknown"
+        },
+        "coverage_status": {
+          "enum": "coverage_status"
+        },
+        "translation_status": {
+          "enum": "translation_status"
+        },
+        "authority_status": {
+          "enum": "authority_status"
+        },
+        "currency_status": {
+          "enum": "currency_status"
+        },
+        "traceability_status": {
+          "enum": "traceability_status"
+        },
+        "notes": {}
+      }
+    }
+  },
+  "patterns": {
+    "section_label": "^[1-9]\\d*(/[1-9]\\d*)?( [฀-๿]+(/[1-9]\\d*)?)?$",
+    "date_partial": "^(\\d{4}(-\\d{2}(-\\d{2})?)?)?$"
+  }
+}
