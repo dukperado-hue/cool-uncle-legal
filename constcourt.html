@@ -229,6 +229,8 @@ mark.hl{background:var(--gold-soft);color:var(--ink);padding:0 3px;border-radius
 .lec-table th,.lec-table td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
 .lec-table th{background:var(--gold-soft);color:var(--ink);font-weight:700}
 .lec-table td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+.lec-table--plain td:first-child{font-weight:400;white-space:normal}
+.lec-table--plain th,.lec-table--plain td{width:50%;line-height:1.7}
 
 footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)}
 .coffee-widget{
@@ -1002,7 +1004,7 @@ Binary Star Scenario — การต่อสู้ระหว่างพล�
 
 มีนักศึกษาถามว่า ถ้าฝรั่งเศสไม่ไว้ใจศาล ทำไมการตรวจตอนเป็นร่างจึงไม่ถือว่าทำลายเจตจำนงของประชาชน อาจารย์ตอบว่าเพราะขณะเป็น "ร่าง" ยังไม่ได้เป็นกฎหมายที่มีผลบังคับ และยังไม่ใช่เจตจำนงของประชาชนที่ส่งออกไปอย่างสมบูรณ์ การตรวจในชั้นนี้จึงไม่ใช่การทำลายเจตจำนงนั้น` },
       { heading: "ข้อดีและข้อจำกัดของการตรวจก่อนประกาศใช้ (สไลด์หน้า 3)",
-        table: { headers: ['ข้อดี (6 ประการ)', 'ข้อจำกัด (4 ประการ)'], rows: [
+        table: { plain: true, headers: ['ข้อดี (6 ประการ)', 'ข้อจำกัด (4 ประการ)'], rows: [
           ["1. เป็นการป้องกัน (Preventive) คุ้มครองสิทธิเสรีภาพล่วงหน้าก่อนกฎหมายบังคับใช้", "1. วัตถุของการตรวจไม่แน่นอน ร่างอาจถูกประมุขของรัฐยับยั้ง (Veto) หรือแก้ไขได้"],
           ["2. ไม่ต้องกังวลผลทางนิตินัย เพราะยังไม่มีผู้ได้รับผลกระทบ จึงไม่ต้องปวดหัวว่าคำวินิจฉัยจะย้อนหลังหรือไปข้างหน้า หรือต้องเว้นระยะก่อนบังคับ", "2. มีลักษณะเป็นการคาดเดา เพราะยังไม่มีข้อเท็จจริงจากการใช้กฎหมายจริง"],
           ["3. หลีกเลี่ยงปัญหาที่ศาลตีกรอบความหมายของกฎหมายว่า \"ไม่ขัดรัฐธรรมนูญถ้าตีความตามที่ศาลกำหนด\" แล้วผูกพันองค์กรอื่น", "3. โอกาสหลุดรอดสูง ถ้าไม่มีใครยื่นตรวจในชั้นร่างและประเทศนั้นไม่มีระบบตรวจหลังประกาศใช้ กฎหมายที่ขัดรัฐธรรมนูญก็บังคับต่อไปจนกว่าสภาจะแก้เอง"],
@@ -1375,7 +1377,7 @@ function renderImagesHtml(images, layout){
 }
 function renderTableHtml(t){
   if (!t) return '';
-  return `<table class="lec-table"><thead><tr>${t.headers.map(h => `<th>${escapeHtml(h)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(r => `<tr>${r.map(c => `<td>${escapeHtml(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+  return `<table class="lec-table${t.plain?' lec-table--plain':''}"><thead><tr>${t.headers.map(h => `<th>${escapeHtml(h)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(r => `<tr>${r.map(c => `<td>${escapeHtml(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
 }
 function renderLectureBlocks(l){
   if (l.blocks) {
