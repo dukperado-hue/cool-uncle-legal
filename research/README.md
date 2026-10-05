@@ -39,4 +39,6 @@ Paper 1: landscape, fragmentation, version divergence, status ambiguity, traceab
 
 ## Status
 
+**D1 seed inventory (2026-10-05, uncommitted):** 25 sources (16 `partially_verified` = existence confirmed from a document or catalogue record read by one pass; 9 `unverified` = lead seeds or unreadable records; none `verified`, Pass 2 pending), 17 leads (11 from the Conductor brief + 6 incidental), 40 coverage rows, 4 exclusions, 8 locally held raw PDFs (not committed; hashed in `sources/raw_manifest.csv`). Lead verification was targeted and is **not** protocol searching (`methodology/seed-inventory-log.md`). Derived views: `outputs/coverage_view.*`, `outputs/source_family_history.md`, `outputs/article_research_view.csv` (empty until article rows are IDENTIFIED). No translation gap is asserted anywhere.
+
 Protocol v0.3-draft, **not frozen**. Venue list: 40 proposed rows URL-verified 2026-10-05 (see `outputs/venue_review.md`), 4 proposed for withdrawal, awaiting Conductor freeze. No Thai authoritative corpus acquired; all grids PROXY. No searches run. SRC-0001 stays unverified: no PDF is held and none may be fabricated, inferred or placeholdered. Registry holds one placeholder source (SRC-0001, the incomplete CCC PDF), `unverified`. Article table: 3,089 `NOT_ASSESSED` skeleton rows.

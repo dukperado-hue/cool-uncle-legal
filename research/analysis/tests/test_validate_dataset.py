@@ -16,7 +16,12 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def clone():
     d = Path(tempfile.mkdtemp())
-    shutil.copytree(ROOT, d / "r", ignore=shutil.ignore_patterns("tests", "__pycache__"))
+    def ignore(dirpath, names):
+        skip = {n for n in names if n in ("tests", "__pycache__")}
+        if Path(dirpath).name == "raw":  # big third-party artefacts not needed (missing raw = warning only)
+            skip |= {n for n in names if n != ".gitkeep"}
+        return skip
+    shutil.copytree(ROOT, d / "r", ignore=ignore)
     return d / "r"
 
 
@@ -41,6 +46,11 @@ def edit(r, rel, fn):
 
 def errs(r):
     return vd.validate(r)[0]
+
+
+def real_warnings(w):
+    """Only warnings about the first register row (SRC-0001), the row the Verification tests edit."""
+    return [x for x in w if "source_register.csv:2:" in x]
 
 
 def has(errors, text):
@@ -89,6 +99,15 @@ class Dataset(unittest.TestCase):
                    coverage_status="partial", verification="unverified", verification_outcome="pending")
         write(r, "sources/source_coverage.csv", cols, [row])
         self.assertTrue(has(errs(r), "SRC-9999"))
+
+    def test_missing_raw_file_is_warning_not_error(self):
+        r = clone()
+        for p in (r / "sources/raw").iterdir():
+            if p.name != ".gitkeep":
+                p.unlink()
+        e, w, _ = vd.validate(r)
+        self.assertEqual(e, [])
+        self.assertTrue(any("not present locally" in x for x in w))
 
     def test_raw_unlisted_file(self):
         r = clone()
@@ -167,6 +186,14 @@ class Verification(unittest.TestCase):
                     verification_outcome="agreed")
         base.update(kw)
         edit(r, "sources/source_register.csv", lambda rows: rows[0].update(base))
+        if base["provenance_status"] == "verified" and base["pass2_verifier"]:
+            cols, rows = read(r, "sources/verification_claims.csv")
+            c = dict.fromkeys(cols, "")
+            c.update(claim_id="VC-9001", source_id="SRC-0001", field="title", pass1_value="t", pass2_value="t", result="confirmed",
+                     pass1_extractor=base["pass1_extractor"], pass2_verifier=base["pass2_verifier"],
+                     verification_independence=vd.derive_independence(base["pass1_extractor"], base["pass2_verifier"]),
+                     verified_date="2026-10-06", evidence="test", resolution_status="none")
+            write(r, "sources/verification_claims.csv", cols, [x for x in rows if x["source_id"] != "SRC-0001"] + [c])
         return r
 
     def test_independent_pass2_ok(self):
@@ -191,7 +218,7 @@ class Verification(unittest.TestCase):
 
     def test_independence_A_has_no_warning(self):
         e, w, _ = vd.validate(self.verified())
-        self.assertEqual((e, w), ([], []))
+        self.assertEqual((e, real_warnings(w)), ([], []))
 
     def test_human_pass2_is_A(self):
         r = self.verified(pass2_verifier="human:reviewer", verification_independence="A")
@@ -204,7 +231,7 @@ class Verification(unittest.TestCase):
         r = self.verified(provenance_status="unverified", evidence_location="PENDING", pass2_verifier="claude:run1",
                           verification_independence="C", verification_outcome="pending")
         e, w, _ = vd.validate(r)
-        self.assertEqual((e, w), ([], []))
+        self.assertEqual((e, real_warnings(w)), ([], []))
 
     def test_C_self_check_with_disputed_or_adjudicated_outcome_is_not_an_error(self):
         for outcome, review in (("disputed", ""), ("adjudicated", "Conductor 2026-10-06")):
@@ -250,9 +277,9 @@ class VersionModel(unittest.TestCase):
     def test_family_version_unique_reprint_vs_revision(self):
         r = clone()
         edit(r, "sources/source_register.csv", lambda rows: rows[0].update(source_family_id="FAM-0001"))
-        new_source(r, "SRC-0002", source_family_id="FAM-0001", source_version="v1")
+        new_source(r, "SRC-9002", source_family_id="FAM-0001", source_version="v1")
         self.assertTrue(has(errs(r), "family/version"))
-        edit(r, "sources/source_register.csv", lambda rows: rows[1].update(source_version="v2"))
+        edit(r, "sources/source_register.csv", lambda rows: rows[-1].update(source_version="v2"))
         self.assertEqual(errs(r), [])
 
 
@@ -565,8 +592,289 @@ class Src0001(unittest.TestCase):
         s = rows[0]
         self.assertEqual((s["source_id"], s["provenance_status"], s["verification_outcome"]), ("SRC-0001", "unverified", "pending"))
         self.assertEqual((s["translator"], s["publisher"], s["publication_year"], s["raw_file_sha256"]), ("unknown", "unknown", "unknown", ""))
-        self.assertEqual([p.name for p in (ROOT / "sources/raw").iterdir()], [".gitkeep"])
-        self.assertEqual(read(ROOT, "sources/raw_manifest.csv")[1], [])
+        self.assertEqual([m for m in read(ROOT, "sources/raw_manifest.csv")[1] if m["source_id"] == "SRC-0001"], [])
+        self.assertFalse([p for p in (ROOT / "sources/raw").iterdir() if p.name.startswith("SRC-0001")])
+
+
+class Leads(unittest.TestCase):
+    def test_conductor_leads_all_preserved_verbatim(self):
+        _, rows = read(ROOT, "sources/leads.csv")
+        by = {x["lead_id"]: x for x in rows}
+        for lid, needle in [("LD-001", "Yale"), ("LD-002", "NHRC"), ("LD-003", "Pinai Nanakorn"), ("LD-004", "Yongyut"),
+                            ("LD-005", "Netayasupha"), ("LD-006", "Korea Legislation"), ("LD-007", "ThaiLawOnline"),
+                            ("LD-008", "Amendment No. 29"), ("LD-009", "ThaiLawOnline"), ("LD-010", "Leeds"), ("LD-011", "Amendment No. 30")]:
+            self.assertIn(needle, by[lid]["lead_text"], lid)
+            self.assertEqual(by[lid]["origin"], "conductor_brief")
+
+    def test_no_lead_rejected_merely_for_not_being_found(self):
+        _, rows = read(ROOT, "sources/leads.csv")
+        self.assertFalse([x for x in rows if x["resolution"] == "rejected"])
+        self.assertTrue(all(x["resolution_notes"] for x in rows))
+
+    def test_confirmed_requires_resolved_source(self):
+        r = clone()
+        edit(r, "sources/leads.csv", lambda rows: next(x for x in rows if x["lead_id"] == "LD-007").update(resolved_source_ids=""))
+        self.assertTrue(has(errs(r), "requires resolved_source_ids"))
+
+    def test_rejected_requires_positive_evidence(self):
+        r = clone()
+        edit(r, "sources/leads.csv", lambda rows: rows[0].update(resolution="rejected", evidence=""))
+        self.assertTrue(has(errs(r), "only with positive evidence"))
+
+    def test_lead_source_links_must_be_bidirectional(self):
+        r = clone()
+        edit(r, "sources/source_register.csv", lambda rows: next(x for x in rows if x["source_id"] == "SRC-0007").update(lead_ids=""))
+        e = errs(r)
+        self.assertTrue(has(e, "does not list LD-003"))
+        self.assertTrue(has(e, "origin=prior_lead requires lead_ids"))
+
+    def test_unresolved_leads_remain_unverified_seeds(self):
+        _, regs = read(ROOT, "sources/source_register.csv")
+        by = {x["source_id"]: x for x in regs}
+        for sid in ("SRC-0007", "SRC-0008", "SRC-0009", "SRC-0016", "SRC-0017", "SRC-0021", "SRC-0025"):
+            self.assertEqual((by[sid]["origin"], by[sid]["provenance_status"], by[sid]["authority_status"]),
+                             ("prior_lead", "unverified", "unknown"), sid)
+
+
+class SeedInventoryFacts(unittest.TestCase):
+    def setUp(self):
+        _, regs = read(ROOT, "sources/source_register.csv")
+        self.by = {x["source_id"]: x for x in regs}
+        self.regs = regs
+
+    def test_no_source_is_official_and_government_published_is_distinct(self):
+        self.assertFalse([x for x in self.regs if x["authority_status"] == "official"])
+        self.assertEqual(self.by["SRC-0020"]["authority_status"], "government_published")
+        self.assertEqual(self.by["SRC-0020"]["authority_evidence"], "")
+
+    def test_only_two_records_verified_and_none_high_impact(self):
+        ver = {x["source_id"] for x in self.regs if x["provenance_status"] == "verified"}
+        self.assertEqual(ver, {"SRC-0006", "SRC-0012"})
+        for sid in ver:
+            self.assertNotEqual(self.by[sid]["coverage"], "full_code")
+            self.assertNotEqual(self.by[sid]["authority_status"], "official")
+
+    def test_four_version_dimensions_kept_apart(self):
+        s = self.by["SRC-0020"]
+        self.assertIn("(No. 30), B.E. 2560", s["last_amending_act"])
+        self.assertEqual(s["effective_date"], "2017")
+        self.assertEqual(s["publication_year"], "unknown")  # PDF creation date is not a publication date
+        self.assertIn("2560", s["thai_version_reference"])
+
+    def test_source_conflict_preserved_not_normalised(self):
+        s = self.by["SRC-0015"]
+        self.assertEqual(s["publication_year"], "unknown")
+        self.assertIn("B.E. 2510 (1977)", s["notes"])
+
+    def test_no_families_invented(self):
+        self.assertFalse([x for x in self.regs if x["source_family_id"]])
+        self.assertTrue(all(x["source_version"] == "v1" for x in self.regs))
+
+    def test_multi_source_is_single_row_with_four_code_coverage(self):
+        self.assertEqual(self.by["SRC-0018"]["code"], "MULTI")
+        _, cov = read(ROOT, "sources/source_coverage.csv")
+        self.assertEqual({c["code"] for c in cov if c["source_id"] == "SRC-0018"}, {"CCC", "PENAL", "CIVPRO", "CRIMPRO"})
+        self.assertEqual(len([x for x in self.regs if "thailawonline.com" in x["source_url_or_bibliographic_reference"]]), 1)
+
+    def test_amendment_only_coverage_uses_string_section_labels(self):
+        _, cov = read(ROOT, "sources/source_coverage.csv")
+        labs = {c["unit_from"] for c in cov if c["source_id"] == "SRC-0020" and c["unit_type"] == "single_section"}
+        self.assertTrue({"169/2", "199 \u0e17\u0e27\u0e34", "222/43", "7"} <= labs)
+        self.assertTrue(all(c["coverage_status"] == "amendment_only" for c in cov if c["source_id"] == "SRC-0020"))
+
+    def test_no_translation_gap_claims(self):
+        _, art = read(ROOT, "corpus/article_level.csv")
+        self.assertEqual({x["search_status"] for x in art}, {"NOT_ASSESSED"})
+
+    def test_raw_manifest_matches_files_when_present(self):
+        e, w, _ = vd.validate(ROOT)
+        self.assertEqual(e, [])
+        self.assertEqual([x for x in w if "same-family" not in x], [])  # all 8 raw files present locally and hash-correct
+
+    def test_thai_text_not_mojibake(self):
+        self.assertIn("\u0e1b\u0e23\u0e30\u0e21\u0e27\u0e25\u0e01\u0e0e\u0e2b\u0e21\u0e32\u0e22", self.by["SRC-0002"]["title"])
+
+
+class ResearchViews(unittest.TestCase):
+    def test_coverage_view_one_row_per_coverage_row(self):
+        import build_research_view as bv
+        cov = bv.coverage_view(ROOT)
+        self.assertEqual(len(cov), len(read(ROOT, "sources/source_coverage.csv")[1]))
+        row = next(x for x in cov if x["Source ID"] == "SRC-0020" and x["Section"] == "s.169/2")
+        self.assertIn("government_published", row["Status"])
+        self.assertTrue(row["Current?"].startswith("amendment-only"))
+
+    def test_current_is_never_asserted_without_authoritative_corpus(self):
+        import build_research_view as bv
+        for x in bv.coverage_view(ROOT):
+            self.assertNotIn(x["Current?"], ("current", "yes"))
+
+    def test_article_view_maps_conceptual_fields_by_join(self):
+        import build_research_view as bv
+        r = clone()
+        edit(r, "corpus/article_level.csv", lambda rows: rows[0].update(
+            search_status="IDENTIFIED", english_source_id="SRC-0010", source_version="v1", english_text_available="yes",
+            coverage_status="full_code", translation_status="translated", authority_status="unknown", currency_status="pre_amendment",
+            traceability_status="traceable_to_source", previous_translation_source_id="SRC-0011", audit_status="audited_consistent",
+            audit_date="2026-10-06", thai_version="TCV-CCC-001"))
+        self.assertEqual(errs(r), [])
+        v = bv.article_view(r)
+        self.assertEqual(len(v), 1)
+        self.assertEqual((v[0]["Code"], v[0]["Section"], v[0]["Previous translation"], v[0]["Audit status"], v[0]["Version"]),
+                         ("CCC", "1", "SRC-0011", "audited_consistent", "v1"))
+        self.assertIn("reference only", v[0]["Thai authoritative text"])
+        self.assertEqual(v[0]["Translator"], "unknown")
+
+    def test_family_history_states_no_families(self):
+        import build_research_view as bv
+        self.assertIn("None. No source family has been established", bv.family_history(ROOT))
+
+    def test_audit_rules(self):
+        r = clone()
+        edit(r, "corpus/article_level.csv", lambda rows: rows[0].update(audit_date="2026-10-06"))
+        self.assertTrue(has(errs(r), "audit_date requires audit_status"))
+        r = clone()
+        edit(r, "corpus/article_level.csv", lambda rows: rows[0].update(
+            search_status="IDENTIFIED", english_source_id="SRC-0010", source_version="v1", english_text_available="yes",
+            coverage_status="full_code", translation_status="translated", authority_status="unknown", currency_status="unknown",
+            traceability_status="unknown", previous_translation_source_id="SRC-0010"))
+        self.assertTrue(has(errs(r), "must differ from english_source_id"))
+
+
+class Pass2Results(unittest.TestCase):
+    def setUp(self):
+        _, regs = read(ROOT, "sources/source_register.csv")
+        self.by = {x["source_id"]: x for x in regs}
+        _, self.claims = read(ROOT, "sources/verification_claims.csv")
+        _, self.cov = read(ROOT, "sources/source_coverage.csv")
+        _, self.leads = read(ROOT, "sources/leads.csv")
+        self.lead = {x["lead_id"]: x for x in self.leads}
+
+    SIXTEEN = ["SRC-0002", "SRC-0003", "SRC-0004", "SRC-0006", "SRC-0010", "SRC-0011", "SRC-0012", "SRC-0013",
+               "SRC-0014", "SRC-0015", "SRC-0018", "SRC-0019", "SRC-0020", "SRC-0022", "SRC-0023", "SRC-0024"]
+
+    def test_all_sixteen_have_pass2_with_independence_B_and_claims(self):
+        for sid in self.SIXTEEN:
+            s = self.by[sid]
+            self.assertEqual(s["verification_independence"], "B", sid)
+            self.assertTrue(s["pass2_verifier"].startswith("claude:cli-pass2-"), sid)
+            self.assertNotEqual(s["pass1_extractor"], s["pass2_verifier"], sid)
+            self.assertIn(s["provenance_status"], ("verified", "partially_verified"), sid)
+            self.assertTrue([c for c in self.claims if c["source_id"] == sid], sid)
+
+    def test_pass1_and_pass2_provenance_kept_separately_per_claim(self):
+        for c in self.claims:
+            if c["source_id"] != "SRC-0001":
+                self.assertNotEqual(c["pass1_extractor"], c["pass2_verifier"])
+                self.assertEqual(c["verification_independence"], "B")
+            self.assertTrue(c["pass1_value"] and c["pass2_value"])
+
+    def test_src0001_stays_unverified_with_c_self_check_only(self):
+        s = self.by["SRC-0001"]
+        self.assertEqual((s["provenance_status"], s["verification_outcome"], s["raw_file_sha256"]), ("unverified", "pending", ""))
+        cl = [c for c in self.claims if c["source_id"] == "SRC-0001"]
+        self.assertEqual([(c["result"], c["verification_independence"], c["resolution_status"]) for c in cl], [("unresolved", "C", "open")])
+
+    def test_pass1_error_srcs_corrected_not_silently(self):
+        # SRC-0019 year was recorded as 1977 although the list prints B.E. 2519 (1977)
+        self.assertEqual(self.by["SRC-0019"]["publication_year"], "unknown")
+        rej = [c for c in self.claims if c["source_id"] == "SRC-0019" and c["result"] == "rejected"]
+        self.assertEqual(len(rej), 1)
+        self.assertEqual(rej[0]["resolution_status"], "resolved_by_evidence")
+        self.assertIn("CORRECTION", self.by["SRC-0019"]["notes"])
+        # SRC-0012 truncation
+        self.assertEqual(self.by["SRC-0012"]["coverage"], "partial")
+        rows = [c for c in self.cov if c["source_id"] == "SRC-0012" and c["unit_type"] == "section_range"]
+        self.assertEqual([(r["unit_from"], r["unit_to"], r["verification"]) for r in rows], [("1", "335", "verified")])
+
+    def test_lead_note_corrected_act_29_exists_but_oag_unconfirmed(self):
+        n = self.lead["LD-008"]["resolution_notes"]
+        self.assertIn("(No. 29), B.E. 2558", n)
+        self.assertIn("CORRECTION", n)
+        self.assertEqual(self.lead["LD-008"]["resolution"], "unresolved")
+        self.assertIn("No. 29", self.by["SRC-0020"]["amendment_reference"])
+
+    def test_source_conflicts_remain_open_not_resolved_by_guess(self):
+        open_ = {(c["source_id"], c["field"]) for c in self.claims if c["resolution_status"] in ("open", "conductor_pending")}
+        for k in [("SRC-0015", "publication_year"), ("SRC-0019", "publication_year"), ("SRC-0003", "publication_year"),
+                  ("SRC-0013", "publication_year"), ("SRC-0023", "publication_year"), ("SRC-0020", "coverage")]:
+            self.assertIn(k, open_)
+        self.assertEqual(self.by["SRC-0015"]["publication_year"], "unknown")
+        for sid in ("SRC-0003", "SRC-0013", "SRC-0023"):
+            self.assertEqual(self.by[sid]["verification_outcome"], "disputed", sid)
+
+    def test_no_family_inferred_from_text_similarity(self):
+        self.assertFalse([x for x in self.by.values() if x["source_family_id"]])
+        rel = [c for c in self.claims if c["field"] == "relationship" and c["source_id"] in ("SRC-0010", "SRC-0011", "SRC-0012")]
+        self.assertEqual({c["result"] for c in rel}, {"not_stated"})
+
+    def test_verified_does_not_imply_full_coverage(self):
+        import build_research_view as bv
+        for sid in ("SRC-0006", "SRC-0012"):
+            self.assertEqual(self.by[sid]["coverage"], "partial")
+            self.assertIn("Coverage remains PARTIAL", self.by[sid]["version_notes"])
+            self.assertIn("NOT verification of full-Code coverage", self.by[sid]["notes"])
+            rows = [c for c in self.cov if c["source_id"] == sid]
+            self.assertFalse([c for c in rows if c["coverage_status"] == "full_code"])
+        for x in bv.coverage_view(ROOT):
+            if x["Source ID"] in ("SRC-0006", "SRC-0012"):
+                self.assertIn("(not completeness)", x["Status"])
+                self.assertIn("coverage partial", x["Status"])
+
+    def test_verified_records_have_no_open_claims(self):
+        for sid in ("SRC-0006", "SRC-0012"):
+            for c in [c for c in self.claims if c["source_id"] == sid]:
+                self.assertNotIn(c["resolution_status"], ("open", "conductor_pending"))
+                self.assertNotEqual(c["result"], "unresolved")
+
+    def test_full_code_records_not_promoted_without_conductor_review(self):
+        for sid in ("SRC-0010", "SRC-0011", "SRC-0018", "SRC-0024"):
+            self.assertEqual(self.by[sid]["provenance_status"], "partially_verified")
+            self.assertEqual(self.by[sid]["conductor_review"], "")
+
+    def test_new_sources_from_pass2_are_not_overclaimed(self):
+        self.assertEqual(self.by["SRC-0027"]["provenance_status"], "unverified")
+        self.assertEqual(self.by["SRC-0026"]["verification_outcome"], "pending")
+        self.assertEqual(self.by["SRC-0026"]["pass2_verifier"], "")
+
+    def test_ccc_samuiforsale_books_v_vi_present_in_coverage_rows(self):
+        rows = [c for c in self.cov if c["source_id"] == "SRC-0006" and c["unit_type"] == "section_range"
+                and int(c["unit_to"]) - int(c["unit_from"]) < 1000]  # exclude the 1-1755 span row
+        self.assertTrue(any(int(r["unit_from"]) <= 1435 and int(r["unit_to"]) >= 1598 for r in rows))
+        self.assertTrue(any(int(r["unit_from"]) <= 1599 and int(r["unit_to"]) >= 1610 for r in rows))
+        self.assertFalse(any(int(r["unit_from"]) <= 900 <= int(r["unit_to"]) for r in rows))  # 856-1011 gap
+
+    # --- validator rules for the claims table
+    def test_rejected_or_unresolved_claim_needs_resolution_status(self):
+        r = clone()
+        edit(r, "sources/verification_claims.csv", lambda rows: next(x for x in rows if x["result"] == "unresolved").update(resolution_status="none"))
+        self.assertTrue(has(errs(r), "requires resolution_status other than 'none'"))
+
+    def test_verified_blocked_by_open_claim(self):
+        r = clone()
+        edit(r, "sources/source_register.csv", lambda rows: next(x for x in rows if x["source_id"] == "SRC-0006").update())
+        cols, rows = read(r, "sources/verification_claims.csv")
+        c = dict.fromkeys(cols, "")
+        c.update(claim_id="VC-9999", source_id="SRC-0006", field="coverage", pass1_value="a", pass2_value="b", result="unresolved",
+                 pass1_extractor="claude:x", pass2_verifier="claude:cli-pass2-C-2026-10-05", verification_independence="B",
+                 verified_date="2026-10-06", evidence="e", resolution_status="open")
+        write(r, "sources/verification_claims.csv", cols, rows + [c])
+        self.assertTrue(has(errs(r), "'verified' but claims remain"))
+
+    def test_agreed_outcome_cannot_hide_conductor_pending(self):
+        r = clone()
+        edit(r, "sources/source_register.csv", lambda rows: next(x for x in rows if x["source_id"] == "SRC-0003").update(verification_outcome="agreed"))
+        self.assertTrue(has(errs(r), "should be 'disputed'"))
+
+    def test_claim_independence_must_match_actors(self):
+        r = clone()
+        edit(r, "sources/verification_claims.csv", lambda rows: rows[0].update(verification_independence="A"))
+        self.assertTrue(has(errs(r), "actors imply B"))
+
+    def test_verified_requires_claims(self):
+        r = clone()
+        edit(r, "sources/verification_claims.csv", lambda rows: [x.update(source_id="SRC-0002") for x in rows if x["source_id"] == "SRC-0006"])
+        self.assertTrue(has(errs(r), "requires recorded per-claim Pass 2 results"))
 
 
 if __name__ == "__main__":

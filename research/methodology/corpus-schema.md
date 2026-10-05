@@ -33,6 +33,10 @@ Grain: one row per **(code, section, thai_version, english_source_id, source_ver
 | `authority_status` | from source; section-level override only with evidence in `notes` |
 | `currency_status` | `current_to_thai_version | pre_amendment | superseded | unknown` |
 | `traceability_status` | `traceable_to_page | traceable_to_source | not_traceable | unknown` |
+| `previous_translation_source_id` | optional FK to the source this translation superseded/replaced for this section (must differ from `english_source_id`) |
+| `audit_status`, `audit_date` | `not_audited | audited_consistent | audited_discrepancy | disputed`; `audit_date` requires a status other than `not_audited` |
+
+**Research-view mapping** (`analysis/build_research_view.py`, derived outputs only): Code/Section ← code/section; *Thai authoritative text* and *English translation* are **referenced, never stored** here (Thai corpus version / `corpus/text/<source_id>/`); Source Thai ← `thai_version`; Effective date ← `thai_effective_date`; Last amendment, Translator ← joined from `source_register`; Previous translation ← `previous_translation_source_id`; Translation status ← `translation_status`; Terminology ← future term-level table (not stored); Audit status/date ← audit fields; Version ← `source_version`.
 | `notes` | |
 
 ### `search_status` semantics

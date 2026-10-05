@@ -1,0 +1,7 @@
+# Third-party raw artefacts are preserved locally and pinned by SHA-256 in sources/raw_manifest.csv,
+# but are NOT committed (copyright; the repository is published). Metadata/provenance IS committed.
+sources/raw/*
+!sources/raw/.gitkeep
+sources/thai_corpus/*
+!sources/thai_corpus/.gitkeep
+__pycache__/

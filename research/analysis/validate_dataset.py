@@ -174,6 +174,60 @@ def validate(root):
             errors.append(f"possible duplicate sources {sig[s]} and {r['source_id']} (same title/translator/publisher/year/version)")
         sig[s] = r["source_id"]
 
+    # ---- per-claim Pass 1 / Pass 2 provenance (kept separate; Pass 1 evidence is never overwritten)
+    claims_by_src = {}
+    for i, c in enumerate(tables.get("verification_claims", []), start=2):
+        w = f"sources/verification_claims.csv:{i}"
+        claims_by_src.setdefault(c["source_id"], []).append(c)
+        derived = derive_independence(c["pass1_extractor"], c["pass2_verifier"])
+        if c["verification_independence"] != derived:
+            errors.append(f"{w}: verification_independence={c['verification_independence']} but actors imply {derived}")
+        if c["result"] in ("rejected", "unresolved") and c["resolution_status"] == "none":
+            errors.append(f"{w}: result={c['result']} requires resolution_status other than 'none' (conflicts are kept and tracked)")
+        if c["result"] in ("confirmed", "not_stated") and c["resolution_status"] not in ("none", "resolved_by_evidence"):
+            errors.append(f"{w}: result={c['result']} must not carry an open resolution_status")
+        if c["result"] == "rejected" and not c["notes"].strip():
+            errors.append(f"{w}: rejected claim requires notes (what the evidence shows)")
+    for sid, s in reg.items():
+        cl = claims_by_src.get(sid, [])
+        if s["provenance_status"] == "verified":
+            if not cl:
+                errors.append(f"source {sid}: 'verified' requires recorded per-claim Pass 2 results (verification_claims)")
+            bad = [c["claim_id"] for c in cl if c["result"] == "unresolved"
+                   or (c["result"] == "rejected" and c["resolution_status"] != "resolved_by_evidence")
+                   or c["resolution_status"] in ("open", "conductor_pending")]
+            if bad:
+                errors.append(f"source {sid}: 'verified' but claims remain rejected/unresolved/open: {bad}")
+            if any(derive_independence(c["pass1_extractor"], c["pass2_verifier"]) == "C" for c in cl):
+                errors.append(f"source {sid}: 'verified' relies on a C (same-run/self-check) claim")
+        if s["verification_outcome"] == "agreed" and any(c["resolution_status"] == "conductor_pending" for c in cl):
+            errors.append(f"source {sid}: verification_outcome=agreed but a claim awaits Conductor adjudication (should be 'disputed')")
+        if s["verification_outcome"] == "disputed" and cl and not any(c["resolution_status"] in ("conductor_pending", "open") or c["result"] == "rejected" for c in cl):
+            errors.append(f"source {sid}: verification_outcome=disputed but no claim records a dispute")
+
+    # ---- leads <-> sources (prior findings are preserved, never silently dropped)
+    leads = {r["lead_id"]: r for r in tables.get("leads", [])}
+    for i, r in enumerate(tables.get("leads", []), start=2):
+        w = f"sources/leads.csv:{i}"
+        res = r["resolution"]
+        if res in ("confirmed", "partially_confirmed", "corrected") and not r["resolved_source_ids"].strip():
+            errors.append(f"{w}: resolution={res} requires resolved_source_ids")
+        if res == "rejected" and not r["evidence"].strip():
+            errors.append(f"{w}: a lead may be 'rejected' only with positive evidence; failure to find is 'unresolved'")
+        for sid in [x.strip() for x in r["resolved_source_ids"].split(";") if x.strip()]:
+            s = reg.get(sid)
+            if s and r["lead_id"] not in [x.strip() for x in s["lead_ids"].split(";")]:
+                errors.append(f"{w}: resolved source {sid} does not list {r['lead_id']} in lead_ids")
+    for sid, s in reg.items():
+        w = f"source {sid}"
+        ids = [x.strip() for x in s["lead_ids"].split(";") if x.strip()]
+        if s["origin"] == "prior_lead" and not ids:
+            errors.append(f"{w}: origin=prior_lead requires lead_ids")
+        for lid in ids:
+            ld = leads.get(lid)
+            if ld and sid not in [x.strip() for x in ld["resolved_source_ids"].split(";")]:
+                errors.append(f"{w}: lists {lid} but that lead's resolved_source_ids does not include it")
+
     # ---- coverage rules (one-to-many Code coverage lives here, never via duplicate sources)
     cov_by_src = {}
     for i, r in enumerate(tables.get("source_coverage", []), start=2):
@@ -189,7 +243,8 @@ def validate(root):
                     errors.append(f"{w}: {f}={r[f]!r} is not a valid section label (strings only, e.g. '1', '1/1')")
         if r["unit_type"] == "single_section" and r["unit_to"] and r["unit_to"] != r["unit_from"]:
             errors.append(f"{w}: single_section must not have a different unit_to")
-        check_verification(w, r, r["coverage_status"] == "full_code", errors, warnings)
+        # row-level B notices are not repeated per coverage row; the source-level warning carries them
+        check_verification(w, r, r["coverage_status"] == "full_code", errors, [])
     for sid, src in reg.items():
         rows = cov_by_src.get(sid, [])
         if src["coverage"] == "full_code" and rows and not any(c["unit_type"] == "whole_code" for c in rows):
@@ -333,6 +388,10 @@ def validate(root):
     for i, r in enumerate(tables.get("article_level", []), start=2):
         w = f"corpus/article_level.csv:{i}"
         st = r["search_status"]
+        if r["audit_date"] and r["audit_status"] in ("", "not_audited"):
+            errors.append(f"{w}: audit_date requires audit_status other than not_audited")
+        if r["previous_translation_source_id"] and r["previous_translation_source_id"] == r["english_source_id"]:
+            errors.append(f"{w}: previous_translation_source_id must differ from english_source_id")
         if grid and (r["code"], r["section"]) not in grid:
             errors.append(f"{w}: section {r['section']!r} not in section_grid for {r['code']}")
         if st == "IDENTIFIED":
@@ -357,7 +416,8 @@ def validate(root):
     for i, r in enumerate(tables.get("raw_manifest", []), start=2):
         p = root / "sources/raw" / r["filename"]
         if not p.exists():
-            errors.append(f"sources/raw_manifest.csv:{i}: {r['filename']} missing from sources/raw")
+            # raw third-party artefacts are kept out of git (see research/.gitignore); the manifest hash still pins them
+            warnings.append(f"sources/raw_manifest.csv:{i}: {r['filename']} not present locally (raw files are not committed; restore it to re-verify the hash)")
             continue
         if hashlib.sha256(p.read_bytes()).hexdigest() != r["sha256"]:
             errors.append(f"sources/raw_manifest.csv:{i}: SHA-256 mismatch for {r['filename']} (raw file modified?)")

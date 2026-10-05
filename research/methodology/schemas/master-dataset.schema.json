@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.3-draft",
+  "schema_version": "0.5-draft",
   "$comment": "Lightweight table schema read by analysis/validate_dataset.py (stdlib only). 'enum' lists are controlled vocabularies; 'required' = non-empty; 'fk' = foreign key ('fk_multi' = ';'-separated list). Section identifiers are ALWAYS strings (pattern 'section_label'). Cross-field rules live in the validator and are described in methodology/*.md.",
   "vocab": {
     "code": [
@@ -85,7 +85,8 @@
       "X2",
       "X3",
       "X4",
-      "X5"
+      "X5",
+      "X6"
     ],
     "yes_no_unknown": [
       "yes",
@@ -193,9 +194,102 @@
     "yes_no": [
       "yes",
       "no"
+    ],
+    "origin": [
+      "prior_lead",
+      "project_holding",
+      "newly_found"
+    ],
+    "lead_resolution": [
+      "confirmed",
+      "partially_confirmed",
+      "corrected",
+      "unresolved",
+      "noted_not_examined",
+      "rejected"
+    ],
+    "lead_origin": [
+      "conductor_brief",
+      "incidental"
+    ],
+    "audit_status": [
+      "not_audited",
+      "audited_consistent",
+      "audited_discrepancy",
+      "disputed"
+    ],
+    "claim_result": [
+      "confirmed",
+      "rejected",
+      "unresolved",
+      "not_stated"
+    ],
+    "claim_resolution": [
+      "none",
+      "open",
+      "resolved_by_evidence",
+      "conductor_pending"
+    ],
+    "claim_field": [
+      "title",
+      "creator",
+      "publisher",
+      "publication_year",
+      "edition",
+      "code_covered",
+      "coverage",
+      "amendment_coverage",
+      "thai_version",
+      "existence",
+      "accessibility",
+      "authority",
+      "relationship",
+      "language",
+      "extent",
+      "isbn",
+      "other"
     ]
   },
   "tables": {
+    "leads": {
+      "file": "sources/leads.csv",
+      "key": "lead_id",
+      "fields": {
+        "lead_id": {
+          "required": true,
+          "pattern": "^LD-\\d{3}$"
+        },
+        "code": {
+          "required": true,
+          "enum": "code_or_multi"
+        },
+        "origin": {
+          "required": true,
+          "enum": "lead_origin"
+        },
+        "lead_text": {
+          "required": true
+        },
+        "lead_received": {
+          "required": true,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "resolution": {
+          "required": true,
+          "enum": "lead_resolution"
+        },
+        "resolved_source_ids": {
+          "fk_multi": "source_register.source_id"
+        },
+        "resolution_notes": {
+          "required": true
+        },
+        "evidence": {},
+        "resolved_date": {
+          "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$"
+        }
+      }
+    },
     "protocol_deviations": {
       "file": "sources/protocol_deviations.csv",
       "key": "deviation_id",
@@ -298,6 +392,13 @@
           "required": true,
           "pattern": "^v\\d+$"
         },
+        "origin": {
+          "required": true,
+          "enum": "origin"
+        },
+        "lead_ids": {
+          "fk_multi": "leads.lead_id"
+        },
         "code": {
           "required": true,
           "enum": "code_or_multi"
@@ -356,6 +457,8 @@
         "amendment_reference": {
           "required": true
         },
+        "amendment_coverage": {},
+        "version_notes": {},
         "notes": {},
         "evidence_location": {
           "required": true
@@ -379,6 +482,56 @@
         "conductor_review": {}
       }
     },
+    "verification_claims": {
+      "file": "sources/verification_claims.csv",
+      "key": "claim_id",
+      "fields": {
+        "claim_id": {
+          "required": true,
+          "pattern": "^VC-\\d{4}$"
+        },
+        "source_id": {
+          "required": true,
+          "fk": "source_register.source_id"
+        },
+        "field": {
+          "required": true,
+          "enum": "claim_field"
+        },
+        "pass1_value": {
+          "required": true
+        },
+        "pass2_value": {
+          "required": true
+        },
+        "result": {
+          "required": true,
+          "enum": "claim_result"
+        },
+        "pass1_extractor": {
+          "required": true
+        },
+        "pass2_verifier": {
+          "required": true
+        },
+        "verification_independence": {
+          "required": true,
+          "enum": "verification_independence"
+        },
+        "verified_date": {
+          "required": true,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "evidence": {
+          "required": true
+        },
+        "resolution_status": {
+          "required": true,
+          "enum": "claim_resolution"
+        },
+        "notes": {}
+      }
+    },
     "source_coverage": {
       "file": "sources/source_coverage.csv",
       "key": "coverage_id",
@@ -399,6 +552,8 @@
           "required": true,
           "enum": "unit_type"
         },
+        "book": {},
+        "chapter": {},
         "unit_from": {},
         "unit_to": {},
         "coverage_status": {
@@ -675,6 +830,9 @@
         "english_source_id": {
           "fk": "source_register.source_id"
         },
+        "previous_translation_source_id": {
+          "fk": "source_register.source_id"
+        },
         "source_version": {
           "pattern": "^(v\\d+)?$"
         },
@@ -695,6 +853,12 @@
         },
         "traceability_status": {
           "enum": "traceability_status"
+        },
+        "audit_status": {
+          "enum": "audit_status"
+        },
+        "audit_date": {
+          "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$"
         },
         "notes": {}
       }
