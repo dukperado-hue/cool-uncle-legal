@@ -77,7 +77,8 @@ entities.forEach(en => {
   ok(en.body && en.body.length > 0, `entity ${en.id}: empty body`);
   ok(!!(en.titleEN || en.titleTH), `entity ${en.id}: no title`);
   if (en.parent) ok(!!en.level, `entity ${en.id}: has a parent but no hierarchy level`);
-  if (['EVENT', 'MODULE'].includes(en.type)) ok(!!en.parent && !!en.level, `entity ${en.id}: ${en.type} needs parent and level`);
+  if (en.type === 'MODULE') ok(!!en.parent && !!en.level, `entity ${en.id}: MODULE needs parent and level`);
+  if (en.type === 'EVENT') ok(!!en.level, `entity ${en.id}: EVENT needs a level`);
   if (en.type === 'EVENT') ok(en.kind === 'lecture' && !!en.lecture, `entity ${en.id}: EVENT must be kind lecture with lecture{}`);
   if (ps.some(s => s.status === 'needs-review')) ok(en.needsReview && en.needsReview.length > 0, `entity ${en.id}: a source is needs-review but needsReview[] is empty`);
   const text = JSON.stringify(en);

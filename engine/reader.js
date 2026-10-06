@@ -100,7 +100,7 @@
       var kn = el('span', 'chip');
       kn.appendChild(Engine.icons.node(ent.kind)); kn.appendChild(document.createTextNode(' ' + (KIND_LABEL[ent.kind] || ent.kind)));
       kinds.appendChild(kn);
-      if (ent.type) kinds.appendChild(el('span', 'chip', TYPE_LABEL[ent.type] || ent.type));
+      if (ent.type && (TYPE_LABEL[ent.type] || ent.type) !== (KIND_LABEL[ent.kind] || ent.kind)) kinds.appendChild(el('span', 'chip', TYPE_LABEL[ent.type] || ent.type));
       (ent.subjects || []).forEach(function (sid) {
         var s = ctx.subjects && ctx.subjects[sid];
         kinds.appendChild(el('a', 'chip', s ? s.titleTH : sid, { href: ctx.subjectHref ? ctx.subjectHref(sid) : '#' }));

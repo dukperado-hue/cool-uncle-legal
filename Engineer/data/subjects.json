@@ -346,7 +346,7 @@
    "titleTH": "ความล้มเหลวของระบบและส่วนประกอบอากาศยาน (SCF)",
    "icon": "airworthiness",
    "status": "seeded",
-   "summary": "ชุดความรู้แรกจากโครงการ FSF AP-CAS: SCF-NP/SCF-PP, ชุดเว็บบินาร์และเวิร์กชอป continuing airworthiness, OAIN และการสอบสวนเชิงโครงสร้าง (ฉบับร่าง ระหว่างตรวจทาน)",
+   "summary": "เว็บบินาร์ FSF AP-CAS เรื่อง System Component Failures และการกำกับดูแลตามความเสี่ยง — บันทึกบรรยาย แบบฝึกหัด และสองแนวคิดหลัก (ฉบับร่าง ระหว่างตรวจทาน)",
    "declaredSources": [
     {
      "name": "Flight Safety Foundation SCF-NP / SCF-PP (NotebookLM d6c1966b, 28 sources read)",
