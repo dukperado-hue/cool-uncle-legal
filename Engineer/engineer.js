@@ -10,7 +10,7 @@
 (function (global) {
   'use strict';
   var Engine = global.Engine, el = Engine.el;
-  var V = '20261006e';                                  /* data cache-bust token: bump on content updates */
+  var V = '20261006f';                                  /* data cache-bust token: bump on content updates */
   var BASE = new URL('./', document.currentScript.src).href;     /* .../Engineer/ */
 
   Engine.icons.register('engineer', {

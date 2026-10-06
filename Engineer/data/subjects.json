@@ -345,8 +345,8 @@
    "titleEN": "System Component Failures (SCF-NP / SCF-PP)",
    "titleTH": "ความล้มเหลวของระบบและส่วนประกอบอากาศยาน (SCF)",
    "icon": "airworthiness",
-   "status": "seeded",
-   "summary": "เว็บบินาร์ FSF AP-CAS เรื่อง System Component Failures และการกำกับดูแลตามความเสี่ยง — บันทึกบรรยาย แบบฝึกหัด และสองแนวคิดหลัก (ฉบับร่าง ระหว่างตรวจทาน)",
+   "status": "planned",
+   "summary": "Coming soon — กำลังเตรียมเนื้อหา",
    "declaredSources": [
     {
      "name": "Flight Safety Foundation SCF-NP / SCF-PP (NotebookLM d6c1966b, 28 sources read)",
