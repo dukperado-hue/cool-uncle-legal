@@ -1,0 +1,46 @@
+{
+ "world": "engineer",
+ "version": "1",
+ "note": "Index of the Engineer world's data. Nothing here is content: it points at files. 'shards' are entity files (loaded lazily, one per theme/subject as the corpus grows). 'external' entries POINT at data that already lives elsewhere in the repository -- they are never copied into Engineer/ (single source of truth).",
+ "subjects": "subjects.json",
+ "shards": [
+  {
+   "id": "demo-real",
+   "path": "entities/demo-real.json",
+   "note": "first entities, built only from material already in this repository"
+  }
+ ],
+ "external": {
+  "dictionaries": [
+   {
+    "id": "abbr",
+    "path": "../dictionary-aviation-abbr.json",
+    "title": "คำย่อ aviation",
+    "owner": "legal-atlas-site",
+    "status": "draft-ai-assisted"
+   },
+   {
+    "id": "terms",
+    "path": "../dictionary-aviation-terms.json",
+    "title": "ศัพท์ aviation",
+    "owner": "legal-atlas-site",
+    "status": "draft-ai-assisted"
+   }
+  ],
+  "sourceRegistries": [
+   {
+    "id": "av-sources",
+    "path": "../aviation/sources/av-sources.json",
+    "title": "Aviation source registry (raw layer)",
+    "owner": "aviation/",
+    "publicFilter": {
+     "field": "redistribution.status",
+     "equals": "public-source"
+    }
+   }
+  ]
+ },
+ "publicPages": [
+  "home"
+ ]
+}

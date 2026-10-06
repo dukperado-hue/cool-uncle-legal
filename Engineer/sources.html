@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>แหล่งข้อมูล · Engineer</title>
+<meta name="description" content="แหล่งข้อมูลของ Engineer">
+<link rel="icon" href="../icons/favicon-32.png" sizes="32x32">
+<link rel="stylesheet" href="../engine/theme.css?v=20261006a">
+</head>
+<body>
+<!-- Shared chrome (topbar, nav, footer) is mounted by engine/shell.js. No colours or layout rules live in this page. -->
+<div class="wrap">
+  <div id="engine-nav"></div>
+  <header class="reader-head" style="max-width:860px;margin:10px auto"><h1 style="font-size:26px">แหล่งข้อมูล</h1><div class="reader-sub">สิ่งที่ใช้อยู่แล้ว และสิ่งที่ผู้จัดทำประกาศไว้แต่ยังไม่ได้ตรวจ</div></header>
+  <div id="sources" class="reader"></div>
+  <div id="engine-footer"></div>
+</div>
+<script src="../engine/core.js?v=20261006a"></script>
+<script src="../engine/shell.js?v=20261006a"></script>
+<script src="../engine/reader.js?v=20261006a"></script>
+<script src="engineer.js?v=20261006a"></script>
+<script>Engineer.pages.sources();</script>
+</body>
+</html>

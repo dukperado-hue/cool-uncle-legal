@@ -1,0 +1,34 @@
+{
+  "version": "1",
+  "note": "Registry of knowledge worlds that share the engine. 'home' and every 'urns' template are paths relative to the SITE ROOT (the folder that contains engine/). A URN <ns>:<kind>/<slug> is turned into a link by the template registered for '<ns>:<kind>'. Adding a world or a URN kind = adding data here, not code. The legal world's links are the CURRENT public pages of the Legal Atlas; this file does not change them.",
+  "worlds": [
+    {
+      "id": "legal",
+      "name": { "th": "กฎหมาย", "en": "Legal" },
+      "brand": { "th": "Cool Uncle", "sub": "Legal Lab" },
+      "icon": "legal",
+      "home": "index.html",
+      "urns": {
+        "atlas:concept": "concept.html?k={slug}",
+        "atlas:provision": "codex-article-viewer.html?id={slug}"
+      }
+    },
+    {
+      "id": "engineer",
+      "name": { "th": "วิศวกรรมการบิน", "en": "Engineer" },
+      "brand": { "th": "Cool Uncle", "sub": "Engineer" },
+      "icon": "aircraft",
+      "home": "Engineer/index.html",
+      "urns": {
+        "eng:subject": "Engineer/subject.html?k={slug}",
+        "eng:concept": "Engineer/entry.html?id={urn}",
+        "eng:lecture": "Engineer/entry.html?id={urn}",
+        "eng:document": "Engineer/entry.html?id={urn}",
+        "eng:source": "Engineer/entry.html?id={urn}",
+        "eng:reference": "Engineer/entry.html?id={urn}",
+        "eng:provision": "Engineer/entry.html?id={urn}",
+        "eng:topic": "Engineer/entry.html?id={urn}"
+      }
+    }
+  ]
+}

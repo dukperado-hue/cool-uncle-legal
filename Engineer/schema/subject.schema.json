@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "engineer/schema/subject.schema.json",
+  "title": "Engineer subject (one card on the home page)",
+  "type": "object",
+  "required": [
+    "id",
+    "urn",
+    "domain",
+    "titleTH",
+    "titleEN",
+    "icon",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "urn": {
+      "type": "string",
+      "pattern": "^eng:subject/[a-z0-9][a-z0-9-]*$"
+    },
+    "domain": {
+      "type": "string",
+      "description": "id from subjects.json domains[]"
+    },
+    "titleTH": {
+      "type": "string"
+    },
+    "titleEN": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string",
+      "description": "icon name registered in the engine icon registry"
+    },
+    "status": {
+      "enum": [
+        "planned",
+        "seeded",
+        "referenced",
+        "published"
+      ]
+    },
+    "summary": {
+      "type": "string"
+    },
+    "declaredSources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "declaredBy",
+          "verifiedInRepo"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "declaredBy": {
+            "type": "string"
+          },
+          "verifiedInRepo": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "description": "cross-world links; content stays in the other world",
+      "items": {
+        "type": "object",
+        "required": [
+          "urn",
+          "rel"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "urn": {
+            "type": "string"
+          },
+          "rel": {
+            "type": "string"
+          },
+          "labelSnapshot": {
+            "type": "string"
+          },
+          "snapshotOf": {
+            "type": "string"
+          },
+          "snapshotDate": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "hidden": {
+      "type": "boolean",
+      "description": "true = not shown on the home page, search or links yet"
+    }
+  }
+}

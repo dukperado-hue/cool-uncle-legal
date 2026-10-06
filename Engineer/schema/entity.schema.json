@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "engineer/schema/entity.schema.json",
+  "title": "Engineer knowledge entity",
+  "description": "ONE entity shape for every content mode (concept, lecture, document, source, reference, provision, topic). Domain content lives in 'body' blocks; the envelope stays identical so the shared reader, search and cross-references work for any world. Cross-world links are URN references, never copies.",
+  "type": "object",
+  "required": ["id", "kind", "subjects", "status", "provenance"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^eng:(concept|lecture|document|source|reference|provision|topic)/[A-Za-z0-9._-]+$", "description": "URN, <ns>:<kind>/<slug>" },
+    "kind": { "enum": ["concept", "lecture", "document", "source", "reference", "provision", "topic"] },
+    "subjects": { "type": "array", "items": { "type": "string" }, "description": "ids from data/subjects.json" },
+    "titleTH": { "type": "string" },
+    "titleEN": { "type": "string" },
+    "summary": { "type": "string" },
+    "status": { "enum": ["draft", "seeded", "published"] },
+    "provenance": {
+      "type": "object",
+      "required": ["origin"],
+      "additionalProperties": false,
+      "properties": {
+        "origin": { "enum": ["source-text", "derived", "ai-assisted", "editorial"], "description": "source-text = verbatim from a cleared source; derived = generated from a registry/other data; ai-assisted = machine draft, unverified; editorial = written by the maintainer" },
+        "note": { "type": "string" }
+      }
+    },
+    "lecture": {
+      "type": "object",
+      "description": "only for kind=lecture: lecture-per-session model",
+      "required": ["series", "no"],
+      "additionalProperties": false,
+      "properties": { "series": { "type": "string" }, "no": { "type": "integer", "minimum": 1 }, "date": { "type": "string" } }
+    },
+    "body": {
+      "type": "array",
+      "items": { "type": "object", "required": ["type"], "properties": { "type": { "type": "string" } } }
+    },
+    "sources": {
+      "type": "array",
+      "items": { "type": "object", "additionalProperties": false, "properties": { "label": { "type": "string" }, "ref": { "type": "string" }, "url": { "type": "string" }, "locator": { "type": "string" }, "note": { "type": "string" } } }
+    },
+    "related": {
+      "type": "array",
+      "items": { "type": "object", "required": ["urn"], "additionalProperties": false, "properties": { "urn": { "type": "string", "pattern": "^[a-z][a-z0-9-]*:[a-z][a-z0-9-]*/.+$" }, "rel": { "type": "string" }, "labelSnapshot": { "type": "string" }, "snapshotOf": { "type": "string" }, "snapshotDate": { "type": "string" } } }
+    },
+    "tags": { "type": "array", "items": { "type": "string" } }
+  }
+}

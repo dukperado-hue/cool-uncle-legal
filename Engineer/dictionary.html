@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>พจนานุกรม · Engineer</title>
+<meta name="description" content="พจนานุกรมคำย่อและศัพท์การบิน">
+<link rel="icon" href="../icons/favicon-32.png" sizes="32x32">
+<link rel="stylesheet" href="../engine/theme.css?v=20261006a">
+</head>
+<body>
+<!-- Shared chrome (topbar, nav, footer) is mounted by engine/shell.js. No colours or layout rules live in this page. -->
+<div class="wrap">
+  <div id="engine-nav"></div>
+  <header class="reader-head" style="max-width:900px;margin:10px auto"><h1 style="font-size:26px">พจนานุกรม aviation</h1><div class="reader-sub">ไฟล์ข้อมูลชุดเดียวกับหน้าพจนานุกรมของ Atlas — ฉบับร่างโดย AI ยังไม่ได้ตรวจกับต้นฉบับทีละคำ</div></header>
+  <div id="atlas-dictionary" style="max-width:900px;margin:0 auto"><noscript>ต้องเปิด JavaScript</noscript></div>
+  <div id="engine-footer"></div>
+</div>
+<script src="../engine/core.js?v=20261006a"></script>
+<script src="../engine/shell.js?v=20261006a"></script>
+<script src="../engine/reader.js?v=20261006a"></script>
+<script src="../atlas-dictionary-view.js?v=20261004d"></script>
+<script src="engineer.js?v=20261006a"></script>
+<script>Engineer.pages.dictionary();</script>
+</body>
+</html>

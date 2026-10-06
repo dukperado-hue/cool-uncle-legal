@@ -1,0 +1,111 @@
+[
+ {
+  "id": "eng:concept/sms",
+  "kind": "concept",
+  "subjects": [
+   "sms"
+  ],
+  "titleTH": "ระบบการจัดการความปลอดภัย",
+  "titleEN": "Safety Management System",
+  "status": "seeded",
+  "provenance": {
+   "origin": "ai-assisted",
+   "note": "แถวคำย่อมาจากพจนานุกรม aviation ที่ NotebookLM ร่างจากเอกสาร ทอ. ยังไม่ได้ตรวจทานกับต้นฉบับทีละคำ"
+  },
+  "body": [
+   {
+    "type": "note",
+    "kind": "info",
+    "text": "หน้านี้ยังไม่มีคำอธิบายแนวคิด — แสดงเฉพาะแถวที่มีอยู่จริงในพจนานุกรม (อ่านสดจากไฟล์ต้นทาง ไม่ได้คัดลอก)"
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "ในพจนานุกรมคำย่อ"
+   },
+   {
+    "type": "dict-rows",
+    "volume": "abbr",
+    "match": [
+     "SMS"
+    ]
+   }
+  ],
+  "related": [
+   {
+    "urn": "eng:reference/aviation-dictionary",
+    "rel": "พจนานุกรมต้นทาง"
+   },
+   {
+    "urn": "eng:subject/sms",
+    "rel": "วิชา"
+   }
+  ]
+ },
+ {
+  "id": "eng:source/rtaf-techdoc-corpus",
+  "kind": "source",
+  "subjects": [
+   "airworthiness"
+  ],
+  "titleTH": "วิชาระบบเอกสารเทคนิค (เอกสาร ทอ.)",
+  "titleEN": "RTAF technical-document corpus",
+  "status": "seeded",
+  "provenance": {
+   "origin": "derived",
+   "note": "ข้อมูลสร้างสดจากทะเบียนแหล่งข้อมูล aviation/sources/av-sources.json — Engineer ไม่เก็บสำเนา"
+  },
+  "body": [
+   {
+    "type": "note",
+    "kind": "warn",
+    "text": "ทะเบียนนี้เป็นรายการอ้างอิงเท่านั้น ไม่ใช่เนื้อหาของเอกสาร และแสดงเฉพาะแหล่งที่ทะเบียนจัดเป็น public-source — แหล่งที่ต้องทบทวนสิทธิ์ (review) ไม่แสดงชื่อ"
+   },
+   {
+    "type": "av-source-list",
+    "registry": "av-sources",
+    "filter": "public-source"
+   }
+  ],
+  "related": [
+   {
+    "urn": "eng:reference/aviation-dictionary",
+    "rel": "พจนานุกรมที่สกัดจากคลังนี้"
+   }
+  ]
+ },
+ {
+  "id": "eng:reference/aviation-dictionary",
+  "kind": "reference",
+  "subjects": [
+   "airworthiness",
+   "sms"
+  ],
+  "titleTH": "พจนานุกรม aviation (คำย่อและศัพท์)",
+  "titleEN": "Aviation dictionary (abbreviations and terms)",
+  "status": "seeded",
+  "provenance": {
+   "origin": "ai-assisted",
+   "note": "ไฟล์เป็นของเว็บไซต์ฝั่ง Atlas — Engineer อ้างอิงไฟล์เดิมโดยตรง"
+  },
+  "body": [
+   {
+    "type": "dict-header",
+    "volume": "abbr"
+   },
+   {
+    "type": "dict-header",
+    "volume": "terms"
+   },
+   {
+    "type": "para",
+    "text": "เปิดดูและค้นหาได้ที่หน้าพจนานุกรมของ Engineer (ใช้ตัวแสดงผลเดียวกับ Atlas) — ทุกแถวมีเลขแหล่งที่มาที่ชี้ไปยังเอกสารต้นทาง"
+   },
+   {
+    "type": "link",
+    "href": "dictionary.html",
+    "text": "เปิดพจนานุกรม"
+   }
+  ]
+ }
+]

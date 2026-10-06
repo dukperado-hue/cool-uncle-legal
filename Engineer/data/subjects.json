@@ -1,0 +1,351 @@
+{
+ "version": "1",
+ "note": "Subject registry of the Engineer world. Adding a subject = adding an object here; no code changes. status: planned (named, no entries), seeded (has entries built only from material already in this repository), referenced (content lives in another world and is linked, not copied), published. declaredSources are names given by the owner in the 2026-10-06 brief; verifiedInRepo=false means the material has NOT been inspected or imported yet. hidden:true keeps a subject (and entities that belong only to hidden subjects) out of the home page, search and links until it is opened by removing the flag. registry.json publicPages lists the pages that are open.",
+ "domains": [
+  {
+   "id": "safety",
+   "titleTH": "ความปลอดภัยการบิน",
+   "titleEN": "Aviation Safety",
+   "icon": "safety",
+   "brand": "brand-crimson",
+   "summaryTH": "ระบบ ภัยคุกคาม การรายงาน การสอบสวน และการจัดการความเสี่ยง"
+  },
+  {
+   "id": "law",
+   "titleTH": "กฎหมายและข้อบังคับการบิน",
+   "titleEN": "Aviation Law & Regulation",
+   "icon": "regulation",
+   "brand": "brand-navy",
+   "summaryTH": "กฎหมาย ข้อบังคับ มาตรฐานสากล และประวัติ — เนื้อหาที่มีอยู่แล้วใน Legal Atlas ใช้การอ้างอิง ไม่คัดลอก"
+  },
+  {
+   "id": "engineering",
+   "titleTH": "อากาศยานและความสมบูรณ์ทางอากาศ",
+   "titleEN": "Aircraft & Airworthiness",
+   "icon": "airworthiness",
+   "brand": "brand-emerald",
+   "summaryTH": "เอกสารเทคนิค การซ่อมบำรุง และข้อกำหนดความสมบูรณ์ทางอากาศ"
+  },
+  {
+   "id": "preview",
+   "titleTH": "เร็ว ๆ นี้",
+   "titleEN": "Coming soon",
+   "icon": "aircraft",
+   "brand": "brand-sky",
+   "summaryTH": "กำลังเตรียมเนื้อหา — ยังไม่เปิดให้ชม"
+  }
+ ],
+ "unclassifiedCorpus": [
+  {
+   "name": "CONCAP",
+   "meaning": null,
+   "declaredBy": "user brief 2026-10-06"
+  },
+  {
+   "name": "ABO",
+   "meaning": null,
+   "declaredBy": "user brief 2026-10-06"
+  },
+  {
+   "name": "SDV-SG",
+   "meaning": null,
+   "declaredBy": "user brief 2026-10-06"
+  }
+ ],
+ "subjects": [
+  {
+   "id": "sms",
+   "urn": "eng:subject/sms",
+   "domain": "safety",
+   "titleEN": "Safety Management System",
+   "titleTH": "ระบบการจัดการความปลอดภัย (SMS)",
+   "icon": "sms",
+   "status": "seeded",
+   "declaredSources": [
+    {
+     "name": "SMS",
+     "declaredBy": "user brief 2026-10-06",
+     "verifiedInRepo": false
+    },
+    {
+     "name": "รายการตรวจสอบการประเมิน SMS ATS เบื้องต้น",
+     "declaredBy": "user brief 2026-10-06",
+     "verifiedInRepo": false
+    }
+   ],
+   "hidden": true
+  },
+  {
+   "id": "sdcps",
+   "urn": "eng:subject/sdcps",
+   "domain": "safety",
+   "titleEN": "SDCPS",
+   "titleTH": "SDCPS",
+   "icon": "hazard",
+   "status": "planned",
+   "declaredSources": [
+    {
+     "name": "SDCPS",
+     "declaredBy": "user brief 2026-10-06",
+     "verifiedInRepo": false
+    }
+   ],
+   "hidden": true
+  },
+  {
+   "id": "occurrence-reporting",
+   "urn": "eng:subject/occurrence-reporting",
+   "domain": "safety",
+   "titleEN": "MOR / VOR occurrence reporting",
+   "titleTH": "การรายงานเหตุการณ์ (MOR / VOR)",
+   "icon": "report",
+   "status": "planned",
+   "declaredSources": [
+    {
+     "name": "VOR",
+     "declaredBy": "user brief 2026-10-06",
+     "verifiedInRepo": false
+    }
+   ],
+   "hidden": true
+  },
+  {
+   "id": "accident-investigation",
+   "urn": "eng:subject/accident-investigation",
+   "domain": "safety",
+   "titleEN": "Accident & Incident Investigation",
+   "titleTH": "การสอบสวนอุบัติเหตุและอุบัติการณ์",
+   "icon": "investigation",
+   "status": "planned",
+   "declaredSources": [
+    {
+     "name": "Accident Investigate",
+     "declaredBy": "user brief 2026-10-06",
+     "verifiedInRepo": false
+    }
+   ],
+   "hidden": true
+  },
+  {
+   "id": "flight-safety",
+   "urn": "eng:subject/flight-safety",
+   "domain": "safety",
+   "titleEN": "Flight Safety",
+   "titleTH": "ความปลอดภัยในการบิน",
+   "icon": "aircraft",
+   "status": "planned",
+   "declaredSources": [
+    {
+     "name": "Flight Safety Foundation SCF-NP / SCF-PP",
+     "declaredBy": "user brief 2026-10-06",
+     "verifiedInRepo": false
+    }
+   ],
+   "hidden": true
+  },
+  {
+   "id": "runway-safety",
+   "urn": "eng:subject/runway-safety",
+   "domain": "safety",
+   "titleEN": "Runway Safety",
+   "titleTH": "ความปลอดภัยของทางวิ่ง",
+   "icon": "runway",
+   "status": "planned",
+   "declaredSources": [
+    {
+     "name": "Runway Safety",
+     "declaredBy": "user brief 2026-10-06",
+     "verifiedInRepo": false
+    }
+   ],
+   "hidden": true
+  },
+  {
+   "id": "wildlife-hazard",
+   "urn": "eng:subject/wildlife-hazard",
+   "domain": "safety",
+   "titleEN": "Bird & Wildlife Hazard Management",
+   "titleTH": "การจัดการอันตรายจากนกและสัตว์ป่า",
+   "icon": "bird",
+   "status": "planned",
+   "declaredSources": [
+    {
+     "name": "ICAO bird and wildlife workshop",
+     "declaredBy": "user brief 2026-10-06",
+     "verifiedInRepo": false
+    },
+    {
+     "name": "Bird Focus Group",
+     "declaredBy": "user brief 2026-10-06",
+     "verifiedInRepo": false
+    }
+   ],
+   "hidden": true
+  },
+  {
+   "id": "gnss-interference",
+   "urn": "eng:subject/gnss-interference",
+   "domain": "safety",
+   "titleEN": "GNSS Interference",
+   "titleTH": "การรบกวนสัญญาณ GPS/GNSS",
+   "icon": "gnss",
+   "status": "planned",
+   "declaredSources": [
+    {
+     "name": "GPS/GNSS interference",
+     "declaredBy": "user brief 2026-10-06",
+     "verifiedInRepo": false
+    }
+   ],
+   "hidden": true
+  },
+  {
+   "id": "human-factors",
+   "urn": "eng:subject/human-factors",
+   "domain": "safety",
+   "titleEN": "Human Factors",
+   "titleTH": "ปัจจัยมนุษย์",
+   "icon": "human",
+   "status": "planned",
+   "declaredSources": [
+    {
+     "name": "human factor and engineering",
+     "declaredBy": "user brief 2026-10-06",
+     "verifiedInRepo": false
+    }
+   ],
+   "hidden": true
+  },
+  {
+   "id": "aviation-act",
+   "urn": "eng:subject/aviation-act",
+   "domain": "law",
+   "titleEN": "Air Navigation Act (Thailand)",
+   "titleTH": "พระราชบัญญัติการเดินอากาศ",
+   "icon": "law",
+   "status": "referenced",
+   "declaredSources": [
+    {
+     "name": "พรบ เดินอากาศ",
+     "declaredBy": "user brief 2026-10-06",
+     "verifiedInRepo": false
+    }
+   ],
+   "references": [
+    {
+     "urn": "atlas:concept/niyam-akatsayan-lae-kan-bin-phonlaruean",
+     "rel": "legal-atlas-concept",
+     "labelSnapshot": "นิยามอากาศยานและการบินพลเรือน",
+     "snapshotOf": "atlas-concepts.json",
+     "snapshotDate": "2026-10-06"
+    },
+    {
+     "urn": "atlas:concept/prapheit-akatsayan-tam-watthuprasong-chai-ngan",
+     "rel": "legal-atlas-concept",
+     "labelSnapshot": "ประเภทของอากาศยานตามวัตถุประสงค์การใช้งาน",
+     "snapshotOf": "atlas-concepts.json",
+     "snapshotDate": "2026-10-06"
+    },
+    {
+     "urn": "atlas:concept/khopkhet-kan-bangkhapchai-yoken-akatsayan-ratchakan",
+     "rel": "legal-atlas-concept",
+     "labelSnapshot": "ขอบเขตการบังคับใช้: ยกเว้นอากาศยานราชการทหาร ตำรวจ และศุลกากร",
+     "snapshotOf": "atlas-concepts.json",
+     "snapshotDate": "2026-10-06"
+    },
+    {
+     "urn": "atlas:concept/nathi-patibat-phuea-khwamplotphai",
+     "rel": "legal-atlas-concept",
+     "labelSnapshot": "หน้าที่ปฏิบัติเพื่อความปลอดภัยของผู้เกี่ยวข้องกับการเดินอากาศ",
+     "snapshotOf": "atlas-concepts.json",
+     "snapshotDate": "2026-10-06"
+    },
+    {
+     "urn": "atlas:concept/seed-0330",
+     "rel": "legal-atlas-concept",
+     "labelSnapshot": "อากาศยานไทย",
+     "snapshotOf": "atlas-concepts.json",
+     "snapshotDate": "2026-10-06"
+    }
+   ],
+   "hidden": true
+  },
+  {
+   "id": "tcar",
+   "urn": "eng:subject/tcar",
+   "domain": "law",
+   "titleEN": "TCAR",
+   "titleTH": "TCAR",
+   "icon": "regulation",
+   "status": "planned",
+   "declaredSources": [
+    {
+     "name": "TCAR",
+     "declaredBy": "user brief 2026-10-06",
+     "verifiedInRepo": false
+    }
+   ],
+   "hidden": true
+  },
+  {
+   "id": "icao-annexes",
+   "urn": "eng:subject/icao-annexes",
+   "domain": "law",
+   "titleEN": "ICAO Annexes",
+   "titleTH": "ภาคผนวก ICAO",
+   "icon": "icao",
+   "status": "planned",
+   "declaredSources": [
+    {
+     "name": "ICAO all annexes",
+     "declaredBy": "user brief 2026-10-06",
+     "verifiedInRepo": false
+    }
+   ],
+   "hidden": true
+  },
+  {
+   "id": "aviation-law-history",
+   "urn": "eng:subject/aviation-law-history",
+   "domain": "law",
+   "titleEN": "Aviation law history",
+   "titleTH": "ประวัติศาสตร์กฎหมายการบิน",
+   "icon": "history",
+   "status": "planned",
+   "declaredSources": [
+    {
+     "name": "aviation law history",
+     "declaredBy": "user brief 2026-10-06",
+     "verifiedInRepo": false
+    }
+   ],
+   "hidden": true
+  },
+  {
+   "id": "airworthiness",
+   "urn": "eng:subject/airworthiness",
+   "domain": "engineering",
+   "titleEN": "Aircraft & Airworthiness",
+   "titleTH": "อากาศยานและความสมบูรณ์ทางอากาศ",
+   "icon": "airworthiness",
+   "status": "seeded",
+   "declaredSources": [
+    {
+     "name": "TCAR AIR Part-M / Part-ML / CAMO / CAO",
+     "declaredBy": "user brief 2026-10-06",
+     "verifiedInRepo": false
+    }
+   ],
+   "hidden": true
+  },
+  {
+   "id": "dummy",
+   "urn": "eng:subject/dummy",
+   "domain": "preview",
+   "titleTH": "กล่องตัวอย่าง (Dummy)",
+   "titleEN": "Placeholder — content coming soon",
+   "icon": "aircraft",
+   "status": "planned"
+  }
+ ]
+}
