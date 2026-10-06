@@ -8,6 +8,11 @@
    "id": "demo-real",
    "path": "entities/demo-real.json",
    "note": "first entities, built only from material already in this repository"
+  },
+  {
+   "id": "scf-first-set",
+   "path": "entities/scf-first-set.json",
+   "note": "SCF-NP/PP first knowledge set from NotebookLM d6c1966b; subject hidden; provenance on every item"
   }
  ],
  "external": {

@@ -4,44 +4,287 @@
   "title": "Engineer knowledge entity",
   "description": "ONE entity shape for every content mode (concept, lecture, document, source, reference, provision, topic). Domain content lives in 'body' blocks; the envelope stays identical so the shared reader, search and cross-references work for any world. Cross-world links are URN references, never copies.",
   "type": "object",
-  "required": ["id", "kind", "subjects", "status", "provenance"],
+  "required": [
+    "id",
+    "kind",
+    "subjects",
+    "status",
+    "provenance"
+  ],
   "additionalProperties": false,
   "properties": {
-    "id": { "type": "string", "pattern": "^eng:(concept|lecture|document|source|reference|provision|topic)/[A-Za-z0-9._-]+$", "description": "URN, <ns>:<kind>/<slug>" },
-    "kind": { "enum": ["concept", "lecture", "document", "source", "reference", "provision", "topic"] },
-    "subjects": { "type": "array", "items": { "type": "string" }, "description": "ids from data/subjects.json" },
-    "titleTH": { "type": "string" },
-    "titleEN": { "type": "string" },
-    "summary": { "type": "string" },
-    "status": { "enum": ["draft", "seeded", "published"] },
+    "id": {
+      "type": "string",
+      "pattern": "^eng:(concept|lecture|document|source|reference|provision|topic)/[A-Za-z0-9._-]+$",
+      "description": "URN, <ns>:<kind>/<slug>"
+    },
+    "kind": {
+      "enum": [
+        "concept",
+        "lecture",
+        "document",
+        "source",
+        "reference",
+        "provision",
+        "topic"
+      ]
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "ids from data/subjects.json"
+    },
+    "titleTH": {
+      "type": "string"
+    },
+    "titleEN": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "seeded",
+        "published"
+      ]
+    },
     "provenance": {
       "type": "object",
-      "required": ["origin"],
+      "required": [
+        "origin"
+      ],
       "additionalProperties": false,
       "properties": {
-        "origin": { "enum": ["source-text", "derived", "ai-assisted", "editorial"], "description": "source-text = verbatim from a cleared source; derived = generated from a registry/other data; ai-assisted = machine draft, unverified; editorial = written by the maintainer" },
-        "note": { "type": "string" }
+        "origin": {
+          "enum": [
+            "source-text",
+            "derived",
+            "ai-assisted",
+            "editorial"
+          ],
+          "description": "source-text = verbatim from a cleared source; derived = generated from a registry/other data; ai-assisted = machine draft, unverified; editorial = written by the maintainer"
+        },
+        "note": {
+          "type": "string"
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "notebookSourceIndex",
+              "sourceDocument",
+              "extraction",
+              "status"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "notebookSourceIndex": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "sourceId": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "sourceDocument": {
+                "type": "string"
+              },
+              "locator": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "page / slide / module / part; null = unknown"
+              },
+              "organization": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "date": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "extraction": {
+                "enum": [
+                  "pdf-text",
+                  "machine-transcript",
+                  "web-page",
+                  "human-read"
+                ]
+              },
+              "status": {
+                "enum": [
+                  "extracted",
+                  "needs-review"
+                ]
+              }
+            }
+          }
+        }
       }
     },
     "lecture": {
       "type": "object",
       "description": "only for kind=lecture: lecture-per-session model",
-      "required": ["series", "no"],
+      "required": [
+        "series",
+        "no"
+      ],
       "additionalProperties": false,
-      "properties": { "series": { "type": "string" }, "no": { "type": "integer", "minimum": 1 }, "date": { "type": "string" } }
+      "properties": {
+        "series": {
+          "type": "string"
+        },
+        "no": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "date": {
+          "type": "string"
+        }
+      }
     },
     "body": {
       "type": "array",
-      "items": { "type": "object", "required": ["type"], "properties": { "type": { "type": "string" } } }
+      "items": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        }
+      }
     },
     "sources": {
       "type": "array",
-      "items": { "type": "object", "additionalProperties": false, "properties": { "label": { "type": "string" }, "ref": { "type": "string" }, "url": { "type": "string" }, "locator": { "type": "string" }, "note": { "type": "string" } } }
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "ref": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "locator": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
     },
     "related": {
       "type": "array",
-      "items": { "type": "object", "required": ["urn"], "additionalProperties": false, "properties": { "urn": { "type": "string", "pattern": "^[a-z][a-z0-9-]*:[a-z][a-z0-9-]*/.+$" }, "rel": { "type": "string" }, "labelSnapshot": { "type": "string" }, "snapshotOf": { "type": "string" }, "snapshotDate": { "type": "string" } } }
+      "items": {
+        "type": "object",
+        "required": [
+          "urn"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "urn": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*:[a-z][a-z0-9-]*/.+$"
+          },
+          "rel": {
+            "type": "string"
+          },
+          "labelSnapshot": {
+            "type": "string"
+          },
+          "snapshotOf": {
+            "type": "string"
+          },
+          "snapshotDate": {
+            "type": "string"
+          },
+          "confidence": {
+            "enum": [
+              "stated",
+              "inferred"
+            ]
+          }
+        }
+      }
     },
-    "tags": { "type": "array", "items": { "type": "string" } }
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "type": {
+      "enum": [
+        "EVENT",
+        "CONCEPT",
+        "PRACTICE",
+        "STANDARD",
+        "CASE_STUDY",
+        "ORGANIZATION",
+        "SYSTEM",
+        "METHODOLOGY",
+        "SOURCE",
+        "SERIES",
+        "MODULE"
+      ],
+      "description": "optional knowledge-object facet (independent of 'kind', which only drives the reader icon). SERIES and MODULE are hierarchy containers."
+    },
+    "level": {
+      "enum": [
+        "series",
+        "event",
+        "module",
+        "topic",
+        "concept"
+      ],
+      "description": "position in the lecture hierarchy Series>Event>Module>Topic>Concept"
+    },
+    "parent": {
+      "type": "string",
+      "pattern": "^eng:[a-z]+/[A-Za-z0-9._-]+$",
+      "description": "URN of the parent in the lecture hierarchy"
+    },
+    "date": {
+      "type": "string",
+      "description": "ISO date or range, as stated by the source"
+    },
+    "materialInNotebook": {
+      "type": "boolean",
+      "description": "false = the event is evidenced only indirectly (no slides/agenda in the source set)"
+    },
+    "needsReview": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "open questions a human must check against the original"
+    }
   }
 }

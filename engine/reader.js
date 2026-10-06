@@ -21,6 +21,9 @@
   var KIND_LABEL = { concept: 'แนวคิด', lecture: 'บรรยาย', document: 'เอกสาร', source: 'แหล่งข้อมูล', reference: 'อ้างอิง', provision: 'บทบัญญัติ', topic: 'หัวข้อ' };
   var STATUS_LABEL = { 'ai-assisted': 'ร่างโดย AI — ยังไม่ได้ตรวจกับต้นฉบับ', 'draft': 'ฉบับร่าง', 'published': 'เผยแพร่', 'source-text': 'ข้อความจากต้นฉบับ', 'derived': 'สรุป/สร้างจากแหล่งที่ระบุ', 'editorial': 'เรียบเรียงโดยผู้จัดทำ' };
 
+  var TYPE_LABEL = { EVENT: 'กิจกรรม', CONCEPT: 'แนวคิด', PRACTICE: 'แนวปฏิบัติ', STANDARD: 'มาตรฐาน/ข้อกำหนด', CASE_STUDY: 'กรณีศึกษา', ORGANIZATION: 'องค์กร', SYSTEM: 'ระบบ', METHODOLOGY: 'วิธีการ', SOURCE: 'แหล่งข้อมูล', SERIES: 'ชุดกิจกรรม', MODULE: 'โมดูล' };
+  var EXTRACT_LABEL = { 'pdf-text': 'ข้อความจาก PDF', 'machine-transcript': 'ถอดเสียงอัตโนมัติ', 'web-page': 'หน้าเว็บ', 'human-read': 'อ่านโดยผู้จัดทำ' };
+
   BLOCKS.heading = function (b) { return el(b.level === 3 ? 'h3' : 'h2', null, b.text); };
   BLOCKS.para = function (b) { return el('p', null, b.text); };
   BLOCKS.list = function (b) {
@@ -97,6 +100,7 @@
       var kn = el('span', 'chip');
       kn.appendChild(Engine.icons.node(ent.kind)); kn.appendChild(document.createTextNode(' ' + (KIND_LABEL[ent.kind] || ent.kind)));
       kinds.appendChild(kn);
+      if (ent.type) kinds.appendChild(el('span', 'chip', TYPE_LABEL[ent.type] || ent.type));
       (ent.subjects || []).forEach(function (sid) {
         var s = ctx.subjects && ctx.subjects[sid];
         kinds.appendChild(el('a', 'chip', s ? s.titleTH : sid, { href: ctx.subjectHref ? ctx.subjectHref(sid) : '#' }));
@@ -126,6 +130,24 @@
           ul.appendChild(li);
         });
         art.appendChild(section('แหล่งที่มา', ul));
+      }
+      var ps = ent.provenance && ent.provenance.sources;
+      if (ps && ps.length) {
+        var pl = el('ul', 'reader-list');
+        ps.forEach(function (p) {
+          var li = el('li');
+          li.appendChild(el('span', null, p.sourceDocument));
+          if (p.locator) li.appendChild(el('span', 'chip', p.locator));
+          li.appendChild(el('span', 'chip', EXTRACT_LABEL[p.extraction] || p.extraction));
+          if (p.status === 'needs-review') li.appendChild(el('span', 'chip', 'รอตรวจทาน'));
+          pl.appendChild(li);
+        });
+        art.appendChild(section('หลักฐานในชุดแหล่งข้อมูล', pl));
+      }
+      if (ent.needsReview && ent.needsReview.length) {
+        var nl = el('ul', 'reader-list');
+        ent.needsReview.forEach(function (t) { nl.appendChild(el('li', null, t)); });
+        art.appendChild(section('ต้องตรวจทานกับต้นฉบับ', nl));
       }
       if (ent.related && ent.related.length) {
         var rl = el('ul', 'reader-list');

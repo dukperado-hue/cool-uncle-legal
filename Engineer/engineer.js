@@ -10,7 +10,7 @@
 (function (global) {
   'use strict';
   var Engine = global.Engine, el = Engine.el;
-  var V = '20261006a';                                  /* data cache-bust token: bump on content updates */
+  var V = '20261006b';                                  /* data cache-bust token: bump on content updates */
   var BASE = new URL('./', document.currentScript.src).href;     /* .../Engineer/ */
 
   Engine.icons.register('engineer', {
@@ -220,7 +220,7 @@
           mine.forEach(function (e) {
             var li = el('li'); li.appendChild(Engine.icons.node(e.kind));
             li.appendChild(el('a', null, e.titleTH || e.titleEN, { href: Engineer.entryHref(e.id) }));
-            li.appendChild(el('span', 'chip', e.kind));
+            li.appendChild(el('span', 'chip', e.type || e.kind));
             if ((e.provenance || {}).origin === 'ai-assisted') li.appendChild(el('span', 'chip', 'ร่างโดย AI'));
             ul.appendChild(li);
           });
@@ -281,7 +281,7 @@
         var ul = el('ul', 'reader-list');
         ents.filter(function (e) { return e.kind === 'source' || e.kind === 'reference'; }).forEach(function (e) {
           var li = el('li'); li.appendChild(Engine.icons.node(e.kind));
-          li.appendChild(el('a', null, e.titleTH || e.titleEN, { href: Engineer.entryHref(e.id) })); li.appendChild(el('span', 'chip', e.kind)); ul.appendChild(li);
+          li.appendChild(el('a', null, e.titleTH || e.titleEN, { href: Engineer.entryHref(e.id) })); li.appendChild(el('span', 'chip', e.type || e.kind)); ul.appendChild(li);
         });
         sec.appendChild(ul); host.appendChild(sec);
         var d2 = el('section', 'reader-section'); d2.appendChild(el('h2', null, 'แหล่งที่ประกาศไว้ แต่ยังไม่ได้ตรวจ/นำเข้า'));

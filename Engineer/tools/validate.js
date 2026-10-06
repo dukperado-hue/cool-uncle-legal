@@ -15,12 +15,12 @@ function check(sch, v, where, errs) {
   if (sch.enum && !sch.enum.includes(v)) errs.push(`${where}: ${JSON.stringify(v)} not in ${JSON.stringify(sch.enum)}`);
   if (sch.type) {
     const t = Array.isArray(v) ? 'array' : v === null ? 'null' : Number.isInteger(v) ? 'integer' : typeof v;
-    const okT = sch.type === t || (sch.type === 'number' && t === 'integer');
+    const okT = [].concat(sch.type).some(x => x === t || (x === 'number' && t === 'integer'));
     if (!okT) { errs.push(`${where}: expected ${sch.type}, got ${t}`); return; }
   }
   if (sch.pattern && typeof v === 'string' && !new RegExp(sch.pattern).test(v)) errs.push(`${where}: "${v}" !~ ${sch.pattern}`);
   if (sch.minimum != null && typeof v === 'number' && v < sch.minimum) errs.push(`${where}: < ${sch.minimum}`);
-  if (sch.type === 'object' && v && typeof v === 'object') {
+  if ([].concat(sch.type).includes('object') && v && typeof v === 'object' && !Array.isArray(v)) {
     (sch.required || []).forEach(k => { if (!(k in v)) errs.push(`${where}: missing ${k}`); });
     const props = sch.properties || {};
     Object.keys(v).forEach(k => {
@@ -28,7 +28,7 @@ function check(sch, v, where, errs) {
       else if (sch.additionalProperties === false) errs.push(`${where}: unexpected property ${k}`);
     });
   }
-  if (sch.type === 'array' && Array.isArray(v) && sch.items) v.forEach((x, i) => check(sch.items, x, `${where}[${i}]`, errs));
+  if ([].concat(sch.type).includes('array') && Array.isArray(v) && sch.items) v.forEach((x, i) => check(sch.items, x, `${where}[${i}]`, errs));
 }
 
 /* ---- load ---- */
@@ -63,6 +63,26 @@ registry.shards.forEach(sh => {
     en.subjects.forEach(s => ok(subjects.has(s), `entity ${en.id}: unknown subject ${s}`));
     ok(en.kind !== 'lecture' || en.lecture, `entity ${en.id}: lecture needs a lecture{series,no}`);
   });
+});
+
+/* ---- 1b typed knowledge objects (entities that declare 'type'): provenance, hierarchy, claims ---- */
+const NB_SOURCES = 28;   /* notebook d6c1966b source count (private index; see evidence-private/scf/tools/sources.json) */
+entities.forEach(en => {
+  if (en.parent) { ok(entities.has(en.parent), `entity ${en.id}: parent ${en.parent} does not exist`); ok(en.parent !== en.id, `entity ${en.id}: parent is itself`); }
+  if (!en.type) return;
+  const ps = (en.provenance && en.provenance.sources) || [];
+  ok(ps.length > 0, `entity ${en.id}: typed object has no provenance.sources`);
+  ps.forEach((s, i) => ok(s.notebookSourceIndex <= NB_SOURCES, `entity ${en.id}.provenance.sources[${i}]: index ${s.notebookSourceIndex} > ${NB_SOURCES}`));
+  ok(!!en.provenance.confidence, `entity ${en.id}: provenance.confidence missing`);
+  ok(en.body && en.body.length > 0, `entity ${en.id}: empty body`);
+  ok(!!(en.titleEN || en.titleTH), `entity ${en.id}: no title`);
+  if (en.parent) ok(!!en.level, `entity ${en.id}: has a parent but no hierarchy level`);
+  if (['EVENT', 'MODULE'].includes(en.type)) ok(!!en.parent && !!en.level, `entity ${en.id}: ${en.type} needs parent and level`);
+  if (en.type === 'EVENT') ok(en.kind === 'lecture' && !!en.lecture, `entity ${en.id}: EVENT must be kind lecture with lecture{}`);
+  if (ps.some(s => s.status === 'needs-review')) ok(en.needsReview && en.needsReview.length > 0, `entity ${en.id}: a source is needs-review but needsReview[] is empty`);
+  const text = JSON.stringify(en);
+  ok(!/5 Whys|SKY ?339/i.test(text.replace(/does not|not (?:in|supported)[^"]*/gi, '')) || en.type === 'SOURCE' || /ไม่(?:มี|พบ)/.test(text), `entity ${en.id}: mentions a term that is absent from every source`);
+  ok(!/\.png|evidence-private/i.test(text), `entity ${en.id}: links a private capture / evidence path`);
 });
 
 /* ---- 2 references / cross-world ---- */
