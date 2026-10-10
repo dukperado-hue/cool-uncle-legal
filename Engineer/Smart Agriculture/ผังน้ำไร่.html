@@ -1,0 +1,2632 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>ผังน้ำไร่</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: full-height map on the left, working panel on the right (stacks under the map on phones).
+   Palette: cool field-paper neutrals, water blue as the single accent; status colors kept separate. */
+:root{
+  --bg:#eef2ee; --panel:#fbfcfa; --ink:#15211b; --muted:#5b6a61; --line:#d4dcd5; --soft:#e6ece7;
+  --water:#1b6aa8; --water-soft:#dcebf7; --on-water:#ffffff;
+  --ok:#2c8a4b; --warn:#b97a0c; --bad:#c03a2b; --ok-soft:#e1f2e6; --warn-soft:#f8eed8; --bad-soft:#f8e1de;
+  --font-display:"Bai Jamjuree","IBM Plex Sans Thai",system-ui,sans-serif;
+  --font-body:"IBM Plex Sans Thai",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:8px;
+  --stage-1:#e9eee9; --stage-2:#d5ddd6; --floor:#f4f2ec; --floor-l:#d6d1c5; --floor-r:#bfb9ab; --floor-grid:rgba(60,72,62,.09); --shadow:rgba(24,34,28,.16); --tag:#ffffff; --tag-ink:#15211b;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0e1411; --panel:#141c18; --ink:#e4ebe6; --muted:#93a39a; --line:#27332d; --soft:#1b2520;
+  --water:#5aa8e4; --water-soft:#16293a; --on-water:#06121c;
+  --ok:#5cc07c; --warn:#e2a93c; --bad:#ec6a5a; --ok-soft:#163222; --warn-soft:#33270f; --bad-soft:#3a1914;
+  --stage-1:#1b2420; --stage-2:#0e1411; --floor:#2a332e; --floor-l:#1f2723; --floor-r:#171d1a; --floor-grid:rgba(220,235,225,.06); --shadow:rgba(0,0,0,.35); --tag:#1d2722; --tag-ink:#e4ebe6;
+  color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --stage-1:#1b2420; --stage-2:#0e1411; --floor:#2a332e; --floor-l:#1f2723; --floor-r:#171d1a; --floor-grid:rgba(220,235,225,.06); --shadow:rgba(0,0,0,.35); --tag:#1d2722; --tag-ink:#e4ebe6;
+  --bg:#0e1411; --panel:#141c18; --ink:#e4ebe6; --muted:#93a39a; --line:#27332d; --soft:#1b2520;
+  --water:#5aa8e4; --water-soft:#16293a; --on-water:#06121c;
+  --ok:#5cc07c; --warn:#e2a93c; --bad:#ec6a5a; --ok-soft:#163222; --warn-soft:#33270f; --bad-soft:#3a1914;
+  color-scheme:dark; }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 var(--font-body);display:flex;flex-direction:column;overflow:hidden}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--water);outline-offset:2px}
+.num,.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+
+/* top bar */
+.top{display:flex;align-items:center;gap:16px;padding:8px 16px;padding-top:calc(8px + env(safe-area-inset-top,0px));background:var(--panel);border-bottom:1px solid var(--line);position:relative;z-index:20;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:8px;min-width:0}
+.brand b{font:700 17px/1.1 var(--font-display);display:block}
+.brand small{color:var(--muted);font-size:12px;display:block;max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.steps{display:flex;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+.steps button{border:0;background:none;padding:6px 10px;border-radius:6px;white-space:nowrap;color:var(--muted);display:flex;gap:6px;align-items:center}
+.steps button i{font:500 11px var(--font-mono);font-style:normal;border:1px solid currentColor;border-radius:50%;width:19px;height:19px;display:grid;place-items:center}
+.steps button:hover{background:var(--soft);color:var(--ink)}
+.steps button.on{background:var(--ink);color:var(--panel)}
+.topActions{display:flex;gap:6px;position:relative}
+.ghost{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:5px 10px}
+.ghost:hover{background:var(--soft)}
+.menu{position:absolute;right:0;top:calc(100% + 6px);background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 10px 30px rgba(0,0,0,.18);padding:6px;min-width:260px;display:flex;flex-direction:column}
+.menu button{border:0;background:none;text-align:left;padding:7px 10px;border-radius:5px}
+.menu button:hover{background:var(--soft)}
+.menu hr{border:0;border-top:1px solid var(--line);margin:4px 0}
+
+/* main layout */
+.layout{flex:1;display:grid;grid-template-columns:minmax(0,1fr) 380px;min-height:0}
+.mapWrap{position:relative;min-width:0;min-height:0;overflow:hidden}
+#map{position:absolute;inset:0;overflow:hidden;touch-action:none;cursor:grab;
+  background-color:#26302b;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:32px 32px}
+#map.drawing{cursor:crosshair}
+#map.panning{cursor:grabbing}
+#map .tiles{position:absolute;inset:0}
+#map .tile{position:absolute;left:0;top:0;width:256px;height:256px;transform-origin:0 0;opacity:0;transition:opacity .2s;user-select:none;pointer-events:none}
+#map .tile.ok{opacity:1}
+#map canvas{position:absolute;inset:0;width:100%;height:100%}
+.mapTop{position:absolute;top:12px;left:12px;right:12px;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;pointer-events:none}
+.mapTop>*{pointer-events:auto}
+.seg{display:flex;background:rgba(15,22,18,.82);border-radius:7px;padding:3px;backdrop-filter:blur(4px)}
+.seg button{border:0;background:none;color:#cfd9d2;padding:4px 10px;border-radius:5px;font-size:13px}
+.seg button.on{background:#f1f5f2;color:#15211b}
+.zoomBtns{display:flex;flex-direction:column;gap:4px}
+.zoomBtns button{width:34px;height:34px;border:0;border-radius:7px;background:rgba(15,22,18,.82);color:#fff;font-size:18px;line-height:1}
+.drawBar{position:absolute;top:56px;left:50%;transform:translateX(-50%);display:flex;gap:6px;align-items:center;background:rgba(15,22,18,.9);color:#fff;padding:6px 6px 6px 12px;border-radius:9px;max-width:calc(100% - 24px);flex-wrap:wrap}
+.drawBar span{font-size:13px}
+.drawBar button{border:0;border-radius:6px;padding:4px 10px;background:#33413a;color:#fff}
+.drawBar button.primary{background:#4fb3ff;color:#06121c;font-weight:600}
+.verdict{position:absolute;left:12px;bottom:26px;max-width:min(420px,calc(100% - 24px));background:var(--panel);border-radius:var(--r);box-shadow:0 8px 28px rgba(0,0,0,.28);padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.verdict select{border:1px solid var(--line);border-radius:6px;background:var(--panel);padding:3px 6px;max-width:100%}
+.verdict .head{font:600 15px/1.35 var(--font-display);display:flex;gap:8px;align-items:flex-start}
+.verdict .sub{color:var(--muted);font-size:12.5px}
+.legend{position:absolute;right:12px;bottom:26px;background:rgba(15,22,18,.82);color:#e8efe9;border-radius:7px;padding:8px 10px;font-size:12px;display:flex;flex-direction:column;gap:4px}
+.legend .row{display:flex;align-items:center;gap:6px}
+.legend .sw{width:16px;height:4px;border-radius:2px}
+.legend .dot{width:9px;height:9px;border-radius:50%}
+.legend .seg{background:none;padding:0;margin-bottom:2px}
+.legend .seg button{padding:2px 7px;font-size:12px}
+.attrib{position:absolute;right:0;bottom:0;font-size:10.5px;background:rgba(255,255,255,.75);color:#222;padding:1px 6px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.attrib a{color:inherit}
+
+/* panel */
+.panel{background:var(--panel);border-left:1px solid var(--line);overflow-y:auto;padding:16px;padding-bottom:calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:16px;min-width:0}
+.panel h2{font:600 20px/1.25 var(--font-display);margin:0;text-wrap:balance}
+.panel h3{font:600 14px/1.3 var(--font-display);margin:0;letter-spacing:.02em}
+.panel p{margin:0;color:var(--muted)}
+.eyebrow{font:500 11px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.card{border:1px solid var(--line);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:10px}
+.card.sel{border-color:var(--water);box-shadow:0 0 0 1px var(--water)}
+.btnrow{display:flex;gap:6px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:6px 11px}
+.btn:hover{background:var(--soft)}
+.btn.primary{background:var(--water);border-color:var(--water);color:var(--on-water);font-weight:600}
+.btn.primary:hover{filter:brightness(1.07)}
+.btn.danger{color:var(--bad)}
+.btn.on{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.btn.sm{padding:3px 8px;font-size:13px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px}
+.fld{display:flex;flex-direction:column;gap:3px;min-width:0}
+.fld.full{grid-column:1/-1}
+.fld label{font-size:12px;color:var(--muted)}
+.fld input,.fld select{border:1px solid var(--line);border-radius:6px;padding:5px 8px;background:var(--panel);width:100%;min-width:0}
+.fld .unit{display:flex;align-items:center;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+.fld .unit input{border:0;font-family:var(--font-mono)}
+.fld .unit span{padding:0 8px;color:var(--muted);font-size:12px;white-space:nowrap}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px}
+.stat{background:var(--soft);border-radius:6px;padding:8px 10px;min-width:0}
+.stat b{display:block;font:500 18px/1.2 var(--font-mono);font-variant-numeric:tabular-nums}
+.stat span{font-size:12px;color:var(--muted)}
+.list{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.list .item{display:flex;align-items:center;gap:8px;padding:7px 10px;border:0;border-top:1px solid var(--line);background:none;text-align:left;width:100%}
+.list .item:first-child{border-top:0}
+.list .item:hover{background:var(--soft)}
+.list .item.sel{background:var(--water-soft)}
+.list .item .grow{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.list .item small{color:var(--muted);font-family:var(--font-mono);font-size:12px;white-space:nowrap}
+.ico{width:22px;height:22px;border-radius:5px;display:grid;place-items:center;font-size:11px;font-weight:600;color:#fff;flex:none}
+.pill{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:1px 8px;font-size:12px;font-weight:500;white-space:nowrap}
+.pill.ok{background:var(--ok-soft);color:var(--ok)} .pill.warn{background:var(--warn-soft);color:var(--warn)} .pill.bad{background:var(--bad-soft);color:var(--bad)} .pill.off{background:var(--soft);color:var(--muted)}
+.toggle{display:flex;align-items:center;gap:8px;padding:6px 10px;border-top:1px solid var(--line)}
+.toggle:first-child{border-top:0}
+.toggle .grow{flex:1;min-width:0}
+.switch{position:relative;width:38px;height:22px;flex:none}
+.switch input{opacity:0;position:absolute;inset:0;margin:0;cursor:pointer}
+.switch span{position:absolute;inset:0;border-radius:11px;background:var(--line);transition:.15s;pointer-events:none}
+.switch span::after{content:"";position:absolute;width:16px;height:16px;border-radius:50%;background:#fff;top:3px;left:3px;transition:.15s;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.switch input:checked+span{background:var(--water)}
+.switch input:checked+span::after{left:19px}
+.note{font-size:12.5px;color:var(--muted);border-left:3px solid var(--line);padding-left:10px}
+.warnbox{font-size:13px;border-radius:6px;padding:8px 10px;background:var(--warn-soft);color:var(--ink)}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th,td{text-align:left;padding:5px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:500;color:var(--muted);font-size:12px}
+td.n{font-family:var(--font-mono);text-align:right;white-space:nowrap}
+.curve{width:100%;height:auto;display:block}
+.curve text{font:10px var(--font-mono);fill:var(--muted)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--panel);padding:8px 14px;border-radius:8px;z-index:50;max-width:calc(100% - 32px)}
+.searchRow{display:flex;gap:6px}
+.searchRow input{flex:1;min-width:0;border:1px solid var(--line);border-radius:6px;padding:6px 9px;background:var(--panel)}
+.results .item{cursor:pointer}
+
+@media (max-width:860px){
+  body{overflow:auto;height:auto;min-height:100%}
+  .layout{display:flex;flex-direction:column}
+  .mapWrap{height:62vh;min-height:360px;flex:none}
+  .panel{border-left:0;border-top:1px solid var(--line);overflow:visible}
+  .steps{order:3;flex-basis:100%}
+  .verdict{bottom:22px;max-width:calc(100% - 24px)}
+  .legend{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- mode switch + formula sandbox ---------- */
+.modeSw{display:flex;background:var(--soft);border-radius:8px;padding:3px;gap:2px}
+.modeSw button{border:0;background:none;padding:5px 12px;border-radius:6px;color:var(--muted);font-weight:500;white-space:nowrap}
+.modeSw button.on{background:var(--panel);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+body.mode-simple .steps{visibility:hidden}
+body.mode-simple #btnFile{display:none}
+.isoWrap{position:relative;min-width:0;min-height:0;overflow:hidden}
+#isoStage{position:absolute;inset:0;overflow:hidden;touch-action:none;background:var(--stage-2)}
+#isoStage canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab}
+.simCtl{position:absolute;top:12px;right:12px;display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end;max-width:calc(100% - 24px)}
+.simCtl button{min-width:34px;height:34px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);font-size:16px;line-height:1;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.simCtl button.wide{font-size:13px;padding:0 10px}
+.simCtl button.on{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.simHint{position:absolute;left:12px;bottom:12px;font-size:12.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:4px 10px;max-width:calc(100% - 24px)}
+.simMenu{position:absolute;z-index:5;width:300px;max-width:calc(100% - 16px);background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 14px 40px rgba(0,0,0,.25);padding:10px;display:flex;flex-direction:column;gap:9px}
+.simMenu .mhead{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-display)}
+.simMenu .x{border:0;background:none;font-size:20px;line-height:1;color:var(--muted);padding:0 4px}
+.msec{display:flex;flex-direction:column;gap:5px}
+.msec>span{font-size:12px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chips button{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:4px 9px;font-size:13px}
+.chips button:hover{background:var(--water-soft);border-color:var(--water)}
+.dirBtn{min-width:36px;font-size:17px!important;line-height:1.1;padding:3px 0!important;font-family:var(--font-mono)}
+.dirBtn.on{background:var(--water)!important;color:var(--on-water);border-color:var(--water)!important}
+.segc{display:flex;background:var(--soft);border-radius:7px;padding:3px;gap:2px}
+.segc button{flex:1;border:0;background:none;border-radius:5px;padding:4px 8px;color:var(--muted)}
+.segc button.on{background:var(--panel);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.pumpGrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pumpCard{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:8px;text-align:left;display:flex;flex-direction:column;gap:2px;min-width:0}
+.pumpCard svg{width:44px;height:30px}
+.pumpCard b{font-size:13.5px}
+.pumpCard small{font-size:11.5px;color:var(--muted);line-height:1.35}
+.pumpCard.on{border-color:var(--water);box-shadow:0 0 0 1px var(--water);background:var(--water-soft)}
+input[type=range]{width:100%;accent-color:var(--water)}
+.toggle.bordered{border:1px solid var(--line);border-radius:8px}
+.outRow{display:flex;align-items:center;gap:10px;padding:8px 10px;border-top:1px solid var(--line)}
+.outRow:first-child{border-top:0}
+.outRow.sel{background:var(--water-soft)}
+.linkish{border:0;background:none;text-align:left;padding:0;display:flex;flex-direction:column;gap:2px;min-width:0}
+.linkish small{color:var(--muted);font-family:var(--font-mono);font-size:12px}
+.meter{position:relative;height:6px;border-radius:3px;background:var(--bad-soft);margin-top:4px}
+.meter .zone{position:absolute;top:0;bottom:0}
+.meter .zone.weak{background:var(--warn-soft)}
+.meter .zone.good{background:var(--ok-soft);border-radius:0 3px 3px 0}
+.meter i{position:absolute;top:-3px;width:4px;height:12px;border-radius:2px;margin-left:-2px;box-shadow:0 0 0 2px var(--panel)}
+.ladder{display:flex;flex-direction:column;gap:5px}
+.lrow{display:grid;grid-template-columns:minmax(0,1fr) 80px 60px;gap:8px;align-items:center;font-size:12.5px}
+.lrow.sub{font-size:11.5px;color:var(--muted)}
+.lrow.sub .lt{padding-left:12px}
+.lrow .lbar{height:8px;background:var(--soft);border-radius:4px;overflow:hidden}
+.lrow .lbar i{display:block;height:100%;border-radius:4px}
+.lrow .lbar i.pos{background:var(--water)}
+.lrow .lbar i.neg{background:var(--bad)}
+.lrow .lv{text-align:right}
+.lrow.total{border-top:1px solid var(--line);padding-top:6px;font-weight:600}
+details summary{cursor:pointer;color:var(--water);font-size:13px}
+.formula{display:flex;flex-direction:column;gap:6px;font-size:12.5px;margin-top:8px}
+.formula p{color:var(--ink)}
+@media (max-width:860px){
+  .modeSw{order:2}
+  body.mode-simple .steps{display:none}
+  .isoWrap{height:60vh;min-height:360px;flex:none}
+}
+
+</style>
+<header class="top">
+  <div class="brand">
+    <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path d="M16 3c5 7 9 11.5 9 17a9 9 0 0 1-18 0c0-5.5 4-10 9-17z" fill="var(--water)"/><path d="M9 21h14M11 25h10" stroke="var(--panel)" stroke-width="2" stroke-linecap="round"/></svg>
+    <div><b>ผังน้ำไร่</b><small id="projName">ไร่ตัวอย่าง</small></div>
+  </div>
+  <div class="modeSw" id="modeSw" role="tablist" aria-label="โหมด"><button data-mode="farm" class="on" role="tab">ผังไร่</button><button data-mode="simple" role="tab">ทดลองสูตร</button></div>
+  <nav class="steps" id="steps" aria-label="ขั้นตอน"></nav>
+  <div class="topActions">
+    <button class="ghost" id="btnUndo" title="ย้อนกลับ (Ctrl+Z)">↶ ย้อน</button>
+    <button class="ghost" id="btnFile">ไฟล์ ▾</button>
+    <div class="menu" id="fileMenu" hidden>
+      <button data-act="new">เริ่มไร่ใหม่ (ว่าง)</button>
+      <button data-act="sample">โหลดไร่ตัวอย่าง</button>
+      <hr>
+      <button data-act="export">บันทึกโปรเจกต์ (.json)</button>
+      <button data-act="import">เปิดโปรเจกต์ (.json)</button>
+      <button data-act="inp">ส่งออก EPANET (.inp) ของสถานการณ์นี้</button>
+      <input type="file" id="fileIn" accept=".json,application/json" hidden>
+    </div>
+  </div>
+</header>
+<main class="layout" id="farmView">
+  <section class="mapWrap">
+    <div id="map" tabindex="0" aria-label="แผนที่"></div>
+    <div class="mapTop">
+      <div class="seg" id="baseSeg">
+        <button data-base="sat" class="on">ดาวเทียม</button><button data-base="osm">ถนน</button><button data-base="none">กริด</button>
+      </div>
+      <div class="zoomBtns"><button id="zin" aria-label="ซูมเข้า">+</button><button id="zout" aria-label="ซูมออก">−</button><button id="zfit" title="ดูทั้งไร่">⤢</button></div>
+    </div>
+    <div class="drawBar" id="drawBar" hidden>
+      <span id="drawHint"></span>
+      <button id="drawUndo">ลบจุดล่าสุด</button>
+      <button id="drawDone" class="primary">เสร็จ</button>
+      <button id="drawCancel">ยกเลิก</button>
+    </div>
+    <div class="verdict" id="verdict"></div>
+    <div class="legend" id="legend"></div>
+    <div class="attrib" id="attrib"></div>
+  </section>
+  <aside class="panel" id="panel"></aside>
+</main>
+<main class="layout simpleView" id="simpleView" hidden>
+  <section class="isoWrap">
+    <div id="isoStage">
+      <div class="simCtl" id="simCtl">
+        <button data-v="rotL" title="หมุนมุมมองทวนเข็ม" aria-label="หมุนซ้าย">⟲</button><button data-v="rotR" title="หมุนมุมมองตามเข็ม" aria-label="หมุนขวา">⟳</button>
+        <button data-v="in" aria-label="ซูมเข้า">+</button><button data-v="out" aria-label="ซูมออก">−</button><button data-v="fit" title="ดูทั้งหมด" aria-label="ดูทั้งหมด">⤢</button>
+        <button data-v="color" class="wide" title="สีท่อตามแรงดัน">สีตามแรงดัน</button>
+      </div>
+      <div class="simHint">แตะ <b>+</b> ที่ปลายท่อเพื่อต่อ · แตะชิ้นส่วนเพื่อแก้ · ลากเพื่อเลื่อนภาพ</div>
+      <div class="simMenu" id="simMenu" hidden></div>
+    </div>
+  </section>
+  <aside class="panel" id="simPanel"></aside>
+</main>
+<div class="toast" id="toast" role="status" hidden></div>
+<script>
+/* ===== Hyd: steady-state pipe network solver (Global Gradient Algorithm, Todini & Pilati) =====
+   Units inside: flow m³/s, head m, length m, diameter m.
+   net.nodes: [{fixed:bool, head:number(if fixed), elev:number}]
+   net.links: [{a, b, type:'pipe'|'pump'|'emit', ...}]
+     pipe : r, m  (h = r·Q^1.852 Hazen-Williams + m·Q² fittings)
+     pump : A, B, cap?  (gain = min(cap, A − B·Q²), built-in check valve)
+     emit : K, x  (Q = K·p^x, flows from junction a to an atmosphere node b; no backflow)
+*/
+var Hyd = (function () {
+  var G_REV = 1e8, QMIN = 1e-7;
+
+  function hwR(L, D, C) { return 10.67 * L / (Math.pow(C, 1.852) * Math.pow(D, 4.871)); }
+
+  // returns [headloss a→b, d(headloss)/dQ]
+  function hg(l, Q) {
+    if (l.type === 'pipe') {
+      var aq = Math.abs(Q), m = l.m || 0;
+      if (aq < QMIN) { var g0 = 1.852 * l.r * Math.pow(QMIN, 0.852) + 2 * m * QMIN; return [g0 * Q, g0]; }
+      var h = l.r * Math.pow(aq, 1.852) + m * aq * aq;
+      return [Q < 0 ? -h : h, 1.852 * l.r * Math.pow(aq, 0.852) + 2 * m * aq];
+    }
+    if (l.type === 'pump') {
+      var top = l.cap != null ? Math.min(l.A, Math.max(0, l.cap)) : l.A;
+      if (Q < 0) return [-top + G_REV * Q, G_REV];
+      var gain = l.A - l.B * Q * Q, gp = Math.max(2 * l.B * Q, 1e-3);
+      if (gain > top) { gain = top; gp = 1e-3; }   // pressure-regulated pump: gain limited to what the controller asks for
+      return [-gain, gp];
+    }
+    // emitter
+    if (Q <= 0) return [G_REV * Q, G_REV];
+    var ix = 1 / l.x, qq = Math.max(Q, QMIN);
+    var hh = Math.pow(Q / l.K, ix);
+    var gg = ix * Math.pow(qq / l.K, ix - 1) / l.K;
+    return [hh, gg];
+  }
+
+  // elimination order: greedy minimum degree on the symbolic graph (computed once per network)
+  function minDegreeOrder(n, adj) {
+    var sets = adj.map(function (s) { return new Set(s); });
+    var alive = new Uint8Array(n).fill(1), order = [];
+    for (var step = 0; step < n; step++) {
+      var best = -1, bd = Infinity;
+      for (var i = 0; i < n; i++) if (alive[i] && sets[i].size < bd) { bd = sets[i].size; best = i; if (bd <= 1) break; }
+      var k = best, nb = Array.from(sets[k]);
+      for (var a = 0; a < nb.length; a++) {
+        sets[nb[a]].delete(k);
+        for (var b = 0; b < nb.length; b++) if (a !== b) sets[nb[a]].add(nb[b]);
+      }
+      alive[k] = 0; order.push(k);
+    }
+    return order;
+  }
+
+  // symmetric sparse solve by elimination in a given order (rows: array of Map col→val, diag, rhs)
+  function solveSym(n, diag, rows, rhs, order) {
+    var elim = new Array(n), x = new Float64Array(n);
+    for (var t = 0; t < n; t++) {
+      var k = order[t], dk = diag[k];
+      if (!(Math.abs(dk) > 1e-300)) dk = 1e-300;
+      var nb = Array.from(rows[k].entries());
+      elim[t] = [nb, dk];
+      for (var a = 0; a < nb.length; a++) rows[nb[a][0]].delete(k);
+      for (var a2 = 0; a2 < nb.length; a2++) {
+        var i = nb[a2][0], aik = nb[a2][1], f = aik / dk;
+        diag[i] -= f * aik;
+        rhs[i] -= f * rhs[k];
+        var ri = rows[i];
+        for (var b = 0; b < nb.length; b++) {
+          if (b === a2) continue;
+          var j = nb[b][0];
+          ri.set(j, (ri.get(j) || 0) - f * nb[b][1]);
+        }
+      }
+    }
+    for (var t2 = n - 1; t2 >= 0; t2--) {
+      var k2 = order[t2], e = elim[t2], s = rhs[k2];
+      for (var c = 0; c < e[0].length; c++) s -= e[0][c][1] * x[e[0][c][0]];
+      x[k2] = s / e[1];
+    }
+    return x;
+  }
+
+  function solve(net, opts) {
+    opts = opts || {};
+    var nodes = net.nodes, links = net.links, nN = nodes.length, nL = links.length;
+    var jIdx = new Int32Array(nN).fill(-1), nJ = 0, fixedSum = 0, fixedN = 0;
+    for (var i = 0; i < nN; i++) {
+      if (nodes[i].fixed) { fixedSum += nodes[i].head; fixedN++; }
+      else jIdx[i] = nJ++;
+    }
+    var H = new Float64Array(nN), Q = new Float64Array(nL);
+    var h0 = fixedN ? fixedSum / fixedN : 0;
+    for (i = 0; i < nN; i++) H[i] = nodes[i].fixed ? nodes[i].head : h0;
+    for (var k = 0; k < nL; k++) Q[k] = links[k].q0 || 1e-4;
+
+    // symbolic structure
+    var adj = []; for (i = 0; i < nJ; i++) adj.push([]);
+    for (k = 0; k < nL; k++) {
+      var ja = jIdx[links[k].a], jb = jIdx[links[k].b];
+      if (ja >= 0 && jb >= 0 && ja !== jb) { adj[ja].push(jb); adj[jb].push(ja); }
+    }
+    var order = minDegreeOrder(nJ, adj);
+    var maxIt = opts.maxIter || 200, it = 0, converged = false, relErr = 1;
+    var Pk = new Float64Array(nL), Yk = new Float64Array(nL);
+
+    for (it = 1; it <= maxIt; it++) {
+      var diag = new Float64Array(nJ), rhs = new Float64Array(nJ), rows = [];
+      for (i = 0; i < nJ; i++) rows.push(new Map());
+      for (k = 0; k < nL; k++) {
+        var l = links[k], r = hg(l, Q[k]), p = 1 / r[1], y = p * r[0];
+        Pk[k] = p; Yk[k] = y;
+        var a = jIdx[l.a], b = jIdx[l.b], qy = Q[k] - y;
+        if (a >= 0) { diag[a] += p; rhs[a] -= qy; if (b < 0) rhs[a] += p * H[l.b]; }
+        if (b >= 0) { diag[b] += p; rhs[b] += qy; if (a < 0) rhs[b] += p * H[l.a]; }
+        if (a >= 0 && b >= 0 && a !== b) {
+          rows[a].set(b, (rows[a].get(b) || 0) - p);
+          rows[b].set(a, (rows[b].get(a) || 0) - p);
+        }
+      }
+      var x = solveSym(nJ, diag, rows, rhs, order);
+      for (i = 0; i < nN; i++) if (jIdx[i] >= 0) H[i] = x[jIdx[i]];
+      var dsum = 0, qsum = 0, relax = it > 40 ? 0.5 : 1;
+      for (k = 0; k < nL; k++) {
+        var qn = Q[k] - Yk[k] + Pk[k] * (H[links[k].a] - H[links[k].b]);
+        var dq = (qn - Q[k]) * relax;
+        Q[k] += dq; dsum += Math.abs(dq); qsum += Math.abs(Q[k]);
+      }
+      relErr = qsum > 0 ? dsum / qsum : 0;
+      if (it > 2 && relErr < 1e-7) { converged = true; break; }
+    }
+    return { H: H, Q: Q, iterations: Math.min(it, maxIt), converged: converged, relErr: relErr };
+  }
+
+  return { solve: solve, hwR: hwR, hg: hg };
+})();
+if (typeof module !== 'undefined') module.exports = Hyd;
+
+</script>
+<script>
+'use strict';
+/* ===================================================================
+   ผังน้ำไร่ — farm layout + irrigation network check, runs fully in the browser.
+   Geometry is stored in local metres (x east, y north) around P.origin.
+   =================================================================== */
+
+// ---------- catalogs (typical values; every number is editable in the UI) ----------
+const PIPES = {
+  pe16:  { label: 'PE 16 มม. (สายน้ำหยด)', d: 13.6, C: 140 },
+  pe20:  { label: 'PE 20 มม.', d: 16.6, C: 140 },
+  pe25:  { label: 'PE 25 มม.', d: 21.0, C: 140 },
+  pe32:  { label: 'PE 32 มม.', d: 27.2, C: 140 },
+  pvc12: { label: 'PVC ½ นิ้ว', d: 18.0, C: 150 },
+  pvc34: { label: 'PVC ¾ นิ้ว', d: 23.5, C: 150 },
+  pvc1:  { label: 'PVC 1 นิ้ว', d: 29.5, C: 150 },
+  pvc114:{ label: 'PVC 1¼ นิ้ว', d: 37.5, C: 150 },
+  pvc112:{ label: 'PVC 1½ นิ้ว', d: 43.5, C: 150 },
+  pvc2:  { label: 'PVC 2 นิ้ว', d: 55.0, C: 150 },
+  pvc212:{ label: 'PVC 2½ นิ้ว', d: 67.0, C: 150 },
+  pvc3:  { label: 'PVC 3 นิ้ว', d: 79.5, C: 150 },
+  pvc4:  { label: 'PVC 4 นิ้ว', d: 103.0, C: 150 },
+};
+const EMITTERS = {
+  drip2:  { label: 'น้ำหยด 2 ลิตร/ชม.', q: 2, p: 1.0, min: 0.5 },
+  drip4:  { label: 'น้ำหยด 4 ลิตร/ชม.', q: 4, p: 1.0, min: 0.5 },
+  drip8:  { label: 'น้ำหยด 8 ลิตร/ชม.', q: 8, p: 1.0, min: 0.5 },
+  mini60: { label: 'มินิสปริงเกอร์ 60 ลิตร/ชม.', q: 60, p: 1.5, min: 1.0 },
+  mini120:{ label: 'มินิสปริงเกอร์ 120 ลิตร/ชม.', q: 120, p: 1.5, min: 1.0 },
+  spk400: { label: 'สปริงเกอร์ 400 ลิตร/ชม.', q: 400, p: 2.0, min: 1.5 },
+  custom: { label: 'กำหนดเอง', q: 50, p: 1.0, min: 0.7 },
+};
+const PUMP_PRESETS = {
+  auto05: { label: 'ปั๊มอัตโนมัติในบ้าน ~0.5 แรง', kind: 'surface', H0: 25, Qd: 2, Hd: 15, Qmax: 3.5, eff: 40 },
+  cen1:   { label: 'หอยโข่ง ~1 แรง', kind: 'surface', H0: 30, Qd: 6, Hd: 20, Qmax: 9, eff: 50 },
+  cen15:  { label: 'หอยโข่ง ~1.5 แรง', kind: 'surface', H0: 32, Qd: 9, Hd: 22, Qmax: 14, eff: 55 },
+  cen2:   { label: 'หอยโข่ง ~2 แรง', kind: 'surface', H0: 38, Qd: 12, Hd: 25, Qmax: 18, eff: 55 },
+  sub15:  { label: 'ซับเมิร์สบ่อบาดาล ~1.5 แรง', kind: 'sub', H0: 60, Qd: 3, Hd: 45, Qmax: 5, eff: 45 },
+  solar:  { label: 'ปั๊มโซลาร์ DC ~750 วัตต์', kind: 'surface', H0: 35, Qd: 4, Hd: 22, Qmax: 6, eff: 45 },
+};
+const SRC = {
+  pond: { label: 'บ่อ / สระ', short: 'บ่อ', color: '#2b8cc4' },
+  well: { label: 'บ่อบาดาล', short: 'บาดาล', color: '#7b5cc4' },
+  tank: { label: 'แท็งก์', short: 'แท็งก์', color: '#1f9884' },
+  city: { label: 'ประปา', short: 'ประปา', color: '#cf7a1c' },
+};
+const SRC_DEFAULT = {
+  pond: { ground: 0, waterDepth: 1.0 },
+  well: { ground: 0, level: 12, drawdown: 3, yield: 4 },
+  tank: { ground: 0, stand: 3, height: 1.5, cap: 2000, fill: 70 },
+  city: { ground: 0, pressure: 1.0 },
+};
+const BAR = 10.197; // metres of water per bar
+const STEPS = [
+  ['land', 'ที่ดิน'], ['fence', 'รั้ว'], ['plant', 'ปลูก'], ['water', 'แหล่งน้ำ'], ['pipe', 'ท่อ & ปั๊ม'], ['run', 'สถานการณ์ & ผล'],
+];
+const KIND_STEP = { boundary: 'land', block: 'plant', source: 'water', pipe: 'pipe', pump: 'pipe' };
+
+// ---------- small utils ----------
+const $ = s => document.querySelector(s);
+const uid = p => p + Math.random().toString(36).slice(2, 8);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const fmt = (v, d = 1) => (v == null || !isFinite(v)) ? '–' : Number(v).toLocaleString('th-TH', { minimumFractionDigits: d, maximumFractionDigits: d });
+const fmt0 = v => fmt(v, 0);
+const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
+function projSeg(p, a, b) {
+  const dx = b[0] - a[0], dy = b[1] - a[1], L2 = dx * dx + dy * dy;
+  let t = L2 ? ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / L2 : 0;
+  t = clamp(t, 0, 1);
+  const q = [a[0] + t * dx, a[1] + t * dy];
+  return { t, q, d: dist(p, q), len: Math.sqrt(L2) };
+}
+const polyLen = pts => pts.reduce((s, p, i) => i ? s + dist(pts[i - 1], p) : 0, 0);
+function polyArea(poly) { let s = 0; for (let i = 0; i < poly.length; i++) { const a = poly[i], b = poly[(i + 1) % poly.length]; s += a[0] * b[1] - b[0] * a[1]; } return Math.abs(s) / 2; }
+function polyPerim(poly) { let s = 0; for (let i = 0; i < poly.length; i++) s += dist(poly[i], poly[(i + 1) % poly.length]); return s; }
+function inPoly(p, poly) {
+  let c = false;
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const a = poly[i], b = poly[j];
+    if (((a[1] > p[1]) !== (b[1] > p[1])) && (p[0] < (b[0] - a[0]) * (p[1] - a[1]) / (b[1] - a[1]) + a[0])) c = !c;
+  }
+  return c;
+}
+function edgeDist(p, poly) { let m = Infinity; for (let i = 0; i < poly.length; i++) m = Math.min(m, projSeg(p, poly[i], poly[(i + 1) % poly.length]).d); return m; }
+function raiText(m2) {
+  const rai = Math.floor(m2 / 1600), ngan = Math.floor((m2 % 1600) / 400), wa = (m2 % 400) / 4;
+  return `${rai} ไร่ ${ngan} งาน ${fmt(wa, 0)} ตร.ว.`;
+}
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(() => t.hidden = true, 2600); }
+function download(name, text, type) {
+  const blob = new Blob([text], { type: type || 'application/octet-stream' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.append(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+
+// ---------- state ----------
+let P = null;                      // project
+const ui = { step: 'land', tool: null, draft: [], sel: null, mouse: null, snap: null, pipeSize: 'pvc1', srcType: null, colorBy: 'pressure' };
+const hist = [];
+const LS_KEY = 'phangnamrai.v1';
+const cleanJSON = obj => JSON.stringify(obj, (k, v) => k.startsWith('_') ? undefined : v);
+function save() { try { localStorage.setItem(LS_KEY, cleanJSON(P)); } catch (e) { } }
+function snapshot() { hist.push(cleanJSON(P)); if (hist.length > 60) hist.shift(); }
+function undo() {
+  if (ui.tool && ui.draft.length) { ui.draft.pop(); redraw(); return; }
+  const s = hist.pop(); if (!s) { toast('ไม่มีอะไรให้ย้อนแล้ว'); return; }
+  P = JSON.parse(s); ui.sel = null; changed(false);
+}
+function scenario() { return P.scenarios.find(s => s.id === P.active) || P.scenarios[0]; }
+const pumpOn = (sc, id) => sc.pumpOn[id] !== false;
+const pipeOpen = (sc, id) => !sc.pipeOff[id];
+
+function emptyProject(origin) {
+  const sc = { id: uid('s'), name: 'สถานการณ์ 1', pumpOn: {}, pipeOff: {} };
+  return {
+    version: 1, name: 'ไร่ของฉัน', origin: origin || { lat: 13.7563, lng: 100.5018 }, zoom: 18,
+    boundary: null, fence: { spacing: 2.5, strands: 4, roll: 100, gate: 4, show: true },
+    blocks: [], sources: [], pipes: [], pumps: [], scenarios: [sc], active: sc.id,
+    settings: { attach: 1.5, minor: 10 },
+  };
+}
+
+// ---------- sample farm (fictional, ~5.8 rai) ----------
+function sampleProject() {
+  const p = emptyProject({ lat: 12.73225, lng: 102.11945 });
+  p.name = 'ไร่ตัวอย่าง (สมมติ)';
+  p.boundary = [[-55, -42], [55, -42], [55, 42], [-55, 42]];
+  const blk = { id: 'b1', name: 'แปลงทุเรียน', crop: 'ทุเรียน', poly: [[-32, -34], [48, -34], [48, 26], [-32, 26]], rowSp: 8, plantSp: 8, setback: 3, angle: 'auto', elev: 0,
+    emitterType: 'mini120', emitter: { ...EMITTERS.mini120 }, perPlant: 1, waterL: 150, latSize: 'pe25', hdrSize: 'pvc112', autoPipes: true };
+  p.blocks.push(blk);
+  p.sources = [
+    { id: 'tank', type: 'tank', name: 'แท็งก์ 3,000 ลิตร', x: -45, y: -34, ...SRC_DEFAULT.tank, cap: 3000 },
+    { id: 'city', type: 'city', name: 'มิเตอร์ประปาหน้าไร่', x: -45, y: -41.5, ...SRC_DEFAULT.city },
+    { id: 'well', type: 'well', name: 'บ่อบาดาล', x: -48, y: 34, ...SRC_DEFAULT.well },
+    { id: 'pond', type: 'pond', name: 'สระหลังไร่', x: 40, y: 36, ...SRC_DEFAULT.pond },
+  ];
+  p.pumps = [
+    { id: 'pw', name: 'ซับเมิร์สบาดาล', a: [-48, 34], b: [-48, 31], preset: 'sub15', ...PUMP_PRESETS.sub15 },
+    { id: 'pb', name: 'ปั๊มเพิ่มแรงดันหลังแท็งก์', a: [-42, -34], b: [-38, -34], preset: 'cen15', ...PUMP_PRESETS.cen15 },
+    { id: 'pp', name: 'ปั๊มสูบจากสระ', a: [40, 36], b: [36, 36], preset: 'cen2', ...PUMP_PRESETS.cen2 },
+  ];
+  p.pumps.forEach(u => delete u.label);
+  p.pipes = [
+    { id: 'city2tank', name: 'ประปา → แท็งก์', size: 'pvc1', pts: [[-45, -41.5], [-45, -34]] },
+    { id: 'well2tank', name: 'บาดาล → แท็งก์', size: 'pvc114', pts: [[-48, 31], [-48, -30], [-45, -34]] },
+    { id: 'tankout', name: 'ท่อออกแท็งก์', size: 'pvc2', pts: [[-45, -34], [-42, -34]] },
+    { id: 'bypass', name: 'บายพาสปั๊ม', size: 'pvc2', pts: [[-42, -34], [-40, -36.5], [-38, -34]] },
+    { id: 'main', name: 'ท่อเมนเข้าแปลง', size: 'pvc2', pts: [[-38, -34], [-30, -34], [-30, -31]] },
+    { id: 'pondline', name: 'สระ → หัวแปลง', size: 'pvc2', pts: [[36, 36], [-30, 36], [-30, 17]] },
+  ];
+  const S = (name, on, off) => ({ id: uid('s'), name, pumpOn: { pw: on.includes('pw'), pb: on.includes('pb'), pp: on.includes('pp') }, pipeOff: Object.fromEntries(off.map(k => [k, true])) });
+  p.scenarios = [
+    S('แท็งก์ไหลลงสวนเอง (ไม่ใช้ปั๊ม)', [], ['city2tank', 'pondline']),
+    S('แท็งก์ + ปั๊มเพิ่มแรงดัน', ['pb'], ['city2tank', 'pondline', 'bypass']),
+    S('สูบจากสระเข้าสวนตรง', ['pp'], ['city2tank', 'tankout']),
+    S('บาดาลเติมแท็งก์', ['pw'], ['city2tank', 'tankout', 'pondline']),
+    S('ประปาเติมแท็งก์', [], ['tankout', 'pondline']),
+  ];
+  p.active = p.scenarios[1].id;
+  P = p; genBlockPipes(blk);
+  return p;
+}
+
+// ---------- coordinates ----------
+const MPD = 111320;
+function toLL(p) { const o = P.origin; return { lat: o.lat + p[1] / MPD, lng: o.lng + p[0] / (MPD * Math.cos(o.lat * Math.PI / 180)) }; }
+function fromLL(ll) { const o = P.origin; return [(ll.lng - o.lng) * MPD * Math.cos(o.lat * Math.PI / 180), (ll.lat - o.lat) * MPD]; }
+
+// ===================================================================
+// Map engine: slippy tiles + one canvas overlay. No external library.
+// ===================================================================
+const TS = 256;
+const BASES = {
+  sat: { url: (z, x, y) => `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`, max: 19,
+    attrib: 'ภาพ © <a href="https://www.esri.com" target="_blank" rel="noopener">Esri</a>, Maxar, Earthstar Geographics, and the GIS User Community' },
+  osm: { url: (z, x, y) => `https://tile.openstreetmap.org/${z}/${x}/${y}.png`, max: 19,
+    attrib: '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors' },
+  none: { url: null, max: 22, attrib: 'กริดช่องละ 32 พิกเซล · ไม่ใช้ภาพแผนที่' },
+};
+const Map2 = (() => {
+  const el = $('#map');
+  const tileDiv = document.createElement('div'); tileDiv.className = 'tiles';
+  const cv = document.createElement('canvas');
+  el.append(tileDiv, cv);
+  const ctx = cv.getContext('2d');
+  const st = { lat: 13.75, lng: 100.5, zoom: 17, base: 'sat' };
+  let W = 1, H = 1, dpr = 1, raf = 0, drawFn = null;
+  const tiles = new Map();
+  function wpx(lat, lng, z) {
+    const s = TS * Math.pow(2, z), sin = clamp(Math.sin(lat * Math.PI / 180), -0.9999, 0.9999);
+    return [(lng + 180) / 360 * s, (0.5 - Math.log((1 + sin) / (1 - sin)) / (4 * Math.PI)) * s];
+  }
+  function wll(x, y, z) { const s = TS * Math.pow(2, z); const n = Math.PI - 2 * Math.PI * y / s; return { lat: 180 / Math.PI * Math.atan(Math.sinh(n)), lng: x / s * 360 - 180 }; }
+  let cpx = [0, 0];
+  function project(ll) { const p = wpx(ll.lat, ll.lng, st.zoom); return [p[0] - cpx[0] + W / 2, p[1] - cpx[1] + H / 2]; }
+  function unproject(x, y) { return wll(cpx[0] + x - W / 2, cpx[1] + y - H / 2, st.zoom); }
+  function setView(lat, lng, zoom) { st.lat = lat; st.lng = lng; if (zoom != null) st.zoom = clamp(zoom, 3, BASES[st.base].max + 3); cpx = wpx(st.lat, st.lng, st.zoom); request(); }
+  function zoomAround(sx, sy, z) {
+    const ll = unproject(sx, sy);
+    st.zoom = clamp(z, 3, BASES[st.base].max + 3); cpx = wpx(st.lat, st.lng, st.zoom);
+    const p = project(ll); const c = [cpx[0] + p[0] - sx, cpx[1] + p[1] - sy];
+    const n = wll(c[0], c[1], st.zoom); st.lat = n.lat; st.lng = n.lng; cpx = wpx(st.lat, st.lng, st.zoom); request();
+  }
+  function resize() {
+    const r = el.getBoundingClientRect(); W = Math.max(1, r.width); H = Math.max(1, r.height); dpr = window.devicePixelRatio || 1;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cpx = wpx(st.lat, st.lng, st.zoom); request();
+  }
+  function drawTiles() {
+    const B = BASES[st.base];
+    const keep = new Set();
+    if (B.url) {
+      const tz = clamp(Math.round(st.zoom), 1, B.max), scale = Math.pow(2, st.zoom - tz), ts = TS * scale;
+      const c = wpx(st.lat, st.lng, tz), ox = W / 2 - c[0] * scale, oy = H / 2 - c[1] * scale, n = Math.pow(2, tz);
+      const x0 = Math.floor(-ox / ts), x1 = Math.floor((W - ox) / ts), y0 = Math.floor(-oy / ts), y1 = Math.floor((H - oy) / ts);
+      for (let tx = x0; tx <= x1; tx++) for (let ty = y0; ty <= y1; ty++) {
+        if (ty < 0 || ty >= n) continue;
+        const wx = ((tx % n) + n) % n, key = `${st.base}/${tz}/${wx}/${ty}`;
+        let img = tiles.get(key);
+        if (!img) {
+          img = new Image(); img.className = 'tile'; img.alt = ''; img.draggable = false;
+          img.onload = () => img.classList.add('ok'); img.onerror = () => img.classList.remove('ok');
+          img.src = B.url(tz, wx, ty); tiles.set(key, img); tileDiv.append(img);
+        }
+        img.style.transform = `translate(${ox + tx * ts}px,${oy + ty * ts}px) scale(${scale * 1.002})`;
+        img.hidden = false; keep.add(key);
+      }
+    }
+    for (const [k, img] of tiles) if (!keep.has(k)) {
+      if (tiles.size > 260) { img.remove(); tiles.delete(k); } else img.hidden = true;
+    }
+  }
+  function frame() {
+    raf = 0; drawTiles();
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+    if (drawFn) drawFn(ctx, W, H);
+  }
+  function request() { if (!raf) raf = requestAnimationFrame(frame); }
+  function setBase(b) { st.base = b; $('#attrib').innerHTML = BASES[b].attrib; for (const [, img] of tiles) img.hidden = true; if (st.zoom > BASES[b].max + 3) st.zoom = BASES[b].max + 3; request(); }
+
+  // ---- pointer handling ----
+  const ptrs = new Map(); let gesture = null, lastTap = null, handlers = {};
+  const local = e => { const r = el.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  el.addEventListener('pointerdown', e => {
+    el.setPointerCapture(e.pointerId); const p = local(e); ptrs.set(e.pointerId, p);
+    if (ptrs.size === 1) gesture = { type: 'pending', start: p, last: p, t: Date.now(), startLL: { lat: st.lat, lng: st.lng }, startC: cpx.slice() };
+    else if (ptrs.size === 2) {
+      if (gesture && gesture.type === 'capture' && handlers.dragEnd) handlers.dragEnd();
+      const [a, b] = [...ptrs.values()]; gesture = { type: 'pinch', d0: Math.hypot(a[0] - b[0], a[1] - b[1]), z0: st.zoom, mid: [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2] };
+    }
+  });
+  el.addEventListener('pointermove', e => {
+    const p = local(e);
+    if (!ptrs.has(e.pointerId)) { handlers.hover && handlers.hover(p[0], p[1]); return; }
+    ptrs.set(e.pointerId, p);
+    if (!gesture) return;
+    if (gesture.type === 'pinch' && ptrs.size >= 2) {
+      const [a, b] = [...ptrs.values()]; const d = Math.hypot(a[0] - b[0], a[1] - b[1]); const mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+      const ll = unproject(gesture.mid[0], gesture.mid[1]);
+      st.zoom = clamp(gesture.z0 + Math.log2(d / gesture.d0), 3, BASES[st.base].max + 3); cpx = wpx(st.lat, st.lng, st.zoom);
+      const pp = project(ll); const c = [cpx[0] + pp[0] - mid[0], cpx[1] + pp[1] - mid[1]]; const n = wll(c[0], c[1], st.zoom);
+      st.lat = n.lat; st.lng = n.lng; cpx = wpx(st.lat, st.lng, st.zoom); gesture.mid = mid; gesture.d0 = d; gesture.z0 = st.zoom; request(); return;
+    }
+    if (gesture.type === 'pending') {
+      if (Math.hypot(p[0] - gesture.start[0], p[1] - gesture.start[1]) < 5) return;
+      if (handlers.dragStart && handlers.dragStart(gesture.start[0], gesture.start[1])) gesture.type = 'capture';
+      else { gesture.type = 'pan'; el.classList.add('panning'); }
+    }
+    if (gesture.type === 'capture') { handlers.drag && handlers.drag(p[0], p[1]); return; }
+    if (gesture.type === 'pan') {
+      const c = [gesture.startC[0] - (p[0] - gesture.start[0]), gesture.startC[1] - (p[1] - gesture.start[1])];
+      const n = wll(c[0], c[1], st.zoom); st.lat = n.lat; st.lng = n.lng; cpx = c; request();
+    }
+    handlers.hover && handlers.hover(p[0], p[1]);
+  });
+  function end(e) {
+    if (!ptrs.has(e.pointerId)) return;
+    ptrs.delete(e.pointerId);
+    if (gesture && gesture.type === 'pending' && e.type === 'pointerup') {
+      const p = gesture.start, now = Date.now();
+      if (lastTap && now - lastTap.t < 320 && Math.hypot(p[0] - lastTap.p[0], p[1] - lastTap.p[1]) < 12) { lastTap = null; handlers.dblTap && handlers.dblTap(p[0], p[1]); }
+      else { lastTap = { t: now, p }; handlers.tap && handlers.tap(p[0], p[1], e); }
+    }
+    if (gesture && gesture.type === 'capture') handlers.dragEnd && handlers.dragEnd();
+    if (ptrs.size === 0) { gesture = null; el.classList.remove('panning'); }
+    else if (gesture && gesture.type === 'pinch') gesture = { type: 'pinchEnd' };
+  }
+  el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end);
+  el.addEventListener('wheel', e => { e.preventDefault(); const p = local(e); zoomAround(p[0], p[1], st.zoom - e.deltaY * (e.deltaMode ? 0.05 : 0.0022)); }, { passive: false });
+  el.addEventListener('contextmenu', e => e.preventDefault());
+  new ResizeObserver(resize).observe(el);
+  return {
+    st, project, unproject, setView, zoomAround, request, setBase, resize,
+    on(h) { handlers = h; }, draw(fn) { drawFn = fn; },
+    size: () => [W, H],
+    mpp: () => 40075016.686 * Math.cos(st.lat * Math.PI / 180) / (TS * Math.pow(2, st.zoom)),
+  };
+})();
+const S = p => Map2.project(toLL(p));          // metres → screen
+const M = (x, y) => fromLL(Map2.unproject(x, y)); // screen → metres
+function redraw() { Map2.request(); }
+
+// ===================================================================
+// Derived geometry: plants and auto-laid laterals
+// ===================================================================
+function blockAngle(b) {
+  if (b.angle !== 'auto' && b.angle !== '' && b.angle != null && isFinite(+b.angle)) return +b.angle * Math.PI / 180;
+  let best = 0, bl = -1;
+  for (let i = 0; i < b.poly.length; i++) { const a = b.poly[i], c = b.poly[(i + 1) % b.poly.length], l = dist(a, c); if (l > bl) { bl = l; best = Math.atan2(c[1] - a[1], c[0] - a[0]); } }
+  return best;
+}
+function plantsOf(b) {
+  const sig = JSON.stringify([b.poly, b.rowSp, b.plantSp, b.setback, b.angle]);
+  if (b._sig === sig) return b._plants;
+  const th = blockAngle(b), c = Math.cos(th), s = Math.sin(th);
+  const toU = p => [p[0] * c + p[1] * s, -p[0] * s + p[1] * c], fromU = q => [q[0] * c - q[1] * s, q[0] * s + q[1] * c];
+  const U = b.poly.map(toU);
+  const umin = Math.min(...U.map(q => q[0])), umax = Math.max(...U.map(q => q[0])), vmin = Math.min(...U.map(q => q[1])), vmax = Math.max(...U.map(q => q[1]));
+  const rs = Math.max(0.2, +b.rowSp || 1), ps = Math.max(0.2, +b.plantSp || 1), sb = Math.max(0, +b.setback || 0);
+  const out = []; let row = 0;
+  const maxN = 6000;
+  for (let v = vmin + sb; v <= vmax - sb + 1e-6 && out.length < maxN; v += rs) {
+    let any = false;
+    for (let u = umin + sb; u <= umax - sb + 1e-6 && out.length < maxN; u += ps) {
+      const p = fromU([u, v]);
+      if (inPoly(p, b.poly) && edgeDist(p, b.poly) >= sb - 1e-6) { out.push({ x: p[0], y: p[1], u, v, row }); any = true; }
+    }
+    if (any) row++;
+  }
+  b._sig = sig; b._plants = out; b._th = th;
+  return out;
+}
+// lay one lateral per plant row plus a header along the start edge of the rows
+function genBlockPipes(b) {
+  const plants = plantsOf(b); if (!plants.length) return;
+  const th = b._th, c = Math.cos(th), s = Math.sin(th), fromU = q => [q[0] * c - q[1] * s, q[0] * s + q[1] * c];
+  const rows = new Map(); plants.forEach(p => { if (!rows.has(p.row)) rows.set(p.row, []); rows.get(p.row).push(p); });
+  const uh = Math.min(...plants.map(p => p.u)) - 1;
+  const oldHdr = P.pipes.find(p => p.block === b.id && p.role === 'header');
+  const oldEnds = oldHdr ? [oldHdr.pts[0], oldHdr.pts[oldHdr.pts.length - 1]] : null;
+  const oldLat0 = P.pipes.find(p => p.block === b.id && p.role === 'lateral');
+  P.pipes = P.pipes.filter(p => p.block !== b.id);
+  const rowList = [...rows.values()].sort((a, z) => a[0].v - z[0].v);
+  rowList.forEach((r, i) => {
+    const ulast = Math.max(...r.map(p => p.u)) + 0.5;
+    P.pipes.push({ id: uid('p'), name: `${b.name} แถว ${i + 1}`, size: b.latSize, block: b.id, role: 'lateral', pts: [fromU([uh, r[0].v]), fromU([ulast, r[0].v])] });
+  });
+  let newEnds;
+  if (rowList.length > 1) {
+    const a = fromU([uh, rowList[0][0].v]), z = fromU([uh, rowList[rowList.length - 1][0].v]);
+    P.pipes.push({ id: uid('p'), name: `${b.name} ท่อหัวแปลง`, size: b.hdrSize, block: b.id, role: 'header', pts: [a, z] });
+    newEnds = [a, z];
+  } else newEnds = [fromU([uh, rowList[0][0].v]), fromU([uh, rowList[0][0].v])];
+  const oldRef = oldEnds || (oldLat0 ? [oldLat0.pts[0], oldLat0.pts[0]] : null);
+  if (oldRef) { // keep supply pipes attached to the header ends when the rows move
+    [0, 1].forEach(i => { if (dist(oldRef[i], newEnds[i]) > 0.01) moveRefs(refsAt(oldRef[i], { block: b.id }), newEnds[i]); });
+  }
+}
+
+// points that coincide (connected network points), so they move together
+function refsAt(pt, opt = {}) {
+  const out = [], T = 0.3;
+  P.pipes.forEach(p => { if (opt.block && p.block === opt.block) return; p.pts.forEach((v, i) => { if (dist(v, pt) < T) out.push({ arr: p.pts, i }); }); });
+  P.pumps.forEach(u => { if (dist(u.a, pt) < T) out.push({ obj: u, k: 'a' }); if (dist(u.b, pt) < T) out.push({ obj: u, k: 'b' }); });
+  P.sources.forEach(s => { if (dist([s.x, s.y], pt) < T) out.push({ src: s }); });
+  return out;
+}
+function moveRefs(refs, p) {
+  refs.forEach(r => { if (r.arr) r.arr[r.i] = [p[0], p[1]]; else if (r.obj) r.obj[r.k] = [p[0], p[1]]; else if (r.src) { r.src.x = p[0]; r.src.y = p[1]; } });
+}
+
+// ===================================================================
+// Hydraulics: build network for a scenario, solve, evaluate
+// ===================================================================
+function srcHead(s, inlet) {
+  const g = +s.ground || 0;
+  if (inlet && s.type === 'tank') return g + (+s.stand || 0) + (+s.height || 0);
+  if (s.type === 'pond') return g - (+s.waterDepth || 0);
+  if (s.type === 'well') return g - (+s.level || 0) - (+s.drawdown || 0);
+  if (s.type === 'tank') return g + (+s.stand || 0) + (+s.height || 0) * clamp(+s.fill || 0, 0, 100) / 100;
+  return g + (+s.pressure || 0) * BAR;
+}
+function emitK(e) { const pn = Math.max(0.05, +e.p || 1) * BAR; return (+e.q || 0) / 1000 / 3600 / Math.sqrt(pn); } // m³/s per m^0.5
+function pumpAB(u) { const Qd = Math.max(0.01, +u.Qd) / 3600; return { A: +u.H0, B: Math.max(1, (+u.H0 - +u.Hd) / (Qd * Qd)) }; }
+function pipeSpec(p) { return PIPES[p.size] || PIPES.pvc1; }
+
+function buildNet(sc, topIn) {
+  topIn = topIn || {};
+  const nodes = [], links = [], grid = new Map(), T = 0.3;
+  const nodeAt = (x, y, elev) => {
+    const gx = Math.round(x), gy = Math.round(y);
+    for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+      const arr = grid.get((gx + dx) + ',' + (gy + dy)); if (arr) for (const i of arr) if (Math.hypot(nodes[i].x - x, nodes[i].y - y) < T) return i;
+    }
+    const i = nodes.push({ x, y, elev: elev || 0, fixed: false }) - 1; const k = gx + ',' + gy;
+    if (!grid.has(k)) grid.set(k, []); grid.get(k).push(i); return i;
+  };
+  P.sources.forEach(s => { const i = nodeAt(s.x, s.y, +s.ground || 0); Object.assign(nodes[i], { fixed: true, head: srcHead(s, topIn[s.id]), src: s.id, elev: +s.ground || 0 }); });
+  const atm = new Map();
+  const atmNode = e => { if (!atm.has(e)) atm.set(e, nodes.push({ fixed: true, head: e, elev: e, atm: true, x: NaN, y: NaN }) - 1); return atm.get(e); };
+
+  // attach each plant to the nearest pipe
+  const attach = +P.settings.attach || 1.5;
+  const plants = [];
+  P.blocks.forEach(b => plantsOf(b).forEach((p, k) => plants.push({ b, k, x: p.x, y: p.y, pipe: null })));
+  const pipeAtt = new Map(P.pipes.map(p => [p.id, []]));
+  plants.forEach(pl => {
+    let best = attach, hit = null;
+    P.pipes.forEach(p => {
+      let cum = 0;
+      for (let i = 1; i < p.pts.length; i++) {
+        const pr = projSeg([pl.x, pl.y], p.pts[i - 1], p.pts[i]);
+        if (pr.d < best) { best = pr.d; hit = { p, s: cum + pr.t * pr.len, q: pr.q }; }
+        cum += pr.len;
+      }
+    });
+    if (hit) { pl.pipe = hit.p.id; pl.q = hit.q; pipeAtt.get(hit.p.id).push({ s: hit.s, x: hit.q[0], y: hit.q[1], elev: +pl.b.elev || 0 }); }
+  });
+  const cands = [];
+  P.pipes.forEach(p => p.pts.forEach(v => cands.push(v)));
+  P.pumps.forEach(u => cands.push(u.a, u.b));
+  P.sources.forEach(s => cands.push([s.x, s.y]));
+  const minorF = 1 + (+P.settings.minor || 0) / 100;
+  P.pipes.forEach(p => {
+    const pts = []; let cum = 0;
+    p.pts.forEach((v, i) => { if (i) cum += dist(p.pts[i - 1], v); pts.push({ s: cum, x: v[0], y: v[1] }); });
+    cands.forEach(c => {
+      let cc = 0;
+      for (let i = 1; i < p.pts.length; i++) {
+        const pr = projSeg(c, p.pts[i - 1], p.pts[i]);
+        if (pr.d < T && pr.t > 1e-6 && pr.t < 1 - 1e-6) pts.push({ s: cc + pr.t * pr.len, x: c[0], y: c[1] });
+        cc += pr.len;
+      }
+    });
+    pipeAtt.get(p.id).forEach(a => pts.push(a));
+    pts.sort((a, b) => a.s - b.s);
+    const open = pipeOpen(sc, p.id), spec = pipeSpec(p);
+    let prev = null;
+    pts.forEach(q => {
+      const n = nodeAt(q.x, q.y, q.elev);
+      if (q.elev != null && !nodes[n].fixed) nodes[n].elev = q.elev;
+      if (prev && prev.n !== n && open) {
+        const L = Math.max(0.05, q.s - prev.s);
+        links.push({ a: prev.n, b: n, type: 'pipe', r: Hyd.hwR(L * minorF, spec.d / 1000, spec.C), kind: 'pipe', pid: p.id, L, Leff: L * minorF, d: spec.d, C: spec.C,
+          q0: 0.5 * Math.PI * Math.pow(spec.d / 2000, 2) });
+      }
+      prev = { n, s: q.s };
+    });
+  });
+  plants.forEach(pl => {
+    if (!pl.pipe) return;
+    const j = nodeAt(pl.q[0], pl.q[1]);
+    const e = pl.b.emitter, K = emitK(e) * Math.max(1, +pl.b.perPlant || 1);
+    pl.node = j;
+    links.push({ a: j, b: atmNode(+pl.b.elev || 0), type: 'emit', K, x: 0.5, kind: 'emit', bid: pl.b.id, k: pl.k, q0: K * Math.sqrt(10) });
+  });
+  P.pumps.forEach(u => {
+    if (!pumpOn(sc, u.id)) return;
+    const { A, B } = pumpAB(u);
+    links.push({ a: nodeAt(u.a[0], u.a[1]), b: nodeAt(u.b[0], u.b[1]), type: 'pump', A, B, kind: 'pump', uid: u.id, q0: (+u.Qd || 1) / 3600 });
+  });
+
+  // keep only what is hydraulically connected to a real water source
+  const adj = nodes.map(() => []);
+  links.forEach((l, k) => { if (l.type !== 'emit') { adj[l.a].push(l.b); adj[l.b].push(l.a); } });
+  const reached = new Uint8Array(nodes.length), stack = [];
+  nodes.forEach((n, i) => { if (n.fixed && !n.atm) { reached[i] = 1; stack.push(i); } });
+  while (stack.length) { const i = stack.pop(); for (const j of adj[i]) if (!reached[j]) { reached[j] = 1; stack.push(j); } }
+  const keepNode = nodes.map((n, i) => reached[i] || n.atm);
+  return { nodes, links, plants, keepNode, nodeAt };
+}
+
+function runScenario(sc, topIn) {
+  const net = buildNet(sc, topIn);
+  const idx = new Int32Array(net.nodes.length).fill(-1), sN = [];
+  net.nodes.forEach((n, i) => { if (net.keepNode[i]) { idx[i] = sN.length; sN.push(n); } });
+  const sL = [], lmap = [];
+  net.links.forEach((l, k) => {
+    if (idx[l.a] < 0 || idx[l.b] < 0) return;
+    if (l.type !== 'emit' && net.nodes[l.a].fixed && net.nodes[l.b].fixed && l.a === l.b) return;
+    sL.push({ ...l, a: idx[l.a], b: idx[l.b] }); lmap.push(k);
+  });
+  let sol = { H: new Float64Array(sN.length), Q: new Float64Array(sL.length), converged: true, iterations: 0 };
+  const t0 = performance.now();
+  if (sL.length && sN.some(n => !n.fixed)) sol = Hyd.solve({ nodes: sN, links: sL });
+  else sN.forEach((n, i) => { sol.H[i] = n.fixed ? n.head : 0; });
+  const ms = performance.now() - t0;
+  const Hn = i => idx[i] >= 0 ? sol.H[idx[i]] : null;
+  const res = { sc, net, sol, idx, sL, lmap, ms, Hn, segs: [], plants: [], pumps: [], tanks: [], warnings: [], blocks: [] };
+
+  // pipe segments
+  sL.forEach((l, k) => {
+    if (l.kind !== 'pipe') return;
+    const Q = sol.Q[k], A = Math.PI * Math.pow(l.d / 2000, 2), na = sN[l.a], nb = sN[l.b];
+    const pa = sol.H[l.a] - na.elev, pb = sol.H[l.b] - nb.elev;
+    res.segs.push({ pid: l.pid, a: [na.x, na.y], b: [nb.x, nb.y], Q, v: Math.abs(Q) / A, p: Math.min(pa, pb), hl: Math.abs(sol.H[l.a] - sol.H[l.b]), L: l.L });
+  });
+  // plants
+  const emitQ = new Map();
+  sL.forEach((l, k) => { if (l.kind === 'emit') emitQ.set(l.bid + ':' + l.k, sol.Q[k]); });
+  net.plants.forEach(pl => {
+    const e = pl.b.emitter, minP = (+e.min || 0) * BAR;
+    let status = 'none', p = null, q = 0;
+    if (pl.pipe) {
+      const h = Hn(pl.node);
+      if (h == null) status = 'dry';
+      else {
+        p = h - (+pl.b.elev || 0); q = Math.max(0, emitQ.get(pl.b.id + ':' + pl.k) || 0) * 3600 * 1000;
+        status = p < 0.05 * BAR || q < 0.01 ? 'dry' : p < minP ? 'low' : 'ok';
+      }
+    }
+    res.plants.push({ bid: pl.b.id, x: pl.x, y: pl.y, status, p, q });
+  });
+  // blocks
+  P.blocks.forEach(b => {
+    const ps = res.plants.filter(p => p.bid === b.id), wet = ps.filter(p => p.status === 'ok' || p.status === 'low');
+    const qs = wet.map(p => p.q), pr = wet.map(p => p.p);
+    const avg = qs.length ? qs.reduce((a, c) => a + c, 0) / qs.length : 0;
+    res.blocks.push({ b, n: ps.length, ok: ps.filter(p => p.status === 'ok').length, low: ps.filter(p => p.status === 'low').length,
+      dry: ps.filter(p => p.status === 'dry').length, none: ps.filter(p => p.status === 'none').length,
+      qavg: avg, qmin: qs.length ? Math.min(...qs) : 0, pmin: pr.length ? Math.min(...pr) : null, pmax: pr.length ? Math.max(...pr) : null,
+      total: qs.reduce((a, c) => a + c, 0), runMin: avg > 0 ? (+b.waterL || 0) / avg * 60 : null });
+  });
+  // pumps
+  P.pumps.forEach(u => {
+    const on = pumpOn(sc, u.id);
+    const r = { u, on, Q: 0, H: null, kW: null, status: 'off', msg: 'ปิดอยู่ในสถานการณ์นี้' };
+    if (on) {
+      const k = sL.findIndex(l => l.kind === 'pump' && l.uid === u.id);
+      if (k < 0) { r.status = 'bad'; r.msg = 'ไม่ได้ต่อกับแหล่งน้ำ ตรวจว่าปลายด้านดูดของปั๊มต่อกับบ่อ แท็งก์ หรือท่อที่มีน้ำ'; }
+      else {
+        const l = sL[k]; r.Q = Math.max(0, sol.Q[k]) * 3600; r.H = sol.H[l.b] - sol.H[l.a];
+        r.kW = r.Q > 0 ? 1000 * 9.81 * (r.Q / 3600) * r.H / (Math.max(10, +u.eff || 50) / 100) / 1000 : 0;
+        if (r.Q < 0.05) { r.status = 'bad'; r.msg = 'น้ำแทบไม่ไหล: ปั๊มส่งไม่ถึงปลายทาง หรือปลายทางถูกปิด'; }
+        else if (r.Q > +u.Qmax) { r.status = 'warn'; r.msg = `ไหล ${fmt(r.Q)} ม³/ชม. เกินช่วงใช้งานของปั๊ม (สูงสุด ${fmt(+u.Qmax)}) ปั๊มจะทำงานหนักและกินไฟ`; }
+        else if (r.Q < 0.3 * +u.Qd) { r.status = 'warn'; r.msg = 'ไหลน้อยมาก ใกล้จุดปิดหัว ปั๊มจะร้อน ควรเปิดโซนเพิ่มหรือใช้ปั๊มเล็กลง'; }
+        else { r.status = 'ok'; r.msg = 'อยู่ในช่วงใช้งานของปั๊ม'; }
+        // suction lift for surface pumps drawing from pond / well
+        const src = P.sources.find(s => dist([s.x, s.y], u.a) < 0.3);
+        if (src && (src.type === 'pond' || src.type === 'well') && u.kind !== 'sub') {
+          const lift = (+src.ground || 0) - srcHead(src);
+          if (lift > 7) { r.status = 'bad'; r.msg = `ระดับน้ำลึก ${fmt(lift)} ม. ปั๊มผิวดินดูดได้จริงราว 6–7 ม. ต้องใช้ปั๊มจุ่ม (ซับเมิร์ส)`; }
+        }
+      }
+    }
+    res.pumps.push(r);
+  });
+  // well yield
+  P.sources.filter(s => s.type === 'well' && +s.yield > 0).forEach(s => {
+    const out = res.pumps.filter(r => r.on && dist(r.u.a, [s.x, s.y]) < 0.3).reduce((a, r) => a + r.Q, 0);
+    if (out > +s.yield) res.warnings.push({ lvl: 'warn', text: `สูบจาก${s.name} ${fmt(out)} ม³/ชม. มากกว่าที่บ่อให้ได้ (${fmt(+s.yield)} ม³/ชม.) ระดับน้ำจะลดลงเรื่อย ๆ` });
+  });
+  // tanks & other sources: net flow (positive = water leaving the source)
+  P.sources.forEach(s => {
+    const n = net.nodeAt(s.x, s.y); const ii = idx[n]; let out = 0;
+    if (ii >= 0) sL.forEach((l, k) => { if (l.a === ii) out += sol.Q[k]; if (l.b === ii) out -= sol.Q[k]; });
+    const Qh = out * 3600; const r = { s, Qh };
+    if (s.type === 'tank' && Math.abs(Qh) > 0.01) {
+      const vol = (+s.cap || 0) / 1000, f = clamp(+s.fill || 0, 0, 100) / 100;
+      r.minutes = Qh > 0 ? vol * f / Qh * 60 : vol * (1 - f) / -Qh * 60;
+    }
+    res.tanks.push(r);
+  });
+  // fast pipes
+  const fast = new Map(); res.segs.forEach(g => { if (g.v > 2) fast.set(g.pid, Math.max(fast.get(g.pid) || 0, g.v)); });
+  fast.forEach((v, pid) => { const p = P.pipes.find(q => q.id === pid); res.warnings.push({ lvl: 'warn', text: `${p ? p.name : 'ท่อ'}: น้ำวิ่ง ${fmt(v)} ม./วินาที เร็วเกิน 2 ม./วินาที ควรขยายท่อ` }); });
+  if (!sol.converged) res.warnings.push({ lvl: 'bad', text: 'การคำนวณไม่ลู่เข้า ผลอาจคลาดเคลื่อน ตรวจท่อที่ต่อวนหรือปั๊มที่ต่อชนกัน' });
+  // a tank that is being filled receives water at its top inlet: solve again with that head
+  if (!topIn) {
+    const filling = res.tanks.filter(t => t.s.type === 'tank' && t.Qh < -0.01);
+    if (filling.length) return runScenario(sc, Object.fromEntries(filling.map(t => [t.s.id, true])));
+  }
+  res.verdict = verdictOf(res);
+  return res;
+}
+
+function verdictOf(res) {
+  const all = res.plants.filter(p => p.status !== 'none');
+  const ok = all.filter(p => p.status === 'ok').length, low = all.filter(p => p.status === 'low').length, dry = all.filter(p => p.status === 'dry').length;
+  const pumpsBad = res.pumps.filter(r => r.on && r.status === 'bad'), pumpsWarn = res.pumps.filter(r => r.on && r.status === 'warn');
+  const filling = res.tanks.filter(t => t.s.type === 'tank' && t.Qh < -0.01);
+  const supplying = res.tanks.filter(t => t.s.type === 'tank' && t.Qh > 0.01);
+  const lines = [];
+  let lvl, head;
+  const watered = ok + low;
+  if (watered > 0) {
+    if (low === 0 && dry === 0 && !pumpsBad.length) { lvl = pumpsWarn.length ? 'warn' : 'ok'; head = `รดได้ครบ ${fmt0(ok)} ต้น แรงดันพอทุกต้น`; }
+    else { lvl = 'bad'; head = `แรงดันพอ ${fmt0(ok)} จาก ${fmt0(all.length)} ต้น`; }
+    if (low) lines.push(`แรงดันไม่ถึงเกณฑ์ ${fmt0(low)} ต้น`);
+    if (dry) lines.push(`ไม่มีน้ำ ${fmt0(dry)} ต้น`);
+    const tot = res.blocks.reduce((a, b) => a + b.total, 0) / 1000;
+    lines.push(`ใช้น้ำรวม ${fmt(tot)} ม³/ชม.`);
+  } else if (filling.length) {
+    lvl = 'info';
+    head = filling.map(t => `เติม${t.s.name} ${fmt(-t.Qh)} ม³/ชม.`).join(' · ');
+    filling.forEach(t => { if (t.minutes != null) lines.push(`จากระดับปัจจุบันเต็มในราว ${fmt0(t.minutes)} นาที`); });
+  } else { lvl = 'off'; head = 'ยังไม่มีน้ำไหลไปที่ต้นไม้'; lines.push('เปิดปั๊มหรือวาล์วในสถานการณ์นี้ หรือต่อท่อจากแหล่งน้ำถึงแปลง'); }
+  const runMax = Math.max(0, ...res.blocks.map(b => b.runMin || 0));
+  supplying.forEach(t => { if (t.minutes != null && watered) {
+    lines.push(`${t.s.name} หมดในราว ${fmt0(t.minutes)} นาที`);
+    if (runMax > t.minutes) { lines.push(`น้ำในแท็งก์หมดก่อนรดครบรอบ (ต้องเปิดราว ${fmt0(runMax)} นาที) ต้องเติมไปพร้อมกันหรือแบ่งรดหลายรอบ`); if (lvl === 'ok') lvl = 'warn'; }
+  } });
+  pumpsBad.concat(pumpsWarn).forEach(r => lines.push(`${r.u.name}: ${r.msg}`));
+  return { lvl, head, lines, ok, low, dry, n: all.length };
+}
+
+let RES = null, ALL = null;
+function recompute() {
+  RES = runScenario(scenario());
+  ALL = null; // comparison table computed lazily
+}
+
+// ===================================================================
+// Drawing
+// ===================================================================
+const COL = { boundary: '#ffe066', block: '#a6e88f', pipe: '#5cc8ff', closed: 'rgba(225,230,226,.55)', ok: '#3fdc84', low: '#ffb020', dry: '#ff5a4a', none: '#d7ddd9', sel: '#ffffff' };
+function pressColor(pBar) { if (pBar == null) return COL.closed; if (pBar < 0.3) return '#ff5a4a'; if (pBar < 0.8) return '#ff9a2e'; if (pBar < 1.5) return '#ffd23f'; if (pBar < 2.5) return '#3fdc84'; return '#36c2ff'; }
+function velColor(v) { if (v < 0.05) return '#9aa7a0'; if (v < 0.5) return '#5cc8ff'; if (v < 1.5) return '#3fdc84'; if (v < 2) return '#ffb020'; return '#ff5a4a'; }
+function pathPoly(ctx, pts, close) { pts.forEach((p, i) => { const s = S(p); i ? ctx.lineTo(s[0], s[1]) : ctx.moveTo(s[0], s[1]); }); if (close) ctx.closePath(); }
+function label(ctx, text, x, y, opt = {}) {
+  ctx.font = `${opt.bold ? 600 : 500} ${opt.size || 12}px "IBM Plex Sans Thai", system-ui, sans-serif`;
+  const w = ctx.measureText(text).width + 10, h = (opt.size || 12) + 8;
+  const bx = opt.align === 'left' ? x : x - w / 2;
+  ctx.fillStyle = opt.bg || 'rgba(12,18,15,.82)'; roundRect(ctx, bx, y - h / 2, w, h, 4); ctx.fill();
+  ctx.fillStyle = opt.color || '#fff'; ctx.textBaseline = 'middle'; ctx.textAlign = 'left'; ctx.fillText(text, bx + 5, y + 0.5);
+}
+function roundRect(ctx, x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
+function isSel(kind, id) { return ui.sel && ui.sel.kind === kind && ui.sel.id === id; }
+
+function drawAll(ctx, W, H) {
+  if (!P) return;
+  const mpp = Map2.mpp(), sc = scenario();
+  // boundary
+  if (P.boundary) {
+    ctx.beginPath(); pathPoly(ctx, P.boundary, true);
+    ctx.fillStyle = 'rgba(255,224,102,.07)'; ctx.fill();
+    ctx.setLineDash([8, 5]); ctx.lineWidth = isSel('boundary', 'b') ? 3.5 : 2.2; ctx.strokeStyle = COL.boundary; ctx.stroke(); ctx.setLineDash([]);
+    if (P.fence.show && (ui.step === 'fence' || ui.step === 'land')) {
+      const sp = Math.max(0.5, +P.fence.spacing || 2.5);
+      if (sp / mpp > 3) { ctx.fillStyle = '#fff'; fencePosts().forEach(p => { const s = S(p); ctx.beginPath(); ctx.arc(s[0], s[1], 2.4, 0, 7); ctx.fill(); }); }
+    }
+  }
+  // blocks
+  P.blocks.forEach(b => {
+    ctx.beginPath(); pathPoly(ctx, b.poly, true);
+    ctx.fillStyle = 'rgba(166,232,143,.10)'; ctx.fill();
+    ctx.lineWidth = isSel('block', b.id) ? 3 : 1.5; ctx.strokeStyle = COL.block; ctx.stroke();
+  });
+  // pipes
+  const segsBy = new Map(); if (RES) RES.segs.forEach(g => { if (!segsBy.has(g.pid)) segsBy.set(g.pid, []); segsBy.get(g.pid).push(g); });
+  ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  P.pipes.forEach(p => {
+    const open = pipeOpen(sc, p.id), spec = pipeSpec(p), w = clamp(1.4 + spec.d / 14, 1.6, 8);
+    if (isSel('pipe', p.id)) { ctx.beginPath(); pathPoly(ctx, p.pts); ctx.lineWidth = w + 6; ctx.strokeStyle = 'rgba(255,255,255,.55)'; ctx.stroke(); }
+    if (!open) { ctx.beginPath(); pathPoly(ctx, p.pts); ctx.setLineDash([4, 5]); ctx.lineWidth = Math.max(1.5, w - 1); ctx.strokeStyle = COL.closed; ctx.stroke(); ctx.setLineDash([]); return; }
+    ctx.beginPath(); pathPoly(ctx, p.pts); ctx.lineWidth = w + 2; ctx.strokeStyle = 'rgba(8,14,11,.7)'; ctx.stroke();
+    const segs = segsBy.get(p.id);
+    if (segs && segs.length) {
+      segs.forEach(g => {
+        ctx.beginPath(); const a = S(g.a), b = S(g.b); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]);
+        ctx.strokeStyle = ui.colorBy === 'velocity' ? velColor(g.v) : pressColor(g.p / BAR); ctx.lineWidth = w; ctx.stroke();
+      });
+    } else { ctx.beginPath(); pathPoly(ctx, p.pts); ctx.lineWidth = w; ctx.strokeStyle = 'rgba(160,170,165,.9)'; ctx.stroke(); }
+  });
+  // plants
+  const pr = RES ? RES.plants : null; let pi = 0;
+  P.blocks.forEach(b => {
+    const ps = plantsOf(b), rpx = clamp(Math.min(+b.plantSp || 1, +b.rowSp || 1) / mpp / 5, 1.6, 7);
+    ps.forEach(p => {
+      const s = S([p.x, p.y]); const r = pr && pr[pi]; pi++;
+      if (s[0] < -10 || s[1] < -10 || s[0] > W + 10 || s[1] > H + 10) return;
+      ctx.beginPath(); ctx.arc(s[0], s[1], rpx, 0, 7);
+      const st = r ? r.status : 'none';
+      if (st === 'none') { ctx.strokeStyle = COL.none; ctx.lineWidth = 1.3; ctx.stroke(); }
+      else { ctx.fillStyle = COL[st]; ctx.fill(); if (rpx > 3) { ctx.strokeStyle = 'rgba(0,0,0,.45)'; ctx.lineWidth = 1; ctx.stroke(); } }
+    });
+  });
+  // pumps
+  P.pumps.forEach(u => {
+    const a = S(u.a), b = S(u.b), m = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], on = pumpOn(sc, u.id);
+    const r = RES && RES.pumps.find(x => x.u.id === u.id);
+    ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.lineWidth = 4; ctx.strokeStyle = on ? '#e9eef0' : COL.closed; ctx.stroke();
+    const col = !on ? '#6f7b75' : r && r.status === 'ok' ? '#2c8a4b' : r && r.status === 'warn' ? '#c98a12' : r && r.status === 'bad' ? '#c23b2b' : '#2b6ea6';
+    if (isSel('pump', u.id)) { ctx.beginPath(); ctx.arc(m[0], m[1], 15, 0, 7); ctx.fillStyle = 'rgba(255,255,255,.6)'; ctx.fill(); }
+    ctx.beginPath(); ctx.arc(m[0], m[1], 11, 0, 7); ctx.fillStyle = col; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = '#fff'; ctx.stroke();
+    // arrow showing pumping direction
+    const ang = Math.atan2(b[1] - a[1], b[0] - a[0]);
+    ctx.save(); ctx.translate(m[0], m[1]); ctx.rotate(ang); ctx.beginPath(); ctx.moveTo(5, 0); ctx.lineTo(-3, -4.5); ctx.lineTo(-3, 4.5); ctx.closePath(); ctx.fillStyle = '#fff'; ctx.fill(); ctx.restore();
+    const txt = on && r && r.Q > 0.01 ? `${u.name} · ${fmt(r.Q)} ม³/ชม. · ${fmt(r.H, 0)} ม.` : `${u.name}${on ? '' : ' (ปิด)'}`;
+    label(ctx, txt, m[0] + 14, m[1] - 16, { align: 'left', size: 11.5 });
+  });
+  // sources
+  P.sources.forEach(s => {
+    const c = S([s.x, s.y]), meta = SRC[s.type];
+    if (isSel('source', s.id)) { ctx.beginPath(); ctx.arc(c[0], c[1], 19, 0, 7); ctx.fillStyle = 'rgba(255,255,255,.6)'; ctx.fill(); }
+    roundRect(ctx, c[0] - 14, c[1] - 14, 28, 28, 6); ctx.fillStyle = meta.color; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = '#fff'; ctx.stroke();
+    if (s.type === 'tank') { const f = clamp(+s.fill || 0, 0, 100) / 100; ctx.fillStyle = 'rgba(255,255,255,.35)'; ctx.fillRect(c[0] - 10, c[1] + 10 - 20 * f, 20, 20 * f); }
+    ctx.fillStyle = '#fff'; ctx.font = '600 10px "IBM Plex Sans Thai", system-ui'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(meta.short, c[0], c[1] + 0.5);
+    const t = RES && RES.tanks.find(x => x.s.id === s.id);
+    const extra = t && Math.abs(t.Qh) > 0.01 ? (t.Qh > 0 ? ` · ออก ${fmt(t.Qh)} ม³/ชม.` : ` · เข้า ${fmt(-t.Qh)} ม³/ชม.`) : '';
+    label(ctx, s.name + extra, c[0], c[1] + 27, { size: 11.5 });
+  });
+  // selection handles
+  const hs = handles();
+  hs.forEach(h => { const s = S(h.p); ctx.fillStyle = '#fff'; ctx.strokeStyle = '#0d1a14'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.rect(s[0] - 5, s[1] - 5, 10, 10); ctx.fill(); ctx.stroke(); });
+  // draft
+  if (ui.tool && (ui.draft.length || ui.mouse)) {
+    const pts = ui.draft.slice(); const m = ui.snap ? ui.snap.p : ui.mouse;
+    if (m && ui.tool !== 'source') pts.push(m);
+    const closed = ui.tool === 'boundary' || ui.tool === 'block';
+    if (pts.length > 1) {
+      ctx.beginPath(); pathPoly(ctx, pts, closed && pts.length > 2);
+      if (closed && pts.length > 2) { ctx.fillStyle = 'rgba(79,179,255,.12)'; ctx.fill(); }
+      ctx.setLineDash([6, 4]); ctx.lineWidth = 2.5; ctx.strokeStyle = '#4fb3ff'; ctx.stroke(); ctx.setLineDash([]);
+      const len = ui.tool === 'pipe' || ui.tool === 'pump' ? polyLen(pts) : null;
+      if (len != null && m) { const s = S(m); label(ctx, `${fmt(len)} ม.`, s[0] + 14, s[1] - 14, { align: 'left', size: 11 }); }
+      if (closed && pts.length > 2) { const s = S(m); label(ctx, `${fmt(polyArea(pts) / 1600, 2)} ไร่`, s[0] + 14, s[1] - 14, { align: 'left', size: 11 }); }
+    }
+    ui.draft.forEach(p => { const s = S(p); ctx.beginPath(); ctx.arc(s[0], s[1], 4, 0, 7); ctx.fillStyle = '#4fb3ff'; ctx.fill(); ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.stroke(); });
+  }
+  if (ui.snap && ui.tool) { const s = S(ui.snap.p); ctx.beginPath(); ctx.arc(s[0], s[1], 9, 0, 7); ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke(); }
+  // scale bar
+  const target = 90 * mpp, pow = Math.pow(10, Math.floor(Math.log10(target))), nice = [1, 2, 5, 10].map(k => k * pow).filter(v => v <= target).pop() || pow;
+  const px = nice / mpp, sx0 = 12, sy0 = 52;
+  ctx.fillStyle = 'rgba(12,18,15,.8)'; roundRect(ctx, sx0, sy0, px + 16, 26, 5); ctx.fill();
+  ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(sx0 + 8, sy0 + 19); ctx.lineTo(sx0 + 8 + px, sy0 + 19); ctx.moveTo(sx0 + 8, sy0 + 15); ctx.lineTo(sx0 + 8, sy0 + 21); ctx.moveTo(sx0 + 8 + px, sy0 + 15); ctx.lineTo(sx0 + 8 + px, sy0 + 21); ctx.stroke();
+  ctx.fillStyle = '#fff'; ctx.font = '500 10.5px "IBM Plex Mono", monospace'; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+  ctx.fillText(nice >= 1000 ? `${nice / 1000} กม.` : `${nice} ม.`, sx0 + 8 + px / 2, sy0 + 12);
+}
+function fencePosts() {
+  const sp = Math.max(0.5, +P.fence.spacing || 2.5), out = [], poly = P.boundary;
+  for (let i = 0; i < poly.length; i++) {
+    const a = poly[i], b = poly[(i + 1) % poly.length], L = dist(a, b), n = Math.max(1, Math.ceil(L / sp - 1e-9));
+    for (let k = 0; k < n; k++) out.push([a[0] + (b[0] - a[0]) * k / n, a[1] + (b[1] - a[1]) * k / n]);
+  }
+  return out;
+}
+
+// ===================================================================
+// Interaction
+// ===================================================================
+function handles() {
+  const s = ui.sel; if (!s || ui.tool) return [];
+  if (s.kind === 'boundary' && P.boundary) return P.boundary.map((p, i) => ({ p, set: q => P.boundary[i] = q }));
+  if (s.kind === 'block') { const b = P.blocks.find(x => x.id === s.id); return b ? b.poly.map((p, i) => ({ p, set: q => b.poly[i] = q, block: b })) : []; }
+  if (s.kind === 'pipe') { const p = P.pipes.find(x => x.id === s.id); return p ? p.pts.map((v, i) => ({ p: v, net: true })) : []; }
+  if (s.kind === 'pump') { const u = P.pumps.find(x => x.id === s.id); return u ? [{ p: u.a, net: true }, { p: u.b, net: true }] : []; }
+  return [];
+}
+function snapAt(sx, sy, mode) {
+  // mode 'net': snap to sources, pump ends, pipe vertices, then onto pipe segments
+  const R = 13; let best = null, bd = R;
+  const consider = (p, kind) => { const s = S(p), d = Math.hypot(s[0] - sx, s[1] - sy); if (d < bd) { bd = d; best = { p: [p[0], p[1]], kind }; } };
+  if (mode === 'net') {
+    P.sources.forEach(s => consider([s.x, s.y], 'node'));
+    P.pumps.forEach(u => { consider(u.a, 'node'); consider(u.b, 'node'); });
+    P.pipes.forEach(p => p.pts.forEach(v => consider(v, 'node')));
+    ui.draft.forEach(v => consider(v, 'node'));
+    if (best) return best;
+    bd = 9; const m = M(sx, sy);
+    P.pipes.forEach(p => { for (let i = 1; i < p.pts.length; i++) { const pr = projSeg(m, p.pts[i - 1], p.pts[i]); const s = S(pr.q), d = Math.hypot(s[0] - sx, s[1] - sy); if (d < bd) { bd = d; best = { p: pr.q, kind: 'seg' }; } } });
+    return best;
+  }
+  if (mode === 'shape') { if (P.boundary) P.boundary.forEach(v => consider(v, 'node')); P.blocks.forEach(b => b.poly.forEach(v => consider(v, 'node'))); if (ui.draft.length > 2) consider(ui.draft[0], 'close'); return best; }
+  return null;
+}
+function hitTest(sx, sy) {
+  for (const s of P.sources) { const c = S([s.x, s.y]); if (Math.abs(c[0] - sx) < 16 && Math.abs(c[1] - sy) < 16) return { kind: 'source', id: s.id }; }
+  for (const u of P.pumps) { const a = S(u.a), b = S(u.b), m = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]; if (Math.hypot(m[0] - sx, m[1] - sy) < 14) return { kind: 'pump', id: u.id }; }
+  let best = null, bd = 8;
+  const segHit = (pts, kind, id, close) => { const n = pts.length; for (let i = 1; i < n + (close ? 1 : 0); i++) { const a = S(pts[i - 1]), b = S(pts[i % n]); const pr = projSeg([sx, sy], a, b); if (pr.d < bd) { bd = pr.d; best = { kind, id }; } } };
+  P.pumps.forEach(u => segHit([u.a, u.b], 'pump', u.id));
+  P.pipes.forEach(p => segHit(p.pts, 'pipe', p.id));
+  if (best) return best;
+  const m = M(sx, sy);
+  for (const b of P.blocks.slice().reverse()) if (inPoly(m, b.poly)) return { kind: 'block', id: b.id };
+  if (P.boundary) { bd = 8; segHit(P.boundary, 'boundary', 'b', true); if (best) return best; }
+  return null;
+}
+
+let drag = null;
+Map2.on({
+  hover(sx, sy) {
+    if (!ui.tool) return;
+    ui.mouse = M(sx, sy);
+    ui.snap = ui.tool === 'pipe' || ui.tool === 'pump' ? snapAt(sx, sy, 'net') : ui.tool === 'boundary' || ui.tool === 'block' ? snapAt(sx, sy, 'shape') : null;
+    redraw();
+  },
+  tap(sx, sy) {
+    if (ui.tool) {
+      const mode = ui.tool === 'pipe' || ui.tool === 'pump' ? 'net' : (ui.tool === 'boundary' || ui.tool === 'block') ? 'shape' : null;
+      const sn = mode ? snapAt(sx, sy, mode) : null;
+      if (sn && sn.kind === 'close') { finishDraw(); return; }
+      const p = sn ? sn.p : M(sx, sy);
+      if (ui.tool === 'source') { placeSource(p); return; }
+      const last = ui.draft[ui.draft.length - 1];
+      if (last && dist(last, p) < 0.05) return;
+      ui.draft.push(p); ui.mouse = p;
+      if (ui.tool === 'pump' && ui.draft.length === 2) { finishDraw(); return; }
+      updateDrawBar(); redraw(); return;
+    }
+    const h = hitTest(sx, sy);
+    select(h);
+  },
+  dblTap() { if (ui.tool && ui.tool !== 'source') finishDraw(); },
+  dragStart(sx, sy) {
+    if (ui.tool) return false;
+    const hs = handles();
+    for (const h of hs) { const s = S(h.p); if (Math.abs(s[0] - sx) < 10 && Math.abs(s[1] - sy) < 10) {
+      snapshot();
+      drag = h.net ? { refs: refsAt(h.p), net: true } : { set: h.set, block: h.block };
+      return true; } }
+    for (const s of P.sources) { const c = S([s.x, s.y]); if (Math.abs(c[0] - sx) < 16 && Math.abs(c[1] - sy) < 16) {
+      snapshot(); drag = { refs: refsAt([s.x, s.y]), net: true }; select({ kind: 'source', id: s.id }, true); return true; } }
+    return false;
+  },
+  drag(sx, sy) {
+    if (!drag) return;
+    let p = M(sx, sy);
+    if (drag.net) {
+      const own = new Set(drag.refs.map(r => r.arr || r.obj || r.src));
+      const sn = snapAt(sx, sy, 'net');
+      if (sn && !drag.refs.some(r => (r.src && dist([r.src.x, r.src.y], sn.p) < 0.01) || (r.arr && dist(r.arr[r.i], sn.p) < 0.01) || (r.obj && dist(r.obj[r.k], sn.p) < 0.01))) p = sn.p;
+      moveRefs(drag.refs, p); void own;
+    } else { drag.set(p); }
+    recomputeSoon(); redraw();
+  },
+  dragEnd() {
+    if (!drag) return;
+    if (drag.block && drag.block.autoPipes) genBlockPipes(drag.block);
+    drag = null; changed(false);
+  },
+});
+
+function select(h, keepStep) {
+  ui.sel = h;
+  if (h && !keepStep && KIND_STEP[h.kind]) ui.step = KIND_STEP[h.kind];
+  renderPanel(); redraw();
+}
+function startTool(tool, extra) {
+  ui.tool = tool; ui.draft = []; ui.snap = null; ui.mouse = null; ui.sel = null;
+  if (tool === 'source') ui.srcType = extra;
+  $('#map').classList.add('drawing'); updateDrawBar(); renderPanel(); redraw();
+}
+function stopTool() { ui.tool = null; ui.draft = []; ui.snap = null; $('#map').classList.remove('drawing'); updateDrawBar(); renderPanel(); redraw(); }
+const TOOL_HINT = {
+  boundary: 'แตะมุมที่ดินทีละจุด แตะจุดแรกหรือกด "เสร็จ" เพื่อปิดรูป',
+  block: 'แตะมุมแปลงปลูกทีละจุด แล้วกด "เสร็จ"',
+  pipe: 'แตะเพื่อวางท่อ แตะบนแหล่งน้ำ ปั๊ม หรือท่อเดิมเพื่อต่อเชื่อม กด "เสร็จ" หรือแตะสองครั้ง',
+  pump: 'แตะด้านดูด (เช่น บนบ่อหรือแท็งก์) แล้วแตะด้านส่ง',
+  source: 'แตะบนแผนที่เพื่อวางจุด',
+};
+function updateDrawBar() {
+  const bar = $('#drawBar'); bar.hidden = !ui.tool;
+  if (!ui.tool) return;
+  $('#drawHint').textContent = ui.tool === 'source' ? `วาง${SRC[ui.srcType].label}: ${TOOL_HINT.source}` : TOOL_HINT[ui.tool];
+  $('#drawDone').hidden = ui.tool === 'source' || ui.tool === 'pump';
+  $('#drawUndo').hidden = ui.tool === 'source' || !ui.draft.length;
+}
+function finishDraw() {
+  const d = ui.draft.filter((p, i, a) => !i || dist(p, a[i - 1]) > 0.05), t = ui.tool;
+  if ((t === 'boundary' || t === 'block') && d.length < 3) { toast('ต้องมีอย่างน้อย 3 มุม'); return; }
+  if ((t === 'pipe' || t === 'pump') && d.length < 2) { toast('ต้องมีอย่างน้อย 2 จุด'); return; }
+  snapshot();
+  let sel = null;
+  if (t === 'boundary') { P.boundary = d; sel = { kind: 'boundary', id: 'b' }; }
+  if (t === 'block') {
+    const b = { id: uid('b'), name: `แปลง ${P.blocks.length + 1}`, crop: '', poly: d, rowSp: 4, plantSp: 4, setback: 2, angle: 'auto', elev: 0,
+      emitterType: 'mini60', emitter: { ...EMITTERS.mini60 }, perPlant: 1, waterL: 40, latSize: 'pe20', hdrSize: 'pvc1', autoPipes: false };
+    P.blocks.push(b); sel = { kind: 'block', id: b.id };
+  }
+  if (t === 'pipe') {
+    const p = { id: uid('p'), name: `ท่อ ${P.pipes.length + 1}`, size: ui.pipeSize, pts: d };
+    P.pipes.push(p); sel = { kind: 'pipe', id: p.id };
+  }
+  if (t === 'pump') {
+    const u = { id: uid('u'), name: `ปั๊ม ${P.pumps.length + 1}`, a: d[0], b: d[1], preset: 'cen1', ...PUMP_PRESETS.cen1 }; delete u.label;
+    P.pumps.push(u); P.scenarios.forEach(s => s.pumpOn[u.id] = s.id === P.active); sel = { kind: 'pump', id: u.id };
+  }
+  ui.tool = null; ui.draft = []; ui.snap = null; $('#map').classList.remove('drawing'); updateDrawBar();
+  ui.sel = sel; if (sel) ui.step = KIND_STEP[sel.kind];
+  changed(false);
+}
+function placeSource(p) {
+  snapshot();
+  const t = ui.srcType, n = P.sources.filter(s => s.type === t).length + 1;
+  const s = { id: uid('w'), type: t, name: SRC[t].label + (n > 1 ? ' ' + n : ''), x: p[0], y: p[1], ...SRC_DEFAULT[t] };
+  P.sources.push(s);
+  ui.tool = null; $('#map').classList.remove('drawing'); updateDrawBar();
+  ui.sel = { kind: 'source', id: s.id }; ui.step = 'water'; changed(false);
+}
+function deleteSel() {
+  const s = ui.sel; if (!s) return; snapshot();
+  if (s.kind === 'boundary') P.boundary = null;
+  if (s.kind === 'block') { P.blocks = P.blocks.filter(b => b.id !== s.id); P.pipes = P.pipes.filter(p => p.block !== s.id); }
+  if (s.kind === 'pipe') P.pipes = P.pipes.filter(p => p.id !== s.id);
+  if (s.kind === 'pump') P.pumps = P.pumps.filter(p => p.id !== s.id);
+  if (s.kind === 'source') P.sources = P.sources.filter(p => p.id !== s.id);
+  ui.sel = null; changed(false); toast('ลบแล้ว · กดย้อนเพื่อเอาคืน');
+}
+
+let rcT = 0;
+function recomputeSoon() { clearTimeout(rcT); rcT = setTimeout(() => { recompute(); renderVerdict(); redraw(); }, 60); }
+function changed(snap = true) {
+  if (snap) snapshot();
+  recompute(); save(); renderPanel(); renderVerdict(); renderLegend(); redraw();
+  $('#projName').textContent = P.name;
+}
+
+// ===================================================================
+// Panel
+// ===================================================================
+function selObj() {
+  const s = ui.sel; if (!s) return null;
+  if (s.kind === 'block') return P.blocks.find(x => x.id === s.id);
+  if (s.kind === 'pipe') return P.pipes.find(x => x.id === s.id);
+  if (s.kind === 'pump') return P.pumps.find(x => x.id === s.id);
+  if (s.kind === 'source') return P.sources.find(x => x.id === s.id);
+  return null;
+}
+function fld(label, key, val, opt = {}) {
+  const id = 'f_' + key.replace(/\W/g, '_');
+  const full = opt.full ? ' full' : '';
+  if (opt.options) {
+    return `<div class="fld${full}"><label for="${id}">${label}</label><select id="${id}" data-k="${key}">${Object.entries(opt.options).map(([k, v]) => `<option value="${k}"${k === String(val) ? ' selected' : ''}>${esc(v)}</option>`).join('')}</select></div>`;
+  }
+  const type = opt.text ? 'text' : 'number';
+  const inp = `<input id="${id}" type="${type}" ${type === 'number' ? `step="${opt.step || 'any'}" inputmode="decimal"` : ''} data-k="${key}" ${opt.text ? '' : 'data-num'} value="${esc(val)}">`;
+  return `<div class="fld${full}"><label for="${id}">${label}</label>${opt.unit ? `<div class="unit">${inp}<span>${opt.unit}</span></div>` : inp}</div>`;
+}
+const sizeOpts = () => Object.fromEntries(Object.entries(PIPES).map(([k, v]) => [k, v.label]));
+const pill = (lvl, t) => `<span class="pill ${lvl}">${esc(t)}</span>`;
+
+function renderSteps() {
+  $('#steps').innerHTML = STEPS.map(([k, t], i) => `<button data-step="${k}" class="${ui.step === k ? 'on' : ''}"><i>${i + 1}</i>${t}</button>`).join('');
+}
+function renderPanel() {
+  renderSteps();
+  const el = $('#panel'); const f = { land: panelLand, fence: panelFence, plant: panelPlant, water: panelWater, pipe: panelPipe, run: panelRun }[ui.step];
+  el.innerHTML = f();
+  if (ui.step === 'run') bindRun();
+}
+
+function panelLand() {
+  const b = P.boundary;
+  return `
+  <div><div class="eyebrow">ขั้น 1</div><h2>ปักหมุดที่ดิน</h2></div>
+  <div class="fld"><label for="search">ค้นหาสถานที่ หรือวางพิกัด / ลิงก์ Google Maps</label>
+    <div class="searchRow"><input id="search" placeholder="เช่น อ.ท่าใหม่ จันทบุรี หรือ 12.73, 102.12"><button class="btn primary" data-act="search">ไป</button></div>
+  </div>
+  <div class="list results" id="searchRes" hidden></div>
+  <div class="btnrow"><button class="btn" data-act="locate">ตำแหน่งของฉัน</button><button class="btn" data-act="moveHere" title="ย้ายผังทั้งหมดมาไว้กลางแผนที่ที่เห็นอยู่">ย้ายผังมากลางจอ</button></div>
+  <div class="card ${isSel('boundary', 'b') ? 'sel' : ''}">
+    <h3>ขอบที่ดิน</h3>
+    ${b ? `<div class="stats"><div class="stat"><b>${fmt(polyArea(b) / 1600, 2)}</b><span>ไร่ · ${raiText(polyArea(b))}</span></div><div class="stat"><b>${fmt0(polyArea(b))}</b><span>ตร.ม.</span></div><div class="stat"><b>${fmt0(polyPerim(b))}</b><span>ม. รอบรูป</span></div></div>
+      <div class="btnrow"><button class="btn" data-act="selBoundary">แก้มุม</button><button class="btn" data-act="tool" data-tool="boundary">วาดใหม่</button><button class="btn danger" data-act="delBoundary">ลบขอบ</button></div>
+      ${isSel('boundary', 'b') ? '<p class="note">ลากสี่เหลี่ยมสีขาวที่มุมเพื่อปรับขอบ</p>' : ''}`
+    : `<p>ซูมไปที่ที่ดินของคุณ แล้วแตะมุมที่ดินบนภาพดาวเทียมทีละจุด</p><div class="btnrow"><button class="btn primary" data-act="tool" data-tool="boundary">วาดขอบที่ดิน</button></div>`}
+  </div>
+  <div class="grid2">${fld('ชื่อไร่', 'proj.name', P.name, { text: true, full: true })}</div>
+  <p class="note">ภาพดาวเทียมอาจเก่าหลายปีและเหลื่อมได้ 1–3 ม. ผังนี้ถือว่าพื้นที่ปลูกราบเรียบ ความสูงต่างกันใส่เองที่แหล่งน้ำและแปลงปลูก</p>`;
+}
+function panelFence() {
+  if (!P.boundary) return `<div><div class="eyebrow">ขั้น 2</div><h2>ล้อมรั้ว</h2></div><p>วาดขอบที่ดินในขั้นที่ 1 ก่อน แล้วระบบจะคำนวณรั้วให้</p><button class="btn primary" data-step-go="land">ไปวาดขอบที่ดิน</button>`;
+  const f = P.fence, per = polyPerim(P.boundary), posts = fencePosts().length;
+  const wire = Math.max(0, per - (+f.gate || 0)) * (+f.strands || 0) * 1.03;
+  return `
+  <div><div class="eyebrow">ขั้น 2</div><h2>ล้อมรั้ว</h2></div>
+  <div class="grid2">
+    ${fld('ระยะห่างเสา', 'fence.spacing', f.spacing, { unit: 'ม.' })}
+    ${fld('จำนวนเส้นลวด', 'fence.strands', f.strands, { unit: 'เส้น', step: 1 })}
+    ${fld('ความยาวลวดต่อม้วน', 'fence.roll', f.roll, { unit: 'ม.' })}
+    ${fld('ช่องประตู (ไม่ขึงลวด)', 'fence.gate', f.gate, { unit: 'ม.' })}
+  </div>
+  <div class="stats">
+    <div class="stat"><b>${fmt0(per)}</b><span>ม. ความยาวรั้ว</span></div>
+    <div class="stat"><b>${fmt0(posts)}</b><span>ต้น เสารวมมุม</span></div>
+    <div class="stat"><b>${fmt0(wire)}</b><span>ม. ลวด (เผื่อหย่อน 3%)</span></div>
+    <div class="stat"><b>${fmt0(Math.ceil(wire / Math.max(1, +f.roll || 100)))}</b><span>ม้วน</span></div>
+  </div>
+  <label class="toggle" style="border:1px solid var(--line);border-radius:8px"><span class="grow">แสดงตำแหน่งเสาบนแผนที่</span><span class="switch"><input type="checkbox" data-k="fence.show" ${f.show ? 'checked' : ''}><span></span></span></label>
+  <p class="note">เสาแบ่งเท่า ๆ กันในแต่ละด้าน ทุกมุมมีเสา ระยะจริงจึงสั้นกว่าหรือเท่ากับที่ตั้งไว้</p>`;
+}
+function panelPlant() {
+  const b = ui.sel && ui.sel.kind === 'block' ? selObj() : null;
+  const rb = b && RES ? RES.blocks.find(x => x.b.id === b.id) : null;
+  return `
+  <div><div class="eyebrow">ขั้น 3</div><h2>แปลงปลูก</h2></div>
+  <div class="btnrow"><button class="btn primary" data-act="tool" data-tool="block">วาดแปลงปลูก</button>${P.boundary ? '<button class="btn" data-act="blockFromBoundary">ใช้ขอบที่ดินทั้งหมด</button>' : ''}</div>
+  ${P.blocks.length ? `<div class="list">${P.blocks.map(x => `<button class="item ${b && b.id === x.id ? 'sel' : ''}" data-selk="block" data-id="${x.id}"><span class="ico" style="background:#4d9a3c">ต้น</span><span class="grow">${esc(x.name)}</span><small>${fmt0(plantsOf(x).length)} ต้น</small></button>`).join('')}</div>` : '<p>ยังไม่มีแปลง วาดขอบแปลงบนแผนที่ แล้วระบบจะวางต้นตามระยะปลูกให้</p>'}
+  ${b ? `<div class="card sel">
+    <div class="grid2">
+      ${fld('ชื่อแปลง', 'name', b.name, { text: true })}
+      ${fld('พืช', 'crop', b.crop, { text: true })}
+      ${fld('ระยะระหว่างแถว', 'rowSp', b.rowSp, { unit: 'ม.' })}
+      ${fld('ระยะระหว่างต้น', 'plantSp', b.plantSp, { unit: 'ม.' })}
+      ${fld('เว้นจากขอบแปลง', 'setback', b.setback, { unit: 'ม.' })}
+      ${fld('ทิศแถว (องศา หรือ auto)', 'angle', b.angle, { text: true })}
+    </div>
+    <div class="stats"><div class="stat"><b>${fmt0(plantsOf(b).length)}</b><span>ต้น</span></div><div class="stat"><b>${fmt(polyArea(b.poly) / 1600, 2)}</b><span>ไร่</span></div><div class="stat"><b>${fmt0(new Set(plantsOf(b).map(p => p.row)).size)}</b><span>แถว</span></div></div>
+    <h3>หัวจ่ายน้ำ</h3>
+    <div class="grid2">
+      ${fld('ชนิด', 'emitterType', b.emitterType, { options: Object.fromEntries(Object.entries(EMITTERS).map(([k, v]) => [k, v.label])), full: true })}
+      ${fld('อัตราไหลที่แรงดันออกแบบ', 'emitter.q', b.emitter.q, { unit: 'ลิตร/ชม.' })}
+      ${fld('แรงดันออกแบบ', 'emitter.p', b.emitter.p, { unit: 'บาร์' })}
+      ${fld('แรงดันต่ำสุดที่ใช้ได้', 'emitter.min', b.emitter.min, { unit: 'บาร์' })}
+      ${fld('จำนวนหัวต่อต้น', 'perPlant', b.perPlant, { unit: 'หัว', step: 1 })}
+      ${fld('น้ำที่ต้องการต่อต้นต่อรอบ', 'waterL', b.waterL, { unit: 'ลิตร' })}
+      ${fld('ความสูงพื้นแปลงเทียบจุดอ้างอิง', 'elev', b.elev, { unit: 'ม.' })}
+    </div>
+    <h3>ท่อในแปลง</h3>
+    <div class="grid2">
+      ${fld('ท่อแยกตามแถว', 'latSize', b.latSize, { options: sizeOpts() })}
+      ${fld('ท่อหัวแปลง', 'hdrSize', b.hdrSize, { options: sizeOpts() })}
+    </div>
+    <label class="toggle" style="border:1px solid var(--line);border-radius:8px"><span class="grow">วางท่อตามแถวให้อัตโนมัติ (อัปเดตเมื่อแก้แปลง)</span><span class="switch"><input type="checkbox" data-k="autoPipes" ${b.autoPipes ? 'checked' : ''}><span></span></span></label>
+    ${rb && rb.n ? `<div class="note">สถานการณ์ "${esc(scenario().name)}": แรงดันพอ ${fmt0(rb.ok)}/${fmt0(rb.n)} ต้น${rb.qavg ? ` · เฉลี่ย ${fmt(rb.qavg, 0)} ลิตร/ชม./ต้น · ต้องเปิดราว ${fmt0(rb.runMin)} นาทีให้ได้ ${fmt0(+b.waterL)} ลิตร` : ''}</div>` : ''}
+    <div class="btnrow"><button class="btn danger" data-act="delete">ลบแปลง</button></div>
+    <p class="note">ต้นไม้ที่อยู่ห่างท่อไม่เกิน ${fmt(+P.settings.attach)} ม. จะต่อกับท่อเส้นนั้นอัตโนมัติ</p>
+  </div>` : ''}`;
+}
+function srcFields(s) {
+  const g = fld('ระดับพื้นตรงจุดนี้', 'ground', s.ground, { unit: 'ม.' });
+  if (s.type === 'pond') return g + fld('ผิวน้ำต่ำกว่าพื้น', 'waterDepth', s.waterDepth, { unit: 'ม.' });
+  if (s.type === 'well') return g + fld('ระดับน้ำนิ่งลึกจากพื้น', 'level', s.level, { unit: 'ม.' }) + fld('ระดับน้ำลดลงเมื่อสูบ', 'drawdown', s.drawdown, { unit: 'ม.' }) + fld('บ่อให้น้ำได้', 'yield', s.yield, { unit: 'ม³/ชม.' });
+  if (s.type === 'tank') return g + fld('ความสูงขาตั้ง', 'stand', s.stand, { unit: 'ม.' }) + fld('ความสูงน้ำเมื่อเต็มถัง', 'height', s.height, { unit: 'ม.' }) + fld('ความจุ', 'cap', s.cap, { unit: 'ลิตร' }) + fld('น้ำในถังตอนนี้', 'fill', s.fill, { unit: '%' });
+  return g + fld('แรงดันน้ำประปาที่มิเตอร์', 'pressure', s.pressure, { unit: 'บาร์' });
+}
+function panelWater() {
+  const s = ui.sel && ui.sel.kind === 'source' ? selObj() : null;
+  return `
+  <div><div class="eyebrow">ขั้น 4</div><h2>แหล่งน้ำ</h2></div>
+  <p>วางทุกแหล่งที่มีจริง แม้บางแหล่งใช้แค่บางฤดู แล้วค่อยเลือกในขั้นที่ 6 ว่าแต่ละสถานการณ์ใช้น้ำจากไหน</p>
+  <div class="btnrow">${Object.entries(SRC).map(([k, v]) => `<button class="btn" data-act="tool" data-tool="source" data-src="${k}"><span class="ico" style="background:${v.color};display:inline-grid;width:16px;height:16px;border-radius:4px;margin-right:4px;vertical-align:-3px"></span>${v.label}</button>`).join('')}</div>
+  ${P.sources.length ? `<div class="list">${P.sources.map(x => `<button class="item ${s && s.id === x.id ? 'sel' : ''}" data-selk="source" data-id="${x.id}"><span class="ico" style="background:${SRC[x.type].color}">${SRC[x.type].short.slice(0, 2)}</span><span class="grow">${esc(x.name)}</span><small>หัวน้ำ ${fmt(srcHead(x))} ม.</small></button>`).join('')}</div>` : ''}
+  ${s ? `<div class="card sel"><div class="eyebrow">${SRC[s.type].label}</div><div class="grid2">${fld('ชื่อ', 'name', s.name, { text: true, full: true })}${srcFields(s)}</div>
+    <div class="note">ระดับน้ำที่ใช้คำนวณ ${fmt(srcHead(s), 2)} ม. เทียบจุดอ้างอิง${s.type === 'tank' ? ` (ก้นถังสูง ${fmt(+s.ground + +s.stand)} ม.)` : ''}</div>
+    <div class="btnrow"><button class="btn danger" data-act="delete">ลบจุดนี้</button></div>
+    <p class="note">ลากไอคอนบนแผนที่เพื่อย้าย ท่อและปั๊มที่ต่ออยู่จะย้ายตาม</p></div>` : ''}
+  <p class="note">จุดอ้างอิงความสูง (0 ม.) คือพื้นแปลงปลูก ถ้าบ่ออยู่ต่ำกว่าแปลง 2 ม. ให้ใส่ระดับพื้น −2</p>`;
+}
+function pumpCurveSVG(u, r) {
+  const W = 300, H = 140, pl = 30, pb = 22, pt = 8, pr = 8;
+  const { A, B } = pumpAB(u); const qmax = Math.max(+u.Qmax || 1, r && r.Q ? r.Q : 0) * 1.15, hmax = Math.max(A, r && r.H ? r.H : 0) * 1.1;
+  const X = q => pl + q / qmax * (W - pl - pr), Y = h => pt + (1 - h / hmax) * (H - pt - pb);
+  let d = ''; for (let i = 0; i <= 40; i++) { const q = qmax * i / 40, h = A - B * Math.pow(q / 3600, 2); if (h < 0) break; d += (i ? 'L' : 'M') + X(q).toFixed(1) + ' ' + Y(h).toFixed(1); }
+  const ticksQ = [0, 0.25, 0.5, 0.75, 1].map(f => +(qmax * f).toFixed(1)), ticksH = [0, 0.5, 1].map(f => Math.round(hmax * f));
+  const op = r && r.on && r.Q > 0.01 && r.H != null ? `<circle cx="${X(r.Q)}" cy="${Y(Math.max(0, r.H))}" r="5" fill="var(--water)" stroke="var(--panel)" stroke-width="2"/><text x="${X(r.Q) + 8}" y="${Y(Math.max(0, r.H)) - 6}" style="fill:var(--ink)">${fmt(r.Q)} ม³/ชม. · ${fmt(r.H, 0)} ม.</text>` : '';
+  return `<svg class="curve" viewBox="0 0 ${W} ${H}" role="img" aria-label="กราฟปั๊ม">
+    ${ticksH.map(h => `<line x1="${pl}" x2="${W - pr}" y1="${Y(h)}" y2="${Y(h)}" stroke="var(--line)"/><text x="${pl - 4}" y="${Y(h) + 3}" text-anchor="end">${h}</text>`).join('')}
+    ${ticksQ.map(q => `<text x="${X(q)}" y="${H - 6}" text-anchor="middle">${q}</text>`).join('')}
+    <rect x="${X(+u.Qmax)}" y="${pt}" width="${Math.max(0, W - pr - X(+u.Qmax))}" height="${H - pt - pb}" fill="var(--warn-soft)" opacity=".7"/>
+    <path d="${d}" fill="none" stroke="var(--ink)" stroke-width="2"/>
+    ${op}
+    <text x="${pl}" y="${pt + 8}" style="fill:var(--muted)">ม.</text><text x="${W - pr}" y="${H - pb - 4}" text-anchor="end">ม³/ชม.</text>
+  </svg>`;
+}
+function panelPipe() {
+  const s = ui.sel, o = selObj(), sc = scenario();
+  const tool = ui.tool;
+  let ed = '';
+  if (s && s.kind === 'pipe' && o) {
+    const segs = RES ? RES.segs.filter(g => g.pid === o.id) : [];
+    const vmax = segs.length ? Math.max(...segs.map(g => g.v)) : null, qmax = segs.length ? Math.max(...segs.map(g => Math.abs(g.Q))) * 3600 : null;
+    const hl = segs.reduce((a, g) => a + g.hl, 0);
+    ed = `<div class="card sel"><div class="eyebrow">ท่อ${o.block ? ' · สร้างจากแปลง' : ''}</div><div class="grid2">
+      ${fld('ชื่อ', 'name', o.name, { text: true, full: true })}
+      ${fld('ขนาดท่อ', 'size', o.size, { options: sizeOpts(), full: true })}</div>
+      <div class="stats"><div class="stat"><b>${fmt(polyLen(o.pts))}</b><span>ม. ยาว</span></div><div class="stat"><b>${vmax == null ? '–' : fmt(vmax, 2)}</b><span>ม./วินาที สูงสุด</span></div><div class="stat"><b>${qmax == null ? '–' : fmt(qmax, 2)}</b><span>ม³/ชม.</span></div><div class="stat"><b>${segs.length ? fmt(hl, 2) : '–'}</b><span>ม. แรงเสียดทาน</span></div></div>
+      <label class="toggle" style="border:1px solid var(--line);border-radius:8px"><span class="grow">เปิดวาล์วท่อนี้ใน "${esc(sc.name)}"</span><span class="switch"><input type="checkbox" data-scpipe="${o.id}" ${pipeOpen(sc, o.id) ? 'checked' : ''}><span></span></span></label>
+      <div class="btnrow"><button class="btn danger" data-act="delete">ลบท่อ</button></div>
+      <p class="note">ลากสี่เหลี่ยมสีขาวเพื่อย้ายจุดหักของท่อ จุดที่ต่อกันอยู่จะเลื่อนตามกัน</p></div>`;
+  }
+  if (s && s.kind === 'pump' && o) {
+    const r = RES && RES.pumps.find(x => x.u.id === o.id);
+    ed = `<div class="card sel"><div class="eyebrow">ปั๊ม</div><div class="grid2">
+      ${fld('ชื่อ', 'name', o.name, { text: true, full: true })}
+      ${fld('เลือกจากค่าตัวอย่าง', 'preset', o.preset || 'custom', { options: { custom: 'กำหนดเองจากป้ายปั๊ม', ...Object.fromEntries(Object.entries(PUMP_PRESETS).map(([k, v]) => [k, v.label])) }, full: true })}
+      ${fld('ชนิด', 'kind', o.kind, { options: { surface: 'ปั๊มผิวดิน (หอยโข่ง / อัตโนมัติ)', sub: 'ปั๊มจุ่ม (ซับเมิร์ส)' }, full: true })}
+      ${fld('ส่งสูงสุดตอนปิดหัว', 'H0', o.H0, { unit: 'ม.' })}
+      ${fld('จุดออกแบบ: อัตราไหล', 'Qd', o.Qd, { unit: 'ม³/ชม.' })}
+      ${fld('จุดออกแบบ: ส่งสูง', 'Hd', o.Hd, { unit: 'ม.' })}
+      ${fld('อัตราไหลสูงสุดที่ใช้ได้', 'Qmax', o.Qmax, { unit: 'ม³/ชม.' })}
+      ${fld('ประสิทธิภาพปั๊ม', 'eff', o.eff, { unit: '%' })}</div>
+      ${pumpCurveSVG(o, r)}
+      ${r ? `<div>${pill(r.status === 'off' ? 'off' : r.status, r.status === 'off' ? 'ปิด' : r.status === 'ok' ? 'ใช้ได้' : r.status === 'warn' ? 'ควรระวัง' : 'มีปัญหา')} <span style="color:var(--muted)">${esc(r.msg)}</span>${r.kW ? `<div class="note" style="margin-top:6px">กินไฟที่เพลาราว ${fmt(r.kW, 2)} กิโลวัตต์ (${fmt(r.kW / 0.746, 2)} แรงม้า)</div>` : ''}</div>` : ''}
+      <label class="toggle" style="border:1px solid var(--line);border-radius:8px"><span class="grow">เปิดปั๊มใน "${esc(sc.name)}"</span><span class="switch"><input type="checkbox" data-scpump="${o.id}" ${pumpOn(sc, o.id) ? 'checked' : ''}><span></span></span></label>
+      <div class="btnrow"><button class="btn" data-act="flipPump">สลับทิศดูด/ส่ง</button><button class="btn danger" data-act="delete">ลบปั๊ม</button></div>
+      <p class="note">ค่าตัวอย่างเป็นตัวเลขทั่วไป ไม่ใช่รุ่นจริง ใส่ค่าจากป้ายหรือแคตตาล็อกปั๊มของคุณเพื่อผลที่ตรงกว่า</p></div>`;
+  }
+  const userPipes = P.pipes.filter(p => !p.block);
+  return `
+  <div><div class="eyebrow">ขั้น 5</div><h2>ท่อและปั๊ม</h2></div>
+  <div class="grid2">${fld('ขนาดท่อที่จะวาด', 'ui.pipeSize', ui.pipeSize, { options: sizeOpts(), full: true })}</div>
+  <div class="btnrow"><button class="btn ${tool === 'pipe' ? 'on' : 'primary'}" data-act="tool" data-tool="pipe">ลากท่อ</button><button class="btn ${tool === 'pump' ? 'on' : ''}" data-act="tool" data-tool="pump">วางปั๊ม</button></div>
+  ${ed}
+  ${P.pumps.length ? `<h3>ปั๊ม</h3><div class="list">${P.pumps.map(u => `<button class="item ${isSel('pump', u.id) ? 'sel' : ''}" data-selk="pump" data-id="${u.id}"><span class="ico" style="background:${pumpOn(sc, u.id) ? 'var(--water)' : '#7b857f'}">P</span><span class="grow">${esc(u.name)}</span><small>${pumpOn(sc, u.id) ? 'เปิด' : 'ปิด'}</small></button>`).join('')}</div>` : ''}
+  ${userPipes.length ? `<h3>ท่อที่วาดเอง</h3><div class="list">${userPipes.map(p => `<button class="item ${isSel('pipe', p.id) ? 'sel' : ''}" data-selk="pipe" data-id="${p.id}"><span class="ico" style="background:${pipeOpen(sc, p.id) ? '#3a8fc9' : '#7b857f'}">ท</span><span class="grow">${esc(p.name)}</span><small>${PIPES[p.size] ? PIPES[p.size].label.replace(' (สายน้ำหยด)', '') : ''} · ${fmt0(polyLen(p.pts))} ม.</small></button>`).join('')}</div>` : ''}
+  <p class="note">ทุกเส้นท่อมีวาล์วในตัว เปิด/ปิดได้แยกตามสถานการณ์ ปั๊มมีวาล์วกันกลับในตัว น้ำไหลทางเดียวตามลูกศร</p>`;
+}
+function panelRun() {
+  const sc = scenario(), r = RES;
+  const v = r.verdict;
+  const userPipes = P.pipes.filter(p => !p.block);
+  const blockGroups = P.blocks.map(b => ({ b, ids: P.pipes.filter(p => p.block === b.id).map(p => p.id) })).filter(g => g.ids.length);
+  return `
+  <div><div class="eyebrow">ขั้น 6</div><h2>สถานการณ์ & ผล</h2></div>
+  <p>สถานการณ์คือชุดของปั๊มและวาล์วที่เปิดอยู่ เช่น หน้าแล้งใช้บาดาล หน้าฝนสูบจากสระ ตั้งได้ไม่จำกัด</p>
+  <div class="list">${P.scenarios.map(x => `<button class="item ${x.id === sc.id ? 'sel' : ''}" data-scsel="${x.id}"><span class="grow">${esc(x.name)}</span></button>`).join('')}</div>
+  <div class="btnrow"><button class="btn" data-act="scDup">คัดลอกเป็นสถานการณ์ใหม่</button><button class="btn danger" data-act="scDel" ${P.scenarios.length < 2 ? 'disabled' : ''}>ลบสถานการณ์นี้</button></div>
+  <div class="card sel">
+    <div class="grid2">${fld('ชื่อสถานการณ์', 'sc.name', sc.name, { text: true, full: true })}</div>
+    ${P.pumps.length ? `<div><h3 style="margin-bottom:4px">ปั๊ม</h3><div class="list">${P.pumps.map(u => { const rr = r.pumps.find(x => x.u.id === u.id); return `<label class="toggle"><span class="grow">${esc(u.name)}${rr && rr.on ? `<br><small style="color:var(--muted)">${rr.Q > 0.01 ? `${fmt(rr.Q)} ม³/ชม. · ส่งสูง ${fmt(rr.H, 0)} ม. · ${fmt(rr.kW, 2)} กิโลวัตต์` : esc(rr.msg)}</small>` : ''}</span>${rr && rr.on ? pill(rr.status, rr.status === 'ok' ? 'ใช้ได้' : rr.status === 'warn' ? 'ระวัง' : 'ปัญหา') : ''}<span class="switch"><input type="checkbox" data-scpump="${u.id}" ${pumpOn(sc, u.id) ? 'checked' : ''}><span></span></span></label>`; }).join('')}</div></div>` : ''}
+    ${userPipes.length ? `<div><h3 style="margin-bottom:4px">วาล์วท่อ</h3><div class="list">${userPipes.map(p => `<label class="toggle"><span class="grow">${esc(p.name)}</span><span class="switch"><input type="checkbox" data-scpipe="${p.id}" ${pipeOpen(sc, p.id) ? 'checked' : ''}><span></span></span></label>`).join('')}</div></div>` : ''}
+    ${blockGroups.length ? `<div><h3 style="margin-bottom:4px">โซนแปลงปลูก</h3><div class="list">${blockGroups.map(g => `<label class="toggle"><span class="grow">${esc(g.b.name)}</span><span class="switch"><input type="checkbox" data-scblock="${g.b.id}" ${g.ids.every(id => pipeOpen(sc, id)) ? 'checked' : ''}><span></span></span></label>`).join('')}</div></div>` : ''}
+  </div>
+  <div class="card">
+    <h3>ผลของสถานการณ์นี้</h3>
+    <div>${pill(v.lvl === 'info' ? 'ok' : v.lvl, v.lvl === 'ok' ? 'ใช้ได้' : v.lvl === 'warn' ? 'ใช้ได้ แต่ควรระวัง' : v.lvl === 'bad' ? 'ยังไม่ผ่าน' : v.lvl === 'info' ? 'เติมน้ำ' : 'ไม่มีน้ำไปแปลง')} <b>${esc(v.head)}</b></div>
+    ${r.blocks.filter(b => b.n).map(b => `<div class="tbl"><table><tr><th>${esc(b.b.name)}</th><th style="text-align:right">ค่า</th></tr>
+      <tr><td>แรงดันพอ / ต่ำ / ไม่มีน้ำ</td><td class="n">${b.ok} / ${b.low} / ${b.dry + b.none}</td></tr>
+      <tr><td>แรงดันที่หัวจ่าย ต่ำสุด–สูงสุด</td><td class="n">${b.pmin == null ? '–' : `${fmt(b.pmin / BAR, 2)}–${fmt(b.pmax / BAR, 2)} บาร์`}</td></tr>
+      <tr><td>น้ำต่อต้น เฉลี่ย (ต่ำสุด)</td><td class="n">${b.qavg ? `${fmt(b.qavg, 0)} (${fmt(b.qmin, 0)}) ลิตร/ชม.` : '–'}</td></tr>
+      <tr><td>ความสม่ำเสมอ (ต่ำสุด/เฉลี่ย)</td><td class="n">${b.qavg ? fmt(b.qmin / b.qavg * 100, 0) + '%' : '–'}</td></tr>
+      <tr><td>น้ำรวมทั้งแปลง</td><td class="n">${fmt(b.total / 1000, 2)} ม³/ชม.</td></tr>
+      <tr><td>เวลาเปิดต่อรอบ (${fmt0(+b.b.waterL)} ลิตร/ต้น)</td><td class="n">${b.runMin ? fmt0(b.runMin) + ' นาที' : '–'}</td></tr></table></div>`).join('')}
+    ${r.tanks.filter(t => Math.abs(t.Qh) > 0.01).length ? `<div class="tbl"><table><tr><th>แหล่งน้ำ</th><th style="text-align:right">น้ำเข้า/ออก</th></tr>${r.tanks.filter(t => Math.abs(t.Qh) > 0.01).map(t => `<tr><td>${esc(t.s.name)}${t.minutes != null ? `<br><small style="color:var(--muted)">${t.Qh > 0 ? 'หมดใน' : 'เต็มใน'}ราว ${fmt0(t.minutes)} นาที</small>` : ''}</td><td class="n">${t.Qh > 0 ? 'ออก' : 'เข้า'} ${fmt(Math.abs(t.Qh), 2)} ม³/ชม.</td></tr>`).join('')}</table></div>` : ''}
+    ${r.warnings.map(w => `<div class="warnbox">${esc(w.text)}</div>`).join('')}
+    <p class="note">คำนวณแบบสภาวะคงที่ ${r.sol.iterations} รอบ ใช้เวลา ${fmt(r.ms, 1)} มิลลิวินาทีบนเครื่องนี้ แรงเสียดทานท่อใช้สูตร Hazen–Williams เผื่อข้อต่อ ${fmt0(+P.settings.minor)}%</p>
+  </div>
+  <div class="card"><h3>เทียบทุกสถานการณ์</h3><div class="tbl" id="cmp">${compareTable()}</div></div>
+  <div class="card"><h3>ตั้งค่าการคำนวณ</h3><div class="grid2">
+    ${fld('ระยะที่ต้นไม้ต่อเข้าท่อเอง', 'set.attach', P.settings.attach, { unit: 'ม.' })}
+    ${fld('เผื่อข้อต่อ วาล์ว ข้องอ', 'set.minor', P.settings.minor, { unit: '% ของความยาว' })}</div></div>`;
+}
+function compareTable() {
+  if (!ALL) ALL = P.scenarios.map(s => s.id === RES.sc.id ? RES : runScenario(s));
+  return `<table><tr><th>สถานการณ์</th><th>ปั๊มที่เปิด</th><th>ผล</th></tr>${ALL.map(r => {
+    const v = r.verdict, on = r.pumps.filter(x => x.on).map(x => x.u.name).join(', ') || '–';
+    return `<tr><td><button class="btn sm" data-scsel="${r.sc.id}" style="text-align:left">${esc(r.sc.name)}</button></td><td>${esc(on)}</td><td>${pill(v.lvl === 'info' ? 'ok' : v.lvl, v.lvl === 'ok' ? 'ใช้ได้' : v.lvl === 'warn' ? 'ระวัง' : v.lvl === 'bad' ? 'ไม่ผ่าน' : v.lvl === 'info' ? 'เติมน้ำ' : 'ไม่มีน้ำ')}<br><small>${esc(v.head)}</small></td></tr>`;
+  }).join('')}</table>`;
+}
+function bindRun() { }
+
+function renderVerdict() {
+  const v = RES.verdict, sc = scenario();
+  const col = { ok: 'var(--ok)', warn: 'var(--warn)', bad: 'var(--bad)', info: 'var(--water)', off: 'var(--muted)' }[v.lvl];
+  $('#verdict').innerHTML = `
+    <select id="scQuick" aria-label="สถานการณ์">${P.scenarios.map(s => `<option value="${s.id}"${s.id === sc.id ? ' selected' : ''}>${esc(s.name)}</option>`).join('')}</select>
+    <div class="head"><span style="width:10px;height:10px;border-radius:50%;background:${col};flex:none;margin-top:6px"></span><span>${esc(v.head)}</span></div>
+    ${v.lines.length ? `<div class="sub">${v.lines.map(esc).join('<br>')}</div>` : ''}`;
+}
+function renderLegend() {
+  const pBar = [['< 0.3', '#ff5a4a'], ['0.3–0.8', '#ff9a2e'], ['0.8–1.5', '#ffd23f'], ['1.5–2.5', '#3fdc84'], ['> 2.5', '#36c2ff']];
+  const vel = [['ไหลน้อย', '#9aa7a0'], ['< 0.5', '#5cc8ff'], ['0.5–1.5', '#3fdc84'], ['1.5–2', '#ffb020'], ['> 2', '#ff5a4a']];
+  const rows = ui.colorBy === 'velocity' ? vel : pBar;
+  $('#legend').innerHTML = `<div class="seg"><button data-color="pressure" class="${ui.colorBy === 'pressure' ? 'on' : ''}">แรงดัน บาร์</button><button data-color="velocity" class="${ui.colorBy === 'velocity' ? 'on' : ''}">ความเร็ว ม./วิ</button></div>
+    ${rows.map(([t, c]) => `<div class="row"><span class="sw" style="background:${c}"></span>${t}</div>`).join('')}
+    <div class="row" style="margin-top:4px"><span class="dot" style="background:${COL.ok}"></span>ต้นได้น้ำพอ</div>
+    <div class="row"><span class="dot" style="background:${COL.low}"></span>แรงดันต่ำ</div>
+    <div class="row"><span class="dot" style="background:${COL.dry}"></span>ไม่มีน้ำ</div>
+    <div class="row"><span class="dot" style="border:1.5px solid ${COL.none}"></span>ยังไม่ต่อท่อ</div>`;
+}
+
+// ---------- panel events ----------
+function setPath(obj, path, val) { const ks = path.split('.'); let o = obj; for (let i = 0; i < ks.length - 1; i++) o = o[ks[i]]; o[ks[ks.length - 1]] = val; }
+$('#panel').addEventListener('change', e => {
+  const t = e.target;
+  if (t.dataset.scpump) { snapshot(); scenario().pumpOn[t.dataset.scpump] = t.checked; changed(false); return; }
+  if (t.dataset.scpipe) { snapshot(); const sc = scenario(); if (t.checked) delete sc.pipeOff[t.dataset.scpipe]; else sc.pipeOff[t.dataset.scpipe] = true; changed(false); return; }
+  if (t.dataset.scblock) { snapshot(); const sc = scenario(); P.pipes.filter(p => p.block === t.dataset.scblock).forEach(p => { if (t.checked) delete sc.pipeOff[p.id]; else sc.pipeOff[p.id] = true; }); changed(false); return; }
+  const k = t.dataset.k; if (!k) return;
+  let val = t.type === 'checkbox' ? t.checked : t.value;
+  if (t.hasAttribute('data-num')) { val = parseFloat(String(val).replace(',', '.')); if (!isFinite(val)) { toast('ใส่เป็นตัวเลข'); renderPanel(); return; } }
+  if (k === 'ui.pipeSize') { ui.pipeSize = val; return; }
+  snapshot();
+  if (k.startsWith('proj.')) { P[k.slice(5)] = val; changed(false); return; }
+  if (k.startsWith('fence.')) { P.fence[k.slice(6)] = val; changed(false); return; }
+  if (k.startsWith('set.')) { P.settings[k.slice(4)] = Math.max(0, val); changed(false); return; }
+  if (k === 'sc.name') { scenario().name = val; changed(false); return; }
+  const o = selObj(); if (!o) return;
+  if (ui.sel.kind === 'block') {
+    if (k === 'emitterType') { o.emitterType = val; if (val !== 'custom') o.emitter = { ...EMITTERS[val] }; }
+    else if (k.startsWith('emitter.')) { setPath(o, k, val); o.emitterType = 'custom'; }
+    else if (k === 'angle') o.angle = String(val).trim().toLowerCase() === 'auto' || val === '' ? 'auto' : (isFinite(parseFloat(val)) ? parseFloat(val) : 'auto');
+    else setPath(o, k, val);
+    if (['rowSp', 'plantSp'].includes(k)) o[k] = Math.max(0.2, val);
+    if (k === 'latSize' || k === 'hdrSize') P.pipes.filter(p => p.block === o.id && p.role === (k === 'latSize' ? 'lateral' : 'header')).forEach(p => p.size = val);
+    if (k === 'name') P.pipes.filter(p => p.block === o.id).forEach(p => p.name = p.role === 'header' ? `${val} ท่อหัวแปลง` : p.name.replace(/^.* แถว /, `${val} แถว `));
+    if (o.autoPipes && ['rowSp', 'plantSp', 'setback', 'angle', 'autoPipes'].includes(k)) genBlockPipes(o);
+    changed(false); return;
+  }
+  if (ui.sel.kind === 'pump') {
+    if (k === 'preset') { o.preset = val; if (PUMP_PRESETS[val]) { const pr = { ...PUMP_PRESETS[val] }; delete pr.label; Object.assign(o, pr); } }
+    else { setPath(o, k, val); if (['H0', 'Qd', 'Hd', 'Qmax'].includes(k)) o.preset = 'custom'; }
+    if (+o.Hd >= +o.H0) { o.Hd = +o.H0 * 0.7; toast('ส่งสูงที่จุดออกแบบต้องน้อยกว่าตอนปิดหัว ปรับให้แล้ว'); }
+    changed(false); return;
+  }
+  setPath(o, k, val); changed(false);
+});
+$('#panel').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.selk) { select({ kind: b.dataset.selk, id: b.dataset.id }); zoomToSel(); return; }
+  if (b.dataset.scsel) { P.active = b.dataset.scsel; changed(false); return; }
+  if (b.dataset.stepGo) { ui.step = b.dataset.stepGo; renderPanel(); redraw(); return; }
+  const act = b.dataset.act; if (!act) return;
+  if (act === 'tool') { if (ui.tool === b.dataset.tool && b.dataset.tool !== 'source') { stopTool(); return; } startTool(b.dataset.tool, b.dataset.src); return; }
+  if (act === 'delete') deleteSel();
+  if (act === 'delBoundary') { ui.sel = { kind: 'boundary', id: 'b' }; deleteSel(); }
+  if (act === 'selBoundary') select({ kind: 'boundary', id: 'b' });
+  if (act === 'blockFromBoundary') { ui.draft = P.boundary.map(p => p.slice()); ui.tool = 'block'; finishDraw(); }
+  if (act === 'flipPump') { snapshot(); const u = selObj(); [u.a, u.b] = [u.b, u.a]; changed(false); }
+  if (act === 'scDup') { snapshot(); const s = JSON.parse(JSON.stringify(scenario())); s.id = uid('s'); s.name = scenario().name + ' (สำเนา)'; P.scenarios.push(s); P.active = s.id; changed(false); }
+  if (act === 'scDel') { if (P.scenarios.length < 2) return; snapshot(); P.scenarios = P.scenarios.filter(s => s.id !== P.active); P.active = P.scenarios[0].id; changed(false); toast('ลบสถานการณ์แล้ว · กดย้อนเพื่อเอาคืน'); }
+  if (act === 'search') doSearch();
+  if (act === 'locate') {
+    if (!navigator.geolocation) { toast('เบราว์เซอร์นี้หาตำแหน่งไม่ได้'); return; }
+    navigator.geolocation.getCurrentPosition(p => { Map2.setView(p.coords.latitude, p.coords.longitude, 18); }, () => toast('หาตำแหน่งไม่ได้ ลองอนุญาตการเข้าถึงตำแหน่ง'));
+  }
+  if (act === 'moveHere') { snapshot(); const c = bboxCenter(); const ll = { lat: Map2.st.lat, lng: Map2.st.lng }; const cm = fromLL(ll); shiftAll(cm[0] - c[0], cm[1] - c[1]); changed(false); toast('ย้ายผังมาไว้กลางจอแล้ว'); }
+});
+$('#panel').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.id === 'search') doSearch(); });
+$('#steps').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; ui.step = b.dataset.step; if (ui.sel && KIND_STEP[ui.sel.kind] !== ui.step) ui.sel = null; renderPanel(); redraw(); });
+$('#verdict').addEventListener('change', e => { if (e.target.id === 'scQuick') { P.active = e.target.value; changed(false); } });
+$('#legend').addEventListener('click', e => { const b = e.target.closest('button'); if (b && b.dataset.color) { ui.colorBy = b.dataset.color; renderLegend(); redraw(); } });
+$('#baseSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; document.querySelectorAll('#baseSeg button').forEach(x => x.classList.toggle('on', x === b)); Map2.setBase(b.dataset.base); try { localStorage.setItem(LS_KEY + '.base', b.dataset.base); } catch (er) { } });
+$('#zin').onclick = () => { const [W, H] = Map2.size(); Map2.zoomAround(W / 2, H / 2, Map2.st.zoom + 1); };
+$('#zout').onclick = () => { const [W, H] = Map2.size(); Map2.zoomAround(W / 2, H / 2, Map2.st.zoom - 1); };
+$('#zfit').onclick = () => fitAll();
+$('#drawDone').onclick = () => finishDraw();
+$('#drawCancel').onclick = () => stopTool();
+$('#drawUndo').onclick = () => { ui.draft.pop(); updateDrawBar(); redraw(); };
+$('#btnUndo').onclick = () => document.body.classList.contains('mode-simple') ? SIM.undo() : undo();
+document.addEventListener('keydown', e => {
+  if (e.target.matches('input,select,textarea')) return;
+  if (document.body.classList.contains('mode-simple')) {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); SIM.undo(); }
+    else if (e.key === 'Escape') SIM.closeMenu();
+    else if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); SIM.deleteSel(); }
+    return;
+  }
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); undo(); }
+  else if (e.key === 'Escape') { if (ui.tool) stopTool(); else select(null, true); }
+  else if (e.key === 'Enter' && ui.tool) finishDraw();
+  else if ((e.key === 'Delete' || e.key === 'Backspace') && !ui.tool && ui.sel) { e.preventDefault(); deleteSel(); }
+  else if (e.key === 'Backspace' && ui.tool) { ui.draft.pop(); updateDrawBar(); redraw(); }
+});
+
+// ---------- view helpers ----------
+function allPts() {
+  const pts = [];
+  if (P.boundary) pts.push(...P.boundary);
+  P.blocks.forEach(b => pts.push(...b.poly)); P.pipes.forEach(p => pts.push(...p.pts)); P.pumps.forEach(u => pts.push(u.a, u.b)); P.sources.forEach(s => pts.push([s.x, s.y]));
+  return pts;
+}
+function bboxCenter() { const pts = allPts(); if (!pts.length) return [0, 0]; const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]); return [(Math.min(...xs) + Math.max(...xs)) / 2, (Math.min(...ys) + Math.max(...ys)) / 2]; }
+function shiftAll(dx, dy) {
+  const mv = p => { p[0] += dx; p[1] += dy; };
+  if (P.boundary) P.boundary.forEach(mv);
+  P.blocks.forEach(b => { b.poly.forEach(mv); b._sig = null; }); P.pipes.forEach(p => p.pts.forEach(mv)); P.pumps.forEach(u => { mv(u.a); mv(u.b); }); P.sources.forEach(s => { s.x += dx; s.y += dy; });
+}
+function fitPts(pts, pad = 60) {
+  if (!pts.length) return;
+  const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
+  const c = toLL([(Math.min(...xs) + Math.max(...xs)) / 2, (Math.min(...ys) + Math.max(...ys)) / 2]);
+  const w = Math.max(20, Math.max(...xs) - Math.min(...xs)), h = Math.max(20, Math.max(...ys) - Math.min(...ys));
+  const [W, H] = Map2.size();
+  const mppNeed = Math.max(w / Math.max(50, W - pad * 2), h / Math.max(50, H - pad * 2 - 120));
+  const z = Math.log2(40075016.686 * Math.cos(c.lat * Math.PI / 180) / (TS * mppNeed));
+  Map2.setView(c.lat, c.lng, Math.min(20.5, z));
+}
+function fitAll() { const pts = allPts(); if (pts.length) fitPts(pts); else Map2.setView(P.origin.lat, P.origin.lng, 17); }
+function zoomToSel() {
+  const o = selObj(); if (!o) return;
+  const pts = o.poly || o.pts || (o.a ? [o.a, o.b] : [[o.x, o.y]]);
+  const [W, H] = Map2.size(); const inView = pts.every(p => { const s = S(p); return s[0] > 0 && s[1] > 0 && s[0] < W && s[1] < H; });
+  if (!inView) fitPts(pts, 120);
+}
+async function doSearch() {
+  const q = ($('#search').value || '').trim(); if (!q) return;
+  const m = q.match(/(-?\d{1,2}\.\d+)\s*[, ]\s*(-?\d{1,3}\.\d+)/) || q.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+  if (m) { Map2.setView(+m[1], +m[2], 18); toast('ไปยังพิกัดแล้ว'); return; }
+  const box = $('#searchRes'); box.hidden = false; box.innerHTML = '<div class="item">กำลังค้นหา…</div>';
+  try {
+    const r = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=6&accept-language=th&q=${encodeURIComponent(q)}`);
+    const js = await r.json();
+    if (!js.length) { box.innerHTML = '<div class="item">ไม่พบสถานที่ ลองพิมพ์ชื่ออำเภอหรือจังหวัด หรือวางพิกัด</div>'; return; }
+    box.innerHTML = js.map(x => `<button class="item" data-lat="${x.lat}" data-lng="${x.lon}"><span class="grow">${esc(x.display_name)}</span></button>`).join('');
+    box.querySelectorAll('button').forEach(b => b.onclick = () => { Map2.setView(+b.dataset.lat, +b.dataset.lng, 17); box.hidden = true; });
+  } catch (er) { box.innerHTML = '<div class="item">ค้นหาไม่ได้ตอนนี้ (ต้องต่ออินเทอร์เน็ต) วางพิกัดแทนได้ เช่น 12.73, 102.12</div>'; }
+}
+
+// ---------- file menu ----------
+$('#btnFile').onclick = e => { e.stopPropagation(); $('#fileMenu').hidden = !$('#fileMenu').hidden; };
+document.addEventListener('click', e => { if (!e.target.closest('#fileMenu')) $('#fileMenu').hidden = true; });
+$('#fileMenu').addEventListener('click', e => {
+  const a = e.target.closest('button'); if (!a) return; const act = a.dataset.act; $('#fileMenu').hidden = true;
+  if (act === 'new') { snapshot(); const o = { lat: Map2.st.lat, lng: Map2.st.lng }; P = emptyProject(o); ui.sel = null; ui.step = 'land'; changed(false); toast('เริ่มไร่ใหม่แล้ว · กดย้อนเพื่อกลับไปผังเดิม'); }
+  if (act === 'sample') { snapshot(); sampleProject(); ui.sel = null; changed(false); fitAll(); }
+  if (act === 'export') download(`${P.name || 'farm'}.json`, JSON.stringify(JSON.parse(cleanJSON(P)), null, 1), 'application/json');
+  if (act === 'import') $('#fileIn').click();
+  if (act === 'inp') download(`${P.name || 'farm'} - ${scenario().name}.inp`, toINP(scenario()), 'text/plain');
+});
+$('#fileIn').onchange = async e => {
+  const f = e.target.files[0]; if (!f) return;
+  try { const js = JSON.parse(await f.text()); if (!js.origin || !js.scenarios) throw 0; snapshot(); P = js; ui.sel = null; changed(false); fitAll(); toast('เปิดโปรเจกต์แล้ว'); }
+  catch (er) { toast('ไฟล์นี้ไม่ใช่โปรเจกต์ผังน้ำไร่'); }
+  e.target.value = '';
+};
+
+// EPANET export: reservoirs for sources/tanks, junction emitters for plants
+function toINP(sc) {
+  const net = buildNet(sc), keep = net.keepNode, N = net.nodes;
+  const id = i => (N[i].fixed ? 'R' : 'J') + i;
+  const emit = new Map();
+  const L = []; net.links.forEach(l => { if (keep[l.a] && keep[l.b]) L.push(l); });
+  L.filter(l => l.kind === 'emit').forEach(l => emit.set(l.a, (emit.get(l.a) || 0) + l.K * 3600));
+  const out = ['[TITLE]', `${P.name} - ${sc.name} (ส่งออกจากผังน้ำไร่)`, '', '[JUNCTIONS]', ';ID Elev Demand'];
+  N.forEach((n, i) => { if (keep[i] && !n.fixed) out.push(`${id(i)} ${n.elev.toFixed(3)} 0`); });
+  out.push('', '[RESERVOIRS]', ';ID Head');
+  N.forEach((n, i) => { if (keep[i] && n.fixed && !n.atm) out.push(`${id(i)} ${n.head.toFixed(3)}`); });
+  out.push('', '[PIPES]', ';ID N1 N2 Length Diam Rough Minor Status');
+  L.filter(l => l.kind === 'pipe').forEach((l, k) => out.push(`P${k} ${id(l.a)} ${id(l.b)} ${l.Leff.toFixed(3)} ${l.d} ${l.C} 0 Open`));
+  const curves = [];
+  out.push('', '[PUMPS]');
+  L.filter(l => l.kind === 'pump').forEach((l, k) => {
+    const u = P.pumps.find(x => x.id === l.uid), B = l.B / 3600 / 3600; // per (m³/h)²
+    let q3 = +u.Qd * 1.4, h3 = l.A - B * q3 * q3; if (h3 <= 0.05 * l.A) { q3 = Math.sqrt(0.9 * l.A / B); h3 = 0.1 * l.A; }
+    curves.push(`C${k} 0 ${l.A.toFixed(3)}`, `C${k} ${(+u.Qd).toFixed(4)} ${(l.A - B * u.Qd * u.Qd).toFixed(3)}`, `C${k} ${q3.toFixed(4)} ${h3.toFixed(3)}`);
+    out.push(`PU${k} ${id(l.a)} ${id(l.b)} HEAD C${k}`);
+  });
+  out.push('', '[CURVES]', ...curves, '', '[EMITTERS]');
+  emit.forEach((K, j) => out.push(`${id(j)} ${K.toFixed(8)}`));
+  out.push('', '[OPTIONS]', 'Units CMH', 'Headloss H-W', 'Emitter Exponent 0.5', 'Accuracy 0.000001', 'Trials 200', '', '[COORDINATES]');
+  N.forEach((n, i) => { if (keep[i] && !n.atm) out.push(`${id(i)} ${n.x.toFixed(2)} ${n.y.toFixed(2)}`); });
+  out.push('', '[END]');
+  return out.join('\n');
+}
+
+// ---------- boot ----------
+(function boot() {
+  let loaded = null;
+  try { const s = localStorage.getItem(LS_KEY); if (s) loaded = JSON.parse(s); } catch (e) { }
+  if (loaded && loaded.origin && loaded.scenarios) P = loaded; else sampleProject();
+  let base = 'sat'; try { base = localStorage.getItem(LS_KEY + '.base') || 'sat'; } catch (e) { }
+  if (!BASES[base]) base = 'sat';
+  document.querySelectorAll('#baseSeg button').forEach(x => x.classList.toggle('on', x.dataset.base === base));
+  Map2.setBase(base);
+  Map2.draw(drawAll);
+  Map2.resize();
+  ui.step = P.boundary ? 'run' : 'land';
+  recompute(); renderPanel(); renderVerdict(); renderLegend(); $('#projName').textContent = P.name;
+  requestAnimationFrame(() => { Map2.resize(); fitAll(); });
+  window.__farm = { get P() { return P; }, get RES() { return RES; }, runScenario, toINP, Map2, S };
+})();
+
+</script>
+<script>
+'use strict';
+/* ===================================================================
+   ทดลองสูตร — isometric sandbox: water source → pump → pipes, elbows, tees → outlets.
+   Pure 2D canvas with hand-drawn shading (no WebGL), redrawn only on change;
+   water animation runs at ~30 fps only while something is flowing.
+   =================================================================== */
+const SIM = (() => {
+  const G = 9.81;
+  const DIRS = { '+x': [1, 0, 0], '-x': [-1, 0, 0], '+y': [0, 1, 0], '-y': [0, -1, 0], '+z': [0, 0, 1], '-z': [0, 0, -1] };
+  const OPP = { '+x': '-x', '-x': '+x', '+y': '-y', '-y': '+y', '+z': '-z', '-z': '+z' };
+  const SIZES = ['pvc12', 'pvc34', 'pvc1', 'pvc114', 'pe20'];
+  const K_BEND = 0.9, K_RUN = 0.6, K_BRANCH = 1.8;
+  const OUTLETS = {
+    faucet:    { label: 'ก๊อกน้ำ', q: 12, p: 1.0, good: 0.7, weak: 0.2 },
+    shower:    { label: 'ฝักบัว', q: 9, p: 1.0, good: 1.0, weak: 0.4 },
+    washer:    { label: 'เครื่องซักผ้า', q: 10, p: 1.0, good: 0.5, weak: 0.3 },
+    hose:      { label: 'สายยางรดน้ำ', q: 22, p: 1.0, good: 0.5, weak: 0.2 },
+    sprinkler: { label: 'สปริงเกอร์สนาม', q: 15, p: 2.0, good: 1.5, weak: 0.8 },
+  };
+  const PUMP_TYPES = {
+    none:     { label: 'ไม่ใช้ปั๊ม', sub: 'ใช้แรงดันจากต้นทางอย่างเดียว' },
+    tank:     { label: 'ปั๊มถังกลม', sub: 'แรงดันสูง ติด-ดับตามสวิตช์แรงดัน แรงดันแกว่ง' },
+    const:    { label: 'ปั๊มแรงดันคงที่', sub: 'ถังเหลี่ยม แรงดันเรียบ จนใช้น้ำเกินกำลังปั๊ม' },
+    inverter: { label: 'ปั๊มอินเวอร์เตอร์', sub: 'ปรับรอบตามการใช้น้ำ แรงดันนิ่ง ประหยัดไฟ' },
+  };
+  // generic home-pump curves by motor size (typical values, not a specific brand)
+  const WATTS = [150, 200, 250, 300, 400, 500, 750, 1100];
+  const H0T = [18, 22, 25, 28, 32, 35, 40, 45];      // m, shut-off head
+  const QMT = [28, 33, 38, 43, 50, 58, 75, 95];      // L/min at zero head
+  const ROOT = [0, 0, 0.35];
+
+  let SM = null, RESS = null, sel = null, hover = null, menu = null, active = false;
+  const hist = [];
+  const LS = 'phangnamrai.simple.v1';
+  const uidS = () => 'n' + Math.random().toString(36).slice(2, 8);
+  const pipe = (len, size, next) => ({ id: uidS(), kind: 'pipe', len, size, next: [next || null] });
+  const bend = (to, next) => ({ id: uidS(), kind: 'bend', to, next: [next || null] });
+  const tee = (branch, run, br) => ({ id: uidS(), kind: 'tee', branch, next: [run || null, br || null] });
+  const outlet = (type, name, open) => ({ id: uidS(), kind: 'outlet', type, name, open });
+
+  function sample() {
+    return {
+      source: { type: 'city', pressure: 0.8, stand: 2.0, level: 1.0 },
+      pump: { type: 'tank', watt: 250, set: null, cutIn: null, cutOut: null, H0: null, Qmax: null },
+      size: 'pvc12', unit: 'w', colorBy: 'pipe',
+      root: { id: 'root', kind: 'root', next: [
+        pipe(1.2, 'pvc34', tee('-y',
+          pipe(2.5, 'pvc34', tee('+y',
+            pipe(1.5, 'pvc12', bend('+z', pipe(3.0, 'pvc12', bend('+x', pipe(1.0, 'pvc12', outlet('shower', 'ฝักบัวชั้น 2', true)))))),
+            pipe(1.5, 'pvc12', tee('+x', outlet('faucet', 'ก๊อกครัว', true))))),
+          pipe(2.0, 'pvc12', outlet('hose', 'ก๊อกสนาม', false)))),
+      ] },
+    };
+  }
+
+  // ---------- pump model ----------
+  function interp(arr, w) {
+    if (w <= WATTS[0]) return arr[0] * w / WATTS[0];
+    for (let i = 1; i < WATTS.length; i++) if (w <= WATTS[i]) { const t = (w - WATTS[i - 1]) / (WATTS[i] - WATTS[i - 1]); return arr[i - 1] + t * (arr[i] - arr[i - 1]); }
+    return arr[arr.length - 1] * Math.pow(w / WATTS[WATTS.length - 1], 0.35);
+  }
+  function pumpSpec(pm) {
+    const w = +pm.watt || 250;
+    let H0 = pm.H0 != null && pm.H0 !== '' ? +pm.H0 : interp(H0T, w), Qm = pm.Qmax != null && pm.Qmax !== '' ? +pm.Qmax : interp(QMT, w);
+    if ((pm.H0 == null || pm.H0 === '') && pm.type === 'inverter') H0 *= 1.1;
+    if ((pm.Qmax == null || pm.Qmax === '') && pm.type === 'inverter') Qm *= 1.1;
+    const autoSet = Math.round(0.6 * H0 / BAR * 10) / 10;
+    const set = pm.set != null && pm.set !== '' ? +pm.set : (pm.type === 'inverter' ? Math.min(2.0, Math.round(0.8 * H0 / BAR * 10) / 10) : autoSet);
+    const band = w <= 250 ? [1.2, 1.8] : w <= 400 ? [1.4, 2.2] : [1.6, 2.6];
+    const cutIn = pm.cutIn != null && pm.cutIn !== '' ? +pm.cutIn : band[0];
+    const cutOut = pm.cutOut != null && pm.cutOut !== '' ? +pm.cutOut : Math.min(band[1], 0.92 * H0 / BAR);
+    const Qs = Qm / 1000 / 60;
+    return { w, H0, Qm, A: H0, B: H0 / (Qs * Qs), set, cutIn, cutOut, autoSet };
+  }
+  const srcHeadS = () => SM.source.type === 'city' ? 0.3 + (+SM.source.pressure || 0) * BAR : (+SM.source.stand || 0) + (+SM.source.level || 0);
+  const SRC_POS = () => SM.source.type === 'city' ? [-2.3, 0, 0] : [-2.5, 0, 0];
+
+  // ---------- geometry ----------
+  function layout() {
+    const out = { pipes: [], joints: [], outlets: [], handles: [] };
+    function go(pc, p, d, parent, port, sz) {
+      if (!pc) { out.handles.push({ parent, port, p, d }); return; }
+      pc._p = p; pc._d = d;
+      if (pc.kind === 'pipe') {
+        const v = DIRS[d], q = [p[0] + v[0] * pc.len, p[1] + v[1] * pc.len, p[2] + v[2] * pc.len];
+        out.pipes.push({ pc, a: p, b: q, d }); go(pc.next[0], q, d, pc, 0, pc.size);
+      } else if (pc.kind === 'bend') { out.joints.push({ pc, p, din: d, outs: [pc.to], sz }); go(pc.next[0], p, pc.to, pc, 0, sz); }
+      else if (pc.kind === 'tee') { out.joints.push({ pc, p, din: d, outs: [d, pc.branch], sz }); go(pc.next[0], p, d, pc, 0, sz); go(pc.next[1], p, pc.branch, pc, 1, sz); }
+      else if (pc.kind === 'outlet') out.outlets.push({ pc, p, d });
+    }
+    go(SM.root.next[0], ROOT, '+x', SM.root, 0, 'pvc1');
+    return out;
+  }
+
+  // ---------- hydraulics ----------
+  const area = size => Math.PI * Math.pow((PIPES[size] || PIPES.pvc12).d / 2000, 2);
+  const mOf = (K, size) => K / (2 * G * Math.pow(area(size), 2));
+  function buildNet() {
+    const nodes = [], links = [], outs = [];
+    const add = (z, fixed, head) => nodes.push({ elev: z, fixed: !!fixed, head }) - 1;
+    const sp = SRC_POS();
+    const src = add(SM.source.type === 'city' ? 0.3 : +SM.source.stand || 0, true, srcHeadS());
+    const pin = add(0.25), root = add(ROOT[2]);
+    const sucL = 1.2 + (SM.source.type === 'tank' ? +SM.source.stand || 0 : 0);
+    const spec0 = PIPES.pvc1;
+    links.push({ a: src, b: pin, type: 'pipe', r: Hyd.hwR(sucL, spec0.d / 1000, spec0.C), m: mOf(1.5, 'pvc1'), kind: 'suction', size: 'pvc1', L: sucL });
+    const pumpOnNow = SM.pump.type !== 'none';
+    const ps = pumpSpec(SM.pump);
+    if (pumpOnNow) links.push({ a: pin, b: root, type: 'pump', A: ps.A, B: ps.B, kind: 'pump', q0: ps.Qm / 2 / 60000 });
+    else links.push({ a: pin, b: root, type: 'pipe', r: Hyd.hwR(0.4, spec0.d / 1000, spec0.C), m: 0, kind: 'suction', size: 'pvc1', L: 0.4 });
+    const atm = new Map();
+    const atmN = z => { const k = z.toFixed(3); if (!atm.has(k)) atm.set(k, add(z, true, z)); return atm.get(k); };
+    function shortLink(n, z, K, size, pc, path) {
+      const n2 = add(z); const sp2 = PIPES[size] || PIPES.pvc12;
+      const li = links.push({ a: n, b: n2, type: 'pipe', r: Hyd.hwR(0.05, sp2.d / 1000, sp2.C), m: mOf(K, size), kind: 'fit', pc, K, size, L: 0.05 }) - 1;
+      return [n2, path.concat(li)];
+    }
+    function go(pc, n, K, size, path, fitPc) {
+      if (!pc) return;
+      const z = nodes[n].elev;
+      if (pc.kind === 'pipe') {
+        const sp2 = PIPES[pc.size] || PIPES.pvc12, z2 = pc._p[2] + DIRS[pc._d][2] * pc.len;
+        const n2 = add(z2);
+        const li = links.push({ a: n, b: n2, type: 'pipe', r: Hyd.hwR(pc.len, sp2.d / 1000, sp2.C), m: mOf(K, pc.size), kind: 'pipe', pc, K, fitPc, size: pc.size, L: pc.len, q0: 0.3 * area(pc.size) }) - 1;
+        go(pc.next[0], n2, 0, pc.size, path.concat(li), null);
+      } else if (pc.kind === 'bend') go(pc.next[0], n, K + K_BEND, size, path, pc);
+      else if (pc.kind === 'tee') {
+        let nn = n, pp = path;
+        if (K > 0) [nn, pp] = shortLink(n, z, K, size, fitPc, path);
+        go(pc.next[0], nn, K_RUN, size, pp, pc);
+        go(pc.next[1], nn, K_BRANCH, size, pp, pc);
+      } else if (pc.kind === 'outlet') {
+        let nn = n, pp = path;
+        if (K > 0) [nn, pp] = shortLink(n, z, K, size, fitPc, path);
+        const o = OUTLETS[pc.type] || OUTLETS.faucet;
+        const Kq = o.q / 1000 / 60 / Math.sqrt(o.p * BAR);
+        let li = -1;
+        if (pc.open) li = links.push({ a: nn, b: atmN(nodes[nn].elev), type: 'emit', K: Kq, x: 0.5, kind: 'emit', pc, q0: Kq * 3 }) - 1;
+        outs.push({ pc, node: nn, link: li, path: pp });
+      }
+    }
+    go(SM.root.next[0], root, 0, SM.size, [0, 1], null);
+    return { nodes, links, outs, src, pin, root, ps, pumpOnNow };
+  }
+
+  function solveSim() {
+    const net = buildNet(), ps = net.ps;
+    const pumpIdx = net.links.findIndex(l => l.kind === 'pump');
+    const anyOpen = net.outs.some(o => o.link >= 0);
+    let sol, static_ = false, Hs = null;
+    const regulated = SM.pump.type === 'const' || SM.pump.type === 'inverter';
+    if (anyOpen) {
+      let Ha = srcHeadS();
+      for (let it = 0; it < 6; it++) {
+        if (pumpIdx >= 0 && regulated) net.links[pumpIdx].cap = Math.max(0, ROOT[2] + ps.set * BAR - Ha);
+        sol = Hyd.solve(net);
+        const nHa = sol.H[net.pin];
+        if (!regulated || pumpIdx < 0 || Math.abs(nHa - Ha) < 0.002) break;
+        Ha = nHa;
+      }
+    } else {
+      static_ = true;
+      const sh = srcHeadS();
+      Hs = SM.pump.type === 'none' ? sh : SM.pump.type === 'tank' ? ROOT[2] + ps.cutOut * BAR : ROOT[2] + ps.set * BAR;
+      Hs = Math.max(Hs, sh);
+      sol = { H: net.nodes.map(n => n.fixed ? n.head : Hs), Q: new Float64Array(net.links.length), converged: true, iterations: 0 };
+      sol.H[net.pin] = sh;
+    }
+    const pAt = n => (sol.H[n] - net.nodes[n].elev) / BAR;
+    const res = { net, sol, static: static_, outs: [], pipes: new Map(), pump: null, total: 0 };
+    net.outs.forEach(o => {
+      const t = OUTLETS[o.pc.type] || OUTLETS.faucet, p = pAt(o.node);
+      const q = o.link >= 0 ? Math.max(0, sol.Q[o.link]) * 60000 : 0;
+      let st = !o.pc.open ? 'off' : p >= t.good ? 'good' : p >= t.weak ? 'weak' : 'dry';
+      if (o.pc.open && q < 0.05) st = 'dry';
+      res.outs.push({ pc: o.pc, p, q, st, path: o.path, node: o.node, t });
+      res.total += q;
+    });
+    net.links.forEach((l, k) => {
+      if (l.kind === 'pipe') { const Q = sol.Q[k]; const r = res.pipes.get(l.pc.id) || { Q, v: Math.abs(Q) / area(l.size), pA: pAt(l.a), pB: pAt(l.b) }; res.pipes.set(l.pc.id, r); }
+    });
+    const sh = srcHeadS();
+    if (SM.pump.type !== 'none') {
+      const Q = static_ ? 0 : Math.max(0, sol.Q[pumpIdx]) * 60000, gain = static_ ? null : sol.H[net.root] - sol.H[net.pin];
+      const hyd = static_ ? 0 : 1000 * G * (Q / 60000) * gain;
+      let watt;
+      if (static_) watt = 0;
+      else if (SM.pump.type === 'inverter') watt = Math.min(ps.w * 1.1, Math.max(0.2 * ps.w, hyd / 0.42 + 15));
+      else watt = ps.w * (0.85 + 0.15 * Math.min(1, Q / ps.Qm));
+      const pOut = pAt(net.root);
+      let note = '';
+      if (static_) note = SM.pump.type === 'tank' ? `ไม่มีการใช้น้ำ ปั๊มตัดที่ ${fmt(ps.cutOut, 1)} บาร์ แรงดันค้างในถังรอไว้` : `ไม่มีการใช้น้ำ ปั๊มหยุด รักษาแรงดันไว้ราว ${fmt(Math.max(ps.set, (sh - ROOT[2]) / BAR), 1)} บาร์`;
+      else if (SM.pump.type === 'tank') note = Q < 0.3 * ps.Qm ? `ใช้น้ำน้อย ปั๊มจะติด-ดับเป็นช่วง แรงดันแกว่งระหว่าง ${fmt(ps.cutIn, 1)}–${fmt(ps.cutOut, 1)} บาร์` : `ใช้น้ำต่อเนื่อง ปั๊มเดินตลอด แรงดันตามกราฟปั๊มที่ ${fmt(pOut, 2)} บาร์`;
+      else if (regulated) note = pOut >= ps.set - 0.05 ? `คุมแรงดันไว้ที่ ${fmt(ps.set, 1)} บาร์ได้` : `ใช้น้ำเกินกำลังปั๊ม แรงดันตกจาก ${fmt(ps.set, 1)} เหลือ ${fmt(pOut, 2)} บาร์`;
+      const suctionP = pAt(net.pin);
+      if (!static_ && suctionP < -0.6) note += ' · ด้านดูดติดลบมาก ระวังปั๊มดูดไม่ขึ้น';
+      res.pump = { Q, gain, pOut, watt, note, ps, hyd };
+    }
+    res.srcQ = static_ ? 0 : Math.max(0, sol.Q[0]) * 60000;
+    return res;
+  }
+
+  // ---------- breakdown (energy ladder) for one outlet ----------
+  function ladder(o) {
+    const net = RESS.net, sol = RESS.sol, rows = [];
+    const sh = srcHeadS();
+    rows.push({ t: SM.source.type === 'city' ? `แรงดันประปา ${fmt(+SM.source.pressure, 2)} บาร์ (มิเตอร์สูง 0.3 ม.)` : `ระดับน้ำในถัง (ขาตั้ง ${fmt(+SM.source.stand, 1)} + น้ำ ${fmt(+SM.source.level, 1)} ม.)`, v: sh, kind: 'start' });
+    if (RESS.static) {
+      const H = sol.H[o.node];
+      if (H - sh > 0.01) rows.push({ t: 'ปั๊มหยุด แรงดันที่ค้างในระบบ', v: H - sh, kind: 'pump' });
+      rows.push({ t: `ความสูงของจุดนี้ ${fmt(net.nodes[o.node].elev, 2)} ม.`, v: -net.nodes[o.node].elev, kind: 'z' });
+      return rows;
+    }
+    let fr = 0, fit = 0;
+    const det = [];
+    o.path.forEach(li => {
+      const l = net.links[li], Q = Math.abs(sol.Q[li]);
+      if (l.kind === 'pump') { rows.push({ t: 'ปั๊มเพิ่มแรงดัน', v: sol.H[l.b] - sol.H[l.a], kind: 'pump' }); return; }
+      const hf = l.r * Math.pow(Q, 1.852), hm = (l.m || 0) * Q * Q;
+      if (l.kind === 'suction') { rows.push({ t: 'ท่อดูดเข้าปั๊ม', v: -(hf + hm), kind: 'loss' }); return; }
+      fr += hf; fit += hm;
+      if (l.kind === 'pipe') det.push({ t: `ท่อ ${(PIPES[l.size] || {}).label || ''} ยาว ${fmt(l.L, 1)} ม. · ${fmt(Q * 60000, 1)} ล./นาที`, v: -hf });
+    });
+    rows.push({ t: `แรงเสียดทานในท่อ ${det.length} ช่วง (Hazen–Williams)`, v: -fr, kind: 'loss', det });
+    rows.push({ t: 'ข้องอและสามทาง (K·v²/2g)', v: -fit, kind: 'loss' });
+    rows.push({ t: `ความสูงของจุดนี้ ${fmt(net.nodes[o.node].elev, 2)} ม.`, v: -net.nodes[o.node].elev, kind: 'z' });
+    return rows;
+  }
+
+  // ===================================================================
+  // Rendering
+  // ===================================================================
+  const stage = document.getElementById('isoStage');
+  const cv = document.createElement('canvas'); stage.prepend(cv);
+  const ctx = cv.getContext('2d');
+  const view = { s: 70, rot: 0, ox: 0, oy: 40 };
+  let W = 1, H = 1, dpr = 1, raf = 0, animT = 0, lastAnim = 0, L = null, hits = [];
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function R(p) { const x = p[0], y = p[1]; switch (view.rot & 3) { case 0: return [x, y]; case 1: return [-y, x]; case 2: return [-x, -y]; default: return [y, -x]; } }
+  const PR = (xr, yr, z) => [W / 2 + view.ox + (xr - yr) * 0.866 * view.s, H / 2 + view.oy + (xr + yr) * 0.5 * view.s - z * view.s];
+  const Pj = p => { const r = R(p); return PR(r[0], r[1], p[2]); };
+  const depth = p => { const r = R(p); return r[0] + r[1]; };
+  const shadowPt = p => { const r = R(p); const z = Math.max(0, p[2]); return PR(r[0] + z * 0.22, r[1] + z * 0.5, 0); };
+  function tok() {
+    const cs = getComputedStyle(stage);
+    const g = n => cs.getPropertyValue(n).trim();
+    return { bg1: g('--stage-1'), bg2: g('--stage-2'), floor: g('--floor'), floorL: g('--floor-l'), floorR: g('--floor-r'), grid: g('--floor-grid'), shadow: g('--shadow'), ink: g('--ink'), tag: g('--tag'), tagInk: g('--tag-ink') };
+  }
+  function hex(c) { const m = c.replace('#', ''); return [parseInt(m.slice(0, 2), 16), parseInt(m.slice(2, 4), 16), parseInt(m.slice(4, 6), 16)]; }
+  function shade(rgb, f) { return `rgb(${rgb.map(v => Math.round(f >= 0 ? v + (255 - v) * f : v * (1 + f))).join(',')})`; }
+  function poly(pts, fill, stroke) { ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.closePath(); if (fill) { ctx.fillStyle = fill; ctx.fill(); } if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 1; ctx.stroke(); } }
+  function line(a, b, w, col, dash) { ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.lineWidth = w; ctx.strokeStyle = col; if (dash) ctx.setLineDash(dash); ctx.stroke(); if (dash) ctx.setLineDash([]); }
+  function normalUp(a, b) { const dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1; let nx = -dy / l, ny = dx / l; if (ny > 0.2 || (Math.abs(ny) <= 0.2 && nx > 0)) { nx = -nx; ny = -ny; } return [nx, ny]; }
+  function tube(a, b, w, rgb) {
+    const n = normalUp(a, b);
+    ctx.lineCap = 'round';
+    line(a, b, w, shade(rgb, -0.42));
+    const o1 = [n[0] * w * 0.12, n[1] * w * 0.12];
+    line([a[0] + o1[0], a[1] + o1[1]], [b[0] + o1[0], b[1] + o1[1]], w * 0.7, shade(rgb, 0));
+    const o2 = [n[0] * w * 0.27, n[1] * w * 0.27];
+    line([a[0] + o2[0], a[1] + o2[1]], [b[0] + o2[0], b[1] + o2[1]], Math.max(1, w * 0.2), shade(rgb, 0.5));
+  }
+  function ball(c, r, rgb) {
+    const g = ctx.createRadialGradient(c[0] - r * 0.35, c[1] - r * 0.4, r * 0.1, c[0], c[1], r);
+    g.addColorStop(0, shade(rgb, 0.55)); g.addColorStop(0.55, shade(rgb, 0)); g.addColorStop(1, shade(rgb, -0.45));
+    ctx.beginPath(); ctx.arc(c[0], c[1], r, 0, 7); ctx.fillStyle = g; ctx.fill();
+  }
+  // axis-aligned box in world space, shaded faces (light from upper left)
+  function box(x0, x1, y0, y1, z0, z1, rgb) {
+    const cs = [[x0, y0], [x1, y0], [x1, y1], [x0, y1]].map(p => R([p[0], p[1]]));
+    const xs = cs.map(c => c[0]), ys = cs.map(c => c[1]);
+    const a = Math.min(...xs), b = Math.max(...xs), c = Math.min(...ys), d = Math.max(...ys);
+    poly([PR(a, d, z0), PR(b, d, z0), PR(b, d, z1), PR(a, d, z1)], shade(rgb, -0.12));   // left face (+y)
+    poly([PR(b, c, z0), PR(b, d, z0), PR(b, d, z1), PR(b, c, z1)], shade(rgb, -0.34));   // right face (+x)
+    poly([PR(a, c, z1), PR(b, c, z1), PR(b, d, z1), PR(a, d, z1)], shade(rgb, 0.18));    // top
+  }
+  function boxShadow(x0, x1, y0, y1, h) {
+    const pts = [[x0, y0], [x1, y0], [x1, y1], [x0, y1]];
+    const top = pts.map(p => shadowPt([p[0], p[1], h])), bot = pts.map(p => Pj([p[0], p[1], 0]));
+    const all = top.concat(bot); const cx = all.reduce((s, p) => s + p[0], 0) / all.length, cy = all.reduce((s, p) => s + p[1], 0) / all.length;
+    all.sort((p, q) => Math.atan2(p[1] - cy, p[0] - cx) - Math.atan2(q[1] - cy, q[0] - cx));
+    poly(all, T.shadow);
+  }
+  function cylinder(cx, cy, r, z0, z1, rgb, topRgb) {
+    const b = Pj([cx, cy, z0]), t = Pj([cx, cy, z1]), rx = r * view.s * 1.2247, ry = r * view.s * 0.7071;
+    const g = ctx.createLinearGradient(b[0] - rx, 0, b[0] + rx, 0);
+    g.addColorStop(0, shade(rgb, -0.35)); g.addColorStop(0.3, shade(rgb, 0.35)); g.addColorStop(0.55, shade(rgb, 0.05)); g.addColorStop(1, shade(rgb, -0.5));
+    ctx.beginPath(); ctx.ellipse(b[0], b[1], rx, ry, 0, 0, Math.PI); ctx.lineTo(t[0] - rx, t[1]); ctx.ellipse(t[0], t[1], rx, ry, 0, Math.PI, 0, true); ctx.closePath();
+    ctx.fillStyle = g; ctx.fill();
+    ctx.beginPath(); ctx.ellipse(t[0], t[1], rx, ry, 0, 0, 7); ctx.fillStyle = shade(topRgb || rgb, 0.25); ctx.fill();
+    ctx.lineWidth = 1; ctx.strokeStyle = shade(rgb, -0.3); ctx.stroke();
+  }
+  function ellipseShadow(cx, cy, r, h) {
+    const b = Pj([cx, cy, 0]), t = shadowPt([cx, cy, h]), rx = r * view.s * 1.2247, ry = r * view.s * 0.7071;
+    ctx.fillStyle = T.shadow; ctx.beginPath(); ctx.ellipse(b[0], b[1], rx, ry, 0, 0, 7); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(t[0], t[1], rx, ry, 0, 0, 7); ctx.fill();
+    ctx.save(); ctx.lineCap = 'butt'; line(b, t, ry * 2, T.shadow); ctx.restore();
+  }
+  function tag(x, y, lines, dot, selected) {
+    ctx.font = '600 12px "IBM Plex Sans Thai", system-ui, sans-serif';
+    const w1 = ctx.measureText(lines[0]).width; ctx.font = '500 11.5px "IBM Plex Mono", ui-monospace, monospace';
+    const w2 = lines[1] ? ctx.measureText(lines[1]).width : 0;
+    const w = Math.max(w1, w2) + 30, h = lines[1] ? 40 : 24, bx = x - w / 2, by = y - h;
+    ctx.save(); ctx.shadowColor = 'rgba(0,0,0,.18)'; ctx.shadowBlur = 8; ctx.shadowOffsetY = 2;
+    ctx.beginPath(); ctx.roundRect ? ctx.roundRect(bx, by, w, h, 6) : ctx.rect(bx, by, w, h); ctx.fillStyle = T.tag; ctx.fill(); ctx.restore();
+    if (selected) { ctx.lineWidth = 2; ctx.strokeStyle = '#3b8fd9'; ctx.stroke(); }
+    ctx.beginPath(); ctx.moveTo(x - 5, by + h); ctx.lineTo(x, by + h + 6); ctx.lineTo(x + 5, by + h); ctx.fillStyle = T.tag; ctx.fill();
+    ctx.beginPath(); ctx.arc(bx + 12, by + 12, 4.5, 0, 7); ctx.fillStyle = dot; ctx.fill();
+    ctx.fillStyle = T.tagInk; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    ctx.font = '600 12px "IBM Plex Sans Thai", system-ui, sans-serif'; ctx.fillText(lines[0], bx + 22, by + 12.5);
+    if (lines[1]) { ctx.font = '500 11.5px "IBM Plex Mono", ui-monospace, monospace'; ctx.fillText(lines[1], bx + 22, by + 29); }
+    return [bx, by, w, h];
+  }
+  const ST_COL = { good: '#2fa35a', weak: '#e0a020', dry: '#d9483a', off: '#8c958f' };
+  const PIPE_RGB = { pvc: hex('#2f6db3'), pe: hex('#2b2f2d') };
+  const pressRGB = p => hex(p < 0.3 ? '#d9483a' : p < 0.8 ? '#f08a2c' : p < 1.5 ? '#e8c23a' : p < 2.5 ? '#3cb371' : '#2f9ad9');
+  let T = null;
+
+  function bboxAll() {
+    const sp = SRC_POS(), top = SM.source.type === 'tank' ? (+SM.source.stand || 0) + 1.3 : 0.8;
+    const pts = [[-3.1, -0.7, 0], [0.4, 0.7, 0], [sp[0], 0, top]];
+    L.pipes.forEach(p => pts.push(p.a, p.b)); L.outlets.forEach(o => pts.push(o.p)); L.joints.forEach(j => pts.push(j.p));
+    return pts;
+  }
+  function fit() {
+    if (!L) L = layout();
+    const pts = bboxAll().map(p => { const r = R(p); return [(r[0] - r[1]) * 0.866, (r[0] + r[1]) * 0.5 - p[2]]; });
+    const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
+    const w = Math.max(...xs) - Math.min(...xs) + 0.6, h = Math.max(...ys) - Math.min(...ys) + 0.8;
+    view.s = clamp(Math.min((W - Math.min(240, W * 0.12)) / w, (H - Math.min(150, H * 0.22)) / h), 18, 140);
+    const cx = (Math.max(...xs) + Math.min(...xs)) / 2, cy = (Math.max(...ys) + Math.min(...ys)) / 2;
+    view.ox = -cx * view.s; view.oy = -cy * view.s + 30;
+    request();
+  }
+
+  function render(now) {
+    raf = 0; if (!active) return;
+    T = tok();
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const bg = ctx.createLinearGradient(0, 0, 0, H); bg.addColorStop(0, T.bg1); bg.addColorStop(1, T.bg2);
+    ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+    if (!L) L = layout();
+    hits = [];
+    // floor slab
+    const rs = bboxAll().map(R);
+    const fx0 = Math.floor(Math.min(...rs.map(r => r[0])) - 1.2), fx1 = Math.ceil(Math.max(...rs.map(r => r[0])) + 1.2);
+    const fy0 = Math.floor(Math.min(...rs.map(r => r[1])) - 1.2), fy1 = Math.ceil(Math.max(...rs.map(r => r[1])) + 1.2), th = 0.18;
+    poly([PR(fx0, fy1, 0), PR(fx1, fy1, 0), PR(fx1, fy1, -th), PR(fx0, fy1, -th)], T.floorL);
+    poly([PR(fx1, fy0, 0), PR(fx1, fy1, 0), PR(fx1, fy1, -th), PR(fx1, fy0, -th)], T.floorR);
+    poly([PR(fx0, fy0, 0), PR(fx1, fy0, 0), PR(fx1, fy1, 0), PR(fx0, fy1, 0)], T.floor);
+    ctx.lineWidth = 1; ctx.strokeStyle = T.grid;
+    for (let x = fx0 + 1; x < fx1; x++) line(PR(x, fy0, 0), PR(x, fy1, 0), 1, T.grid);
+    for (let y = fy0 + 1; y < fy1; y++) line(PR(fx0, y, 0), PR(fx1, y, 0), 1, T.grid);
+
+    const sp = SRC_POS(), tankSrc = SM.source.type === 'tank', stand = +SM.source.stand || 0;
+    const pt = SM.pump.type;
+    // ---- shadows ----
+    if (tankSrc) { ellipseShadow(sp[0], sp[1], 0.55, stand + 1.2); }
+    else boxShadow(sp[0] - 0.2, sp[0] + 0.2, -0.2, 0.2, 0.6);
+    if (pt !== 'none') boxShadow(-1.3, -0.3, -0.3, 0.3, pt === 'const' ? 0.6 : 0.45);
+    if (pt === 'tank') ellipseShadow(-0.8, -0.55, 0.26, 0.6);
+    ctx.lineCap = 'round';
+    L.pipes.forEach(p => { const w = pipeW(p.pc.size); line(shadowPt(p.a), shadowPt(p.b), w * 1.1, T.shadow); });
+    L.outlets.forEach(o => { const s = shadowPt(o.p); ctx.fillStyle = T.shadow; ctx.beginPath(); ctx.ellipse(s[0], s[1], 9, 5, 0, 0, 7); ctx.fill(); });
+
+    // ---- objects, painter's order ----
+    const items = [];
+    items.push({ d: depth(sp) - 0.5, f: drawSource });
+    items.push({ d: depth([-0.8, 0, 0]) - 0.2, f: drawPump });
+    items.push({ d: depth([-1.6, 0, 0]), f: drawSuction });
+    L.pipes.forEach(p => items.push({ d: Math.max(depth(p.a), depth(p.b)) - 0.3 + (p.a[2] + p.b[2]) * 0.002, f: () => drawPipe(p) }));
+    L.joints.forEach(j => items.push({ d: depth(j.p) + 0.01 + j.p[2] * 0.002, f: () => drawJoint(j) }));
+    L.outlets.forEach(o => items.push({ d: depth(o.p) + 0.02, f: () => drawOutlet(o, now) }));
+    items.sort((a, b) => a.d - b.d).forEach(it => it.f());
+    // ---- add handles ----
+    L.handles.forEach(h => {
+      const s = Pj(h.p), v = DIRS[h.d], q = Pj([h.p[0] + v[0] * 0.28, h.p[1] + v[1] * 0.28, h.p[2] + v[2] * 0.28]);
+      const on = hover && hover.kind === 'handle' && hover.h.parent === h.parent && hover.h.port === h.port;
+      line(s, q, 2, 'rgba(59,143,217,.55)', [3, 3]);
+      ctx.beginPath(); ctx.arc(q[0], q[1], on ? 13 : 11, 0, 7); ctx.fillStyle = '#3b8fd9'; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = '#fff'; ctx.stroke();
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 2.2; ctx.beginPath(); ctx.moveTo(q[0] - 5, q[1]); ctx.lineTo(q[0] + 5, q[1]); ctx.moveTo(q[0], q[1] - 5); ctx.lineTo(q[0], q[1] + 5); ctx.stroke();
+      hits.push({ kind: 'handle', h, x: q[0], y: q[1], r: 14, pri: 3 });
+    });
+    // ---- tags ----
+    if (RESS) {
+      RESS.outs.forEach(o => {
+        const s = Pj(o.pc._p);
+        const head = o.pc.name || o.t.label;
+        const l2 = !o.pc.open ? `ปิด · รอ ${fmt(o.p, 2)} บาร์` : `${fmt(o.p, 2)} บาร์ · ${fmt(o.q, 1)} ล./นาที`;
+        const r = tag(s[0], s[1] - 30 - (o.pc.type === 'washer' ? 40 : 0), [head, l2], ST_COL[o.st], sel === o.pc.id);
+        hits.push({ kind: 'piece', id: o.pc.id, rect: r, pri: 2 });
+      });
+      if (RESS.pump) {
+        const s = Pj([-0.8, 0, pt === 'const' ? 0.65 : 0.5]);
+        const ps = RESS.pump.ps;
+        const r = tag(s[0], s[1] - 18, [`${PUMP_TYPES[pt].label} ${wattLabel(ps.w)}`, RESS.static ? `หยุด · ${fmt(RESS.pump.pOut, 2)} บาร์` : `ออก ${fmt(RESS.pump.pOut, 2)} บาร์ · ${fmt(RESS.pump.Q, 1)} ล./นาที`], '#3b8fd9', sel === 'pump');
+        hits.push({ kind: 'piece', id: 'pump', rect: r, pri: 2 });
+      }
+    }
+    // keep animating while water is flowing
+    if (RESS && RESS.total > 0.05 && !reduced.matches && !document.hidden) { if (!animT) animT = requestAnimationFrame(tick); }
+  }
+  function tick(t) { animT = 0; if (!active) return; if (t - lastAnim > 33) { lastAnim = t; render(t); } else animT = requestAnimationFrame(tick); }
+  function request() { if (!raf) raf = requestAnimationFrame(render); }
+  const pipeW = size => clamp((PIPES[size] || PIPES.pvc12).d / 1000 * view.s * 1.25, 5, 26);
+  function pipeRGB(pc) {
+    if (SM.colorBy === 'pressure' && RESS) { const r = RESS.pipes.get(pc.id); if (r) return pressRGB(Math.min(r.pA, r.pB)); }
+    return (pc.size || '').startsWith('pe') ? PIPE_RGB.pe : PIPE_RGB.pvc;
+  }
+  function selGlow(a, b, w) { ctx.lineCap = 'round'; line(a, b, w + 8, 'rgba(59,143,217,.45)'); }
+  function drawPipe(p) {
+    const a = Pj(p.a), b = Pj(p.b), w = pipeW(p.pc.size);
+    if (sel === p.pc.id || (hover && hover.id === p.pc.id)) selGlow(a, b, w);
+    tube(a, b, w, pipeRGB(p.pc));
+    // flowing water hint: moving dashes, speed follows velocity
+    const r = RESS && RESS.pipes.get(p.pc.id);
+    if (r && Math.abs(r.Q) * 60000 > 0.05) {
+      const off = -(performance.now() / 1000) * clamp(r.v, 0.2, 3) * view.s * (r.Q >= 0 ? 1 : -1);
+      ctx.save(); ctx.globalAlpha = 0.55; ctx.lineDashOffset = off; line(a, b, Math.max(1.5, w * 0.16), '#dff2ff', [w * 0.6, w * 1.4]); ctx.restore();
+    }
+    // band at each end (socket)
+    [a, b].forEach(e => { ctx.beginPath(); ctx.arc(e[0], e[1], w * 0.52, 0, 7); ctx.fillStyle = shade(pipeRGB(p.pc), -0.15); ctx.fill(); });
+    hits.push({ kind: 'piece', id: p.pc.id, seg: [a, b], r: Math.max(8, w * 0.7), pri: 1 });
+  }
+  function drawJoint(j) {
+    const c = Pj(j.p), w = pipeW(sizeNear(j));
+    if (sel === j.pc.id || (hover && hover.id === j.pc.id)) { ctx.beginPath(); ctx.arc(c[0], c[1], w * 1.1 + 5, 0, 7); ctx.fillStyle = 'rgba(59,143,217,.45)'; ctx.fill(); }
+    // short stubs show the fitting's arms
+    const arms = [OPP[j.din]].concat(j.outs);
+    arms.forEach(d => { const v = DIRS[d]; const e = Pj([j.p[0] + v[0] * 0.09, j.p[1] + v[1] * 0.09, j.p[2] + v[2] * 0.09]); tube(c, e, w * 1.3, hex('#e9ece9')); });
+    ball(c, w * (j.pc.kind === 'tee' ? 0.95 : 0.8), hex('#eef1ee'));
+    hits.push({ kind: 'piece', id: j.pc.id, x: c[0], y: c[1], r: Math.max(10, w), pri: 2 });
+  }
+  function sizeNear(j) { return j.sz || SM.size; }
+  function drawSuction() {
+    const sp = SRC_POS(), tankSrc = SM.source.type === 'tank', stand = +SM.source.stand || 0;
+    const w = pipeW('pvc1'), rgb = PIPE_RGB.pvc;
+    const pin = [SM.pump.type === 'none' ? -0.3 : -1.3, 0, 0.25];
+    if (tankSrc) {
+      const o = [sp[0] + 0.5, 0, stand + 0.12], d = [sp[0] + 0.75, 0, stand + 0.12], e = [sp[0] + 0.75, 0, 0.25];
+      tube(Pj(o), Pj(d), w, rgb); tube(Pj(d), Pj(e), w, rgb); tube(Pj(e), Pj(pin), w, rgb);
+      ball(Pj(d), w * 0.75, hex('#eef1ee')); ball(Pj(e), w * 0.75, hex('#eef1ee'));
+    } else tube(Pj([sp[0] + 0.15, 0, 0.25]), Pj(pin), w, rgb);
+    if (SM.pump.type === 'none') tube(Pj(pin), Pj(ROOT), w, rgb);
+  }
+  function drawSource() {
+    const sp = SRC_POS();
+    if (SM.source.type === 'tank') {
+      const stand = +SM.source.stand || 0, lv = clamp(+SM.source.level || 0, 0, 1.2);
+      if (stand > 0.05) {
+        [[-0.38, -0.38], [0.38, -0.38], [-0.38, 0.38], [0.38, 0.38]].sort((a, b) => depth([a[0], a[1], 0]) - depth([b[0], b[1], 0]))
+          .forEach(o => box(sp[0] + o[0] - 0.04, sp[0] + o[0] + 0.04, o[1] - 0.04, o[1] + 0.04, 0, stand, hex('#7d8580')));
+        box(sp[0] - 0.45, sp[0] + 0.45, -0.45, 0.45, stand - 0.06, stand, hex('#8d958f'));
+      }
+      cylinder(sp[0], sp[1], 0.5, stand, stand + 1.2, hex('#3f7fc2'), hex('#5b95cf'));
+      // water level band
+      const b = Pj([sp[0], 0, stand + lv]); ctx.strokeStyle = 'rgba(255,255,255,.55)'; ctx.lineWidth = 1.5; ctx.setLineDash([4, 3]);
+      ctx.beginPath(); ctx.ellipse(b[0], b[1], 0.5 * view.s * 1.2247, 0.5 * view.s * 0.7071, 0, 0.15, Math.PI - 0.15); ctx.stroke(); ctx.setLineDash([]);
+      const t = Pj([sp[0], 0, stand + 1.2]);
+      hits.push({ kind: 'piece', id: 'source', x: t[0], y: (t[1] + Pj([sp[0], 0, stand])[1]) / 2, r: 0.6 * view.s, pri: 1 });
+    } else {
+      box(sp[0] - 0.2, sp[0] + 0.2, -0.2, 0.2, 0, 0.55, hex('#a7aca8'));
+      const c = Pj([sp[0], 0, 0.62]); ctx.beginPath(); ctx.arc(c[0], c[1], 0.15 * view.s, 0, 7); ctx.fillStyle = '#f5f3ea'; ctx.fill(); ctx.lineWidth = 3; ctx.strokeStyle = '#3d4741'; ctx.stroke();
+      ctx.fillStyle = '#3d4741'; ctx.font = `600 ${Math.max(8, view.s * 0.1)}px "IBM Plex Mono", monospace`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(fmt(+SM.source.pressure, 1), c[0], c[1] + 1);
+      hits.push({ kind: 'piece', id: 'source', x: c[0], y: c[1] + 0.2 * view.s, r: 0.35 * view.s, pri: 1 });
+    }
+  }
+  function drawPump() {
+    const t = SM.pump.type; if (t === 'none') return;
+    const s0 = Pj([-0.8, 0, 0.3]);
+    if (sel === 'pump' || (hover && hover.id === 'pump')) { ctx.beginPath(); ctx.ellipse(s0[0], s0[1], 0.85 * view.s, 0.55 * view.s, 0, 0, 7); ctx.fillStyle = 'rgba(59,143,217,.25)'; ctx.fill(); }
+    box(-1.32, -0.28, -0.28, 0.28, 0, 0.05, hex('#3a403c'));
+    if (t === 'tank') {
+      cylinder(-0.8, -0.55, 0.26, 0.05, 0.62, hex('#2f73c0'));
+      box(-1.25, -0.72, -0.17, 0.17, 0.05, 0.4, hex('#2c8a6a'));
+      box(-0.72, -0.36, -0.15, 0.15, 0.05, 0.36, hex('#b9bfbb'));
+      const g = Pj([-0.8, -0.55, 0.7]); tube(Pj([-0.8, -0.55, 0.62]), g, 4, hex('#b9bfbb')); ball(g, 6, hex('#f2f2ee'));
+    } else if (t === 'const') {
+      box(-1.28, -0.32, -0.27, 0.27, 0.05, 0.62, hex('#e8ebe8'));
+      box(-1.28, -0.32, -0.27, 0.27, 0.6, 0.64, hex('#2f73c0'));
+      const g = Pj([-0.55, 0, 0.66]); ball(g, 7, hex('#f6f6f2'));
+    } else {
+      box(-1.25, -0.72, -0.17, 0.17, 0.05, 0.4, hex('#4b5560'));
+      box(-0.72, -0.36, -0.15, 0.15, 0.05, 0.36, hex('#b9bfbb'));
+      box(-1.18, -0.86, -0.2, 0.2, 0.4, 0.52, hex('#1f2a33'));
+      const c = Pj([-1.02, 0.2, 0.47]);
+      const txt = RESS && RESS.pump ? fmt(RESS.pump.pOut, 1) : '';
+      ctx.fillStyle = '#0d1612'; ctx.fillRect(c[0] - 17, c[1] - 9, 34, 18);
+      ctx.fillStyle = '#5cf08f'; ctx.font = '600 12px "IBM Plex Mono", monospace'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(txt, c[0], c[1] + 1);
+    }
+    const out = Pj([-0.36, 0, ROOT[2]]); tube(out, Pj(ROOT), pipeW('pvc1'), hex('#b9bfbb'));
+    hits.push({ kind: 'piece', id: 'pump', x: s0[0], y: s0[1] - 0.1 * view.s, r: 0.45 * view.s, pri: 1 });
+  }
+  function drawOutlet(o, now) {
+    const c = Pj(o.p), pc = o.pc, r = RESS && RESS.outs.find(x => x.pc === pc), v = DIRS[o.d];
+    const chrome = hex('#c9cfd0');
+    const isSel = sel === pc.id || (hover && hover.id === pc.id);
+    if (isSel) { ctx.beginPath(); ctx.arc(c[0], c[1], 20, 0, 7); ctx.fillStyle = 'rgba(59,143,217,.35)'; ctx.fill(); }
+    const tip = [o.p[0] + v[0] * 0.12, o.p[1] + v[1] * 0.12, o.p[2] + v[2] * 0.12];
+    let jetFrom = tip, jetDir = v;
+    if (pc.type === 'shower') {
+      const h = Pj(tip); tube(c, h, 7, chrome);
+      ctx.beginPath(); ctx.ellipse(h[0], h[1] + 3, 13, 7, 0, 0, 7); ctx.fillStyle = shade(chrome, 0.2); ctx.fill(); ctx.strokeStyle = shade(chrome, -0.4); ctx.lineWidth = 1; ctx.stroke();
+      jetDir = [0, 0, -1];
+    } else if (pc.type === 'washer') {
+      const bx = o.p[0] + v[0] * 0.45, by = o.p[1] + v[1] * 0.45;
+      box(bx - 0.3, bx + 0.3, by - 0.3, by + 0.3, 0, 0.85, hex('#eef0ee'));
+      const f = Pj([bx + 0.3 * 0.2, by + 0.3, 0.45]); ctx.beginPath(); ctx.ellipse(f[0], f[1], 0.16 * view.s, 0.2 * view.s, -0.5, 0, 7); ctx.fillStyle = '#3c4a55'; ctx.fill(); ctx.strokeStyle = '#c9cfd0'; ctx.lineWidth = 3; ctx.stroke();
+      tube(c, Pj(tip), 6, chrome); jetFrom = null;
+    } else if (pc.type === 'sprinkler') {
+      const base = [o.p[0], o.p[1], 0]; tube(c, Pj(base), 5, hex('#2b2f2d'));
+      const h = Pj([o.p[0], o.p[1], o.p[2] + 0.1]); tube(c, h, 7, hex('#2b2f2d')); ball(h, 6, hex('#e0c03a'));
+      jetFrom = [o.p[0], o.p[1], o.p[2] + 0.12]; jetDir = null;
+    } else if (pc.type === 'hose') {
+      const e = Pj(tip); tube(c, e, 8, hex('#2e9a55'));
+    } else {
+      const e = Pj(tip); tube(c, e, 7, chrome);
+      const nub = Pj([tip[0], tip[1], tip[2] - 0.06]); tube(e, nub, 6, chrome);
+      const hd = Pj([o.p[0], o.p[1], o.p[2] + 0.1]); tube(c, hd, 3, chrome); ball(hd, 5, hex(pc.open ? '#3b8fd9' : '#d9483a'));
+      jetFrom = [tip[0], tip[1], tip[2] - 0.06]; jetDir = [0, 0, -1];
+    }
+    if (r && r.q > 0.05 && jetFrom) drawJet(jetFrom, jetDir, r, now, pc.type);
+    hits.push({ kind: 'piece', id: pc.id, x: c[0], y: c[1], r: 16, pri: 2 });
+  }
+  // water jet: launch speed follows pressure (v = √(2gh)), drawn as a short parabola
+  function drawJet(p0, dir, r, now, type) {
+    const t = (now || performance.now()) / 1000;
+    const vj = Math.sqrt(2 * G * Math.max(0.05, r.p) * BAR) * 0.22, n = clamp(Math.round(r.q / 2), 3, 14);
+    ctx.save(); ctx.lineCap = 'round';
+    const arcs = [];
+    if (type === 'sprinkler') for (let k = 0; k < 8; k++) { const a = k / 8 * Math.PI * 2 + t * 0.6; arcs.push([Math.cos(a) * 0.7, Math.sin(a) * 0.7, 0.7]); }
+    else if (type === 'shower') for (let k = 0; k < 6; k++) { const a = k / 6 * Math.PI * 2; arcs.push([Math.cos(a) * 0.12, Math.sin(a) * 0.12, -1]); }
+    else if (dir && dir[2] === 0) arcs.push([dir[0], dir[1], 0.15]); else arcs.push([0, 0, -1]);
+    arcs.forEach(d0 => {
+      const pts = [];
+      for (let i = 0; i <= 16; i++) {
+        const tt = i / 16 * 0.9, x = p0[0] + d0[0] * vj * tt, y = p0[1] + d0[1] * vj * tt, z = p0[2] + d0[2] * vj * tt - 0.5 * G * 0.25 * tt * tt;
+        const zf = type === 'shower' ? Math.max(0, p0[2] - 1.3) : 0; pts.push(Pj([x, y, Math.max(zf, z)])); if (z <= zf) break;
+      }
+      ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]));
+      ctx.strokeStyle = 'rgba(120,190,245,.55)'; ctx.lineWidth = clamp(r.q / 5, 1.2, 4); ctx.stroke();
+      ctx.setLineDash([2, 9]); ctx.lineDashOffset = -t * 60; ctx.strokeStyle = 'rgba(235,248,255,.9)'; ctx.lineWidth = 2; ctx.stroke(); ctx.setLineDash([]);
+      const end = pts[pts.length - 1]; if (pts.length < 17 || end) { ctx.fillStyle = 'rgba(120,190,245,.25)'; ctx.beginPath(); ctx.ellipse(end[0], end[1], 9 + n, 4 + n / 3, 0, 0, 7); ctx.fill(); }
+    });
+    ctx.restore();
+  }
+
+  // ---------- interaction ----------
+  function hitAt(x, y) {
+    let best = null, bp = -1, bd = 1e9;
+    hits.forEach(h => {
+      let d;
+      if (h.rect) { const [bx, by, w, hh] = h.rect; d = (x >= bx && x <= bx + w && y >= by && y <= by + hh) ? 0 : 1e9; }
+      else if (h.seg) { const pr = projSeg([x, y], h.seg[0], h.seg[1]); d = pr.d <= h.r ? pr.d : 1e9; }
+      else { d = Math.hypot(h.x - x, h.y - y); if (d > h.r) d = 1e9; }
+      if (d < 1e9 && (h.pri > bp || (h.pri === bp && d < bd))) { best = h; bp = h.pri; bd = d; }
+    });
+    return best;
+  }
+  const ptrs = new Map(); let gest = null;
+  const loc = e => { const r = stage.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  cv.addEventListener('pointerdown', e => { cv.setPointerCapture(e.pointerId); const p = loc(e); ptrs.set(e.pointerId, p);
+    if (ptrs.size === 1) gest = { t: 'pend', s: p, o: [view.ox, view.oy] };
+    else if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; gest = { t: 'pinch', d0: Math.hypot(a[0] - b[0], a[1] - b[1]), s0: view.s }; } });
+  cv.addEventListener('pointermove', e => {
+    const p = loc(e);
+    if (!ptrs.has(e.pointerId)) { const h = hitAt(p[0], p[1]); const nh = h ? (h.kind === 'handle' ? { kind: 'handle', h: h.h } : { id: h.id }) : null;
+      if (JSON.stringify(nh && (nh.id || nh.h.port + nh.h.parent.id)) !== JSON.stringify(hover && (hover.id || hover.h.port + hover.h.parent.id))) { hover = nh; cv.style.cursor = h ? 'pointer' : 'grab'; request(); } return; }
+    ptrs.set(e.pointerId, p);
+    if (!gest) return;
+    if (gest.t === 'pinch' && ptrs.size >= 2) { const [a, b] = [...ptrs.values()]; zoomBy(Math.hypot(a[0] - b[0], a[1] - b[1]) / gest.d0 * gest.s0 / view.s, (a[0] + b[0]) / 2, (a[1] + b[1]) / 2); return; }
+    if (gest.t === 'pend' && Math.hypot(p[0] - gest.s[0], p[1] - gest.s[1]) > 5) gest.t = 'pan';
+    if (gest.t === 'pan') { view.ox = gest.o[0] + p[0] - gest.s[0]; view.oy = gest.o[1] + p[1] - gest.s[1]; request(); }
+  });
+  const end = e => { if (!ptrs.has(e.pointerId)) return; ptrs.delete(e.pointerId);
+    if (gest && gest.t === 'pend' && e.type === 'pointerup') tap(gest.s[0], gest.s[1]);
+    if (!ptrs.size) gest = null; else if (gest && gest.t === 'pinch') gest = { t: 'done' }; };
+  cv.addEventListener('pointerup', end); cv.addEventListener('pointercancel', end);
+  cv.addEventListener('wheel', e => { e.preventDefault(); const p = loc(e); zoomBy(Math.exp(-e.deltaY * (e.deltaMode ? 0.05 : 0.0018)), p[0], p[1]); }, { passive: false });
+  function zoomBy(f, x, y) {
+    const s2 = clamp(view.s * f, 18, 220), k = s2 / view.s;
+    view.ox = (view.ox + W / 2 - x) * k - W / 2 + x; view.oy = (view.oy + H / 2 - y) * k - H / 2 + y; view.s = s2; request();
+  }
+  function tap(x, y) {
+    const h = hitAt(x, y);
+    closeMenu();
+    if (!h) { sel = null; renderPanelS(); request(); return; }
+    if (h.kind === 'handle') { openMenu(h.h, x, y); return; }
+    sel = h.id; renderPanelS(); request();
+    document.getElementById('simSelCard')?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+
+  // arrow glyph for a direction as it appears on screen right now
+  function arrowFor(d) {
+    if (d === '+z') return '↑'; if (d === '-z') return '↓';
+    const v = DIRS[d], a = Pj([0, 0, 0]), b = Pj([v[0], v[1], 0]);
+    const dx = b[0] - a[0], dy = b[1] - a[1];
+    return dx > 0 ? (dy > 0 ? '↘' : '↗') : (dy > 0 ? '↙' : '↖');
+  }
+  function dirOptions(dIn) { return Object.keys(DIRS).filter(d => d !== dIn && d !== OPP[dIn]); }
+  const menuEl = document.getElementById('simMenu');
+  function openMenu(h, x, y) {
+    menu = h;
+    const dirs = dirOptions(h.d).map(d => `<button class="dirBtn" data-d="${d}" title="${d}">${arrowFor(d)}</button>`).join('');
+    menuEl.innerHTML = `
+      <div class="mhead"><b>ต่ออะไรต่อจากตรงนี้</b><button class="x" data-act="close" aria-label="ปิด">×</button></div>
+      <div class="msec"><span>ท่อตรง ${arrowFor(h.d)} (${(PIPES[SM.size] || {}).label})</span><div class="chips">${[0.5, 1, 2, 3, 5].map(l => `<button data-add="pipe" data-len="${l}">${l} ม.</button>`).join('')}</div></div>
+      <div class="msec"><span>ข้องอ 90° เลี้ยวไปทาง</span><div class="chips">${dirs.replace(/class="dirBtn"/g, 'class="dirBtn" data-add="bend"')}</div></div>
+      <div class="msec"><span>สามทาง แยกออกไปทาง</span><div class="chips">${dirs.replace(/class="dirBtn"/g, 'class="dirBtn" data-add="tee"')}</div></div>
+      <div class="msec"><span>จุดใช้น้ำ</span><div class="chips">${Object.entries(OUTLETS).map(([k, v]) => `<button data-add="outlet" data-type="${k}">${v.label}</button>`).join('')}</div></div>`;
+    menuEl.hidden = false;
+    const r = stage.getBoundingClientRect(), mw = menuEl.offsetWidth, mh = menuEl.offsetHeight;
+    menuEl.style.left = clamp(x + 14, 8, r.width - mw - 8) + 'px'; menuEl.style.top = clamp(y - mh / 2, 8, r.height - mh - 8) + 'px';
+  }
+  function closeMenu() { menu = null; menuEl.hidden = true; }
+  menuEl.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.act === 'close') { closeMenu(); return; }
+    if (!menu || !b.dataset.add) return;
+    snap();
+    let pc;
+    if (b.dataset.add === 'pipe') pc = pipe(+b.dataset.len, SM.size);
+    if (b.dataset.add === 'bend') pc = bend(b.dataset.d);
+    if (b.dataset.add === 'tee') pc = tee(b.dataset.d);
+    if (b.dataset.add === 'outlet') { const n = countOutlets() + 1; pc = outlet(b.dataset.type, `${OUTLETS[b.dataset.type].label} ${n}`, true); }
+    menu.parent.next[menu.port] = pc;
+    const keep = pc.kind !== 'outlet';
+    closeMenu(); sel = pc.id; changedS();
+    if (keep) { // offer the next step right away at the new open end
+      requestAnimationFrame(() => { const h = L.handles.find(x => x.parent === pc && x.port === 0); if (h) { const v = DIRS[h.d], q = Pj([h.p[0] + v[0] * 0.28, h.p[1] + v[1] * 0.28, h.p[2] + v[2] * 0.28]); if (q[0] > 0 && q[1] > 0 && q[0] < W && q[1] < H) openMenu(h, q[0], q[1]); } });
+    }
+  });
+  function countOutlets() { let n = 0; walk(SM.root, p => { if (p.kind === 'outlet') n++; }); return n; }
+  function walk(pc, f) { if (!pc) return; f(pc); (pc.next || []).forEach(c => walk(c, f)); }
+  function findWithParent(id) { let r = null; walk(SM.root, p => { (p.next || []).forEach((c, i) => { if (c && c.id === id) r = { parent: p, port: i, pc: c }; }); }); return r; }
+
+  // ---------- state ----------
+  function save() { try { localStorage.setItem(LS, JSON.stringify(SM, (k, v) => k.startsWith('_') ? undefined : v)); } catch (e) { } }
+  function snap() { hist.push(JSON.stringify(SM, (k, v) => k.startsWith('_') ? undefined : v)); if (hist.length > 60) hist.shift(); }
+  function undo() { const s = hist.pop(); if (!s) { toast('ไม่มีอะไรให้ย้อนแล้ว'); return; } SM = JSON.parse(s); sel = null; closeMenu(); changedS(); }
+  function changedS() { L = layout(); RESS = solveSim(); save(); renderPanelS(); request(); }
+  function deleteSel() {
+    if (!sel || sel === 'pump' || sel === 'source') return;
+    const f = findWithParent(sel); if (!f) return;
+    let n = 0; walk(f.pc, () => n++);
+    snap(); f.parent.next[f.port] = null; sel = null; changedS();
+    toast(n > 1 ? `ลบ ${n} ชิ้น (รวมที่ต่ออยู่ปลายทาง) · กดย้อนเพื่อเอาคืน` : 'ลบแล้ว · กดย้อนเพื่อเอาคืน');
+  }
+
+  // ---------- panel ----------
+  const panel = document.getElementById('simPanel');
+  const wattLabel = w => SM.unit === 'hp' ? `${fmt(w / 746, 2)} แรง` : `${fmt0(w)} วัตต์`;
+  const sfld = (label, key, val, unit, opt = {}) => `<div class="fld${opt.full ? ' full' : ''}"><label for="s_${key}">${label}</label><div class="unit"><input id="s_${key}" type="number" step="any" inputmode="decimal" data-s="${key}" value="${val == null ? '' : esc(val)}" placeholder="${opt.ph == null ? '' : esc(opt.ph)}"><span>${unit}</span></div></div>`;
+  function pumpIcon(t) {
+    const c = { none: '#8c958f', tank: '#2f73c0', const: '#e8ebe8', inverter: '#1f2a33' }[t];
+    if (t === 'none') return `<svg viewBox="0 0 40 28" aria-hidden="true"><path d="M2 18h36" stroke="#2f6db3" stroke-width="6" stroke-linecap="round"/></svg>`;
+    if (t === 'tank') return `<svg viewBox="0 0 40 28" aria-hidden="true"><ellipse cx="13" cy="17" rx="9" ry="9" fill="${c}"/><rect x="18" y="7" width="18" height="11" rx="2" fill="#2c8a6a"/><rect x="4" y="25" width="34" height="2" fill="#3a403c"/></svg>`;
+    if (t === 'const') return `<svg viewBox="0 0 40 28" aria-hidden="true"><rect x="5" y="5" width="30" height="20" rx="2" fill="${c}" stroke="#9aa39d"/><rect x="5" y="4" width="30" height="3" fill="#2f73c0"/><rect x="4" y="25" width="32" height="2" fill="#3a403c"/></svg>`;
+    return `<svg viewBox="0 0 40 28" aria-hidden="true"><rect x="5" y="9" width="22" height="14" rx="2" fill="#4b5560"/><rect x="8" y="3" width="14" height="7" rx="1" fill="${c}"/><rect x="10" y="5" width="10" height="3" fill="#5cf08f"/><rect x="27" y="11" width="9" height="10" fill="#b9bfbb"/><rect x="4" y="25" width="34" height="2" fill="#3a403c"/></svg>`;
+  }
+  function meter(o) {
+    const max = 4, pct = v => clamp(v / max * 100, 0, 100);
+    return `<div class="meter" aria-hidden="true"><span class="zone weak" style="left:${pct(o.t.weak)}%;width:${pct(o.t.good) - pct(o.t.weak)}%"></span><span class="zone good" style="left:${pct(o.t.good)}%;width:${100 - pct(o.t.good)}%"></span><i style="left:${pct(Math.max(0, o.p))}%;background:${ST_COL[o.st]}"></i></div>`;
+  }
+  const stText = { good: 'แรงดี', weak: 'ค่อนข้างเบา', dry: 'แทบไม่ไหล', off: 'ปิดอยู่' };
+  function selEditor() {
+    if (!sel) return `<p class="note">แตะชิ้นส่วนในภาพเพื่อแก้ แตะวงกลม + สีฟ้าที่ปลายท่อเพื่อต่อท่อ ข้องอ สามทาง หรือก๊อก</p>`;
+    if (sel === 'pump') return '';
+    if (sel === 'source') return '';
+    const f = findWithParent(sel); if (!f) return '';
+    const pc = f.pc;
+    let body = '';
+    if (pc.kind === 'pipe') {
+      const r = RESS.pipes.get(pc.id);
+      body = `<div class="grid2">${sfld('ความยาว', 'pc.len', pc.len, 'ม.')}<div class="fld"><label for="s_pcsize">ขนาดท่อ</label><select id="s_pcsize" data-s="pc.size">${SIZES.map(k => `<option value="${k}"${k === pc.size ? ' selected' : ''}>${PIPES[k].label}</option>`).join('')}</select></div></div>
+      ${r ? `<div class="stats"><div class="stat"><b>${fmt(Math.abs(r.Q) * 60000, 1)}</b><span>ล./นาที</span></div><div class="stat"><b>${fmt(r.v, 2)}</b><span>ม./วินาที</span></div><div class="stat"><b>${fmt(r.pA, 2)}→${fmt(r.pB, 2)}</b><span>บาร์ ต้น→ปลาย</span></div></div>` : ''}
+      <div class="btnrow"><button class="btn sm" data-sact="insTee">เพิ่มสามทางที่ปลายท่อนี้</button><button class="btn sm" data-sact="sizeDown">ปลายทางทั้งหมดใช้ขนาดนี้</button></div>`;
+    } else if (pc.kind === 'bend' || pc.kind === 'tee') {
+      const key = pc.kind === 'bend' ? 'to' : 'branch';
+      body = `<div class="fld"><label>${pc.kind === 'bend' ? 'เลี้ยวไปทาง' : 'แยกออกไปทาง'}</label><div class="chips">${dirOptions(pc._d).map(d => `<button class="dirBtn ${pc[key] === d ? 'on' : ''}" data-dirset="${d}">${arrowFor(d)}</button>`).join('')}</div></div>
+      <p class="note">${pc.kind === 'bend' ? `ข้องอ 90° ค่า K = ${K_BEND}` : `สามทาง: น้ำผ่านตรง K = ${K_RUN} · น้ำเลี้ยวเข้าทางแยก K = ${K_BRANCH}`}</p>`;
+    } else if (pc.kind === 'outlet') {
+      const o = RESS.outs.find(x => x.pc === pc);
+      body = `<div class="grid2"><div class="fld full"><label for="s_oname">ชื่อ</label><input id="s_oname" type="text" data-s="pc.name" value="${esc(pc.name)}"></div>
+        <div class="fld full"><label for="s_otype">ชนิด</label><select id="s_otype" data-s="pc.type">${Object.entries(OUTLETS).map(([k, v]) => `<option value="${k}"${k === pc.type ? ' selected' : ''}>${v.label} (${v.q} ล./นาที ที่ ${v.p} บาร์)</option>`).join('')}</select></div></div>
+        <label class="toggle bordered"><span class="grow">เปิดน้ำ</span><span class="switch"><input type="checkbox" data-otoggle="${pc.id}" ${pc.open ? 'checked' : ''}><span></span></span></label>
+        ${o ? `<div class="note">แรงดันที่จุดนี้ ${fmt(o.p, 2)} บาร์ · ใช้ได้ดีตั้งแต่ ${o.t.good} บาร์ขึ้นไป</div>` : ''}`;
+    }
+    const name = { pipe: 'ท่อตรง', bend: 'ข้องอ', tee: 'สามทาง', outlet: 'จุดใช้น้ำ' }[pc.kind];
+    return `<div class="card sel" id="simSelCard"><div class="eyebrow">ชิ้นที่เลือก · ${name}</div>${body}
+      <div class="btnrow"><button class="btn danger sm" data-sact="del">ลบชิ้นนี้${pc.kind !== 'outlet' ? 'และที่ต่อปลายทาง' : ''}</button></div></div>`;
+  }
+  function renderPanelS() {
+    if (!RESS) return;
+    const s = SM.source, pm = SM.pump, ps = pumpSpec(pm), rp = RESS.pump;
+    const focus = (sel && RESS.outs.find(o => o.pc.id === sel)) || RESS.outs.find(o => o.pc.open) || RESS.outs[0];
+    const rows = focus ? ladder(focus) : [];
+    const sum = rows.reduce((a, r) => a + r.v, 0);
+    const maxAbs = Math.max(1, ...rows.map(r => Math.abs(r.v)));
+    panel.innerHTML = `
+    <div><div class="eyebrow">ทดลองสูตร</div><h2>ต้นน้ำ → ปั๊ม → ท่อ → ก๊อก</h2><p>ลองเปลี่ยนปั๊ม ขนาดท่อ หรือเปิดก๊อกพร้อมกันหลายจุด แล้วดูว่าแรงดันที่ปลายทางเหลือเท่าไร</p></div>
+    <div class="card ${sel === 'source' ? 'sel' : ''}">
+      <h3>ต้นน้ำ</h3>
+      <div class="segc"><button data-src="city" class="${s.type === 'city' ? 'on' : ''}">น้ำประปา</button><button data-src="tank" class="${s.type === 'tank' ? 'on' : ''}">ถังเก็บน้ำ</button></div>
+      <div class="grid2">${s.type === 'city' ? sfld('แรงดันประปาที่มิเตอร์', 'src.pressure', s.pressure, 'บาร์') : sfld('ความสูงขาตั้งถัง', 'src.stand', s.stand, 'ม.') + sfld('ระดับน้ำในถัง', 'src.level', s.level, 'ม.')}</div>
+      ${s.type === 'city' && pm.type !== 'none' ? '<p class="note">การประปาส่วนใหญ่ไม่อนุญาตให้ต่อปั๊มดูดตรงจากท่อประปา ควรพักน้ำลงถังก่อน โปรแกรมคำนวณให้ได้ทั้งสองแบบ</p>' : ''}
+    </div>
+    <div class="card ${sel === 'pump' ? 'sel' : ''}">
+      <h3>ปั๊มน้ำ</h3>
+      <div class="pumpGrid">${Object.entries(PUMP_TYPES).map(([k, v]) => `<button class="pumpCard ${pm.type === k ? 'on' : ''}" data-ptype="${k}">${pumpIcon(k)}<b>${v.label}</b><small>${v.sub}</small></button>`).join('')}</div>
+      ${pm.type !== 'none' ? `
+      <div class="grid2">
+        <div class="fld"><label for="s_watt">ขนาดมอเตอร์</label><select id="s_watt" data-s="pump.watt">${WATTS.map(w => `<option value="${w}"${w === +pm.watt ? ' selected' : ''}>${SM.unit === 'hp' ? `${fmt(w / 746, 2)} แรงม้า (${w} วัตต์)` : `${w} วัตต์ (${fmt(w / 746, 2)} แรงม้า)`}</option>`).join('')}</select></div>
+        <div class="fld"><label>หน่วย</label><div class="segc"><button data-unit="w" class="${SM.unit !== 'hp' ? 'on' : ''}">วัตต์</button><button data-unit="hp" class="${SM.unit === 'hp' ? 'on' : ''}">แรงม้า</button></div></div>
+        ${pm.type === 'tank' ? sfld('สวิตช์ต่อ (ปั๊มเริ่ม)', 'pump.cutIn', pm.cutIn, 'บาร์', { ph: fmt(ps.cutIn, 1) }) + sfld('สวิตช์ตัด (ปั๊มหยุด)', 'pump.cutOut', pm.cutOut, 'บาร์', { ph: fmt(ps.cutOut, 1) }) : ''}
+        ${pm.type === 'const' ? sfld('แรงดันที่ปั๊มคุมไว้', 'pump.set', pm.set, 'บาร์', { ph: fmt(ps.autoSet, 1) }) : ''}
+        ${pm.type === 'inverter' ? `<div class="fld full"><label for="s_set">ตั้งแรงดันที่ต้องการ: <b class="num">${fmt(ps.set, 1)} บาร์</b></label><input id="s_set" type="range" min="0.8" max="${fmt(Math.floor(ps.H0 / BAR * 0.9 * 10) / 10, 1)}" step="0.1" value="${ps.set}" data-s="pump.set"></div>` : ''}
+      </div>
+      ${pumpCurve(ps, rp)}
+      ${rp ? `<div class="stats"><div class="stat"><b>${fmt(rp.pOut, 2)}</b><span>บาร์ ที่ปากปั๊ม</span></div><div class="stat"><b>${fmt(rp.Q, 1)}</b><span>ล./นาที</span></div><div class="stat"><b>${fmt0(rp.watt)}</b><span>วัตต์ ใช้ไฟราว</span></div></div><p class="note">${esc(rp.note)}</p>` : ''}
+      <details><summary>ปรับกราฟปั๊มเอง (จากป้ายปั๊ม)</summary><div class="grid2" style="margin-top:8px">${sfld('ส่งสูงสุด (ปิดหัว)', 'pump.H0', pm.H0, 'ม.', { ph: fmt(ps.H0, 0) })}${sfld('ไหลสูงสุด', 'pump.Qmax', pm.Qmax, 'ล./นาที', { ph: fmt(ps.Qm, 0) })}</div><p class="note">เว้นว่างไว้เพื่อใช้ค่าประมาณทั่วไปตามขนาดมอเตอร์ ไม่ใช่ค่าของยี่ห้อใดยี่ห้อหนึ่ง</p></details>` : ''}
+    </div>
+    <div class="card">
+      <div class="fld"><label for="s_defsize">ขนาดท่อเมื่อเพิ่มท่อใหม่</label><select id="s_defsize" data-s="size">${SIZES.map(k => `<option value="${k}"${k === SM.size ? ' selected' : ''}>${PIPES[k].label}</option>`).join('')}</select></div>
+    </div>
+    ${selEditor()}
+    <div class="card">
+      <h3>จุดใช้น้ำ ${RESS.static ? '' : `· รวม ${fmt(RESS.total, 1)} ล./นาที`}</h3>
+      ${RESS.outs.length ? `<div class="list">${RESS.outs.map(o => `<div class="outRow ${sel === o.pc.id ? 'sel' : ''}">
+        <button class="grow linkish" data-pick="${o.pc.id}"><b>${esc(o.pc.name || o.t.label)}</b><small>${o.pc.open ? `${fmt(o.p, 2)} บาร์ · ${fmt(o.q, 1)} ล./นาที · ${stText[o.st]}` : `ปิด · รอ ${fmt(o.p, 2)} บาร์`}</small>${meter(o)}</button>
+        <span class="switch"><input type="checkbox" aria-label="เปิด ${esc(o.pc.name)}" data-otoggle="${o.pc.id}" ${o.pc.open ? 'checked' : ''}><span></span></span></div>`).join('')}</div>
+        <p class="note">แถบเขียว = ใช้ได้ดี · เหลือง = เบา (ปรับตามชนิด เช่น ฝักบัวต้องการ ≥ 1 บาร์)</p>` : '<p class="note">ยังไม่มีจุดใช้น้ำ แตะ + ที่ปลายท่อแล้วเลือก "จุดใช้น้ำ"</p>'}
+    </div>
+    ${focus ? `<div class="card">
+      <h3>ที่มาของแรงดัน · ${esc(focus.pc.name)}</h3>
+      <div class="ladder">${rows.map(r => `<div class="lrow"><span class="lt">${esc(r.t)}</span><span class="lbar"><i class="${r.v >= 0 ? 'pos' : 'neg'}" style="width:${Math.abs(r.v) / maxAbs * 100}%"></i></span><span class="lv num">${r.v >= 0 ? '+' : '−'}${fmt(Math.abs(r.v), 2)}</span></div>${r.det && r.det.length > 1 ? r.det.map(d => `<div class="lrow sub"><span class="lt">${esc(d.t)}</span><span></span><span class="lv num">−${fmt(Math.abs(d.v), 2)}</span></div>`).join('') : ''}`).join('')}
+        <div class="lrow total"><span class="lt">แรงดันที่เหลือ = ${fmt(sum, 2)} ม. ÷ 10.2</span><span></span><span class="lv num">${fmt(sum / BAR, 2)} บาร์</span></div>
+      </div>
+      <details><summary>สูตรที่ใช้</summary><div class="formula">
+        <p><b>แรงดันที่ก๊อก</b> P = (H<sub>ต้นทาง</sub> + H<sub>ปั๊ม</sub> − Σh<sub>f</sub> − Σh<sub>m</sub> − z) ÷ 10.2 บาร์</p>
+        <p><b>แรงเสียดทานท่อ</b> (Hazen–Williams) h<sub>f</sub> = 10.67 · L · Q<sup>1.852</sup> ÷ (C<sup>1.852</sup> · D<sup>4.87</sup>) ใช้ C = 150 สำหรับ PVC</p>
+        <p><b>ข้องอ สามทาง</b> h<sub>m</sub> = K · v² ÷ 2g</p>
+        <p><b>ก๊อก</b> Q = K<sub>ก๊อก</sub> · √P ยิ่งแรงดันมาก น้ำยิ่งไหลมาก เมื่อเปิดหลายจุด น้ำไหลมากขึ้น แรงเสียดทานเพิ่ม แรงดันทุกจุดจึงตกพร้อมกัน</p>
+        <p><b>ปั๊ม</b> ส่งสูง = H<sub>0</sub> − B · Q² · ปั๊มแรงดันคงที่และอินเวอร์เตอร์จะจำกัดแรงดันขาออกไม่ให้เกินค่าที่ตั้ง</p>
+        <p>แก้สมการทั้งระบบพร้อมกันด้วยวิธี Global Gradient (แบบเดียวกับ EPANET) ${RESS.sol.iterations} รอบ</p>
+      </div></details>
+    </div>` : ''}
+    <div class="btnrow"><button class="btn" data-sact="reset">กลับเป็นแบบตัวอย่าง</button><button class="btn" data-sact="clear">ล้างท่อทั้งหมด</button></div>`;
+  }
+  function pumpCurve(ps, rp) {
+    const Wd = 300, Hd = 120, pl = 30, pb = 20, pt = 8, pr = 10;
+    const qmax = ps.Qm * 1.05, hmax = ps.H0 * 1.1;
+    const X = q => pl + q / qmax * (Wd - pl - pr), Y = h => pt + (1 - h / hmax) * (Hd - pt - pb);
+    let d = ''; for (let i = 0; i <= 40; i++) { const q = qmax * i / 40; let h = ps.A - ps.B * Math.pow(q / 60000, 2); if (SM.pump.type === 'const' || SM.pump.type === 'inverter') h = Math.min(h, ps.set * BAR + (RESS && RESS.pump && RESS.pump.gain != null ? 0 : 0)); if (h < 0) break; d += (i ? 'L' : 'M') + X(q).toFixed(1) + ' ' + Y(h).toFixed(1); }
+    let raw = ''; if (SM.pump.type !== 'tank') for (let i = 0; i <= 40; i++) { const q = qmax * i / 40, h = ps.A - ps.B * Math.pow(q / 60000, 2); if (h < 0) break; raw += (i ? 'L' : 'M') + X(q).toFixed(1) + ' ' + Y(h).toFixed(1); }
+    const band = SM.pump.type === 'tank' ? `<rect x="${pl}" y="${Y(ps.cutOut * BAR)}" width="${Wd - pl - pr}" height="${Y(ps.cutIn * BAR) - Y(ps.cutOut * BAR)}" fill="var(--warn-soft)"/><text x="${Wd - pr - 2}" y="${Y(ps.cutOut * BAR) + 10}" text-anchor="end">ช่วงสวิตช์ ${fmt(ps.cutIn, 1)}–${fmt(ps.cutOut, 1)} บาร์</text>` : '';
+    const op = rp && !RESS.static && rp.Q > 0.05 ? `<circle cx="${X(rp.Q)}" cy="${Y(rp.gain)}" r="5" fill="var(--water)" stroke="var(--panel)" stroke-width="2"/>` : '';
+    return `<svg class="curve" viewBox="0 0 ${Wd} ${Hd}" role="img" aria-label="กราฟปั๊ม แรงส่งเทียบอัตราไหล">
+      ${band}
+      ${[0, 0.5, 1].map(f => `<line x1="${pl}" x2="${Wd - pr}" y1="${Y(hmax * f / 1.1)}" y2="${Y(hmax * f / 1.1)}" stroke="var(--line)"/><text x="${pl - 4}" y="${Y(hmax * f / 1.1) + 3}" text-anchor="end">${fmt0(hmax * f / 1.1)}</text>`).join('')}
+      ${[0, 0.5, 1].map(f => `<text x="${X(ps.Qm * f)}" y="${Hd - 5}" text-anchor="middle">${fmt0(ps.Qm * f)}</text>`).join('')}
+      ${raw ? `<path d="${raw}" fill="none" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 3"/>` : ''}
+      <path d="${d}" fill="none" stroke="var(--ink)" stroke-width="2"/>${op}
+      <text x="${pl}" y="${pt + 6}" style="fill:var(--muted)">ม. ที่ปั๊มเพิ่ม</text><text x="${Wd - pr}" y="${Hd - pb - 4}" text-anchor="end">ล./นาที</text></svg>`;
+  }
+  panel.addEventListener('change', e => {
+    const t = e.target;
+    if (t.dataset.otoggle) { const f = findWithParent(t.dataset.otoggle); if (f) { snap(); f.pc.open = t.checked; changedS(); } return; }
+    const k = t.dataset.s; if (!k) return;
+    snap();
+    let v = t.value; const isNum = t.type === 'number' || t.type === 'range' || k === 'pump.watt';
+    if (isNum) v = v === '' ? null : parseFloat(v);
+    if (isNum && v != null && !isFinite(v)) { toast('ใส่เป็นตัวเลข'); hist.pop(); renderPanelS(); return; }
+    if (k.startsWith('src.')) SM.source[k.slice(4)] = Math.max(0, v || 0);
+    else if (k.startsWith('pump.')) { SM.pump[k.slice(5)] = v; if (k === 'pump.watt') { SM.pump.set = SM.pump.type === 'inverter' ? SM.pump.set : null; } }
+    else if (k === 'size') SM.size = v;
+    else if (k.startsWith('pc.')) { const f = findWithParent(sel); if (!f) return; const kk = k.slice(3); f.pc[kk] = kk === 'len' ? clamp(v || 0.1, 0.1, 100) : v; }
+    changedS();
+  });
+  panel.addEventListener('input', e => { if (e.target.type === 'range') { const lab = e.target.closest('.fld').querySelector('b'); if (lab) lab.textContent = `${fmt(+e.target.value, 1)} บาร์`; } });
+  panel.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.src) { snap(); SM.source.type = b.dataset.src; changedS(); fit(); return; }
+    if (b.dataset.ptype) { snap(); SM.pump.type = b.dataset.ptype; SM.pump.set = null; changedS(); return; }
+    if (b.dataset.unit) { SM.unit = b.dataset.unit; changedS(); return; }
+    if (b.dataset.pick) { sel = b.dataset.pick; renderPanelS(); request(); return; }
+    if (b.dataset.dirset) { const f = findWithParent(sel); if (!f) return; snap(); f.pc[f.pc.kind === 'bend' ? 'to' : 'branch'] = b.dataset.dirset; changedS(); return; }
+    const a = b.dataset.sact;
+    if (a === 'del') deleteSel();
+    if (a === 'reset') { snap(); SM = sample(); sel = null; changedS(); fit(); toast('กลับเป็นแบบตัวอย่างแล้ว · กดย้อนเพื่อเอาคืน'); }
+    if (a === 'clear') { snap(); SM.root.next[0] = null; sel = null; changedS(); toast('ล้างท่อแล้ว แตะ + ที่ปากปั๊มเพื่อเริ่มต่อใหม่'); }
+    if (a === 'insTee') { const f = findWithParent(sel); if (!f) return; snap(); const d = f.pc._d, br = dirOptions(d).find(x => x !== '+z' && x !== '-z') || '+z'; f.pc.next[0] = tee(br, f.pc.next[0]); sel = f.pc.next[0].id; changedS(); toast('เพิ่มสามทางแล้ว แตะ + ที่ทางแยกเพื่อต่อท่อ'); }
+    if (a === 'sizeDown') { const f = findWithParent(sel); if (!f) return; snap(); walk(f.pc, p => { if (p.kind === 'pipe') p.size = f.pc.size; }); changedS(); }
+  });
+  // stage controls
+  document.getElementById('simCtl').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    const a = b.dataset.v;
+    if (a === 'rotL') { view.rot = (view.rot + 3) & 3; L = layout(); fit(); }
+    if (a === 'rotR') { view.rot = (view.rot + 1) & 3; L = layout(); fit(); }
+    if (a === 'in') zoomBy(1.2, W / 2, H / 2);
+    if (a === 'out') zoomBy(1 / 1.2, W / 2, H / 2);
+    if (a === 'fit') fit();
+    if (a === 'color') { SM.colorBy = SM.colorBy === 'pressure' ? 'pipe' : 'pressure'; b.classList.toggle('on', SM.colorBy === 'pressure'); save(); request(); }
+    closeMenu();
+  });
+  function resize() {
+    const r = stage.getBoundingClientRect(); W = Math.max(1, r.width); H = Math.max(1, r.height);
+    dpr = Math.min(2, window.devicePixelRatio || 1); cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); request();
+  }
+  new ResizeObserver(() => { const first = W <= 1; resize(); if (first && active) fit(); }).observe(stage);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) request(); });
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', request);
+
+  // ---------- boot ----------
+  try { const s = localStorage.getItem(LS); if (s) SM = JSON.parse(s); } catch (e) { }
+  if (!SM || !SM.root || !SM.pump) SM = sample();
+  return {
+    show() { active = true; resize(); L = layout(); RESS = solveSim(); renderPanelS(); document.getElementById('simCtl').querySelector('[data-v=color]').classList.toggle('on', SM.colorBy === 'pressure'); fit(); },
+    hide() { active = false; closeMenu(); },
+    undo, deleteSel, closeMenu,
+    get active() { return active; },
+    get SM() { return SM; }, get RES() { return RESS; }, solveSim, pumpSpec, Pj, layout, ladder,
+  };
+})();
+
+</script>
+<script>
+/* mode switch: farm plan ↔ formula sandbox */
+(function () {
+  const sw = document.getElementById('modeSw');
+  function setMode(m) {
+    const simple = m === 'simple';
+    document.body.classList.toggle('mode-simple', simple);
+    document.getElementById('farmView').hidden = simple;
+    document.getElementById('simpleView').hidden = !simple;
+    sw.querySelectorAll('button').forEach(b => { b.classList.toggle('on', b.dataset.mode === m); b.setAttribute('aria-selected', b.dataset.mode === m); });
+    if (simple) SIM.show(); else { SIM.hide(); Map2.resize(); }
+    try { localStorage.setItem('phangnamrai.mode', m); } catch (e) { }
+  }
+  sw.addEventListener('click', e => { const b = e.target.closest('button'); if (b) setMode(b.dataset.mode); });
+  let m = 'farm'; try { m = localStorage.getItem('phangnamrai.mode') || 'farm'; } catch (e) { }
+  setMode(m);
+})();
+</script>
+
+
+</body></html>
