@@ -1,4 +1,8 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ผังน้ำไร่</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -169,14 +173,14 @@ td.n{font-family:var(--font-mono);text-align:right;white-space:nowrap}
 body.mode-simple .steps{visibility:hidden}
 body.mode-simple #btnFile{display:none}
 .isoWrap{position:relative;min-width:0;min-height:0;overflow:hidden}
-#isoStage{position:absolute;inset:0;overflow:hidden;touch-action:none;background:var(--stage-2)}
-#isoStage canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab}
+#isoStage,#houseStage{position:absolute;inset:0;overflow:hidden;touch-action:none;background:var(--stage-2)}
+#isoStage canvas,#houseStage canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab}
 .simCtl{position:absolute;top:12px;right:12px;display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end;max-width:calc(100% - 24px)}
 .simCtl button{min-width:34px;height:34px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);font-size:16px;line-height:1;box-shadow:0 2px 6px rgba(0,0,0,.08)}
 .simCtl button.wide{font-size:13px;padding:0 10px}
 .simCtl button.on{background:var(--ink);color:var(--panel);border-color:var(--ink)}
 .simHint{position:absolute;left:12px;bottom:12px;font-size:12.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:4px 10px;max-width:calc(100% - 24px)}
-.simMenu{position:absolute;z-index:5;width:300px;max-width:calc(100% - 16px);background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 14px 40px rgba(0,0,0,.25);padding:10px;display:flex;flex-direction:column;gap:9px}
+.simMenu{position:absolute;z-index:6;width:300px;max-width:calc(100% - 16px);background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 14px 40px rgba(0,0,0,.25);padding:10px;display:flex;flex-direction:column;gap:9px}
 .simMenu .mhead{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-display)}
 .simMenu .x{border:0;background:none;font-size:20px;line-height:1;color:var(--muted);padding:0 4px}
 .msec{display:flex;flex-direction:column;gap:5px}
@@ -226,13 +230,43 @@ details summary{cursor:pointer;color:var(--water);font-size:13px}
   .isoWrap{height:60vh;min-height:360px;flex:none}
 }
 
+/* ---------- house plumbing editor ---------- */
+.hTools{position:absolute;top:12px;left:12px;display:flex;flex-direction:column;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:6px;box-shadow:0 4px 14px rgba(0,0,0,.1);max-height:calc(100% - 24px);overflow-y:auto;width:124px;z-index:3}
+.hTools button{border:0;background:none;text-align:left;padding:5px 8px;border-radius:6px;font-size:13px;color:var(--ink)}
+.hTools button:hover{background:var(--soft)}
+.hTools button.on{background:var(--water);color:var(--on-water)}
+.hTools .sep{font:500 10.5px var(--font-mono);letter-spacing:.06em;color:var(--muted);padding:6px 8px 2px;border-top:1px solid var(--line);margin-top:2px}
+.hTools .row{display:flex;gap:2px}
+.hTools .row button{flex:1;text-align:center;font-size:16px;padding:4px 0}
+.hBar{position:absolute;top:12px;left:148px;right:12px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;background:rgba(15,22,18,.9);color:#fff;padding:6px 6px 6px 12px;border-radius:9px;z-index:3}
+.hBar span{font-size:13px}
+.hBar .lvl{color:#bfe0ff;margin-left:auto}
+.hBar button{border:0;border-radius:6px;padding:4px 10px;background:#33413a;color:#fff}
+.hBar button.primary{background:#4fb3ff;color:#06121c;font-weight:600}
+.pumpSpec{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.pumpRow{border-top:1px solid var(--line);padding:8px 0}
+.pumpRow:first-of-type{border-top:0}
+.pumpRow .note{font-size:12px}
+@media (max-width:860px){
+  .hTools{flex-direction:row;flex-wrap:wrap;width:auto;right:12px;max-height:none;padding:4px}
+  .hTools .sep{display:none}
+  .hTools button{padding:4px 7px;font-size:12px}
+  .hBar{top:auto;bottom:12px;left:12px}
+}
+
+.simMenu .msec b{color:var(--water)}
+.hTools{width:150px}
+.hBar{left:174px}
+
 </style>
+</head>
+<body>
 <header class="top">
   <div class="brand">
     <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path d="M16 3c5 7 9 11.5 9 17a9 9 0 0 1-18 0c0-5.5 4-10 9-17z" fill="var(--water)"/><path d="M9 21h14M11 25h10" stroke="var(--panel)" stroke-width="2" stroke-linecap="round"/></svg>
     <div><b>ผังน้ำไร่</b><small id="projName">ไร่ตัวอย่าง</small></div>
   </div>
-  <div class="modeSw" id="modeSw" role="tablist" aria-label="โหมด"><button data-mode="farm" class="on" role="tab">ผังไร่</button><button data-mode="simple" role="tab">ทดลองสูตร</button></div>
+  <div class="modeSw" id="modeSw" role="tablist" aria-label="โหมด"><button data-mode="lab" role="tab">ทดลอง</button><button data-mode="house" role="tab">บ้าน</button><button data-mode="farm" class="on" role="tab">ไร่</button></div>
   <nav class="steps" id="steps" aria-label="ขั้นตอน"></nav>
   <div class="topActions">
     <button class="ghost" id="btnUndo" title="ย้อนกลับ (Ctrl+Z)">↶ ย้อน</button>
@@ -269,7 +303,7 @@ details summary{cursor:pointer;color:var(--water);font-size:13px}
   </section>
   <aside class="panel" id="panel"></aside>
 </main>
-<main class="layout simpleView" id="simpleView" hidden>
+<main class="layout simpleView" id="labView" hidden>
   <section class="isoWrap">
     <div id="isoStage">
       <div class="simCtl" id="simCtl">
@@ -282,6 +316,33 @@ details summary{cursor:pointer;color:var(--water);font-size:13px}
     </div>
   </section>
   <aside class="panel" id="simPanel"></aside>
+</main>
+<main class="layout simpleView" id="houseView" hidden>
+  <section class="isoWrap">
+    <div id="houseStage">
+      <div class="hTools" id="hTools" role="toolbar" aria-label="เครื่องมือ">
+        <button data-tool="select" class="on" title="เลือก ลากย้าย และกด + เพื่อต่อท่อ">เลือก / ย้าย</button>
+        <button data-tool="pipe" title="ลากท่อจากจุดต่อหนึ่งไปอีกจุด">ลากท่ออิสระ</button>
+        <span class="sep">วาง</span>
+        <button data-tool="place:city">ประปาเข้า</button>
+        <button data-tool="place:tank">ถังน้ำ</button>
+        <button data-tool="place:pump">ปั๊ม</button>
+        <button data-tool="place:out:faucet">ก๊อก</button>
+        <button data-tool="place:out:shower">ฝักบัว</button>
+        <button data-tool="place:out:washer">เครื่องซักผ้า</button>
+        <button data-tool="place:out:toilet">ชักโครก</button>
+        <button data-tool="place:out:hose">ก๊อกสนาม</button>
+        <button data-tool="place:out:sprinkler">สปริงเกอร์</button>
+        <span class="sep">มุมมอง</span>
+        <span class="row"><button data-v="rotL" aria-label="หมุนซ้าย">⟲</button><button data-v="rotR" aria-label="หมุนขวา">⟳</button><button data-v="fit" aria-label="ดูทั้งหมด">⤢</button></span>
+        <button data-v="labels">ป้าย: ทั้งหมด</button>
+        <button data-v="color">สีตามแรงดัน</button>
+      </div>
+      <div class="hBar" id="hBar" hidden></div>
+      <div class="simMenu" id="hMenu" hidden></div>
+    </div>
+  </section>
+  <aside class="panel" id="housePanel"></aside>
 </main>
 <div class="toast" id="toast" role="status" hidden></div>
 <script>
@@ -1656,13 +1717,13 @@ $('#zfit').onclick = () => fitAll();
 $('#drawDone').onclick = () => finishDraw();
 $('#drawCancel').onclick = () => stopTool();
 $('#drawUndo').onclick = () => { ui.draft.pop(); updateDrawBar(); redraw(); };
-$('#btnUndo').onclick = () => document.body.classList.contains('mode-simple') ? SIM.undo() : undo();
+$('#btnUndo').onclick = () => window.ISO ? window.ISO.undo() : undo();
 document.addEventListener('keydown', e => {
   if (e.target.matches('input,select,textarea')) return;
-  if (document.body.classList.contains('mode-simple')) {
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); SIM.undo(); }
-    else if (e.key === 'Escape') SIM.closeMenu();
-    else if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); SIM.deleteSel(); }
+  if (document.body.classList.contains('mode-simple') && window.ISO) {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); window.ISO.undo(); }
+    else if (e.key === 'Escape') window.ISO.closeMenu();
+    else if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); window.ISO.deleteSel(); }
     return;
   }
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); undo(); }
@@ -2610,23 +2671,1022 @@ const SIM = (() => {
 
 </script>
 <script>
-/* mode switch: farm plan ↔ formula sandbox */
+'use strict';
+/* ===================================================================
+   ต่อน้ำในบ้าน — isometric house plumbing editor.
+   Place a city inlet, tanks, pumps and fixtures on any floor, drag them,
+   draw pipes between them. Fittings (elbow, coupling, tee, cross, reducer)
+   are derived from the geometry and counted into a shopping list.
+   Plain 2D canvas, redrawn on change; water animation only while flowing.
+   =================================================================== */
+const HOUSE = (() => {
+  const G = 9.81, GRID = 0.25;
+  const SIZES = ['pvc12', 'pvc34', 'pvc1', 'pvc114', 'pe20'];
+  const K_ELBOW = 0.9, K_TEE = 1.2, K_CROSS = 1.5, K_COUP = 0.08;
+  const OUTLETS = {
+    faucet:    { label: 'ก๊อกน้ำ', q: 12, p: 1.0, good: 0.7, weak: 0.2, h: 0.9 },
+    shower:    { label: 'ฝักบัว', q: 9, p: 1.0, good: 1.0, weak: 0.4, h: 2.0 },
+    washer:    { label: 'เครื่องซักผ้า', q: 10, p: 1.0, good: 0.5, weak: 0.3, h: 0.8 },
+    toilet:    { label: 'ชักโครก (เติมถังพัก)', q: 8, p: 1.0, good: 0.5, weak: 0.2, h: 0.5 },
+    hose:      { label: 'ก๊อกสนาม / สายยาง', q: 22, p: 1.0, good: 0.5, weak: 0.2, h: 0.6 },
+    sprinkler: { label: 'สปริงเกอร์สนาม', q: 15, p: 2.0, good: 1.5, weak: 0.8, h: 0.1 },
+  };
+  const TYPES = {
+    tank: { label: 'ปั๊มถังกลม', sub: 'แรงดันสูง ติด-ดับตามสวิตช์ แรงดันแกว่ง' },
+    const: { label: 'ปั๊มแรงดันคงที่', sub: 'ถังเหลี่ยม แรงดันเรียบกว่า เสียงเบา' },
+    inverter: { label: 'ปั๊มอินเวอร์เตอร์', sub: 'ปรับรอบตามการใช้น้ำ แรงดันนิ่ง ประหยัดไฟ' },
+  };
+  // Catalog: H0 = suction lift + discharge head from the maker's table (≈ shut-off head),
+  // Qr at Hr = rated capacity at that head, used to fit gain = H0 − B·Q².
+  // src: hitachi = Hitachi water-pump general catalogue (shallow-well XS series, sister models of the Thai XX/XX2 line)
+  //      toyobo  = Hitachi Thai distributor page for WM-PV250XX2 · mitsu = mitsubishi-kyw.co.th product page
+  const CATALOG = [
+    { id: 'wtp100', brand: 'Hitachi', model: 'WT-P100', type: 'tank', w: 100, H0: 22, Qr: 30, Hr: 12, Qmax: 40, cutIn: 1.6, cutOut: 2.2, pipe: '¾"', src: 'hitachi' },
+    { id: 'wtp150', brand: 'Hitachi', model: 'WT-P150', type: 'tank', w: 150, H0: 22, Qr: 34, Hr: 12, Qmax: 46, cutIn: 1.6, cutOut: 2.2, pipe: '1"', src: 'hitachi' },
+    { id: 'wtp200', brand: 'Hitachi', model: 'WT-P200', type: 'tank', w: 200, H0: 28, Qr: 42, Hr: 12, Qmax: 50, cutIn: 2.2, cutOut: 2.8, pipe: '1"', src: 'hitachi' },
+    { id: 'wtp250', brand: 'Hitachi', model: 'WT-P250', type: 'tank', w: 250, H0: 28, Qr: 46, Hr: 12, Qmax: 52, cutIn: 2.2, cutOut: 2.8, pipe: '1"', src: 'hitachi' },
+    { id: 'wtp300', brand: 'Hitachi', model: 'WT-P300', type: 'tank', w: 300, H0: 28, Qr: 50, Hr: 12, Qmax: 60, cutIn: 2.2, cutOut: 2.8, pipe: '1"', src: 'hitachi' },
+    { id: 'wp205r2', brand: 'Mitsubishi', model: 'WP-205R2', type: 'tank', w: 200, H0: 28, Qr: 48, Hr: 14, Qmax: null, cutIn: 2.2, cutOut: 2.8, pipe: '1"', src: 'mitsu', swEst: true },
+    { id: 'wmp150', brand: 'Hitachi', model: 'WM-P150', type: 'const', w: 150, H0: 21, Qr: 37, Hr: 12, Qmax: 50, cutIn: 1.4, cutOut: 1.8, pipe: '1"', src: 'hitachi' },
+    { id: 'wmp200', brand: 'Hitachi', model: 'WM-P200', type: 'const', w: 200, H0: 22, Qr: 43, Hr: 12, Qmax: 55, cutIn: 1.6, cutOut: 2.2, pipe: '1"', src: 'hitachi' },
+    { id: 'wmp250', brand: 'Hitachi', model: 'WM-P250', type: 'const', w: 250, H0: 26, Qr: 47, Hr: 12, Qmax: 59, cutIn: 2.0, cutOut: 2.6, pipe: '1"', src: 'hitachi' },
+    { id: 'wmp300', brand: 'Hitachi', model: 'WM-P300', type: 'const', w: 300, H0: 26, Qr: 51, Hr: 12, Qmax: 61, cutIn: 2.0, cutOut: 2.6, pipe: '1"', src: 'hitachi' },
+    { id: 'wmp350', brand: 'Hitachi', model: 'WM-P350', type: 'const', w: 350, H0: 26, Qr: 53, Hr: 12, Qmax: 65, cutIn: 2.0, cutOut: 2.6, pipe: '1"', src: 'hitachi' },
+    { id: 'ep205r2', brand: 'Mitsubishi', model: 'EP-205R2', type: 'const', w: 200, H0: 28, Qr: 47.19, Hr: 14, Qmax: null, cutIn: 2.2, cutOut: 2.8, pipe: '1"', src: 'mitsu', swEst: true },
+    { id: 'wmpv250', brand: 'Hitachi', model: 'WM-PV250XX2', type: 'inverter', w: 250, H0: 25, Qr: 52, Hr: 12, Qmax: 62, set: 2.0, pipe: '1"', src: 'toyobo' },
+  ];
+  const SRC_NOTE = {
+    hitachi: 'แคตตาล็อกปั๊มน้ำ Hitachi (รุ่น XS ซึ่งเป็นรุ่นพี่น้องกับ XX/XX2 ที่ขายในไทย)',
+    toyobo: 'หน้าสินค้า WM-PV250XX2 ของตัวแทนจำหน่าย Hitachi ในไทย',
+    mitsu: 'หน้าสินค้าบนเว็บ Mitsubishi Electric Kang Yong (ไม่ระบุค่าสวิตช์แรงดัน ใช้ค่าประมาณ)',
+  };
+  const TANK_SIZES = { 500: [0.8, 1.1], 1000: [1.0, 1.45], 1500: [1.12, 1.65], 2000: [1.25, 1.8] };
+  const ROTV = [[1, 0], [0, 1], [-1, 0], [0, -1]];
+  const DIRS = { '+x': [1, 0, 0], '-x': [-1, 0, 0], '+y': [0, 1, 0], '-y': [0, -1, 0], '+z': [0, 0, 1], '-z': [0, 0, -1] };
+  const OPP = { '+x': '-x', '-x': '+x', '+y': '-y', '-y': '+y', '+z': '-z', '-z': '+z' };
+  const dkey = v => v[2] > 0.5 ? '+z' : v[2] < -0.5 ? '-z' : Math.abs(v[0]) >= Math.abs(v[1]) ? (v[0] >= 0 ? '+x' : '-x') : (v[1] >= 0 ? '+y' : '-y');
+
+  let lastPipePt = null;
+  let S = null, R = null, sel = null, hover = null, active = false, tool = 'select', draft = null, mouse3 = null, snapT = null;
+  const hist = [];
+  const LS = 'phangnamrai.house.v1';
+  const uidH = p => p + Math.random().toString(36).slice(2, 7);
+  const snapG = v => Math.round(v / GRID) * GRID;
+  const eq3 = (a, b) => Math.abs(a[0] - b[0]) < 1e-6 && Math.abs(a[1] - b[1]) < 1e-6 && Math.abs(a[2] - b[2]) < 1e-6;
+  const d3 = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+
+  // ---------- model ----------
+  function sample() {
+    const s = { house: { w: 8, d: 8, floors: 2, fh: 3, x: 1, y: 3 }, level: 0, size: 'pvc12', unit: 'w', colorBy: 'pipe', nodes: {}, pipes: [], comps: [] };
+    const N = (id, x, y, z) => { s.nodes[id] = { x, y, z }; return { n: id }; };
+    const C = c => { s.comps.push(c); return c; };
+    const P = (a, b, size, zfirst) => s.pipes.push({ id: uidH('p'), a, b, size, zfirst: !!zfirst });
+    C({ id: 'city', kind: 'city', x: -1.25, y: 0.25, z: 0, rot: 0, pressure: 0.8, name: 'มิเตอร์ประปา' });
+    C({ id: 'tank1', kind: 'tank', x: -1.25, y: 2, z: 0, rot: 0, liters: 1000, level: 70, filling: true, name: 'ถังเก็บน้ำ 1,000 ลิตร' });
+    C({ id: 'pump1', kind: 'pump', x: 0.5, y: 2, z: 0, rot: 0, model: 'wtp250', name: 'ปั๊มน้ำ' });
+    C({ id: 'o1', kind: 'outlet', type: 'faucet', x: 4, y: 5, z: 0.9, rot: 0, open: true, name: 'ก๊อกซิงก์ครัว' });
+    C({ id: 'o2', kind: 'outlet', type: 'shower', x: 4, y: 8.5, z: 2.0, rot: 0, open: false, name: 'ฝักบัวห้องน้ำล่าง' });
+    C({ id: 'o3', kind: 'outlet', type: 'shower', x: 4, y: 8.5, z: 5.0, rot: 0, open: true, name: 'ฝักบัวห้องน้ำบน' });
+    C({ id: 'o4', kind: 'outlet', type: 'faucet', x: 2, y: 10, z: 3.9, rot: 0, open: false, name: 'อ่างล้างหน้าชั้นบน' });
+    C({ id: 'o5', kind: 'outlet', type: 'hose', x: 2, y: 0.5, z: 0.6, rot: 0, open: false, name: 'ก๊อกสนามหน้าบ้าน' });
+    const n1 = N('n1', 2, 2, 0.3), n2 = N('n2', 2, 5, 0.3), n3 = N('n3', 2, 8.5, 0.3), n4 = N('n4', 2, 8.5, 3.3);
+    P({ c: 'city', port: 'p' }, { c: 'tank1', port: 'in' }, 'pvc12');
+    P({ c: 'tank1', port: 'out' }, { c: 'pump1', port: 'in' }, 'pvc1');
+    P({ c: 'pump1', port: 'out' }, n1, 'pvc34');
+    P(n1, n2, 'pvc34'); P(n2, n3, 'pvc34'); P(n3, n4, 'pvc34');
+    P(n2, { c: 'o1', port: 'p' }, 'pvc12');
+    P(n3, { c: 'o2', port: 'p' }, 'pvc12');
+    P(n4, { c: 'o3', port: 'p' }, 'pvc12');
+    P(n4, { c: 'o4', port: 'p' }, 'pvc12');
+    P(n1, { c: 'o5', port: 'p' }, 'pvc12');
+    return s;
+  }
+  const comp = id => S.comps.find(c => c.id === id);
+  function tankDims(c) { return TANK_SIZES[c.liters] || TANK_SIZES[1000]; }
+  function ports(c) {
+    const v = ROTV[(c.rot || 0) & 3];
+    const at = (f, side, z) => [c.x + v[0] * f - v[1] * side, c.y + v[1] * f + v[0] * side, z];
+    if (c.kind === 'city') return { p: [c.x, c.y, c.z + 0.3] };
+    if (c.kind === 'tank') { const [D, Hh] = tankDims(c), r = D / 2; return { in: at(-(r + 0.08), 0, c.z + Hh - 0.15), out: at(r + 0.08, 0, c.z + 0.12) }; }
+    if (c.kind === 'pump') return { in: at(-0.5, 0, c.z + 0.22), out: at(0.5, 0, c.z + 0.3) };
+    return { p: [c.x, c.y, c.z] };
+  }
+  function refPos(ref) {
+    if (ref.n) { const n = S.nodes[ref.n]; return n ? [n.x, n.y, n.z] : null; }
+    const c = comp(ref.c); if (!c) return null; return ports(c)[ref.port] || null;
+  }
+  const refKey = ref => ref.n ? 'n:' + ref.n : `c:${ref.c}:${ref.port}`;
+  function route(p) {
+    const A = refPos(p.a), B = refPos(p.b); if (!A || !B) return [];
+    const pts = p.zfirst ? [A, [A[0], A[1], B[2]], [B[0], A[1], B[2]], B] : [A, [B[0], A[1], A[2]], [B[0], B[1], A[2]], B];
+    return pts.filter((q, i) => i === 0 || !eq3(q, pts[i - 1]));
+  }
+  const routeLen = pts => pts.reduce((s, q, i) => i ? s + d3(pts[i - 1], q) : 0, 0);
+  const dirOf = (a, b) => { const v = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], l = Math.hypot(...v) || 1; return v.map(x => Math.round(x / l)); };
+  const parallel = (u, v) => Math.abs(u[0] * v[0] + u[1] * v[1] + u[2] * v[2]) > 0.99;
+
+  // ---------- pump model ----------
+  function pumpSpec(c) {
+    const m = CATALOG.find(x => x.id === c.model);
+    let sp;
+    if (m && c.model !== 'custom') sp = { ...m };
+    else sp = { brand: '', model: 'กำหนดเอง', type: c.ctype || 'tank', w: +c.cw || 250, H0: +c.cH0 || 25, Qr: +c.cQr || 40, Hr: +c.cHr || 12, cutIn: +c.ccutIn || 1.6, cutOut: +c.ccutOut || 2.2 };
+    sp.B = Math.max(1, (sp.H0 - sp.Hr) / Math.pow(sp.Qr / 60000, 2));
+    sp.Qm = 60000 * Math.sqrt(sp.H0 / sp.B);
+    sp.set = sp.type === 'inverter' ? (c.set != null && c.set !== '' ? +c.set : (sp.set || 2.0)) : sp.type === 'const' ? sp.cutOut : null;
+    sp.target = sp.type === 'tank' ? sp.cutOut : sp.set;
+    return sp;
+  }
+
+  // ---------- hydraulics ----------
+  const area = size => Math.PI * Math.pow((PIPES[size] || PIPES.pvc12).d / 2000, 2);
+  const mOf = (K, size) => K / (2 * G * Math.pow(area(size), 2));
+  function fittings() {
+    // ends per hydraulic point: direction leaving the point along each pipe
+    const ends = new Map(), out = { elbow: 0, coupling: 0, tee: 0, cross: 0, reducer: 0, adapter: 0, perPipeK: new Map(), byKey: new Map() };
+    S.pipes.forEach(p => {
+      const r = route(p); if (r.length < 2) return;
+      const bends = r.length - 2; out.elbow += bends;
+      out.perPipeK.set(p.id, bends * K_ELBOW);
+      [[p.a, r[0], r[1]], [p.b, r[r.length - 1], r[r.length - 2]]].forEach(([ref, at, nx]) => {
+        const k = refKey(ref); if (!ends.has(k)) ends.set(k, []); ends.get(k).push({ p, d: dirOf(at, nx) });
+      });
+    });
+    ends.forEach((arr, k) => {
+      const isPort = k.startsWith('c:');
+      let kind = null, K = 0;
+      if (isPort) { out.adapter += arr.length; kind = 'adapter'; if (arr.length >= 2) { out.tee += arr.length - 1; kind = 'tee'; K = K_TEE; } }
+      else if (arr.length === 2) { if (parallel(arr[0].d, arr[1].d)) { out.coupling++; kind = 'coupling'; K = K_COUP; } else { out.elbow++; kind = 'elbow'; K = K_ELBOW; } }
+      else if (arr.length === 3) { out.tee++; kind = 'tee'; K = K_TEE; }
+      else if (arr.length >= 4) { out.cross++; kind = 'cross'; K = K_CROSS; }
+      const sizes = new Set(arr.map(e => e.p.size)); if (sizes.size > 1) out.reducer += sizes.size - 1;
+      out.byKey.set(k, { kind, n: arr.length, dirs: arr.map(e => e.d), sizes: [...sizes] });
+      arr.forEach(e => out.perPipeK.set(e.p.id, (out.perPipeK.get(e.p.id) || 0) + K / 2));
+    });
+    return out;
+  }
+  function buildNet(caps) {
+    const nodes = [], links = [], idx = new Map(), F = fittings();
+    const node = (k, z) => { if (!idx.has(k)) idx.set(k, nodes.push({ elev: z, fixed: false, key: k }) - 1); return idx.get(k); };
+    const atmN = new Map(); const atm = z => { const k = z.toFixed(3); if (!atmN.has(k)) atmN.set(k, nodes.push({ elev: z, fixed: true, head: z, atm: true }) - 1); return atmN.get(k); };
+    const outs = [], pumps = [], tanks = [];
+    S.comps.forEach(c => {
+      const P = ports(c);
+      if (c.kind === 'city') { const i = node(`c:${c.id}:p`, P.p[2]); Object.assign(nodes[i], { fixed: true, head: P.p[2] + (+c.pressure || 0) * BAR }); }
+      if (c.kind === 'tank') {
+        const [, Hh] = tankDims(c), lvl = clamp(+c.level || 0, 0, 100) / 100;
+        const o = node(`c:${c.id}:out`, P.out[2]); Object.assign(nodes[o], { fixed: true, head: c.z + 0.05 + (Hh - 0.15) * lvl });
+        const i = node(`c:${c.id}:in`, P.in[2]); let li = -1;
+        if (c.filling && lvl < 0.995) { const K = 25 / 60000 / Math.sqrt(BAR); li = links.push({ a: i, b: atm(P.in[2]), type: 'emit', K, x: 0.5, kind: 'fill', cid: c.id, q0: K * 2 }) - 1; }
+        tanks.push({ c, inNode: i, outNode: o, fillLink: li });
+      }
+      if (c.kind === 'pump') {
+        const sp = pumpSpec(c), a = node(`c:${c.id}:in`, P.in[2]), b = node(`c:${c.id}:out`, P.out[2]);
+        const li = links.push({ a, b, type: 'pump', A: sp.H0, B: sp.B, kind: 'pump', cid: c.id, q0: sp.Qr / 60000 / 2, cap: caps && caps[c.id] != null ? caps[c.id] : undefined }) - 1;
+        pumps.push({ c, sp, link: li, a, b });
+      }
+      if (c.kind === 'outlet') {
+        const t = OUTLETS[c.type] || OUTLETS.faucet, i = node(`c:${c.id}:p`, P.p[2]); let li = -1;
+        if (c.open) { const K = t.q / 60000 / Math.sqrt(t.p * BAR); li = links.push({ a: i, b: atm(P.p[2]), type: 'emit', K, x: 0.5, kind: 'emit', cid: c.id, q0: K * 3 }) - 1; }
+        outs.push({ c, t, node: i, link: li });
+      }
+    });
+    Object.entries(S.nodes).forEach(([id, n]) => node('n:' + id, n.z));
+    S.pipes.forEach(p => {
+      const r = route(p); if (r.length < 2) return;
+      const a = idx.get(refKey(p.a)), b = idx.get(refKey(p.b)); if (a == null || b == null) return;
+      const L = routeLen(r), sp = PIPES[p.size] || PIPES.pvc12, K = F.perPipeK.get(p.id) || 0;
+      links.push({ a, b, type: 'pipe', r: Hyd.hwR(Math.max(0.05, L), sp.d / 1000, sp.C), m: mOf(K, p.size), kind: 'pipe', pid: p.id, size: p.size, L, K, q0: 0.3 * area(p.size) });
+    });
+    return { nodes, links, idx, outs, pumps, tanks, F };
+  }
+  function solveHouse() {
+    let caps = {}, net, sol, sub;
+    for (let it = 0; it < 8; it++) {
+      net = buildNet(caps);
+      sub = reachable(net);
+      sol = sub.L.length && sub.N.some(n => !n.fixed) ? Hyd.solve({ nodes: sub.N, links: sub.L }) : null;
+      let moved = 0;
+      net.pumps.forEach(pm => {
+        const ia = sub.map[pm.a], H_in = sol && ia >= 0 ? sol.H[ia] : null; if (H_in == null) return;
+        const want = Math.max(0, net.nodes[pm.b].elev + pm.sp.target * BAR - H_in);
+        if (caps[pm.c.id] == null || Math.abs(caps[pm.c.id] - want) > 0.002) { moved++; caps[pm.c.id] = want; }
+      });
+      if (!moved) break;
+    }
+    return evaluate(net, sub, sol);
+  }
+  function reachable(net) {
+    const n = net.nodes.length, adj = Array.from({ length: n }, () => []);
+    net.links.forEach(l => { if (l.type !== 'emit') { adj[l.a].push(l.b); adj[l.b].push(l.a); } });
+    const seen = new Uint8Array(n), st = [];
+    net.nodes.forEach((x, i) => { if (x.fixed && !x.atm) { seen[i] = 1; st.push(i); } });
+    while (st.length) { const i = st.pop(); for (const j of adj[i]) if (!seen[j]) { seen[j] = 1; st.push(j); } }
+    const map = new Int32Array(n).fill(-1), N = [];
+    net.nodes.forEach((x, i) => { if (seen[i] || x.atm) { map[i] = N.length; N.push(x); } });
+    const L = [], lmap = new Int32Array(net.links.length).fill(-1);
+    net.links.forEach((l, k) => { if (map[l.a] >= 0 && map[l.b] >= 0 && !(net.nodes[l.a].atm && net.nodes[l.b].atm)) { lmap[k] = L.length; L.push({ ...l, a: map[l.a], b: map[l.b] }); } });
+    return { N, L, map, lmap, seen };
+  }
+  function evaluate(net, sub, sol) {
+    const H = i => sub.map[i] >= 0 && sol ? sol.H[sub.map[i]] : (net.nodes[i].fixed ? net.nodes[i].head : null);
+    const Qk = k => sub.lmap[k] >= 0 && sol ? sol.Q[sub.lmap[k]] : 0;
+    const pAt = i => { const h = H(i); return h == null ? null : (h - net.nodes[i].elev) / BAR; };
+    const res = { net, sub, sol, outs: [], pipes: new Map(), pumps: [], tanks: [], total: 0, iters: sol ? sol.iterations : 0, H, Qk, pAt };
+    net.outs.forEach(o => {
+      const p = pAt(o.node), q = o.link >= 0 ? Math.max(0, Qk(o.link)) * 60000 : 0;
+      let st = p == null ? 'none' : !o.c.open ? 'off' : p >= o.t.good ? 'good' : p >= o.t.weak ? 'weak' : 'dry';
+      if (o.c.open && p != null && q < 0.05) st = 'dry';
+      res.outs.push({ c: o.c, t: o.t, p, q, st, node: o.node }); res.total += q;
+    });
+    net.links.forEach((l, k) => { if (l.kind === 'pipe') { const Q = Qk(k); res.pipes.set(l.pid, { Q, v: Math.abs(Q) / area(l.size), pA: pAt(l.a), pB: pAt(l.b), L: l.L, K: l.K, hf: l.r * Math.pow(Math.abs(Q), 1.852), hm: l.m * Q * Q, link: k }); } });
+    net.pumps.forEach(pm => {
+      const Q = Math.max(0, Qk(pm.link)) * 60000, hin = H(pm.a), hout = H(pm.b);
+      const connected = sub.map[pm.a] >= 0 && sub.map[pm.b] >= 0 && sub.seen[pm.a];
+      const gain = hin != null && hout != null ? hout - hin : null, pOut = pAt(pm.b), pIn = pAt(pm.a), sp = pm.sp;
+      const hyd = 1000 * G * (Q / 60000) * Math.max(0, gain || 0);
+      let watt = 0; if (Q > 0.05) watt = sp.type === 'inverter' ? Math.min(sp.w * 1.1, Math.max(0.2 * sp.w, hyd / 0.42 + 12)) : sp.w * (0.85 + 0.15 * Math.min(1, Q / sp.Qm));
+      let note, st = 'ok';
+      if (!connected) { note = 'ด้านดูดไม่ได้ต่อกับน้ำ ต่อท่อจากถังหรือประปาเข้าช่องดูด (ฝั่งสีฟ้า)'; st = 'bad'; }
+      else if (Q < 0.05) note = sp.type === 'tank' ? `ไม่มีการใช้น้ำ ปั๊มตัดที่ ${fmt(sp.cutOut, 1)} บาร์ แรงดันค้างในถังรอไว้` : `ไม่มีการใช้น้ำ ปั๊มหยุด รักษาแรงดันไว้ราว ${fmt(sp.target, 1)} บาร์`;
+      else if (sp.type === 'tank') note = Q < 0.3 * sp.Qm ? `ใช้น้ำน้อย ปั๊มจะติด-ดับเป็นช่วง แรงดันแกว่ง ${fmt(sp.cutIn, 1)}–${fmt(sp.cutOut, 1)} บาร์` : `ใช้น้ำต่อเนื่อง ปั๊มเดินตลอด แรงดันตามกราฟปั๊ม ${fmt(pOut, 2)} บาร์`;
+      else note = pOut >= sp.target - 0.05 ? `คุมแรงดันไว้ที่ ${fmt(sp.target, 1)} บาร์ได้` : `ใช้น้ำเกินกำลังปั๊ม แรงดันตกจาก ${fmt(sp.target, 1)} เหลือ ${fmt(pOut, 2)} บาร์`;
+      if (connected && Q > 0.05 && pIn != null && pIn < -0.5) { note += ' · ด้านดูดติดลบมาก ระวังดูดไม่ขึ้น'; st = 'warn'; }
+      if (connected && Q > sp.Qm * 0.97) st = 'warn';
+      res.pumps.push({ c: pm.c, sp, Q, gain, pOut, pIn, watt, note, st, connected });
+    });
+    net.tanks.forEach(t => {
+      const fill = t.fillLink >= 0 ? Math.max(0, Qk(t.fillLink)) * 60000 : 0;
+      let draw = 0; const oi = sub.map[t.outNode];
+      if (oi >= 0 && sol) sub.L.forEach((l, k) => { if (l.a === oi) draw += sol.Q[k]; if (l.b === oi) draw -= sol.Q[k]; });
+      draw *= 60000;
+      const [, Hh] = tankDims(t.c), lvl = clamp(+t.c.level || 0, 0, 100) / 100, net_ = fill - draw;
+      const minutes = Math.abs(net_) > 0.05 ? (net_ < 0 ? t.c.liters * lvl / -net_ : t.c.liters * (1 - lvl) / net_) : null;
+      res.tanks.push({ c: t.c, fill, draw, net: net_, minutes, pIn: pAt(t.inNode), Hh });
+    });
+    res.bom = bom(net.F);
+    return res;
+  }
+  function bom(F) {
+    const len = {}; S.pipes.forEach(p => { const L = routeLen(route(p)); len[p.size] = (len[p.size] || 0) + L; });
+    return { len, F };
+  }
+  // trace the water back from an outlet to its source along the largest inflow at each step
+  function ladder(o) {
+    const net = R.net, sub = R.sub, sol = R.sol; if (!sol) return [];
+    let cur = o.node; const path = []; const seen = new Set();
+    for (let s = 0; s < 400; s++) {
+      if (net.nodes[cur].fixed && !net.nodes[cur].atm) break;
+      if (seen.has(cur)) break; seen.add(cur);
+      let best = -1, bq = 1e-9, other = -1;
+      net.links.forEach((l, k) => { if (l.type === 'emit') return; const Q = R.Qk(k); if (l.b === cur && Q > bq) { bq = Q; best = k; other = l.a; } if (l.a === cur && -Q > bq) { bq = -Q; best = k; other = l.b; } });
+      if (best < 0) break; path.push(best); cur = other;
+    }
+    const src = net.nodes[cur], rows = [];
+    const srcName = (() => { const k = src.key || ''; const c = comp(k.split(':')[1]); return c ? c.name : 'ต้นทาง'; })();
+    rows.push({ t: `${srcName}: ระดับพลังงานน้ำต้นทาง`, v: src.head || 0 });
+    let fr = 0, fit = 0, nP = 0;
+    path.slice().reverse().forEach(k => {
+      const l = net.links[k], Q = Math.abs(R.Qk(k));
+      if (l.kind === 'pump') { const c = comp(l.cid); rows.push({ t: `${c ? c.name : 'ปั๊ม'} เพิ่มแรงดัน`, v: R.H(l.b) - R.H(l.a) }); return; }
+      fr += l.r * Math.pow(Q, 1.852); fit += l.m * Q * Q; nP++;
+    });
+    rows.push({ t: `แรงเสียดทานในท่อ ${nP} ช่วง (Hazen–Williams)`, v: -fr });
+    rows.push({ t: 'ข้องอ สามทาง ข้อต่อ (K·v²/2g)', v: -fit });
+    rows.push({ t: `ความสูงของจุดนี้ ${fmt(net.nodes[o.node].elev, 2)} ม.`, v: -net.nodes[o.node].elev });
+    return rows;
+  }
+
+  // ===================================================================
+  // Rendering
+  // ===================================================================
+  const stage = document.getElementById('houseStage');
+  const cv = document.createElement('canvas'); stage.prepend(cv);
+  const ctx = cv.getContext('2d');
+  const view = { s: 50, rot: 0, ox: 0, oy: 0 };
+  let W = 1, H = 1, dpr = 1, raf = 0, animT = 0, lastAnim = 0, hits = [], T = null, tagQ = [];
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function Rt(x, y) { switch (view.rot & 3) { case 0: return [x, y]; case 1: return [-y, x]; case 2: return [-x, -y]; default: return [y, -x]; } }
+  function Rinv(xr, yr) { switch (view.rot & 3) { case 0: return [xr, yr]; case 1: return [yr, -xr]; case 2: return [-xr, -yr]; default: return [-yr, xr]; } }
+  const PR = (xr, yr, z) => [W / 2 + view.ox + (xr - yr) * 0.866 * view.s, H / 2 + view.oy + (xr + yr) * 0.5 * view.s - z * view.s];
+  const Pj = p => { const r = Rt(p[0], p[1]); return PR(r[0], r[1], p[2]); };
+  const depth = p => { const r = Rt(p[0], p[1]); return r[0] + r[1]; };
+  const shadowPt = p => { const r = Rt(p[0], p[1]); const z = Math.max(0, p[2]); return PR(r[0] + z * 0.22, r[1] + z * 0.5, 0); };
+  function unprojectZ(sx, sy, z) {
+    const u = (sx - W / 2 - view.ox) / (0.866 * view.s), v = (sy - H / 2 - view.oy + z * view.s) / (0.5 * view.s);
+    const xr = (u + v) / 2, yr = (v - u) / 2; const [x, y] = Rinv(xr, yr); return [x, y, z];
+  }
+  function tok() { const cs = getComputedStyle(stage), g = n => cs.getPropertyValue(n).trim(); return { bg1: g('--stage-1'), bg2: g('--stage-2'), floor: g('--floor'), floorL: g('--floor-l'), floorR: g('--floor-r'), grid: g('--floor-grid'), shadow: g('--shadow'), tag: g('--tag'), tagInk: g('--tag-ink'), wall: g('--muted') }; }
+  const hex = c => { const m = c.replace('#', ''); return [parseInt(m.slice(0, 2), 16), parseInt(m.slice(2, 4), 16), parseInt(m.slice(4, 6), 16)]; };
+  const shade = (rgb, f) => `rgb(${rgb.map(v => Math.round(f >= 0 ? v + (255 - v) * f : v * (1 + f))).join(',')})`;
+  function poly(pts, fill, stroke, lw) { ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.closePath(); if (fill) { ctx.fillStyle = fill; ctx.fill(); } if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw || 1; ctx.stroke(); } }
+  function line(a, b, w, col, dash) { ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.lineWidth = w; ctx.strokeStyle = col; if (dash) ctx.setLineDash(dash); ctx.stroke(); if (dash) ctx.setLineDash([]); }
+  function normalUp(a, b) { const dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1; let nx = -dy / l, ny = dx / l; if (ny > 0.2 || (Math.abs(ny) <= 0.2 && nx > 0)) { nx = -nx; ny = -ny; } return [nx, ny]; }
+  function tube(a, b, w, rgb) {
+    const n = normalUp(a, b); ctx.lineCap = 'round';
+    line(a, b, w, shade(rgb, -0.42));
+    const o1 = [n[0] * w * 0.12, n[1] * w * 0.12]; line([a[0] + o1[0], a[1] + o1[1]], [b[0] + o1[0], b[1] + o1[1]], w * 0.7, shade(rgb, 0));
+    const o2 = [n[0] * w * 0.27, n[1] * w * 0.27]; line([a[0] + o2[0], a[1] + o2[1]], [b[0] + o2[0], b[1] + o2[1]], Math.max(1, w * 0.2), shade(rgb, 0.5));
+  }
+  function ball(c, r, rgb) { const g = ctx.createRadialGradient(c[0] - r * 0.35, c[1] - r * 0.4, r * 0.1, c[0], c[1], r); g.addColorStop(0, shade(rgb, 0.55)); g.addColorStop(0.55, shade(rgb, 0)); g.addColorStop(1, shade(rgb, -0.45)); ctx.beginPath(); ctx.arc(c[0], c[1], r, 0, 7); ctx.fillStyle = g; ctx.fill(); }
+  function box(x0, x1, y0, y1, z0, z1, rgb) {
+    const cs = [[x0, y0], [x1, y0], [x1, y1], [x0, y1]].map(p => Rt(p[0], p[1]));
+    const a = Math.min(...cs.map(c => c[0])), b = Math.max(...cs.map(c => c[0])), c = Math.min(...cs.map(q => q[1])), d = Math.max(...cs.map(q => q[1]));
+    poly([PR(a, d, z0), PR(b, d, z0), PR(b, d, z1), PR(a, d, z1)], shade(rgb, -0.12));
+    poly([PR(b, c, z0), PR(b, d, z0), PR(b, d, z1), PR(b, c, z1)], shade(rgb, -0.34));
+    poly([PR(a, c, z1), PR(b, c, z1), PR(b, d, z1), PR(a, d, z1)], shade(rgb, 0.18));
+  }
+  function cylinder(cx, cy, r, z0, z1, rgb) {
+    const b = Pj([cx, cy, z0]), t = Pj([cx, cy, z1]), rx = r * view.s * 1.2247, ry = r * view.s * 0.7071;
+    const g = ctx.createLinearGradient(b[0] - rx, 0, b[0] + rx, 0);
+    g.addColorStop(0, shade(rgb, -0.35)); g.addColorStop(0.3, shade(rgb, 0.35)); g.addColorStop(0.55, shade(rgb, 0.05)); g.addColorStop(1, shade(rgb, -0.5));
+    ctx.beginPath(); ctx.ellipse(b[0], b[1], rx, ry, 0, 0, Math.PI); ctx.lineTo(t[0] - rx, t[1]); ctx.ellipse(t[0], t[1], rx, ry, 0, Math.PI, 0, true); ctx.closePath(); ctx.fillStyle = g; ctx.fill();
+    ctx.beginPath(); ctx.ellipse(t[0], t[1], rx, ry, 0, 0, 7); ctx.fillStyle = shade(rgb, 0.25); ctx.fill(); ctx.lineWidth = 1; ctx.strokeStyle = shade(rgb, -0.3); ctx.stroke();
+  }
+  function blob(cx, cy, r, h) { const b = Pj([cx, cy, 0]), t = shadowPt([cx, cy, h]), rx = r * view.s * 1.2247, ry = r * view.s * 0.7071; ctx.fillStyle = T.shadow; ctx.beginPath(); ctx.ellipse(b[0], b[1], rx, ry, 0, 0, 7); ctx.fill(); ctx.beginPath(); ctx.ellipse(t[0], t[1], rx, ry, 0, 0, 7); ctx.fill(); ctx.save(); ctx.lineCap = 'butt'; line(b, t, ry * 2, T.shadow); ctx.restore(); }
+  function measureTag(t) {
+    const f1 = t.small ? '600 11px' : '600 12px';
+    ctx.font = `${f1} "IBM Plex Sans Thai", system-ui, sans-serif`; const w1 = ctx.measureText(t.lines[0]).width;
+    ctx.font = '500 11.5px "IBM Plex Mono", ui-monospace, monospace'; const w2 = t.lines[1] ? ctx.measureText(t.lines[1]).width : 0;
+    return [Math.max(w1, w2) + (t.small ? 22 : 30), t.lines[1] ? 40 : (t.small ? 20 : 24)];
+  }
+  function drawTag(t, r, selected) {
+    const [bx, by, w, h] = r, a = t.a;
+    // leader from the anchor to the nearest edge of the label
+    const nx = clamp(a[0], bx, bx + w), ny = clamp(a[1], by, by + h);
+    if (Math.hypot(nx - a[0], ny - a[1]) > 3) { ctx.save(); ctx.lineCap = 'round'; line(a, [nx, ny], 1.5, 'rgba(40,52,46,.55)'); ctx.restore(); ctx.beginPath(); ctx.arc(a[0], a[1], 3, 0, 7); ctx.fillStyle = t.dot; ctx.fill(); ctx.lineWidth = 1.2; ctx.strokeStyle = '#fff'; ctx.stroke(); }
+    ctx.save(); ctx.shadowColor = 'rgba(0,0,0,.18)'; ctx.shadowBlur = 8; ctx.shadowOffsetY = 2;
+    ctx.beginPath(); ctx.roundRect ? ctx.roundRect(bx, by, w, h, 6) : ctx.rect(bx, by, w, h); ctx.fillStyle = T.tag; ctx.globalAlpha = t.small ? 0.92 : 1; ctx.fill(); ctx.restore();
+    if (selected) { ctx.lineWidth = 2; ctx.strokeStyle = '#3b8fd9'; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(bx, by, w, h, 6) : ctx.rect(bx, by, w, h); ctx.stroke(); }
+    const cy = t.lines[1] ? by + 12.5 : by + h / 2;
+    ctx.beginPath(); ctx.arc(bx + (t.small ? 10 : 12), cy, t.small ? 3.5 : 4.5, 0, 7); ctx.fillStyle = t.dot; ctx.fill();
+    ctx.fillStyle = T.tagInk; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    ctx.font = `${t.small ? '600 11px' : '600 12px'} "IBM Plex Sans Thai", system-ui, sans-serif`; ctx.fillText(t.lines[0], bx + (t.small ? 18 : 22), cy + 0.5);
+    if (t.lines[1]) { ctx.font = '500 11.5px "IBM Plex Mono", ui-monospace, monospace'; ctx.fillText(t.lines[1], bx + 22, by + 29); }
+  }
+  // length of segment a–b inside rect r (Liang–Barsky)
+  function clipLen(a, b, r) {
+    let t0 = 0, t1 = 1; const dx = b[0] - a[0], dy = b[1] - a[1];
+    const P = [-dx, dx, -dy, dy], Q = [a[0] - r[0], r[0] + r[2] - a[0], a[1] - r[1], r[1] + r[3] - a[1]];
+    for (let i = 0; i < 4; i++) {
+      if (P[i] === 0) { if (Q[i] < 0) return 0; }
+      else { const t = Q[i] / P[i]; if (P[i] < 0) { if (t > t1) return 0; if (t > t0) t0 = t; } else { if (t < t0) return 0; if (t < t1) t1 = t; } }
+    }
+    return (t1 - t0) * Math.hypot(dx, dy);
+  }
+  const overlapA = (a, b) => Math.max(0, Math.min(a[0] + a[2], b[0] + b[2]) - Math.max(a[0], b[0])) * Math.max(0, Math.min(a[1] + a[3], b[1] + b[3]) - Math.max(a[1], b[1]));
+  // place labels where they cover the fewest pipes, fittings, devices and other labels
+  function layoutTags() {
+    const mode = S.labels || 'all';
+    const q = tagQ.filter(t => sel === t.id || mode === 'all' || (mode === 'outlets' && t.kind === 'out'))
+      .sort((a, b) => ((sel === b.id) - (sel === a.id)) || (a.pri - b.pri));
+    const segs = hits.filter(h => h.seg).map(h => [h.seg[0], h.seg[1], h.r]);
+    const blobs = hits.filter(h => h.x != null && h.kind !== 'handle').map(h => [h.x, h.y, h.r]);
+    const placed = [];
+    const C = [[0, -1], [0.9, -1], [-0.9, -1], [1.25, 0], [-1.25, 0], [0, -1.9], [1.3, -1.6], [-1.3, -1.6], [0.9, 1], [-0.9, 1], [0, 1.4], [2, -0.6], [-2, -0.6], [0, -2.8]];
+    q.forEach(t => {
+      const [w, h] = measureTag(t), gap = t.small ? 8 : 14;
+      let best = null, bs = Infinity;
+      C.forEach(([cx, cy], i) => {
+        const mx = t.a[0] + cx * (w / 2 + gap), my = t.a[1] + cy * (h / 2 + gap), r = [mx - w / 2, my - h / 2, w, h];
+        const ri = [r[0] - 3, r[1] - 3, r[2] + 6, r[3] + 6];
+        let sc = i * 3;
+        segs.forEach(sg => { const l = clipLen(sg[0], sg[1], ri); if (l) sc += l * (2 + sg[2] * 0.25); });
+        blobs.forEach(b => { const dx = clamp(b[0], r[0], r[0] + w) - b[0], dy = clamp(b[1], r[1], r[1] + h) - b[1]; if (Math.hypot(dx, dy) < b[2]) sc += 120; });
+        placed.forEach(p => { sc += overlapA(ri, p) * 1.5; });
+        if (r[0] < 4 || r[1] < 4 || r[0] + w > W - 4 || r[1] + h > H - 4) sc += 400;
+        if (sc < bs) { bs = sc; best = r; }
+      });
+      placed.push(best);
+      drawTag(t, best, sel === t.id);
+      hits.push({ kind: t.kind === 'fit' ? 'node' : 'comp', id: t.id, rect: best, pri: 2 });
+    });
+  }
+  const ST_COL = { good: '#2fa35a', weak: '#e0a020', dry: '#d9483a', off: '#8c958f', none: '#8c958f', ok: '#2fa35a', warn: '#e0a020', bad: '#d9483a' };
+  const PIPE_RGB = { pvc: hex('#2f6db3'), pe: hex('#2b2f2d') };
+  const pressRGB = p => hex(p == null ? '#8c958f' : p < 0.3 ? '#d9483a' : p < 0.8 ? '#f08a2c' : p < 1.5 ? '#e8c23a' : p < 2.5 ? '#3cb371' : '#2f9ad9');
+  const pipeW = size => clamp((PIPES[size] || PIPES.pvc12).d / 1000 * view.s * 1.3, 4, 24);
+  function pipeRGB(p) { if (S.colorBy === 'pressure' && R) { const r = R.pipes.get(p.id); if (r) return pressRGB(r.pA == null ? null : Math.min(r.pA, r.pB)); } return (p.size || '').startsWith('pe') ? PIPE_RGB.pe : PIPE_RGB.pvc; }
+  const levels = () => { const out = [0]; for (let f = 1; f < S.house.floors; f++) out.push(f * S.house.fh); out.push(S.house.floors * S.house.fh); return out; };
+  const levelName = (z, i, all) => i === 0 ? 'ชั้น 1 (พื้นดิน)' : i === all.length - 1 ? 'ดาดฟ้า' : `ชั้น ${i + 1}`;
+
+  function allPts() {
+    const h = S.house, pts = [[h.x, h.y, 0], [h.x + h.w, h.y + h.d, h.floors * h.fh]];
+    S.comps.forEach(c => pts.push([c.x, c.y, c.z]));
+    Object.values(S.nodes).forEach(n => pts.push([n.x, n.y, n.z]));
+    return pts;
+  }
+  function fit() {
+    const pts = allPts().map(p => { const r = Rt(p[0], p[1]); return [(r[0] - r[1]) * 0.866, (r[0] + r[1]) * 0.5 - p[2]]; });
+    const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
+    const w = Math.max(...xs) - Math.min(...xs) + 1, h = Math.max(...ys) - Math.min(...ys) + 1.5;
+    const narrow = W < 700, padL = narrow ? 16 : 176, padR = 24, padT = narrow ? 110 : 60, padB = 24;
+    view.s = clamp(Math.min((W - padL - padR) / w, (H - padT - padB) / h), 10, 140);
+    const cx = (Math.max(...xs) + Math.min(...xs)) / 2, cy = (Math.max(...ys) + Math.min(...ys)) / 2;
+    view.ox = -cx * view.s + (padL - padR) / 2; view.oy = -cy * view.s + (padT - padB) / 2 + 10; request();
+  }
+
+  function render(now) {
+    raf = 0; if (!active) return;
+    T = tok(); hits = []; tagQ = [];
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const bg = ctx.createLinearGradient(0, 0, 0, H); bg.addColorStop(0, T.bg1); bg.addColorStop(1, T.bg2); ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+    const h = S.house;
+    // ground slab around everything
+    const rs = allPts().map(p => Rt(p[0], p[1]));
+    const fx0 = Math.floor(Math.min(...rs.map(r => r[0])) - 1.5), fx1 = Math.ceil(Math.max(...rs.map(r => r[0])) + 1.5);
+    const fy0 = Math.floor(Math.min(...rs.map(r => r[1])) - 1.5), fy1 = Math.ceil(Math.max(...rs.map(r => r[1])) + 1.5), th = 0.25;
+    poly([PR(fx0, fy1, 0), PR(fx1, fy1, 0), PR(fx1, fy1, -th), PR(fx0, fy1, -th)], T.floorL);
+    poly([PR(fx1, fy0, 0), PR(fx1, fy1, 0), PR(fx1, fy1, -th), PR(fx1, fy0, -th)], T.floorR);
+    poly([PR(fx0, fy0, 0), PR(fx1, fy0, 0), PR(fx1, fy1, 0), PR(fx0, fy1, 0)], T.floor);
+    for (let x = fx0 + 1; x < fx1; x++) line(PR(x, fy0, 0), PR(x, fy1, 0), 1, T.grid);
+    for (let y = fy0 + 1; y < fy1; y++) line(PR(fx0, y, 0), PR(fx1, y, 0), 1, T.grid);
+    // house footprint + floor plates
+    const hc = [[h.x, h.y], [h.x + h.w, h.y], [h.x + h.w, h.y + h.d], [h.x, h.y + h.d]];
+    poly(hc.map(c => Pj([c[0], c[1], 0.01])), 'rgba(150,140,120,.12)', 'rgba(90,85,75,.35)', 1.2);
+    // shadows
+    S.comps.forEach(c => {
+      if (c.kind === 'tank') { const [D, Hh] = tankDims(c); blob(c.x, c.y, D / 2, c.z + Hh); }
+      if (c.kind === 'pump') blob(c.x, c.y, 0.35, c.z + 0.5);
+      if (c.kind === 'city') blob(c.x, c.y, 0.2, 0.6);
+    });
+    S.pipes.forEach(p => { const r = route(p), w = pipeW(p.size); ctx.lineCap = 'round'; for (let i = 1; i < r.length; i++) line(shadowPt(r[i - 1]), shadowPt(r[i]), w, T.shadow); });
+    // working level plane
+    const lv = S.level;
+    if (lv > 0 || tool !== 'select') {
+      const pl = hc.map(c => Pj([c[0], c[1], lv]));
+      poly(pl, lv > 0 ? 'rgba(59,143,217,.06)' : null, 'rgba(59,143,217,.55)', 1.5);
+      ctx.save(); ctx.globalAlpha = 0.35; for (let x = Math.ceil(h.x); x < h.x + h.w; x++) line(Pj([x, h.y, lv]), Pj([x, h.y + h.d, lv]), 1, 'rgba(59,143,217,.5)'); for (let y = Math.ceil(h.y); y < h.y + h.d; y++) line(Pj([h.x, y, lv]), Pj([h.x + h.w, y, lv]), 1, 'rgba(59,143,217,.5)'); ctx.restore();
+    }
+    // upper floor plates (outline only, stays out of the way)
+    for (let f = 1; f <= h.floors; f++) { const z = f * h.fh; if (z === lv) continue; poly(hc.map(c => Pj([c[0], c[1], z])), null, 'rgba(90,85,75,.28)', 1); }
+    // vertical house edges
+    hc.forEach(c => line(Pj([c[0], c[1], 0]), Pj([c[0], c[1], h.floors * h.fh]), 1, 'rgba(90,85,75,.22)', [4, 4]));
+
+    // objects in painter's order
+    const items = [];
+    const F = R ? R.net.F : fittings();
+    S.pipes.forEach(p => { const r = route(p); for (let i = 1; i < r.length; i++) { const a = r[i - 1], b = r[i]; items.push({ d: Math.max(depth(a), depth(b)) - 0.2 + (a[2] + b[2]) * 0.001, f: () => drawSeg(p, a, b, i === 1, i === r.length - 1) }); } for (let i = 1; i < r.length - 1; i++) items.push({ d: depth(r[i]) + 0.01 + r[i][2] * 0.001, f: () => joint(r[i], p.size, 'elbow') }); });
+    Object.entries(S.nodes).forEach(([id, n]) => { const p = [n.x, n.y, n.z]; items.push({ d: depth(p) + 0.02 + n.z * 0.001, f: () => drawNode(id, p, F.byKey.get('n:' + id)) }); });
+    S.comps.forEach(c => items.push({ d: depth([c.x, c.y, c.z]) + (c.kind === 'outlet' ? 0.03 : -0.3), f: () => drawComp(c, now) }));
+    items.sort((a, b) => a.d - b.d).forEach(it => it.f());
+    // draft preview while drawing a pipe
+    if (tool === 'pipe' && draft && mouse3) {
+      const a = refPos(draft.from), b = snapT ? snapT.p : mouse3;
+      if (a && b) {
+        const pts = [a, [b[0], a[1], a[2]], [b[0], b[1], a[2]], b].filter((q, i, arr) => !i || !eq3(q, arr[i - 1]));
+        ctx.save(); ctx.globalAlpha = 0.6; for (let i = 1; i < pts.length; i++) tube(Pj(pts[i - 1]), Pj(pts[i]), pipeW(S.size), hex('#3b8fd9')); ctx.restore();
+        const s = Pj(b), txt = `${fmt(routeLen(pts), 2)} ม.`; ctx.font = '500 11px "IBM Plex Mono", monospace'; const tw = ctx.measureText(txt).width + 10;
+        ctx.fillStyle = 'rgba(12,18,15,.8)'; ctx.fillRect(s[0] + 12, s[1] - 26, tw, 18); ctx.fillStyle = '#fff'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.fillText(txt, s[0] + 17, s[1] - 17);
+      }
+    }
+    if (snapT && tool !== 'select') { const s = Pj(snapT.p); ctx.beginPath(); ctx.arc(s[0], s[1], 10, 0, 7); ctx.strokeStyle = '#3b8fd9'; ctx.lineWidth = 2.5; ctx.stroke(); }
+    else if (mouse3 && tool !== 'select') { const s = Pj(mouse3); ctx.beginPath(); ctx.arc(s[0], s[1], 4, 0, 7); ctx.fillStyle = '#3b8fd9'; ctx.fill(); line(s, Pj([mouse3[0], mouse3[1], 0]), 1, 'rgba(59,143,217,.4)', [3, 3]); }
+    // free ports while drawing pipes
+    if (tool === 'pipe') S.comps.forEach(c => Object.entries(ports(c)).forEach(([k, p]) => { const s = Pj(p); ctx.beginPath(); ctx.arc(s[0], s[1], 6, 0, 7); ctx.fillStyle = k === 'in' ? '#3b8fd9' : k === 'out' ? '#2fa35a' : '#ffffff'; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = '#1b2a22'; ctx.stroke(); }));
+    // tags
+    if (R) {
+      R.outs.forEach(o => { const s = Pj([o.c.x, o.c.y, o.c.z + (o.c.type === 'washer' ? 0.5 : 0.05)]); const l2 = o.p == null ? 'ยังไม่ได้ต่อน้ำ' : !o.c.open ? `ปิด · รอ ${fmt(o.p, 2)} บาร์` : `${fmt(o.p, 2)} บาร์ · ${fmt(o.q, 1)} ล./นาที`; tagQ.push({ kind: 'out', id: o.c.id, a: s, lines: [o.c.name || o.t.label, l2], dot: ST_COL[o.st], pri: 1 }); });
+      R.pumps.forEach(pm => { const s = Pj([pm.c.x, pm.c.y, pm.c.z + 0.65]); tagQ.push({ kind: 'pump', id: pm.c.id, a: s, lines: [`${pm.sp.brand ? pm.sp.brand + ' ' : ''}${pm.sp.model} · ${wattLabel(pm.sp.w)}`, !pm.connected ? 'ยังไม่ได้ต่อด้านดูด' : pm.Q < 0.05 ? `หยุด · ${fmt(pm.pOut, 2)} บาร์` : `ออก ${fmt(pm.pOut, 2)} บาร์ · ${fmt(pm.Q, 1)} ล./นาที`], dot: ST_COL[pm.st] || '#3b8fd9', pri: 2 }); });
+      R.tanks.forEach(t => { const [, Hh] = tankDims(t.c); const s = Pj([t.c.x, t.c.y, t.c.z + Hh]); tagQ.push({ kind: 'tank', id: t.c.id, a: s, lines: [t.c.name, `${fmt(t.c.level, 0)}% · ${Math.abs(t.net) < 0.05 ? 'คงที่' : t.net > 0 ? `เติม +${fmt(t.net, 1)}` : `ลด ${fmt(-t.net, 1)}`} ล./นาที`], dot: '#3f7fc2', pri: 3 }); });
+      if (view.s > 34) R.net.F.byKey.forEach((info, k) => { if (!k.startsWith('n:') || !info.kind) return; const n = S.nodes[k.slice(2)]; if (!n) return; const nm = { elbow: 'ข้องอ', coupling: 'ข้อต่อตรง', tee: 'สามทาง', cross: 'สี่ทาง' }[info.kind]; if (!nm) return; tagQ.push({ kind: 'fit', id: k.slice(2), a: Pj([n.x, n.y, n.z]), lines: [`${nm} ${info.sizes.map(z => (PIPES[z] || {}).label.replace('PVC ', '').replace(' นิ้ว', '″')).join('×')}`], dot: '#c9cfd0', pri: 4, small: true }); });
+    }
+    drawHandles();
+    layoutTags();
+    if (R && R.total > 0.05 && !reduced.matches && !document.hidden) { if (!animT) animT = requestAnimationFrame(tick); }
+  }
+  function tick(t) { animT = 0; if (!active) return; if (t - lastAnim > 33) { lastAnim = t; render(t); } else animT = requestAnimationFrame(tick); }
+  function request() { if (!raf) raf = requestAnimationFrame(render); }
+
+  function drawSeg(p, a, b, first, last) {
+    const A = Pj(a), B = Pj(b), w = pipeW(p.size), on = sel === p.id || (hover && hover.id === p.id);
+    if (on) { ctx.lineCap = 'round'; line(A, B, w + 8, 'rgba(59,143,217,.45)'); }
+    tube(A, B, w, pipeRGB(p));
+    const r = R && R.pipes.get(p.id);
+    if (r && Math.abs(r.Q) * 60000 > 0.05) { const off = -(performance.now() / 1000) * clamp(r.v, 0.2, 3) * view.s * (r.Q >= 0 ? 1 : -1); ctx.save(); ctx.globalAlpha = 0.55; ctx.lineDashOffset = off; line(A, B, Math.max(1.5, w * 0.16), '#dff2ff', [w * 0.6, w * 1.4]); ctx.restore(); }
+    hits.push({ kind: 'pipe', id: p.id, seg: [A, B], a, b, r: Math.max(7, w * 0.7), pri: 1 });
+  }
+  function joint(p, size, kind) { const c = Pj(p), w = pipeW(size); ball(c, w * (kind === 'elbow' ? 0.78 : 0.95), hex('#e9ece9')); }
+  function drawNode(id, p, info) {
+    const c = Pj(p), on = sel === id || (hover && hover.id === id);
+    const n = info ? info.n : 0, size = info && info.sizes[0] || S.size, w = pipeW(size);
+    if (on) { ctx.beginPath(); ctx.arc(c[0], c[1], w + 7, 0, 7); ctx.fillStyle = 'rgba(59,143,217,.45)'; ctx.fill(); }
+    if (info && info.dirs) info.dirs.forEach(d => tube(c, Pj([p[0] + d[0] * 0.1, p[1] + d[1] * 0.1, p[2] + d[2] * 0.1]), w * 1.3, hex('#e9ece9')));
+    if (n <= 1) { ctx.beginPath(); ctx.arc(c[0], c[1], 5, 0, 7); ctx.fillStyle = '#3b8fd9'; ctx.fill(); ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke(); }
+    else ball(c, w * (n >= 3 ? 1.0 : 0.8), hex('#eef1ee'));
+    if (tool !== 'select' || on || n <= 1) { ctx.beginPath(); ctx.arc(c[0], c[1], 3, 0, 7); ctx.fillStyle = '#3b8fd9'; ctx.fill(); }
+    hits.push({ kind: 'node', id, x: c[0], y: c[1], r: Math.max(9, w), pri: 3, p });
+  }
+  function drawComp(c, now) {
+    const on = sel === c.id || (hover && hover.id === c.id);
+    const glow = (x, y, rx, ry) => { if (!on) return; ctx.beginPath(); ctx.ellipse(x, y, rx, ry, 0, 0, 7); ctx.fillStyle = 'rgba(59,143,217,.28)'; ctx.fill(); };
+    const P = ports(c);
+    if (c.kind === 'city') {
+      const g = Pj([c.x, c.y, 0.3]); glow(g[0], g[1], 0.5 * view.s, 0.4 * view.s);
+      box(c.x - 0.2, c.x + 0.2, c.y - 0.2, c.y + 0.2, c.z, c.z + 0.55, hex('#a7aca8'));
+      const d = Pj([c.x, c.y, c.z + 0.62]); ctx.beginPath(); ctx.arc(d[0], d[1], Math.max(7, 0.15 * view.s), 0, 7); ctx.fillStyle = '#f5f3ea'; ctx.fill(); ctx.lineWidth = 3; ctx.strokeStyle = '#3d4741'; ctx.stroke();
+      ctx.fillStyle = '#3d4741'; ctx.font = `600 ${Math.max(8, view.s * 0.1)}px "IBM Plex Mono", monospace`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(fmt(+c.pressure, 1), d[0], d[1] + 1);
+      hits.push({ kind: 'comp', id: c.id, x: g[0], y: g[1], r: Math.max(14, 0.4 * view.s), pri: 2 });
+    }
+    if (c.kind === 'tank') {
+      const [D, Hh] = tankDims(c), r = D / 2, lvl = clamp(+c.level || 0, 0, 100) / 100;
+      const mid = Pj([c.x, c.y, c.z + Hh / 2]); glow(mid[0], mid[1], r * view.s * 1.6, Hh * view.s * 0.75);
+      if (c.z > 0.05) { [[-0.7, -0.7], [0.7, -0.7], [-0.7, 0.7], [0.7, 0.7]].map(o => [o[0] * r, o[1] * r]).sort((a, b) => depth([a[0], a[1], 0]) - depth([b[0], b[1], 0])).forEach(o => box(c.x + o[0] - 0.04, c.x + o[0] + 0.04, c.y + o[1] - 0.04, c.y + o[1] + 0.04, 0, c.z, hex('#7d8580'))); box(c.x - r, c.x + r, c.y - r, c.y + r, c.z - 0.06, c.z, hex('#8d958f')); }
+      cylinder(c.x, c.y, r, c.z, c.z + Hh, hex('#3f7fc2'));
+      const b = Pj([c.x, c.y, c.z + 0.05 + (Hh - 0.15) * lvl]); ctx.strokeStyle = 'rgba(255,255,255,.6)'; ctx.lineWidth = 1.5; ctx.setLineDash([4, 3]); ctx.beginPath(); ctx.ellipse(b[0], b[1], r * view.s * 1.2247, r * view.s * 0.7071, 0, 0.15, Math.PI - 0.15); ctx.stroke(); ctx.setLineDash([]);
+      [['in', '#3b8fd9'], ['out', '#2fa35a']].forEach(([k]) => { const s = Pj(P[k]); ball(s, Math.max(4, pipeW('pvc1') * 0.6), hex('#c9cfd0')); });
+      hits.push({ kind: 'comp', id: c.id, x: mid[0], y: mid[1], r: Math.max(16, r * view.s * 1.1), pri: 2 });
+    }
+    if (c.kind === 'pump') {
+      const sp = pumpSpec(c), v = ROTV[(c.rot || 0) & 3], s0 = Pj([c.x, c.y, c.z + 0.25]);
+      glow(s0[0], s0[1], 0.8 * view.s, 0.5 * view.s);
+      const ex = (a, b) => { const x0 = c.x + v[0] * a - v[1] * b, y0 = c.y + v[1] * a + v[0] * b; return [x0, y0]; };
+      const bx = (a0, a1, b0, b1, z0, z1, col) => { const p1 = ex(a0, b0), p2 = ex(a1, b1); box(Math.min(p1[0], p2[0]), Math.max(p1[0], p2[0]), Math.min(p1[1], p2[1]), Math.max(p1[1], p2[1]), c.z + z0, c.z + z1, hex(col)); };
+      bx(-0.5, 0.5, -0.28, 0.28, 0, 0.05, '#3a403c');
+      if (sp.type === 'tank') { const t = ex(0, -0.5); cylinder(t[0], t[1], 0.24, c.z + 0.05, c.z + 0.6, hex('#2f73c0')); bx(-0.45, 0.05, -0.16, 0.16, 0.05, 0.4, '#2c8a6a'); bx(0.05, 0.42, -0.14, 0.14, 0.05, 0.36, '#b9bfbb'); }
+      else if (sp.type === 'const') { bx(-0.46, 0.46, -0.27, 0.27, 0.05, 0.6, '#e8ebe8'); bx(-0.46, 0.46, -0.27, 0.27, 0.58, 0.62, '#2f73c0'); }
+      else { bx(-0.45, 0.05, -0.16, 0.16, 0.05, 0.4, '#4b5560'); bx(0.05, 0.42, -0.14, 0.14, 0.05, 0.36, '#b9bfbb'); bx(-0.38, -0.06, -0.2, 0.2, 0.4, 0.52, '#1f2a33'); const r = R && R.pumps.find(x => x.c === c); const d = Pj([c.x, c.y, c.z + 0.6]); ctx.fillStyle = '#0d1612'; ctx.fillRect(d[0] - 17, d[1] - 9, 34, 18); ctx.fillStyle = '#5cf08f'; ctx.font = '600 12px "IBM Plex Mono", monospace'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(r && r.pOut != null ? fmt(r.pOut, 1) : '--', d[0], d[1] + 1); }
+      // ports: blue = suction, green = discharge
+      const pi = Pj(P.in), po = Pj(P.out), mid = Pj([c.x, c.y, c.z + 0.22]); tube(pi, mid, pipeW('pvc1'), hex('#b9bfbb')); tube(Pj([c.x + v[0] * 0.3, c.y + v[1] * 0.3, c.z + 0.3]), po, pipeW('pvc1'), hex('#b9bfbb'));
+      ball(pi, 5, hex('#3b8fd9')); ball(po, 5, hex('#2fa35a'));
+      hits.push({ kind: 'comp', id: c.id, x: s0[0], y: s0[1], r: Math.max(16, 0.45 * view.s), pri: 2 });
+    }
+    if (c.kind === 'outlet') drawOutlet(c, now, on);
+  }
+  function drawOutlet(c, now, on) {
+    const p = [c.x, c.y, c.z], s = Pj(p), chrome = hex('#c9cfd0'), r = R && R.outs.find(x => x.c === c);
+    if (on) { ctx.beginPath(); ctx.arc(s[0], s[1], 20, 0, 7); ctx.fillStyle = 'rgba(59,143,217,.35)'; ctx.fill(); }
+    const v = ROTV[(c.rot || 0) & 3];
+    let jet = null;
+    if (c.type === 'shower') { const h = Pj([c.x + v[0] * 0.2, c.y + v[1] * 0.2, c.z]); tube(s, h, 6, chrome); ctx.beginPath(); ctx.ellipse(h[0], h[1] + 3, 12, 6, 0, 0, 7); ctx.fillStyle = shade(chrome, 0.2); ctx.fill(); ctx.strokeStyle = shade(chrome, -0.4); ctx.lineWidth = 1; ctx.stroke(); jet = { p: [c.x + v[0] * 0.2, c.y + v[1] * 0.2, c.z - 0.03], d: [0, 0, -1], fan: true }; }
+    else if (c.type === 'washer') { const bx = c.x + v[0] * 0.4, by = c.y + v[1] * 0.4, z0 = Math.max(0, c.z - 0.8) ; box(bx - 0.3, bx + 0.3, by - 0.3, by + 0.3, z0, z0 + 0.85, hex('#eef0ee')); tube(s, Pj([bx, by, c.z]), 5, chrome); }
+    else if (c.type === 'toilet') { const bx = c.x + v[0] * 0.3, by = c.y + v[1] * 0.3, z0 = Math.max(0, c.z - 0.5); box(bx - 0.2, bx + 0.2, by - 0.12, by + 0.12, z0 + 0.4, z0 + 0.8, hex('#f4f4f2')); box(bx - 0.18, bx + 0.18, by - 0.3, by + 0.3, z0, z0 + 0.42, hex('#f4f4f2')); tube(s, Pj([bx, by, c.z]), 4, chrome); }
+    else if (c.type === 'sprinkler') { tube(s, Pj([c.x, c.y, c.z + 0.12]), 6, hex('#2b2f2d')); ball(Pj([c.x, c.y, c.z + 0.14]), 6, hex('#e0c03a')); jet = { p: [c.x, c.y, c.z + 0.16], d: null, ring: true }; }
+    else if (c.type === 'hose') { const e = Pj([c.x + v[0] * 0.15, c.y + v[1] * 0.15, c.z]); tube(s, e, 8, hex('#2e9a55')); jet = { p: [c.x + v[0] * 0.15, c.y + v[1] * 0.15, c.z], d: [v[0], v[1], 0.15] }; }
+    else { const tip = [c.x + v[0] * 0.14, c.y + v[1] * 0.14, c.z]; tube(s, Pj(tip), 6, chrome); const nub = [tip[0], tip[1], tip[2] - 0.06]; tube(Pj(tip), Pj(nub), 5, chrome); const hd = Pj([c.x, c.y, c.z + 0.1]); tube(s, hd, 3, chrome); ball(hd, 5, hex(c.open ? '#3b8fd9' : '#d9483a')); jet = { p: nub, d: [0, 0, -1] }; }
+    if (r && r.q > 0.05 && jet) drawJet(jet, r, now);
+    hits.push({ kind: 'comp', id: c.id, x: s[0], y: s[1], r: 16, pri: 2 });
+  }
+  function drawJet(j, r, now) {
+    const t = (now || performance.now()) / 1000, vj = Math.sqrt(2 * G * Math.max(0.05, r.p) * BAR) * 0.22;
+    const dirs = j.ring ? Array.from({ length: 8 }, (_, k) => { const a = k / 8 * Math.PI * 2 + t * 0.6; return [Math.cos(a) * 0.7, Math.sin(a) * 0.7, 0.7]; }) : j.fan ? Array.from({ length: 6 }, (_, k) => { const a = k / 6 * Math.PI * 2; return [Math.cos(a) * 0.12, Math.sin(a) * 0.12, -1]; }) : [j.d];
+    const zf = j.fan ? Math.max(0, j.p[2] - 1.3) : Math.floor(j.p[2] / S.house.fh + 1e-6) * S.house.fh;
+    ctx.save(); ctx.lineCap = 'round';
+    dirs.forEach(d0 => {
+      const pts = [];
+      for (let i = 0; i <= 16; i++) { const tt = i / 16 * 0.9, x = j.p[0] + d0[0] * vj * tt, y = j.p[1] + d0[1] * vj * tt, z = j.p[2] + d0[2] * vj * tt - 0.5 * G * 0.25 * tt * tt; pts.push(Pj([x, y, Math.max(zf, z)])); if (z <= zf) break; }
+      ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.strokeStyle = 'rgba(120,190,245,.55)'; ctx.lineWidth = clamp(r.q / 5, 1.2, 4); ctx.stroke();
+      ctx.setLineDash([2, 9]); ctx.lineDashOffset = -t * 60; ctx.strokeStyle = 'rgba(235,248,255,.9)'; ctx.lineWidth = 2; ctx.stroke(); ctx.setLineDash([]);
+      const e = pts[pts.length - 1]; ctx.fillStyle = 'rgba(120,190,245,.25)'; ctx.beginPath(); ctx.ellipse(e[0], e[1], 10, 4, 0, 0, 7); ctx.fill();
+    });
+    ctx.restore();
+  }
+
+  // ---------- "+" handles at every open end: build pipes direction by direction ----------
+  function portDir(c, port) {
+    const v = ROTV[(c.rot || 0) & 3];
+    if (c.kind === 'outlet') return '-z';
+    if (port === 'in') return dkey([-v[0], -v[1], 0]);
+    return dkey([v[0], v[1], 0]);
+  }
+  function openEnds() {
+    const deg = new Map(), used = new Map();
+    S.pipes.forEach(p => { const r = route(p); if (r.length < 2) return; [[p.a, r[0], r[1]], [p.b, r[r.length - 1], r[r.length - 2]]].forEach(([ref, at, nx]) => { const k = refKey(ref); deg.set(k, (deg.get(k) || 0) + 1); if (!used.has(k)) used.set(k, []); used.get(k).push(dkey(dirOf(at, nx))); }); });
+    const out = [];
+    Object.entries(S.nodes).forEach(([id, n]) => { const k = 'n:' + id; if ((deg.get(k) || 0) <= 1) { const u = used.get(k) || []; out.push({ ref: { n: id }, p: [n.x, n.y, n.z], d: u.length ? OPP[u[0]] : '+x', used: u }); } });
+    S.comps.forEach(c => Object.entries(ports(c)).forEach(([k, pp]) => { const key = `c:${c.id}:${k}`; if (!deg.get(key)) out.push({ ref: { c: c.id, port: k }, p: pp, d: portDir(c, k), used: [] }); }));
+    return out;
+  }
+  const handleAt = h => { const v = DIRS[h.d]; return Pj([h.p[0] + v[0] * 0.3, h.p[1] + v[1] * 0.3, h.p[2] + v[2] * 0.3]); };
+  function drawHandles() {
+    if (tool !== 'select') return;
+    openEnds().forEach(h => {
+      const s = Pj(h.p), q = handleAt(h), on = menu && refKey(menu.ref) === refKey(h.ref);
+      line(s, q, 2, 'rgba(59,143,217,.55)', [3, 3]);
+      ctx.beginPath(); ctx.arc(q[0], q[1], on ? 12 : 10, 0, 7); ctx.fillStyle = '#3b8fd9'; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = '#fff'; ctx.stroke();
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 2.2; ctx.beginPath(); ctx.moveTo(q[0] - 5, q[1]); ctx.lineTo(q[0] + 5, q[1]); ctx.moveTo(q[0], q[1] - 5); ctx.lineTo(q[0], q[1] + 5); ctx.stroke();
+      hits.push({ kind: 'handle', h, x: q[0], y: q[1], r: 13, pri: 5 });
+    });
+  }
+  function arrowFor(d) {
+    if (d === '+z') return '↑'; if (d === '-z') return '↓';
+    const v = DIRS[d], a = Pj([0, 0, 0]), b = Pj([v[0], v[1], 0]), dx = b[0] - a[0], dy = b[1] - a[1];
+    return dx > 0 ? (dy > 0 ? '↘' : '↗') : (dy > 0 ? '↙' : '↖');
+  }
+  let menu = null;
+  const menuEl = document.getElementById('hMenu');
+  function openMenu(h, x, y) {
+    menu = { ref: h.ref, p: h.p, d: menu && refKey(menu.ref) === refKey(h.ref) ? menu.d : h.d, used: h.used || [], x, y, kind: h.kind };
+    renderMenu();
+  }
+  function renderMenu() {
+    if (!menu) { menuEl.hidden = true; return; }
+    const dirs = Object.keys(DIRS).filter(d => !menu.used.includes(d));
+    if (!dirs.includes(menu.d)) menu.d = dirs[0];
+    const turn = menu.used.length === 1 && menu.d !== OPP[menu.used[0]];
+    const fitName = menu.used.length === 0 ? '' : menu.used.length === 1 ? (turn ? 'ข้องอ 90°' : 'ข้อต่อตรง') : menu.used.length === 2 ? 'สามทาง' : 'สี่ทาง';
+    menuEl.innerHTML = `
+      <div class="mhead"><b>${menu.kind === 'tee' ? 'แยกสามทางตรงนี้' : 'ต่อท่อจากจุดนี้'}</b><button class="x" data-m="close" aria-label="ปิด">×</button></div>
+      <div class="msec"><span>1. เลือกทิศ ${fitName ? `· จะใส่ <b>${fitName}</b> ให้` : ''}</span><div class="chips">${dirs.map(d => `<button class="dirBtn ${menu.d === d ? 'on' : ''}" data-m="dir" data-d="${d}" title="${d === '+z' ? 'ขึ้น' : d === '-z' ? 'ลง' : 'แนวราบ'}">${arrowFor(d)}</button>`).join('')}</div></div>
+      <div class="msec"><span>2. ต่อท่อ ${(PIPES[S.size] || {}).label} ยาว</span><div class="chips">${[0.3, 0.5, 1, 2, 3, 5].map(l => `<button data-m="len" data-l="${l}">${l} ม.</button>`).join('')}</div></div>
+      <div class="msec"><span>หรือจบด้วยอุปกรณ์</span><div class="chips">${Object.entries(OUTLETS).map(([k, v]) => `<button data-m="out" data-t="${k}">${v.label.replace(' (เติมถังพัก)', '')}</button>`).join('')}</div></div>`;
+    menuEl.hidden = false;
+    const r = stage.getBoundingClientRect(), mw = menuEl.offsetWidth, mh = menuEl.offsetHeight;
+    menuEl.style.left = clamp(menu.x + 16, 8, r.width - mw - 8) + 'px'; menuEl.style.top = clamp(menu.y - mh / 2, 8, r.height - mh - 8) + 'px';
+    request();
+  }
+  function closeMenuH() { menu = null; menuEl.hidden = true; request(); }
+  menuEl.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || !menu) return;
+    const m = b.dataset.m;
+    if (m === 'close') { closeMenuH(); return; }
+    if (m === 'dir') { menu.d = b.dataset.d; renderMenu(); return; }
+    const v = DIRS[menu.d], p0 = menu.p;
+    if (m === 'len') {
+      const L = +b.dataset.l, r2 = x => Math.round(x * 100) / 100, p1 = [r2(p0[0] + v[0] * L), r2(p0[1] + v[1] * L), r2(Math.max(0, p0[2] + v[2] * L))];
+      snap(); const id = uidH('n'); S.nodes[id] = { x: p1[0], y: p1[1], z: p1[2] };
+      S.pipes.push({ id: uidH('p'), a: menu.ref, b: { n: id }, size: S.size, zfirst: v[2] !== 0 });
+      const keepDir = menu.d; sel = null; changedQuiet(); renderPanel();
+      const h = openEnds().find(x => x.ref.n === id); if (h) { h.d = keepDir; const q = handleAt(h); menu = null; openMenu(h, q[0], q[1]); menu.d = keepDir; renderMenu(); }
+      return;
+    }
+    if (m === 'out') {
+      const t = b.dataset.t, o = OUTLETS[t], L = 0.3, r2 = x => Math.round(x * 100) / 100, p1 = [r2(p0[0] + v[0] * L), r2(p0[1] + v[1] * L), r2(Math.max(0, p0[2] + v[2] * L))];
+      const hv = Math.abs(v[0]) + Math.abs(v[1]) ? v : [1, 0, 0], rot = ROTV.findIndex(r => r[0] === Math.sign(hv[0]) && r[1] === Math.sign(hv[1]));
+      snap(); const c = { id: uidH('o'), kind: 'outlet', type: t, x: p1[0], y: p1[1], z: p1[2], rot: Math.max(0, rot), open: true, name: `${o.label.replace(' (เติมถังพัก)', '')} ${S.comps.filter(x => x.type === t).length + 1}` };
+      S.comps.push(c); S.pipes.push({ id: uidH('p'), a: menu.ref, b: { c: c.id, port: 'p' }, size: S.size, zfirst: v[2] !== 0 });
+      sel = c.id; closeMenuH(); changed();
+    }
+  });
+  // add a tee in the middle of a pipe and offer the branch straight away
+  function teeOnPipe(pid, p3) {
+    const pp = S.pipes.find(x => x.id === pid); if (!pp) return;
+    snap(); const id = splitPipe(pid, p3); changedQuiet();
+    const n = S.nodes[id], used = (R.net.F.byKey.get('n:' + id) || { dirs: [] }).dirs.map(dkey);
+    const cand = ['+y', '-y', '+x', '-x', '+z', '-z'].find(d => !used.includes(d));
+    sel = id; renderPanel();
+    const h = { ref: { n: id }, p: [n.x, n.y, n.z], d: cand, used, kind: 'tee' }, q = handleAt(h);
+    menu = null; openMenu(h, q[0], q[1]);
+  }
+
+  // ===================================================================
+  // Interaction
+  // ===================================================================
+  function hitAt(x, y, kinds) {
+    let best = null, bp = -1, bd = 1e9;
+    hits.forEach(h => {
+      if (kinds && !kinds.includes(h.kind)) return;
+      let d;
+      if (h.rect) { const [bx, by, w, hh] = h.rect; d = (x >= bx && x <= bx + w && y >= by && y <= by + hh) ? 0 : 1e9; }
+      else if (h.seg) { const pr = projSeg([x, y], h.seg[0], h.seg[1]); d = pr.d <= h.r ? pr.d : 1e9; h._t = pr.t; }
+      else { d = Math.hypot(h.x - x, h.y - y); if (d > h.r) d = 1e9; }
+      if (d < 1e9 && (h.pri > bp || (h.pri === bp && d < bd))) { best = h; bp = h.pri; bd = d; }
+    });
+    return best;
+  }
+  // snapping target for pipe drawing: a component port, a node, or a point on a pipe
+  function snapAt(x, y) {
+    let best = null, bd = 14;
+    S.comps.forEach(c => Object.entries(ports(c)).forEach(([k, p]) => { const s = Pj(p), d = Math.hypot(s[0] - x, s[1] - y); if (d < bd) { bd = d; best = { ref: { c: c.id, port: k }, p }; } }));
+    Object.entries(S.nodes).forEach(([id, n]) => { const p = [n.x, n.y, n.z], s = Pj(p), d = Math.hypot(s[0] - x, s[1] - y); if (d < bd) { bd = d; best = { ref: { n: id }, p }; } });
+    if (best) return best;
+    const h = hitAt(x, y, ['pipe']);
+    if (h) {
+      const a = h.a, b = h.b, t = clamp(h._t, 0, 1);
+      const p = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t].map((v, i) => (a[i] === b[i] ? v : snapG(v)));
+      return { split: h.id, p };
+    }
+    return null;
+  }
+  function planePoint(x, y) {
+    // while drawing, keep the pipe at the height it started from if that is on the working floor
+    let z = S.level; const a = draft && refPos(draft.from);
+    if (tool === 'pipe' && a && a[2] >= S.level - 1e-6 && a[2] < S.level + Math.min(1.5, S.house.fh - 0.1)) z = a[2];
+    const p = unprojectZ(x, y, z); return [snapG(p[0]), snapG(p[1]), z];
+  }
+
+  const ptrs = new Map(); let gest = null, drag = null;
+  const loc = e => { const r = stage.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  cv.addEventListener('pointerdown', e => {
+    cv.setPointerCapture(e.pointerId); const p = loc(e); ptrs.set(e.pointerId, p);
+    if (ptrs.size === 1) gest = { t: 'pend', s: p, o: [view.ox, view.oy] };
+    else if (ptrs.size === 2) { drag = null; const [a, b] = [...ptrs.values()]; gest = { t: 'pinch', d0: Math.hypot(a[0] - b[0], a[1] - b[1]), s0: view.s }; }
+  });
+  cv.addEventListener('pointermove', e => {
+    const p = loc(e);
+    if (!ptrs.has(e.pointerId)) { onHover(p[0], p[1]); return; }
+    ptrs.set(e.pointerId, p);
+    if (!gest) return;
+    if (gest.t === 'pinch' && ptrs.size >= 2) { const [a, b] = [...ptrs.values()]; zoomBy(Math.hypot(a[0] - b[0], a[1] - b[1]) / gest.d0 * gest.s0 / view.s, (a[0] + b[0]) / 2, (a[1] + b[1]) / 2); return; }
+    if (gest.t === 'pend' && Math.hypot(p[0] - gest.s[0], p[1] - gest.s[1]) > 5) {
+      gest.t = 'pan';
+      if (tool === 'select') { const h = hitAt(gest.s[0], gest.s[1], ['comp', 'node']); if (h) { const obj = h.kind === 'node' ? S.nodes[h.id] : comp(h.id); if (obj) { snap(); const z = obj.z; const s0 = unprojectZ(gest.s[0], gest.s[1], z); drag = { obj, z, dx: obj.x - s0[0], dy: obj.y - s0[1], id: h.id }; sel = h.id; gest.t = 'drag'; } } }
+    }
+    if (gest.t === 'drag' && drag) { const q = unprojectZ(p[0], p[1], drag.z); drag.obj.x = snapG(q[0] + drag.dx); drag.obj.y = snapG(q[1] + drag.dy); L_dirty(); request(); return; }
+    if (gest.t === 'pan') { if (menu) closeMenuH(); view.ox = gest.o[0] + p[0] - gest.s[0]; view.oy = gest.o[1] + p[1] - gest.s[1]; request(); }
+    onHover(p[0], p[1]);
+  });
+  const end = e => {
+    if (!ptrs.has(e.pointerId)) return; ptrs.delete(e.pointerId);
+    if (gest && gest.t === 'pend' && e.type === 'pointerup') tap(gest.s[0], gest.s[1]);
+    if (gest && gest.t === 'drag') { drag = null; changed(false); }
+    if (!ptrs.size) gest = null; else if (gest && gest.t === 'pinch') gest = { t: 'done' };
+  };
+  cv.addEventListener('pointerup', end); cv.addEventListener('pointercancel', end);
+  cv.addEventListener('dblclick', () => { if (tool === 'pipe') finishPipe(); });
+  cv.addEventListener('wheel', e => { e.preventDefault(); const p = loc(e); zoomBy(Math.exp(-e.deltaY * (e.deltaMode ? 0.05 : 0.0018)), p[0], p[1]); }, { passive: false });
+  function zoomBy(f, x, y) { const s2 = clamp(view.s * f, 10, 220), k = s2 / view.s; view.ox = (view.ox + W / 2 - x) * k - W / 2 + x; view.oy = (view.oy + H / 2 - y) * k - H / 2 + y; view.s = s2; request(); }
+  let dirtyT = 0; function L_dirty() { clearTimeout(dirtyT); dirtyT = setTimeout(() => { R = solveHouse(); request(); }, 40); }
+  function onHover(x, y) {
+    if (tool !== 'select') { snapT = tool === 'pipe' ? snapAt(x, y) : null; mouse3 = planePoint(x, y); request(); return; }
+    const h = hitAt(x, y); const nid = h ? h.id : null;
+    if ((hover && hover.id) !== nid) { hover = h ? { id: nid } : null; cv.style.cursor = h ? (h.kind === 'comp' || h.kind === 'node' ? 'move' : 'pointer') : 'grab'; request(); }
+  }
+  function tap(x, y) {
+    if (tool === 'pipe') { pipeClick(x, y); return; }
+    if (tool.startsWith('place:')) { place(tool.slice(6), planePoint(x, y)); return; }
+    const h = hitAt(x, y);
+    if (h && h.kind === 'handle') { openMenu(h.h, x, y); return; }
+    closeMenuH();
+    if (h && h.kind === 'pipe') { const t = clamp(h._t, 0, 1); lastPipePt = { id: h.id, p: h.a.map((v, i) => h.a[i] === h.b[i] ? v : snapG(v + (h.b[i] - v) * t)) }; }
+    sel = h ? h.id : null; renderPanel(); request();
+    if (h) document.getElementById('hSelCard')?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+  function refFromSnap(sn) {
+    if (!sn) return null;
+    if (sn.ref) return sn.ref;
+    if (sn.split) { const id = splitPipe(sn.split, sn.p); return id ? { n: id } : null; }
+    return null;
+  }
+  function splitPipe(pid, p) {
+    const pp = S.pipes.find(x => x.id === pid); if (!pp) return null;
+    const id = uidH('n'); S.nodes[id] = { x: p[0], y: p[1], z: p[2] };
+    S.pipes = S.pipes.filter(x => x !== pp);
+    S.pipes.push({ id: uidH('p'), a: pp.a, b: { n: id }, size: pp.size, zfirst: pp.zfirst }, { id: uidH('p'), a: { n: id }, b: pp.b, size: pp.size, zfirst: pp.zfirst });
+    return id;
+  }
+  function pipeClick(x, y) {
+    const sn = snapAt(x, y);
+    if (!draft) {
+      snap();
+      let ref = refFromSnap(sn);
+      if (!ref) { const p = planePoint(x, y), id = uidH('n'); S.nodes[id] = { x: p[0], y: p[1], z: p[2] }; ref = { n: id }; }
+      draft = { from: ref }; changedQuiet(); updateBar(); return;
+    }
+    let ref = refFromSnap(sn);
+    if (!ref) { const p = planePoint(x, y), id = uidH('n'); S.nodes[id] = { x: p[0], y: p[1], z: p[2] }; ref = { n: id }; }
+    if (refKey(ref) === refKey(draft.from)) return;
+    S.pipes.push({ id: uidH('p'), a: draft.from, b: ref, size: S.size, zfirst: false });
+    const endsAtExisting = !!(sn && (sn.ref || sn.split));
+    draft = { from: ref };
+    changedQuiet();
+    if (endsAtExisting && sn.ref && sn.ref.c) finishPipe(); else updateBar();
+  }
+  function finishPipe() {
+    draft = null;
+    // drop dangling nodes created by a start click with no pipe
+    Object.keys(S.nodes).forEach(id => { if (!S.pipes.some(p => p.a.n === id || p.b.n === id)) delete S.nodes[id]; });
+    setTool('select'); changed(false);
+  }
+  function place(kind, p) {
+    snap();
+    const n = S.comps.filter(c => c.kind === kind.split(':')[0]).length + 1;
+    let c;
+    if (kind === 'tank') c = { id: uidH('t'), kind: 'tank', x: p[0], y: p[1], z: p[2], rot: 0, liters: 1000, level: 70, filling: true, name: `ถังเก็บน้ำ ${n}` };
+    else if (kind === 'pump') c = { id: uidH('u'), kind: 'pump', x: p[0], y: p[1], z: p[2], rot: 0, model: 'wtp250', name: `ปั๊มน้ำ ${n}` };
+    else if (kind === 'city') { if (S.comps.some(c2 => c2.kind === 'city')) { toast('มีจุดน้ำประปาเข้าแล้ว ลากย้ายจุดเดิมได้'); hist.pop(); setTool('select'); return; } c = { id: uidH('c'), kind: 'city', x: p[0], y: p[1], z: 0, rot: 0, pressure: 0.8, name: 'มิเตอร์ประปา' }; }
+    else { const t = kind.split(':')[1], o = OUTLETS[t]; c = { id: uidH('o'), kind: 'outlet', type: t, x: p[0], y: p[1], z: p[2] + o.h, rot: 0, open: true, name: `${o.label} ${S.comps.filter(x => x.type === t).length + 1}` }; }
+    S.comps.push(c); sel = c.id; setTool('select'); changed(false);
+    toast('วางแล้ว เลือก "ลากท่อ" แล้วแตะที่จุดต่อของชิ้นนี้เพื่อต่อน้ำ');
+  }
+  function labelBtn() { const b = document.querySelector('#hTools [data-v=labels]'); if (b) { b.textContent = { all: 'ป้าย: ทั้งหมด', outlets: 'ป้าย: เฉพาะจุดใช้น้ำ', off: 'ป้าย: ปิด' }[S.labels || 'all']; b.classList.toggle('on', S.labels === 'off'); } }
+  function setTool(t) {
+    tool = t; closeMenuH(); if (t !== 'pipe') draft = null; snapT = null; mouse3 = null;
+    document.querySelectorAll('#hTools [data-tool]').forEach(b => b.classList.toggle('on', b.dataset.tool === t));
+    cv.style.cursor = t === 'select' ? 'grab' : 'crosshair';
+    updateBar(); request();
+  }
+  const bar = document.getElementById('hBar');
+  function updateBar() {
+    if (tool === 'select') { bar.hidden = true; return; }
+    bar.hidden = false;
+    const lv = levels(), i = lv.indexOf(S.level);
+    const msg = tool === 'pipe' ? (draft ? 'แตะจุดถัดไป ท่อจะเดินตามแนวแกนให้เอง แตะจุดต่อของอุปกรณ์เพื่อจบ' : 'แตะจุดเริ่ม: จุดต่อของอุปกรณ์ จุดบนท่อเดิม หรือพื้นชั้นที่เลือก') : 'แตะบนพื้นชั้นที่เลือกเพื่อวาง';
+    bar.innerHTML = `<span>${msg}</span><span class="lvl">พื้นทำงาน: <b>${levelName(S.level, i, lv)}</b></span><button data-bar="up">ขึ้นชั้น ↑</button><button data-bar="down">ลงชั้น ↓</button>${tool === 'pipe' ? '<button data-bar="done" class="primary">เสร็จ</button>' : ''}<button data-bar="cancel">ยกเลิก</button>`;
+  }
+  bar.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return; const a = b.dataset.bar, lv = levels(), i = lv.indexOf(S.level);
+    if (a === 'up' && i < lv.length - 1) S.level = lv[i + 1];
+    if (a === 'down' && i > 0) S.level = lv[i - 1];
+    if (a === 'done') { finishPipe(); return; }
+    if (a === 'cancel') { if (draft) finishPipe(); else setTool('select'); return; }
+    updateBar(); renderPanel(); request();
+  });
+  document.getElementById('hTools').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.tool) { setTool(tool === b.dataset.tool && b.dataset.tool !== 'select' ? 'select' : b.dataset.tool); return; }
+    if (b.dataset.v === 'rotL') { view.rot = (view.rot + 3) & 3; fit(); }
+    if (b.dataset.v === 'rotR') { view.rot = (view.rot + 1) & 3; fit(); }
+    if (b.dataset.v === 'fit') fit();
+    if (b.dataset.v === 'labels') { const order = ['all', 'outlets', 'off']; S.labels = order[(order.indexOf(S.labels || 'all') + 1) % 3]; labelBtn(); save(); request(); return; }
+    if (b.dataset.v === 'color') { S.colorBy = S.colorBy === 'pressure' ? 'pipe' : 'pressure'; b.classList.toggle('on', S.colorBy === 'pressure'); save(); request(); }
+  });
+
+  // ---------- state ----------
+  const clean = () => JSON.stringify(S, (k, v) => k.startsWith('_') ? undefined : v);
+  function save() { try { localStorage.setItem(LS, clean()); } catch (e) { } }
+  function snap() { hist.push(clean()); if (hist.length > 80) hist.shift(); }
+  function undo() { if (draft) { finishPipe(); return; } const s = hist.pop(); if (!s) { toast('ไม่มีอะไรให้ย้อนแล้ว'); return; } S = JSON.parse(s); sel = null; changed(false); }
+  function changedQuiet() { R = solveHouse(); save(); request(); }
+  function changed() { R = solveHouse(); save(); renderPanel(); request(); }
+  function deleteSel() {
+    if (!sel) return; snap();
+    if (S.nodes[sel]) { delete S.nodes[sel]; S.pipes = S.pipes.filter(p => p.a.n !== sel && p.b.n !== sel); }
+    else if (comp(sel)) { S.comps = S.comps.filter(c => c.id !== sel); S.pipes = S.pipes.filter(p => p.a.c !== sel && p.b.c !== sel); }
+    else S.pipes = S.pipes.filter(p => p.id !== sel);
+    Object.keys(S.nodes).forEach(id => { if (!S.pipes.some(p => p.a.n === id || p.b.n === id)) delete S.nodes[id]; });
+    sel = null; changed(); toast('ลบแล้ว · กดย้อนเพื่อเอาคืน');
+  }
+
+  // ===================================================================
+  // Panel
+  // ===================================================================
+  const panel = document.getElementById('housePanel');
+  const wattLabel = w => S.unit === 'hp' ? `${fmt(w / 746, 2)} แรง` : `${fmt0(w)} วัตต์`;
+  const hf = (label, key, val, unit, opt = {}) => `<div class="fld${opt.full ? ' full' : ''}"><label for="h_${key}">${label}</label><div class="unit"><input id="h_${key}" type="number" step="${opt.step || 'any'}" inputmode="decimal" data-h="${key}" value="${val == null ? '' : esc(val)}"><span>${unit}</span></div></div>`;
+  const stText = { good: 'แรงดี', weak: 'ค่อนข้างเบา', dry: 'เบามาก', off: 'ปิดอยู่', none: 'ยังไม่ได้ต่อน้ำ' };
+  function meter(o) { const max = 4, pct = v => clamp(v / max * 100, 0, 100); return `<div class="meter" aria-hidden="true"><span class="zone weak" style="left:${pct(o.t.weak)}%;width:${pct(o.t.good) - pct(o.t.weak)}%"></span><span class="zone good" style="left:${pct(o.t.good)}%;width:${100 - pct(o.t.good)}%"></span>${o.p != null ? `<i style="left:${pct(Math.max(0, o.p))}%;background:${ST_COL[o.st]}"></i>` : ''}</div>`; }
+  function pumpCurve(sp, rp) {
+    const Wd = 300, Hd = 120, pl = 30, pb = 20, pt = 8, pr = 10, qmax = sp.Qm * 1.05, hmax = sp.H0 * 1.1;
+    const X = q => pl + q / qmax * (Wd - pl - pr), Y = h => pt + (1 - h / hmax) * (Hd - pt - pb);
+    let raw = ''; for (let i = 0; i <= 40; i++) { const q = qmax * i / 40, h = sp.H0 - sp.B * Math.pow(q / 60000, 2); if (h < 0) break; raw += (i ? 'L' : 'M') + X(q).toFixed(1) + ' ' + Y(h).toFixed(1); }
+    const band = sp.type === 'tank' ? `<rect x="${pl}" y="${Y(sp.cutOut * BAR)}" width="${Wd - pl - pr}" height="${Math.max(0, Y(sp.cutIn * BAR) - Y(sp.cutOut * BAR))}" fill="var(--warn-soft)"/><text x="${Wd - pr - 2}" y="${Y(sp.cutOut * BAR) + 10}" text-anchor="end">สวิตช์ ${fmt(sp.cutIn, 1)}–${fmt(sp.cutOut, 1)} บาร์</text>` : `<line x1="${pl}" x2="${Wd - pr}" y1="${Y(sp.target * BAR)}" y2="${Y(sp.target * BAR)}" stroke="var(--water)" stroke-dasharray="4 3"/><text x="${Wd - pr - 2}" y="${Y(sp.target * BAR) - 4}" text-anchor="end">คุมไว้ ${fmt(sp.target, 1)} บาร์</text>`;
+    const op = rp && rp.Q > 0.05 && rp.gain != null ? `<circle cx="${X(rp.Q)}" cy="${Y(Math.max(0, rp.gain))}" r="5" fill="var(--water)" stroke="var(--panel)" stroke-width="2"/>` : '';
+    const ref = `<circle cx="${X(sp.Qr)}" cy="${Y(sp.Hr)}" r="3" fill="var(--ink)"/><text x="${X(sp.Qr) + (X(sp.Qr) > 200 ? -5 : 5)}" y="${Y(sp.Hr) + 12}" text-anchor="${X(sp.Qr) > 200 ? 'end' : 'start'}">${fmt(sp.Qr, 0)} ล./นาที @ ${sp.Hr} ม.</text>`;
+    return `<svg class="curve" viewBox="0 0 ${Wd} ${Hd}" role="img" aria-label="กราฟปั๊ม ความสูงส่งเทียบอัตราไหล">${band}
+      ${[0, 0.5, 1].map(f => `<line x1="${pl}" x2="${Wd - pr}" y1="${Y(sp.H0 * f)}" y2="${Y(sp.H0 * f)}" stroke="var(--line)"/><text x="${pl - 4}" y="${Y(sp.H0 * f) + 3}" text-anchor="end">${fmt0(sp.H0 * f)}</text>`).join('')}
+      ${[0, 0.5, 1].map(f => `<text x="${X(sp.Qm * f)}" y="${Hd - 5}" text-anchor="middle">${fmt0(sp.Qm * f)}</text>`).join('')}
+      <path d="${raw}" fill="none" stroke="var(--ink)" stroke-width="2"/>${ref}${op}
+      <text x="${pl}" y="${pt + 6}" style="fill:var(--muted)">ม. ส่งสูง</text><text x="${Wd - pr}" y="${Hd - pb - 4}" text-anchor="end">ล./นาที</text></svg>`;
+  }
+  function selEditor() {
+    if (!sel) return `<p class="note">แตะชิ้นใดก็ได้ในภาพเพื่อแก้ ลากอุปกรณ์หรือข้อต่อเพื่อย้าย ท่อจะเดินตามไปเอง ปุ่ม "ป้าย" ในแถบซ้ายใช้ซ่อนตัวหนังสือที่บังท่อ</p>`;
+    const c = comp(sel), node = S.nodes[sel], pipe = S.pipes.find(p => p.id === sel);
+    let body = '', title = '';
+    if (c && c.kind === 'city') { title = 'น้ำประปาเข้า'; body = `<div class="grid2">${hf('แรงดันที่มิเตอร์', 'c.pressure', c.pressure, 'บาร์')}</div><p class="note">ประปาบ้านในไทยมักอยู่ราว 0.5–1.5 บาร์ ขึ้นกับพื้นที่และเวลา</p>`; }
+    if (c && c.kind === 'tank') {
+      const t = R && R.tanks.find(x => x.c === c);
+      title = 'ถังเก็บน้ำ';
+      body = `<div class="grid2"><div class="fld full"><label for="h_tname">ชื่อ</label><input id="h_tname" type="text" data-h="c.name" value="${esc(c.name)}"></div>
+        <div class="fld"><label for="h_lit">ขนาดถัง</label><select id="h_lit" data-h="c.liters">${Object.keys(TANK_SIZES).map(k => `<option value="${k}"${+k === +c.liters ? ' selected' : ''}>${fmt0(+k)} ลิตร</option>`).join('')}</select></div>
+        ${hf('วางสูงจากพื้นดิน', 'c.z', c.z, 'ม.')}${hf('น้ำในถังตอนนี้', 'c.level', c.level, '%')}</div>
+        <label class="toggle bordered"><span class="grow">ลูกลอยเปิด เติมน้ำเข้าถัง</span><span class="switch"><input type="checkbox" data-hb="c.filling" ${c.filling ? 'checked' : ''}><span></span></span></label>
+        ${t ? `<div class="stats"><div class="stat"><b>${fmt(t.fill, 1)}</b><span>ล./นาที เติมเข้า</span></div><div class="stat"><b>${fmt(t.draw, 1)}</b><span>ล./นาที ใช้ออก</span></div><div class="stat"><b>${t.minutes == null ? '–' : fmt0(t.minutes)}</b><span>นาที ${t.net < 0 ? 'จนถังหมด' : 'จนถังเต็ม'}</span></div></div>` : ''}
+        <p class="note">ช่องดูดน้ำออกอยู่ล่าง (สีเขียว) ช่องน้ำเข้าอยู่บน ถ้าวางถังบนหลังคาหรือบนขาตั้ง น้ำจะไหลลงเองด้วยแรงโน้มถ่วง</p>`;
+    }
+    if (c && c.kind === 'pump') {
+      const sp = pumpSpec(c), rp = R && R.pumps.find(x => x.c === c);
+      title = 'ปั๊มน้ำ';
+      const groups = Object.keys(TYPES).map(t => `<optgroup label="${TYPES[t].label}">${CATALOG.filter(m => m.type === t).map(m => `<option value="${m.id}"${m.id === c.model ? ' selected' : ''}>${m.brand} ${m.model} · ${m.w} วัตต์</option>`).join('')}</optgroup>`).join('');
+      body = `<div class="grid2"><div class="fld full"><label for="h_pname">ชื่อ</label><input id="h_pname" type="text" data-h="c.name" value="${esc(c.name)}"></div>
+        <div class="fld full"><label for="h_model">รุ่นปั๊ม</label><select id="h_model" data-h="c.model">${groups}<option value="custom"${c.model === 'custom' ? ' selected' : ''}>กำหนดเองจากป้ายปั๊ม</option></select></div></div>
+        <div class="pumpSpec"><span class="pill ${sp.type === 'tank' ? 'warn' : 'ok'}">${TYPES[sp.type].label}</span><span>${TYPES[sp.type].sub}</span></div>
+        ${c.model === 'custom' ? `<div class="grid2"><div class="fld"><label for="h_ctype">ชนิด</label><select id="h_ctype" data-h="c.ctype">${Object.entries(TYPES).map(([k, v]) => `<option value="${k}"${(c.ctype || 'tank') === k ? ' selected' : ''}>${v.label}</option>`).join('')}</select></div>${hf('กำลังมอเตอร์', 'c.cw', c.cw || 250, 'วัตต์')}${hf('ส่งสูงสุด (ดูด+ส่ง)', 'c.cH0', c.cH0 || 25, 'ม.')}${hf('ปริมาณน้ำ', 'c.cQr', c.cQr || 40, 'ล./นาที')}${hf('ที่ความสูง', 'c.cHr', c.cHr || 12, 'ม.')}${(c.ctype || 'tank') !== 'inverter' ? hf('สวิตช์ต่อ', 'c.ccutIn', c.ccutIn || 1.6, 'บาร์') + hf('สวิตช์ตัด', 'c.ccutOut', c.ccutOut || 2.2, 'บาร์') : ''}</div>` : ''}
+        ${sp.type === 'inverter' ? `<div class="fld"><label for="h_set">ตั้งแรงดัน: <b class="num">${fmt(sp.set, 1)} บาร์</b></label><input id="h_set" type="range" min="1" max="${fmt(Math.floor(sp.H0 / BAR * 0.9 * 10) / 10, 1)}" step="0.1" value="${sp.set}" data-h="c.set"></div>` : ''}
+        ${pumpCurve(sp, rp)}
+        <div class="tbl"><table><tr><td>กำลังมอเตอร์</td><td class="n">${fmt0(sp.w)} วัตต์ (${fmt(sp.w / 746, 2)} แรงม้า)</td></tr><tr><td>ส่งสูงสุด (ดูด + ส่ง)</td><td class="n">${fmt(sp.H0, 0)} ม.</td></tr><tr><td>ปริมาณน้ำ</td><td class="n">${fmt(sp.Qr, 1)} ล./นาที ที่ ${sp.Hr} ม.</td></tr>${sp.type !== 'inverter' ? `<tr><td>สวิตช์แรงดัน ต่อ/ตัด</td><td class="n">${fmt(sp.cutIn, 1)} / ${fmt(sp.cutOut, 1)} บาร์${sp.swEst ? ' (ประมาณ)' : ''}</td></tr>` : ''}${sp.pipe ? `<tr><td>ขนาดท่อดูด/ส่ง</td><td class="n">${sp.pipe}</td></tr>` : ''}</table></div>
+        ${rp ? `<div class="stats"><div class="stat"><b>${fmt(rp.pOut, 2)}</b><span>บาร์ ขาออก</span></div><div class="stat"><b>${fmt(rp.Q, 1)}</b><span>ล./นาที</span></div><div class="stat"><b>${fmt0(rp.watt)}</b><span>วัตต์ ใช้ไฟราว</span></div></div><p class="note">${esc(rp.note)}</p>` : ''}
+        ${sp.src ? `<p class="note">ที่มา: ${esc(SRC_NOTE[sp.src])} กราฟปั๊มประมาณจากค่าส่งสูงสุดและจุดปริมาณน้ำที่ระบุ ตรวจกับป้ายปั๊มจริงอีกครั้ง</p>` : ''}
+        <div class="btnrow"><button class="btn sm" data-hact="rot">หมุนปั๊ม 90°</button></div>`;
+    }
+    if (c && c.kind === 'outlet') {
+      const o = R && R.outs.find(x => x.c === c);
+      title = 'จุดใช้น้ำ';
+      body = `<div class="grid2"><div class="fld full"><label for="h_oname">ชื่อ</label><input id="h_oname" type="text" data-h="c.name" value="${esc(c.name)}"></div>
+        <div class="fld full"><label for="h_otype">ชนิด</label><select id="h_otype" data-h="c.type">${Object.entries(OUTLETS).map(([k, v]) => `<option value="${k}"${k === c.type ? ' selected' : ''}>${v.label} (${v.q} ล./นาที ที่ ${v.p} บาร์)</option>`).join('')}</select></div>
+        ${hf('ความสูงจากพื้นดิน', 'c.z', c.z, 'ม.')}</div>
+        <label class="toggle bordered"><span class="grow">เปิดน้ำ</span><span class="switch"><input type="checkbox" data-hb="c.open" ${c.open ? 'checked' : ''}><span></span></span></label>
+        ${o && o.p != null ? `<div class="note">แรงดันที่จุดนี้ ${fmt(o.p, 2)} บาร์ · ใช้ได้ดีตั้งแต่ ${o.t.good} บาร์</div>` : '<div class="note">ยังไม่ได้ต่อน้ำ ลากท่อมาที่จุดสีขาวของอุปกรณ์นี้</div>'}
+        <div class="btnrow"><button class="btn sm" data-hact="rot">หมุน 90°</button></div>`;
+    }
+    if (node) {
+      const info = R && R.net.F.byKey.get('n:' + sel);
+      title = info ? { elbow: 'ข้องอ', coupling: 'ข้อต่อตรง', tee: 'สามทาง', cross: 'สี่ทาง' }[info.kind] || 'จุดปลายท่อ' : 'จุดปลายท่อ';
+      body = `<div class="grid2">${hf('ความสูงจากพื้นดิน', 'n.z', node.z, 'ม.')}</div><div class="btnrow"><button class="btn sm primary" data-hact="branch">แยกท่อออกจากจุดนี้</button></div><p class="note">${info && info.n >= 2 ? `มีท่อมาต่อ ${info.n} เส้น ระบบเลือกข้อต่อให้เอง` : 'ปลายท่อเปิดอยู่ ใช้ "ลากท่อ" แตะจุดนี้เพื่อต่อไปยังอุปกรณ์'}</p>`;
+    }
+    if (pipe) {
+      const r = R && R.pipes.get(pipe.id), L = routeLen(route(pipe));
+      title = 'ท่อ';
+      body = `<div class="grid2"><div class="fld full"><label for="h_psize">ขนาดท่อ</label><select id="h_psize" data-h="p.size">${SIZES.map(k => `<option value="${k}"${k === pipe.size ? ' selected' : ''}>${PIPES[k].label}</option>`).join('')}</select></div></div>
+        <div class="stats"><div class="stat"><b>${fmt(L, 2)}</b><span>ม. ยาว</span></div>${r ? `<div class="stat"><b>${fmt(Math.abs(r.Q) * 60000, 1)}</b><span>ล./นาที</span></div><div class="stat"><b>${fmt(r.v, 2)}</b><span>ม./วินาที</span></div>` : ''}</div>
+        ${r && r.pA != null ? `<p class="note">แรงดันต้นท่อ ${fmt(r.pA, 2)} → ปลายท่อ ${fmt(r.pB, 2)} บาร์ · เสียไปกับแรงเสียดทาน ${fmt(r.hf, 2)} ม. และข้อต่อ ${fmt(r.hm, 2)} ม.</p>` : ''}
+        ${r && r.v > 2 ? '<div class="warnbox">น้ำวิ่งเร็วเกิน 2 ม./วินาที ท่ออาจมีเสียงดังและแรงดันตก ควรขยายท่อ</div>' : ''}
+        <div class="btnrow"><button class="btn sm primary" data-hact="tee">ใส่สามทางตรงจุดที่แตะ</button><button class="btn sm" data-hact="flip">สลับแนวเดินท่อ (ขึ้นก่อน/ราบก่อน)</button></div>`;
+    }
+    return `<div class="card sel" id="hSelCard"><div class="eyebrow">ชิ้นที่เลือก · ${title}</div>${body}<div class="btnrow"><button class="btn danger sm" data-hact="del">ลบ</button></div></div>`;
+  }
+  function renderPanel() {
+    if (!R) return;
+    const h = S.house, lv = levels();
+    const focus = (sel && R.outs.find(o => o.c.id === sel)) || R.outs.find(o => o.c.open && o.p != null) || null;
+    const rows = focus ? ladder(focus) : [], sum = rows.reduce((a, r) => a + r.v, 0), maxAbs = Math.max(1, ...rows.map(r => Math.abs(r.v)));
+    const B = R.bom, Fx = B.F;
+    panel.innerHTML = `
+    <div><div class="eyebrow">ต่อน้ำในบ้าน</div><h2>วางถัง ปั๊ม ท่อ และก๊อก แล้วดูแรงดันทุกจุด</h2><p>วางอุปกรณ์จากแถบซ้าย แล้วกดวงกลม <b>+</b> ที่ปลายท่อหรือจุดต่อที่ยังว่าง เลือกทิศ ↗↘↙↖↑↓ และความยาวท่อ เลี้ยวเมื่อไรจะใส่ข้องอให้ แตะท่อแล้วกด "ใส่สามทาง" เพื่อแยกทาง</p></div>
+    ${selEditor()}
+    <div class="card">
+      <h3>จุดใช้น้ำ ${R.total > 0 ? `· รวม ${fmt(R.total, 1)} ล./นาที` : ''}</h3>
+      ${R.outs.length ? `<div class="list">${R.outs.map(o => `<div class="outRow ${sel === o.c.id ? 'sel' : ''}"><button class="grow linkish" data-pick="${o.c.id}"><b>${esc(o.c.name)}</b><small>${o.p == null ? 'ยังไม่ได้ต่อน้ำ' : o.c.open ? `${fmt(o.p, 2)} บาร์ · ${fmt(o.q, 1)} ล./นาที · ${stText[o.st]}` : `ปิด · รอ ${fmt(o.p, 2)} บาร์`}</small>${meter(o)}</button><span class="switch"><input type="checkbox" aria-label="เปิด ${esc(o.c.name)}" data-open="${o.c.id}" ${o.c.open ? 'checked' : ''}><span></span></span></div>`).join('')}</div>
+      <p class="note">เปิดหลายจุดพร้อมกันเพื่อดูว่าแรงดันตกเท่าไร แถบเขียว = ใช้ได้ดี เหลือง = เบา</p>` : '<p class="note">ยังไม่มีจุดใช้น้ำ</p>'}
+    </div>
+    ${R.pumps.length ? `<div class="card"><h3>ปั๊ม</h3>${R.pumps.map(p => `<button class="linkish pumpRow" data-pick="${p.c.id}"><b>${esc(p.c.name)} · ${esc(p.sp.brand)} ${esc(p.sp.model)}</b><small>${p.connected && p.Q > 0.05 ? `${fmt(p.Q, 1)} ล./นาที · ขาออก ${fmt(p.pOut, 2)} บาร์ · ~${fmt0(p.watt)} วัตต์` : ''}</small><span class="note">${esc(p.note)}</span></button>`).join('')}</div>` : ''}
+    ${focus ? `<div class="card"><h3>ที่มาของแรงดัน · ${esc(focus.c.name)}</h3>
+      <div class="ladder">${rows.map(r => `<div class="lrow"><span class="lt">${esc(r.t)}</span><span class="lbar"><i class="${r.v >= 0 ? 'pos' : 'neg'}" style="width:${Math.abs(r.v) / maxAbs * 100}%"></i></span><span class="lv num">${r.v >= 0 ? '+' : '−'}${fmt(Math.abs(r.v), 2)}</span></div>`).join('')}
+      <div class="lrow total"><span class="lt">เหลือ ${fmt(sum, 2)} ม. ÷ 10.2</span><span></span><span class="lv num">${fmt(sum / BAR, 2)} บาร์</span></div></div>
+      <details><summary>สูตรที่ใช้</summary><div class="formula">
+        <p><b>แรงดันที่ก๊อก</b> P = (H<sub>ต้นทาง</sub> + H<sub>ปั๊ม</sub> − Σh<sub>f</sub> − Σh<sub>m</sub> − z) ÷ 10.2 บาร์ ไล่ตามทางที่น้ำไหลมามากที่สุด</p>
+        <p><b>แรงเสียดทานท่อ</b> h<sub>f</sub> = 10.67 · L · Q<sup>1.852</sup> ÷ (C<sup>1.852</sup> · D<sup>4.87</sup>) · C = 150 (PVC)</p>
+        <p><b>ข้อต่อ</b> h<sub>m</sub> = K · v² ÷ 2g · ข้องอ K ${K_ELBOW} · สามทาง K ${K_TEE} · ข้อต่อตรง K ${K_COUP}</p>
+        <p><b>ก๊อก</b> Q = K<sub>ก๊อก</sub> · √P · <b>ปั๊ม</b> ส่งสูง = H<sub>0</sub> − B·Q² และไม่เกินแรงดันที่สวิตช์หรือตัวคุมตั้งไว้</p>
+        <p>แก้สมการทั้งบ้านพร้อมกันด้วยวิธี Global Gradient (แบบเดียวกับ EPANET) ${R.iters} รอบ</p></div></details></div>` : ''}
+    <div class="card"><h3>รายการของที่ต้องซื้อ</h3><div class="tbl"><table>
+      ${Object.entries(B.len).map(([k, v]) => `<tr><td>ท่อ ${PIPES[k].label}</td><td class="n">${fmt(v, 1)} ม. (${fmt0(Math.ceil(v / 4))} เส้น ยาว 4 ม.)</td></tr>`).join('')}
+      ${[['elbow', 'ข้องอ 90°'], ['coupling', 'ข้อต่อตรง'], ['tee', 'สามทาง'], ['cross', 'สี่ทาง'], ['reducer', 'ข้อลด (ต่อท่อต่างขนาด)'], ['adapter', 'ข้อต่อเกลียว (เข้าอุปกรณ์)']].filter(([k]) => Fx[k]).map(([k, t]) => `<tr><td>${t}</td><td class="n">${Fx[k]} ตัว</td></tr>`).join('')}
+    </table></div><p class="note">นับจากแนวท่อในแบบ ยังไม่รวมวาล์ว กาว เทปพันเกลียว และตัวยึดท่อ ควรเผื่อท่อเพิ่ม 10%</p></div>
+    <div class="card"><h3>ตัวบ้าน</h3><div class="grid2">${hf('กว้าง', 'h.w', h.w, 'ม.')}${hf('ลึก', 'h.d', h.d, 'ม.')}${hf('จำนวนชั้น', 'h.floors', h.floors, 'ชั้น', { step: 1 })}${hf('สูงต่อชั้น', 'h.fh', h.fh, 'ม.')}</div>
+      <div class="fld"><label>พื้นทำงาน (วางของและท่อที่ระดับนี้)</label><div class="segc">${lv.map((z, i) => `<button data-level="${z}" class="${S.level === z ? 'on' : ''}">${levelName(z, i, lv)}</button>`).join('')}</div></div>
+      <div class="fld"><label for="h_defsize">ขนาดท่อเมื่อลากท่อใหม่</label><select id="h_defsize" data-h="size">${SIZES.map(k => `<option value="${k}"${k === S.size ? ' selected' : ''}>${PIPES[k].label}</option>`).join('')}</select></div>
+      <div class="fld"><label>หน่วยกำลังปั๊ม</label><div class="segc"><button data-unit="w" class="${S.unit !== 'hp' ? 'on' : ''}">วัตต์</button><button data-unit="hp" class="${S.unit === 'hp' ? 'on' : ''}">แรงม้า</button></div></div>
+    </div>
+    <div class="btnrow"><button class="btn" data-hact="reset">กลับเป็นบ้านตัวอย่าง</button><button class="btn" data-hact="clear">ล้างทั้งหมด</button></div>`;
+  }
+  panel.addEventListener('change', e => {
+    const t = e.target;
+    if (t.dataset.open) { const c = comp(t.dataset.open); if (c) { snap(); c.open = t.checked; changed(); } return; }
+    if (t.dataset.hb) { const c = comp(sel); if (!c) return; snap(); c[t.dataset.hb.slice(2)] = t.checked; changed(); return; }
+    const k = t.dataset.h; if (!k) return;
+    snap();
+    let v = t.value; const isNum = t.type === 'number' || t.type === 'range' || k === 'c.liters';
+    if (isNum) { v = parseFloat(v); if (!isFinite(v)) { hist.pop(); toast('ใส่เป็นตัวเลข'); renderPanel(); return; } }
+    if (k === 'size') S.size = v;
+    else if (k.startsWith('h.')) { const kk = k.slice(2); S.house[kk] = kk === 'floors' ? clamp(Math.round(v), 1, 5) : clamp(v, 1, 60); if (!levels().includes(S.level)) S.level = 0; }
+    else if (k.startsWith('c.')) { const c = comp(sel); if (!c) return; const kk = k.slice(2); c[kk] = kk === 'z' ? Math.max(0, v) : v; if (kk === 'model' && c.model !== 'custom') delete c.set; }
+    else if (k === 'n.z') { const n = S.nodes[sel]; if (n) n.z = Math.max(0, v); }
+    else if (k === 'p.size') { const p = S.pipes.find(x => x.id === sel); if (p) p.size = v; }
+    changed();
+  });
+  panel.addEventListener('input', e => { if (e.target.type === 'range') { const b = e.target.closest('.fld').querySelector('b'); if (b) b.textContent = `${fmt(+e.target.value, 1)} บาร์`; } });
+  panel.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.pick) { sel = b.dataset.pick; renderPanel(); request(); return; }
+    if (b.dataset.level != null) { S.level = +b.dataset.level; save(); renderPanel(); updateBar(); request(); return; }
+    if (b.dataset.unit) { S.unit = b.dataset.unit; save(); renderPanel(); request(); return; }
+    const a = b.dataset.hact;
+    if (a === 'del') deleteSel();
+    if (a === 'rot') { const c = comp(sel); if (c) { snap(); c.rot = ((c.rot || 0) + 1) & 3; changed(); } }
+    if (a === 'tee') { const pp = S.pipes.find(x => x.id === sel); if (!pp) return; let pt = lastPipePt && lastPipePt.id === sel ? lastPipePt.p : null; if (!pt) { const r = route(pp); const a0 = r[0], b0 = r[1]; pt = a0.map((v, i) => snapG((v + b0[i]) / 2)); } teeOnPipe(sel, pt); return; }
+    if (a === 'branch') { const n = S.nodes[sel]; if (!n) return; const used = ((R.net.F.byKey.get('n:' + sel) || { dirs: [] }).dirs || []).map(dkey); const cand = ['+y', '-y', '+x', '-x', '+z', '-z'].find(d => !used.includes(d)); const h = { ref: { n: sel }, p: [n.x, n.y, n.z], d: cand, used, kind: used.length >= 2 ? 'tee' : '' }; const q = handleAt(h); menu = null; openMenu(h, q[0], q[1]); return; }
+    if (a === 'flip') { const p = S.pipes.find(x => x.id === sel); if (p) { snap(); p.zfirst = !p.zfirst; changed(); } }
+    if (a === 'reset') { snap(); S = sample(); sel = null; changed(); fit(); toast('กลับเป็นบ้านตัวอย่างแล้ว · กดย้อนเพื่อเอาคืน'); }
+    if (a === 'clear') { snap(); S.comps = []; S.pipes = []; S.nodes = {}; sel = null; changed(); toast('ล้างแล้ว เริ่มจากวาง "ประปาเข้า" ด้วยแถบเครื่องมือซ้าย'); }
+  });
+  function resize() { const r = stage.getBoundingClientRect(); W = Math.max(1, r.width); H = Math.max(1, r.height); dpr = Math.min(2, window.devicePixelRatio || 1); cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); request(); }
+  new ResizeObserver(() => { const first = W <= 1; resize(); if (first && active) fit(); }).observe(stage);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) request(); });
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', request);
+
+  try { const s = localStorage.getItem(LS); if (s) S = JSON.parse(s); } catch (e) { }
+  if (!S || !S.comps || !S.house) S = sample();
+  return {
+    show() { active = true; resize(); R = solveHouse(); renderPanel(); labelBtn(); document.querySelector('#hTools [data-v=color]').classList.toggle('on', S.colorBy === 'pressure'); setTool('select'); fit(); },
+    hide() { active = false; closeMenuH(); },
+    undo, deleteSel, closeMenu() { if (menu) { closeMenuH(); return; } if (tool !== 'select') { if (draft) finishPipe(); else setTool('select'); } else { sel = null; renderPanel(); request(); } },
+    get active() { return active; }, get S() { return S; }, get RES() { return R; },
+    solveHouse, Pj, ports, route, ladder, CATALOG, pumpSpec, setTool,
+  };
+})();
+
+</script>
+<script>
+/* mode switch: lab (formula sandbox) · house plumbing · farm plan */
+window.ISO = null;
 (function () {
   const sw = document.getElementById('modeSw');
+  const views = { lab: ['labView', SIM], house: ['houseView', HOUSE], farm: ['farmView', null] };
   function setMode(m) {
-    const simple = m === 'simple';
-    document.body.classList.toggle('mode-simple', simple);
-    document.getElementById('farmView').hidden = simple;
-    document.getElementById('simpleView').hidden = !simple;
+    if (!views[m]) m = 'farm';
+    document.body.classList.toggle('mode-simple', m !== 'farm');
+    Object.entries(views).forEach(([k, [id, mod]]) => { document.getElementById(id).hidden = k !== m; if (k !== m && mod) mod.hide(); });
     sw.querySelectorAll('button').forEach(b => { b.classList.toggle('on', b.dataset.mode === m); b.setAttribute('aria-selected', b.dataset.mode === m); });
-    if (simple) SIM.show(); else { SIM.hide(); Map2.resize(); }
+    window.ISO = views[m][1];
+    if (window.ISO) window.ISO.show(); else Map2.resize();
     try { localStorage.setItem('phangnamrai.mode', m); } catch (e) { }
   }
   sw.addEventListener('click', e => { const b = e.target.closest('button'); if (b) setMode(b.dataset.mode); });
   let m = 'farm'; try { m = localStorage.getItem('phangnamrai.mode') || 'farm'; } catch (e) { }
+  if (m === 'simple') m = 'house';
   setMode(m);
 })();
 </script>
-
-
-</body></html>
+</body>
+</html>
