@@ -1,5 +1,5 @@
 {
- "version": "d1-9-0",
+ "version": "d1-9-1",
  "generated": "2026-10-04",
  "principle": "Overlay only: an English-Thai term layer over the Legal English sources. conceptRef points to an existing Atlas concept id and is present only when confirmed; the Dictionary never stores definitions, provisions, subject tags or relations of its own.",
  "entries": [
@@ -599,6 +599,10 @@
     {
      "file": "LA270 Dr Korrasut's Handout.pdf",
      "kind": "handout"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -1917,6 +1921,10 @@
     {
      "file": "legaleng.html ครั้งที่ 4",
      "kind": "lecture-page"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -1931,6 +1939,10 @@
     {
      "file": "legaleng.html ครั้งที่ 4",
      "kind": "lecture-page"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -1944,6 +1956,10 @@
    "sources": [
     {
      "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 9",
      "kind": "lecture-page"
     }
    ]
@@ -2462,6 +2478,10 @@
    "sources": [
     {
      "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 9",
      "kind": "lecture-page"
     }
    ]
@@ -4312,6 +4332,10 @@
     {
      "file": "legaleng.html ครั้งที่ 7",
      "kind": "lecture-page"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -4857,6 +4881,953 @@
    "sources": [
     {
      "file": "legaleng.html ครั้งที่ 8",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/protocol",
+   "en": "Protocol",
+   "th": [
+    "พิธีสาร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/charter",
+   "en": "Charter",
+   "th": [
+    "กฎบัตร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/custom",
+   "en": "Custom",
+   "th": [
+    "จารีตประเพณีระหว่างประเทศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/ratification",
+   "en": "Ratification",
+   "th": [
+    "การให้สัตยาบัน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/accession",
+   "en": "Accession",
+   "th": [
+    "ภาคยานุวัติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/full-powers",
+   "en": "Full powers",
+   "th": [
+    "หนังสือมอบอำนาจเต็ม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/reservation",
+   "en": "Reservation",
+   "th": [
+    "ข้อสงวน",
+    "การสงวนท่าทีต่อบางข้อบทในสนธิสัญญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/state-responsibility",
+   "en": "State responsibility",
+   "th": [
+    "ความรับผิดของรัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/jurisdiction",
+   "en": "Jurisdiction",
+   "th": [
+    "เขตอำนาจ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/sovereignty",
+   "en": "Sovereignty",
+   "th": [
+    "อำนาจอธิปไตย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/sovereign-rights",
+   "en": "Sovereign rights",
+   "th": [
+    "สิทธิอธิปไตย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/exclusive-economic-zone-eez",
+   "en": "Exclusive Economic Zone (EEZ)",
+   "th": [
+    "เขตเศรษฐกิจจำเพาะ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/continental-shelf",
+   "en": "Continental shelf",
+   "th": [
+    "ไหล่ทวีป"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/use-of-force",
+   "en": "Use of force",
+   "th": [
+    "การใช้กำลัง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/armed-attack",
+   "en": "Armed attack",
+   "th": [
+    "การโจมตีด้วยอาวุธ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/dualism",
+   "en": "Dualism",
+   "th": [
+    "ทวินิยม",
+    "ระบบทวินิยม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/genocide",
+   "en": "Genocide",
+   "th": [
+    "การฆ่าล้างเผ่าพันธุ์",
+    "การทำลายล้างเผ่าพันธุ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/obligation-international-law",
+   "en": "Obligation (international law)",
+   "th": [
+    "ภาระผูกพัน",
+    "พันธะ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/right-international-law",
+   "en": "Right (international law)",
+   "th": [
+    "สิทธิ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/shall",
+   "en": "Shall",
+   "th": [
+    "ต้อง (ผูกพันบังคับ)"
+   ],
+   "kind": "usage",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/must",
+   "en": "Must",
+   "th": [
+    "ต้อง (เด็ดขาด)"
+   ],
+   "kind": "usage",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/may",
+   "en": "May",
+   "th": [
+    "อาจ (ดุลพินิจ ไม่ใช่หน้าที่)"
+   ],
+   "kind": "usage",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/should",
+   "en": "Should",
+   "th": [
+    "ควร (ข้อเสนอแนะ ไม่ผูกพัน)"
+   ],
+   "kind": "usage",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/subject-to",
+   "en": "Subject to",
+   "th": [
+    "ภายใต้บังคับแห่ง"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/without-prejudice-to",
+   "en": "Without prejudice to",
+   "th": [
+    "โดยไม่กระทบต่อ"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/notwithstanding",
+   "en": "Notwithstanding",
+   "th": [
+    "แม้จะมีบัญญัติไว้เป็นอย่างอื่น"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/hereinafter",
+   "en": "Hereinafter",
+   "th": [
+    "ต่อไปนี้เรียกว่า"
+   ],
+   "kind": "structure",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/interpret",
+   "en": "Interpret",
+   "th": [
+    "ตีความ (กฎหมาย/สนธิสัญญา)"
+   ],
+   "kind": "usage",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/construe",
+   "en": "Construe",
+   "th": [
+    "ตีความ (คำพิพากษา)"
+   ],
+   "kind": "usage",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/ambiguity",
+   "en": "Ambiguity",
+   "th": [
+    "ความคลุมเครือ",
+    "ตีความได้หลายความหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/vagueness",
+   "en": "Vagueness",
+   "th": [
+    "ความไม่ชัดเจน",
+    "ขอบเขตไม่แน่นอน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/travaux-preparatoires",
+   "en": "Travaux préparatoires",
+   "th": [
+    "ประวัติการร่าง",
+    "เอกสารเตรียมร่างสนธิสัญญา"
+   ],
+   "kind": "latin",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/preparatory-work",
+   "en": "Preparatory work",
+   "th": [
+    "ประวัติการร่าง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/object-and-purpose",
+   "en": "Object and purpose",
+   "th": [
+    "วัตถุประสงค์และความมุ่งหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/ordinary-meaning",
+   "en": "Ordinary meaning",
+   "th": [
+    "ความหมายสามัญ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/supplementary-means-of-interpretation",
+   "en": "Supplementary means of interpretation",
+   "th": [
+    "วิธีการประกอบการตีความ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/circumstances-of-the-conclusion-of-a-treaty",
+   "en": "Circumstances of the conclusion of a treaty",
+   "th": [
+    "พฤติการณ์ขณะทำสนธิสัญญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/delimitation",
+   "en": "Delimitation",
+   "th": [
+    "การกำหนดเส้นเขตแดน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/mixed-commission",
+   "en": "Mixed commission",
+   "th": [
+    "คณะกรรมการปักปันเขตแดนร่วม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/joint-statement",
+   "en": "Joint statement",
+   "th": [
+    "แถลงการณ์ร่วม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/declaration",
+   "en": "Declaration",
+   "th": [
+    "ประกาศ",
+    "ปฏิญญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/advisory-opinion",
+   "en": "Advisory opinion",
+   "th": [
+    "ความเห็นเชิงแนะนำ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/advisory-jurisdiction",
+   "en": "Advisory jurisdiction",
+   "th": [
+    "เขตอำนาจในการให้ความเห็นเชิงแนะนำ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/rejection-of-objection",
+   "en": "Rejection of objection",
+   "th": [
+    "การปฏิเสธคำคัดค้าน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/operative-clause",
+   "en": "Operative clause",
+   "th": [
+    "ส่วนสรุปคำตอบท้ายคำวินิจฉัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/most-serious-crimes",
+   "en": "Most serious crimes",
+   "th": [
+    "อาชญากรรมที่ร้ายแรงที่สุด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/crime-of-aggression",
+   "en": "Crime of aggression",
+   "th": [
+    "อาชญากรรมการรุกราน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/act-of-aggression",
+   "en": "Act of aggression",
+   "th": [
+    "การกระทำอันเป็นการรุกราน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/crimes-against-humanity",
+   "en": "Crimes against humanity",
+   "th": [
+    "อาชญากรรมต่อมวลมนุษยชาติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/war-crimes",
+   "en": "War crimes",
+   "th": [
+    "อาชญากรรมสงคราม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/territorial-integrity",
+   "en": "Territorial integrity",
+   "th": [
+    "บูรณภาพแห่งดินแดน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/political-independence",
+   "en": "Political independence",
+   "th": [
+    "เอกราชทางการเมือง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/innocent-passage",
+   "en": "Innocent passage",
+   "th": [
+    "สิทธิผ่านโดยสุจริต"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/coastal-state",
+   "en": "Coastal State",
+   "th": [
+    "รัฐชายฝั่ง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/protection-of-the-marine-environment",
+   "en": "Protection of the marine environment",
+   "th": [
+    "การคุ้มครองสิ่งแวดล้อมทางทะเล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/sustainable-development",
+   "en": "Sustainable development",
+   "th": [
+    "การพัฒนาอย่างยั่งยืน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/torture",
+   "en": "Torture",
+   "th": [
+    "การทรมาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/cruel-inhuman-or-degrading-treatment",
+   "en": "Cruel, inhuman or degrading treatment",
+   "th": [
+    "การปฏิบัติที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรี"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/public-official",
+   "en": "Public official",
+   "th": [
+    "เจ้าหน้าที่ของรัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/main-channel",
+   "en": "Main channel",
+   "th": [
+    "ช่องทางหลักของแม่น้ำ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/unga-united-nations-general-assembly",
+   "en": "UNGA (United Nations General Assembly)",
+   "th": [
+    "สมัชชาใหญ่แห่งสหประชาชาติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/ilc-international-law-commission",
+   "en": "ILC (International Law Commission)",
+   "th": [
+    "คณะกรรมาธิการกฎหมายระหว่างประเทศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/icj-international-court-of-justice",
+   "en": "ICJ (International Court of Justice)",
+   "th": [
+    "ศาลยุติธรรมระหว่างประเทศ",
+    "ศาลโลก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/icc-international-criminal-court",
+   "en": "ICC (International Criminal Court)",
+   "th": [
+    "ศาลอาญาระหว่างประเทศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/vclt-vienna-convention-on-the-law-of-treaties",
+   "en": "VCLT (Vienna Convention on the Law of Treaties)",
+   "th": [
+    "อนุสัญญากรุงเวียนนาว่าด้วยกฎหมายสนธิสัญญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/rome-statute",
+   "en": "Rome Statute",
+   "th": [
+    "ธรรมนูญกรุงโรม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/unclos-un-convention-on-the-law-of-the-sea",
+   "en": "UNCLOS (UN Convention on the Law of the Sea)",
+   "th": [
+    "อนุสัญญาสหประชาชาติว่าด้วยกฎหมายทะเล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 9",
      "kind": "lecture-page"
     }
    ]
