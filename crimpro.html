@@ -304,6 +304,74 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
   .lecture-num{width:28px;height:28px;font-size:12px}
   .lecture-body{padding:0 14px 14px 14px}
 }
+/* ---------- War Mode (crimpro-war.js) ---------- */
+#lec-war .lecture-body{padding:0 16px 16px;white-space:normal}
+.iw-top{font-size:14px;line-height:1.85;color:var(--ink-soft);margin:2px 0 14px}
+.iw-top p{margin:0 0 8px}
+.iw-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 16px}
+.iw-tab{flex:1;min-width:130px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-family:inherit;font-size:14px;font-weight:700;color:var(--ink-soft);cursor:pointer;text-align:center;transition:all .15s}
+.iw-tab:hover:not(.active){border-color:var(--gold)}
+.iw-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.iw-tab-n{display:inline-block;margin-left:4px;font-size:11px;font-weight:800;padding:1px 7px;border-radius:999px;background:rgba(0,0,0,.08)}
+.iw-tab.active .iw-tab-n{background:rgba(255,255,255,.25)}
+.iw-panel{display:none}
+.iw-panel.active{display:block}
+.iw-intro{background:var(--gold-soft);border-left:3px solid var(--gold);border-radius:8px;padding:12px 16px;margin:0 0 14px;font-size:13.5px;line-height:1.85;color:var(--ink)}
+.iw-intro p{margin:0 0 6px}.iw-intro p:last-child{margin-bottom:0}
+.iw-chips{margin-top:8px}
+.iw-chip{display:inline-block;margin:0 6px 6px 0;padding:3px 10px;border:1px solid var(--line);border-radius:999px;background:var(--card);font-size:12px;font-weight:700;color:var(--ink-soft)}
+.iw-chip-rep{border-color:var(--gold);background:var(--gold-soft);color:var(--ink)}
+.iw-chip-sec b{color:var(--accent);margin-left:2px}
+.iw-q{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;background:var(--paper)}
+.iw-q-head{display:flex;gap:10px;align-items:baseline;margin-bottom:6px;flex-wrap:wrap}
+.iw-q-no{flex:none;min-width:22px;text-align:center;font-size:12px;font-weight:800;color:var(--accent);background:var(--gold-soft);border-radius:999px;padding:1px 8px}
+.iw-badge{margin-left:auto;font-size:11.5px;font-weight:800;padding:2px 10px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+.iw-badge-ok{color:var(--ok);border-color:var(--ok);background:var(--ok-bg)}
+.iw-badge-warn,.iw-badge-wait{color:var(--ink);border-color:var(--gold);background:var(--gold-soft)}
+.iw-sec{margin:22px 0 4px;font-size:15px;font-weight:800;color:var(--ink);padding-bottom:6px;border-bottom:2px solid var(--gold)}
+.iw-bar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 6px}
+.iw-bar-btn{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-family:inherit;font-size:13px;font-weight:700;color:var(--ink-soft);cursor:pointer}
+.iw-bar-btn:hover{border-color:var(--gold);color:var(--ink)}
+.iw-q-title{font-weight:700;font-size:14.5px;color:var(--ink);line-height:1.6}
+.iw-meta{margin:8px 0 10px;border:1px dashed var(--line);border-radius:10px;padding:8px 12px;background:var(--card)}
+.iw-meta-row{display:flex;gap:10px;margin:4px 0;font-size:13px;line-height:1.75}
+.iw-meta-k{flex:0 0 130px;font-weight:700;color:var(--ink-faint)}
+.iw-meta-v{flex:1;min-width:0;color:var(--ink-soft)}
+.iw-meta-v p{margin:0 0 4px}
+.iw-q-body{font-size:14px;line-height:1.85;color:var(--ink-soft)}
+.iw-q-body p{margin:0 0 8px}
+.iw-q-body p.iw-ask{color:var(--ink);font-weight:600;margin-left:4px}
+.iw-q-body p.iw-note{font-size:12.5px;color:var(--ink-faint)}
+.iw-ul{margin:4px 0 6px 20px;padding:0}.iw-ul li{margin:2px 0}
+.iw-ans{margin-top:10px}
+.iw-ans>summary,.iw-vars>summary{cursor:pointer;font-weight:700;font-size:13.5px;color:var(--accent);padding:6px 0;list-style:none}
+.iw-ans>summary::-webkit-details-marker,.iw-vars>summary::-webkit-details-marker{display:none}
+.iw-ans-body{background:var(--ok-bg);border:1.5px solid var(--ok);border-radius:10px;padding:12px 16px;font-size:14px;line-height:1.9;color:var(--ink)}
+.iw-ans-body p{margin:0 0 8px}
+.iw-vars{margin-top:8px}
+.iw-var{border-top:1px solid var(--line);padding:12px 0 4px}
+.iw-var-head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:4px}
+.iw-pts{font-size:12px;color:var(--ink-faint);font-weight:700}
+.iw-memo{margin-top:12px;background:#EFE9FA;border:1.5px solid #7E57C2;border-radius:10px;padding:10px 14px;font-size:13.5px}
+.iw-memo-t{display:block;font-weight:800;font-size:12px;color:#5B3FA0;margin-bottom:4px}
+:root[data-theme="dark"] .iw-memo,:root[data-theme="horror"] .iw-memo{background:#2A2140;border-color:#9C7BE0}
+:root[data-theme="dark"] .iw-memo-t,:root[data-theme="horror"] .iw-memo-t{color:#C9B6F5}
+.iw-pending{margin-top:10px;padding:10px 14px;border:1.5px dashed var(--gold);border-radius:10px;background:var(--gold-soft);font-size:13.5px;color:var(--ink)}
+.iw-partial{margin:0 0 10px;padding:8px 12px;border-left:3px dashed var(--gold);background:var(--gold-soft);border-radius:6px;font-size:12.5px;color:var(--ink-soft)}
+.iw-foot{margin-top:18px;font-size:12.5px;color:var(--ink-faint);line-height:1.8}
+.iw-foot p{margin:0 0 6px}
+.iw-deep{margin-top:10px}.iw-deep>summary{cursor:pointer;font-weight:700;font-size:13.5px;color:var(--ink-soft);padding:6px 0;list-style:none}.iw-deep>summary::-webkit-details-marker{display:none}
+.iw-stats{border:1px solid var(--line);border-radius:12px;padding:6px 16px 14px;margin:0 0 16px;background:var(--card)}
+.iw-bar-row{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:13px}
+.iw-bar-l{flex:0 0 250px;color:var(--ink);font-weight:600;line-height:1.5}
+.iw-bar-track{flex:1;min-width:60px;height:10px;border-radius:999px;background:var(--line);overflow:hidden}
+.iw-bar-fill{display:block;height:100%;background:var(--accent);border-radius:999px}
+.iw-bar-n{flex:0 0 42px;text-align:right;font-weight:800;color:var(--ink)}
+.iw-bar-r{flex:0 0 74px;font-size:11.5px;color:var(--ink-faint)}
+.iw-stat-note{margin-top:12px;font-size:13px;line-height:1.85;color:var(--ink-soft)}
+.iw-stat-note p{margin:0 0 6px}
+@media(max-width:640px){.iw-meta-row{flex-direction:column;gap:0}.iw-meta-k{flex:none}.iw-q{padding:12px}.iw-bar-row{flex-wrap:wrap}.iw-bar-l{flex:1 0 100%}.iw-bar-r{flex:none}.iw-badge{margin-left:0}}
+@media print{.iw-tabs,.iw-bar,#iw-panel-all{display:none!important}.iw-panel{display:block!important}.iw-ans,.iw-vars{display:block}.iw-ans>summary,.iw-vars>summary{display:none}}
 </style>
 <meta name="description" content="ทบทวนประมวลกฎหมายวิธีพิจารณาความอาญา (วิอาญา) ครบทุกมาตรา — พนักงานสอบสวน อัยการ สำนวนฟ้อง ขันประกัน พร้อมจุดดักข้อสอบและเกมฝึกจำ สำหรับเตรียมสอบปริญญาตรี เนติฯ ตั๋วทนาย">
 <meta name="keywords" content="ประมวลกฎหมายวิธีพิจารณาความอาญา, วิอาญา, วิ.อาญา, วิธีพิจารณาความอาญา, พนักงานสอบสวน, สำนวนฟ้อง, ขันประกัน, จำเลย, ประมวลกฎหมายวิธีพิจารณาความอาญา, วิอาญา, วิ.อาญา, วิธีพิจารณาความอาญา, พนักงานสอบสวน, สำนวนฟ้อง, ขันประกัน, จำเลย, จำเลยข์">
@@ -377,6 +445,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
     <p class="section-sub">สรุปจากเอกสารเฉลยแบบฝึกหัด/ฎีกา จัดกลุ่มตามหัวข้อกฎหมาย ใช้เป็นคลังทบทวนได้ทุกเมื่อ
       ไม่ผูกกับว่าอาจารย์บรรยายถึงไหนแล้ว</p>
     <div class="lecture-list" id="lectureList"></div>
+    <div id="warHost"></div>
     </div>
 
     <div class="crim-pane" id="crim-pane-comics" role="tabpanel">
@@ -2693,7 +2762,9 @@ function renderComics(){
 renderComics();
 (function(){
   const h = (location.hash || '').replace('#', '');
+  if(/^war(-\w+)?$/.test(h)) window.__warDeep = '#' + h;
   if(h === 'comics' || h === 'codex') showCrimTab(h);
+  if(/^war(-\w+)?$/.test(h)) showCrimTab('codex');
 })();
 
 /* ================================================================
@@ -2940,6 +3011,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <link rel="stylesheet" href="legal-disclaimer.css">
+<script src="crimpro-war.js?v=1"></script>
 <script src="legal-footer.js"></script>
 <script src="lecture-print.js"></script>
 </body>
