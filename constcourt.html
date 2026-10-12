@@ -278,7 +278,12 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
 .iw-chips{margin-top:8px}
 .iw-chip{display:inline-block;margin:0 6px 6px 0;padding:3px 10px;border:1px solid var(--line);border-radius:999px;background:var(--card);font-size:12px;font-weight:700;color:var(--ink-soft)}
 .iw-q{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;background:var(--paper)}
-.iw-q-head{display:flex;gap:8px;align-items:center;margin-bottom:6px}
+.iw-q-head{display:flex;gap:10px;align-items:baseline;margin-bottom:6px}
+.iw-q-no{flex:none;min-width:22px;text-align:center;font-size:12px;font-weight:800;color:var(--accent);background:var(--gold-soft);border-radius:999px;padding:1px 8px}
+.iw-sec{margin:22px 0 4px;font-size:15px;font-weight:800;color:var(--ink);padding-bottom:6px;border-bottom:2px solid var(--gold)}
+.iw-bar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 6px}
+.iw-bar-btn{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-family:inherit;font-size:13px;font-weight:700;color:var(--ink-soft);cursor:pointer}
+.iw-bar-btn:hover{border-color:var(--gold);color:var(--ink)}
 .iw-q-id{font-size:11px;font-weight:800;color:#fff;background:var(--accent);padding:2px 8px;border-radius:6px;letter-spacing:.4px}
 .iw-q-title{font-weight:700;font-size:14.5px;color:var(--ink);line-height:1.6}
 .iw-q-src{font-size:12px;color:var(--ink-faint);margin:2px 0 8px}
@@ -306,7 +311,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
 .iw-foot p{margin:0 0 6px}
 .iw-deep{margin-top:10px}.iw-deep>summary{cursor:pointer;font-weight:700;font-size:13.5px;color:var(--ink-soft);padding:6px 0;list-style:none}.iw-deep>summary::-webkit-details-marker{display:none}
 @media(max-width:640px){.iw-meta-row{flex-direction:column;gap:0}.iw-meta-k{flex:none}.iw-q{padding:12px}}
-@media print{.iw-tabs{display:none}.iw-panel{display:block!important}.iw-ans{display:block}.iw-ans>summary{display:none}}
+@media print{.iw-tabs,.iw-bar,#iw-panel-all{display:none!important}.iw-panel{display:block!important}.iw-ans{display:block}.iw-ans>summary{display:none}}
 </style>
 <meta name="description" content="ทบทวนศาลรัฐธรรมนูญและคดีรัฐธรรมนูญ — วิธีเสนอคำร้อง วินิจฉัยกฎหมายขัดรัฐธรรมนูญ พร้อมเกมทบทวนและจุดดักข้อสอบวิชากฎหมายรัฐธรรมนูญ">
 <meta name="keywords" content="ศาลรัฐธรรมนูญ, คดีรัฐธรรมนูญ, กฎหมายรัฐธรรมนูญ, รัฐธรรมนูญแห่งราชอาณาจักรไทย, พ.ร.บ.ประกอบรัฐธรรมนูญว่าด้วยวิธีการพิจารณาคดีของศาลรัฐธรรมนูญ, ศาลรัฐธรรมนูญ, คดีรัฐธรรมนูญ, กฎหมายรัฐธรรมนูญ, รัฐธรรมนูญแห่งราชอาณาจักรไทย, พ.ร.บ.ประกอบรัฐธรรมนูญว่าด้วยวิธีการพิจารณาคดีของศาลรัฐธรรมนูญ">
@@ -363,7 +368,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
     <span class="tts-hint">เปิดบรรยายครั้งที่ต้องการก่อน แล้วกด "อ่านออกเสียง"</span>
   </div>
   <div class="lecture-list" id="lectureList"></div>
-<script src="constcourt-war.js?v=1"></script>
+<script src="constcourt-war.js?v=2"></script>
 
   <div class="reading-header">📚 อ่านเสริมประกอบการบรรยาย</div>
   <div class="lecture-list" id="readingList"></div>
@@ -1324,6 +1329,8 @@ Binary Star Scenario — การต่อสู้ระหว่างพล�
 [[S:ความลักลั่นที่อาจารย์ชี้]] ถ้าเจ้าหน้าที่พบการฝ่าฝืน[[U:วรรคสอง]] เส้นทางสมบูรณ์ คือแจ้ง ป.ป.ช. แล้ว ป.ป.ช. สอบสวน ส่งศาลรัฐธรรมนูญ ศาลดำเนินการตามวรรคสาม (ลงโทษบุคคลและให้การกระทำสิ้นผล) แต่ถ้าเจ้าหน้าที่พบการฝ่าฝืน[[U:วรรคหนึ่ง]] (เช่น แปรญัตติเพิ่มงบ) ก็แจ้ง ป.ป.ช. ได้เหมือนกัน ป.ป.ช. ส่งศาลรัฐธรรมนูญได้ แต่วรรคสามเขียนถึงเฉพาะการฝ่าฝืนวรรคสอง ไม่ได้พูดถึงวรรคหนึ่งเลย อาจารย์ลองเดาความคิดของผู้ร่างว่า น่าจะอยากลงโทษการฝ่าฝืนวรรคหนึ่งด้วยเพราะมุ่งปราบทุจริต แต่ตัวบทวรรคสามเขียนไปไม่ถึง
 
 [[S:ข้อวิพากษ์ต่อโครงสร้างโดยรวม]] การยื่นตาม ม.148 โทษเกิดกับตัวร่างกฎหมาย (ตกไป) แต่การยื่นตาม ม.144 โทษเกิดกับตัวบุคคลอย่างรุนแรง อาจารย์เห็นว่าเป็นการเอาเรื่องปราบคอร์รัปชันมา[[P:ใส่ผิดฝาผิดตัว]] เพราะ ม.144 อยู่ในหมวดรัฐสภา ยังเป็นชั้นกระบวนการนิติบัญญัติ กฎหมายยังไม่ประกาศใช้ การทุจริตยังไม่เกิด แต่รัฐธรรมนูญ 2560 ดึง ป.ป.ช. และกลไกปราบทุจริตมาจับผิดและลงโทษตั้งแต่ยังเป็นร่าง` },
+      { heading: "คลิปประกอบ — สรุปปิดเรื่อง ม.144",
+        video: '1Pl7V-lwNGk', videoCaption: 'คลิปประกอบท้ายเรื่อง ม.144' },
       { heading: "คดีศึกษา: คำวินิจฉัยศาลรัฐธรรมนูญที่ 15/2568 — คดีแรกที่ศาลวินิจฉัยว่ามีการฝ่าฝืน ม.144 วรรคสอง ข้อเท็จจริงและประเด็น",
         text:
 `อาจารย์เน้นว่า[[P:คดีนี้เป็นคดีแรกที่มีการปรับใช้ ม.144 วรรคสอง และศาลรัฐธรรมนูญวินิจฉัยว่ามีการฝ่าฝืนจริง]]
