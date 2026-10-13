@@ -364,6 +364,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
     <button type="button" class="mode-tab active" data-mode="read" role="tab" onclick="switchMode('read')" onmouseenter="playHoverSound()">📖 โหมดอ่าน</button>
     <button type="button" class="mode-tab" data-mode="waradmin" role="tab" onclick="switchMode('waradmin')" onmouseenter="playHoverSound()">⚔️ War Mode วิฯ ปกครอง</button>
     <button type="button" class="mode-tab" data-mode="warconst" role="tab" onclick="switchMode('warconst')" onmouseenter="playHoverSound()">⚔️ War Mode วิฯ รัฐธรรมนูญ</button>
+    <button type="button" class="mode-tab" data-mode="comics" role="tab" onclick="switchMode('comics')" onmouseenter="playHoverSound()">🎭 Comics</button>
   </div>
 
   <div class="mode-panel active" id="panel-read">
@@ -385,6 +386,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
   </div>
   <div class="mode-panel" id="panel-waradmin"></div>
   <div class="mode-panel" id="panel-warconst"></div>
+  <div class="mode-panel" id="panel-comics"></div>
 
   <div class="coffee-widget">
   <p>ถ้าเว็บนี้มีประโยชน์ เลี้ยงกาแฟ Cool Uncle สักแก้วได้นะ ☕</p>
@@ -1418,10 +1420,10 @@ function toggleReading(id){
 renderReadings();
 
 /* ---- โหมด: อ่าน / War Mode วิ.ปกครอง / War Mode วิ.รัฐธรรมนูญ ---- */
-const MODE_HASH = { read:'', waradmin:'#war-admin', warconst:'#war-const' };
+const MODE_HASH = { read:'', waradmin:'#war-admin', warconst:'#war-const', comics:'#comics' };
 function switchMode(mode){
   document.querySelectorAll('.mode-tab').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
-  ['read','waradmin','warconst'].forEach(m => {
+  ['read','waradmin','warconst','comics'].forEach(m => {
     const p = document.getElementById('panel-' + m);
     if (p) p.classList.toggle('active', m === mode);
   });
@@ -1435,6 +1437,7 @@ if (typeof renderWarPanels === 'function') renderWarPanels();
   const h = location.hash;
   if (h === '#war-admin') switchMode('waradmin');
   else if (h === '#war-const') switchMode('warconst');
+  else if (/^#comics(-\d+)?$/.test(h)) switchMode('comics');
 })();
 
 </script>
@@ -1712,6 +1715,8 @@ document.addEventListener('DOMContentLoaded', () => {
 <style media="print">@page{size:A4;margin:18mm 18mm 18mm 30mm}</style>
 <script src="legal-footer.js"></script>
 <script src="lecture-print.js"></script>
+<script src="comics-tab.js?v=1"></script>
+<script>ComicsTab.mount('constproc', document.getElementById('panel-comics')).then(function(n){ if(n){ var b=document.querySelector('.mode-tab[data-mode=comics]'); if(b) b.textContent='🎭 Comics ('+n+' ตอน)'; var m=location.hash.match(/^#comics-(\d+)$/); if(m){ var el=document.getElementById('comics-'+m[1]); if(el) el.scrollIntoView(); } } });</script>
 </body>
 </html>
 
