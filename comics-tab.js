@@ -3,7 +3,7 @@
      ComicsTab.install('iplaw')            หน้าที่ยังไม่มีแถบแท็บ: สร้างแถบ 📖 สรุปรายครั้ง / 🎭 Comics ให้เอง
      ComicsTab.mount('constproc', element) หน้าที่มีแถบแท็บอยู่แล้ว: วาดตอนการ์ตูนลงใน element ที่ให้ */
 (function(){
-  var V = '1';
+  var V = '2';
   var css = [
     '.ct-tabs{display:flex;gap:8px;margin:22px 0 18px;flex-wrap:wrap}',
     '.ct-tab{flex:1;min-width:150px;background:var(--card,#fff);border:1px solid var(--line,#e2ded3);border-radius:12px;padding:12px 14px;font:inherit;font-size:14px;font-weight:700;color:var(--ink-soft,#5A6072);cursor:pointer;transition:all .15s;text-align:center}',
@@ -40,14 +40,15 @@
     return dataP;
   }
 
-  function mount(code, host){
+  function mount(code, host, opts){
     addCss();
+    var px = (opts && opts.idPrefix) || 'comics-';
     host.innerHTML = '<div class="ct-empty">กำลังโหลดการ์ตูน…</div>';
     return load().then(function(d){
       var s = (d.subjects || []).filter(function(x){ return x.code === code; })[0];
       var intro = '<div class="ct-intro">🎭 <b>Cool Uncle Comics</b> — เรียนผ่านการ์ตูนทีละครั้งเรียน กดที่ตอนเพื่อเปิดอ่านทุกหน้า (แตะรูปเพื่อดูขนาดเต็ม) · <a href="comics.html#' + esc(code) + '">ดูการ์ตูนทุกวิชา →</a></div>';
       if (!s || !s.eps || !s.eps.length){ host.innerHTML = intro + '<div class="ct-empty">ยังไม่มีตอนของวิชานี้ — กำลังทำ</div>'; return 0; }
-      var m = location.hash.match(/^#comics-(\d+)$/);
+      var m = location.hash.match(new RegExp('^#' + px + '(\\d+)$'));
       var openEp = m ? +m[1] : 0;
       host.innerHTML = intro + s.eps.map(function(e){
         var pages = '';
@@ -55,7 +56,7 @@
           var u = 'comics/' + s.code + '/ep' + two(e.ep) + '/web/p' + i + '.jpg?v=' + V;
           pages += '<a href="' + u + '" target="_blank" rel="noopener"><img loading="lazy" src="' + u + '" alt="EP.' + e.ep + ' หน้า ' + i + '"></a>';
         }
-        return '<div class="ct-ep' + (openEp === e.ep ? ' open' : '') + '" id="comics-' + e.ep + '">' +
+        return '<div class="ct-ep' + (openEp === e.ep ? ' open' : '') + '" id="' + px + e.ep + '">' +
           '<button type="button" class="ct-ep-head"><span class="ct-ep-badge">EP.' + two(e.ep) + '</span>' +
           '<span class="ct-ep-title">' + esc(e.title) + (e.sub ? '<small>' + esc(e.sub) + '</small>' : '') + '</span>' +
           '<span class="ct-ep-meta">' + e.pages + ' หน้า ▾</span></button>' +

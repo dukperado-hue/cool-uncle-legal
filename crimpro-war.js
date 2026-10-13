@@ -44,6 +44,12 @@ const CW_DATA = {"nq":96,"tabs":[{"k":"p","label":"👤 ผู้เสียห
       ${(rep || rel) ? `<div class="iw-chips">${rep}${rel}</div>` : ''}${ans}</div>`;
   }
 
+  // การ์ตูนอธิบายประจำกลุ่ม (War Mode Comics): กลุ่ม -> ตอนใน comics/crimprowar
+  const COMIC_FAM = { D: { ep: 1, pages: 10, title: 'จับ-ค้น: สูตรตอบ 4 ชั้น' } };
+  function comicLink(f){
+    const c = COMIC_FAM[f.k]; if (!c) return '';
+    return `<div class="iw-comic" style="margin:8px 0 10px"><a href="#warcomic-${c.ep}" onclick="return cwOpenComic(${c.ep})" style="display:inline-block;padding:8px 14px;border-radius:999px;background:var(--accent,#c0392b);color:#fff;font-weight:700;text-decoration:none">🎭 ดูการ์ตูนอธิบายกลุ่มนี้ — ${esc(c.title)} (${c.pages} หน้า)</a></div>`;
+  }
   function famCard(f, idPrefix){
     const b = BADGE[f.status] || BADGE.pending;
     const row = r => `<div class="iw-meta-row"><span class="iw-meta-k">${r[0]}</span><div class="iw-meta-v">${rich(r[1])}</div></div>`;
@@ -61,7 +67,7 @@ const CW_DATA = {"nq":96,"tabs":[{"k":"p","label":"👤 ผู้เสียห
     const vars = `<details class="iw-vars"><summary>📝 โจทย์ที่เคยออกในกลุ่มนี้ (${f.variants.length} ข้อ)</summary>${f.variants.map(v => variant(v, idPrefix + 'v-')).join('')}</details>`;
     return `<div class="iw-q iw-fam" id="${idPrefix}${esc(f.k)}">
       <div class="iw-q-head"><span class="iw-q-no">${f.no}</span><span class="iw-q-title">${esc(f.title)}</span><span class="iw-badge iw-badge-${b[1]}">${b[0]}</span></div>
-      <div class="iw-meta">${meta}</div>${deepBox}${ans}${vars}</div>`;
+      <div class="iw-meta">${meta}</div>${comicLink(f)}${deepBox}${ans}${vars}</div>`;
   }
 
   function statsBox(){
