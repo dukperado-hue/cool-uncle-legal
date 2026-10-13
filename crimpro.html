@@ -455,6 +455,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
     <div class="crim-pane" id="crim-pane-comics" role="tabpanel">
       <h2 class="section-h2">🎭 Cool Uncle Comics — วิ.อาญาฉบับลุงคูล</h2>
       <p class="section-sub">เรียนวิ.อาญาผ่านการ์ตูนสั้น ลุงคูลกับสัตว์น้อยพาไล่ตัวบทและฎีกาทีละเรื่อง (ฉบับทดลอง — สคริปต์ร่างโดย NotebookLM แล้วตรวจกับตัวบท)</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px"><button type="button" class="ct-btn" style="appearance:none;border:0;cursor:pointer;padding:10px 18px;border-radius:999px;background:var(--accent,#c0392b);color:#fff;font:inherit;font-weight:800" onclick="ComicsTab.openReader('crimpro',1,0)">📖 เปิดโหมดอ่านการ์ตูนเต็มจอ (ตอน 1–9 · ทีละหน้า/เลื่อนอ่าน)</button></div>
       <div id="comicEpList"></div>
       <h2 class="section-h2" id="comics-war" style="margin-top:30px">⚔️ War Mode Comics — การ์ตูนติวข้อสอบ</h2>
       <p class="section-sub">ไล่ข้อสอบเก่าทีละกลุ่มโจทย์เป็นการ์ตูน: สูตรตอบ ตัวอย่างวิธีเขียน และกับดัก (ตอนตัวอย่าง — กลุ่มอื่นทยอยทำ) · เปิดจากปุ่ม 🎭 ในการ์ดกลุ่มโจทย์ของ War Mode ได้ด้วย</p>
@@ -3019,11 +3020,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <link rel="stylesheet" href="legal-disclaimer.css">
-<script src="crimpro-war.js?v=4"></script>
-<script src="comics-tab.js?v=2"></script>
+<script src="crimpro-war.js?v=5"></script>
+<script src="comics-tab.js?v=3"></script>
 <script>
 ComicsTab.mount('crimprowar', document.getElementById('warComicList'), {idPrefix:'warcomic-'}).then(function(){ if(/^#warcomic-\d+$/.test(location.hash)){ showCrimTab('comics'); var el=document.getElementById(location.hash.slice(1)); if(el){ el.classList.add('open'); el.scrollIntoView(); } } });
-window.cwOpenComic = function(ep){ showCrimTab('comics'); var el=document.getElementById('warcomic-'+ep); if(el){ el.classList.add('open'); setTimeout(function(){ el.scrollIntoView({behavior:'smooth',block:'start'}); },60); } return false; };
+window.cwOpenComic = function(ep){ ComicsTab.openReader('crimprowar', ep, 0); return false; };
 </script>
 <script src="legal-footer.js"></script>
 <script src="lecture-print.js"></script>

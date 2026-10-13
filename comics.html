@@ -5,74 +5,55 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ลุงคูลคอมิก — การ์ตูนกฎหมาย</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f6f4ef;--card:#fff;--ink:#22283A;--soft:#5A6072;--line:#e2ded3;--accent:#c0392b}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14161f;--card:#1c2030;--ink:#E9E7E1;--soft:#A9AEC2;--line:#2c3148;--accent:#ff7a6b}}
-:root[data-theme="dark"]{--bg:#14161f;--card:#1c2030;--ink:#E9E7E1;--soft:#A9AEC2;--line:#2c3148;--accent:#ff7a6b}
+:root{--bg:#f6f4ef;--card:#fff;--ink:#22283A;--ink-soft:#5A6072;--ink-faint:#8a8fa0;--line:#e2ded3;--accent:#c0392b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14161f;--card:#1c2030;--ink:#E9E7E1;--ink-soft:#A9AEC2;--ink-faint:#8a8fa5;--line:#2c3148;--accent:#ff7a6b}}
+:root[data-theme="dark"]{--bg:#14161f;--card:#1c2030;--ink:#E9E7E1;--ink-soft:#A9AEC2;--ink-faint:#8a8fa5;--line:#2c3148;--accent:#ff7a6b}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:'Sarabun',system-ui,sans-serif;line-height:1.6}
 header{padding:20px 16px 8px;max-width:980px;margin:0 auto}
-header a{color:var(--soft);font-size:14px;text-decoration:none}
+header a{color:var(--ink-soft);font-size:14px;text-decoration:none}
 h1{margin:6px 0 2px;font-size:26px}
-.sub{color:var(--soft);font-size:14px}
+.sub{color:var(--ink-soft);font-size:14px}
 main{max-width:980px;margin:0 auto;padding:8px 16px 60px}
 .tabs{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
-.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer;font:inherit;font-size:14px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 15px;cursor:pointer;font:inherit;font-size:14px;font-weight:700}
 .tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
-.ep{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden}
-.ep-head{display:flex;gap:12px;align-items:center;padding:12px 14px;cursor:pointer;width:100%;border:0;background:none;color:inherit;font:inherit;text-align:left}
-.badge{background:var(--accent);color:#fff;border-radius:8px;padding:2px 9px;font-weight:700;font-size:13px;white-space:nowrap}
-.ep-title{font-weight:700}
-.ep-title small{display:block;color:var(--soft);font-weight:400;font-size:13px}
-.ep-body{display:none;padding:0 12px 14px}
-.ep.open .ep-body{display:block}
-.pages{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
-.pages img{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);display:block}
-.empty{color:var(--soft);padding:24px 0}
 </style>
 </head>
 <body>
 <header>
   <a href="index.html">← หน้าแรก</a>
   <h1>🎭 ลุงคูลคอมิก</h1>
-  <div class="sub">การ์ตูนอธิบายกฎหมายทีละครั้งเรียน — กดที่ตอนเพื่อเปิดดูทุกหน้า (แตะรูปเพื่อดูขนาดเต็ม)</div>
+  <div class="sub">การ์ตูนอธิบายกฎหมายทีละครั้งเรียน — กด ▶ เพื่ออ่านเต็มจอ (ทีละหน้า หรือเลื่อนต่อเนื่อง) ระบบจำหน้าที่อ่านค้างไว้ให้</div>
 </header>
 <main>
   <div class="tabs" id="tabs" role="tablist"></div>
   <div id="list"></div>
 </main>
+<script src="comics-tab.js?v=3"></script>
 <script>
 (function(){
-  var V = '2';
+  var V = '3';
   var list = document.getElementById('list'), tabs = document.getElementById('tabs');
   var data = null, cur = null;
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function render(){
-    var s = data.subjects.filter(function(x){return x.code===cur})[0];
     tabs.innerHTML = data.subjects.map(function(x){
       return '<button class="tab" role="tab" aria-selected="'+(x.code===cur)+'" data-code="'+esc(x.code)+'">'+esc(x.emoji||'')+' '+esc(x.name)+' ('+x.eps.length+')</button>';
     }).join('');
-    if(!s || !s.eps.length){ list.innerHTML='<div class="empty">ยังไม่มีตอน</div>'; return; }
-    var hashEp = (location.hash.match(/^#([a-z]+)-(\d+)$/)||[]);
-    list.innerHTML = s.eps.map(function(e){
-      var pages = [];
-      for(var i=1;i<=e.pages;i++) pages.push('comics/'+s.code+'/ep'+('0'+e.ep).slice(-2)+'/web/p'+i+'.jpg?v='+V);
-      var open = (hashEp[1]===s.code && +hashEp[2]===e.ep) ? ' open' : '';
-      return '<div class="ep'+open+'" id="'+s.code+'-'+e.ep+'"><button class="ep-head" aria-expanded="false"><span class="badge">EP.'+('0'+e.ep).slice(-2)+'</span><span class="ep-title">'+esc(e.title)+'<small>'+esc(e.sub||'')+'</small></span></button><div class="ep-body"><div class="pages">'+
-        pages.map(function(p,i){return '<a href="'+p+'" target="_blank" rel="noopener"><img loading="lazy" src="'+p+'" alt="EP.'+e.ep+' หน้า '+(i+1)+'"></a>'}).join('')+'</div></div></div>';
-    }).join('');
+    ComicsTab.mount(cur, list, {idPrefix: cur + '-'});
   }
   document.addEventListener('click',function(ev){
-    var t = ev.target.closest('.tab'); if(t){ cur=t.getAttribute('data-code'); try{history.replaceState(null,'','#'+cur)}catch(e){} render(); return; }
-    var h = ev.target.closest('.ep-head'); if(h){ h.parentNode.classList.toggle('open'); }
+    var t = ev.target.closest('.tab'); if(t){ cur=t.getAttribute('data-code'); try{history.replaceState(null,'','#'+cur)}catch(e){} render(); }
   });
   fetch('comics/index.json?v='+V).then(function(r){return r.json()}).then(function(d){
     data = d;
     var m = location.hash.match(/^#([a-z]+)/);
     cur = (m && d.subjects.some(function(x){return x.code===m[1]})) ? m[1] : d.subjects[0].code;
     render();
-  }).catch(function(){ list.innerHTML='<div class="empty">โหลดรายการไม่สำเร็จ</div>'; });
+  }).catch(function(){ list.innerHTML='<div style="padding:24px 0;color:var(--ink-soft)">โหลดรายการไม่สำเร็จ</div>'; });
 })();
 </script>
 </body>

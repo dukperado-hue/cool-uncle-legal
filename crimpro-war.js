@@ -46,6 +46,11 @@ const CW_DATA = {"nq":96,"tabs":[{"k":"p","label":"👤 ผู้เสียห
 
   // การ์ตูนอธิบายประจำกลุ่ม (War Mode Comics): กลุ่ม -> ตอนใน comics/crimprowar
   const COMIC_FAM = { D: { ep: 1, pages: 10, title: 'จับ-ค้น: สูตรตอบ 4 ชั้น' } };
+  function comicBanner(){
+    const ks = Object.keys(COMIC_FAM); if (!ks.length) return '';
+    const btn = ks.map(k => { const c = COMIC_FAM[k]; return `<button type="button" onclick="cwOpenComic(${c.ep})" style="appearance:none;border:0;cursor:pointer;padding:9px 16px;border-radius:999px;background:var(--accent,#c0392b);color:#fff;font:inherit;font-weight:800">▶ อ่านเลย: ${esc(c.title)} (${c.pages} หน้า)</button>`; }).join(' ');
+    return `<div class="iw-comic-banner" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:0 0 16px;padding:12px 16px;border-radius:14px;border:1px solid var(--line);background:var(--card)"><span>🎭 <b>การ์ตูนติว War Mode</b> — เรียนสูตรตอบเป็นการ์ตูนทีละกลุ่มโจทย์ (ตอนตัวอย่าง ${ks.length} ตอน · ตอนอื่นทยอยทำ)</span><span style="display:flex;gap:8px;flex-wrap:wrap">${btn}</span></div>`;
+  }
   function comicLink(f){
     const c = COMIC_FAM[f.k]; if (!c) return '';
     return `<div class="iw-comic" style="margin:8px 0 10px"><a href="#warcomic-${c.ep}" onclick="return cwOpenComic(${c.ep})" style="display:inline-block;padding:8px 14px;border-radius:999px;background:var(--accent,#c0392b);color:#fff;font-weight:700;text-decoration:none">🎭 ดูการ์ตูนอธิบายกลุ่มนี้ — ${esc(c.title)} (${c.pages} หน้า)</a></div>`;
@@ -119,7 +124,7 @@ const CW_DATA = {"nq":96,"tabs":[{"k":"p","label":"👤 ผู้เสียห
     host.dataset.done = '1';
     host.innerHTML = `<h2 class="section-h2">⚔️ War Mode — คลังข้อสอบเก่า วิ.อาญา (22 ฉบับ · ${D.nq} ข้อ)</h2>
       <p class="section-sub">จัดเป็น ${D.fams.length} กลุ่มโจทย์ พร้อมสถิติหัวข้อและมาตราที่ออกบ่อย · เฉลยรายข้อเขียนตามหลัก ตั้งประเด็น → ตัวบท → ปรับบท → สรุป</p>
-      <div id="lec-war">${bodyHTML()}</div>`;
+      ${comicBanner()}<div id="lec-war">${bodyHTML()}</div>`;
     const m = (window.__warDeep || location.hash || '').match(/^#war(?:-(\w+))?$/);
     if (m && m[1] && TAB_ORDER.indexOf(m[1]) >= 0) iwSwitch(m[1]);
   };
