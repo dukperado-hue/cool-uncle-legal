@@ -1,4 +1,4 @@
-/* constproc-war.js — สร้างอัตโนมัติจาก build_war.py · แก้ที่ต้นทางแล้ว build ใหม่ */
+﻿/* constproc-war.js — สร้างอัตโนมัติจาก build_war.py · แก้ที่ต้นทางแล้ว build ใหม่ */
 const WAR_SCRUB = [["\u0e21\u0e2b\u0e32\u0e27\u0e34\u0e17\u0e22\u0e32\u0e25\u0e31\u0e22\u0e18\u0e23\u0e23\u0e21\u0e28\u0e32\u0e2a\u0e15\u0e23\u0e4c", "\u0e21\u0e2b\u0e32\u0e27\u0e34\u0e17\u0e22\u0e32\u0e25\u0e31\u0e22 \u0e01."], ["\u0e19\u0e32\u0e22\u0e01\\s*\u0e2d\u0e21\u0e18\\.", "\u0e19\u0e32\u0e22\u0e01\u0e2d\u0e07\u0e04\u0e4c\u0e01\u0e32\u0e23\u0e19\u0e31\u0e01\u0e28\u0e36\u0e01\u0e29\u0e32"], ["\u0e2d\u0e21\u0e18\\.", "\u0e2d\u0e07\u0e04\u0e4c\u0e01\u0e32\u0e23\u0e19\u0e31\u0e01\u0e28\u0e36\u0e01\u0e29\u0e32"], ["\u0e21\u0e18\\.", "\u0e21\u0e2b\u0e32\u0e27\u0e34\u0e17\u0e22\u0e32\u0e25\u0e31\u0e22"], ["\u0e28\u0e39\u0e19\u0e22\u0e4c\u0e23\u0e31\u0e07\u0e2a\u0e34\u0e15", "\u0e28\u0e39\u0e19\u0e22\u0e4c\u0e01\u0e32\u0e23\u0e28\u0e36\u0e01\u0e29\u0e32\u0e41\u0e2b\u0e48\u0e07\u0e2b\u0e19\u0e36\u0e48\u0e07"], ["\u0e18\u0e23\u0e23\u0e21\u0e28\u0e32\u0e2a\u0e15\u0e23\u0e4c", "\u0e21\u0e2b\u0e32\u0e27\u0e34\u0e17\u0e22\u0e32\u0e25\u0e31\u0e22"]];
 const WAR_DATA = {
  "parts": {
@@ -3190,11 +3190,53 @@ const WAR_DATA = {
       + ans + '</div>';
   }
 
+  // ---------- สถิติข้อสอบ (คำนวณจาก WAR_DATA ตอนแสดงผล) ----------
+  function paperOf(x){ return String(x).replace(/\s*ข้อ\s*\d+.*$/,'').trim(); }
+  function yearOf(p){ const m=/(\d{4})/.exec(p); return m?+m[1]:0; }
+  function flat(a){ return (a||[]).map(b=>Array.isArray(b[1])?b[1].join(' '):String(b[1]||'')).join(' '); }
+  function warStatsHtml(part){
+    const D=WAR_DATA, issues=D.issues.filter(i=>i.part===part), qs=D.questions.filter(q=>q.part===part);
+    const allP=new Set(); D.questions.forEach(q=>(q.src||[]).forEach(x=>allP.add(paperOf(x))));
+    const recentP=new Set(Array.from(allP).filter(p=>yearOf(p)>=2566));
+    const total=allP.size||1;
+    const rows=issues.map(i=>{
+      const ps=new Set(); qs.filter(q=>q.issue===i.n).forEach(q=>(q.src||[]).forEach(x=>ps.add(paperOf(x))));
+      const rc=Array.from(ps).filter(p=>recentP.has(p)).length;
+      return {i:i, n:ps.size, r:rc};
+    }).sort((a,b)=>b.n-a.n||b.r-a.r);
+    const bar=r=>'<div class="ws-row"><div class="ws-name"><b>'+r.i.n+'</b> '+esc(r.i.short)+'</div><div class="ws-bar"><span style="width:'+Math.round(r.n/total*100)+'%"></span></div><div class="ws-num">'+r.n+'/'+total+' ชุด · ล่าสุด '+r.r+'/'+recentP.size+'</div></div>';
+    const secs={};
+    qs.forEach(q=>{
+      const t=flat(q.answer); const seen={};
+      let m; const re=/(?:มาตรา|ม\.)\s*(\d+(?:\/\d+)?)/g;
+      while((m=re.exec(t))){ if(!seen[m[1]]){ seen[m[1]]=1; secs[m[1]]=(secs[m[1]]||0)+((q.src||[]).length||1); } }
+    });
+    const top=Object.keys(secs).map(k=>[k,secs[k]]).sort((a,b)=>b[1]-a[1]||(parseFloat(a[0])-parseFloat(b[0]))).slice(0,16);
+    const chips=top.length?'<div class="ws-sub">มาตราที่ถูกอ้างในธงคำตอบบ่อยที่สุด (นับถ่วงตามจำนวนครั้งที่โจทย์ข้อนั้นออกสอบ)</div><div>'+top.map(t=>'<span class="ws-chip">ม.'+esc(t[0])+' <small>×'+t[1]+'</small></span>').join('')+'</div>':'';
+    const nA=qs.length, nApp=qs.reduce((s,q)=>s+((q.src||[]).length||1),0);
+    return '<div class="ws-box"><div class="ws-title">📊 สถิติข้อสอบเก่า — ประเด็นที่ออกบ่อย</div>'
+      + '<div class="ws-note">ฐานข้อมูล '+total+' ชุด (ปี 2563–2568) · ส่วนนี้ '+nA+' โจทย์ไม่ซ้ำ (ออกสอบรวม '+nApp+' ครั้ง) · “ล่าสุด” = '+recentP.size+' ชุดปี 2566–2568</div>'
+      + rows.map(bar).join('') + chips
+      + '<div class="ws-note ws-warn">⚠️ นับมาตราจากข้อความในธงคำตอบร่าง จึงใช้ดูแนวโน้มเท่านั้น (เลขมาตราอาจมาจากกฎหมายคนละฉบับ เช่น พ.ร.บ.ศาลปกครอง · พ.ร.บ.วิธีปฏิบัติราชการ · รัฐธรรมนูญ) ไม่ใช่สถิติทางการ</div></div>';
+  }
+  (function(){
+    const st=document.createElement('style');
+    st.textContent='.ws-box{margin:14px 0;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--card)}'
+      +'.ws-title{font-weight:800;font-size:15px;margin-bottom:6px}.ws-note{font-size:12px;color:var(--ink-faint);line-height:1.6;margin:4px 0 10px}.ws-warn{margin-top:12px}'
+      +'.ws-row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;gap:10px;align-items:center;margin:6px 0;font-size:13px}'
+      +'.ws-name{min-width:0}.ws-name b{color:var(--accent)}.ws-bar{height:10px;border-radius:999px;background:rgba(128,128,128,.18);overflow:hidden}.ws-bar span{display:block;height:100%;background:var(--accent);border-radius:999px}'
+      +'.ws-num{font-size:11.5px;color:var(--ink-faint);white-space:nowrap}.ws-sub{font-weight:700;font-size:12px;color:var(--ink-faint);margin:14px 0 6px}'
+      +'.ws-chip{display:inline-block;margin:0 6px 6px 0;padding:3px 10px;border:1px solid var(--line);border-radius:999px;font-size:12.5px;font-weight:700}.ws-chip small{color:var(--ink-faint);font-weight:700}'
+      +'@media(max-width:640px){.ws-row{grid-template-columns:1fr;gap:3px}.ws-num{white-space:normal}}';
+    document.head.appendChild(st);
+  })();
+
   function panelHtml(part){
     const D=WAR_DATA, P=D.parts[part];
     const issues=D.issues.filter(i=>i.part===part);
     const qs=D.questions.filter(q=>q.part===part);
     let h=PRINT_BAR+'<div class="board-note war-intro"><div class="board-note-title">'+esc(P.title)+'</div>'+P.intro.map(x=>'<p>'+inl(x)+'</p>').join('')+'</div>';
+    h+=warStatsHtml(part);
     h+='<div class="war-map"><div class="war-map-title">แผนที่ประเด็น (กดเพื่อกระโดดไป)</div>'
       + issues.map(i=>'<a class="war-chip" href="#war-issue-'+i.n+'" onclick="warJump(event,'+i.n+')"><b>'+i.n+'</b> '+esc(i.short)+'<span class="war-chip-n">'+i.count+' โจทย์</span></a>').join('')+'</div>';
     let qn=0;
