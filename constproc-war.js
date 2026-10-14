@@ -3236,6 +3236,7 @@ const WAR_DATA = {
     const issues=D.issues.filter(i=>i.part===part);
     const qs=D.questions.filter(q=>q.part===part);
     let h=PRINT_BAR+'<div class="board-note war-intro"><div class="board-note-title">'+esc(P.title)+'</div>'+P.intro.map(x=>'<p>'+inl(x)+'</p>').join('')+'</div>';
+    h+=comicBannerHtml(part);
     h+=warStatsHtml(part);
     h+='<div class="war-map"><div class="war-map-title">แผนที่ประเด็น (กดเพื่อกระโดดไป)</div>'
       + issues.map(i=>'<a class="war-chip" href="#war-issue-'+i.n+'" onclick="warJump(event,'+i.n+')"><b>'+i.n+'</b> '+esc(i.short)+'<span class="war-chip-n">'+i.count+' โจทย์</span></a>').join('')+'</div>';
@@ -3243,7 +3244,7 @@ const WAR_DATA = {
     issues.forEach(i=>{
       const iq=qs.filter(q=>q.issue===i.n);
       h+='<details class="war-issue" id="war-issue-'+i.n+'" open><summary><span class="war-issue-n">'+i.n+'</span><span class="war-issue-name">'+esc(i.name)+'</span><span class="war-issue-freq">'+esc(i.freq)+'</span></summary>'
-        + '<div class="war-issue-body"><div class="war-keys"><div class="war-keys-title">หลักที่ต้องมี (ธงประเด็น)</div>'+i.keys.map(k=>'<div>'+inl(k)+'</div>').join('')+'</div>'
+        + '<div class="war-issue-body">'+comicLinkHtml(i.n)+'<div class="war-keys"><div class="war-keys-title">หลักที่ต้องมี (ธงประเด็น)</div>'+i.keys.map(k=>'<div>'+inl(k)+'</div>').join('')+'</div>'
         + iq.map(q=>questionHtml(q,++qn)).join('') + '</div></details>';
     });
     if(part==='A') h+=lectureBankHtml();
@@ -3346,6 +3347,24 @@ const WAR_DATA = {
     if(!inner) return '';
     return '<details class="war-issue" id="war-issue-lec" open><summary><span class="war-issue-n">★</span><span class="war-issue-name">โจทย์ที่อาจารย์เฉลยในคาบ (ครั้งที่ 5–8) — 27 ข้อ</span><span class="war-issue-freq">เฉลยตามที่บรรยายจริง</span></summary>'
       + '<div class="war-issue-body"><div class="war-keys"><div class="war-keys-title">วิธีใช้</div><div>ชุดนี้คือโจทย์ตุ๊กตาที่อาจารย์เฉลยเองในคาบ เขียนเฉลยใหม่เป็นแบบตอบข้อสอบจริง (กึ่งบรรยาย ยกมาตราให้อ่านรู้เรื่อง วินิจฉัยตามข้อเท็จจริง สรุป และย่อหน้า "อนึ่ง") โดยยึดผลวินิจฉัยตามที่บรรยายในคาบ · ใต้เฉลยแต่ละข้อมี <b style="color:#7C5CC4">กล่องสีม่วง "มาตราที่ต้องท่อง"</b> รวมมาตราที่ควรจำให้ได้ · ลำดับการตอบ: เขตอำนาจมาตรา 9 → ผู้มีสิทธิฟ้องมาตรา 42 → อุทธรณ์ก่อนฟ้อง → ระยะเวลา → ค่าธรรมเนียม · หลายข้อซ้ำหรือใกล้เคียงกับโจทย์ในข้อสอบเก่าด้านบน · ชื่อตัวละครในโจทย์ปรับใหม่แล้ว</div></div>'+inner+'</div></details>';
+  }
+
+  // การ์ตูนติวประจำประเด็น (War Mode Comics): ประเด็น -> ตอนใน comics/constprocwar (comics-tab.js ต้องโหลดอยู่ในหน้า)
+  const COMIC_ISSUE = {
+    1:{pages:10,title:'เขตอำนาจศาลปกครอง ม.9'}, 2:{pages:9,title:'ใครมีสิทธิฟ้อง? ม.42'}, 3:{pages:9,title:'ภาวะวิสัย vs อัตวิสัย'},
+    4:{pages:9,title:'ก่อนฟ้อง ต้องทำอะไร?'}, 5:{pages:9,title:'คำบังคับ ม.72 ศาลสั่งอะไรได้?'}, 6:{pages:9,title:'ระบบไต่สวน ศาลเป็นผู้คุมเกม'},
+    7:{pages:9,title:'วิธีพิจารณาคดีรัฐธรรมนูญ ภาพรวม'}, 8:{pages:9,title:'ตรวจกฎหมาย ก่อน-หลังประกาศใช้'}, 9:{pages:9,title:'ศาลรัฐธรรมนูญ องค์คณะ 9 คน'}, 10:{pages:7,title:'ศาลต้องฟังทั้งสองฝ่าย'}
+  };
+  window.cpwOpenComic=function(ep){ if(window.ComicsTab) ComicsTab.openReader('constprocwar', ep, 0); return false; };
+  function comicBannerHtml(part){
+    const ks=WAR_DATA.issues.filter(i=>i.part===part && COMIC_ISSUE[i.n]).map(i=>i.n);
+    if(!ks.length) return '';
+    const btn=ks.map(n=>'<button type="button" onclick="cpwOpenComic('+n+')" style="appearance:none;border:0;cursor:pointer;padding:8px 14px;border-radius:999px;background:var(--accent,#2E4A7A);color:#fff;font:inherit;font-weight:800">▶ '+n+'. '+esc(COMIC_ISSUE[n].title)+'</button>').join(' ');
+    return '<div class="war-comic-banner" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 16px;padding:12px 16px;border-radius:14px;border:1px solid var(--line);background:var(--card)"><span>🎭 <b>การ์ตูนติว War Mode</b> — เรียนสูตรตอบเป็นการ์ตูนทีละประเด็น ('+ks.length+' ตอน · ส่วนที่อาจารย์ยังไม่บรรยายทำเครื่องหมาย ⏳ รอเนื้อหา)</span><span style="display:flex;gap:8px;flex-wrap:wrap">'+btn+'</span></div>';
+  }
+  function comicLinkHtml(n){
+    const c=COMIC_ISSUE[n]; if(!c) return '';
+    return '<div class="war-comic" style="margin:4px 0 12px"><a href="#" onclick="return cpwOpenComic('+n+')" style="display:inline-block;padding:8px 14px;border-radius:999px;background:var(--accent,#2E4A7A);color:#fff;font-weight:700;text-decoration:none">🎭 ดูการ์ตูนอธิบายประเด็นนี้ — '+esc(c.title)+' ('+c.pages+' หน้า)</a></div>';
   }
 
   window.warJump=function(ev,n){
