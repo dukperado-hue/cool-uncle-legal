@@ -45,11 +45,11 @@ const CW_DATA = {"nq":96,"tabs":[{"k":"p","label":"👤 ผู้เสียห
   }
 
   // การ์ตูนอธิบายประจำกลุ่ม (War Mode Comics): กลุ่ม -> ตอนใน comics/crimprowar
-  const COMIC_FAM = { D: { ep: 1, pages: 10, title: 'จับ-ค้น: สูตรตอบ 4 ชั้น' } };
+  const COMIC_FAM = { A: { ep: 2, pages: 10, title: 'ผู้เสียหาย · จัดการแทน · โจทก์ร่วม' }, B: { ep: 3, pages: 10, title: 'ถอน · ยอมความ · ระงับสิทธิ · ฟ้องซ้ำ' }, C: { ep: 4, pages: 10, title: 'ใครสอบสวน? ท้องที่ไหน?' }, D: { ep: 1, pages: 10, title: 'จับ-ค้น: สูตรตอบ 4 ชั้น' }, E: { ep: 5, pages: 10, title: 'สอบสวนผู้ต้องหา · ทนาย · ตรวจร่างกาย · เด็ก' }, F: { ep: 6, pages: 10, title: 'ชันสูตรพลิกศพ · ไต่สวนการตาย' }, G: { ep: 7, pages: 10, title: 'อัยการสั่งไม่ฟ้องแล้วจบจริงไหม?' }, H: { ep: 8, pages: 10, title: 'ฟ้องบกพร่อง แก้ได้ไหม? (ม.164 รอเนื้อหา)' } };
   function comicBanner(){
     const ks = Object.keys(COMIC_FAM); if (!ks.length) return '';
     const btn = ks.map(k => { const c = COMIC_FAM[k]; return `<button type="button" onclick="cwOpenComic(${c.ep})" style="appearance:none;border:0;cursor:pointer;padding:9px 16px;border-radius:999px;background:var(--accent,#c0392b);color:#fff;font:inherit;font-weight:800">▶ อ่านเลย: ${esc(c.title)} (${c.pages} หน้า)</button>`; }).join(' ');
-    return `<div class="iw-comic-banner" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:0 0 16px;padding:12px 16px;border-radius:14px;border:1px solid var(--line);background:var(--card)"><span>🎭 <b>การ์ตูนติว War Mode</b> — เรียนสูตรตอบเป็นการ์ตูนทีละกลุ่มโจทย์ (ตอนตัวอย่าง ${ks.length} ตอน · ตอนอื่นทยอยทำ)</span><span style="display:flex;gap:8px;flex-wrap:wrap">${btn}</span></div>`;
+    return `<div class="iw-comic-banner" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:0 0 16px;padding:12px 16px;border-radius:14px;border:1px solid var(--line);background:var(--card)"><span>🎭 <b>การ์ตูนติว War Mode</b> — เรียนสูตรตอบเป็นการ์ตูนทีละกลุ่มโจทย์ (${ks.length} ตอน · กลุ่ม I–N ทยอยทำตามที่อาจารย์สอน)</span><span style="display:flex;gap:8px;flex-wrap:wrap">${btn}</span></div>`;
   }
   function comicLink(f){
     const c = COMIC_FAM[f.k]; if (!c) return '';
