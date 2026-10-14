@@ -25,6 +25,26 @@ const IW_DATA = {"tabs": [{"k": "cr", "label": "⚖️ ลิขสิทธิ�
   const D = IW_DATA;
   const TAB_ORDER = D.tabs.map(t => t.k);
 
+  // การ์ตูนติวประจำข้อ (War Mode Comics): รหัสข้อ -> ตอนใน comics/iplawwar (comics-tab.js ต้องโหลดอยู่ในหน้า)
+  const COMIC_EP = {
+    1:{pages:9,title:'โอนลิขสิทธิ์ไม่จดทะเบียน ทายาทแจกหนังสือ'}, 2:{pages:8,title:'ซื้อหนังสือมาแล้ว ทำอะไรได้บ้าง?'},
+    3:{pages:8,title:'รับงานฟรีแลนซ์ในเวลางาน ลิขสิทธิ์เป็นของใคร?'}, 4:{pages:7,title:'งานแปล ต้องขออนุญาตกี่ต่อ?'},
+    5:{pages:8,title:'โอนเพลงแล้ว ยังห้ามอะไรได้อีก?'}, 6:{pages:10,title:'ลิขสิทธิ์ไม่ต้องใหม่ แต่ห้ามลอก'},
+    7:{pages:9,title:'เครื่องหมายแบบไหน บ่งเฉพาะ?'}
+  };
+  const COMIC_Q = {CR1:1, CR2:2, CR3a:3, CR4:4, CR5:5, CR6:6, CR7:6, TM2a:7, TM2b:7, TM5:7};
+  window.iwOpenComic = function(ep){ if (window.ComicsTab) ComicsTab.openReader('iplawwar', ep, 0); return false; };
+  function comicBanner(){
+    const ks = Object.keys(COMIC_EP);
+    const btn = ks.map(n => `<button type="button" onclick="iwOpenComic(${n})" style="appearance:none;border:0;cursor:pointer;padding:8px 14px;border-radius:999px;background:var(--accent,#2E4A7A);color:#fff;font:inherit;font-weight:800">▶ ${n}. ${esc(COMIC_EP[n].title)}</button>`).join(' ');
+    return `<div class="iw-comic-banner" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 16px;padding:12px 16px;border-radius:14px;border:1px solid var(--line);background:var(--card)"><span>🎭 <b>การ์ตูนติว War Mode</b> — ${ks.length} ตอน (ลิขสิทธิ์ 6 · เครื่องหมายการค้า 1) · ส่วนที่อาจารย์ยังไม่บรรยาย (เครื่องหมายการค้าครั้ง 10–11 · สิทธิบัตร) ยังไม่ทำ</span><span style="display:flex;gap:8px;flex-wrap:wrap">${btn}</span></div>`;
+  }
+  function comicBtn(id){
+    const n = COMIC_Q[id]; if (!n) return '';
+    const c = COMIC_EP[n];
+    return `<div class="iw-comic" style="margin:8px 0 10px"><a href="#" onclick="return iwOpenComic(${n})" style="display:inline-block;padding:8px 14px;border-radius:999px;background:var(--accent,#2E4A7A);color:#fff;font-weight:700;text-decoration:none">🎭 ดูการ์ตูนอธิบายข้อนี้ — ${esc(c.title)} (${c.pages} หน้า)</a></div>`;
+  }
+
   function qCard(q){
     const papers = q.papers ? `<div class="iw-q-src">ออกสอบ: ${esc(q.papers)}</div>` : '';
     const facts = (q.facts || []).map(p => `<p>${esc(p)}</p>`).join('');
@@ -44,7 +64,7 @@ const IW_DATA = {"tabs": [{"k": "cr", "label": "⚖️ ลิขสิทธิ�
     }
     return `<div class="iw-q" id="iwq-${esc(q.id)}">
       <div class="iw-q-head"><span class="iw-q-id">${esc(q.id)}</span></div>
-      <div class="iw-q-title">${esc(q.title)}</div>${papers}
+      <div class="iw-q-title">${esc(q.title)}</div>${comicBtn(q.id)}${papers}
       ${meta ? `<div class="iw-meta">${meta}</div>` : ''}
       <div class="iw-q-body">${facts}${asks}</div>${deepBox}${ans}</div>`;
   }
@@ -60,6 +80,7 @@ const IW_DATA = {"tabs": [{"k": "cr", "label": "⚖️ ลิขสิทธิ�
   function bodyHTML(){
     const tabs = D.tabs.map((t, i) => `<button type="button" class="iw-tab${i === 0 ? ' active' : ''}" data-k="${t.k}" onclick="iwSwitch('${t.k}')">${esc(t.label)} <span class="iw-tab-n">${D.questions.filter(q => q.tab === t.k).length}</span></button>`).join('');
     return `<div class="iw-top">${rich(D.intro)}</div>
+      ${comicBanner()}
       <div class="iw-tabs" role="tablist">${tabs}</div>
       ${D.tabs.map(panel).join('')}
       <div class="iw-foot">${rich(D.footer)}</div>`;
