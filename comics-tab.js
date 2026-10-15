@@ -1,11 +1,11 @@
 /* comics-tab.js — แท็บ "🎭 Comics" + โหมดอ่านเต็มจอ ใช้ร่วมกันทุกหน้าวิชา (อ่านรายการจาก comics/index.json)
-   <script src="comics-tab.js?v=3"></script> แล้วเรียก
+   <script src="comics-tab.js?v=4"></script> แล้วเรียก
      ComicsTab.install('iplaw')                 หน้าที่ยังไม่มีแถบแท็บ: สร้างแถบ 📖 สรุปรายครั้ง / 🎭 Comics ให้เอง
      ComicsTab.mount('constproc', el, opts)     วาดรายการตอนลงใน el (opts.idPrefix เปลี่ยน id ตอน)
      ComicsTab.openReader('crimprowar', 1, 0)   เปิดโหมดอ่านเต็มจอที่ตอน/หน้าที่ต้องการ (หน้า 0 = หน้าแรก)
    โหมดอ่าน: ทีละหน้า (← → / คลิกซ้าย-ขวา / ปัด) หรือเลื่อนต่อเนื่อง · จำตอนและหน้าที่อ่านค้างไว้ · จบตอนแล้วไปตอนถัดไปได้ทันที */
 (function(){
-  var V = '3';
+  var V = '4';
   var css = [
     '.ct-tabs{display:flex;gap:8px;margin:22px 0 18px;flex-wrap:wrap}',
     '.ct-tab{flex:1;min-width:150px;background:var(--card,#fff);border:1px solid var(--line,#e2ded3);border-radius:12px;padding:12px 14px;font:inherit;font-size:14px;font-weight:700;color:var(--ink-soft,#5A6072);cursor:pointer;transition:all .15s;text-align:center}',
