@@ -3182,7 +3182,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 <link rel="stylesheet" href="legal-disclaimer.css">
 <script src="crimpro-war.js?v=6"></script>
-<script src="comics-tab.js?v=4"></script>
+<script src="comics-tab.js?v=5"></script>
 <script>
 ComicsTab.mount('crimprowar', document.getElementById('warComicList'), {idPrefix:'warcomic-'}).then(function(){ if(/^#warcomic-\d+$/.test(location.hash)){ showCrimTab('comics'); var el=document.getElementById(location.hash.slice(1)); if(el){ el.classList.add('open'); el.scrollIntoView(); } } });
 window.cwOpenComic = function(ep){ ComicsTab.openReader('crimprowar', ep, 0); return false; };
