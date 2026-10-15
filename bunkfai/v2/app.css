@@ -274,3 +274,22 @@ details.fold[open] summary{border-bottom:1px solid var(--line);margin-bottom:12p
   #banner,#head,#side,#bnav,.noprint,.toast{display:none!important}
   #app{display:block}#main{padding:0}body{background:#fff}
 }
+
+/* ===== v0.3: logo-to-chooser, quick actions, help card, progress, letter draft ===== */
+.homebtn{background:none;border:0;padding:4px;margin:-4px;font:inherit;color:inherit;text-align:left;cursor:pointer;display:flex;align-items:center;gap:12px;border-radius:12px;min-width:0}
+.homebtn:hover{background:var(--info-bg)}
+.homebtn:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+button.brand{width:100%}
+.rqwrap{display:flex;flex-direction:column;gap:8px}
+.rqact{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card.help{background:var(--info-bg);border-color:#c5d6f2;box-shadow:none}
+.card.help .h3{display:flex;gap:8px;align-items:center}
+a.tel{color:var(--primary);font-weight:600;text-decoration:none}
+a.tel:hover{text-decoration:underline}
+.prog{height:12px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:12px}
+.prog i{display:block;height:100%;background:var(--amber);border-radius:99px;transition:width .3s}
+.letter{border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;background:#fff;margin-top:12px;font-size:15px}
+.letter h3{text-align:center;font-size:17px;margin:0 0 6px}
+.letter .d{text-align:right;color:var(--mute);font-size:13px;margin-bottom:8px}
+.letter p{margin:6px 0;line-height:1.7}
+.letter .n{margin-top:10px;padding-top:8px;border-top:1px dashed var(--line-2);color:var(--mute);font-size:12.5px}

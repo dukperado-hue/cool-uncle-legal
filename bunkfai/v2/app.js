@@ -78,6 +78,38 @@ function amphoesOf(th) {
   return AM[p.en === 'Bangkok' ? 'Bangkok Metropolis' : p.en] || AM[p.en] || [];
 }
 function atcOf(icao) { return (CT.atc && CT.atc[icao]) || null; }
+// เบอร์ที่ทำการอำเภอ (ชุดข้อมูลจาก v1 — บางอำเภอไม่มีเบอร์ จะคืน null)
+function amphoeContact(prov, th) {
+  var a = amphoesOf(prov).filter(function (x) { return x.th === th; })[0];
+  var c = a && D.amphoeContacts && D.amphoeContacts[a.catm];
+  return c && c.has_phone ? c : null;
+}
+function telLink(s) { var m = String(s || '').match(/[0-9][0-9\-\s]{6,}/); return m ? '<a class="tel" href="tel:' + m[0].replace(/[^0-9]/g, '') + '">' + esc(s) + '</a>' : esc(s); }
+
+/* ================= ตัวจำลองวิถี (พอร์ตจาก v1 — ประมาณการอย่างง่าย ไม่ใช่ค่ารับรอง) ================= */
+var SIM = {
+  mun: { label: 'บั้งไฟหมื่น (≈ 30 กก.)', mode: 'rocket', v0: 25, mass: 30, thrust: 620, tburn: 2.4, peakM: 500 },
+  saen: { label: 'บั้งไฟแสน (≈ 120 กก.)', mode: 'rocket', v0: 30, mass: 120, thrust: 2300, tburn: 5.0, peakM: 1100 },
+  lan: { label: 'บั้งไฟล้าน (≈ 1,000 กก.)', mode: 'rocket', v0: 35, mass: 1000, thrust: 19000, tburn: 8.5, peakM: 3000 },
+  plu: { label: 'พลุ / ตะไล', mode: 'rocket', v0: 60, mass: 1, thrust: 62, tburn: 1.2, peakM: 300 },
+  khom: { label: 'โคมลอย / โคมไฟ', mode: 'khom', riseV: 3, burnMin: 45, fallV: 2, peakM: 1500 }
+};
+var SIM_DEFAULT = { bangfai: 'saen', komloy: 'khom', talai: 'plu', plu: 'plu', other: 'plu' };
+function simPeakM(k) {
+  var t = SIM[k];
+  if (t.mode === 'khom') return Math.min(t.riseV * t.burnMin * 60, t.peakM);
+  var g = 9.81, rho = 1.1, cd = 0.7, A = 0.02, dt = 0.005, v = t.v0, z = 0, tt = 0, mass = t.mass, rate = (0.65 * t.mass) / t.tburn, peak = 0;
+  while (tt < 600) {
+    var drag = 0.5 * rho * cd * A * v * v, a;
+    if (tt < t.tburn) { a = (t.thrust - drag) / mass - g; mass -= rate * dt; } else a = -drag / Math.max(mass, 0.05) - g;
+    v += a * dt; z += v * dt; tt += dt; if (z > peak) peak = z; if (v < 0 && z <= 0) break;
+  }
+  return Math.min(peak, t.peakM * 1.1);
+}
+function simDriftKm(k) { // ลม 5 ม./วิ
+  var t = SIM[k], peak = simPeakM(k), wind = 5;
+  return t.mode === 'khom' ? Math.round((peak / (t.fallV * 1000) * wind + t.burnMin * wind / 60) * 10) / 10 : peak / 15 * wind / 1000;
+}
 
 /* ================= ชนิด/สถานะ ================= */
 var STATUS = {
@@ -103,7 +135,7 @@ function mk(id, own, name, type, qty, prov, amp, lat, lon, dd, from, to, status,
 function seed() {
   var N = Date.now(), H = 36e5;
   return { seq: 8, users: [['สมชาย ใจดี (ทดสอบ)', 'ประชาชน', 'ThaID (จำลอง)'], ['สมหญิง รักษ์ถิ่น (ทดสอบ)', 'ประชาชน', 'บัญชีชั่วคราว'], ['นายอำเภอ ตัวอย่าง ก', 'นายอำเภอ', 'ชื่อผู้ใช้/รหัสผ่าน'], ['ปลัดจังหวัด ตัวอย่าง', 'ปลัดจังหวัด', 'ชื่อผู้ใช้/รหัสผ่าน'], ['เจ้าหน้าที่ ATC ตัวอย่าง', 'ATC', 'ชื่อผู้ใช้/รหัสผ่าน'], ['ผู้ดูแล ตัวอย่าง', 'ผู้ดูแลระบบ', 'ชื่อผู้ใช้/รหัสผ่าน']], requests: [
-    mk(1, 'me', 'สมชาย ใจดี (ทดสอบ)', 'bangfai', 20, 'ร้อยเอ็ด', 'เมืองร้อยเอ็ด', 16.0450, 103.6900, 6, '09:00', '12:00', 'approved', [{ t: N - 30 * H, by: 'ผู้ขอ', s: 'submitted', n: '' }, { t: N - 26 * H, by: 'นายอำเภอ', s: 'review', n: 'เริ่มพิจารณา' }, { t: N - 20 * H, by: 'นายอำเภอ', s: 'approved', n: 'ครบถ้วน อยู่นอกเขต LHZ' }], { permit: 'BF-P-2569-0001', place: 'ลานกิจกรรมทุ่งนา หมู่ 4' }),
+    mk(1, 'me', 'สมชาย ใจดี (ทดสอบ)', 'bangfai', 20, 'ร้อยเอ็ด', 'เมืองร้อยเอ็ด', 16.0450, 103.6900, 6, '09:00', '12:00', 'approved', [{ t: N - 30 * H, by: 'ผู้ขอ', s: 'submitted', n: '' }, { t: N - 26 * H, by: 'นายอำเภอ', s: 'review', n: 'เริ่มพิจารณา' }, { t: N - 20 * H, by: 'นายอำเภอ', s: 'approved', n: 'ครบถ้วน อยู่นอกเขต LHZ' }], { permit: 'BF-P-2569-0001', place: 'ลานกิจกรรมทุ่งนา หมู่ 4', ceil: '5000', contacts: [['นายสมหมาย ใจดี (ทดสอบ)', '081-234-5678'], ['นายประเสริฐ สุขี (ทดสอบ)', '089-876-5432']] }),
     mk(2, 'me', 'สมชาย ใจดี (ทดสอบ)', 'komloy', 50, 'บุรีรัมย์', 'เมืองบุรีรัมย์', 15.2000, 103.2600, 4, '18:00', '20:00', 'rejected', [{ t: N - 50 * H, by: 'ผู้ขอ', s: 'submitted', n: '' }, { t: N - 40 * H, by: 'นายอำเภอ', s: 'rejected', n: 'พื้นที่อยู่ในเขต LHZ รอบท่าอากาศยานบุรีรัมย์ กรุณาเลือกพื้นที่ใหม่' }], { place: 'ลานวัด' }),
     mk(3, 'me', 'สมชาย ใจดี (ทดสอบ)', 'talai', 100, 'ยโสธร', 'เมืองยโสธร', 15.7900, 104.1400, 12, '14:00', '16:00', 'submitted', [{ t: N - 3 * H, by: 'ผู้ขอ', s: 'submitted', n: '' }], { place: 'ลานกิจกรรม ต.ตาดทอง' }),
     mk(4, 'o', 'สมหญิง รักษ์ถิ่น (ทดสอบ)', 'bangfai', 15, 'ยโสธร', 'ป่าติ้ว', 15.8200, 104.0500, 12, '10:00', '13:00', 'review', [{ t: N - 8 * H, by: 'ผู้ขอ', s: 'submitted', n: '' }, { t: N - 5 * H, by: 'นายอำเภอ', s: 'review', n: 'เริ่มพิจารณา' }]),
@@ -161,6 +193,23 @@ BF.registerLayer({ id: 'phz', name: 'แนวขึ้น-ลง (PHZ)', source
   draw: function (map, g) { AIR.airports.forEach(function (a) { (a.phz_bands || []).forEach(function (b) { (b.rings || []).forEach(function (ring) { L.polygon(ring, { color: '#F97316', weight: 1, fillColor: b.d1 <= 3 ? '#EF4444' : '#F97316', fillOpacity: b.d1 <= 3 ? .6 : .4 }).bindTooltip(a.nameTh + ' — ' + b.nameTh).addTo(g); }); }); }); } });
 BF.registerLayer({ id: 'airports', name: 'ท่าอากาศยาน (จุด ARP)', source: AIRMETA.source || 'AIP Thailand', effective: AIRMETA.effective, status: 'reference', owner: 'กพท. (ต้องยืนยัน)', on: true,
   draw: function (map, g) { AIR.airports.forEach(function (a) { L.circleMarker([a.lat, a.lon], { radius: 4, color: '#fff', weight: 1.5, fillColor: '#13243B', fillOpacity: 1 }).bindTooltip(a.nameTh + ' (' + a.icao + ')').addTo(g); }); } });
+function dest(lat, lon, brg, km) {
+  var d = km / 6371, b = rad(brg), la = rad(lat), lo = rad(lon);
+  var la2 = Math.asin(Math.sin(la) * Math.cos(d) + Math.cos(la) * Math.sin(d) * Math.cos(b));
+  var lo2 = lo + Math.atan2(Math.sin(b) * Math.sin(d) * Math.cos(la), Math.cos(d) - Math.sin(la) * Math.sin(la2));
+  return [la2 * 180 / Math.PI, lo2 * 180 / Math.PI];
+}
+// เส้นกลางทางวิ่งต่อยาวออกไป 10 กม. ทั้งสองด้าน (ข้อมูลทิศทางทางวิ่งจาก AIP AD 2.12 ผ่าน v1)
+BF.registerLayer({ id: 'rwy', name: 'แนวเส้นกลางทางวิ่ง (ต่อออก 10 กม.)', source: 'AIP AD 2.12', effective: AIRMETA.effective, status: 'reference', owner: 'กพท. (ต้องยืนยัน)', on: false,
+  draw: function (map, g) {
+    var FP = window.FLIGHT_PATH_DATA || {};
+    AIR.airports.forEach(function (a) {
+      (FP[a.icao] || []).forEach(function (r) {
+        var p1 = dest(a.lat, a.lon, r.trueBrg, 10), p2 = dest(a.lat, a.lon, (r.trueBrg + 180) % 360, 10);
+        L.polyline([p1, p2], { color: '#7C3AED', weight: 1.5, dashArray: '2 6', opacity: .8 }).bindTooltip(a.nameTh + ' ทางวิ่ง ' + r.desig + ' (ทิศจริง ' + r.trueBrg + '°)').addTo(g);
+      });
+    });
+  } });
 
 var maps = [];
 function killMaps() { maps.forEach(function (m) { try { m.remove(); } catch (e) { } }); maps = []; }
@@ -221,11 +270,13 @@ function renderShell() {
   $('#app').classList.toggle('bare', !(logged && page !== 'login'));
   var btn = function (n, side) { return '<button data-p="' + n[0] + '"' + (n[0] === on ? ' class="on" aria-current="page"' : '') + '>' + ic(n[1], n[0] === on ? 'fill' : '') + '<span>' + n[2] + '</span>' + cntBadge(n[0]) + '</button>'; };
   $('#bnav').innerHTML = nav.map(function (n) { return btn(n); }).join('');
-  $('#side').innerHTML = logged ? '<div class="brand"><div class="logo">' + ic('rocket_launch', 'lg') + '</div><div><b>แจ้งก่อนจุด</b><small>ต้นแบบระบบรับคำขอ · v2</small></div></div><nav>' + nav.map(function (n) { return btn(n); }).join('') + '</nav><div class="foot">' + esc(rl.label) + '<br><a href="v1.html">เครื่องมือเดิม (v1)</a></div>' : '';
-  $$('#bnav button, #side nav button').forEach(function (b) { b.onclick = function () { wz = (b.dataset.p === 'home' || b.dataset.p === 'mine') ? wz : wz; go(b.dataset.p); }; });
-  $('#head').innerHTML = '<div class="logo">' + ic('rocket_launch', 'lg') + '</div><div><div class="hname">แจ้งก่อนจุด</div><div class="hsub">ต้นแบบระบบรับคำขอ (ไม่ใช่ระบบของหน่วยงานรัฐ)</div></div><div class="ttl"><div class="h2">' + esc(TITLES[page] || '') + '</div></div>' +
+  $('#side').innerHTML = logged ? '<button class="brand homebtn" data-home title="กลับหน้าเลือกผู้ใช้ (เฉพาะ sandbox)" aria-label="แจ้งก่อนจุด กลับหน้าเลือกผู้ใช้"><div class="logo">' + ic('rocket_launch', 'lg') + '</div><div><b>แจ้งก่อนจุด</b><small>กลับไปเลือกผู้ใช้</small></div></button><nav>' + nav.map(function (n) { return btn(n); }).join('') + '</nav><div class="foot">' + esc(rl.label) + '</div>' : '';
+  $$('#bnav button, #side nav button').forEach(function (b) { b.onclick = function () { go(b.dataset.p); }; });
+  $('#head').innerHTML = '<button class="homebtn" data-home title="กลับหน้าเลือกผู้ใช้ (เฉพาะ sandbox)" aria-label="แจ้งก่อนจุด กลับหน้าเลือกผู้ใช้"><div class="logo">' + ic('rocket_launch', 'lg') + '</div><div><div class="hname">แจ้งก่อนจุด</div><div class="hsub">ต้นแบบระบบรับคำขอ (ไม่ใช่ระบบของหน่วยงานรัฐ)</div></div></button><div class="ttl"><div class="h2">' + esc(TITLES[page] || '') + '</div></div>' +
     (logged ? '<div class="hwho"><span class="nm">' + esc(session.name || rl.name) + '</span><div class="avatar" aria-hidden="true">' + esc((session.name || rl.name).charAt(0)) + '</div></div>' : '');
   $('#head').style.display = page === 'login' ? 'none' : '';
+  // sandbox: แตะโลโก้ = กลับหน้าเลือกผู้ใช้ (ข้อมูลคำขอยังอยู่ ไม่ถูกล้าง)
+  $$('[data-home]').forEach(function (b) { b.onclick = function () { session = null; wz = null; saveSess(); go('login'); }; });
 }
 function render() {
   killMaps();
@@ -251,7 +302,15 @@ function reqCard(r) {
   return '<button class="rq" data-id="' + r.id + '"><div class="row between"><span class="no">เลขที่: ' + esc(r.no) + '</span>' + chip(r.status) + '</div><div class="t">' + esc(t[0]) + ' (' + r.qty + ' ชิ้น)</div>' +
     '<div class="m">' + ic('calendar_today', 'sm') + fmtDate(r.date) + ' · ' + r.from + '–' + r.to + ' น.</div><div class="m">' + ic('pin_drop', 'sm') + esc(r.place || r.amphoe) + ' อ.' + esc(r.amphoe) + ' จ.' + esc(r.province) + '</div></button>';
 }
-function bindReqCards(root, to) { $$('.rq', root).forEach(function (b) { b.onclick = function () { go(to || 'detail', b.dataset.id); }; }); }
+function bindReqCards(root, to) {
+  $$('.rq', root).forEach(function (b) { b.onclick = function () { go(to || 'detail', b.dataset.id); }; });
+  $$('[data-permit]', root).forEach(function (b) { b.onclick = function () { go('permit', b.dataset.permit); }; });
+  $$('[data-launch]', root).forEach(function (b) { b.onclick = function () { go('launch', b.dataset.launch); }; });
+}
+// การ์ดคำขอ + ปุ่มลัดเมื่ออนุมัติแล้ว (ตาม Stitch หน้าหลัก)
+function reqCardAct(r) {
+  return '<div class="rqwrap">' + reqCard(r) + (r.status === 'approved' && r.permit ? '<div class="rqact"><button class="btn ghost sm" data-permit="' + r.id + '">' + ic('description', 'sm') + 'ดูใบอนุญาต</button><button class="btn sm" data-launch="' + r.id + '">' + ic('campaign', 'sm') + 'แจ้งก่อนจุด</button></div>' : '') + '</div>';
+}
 function legendHTML() {
   return '<div class="legend"><div class="lg-item"><span class="dot" style="background:var(--zone-red)"></span><div><b>เขตห้ามรัศมี 10 กม. รอบท่าอากาศยาน (LHZ)</b><span class="small mute">ห้ามจุด/ปล่อย เว้นแต่ได้รับอนุญาต</span></div></div>' +
     '<div class="lg-item"><span class="sq" style="background:var(--zone-orange)"></span><div><b>แนวขึ้น-ลงเครื่องบิน (PHZ)</b><span class="small mute">ห้ามปล่อยวัตถุเด็ดขาด</span></div></div></div>';
@@ -288,8 +347,11 @@ function vLogin(v) {
     '<div class="card"><label class="f" for="lid" style="margin-top:0">ชื่อผู้ใช้ <span class="req">*</span></label><input id="lid" class="in" autocomplete="off" placeholder="ใช้ชื่อสมมติใน sandbox"><label class="f" for="lpw">รหัสผ่าน <span class="req">*</span></label><input id="lpw" type="password" class="in" autocomplete="off" placeholder="รหัสสมมติ"><button class="btn amber block" id="lgo" style="margin-top:20px">' + ic('login') + 'เข้าสู่ระบบ</button><p class="hint">ห้ามกรอกเลขบัตรประชาชนหรือรหัสผ่านจริงของใคร ระบบนี้ไม่ตรวจรหัสและไม่ส่งข้อมูลออกนอกเครื่อง</p></div>' +
     '<div class="card flat"><h2 class="h3">ทดลองด้วยบทบาทอื่น</h2><p class="small mute" style="margin:4px 0 12px">เฉพาะ sandbox เพื่อดูหน้าจอของแต่ละฝ่าย</p><div class="rolebtns">' +
     ['citizen', 'officer', 'atc', 'admin'].map(function (k) { return '<button class="btn ghost sm" data-r="' + k + '">' + esc(ROLES[k].label) + '</button>'; }).join('') + '</div></div>' +
+    '<div class="card help"><h2 class="h3">' + ic('support_agent', 'fill') + ' ต้องการความช่วยเหลือ หรือใช้งานไม่เป็น?</h2><p class="small" style="margin:6px 0 12px">ผู้สูงอายุหรือไม่มีสมาร์ตโฟน ให้เจ้าหน้าที่ช่วยยื่นคำขอแทนได้ ไม่ต้องใช้แอปเอง</p>' +
+    '<div class="tile" style="margin-bottom:10px"><div class="k">สายด่วนกรมการปกครอง / ที่ทำการอำเภอ</div><div class="v">' + esc((CT.hotlines && CT.hotlines.amphoe) || '1567') + '</div></div>' +
+    '<div class="tile"><div class="k">หรือติดต่อใกล้บ้าน</div><div class="v">ผู้ใหญ่บ้าน / กำนัน / เจ้าหน้าที่ อบต. ช่วยยื่นคำขอแทนได้</div></div></div>' +
     '<div class="warnbox">' + ic('gavel', 'fill') + '<div><b>การจุดโดยไม่ได้รับอนุญาตมีความผิดตามกฎหมาย</b><div class="small">โทษและเงื่อนไขขึ้นกับประกาศของแต่ละจังหวัดและกฎหมายการเดินอากาศ ดูรายละเอียดของจังหวัดคุณได้ในขั้นตอนสร้างคำขอ</div></div></div>' +
-    '<p class="tiny mute" style="text-align:center">Sandbox v0.2 · ข้อมูลห้วงอากาศอ้างอิง AIP Thailand ' + esc(AIRMETA.effective || '') + ' (ข้อมูลประกอบ ยังไม่รับรอง) · <a href="v1.html">เครื่องมือเดิม v1</a></p></div>';
+    '<p class="tiny mute" style="text-align:center">Sandbox v0.3 · ข้อมูลห้วงอากาศอ้างอิง AIP Thailand ' + esc(AIRMETA.effective || '') + ' (ข้อมูลประกอบ ยังไม่รับรอง)</p></div>';
   var enter = function (r) { session = { role: r, name: ROLES[r].name }; saveSess(); go(ROLES[r].nav[0][0]); };
   $('#thaid').onclick = function () { enter('citizen'); };
   $('#lgo').onclick = function () { enter('citizen'); };
@@ -303,7 +365,7 @@ function vHome(v) {
   v.innerHTML = '<div class="grid g2"><div class="stack lg">' +
     '<div class="card"><span class="chip wait sm">' + ic('event', 'sm') + 'ช่วงนี้ยื่นล่วงหน้าตามระเบียบจังหวัด</span><h1 class="h1" style="margin:10px 0 4px">สวัสดีครับ ' + esc(session.name.replace(' (ทดสอบ)', '')) + '</h1><p class="lead">ยื่นคำขอก่อนจุดทุกครั้ง ระบบจะตรวจเขตห้ามรอบท่าอากาศยานให้ทันที</p></div>' +
     '<button class="hero btn" id="cta" style="display:flex;text-align:left;gap:16px;width:100%;justify-content:flex-start;border-radius:16px;min-height:0;padding:20px"><span class="ic">' + ic('rocket_launch', 'lg fill') + '</span><span style="flex:1"><b style="font-size:20px;display:block">ยื่นคำขอจุดบั้งไฟ / โคมลอย</b><span class="small" style="color:#b7c7e5;font-weight:400">กรอก 4 ขั้นตอน ตรวจแนวเขตปลอดภัยอัตโนมัติ</span></span>' + ic('arrow_forward') + '</button>' +
-    '<div><div class="row between" style="margin-bottom:12px"><h2 class="h2">คำขอของฉัน</h2><button class="link" id="all">ดูทั้งหมด (' + mine.length + ')</button></div><div class="stack">' + (active.length ? active.slice(0, 3).map(reqCard).join('') : '<div class="card empty">' + ic('inbox') + '<p>ยังไม่มีคำขอที่กำลังดำเนินการ</p></div>') + '</div></div>' +
+    '<div><div class="row between" style="margin-bottom:12px"><h2 class="h2">คำขอของฉัน</h2><button class="link" id="all">ดูทั้งหมด (' + mine.length + ')</button></div><div class="stack">' + (active.length ? active.slice(0, 3).map(reqCardAct).join('') : '<div class="card empty">' + ic('inbox') + '<p>ยังไม่มีคำขอที่กำลังดำเนินการ</p></div>') + '</div></div>' +
     '<div class="safety">' + ic('info', 'fill') + '<div><b>คำแนะนำเพื่อความปลอดภัย</b><p class="small">ยื่นคำขอล่วงหน้าอย่างน้อยตามที่ประกาศจังหวัดกำหนด (ส่วนใหญ่ 7 วัน) เพื่อให้อำเภอและหน่วยที่เกี่ยวข้องมีเวลาพิจารณาและประสานงาน</p></div></div></div>' +
     '<div class="stack lg"><div class="card"><h2 class="h2" style="margin-bottom:4px">แนวเขตปลอดภัยทางอากาศ</h2><p class="small mute" style="margin-bottom:12px">ท่าอากาศยาน ' + AIR.airports.length + ' แห่งทั่วประเทศ</p><div class="mapbox"><div id="m1" class="map"></div></div><div style="margin-top:14px">' + legendHTML() + '</div><p class="tiny mute" style="margin-top:10px">ข้อมูลอ้างอิง AIP Thailand ' + esc(AIRMETA.effective || '') + ' · ข้อมูลประกอบ ยังไม่รับรองโดยหน่วยงานเจ้าของข้อมูล</p></div></div></div>';
   $('#cta').onclick = function () { wz = null; go('new'); };
@@ -383,7 +445,14 @@ function step2(c) {
     '<div class="card"><label class="f" for="wq" style="margin-top:0">จำนวน (ชิ้น/ลูก) <span class="req">*</span></label><input id="wq" type="number" min="1" inputmode="numeric" class="in" value="' + wz.qty + '">' +
     '<label class="f" for="wsz">ขนาด/รายละเอียดเพิ่มเติม</label><input id="wsz" class="in" value="' + esc(wz.size) + '" placeholder="เช่น บั้งไฟหมื่น ท่อ 3 นิ้ว">' +
     '<label class="f" for="wc">ความสูงสูงสุดที่คาดว่าจะขึ้น (ฟุต)</label><input id="wc" type="number" min="0" inputmode="numeric" class="in" value="' + esc(wz.ceil) + '"><p class="hint">ไม่บังคับ เจ้าหน้าที่อาจกำหนดเงื่อนไขความสูงในใบอนุญาต</p></div>' +
+    '<details class="fold" id="simbox"><summary><span>' + ic('calculate', 'sm') + ' ช่วยประมาณความสูงและระยะตก (จำลองอย่างง่าย)</span></summary><label class="f" for="sk" style="margin-top:0">แบบจำลอง</label><select id="sk" class="in">' + Object.keys(SIM).map(function (k) { return '<option value="' + k + '">' + SIM[k].label + '</option>'; }).join('') + '</select><div id="simout" style="margin-top:12px"></div><p class="tiny mute" style="margin:10px 0 14px">ประมาณจากแบบจำลองฟิสิกส์อย่างง่าย (ลม 5 ม./วิ) ไม่ใช่ค่ารับรอง ใช้เพื่อช่วยกรอกความสูงที่คาดไว้เท่านั้น</p></details>' +
     '<div class="actbar"><button class="btn ghost" id="bk">' + ic('arrow_back') + 'ย้อนกลับ</button><button class="btn amber" id="nx">ถัดไป ' + ic('arrow_forward') + '</button></div>';
+  function sim() {
+    var k = $('#sk').value, pm = Math.round(simPeakM(k)), ft = Math.round(pm * 3.28084 / 100) * 100;
+    $('#simout').innerHTML = '<div class="grid g2"><div class="tile"><div class="k">ความสูงสูงสุด (ประมาณ)</div><div class="v">≈ ' + pm.toLocaleString('th-TH') + ' ม. (≈ ' + ft.toLocaleString('th-TH') + ' ฟุต)</div></div><div class="tile"><div class="k">ระยะตก/ล่องลอยตามลม</div><div class="v">≈ ' + simDriftKm(k).toFixed(1) + ' กม.</div></div></div><button class="btn ghost sm" id="usesim" style="margin-top:10px">' + ic('input', 'sm') + 'ใช้ ' + ft.toLocaleString('th-TH') + ' ฟุต เป็นความสูงที่คาด</button>';
+    $('#usesim').onclick = function () { wz.ceil = String(ft); $('#wc').value = wz.ceil; toast('ใส่ความสูงที่คาดแล้ว'); };
+  }
+  $('#sk').value = SIM_DEFAULT[wz.type] || 'plu'; $('#sk').onchange = sim; sim();
   $$('.opt', c).forEach(function (o) { o.onclick = function () { wz.type = o.dataset.k; $$('.opt', c).forEach(function (x) { x.classList.toggle('on', x === o); x.setAttribute('aria-checked', x === o); }); }; });
   $('#wq').oninput = function () { wz.qty = +this.value || 1; }; $('#wsz').oninput = function () { wz.size = this.value; }; $('#wc').oninput = function () { wz.ceil = this.value; };
   $('#bk').onclick = function () { wz.step = 1; render(); }; $('#nx').onclick = function () { wz.step = 3; render(); };
@@ -429,15 +498,17 @@ function vDetail(v) {
   var tl = '<ul class="tl">' + step('ok', 'check', 'ยื่นคำขอเรียบร้อยแล้ว', sub ? fmtTs(sub.t) : '-') + step('ok', 'radar', 'ระบบตรวจเบื้องต้น', worst === 'fail' ? 'พบข้อควรพิจารณาด้านเขตห้าม' : worst === 'warn' ? 'ผ่าน มีข้อสังเกต' : 'ผ่านทุกข้อ') +
     step(st === 'submitted' ? 'cur' : st === 'review' || st === 'info' ? 'cur' : st === 'rejected' ? 'bad' : st === 'approved' ? 'ok' : 'future', st === 'rejected' ? 'close' : st === 'approved' ? 'check' : 'hourglass_top', 'ฝ่ายปกครองพิจารณา', st === 'rejected' ? 'ไม่อนุมัติ' : st === 'approved' ? 'อนุมัติแล้ว' : st === 'info' ? 'รอข้อมูลเพิ่มจากผู้ขอ' : 'กำลังดำเนินการ') +
     step(st === 'approved' ? 'ok' : 'future', 'cell_tower', 'ประสานหน่วยควบคุมจราจรทางอากาศ', 'เจ้าหน้าที่ประสานนอกระบบ (ยังไม่เชื่อมใน sandbox)') + step(st === 'approved' ? 'ok' : 'future', 'verified', 'ออกใบอนุญาต', r.permit ? 'เลขที่ ' + esc(r.permit) : 'รอผลพิจารณา') + '</ul>';
-  var ne = nearestAirports(r.lat, r.lon, 1)[0], atc = atcOf(ne.ap.icao);
+  var ne = nearestAirports(r.lat, r.lon, 1)[0], atc = atcOf(ne.ap.icao), amp = amphoeContact(r.province, r.amphoe);
   var rej = st === 'rejected' ? '<div class="reason"><b>เหตุผลที่ไม่อนุมัติ</b><br>' + esc(last.n || '-') + '</div>' : st === 'info' ? '<div class="reason info"><b>เจ้าหน้าที่ขอข้อมูลเพิ่ม</b><br>' + esc(last.n || '-') + '</div>' : '';
   var isC = role() === 'citizen';
   v.innerHTML = '<div class="row" style="margin-bottom:16px"><button class="btn ghost sm" id="bk">' + ic('arrow_back') + 'กลับ</button></div><div class="grid side"><div class="stack lg">' +
     '<div class="hero"><div class="row between"><span class="chip wait">' + ic(STATUS[st][1], 'fill sm') + esc(STATUS[st][0]) + '</span><span class="small" style="color:#b7c7e5">' + esc(r.no) + '</span></div><h1 class="h1" style="margin:12px 0 6px">คำขอจุด' + esc(t[0]) + '</h1><div class="small" style="color:#b7c7e5">ยื่นเมื่อ ' + (sub ? fmtTs(sub.t) : '-') + '</div></div>' + rej +
     '<div class="card"><h2 class="h2" style="margin-bottom:12px">ไทม์ไลน์สถานะ</h2>' + tl + '<details class="fold"><summary>ประวัติการเปลี่ยนสถานะ</summary>' + timeline(r) + '</details></div>' +
-    '<div class="card"><h2 class="h2" style="margin-bottom:12px">ผลตรวจเบื้องต้น</h2>' + checkHTML(ck) + '</div>' + regCard(r.province, false) + '</div>' +
+    '<div class="card"><h2 class="h2" style="margin-bottom:12px">ผลตรวจเบื้องต้น</h2>' + checkHTML(ck) + '</div>' + regCard(r.province, false) +
+    (isC ? '<details class="fold"><summary><span>' + ic('help', 'sm') + ' ข้อควรทราบ: ถ้าไม่อนุมัติหรือต้องการข้อมูลเพิ่ม</span></summary><p class="small" style="margin-bottom:10px">เจ้าหน้าที่จะระบุเหตุผลไว้ในหน้านี้และแจ้งให้ทราบ ผู้ขอสามารถแก้ไขข้อมูลแล้วกด "แก้ไขแล้วส่งใหม่" ได้</p><p class="small" style="margin-bottom:12px">หากไม่เข้าใจเหตุผล หรือเร่งด่วน ติดต่อที่ทำการอำเภอตามเบอร์ในกล่อง "ติดต่อสอบถาม" ได้โดยตรง</p></details>' : '') + '</div>' +
     '<div class="stack lg"><div class="card"><h2 class="h2" style="margin-bottom:12px">รายละเอียด</h2><dl class="kv"><dt>ประเภท</dt><dd>' + t[0] + ' × ' + r.qty + (r.size ? ' (' + esc(r.size) + ')' : '') + '</dd><dt>วัน-เวลา</dt><dd>' + fmtDate(r.date) + ' ' + r.from + '–' + r.to + ' น.</dd><dt>สถานที่</dt><dd>' + esc(r.place || '-') + '<br>อ.' + esc(r.amphoe) + ' จ.' + esc(r.province) + '</dd><dt>พิกัด</dt><dd>' + r.lat.toFixed(4) + ', ' + r.lon.toFixed(4) + '</dd>' + (r.ceil ? '<dt>ความสูงที่คาด</dt><dd>' + esc(r.ceil) + ' ฟุต</dd>' : '') + '<dt>ผู้ขอ</dt><dd>' + esc(r.applicant) + '<br><span class="tiny mute">โทร ' + esc(r.phone) + '</span></dd></dl><div class="mapbox" style="margin-top:14px"><div id="m3" class="map" style="height:260px"></div></div></div>' +
-    '<div class="card"><h2 class="h3" style="margin-bottom:8px">ติดต่อสอบถาม</h2><div class="stack" style="gap:10px"><div class="tile"><div class="k">ที่ทำการอำเภอ / กรมการปกครอง</div><div class="v">' + esc((CT.hotlines && CT.hotlines.amphoe) || '-') + '</div></div>' + (atc ? '<div class="tile"><div class="k">หน่วยควบคุมจราจรทางอากาศใกล้พื้นที่ (' + esc(ne.ap.icao) + ')</div><div class="v">' + esc(atc.unit) + '<br><span class="small">โทร ' + esc(atc.tel || '-') + '</span></div></div>' : '') + '</div></div>' +
+    coordCard(r) +
+    '<div class="card"><h2 class="h3" style="margin-bottom:8px">ติดต่อสอบถาม</h2><div class="stack" style="gap:10px">' + (amp ? '<div class="tile"><div class="k">ที่ทำการอำเภอ' + esc(r.amphoe) + '</div><div class="v">' + telLink(amp.phone) + '</div>' + '<div class="tiny mute">เบอร์จากชุดข้อมูล v1 ยังไม่ได้ตรวจกับต้นฉบับ</div></div>' : '') + '<div class="tile"><div class="k">สายด่วนกรมการปกครอง</div><div class="v">' + esc((CT.hotlines && CT.hotlines.amphoe) || '-') + '</div></div>' + (atc ? '<div class="tile"><div class="k">หน่วยควบคุมจราจรทางอากาศใกล้พื้นที่ (' + esc(ne.ap.icao) + ')</div><div class="v">' + esc(atc.unit) + '<br><span class="small">โทร ' + esc(atc.tel || '-') + '</span></div></div>' : '') + '</div></div>' +
     '<div class="stack">' + (isC && st === 'approved' ? '<button class="btn amber block" id="pm">' + ic('description') + 'ดูใบอนุญาต</button><button class="btn ghost block" id="gl">' + ic('local_fire_department') + 'ไปหน้าวันจุด</button>' : '') +
     (isC && (st === 'rejected' || st === 'info') ? '<button class="btn amber block" id="rs">' + ic('edit') + 'แก้ไขแล้วส่งใหม่</button>' : '') + (isC && st === 'draft' ? '<button class="btn block" id="sd">' + ic('send') + 'ส่งคำขอ</button>' : '') +
     (isC && ['draft', 'submitted', 'review', 'info'].indexOf(st) > -1 ? '<button class="btn ghost block" id="cn">' + ic('cancel') + 'ยกเลิกคำขอ</button>' : '') + (!isC && st === 'approved' ? '<button class="btn amber block" id="pm">' + ic('description') + 'ดูใบอนุญาต</button>' : '') + '</div></div></div>';
@@ -448,15 +519,28 @@ function vDetail(v) {
   b('#cn', function () { setStatus(r, 'cancelled', 'ผู้ขอ', 'ผู้ขอยกเลิกเอง'); render(); }); b('#sd', function () { setStatus(r, 'submitted', 'ผู้ขอ', ''); render(); });
   var m = mkMap('m3', [r.lat, r.lon], 11, { wheel: false }); if (m) L.marker([r.lat, r.lon]).addTo(m);
 }
+// ผู้ประสานงานหน้างาน (กดโทรได้) — ตามหน้ารายละเอียดใน Stitch
+function coordCard(r) {
+  var co = (r.contacts || []).filter(function (c) { return c && (c[0] || c[1]); });
+  if (!co.length) return '';
+  return '<div class="card"><h2 class="h3" style="margin-bottom:8px">' + ic('groups', 'sm') + ' ผู้ประสานงานหน้างาน</h2><div class="stack" style="gap:10px">' + co.map(function (c, i) { return '<div class="tile row between"><div><div class="k">คนที่ ' + (i + 1) + '</div><div class="v">' + esc(c[0] || '-') + '</div></div>' + (c[1] ? '<a class="btn ghost sm tel" href="tel:' + esc(String(c[1]).replace(/[^0-9]/g, '')) + '" aria-label="โทรหา ' + esc(c[0] || '') + '">' + ic('call', 'sm') + esc(c[1]) + '</a>' : '') + '</div>'; }).join('') + '</div></div>';
+}
 function vPermit(v) {
   var r = byId(arg); if (!r || !r.permit) { go('mine'); return; }
   var t = TYPES[r.type], ap = r.history.filter(function (h) { return h.s === 'approved'; })[0], ne = nearestAirports(r.lat, r.lon, 1)[0];
   v.innerHTML = '<div class="narrow stack"><div class="row noprint"><button class="btn ghost sm" id="bk">' + ic('arrow_back') + 'กลับ</button></div>' +
     '<div class="permit"><div class="ph"><div class="small" style="color:#b7c7e5">ใบอนุญาตตัวอย่าง (Sandbox)</div><h1 class="h1" style="margin-top:4px">ใบอนุญาตจุด/ปล่อย' + esc(t[0]) + '</h1><div class="small" style="color:#b7c7e5;margin-top:6px">เลขที่ ' + esc(r.permit) + ' · อ้างอิงคำขอ ' + esc(r.no) + '</div></div>' +
-    '<div class="pb stack"><div class="chip ok" style="align-self:flex-start">' + ic('check_circle', 'fill sm') + 'อนุมัติแล้ว (ตัวอย่างทดสอบ)</div><dl class="kv"><dt>ผู้ได้รับอนุญาต</dt><dd>' + esc(r.applicant) + '</dd><dt>ประเภท/จำนวน</dt><dd>' + t[0] + ' × ' + r.qty + '</dd><dt>วัน-เวลา</dt><dd>' + fmtDate(r.date) + ' ' + r.from + '–' + r.to + ' น.</dd><dt>สถานที่</dt><dd>' + esc(r.place || '-') + '<br>อ.' + esc(r.amphoe) + ' จ.' + esc(r.province) + '</dd><dt>พิกัด</dt><dd>' + r.lat.toFixed(4) + ', ' + r.lon.toFixed(4) + '</dd><dt>ท่าอากาศยานใกล้สุด</dt><dd>' + esc(ne.ap.nameTh) + ' (' + esc(ne.ap.icao) + ') ห่าง ' + ne.d.toFixed(1) + ' กม.</dd><dt>เงื่อนไข</dt><dd>' + esc((ap && ap.n) || 'ต้องได้รับไฟเขียวจากหน่วยควบคุมจราจรทางอากาศก่อนจุดทุกครั้ง') + '</dd></dl>' +
-    '<div class="row between" style="align-items:flex-end"><div><canvas id="qr" style="width:132px;height:132px;image-rendering:pixelated" aria-label="คิวอาร์โค้ดตัวอย่าง"></canvas><div class="tiny mute">สแกนเพื่อตรวจสถานะ (ตัวอย่าง)</div></div><div style="text-align:center"><div style="height:44px"></div>……………………………<br><span class="tiny mute">ผู้พิจารณา (ตัวอย่าง)</span></div></div></div></div>' +
+    '<div class="pb stack"><div class="chip ok" style="align-self:flex-start">' + ic('check_circle', 'fill sm') + 'อนุมัติแล้ว (ตัวอย่างทดสอบ)</div><dl class="kv"><dt>ผู้ได้รับอนุญาต</dt><dd>' + esc(r.applicant) + '</dd><dt>ประเภท/จำนวน</dt><dd>' + t[0] + ' × ' + r.qty + '</dd><dt>วัน-เวลา</dt><dd>' + fmtDate(r.date) + ' ' + r.from + '–' + r.to + ' น.</dd><dt>สถานที่</dt><dd>' + esc(r.place || '-') + '<br>อ.' + esc(r.amphoe) + ' จ.' + esc(r.province) + '</dd><dt>พิกัด</dt><dd>' + r.lat.toFixed(4) + ', ' + r.lon.toFixed(4) + '</dd><dt>ท่าอากาศยานใกล้สุด</dt><dd>' + esc(ne.ap.nameTh) + ' (' + esc(ne.ap.icao) + ') ห่าง ' + ne.d.toFixed(1) + ' กม.</dd>' + (r.ceil ? '<dt>เพดานบินสูงสุด (AGL)</dt><dd><b>' + esc(Number(r.ceil).toLocaleString('th-TH')) + ' ฟุต</b> · ห้ามเกินที่ระบุ</dd>' : '') + '<dt>NOTAM</dt><dd>ประสานผ่านหน่วยควบคุมจราจรทางอากาศ (ยังไม่เชื่อมระบบจริงใน sandbox)</dd><dt>ผู้อนุมัติ</dt><dd>' + esc((ap && ap.by) || '-') + ' <span class="chip ok sm">' + ic('verified', 'fill sm') + 'ลงนามดิจิทัล (ตัวอย่าง)</span></dd><dt>เงื่อนไข</dt><dd>' + esc((ap && ap.n) || 'ต้องได้รับไฟเขียวจากหน่วยควบคุมจราจรทางอากาศก่อนจุดทุกครั้ง') + '</dd></dl>' +
+    '<div class="row between" style="align-items:flex-end"><div><canvas id="qr" style="width:132px;height:132px;image-rendering:pixelated" aria-label="คิวอาร์โค้ดตัวอย่าง"></canvas><div class="tiny mute">สแกนเพื่อตรวจสถานะ (ตัวอย่าง)<br>สร้างรหัสเมื่อ ' + fmtTs(ap ? ap.t : Date.now()) + '</div></div><div style="text-align:center"><div style="height:44px"></div>……………………………<br><span class="tiny mute">ผู้พิจารณา (ตัวอย่าง)</span></div></div></div></div>' +
     '<div class="warnbox">' + ic('warning', 'fill') + '<div><b>ต้องกดขอไฟเขียวก่อนจุดจริงทุกครั้ง</b><div class="small">ใบอนุญาตนี้เป็นตัวอย่างทดสอบ ไม่มีผลทางกฎหมาย</div></div></div>' +
-    '<div class="stack noprint"><button class="btn amber block" id="gl">' + ic('local_fire_department') + 'ไปหน้าวันจุด (ขอไฟเขียว)</button><button class="btn ghost block" onclick="window.print()">' + ic('print') + 'พิมพ์ / บันทึกเป็น PDF</button></div></div>';
+    '<div class="stack noprint"><button class="btn amber block" id="gl">' + ic('local_fire_department') + 'ไปหน้าวันจุด (ขอไฟเขียว)</button><div class="two"><button class="btn ghost" onclick="window.print()">' + ic('print') + 'พิมพ์ / PDF</button><button class="btn ghost" id="shr">' + ic('share') + 'แชร์ให้ทีมงาน</button></div>' +
+    '<div class="card help"><b>' + ic('support_agent', 'fill') + ' ต้องการความช่วยเหลือ?</b><div class="small" style="margin:4px 0 8px">' + esc((CT.hotlines && CT.hotlines.amphoe) || '') + '</div></div></div></div>';
+  $('#shr').onclick = function () {
+    var txt = 'ใบอนุญาต (ตัวอย่างทดสอบ) ' + r.permit + ' · ' + t[0] + ' · ' + fmtDate(r.date) + ' ' + r.from + '–' + r.to + ' น. · อ.' + r.amphoe + ' จ.' + r.province;
+    if (navigator.share) navigator.share({ title: 'ใบอนุญาตตัวอย่าง', text: txt }).catch(function () { });
+    else if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function () { toast('คัดลอกข้อความแล้ว'); }, function () { toast('คัดลอกไม่ได้ กรุณาคัดลอกเอง'); });
+    else toast('เบราว์เซอร์นี้ไม่รองรับการแชร์');
+  };
   qr($('#qr'), r.permit); $('#bk').onclick = function () { go('detail', r.id); }; $('#gl').onclick = function () { go('launch', r.id); };
 }
 function vLaunch(v) {
@@ -464,30 +548,39 @@ function vLaunch(v) {
   if (!ap.length) { v.innerHTML = '<div class="narrow card empty">' + ic('event_busy') + '<p>ยังไม่มีคำขอที่ได้รับอนุมัติ</p></div>'; return; }
   var r = byId(arg); if (!r || ap.indexOf(r) < 0) r = ap[0];
   var L_ = r.launch, body = '', sig = '', ne = nearestAirports(r.lat, r.lon, 1)[0], atc = atcOf(ne.ap.icao);
+  var fired = Math.min(r.fired || 0, r.qty), nextNo = fired + 1, left = r.qty - fired;
   if (L_ === 'none' || L_ === 'denied' || L_ === 'paused') {
     sig = '<div class="signal ' + (L_ === 'none' ? 'grey' : L_ === 'denied' ? 'red' : 'amber') + '"><div class="big">' + ic(L_ === 'paused' ? 'pause' : 'front_hand', 'fill') + '</div><b>' + (L_ === 'none' ? 'ยังไม่ได้ขอไฟเขียว' : L_ === 'denied' ? 'สถานะ: ยังไม่ให้จุด' : 'สถานะ: พักชั่วคราว') + '</b></div>';
-    var dn = r.history[r.history.length - 1]; body = (L_ === 'denied' && dn.n ? '<div class="reason"><b>เหตุผลจากหน่วยควบคุมจราจรทางอากาศ</b><br>' + esc(dn.n) + '</div>' : '') + '<div class="warnbox">' + ic('block', 'fill') + '<div><b>ห้ามจุดจนกว่าจะได้รับไฟเขียว</b></div></div><button class="btn big" id="a1">' + ic('cell_tower') + (L_ === 'none' ? 'ขอไฟเขียวจากหน่วยควบคุมจราจรทางอากาศ' : 'ขอไฟเขียวอีกครั้ง') + '</button><p class="tiny mute">ใน sandbox ไม่บังคับให้ตรงวัน เพื่อให้ทดลองได้</p>';
+    var dn = r.history[r.history.length - 1]; body = (L_ === 'denied' && dn.n ? '<div class="reason"><b>เหตุผลจากหน่วยควบคุมจราจรทางอากาศ</b><br>' + esc(dn.n) + '</div>' : '') + '<div class="warnbox">' + ic('block', 'fill') + '<div><b>ห้ามจุดจนกว่าจะได้รับไฟเขียว</b></div></div><button class="btn big" id="a1">' + ic('cell_tower') + (fired > 0 ? 'ขอไฟเขียวจุดชิ้นถัดไป (ชิ้นที่ ' + nextNo + ')' : L_ === 'none' ? 'ขอไฟเขียวจากหน่วยควบคุมจราจรทางอากาศ' : 'ขอไฟเขียวอีกครั้ง') + '</button><p class="tiny mute">ใน sandbox ไม่บังคับให้ตรงวัน เพื่อให้ทดลองได้</p>';
   } else if (L_ === 'asked') {
     sig = '<div class="signal amber"><div class="spin" aria-hidden="true"></div><b>รอไฟเขียว…</b></div>'; body = '<div class="warnbox">' + ic('block', 'fill') + '<div><b>ห้ามจุดจนกว่าจะได้รับไฟเขียว</b><div class="small">ทดลอง: สลับไปบทบาท ATC จากหน้าเข้าสู่ระบบเพื่อกดให้ไฟเขียว</div></div></div><button class="btn ghost block" id="a0">ยกเลิกการขอ</button>';
   } else if (L_ === 'green') {
-    sig = '<div class="signal green"><div class="big">' + ic('check', 'fill') + '</div><b>ได้รับไฟเขียว จุดได้ตามเวลาที่ขอ</b></div>'; body = '<button class="btn ok big" id="a2">' + ic('local_fire_department', 'fill') + 'เริ่มจุด/ปล่อย</button>';
+    sig = '<div class="signal green"><div class="big">' + ic('check', 'fill') + '</div><b>ได้รับไฟเขียว จุดได้ตามเวลาที่ขอ</b></div>'; body = '<button class="btn ok big" id="a2">' + ic('local_fire_department', 'fill') + 'เริ่มจุด/ปล่อย (ชิ้นที่ ' + nextNo + ')</button>';
   } else if (L_ === 'burning') {
-    sig = '<div class="signal green"><div class="big">' + ic('local_fire_department', 'fill') + '</div><b>กำลังจุด/ปล่อย</b></div>'; body = '<div class="actbar" style="margin-top:0"><button class="btn ghost" id="a3">' + ic('pause') + 'พักชั่วคราว</button><button class="btn bad" id="a4">' + ic('stop') + 'สิ้นสุดการจุด</button></div>';
+    sig = '<div class="signal green"><div class="big">' + ic('local_fire_department', 'fill') + '</div><b>กำลังจุด/ปล่อย ชิ้นที่ ' + nextNo + '</b></div>'; body = '<button class="btn ok big" id="a5">' + ic('task_alt', 'fill') + 'จุดชิ้นที่ ' + nextNo + ' เสร็จแล้ว</button><div class="actbar" style="margin-top:0"><button class="btn ghost" id="a3">' + ic('pause') + 'พักชั่วคราว</button><button class="btn bad" id="a4">' + ic('stop') + 'ปิดงานก่อนครบ</button></div>';
   } else { sig = '<div class="signal grey"><div class="big">' + ic('flag', 'fill') + '</div><b>สิ้นสุดการจุดแล้ว ใบอนุญาตนี้หมดผลแล้ว</b></div>'; }
   v.innerHTML = '<div class="narrow stack lg"><div><h1 class="h1">วันจุด/ปล่อย</h1><label class="f" for="ls">เลือกคำขอที่ได้รับอนุมัติ</label><select id="ls" class="in">' + ap.map(function (x) { return '<option value="' + x.id + '"' + (x.id === r.id ? ' selected' : '') + '>' + esc(x.no) + ' · ' + TYPES[x.type][0] + ' · ' + fmtDate(x.date) + '</option>'; }).join('') + '</select></div>' +
-    '<div class="card stack"><div class="row between"><b>ใบอนุญาต ' + esc(r.permit) + '</b><span class="chip ok">' + ic('check_circle', 'fill sm') + 'ใช้งานได้</span></div><div class="tile"><div class="k">' + fmtDate(r.date) + '</div><div class="v">' + r.from + '–' + r.to + ' น. · ' + TYPES[r.type][0] + ' × ' + r.qty + '</div></div></div>' +
+    '<div class="card stack"><div class="row between"><b>ใบอนุญาต ' + esc(r.permit) + '</b><span class="chip ' + (L_ === 'ended' ? 'off' : 'ok') + '">' + ic('check_circle', 'fill sm') + (L_ === 'ended' ? 'สิ้นสุดแล้ว' : 'ใช้งานได้') + '</span></div><div class="tile"><div class="k">' + fmtDate(r.date) + '</div><div class="v">' + r.from + '–' + r.to + ' น. · ' + TYPES[r.type][0] + ' × ' + r.qty + '</div></div>' +
+    '<div class="grid g2"><div class="tile"><div class="k">ระบบวิทยุการบิน</div><div class="v">ยังไม่เชื่อมต่อ</div><div class="tiny mute">sandbox · ATC กดไฟเขียวในระบบนี้แทน</div></div><div class="tile"><div class="k">ลม / ทัศนวิสัย</div><div class="v">ไม่มีข้อมูลจริง</div><div class="tiny mute">ยังไม่เชื่อมแหล่งข้อมูลสภาพอากาศ</div></div></div></div>' +
+    '<div class="card"><div class="row between"><div><div class="small mute">ความคืบหน้าการจุดประจำวัน</div><div class="h2">จุดแล้ว ' + fired + ' <span class="mute" style="font-weight:500">/ ' + r.qty + ' ชิ้น</span></div></div><span class="chip info">เหลืออีก ' + left + ' ชิ้น</span></div><div class="prog" role="progressbar" aria-valuemin="0" aria-valuemax="' + r.qty + '" aria-valuenow="' + fired + '"><i style="width:' + (r.qty ? fired / r.qty * 100 : 0) + '%"></i></div></div>' +
     '<div class="card stack">' + sig + body + '</div>' +
     '<div class="card"><h2 class="h3" style="margin-bottom:10px">สายด่วน</h2><div class="stack" style="gap:10px"><div class="tile"><div class="k">กรมการปกครอง / ที่ทำการอำเภอ</div><div class="v">' + esc((CT.hotlines && CT.hotlines.amphoe) || '-') + '</div></div><div class="tile"><div class="k">เหตุด่วน</div><div class="v">' + esc((CT.hotlines && CT.hotlines.police) || '191') + '</div></div>' + (atc ? '<div class="tile"><div class="k">หน่วยควบคุมจราจรทางอากาศใกล้พื้นที่ (' + esc(ne.ap.icao) + ')</div><div class="v">' + esc(atc.unit) + '<br><span class="small">โทร ' + esc(atc.tel || '-') + '</span></div></div>' : '') + '</div></div></div>';
   $('#ls').onchange = function () { go('launch', this.value); };
   var b = function (i, f) { var e = $(i); if (e) e.onclick = f; };
   b('#a1', function () { logLaunch(r, 'asked', 'ผู้ขอ'); render(); }); b('#a0', function () { logLaunch(r, 'none', 'ผู้ขอ', 'ยกเลิกการขอไฟเขียว'); render(); });
+  b('#a5', function () {
+    r.fired = fired + 1;
+    if (r.fired >= r.qty) { logLaunch(r, 'ended', 'ผู้ขอ', 'จุดครบ ' + r.qty + ' ชิ้น'); toast('จุดครบแล้ว ปิดงานอัตโนมัติ'); }
+    else { logLaunch(r, 'none', 'ผู้ขอ', 'จุดชิ้นที่ ' + r.fired + ' เสร็จ — ต้องขอไฟเขียวชิ้นถัดไป'); }
+    render();
+  });
   b('#a2', function () { logLaunch(r, 'burning', 'ผู้ขอ'); render(); }); b('#a3', function () { logLaunch(r, 'paused', 'ผู้ขอ'); render(); }); b('#a4', function () { logLaunch(r, 'ended', 'ผู้ขอ'); render(); });
 }
 function vAccount(v) {
   var rl = ROLES[session.role];
   v.innerHTML = '<div class="narrow stack lg"><div class="card row" style="gap:16px"><div class="avatar" style="width:60px;height:60px;font-size:24px">' + esc((session.name || rl.name).charAt(0)) + '</div><div><h1 class="h2">' + esc(session.name || rl.name) + '</h1><div class="small mute">' + esc(rl.label) + '</div></div></div>' +
     '<div class="card"><h2 class="h3">สลับบทบาททดลอง</h2><p class="small mute" style="margin:4px 0 12px">เฉพาะ sandbox</p><div class="rolebtns">' + ['citizen', 'officer', 'atc', 'admin'].map(function (k) { return '<button class="btn ' + (k === session.role ? '' : 'ghost') + ' sm" data-r="' + k + '">' + esc(ROLES[k].label) + '</button>'; }).join('') + '</div></div>' +
-    '<div class="card"><h2 class="h3">เครื่องมือเดิม (v1)</h2><p class="small mute" style="margin:4px 0 12px">ตัวจำลองวิถี ตัวสร้างหนังสือ บันทึกเหตุการณ์ และแผนที่ประกาศ 77 จังหวัด ยังอยู่ในเวอร์ชันเดิม</p><a class="btn ghost" href="v1.html">' + ic('open_in_new') + 'เปิด v1</a></div>' +
+    '<div class="card"><h2 class="h3">เวอร์ชันเก่า (เก็บไว้อ้างอิง)</h2><p class="small mute" style="margin:4px 0 12px">ตัวจำลองวิถี ร่างหนังสือ ข้อมูลอำเภอ และระเบียบ 77 จังหวัดย้ายมาไว้ใน v2 แล้ว ที่ยังอยู่เฉพาะใน v1: ตัวสร้างคำร้องแจ้ง 3 หน่วยงาน และแผนที่ความเสี่ยงจากบันทึกเหตุการณ์</p><a class="btn ghost" href="v1.html">' + ic('open_in_new') + 'เปิด v1</a></div>' +
     '<div class="card stack"><button class="btn ghost" id="rst">' + ic('restart_alt') + 'รีเซ็ตข้อมูลตัวอย่าง</button><button class="btn" id="out">' + ic('logout') + 'ออกจากระบบ</button><p class="tiny mute">ข้อมูลของ sandbox เก็บในเบราว์เซอร์เครื่องนี้เท่านั้น</p></div></div>';
   $$('[data-r]', v).forEach(function (b) { b.onclick = function () { session = { role: b.dataset.r, name: ROLES[b.dataset.r].name }; saveSess(); go(ROLES[b.dataset.r].nav[0][0]); }; });
   $('#rst').onclick = function () { S = seed(); save(); wz = null; toast('รีเซ็ตข้อมูลตัวอย่างแล้ว'); };
@@ -508,6 +601,39 @@ function vInbox(v) {
   var m = mkMap('m4', [15.9, 103.4], 7, { panel: true });
   if (m) { var pts = []; list.forEach(function (r) { var col = { approved: '#15803D', rejected: '#B91C1C' }[r.status] || '#13243B'; L.circleMarker([r.lat, r.lon], { radius: 9, color: '#fff', weight: 2, fillColor: col, fillOpacity: 1 }).addTo(m).bindTooltip(r.no + ' · ' + STATUS[r.status][0]).on('click', function () { go('review', r.id); }); pts.push([r.lat, r.lon]); }); if (pts.length > 1) m.fitBounds(pts, { padding: [30, 30], maxZoom: 9 }); }
 }
+/* ร่างหนังสือแจ้งผล (พอร์ตจาก v1 แก้คำผิดแล้ว) — ร่างอัตโนมัติ ต้องให้ผู้มีอำนาจตรวจก่อนใช้จริง */
+function letterLines(r, decision) {
+  var pv = provOf(r.province), g = pv && pv.reg, hits = clearance(r.lat, r.lon), inZone = hits.length > 0, t = TYPES[r.type][0], D_ = new Date();
+  var dateStr = D_.getDate() + ' ' + ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'][D_.getMonth()] + ' ' + (D_.getFullYear() + 543);
+  var basis = 'ประกาศจังหวัด' + r.province + (g && g.title ? ' เรื่อง ' + g.title : '') + ' ประกอบพระราชบัญญัติการเดินอากาศ พ.ศ. 2497';
+  var L = [];
+  if (decision === 'allow') {
+    L.push('เรื่อง อนุญาตให้จุด/ปล่อย' + t + ' ตามคำขอเลขที่ ' + r.no);
+    L.push('ตามที่ ' + r.applicant + ' ยื่นคำขอจุด/ปล่อย' + t + ' จำนวน ' + r.qty + ' ชิ้น ในวันที่ ' + fmtDate(r.date) + ' เวลา ' + r.from + '–' + r.to + ' น. ณ ' + (r.place || '-') + ' อำเภอ' + r.amphoe + ' จังหวัด' + r.province + ' นั้น');
+    L.push('ผู้พิจารณาได้พิจารณาแล้ว อนุญาตตามที่ขอ โดยอาศัยอำนาจตาม' + basis);
+    if (inZone) L.push('เงื่อนไข: ตำแหน่งที่ขออยู่ในเขตปลอดภัยทางการเดินอากาศของท่าอากาศยาน ต้องได้รับความเห็นชอบจากผู้ประกอบท่าอากาศยานก่อน');
+    L.push('เงื่อนไข: ต้องขอและได้รับสัญญาณไฟเขียวจากหน่วยควบคุมจราจรทางอากาศก่อนจุด/ปล่อยทุกครั้ง');
+    if (r.ceil) L.push('เงื่อนไข: ห้ามให้วัตถุขึ้นสูงเกิน ' + Number(r.ceil).toLocaleString('th-TH') + ' ฟุต จากพื้นดิน');
+  } else {
+    L.push('เรื่อง ไม่อนุญาตให้จุด/ปล่อย' + t + ' ตามคำขอเลขที่ ' + r.no);
+    L.push('ตามที่ ' + r.applicant + ' ยื่นคำขอจุด/ปล่อย' + t + ' ในวันที่ ' + fmtDate(r.date) + ' ณ อำเภอ' + r.amphoe + ' จังหวัด' + r.province + ' นั้น');
+    L.push(inZone ? 'ผู้พิจารณาไม่อนุญาต เนื่องจากตำแหน่งที่ขออยู่ในเขตปลอดภัยทางการเดินอากาศของท่าอากาศยาน ซึ่งห้ามจุด/ปล่อยวัตถุขึ้นอากาศ เว้นแต่ได้รับอนุญาตจากผู้ประกอบท่าอากาศยาน' : 'ผู้พิจารณาไม่อนุญาต ด้วยเหตุผล: [ระบุเหตุผล]');
+    L.push('ทั้งนี้ อาศัยอำนาจตาม' + basis);
+    L.push('ผู้ขอมีสิทธิอุทธรณ์คำสั่งนี้ตามพระราชบัญญัติวิธีปฏิบัติราชการทางปกครอง พ.ศ. 2539 มาตรา 44 ภายใน 15 วันนับแต่วันที่ได้รับแจ้งคำสั่ง');
+  }
+  return { head: decision === 'allow' ? 'หนังสืออนุญาต (ร่าง)' : 'หนังสือไม่อนุญาต (ร่าง)', date: 'ลงวันที่ ' + dateStr, lines: L, note: 'ร่างอัตโนมัติจากระบบทดสอบ ต้องให้ผู้มีอำนาจและผู้ตรวจสอบข้อกฎหมายตรวจก่อนใช้เป็นทางการ · ข้อกฎหมายอ้างอิงยังไม่ได้ตรวจกับต้นฉบับ' };
+}
+function letterBox(r) {
+  var inZone = clearance(r.lat, r.lon).length > 0;
+  return '<details class="fold" id="lbx"><summary><span>' + ic('mail', 'sm') + ' ร่างหนังสือแจ้งผล</span><span class="chip off sm">ร่าง</span></summary><label class="f" for="ld" style="margin-top:0">ผลที่ต้องการแจ้ง</label><select id="ld" class="in"><option value="allow"' + (inZone ? '' : ' selected') + '>อนุญาต</option><option value="deny"' + (inZone ? ' selected' : '') + '>ไม่อนุญาต</option></select><div id="lout" class="letter"></div><div class="actbar" style="margin:12px 0 14px"><button class="btn ghost sm" id="lcp">' + ic('content_copy', 'sm') + 'คัดลอกข้อความ</button><button class="btn ghost sm" id="lpr">' + ic('print', 'sm') + 'พิมพ์</button></div></details>';
+}
+function wireLetter(r) {
+  var sel = $('#ld'); if (!sel) return;
+  function draw() { var x = letterLines(r, sel.value); $('#lout').innerHTML = '<h3>' + esc(x.head) + '</h3><div class="d">' + esc(x.date) + '</div>' + x.lines.map(function (l) { return '<p>' + esc(l) + '</p>'; }).join('') + '<div class="n">' + esc(x.note) + '</div>'; return x; }
+  draw(); sel.onchange = draw;
+  $('#lcp').onclick = function () { var x = letterLines(r, sel.value), txt = [x.head, x.date].concat(x.lines, [x.note]).join('\n'); if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function () { toast('คัดลอกแล้ว'); }, function () { toast('คัดลอกไม่ได้'); }); };
+  $('#lpr').onclick = function () { var w = window.open('', '_blank'); if (!w) { toast('เบราว์เซอร์บล็อกหน้าต่างพิมพ์'); return; } w.document.write('<!doctype html><meta charset="utf-8"><title>ร่างหนังสือ</title><body style="font-family:Sarabun,Tahoma,sans-serif;max-width:640px;margin:24px auto;line-height:1.7">' + $('#lout').innerHTML + '</body>'); w.document.close(); w.focus(); w.print(); };
+}
 function vReview(v) {
   var r = byId(arg); if (!r) { go('inbox'); return; }
   var canAct = ['submitted', 'review', 'info'].indexOf(r.status) > -1;
@@ -515,7 +641,8 @@ function vReview(v) {
   var t = TYPES[r.type], ne = nearestAirports(r.lat, r.lon, 1)[0], atc = atcOf(ne.ap.icao);
   v.innerHTML = '<div class="row" style="margin-bottom:16px"><button class="btn ghost sm" id="bk">' + ic('arrow_back') + 'กลับกล่องคำขอ</button></div><div class="grid side"><div class="stack lg">' +
     '<div class="card"><div class="row between"><h1 class="h2">' + esc(r.no) + '</h1>' + chip(r.status) + '</div><dl class="kv" style="margin-top:14px"><dt>ผู้ขอ</dt><dd>' + esc(r.applicant) + '<br><span class="tiny mute">โทร ' + esc(r.phone) + '</span></dd><dt>ประเภท/จำนวน</dt><dd>' + t[0] + ' × ' + r.qty + '</dd><dt>พื้นที่</dt><dd>' + esc(r.place || '-') + '<br>อ.' + esc(r.amphoe) + ' จ.' + esc(r.province) + '</dd><dt>วัน-เวลา</dt><dd>' + fmtDate(r.date) + ' ' + r.from + '–' + r.to + ' น.</dd>' + (r.ceil ? '<dt>ความสูงที่คาด</dt><dd>' + esc(r.ceil) + ' ฟุต</dd>' : '') + '</dl></div>' +
-    '<div class="card"><div class="row between" style="margin-bottom:6px"><h2 class="h2">ผลตรวจอัตโนมัติ</h2><span class="chip off sm">ตัวช่วย ไม่ตัดสินแทน</span></div>' + checkHTML(autoChecks(r)) + '</div>' + regCard(r.province, true) +
+    '<div class="card"><div class="row between" style="margin-bottom:6px"><h2 class="h2">ผลตรวจอัตโนมัติ</h2><span class="chip off sm">ตัวช่วย ไม่ตัดสินแทน</span></div>' + checkHTML(autoChecks(r)) + '</div>' + regCard(r.province, true) + letterBox(r) +
+    (amphoeContact(r.province, r.amphoe) ? '<div class="card"><h2 class="h3" style="margin-bottom:8px">ที่ทำการอำเภอ' + esc(r.amphoe) + '</h2><div class="small">โทร ' + telLink(amphoeContact(r.province, r.amphoe).phone) + '</div></div>' : '') +
     (atc ? '<div class="card"><h2 class="h3" style="margin-bottom:8px">หน่วยควบคุมจราจรทางอากาศใกล้พื้นที่ (' + esc(ne.ap.icao) + ')</h2><div class="small">' + esc(atc.unit) + '<br>โทร ' + esc(atc.tel || '-') + (atc.email ? '<br>' + esc(atc.email) : '') + '</div></div>' : '') +
     '<div class="card"><h2 class="h2" style="margin-bottom:12px">ความคืบหน้า</h2>' + timeline(r) + '</div></div>' +
     '<div class="card" style="position:sticky;top:96px"><h2 class="h2" style="margin-bottom:12px">ตำแหน่งและการตัดสินใจ</h2><div class="mapbox"><div id="m5" class="map" style="height:300px"></div></div>' +
@@ -523,6 +650,7 @@ function vReview(v) {
   $('#bk').onclick = function () { go('inbox'); };
   var m = mkMap('m5', [r.lat, r.lon], 11, { panel: true, wheel: false }); if (m) L.marker([r.lat, r.lon]).addTo(m);
   var pm = $('#pm'); if (pm) pm.onclick = function () { go('permit', r.id); };
+  wireLetter(r);
   if (canAct) {
     var need = function () { var n = $('#rn').value.trim(); if (!n) { toast('กรุณาระบุเหตุผล'); $('#rn').focus(); return null; } return n; };
     $('#ap').onclick = function () { setStatus(r, 'approved', 'นายอำเภอ', $('#rn').value.trim()); toast('อนุมัติแล้ว ออกใบอนุญาต ' + r.permit); go('inbox'); };
