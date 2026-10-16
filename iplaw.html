@@ -175,7 +175,8 @@ h1,h2{font-family:'Noto Serif Thai',serif}
 .lecture-img-inline-x2{width:680px;max-width:100%;float:none;margin:10px auto 14px}
 .lecture-img-inline-x3{width:880px;max-width:100%;float:none;margin:10px auto 14px}
 .lecture-img-inline-x4{width:1000px;max-width:100%;float:none;margin:10px auto 14px}
-@media(max-width:600px){.lecture-img-inline-lg{width:220px}.lecture-img-inline-xl,.lecture-img-inline-xxl,.lecture-img-inline-x2,.lecture-img-inline-x3,.lecture-img-inline-x4{width:100%}}
+.lecture-img-inline-x800{width:800px;max-width:100%;float:none;margin:10px auto 14px}
+@media(max-width:600px){.lecture-img-inline-lg{width:220px}.lecture-img-inline-xl,.lecture-img-inline-xxl,.lecture-img-inline-x2,.lecture-img-inline-x3,.lecture-img-inline-x4,.lecture-img-inline-x800{width:100%}}
 .exercise-box{background:var(--gold-soft);border:1.5px solid var(--gold);border-radius:10px;padding:14px 16px;margin:16px 0 4px;clear:both}
 .exercise-box .ex-label{display:block;font-weight:800;color:#8F6511;font-size:12px;letter-spacing:.03em;margin-bottom:6px}
 :root[data-theme="dark"] .exercise-box .ex-label,:root[data-theme="horror"] .exercise-box .ex-label{color:var(--gold)}
@@ -1533,8 +1534,8 @@ TRIPS ข้อ 9 ยืนยันพันธกรณีให้ประ�
 (หมายเหตุสถานะ: ช่วงต้นคาบ — เฉลยข้อสอบ มาตรา 44/45 และฎีกา MITA, SUPER-SHIELD, CHUPA CHUPS — ยังไม่มีเสียงบรรยายที่ใช้ได้ เพราะไฟล์ "part 1" ที่เชื่อมไว้เป็นเสียงข่าว LV vs Molly Tea ภาษาอังกฤษ ไม่ใช่เสียงในห้องเรียน)
 `,
     inlineImages: [
-      { key: "ip10_rights", src: "pics/codex/ip10_s4_03.png", caption: "สิทธิของเจ้าของเครื่องหมายการค้าที่จดทะเบียน 3 ประการ — ใช้ · อนุญาตให้ใช้ (licensing) · โอน (จากสไลด์)", large: true },
-      { key: "ip10_fraud", src: "pics/codex/ip10_s4_25.png", caption: "สามเหลี่ยมเครื่องหมาย–แหล่งที่มา–สินค้า และชั้นของสิทธิ: FRAUD (ม. 46) เป็นฐานกว้าง PROPERTY (ม. 44, 49, 68) ซ้อนอยู่บน (จากสไลด์)", xl: true }
+      { key: "ip10_rights", src: "pics/codex/ip10_s4_03.png", caption: "สิทธิของเจ้าของเครื่องหมายการค้าที่จดทะเบียน 3 ประการ — ใช้ · อนุญาตให้ใช้ (licensing) · โอน (จากสไลด์)", x800: true },
+      { key: "ip10_fraud", src: "pics/codex/ip10_s4_25.png", caption: "สามเหลี่ยมเครื่องหมาย–แหล่งที่มา–สินค้า และชั้นของสิทธิ: FRAUD (ม. 46) เป็นฐานกว้าง PROPERTY (ม. 44, 49, 68) ซ้อนอยู่บน (จากสไลด์)", x800: true }
     ],
     inlineVideos: [
       { key: "lv", id: "EN0K0rJBB98", caption: "ศึกชานม! \"LV\" ฟ้อง \"Molly Tea\" จีน ปมโลโก้ดอกไม้ — การตลาดเงินล้าน (TNN) 6 ก.ค. 69" },
@@ -1658,7 +1659,7 @@ let escaped = raw.replace(/</g,'&lt;');
   }
   if (l.inlineImages && l.inlineImages.length) {
     l.inlineImages.forEach(im => {
-      const tag = `<div class="lecture-img-inline${im.large ? ' lecture-img-inline-lg' : ''}${im.xl ? ' lecture-img-inline-xl' : ''}${im.xxl ? ' lecture-img-inline-xxl' : ''}${im.x2 ? ' lecture-img-inline-x2' : ''}${im.x3 ? ' lecture-img-inline-x3' : ''}${im.x4 ? ' lecture-img-inline-x4' : ''}"><img src="${im.src}" alt="${im.caption||''}" loading="lazy" onerror="this.parentElement.remove()"><div class="cap">${im.caption||''}</div></div>`;
+      const tag = `<div class="lecture-img-inline${im.large ? ' lecture-img-inline-lg' : ''}${im.xl ? ' lecture-img-inline-xl' : ''}${im.xxl ? ' lecture-img-inline-xxl' : ''}${im.x2 ? ' lecture-img-inline-x2' : ''}${im.x3 ? ' lecture-img-inline-x3' : ''}${im.x4 ? ' lecture-img-inline-x4' : ''}${im.x800 ? ' lecture-img-inline-x800' : ''}"><img src="${im.src}" alt="${im.caption||''}" loading="lazy" onerror="this.parentElement.remove()"><div class="cap">${im.caption||''}</div></div>`;
       const marker = `[[IMG:${im.key}]]`;
       escaped = escaped.includes(marker) ? escaped.replace(marker, tag) : tag + escaped;
     });
