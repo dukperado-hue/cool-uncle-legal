@@ -1,5 +1,5 @@
 {
- "version": "d1-9-1",
+ "version": "d1-10-0",
  "generated": "2026-10-04",
  "principle": "Overlay only: an English-Thai term layer over the Legal English sources. conceptRef points to an existing Atlas concept id and is present only when confirmed; the Dictionary never stores definitions, provisions, subject tags or relations of its own.",
  "entries": [
@@ -293,6 +293,10 @@
     {
      "file": "LA270-2-FINAL-2-2025-LP.pdf",
      "kind": "oldexam"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -1187,13 +1191,18 @@
    "id": "atlas:term/separation-of-powers",
    "en": "Separation of powers",
    "th": [
-    "การแบ่งแยกอำนาจ"
+    "การแบ่งแยกอำนาจ",
+    "หลักการแบ่งแยกอำนาจ"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "ภาษาอังกฤษ ครั้งที่ 03 22AUG26 part 03.m4a.m4a",
      "kind": "lecture-audio"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -2003,6 +2012,10 @@
     {
      "file": "legaleng.html ครั้งที่ 4",
      "kind": "lecture-page"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
     }
    ]
   },
@@ -2546,12 +2559,17 @@
    "id": "atlas:term/ultra-vires",
    "en": "ultra vires",
    "th": [
-    "เกินขอบอำนาจ"
+    "เกินขอบอำนาจ",
+    "การใช้อำนาจเกินขอบเขต"
    ],
    "kind": "latin",
    "sources": [
     {
      "file": "legaleng.html ครั้งที่ 4",
+     "kind": "lecture-page"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 10",
      "kind": "lecture-page"
     }
    ]
@@ -4665,12 +4683,17 @@
    "id": "atlas:term/rule-of-law",
    "en": "Rule of Law",
    "th": [
-    "หลักนิติธรรม"
+    "หลักนิติธรรม",
+    "หลักการปกครองโดยกฎหมาย"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "legaleng.html ครั้งที่ 7",
+     "kind": "lecture-page"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 10",
      "kind": "lecture-page"
     }
    ]
@@ -5022,6 +5045,10 @@
    "sources": [
     {
      "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    },
+    {
+     "file": "legaleng.html ครั้งที่ 10",
      "kind": "lecture-page"
     }
    ]
@@ -5828,6 +5855,1645 @@
    "sources": [
     {
      "file": "legaleng.html ครั้งที่ 9",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/legislative-power",
+   "en": "Legislative power",
+   "th": [
+    "อำนาจนิติบัญญัติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/legislate",
+   "en": "Legislate",
+   "th": [
+    "ออกกฎหมาย",
+    "บัญญัติกฎหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/the-legislature",
+   "en": "The legislature",
+   "th": [
+    "คณะนิติบัญญัติ",
+    "ฝ่ายนิติบัญญัติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/executive-power",
+   "en": "Executive power",
+   "th": [
+    "อำนาจฝ่ายบริหาร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/the-executive",
+   "en": "The executive",
+   "th": [
+    "ฝ่ายบริหาร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/judicial-power",
+   "en": "Judicial power",
+   "th": [
+    "อำนาจฝ่ายตุลาการ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/the-judiciary",
+   "en": "The judiciary",
+   "th": [
+    "ฝ่ายตุลาการ",
+    "องค์กรตุลาการ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/parliamentary-system",
+   "en": "Parliamentary system",
+   "th": [
+    "ระบบรัฐสภา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/parliament",
+   "en": "Parliament",
+   "th": [
+    "รัฐสภา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/presidential-system",
+   "en": "Presidential system",
+   "th": [
+    "ระบบประธานาธิบดี"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/president",
+   "en": "President",
+   "th": [
+    "ประธานาธิบดี"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/republic",
+   "en": "Republic",
+   "th": [
+    "สาธารณรัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/republic-system",
+   "en": "Republic system",
+   "th": [
+    "ระบบสาธารณรัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/house-of-representatives",
+   "en": "House of Representatives",
+   "th": [
+    "สภาผู้แทนราษฎร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/senate",
+   "en": "Senate",
+   "th": [
+    "วุฒิสภา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/house-of-parliament-national-assembly",
+   "en": "House of Parliament / National Assembly",
+   "th": [
+    "รัฐสภา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/president-of-the-parliament",
+   "en": "President of the Parliament",
+   "th": [
+    "ประธานรัฐสภา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/vice-president-of-the-parliament",
+   "en": "Vice President of the Parliament",
+   "th": [
+    "รองประธานรัฐสภา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/president-of-the-senate",
+   "en": "President of the Senate",
+   "th": [
+    "ประธานวุฒิสภา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/speaker-of-the-house",
+   "en": "Speaker of the House",
+   "th": [
+    "ประธานสภาผู้แทนราษฎร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/spokesperson",
+   "en": "Spokesperson",
+   "th": [
+    "โฆษก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/member-of-parliament-mp",
+   "en": "Member of Parliament (MP)",
+   "th": [
+    "สมาชิกสภาผู้แทนราษฎร",
+    "ส.ส."
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/prime-minister-pm",
+   "en": "Prime Minister (PM)",
+   "th": [
+    "นายกรัฐมนตรี"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/cabinet",
+   "en": "Cabinet",
+   "th": [
+    "คณะรัฐมนตรี"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/constitutional-organisations",
+   "en": "Constitutional organisations",
+   "th": [
+    "องค์กรตามรัฐธรรมนูญ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/ombudsman",
+   "en": "Ombudsman",
+   "th": [
+    "ผู้ตรวจการแผ่นดิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/the-national-legislative-assembly",
+   "en": "The National Legislative Assembly",
+   "th": [
+    "สภานิติบัญญัติแห่งชาติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/interim",
+   "en": "Interim",
+   "th": [
+    "ชั่วคราว"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/permanent",
+   "en": "Permanent",
+   "th": [
+    "ถาวร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/congress",
+   "en": "Congress",
+   "th": [
+    "รัฐสภาสหรัฐอเมริกา (สภาคองเกรส)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/lord-chancellor",
+   "en": "Lord Chancellor",
+   "th": [
+    "รัฐมนตรีว่าการกระทรวงยุติธรรม (อังกฤษ)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/minister-of-justice",
+   "en": "Minister of Justice",
+   "th": [
+    "รัฐมนตรีว่าการกระทรวงยุติธรรม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/chancellor-of-the-exchequer",
+   "en": "Chancellor of the Exchequer",
+   "th": [
+    "รัฐมนตรีว่าการกระทรวงการคลัง (อังกฤษ)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/minister-of-finance",
+   "en": "Minister of Finance",
+   "th": [
+    "รัฐมนตรีว่าการกระทรวงการคลัง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/home-secretary",
+   "en": "Home Secretary",
+   "th": [
+    "รัฐมนตรีว่าการกระทรวงมหาดไทย (อังกฤษ)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/secretary-of-state",
+   "en": "Secretary of State",
+   "th": [
+    "รัฐมนตรีว่าการกระทรวงการต่างประเทศ (สหรัฐ)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/minister-of-foreign-affairs",
+   "en": "Minister of Foreign Affairs",
+   "th": [
+    "รัฐมนตรีว่าการกระทรวงการต่างประเทศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/nation",
+   "en": "Nation",
+   "th": [
+    "ชาติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/nationality",
+   "en": "Nationality",
+   "th": [
+    "สัญชาติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/race",
+   "en": "Race",
+   "th": [
+    "เชื้อชาติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/state",
+   "en": "State",
+   "th": [
+    "รัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/nation-state",
+   "en": "Nation-state",
+   "th": [
+    "รัฐชาติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/country",
+   "en": "Country",
+   "th": [
+    "ประเทศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/kingdom",
+   "en": "Kingdom",
+   "th": [
+    "ราชอาณาจักร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/federal-republic",
+   "en": "Federal Republic",
+   "th": [
+    "สหพันธ์สาธารณรัฐ",
+    "รัฐรวม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/confederation",
+   "en": "Confederation",
+   "th": [
+    "สมาพันธรัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/accountability",
+   "en": "Accountability",
+   "th": [
+    "ความรับผิดชอบ",
+    "ความสามารถตรวจสอบได้"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/transparency",
+   "en": "Transparency",
+   "th": [
+    "ความโปร่งใส"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/promulgate",
+   "en": "Promulgate",
+   "th": [
+    "ประกาศใช้",
+    "ตรากฎหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/prescribe",
+   "en": "Prescribe",
+   "th": [
+    "กำหนด",
+    "บัญญัติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/interpretation",
+   "en": "Interpretation",
+   "th": [
+    "การตีความ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/parliamentary-sovereignty",
+   "en": "Parliamentary sovereignty",
+   "th": [
+    "อำนาจสูงสุดของรัฐสภา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/parliamentary-privilege",
+   "en": "Parliamentary privilege",
+   "th": [
+    "เอกสิทธิ์รัฐสภา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/royal-prerogative",
+   "en": "Royal prerogative",
+   "th": [
+    "พระราชอำนาจ",
+    "อำนาจพิเศษ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/impartiality",
+   "en": "Impartiality",
+   "th": [
+    "ความไม่ลำเอียง",
+    "ความเป็นกลาง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/judicial-independence",
+   "en": "Judicial independence",
+   "th": [
+    "ความเป็นอิสระของตุลาการ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/expropriation",
+   "en": "Expropriation",
+   "th": [
+    "การเวนคืนทรัพย์สิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/expropriate",
+   "en": "Expropriate",
+   "th": [
+    "เวนคืน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/infringement",
+   "en": "Infringement",
+   "th": [
+    "การละเมิด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/infringe",
+   "en": "Infringe",
+   "th": [
+    "ละเมิด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/legal-state-rechtsstaat",
+   "en": "Legal state / Rechtsstaat",
+   "th": [
+    "หลักนิติรัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/human-dignity",
+   "en": "Human dignity",
+   "th": [
+    "ศักดิ์ศรีความเป็นมนุษย์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/emergency-decree",
+   "en": "Emergency decree",
+   "th": [
+    "พระราชกำหนด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/fundamental-rights",
+   "en": "Fundamental rights",
+   "th": [
+    "สิทธิขั้นพื้นฐาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/legitimacy",
+   "en": "Legitimacy",
+   "th": [
+    "ความชอบด้วยกฎหมาย (ตามที่ถอดเสียง)",
+    "ความชอบธรรม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/illegitimacy",
+   "en": "Illegitimacy",
+   "th": [
+    "ความไม่ชอบด้วยกฎหมาย (ตามที่ถอดเสียง)",
+    "ความไม่ชอบธรรม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/equality",
+   "en": "Equality",
+   "th": [
+    "ความเสมอภาค"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/equal-opportunity",
+   "en": "Equal opportunity",
+   "th": [
+    "ความเสมอภาคในโอกาส"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/equal-outcome",
+   "en": "Equal outcome",
+   "th": [
+    "ความเสมอภาคในผลลัพธ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/equal-treatment",
+   "en": "Equal treatment",
+   "th": [
+    "การปฏิบัติอย่างเท่าเทียม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/affirmative-action",
+   "en": "Affirmative action",
+   "th": [
+    "มาตรการเชิงบวก (โควต้าให้กลุ่มคนส่วนน้อย)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/non-discriminatory-measures",
+   "en": "Non-discriminatory measures",
+   "th": [
+    "มาตรการที่ไม่เลือกปฏิบัติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/unjust-discrimination",
+   "en": "Unjust discrimination",
+   "th": [
+    "การเลือกปฏิบัติอย่างไม่เป็นธรรม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/liberty-of-travelling",
+   "en": "Liberty of travelling",
+   "th": [
+    "เสรีภาพในการเดินทาง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/freedom-of-assembly",
+   "en": "Freedom of assembly",
+   "th": [
+    "เสรีภาพในการชุมนุม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/national-strategy",
+   "en": "National strategy",
+   "th": [
+    "ยุทธศาสตร์แห่งชาติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/national-interest-public-interest",
+   "en": "National interest / public interest",
+   "th": [
+    "ประโยชน์ของชาติ",
+    "ประโยชน์สาธารณะ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/administrative-judges",
+   "en": "Administrative judges",
+   "th": [
+    "ตุลาการศาลปกครอง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/local-administration",
+   "en": "Local administration",
+   "th": [
+    "การปกครองส่วนท้องถิ่น"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/administrative-action",
+   "en": "Administrative action",
+   "th": [
+    "การกระทำทางปกครอง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/adjudication",
+   "en": "Adjudication",
+   "th": [
+    "การวินิจฉัยชี้ขาด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/neglect-of-duty",
+   "en": "Neglect of duty",
+   "th": [
+    "การละเลยต่อหน้าที่"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/public-procurement",
+   "en": "Public procurement",
+   "th": [
+    "การจัดซื้อจัดจ้างภาครัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/regulatory-bodies-regulatory-agency",
+   "en": "Regulatory bodies / regulatory agency",
+   "th": [
+    "องค์กรกำกับดูแล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/state-owned-enterprise-soe",
+   "en": "State-owned enterprise (SOE)",
+   "th": [
+    "รัฐวิสาหกิจ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/undue-delay",
+   "en": "Undue delay",
+   "th": [
+    "ล่าช้าเกินสมควร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/superintendence",
+   "en": "Superintendence",
+   "th": [
+    "การกำกับดูแล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/superintendent",
+   "en": "Superintendent",
+   "th": [
+    "ผู้กำกับดูแล",
+    "ผู้ควบคุม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/administrative-order",
+   "en": "Administrative order",
+   "th": [
+    "คำสั่งทางปกครอง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/administrative-contract",
+   "en": "Administrative contract",
+   "th": [
+    "สัญญาทางปกครอง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/the-principle-of-good-governance",
+   "en": "The principle of good governance",
+   "th": [
+    "หลักธรรมาภิบาล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/judicial-review",
+   "en": "Judicial review",
+   "th": [
+    "การตรวจสอบการใช้อำนาจรัฐโดยศาล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/the-supreme-administrative-court",
+   "en": "The Supreme Administrative Court",
+   "th": [
+    "ศาลปกครองสูงสุด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/the-administrative-court-of-first-instance",
+   "en": "The Administrative Court of First Instance",
+   "th": [
+    "ศาลปกครองชั้นต้น"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/judicial-discretion",
+   "en": "Judicial discretion",
+   "th": [
+    "การใช้ดุลพินิจของตุลาการ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/the-principle-of-proportionality",
+   "en": "The principle of proportionality",
+   "th": [
+    "หลักความได้สัดส่วน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/intra-vires",
+   "en": "Intra vires",
+   "th": [
+    "การใช้อำนาจภายในขอบเขต"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/affirm",
+   "en": "Affirm",
+   "th": [
+    "พิพากษายืน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/revoke",
+   "en": "Revoke",
+   "th": [
+    "เพิกถอน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/intervene",
+   "en": "Intervene",
+   "th": [
+    "แทรกแซง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/abuse-of-power",
+   "en": "Abuse of power",
+   "th": [
+    "ใช้อำนาจโดยมิชอบ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/coup-d-tat",
+   "en": "Coup d'état",
+   "th": [
+    "รัฐประหาร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/the-fruits-of-one-s-labour",
+   "en": "The fruits of one's labour",
+   "th": [
+    "น้ำพักน้ำแรง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/public-order",
+   "en": "Public order",
+   "th": [
+    "ความสงบเรียบร้อยของประชาชน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/public-safety",
+   "en": "Public safety",
+   "th": [
+    "ความปลอดภัยสาธารณะ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/freedom-of-religion",
+   "en": "Freedom of religion",
+   "th": [
+    "เสรีภาพในการถือศาสนา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/manifestation-of-religion-or-belief",
+   "en": "Manifestation (of religion or belief)",
+   "th": [
+    "การแสดงออกซึ่งศาสนาหรือความเชื่อ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/prescribed-by-law",
+   "en": "Prescribed by law",
+   "th": [
+    "บัญญัติไว้ในกฎหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/necessary-in-a-democratic-society",
+   "en": "Necessary in a democratic society",
+   "th": [
+    "จำเป็นในสังคมประชาธิปไตย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/petition",
+   "en": "Petition",
+   "th": [
+    "ยื่นคำร้อง",
+    "ร้องเรียนต่อรัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/right-to-education",
+   "en": "Right to education",
+   "th": [
+    "สิทธิทางการศึกษา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/right-to-health",
+   "en": "Right to health",
+   "th": [
+    "สิทธิทางสุขภาพ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/icescr",
+   "en": "ICESCR",
+   "th": [
+    "กติการะหว่างประเทศว่าด้วยสิทธิทางเศรษฐกิจ สังคม และวัฒนธรรม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/iccpr",
+   "en": "ICCPR",
+   "th": [
+    "กติการะหว่างประเทศว่าด้วยสิทธิพลเมืองและสิทธิทางการเมือง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/udhr",
+   "en": "UDHR",
+   "th": [
+    "ปฏิญญาสากลว่าด้วยสิทธิมนุษยชน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
+     "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/official-religion",
+   "en": "Official religion",
+   "th": [
+    "ศาสนาประจำชาติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "legaleng.html ครั้งที่ 10",
      "kind": "lecture-page"
     }
    ]
