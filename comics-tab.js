@@ -228,8 +228,9 @@
   }
 
   /* หน้าที่ยังไม่มีแถบแท็บ: สร้างแถบ + ห่อเนื้อหาเดิมไว้ในแท็บ "สรุปรายครั้ง" */
-  function install(code){
+  function install(code, extra){
     addCss();
+    extra = extra || [];
     var head = document.querySelector('.page-head');
     var end = document.querySelector('.coffee-widget');
     if (!head || !end) return;
@@ -238,10 +239,14 @@
     while (node && node !== end){ var nx = node.nextSibling; readPanel.appendChild(node); node = nx; }
     var comicsPanel = document.createElement('div'); comicsPanel.className = 'ct-panel'; comicsPanel.id = 'ct-panel-comics';
     var tabs = document.createElement('div'); tabs.className = 'ct-tabs'; tabs.setAttribute('role', 'tablist'); tabs.setAttribute('aria-label', 'เลือกมุมมอง');
+    /* extra = [{k, label, match: RegExp for location.hash, hash, render(panelEl)}] — แท็บเสริมระหว่าง "สรุปรายครั้ง" กับ "Comics" (เช่น War Mode) */
+    var extraPanels = extra.map(function(x){ var p = document.createElement('div'); p.className = 'ct-panel'; p.id = 'ct-panel-' + x.k; return p; });
     tabs.innerHTML = '<button type="button" class="ct-tab active" role="tab" data-tab="read">📖 สรุปรายครั้ง</button>' +
+                     extra.map(function(x){ return '<button type="button" class="ct-tab" role="tab" data-tab="' + x.k + '">' + x.label + '</button>'; }).join('') +
                      '<button type="button" class="ct-tab" role="tab" data-tab="comics">🎭 Comics</button>';
     end.parentNode.insertBefore(tabs, end);
     end.parentNode.insertBefore(readPanel, end);
+    extraPanels.forEach(function(p){ end.parentNode.insertBefore(p, end); });
     end.parentNode.insertBefore(comicsPanel, end);
     var mounted = false;
     function show(name, keepHash){
@@ -253,14 +258,18 @@
           if (m){ var el = document.getElementById('comics-' + m[1]); if (el) el.scrollIntoView(); }
         });
       }
+      var ex = extra.filter(function(x){ return x.k === name; })[0];
+      if (ex && !ex.done){ ex.done = true; if (ex.render) ex.render(document.getElementById('ct-panel-' + ex.k)); }
       tabs.querySelectorAll('.ct-tab').forEach(function(b){ b.classList.toggle('active', b.dataset.tab === name); });
       readPanel.classList.toggle('active', name === 'read');
+      extraPanels.forEach(function(p){ p.classList.toggle('active', p.id === 'ct-panel-' + name); });
       comicsPanel.classList.toggle('active', name === 'comics');
       try { if (typeof TTS !== 'undefined') TTS.stop(); } catch (e) {}
-      if (!keepHash) { try { history.replaceState(null, '', name === 'comics' ? '#comics' : location.pathname + location.search); } catch (e) {} }
+      if (!keepHash) { try { history.replaceState(null, '', name === 'comics' ? '#comics' : ex ? (ex.hash || '#' + ex.k) : location.pathname + location.search); } catch (e) {} }
     }
     tabs.addEventListener('click', function(ev){ var b = ev.target.closest('.ct-tab'); if (b) show(b.dataset.tab); });
     if (/^#comics(-\d+)?$/.test(location.hash)) show('comics', true);
+    extra.forEach(function(x){ if ((x.match || new RegExp('^#' + x.k + '(-[a-z0-9]+)?$')).test(location.hash)) show(x.k, true); });
   }
 
   window.ComicsTab = { mount: mount, install: install, openReader: openReader, closeReader: closeReader };

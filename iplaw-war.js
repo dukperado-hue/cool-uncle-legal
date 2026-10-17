@@ -36,13 +36,13 @@ const IW_DATA = {"tabs": [{"k": "cr", "label": "⚖️ ลิขสิทธิ�
   window.iwOpenComic = function(ep){ if (window.ComicsTab) ComicsTab.openReader('iplawwar', ep, 0); return false; };
   function comicBanner(){
     const ks = Object.keys(COMIC_EP);
-    const btn = ks.map(n => `<button type="button" onclick="iwOpenComic(${n})" style="appearance:none;border:0;cursor:pointer;padding:8px 14px;border-radius:999px;background:var(--accent,#2E4A7A);color:#fff;font:inherit;font-weight:800">▶ ${n}. ${esc(COMIC_EP[n].title)}</button>`).join(' ');
-    return `<div class="iw-comic-banner" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 16px;padding:12px 16px;border-radius:14px;border:1px solid var(--line);background:var(--card)"><span>🎭 <b>การ์ตูนติว War Mode</b> — ${ks.length} ตอน (ลิขสิทธิ์ 6 · เครื่องหมายการค้า 1) · ส่วนที่อาจารย์ยังไม่บรรยาย (เครื่องหมายการค้าครั้ง 10–11 · สิทธิบัตร) ยังไม่ทำ</span><span style="display:flex;gap:8px;flex-wrap:wrap">${btn}</span></div>`;
+    const btn = ks.map(n => `<button type="button" class="iw-pill" onclick="iwOpenComic(${n})">▶ ${n}. ${esc(COMIC_EP[n].title)}</button>`).join('');
+    return `<details class="iw-comic-banner"><summary>🎭 การ์ตูนติว War Mode — ${ks.length} ตอน (ลิขสิทธิ์ 6 · เครื่องหมายการค้า 1) · กดเพื่อเลือกตอน</summary><div class="iw-pills">${btn}</div><p class="iw-comic-note">ส่วนที่อาจารย์ยังไม่บรรยาย (เครื่องหมายการค้าบางส่วน · สิทธิบัตร) ยังไม่ทำการ์ตูน</p></details>`;
   }
   function comicBtn(id){
     const n = COMIC_Q[id]; if (!n) return '';
     const c = COMIC_EP[n];
-    return `<div class="iw-comic" style="margin:8px 0 10px"><a href="#" onclick="return iwOpenComic(${n})" style="display:inline-block;padding:8px 14px;border-radius:999px;background:var(--accent,#2E4A7A);color:#fff;font-weight:700;text-decoration:none">🎭 ดูการ์ตูนอธิบายข้อนี้ — ${esc(c.title)} (${c.pages} หน้า)</a></div>`;
+    return `<div class="iw-comic"><a href="#" class="iw-pill" onclick="return iwOpenComic(${n})">🎭 การ์ตูนข้อนี้: ${esc(c.title)} (${c.pages} หน้า)</a></div>`;
   }
 
   function qCard(q){
@@ -84,7 +84,7 @@ const IW_DATA = {"tabs": [{"k": "cr", "label": "⚖️ ลิขสิทธิ�
 
   function bodyHTML(){
     const tabs = D.tabs.map((t, i) => `<button type="button" class="iw-tab${i === 0 ? ' active' : ''}" data-k="${t.k}" onclick="iwSwitch('${t.k}')">${esc(t.label)} <span class="iw-tab-n">${D.questions.filter(q => q.tab === t.k).length}</span></button>`).join('');
-    return `<div class="iw-top">${rich(D.intro)}</div>
+    return `<details class="iw-top-d" open><summary>ℹ️ วิธีใช้ · ชุดข้อสอบ · กติกาเฉลย</summary><div class="iw-top">${rich(D.intro)}</div></details>
       ${comicBanner()}
       <div class="iw-bar"><button type="button" class="iw-bar-btn" onclick="iwOpenAll(true)">📖 เปิดเฉลยทั้งหมด</button><button type="button" class="iw-bar-btn" onclick="iwOpenAll(false)">📕 พับทั้งหมด</button><button type="button" class="iw-bar-btn" onclick="iwPrint('cur')">🖨️ พิมพ์หมวดที่เปิดอยู่</button><button type="button" class="iw-bar-btn" onclick="iwPrint('all')">🖨️ พิมพ์ทั้งหมด</button></div>
       <div class="iw-tabs" role="tablist">${tabs}</div>
@@ -93,12 +93,12 @@ const IW_DATA = {"tabs": [{"k": "cr", "label": "⚖️ ลิขสิทธิ�
   }
 
   window.iwOpenAll = function(open){
-    const p = document.querySelector('#lec-war .iw-panel.active');
+    const p = document.querySelector('#iw-root .iw-panel.active');
     if (p) p.querySelectorAll('details').forEach(d => { d.open = !!open; });
   };
-  /* print: expand every answer, show only #lec-war (see @media print in iplaw.html), restore afterwards */
+  /* print: expand every answer, show only #iw-root (see @media print in iplaw.html), restore afterwards */
   window.iwPrint = function(mode){
-    const ds = Array.from(document.querySelectorAll('#lec-war details'));
+    const ds = Array.from(document.querySelectorAll('#iw-root details'));
     const was = ds.map(d => d.open);
     ds.forEach(d => { d.open = true; });
     document.body.classList.add('iw-printing', 'iw-print-' + mode);
@@ -116,37 +116,13 @@ const IW_DATA = {"tabs": [{"k": "cr", "label": "⚖️ ลิขสิทธิ�
     try { history.replaceState(null, '', location.pathname + location.search + '#war-' + k); } catch(e){}
   };
 
-  window.addEventListener('load', () => {
-    const orig = window.printAllLectures;
-    if (typeof orig !== 'function') return;
-    window.printAllLectures = list => orig({querySelectorAll: sel => Array.from(list.querySelectorAll(sel)).filter(r => r.id !== 'lec-war')});
-  });
-  window.renderWarRow = function(){
-    const list = document.getElementById('lectureList');
-    if (!list || document.getElementById('lec-war')) return;
-    const row = document.createElement('div');
-    row.className = 'lecture-row iw-row';
-    row.id = 'lec-war';
-    row.innerHTML = `<div class="lecture-head" onclick="toggleLecture('war')">
-        <div class="lecture-num">⚔️</div>
-        <div class="lecture-title">War Mode — คลังข้อสอบเก่า แยกตามประเภท (ลิขสิทธิ์ · เครื่องหมายการค้า · สิทธิบัตร)</div>
-        <div class="lecture-toggle">▾</div>
-      </div>
-      <div class="lecture-body">${bodyHTML()}</div>`;
-    list.appendChild(row);
-    /* the lecture-print.js 🖨️ in this row would clone the whole interactive panel; route it to the War Mode print instead */
-    const head = row.querySelector('.lecture-head');
-    if (head) head.addEventListener('click', ev => {
-      if (!ev.target.closest('.lecture-print-btn')) return;
-      ev.stopImmediatePropagation(); ev.preventDefault();
-      row.classList.add('open'); iwPrint('all');
-    }, true);
-    const h = location.hash || '';
-    const m = h.match(/^#war(?:-(\w+))?$/);
-    if (m) {
-      row.classList.add('open');
-      if (m[1] && TAB_ORDER.indexOf(m[1]) >= 0) iwSwitch(m[1]);
-      setTimeout(() => row.scrollIntoView({block:'start'}), 80);
-    }
+  /* War Mode เป็นแท็บบนสุดของหน้า (ComicsTab.install('iplaw', [{k:'war', ...}]) เรียกฟังก์ชันนี้ตอนเปิดแท็บ) */
+  window.renderWarMode = function(host){
+    if (!host || host.dataset.done) return;
+    host.dataset.done = '1';
+    host.innerHTML = `<div id="iw-root"><h2 class="section-h2">⚔️ War Mode — คลังข้อสอบเก่า วิชา IP (${D.questions.length} ข้อ · 4 ชุด)</h2>
+      ${bodyHTML()}</div>`;
+    const m = (location.hash || '').match(/^#war(?:-(\w+))?$/);
+    if (m && m[1] && TAB_ORDER.indexOf(m[1]) >= 0) iwSwitch(m[1]);
   };
 })();

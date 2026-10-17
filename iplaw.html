@@ -271,11 +271,35 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
 .iw-deep{margin-top:10px}.iw-deep>summary{cursor:pointer;font-weight:700;font-size:13.5px;color:var(--ink-soft);padding:6px 0;list-style:none}.iw-deep>summary::-webkit-details-marker{display:none}
 .iw-foot p{margin:0 0 6px}
 @media(max-width:640px){.iw-meta-row{flex-direction:column;gap:0}.iw-meta-k{flex:none}.iw-q{padding:12px}}
-.iw-sec{margin:22px 0 4px;font-size:15px;font-weight:800;color:var(--ink);padding-bottom:6px;border-bottom:2px solid var(--gold)}
+/* spacing pass: War Mode as top tab */
+#iw-root .section-h2{margin:6px 0 10px}
+.iw-top-d{margin:0 0 12px;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:0 14px}
+.iw-top-d>summary{cursor:pointer;font-weight:700;font-size:13.5px;color:var(--ink-soft);padding:9px 0;list-style:none}
+.iw-top-d>summary::-webkit-details-marker{display:none}
+.iw-top-d .iw-top{margin:0 0 10px;font-size:13.5px;line-height:1.75}
+.iw-top-d .iw-top p{margin:0 0 5px}
+.iw-comic-banner{margin:0 0 12px;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:0 14px}
+.iw-comic-banner>summary{cursor:pointer;font-weight:700;font-size:13.5px;color:var(--ink-soft);padding:9px 0;list-style:none}
+.iw-comic-banner>summary::-webkit-details-marker{display:none}
+.iw-pills{display:flex;gap:6px;flex-wrap:wrap;padding:2px 0 10px}
+.iw-comic-note{margin:0 0 10px;font-size:12px;color:var(--ink-faint)}
+.iw-pill{appearance:none;border:0;cursor:pointer;display:inline-block;padding:5px 12px;border-radius:999px;background:var(--accent,#2E4A7A);color:#fff;font:inherit;font-weight:700;font-size:12.5px;text-decoration:none}
+.iw-comic{margin:2px 0 6px}
+#iw-root .iw-tabs{margin:2px 0 12px}
+#iw-root .iw-bar{margin:0 0 10px}
+#iw-root .iw-intro{margin:0 0 12px;padding:10px 14px}
+#iw-root .iw-q{padding:12px 15px;margin:10px 0}
+#iw-root .iw-q-head{margin-bottom:2px}
+#iw-root .iw-meta{margin:6px 0 8px;padding:6px 10px}
+#iw-root .iw-q-body{line-height:1.75}
+#iw-root .iw-q-body p{margin:0 0 6px}
+#iw-root .iw-deep,#iw-root .iw-ans{margin-top:2px}
+#iw-root .iw-deep>summary,#iw-root .iw-ans>summary{padding:4px 0}
+.iw-sec{margin:16px 0 2px;font-size:15px;font-weight:800;color:var(--ink);padding-bottom:6px;border-bottom:2px solid var(--gold)}
 .iw-bar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 6px}
 .iw-bar-btn{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-family:inherit;font-size:13px;font-weight:700;color:var(--ink-soft);cursor:pointer}
 .iw-bar-btn:hover{border-color:var(--gold);color:var(--ink)}
-@media print{@page{margin:20mm 20mm 20mm 30mm}body.iw-printing,body.iw-printing *{visibility:visible!important}body.iw-printing :not(#lec-war):not(#lec-war *):not(:has(#lec-war)){display:none!important}body.iw-printing #lec-war,body.iw-printing #lec-war *{color:#111!important;background:transparent!important;box-shadow:none!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}body.iw-printing .iw-comic-banner,body.iw-printing .iw-comic,body.iw-printing #lec-war .lecture-print-btn,body.iw-printing #lec-war .lecture-toggle{display:none!important}.iw-tabs,.iw-bar{display:none!important}.iw-ans,.iw-deep{display:block}.iw-ans>summary,.iw-deep>summary{display:none}body.iw-print-all .iw-panel{display:block!important}body.iw-print-cur .iw-panel{display:none!important}body.iw-print-cur .iw-panel.active{display:block!important}}
+@media print{@page{margin:20mm 20mm 20mm 30mm}body.iw-printing,body.iw-printing *{visibility:visible!important}body.iw-printing :not(#iw-root):not(#iw-root *):not(:has(#iw-root)){display:none!important}body.iw-printing #iw-root,body.iw-printing #iw-root *{color:#111!important;background:transparent!important;box-shadow:none!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}body.iw-printing .iw-comic-banner,body.iw-printing .iw-comic,.iw-tabs,.iw-bar{display:none!important}.iw-ans,.iw-deep{display:block}.iw-ans>summary,.iw-deep>summary{display:none}body.iw-print-all .iw-panel{display:block!important}body.iw-print-cur .iw-panel{display:none!important}body.iw-print-cur .iw-panel.active{display:block!important}}
 
 </style>
 <meta name="description" content="ทบทวนกฎหมายทรัพย์สินทางปัญญาครบเครื่อง — พ.ร.บ.ลิขสิทธิ์ พ.ศ. 2537, พ.ร.บ.สิทธิบัตร พ.ศ. 2522, พ.ร.บ.เครื่องหมายการค้า พ.ศ. 2534 และศาลทรัพย์สินทางปัญญาฯ พร้อมเกมทบทวนและจุดดักข้อสอบ">
@@ -344,7 +368,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
 <footer>สร้างด้วย Claude · ⚠️ ใช้อ่านเสริมหลักสูตรเท่านั้น โปรดตรวจสอบความถูกต้องของข้อมูล · Cool Uncle Legal Lab 2024</footer>
 </div>
 
-<script src="iplaw-war.js?v=3"></script>
+<script src="iplaw-war.js?v=5"></script>
 <script>
 let __hbAudioCtx;
 function playHoverSound(){
@@ -1752,7 +1776,6 @@ function toggleLecture(n){
   playHoverSound();
 }
 renderLectures();
-if (typeof renderWarRow === 'function') renderWarRow();
 </script>
 <script>
 /* ================================================================
@@ -2026,7 +2049,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <link rel="stylesheet" href="legal-disclaimer.css">
 <script src="legal-footer.js"></script>
 <script src="lecture-print.js"></script>
-<script src="comics-tab.js?v=5"></script>
-<script>ComicsTab.install('iplaw');</script>
+<script src="comics-tab.js?v=7"></script>
+<script>ComicsTab.install('iplaw', [{k:'war', label:'⚔️ War Mode', render: function(el){ renderWarMode(el); }}]);</script>
 </body>
 </html>
