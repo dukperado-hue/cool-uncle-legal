@@ -100,7 +100,7 @@ const CW_DATA = {"nq":96,"tabs":[{"k":"p","label":"👤 ผู้เสียห
   function bodyHTML(){
     const tabs = [{k:'all', label:'📚 ทั้งหมด', n:D.fams.length}].concat(D.tabs.map(t => ({k:t.k, label:t.label, n:D.fams.filter(f => f.tab === t.k).length})))
       .map((t, i) => `<button type="button" class="iw-tab${i === 0 ? ' active' : ''}" data-k="${t.k}" onclick="iwSwitch('${t.k}')">${esc(t.label)} <span class="iw-tab-n">${t.n}</span></button>`).join('');
-    const bar = `<div class="iw-bar"><button type="button" class="iw-bar-btn" onclick="iwOpenAll(true)">📖 เปิดเฉลยและโจทย์ทั้งหมด</button><button type="button" class="iw-bar-btn" onclick="iwOpenAll(false)">📕 พับทั้งหมด</button></div>`;
+    const bar = `<div class="iw-bar"><button type="button" class="iw-bar-btn" onclick="iwOpenAll(true)">📖 เปิดเฉลยและโจทย์ทั้งหมด</button><button type="button" class="iw-bar-btn" onclick="iwOpenAll(false)">📕 พับทั้งหมด</button><button type="button" class="iw-bar-btn" onclick="iwPrint('cur')">🖨️ พิมพ์หมวดที่เปิดอยู่</button><button type="button" class="iw-bar-btn" onclick="iwPrint('all')">🖨️ พิมพ์ทั้งหมด</button></div>`;
     return `<div class="iw-top">${rich(D.intro)}</div>${statsBox()}
       <div class="iw-tabs" role="tablist">${tabs}</div>${bar}
       ${allPanel()}${D.tabs.map(panel).join('')}
@@ -110,6 +110,21 @@ const CW_DATA = {"nq":96,"tabs":[{"k":"p","label":"👤 ผู้เสียห
   window.iwOpenAll = function(open){
     const p = document.querySelector('.iw-panel.active');
     if (p) p.querySelectorAll('details.iw-ans, details.iw-vars').forEach(d => { d.open = !!open; });
+  };
+
+  /* print: expand every answer, show only #lec-war (see @media print in crimpro.html), restore afterwards */
+  window.iwPrint = function(mode){
+    const ds = Array.from(document.querySelectorAll('#lec-war details'));
+    const was = ds.map(d => d.open);
+    ds.forEach(d => { d.open = true; });
+    document.body.classList.add('iw-printing', 'iw-print-' + mode);
+    const done = () => {
+      window.removeEventListener('afterprint', done);
+      document.body.classList.remove('iw-printing', 'iw-print-cur', 'iw-print-all');
+      ds.forEach((d, i) => { d.open = was[i]; });
+    };
+    window.addEventListener('afterprint', done);
+    window.print();
   };
 
   window.iwSwitch = function(k){

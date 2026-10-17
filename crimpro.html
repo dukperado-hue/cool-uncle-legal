@@ -371,7 +371,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
 .iw-stat-note{margin-top:12px;font-size:13px;line-height:1.85;color:var(--ink-soft)}
 .iw-stat-note p{margin:0 0 6px}
 @media(max-width:640px){.iw-meta-row{flex-direction:column;gap:0}.iw-meta-k{flex:none}.iw-q{padding:12px}.iw-bar-row{flex-wrap:wrap}.iw-bar-l{flex:1 0 100%}.iw-bar-r{flex:none}.iw-badge{margin-left:0}}
-@media print{.iw-tabs,.iw-bar,#iw-panel-all{display:none!important}.iw-panel{display:block!important}.iw-ans,.iw-vars{display:block}.iw-ans>summary,.iw-vars>summary{display:none}}
+@media print{@page{margin:20mm 20mm 20mm 30mm}body.iw-printing,body.iw-printing *{visibility:visible!important}body.iw-printing :not(#lec-war):not(#lec-war *):not(:has(#lec-war)){display:none!important}body.iw-printing #lec-war,body.iw-printing #lec-war *{color:#111!important;background:transparent!important;box-shadow:none!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.iw-tabs,.iw-bar{display:none!important}.iw-ans,.iw-vars{display:block}.iw-ans>summary,.iw-vars>summary{display:none}body.iw-print-all .iw-panel{display:block!important}body.iw-print-all #iw-panel-all{display:none!important}body.iw-print-cur .iw-panel{display:none!important}body.iw-print-cur .iw-panel.active{display:block!important}}
 </style>
 <meta name="description" content="ทบทวนประมวลกฎหมายวิธีพิจารณาความอาญา (วิอาญา) ครบทุกมาตรา — พนักงานสอบสวน อัยการ สำนวนฟ้อง ขันประกัน พร้อมจุดดักข้อสอบและเกมฝึกจำ สำหรับเตรียมสอบปริญญาตรี เนติฯ ตั๋วทนาย">
 <meta name="keywords" content="ประมวลกฎหมายวิธีพิจารณาความอาญา, วิอาญา, วิ.อาญา, วิธีพิจารณาความอาญา, พนักงานสอบสวน, สำนวนฟ้อง, ขันประกัน, จำเลย, ประมวลกฎหมายวิธีพิจารณาความอาญา, วิอาญา, วิ.อาญา, วิธีพิจารณาความอาญา, พนักงานสอบสวน, สำนวนฟ้อง, ขันประกัน, จำเลย, จำเลยข์">
@@ -3181,7 +3181,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <link rel="stylesheet" href="legal-disclaimer.css">
-<script src="crimpro-war.js?v=6"></script>
+<script src="crimpro-war.js?v=7"></script>
 <script src="comics-tab.js?v=5"></script>
 <script>
 ComicsTab.mount('crimprowar', document.getElementById('warComicList'), {idPrefix:'warcomic-'}).then(function(){ if(/^#warcomic-\d+$/.test(location.hash)){ showCrimTab('comics'); var el=document.getElementById(location.hash.slice(1)); if(el){ el.classList.add('open'); el.scrollIntoView(); } } });
