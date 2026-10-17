@@ -68,6 +68,7 @@
          "y": 100,
          "h": 44,
          "shot": "full",
+         "face": 0.46,
          "sticker": true,
          "tilt": -3
         },
@@ -77,6 +78,7 @@
          "y": 100,
          "h": 44,
          "shot": "full",
+         "face": 0.46,
          "sticker": true,
          "tilt": 2
         },
@@ -86,6 +88,7 @@
          "y": 100,
          "h": 40,
          "shot": "full",
+         "face": 0.46,
          "sticker": true,
          "tilt": -2
         },
@@ -95,6 +98,7 @@
          "y": 100,
          "h": 50,
          "shot": "full",
+         "face": 0.46,
          "sticker": true,
          "tilt": 3
         }
@@ -181,7 +185,8 @@
          "x": 50,
          "y": 100,
          "h": 64,
-         "shot": "full"
+         "shot": "full",
+         "face": 0.46
         }
        ],
        "bubbles": [
@@ -209,7 +214,8 @@
          "x": 50,
          "y": 100,
          "h": 64,
-         "shot": "full"
+         "shot": "full",
+         "face": 0.46
         }
        ],
        "bubbles": [
@@ -301,7 +307,8 @@
          "x": 50,
          "y": 100,
          "h": 64,
-         "shot": "full"
+         "shot": "full",
+         "face": 0.46
         }
        ],
        "bubbles": [
@@ -329,7 +336,8 @@
          "x": 50,
          "y": 100,
          "h": 64,
-         "shot": "full"
+         "shot": "full",
+         "face": 0.46
         }
        ],
        "bubbles": [
@@ -362,7 +370,8 @@
          "x": 50,
          "y": 100,
          "h": 64,
-         "shot": "full"
+         "shot": "full",
+         "face": 0.46
         }
        ],
        "bubbles": [
@@ -453,7 +462,8 @@
          "x": 50,
          "y": 100,
          "h": 64,
-         "shot": "full"
+         "shot": "full",
+         "face": 0.46
         }
        ],
        "bubbles": [
@@ -481,7 +491,8 @@
          "x": 50,
          "y": 100,
          "h": 64,
-         "shot": "full"
+         "shot": "full",
+         "face": 0.46
         }
        ],
        "bubbles": [
@@ -513,8 +524,9 @@
          "who": "sd",
          "x": 50,
          "y": 100,
-         "h": 64,
-         "shot": "full"
+         "h": 56,
+         "shot": "full",
+         "face": 0.46
         }
        ],
        "bubbles": [
@@ -573,7 +585,8 @@
          "x": 50,
          "y": 100,
          "h": 64,
-         "shot": "full"
+         "shot": "full",
+         "face": 0.46
         }
        ],
        "bubbles": [
@@ -600,8 +613,9 @@
          "who": "tu",
          "x": 50,
          "y": 100,
-         "h": 64,
-         "shot": "full"
+         "h": 56,
+         "shot": "full",
+         "face": 0.46
         }
        ],
        "bubbles": [
@@ -633,8 +647,9 @@
          "who": "sd",
          "x": 50,
          "y": 100,
-         "h": 64,
-         "shot": "full"
+         "h": 56,
+         "shot": "full",
+         "face": 0.46
         }
        ],
        "bubbles": [
@@ -693,7 +708,8 @@
          "x": 50,
          "y": 100,
          "h": 64,
-         "shot": "full"
+         "shot": "full",
+         "face": 0.46
         }
        ],
        "bubbles": [
@@ -721,7 +737,8 @@
          "x": 50,
          "y": 100,
          "h": 64,
-         "shot": "full"
+         "shot": "full",
+         "face": 0.46
         }
        ],
        "bubbles": [
@@ -753,8 +770,9 @@
          "who": "sl",
          "x": 50,
          "y": 100,
-         "h": 64,
-         "shot": "full"
+         "h": 56,
+         "shot": "full",
+         "face": 0.46
         }
        ],
        "bubbles": [
