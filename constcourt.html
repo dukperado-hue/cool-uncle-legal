@@ -263,6 +263,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
 /* ---------- War Mode (constcourt-war.js) ---------- */
 .lec-hl{background:linear-gradient(transparent 55%,var(--gold-soft) 55%);box-shadow:inset 0 -1px 0 var(--gold);padding:0 1px;border-radius:2px}
 :root[data-theme="dark"] .lec-hl,:root[data-theme="horror"] .lec-hl{background:var(--gold-soft);color:var(--ink);box-shadow:inset 0 -1px 0 var(--gold)}
+.section-h2{margin:6px 0 10px;font-size:20px}
 .iw-top{font-size:14px;line-height:1.85;color:var(--ink-soft);margin:2px 0 14px}
 .iw-top p{margin:0 0 8px}
 .iw-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 16px}
@@ -368,7 +369,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
     <span class="tts-hint">เปิดบรรยายครั้งที่ต้องการก่อน แล้วกด "อ่านออกเสียง"</span>
   </div>
   <div class="lecture-list" id="lectureList"></div>
-<script src="constcourt-war.js?v=4"></script>
+<script src="constcourt-war.js?v=5"></script>
 
   <div class="reading-header">📚 อ่านเสริมประกอบการบรรยาย</div>
   <div class="lecture-list" id="readingList"></div>
@@ -1868,7 +1869,6 @@ function toggleLecture(n){
   }
 }
 renderLectures();
-if (typeof renderWarRow === 'function') renderWarRow();
 
 /* Supplementary reading boxes — Chapter 1 summary + Kelsen biography, per user request. */
 const READINGS = [
@@ -2324,6 +2324,6 @@ document.addEventListener('DOMContentLoaded', () => {
 <script src="legal-footer.js"></script>
 <script src="lecture-print.js"></script>
 <script src="comics-tab.js?v=5"></script>
-<script>ComicsTab.install('constcourt');</script>
+<script>ComicsTab.install('constcourt', [{k:'war', label:'⚔️ War Mode', render: function(el){ renderWarMode(el); }}]);</script>
 </body>
 </html>

@@ -87,25 +87,12 @@ const IW_DATA = {"tabs": [{"k": "leg", "label": "⚖️ ที่มา · ค�
     try { history.replaceState(null, '', location.pathname + location.search + '#war-' + k); } catch(e){}
   };
 
-  window.renderWarRow = function(){
-    const list = document.getElementById('lectureList');
-    if (!list || document.getElementById('lec-war')) return;
-    const row = document.createElement('div');
-    row.className = 'lecture-row iw-row';
-    row.id = 'lec-war';
-    row.innerHTML = `<div class="lecture-head" onclick="toggleLecture('war')">
-        <div class="lecture-num">⚔️</div>
-        <div class="lecture-title">War Mode — คลังข้อสอบเก่า น.259 แยกตามประเด็น (ที่มา · เขตอำนาจ · ตรวจหลังประกาศใช้ · แก้ไขรัฐธรรมนูญ · หนังสือสัญญา)</div>
-        <div class="lecture-toggle">▾</div>
-      </div>
-      <div class="lecture-body">${bodyHTML()}</div>`;
-    list.insertBefore(row, list.firstChild);
-    const h = location.hash || '';
-    const m = h.match(/^#war(?:-(\w+))?$/);
-    if (m) {
-      row.classList.add('open');
-      if (m[1] && TAB_ORDER.indexOf(m[1]) >= 0) iwSwitch(m[1]);
-      setTimeout(() => row.scrollIntoView({block:'start'}), 80);
-    }
+  /* War Mode เป็นแท็บบนสุดของหน้า (ComicsTab.install('constcourt', [{k:'war', ...}]) เรียกฟังก์ชันนี้ตอนเปิดแท็บ) */
+  window.renderWarMode = function(host){
+    if (!host || host.dataset.done) return;
+    host.dataset.done = '1';
+    host.innerHTML = `<div id="iw-root"><h2 class="section-h2">⚔️ War Mode — คลังข้อสอบเก่า น.259 (${D.questions.length} ข้อ · 5 ชุด)</h2>${bodyHTML()}</div>`;
+    const m = (location.hash || '').match(/^#war(?:-(\w+))?$/);
+    if (m && m[1] && TAB_ORDER.indexOf(m[1]) >= 0) iwSwitch(m[1]);
   };
 })();
