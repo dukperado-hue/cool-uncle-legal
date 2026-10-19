@@ -99,7 +99,7 @@ const IW_DATA = {"tabs": [{"k": "leg", "label": "⚖️ ที่มา · ค�
         <div class="lecture-toggle">▾</div>
       </div>
       <div class="lecture-body">${bodyHTML()}</div>`;
-    list.appendChild(row);
+    list.insertBefore(row, list.firstChild);
     const h = location.hash || '';
     const m = h.match(/^#war(?:-(\w+))?$/);
     if (m) {
