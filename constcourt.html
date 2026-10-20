@@ -312,7 +312,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
 .iw-foot p{margin:0 0 6px}
 .iw-deep{margin-top:10px}.iw-deep>summary{cursor:pointer;font-weight:700;font-size:13.5px;color:var(--ink-soft);padding:6px 0;list-style:none}.iw-deep>summary::-webkit-details-marker{display:none}
 @media(max-width:640px){.iw-meta-row{flex-direction:column;gap:0}.iw-meta-k{flex:none}.iw-q{padding:12px}}
-@media print{.iw-tabs,.iw-bar,#iw-panel-all{display:none!important}.iw-panel{display:block!important}.iw-ans{display:block}.iw-ans>summary{display:none}}
+@media print{@page{margin:20mm 20mm 20mm 30mm}body.iw-printing,body.iw-printing *{visibility:visible!important}body.iw-printing :not(#iw-root):not(#iw-root *):not(:has(#iw-root)){display:none!important}body.iw-printing #iw-root,body.iw-printing #iw-root *{color:#111!important;background:transparent!important;box-shadow:none!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.iw-tabs,.iw-bar,#iw-panel-all{display:none!important}.iw-ans,.iw-deep{display:block}.iw-ans>summary,.iw-deep>summary{display:none}body.iw-print-all .iw-panel{display:block!important}body.iw-print-cur .iw-panel{display:none!important}body.iw-print-cur .iw-panel.active{display:block!important}}
 </style>
 <meta name="description" content="ทบทวนศาลรัฐธรรมนูญและคดีรัฐธรรมนูญ — วิธีเสนอคำร้อง วินิจฉัยกฎหมายขัดรัฐธรรมนูญ พร้อมเกมทบทวนและจุดดักข้อสอบวิชากฎหมายรัฐธรรมนูญ">
 <meta name="keywords" content="ศาลรัฐธรรมนูญ, คดีรัฐธรรมนูญ, กฎหมายรัฐธรรมนูญ, รัฐธรรมนูญแห่งราชอาณาจักรไทย, พ.ร.บ.ประกอบรัฐธรรมนูญว่าด้วยวิธีการพิจารณาคดีของศาลรัฐธรรมนูญ, ศาลรัฐธรรมนูญ, คดีรัฐธรรมนูญ, กฎหมายรัฐธรรมนูญ, รัฐธรรมนูญแห่งราชอาณาจักรไทย, พ.ร.บ.ประกอบรัฐธรรมนูญว่าด้วยวิธีการพิจารณาคดีของศาลรัฐธรรมนูญ">
@@ -369,7 +369,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
     <span class="tts-hint">เปิดบรรยายครั้งที่ต้องการก่อน แล้วกด "อ่านออกเสียง"</span>
   </div>
   <div class="lecture-list" id="lectureList"></div>
-<script src="constcourt-war.js?v=5"></script>
+<script src="constcourt-war.js?v=6"></script>
 
   <div class="reading-header">📚 อ่านเสริมประกอบการบรรยาย</div>
   <div class="lecture-list" id="readingList"></div>

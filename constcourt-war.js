@@ -69,7 +69,7 @@ const IW_DATA = {"tabs": [{"k": "leg", "label": "⚖️ ที่มา · ค�
   function bodyHTML(){
     const tabs = [{k:'all', label:'📚 ทั้งหมด', n:D.questions.length}].concat(D.tabs.map(t => ({k:t.k, label:t.label, n:D.questions.filter(q => q.tab === t.k).length})))
       .map((t, i) => `<button type="button" class="iw-tab${i === 0 ? ' active' : ''}" data-k="${t.k}" onclick="iwSwitch('${t.k}')">${esc(t.label)} <span class="iw-tab-n">${t.n}</span></button>`).join('');
-    const bar = `<div class="iw-bar"><button type="button" class="iw-bar-btn" onclick="iwOpenAll(true)">📖 เปิดเฉลยทั้งหมด</button><button type="button" class="iw-bar-btn" onclick="iwOpenAll(false)">📕 พับเฉลยทั้งหมด</button></div>`;
+    const bar = `<div class="iw-bar"><button type="button" class="iw-bar-btn" onclick="iwOpenAll(true)">📖 เปิดเฉลยทั้งหมด</button><button type="button" class="iw-bar-btn" onclick="iwOpenAll(false)">📕 พับเฉลยทั้งหมด</button><button type="button" class="iw-bar-btn" onclick="iwPrint('cur')">🖨️ พิมพ์หมวดที่เปิดอยู่</button><button type="button" class="iw-bar-btn" onclick="iwPrint('all')">🖨️ พิมพ์ทั้งหมด</button></div>`;
     return `<div class="iw-top">${rich(D.intro)}</div>
       <div class="iw-tabs" role="tablist">${tabs}</div>${bar}
       ${allPanel()}${D.tabs.map(t => panel(t).replace(' active"', '"')).join('')}
@@ -79,6 +79,22 @@ const IW_DATA = {"tabs": [{"k": "leg", "label": "⚖️ ที่มา · ค�
   window.iwOpenAll = function(open){
     const p = document.querySelector('.iw-panel.active');
     if (p) p.querySelectorAll('details.iw-ans').forEach(d => { d.open = !!open; });
+  };
+
+  /* print: expand every answer, show only #iw-root (see @media print in constcourt.html), restore afterwards */
+  window.iwPrint = function(mode){
+    if (mode === 'cur' && document.querySelector('.iw-panel.active#iw-panel-all')) mode = 'all'; /* แท็บ "ทั้งหมด" = พิมพ์ครบทุกหมวด */
+    const ds = Array.from(document.querySelectorAll('#iw-root details'));
+    const was = ds.map(d => d.open);
+    ds.forEach(d => { d.open = true; });
+    document.body.classList.add('iw-printing', 'iw-print-' + mode);
+    const done = () => {
+      window.removeEventListener('afterprint', done);
+      document.body.classList.remove('iw-printing', 'iw-print-cur', 'iw-print-all');
+      ds.forEach((d, i) => { d.open = was[i]; });
+    };
+    window.addEventListener('afterprint', done);
+    window.print();
   };
 
   window.iwSwitch = function(k){
