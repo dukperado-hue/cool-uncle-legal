@@ -42,8 +42,8 @@ function crumbText(key, num) {
 
 // ---------------------------------------------------------------- generic
 head('Registry / no-hardcode / URL-safety');
-ok('registry loaded, 24 real + 1 planned collection',
-   Object.keys(registry.collections).length === 25);
+ok('registry loaded, 25 real + 1 planned collection',
+   Object.keys(registry.collections).length === 26);
 const coreSrc = fs.readFileSync(path.join(ROOT, 'atlas-core.js'), 'utf8');
 ok("atlas-core: structural field order is derived from the registry, not a literal array",
    /getStructuralFieldOrder/.test(coreSrc) &&

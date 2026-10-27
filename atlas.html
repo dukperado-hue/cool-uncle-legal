@@ -338,7 +338,7 @@
 <script>
 (function () {
   'use strict';
-  var CODEX_VERSION = '20261026a';
+  var CODEX_VERSION = '20261027a';
   var root = document.getElementById('atlas-root');
   var foot = document.getElementById('atlas-foot');
 
@@ -356,7 +356,7 @@
     fetch('codex-data.json?v=' + CODEX_VERSION).then(function (r) {
       if (!r.ok) throw new Error('codex-data.json ' + r.status); return r.json();
     }),
-    AtlasCore.loadRegistry('collections-registry.json?v=20261001b')
+    AtlasCore.loadRegistry('collections-registry.json?v=20261027a')
   ]).then(function (res) {
     AtlasCore.attachCorpus(res[0]);
     AtlasUI.mount(root);

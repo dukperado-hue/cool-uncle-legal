@@ -820,6 +820,11 @@ footer{
           <div class="name">พ.ร.ป.พรรคการเมือง</div>
           <div class="status">153 มาตรา</div>
         </a>
+        <a href="codex-search.html?book=constcourtproc" class="codex-card compact" onmouseenter="playHoverSound()">
+          <div class="icon">⚖️</div>
+          <div class="name">พ.ร.ป.วิธีพิจารณาศาลรัฐธรรมนูญ</div>
+          <div class="status">83 มาตรา</div>
+        </a>
         <a href="codex-search.html?book=torture" class="codex-card compact" onmouseenter="playHoverSound()">
           <div class="icon">🛡️</div>
           <div class="name">ป้องกันการทรมานและอุ้มหาย</div>
@@ -1040,6 +1045,7 @@ const CODEX_BOOKS = [
   { name: "พระธรรมนูญ", desc: "34 มาตรา", icon: "🏛️", href: "codex-search.html?book=constitution" },
   { name: "รัฐธรรมนูญ 2560", desc: "279 มาตรา", icon: "🇹🇭", href: "codex-search.html?book=const2560" },
   { name: "พ.ร.ป.พรรคการเมือง", desc: "153 มาตรา", icon: "🗳️", href: "codex-search.html?book=politicalparty" },
+  { name: "พ.ร.ป.วิธีพิจารณาศาลรัฐธรรมนูญ", desc: "83 มาตรา", icon: "⚖️", href: "codex-search.html?book=constcourtproc" },
   { name: "ป้องกันการทรมานและอุ้มหาย", desc: "43 มาตรา", icon: "🛡️", href: "codex-search.html?book=torture" },
   { name: "กฎหมายปกครอง", desc: "2 ฉบับ", icon: "🏢", href: "codex-search.html?book=admin" },
   { name: "ทรัพย์สินทางปัญญา", desc: "5 ฉบับ", icon: "💡", href: "codex-search.html?book=ip" },
@@ -1079,6 +1085,7 @@ const CODEX_BOOK_LABELS = {
   tortofficials: 'ละเมิดของเจ้าหน้าที่', copyright: 'ลิขสิทธิ์', patent: 'สิทธิบัตร',
   trademark: 'เครื่องหมายการค้า', carriage: 'รับขนของทางทะเล', ipcourt: 'ศาลทรัพย์สินทางปัญญา',
   politicalparty: 'พ.ร.ป.พรรคการเมือง',
+  constcourtproc: 'พ.ร.ป.วิธีพิจารณาศาลรัฐธรรมนูญ',
 };
 const CODEX_BOOK_KEYS = Object.keys(CODEX_BOOK_LABELS);
 function bookTagColor(bookKey){

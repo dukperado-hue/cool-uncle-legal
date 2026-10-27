@@ -336,6 +336,7 @@
       admincourt:    { title: 'พ.ร.บ.จัดตั้งศาลปกครองฯ' },
       tortofficials: { title: 'พ.ร.บ.ความรับผิดทางละเมิดของเจ้าหน้าที่' },
       politicalparty:{ title: 'พ.ร.ป.พรรคการเมือง พ.ศ. 2560' },
+      constcourtproc: { title: 'พ.ร.ป.วิธีพิจารณาของศาลรัฐธรรมนูญ พ.ศ. 2561' },
       copyright:     { title: 'พ.ร.บ.ลิขสิทธิ์ พ.ศ. 2537' },
       patent:        { title: 'พ.ร.บ.สิทธิบัตร พ.ศ. 2522' },
       trademark:     { title: 'พ.ร.บ.เครื่องหมายการค้า พ.ศ. 2534' },
@@ -365,7 +366,7 @@
       crimpro:  { label: 'วิอาญา',           color: '#ff4d8d', books: ['crimpro'] },
       public:   { label: 'มหาชน', color: '#aa00ff', subgroups: {
                     adminlaw: { label: 'กฎหมายปกครอง', books: ['adminproc', 'admincourt', 'tortofficials', 'torture', 'pdpa'] },
-                    constlaw: { label: 'รัฐธรรมนูญ',   books: ['constitution', 'const2560', 'politicalparty'] },
+                    constlaw: { label: 'รัฐธรรมนูญ',   books: ['constitution', 'const2560', 'politicalparty', 'constcourtproc'] },
                   } },
       other:    { label: 'อื่นๆ', color: '#ff9900', books: ['copyright', 'patent', 'trademark', 'carriage', 'ipcourt'] },
       aviation: { label: 'การบิน', color: '#2299ff', books: ['airnav', 'caat2558', 'airoffences'] },
@@ -387,7 +388,7 @@
       [codex, articleIndex] = await Promise.all([
         fetch('codex-data.json', { cache: 'no-store' }).then(r => r.json()),
         fetch('prototype/assets/cases/article-case-index.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : {}),
-        (window.AtlasCore ? AtlasCore.loadRegistry('collections-registry.json?v=20260924e').catch(() => {}) : Promise.resolve()),
+        (window.AtlasCore ? AtlasCore.loadRegistry('collections-registry.json?v=20261027a').catch(() => {}) : Promise.resolve()),
       ]);
     } catch (e) {
       loadingEl.innerHTML = '<div style="color:#ff8080">โหลดข้อมูลไม่สำเร็จ: ' + (e.message || e) + '</div>';
@@ -874,6 +875,7 @@
       ['carriage', ['รับขนของทางทะเล']],
       ['ipcourt', ['ศาลทรัพย์สินทางปัญญา']],
       ['politicalparty', ['พรรคการเมือง']],
+      ['constcourtproc', ['วิธีพิจารณาของศาลรัฐธรรมนูญ', 'พ.ร.ป.วิธีพิจารณา']],
       ['caat2558', ['การบินพลเรือนแห่งประเทศไทย']],
       ['airoffences', ['ความผิดบางประการต่อการเดินอากาศ']],
       ['airnav', ['การเดินอากาศ']],

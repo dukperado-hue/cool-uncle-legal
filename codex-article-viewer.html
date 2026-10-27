@@ -1389,6 +1389,7 @@ const BOOK_TITLES = {
   carriage: 'พระราชบัญญัติการรับขนของทางทะเล พ.ศ. 2534',
   ipcourt: 'พระราชบัญญัติจัดตั้งศาลทรัพย์สินทางปัญญาและการค้าระหว่างประเทศฯ พ.ศ. 2539',
   politicalparty: 'พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยพรรคการเมือง พ.ศ. 2560',
+  constcourtproc: 'พระราชบัญญัติประกอบรัฐธรรมนูญว่าด้วยวิธีพิจารณาของศาลรัฐธรรมนูญ พ.ศ. 2561',
   airnav: 'พระราชบัญญัติการเดินอากาศ พ.ศ. 2497',
   caat2558: 'พระราชกำหนดการบินพลเรือนแห่งประเทศไทย พ.ศ. 2558',
   airoffences: 'พระราชบัญญัติว่าด้วยความผิดบางประการต่อการเดินอากาศ พ.ศ. 2558',
@@ -2277,7 +2278,7 @@ async function loadAndRender() {
   // Resolve the tiny registry first (best-effort, ~14 KB) so we can decode
   // an ?atlas= id before parsing. Negligible next to the 9.5 MB corpus.
   if (window.AtlasCore) {
-    try { await AtlasCore.loadRegistry('collections-registry.json?v=20261001b'); } catch (e) {}
+    try { await AtlasCore.loadRegistry('collections-registry.json?v=20261027a'); } catch (e) {}
   }
 
   // Accept BOTH:  ?id=<collection>_<number>   (legacy — unchanged, canonical)
@@ -2307,7 +2308,7 @@ async function loadAndRender() {
   currentNumber = id.slice(id.indexOf('_') + 1);
 
   try {
-    const res = await fetch('codex-data.json?v=20261026a');
+    const res = await fetch('codex-data.json?v=20261027a');
     if (!res.ok) throw new Error('fetch failed');
     codexData = await res.json();
   } catch (e) {
