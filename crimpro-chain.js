@@ -306,6 +306,15 @@ const css = `
 .ch-branches::before{content:"";position:absolute;top:0;left:50%;width:2px;height:12px;background:var(--c,var(--ink-faint))}
 .ch-bbox{flex:1 1 150px;max-width:270px;box-sizing:border-box;border:1.5px dashed var(--c,var(--accent));border-radius:9px;background:var(--paper);padding:6px 9px;text-align:center;font-size:12.5px;line-height:1.65;color:var(--ink)}
 .ch-bbox b{display:block;color:var(--c,var(--accent));font-size:12px}
+.ch-star{display:block;margin-top:5px;font-size:11.5px;font-weight:700;color:var(--gold)}
+.ch-star.s0{color:var(--ink-faint);font-weight:500}
+.ch-lec{display:block;margin-top:3px;font-size:11px;color:var(--ink-soft)}
+.ch-ep-stars{font-size:12px;white-space:nowrap}
+.ch-legend{font-size:12.5px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 13px;margin:0 0 12px;line-height:1.75}
+.ch-view{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+.ch-view button{appearance:none;font:inherit;font-size:13.5px;font-weight:800;padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);cursor:pointer}
+.ch-view button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ch-lec-note{font-size:13px;color:var(--ink-soft);padding:6px 2px}
 .ch-notes{margin-top:16px;border-top:2px dashed var(--line);padding-top:12px}
 .ch-notes h4{margin:0 0 8px;font-size:14px;color:var(--accent)}
 .ch-notes ul{margin:0;padding:0 0 0 20px}
@@ -321,20 +330,52 @@ function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','
 function flat(ep){
   return [ep.title, 'ชุดที่ '+ep.n].concat(ep.steps.map(s=>(s.r||'')+' '+(s.t||'')+' '+(s.g||'')+' '+(s.o||[]).map(o=>o.l+' '+o.t).join(' '))).join(' ');
 }
+const TOPICS={vic:['ผู้เสียหาย · ผู้จัดการแทน',20],cmp:['ร้องทุกข์ · ความผิดต่อส่วนตัว',15],inv:['พงส.ผู้รับผิดชอบ · เขตสอบสวน',12],arrest:['จับ (ม.78–85)',21],search:['ค้น · ยึด',20],suspect:['สอบสวนผู้ต้องหา · ทนาย',20],child:['เด็กในชั้นสอบสวน/พิจารณา',15],ag:['อัยการสั่งคดี · ไม่ฟ้อง',12],file:['ฟ้อง · บรรยายฟ้อง',12],mulfon:['ไต่สวนมูลฟ้อง',13],trial:['พิจารณา · รับสารภาพ',17],judg:['คำพิพากษา · เกินคำขอ',20],appeal:['อุทธรณ์ · ฎีกา',7]};
+const T_ALL=()=>true;
+const STAR_RULES=[
+ [1,T_ALL,'vic'],[2,(s,i)=>i===0,'vic'],[2,T_ALL,'cmp'],[3,T_ALL,'inv'],
+ [4,s=>/ม\.133 ทวิ/.test(s.r),'child'],
+ [5,s=>/ม\.133 ทวิ/.test(s.r),'child'],[5,s=>/ม\.132\((3|4)\)|ม\.139 ว\.2/.test(s.r),'search'],
+ [6,s=>s.r.indexOf('ถูกบัง')<0,'arrest'],[7,(s,i)=>i>=1&&i<=7,'search'],[7,T_ALL,'arrest'],
+ [8,s=>/ม\.134\/2|ม\.133 ตรี/.test(s.r),'child'],[8,s=>/ม\.134|ม\.139 ว\.1/.test(s.r),'suspect'],
+ [10,(s,i)=>i>=6&&i<=9,'ag'],[11,T_ALL,'ag'],[12,T_ALL,'ag'],
+ [13,(s,i)=>i===0||i===1||i===5,'ag'],[13,(s,i)=>i===2||i===3,'file'],
+ [14,(s,i)=>i===0,'vic'],[14,(s,i)=>i===1||i===2||i===4,'file'],[14,(s,i)=>i===5||i===6,'mulfon'],
+ [15,T_ALL,'mulfon'],[16,T_ALL,'trial'],[20,T_ALL,'judg'],[21,(s,i)=>i<=1,'judg'],[22,T_ALL,'appeal'],[23,T_ALL,'appeal']
+];
+function starsFor(ep,idx){
+  const s=ep.steps[idx];
+  for(const r of STAR_RULES){ if(r[0]===ep.n && r[1](s,idx)){ const t=TOPICS[r[2]]; const n=t[1]; return {t:t[0],n:n,k:n>=20?3:n>=15?2:n>=10?1:0}; } }
+  return null;
+}
+function lecsFor(epn,idx){
+  const L=window.CHAIN_LEC; if(!L) return [];
+  const k=epn+'.'+idx;
+  if(L.step && Object.prototype.hasOwnProperty.call(L.step,k)) return L.step[k];
+  return (L.def&&L.def[epn])||[];
+}
+function epMaxStars(ep){
+  let m=0; ep.steps.forEach((s,i)=>{ if(s.g) return; const x=starsFor(ep,i); if(x&&x.k>m) m=x.k; }); return m;
+}
 const PAL=['#2E4A7A','#1E7A4F','#B23A3A','#7A3E9D','#B08A3C','#0F7C8C'];
-function nodeHtml(s,i,last){
+function nodeHtml(s,i,last,ep,idx,hideLec){
   const c=PAL[i%PAL.length];
-  let h='<div class="ch-node" style="--c:'+c+'"><div class="ch-box"><span class="ch-ref">'+esc(s.r)+'</span><span class="ch-txt">'+esc(s.t)+'</span></div>';
+  const st=starsFor(ep,idx);
+  const ls=lecsFor(ep.n,idx).filter(n=>!hideLec||hideLec.indexOf(n)<0);
+  let h='<div class="ch-node" style="--c:'+c+'"><div class="ch-box"><span class="ch-ref">'+esc(s.r)+'</span><span class="ch-txt">'+esc(s.t)+'</span>'
+    +(st?'<span class="ch-star s'+st.k+'" title="หัวข้อ '+esc(st.t)+' ออกข้อสอบ '+st.n+' จาก 22 ฉบับ">'+(st.k?'⭐'.repeat(st.k)+' ':'')+'ออก '+st.n+'/22 ฉบับ · '+esc(st.t)+'</span>':'')
+    +(ls.length?'<span class="ch-lec">📚 เรียนครั้งที่ '+ls.join(' · ')+'</span>':'')
+    +'</div>';
   if(s.o) h+='<div class="ch-branches">'+s.o.map(x=>'<div class="ch-bbox"><b>'+esc(x.l)+'</b>'+esc(x.t)+'</div>').join('')+'</div>';
   if(!last) h+='<div class="ch-arrow"></div>';
   return h+'</div>';
 }
-function flowHtml(steps){
-  let i=0, out='';
+function flowHtml(ep){
+  const steps=ep.steps; let i=0, out='';
   steps.forEach((s,k)=>{
     if(s.g){ out+='<div class="ch-fc-band">'+esc(s.g)+'</div>'; return; }
     const rest=steps.slice(k+1).some(x=>!x.g);
-    out+=nodeHtml(s,i++,!rest);
+    out+=nodeHtml(s,i++,!rest,ep,k);
   });
   return '<div class="ch-fc">'+out+'</div>';
 }
@@ -349,11 +390,55 @@ function epHtml(ep, open){
     +'<div class="ch-ep-head" onclick="this.parentNode.classList.toggle(\'open\');try{playHoverSound()}catch(e){}">'
     +'<div class="ch-ep-num">'+ep.n+'</div>'
     +'<div class="ch-ep-title">'+ep.ic+' '+esc(ep.title)+'<small>ชุดที่ '+ep.n+' · '+n+' ขั้น</small></div>'
+    +(epMaxStars(ep)?'<span class="ch-ep-stars" title="มีหัวข้อที่ออกข้อสอบบ่อย">'+'⭐'.repeat(epMaxStars(ep))+'</span>':'')
     +(ep.warn?'<span class="ch-ep-warn">อ่านไม่ครบ</span>':'')
     +'<span class="ch-ep-caret">▶</span></div>'
     +'<div class="ch-ep-body">'
     +(ep.warn?'<div class="ch-note">⚠️ '+esc(ep.warn)+'</div>':'')
-    +flowHtml(ep.steps)+notesHtml(ep.n)+'</div></div>';
+    +flowHtml(ep)+notesHtml(ep.n)+'</div></div>';
+}
+
+function lecSections(){
+  const L=window.CHAIN_LEC||{titles:{},def:{},step:{},note:{}};
+  const secs={}; for(let n=1;n<=15;n++) secs[n]=[]; secs.later=[];
+  EPS.forEach(ep=>{
+    ep.steps.forEach((s,idx)=>{
+      if(s.g) return;
+      const ls=lecsFor(ep.n,idx);
+      const key=ls.length?ls[0]:'later';
+      const arr=secs[key]; const last=arr[arr.length-1];
+      if(last&&last.ep===ep) last.items.push({s,idx}); else arr.push({ep,items:[{s,idx}]});
+    });
+  });
+  return {L,secs};
+}
+function lecBody(groups,n){
+  return groups.map(g=>{
+    const items=g.items; let i=0;
+    return '<div class="ch-fc-band">ชุดที่ '+g.ep.n+' · '+esc(g.ep.title)+'</div><div class="ch-fc">'
+      +items.map((it,k)=>nodeHtml(it.s,i++,k===items.length-1,g.ep,it.idx,n==='later'?null:[n])).join('')+'</div>';
+  }).join('');
+}
+function lecHtml(q){
+  const {L,secs}=lecSections(); let out='';
+  const test=g=>!q||g.some(x=>(x.ep.title+' '+x.items.map(it=>(it.s.r||'')+' '+(it.s.t||'')).join(' ')).includes(q));
+  for(let n=1;n<=15;n++){
+    const g=secs[n]; if(q&&!test(g)) continue;
+    const title=(L.titles&&L.titles[n])||'ยังไม่ได้บรรยาย';
+    const cnt=g.reduce((a,x)=>a+x.items.length,0);
+    const body=cnt?lecBody(g,n):'<div class="ch-lec-note">'+esc((L.note&&L.note[n])||(n>=11?'ยังไม่ได้บรรยาย — ยังไม่มีขั้นในผังที่จัดเข้าครั้งนี้':'ไม่มีขั้นในผังที่จัดเข้าครั้งนี้'))+'</div>';
+    out+='<div class="ch-ep'+(q?' open':'')+'" id="ch-lec-'+n+'"><div class="ch-ep-head" onclick="this.parentNode.classList.toggle(\'open\');try{playHoverSound()}catch(e){}">'
+      +'<div class="ch-ep-num">'+n+'</div><div class="ch-ep-title">เรียนครั้งที่ '+n+'<small>'+esc(title)+(cnt?' · '+cnt+' ขั้น':'')+'</small></div><span class="ch-ep-caret">▶</span></div>'
+      +'<div class="ch-ep-body">'+body+'</div></div>';
+  }
+  const g=secs.later;
+  if(g.length && (!q||test(g))){
+    const cnt=g.reduce((a,x)=>a+x.items.length,0);
+    out+='<div class="ch-ep'+(q?' open':'')+'" id="ch-lec-later"><div class="ch-ep-head" onclick="this.parentNode.classList.toggle(\'open\')">'
+      +'<div class="ch-ep-num">…</div><div class="ch-ep-title">รอจัดเข้าครั้งที่ 11–15<small>เรื่องที่ยังไม่ได้บรรยาย (ไต่สวนมูลฟ้อง · พิจารณา · พิพากษา · อุทธรณ์) · '+cnt+' ขั้น</small></div><span class="ch-ep-caret">▶</span></div>'
+      +'<div class="ch-ep-body">'+lecBody(g,'later')+'</div></div>';
+  }
+  return out||'<div class="ch-empty">ไม่พบ "'+esc(q)+'"</div>';
 }
 
 function init(){
@@ -363,20 +448,27 @@ function init(){
   host.innerHTML =
     '<div class="ch-credit">💡 ผังไล่สายนี้เรียบเรียงใหม่จากซีรีส์ <b>"ไล่สาย ป.วิ.อาญา" ชุดที่ 1–23</b> ของช่อง TikTok '
     +'<a href="https://www.tiktok.com/@panya.lawbook" target="_blank" rel="noopener">@panya.lawbook</a> '
-    +'— อ่านลำดับมาตราจากผังในคลิปแล้วเขียนคำอธิบายเอง และตรวจเลขมาตรากับตัวบทในคลังนี้ ชุดที่ติดป้าย "อ่านไม่ครบ" ควรเปิดคลิปต้นฉบับประกอบ</div>'
+    +'— อ่านลำดับมาตราจากผังในคลิปแล้วเขียนคำอธิบายเอง และตรวจเลขมาตรากับตัวบทในคลังนี้ ชุดที่ติดป้าย "อ่านไม่ครบ" ควรเปิดคลิปต้นฉบับประกอบ (ยังไม่ได้เทียบกับผังต้นฉบับทุกบรรทัด)</div>'
     +'<div class="ch-audio">🎧 <b>ฟังไล่สาย</b> (เสียงสร้างด้วย NotebookLM จากผังด้านล่าง — เลขมาตราอาจพูดคลาดเคลื่อน ใช้ประกอบการอ่านเท่านั้น)'
     +AUDIO.map(a=>'<div class="ch-audio-row"><span>'+esc(a.label)+'</span><audio controls preload="none" src="'+a.src+'" onerror="this.parentNode.style.display=\'none\'"></audio></div>').join('')+'</div>'
+    +'<div class="ch-legend">⭐ <b>ดาวข้อสอบออกบ่อย</b> นับจากข้อสอบเก่า 22 ฉบับใน War Mode: ⭐⭐⭐ = ออก 20+ ฉบับ · ⭐⭐ = 15–19 ฉบับ · ⭐ = 10–14 ฉบับ · ไม่มีดาว = ออกน้อยกว่านั้น (นับตามหัวข้อ ไม่ใช่ตามมาตราเดี่ยวๆ)</div>'
+    +'<div class="ch-view"><button type="button" class="on" data-v="clip">📼 ตามชุดคลิป (23 ชุด)</button><button type="button" data-v="lec">📚 ตามบรรยาย 15 ครั้ง</button></div>'
     +'<div class="ch-find"><input id="chFind" type="search" placeholder="ค้นหา เช่น 143, ฝากขัง, อุทธรณ์ …" aria-label="ค้นหาในผังไล่สาย"><span class="ch-count" id="chCount"></span></div>'
     +'<div class="ch-wrap" id="chList"></div>';
   const list = document.getElementById('chList');
   const inp = document.getElementById('chFind');
   const cnt = document.getElementById('chCount');
+  let view='clip';
   function draw(){
     const q = inp.value.trim();
+    if(view==='lec'){ list.innerHTML=lecHtml(q); cnt.textContent='15 ครั้ง'; return; }
     const shown = q ? EPS.filter(e=>flat(e).includes(q)) : EPS;
     list.innerHTML = shown.length ? shown.map(e=>epHtml(e, !!q || e.n===13)).join('') : '<div class="ch-empty">ไม่พบ "'+esc(q)+'" ในผังไล่สายทั้ง 23 ชุด</div>';
     cnt.textContent = q ? ('พบ '+shown.length+' ชุด') : (EPS.length+' ชุด');
   }
+  host.querySelectorAll('.ch-view button').forEach(b=>b.addEventListener('click',()=>{
+    view=b.dataset.v; host.querySelectorAll('.ch-view button').forEach(x=>x.classList.toggle('on',x===b)); draw();
+  }));
   inp.addEventListener('input', draw);
   draw();
 }
