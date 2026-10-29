@@ -337,6 +337,8 @@ const css = `
 .ch-notes h4{margin:0 0 8px;font-size:14px;color:var(--accent)}
 .ch-notes ul{margin:0;padding:0 0 0 20px}
 .ch-notes li{font-size:13.5px;line-height:1.85;color:var(--ink);margin:4px 0}
+.ch-notes li.ch-nh{list-style:none;margin:14px 0 4px -20px;font-weight:800;font-size:14.5px}
+.ch-notes li.ch-nh mark{background:var(--gold-soft);color:var(--ink);padding:2px 10px;border-radius:6px}
 .ch-notes p{font-size:13.5px;line-height:1.85;color:var(--ink);margin:0 0 8px}
 .ch-notes-empty{font-size:12.5px;color:var(--ink-faint)}
 .ch-empty{padding:18px;text-align:center;color:var(--ink-soft);font-size:14px}
@@ -401,7 +403,7 @@ function flowHtml(ep){
 function notesHtml(n){
   const N=(window.CHAIN_NOTES||{})[n];
   if(!N||!N.length) return '<div class="ch-notes"><h4>📝 บันทึกจากเสียง</h4><div class="ch-notes-empty">กำลังเรียบเรียง</div></div>';
-  return '<div class="ch-notes"><h4>📝 บันทึกจากเสียง</h4><ul>'+N.map(t=>'<li>'+esc(t)+'</li>').join('')+'</ul></div>';
+  return '<div class="ch-notes"><h4>📝 บันทึกจากเสียง</h4><ul>'+N.map(t=>t.indexOf('## ')===0?'<li class="ch-nh"><mark>'+esc(t.slice(3))+'</mark></li>':'<li>'+esc(t)+'</li>').join('')+'</ul></div>';
 }
 function epHtml(ep, open){
   const n = ep.steps.filter(s=>!s.g).length;
