@@ -322,6 +322,9 @@ const css = `
 .ch-lane-h{font-weight:800;font-size:12.5px;color:var(--c,var(--accent));margin:0 0 6px}
 .ch-lane .ch-box{padding:6px 10px 7px}
 .ch-lane .ch-arrow{height:14px}
+.ch-lane::after{content:"";width:2px;height:16px;background:var(--c,var(--ink-faint));margin-top:2px}
+.ch-merge{width:50%;height:2px;background:var(--c,var(--ink-faint))}
+@media(max-width:560px){.ch-lanes::before,.ch-merge{display:none}}
 .ch-bbox{flex:1 1 150px;max-width:270px;box-sizing:border-box;border:1.5px dashed var(--c,var(--accent));border-radius:9px;background:var(--paper);padding:6px 9px;text-align:center;font-size:12.5px;line-height:1.65;color:var(--ink)}
 .ch-bbox b{display:block;color:var(--c,var(--accent));font-size:12px}
 .ch-star{display:block;margin-top:5px;font-size:11.5px;font-weight:700;color:var(--gold)}
@@ -386,7 +389,7 @@ function nodeHtml(s,i,last,ep,idx,hideLec){
     +(st?'<span class="ch-star s'+st.k+'" title="หัวข้อ '+esc(st.t)+' ออกข้อสอบ '+st.n+' จาก 22 ฉบับ">'+(st.k?'⭐'.repeat(st.k)+' ':'')+'ออก '+st.n+'/22 ฉบับ · '+esc(st.t)+'</span>':'')
     +(ls.length?'<span class="ch-lec">📚 เรียนครั้งที่ '+ls.join(' · ')+'</span>':'')
     +'</div>';
-  if(s.lanes) h+='<div class="ch-lanes">'+s.lanes.map(L=>'<div class="ch-lane"><div class="ch-lane-h">'+esc(L.h)+'</div>'+L.steps.map((x,j)=>'<div class="ch-box"><span class="ch-ref">'+esc(x.r)+'</span><span class="ch-txt">'+esc(x.t)+'</span></div>'+(x.o?'<div class="ch-branches">'+x.o.map(y=>'<div class="ch-bbox"><b>'+esc(y.l)+'</b>'+esc(y.t)+'</div>').join('')+'</div>':'')+(j<L.steps.length-1?'<div class="ch-arrow"></div>':'')).join('')+'</div>').join('')+'</div>';
+  if(s.lanes) h+='<div class="ch-lanes">'+s.lanes.map(L=>'<div class="ch-lane"><div class="ch-lane-h">'+esc(L.h)+'</div>'+L.steps.map((x,j)=>'<div class="ch-box"><span class="ch-ref">'+esc(x.r)+'</span><span class="ch-txt">'+esc(x.t)+'</span></div>'+(x.o?'<div class="ch-branches">'+x.o.map(y=>'<div class="ch-bbox"><b>'+esc(y.l)+'</b>'+esc(y.t)+'</div>').join('')+'</div>':'')+(j<L.steps.length-1?'<div class="ch-arrow"></div>':'')).join('')+'</div>').join('')+'</div><div class="ch-merge"></div>';
   if(s.o) h+='<div class="ch-branches">'+s.o.map(x=>'<div class="ch-bbox"><b>'+esc(x.l)+'</b>'+esc(x.t)+'</div>').join('')+'</div>';
   if(!last) h+='<div class="ch-arrow"></div>';
   return h+'</div>';
