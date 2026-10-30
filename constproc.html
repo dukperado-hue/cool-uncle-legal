@@ -1930,7 +1930,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <style media="print">@page{size:A4;margin:18mm 18mm 18mm 30mm}</style>
 <script src="legal-footer.js"></script>
 <script src="lecture-print.js"></script>
-<script src="comics-tab.js?v=9"></script>
+<script src="comics-tab.js?v=10"></script>
 <script>ComicsTab.mount('constproc', document.getElementById('panel-comics')).then(function(n){ if(n){ var b=document.querySelector('.mode-tab[data-mode=comics]'); if(b) b.textContent='🎭 Comics ('+n+' ตอน)'; var m=location.hash.match(/^#comics-(\d+)$/); if(m){ var el=document.getElementById('comics-'+m[1]); if(el) el.scrollIntoView(); } } });</script>
 </body>
 </html>

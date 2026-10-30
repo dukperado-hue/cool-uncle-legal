@@ -5,7 +5,7 @@
      ComicsTab.openReader('crimprowar', 1, 0)   เปิดโหมดอ่านเต็มจอที่ตอน/หน้าที่ต้องการ (หน้า 0 = หน้าแรก)
    โหมดอ่าน: ทีละหน้า (← → / คลิกซ้าย-ขวา / ปัด) หรือเลื่อนต่อเนื่อง · จำตอนและหน้าที่อ่านค้างไว้ · จบตอนแล้วไปตอนถัดไปได้ทันที */
 (function(){
-  var V = '9';
+  var V = '10';
   var css = [
     '.ct-tabs{display:flex;gap:8px;margin:22px 0 18px;flex-wrap:wrap}',
     '.ct-tab{flex:1;min-width:150px;background:var(--card,#fff);border:1px solid var(--line,#e2ded3);border-radius:12px;padding:12px 14px;font:inherit;font-size:14px;font-weight:700;color:var(--ink-soft,#5A6072);cursor:pointer;transition:all .15s;text-align:center}',
