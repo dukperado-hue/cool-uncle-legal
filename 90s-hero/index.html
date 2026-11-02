@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>90's HERO — ONE MORE RUN · Stage 01</title>
-<meta name="description" content="90's HERO: a 90s action-movie parody shooter. Pick a hero and blow up The Old Factory. Runs in the browser, keyboard or gamepad.">
+<title>90's HERO — ONE MORE RUN · Stages 01-03</title>
+<meta name="description" content="90's HERO: a 90s action-movie parody shooter. 3 stages, 13 heroes. Runs in the browser, keyboard or gamepad.">
 <meta property="og:title" content="90's HERO — ONE MORE RUN">
-<meta property="og:description" content="Broforce-style 90s Asian action-movie parody. 13 heroes, one factory, lots of barrels.">
+<meta property="og:description" content="Broforce-style 90s Asian action-movie parody. 13 heroes, 3 stages, lots of barrels.">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
   html,body{margin:0;height:100%;background:#0b0710;overflow:hidden}
@@ -85,6 +85,8 @@ const CHARS = {
 const CHAR_KEYS = ['wah', 'ma', 'fei', 'nine', 'siang', 'sura', 'li', 'ximen', 'chiru', 'dong', 'zhang', 'vijay', 'ram'];
 const heroOf = p => CHARS[p && p.ch] || CHARS[CHOSEN] || CHARS.wah;
 let CHOSEN = 'wah';
+let STAGE = 1;
+const STAGE_NAMES = { 1: 'THE OLD FACTORY', 2: '十八金人  THE 18 GOLDEN MEN', 3: 'BOLLYWOOD: MUMBAI STREET' };
 let NOINPUT = false;
 
 // ---------- canvas ----------
@@ -113,7 +115,7 @@ const KEYMAP = {
   ArrowLeft: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right',
   ArrowUp: 'up', KeyW: 'jump', ArrowDown: 'down', KeyS: 'down',
   ControlLeft: 'jump', Space: 'jump', KeyJ: 'shoot', KeyK: 'bomb', KeyR: 'restart', Enter: 'start',
-  KeyM: 'music', KeyP: 'pause', Escape: 'pause', KeyC: 'chars', Digit1: 'c1', Digit2: 'c2', Digit3: 'c3', Digit4: 'c4', Digit5: 'c5', Digit6: 'c6', Digit7: 'c7', Digit8: 'c8', Digit9: 'c9', Digit0: 'c10', Minus: 'c11', Equal: 'c12', Backspace: 'c13', KeyL: 'ult', Numpad1: 'c1', Numpad2: 'c2', Numpad3: 'c3', Numpad4: 'c4', Numpad5: 'c5'
+  KeyM: 'music', KeyP: 'pause', Escape: 'pause', KeyC: 'chars', Digit1: 'c1', Digit2: 'c2', Digit3: 'c3', Digit4: 'c4', Digit5: 'c5', Digit6: 'c6', Digit7: 'c7', Digit8: 'c8', Digit9: 'c9', Digit0: 'c10', Minus: 'c11', Equal: 'c12', Backspace: 'c13', Tab: 'stage', KeyL: 'ult', Numpad1: 'c1', Numpad2: 'c2', Numpad3: 'c3', Numpad4: 'c4', Numpad5: 'c5'
 };
 addEventListener('keydown', e => {
   const a = KEYMAP[e.code];
@@ -270,7 +272,7 @@ const DESTRUCT = [false, false, false, true, true, true, false, false];
 let tiles, thp, ruin;
 const ARENA = { x0: 188, x1: 218, trigger: 192 };
 // Metal Slug-style screen locks: camera holds, reinforcements arrive in waves, then "GO!"
-const LOCKS = [
+const LOCKS1 = [
   { x0: 50, x1: 80, trig: 57, waves: [
     [['soldier', 77], ['soldier', 74], ['gunner', 64]],
     [['soldier', 53], ['heavy', 76], ['soldier', 70]]
@@ -281,6 +283,7 @@ const LOCKS = [
   ] }
 ];
 
+let LOCKS = LOCKS1;
 function buildLevel() {
   tiles = new Uint8Array(LW * LH); thp = new Float32Array(LW * LH); ruin = new Uint8Array(LW * LH);
   const set = (x, y, t) => { if (x < 0 || y < 0 || x >= LW || y >= LH) return; tiles[y * LW + x] = t; thp[y * LW + x] = HPS[t]; };
@@ -290,6 +293,9 @@ function buildLevel() {
   const br = (tx, row) => E.barrels.push(mkBarrel(tx, row));
   const cp = (tx) => E.checkpoints.push({ x: tx * TS, y: 18 * TS, on: false });
   const hint = (tx, ty, s, sw) => { const v = typeof sw === 'string' ? { wah: sw } : (sw || {}); E.hints.push({ x: tx * TS, y: ty * TS, s: v[CHOSEN] || s }); };
+  if (STAGE === 2) { LOCKS = LOCKS2; return buildStage2(E, set, fill, en, br, cp, hint); }
+  if (STAGE === 3) { LOCKS = LOCKS3; return buildStage3(E, set, fill, en, br, cp, hint); }
+  LOCKS = LOCKS1;
 
   // floor + side walls
   fill(0, LW - 1, 18, LH - 1, T.G);
@@ -415,7 +421,7 @@ function groundBelow(x, y) { for (let ty = Math.floor(y / TS); ty < LH; ty++) { 
 // =====================================================================
 // ENTITIES
 // =====================================================================
-const ESPEC = { soldier: { w: 10, h: 20, hp: 3 }, gunner: { w: 10, h: 20, hp: 4 }, heavy: { w: 16, h: 26, hp: 26 } };
+const ESPEC = { monk: { w: 10, h: 21, hp: 8 }, soldier: { w: 10, h: 20, hp: 3 }, gunner: { w: 10, h: 20, hp: 4 }, heavy: { w: 16, h: 26, hp: 26 } };
 function mkEnemy(type, tx, row) {
   const S = ESPEC[type];
   return {
@@ -458,14 +464,14 @@ function newGame(mode) {
     cam: { x: 0, y: 0, look: 0, trauma: 0, lock: null },
     boss: null, arena: 'idle', exitOpen: false, flag: E.flag, dropT: 6, pickT: 10,
     chainSeq: 0, chains: {}, combo: { n: 0, t: 0 }, banner: null, winT: 0, pin: {},
-    stats: { kills: 0, shots: 0, hits: 0, barrels: 0, maxChain: 0, deaths: 0, tiles: 0, damage: 0, rams: 0, stomps: 0, doves: 0, melee: 0, supers: 0, deflect: 0, spirits: 0, rockets: 0, blocked: 0, dodges: 0, drinks: 0, coughs: 0, charged: 0, blows: 0, slaps: 0, domino: 0, ults: 0, absorbed: 0, reflected: 0, reloads: 0, slides: 0, beasts: 0, pounces: 0 },
+    stats: { kills: 0, shots: 0, hits: 0, barrels: 0, maxChain: 0, deaths: 0, tiles: 0, damage: 0, rams: 0, stomps: 0, doves: 0, melee: 0, supers: 0, deflect: 0, spirits: 0, rockets: 0, blocked: 0, dodges: 0, drinks: 0, coughs: 0, charged: 0, blows: 0, slaps: 0, domino: 0, ults: 0, monks: 0, absorbed: 0, reflected: 0, reloads: 0, slides: 0, beasts: 0, pounces: 0 },
     best: loadBest(), lock: null, lockDone: [], goT: 0
   };
   rebuildLevelCanvas();
   snapCamera();
 }
-function loadBest() { try { const v = parseFloat(localStorage.getItem('omr_best_s01_' + CHOSEN)); return isNaN(v) ? null : v; } catch (e) { return null; } }
-function saveBest(v) { try { localStorage.setItem('omr_best_s01_' + CHOSEN, String(v)); } catch (e) { } }
+function loadBest() { try { const v = parseFloat(localStorage.getItem('omr_best_s0' + STAGE + '_' + CHOSEN)); return isNaN(v) ? null : v; } catch (e) { return null; } }
+function saveBest(v) { try { localStorage.setItem('omr_best_s0' + STAGE + '_' + CHOSEN, String(v)); } catch (e) { } }
 
 // ---------- feedback helpers ----------
 function shake(a) { G.cam.trauma = Math.min(1, G.cam.trauma + a); }
@@ -555,6 +561,7 @@ function explode(x, y, r, dmg, o) {
   if (n >= 3 && !o.quiet) { popup(x, y - 22, 'CHAIN x' + n + '!', n >= 6 ? '#ff5a3a' : '#ffd23f', n >= 6, 'chain' + chain); G.stats.maxChain = Math.max(G.stats.maxChain, n); }
   // feedback
   shake(o.quiet ? 0.12 : 0.28 + r / 260);
+  if (STAGE === 3 && !o.quiet && r >= 20 && !o.shell) for (let k = 0; k < 6; k++) part('smoke', x + rnd(-r / 2, r / 2), y + rnd(-r / 2, r / 4), rnd(-70, 70), rnd(-90, -20), rnd(0.6, 1.1), 4, HOLI[k % 5], { grow: 10, a: 0.55 });
   if (!o.quiet) hitstop(r > 60 ? 0.09 : 0.035);
   audio.play('boom', o.quiet ? 0.45 : clamp(r / 46, 0.6, 1.3));
   light(x, y, r * 2.6, 0.32);
@@ -636,7 +643,7 @@ function killEnemy(e, dir, explosive, chain) {
   e.vx = dir * (explosive ? rnd(200, 320) : rnd(90, 150));
   e.vy = explosive ? -rnd(260, 380) : -rnd(130, 190);
   e.vr = dir * (explosive ? rnd(10, 18) : rnd(6, 10));
-  G.stats.kills++;
+  G.stats.kills++; if (e.type === 'monk') { G.stats.monks++; popup(e.x + 5, e.y - 10, '金人 ' + G.stats.monks + '/18', '#ffd23f'); }
   audio.play('edie');
   gore(e.x + e.w / 2, e.y + e.h / 2, explosive ? 14 : 6, explosive ? 1.4 : 0.8);
   hitstop(0.025);
@@ -1770,8 +1777,10 @@ function updEnemy(e, dt) {
   e.vy = Math.min(e.vy + GRAV_E * dt, e.para ? 75 : 700);
   if (e.para && e.onGround) { e.para = false; dust(e.x + e.w / 2, e.y + e.h, 4, 6); }
   if (e.para) { e.vx = 0; moveBody(e, dt); return; }
+  if (e.form === 'pyr') { e.stun = 0; updMonk(e, dt); return; }
   if (e.stun > 0) { e.stun -= dt; e.vx = approach(e.vx, 0, 500 * dt); moveBody(e, dt); return; }
-  if (e.type === 'soldier') updSoldier(e, dt);
+  if (e.type === 'monk') updMonk(e, dt);
+  else if (e.type === 'soldier') updSoldier(e, dt);
   else if (e.type === 'gunner') updGunner(e, dt);
   else updHeavy(e, dt);
   moveBody(e, dt);
@@ -1907,7 +1916,7 @@ function damageBoss(d, srcX) {
   if (b.hp <= 0) {
     b.hp = 0; b.dying = 2.0; b.state = 'dying'; G.stats.kills++;
     G.timeScale = 0.45; G.slowT = 1.1; audio.play('roar'); hitstop(0.12);
-    popup(b.x + 12, b.y - 12, 'THE FOREMAN IS DOWN!', '#ffd23f', true);
+    popup(b.x + 12, b.y - 12, (b.name || 'THE FOREMAN') + ' IS GOING DOWN!', '#ffd23f', true);
   }
 }
 function chooseBossAttack(b) {
@@ -1917,6 +1926,7 @@ function chooseBossAttack(b) {
   else { b.state = 'slam_tele'; b.t = 0.55; audio.play('warn'); }
 }
 function updBoss(b, dt) {
+  if (b.type === 'gunboat') return updGunboat(b, dt);
   const p = G.player, pcx = p.x + p.w / 2, bcx = b.x + b.w / 2, dx = pcx - bcx;
   b.flash -= dt; b.fireT -= dt; b.anim += dt; if (b.ramCd > 0) b.ramCd -= dt;
   b.vy = Math.min(b.vy + GRAV_E * dt, 800);
@@ -2064,7 +2074,7 @@ function step(dt, ip) {
           if (b.hitSet && b.hitSet.has(e)) continue;
           G.stats.hits++;
           if (b.pierce > 0) { b.pierce--; (b.hitSet = b.hitSet || new Set()).add(e); } else dead = true;
-          damageEnemy(e, b.dmg || 1, b.x - b.vx * 0.01, false); audio.play('hit');
+          damageEnemy(e, e.type === 'monk' ? monkBulletHit(e, b) : (b.dmg || 1), b.x - b.vx * 0.01, false); audio.play('hit');
           if (b.ult) addUlt(G.player, b.ult); if (b.beast) addBeast(G.player, b.beast);
           sparks(b.x, b.y, 3, sign(b.vx), '#fff2b0'); if (Math.random() < 0.6) gore(b.x, b.y, 2, 0.4);
           break;
@@ -2229,8 +2239,8 @@ function step(dt, ip) {
       popup(c.x + 8, c.y - 40, 'CHECKPOINT', '#7dff8a'); audio.play('check');
       for (const o of G.checkpoints) if (o.x < c.x) o.on = true;
     }
-    updLocks(dt);
-    if (G.arena === 'idle' && p.x > ARENA.trigger * TS) {
+    updLocks(dt); updGong(dt); updStage3(dt);
+    if (STAGE === 1 && G.arena === 'idle' && p.x > ARENA.trigger * TS) {
       G.arena = 'fight';
       for (let ty = 10; ty <= 17; ty++) setTile(ARENA.x0, ty, T.S);
       dust(ARENA.x0 * TS + 8, 18 * TS, 10, 8); audio.play('clang'); shake(0.3);
@@ -2250,7 +2260,9 @@ function step(dt, ip) {
   }
   updateCamera(dt);
 }
-function dropIn(type, tx) {
+function dropIn(type, tx, form) {
+  if (type === 'pyramid') { spawnPyramid(tx); return; }
+  if (type === 'monk') { const m = mkEnemy('monk', tx, 1); m.y = -40 - rnd(0, 60); m.form = form || 'line'; m.alerted = true; m.state = 'engage'; m.cd = rnd(0.6, 1.4); m.face = -1; G.enemies.push(m); return; }
   const e = mkEnemy(type, tx, 1); e.y = -40 - rnd(0, 50); e.para = true; e.alerted = true; e.state = 'react'; e.t = 0.2;
   G.enemies.push(e);
 }
@@ -2268,12 +2280,373 @@ function updLocks(dt) {
   if (alive <= (G.lock.wave < L.waves.length ? 1 : 0)) G.lock.t -= dt;
   if (G.lock.t <= 0) {
     if (G.lock.wave < L.waves.length) {
-      for (const [type, tx] of L.waves[G.lock.wave]) dropIn(type, tx);
+      for (const w of L.waves[G.lock.wave]) dropIn(w[0], w[1], w[2]);
       G.lock.wave++; G.lock.t = 1.0; audio.play('warn');
       popup((L.x0 + L.x1) / 2 * TS, 4 * TS + G.cam.y, 'INCOMING!', '#ffd23f');
     } else if (alive === 0) {
       G.lockDone[G.lock.i] = true; G.lock = null; G.cam.lock = null; G.goT = 3; audio.play('check');
+      if (STAGE === 2 && LOCKS.every((_, i) => G.lockDone[i])) { G.exitOpen = true; G.goT = 0; popup(G.flag.x - 40, 11 * TS, 'THE GATE OPENS  >>', '#7dff8a', true); if (G.bride) { G.bride.x = G.flag.x + 26; G.bride.y = 18 * TS - 18; G.bride.vx = G.bride.vy = 0; G.bride.st = 'wait'; G.bride.face = -1; } }
     }
+  }
+}
+
+// =====================================================================
+// STAGE 02 — 十八金人 / THE 18 GOLDEN MEN: the Shaolin trial of formations
+// =====================================================================
+const LOCKS2 = [
+  { x0: 20, x1: 50, trig: 27, waves: [
+    [['monk', 44, 'line'], ['monk', 46, 'line'], ['monk', 48, 'line']],
+    [['monk', 23, 'circle'], ['monk', 47, 'circle'], ['monk', 35, 'circle']]
+  ] },
+  { x0: 60, x1: 90, trig: 67, waves: [
+    [['monk', 84, 'wall'], ['monk', 85, 'wall'], ['monk', 86, 'wall']],
+    [['monk', 63, 'staff'], ['monk', 87, 'staff'], ['monk', 80, 'staff']]
+  ] },
+  { x0: 100, x1: 130, trig: 106, waves: [
+    [['pyramid', 120]]
+  ] }
+];
+function buildStage2(E, set, fill, en, br, cp, hint) {
+  fill(0, LW - 1, 18, LH - 1, T.G);
+  fill(0, 1, 0, 17, T.S); fill(140, LW - 1, 0, 17, T.S);
+  // courtyard
+  hint(4, 12, 'SHAOLIN TRIAL:  18 GOLDEN MEN STAND BETWEEN YOU AND THE GATE');
+  hint(9, 9, 'GOLD SKIN: BULLETS GLANCE OFF  ·  FISTS AND FIRE HIT FULL');
+  fill(12, 13, 17, 17, T.C); br(16, 18); br(17, 18);
+  cp(19);
+  // hall 1 — line + circle formations
+  fill(30, 36, 15, 15, T.P); fill(40, 44, 13, 13, T.P);
+  br(33, 18); br(38, 18);
+  // corridor + stone wall (break it or burn it)
+  fill(53, 54, 12, 17, T.B); br(51, 18); br(52, 18); fill(53, 54, 0, 4, T.S);
+  hint(48, 10, 'STONE DOORS BREAK.  OIL JARS HELP.');
+  cp(57);
+  // hall 2 — wall + staff formations
+  fill(70, 76, 15, 15, T.P); fill(78, 82, 12, 12, T.P); br(74, 18); br(79, 18);
+  hint(62, 9, 'THE WALL FORMATION ONLY GUARDS ITS FRONT');
+  cp(95);
+  fill(92, 93, 16, 17, T.C); br(97, 18);
+  // hall 3 — the grand formation
+  fill(104, 108, 14, 14, T.P); fill(124, 128, 14, 14, T.P); br(110, 18); br(128, 18);
+  hint(100, 8, '十八金人陣 — WHEN THE BELL RINGS, JUMP');
+  cp(132);
+  hint(133, 12, 'THE GATE  >>');
+  E.start = { x: 4 * TS, y: 18 * TS - PC.standH };
+  E.flag = { x: 136 * TS, y: 18 * TS };
+  return E;
+}
+function spawnPyramid(tx) {
+  const base = tx * TS, gy = 18 * TS, S = ESPEC.monk;
+  const rows = [[-1.5, -0.5, 0.5, 1.5].slice(0, 3).map(v => v - 0), [-0.5, 0.5], [0]];
+  rows[0] = [-1, 0, 1];
+  rows.forEach((r, tier) => r.forEach(off => {
+    const e = mkEnemy('monk', tx, 18); e.form = 'pyr'; e.tier = tier; e.alerted = true; e.state = 'engage';
+    e.x = base + off * (S.w + 2) - S.w / 2; e.y = gy - S.h * (tier + 1) + tier * 2; e.face = -1;
+    G.enemies.push(e); dust(e.x + 5, e.y + e.h, 4, 6);
+  }));
+  G.gongT = 3.2; G.pyrX = base;
+  G.banner = { t: 0, title: '十八金人陣', sub: 'THE GRAND FORMATION OF THE 18 GOLDEN MEN' };
+  audio.play('roar'); shake(0.3);
+}
+function updMonk(e, dt) {
+  const p = G.player, pcx = p.x + p.w / 2, ecx = e.x + e.w / 2, dx = pcx - ecx, dy = (p.y + p.h) - (e.y + e.h);
+  e.cd -= dt; e.t -= dt;
+  if (e.form === 'pyr') {
+    // stays in the pyramid while the monks under it still stand
+    e.vx = 0; e.vy = 0; e.face = sign(dx) || e.face;
+    if (e.tier > 0) {
+      const below = G.enemies.filter(o => o !== e && !o.dead && o.form === 'pyr' && o.tier === e.tier - 1 && Math.abs((o.x + o.w / 2) - ecx) < 12);
+      if (below.length < (e.tier === 2 ? 2 : 2) || below.length === 0) { e.form = 'line'; e.vy = -160; e.state = 'engage'; popup(ecx, e.y - 6, '!', '#ffd23f'); return; }
+    }
+    if (Math.abs(dx) < 20 && Math.abs(dy) < 22 && e.cd <= 0 && e.state === 'engage') { e.state = 'wind'; e.t = 0.35; e.alertT = 0.35; e.alertK = '!'; }
+    if (e.state === 'wind' && e.t <= 0) { e.state = 'engage'; e.cd = rnd(0.9, 1.3); e.fireT = 0.15; if (Math.abs(dx) < 22 && Math.abs(dy) < 22) hurtPlayer(1, ecx, true); audio.play('punch'); }
+    e.y -= 0;    // no physics: held up by the men below
+    return 'still';
+  }
+  const reach = e.form === 'staff' ? 26 : 16;
+  e.spin = e.form === 'staff' && (e.anim % 2.6) < 1.6;
+  let tv = 0;
+  switch (e.state) {
+    case 'patrol': case 'react': e.state = 'engage'; break;
+    case 'engage': {
+      e.face = sign(dx) || e.face;
+      let want = reach - 4;
+      if (e.form === 'circle') {            // circle formation: surround, then attack one at a time
+        const busy = G.enemies.some(o => o !== e && !o.dead && o.form === 'circle' && (o.state === 'wind' || o.state === 'strike' || o.closing));
+        e.closing = !busy && e.cd <= 0; want = e.closing ? reach - 4 : 30;
+      }
+      const sp = e.form === 'wall' ? 38 : (e.form === 'line' ? 62 : 72);
+      if (Math.abs(dx) > want) tv = e.face * sp; else if (Math.abs(dx) < want - 20 && !e.closing && e.form === 'circle') tv = -e.face * sp * 0.4;
+      if (tv && !canWalk(e, sign(tv))) { tv = 0; if (e.onGround && Math.abs(dx) > 30 && Math.random() < dt * 2) e.vy = -360; }
+      if (e.onGround && dy < -40 && Math.abs(dx) < 70 && Math.random() < dt * 1.5) e.vy = -430;   // leap up to platforms
+      if (e.onGround && dy > 20 && standingOnPlatformOnly(e)) { e.dropT = 0.3; e.y += 1; }        // never camp above the player
+      else if (e.onGround && dy > 20 && !standingOnPlatformOnly(e) && Math.abs(dx) < 40) tv = e.face * 80;   // walk off a ledge toward him
+      if (e.cd <= 0 && Math.abs(dx) < reach + 4 && Math.abs(dy) < 22 && (e.form !== 'circle' || e.closing)) { e.state = 'wind'; e.t = e.form === 'staff' ? 0.45 : 0.35; e.alertT = e.t; e.alertK = '!'; }
+      break;
+    }
+    case 'wind': tv = 0; if (e.t <= 0) { e.state = 'strike'; e.t = 0.15; e.vx = e.face * 170; e.fireT = 0.15; audio.play('whoosh'); } break;
+    case 'strike':
+      tv = e.face * 120;
+      if (!e.struck && Math.abs(dx) < reach + 6 && Math.abs(dy) < 22) { e.struck = true; hurtPlayer(1, ecx, true); audio.play('punch'); }
+      if (e.t <= 0) { e.state = 'engage'; e.struck = false; e.closing = false; e.cd = rnd(0.9, 1.4); }
+      break;
+  }
+  e.vx = e.state === 'strike' ? e.vx : approach(e.vx, tv, 600 * dt);
+}
+function monkBulletHit(e, b) {     // returns the damage a bullet does (0 = glanced off)
+  const front = sign(b.vx) === -e.face;
+  if ((e.form === 'wall' || e.spin) && front && !b.home) { sparks(b.x, b.y, 4, -sign(b.vx), '#ffe070'); audio.play('ric'); return 0; }
+  return (b.dmg || 1) * 0.45;
+}
+function updGong(dt) {
+  if (STAGE !== 2 || G.gongT == null) return;
+  const pyr = G.enemies.filter(e => !e.dead && e.form === 'pyr' && e.tier === 0);
+  if (!pyr.length) { G.gongT = null; return; }
+  const was = G.gongT; G.gongT -= dt;
+  if (was > 0.8 && G.gongT <= 0.8) { popup(G.pyrX, 10 * TS, '鐘 —  JUMP!', '#ffd23f', true); audio.play('warn'); }
+  if (G.gongT <= 0) {
+    G.gongT = 3.6; audio.play('clang'); audio.play('slam'); shake(0.25);
+    for (const e of pyr) { const x = e.x + e.w / 2; G.shocks.push({ x, y: 18 * TS, dir: 1, d: 0 }, { x, y: 18 * TS, dir: -1, d: 0 }); }
+    G.shocks.splice(0, Math.max(0, G.shocks.length - 4));     // two waves each way, not six
+  }
+}
+function drawMonk(e, ph, moving) {
+  const GD = '#e8b830', GD2 = '#b8861a', GD3 = '#ffe48a', SASH = '#c02020';
+  if (e.form === 'pyr' && !e.dead) { px(-4, -8, 3, 8, GD2); px(1, -8, 3, 8, GD2); }      // braced stance
+  else legs(ph, moving, !e.onGround, e.vy, GD2, '#6a4a10', 8);
+  px(-4, -16, 8, 8, GD); px(-4, -16, 1, 8, GD2); px(-4, -9, 8, 2, SASH); px(2, -15, 1, 3, GD3);
+  px(-3, -22, 6, 6, GD); px(-2, -22, 3, 1, GD3); px(1, -20, 1, 1, '#5a3a00');                   // shaved golden head
+  for (let i = 0; i < 3; i++) px(-2 + i * 2, -23, 1, 1, GD2);                                     // head marks
+  const atk = e.state === 'wind' || e.state === 'strike';
+  if (e.form === 'wall' && !atk) { px(-8, -15, 18, 2, GD); px(-9, -16, 2, 3, GD3); px(9, -16, 2, 3, GD3); }   // arms linked
+  else if (e.form === 'staff') {
+    const a = e.spin ? e.anim * 22 : (atk ? 0 : -0.3);
+    ctx.save(); ctx.translate(2, -13); ctx.rotate(a); px(-13, -1, 26, 2, '#7a4a1a'); px(-13, -1, 3, 2, GD); px(10, -1, 3, 2, GD); ctx.restore();
+    px(0, -15, 4, 3, GD);
+  }
+  else if (e.state === 'strike') { px(1, -15, 9, 3, GD); px(9, -16, 3, 4, GD3); }
+  else if (e.state === 'wind') { px(-6, -15, 4, 3, GD); px(2, -17, 3, 3, GD); }
+  else { px(-6, -15, 2, 6, GD); px(2, -15, 3, 2, GD); px(4, -14, 2, 2, GD3); }
+}
+function drawTempleBG(cam) {
+  const sky = ctx.createLinearGradient(0, 0, 0, VH);
+  sky.addColorStop(0, '#2a0a0a'); sky.addColorStop(0.5, '#7a2a10'); sky.addColorStop(0.8, '#d88a2a'); sky.addColorStop(1, '#f2c860');
+  ctx.fillStyle = sky; ctx.fillRect(0, 0, VW, VH);
+  ctx.fillStyle = 'rgba(255,220,140,0.85)'; ctx.beginPath(); ctx.arc(VW * 0.7, VH * 0.52, 34, 0, 6.283); ctx.fill();
+  const hor = 18 * TS - cam.y;
+  // far mountains
+  ctx.fillStyle = '#4a1a14';
+  for (let i = -1; i < 8; i++) { const x = i * 90 - (cam.x * 0.15) % 90; ctx.beginPath(); ctx.moveTo(x - 20, hor - 40); ctx.lineTo(x + 40, hor - 150); ctx.lineTo(x + 110, hor - 40); ctx.fill(); }
+  // pagoda roofs (mid layer)
+  for (let i = -1; i < 6; i++) {
+    const x = i * 140 - (cam.x * 0.35) % 140, b = hor - 30;
+    ctx.fillStyle = '#2a0c0c'; ctx.fillRect(x + 30, b - 70, 40, 70);
+    for (let k = 0; k < 3; k++) { const w = 70 - k * 14, y = b - 70 + k * 0 - k * 22; ctx.fillStyle = '#1a0606'; ctx.beginPath(); ctx.moveTo(x + 50 - w / 2 - 8, y + 6); ctx.lineTo(x + 50 + w / 2 + 8, y + 6); ctx.lineTo(x + 50 + w / 2 - 4, y - 6); ctx.lineTo(x + 50 - w / 2 + 4, y - 6); ctx.fill(); ctx.fillStyle = '#c8901a'; ctx.fillRect(x + 50 - w / 2 - 8, y + 5, w + 16, 1); }
+    ctx.fillStyle = '#ffb040'; ctx.fillRect(x + 46, b - 50, 3, 4); ctx.fillRect(x + 52, b - 50, 3, 4);
+  }
+  // incense haze
+  ctx.fillStyle = 'rgba(255,220,180,0.06)'; for (let i = 0; i < 5; i++) ctx.fillRect(0, hor - 60 - i * 18 + Math.sin(G.clock + i) * 4, VW, 6);
+}
+
+// =====================================================================
+// STAGE 03 — BOLLYWOOD: MUMBAI STREET. A gunboat shells you from the foreground, then docks for the finale.
+// =====================================================================
+const LOCKS3 = [
+  { x0: 40, x1: 70, trig: 47, waves: [
+    [['soldier', 66], ['soldier', 63], ['gunner', 44]],
+    [['heavy', 65], ['soldier', 45], ['soldier', 56]]
+  ] },
+  { x0: 100, x1: 130, trig: 107, waves: [
+    [['soldier', 126], ['gunner', 104], ['soldier', 120]],
+    [['heavy', 103], ['soldier', 127], ['gunner', 118], ['soldier', 110]]
+  ] }
+];
+const HOLI = ['#ff3a8a', '#ffd23f', '#3ad0ff', '#7dff5a', '#b05aff'];
+const DOCK = { gate: 148, trig: 153, pier: 168, deck1: 177, cab: 171 };
+function buildStage3(E, set, fill, en, br, cp, hint) {
+  fill(0, DOCK.pier - 1, 18, LH - 1, T.G);                 // street + pier; beyond it, the harbour
+  fill(0, 1, 0, 17, T.S); fill(DOCK.deck1 + 1, LW - 1, 0, LH - 1, T.E); fill(LW - 2, LW - 1, 0, LH - 1, T.S);
+  hint(4, 12, 'MUMBAI.  SOMEONE PARKED A GUNBOAT IN THE FOREGROUND.');
+  hint(10, 9, 'RED CIRCLE ON THE GROUND = SHELL INCOMING. MOVE!');
+  // shop row 1: awnings, stalls, gas cylinders
+  fill(8, 13, 14, 14, T.P); fill(18, 24, 13, 13, T.P); fill(28, 33, 14, 14, T.P);
+  fill(14, 15, 17, 17, T.C); br(21, 18); br(22, 18); br(23, 18); fill(26, 26, 16, 17, T.B);
+  en('soldier', 11, 14); en('soldier', 20, 13); en('gunner', 31, 14); en('soldier', 25, 18); en('soldier', 35, 18);
+  cp(37);
+  // market lock
+  fill(48, 54, 14, 14, T.P); fill(58, 64, 12, 12, T.P); br(51, 18); br(52, 18); br(60, 18); fill(56, 56, 16, 17, T.C);
+  // cinema street
+  fill(74, 80, 13, 13, T.P); fill(84, 90, 14, 14, T.P); fill(82, 83, 16, 17, T.B); br(76, 18); br(77, 18); br(78, 18); br(79, 18);
+  en('heavy', 88, 18); en('soldier', 75, 13); en('gunner', 87, 14); en('soldier', 93, 18);
+  hint(72, 9, 'THE TUK-TUK RANK IS FULL OF GAS. YOU KNOW WHAT TO DO.');
+  cp(96);
+  // bazaar lock
+  fill(108, 114, 14, 14, T.P); fill(118, 124, 13, 13, T.P); br(112, 18); br(116, 18); br(117, 18);
+  cp(134);
+  fill(138, 144, 14, 14, T.P); br(140, 18); br(141, 18); en('soldier', 139, 14); en('soldier', 143, 18);
+  // the docks
+  cp(150);
+  hint(152, 9, 'THE DOCKS  >>');
+  E.start = { x: 4 * TS, y: 18 * TS - PC.standH };
+  E.flag = { x: 160 * TS, y: 18 * TS };
+  return E;
+}
+function stage3Init() { G.fboat = { t: 0, shellT: 3.0 }; G.shells = []; G.arena3 = 'idle'; }
+function fireShell(tx, delay) {
+  const gy = groundBelow(tx, 6 * TS);
+  G.shells.push({ tx, ty: gy, t: 0, T: delay || 0.9, sx: G.cam.x + VW * 0.5, sy: G.cam.y + VH + 20 });
+  audio.play('warn');
+}
+function updStage3(dt) {
+  if (STAGE !== 3) return;
+  if (!G.shells) stage3Init();
+  const p = G.player;
+  // the foreground gunboat keeps lobbing shells until it docks
+  if (G.arena3 === 'idle') {
+    const F = G.fboat; F.t += dt; F.shellT -= dt;
+    if (F.shellT <= 0 && !p.dead && G.mode === 'play' && !G.cine) {
+      F.shellT = rnd(3.0, 4.2);
+      const lead = clamp(p.vx * 0.7, -90, 90), n = G.lock ? 1 : (Math.random() < 0.3 ? 2 : 1);
+      for (let i = 0; i < n; i++) fireShell(p.x + p.w / 2 + lead + rnd(-24, 24) + i * 40, 0.9 + i * 0.25);
+    }
+    if (p.x > DOCK.trig * TS && !p.dead) {
+      G.arena3 = 'fight';
+      for (let ty = 10; ty <= 17; ty++) setTile(DOCK.gate, ty, T.S);
+      dust(DOCK.gate * TS + 8, 18 * TS, 10, 8); audio.play('clang'); shake(0.3);
+      G.cam.lock = { x0: DOCK.gate * TS, x1: DOCK.pier * TS };
+      later(0.6, spawnGunboat);
+    }
+  }
+  for (let i = G.shells.length - 1; i >= 0; i--) {
+    const s = G.shells[i]; s.t += dt;
+    if (s.t >= s.T) {
+      G.shells.splice(i, 1);
+      explode(s.tx, s.ty - 4, 30, 14, { shell: true });
+      for (let k = 0; k < 8; k++) part('smoke', s.tx + rnd(-14, 14), s.ty - rnd(4, 18), rnd(-70, 70), rnd(-90, -20), rnd(0.6, 1.1), 4, HOLI[k % 5], { grow: 10, a: 0.6 });
+    }
+  }
+}
+function spawnGunboat() {
+  G.boss = {
+    type: 'gunboat', name: 'THE GUNBOAT', x: DOCK.cab * TS + 260, y: 14 * TS, w: 64, h: 64, vx: 0, vy: 0, hp: 180, maxHp: 180, face: -1,
+    state: 'enter', t: 0, flash: 0, onGround: true, dead: false, phase: 1, atk: 0, aimLow: false,
+    fireT: 0, mgCd: 0, dying: 0, anim: 0, shown: 0, bob: 0
+  };
+  G.banner = { t: 0, title: 'THE GUNBOAT', sub: 'मुंबई का बादशाह  —  "THE HARBOUR IS MINE."' };
+  audio.play('roar');
+}
+function updGunboat(b, dt) {
+  const p = G.player, pcx = p.x + p.w / 2;
+  b.flash -= dt; b.fireT -= dt; b.anim += dt; b.t -= dt;
+  b.bob = Math.sin(b.anim * 2.2) * 1.5;
+  if (b.state === 'enter') {
+    b.x = approach(b.x, DOCK.cab * TS, 170 * dt);
+    if (b.x <= DOCK.cab * TS) {
+      b.state = 'idle'; b.t = 1.2;
+      for (let tx = DOCK.pier; tx <= DOCK.deck1; tx++) setTile(tx, 18, T.S); for (let tx = DOCK.pier; tx <= DOCK.deck1; tx++) setTile(tx, 19, T.S);       // the deck becomes the floor
+      G.cam.lock = { x0: DOCK.gate * TS, x1: (DOCK.deck1 + 1) * TS }; shake(0.4); audio.play('slam');
+      popup(DOCK.pier * TS + 40, 12 * TS, 'IT DOCKED. GET ON BOARD!', '#ffd23f', true);
+    }
+    return;
+  }
+  if (b.dying > 0) {
+    b.dying -= dt;
+    if (Math.random() < dt * 18) explode(b.x + rnd(0, b.w), b.y + rnd(0, b.h), 28, 0, { noDmg: true, quiet: true });
+    if (Math.random() < dt * 10) for (let k = 0; k < 3; k++) part('smoke', b.x + rnd(0, b.w), b.y + rnd(0, 30), rnd(-60, 60), rnd(-120, -40), 1, 5, HOLI[k], { grow: 12, a: 0.6 });
+    if (b.dying <= 0) {
+      b.dead = true; explode(b.x + b.w / 2, b.y + b.h / 2, 90, 40, { byPlayer: true });
+      G.exitOpen = true; G.cam.lock = null; if (G.bride) { G.bride.x = G.flag.x + 26; G.bride.y = 18 * TS - 18; G.bride.vx = G.bride.vy = 0; G.bride.st = 'wait'; G.bride.face = -1; }
+      popup(b.x, 10 * TS, 'THE GUNBOAT IS SUNK!', '#ffd23f', true);
+    }
+    return;
+  }
+  if (!p.dead && p.x + p.w > b.x - 1) { p.x = b.x - 1 - p.w; if (p.vx > 0) p.vx = 0; }      // the cabin is a wall: fight it from the front
+  for (const e of G.enemies) if (!e.dead && e.x + e.w > b.x - 1 && e.y > 10 * TS) e.x = b.x - 1 - e.w;
+  if (b.hp < b.maxHp * 0.5 && b.phase === 1) { b.phase = 2; popup(b.x, b.y - 10, 'FULL STEAM!', '#ff5a3a', true); audio.play('roar'); }
+  const fast = b.phase === 2 ? 0.75 : 1;
+  switch (b.state) {
+    case 'idle':
+      if (b.t <= 0) {
+        const k = ['shell', 'mg', 'shell', 'cannon'][b.atk++ % 4];
+        if (k === 'shell') { b.state = 'shell'; b.t = 0.4; }
+        else if (k === 'mg') { b.state = 'mg_tele'; b.t = 0.8 * fast; b.aimLow = Math.random() < 0.5; audio.play('spin'); popup(b.x - 10, b.y + (b.aimLow ? 52 : 40), b.aimLow ? 'LOW — JUMP!' : 'HIGH — DUCK!', '#ff5a3a'); }
+        else { b.state = 'cannon_tele'; b.t = 0.9 * fast; audio.play('warn'); }
+      }
+      break;
+    case 'shell': {
+      const n = b.phase === 2 ? 4 : 3;
+      for (let i = 0; i < n; i++) later(i * 0.18, () => fireShell(clamp(pcx + rnd(-60, 60), (DOCK.gate + 1) * TS, DOCK.cab * TS - 8), 0.95));
+      b.state = 'idle'; b.t = 2.0 * fast; break;
+    }
+    case 'mg_tele': if (b.t <= 0) { b.state = 'mg_fire'; b.t = 1.3; b.mgCd = 0; } break;
+    case 'mg_fire':
+      b.mgCd -= dt;
+      if (b.mgCd <= 0) {
+        b.mgCd = b.phase === 2 ? 0.06 : 0.075; b.fireT = 0.04;
+        const gy = b.aimLow ? 18 * TS - 5 : 18 * TS - 15;
+        ebullet(b.x - 4, gy + rnd(-0.6, 0.6), -330, 0, 'mg'); audio.play('eshot'); light(b.x - 4, gy, 24, 0.04, '255,170,90');
+      }
+      if (b.t <= 0) { b.state = 'idle'; b.t = 1.1 * fast; }
+      break;
+    case 'cannon_tele': if (b.t <= 0) {                   // the bow cannon: three big rounds that skip along the deck
+      for (let i = 0; i < 3; i++) later(i * 0.3, () => { ebullet(b.x - 4, 18 * TS - 12, -240, -60, 'pellet', 1.6); ebullet(b.x - 4, 18 * TS - 12, -240, 0, 'pellet', 1.6); audio.play('boom', 0.4); shake(0.1); });
+      b.state = 'idle'; b.t = 1.6 * fast; } break;
+  }
+}
+function drawGunboatAt(x, y, s, alpha, flash, deck) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s); ctx.globalAlpha = alpha;
+  const H = flash ? '#ffffff' : '#3a4a5a', H2 = flash ? '#ffffff' : '#26323e', R = flash ? '#ffffff' : '#c02a2a';
+  ctx.fillStyle = H; ctx.beginPath(); ctx.moveTo(-8, 0); ctx.lineTo(140, 0); ctx.lineTo(125, 26); ctx.lineTo(8, 26); ctx.fill();   // hull
+  ctx.fillStyle = R; ctx.fillRect(-2, 8, 136, 3);
+  ctx.fillStyle = H2; ctx.fillRect(40, -64, 64, 64);                                                // cabin
+  ctx.fillStyle = '#ffd23f'; for (let i = 0; i < 4; i++) ctx.fillRect(46 + i * 15, -54, 9, 7);
+  ctx.fillStyle = H; ctx.fillRect(72, -86, 12, 24); ctx.fillStyle = '#1a1a1a'; ctx.fillRect(72, -88, 12, 3);  // funnel
+  ctx.fillStyle = '#5a6a78'; ctx.fillRect(20, -14, 26, 10); ctx.fillRect(4, -11, 20, 4);              // bow gun
+  ctx.fillStyle = '#ff8a1a'; ctx.fillRect(110, -74, 18, 10); ctx.fillStyle = '#fff'; ctx.fillRect(110, -71, 18, 3); ctx.fillStyle = '#2a8a3a'; ctx.fillRect(110, -68, 18, 4);   // a flag
+  ctx.restore();
+}
+function drawGunboat(b) {
+  drawGunboatAt(Math.round(b.x - 40), Math.round(18 * TS + b.bob), 1, 1, b.flash > 0, true);
+  if (b.state === 'mg_tele' || b.state === 'cannon_tele') { ctx.fillStyle = Math.floor(G.clock * 16) % 2 ? '#ff3a2a' : '#ffd23f'; ctx.fillRect(b.x - 8, 18 * TS - (b.aimLow ? 7 : 17), 4, 4); }
+}
+function drawStage3Overlay() {      // screen space: the foreground boat and the shell warnings
+  const c = G.cam;
+  for (const s of G.shells || []) {
+    const k = s.t / s.T, mx = s.tx - c.x, my = s.ty - c.y;
+    ctx.strokeStyle = Math.floor(G.clock * 14) % 2 ? '#ff3a2a' : '#ffd23f'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.ellipse(mx, my - 1, 16 * (1.2 - k * 0.4), 4, 0, 0, 6.283); ctx.stroke();
+    const sx = s.sx - c.x, sy = s.sy - c.y, hx = sx + (mx - sx) * k, hy = sy + (my - sy) * k - Math.sin(k * Math.PI) * 160;
+    ctx.fillStyle = '#222'; ctx.beginPath(); ctx.arc(hx, hy, 3, 0, 6.283); ctx.fill(); ctx.fillStyle = '#ffb040'; ctx.fillRect(hx - 1, hy - 1, 2, 2);
+  }
+  if (G.arena3 === 'idle' && G.fboat && G.mode !== 'select' && G.mode !== 'title') {
+    const F = G.fboat, x = VW * 0.38 + Math.sin(F.t * 0.35) * 110, y = VH + 62 + Math.sin(F.t * 2) * 3;
+    drawGunboatAt(x, y, 1.3, 0.72, false);
+    if (F.shellT < 0.25) { ctx.fillStyle = '#fff6c0'; ctx.fillRect(x + 14, y - 30, 10, 8); }
+  }
+}
+function drawMumbaiBG(cam) {
+  const sky = ctx.createLinearGradient(0, 0, 0, VH);
+  sky.addColorStop(0, '#2a0a3a'); sky.addColorStop(0.5, '#a02a5a'); sky.addColorStop(0.8, '#ff8a3a'); sky.addColorStop(1, '#ffd27a');
+  ctx.fillStyle = sky; ctx.fillRect(0, 0, VW, VH);
+  const hor = 18 * TS - cam.y;
+  ctx.fillStyle = 'rgba(255,230,160,0.9)'; ctx.beginPath(); ctx.arc(VW * 0.3, hor - 120, 26, 0, 6.283); ctx.fill();
+  // far skyline
+  ctx.fillStyle = '#4a1a4a';
+  for (let i = -1; i < 14; i++) { const x = i * 44 - (cam.x * 0.15) % 44, h = 60 + ((i * 37) % 5) * 18; ctx.fillRect(x, hor - 40 - h, 34, h); }
+  // shop facades (mid layer)
+  const cols = ['#e8406a', '#ffb020', '#2ab0c8', '#7ac83a', '#b04ad0', '#ff7a2a'], signs = ['CHAI', 'PAAN', 'CINEMA', 'TAILOR', 'SWEETS', 'RADIO'];
+  for (let i = -1; i < 7; i++) {
+    const idx = Math.floor((cam.x * 0.45) / 80) + i, x = idx * 80 - cam.x * 0.45, b = hor - 16, c = cols[((idx % 6) + 6) % 6];
+    ctx.fillStyle = c; ctx.fillRect(x, b - 90, 74, 90); ctx.fillStyle = 'rgba(0,0,0,0.35)'; ctx.fillRect(x, b - 90, 74, 6);
+    ctx.fillStyle = '#1a0a1a'; for (let w = 0; w < 3; w++) ctx.fillRect(x + 8 + w * 22, b - 70, 12, 14);
+    ctx.fillStyle = '#fff4c0'; ctx.fillRect(x + 6, b - 36, 62, 11); ctx.fillStyle = '#2a0a1a'; ctx.font = 'bold 8px monospace'; ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.fillText(signs[((idx % 6) + 6) % 6], x + 37, b - 35);
+    for (let f = 0; f < 6; f++) { ctx.fillStyle = HOLI[(f + idx) % 5 < 0 ? 0 : (f + idx) % 5]; ctx.fillRect(x + f * 13, b - 92, 8, 5); }   // bunting
+  }
+  // the harbour
+  const wx = DOCK.pier * TS - cam.x;
+  if (wx < VW) {
+    ctx.fillStyle = '#1a4a7a'; ctx.fillRect(Math.max(0, wx), hor + 2, VW, VH);
+    ctx.fillStyle = 'rgba(255,255,255,0.25)'; for (let i = 0; i < 8; i++) ctx.fillRect(Math.max(0, wx) + ((i * 53 + G.clock * 20) % (VW + 40)) - 20, hor + 8 + (i % 4) * 9, 14, 1);
   }
 }
 // =====================================================================
@@ -2549,6 +2922,8 @@ function buildBackgrounds() {
   SCAN = mkCanvas(VW, VH); g = SCAN.getContext('2d'); g.fillStyle = 'rgba(0,0,0,0.09)'; for (let y = 0; y < VH; y += 2) g.fillRect(0, y, VW, 1);
 }
 function drawBackground(cam) {
+  if (STAGE === 3) return drawMumbaiBG(cam);
+  if (STAGE === 2) return drawTempleBG(cam);
   const sky = ctx.createLinearGradient(0, 0, 0, VH);
   sky.addColorStop(0, '#1a0e2e'); sky.addColorStop(0.45, '#5a2050'); sky.addColorStop(0.75, '#d0583a'); sky.addColorStop(1, '#f2a04a');
   ctx.fillStyle = sky; ctx.fillRect(0, 0, VW, VH);
@@ -3183,11 +3558,12 @@ function drawSelect() {
   if (G.uiDoves) for (const d of G.uiDoves) { ctx.fillStyle = '#fff'; const up = Math.sin(d.ph) > 0; ctx.fillRect(d.x - 2, d.y, 5, 2); ctx.fillRect(d.x - 3, d.y + (up ? -3 : 2), 3, 2); ctx.fillRect(d.x, d.y + (up ? -4 : 2), 3, 2); }
   if (k === 'ma' && (t % 2.5) < 0.04 && Math.random() < 0.6) { const R = cardRect(1); spawnDovesUI(R.x + 44, R.y + 22); }
   const bt = bestFor(k);
-  txt('BEST TIME (' + C.name + '): ' + (bt != null ? fmtTime(bt) : '--:--'), VW / 2, VH - 11, '#7dff8a', 8, 'center');
+  txt('STAGE 0' + STAGE + ': ' + STAGE_NAMES[STAGE] + '  (TAB)', 10, VH - 11, '#ffd23f', 8, 'left');
+  txt('BEST TIME (' + C.name + '): ' + (bt != null ? fmtTime(bt) : '--:--'), VW - 10, VH - 11, '#7dff8a', 8, 'right');
 }
 function spawnDovesUI(x, y) { G.uiDoves = G.uiDoves || []; for (let i = 0; i < 5; i++) G.uiDoves.push({ x, y, vx: rnd(-60, 60), vy: rnd(-90, -40), ph: rnd(0, 6), t: 1.6 }); audio.play('coo'); }
 function updUIDoves(dt) { if (!G.uiDoves) return; for (let i = G.uiDoves.length - 1; i >= 0; i--) { const d = G.uiDoves[i]; d.t -= dt; d.ph += dt * 18; d.x += d.vx * dt; d.y += d.vy * dt; if (d.t <= 0) G.uiDoves.splice(i, 1); } }
-function bestFor(k) { try { const v = parseFloat(localStorage.getItem('omr_best_s01_' + k)); return isNaN(v) ? null : v; } catch (e) { return null; } }
+function bestFor(k) { try { const v = parseFloat(localStorage.getItem('omr_best_s0' + STAGE + '_' + k)); return isNaN(v) ? null : v; } catch (e) { return null; } }
 function alertIcon(x, y, k, t) {
   ctx.font = 'bold 9px monospace'; ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
   ctx.fillStyle = '#000'; ctx.fillText(k, x + 1, y + 1);
@@ -3202,7 +3578,8 @@ function drawEnemy(e) {
   const moving = Math.abs(e.vx) > 15 && e.onGround && !e.dead;
   const ph = e.anim * 12;
   const SK = '#d99a6a';
-  if (e.type === 'soldier') {
+  if (e.type === 'monk') drawMonk(e, ph, moving);
+  else if (e.type === 'soldier') {
     legs(ph, moving, !e.onGround, e.vy, '#5c5434', '#1e1a10', 8);
     px(-4, -16, 8, 8, '#8c7c4c'); px(-4, -9, 8, 1, '#3a3220'); px(-5, -15, 2, 5, '#7a6a40');
     px(-3, -21, 6, 5, SK); px(-4, -23, 8, 3, '#4b5a2b'); px(-4, -21, 8, 1, '#3a4620'); px(1, -19, 1, 1, '#000');
@@ -3248,6 +3625,7 @@ function drawEnemy(e) {
   }
 }
 function drawBoss(b, corpse) {
+  if (b.type === 'gunboat') return drawGunboat(b);
   const fx = Math.round(b.x + b.w / 2), fy = Math.round(b.y + b.h);
   ctx.save(); ctx.translate(fx, fy);
   if (corpse) { ctx.translate(0, -17); ctx.rotate(b.rot); ctx.translate(0, 17); }
@@ -3441,7 +3819,7 @@ function render() {
   if (G.fade > 0 && G.mode === 'play') { ctx.fillStyle = 'rgba(0,0,0,' + G.fade + ')'; ctx.fillRect(0, 0, VW, VH); }
   if (G.mode === 'title') drawTitle();
   else if (G.mode === 'select') drawSelect();
-  else { if (G.closeups.length) drawCloseups(); drawHUD(); if (G.banner) drawBanner(); if (G.mode === 'win') drawWin(); if (G.paused) drawPause(); }
+  else { if (STAGE === 3) drawStage3Overlay(); if (G.closeups.length) drawCloseups(); drawHUD(); if (G.banner) drawBanner(); if (G.mode === 'win') drawWin(); if (G.paused) drawPause(); }
 }
 function txt(s, x, y, col, size, align, shadow) {
   ctx.font = 'bold ' + (size || 8) + 'px monospace'; ctx.textAlign = align || 'left'; ctx.textBaseline = 'top';
@@ -3479,6 +3857,7 @@ function drawHUD() {
   ctx.fillStyle = 'rgba(0,0,0,0.45)'; ctx.fillRect(VW - 104, 4, 100, 22);
   txt('TIME ' + fmtTime(G.time), VW - 8, 7, '#ffe9b8', 8, 'right');
   txt('KILLS ' + G.stats.kills, VW - 8, 16, '#ffb070', 8, 'right');
+  if (STAGE === 2) txt('金人 ' + G.stats.monks + '/18', VW - 110, 9, '#ffd23f', 10, 'right');
   const help = { wah: 'RIDE A/D  JUMP W/CTRL  BOOST-RAM J (AIR: DASH)  CRUSH: LAND ON THEM  SLAM: S IN AIR  DYNAMITE K',
     ma: 'MOVE A/D  JUMP W/CTRL  DUAL FIRE J  DYNAMITE K  CROUCH S  AIM UP ↑  RESTART R',
     fei: 'MOVE A/D  JUMP W/CTRL  COMBO J (AIR: FLYING KICK)  SHADOWLESS KICK K  CROUCH SWEEP S',
@@ -3501,7 +3880,7 @@ function drawHUD() {
   if (b && !b.dead && b.state !== 'enter') {
     const w = 220, x = (VW - w) / 2, y = VH - 16;
     ctx.fillStyle = 'rgba(0,0,0,0.7)'; ctx.fillRect(x - 2, y - 10, w + 4, 16);
-    txt('THE FOREMAN', x, y - 9, '#ffd23f', 8, 'left');
+    txt(b.name || 'THE FOREMAN', x, y - 9, '#ffd23f', 8, 'left');
     ctx.fillStyle = '#3a1010'; ctx.fillRect(x, y, w, 4);
     ctx.fillStyle = b.flash > 0 ? '#fff' : (b.phase === 2 ? '#ff3a2a' : '#ff8a2a'); ctx.fillRect(x, y, w * b.hp / b.maxHp, 4);
   }
@@ -3563,7 +3942,7 @@ function drawWin() {
     zhang: [['BULLETS ABSORBED', String(s.absorbed)], ['SENT BACK / TAI CHI STORMS', s.reflected + ' / ' + s.ults]],
     vijay: [['ROUNDS FIRED', String(s.shots)], ['RELOADS / SLIDES', s.reloads + ' / ' + s.slides]],
     ram: [['BEASTS CALLED', String(s.beasts)], ['POUNCES / RAMPAGES', s.pounces + ' / ' + s.ults]] }[G.player.ch];
-  const rows = [['TIME', fmtTime(G.time) + (G.newBest ? '   NEW BEST!' : '')], ['KILLS', String(s.kills)], ...mid, ['BARRELS BLOWN', String(s.barrels)], ['BIGGEST CHAIN', 'x' + s.maxChain], ['RETAKES (DEATHS)', String(s.deaths)]];
+  const rows = [['TIME', fmtTime(G.time) + (G.newBest ? '   NEW BEST!' : '')], ['KILLS', String(s.kills)], ...(STAGE === 2 ? [['GOLDEN MEN', s.monks + '/18']] : []), ...mid, ...(STAGE === 2 ? [] : [['BARRELS BLOWN', String(s.barrels)]]), ['BIGGEST CHAIN', 'x' + s.maxChain], ['RETAKES (DEATHS)', String(s.deaths)]];
   txt(heroOf(G.player).name + '  ' + heroOf(G.player).cn, VW / 2, 74, heroOf(G.player).col, 8, 'center');
   rows.forEach((r, i) => { if (t > 0.3 + i * 0.12) { txt(r[0], VW / 2 - 110, 90 + i * 14, '#ffb070', 8, 'left'); txt(r[1], VW / 2 + 110, 90 + i * 14, r[1].includes('BEST') ? '#7dff8a' : '#fff', 8, 'right'); } });
   if (t > 1.3) {
@@ -3572,7 +3951,7 @@ function drawWin() {
     txt(G.rank, 0, -20, G.rank === 'S' ? '#ffd23f' : '#ff9a3a', 36, 'center'); ctx.restore();
     txt('RANK', VW / 2 + 170, 150, '#ffb070', 8, 'center');
   }
-  if (t > 1.0 && Math.floor(t * 2) % 2 === 0) txt('R / ENTER / SPACE  —  ONE MORE RUN', VW / 2, 196, '#ffffff', 10, 'center');
+  if (t > 1.0 && Math.floor(t * 2) % 2 === 0) txt(STAGE < 3 ? 'ENTER = NEXT STAGE   ·   R / SPACE = ONE MORE RUN' : 'R / ENTER / SPACE  —  ONE MORE RUN', VW / 2, 196, '#ffffff', 10, 'center');
   if (t > 1.0) txt('C  —  CHANGE CHARACTER', VW / 2, 212, '#ffb070', 8, 'center');
 }
 
@@ -3597,6 +3976,7 @@ function frame(now) {
       if (ip.up || ip.down) { G.sel = G.sel < CARD.cols ? Math.min(G.sel + CARD.cols, n - 1) : G.sel - CARD.cols; audio.play('bounce'); }
       let num = -1; ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10', 'c11', 'c12', 'c13'].forEach((c, i) => { if (ip[c] && i < n) num = i; });
       if (num >= 0) G.sel = num;
+      if (ip.stage) { STAGE = STAGE % 3 + 1; audio.play('check'); }
       let go = G.selT > 0.25 && (ip.start || ip.jump || (ip.shoot && !ip.click) || num >= 0);
       if (ip.click && G.selT > 0.25) { const c = cardAt(mouse.x, mouse.y); if (c >= 0) { if (c === G.sel) go = true; G.sel = c; } }
       if (go) { CHOSEN = CHAR_KEYS[G.sel]; audio.play('check'); startGame(); }
@@ -3607,7 +3987,7 @@ function frame(now) {
     else if (G.mode === 'win') {
       G.winT += dt; G.clock += dt;
       acc += dt; while (acc >= STEP) { step(STEP, {}); acc -= STEP; }
-      if (G.winT > 0.9 && (ip.start || ip.jump)) startGame();
+      if (G.winT > 0.9 && (ip.start || ip.jump)) { if (ip.start && STAGE < 3) STAGE++; startGame(); }
     } else {
       if (ip.pause) G.paused = !G.paused;
       if (!G.paused) {
