@@ -427,6 +427,36 @@ footer{
   margin-top:40px;text-align:center;font-size:12.5px;color:var(--ink-faint);
   border-top:1px solid var(--line);padding-top:16px;
 }
+/* บรรยายรายครั้ง */
+.lec-group{font-weight:800;color:var(--gold);font-size:13.5px;margin:22px 0 10px;letter-spacing:.03em}
+.lec-group:first-child{margin-top:0}
+.lec-list{display:flex;flex-direction:column;gap:10px}
+.lec-row{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.lec-head{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer}
+.lec-num{min-width:34px;height:34px;padding:0 6px;flex-shrink:0;border-radius:17px;background:var(--gold-soft);color:var(--ink);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13px}
+.lec-ttl{flex:1;font-weight:700;color:var(--ink);font-size:14.5px;line-height:1.45}
+.lec-date{display:block;font-weight:400;color:var(--ink-faint);font-size:12px}
+.lec-tog{color:var(--ink-faint);font-size:13px;transition:transform .2s}
+.lec-row.open .lec-tog{transform:rotate(180deg)}
+.lec-body{display:none;padding:2px 16px 18px;font-size:14px;color:var(--ink-soft);line-height:1.8}
+.lec-row.open .lec-body{display:block}
+.lec-body h4{color:var(--ink);font-size:14.5px;margin:18px 0 6px}
+.lec-body ul{margin:4px 0 8px;padding-left:20px}
+.lec-body li{margin:3px 0}
+.lec-body p{margin:0 0 10px}
+.lec-body strong{color:var(--ink)}
+.lec-review{background:var(--accent-soft);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:6px 0 14px;color:var(--ink)}
+.lec-review b{color:var(--ink)}
+.lec-review ul{margin:6px 0 0;padding-left:20px}
+.lec-chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.lec-chip{background:var(--gold-soft);color:var(--ink);border-radius:999px;padding:2px 10px;font-size:12.5px}
+.lec-sec{border:1px solid var(--line);border-radius:12px;margin:10px 0;background:var(--card)}
+.lec-sec>summary{cursor:pointer;padding:10px 14px;font-weight:700;color:var(--ink);font-size:14px}
+.lec-sec>div{padding:0 14px 12px}
+.lec-tbl-wrap{overflow-x:auto;margin:8px 0}
+.lec-tbl{border-collapse:collapse;font-size:13px;min-width:420px}
+.lec-tbl th,.lec-tbl td{border:1px solid var(--line);padding:6px 9px;vertical-align:top;text-align:left}
+.lec-tbl th{background:var(--gold-soft);color:var(--ink)}
 .view{display:none}
 .view.on{display:block}
 
@@ -727,7 +757,8 @@ function playHoverSound(){
 </header>
 
 <nav class="tabbar" aria-label="โหมดเกม">
-  <button id="tab-card" class="on">การ์ดจำมาตรา</button>
+  <button id="tab-lec" class="on">บรรยายรายครั้ง</button>
+  <button id="tab-card">การ์ดจำมาตรา</button>
   <button id="tab-seq">เรียงมาตรา</button>
   <button id="tab-quiz">วิเคราะห์โจทย์</button>
   <button id="tab-irac">ฝึก IRAC</button>
@@ -736,8 +767,14 @@ function playHoverSound(){
   <button id="btn-reset" title="รีเซ็ตทั้งหมด" aria-label="รีเซ็ตทั้งหมด">↺</button>
 </nav>
 
+<!-- ============ โหมด 0: บรรยายรายครั้ง ============ -->
+<section id="view-lec" class="view on">
+  <div class="study-disclaimer">⚠️ บันทึกจากคำบรรยายและสัมมนา เรียบเรียงใหม่จากเสียง/สรุปคำบรรยายใน NotebookLM — ใช้ประกอบการอ่านตำราหลักเท่านั้น ตรวจเลขมาตราและเลขฎีกากับตัวบท/ตำราก่อนนำไปอ้างอิง</div>
+  <div id="lecList"><p class="muted">กำลังโหลดบันทึกการบรรยาย…</p></div>
+</section>
+
 <!-- ============ โหมด 1: การ์ด ============ -->
-<section id="view-card" class="view on">
+<section id="view-card" class="view">
   <div class="row">
     <select id="cat-select" aria-label="เลือกหมวด"></select>
     <span class="muted" id="card-progress"></span>
@@ -1480,6 +1517,7 @@ const SUMMARY_TOPICS = [
 ];
 
 </script>
+<script src="debt-lectures.js?v=1"></script>
 <script>
 /* ================================================================
    ENGINE — โครงเกม
@@ -2075,6 +2113,8 @@ document.getElementById('lvl-adv').addEventListener('click', ()=>{ SoundFX.click
 /* =========================================================
    แท็บหลัก + รีเซ็ต
    ========================================================= */
+const tabLec = document.getElementById('tab-lec');
+const viewLec = document.getElementById('view-lec');
 const tabCard = document.getElementById('tab-card');
 const tabSeq  = document.getElementById('tab-seq');
 const tabQuiz = document.getElementById('tab-quiz');
@@ -2087,6 +2127,8 @@ const viewIrac = document.getElementById('view-irac');
 const viewStudy = document.getElementById('view-study');
 
 function setTab(which){
+  viewLec.classList.toggle('on', which==='lec');
+  tabLec.classList.toggle('on', which==='lec');
   viewCard.classList.toggle('on', which==='card');
   viewSeq.classList.toggle('on', which==='seq');
   viewQuiz.classList.toggle('on', which==='quiz');
@@ -2107,6 +2149,35 @@ function setTab(which){
   if(which !== 'study' && typeof TTS !== 'undefined') TTS.stop();
   syncStickyBar();
 }
+tabLec.addEventListener('click', ()=>{ SoundFX.tab(); setTab('lec'); });
+/* ---------- บรรยายรายครั้ง ---------- */
+function renderLectures(){
+  const el = document.getElementById('lecList');
+  if(typeof DEBT_LECTURES === 'undefined'){ el.innerHTML = '<p class="muted">โหลดบันทึกการบรรยายไม่สำเร็จ ลองรีเฟรชหน้า</p>'; return; }
+  const groups = [['บรรยายครั้งที่ 1–15','บรรยาย'],['สัมมนา 1–4','สัมมนา']];
+  el.innerHTML = groups.map(g => {
+    const rows = DEBT_LECTURES.filter(l => l.kind === g[1]);
+    return '<div class="lec-group">'+g[0]+'</div><div class="lec-list">'+rows.map(l => {
+      const label = (l.kind==='สัมมนา' ? 'ส.' : '') + l.n;
+      const hl = l.hl.length ? '<ul>'+l.hl.map(x=>'<li>'+x+'</li>').join('')+'</ul>' : '';
+      const cites = l.cites.length ? '<div class="lec-chips">'+l.cites.map(c=>'<span class="lec-chip">'+c+'</span>').join('')+'</div>' : '<p>ครั้งนี้ไม่มีเลขฎีกาที่ยืนยันได้จากเอกสาร (ดูตัวอย่างคดีในหัวข้อด้านล่าง)</p>';
+      return '<div class="lec-row" id="lec-'+l.key+'"><div class="lec-head" data-k="'+l.key+'"><div class="lec-num">'+label+'</div><div class="lec-ttl">'+l.title+'<span class="lec-date">'+l.date+'</span></div><div class="lec-tog">▾</div></div>'
+        +'<div class="lec-body">'
+        +'<div class="lec-review"><b>📌 สรุปทบทวน</b><p style="margin:6px 0 4px">มาตราที่ปรากฏในครั้งนี้: ม. '+l.arts+'</p>'
+        +(hl?'<b>จุดที่อาจารย์เน้น</b>'+hl:'')
+        +'<b>ฎีกาที่ยืนยันเลขแล้ว</b>'+cites+'</div>'
+        +'<h4>เนื้อหารายครั้ง</h4>'+l.content
+        +'<details class="lec-sec"><summary>⚖️ ฎีกาและตัวอย่างคดี</summary><div>'+l.cases+'</div></details>'
+        +'<details class="lec-sec"><summary>🧩 วิเคราะห์โจทย์ (IRAC)</summary><div>'+l.irac+'</div></details>'
+        +'</div></div>';
+    }).join('')+'</div>';
+  }).join('');
+  el.querySelectorAll('.lec-head').forEach(hd => hd.addEventListener('click', ()=>{
+    hd.parentElement.classList.toggle('open'); try{SoundFX.click();}catch(e){}
+  }));
+}
+renderLectures();
+
 tabCard.addEventListener('click', ()=>{ SoundFX.tab(); setTab('card'); });
 tabSeq.addEventListener('click', ()=>{ SoundFX.tab(); setTab('seq'); });
 tabQuiz.addEventListener('click', ()=>{ SoundFX.tab(); setTab('quiz'); });
@@ -2567,7 +2638,7 @@ seqSelect.value = SEQ_ORDER[0];
 renderSeq();
 renderSetPicker();
 setLevel('basic');
-setTab('card');
+setTab('lec');
 </script>
 <script>
 const THEME_KEY = 'codex-theme';
