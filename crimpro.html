@@ -456,7 +456,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
     <div class="crim-pane" id="crim-pane-comics" role="tabpanel">
       <h2 class="section-h2">🎭 Cool Uncle Comics — วิ.อาญาฉบับลุงคูล</h2>
       <p class="section-sub">เรียนวิ.อาญาผ่านการ์ตูนสั้น ลุงคูลกับสัตว์น้อยพาไล่ตัวบทและฎีกาทีละเรื่อง (ฉบับทดลอง — สคริปต์ร่างโดย NotebookLM แล้วตรวจกับตัวบท)</p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px"><button type="button" class="ct-btn" style="appearance:none;border:0;cursor:pointer;padding:10px 18px;border-radius:999px;background:var(--accent,#c0392b);color:#fff;font:inherit;font-weight:800" onclick="ComicsTab.openReader('crimpro',1,0)">📖 เปิดโหมดอ่านการ์ตูนเต็มจอ (ตอน 1–10 · ทีละหน้า/เลื่อนอ่าน)</button></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px"><button type="button" class="ct-btn" style="appearance:none;border:0;cursor:pointer;padding:10px 18px;border-radius:999px;background:var(--accent,#c0392b);color:#fff;font:inherit;font-weight:800" onclick="ComicsTab.openReader('crimpro',1,0)">📖 เปิดโหมดอ่านการ์ตูนเต็มจอ (ตอน 1–13 · ทีละหน้า/เลื่อนอ่าน)</button></div>
       <div id="comicEpList"></div>
       <h2 class="section-h2" id="comics-war" style="margin-top:30px">⚔️ War Mode Comics — การ์ตูนติวข้อสอบ</h2>
       <p class="section-sub">ไล่ข้อสอบเก่าทีละกลุ่มโจทย์เป็นการ์ตูน: สูตรตอบ ตัวอย่างวิธีเขียน และกับดัก (ตอนตัวอย่าง — กลุ่มอื่นทยอยทำ) · เปิดจากปุ่ม 🎭 ในการ์ดกลุ่มโจทย์ของ War Mode ได้ด้วย</p>
@@ -3838,7 +3838,9 @@ const COMICS = [
   { ep: 8, title: 'เขียนคำฟ้องยังไงไม่ให้โดนยก', pages: Array.from({length: 11}, (_, i) => 'comics/crimpro/ep08/web/p' + (i + 1) + '.jpg'), sub: 'ม.157–160 · แบบคำฟ้อง ม.158 · บรรยายฟ้อง · แก้ฟ้องได้/ไม่ได้ · ลายมือชื่อ'},
   { ep: 9, title: 'ฟ้องผิดแก้ได้ไหม ฟ้องแกล้งโดนอะไร?', pages: Array.from({length: 13}, (_, i) => 'comics/crimpro/ep09/web/p' + (i + 1) + '.jpg'), sub: 'ม.159 เพิ่มโทษ/นับโทษต่อ · ม.161 แก้ฟ้อง/ไม่ประทับ/ยกฟ้อง · ม.161/1 ฟ้องไม่สุจริต · SLAPP' },
   { ep: 10, title: 'ฟ้องอาญาแล้ว เรียกเงินคืนได้ไหม? (คดีแพ่งเกี่ยวเนื่อง)', pages: Array.from({length: 14}, (_, i) => 'comics/crimpro/ep10/web/p' + (i + 1) + '.jpg'), sub: 'ม.40 · ม.43 อัยการเรียกทรัพย์/ราคา · ม.44/1 คำร้องค่าสินไหม · ม.44/2' },
-  { ep: 12, title: 'ฟ้องแพ่งช้าไปเสียสิทธิไหม? ไต่สวนมูลฟ้อง โจทก์ขาดนัด แก้ฟ้อง', pages: Array.from({length: 16}, (_, i) => 'comics/crimpro/ep12/web/p' + (i + 1) + '.jpg'), sub: 'ม.51 อายุความ · ม.162–171 ไต่สวนมูลฟ้อง · ม.166 โจทก์ขาดนัด · ม.167/170 · ม.163–164 แก้ฟ้อง' }
+  { ep: 11, title: 'อาญาตัดสินแล้ว ศาลแพ่งต้องเชื่อไหม? (คดีแพ่งเกี่ยวเนื่อง ต่อ)', pages: Array.from({length: 17}, (_, i) => 'comics/crimpro/ep11/web/p' + (i + 1) + '.jpg'), sub: 'ม.40–42 กระบวนพิจารณา · ม.46 ผูกข้อเท็จจริง · ม.47 ราคา/ค่าสินไหม · ม.48–50 คืนทรัพย์ · ศาลอาญาถือแพ่งไหม' },
+  { ep: 12, title: 'ฟ้องแพ่งช้าไปเสียสิทธิไหม? ไต่สวนมูลฟ้อง โจทก์ขาดนัด แก้ฟ้อง', pages: Array.from({length: 16}, (_, i) => 'comics/crimpro/ep12/web/p' + (i + 1) + '.jpg'), sub: 'ม.51 อายุความ · ม.162–171 ไต่สวนมูลฟ้อง · ม.166 โจทก์ขาดนัด · ม.167/170 · ม.163–164 แก้ฟ้อง' },
+  { ep: 13, title: 'จำเลยหายไปไหน? ศาลพิจารณาลับหลังได้ไหม? (ชั้นพิจารณา)', pages: Array.from({length: 19}, (_, i) => 'comics/crimpro/ep13/web/p' + (i + 1) + '.jpg'), sub: 'ม.163–164 แก้ฟ้อง/คำให้การ · ม.172 เปิดเผย ต่อหน้าจำเลย · ม.172 ทวิ · ม.237 ทวิ · ม.173 ทนาย' },
 ];
 function escC(x){ return String(x == null ? '' : x).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
 function renderComics(){
