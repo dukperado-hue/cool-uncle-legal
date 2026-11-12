@@ -35,7 +35,7 @@
     '  #printArea mark{background:#fdeeb0 !important}',
     '  #printArea .exercise-box{border:1px solid #999 !important;background:#f5f0df !important;padding:10px 12px;border-radius:6px;margin:10px 0}',
     '  #printArea .print-video-link{font-size:12px;margin:6px 0}',
-    '  #printArea img{max-width:100%;page-break-inside:avoid}',
+    '  #printArea img{max-width:100%;max-height:185mm;width:auto;object-fit:contain;page-break-inside:avoid;break-inside:avoid}',
     '  #printArea .lecture-img-pair{display:flex;gap:8px}',
     '  #printArea .lecture-img-pair img{height:160px;width:auto}',
     '  #printArea .lecture-img-inline{float:none;width:auto;margin:8px 0}',
