@@ -106,7 +106,7 @@ const CW_DATA = {"nq":96,"tabs":[{"k":"p","label":"👤 ผู้เสียห
   function bodyHTML(){
     const tabs = [{k:'all', label:'📚 ทั้งหมด', n:D.fams.length}].concat(D.tabs.map(t => ({k:t.k, label:t.label, n:D.fams.filter(f => f.tab === t.k).length})))
       .map((t, i) => `<button type="button" class="iw-tab${i === 0 ? ' active' : ''}" data-k="${t.k}" onclick="iwSwitch('${t.k}')">${esc(t.label)} <span class="iw-tab-n">${t.n}</span></button>`).join('');
-    const bar = `<div class="iw-bar"><button type="button" class="iw-bar-btn" onclick="iwOpenAll(true)">📖 เปิดเฉลยและโจทย์ทั้งหมด</button><button type="button" class="iw-bar-btn" onclick="iwOpenAll(false)">📕 พับทั้งหมด</button><button type="button" class="iw-bar-btn" onclick="iwPrint('cur')">🖨️ พิมพ์หมวดที่เปิดอยู่</button><button type="button" class="iw-bar-btn" onclick="iwPrint('all')">🖨️ พิมพ์ทั้งหมด</button></div>`;
+    const bar = `<div class="iw-bar"><button type="button" class="iw-bar-btn" onclick="iwOpenAll(true)">📖 เปิดเฉลยและโจทย์ทั้งหมด</button><button type="button" class="iw-bar-btn" onclick="iwOpenAll(false)">📕 พับทั้งหมด</button><button type="button" class="iw-bar-btn" onclick="iwPrint('cur')">🖨️ พิมพ์หมวดที่เปิดอยู่</button><button type="button" class="iw-bar-btn" onclick="iwPrint('all')">🖨️ พิมพ์ทั้งหมด</button><button type="button" class="iw-bar-btn" onclick="iwPrint('short')">🖨️ พิมพ์โหมดสั้น (โจทย์ + ฎีกาย่อ + มาตราย่อ + คำตอบ)</button></div>`;
     return `<div class="iw-top">${rich(D.intro)}</div>${statsBox()}
       <div class="iw-tabs" role="tablist">${tabs}</div>${bar}
       ${allPanel()}${D.tabs.map(panel).join('')}
@@ -119,14 +119,53 @@ const CW_DATA = {"nq":96,"tabs":[{"k":"p","label":"👤 ผู้เสียห
   };
 
   /* print: expand every answer, show only #lec-war (see @media print in crimpro.html), restore afterwards */
+  /* โหมดสั้น: โจทย์ + ฎีกาย่อ + มาตราย่อ (ตัดคำอธิบายยาว) + คำตอบ — สร้างเอกสารพิมพ์ชั่วคราวแล้วลบทิ้งหลังพิมพ์ */
+  function cut(s, n){ s = String(s || '').trim(); return s.length > n ? s.slice(0, n).replace(/\s+\S*$/, '') + '…' : s; }
+  function shortSec(x){
+    let s = String(x || '').replace(/ป\.วิ\.อ\.\s*มาตรา\s*/g, 'ม.').replace(/ประมวลกฎหมายอาญา\s*มาตรา\s*/g, 'ป.อ. ม.').replace(/ป\.อ\.\s*มาตรา\s*/g, 'ป.อ. ม.');
+    const i = s.indexOf(' — ');
+    if (i < 0) return cut(s, 110);
+    const head = s.slice(0, i), tail = s.slice(i + 3).replace(/\([^()]*[ก-๙][^()]*\)/g, '').replace(/\s{2,}/g, ' ').trim();
+    return head + ' — ' + cut(tail, 90);
+  }
+  function shortHTML(){
+    const out = D.tabs.map(t => {
+      const fs = D.fams.filter(f => f.tab === t.k && f.variants.length);
+      return `<h3 class="cw-s-tab">${esc(t.label)}</h3>` + fs.map(f => `<h4 class="cw-s-fam">กลุ่ม ${esc(f.no)} · ${esc(f.title)}</h4>` + f.variants.map(v => {
+        const c = v.cases || { d: [], m: [] };
+        const facts = (v.facts || []).map(p => `<p>${esc(p)}</p>`).join('');
+        const asks = (v.asks || []).map(p => `<p class="iw-ask">${esc(p)}</p>`).join('');
+        const note = v.note ? `<p class="iw-note">หมายเหตุท้ายโจทย์: ${esc(v.note)}</p>` : '';
+        const d = (c.d || []).map(x => `<li>${esc(cut(x, 220))}</li>`).join('');
+        const m = (c.m || []).map(x => `<li>${esc(shortSec(x))}</li>`).join('');
+        const ans = v.ans ? rich(v.ans.split(/\r?\n\s*\r?\n/).filter(x => !/^\*\*กรณีตามปัญหา/.test(x.trim())).join('\n\n')) : '<p><em>(ยังไม่มีเฉลย — รอเนื้อหาที่บรรยาย)</em></p>';
+        return `<div class="cw-s-q"><div class="cw-s-h">${esc(v.label)}${v.pts ? ` · ${esc(v.pts)} คะแนน` : ''}</div><div class="cw-s-body">${facts}${asks}${note}</div>
+          <div class="cw-s-box"><b>ฎีกาย่อ</b><ul>${d}</ul><b>มาตราย่อ</b><ul>${m}</ul></div>
+          <div class="cw-s-ans"><b>คำตอบ (วิธีสบัญญัติ — ย่อ)</b>${ans}</div></div>`;
+      }).join('')).join('');
+    }).join('');
+    return `<h2 class="cw-s-title">War Mode วิ.อาญา — โหมดสั้น (${D.nq} ข้อ)</h2>${out}`;
+  }
+  function shortStyle(){
+    if (document.getElementById('cw-short-css')) return;
+    const st = document.createElement('style'); st.id = 'cw-short-css';
+    st.textContent = '.cw-shortdoc{display:none}@media print{body.iw-print-short #warHost :not(.cw-shortdoc):not(.cw-shortdoc *):not(:has(.cw-shortdoc)){display:none!important}body.iw-print-short .cw-shortdoc{display:block!important;font-size:9.5pt;line-height:1.45}.cw-s-title{font-size:15pt;margin:0 0 6px}.cw-s-tab{font-size:12.5pt;margin:14px 0 4px;border-bottom:1.5px solid #111;break-after:avoid}.cw-s-fam{font-size:11pt;margin:10px 0 2px;break-after:avoid}.cw-s-q{border-top:1px solid #999;padding:6px 0;margin:4px 0}.cw-s-h{font-weight:700}.cw-s-body p{margin:2px 0}.cw-s-box{border:1px solid #888;padding:2px 8px;margin:3px 0;font-size:8.5pt}.cw-s-box ul{margin:1px 0 3px 16px;padding:0}.cw-s-ans{font-size:9pt}.cw-s-ans p{margin:2px 0}}';
+    document.head.appendChild(st);
+  }
   window.iwPrint = function(mode){
-    const ds = Array.from(document.querySelectorAll('#lec-war details'));
+    const ds = Array.from(document.querySelectorAll('#warHost details'));
     const was = ds.map(d => d.open);
-    ds.forEach(d => { d.open = true; });
+    let sd = null;
+    if (mode === 'short') {
+      shortStyle();
+      sd = document.createElement('div'); sd.className = 'cw-shortdoc'; sd.innerHTML = shortHTML();
+      document.getElementById('warHost').appendChild(sd);
+    } else ds.forEach(d => { d.open = true; });
     document.body.classList.add('iw-printing', 'iw-print-' + mode);
     const done = () => {
       window.removeEventListener('afterprint', done);
-      document.body.classList.remove('iw-printing', 'iw-print-cur', 'iw-print-all');
+      document.body.classList.remove('iw-printing', 'iw-print-cur', 'iw-print-all', 'iw-print-short');
+      if (sd) sd.remove();
       ds.forEach((d, i) => { d.open = was[i]; });
     };
     window.addEventListener('afterprint', done);
