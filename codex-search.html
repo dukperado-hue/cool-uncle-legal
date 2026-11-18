@@ -1016,7 +1016,7 @@ let currentPage = 0;
 async function loadCodexData() {
   try {
     const [response] = await Promise.all([
-      fetch('codex-data.json?v=20261113a'),
+      fetch('codex-data.json?v=20261118a'),
       (window.AtlasCore ? AtlasCore.loadRegistry('collections-registry.json?v=20261101a').catch(() => {}) : Promise.resolve())
     ]);
     if (!response.ok) throw new Error('Failed to load codex data');
@@ -1051,6 +1051,12 @@ const BOOK_INFO = {
   airnav: { title: 'พระราชบัญญัติการเดินอากาศ พ.ศ. 2497', short: 'การเดินอากาศ', icon: '✈️' },
   caat2558: { title: 'พระราชกำหนดการบินพลเรือนแห่งประเทศไทย พ.ศ. 2558', short: 'การบินพลเรือนแห่งประเทศไทย', icon: '🛫' },
   airoffences: { title: 'พระราชบัญญัติว่าด้วยความผิดบางประการต่อการเดินอากาศ พ.ศ. 2558', short: 'ความผิดต่อการเดินอากาศ', icon: '🚨' },
+  aaic_def: { title: 'ประกาศ กสอ. เรื่อง อุบัติเหตุและอุบัติการณ์รุนแรง พ.ศ. 2563', short: 'กสอ. · นิยามอุบัติเหตุ/อุบัติการณ์รุนแรง', icon: '💥' },
+  aaic_reg1: { title: 'ข้อบังคับ กสอ. ฉบับที่ 1 ว่าด้วยการแจ้งและจัดทำรายงานเบื้องต้นเมื่อเกิดอุบัติเหตุหรืออุบัติการณ์รุนแรง พ.ศ. 2563', short: 'กสอ. ข้อบังคับ 1 · การแจ้งและรายงานเบื้องต้น', icon: '📞' },
+  aaic_reg2: { title: 'ข้อบังคับ กสอ. ฉบับที่ 2 การพิทักษ์อากาศยาน พ.ศ. 2563', short: 'กสอ. ข้อบังคับ 2 · การพิทักษ์อากาศยาน', icon: '🛡️' },
+  aaic_reg3: { title: 'ข้อบังคับ กสอ. ฉบับที่ 3 ว่าด้วยการแต่งตั้งผู้แทน ที่ปรึกษา หรือผู้เชี่ยวชาญเข้าร่วมการสอบสวน พ.ศ. 2563', short: 'กสอ. ข้อบังคับ 3 · ผู้แทน/ที่ปรึกษา/ผู้เชี่ยวชาญ', icon: '🤝' },
+  aaic_meeting: { title: 'ประกาศ กสอ. เรื่อง หลักเกณฑ์ วิธีการ และเงื่อนไข การประชุม การลงมติ และการปฏิบัติหน้าที่ของ กสอ. พ.ศ. 2566', short: 'กสอ. · การประชุมและการลงมติ', icon: '🗳️' },
+  chicago: { title: 'อนุสัญญาว่าด้วยการบินพลเรือนระหว่างประเทศ (อนุสัญญาชิคาโก ค.ศ. 1944) · ฉบับแปลไทยโดย สมชาย พิพุธวัฒน์', short: 'อนุสัญญาชิคาโก 1944', icon: '🌐' },
   torture: { title: 'พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565', short: 'ป้องกันการทรมานและอุ้มหาย', icon: '🛡️' },
   pdpa: { title: 'พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562', short: 'คุ้มครองข้อมูลส่วนบุคคล (PDPA)', icon: '🔐' },
   envprotect: { title: 'พระราชบัญญัติส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535', short: 'ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อม', icon: '🌿' },
@@ -1596,6 +1602,12 @@ function showAirBookPicker() {
     <button type="button" class="book-btn book-btn-sm" onclick="pickAirBook('airnav')" onmouseenter="playHoverSound()">✈️ พระราชบัญญัติการเดินอากาศ พ.ศ. ๒๔๙๗</button>
     <button type="button" class="book-btn book-btn-sm" onclick="pickAirBook('caat2558')" onmouseenter="playHoverSound()">🛫 พระราชกำหนดการบินพลเรือนแห่งประเทศไทย พ.ศ. ๒๕๕๘</button>
     <button type="button" class="book-btn book-btn-sm" onclick="pickAirBook('airoffences')" onmouseenter="playHoverSound()">🚨 พระราชบัญญัติว่าด้วยความผิดบางประการต่อการเดินอากาศ พ.ศ. ๒๕๕๘</button>
+    <button type="button" class="book-btn book-btn-sm" onclick="pickAirBook('aaic_def')" onmouseenter="playHoverSound()">💥 ประกาศ กสอ. เรื่อง อุบัติเหตุและอุบัติการณ์รุนแรง พ.ศ. 2563</button>
+    <button type="button" class="book-btn book-btn-sm" onclick="pickAirBook('aaic_reg1')" onmouseenter="playHoverSound()">📞 ข้อบังคับ กสอ. ฉบับที่ 1 ว่าด้วยการแจ้งและจัดทำรายงานเบื้องต้นเมื่อเกิดอุบัติเหตุหรืออุบัติการณ์รุนแรง พ.ศ. 2563</button>
+    <button type="button" class="book-btn book-btn-sm" onclick="pickAirBook('aaic_reg2')" onmouseenter="playHoverSound()">🛡️ ข้อบังคับ กสอ. ฉบับที่ 2 การพิทักษ์อากาศยาน พ.ศ. 2563</button>
+    <button type="button" class="book-btn book-btn-sm" onclick="pickAirBook('aaic_reg3')" onmouseenter="playHoverSound()">🤝 ข้อบังคับ กสอ. ฉบับที่ 3 ว่าด้วยการแต่งตั้งผู้แทน ที่ปรึกษา หรือผู้เชี่ยวชาญเข้าร่วมการสอบสวน พ.ศ. 2563</button>
+    <button type="button" class="book-btn book-btn-sm" onclick="pickAirBook('aaic_meeting')" onmouseenter="playHoverSound()">🗳️ ประกาศ กสอ. เรื่อง หลักเกณฑ์ วิธีการ และเงื่อนไข การประชุม การลงมติ และการปฏิบัติหน้าที่ของ กสอ. พ.ศ. 2566</button>
+    <button type="button" class="book-btn book-btn-sm" onclick="pickAirBook('chicago')" onmouseenter="playHoverSound()">🌐 อนุสัญญาว่าด้วยการบินพลเรือนระหว่างประเทศ (อนุสัญญาชิคาโก ค.ศ. 1944)</button>
   `;
   document.querySelector('.search-container').appendChild(picker);
 }
@@ -1880,7 +1892,7 @@ function displayResults(results) {
     const adj = getAdjacentArticleNumbers(article.bookType, article.number);
     const headerHtml = `
       <div class="article-header">
-        <div class="article-number">มาตรา ${article.number}${article.examFreq ? ` <span class="exam-freq-badge" title="ออกสอบเนติ ${article.examFreq.count} ครั้ง">${'★'.repeat(article.examFreq.stars)}</span>` : ''}</div>
+        <div class="article-number">${article.unit || 'มาตรา'} ${article.number}${article.articleTitle ? ' · ' + escapeHtml(article.articleTitle) : ''}${article.examFreq ? ` <span class="exam-freq-badge" title="ออกสอบเนติ ${article.examFreq.count} ครั้ง">${'★'.repeat(article.examFreq.stars)}</span>` : ''}</div>
         <div class="article-actions">
           ${article.cancelled ? '<span class="cancelled-badge">ยกเลิกแล้ว</span>' : ''}
           <button type="button" class="icon-btn" data-navrole="hdr-prev" title="มาตราก่อนหน้า" onclick="navigateArticle('${article.bookType}','${article.number}','prev',this,'hdr-prev')" onmouseenter="playHoverSound()" ${adj.prev ? '' : 'disabled'}>‹ ก่อนหน้า</button>
@@ -2066,7 +2078,7 @@ function printAllResults(mode) {
     const pagesHtml = currentResults.map(article => {
       const contentColHtml = `
         <div class="write-col write-col-content">
-          <div class="write-num">มาตรา ${escapeHtml(article.number)}</div>
+          <div class="write-num">${article.unit || 'มาตรา'} ${escapeHtml(article.number)}</div>
           <div class="write-text" data-chunk-index="0">${renderArticleTextHtml(article)}</div>
         </div>`;
       const otherColHtml = annotated
@@ -2089,7 +2101,7 @@ function printAllResults(mode) {
       <h1 style="font-family:'Noto Serif Thai',serif;font-size:18px;margin-bottom:12px;">${groupTitle}</h1>
       ${currentResults.map(article => `
         <div style="margin-bottom:10px;">
-          <h2 style="font-family:'Noto Serif Thai',serif;font-size:14px;margin-bottom:3px;">มาตรา ${escapeHtml(article.number)}</h2>
+          <h2 style="font-family:'Noto Serif Thai',serif;font-size:14px;margin-bottom:3px;">${article.unit || 'มาตรา'} ${escapeHtml(article.number)}</h2>
           <div class="article-text" data-chunk-index="0" style="font-size:13px;line-height:1.55;">${renderArticleTextHtml(article)}</div>
         </div>`).join('')}
     `;
@@ -2107,7 +2119,7 @@ function printAllResults(mode) {
           : '';
         return `
         <div style="margin-bottom:26px;padding-bottom:20px;border-bottom:1px solid #ccc;break-inside:avoid;">
-          <h2 style="font-family:'Noto Serif Thai',serif;margin-bottom:10px;">มาตรา ${article.number}</h2>
+          <h2 style="font-family:'Noto Serif Thai',serif;margin-bottom:10px;">${article.unit || 'มาตรา'} ${article.number}</h2>
           <div class="article-text" data-chunk-index="0">${renderArticleTextHtml(article)}</div>
           ${lectureHtml ? `<div style="margin-top:14px;padding-top:10px;border-top:2px solid #ccc;">${lectureHtml}</div>` : ''}
           ${noteHtml}

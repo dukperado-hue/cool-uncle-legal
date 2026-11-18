@@ -345,6 +345,12 @@
       airnav:        { title: 'พ.ร.บ.การเดินอากาศ พ.ศ. 2497' },
       caat2558:      { title: 'พ.ร.ก.การบินพลเรือนแห่งประเทศไทย พ.ศ. 2558' },
       airoffences:   { title: 'พ.ร.บ.ว่าด้วยความผิดบางประการต่อการเดินอากาศ พ.ศ. 2558' },
+      aaic_def: { title: 'กสอ. · นิยามอุบัติเหตุ/อุบัติการณ์รุนแรง' },
+      aaic_reg1: { title: 'กสอ. ข้อบังคับ 1 · การแจ้งและรายงานเบื้องต้น' },
+      aaic_reg2: { title: 'กสอ. ข้อบังคับ 2 · การพิทักษ์อากาศยาน' },
+      aaic_reg3: { title: 'กสอ. ข้อบังคับ 3 · ผู้แทน/ที่ปรึกษา/ผู้เชี่ยวชาญ' },
+      aaic_meeting: { title: 'กสอ. · การประชุมและการลงมติ' },
+      chicago: { title: 'อนุสัญญาชิคาโก 1944' },
       torture:       { title: 'พ.ร.บ.ป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565' },
       pdpa:          { title: 'พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562' },
       envprotect:    { title: 'พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535' },
@@ -369,7 +375,7 @@
                     constlaw: { label: 'รัฐธรรมนูญ',   books: ['constitution', 'const2560', 'politicalparty', 'constcourtproc'] },
                   } },
       other:    { label: 'อื่นๆ', color: '#ff9900', books: ['copyright', 'patent', 'trademark', 'carriage', 'ipcourt'] },
-      aviation: { label: 'การบิน', color: '#2299ff', books: ['airnav', 'caat2558', 'airoffences'] },
+      aviation: { label: 'การบิน', color: '#2299ff', books: ['airnav', 'caat2558', 'airoffences', 'aaic_def', 'aaic_reg1', 'aaic_reg2', 'aaic_reg3', 'aaic_meeting', 'chicago'] },
       environment: { label: 'สิ่งแวดล้อม', color: '#22cc77', books: ['envprotect', 'hazsub', 'marinecoast', 'fisheries'] },
     };
     const CASE_COLOR = '#ffcc44';
@@ -646,7 +652,7 @@
         // no hierarchy at all (e.g. tortofficials) -> go straight to มาตรา leaves
         for (const a of arts.sort((x, y) => naturalArticleSort(x.number, y.number))) {
           const id = 'article:' + node.bookKey + ':' + a.number;
-          addNode({ id, name: 'มาตรา ' + a.number, type: 'article', bookKey: node.bookKey, number: a.number, size: 3.2, color: node.color, parentId: node.id });
+          addNode({ id, name: (a.unit || 'มาตรา') + ' ' + a.number, type: 'article', bookKey: node.bookKey, number: a.number, size: 3.2, color: node.color, parentId: node.id });
           addLink(node.id, id);
           kids.add(id);
         }
@@ -669,7 +675,7 @@
       if (!found) {
         for (const a of arts.sort((x, y) => naturalArticleSort(x.number, y.number))) {
           const id = 'article:' + node.bookKey + ':' + a.number;
-          addNode({ id, name: 'มาตรา ' + a.number, type: 'article', bookKey: node.bookKey, number: a.number, size: 3.2, color: node.color, parentId: node.id });
+          addNode({ id, name: (a.unit || 'มาตรา') + ' ' + a.number, type: 'article', bookKey: node.bookKey, number: a.number, size: 3.2, color: node.color, parentId: node.id });
           addLink(node.id, id);
           kids.add(id);
         }
@@ -1246,7 +1252,7 @@
       const key = node.bookKey + ':' + node.number;
       const cases = (articleIndex[key] || []);
       let html = `<div class="kicker">${escapeHtml(bookTitle)}</div>`;
-      html += `<h3>มาตรา ${escapeHtml(node.number)}${art && art.cancelled ? ' (ยกเลิกแล้ว)' : ''}</h3>`;
+      html += `<h3>${(art && art.unit) || 'มาตรา'} ${escapeHtml(node.number)}${art && art.cancelled ? ' (ยกเลิกแล้ว)' : ''}</h3>`;
       if (art) {
         html += `<div class="article-text${art.cancelled ? ' cancelled' : ''}">${escapeHtml(art.text)}</div>`;
       } else {

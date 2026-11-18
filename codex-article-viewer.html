@@ -1393,6 +1393,12 @@ const BOOK_TITLES = {
   airnav: 'พระราชบัญญัติการเดินอากาศ พ.ศ. 2497',
   caat2558: 'พระราชกำหนดการบินพลเรือนแห่งประเทศไทย พ.ศ. 2558',
   airoffences: 'พระราชบัญญัติว่าด้วยความผิดบางประการต่อการเดินอากาศ พ.ศ. 2558',
+  aaic_def: 'ประกาศ กสอ. เรื่อง อุบัติเหตุและอุบัติการณ์รุนแรง พ.ศ. 2563',
+  aaic_reg1: 'ข้อบังคับ กสอ. ฉบับที่ 1 ว่าด้วยการแจ้งและจัดทำรายงานเบื้องต้นเมื่อเกิดอุบัติเหตุหรืออุบัติการณ์รุนแรง พ.ศ. 2563',
+  aaic_reg2: 'ข้อบังคับ กสอ. ฉบับที่ 2 การพิทักษ์อากาศยาน พ.ศ. 2563',
+  aaic_reg3: 'ข้อบังคับ กสอ. ฉบับที่ 3 ว่าด้วยการแต่งตั้งผู้แทน ที่ปรึกษา หรือผู้เชี่ยวชาญเข้าร่วมการสอบสวน พ.ศ. 2563',
+  aaic_meeting: 'ประกาศ กสอ. เรื่อง หลักเกณฑ์ วิธีการ และเงื่อนไข การประชุม การลงมติ และการปฏิบัติหน้าที่ของ กสอ. พ.ศ. 2566',
+  chicago: 'อนุสัญญาว่าด้วยการบินพลเรือนระหว่างประเทศ (อนุสัญญาชิคาโก ค.ศ. 1944) · ฉบับแปลไทยโดย สมชาย พิพุธวัฒน์',
   torture: 'พระราชบัญญัติป้องกันและปราบปรามการทรมานและการกระทำให้บุคคลสูญหาย พ.ศ. 2565',
   pdpa: 'พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562',
   envprotect: 'พระราชบัญญัติส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535',
@@ -2149,7 +2155,7 @@ function printCurrentArticle() {
     : '';
   printArea.innerHTML = `
     ${printDateStamp()}
-    <h2 style="font-family:'Noto Serif Thai',serif;margin-bottom:14px;">มาตรา ${numberText}</h2>
+    <h2 style="font-family:'Noto Serif Thai',serif;margin-bottom:14px;">${(document.querySelector('.article-number-label')||{}).textContent || 'มาตรา'} ${numberText}</h2>
     <div class="article-body" style="border:none;padding:0;background:none;">${bodyHtml}</div>
     ${noteHtml}
   `;
@@ -2308,7 +2314,7 @@ async function loadAndRender() {
   currentNumber = id.slice(id.indexOf('_') + 1);
 
   try {
-    const res = await fetch('codex-data.json?v=20261113a');
+    const res = await fetch('codex-data.json?v=20261118a');
     if (!res.ok) throw new Error('fetch failed');
     codexData = await res.json();
   } catch (e) {
@@ -2369,6 +2375,8 @@ async function loadAndRender() {
   var articleTitleEl = document.getElementById('article-title');
   var articleTitleSepEl = document.getElementById('article-title-sep');
   var articleTitleText = (article.articleTitle || '').trim();
+  var unitLblEl = document.querySelector('.article-number-label');
+  if (unitLblEl) unitLblEl.textContent = article.unit || 'มาตรา';
   articleTitleEl.textContent = articleTitleText;
   articleTitleEl.hidden = !articleTitleText;
   articleTitleSepEl.hidden = !articleTitleText;
