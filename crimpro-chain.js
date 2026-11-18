@@ -586,7 +586,7 @@ function lecHtml(q){
     const g=secs[n]; if(q&&!test(g)) continue;
     const title=(L.titles&&L.titles[n])||'ยังไม่ได้บรรยาย';
     const cnt=g.reduce((a,x)=>a+x.items.length,0);
-    const body=cnt?lecBody(g,n):'<div class="ch-lec-note">'+esc((L.note&&L.note[n])||(n>=11?'ยังไม่ได้บรรยาย — ยังไม่มีขั้นในผังที่จัดเข้าครั้งนี้':'ไม่มีขั้นในผังที่จัดเข้าครั้งนี้'))+'</div>';
+    const body=cnt?lecBody(g,n):'<div class="ch-lec-note">'+esc((L.note&&L.note[n])||(n>=15?'ยังไม่ได้บรรยาย — ยังไม่มีขั้นในผังที่จัดเข้าครั้งนี้':'ไม่มีขั้นในผังที่จัดเข้าครั้งนี้'))+'</div>';
     out+='<div class="ch-ep'+(q?' open':'')+'" id="ch-lec-'+n+'"><div class="ch-ep-head" onclick="this.parentNode.classList.toggle(\'open\');try{playHoverSound()}catch(e){}">'
       +'<div class="ch-ep-num">'+n+'</div><div class="ch-ep-title">เรียนครั้งที่ '+n+'<small>'+esc(title)+(cnt?' · '+cnt+' ขั้น':'')+'</small></div><span class="ch-ep-caret">▶</span></div>'
       +'<div class="ch-ep-body">'+body+'</div></div>';
@@ -595,7 +595,7 @@ function lecHtml(q){
   if(g.length && (!q||test(g))){
     const cnt=g.reduce((a,x)=>a+x.items.length,0);
     out+='<div class="ch-ep'+(q?' open':'')+'" id="ch-lec-later"><div class="ch-ep-head" onclick="this.parentNode.classList.toggle(\'open\')">'
-      +'<div class="ch-ep-num">…</div><div class="ch-ep-title">รอจัดเข้าครั้งที่ 11–15<small>เรื่องที่ยังไม่ได้บรรยาย (ไต่สวนมูลฟ้อง · พิจารณา · พิพากษา · อุทธรณ์) · '+cnt+' ขั้น</small></div><span class="ch-ep-caret">▶</span></div>'
+      +'<div class="ch-ep-num">…</div><div class="ch-ep-title">รอครั้งที่ 15<small>เรื่องที่ยังไม่ได้บรรยาย (ม.190 · อุทธรณ์) · '+cnt+' ขั้น</small></div><span class="ch-ep-caret">▶</span></div>'
       +'<div class="ch-ep-body">'+lecBody(g,'later')+'</div></div>';
   }
   return out||'<div class="ch-empty">ไม่พบ "'+esc(q)+'"</div>';
