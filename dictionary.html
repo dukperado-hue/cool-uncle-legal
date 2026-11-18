@@ -94,13 +94,14 @@
   <div id="atlas-dictionary"><noscript>ต้องเปิด JavaScript เพื่อดูพจนานุกรม</noscript></div>
 </div>
 
-<script src="atlas-dictionary-view.js?v=20261004d"></script>
+<script src="atlas-dictionary-view.js?v=20261119a"></script>
 <script>
 (function () {
   'use strict';
   AtlasDictionaryView.mountPage(document.getElementById('atlas-dictionary'), {
     volumes: [
-      { id: 'law', type: 'law', title: 'กฎหมาย', sub: 'ศัพท์กฎหมายอังกฤษ ↔ ไทย (วิชา Legal English)', url: 'atlas-dictionary.json?v=d1-10-0' },
+      { id: 'law', type: 'law', title: 'กฎหมาย', sub: 'ศัพท์กฎหมายอังกฤษ ↔ ไทย (วิชา Legal English)', url: 'atlas-dictionary.json?v=d1-11-0' },
+      { id: 'avlaw', type: 'law', title: 'กฎหมายการบิน', sub: 'ศัพท์กฎหมายการบินไทย ↔ อังกฤษ (พ.ร.บ.การเดินอากาศ · ข้อกำหนด กพท. · อนุสัญญาชิคาโก · บทความ สมชาย พิพุธวัฒน์)', url: 'dictionary-aviation-law.json?v=av-1-0' },
       { id: 'abbr', type: 'abbr', title: 'คำย่อ aviation', sub: 'คำย่อการบินและการซ่อมบำรุง', url: 'dictionary-aviation-abbr.json?v=20261004b' },
       { id: 'aviation', type: 'terms', title: 'aviation', sub: 'ศัพท์การบินและการซ่อมบำรุง', url: 'dictionary-aviation-terms.json?v=20261015a' }
     ]

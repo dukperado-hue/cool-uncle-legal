@@ -20,12 +20,14 @@
 
   var KIND_LABEL = {
     term: 'ศัพท์', collocation: 'วลี', usage: 'คำที่ใช้ในบริบท',
-    latin: 'ละติน', structure: 'โครงสร้างตัวบท', profession: 'อาชีพ/ตำแหน่ง'
+    latin: 'ละติน', structure: 'โครงสร้างตัวบท', profession: 'อาชีพ/ตำแหน่ง',
+    heading: 'ชื่อข้อในอนุสัญญา'
   };
   var SRC_LABEL = {
     handout: 'เอกสารประกอบ', slides: 'สไลด์', oldexam: 'ข้อสอบเก่า',
     textbook: 'ตำรา', 'lecture-audio': 'เสียงบรรยาย', 'course-spec': 'แผนรายวิชา',
-    'lecture-page': 'หน้าบรรยายวิชา'
+    'lecture-page': 'หน้าบรรยายวิชา',
+    statute: 'บทนิยามในกฎหมาย', regulation: 'ข้อกำหนด กพท.', treaty: 'อนุสัญญาชิคาโก (คำแปล)', commentary: 'บทความ สมชาย พิพุธวัฒน์'
   };
   var CONCEPT_PREFIX = 'atlas:concept/';
 
@@ -34,6 +36,7 @@
     '.atlas-dict>summary{cursor:pointer;padding:var(--s3,12px) var(--s4,16px);font-weight:600;list-style:none}' +
     '.atlas-dict>summary::-webkit-details-marker{display:none}' +
     '.atlas-dict-sub{font-weight:400;font-size:12.5px;color:var(--muted,#5b6472);margin-left:8px}' +
+    '.atlas-dict-note{font-size:13px;color:var(--muted,#5b6472);margin:2px 0 4px;line-height:1.5}' +
     '.atlas-dict-body{padding:0 var(--s4,16px) var(--s4,16px)}' +
     '.atlas-dict-bar{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 12px}' +
     '.atlas-dict-bar input,.atlas-dict-bar select{font:inherit;font-size:14px;padding:7px 10px;border:1px solid var(--line,#e6e1d6);border-radius:8px;background:var(--bg,#FBF9F4);color:var(--ink,#1f2430)}' +
@@ -128,7 +131,7 @@
     body.appendChild(list);
 
     var index = entries.map(function (e) {
-      return { e: e, hay: fold(e.en + ' ' + (e.th || []).join(' ')) };
+      return { e: e, hay: fold(e.en + ' ' + (e.th || []).join(' ') + ' ' + (e.note || '')) };
     });
 
     function row(e) {
@@ -150,6 +153,7 @@
         a.href = 'concept.html?k=' + encodeURIComponent(e.conceptRef.slice(CONCEPT_PREFIX.length));
         meta.appendChild(a);
       }
+      if (e.note) li.appendChild(el('div', 'atlas-dict-note', e.note));
       li.appendChild(meta);
       return li;
     }

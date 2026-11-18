@@ -1,0 +1,3569 @@
+{
+ "version": "av-1-0",
+ "generated": "2026-11-19",
+ "principle": "Thai-English aviation-law term pairs from enacted wording (พ.ร.บ.การเดินอากาศ ม.4 + CAAT English translation, ข้อกำหนด กพท. 22/32), the Chicago Convention translation by Somchai Piputwat, and terms he discusses in his commentary. note = short usage remark, not a definition.",
+ "entries": [
+  {
+   "id": "atlas:avterm/abrogation-of-inconsistent-arrangements",
+   "en": "Abrogation of inconsistent arrangements",
+   "th": [
+    "การยกเลิกบรรดาข้อตกลงที่ไม่สอดคล้อง"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 82",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/accident",
+   "en": "Accident",
+   "th": [
+    "อุบัติเหตุ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/acquisition-or-use-of-land",
+   "en": "Acquisition or use of land",
+   "th": [
+    "การได้มาหรือการใช้ที่ดิน"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 72",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/acts-of-unlawful-interference",
+   "en": "Acts of Unlawful Interference",
+   "th": [
+    "การกระทำอันเป็นการแทรกแซงโดยมิชอบด้วยกฎหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/ad-hoc-committee",
+   "en": "Ad hoc committee",
+   "th": [
+    "กรรมการเฉพาะเรื่อง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/adherence-to-convention",
+   "en": "Adherence to Convention",
+   "th": [
+    "การให้ภาคยานุวัติอนุสัญญา"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 92",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/admission-of-other-states",
+   "en": "Admission of other States",
+   "th": [
+    "การรับรัฐอื่น ๆ เข้าร่วม"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 93",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/adoption-and-amendment-of-annexes",
+   "en": "Adoption and amendment of Annexes",
+   "th": [
+    "การตกลงเลือกใช้และแก้ไขภาคผนวกต่าง ๆ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 90",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/adoption-of-international-standards",
+   "en": "Adoption of international standards",
+   "th": [
+    "การตกลงเลือกใช้บรรดามาตรฐานระหว่างประเทศ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 37",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/aerial-work",
+   "en": "Aerial Work",
+   "th": [
+    "การทำงานทางอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    },
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/aerodrome",
+   "en": "Aerodrome",
+   "th": [
+    "สนามบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/aeronautical-information-service",
+   "en": "Aeronautical Information Service (AIS)",
+   "th": [
+    "บริการข่าวสารการบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/aeronautical-revenue",
+   "en": "Aeronautical revenue",
+   "th": [
+    "รายได้จากกิจกรรมการบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/air-navigation",
+   "en": "Air navigation",
+   "th": [
+    "การเดินอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "ในชื่อ พ.ร.บ. ไม่ได้หมายถึง navigation ในความหมายแคบ คณะกรรมการกฤษฎีกา (เรื่องเสร็จที่ 540/2541) ถือว่าครอบคลุมทุกกิจกรรมใน พ.ร.บ. ผู้เขียนเห็นว่ามีความหมายเท่ากับ \"การบิน\""
+  },
+  {
+   "id": "atlas:avterm/air-navigation-aid",
+   "en": "Air Navigation Aid",
+   "th": [
+    "เครื่องอำนวยความสะดวกในการเดินอากาศ",
+    "เครื่องอนุกูลการเดินอากาศ",
+    "เครื่องช่วยในการเดินอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    },
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "\"เครื่องอนุกูลการเดินอากาศ\" คือคำแปล air navigation aids ในอนุสัญญาชิคาโก ข้อ 37 และ \"เครื่องช่วยในการเดินอากาศ\" เป็นคำที่หน่วยงานการบินพลเรือนเคยใช้"
+  },
+  {
+   "id": "atlas:avterm/air-navigation-aids",
+   "en": "Air navigation aids",
+   "th": [
+    "เครื่องอนุกูลการเดินอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 37",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/air-navigation-facilities",
+   "en": "Air navigation facilities",
+   "th": [
+    "เครื่องอำนวยความสะดวกในการเดินอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "อนุสัญญาชิคาโก (หมวด 15) และ พ.ร.บ. ฉบับเดิมใช้คำนี้คู่กับ air navigation facilities ฉบับที่ 14 (2562) บัญญัติคำใหม่ \"สิ่งอำนวยความสะดวกในการเดินอากาศ\" และคำแปลของ กพท. ย้ายคำเดิมไปคู่กับ Air Navigation Aid ผู้เขียนเห็นว่าจะทำให้ใช้กฎหมายสับสน"
+  },
+  {
+   "id": "atlas:avterm/air-navigation-facility",
+   "en": "Air Navigation Facility",
+   "th": [
+    "สิ่งอำนวยความสะดวกในการเดินอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    },
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "คำใหม่จากฉบับที่ 14 (2562) นิยามคล้ายกฎหมายแบบของ FAA เทียบ \"เครื่องอำนวยความสะดวกในการเดินอากาศ\" ในอนุสัญญาชิคาโก"
+  },
+  {
+   "id": "atlas:avterm/air-navigation-service",
+   "en": "Air Navigation Service",
+   "th": [
+    "บริการการเดินอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/air-operator",
+   "en": "Air Operator",
+   "th": [
+    "ผู้ดำเนินการเดินอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/air-operator-certificate",
+   "en": "Air Operator Certificate (AOC)",
+   "th": [
+    "ใบรับรองผู้ดำเนินการเดินอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/air-service",
+   "en": "Air service",
+   "th": [
+    "บริการเดินอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 96",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/air-traffic-management",
+   "en": "Air Traffic Management (ATM)",
+   "th": [
+    "การจัดการจราจรทางอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/air-traffic-service",
+   "en": "Air Traffic Service (ATS)",
+   "th": [
+    "บริการจราจรทางอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/airborne-image-recorder",
+   "en": "Airborne Image Recorder (AIR)",
+   "th": [
+    "เครื่องบันทึกภาพทางอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/aircraft",
+   "en": "Aircraft",
+   "th": [
+    "อากาศยาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/aircraft-commander",
+   "en": "Aircraft Commander",
+   "th": [
+    "ผู้ควบคุมอากาศยาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/aircraft-in-distress",
+   "en": "Aircraft in distress",
+   "th": [
+    "อากาศยานในระหว่างทุกขภัย"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 25",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/aircraft-part",
+   "en": "Aircraft Part",
+   "th": [
+    "ชิ้นส่วนของอากาศยาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/aircraft-radio-equipment",
+   "en": "Aircraft radio equipment",
+   "th": [
+    "เครื่องวิทยุบนอากาศยาน"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 30",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/aircraft-replacement-part",
+   "en": "Aircraft Replacement Part",
+   "th": [
+    "ชิ้นส่วนรับรองคุณภาพ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/aircraft-technical-services",
+   "en": "Aircraft Technical Services",
+   "th": [
+    "บริการช่างอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/airframe",
+   "en": "Airframe",
+   "th": [
+    "ลำตัวอากาศยาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/airline",
+   "en": "Airline",
+   "th": [
+    "สายการบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 96",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/airport-and-similar-charges",
+   "en": "Airport and similar charges",
+   "th": [
+    "ค่าภาระท่าอากาศยานและค่าภาระที่คล้ายกัน",
+    "บรรดาค่าภาระท่าอากาศยานและค่าภาระที่คล้ายกัน"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 15",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/airside-cctv-recorder",
+   "en": "Airside CCTV Recorder",
+   "th": [
+    "ระบบบันทึกภาพจากกล้องโทรทัศน์วงจรปิดในเขตการบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/airspace",
+   "en": "Airspace",
+   "th": [
+    "ห้วงอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 1",
+     "kind": "treaty"
+    }
+   ],
+   "note": "คำแปลในราชกิจจานุเบกษา (2494) ใช้ \"อวกาศ\" ผู้แปลใช้ \"ห้วงอากาศ\""
+  },
+  {
+   "id": "atlas:avterm/airworthiness-approval-tag",
+   "en": "Airworthiness Approval Tag",
+   "th": [
+    "หนังสือรับรองความสมควรเดินอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/airworthiness-directive",
+   "en": "Airworthiness Directive",
+   "th": [
+    "คำสั่งความสมควรเดินอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/ambient-workplace-recordings",
+   "en": "Ambient Workplace Recordings",
+   "th": [
+    "การบันทึกภาพหรือเสียงในสภาพแวดล้อมการปฏิบัติงาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/amendment-of-convention",
+   "en": "Amendment of Convention",
+   "th": [
+    "การแก้ไขเพิ่มเติมอนุสัญญา"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 94",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/annex",
+   "en": "Annex",
+   "th": [
+    "ภาคผนวก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/appeals",
+   "en": "Appeals",
+   "th": [
+    "การอุทธรณ์",
+    "บรรดาการอุทธรณ์"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 86",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/applicability-of-air-regulations",
+   "en": "Applicability of air regulations",
+   "th": [
+    "การใช้ข้อบังคับทางอากาศ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 11",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/appointment-of-personnel",
+   "en": "Appointment of personnel",
+   "th": [
+    "การแต่งตั้งเจ้าหน้าที่"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 58",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/appropriate-ats-authority",
+   "en": "Appropriate ATS authority",
+   "th": [
+    "ผู้มีอำนาจหน้าที่ที่รับผิดชอบในการให้บริการจราจรทางอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "ข้อบังคับ กพท. 30 (กฎจราจรทางอากาศ)"
+  },
+  {
+   "id": "atlas:avterm/approved-design",
+   "en": "Approved Design",
+   "th": [
+    "แบบที่ได้รับการรับรอง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/approved-maintenance-organization",
+   "en": "Approved Maintenance Organization",
+   "th": [
+    "ผู้ดำเนินการหน่วยซ่อม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/approved-training-organization",
+   "en": "Approved Training Organization",
+   "th": [
+    "สถาบันฝึกอบรมด้านการบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/arbitration-procedure",
+   "en": "Arbitration procedure",
+   "th": [
+    "วิธีดำเนินการอนุญาโตตุลาการ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 85",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/arrangements-with-other-international-bodies",
+   "en": "Arrangements with other international bodies",
+   "th": [
+    "ข้อตกลงกับองค์คณะระหว่างประเทศองค์คณะอื่น ๆ",
+    "บรรดาข้อตกลงกับองค์คณะระหว่างประเทศองค์คณะอื่น ๆ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 65",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/authoritative-safeguard",
+   "en": "Authoritative Safeguard",
+   "th": [
+    "การป้องกันข้อมูล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/authority",
+   "en": "Authority",
+   "th": [
+    "อำนาจหน้าที่"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/aviation",
+   "en": "Aviation",
+   "th": [
+    "การบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/aviation-inspector",
+   "en": "Aviation Inspector",
+   "th": [
+    "ผู้ตรวจสอบด้านการบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/aviation-safety-risk",
+   "en": "Aviation Safety Risk",
+   "th": [
+    "ความเสี่ยงด้านความปลอดภัยในการบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/budget-and-apportionment-of-expenses",
+   "en": "Budget and apportionment of expenses",
+   "th": [
+    "งบประมาณและการแบ่งส่วนบรรดาค่าใช้จ่าย"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 61",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/cabotage",
+   "en": "Cabotage",
+   "th": [
+    "กาโบตาจ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 7",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/cargo-restrictions",
+   "en": "Cargo restrictions",
+   "th": [
+    "ข้อกำกัดสินค้า",
+    "บรรดาข้อกำกัดสินค้า"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 35",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/certificate-of-airworthiness",
+   "en": "Certificate of Airworthiness",
+   "th": [
+    "ใบสำคัญสมควรเดินอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/certificates-of-airworthiness",
+   "en": "Certificates of airworthiness",
+   "th": [
+    "ใบสำคัญสมควรเดินอากาศ",
+    "บรรดาใบสำคัญสมควรเดินอากาศ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 31",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/civil-and-state-aircraft",
+   "en": "Civil and state aircraft",
+   "th": [
+    "อากาศยานพลเรือนและอากาศยานราชการ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 3",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/civil-aviation",
+   "en": "Civil Aviation",
+   "th": [
+    "การบินพลเรือน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    },
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "ผู้เขียนวิจารณ์นิยามปี 2562 ว่าแคบเกินไปเพราะผูกกับการปฏิบัติการสามประเภทตามภาคผนวก 6"
+  },
+  {
+   "id": "atlas:avterm/civil-aviation-authority-of-thailand",
+   "en": "Civil Aviation Authority of Thailand",
+   "th": [
+    "สำนักงานการบินพลเรือนแห่งประเทศไทย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/civil-aviation-organization",
+   "en": "Civil Aviation Organization",
+   "th": [
+    "องค์กรด้านการบินพลเรือน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/cockpit-voice-recorder",
+   "en": "Cockpit Voice Recorder (CVR)",
+   "th": [
+    "เครื่องบันทึกเสียงในห้องนักบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/commercial-air-transport",
+   "en": "Commercial Air Transport",
+   "th": [
+    "การขนส่งทางอากาศเพื่อการพาณิชย์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/competent-authority",
+   "en": "Competent Authority",
+   "th": [
+    "ผู้พิจารณา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ],
+   "note": "ในข้อกำหนด 32 หมายถึงผู้มีอำนาจตัดสินให้เปิดเผยข้อมูลด้านความปลอดภัย ไม่ใช่ \"หน่วยงานผู้มีอำนาจ\" ตามความหมายทั่วไปในเอกสาร ICAO"
+  },
+  {
+   "id": "atlas:avterm/competent-official",
+   "en": "Competent Official",
+   "th": [
+    "พนักงานเจ้าหน้าที่"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/composition-and-election-of-council",
+   "en": "Composition and election of Council",
+   "th": [
+    "องค์ประกอบและการเลือกตั้งคณะมนตรี"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 50",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/consolidation-and-codification",
+   "en": "Consolidation and codification",
+   "th": [
+    "การรวบรวมและการจัดทำประมวล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/continuous-monitoring-approach",
+   "en": "Continuous monitoring approach (CMA)",
+   "th": [
+    "วิธีการเฝ้าตรวจตราอย่างต่อเนื่อง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/convention",
+   "en": "Convention",
+   "th": [
+    "อนุสัญญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/corrective-action",
+   "en": "Corrective Action",
+   "th": [
+    "มาตรการแก้ไข"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/crew-member",
+   "en": "Crew Member",
+   "th": [
+    "สมาชิกลูกเรือ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/cross-subsidization",
+   "en": "Cross-subsidization",
+   "th": [
+    "การอุดหนุนข้ามท่าอากาศยาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/custodian",
+   "en": "Custodian",
+   "th": [
+    "ผู้ดูแล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/customs-and-immigration-procedures",
+   "en": "Customs and immigration procedures",
+   "th": [
+    "วิธีดำเนินการศุลกากรและการเข้าเมือง",
+    "บรรดาวิธีดำเนินการศุลกากรและการเข้าเมือง"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 23",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/customs-duty",
+   "en": "Customs duty",
+   "th": [
+    "ภาษีศุลกากร"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 24",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/danger-area",
+   "en": "Danger area",
+   "th": [
+    "พื้นที่อันตราย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/dangerous-goods",
+   "en": "Dangerous Goods",
+   "th": [
+    "วัตถุอันตราย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/de-identification",
+   "en": "De-identification",
+   "th": [
+    "การปกปิดข้อมูลบางส่วน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/definitions",
+   "en": "Definitions",
+   "th": [
+    "บทนิยาม"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 96",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/denunciation-of-convention",
+   "en": "Denunciation of Convention",
+   "th": [
+    "การบอกเลิกอนุสัญญา"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 95",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/departures-from-international-standards",
+   "en": "Departures from international standards",
+   "th": [
+    "การออกห่างจากบรรดามาตรฐานระหว่างประเทศ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 38",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/designation-of-routes-and-airports",
+   "en": "Designation of routes and airports",
+   "th": [
+    "การกำหนดเส้นทางบินต่าง ๆ และบรรดาท่าอากาศยาน"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 68",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/director",
+   "en": "Director",
+   "th": [
+    "ผู้อำนวยการ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/director-general",
+   "en": "Director General",
+   "th": [
+    "อธิบดี"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/display-of-marks",
+   "en": "Display of marks",
+   "th": [
+    "การแสดงเครื่องหมายต่าง ๆ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 20",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/documents-carried-in-aircraft",
+   "en": "Documents carried in aircraft",
+   "th": [
+    "เอกสารที่ต้องนำไปในอากาศยาน",
+    "บรรดาเอกสารที่ต้องนำไปในอากาศยาน"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 29",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/dual-registration",
+   "en": "Dual registration",
+   "th": [
+    "การจดทะเบียนสองแห่ง"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 18",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/dual-till",
+   "en": "Dual-till",
+   "th": [
+    "เชิงซ้อน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/duties-of-commission",
+   "en": "Duties of Commission",
+   "th": [
+    "หน้าที่ของคณะกรรมาธิการ",
+    "บรรดาหน้าที่ของคณะกรรมาธิการ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 57",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/duty",
+   "en": "Duty",
+   "th": [
+    "หน้าที่"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/endorsement-of-certificates-and-licenses",
+   "en": "Endorsement of certificates and licenses",
+   "th": [
+    "การสลักหลังบรรดาใบสำคัญและใบอนุญาตต่าง ๆ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 39",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/engine",
+   "en": "Engine",
+   "th": [
+    "เครื่องยนต์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/entry-and-clearance-regulations",
+   "en": "Entry and clearance regulations",
+   "th": [
+    "ข้อบังคับการเข้าและการตรวจปล่อย"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 13",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/exemption-from-seizure-on-patent-claims",
+   "en": "Exemption from seizure on patent claims",
+   "th": [
+    "การยกเว้นจากการยึดในบรรดาการเรียกร้องสิทธิบัตร"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 27",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/expenditure-and-assessment-of-funds",
+   "en": "Expenditure and assessment of funds",
+   "th": [
+    "รายจ่ายและการกำหนดกองทุน"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 73",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/expenses-of-delegations-and-other-representatives",
+   "en": "Expenses of delegations and other representatives",
+   "th": [
+    "ค่าใช้จ่ายของคณะผู้แทน และบรรดาผู้แทนอื่น ๆ",
+    "บรรดาค่าใช้จ่ายของคณะผู้แทน และบรรดาผู้แทนอื่น ๆ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 63",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/facilitation-of-formalities",
+   "en": "Facilitation of formalities",
+   "th": [
+    "การอำนวยความสะดวกในระเบียบการต่าง ๆ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 22",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/file-reports-with-council",
+   "en": "File reports with Council",
+   "th": [
+    "การส่งรายงานต่าง ๆ ต่อคณะมนตรี"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 67",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/final-report",
+   "en": "Final Report",
+   "th": [
+    "รายงานฉบับสมบูรณ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/financing-of-air-navigation-facilities",
+   "en": "Financing of air navigation facilities",
+   "th": [
+    "การจัดหาเงินทุนของบรรดาเครื่องอำนวยความสะดวก"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 70",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/first-meeting-of-assembly",
+   "en": "First meeting of Assembly",
+   "th": [
+    "การประชุมครั้งแรกของสมัชชา"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 46",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/flight-data-analysis-programme",
+   "en": "Flight Data Analysis Programme (FDAP)",
+   "th": [
+    "โปรแกรมวิเคราะห์ข้อมูลการบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/flight-data-recorder",
+   "en": "Flight Data Recorder (FDR)",
+   "th": [
+    "เครื่องบันทึกข้อมูลการบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/flight-information-region",
+   "en": "Flight information region (FIR)",
+   "th": [
+    "เขตภูมิภาคข่าวสารการบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "ใช้ใน ม.15/18 แต่ไม่มีนิยามในกฎหมาย"
+  },
+  {
+   "id": "atlas:avterm/follow-up",
+   "en": "Follow-up",
+   "th": [
+    "การติดตามผล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/foreign-air-operator",
+   "en": "Foreign Air Operator",
+   "th": [
+    "ผู้ดำเนินการเดินอากาศต่างประเทศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/foreign-aircraft",
+   "en": "Foreign Aircraft",
+   "th": [
+    "อากาศยานต่างประเทศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/function",
+   "en": "Function",
+   "th": [
+    "การหน้าที่"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "ผู้เขียนแยก การหน้าที่ (function) ของนิติบุคคล ออกจาก อำนาจหน้าที่ (authority) อำนาจ (power) และหน้าที่ (duty) ของตำแหน่ง"
+  },
+  {
+   "id": "atlas:avterm/function-of-council",
+   "en": "Function of Council",
+   "th": [
+    "การหน้าที่ของคณะมนตรี"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 78",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/functional-approach",
+   "en": "Functional approach",
+   "th": [
+    "หลักภารกิจ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/functions-relating-to-other-agreements",
+   "en": "Functions relating to other agreements",
+   "th": [
+    "การหน้าที่เกี่ยวกับบรรดาความตกลงอื่น ๆ",
+    "บรรดาการหน้าที่เกี่ยวกับบรรดาความตกลงอื่น ๆ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 66",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/general-aviation",
+   "en": "General Aviation",
+   "th": [
+    "การบินทั่วไป"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    },
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/gross-negligence",
+   "en": "Gross Negligence",
+   "th": [
+    "การกระทำโดยประมาทเลินเล่ออย่างร้ายแรง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/hazard",
+   "en": "Hazard",
+   "th": [
+    "ปัจจัยอันตราย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/hazard-identification",
+   "en": "Hazard Identification",
+   "th": [
+    "การระบุปัจจัยอันตราย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/holder-of-the-type-certificate",
+   "en": "Holder of the Type Certificate",
+   "th": [
+    "ผู้ได้รับใบรับรองแบบ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/immunities-and-privileges-of-personnel",
+   "en": "Immunities and privileges of personnel",
+   "th": [
+    "ความคุ้มกันและบรรดาเอกสิทธิ์ของเจ้าหน้าที่",
+    "บรรดาความคุ้มกันและบรรดาเอกสิทธิ์ของเจ้าหน้าที่"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 60",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/improvement-of-air-navigation-facilities",
+   "en": "Improvement of air navigation facilities",
+   "th": [
+    "การยังบรรดาเครื่องอำนวยความสะดวกในการเดินอากาศ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 69",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/incident",
+   "en": "Incident",
+   "th": [
+    "อุบัติการณ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/initial-report",
+   "en": "Initial Report",
+   "th": [
+    "รายงานเบื้องต้น"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/instrument-flight-procedure-design-service",
+   "en": "Instrument Flight Procedure Design Service",
+   "th": [
+    "บริการออกแบบวิธีปฏิบัติการบินด้วยเครื่องวัดประกอบการบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/international-air-service",
+   "en": "International air service",
+   "th": [
+    "บริการเดินอากาศระหว่างประเทศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 96",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/international-character-of-personnel",
+   "en": "International character of personnel",
+   "th": [
+    "ลักษณะระหว่างประเทศของเจ้าหน้าที่"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 59",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/international-standards-and-recommended-practices",
+   "en": "International Standards and Recommended Practices (SARPs)",
+   "th": [
+    "มาตรฐานและวิธีปฏิบัติที่แนะนำระหว่างประเทศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/investigation-of-accidents",
+   "en": "Investigation of accidents",
+   "th": [
+    "การสืบสวนอุบัติเหตุต่าง ๆ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 26",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/joint-operating-organizations-permitted",
+   "en": "Joint operating organizations permitted",
+   "th": [
+    "อนุญาตให้ตั้งบรรดาองค์การดำเนินการบินร่วมกัน"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 77",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/journey-log-books",
+   "en": "Journey log books",
+   "th": [
+    "สมุดปูมเดินทางต่าง ๆ",
+    "บรรดาสมุดปูมเดินทางต่าง ๆ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 34",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/landing-at-customs-airport",
+   "en": "Landing at customs airport",
+   "th": [
+    "การลง ณ ท่าอากาศยานศุลกากร"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 10",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/legal-capacity",
+   "en": "Legal Capacity",
+   "th": [
+    "อำนาจทางกฎหมาย"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 47",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/licenced-aerodrome",
+   "en": "Licenced Aerodrome",
+   "th": [
+    "สนามบินอนุญาต"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/licenced-temporary-takeoff-and-landing-area",
+   "en": "Licenced Temporary Takeoff and Landing Area",
+   "th": [
+    "ที่ขึ้นลงชั่วคราวอนุญาต"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/licenses-of-personnel",
+   "en": "Licenses of personnel",
+   "th": [
+    "ใบอนุญาตของผู้ประจำหน้าที่",
+    "บรรดาใบอนุญาตของผู้ประจำหน้าที่"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 32",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/list-of-mandatory-occurrences",
+   "en": "List of Mandatory Occurrences",
+   "th": [
+    "รายการของเหตุการณ์ด้านความปลอดภัยภาคบังคับ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/maintenance",
+   "en": "Maintenance",
+   "th": [
+    "การบำรุงรักษา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/major-aircraft-appliance",
+   "en": "Major Aircraft Appliance",
+   "th": [
+    "ส่วนประกอบสำคัญของอากาศยาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/mandatory-functions-of-council",
+   "en": "Mandatory functions of Council",
+   "th": [
+    "การหน้าที่ในอาณัติของคณะมนตรี",
+    "บรรดาการหน้าที่ในอาณัติของคณะมนตรี"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 54",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/mandatory-occurrence-reporting",
+   "en": "Mandatory Occurrence Reporting",
+   "th": [
+    "การรายงานเหตุการณ์ด้านความปลอดภัยภาคบังคับ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/meetings-of-assembly-and-voting",
+   "en": "Meetings of Assembly and voting",
+   "th": [
+    "การประชุมของสมัชชา และการออกเสียง",
+    "บรรดาการประชุมของสมัชชา และการออกเสียง"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 48",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/meteorological-services-for-air-navigation",
+   "en": "Meteorological Services for Air Navigation (MET)",
+   "th": [
+    "บริการอุตุนิยมวิทยาการบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/minister",
+   "en": "Minister",
+   "th": [
+    "รัฐมนตรี"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/misuse-of-civil-aviation",
+   "en": "Misuse of civil aviation",
+   "th": [
+    "การเขวใช้การบินพลเรือน"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 4",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/multi-crew-pilot-licence",
+   "en": "Multi-crew pilot licence (MPL)",
+   "th": [
+    "ใบอนุญาตนักบินผู้ช่วยเครื่องบิน",
+    "ใบอนุญาตนักบินทำหน้าที่หลายคน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "ข้อบังคับ กพท. 24 ใช้ \"นักบินผู้ช่วยเครื่องบิน\" ผู้เขียนเห็นว่าทำให้เข้าใจผิดว่าเป็น co-pilot และเสนอ \"นักบินทำหน้าที่หลายคน\""
+  },
+  {
+   "id": "atlas:avterm/name-and-composition",
+   "en": "Name and composition",
+   "th": [
+    "ชื่อและองค์ประกอบ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 43",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/national-laws-governing-registration",
+   "en": "National laws governing registration",
+   "th": [
+    "กฎหมายแห่งชาติว่าด้วยการจดทะเบียน",
+    "บรรดากฎหมายแห่งชาติว่าด้วยการจดทะเบียน"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 19",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/nationality-of-aircraft",
+   "en": "Nationality of aircraft",
+   "th": [
+    "สัญชาติของอากาศยาน"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 17",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/navigable-airspace",
+   "en": "Navigable Airspace",
+   "th": [
+    "ห้วงอากาศที่ใช้ในการเดินอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/nomination-and-appointment-of-commission",
+   "en": "Nomination and appointment of Commission",
+   "th": [
+    "การเสนอชื่อและการแต่งตั้งคณะกรรมาธิการ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 56",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/non-aeronautical-revenue",
+   "en": "Non-aeronautical revenue",
+   "th": [
+    "รายได้ที่ไม่เกี่ยวเนื่องกับกิจกรรมการบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/notify",
+   "en": "Notify",
+   "th": [
+    "แจ้งเหตุการณ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/objectives",
+   "en": "Objectives",
+   "th": [
+    "วัตถุประสงค์",
+    "บรรดาวัตถุประสงค์"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 44",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/occurrence",
+   "en": "Occurrence",
+   "th": [
+    "เหตุการณ์ด้านความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/occurrence-analysis",
+   "en": "Occurrence Analysis",
+   "th": [
+    "การวิเคราะห์เหตุการณ์ด้านความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/operator",
+   "en": "Operator",
+   "th": [
+    "ผู้ทำการบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/parachute",
+   "en": "Parachute",
+   "th": [
+    "ร่มอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/paris-and-habana-conventions",
+   "en": "Paris and Habana Conventions",
+   "th": [
+    "อนุสัญญากรุงปารีสและอนุสัญญากรุงฮาบานา"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 80",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/participation-in-operating-organizations",
+   "en": "Participation in operating organizations",
+   "th": [
+    "การเข้ามีส่วนร่วมในบรรดาองค์การดำเนินการ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 79",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/participation-without-a-vote",
+   "en": "Participation without a vote",
+   "th": [
+    "การเข้ามีส่วนร่วมโดยไม่มีสิทธิออกเสียง"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 53",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/passenger-service-charge",
+   "en": "Passenger Service Charge (PSC)",
+   "th": [
+    "ค่าบริการผู้โดยสารขาออก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "เดิมเรียก \"ค่าธรรมเนียมการใช้สนามบินของผู้โดยสารออกจากสนามบิน\" เปลี่ยนเป็นค่าบริการในปี 2551"
+  },
+  {
+   "id": "atlas:avterm/penalty-for-non-conformity-by-state",
+   "en": "Penalty for non-conformity by State",
+   "th": [
+    "โทษสำหรับรัฐที่ไม่ปฏิบัติตาม"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 88",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/penalty-for-non-conformity-of-airline",
+   "en": "Penalty for non-conformity of airline",
+   "th": [
+    "โทษสำหรับสายการบินที่ไม่ปฏิบัติตาม"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 87",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/permanent-seat",
+   "en": "Permanent seat",
+   "th": [
+    "สำนักถาวร"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 45",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/permissive-functions-of-council",
+   "en": "Permissive functions of Council",
+   "th": [
+    "การหน้าที่ของคณะมนตรี ที่อนุญาตให้ทำได้",
+    "บรรดาการหน้าที่ของคณะมนตรี ที่อนุญาตให้ทำได้"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 55",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/personnel",
+   "en": "Personnel",
+   "th": [
+    "ผู้ประจำหน้าที่"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/photographic-apparatus",
+   "en": "Photographic apparatus",
+   "th": [
+    "อุปกรณ์ถ่ายภาพ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 36",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/pilotless-aircraft",
+   "en": "Pilotless aircraft",
+   "th": [
+    "อากาศยานไม่มีนักบิน",
+    "อากาศยานซึ่งไม่มีนักบิน"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 8",
+     "kind": "treaty"
+    },
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "ข้อ 8 อนุสัญญาชิคาโก และ ม.24"
+  },
+  {
+   "id": "atlas:avterm/power",
+   "en": "Power",
+   "th": [
+    "อำนาจ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/powers-and-duties-of-assembly",
+   "en": "Powers and duties of Assembly",
+   "th": [
+    "อำนาจ และบรรดาหน้าที่ของสมัชชา",
+    "บรรดาอำนาจ และบรรดาหน้าที่ของสมัชชา"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 49",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/premise",
+   "en": "Premise",
+   "th": [
+    "สถานที่ทำการ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/president-of-council",
+   "en": "President of Council",
+   "th": [
+    "ประธานคณะมนตรี"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 51",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/prevention-of-spread-of-disease",
+   "en": "Prevention of spread of disease",
+   "th": [
+    "การป้องกันการแพร่ของโรค"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 14",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/preventive-action",
+   "en": "Preventive Action",
+   "th": [
+    "มาตรการเชิงป้องกัน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/price-cap-regulation",
+   "en": "Price cap regulation",
+   "th": [
+    "หลักการกำหนดเพดานราคา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "แบ่งเป็นเชิงเดี่ยว (single-till) และเชิงซ้อน (dual-till)"
+  },
+  {
+   "id": "atlas:avterm/primary-aviation-legislation",
+   "en": "Primary aviation legislation",
+   "th": [
+    "กฎหมายการบินหลัก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/private-aircraft",
+   "en": "Private Aircraft",
+   "th": [
+    "อากาศยานส่วนบุคคล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/product",
+   "en": "Product",
+   "th": [
+    "ผลิตภัณฑ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/production-certificate-for-aircraft",
+   "en": "Production Certificate for Aircraft",
+   "th": [
+    "ใบอนุญาตผลิตอากาศยาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/production-certificate-for-aircraft-replacement-parts",
+   "en": "Production Certificate for Aircraft Replacement Parts",
+   "th": [
+    "ใบอนุญาตผลิตชิ้นส่วนรับรองคุณภาพ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/production-certificate-for-major-aircraft-appliances",
+   "en": "Production Certificate for Major Aircraft Appliances",
+   "th": [
+    "ใบอนุญาตผลิตส่วนประกอบสำคัญของอากาศยาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/production-certificate-for-tso-articles",
+   "en": "Production Certificate for TSO Articles",
+   "th": [
+    "ใบอนุญาตผลิตบริภัณฑ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/prohibited-area",
+   "en": "Prohibited area",
+   "th": [
+    "พื้นที่หวงห้ามเด็ดขาด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/prohibited-areas",
+   "en": "Prohibited areas",
+   "th": [
+    "พื้นที่หวงห้ามเด็ดขาด",
+    "บรรดาพื้นที่หวงห้ามเด็ดขาด"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 9",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/propeller",
+   "en": "Propeller",
+   "th": [
+    "ใบพัด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/protection-of-safety-data-and-safety-information",
+   "en": "Protection of Safety Data and Safety Information",
+   "th": [
+    "การพิทักษ์ข้อมูลและสารสนเทศด้านความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/public-aerodrome-manager",
+   "en": "Public Aerodrome Manager",
+   "th": [
+    "ผู้จัดการสนามบินสาธารณะ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/public-aerodrome-operating-certificate",
+   "en": "Public Aerodrome Operating Certificate",
+   "th": [
+    "ใบรับรองการดำเนินงานสนามบินสาธารณะ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/public-aerodrome-operator",
+   "en": "Public Aerodrome Operator",
+   "th": [
+    "ผู้ดำเนินการสนามบินสาธารณะ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/ramp",
+   "en": "Ramp",
+   "th": [
+    "ลานจอดอากาศยาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/ramp-services",
+   "en": "Ramp Services",
+   "th": [
+    "บริการในลานจอดอากาศยาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/rate-of-return-regulation",
+   "en": "Rate-of-return regulation",
+   "th": [
+    "หลักการกำหนดอัตราผลตอบแทนการลงทุน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/ratification-of-convention",
+   "en": "Ratification of Convention",
+   "th": [
+    "การให้สัตยาบันของอนุสัญญา"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 91",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/recognition-of-certificates-and-licenses",
+   "en": "Recognition of certificates and licenses",
+   "th": [
+    "การยอมรับนับถือบรรดาใบสำคัญและใบอนุญาตต่าง ๆ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 33",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/recognition-of-existing-standards",
+   "en": "Recognition of existing standards",
+   "th": [
+    "การยอมรับนับถือบรรดามาตรฐาน"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 41",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/registration-of-existing-agreements",
+   "en": "Registration of existing agreements",
+   "th": [
+    "การจดทะเบียนบรรดาความตกลงที่มีอยู่"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 81",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/registration-of-new-arrangements",
+   "en": "Registration of new arrangements",
+   "th": [
+    "การจดทะเบียนบรรดาข้อตกลงใหม่"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 83",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/regulated-agent",
+   "en": "Regulated Agent",
+   "th": [
+    "ตัวแทนควบคุม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/regulated-postal-authority",
+   "en": "Regulated Postal Authority",
+   "th": [
+    "การไปรษณีย์ควบคุม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/remote-pilot",
+   "en": "Remote pilot",
+   "th": [
+    "นักบินอากาศยานที่ควบคุมการบินจากระยะไกล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/repair-station-accountable-manager",
+   "en": "Repair Station Accountable Manager",
+   "th": [
+    "ผู้ดำเนินการหน่วยซ่อม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/repair-station-certificate",
+   "en": "Repair Station Certificate",
+   "th": [
+    "ใบรับรองหน่วยซ่อม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/report-of-registrations",
+   "en": "Report of registrations",
+   "th": [
+    "รายงานบรรดาการจดทะเบียน"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 21",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/reporting-culture",
+   "en": "Reporting Culture",
+   "th": [
+    "วัฒนธรรมการรายงาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/restricted-area",
+   "en": "Restricted area",
+   "th": [
+    "พื้นที่หวงห้ามเฉพาะ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "ม.22 ใช้ \"พื้นที่หวงห้ามเฉพาะ\" ขณะที่ข้อบังคับ กพท. 30 ใช้ \"พื้นที่หวงห้ามเด็ดขาดเฉพาะ\""
+  },
+  {
+   "id": "atlas:avterm/return-of-funds",
+   "en": "Return of funds",
+   "th": [
+    "การคืนกองทุน"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 76",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/right-of-non-scheduled-flight",
+   "en": "Right of non-scheduled flight",
+   "th": [
+    "สิทธิของการบินไม่ประจำ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 5",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/risk-control-measure",
+   "en": "Risk Control Measure",
+   "th": [
+    "มาตรการจัดการความเสี่ยง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/rules-of-the-air",
+   "en": "Rules of the air",
+   "th": [
+    "กฎจราจรทางอากาศ",
+    "บรรดากฎจราจรทางอากาศ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 12",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/safety-data",
+   "en": "Safety Data",
+   "th": [
+    "ข้อมูลด้านความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/safety-information",
+   "en": "Safety Information",
+   "th": [
+    "สารสนเทศด้านความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/safety-management-system",
+   "en": "Safety Management System",
+   "th": [
+    "ระบบการจัดการด้านนิรภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/safety-risk-assessment",
+   "en": "Safety Risk Assessment",
+   "th": [
+    "การประเมินความเสี่ยงด้านความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/scheduled-air-services",
+   "en": "Scheduled air services",
+   "th": [
+    "บริการเดินอากาศประจำมีกำหนด"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 6",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/screening",
+   "en": "Screening",
+   "th": [
+    "การตรวจค้น"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/search-and-rescue-service",
+   "en": "Search and Rescue Service (SAR)",
+   "th": [
+    "บริการค้นหาและช่วยเหลืออากาศยานประสบภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/search-of-aircraft",
+   "en": "Search of aircraft",
+   "th": [
+    "การตรวจค้นอากาศยาน"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 16",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/security",
+   "en": "Security",
+   "th": [
+    "การรักษาความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/security-arrangements",
+   "en": "Security arrangements",
+   "th": [
+    "ข้อตกลงเพื่อความมั่นคง",
+    "บรรดาข้อตกลงเพื่อความมั่นคง"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 64",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/security-directive",
+   "en": "Security Directive",
+   "th": [
+    "คำสั่งการรักษาความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/serious-incident",
+   "en": "Serious Incident",
+   "th": [
+    "อุบัติการณ์รุนแรง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/settlement-of-disputes",
+   "en": "Settlement of disputes",
+   "th": [
+    "การระงับข้อพิพาทต่าง ๆ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 84",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/single-till",
+   "en": "Single-till",
+   "th": [
+    "เชิงเดี่ยว"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/sovereignty",
+   "en": "Sovereignty",
+   "th": [
+    "อธิปไตย"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 1",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/specific-operating-regulations",
+   "en": "Specific operating regulations",
+   "th": [
+    "กฎเกณฑ์รายละเอียดทางเทคนิค",
+    "อนุบัญญัติด้านเทคนิค"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/standard-part",
+   "en": "Standard Part",
+   "th": [
+    "ชิ้นส่วนมาตรฐาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/standing-committee",
+   "en": "Standing committee",
+   "th": [
+    "กรรมการถาวร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "คณะกรรมการสอบสวนอุบัติเหตุ (บทความใน MFU Connexion 4(1))"
+  },
+  {
+   "id": "atlas:avterm/state-aircraft",
+   "en": "State Aircraft",
+   "th": [
+    "อากาศยานราชการ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    },
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "ข้อ 3(b) อนุสัญญาชิคาโกใช้หลักภารกิจ (functional approach) คืออากาศยานที่ใช้ในบริการทหาร ศุลกากร และตำรวจ"
+  },
+  {
+   "id": "atlas:avterm/stop-for-non-traffic-purposes",
+   "en": "Stop for non-traffic purposes",
+   "th": [
+    "แวะลงมิใช่เพื่อการค้า"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 96",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/summarized-or-aggregated",
+   "en": "Summarized or Aggregated",
+   "th": [
+    "การสรุปข้อมูลภาพรวม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/supplemental-type-certificate",
+   "en": "Supplemental Type Certificate",
+   "th": [
+    "ใบรับรองแบบส่วนเพิ่มเติม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/suspension-of-voting-power",
+   "en": "Suspension of voting power",
+   "th": [
+    "การถอนอำนาจการออกเสียง"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 62",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/taking-over-of-facilities-from-council",
+   "en": "Taking over of facilities from Council",
+   "th": [
+    "การรับมอบบรรดาเครื่องอำนวยความสะดวกจากคณะมนตรี"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 75",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/tariff",
+   "en": "Tariff",
+   "th": [
+    "พิกัดอัตราค่าขนส่ง",
+    "พิกัดอัตราค่าโดยสารและค่าระวาง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "ผู้เขียนถอดความจาก tariff ในเอกสาร ICAO (ม.20)"
+  },
+  {
+   "id": "atlas:avterm/technical-assistance-and-utilization-of-revenues",
+   "en": "Technical assistance and utilization of revenues",
+   "th": [
+    "การช่วยเหลือทางเทคนิคและการใช้บรรดารายได้ให้เป็นประโยชน์"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 74",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/technical-standard-order-article",
+   "en": "Technical Standard Order Article (TSO Article)",
+   "th": [
+    "บริภัณฑ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/temporary-takeoff-and-landing-area-for-aircraft",
+   "en": "Temporary Takeoff and Landing Area for Aircraft",
+   "th": [
+    "ที่ขึ้นลงชั่วคราวของอากาศยาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/territory",
+   "en": "Territory",
+   "th": [
+    "อาณาเขต"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 2",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/transfer-of-certain-functions-and-duties",
+   "en": "Transfer of certain functions and duties",
+   "th": [
+    "การโอนบรรดาการหน้าที่และบรรดาหน้าที่บางประการ"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 83 ทวิ",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/transport-aircraft",
+   "en": "Transport Aircraft",
+   "th": [
+    "อากาศยานขนส่ง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/type-certificate",
+   "en": "Type Certificate",
+   "th": [
+    "ใบรับรองแบบ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
+     "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/ultralight-aircraft",
+   "en": "Ultralight aircraft",
+   "th": [
+    "อากาศยานเบาพิเศษ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "ข้อบังคับ กบร. ฉบับที่ 43"
+  },
+  {
+   "id": "atlas:avterm/unmanned-aircraft",
+   "en": "Unmanned aircraft",
+   "th": [
+    "อากาศยานไม่มีคน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
+     "kind": "commentary"
+    }
+   ],
+   "note": "ผู้เขียนเสนอให้เขียนหมวดใหม่ว่าด้วย \"อากาศยานไม่มีคน\" แทนถ้อยคำใน ม.24"
+  },
+  {
+   "id": "atlas:avterm/validity-of-endorsed-certificates-and-licenses",
+   "en": "Validity of endorsed certificates and licenses",
+   "th": [
+    "ความสมบูรณ์ของใบสำคัญและใบอนุญาตที่ถูกสลักหลัง"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 40",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/voluntary-occurrence-reporting",
+   "en": "Voluntary Occurrence Reporting",
+   "th": [
+    "การรายงานเหตุการณ์ด้านความปลอดภัยภาคสมัครใจ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/voting-in-council",
+   "en": "Voting in Council",
+   "th": [
+    "การออกเสียงในคณะมนตรี"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 52",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/war-and-emergency-conditions",
+   "en": "War and emergency conditions",
+   "th": [
+    "สงครามและภาวะฉุกเฉิน"
+   ],
+   "kind": "heading",
+   "sources": [
+    {
+     "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 89",
+     "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/wilful-misconduct",
+   "en": "Wilful Misconduct",
+   "th": [
+    "การจงใจกระทำหรือละเว้นการกระทำที่ฝ่าฝืนหรือขัดต่อกฎหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
+     "kind": "regulation"
+    }
+   ]
+  }
+ ]
+}

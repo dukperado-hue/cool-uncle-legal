@@ -1,6 +1,6 @@
 {
- "version": "d1-10-0",
- "generated": "2026-10-04",
+ "version": "d1-11-0",
+ "generated": "2026-11-19",
  "principle": "Overlay only: an English-Thai term layer over the Legal English sources. conceptRef points to an existing Atlas concept id and is present only when confirmed; the Dictionary never stores definitions, provisions, subject tags or relations of its own.",
  "entries": [
   {
@@ -75,13 +75,18 @@
    "id": "atlas:term/appeal",
    "en": "Appeal",
    "th": [
-    "อุทธรณ์"
+    "อุทธรณ์",
+    "การอุทธรณ์"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "LA270-2-FINAL-2-2025-LP.pdf",
      "kind": "oldexam"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
     }
    ]
   },
@@ -315,6 +320,10 @@
     {
      "file": "LA270 - Criminal Law (slides).pptx",
      "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
     }
    ]
   },
@@ -441,6 +450,10 @@
     {
      "file": "LA270-2-FINAL-2-2025-LP.pdf",
      "kind": "oldexam"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
     }
    ]
   },
@@ -488,6 +501,10 @@
     {
      "file": "LA270 - Criminal Law (slides).pptx",
      "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
     }
    ]
   },
@@ -709,6 +726,10 @@
     {
      "file": "legaleng.html ครั้งที่ 8",
      "kind": "lecture-page"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
     }
    ]
   },
@@ -832,6 +853,10 @@
     {
      "file": "legaleng.html ครั้งที่ 4",
      "kind": "lecture-page"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
     }
    ]
   },
@@ -850,6 +875,14 @@
     {
      "file": "LA270 - Criminal Law (slides).pptx",
      "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
     }
    ]
   },
@@ -1015,6 +1048,10 @@
     {
      "file": "LA270 - LT4.pdf",
      "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
     }
    ]
   },
@@ -1076,6 +1113,10 @@
     {
      "file": "LA270 - Criminal Law (slides).pptx",
      "kind": "slides"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
     }
    ]
   },
@@ -2971,13 +3012,19 @@
    "id": "atlas:term/parole",
    "en": "parole",
    "th": [
-    "การปล่อยตัวนักโทษก่อนครบกำหนด"
+    "การปล่อยตัวนักโทษก่อนครบกำหนด",
+    "การพักการลงโทษ",
+    "การปล่อยตัวจำเลยที่ต้องโทษจำคุกก่อนกำหนดที่วางไว้เดิม"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "legaleng.html ครั้งที่ 8",
      "kind": "lecture-page"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
     }
    ]
   },
@@ -3307,13 +3354,18 @@
    "id": "atlas:term/claimant",
    "en": "Claimant",
    "th": [
-    "โจทก์/ผู้ฟ้อง/ผู้ยื่นคำร้อง"
+    "โจทก์/ผู้ฟ้อง/ผู้ยื่นคำร้อง",
+    "บุคคลที่เป็นผู้ยกสิทธิเรียกร้องขึ้นเพื่อขอให้บังคับการตาม"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "legaleng.html ครั้งที่ 4",
      "kind": "lecture-page"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
     }
    ]
   },
@@ -3335,13 +3387,18 @@
    "id": "atlas:term/accused",
    "en": "Accused",
    "th": [
-    "ผู้ต้องหา"
+    "ผู้ต้องหา",
+    "ผู้ถูกกล่าวหา"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "legaleng.html ครั้งที่ 4",
      "kind": "lecture-page"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
     }
    ]
   },
@@ -3356,6 +3413,10 @@
     {
      "file": "legaleng.html ครั้งที่ 4",
      "kind": "lecture-page"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
     }
    ]
   },
@@ -3972,6 +4033,14 @@
     {
      "file": "legaleng.html ครั้งที่ 6",
      "kind": "lecture-page"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
     }
    ]
   },
@@ -3979,13 +4048,22 @@
    "id": "atlas:term/promise",
    "en": "Promise",
    "th": [
-    "คำมั่น"
+    "คำมั่น",
+    "ให้สัญญา หรือให้คำมั่นสัญญา"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "legaleng.html ครั้งที่ 6",
      "kind": "lecture-page"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
     }
    ]
   },
@@ -3993,13 +4071,23 @@
    "id": "atlas:term/agreement",
    "en": "Agreement",
    "th": [
-    "ข้อตกลง"
+    "ข้อตกลง",
+    "การแสดงเจตนาของบุคคลตั้งแต่สองฝ่ายขึ้นไปที่ถูกต้องตรงกัน",
+    "สัญญา"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "legaleng.html ครั้งที่ 6",
      "kind": "lecture-page"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
     }
    ]
   },
@@ -4684,7 +4772,8 @@
    "en": "Rule of Law",
    "th": [
     "หลักนิติธรรม",
-    "หลักการปกครองโดยกฎหมาย"
+    "หลักการปกครองโดยกฎหมาย",
+    "หลักนิติรัฐ"
    ],
    "kind": "term",
    "sources": [
@@ -4695,6 +4784,10 @@
     {
      "file": "legaleng.html ครั้งที่ 10",
      "kind": "lecture-page"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
     }
    ]
   },
@@ -4856,13 +4949,19 @@
    "id": "atlas:term/murder",
    "en": "Murder",
    "th": [
-    "ฆ่าโดยเจตนา"
+    "ฆ่าโดยเจตนา",
+    "ฆ่าคนตายโดยเจตนา",
+    "การกระทำความผิดฐานฆ่าคนตายโดยเจตนา"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "legaleng.html ครั้งที่ 8",
      "kind": "lecture-page"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
     }
    ]
   },
@@ -4891,6 +4990,14 @@
     {
      "file": "legaleng.html ครั้งที่ 8",
      "kind": "lecture-page"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
     }
    ]
   },
@@ -4968,13 +5075,18 @@
    "id": "atlas:term/accession",
    "en": "Accession",
    "th": [
-    "ภาคยานุวัติ"
+    "ภาคยานุวัติ",
+    "การเข้าเป็นภาคีของอนุสัญญา"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "legaleng.html ครั้งที่ 9",
      "kind": "lecture-page"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
     }
    ]
   },
@@ -6542,13 +6654,18 @@
    "en": "Promulgate",
    "th": [
     "ประกาศใช้",
-    "ตรากฎหมาย"
+    "ตรากฎหมาย",
+    "ประกาศอย่างเป็นทางการและทำให้สิ่งที่ประกาศมีผลทางกฎหมาย"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "legaleng.html ครั้งที่ 10",
      "kind": "lecture-page"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
     }
    ]
   },
@@ -6564,6 +6681,10 @@
     {
      "file": "legaleng.html ครั้งที่ 10",
      "kind": "lecture-page"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
     }
    ]
   },
@@ -7495,6 +7616,2671 @@
     {
      "file": "legaleng.html ครั้งที่ 10",
      "kind": "lecture-page"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/substantive-law",
+   "en": "Substantive law",
+   "th": [
+    "กฎหมายสารบัญญัติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/procedural-law",
+   "en": "Procedural law",
+   "th": [
+    "กฎหมายวิธีสบัญญัติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/conviction",
+   "en": "Conviction",
+   "th": [
+    "ตัดสินว่ามีความผิดอาญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/substance",
+   "en": "Substance",
+   "th": [
+    "สาระ หรือเนื้อหาของเรื่องที่กำลังกล่าวถึง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/substantive",
+   "en": "Substantive",
+   "th": [
+    "ความเกี่ยวเนื่องหรือความสัมพันธ์กับสิ่งที่เป็นสาระหรือเนื้อหาของเรื่อง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/procedure",
+   "en": "Procedure",
+   "th": [
+    "กระบวนการหรือขั้นตอน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/promulgation",
+   "en": "Promulgation",
+   "th": [
+    "การประกาศใช้กฎหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/enact",
+   "en": "Enact",
+   "th": [
+    "ประกาศทำให้มีผลทางกฎหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/enactment",
+   "en": "Enactment",
+   "th": [
+    "กระบวนการประกาศใช้กฎหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/offense",
+   "en": "Offense",
+   "th": [
+    "ข้อหา หรือฐานความผิด",
+    "ข้อหา",
+    "การกระทำใดก็ตามที่ฝ่าฝืนหรือละเมิดต่อบทบัญญัติของกฎหมายที่มีโทษทางอาญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/offence",
+   "en": "Offence",
+   "th": [
+    "ข้อหา หรือฐานความผิด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/criminal-adjective",
+   "en": "Criminal (adjective)",
+   "th": [
+    "มีลักษณะหรือเกี่ยวข้องกับความผิดอาญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/criminal-noun",
+   "en": "Criminal (noun)",
+   "th": [
+    "บุคคลที่กระทำความผิดอาญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/punish",
+   "en": "Punish",
+   "th": [
+    "ลงโทษ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/punishable",
+   "en": "Punishable",
+   "th": [
+    "อาจถูกลงโทษ หรือมีลักษณะอันอาจถูกลงโทษได้",
+    "มีโทษ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/punishing",
+   "en": "Punishing",
+   "th": [
+    "เป็นสิ่งที่มีลักษณะร้ายแรง รุนแรงหรือทำให้อ่อนแอจนแทบจะเกินการช่วยเหลือเยียวยา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/carry-a-punishment-of",
+   "en": "Carry a punishment of",
+   "th": [
+    "มีโทษ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/capital-punishment",
+   "en": "Capital punishment",
+   "th": [
+    "การลงโทษประหารชีวิต",
+    "โทษประหารชีวิต"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/death-penalty",
+   "en": "Death penalty",
+   "th": [
+    "โทษประหารชีวิต"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/imprison",
+   "en": "Imprison",
+   "th": [
+    "จำคุก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/convict-verb",
+   "en": "Convict (verb)",
+   "th": [
+    "ตัดสินหรือพิพากษาในคดีอาญาว่าจำเลยมีความผิด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/convict-noun",
+   "en": "Convict (noun)",
+   "th": [
+    "จำเลยที่ถูกตัดสินหรือพิพากษาว่ามีความผิด",
+    "นักโทษที่ถูกจำคุก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/con",
+   "en": "Con",
+   "th": [
+    "ผู้ต้องโทษที่ถูกจำคุกในเรือนจำ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/inmate",
+   "en": "Inmate",
+   "th": [
+    "นักโทษ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/prisoner",
+   "en": "Prisoner",
+   "th": [
+    "นักโทษ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/offender",
+   "en": "Offender",
+   "th": [
+    "ผู้ที่กระทำผิดกฎหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/wrongdoer",
+   "en": "Wrongdoer",
+   "th": [
+    "ผู้ที่กระทำความผิด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/stare-decisis",
+   "en": "Stare decisis",
+   "th": [
+    "หลักคำพิพากษาบรรทัดฐาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 1",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/charge-verb",
+   "en": "Charge (verb)",
+   "th": [
+    "ตั้งข้อหา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/charge-noun",
+   "en": "Charge (noun)",
+   "th": [
+    "ข้อหา หรือฐานความผิด",
+    "คำสั่งหรือคำแนะนำที่ผู้พิพากษาได้ให้แก่คณะลูกขุน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/preordained",
+   "en": "Preordained",
+   "th": [
+    "ที่กำหนดไว้แล้ว"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/due-process-of-law",
+   "en": "Due process of law",
+   "th": [
+    "การปฏิบัติอย่างเป็นธรรมตามกฎหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/right-to-remain-silent",
+   "en": "Right to remain silent",
+   "th": [
+    "สิทธิที่จะไม่ให้การ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/government",
+   "en": "Government",
+   "th": [
+    "รัฐ หรือรัฐบาล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/trial",
+   "en": "Trial",
+   "th": [
+    "การพิจารณาคดี"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/adhere",
+   "en": "Adhere",
+   "th": [
+    "ยึดถือ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/right-to-counsel",
+   "en": "Right to counsel",
+   "th": [
+    "สิทธิที่จะปรึกษา (ทนายความ)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/arbitrary",
+   "en": "Arbitrary",
+   "th": [
+    "ตามอำเภอใจ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/heinous",
+   "en": "Heinous",
+   "th": [
+    "ร้ายแรง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/govern",
+   "en": "Govern",
+   "th": [
+    "ปกครอง",
+    "มีอิทธิพลหรือมีอำนาจควบคุมเหนืออีกสิ่งหนึ่งหรือเหนือการกระทำ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/governor",
+   "en": "Governor",
+   "th": [
+    "ผู้ว่าราชการจังหวัด",
+    "ผู้ว่าการ",
+    "ผู้ว่าการรัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/gubernator",
+   "en": "Gubernator",
+   "th": [
+    "กัปตันผู้ควบคุมทิศทางเรือ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/governmental",
+   "en": "Governmental",
+   "th": [
+    "ที่เกี่ยวกับรัฐหรือรัฐบาล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/governmental-agency",
+   "en": "Governmental agency",
+   "th": [
+    "องค์กรหรือหน่วยงานของรัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/governmental-body",
+   "en": "Governmental body",
+   "th": [
+    "องค์กรหรือหน่วยงานของรัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/governmental-agent",
+   "en": "Governmental agent",
+   "th": [
+    "บุคลากรหรือเจ้าหน้าที่ในหน่วยงานของรัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/governmental-act",
+   "en": "Governmental act",
+   "th": [
+    "การกระทำที่เป็นการใช้อำนาจของรัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/governmental-activity",
+   "en": "Governmental activity",
+   "th": [
+    "กิจกรรมของรัฐหรือหน่วยงานของรัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/governmental-building-facility",
+   "en": "Governmental building/facility",
+   "th": [
+    "อาคารหรือที่ทำการของหน่วยงานของรัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/applicable-law",
+   "en": "Applicable law",
+   "th": [
+    "กฎหมายที่ใช้บังคับ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/conflict-of-laws-rules",
+   "en": "Conflict of Laws Rules",
+   "th": [
+    "การขัดกันแห่งกฎหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/adhesion",
+   "en": "Adhesion",
+   "th": [
+    "การเข้าผูกพันเฉพาะบางส่วนของอนุสัญญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/unfair-contract-terms",
+   "en": "Unfair contract terms",
+   "th": [
+    "ข้อสัญญาที่ไม่เป็นธรรม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/prosecution-by-information",
+   "en": "Prosecution by information",
+   "th": [
+    "การแจ้งข้อกล่าวหาให้ผู้ต้องหาทราบโดยไม่ต้องมีการไต่สวนมูลฟ้อง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/grand-jury",
+   "en": "Grand jury",
+   "th": [
+    "คณะลูกขุนชุดที่ทำหน้าที่ไต่สวนมูลฟ้อง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/federal-rule-of-criminal-procedure",
+   "en": "Federal Rule of Criminal Procedure",
+   "th": [
+    "ข้อกำหนดวิธีพิจารณาคดีอาญาแห่งสหพันธรัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/information",
+   "en": "Information",
+   "th": [
+    "ข้อมูลที่เกี่ยวกับการกระทำความผิดอาญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/in-open-court",
+   "en": "In open court",
+   "th": [
+    "โดยเปิดเผยต่อศาล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/alternate-juror",
+   "en": "Alternate juror",
+   "th": [
+    "ลูกขุนสำรอง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/jury-duty",
+   "en": "Jury duty",
+   "th": [
+    "การทำหน้าที่ลูกขุน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/jury-selection-process",
+   "en": "Jury selection process",
+   "th": [
+    "กระบวนการคัดเลือกตัวลูกขุน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/prospective-jurors",
+   "en": "Prospective jurors",
+   "th": [
+    "ผู้ที่คาดหมายว่าจะเป็นลูกขุน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/challenge",
+   "en": "Challenge",
+   "th": [
+    "การคัดค้านหรือการโต้แย้ง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/cause",
+   "en": "Cause",
+   "th": [
+    "สาเหตุของการคัดค้าน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/challenge-for-cause",
+   "en": "Challenge for cause",
+   "th": [
+    "การคัดค้านเนื่องจากมีเหตุที่ทำให้บุคคลไม่เหมาะสมที่จะเป็นลูกขุน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/counsel-verb",
+   "en": "Counsel (verb)",
+   "th": [
+    "ให้คำแนะนำหรือคำปรึกษา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/promissory",
+   "en": "Promissory",
+   "th": [
+    "มีลักษณะของคำสัญญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/contractual",
+   "en": "Contractual",
+   "th": [
+    "อันเกิดจากสัญญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/unjust-enrichment",
+   "en": "Unjust enrichment",
+   "th": [
+    "ลาภมิควรได้"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/promissory-note",
+   "en": "Promissory note",
+   "th": [
+    "ตั๋วสัญญาใช้เงิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/oblige",
+   "en": "Oblige",
+   "th": [
+    "การทำให้ผูกมัดโดยผลของกฎหมายหรือการก่อให้เกิดหน้าที่แก่บุคคลใดบุคคลหนึ่ง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/principal-obligation",
+   "en": "Principal obligation",
+   "th": [
+    "หนี้ประธาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/accessory-obligation",
+   "en": "Accessory obligation",
+   "th": [
+    "หนี้อุปกรณ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/primary-obligation",
+   "en": "Primary obligation",
+   "th": [
+    "หนี้ชั้นต้น"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/secondary-obligation",
+   "en": "Secondary obligation",
+   "th": [
+    "หนี้ลำดับรอง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/contract",
+   "en": "Contract",
+   "th": [
+    "สัญญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/course-of-performance",
+   "en": "Course of Performance",
+   "th": [
+    "แนวทางการปฏิบัติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/course-of-dealing",
+   "en": "Course of Dealing",
+   "th": [
+    "แนวทางในการติดต่อระหว่างกัน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/usage-of-trade",
+   "en": "Usage of Trade",
+   "th": [
+    "แนวทางตามปกติประเพณีทางการค้า"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/principal-contract",
+   "en": "Principal Contract",
+   "th": [
+    "สัญญาประธาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/accessory-contract",
+   "en": "Accessory Contract",
+   "th": [
+    "สัญญาอุปกรณ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/mortgage",
+   "en": "Mortgage",
+   "th": [
+    "จำนอง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 3",
+     "kind": "textbook"
+    },
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/pledge",
+   "en": "Pledge",
+   "th": [
+    "จำนำ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/guaranty",
+   "en": "Guaranty",
+   "th": [
+    "ค้ำประกัน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/strict-liability",
+   "en": "Strict liability",
+   "th": [
+    "ความรับผิดโดยเคร่งครัด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/product-liability",
+   "en": "Product liability",
+   "th": [
+    "ความรับผิดอันเกิดจากผลิตภัณฑ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/vicarious-liability",
+   "en": "Vicarious liability",
+   "th": [
+    "ความรับผิดจากการกระทำของบุคคลอื่น"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/age-of-consent",
+   "en": "Age of consent",
+   "th": [
+    "อายุของผู้ที่ให้ความยินยอม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/majority",
+   "en": "Majority",
+   "th": [
+    "อายุที่บรรลุนิติภาวะที่ทำให้กลายเป็นผู้ใหญ่ตามกฎหมาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/minor",
+   "en": "Minor",
+   "th": [
+    "ผู้เยาว์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/legal-age",
+   "en": "Legal age",
+   "th": [
+    "อายุตามที่กฎหมายกำหนดไว้"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/sexual-harassment",
+   "en": "Sexual harassment",
+   "th": [
+    "การคุกคามทางเพศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/file-the-suit",
+   "en": "File the suit",
+   "th": [
+    "ฟ้องคดี"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/discrimination",
+   "en": "Discrimination",
+   "th": [
+    "การเลือกปฏิบัติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/claim",
+   "en": "Claim",
+   "th": [
+    "กล่าวอ้าง",
+    "เรียกร้อง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/insurance",
+   "en": "Insurance",
+   "th": [
+    "การประกันภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/health-insurance",
+   "en": "Health insurance",
+   "th": [
+    "การประกันภัยสุขภาพ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/life-insurance",
+   "en": "Life insurance",
+   "th": [
+    "การประกันภัยชีวิต"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/automobile-insurance",
+   "en": "Automobile insurance",
+   "th": [
+    "การประกันภัยรถยนต์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/insurance-company",
+   "en": "Insurance company",
+   "th": [
+    "บริษัทประกันภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/insurer",
+   "en": "Insurer",
+   "th": [
+    "ผู้รับประกันภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/insured",
+   "en": "Insured",
+   "th": [
+    "ผู้เอาประกันภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/beneficiary",
+   "en": "Beneficiary",
+   "th": [
+    "ผู้รับประโยชน์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/negligence",
+   "en": "Negligence",
+   "th": [
+    "ความประมาท",
+    "ความประมาทเลินเล่อ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/beyond-a-reasonable-doubt",
+   "en": "Beyond a reasonable doubt",
+   "th": [
+    "ปราศจากความสงสัยตามสมควร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/due-care",
+   "en": "Due care",
+   "th": [
+    "ความระมัดระวังอันสมควร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/adduce",
+   "en": "Adduce",
+   "th": [
+    "นำสืบ",
+    "การนำสืบเป็นข้อพิสูจน์หรือเป็นพยานหลักฐานเพื่อสนับสนุนข้ออ้างหรือข้อต่อสู้ของตน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/circumstantial-evidence",
+   "en": "Circumstantial evidence",
+   "th": [
+    "พยานหลักฐานแวดล้อม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/res-ipsa-loquitur",
+   "en": "Res ipsa loquitur",
+   "th": [
+    "กรณีของข้อเท็จจริงที่พิสูจน์ได้ด้วยตัวเอง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/plaint",
+   "en": "Plaint",
+   "th": [
+    "คำฟ้องที่โจทก์ยื่นต่อศาล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/complain",
+   "en": "Complain",
+   "th": [
+    "การบ่นว่าในเรื่องต่างๆ ที่ทำให้เรารู้สึกไม่พอใจหรือเดือดร้อนรำคาญ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/negligent",
+   "en": "Negligent",
+   "th": [
+    "ประมาทเลินเล่อ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/a-reasonably-prudent-and-careful-person",
+   "en": "A reasonably prudent and careful person",
+   "th": [
+    "บุคคลซึ่งมีความระมัดระวังตามสมควร (วิญญูชน)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/a-reasonably-prudent-person",
+   "en": "A reasonably prudent person",
+   "th": [
+    "บุคคลซึ่งมีความระมัดระวังตามสมควร (วิญญูชน)"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/a-reasonable-doubt",
+   "en": "A reasonable doubt",
+   "th": [
+    "ความสงสัยตามสมควร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/give-benefits-of-the-doubt",
+   "en": "Give benefits of the doubt",
+   "th": [
+    "การที่ศาลยกประโยชน์แห่งความสงสัยให้แก่จำเลย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/weight-of-evidence",
+   "en": "Weight of evidence",
+   "th": [
+    "น้ำหนักของพยานหลักฐาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/manner-of-testifying",
+   "en": "Manner of testifying",
+   "th": [
+    "ลักษณะกิริยาอาการของพยานในขณะที่เบิกความให้ข้อมูลที่ตนรู้เห็นมา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/due-notice",
+   "en": "Due notice",
+   "th": [
+    "คำบอกกล่าวโดยชอบ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/due-process",
+   "en": "Due process",
+   "th": [
+    "การดำเนินกระบวนพิจารณาที่เป็นธรรม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/with-due-respect",
+   "en": "With due respect",
+   "th": [
+    "ด้วยความเคารพ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/larceny",
+   "en": "Larceny",
+   "th": [
+    "ลักทรัพย์",
+    "ความผิดฐานลักทรัพย์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/rape",
+   "en": "Rape",
+   "th": [
+    "ข่มขืน",
+    "ความผิดฐานข่มขืนกระทำชำเรา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/burglary",
+   "en": "Burglary",
+   "th": [
+    "ลักทรัพย์ในที่รโหฐาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/self-defense",
+   "en": "Self-defense",
+   "th": [
+    "ป้องกัน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/guilt",
+   "en": "Guilt",
+   "th": [
+    "ความผิด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/innocence",
+   "en": "Innocence",
+   "th": [
+    "ความบริสุทธิ์",
+    "ความบริสุทธิ์หรือการปราศจากความผิด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/warrant-of-arrest",
+   "en": "Warrant of arrest",
+   "th": [
+    "หมายจับ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/arrest-warrant",
+   "en": "Arrest warrant",
+   "th": [
+    "หมายจับ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/indictment",
+   "en": "Indictment",
+   "th": [
+    "การฟ้องโดยมีคำวินิจฉัยคณะลูกขุนว่าคดีมีมูล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/arraignment",
+   "en": "Arraignment",
+   "th": [
+    "การกล่าวโทษ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/motion-for-new-trial",
+   "en": "Motion for new trial",
+   "th": [
+    "คำร้องขอให้สืบพยานใหม่"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/execution-of-sentence",
+   "en": "Execution of sentence",
+   "th": [
+    "การบังคับโทษ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/probation",
+   "en": "Probation",
+   "th": [
+    "การคุมประพฤติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/pardon",
+   "en": "Pardon",
+   "th": [
+    "การอภัยโทษ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/extradition",
+   "en": "Extradition",
+   "th": [
+    "การส่งผู้ร้ายข้ามแดน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/malice-aforethought",
+   "en": "Malice aforethought",
+   "th": [
+    "การกระทำการใดๆ โดยมีเจตนาที่จะกระทำความผิดเช่นนั้น"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/first-degree-murder",
+   "en": "First degree murder",
+   "th": [
+    "ความผิดฐานฆ่าคนตายโดยไตร่ตรองไว้ก่อน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/premeditated",
+   "en": "Premeditated",
+   "th": [
+    "การคิดว่าจะกระทำการสิ่งหนึ่งสิ่งใดไว้ล่วงหน้า"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/punishable-with-death",
+   "en": "Punishable with death",
+   "th": [
+    "โทษประหารชีวิต"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/imprisonment-for-life",
+   "en": "Imprisonment for life",
+   "th": [
+    "ความผิดที่มีโทษจำคุกตลอดชีวิต"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/taking-away-of-the-property",
+   "en": "Taking away of the property",
+   "th": [
+    "การที่ผู้กระทำได้เอาทรัพย์ของบุคคลอื่นไป"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/grand",
+   "en": "Grand",
+   "th": [
+    "ลักษณะที่ใหญ่โตพอสมควร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/petit",
+   "en": "Petit",
+   "th": [
+    "เล็กน้อย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/misappropriation",
+   "en": "Misappropriation",
+   "th": [
+    "ยักยอก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/nature-of-the-property",
+   "en": "Nature of the property",
+   "th": [
+    "ลักษณะของทรัพย์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/amount-of-the-property",
+   "en": "Amount of the property",
+   "th": [
+    "จำนวนของทรัพย์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/identity-of-the-recipient",
+   "en": "Identity of the recipient",
+   "th": [
+    "ตัวผู้รับมอบทรัพย์นั้น",
+    "ตัวผู้รับ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/compel-to-submit-by-force",
+   "en": "Compel to submit by force",
+   "th": [
+    "การใช้กำลังบังคับ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/model-penal-code",
+   "en": "Model Penal Code",
+   "th": [
+    "ประมวลกฎหมายอาญาแม่แบบ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/american-law-institute-ali",
+   "en": "American Law Institute (ALI)",
+   "th": [
+    "สถาบันกฎหมายแห่งสหรัฐอเมริกา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/continuing-offense",
+   "en": "Continuing offense",
+   "th": [
+    "การกระทำความผิดต่อเนื่อง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/greater-offense",
+   "en": "Greater offense",
+   "th": [
+    "ความผิดฐานที่มีความร้ายแรงกว่า"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/lesser-offense",
+   "en": "Lesser offense",
+   "th": [
+    "ความผิดฐานที่ร้ายแรงน้อยกว่า"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/lesser-included-offense",
+   "en": "Lesser included offense",
+   "th": [
+    "ความผิดฐานที่ร้ายแรงน้อยกว่า"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/mental-state",
+   "en": "Mental state",
+   "th": [
+    "สภาวะทางจิตใจ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/petty-offense",
+   "en": "Petty offense",
+   "th": [
+    "บรรดาข้อหาหรือฐานความผิดที่โทษไม่สูง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/mental-disease-or-defect",
+   "en": "Mental disease or defect",
+   "th": [
+    "โรคหรือข้อบกพร่องทางจิต"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/irresistible-impulse",
+   "en": "Irresistible impulse",
+   "th": [
+    "แรงกระตุ้นที่ไม่อาจขัดขืน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/self-control",
+   "en": "Self-control",
+   "th": [
+    "ความสามารถในการควบคุมตนเอง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/choices-of-action",
+   "en": "Choices of action",
+   "th": [
+    "การเลือกตัดสินใจกระทำการอย่างใดอย่างหนึ่ง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/competency-to-stand-trial",
+   "en": "Competency to stand trial",
+   "th": [
+    "ความสามารถที่จะร่วมในกระบวนพิจารณา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/immediate-danger",
+   "en": "Immediate danger",
+   "th": [
+    "ภยันตรายที่ใกล้จะถึง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/imminent-danger",
+   "en": "Imminent danger",
+   "th": [
+    "ภยันตรายที่ใกล้จะถึง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/guilty",
+   "en": "Guilty",
+   "th": [
+    "มีความผิด",
+    "รับสารภาพ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/guilty-plea",
+   "en": "Guilty plea",
+   "th": [
+    "คำให้การรับสารภาพของจำเลยต่อศาลว่าตนเองกระทำความผิดตามที่ถูกกล่าวหา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/guilty-verdict",
+   "en": "Guilty verdict",
+   "th": [
+    "คำตัดสินของคณะลูกขุนให้จำเลยมีความผิด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/presumption-of-innocence",
+   "en": "Presumption of innocence",
+   "th": [
+    "การที่สันนิษฐานไว้ก่อนว่าจำเลยเป็นผู้บริสุทธิ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/surety",
+   "en": "Surety",
+   "th": [
+    "ผู้ประกัน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/bail-bond",
+   "en": "Bail bond",
+   "th": [
+    "สัญญาประกัน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/secured-bail-bond",
+   "en": "Secured bail bond",
+   "th": [
+    "สัญญาประกันที่มีการวางหลักประกันความรับผิดไว้ด้วย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/bailable-offence",
+   "en": "Bailable offence",
+   "th": [
+    "ฐานความผิดหรือข้อหาที่อยู่ในวิสัยที่จะให้มีการปล่อยชั่วคราวได้"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/suspension-of-sentence",
+   "en": "Suspension of sentence",
+   "th": [
+    "รอการลงโทษจำเลยไว้"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/probation-officer",
+   "en": "Probation officer",
+   "th": [
+    "พนักงานคุมประพฤติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/probationer",
+   "en": "Probationer",
+   "th": [
+    "บุคคลผู้ที่ถูกคุมประพฤติ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/probate",
+   "en": "Probate",
+   "th": [
+    "การดำเนินการเพื่อที่จะพิสูจน์ความถูกต้องแท้จริงของพินัยกรรมและการจัดการมรดกของผู้ตาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/probate-proceeding",
+   "en": "Probate proceeding",
+   "th": [
+    "กระบวนพิจารณาของศาลที่เกี่ยวกับเรื่องพินัยกรรมและการจัดการมรดก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/probate-court",
+   "en": "Probate court",
+   "th": [
+    "ศาลที่มีอำนาจพิจารณาพิพากษาคดีเกี่ยวกับการจัดการมรดก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/probate-estate",
+   "en": "Probate estate",
+   "th": [
+    "กองมรดกที่ต้องมีการจัดการ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/executor-administrator-of-the-estate",
+   "en": "Executor / Administrator of the estate",
+   "th": [
+    "ผู้จัดการมรดก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/probative",
+   "en": "Probative",
+   "th": [
+    "ใช้สำหรับการพิสูจน์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/probative-value",
+   "en": "Probative value",
+   "th": [
+    "คุณค่าต่อการใช้พิสูจน์ข้อเท็จจริงอย่างใดอย่างหนึ่งได้"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/sentencing-guideline",
+   "en": "Sentencing Guideline",
+   "th": [
+    "แนวทางการกำหนดโทษ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
+    }
+   ]
+  },
+  {
+   "id": "atlas:term/conditional-pardon",
+   "en": "Conditional pardon",
+   "th": [
+    "การอภัยโทษแบบมีเงื่อนไข"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
+     "kind": "textbook"
     }
    ]
   }
