@@ -479,6 +479,41 @@ const css = `
 .ch-notes-empty{font-size:12.5px;color:var(--ink-faint)}
 .ch-empty{padding:18px;text-align:center;color:var(--ink-soft);font-size:14px}
 .ch-ep mark{background:var(--gold-soft);color:inherit;border-radius:3px;padding:0 2px}
+.ch-print{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.ch-print button,.ch-pbtn{appearance:none;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:13px;font-weight:700;border-radius:999px;padding:7px 14px;cursor:pointer}
+.ch-print button:hover,.ch-pbtn:hover{border-color:var(--accent)}
+.ch-pbtn{display:block;margin:8px 0 6px auto;font-size:12.5px;padding:5px 12px}
+#chPrint{position:absolute;left:-99999px;top:0;width:186mm;visibility:hidden;pointer-events:none}
+#chPrint,#chPrint *{--card:#fff;--paper:#f7f7f7;--ink:#111;--ink-soft:#444;--ink-faint:#888;--line:#ccc;--shadow:none;--gold:#7a5a10;--gold-soft:#f3ead2;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#chPrint{background:#fff;color:#111}
+.chp-in{width:186mm;box-sizing:border-box;font-family:inherit}
+.chp-h{margin:0 0 3mm;font-size:20px;font-weight:800;color:#111;border-bottom:2px solid #111;padding-bottom:2mm;display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.chp-h small{font-size:11px;font-weight:600;color:#666}
+.chp-intro{margin:0 0 2mm;font-size:12px;line-height:1.6;color:#333}
+.chp-abbr{margin:2mm 0 0;font-size:11px;line-height:1.6;color:#333}
+.chp-in .ch-node{width:100%}
+.chp-in .ch-fc{overflow:visible}
+.chp-in .ch-box{padding:4px 9px 5px;box-shadow:none}
+.chp-in .ch-box .ch-txt{line-height:1.5}
+.chp-in .ch-box .ch-ref{margin:0 0 2px}
+.chp-in .ch-star,.chp-in .ch-lec{display:inline-block;margin:2px 4px 0;font-size:10.5px}
+.chp-in .ch-arrow{height:12px}
+.chp-in .ch-branches{gap:5px;padding-top:8px}
+.chp-in .ch-branches::before{height:8px}
+.chp-in .ch-bbox{padding:4px 7px;line-height:1.5;max-width:none}
+.chp-in .ch-fc-band{margin:4px 0 6px;padding:3px 8px}
+.chp-in .ch-lanes{gap:8px;margin-top:6px;padding-top:6px}
+.chp-2col .ch-fc{display:block;column-count:2;column-gap:6mm}
+.chp-2col .ch-node{break-inside:avoid}
+.chp-2col .ch-fc-band{break-after:avoid}
+@page chainp{size:A4 portrait;margin:12mm}
+@media print{
+ body.ch-printing>*:not(#chPrint){display:none!important}
+ body.ch-printing #chPrint{position:static;left:auto;visibility:visible!important;width:auto}
+ body.ch-printing #chPrint *{visibility:visible!important}
+ .chp-page{page:chainp;break-after:page;page-break-after:always;break-inside:avoid;overflow:hidden}
+ .chp-page:last-child{break-after:auto;page-break-after:auto}
+}
 @media(max-width:640px){.ch-ep-head{padding:11px 11px}.ch-ep-body{padding:2px 11px 14px}.ch-txt{font-size:13.5px}}
 `;
 
@@ -551,6 +586,7 @@ function epHtml(ep, open){
     +(ep.warn?'<span class="ch-ep-warn">อ่านไม่ครบ</span>':'')
     +'<span class="ch-ep-caret">▶</span></div>'
     +'<div class="ch-ep-body">'
+    +'<button type="button" class="ch-pbtn" onclick="ChainPrint(['+ep.n+'])">🖨️ พิมพ์ผังชุดนี้ (1 หน้า A4)</button>'
     +(ep.warn?'<div class="ch-note">⚠️ '+esc(ep.warn)+'</div>':'')
     +(ep.intro?'<div class="ch-intro">'+esc(ep.intro)+'</div>':'')
     +flowHtml(ep)
@@ -601,6 +637,52 @@ function lecHtml(q){
   return out||'<div class="ch-empty">ไม่พบ "'+esc(q)+'"</div>';
 }
 
+const MM=96/25.4, PAGE_H=(297-24)*MM*0.97;
+function printPage(ep){
+  return '<section class="chp-page"><div class="chp-in">'
+    +'<h2 class="chp-h"><span>'+ep.ic+' ชุดที่ '+ep.n+' · '+esc(ep.title)+'</span><small>ไล่สาย ป.วิ.อาญา · coolunclelab.com</small></h2>'
+    +(ep.intro?'<p class="chp-intro">'+esc(ep.intro)+'</p>':'')
+    +flowHtml(ep)
+    +(ep.abbr?'<div class="chp-abbr"><b>มาตราย่อ:</b> '+esc(ep.abbr)+'</div>':'')
+    +'</div></section>';
+}
+function fitPage(el){
+  // หาขนาดที่ทั้งผังลงหน้าเดียว: ลอง 1 คอลัมน์ ถ้าต้องย่อมากเกินไปค่อยลอง 2 คอลัมน์ แล้วเลือกแบบที่ตัวหนังสือใหญ่กว่า
+  const W=186*MM;
+  function solve(two){
+    el.classList.toggle('chp-2col',two);
+    let z=1;
+    for(let k=0;k<4;k++){
+      el.style.zoom=''; el.style.width=(W/z)+'px';
+      const h=el.scrollHeight;
+      const nz=Math.min(1,PAGE_H/h);
+      if(Math.abs(nz-z)<0.01){ z=nz; break; }
+      z=nz;
+    }
+    el.style.width=(W/z)+'px';
+    while(z>0.2 && el.scrollHeight*z>PAGE_H){ z*=0.97; el.style.width=(W/z)+'px'; }
+    return z;
+  }
+  const z1=solve(false);
+  let two=false, z=z1;
+  if(z1<0.72){ const z2=solve(true); if(z2>z1+0.05){ two=true; z=z2; } }
+  solve(two); el.style.width=(W/z)+'px';
+  while(z>0.2 && el.scrollHeight*z>PAGE_H){ z*=0.97; el.style.width=(W/z)+'px'; }
+  el.style.zoom=z;
+}
+window.ChainPrint=function(nums){
+  const eps=nums&&nums.length?EPS.filter(e=>nums.indexOf(e.n)>=0):EPS;
+  if(!eps.length) return;
+  let box=document.getElementById('chPrint');
+  if(!box){ box=document.createElement('div'); box.id='chPrint'; document.body.appendChild(box); }
+  box.innerHTML=eps.map(printPage).join('');
+  box.querySelectorAll('.chp-in').forEach(fitPage);
+  document.body.classList.add('ch-printing');
+  const done=()=>{ document.body.classList.remove('ch-printing'); box.innerHTML=''; window.removeEventListener('afterprint',done); };
+  window.addEventListener('afterprint',done);
+  setTimeout(()=>{ window.print(); },60);
+};
+
 function init(){
   const host = document.getElementById('chainEpList');
   if(!host) return;
@@ -613,6 +695,7 @@ function init(){
     +AUDIO.map(a=>'<div class="ch-audio-row"><span>'+esc(a.label)+'</span><audio controls preload="none" src="'+a.src+'" onerror="this.parentNode.style.display=\'none\'"></audio></div>').join('')+'</div>'
     +'<div class="ch-legend">⭐ <b>ดาวข้อสอบออกบ่อย</b> นับจากข้อสอบเก่า 22 ฉบับใน War Mode: ⭐⭐⭐ = ออก 20+ ฉบับ · ⭐⭐ = 15–19 ฉบับ · ⭐ = 10–14 ฉบับ · ไม่มีดาว = ออกน้อยกว่านั้น (นับตามหัวข้อ ไม่ใช่ตามมาตราเดี่ยวๆ)</div>'
     +'<div class="ch-view"><button type="button" class="on" data-v="clip">📼 ตามชุดคลิป (23 ชุด)</button><button type="button" data-v="lec">📚 ตามบรรยาย 15 ครั้ง</button></div>'
+    +'<div class="ch-print"><button type="button" id="chPrintAll">🖨️ พิมพ์ผังที่แสดงอยู่ (ชุดละ 1 หน้า A4)</button></div>'
     +'<div class="ch-find"><input id="chFind" type="search" placeholder="ค้นหา เช่น 143, ฝากขัง, อุทธรณ์ …" aria-label="ค้นหาในผังไล่สาย"><span class="ch-count" id="chCount"></span></div>'
     +'<div class="ch-wrap" id="chList"></div>';
   const list = document.getElementById('chList');
@@ -630,6 +713,10 @@ function init(){
     view=b.dataset.v; host.querySelectorAll('.ch-view button').forEach(x=>x.classList.toggle('on',x===b)); draw();
   }));
   inp.addEventListener('input', draw);
+  document.getElementById('chPrintAll').addEventListener('click',()=>{
+    const q=inp.value.trim();
+    ChainPrint(q?EPS.filter(e=>flat(e).includes(q)).map(e=>e.n):null);
+  });
   draw();
 }
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init); else init();
