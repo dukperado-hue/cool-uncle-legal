@@ -503,6 +503,9 @@ const css = `
 .chp-in .ch-bbox{padding:4px 7px;line-height:1.5;max-width:none}
 .chp-in .ch-fc-band{margin:4px 0 6px;padding:3px 8px}
 .chp-in .ch-lanes{gap:8px;margin-top:6px;padding-top:6px}
+.chp-notes{width:186mm;box-sizing:border-box;color:#111}
+.chp-notes h3{font-size:14px;font-weight:800;margin:4mm 0 1.5mm;padding:1mm 2.5mm;background:#f3ead2;border-left:3px solid #7a5a10;break-after:avoid}
+.chp-notes p{font-size:12.5px;line-height:1.75;margin:0 0 1.8mm;text-align:justify;orphans:3;widows:3}
 .chp-2col .ch-fc{display:block;column-count:2;column-gap:6mm}
 .chp-2col .ch-node{break-inside:avoid}
 .chp-2col .ch-fc-band{break-after:avoid}
@@ -511,8 +514,10 @@ const css = `
  body.ch-printing>*:not(#chPrint){display:none!important}
  body.ch-printing #chPrint{position:static;left:auto;visibility:visible!important;width:auto}
  body.ch-printing #chPrint *{visibility:visible!important}
- .chp-page{page:chainp;break-after:page;page-break-after:always;break-inside:avoid;overflow:hidden}
- .chp-page:last-child{break-after:auto;page-break-after:auto}
+ .chp-page,.chp-notes{page:chainp;break-after:page;page-break-after:always}
+ .chp-page{break-inside:avoid;overflow:hidden}
+ .chp-notes{width:auto}
+ #chPrint>section:last-child{break-after:auto;page-break-after:auto}
 }
 @media(max-width:640px){.ch-ep-head{padding:11px 11px}.ch-ep-body{padding:2px 11px 14px}.ch-txt{font-size:13.5px}}
 `;
@@ -586,7 +591,7 @@ function epHtml(ep, open){
     +(ep.warn?'<span class="ch-ep-warn">อ่านไม่ครบ</span>':'')
     +'<span class="ch-ep-caret">▶</span></div>'
     +'<div class="ch-ep-body">'
-    +'<button type="button" class="ch-pbtn" onclick="ChainPrint(['+ep.n+'])">🖨️ พิมพ์ผังชุดนี้ (1 หน้า A4)</button>'
+    +'<button type="button" class="ch-pbtn" onclick="ChainPrint(['+ep.n+'])">🖨️ พิมพ์ชุดนี้ (ผัง 1 หน้า + บันทึก)</button>'
     +(ep.warn?'<div class="ch-note">⚠️ '+esc(ep.warn)+'</div>':'')
     +(ep.intro?'<div class="ch-intro">'+esc(ep.intro)+'</div>':'')
     +flowHtml(ep)
@@ -644,7 +649,14 @@ function printPage(ep){
     +(ep.intro?'<p class="chp-intro">'+esc(ep.intro)+'</p>':'')
     +flowHtml(ep)
     +(ep.abbr?'<div class="chp-abbr"><b>มาตราย่อ:</b> '+esc(ep.abbr)+'</div>':'')
-    +'</div></section>';
+    +'</div></section>'
+    +printNotes(ep);
+}
+function printNotes(ep){
+  const N=(window.CHAIN_NOTES||{})[ep.n];
+  if(!N||!N.length) return '';
+  return '<section class="chp-notes"><h2 class="chp-h"><span>📝 บันทึกจากเสียง · ชุดที่ '+ep.n+' · '+esc(ep.title)+'</span><small>ไล่สาย ป.วิ.อาญา · coolunclelab.com</small></h2>'
+    +N.map(t=>t.indexOf('## ')===0?'<h3>'+esc(t.slice(3))+'</h3>':'<p>'+esc(t)+'</p>').join('')+'</section>';
 }
 function fitPage(el){
   // หาขนาดที่ทั้งผังลงหน้าเดียว: ลอง 1 คอลัมน์ ถ้าต้องย่อมากเกินไปค่อยลอง 2 คอลัมน์ แล้วเลือกแบบที่ตัวหนังสือใหญ่กว่า
@@ -695,7 +707,7 @@ function init(){
     +AUDIO.map(a=>'<div class="ch-audio-row"><span>'+esc(a.label)+'</span><audio controls preload="none" src="'+a.src+'" onerror="this.parentNode.style.display=\'none\'"></audio></div>').join('')+'</div>'
     +'<div class="ch-legend">⭐ <b>ดาวข้อสอบออกบ่อย</b> นับจากข้อสอบเก่า 22 ฉบับใน War Mode: ⭐⭐⭐ = ออก 20+ ฉบับ · ⭐⭐ = 15–19 ฉบับ · ⭐ = 10–14 ฉบับ · ไม่มีดาว = ออกน้อยกว่านั้น (นับตามหัวข้อ ไม่ใช่ตามมาตราเดี่ยวๆ)</div>'
     +'<div class="ch-view"><button type="button" class="on" data-v="clip">📼 ตามชุดคลิป (23 ชุด)</button><button type="button" data-v="lec">📚 ตามบรรยาย 15 ครั้ง</button></div>'
-    +'<div class="ch-print"><button type="button" id="chPrintAll">🖨️ พิมพ์ผังที่แสดงอยู่ (ชุดละ 1 หน้า A4)</button></div>'
+    +'<div class="ch-print"><button type="button" id="chPrintAll">🖨️ พิมพ์ผังที่แสดงอยู่ (ผังชุดละ 1 หน้า + บันทึกจากเสียง)</button></div>'
     +'<div class="ch-find"><input id="chFind" type="search" placeholder="ค้นหา เช่น 143, ฝากขัง, อุทธรณ์ …" aria-label="ค้นหาในผังไล่สาย"><span class="ch-count" id="chCount"></span></div>'
     +'<div class="ch-wrap" id="chList"></div>';
   const list = document.getElementById('chList');
