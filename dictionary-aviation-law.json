@@ -1,7 +1,7 @@
 {
- "version": "av-1-0",
- "generated": "2026-11-19",
- "principle": "Thai-English aviation-law term pairs from enacted wording (พ.ร.บ.การเดินอากาศ ม.4 + CAAT English translation, ข้อกำหนด กพท. 22/32), the Chicago Convention translation by Somchai Piputwat, and terms he discusses in his commentary. note = short usage remark, not a definition.",
+ "version": "av-1-1",
+ "generated": "2026-11-20",
+ "principle": "Thai-English aviation-law term pairs from enacted wording (พ.ร.บ.การเดินอากาศ ม.4 + CAAT English translation, ข้อกำหนด กพท. 22/32), the Chicago Convention translation by Somchai Piputwat, terms he discusses in his commentary, and the locked terms of the internal Thai translation of ICAO Annex 19 (3rd ed. 2025; terms only, the Annex text is ICAO copyright). note = short usage remark, not a definition.",
  "entries": [
   {
    "id": "atlas:avterm/abrogation-of-inconsistent-arrangements",
@@ -18,6 +18,21 @@
    ]
   },
   {
+   "id": "atlas:avterm/acceptable-level-of-safety-performance",
+   "en": "Acceptable level of safety performance (ALoSP)",
+   "th": [
+    "ระดับสมรรถนะด้านความปลอดภัยที่ยอมรับได้"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ],
+   "note": "คำนำของ Annex 19 ระบุว่าบทบัญญัติเรื่อง ALoSP ถูกแทนที่ด้วยบทบัญญัติการบริหารสมรรถนะด้านความปลอดภัยที่เป็นพื้นฐานกว่า"
+  },
+  {
    "id": "atlas:avterm/accident",
    "en": "Accident",
    "th": [
@@ -28,6 +43,39 @@
     {
      "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
      "kind": "regulation"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/accountability",
+   "en": "Accountability",
+   "th": [
+    "ความรับผิดชอบในผลลัพธ์",
+    "ภาระรับผิด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/accountable-executive",
+   "en": "Accountable executive",
+   "th": [
+    "ผู้บริหารระดับสูงผู้รับผิดชอบ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
     }
    ]
   },
@@ -354,8 +402,13 @@
     {
      "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
      "kind": "statute"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
     }
-   ]
+   ],
+   "note": "ย่อ ATS"
   },
   {
    "id": "atlas:avterm/airborne-image-recorder",
@@ -608,6 +661,10 @@
     {
      "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
      "kind": "statute"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
     }
    ]
   },
@@ -624,6 +681,24 @@
      "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 86",
      "kind": "treaty"
     }
+   ]
+  },
+  {
+   "id": "atlas:avterm/appendix",
+   "en": "Appendix",
+   "th": [
+    "อนุผนวก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ],
+   "note": "ส่วนที่แยกไว้ท้ายภาคผนวกเพื่อความสะดวก แต่มีสถานะเป็นส่วนหนึ่งของ SARPs — ต่างจาก Attachment",
+   "see": [
+    "av-law:attachment"
    ]
   },
   {
@@ -687,29 +762,41 @@
    "id": "atlas:avterm/approved-maintenance-organization",
    "en": "Approved Maintenance Organization",
    "th": [
-    "ผู้ดำเนินการหน่วยซ่อม"
+    "ผู้ดำเนินการหน่วยซ่อม",
+    "หน่วยซ่อมที่ได้รับการรับรอง"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
      "kind": "regulation"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
     }
-   ]
+   ],
+   "note": "ย่อ AMO · ข้อกำหนด กพท. ใช้ \"ผู้ดำเนินการหน่วยซ่อม\" คำแปล Annex 19 ภายในใช้ \"หน่วยซ่อมที่ได้รับการรับรอง\""
   },
   {
    "id": "atlas:avterm/approved-training-organization",
    "en": "Approved Training Organization",
    "th": [
-    "สถาบันฝึกอบรมด้านการบิน"
+    "สถาบันฝึกอบรมด้านการบิน",
+    "สถาบันฝึกอบรมด้านการบินที่ได้รับการรับรอง"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
      "kind": "regulation"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
     }
-   ]
+   ],
+   "note": "ย่อ ATO · ข้อกำหนด กพท. ใช้ \"สถาบันฝึกอบรมด้านการบิน\""
   },
   {
    "id": "atlas:avterm/arbitration-procedure",
@@ -738,6 +825,41 @@
      "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 65",
      "kind": "treaty"
     }
+   ]
+  },
+  {
+   "id": "atlas:avterm/attachment",
+   "en": "Attachment",
+   "th": [
+    "เอกสารแนบท้าย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ],
+   "note": "เนื้อหาเสริมหรือแนวทางการใช้ SARPs ไม่มีสถานะเป็น SARPs — ต่างจาก Appendix",
+   "see": [
+    "av-law:appendix"
+   ]
+  },
+  {
+   "id": "atlas:avterm/audit",
+   "en": "Audit",
+   "th": [
+    "การตรวจประเมิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ],
+   "see": [
+    "av-law:surveillance"
    ]
   },
   {
@@ -879,6 +1001,37 @@
     {
      "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 31",
      "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/certified-aerodrome",
+   "en": "Certified aerodrome",
+   "th": [
+    "สนามบินที่ได้รับใบรับรอง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ],
+   "see": [
+    "av-law:aerodrome"
+   ]
+  },
+  {
+   "id": "atlas:avterm/certified-heliport",
+   "en": "Certified heliport",
+   "th": [
+    "ลานจอดเฮลิคอปเตอร์ที่ได้รับใบรับรอง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
     }
    ]
   },
@@ -1029,6 +1182,20 @@
    ]
   },
   {
+   "id": "atlas:avterm/continual-improvement",
+   "en": "Continual improvement",
+   "th": [
+    "การปรับปรุงอย่างต่อเนื่อง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/continuous-monitoring-approach",
    "en": "Continuous monitoring approach (CMA)",
    "th": [
@@ -1043,6 +1210,20 @@
    ]
   },
   {
+   "id": "atlas:avterm/contracting-state",
+   "en": "Contracting State",
+   "th": [
+    "รัฐภาคี"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/convention",
    "en": "Convention",
    "th": [
@@ -1053,6 +1234,10 @@
     {
      "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
      "kind": "statute"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
     }
    ]
   },
@@ -1071,6 +1256,21 @@
    ]
   },
   {
+   "id": "atlas:avterm/council",
+   "en": "Council",
+   "th": [
+    "คณะมนตรี"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ],
+   "note": "คณะมนตรีองค์การการบินพลเรือนระหว่างประเทศ (ICAO Council) ผู้รับรองภาคผนวก"
+  },
+  {
    "id": "atlas:avterm/crew-member",
    "en": "Crew Member",
    "th": [
@@ -1082,6 +1282,24 @@
      "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
      "kind": "statute"
     }
+   ]
+  },
+  {
+   "id": "atlas:avterm/critical-element",
+   "en": "Critical element (CE)",
+   "th": [
+    "องค์ประกอบสำคัญ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · Appendix 1 (SSO)",
+     "kind": "icao-annex"
+    }
+   ],
+   "note": "องค์ประกอบสำคัญ 8 ประการ (CE-1 ถึง CE-8) ของระบบ SSO ใน Annex 19 Appendix 1",
+   "see": [
+    "av-law:state-safety-oversight"
    ]
   },
   {
@@ -1694,6 +1912,10 @@
     {
      "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
      "kind": "regulation"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
     }
    ]
   },
@@ -1722,6 +1944,20 @@
     {
      "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
      "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/human-performance",
+   "en": "Human performance",
+   "th": [
+    "สมรรถนะของมนุษย์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
     }
    ]
   },
@@ -1765,6 +2001,10 @@
     {
      "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
      "kind": "regulation"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
     }
    ]
   },
@@ -1783,6 +2023,23 @@
    ]
   },
   {
+   "id": "atlas:avterm/inspection",
+   "en": "Inspection",
+   "th": [
+    "การตรวจสอบ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ],
+   "see": [
+    "av-law:surveillance"
+   ]
+  },
+  {
    "id": "atlas:avterm/instrument-flight-procedure-design-service",
    "en": "Instrument Flight Procedure Design Service",
    "th": [
@@ -1793,6 +2050,20 @@
     {
      "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
      "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/interface",
+   "en": "Interface",
+   "th": [
+    "ส่วนเชื่อมต่อ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
     }
    ]
   },
@@ -1828,13 +2099,18 @@
    "id": "atlas:avterm/international-standards-and-recommended-practices",
    "en": "International Standards and Recommended Practices (SARPs)",
    "th": [
-    "มาตรฐานและวิธีปฏิบัติที่แนะนำระหว่างประเทศ"
+    "มาตรฐานและวิธีปฏิบัติที่แนะนำระหว่างประเทศ",
+    "มาตรฐานและวิธีปฏิบัติที่แนะนำ"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
      "kind": "commentary"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
     }
    ]
   },
@@ -1995,6 +2271,20 @@
    ]
   },
   {
+   "id": "atlas:avterm/management-of-change",
+   "en": "Management of change",
+   "th": [
+    "การบริหารการเปลี่ยนแปลง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/mandatory-functions-of-council",
    "en": "Mandatory functions of Council",
    "th": [
@@ -2021,6 +2311,23 @@
      "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
      "kind": "regulation"
     }
+   ]
+  },
+  {
+   "id": "atlas:avterm/mandatory-safety-reporting",
+   "en": "Mandatory safety reporting",
+   "th": [
+    "การรายงานภาคบังคับ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ],
+   "see": [
+    "av-law:voluntary-safety-reporting"
    ]
   },
   {
@@ -2221,6 +2528,10 @@
     {
      "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
      "kind": "regulation"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
     }
    ]
   },
@@ -2239,6 +2550,20 @@
    ]
   },
   {
+   "id": "atlas:avterm/operational-personnel",
+   "en": "Operational personnel",
+   "th": [
+    "บุคลากรปฏิบัติการ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/operator",
    "en": "Operator",
    "th": [
@@ -2249,6 +2574,24 @@
     {
      "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
      "kind": "regulation"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/organization-responsible-for-the-type-design",
+   "en": "Organization responsible for the type design",
+   "th": [
+    "องค์กรผู้รับผิดชอบแบบ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
     }
    ]
   },
@@ -2532,15 +2875,21 @@
    "id": "atlas:avterm/primary-aviation-legislation",
    "en": "Primary aviation legislation",
    "th": [
-    "กฎหมายการบินหลัก"
+    "กฎหมายการบินหลัก",
+    "กฎหมายแม่บทด้านการบิน"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
      "kind": "commentary"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · Appendix 1 (SSO)",
+     "kind": "icao-annex"
     }
-   ]
+   ],
+   "note": "องค์ประกอบสำคัญข้อที่ 1 (CE-1) ของระบบ SSO ใน Annex 19 Appendix 1; คำแปล Annex 19 ภายในใช้ \"กฎหมายแม่บทด้านการบิน\""
   },
   {
    "id": "atlas:avterm/private-aircraft",
@@ -2810,6 +3159,25 @@
    ]
   },
   {
+   "id": "atlas:avterm/recommended-practice",
+   "en": "Recommended Practice",
+   "th": [
+    "วิธีปฏิบัติที่แนะนำ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ],
+   "note": "ข้อกำหนดที่ใช้ should รัฐภาคีพึงพยายามปฏิบัติตาม (endeavour to conform)",
+   "see": [
+    "law:should",
+    "av-law:standard"
+   ]
+  },
+  {
    "id": "atlas:avterm/registration-of-existing-agreements",
    "en": "Registration of existing agreements",
    "th": [
@@ -2877,6 +3245,23 @@
      "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
      "kind": "commentary"
     }
+   ]
+  },
+  {
+   "id": "atlas:avterm/remotely-piloted-aircraft-system",
+   "en": "Remotely piloted aircraft system (RPAS)",
+   "th": [
+    "ระบบอากาศยานที่ควบคุมการบินจากระยะไกล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ],
+   "see": [
+    "av-law:remote-pilot"
    ]
   },
   {
@@ -2982,15 +3367,21 @@
    "id": "atlas:avterm/risk-control-measure",
    "en": "Risk Control Measure",
    "th": [
-    "มาตรการจัดการความเสี่ยง"
+    "มาตรการจัดการความเสี่ยง",
+    "มาตรการควบคุมความเสี่ยง"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
      "kind": "regulation"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
     }
-   ]
+   ],
+   "note": "Annex 19 ใช้ \"safety risk control\" แปลว่า \"มาตรการควบคุมความเสี่ยง\"; ข้อกำหนด กพท. ใช้ \"มาตรการจัดการความเสี่ยง\""
   },
   {
    "id": "atlas:avterm/rules-of-the-air",
@@ -3008,6 +3399,38 @@
    ]
   },
   {
+   "id": "atlas:avterm/safety",
+   "en": "Safety",
+   "th": [
+    "ความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
+    }
+   ],
+   "note": "คำแปล Annex 19 ภายในใช้ \"ความปลอดภัย\" ทั้งฉบับ ยกเว้นชื่อ SMS ที่คงคำ \"นิรภัย\" ตามคำแปลใน พ.ร.บ.การเดินอากาศ",
+   "see": [
+    "av-law:safety-management-system"
+   ]
+  },
+  {
+   "id": "atlas:avterm/safety-assurance",
+   "en": "Safety assurance",
+   "th": [
+    "การประกันความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/safety-data",
    "en": "Safety Data",
    "th": [
@@ -3018,6 +3441,24 @@
     {
      "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
      "kind": "regulation"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/safety-data-collection-and-processing-system",
+   "en": "Safety data collection and processing system (SDCPS)",
+   "th": [
+    "ระบบการรวบรวมและประมวลผลข้อมูลด้านความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
     }
    ]
   },
@@ -3032,8 +3473,27 @@
     {
      "file": "ข้อกำหนด กพท. ฉบับที่ 32 (การพิทักษ์ข้อมูลด้านความปลอดภัย)",
      "kind": "regulation"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
     }
    ]
+  },
+  {
+   "id": "atlas:avterm/safety-intelligence",
+   "en": "Safety intelligence",
+   "th": [
+    "ข่าวกรองด้านความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ],
+   "note": "ชื่อบทที่ 5 ของ Annex 19 (Development of safety intelligence)"
   },
   {
    "id": "atlas:avterm/safety-management-system",
@@ -3046,7 +3506,127 @@
     {
      "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
      "kind": "statute"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
     }
+   ],
+   "note": "ย่อ SMS · Annex 19 บทที่ 4 (นิยามในบทที่ 1)"
+  },
+  {
+   "id": "atlas:avterm/safety-objective",
+   "en": "Safety objective",
+   "th": [
+    "วัตถุประสงค์ด้านความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/safety-oversight",
+   "en": "Safety oversight",
+   "th": [
+    "การกำกับดูแลด้านความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/safety-performance",
+   "en": "Safety performance",
+   "th": [
+    "สมรรถนะด้านความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/safety-performance-indicator",
+   "en": "Safety performance indicator (SPI)",
+   "th": [
+    "ตัวชี้วัดสมรรถนะด้านความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/safety-performance-target",
+   "en": "Safety performance target (SPT)",
+   "th": [
+    "ค่าเป้าหมายสมรรถนะด้านความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/safety-policy",
+   "en": "Safety policy",
+   "th": [
+    "นโยบายด้านความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/safety-promotion",
+   "en": "Safety promotion",
+   "th": [
+    "การส่งเสริมความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/safety-risk",
+   "en": "Safety risk",
+   "th": [
+    "ความเสี่ยงด้านความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
+    }
+   ],
+   "see": [
+    "av-law:aviation-safety-risk"
    ]
   },
   {
@@ -3060,6 +3640,10 @@
     {
      "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
      "kind": "regulation"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
     }
    ]
   },
@@ -3177,6 +3761,20 @@
    ]
   },
   {
+   "id": "atlas:avterm/service-provider",
+   "en": "Service provider",
+   "th": [
+    "ผู้ให้บริการ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/settlement-of-disputes",
    "en": "Settlement of disputes",
    "th": [
@@ -3230,7 +3828,31 @@
     {
      "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
      "kind": "commentary"
+    },
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · Appendix 1 (SSO)",
+     "kind": "icao-annex"
     }
+   ],
+   "note": "องค์ประกอบสำคัญข้อที่ 2 (CE-2) ของระบบ SSO ใน Annex 19 Appendix 1"
+  },
+  {
+   "id": "atlas:avterm/standard",
+   "en": "Standard",
+   "th": [
+    "มาตรฐาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ],
+   "note": "ข้อกำหนดที่ใช้ shall รัฐภาคีต้องปฏิบัติตาม และต้องแจ้งความแตกต่างระหว่างกฎหมายภายในกับมาตรฐานต่อ ICAO ตามข้อ 38 อนุสัญญาชิคาโก",
+   "see": [
+    "law:shall",
+    "av-law:recommended-practice"
    ]
   },
   {
@@ -3282,6 +3904,39 @@
    "note": "ข้อ 3(b) อนุสัญญาชิคาโกใช้หลักภารกิจ (functional approach) คืออากาศยานที่ใช้ในบริการทหาร ศุลกากร และตำรวจ"
   },
   {
+   "id": "atlas:avterm/state-safety-oversight",
+   "en": "State safety oversight (SSO)",
+   "th": [
+    "การกำกับดูแลด้านความปลอดภัยของรัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · Appendix 1 (SSO)",
+     "kind": "icao-annex"
+    }
+   ],
+   "note": "Annex 19 Appendix 1 กำหนดองค์ประกอบสำคัญ (CE) 8 ประการของระบบ SSO",
+   "see": [
+    "av-law:critical-element"
+   ]
+  },
+  {
+   "id": "atlas:avterm/state-safety-programme",
+   "en": "State safety programme (SSP)",
+   "th": [
+    "แผนงานด้านความปลอดภัยของรัฐ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
+    }
+   ],
+   "note": "Annex 19 บทที่ 3"
+  },
+  {
    "id": "atlas:avterm/stop-for-non-traffic-purposes",
    "en": "Stop for non-traffic purposes",
    "th": [
@@ -3324,6 +3979,25 @@
    ]
   },
   {
+   "id": "atlas:avterm/surveillance",
+   "en": "Surveillance",
+   "th": [
+    "การตรวจติดตาม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ) · บทที่ 1 นิยาม",
+     "kind": "icao-annex"
+    }
+   ],
+   "note": "แยกจาก audit (การตรวจประเมิน) และ inspection (การตรวจสอบ)",
+   "see": [
+    "av-law:audit",
+    "av-law:inspection"
+   ]
+  },
+  {
    "id": "atlas:avterm/suspension-of-voting-power",
    "en": "Suspension of voting power",
    "th": [
@@ -3334,6 +4008,20 @@
     {
      "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 62",
      "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/system-description",
+   "en": "System description",
+   "th": [
+    "คำบรรยายระบบ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
     }
    ]
   },
@@ -3521,6 +4209,23 @@
      "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
      "kind": "regulation"
     }
+   ]
+  },
+  {
+   "id": "atlas:avterm/voluntary-safety-reporting",
+   "en": "Voluntary safety reporting",
+   "th": [
+    "การรายงานภาคสมัครใจ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
+     "kind": "icao-annex"
+    }
+   ],
+   "see": [
+    "av-law:mandatory-safety-reporting"
    ]
   },
   {

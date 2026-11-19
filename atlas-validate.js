@@ -1389,9 +1389,10 @@ head('F6 — Provision Context in the F1 Reader');
   // host cache-bust
   const ah = fs.readFileSync(path.join(ROOT, 'atlas.html'), 'utf8');
   const ch = fs.readFileSync(path.join(ROOT, 'concept.html'), 'utf8');
+  // later bumps are fine: the contract is "past 20260909e", not one pinned value
+  const pvv = s => (s.match(/atlas-provision-view\.js\?v=(\d{8}[a-z]?)/) || [])[1] || '';
   ok('F6 atlas.html + concept.html bumped atlas-provision-view.js ?v past 20260909e (F11.3.4 lecture notes)',
-     /atlas-provision-view\.js\?v=20260911a/.test(ah) && /atlas-provision-view\.js\?v=20260911a/.test(ch) &&
-     !/atlas-provision-view\.js\?v=20260909e/.test(ah) && !/atlas-provision-view\.js\?v=20260909e/.test(ch));
+     pvv(ah) > '20260909e' && pvv(ch) > '20260909e', pvv(ah) + ' / ' + pvv(ch));
 })();
 
 // ============================================================ F7-C1
@@ -1825,7 +1826,201 @@ head('F8 — Related concept integrity + inbound surfacing');
      LHP.qualifies(Object.assign({}, good, { historicalEvidence: { type: 'doctrine', basis: [] } }), LH_CTX) === false);
 })();
 
+// ---------------------------------------------------------------- Dictionary
+// Every Dictionary volume listed in dictionary-registry.json: 4 books (law,
+// av-law, av-mx, av-mil) + flat supplements. Schema, namespace and duplicate-id
+// problems FAIL. Broken cross-links, conceptRefs that point at seeds or missing
+// concepts, duplicate English headwords and open translation decisions are WARN:
+// they are follow-up work, not a broken page.
+let warnCount = 0;
+function warn(name, detail) {
+  warnCount++;
+  console.log('  WARN  ' + name + (detail ? '  — ' + detail : ''));
+}
+(function dictionary() {
+  head('Dictionary — registry, 4 books, schema, namespaces, references');
+  const regPath = path.join(ROOT, 'dictionary-registry.json');
+  ok('D0 dictionary-registry.json present', fs.existsSync(regPath));
+  if (!fs.existsSync(regPath)) return;
+  let reg;
+  try { reg = JSON.parse(fs.readFileSync(regPath, 'utf8')); ok('D0 registry parses', true); }
+  catch (e) { ok('D0 registry parses', false, e.message); return; }
+  const vols = Array.isArray(reg.volumes) ? reg.volumes : [];
+  const books = vols.filter(v => v.book);
+  const NS = { 1: ['law', 'atlas:term/'], 2: ['av-law', 'atlas:avterm/'], 3: ['av-mx', 'atlas:mxterm/'], 4: ['av-mil', 'atlas:milterm/'] };
+  ok('D0 registry lists exactly books 1-4 once each',
+     JSON.stringify(books.map(b => b.book).sort()) === '[1,2,3,4]', books.map(b => b.book).join(','));
+  ok('D0 each book has its fixed namespace and id prefix (law, av-law, av-mx, av-mil)',
+     books.every(b => NS[b.book] && b.ns === NS[b.book][0] && b.idPrefix === NS[b.book][1]),
+     books.map(b => b.book + '=' + b.ns + ' ' + b.idPrefix).join(' | '));
+  ok('D0 volume ids and urls are unique', new Set(vols.map(v => v.id)).size === vols.length &&
+     new Set(vols.map(v => v.url)).size === vols.length);
+  ok('D0 visibility is public|private; only book 4 (av-mil) is private',
+     vols.every(v => v.visibility === 'public' || v.visibility === 'private') &&
+     vols.filter(v => v.visibility === 'private').map(v => v.ns).join() === 'av-mil');
+
+  // private data must never be tracked or pushed (GitHub Pages serves every pushed file)
+  const { execFileSync } = require('child_process');
+  const git = args => { try { execFileSync('git', args, { cwd: ROOT, stdio: 'pipe' }); return true; } catch (e) { return false; } };
+  const gitOK = git(['rev-parse', '--is-inside-work-tree']);
+  vols.filter(v => v.visibility === 'private').forEach(v => {
+    if (!gitOK) { warn('D0 ' + v.url + ' privacy not checked', 'not a git work tree'); return; }
+    ok('D0 private ' + v.url + ' is gitignored', git(['check-ignore', '-q', v.url]));
+    ok('D0 private ' + v.url + ' is not tracked', !git(['ls-files', '--error-unmatch', v.url]));
+  });
+
+  // no orphan dictionary data file outside the registry
+  const known = new Set(vols.map(v => v.url).concat(['dictionary-registry.json']));
+  const orphans = fs.readdirSync(ROOT).filter(f => /^(atlas-)?dictionary.*\.json$/.test(f) && !known.has(f));
+  ok('D0 every dictionary*.json data file in the root is listed in the registry', orphans.length === 0, orphans.join(', ') || 'none');
+
+  // load
+  const docs = {};
+  vols.forEach(v => {
+    const p = path.join(ROOT, v.url);
+    if (!fs.existsSync(p)) {
+      if (v.visibility === 'private') { ok('D1 ' + v.url + ' absent (private book, not in this checkout) — skipped', true); return; }
+      ok('D1 ' + v.url + ' present', false, 'missing'); return;
+    }
+    try { docs[v.id] = JSON.parse(fs.readFileSync(p, 'utf8')); ok('D1 ' + v.url + ' parses', Array.isArray(docs[v.id].entries), 'entries=' + (docs[v.id].entries || []).length); }
+    catch (e) { ok('D1 ' + v.url + ' parses', false, e.message); }
+  });
+
+  const KINDS = new Set(['term', 'collocation', 'usage', 'latin', 'structure', 'profession', 'heading']);
+  const SRCS = new Set(['handout', 'slides', 'oldexam', 'textbook', 'lecture-audio', 'course-spec', 'lecture-page',
+                        'statute', 'regulation', 'treaty', 'commentary', 'icao-annex']);
+  const KEYS = new Set(['id', 'en', 'th', 'kind', 'sources', 'note', 'see', 'conceptRef']);
+  const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+  const nsBook = {};
+  books.forEach(b => { nsBook[b.ns] = b; });
+  const idsByNs = {};
+  books.forEach(b => { if (docs[b.id]) idsByNs[b.ns] = new Set(docs[b.id].entries.map(e => String(e.id).slice(b.idPrefix.length))); });
+  const viewSrc = fs.readFileSync(path.join(ROOT, 'atlas-dictionary-view.js'), 'utf8');
+
+  // schema per book
+  books.forEach(b => {
+    const d = docs[b.id];
+    if (!d) return;
+    const E = d.entries;
+    const tag = 'D2 [' + b.ns + ']';
+    ok(tag + ' version is a non-empty string', typeof d.version === 'string' && d.version.length > 0, d.version);
+    ok(tag + ' registry v matches the file version (cache-buster stays in step)', b.v === d.version, b.v + ' vs ' + d.version);
+    if (b.visibility === 'private') ok(tag + ' file declares visibility "private"', d.visibility === 'private');
+    const bad = (label, pred) => {
+      const hit = E.filter(e => !pred(e));
+      ok(tag + ' ' + label, hit.length === 0, hit.length ? hit.slice(0, 5).map(e => e.id || JSON.stringify(e).slice(0, 60)).join(', ') + (hit.length > 5 ? ' …+' + (hit.length - 5) : '') : E.length + ' entries');
+    };
+    bad('every id = ' + b.idPrefix + '<slug> (namespace prefix of this book)',
+        e => typeof e.id === 'string' && e.id.indexOf(b.idPrefix) === 0 && SLUG.test(e.id.slice(b.idPrefix.length)));
+    bad('required en (term) is a non-empty string', e => typeof e.en === 'string' && e.en.trim() === e.en && e.en.length > 0);
+    bad('required th (translation) is a non-empty array of non-empty strings',
+        e => Array.isArray(e.th) && e.th.length > 0 && e.th.every(t => typeof t === 'string' && t.trim().length > 0));
+    bad('required kind (category) is a known kind', e => KINDS.has(e.kind));
+    bad('required sources[] each have file + known kind',
+        e => Array.isArray(e.sources) && e.sources.length > 0 && e.sources.every(s => s && typeof s.file === 'string' && s.file.length > 0 && SRCS.has(s.kind)));
+    bad('optional note, when present, is a non-empty string', e => e.note === undefined || (typeof e.note === 'string' && e.note.trim().length > 0));
+    bad('optional see[] is "<ns>:<slug>" with a registered book namespace',
+        e => e.see === undefined || (Array.isArray(e.see) && e.see.length > 0 && e.see.every(s => {
+          const i = String(s).indexOf(':');
+          return i > 0 && nsBook[s.slice(0, i)] && SLUG.test(s.slice(i + 1));
+        })));
+    bad('optional conceptRef is an atlas:concept/<slug> id', e => e.conceptRef === undefined || /^atlas:concept\/[a-z0-9-]+$/.test(e.conceptRef));
+    bad('no keys outside the overlay schema', e => Object.keys(e).every(k => KEYS.has(k)));
+    const ids = E.map(e => e.id);
+    const dupIds = ids.filter((x, i) => ids.indexOf(x) !== i);
+    ok(tag + ' no duplicate ids', dupIds.length === 0, dupIds.join(', ') || 'none');
+    const byEn = {};
+    E.forEach(e => { const k = String(e.en).toLowerCase(); (byEn[k] = byEn[k] || []).push(e.id); });
+    Object.keys(byEn).filter(k => byEn[k].length > 1)
+      .forEach(k => warn(tag + ' duplicate English headword "' + k + '"', byEn[k].join(' , ')));
+    const kindsUsed = new Set(E.map(e => e.kind));
+    const srcUsed = new Set([].concat(...E.map(e => (e.sources || []).map(s => s.kind))));
+    ok(tag + ' viewer has a label for every kind and source kind used',
+       [...kindsUsed].every(k => new RegExp("\\b" + k + "\\s*:").test(viewSrc)) &&
+       [...srcUsed].every(k => viewSrc.indexOf("'" + k + "':") !== -1 || new RegExp("[{,\\s]" + k + "\\s*:").test(viewSrc)),
+       [...srcUsed].join(','));
+  });
+
+  // references: see (within and across namespaces) + conceptRef into the concept layer
+  const conceptPath = path.join(ROOT, 'atlas-concepts.json');
+  const concepts = fs.existsSync(conceptPath) ? JSON.parse(fs.readFileSync(conceptPath, 'utf8')).concepts : {};
+  let seeTotal = 0, seeBroken = 0, refTotal = 0;
+  books.forEach(b => {
+    const d = docs[b.id];
+    if (!d) return;
+    d.entries.forEach(e => {
+      (e.see || []).forEach(s => {
+        seeTotal++;
+        const i = s.indexOf(':'), ns = s.slice(0, i), slug = s.slice(i + 1);
+        if (!idsByNs[ns]) { seeBroken++; warn('D3 [' + b.ns + '] see target book not loaded', e.id + ' -> ' + s); }
+        else if (!idsByNs[ns].has(slug)) { seeBroken++; warn('D3 [' + b.ns + '] broken see link', e.id + ' -> ' + s); }
+      });
+      if (e.conceptRef) {
+        refTotal++;
+        const slug = e.conceptRef.slice('atlas:concept/'.length);
+        const c = concepts[slug];
+        if (!c) warn('D3 [' + b.ns + '] conceptRef points at a missing concept', e.id + ' -> ' + e.conceptRef);
+        else if (c.status !== 'published') warn('D3 [' + b.ns + '] conceptRef points at a ' + c.status + ' (not published)', e.id + ' -> ' + e.conceptRef + ' ' + c.titleTH);
+        else if (!String(c.summary || '').trim()) warn('D3 [' + b.ns + '] conceptRef points at a concept with no summary', e.id + ' -> ' + e.conceptRef);
+      }
+    });
+  });
+  ok('D3 cross-links and conceptRefs checked', true, seeTotal + ' see links (' + seeBroken + ' broken), ' + refTotal + ' conceptRefs');
+
+  // the same English headword in two books with no Thai rendering in common
+  const firstBook = {};
+  books.forEach(b => (docs[b.id] ? docs[b.id].entries : []).forEach(e => {
+    const k = e.en.toLowerCase().replace(/\s*\(.*?\)/g, '').trim();
+    (firstBook[k] = firstBook[k] || []).push([b.ns, e]);
+  }));
+  Object.keys(firstBook).forEach(k => {
+    const hits = firstBook[k];
+    const nss = new Set(hits.map(h => h[0]));
+    if (nss.size < 2) return;
+    const sets = hits.map(h => new Set(h[1].th));
+    const shared = [...sets[0]].some(t => sets.slice(1).every(s => s.has(t)));
+    if (!shared) warn('D4 "' + k + '" is rendered differently across books', hits.map(h => h[0] + ': ' + h[1].th.join(' / ')).join(' | '));
+  });
+
+  // open decisions carried from the D1 audit (2026-10-03): reported until the data settles them
+  const law = docs.law ? docs.law.entries : [];
+  const thOf = en => { const e = law.find(x => x.en.toLowerCase() === en.toLowerCase()); return e ? e.th.join(' / ') : '(no entry)'; };
+  const cTitle = s => concepts[s] ? concepts[s].titleTH + ' = ' + (concepts[s].titleEN || '(no titleEN)') + ' [' + concepts[s].status + ']' : '(no concept ' + s + ')';
+  [
+    ['Rescission vs Termination', () => 'Rescission: ' + thOf('Rescission') + ' · Termination: ' + thOf('Termination')],
+    ['Thing vs Property', () => 'Thing: ' + thOf('Thing') + ' · Property: ' + thOf('Property') + ' · concept sap ' + cTitle('sap')],
+    ['Custom vs Ordinary usage', () => 'Custom: ' + thOf('Custom') + ' · Ordinary usage: ' + thOf('Ordinary usage')],
+    ['Juristic act / Juridical act / Legal transaction', () => ['Juristic act', 'Juridical act', 'Legal transaction'].map(x => x + ': ' + thOf(x)).join(' · ')],
+    ['Betrothal vs Engagement', () => 'Betrothal: ' + thOf('Betrothal') + ' · Engagement: ' + thOf('Engagement')],
+    ['สินสอด: concept seed-0354 vs lecturer (Sinsod)', () => cTitle('seed-0354') + ' · Sinsod: ' + thOf('Sinsod')],
+    ['Rule of law: หลักนิติรัฐ vs หลักนิติธรรม', () => 'Rule of law: ' + thOf('Rule of law') + ' · concept lak-nititham ' + cTitle('lak-nititham')],
+    ['Forfeiture vs Confiscation (seed-0338)', () => 'Forfeiture of property: ' + thOf('Forfeiture of property') + ' · ' + cTitle('seed-0338')],
+    ['Fraud: กลฉ้อฉล (civil) vs ฉ้อโกง (criminal)', () => 'Fraud: ' + thOf('Fraud')],
+    ['Intent: จงใจ (seed-0446) vs เจตนา (seed-0484)', () => cTitle('seed-0446') + ' · ' + cTitle('seed-0484')],
+  ].forEach(([name, f]) => warn('D5 open translation decision: ' + name, f()));
+  [['seed-0432', 'nitikam'], ['seed-0288', 'samkanphid'], ['seed-0053', 'krobkrong-parapak'], ['seed-0320', 'phayayam'], ['seed-0316', 'seed-0459']]
+    .forEach(([a, b]) => { if (concepts[a] && concepts[b]) warn('D5 duplicate concept pair still open', a + ' (' + cTitle(a) + ') vs ' + b + ' (' + cTitle(b) + ')');
+                           else if (concepts[a] && !concepts[b]) warn('D5 duplicate concept check: twin not found', a + ' ' + cTitle(a) + ' — expected twin ' + b + ' is absent'); });
+
+  // flat supplements (abbr / terms): light shape check only
+  vols.filter(v => !v.book).forEach(v => {
+    const d = docs[v.id];
+    if (!d) return;
+    const key = v.type === 'abbr' ? 'abbr' : 'en';
+    const badRows = d.entries.filter(e => typeof e[key] !== 'string' || !e[key].trim());
+    ok('D6 [' + v.id + '] supplement rows all have ' + key, badRows.length === 0, d.entries.length + ' rows');
+  });
+
+  // the page and the viewer agree with the registry
+  const page = fs.readFileSync(path.join(ROOT, 'dictionary.html'), 'utf8');
+  ok('D7 dictionary.html mounts from dictionary-registry.json', /registry:\s*'dictionary-registry\.json/.test(page));
+  ok('D7 viewer hides private volumes off localhost and resolves see links',
+     /visibility !== 'private' \|\| local/.test(viewSrc) && /function seeLink/.test(viewSrc));
+  try { execFileSync(process.execPath, ['--check', path.join(ROOT, 'atlas-dictionary-view.js')], { stdio: 'pipe' }); ok('D7 atlas-dictionary-view.js parses', true); }
+  catch (e) { ok('D7 atlas-dictionary-view.js parses', false, String(e.stderr || e).slice(0, 200)); }
+})();
+
 console.log('\n----------------------------------------');
-console.log('  RESULT:  ' + pass + ' passed, ' + fail + ' failed');
+console.log('  RESULT:  ' + pass + ' passed, ' + fail + ' failed' + (warnCount ? ', ' + warnCount + ' warnings' : ''));
 console.log('----------------------------------------');
 process.exit(fail ? 1 : 0);

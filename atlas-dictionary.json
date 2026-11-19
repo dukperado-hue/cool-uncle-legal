@@ -1,6 +1,6 @@
 {
- "version": "d1-11-0",
- "generated": "2026-11-19",
+ "version": "d1-12-0",
+ "generated": "2026-11-20",
  "principle": "Overlay only: an English-Thai term layer over the Legal English sources. conceptRef points to an existing Atlas concept id and is present only when confirmed; the Dictionary never stores definitions, provisions, subject tags or relations of its own.",
  "entries": [
   {
@@ -111,6 +111,10 @@
      "file": "legaleng.html ครั้งที่ 4",
      "kind": "lecture-page"
     }
+   ],
+   "note": "กฎหมายระหว่างประเทศและสนธิสัญญานิยมใช้ แปลว่า \"ข้อ\" หรือ \"มาตรา\" (เช่น Article 38 ICJ Statute) — กฎหมายภายในของไทยนิยมใช้ Section",
+   "see": [
+    "law:section"
    ]
   },
   {
@@ -392,7 +396,8 @@
      "file": "LA270 Dr Korrasut's Handout.pdf",
      "kind": "handout"
     }
-   ]
+   ],
+   "note": "ป.พ.พ. ม.9: แกงได คือเครื่องหมายที่ทำแทนการลงลายมือชื่อ (เช่นเดียวกับลายพิมพ์นิ้วมือ ตราประทับ) ต้องมีพยานลงลายมือชื่อรับรองสองคน — ไม่ได้แปลว่า \"ข้าม\""
   },
   {
    "id": "atlas:term/debtor",
@@ -1132,7 +1137,8 @@
      "file": "LA270 Dr Korrasut's Handout.pdf",
      "kind": "handout"
     }
-   ]
+   ],
+   "note": "ป.พ.พ. ม.157: สำคัญผิดในคุณสมบัติของบุคคลหรือทรัพย์ซึ่งตามปกติถือเป็นสาระสำคัญ นิติกรรมเป็นโมฆียะ — แปลว่า \"คุณสมบัติ\" ไม่ใช่ \"คุณภาพ\""
   },
   {
    "id": "atlas:term/real-right",
@@ -1226,6 +1232,10 @@
      "file": "legaleng.html ครั้งที่ 4",
      "kind": "lecture-page"
     }
+   ],
+   "note": "ใช้เรียก \"มาตรา\" ในกฎหมายภายในประเทศ รวมทั้งกฎหมายไทยฉบับแปล (เช่น Section 420) — อาจารย์เน้นให้แยกจาก Article ซึ่งกฎหมายระหว่างประเทศและสนธิสัญญานิยมใช้",
+   "see": [
+    "law:article"
    ]
   },
   {
@@ -1259,7 +1269,8 @@
      "file": "LA270 Dr Korrasut's Handout.pdf",
      "kind": "handout"
     }
-   ]
+   ],
+   "note": "ป.พ.พ. ม.391 (ผลของการเลิกสัญญา): การงานอันได้กระทำให้ ต้องชดใช้ด้วยใช้เงินตามควรค่าแห่งการนั้น — แปลว่า \"การงาน\" ไม่ใช่ \"บริการ\""
   },
   {
    "id": "atlas:term/set-off",
@@ -1504,6 +1515,10 @@
      "file": "LA270-2-FINAL-2-2025-LP.pdf",
      "kind": "oldexam"
     }
+   ],
+   "note": "ใช้กับศาล: try a case / try the accused = พิจารณาคดี ดำเนินคดี ไม่ใช่ \"พยายาม\" คำนามคือ trial (การพิจารณาคดี)",
+   "see": [
+    "law:trial"
    ]
   },
   {
@@ -1594,7 +1609,8 @@
      "file": "LA270 Dr Korrasut's Handout.pdf",
      "kind": "handout"
     }
-   ]
+   ],
+   "note": "ป.พ.พ. ม.9: \"ทำเป็นหนังสือ\" (in writing) ผู้ทำไม่จำเป็นต้องเขียนเอง แต่ต้องลงลายมือชื่อ — แปลว่า \"หนังสือ\" ไม่ใช่ \"การเขียน\""
   },
   {
    "id": "atlas:term/contract-law",
@@ -3866,6 +3882,10 @@
      "file": "legaleng.html ครั้งที่ 5",
      "kind": "lecture-page"
     }
+   ],
+   "note": "ใช้เล่าข้อเท็จจริงและสิ่งที่ศาลตัดสินไปแล้ว (the court held / decided)",
+   "see": [
+    "law:present-tense"
    ]
   },
   {
@@ -3880,6 +3900,10 @@
      "file": "legaleng.html ครั้งที่ 5",
      "kind": "lecture-page"
     }
+   ],
+   "note": "ใช้กับหลักกฎหมายหรือบทบัญญัติที่ยังใช้บังคับ (the statute requires) และในสัญญาใช้กับการกระทำที่สำเร็จเมื่อลงนาม (X hereby grants …)",
+   "see": [
+    "law:past-tense"
    ]
   },
   {
@@ -5306,6 +5330,10 @@
      "file": "legaleng.html ครั้งที่ 9",
      "kind": "lecture-page"
     }
+   ],
+   "note": "หน้าที่ผูกพันบังคับ (binding duty) สนธิสัญญานิยม shall มากกว่า must; สัญญาธุรกิจต่อธุรกิจ (B2B) นิยม shall — เลือก shall หรือ must อย่างใดอย่างหนึ่งแล้วใช้ให้สม่ำเสมอ",
+   "see": [
+    "law:must"
    ]
   },
   {
@@ -5320,6 +5348,10 @@
      "file": "legaleng.html ครั้งที่ 9",
      "kind": "lecture-page"
     }
+   ],
+   "note": "บังคับเด็ดขาด พบน้อยในสนธิสัญญาเพราะฟังเหมือนสั่งรัฐอื่นโดยตรง; สัญญากับบุคคลทั่วไปที่ไม่ใช่นักกฎหมายนิยม must",
+   "see": [
+    "law:shall"
    ]
   },
   {
@@ -5334,7 +5366,8 @@
      "file": "legaleng.html ครั้งที่ 9",
      "kind": "lecture-page"
     }
-   ]
+   ],
+   "note": "ให้ดุลพินิจ (discretion) จะทำหรือไม่ทำก็ได้ ไม่ใช่หน้าที่ แต่ยังอยู่ภายใต้เงื่อนไขที่ตัวบทกำหนด; มักใช้กับสิทธิ (may / entitled to)"
   },
   {
    "id": "atlas:term/should",
@@ -5348,7 +5381,8 @@
      "file": "legaleng.html ครั้งที่ 9",
      "kind": "lecture-page"
     }
-   ]
+   ],
+   "note": "ข้อเสนอแนะ (recommendation / soft law) ไม่ทำก็ไม่ผิดหน้าที่"
   },
   {
    "id": "atlas:term/subject-to",
@@ -5418,6 +5452,10 @@
      "file": "legaleng.html ครั้งที่ 9",
      "kind": "lecture-page"
     }
+   ],
+   "note": "ใช้กับการตีความกฎหมายหรือสนธิสัญญา — การตีความคำพิพากษามักใช้ construe",
+   "see": [
+    "law:construe"
    ]
   },
   {
@@ -5432,6 +5470,10 @@
      "file": "legaleng.html ครั้งที่ 9",
      "kind": "lecture-page"
     }
+   ],
+   "note": "มักใช้กับการตีความคำพิพากษา เช่น ICJ Statute Art. 60: เมื่อมีข้อพิพาทเรื่องความหมายของคำพิพากษา ศาลต้อง construe ตามคำขอ (คดีปราสาทพระวิหาร)",
+   "see": [
+    "law:interpret"
    ]
   },
   {

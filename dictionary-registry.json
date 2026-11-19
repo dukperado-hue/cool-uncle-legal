@@ -1,0 +1,75 @@
+{
+ "version": "reg-1",
+ "generated": "2026-11-20",
+ "principle": "One registry for every Dictionary volume. A book owns a namespace (ns) used for cross-links written as \"<ns>:<slug>\", where slug is the part of an entry id after idPrefix. conceptRef (atlas:concept/<slug>, including seed-NNNN) points into the Atlas concept layer, not into a book. visibility \"private\" = never committed (the data file is gitignored) and never shown on the public site; the viewer lists it only on localhost.",
+ "volumes": [
+  {
+   "book": 1,
+   "id": "law",
+   "ns": "law",
+   "idPrefix": "atlas:term/",
+   "type": "law",
+   "visibility": "public",
+   "title": "กฎหมาย",
+   "sub": "ศัพท์กฎหมายอังกฤษ ↔ ไทย: แพ่ง อาญา มหาชน และ Legal English",
+   "url": "atlas-dictionary.json",
+   "v": "d1-12-0"
+  },
+  {
+   "book": 2,
+   "id": "avlaw",
+   "ns": "av-law",
+   "idPrefix": "atlas:avterm/",
+   "type": "law",
+   "visibility": "public",
+   "title": "กฎหมายการบิน",
+   "sub": "ศัพท์กฎหมายการบินและความปลอดภัย ไทย ↔ อังกฤษ (พ.ร.บ.การเดินอากาศ · ข้อกำหนด กพท. · อนุสัญญาชิคาโก · ICAO Annex 19 · บทความ สมชาย พิพุธวัฒน์)",
+   "url": "dictionary-aviation-law.json",
+   "v": "av-1-1"
+  },
+  {
+   "book": 3,
+   "id": "avmx",
+   "ns": "av-mx",
+   "idPrefix": "atlas:mxterm/",
+   "type": "law",
+   "visibility": "public",
+   "title": "ช่างอากาศยาน",
+   "sub": "ศัพท์ช่างอากาศยานและวิศวกรรม ไทย ↔ อังกฤษ (ตรวจกับแหล่งแล้ว)",
+   "url": "dictionary-aircraft-maint.json",
+   "v": "mx-0-1"
+  },
+  {
+   "book": 4,
+   "id": "avmil",
+   "ns": "av-mil",
+   "idPrefix": "atlas:milterm/",
+   "type": "law",
+   "visibility": "private",
+   "title": "การบินทหาร",
+   "sub": "ศัพท์การบินทหารและยุทธวิธี (ส่วนตัว ไม่เผยแพร่)",
+   "url": "dictionary-military-aviation.json",
+   "v": "mil-0-1"
+  },
+  {
+   "book": null,
+   "id": "abbr",
+   "type": "abbr",
+   "visibility": "public",
+   "title": "คำย่อ aviation",
+   "sub": "คำย่อการบินและการซ่อมบำรุง (ร่าง ภาคผนวกของเล่ม 3)",
+   "url": "dictionary-aviation-abbr.json",
+   "v": "20261004b"
+  },
+  {
+   "book": null,
+   "id": "aviation",
+   "type": "terms",
+   "visibility": "public",
+   "title": "aviation",
+   "sub": "ศัพท์การบินและการซ่อมบำรุง (ร่าง ภาคผนวกของเล่ม 3)",
+   "url": "dictionary-aviation-terms.json",
+   "v": "20261015a"
+  }
+ ]
+}

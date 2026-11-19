@@ -14,6 +14,13 @@
  *
  * Public API:  AtlasDictionaryView.mount(el, { url })            — one collapsed legal panel
  *              AtlasDictionaryView.mountPage(el, { volumes })  — dictionary.html: tabbed volumes
+ *              AtlasDictionaryView.mountPage(el, { registry }) — same, volumes read from
+ *                dictionary-registry.json (4 books + supplements). A volume with
+ *                visibility "private" is listed only on localhost / file:.
+ *
+ * Cross-links: an entry may carry see: ["<ns>:<slug>"] (e.g. "law:shall" from
+ * book av-law). ns is a book namespace from the registry; slug is the entry id
+ * after the book's idPrefix. Links open that book with the term pre-searched.
  * ========================================================================== */
 (function (global) {
   'use strict';
@@ -27,7 +34,8 @@
     handout: 'เอกสารประกอบ', slides: 'สไลด์', oldexam: 'ข้อสอบเก่า',
     textbook: 'ตำรา', 'lecture-audio': 'เสียงบรรยาย', 'course-spec': 'แผนรายวิชา',
     'lecture-page': 'หน้าบรรยายวิชา',
-    statute: 'บทนิยามในกฎหมาย', regulation: 'ข้อกำหนด กพท.', treaty: 'อนุสัญญาชิคาโก (คำแปล)', commentary: 'บทความ สมชาย พิพุธวัฒน์'
+    statute: 'บทนิยามในกฎหมาย', regulation: 'ข้อกำหนด กพท.', treaty: 'อนุสัญญาชิคาโก (คำแปล)', commentary: 'บทความ สมชาย พิพุธวัฒน์',
+    'icao-annex': 'ICAO Annex (คำแปลภายใน)'
   };
   var CONCEPT_PREFIX = 'atlas:concept/';
 
@@ -104,11 +112,18 @@
     });
   }
 
-  function render(body, entries) {
+  // ctx (optional, dictionary.html only): { query, emptyText, seeLink(ref) -> {href, label, go} | null }
+  function render(body, entries, ctx) {
+    ctx = ctx || {};
     body.textContent = '';
+    if (!entries.length && ctx.emptyText) {
+      body.appendChild(el('div', 'atlas-dict-empty', ctx.emptyText));
+      return;
+    }
     var bar = el('div', 'atlas-dict-bar');
     var q = el('input');
     q.type = 'search';
+    if (ctx.query) q.value = ctx.query;
     q.placeholder = 'ค้นศัพท์ — พิมพ์ภาษาอังกฤษหรือไทย';
     q.setAttribute('aria-label', 'ค้นพจนานุกรม');
     var kindSel = el('select');
@@ -152,6 +167,20 @@
         var a = el('a', null, 'ดูแนวคิดที่เกี่ยวข้อง →');
         a.href = 'concept.html?k=' + encodeURIComponent(e.conceptRef.slice(CONCEPT_PREFIX.length));
         meta.appendChild(a);
+      }
+      if (ctx.seeLink) {
+        (e.see || []).forEach(function (ref) {
+          var t = ctx.seeLink(ref);
+          if (!t) return;
+          var s = el('a', 'atlas-dict-chip', 'ดู ' + t.label + ' →');
+          s.href = t.href;
+          s.addEventListener('click', function (ev) {
+            if (ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.button) return;
+            ev.preventDefault();
+            t.go();
+          });
+          meta.appendChild(s);
+        });
       }
       if (e.note) li.appendChild(el('div', 'atlas-dict-note', e.note));
       li.appendChild(meta);
@@ -294,9 +323,41 @@
     }
   };
 
+  function isLocalHost() {
+    var h = location.hostname;
+    return location.protocol === 'file:' || h === 'localhost' || h === '127.0.0.1' || h === '[::1]';
+  }
+
+  // registry volume -> page volume (url with cache-buster); private volumes only on localhost
+  function fromRegistry(reg) {
+    var local = isLocalHost();
+    return (reg && reg.volumes || []).filter(function (v) {
+      return v.visibility !== 'private' || local;
+    }).map(function (v) {
+      var t = v.book ? 'เล่ม ' + v.book + ' · ' + v.title : v.title;
+      return {
+        id: v.id, type: v.type, ns: v.ns || null, idPrefix: v.idPrefix || null,
+        title: (v.visibility === 'private' ? '🔒 ' : '') + t, sub: v.sub,
+        url: v.url + (v.v ? '?v=' + encodeURIComponent(v.v) : '')
+      };
+    });
+  }
+
   function mountPage(host, opts) {
     if (!host) return;
     opts = opts || {};
+    if (opts.registry && !opts.volumes) {
+      fetch(opts.registry).then(function (r) {
+        if (!r.ok) throw new Error(opts.registry + ' ' + r.status);
+        return r.json();
+      }).then(function (reg) {
+        mountPage(host, { volumes: fromRegistry(reg) });
+      }).catch(function (err) {
+        injectCss();
+        host.appendChild(el('div', 'atlas-dict-err', 'โหลดรายชื่อเล่มพจนานุกรมไม่สำเร็จ: ' + String(err && err.message || err)));
+      });
+      return;
+    }
     var vols = opts.volumes || [];
     injectCss();
     if (!document.getElementById('atlas-dv-css')) {
@@ -317,16 +378,38 @@
       cache[v.id].catch(function () { delete cache[v.id]; });
       return cache[v.id];
     }
-    function select(v) {
+    var byNs = {};
+    vols.forEach(function (v) { if (v.ns) byNs[v.ns] = v; });
+    function pageHref(v, q) {
+      return '?' + (q ? 'q=' + encodeURIComponent(q) : '') + '#' + v.id;
+    }
+    // "<ns>:<slug>" -> link into that book with the slug's words pre-searched
+    function seeLink(ref) {
+      var i = String(ref).indexOf(':');
+      var v = i > 0 && byNs[ref.slice(0, i)];
+      if (!v) return null;
+      var words = ref.slice(i + 1).replace(/-/g, ' ');
+      return {
+        href: pageHref(v, words),
+        label: words + (v.id === current ? '' : ' (' + v.title.replace(/^🔒 /, '') + ')'),
+        go: function () { select(v, words); }
+      };
+    }
+    var current = null;
+    function select(v, query) {
+      current = v.id;
       vols.forEach(function (x) { btns[x.id].setAttribute('aria-selected', String(x === v)); });
-      try { history.replaceState(null, '', '#' + v.id); } catch (e) { /* ignore */ }
+      try { history.replaceState(null, '', pageHref(v, query)); } catch (e) { /* ignore */ }
       panel.textContent = '';
       var body = el('div', 'atlas-dict-body');
       body.appendChild(el('div', 'atlas-dict-empty', 'กำลังโหลด…'));
       panel.appendChild(body);
       load(v).then(function (doc) {
         if (btns[v.id].getAttribute('aria-selected') !== 'true') return;
-        if (v.type === 'law') render(body, doc.entries || []);
+        if (v.type === 'law') render(body, doc.entries || [], {
+          query: query || '', seeLink: seeLink,
+          emptyText: 'เล่มนี้ยังไม่มีรายการ — กำลังตรวจศัพท์กับแหล่งที่มาก่อนเผยแพร่'
+        });
         else renderFlat(body, doc, SPEC[v.type]);
         btns[v.id].textContent = v.title + ' (' + (doc.entries || []).length.toLocaleString('th-TH') + ')';
       }).catch(function (err) {
@@ -340,8 +423,11 @@
       b.addEventListener('click', function () { select(v); });
       tabs.appendChild(b); btns[v.id] = b;
     });
+    if (!vols.length) return;
     var want = (location.hash || '').replace('#', '');
-    select(vols.filter(function (v) { return v.id === want; })[0] || vols[0]);
+    var q0 = '';
+    try { q0 = new URLSearchParams(location.search).get('q') || ''; } catch (e) { /* ignore */ }
+    select(vols.filter(function (v) { return v.id === want; })[0] || vols[0], q0);
   }
 
   global.AtlasDictionaryView = { mount: mount, mountPage: mountPage };

@@ -34,3 +34,7 @@ __pycache__/
 !/internal/sources/.gitkeep
 /internal/review/*
 !/internal/review/.gitkeep
+
+# Dictionary book 4 (av-mil, military aviation) is PRIVATE: never commit or serve it.
+# GitHub Pages publishes every pushed file. See dictionary-registry.json (visibility).
+/dictionary-military-aviation*.json

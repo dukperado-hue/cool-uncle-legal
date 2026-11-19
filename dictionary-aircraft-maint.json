@@ -1,0 +1,6 @@
+{
+ "version": "mx-0-1",
+ "generated": "2026-11-20",
+ "principle": "Book 3 (av-mx): Thai-English aircraft maintenance and engineering terms, same schema as book 2 (id atlas:mxterm/<slug>, en, th[], kind, sources[{file,kind}], optional note / see / conceptRef). Only pairs checked against a cited source go here; the AI-assisted drafts stay in the abbr and aviation supplement tabs until each pair is verified.",
+ "entries": []
+}
