@@ -81,8 +81,8 @@
    "airworthiness",
    "sms"
   ],
-  "titleTH": "พจนานุกรม aviation (คำย่อและศัพท์)",
-  "titleEN": "Aviation dictionary (abbreviations and terms)",
+  "titleTH": "พจนานุกรม aviation (คำย่อ)",
+  "titleEN": "Aviation dictionary (abbreviations)",
   "status": "seeded",
   "provenance": {
    "origin": "ai-assisted",
@@ -92,10 +92,6 @@
    {
     "type": "dict-header",
     "volume": "abbr"
-   },
-   {
-    "type": "dict-header",
-    "volume": "terms"
    },
    {
     "type": "para",

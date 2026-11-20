@@ -1,5 +1,5 @@
 {
- "version": "av-1-1",
+ "version": "av-1-2",
  "generated": "2026-11-20",
  "principle": "Thai-English aviation-law term pairs from enacted wording (พ.ร.บ.การเดินอากาศ ม.4 + CAAT English translation, ข้อกำหนด กพท. 22/32), the Chicago Convention translation by Somchai Piputwat, terms he discusses in his commentary, and the locked terms of the internal Thai translation of ICAO Annex 19 (3rd ed. 2025; terms only, the Annex text is ICAO copyright). note = short usage remark, not a definition.",
  "entries": [
@@ -55,7 +55,8 @@
    "en": "Accountability",
    "th": [
     "ความรับผิดชอบในผลลัพธ์",
-    "ภาระรับผิด"
+    "ภาระรับผิด",
+    "ภาระรับผิดชอบ"
    ],
    "kind": "term",
    "sources": [
@@ -63,6 +64,11 @@
      "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
      "kind": "icao-annex"
     }
+   ],
+   "note": "บริบท SMS ตาม ICAO Annex 19: ภาระรับผิดชอบสูงสุดต่อความปลอดภัยอยู่ที่ผู้บริหารระดับสูงผู้รับผิดชอบ (accountable executive) — คำแปล Annex 19 ภายในล็อกไว้ว่า \"ความรับผิดชอบในผลลัพธ์ (ภาระรับผิด)\"; คำร่วมกับเล่ม 1 คือ \"ภาระรับผิดชอบ\"",
+   "see": [
+    "av-law:accountable-executive",
+    "law:accountability"
    ]
   },
   {
@@ -3806,7 +3812,8 @@
    "id": "atlas:avterm/sovereignty",
    "en": "Sovereignty",
    "th": [
-    "อธิปไตย"
+    "อธิปไตย",
+    "อำนาจอธิปไตย"
    ],
    "kind": "heading",
    "sources": [
@@ -3814,6 +3821,10 @@
      "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 1",
      "kind": "treaty"
     }
+   ],
+   "note": "ชื่อข้อ 1 อนุสัญญาชิคาโก (คำแปลของสมชายใช้ \"อธิปไตย\"): รัฐมีอำนาจอธิปไตยโดยสมบูรณ์และแต่ผู้เดียวเหนือห้วงอากาศเหนือดินแดนของตน (complete and exclusive sovereignty over the airspace above its territory) — คำร่วมกับเล่ม 1 คือ \"อำนาจอธิปไตย\"",
+   "see": [
+    "law:sovereignty"
    ]
   },
   {

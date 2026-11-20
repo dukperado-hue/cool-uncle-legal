@@ -1,5 +1,5 @@
 {
- "version": "reg-1",
+ "version": "reg-2",
  "generated": "2026-11-20",
  "principle": "One registry for every Dictionary volume. A book owns a namespace (ns) used for cross-links written as \"<ns>:<slug>\", where slug is the part of an entry id after idPrefix. conceptRef (atlas:concept/<slug>, including seed-NNNN) points into the Atlas concept layer, not into a book. visibility \"private\" = never committed (the data file is gitignored) and never shown on the public site; the viewer lists it only on localhost.",
  "volumes": [
@@ -13,7 +13,7 @@
    "title": "กฎหมาย",
    "sub": "ศัพท์กฎหมายอังกฤษ ↔ ไทย: แพ่ง อาญา มหาชน และ Legal English",
    "url": "atlas-dictionary.json",
-   "v": "d1-12-0"
+   "v": "d1-13-0"
   },
   {
    "book": 2,
@@ -25,7 +25,7 @@
    "title": "กฎหมายการบิน",
    "sub": "ศัพท์กฎหมายการบินและความปลอดภัย ไทย ↔ อังกฤษ (พ.ร.บ.การเดินอากาศ · ข้อกำหนด กพท. · อนุสัญญาชิคาโก · ICAO Annex 19 · บทความ สมชาย พิพุธวัฒน์)",
    "url": "dictionary-aviation-law.json",
-   "v": "av-1-1"
+   "v": "av-1-2"
   },
   {
    "book": 3,
@@ -47,9 +47,9 @@
    "type": "law",
    "visibility": "private",
    "title": "การบินทหาร",
-   "sub": "ศัพท์การบินทหารและยุทธวิธี (ส่วนตัว ไม่เผยแพร่)",
+   "sub": "ศัพท์การบินทหาร (ส่วนตัว ไม่เผยแพร่) — รวมร่างศัพท์จากเอกสาร ทอ. ที่ย้ายออกจากเว็บสาธารณะ",
    "url": "dictionary-military-aviation.json",
-   "v": "mil-0-1"
+   "v": "mil-1-0"
   },
   {
    "book": null,
@@ -60,16 +60,6 @@
    "sub": "คำย่อการบินและการซ่อมบำรุง (ร่าง ภาคผนวกของเล่ม 3)",
    "url": "dictionary-aviation-abbr.json",
    "v": "20261004b"
-  },
-  {
-   "book": null,
-   "id": "aviation",
-   "type": "terms",
-   "visibility": "public",
-   "title": "aviation",
-   "sub": "ศัพท์การบินและการซ่อมบำรุง (ร่าง ภาคผนวกของเล่ม 3)",
-   "url": "dictionary-aviation-terms.json",
-   "v": "20261015a"
   }
  ]
 }

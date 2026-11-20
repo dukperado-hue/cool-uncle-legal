@@ -35,7 +35,7 @@
     textbook: 'ตำรา', 'lecture-audio': 'เสียงบรรยาย', 'course-spec': 'แผนรายวิชา',
     'lecture-page': 'หน้าบรรยายวิชา',
     statute: 'บทนิยามในกฎหมาย', regulation: 'ข้อกำหนด กพท.', treaty: 'อนุสัญญาชิคาโก (คำแปล)', commentary: 'บทความ สมชาย พิพุธวัฒน์',
-    'icao-annex': 'ICAO Annex (คำแปลภายใน)'
+    'icao-annex': 'ICAO Annex (คำแปลภายใน)', 'code-provision': 'ตัวบทกฎหมาย', 'rtaf-doc': 'เอกสาร ทอ.'
   };
   var CONCEPT_PREFIX = 'atlas:concept/';
 
@@ -146,15 +146,17 @@
     body.appendChild(list);
 
     var index = entries.map(function (e) {
-      return { e: e, hay: fold(e.en + ' ' + (e.th || []).join(' ') + ' ' + (e.note || '')) };
+      return { e: e, hay: fold(e.en + ' ' + (e.th || []).join(' ') + ' ' + (e.note || '') + ' ' + (e.ctx || '')) };
     });
 
     function row(e) {
       var li = el('li', 'atlas-dict-row');
       li.appendChild(el('div', 'atlas-dict-en', e.en));
-      li.appendChild(el('div', 'atlas-dict-th', (e.th || []).join(' · ')));
+      li.appendChild(el('div', 'atlas-dict-th', (e.th || []).join(' · ') || '—'));
+      if (e.ctx) li.appendChild(el('div', 'atlas-dv-ctx', e.ctx));
       var meta = el('div', 'atlas-dict-meta');
       meta.appendChild(el('span', 'atlas-dict-chip', KIND_LABEL[e.kind] || e.kind));
+      if (e.draft) meta.appendChild(el('span', 'atlas-dict-chip', 'ร่าง ยังไม่ตรวจกับต้นฉบับ'));
       var seen = {};
       (e.sources || []).forEach(function (s) {
         if (seen[s.kind]) return;

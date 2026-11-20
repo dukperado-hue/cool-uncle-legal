@@ -7,7 +7,7 @@
 <meta name="description" content="พจนานุกรม Thai Legal Atlas — ศัพท์กฎหมายอังกฤษ ↔ ไทย, ศัพท์กฎหมายการบิน ศัพท์ช่างอากาศยาน คำย่อการบิน พร้อมแหล่งที่มา">
 <link rel="canonical" href="https://coolunclelab.com/dictionary.html">
 <!--
-  dictionary.html :: tabbed Dictionary: 4 books (law · av-law · av-mx · av-mil) + 2 aviation supplements.
+  dictionary.html :: tabbed Dictionary: 4 books (law · av-law · av-mx · av-mil) + the abbr supplement.
   STANDALONE: the volume list comes from dictionary-registry.json; atlas-dictionary-view.js
   (mountPage) loads each book. Book 4 (av-mil) is private: gitignored, listed only on localhost.
 -->
@@ -89,17 +89,17 @@
 <div class="dict-wrap">
   <header class="dict-masthead">
     <h1>📖 พจนานุกรม · Dictionary</h1>
-    <p>เล่ม 1 กฎหมาย · เล่ม 2 กฎหมายการบิน · เล่ม 3 ช่างอากาศยาน (พร้อมภาคผนวกคำย่อและศัพท์การบิน) — ศัพท์อังกฤษ ↔ ไทย พร้อมแหล่งที่มา</p>
+    <p>เล่ม 1 กฎหมาย · เล่ม 2 กฎหมายการบิน · เล่ม 3 ช่างอากาศยาน (พร้อมภาคผนวกคำย่อ) — ศัพท์อังกฤษ ↔ ไทย พร้อมแหล่งที่มา</p>
   </header>
   <div id="atlas-dictionary"><noscript>ต้องเปิด JavaScript เพื่อดูพจนานุกรม</noscript></div>
 </div>
 
-<script src="atlas-dictionary-view.js?v=20261120a"></script>
+<script src="atlas-dictionary-view.js?v=20261120b"></script>
 <script>
 (function () {
   'use strict';
   AtlasDictionaryView.mountPage(document.getElementById('atlas-dictionary'), {
-    registry: 'dictionary-registry.json?v=reg-1'
+    registry: 'dictionary-registry.json?v=reg-2'
   });
 })();
 </script>

@@ -1888,8 +1888,8 @@ function warn(name, detail) {
 
   const KINDS = new Set(['term', 'collocation', 'usage', 'latin', 'structure', 'profession', 'heading']);
   const SRCS = new Set(['handout', 'slides', 'oldexam', 'textbook', 'lecture-audio', 'course-spec', 'lecture-page',
-                        'statute', 'regulation', 'treaty', 'commentary', 'icao-annex']);
-  const KEYS = new Set(['id', 'en', 'th', 'kind', 'sources', 'note', 'see', 'conceptRef']);
+                        'statute', 'regulation', 'treaty', 'commentary', 'icao-annex', 'code-provision', 'rtaf-doc']);
+  const KEYS = new Set(['id', 'en', 'th', 'kind', 'sources', 'note', 'see', 'conceptRef', 'ctx', 'draft']);
   const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
   const nsBook = {};
   books.forEach(b => { nsBook[b.ns] = b; });
@@ -1913,8 +1913,11 @@ function warn(name, detail) {
     bad('every id = ' + b.idPrefix + '<slug> (namespace prefix of this book)',
         e => typeof e.id === 'string' && e.id.indexOf(b.idPrefix) === 0 && SLUG.test(e.id.slice(b.idPrefix.length)));
     bad('required en (term) is a non-empty string', e => typeof e.en === 'string' && e.en.trim() === e.en && e.en.length > 0);
-    bad('required th (translation) is a non-empty array of non-empty strings',
-        e => Array.isArray(e.th) && e.th.length > 0 && e.th.every(t => typeof t === 'string' && t.trim().length > 0));
+    bad('required th (translation) is a non-empty array of non-empty strings (may be empty only on a draft row)',
+        e => Array.isArray(e.th) && (e.th.length > 0 || e.draft === true) && e.th.every(t => typeof t === 'string' && t.trim().length > 0));
+    bad('optional draft is true, and drafts (unverified rows) exist only in a private book',
+        e => e.draft === undefined || (e.draft === true && b.visibility === 'private'));
+    bad('optional ctx, when present, is a non-empty string', e => e.ctx === undefined || (typeof e.ctx === 'string' && e.ctx.trim().length > 0));
     bad('required kind (category) is a known kind', e => KINDS.has(e.kind));
     bad('required sources[] each have file + known kind',
         e => Array.isArray(e.sources) && e.sources.length > 0 && e.sources.every(s => s && typeof s.file === 'string' && s.file.length > 0 && SRCS.has(s.kind)));
@@ -1968,8 +1971,9 @@ function warn(name, detail) {
   ok('D3 cross-links and conceptRefs checked', true, seeTotal + ' see links (' + seeBroken + ' broken), ' + refTotal + ' conceptRefs');
 
   // the same English headword in two books with no Thai rendering in common
+  // (draft rows are unverified and live only in the private book: not compared)
   const firstBook = {};
-  books.forEach(b => (docs[b.id] ? docs[b.id].entries : []).forEach(e => {
+  books.forEach(b => (docs[b.id] ? docs[b.id].entries : []).filter(e => !e.draft).forEach(e => {
     const k = e.en.toLowerCase().replace(/\s*\(.*?\)/g, '').trim();
     (firstBook[k] = firstBook[k] || []).push([b.ns, e]);
   }));
@@ -1982,25 +1986,43 @@ function warn(name, detail) {
     if (!shared) warn('D4 "' + k + '" is rendered differently across books', hits.map(h => h[0] + ': ' + h[1].th.join(' / ')).join(' | '));
   });
 
-  // open decisions carried from the D1 audit (2026-10-03): reported until the data settles them
+  // the 10 translation decisions from the D1 audit (2026-10-03), settled 2026-11-20.
+  // Each rule is the decision itself; it FAILS if later data drifts away from it.
   const law = docs.law ? docs.law.entries : [];
-  const thOf = en => { const e = law.find(x => x.en.toLowerCase() === en.toLowerCase()); return e ? e.th.join(' / ') : '(no entry)'; };
-  const cTitle = s => concepts[s] ? concepts[s].titleTH + ' = ' + (concepts[s].titleEN || '(no titleEN)') + ' [' + concepts[s].status + ']' : '(no concept ' + s + ')';
+  const lawBy = slug => law.find(x => x.id === 'atlas:term/' + slug);
+  const has = (slug, th0, ref) => { const e = lawBy(slug); return !!e && (!th0 || e.th[0] === th0) && (!ref || e.conceptRef === 'atlas:concept/' + ref) && !!e.note; };
+  const cEN = s => (concepts[s] && concepts[s].titleEN) || '';
   [
-    ['Rescission vs Termination', () => 'Rescission: ' + thOf('Rescission') + ' · Termination: ' + thOf('Termination')],
-    ['Thing vs Property', () => 'Thing: ' + thOf('Thing') + ' · Property: ' + thOf('Property') + ' · concept sap ' + cTitle('sap')],
-    ['Custom vs Ordinary usage', () => 'Custom: ' + thOf('Custom') + ' · Ordinary usage: ' + thOf('Ordinary usage')],
-    ['Juristic act / Juridical act / Legal transaction', () => ['Juristic act', 'Juridical act', 'Legal transaction'].map(x => x + ': ' + thOf(x)).join(' · ')],
-    ['Betrothal vs Engagement', () => 'Betrothal: ' + thOf('Betrothal') + ' · Engagement: ' + thOf('Engagement')],
-    ['สินสอด: concept seed-0354 vs lecturer (Sinsod)', () => cTitle('seed-0354') + ' · Sinsod: ' + thOf('Sinsod')],
-    ['Rule of law: หลักนิติรัฐ vs หลักนิติธรรม', () => 'Rule of law: ' + thOf('Rule of law') + ' · concept lak-nititham ' + cTitle('lak-nititham')],
-    ['Forfeiture vs Confiscation (seed-0338)', () => 'Forfeiture of property: ' + thOf('Forfeiture of property') + ' · ' + cTitle('seed-0338')],
-    ['Fraud: กลฉ้อฉล (civil) vs ฉ้อโกง (criminal)', () => 'Fraud: ' + thOf('Fraud')],
-    ['Intent: จงใจ (seed-0446) vs เจตนา (seed-0484)', () => cTitle('seed-0446') + ' · ' + cTitle('seed-0484')],
-  ].forEach(([name, f]) => warn('D5 open translation decision: ' + name, f()));
-  [['seed-0432', 'nitikam'], ['seed-0288', 'samkanphid'], ['seed-0053', 'krobkrong-parapak'], ['seed-0320', 'phayayam'], ['seed-0316', 'seed-0459']]
-    .forEach(([a, b]) => { if (concepts[a] && concepts[b]) warn('D5 duplicate concept pair still open', a + ' (' + cTitle(a) + ') vs ' + b + ' (' + cTitle(b) + ')');
-                           else if (concepts[a] && !concepts[b]) warn('D5 duplicate concept check: twin not found', a + ' ' + cTitle(a) + ' — expected twin ' + b + ' is absent'); });
+    ['1 Rescission = การเลิกสัญญา (ม.386-391, handout) · Termination = เอกเทศสัญญาบางชนิด · Avoid = บอกล้าง (ม.175-176)',
+     has('rescission', 'การเลิกสัญญา', 'kan-loek-sanya') && has('termination') && has('avoid', 'บอกล้างโมฆียะกรรม', 'mokhiya') && /^Rescission/.test(cEN('kan-loek-sanya'))],
+    ['2 Thing = ทรัพย์ (ม.137) · Property = ทรัพย์สิน (ม.138)',
+     has('thing', 'ทรัพย์', 'sap') && has('property', 'ทรัพย์สิน', 'sap') && /^Thing · Property/.test(cEN('sap'))],
+    ['3 Custom = จารีตประเพณี (ม.4) · Ordinary usage = ปกติประเพณี (ม.368)', has('custom', 'จารีตประเพณี') && has('ordinary-usage', 'ปกติประเพณี')],
+    ['4 Juristic act / Juridical act / Legal transaction = นิติกรรม (Juristic act หลัก)',
+     ['juristic-act', 'juridical-act', 'legal-transaction'].every(s => has(s, null, 'nitikam'))],
+    ['5 Betrothal = การหมั้น (หลัก) · Engagement = คำทั่วไป', has('betrothal', 'การหมั้น') && has('engagement', 'การหมั้น')],
+    ['6 Sinsod = สินสอด (ม.1437 วรรคสาม), ไม่ใช่ Dowry', has('sinsod', 'สินสอด', 'seed-0354') && !/dowry/i.test(cEN('seed-0354'))],
+    ['7 Rule of law = หลักนิติธรรม (เทียบ หลักนิติรัฐ / Rechtsstaat)', has('rule-of-law', 'หลักนิติธรรม', 'lak-nititham') && /นิติรัฐ/.test(lawBy('rule-of-law').note)],
+    ['8 Forfeiture = ริบทรัพย์สิน (ป.อ. ม.18 (5)) · Confiscation = ยึดเป็นของรัฐ',
+     has('forfeiture-of-property', 'ริบทรัพย์สิน', 'seed-0338') && has('confiscation-of-property') && /^Forfeiture/.test(cEN('seed-0338'))],
+    ['9 Fraud: กลฉ้อฉล (ม.159) / ฉ้อโกง (ป.อ. ม.341)', has('fraud', 'กลฉ้อฉล') && /159/.test(lawBy('fraud').note) && /341/.test(lawBy('fraud').note)],
+    ['10 Intent = เจตนา (ป.อ. ม.59) · Wilfully = จงใจ (ป.พ.พ. ม.420)',
+     has('intent-intention', 'เจตนา', 'kan-kratham-chetana-pramat') && has('wilfully', 'จงใจ', 'seed-0446')],
+  ].forEach(([name, cond]) => ok('D5 translation decision ' + name, cond));
+
+  // duplicate concepts: a seed whose title repeats a published concept (or an agreed pair) must carry the
+  // audit note "… atlas:concept/<canonical> … ห้ามเผยแพร่ซ้ำ" (precedent seed-0242/seed-0498, commit a8c7707d)
+  const settled = s => /ห้ามเผยแพร่ซ้ำ/.test(((concepts[s] || {}).authoring || {}).provenance || '');
+  const pointsTo = (s, t) => settled(s) && (concepts[s].authoring.provenance.indexOf('atlas:concept/' + t) !== -1);
+  [['seed-0432', 'nitikam'], ['seed-0288', 'samkanphid'], ['seed-0053', 'krobkrong-parapak'],
+   ['seed-0320', 'phayayam-kratham-khwamphid'], ['seed-0459', 'seed-0316']]
+    .forEach(([s, t]) => ok('D5 duplicate concept ' + s + ' points at canonical ' + t, !!concepts[t] && pointsTo(s, t)));
+  const normTH = x => String(x || '').replace(/\s*\(.*?\)/g, '').trim().replace(/^(การ|ความ)/, '').replace(/\s+/g, '');
+  const pubNames = {};
+  Object.keys(concepts).forEach(k => { const c = concepts[k]; if (c.status !== 'published') return;
+    [c.titleTH].concat(c.aliases || []).forEach(n => { (pubNames[normTH(n)] = pubNames[normTH(n)] || []).push(k); }); });
+  Object.keys(concepts).filter(k => concepts[k].status === 'seed' && pubNames[normTH(concepts[k].titleTH)] && !settled(k))
+    .forEach(k => warn('D5 seed repeats a published concept and has no audit note', k + ' ' + concepts[k].titleTH + ' ~ ' + pubNames[normTH(concepts[k].titleTH)].join(', ')));
 
   // flat supplements (abbr / terms): light shape check only
   vols.filter(v => !v.book).forEach(v => {

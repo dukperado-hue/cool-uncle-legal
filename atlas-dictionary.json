@@ -1,5 +1,5 @@
 {
- "version": "d1-12-0",
+ "version": "d1-13-0",
  "generated": "2026-11-20",
  "principle": "Overlay only: an English-Thai term layer over the Legal English sources. conceptRef points to an existing Atlas concept id and is present only when confirmed; the Dictionary never stores definitions, provisions, subject tags or relations of its own.",
  "entries": [
@@ -2818,14 +2818,24 @@
    "id": "atlas:term/forfeiture-of-property",
    "en": "Forfeiture of property",
    "th": [
-    "ริบทรัพย์สิน"
+    "ริบทรัพย์สิน",
+    "การริบทรัพย์สิน"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "legaleng.html ครั้งที่ 8",
      "kind": "lecture-page"
+    },
+    {
+     "file": "ป.อ. ม.18 (5), 32-34",
+     "kind": "code-provision"
     }
+   ],
+   "conceptRef": "atlas:concept/seed-0338",
+   "note": "โทษทางอาญาสถานหนึ่งตาม ป.อ. ม.18 (5) — ริบภาคบังคับ (ม.32, 34) และริบตามดุลพินิจ (ม.33)",
+   "see": [
+    "law:confiscation-of-property"
    ]
   },
   {
@@ -4169,6 +4179,12 @@
      "file": "legaleng.html ครั้งที่ 6",
      "kind": "lecture-page"
     }
+   ],
+   "conceptRef": "atlas:concept/nitikam",
+   "note": "คำมาตรฐานของตำราไทยส่วนใหญ่และคำแปล ป.พ.พ. — ทั้ง Juristic act, Juridical act และ Legal transaction แปลว่า \"นิติกรรม\" ในระบบ Civil Law คำหลักใน Atlas คือ Juristic act",
+   "see": [
+    "law:juridical-act",
+    "law:legal-transaction"
    ]
   },
   {
@@ -4183,6 +4199,12 @@
      "file": "legaleng.html ครั้งที่ 6",
      "kind": "lecture-page"
     }
+   ],
+   "conceptRef": "atlas:concept/nitikam",
+   "note": "คำของประมวลกฎหมายแพ่งเยอรมัน (BGB) และตำรา ศ.ไชยยศ — ทั้ง Juristic act, Juridical act และ Legal transaction แปลว่า \"นิติกรรม\" ในระบบ Civil Law คำหลักใน Atlas คือ Juristic act",
+   "see": [
+    "law:juristic-act",
+    "law:juridical-act"
    ]
   },
   {
@@ -4197,6 +4219,12 @@
      "file": "legaleng.html ครั้งที่ 6",
      "kind": "lecture-page"
     }
+   ],
+   "conceptRef": "atlas:concept/nitikam",
+   "note": "คำของประมวลกฎหมายแพ่งฝรั่งเศส (Code civil) — ทั้ง Juristic act, Juridical act และ Legal transaction แปลว่า \"นิติกรรม\" ในระบบ Civil Law คำหลักใน Atlas คือ Juristic act",
+   "see": [
+    "law:juristic-act",
+    "law:legal-transaction"
    ]
   },
   {
@@ -4322,7 +4350,17 @@
     {
      "file": "legaleng.html ครั้งที่ 6",
      "kind": "lecture-page"
+    },
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
     }
+   ],
+   "conceptRef": "atlas:concept/kan-loek-sanya",
+   "note": "การเลิกสัญญาตามหลักทั่วไป (ป.พ.พ. ม.386-391): เลิกแล้วคู่สัญญาต้องกลับคืนสู่ฐานะเดิม (ม.391) handout ของอาจารย์ระบุว่าบททั่วไปใช้ rescind/rescission; ศ.กมลและ ศ.เข็มชัยใช้ rescission ส่วนฉบับกฤษฎีกาใช้ termination — ไม่ใช่ \"การบอกล้าง\" ซึ่งคือ avoid (ม.175-176)",
+   "see": [
+    "law:termination",
+    "law:avoid"
    ]
   },
   {
@@ -4813,7 +4851,9 @@
      "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 2",
      "kind": "textbook"
     }
-   ]
+   ],
+   "conceptRef": "atlas:concept/lak-nititham",
+   "note": "คำหลักคือ หลักนิติธรรม (รัฐธรรมนูญ 2560 ม.3 วรรคสอง และความหมายสากลของ rule of law) — หลักนิติรัฐมาจากแนวคิด Rechtsstaat ของกฎหมายมหาชนภาคพื้นทวีป เน้นรัฐผูกพันตามกฎหมาย มักถูกใช้ปนกัน แต่ไม่ใช่คำเดียวกัน"
   },
   {
    "id": "atlas:term/thin-formal-rule-of-law",
@@ -5036,7 +5076,16 @@
     {
      "file": "legaleng.html ครั้งที่ 8",
      "kind": "lecture-page"
+    },
+    {
+     "file": "ป.อ. ม.59",
+     "kind": "code-provision"
     }
+   ],
+   "conceptRef": "atlas:concept/kan-kratham-chetana-pramat",
+   "note": "ทางอาญา: เจตนา ตาม ป.อ. ม.59 วรรคสอง (รู้สำนึกในการกระทำ ประสงค์ต่อผลหรือเล็งเห็นผล) — ทางละเมิด ป.พ.พ. ม.420 ใช้ wilfully แปลว่า \"จงใจ\"",
+   "see": [
+    "law:wilfully"
    ]
   },
   {
@@ -5071,6 +5120,8 @@
    "id": "atlas:term/custom",
    "en": "Custom",
    "th": [
+    "จารีตประเพณี",
+    "จารีตประเพณีแห่งท้องถิ่น",
     "จารีตประเพณีระหว่างประเทศ"
    ],
    "kind": "term",
@@ -5078,7 +5129,15 @@
     {
      "file": "legaleng.html ครั้งที่ 9",
      "kind": "lecture-page"
+    },
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
     }
+   ],
+   "note": "ป.พ.พ. ม.4 วรรคสอง: เมื่อไม่มีบทกฎหมายที่จะยกมาปรับ ให้วินิจฉัยตามจารีตประเพณีแห่งท้องถิ่น (local custom) — เป็นบ่อเกิดของกฎหมาย; ในกฎหมายระหว่างประเทศคือจารีตประเพณีระหว่างประเทศ ต่างจาก ordinary usage ที่ใช้ตีความเจตนา",
+   "see": [
+    "law:ordinary-usage"
    ]
   },
   {
@@ -5175,7 +5234,8 @@
    "id": "atlas:term/sovereignty",
    "en": "Sovereignty",
    "th": [
-    "อำนาจอธิปไตย"
+    "อำนาจอธิปไตย",
+    "อธิปไตย"
    ],
    "kind": "term",
    "sources": [
@@ -5187,6 +5247,10 @@
      "file": "legaleng.html ครั้งที่ 10",
      "kind": "lecture-page"
     }
+   ],
+   "note": "รัฐธรรมนูญ (อำนาจอธิปไตยเป็นของปวงชนชาวไทย) และกฎหมายระหว่างประเทศ (อำนาจสูงสุดของรัฐเหนือดินแดน) — ด้านการบินดูอธิปไตยเหนือห้วงอากาศ (อนุสัญญาชิคาโก ข้อ 1)",
+   "see": [
+    "av-law:sovereignty"
    ]
   },
   {
@@ -6666,6 +6730,8 @@
    "id": "atlas:term/accountability",
    "en": "Accountability",
    "th": [
+    "ความรับผิดชอบที่ตรวจสอบได้",
+    "ภาระรับผิดชอบ",
     "ความรับผิดชอบ",
     "ความสามารถตรวจสอบได้"
    ],
@@ -6675,6 +6741,10 @@
      "file": "legaleng.html ครั้งที่ 10",
      "kind": "lecture-page"
     }
+   ],
+   "note": "กฎหมายมหาชน/ธรรมาภิบาล: ผู้ใช้อำนาจต้องรับผิดชอบต่อผลและถูกตรวจสอบได้ — ด้านความปลอดภัยการบินดู accountability ใน SMS",
+   "see": [
+    "av-law:accountability"
    ]
   },
   {
@@ -10324,6 +10394,266 @@
      "file": "ภาษาอังกฤษกฎหมาย (LEGAL ENGLISH) · สรวิศ ลิมปรังษี · สำนักงานศาลยุติธรรม 2554 · บทที่ 7",
      "kind": "textbook"
     }
+   ]
+  },
+  {
+   "id": "atlas:term/termination",
+   "en": "Termination",
+   "th": [
+    "การเลิกสัญญา (เอกเทศสัญญาบางชนิด)",
+    "การบอกเลิกสัญญา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    },
+    {
+     "file": "legaleng.html แบบฝึกศัพท์ (ข้อหลอก) ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ],
+   "note": "ใช้กับการเลิกสัญญาในเอกเทศสัญญาบางชนิด โดยเฉพาะสัญญาต่อเนื่อง เช่น เช่า จ้างแรงงาน ซึ่งยุติสัญญานับแต่เลิกเป็นต้นไป — ต่างจาก rescission ตามบททั่วไป (ม.386-391) ที่คู่สัญญาต้องกลับคืนสู่ฐานะเดิม",
+   "see": [
+    "law:rescission"
+   ]
+  },
+  {
+   "id": "atlas:term/avoid",
+   "en": "Avoid (a voidable act)",
+   "th": [
+    "บอกล้างโมฆียะกรรม",
+    "การบอกล้าง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ],
+   "conceptRef": "atlas:concept/mokhiya",
+   "note": "ป.พ.พ. ม.175-176: โมฆียะกรรมที่ถูกบอกล้างแล้วถือว่าเป็นโมฆะมาแต่เริ่มแรก คู่กรณีต้องกลับคืนสู่ฐานะเดิม — ใช้กับนิติกรรม ไม่ใช่การเลิกสัญญา (rescission)",
+   "see": [
+    "law:voidable",
+    "law:rescission"
+   ]
+  },
+  {
+   "id": "atlas:term/thing",
+   "en": "Thing",
+   "th": [
+    "ทรัพย์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "แนวทางการตอบข้อสอบเก็บคะแนน น.270 · ชุดที่ 1 ข้อ 10",
+     "kind": "oldexam"
+    },
+    {
+     "file": "ป.พ.พ. ม.137",
+     "kind": "code-provision"
+    }
+   ],
+   "conceptRef": "atlas:concept/sap",
+   "note": "ป.พ.พ. ม.137: ทรัพย์ หมายความว่า วัตถุมีรูปร่าง",
+   "see": [
+    "law:property"
+   ]
+  },
+  {
+   "id": "atlas:term/property",
+   "en": "Property",
+   "th": [
+    "ทรัพย์สิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "แนวทางการตอบข้อสอบเก็บคะแนน น.270 · ชุดที่ 1 ข้อ 10",
+     "kind": "oldexam"
+    },
+    {
+     "file": "ป.พ.พ. ม.138",
+     "kind": "code-provision"
+    }
+   ],
+   "conceptRef": "atlas:concept/sap",
+   "note": "ป.พ.พ. ม.138: ทรัพย์สิน หมายความรวมทั้งทรัพย์และวัตถุไม่มีรูปร่าง ซึ่งอาจมีราคาและอาจถือเอาได้ — กว้างกว่า Thing",
+   "see": [
+    "law:thing"
+   ]
+  },
+  {
+   "id": "atlas:term/ordinary-usage",
+   "en": "Ordinary usage",
+   "th": [
+    "ปกติประเพณี"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    },
+    {
+     "file": "ป.พ.พ. ม.368",
+     "kind": "code-provision"
+    }
+   ],
+   "note": "การปฏิบัติที่เคยชินตามปกติ (รวมถึงประเพณีทางการค้า) ใช้ประกอบการตีความเจตนาและสัญญา เช่น ม.361 วรรคสอง และ ม.368 (ตีความสัญญาโดยพิเคราะห์ถึงปกติประเพณีด้วย) — ไม่ใช่บ่อเกิดของกฎหมายอย่าง custom (ม.4)",
+   "see": [
+    "law:custom",
+    "law:usage-of-trade"
+   ]
+  },
+  {
+   "id": "atlas:term/betrothal",
+   "en": "Betrothal",
+   "th": [
+    "การหมั้น"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    },
+    {
+     "file": "ป.พ.พ. ม.1435",
+     "kind": "code-provision"
+    }
+   ],
+   "note": "คำหลักตามคำแปล ป.พ.พ. ของ ศ.กมลและ ศ.เข็มชัย (ม.1435 การหมั้นทำได้เมื่อชายและหญิงมีอายุสิบเจ็ดปีบริบูรณ์แล้ว)",
+   "see": [
+    "law:engagement",
+    "law:betrothal-gift"
+   ]
+  },
+  {
+   "id": "atlas:term/engagement",
+   "en": "Engagement",
+   "th": [
+    "การหมั้น"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    }
+   ],
+   "note": "คำที่ใช้ทั่วไป และเป็นคำของคำแปลฉบับกฤษฎีกา (ม.1435) — ในงานเขียนกฎหมายไทยให้ใช้ betrothal เป็นคำหลัก",
+   "see": [
+    "law:betrothal"
+   ]
+  },
+  {
+   "id": "atlas:term/sinsod",
+   "en": "Sinsod",
+   "th": [
+    "สินสอด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    },
+    {
+     "file": "ป.พ.พ. ม.1437 วรรคสาม",
+     "kind": "code-provision"
+    }
+   ],
+   "conceptRef": "atlas:concept/seed-0354",
+   "note": "ป.พ.พ. ม.1437 วรรคสาม: ทรัพย์สินซึ่งฝ่ายชายให้แก่บิดามารดา ผู้รับบุตรบุญธรรม หรือผู้ปกครองฝ่ายหญิง เพื่อตอบแทนการที่หญิงยอมสมรส — ศ.กมลทับศัพท์ Sinsod; อย่าแปลว่า Dowry ซึ่งคือทรัพย์สินที่ฝ่ายหญิงนำมาให้ฝ่ายชายตามธรรมเนียมตะวันตก/อินเดีย ทิศทางตรงข้ามกัน",
+   "see": [
+    "law:bride-price",
+    "law:betrothal"
+   ]
+  },
+  {
+   "id": "atlas:term/bride-price",
+   "en": "Bride price",
+   "th": [
+    "สินสอด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    },
+    {
+     "file": "legaleng.html แบบฝึกศัพท์ (ข้อหลอก) ครั้งที่ 6",
+     "kind": "lecture-page"
+    }
+   ],
+   "conceptRef": "atlas:concept/seed-0354",
+   "note": "คำแปลฉบับกฤษฎีกา (ม.1437) ซึ่งอาจารย์ชี้ว่าอาจทำให้เข้าใจผิดทางวัฒนธรรม (ฟังเหมือนราคาซื้อเจ้าสาว) — นิยมใช้ Sinsod",
+   "see": [
+    "law:sinsod"
+   ]
+  },
+  {
+   "id": "atlas:term/confiscation-of-property",
+   "en": "Confiscation of property",
+   "th": [
+    "การยึดทรัพย์สินเป็นของรัฐ",
+    "การริบทรัพย์สินให้ตกเป็นของแผ่นดิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "พ.ร.บ.ป้องกันและปราบปรามการฟอกเงิน พ.ศ. 2542 (มาตรการทางแพ่งให้ทรัพย์สินตกเป็นของแผ่นดิน)",
+     "kind": "code-provision"
+    }
+   ],
+   "note": "ใช้ในความหมายกว้างว่ารัฐยึดทรัพย์สินมาเป็นของแผ่นดิน เช่น มาตรการทางแพ่งตามกฎหมายฟอกเงิน หรือมาตรการทางมหาชน — เมื่อหมายถึงโทษริบทรัพย์สินทางอาญาตาม ป.อ. ม.18 (5) ให้ใช้ Forfeiture of property",
+   "see": [
+    "law:forfeiture-of-property"
+   ]
+  },
+  {
+   "id": "atlas:term/fraud",
+   "en": "Fraud",
+   "th": [
+    "กลฉ้อฉล",
+    "ฉ้อโกง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "LA270 Dr Korrasut's Handout.pdf",
+     "kind": "handout"
+    },
+    {
+     "file": "ป.อ. ม.341",
+     "kind": "code-provision"
+    }
+   ],
+   "note": "สองบริบท: (1) แพ่ง = กลฉ้อฉล ทำให้การแสดงเจตนาเป็นโมฆียะ (ป.พ.พ. ม.159; handout); (2) อาญา = ความผิดฐานฉ้อโกง (ป.อ. ม.341) — ต้องดูบริบทก่อนแปล"
+  },
+  {
+   "id": "atlas:term/wilfully",
+   "en": "Wilfully / Intentionally (tort)",
+   "th": [
+    "จงใจ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "ป.พ.พ. ม.420",
+     "kind": "code-provision"
+    }
+   ],
+   "conceptRef": "atlas:concept/seed-0446",
+   "note": "ป.พ.พ. ม.420: ผู้ใดจงใจหรือประมาทเลินเล่อ ทำต่อบุคคลอื่นโดยผิดกฎหมาย — ในละเมิดใช้ \"จงใจ\" ส่วนทางอาญาใช้ intent/intention = \"เจตนา\" (ป.อ. ม.59)",
+   "see": [
+    "law:intent-intention",
+    "law:negligence"
    ]
   }
  ]

@@ -7,7 +7,7 @@ It uses the shared engine in [`../engine/`](../engine/README.md) and keeps only 
 site root (coolunclelab.com)
 ├── engine/                 SHARED: theme.css · core.js (icons, theme, data, URN) · shell.js · reader.js · worlds.json
 ├── index.html, atlas.html, concept.html, dictionary.html ...   LEGAL world (unchanged)
-├── dictionary-aviation-*.json, aviation/sources/av-sources.json   existing aviation material (owned there, referenced here)
+├── dictionary-aviation-abbr.json, aviation/sources/av-sources.json   existing aviation material (owned there, referenced here)
 └── Engineer/               ENGINEER world
     ├── index.html subject.html entry.html dictionary.html sources.html    thin pages: no CSS, no colours
     ├── engineer.js         world adapter: data access, page controllers, 3 data-reading reader blocks
@@ -33,7 +33,7 @@ site root (coolunclelab.com)
 * **Entity** (`data/entities/*.json`): one envelope for every mode — `concept | lecture | document | source | reference | provision | topic` — with `body` blocks, `sources`, `related` (URNs, may point into other worlds) and `provenance.origin` (`source-text | derived | ai-assisted | editorial`). `ai-assisted` shows a visible warning banner.
 * **Lecture per session**: `kind:"lecture"` + `lecture:{series,no}`. Tested end-to-end with a throw-away shard (removed). No aviation lecture content exists in the repo, so none is shipped.
 * **URNs**: `<ns>:<kind>/<slug>` — `eng:concept/sms`, `atlas:concept/<slug>`, `av:source/…` (reserved for the aviation raw layer; not linked yet).
-* **Pointers, not copies**: `registry.json › external` points at `../dictionary-aviation-abbr.json`, `../dictionary-aviation-terms.json`, `../aviation/sources/av-sources.json` (paths relative to `Engineer/`). Rows are read live. Cross-world `labelSnapshot` values are drift-checked against Atlas by the validator.
+* **Pointers, not copies**: `registry.json › external` points at `../dictionary-aviation-abbr.json` and `../aviation/sources/av-sources.json` (the RTAF-sourced terms volume moved to the private Dictionary book 4 on 2026-11-20 and is no longer public) (paths relative to `Engineer/`). Rows are read live. Cross-world `labelSnapshot` values are drift-checked against Atlas by the validator.
 * **Publication rule respected**: the source-registry block shows only entries whose `redistribution.status` is `public-source`; `review` entries are counted, never named.
 
 ## Add things without touching engine code

@@ -23,13 +23,6 @@
     "title": "คำย่อ aviation",
     "owner": "legal-atlas-site",
     "status": "draft-ai-assisted"
-   },
-   {
-    "id": "terms",
-    "path": "../dictionary-aviation-terms.json",
-    "title": "ศัพท์ aviation",
-    "owner": "legal-atlas-site",
-    "status": "draft-ai-assisted"
    }
   ],
   "sourceRegistries": [
