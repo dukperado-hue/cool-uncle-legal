@@ -28,14 +28,14 @@
   var KIND_LABEL = {
     term: 'ศัพท์', collocation: 'วลี', usage: 'คำที่ใช้ในบริบท',
     latin: 'ละติน', structure: 'โครงสร้างตัวบท', profession: 'อาชีพ/ตำแหน่ง',
-    heading: 'ชื่อข้อในอนุสัญญา'
+    heading: 'ชื่อข้อในอนุสัญญา', abbr: 'คำย่อ'
   };
   var SRC_LABEL = {
     handout: 'เอกสารประกอบ', slides: 'สไลด์', oldexam: 'ข้อสอบเก่า',
     textbook: 'ตำรา', 'lecture-audio': 'เสียงบรรยาย', 'course-spec': 'แผนรายวิชา',
     'lecture-page': 'หน้าบรรยายวิชา',
     statute: 'บทนิยามในกฎหมาย', regulation: 'ข้อกำหนด กพท.', treaty: 'อนุสัญญาชิคาโก (คำแปล)', commentary: 'บทความ สมชาย พิพุธวัฒน์',
-    'icao-annex': 'ICAO Annex (คำแปลภายใน)', 'code-provision': 'ตัวบทกฎหมาย', 'rtaf-doc': 'เอกสาร ทอ.'
+    'icao-annex': 'ICAO Annex (คำแปลภายใน)', 'code-provision': 'ตัวบทกฎหมาย', 'rtaf-doc': 'กรมช่างอากาศ ทอ.'
   };
   var CONCEPT_PREFIX = 'atlas:concept/';
 

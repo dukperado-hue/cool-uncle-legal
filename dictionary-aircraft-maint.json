@@ -1,6 +1,1311 @@
 {
- "version": "mx-0-1",
+ "version": "mx-1-0",
  "generated": "2026-11-20",
- "principle": "Book 3 (av-mx): Thai-English aircraft maintenance and engineering terms, same schema as book 2 (id atlas:mxterm/<slug>, en, th[], kind, sources[{file,kind}], optional note / see / conceptRef). Only pairs checked against a cited source go here; the AI-assisted drafts stay in the abbr and aviation supplement tabs until each pair is verified.",
- "entries": []
+ "principle": "Book 3 (av-mx): Thai-English aircraft maintenance and engineering terms, same schema as book 2. A pair is listed only when its source pairs the two words itself; the first set (2026-11-20) comes from publicly posted RTAF Directorate of Aeronautical Engineering documents, each pair checked against the document text as \"<thai> (<english>)\". Source links are not reproduced; the document number is kept.",
+ "entries": [
+  {
+   "id": "atlas:mxterm/accumulator",
+   "en": "Accumulator",
+   "th": [
+    "ถังสะสมความดัน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #025",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/actuating-section",
+   "en": "Actuating Section",
+   "th": [
+    "ส่วนให้งานกล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #025",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/adjustable-jaw-wrench",
+   "en": "Adjustable-Jaw Wrench",
+   "th": [
+    "ประแจปากขยาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #096",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/aircraft-maintenance-course",
+   "en": "Aircraft Maintenance Course",
+   "th": [
+    "หลักสูตรช่างซ่อมบำรุงอากาศยาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #090",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/aircraft-maintenance-program",
+   "en": "Aircraft Maintenance Program",
+   "th": [
+    "โปรแกรมการซ่อมบำรุงอากาศยาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #090",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/alclad",
+   "en": "Alclad",
+   "th": [
+    "อัลแคลด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/allen-wrench",
+   "en": "Allen Wrench",
+   "th": [
+    "ประแจแอล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #096",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/anode",
+   "en": "Anode",
+   "th": [
+    "แอโนด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/anodize-coating",
+   "en": "Anodize Coating",
+   "th": [
+    "การเคลือบผิวแบบอะโนไดซ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/audit-program",
+   "en": "Audit Program",
+   "th": [
+    "โปรแกรมการตรวจสอบ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #088",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/augmentor-tube",
+   "en": "Augmentor Tube",
+   "th": [
+    "ท่อเสริม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #026",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/basic-postflight-inspection",
+   "en": "Basic Postflight Inspection",
+   "th": [
+    "การตรวจหลังบินขั้นมูลฐาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #094",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/bending-tools",
+   "en": "Bending Tools",
+   "th": [
+    "เครื่องมือดัดท่อ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/bilge-areas",
+   "en": "Bilge Areas",
+   "th": [
+    "บริเวณบิลจ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/calendar-inspection",
+   "en": "Calendar Inspection",
+   "th": [
+    "การตรวจตามระยะเวลาปฏิทิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #015",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/caliper",
+   "en": "Caliper",
+   "th": [
+    "คาลิเปอร์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/carbide-sensitization",
+   "en": "Carbide Sensitization",
+   "th": [
+    "การไวต่อคาร์ไบด์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/cathode",
+   "en": "Cathode",
+   "th": [
+    "แคโทด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/chemical-conversion-coating",
+   "en": "Chemical Conversion Coating",
+   "th": [
+    "การเคลือบผิวแบบเคมี"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/chemical-spot-test",
+   "en": "Chemical Spot Test",
+   "th": [
+    "การทดสอบทางเคมีแบบจุด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/cognizant-engineer",
+   "en": "Cognizant Engineer",
+   "th": [
+    "วิศวกรผู้รับผิดชอบ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/concentration-cell-corrosion",
+   "en": "Concentration Cell Corrosion",
+   "th": [
+    "การกัดกร่อนแบบเซลล์ความเข้มข้น"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/corrosion-fatigue",
+   "en": "Corrosion Fatigue",
+   "th": [
+    "การล้าจากการกัดกร่อน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/crescent-wrench",
+   "en": "Crescent Wrench",
+   "th": [
+    "ประแจเลื่อน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #096",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/crevice-corrosion",
+   "en": "Crevice Corrosion",
+   "th": [
+    "การกัดกร่อนในร่อง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/cross-point-screwdriver",
+   "en": "Cross Point Screwdriver",
+   "th": [
+    "ไขควงปากแฉก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #096",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/depth-probe",
+   "en": "Depth Probe",
+   "th": [
+    "ก้านวัดลึก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/electric-bench-grinder",
+   "en": "Electric Bench Grinder",
+   "th": [
+    "เครื่องเจียระไนแบบตั้งโต๊ะ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/electric-drill",
+   "en": "Electric Drill",
+   "th": [
+    "สว่านไฟฟ้า"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/emergency-pump",
+   "en": "Emergency Pump",
+   "th": [
+    "สูบฉุกเฉิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #025",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/exfoliation-corrosion",
+   "en": "Exfoliation Corrosion",
+   "th": [
+    "การกัดกร่อนแบบลอกชั้น",
+    "การกัดกร่อนแบบเอ็กซ์โฟลิเอชัน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/files",
+   "en": "Files",
+   "th": [
+    "ตะไบ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/filiform-corrosion",
+   "en": "Filiform Corrosion",
+   "th": [
+    "การกัดกร่อนแบบฟิลิฟอร์ม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/fillet-sealant",
+   "en": "Fillet Sealant",
+   "th": [
+    "ซีลแลนต์แบบฟิลเลต"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/flaring-tools",
+   "en": "Flaring Tools",
+   "th": [
+    "เครื่องมือผายปากท่อ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/fretting-corrosion",
+   "en": "Fretting Corrosion",
+   "th": [
+    "การกัดกร่อนจากการเสียดสีสั่น"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/galvanic-corrosion",
+   "en": "Galvanic Corrosion",
+   "th": [
+    "การกัดกร่อนแบบกัลวานิก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/gauge",
+   "en": "Gauge",
+   "th": [
+    "เกจ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/general-requirements",
+   "en": "General Requirements",
+   "th": [
+    "ข้อกำหนดทั่วไป"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #088",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/graphite-epoxy",
+   "en": "Graphite/Epoxy",
+   "th": [
+    "กราไฟต์/อีพ็อกซี"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/hand-hack-saw",
+   "en": "Hand Hack Saw",
+   "th": [
+    "เลื่อยมือ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/human-resources",
+   "en": "Human Resources",
+   "th": [
+    "ทรัพยากรบุคคล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #088",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/hydrogen-embrittlement",
+   "en": "Hydrogen Embrittlement",
+   "th": [
+    "ความเปราะจากไฮโดรเจน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/inside-caliper-jaws",
+   "en": "Inside Caliper Jaws",
+   "th": [
+    "เขี้ยววัดใน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/intergranular-corrosion",
+   "en": "Intergranular Corrosion",
+   "th": [
+    "การกัดกร่อนตามแนวขอบเกรน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/isochronal-inspection",
+   "en": "Isochronal Inspection",
+   "th": [
+    "การตรวจตามสมกาล"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #094",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/lap-joint",
+   "en": "Lap Joint",
+   "th": [
+    "รอยต่อแบบซ้อน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/length-to-depth-ratio",
+   "en": "Length-to-Depth Ratio",
+   "th": [
+    "อัตราส่วนความยาวต่อความลึก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/letter-check-inspection",
+   "en": "Letter Check Inspection",
+   "th": [
+    "การตรวจตามอักษรภาค"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #094",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/locking-spring",
+   "en": "Locking Spring",
+   "th": [
+    "สปริงล็อค"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/main-scale",
+   "en": "Main Scale",
+   "th": [
+    "สเกลหลัก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/management-responsibility",
+   "en": "Management Responsibility",
+   "th": [
+    "ความรับผิดชอบของฝ่ายบริหาร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #088",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/metal-ion-concentration-cells",
+   "en": "Metal Ion Concentration Cells",
+   "th": [
+    "เซลล์ความเข้มข้นของไอออนโลหะ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/micrometer",
+   "en": "Micrometer",
+   "th": [
+    "ไมโครมิเตอร์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/offset-screwdriver",
+   "en": "Offset Screwdriver",
+   "th": [
+    "ไขควงออฟเซ็ต"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #096",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/on-the-job-training",
+   "en": "On the Job Training",
+   "th": [
+    "การฝึกงานในหน้าที่"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #088",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/open-end-wrench",
+   "en": "Open-End Wrench",
+   "th": [
+    "ประแจปากตาย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #096",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/outside-caliper-jaws",
+   "en": "Outside Caliper Jaws",
+   "th": [
+    "ปากวัดนอก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/oxygen-concentration-cells",
+   "en": "Oxygen Concentration Cells",
+   "th": [
+    "เซลล์ความเข้มข้นของออกซิเจน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/pitting-corrosion",
+   "en": "Pitting Corrosion",
+   "th": [
+    "การกัดกร่อนแบบเป็นหลุม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/popped-rivet-heads",
+   "en": "Popped Rivet Heads",
+   "th": [
+    "หัวหมุดย้ำยกตัว"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/postflight-inspection",
+   "en": "Postflight Inspection",
+   "th": [
+    "การตรวจหลังบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #015",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/preservation-of-products",
+   "en": "Preservation of Products",
+   "th": [
+    "การถนอมรักษาพัสดุ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #088",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/process-control-record",
+   "en": "Process Control Record",
+   "th": [
+    "บันทึกกระบวนการซ่อม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #088",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/progressive-inspection",
+   "en": "Progressive Inspection",
+   "th": [
+    "การตรวจตามภาคก้าวหน้า"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #094",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/protractor",
+   "en": "Protractor",
+   "th": [
+    "เครื่องมือวัดองศา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/quality-management-system",
+   "en": "Quality Management System",
+   "th": [
+    "ระบบบริหารคุณภาพ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #088",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/quality-objective",
+   "en": "Quality Objective",
+   "th": [
+    "เป้าหมายคุณภาพ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #088",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/quality-policy",
+   "en": "Quality Policy",
+   "th": [
+    "นโยบายคุณภาพ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #088",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/reliability",
+   "en": "Reliability",
+   "th": [
+    "ความเชื่อถือได้"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #078",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/resource-management",
+   "en": "Resource Management",
+   "th": [
+    "การบริหารทรัพยากร"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #088",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/rivet-gun",
+   "en": "Rivet Gun",
+   "th": [
+    "ค้อนลม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/rotary-file",
+   "en": "Rotary File",
+   "th": [
+    "ตะไบหมุน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/rule-measuring",
+   "en": "Rule (measuring)",
+   "th": [
+    "บรรทัด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #096",
+     "kind": "rtaf-doc"
+    }
+   ],
+   "note": "บรรทัดวัดขนาด (เครื่องมือวัด) ไม่ใช่ \"กฎ\""
+  },
+  {
+   "id": "atlas:mxterm/screw-pitch-gauge",
+   "en": "Screw Pitch Gauge",
+   "th": [
+    "เกจวัดระยะพิตของเกลียว"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/service-bulletin",
+   "en": "Service Bulletin",
+   "th": [
+    "ข่าวสารด้านบริการ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #090",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/shot-peening",
+   "en": "Shot Peening",
+   "th": [
+    "การยิงเม็ดโลหะ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/shuttle-valve",
+   "en": "Shuttle Valve",
+   "th": [
+    "วาล์วจัดทาง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #025",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/snap-gauge",
+   "en": "Snap Gauge",
+   "th": [
+    "เกจก้ามปู"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #096",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/standard-screwdriver",
+   "en": "Standard Screwdriver",
+   "th": [
+    "ไขควงปากแบน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #096",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/steel-rule",
+   "en": "Steel Rule",
+   "th": [
+    "บรรทัดเหล็ก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/support-document",
+   "en": "Support Document",
+   "th": [
+    "เอกสารสนับสนุน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #088",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/tape-rule",
+   "en": "Tape Rule",
+   "th": [
+    "ตลับเทป"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/technical-skill",
+   "en": "Technical Skill",
+   "th": [
+    "ทักษะความชำนาญทางเทคนิค"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #088",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/tension-meter",
+   "en": "Tension Meter",
+   "th": [
+    "เครื่องวัดความตึงลวด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/test-record",
+   "en": "Test Record",
+   "th": [
+    "บันทึกการทดสอบ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #088",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/training-manual",
+   "en": "Training Manual",
+   "th": [
+    "คู่มือการฝึกอบรมช่างซ่อมบำรุงอากาศยาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #090",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/tube-cutting-tools",
+   "en": "Tube Cutting Tools",
+   "th": [
+    "เครื่องมือตัดท่อ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/uniform-etch-corrosion",
+   "en": "Uniform Etch Corrosion",
+   "th": [
+    "การกัดกร่อนแบบสึกกร่อนสม่ำเสมอ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #012",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/vernier-caliper",
+   "en": "Vernier Caliper",
+   "th": [
+    "เวอร์เนียร์คาลิเปอร์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/vernier-scale",
+   "en": "Vernier Scale",
+   "th": [
+    "สเกลเลื่อน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #095",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/work-instruction",
+   "en": "Work Instruction",
+   "th": [
+    "คำแนะนำการปฏิบัติงาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #088",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:mxterm/work-procedure",
+   "en": "Work Procedure",
+   "th": [
+    "ขั้นตอนการปฏิบัติงาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #088",
+     "kind": "rtaf-doc"
+    }
+   ]
+  }
+ ]
 }

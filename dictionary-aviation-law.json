@@ -1,7 +1,7 @@
 {
- "version": "av-1-2",
+ "version": "av-1-3",
  "generated": "2026-11-20",
- "principle": "Thai-English aviation-law term pairs from enacted wording (พ.ร.บ.การเดินอากาศ ม.4 + CAAT English translation, ข้อกำหนด กพท. 22/32), the Chicago Convention translation by Somchai Piputwat, terms he discusses in his commentary, and the locked terms of the internal Thai translation of ICAO Annex 19 (3rd ed. 2025; terms only, the Annex text is ICAO copyright). note = short usage remark, not a definition.",
+ "principle": "Thai-English aviation-law term pairs from enacted wording (พ.ร.บ.การเดินอากาศ ม.4 + CAAT English translation, ข้อกำหนด กพท. 22/32), the Chicago Convention translation by Somchai Piputwat, terms he discusses in his commentary, and the locked terms of the internal Thai translation of ICAO Annex 19 (3rd ed. 2025; terms only, the Annex text is ICAO copyright). note = short usage remark, not a definition. Also: common flight-operations and aerodynamics terms that RTAF Directorate of Aeronautical Engineering documents define as \"<thai> (<english>)\", each checked against the document text (2026-11-20).",
  "entries": [
   {
    "id": "atlas:avterm/abrogation-of-inconsistent-arrangements",
@@ -212,6 +212,24 @@
     {
      "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
      "kind": "statute"
+    },
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #089",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/aeronautical-charts",
+   "en": "Aeronautical Charts",
+   "th": [
+    "แผนภูมิการบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #089",
+     "kind": "rtaf-doc"
     }
    ]
   },
@@ -219,15 +237,21 @@
    "id": "atlas:avterm/aeronautical-information-service",
    "en": "Aeronautical Information Service (AIS)",
    "th": [
-    "บริการข่าวสารการบิน"
+    "บริการข่าวสารการบิน",
+    "การบริการข่าวสารการบิน"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
      "kind": "statute"
+    },
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #089",
+     "kind": "rtaf-doc"
     }
-   ]
+   ],
+   "note": "เอกสาร ทอ. ใช้ \"การบริการข่าวสารการบิน\""
   },
   {
    "id": "atlas:avterm/aeronautical-revenue",
@@ -240,6 +264,20 @@
     {
      "file": "สมชาย พิพุธวัฒน์ · ๑๐๐ ปีกฎหมายการบิน (บทความ)",
      "kind": "commentary"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/aeronautical-telecommunications",
+   "en": "Aeronautical Telecommunications",
+   "th": [
+    "การสื่อสารการเดินอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #089",
+     "kind": "rtaf-doc"
     }
    ]
   },
@@ -401,7 +439,8 @@
    "id": "atlas:avterm/air-traffic-service",
    "en": "Air Traffic Service (ATS)",
    "th": [
-    "บริการจราจรทางอากาศ"
+    "บริการจราจรทางอากาศ",
+    "การบริการการเดินอากาศ"
    ],
    "kind": "term",
    "sources": [
@@ -412,9 +451,13 @@
     {
      "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
      "kind": "icao-annex"
+    },
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #089",
+     "kind": "rtaf-doc"
     }
    ],
-   "note": "ย่อ ATS"
+   "note": "ย่อ ATS · เอกสาร ทอ. ใช้ \"การบริการการเดินอากาศ\""
   },
   {
    "id": "atlas:avterm/airborne-image-recorder",
@@ -445,6 +488,20 @@
    ]
   },
   {
+   "id": "atlas:avterm/aircraft-accident-and-incident-investigation",
+   "en": "Aircraft Accident and Incident Investigation",
+   "th": [
+    "การสอบสวนอากาศยานอุบัติเหตุ/อุบัติการณ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #089",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/aircraft-commander",
    "en": "Aircraft Commander",
    "th": [
@@ -469,6 +526,35 @@
     {
      "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 25",
      "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/aircraft-maintenance-licence",
+   "en": "Aircraft Maintenance Licence",
+   "th": [
+    "ใบอนุญาตช่างซ่อมบำรุงอากาศยาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #090",
+     "kind": "rtaf-doc"
+    }
+   ],
+   "note": "ในเอกสาร ทอ. ที่อ้างถึงข้อกำหนดความสมควรเดินอากาศ"
+  },
+  {
+   "id": "atlas:avterm/aircraft-nationality-and-registration-marks",
+   "en": "Aircraft Nationality and Registration Marks",
+   "th": [
+    "เครื่องหมายทะเบียนและสัญชาติอากาศยาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #089",
+     "kind": "rtaf-doc"
     }
    ]
   },
@@ -525,6 +611,20 @@
     {
      "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
      "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/airfoil",
+   "en": "Airfoil",
+   "th": [
+    "แพนอากาศ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #018",
+     "kind": "rtaf-doc"
     }
    ]
   },
@@ -618,15 +718,21 @@
    "id": "atlas:avterm/airworthiness-directive",
    "en": "Airworthiness Directive",
    "th": [
-    "คำสั่งความสมควรเดินอากาศ"
+    "คำสั่งความสมควรเดินอากาศ",
+    "คำสั่งสมควรเดินอากาศ"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
      "kind": "statute"
+    },
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #090",
+     "kind": "rtaf-doc"
     }
-   ]
+   ],
+   "note": "เอกสาร ทอ. ใช้ \"คำสั่งสมควรเดินอากาศ\""
   },
   {
    "id": "atlas:avterm/ambient-workplace-recordings",
@@ -653,6 +759,20 @@
     {
      "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 94",
      "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/angle-of-attack",
+   "en": "Angle of Attack",
+   "th": [
+    "มุมปะทะ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #020",
+     "kind": "rtaf-doc"
     }
    ]
   },
@@ -939,6 +1059,20 @@
    ]
   },
   {
+   "id": "atlas:avterm/boundary-layer",
+   "en": "Boundary Layer",
+   "th": [
+    "ชั้นชิดผิว"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #020",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/budget-and-apportionment-of-expenses",
    "en": "Budget and apportionment of expenses",
    "th": [
@@ -978,6 +1112,20 @@
     {
      "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 35",
      "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/centrifugal-force",
+   "en": "Centrifugal Force",
+   "th": [
+    "แรงเหวี่ยงหนีศูนย์กลาง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #018",
+     "kind": "rtaf-doc"
     }
    ]
   },
@@ -1038,6 +1186,20 @@
     {
      "file": "ICAO Annex 19 Safety Management ฉบับที่ 3 (พ.ย. 2025) · คำแปลไทยภายใน (glossary ล็อกคำ)",
      "kind": "icao-annex"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/chord-line",
+   "en": "Chord Line",
+   "th": [
+    "เส้นชะยา"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #018",
+     "kind": "rtaf-doc"
     }
    ]
   },
@@ -1394,6 +1556,20 @@
    ]
   },
   {
+   "id": "atlas:avterm/dangerous-material",
+   "en": "Dangerous Material",
+   "th": [
+    "วัตถุอันตราย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #089",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/de-identification",
    "en": "De-identification",
    "th": [
@@ -1506,6 +1682,20 @@
    ]
   },
   {
+   "id": "atlas:avterm/dissymmetry-of-lift",
+   "en": "Dissymmetry Of Lift",
+   "th": [
+    "การไม่สมดุลของแรงยก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #018",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/documents-carried-in-aircraft",
    "en": "Documents carried in aircraft",
    "th": [
@@ -1517,6 +1707,20 @@
     {
      "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 29",
      "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/drag",
+   "en": "Drag",
+   "th": [
+    "แรงต้าน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #018",
+     "kind": "rtaf-doc"
     }
    ]
   },
@@ -1616,6 +1820,20 @@
     {
      "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 13",
      "kind": "treaty"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/environmental-protection",
+   "en": "Environmental Protection",
+   "th": [
+    "การป้องกันสิ่งแวดล้อม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #089",
+     "kind": "rtaf-doc"
     }
    ]
   },
@@ -1776,6 +1994,34 @@
    "note": "ใช้ใน ม.15/18 แต่ไม่มีนิยามในกฎหมาย"
   },
   {
+   "id": "atlas:avterm/flight-operation",
+   "en": "Flight Operation",
+   "th": [
+    "การปฏิบัติการบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #089",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/flight-path",
+   "en": "Flight Path",
+   "th": [
+    "วิถีบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #020",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/follow-up",
    "en": "Follow-up",
    "th": [
@@ -1894,6 +2140,20 @@
    ]
   },
   {
+   "id": "atlas:avterm/geometric-unbalance",
+   "en": "Geometric Unbalance",
+   "th": [
+    "การไม่สมดุลทางเรขาคณิต"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #018",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/gross-negligence",
    "en": "Gross Negligence",
    "th": [
@@ -1966,6 +2226,21 @@
      "kind": "icao-annex"
     }
    ]
+  },
+  {
+   "id": "atlas:avterm/hunting",
+   "en": "Hunting",
+   "th": [
+    "การส่ายตัวทางระนาบ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #018",
+     "kind": "rtaf-doc"
+    }
+   ],
+   "note": "การเคลื่อนที่ของใบพัดโรเตอร์ในระนาบหมุน (lead-lag)"
   },
   {
    "id": "atlas:avterm/immunities-and-privileges-of-personnel",
@@ -2178,6 +2453,20 @@
    ]
   },
   {
+   "id": "atlas:avterm/leading-edge",
+   "en": "Leading Edge",
+   "th": [
+    "ชายหน้า"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #018",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/legal-capacity",
    "en": "Legal Capacity",
    "th": [
@@ -2235,6 +2524,20 @@
    ]
   },
   {
+   "id": "atlas:avterm/lift",
+   "en": "Lift",
+   "th": [
+    "แรงยก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #018",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/list-of-mandatory-occurrences",
    "en": "List of Mandatory Occurrences",
    "th": [
@@ -2245,6 +2548,20 @@
     {
      "file": "ข้อกำหนด กพท. ฉบับที่ 22 (การรายงานเหตุการณ์ด้านความปลอดภัย)",
      "kind": "regulation"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/load-factor",
+   "en": "Load Factor",
+   "th": [
+    "ตัวประกอบภารกรรม"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #020",
+     "kind": "rtaf-doc"
     }
    ]
   },
@@ -2556,6 +2873,20 @@
    ]
   },
   {
+   "id": "atlas:avterm/operation-of-aircraft",
+   "en": "Operation of Aircraft",
+   "th": [
+    "การปฏิบัติการของอากาศยาน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #089",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/operational-personnel",
    "en": "Operational personnel",
    "th": [
@@ -2612,6 +2943,20 @@
     {
      "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
      "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/parasite-drag",
+   "en": "Parasite Drag",
+   "th": [
+    "แรงต้านติดตัว"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #020",
+     "kind": "rtaf-doc"
     }
    ]
   },
@@ -3240,6 +3585,20 @@
    ]
   },
   {
+   "id": "atlas:avterm/relative-wind",
+   "en": "Relative Wind",
+   "th": [
+    "ทิศทางลมสัมพัทธ์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #018",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/remote-pilot",
    "en": "Remote pilot",
    "th": [
@@ -3390,19 +3749,39 @@
    "note": "Annex 19 ใช้ \"safety risk control\" แปลว่า \"มาตรการควบคุมความเสี่ยง\"; ข้อกำหนด กพท. ใช้ \"มาตรการจัดการความเสี่ยง\""
   },
   {
+   "id": "atlas:avterm/rotational-force",
+   "en": "Rotational Force",
+   "th": [
+    "แรงการขับหมุนของโรเตอร์"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #018",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/rules-of-the-air",
    "en": "Rules of the air",
    "th": [
     "กฎจราจรทางอากาศ",
-    "บรรดากฎจราจรทางอากาศ"
+    "บรรดากฎจราจรทางอากาศ",
+    "กฎการบิน"
    ],
    "kind": "heading",
    "sources": [
     {
      "file": "อนุสัญญาชิคาโก 1944 · คำแปลของสมชาย พิพุธวัฒน์ (Rev II, 2022) เทียบ ICAO Doc 7300/9 · ข้อ 12",
      "kind": "treaty"
+    },
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #089",
+     "kind": "rtaf-doc"
     }
-   ]
+   ],
+   "note": "เอกสาร ทอ. ใช้ \"กฎการบิน\""
   },
   {
    "id": "atlas:avterm/safety",
@@ -3500,6 +3879,35 @@
     }
    ],
    "note": "ชื่อบทที่ 5 ของ Annex 19 (Development of safety intelligence)"
+  },
+  {
+   "id": "atlas:avterm/safety-management",
+   "en": "Safety Management",
+   "th": [
+    "การจัดการนิรภัยการบิน"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #089",
+     "kind": "rtaf-doc"
+    }
+   ],
+   "note": "เอกสาร ทอ. ใช้คำว่า \"นิรภัย\" ตามธรรมเนียมทางทหาร; คำแปล ICAO Annex 19 ใช้ \"ความปลอดภัย\""
+  },
+  {
+   "id": "atlas:avterm/safety-management-manual",
+   "en": "Safety Management Manual",
+   "th": [
+    "คู่มือการจัดการความปลอดภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #090",
+     "kind": "rtaf-doc"
+    }
+   ]
   },
   {
    "id": "atlas:avterm/safety-management-system",
@@ -3682,6 +4090,20 @@
    ]
   },
   {
+   "id": "atlas:avterm/search-and-rescue",
+   "en": "Search and Rescue",
+   "th": [
+    "การค้นหาและช่วยเหลืออากาศยานประสบภัย"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #089",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/search-and-rescue-service",
    "en": "Search and Rescue Service (SAR)",
    "th": [
@@ -3720,6 +4142,10 @@
     {
      "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
      "kind": "statute"
+    },
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #089",
+     "kind": "rtaf-doc"
     }
    ]
   },
@@ -3749,6 +4175,20 @@
     {
      "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
      "kind": "statute"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/separation-point",
+   "en": "Separation Point",
+   "th": [
+    "จุดแยกตัว"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #020",
+     "kind": "rtaf-doc"
     }
    ]
   },
@@ -4023,6 +4463,20 @@
    ]
   },
   {
+   "id": "atlas:avterm/swept-angle",
+   "en": "Swept Angle",
+   "th": [
+    "มุมลู่ปีก"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #020",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
    "id": "atlas:avterm/system-description",
    "en": "System description",
    "th": [
@@ -4123,6 +4577,35 @@
    ]
   },
   {
+   "id": "atlas:avterm/thrust",
+   "en": "Thrust",
+   "th": [
+    "แรงฉุด"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #018",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/trailing-edge",
+   "en": "Trailing Edge",
+   "th": [
+    "ชายหลัง"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #018",
+     "kind": "rtaf-doc"
+    }
+   ],
+   "note": "เอกสารต้นทางสะกด \"TAILING EDGE\""
+  },
+  {
    "id": "atlas:avterm/transfer-of-certain-functions-and-duties",
    "en": "Transfer of certain functions and duties",
    "th": [
@@ -4154,15 +4637,21 @@
    "id": "atlas:avterm/type-certificate",
    "en": "Type Certificate",
    "th": [
-    "ใบรับรองแบบ"
+    "ใบรับรองแบบ",
+    "การรับรองแบบอากาศยาน"
    ],
    "kind": "term",
    "sources": [
     {
      "file": "พ.ร.บ.การเดินอากาศ พ.ศ. 2497 ม.4 · คำแปลอังกฤษของ กพท. (Consolidated Text, ม.ค. 2023)",
      "kind": "statute"
+    },
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #090",
+     "kind": "rtaf-doc"
     }
-   ]
+   ],
+   "note": "เอกสาร ทอ. ใช้ \"การรับรองแบบอากาศยาน\""
   },
   {
    "id": "atlas:avterm/ultralight-aircraft",
@@ -4178,6 +4667,34 @@
     }
    ],
    "note": "ข้อบังคับ กบร. ฉบับที่ 43"
+  },
+  {
+   "id": "atlas:avterm/units-of-measurement-to-be-used-in-air-and-ground-operations",
+   "en": "Units of Measurement to be Used in Air and Ground Operations",
+   "th": [
+    "หน่วยวัดที่ใช้ในการปฏิบัติการ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #089",
+     "kind": "rtaf-doc"
+    }
+   ]
+  },
+  {
+   "id": "atlas:avterm/unmanned-aerial-vehicle",
+   "en": "Unmanned Aerial Vehicle",
+   "th": [
+    "อากาศยานไร้คนขับ"
+   ],
+   "kind": "term",
+   "sources": [
+    {
+     "file": "เอกสารเผยแพร่ของกรมช่างอากาศ กองทัพอากาศ (RTAF Directorate of Aeronautical Engineering) · ฉบับ #089",
+     "kind": "rtaf-doc"
+    }
+   ]
   },
   {
    "id": "atlas:avterm/unmanned-aircraft",

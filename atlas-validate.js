@@ -1886,7 +1886,7 @@ function warn(name, detail) {
     catch (e) { ok('D1 ' + v.url + ' parses', false, e.message); }
   });
 
-  const KINDS = new Set(['term', 'collocation', 'usage', 'latin', 'structure', 'profession', 'heading']);
+  const KINDS = new Set(['term', 'collocation', 'usage', 'latin', 'structure', 'profession', 'heading', 'abbr']);
   const SRCS = new Set(['handout', 'slides', 'oldexam', 'textbook', 'lecture-audio', 'course-spec', 'lecture-page',
                         'statute', 'regulation', 'treaty', 'commentary', 'icao-annex', 'code-provision', 'rtaf-doc']);
   const KEYS = new Set(['id', 'en', 'th', 'kind', 'sources', 'note', 'see', 'conceptRef', 'ctx', 'draft']);
@@ -2023,6 +2023,25 @@ function warn(name, detail) {
     [c.titleTH].concat(c.aliases || []).forEach(n => { (pubNames[normTH(n)] = pubNames[normTH(n)] || []).push(k); }); });
   Object.keys(concepts).filter(k => concepts[k].status === 'seed' && pubNames[normTH(concepts[k].titleTH)] && !settled(k))
     .forEach(k => warn('D5 seed repeats a published concept and has no audit note', k + ' ' + concepts[k].titleTH + ' ~ ' + pubNames[normTH(concepts[k].titleTH)].join(', ')));
+
+  // public files carry no RTAF deep links (attribution text + document number only), and RTAF rows
+  // published in a public book are checked pairs, never drafts
+  vols.filter(v => v.visibility === 'public').forEach(v => {
+    const p = path.join(ROOT, v.url);
+    if (!fs.existsSync(p)) return;
+    const raw = fs.readFileSync(p, 'utf8');
+    ok('D8 [' + v.id + '] public file has no rtaf.mi.th link', !/rtaf\.mi\.th/i.test(raw));
+    const d = docs[v.id];
+    if (!d) return;
+    if (v.book) {
+      const rt = d.entries.filter(e => (e.sources || []).some(s => s.kind === 'rtaf-doc'));
+      ok('D8 [' + v.ns + '] RTAF-sourced rows name the directorate and a document number, with no URL',
+         rt.every(e => e.sources.filter(s => s.kind === 'rtaf-doc').every(s => /กรมช่างอากาศ/.test(s.file) && /#\d{3}\b/.test(s.file) && !/https?:/.test(s.file))),
+         rt.length + ' rows');
+    } else {
+      ok('D8 [' + v.id + '] supplement has no source-URL map', !d.sources || Object.values(d.sources).every(u => !/^https?:/.test(String(u))));
+    }
+  });
 
   // flat supplements (abbr / terms): light shape check only
   vols.filter(v => !v.book).forEach(v => {
