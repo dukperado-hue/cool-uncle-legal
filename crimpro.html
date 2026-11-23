@@ -450,6 +450,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
     </div>
 
     <div class="crim-pane" id="crim-pane-war" role="tabpanel">
+      <div id="war2026Host"></div>
       <div id="warHost"></div>
     </div>
 
@@ -4496,7 +4497,7 @@ renderComics();
   const h = (location.hash || '').replace('#', '');
   if(/^war(-\w+)?$/.test(h)) window.__warDeep = '#' + h;
   if(h === 'comics' || h === 'codex' || h === 'chain') showCrimTab(h);
-  if(/^war(-\w+)?$/.test(h)) showCrimTab('war');
+  if(/^war(-\w+)?$/.test(h) || /^war2026(-[\d-]+)?$/.test(h)) showCrimTab('war');
 })();
 
 /* ================================================================
@@ -4744,6 +4745,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 <link rel="stylesheet" href="legal-disclaimer.css">
 <script src="crimpro-war.js?v=10"></script>
+<script src="crimpro-war2026.js?v=1"></script>
 <script src="comics-tab.js?v=20"></script>
 <script>
 ComicsTab.mount('crimprowar', document.getElementById('warComicList'), {idPrefix:'warcomic-'}).then(function(){ if(/^#warcomic-\d+$/.test(location.hash)){ showCrimTab('comics'); var el=document.getElementById(location.hash.slice(1)); if(el){ el.classList.add('open'); el.scrollIntoView(); } } });
