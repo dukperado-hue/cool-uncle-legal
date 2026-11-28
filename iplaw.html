@@ -382,6 +382,7 @@ footer{margin-top:44px;text-align:center;font-size:12.5px;color:var(--ink-faint)
 
 <script src="iplaw-arts.js?v=20261031a"></script>
 <script src="iplaw-war.js?v=7"></script>
+<script src="iplaw-war2026.js?v=1"></script>
 <script>
 let __hbAudioCtx;
 function playHoverSound(){
@@ -2899,6 +2900,6 @@ document.addEventListener('DOMContentLoaded', () => {
 <script src="legal-footer.js"></script>
 <script src="lecture-print.js"></script>
 <script src="comics-tab.js?v=20"></script>
-<script>ComicsTab.install('iplaw', [{k:'war', label:'⚔️ War Mode', render: function(el){ renderWarMode(el); }}]);</script>
+<script>ComicsTab.install('iplaw', [{k:'war', label:'⚔️ War Mode', match: /^#war(2026)?(-[a-z0-9-]+)?$/, render: function(el){ renderWarMode(el); }}]);</script>
 </body>
 </html>
